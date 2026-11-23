@@ -1,6 +1,51 @@
 Unreleased Changes
 ------------------
 
+1.95.0 (2026-11-20)
+------------------
+
+* Feature - Adds the parametersUri field to StartRun, which lets you provide run parameters in a JSON file in Amazon S3 instead of inline. GetRun returns parametersUri for runs started this way.
+
+1.94.0 (2026-11-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.93.0 (2026-11-16)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.92.0 (2026-11-11)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.91.0 (2026-11-10)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.90.0 (2026-11-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.89.0 (2026-11-06)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.88.0 (2026-11-04)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.87.0 (2026-10-30)
+------------------
+
+* Feature - Adds the outputUriPrefixMode parameter to StartRun and GetRun. You can now write run outputs directly under outputUri, without the prefixes the service adds by default. When you opt in, outputs overwrite existing objects at the same keys.
+
 1.86.0 (2026-10-29)
 ------------------
 

@@ -1,6 +1,46 @@
 Unreleased Changes
 ------------------
 
+1.55.0 (2026-11-19)
+------------------
+
+* Feature - Adds the Leads APIs (SearchEngagements, ListEngagementGroups), customer account APIs with statistics and bulk jobs, SearchOpportunities, opportunity bulk jobs, account planning invitations, co-sell motion reason on AWS opportunity summaries, and channel recommendations on lead insights.
+
+1.54.0 (2026-11-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.53.0 (2026-11-16)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.52.0 (2026-11-11)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.51.0 (2026-11-10)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.50.0 (2026-11-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.49.0 (2026-11-06)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.48.0 (2026-11-04)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.47.0 (2026-10-29)
 ------------------
 

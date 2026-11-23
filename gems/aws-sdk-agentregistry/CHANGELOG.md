@@ -1,6 +1,51 @@
 Unreleased Changes
 ------------------
 
+1.20.0 (2026-11-20)
+------------------
+
+* Feature - Adds support for the WEBBOT registry record type
+
+1.19.0 (2026-11-19)
+------------------
+
+* Feature - BatchGetDiscoverableRegistryRecord returns a short-lived download URL and SHA-256 checksum for approved skill packages. SearchDiscoverableRegistryRecords adds searchType (KEYWORD, SEMANTIC, HYBRID) and pagination. Adds bearer token authentication for registries that use JWT authorization.
+
+1.18.0 (2026-11-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.17.0 (2026-11-16)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.16.0 (2026-11-11)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.15.0 (2026-11-10)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.14.0 (2026-11-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.13.0 (2026-11-06)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.12.0 (2026-11-04)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.11.0 (2026-10-29)
 ------------------
 

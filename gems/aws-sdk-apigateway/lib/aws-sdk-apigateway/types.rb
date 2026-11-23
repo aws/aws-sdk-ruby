@@ -33,7 +33,8 @@ module Aws::APIGateway
       include Aws::Structure
     end
 
-    # Represents an AWS account that is associated with API Gateway.
+    # Represents an Amazon Web Services account that is associated with API
+    # Gateway.
     #
     # @!attribute [rw] cloudwatch_role_arn
     #   The ARN of an Amazon CloudWatch role for the current Account.
@@ -203,14 +204,17 @@ module Aws::APIGateway
     #   The authorizer type. Valid values are `TOKEN` for a Lambda function
     #   using a single authorization token submitted in a custom header,
     #   `REQUEST` for a Lambda function using incoming request parameters,
-    #   and `COGNITO_USER_POOLS` for using an Amazon Cognito user pool.
+    #   `COGNITO_USER_POOLS` for using an Amazon Cognito user pool, and
+    #   `JWT` for using a native JWT authorizer with the trusted issuers,
+    #   audiences, and signing algorithms that you declare.
     #   @return [String]
     #
     # @!attribute [rw] provider_arns
     #   A list of the Amazon Cognito user pool ARNs for the
     #   `COGNITO_USER_POOLS` authorizer. Each element is of this format:
     #   `arn:aws:cognito-idp:{region}:{account_id}:userpool/{user_pool_id}`.
-    #   For a `TOKEN` or `REQUEST` authorizer, this is not defined.
+    #   For a `TOKEN` or `REQUEST` authorizer, this is not defined. This
+    #   property is not supported for `JWT` authorizers.
     #   @return [Array<String>]
     #
     # @!attribute [rw] auth_type
@@ -229,7 +233,8 @@ module Aws::APIGateway
     #   `path` indicates that the remaining substring in the URI should be
     #   treated as the path to the resource, including the initial `/`. For
     #   Lambda functions, this is usually of the form
-    #   `/2015-03-31/functions/[FunctionARN]/invocations`.
+    #   `/2015-03-31/functions/[FunctionARN]/invocations`. This property is
+    #   not supported for `JWT` authorizers.
     #   @return [String]
     #
     # @!attribute [rw] authorizer_credentials
@@ -237,6 +242,7 @@ module Aws::APIGateway
     #   invoke the authorizer. To specify an IAM role for API Gateway to
     #   assume, use the role's Amazon Resource Name (ARN). To use
     #   resource-based permissions on the Lambda function, specify null.
+    #   This property is not supported for `JWT` authorizers.
     #   @return [String]
     #
     # @!attribute [rw] identity_source
@@ -260,7 +266,11 @@ module Aws::APIGateway
     #   response without calling the Lambda function. The valid value is a
     #   string of comma-separated mapping expressions of the specified
     #   request parameters. When the authorization caching is not enabled,
-    #   this property is optional.
+    #   this property is optional. For a `JWT` authorizer, this is required
+    #   and must be a single request-header mapping expression,
+    #   `method.request.header.<name>`, for example,
+    #   `method.request.header.Authorization`. Query string parameters are
+    #   not supported, and there is no default.
     #   @return [String]
     #
     # @!attribute [rw] identity_validation_expression
@@ -271,15 +281,21 @@ module Aws::APIGateway
     #   regular expression. It will invoke the authorizer's Lambda function
     #   when there is a match. Otherwise, it will return a 401 Unauthorized
     #   response without calling the Lambda function. The validation
-    #   expression does not apply to the `REQUEST` authorizer.
+    #   expression does not apply to the `REQUEST` or `JWT` authorizer.
     #   @return [String]
     #
     # @!attribute [rw] authorizer_result_ttl_in_seconds
     #   The TTL in seconds of cached authorizer results. If it equals 0,
     #   authorization caching is disabled. If it is greater than 0, API
     #   Gateway will cache authorizer responses. If this field is not set,
-    #   the default value is 300. The maximum value is 3600, or 1 hour.
+    #   the default value is 300. The maximum value is 3600, or 1 hour. This
+    #   property is not supported for `JWT` authorizers.
     #   @return [Integer]
+    #
+    # @!attribute [rw] jwt_configuration
+    #   The configuration returned for a JWT authorizer. This field is
+    #   present only when `type` is `JWT`.
+    #   @return [Types::JwtConfiguration]
     #
     class Authorizer < Struct.new(
       :id,
@@ -291,7 +307,8 @@ module Aws::APIGateway
       :authorizer_credentials,
       :identity_source,
       :identity_validation_expression,
-      :authorizer_result_ttl_in_seconds)
+      :authorizer_result_ttl_in_seconds,
+      :jwt_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -532,14 +549,17 @@ module Aws::APIGateway
     #   The authorizer type. Valid values are `TOKEN` for a Lambda function
     #   using a single authorization token submitted in a custom header,
     #   `REQUEST` for a Lambda function using incoming request parameters,
-    #   and `COGNITO_USER_POOLS` for using an Amazon Cognito user pool.
+    #   `COGNITO_USER_POOLS` for using an Amazon Cognito user pool, and
+    #   `JWT` for using a native JWT authorizer with the trusted issuers,
+    #   audiences, and signing algorithms that you declare.
     #   @return [String]
     #
     # @!attribute [rw] provider_arns
     #   A list of the Amazon Cognito user pool ARNs for the
     #   `COGNITO_USER_POOLS` authorizer. Each element is of this format:
     #   `arn:aws:cognito-idp:{region}:{account_id}:userpool/{user_pool_id}`.
-    #   For a `TOKEN` or `REQUEST` authorizer, this is not defined.
+    #   For a `TOKEN` or `REQUEST` authorizer, this is not defined. This
+    #   property is not supported for `JWT` authorizers.
     #   @return [Array<String>]
     #
     # @!attribute [rw] auth_type
@@ -558,7 +578,8 @@ module Aws::APIGateway
     #   `path` indicates that the remaining substring in the URI should be
     #   treated as the path to the resource, including the initial `/`. For
     #   Lambda functions, this is usually of the form
-    #   `/2015-03-31/functions/[FunctionARN]/invocations`.
+    #   `/2015-03-31/functions/[FunctionARN]/invocations`. This property is
+    #   not supported for `JWT` authorizers.
     #   @return [String]
     #
     # @!attribute [rw] authorizer_credentials
@@ -566,6 +587,7 @@ module Aws::APIGateway
     #   invoke the authorizer. To specify an IAM role for API Gateway to
     #   assume, use the role's Amazon Resource Name (ARN). To use
     #   resource-based permissions on the Lambda function, specify null.
+    #   This property is not supported for `JWT` authorizers.
     #   @return [String]
     #
     # @!attribute [rw] identity_source
@@ -589,7 +611,11 @@ module Aws::APIGateway
     #   response without calling the Lambda function. The valid value is a
     #   string of comma-separated mapping expressions of the specified
     #   request parameters. When the authorization caching is not enabled,
-    #   this property is optional.
+    #   this property is optional. For a `JWT` authorizer, this is required
+    #   and must be a single request-header mapping expression,
+    #   `method.request.header.<name>`, for example,
+    #   `method.request.header.Authorization`. Query string parameters are
+    #   not supported, and there is no default.
     #   @return [String]
     #
     # @!attribute [rw] identity_validation_expression
@@ -600,15 +626,21 @@ module Aws::APIGateway
     #   regular expression. It will invoke the authorizer's Lambda function
     #   when there is a match. Otherwise, it will return a 401 Unauthorized
     #   response without calling the Lambda function. The validation
-    #   expression does not apply to the `REQUEST` authorizer.
+    #   expression does not apply to the `REQUEST` or `JWT` authorizer.
     #   @return [String]
     #
     # @!attribute [rw] authorizer_result_ttl_in_seconds
     #   The TTL in seconds of cached authorizer results. If it equals 0,
     #   authorization caching is disabled. If it is greater than 0, API
     #   Gateway will cache authorizer responses. If this field is not set,
-    #   the default value is 300. The maximum value is 3600, or 1 hour.
+    #   the default value is 300. The maximum value is 3600, or 1 hour. This
+    #   property is not supported for `JWT` authorizers.
     #   @return [Integer]
+    #
+    # @!attribute [rw] jwt_configuration
+    #   The configuration for a JWT authorizer. Required for JWT
+    #   authorizers.
+    #   @return [Types::JwtConfigurationInput]
     #
     class CreateAuthorizerRequest < Struct.new(
       :rest_api_id,
@@ -620,7 +652,8 @@ module Aws::APIGateway
       :authorizer_credentials,
       :identity_source,
       :identity_validation_expression,
-      :authorizer_result_ttl_in_seconds)
+      :authorizer_result_ttl_in_seconds,
+      :jwt_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1956,7 +1989,7 @@ module Aws::APIGateway
     # @!attribute [rw] regional_hosted_zone_id
     #   The region-specific Amazon Route 53 Hosted Zone ID of the regional
     #   endpoint. For more information, see Set up a Regional Custom Domain
-    #   Name and AWS Regions and Endpoints for API Gateway.
+    #   Name and Amazon Web Services Regions and Endpoints for API Gateway.
     #   @return [String]
     #
     # @!attribute [rw] regional_certificate_name
@@ -1982,7 +2015,8 @@ module Aws::APIGateway
     #   The region-agnostic Amazon Route 53 Hosted Zone ID of the
     #   edge-optimized endpoint. The valid value is `Z2FDTNDATAQYW2` for all
     #   the regions. For more information, see Set up a Regional Custom
-    #   Domain Name and AWS Regions and Endpoints for API Gateway.
+    #   Domain Name and Amazon Web Services Regions and Endpoints for API
+    #   Gateway.
     #   @return [String]
     #
     # @!attribute [rw] endpoint_configuration
@@ -2673,8 +2707,8 @@ module Aws::APIGateway
     #   The owner of the domain name access association. Use `SELF` to only
     #   list the domain name access associations owned by your own account.
     #   Use `OTHER_ACCOUNTS` to list the domain name access associations
-    #   with your private custom domain names that are owned by other AWS
-    #   accounts.
+    #   with your private custom domain names that are owned by other Amazon
+    #   Web Services accounts.
     #   @return [String]
     #
     class GetDomainNameAccessAssociationsRequest < Struct.new(
@@ -3561,12 +3595,12 @@ module Aws::APIGateway
     #
     # @!attribute [rw] credentials
     #   Specifies the credentials required for the integration, if any. For
-    #   AWS integrations, three options are available. To specify an IAM
-    #   Role for API Gateway to assume, use the role's Amazon Resource Name
-    #   (ARN). To require that the caller's identity be passed through from
-    #   the request, specify the string `arn:aws:iam::*:user/*`. To use
-    #   resource-based permissions on supported Amazon Web Services
-    #   services, specify null.
+    #   Amazon Web Services integrations, three options are available. To
+    #   specify an IAM Role for API Gateway to assume, use the role's
+    #   Amazon Resource Name (ARN). To require that the caller's identity
+    #   be passed through from the request, specify the string
+    #   `arn:aws:iam::*:user/*`. To use resource-based permissions on
+    #   supported Amazon Web Services services, specify null.
     #   @return [String]
     #
     # @!attribute [rw] request_parameters
@@ -3655,7 +3689,7 @@ module Aws::APIGateway
     #   @return [String]
     #
     # @!attribute [rw] integration_target
-    #   The ALB or NLB listener to send the request to.
+    #   The ALB or NLB ARN to send the request to.
     #   @return [String]
     #
     class Integration < Struct.new(
@@ -3742,6 +3776,132 @@ module Aws::APIGateway
       include Aws::Structure
     end
 
+    # An additional claim rule for an issuer.
+    #
+    # @!attribute [rw] claim_name
+    #   The name of the claim to check. The value cannot be empty and cannot
+    #   be `iss`, `aud`, `exp`, `nbf`, `iat`, `scope`, or `scp`.
+    #   @return [String]
+    #
+    # @!attribute [rw] format
+    #   The format of the claim value. The only valid value is
+    #   `SINGLE_STRING`.
+    #   @return [String]
+    #
+    # @!attribute [rw] required
+    #   Specifies whether the claim must be present in the token. Defaults
+    #   to `false`. When `true`, the token must contain the claim.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] expected_values
+    #   The accepted value for the claim. The value cannot be empty. When a
+    #   value is specified, the claim must match it exactly, and the match
+    #   is case-sensitive. When no value is specified, the claim only has to
+    #   be present.
+    #   @return [Array<String>]
+    #
+    class JwtAdditionalClaim < Struct.new(
+      :claim_name,
+      :format,
+      :required,
+      :expected_values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The JWT configuration returned for a JWT authorizer.
+    #
+    # @!attribute [rw] issuers
+    #   The trusted issuers configured for the authorizer.
+    #   @return [Array<Types::JwtIssuer>]
+    #
+    # @!attribute [rw] default_algorithms
+    #   The signing algorithms configured for the authorizer.
+    #   @return [Array<String>]
+    #
+    class JwtConfiguration < Struct.new(
+      :issuers,
+      :default_algorithms)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The JWT configuration supplied for a JWT authorizer.
+    #
+    # @!attribute [rw] issuers
+    #   The issuers that the authorizer trusts. Issuer URLs must be unique.
+    #   @return [Array<Types::JwtIssuerInput>]
+    #
+    # @!attribute [rw] default_algorithms
+    #   The signing algorithms that the authorizer accepts, applied to every
+    #   issuer. Valid values are `RS256`, `RS384`, `RS512`, `ES256`,
+    #   `ES384`, and `ES512`.
+    #   @return [Array<String>]
+    #
+    class JwtConfigurationInput < Struct.new(
+      :issuers,
+      :default_algorithms)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A trusted issuer in the returned JWT configuration.
+    #
+    # @!attribute [rw] issuer
+    #   The OpenID Connect (OIDC) issuer URL.
+    #   @return [String]
+    #
+    # @!attribute [rw] audiences
+    #   The audiences that the issuer can issue tokens for.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] additional_claims
+    #   The additional claim rules configured for this issuer.
+    #   @return [Array<Types::JwtAdditionalClaim>]
+    #
+    # @!attribute [rw] jwks_uri
+    #   The JSON Web Key Set (JWKS) URI that API Gateway resolved from the
+    #   issuer's OpenID Connect discovery document. This value is read-only
+    #   and cannot be set.
+    #   @return [String]
+    #
+    class JwtIssuer < Struct.new(
+      :issuer,
+      :audiences,
+      :additional_claims,
+      :jwks_uri)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A trusted issuer in the JWT configuration.
+    #
+    # @!attribute [rw] issuer
+    #   The OpenID Connect (OIDC) issuer URL. The value must be an absolute
+    #   `https` URL that includes a host and has no user information, query,
+    #   or fragment. It must exactly match the `iss` claim of the token, and
+    #   the issuer's OIDC discovery document must name this exact issuer.
+    #   @return [String]
+    #
+    # @!attribute [rw] audiences
+    #   The audiences that the issuer can issue tokens for. None can be
+    #   empty. The token's `aud` claim must contain at least one of these
+    #   values.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] additional_claims
+    #   The additional claim rules for this issuer. Claim names must be
+    #   unique within the issuer.
+    #   @return [Array<Types::JwtAdditionalClaim>]
+    #
+    class JwtIssuerInput < Struct.new(
+      :issuer,
+      :audiences,
+      :additional_claims)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The request exceeded the rate limit. Retry after the specified time
     # period.
     #
@@ -3776,9 +3936,9 @@ module Aws::APIGateway
     #
     # @!attribute [rw] authorization_type
     #   The method's authorization type. Valid values are `NONE` for open
-    #   access, `AWS_IAM` for using AWS IAM permissions, `CUSTOM` for using
-    #   a custom authorizer, or `COGNITO_USER_POOLS` for using a Cognito
-    #   user pool.
+    #   access, `AWS_IAM` for using Amazon Web Services IAM permissions,
+    #   `CUSTOM` for using a custom authorizer, `COGNITO_USER_POOLS` for
+    #   using a Cognito user pool, or `JWT` for using a JWT authorizer.
     #   @return [String]
     #
     # @!attribute [rw] authorizer_id
@@ -3839,7 +3999,9 @@ module Aws::APIGateway
     #   scopes matches a claimed scope in the access token. Otherwise, the
     #   invocation is not authorized. When the method scope is configured,
     #   the client must provide an access token instead of an identity token
-    #   for authorization purposes.
+    #   for authorization purposes. The scopes are also used with a `JWT`
+    #   authorizer. When scopes are configured, the `scope` (or `scp`) claim
+    #   of the token must contain at least one of the configured scopes.
     #   @return [Array<String>]
     #
     class Method < Struct.new(
@@ -3976,9 +4138,9 @@ module Aws::APIGateway
     #
     # @!attribute [rw] authorization_type
     #   The method's authorization type. Valid values are `NONE` for open
-    #   access, `AWS_IAM` for using AWS IAM permissions, `CUSTOM` for using
-    #   a custom authorizer, or `COGNITO_USER_POOLS` for using a Cognito
-    #   user pool.
+    #   access, `AWS_IAM` for using Amazon Web Services IAM permissions,
+    #   `CUSTOM` for using a custom authorizer, or `COGNITO_USER_POOLS` for
+    #   using a Cognito user pool.
     #   @return [String]
     #
     # @!attribute [rw] api_key_required
@@ -4154,9 +4316,9 @@ module Aws::APIGateway
     #
     # @!attribute [rw] value
     #   The new target value of the update operation. It is applicable for
-    #   the add or replace operation. When using AWS CLI to update a
-    #   property of a JSON value, enclose the JSON object with a pair of
-    #   single quotes in a Linux shell, e.g., '\{"a": ...}'.
+    #   the add or replace operation. When using CLI to update a property of
+    #   a JSON value, enclose the JSON object with a pair of single quotes
+    #   in a Linux shell, e.g., '\{"a": ...}'.
     #   @return [String]
     #
     # @!attribute [rw] from
@@ -4345,7 +4507,7 @@ module Aws::APIGateway
     #   @return [String]
     #
     # @!attribute [rw] integration_target
-    #   The ALB or NLB listener to send the request to.
+    #   The ALB or NLB ARN to send the request to.
     #   @return [String]
     #
     class PutIntegrationRequest < Struct.new(
@@ -4453,9 +4615,9 @@ module Aws::APIGateway
     #
     # @!attribute [rw] authorization_type
     #   The method's authorization type. Valid values are `NONE` for open
-    #   access, `AWS_IAM` for using AWS IAM permissions, `CUSTOM` for using
-    #   a custom authorizer, or `COGNITO_USER_POOLS` for using a Cognito
-    #   user pool.
+    #   access, `AWS_IAM` for using Amazon Web Services IAM permissions,
+    #   `CUSTOM` for using a custom authorizer, `COGNITO_USER_POOLS` for
+    #   using a Cognito user pool, or `JWT` for using a JWT authorizer.
     #   @return [String]
     #
     # @!attribute [rw] authorizer_id
@@ -4508,7 +4670,9 @@ module Aws::APIGateway
     #   scopes matches a claimed scope in the access token. Otherwise, the
     #   invocation is not authorized. When the method scope is configured,
     #   the client must provide an access token instead of an identity token
-    #   for authorization purposes.
+    #   for authorization purposes. The scopes are also used with a `JWT`
+    #   authorizer. When scopes are configured, the `scope` (or `scp`) claim
+    #   of the token must contain at least one of the configured scopes.
     #   @return [Array<String>]
     #
     class PutMethodRequest < Struct.new(
@@ -4602,7 +4766,7 @@ module Aws::APIGateway
     # @!attribute [rw] parameters
     #   Custom header parameters as part of the request. For example, to
     #   exclude DocumentationParts from an imported API, set
-    #   `ignore=documentation` as a `parameters` value, as in the AWS CLI
+    #   `ignore=documentation` as a `parameters` value, as in the CLI
     #   command of `aws apigateway import-rest-api --parameters
     #   ignore=documentation --body
     #   'file:///path/to/imported-api-body.json'`.
@@ -6226,7 +6390,8 @@ module Aws::APIGateway
       include Aws::Structure
     end
 
-    # Represents a collection of usage plans for an AWS account.
+    # Represents a collection of usage plans for an Amazon Web Services
+    # account.
     #
     # @!attribute [rw] position
     #   @return [String]

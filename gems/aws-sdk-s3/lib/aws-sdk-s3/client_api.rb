@@ -607,9 +607,12 @@ module Aws::S3
     ReplicaModifications = Shapes::StructureShape.new(name: 'ReplicaModifications')
     ReplicaModificationsStatus = Shapes::StringShape.new(name: 'ReplicaModificationsStatus')
     ReplicationConfiguration = Shapes::StructureShape.new(name: 'ReplicationConfiguration')
+    ReplicationPrefixList = Shapes::ListShape.new(name: 'ReplicationPrefixList')
     ReplicationRule = Shapes::StructureShape.new(name: 'ReplicationRule')
     ReplicationRuleAndOperator = Shapes::StructureShape.new(name: 'ReplicationRuleAndOperator')
     ReplicationRuleFilter = Shapes::StructureShape.new(name: 'ReplicationRuleFilter')
+    ReplicationRuleNotOperator = Shapes::StructureShape.new(name: 'ReplicationRuleNotOperator')
+    ReplicationRuleOrOperator = Shapes::StructureShape.new(name: 'ReplicationRuleOrOperator')
     ReplicationRuleStatus = Shapes::StringShape.new(name: 'ReplicationRuleStatus')
     ReplicationRules = Shapes::ListShape.new(name: 'ReplicationRules', flattened: true)
     ReplicationStatus = Shapes::StringShape.new(name: 'ReplicationStatus')
@@ -727,6 +730,8 @@ module Aws::S3
     UploadPartCopyRequest = Shapes::StructureShape.new(name: 'UploadPartCopyRequest')
     UploadPartOutput = Shapes::StructureShape.new(name: 'UploadPartOutput')
     UploadPartRequest = Shapes::StructureShape.new(name: 'UploadPartRequest')
+    UseSourceMultiRegionKey = Shapes::StructureShape.new(name: 'UseSourceMultiRegionKey')
+    UseSourceMultiRegionKeyStatus = Shapes::StringShape.new(name: 'UseSourceMultiRegionKeyStatus')
     UserMetadata = Shapes::ListShape.new(name: 'UserMetadata')
     Value = Shapes::StringShape.new(name: 'Value')
     VersionCount = Shapes::IntegerShape.new(name: 'VersionCount')
@@ -745,6 +750,7 @@ module Aws::S3
     AbortIncompleteMultipartUpload.struct_class = Types::AbortIncompleteMultipartUpload
 
     AbortMultipartUploadOutput.add_member(:request_charged, Shapes::ShapeRef.new(shape: RequestCharged, location: "header", location_name: "x-amz-request-charged"))
+    AbortMultipartUploadOutput.add_member(:version_id, Shapes::ShapeRef.new(shape: ObjectVersionId, location: "header", location_name: "x-amz-version-id"))
     AbortMultipartUploadOutput.struct_class = Types::AbortMultipartUploadOutput
 
     AbortMultipartUploadRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "Bucket", metadata: {"contextParam" => {"name" => "Bucket"}}))
@@ -1136,6 +1142,7 @@ module Aws::S3
     CreateMultipartUploadOutput.add_member(:request_charged, Shapes::ShapeRef.new(shape: RequestCharged, location: "header", location_name: "x-amz-request-charged"))
     CreateMultipartUploadOutput.add_member(:checksum_algorithm, Shapes::ShapeRef.new(shape: ChecksumAlgorithm, location: "header", location_name: "x-amz-checksum-algorithm"))
     CreateMultipartUploadOutput.add_member(:checksum_type, Shapes::ShapeRef.new(shape: ChecksumType, location: "header", location_name: "x-amz-checksum-type"))
+    CreateMultipartUploadOutput.add_member(:version_id, Shapes::ShapeRef.new(shape: ObjectVersionId, location: "header", location_name: "x-amz-version-id"))
     CreateMultipartUploadOutput.struct_class = Types::CreateMultipartUploadOutput
 
     CreateMultipartUploadRequest.add_member(:acl, Shapes::ShapeRef.new(shape: ObjectCannedACL, location: "header", location_name: "x-amz-acl"))
@@ -1362,6 +1369,7 @@ module Aws::S3
     Encryption.struct_class = Types::Encryption
 
     EncryptionConfiguration.add_member(:replica_kms_key_id, Shapes::ShapeRef.new(shape: ReplicaKmsKeyID, location_name: "ReplicaKmsKeyID"))
+    EncryptionConfiguration.add_member(:use_source_multi_region_key, Shapes::ShapeRef.new(shape: UseSourceMultiRegionKey, location_name: "UseSourceMultiRegionKey"))
     EncryptionConfiguration.struct_class = Types::EncryptionConfiguration
 
     EncryptionTypeList.member = Shapes::ShapeRef.new(shape: EncryptionType, location_name: "EncryptionType")
@@ -2289,6 +2297,7 @@ module Aws::S3
     ListPartsOutput.add_member(:request_charged, Shapes::ShapeRef.new(shape: RequestCharged, location: "header", location_name: "x-amz-request-charged"))
     ListPartsOutput.add_member(:checksum_algorithm, Shapes::ShapeRef.new(shape: ChecksumAlgorithm, location_name: "ChecksumAlgorithm"))
     ListPartsOutput.add_member(:checksum_type, Shapes::ShapeRef.new(shape: ChecksumType, location_name: "ChecksumType"))
+    ListPartsOutput.add_member(:version_id, Shapes::ShapeRef.new(shape: ObjectVersionId, location: "header", location_name: "x-amz-version-id"))
     ListPartsOutput.struct_class = Types::ListPartsOutput
 
     ListPartsRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "Bucket", metadata: {"contextParam" => {"name" => "Bucket"}}))
@@ -2370,6 +2379,7 @@ module Aws::S3
     MultipartUpload.add_member(:initiator, Shapes::ShapeRef.new(shape: Initiator, location_name: "Initiator"))
     MultipartUpload.add_member(:checksum_algorithm, Shapes::ShapeRef.new(shape: ChecksumAlgorithm, location_name: "ChecksumAlgorithm"))
     MultipartUpload.add_member(:checksum_type, Shapes::ShapeRef.new(shape: ChecksumType, location_name: "ChecksumType"))
+    MultipartUpload.add_member(:version_id, Shapes::ShapeRef.new(shape: ObjectVersionId, location_name: "VersionId"))
     MultipartUpload.struct_class = Types::MultipartUpload
 
     MultipartUploadList.member = Shapes::ShapeRef.new(shape: MultipartUpload)
@@ -3009,6 +3019,8 @@ module Aws::S3
     ReplicationConfiguration.add_member(:rules, Shapes::ShapeRef.new(shape: ReplicationRules, required: true, location_name: "Rule"))
     ReplicationConfiguration.struct_class = Types::ReplicationConfiguration
 
+    ReplicationPrefixList.member = Shapes::ShapeRef.new(shape: Prefix, location_name: "Prefix")
+
     ReplicationRule.add_member(:id, Shapes::ShapeRef.new(shape: ID, location_name: "ID"))
     ReplicationRule.add_member(:priority, Shapes::ShapeRef.new(shape: Priority, location_name: "Priority"))
     ReplicationRule.add_member(:prefix, Shapes::ShapeRef.new(shape: Prefix, deprecated: true, location_name: "Prefix"))
@@ -3022,12 +3034,23 @@ module Aws::S3
 
     ReplicationRuleAndOperator.add_member(:prefix, Shapes::ShapeRef.new(shape: Prefix, location_name: "Prefix"))
     ReplicationRuleAndOperator.add_member(:tags, Shapes::ShapeRef.new(shape: TagSet, location_name: "Tag", metadata: {"flattened" => true}))
+    ReplicationRuleAndOperator.add_member(:not, Shapes::ShapeRef.new(shape: ReplicationRuleNotOperator, location_name: "Not"))
     ReplicationRuleAndOperator.struct_class = Types::ReplicationRuleAndOperator
 
     ReplicationRuleFilter.add_member(:prefix, Shapes::ShapeRef.new(shape: Prefix, location_name: "Prefix"))
     ReplicationRuleFilter.add_member(:tag, Shapes::ShapeRef.new(shape: Tag, location_name: "Tag"))
     ReplicationRuleFilter.add_member(:and, Shapes::ShapeRef.new(shape: ReplicationRuleAndOperator, location_name: "And"))
+    ReplicationRuleFilter.add_member(:not, Shapes::ShapeRef.new(shape: ReplicationRuleNotOperator, location_name: "Not"))
     ReplicationRuleFilter.struct_class = Types::ReplicationRuleFilter
+
+    ReplicationRuleNotOperator.add_member(:prefix, Shapes::ShapeRef.new(shape: Prefix, location_name: "Prefix"))
+    ReplicationRuleNotOperator.add_member(:tag, Shapes::ShapeRef.new(shape: Tag, location_name: "Tag"))
+    ReplicationRuleNotOperator.add_member(:or, Shapes::ShapeRef.new(shape: ReplicationRuleOrOperator, location_name: "Or"))
+    ReplicationRuleNotOperator.struct_class = Types::ReplicationRuleNotOperator
+
+    ReplicationRuleOrOperator.add_member(:prefixes, Shapes::ShapeRef.new(shape: ReplicationPrefixList, location_name: "Prefix", metadata: {"flattened" => true}))
+    ReplicationRuleOrOperator.add_member(:tags, Shapes::ShapeRef.new(shape: TagSet, location_name: "Tag", metadata: {"flattened" => true}))
+    ReplicationRuleOrOperator.struct_class = Types::ReplicationRuleOrOperator
 
     ReplicationRules.member = Shapes::ShapeRef.new(shape: ReplicationRule)
 
@@ -3302,6 +3325,7 @@ module Aws::S3
     UploadPartCopyOutput.add_member(:ssekms_key_id, Shapes::ShapeRef.new(shape: SSEKMSKeyId, location: "header", location_name: "x-amz-server-side-encryption-aws-kms-key-id"))
     UploadPartCopyOutput.add_member(:bucket_key_enabled, Shapes::ShapeRef.new(shape: BucketKeyEnabled, location: "header", location_name: "x-amz-server-side-encryption-bucket-key-enabled"))
     UploadPartCopyOutput.add_member(:request_charged, Shapes::ShapeRef.new(shape: RequestCharged, location: "header", location_name: "x-amz-request-charged"))
+    UploadPartCopyOutput.add_member(:version_id, Shapes::ShapeRef.new(shape: ObjectVersionId, location: "header", location_name: "x-amz-version-id"))
     UploadPartCopyOutput.struct_class = Types::UploadPartCopyOutput
     UploadPartCopyOutput[:payload] = :copy_part_result
     UploadPartCopyOutput[:payload_member] = UploadPartCopyOutput.member(:copy_part_result)
@@ -3344,6 +3368,7 @@ module Aws::S3
     UploadPartOutput.add_member(:ssekms_key_id, Shapes::ShapeRef.new(shape: SSEKMSKeyId, location: "header", location_name: "x-amz-server-side-encryption-aws-kms-key-id"))
     UploadPartOutput.add_member(:bucket_key_enabled, Shapes::ShapeRef.new(shape: BucketKeyEnabled, location: "header", location_name: "x-amz-server-side-encryption-bucket-key-enabled"))
     UploadPartOutput.add_member(:request_charged, Shapes::ShapeRef.new(shape: RequestCharged, location: "header", location_name: "x-amz-request-charged"))
+    UploadPartOutput.add_member(:version_id, Shapes::ShapeRef.new(shape: ObjectVersionId, location: "header", location_name: "x-amz-version-id"))
     UploadPartOutput.struct_class = Types::UploadPartOutput
 
     UploadPartRequest.add_member(:body, Shapes::ShapeRef.new(shape: Body, location_name: "Body", metadata: {"streaming" => true}))
@@ -3372,6 +3397,9 @@ module Aws::S3
     UploadPartRequest.struct_class = Types::UploadPartRequest
     UploadPartRequest[:payload] = :body
     UploadPartRequest[:payload_member] = UploadPartRequest.member(:body)
+
+    UseSourceMultiRegionKey.add_member(:status, Shapes::ShapeRef.new(shape: UseSourceMultiRegionKeyStatus, required: true, location_name: "Status"))
+    UseSourceMultiRegionKey.struct_class = Types::UseSourceMultiRegionKey
 
     UserMetadata.member = Shapes::ShapeRef.new(shape: MetadataEntry, location_name: "MetadataEntry")
 

@@ -30,6 +30,8 @@ module Aws::ACM
       attr_accessor certificate_key_pair_origin: ("AWS_MANAGED" | "ACME" | "CUSTOMER_PROVIDED")
       attr_accessor acme_endpoint_arn: ::String
       attr_accessor acme_account_id: ::String
+      attr_accessor certificate_usage: ("CLIENT_AND_SERVER_AUTH" | "CLIENT_AUTH_ONLY")
+      attr_accessor root_hierarchy_type: ("N2_AMAZON_MANAGED" | "N2_SFG2_AMAZON_MANAGED")
       SENSITIVE: []
     end
 
@@ -45,6 +47,7 @@ module Aws::ACM
       attr_accessor certificate_key_pair_origin: ("AWS_MANAGED" | "ACME" | "CUSTOMER_PROVIDED")
       attr_accessor acme_endpoint_arn: ::String
       attr_accessor acme_account_id: ::String
+      attr_accessor root_hierarchy_type: ("N2_AMAZON_MANAGED" | "N2_SFG2_AMAZON_MANAGED")
       attr_accessor unknown: untyped
       SENSITIVE: []
 
@@ -69,6 +72,8 @@ module Aws::ACM
       class AcmeEndpointArn < AcmCertificateMetadataFilter
       end
       class AcmeAccountId < AcmCertificateMetadataFilter
+      end
+      class RootHierarchyType < AcmCertificateMetadataFilter
       end
       class Unknown < AcmCertificateMetadataFilter
       end
@@ -221,6 +226,8 @@ module Aws::ACM
       attr_accessor certificate_key_pair_origin: ("AWS_MANAGED" | "ACME" | "CUSTOMER_PROVIDED")
       attr_accessor acme_endpoint_arn: ::String
       attr_accessor acme_account_id: ::String
+      attr_accessor certificate_usage: ("CLIENT_AND_SERVER_AUTH" | "CLIENT_AUTH_ONLY")
+      attr_accessor root_hierarchy_type: ("N2_AMAZON_MANAGED" | "N2_SFG2_AMAZON_MANAGED")
       SENSITIVE: []
     end
 
@@ -308,6 +315,8 @@ module Aws::ACM
       attr_accessor revoked_at: ::Time
       attr_accessor managed_by: ("CLOUDFRONT")
       attr_accessor certificate_key_pair_origin: ("AWS_MANAGED" | "ACME" | "CUSTOMER_PROVIDED")
+      attr_accessor certificate_usage: ("CLIENT_AND_SERVER_AUTH" | "CLIENT_AUTH_ONLY")
+      attr_accessor root_hierarchy_type: ("N2_AMAZON_MANAGED" | "N2_SFG2_AMAZON_MANAGED")
       SENSITIVE: []
     end
 
@@ -762,6 +771,7 @@ module Aws::ACM
     class ListCertificatesRequest
       attr_accessor certificate_statuses: ::Array[("PENDING_VALIDATION" | "ISSUED" | "INACTIVE" | "EXPIRED" | "VALIDATION_TIMED_OUT" | "REVOKED" | "FAILED")]
       attr_accessor certificate_key_pair_origins: ::Array[("AWS_MANAGED" | "ACME" | "CUSTOMER_PROVIDED")]
+      attr_accessor root_hierarchy_types: ::Array[("N2_AMAZON_MANAGED" | "N2_SFG2_AMAZON_MANAGED")]
       attr_accessor includes: Types::Filters
       attr_accessor next_token: ::String
       attr_accessor max_items: ::Integer
@@ -865,6 +875,8 @@ module Aws::ACM
       attr_accessor tags: ::Array[Types::Tag]
       attr_accessor key_algorithm: ("RSA_1024" | "RSA_2048" | "RSA_3072" | "RSA_4096" | "EC_prime256v1" | "EC_secp384r1" | "EC_secp521r1")
       attr_accessor managed_by: ("CLOUDFRONT")
+      attr_accessor certificate_usage: ("CLIENT_AND_SERVER_AUTH" | "CLIENT_AUTH_ONLY")
+      attr_accessor root_hierarchy_type: ("N2_AMAZON_MANAGED" | "N2_SFG2_AMAZON_MANAGED")
       SENSITIVE: []
     end
 

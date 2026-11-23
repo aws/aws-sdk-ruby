@@ -1328,13 +1328,14 @@ module Aws::DirectConnect
         "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "directconnect",
         "jsonVersion" => "1.1",
-        "protocol" => "json",
-        "protocols" => ["json"],
+        "protocol" => "smithy-rpc-v2-cbor",
+        "protocols" => ["smithy-rpc-v2-cbor", "json"],
         "serviceFullName" => "AWS Direct Connect",
         "serviceId" => "Direct Connect",
         "signatureVersion" => "v4",
         "targetPrefix" => "OvertureService",
         "uid" => "directconnect-2012-10-25",
+        "xmlNamespace" => "http://directconnect.amazonaws.com/doc/2012-10-25/",
       }
 
       api.add_operation(:accept_direct_connect_gateway_association_proposal, Seahorse::Model::Operation.new.tap do |o|

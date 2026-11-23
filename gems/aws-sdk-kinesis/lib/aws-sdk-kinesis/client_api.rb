@@ -15,7 +15,24 @@ module Aws::Kinesis
     include Seahorse::Model
 
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
+    AcknowledgeDeadLetterQueueRecordsErrorEntry = Shapes::StructureShape.new(name: 'AcknowledgeDeadLetterQueueRecordsErrorEntry')
+    AcknowledgeDeadLetterQueueRecordsErrorEntryList = Shapes::ListShape.new(name: 'AcknowledgeDeadLetterQueueRecordsErrorEntryList')
+    AcknowledgeDeadLetterQueueRecordsInput = Shapes::StructureShape.new(name: 'AcknowledgeDeadLetterQueueRecordsInput')
+    AcknowledgeDeadLetterQueueRecordsOutput = Shapes::StructureShape.new(name: 'AcknowledgeDeadLetterQueueRecordsOutput')
+    AcknowledgeDeadLetterQueueRecordsRequestEntry = Shapes::StructureShape.new(name: 'AcknowledgeDeadLetterQueueRecordsRequestEntry')
+    AcknowledgeDeadLetterQueueRecordsRequestEntryList = Shapes::ListShape.new(name: 'AcknowledgeDeadLetterQueueRecordsRequestEntryList')
+    AcknowledgeDeadLetterQueueRecordsResultEntry = Shapes::StructureShape.new(name: 'AcknowledgeDeadLetterQueueRecordsResultEntry')
+    AcknowledgeDeadLetterQueueRecordsResultEntryList = Shapes::ListShape.new(name: 'AcknowledgeDeadLetterQueueRecordsResultEntryList')
+    AcknowledgeQueueRecordsErrorEntry = Shapes::StructureShape.new(name: 'AcknowledgeQueueRecordsErrorEntry')
+    AcknowledgeQueueRecordsErrorEntryList = Shapes::ListShape.new(name: 'AcknowledgeQueueRecordsErrorEntryList')
+    AcknowledgeQueueRecordsInput = Shapes::StructureShape.new(name: 'AcknowledgeQueueRecordsInput')
+    AcknowledgeQueueRecordsOutput = Shapes::StructureShape.new(name: 'AcknowledgeQueueRecordsOutput')
+    AcknowledgeQueueRecordsRequestEntry = Shapes::StructureShape.new(name: 'AcknowledgeQueueRecordsRequestEntry')
+    AcknowledgeQueueRecordsRequestEntryList = Shapes::ListShape.new(name: 'AcknowledgeQueueRecordsRequestEntryList')
+    AcknowledgeQueueRecordsResultEntry = Shapes::StructureShape.new(name: 'AcknowledgeQueueRecordsResultEntry')
+    AcknowledgeQueueRecordsResultEntryList = Shapes::ListShape.new(name: 'AcknowledgeQueueRecordsResultEntryList')
     AddTagsToStreamInput = Shapes::StructureShape.new(name: 'AddTagsToStreamInput')
+    ApproximateArrivalTimestamp = Shapes::TimestampShape.new(name: 'ApproximateArrivalTimestamp')
     BooleanObject = Shapes::BooleanShape.new(name: 'BooleanObject')
     BucketARN = Shapes::StringShape.new(name: 'BucketARN')
     ChannelARN = Shapes::StringShape.new(name: 'ChannelARN')
@@ -53,12 +70,16 @@ module Aws::Kinesis
     ConsumerStatus = Shapes::StringShape.new(name: 'ConsumerStatus')
     CreateChannelInput = Shapes::StructureShape.new(name: 'CreateChannelInput')
     CreateChannelOutput = Shapes::StructureShape.new(name: 'CreateChannelOutput')
+    CreateQueueInput = Shapes::StructureShape.new(name: 'CreateQueueInput')
+    CreateQueueOutput = Shapes::StructureShape.new(name: 'CreateQueueOutput')
     CreateStreamInput = Shapes::StructureShape.new(name: 'CreateStreamInput')
     Data = Shapes::BlobShape.new(name: 'Data')
     DataFreshnessInSeconds = Shapes::IntegerShape.new(name: 'DataFreshnessInSeconds')
+    DeadLetterConfiguration = Shapes::StructureShape.new(name: 'DeadLetterConfiguration')
     DeadLetterQueueS3Configuration = Shapes::StructureShape.new(name: 'DeadLetterQueueS3Configuration')
     DecreaseStreamRetentionPeriodInput = Shapes::StructureShape.new(name: 'DecreaseStreamRetentionPeriodInput')
     DeleteChannelInput = Shapes::StructureShape.new(name: 'DeleteChannelInput')
+    DeleteQueueInput = Shapes::StructureShape.new(name: 'DeleteQueueInput')
     DeleteResourcePolicyInput = Shapes::StructureShape.new(name: 'DeleteResourcePolicyInput')
     DeleteStreamInput = Shapes::StructureShape.new(name: 'DeleteStreamInput')
     DeregisterStreamConsumerInput = Shapes::StructureShape.new(name: 'DeregisterStreamConsumerInput')
@@ -68,6 +89,8 @@ module Aws::Kinesis
     DescribeChannelOutput = Shapes::StructureShape.new(name: 'DescribeChannelOutput')
     DescribeLimitsInput = Shapes::StructureShape.new(name: 'DescribeLimitsInput')
     DescribeLimitsOutput = Shapes::StructureShape.new(name: 'DescribeLimitsOutput')
+    DescribeQueueInput = Shapes::StructureShape.new(name: 'DescribeQueueInput')
+    DescribeQueueOutput = Shapes::StructureShape.new(name: 'DescribeQueueOutput')
     DescribeStreamConsumerInput = Shapes::StructureShape.new(name: 'DescribeStreamConsumerInput')
     DescribeStreamConsumerOutput = Shapes::StructureShape.new(name: 'DescribeStreamConsumerOutput')
     DescribeStreamInput = Shapes::StructureShape.new(name: 'DescribeStreamInput')
@@ -87,6 +110,7 @@ module Aws::Kinesis
     ExpectedBucketOwner = Shapes::StringShape.new(name: 'ExpectedBucketOwner')
     ExpiredIteratorException = Shapes::StructureShape.new(name: 'ExpiredIteratorException')
     ExpiredNextTokenException = Shapes::StructureShape.new(name: 'ExpiredNextTokenException')
+    FirstReceiveTimestamp = Shapes::TimestampShape.new(name: 'FirstReceiveTimestamp')
     GSRSchemaARN = Shapes::StringShape.new(name: 'GSRSchemaARN')
     GetRecordsInput = Shapes::StructureShape.new(name: 'GetRecordsInput')
     GetRecordsInputLimit = Shapes::IntegerShape.new(name: 'GetRecordsInputLimit')
@@ -111,6 +135,9 @@ module Aws::Kinesis
     ListChannelsInput = Shapes::StructureShape.new(name: 'ListChannelsInput')
     ListChannelsInputLimit = Shapes::IntegerShape.new(name: 'ListChannelsInputLimit')
     ListChannelsOutput = Shapes::StructureShape.new(name: 'ListChannelsOutput')
+    ListQueuesInput = Shapes::StructureShape.new(name: 'ListQueuesInput')
+    ListQueuesInputLimit = Shapes::IntegerShape.new(name: 'ListQueuesInputLimit')
+    ListQueuesOutput = Shapes::StructureShape.new(name: 'ListQueuesOutput')
     ListShardsInput = Shapes::StructureShape.new(name: 'ListShardsInput')
     ListShardsInputLimit = Shapes::IntegerShape.new(name: 'ListShardsInputLimit')
     ListShardsOutput = Shapes::StructureShape.new(name: 'ListShardsOutput')
@@ -125,6 +152,7 @@ module Aws::Kinesis
     ListTagsForStreamInput = Shapes::StructureShape.new(name: 'ListTagsForStreamInput')
     ListTagsForStreamInputLimit = Shapes::IntegerShape.new(name: 'ListTagsForStreamInputLimit')
     ListTagsForStreamOutput = Shapes::StructureShape.new(name: 'ListTagsForStreamOutput')
+    MaxReceiveCount = Shapes::IntegerShape.new(name: 'MaxReceiveCount')
     MaxRecordSizeInKiB = Shapes::IntegerShape.new(name: 'MaxRecordSizeInKiB')
     MergeShardsInput = Shapes::StructureShape.new(name: 'MergeShardsInput')
     MetricsName = Shapes::StringShape.new(name: 'MetricsName')
@@ -156,10 +184,37 @@ module Aws::Kinesis
     PutRecordsResultEntry = Shapes::StructureShape.new(name: 'PutRecordsResultEntry')
     PutRecordsResultEntryList = Shapes::ListShape.new(name: 'PutRecordsResultEntryList')
     PutResourcePolicyInput = Shapes::StructureShape.new(name: 'PutResourcePolicyInput')
+    QueueARN = Shapes::StringShape.new(name: 'QueueARN')
+    QueueAttributes = Shapes::StructureShape.new(name: 'QueueAttributes')
+    QueueCountObject = Shapes::IntegerShape.new(name: 'QueueCountObject')
+    QueueDescription = Shapes::StructureShape.new(name: 'QueueDescription')
+    QueueName = Shapes::StringShape.new(name: 'QueueName')
+    QueueRecord = Shapes::StructureShape.new(name: 'QueueRecord')
+    QueueRecordList = Shapes::ListShape.new(name: 'QueueRecordList')
+    QueueStartingPosition = Shapes::StructureShape.new(name: 'QueueStartingPosition')
+    QueueStartingPositionType = Shapes::StringShape.new(name: 'QueueStartingPositionType')
+    QueueStatus = Shapes::StringShape.new(name: 'QueueStatus')
+    QueueStreamConfiguration = Shapes::StructureShape.new(name: 'QueueStreamConfiguration')
+    QueueStreamConfigurationList = Shapes::ListShape.new(name: 'QueueStreamConfigurationList')
+    QueueStreamFilter = Shapes::StructureShape.new(name: 'QueueStreamFilter')
+    QueueStreamFilterList = Shapes::ListShape.new(name: 'QueueStreamFilterList')
+    QueueStreamIdentifier = Shapes::StructureShape.new(name: 'QueueStreamIdentifier')
+    QueueStreamIdentifierList = Shapes::ListShape.new(name: 'QueueStreamIdentifierList')
+    QueueSummary = Shapes::StructureShape.new(name: 'QueueSummary')
+    QueueSummaryList = Shapes::ListShape.new(name: 'QueueSummaryList')
+    ReceiptHandle = Shapes::StringShape.new(name: 'ReceiptHandle')
+    ReceiveCount = Shapes::IntegerShape.new(name: 'ReceiveCount')
+    ReceiveDeadLetterQueueRecordsInput = Shapes::StructureShape.new(name: 'ReceiveDeadLetterQueueRecordsInput')
+    ReceiveDeadLetterQueueRecordsOutput = Shapes::StructureShape.new(name: 'ReceiveDeadLetterQueueRecordsOutput')
+    ReceiveQueueRecordsInput = Shapes::StructureShape.new(name: 'ReceiveQueueRecordsInput')
+    ReceiveQueueRecordsInputLimit = Shapes::IntegerShape.new(name: 'ReceiveQueueRecordsInputLimit')
+    ReceiveQueueRecordsOutput = Shapes::StructureShape.new(name: 'ReceiveQueueRecordsOutput')
+    ReceiveQueueRecordsWaitTimeSeconds = Shapes::IntegerShape.new(name: 'ReceiveQueueRecordsWaitTimeSeconds')
     Record = Shapes::StructureShape.new(name: 'Record')
     RecordConfiguration = Shapes::StructureShape.new(name: 'RecordConfiguration')
     RecordDistributionStrategy = Shapes::StringShape.new(name: 'RecordDistributionStrategy')
     RecordFormatType = Shapes::StringShape.new(name: 'RecordFormatType')
+    RecordId = Shapes::StringShape.new(name: 'RecordId')
     RecordList = Shapes::ListShape.new(name: 'RecordList')
     RegisterStreamConsumerInput = Shapes::StructureShape.new(name: 'RegisterStreamConsumerInput')
     RegisterStreamConsumerOutput = Shapes::StructureShape.new(name: 'RegisterStreamConsumerOutput')
@@ -167,6 +222,14 @@ module Aws::Kinesis
     ResourceARN = Shapes::StringShape.new(name: 'ResourceARN')
     ResourceInUseException = Shapes::StructureShape.new(name: 'ResourceInUseException')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
+    RestoreDeadLetterQueueRecordsErrorEntry = Shapes::StructureShape.new(name: 'RestoreDeadLetterQueueRecordsErrorEntry')
+    RestoreDeadLetterQueueRecordsErrorEntryList = Shapes::ListShape.new(name: 'RestoreDeadLetterQueueRecordsErrorEntryList')
+    RestoreDeadLetterQueueRecordsInput = Shapes::StructureShape.new(name: 'RestoreDeadLetterQueueRecordsInput')
+    RestoreDeadLetterQueueRecordsOutput = Shapes::StructureShape.new(name: 'RestoreDeadLetterQueueRecordsOutput')
+    RestoreDeadLetterQueueRecordsRequestEntry = Shapes::StructureShape.new(name: 'RestoreDeadLetterQueueRecordsRequestEntry')
+    RestoreDeadLetterQueueRecordsRequestEntryList = Shapes::ListShape.new(name: 'RestoreDeadLetterQueueRecordsRequestEntryList')
+    RestoreDeadLetterQueueRecordsResultEntry = Shapes::StructureShape.new(name: 'RestoreDeadLetterQueueRecordsResultEntry')
+    RestoreDeadLetterQueueRecordsResultEntryList = Shapes::ListShape.new(name: 'RestoreDeadLetterQueueRecordsResultEntryList')
     RetentionPeriodHours = Shapes::IntegerShape.new(name: 'RetentionPeriodHours')
     RoleARN = Shapes::StringShape.new(name: 'RoleARN')
     S3CompressionType = Shapes::StringShape.new(name: 'S3CompressionType')
@@ -226,13 +289,33 @@ module Aws::Kinesis
     TagMap = Shapes::MapShape.new(name: 'TagMap')
     TagResourceInput = Shapes::StructureShape.new(name: 'TagResourceInput')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
+    TargetType = Shapes::StringShape.new(name: 'TargetType')
+    ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     UntagResourceInput = Shapes::StructureShape.new(name: 'UntagResourceInput')
     UpdateAccountSettingsInput = Shapes::StructureShape.new(name: 'UpdateAccountSettingsInput')
     UpdateAccountSettingsOutput = Shapes::StructureShape.new(name: 'UpdateAccountSettingsOutput')
     UpdateChannelInput = Shapes::StructureShape.new(name: 'UpdateChannelInput')
     UpdateChannelOutput = Shapes::StructureShape.new(name: 'UpdateChannelOutput')
+    UpdateDeadLetterQueueRecordsVisibilityErrorEntry = Shapes::StructureShape.new(name: 'UpdateDeadLetterQueueRecordsVisibilityErrorEntry')
+    UpdateDeadLetterQueueRecordsVisibilityErrorEntryList = Shapes::ListShape.new(name: 'UpdateDeadLetterQueueRecordsVisibilityErrorEntryList')
+    UpdateDeadLetterQueueRecordsVisibilityInput = Shapes::StructureShape.new(name: 'UpdateDeadLetterQueueRecordsVisibilityInput')
+    UpdateDeadLetterQueueRecordsVisibilityOutput = Shapes::StructureShape.new(name: 'UpdateDeadLetterQueueRecordsVisibilityOutput')
+    UpdateDeadLetterQueueRecordsVisibilityRequestEntry = Shapes::StructureShape.new(name: 'UpdateDeadLetterQueueRecordsVisibilityRequestEntry')
+    UpdateDeadLetterQueueRecordsVisibilityRequestEntryList = Shapes::ListShape.new(name: 'UpdateDeadLetterQueueRecordsVisibilityRequestEntryList')
+    UpdateDeadLetterQueueRecordsVisibilityResultEntry = Shapes::StructureShape.new(name: 'UpdateDeadLetterQueueRecordsVisibilityResultEntry')
+    UpdateDeadLetterQueueRecordsVisibilityResultEntryList = Shapes::ListShape.new(name: 'UpdateDeadLetterQueueRecordsVisibilityResultEntryList')
     UpdateMaxRecordSizeInput = Shapes::StructureShape.new(name: 'UpdateMaxRecordSizeInput')
+    UpdateQueueInput = Shapes::StructureShape.new(name: 'UpdateQueueInput')
+    UpdateQueueOutput = Shapes::StructureShape.new(name: 'UpdateQueueOutput')
+    UpdateQueueRecordsVisibilityErrorEntry = Shapes::StructureShape.new(name: 'UpdateQueueRecordsVisibilityErrorEntry')
+    UpdateQueueRecordsVisibilityErrorEntryList = Shapes::ListShape.new(name: 'UpdateQueueRecordsVisibilityErrorEntryList')
+    UpdateQueueRecordsVisibilityInput = Shapes::StructureShape.new(name: 'UpdateQueueRecordsVisibilityInput')
+    UpdateQueueRecordsVisibilityOutput = Shapes::StructureShape.new(name: 'UpdateQueueRecordsVisibilityOutput')
+    UpdateQueueRecordsVisibilityRequestEntry = Shapes::StructureShape.new(name: 'UpdateQueueRecordsVisibilityRequestEntry')
+    UpdateQueueRecordsVisibilityRequestEntryList = Shapes::ListShape.new(name: 'UpdateQueueRecordsVisibilityRequestEntryList')
+    UpdateQueueRecordsVisibilityResultEntry = Shapes::StructureShape.new(name: 'UpdateQueueRecordsVisibilityResultEntry')
+    UpdateQueueRecordsVisibilityResultEntryList = Shapes::ListShape.new(name: 'UpdateQueueRecordsVisibilityResultEntryList')
     UpdateShardCountInput = Shapes::StructureShape.new(name: 'UpdateShardCountInput')
     UpdateShardCountOutput = Shapes::StructureShape.new(name: 'UpdateShardCountOutput')
     UpdateStreamModeInput = Shapes::StructureShape.new(name: 'UpdateStreamModeInput')
@@ -240,10 +323,61 @@ module Aws::Kinesis
     UpdateStreamWarmThroughputInput = Shapes::StructureShape.new(name: 'UpdateStreamWarmThroughputInput')
     UpdateStreamWarmThroughputOutput = Shapes::StructureShape.new(name: 'UpdateStreamWarmThroughputOutput')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
+    VisibilityTimeoutSeconds = Shapes::IntegerShape.new(name: 'VisibilityTimeoutSeconds')
     WarmThroughputObject = Shapes::StructureShape.new(name: 'WarmThroughputObject')
 
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     AccessDeniedException.struct_class = Types::AccessDeniedException
+
+    AcknowledgeDeadLetterQueueRecordsErrorEntry.add_member(:receipt_handle, Shapes::ShapeRef.new(shape: ReceiptHandle, required: true, location_name: "ReceiptHandle"))
+    AcknowledgeDeadLetterQueueRecordsErrorEntry.add_member(:error_code, Shapes::ShapeRef.new(shape: ErrorCode, required: true, location_name: "ErrorCode"))
+    AcknowledgeDeadLetterQueueRecordsErrorEntry.add_member(:error_message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "ErrorMessage"))
+    AcknowledgeDeadLetterQueueRecordsErrorEntry.struct_class = Types::AcknowledgeDeadLetterQueueRecordsErrorEntry
+
+    AcknowledgeDeadLetterQueueRecordsErrorEntryList.member = Shapes::ShapeRef.new(shape: AcknowledgeDeadLetterQueueRecordsErrorEntry)
+
+    AcknowledgeDeadLetterQueueRecordsInput.add_member(:queue_arn, Shapes::ShapeRef.new(shape: QueueARN, required: true, location_name: "QueueARN", metadata: {"contextParam" => {"name" => "QueueARN"}}))
+    AcknowledgeDeadLetterQueueRecordsInput.add_member(:entries, Shapes::ShapeRef.new(shape: AcknowledgeDeadLetterQueueRecordsRequestEntryList, required: true, location_name: "Entries"))
+    AcknowledgeDeadLetterQueueRecordsInput.struct_class = Types::AcknowledgeDeadLetterQueueRecordsInput
+
+    AcknowledgeDeadLetterQueueRecordsOutput.add_member(:successful, Shapes::ShapeRef.new(shape: AcknowledgeDeadLetterQueueRecordsResultEntryList, required: true, location_name: "Successful"))
+    AcknowledgeDeadLetterQueueRecordsOutput.add_member(:failed, Shapes::ShapeRef.new(shape: AcknowledgeDeadLetterQueueRecordsErrorEntryList, required: true, location_name: "Failed"))
+    AcknowledgeDeadLetterQueueRecordsOutput.struct_class = Types::AcknowledgeDeadLetterQueueRecordsOutput
+
+    AcknowledgeDeadLetterQueueRecordsRequestEntry.add_member(:receipt_handle, Shapes::ShapeRef.new(shape: ReceiptHandle, required: true, location_name: "ReceiptHandle"))
+    AcknowledgeDeadLetterQueueRecordsRequestEntry.struct_class = Types::AcknowledgeDeadLetterQueueRecordsRequestEntry
+
+    AcknowledgeDeadLetterQueueRecordsRequestEntryList.member = Shapes::ShapeRef.new(shape: AcknowledgeDeadLetterQueueRecordsRequestEntry)
+
+    AcknowledgeDeadLetterQueueRecordsResultEntry.add_member(:receipt_handle, Shapes::ShapeRef.new(shape: ReceiptHandle, required: true, location_name: "ReceiptHandle"))
+    AcknowledgeDeadLetterQueueRecordsResultEntry.struct_class = Types::AcknowledgeDeadLetterQueueRecordsResultEntry
+
+    AcknowledgeDeadLetterQueueRecordsResultEntryList.member = Shapes::ShapeRef.new(shape: AcknowledgeDeadLetterQueueRecordsResultEntry)
+
+    AcknowledgeQueueRecordsErrorEntry.add_member(:receipt_handle, Shapes::ShapeRef.new(shape: ReceiptHandle, required: true, location_name: "ReceiptHandle"))
+    AcknowledgeQueueRecordsErrorEntry.add_member(:error_code, Shapes::ShapeRef.new(shape: ErrorCode, required: true, location_name: "ErrorCode"))
+    AcknowledgeQueueRecordsErrorEntry.add_member(:error_message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "ErrorMessage"))
+    AcknowledgeQueueRecordsErrorEntry.struct_class = Types::AcknowledgeQueueRecordsErrorEntry
+
+    AcknowledgeQueueRecordsErrorEntryList.member = Shapes::ShapeRef.new(shape: AcknowledgeQueueRecordsErrorEntry)
+
+    AcknowledgeQueueRecordsInput.add_member(:queue_arn, Shapes::ShapeRef.new(shape: QueueARN, required: true, location_name: "QueueARN", metadata: {"contextParam" => {"name" => "QueueARN"}}))
+    AcknowledgeQueueRecordsInput.add_member(:entries, Shapes::ShapeRef.new(shape: AcknowledgeQueueRecordsRequestEntryList, required: true, location_name: "Entries"))
+    AcknowledgeQueueRecordsInput.struct_class = Types::AcknowledgeQueueRecordsInput
+
+    AcknowledgeQueueRecordsOutput.add_member(:successful, Shapes::ShapeRef.new(shape: AcknowledgeQueueRecordsResultEntryList, required: true, location_name: "Successful"))
+    AcknowledgeQueueRecordsOutput.add_member(:failed, Shapes::ShapeRef.new(shape: AcknowledgeQueueRecordsErrorEntryList, required: true, location_name: "Failed"))
+    AcknowledgeQueueRecordsOutput.struct_class = Types::AcknowledgeQueueRecordsOutput
+
+    AcknowledgeQueueRecordsRequestEntry.add_member(:receipt_handle, Shapes::ShapeRef.new(shape: ReceiptHandle, required: true, location_name: "ReceiptHandle"))
+    AcknowledgeQueueRecordsRequestEntry.struct_class = Types::AcknowledgeQueueRecordsRequestEntry
+
+    AcknowledgeQueueRecordsRequestEntryList.member = Shapes::ShapeRef.new(shape: AcknowledgeQueueRecordsRequestEntry)
+
+    AcknowledgeQueueRecordsResultEntry.add_member(:receipt_handle, Shapes::ShapeRef.new(shape: ReceiptHandle, required: true, location_name: "ReceiptHandle"))
+    AcknowledgeQueueRecordsResultEntry.struct_class = Types::AcknowledgeQueueRecordsResultEntry
+
+    AcknowledgeQueueRecordsResultEntryList.member = Shapes::ShapeRef.new(shape: AcknowledgeQueueRecordsResultEntry)
 
     AddTagsToStreamInput.add_member(:stream_name, Shapes::ShapeRef.new(shape: StreamName, location_name: "StreamName"))
     AddTagsToStreamInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, required: true, location_name: "Tags"))
@@ -351,6 +485,15 @@ module Aws::Kinesis
     CreateChannelOutput.add_member(:channel_description, Shapes::ShapeRef.new(shape: ChannelDescription, required: true, location_name: "ChannelDescription"))
     CreateChannelOutput.struct_class = Types::CreateChannelOutput
 
+    CreateQueueInput.add_member(:queue_name, Shapes::ShapeRef.new(shape: QueueName, required: true, location_name: "QueueName"))
+    CreateQueueInput.add_member(:stream_configuration_list, Shapes::ShapeRef.new(shape: QueueStreamConfigurationList, required: true, location_name: "StreamConfigurationList"))
+    CreateQueueInput.add_member(:queue_attributes, Shapes::ShapeRef.new(shape: QueueAttributes, location_name: "QueueAttributes"))
+    CreateQueueInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
+    CreateQueueInput.struct_class = Types::CreateQueueInput
+
+    CreateQueueOutput.add_member(:queue_description, Shapes::ShapeRef.new(shape: QueueDescription, required: true, location_name: "QueueDescription"))
+    CreateQueueOutput.struct_class = Types::CreateQueueOutput
+
     CreateStreamInput.add_member(:stream_name, Shapes::ShapeRef.new(shape: StreamName, required: true, location_name: "StreamName"))
     CreateStreamInput.add_member(:shard_count, Shapes::ShapeRef.new(shape: PositiveIntegerObject, location_name: "ShardCount"))
     CreateStreamInput.add_member(:stream_mode_details, Shapes::ShapeRef.new(shape: StreamModeDetails, location_name: "StreamModeDetails"))
@@ -359,6 +502,10 @@ module Aws::Kinesis
     CreateStreamInput.add_member(:max_record_size_in_ki_b, Shapes::ShapeRef.new(shape: MaxRecordSizeInKiB, location_name: "MaxRecordSizeInKiB"))
     CreateStreamInput.add_member(:record_distribution_strategy, Shapes::ShapeRef.new(shape: RecordDistributionStrategy, location_name: "RecordDistributionStrategy"))
     CreateStreamInput.struct_class = Types::CreateStreamInput
+
+    DeadLetterConfiguration.add_member(:target_type, Shapes::ShapeRef.new(shape: TargetType, required: true, location_name: "TargetType"))
+    DeadLetterConfiguration.add_member(:max_receive_count, Shapes::ShapeRef.new(shape: MaxReceiveCount, location_name: "MaxReceiveCount"))
+    DeadLetterConfiguration.struct_class = Types::DeadLetterConfiguration
 
     DeadLetterQueueS3Configuration.add_member(:bucket_arn, Shapes::ShapeRef.new(shape: BucketARN, required: true, location_name: "BucketARN"))
     DeadLetterQueueS3Configuration.add_member(:expected_bucket_owner, Shapes::ShapeRef.new(shape: ExpectedBucketOwner, required: true, location_name: "ExpectedBucketOwner"))
@@ -373,6 +520,9 @@ module Aws::Kinesis
 
     DeleteChannelInput.add_member(:channel_arn, Shapes::ShapeRef.new(shape: ChannelARN, required: true, location_name: "ChannelARN", metadata: {"contextParam" => {"name" => "ChannelARN"}}))
     DeleteChannelInput.struct_class = Types::DeleteChannelInput
+
+    DeleteQueueInput.add_member(:queue_arn, Shapes::ShapeRef.new(shape: QueueARN, required: true, location_name: "QueueARN", metadata: {"contextParam" => {"name" => "QueueARN"}}))
+    DeleteQueueInput.struct_class = Types::DeleteQueueInput
 
     DeleteResourcePolicyInput.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceARN, required: true, location_name: "ResourceARN", metadata: {"contextParam" => {"name" => "ResourceARN"}}))
     DeleteResourcePolicyInput.add_member(:stream_id, Shapes::ShapeRef.new(shape: StreamId, location_name: "StreamId", metadata: {"contextParam" => {"name" => "StreamId"}}))
@@ -410,6 +560,12 @@ module Aws::Kinesis
     DescribeLimitsOutput.add_member(:channel_count, Shapes::ShapeRef.new(shape: ChannelCountObject, location_name: "ChannelCount"))
     DescribeLimitsOutput.add_member(:channel_count_limit, Shapes::ShapeRef.new(shape: ChannelCountObject, location_name: "ChannelCountLimit"))
     DescribeLimitsOutput.struct_class = Types::DescribeLimitsOutput
+
+    DescribeQueueInput.add_member(:queue_arn, Shapes::ShapeRef.new(shape: QueueARN, required: true, location_name: "QueueARN", metadata: {"contextParam" => {"name" => "QueueARN"}}))
+    DescribeQueueInput.struct_class = Types::DescribeQueueInput
+
+    DescribeQueueOutput.add_member(:queue_description, Shapes::ShapeRef.new(shape: QueueDescription, required: true, location_name: "QueueDescription"))
+    DescribeQueueOutput.struct_class = Types::DescribeQueueOutput
 
     DescribeStreamConsumerInput.add_member(:stream_arn, Shapes::ShapeRef.new(shape: StreamARN, location_name: "StreamARN", metadata: {"contextParam" => {"name" => "StreamARN"}}))
     DescribeStreamConsumerInput.add_member(:consumer_name, Shapes::ShapeRef.new(shape: ConsumerName, location_name: "ConsumerName"))
@@ -549,6 +705,15 @@ module Aws::Kinesis
     ListChannelsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListChannelsOutput.struct_class = Types::ListChannelsOutput
 
+    ListQueuesInput.add_member(:max_results, Shapes::ShapeRef.new(shape: ListQueuesInputLimit, location_name: "MaxResults"))
+    ListQueuesInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListQueuesInput.add_member(:stream_filter, Shapes::ShapeRef.new(shape: QueueStreamFilterList, location_name: "StreamFilter"))
+    ListQueuesInput.struct_class = Types::ListQueuesInput
+
+    ListQueuesOutput.add_member(:queue_summaries, Shapes::ShapeRef.new(shape: QueueSummaryList, required: true, location_name: "QueueSummaries"))
+    ListQueuesOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListQueuesOutput.struct_class = Types::ListQueuesOutput
+
     ListShardsInput.add_member(:stream_name, Shapes::ShapeRef.new(shape: StreamName, location_name: "StreamName"))
     ListShardsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListShardsInput.add_member(:exclusive_start_shard_id, Shapes::ShapeRef.new(shape: ShardId, location_name: "ExclusiveStartShardId"))
@@ -680,6 +845,78 @@ module Aws::Kinesis
     PutResourcePolicyInput.add_member(:policy, Shapes::ShapeRef.new(shape: Policy, required: true, location_name: "Policy"))
     PutResourcePolicyInput.struct_class = Types::PutResourcePolicyInput
 
+    QueueAttributes.add_member(:visibility_timeout_seconds, Shapes::ShapeRef.new(shape: VisibilityTimeoutSeconds, location_name: "VisibilityTimeoutSeconds"))
+    QueueAttributes.add_member(:dead_letter_configuration, Shapes::ShapeRef.new(shape: DeadLetterConfiguration, location_name: "DeadLetterConfiguration"))
+    QueueAttributes.struct_class = Types::QueueAttributes
+
+    QueueDescription.add_member(:queue_name, Shapes::ShapeRef.new(shape: QueueName, required: true, location_name: "QueueName"))
+    QueueDescription.add_member(:queue_arn, Shapes::ShapeRef.new(shape: QueueARN, required: true, location_name: "QueueARN"))
+    QueueDescription.add_member(:queue_status, Shapes::ShapeRef.new(shape: QueueStatus, required: true, location_name: "QueueStatus"))
+    QueueDescription.add_member(:queue_creation_timestamp, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "QueueCreationTimestamp"))
+    QueueDescription.add_member(:stream_configuration_list, Shapes::ShapeRef.new(shape: QueueStreamConfigurationList, required: true, location_name: "StreamConfigurationList"))
+    QueueDescription.add_member(:queue_attributes, Shapes::ShapeRef.new(shape: QueueAttributes, location_name: "QueueAttributes"))
+    QueueDescription.struct_class = Types::QueueDescription
+
+    QueueRecord.add_member(:receipt_handle, Shapes::ShapeRef.new(shape: ReceiptHandle, required: true, location_name: "ReceiptHandle"))
+    QueueRecord.add_member(:record_id, Shapes::ShapeRef.new(shape: RecordId, required: true, location_name: "RecordId"))
+    QueueRecord.add_member(:partition_key, Shapes::ShapeRef.new(shape: PartitionKey, location_name: "PartitionKey"))
+    QueueRecord.add_member(:data, Shapes::ShapeRef.new(shape: Data, required: true, location_name: "Data"))
+    QueueRecord.add_member(:approximate_arrival_timestamp, Shapes::ShapeRef.new(shape: ApproximateArrivalTimestamp, required: true, location_name: "ApproximateArrivalTimestamp"))
+    QueueRecord.add_member(:first_receive_timestamp, Shapes::ShapeRef.new(shape: FirstReceiveTimestamp, required: true, location_name: "FirstReceiveTimestamp"))
+    QueueRecord.add_member(:receive_count, Shapes::ShapeRef.new(shape: ReceiveCount, required: true, location_name: "ReceiveCount"))
+    QueueRecord.struct_class = Types::QueueRecord
+
+    QueueRecordList.member = Shapes::ShapeRef.new(shape: QueueRecord)
+
+    QueueStartingPosition.add_member(:type, Shapes::ShapeRef.new(shape: QueueStartingPositionType, required: true, location_name: "Type"))
+    QueueStartingPosition.add_member(:timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "Timestamp"))
+    QueueStartingPosition.struct_class = Types::QueueStartingPosition
+
+    QueueStreamConfiguration.add_member(:stream_arn, Shapes::ShapeRef.new(shape: StreamARN, required: true, location_name: "StreamARN"))
+    QueueStreamConfiguration.add_member(:starting_position, Shapes::ShapeRef.new(shape: QueueStartingPosition, location_name: "StartingPosition"))
+    QueueStreamConfiguration.struct_class = Types::QueueStreamConfiguration
+
+    QueueStreamConfigurationList.member = Shapes::ShapeRef.new(shape: QueueStreamConfiguration)
+
+    QueueStreamFilter.add_member(:stream_arn, Shapes::ShapeRef.new(shape: StreamARN, required: true, location_name: "StreamARN"))
+    QueueStreamFilter.add_member(:stream_creation_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "StreamCreationTimestamp"))
+    QueueStreamFilter.struct_class = Types::QueueStreamFilter
+
+    QueueStreamFilterList.member = Shapes::ShapeRef.new(shape: QueueStreamFilter)
+
+    QueueStreamIdentifier.add_member(:stream_arn, Shapes::ShapeRef.new(shape: StreamARN, required: true, location_name: "StreamARN"))
+    QueueStreamIdentifier.add_member(:stream_creation_timestamp, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "StreamCreationTimestamp"))
+    QueueStreamIdentifier.struct_class = Types::QueueStreamIdentifier
+
+    QueueStreamIdentifierList.member = Shapes::ShapeRef.new(shape: QueueStreamIdentifier)
+
+    QueueSummary.add_member(:queue_name, Shapes::ShapeRef.new(shape: QueueName, required: true, location_name: "QueueName"))
+    QueueSummary.add_member(:queue_arn, Shapes::ShapeRef.new(shape: QueueARN, required: true, location_name: "QueueARN"))
+    QueueSummary.add_member(:queue_status, Shapes::ShapeRef.new(shape: QueueStatus, required: true, location_name: "QueueStatus"))
+    QueueSummary.add_member(:queue_creation_timestamp, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "QueueCreationTimestamp"))
+    QueueSummary.add_member(:streams, Shapes::ShapeRef.new(shape: QueueStreamIdentifierList, required: true, location_name: "Streams"))
+    QueueSummary.struct_class = Types::QueueSummary
+
+    QueueSummaryList.member = Shapes::ShapeRef.new(shape: QueueSummary)
+
+    ReceiveDeadLetterQueueRecordsInput.add_member(:queue_arn, Shapes::ShapeRef.new(shape: QueueARN, required: true, location_name: "QueueARN", metadata: {"contextParam" => {"name" => "QueueARN"}}))
+    ReceiveDeadLetterQueueRecordsInput.add_member(:limit, Shapes::ShapeRef.new(shape: ReceiveQueueRecordsInputLimit, location_name: "Limit"))
+    ReceiveDeadLetterQueueRecordsInput.add_member(:wait_time_seconds, Shapes::ShapeRef.new(shape: ReceiveQueueRecordsWaitTimeSeconds, location_name: "WaitTimeSeconds"))
+    ReceiveDeadLetterQueueRecordsInput.add_member(:visibility_timeout_seconds, Shapes::ShapeRef.new(shape: VisibilityTimeoutSeconds, location_name: "VisibilityTimeoutSeconds"))
+    ReceiveDeadLetterQueueRecordsInput.struct_class = Types::ReceiveDeadLetterQueueRecordsInput
+
+    ReceiveDeadLetterQueueRecordsOutput.add_member(:queue_records, Shapes::ShapeRef.new(shape: QueueRecordList, required: true, location_name: "QueueRecords"))
+    ReceiveDeadLetterQueueRecordsOutput.struct_class = Types::ReceiveDeadLetterQueueRecordsOutput
+
+    ReceiveQueueRecordsInput.add_member(:queue_arn, Shapes::ShapeRef.new(shape: QueueARN, required: true, location_name: "QueueARN", metadata: {"contextParam" => {"name" => "QueueARN"}}))
+    ReceiveQueueRecordsInput.add_member(:limit, Shapes::ShapeRef.new(shape: ReceiveQueueRecordsInputLimit, location_name: "Limit"))
+    ReceiveQueueRecordsInput.add_member(:wait_time_seconds, Shapes::ShapeRef.new(shape: ReceiveQueueRecordsWaitTimeSeconds, location_name: "WaitTimeSeconds"))
+    ReceiveQueueRecordsInput.add_member(:visibility_timeout_seconds, Shapes::ShapeRef.new(shape: VisibilityTimeoutSeconds, location_name: "VisibilityTimeoutSeconds"))
+    ReceiveQueueRecordsInput.struct_class = Types::ReceiveQueueRecordsInput
+
+    ReceiveQueueRecordsOutput.add_member(:queue_records, Shapes::ShapeRef.new(shape: QueueRecordList, required: true, location_name: "QueueRecords"))
+    ReceiveQueueRecordsOutput.struct_class = Types::ReceiveQueueRecordsOutput
+
     Record.add_member(:sequence_number, Shapes::ShapeRef.new(shape: SequenceNumber, required: true, location_name: "SequenceNumber"))
     Record.add_member(:approximate_arrival_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "ApproximateArrivalTimestamp"))
     Record.add_member(:data, Shapes::ShapeRef.new(shape: Data, required: true, location_name: "Data"))
@@ -713,6 +950,31 @@ module Aws::Kinesis
 
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
+
+    RestoreDeadLetterQueueRecordsErrorEntry.add_member(:receipt_handle, Shapes::ShapeRef.new(shape: ReceiptHandle, required: true, location_name: "ReceiptHandle"))
+    RestoreDeadLetterQueueRecordsErrorEntry.add_member(:error_code, Shapes::ShapeRef.new(shape: ErrorCode, required: true, location_name: "ErrorCode"))
+    RestoreDeadLetterQueueRecordsErrorEntry.add_member(:error_message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "ErrorMessage"))
+    RestoreDeadLetterQueueRecordsErrorEntry.struct_class = Types::RestoreDeadLetterQueueRecordsErrorEntry
+
+    RestoreDeadLetterQueueRecordsErrorEntryList.member = Shapes::ShapeRef.new(shape: RestoreDeadLetterQueueRecordsErrorEntry)
+
+    RestoreDeadLetterQueueRecordsInput.add_member(:queue_arn, Shapes::ShapeRef.new(shape: QueueARN, required: true, location_name: "QueueARN", metadata: {"contextParam" => {"name" => "QueueARN"}}))
+    RestoreDeadLetterQueueRecordsInput.add_member(:entries, Shapes::ShapeRef.new(shape: RestoreDeadLetterQueueRecordsRequestEntryList, required: true, location_name: "Entries"))
+    RestoreDeadLetterQueueRecordsInput.struct_class = Types::RestoreDeadLetterQueueRecordsInput
+
+    RestoreDeadLetterQueueRecordsOutput.add_member(:successful, Shapes::ShapeRef.new(shape: RestoreDeadLetterQueueRecordsResultEntryList, required: true, location_name: "Successful"))
+    RestoreDeadLetterQueueRecordsOutput.add_member(:failed, Shapes::ShapeRef.new(shape: RestoreDeadLetterQueueRecordsErrorEntryList, required: true, location_name: "Failed"))
+    RestoreDeadLetterQueueRecordsOutput.struct_class = Types::RestoreDeadLetterQueueRecordsOutput
+
+    RestoreDeadLetterQueueRecordsRequestEntry.add_member(:receipt_handle, Shapes::ShapeRef.new(shape: ReceiptHandle, required: true, location_name: "ReceiptHandle"))
+    RestoreDeadLetterQueueRecordsRequestEntry.struct_class = Types::RestoreDeadLetterQueueRecordsRequestEntry
+
+    RestoreDeadLetterQueueRecordsRequestEntryList.member = Shapes::ShapeRef.new(shape: RestoreDeadLetterQueueRecordsRequestEntry)
+
+    RestoreDeadLetterQueueRecordsResultEntry.add_member(:receipt_handle, Shapes::ShapeRef.new(shape: ReceiptHandle, required: true, location_name: "ReceiptHandle"))
+    RestoreDeadLetterQueueRecordsResultEntry.struct_class = Types::RestoreDeadLetterQueueRecordsResultEntry
+
+    RestoreDeadLetterQueueRecordsResultEntryList.member = Shapes::ShapeRef.new(shape: RestoreDeadLetterQueueRecordsResultEntry)
 
     S3DestinationConfiguration.add_member(:data_freshness_in_seconds, Shapes::ShapeRef.new(shape: DataFreshnessInSeconds, location_name: "DataFreshnessInSeconds"))
     S3DestinationConfiguration.add_member(:dead_letter_queue_s3_configuration, Shapes::ShapeRef.new(shape: DeadLetterQueueS3Configuration, location_name: "DeadLetterQueueS3Configuration"))
@@ -831,6 +1093,7 @@ module Aws::Kinesis
     StreamDescriptionSummary.add_member(:max_record_size_in_ki_b, Shapes::ShapeRef.new(shape: MaxRecordSizeInKiB, location_name: "MaxRecordSizeInKiB"))
     StreamDescriptionSummary.add_member(:channel_count, Shapes::ShapeRef.new(shape: ChannelCountObject, location_name: "ChannelCount"))
     StreamDescriptionSummary.add_member(:record_distribution_strategy, Shapes::ShapeRef.new(shape: RecordDistributionStrategy, location_name: "RecordDistributionStrategy"))
+    StreamDescriptionSummary.add_member(:queue_count, Shapes::ShapeRef.new(shape: QueueCountObject, location_name: "QueueCount"))
     StreamDescriptionSummary.struct_class = Types::StreamDescriptionSummary
 
     StreamFilter.add_member(:stream_arn, Shapes::ShapeRef.new(shape: StreamARN, required: true, location_name: "StreamARN"))
@@ -897,6 +1160,9 @@ module Aws::Kinesis
     TagResourceInput.add_member(:stream_id, Shapes::ShapeRef.new(shape: StreamId, location_name: "StreamId", metadata: {"contextParam" => {"name" => "StreamId"}}))
     TagResourceInput.struct_class = Types::TagResourceInput
 
+    ThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    ThrottlingException.struct_class = Types::ThrottlingException
+
     UntagResourceInput.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location_name: "TagKeys"))
     UntagResourceInput.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceARN, required: true, location_name: "ResourceARN", metadata: {"contextParam" => {"name" => "ResourceARN"}}))
     UntagResourceInput.add_member(:stream_id, Shapes::ShapeRef.new(shape: StreamId, location_name: "StreamId", metadata: {"contextParam" => {"name" => "StreamId"}}))
@@ -917,10 +1183,69 @@ module Aws::Kinesis
     UpdateChannelOutput.add_member(:channel_description, Shapes::ShapeRef.new(shape: ChannelDescription, required: true, location_name: "ChannelDescription"))
     UpdateChannelOutput.struct_class = Types::UpdateChannelOutput
 
+    UpdateDeadLetterQueueRecordsVisibilityErrorEntry.add_member(:receipt_handle, Shapes::ShapeRef.new(shape: ReceiptHandle, required: true, location_name: "ReceiptHandle"))
+    UpdateDeadLetterQueueRecordsVisibilityErrorEntry.add_member(:error_code, Shapes::ShapeRef.new(shape: ErrorCode, required: true, location_name: "ErrorCode"))
+    UpdateDeadLetterQueueRecordsVisibilityErrorEntry.add_member(:error_message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "ErrorMessage"))
+    UpdateDeadLetterQueueRecordsVisibilityErrorEntry.struct_class = Types::UpdateDeadLetterQueueRecordsVisibilityErrorEntry
+
+    UpdateDeadLetterQueueRecordsVisibilityErrorEntryList.member = Shapes::ShapeRef.new(shape: UpdateDeadLetterQueueRecordsVisibilityErrorEntry)
+
+    UpdateDeadLetterQueueRecordsVisibilityInput.add_member(:queue_arn, Shapes::ShapeRef.new(shape: QueueARN, required: true, location_name: "QueueARN", metadata: {"contextParam" => {"name" => "QueueARN"}}))
+    UpdateDeadLetterQueueRecordsVisibilityInput.add_member(:entries, Shapes::ShapeRef.new(shape: UpdateDeadLetterQueueRecordsVisibilityRequestEntryList, required: true, location_name: "Entries"))
+    UpdateDeadLetterQueueRecordsVisibilityInput.struct_class = Types::UpdateDeadLetterQueueRecordsVisibilityInput
+
+    UpdateDeadLetterQueueRecordsVisibilityOutput.add_member(:successful, Shapes::ShapeRef.new(shape: UpdateDeadLetterQueueRecordsVisibilityResultEntryList, required: true, location_name: "Successful"))
+    UpdateDeadLetterQueueRecordsVisibilityOutput.add_member(:failed, Shapes::ShapeRef.new(shape: UpdateDeadLetterQueueRecordsVisibilityErrorEntryList, required: true, location_name: "Failed"))
+    UpdateDeadLetterQueueRecordsVisibilityOutput.struct_class = Types::UpdateDeadLetterQueueRecordsVisibilityOutput
+
+    UpdateDeadLetterQueueRecordsVisibilityRequestEntry.add_member(:receipt_handle, Shapes::ShapeRef.new(shape: ReceiptHandle, required: true, location_name: "ReceiptHandle"))
+    UpdateDeadLetterQueueRecordsVisibilityRequestEntry.add_member(:visibility_timeout_seconds, Shapes::ShapeRef.new(shape: VisibilityTimeoutSeconds, required: true, location_name: "VisibilityTimeoutSeconds"))
+    UpdateDeadLetterQueueRecordsVisibilityRequestEntry.struct_class = Types::UpdateDeadLetterQueueRecordsVisibilityRequestEntry
+
+    UpdateDeadLetterQueueRecordsVisibilityRequestEntryList.member = Shapes::ShapeRef.new(shape: UpdateDeadLetterQueueRecordsVisibilityRequestEntry)
+
+    UpdateDeadLetterQueueRecordsVisibilityResultEntry.add_member(:receipt_handle, Shapes::ShapeRef.new(shape: ReceiptHandle, required: true, location_name: "ReceiptHandle"))
+    UpdateDeadLetterQueueRecordsVisibilityResultEntry.struct_class = Types::UpdateDeadLetterQueueRecordsVisibilityResultEntry
+
+    UpdateDeadLetterQueueRecordsVisibilityResultEntryList.member = Shapes::ShapeRef.new(shape: UpdateDeadLetterQueueRecordsVisibilityResultEntry)
+
     UpdateMaxRecordSizeInput.add_member(:stream_arn, Shapes::ShapeRef.new(shape: StreamARN, location_name: "StreamARN", metadata: {"contextParam" => {"name" => "StreamARN"}}))
     UpdateMaxRecordSizeInput.add_member(:stream_id, Shapes::ShapeRef.new(shape: StreamId, location_name: "StreamId", metadata: {"contextParam" => {"name" => "StreamId"}}))
     UpdateMaxRecordSizeInput.add_member(:max_record_size_in_ki_b, Shapes::ShapeRef.new(shape: MaxRecordSizeInKiB, required: true, location_name: "MaxRecordSizeInKiB"))
     UpdateMaxRecordSizeInput.struct_class = Types::UpdateMaxRecordSizeInput
+
+    UpdateQueueInput.add_member(:queue_arn, Shapes::ShapeRef.new(shape: QueueARN, required: true, location_name: "QueueARN", metadata: {"contextParam" => {"name" => "QueueARN"}}))
+    UpdateQueueInput.add_member(:queue_attributes, Shapes::ShapeRef.new(shape: QueueAttributes, required: true, location_name: "QueueAttributes"))
+    UpdateQueueInput.struct_class = Types::UpdateQueueInput
+
+    UpdateQueueOutput.add_member(:queue_description, Shapes::ShapeRef.new(shape: QueueDescription, required: true, location_name: "QueueDescription"))
+    UpdateQueueOutput.struct_class = Types::UpdateQueueOutput
+
+    UpdateQueueRecordsVisibilityErrorEntry.add_member(:receipt_handle, Shapes::ShapeRef.new(shape: ReceiptHandle, required: true, location_name: "ReceiptHandle"))
+    UpdateQueueRecordsVisibilityErrorEntry.add_member(:error_code, Shapes::ShapeRef.new(shape: ErrorCode, required: true, location_name: "ErrorCode"))
+    UpdateQueueRecordsVisibilityErrorEntry.add_member(:error_message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "ErrorMessage"))
+    UpdateQueueRecordsVisibilityErrorEntry.struct_class = Types::UpdateQueueRecordsVisibilityErrorEntry
+
+    UpdateQueueRecordsVisibilityErrorEntryList.member = Shapes::ShapeRef.new(shape: UpdateQueueRecordsVisibilityErrorEntry)
+
+    UpdateQueueRecordsVisibilityInput.add_member(:queue_arn, Shapes::ShapeRef.new(shape: QueueARN, required: true, location_name: "QueueARN", metadata: {"contextParam" => {"name" => "QueueARN"}}))
+    UpdateQueueRecordsVisibilityInput.add_member(:entries, Shapes::ShapeRef.new(shape: UpdateQueueRecordsVisibilityRequestEntryList, required: true, location_name: "Entries"))
+    UpdateQueueRecordsVisibilityInput.struct_class = Types::UpdateQueueRecordsVisibilityInput
+
+    UpdateQueueRecordsVisibilityOutput.add_member(:successful, Shapes::ShapeRef.new(shape: UpdateQueueRecordsVisibilityResultEntryList, required: true, location_name: "Successful"))
+    UpdateQueueRecordsVisibilityOutput.add_member(:failed, Shapes::ShapeRef.new(shape: UpdateQueueRecordsVisibilityErrorEntryList, required: true, location_name: "Failed"))
+    UpdateQueueRecordsVisibilityOutput.struct_class = Types::UpdateQueueRecordsVisibilityOutput
+
+    UpdateQueueRecordsVisibilityRequestEntry.add_member(:receipt_handle, Shapes::ShapeRef.new(shape: ReceiptHandle, required: true, location_name: "ReceiptHandle"))
+    UpdateQueueRecordsVisibilityRequestEntry.add_member(:visibility_timeout_seconds, Shapes::ShapeRef.new(shape: VisibilityTimeoutSeconds, required: true, location_name: "VisibilityTimeoutSeconds"))
+    UpdateQueueRecordsVisibilityRequestEntry.struct_class = Types::UpdateQueueRecordsVisibilityRequestEntry
+
+    UpdateQueueRecordsVisibilityRequestEntryList.member = Shapes::ShapeRef.new(shape: UpdateQueueRecordsVisibilityRequestEntry)
+
+    UpdateQueueRecordsVisibilityResultEntry.add_member(:receipt_handle, Shapes::ShapeRef.new(shape: ReceiptHandle, required: true, location_name: "ReceiptHandle"))
+    UpdateQueueRecordsVisibilityResultEntry.struct_class = Types::UpdateQueueRecordsVisibilityResultEntry
+
+    UpdateQueueRecordsVisibilityResultEntryList.member = Shapes::ShapeRef.new(shape: UpdateQueueRecordsVisibilityResultEntry)
 
     UpdateShardCountInput.add_member(:stream_name, Shapes::ShapeRef.new(shape: StreamName, location_name: "StreamName"))
     UpdateShardCountInput.add_member(:target_shard_count, Shapes::ShapeRef.new(shape: PositiveIntegerObject, required: true, location_name: "TargetShardCount"))
@@ -986,6 +1311,32 @@ module Aws::Kinesis
         "uid" => "kinesis-2013-12-02",
       }
 
+      api.add_operation(:acknowledge_dead_letter_queue_records, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AcknowledgeDeadLetterQueueRecords"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: AcknowledgeDeadLetterQueueRecordsInput)
+        o.output = Shapes::ShapeRef.new(shape: AcknowledgeDeadLetterQueueRecordsOutput)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:acknowledge_queue_records, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AcknowledgeQueueRecords"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: AcknowledgeQueueRecordsInput)
+        o.output = Shapes::ShapeRef.new(shape: AcknowledgeQueueRecordsOutput)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
       api.add_operation(:add_tags_to_stream, Seahorse::Model::Operation.new.tap do |o|
         o.name = "AddTagsToStream"
         o.http_method = "POST"
@@ -1017,6 +1368,21 @@ module Aws::Kinesis
         o.errors << Shapes::ShapeRef.new(shape: KMSOptInRequired)
         o.errors << Shapes::ShapeRef.new(shape: KMSThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:create_queue, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateQueue"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateQueueInput)
+        o.output = Shapes::ShapeRef.new(shape: CreateQueueOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
       end)
 
       api.add_operation(:create_stream, Seahorse::Model::Operation.new.tap do |o|
@@ -1057,17 +1423,33 @@ module Aws::Kinesis
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
+      api.add_operation(:delete_queue, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteQueue"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteQueueInput)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+      end)
+
       api.add_operation(:delete_resource_policy, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteResourcePolicy"
         o.http_method = "POST"
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DeleteResourcePolicyInput)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
       end)
 
       api.add_operation(:delete_stream, Seahorse::Model::Operation.new.tap do |o|
@@ -1123,6 +1505,20 @@ module Aws::Kinesis
         o.input = Shapes::ShapeRef.new(shape: DescribeLimitsInput)
         o.output = Shapes::ShapeRef.new(shape: DescribeLimitsOutput)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+      end)
+
+      api.add_operation(:describe_queue, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeQueue"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeQueueInput)
+        o.output = Shapes::ShapeRef.new(shape: DescribeQueueOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
       end)
 
       api.add_operation(:describe_stream, Seahorse::Model::Operation.new.tap do |o|
@@ -1220,11 +1616,13 @@ module Aws::Kinesis
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: GetResourcePolicyInput)
         o.output = Shapes::ShapeRef.new(shape: GetResourcePolicyOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
       end)
 
       api.add_operation(:get_shard_iterator, Seahorse::Model::Operation.new.tap do |o|
@@ -1265,6 +1663,26 @@ module Aws::Kinesis
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_queues, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListQueues"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListQueuesInput)
+        o.output = Shapes::ShapeRef.new(shape: ListQueuesOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ExpiredNextTokenException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -1330,11 +1748,13 @@ module Aws::Kinesis
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ListTagsForResourceInput)
         o.output = Shapes::ShapeRef.new(shape: ListTagsForResourceOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
       end)
 
       api.add_operation(:list_tags_for_stream, Seahorse::Model::Operation.new.tap do |o|
@@ -1409,11 +1829,51 @@ module Aws::Kinesis
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: PutResourcePolicyInput)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+      end)
+
+      api.add_operation(:receive_dead_letter_queue_records, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ReceiveDeadLetterQueueRecords"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ReceiveDeadLetterQueueRecordsInput)
+        o.output = Shapes::ShapeRef.new(shape: ReceiveDeadLetterQueueRecordsOutput)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: KMSAccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: KMSDisabledException)
+        o.errors << Shapes::ShapeRef.new(shape: KMSInvalidStateException)
+        o.errors << Shapes::ShapeRef.new(shape: KMSNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: KMSOptInRequired)
+        o.errors << Shapes::ShapeRef.new(shape: KMSThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:receive_queue_records, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ReceiveQueueRecords"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ReceiveQueueRecordsInput)
+        o.output = Shapes::ShapeRef.new(shape: ReceiveQueueRecordsOutput)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: KMSAccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: KMSDisabledException)
+        o.errors << Shapes::ShapeRef.new(shape: KMSInvalidStateException)
+        o.errors << Shapes::ShapeRef.new(shape: KMSNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: KMSOptInRequired)
+        o.errors << Shapes::ShapeRef.new(shape: KMSThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:register_stream_consumer, Seahorse::Model::Operation.new.tap do |o|
@@ -1439,6 +1899,19 @@ module Aws::Kinesis
         o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:restore_dead_letter_queue_records, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "RestoreDeadLetterQueueRecords"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: RestoreDeadLetterQueueRecordsInput)
+        o.output = Shapes::ShapeRef.new(shape: RestoreDeadLetterQueueRecordsOutput)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:split_shard, Seahorse::Model::Operation.new.tap do |o|
@@ -1508,11 +1981,13 @@ module Aws::Kinesis
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: TagResourceInput)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
       end)
 
       api.add_operation(:untag_resource, Seahorse::Model::Operation.new.tap do |o|
@@ -1521,11 +1996,13 @@ module Aws::Kinesis
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: UntagResourceInput)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
       end)
 
       api.add_operation(:update_account_settings, Seahorse::Model::Operation.new.tap do |o|
@@ -1553,6 +2030,19 @@ module Aws::Kinesis
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
+      api.add_operation(:update_dead_letter_queue_records_visibility, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateDeadLetterQueueRecordsVisibility"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateDeadLetterQueueRecordsVisibilityInput)
+        o.output = Shapes::ShapeRef.new(shape: UpdateDeadLetterQueueRecordsVisibilityOutput)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
       api.add_operation(:update_max_record_size, Seahorse::Model::Operation.new.tap do |o|
         o.name = "UpdateMaxRecordSize"
         o.http_method = "POST"
@@ -1565,6 +2055,34 @@ module Aws::Kinesis
         o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
+      api.add_operation(:update_queue, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateQueue"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateQueueInput)
+        o.output = Shapes::ShapeRef.new(shape: UpdateQueueOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+      end)
+
+      api.add_operation(:update_queue_records_visibility, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateQueueRecordsVisibility"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateQueueRecordsVisibilityInput)
+        o.output = Shapes::ShapeRef.new(shape: UpdateQueueRecordsVisibilityOutput)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:update_shard_count, Seahorse::Model::Operation.new.tap do |o|

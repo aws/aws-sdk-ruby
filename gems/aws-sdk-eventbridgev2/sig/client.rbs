@@ -112,6 +112,7 @@ module Aws
         def name: () -> ::String
         def event_bus_arn: () -> ::String
         def state: () -> ("CREATING" | "ACTIVE" | "UPDATING" | "CREATE_FAILED" | "UPDATE_FAILED" | "DELETING" | "DELETE_FAILED")
+        def event_source_details: () -> Types::EventSourceDetails
         def creation_time: () -> ::Time
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EventBridgeV2/Client.html#create_event_source-instance_method
@@ -135,6 +136,7 @@ module Aws
         def point_in_time_configuration: () -> Types::PointInTimeConfiguration
         def state: () -> ("RUNNING" | "STOPPED")
         def creation_time: () -> ::Time
+        def subscriber_details: () -> Types::SubscriberDetails
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EventBridgeV2/Client.html#create_subscriber-instance_method
       def create_subscriber: (
@@ -172,6 +174,7 @@ module Aws
                                    invocation_timeout_seconds: ::String?
                                  }?,
                                  event_bus_v2_parameters: Params::event_bus_v2_parameters?,
+                                 msk_parameters: Params::msk_parameters?,
                                  target_arn: ::String
                                },
                                ?description: ::String,
@@ -285,6 +288,7 @@ module Aws
         def description: () -> ::String
         def state: () -> ("CREATING" | "ACTIVE" | "UPDATING" | "CREATE_FAILED" | "UPDATE_FAILED" | "DELETING" | "DELETE_FAILED")
         def revoked: () -> bool
+        def event_source_details: () -> Types::EventSourceDetails
         def creation_time: () -> ::Time
         def last_modified_time: () -> ::Time
       end
@@ -314,6 +318,7 @@ module Aws
         def revoked: () -> bool
         def creation_time: () -> ::Time
         def last_modified_time: () -> ::Time
+        def subscriber_details: () -> Types::SubscriberDetails
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EventBridgeV2/Client.html#describe_subscriber-instance_method
       def describe_subscriber: (
@@ -483,6 +488,22 @@ module Aws
                            ) -> _RevokeResourceResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RevokeResourceResponseSuccess
 
+      interface _RotateWebhookCredentialsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RotateWebhookCredentialsResponse]
+        def secret_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EventBridgeV2/Client.html#rotate_webhook_credentials-instance_method
+      def rotate_webhook_credentials: (
+                                        event_source_arn: ::String,
+                                        ?credential: {
+                                          static_token_secret_value: ::String?,
+                                          basic_http_password: ::String?,
+                                          hmac_secret_value: ::String?
+                                        },
+                                        ?client_token: ::String
+                                      ) -> _RotateWebhookCredentialsResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RotateWebhookCredentialsResponseSuccess
+
       interface _TagResourceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
       end
@@ -553,6 +574,7 @@ module Aws
         def point_in_time_configuration: () -> Types::PointInTimeConfiguration
         def state: () -> ("RUNNING" | "STOPPED")
         def last_modified_time: () -> ::Time
+        def subscriber_details: () -> Types::SubscriberDetails
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EventBridgeV2/Client.html#update_subscriber-instance_method
       def update_subscriber: (
@@ -591,7 +613,8 @@ module Aws
                                    input: ::String,
                                    invocation_timeout_seconds: ::String?
                                  }?,
-                                 event_bus_v2_parameters: Params::event_bus_v2_parameters?
+                                 event_bus_v2_parameters: Params::event_bus_v2_parameters?,
+                                 msk_parameters: Params::msk_parameters?
                                },
                                ?filter_configuration: {
                                  language: ("EVENT_BRIDGE_PATTERN")?,
@@ -636,6 +659,10 @@ module Aws
                     event_bus_arn: ::String
                   ) -> Client::_DescribeEventBusResponseSuccess
                     | (:event_bus_deleted waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribeEventBusResponseSuccess
+                    | (:msk_subscriber_active waiter_name, 
+                    subscriber_arn: ::String
+                  ) -> Client::_DescribeSubscriberResponseSuccess
+                    | (:msk_subscriber_active waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribeSubscriberResponseSuccess
     end
   end
 end

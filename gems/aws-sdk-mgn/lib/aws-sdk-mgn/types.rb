@@ -478,6 +478,10 @@ module Aws::Mgn
     #   Launch configuration template map auto tagging MPE ID.
     #   @return [String]
     #
+    # @!attribute [rw] map_auto_tagging_key
+    #   Launch configuration template map auto tagging key.
+    #   @return [String]
+    #
     # @!attribute [rw] tags
     #   Request to associate tags during creation of a Launch Configuration
     #   Template.
@@ -537,6 +541,7 @@ module Aws::Mgn
       :post_launch_actions,
       :enable_map_auto_tagging,
       :map_auto_tagging_mpe_id,
+      :map_auto_tagging_key,
       :tags,
       :launch_disposition,
       :target_instance_type_right_sizing_method,
@@ -554,6 +559,14 @@ module Aws::Mgn
       include Aws::Structure
     end
 
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
     # @!attribute [rw] name
     #   The name of the network migration definition.
     #   @return [String]
@@ -565,6 +578,12 @@ module Aws::Mgn
     # @!attribute [rw] source_configurations
     #   A list of source configurations for the network migration.
     #   @return [Array<Types::SourceConfiguration>]
+    #
+    # @!attribute [rw] definition_type
+    #   Specifies the type of the definition. `MIGRATION` migrates an
+    #   existing network. `NEW_NETWORK` designs a new network. If you omit
+    #   this value, the definition type is `MIGRATION`.
+    #   @return [String]
     #
     # @!attribute [rw] target_s3_configuration
     #   The S3 configuration for storing the target network artifacts.
@@ -603,9 +622,11 @@ module Aws::Mgn
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/CreateNetworkMigrationDefinitionRequest AWS API Documentation
     #
     class CreateNetworkMigrationDefinitionRequest < Struct.new(
+      :client_token,
       :name,
       :description,
       :source_configurations,
+      :definition_type,
       :target_s3_configuration,
       :target_network,
       :target_deployment,
@@ -614,6 +635,130 @@ module Aws::Mgn
       :tags,
       :scope_tags)
       SENSITIVE = [:tags, :scope_tags]
+      include Aws::Structure
+    end
+
+    # An operation that creates a new construct in the segment.
+    #
+    # @!attribute [rw] name
+    #   The name for the new construct.
+    #   @return [String]
+    #
+    # @!attribute [rw] excluded
+    #   Whether the new construct is excluded from the migration.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] properties
+    #   The properties of the new construct, using their native value types.
+    #   @return [Hash<String,Hash,Array,String,Numeric,Boolean>]
+    #
+    # @!attribute [rw] configuration
+    #   The initial construct-type-specific behavioral configuration for the
+    #   new construct.
+    #   @return [Types::OperationConfigurationUnion]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/CreateOperation AWS API Documentation
+    #
+    class CreateOperation < Struct.new(
+      :name,
+      :excluded,
+      :properties,
+      :configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
+    #   The name of the source action.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the source action.
+    #   @return [String]
+    #
+    # @!attribute [rw] ssm_parameter_name
+    #   AWS Systems Manager Parameter Store parameter name.
+    #   @return [String]
+    #
+    # @!attribute [rw] timeout_seconds
+    #   The maximum time, in seconds, that the script can run on each source
+    #   server.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] operating_system
+    #   The operating system of the source servers that the script runs on.
+    #   Set to `linux` or `windows` to run the script only on source servers
+    #   with that operating system, or `all` to run it on both.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Tags to assign to the source action.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] account_id
+    #   Account ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/CreateRemoteSourceActionRequest AWS API Documentation
+    #
+    class CreateRemoteSourceActionRequest < Struct.new(
+      :name,
+      :description,
+      :ssm_parameter_name,
+      :timeout_seconds,
+      :operating_system,
+      :tags,
+      :account_id)
+      SENSITIVE = [:tags]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] remote_source_action_id
+    #   The unique identifier of the source action.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the source action.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the source action.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the source action.
+    #   @return [String]
+    #
+    # @!attribute [rw] ssm_parameter_name
+    #   AWS Systems Manager Parameter Store parameter name.
+    #   @return [String]
+    #
+    # @!attribute [rw] timeout_seconds
+    #   The maximum time, in seconds, that the script can run on each source
+    #   server.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] operating_system
+    #   The operating system of the source servers that the script runs on.
+    #   Absent when the script runs on both Linux and Windows.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Tags assigned to the source action.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/CreateRemoteSourceActionResponse AWS API Documentation
+    #
+    class CreateRemoteSourceActionResponse < Struct.new(
+      :remote_source_action_id,
+      :arn,
+      :name,
+      :description,
+      :ssm_parameter_name,
+      :timeout_seconds,
+      :operating_system,
+      :tags)
+      SENSITIVE = [:tags]
       include Aws::Structure
     end
 
@@ -696,6 +841,15 @@ module Aws::Mgn
     #   template creation.
     #   @return [Boolean]
     #
+    # @!attribute [rw] outpost_snapshot_location
+    #   Request to set the location of replication snapshots when the
+    #   staging area subnet is on an AWS Outpost during Replication Settings
+    #   template creation. Set to `OUTPOST` to keep replication snapshots on
+    #   the Outpost, or `REGION` to store them in the AWS Region. Required
+    #   when the staging area subnet is on an Outpost, and not allowed
+    #   otherwise.
+    #   @return [String]
+    #
     # @!attribute [rw] storage_configuration
     #   Request to configure storage during Replication Settings template
     #   creation.
@@ -720,6 +874,7 @@ module Aws::Mgn
       :tags,
       :internet_protocol,
       :store_snapshot_on_local_zone,
+      :outpost_snapshot_location,
       :storage_configuration)
       SENSITIVE = [:staging_area_tags, :tags]
       include Aws::Structure
@@ -805,6 +960,11 @@ module Aws::Mgn
     #   Replication server instance ID.
     #   @return [String]
     #
+    # @!attribute [rw] staging_outpost_arn
+    #   The ARN of the AWS Outpost that hosts the staging area, when the
+    #   staging area subnet is on an Outpost.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/DataReplicationInfo AWS API Documentation
     #
     class DataReplicationInfo < Struct.new(
@@ -815,7 +975,8 @@ module Aws::Mgn
       :data_replication_initiation,
       :data_replication_error,
       :last_snapshot_date_time,
-      :replicator_id)
+      :replicator_id,
+      :staging_outpost_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -990,6 +1151,27 @@ module Aws::Mgn
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/DeleteOperation AWS API Documentation
     #
     class DeleteOperation < Aws::EmptyStructure; end
+
+    # @!attribute [rw] remote_source_action_id
+    #   The unique identifier of the source action to delete.
+    #   @return [String]
+    #
+    # @!attribute [rw] account_id
+    #   Account ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/DeleteRemoteSourceActionRequest AWS API Documentation
+    #
+    class DeleteRemoteSourceActionRequest < Struct.new(
+      :remote_source_action_id,
+      :account_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/DeleteRemoteSourceActionResponse AWS API Documentation
+    #
+    class DeleteRemoteSourceActionResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] replication_configuration_template_id
     #   Request to delete Replication Configuration Template from service by
@@ -1696,6 +1878,55 @@ module Aws::Mgn
     end
 
     # @!attribute [rw] source_server_id
+    #   Request to get the launch configuration defaults by Source Server
+    #   ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] account_id
+    #   Request to get the launch configuration defaults by Account ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/GetLaunchConfigurationDefaultsRequest AWS API Documentation
+    #
+    class GetLaunchConfigurationDefaultsRequest < Struct.new(
+      :source_server_id,
+      :account_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] source_server_id
+    #   Source Server ID of the launch configuration defaults.
+    #   @return [String]
+    #
+    # @!attribute [rw] small_volume_max_size
+    #   Disks up to this size, in GiB, use the small volume configuration,
+    #   and larger disks use the large one. `0` means every disk uses the
+    #   large one.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] small_volume_configuration
+    #   Volume configuration for disks up to `smallVolumeMaxSize`. Omitted
+    #   when none of its fields is set.
+    #   @return [Types::SourceServerVolumeConfiguration]
+    #
+    # @!attribute [rw] large_volume_configuration
+    #   Volume configuration for disks larger than `smallVolumeMaxSize`.
+    #   Omitted when none of its fields is set.
+    #   @return [Types::SourceServerVolumeConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/GetLaunchConfigurationDefaultsResponse AWS API Documentation
+    #
+    class GetLaunchConfigurationDefaultsResponse < Struct.new(
+      :source_server_id,
+      :small_volume_max_size,
+      :small_volume_configuration,
+      :large_volume_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] source_server_id
     #   Request to get Launch Configuration information by Source Server ID.
     #   @return [String]
     #
@@ -2072,6 +2303,30 @@ module Aws::Mgn
     #
     class InitializeServiceResponse < Aws::EmptyStructure; end
 
+    # The content of a network migration insight.
+    #
+    # @!attribute [rw] code
+    #   A stable identifier for the kind of insight.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   The human-readable insight message.
+    #   @return [String]
+    #
+    # @!attribute [rw] topic
+    #   The topic that the insight relates to.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/InsightMessage AWS API Documentation
+    #
+    class InsightMessage < Struct.new(
+      :code,
+      :message,
+      :topic)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The server encountered an unexpected condition that prevented it from
     # fulfilling the request.
     #
@@ -2328,6 +2583,10 @@ module Aws::Mgn
     #   Map auto tagging MPE ID.
     #   @return [String]
     #
+    # @!attribute [rw] map_auto_tagging_key
+    #   Map auto tagging key.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/LaunchConfiguration AWS API Documentation
     #
     class LaunchConfiguration < Struct.new(
@@ -2342,7 +2601,8 @@ module Aws::Mgn
       :boot_mode,
       :post_launch_actions,
       :enable_map_auto_tagging,
-      :map_auto_tagging_mpe_id)
+      :map_auto_tagging_mpe_id,
+      :map_auto_tagging_key)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2365,6 +2625,10 @@ module Aws::Mgn
     #
     # @!attribute [rw] map_auto_tagging_mpe_id
     #   Launch configuration template map auto tagging MPE ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] map_auto_tagging_key
+    #   Launch configuration template map auto tagging key.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -2431,6 +2695,7 @@ module Aws::Mgn
       :post_launch_actions,
       :enable_map_auto_tagging,
       :map_auto_tagging_mpe_id,
+      :map_auto_tagging_key,
       :tags,
       :ec2_launch_template_id,
       :launch_disposition,
@@ -3615,6 +3880,86 @@ module Aws::Mgn
       include Aws::Structure
     end
 
+    # Filters for listing network migration insights.
+    #
+    # @!attribute [rw] insight_types
+    #   The insight types to include in the results.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/ListNetworkMigrationInsightsFilters AWS API Documentation
+    #
+    class ListNetworkMigrationInsightsFilters < Struct.new(
+      :insight_types)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] network_migration_definition_id
+    #   The unique identifier of the network migration definition.
+    #   @return [String]
+    #
+    # @!attribute [rw] network_migration_execution_id
+    #   The unique identifier of the network migration execution to narrow
+    #   the results to.
+    #   @return [String]
+    #
+    # @!attribute [rw] producer_id
+    #   The identifier of the job or API request to narrow the results to.
+    #   @return [String]
+    #
+    # @!attribute [rw] segment_id
+    #   The unique identifier of the segment to narrow the results to.
+    #   @return [String]
+    #
+    # @!attribute [rw] construct_id
+    #   The unique identifier of the construct to narrow the results to.
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   Filters to apply when listing insights.
+    #   @return [Types::ListNetworkMigrationInsightsFilters]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in a single call.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/ListNetworkMigrationInsightsRequest AWS API Documentation
+    #
+    class ListNetworkMigrationInsightsRequest < Struct.new(
+      :network_migration_definition_id,
+      :network_migration_execution_id,
+      :producer_id,
+      :segment_id,
+      :construct_id,
+      :filters,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] items
+    #   A list of network migration insights.
+    #   @return [Array<Types::NetworkMigrationInsight>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results. This value is
+    #   null when there are no more results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/ListNetworkMigrationInsightsResponse AWS API Documentation
+    #
+    class ListNetworkMigrationInsightsResponse < Struct.new(
+      :items,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Filters for listing mapper segment constructs.
     #
     # @!attribute [rw] construct_i_ds
@@ -3659,6 +4004,15 @@ module Aws::Mgn
     #   The token for the next page of results.
     #   @return [String]
     #
+    # @!attribute [rw] include_enriched_properties
+    #   Whether to return construct properties using their native value
+    #   types.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] include_configuration
+    #   Whether to return construct-type-specific behavioral configuration.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/ListNetworkMigrationMapperSegmentConstructsRequest AWS API Documentation
     #
     class ListNetworkMigrationMapperSegmentConstructsRequest < Struct.new(
@@ -3667,7 +4021,9 @@ module Aws::Mgn
       :segment_id,
       :filters,
       :max_results,
-      :next_token)
+      :next_token,
+      :include_enriched_properties,
+      :include_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3876,6 +4232,245 @@ module Aws::Mgn
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/ListNetworkMigrationMappingsResponse AWS API Documentation
     #
     class ListNetworkMigrationMappingsResponse < Struct.new(
+      :items,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] source_server_id
+    #   The unique identifier of the source server to list invocation
+    #   results for.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in a single call.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] account_id
+    #   Account ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/ListRemoteSourceActionInvocationResultsRequest AWS API Documentation
+    #
+    class ListRemoteSourceActionInvocationResultsRequest < Struct.new(
+      :source_server_id,
+      :max_results,
+      :next_token,
+      :account_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] items
+    #   A list of source action invocation results.
+    #   @return [Array<Types::RemoteSourceActionInvocationResult>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results. This value is
+    #   null when there are no more results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/ListRemoteSourceActionInvocationResultsResponse AWS API Documentation
+    #
+    class ListRemoteSourceActionInvocationResultsResponse < Struct.new(
+      :items,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] remote_source_action_job_id
+    #   The unique identifier of the job to list invocations for.
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   Filters to apply when listing invocations, such as source server or
+    #   status.
+    #   @return [Types::ListRemoteSourceActionInvocationsRequestFilters]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in a single call.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] account_id
+    #   Account ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/ListRemoteSourceActionInvocationsRequest AWS API Documentation
+    #
+    class ListRemoteSourceActionInvocationsRequest < Struct.new(
+      :remote_source_action_job_id,
+      :filters,
+      :max_results,
+      :next_token,
+      :account_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Filters for listing source action invocations.
+    #
+    # @!attribute [rw] source_server_arns
+    #   A list of source server ARNs to filter by.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] remote_source_action_arns
+    #   A list of source action ARNs to filter by.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] statuses
+    #   A list of invocation statuses to filter by.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/ListRemoteSourceActionInvocationsRequestFilters AWS API Documentation
+    #
+    class ListRemoteSourceActionInvocationsRequestFilters < Struct.new(
+      :source_server_arns,
+      :remote_source_action_arns,
+      :statuses)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] items
+    #   A list of source action invocations.
+    #   @return [Array<Types::RemoteSourceActionInvocation>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results. This value is
+    #   null when there are no more results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/ListRemoteSourceActionInvocationsResponse AWS API Documentation
+    #
+    class ListRemoteSourceActionInvocationsResponse < Struct.new(
+      :items,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] filters
+    #   Filters to apply when listing source action jobs.
+    #   @return [Types::ListRemoteSourceActionJobsRequestFilters]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in a single call.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] account_id
+    #   Account ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/ListRemoteSourceActionJobsRequest AWS API Documentation
+    #
+    class ListRemoteSourceActionJobsRequest < Struct.new(
+      :filters,
+      :max_results,
+      :next_token,
+      :account_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Filters for listing source action jobs.
+    #
+    # @!attribute [rw] remote_source_action_job_i_ds
+    #   A list of job IDs to filter by.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/ListRemoteSourceActionJobsRequestFilters AWS API Documentation
+    #
+    class ListRemoteSourceActionJobsRequestFilters < Struct.new(
+      :remote_source_action_job_i_ds)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] items
+    #   A list of source action jobs.
+    #   @return [Array<Types::RemoteSourceActionJob>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results. This value is
+    #   null when there are no more results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/ListRemoteSourceActionJobsResponse AWS API Documentation
+    #
+    class ListRemoteSourceActionJobsResponse < Struct.new(
+      :items,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] filters
+    #   Filters to apply when listing source actions.
+    #   @return [Types::ListRemoteSourceActionsRequestFilters]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in a single call.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] account_id
+    #   Account ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/ListRemoteSourceActionsRequest AWS API Documentation
+    #
+    class ListRemoteSourceActionsRequest < Struct.new(
+      :filters,
+      :max_results,
+      :next_token,
+      :account_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Filters for listing source actions.
+    #
+    # @!attribute [rw] remote_source_action_i_ds
+    #   A list of source action IDs to filter by.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/ListRemoteSourceActionsRequestFilters AWS API Documentation
+    #
+    class ListRemoteSourceActionsRequestFilters < Struct.new(
+      :remote_source_action_i_ds)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] items
+    #   A list of source actions.
+    #   @return [Array<Types::RemoteSourceAction>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results. This value is
+    #   null when there are no more results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/ListRemoteSourceActionsResponse AWS API Documentation
+    #
+    class ListRemoteSourceActionsResponse < Struct.new(
       :items,
       :next_token)
       SENSITIVE = []
@@ -4468,6 +5063,11 @@ module Aws::Mgn
     #   A list of source configurations for the network migration.
     #   @return [Array<Types::SourceConfiguration>]
     #
+    # @!attribute [rw] definition_type
+    #   Specifies the type of the definition. `MIGRATION` migrates an
+    #   existing network. `NEW_NETWORK` designs a new network.
+    #   @return [String]
+    #
     # @!attribute [rw] target_s3_configuration
     #   The S3 configuration for storing the target network artifacts.
     #   @return [Types::TargetS3Configuration]
@@ -4517,6 +5117,7 @@ module Aws::Mgn
       :name,
       :description,
       :source_configurations,
+      :definition_type,
       :target_s3_configuration,
       :target_network,
       :target_deployment,
@@ -4556,6 +5157,10 @@ module Aws::Mgn
     #   Scope tags for the network migration definition.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] definition_type
+    #   The type of the network migration definition.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/NetworkMigrationDefinitionSummary AWS API Documentation
     #
     class NetworkMigrationDefinitionSummary < Struct.new(
@@ -4564,7 +5169,8 @@ module Aws::Mgn
       :source_environment,
       :arn,
       :tags,
-      :scope_tags)
+      :scope_tags,
+      :definition_type)
       SENSITIVE = [:tags, :scope_tags]
       include Aws::Structure
     end
@@ -4727,6 +5333,81 @@ module Aws::Mgn
       include Aws::Structure
     end
 
+    # An insight produced during a network migration, such as a warning,
+    # decision, question, or other context beyond the migrated output.
+    #
+    # @!attribute [rw] network_migration_definition_id
+    #   The unique identifier of the network migration definition the
+    #   insight belongs to.
+    #   @return [String]
+    #
+    # @!attribute [rw] network_migration_execution_id
+    #   The unique identifier of the network migration execution the insight
+    #   belongs to.
+    #   @return [String]
+    #
+    # @!attribute [rw] producer_id
+    #   The identifier of the job or API request that produced the insight.
+    #   @return [String]
+    #
+    # @!attribute [rw] producer_type
+    #   Whether the insight was produced by a job or by an API request.
+    #   @return [String]
+    #
+    # @!attribute [rw] producer_name
+    #   The job type or API name that produced the insight.
+    #   @return [String]
+    #
+    # @!attribute [rw] segment_id
+    #   The unique identifier of the segment the insight relates to; absent
+    #   for run-level insights.
+    #   @return [String]
+    #
+    # @!attribute [rw] construct_id
+    #   The unique identifier of the construct the insight relates to;
+    #   absent for run-level and segment-level insights.
+    #   @return [String]
+    #
+    # @!attribute [rw] insight_id
+    #   The unique identifier of the insight.
+    #   @return [String]
+    #
+    # @!attribute [rw] insight_level
+    #   The level that the insight applies to: the run, a segment, or a
+    #   construct.
+    #   @return [String]
+    #
+    # @!attribute [rw] insight_type
+    #   The type of the insight.
+    #   @return [String]
+    #
+    # @!attribute [rw] insight_message
+    #   The content of the insight.
+    #   @return [Types::InsightMessage]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp when the insight was created.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/NetworkMigrationInsight AWS API Documentation
+    #
+    class NetworkMigrationInsight < Struct.new(
+      :network_migration_definition_id,
+      :network_migration_execution_id,
+      :producer_id,
+      :producer_type,
+      :producer_name,
+      :segment_id,
+      :construct_id,
+      :insight_id,
+      :insight_level,
+      :insight_type,
+      :insight_message,
+      :created_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] job_id
     #   The unique identifier of the job that created this segment.
     #   @return [String]
@@ -4853,6 +5534,16 @@ module Aws::Mgn
     #   The properties and configuration of the construct.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] enriched_properties
+    #   The construct properties using their native value types. Returned by
+    #   Get, and by List when includeEnrichedProperties is true.
+    #   @return [Hash<String,Hash,Array,String,Numeric,Boolean>]
+    #
+    # @!attribute [rw] configuration
+    #   The construct-type-specific behavioral configuration. Returned by
+    #   Get, and by List when includeConfiguration is true.
+    #   @return [Types::OperationConfigurationUnion]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/NetworkMigrationMapperSegmentConstruct AWS API Documentation
     #
     class NetworkMigrationMapperSegmentConstruct < Struct.new(
@@ -4864,7 +5555,9 @@ module Aws::Mgn
       :excluded,
       :created_at,
       :updated_at,
-      :properties)
+      :properties,
+      :enriched_properties,
+      :configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4971,6 +5664,36 @@ module Aws::Mgn
       include Aws::Structure
     end
 
+    # Construct-type-specific behavioral configuration. The variant provided
+    # must match the construct type.
+    #
+    # @note OperationConfigurationUnion is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note OperationConfigurationUnion is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of OperationConfigurationUnion corresponding to the set member.
+    #
+    # @!attribute [rw] security_group
+    #   Behavioral configuration for a security group construct.
+    #   @return [Types::SecurityGroupConfiguration]
+    #
+    # @!attribute [rw] security_group_rule
+    #   Behavioral configuration for a security group rule construct.
+    #   @return [Types::SecurityGroupRuleConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/OperationConfigurationUnion AWS API Documentation
+    #
+    class OperationConfigurationUnion < Struct.new(
+      :security_group,
+      :security_group_rule,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class SecurityGroup < OperationConfigurationUnion; end
+      class SecurityGroupRule < OperationConfigurationUnion; end
+      class Unknown < OperationConfigurationUnion; end
+    end
+
     # A union type representing the operation to perform on a construct
     # during a mapping update.
     #
@@ -4993,6 +5716,17 @@ module Aws::Mgn
     #   An update operation to modify construct properties.
     #   @return [Types::UpdateOperation]
     #
+    # @!attribute [rw] update_v2
+    #   An update operation that modifies a construct using native property
+    #   value types and behavioral configuration, with partial updates and
+    #   property removal.
+    #   @return [Types::UpdateOperationV2]
+    #
+    # @!attribute [rw] create
+    #   A create operation that adds a new construct to the segment,
+    #   identified by the constructLogicalID on the parent construct entry.
+    #   @return [Types::CreateOperation]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/OperationUnion AWS API Documentation
     #
     class OperationUnion < Struct.new(
@@ -5000,6 +5734,8 @@ module Aws::Mgn
       :split,
       :delete,
       :update,
+      :update_v2,
+      :create,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
@@ -5009,6 +5745,8 @@ module Aws::Mgn
       class Split < OperationUnion; end
       class Delete < OperationUnion; end
       class Update < OperationUnion; end
+      class UpdateV2 < OperationUnion; end
+      class Create < OperationUnion; end
       class Unknown < OperationUnion; end
     end
 
@@ -5269,6 +6007,193 @@ module Aws::Mgn
       include Aws::Structure
     end
 
+    # A source action, which references a script in AWS Systems Manager
+    # Parameter Store that Application Migration Service runs on source
+    # servers through a connector.
+    #
+    # @!attribute [rw] remote_source_action_id
+    #   The unique identifier of the source action.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the source action.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the source action.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the source action.
+    #   @return [String]
+    #
+    # @!attribute [rw] ssm_parameter_name
+    #   AWS Systems Manager Parameter Store parameter name.
+    #   @return [String]
+    #
+    # @!attribute [rw] timeout_seconds
+    #   The maximum time, in seconds, that the script can run on each source
+    #   server.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] operating_system
+    #   The operating system of the source servers that the script runs on.
+    #   Absent when the script runs on both Linux and Windows.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Tags assigned to the source action.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/RemoteSourceAction AWS API Documentation
+    #
+    class RemoteSourceAction < Struct.new(
+      :remote_source_action_id,
+      :arn,
+      :name,
+      :description,
+      :ssm_parameter_name,
+      :timeout_seconds,
+      :operating_system,
+      :tags)
+      SENSITIVE = [:tags]
+      include Aws::Structure
+    end
+
+    # The run of a source action on one source server as part of a job.
+    #
+    # @!attribute [rw] source_server_arn
+    #   The ARN of the source server.
+    #   @return [String]
+    #
+    # @!attribute [rw] remote_source_action_arn
+    #   The ARN of the source action.
+    #   @return [String]
+    #
+    # @!attribute [rw] ssm_command_invocation_id
+    #   The ID of the AWS Systems Manager command that runs the source
+    #   action on the connector.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the invocation.
+    #   @return [String]
+    #
+    # @!attribute [rw] started_at
+    #   The timestamp when the command started running.
+    #   @return [Time]
+    #
+    # @!attribute [rw] ended_at
+    #   The timestamp when the command finished.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/RemoteSourceActionInvocation AWS API Documentation
+    #
+    class RemoteSourceActionInvocation < Struct.new(
+      :source_server_arn,
+      :remote_source_action_arn,
+      :ssm_command_invocation_id,
+      :status,
+      :started_at,
+      :ended_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The latest invocation result of a source action on a source server.
+    #
+    # @!attribute [rw] remote_source_action_id
+    #   The unique identifier of the source action.
+    #   @return [String]
+    #
+    # @!attribute [rw] connector_owner_account_id
+    #   The ID of the account that owns the connector that ran the source
+    #   action.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the latest invocation.
+    #   @return [String]
+    #
+    # @!attribute [rw] started_at
+    #   The timestamp when the command started running.
+    #   @return [Time]
+    #
+    # @!attribute [rw] ended_at
+    #   The timestamp when the command finished.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/RemoteSourceActionInvocationResult AWS API Documentation
+    #
+    class RemoteSourceActionInvocationResult < Struct.new(
+      :remote_source_action_id,
+      :connector_owner_account_id,
+      :status,
+      :started_at,
+      :ended_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A job that runs a source action on source servers through a connector.
+    #
+    # @!attribute [rw] remote_source_action_job_id
+    #   The unique identifier of the job.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the job.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the job.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_server_arns
+    #   The ARNs of the source servers that the job runs on.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] remote_source_action_arns
+    #   The ARNs of the source actions that the job runs.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] connector_arn
+    #   The ARN of the connector that runs the job.
+    #   @return [String]
+    #
+    # @!attribute [rw] started_at
+    #   The timestamp when the job started running.
+    #   @return [Time]
+    #
+    # @!attribute [rw] ended_at
+    #   The timestamp when the job completed or failed.
+    #   @return [Time]
+    #
+    # @!attribute [rw] status_reason
+    #   The reason the job failed.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Tags assigned to the job.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/RemoteSourceActionJob AWS API Documentation
+    #
+    class RemoteSourceActionJob < Struct.new(
+      :remote_source_action_job_id,
+      :arn,
+      :status,
+      :source_server_arns,
+      :remote_source_action_arns,
+      :connector_arn,
+      :started_at,
+      :ended_at,
+      :status_reason,
+      :tags)
+      SENSITIVE = [:tags]
+      include Aws::Structure
+    end
+
     # @!attribute [rw] source_server_id
     #   Source server ID of the post migration custom action to remove.
     #   @return [String]
@@ -5390,6 +6315,13 @@ module Aws::Mgn
     #   Replication Configuration store snapshot on local zone.
     #   @return [Boolean]
     #
+    # @!attribute [rw] outpost_snapshot_location
+    #   Indicates the location of replication snapshots when the staging
+    #   area subnet is on an AWS Outpost. `OUTPOST` keeps replication
+    #   snapshots on the Outpost, and `REGION` stores them in the AWS
+    #   Region.
+    #   @return [String]
+    #
     # @!attribute [rw] storage_configuration
     #   Replication Configuration storage configuration.
     #   @return [Types::StorageConfiguration]
@@ -5415,6 +6347,7 @@ module Aws::Mgn
       :use_fips_endpoint,
       :internet_protocol,
       :store_snapshot_on_local_zone,
+      :outpost_snapshot_location,
       :storage_configuration)
       SENSITIVE = [:staging_area_tags]
       include Aws::Structure
@@ -5528,6 +6461,13 @@ module Aws::Mgn
     #   Replication Configuration template store snapshot on local zone.
     #   @return [Boolean]
     #
+    # @!attribute [rw] outpost_snapshot_location
+    #   Indicates the location of replication snapshots in the Replication
+    #   Configuration template when the staging area subnet is on an AWS
+    #   Outpost. `OUTPOST` keeps replication snapshots on the Outpost, and
+    #   `REGION` stores them in the AWS Region.
+    #   @return [String]
+    #
     # @!attribute [rw] storage_configuration
     #   Replication Configuration template storage configuration.
     #   @return [Types::StorageConfiguration]
@@ -5553,6 +6493,7 @@ module Aws::Mgn
       :tags,
       :internet_protocol,
       :store_snapshot_on_local_zone,
+      :outpost_snapshot_location,
       :storage_configuration)
       SENSITIVE = [:staging_area_tags, :tags]
       include Aws::Structure
@@ -5664,6 +6605,165 @@ module Aws::Mgn
       :s3_bucket_owner,
       :s3_key)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The associations that bind a security group to source machines before
+    # they are provisioned.
+    #
+    # @!attribute [rw] cidrs
+    #   The CIDR ranges associated with the security group. A provided list
+    #   replaces the stored list; an empty list clears it, and omitting the
+    #   field leaves it unchanged.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] vm_uui_ds
+    #   The UUIDs of the source machines associated with the security group.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] user_provided_i_ds
+    #   The user-provided identifiers of the source machines associated with
+    #   the security group.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/SecurityGroupAssociations AWS API Documentation
+    #
+    class SecurityGroupAssociations < Struct.new(
+      :cidrs,
+      :vm_uui_ds,
+      :user_provided_i_ds)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Behavioral configuration for a security group construct.
+    #
+    # @!attribute [rw] associations
+    #   The CIDR ranges and machine identifiers that associate source
+    #   machines with the security group. Each list provided replaces the
+    #   stored list rather than merging into it.
+    #   @return [Types::SecurityGroupAssociations]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/SecurityGroupConfiguration AWS API Documentation
+    #
+    class SecurityGroupConfiguration < Struct.new(
+      :associations)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Behavioral configuration for a security group rule construct.
+    #
+    # @!attribute [rw] enable_referencing
+    #   Whether automatic conversion of CIDR-based sources and destinations
+    #   to security group references applies to this rule.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/SecurityGroupRuleConfiguration AWS API Documentation
+    #
+    class SecurityGroupRuleConfiguration < Struct.new(
+      :enable_referencing)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An operation that creates a segment.
+    #
+    # @!attribute [rw] name
+    #   The name of the new segment.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the new segment.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_account
+    #   The target AWS account for the new segment.
+    #   @return [String]
+    #
+    # @!attribute [rw] scope_tags
+    #   Scope tags for the new segment.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/SegmentCreateOperation AWS API Documentation
+    #
+    class SegmentCreateOperation < Struct.new(
+      :name,
+      :description,
+      :target_account,
+      :scope_tags)
+      SENSITIVE = [:scope_tags]
+      include Aws::Structure
+    end
+
+    # An operation that deletes a segment from the mapping.
+    #
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/SegmentDeleteOperation AWS API Documentation
+    #
+    class SegmentDeleteOperation < Aws::EmptyStructure; end
+
+    # Specifies the operation to perform on a segment during a mapping
+    # update. Specify one of a create, update, or delete operation.
+    #
+    # @note SegmentOperation is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @!attribute [rw] create
+    #   A create operation to add a new segment.
+    #   @return [Types::SegmentCreateOperation]
+    #
+    # @!attribute [rw] update
+    #   An update operation to modify segment properties.
+    #   @return [Types::SegmentUpdateOperation]
+    #
+    # @!attribute [rw] delete
+    #   A delete operation to remove a segment from the mapping.
+    #   @return [Types::SegmentDeleteOperation]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/SegmentOperation AWS API Documentation
+    #
+    class SegmentOperation < Struct.new(
+      :create,
+      :update,
+      :delete,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Create < SegmentOperation; end
+      class Update < SegmentOperation; end
+      class Delete < SegmentOperation; end
+      class Unknown < SegmentOperation; end
+    end
+
+    # An operation that updates the properties of a segment.
+    #
+    # @!attribute [rw] name
+    #   The updated name for the segment.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The updated description for the segment.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_account
+    #   The updated target AWS account for the segment.
+    #   @return [String]
+    #
+    # @!attribute [rw] scope_tags
+    #   The updated scope tags for the segment.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/SegmentUpdateOperation AWS API Documentation
+    #
+    class SegmentUpdateOperation < Struct.new(
+      :name,
+      :description,
+      :target_account,
+      :scope_tags)
+      SENSITIVE = [:scope_tags]
       include Aws::Structure
     end
 
@@ -5975,6 +7075,44 @@ module Aws::Mgn
     class SourceServerConnectorAction < Struct.new(
       :credentials_secret_arn,
       :connector_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the Amazon Elastic Block Store (Amazon EBS) volume
+    # configuration for the disk mappings created later in the source
+    # server's Amazon Elastic Compute Cloud (Amazon EC2) launch template.
+    # Fields that aren't set get the service's default values.
+    #
+    # @!attribute [rw] volume_type
+    #   EBS volume type.
+    #   @return [String]
+    #
+    # @!attribute [rw] iops
+    #   Provisioned IOPS, for io1, io2 and gp3 volumes.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] throughput
+    #   Throughput in MiB/s, for gp3 volumes only.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] volume_initialization_rate
+    #   Provisioned rate for volume initialization, in MiB/s.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] delete_on_termination
+    #   Specifies whether the volume is deleted when the launched instance
+    #   terminates.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/SourceServerVolumeConfiguration AWS API Documentation
+    #
+    class SourceServerVolumeConfiguration < Struct.new(
+      :volume_type,
+      :iops,
+      :throughput,
+      :volume_initialization_rate,
+      :delete_on_termination)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6387,12 +7525,25 @@ module Aws::Mgn
     #   The ID of the segment containing the construct.
     #   @return [String]
     #
+    # @!attribute [rw] segment_logical_id
+    #   The identifier of a segment created in the same request that this
+    #   construct belongs to. Use it instead of `segmentID` for a new
+    #   segment.
+    #   @return [String]
+    #
     # @!attribute [rw] construct_id
     #   The ID of the construct to update.
     #   @return [String]
     #
     # @!attribute [rw] construct_type
     #   The type of the construct.
+    #   @return [String]
+    #
+    # @!attribute [rw] construct_logical_id
+    #   The logical identifier for a construct created by a create
+    #   operation; other operations identify the construct by constructID.
+    #   Other entries in the same request can reference the new construct as
+    #   \{"Ref": "&lt;constructLogicalID&gt;"}.
     #   @return [String]
     #
     # @!attribute [rw] operation
@@ -6403,8 +7554,10 @@ module Aws::Mgn
     #
     class StartNetworkMigrationMappingUpdateConstruct < Struct.new(
       :segment_id,
+      :segment_logical_id,
       :construct_id,
       :construct_type,
+      :construct_logical_id,
       :operation)
       SENSITIVE = []
       include Aws::Structure
@@ -6455,6 +7608,16 @@ module Aws::Mgn
     #   The ID of the segment to update.
     #   @return [String]
     #
+    # @!attribute [rw] segment_logical_id
+    #   An identifier that you choose for a segment created by this request.
+    #   You can use it in other constructs in the same request to refer to
+    #   the new segment.
+    #   @return [String]
+    #
+    # @!attribute [rw] operation
+    #   The operation to perform on the segment.
+    #   @return [Types::SegmentOperation]
+    #
     # @!attribute [rw] target_account
     #   The updated target AWS account for the segment.
     #   @return [String]
@@ -6467,9 +7630,64 @@ module Aws::Mgn
     #
     class StartNetworkMigrationMappingUpdateSegment < Struct.new(
       :segment_id,
+      :segment_logical_id,
+      :operation,
       :target_account,
       :scope_tags)
       SENSITIVE = [:scope_tags]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] remote_source_action_arns
+    #   The ARNs of the source actions to run.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] connector_arn
+    #   The ARN of the connector that runs the source actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_server_arns
+    #   The ARNs of the source servers to run the source actions on.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Tags to assign to the job.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] account_id
+    #   Account ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/StartRemoteSourceActionJobRequest AWS API Documentation
+    #
+    class StartRemoteSourceActionJobRequest < Struct.new(
+      :remote_source_action_arns,
+      :connector_arn,
+      :source_server_arns,
+      :client_token,
+      :tags,
+      :account_id)
+      SENSITIVE = [:tags]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] remote_source_action_job
+    #   The job that was started.
+    #   @return [Types::RemoteSourceActionJob]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/StartRemoteSourceActionJobResponse AWS API Documentation
+    #
+    class StartRemoteSourceActionJobResponse < Struct.new(
+      :remote_source_action_job)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -6940,6 +8158,78 @@ module Aws::Mgn
     end
 
     # @!attribute [rw] source_server_id
+    #   Request to update the launch configuration defaults by Source Server
+    #   ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] account_id
+    #   Request to update the launch configuration defaults by Account ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] small_volume_max_size
+    #   Disks up to this size, in GiB, use the small volume configuration,
+    #   and larger disks use the large one. `0` means every disk uses the
+    #   large one. If you omit it, the current value is kept.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] small_volume_configuration
+    #   Volume configuration for disks up to `smallVolumeMaxSize`. If you
+    #   omit it, the current one is kept. If you send it, it replaces the
+    #   current one: fields you omit are cleared, and an empty
+    #   configuration, `{}`, clears all of them.
+    #   @return [Types::SourceServerVolumeConfiguration]
+    #
+    # @!attribute [rw] large_volume_configuration
+    #   Volume configuration for disks larger than `smallVolumeMaxSize`. If
+    #   you omit it, the current one is kept. If you send it, it replaces
+    #   the current one: fields you omit are cleared, and an empty
+    #   configuration, `{}`, clears all of them.
+    #   @return [Types::SourceServerVolumeConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/UpdateLaunchConfigurationDefaultsRequest AWS API Documentation
+    #
+    class UpdateLaunchConfigurationDefaultsRequest < Struct.new(
+      :source_server_id,
+      :account_id,
+      :small_volume_max_size,
+      :small_volume_configuration,
+      :large_volume_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] source_server_id
+    #   Source Server ID of the launch configuration defaults.
+    #   @return [String]
+    #
+    # @!attribute [rw] small_volume_max_size
+    #   Disks up to this size, in GiB, use the small volume configuration,
+    #   and larger disks use the large one. `0` means every disk uses the
+    #   large one.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] small_volume_configuration
+    #   Volume configuration for disks up to `smallVolumeMaxSize`. Omitted
+    #   when none of its fields is set.
+    #   @return [Types::SourceServerVolumeConfiguration]
+    #
+    # @!attribute [rw] large_volume_configuration
+    #   Volume configuration for disks larger than `smallVolumeMaxSize`.
+    #   Omitted when none of its fields is set.
+    #   @return [Types::SourceServerVolumeConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/UpdateLaunchConfigurationDefaultsResponse AWS API Documentation
+    #
+    class UpdateLaunchConfigurationDefaultsResponse < Struct.new(
+      :source_server_id,
+      :small_volume_max_size,
+      :small_volume_configuration,
+      :large_volume_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] source_server_id
     #   Update Launch configuration by Source Server ID request.
     #   @return [String]
     #
@@ -6983,6 +8273,10 @@ module Aws::Mgn
     #   Launch configuration map auto tagging MPE ID.
     #   @return [String]
     #
+    # @!attribute [rw] map_auto_tagging_key
+    #   Launch configuration map auto tagging key.
+    #   @return [String]
+    #
     # @!attribute [rw] account_id
     #   Update Launch configuration Account ID.
     #   @return [String]
@@ -7001,6 +8295,7 @@ module Aws::Mgn
       :post_launch_actions,
       :enable_map_auto_tagging,
       :map_auto_tagging_mpe_id,
+      :map_auto_tagging_key,
       :account_id)
       SENSITIVE = []
       include Aws::Structure
@@ -7020,6 +8315,10 @@ module Aws::Mgn
     #
     # @!attribute [rw] map_auto_tagging_mpe_id
     #   Launch configuration template map auto tagging MPE ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] map_auto_tagging_key
+    #   Launch configuration template map auto tagging key.
     #   @return [String]
     #
     # @!attribute [rw] launch_disposition
@@ -7077,6 +8376,7 @@ module Aws::Mgn
       :post_launch_actions,
       :enable_map_auto_tagging,
       :map_auto_tagging_mpe_id,
+      :map_auto_tagging_key,
       :launch_disposition,
       :target_instance_type_right_sizing_method,
       :copy_private_ip,
@@ -7139,6 +8439,10 @@ module Aws::Mgn
     #   The updated scope tags for the network migration definition.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] definition_type
+    #   The updated type of the network migration definition.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/UpdateNetworkMigrationDefinitionRequest AWS API Documentation
     #
     class UpdateNetworkMigrationDefinitionRequest < Struct.new(
@@ -7151,7 +8455,8 @@ module Aws::Mgn
       :target_deployment,
       :vpc_provisioning_strategy,
       :cidr_mappings,
-      :scope_tags)
+      :scope_tags,
+      :definition_type)
       SENSITIVE = [:scope_tags]
       include Aws::Structure
     end
@@ -7204,6 +8509,138 @@ module Aws::Mgn
       :excluded,
       :properties)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An operation that updates a construct using native property value
+    # types and construct-type-specific behavioral configuration.
+    #
+    # @!attribute [rw] name
+    #   The updated name for the construct.
+    #   @return [String]
+    #
+    # @!attribute [rw] excluded
+    #   Whether to exclude this construct from the migration.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] properties
+    #   The properties to set or overwrite on the construct, using their
+    #   native value types; omitted keys are unchanged.
+    #   @return [Hash<String,Hash,Array,String,Numeric,Boolean>]
+    #
+    # @!attribute [rw] properties_to_delete
+    #   The property keys to remove from the construct.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] configuration
+    #   Construct-type-specific behavioral configuration to apply, such as
+    #   security group associations or security group rule referencing.
+    #   @return [Types::OperationConfigurationUnion]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/UpdateOperationV2 AWS API Documentation
+    #
+    class UpdateOperationV2 < Struct.new(
+      :name,
+      :excluded,
+      :properties,
+      :properties_to_delete,
+      :configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] remote_source_action_id
+    #   The unique identifier of the source action to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The updated name of the source action.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The updated description of the source action.
+    #   @return [String]
+    #
+    # @!attribute [rw] ssm_parameter_name
+    #   AWS Systems Manager Parameter Store parameter name.
+    #   @return [String]
+    #
+    # @!attribute [rw] timeout_seconds
+    #   The updated maximum time, in seconds, that the script can run on
+    #   each source server.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] operating_system
+    #   The updated operating system of the source servers that the script
+    #   runs on. Set to `linux` or `windows` to run the script only on
+    #   source servers with that operating system, or `all` to run it on
+    #   both.
+    #   @return [String]
+    #
+    # @!attribute [rw] account_id
+    #   Account ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/UpdateRemoteSourceActionRequest AWS API Documentation
+    #
+    class UpdateRemoteSourceActionRequest < Struct.new(
+      :remote_source_action_id,
+      :name,
+      :description,
+      :ssm_parameter_name,
+      :timeout_seconds,
+      :operating_system,
+      :account_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] remote_source_action_id
+    #   The unique identifier of the source action.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the source action.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the source action.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the source action.
+    #   @return [String]
+    #
+    # @!attribute [rw] ssm_parameter_name
+    #   AWS Systems Manager Parameter Store parameter name.
+    #   @return [String]
+    #
+    # @!attribute [rw] timeout_seconds
+    #   The maximum time, in seconds, that the script can run on each source
+    #   server.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] operating_system
+    #   The operating system of the source servers that the script runs on.
+    #   Absent when the script runs on both Linux and Windows.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Tags assigned to the source action.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/UpdateRemoteSourceActionResponse AWS API Documentation
+    #
+    class UpdateRemoteSourceActionResponse < Struct.new(
+      :remote_source_action_id,
+      :arn,
+      :name,
+      :description,
+      :ssm_parameter_name,
+      :timeout_seconds,
+      :operating_system,
+      :tags)
+      SENSITIVE = [:tags]
       include Aws::Structure
     end
 
@@ -7288,6 +8725,14 @@ module Aws::Mgn
     #   Update replication configuration store snapshot on local zone.
     #   @return [Boolean]
     #
+    # @!attribute [rw] outpost_snapshot_location
+    #   Updates the location of replication snapshots when the staging area
+    #   subnet is on an AWS Outpost. Set to `OUTPOST` to keep replication
+    #   snapshots on the Outpost, or `REGION` to store them in the AWS
+    #   Region. Required when the staging area subnet is on an Outpost, and
+    #   not allowed otherwise.
+    #   @return [String]
+    #
     # @!attribute [rw] storage_configuration
     #   Update replication configuration storage configuration.
     #   @return [Types::StorageConfiguration]
@@ -7314,6 +8759,7 @@ module Aws::Mgn
       :account_id,
       :internet_protocol,
       :store_snapshot_on_local_zone,
+      :outpost_snapshot_location,
       :storage_configuration)
       SENSITIVE = [:staging_area_tags]
       include Aws::Structure
@@ -7397,6 +8843,14 @@ module Aws::Mgn
     #   zone request.
     #   @return [Boolean]
     #
+    # @!attribute [rw] outpost_snapshot_location
+    #   Updates the location of replication snapshots in the Replication
+    #   Configuration template when the staging area subnet is on an AWS
+    #   Outpost. Set to `OUTPOST` to keep replication snapshots on the
+    #   Outpost, or `REGION` to store them in the AWS Region. Required when
+    #   the staging area subnet is on an Outpost, and not allowed otherwise.
+    #   @return [String]
+    #
     # @!attribute [rw] storage_configuration
     #   Update replication configuration template storage configuration
     #   request.
@@ -7422,6 +8876,7 @@ module Aws::Mgn
       :use_fips_endpoint,
       :internet_protocol,
       :store_snapshot_on_local_zone,
+      :outpost_snapshot_location,
       :storage_configuration)
       SENSITIVE = [:staging_area_tags]
       include Aws::Structure

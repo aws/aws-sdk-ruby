@@ -23,7 +23,7 @@ Aws::Plugins::GlobalConfiguration.add_identifier(:health)
 # structure.
 #
 #     health = Aws::Health::Client.new
-#     resp = health.describe_affected_accounts_for_organization(params)
+#     resp = health.configure_tags(params)
 #
 # See {Client} for more information.
 #
@@ -54,7 +54,7 @@ module Aws::Health
   autoload :EndpointProvider, 'aws-sdk-health/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-health/endpoints'
 
-  GEM_VERSION = '1.111.0'
+  GEM_VERSION = '1.118.0'
 
 end
 

@@ -983,6 +983,16 @@
       "output":{"shape":"ListThreatsOutput"},
       "readonly":true
     },
+    "ResumePentestJob":{
+      "name":"ResumePentestJob",
+      "http":{
+        "method":"POST",
+        "requestUri":"/ResumePentestJob",
+        "responseCode":200
+      },
+      "input":{"shape":"ResumePentestJobInput"},
+      "output":{"shape":"ResumePentestJobOutput"}
+    },
     "StartCodeRemediation":{
       "name":"StartCodeRemediation",
       "http":{
@@ -2261,6 +2271,16 @@
       "type":"list",
       "member":{"shape":"CodeLocation"}
     },
+    "CodeRemediationJobStatus":{
+      "type":"string",
+      "enum":[
+        "IN_PROGRESS",
+        "COMPLETED",
+        "FAILED",
+        "NO_CHANGE_REQUIRED",
+        "UNKNOWN"
+      ]
+    },
     "CodeRemediationStrategy":{
       "type":"string",
       "enum":[
@@ -2282,7 +2302,10 @@
       "members":{
         "repoName":{"shape":"String"},
         "codeDiffLink":{"shape":"String"},
-        "pullRequestLink":{"shape":"String"}
+        "pullRequestLink":{"shape":"String"},
+        "status":{"shape":"CodeRemediationJobStatus"},
+        "statusCode":{"shape":"String"},
+        "statusReason":{"shape":"String"}
       }
     },
     "CodeRemediationTaskDetailsList":{
@@ -2689,6 +2712,7 @@
         "vpcConfig":{"shape":"VpcConfig"},
         "networkTrafficConfig":{"shape":"NetworkTrafficConfig"},
         "codeRemediationStrategy":{"shape":"CodeRemediationStrategy"},
+        "cleanUpStrategy":{"shape":"CleanUpStrategy"},
         "disableManagedSkills":{"shape":"SkillTypeList"},
         "maxTaskHours":{"shape":"Double"},
         "reportDestination":{"shape":"ReportDestination"},
@@ -3180,7 +3204,8 @@
       "enum":[
         "CLIENT_ERROR",
         "INTERNAL_ERROR",
-        "STOPPED_BY_USER"
+        "STOPPED_BY_USER",
+        "PAUSED_BY_USER"
       ]
     },
     "ErrorInformation":{
@@ -3500,6 +3525,13 @@
         "GROUP"
       ]
     },
+    "GroupMetadata":{
+      "type":"structure",
+      "members":{
+        "displayName":{"shape":"String"},
+        "description":{"shape":"String"}
+      }
+    },
     "HostAddress":{"type":"string"},
     "HttpVerification":{
       "type":"structure",
@@ -3792,6 +3824,8 @@
         "IN_PROGRESS",
         "STOPPING",
         "STOPPED",
+        "PAUSING",
+        "PAUSED",
         "FAILED",
         "COMPLETED"
       ]
@@ -4299,7 +4333,8 @@
     "MemberMetadata":{
       "type":"structure",
       "members":{
-        "user":{"shape":"UserMetadata"}
+        "user":{"shape":"UserMetadata"},
+        "group":{"shape":"GroupMetadata"}
       },
       "union":true
     },
@@ -4342,12 +4377,16 @@
     },
     "MembershipType":{
       "type":"string",
-      "enum":["USER"]
+      "enum":[
+        "USER",
+        "GROUP"
+      ]
     },
     "MembershipTypeFilter":{
       "type":"string",
       "enum":[
         "USER",
+        "GROUP",
         "ALL"
       ]
     },
@@ -4453,6 +4492,7 @@
         "scopeChanges":{"shape":"ScopeChangeList"},
         "cicdConfiguration":{"shape":"CiCdConfiguration"},
         "testScope":{"shape":"TestScope"},
+        "version":{"shape":"String"},
         "createdAt":{"shape":"SyntheticTimestamp_date_time"},
         "updatedAt":{"shape":"SyntheticTimestamp_date_time"}
       }
@@ -4479,7 +4519,8 @@
         "createdAt":{"shape":"SyntheticTimestamp_date_time"},
         "updatedAt":{"shape":"SyntheticTimestamp_date_time"},
         "jobType":{"shape":"JobType"},
-        "reportUrl":{"shape":"String"}
+        "reportUrl":{"shape":"String"},
+        "version":{"shape":"String"}
       }
     },
     "PentestJobSummaryList":{
@@ -4688,6 +4729,30 @@
         "DOCUMENT",
         "PROJECT"
       ]
+    },
+    "ResumePentestJobInput":{
+      "type":"structure",
+      "members":{
+        "agentSpaceId":{"shape":"String"},
+        "pentestJobId":{"shape":"String"},
+        "actors":{"shape":"ActorList"},
+        "networkTrafficConfig":{"shape":"NetworkTrafficConfig"},
+        "vpcConfig":{"shape":"VpcConfig"},
+        "maxTaskHours":{"shape":"Double"},
+        "copyConfigFromPentest":{"shape":"Boolean"}
+      }
+    },
+    "ResumePentestJobOutput":{
+      "type":"structure",
+      "members":{
+        "title":{"shape":"String"},
+        "status":{"shape":"JobStatus"},
+        "createdAt":{"shape":"SyntheticTimestamp_date_time"},
+        "updatedAt":{"shape":"SyntheticTimestamp_date_time"},
+        "pentestId":{"shape":"String"},
+        "pentestJobId":{"shape":"String"},
+        "version":{"shape":"String"}
+      }
     },
     "RiskLevel":{
       "type":"string",
@@ -5133,7 +5198,8 @@
       ],
       "members":{
         "agentSpaceId":{"shape":"String"},
-        "pentestJobId":{"shape":"String"}
+        "pentestJobId":{"shape":"String"},
+        "pause":{"shape":"Boolean"}
       }
     },
     "StopPentestJobOutput":{
@@ -5859,6 +5925,7 @@
         "vpcConfig":{"shape":"VpcConfig"},
         "networkTrafficConfig":{"shape":"NetworkTrafficConfig"},
         "codeRemediationStrategy":{"shape":"CodeRemediationStrategy"},
+        "cleanUpStrategy":{"shape":"CleanUpStrategy"},
         "disableManagedSkills":{"shape":"SkillTypeList"},
         "maxTaskHours":{"shape":"Double"},
         "reportDestination":{"shape":"ReportDestination"},

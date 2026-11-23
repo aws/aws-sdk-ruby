@@ -264,7 +264,8 @@ module Aws::EMRServerless
     #     An integer representing the maximum number attempts that will be made for
     #     a single request, including the initial attempt.  For example,
     #     setting this value to 5 will result in a request being retried up to
-    #     4 times. Used in `standard` and `adaptive` retry modes.
+    #     4 times. Used in `standard` and `adaptive` retry modes. Defaults to 3,
+    #     except for DynamoDB and DynamoDB Streams, which default to 4.
     #
     #   @option options [String] :profile ("default")
     #     Used when loading credentials from the shared credentials file at `HOME/.aws/credentials`.
@@ -327,15 +328,15 @@ module Aws::EMRServerless
     #     used by the default backoff function. This option is only used in the
     #     `legacy` retry mode.
     #
-    #   @option options [String] :retry_mode ("legacy")
+    #   @option options [String] :retry_mode ("standard")
     #     Specifies which retry algorithm to use. Values are:
     #
-    #     * `legacy` - The pre-existing retry behavior. This is the default
-    #       value if no retry mode is provided.
+    #     * `legacy` - The pre-existing retry behavior.
     #
     #     * `standard` - A standardized set of retry rules across the AWS SDKs.
     #       This includes support for retry quotas, which limit the number of
-    #       unsuccessful retries a client can make.
+    #       unsuccessful retries a client can make. This is the default value
+    #       if no retry mode is provided.
     #
     #     * `adaptive` - A retry mode that includes all the functionality of
     #       `standard` mode along with automatic client side throttling.
@@ -1006,6 +1007,7 @@ module Aws::EMRServerless
     #   resp.job_run.worker_type_specifications["WorkerTypeString"].image_configuration.image_uri #=> String
     #   resp.job_run.worker_type_specifications["WorkerTypeString"].image_configuration.resolved_image_digest #=> String
     #   resp.job_run.worker_type_specifications["WorkerTypeString"].image_configuration.application_level_digest_resolution #=> Boolean
+    #   resp.job_run.flex_execution.enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/emr-serverless-2021-07-13/GetJobRun AWS API Documentation
     #
@@ -1277,6 +1279,7 @@ module Aws::EMRServerless
     #   resp.job_run_attempts[0].release_label #=> String
     #   resp.job_run_attempts[0].type #=> String
     #   resp.job_run_attempts[0].attempt #=> Integer
+    #   resp.job_run_attempts[0].flex_execution.enabled #=> Boolean
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/emr-serverless-2021-07-13/ListJobRunAttempts AWS API Documentation
@@ -1351,6 +1354,7 @@ module Aws::EMRServerless
     #   resp.job_runs[0].attempt #=> Integer
     #   resp.job_runs[0].attempt_created_at #=> Time
     #   resp.job_runs[0].attempt_updated_at #=> Time
+    #   resp.job_runs[0].flex_execution.enabled #=> Boolean
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/emr-serverless-2021-07-13/ListJobRuns AWS API Documentation
@@ -1528,6 +1532,10 @@ module Aws::EMRServerless
     # @option params [Types::RetryPolicy] :retry_policy
     #   The retry policy when job run starts.
     #
+    # @option params [Types::FlexExecution] :flex_execution
+    #   The Amazon EMR Serverless Flex settings for the job run. If you don't
+    #   specify these settings, the job run doesn't use Flex capacity.
+    #
     # @return [Types::StartJobRunResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartJobRunResponse#application_id #application_id} => String
@@ -1606,6 +1614,9 @@ module Aws::EMRServerless
     #     retry_policy: {
     #       max_attempts: 1,
     #       max_failed_attempts_per_hour: 1,
+    #     },
+    #     flex_execution: {
+    #       enabled: false,
     #     },
     #   })
     #
@@ -2121,7 +2132,7 @@ module Aws::EMRServerless
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-emrserverless'
-      context[:gem_version] = '1.78.0'
+      context[:gem_version] = '1.85.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

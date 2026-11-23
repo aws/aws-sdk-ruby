@@ -32,6 +32,37 @@ module Aws::PartnerCentralChannel
       SENSITIVE: []
     end
 
+    class Address
+      attr_accessor city: ::String
+      attr_accessor state_or_region: ::String
+      attr_accessor postal_code: ::String
+      attr_accessor country_code: ::String
+      attr_accessor address_line: ::String
+      attr_accessor address_line_2: ::String
+      SENSITIVE: []
+    end
+
+    class CancelChannelContractDetail
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor status: ("PENDING" | "ACCEPTED" | "EXPIRED" | "CANCELED" | "INACTIVE")
+      attr_accessor cancellation_reason: ::String
+      SENSITIVE: []
+    end
+
+    class CancelChannelContractRequest
+      attr_accessor catalog: ::String
+      attr_accessor identifier: ::String
+      attr_accessor reason: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class CancelChannelContractResponse
+      attr_accessor channel_contract_detail: Types::CancelChannelContractDetail
+      SENSITIVE: []
+    end
+
     class CancelChannelHandshakeDetail
       attr_accessor id: ::String
       attr_accessor arn: ::String
@@ -48,6 +79,66 @@ module Aws::PartnerCentralChannel
     class CancelChannelHandshakeResponse
       attr_accessor channel_handshake_detail: Types::CancelChannelHandshakeDetail
       SENSITIVE: []
+    end
+
+    class ChannelContractDetail
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor catalog: ::String
+      attr_accessor contract_type: ("MANAGED_SERVICES_ATTESTATION")
+      attr_accessor status: ("PENDING" | "ACCEPTED" | "EXPIRED" | "CANCELED" | "INACTIVE")
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor responded_at: ::Time
+      attr_accessor cancellation_reason: ::String
+      attr_accessor details: Types::ChannelContractDetails
+      SENSITIVE: []
+    end
+
+    class ChannelContractDetails
+      attr_accessor managed_services_attestation_details: Types::ManagedServicesAttestationDetails
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class ManagedServicesAttestationDetails < ChannelContractDetails
+      end
+      class Unknown < ChannelContractDetails
+      end
+    end
+
+    class ChannelContractPayload
+      attr_accessor managed_services_attestation_payload: Types::ManagedServicesAttestationPayload
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class ManagedServicesAttestationPayload < ChannelContractPayload
+      end
+      class Unknown < ChannelContractPayload
+      end
+    end
+
+    class ChannelContractSummary
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor catalog: ::String
+      attr_accessor contract_type: ("MANAGED_SERVICES_ATTESTATION")
+      attr_accessor status: ("PENDING" | "ACCEPTED" | "EXPIRED" | "CANCELED" | "INACTIVE")
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor responded_at: ::Time
+      attr_accessor details: Types::ChannelContractSummaryDetails
+      SENSITIVE: []
+    end
+
+    class ChannelContractSummaryDetails
+      attr_accessor managed_services_attestation_details: Types::ManagedServicesAttestationSummaryDetails
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class ManagedServicesAttestationDetails < ChannelContractSummaryDetails
+      end
+      class Unknown < ChannelContractSummaryDetails
+      end
     end
 
     class ChannelHandshakePayload
@@ -88,6 +179,26 @@ module Aws::PartnerCentralChannel
       SENSITIVE: []
     end
 
+    class CreateChannelContractDetail
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateChannelContractRequest
+      attr_accessor contract_type: ("MANAGED_SERVICES_ATTESTATION")
+      attr_accessor catalog: ::String
+      attr_accessor payload: Types::ChannelContractPayload
+      attr_accessor client_token: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateChannelContractResponse
+      attr_accessor channel_contract_detail: Types::CreateChannelContractDetail
+      SENSITIVE: []
+    end
+
     class CreateChannelHandshakeDetail
       attr_accessor id: ::String
       attr_accessor arn: ::String
@@ -117,11 +228,12 @@ module Aws::PartnerCentralChannel
 
     class CreateProgramManagementAccountRequest
       attr_accessor catalog: ::String
-      attr_accessor program: ("SOLUTION_PROVIDER" | "DISTRIBUTION" | "DISTRIBUTION_SELLER")
+      attr_accessor program: ("SOLUTION_PROVIDER" | "DISTRIBUTION" | "DISTRIBUTION_SELLER" | "MANAGED_SERVICES_PROVIDER")
       attr_accessor display_name: ::String
       attr_accessor account_id: ::String
       attr_accessor client_token: ::String
       attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor type: ("RESALE_BILLING_TRANSFER" | "MANAGED_SERVICES")
       SENSITIVE: []
     end
 
@@ -138,7 +250,7 @@ module Aws::PartnerCentralChannel
 
     class CreateRelationshipRequest
       attr_accessor catalog: ::String
-      attr_accessor association_type: ("DOWNSTREAM_SELLER" | "END_CUSTOMER" | "INTERNAL")
+      attr_accessor association_type: ("DOWNSTREAM_SELLER" | "END_CUSTOMER" | "INTERNAL" | "MANAGED_SERVICES_END_CUSTOMER")
       attr_accessor program_management_account_identifier: ::String
       attr_accessor associated_account_id: ::String
       attr_accessor display_name: ::String
@@ -147,6 +259,8 @@ module Aws::PartnerCentralChannel
       attr_accessor client_token: ::String
       attr_accessor tags: ::Array[Types::Tag]
       attr_accessor requested_support_plan: Types::SupportPlan
+      attr_accessor account_scope: ("ENTIRE_ORGANIZATION" | "SPECIFIC_MEMBER_ACCOUNTS")
+      attr_accessor start_date: ::Time
       SENSITIVE: []
     end
 
@@ -174,6 +288,17 @@ module Aws::PartnerCentralChannel
     end
 
     class DeleteRelationshipResponse < Aws::EmptyStructure
+    end
+
+    class GetChannelContractRequest
+      attr_accessor catalog: ::String
+      attr_accessor identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetChannelContractResponse
+      attr_accessor channel_contract_detail: Types::ChannelContractDetail
+      SENSITIVE: []
     end
 
     class GetRelationshipRequest
@@ -208,6 +333,45 @@ module Aws::PartnerCentralChannel
     class InternalServerException
       attr_accessor message: ::String
       SENSITIVE: []
+    end
+
+    class ListChannelContractsRequest
+      attr_accessor catalog: ::String
+      attr_accessor contract_type: ("MANAGED_SERVICES_ATTESTATION")
+      attr_accessor statuses: ::Array[("PENDING" | "ACCEPTED" | "EXPIRED" | "CANCELED" | "INACTIVE")]
+      attr_accessor contract_type_filters: Types::ListChannelContractsTypeFilters
+      attr_accessor contract_type_sort: Types::ListChannelContractsTypeSort
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListChannelContractsResponse
+      attr_accessor items: ::Array[Types::ChannelContractSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListChannelContractsTypeFilters
+      attr_accessor managed_services_attestation_type_filters: Types::ManagedServicesAttestationTypeFilters
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class ManagedServicesAttestationTypeFilters < ListChannelContractsTypeFilters
+      end
+      class Unknown < ListChannelContractsTypeFilters
+      end
+    end
+
+    class ListChannelContractsTypeSort
+      attr_accessor managed_services_attestation_type_sort: Types::ManagedServicesAttestationTypeSort
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class ManagedServicesAttestationTypeSort < ListChannelContractsTypeSort
+      end
+      class Unknown < ListChannelContractsTypeSort
+      end
     end
 
     class ListChannelHandshakesRequest
@@ -267,11 +431,12 @@ module Aws::PartnerCentralChannel
       attr_accessor catalog: ::String
       attr_accessor max_results: ::Integer
       attr_accessor display_names: ::Array[::String]
-      attr_accessor programs: ::Array[("SOLUTION_PROVIDER" | "DISTRIBUTION" | "DISTRIBUTION_SELLER")]
+      attr_accessor programs: ::Array[("SOLUTION_PROVIDER" | "DISTRIBUTION" | "DISTRIBUTION_SELLER" | "MANAGED_SERVICES_PROVIDER")]
       attr_accessor account_ids: ::Array[::String]
       attr_accessor statuses: ::Array[("PENDING" | "ACTIVE" | "INACTIVE")]
       attr_accessor sort: Types::ListProgramManagementAccountsSortBase
       attr_accessor next_token: ::String
+      attr_accessor type: ("RESALE_BILLING_TRANSFER" | "MANAGED_SERVICES")
       SENSITIVE: []
     end
 
@@ -291,7 +456,7 @@ module Aws::PartnerCentralChannel
       attr_accessor catalog: ::String
       attr_accessor max_results: ::Integer
       attr_accessor associated_account_ids: ::Array[::String]
-      attr_accessor association_types: ::Array[("DOWNSTREAM_SELLER" | "END_CUSTOMER" | "INTERNAL")]
+      attr_accessor association_types: ::Array[("DOWNSTREAM_SELLER" | "END_CUSTOMER" | "INTERNAL" | "MANAGED_SERVICES_END_CUSTOMER")]
       attr_accessor display_names: ::Array[::String]
       attr_accessor program_management_account_identifiers: ::Array[::String]
       attr_accessor sort: Types::ListRelationshipsSortBase
@@ -321,6 +486,54 @@ module Aws::PartnerCentralChannel
       SENSITIVE: []
     end
 
+    class ManagedServicesAttestationDetails
+      attr_accessor legal_entity_name: ::String
+      attr_accessor relationship_identifier: ::String
+      attr_accessor program_management_account_identifier: ::String
+      attr_accessor member_account_ids: ::Array[::String]
+      attr_accessor end_date: ::Time
+      attr_accessor supported_services: ::Array[("MONITORING" | "PATCHING" | "SECURITY" | "BACKUP_AND_DISASTER_RECOVERY" | "FINANCIAL_OPERATIONS" | "INFRASTRUCTURE_AS_CODE_AND_AUTOMATION" | "WELL_ARCHITECTED" | "ARTIFICIAL_INTELLIGENCE_AND_MACHINE_LEARNING_OPERATIONS")]
+      attr_accessor signatory_name: ::String
+      attr_accessor signatory_email: ::String
+      attr_accessor legal_entity_address: Types::Address
+      SENSITIVE: [:legal_entity_name, :signatory_name, :signatory_email, :legal_entity_address]
+    end
+
+    class ManagedServicesAttestationPayload
+      attr_accessor legal_entity_name: ::String
+      attr_accessor relationship_identifier: ::String
+      attr_accessor program_management_account_identifier: ::String
+      attr_accessor member_account_ids: ::Array[::String]
+      attr_accessor end_date: ::Time
+      attr_accessor supported_services: ::Array[("MONITORING" | "PATCHING" | "SECURITY" | "BACKUP_AND_DISASTER_RECOVERY" | "FINANCIAL_OPERATIONS" | "INFRASTRUCTURE_AS_CODE_AND_AUTOMATION" | "WELL_ARCHITECTED" | "ARTIFICIAL_INTELLIGENCE_AND_MACHINE_LEARNING_OPERATIONS")]
+      attr_accessor legal_entity_address: Types::Address
+      attr_accessor signatory_name: ::String
+      attr_accessor signatory_email: ::String
+      SENSITIVE: [:legal_entity_name, :legal_entity_address, :signatory_name, :signatory_email]
+    end
+
+    class ManagedServicesAttestationSummaryDetails
+      attr_accessor legal_entity_name: ::String
+      attr_accessor relationship_identifier: ::String
+      attr_accessor program_management_account_identifier: ::String
+      attr_accessor member_account_ids: ::Array[::String]
+      attr_accessor end_date: ::Time
+      attr_accessor supported_services: ::Array[("MONITORING" | "PATCHING" | "SECURITY" | "BACKUP_AND_DISASTER_RECOVERY" | "FINANCIAL_OPERATIONS" | "INFRASTRUCTURE_AS_CODE_AND_AUTOMATION" | "WELL_ARCHITECTED" | "ARTIFICIAL_INTELLIGENCE_AND_MACHINE_LEARNING_OPERATIONS")]
+      SENSITIVE: [:legal_entity_name]
+    end
+
+    class ManagedServicesAttestationTypeFilters
+      attr_accessor relationship_identifiers: ::Array[::String]
+      attr_accessor legal_entity_names: ::Array[::String]
+      SENSITIVE: [:legal_entity_names]
+    end
+
+    class ManagedServicesAttestationTypeSort
+      attr_accessor sort_order: ("Ascending" | "Descending")
+      attr_accessor sort_by: ("UpdatedAt")
+      SENSITIVE: []
+    end
+
     class PartnerLedSupport
       attr_accessor coverage: ("ENTIRE_ORGANIZATION" | "MANAGEMENT_ACCOUNT_ONLY")
       attr_accessor provider: ("DISTRIBUTOR" | "DISTRIBUTION_SELLER")
@@ -329,7 +542,7 @@ module Aws::PartnerCentralChannel
     end
 
     class ProgramManagementAccountHandshakeDetail
-      attr_accessor program: ("SOLUTION_PROVIDER" | "DISTRIBUTION" | "DISTRIBUTION_SELLER")
+      attr_accessor program: ("SOLUTION_PROVIDER" | "DISTRIBUTION" | "DISTRIBUTION_SELLER" | "MANAGED_SERVICES_PROVIDER")
       SENSITIVE: []
     end
 
@@ -337,7 +550,7 @@ module Aws::PartnerCentralChannel
       attr_accessor id: ::String
       attr_accessor revision: ::String
       attr_accessor catalog: ::String
-      attr_accessor program: ("SOLUTION_PROVIDER" | "DISTRIBUTION" | "DISTRIBUTION_SELLER")
+      attr_accessor program: ("SOLUTION_PROVIDER" | "DISTRIBUTION" | "DISTRIBUTION_SELLER" | "MANAGED_SERVICES_PROVIDER")
       attr_accessor display_name: ::String
       attr_accessor account_id: ::String
       attr_accessor arn: ::String
@@ -345,11 +558,12 @@ module Aws::PartnerCentralChannel
       attr_accessor updated_at: ::Time
       attr_accessor start_date: ::Time
       attr_accessor status: ("PENDING" | "ACTIVE" | "INACTIVE")
+      attr_accessor type: ("RESALE_BILLING_TRANSFER" | "MANAGED_SERVICES")
       SENSITIVE: []
     end
 
     class ProgramManagementAccountTypeFilters
-      attr_accessor programs: ::Array[("SOLUTION_PROVIDER" | "DISTRIBUTION" | "DISTRIBUTION_SELLER")]
+      attr_accessor programs: ::Array[("SOLUTION_PROVIDER" | "DISTRIBUTION" | "DISTRIBUTION_SELLER" | "MANAGED_SERVICES_PROVIDER")]
       SENSITIVE: []
     end
 
@@ -382,15 +596,18 @@ module Aws::PartnerCentralChannel
       attr_accessor id: ::String
       attr_accessor revision: ::String
       attr_accessor catalog: ::String
-      attr_accessor association_type: ("DOWNSTREAM_SELLER" | "END_CUSTOMER" | "INTERNAL")
+      attr_accessor association_type: ("DOWNSTREAM_SELLER" | "END_CUSTOMER" | "INTERNAL" | "MANAGED_SERVICES_END_CUSTOMER")
       attr_accessor program_management_account_id: ::String
       attr_accessor associated_account_id: ::String
       attr_accessor display_name: ::String
       attr_accessor resale_account_model: ("DISTRIBUTOR" | "END_CUSTOMER" | "SOLUTION_PROVIDER")
       attr_accessor sector: ("COMMERCIAL" | "GOVERNMENT" | "GOVERNMENT_EXCEPTION")
+      attr_accessor account_scope: ("ENTIRE_ORGANIZATION" | "SPECIFIC_MEMBER_ACCOUNTS")
+      attr_accessor channel_contract_id: ::String
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
       attr_accessor start_date: ::Time
+      attr_accessor end_date: ::Time
       SENSITIVE: []
     end
 
@@ -399,7 +616,7 @@ module Aws::PartnerCentralChannel
       attr_accessor id: ::String
       attr_accessor revision: ::String
       attr_accessor catalog: ::String
-      attr_accessor association_type: ("DOWNSTREAM_SELLER" | "END_CUSTOMER" | "INTERNAL")
+      attr_accessor association_type: ("DOWNSTREAM_SELLER" | "END_CUSTOMER" | "INTERNAL" | "MANAGED_SERVICES_END_CUSTOMER")
       attr_accessor program_management_account_id: ::String
       attr_accessor associated_account_id: ::String
       attr_accessor display_name: ::String

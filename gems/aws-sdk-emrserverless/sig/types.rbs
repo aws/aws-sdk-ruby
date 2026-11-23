@@ -148,6 +148,11 @@ module Aws::EMRServerless
       SENSITIVE: []
     end
 
+    class FlexExecution
+      attr_accessor enabled: bool
+      SENSITIVE: []
+    end
+
     class GetApplicationRequest
       attr_accessor application_id: ::String
       SENSITIVE: []
@@ -323,6 +328,7 @@ module Aws::EMRServerless
       attr_accessor queued_duration_milliseconds: ::Integer
       attr_accessor image_configuration: Types::ImageConfiguration
       attr_accessor worker_type_specifications: ::Hash[::String, Types::WorkerTypeSpecification]
+      attr_accessor flex_execution: Types::FlexExecution
       SENSITIVE: []
     end
 
@@ -342,6 +348,7 @@ module Aws::EMRServerless
       attr_accessor release_label: ::String
       attr_accessor type: ::String
       attr_accessor attempt: ::Integer
+      attr_accessor flex_execution: Types::FlexExecution
       SENSITIVE: []
     end
 
@@ -368,6 +375,7 @@ module Aws::EMRServerless
       attr_accessor attempt: ::Integer
       attr_accessor attempt_created_at: ::Time
       attr_accessor attempt_updated_at: ::Time
+      attr_accessor flex_execution: Types::FlexExecution
       SENSITIVE: []
     end
 
@@ -557,7 +565,7 @@ module Aws::EMRServerless
       attr_accessor entry_point: ::String
       attr_accessor entry_point_arguments: ::Array[::String]
       attr_accessor spark_submit_parameters: ::String
-      SENSITIVE: [:entry_point, :spark_submit_parameters]
+      SENSITIVE: [:entry_point, :entry_point_arguments, :spark_submit_parameters]
     end
 
     class StartApplicationRequest
@@ -580,6 +588,7 @@ module Aws::EMRServerless
       attr_accessor name: ::String
       attr_accessor mode: ("BATCH" | "STREAMING")
       attr_accessor retry_policy: Types::RetryPolicy
+      attr_accessor flex_execution: Types::FlexExecution
       SENSITIVE: []
     end
 

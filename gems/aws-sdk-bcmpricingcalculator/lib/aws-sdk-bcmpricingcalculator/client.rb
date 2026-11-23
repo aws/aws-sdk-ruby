@@ -264,7 +264,8 @@ module Aws::BCMPricingCalculator
     #     An integer representing the maximum number attempts that will be made for
     #     a single request, including the initial attempt.  For example,
     #     setting this value to 5 will result in a request being retried up to
-    #     4 times. Used in `standard` and `adaptive` retry modes.
+    #     4 times. Used in `standard` and `adaptive` retry modes. Defaults to 3,
+    #     except for DynamoDB and DynamoDB Streams, which default to 4.
     #
     #   @option options [String] :profile ("default")
     #     Used when loading credentials from the shared credentials file at `HOME/.aws/credentials`.
@@ -327,15 +328,15 @@ module Aws::BCMPricingCalculator
     #     used by the default backoff function. This option is only used in the
     #     `legacy` retry mode.
     #
-    #   @option options [String] :retry_mode ("legacy")
+    #   @option options [String] :retry_mode ("standard")
     #     Specifies which retry algorithm to use. Values are:
     #
-    #     * `legacy` - The pre-existing retry behavior. This is the default
-    #       value if no retry mode is provided.
+    #     * `legacy` - The pre-existing retry behavior.
     #
     #     * `standard` - A standardized set of retry rules across the AWS SDKs.
     #       This includes support for retry quotas, which limit the number of
-    #       unsuccessful retries a client can make.
+    #       unsuccessful retries a client can make. This is the default value
+    #       if no retry mode is provided.
     #
     #     * `adaptive` - A retry mode that includes all the functionality of
     #       `standard` mode along with automatic client side throttling.
@@ -874,7 +875,7 @@ module Aws::BCMPricingCalculator
     end
 
     # Delete commitment that you have created in a Bill Scenario. You can
-    # only delete a commitment that you had added and cannot model deletion
+    # only delete a commitment that you had added and can't model deletion
     # (or removal) of a existing commitment. If you want model deletion of
     # an existing commitment, see the negate [
     # BillScenarioCommitmentModificationAction][1] of [
@@ -928,7 +929,7 @@ module Aws::BCMPricingCalculator
     end
 
     # Delete usage that you have created in a Bill Scenario. You can only
-    # delete usage that you had added and cannot model deletion (or removal)
+    # delete usage that you had added and can't model deletion (or removal)
     # of a existing usage. If you want model removal of an existing usage,
     # see [ BatchUpdateBillScenarioUsageModification][1].
     #
@@ -979,7 +980,7 @@ module Aws::BCMPricingCalculator
     end
 
     # Delete usage that you have created in a Workload estimate. You can
-    # only delete usage that you had added and cannot model deletion (or
+    # only delete usage that you had added and can't model deletion (or
     # removal) of a existing usage. If you want model removal of an existing
     # usage, see [ BatchUpdateWorkloadEstimateUsage][1].
     #
@@ -1405,7 +1406,7 @@ module Aws::BCMPricingCalculator
     #   The tags to apply to the bill scenario.
     #
     # @option params [String] :group_sharing_preference
-    #   The setting for the reserved instance and savings plan group sharing
+    #   The setting for the reserved instance and savings plans group sharing
     #   used in this estimate.
     #
     # @option params [String] :cost_category_group_sharing_preference_arn
@@ -1472,7 +1473,10 @@ module Aws::BCMPricingCalculator
     #   not need to pass this option.**
     #
     # @option params [String] :rate_type
-    #   The type of pricing rates to use for the estimate.
+    #   The type of pricing rates for the estimate. You can only use a rate
+    #   type that your Pricing Calculator rate preferences allow. If you use
+    #   billing transfer as a bill source account, you can only use
+    #   BEFORE\_DISCOUNTS.
     #
     # @option params [Hash<String,String>] :tags
     #   The tags to apply to the workload estimate.
@@ -1714,6 +1718,81 @@ module Aws::BCMPricingCalculator
     # @param [Hash] params ({})
     def get_preferences(params = {}, options = {})
       req = build_request(:get_preferences, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the estimated cost of a list of usage lines. Each usage line
+    # identifies a billing line by its service code, usage type, and
+    # operation, and includes the usage amount to price. The estimate is
+    # based on Amazon Web Services pricing data and the rate type you
+    # choose. It doesn't include taxes, and your actual charges depend on
+    # your usage.
+    #
+    # The response includes the estimated cost of each usage line that was
+    # priced. It also includes each usage line that couldn't be priced, and
+    # the reason it couldn't be priced.
+    #
+    # @option params [required, Array<Types::GetUsageLinesEstimatedCostInput>] :usage
+    #   The usage lines that you want to estimate. You can include up to 500
+    #   usage lines in a request.
+    #
+    # @option params [required, String] :rate_type
+    #   The type of pricing rates to use to estimate the cost of the usage
+    #   lines. You can only use a rate type that your Pricing Calculator rate
+    #   preferences allow. If you use billing transfer as a bill source
+    #   account, you can only use BEFORE\_DISCOUNTS
+    #
+    # @return [Types::GetUsageLinesEstimatedCostResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetUsageLinesEstimatedCostResponse#rate_type #rate_type} => String
+    #   * {Types::GetUsageLinesEstimatedCostResponse#total_cost #total_cost} => Float
+    #   * {Types::GetUsageLinesEstimatedCostResponse#currency #currency} => String
+    #   * {Types::GetUsageLinesEstimatedCostResponse#line_items #line_items} => Array&lt;Types::GetUsageLinesEstimatedCostLineItem&gt;
+    #   * {Types::GetUsageLinesEstimatedCostResponse#errors #errors} => Array&lt;Types::GetUsageLinesEstimatedCostError&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_usage_lines_estimated_cost({
+    #     usage: [ # required
+    #       {
+    #         service_code: "ServiceCode", # required
+    #         usage_type: "UsageType", # required
+    #         operation: "Operation", # required
+    #         key: "Key", # required
+    #         amount: 1.0, # required
+    #       },
+    #     ],
+    #     rate_type: "BEFORE_DISCOUNTS", # required, accepts BEFORE_DISCOUNTS, AFTER_DISCOUNTS, AFTER_DISCOUNTS_AND_COMMITMENTS
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.rate_type #=> String, one of "BEFORE_DISCOUNTS", "AFTER_DISCOUNTS", "AFTER_DISCOUNTS_AND_COMMITMENTS"
+    #   resp.total_cost #=> Float
+    #   resp.currency #=> String, one of "USD"
+    #   resp.line_items #=> Array
+    #   resp.line_items[0].key #=> String
+    #   resp.line_items[0].service_code #=> String
+    #   resp.line_items[0].usage_type #=> String
+    #   resp.line_items[0].operation #=> String
+    #   resp.line_items[0].estimated_cost.usage_amount #=> Float
+    #   resp.line_items[0].estimated_cost.usage_unit #=> String
+    #   resp.line_items[0].estimated_cost.cost #=> Float
+    #   resp.line_items[0].estimated_cost.currency #=> String, one of "USD"
+    #   resp.errors #=> Array
+    #   resp.errors[0].key #=> String
+    #   resp.errors[0].service_code #=> String
+    #   resp.errors[0].usage_type #=> String
+    #   resp.errors[0].operation #=> String
+    #   resp.errors[0].error_code #=> String, one of "BAD_REQUEST", "NOT_FOUND", "CONFLICT", "INTERNAL_SERVER_ERROR"
+    #   resp.errors[0].error_message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bcm-pricing-calculator-2024-06-19/GetUsageLinesEstimatedCost AWS API Documentation
+    #
+    # @overload get_usage_lines_estimated_cost(params = {})
+    # @param [Hash] params ({})
+    def get_usage_lines_estimated_cost(params = {}, options = {})
+      req = build_request(:get_usage_lines_estimated_cost, params)
       req.send_request(options)
     end
 
@@ -2621,7 +2700,7 @@ module Aws::BCMPricingCalculator
     #   The new expiration date for the bill scenario.
     #
     # @option params [String] :group_sharing_preference
-    #   The setting for the reserved instance and savings plan group sharing
+    #   The setting for the reserved instance and savings plans group sharing
     #   used in this estimate.
     #
     # @option params [String] :cost_category_group_sharing_preference_arn
@@ -2787,7 +2866,7 @@ module Aws::BCMPricingCalculator
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bcmpricingcalculator'
-      context[:gem_version] = '1.39.0'
+      context[:gem_version] = '1.47.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

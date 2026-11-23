@@ -264,7 +264,8 @@ module Aws::TaxSettings
     #     An integer representing the maximum number attempts that will be made for
     #     a single request, including the initial attempt.  For example,
     #     setting this value to 5 will result in a request being retried up to
-    #     4 times. Used in `standard` and `adaptive` retry modes.
+    #     4 times. Used in `standard` and `adaptive` retry modes. Defaults to 3,
+    #     except for DynamoDB and DynamoDB Streams, which default to 4.
     #
     #   @option options [String] :profile ("default")
     #     Used when loading credentials from the shared credentials file at `HOME/.aws/credentials`.
@@ -327,15 +328,15 @@ module Aws::TaxSettings
     #     used by the default backoff function. This option is only used in the
     #     `legacy` retry mode.
     #
-    #   @option options [String] :retry_mode ("legacy")
+    #   @option options [String] :retry_mode ("standard")
     #     Specifies which retry algorithm to use. Values are:
     #
-    #     * `legacy` - The pre-existing retry behavior. This is the default
-    #       value if no retry mode is provided.
+    #     * `legacy` - The pre-existing retry behavior.
     #
     #     * `standard` - A standardized set of retry rules across the AWS SDKs.
     #       This includes support for retry quotas, which limit the number of
-    #       unsuccessful retries a client can make.
+    #       unsuccessful retries a client can make. This is the default value
+    #       if no retry mode is provided.
     #
     #     * `adaptive` - A retry mode that includes all the functionality of
     #       `standard` mode along with automatic client side throttling.
@@ -578,6 +579,13 @@ module Aws::TaxSettings
     # To call this API operation for specific countries, see the following
     # country-specific requirements.
     #
+    # **Argentina**
+    #
+    # * `RegistrationType` valid values are `CUIT` (Clave Única de
+    #   Identificación Tributaria) and `CDI` (Clave de Identificación).
+    #
+    # ^
+    #
     # **Bangladesh**
     #
     # * You must specify the tax registration certificate document in the
@@ -716,6 +724,30 @@ module Aws::TaxSettings
     #
     # ^
     #
+    # **New Zealand**
+    #
+    # * You can optionally specify the `sector`. Valid values are
+    #   `Government` and `Business`. Non-government customers use
+    #   `Business`.
+    #
+    # * If your `sector` is `Government`, you can optionally specify the
+    #   `peppolId` in the `newZealandAdditionalInfo` field of the
+    #   `additionalTaxInformation` object.
+    #
+    # **Norway**
+    #
+    # * You can optionally specify the `taxRegistrationNumberType` in the
+    #   `norwayAdditionalInfo` field of the `additionalTaxInformation`
+    #   object. Valid values are `TaxRegistrationNumber` and
+    #   `LocalRegistrationNumber`. Use `LocalRegistrationNumber` to register
+    #   a Norwegian Organisation Number for a business that isn't VAT
+    #   registered. In that case, the `registrationId` must be the 9-digit
+    #   Organisation Number.
+    #
+    # * You can optionally specify the `peppolId` in the
+    #   `norwayAdditionalInfo` field of the `additionalTaxInformation`
+    #   object.
+    #
     # **Saudi Arabia**
     #
     # * For `address`, you must specify `addressLine3`.
@@ -773,6 +805,40 @@ module Aws::TaxSettings
     # * The sector valid values are `Business` and `Individual`.
     #
     # ^
+    #
+    # **United Arab Emirates**
+    #
+    # * You must specify the `taxRegistrationNumberType` in the
+    #   `unitedArabEmiratesAdditionalInfo` field of the
+    #   `additionalTaxInformation` object. Valid values are
+    #   `VATTaxRegistrationNumber` and `LocalTaxRegistrationNumber`
+    #   (Corporate Tax).
+    #
+    # * You can optionally specify the `peppolId`, `tradeLicenseNumber`, and
+    #   `emiratesId` in the `unitedArabEmiratesAdditionalInfo` field.
+    #
+    # **Uruguay**
+    #
+    # * `RegistrationType` valid values are `RUT` (Registro Único
+    #   Tributario), `NIE` (Numero de Identificacion del Extranjero), and
+    #   `CI` (Cedula Identidad).
+    #
+    # ^
+    #
+    # **Vietnam**
+    #
+    # * You must specify the `vatCreditMethod` in the
+    #   `vietnamAdditionalInfo` field of the `additionalTaxInformation`
+    #   object.
+    #
+    # * If `vatCreditMethod` is `true`, the sector must be `Business`, and
+    #   you must specify the `enterpriseIdentificationNumber`,
+    #   `electronicTransactionCodeNumber`, `paymentVoucherNumber`, and
+    #   `paymentVoucherNumberDate`.
+    #
+    # * If `vatCreditMethod` is `false`, the sector must be `Individual`,
+    #   and you must not specify those four fields. The tax registration
+    #   number can also be 12 digits.
     #
     # **Philippines**
     #
@@ -859,7 +925,7 @@ module Aws::TaxSettings
     #     account_ids: ["AccountId"], # required
     #     tax_registration_entry: { # required
     #       registration_id: "RegistrationId", # required
-    #       registration_type: "VAT", # required, accepts VAT, GST, CPF, CNPJ, SST, TIN, NRIC, PAN, NIP
+    #       registration_type: "VAT", # required, accepts VAT, GST, CPF, CNPJ, SST, TIN, NRIC, PAN, NIP, CUIT, CDI, RUT, NIE, CI
     #       legal_name: "LegalName",
     #       legal_address: {
     #         address_line_1: "AddressLine1",
@@ -942,6 +1008,7 @@ module Aws::TaxSettings
     #           electronic_transaction_code_number: "ElectronicTransactionCodeNumber",
     #           payment_voucher_number: "PaymentVoucherNumber",
     #           payment_voucher_number_date: "DateString",
+    #           vat_credit_method: false,
     #         },
     #         egypt_additional_info: {
     #           unique_identification_number: "UniqueIdentificationNumber",
@@ -980,6 +1047,19 @@ module Aws::TaxSettings
     #           tax_regime: "MexicoTaxRegimeCode",
     #           tax_regime_full_name: "MexicoTaxRegimeFullName",
     #           cfdi_usage_code: "MexicoCfdiUsageCode",
+    #         },
+    #         united_arab_emirates_additional_info: {
+    #           tax_registration_number_type: "VATTaxRegistrationNumber", # accepts VATTaxRegistrationNumber, LocalTaxRegistrationNumber
+    #           peppol_id: "UaePeppolId",
+    #           trade_license_number: "UaeTradeLicenseNumber",
+    #           emirates_id: "UaeEmiratesId",
+    #         },
+    #         norway_additional_info: {
+    #           tax_registration_number_type: "TaxRegistrationNumber", # accepts TaxRegistrationNumber, LocalRegistrationNumber
+    #           peppol_id: "NorwayPeppolId",
+    #         },
+    #         new_zealand_additional_info: {
+    #           peppol_id: "NewZealandPeppolId",
     #         },
     #       },
     #       verification_details: {
@@ -1137,7 +1217,7 @@ module Aws::TaxSettings
     # @example Response structure
     #
     #   resp.tax_registration.registration_id #=> String
-    #   resp.tax_registration.registration_type #=> String, one of "VAT", "GST", "CPF", "CNPJ", "SST", "TIN", "NRIC", "PAN", "NIP"
+    #   resp.tax_registration.registration_type #=> String, one of "VAT", "GST", "CPF", "CNPJ", "SST", "TIN", "NRIC", "PAN", "NIP", "CUIT", "CDI", "RUT", "NIE", "CI"
     #   resp.tax_registration.legal_name #=> String
     #   resp.tax_registration.status #=> String, one of "Verified", "Pending", "Deleted", "Rejected"
     #   resp.tax_registration.sector #=> String, one of "Business", "Individual", "Government"
@@ -1187,6 +1267,7 @@ module Aws::TaxSettings
     #   resp.tax_registration.additional_tax_information.vietnam_additional_info.electronic_transaction_code_number #=> String
     #   resp.tax_registration.additional_tax_information.vietnam_additional_info.payment_voucher_number #=> String
     #   resp.tax_registration.additional_tax_information.vietnam_additional_info.payment_voucher_number_date #=> String
+    #   resp.tax_registration.additional_tax_information.vietnam_additional_info.vat_credit_method #=> Boolean
     #   resp.tax_registration.additional_tax_information.egypt_additional_info.unique_identification_number #=> String
     #   resp.tax_registration.additional_tax_information.egypt_additional_info.unique_identification_number_expiration_date #=> String
     #   resp.tax_registration.additional_tax_information.greece_additional_info.contracting_authority_code #=> String
@@ -1205,6 +1286,19 @@ module Aws::TaxSettings
     #   resp.tax_registration.additional_tax_information.mexico_additional_info.tax_regime #=> String
     #   resp.tax_registration.additional_tax_information.mexico_additional_info.tax_regime_full_name #=> String
     #   resp.tax_registration.additional_tax_information.mexico_additional_info.cfdi_usage_code #=> String
+    #   resp.tax_registration.additional_tax_information.colombia_additional_info.responsibility_codes #=> Array
+    #   resp.tax_registration.additional_tax_information.colombia_additional_info.responsibility_codes[0] #=> String
+    #   resp.tax_registration.additional_tax_information.colombia_additional_info.taxpayer_type_code #=> String
+    #   resp.tax_registration.additional_tax_information.colombia_additional_info.issue_date #=> String
+    #   resp.tax_registration.additional_tax_information.united_arab_emirates_additional_info.tax_registration_number_type #=> String, one of "VATTaxRegistrationNumber", "LocalTaxRegistrationNumber"
+    #   resp.tax_registration.additional_tax_information.united_arab_emirates_additional_info.peppol_id #=> String
+    #   resp.tax_registration.additional_tax_information.united_arab_emirates_additional_info.trade_license_number #=> String
+    #   resp.tax_registration.additional_tax_information.united_arab_emirates_additional_info.emirates_id #=> String
+    #   resp.tax_registration.additional_tax_information.norway_additional_info.tax_registration_number_type #=> String, one of "TaxRegistrationNumber", "LocalRegistrationNumber"
+    #   resp.tax_registration.additional_tax_information.norway_additional_info.peppol_id #=> String
+    #   resp.tax_registration.additional_tax_information.new_zealand_additional_info.peppol_id #=> String
+    #   resp.tax_registration.status_reason.code #=> String
+    #   resp.tax_registration.status_reason.message #=> String
     #   resp.tax_registration.legal_address.address_line_1 #=> String
     #   resp.tax_registration.legal_address.address_line_2 #=> String
     #   resp.tax_registration.legal_address.address_line_3 #=> String
@@ -1395,7 +1489,7 @@ module Aws::TaxSettings
     #   resp.account_details #=> Array
     #   resp.account_details[0].account_id #=> String
     #   resp.account_details[0].tax_registration.registration_id #=> String
-    #   resp.account_details[0].tax_registration.registration_type #=> String, one of "VAT", "GST", "CPF", "CNPJ", "SST", "TIN", "NRIC", "PAN", "NIP"
+    #   resp.account_details[0].tax_registration.registration_type #=> String, one of "VAT", "GST", "CPF", "CNPJ", "SST", "TIN", "NRIC", "PAN", "NIP", "CUIT", "CDI", "RUT", "NIE", "CI"
     #   resp.account_details[0].tax_registration.legal_name #=> String
     #   resp.account_details[0].tax_registration.status #=> String, one of "Verified", "Pending", "Deleted", "Rejected"
     #   resp.account_details[0].tax_registration.sector #=> String, one of "Business", "Individual", "Government"
@@ -1445,6 +1539,7 @@ module Aws::TaxSettings
     #   resp.account_details[0].tax_registration.additional_tax_information.vietnam_additional_info.electronic_transaction_code_number #=> String
     #   resp.account_details[0].tax_registration.additional_tax_information.vietnam_additional_info.payment_voucher_number #=> String
     #   resp.account_details[0].tax_registration.additional_tax_information.vietnam_additional_info.payment_voucher_number_date #=> String
+    #   resp.account_details[0].tax_registration.additional_tax_information.vietnam_additional_info.vat_credit_method #=> Boolean
     #   resp.account_details[0].tax_registration.additional_tax_information.egypt_additional_info.unique_identification_number #=> String
     #   resp.account_details[0].tax_registration.additional_tax_information.egypt_additional_info.unique_identification_number_expiration_date #=> String
     #   resp.account_details[0].tax_registration.additional_tax_information.greece_additional_info.contracting_authority_code #=> String
@@ -1463,6 +1558,19 @@ module Aws::TaxSettings
     #   resp.account_details[0].tax_registration.additional_tax_information.mexico_additional_info.tax_regime #=> String
     #   resp.account_details[0].tax_registration.additional_tax_information.mexico_additional_info.tax_regime_full_name #=> String
     #   resp.account_details[0].tax_registration.additional_tax_information.mexico_additional_info.cfdi_usage_code #=> String
+    #   resp.account_details[0].tax_registration.additional_tax_information.colombia_additional_info.responsibility_codes #=> Array
+    #   resp.account_details[0].tax_registration.additional_tax_information.colombia_additional_info.responsibility_codes[0] #=> String
+    #   resp.account_details[0].tax_registration.additional_tax_information.colombia_additional_info.taxpayer_type_code #=> String
+    #   resp.account_details[0].tax_registration.additional_tax_information.colombia_additional_info.issue_date #=> String
+    #   resp.account_details[0].tax_registration.additional_tax_information.united_arab_emirates_additional_info.tax_registration_number_type #=> String, one of "VATTaxRegistrationNumber", "LocalTaxRegistrationNumber"
+    #   resp.account_details[0].tax_registration.additional_tax_information.united_arab_emirates_additional_info.peppol_id #=> String
+    #   resp.account_details[0].tax_registration.additional_tax_information.united_arab_emirates_additional_info.trade_license_number #=> String
+    #   resp.account_details[0].tax_registration.additional_tax_information.united_arab_emirates_additional_info.emirates_id #=> String
+    #   resp.account_details[0].tax_registration.additional_tax_information.norway_additional_info.tax_registration_number_type #=> String, one of "TaxRegistrationNumber", "LocalRegistrationNumber"
+    #   resp.account_details[0].tax_registration.additional_tax_information.norway_additional_info.peppol_id #=> String
+    #   resp.account_details[0].tax_registration.additional_tax_information.new_zealand_additional_info.peppol_id #=> String
+    #   resp.account_details[0].tax_registration.status_reason.code #=> String
+    #   resp.account_details[0].tax_registration.status_reason.message #=> String
     #   resp.account_details[0].tax_registration.jurisdiction.state_or_region #=> String
     #   resp.account_details[0].tax_registration.jurisdiction.country_code #=> String
     #   resp.account_details[0].tax_inheritance_details.parent_entity_id #=> String
@@ -1614,6 +1722,13 @@ module Aws::TaxSettings
     # To call this API operation for specific countries, see the following
     # country-specific requirements.
     #
+    # **Argentina**
+    #
+    # * `RegistrationType` valid values are `CUIT` (Clave Única de
+    #   Identificación Tributaria) and `CDI` (Clave de Identificación).
+    #
+    # ^
+    #
     # **Bangladesh**
     #
     # * You must specify the tax registration certificate document in the
@@ -1752,6 +1867,30 @@ module Aws::TaxSettings
     #
     # ^
     #
+    # **New Zealand**
+    #
+    # * You can optionally specify the `sector`. Valid values are
+    #   `Government` and `Business`. Non-government customers use
+    #   `Business`.
+    #
+    # * If your `sector` is `Government`, you can optionally specify the
+    #   `peppolId` in the `newZealandAdditionalInfo` field of the
+    #   `additionalTaxInformation` object.
+    #
+    # **Norway**
+    #
+    # * You can optionally specify the `taxRegistrationNumberType` in the
+    #   `norwayAdditionalInfo` field of the `additionalTaxInformation`
+    #   object. Valid values are `TaxRegistrationNumber` and
+    #   `LocalRegistrationNumber`. Use `LocalRegistrationNumber` to register
+    #   a Norwegian Organisation Number for a business that isn't VAT
+    #   registered. In that case, the `registrationId` must be the 9-digit
+    #   Organisation Number.
+    #
+    # * You can optionally specify the `peppolId` in the
+    #   `norwayAdditionalInfo` field of the `additionalTaxInformation`
+    #   object.
+    #
     # **Saudi Arabia**
     #
     # * For `address`, you must specify `addressLine3`.
@@ -1809,6 +1948,40 @@ module Aws::TaxSettings
     # * The sector valid values are `Business` and `Individual`.
     #
     # ^
+    #
+    # **United Arab Emirates**
+    #
+    # * You must specify the `taxRegistrationNumberType` in the
+    #   `unitedArabEmiratesAdditionalInfo` field of the
+    #   `additionalTaxInformation` object. Valid values are
+    #   `VATTaxRegistrationNumber` and `LocalTaxRegistrationNumber`
+    #   (Corporate Tax).
+    #
+    # * You can optionally specify the `peppolId`, `tradeLicenseNumber`, and
+    #   `emiratesId` in the `unitedArabEmiratesAdditionalInfo` field.
+    #
+    # **Uruguay**
+    #
+    # * `RegistrationType` valid values are `RUT` (Registro Único
+    #   Tributario), `NIE` (Numero de Identificacion del Extranjero), and
+    #   `CI` (Cedula Identidad).
+    #
+    # ^
+    #
+    # **Vietnam**
+    #
+    # * You must specify the `vatCreditMethod` in the
+    #   `vietnamAdditionalInfo` field of the `additionalTaxInformation`
+    #   object.
+    #
+    # * If `vatCreditMethod` is `true`, the sector must be `Business`, and
+    #   you must specify the `enterpriseIdentificationNumber`,
+    #   `electronicTransactionCodeNumber`, `paymentVoucherNumber`, and
+    #   `paymentVoucherNumberDate`.
+    #
+    # * If `vatCreditMethod` is `false`, the sector must be `Individual`,
+    #   and you must not specify those four fields. The tax registration
+    #   number can also be 12 digits.
     #
     # **Philippines**
     #
@@ -1894,7 +2067,7 @@ module Aws::TaxSettings
     #     account_id: "AccountId",
     #     tax_registration_entry: { # required
     #       registration_id: "RegistrationId", # required
-    #       registration_type: "VAT", # required, accepts VAT, GST, CPF, CNPJ, SST, TIN, NRIC, PAN, NIP
+    #       registration_type: "VAT", # required, accepts VAT, GST, CPF, CNPJ, SST, TIN, NRIC, PAN, NIP, CUIT, CDI, RUT, NIE, CI
     #       legal_name: "LegalName",
     #       legal_address: {
     #         address_line_1: "AddressLine1",
@@ -1977,6 +2150,7 @@ module Aws::TaxSettings
     #           electronic_transaction_code_number: "ElectronicTransactionCodeNumber",
     #           payment_voucher_number: "PaymentVoucherNumber",
     #           payment_voucher_number_date: "DateString",
+    #           vat_credit_method: false,
     #         },
     #         egypt_additional_info: {
     #           unique_identification_number: "UniqueIdentificationNumber",
@@ -2015,6 +2189,19 @@ module Aws::TaxSettings
     #           tax_regime: "MexicoTaxRegimeCode",
     #           tax_regime_full_name: "MexicoTaxRegimeFullName",
     #           cfdi_usage_code: "MexicoCfdiUsageCode",
+    #         },
+    #         united_arab_emirates_additional_info: {
+    #           tax_registration_number_type: "VATTaxRegistrationNumber", # accepts VATTaxRegistrationNumber, LocalTaxRegistrationNumber
+    #           peppol_id: "UaePeppolId",
+    #           trade_license_number: "UaeTradeLicenseNumber",
+    #           emirates_id: "UaeEmiratesId",
+    #         },
+    #         norway_additional_info: {
+    #           tax_registration_number_type: "TaxRegistrationNumber", # accepts TaxRegistrationNumber, LocalRegistrationNumber
+    #           peppol_id: "NorwayPeppolId",
+    #         },
+    #         new_zealand_additional_info: {
+    #           peppol_id: "NewZealandPeppolId",
     #         },
     #       },
     #       verification_details: {
@@ -2067,7 +2254,7 @@ module Aws::TaxSettings
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-taxsettings'
-      context[:gem_version] = '1.52.0'
+      context[:gem_version] = '1.60.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

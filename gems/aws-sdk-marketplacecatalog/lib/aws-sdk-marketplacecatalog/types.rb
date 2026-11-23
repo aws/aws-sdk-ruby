@@ -55,6 +55,51 @@ module Aws::MarketplaceCatalog
       include Aws::Structure
     end
 
+    # An additional resource for a listing, with its type, display text, and
+    # URL.
+    #
+    # @!attribute [rw] type
+    #   The type of the resource. Currently, the only value that the service
+    #   returns is `Link`.
+    #   @return [String]
+    #
+    # @!attribute [rw] text
+    #   The text to display for the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] url
+    #   The URL of the resource.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/AdditionalResource AWS API Documentation
+    #
+    class AdditionalResource < Struct.new(
+      :type,
+      :text,
+      :url)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A proposed set of additional resources for a listing.
+    #
+    # @!attribute [rw] value
+    #   The proposed additional resources.
+    #   @return [Array<Types::AdditionalResource>]
+    #
+    # @!attribute [rw] rationale
+    #   Why this alternative is recommended.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/AdditionalResourcesAlternative AWS API Documentation
+    #
+    class AdditionalResourcesAlternative < Struct.new(
+      :value,
+      :rationale)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Object that allows filtering on entity id of an AMI product.
     #
     # @!attribute [rw] value_list
@@ -277,11 +322,19 @@ module Aws::MarketplaceCatalog
     #   want to list.
     #   @return [String]
     #
+    # @!attribute [rw] entity_ids
+    #   A list of up to 50 entity IDs whose assessments you want to list.
+    #   The response includes only the latest published assessment of each
+    #   entity. You must also specify `FrameworkId` in the request, and you
+    #   can't combine `EntityIds` with `EntityId` or `ChangeSetId`.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/AssessmentTargetFilter AWS API Documentation
     #
     class AssessmentTargetFilter < Struct.new(
       :entity_id,
-      :change_set_id)
+      :change_set_id,
+      :entity_ids)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -386,6 +439,25 @@ module Aws::MarketplaceCatalog
     class CancelChangeSetResponse < Struct.new(
       :change_set_id,
       :change_set_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A proposed set of case studies for a solution.
+    #
+    # @!attribute [rw] value
+    #   The proposed case studies.
+    #   @return [Array<Types::ListingCaseStudy>]
+    #
+    # @!attribute [rw] rationale
+    #   Why this set of case studies fits the solution.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/CaseStudiesAlternative AWS API Documentation
+    #
+    class CaseStudiesAlternative < Struct.new(
+      :value,
+      :rationale)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -755,6 +827,95 @@ module Aws::MarketplaceCatalog
       include Aws::Structure
     end
 
+    # The proposed values for a listing field. Exactly one member is set,
+    # depending on the field. The list in that member is empty if the status
+    # of the recommendation is `INSUFFICIENT_CONTEXT`.
+    #
+    # @note ContentAlternatives is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of ContentAlternatives corresponding to the set member.
+    #
+    # @!attribute [rw] text
+    #   The proposed values for a text field, such as `ProductTitle` or
+    #   `LongDescription`. You can have up to 3 alternatives.
+    #   @return [Array<Types::TextAlternative>]
+    #
+    # @!attribute [rw] text_list
+    #   The proposed values for `Highlights`, `SearchKeywords`, or
+    #   `Categories`. You can have up to 3 alternatives.
+    #   @return [Array<Types::TextListAlternative>]
+    #
+    # @!attribute [rw] additional_resources
+    #   The proposed values for `AdditionalResources`. You can have up to 3
+    #   alternatives.
+    #   @return [Array<Types::AdditionalResourcesAlternative>]
+    #
+    # @!attribute [rw] use_cases
+    #   The proposed values for `UseCases`. You can have up to 3
+    #   alternatives.
+    #   @return [Array<Types::UseCasesAlternative>]
+    #
+    # @!attribute [rw] case_studies
+    #   The proposed values for `CaseStudies`. You can have up to 3
+    #   alternatives.
+    #   @return [Array<Types::CaseStudiesAlternative>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/ContentAlternatives AWS API Documentation
+    #
+    class ContentAlternatives < Struct.new(
+      :text,
+      :text_list,
+      :additional_resources,
+      :use_cases,
+      :case_studies,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Text < ContentAlternatives; end
+      class TextList < ContentAlternatives; end
+      class AdditionalResources < ContentAlternatives; end
+      class UseCases < ContentAlternatives; end
+      class CaseStudies < ContentAlternatives; end
+      class Unknown < ContentAlternatives; end
+    end
+
+    # A recommendation for a listing field.
+    #
+    # @!attribute [rw] status
+    #   The status of the recommendation. Valid values are:
+    #
+    #   * `GENERATED` - The service proposed values for the field.
+    #
+    #   * `INSUFFICIENT_CONTEXT` - The service couldn't propose a value.
+    #     The follow-up questions say what is missing.
+    #   @return [String]
+    #
+    # @!attribute [rw] alternatives
+    #   The proposed values for the field, in ranked order.
+    #   @return [Types::ContentAlternatives]
+    #
+    # @!attribute [rw] follow_up_questions
+    #   Questions that you can answer to get a better recommendation. The
+    #   list is empty if there are none.
+    #   @return [Array<Types::FollowUpQuestion>]
+    #
+    # @!attribute [rw] findings
+    #   The checklist of criteria for the field, in ranked order. It
+    #   includes the criteria that the field passes and the criteria that it
+    #   fails. The list is empty if there are none.
+    #   @return [Array<Types::ListingFinding>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/ContentRecommendation AWS API Documentation
+    #
+    class ContentRecommendation < Struct.new(
+      :status,
+      :alternatives,
+      :follow_up_questions,
+      :findings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The result of evaluating a single control as part of an assessment.
     #
     # @!attribute [rw] control_id
@@ -765,17 +926,34 @@ module Aws::MarketplaceCatalog
     #   The result of the control evaluation.
     #   @return [String]
     #
+    # @!attribute [rw] verification_source
+    #   Where the result of the control came from. This value doesn't say
+    #   whether the control passed. A control that you attested to can still
+    #   have a result of `PASS`. Valid values are:
+    #
+    #   * `AWS_VERIFIED` - AWS evaluated the control.
+    #
+    #   * `SELF_ATTESTED` - You attested to the result of the control.
+    #   @return [String]
+    #
     # @!attribute [rw] errors
     #   An array of `ControlError` objects associated with the control
     #   evaluation.
     #   @return [Array<Types::ControlError>]
+    #
+    # @!attribute [rw] control_summary
+    #   A summary of what the control produced, such as recommendations for
+    #   the listing.
+    #   @return [Types::ControlSummary]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/ControlAssessment AWS API Documentation
     #
     class ControlAssessment < Struct.new(
       :control_id,
       :control_assessment_result,
-      :errors)
+      :verification_source,
+      :errors,
+      :control_summary)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -803,6 +981,50 @@ module Aws::MarketplaceCatalog
       :scope)
       SENSITIVE = []
       include Aws::Structure
+    end
+
+    # A control to run as part of an assessment, and the input to run it
+    # with.
+    #
+    # @!attribute [rw] control_id
+    #   The unique identifier of the control to run.
+    #   @return [String]
+    #
+    # @!attribute [rw] input
+    #   Optional. The input for the control, as a JSON document. The fields
+    #   that a control accepts depend on the control.
+    #   @return [Hash,Array,String,Numeric,Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/ControlInput AWS API Documentation
+    #
+    class ControlInput < Struct.new(
+      :control_id,
+      :input)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A summary of what a control produced. Exactly one member is set,
+    # corresponding to the kind of control.
+    #
+    # @note ControlSummary is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of ControlSummary corresponding to the set member.
+    #
+    # @!attribute [rw] listing_recommendations
+    #   The recommendations that a listing recommendations control produced
+    #   for the listing.
+    #   @return [Types::ListingRecommendations]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/ControlSummary AWS API Documentation
+    #
+    class ControlSummary < Struct.new(
+      :listing_recommendations,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class ListingRecommendations < ControlSummary; end
+      class Unknown < ControlSummary; end
     end
 
     # Object that allows filtering on entity id of a data product.
@@ -1722,6 +1944,63 @@ module Aws::MarketplaceCatalog
       include Aws::Structure
     end
 
+    # A recommended AWS Marketplace feature for a listing.
+    #
+    # @!attribute [rw] feature_id
+    #   The feature that is recommended. Valid values are
+    #   `REQUEST_PRIVATE_OFFER`, `REQUEST_A_DEMO`, `PROMOTIONAL_MEDIA`,
+    #   `FREE_TRIAL`, and `QUICK_LAUNCH`.
+    #   @return [String]
+    #
+    # @!attribute [rw] action
+    #   What you should do. It might contain a link to the console.
+    #   @return [String]
+    #
+    # @!attribute [rw] rationale
+    #   Why the feature is recommended.
+    #   @return [String]
+    #
+    # @!attribute [rw] severity
+    #   How much the recommendation blocks the listing. Valid values are
+    #   `BLOCKING` and `ADVISORY`.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   Whether the listing has the feature. Valid values are:
+    #
+    #   * `PASS` - The listing already has the feature.
+    #
+    #   * `FAIL` - The feature is one to turn on.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/FeatureRecommendation AWS API Documentation
+    #
+    class FeatureRecommendation < Struct.new(
+      :feature_id,
+      :action,
+      :rationale,
+      :severity,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The feature recommendations for a listing, for a product or a
+    # solution.
+    #
+    # @!attribute [rw] recommendations
+    #   The recommended features, in ranked order. The list has at most one
+    #   entry for each feature and up to 5 entries.
+    #   @return [Array<Types::FeatureRecommendation>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/FeatureRecommendations AWS API Documentation
+    #
+    class FeatureRecommendations < Struct.new(
+      :recommendations)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A filter object, used to optionally filter results from calls to the
     # `ListEntities` and `ListChangeSets` actions.
     #
@@ -1765,6 +2044,26 @@ module Aws::MarketplaceCatalog
     class Filter < Struct.new(
       :name,
       :value_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A question that you can answer to get a better recommendation, and the
+    # reason that it's asked.
+    #
+    # @!attribute [rw] question
+    #   The question to answer.
+    #   @return [String]
+    #
+    # @!attribute [rw] justification
+    #   Why the question is asked.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/FollowUpQuestion AWS API Documentation
+    #
+    class FollowUpQuestion < Struct.new(
+      :question,
+      :justification)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1815,11 +2114,23 @@ module Aws::MarketplaceCatalog
     #   framework.
     #   @return [Types::ContainerSecuritySummary]
     #
+    # @!attribute [rw] listing_quality_summary
+    #   The details of the resource assessed under the Listing Quality
+    #   framework.
+    #   @return [Types::ListingQualitySummary]
+    #
+    # @!attribute [rw] listing_recommendations_summary
+    #   The details of the resource assessed under the Listing
+    #   Recommendations framework.
+    #   @return [Types::ListingRecommendationsSummary]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/FrameworkSummary AWS API Documentation
     #
     class FrameworkSummary < Struct.new(
       :ami_security_summary,
       :container_security_summary,
+      :listing_quality_summary,
+      :listing_recommendations_summary,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
@@ -1827,6 +2138,8 @@ module Aws::MarketplaceCatalog
 
       class AmiSecuritySummary < FrameworkSummary; end
       class ContainerSecuritySummary < FrameworkSummary; end
+      class ListingQualitySummary < FrameworkSummary; end
+      class ListingRecommendationsSummary < FrameworkSummary; end
       class Unknown < FrameworkSummary; end
     end
 
@@ -1877,7 +2190,8 @@ module Aws::MarketplaceCatalog
     # @!attribute [rw] framework_id
     #   The unique identifier of a framework. When specified, only
     #   assessments performed against this framework are returned. For
-    #   example, `AMISecurity`.
+    #   example, `AMISecurity`. Required when you use `EntityIds` in
+    #   `AssessmentTargetFilter`.
     #   @return [String]
     #
     # @!attribute [rw] assessment_target_filter
@@ -2099,6 +2413,201 @@ module Aws::MarketplaceCatalog
     class ListTagsForResourceResponse < Struct.new(
       :resource_arn,
       :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A recommended case study.
+    #
+    # @!attribute [rw] id
+    #   The ID of the case study entity. Identify a case study by this ID
+    #   and not by `Title`, which you can edit.
+    #   @return [String]
+    #
+    # @!attribute [rw] title
+    #   The title of the case study.
+    #   @return [String]
+    #
+    # @!attribute [rw] rationale
+    #   Why this case study was selected.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/ListingCaseStudy AWS API Documentation
+    #
+    class ListingCaseStudy < Struct.new(
+      :id,
+      :title,
+      :rationale)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # One row of the checklist of criteria for a listing field. A row is
+    # either a criterion that the field already meets or advice for a
+    # criterion that it doesn't.
+    #
+    # @!attribute [rw] action
+    #   What you should do to meet the criterion.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   What the criterion asks for. The text is the same for every listing.
+    #   The reasoning for a specific listing is in the rationale of the
+    #   alternatives.
+    #   @return [String]
+    #
+    # @!attribute [rw] severity
+    #   How much the criterion blocks the listing. It is set on every row.
+    #   For a row with a status of `PASS`, it is the weight of a criterion
+    #   that is already met. Valid values are `BLOCKING` and `ADVISORY`.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The result for the criterion. Valid values are:
+    #
+    #   * `PASS` - The criterion is met and no action is needed.
+    #
+    #   * `FAIL` - The criterion isn't met or wasn't scored.
+    #
+    #   This value is different from the status of the content
+    #   recommendation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/ListingFinding AWS API Documentation
+    #
+    class ListingFinding < Struct.new(
+      :action,
+      :description,
+      :severity,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The details of the resource assessed under the Listing Quality
+    # framework.
+    #
+    # @!attribute [rw] tier
+    #   The quality tier of the listing. Valid values are
+    #   `NEEDS_IMPROVEMENT`, `BASIC`, `STRONG`, and `EXCELLENT`.
+    #   @return [String]
+    #
+    # @!attribute [rw] entity_revision
+    #   The revision of the entity that the tier was evaluated against. To
+    #   check whether the tier is out of date, compare this value with the
+    #   current revision of the entity.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/ListingQualitySummary AWS API Documentation
+    #
+    class ListingQualitySummary < Struct.new(
+      :tier,
+      :entity_revision)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The recommendations that a listing recommendations control produced.
+    # Exactly one member is set, corresponding to the control: content
+    # recommendations for a product, content recommendations for a solution,
+    # or feature recommendations.
+    #
+    # @note ListingRecommendations is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of ListingRecommendations corresponding to the set member.
+    #
+    # @!attribute [rw] product_content_recommendations
+    #   The content recommendations for a product listing.
+    #   @return [Types::ProductContentRecommendations]
+    #
+    # @!attribute [rw] solution_content_recommendations
+    #   The content recommendations for a solution listing.
+    #   @return [Types::SolutionContentRecommendations]
+    #
+    # @!attribute [rw] feature_recommendations
+    #   The recommendations for AWS Marketplace features to use with the
+    #   listing, for a product or a solution.
+    #   @return [Types::FeatureRecommendations]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/ListingRecommendations AWS API Documentation
+    #
+    class ListingRecommendations < Struct.new(
+      :product_content_recommendations,
+      :solution_content_recommendations,
+      :feature_recommendations,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class ProductContentRecommendations < ListingRecommendations; end
+      class SolutionContentRecommendations < ListingRecommendations; end
+      class FeatureRecommendations < ListingRecommendations; end
+      class Unknown < ListingRecommendations; end
+    end
+
+    # The details of the resource assessed under the Listing Recommendations
+    # framework.
+    #
+    # @!attribute [rw] tier
+    #   The quality tier of the listing. Valid values are
+    #   `NEEDS_IMPROVEMENT`, `BASIC`, `STRONG`, and `EXCELLENT`.
+    #   @return [String]
+    #
+    # @!attribute [rw] entity_revision
+    #   The revision of the entity that the recommendations were generated
+    #   against. To check whether the recommendations are out of date,
+    #   compare this value with the current revision of the entity.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/ListingRecommendationsSummary AWS API Documentation
+    #
+    class ListingRecommendationsSummary < Struct.new(
+      :tier,
+      :entity_revision)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A use case from the AWS Marketplace use case taxonomy.
+    #
+    # @!attribute [rw] id
+    #   The unique identifier of the use case.
+    #   @return [String]
+    #
+    # @!attribute [rw] rank
+    #   The rank of the use case. A rank of 1 is the strongest match. Valid
+    #   values range from 1 to 5.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] name
+    #   The name of the use case.
+    #   @return [String]
+    #
+    # @!attribute [rw] group
+    #   The group of the use case in the taxonomy.
+    #   @return [String]
+    #
+    # @!attribute [rw] subgroup
+    #   The subgroup of the use case in the taxonomy.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_case_details
+    #   How the solution serves the use case.
+    #   @return [String]
+    #
+    # @!attribute [rw] rationale
+    #   Why this use case is recommended.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/ListingUseCase AWS API Documentation
+    #
+    class ListingUseCase < Struct.new(
+      :id,
+      :rank,
+      :name,
+      :group,
+      :subgroup,
+      :use_case_details,
+      :rationale)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2375,6 +2884,15 @@ module Aws::MarketplaceCatalog
     #    </note>
     #   @return [Types::OfferResaleAuthorizationIdFilter]
     #
+    # @!attribute [rw] subsidiary_authorization_id
+    #   A filter that matches offers by the ID of the subsidiary
+    #   authorization that they were created from.
+    #
+    #   <note markdown="1"> Not all offers have a `SubsidiaryAuthorizationId`.
+    #
+    #    </note>
+    #   @return [Types::OfferSubsidiaryAuthorizationIdFilter]
+    #
     # @!attribute [rw] release_date
     #   Allows filtering on the `ReleaseDate` of an offer.
     #   @return [Types::OfferReleaseDateFilter]
@@ -2422,6 +2940,7 @@ module Aws::MarketplaceCatalog
       :name,
       :product_id,
       :resale_authorization_id,
+      :subsidiary_authorization_id,
       :release_date,
       :availability_end_date,
       :buyer_accounts,
@@ -2849,6 +3368,26 @@ module Aws::MarketplaceCatalog
       include Aws::Structure
     end
 
+    # A filter that matches offers by the ID of the subsidiary authorization
+    # they were created from.
+    #
+    # <note markdown="1"> Not all offers have a `SubsidiaryAuthorizationId`.
+    #
+    #  </note>
+    #
+    # @!attribute [rw] value_list
+    #   A list of subsidiary authorization IDs to filter offers by. You can
+    #   include up to 10 subsidiary authorization IDs in this list.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/OfferSubsidiaryAuthorizationIdFilter AWS API Documentation
+    #
+    class OfferSubsidiaryAuthorizationIdFilter < Struct.new(
+      :value_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Summarized information about an offer.
     #
     # @!attribute [rw] name
@@ -2861,6 +3400,12 @@ module Aws::MarketplaceCatalog
     #
     # @!attribute [rw] resale_authorization_id
     #   The ResaleAuthorizationId of the offer.
+    #   @return [String]
+    #
+    # @!attribute [rw] subsidiary_authorization_id
+    #   The ID of the subsidiary authorization that the offer was created
+    #   from. The ID begins with `subauthz-` followed by 13 alphanumeric
+    #   characters.
     #   @return [String]
     #
     # @!attribute [rw] release_date
@@ -2905,6 +3450,7 @@ module Aws::MarketplaceCatalog
       :name,
       :product_id,
       :resale_authorization_id,
+      :subsidiary_authorization_id,
       :release_date,
       :availability_end_date,
       :buyer_accounts,
@@ -2962,6 +3508,64 @@ module Aws::MarketplaceCatalog
       include Aws::Structure
     end
 
+    # The content recommendations for a product listing, with one member for
+    # each listing field. A member is absent if nothing is recommended for
+    # that field.
+    #
+    # @!attribute [rw] product_title
+    #   The recommendation for the product title.
+    #   @return [Types::ContentRecommendation]
+    #
+    # @!attribute [rw] short_description
+    #   The recommendation for the short description.
+    #   @return [Types::ContentRecommendation]
+    #
+    # @!attribute [rw] long_description
+    #   The recommendation for the long description.
+    #   @return [Types::ContentRecommendation]
+    #
+    # @!attribute [rw] support_description
+    #   The recommendation for the support description.
+    #   @return [Types::ContentRecommendation]
+    #
+    # @!attribute [rw] highlights
+    #   The recommendation for the highlights.
+    #   @return [Types::ContentRecommendation]
+    #
+    # @!attribute [rw] search_keywords
+    #   The recommendation for the search keywords.
+    #   @return [Types::ContentRecommendation]
+    #
+    # @!attribute [rw] categories
+    #   The recommendation for the categories.
+    #   @return [Types::ContentRecommendation]
+    #
+    # @!attribute [rw] additional_resources
+    #   The recommendation for the additional resources. Each alternative
+    #   has up to 3 resources.
+    #   @return [Types::ContentRecommendation]
+    #
+    # @!attribute [rw] citations
+    #   The sources that the recommendations are based on. You can have up
+    #   to 5 sources. The list is empty if there are none.
+    #   @return [Array<Types::RecommendationCitation>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/ProductContentRecommendations AWS API Documentation
+    #
+    class ProductContentRecommendations < Struct.new(
+      :product_title,
+      :short_description,
+      :long_description,
+      :support_description,
+      :highlights,
+      :search_keywords,
+      :categories,
+      :additional_resources,
+      :citations)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the entity resource you want to
     #   associate with a resource policy.
@@ -2983,6 +3587,20 @@ module Aws::MarketplaceCatalog
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/PutResourcePolicyResponse AWS API Documentation
     #
     class PutResourcePolicyResponse < Aws::EmptyStructure; end
+
+    # A source that the recommendations are based on.
+    #
+    # @!attribute [rw] url
+    #   The HTTPS URL of the source.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/RecommendationCitation AWS API Documentation
+    #
+    class RecommendationCitation < Struct.new(
+      :url)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # Allows filtering on `AvailabilityEndDate` of a ResaleAuthorization.
     #
@@ -3754,6 +4372,60 @@ module Aws::MarketplaceCatalog
       include Aws::Structure
     end
 
+    # The content recommendations for a solution listing, with one member
+    # for each listing field. A member is absent if nothing is recommended
+    # for that field.
+    #
+    # @!attribute [rw] title
+    #   The recommendation for the external title of the solution.
+    #   @return [Types::ContentRecommendation]
+    #
+    # @!attribute [rw] short_description
+    #   The recommendation for the value proposition of the solution.
+    #   @return [Types::ContentRecommendation]
+    #
+    # @!attribute [rw] long_description
+    #   The recommendation for the long description of the solution.
+    #   @return [Types::ContentRecommendation]
+    #
+    # @!attribute [rw] integration_details
+    #   The recommendation for the integration details of the solution.
+    #   @return [Types::ContentRecommendation]
+    #
+    # @!attribute [rw] additional_resources
+    #   The recommendation for the additional resources. Each alternative
+    #   has up to 8 resources.
+    #   @return [Types::ContentRecommendation]
+    #
+    # @!attribute [rw] use_cases
+    #   The recommendation for the use cases of the solution.
+    #   @return [Types::ContentRecommendation]
+    #
+    # @!attribute [rw] case_studies
+    #   The recommendation for the case studies of the solution. Each
+    #   alternative has up to 20 case studies.
+    #   @return [Types::ContentRecommendation]
+    #
+    # @!attribute [rw] citations
+    #   The sources that the recommendations are based on. You can have up
+    #   to 5 sources. The list is empty if there are none.
+    #   @return [Array<Types::RecommendationCitation>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/SolutionContentRecommendations AWS API Documentation
+    #
+    class SolutionContentRecommendations < Struct.new(
+      :title,
+      :short_description,
+      :long_description,
+      :integration_details,
+      :additional_resources,
+      :use_cases,
+      :case_studies,
+      :citations)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An object that contains two attributes, `SortBy` and `SortOrder`.
     #
     # @!attribute [rw] sort_by
@@ -3775,6 +4447,62 @@ module Aws::MarketplaceCatalog
     class Sort < Struct.new(
       :sort_by,
       :sort_order)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] catalog
+    #   The catalog related to the request. Fixed value: `AWSMarketplace`
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   A unique token to identify the request to ensure idempotency.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] framework_id
+    #   The unique identifier of the framework that defines the controls to
+    #   run.
+    #   @return [String]
+    #
+    # @!attribute [rw] entity_id
+    #   The unique ID of the product entity to assess.
+    #   @return [String]
+    #
+    # @!attribute [rw] controls
+    #   The controls to provide input for. Every control in the framework is
+    #   included in the assessment, and a control that you don't specify
+    #   gets no input. You can specify 1–100 controls.
+    #   @return [Array<Types::ControlInput>]
+    #
+    # @!attribute [rw] tags
+    #   A map of tags to apply to the assessment when you create it. Each
+    #   tag is a key-value pair. You can specify 1–200 tags.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/StartAssessmentRequest AWS API Documentation
+    #
+    class StartAssessmentRequest < Struct.new(
+      :catalog,
+      :client_token,
+      :framework_id,
+      :entity_id,
+      :controls,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] assessment_id
+    #   The unique ID of the assessment that was started.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/StartAssessmentResponse AWS API Documentation
+    #
+    class StartAssessmentResponse < Struct.new(
+      :assessment_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4223,6 +4951,45 @@ module Aws::MarketplaceCatalog
     #
     class TagResourceResponse < Aws::EmptyStructure; end
 
+    # A proposed text value for a listing field.
+    #
+    # @!attribute [rw] value
+    #   The proposed text. The limit of the field itself, such as 255
+    #   characters for a title, applies.
+    #   @return [String]
+    #
+    # @!attribute [rw] rationale
+    #   Why this alternative is recommended.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/TextAlternative AWS API Documentation
+    #
+    class TextAlternative < Struct.new(
+      :value,
+      :rationale)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A proposed list of text values for a listing field.
+    #
+    # @!attribute [rw] value
+    #   The proposed list of text values. The list has 1–15 items.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] rationale
+    #   Why this alternative is recommended.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/TextListAlternative AWS API Documentation
+    #
+    class TextListAlternative < Struct.new(
+      :value,
+      :rationale)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Too many requests.
     #
     # HTTP status code: 429
@@ -4260,6 +5027,25 @@ module Aws::MarketplaceCatalog
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/UntagResourceResponse AWS API Documentation
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
+
+    # A proposed set of use cases for a solution.
+    #
+    # @!attribute [rw] value
+    #   The proposed use cases, in ranked order.
+    #   @return [Array<Types::ListingUseCase>]
+    #
+    # @!attribute [rw] rationale
+    #   Why this alternative is recommended.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/UseCasesAlternative AWS API Documentation
+    #
+    class UseCasesAlternative < Struct.new(
+      :value,
+      :rationale)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # An error occurred during validation.
     #

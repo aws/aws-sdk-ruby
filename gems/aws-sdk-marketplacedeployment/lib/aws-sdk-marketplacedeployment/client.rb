@@ -264,7 +264,8 @@ module Aws::MarketplaceDeployment
     #     An integer representing the maximum number attempts that will be made for
     #     a single request, including the initial attempt.  For example,
     #     setting this value to 5 will result in a request being retried up to
-    #     4 times. Used in `standard` and `adaptive` retry modes.
+    #     4 times. Used in `standard` and `adaptive` retry modes. Defaults to 3,
+    #     except for DynamoDB and DynamoDB Streams, which default to 4.
     #
     #   @option options [String] :profile ("default")
     #     Used when loading credentials from the shared credentials file at `HOME/.aws/credentials`.
@@ -327,15 +328,15 @@ module Aws::MarketplaceDeployment
     #     used by the default backoff function. This option is only used in the
     #     `legacy` retry mode.
     #
-    #   @option options [String] :retry_mode ("legacy")
+    #   @option options [String] :retry_mode ("standard")
     #     Specifies which retry algorithm to use. Values are:
     #
-    #     * `legacy` - The pre-existing retry behavior. This is the default
-    #       value if no retry mode is provided.
+    #     * `legacy` - The pre-existing retry behavior.
     #
     #     * `standard` - A standardized set of retry rules across the AWS SDKs.
     #       This includes support for retry quotas, which limit the number of
-    #       unsuccessful retries a client can make.
+    #       unsuccessful retries a client can make. This is the default value
+    #       if no retry mode is provided.
     #
     #     * `adaptive` - A retry mode that includes all the functionality of
     #       `standard` mode along with automatic client side throttling.
@@ -481,16 +482,391 @@ module Aws::MarketplaceDeployment
 
     # @!group API Operations
 
-    # Lists all tags that have been added to a deployment parameter
-    # resource.
+    # Returns the active deployment configuration for a product and delivery
+    # option. The active deployment configuration is the configuration from
+    # the most recent successful deployment configuration job. The seller
+    # that owns the product and buyers entitled to the product can call this
+    # operation.
+    #
+    # If the product and delivery option have no active deployment
+    # configuration, the operation returns a `ResourceNotFoundException`.
+    #
+    # @option params [required, String] :catalog
+    #   The catalog related to the request. Fixed value: `AWSMarketplace`
+    #
+    # @option params [required, String] :product_id
+    #   The ID of the AWS Marketplace product, for example
+    #   `prod-1234567890abc`.
+    #
+    # @option params [required, String] :delivery_option_type
+    #   The delivery option type of the deployment configuration.
+    #
+    # @return [Types::GetDeploymentConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetDeploymentConfigurationResponse#configuration #configuration} => Types::DeploymentConfigurationDetail
+    #
+    #
+    # @example Example: Get the active deployment configuration
+    #
+    #   # Returns only the current active configuration for the owning seller or an entitled buyer.
+    #
+    #   resp = client.get_deployment_configuration({
+    #     catalog: "AWSMarketplace", 
+    #     delivery_option_type: "data-as-a-service", 
+    #     product_id: "product-1234", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     configuration: {
+    #       data_as_a_service: {
+    #         fulfillment_url: "https://example.com/daas/register", 
+    #       }, 
+    #     }, 
+    #   }
+    #
+    # @example Example: Get active configuration fails when none exists
+    #
+    #   # If the product and delivery option have no active deployment configuration, the operation returns a
+    #   # ResourceNotFoundException.
+    #
+    #   resp = client.get_deployment_configuration({
+    #     catalog: "AWSMarketplace", 
+    #     delivery_option_type: "data-as-a-service", 
+    #     product_id: "product-1234", 
+    #   })
+    #
+    # @example Example: Get active configuration fails for an unauthorized caller
+    #
+    #   # If the caller is neither the seller of the product nor a buyer entitled to it, the operation returns an
+    #   # AccessDeniedException.
+    #
+    #   resp = client.get_deployment_configuration({
+    #     catalog: "AWSMarketplace", 
+    #     delivery_option_type: "data-as-a-service", 
+    #     product_id: "product-1234", 
+    #   })
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_deployment_configuration({
+    #     catalog: "Catalog", # required
+    #     product_id: "ResourceId", # required
+    #     delivery_option_type: "data-as-a-service", # required, accepts data-as-a-service
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.configuration.data_as_a_service.fulfillment_url #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-deployment-2023-01-25/GetDeploymentConfiguration AWS API Documentation
+    #
+    # @overload get_deployment_configuration(params = {})
+    # @param [Hash] params ({})
+    def get_deployment_configuration(params = {}, options = {})
+      req = build_request(:get_deployment_configuration, params)
+      req.send_request(options)
+    end
+
+    # Returns the details of a deployment configuration job. Only the seller
+    # that started the job can call this operation.
+    #
+    # If the job doesn't belong to the product and delivery option in the
+    # request path, the operation returns a `ResourceNotFoundException`.
+    #
+    # @option params [required, String] :catalog
+    #   The catalog related to the request. Fixed value: `AWSMarketplace`
+    #
+    # @option params [required, String] :product_id
+    #   The ID of the AWS Marketplace product, for example
+    #   `prod-1234567890abc`.
+    #
+    # @option params [required, String] :delivery_option_type
+    #   The delivery option type of the deployment configuration.
+    #
+    # @option params [required, String] :job_id
+    #   The unique identifier of the deployment configuration job.
+    #
+    # @return [Types::GetDeploymentConfigurationJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetDeploymentConfigurationJobResponse#job_id #job_id} => String
+    #   * {Types::GetDeploymentConfigurationJobResponse#configuration #configuration} => Types::DeploymentConfigurationDetail
+    #   * {Types::GetDeploymentConfigurationJobResponse#status #status} => String
+    #   * {Types::GetDeploymentConfigurationJobResponse#created_at #created_at} => Time
+    #   * {Types::GetDeploymentConfigurationJobResponse#configuration_arn #configuration_arn} => String
+    #   * {Types::GetDeploymentConfigurationJobResponse#ended_at #ended_at} => Time
+    #   * {Types::GetDeploymentConfigurationJobResponse#error_code #error_code} => String
+    #   * {Types::GetDeploymentConfigurationJobResponse#message #message} => String
+    #
+    #
+    # @example Example: Get a succeeded job
+    #
+    #   # A succeeded job includes endedAt and the ARN of the deployment configuration that it published.
+    #
+    #   resp = client.get_deployment_configuration_job({
+    #     catalog: "AWSMarketplace", 
+    #     delivery_option_type: "data-as-a-service", 
+    #     job_id: "1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d", 
+    #     product_id: "product-1234", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     configuration: {
+    #       data_as_a_service: {
+    #         fulfillment_url: "https://example.com/daas/register", 
+    #       }, 
+    #     }, 
+    #     configuration_arn: "arn:aws:aws-marketplace:us-east-1:123456789012:DeploymentConfiguration:catalogs/AWSMarketplace/products/product-1234/delivery-options/data-as-a-service", 
+    #     created_at: Time.parse("2026-09-18T08:52:46.397Z"), 
+    #     ended_at: Time.parse("2026-09-18T08:53:10.001Z"), 
+    #     job_id: "1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d", 
+    #     status: "SUCCEEDED", 
+    #   }
+    #
+    # @example Example: Get a failed job
+    #
+    #   # A failed job includes errorCode, message, and endedAt.
+    #
+    #   resp = client.get_deployment_configuration_job({
+    #     catalog: "AWSMarketplace", 
+    #     delivery_option_type: "data-as-a-service", 
+    #     job_id: "9f8e7d6c5b4a3f2e1d0c9b8a7f6e5d4c", 
+    #     product_id: "product-1234", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     configuration: {
+    #       data_as_a_service: {
+    #         fulfillment_url: "https://example.com/daas/register", 
+    #       }, 
+    #     }, 
+    #     created_at: Time.parse("2026-09-18T08:52:46.397Z"), 
+    #     ended_at: Time.parse("2026-09-18T08:53:05.221Z"), 
+    #     error_code: "FULFILLMENT_URL_UNREACHABLE", 
+    #     job_id: "9f8e7d6c5b4a3f2e1d0c9b8a7f6e5d4c", 
+    #     message: "The fulfillment URL could not be reached. Verify the endpoint is publicly reachable over HTTPS and responding.", 
+    #     status: "FAILED", 
+    #   }
+    #
+    # @example Example: Get job fails when the job isn't found
+    #
+    #   # If the job doesn't exist, or doesn't belong to the product and delivery option in the request path, the operation
+    #   # returns a ResourceNotFoundException.
+    #
+    #   resp = client.get_deployment_configuration_job({
+    #     catalog: "AWSMarketplace", 
+    #     delivery_option_type: "data-as-a-service", 
+    #     job_id: "abcd1234abcd1234abcd1234abcd1234", 
+    #     product_id: "product-1234", 
+    #   })
+    #
+    # @example Example: Get job fails for a caller that didn't start the job
+    #
+    #   # If the job exists but the caller isn't the seller that started it, the operation returns an AccessDeniedException.
+    #
+    #   resp = client.get_deployment_configuration_job({
+    #     catalog: "AWSMarketplace", 
+    #     delivery_option_type: "data-as-a-service", 
+    #     job_id: "1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d", 
+    #     product_id: "product-1234", 
+    #   })
+    #
+    # @example Example: Get job fails for a caller not authorized for the product
+    #
+    #   # When the job does not exist and the caller is not authorized for the product, the result is AccessDeniedException.
+    #
+    #   resp = client.get_deployment_configuration_job({
+    #     catalog: "AWSMarketplace", 
+    #     delivery_option_type: "data-as-a-service", 
+    #     job_id: "abcd1234abcd1234abcd1234abcd1234", 
+    #     product_id: "product-1234", 
+    #   })
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_deployment_configuration_job({
+    #     catalog: "Catalog", # required
+    #     product_id: "ResourceId", # required
+    #     delivery_option_type: "data-as-a-service", # required, accepts data-as-a-service
+    #     job_id: "DeploymentConfigurationJobId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.job_id #=> String
+    #   resp.configuration.data_as_a_service.fulfillment_url #=> String
+    #   resp.status #=> String, one of "IN_PROGRESS", "SUCCEEDED", "FAILED"
+    #   resp.created_at #=> Time
+    #   resp.configuration_arn #=> String
+    #   resp.ended_at #=> Time
+    #   resp.error_code #=> String, one of "FULFILLMENT_URL_UNREACHABLE", "INTERNAL_ERROR", "ENDPOINT_INVALID"
+    #   resp.message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-deployment-2023-01-25/GetDeploymentConfigurationJob AWS API Documentation
+    #
+    # @overload get_deployment_configuration_job(params = {})
+    # @param [Hash] params ({})
+    def get_deployment_configuration_job(params = {}, options = {})
+      req = build_request(:get_deployment_configuration_job, params)
+      req.send_request(options)
+    end
+
+    # Lists the deployment configuration jobs that you started for a product
+    # and delivery option, ordered from newest to oldest. Results are
+    # paginated. Use the `nextToken` parameter to retrieve additional
+    # results.
+    #
+    # If you haven't started any jobs for the product and delivery option,
+    # the operation returns an empty `jobs` list.
+    #
+    # @option params [required, String] :catalog
+    #   The catalog related to the request. Fixed value: `AWSMarketplace`
+    #
+    # @option params [required, String] :product_id
+    #   The ID of the AWS Marketplace product, for example
+    #   `prod-1234567890abc`.
+    #
+    # @option params [required, String] :delivery_option_type
+    #   The delivery option type of the deployment configuration.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of jobs to return in a single page. Valid values
+    #   are 1 through 100. The default is 20.
+    #
+    # @option params [String] :next_token
+    #   The token for the next page of results. Use the value returned in the
+    #   previous response.
+    #
+    # @return [Types::ListDeploymentConfigurationJobsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListDeploymentConfigurationJobsResponse#jobs #jobs} => Array&lt;Types::DeploymentConfigurationJobSummary&gt;
+    #   * {Types::ListDeploymentConfigurationJobsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: List jobs, newest first
+    #
+    #   # Returns the caller's jobs ordered by newest createdAt first, with an optional nextToken when more pages exist.
+    #
+    #   resp = client.list_deployment_configuration_jobs({
+    #     catalog: "AWSMarketplace", 
+    #     delivery_option_type: "data-as-a-service", 
+    #     max_results: 20, 
+    #     product_id: "product-1234", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     jobs: [
+    #       {
+    #         configuration: {
+    #           data_as_a_service: {
+    #             fulfillment_url: "https://example.com/daas/register", 
+    #           }, 
+    #         }, 
+    #         created_at: Time.parse("2026-09-18T09:10:00.000Z"), 
+    #         job_id: "9f8e7d6c5b4a3f2e1d0c9b8a7f6e5d4c", 
+    #         status: "FAILED", 
+    #       }, 
+    #       {
+    #         configuration: {
+    #           data_as_a_service: {
+    #             fulfillment_url: "https://example.com/daas/register", 
+    #           }, 
+    #         }, 
+    #         created_at: Time.parse("2026-09-18T08:52:46.397Z"), 
+    #         job_id: "1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d", 
+    #         status: "SUCCEEDED", 
+    #       }, 
+    #     ], 
+    #     next_token: "b3BhcXVlLXBhZ2luYXRpb24tY3Vyc29y", 
+    #   }
+    #
+    # @example Example: List jobs returns an empty list when an authorized seller has no jobs
+    #
+    #   # When the caller is authorized for the product and has not started any jobs, the result is an empty jobs list with no
+    #   # nextToken.
+    #
+    #   resp = client.list_deployment_configuration_jobs({
+    #     catalog: "AWSMarketplace", 
+    #     delivery_option_type: "data-as-a-service", 
+    #     product_id: "product-1234", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     jobs: [
+    #     ], 
+    #   }
+    #
+    # @example Example: List jobs fails for a caller not authorized for the product
+    #
+    #   # If the caller isn't authorized for the product, the operation returns an AccessDeniedException.
+    #
+    #   resp = client.list_deployment_configuration_jobs({
+    #     catalog: "AWSMarketplace", 
+    #     delivery_option_type: "data-as-a-service", 
+    #     product_id: "product-1234", 
+    #   })
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_deployment_configuration_jobs({
+    #     catalog: "Catalog", # required
+    #     product_id: "ResourceId", # required
+    #     delivery_option_type: "data-as-a-service", # required, accepts data-as-a-service
+    #     max_results: 1,
+    #     next_token: "DeploymentConfigurationNextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.jobs #=> Array
+    #   resp.jobs[0].job_id #=> String
+    #   resp.jobs[0].status #=> String, one of "IN_PROGRESS", "SUCCEEDED", "FAILED"
+    #   resp.jobs[0].configuration.data_as_a_service.fulfillment_url #=> String
+    #   resp.jobs[0].created_at #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-deployment-2023-01-25/ListDeploymentConfigurationJobs AWS API Documentation
+    #
+    # @overload list_deployment_configuration_jobs(params = {})
+    # @param [Hash] params ({})
+    def list_deployment_configuration_jobs(params = {}, options = {})
+      req = build_request(:list_deployment_configuration_jobs, params)
+      req.send_request(options)
+    end
+
+    # Lists all tags that have been added to a resource.
     #
     # @option params [required, String] :resource_arn
-    #   The Amazon Resource Name (ARN) associated with the deployment
-    #   parameter resource you want to list tags on.
+    #   The Amazon Resource Name (ARN) of the resource you want to list tags
+    #   on.
     #
     # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListTagsForResourceResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    #
+    # @example Example: Listing tags for a deployment parameter
+    #
+    #   # The following example demonstrates listing the tags for a deployment parameter. If no tags are present, the API will
+    #   # return an empty map.
+    #
+    #   resp = client.list_tags_for_resource({
+    #     resource_arn: "arn:aws:aws-marketplace:us-east-1:123456789012:DeploymentParameter:catalogs/AWSMarketplace/products/product-1234/dp-uniqueidentifier", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     tags: {
+    #       "FooKey" => "BarValue", 
+    #       "HelloKey" => "WorldValue", 
+    #     }, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -515,11 +891,28 @@ module Aws::MarketplaceDeployment
     # Creates or updates a deployment parameter and is targeted by `catalog`
     # and `agreementId`.
     #
+    # @option params [required, String] :catalog
+    #   The catalog related to the request. Fixed value: `AWSMarketplace`
+    #
+    # @option params [required, String] :product_id
+    #   The product for which AWS Marketplace will save secrets for the
+    #   buyer’s account.
+    #
     # @option params [required, String] :agreement_id
     #   The unique identifier of the agreement.
     #
-    # @option params [required, String] :catalog
-    #   The catalog related to the request. Fixed value: `AWSMarketplace`
+    # @option params [required, Types::DeploymentParameterInput] :deployment_parameter
+    #   The deployment parameter targeted to the acceptor of an agreement for
+    #   which to create the AWS Secrets Manager resource.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   A map of key-value pairs, where each pair represents a tag saved to
+    #   the resource. Tags will only be applied for create operations, and
+    #   they'll be ignored if the resource already exists.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :expiration_date
+    #   The date when deployment parameters expire and are scheduled for
+    #   deletion.
     #
     # @option params [String] :client_token
     #   The idempotency token for deployment parameters. A unique identifier
@@ -533,52 +926,99 @@ module Aws::MarketplaceDeployment
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
-    # @option params [required, Types::DeploymentParameterInput] :deployment_parameter
-    #   The deployment parameter targeted to the acceptor of an agreement for
-    #   which to create the AWS Secret Manager resource.
-    #
-    # @option params [Time,DateTime,Date,Integer,String] :expiration_date
-    #   The date when deployment parameters expire and are scheduled for
-    #   deletion.
-    #
-    # @option params [required, String] :product_id
-    #   The product for which AWS Marketplace will save secrets for the
-    #   buyer’s account.
-    #
-    # @option params [Hash<String,String>] :tags
-    #   A map of key-value pairs, where each pair represents a tag saved to
-    #   the resource. Tags will only be applied for create operations, and
-    #   they'll be ignored if the resource already exists.
-    #
     # @return [Types::PutDeploymentParameterResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
+    #   * {Types::PutDeploymentParameterResponse#resource_arn #resource_arn} => String
     #   * {Types::PutDeploymentParameterResponse#agreement_id #agreement_id} => String
     #   * {Types::PutDeploymentParameterResponse#deployment_parameter_id #deployment_parameter_id} => String
-    #   * {Types::PutDeploymentParameterResponse#resource_arn #resource_arn} => String
     #   * {Types::PutDeploymentParameterResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    #
+    # @example Example: Creating or updating a deployment parameter
+    #
+    #   # The following example demonstrates creating or updating a deployment parameter named "ExampleDeploymentParameterName".
+    #   # The secret will be saved in the Buyer account associated with the passed `agreementId`, with the value set to the
+    #   # provided `secretString`. Note that the deployment parameter `secretString` can be passed in JSON string format, allowing
+    #   # [json-key specific CloudFormation dynamic
+    #   # references](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/dynamic-references.html) from a single
+    #   # deployment parameter.
+    #
+    #   resp = client.put_deployment_parameter({
+    #     agreement_id: "agmt-1234", 
+    #     catalog: "AWSMarketplace", 
+    #     client_token: "some-unique-uuid-between-32-and-64-characters", 
+    #     deployment_parameter: {
+    #       name: "ExampleDeploymentParameterName", 
+    #       secret_string: "{\"apiKey\": \"helloWorldApiKey\", \"entityId\": \"fooBarEntityId\"}", 
+    #     }, 
+    #     product_id: "product-1234", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     agreement_id: "agmt-1234", 
+    #     deployment_parameter_id: "dp-uniqueidentifier", 
+    #     resource_arn: "arn:aws:aws-marketplace:us-east-1:123456789012:DeploymentParameter:catalogs/AWSMarketplace/products/product-1234/dp-uniqueidentifier", 
+    #     tags: {
+    #     }, 
+    #   }
+    #
+    # @example Example: Creating a simple deployment parameter, with tags and expiration.
+    #
+    #   # The following example demonstrates creating a simple deployment parameter named "ExampleSimpleDeploymentParameterName".
+    #   # If multiple secrets are not required, the `secretString` may be provided in String format. The provided tags are only
+    #   # applied on resource creation and will be ignored if the operation results in an update. The API response includes the
+    #   # tags present on the resource after completion of the operation.
+    #
+    #   resp = client.put_deployment_parameter({
+    #     agreement_id: "agmt-1234", 
+    #     catalog: "AWSMarketplace", 
+    #     client_token: "some-unique-uuid-between-32-and-64-characters", 
+    #     deployment_parameter: {
+    #       name: "ExampleSimpleDeploymentParameterName", 
+    #       secret_string: "MySimpleValue", 
+    #     }, 
+    #     expiration_date: Time.parse("2099-11-18T08:52:46.397Z"), 
+    #     product_id: "product-1234", 
+    #     tags: {
+    #       "FooKey" => "BarValue", 
+    #       "HelloKey" => "WorldValue", 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     agreement_id: "agmt-1234", 
+    #     deployment_parameter_id: "dp-uniqueidentifier", 
+    #     resource_arn: "arn:aws:aws-marketplace:us-east-1:123456789012:DeploymentParameter:catalogs/AWSMarketplace/products/product-1234/dp-uniqueidentifier", 
+    #     tags: {
+    #       "FooKey" => "BarValue", 
+    #       "HelloKey" => "WorldValue", 
+    #     }, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.put_deployment_parameter({
-    #     agreement_id: "ResourceId", # required
     #     catalog: "Catalog", # required
-    #     client_token: "ClientToken",
+    #     product_id: "ResourceId", # required
+    #     agreement_id: "ResourceId", # required
     #     deployment_parameter: { # required
     #       name: "DeploymentParameterName", # required
     #       secret_string: "SecretString", # required
     #     },
-    #     expiration_date: Time.now,
-    #     product_id: "ResourceId", # required
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
+    #     expiration_date: Time.now,
+    #     client_token: "ClientToken",
     #   })
     #
     # @example Response structure
     #
+    #   resp.resource_arn #=> String
     #   resp.agreement_id #=> String
     #   resp.deployment_parameter_id #=> String
-    #   resp.resource_arn #=> String
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
     #
@@ -588,6 +1028,151 @@ module Aws::MarketplaceDeployment
     # @param [Hash] params ({})
     def put_deployment_parameter(params = {}, options = {})
       req = build_request(:put_deployment_parameter, params)
+      req.send_request(options)
+    end
+
+    # Starts a job that publishes a deployment configuration for a product
+    # and delivery option. The job runs asynchronously. Use
+    # `GetDeploymentConfigurationJob` to track its status. When the job
+    # reaches the `SUCCEEDED` status, its configuration becomes the active
+    # deployment configuration for the product and delivery option.
+    #
+    # The populated member of `configuration` must match the
+    # `deliveryOptionType` in the request path.
+    #
+    # @option params [required, String] :catalog
+    #   The catalog related to the request. Fixed value: `AWSMarketplace`
+    #
+    # @option params [required, String] :product_id
+    #   The ID of the AWS Marketplace product, for example
+    #   `prod-1234567890abc`.
+    #
+    # @option params [required, String] :delivery_option_type
+    #   The delivery option type of the deployment configuration.
+    #
+    # @option params [required, Types::DeploymentConfigurationDetail] :configuration
+    #   The deployment configuration to publish.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   A map of key-value pairs, where each pair represents a tag to apply to
+    #   the deployment configuration. Only the request that creates the
+    #   deployment configuration can apply tags. If the deployment
+    #   configuration already exists, a request that includes one or more tags
+    #   fails with a `ValidationException`. To change tags on an existing
+    #   deployment configuration, use `TagResource` and `UntagResource`.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that you provide to ensure that
+    #   the operation completes no more than one time. If you retry a request
+    #   with the same token and the same input, the service returns the
+    #   original job instead of starting a new one. If you reuse a token with
+    #   different input, the request fails with a `ConflictException`.
+    #
+    #   <note markdown="1"> This field is not required if you're calling using an AWS SDK.
+    #   Otherwise, a `clientToken` must be provided with the request.
+    #
+    #    </note>
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::StartDeploymentConfigurationJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartDeploymentConfigurationJobResponse#job_id #job_id} => String
+    #   * {Types::StartDeploymentConfigurationJobResponse#configuration #configuration} => Types::DeploymentConfigurationDetail
+    #   * {Types::StartDeploymentConfigurationJobResponse#status #status} => String
+    #   * {Types::StartDeploymentConfigurationJobResponse#created_at #created_at} => Time
+    #
+    #
+    # @example Example: Start a Data-as-a-Service deployment configuration job
+    #
+    #   # Starts a job that publishes a Data-as-a-Service deployment configuration. The job starts in the IN_PROGRESS status. Call
+    #   # GetDeploymentConfigurationJob to check when it reaches SUCCEEDED or FAILED.
+    #
+    #   resp = client.start_deployment_configuration_job({
+    #     catalog: "AWSMarketplace", 
+    #     client_token: "some-unique-uuid-between-32-and-64-characters", 
+    #     configuration: {
+    #       data_as_a_service: {
+    #         fulfillment_url: "https://example.com/daas/register", 
+    #       }, 
+    #     }, 
+    #     delivery_option_type: "data-as-a-service", 
+    #     product_id: "product-1234", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     configuration: {
+    #       data_as_a_service: {
+    #         fulfillment_url: "https://example.com/daas/register", 
+    #       }, 
+    #     }, 
+    #     created_at: Time.parse("2026-09-18T08:52:46.397Z"), 
+    #     job_id: "1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d", 
+    #     status: "IN_PROGRESS", 
+    #   }
+    #
+    # @example Example: Start fails when the product or catalog doesn't exist
+    #
+    #   # If the product or catalog doesn't exist, the operation returns a ResourceNotFoundException.
+    #
+    #   resp = client.start_deployment_configuration_job({
+    #     catalog: "AWSMarketplace", 
+    #     configuration: {
+    #       data_as_a_service: {
+    #         fulfillment_url: "https://example.com/daas/register", 
+    #       }, 
+    #     }, 
+    #     delivery_option_type: "data-as-a-service", 
+    #     product_id: "product-does-not-exist", 
+    #   })
+    #
+    # @example Example: Start fails when the caller is not the product seller
+    #
+    #   # If the caller isn't the seller of the product, the operation returns an AccessDeniedException.
+    #
+    #   resp = client.start_deployment_configuration_job({
+    #     catalog: "AWSMarketplace", 
+    #     configuration: {
+    #       data_as_a_service: {
+    #         fulfillment_url: "https://example.com/daas/register", 
+    #       }, 
+    #     }, 
+    #     delivery_option_type: "data-as-a-service", 
+    #     product_id: "product-1234", 
+    #   })
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_deployment_configuration_job({
+    #     catalog: "Catalog", # required
+    #     product_id: "ResourceId", # required
+    #     delivery_option_type: "data-as-a-service", # required, accepts data-as-a-service
+    #     configuration: { # required
+    #       data_as_a_service: {
+    #         fulfillment_url: "DeploymentConfigurationFulfillmentUrl", # required
+    #       },
+    #     },
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.job_id #=> String
+    #   resp.configuration.data_as_a_service.fulfillment_url #=> String
+    #   resp.status #=> String, one of "IN_PROGRESS", "SUCCEEDED", "FAILED"
+    #   resp.created_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-deployment-2023-01-25/StartDeploymentConfigurationJob AWS API Documentation
+    #
+    # @overload start_deployment_configuration_job(params = {})
+    # @param [Hash] params ({})
+    def start_deployment_configuration_job(params = {}, options = {})
+      req = build_request(:start_deployment_configuration_job, params)
       req.send_request(options)
     end
 
@@ -602,6 +1187,23 @@ module Aws::MarketplaceDeployment
     #   the resource.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: Adding tags to a deployment parameter
+    #
+    #   # The following example demonstrates adding two tags to a deployment parameter. There is no output from this API.
+    #
+    #   resp = client.tag_resource({
+    #     resource_arn: "arn:aws:aws-marketplace:us-east-1:123456789012:DeploymentParameter:catalogs/AWSMarketplace/products/product-1234/dp-uniqueidentifier", 
+    #     tags: {
+    #       "FooKey" => "BarValue", 
+    #       "HelloKey" => "WorldValue", 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -631,6 +1233,24 @@ module Aws::MarketplaceDeployment
     #   A list of key names of tags to be removed.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: Removing tags from a deployment parameter
+    #
+    #   # The following example demonstrates removing two tags from a deployment parameter. For each, both the tag and the
+    #   # associated value are removed. There is no output from this API.
+    #
+    #   resp = client.untag_resource({
+    #     resource_arn: "arn:aws:aws-marketplace:us-east-1:123456789012:DeploymentParameter:catalogs/AWSMarketplace/products/product-1234/dp-uniqueidentifier", 
+    #     tag_keys: [
+    #       "FooKey", 
+    #       "HelloKey", 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -666,7 +1286,7 @@ module Aws::MarketplaceDeployment
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-marketplacedeployment'
-      context[:gem_version] = '1.44.0'
+      context[:gem_version] = '1.52.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

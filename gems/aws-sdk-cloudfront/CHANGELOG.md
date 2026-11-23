@@ -1,6 +1,51 @@
 Unreleased Changes
 ------------------
 
+1.171.0 (2026-11-20)
+------------------
+
+* Feature - Amazon CloudFront now supports HTTP2 connections to custom and VPC origins, so you can multiplex many requests over fewer origin connections, including WebSocket connections to HTTP2 origins that support extended CONNECT.
+
+1.170.0 (2026-11-19)
+------------------
+
+* Feature - Amazon CloudFront adds configuration for SNI-less clients on Anycast static IPs, introduces Anycast IP based domain routing for Distribution Tenants, provides automatic domain ownership validation when creating or updating Distribution Tenants, and enables HTTP traffic via DNS validation.
+
+1.169.0 (2026-11-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.168.0 (2026-11-16)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.167.0 (2026-11-11)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.166.0 (2026-11-10)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.165.0 (2026-11-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.164.0 (2026-11-06)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.163.0 (2026-11-04)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.162.0 (2026-10-29)
 ------------------
 

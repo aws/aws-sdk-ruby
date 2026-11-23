@@ -264,7 +264,8 @@ module Aws::ElasticBeanstalk
     #     An integer representing the maximum number attempts that will be made for
     #     a single request, including the initial attempt.  For example,
     #     setting this value to 5 will result in a request being retried up to
-    #     4 times. Used in `standard` and `adaptive` retry modes.
+    #     4 times. Used in `standard` and `adaptive` retry modes. Defaults to 3,
+    #     except for DynamoDB and DynamoDB Streams, which default to 4.
     #
     #   @option options [String] :profile ("default")
     #     Used when loading credentials from the shared credentials file at `HOME/.aws/credentials`.
@@ -327,15 +328,15 @@ module Aws::ElasticBeanstalk
     #     used by the default backoff function. This option is only used in the
     #     `legacy` retry mode.
     #
-    #   @option options [String] :retry_mode ("legacy")
+    #   @option options [String] :retry_mode ("standard")
     #     Specifies which retry algorithm to use. Values are:
     #
-    #     * `legacy` - The pre-existing retry behavior. This is the default
-    #       value if no retry mode is provided.
+    #     * `legacy` - The pre-existing retry behavior.
     #
     #     * `standard` - A standardized set of retry rules across the AWS SDKs.
     #       This includes support for retry quotas, which limit the number of
-    #       unsuccessful retries a client can make.
+    #       unsuccessful retries a client can make. This is the default value
+    #       if no retry mode is provided.
     #
     #     * `adaptive` - A retry mode that includes all the functionality of
     #       `standard` mode along with automatic client side throttling.
@@ -911,6 +912,12 @@ module Aws::ElasticBeanstalk
     #   You must turn processing on for application versions that you create
     #   using CodeBuild or CodeCommit. For application versions built from a
     #   source bundle in Amazon S3, processing is optional.
+    #
+    #   For application versions with `ImageConfiguration.Build`, `Process`
+    #   determines when Elastic Beanstalk builds the container image. Set it
+    #   to `true` to build the image when you create the application version.
+    #   If you don't, Elastic Beanstalk builds the image when you first
+    #   deploy the application version to an environment.
     #
     #   <note markdown="1"> The `Process` option validates Elastic Beanstalk configuration files.
     #   It doesn't validate your application's configuration files, like
@@ -3367,6 +3374,9 @@ module Aws::ElasticBeanstalk
     #   resp.platform_description.custom_ami_list #=> Array
     #   resp.platform_description.custom_ami_list[0].virtualization_type #=> String
     #   resp.platform_description.custom_ami_list[0].image_id #=> String
+    #   resp.platform_description.default_ami_list #=> Array
+    #   resp.platform_description.default_ami_list[0].architecture #=> String, one of "x86_64", "arm64"
+    #   resp.platform_description.default_ami_list[0].image_id #=> String
     #   resp.platform_description.supported_tier_list #=> Array
     #   resp.platform_description.supported_tier_list[0] #=> String
     #   resp.platform_description.supported_addon_list #=> Array
@@ -5050,7 +5060,7 @@ module Aws::ElasticBeanstalk
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-elasticbeanstalk'
-      context[:gem_version] = '1.114.0'
+      context[:gem_version] = '1.121.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

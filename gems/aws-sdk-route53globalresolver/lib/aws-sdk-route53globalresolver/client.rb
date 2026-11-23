@@ -264,7 +264,8 @@ module Aws::Route53GlobalResolver
     #     An integer representing the maximum number attempts that will be made for
     #     a single request, including the initial attempt.  For example,
     #     setting this value to 5 will result in a request being retried up to
-    #     4 times. Used in `standard` and `adaptive` retry modes.
+    #     4 times. Used in `standard` and `adaptive` retry modes. Defaults to 3,
+    #     except for DynamoDB and DynamoDB Streams, which default to 4.
     #
     #   @option options [String] :profile ("default")
     #     Used when loading credentials from the shared credentials file at `HOME/.aws/credentials`.
@@ -327,15 +328,15 @@ module Aws::Route53GlobalResolver
     #     used by the default backoff function. This option is only used in the
     #     `legacy` retry mode.
     #
-    #   @option options [String] :retry_mode ("legacy")
+    #   @option options [String] :retry_mode ("standard")
     #     Specifies which retry algorithm to use. Values are:
     #
-    #     * `legacy` - The pre-existing retry behavior. This is the default
-    #       value if no retry mode is provided.
+    #     * `legacy` - The pre-existing retry behavior.
     #
     #     * `standard` - A standardized set of retry rules across the AWS SDKs.
     #       This includes support for retry quotas, which limit the number of
-    #       unsuccessful retries a client can make.
+    #       unsuccessful retries a client can make. This is the default value
+    #       if no retry mode is provided.
     #
     #     * `adaptive` - A retry mode that includes all the functionality of
     #       `standard` mode along with automatic client side throttling.
@@ -793,7 +794,7 @@ module Aws::Route53GlobalResolver
     # Global Resolver resources. That is, for example, specify `--region
     # us-east-2` on Amazon Web Services CLI commands.
     #
-    # @option params [required, String] :cidr
+    # @option params [String] :cidr
     #   The IP address or CIDR range that is allowed to send DNS queries to
     #   the Route 53 Global Resolver.
     #
@@ -804,11 +805,19 @@ module Aws::Route53GlobalResolver
     #   not need to pass this option.**
     #
     # @option params [String] :ip_address_type
-    #   The IP address type for this access source. Valid values are IPv4 and
-    #   IPv6 (if the Route 53 Global Resolver supports dual-stack).
+    #   The IP address type for this access source. Valid values are IPV4,
+    #   IPV6, and NONE. If you provide a CIDR range, this defaults to IPV4;
+    #   otherwise it defaults to NONE.
     #
     # @option params [String] :name
     #   A descriptive name for the access source.
+    #
+    # @option params [String] :core_network_endpoint_id
+    #   The ID of the core network endpoint to associate with this access
+    #   source.
+    #
+    # @option params [String] :segment
+    #   The name of the segment to associate with this access source.
     #
     # @option params [required, String] :dns_view_id
     #   The ID of the DNS view to associate with this access source.
@@ -828,6 +837,8 @@ module Aws::Route53GlobalResolver
     #   * {Types::CreateAccessSourceOutput#created_at #created_at} => Time
     #   * {Types::CreateAccessSourceOutput#id #id} => String
     #   * {Types::CreateAccessSourceOutput#ip_address_type #ip_address_type} => String
+    #   * {Types::CreateAccessSourceOutput#core_network_endpoint_id #core_network_endpoint_id} => String
+    #   * {Types::CreateAccessSourceOutput#segment #segment} => String
     #   * {Types::CreateAccessSourceOutput#name #name} => String
     #   * {Types::CreateAccessSourceOutput#dns_view_id #dns_view_id} => String
     #   * {Types::CreateAccessSourceOutput#protocol #protocol} => String
@@ -866,10 +877,12 @@ module Aws::Route53GlobalResolver
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_access_source({
-    #     cidr: "Cidr", # required
+    #     cidr: "Cidr",
     #     client_token: "ClientToken",
-    #     ip_address_type: "IPV4", # accepts IPV4, IPV6
+    #     ip_address_type: "IPV4", # accepts IPV4, IPV6, NONE
     #     name: "ResourceNameShort",
+    #     core_network_endpoint_id: "ResourceId",
+    #     segment: "SegmentName",
     #     dns_view_id: "ResourceId", # required
     #     protocol: "DO53", # required, accepts DO53, DOH, DOT
     #     tags: {
@@ -883,7 +896,9 @@ module Aws::Route53GlobalResolver
     #   resp.cidr #=> String
     #   resp.created_at #=> Time
     #   resp.id #=> String
-    #   resp.ip_address_type #=> String, one of "IPV4", "IPV6"
+    #   resp.ip_address_type #=> String, one of "IPV4", "IPV6", "NONE"
+    #   resp.core_network_endpoint_id #=> String
+    #   resp.segment #=> String
     #   resp.name #=> String
     #   resp.dns_view_id #=> String
     #   resp.protocol #=> String, one of "DO53", "DOH", "DOT"
@@ -973,6 +988,109 @@ module Aws::Route53GlobalResolver
     # @param [Hash] params ({})
     def create_access_token(params = {}, options = {})
       req = build_request(:create_access_token, params)
+      req.send_request(options)
+    end
+
+    # Creates a core network endpoint, which enables DNS resolution for
+    # Amazon Web Services Cloud WAN core network segments. The endpoint
+    # connects a Route 53 Global Resolver to an Amazon Web Services Cloud
+    # WAN core network so that resources attached to the core network can
+    # send DNS queries to the resolver.
+    #
+    # Route 53 Global Resolver is a global service that supports resolvers
+    # in multiple Amazon Web Services Regions, but you must specify the US
+    # East (Ohio) Region to create, update, or otherwise work with Route 53
+    # Global Resolver resources. That is, for example, specify `--region
+    # us-east-2` on Amazon Web Services CLI commands.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that ensures the request is
+    #   idempotent. Making the same request multiple times with the same
+    #   `clientToken` produces the same result every time.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, String] :core_network_arn
+    #   The Amazon Resource Name (ARN) of the Amazon Web Services Cloud WAN
+    #   core network to connect to this endpoint.
+    #
+    # @option params [required, String] :global_resolver_id
+    #   The ID of the Route 53 Global Resolver to associate with this core
+    #   network endpoint.
+    #
+    # @option params [required, Array<Types::CoreNetworkEndpointDnsIpInputItem>] :ip_addresses
+    #   The IP addresses that the core network endpoint uses to resolve DNS
+    #   queries within the Amazon Web Services Cloud WAN core network.
+    #
+    # @option params [String] :name
+    #   A descriptive name for the core network endpoint.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   An array of user-defined keys and optional values that you can use to
+    #   categorize and organize the core network endpoint.
+    #
+    # @return [Types::CreateCoreNetworkEndpointOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateCoreNetworkEndpointOutput#arn #arn} => String
+    #   * {Types::CreateCoreNetworkEndpointOutput#available_regions #available_regions} => Array&lt;String&gt;
+    #   * {Types::CreateCoreNetworkEndpointOutput#core_network_arn #core_network_arn} => String
+    #   * {Types::CreateCoreNetworkEndpointOutput#created_at #created_at} => Time
+    #   * {Types::CreateCoreNetworkEndpointOutput#global_resolver_id #global_resolver_id} => String
+    #   * {Types::CreateCoreNetworkEndpointOutput#id #id} => String
+    #   * {Types::CreateCoreNetworkEndpointOutput#ip_addresses #ip_addresses} => Array&lt;Types::CoreNetworkEndpointDnsIpItem&gt;
+    #   * {Types::CreateCoreNetworkEndpointOutput#name #name} => String
+    #   * {Types::CreateCoreNetworkEndpointOutput#status #status} => String
+    #   * {Types::CreateCoreNetworkEndpointOutput#updated_at #updated_at} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_core_network_endpoint({
+    #     client_token: "ClientToken",
+    #     core_network_arn: "ResourceArn", # required
+    #     global_resolver_id: "ResourceId", # required
+    #     ip_addresses: [ # required
+    #       {
+    #         ipv4_address: "IPv4Address",
+    #         ipv6_address: "IPv6Address",
+    #         dns_label: "DnsLabel", # required
+    #         region_scope: "ALL", # required, accepts ALL, REGIONAL
+    #         regions: ["Region"],
+    #       },
+    #     ],
+    #     name: "ResourceName",
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.available_regions #=> Array
+    #   resp.available_regions[0] #=> String
+    #   resp.core_network_arn #=> String
+    #   resp.created_at #=> Time
+    #   resp.global_resolver_id #=> String
+    #   resp.id #=> String
+    #   resp.ip_addresses #=> Array
+    #   resp.ip_addresses[0].ipv4_address #=> String
+    #   resp.ip_addresses[0].ipv6_address #=> String
+    #   resp.ip_addresses[0].dns_label #=> String
+    #   resp.ip_addresses[0].dns_name #=> String
+    #   resp.ip_addresses[0].region_scope #=> String, one of "ALL", "REGIONAL"
+    #   resp.ip_addresses[0].regions #=> Array
+    #   resp.ip_addresses[0].regions[0] #=> String
+    #   resp.name #=> String
+    #   resp.status #=> String, one of "CREATING", "OPERATIONAL", "UPDATING", "DELETING"
+    #   resp.updated_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53globalresolver-2022-09-27/CreateCoreNetworkEndpoint AWS API Documentation
+    #
+    # @overload create_core_network_endpoint(params = {})
+    # @param [Hash] params ({})
+    def create_core_network_endpoint(params = {}, options = {})
+      req = build_request(:create_core_network_endpoint, params)
       req.send_request(options)
     end
 
@@ -1335,6 +1453,22 @@ module Aws::Route53GlobalResolver
     #   The IP address type for the Route 53 Global Resolver. Valid values are
     #   IPV4 (default) or DUAL\_STACK for both IPv4 and IPv6 support.
     #
+    # @option params [String] :public_ip_status
+    #   Specifies the public IP connectivity to configure for the Route 53
+    #   Global Resolver. Public IP addresses let DNS clients send queries to
+    #   the resolver over the internet. Valid values are the following:
+    #
+    #   * `ENABLED_RESERVED` - Public IP connectivity is enabled, and the
+    #     global anycast public IP addresses are reserved for the Route 53
+    #     Global Resolver.
+    #
+    #   * `DISABLED_RESERVED` - Public IP connectivity is disabled, and the
+    #     global anycast public IP addresses remain reserved for the Route 53
+    #     Global Resolver.
+    #
+    #   * `DISABLED_RELEASED` - Public IP connectivity is disabled, and the
+    #     global anycast public IP addresses are released.
+    #
     # @option params [required, String] :name
     #   A descriptive name for the Route 53 Global Resolver instance. Maximum
     #   length of 64 characters.
@@ -1362,6 +1496,7 @@ module Aws::Route53GlobalResolver
     #   * {Types::CreateGlobalResolverOutput#description #description} => String
     #   * {Types::CreateGlobalResolverOutput#dns_name #dns_name} => String
     #   * {Types::CreateGlobalResolverOutput#ip_address_type #ip_address_type} => String
+    #   * {Types::CreateGlobalResolverOutput#public_ip_status #public_ip_status} => String
     #   * {Types::CreateGlobalResolverOutput#ipv4_addresses #ipv4_addresses} => Array&lt;String&gt;
     #   * {Types::CreateGlobalResolverOutput#ipv6_addresses #ipv6_addresses} => Array&lt;String&gt;
     #   * {Types::CreateGlobalResolverOutput#name #name} => String
@@ -1376,6 +1511,7 @@ module Aws::Route53GlobalResolver
     #     client_token: "ClientToken",
     #     description: "ResourceDescription",
     #     ip_address_type: "IPV4", # accepts IPV4, DUAL_STACK
+    #     public_ip_status: "ENABLED_RESERVED", # accepts ENABLED_RESERVED, DISABLED_RESERVED, DISABLED_RELEASED
     #     name: "ResourceName", # required
     #     observability_region: "Region",
     #     regions: ["Region"], # required
@@ -1393,6 +1529,7 @@ module Aws::Route53GlobalResolver
     #   resp.description #=> String
     #   resp.dns_name #=> String
     #   resp.ip_address_type #=> String, one of "IPV4", "DUAL_STACK"
+    #   resp.public_ip_status #=> String, one of "ENABLED_RESERVED", "DISABLED_RESERVED", "DISABLED_RELEASED"
     #   resp.ipv4_addresses #=> Array
     #   resp.ipv4_addresses[0] #=> String
     #   resp.ipv6_addresses #=> Array
@@ -1428,12 +1565,14 @@ module Aws::Route53GlobalResolver
     #
     #   * {Types::DeleteAccessSourceOutput#arn #arn} => String
     #   * {Types::DeleteAccessSourceOutput#cidr #cidr} => String
+    #   * {Types::DeleteAccessSourceOutput#core_network_endpoint_id #core_network_endpoint_id} => String
     #   * {Types::DeleteAccessSourceOutput#created_at #created_at} => Time
     #   * {Types::DeleteAccessSourceOutput#id #id} => String
     #   * {Types::DeleteAccessSourceOutput#ip_address_type #ip_address_type} => String
     #   * {Types::DeleteAccessSourceOutput#name #name} => String
     #   * {Types::DeleteAccessSourceOutput#dns_view_id #dns_view_id} => String
     #   * {Types::DeleteAccessSourceOutput#protocol #protocol} => String
+    #   * {Types::DeleteAccessSourceOutput#segment #segment} => String
     #   * {Types::DeleteAccessSourceOutput#status #status} => String
     #   * {Types::DeleteAccessSourceOutput#updated_at #updated_at} => Time
     #
@@ -1447,12 +1586,14 @@ module Aws::Route53GlobalResolver
     #
     #   resp.arn #=> String
     #   resp.cidr #=> String
+    #   resp.core_network_endpoint_id #=> String
     #   resp.created_at #=> Time
     #   resp.id #=> String
-    #   resp.ip_address_type #=> String, one of "IPV4", "IPV6"
+    #   resp.ip_address_type #=> String, one of "IPV4", "IPV6", "NONE"
     #   resp.name #=> String
     #   resp.dns_view_id #=> String
     #   resp.protocol #=> String, one of "DO53", "DOH", "DOT"
+    #   resp.segment #=> String
     #   resp.status #=> String, one of "CREATING", "OPERATIONAL", "UPDATING", "DELETING"
     #   resp.updated_at #=> Time
     #
@@ -1500,6 +1641,66 @@ module Aws::Route53GlobalResolver
     # @param [Hash] params ({})
     def delete_access_token(params = {}, options = {})
       req = build_request(:delete_access_token, params)
+      req.send_request(options)
+    end
+
+    # Deletes a core network endpoint. This operation cannot be undone.
+    #
+    # Route 53 Global Resolver is a global service that supports resolvers
+    # in multiple Amazon Web Services Regions, but you must specify the US
+    # East (Ohio) Region to create, update, or otherwise work with Route 53
+    # Global Resolver resources. That is, for example, specify `--region
+    # us-east-2` on Amazon Web Services CLI commands.
+    #
+    # @option params [required, String] :core_network_endpoint_id
+    #   The unique identifier of the core network endpoint to delete.
+    #
+    # @return [Types::DeleteCoreNetworkEndpointOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteCoreNetworkEndpointOutput#arn #arn} => String
+    #   * {Types::DeleteCoreNetworkEndpointOutput#available_regions #available_regions} => Array&lt;String&gt;
+    #   * {Types::DeleteCoreNetworkEndpointOutput#core_network_arn #core_network_arn} => String
+    #   * {Types::DeleteCoreNetworkEndpointOutput#created_at #created_at} => Time
+    #   * {Types::DeleteCoreNetworkEndpointOutput#global_resolver_id #global_resolver_id} => String
+    #   * {Types::DeleteCoreNetworkEndpointOutput#id #id} => String
+    #   * {Types::DeleteCoreNetworkEndpointOutput#ip_addresses #ip_addresses} => Array&lt;Types::CoreNetworkEndpointDnsIpItem&gt;
+    #   * {Types::DeleteCoreNetworkEndpointOutput#name #name} => String
+    #   * {Types::DeleteCoreNetworkEndpointOutput#status #status} => String
+    #   * {Types::DeleteCoreNetworkEndpointOutput#updated_at #updated_at} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_core_network_endpoint({
+    #     core_network_endpoint_id: "ResourceId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.available_regions #=> Array
+    #   resp.available_regions[0] #=> String
+    #   resp.core_network_arn #=> String
+    #   resp.created_at #=> Time
+    #   resp.global_resolver_id #=> String
+    #   resp.id #=> String
+    #   resp.ip_addresses #=> Array
+    #   resp.ip_addresses[0].ipv4_address #=> String
+    #   resp.ip_addresses[0].ipv6_address #=> String
+    #   resp.ip_addresses[0].dns_label #=> String
+    #   resp.ip_addresses[0].dns_name #=> String
+    #   resp.ip_addresses[0].region_scope #=> String, one of "ALL", "REGIONAL"
+    #   resp.ip_addresses[0].regions #=> Array
+    #   resp.ip_addresses[0].regions[0] #=> String
+    #   resp.name #=> String
+    #   resp.status #=> String, one of "CREATING", "OPERATIONAL", "UPDATING", "DELETING"
+    #   resp.updated_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53globalresolver-2022-09-27/DeleteCoreNetworkEndpoint AWS API Documentation
+    #
+    # @overload delete_core_network_endpoint(params = {})
+    # @param [Hash] params ({})
+    def delete_core_network_endpoint(params = {}, options = {})
+      req = build_request(:delete_core_network_endpoint, params)
       req.send_request(options)
     end
 
@@ -1911,12 +2112,14 @@ module Aws::Route53GlobalResolver
     #
     #   * {Types::GetAccessSourceOutput#arn #arn} => String
     #   * {Types::GetAccessSourceOutput#cidr #cidr} => String
+    #   * {Types::GetAccessSourceOutput#core_network_endpoint_id #core_network_endpoint_id} => String
     #   * {Types::GetAccessSourceOutput#created_at #created_at} => Time
     #   * {Types::GetAccessSourceOutput#id #id} => String
     #   * {Types::GetAccessSourceOutput#ip_address_type #ip_address_type} => String
     #   * {Types::GetAccessSourceOutput#name #name} => String
     #   * {Types::GetAccessSourceOutput#dns_view_id #dns_view_id} => String
     #   * {Types::GetAccessSourceOutput#protocol #protocol} => String
+    #   * {Types::GetAccessSourceOutput#segment #segment} => String
     #   * {Types::GetAccessSourceOutput#status #status} => String
     #   * {Types::GetAccessSourceOutput#updated_at #updated_at} => Time
     #
@@ -1930,12 +2133,14 @@ module Aws::Route53GlobalResolver
     #
     #   resp.arn #=> String
     #   resp.cidr #=> String
+    #   resp.core_network_endpoint_id #=> String
     #   resp.created_at #=> Time
     #   resp.id #=> String
-    #   resp.ip_address_type #=> String, one of "IPV4", "IPV6"
+    #   resp.ip_address_type #=> String, one of "IPV4", "IPV6", "NONE"
     #   resp.name #=> String
     #   resp.dns_view_id #=> String
     #   resp.protocol #=> String, one of "DO53", "DOH", "DOT"
+    #   resp.segment #=> String
     #   resp.status #=> String, one of "CREATING", "OPERATIONAL", "UPDATING", "DELETING"
     #   resp.updated_at #=> Time
     #
@@ -1999,6 +2204,67 @@ module Aws::Route53GlobalResolver
     # @param [Hash] params ({})
     def get_access_token(params = {}, options = {})
       req = build_request(:get_access_token, params)
+      req.send_request(options)
+    end
+
+    # Retrieves information about a core network endpoint.
+    #
+    # Route 53 Global Resolver is a global service that supports resolvers
+    # in multiple Amazon Web Services Regions, but you must specify the US
+    # East (Ohio) Region to create, update, or otherwise work with Route 53
+    # Global Resolver resources. That is, for example, specify `--region
+    # us-east-2` on Amazon Web Services CLI commands.
+    #
+    # @option params [required, String] :core_network_endpoint_id
+    #   The unique identifier of the core network endpoint to retrieve
+    #   information about.
+    #
+    # @return [Types::GetCoreNetworkEndpointOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetCoreNetworkEndpointOutput#arn #arn} => String
+    #   * {Types::GetCoreNetworkEndpointOutput#available_regions #available_regions} => Array&lt;String&gt;
+    #   * {Types::GetCoreNetworkEndpointOutput#core_network_arn #core_network_arn} => String
+    #   * {Types::GetCoreNetworkEndpointOutput#created_at #created_at} => Time
+    #   * {Types::GetCoreNetworkEndpointOutput#global_resolver_id #global_resolver_id} => String
+    #   * {Types::GetCoreNetworkEndpointOutput#id #id} => String
+    #   * {Types::GetCoreNetworkEndpointOutput#ip_addresses #ip_addresses} => Array&lt;Types::CoreNetworkEndpointDnsIpItem&gt;
+    #   * {Types::GetCoreNetworkEndpointOutput#name #name} => String
+    #   * {Types::GetCoreNetworkEndpointOutput#status #status} => String
+    #   * {Types::GetCoreNetworkEndpointOutput#updated_at #updated_at} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_core_network_endpoint({
+    #     core_network_endpoint_id: "ResourceId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.available_regions #=> Array
+    #   resp.available_regions[0] #=> String
+    #   resp.core_network_arn #=> String
+    #   resp.created_at #=> Time
+    #   resp.global_resolver_id #=> String
+    #   resp.id #=> String
+    #   resp.ip_addresses #=> Array
+    #   resp.ip_addresses[0].ipv4_address #=> String
+    #   resp.ip_addresses[0].ipv6_address #=> String
+    #   resp.ip_addresses[0].dns_label #=> String
+    #   resp.ip_addresses[0].dns_name #=> String
+    #   resp.ip_addresses[0].region_scope #=> String, one of "ALL", "REGIONAL"
+    #   resp.ip_addresses[0].regions #=> Array
+    #   resp.ip_addresses[0].regions[0] #=> String
+    #   resp.name #=> String
+    #   resp.status #=> String, one of "CREATING", "OPERATIONAL", "UPDATING", "DELETING"
+    #   resp.updated_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53globalresolver-2022-09-27/GetCoreNetworkEndpoint AWS API Documentation
+    #
+    # @overload get_core_network_endpoint(params = {})
+    # @param [Hash] params ({})
+    def get_core_network_endpoint(params = {}, options = {})
+      req = build_request(:get_core_network_endpoint, params)
       req.send_request(options)
     end
 
@@ -2205,6 +2471,7 @@ module Aws::Route53GlobalResolver
     #   * {Types::GetGlobalResolverOutput#ipv4_addresses #ipv4_addresses} => Array&lt;String&gt;
     #   * {Types::GetGlobalResolverOutput#ipv6_addresses #ipv6_addresses} => Array&lt;String&gt;
     #   * {Types::GetGlobalResolverOutput#ip_address_type #ip_address_type} => String
+    #   * {Types::GetGlobalResolverOutput#public_ip_status #public_ip_status} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -2231,6 +2498,7 @@ module Aws::Route53GlobalResolver
     #   resp.ipv6_addresses #=> Array
     #   resp.ipv6_addresses[0] #=> String
     #   resp.ip_address_type #=> String, one of "IPV4", "DUAL_STACK"
+    #   resp.public_ip_status #=> String, one of "ENABLED_RESERVED", "DISABLED_RESERVED", "DISABLED_RELEASED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53globalresolver-2022-09-27/GetGlobalResolver AWS API Documentation
     #
@@ -2423,12 +2691,14 @@ module Aws::Route53GlobalResolver
     #   resp.access_sources #=> Array
     #   resp.access_sources[0].arn #=> String
     #   resp.access_sources[0].cidr #=> String
+    #   resp.access_sources[0].core_network_endpoint_id #=> String
     #   resp.access_sources[0].created_at #=> Time
     #   resp.access_sources[0].id #=> String
-    #   resp.access_sources[0].ip_address_type #=> String, one of "IPV4", "IPV6"
+    #   resp.access_sources[0].ip_address_type #=> String, one of "IPV4", "IPV6", "NONE"
     #   resp.access_sources[0].name #=> String
     #   resp.access_sources[0].dns_view_id #=> String
     #   resp.access_sources[0].protocol #=> String, one of "DO53", "DOH", "DOT"
+    #   resp.access_sources[0].segment #=> String
     #   resp.access_sources[0].status #=> String, one of "CREATING", "OPERATIONAL", "UPDATING", "DELETING"
     #   resp.access_sources[0].updated_at #=> Time
     #
@@ -2500,6 +2770,74 @@ module Aws::Route53GlobalResolver
     # @param [Hash] params ({})
     def list_access_tokens(params = {}, options = {})
       req = build_request(:list_access_tokens, params)
+      req.send_request(options)
+    end
+
+    # Lists the core network endpoints in your Amazon Web Services account,
+    # with pagination support.
+    #
+    # Route 53 Global Resolver is a global service that supports resolvers
+    # in multiple Amazon Web Services Regions, but you must specify the US
+    # East (Ohio) Region to create, update, or otherwise work with Route 53
+    # Global Resolver resources. That is, for example, specify `--region
+    # us-east-2` on Amazon Web Services CLI commands.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to retrieve in a single call.
+    #
+    # @option params [String] :next_token
+    #   A pagination token used for large sets of results that can't be
+    #   returned in a single response.
+    #
+    # @option params [Hash<String,Array>] :filters
+    #   Values to filter the results.
+    #
+    # @return [Types::ListCoreNetworkEndpointsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListCoreNetworkEndpointsOutput#next_token #next_token} => String
+    #   * {Types::ListCoreNetworkEndpointsOutput#core_network_endpoints #core_network_endpoints} => Array&lt;Types::CoreNetworkEndpointsItem&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_core_network_endpoints({
+    #     max_results: 1,
+    #     next_token: "String",
+    #     filters: {
+    #       "String" => ["String"],
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.core_network_endpoints #=> Array
+    #   resp.core_network_endpoints[0].arn #=> String
+    #   resp.core_network_endpoints[0].available_regions #=> Array
+    #   resp.core_network_endpoints[0].available_regions[0] #=> String
+    #   resp.core_network_endpoints[0].core_network_arn #=> String
+    #   resp.core_network_endpoints[0].created_at #=> Time
+    #   resp.core_network_endpoints[0].global_resolver_id #=> String
+    #   resp.core_network_endpoints[0].id #=> String
+    #   resp.core_network_endpoints[0].ip_addresses #=> Array
+    #   resp.core_network_endpoints[0].ip_addresses[0].ipv4_address #=> String
+    #   resp.core_network_endpoints[0].ip_addresses[0].ipv6_address #=> String
+    #   resp.core_network_endpoints[0].ip_addresses[0].dns_label #=> String
+    #   resp.core_network_endpoints[0].ip_addresses[0].dns_name #=> String
+    #   resp.core_network_endpoints[0].ip_addresses[0].region_scope #=> String, one of "ALL", "REGIONAL"
+    #   resp.core_network_endpoints[0].ip_addresses[0].regions #=> Array
+    #   resp.core_network_endpoints[0].ip_addresses[0].regions[0] #=> String
+    #   resp.core_network_endpoints[0].name #=> String
+    #   resp.core_network_endpoints[0].status #=> String, one of "CREATING", "OPERATIONAL", "UPDATING", "DELETING"
+    #   resp.core_network_endpoints[0].updated_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53globalresolver-2022-09-27/ListCoreNetworkEndpoints AWS API Documentation
+    #
+    # @overload list_core_network_endpoints(params = {})
+    # @param [Hash] params ({})
+    def list_core_network_endpoints(params = {}, options = {})
+      req = build_request(:list_core_network_endpoints, params)
       req.send_request(options)
     end
 
@@ -2790,6 +3128,7 @@ module Aws::Route53GlobalResolver
     #   resp.global_resolvers[0].ipv6_addresses #=> Array
     #   resp.global_resolvers[0].ipv6_addresses[0] #=> String
     #   resp.global_resolvers[0].ip_address_type #=> String, one of "IPV4", "DUAL_STACK"
+    #   resp.global_resolvers[0].public_ip_status #=> String, one of "ENABLED_RESERVED", "DISABLED_RESERVED", "DISABLED_RELEASED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53globalresolver-2022-09-27/ListGlobalResolvers AWS API Documentation
     #
@@ -3089,6 +3428,9 @@ module Aws::Route53GlobalResolver
     # @option params [String] :cidr
     #   The CIDR block for the access source.
     #
+    # @option params [String] :dns_view_id
+    #   The ID of the DNS view to associate with this access source.
+    #
     # @option params [String] :ip_address_type
     #   The IP address type for the access source.
     #
@@ -3102,12 +3444,14 @@ module Aws::Route53GlobalResolver
     #
     #   * {Types::UpdateAccessSourceOutput#arn #arn} => String
     #   * {Types::UpdateAccessSourceOutput#cidr #cidr} => String
+    #   * {Types::UpdateAccessSourceOutput#core_network_endpoint_id #core_network_endpoint_id} => String
     #   * {Types::UpdateAccessSourceOutput#created_at #created_at} => Time
     #   * {Types::UpdateAccessSourceOutput#id #id} => String
     #   * {Types::UpdateAccessSourceOutput#ip_address_type #ip_address_type} => String
     #   * {Types::UpdateAccessSourceOutput#name #name} => String
     #   * {Types::UpdateAccessSourceOutput#dns_view_id #dns_view_id} => String
     #   * {Types::UpdateAccessSourceOutput#protocol #protocol} => String
+    #   * {Types::UpdateAccessSourceOutput#segment #segment} => String
     #   * {Types::UpdateAccessSourceOutput#status #status} => String
     #   * {Types::UpdateAccessSourceOutput#updated_at #updated_at} => Time
     #
@@ -3116,7 +3460,8 @@ module Aws::Route53GlobalResolver
     #   resp = client.update_access_source({
     #     access_source_id: "ResourceId", # required
     #     cidr: "Cidr",
-    #     ip_address_type: "IPV4", # accepts IPV4, IPV6
+    #     dns_view_id: "ResourceId",
+    #     ip_address_type: "IPV4", # accepts IPV4, IPV6, NONE
     #     name: "ResourceNameShort",
     #     protocol: "DO53", # accepts DO53, DOH, DOT
     #   })
@@ -3125,12 +3470,14 @@ module Aws::Route53GlobalResolver
     #
     #   resp.arn #=> String
     #   resp.cidr #=> String
+    #   resp.core_network_endpoint_id #=> String
     #   resp.created_at #=> Time
     #   resp.id #=> String
-    #   resp.ip_address_type #=> String, one of "IPV4", "IPV6"
+    #   resp.ip_address_type #=> String, one of "IPV4", "IPV6", "NONE"
     #   resp.name #=> String
     #   resp.dns_view_id #=> String
     #   resp.protocol #=> String, one of "DO53", "DOH", "DOT"
+    #   resp.segment #=> String
     #   resp.status #=> String, one of "CREATING", "OPERATIONAL", "UPDATING", "DELETING"
     #   resp.updated_at #=> Time
     #
@@ -3180,6 +3527,88 @@ module Aws::Route53GlobalResolver
     # @param [Hash] params ({})
     def update_access_token(params = {}, options = {})
       req = build_request(:update_access_token, params)
+      req.send_request(options)
+    end
+
+    # Updates the configuration of a core network endpoint. You can change
+    # the name and modify the IP addresses that the endpoint uses for DNS
+    # resolution.
+    #
+    # Route 53 Global Resolver is a global service that supports resolvers
+    # in multiple Amazon Web Services Regions, but you must specify the US
+    # East (Ohio) Region to create, update, or otherwise work with Route 53
+    # Global Resolver resources. That is, for example, specify `--region
+    # us-east-2` on Amazon Web Services CLI commands.
+    #
+    # @option params [required, String] :core_network_endpoint_id
+    #   The unique identifier of the core network endpoint to update.
+    #
+    # @option params [String] :name
+    #   The name of the core network endpoint.
+    #
+    # @option params [Array<Types::UpdateIpAddressEntry>] :update_ip_addresses
+    #   The IP address changes to apply to the core network endpoint. Use this
+    #   parameter to add or remove the IP addresses that the endpoint uses to
+    #   resolve DNS queries within the Amazon Web Services Cloud WAN core
+    #   network.
+    #
+    # @return [Types::UpdateCoreNetworkEndpointOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateCoreNetworkEndpointOutput#arn #arn} => String
+    #   * {Types::UpdateCoreNetworkEndpointOutput#available_regions #available_regions} => Array&lt;String&gt;
+    #   * {Types::UpdateCoreNetworkEndpointOutput#core_network_arn #core_network_arn} => String
+    #   * {Types::UpdateCoreNetworkEndpointOutput#created_at #created_at} => Time
+    #   * {Types::UpdateCoreNetworkEndpointOutput#global_resolver_id #global_resolver_id} => String
+    #   * {Types::UpdateCoreNetworkEndpointOutput#id #id} => String
+    #   * {Types::UpdateCoreNetworkEndpointOutput#ip_addresses #ip_addresses} => Array&lt;Types::CoreNetworkEndpointDnsIpItem&gt;
+    #   * {Types::UpdateCoreNetworkEndpointOutput#name #name} => String
+    #   * {Types::UpdateCoreNetworkEndpointOutput#status #status} => String
+    #   * {Types::UpdateCoreNetworkEndpointOutput#updated_at #updated_at} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_core_network_endpoint({
+    #     core_network_endpoint_id: "ResourceId", # required
+    #     name: "ResourceName",
+    #     update_ip_addresses: [
+    #       {
+    #         operation: "ADD", # required, accepts ADD, REMOVE, UPDATE
+    #         ipv4_address: "IPv4Address",
+    #         ipv6_address: "IPv6Address",
+    #         dns_label: "DnsLabel",
+    #         region_scope: "ALL", # accepts ALL, REGIONAL
+    #         regions: ["Region"],
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.available_regions #=> Array
+    #   resp.available_regions[0] #=> String
+    #   resp.core_network_arn #=> String
+    #   resp.created_at #=> Time
+    #   resp.global_resolver_id #=> String
+    #   resp.id #=> String
+    #   resp.ip_addresses #=> Array
+    #   resp.ip_addresses[0].ipv4_address #=> String
+    #   resp.ip_addresses[0].ipv6_address #=> String
+    #   resp.ip_addresses[0].dns_label #=> String
+    #   resp.ip_addresses[0].dns_name #=> String
+    #   resp.ip_addresses[0].region_scope #=> String, one of "ALL", "REGIONAL"
+    #   resp.ip_addresses[0].regions #=> Array
+    #   resp.ip_addresses[0].regions[0] #=> String
+    #   resp.name #=> String
+    #   resp.status #=> String, one of "CREATING", "OPERATIONAL", "UPDATING", "DELETING"
+    #   resp.updated_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53globalresolver-2022-09-27/UpdateCoreNetworkEndpoint AWS API Documentation
+    #
+    # @overload update_core_network_endpoint(params = {})
+    # @param [Hash] params ({})
+    def update_core_network_endpoint(params = {}, options = {})
+      req = build_request(:update_core_network_endpoint, params)
       req.send_request(options)
     end
 
@@ -3460,6 +3889,22 @@ module Aws::Route53GlobalResolver
     #   The IP address type for the Global Resolver. Valid values are IPV4 or
     #   DUAL\_STACK for both IPv4 and IPv6 support.
     #
+    # @option params [String] :public_ip_status
+    #   Specifies the public IP connectivity to configure for the Route 53
+    #   Global Resolver. Public IP addresses let DNS clients send queries to
+    #   the resolver over the internet. Valid values are the following:
+    #
+    #   * `ENABLED_RESERVED` - Public IP connectivity is enabled, and the
+    #     global anycast public IP addresses are reserved for the Route 53
+    #     Global Resolver.
+    #
+    #   * `DISABLED_RESERVED` - Public IP connectivity is disabled, and the
+    #     global anycast public IP addresses remain reserved for the Route 53
+    #     Global Resolver.
+    #
+    #   * `DISABLED_RELEASED` - Public IP connectivity is disabled, and the
+    #     global anycast public IP addresses are released.
+    #
     # @option params [Array<String>] :regions
     #   The list of Amazon Web Services Regions where the Global Resolver will
     #   operate. The resolver will be distributed across these Regions to
@@ -3481,6 +3926,7 @@ module Aws::Route53GlobalResolver
     #   * {Types::UpdateGlobalResolverOutput#ipv4_addresses #ipv4_addresses} => Array&lt;String&gt;
     #   * {Types::UpdateGlobalResolverOutput#ipv6_addresses #ipv6_addresses} => Array&lt;String&gt;
     #   * {Types::UpdateGlobalResolverOutput#ip_address_type #ip_address_type} => String
+    #   * {Types::UpdateGlobalResolverOutput#public_ip_status #public_ip_status} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -3490,6 +3936,7 @@ module Aws::Route53GlobalResolver
     #     observability_region: "Region",
     #     description: "ResourceDescription",
     #     ip_address_type: "IPV4", # accepts IPV4, DUAL_STACK
+    #     public_ip_status: "ENABLED_RESERVED", # accepts ENABLED_RESERVED, DISABLED_RESERVED, DISABLED_RELEASED
     #     regions: ["Region"],
     #   })
     #
@@ -3512,6 +3959,7 @@ module Aws::Route53GlobalResolver
     #   resp.ipv6_addresses #=> Array
     #   resp.ipv6_addresses[0] #=> String
     #   resp.ip_address_type #=> String, one of "IPV4", "DUAL_STACK"
+    #   resp.public_ip_status #=> String, one of "ENABLED_RESERVED", "DISABLED_RESERVED", "DISABLED_RELEASED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53globalresolver-2022-09-27/UpdateGlobalResolver AWS API Documentation
     #
@@ -3592,7 +4040,7 @@ module Aws::Route53GlobalResolver
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-route53globalresolver'
-      context[:gem_version] = '1.19.0'
+      context[:gem_version] = '1.27.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -538,6 +538,7 @@ module Aws::WorkSpaces
     WorkspaceImageState = Shapes::StringShape.new(name: 'WorkspaceImageState')
     WorkspaceList = Shapes::ListShape.new(name: 'WorkspaceList')
     WorkspaceName = Shapes::StringShape.new(name: 'WorkspaceName')
+    WorkspaceOSUserMode = Shapes::StringShape.new(name: 'WorkspaceOSUserMode')
     WorkspaceProperties = Shapes::StructureShape.new(name: 'WorkspaceProperties')
     WorkspaceRequest = Shapes::StructureShape.new(name: 'WorkspaceRequest')
     WorkspaceRequestList = Shapes::ListShape.new(name: 'WorkspaceRequestList')
@@ -1558,6 +1559,7 @@ module Aws::WorkSpaces
     RegisterWorkspaceDirectoryRequest.add_member(:workspace_directory_name, Shapes::ShapeRef.new(shape: WorkspaceDirectoryName, location_name: "WorkspaceDirectoryName"))
     RegisterWorkspaceDirectoryRequest.add_member(:workspace_directory_description, Shapes::ShapeRef.new(shape: WorkspaceDirectoryDescription, location_name: "WorkspaceDirectoryDescription"))
     RegisterWorkspaceDirectoryRequest.add_member(:user_identity_type, Shapes::ShapeRef.new(shape: UserIdentityType, location_name: "UserIdentityType"))
+    RegisterWorkspaceDirectoryRequest.add_member(:workspace_os_user_mode, Shapes::ShapeRef.new(shape: WorkspaceOSUserMode, location_name: "WorkspaceOsUserMode"))
     RegisterWorkspaceDirectoryRequest.add_member(:idc_instance_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "IdcInstanceArn"))
     RegisterWorkspaceDirectoryRequest.add_member(:microsoft_entra_config, Shapes::ShapeRef.new(shape: MicrosoftEntraConfig, location_name: "MicrosoftEntraConfig"))
     RegisterWorkspaceDirectoryRequest.add_member(:workspace_type, Shapes::ShapeRef.new(shape: WorkspaceType, location_name: "WorkspaceType"))
@@ -1633,6 +1635,8 @@ module Aws::WorkSpaces
     SelfservicePermissions.add_member(:change_compute_type, Shapes::ShapeRef.new(shape: ReconnectEnum, location_name: "ChangeComputeType"))
     SelfservicePermissions.add_member(:switch_running_mode, Shapes::ShapeRef.new(shape: ReconnectEnum, location_name: "SwitchRunningMode"))
     SelfservicePermissions.add_member(:rebuild_workspace, Shapes::ShapeRef.new(shape: ReconnectEnum, location_name: "RebuildWorkspace"))
+    SelfservicePermissions.add_member(:nested_virtualization, Shapes::ShapeRef.new(shape: ReconnectEnum, location_name: "NestedVirtualization"))
+    SelfservicePermissions.add_member(:enable_end_user_advisor, Shapes::ShapeRef.new(shape: ReconnectEnum, location_name: "EnableEndUserAdvisor"))
     SelfservicePermissions.struct_class = Types::SelfservicePermissions
 
     Snapshot.add_member(:snapshot_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "SnapshotTime"))
@@ -1917,6 +1921,7 @@ module Aws::WorkSpaces
     WorkspaceDirectory.add_member(:idc_config, Shapes::ShapeRef.new(shape: IDCConfig, location_name: "IDCConfig"))
     WorkspaceDirectory.add_member(:active_directory_config, Shapes::ShapeRef.new(shape: ActiveDirectoryConfig, location_name: "ActiveDirectoryConfig"))
     WorkspaceDirectory.add_member(:streaming_properties, Shapes::ShapeRef.new(shape: StreamingProperties, location_name: "StreamingProperties"))
+    WorkspaceDirectory.add_member(:workspace_os_user_mode, Shapes::ShapeRef.new(shape: WorkspaceOSUserMode, location_name: "WorkspaceOsUserMode"))
     WorkspaceDirectory.add_member(:error_message, Shapes::ShapeRef.new(shape: Description, location_name: "ErrorMessage"))
     WorkspaceDirectory.struct_class = Types::WorkspaceDirectory
 
@@ -2040,13 +2045,14 @@ module Aws::WorkSpaces
         "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "workspaces",
         "jsonVersion" => "1.1",
-        "protocol" => "json",
-        "protocols" => ["json"],
+        "protocol" => "smithy-rpc-v2-cbor",
+        "protocols" => ["smithy-rpc-v2-cbor", "json"],
         "serviceFullName" => "Amazon WorkSpaces",
         "serviceId" => "WorkSpaces",
         "signatureVersion" => "v4",
         "targetPrefix" => "WorkspacesService",
         "uid" => "workspaces-2015-04-08",
+        "xmlNamespace" => "http://workspaces.amazonaws.com/api/v1",
       }
 
       api.add_operation(:accept_account_link_invitation, Seahorse::Model::Operation.new.tap do |o|

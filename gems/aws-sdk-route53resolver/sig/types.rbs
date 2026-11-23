@@ -63,6 +63,13 @@ module Aws::Route53Resolver
       SENSITIVE: []
     end
 
+    class AutoAllowlistConfig
+      attr_accessor initial_data_timeframe_hours: ::Integer
+      attr_accessor import_from_firewall_domain_list_id: ::String
+      attr_accessor auto_allowlist_firewall_domain_list_id: ::String
+      SENSITIVE: []
+    end
+
     class BatchCreateFirewallRuleError
       attr_accessor firewall_rule: Types::CreateFirewallRuleEntry
       attr_accessor code: ::String
@@ -423,7 +430,7 @@ module Aws::Route53Resolver
       attr_accessor creation_time: ::String
       attr_accessor modification_time: ::String
       attr_accessor category: ::String
-      attr_accessor managed_list_type: ("THREAT" | "CONTENT")
+      attr_accessor managed_list_type: ("THREAT" | "CONTENT" | "AUTOALLOWLIST")
       SENSITIVE: []
     end
 
@@ -433,8 +440,11 @@ module Aws::Route53Resolver
       attr_accessor name: ::String
       attr_accessor creator_request_id: ::String
       attr_accessor managed_owner_name: ::String
-      attr_accessor managed_list_type: ("THREAT" | "CONTENT")
+      attr_accessor managed_list_type: ("THREAT" | "CONTENT" | "AUTOALLOWLIST")
       attr_accessor category: ::String
+      attr_accessor firewall_rule_group_id: ::String
+      attr_accessor firewall_threat_protection_id: ::String
+      attr_accessor status: ("COMPLETE" | "COMPLETE_IMPORT_FAILED" | "IMPORTING" | "DELETING" | "UPDATING")
       SENSITIVE: []
     end
 
@@ -459,6 +469,15 @@ module Aws::Route53Resolver
       attr_accessor firewall_rule_type: Types::FirewallRuleType
       attr_accessor status: ::String
       attr_accessor status_message: ::String
+      SENSITIVE: []
+    end
+
+    class FirewallRuleDomain
+      attr_accessor domain_name: ::String
+      attr_accessor domain_status: ("OBSERVED" | "ALLOWED" | "DENIED" | "UNKNOWN")
+      attr_accessor last_24_hour_requests: ::Integer
+      attr_accessor total_requests: ::Integer
+      attr_accessor added_time: ::String
       SENSITIVE: []
     end
 
@@ -509,6 +528,7 @@ module Aws::Route53Resolver
       attr_accessor firewall_advanced_content_category: Types::FirewallAdvancedContentCategoryConfig
       attr_accessor firewall_advanced_threat_category: Types::FirewallAdvancedThreatCategoryConfig
       attr_accessor dns_threat_protection: Types::DnsThreatProtectionRuleTypeConfig
+      attr_accessor auto_allowlist: Types::AutoAllowlistConfig
       SENSITIVE: []
     end
 
@@ -538,6 +558,8 @@ module Aws::Route53Resolver
 
     class GetFirewallDomainListResponse
       attr_accessor firewall_domain_list: Types::FirewallDomainList
+      attr_accessor firewall_rule_group_id: ::String
+      attr_accessor firewall_threat_protection_id: ::String
       SENSITIVE: []
     end
 
@@ -784,6 +806,30 @@ module Aws::Route53Resolver
     class ListFirewallDomainsResponse
       attr_accessor next_token: ::String
       attr_accessor domains: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ListFirewallRuleDomainsQueryOptions
+      attr_accessor domain_status: ("OBSERVED" | "ALLOWED" | "DENIED")
+      attr_accessor sort_by: ("TIME_ADDED" | "DAILY_TOTAL" | "TOTAL_REQUESTS")
+      attr_accessor sort_order: ("ASC" | "DESC")
+      attr_accessor domain_name_filter: ::String
+      SENSITIVE: []
+    end
+
+    class ListFirewallRuleDomainsRequest
+      attr_accessor firewall_rule_group_id: ::String
+      attr_accessor firewall_threat_protection_id: ::String
+      attr_accessor firewall_domain_list_id: ::String
+      attr_accessor query_options: Types::ListFirewallRuleDomainsQueryOptions
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListFirewallRuleDomainsResponse
+      attr_accessor domains: ::Array[Types::FirewallRuleDomain]
+      attr_accessor next_token: ::String
       SENSITIVE: []
     end
 
@@ -1229,7 +1275,7 @@ module Aws::Route53Resolver
 
     class UpdateFirewallDomainsRequest
       attr_accessor firewall_domain_list_id: ::String
-      attr_accessor operation: ("ADD" | "REMOVE" | "REPLACE")
+      attr_accessor operation: ("ADD" | "REMOVE" | "REPLACE" | "DENY")
       attr_accessor domains: ::Array[::String]
       SENSITIVE: []
     end

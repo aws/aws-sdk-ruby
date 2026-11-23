@@ -264,7 +264,8 @@ module Aws::Billing
     #     An integer representing the maximum number attempts that will be made for
     #     a single request, including the initial attempt.  For example,
     #     setting this value to 5 will result in a request being retried up to
-    #     4 times. Used in `standard` and `adaptive` retry modes.
+    #     4 times. Used in `standard` and `adaptive` retry modes. Defaults to 3,
+    #     except for DynamoDB and DynamoDB Streams, which default to 4.
     #
     #   @option options [String] :profile ("default")
     #     Used when loading credentials from the shared credentials file at `HOME/.aws/credentials`.
@@ -327,15 +328,15 @@ module Aws::Billing
     #     used by the default backoff function. This option is only used in the
     #     `legacy` retry mode.
     #
-    #   @option options [String] :retry_mode ("legacy")
+    #   @option options [String] :retry_mode ("standard")
     #     Specifies which retry algorithm to use. Values are:
     #
-    #     * `legacy` - The pre-existing retry behavior. This is the default
-    #       value if no retry mode is provided.
+    #     * `legacy` - The pre-existing retry behavior.
     #
     #     * `standard` - A standardized set of retry rules across the AWS SDKs.
     #       This includes support for retry quotas, which limit the number of
-    #       unsuccessful retries a client can make.
+    #       unsuccessful retries a client can make. This is the default value
+    #       if no retry mode is provided.
     #
     #     * `adaptive` - A retry mode that includes all the functionality of
     #       `standard` mode along with automatic client side throttling.
@@ -543,7 +544,23 @@ module Aws::Billing
     #   views with.
     #
     # @option params [required, Array<String>] :source_views
-    #   A list of ARNs of the source billing views to associate.
+    #   A list of ARNs of the source billing views to associate. Source views
+    #   can be of the following types:
+    #
+    #   * `PRIMARY` - The billing view that contains all cost management data
+    #     associated with an account.
+    #
+    #   * `CUSTOM` - A billing view that a customer creates from one or more
+    #     source views.
+    #
+    #   * `BILLING_GROUP` - The billing view for an Billing Conductor billing
+    #     group.
+    #
+    #   * `BILLING_TRANSFER` - The billing view for the billing data that a
+    #     bill transfer account is financially responsible for.
+    #
+    #   * `BILLING_TRANSFER_SHOWBACK` - The billing view for billing data
+    #     configured for showback or chargeback purposes.
     #
     # @return [Types::AssociateSourceViewsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -641,7 +658,22 @@ module Aws::Billing
     #
     # @option params [required, Array<String>] :source_views
     #   A list of billing views used as the data source for the custom billing
-    #   view.
+    #   view. Source views can be of the following types:
+    #
+    #   * `PRIMARY` - The billing view that contains all cost management data
+    #     associated with an account.
+    #
+    #   * `CUSTOM` - A billing view that a customer creates from one or more
+    #     source views.
+    #
+    #   * `BILLING_GROUP` - The billing view for an Billing Conductor billing
+    #     group.
+    #
+    #   * `BILLING_TRANSFER` - The billing view for the billing data that a
+    #     bill transfer account is financially responsible for.
+    #
+    #   * `BILLING_TRANSFER_SHOWBACK` - The billing view for billing data
+    #     configured for showback or chargeback purposes.
     #
     # @option params [Types::Expression] :data_filter_expression
     #   See [Expression][1]. Billing view only supports `LINKED_ACCOUNT`,
@@ -1115,7 +1147,9 @@ module Aws::Billing
     # Retrieves billing preferences for the specified feature. Each feature
     # controls a distinct billing capability: which accounts can share
     # Reserved Instances or credits, whether billing alerts are enabled, the
-    # historical record of sharing changes, and per-credit options.
+    # historical record of sharing changes, per-credit options, and which
+    # accounts an individual Reserved Instance or Savings Plan is shared
+    # with.
     #
     # @option params [String] :next_token
     #   Pagination token from a previous response. Pass the value returned in
@@ -1129,12 +1163,16 @@ module Aws::Billing
     #   The feature to retrieve. Specify exactly one value. Valid values:
     #   `BILLING_ALERTS`, `RI_SHARING`, `RI_SHARING_HISTORY`,
     #   `CREDIT_SHARING`, `CREDIT_SHARING_HISTORY`, `CREDIT_LEVEL_SHARING`,
-    #   `CREDIT_PREFERENCE_OPTIONS`.
+    #   `CREDIT_PREFERENCE_OPTIONS`, `BENEFIT_LEVEL_SHARING`.
     #
     # @option params [Array<Types::BillingFeatureFilter>] :filters
     #   Filters to narrow results. Specify exactly one filter when supplied.
     #   The supported filter name is `PREFERENCE_KEY`, which accepts 1 to 10
     #   values to match preference keys.
+    #
+    #   For `BENEFIT_LEVEL_SHARING`, this filter is required. Specify exactly
+    #   one value that identifies the Reserved Instance (RI) or Savings Plan
+    #   (SP), in the form `benefit/{ri|sp}/{benefitId}`.
     #
     # @return [Types::GetBillingPreferencesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1146,7 +1184,7 @@ module Aws::Billing
     #   resp = client.get_billing_preferences({
     #     next_token: "PageToken",
     #     max_results: 1,
-    #     features: ["RI_SHARING"], # required, accepts RI_SHARING, RI_SHARING_HISTORY, CREDIT_SHARING, CREDIT_SHARING_HISTORY, CREDIT_LEVEL_SHARING, BILLING_ALERTS, CREDIT_PREFERENCE_OPTIONS
+    #     features: ["RI_SHARING"], # required, accepts RI_SHARING, RI_SHARING_HISTORY, CREDIT_SHARING, CREDIT_SHARING_HISTORY, CREDIT_LEVEL_SHARING, BILLING_ALERTS, CREDIT_PREFERENCE_OPTIONS, BENEFIT_LEVEL_SHARING
     #     filters: [
     #       {
     #         name: "PREFERENCE_KEY", # accepts PREFERENCE_KEY
@@ -1158,7 +1196,7 @@ module Aws::Billing
     # @example Response structure
     #
     #   resp.billing_preferences #=> Array
-    #   resp.billing_preferences[0].feature #=> String, one of "RI_SHARING", "RI_SHARING_HISTORY", "CREDIT_SHARING", "CREDIT_SHARING_HISTORY", "CREDIT_LEVEL_SHARING", "BILLING_ALERTS", "CREDIT_PREFERENCE_OPTIONS"
+    #   resp.billing_preferences[0].feature #=> String, one of "RI_SHARING", "RI_SHARING_HISTORY", "CREDIT_SHARING", "CREDIT_SHARING_HISTORY", "CREDIT_LEVEL_SHARING", "BILLING_ALERTS", "CREDIT_PREFERENCE_OPTIONS", "BENEFIT_LEVEL_SHARING"
     #   resp.billing_preferences[0].key #=> String
     #   resp.billing_preferences[0].value #=> String, one of "ENABLED", "DISABLED"
     #   resp.billing_preferences[0].account_name #=> String
@@ -1342,12 +1380,17 @@ module Aws::Billing
     #   allocation entries for all credits.
     #
     # @option params [required, Time,DateTime,Date,Integer,String] :start_date
-    #   Inclusive start date as Unix epoch seconds. Must be on or before
-    #   `endDate`. The range from `startDate` to `endDate` cannot exceed 24
-    #   billing months.
+    #   The inclusive start date of the range, in Unix epoch seconds. This
+    #   value must be earlier than `endDate`. You get credit allocations for
+    #   bills whose billing period starts on or after `startDate` and before
+    #   `endDate`. If `startDate` is in the middle of a billing period, that
+    #   period isn't included. The range can't exceed 24 calendar months.
     #
     # @option params [required, Time,DateTime,Date,Integer,String] :end_date
-    #   Inclusive end date as Unix epoch seconds.
+    #   The exclusive end date of the range, in Unix epoch seconds. To get one
+    #   billing month, set `startDate` to the first day of that month. Then
+    #   set `endDate` to the first day of the next month. Use 00:00 UTC for
+    #   both.
     #
     # @option params [String] :next_token
     #   Pagination token from a previous response. Pass the value returned in
@@ -2596,6 +2639,84 @@ module Aws::Billing
       req.send_request(options)
     end
 
+    # Splits the available balance of a credit into 2 to 99 new credits in
+    # the same account, and cancels the original credit. The new credits
+    # keep the original credit's end date and applicable products.
+    #
+    # The available balance is the remaining balance minus any amount
+    # reserved for a bill that isn't finalized. The portions must add up to
+    # exactly the available balance. Each portion must be at least 100.00 in
+    # the currency of the credit. For example, if the credit is in USD, each
+    # portion must be at least USD $100.00. A reserved amount stays on the
+    # original credit and still applies to that bill.
+    #
+    # A credit and every credit split from it count toward a limit of 100
+    # credits. After a split, you can't split or transfer the original
+    # credit. You can split or transfer its new credits, and you can split a
+    # credit after you transfer it.
+    #
+    # You must own the credit or be the payer of the account that owns it.
+    # You can't undo a split. This operation is idempotent and supports a
+    # dry run.
+    #
+    # @option params [required, String] :credit_id
+    #   The ID of the credit to split.
+    #
+    # @option params [required, Array<Types::SplitPortion>] :portions
+    #   The new credits to create, one for each portion, in the order listed.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that you provide to ensure that
+    #   the operation completes no more than one time. If you retry a
+    #   successful request with the same client token and parameters, the
+    #   retry completes without performing any further actions. If you reuse a
+    #   client token with different parameters, the request fails with a
+    #   `ValidationException`.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [Boolean] :dry_run
+    #   Specifies whether to validate the request and return the result
+    #   without changing any credit.
+    #
+    # @return [Types::SplitCreditResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::SplitCreditResponse#parent_credit_id #parent_credit_id} => String
+    #   * {Types::SplitCreditResponse#child_credits #child_credits} => Array&lt;Types::ChildCredit&gt;
+    #   * {Types::SplitCreditResponse#dry_run #dry_run} => Boolean
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.split_credit({
+    #     credit_id: "CreditId", # required
+    #     portions: [ # required
+    #       {
+    #         amount: "DecimalAmountString", # required
+    #         description: "SplitPortionDescriptionString",
+    #       },
+    #     ],
+    #     client_token: "ClientToken",
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.parent_credit_id #=> String
+    #   resp.child_credits #=> Array
+    #   resp.child_credits[0].credit_id #=> String
+    #   resp.child_credits[0].amount #=> String
+    #   resp.dry_run #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billing-2023-09-07/SplitCredit AWS API Documentation
+    #
+    # @overload split_credit(params = {})
+    # @param [Hash] params ({})
+    def split_credit(params = {}, options = {})
+      req = build_request(:split_credit, params)
+      req.send_request(options)
+    end
+
     # An API operation for adding one or more tags (key-value pairs) to a
     # resource.
     #
@@ -2645,6 +2766,77 @@ module Aws::Billing
       req.send_request(options)
     end
 
+    # Moves a credit to another account in the same consolidated billing
+    # family. The credit keeps its ID, balance, end date, and applicable
+    # products. Only the account that owns the credit changes.
+    #
+    # The transfer removes the credit's sharing settings. The new owner or
+    # the payer can set them again. Any amount reserved for a bill that
+    # isn't finalized moves with the credit and still applies to that bill.
+    #
+    # You must be the payer of both accounts. You can't transfer a credit
+    # that has ended, has no available balance, or is the original credit of
+    # a split. A transfer creates no credit, so it doesn't count toward the
+    # split limit, and the payer can transfer the credit back. This
+    # operation is idempotent and supports a dry run.
+    #
+    # @option params [required, String] :credit_id
+    #   The ID of the credit to transfer.
+    #
+    # @option params [required, String] :destination_account_id
+    #   The Amazon Web Services account ID that becomes the owner of the
+    #   credit. The account must be in your consolidated billing family and
+    #   must not be the current owner.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that you provide to ensure that
+    #   the operation completes no more than one time. If you retry a
+    #   successful request with the same client token and parameters, the
+    #   retry completes without performing any further actions. If you reuse a
+    #   client token with different parameters, the request fails with a
+    #   `ValidationException`.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [Boolean] :dry_run
+    #   Specifies whether to validate the request and return the result
+    #   without changing the credit.
+    #
+    # @return [Types::TransferCreditResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::TransferCreditResponse#source_credit_id #source_credit_id} => String
+    #   * {Types::TransferCreditResponse#new_credit_id #new_credit_id} => String
+    #   * {Types::TransferCreditResponse#destination_account_id #destination_account_id} => String
+    #   * {Types::TransferCreditResponse#amount #amount} => String
+    #   * {Types::TransferCreditResponse#dry_run #dry_run} => Boolean
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.transfer_credit({
+    #     credit_id: "CreditId", # required
+    #     destination_account_id: "AccountId", # required
+    #     client_token: "ClientToken",
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.source_credit_id #=> String
+    #   resp.new_credit_id #=> String
+    #   resp.destination_account_id #=> String
+    #   resp.amount #=> String
+    #   resp.dry_run #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billing-2023-09-07/TransferCredit AWS API Documentation
+    #
+    # @overload transfer_credit(params = {})
+    # @param [Hash] params ({})
+    def transfer_credit(params = {}, options = {})
+      req = build_request(:transfer_credit, params)
+      req.send_request(options)
+    end
+
     # Removes one or more tags from a resource. Specify only tag keys in
     # your request. Don't specify the value.
     #
@@ -2691,18 +2883,18 @@ module Aws::Billing
     # keys. The action sets the value for each provided key; keys not
     # present in the request are unchanged.
     #
-    # Sharing keys (`RI_SHARING`, `CREDIT_SHARING`, `CREDIT_LEVEL_SHARING`,
-    # and sharing keys under `CREDIT_PREFERENCE_OPTIONS`) may only be set by
-    # the management account of a consolidated billing family. The
-    # `credit/{creditId}/status` key may be set by member accounts for
-    # credits they own, or by the management account for any credit in the
-    # family.
+    # To set sharing keys (`RI_SHARING`, `CREDIT_SHARING`,
+    # `CREDIT_LEVEL_SHARING`, `BENEFIT_LEVEL_SHARING`, and sharing keys
+    # under `CREDIT_PREFERENCE_OPTIONS`), you must use the management
+    # account of a consolidated billing family. To set the
+    # `credit/{creditId}/status` key, you must own the credit or use the
+    # management account of its family.
     #
     # @option params [required, String] :feature
     #   The feature to update. Valid values: `BILLING_ALERTS`, `RI_SHARING`,
-    #   `CREDIT_SHARING`, `CREDIT_LEVEL_SHARING`, `CREDIT_PREFERENCE_OPTIONS`.
-    #   The history features (`RI_SHARING_HISTORY` and
-    #   `CREDIT_SHARING_HISTORY`) are read-only and cannot be updated.
+    #   `CREDIT_SHARING`, `CREDIT_LEVEL_SHARING`, `CREDIT_PREFERENCE_OPTIONS`,
+    #   `BENEFIT_LEVEL_SHARING`. The history features (`RI_SHARING_HISTORY`
+    #   and `CREDIT_SHARING_HISTORY`) are read-only and cannot be updated.
     #
     # @option params [required, Array<Types::BillingPreferenceForKey>] :billing_preferences_per_key
     #   Key/value pairs to apply. All keys in a single request must be valid
@@ -2710,12 +2902,51 @@ module Aws::Billing
     #   `CREDIT_PREFERENCE_OPTIONS`, all keys must reference the same
     #   `creditId`.
     #
+    #   For `BENEFIT_LEVEL_SHARING`, all keys must reference the same Reserved
+    #   Instance or Savings Plan. To share it with the accounts in one Cost
+    #   Category rule, send these three keys with the value `ENABLED`:
+    #
+    #   * `benefit/{ri|sp}/{benefitId}/sharing/costCategoryArn/{costCategoryArn}`
+    #
+    #   * `benefit/{ri|sp}/{benefitId}/sharing/ruleName/{ruleName}`
+    #
+    #   * `benefit/{ri|sp}/{benefitId}/sharing/mode/{prioritized|restricted}`
+    #
+    #   With `prioritized`, any benefit that the rule's accounts don't use
+    #   goes to the rest of your consolidated billing family, following your
+    #   family sharing settings. With `restricted`, only the owner and the
+    #   rule's accounts receive it. The Cost Category must belong to your
+    #   account. To stop sharing, send the same three keys with the value
+    #   `DISABLED`.
+    #
+    #   For `RI_SHARING` and `CREDIT_SHARING`, you can share benefits by
+    #   account group. Each rule in a Cost Category is one group. Send exactly
+    #   one of these group keys with the value `ENABLED`:
+    #
+    #   * `open-sharing` - Share across the whole consolidated billing family,
+    #     with no groups.
+    #
+    #   * `costcategory-prioritized/{costCategoryArn}` - Share within each
+    #     group first, then with the rest of the family.
+    #
+    #   * `costcategory-restricted/{costCategoryArn}` - An account in a group
+    #     shares only with accounts in the same group.
+    #
+    #   For `RI_SHARING`, the `costcategory-` keys use a Cost Category that
+    #   supports the `billing:rispgroupsharing` resource type. To use a Cost
+    #   Category that supports the `billing:benefitgroupsharing` resource
+    #   type, use the `benefitgroup-prioritized/` or
+    #   `benefitgroup-restricted/` prefix instead. For `CREDIT_SHARING`, the
+    #   Cost Category must support the `billing:benefitgroupsharing` resource
+    #   type. The Cost Category must belong to your account.
+    #   `GetBillingPreferences` returns the group key that is in effect.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_billing_preferences({
-    #     feature: "RI_SHARING", # required, accepts RI_SHARING, RI_SHARING_HISTORY, CREDIT_SHARING, CREDIT_SHARING_HISTORY, CREDIT_LEVEL_SHARING, BILLING_ALERTS, CREDIT_PREFERENCE_OPTIONS
+    #     feature: "RI_SHARING", # required, accepts RI_SHARING, RI_SHARING_HISTORY, CREDIT_SHARING, CREDIT_SHARING_HISTORY, CREDIT_LEVEL_SHARING, BILLING_ALERTS, CREDIT_PREFERENCE_OPTIONS, BENEFIT_LEVEL_SHARING
     #     billing_preferences_per_key: [ # required
     #       {
     #         key: "PreferenceKey", # required
@@ -2839,7 +3070,7 @@ module Aws::Billing
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-billing'
-      context[:gem_version] = '1.41.0'
+      context[:gem_version] = '1.49.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

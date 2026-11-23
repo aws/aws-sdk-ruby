@@ -40,8 +40,10 @@ module Aws::Route53
   # * {DelegationSetInUse}
   # * {DelegationSetNotAvailable}
   # * {DelegationSetNotReusable}
+  # * {FeatureNotEnabled}
   # * {HealthCheckAlreadyExists}
   # * {HealthCheckInUse}
+  # * {HealthCheckSourceAlreadyExists}
   # * {HealthCheckVersionMismatch}
   # * {HostedZoneAlreadyExists}
   # * {HostedZoneNotEmpty}
@@ -58,6 +60,7 @@ module Aws::Route53
   # * {InvalidKeySigningKeyName}
   # * {InvalidKeySigningKeyStatus}
   # * {InvalidPaginationToken}
+  # * {InvalidResourceRecordSetProtectionBatch}
   # * {InvalidSigningStatus}
   # * {InvalidTrafficPolicyDocument}
   # * {InvalidVPCId}
@@ -74,6 +77,7 @@ module Aws::Route53
   # * {NoSuchDelegationSet}
   # * {NoSuchGeoLocation}
   # * {NoSuchHealthCheck}
+  # * {NoSuchHealthCheckSource}
   # * {NoSuchHostedZone}
   # * {NoSuchKeySigningKey}
   # * {NoSuchQueryLoggingConfig}
@@ -81,9 +85,11 @@ module Aws::Route53
   # * {NoSuchTrafficPolicyInstance}
   # * {NotAuthorizedException}
   # * {PriorRequestNotComplete}
+  # * {ProtectionAlreadyExists}
   # * {PublicZoneVPCAssociation}
   # * {QueryLoggingConfigAlreadyExists}
   # * {ThrottlingException}
+  # * {TooManyHealthCheckSources}
   # * {TooManyHealthChecks}
   # * {TooManyHostedZones}
   # * {TooManyKeySigningKeys}
@@ -298,6 +304,21 @@ module Aws::Route53
       end
     end
 
+    class FeatureNotEnabled < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Route53::Types::FeatureNotEnabled] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
     class HealthCheckAlreadyExists < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -318,6 +339,21 @@ module Aws::Route53
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::Route53::Types::HealthCheckInUse] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class HealthCheckSourceAlreadyExists < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Route53::Types::HealthCheckSourceAlreadyExists] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
@@ -573,6 +609,26 @@ module Aws::Route53
       end
     end
 
+    class InvalidResourceRecordSetProtectionBatch < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Route53::Types::InvalidResourceRecordSetProtectionBatch] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+
+      # @return [String]
+      def errors
+        @data[:errors]
+      end
+    end
+
     class InvalidSigningStatus < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -813,6 +869,21 @@ module Aws::Route53
       end
     end
 
+    class NoSuchHealthCheckSource < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Route53::Types::NoSuchHealthCheckSource] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
     class NoSuchHostedZone < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -918,6 +989,26 @@ module Aws::Route53
       end
     end
 
+    class ProtectionAlreadyExists < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Route53::Types::ProtectionAlreadyExists] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+
+      # @return [String]
+      def errors
+        @data[:errors]
+      end
+    end
+
     class PublicZoneVPCAssociation < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -953,6 +1044,21 @@ module Aws::Route53
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::Route53::Types::ThrottlingException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class TooManyHealthCheckSources < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Route53::Types::TooManyHealthCheckSources] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

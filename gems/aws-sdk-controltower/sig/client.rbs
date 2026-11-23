@@ -282,7 +282,8 @@ module Aws
                                       baseline_identifiers: Array[::String]?,
                                       parent_identifiers: Array[::String]?,
                                       statuses: Array[("SUCCEEDED" | "FAILED" | "UNDER_CHANGE")]?,
-                                      inheritance_drift_statuses: Array[("IN_SYNC" | "DRIFTED")]?
+                                      inheritance_drift_statuses: Array[("IN_SYNC" | "DRIFTED")]?,
+                                      source_drift_statuses: Array[("IN_SYNC" | "DRIFTED")]?
                                     },
                                     ?next_token: ::String,
                                     ?max_results: ::Integer,

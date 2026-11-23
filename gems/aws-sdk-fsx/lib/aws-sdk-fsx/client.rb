@@ -264,7 +264,8 @@ module Aws::FSx
     #     An integer representing the maximum number attempts that will be made for
     #     a single request, including the initial attempt.  For example,
     #     setting this value to 5 will result in a request being retried up to
-    #     4 times. Used in `standard` and `adaptive` retry modes.
+    #     4 times. Used in `standard` and `adaptive` retry modes. Defaults to 3,
+    #     except for DynamoDB and DynamoDB Streams, which default to 4.
     #
     #   @option options [String] :profile ("default")
     #     Used when loading credentials from the shared credentials file at `HOME/.aws/credentials`.
@@ -327,15 +328,15 @@ module Aws::FSx
     #     used by the default backoff function. This option is only used in the
     #     `legacy` retry mode.
     #
-    #   @option options [String] :retry_mode ("legacy")
+    #   @option options [String] :retry_mode ("standard")
     #     Specifies which retry algorithm to use. Values are:
     #
-    #     * `legacy` - The pre-existing retry behavior. This is the default
-    #       value if no retry mode is provided.
+    #     * `legacy` - The pre-existing retry behavior.
     #
     #     * `standard` - A standardized set of retry rules across the AWS SDKs.
     #       This includes support for retry quotas, which limit the number of
-    #       unsuccessful retries a client can make.
+    #       unsuccessful retries a client can make. This is the default value
+    #       if no retry mode is provided.
     #
     #     * `adaptive` - A retry mode that includes all the functionality of
     #       `standard` mode along with automatic client side throttling.
@@ -948,7 +949,7 @@ module Aws::FSx
     #   resp.backup.file_system.administrative_actions[0].message #=> String
     #   resp.backup.file_system.ontap_configuration.automatic_backup_retention_days #=> Integer
     #   resp.backup.file_system.ontap_configuration.daily_automatic_backup_start_time #=> String
-    #   resp.backup.file_system.ontap_configuration.deployment_type #=> String, one of "MULTI_AZ_1", "SINGLE_AZ_1", "SINGLE_AZ_2", "MULTI_AZ_2"
+    #   resp.backup.file_system.ontap_configuration.deployment_type #=> String, one of "MULTI_AZ_1", "SINGLE_AZ_1", "SINGLE_AZ_2", "MULTI_AZ_2", "SINGLE_AZ_3", "MULTI_AZ_3"
     #   resp.backup.file_system.ontap_configuration.endpoint_ip_address_range #=> String
     #   resp.backup.file_system.ontap_configuration.endpoints.intercluster.dns_name #=> String
     #   resp.backup.file_system.ontap_configuration.endpoints.intercluster.ip_addresses #=> Array
@@ -1123,7 +1124,7 @@ module Aws::FSx
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.administrative_actions #=> Types::AdministrativeActions
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.ontap_configuration.automatic_backup_retention_days #=> Integer
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.ontap_configuration.daily_automatic_backup_start_time #=> String
-    #   resp.backup.volume.administrative_actions[0].target_file_system_values.ontap_configuration.deployment_type #=> String, one of "MULTI_AZ_1", "SINGLE_AZ_1", "SINGLE_AZ_2", "MULTI_AZ_2"
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.ontap_configuration.deployment_type #=> String, one of "MULTI_AZ_1", "SINGLE_AZ_1", "SINGLE_AZ_2", "MULTI_AZ_2", "SINGLE_AZ_3", "MULTI_AZ_3"
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.ontap_configuration.endpoint_ip_address_range #=> String
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.intercluster.dns_name #=> String
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.intercluster.ip_addresses #=> Array
@@ -1387,7 +1388,7 @@ module Aws::FSx
     #   resp.administrative_actions[0].target_file_system_values.administrative_actions #=> Types::AdministrativeActions
     #   resp.administrative_actions[0].target_file_system_values.ontap_configuration.automatic_backup_retention_days #=> Integer
     #   resp.administrative_actions[0].target_file_system_values.ontap_configuration.daily_automatic_backup_start_time #=> String
-    #   resp.administrative_actions[0].target_file_system_values.ontap_configuration.deployment_type #=> String, one of "MULTI_AZ_1", "SINGLE_AZ_1", "SINGLE_AZ_2", "MULTI_AZ_2"
+    #   resp.administrative_actions[0].target_file_system_values.ontap_configuration.deployment_type #=> String, one of "MULTI_AZ_1", "SINGLE_AZ_1", "SINGLE_AZ_2", "MULTI_AZ_2", "SINGLE_AZ_3", "MULTI_AZ_3"
     #   resp.administrative_actions[0].target_file_system_values.ontap_configuration.endpoint_ip_address_range #=> String
     #   resp.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.intercluster.dns_name #=> String
     #   resp.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.intercluster.ip_addresses #=> Array
@@ -1528,7 +1529,9 @@ module Aws::FSx
     # For FSx for OpenZFS file systems, the volume must be hosted on a
     # high-availability file system, either Single-AZ or Multi-AZ. For more
     # information, see [Accessing your data using Amazon S3 access
-    # points][1]. in the Amazon FSx for OpenZFS User Guide.
+    # points][1] in the Amazon FSx for OpenZFS User Guide. For FSx for ONTAP
+    # file systems, see [Accessing data using Amazon S3 access points][2] in
+    # the Amazon FSx for NetApp ONTAP User Guide.
     #
     # The requester requires the following permissions to perform these
     # actions:
@@ -1552,6 +1555,7 @@ module Aws::FSx
     #
     #
     # [1]: https://docs.aws.amazon.com/fsx/latest/OpenZFSGuide/s3accesspoints-for-FSx.html
+    # [2]: https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/s3-access-points.html
     #
     # @option params [String] :client_request_token
     #   (Optional) An idempotency token for resource creation, in a string of
@@ -1566,8 +1570,8 @@ module Aws::FSx
     #   The name you want to assign to this S3 access point.
     #
     # @option params [required, String] :type
-    #   The type of S3 access point you want to create. Only `OpenZFS` is
-    #   supported.
+    #   The type of S3 access point you want to create. Valid values are
+    #   `OPENZFS` and `ONTAP`.
     #
     # @option params [Types::CreateAndAttachS3AccessPointOpenZFSConfiguration] :open_zfs_configuration
     #   Specifies the configuration to use when creating and attaching an S3
@@ -1981,7 +1985,7 @@ module Aws::FSx
     #   resp.backup.file_system.administrative_actions[0].message #=> String
     #   resp.backup.file_system.ontap_configuration.automatic_backup_retention_days #=> Integer
     #   resp.backup.file_system.ontap_configuration.daily_automatic_backup_start_time #=> String
-    #   resp.backup.file_system.ontap_configuration.deployment_type #=> String, one of "MULTI_AZ_1", "SINGLE_AZ_1", "SINGLE_AZ_2", "MULTI_AZ_2"
+    #   resp.backup.file_system.ontap_configuration.deployment_type #=> String, one of "MULTI_AZ_1", "SINGLE_AZ_1", "SINGLE_AZ_2", "MULTI_AZ_2", "SINGLE_AZ_3", "MULTI_AZ_3"
     #   resp.backup.file_system.ontap_configuration.endpoint_ip_address_range #=> String
     #   resp.backup.file_system.ontap_configuration.endpoints.intercluster.dns_name #=> String
     #   resp.backup.file_system.ontap_configuration.endpoints.intercluster.ip_addresses #=> Array
@@ -2156,7 +2160,7 @@ module Aws::FSx
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.administrative_actions #=> Types::AdministrativeActions
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.ontap_configuration.automatic_backup_retention_days #=> Integer
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.ontap_configuration.daily_automatic_backup_start_time #=> String
-    #   resp.backup.volume.administrative_actions[0].target_file_system_values.ontap_configuration.deployment_type #=> String, one of "MULTI_AZ_1", "SINGLE_AZ_1", "SINGLE_AZ_2", "MULTI_AZ_2"
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.ontap_configuration.deployment_type #=> String, one of "MULTI_AZ_1", "SINGLE_AZ_1", "SINGLE_AZ_2", "MULTI_AZ_2", "SINGLE_AZ_3", "MULTI_AZ_3"
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.ontap_configuration.endpoint_ip_address_range #=> String
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.intercluster.dns_name #=> String
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.intercluster.ip_addresses #=> Array
@@ -2288,6 +2292,10 @@ module Aws::FSx
     #   overlapping file system paths. For example, if a data repository is
     #   associated with file system path `/ns1/`, then you cannot link another
     #   data repository with file system path `/ns1/ns2`.
+    #
+    #   You must specify this path when you create a data repository
+    #   association. There is no default value; a request that omits it fails
+    #   with a `BadRequest` error.
     #
     #   This path specifies where in your file system files will be exported
     #   from or imported to. This file system directory can be linked to only
@@ -3178,7 +3186,7 @@ module Aws::FSx
     #     ontap_configuration: {
     #       automatic_backup_retention_days: 1,
     #       daily_automatic_backup_start_time: "DailyTime",
-    #       deployment_type: "MULTI_AZ_1", # required, accepts MULTI_AZ_1, SINGLE_AZ_1, SINGLE_AZ_2, MULTI_AZ_2
+    #       deployment_type: "MULTI_AZ_1", # required, accepts MULTI_AZ_1, SINGLE_AZ_1, SINGLE_AZ_2, MULTI_AZ_2, SINGLE_AZ_3, MULTI_AZ_3
     #       endpoint_ip_address_range: "IpAddressRange",
     #       fsx_admin_password: "AdminPassword",
     #       disk_iops_configuration: {
@@ -3409,7 +3417,7 @@ module Aws::FSx
     #   resp.file_system.administrative_actions[0].message #=> String
     #   resp.file_system.ontap_configuration.automatic_backup_retention_days #=> Integer
     #   resp.file_system.ontap_configuration.daily_automatic_backup_start_time #=> String
-    #   resp.file_system.ontap_configuration.deployment_type #=> String, one of "MULTI_AZ_1", "SINGLE_AZ_1", "SINGLE_AZ_2", "MULTI_AZ_2"
+    #   resp.file_system.ontap_configuration.deployment_type #=> String, one of "MULTI_AZ_1", "SINGLE_AZ_1", "SINGLE_AZ_2", "MULTI_AZ_2", "SINGLE_AZ_3", "MULTI_AZ_3"
     #   resp.file_system.ontap_configuration.endpoint_ip_address_range #=> String
     #   resp.file_system.ontap_configuration.endpoints.intercluster.dns_name #=> String
     #   resp.file_system.ontap_configuration.endpoints.intercluster.ip_addresses #=> Array
@@ -3999,7 +4007,7 @@ module Aws::FSx
     #   resp.file_system.administrative_actions[0].message #=> String
     #   resp.file_system.ontap_configuration.automatic_backup_retention_days #=> Integer
     #   resp.file_system.ontap_configuration.daily_automatic_backup_start_time #=> String
-    #   resp.file_system.ontap_configuration.deployment_type #=> String, one of "MULTI_AZ_1", "SINGLE_AZ_1", "SINGLE_AZ_2", "MULTI_AZ_2"
+    #   resp.file_system.ontap_configuration.deployment_type #=> String, one of "MULTI_AZ_1", "SINGLE_AZ_1", "SINGLE_AZ_2", "MULTI_AZ_2", "SINGLE_AZ_3", "MULTI_AZ_3"
     #   resp.file_system.ontap_configuration.endpoint_ip_address_range #=> String
     #   resp.file_system.ontap_configuration.endpoints.intercluster.dns_name #=> String
     #   resp.file_system.ontap_configuration.endpoints.intercluster.ip_addresses #=> Array
@@ -4216,7 +4224,7 @@ module Aws::FSx
     #   resp.snapshot.administrative_actions[0].target_file_system_values.administrative_actions #=> Types::AdministrativeActions
     #   resp.snapshot.administrative_actions[0].target_file_system_values.ontap_configuration.automatic_backup_retention_days #=> Integer
     #   resp.snapshot.administrative_actions[0].target_file_system_values.ontap_configuration.daily_automatic_backup_start_time #=> String
-    #   resp.snapshot.administrative_actions[0].target_file_system_values.ontap_configuration.deployment_type #=> String, one of "MULTI_AZ_1", "SINGLE_AZ_1", "SINGLE_AZ_2", "MULTI_AZ_2"
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.ontap_configuration.deployment_type #=> String, one of "MULTI_AZ_1", "SINGLE_AZ_1", "SINGLE_AZ_2", "MULTI_AZ_2", "SINGLE_AZ_3", "MULTI_AZ_3"
     #   resp.snapshot.administrative_actions[0].target_file_system_values.ontap_configuration.endpoint_ip_address_range #=> String
     #   resp.snapshot.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.intercluster.dns_name #=> String
     #   resp.snapshot.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.intercluster.ip_addresses #=> Array
@@ -4728,7 +4736,7 @@ module Aws::FSx
     #   resp.volume.administrative_actions[0].target_file_system_values.administrative_actions #=> Types::AdministrativeActions
     #   resp.volume.administrative_actions[0].target_file_system_values.ontap_configuration.automatic_backup_retention_days #=> Integer
     #   resp.volume.administrative_actions[0].target_file_system_values.ontap_configuration.daily_automatic_backup_start_time #=> String
-    #   resp.volume.administrative_actions[0].target_file_system_values.ontap_configuration.deployment_type #=> String, one of "MULTI_AZ_1", "SINGLE_AZ_1", "SINGLE_AZ_2", "MULTI_AZ_2"
+    #   resp.volume.administrative_actions[0].target_file_system_values.ontap_configuration.deployment_type #=> String, one of "MULTI_AZ_1", "SINGLE_AZ_1", "SINGLE_AZ_2", "MULTI_AZ_2", "SINGLE_AZ_3", "MULTI_AZ_3"
     #   resp.volume.administrative_actions[0].target_file_system_values.ontap_configuration.endpoint_ip_address_range #=> String
     #   resp.volume.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.intercluster.dns_name #=> String
     #   resp.volume.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.intercluster.ip_addresses #=> Array
@@ -5037,7 +5045,7 @@ module Aws::FSx
     #   resp.volume.administrative_actions[0].target_file_system_values.administrative_actions #=> Types::AdministrativeActions
     #   resp.volume.administrative_actions[0].target_file_system_values.ontap_configuration.automatic_backup_retention_days #=> Integer
     #   resp.volume.administrative_actions[0].target_file_system_values.ontap_configuration.daily_automatic_backup_start_time #=> String
-    #   resp.volume.administrative_actions[0].target_file_system_values.ontap_configuration.deployment_type #=> String, one of "MULTI_AZ_1", "SINGLE_AZ_1", "SINGLE_AZ_2", "MULTI_AZ_2"
+    #   resp.volume.administrative_actions[0].target_file_system_values.ontap_configuration.deployment_type #=> String, one of "MULTI_AZ_1", "SINGLE_AZ_1", "SINGLE_AZ_2", "MULTI_AZ_2", "SINGLE_AZ_3", "MULTI_AZ_3"
     #   resp.volume.administrative_actions[0].target_file_system_values.ontap_configuration.endpoint_ip_address_range #=> String
     #   resp.volume.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.intercluster.dns_name #=> String
     #   resp.volume.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.intercluster.ip_addresses #=> Array
@@ -5912,7 +5920,7 @@ module Aws::FSx
     #   resp.backups[0].file_system.administrative_actions[0].message #=> String
     #   resp.backups[0].file_system.ontap_configuration.automatic_backup_retention_days #=> Integer
     #   resp.backups[0].file_system.ontap_configuration.daily_automatic_backup_start_time #=> String
-    #   resp.backups[0].file_system.ontap_configuration.deployment_type #=> String, one of "MULTI_AZ_1", "SINGLE_AZ_1", "SINGLE_AZ_2", "MULTI_AZ_2"
+    #   resp.backups[0].file_system.ontap_configuration.deployment_type #=> String, one of "MULTI_AZ_1", "SINGLE_AZ_1", "SINGLE_AZ_2", "MULTI_AZ_2", "SINGLE_AZ_3", "MULTI_AZ_3"
     #   resp.backups[0].file_system.ontap_configuration.endpoint_ip_address_range #=> String
     #   resp.backups[0].file_system.ontap_configuration.endpoints.intercluster.dns_name #=> String
     #   resp.backups[0].file_system.ontap_configuration.endpoints.intercluster.ip_addresses #=> Array
@@ -6087,7 +6095,7 @@ module Aws::FSx
     #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.administrative_actions #=> Types::AdministrativeActions
     #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.ontap_configuration.automatic_backup_retention_days #=> Integer
     #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.ontap_configuration.daily_automatic_backup_start_time #=> String
-    #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.ontap_configuration.deployment_type #=> String, one of "MULTI_AZ_1", "SINGLE_AZ_1", "SINGLE_AZ_2", "MULTI_AZ_2"
+    #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.ontap_configuration.deployment_type #=> String, one of "MULTI_AZ_1", "SINGLE_AZ_1", "SINGLE_AZ_2", "MULTI_AZ_2", "SINGLE_AZ_3", "MULTI_AZ_3"
     #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.ontap_configuration.endpoint_ip_address_range #=> String
     #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.intercluster.dns_name #=> String
     #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.intercluster.ip_addresses #=> Array
@@ -6816,7 +6824,7 @@ module Aws::FSx
     #   resp.file_systems[0].administrative_actions[0].message #=> String
     #   resp.file_systems[0].ontap_configuration.automatic_backup_retention_days #=> Integer
     #   resp.file_systems[0].ontap_configuration.daily_automatic_backup_start_time #=> String
-    #   resp.file_systems[0].ontap_configuration.deployment_type #=> String, one of "MULTI_AZ_1", "SINGLE_AZ_1", "SINGLE_AZ_2", "MULTI_AZ_2"
+    #   resp.file_systems[0].ontap_configuration.deployment_type #=> String, one of "MULTI_AZ_1", "SINGLE_AZ_1", "SINGLE_AZ_2", "MULTI_AZ_2", "SINGLE_AZ_3", "MULTI_AZ_3"
     #   resp.file_systems[0].ontap_configuration.endpoint_ip_address_range #=> String
     #   resp.file_systems[0].ontap_configuration.endpoints.intercluster.dns_name #=> String
     #   resp.file_systems[0].ontap_configuration.endpoints.intercluster.ip_addresses #=> Array
@@ -6984,8 +6992,8 @@ module Aws::FSx
     #
     # When retrieving all snapshots, you can optionally specify the
     # `MaxResults` parameter to limit the number of snapshots in a response.
-    # If more backups remain, Amazon FSx returns a `NextToken` value in the
-    # response. In this case, send a later request with the `NextToken`
+    # If more snapshots remain, Amazon FSx returns a `NextToken` value in
+    # the response. In this case, send a later request with the `NextToken`
     # request parameter set to the value of `NextToken` from the last
     # response.
     #
@@ -7001,7 +7009,7 @@ module Aws::FSx
     #   snapshot descriptions while still including a `NextToken` value.
     #
     # * The order of snapshots returned in the response of one
-    #   `DescribeSnapshots` call and the order of backups returned across
+    #   `DescribeSnapshots` call and the order of snapshots returned across
     #   the responses of a multi-call iteration is unspecified.
     #
     # @option params [Array<String>] :snapshot_ids
@@ -7147,7 +7155,7 @@ module Aws::FSx
     #   resp.snapshots[0].administrative_actions[0].target_file_system_values.administrative_actions #=> Types::AdministrativeActions
     #   resp.snapshots[0].administrative_actions[0].target_file_system_values.ontap_configuration.automatic_backup_retention_days #=> Integer
     #   resp.snapshots[0].administrative_actions[0].target_file_system_values.ontap_configuration.daily_automatic_backup_start_time #=> String
-    #   resp.snapshots[0].administrative_actions[0].target_file_system_values.ontap_configuration.deployment_type #=> String, one of "MULTI_AZ_1", "SINGLE_AZ_1", "SINGLE_AZ_2", "MULTI_AZ_2"
+    #   resp.snapshots[0].administrative_actions[0].target_file_system_values.ontap_configuration.deployment_type #=> String, one of "MULTI_AZ_1", "SINGLE_AZ_1", "SINGLE_AZ_2", "MULTI_AZ_2", "SINGLE_AZ_3", "MULTI_AZ_3"
     #   resp.snapshots[0].administrative_actions[0].target_file_system_values.ontap_configuration.endpoint_ip_address_range #=> String
     #   resp.snapshots[0].administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.intercluster.dns_name #=> String
     #   resp.snapshots[0].administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.intercluster.ip_addresses #=> Array
@@ -7538,7 +7546,7 @@ module Aws::FSx
     #   resp.volumes[0].administrative_actions[0].target_file_system_values.administrative_actions #=> Types::AdministrativeActions
     #   resp.volumes[0].administrative_actions[0].target_file_system_values.ontap_configuration.automatic_backup_retention_days #=> Integer
     #   resp.volumes[0].administrative_actions[0].target_file_system_values.ontap_configuration.daily_automatic_backup_start_time #=> String
-    #   resp.volumes[0].administrative_actions[0].target_file_system_values.ontap_configuration.deployment_type #=> String, one of "MULTI_AZ_1", "SINGLE_AZ_1", "SINGLE_AZ_2", "MULTI_AZ_2"
+    #   resp.volumes[0].administrative_actions[0].target_file_system_values.ontap_configuration.deployment_type #=> String, one of "MULTI_AZ_1", "SINGLE_AZ_1", "SINGLE_AZ_2", "MULTI_AZ_2", "SINGLE_AZ_3", "MULTI_AZ_3"
     #   resp.volumes[0].administrative_actions[0].target_file_system_values.ontap_configuration.endpoint_ip_address_range #=> String
     #   resp.volumes[0].administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.intercluster.dns_name #=> String
     #   resp.volumes[0].administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.intercluster.ip_addresses #=> Array
@@ -8024,7 +8032,7 @@ module Aws::FSx
     #   resp.file_system.administrative_actions[0].message #=> String
     #   resp.file_system.ontap_configuration.automatic_backup_retention_days #=> Integer
     #   resp.file_system.ontap_configuration.daily_automatic_backup_start_time #=> String
-    #   resp.file_system.ontap_configuration.deployment_type #=> String, one of "MULTI_AZ_1", "SINGLE_AZ_1", "SINGLE_AZ_2", "MULTI_AZ_2"
+    #   resp.file_system.ontap_configuration.deployment_type #=> String, one of "MULTI_AZ_1", "SINGLE_AZ_1", "SINGLE_AZ_2", "MULTI_AZ_2", "SINGLE_AZ_3", "MULTI_AZ_3"
     #   resp.file_system.ontap_configuration.endpoint_ip_address_range #=> String
     #   resp.file_system.ontap_configuration.endpoints.intercluster.dns_name #=> String
     #   resp.file_system.ontap_configuration.endpoints.intercluster.ip_addresses #=> Array
@@ -8212,7 +8220,7 @@ module Aws::FSx
     #   resp.administrative_actions[0].target_file_system_values.administrative_actions #=> Types::AdministrativeActions
     #   resp.administrative_actions[0].target_file_system_values.ontap_configuration.automatic_backup_retention_days #=> Integer
     #   resp.administrative_actions[0].target_file_system_values.ontap_configuration.daily_automatic_backup_start_time #=> String
-    #   resp.administrative_actions[0].target_file_system_values.ontap_configuration.deployment_type #=> String, one of "MULTI_AZ_1", "SINGLE_AZ_1", "SINGLE_AZ_2", "MULTI_AZ_2"
+    #   resp.administrative_actions[0].target_file_system_values.ontap_configuration.deployment_type #=> String, one of "MULTI_AZ_1", "SINGLE_AZ_1", "SINGLE_AZ_2", "MULTI_AZ_2", "SINGLE_AZ_3", "MULTI_AZ_3"
     #   resp.administrative_actions[0].target_file_system_values.ontap_configuration.endpoint_ip_address_range #=> String
     #   resp.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.intercluster.dns_name #=> String
     #   resp.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.intercluster.ip_addresses #=> Array
@@ -8545,7 +8553,7 @@ module Aws::FSx
     #   resp.file_system.administrative_actions[0].message #=> String
     #   resp.file_system.ontap_configuration.automatic_backup_retention_days #=> Integer
     #   resp.file_system.ontap_configuration.daily_automatic_backup_start_time #=> String
-    #   resp.file_system.ontap_configuration.deployment_type #=> String, one of "MULTI_AZ_1", "SINGLE_AZ_1", "SINGLE_AZ_2", "MULTI_AZ_2"
+    #   resp.file_system.ontap_configuration.deployment_type #=> String, one of "MULTI_AZ_1", "SINGLE_AZ_1", "SINGLE_AZ_2", "MULTI_AZ_2", "SINGLE_AZ_3", "MULTI_AZ_3"
     #   resp.file_system.ontap_configuration.endpoint_ip_address_range #=> String
     #   resp.file_system.ontap_configuration.endpoints.intercluster.dns_name #=> String
     #   resp.file_system.ontap_configuration.endpoints.intercluster.ip_addresses #=> Array
@@ -8971,9 +8979,10 @@ module Aws::FSx
     # @option params [Integer] :storage_capacity
     #   Use this parameter to increase the storage capacity of an FSx for
     #   Windows File Server, FSx for Lustre, FSx for OpenZFS, or FSx for ONTAP
-    #   file system. For second-generation FSx for ONTAP file systems, you can
-    #   also decrease the storage capacity. Specifies the storage capacity
-    #   target value, in GiB, for the file system that you're updating.
+    #   file system. For second-generation and third-generation FSx for ONTAP
+    #   file systems, you can also decrease the storage capacity. Specifies
+    #   the storage capacity target value, in GiB, for the file system that
+    #   you're updating.
     #
     #   <note markdown="1"> You can't make a storage capacity increase request if there is an
     #   existing storage capacity increase request in progress.
@@ -9011,8 +9020,11 @@ module Aws::FSx
     #
     #   For ONTAP file systems, when increasing storage capacity, the storage
     #   capacity target value must be at least 10 percent greater than the
-    #   current storage capacity value. When decreasing storage capacity on
-    #   second-generation file systems, the target value must be at least 9
+    #   current storage capacity value. If that increase would reach or exceed
+    #   the maximum SSD storage capacity for your file system's
+    #   configuration, you can specify any greater value up to that maximum.
+    #   When decreasing storage capacity on second-generation and
+    #   third-generation file systems, the target value must be at least 9
     #   percent smaller than the current SSD storage capacity. For more
     #   information, see [File system storage capacity and IOPS][4] in the
     #   Amazon FSx for NetApp ONTAP User Guide.
@@ -9365,7 +9377,7 @@ module Aws::FSx
     #   resp.file_system.administrative_actions[0].message #=> String
     #   resp.file_system.ontap_configuration.automatic_backup_retention_days #=> Integer
     #   resp.file_system.ontap_configuration.daily_automatic_backup_start_time #=> String
-    #   resp.file_system.ontap_configuration.deployment_type #=> String, one of "MULTI_AZ_1", "SINGLE_AZ_1", "SINGLE_AZ_2", "MULTI_AZ_2"
+    #   resp.file_system.ontap_configuration.deployment_type #=> String, one of "MULTI_AZ_1", "SINGLE_AZ_1", "SINGLE_AZ_2", "MULTI_AZ_2", "SINGLE_AZ_3", "MULTI_AZ_3"
     #   resp.file_system.ontap_configuration.endpoint_ip_address_range #=> String
     #   resp.file_system.ontap_configuration.endpoints.intercluster.dns_name #=> String
     #   resp.file_system.ontap_configuration.endpoints.intercluster.ip_addresses #=> Array
@@ -9601,7 +9613,7 @@ module Aws::FSx
     #   resp.snapshot.administrative_actions[0].target_file_system_values.administrative_actions #=> Types::AdministrativeActions
     #   resp.snapshot.administrative_actions[0].target_file_system_values.ontap_configuration.automatic_backup_retention_days #=> Integer
     #   resp.snapshot.administrative_actions[0].target_file_system_values.ontap_configuration.daily_automatic_backup_start_time #=> String
-    #   resp.snapshot.administrative_actions[0].target_file_system_values.ontap_configuration.deployment_type #=> String, one of "MULTI_AZ_1", "SINGLE_AZ_1", "SINGLE_AZ_2", "MULTI_AZ_2"
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.ontap_configuration.deployment_type #=> String, one of "MULTI_AZ_1", "SINGLE_AZ_1", "SINGLE_AZ_2", "MULTI_AZ_2", "SINGLE_AZ_3", "MULTI_AZ_3"
     #   resp.snapshot.administrative_actions[0].target_file_system_values.ontap_configuration.endpoint_ip_address_range #=> String
     #   resp.snapshot.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.intercluster.dns_name #=> String
     #   resp.snapshot.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.intercluster.ip_addresses #=> Array
@@ -10053,7 +10065,7 @@ module Aws::FSx
     #   resp.volume.administrative_actions[0].target_file_system_values.administrative_actions #=> Types::AdministrativeActions
     #   resp.volume.administrative_actions[0].target_file_system_values.ontap_configuration.automatic_backup_retention_days #=> Integer
     #   resp.volume.administrative_actions[0].target_file_system_values.ontap_configuration.daily_automatic_backup_start_time #=> String
-    #   resp.volume.administrative_actions[0].target_file_system_values.ontap_configuration.deployment_type #=> String, one of "MULTI_AZ_1", "SINGLE_AZ_1", "SINGLE_AZ_2", "MULTI_AZ_2"
+    #   resp.volume.administrative_actions[0].target_file_system_values.ontap_configuration.deployment_type #=> String, one of "MULTI_AZ_1", "SINGLE_AZ_1", "SINGLE_AZ_2", "MULTI_AZ_2", "SINGLE_AZ_3", "MULTI_AZ_3"
     #   resp.volume.administrative_actions[0].target_file_system_values.ontap_configuration.endpoint_ip_address_range #=> String
     #   resp.volume.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.intercluster.dns_name #=> String
     #   resp.volume.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.intercluster.ip_addresses #=> Array
@@ -10167,7 +10179,7 @@ module Aws::FSx
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-fsx'
-      context[:gem_version] = '1.145.0'
+      context[:gem_version] = '1.153.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

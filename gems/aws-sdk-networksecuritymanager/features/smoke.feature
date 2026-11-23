@@ -8,18 +8,6 @@
 Feature: Smoke tests for NetworkSecurityManager
 
   @networksecuritymanager @smoke
-  Scenario: ListAdminAccountsNotOnboarded
-    Given I create a 'Aws::NetworkSecurityManager' client with config:
-      """
-{"region":"us-east-1","use_fips_endpoint":false,"use_dualstack_endpoint":false}
-      """
-    When I call the operation 'list_admin_accounts' with params:
-      """
-{}
-      """
-    Then I expect a 'Aws::NetworkSecurityManager::Errors::ValidationException' was raised
-
-  @networksecuritymanager @smoke
   Scenario: ListPoliciesSuccess
     Given I create a 'Aws::NetworkSecurityManager' client with config:
       """
@@ -30,3 +18,15 @@ Feature: Smoke tests for NetworkSecurityManager
 {}
       """
     Then I expect an error was not raised
+
+  @networksecuritymanager @smoke
+  Scenario: ListAdminAccountsNotOnboarded
+    Given I create a 'Aws::NetworkSecurityManager' client with config:
+      """
+{"region":"us-east-1","use_fips_endpoint":false,"use_dualstack_endpoint":false}
+      """
+    When I call the operation 'list_admin_accounts' with params:
+      """
+{}
+      """
+    Then I expect a 'Aws::NetworkSecurityManager::Errors::ValidationException' was raised

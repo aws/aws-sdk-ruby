@@ -93,6 +93,28 @@ module Aws
                                  ) -> _ActivateSubscriptionResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ActivateSubscriptionResponseSuccess
 
+      interface _CreateDatasetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateDatasetOutput]
+        def arn: () -> ::String
+        def dataset_id: () -> ::String
+        def type: () -> ("MEDICAL_CODING")
+        def status: () -> ("CREATING" | "ACTIVE" | "CREATE_FAILED" | "DELETING" | "DELETE_FAILED" | "DELETED")
+        def created_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectHealth/Client.html#create_dataset-instance_method
+      def create_dataset: (
+                            domain_id: ::String,
+                            name: ::String,
+                            config: {
+                              medical_coding: {
+                                s3_input_path: ::String,
+                                s3_output_path: ::String
+                              }?
+                            },
+                            ?client_token: ::String
+                          ) -> _CreateDatasetResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDatasetResponseSuccess
+
       interface _CreateDomainResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateDomainOutput]
         def domain_id: () -> ::String
@@ -146,6 +168,19 @@ module Aws
                                    ) -> _DeactivateSubscriptionResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeactivateSubscriptionResponseSuccess
 
+      interface _DeleteDatasetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteDatasetOutput]
+        def arn: () -> ::String
+        def dataset_id: () -> ::String
+        def status: () -> ("CREATING" | "ACTIVE" | "CREATE_FAILED" | "DELETING" | "DELETE_FAILED" | "DELETED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectHealth/Client.html#delete_dataset-instance_method
+      def delete_dataset: (
+                            domain_id: ::String,
+                            dataset_id: ::String
+                          ) -> _DeleteDatasetResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteDatasetResponseSuccess
+
       interface _DeleteDomainResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteDomainOutput]
         def domain_id: () -> ::String
@@ -157,6 +192,26 @@ module Aws
                            domain_id: ::String
                          ) -> _DeleteDomainResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteDomainResponseSuccess
+
+      interface _GetDatasetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDatasetOutput]
+        def arn: () -> ::String
+        def dataset_id: () -> ::String
+        def name: () -> ::String
+        def type: () -> ("MEDICAL_CODING")
+        def config: () -> Types::DatasetConfig
+        def status: () -> ("CREATING" | "ACTIVE" | "CREATE_FAILED" | "DELETING" | "DELETE_FAILED" | "DELETED")
+        def status_details: () -> ::String
+        def artifacts: () -> Types::DatasetArtifacts
+        def created_at: () -> ::Time
+        def updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectHealth/Client.html#get_dataset-instance_method
+      def get_dataset: (
+                         domain_id: ::String,
+                         dataset_id: ::String
+                       ) -> _GetDatasetResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDatasetResponseSuccess
 
       interface _GetDomainResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetDomainOutput]
@@ -176,6 +231,28 @@ module Aws
                         domain_id: ::String
                       ) -> _GetDomainResponseSuccess
                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDomainResponseSuccess
+
+      interface _GetMedicalCodingJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetMedicalCodingJobResponse]
+        def job_id: () -> ::String
+        def job_arn: () -> ::String
+        def job_status: () -> ("SUBMITTED" | "IN_PROGRESS" | "FAILED" | "SUCCEEDED")
+        def creation_time: () -> ::Time
+        def updated_time: () -> ::Time
+        def text: () -> ::String
+        def patient_context: () -> Types::MedicalCodesPatientContext
+        def encounter_context: () -> Types::MedicalCodesEncounterContext
+        def output_data_config: () -> Types::MedicalCodingOutputDataConfig
+        def dataset_id: () -> ::String
+        def medical_coding_output: () -> Types::MedicalCodingOutput
+        def status_details: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectHealth/Client.html#get_medical_coding_job-instance_method
+      def get_medical_coding_job: (
+                                    domain_id: ::String,
+                                    job_id: ::String
+                                  ) -> _GetMedicalCodingJobResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetMedicalCodingJobResponseSuccess
 
       interface _GetMedicalScribeListeningSessionResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetMedicalScribeListeningSessionOutput]
@@ -223,6 +300,20 @@ module Aws
                             ) -> _GetSubscriptionResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSubscriptionResponseSuccess
 
+      interface _ListDatasetsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDatasetsOutput]
+        def items: () -> ::Array[Types::DatasetSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectHealth/Client.html#list_datasets-instance_method
+      def list_datasets: (
+                           domain_id: ::String,
+                           ?type: ("MEDICAL_CODING"),
+                           ?next_token: ::String,
+                           ?max_results: ::Integer
+                         ) -> _ListDatasetsResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDatasetsResponseSuccess
+
       interface _ListDomainsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListDomainsOutput]
         def domains: () -> ::Array[Types::DomainSummary]
@@ -258,6 +349,37 @@ module Aws
                                     resource_arn: ::String
                                   ) -> _ListTagsForResourceResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _StartMedicalCodingJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartMedicalCodingJobResponse]
+        def job_arn: () -> ::String
+        def job_id: () -> ::String
+        def creation_time: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectHealth/Client.html#start_medical_coding_job-instance_method
+      def start_medical_coding_job: (
+                                      domain_id: ::String,
+                                      text: ::String,
+                                      ?patient_context: {
+                                        sex: ("MALE" | "FEMALE" | "NON_BINARY" | "UNKNOWN")?,
+                                        status: ("NEW" | "ESTABLISHED")?,
+                                        date_of_birth: ::String?,
+                                        insurance: ::String?
+                                      },
+                                      ?encounter_context: {
+                                        encounter_type: ("TELEHEALTH" | "IN_PERSON")?,
+                                        encounter_reason: ::String?,
+                                        after_hours: bool?,
+                                        encounter_date: ::String?,
+                                        encounter_duration_minutes: ::Integer?
+                                      },
+                                      output_data_config: {
+                                        s3_output_path: ::String
+                                      },
+                                      ?dataset_id: ::String,
+                                      ?client_token: ::String
+                                    ) -> _StartMedicalCodingJobResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartMedicalCodingJobResponseSuccess
 
       interface _StartPatientInsightsJobResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::StartPatientInsightsJobResponse]
@@ -301,6 +423,22 @@ module Aws
                                         ?client_token: ::String
                                       ) -> _StartPatientInsightsJobResponseSuccess
                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartPatientInsightsJobResponseSuccess
+
+      interface _SubmitFeedbackResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SubmitFeedbackResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectHealth/Client.html#submit_feedback-instance_method
+      def submit_feedback: (
+                             domain_id: ::String,
+                             artifact_source_id: ::String,
+                             ?subscription_id: ::String,
+                             artifact_type: ("CLINICAL_DOC" | "MEDICAL_CODES"),
+                             signed_artifact_s3_uri: ::String,
+                             ?generated_artifact_s3_uri: ::String,
+                             ?comments: ::String,
+                             ?client_token: ::String
+                           ) -> _SubmitFeedbackResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SubmitFeedbackResponseSuccess
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectHealth/Client.html#tag_resource-instance_method
       def tag_resource: (

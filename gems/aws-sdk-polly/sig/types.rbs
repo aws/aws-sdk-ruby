@@ -8,6 +8,11 @@
 module Aws::Polly
   module Types
 
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
     class AudioEvent
       attr_accessor audio_chunk: ::String
       attr_accessor event_type: untyped
@@ -19,12 +24,49 @@ module Aws::Polly
       SENSITIVE: []
     end
 
+    class ConflictException
+      attr_accessor message: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ("lexicon" | "voice")
+      SENSITIVE: []
+    end
+
+    class CreateVoiceInput
+      attr_accessor name: ::String
+      attr_accessor language_code: ("de-DE" | "en-US" | "es-US" | "fr-FR" | "hi-IN" | "it-IT" | "pt-BR")
+      attr_accessor terms_accepted: bool
+      attr_accessor voice_creation_data: Types::VoiceCreationData
+      attr_accessor customer_managed_encryption: Types::CustomerManagedEncryption
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateVoiceOutput
+      attr_accessor voice: Types::Voice
+      SENSITIVE: []
+    end
+
+    class CustomerManagedEncryption
+      attr_accessor kms_key_arn: ::String
+      attr_accessor encryption_context: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
     class DeleteLexiconInput
       attr_accessor name: ::String
       SENSITIVE: []
     end
 
     class DeleteLexiconOutput < Aws::EmptyStructure
+    end
+
+    class DeleteVoiceInput
+      attr_accessor voice_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteVoiceOutput < Aws::EmptyStructure
     end
 
     class DescribeVoicesInput
@@ -72,6 +114,16 @@ module Aws::Polly
       SENSITIVE: []
     end
 
+    class GetVoiceInput
+      attr_accessor voice_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetVoiceOutput
+      attr_accessor voice: Types::Voice
+      SENSITIVE: []
+    end
+
     class InvalidLexiconException
       attr_accessor message: ::String
       SENSITIVE: []
@@ -103,6 +155,11 @@ module Aws::Polly
     end
 
     class InvalidSsmlException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidTagParameterException
       attr_accessor message: ::String
       SENSITIVE: []
     end
@@ -173,6 +230,16 @@ module Aws::Polly
       SENSITIVE: []
     end
 
+    class ListTagsForResourceInput
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceOutput
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
     class MarksNotSupportedForFormatException
       attr_accessor message: ::String
       SENSITIVE: []
@@ -191,10 +258,30 @@ module Aws::Polly
     class PutLexiconInput
       attr_accessor name: ::String
       attr_accessor content: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: [:content]
     end
 
     class PutLexiconOutput < Aws::EmptyStructure
+    end
+
+    class Recording
+      attr_accessor format: ("wav" | "flac" | "ogg_vorbis" | "mp3")
+      attr_accessor data: Types::RecordingData
+      SENSITIVE: []
+    end
+
+    class RecordingData
+      attr_accessor s3_url: ::String
+      attr_accessor bytes: ::String
+      SENSITIVE: [:bytes]
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ("lexicon" | "voice")
+      SENSITIVE: []
     end
 
     class ServiceFailureException
@@ -205,7 +292,7 @@ module Aws::Polly
 
     class ServiceQuotaExceededException
       attr_accessor message: ::String
-      attr_accessor quota_code: ("input-stream-inbound-event-timeout" | "input-stream-timeout")
+      attr_accessor quota_code: ("input-stream-inbound-event-timeout" | "input-stream-timeout" | "custom-voice-max-count")
       attr_accessor service_code: ("polly")
       attr_accessor event_type: untyped
       SENSITIVE: []
@@ -303,6 +390,15 @@ module Aws::Polly
       SENSITIVE: []
     end
 
+    class TagResourceInput
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class TagResourceOutput < Aws::EmptyStructure
+    end
+
     class TextEvent
       attr_accessor text: ::String
       attr_accessor text_type: ("ssml" | "text")
@@ -329,6 +425,11 @@ module Aws::Polly
       SENSITIVE: []
     end
 
+    class TooManyTagsException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
     class UnsupportedPlsAlphabetException
       attr_accessor message: ::String
       SENSITIVE: []
@@ -339,9 +440,18 @@ module Aws::Polly
       SENSITIVE: []
     end
 
+    class UntagResourceInput
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceOutput < Aws::EmptyStructure
+    end
+
     class ValidationException
       attr_accessor message: ::String
-      attr_accessor reason: ("unsupportedOperation" | "fieldValidationFailed" | "other" | "invalidInboundEvent")
+      attr_accessor reason: ("unsupportedOperation" | "fieldValidationFailed" | "other" | "invalidInboundEvent" | "kmsKeyNotFound" | "kmsKeyUnusable")
       attr_accessor fields: ::Array[Types::ValidationExceptionField]
       attr_accessor event_type: untyped
       SENSITIVE: []
@@ -354,13 +464,25 @@ module Aws::Polly
     end
 
     class Voice
+      attr_accessor arn: ::String
       attr_accessor gender: ("Female" | "Male")
       attr_accessor id: ("Aditi" | "Amy" | "Astrid" | "Bianca" | "Brian" | "Camila" | "Carla" | "Carmen" | "Celine" | "Chantal" | "Conchita" | "Cristiano" | "Dora" | "Emma" | "Enrique" | "Ewa" | "Filiz" | "Gabrielle" | "Geraint" | "Giorgio" | "Gwyneth" | "Hans" | "Ines" | "Ivy" | "Jacek" | "Jan" | "Joanna" | "Joey" | "Justin" | "Karl" | "Kendra" | "Kevin" | "Kimberly" | "Lea" | "Liv" | "Lotte" | "Lucia" | "Lupe" | "Mads" | "Maja" | "Marlene" | "Mathieu" | "Matthew" | "Maxim" | "Mia" | "Miguel" | "Mizuki" | "Naja" | "Nicole" | "Olivia" | "Penelope" | "Raveena" | "Ricardo" | "Ruben" | "Russell" | "Salli" | "Seoyeon" | "Takumi" | "Tatyana" | "Vicki" | "Vitoria" | "Zeina" | "Zhiyu" | "Aria" | "Ayanda" | "Arlet" | "Hannah" | "Arthur" | "Daniel" | "Liam" | "Pedro" | "Kajal" | "Hiujin" | "Laura" | "Elin" | "Ida" | "Suvi" | "Ola" | "Hala" | "Andres" | "Sergio" | "Remi" | "Adriano" | "Thiago" | "Ruth" | "Stephen" | "Kazuha" | "Tomoko" | "Niamh" | "Sofie" | "Lisa" | "Isabelle" | "Zayd" | "Danielle" | "Gregory" | "Burcu" | "Jitka" | "Sabrina" | "Jasmine" | "Jihye" | "Ambre" | "Beatrice" | "Florian" | "Lennart" | "Lorenzo" | "Tiffany" | "Arjun" | "Carlos" | "Carolina" | "Curtis" | "Hyunduk" | "Kenneth" | "Kiara" | "Leo" | "Nate" | "Tina")
       attr_accessor language_code: ("arb" | "cmn-CN" | "cy-GB" | "da-DK" | "de-DE" | "en-AU" | "en-GB" | "en-GB-WLS" | "en-IN" | "en-US" | "es-ES" | "es-MX" | "es-US" | "fr-CA" | "fr-FR" | "is-IS" | "it-IT" | "ja-JP" | "hi-IN" | "ko-KR" | "nb-NO" | "nl-NL" | "pl-PL" | "pt-BR" | "pt-PT" | "ro-RO" | "ru-RU" | "sv-SE" | "tr-TR" | "en-NZ" | "en-ZA" | "ca-ES" | "de-AT" | "yue-CN" | "ar-AE" | "fi-FI" | "en-IE" | "nl-BE" | "fr-BE" | "cs-CZ" | "de-CH" | "en-SG")
       attr_accessor language_name: ::String
       attr_accessor name: ::String
+      attr_accessor origin: ("aws" | "customer")
+      attr_accessor status: ("pending" | "active" | "failed")
+      attr_accessor status_reason: ::String
       attr_accessor additional_language_codes: ::Array[("arb" | "cmn-CN" | "cy-GB" | "da-DK" | "de-DE" | "en-AU" | "en-GB" | "en-GB-WLS" | "en-IN" | "en-US" | "es-ES" | "es-MX" | "es-US" | "fr-CA" | "fr-FR" | "is-IS" | "it-IT" | "ja-JP" | "hi-IN" | "ko-KR" | "nb-NO" | "nl-NL" | "pl-PL" | "pt-BR" | "pt-PT" | "ro-RO" | "ru-RU" | "sv-SE" | "tr-TR" | "en-NZ" | "en-ZA" | "ca-ES" | "de-AT" | "yue-CN" | "ar-AE" | "fi-FI" | "en-IE" | "nl-BE" | "fr-BE" | "cs-CZ" | "de-CH" | "en-SG")]
       attr_accessor supported_engines: ::Array[("standard" | "neural" | "long-form" | "generative")]
+      attr_accessor voice_creation_data: Types::VoiceCreationData
+      attr_accessor customer_managed_encryption: Types::CustomerManagedEncryption
+      attr_accessor creation_time: ::Time
+      SENSITIVE: []
+    end
+
+    class VoiceCreationData
+      attr_accessor recordings: ::Array[Types::Recording]
       SENSITIVE: []
     end
 

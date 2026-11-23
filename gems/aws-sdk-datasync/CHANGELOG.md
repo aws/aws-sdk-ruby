@@ -1,6 +1,46 @@
 Unreleased Changes
 ------------------
 
+1.143.0 (2026-11-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.142.0 (2026-11-16)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.141.0 (2026-11-11)
+------------------
+
+* Feature - This release adds Smithy RPC v2 CBOR as an additional protocol alongside the existing AWS JSON 1.1. The SDK will prioritize its most performant protocol.
+
+1.140.0 (2026-11-10)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.139.0 (2026-11-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.138.0 (2026-11-06)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.137.0 (2026-11-05)
+------------------
+
+* Feature - Adds support for federated identity on Azure Blob Storage and object storage locations, enabling DataSync to authenticate to Azure and Google Cloud Storage using Workload Identity Federation (WIF) over OpenID Connect (OIDC) instead of stored long-lived credentials.
+
+1.136.0 (2026-11-04)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.135.0 (2026-10-29)
 ------------------
 

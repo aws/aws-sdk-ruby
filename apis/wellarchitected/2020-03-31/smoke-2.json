@@ -17,10 +17,26 @@
       "useAccountIdRouting" : true
     }
   }, {
-    "id" : "ListAgentContexts",
-    "operationName" : "ListAgentContexts",
+    "id" : "GetAgentOrganizationalReportData",
+    "operationName" : "GetAgentOrganizationalReportData",
     "input" : {
-      "profileArn" : "arn:aws:wellarchitected:us-west-2:123456789012:agent-profile/test-profile"
+      "reportId" : "f6b5df15-3409-483f-b796-45d0e590222c",
+      "format" : "JSON"
+    },
+    "expectation" : {
+      "failure" : { }
+    },
+    "config" : {
+      "region" : "us-west-2",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
+    "id" : "GetAgentOrganizationalReport",
+    "operationName" : "GetAgentOrganizationalReport",
+    "input" : {
+      "reportId" : "f6b5df15-3409-483f-b796-45d0e590222c"
     },
     "expectation" : {
       "failure" : { }
@@ -49,42 +65,9 @@
       "useAccountIdRouting" : true
     }
   }, {
-    "id" : "DeleteAgentProfile",
-    "operationName" : "DeleteAgentProfile",
-    "input" : {
-      "profileArn" : "arn:aws:wellarchitected:us-west-2:123456789012:agent-profile/test-profile"
-    },
-    "expectation" : {
-      "failure" : { }
-    },
-    "config" : {
-      "region" : "us-west-2",
-      "useFips" : false,
-      "useDualstack" : false,
-      "useAccountIdRouting" : true
-    }
-  }, {
-    "id" : "UpdateAgentProfile",
-    "operationName" : "UpdateAgentProfile",
-    "input" : {
-      "profileArn" : "arn:aws:wellarchitected:us-west-2:123456789012:agent-profile/test-profile"
-    },
-    "expectation" : {
-      "failure" : { }
-    },
-    "config" : {
-      "region" : "us-west-2",
-      "useFips" : false,
-      "useDualstack" : false,
-      "useAccountIdRouting" : true
-    }
-  }, {
-    "id" : "GetAgentContext",
-    "operationName" : "GetAgentContext",
-    "input" : {
-      "profileArn" : "arn:aws:wellarchitected:us-west-2:123456789012:agent-profile/test-profile",
-      "id" : "f6b5df15-3409-483f-b796-45d0e590222c"
-    },
+    "id" : "GetAgentPreferences",
+    "operationName" : "GetAgentPreferences",
+    "input" : { },
     "expectation" : {
       "failure" : { }
     },
@@ -99,6 +82,21 @@
     "operationName" : "ListAgentGoals",
     "input" : {
       "profileArn" : "arn:aws:wellarchitected:us-west-2:123456789012:agent-profile/test-profile"
+    },
+    "expectation" : {
+      "failure" : { }
+    },
+    "config" : {
+      "region" : "us-west-2",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
+    "id" : "DeleteAgentRecommendationPolicy",
+    "operationName" : "DeleteAgentRecommendationPolicy",
+    "input" : {
+      "recommendationArn" : "arn:aws:wellarchitected:us-west-2:123456789012:agent-recommendation/f6b5df15-3409-483f-b796-45d0e590222c"
     },
     "expectation" : {
       "failure" : { }
@@ -157,10 +155,46 @@
       "useAccountIdRouting" : true
     }
   }, {
-    "id" : "GetAgentProfile",
-    "operationName" : "GetAgentProfile",
+    "id" : "CreateAgentOrganizationalProfile",
+    "operationName" : "CreateAgentOrganizationalProfile",
     "input" : {
-      "profileArn" : "arn:aws:wellarchitected:us-west-2:123456789012:agent-profile/test-security-profile"
+      "clientToken" : "smoke-test-client-token",
+      "name" : "smoke-test-organizational-profile",
+      "pillars" : [ "COST_OPTIMIZATION" ],
+      "organizationalAggregationConfiguration" : {
+        "accounts" : [ {
+          "accountId" : "123456789012",
+          "regions" : [ "us-west-2" ]
+        } ]
+      }
+    },
+    "expectation" : {
+      "failure" : { }
+    },
+    "config" : {
+      "region" : "us-west-2",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
+    "id" : "CreateAgentBasicProfile",
+    "operationName" : "CreateAgentBasicProfile",
+    "input" : { },
+    "expectation" : {
+      "failure" : { }
+    },
+    "config" : {
+      "region" : "us-west-2",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
+    "id" : "GetAgentProfilePolicy",
+    "operationName" : "GetAgentProfilePolicy",
+    "input" : {
+      "profileArn" : "arn:aws:wellarchitected:us-west-2:123456789012:agent-profile/test-profile"
     },
     "expectation" : {
       "failure" : { }
@@ -198,11 +232,267 @@
       "useAccountIdRouting" : true
     }
   }, {
+    "id" : "PutAgentRecommendationPolicy",
+    "operationName" : "PutAgentRecommendationPolicy",
+    "input" : {
+      "recommendationArn" : "arn:aws:wellarchitected:us-west-2:123456789012:agent-recommendation/f6b5df15-3409-483f-b796-45d0e590222c",
+      "policy" : "{}"
+    },
+    "expectation" : {
+      "failure" : { }
+    },
+    "config" : {
+      "region" : "us-west-2",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
     "id" : "DeleteAgentGoal",
     "operationName" : "DeleteAgentGoal",
     "input" : {
       "profileArn" : "arn:aws:wellarchitected:us-west-2:123456789012:agent-profile/test-profile",
       "id" : "f6b5df15-3409-483f-b796-45d0e590222c"
+    },
+    "expectation" : {
+      "failure" : { }
+    },
+    "config" : {
+      "region" : "us-west-2",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
+    "id" : "GetAgentRecommendationPolicy",
+    "operationName" : "GetAgentRecommendationPolicy",
+    "input" : {
+      "recommendationArn" : "arn:aws:wellarchitected:us-west-2:123456789012:agent-recommendation/f6b5df15-3409-483f-b796-45d0e590222c"
+    },
+    "expectation" : {
+      "failure" : { }
+    },
+    "config" : {
+      "region" : "us-west-2",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
+    "id" : "DeleteAgentOrganizationalReport",
+    "operationName" : "DeleteAgentOrganizationalReport",
+    "input" : {
+      "reportId" : "f6b5df15-3409-483f-b796-45d0e590222c"
+    },
+    "expectation" : {
+      "failure" : { }
+    },
+    "config" : {
+      "region" : "us-west-2",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
+    "id" : "GetAgentRecommendation",
+    "operationName" : "GetAgentRecommendation",
+    "input" : {
+      "recommendationArn" : "arn:aws:wellarchitected:us-west-2:123456789012:agent-recommendation/f6b5df15-3409-483f-b796-45d0e590222c"
+    },
+    "expectation" : {
+      "failure" : { }
+    },
+    "config" : {
+      "region" : "us-west-2",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
+    "id" : "ListAgentOrganizationalReports",
+    "operationName" : "ListAgentOrganizationalReports",
+    "input" : { },
+    "expectation" : {
+      "failure" : { }
+    },
+    "config" : {
+      "region" : "us-west-2",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
+    "id" : "ListAgentContexts",
+    "operationName" : "ListAgentContexts",
+    "input" : {
+      "profileArn" : "arn:aws:wellarchitected:us-west-2:123456789012:agent-profile/test-profile"
+    },
+    "expectation" : {
+      "failure" : { }
+    },
+    "config" : {
+      "region" : "us-west-2",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
+    "id" : "DeleteAgentProfile",
+    "operationName" : "DeleteAgentProfile",
+    "input" : {
+      "profileArn" : "arn:aws:wellarchitected:us-west-2:123456789012:agent-profile/test-profile"
+    },
+    "expectation" : {
+      "failure" : { }
+    },
+    "config" : {
+      "region" : "us-west-2",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
+    "id" : "GetAgentContext",
+    "operationName" : "GetAgentContext",
+    "input" : {
+      "profileArn" : "arn:aws:wellarchitected:us-west-2:123456789012:agent-profile/test-profile",
+      "id" : "f6b5df15-3409-483f-b796-45d0e590222c"
+    },
+    "expectation" : {
+      "failure" : { }
+    },
+    "config" : {
+      "region" : "us-west-2",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
+    "id" : "UpdateAgentProfile",
+    "operationName" : "UpdateAgentProfile",
+    "input" : {
+      "profileArn" : "arn:aws:wellarchitected:us-west-2:123456789012:agent-profile/test-profile"
+    },
+    "expectation" : {
+      "failure" : { }
+    },
+    "config" : {
+      "region" : "us-west-2",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
+    "id" : "CreateAgentOrganizationalReport",
+    "operationName" : "CreateAgentOrganizationalReport",
+    "input" : {
+      "clientToken" : "smoke-test-client-token",
+      "label" : "smoke-test-organizational-report",
+      "filters" : {
+        "accountIds" : [ "123456789012" ],
+        "pillars" : [ "COST_OPTIMIZATION" ]
+      }
+    },
+    "expectation" : {
+      "failure" : { }
+    },
+    "config" : {
+      "region" : "us-west-2",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
+    "id" : "ListAgentRecommendationItems",
+    "operationName" : "ListAgentRecommendationItems",
+    "input" : {
+      "recommendationArn" : "arn:aws:wellarchitected:us-west-2:123456789012:agent-recommendation/f6b5df15-3409-483f-b796-45d0e590222c"
+    },
+    "expectation" : {
+      "failure" : { }
+    },
+    "config" : {
+      "region" : "us-west-2",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
+    "id" : "DeleteAgentProfilePolicy",
+    "operationName" : "DeleteAgentProfilePolicy",
+    "input" : {
+      "profileArn" : "arn:aws:wellarchitected:us-west-2:123456789012:agent-profile/test-profile"
+    },
+    "expectation" : {
+      "failure" : { }
+    },
+    "config" : {
+      "region" : "us-west-2",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
+    "id" : "GetAgentProfile",
+    "operationName" : "GetAgentProfile",
+    "input" : {
+      "profileArn" : "arn:aws:wellarchitected:us-west-2:123456789012:agent-profile/test-security-profile"
+    },
+    "expectation" : {
+      "failure" : { }
+    },
+    "config" : {
+      "region" : "us-west-2",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
+    "id" : "UpdateAgentOrganizationalProfile",
+    "operationName" : "UpdateAgentOrganizationalProfile",
+    "input" : {
+      "profileArn" : "arn:aws:wellarchitected:us-west-2:123456789012:agent-profile/smoke-test-organizational-profile",
+      "pillars" : [ "COST_OPTIMIZATION" ],
+      "organizationalAggregationConfiguration" : {
+        "organizationalUnits" : [ {
+          "organizationalUnitId" : "ou-abcd-11111111",
+          "regions" : [ "us-west-2" ]
+        } ]
+      }
+    },
+    "expectation" : {
+      "failure" : { }
+    },
+    "config" : {
+      "region" : "us-west-2",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
+    "id" : "SendAgentOrganizationalReportDataToS3",
+    "operationName" : "SendAgentOrganizationalReportDataToS3",
+    "input" : {
+      "reportId" : "f6b5df15-3409-483f-b796-45d0e590222c",
+      "format" : "JSON",
+      "bucketArn" : "arn:aws:s3:::smoke-test-bucket",
+      "objectKey" : "smoke-test/report.json"
+    },
+    "expectation" : {
+      "failure" : { }
+    },
+    "config" : {
+      "region" : "us-west-2",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
+    "id" : "PutAgentProfilePolicy",
+    "operationName" : "PutAgentProfilePolicy",
+    "input" : {
+      "profileArn" : "arn:aws:wellarchitected:us-west-2:123456789012:agent-profile/test-profile",
+      "policy" : "{}"
     },
     "expectation" : {
       "failure" : { }
@@ -235,6 +525,24 @@
     "input" : {
       "profileArn" : "arn:aws:wellarchitected:us-west-2:123456789012:agent-profile/test-profile",
       "id" : "f6b5df15-3409-483f-b796-45d0e590222c"
+    },
+    "expectation" : {
+      "failure" : { }
+    },
+    "config" : {
+      "region" : "us-west-2",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
+    "id" : "PutAgentPreferences",
+    "operationName" : "PutAgentPreferences",
+    "input" : {
+      "preferences" : [ {
+        "key" : "ORG_INTEGRATION",
+        "state" : "DISABLED"
+      } ]
     },
     "expectation" : {
       "failure" : { }

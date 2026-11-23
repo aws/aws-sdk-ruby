@@ -36,6 +36,231 @@ module Aws::ObservabilityAdmin
       SENSITIVE: []
     end
 
+    class AllSubscriptions < Aws::EmptyStructure
+    end
+
+    class AzureAwsManagedFlowLogs
+      attr_accessor retention_days: ::Integer
+      SENSITIVE: []
+    end
+
+    class AzureConnectorConfiguration
+      attr_accessor tenant_identifier: ::String
+      attr_accessor client_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class AzureConnectorQuery
+      attr_accessor management_groups: Types::AzureManagementGroupsQuery
+      attr_accessor subscriptions: Types::AzureSubscriptionsQuery
+      attr_accessor resource_types: Types::AzureResourceTypesQuery
+      attr_accessor regions: Types::AzureRegionsQuery
+      attr_accessor resource_ids: Types::AzureResourceIdsQuery
+      attr_accessor event_hubs: Types::AzureEventHubsQuery
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class ManagementGroups < AzureConnectorQuery
+      end
+      class Subscriptions < AzureConnectorQuery
+      end
+      class ResourceTypes < AzureConnectorQuery
+      end
+      class Regions < AzureConnectorQuery
+      end
+      class ResourceIds < AzureConnectorQuery
+      end
+      class EventHubs < AzureConnectorQuery
+      end
+      class Unknown < AzureConnectorQuery
+      end
+    end
+
+    class AzureConnectorQueryResults
+      attr_accessor management_groups: ::Array[Types::AzureManagementGroupSummary]
+      attr_accessor subscriptions: ::Array[Types::AzureSubscriptionSummary]
+      attr_accessor resource_types: ::Array[::String]
+      attr_accessor regions: ::Array[::String]
+      attr_accessor resource_ids: ::Array[Types::AzureResourceIdentifierSummary]
+      attr_accessor event_hubs: ::Array[Types::AzureEventHubSummary]
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class ManagementGroups < AzureConnectorQueryResults
+      end
+      class Subscriptions < AzureConnectorQueryResults
+      end
+      class ResourceTypes < AzureConnectorQueryResults
+      end
+      class Regions < AzureConnectorQueryResults
+      end
+      class ResourceIds < AzureConnectorQueryResults
+      end
+      class EventHubs < AzureConnectorQueryResults
+      end
+      class Unknown < AzureConnectorQueryResults
+      end
+    end
+
+    class AzureCustomerManagedFlowLogs
+      attr_accessor storage_accounts: ::Array[Types::AzureFlowLogStorageAccountScope]
+      SENSITIVE: []
+    end
+
+    class AzureEventHubConfiguration
+      attr_accessor tier: ("Standard" | "Premium")
+      attr_accessor partition_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class AzureEventHubSummary
+      attr_accessor resource_id: ::String
+      attr_accessor event_hub_name: ::String
+      attr_accessor namespace_name: ::String
+      attr_accessor fully_qualified_namespace: ::String
+      attr_accessor region: ::String
+      attr_accessor subscription_id: ::String
+      SENSITIVE: []
+    end
+
+    class AzureEventHubsQuery
+      attr_accessor scope: Types::AzureQueryScope
+      attr_accessor namespace_name: ::String
+      attr_accessor region: ::String
+      SENSITIVE: []
+    end
+
+    class AzureFlowLogStorageAccountScope
+      attr_accessor region: ::String
+      attr_accessor storage_account_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class AzureFlowLogsInfrastructure
+      attr_accessor customer_managed: Types::AzureCustomerManagedFlowLogs
+      attr_accessor aws_managed: Types::AzureAwsManagedFlowLogs
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class CustomerManaged < AzureFlowLogsInfrastructure
+      end
+      class AwsManaged < AzureFlowLogsInfrastructure
+      end
+      class Unknown < AzureFlowLogsInfrastructure
+      end
+    end
+
+    class AzureInfrastructure
+      attr_accessor subscription_id: ::String
+      attr_accessor event_hubs: ::Array[Types::AzureEventHubConfiguration]
+      attr_accessor flow_logs: Types::AzureFlowLogsInfrastructure
+      SENSITIVE: []
+    end
+
+    class AzureManagementGroupSummary
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor display_name: ::String
+      SENSITIVE: []
+    end
+
+    class AzureManagementGroupsQuery
+      attr_accessor parent_management_group_id: ::String
+      SENSITIVE: []
+    end
+
+    class AzureQueryScope
+      attr_accessor management_group_id: ::String
+      attr_accessor subscription_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class AzureRegionsQuery
+      attr_accessor scope: Types::AzureQueryScope
+      SENSITIVE: []
+    end
+
+    class AzureResourceIdScope
+      attr_accessor region: ::String
+      attr_accessor resource_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class AzureResourceIdentifierSummary
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ::String
+      attr_accessor region: ::String
+      attr_accessor subscription_id: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class AzureResourceIdsQuery
+      attr_accessor scope: Types::AzureQueryScope
+      attr_accessor resource_type: ::String
+      attr_accessor region: ::String
+      attr_accessor tag_filters: ::Array[Types::TagFilter]
+      SENSITIVE: []
+    end
+
+    class AzureResourceTypesQuery
+      attr_accessor scope: Types::AzureQueryScope
+      SENSITIVE: []
+    end
+
+    class AzureScope
+      attr_accessor subscriptions: Types::AzureSubscriptionScope
+      attr_accessor regions: ::Array[::String]
+      attr_accessor resource_types: ::Array[::String]
+      attr_accessor tag_filters: ::Array[Types::TagFilter]
+      attr_accessor resources: ::Array[Types::AzureResourceIdScope]
+      SENSITIVE: []
+    end
+
+    class AzureScopeItem
+      attr_accessor telemetry_types: ::Array[("ResourceLogs" | "Metrics" | "FlowLogs")]
+      attr_accessor scope: Types::AzureScope
+      SENSITIVE: []
+    end
+
+    class AzureSubscriptionScope
+      attr_accessor all: Types::AllSubscriptions
+      attr_accessor ids: ::Array[::String]
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class All < AzureSubscriptionScope
+      end
+      class Ids < AzureSubscriptionScope
+      end
+      class Unknown < AzureSubscriptionScope
+      end
+    end
+
+    class AzureSubscriptionSummary
+      attr_accessor subscription_id: ::String
+      attr_accessor display_name: ::String
+      attr_accessor state: ::String
+      attr_accessor management_group_id: ::String
+      SENSITIVE: []
+    end
+
+    class AzureSubscriptionsQuery
+      attr_accessor management_group_id: ::String
+      SENSITIVE: []
+    end
+
+    class AzureTelemetrySourceConfigurationInput
+      attr_accessor aws_config_connector_arn: ::String
+      SENSITIVE: []
+    end
+
+    class AzureTelemetrySourceConfigurationOutput
+      attr_accessor aws_config_connector_arn: ::String
+      attr_accessor service_linked_recorder_arn: ::String
+      SENSITIVE: []
+    end
+
     class CentralizationRule
       attr_accessor source: Types::CentralizationRuleSource
       attr_accessor destination: Types::CentralizationRuleDestination
@@ -47,6 +272,7 @@ module Aws::ObservabilityAdmin
       attr_accessor account: ::String
       attr_accessor destination_logs_configuration: Types::DestinationLogsConfiguration
       attr_accessor destination_metrics_configuration: Types::DestinationMetricsConfiguration
+      attr_accessor destination_profiles_configuration: Types::DestinationProfilesConfiguration
       SENSITIVE: []
     end
 
@@ -55,6 +281,7 @@ module Aws::ObservabilityAdmin
       attr_accessor scope: ::String
       attr_accessor source_logs_configuration: Types::SourceLogsConfiguration
       attr_accessor source_metrics_configuration: Types::SourceMetricsConfiguration
+      attr_accessor source_profiles_configuration: Types::SourceProfilesConfiguration
       attr_accessor source_context_graph_configuration: Types::SourceContextGraphConfiguration
       SENSITIVE: []
     end
@@ -103,6 +330,57 @@ module Aws::ObservabilityAdmin
       SENSITIVE: []
     end
 
+    class Connector
+      attr_accessor arn: ::String
+      attr_accessor provider: ("AZURE")
+      attr_accessor connector_configuration: Types::ConnectorConfiguration
+      attr_accessor role_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor created_time_stamp: ::Integer
+      SENSITIVE: []
+    end
+
+    class ConnectorConfiguration
+      attr_accessor azure: Types::AzureConnectorConfiguration
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Azure < ConnectorConfiguration
+      end
+      class Unknown < ConnectorConfiguration
+      end
+    end
+
+    class ConnectorQuery
+      attr_accessor azure: Types::AzureConnectorQuery
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Azure < ConnectorQuery
+      end
+      class Unknown < ConnectorQuery
+      end
+    end
+
+    class ConnectorQueryResults
+      attr_accessor azure: Types::AzureConnectorQueryResults
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Azure < ConnectorQueryResults
+      end
+      class Unknown < ConnectorQueryResults
+      end
+    end
+
+    class ConnectorSummary
+      attr_accessor arn: ::String
+      attr_accessor provider: ("AZURE")
+      attr_accessor name: ::String
+      attr_accessor created_time_stamp: ::Integer
+      SENSITIVE: []
+    end
+
     class CreateCentralizationRuleForOrganizationInput
       attr_accessor rule_name: ::String
       attr_accessor rule: Types::CentralizationRule
@@ -112,6 +390,20 @@ module Aws::ObservabilityAdmin
 
     class CreateCentralizationRuleForOrganizationOutput
       attr_accessor rule_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateConnectorInput
+      attr_accessor connector_configuration: Types::ConnectorConfiguration
+      attr_accessor role_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor client_token: ::String
+      SENSITIVE: [:client_token]
+    end
+
+    class CreateConnectorOutput
+      attr_accessor connector: Types::Connector
       SENSITIVE: []
     end
 
@@ -196,6 +488,14 @@ module Aws::ObservabilityAdmin
       SENSITIVE: []
     end
 
+    class DeleteConnectorInput
+      attr_accessor connector_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteConnectorOutput < Aws::EmptyStructure
+    end
+
     class DeleteDatasetIntegrationInput
       attr_accessor arn: ::String
       SENSITIVE: []
@@ -235,6 +535,11 @@ module Aws::ObservabilityAdmin
 
     class DestinationMetricsConfiguration
       attr_accessor backup_configuration: Types::MetricsBackupConfiguration
+      SENSITIVE: []
+    end
+
+    class DestinationProfilesConfiguration
+      attr_accessor backup_configuration: Types::ProfilesBackupConfiguration
       SENSITIVE: []
     end
 
@@ -283,6 +588,43 @@ module Aws::ObservabilityAdmin
       attr_accessor tag_propagation_failure_reason: ("RoleNotAssumable" | "RoleLacksPermissions")
       attr_accessor context_graph_status: ("Healthy" | "Unhealthy" | "Provisioning")
       attr_accessor centralization_rule: Types::CentralizationRule
+      SENSITIVE: []
+    end
+
+    class GetConnectorInput
+      attr_accessor connector_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetConnectorOutput
+      attr_accessor connector: Types::Connector
+      SENSITIVE: []
+    end
+
+    class GetConnectorTelemetryManifestInput
+      attr_accessor connector_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetConnectorTelemetryManifestOutput
+      attr_accessor manifest: Types::TelemetryManifest
+      attr_accessor version: ::Integer
+      attr_accessor last_update_time_stamp: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetConnectorTelemetrySetupInput
+      attr_accessor connector_identifier: ::String
+      attr_accessor format: ("BICEP")
+      SENSITIVE: []
+    end
+
+    class GetConnectorTelemetrySetupOutput
+      attr_accessor artifacts: ::Array[Types::SetupArtifact]
+      attr_accessor required_permissions_to_apply: ::Array[::String]
+      attr_accessor format: ("BICEP")
+      attr_accessor provider: ("AZURE")
+      attr_accessor manifest_version: ::Integer
       SENSITIVE: []
     end
 
@@ -380,6 +722,21 @@ module Aws::ObservabilityAdmin
       SENSITIVE: []
     end
 
+    class GetThirdPartyTelemetryEnrichmentInput
+      attr_accessor telemetry_enrichment_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetThirdPartyTelemetryEnrichmentOutput
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor status: ("Initializing" | "Running" | "Stopped" | "Impaired")
+      attr_accessor status_reason: ::String
+      attr_accessor telemetry_source_configuration: Types::TelemetrySourceConfigurationOutput
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
     class IntegrationSummary
       attr_accessor arn: ::String
       attr_accessor status: ("ACTIVE" | "DELETING")
@@ -417,6 +774,18 @@ module Aws::ObservabilityAdmin
       SENSITIVE: []
     end
 
+    class ListConnectorsInput
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: [:next_token]
+    end
+
+    class ListConnectorsOutput
+      attr_accessor connector_summaries: ::Array[Types::ConnectorSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: [:next_token]
+    end
+
     class ListDatasetIntegrationsInput
       attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
@@ -432,7 +801,7 @@ module Aws::ObservabilityAdmin
     class ListResourceTelemetryForOrganizationInput
       attr_accessor account_identifiers: ::Array[::String]
       attr_accessor resource_identifier_prefix: ::String
-      attr_accessor resource_types: ::Array[("AWS::EC2::Instance" | "AWS::EC2::VPC" | "AWS::Lambda::Function" | "AWS::CloudTrail" | "AWS::EKS::Cluster" | "AWS::WAFv2::WebACL" | "AWS::ElasticLoadBalancingV2::LoadBalancer" | "AWS::Route53Resolver::ResolverEndpoint" | "AWS::BedrockAgentCore::Runtime" | "AWS::BedrockAgentCore::Browser" | "AWS::BedrockAgentCore::CodeInterpreter" | "AWS::BedrockAgentCore::Gateway" | "AWS::BedrockAgentCore::Memory" | "AWS::BedrockAgentCore::WorkloadIdentity" | "AWS::BedrockAgentCore::PaymentManager" | "AWS::SecurityHub::Hub" | "AWS::CloudFront::Distribution" | "AWS::SecurityHub::HubV2" | "AWS::CloudWatch::OTelEnrichment" | "AWS::MSK::Cluster" | "AWS::S3::Bucket" | "AWS::Bedrock::KnowledgeBase" | "AWS::XRay::TransactionSearchConfig")]
+      attr_accessor resource_types: ::Array[("AWS::EC2::Instance" | "AWS::EC2::VPC" | "AWS::Lambda::Function" | "AWS::CloudTrail" | "AWS::EKS::Cluster" | "AWS::WAFv2::WebACL" | "AWS::ElasticLoadBalancingV2::LoadBalancer" | "AWS::Route53Resolver::ResolverEndpoint" | "AWS::BedrockAgentCore::Runtime" | "AWS::BedrockAgentCore::Browser" | "AWS::BedrockAgentCore::CodeInterpreter" | "AWS::BedrockAgentCore::Gateway" | "AWS::BedrockAgentCore::Memory" | "AWS::BedrockAgentCore::WorkloadIdentity" | "AWS::BedrockAgentCore::PaymentManager" | "AWS::SecurityHub::Hub" | "AWS::CloudFront::Distribution" | "AWS::SecurityHub::HubV2" | "AWS::CloudWatch::OTelEnrichment" | "AWS::MSK::Cluster" | "AWS::S3::Bucket" | "AWS::Bedrock::KnowledgeBase" | "AWS::XRay::TransactionSearchConfig" | "AWS::CloudWatchOmni" | "AWS::NetworkFirewall::Firewall")]
       attr_accessor telemetry_configuration_state: ::Hash[("Logs" | "Metrics" | "Traces" | "Insights"), ("Enabled" | "Disabled" | "NotApplicable")]
       attr_accessor resource_tags: ::Hash[::String, ::String]
       attr_accessor max_results: ::Integer
@@ -448,7 +817,7 @@ module Aws::ObservabilityAdmin
 
     class ListResourceTelemetryInput
       attr_accessor resource_identifier_prefix: ::String
-      attr_accessor resource_types: ::Array[("AWS::EC2::Instance" | "AWS::EC2::VPC" | "AWS::Lambda::Function" | "AWS::CloudTrail" | "AWS::EKS::Cluster" | "AWS::WAFv2::WebACL" | "AWS::ElasticLoadBalancingV2::LoadBalancer" | "AWS::Route53Resolver::ResolverEndpoint" | "AWS::BedrockAgentCore::Runtime" | "AWS::BedrockAgentCore::Browser" | "AWS::BedrockAgentCore::CodeInterpreter" | "AWS::BedrockAgentCore::Gateway" | "AWS::BedrockAgentCore::Memory" | "AWS::BedrockAgentCore::WorkloadIdentity" | "AWS::BedrockAgentCore::PaymentManager" | "AWS::SecurityHub::Hub" | "AWS::CloudFront::Distribution" | "AWS::SecurityHub::HubV2" | "AWS::CloudWatch::OTelEnrichment" | "AWS::MSK::Cluster" | "AWS::S3::Bucket" | "AWS::Bedrock::KnowledgeBase" | "AWS::XRay::TransactionSearchConfig")]
+      attr_accessor resource_types: ::Array[("AWS::EC2::Instance" | "AWS::EC2::VPC" | "AWS::Lambda::Function" | "AWS::CloudTrail" | "AWS::EKS::Cluster" | "AWS::WAFv2::WebACL" | "AWS::ElasticLoadBalancingV2::LoadBalancer" | "AWS::Route53Resolver::ResolverEndpoint" | "AWS::BedrockAgentCore::Runtime" | "AWS::BedrockAgentCore::Browser" | "AWS::BedrockAgentCore::CodeInterpreter" | "AWS::BedrockAgentCore::Gateway" | "AWS::BedrockAgentCore::Memory" | "AWS::BedrockAgentCore::WorkloadIdentity" | "AWS::BedrockAgentCore::PaymentManager" | "AWS::SecurityHub::Hub" | "AWS::CloudFront::Distribution" | "AWS::SecurityHub::HubV2" | "AWS::CloudWatch::OTelEnrichment" | "AWS::MSK::Cluster" | "AWS::S3::Bucket" | "AWS::Bedrock::KnowledgeBase" | "AWS::XRay::TransactionSearchConfig" | "AWS::CloudWatchOmni" | "AWS::NetworkFirewall::Firewall")]
       attr_accessor telemetry_configuration_state: ::Hash[("Logs" | "Metrics" | "Traces" | "Insights"), ("Enabled" | "Disabled" | "NotApplicable")]
       attr_accessor resource_tags: ::Hash[::String, ::String]
       attr_accessor max_results: ::Integer
@@ -460,6 +829,20 @@ module Aws::ObservabilityAdmin
       attr_accessor telemetry_configurations: ::Array[Types::TelemetryConfiguration]
       attr_accessor next_token: ::String
       SENSITIVE: []
+    end
+
+    class ListResourcesByConnectorInput
+      attr_accessor connector_identifier: ::String
+      attr_accessor selector: Types::ConnectorQuery
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: [:next_token]
+    end
+
+    class ListResourcesByConnectorOutput
+      attr_accessor results: Types::ConnectorQueryResults
+      attr_accessor next_token: ::String
+      SENSITIVE: [:next_token]
     end
 
     class ListS3TableIntegrationsInput
@@ -524,8 +907,22 @@ module Aws::ObservabilityAdmin
       SENSITIVE: []
     end
 
+    class ListThirdPartyTelemetryEnrichmentsInput
+      attr_accessor status: ("Initializing" | "Running" | "Stopped" | "Impaired")
+      attr_accessor telemetry_source: ("Azure")
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListThirdPartyTelemetryEnrichmentsOutput
+      attr_accessor telemetry_enrichments: ::Array[Types::ThirdPartyTelemetryEnrichmentSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class LogDeliveryParameters
-      attr_accessor log_types: ::Array[("APPLICATION_LOGS" | "USAGE_LOGS" | "SECURITY_FINDING_LOGS" | "ACCESS_LOGS" | "CONNECTION_LOGS" | "S3_SERVER_ACCESS_LOGS" | "ALB_ACCESS_LOGS" | "ALB_CONNECTION_LOGS" | "ALB_HEALTH_CHECK_LOGS")]
+      attr_accessor log_types: ::Array[("APPLICATION_LOGS" | "USAGE_LOGS" | "SECURITY_FINDING_LOGS" | "ACCESS_LOGS" | "CONNECTION_LOGS" | "S3_SERVER_ACCESS_LOGS" | "ALB_ACCESS_LOGS" | "ALB_CONNECTION_LOGS" | "ALB_HEALTH_CHECK_LOGS" | "FLOW_LOGS" | "ALERT_LOGS" | "TLS_LOGS")]
       SENSITIVE: []
     end
 
@@ -575,6 +972,24 @@ module Aws::ObservabilityAdmin
       SENSITIVE: []
     end
 
+    class ProfilesBackupConfiguration
+      attr_accessor region: ::String
+      SENSITIVE: []
+    end
+
+    class PutConnectorTelemetryManifestInput
+      attr_accessor connector_identifier: ::String
+      attr_accessor manifest: Types::TelemetryManifest
+      attr_accessor expected_version: ::Integer
+      attr_accessor client_token: ::String
+      SENSITIVE: [:client_token]
+    end
+
+    class PutConnectorTelemetryManifestOutput
+      attr_accessor version: ::Integer
+      SENSITIVE: []
+    end
+
     class Record
       attr_accessor data: ::String
       attr_accessor type: ("STRING" | "JSON")
@@ -606,6 +1021,14 @@ module Aws::ObservabilityAdmin
       SENSITIVE: []
     end
 
+    class SetupArtifact
+      attr_accessor file_name: ::String
+      attr_accessor content: ::String
+      attr_accessor format: ("BICEP")
+      attr_accessor content_type: ::String
+      SENSITIVE: []
+    end
+
     class SingleHeader
       attr_accessor name: ::String
       SENSITIVE: []
@@ -623,11 +1046,23 @@ module Aws::ObservabilityAdmin
       attr_accessor log_group_selection_criteria: ::String
       attr_accessor data_source_selection_criteria: ::String
       attr_accessor encrypted_log_group_strategy: ("ALLOW" | "SKIP")
+      attr_accessor centralize_with_data_protection: ("ENABLED" | "DISABLED")
       SENSITIVE: []
     end
 
     class SourceMetricsConfiguration
       attr_accessor metrics_selection_criteria: ::String
+      SENSITIVE: []
+    end
+
+    class SourceProfilesConfiguration
+      attr_accessor profiles_selection_criteria: ::String
+      SENSITIVE: []
+    end
+
+    class SourceProgress
+      attr_accessor active: ::Integer
+      attr_accessor total: ::Integer
       SENSITIVE: []
     end
 
@@ -649,8 +1084,52 @@ module Aws::ObservabilityAdmin
       SENSITIVE: []
     end
 
+    class StartTelemetryPipelineRefreshInput
+      attr_accessor pipeline_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class StartTelemetryPipelineRefreshOutput < Aws::EmptyStructure
+    end
+
+    class StartThirdPartyTelemetryEnrichmentInput
+      attr_accessor name: ::String
+      attr_accessor telemetry_source_configuration: Types::TelemetrySourceConfigurationInput
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class StartThirdPartyTelemetryEnrichmentOutput
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor status: ("Initializing" | "Running" | "Stopped" | "Impaired")
+      attr_accessor status_reason: ::String
+      attr_accessor telemetry_source_configuration: Types::TelemetrySourceConfigurationOutput
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
     class StopTelemetryEnrichmentOutput
       attr_accessor status: ("Running" | "Stopped" | "Impaired")
+      SENSITIVE: []
+    end
+
+    class StopThirdPartyTelemetryEnrichmentInput
+      attr_accessor telemetry_enrichment_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class StopThirdPartyTelemetryEnrichmentOutput
+      attr_accessor name: ::String
+      attr_accessor telemetry_source: ("Azure")
+      attr_accessor status: ("Initializing" | "Running" | "Stopped" | "Impaired")
+      attr_accessor status_reason: ::String
+      SENSITIVE: []
+    end
+
+    class TagFilter
+      attr_accessor key: ::String
+      attr_accessor values: ::Array[::String]
       SENSITIVE: []
     end
 
@@ -669,7 +1148,7 @@ module Aws::ObservabilityAdmin
     class TelemetryConfiguration
       attr_accessor account_identifier: ::String
       attr_accessor telemetry_configuration_state: ::Hash[("Logs" | "Metrics" | "Traces" | "Insights"), ("Enabled" | "Disabled" | "NotApplicable")]
-      attr_accessor resource_type: ("AWS::EC2::Instance" | "AWS::EC2::VPC" | "AWS::Lambda::Function" | "AWS::CloudTrail" | "AWS::EKS::Cluster" | "AWS::WAFv2::WebACL" | "AWS::ElasticLoadBalancingV2::LoadBalancer" | "AWS::Route53Resolver::ResolverEndpoint" | "AWS::BedrockAgentCore::Runtime" | "AWS::BedrockAgentCore::Browser" | "AWS::BedrockAgentCore::CodeInterpreter" | "AWS::BedrockAgentCore::Gateway" | "AWS::BedrockAgentCore::Memory" | "AWS::BedrockAgentCore::WorkloadIdentity" | "AWS::BedrockAgentCore::PaymentManager" | "AWS::SecurityHub::Hub" | "AWS::CloudFront::Distribution" | "AWS::SecurityHub::HubV2" | "AWS::CloudWatch::OTelEnrichment" | "AWS::MSK::Cluster" | "AWS::S3::Bucket" | "AWS::Bedrock::KnowledgeBase" | "AWS::XRay::TransactionSearchConfig")
+      attr_accessor resource_type: ("AWS::EC2::Instance" | "AWS::EC2::VPC" | "AWS::Lambda::Function" | "AWS::CloudTrail" | "AWS::EKS::Cluster" | "AWS::WAFv2::WebACL" | "AWS::ElasticLoadBalancingV2::LoadBalancer" | "AWS::Route53Resolver::ResolverEndpoint" | "AWS::BedrockAgentCore::Runtime" | "AWS::BedrockAgentCore::Browser" | "AWS::BedrockAgentCore::CodeInterpreter" | "AWS::BedrockAgentCore::Gateway" | "AWS::BedrockAgentCore::Memory" | "AWS::BedrockAgentCore::WorkloadIdentity" | "AWS::BedrockAgentCore::PaymentManager" | "AWS::SecurityHub::Hub" | "AWS::CloudFront::Distribution" | "AWS::SecurityHub::HubV2" | "AWS::CloudWatch::OTelEnrichment" | "AWS::MSK::Cluster" | "AWS::S3::Bucket" | "AWS::Bedrock::KnowledgeBase" | "AWS::XRay::TransactionSearchConfig" | "AWS::CloudWatchOmni" | "AWS::NetworkFirewall::Firewall")
       attr_accessor resource_identifier: ::String
       attr_accessor resource_tags: ::Hash[::String, ::String]
       attr_accessor last_update_time_stamp: ::Integer
@@ -691,6 +1170,34 @@ module Aws::ObservabilityAdmin
       SENSITIVE: []
     end
 
+    class TelemetryManifest
+      attr_accessor source: Types::TelemetryManifestSource
+      attr_accessor infrastructure: Types::TelemetryManifestInfrastructure
+      SENSITIVE: []
+    end
+
+    class TelemetryManifestInfrastructure
+      attr_accessor azure: Types::AzureInfrastructure
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Azure < TelemetryManifestInfrastructure
+      end
+      class Unknown < TelemetryManifestInfrastructure
+      end
+    end
+
+    class TelemetryManifestSource
+      attr_accessor azure: ::Array[Types::AzureScopeItem]
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Azure < TelemetryManifestSource
+      end
+      class Unknown < TelemetryManifestSource
+      end
+    end
+
     class TelemetryPipeline
       attr_accessor created_time_stamp: ::Integer
       attr_accessor last_update_time_stamp: ::Integer
@@ -700,6 +1207,9 @@ module Aws::ObservabilityAdmin
       attr_accessor status: ("CREATING" | "ACTIVE" | "UPDATING" | "DELETING" | "CREATE_FAILED" | "UPDATE_FAILED")
       attr_accessor status_reason: Types::TelemetryPipelineStatusReason
       attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor last_refresh_time_stamp: ::Integer
+      attr_accessor source_progress: Types::SourceProgress
+      attr_accessor configuration_summary: Types::ConfigurationSummary
       SENSITIVE: []
     end
 
@@ -725,7 +1235,7 @@ module Aws::ObservabilityAdmin
     end
 
     class TelemetryRule
-      attr_accessor resource_type: ("AWS::EC2::Instance" | "AWS::EC2::VPC" | "AWS::Lambda::Function" | "AWS::CloudTrail" | "AWS::EKS::Cluster" | "AWS::WAFv2::WebACL" | "AWS::ElasticLoadBalancingV2::LoadBalancer" | "AWS::Route53Resolver::ResolverEndpoint" | "AWS::BedrockAgentCore::Runtime" | "AWS::BedrockAgentCore::Browser" | "AWS::BedrockAgentCore::CodeInterpreter" | "AWS::BedrockAgentCore::Gateway" | "AWS::BedrockAgentCore::Memory" | "AWS::BedrockAgentCore::WorkloadIdentity" | "AWS::BedrockAgentCore::PaymentManager" | "AWS::SecurityHub::Hub" | "AWS::CloudFront::Distribution" | "AWS::SecurityHub::HubV2" | "AWS::CloudWatch::OTelEnrichment" | "AWS::MSK::Cluster" | "AWS::S3::Bucket" | "AWS::Bedrock::KnowledgeBase" | "AWS::XRay::TransactionSearchConfig")
+      attr_accessor resource_type: ("AWS::EC2::Instance" | "AWS::EC2::VPC" | "AWS::Lambda::Function" | "AWS::CloudTrail" | "AWS::EKS::Cluster" | "AWS::WAFv2::WebACL" | "AWS::ElasticLoadBalancingV2::LoadBalancer" | "AWS::Route53Resolver::ResolverEndpoint" | "AWS::BedrockAgentCore::Runtime" | "AWS::BedrockAgentCore::Browser" | "AWS::BedrockAgentCore::CodeInterpreter" | "AWS::BedrockAgentCore::Gateway" | "AWS::BedrockAgentCore::Memory" | "AWS::BedrockAgentCore::WorkloadIdentity" | "AWS::BedrockAgentCore::PaymentManager" | "AWS::SecurityHub::Hub" | "AWS::CloudFront::Distribution" | "AWS::SecurityHub::HubV2" | "AWS::CloudWatch::OTelEnrichment" | "AWS::MSK::Cluster" | "AWS::S3::Bucket" | "AWS::Bedrock::KnowledgeBase" | "AWS::XRay::TransactionSearchConfig" | "AWS::CloudWatchOmni" | "AWS::NetworkFirewall::Firewall")
       attr_accessor telemetry_type: ("Logs" | "Metrics" | "Traces" | "Insights")
       attr_accessor telemetry_source_types: ::Array[("VPC_FLOW_LOGS" | "ROUTE53_RESOLVER_QUERY_LOGS" | "EKS_AUDIT_LOGS" | "EKS_AUTHENTICATOR_LOGS" | "EKS_CONTROLLER_MANAGER_LOGS" | "EKS_SCHEDULER_LOGS" | "EKS_API_LOGS")]
       attr_accessor destination_configuration: Types::TelemetryDestinationConfiguration
@@ -742,10 +1252,32 @@ module Aws::ObservabilityAdmin
       attr_accessor rule_arn: ::String
       attr_accessor created_time_stamp: ::Integer
       attr_accessor last_update_time_stamp: ::Integer
-      attr_accessor resource_type: ("AWS::EC2::Instance" | "AWS::EC2::VPC" | "AWS::Lambda::Function" | "AWS::CloudTrail" | "AWS::EKS::Cluster" | "AWS::WAFv2::WebACL" | "AWS::ElasticLoadBalancingV2::LoadBalancer" | "AWS::Route53Resolver::ResolverEndpoint" | "AWS::BedrockAgentCore::Runtime" | "AWS::BedrockAgentCore::Browser" | "AWS::BedrockAgentCore::CodeInterpreter" | "AWS::BedrockAgentCore::Gateway" | "AWS::BedrockAgentCore::Memory" | "AWS::BedrockAgentCore::WorkloadIdentity" | "AWS::BedrockAgentCore::PaymentManager" | "AWS::SecurityHub::Hub" | "AWS::CloudFront::Distribution" | "AWS::SecurityHub::HubV2" | "AWS::CloudWatch::OTelEnrichment" | "AWS::MSK::Cluster" | "AWS::S3::Bucket" | "AWS::Bedrock::KnowledgeBase" | "AWS::XRay::TransactionSearchConfig")
+      attr_accessor resource_type: ("AWS::EC2::Instance" | "AWS::EC2::VPC" | "AWS::Lambda::Function" | "AWS::CloudTrail" | "AWS::EKS::Cluster" | "AWS::WAFv2::WebACL" | "AWS::ElasticLoadBalancingV2::LoadBalancer" | "AWS::Route53Resolver::ResolverEndpoint" | "AWS::BedrockAgentCore::Runtime" | "AWS::BedrockAgentCore::Browser" | "AWS::BedrockAgentCore::CodeInterpreter" | "AWS::BedrockAgentCore::Gateway" | "AWS::BedrockAgentCore::Memory" | "AWS::BedrockAgentCore::WorkloadIdentity" | "AWS::BedrockAgentCore::PaymentManager" | "AWS::SecurityHub::Hub" | "AWS::CloudFront::Distribution" | "AWS::SecurityHub::HubV2" | "AWS::CloudWatch::OTelEnrichment" | "AWS::MSK::Cluster" | "AWS::S3::Bucket" | "AWS::Bedrock::KnowledgeBase" | "AWS::XRay::TransactionSearchConfig" | "AWS::CloudWatchOmni" | "AWS::NetworkFirewall::Firewall")
       attr_accessor telemetry_type: ("Logs" | "Metrics" | "Traces" | "Insights")
       attr_accessor telemetry_source_types: ::Array[("VPC_FLOW_LOGS" | "ROUTE53_RESOLVER_QUERY_LOGS" | "EKS_AUDIT_LOGS" | "EKS_AUTHENTICATOR_LOGS" | "EKS_CONTROLLER_MANAGER_LOGS" | "EKS_SCHEDULER_LOGS" | "EKS_API_LOGS")]
       SENSITIVE: []
+    end
+
+    class TelemetrySourceConfigurationInput
+      attr_accessor azure: Types::AzureTelemetrySourceConfigurationInput
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Azure < TelemetrySourceConfigurationInput
+      end
+      class Unknown < TelemetrySourceConfigurationInput
+      end
+    end
+
+    class TelemetrySourceConfigurationOutput
+      attr_accessor azure: Types::AzureTelemetrySourceConfigurationOutput
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Azure < TelemetrySourceConfigurationOutput
+      end
+      class Unknown < TelemetrySourceConfigurationOutput
+      end
     end
 
     class TestTelemetryPipelineInput
@@ -757,6 +1289,13 @@ module Aws::ObservabilityAdmin
 
     class TestTelemetryPipelineOutput
       attr_accessor results: ::Array[Types::PipelineOutput]
+      SENSITIVE: []
+    end
+
+    class ThirdPartyTelemetryEnrichmentSummary
+      attr_accessor name: ::String
+      attr_accessor telemetry_source: ("Azure")
+      attr_accessor status: ("Initializing" | "Running" | "Stopped" | "Impaired")
       SENSITIVE: []
     end
 

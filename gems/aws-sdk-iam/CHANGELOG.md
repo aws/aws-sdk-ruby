@@ -1,6 +1,51 @@
 Unreleased Changes
 ------------------
 
+1.168.0 (2026-11-19)
+------------------
+
+* Feature - This release adds API support for configuring trusted identity propagation for IAM SAML and OpenIDConnect providers.
+
+1.167.0 (2026-11-18)
+------------------
+
+* Feature - Adds MaxSignInSessionDuration to IAM Roles and Login Profiles, allowing customers to configure the maximum Console sign-in session duration per principal. Affects CreateRole, UpdateRole, GetRole and LoginProfile APIs.
+
+1.166.0 (2026-11-16)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.165.0 (2026-11-13)
+------------------
+
+* Feature - Minor documentation updates only
+
+1.164.0 (2026-11-11)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.163.0 (2026-11-10)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.162.0 (2026-11-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.161.0 (2026-11-06)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.160.0 (2026-11-04)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.159.0 (2026-10-29)
 ------------------
 

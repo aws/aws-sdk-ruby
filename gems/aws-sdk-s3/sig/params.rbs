@@ -40,6 +40,23 @@ module Aws
       }?
     }
 
+      type replication_rule_not_operator = {
+      prefix: ::String?,
+      tag: {
+        key: ::String,
+        value: ::String
+      }?,
+      or: {
+        prefixes: Array[::String]?,
+        tags: Array[
+          {
+            key: ::String,
+            value: ::String
+          }
+        ]?
+      }?
+    }
+
       type csv_input = {
       file_header_info: ("USE" | "IGNORE" | "NONE")?,
       comments: ::String?,

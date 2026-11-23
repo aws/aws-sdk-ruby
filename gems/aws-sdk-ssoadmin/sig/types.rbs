@@ -469,6 +469,7 @@ module Aws::SSOAdmin
       attr_accessor primary_region: ::String
       attr_accessor regions: ::Array[Types::RegionMetadata]
       attr_accessor encryption_configuration_details: Types::EncryptionConfigurationDetails
+      attr_accessor network_configuration_details: Types::NetworkConfigurationInfo
       attr_accessor permission_sets_enabled: bool
       SENSITIVE: []
     end
@@ -1003,6 +1004,14 @@ module Aws::SSOAdmin
       SENSITIVE: []
     end
 
+    class NetworkConfigurationInfo
+      attr_accessor vpce_access_required: bool
+      attr_accessor restrict_source_vpcs: ::Array[::String]
+      attr_accessor allow_source_ips: ::Array[::String]
+      attr_accessor exclude_application_arns: ::Array[::String]
+      SENSITIVE: []
+    end
+
     class OidcJwtConfiguration
       attr_accessor issuer_url: ::String
       attr_accessor claim_attribute_path: ::String
@@ -1285,6 +1294,7 @@ module Aws::SSOAdmin
       attr_accessor instance_arn: ::String
       attr_accessor encryption_configuration: Types::EncryptionConfiguration
       attr_accessor permission_sets_enabled: bool
+      attr_accessor network_configuration: Types::NetworkConfigurationInfo
       SENSITIVE: []
     end
 

@@ -1403,6 +1403,63 @@
         {"shape":"ResourceNotFoundException"}
       ]
     },
+    "GetSoftwareResourcesV2":{
+      "name":"GetSoftwareResourcesV2",
+      "http":{
+        "method":"POST",
+        "requestUri":"/softwarev2/resources"
+      },
+      "input":{"shape":"GetSoftwareResourcesV2Request"},
+      "output":{"shape":"GetSoftwareResourcesV2Response"},
+      "errors":[
+        {"shape":"InternalServerException"},
+        {"shape":"AccessDeniedException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"ConflictException"},
+        {"shape":"ValidationException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"OrganizationalUnitNotFoundException"},
+        {"shape":"OrganizationNotFoundException"}
+      ]
+    },
+    "GetSoftwareStatisticsV2":{
+      "name":"GetSoftwareStatisticsV2",
+      "http":{
+        "method":"POST",
+        "requestUri":"/softwarev2/statistics"
+      },
+      "input":{"shape":"GetSoftwareStatisticsV2Request"},
+      "output":{"shape":"GetSoftwareStatisticsV2Response"},
+      "errors":[
+        {"shape":"InternalServerException"},
+        {"shape":"AccessDeniedException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"ConflictException"},
+        {"shape":"ValidationException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"OrganizationalUnitNotFoundException"},
+        {"shape":"OrganizationNotFoundException"}
+      ]
+    },
+    "GetSoftwareV2":{
+      "name":"GetSoftwareV2",
+      "http":{
+        "method":"POST",
+        "requestUri":"/softwarev2"
+      },
+      "input":{"shape":"GetSoftwareV2Request"},
+      "output":{"shape":"GetSoftwareV2Response"},
+      "errors":[
+        {"shape":"InternalServerException"},
+        {"shape":"AccessDeniedException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"ConflictException"},
+        {"shape":"ValidationException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"OrganizationalUnitNotFoundException"},
+        {"shape":"OrganizationNotFoundException"}
+      ]
+    },
     "InviteMembers":{
       "name":"InviteMembers",
       "http":{
@@ -8511,7 +8568,8 @@
       "type":"string",
       "enum":[
         "Azure",
-        "AWS"
+        "AWS",
+        "GCP"
       ]
     },
     "CloudWatchLogsLogGroupArnConfigDetails":{
@@ -8605,7 +8663,8 @@
       "enum":[
         "PENDING",
         "SUCCESS",
-        "FAILED"
+        "FAILED",
+        "DISABLED"
       ]
     },
     "ConfigurationPolicyAssociationSummary":{
@@ -8671,7 +8730,8 @@
       "enum":[
         "JIRA_CLOUD",
         "SERVICENOW",
-        "AZURE"
+        "AZURE",
+        "GCP"
       ]
     },
     "ConnectorStatus":{
@@ -9022,14 +9082,16 @@
     "CriticalitySourceList":{
       "type":"list",
       "member":{"shape":"CriticalitySource"},
-      "max":3
+      "max":5
     },
     "CriticalitySourceType":{
       "type":"string",
       "enum":[
         "AutomationRule",
         "ResourceName",
-        "TagInference"
+        "TagInference",
+        "CloudWatchTelemetryInference",
+        "InstalledSoftwareAndPackageInference"
       ]
     },
     "CrossAccountMaxResults":{
@@ -9039,7 +9101,10 @@
     },
     "CspmConnectorProviderName":{
       "type":"string",
-      "enum":["AZURE"]
+      "enum":[
+        "AZURE",
+        "GCP"
+      ]
     },
     "CspmConnectorStatus":{
       "type":"string",
@@ -9092,14 +9157,16 @@
     "CspmProviderConfiguration":{
       "type":"structure",
       "members":{
-        "Azure":{"shape":"AzureProviderConfiguration"}
+        "Azure":{"shape":"AzureProviderConfiguration"},
+        "GCP":{"shape":"GcpProviderConfiguration"}
       },
       "union":true
     },
     "CspmProviderDetail":{
       "type":"structure",
       "members":{
-        "Azure":{"shape":"AzureDetail"}
+        "Azure":{"shape":"AzureDetail"},
+        "GCP":{"shape":"GcpDetail"}
       },
       "union":true
     },
@@ -9114,7 +9181,8 @@
     "CspmProviderUpdateConfiguration":{
       "type":"structure",
       "members":{
-        "Azure":{"shape":"AzureUpdateConfiguration"}
+        "Azure":{"shape":"AzureUpdateConfiguration"},
+        "GCP":{"shape":"GcpUpdateConfiguration"}
       },
       "union":true
     },
@@ -10288,6 +10356,69 @@
         "SECURITY_HUB_V2_MULTI_CLOUD_AZURE"
       ]
     },
+    "GcpDetail":{
+      "type":"structure",
+      "required":[
+        "AWSConfigConnectorArn",
+        "ScopeConfiguration",
+        "GCPRegions"
+      ],
+      "members":{
+        "AWSConfigConnectorArn":{"shape":"NonEmptyString"},
+        "ScopeConfiguration":{"shape":"GcpScopeConfiguration"},
+        "GCPRegions":{"shape":"GcpRegionList"}
+      }
+    },
+    "GcpProviderConfiguration":{
+      "type":"structure",
+      "required":[
+        "AWSConfigConnectorArn",
+        "ScopeConfiguration",
+        "GCPRegions"
+      ],
+      "members":{
+        "AWSConfigConnectorArn":{"shape":"NonEmptyString"},
+        "ScopeConfiguration":{"shape":"GcpScopeConfiguration"},
+        "GCPRegions":{"shape":"GcpRegionList"}
+      }
+    },
+    "GcpRegionList":{
+      "type":"list",
+      "member":{"shape":"NonEmptyString"},
+      "max":256,
+      "min":1
+    },
+    "GcpResourceDetails":{
+      "type":"structure",
+      "members":{},
+      "document":true
+    },
+    "GcpScopeConfiguration":{
+      "type":"structure",
+      "required":["ScopeType"],
+      "members":{
+        "ScopeType":{"shape":"GcpScopeType"},
+        "ScopeValues":{"shape":"ScopeValueList"}
+      }
+    },
+    "GcpScopeType":{
+      "type":"string",
+      "enum":[
+        "PROJECT",
+        "ORGANIZATION"
+      ]
+    },
+    "GcpUpdateConfiguration":{
+      "type":"structure",
+      "required":[
+        "ScopeConfiguration",
+        "GCPRegions"
+      ],
+      "members":{
+        "ScopeConfiguration":{"shape":"GcpScopeConfiguration"},
+        "GCPRegions":{"shape":"GcpRegionList"}
+      }
+    },
     "GenerateRecommendedPolicyV2Request":{
       "type":"structure",
       "required":["MetadataUid"],
@@ -10846,6 +10977,66 @@
       "required":["SecurityControlDefinition"],
       "members":{
         "SecurityControlDefinition":{"shape":"SecurityControlDefinition"}
+      }
+    },
+    "GetSoftwareResourcesV2Request":{
+      "type":"structure",
+      "required":[
+        "PackageName",
+        "PackageType"
+      ],
+      "members":{
+        "PackageName":{"shape":"NonEmptyString"},
+        "PackageType":{"shape":"NonEmptyString"},
+        "PackageVersion":{"shape":"NonEmptyString"},
+        "Filters":{"shape":"SoftwareFilters"},
+        "Scopes":{"shape":"SoftwareScopes"},
+        "SortCriteria":{"shape":"SortCriteria"},
+        "NextToken":{"shape":"NextToken"},
+        "MaxResults":{"shape":"MaxResults"}
+      }
+    },
+    "GetSoftwareResourcesV2Response":{
+      "type":"structure",
+      "required":["SoftwareResources"],
+      "members":{
+        "SoftwareResources":{"shape":"SoftwareResourceResultList"},
+        "NextToken":{"shape":"NextToken"}
+      }
+    },
+    "GetSoftwareStatisticsV2Request":{
+      "type":"structure",
+      "required":["GroupByRules"],
+      "members":{
+        "GroupByRules":{"shape":"SoftwareGroupByRules"},
+        "Scopes":{"shape":"SoftwareScopes"},
+        "SortOrder":{"shape":"SortOrder"},
+        "MaxStatisticResults":{"shape":"MaxStatisticResults"}
+      }
+    },
+    "GetSoftwareStatisticsV2Response":{
+      "type":"structure",
+      "required":["GroupByResults"],
+      "members":{
+        "GroupByResults":{"shape":"GroupByResults"}
+      }
+    },
+    "GetSoftwareV2Request":{
+      "type":"structure",
+      "members":{
+        "Filters":{"shape":"SoftwareFilters"},
+        "Scopes":{"shape":"SoftwareScopes"},
+        "SortCriteria":{"shape":"SortCriteria"},
+        "NextToken":{"shape":"NextToken"},
+        "MaxResults":{"shape":"MaxResults"}
+      }
+    },
+    "GetSoftwareV2Response":{
+      "type":"structure",
+      "required":["Software"],
+      "members":{
+        "Software":{"shape":"SoftwareList"},
+        "NextToken":{"shape":"NextToken"}
       }
     },
     "GranularityField":{
@@ -12251,7 +12442,8 @@
       "enum":[
         "PENDING",
         "ENABLED",
-        "FAILED"
+        "FAILED",
+        "DISABLED"
       ]
     },
     "OrganizationNotFoundException":{
@@ -12472,7 +12664,8 @@
       "members":{
         "JiraCloud":{"shape":"JiraCloudProviderConfiguration"},
         "ServiceNow":{"shape":"ServiceNowProviderConfiguration"},
-        "Azure":{"shape":"AzureProviderConfiguration"}
+        "Azure":{"shape":"AzureProviderConfiguration"},
+        "GCP":{"shape":"GcpProviderConfiguration"}
       },
       "union":true
     },
@@ -12481,7 +12674,8 @@
       "members":{
         "JiraCloud":{"shape":"JiraCloudDetail"},
         "ServiceNow":{"shape":"ServiceNowDetail"},
-        "Azure":{"shape":"AzureDetail"}
+        "Azure":{"shape":"AzureDetail"},
+        "GCP":{"shape":"GcpDetail"}
       },
       "union":true
     },
@@ -12498,7 +12692,8 @@
       "members":{
         "JiraCloud":{"shape":"JiraCloudUpdateConfiguration"},
         "ServiceNow":{"shape":"ServiceNowUpdateConfiguration"},
-        "Azure":{"shape":"AzureUpdateConfiguration"}
+        "Azure":{"shape":"AzureUpdateConfiguration"},
+        "GCP":{"shape":"GcpUpdateConfiguration"}
       },
       "union":true
     },
@@ -13081,7 +13276,8 @@
         "AwsS3AccessPoint":{"shape":"AwsS3AccessPointDetails"},
         "AwsEc2ClientVpnEndpoint":{"shape":"AwsEc2ClientVpnEndpointDetails"},
         "CodeRepository":{"shape":"CodeRepositoryDetails"},
-        "AzureResource":{"shape":"AzureResourceDetails"}
+        "AzureResource":{"shape":"AzureResourceDetails"},
+        "GcpResource":{"shape":"GcpResourceDetails"}
       }
     },
     "ResourceFindingsSummary":{
@@ -13837,7 +14033,8 @@
       "type":"string",
       "enum":[
         "AWS",
-        "Azure"
+        "Azure",
+        "GCP"
       ]
     },
     "SecurityControlsProviders":{
@@ -14021,6 +14218,58 @@
       "min":1
     },
     "SizeBytes":{"type":"long"},
+    "SoftwareCompositeFilter":{
+      "type":"structure",
+      "members":{
+        "StringFilters":{"shape":"SoftwareStringFilterList"},
+        "NestedCompositeFilters":{"shape":"SoftwareCompositeFilterList"},
+        "Operator":{"shape":"AllowedOperators"}
+      }
+    },
+    "SoftwareCompositeFilterList":{
+      "type":"list",
+      "member":{"shape":"SoftwareCompositeFilter"}
+    },
+    "SoftwareFilters":{
+      "type":"structure",
+      "members":{
+        "CompositeFilters":{"shape":"SoftwareCompositeFilterList"},
+        "CompositeOperator":{"shape":"AllowedOperators"}
+      }
+    },
+    "SoftwareGroupByField":{
+      "type":"string",
+      "enum":[
+        "AccountId",
+        "PackageName",
+        "PackageVersion",
+        "PackageType",
+        "Region",
+        "ResourceRegion",
+        "ResourceType",
+        "ResourceId",
+        "ResourceProvider",
+        "ResourceOwnerAccountId",
+        "ResourceOwnerOrgId",
+        "ResourceCloudPartition"
+      ]
+    },
+    "SoftwareGroupByRule":{
+      "type":"structure",
+      "required":["GroupByField"],
+      "members":{
+        "GroupByField":{"shape":"SoftwareGroupByField"},
+        "Filters":{"shape":"SoftwareFilters"}
+      }
+    },
+    "SoftwareGroupByRules":{
+      "type":"list",
+      "member":{"shape":"SoftwareGroupByRule"}
+    },
+    "SoftwareList":{
+      "type":"list",
+      "member":{"shape":"SoftwareResult"}
+    },
     "SoftwarePackage":{
       "type":"structure",
       "members":{
@@ -14040,6 +14289,78 @@
     "SoftwarePackageList":{
       "type":"list",
       "member":{"shape":"SoftwarePackage"}
+    },
+    "SoftwareResourceResult":{
+      "type":"structure",
+      "required":[
+        "AccountId",
+        "ResourceType",
+        "Region",
+        "ResourceId"
+      ],
+      "members":{
+        "AccountId":{"shape":"NonEmptyString"},
+        "ResourceType":{"shape":"NonEmptyString"},
+        "Region":{"shape":"NonEmptyString"},
+        "ResourceId":{"shape":"NonEmptyString"},
+        "ResourceProvider":{"shape":"NonEmptyString"},
+        "ResourceOwnerOrgId":{"shape":"NonEmptyString"},
+        "ResourceOwnerAccountId":{"shape":"NonEmptyString"},
+        "ResourceCloudPartition":{"shape":"NonEmptyString"},
+        "ResourceRegion":{"shape":"NonEmptyString"}
+      }
+    },
+    "SoftwareResourceResultList":{
+      "type":"list",
+      "member":{"shape":"SoftwareResourceResult"}
+    },
+    "SoftwareResult":{
+      "type":"structure",
+      "required":[
+        "PackageName",
+        "PackageType",
+        "ResourceCount"
+      ],
+      "members":{
+        "PackageName":{"shape":"NonEmptyString"},
+        "PackageVersion":{"shape":"NonEmptyString"},
+        "PackageType":{"shape":"NonEmptyString"},
+        "ResourceCount":{"shape":"Integer"}
+      }
+    },
+    "SoftwareScopes":{
+      "type":"structure",
+      "members":{
+        "AwsOrganizations":{"shape":"AwsOrganizationScopeList"}
+      }
+    },
+    "SoftwareStringField":{
+      "type":"string",
+      "enum":[
+        "AccountId",
+        "PackageName",
+        "PackageVersion",
+        "PackageType",
+        "Region",
+        "ResourceRegion",
+        "ResourceType",
+        "ResourceId",
+        "ResourceProvider",
+        "ResourceOwnerAccountId",
+        "ResourceOwnerOrgId",
+        "ResourceCloudPartition"
+      ]
+    },
+    "SoftwareStringFilter":{
+      "type":"structure",
+      "members":{
+        "FieldName":{"shape":"SoftwareStringField"},
+        "Filter":{"shape":"StringFilter"}
+      }
+    },
+    "SoftwareStringFilterList":{
+      "type":"list",
+      "member":{"shape":"SoftwareStringFilter"}
     },
     "SortCriteria":{
       "type":"list",
@@ -14202,7 +14523,8 @@
       "type":"string",
       "enum":[
         "AWS",
-        "Azure"
+        "Azure",
+        "GCP"
       ]
     },
     "StandardsProviders":{

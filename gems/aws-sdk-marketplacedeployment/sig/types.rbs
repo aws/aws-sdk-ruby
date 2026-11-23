@@ -19,14 +19,85 @@ module Aws::MarketplaceDeployment
       SENSITIVE: []
     end
 
+    class DataAsAServiceConfigurationDetail
+      attr_accessor fulfillment_url: ::String
+      SENSITIVE: []
+    end
+
+    class DeploymentConfigurationDetail
+      attr_accessor data_as_a_service: Types::DataAsAServiceConfigurationDetail
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class DataAsAService < DeploymentConfigurationDetail
+      end
+      class Unknown < DeploymentConfigurationDetail
+      end
+    end
+
+    class DeploymentConfigurationJobSummary
+      attr_accessor job_id: ::String
+      attr_accessor status: ("IN_PROGRESS" | "SUCCEEDED" | "FAILED")
+      attr_accessor configuration: Types::DeploymentConfigurationDetail
+      attr_accessor created_at: ::Time
+      SENSITIVE: []
+    end
+
     class DeploymentParameterInput
       attr_accessor name: ::String
       attr_accessor secret_string: ::String
       SENSITIVE: [:secret_string]
     end
 
+    class GetDeploymentConfigurationJobRequest
+      attr_accessor catalog: ::String
+      attr_accessor product_id: ::String
+      attr_accessor delivery_option_type: ("data-as-a-service")
+      attr_accessor job_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetDeploymentConfigurationJobResponse
+      attr_accessor job_id: ::String
+      attr_accessor configuration: Types::DeploymentConfigurationDetail
+      attr_accessor status: ("IN_PROGRESS" | "SUCCEEDED" | "FAILED")
+      attr_accessor created_at: ::Time
+      attr_accessor configuration_arn: ::String
+      attr_accessor ended_at: ::Time
+      attr_accessor error_code: ("FULFILLMENT_URL_UNREACHABLE" | "INTERNAL_ERROR" | "ENDPOINT_INVALID")
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class GetDeploymentConfigurationRequest
+      attr_accessor catalog: ::String
+      attr_accessor product_id: ::String
+      attr_accessor delivery_option_type: ("data-as-a-service")
+      SENSITIVE: []
+    end
+
+    class GetDeploymentConfigurationResponse
+      attr_accessor configuration: Types::DeploymentConfigurationDetail
+      SENSITIVE: []
+    end
+
     class InternalServerException
       attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListDeploymentConfigurationJobsRequest
+      attr_accessor catalog: ::String
+      attr_accessor product_id: ::String
+      attr_accessor delivery_option_type: ("data-as-a-service")
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDeploymentConfigurationJobsResponse
+      attr_accessor jobs: ::Array[Types::DeploymentConfigurationJobSummary]
+      attr_accessor next_token: ::String
       SENSITIVE: []
     end
 
@@ -41,20 +112,20 @@ module Aws::MarketplaceDeployment
     end
 
     class PutDeploymentParameterRequest
-      attr_accessor agreement_id: ::String
       attr_accessor catalog: ::String
-      attr_accessor client_token: ::String
-      attr_accessor deployment_parameter: Types::DeploymentParameterInput
-      attr_accessor expiration_date: ::Time
       attr_accessor product_id: ::String
+      attr_accessor agreement_id: ::String
+      attr_accessor deployment_parameter: Types::DeploymentParameterInput
       attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor expiration_date: ::Time
+      attr_accessor client_token: ::String
       SENSITIVE: []
     end
 
     class PutDeploymentParameterResponse
+      attr_accessor resource_arn: ::String
       attr_accessor agreement_id: ::String
       attr_accessor deployment_parameter_id: ::String
-      attr_accessor resource_arn: ::String
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
     end
@@ -66,6 +137,24 @@ module Aws::MarketplaceDeployment
 
     class ServiceQuotaExceededException
       attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class StartDeploymentConfigurationJobRequest
+      attr_accessor catalog: ::String
+      attr_accessor product_id: ::String
+      attr_accessor delivery_option_type: ("data-as-a-service")
+      attr_accessor configuration: Types::DeploymentConfigurationDetail
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class StartDeploymentConfigurationJobResponse
+      attr_accessor job_id: ::String
+      attr_accessor configuration: Types::DeploymentConfigurationDetail
+      attr_accessor status: ("IN_PROGRESS" | "SUCCEEDED" | "FAILED")
+      attr_accessor created_at: ::Time
       SENSITIVE: []
     end
 
@@ -93,8 +182,8 @@ module Aws::MarketplaceDeployment
     end
 
     class ValidationException
-      attr_accessor field_name: ::String
       attr_accessor message: ::String
+      attr_accessor field_name: ::String
       SENSITIVE: []
     end
   end

@@ -412,7 +412,10 @@
     "Boolean": {
       "base": null,
       "refs": {
+        "DefaultRunSetting$requesterPaysEnabled": "<p>Specifies whether each workflow run in the batch can read inputs from Amazon Simple Storage Service (Amazon S3) buckets that use Requester Pays. Your account pays the request and data transfer charges for those reads. The default is <code>false</code>.</p>",
+        "GetRunResponse$requesterPaysEnabled": "<p>Specifies whether this workflow run can read inputs from Amazon S3 buckets that use Requester Pays, as set in the <code>StartRun</code> or <code>StartRunBatch</code> request.</p>",
         "GetRunTaskResponse$cacheHit": "<p>Set to true if Amazon Web Services HealthOmics found a matching entry in the run cache for this task.</p>",
+        "StartRunRequest$requesterPaysEnabled": "<p>Specifies whether the workflow run that this request starts can read inputs from Amazon S3 buckets that use Requester Pays. Your account pays the request and data transfer charges for those reads. The default is <code>false</code>.</p>",
         "TaskListItem$cacheHit": "<p>Set to true if Amazon Web Services HealthOmics found a matching entry in the run cache for this task.</p>",
         "VcfOptions$ignoreQualField": "<p>The file's ignore qual field setting.</p>",
         "VcfOptions$ignoreFilterField": "<p>The file's ignore filter field setting.</p>",
@@ -999,10 +1002,10 @@
     "EngineSettings": {
       "base": null,
       "refs": {
-        "DefaultRunSetting$engineSettings": "<p>Engine-specific settings for the workflow run. Use this field to specify configuration options that are specific to the workflow engine (for example, Nextflow profiles).</p>",
+        "DefaultRunSetting$engineSettings": "<p>Engine-specific settings for the workflow run. Use this field to specify configuration options that are specific to the workflow engine (for example, Nextflow profiles, Nextflow runtime configuration).</p>",
         "GetRunResponse$engineSettings": "<p>The engine-specific settings for the workflow run.</p>",
-        "InlineSetting$engineSettings": "<p>Per-run engine-specific settings. Use this field to specify configuration options that are specific to the workflow engine (for example, Nextflow profiles). Overrides <code>defaultRunSetting.engineSettings</code> for this run.</p>",
-        "StartRunRequest$engineSettings": "<p>Engine-specific settings for the workflow run. Use this field to specify configuration options that are specific to the workflow engine (for example, Nextflow profiles).</p>"
+        "InlineSetting$engineSettings": "<p>Per-run engine-specific settings. Use this field to specify configuration options that are specific to the workflow engine (for example, Nextflow profiles, Nextflow runtime configuration). Overrides <code>defaultRunSetting.engineSettings</code> for this run.</p>",
+        "StartRunRequest$engineSettings": "<p>Engine-specific settings for the workflow run. Use this field to specify configuration options that are specific to the workflow engine (for example, Nextflow profiles, Nextflow runtime configuration).</p>"
       }
     },
     "EngineVersion": {
@@ -2660,7 +2663,7 @@
       }
     },
     "RegistryMapping": {
-      "base": "<p>If you are using the ECR pull through cache feature, the registry mapping maps between the ECR repository and the upstream registry where container images are pulled and synchronized.</p>",
+      "base": "<p>Maps an upstream container registry to a repository prefix in your Amazon Elastic Container Registry (Amazon ECR) private registry. For registries that Amazon ECR pull through cache supports, you create a pull through cache rule that synchronizes the upstream repositories with your private repositories. You can also use some registries that pull through cache doesn't support. For these registries, specify <code>credentialArn</code>, and Amazon Web Services HealthOmics copies each image into a private Amazon ECR repository the first time a task needs it.</p>",
       "refs": {
         "RegistryMappingsList$member": null
       }
@@ -2668,7 +2671,7 @@
     "RegistryMappingsList": {
       "base": null,
       "refs": {
-        "ContainerRegistryMap$registryMappings": "<p>Mapping that provides the ECR repository path where upstream container images are pulled and synchronized.</p>"
+        "ContainerRegistryMap$registryMappings": "<p>The mappings between upstream container registries and repository prefixes in your Amazon Elastic Container Registry (Amazon ECR) private registry. The list can include both pull through cache mappings and mappings for registries that Amazon Web Services HealthOmics copies images from.</p>"
       }
     },
     "RequestTimeoutException": {
@@ -3031,13 +3034,32 @@
         "StartRunResponse$runOutputUri": "<p>The destination for workflow outputs.</p>"
       }
     },
+    "RunOutputUriPrefixMode": {
+      "base": "<p>The mode controls the path prefixes that the service adds beneath <code>outputUri</code>. Valid values:</p> <ul> <li> <p> <code>SERVICE_DEFINED</code> – Adds a run-specific prefix</p> </li> <li> <p> <code>NONE_WITH_OVERWRITE</code> – Adds no prefix and overwrites existing objects at the run's output keys</p> </li> </ul>",
+      "refs": {
+        "GetRunResponse$outputUriPrefixMode": "<p>The service returns the value that the <code>StartRun</code> request specified for <code>outputUriPrefixMode</code>. The service returns <code>SERVICE_DEFINED</code> if the request did not specify a value.</p>",
+        "StartRunRequest$outputUriPrefixMode": "<p>You can control the path prefixes that the service adds beneath <code>outputUri</code>. If you don't specify a value, the service uses <code>SERVICE_DEFINED</code>, which adds a run-specific prefix.</p>"
+      }
+    },
     "RunParameters": {
       "base": null,
       "refs": {
         "DefaultRunSetting$parameters": "<p>Workflow parameter names and values shared across all runs. Merged with per-run parameters; run-specific values take precedence when keys overlap. Can be overridden per run.</p>",
         "GetRunResponse$parameters": "<p>The run's parameters.</p>",
         "InlineSetting$parameters": "<p>Per-run workflow parameters. Merged with <code>defaultRunSetting.parameters</code>; values in this object take precedence when keys overlap.</p>",
-        "StartRunRequest$parameters": "<p>Parameters for the run. The run needs all required parameters and can include optional parameters. The run cannot include any parameters that are not defined in the parameter template. To retrieve parameters from the run, use the GetRun API operation.</p>"
+        "StartRunRequest$parameters": "<p>Parameters for the run. The run needs all required parameters and can include optional parameters. The run cannot include any parameters that are not defined in the parameter template. To retrieve parameters from the run, use the GetRun API operation. To supply the parameters in a file in S3 instead, use <code>parametersUri</code>. Specify either <code>parameters</code> or <code>parametersUri</code>, not both.</p>"
+      }
+    },
+    "RunParametersUri": {
+      "base": null,
+      "refs": {
+        "StartRunRequest$parametersUri": "<p>The S3 URI of a JSON file that contains the run parameters. Use this field instead of <code>parameters</code> when your parameters are too large for the request. Specify either <code>parameters</code> or <code>parametersUri</code>, not both.</p> <p>Amazon Web Services HealthOmics validates the file after <code>StartRun</code> returns. If the file isn't valid, Amazon Web Services HealthOmics fails the run with the failure reason <code>INVALID_RUN_PARAMETERS</code>. For more information about permissions, limits, and other requirements, see <a href=\"https://docs.aws.amazon.com/omics/latest/dev/workflows-run-inputs.html\">Amazon Web Services HealthOmics run inputs</a> and <a href=\"https://docs.aws.amazon.com/omics/latest/dev/fixed-quotas.html\">Amazon Web Services HealthOmics service quotas</a> in the <i>Amazon Web Services HealthOmics User Guide</i>.</p>"
+      }
+    },
+    "RunParametersUriOrPresignedUrl": {
+      "base": null,
+      "refs": {
+        "GetRunResponse$parametersUri": "<p>For a run that you started with <code>parametersUri</code>, the service returns the location of the run parameters in this field instead of <code>parameters</code>. The value is one of the following values:</p> <ul> <li> <p>A presigned HTTPS URL for the copy of the parameters file that Amazon Web Services HealthOmics stores for the run</p> </li> <li> <p>The S3 URI that you submitted, if Amazon Web Services HealthOmics has not stored a copy of the file yet or the run failed validation</p> </li> </ul> <p>A presigned URL expires after a limited time. Call <code>GetRun</code> again to get a new URL. Treat the URL as a credential and do not share it. If the run failed because the parameters were not valid, check <code>failureReason</code> and <code>statusMessage</code>.</p>"
       }
     },
     "RunRequestId": {

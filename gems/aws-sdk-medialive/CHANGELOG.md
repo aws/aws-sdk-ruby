@@ -1,6 +1,56 @@
 Unreleased Changes
 ------------------
 
+1.214.0 (2026-11-20)
+------------------
+
+* Feature - AWS Elemental MediaLive now supports converting captions from non-embedded sources, such as Teletext and Smart Subtitles, into CEA-608 and CEA-708 embedded captions, and supports WebVTT subtitle renditions from HLS inputs as a caption source.
+
+1.213.0 (2026-11-19)
+------------------
+
+* Feature - This feature adds a new codec "JPEGXS" to the Input Specification Codec field. It adds a new "MAX 500 MBPS" maximum bitrate to the maximum bitrate Input Specification field. These input spec changes are used to enable TR-07 inputs and are also tied to metering of JPEGXS inputs.
+
+1.212.0 (2026-11-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.211.0 (2026-11-16)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.210.0 (2026-11-12)
+------------------
+
+* Feature - AWS Elemental MediaLive now adds a caption language setting for MediaPackage V2 output groups that signals a stream carries no closed captions.
+
+1.209.0 (2026-11-11)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.208.0 (2026-11-10)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.207.0 (2026-11-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.206.0 (2026-11-06)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.205.0 (2026-11-04)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.204.0 (2026-10-29)
 ------------------
 

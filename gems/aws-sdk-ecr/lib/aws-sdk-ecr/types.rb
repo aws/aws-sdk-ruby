@@ -900,6 +900,27 @@ module Aws::ECR
       include Aws::Structure
     end
 
+    # The delete replication configuration for a replication rule. When
+    # delete replication is enabled, the service replicates image deletions
+    # and image tag removals in the source registry to the replication
+    # destinations.
+    #
+    # @!attribute [rw] enabled
+    #   Specifies whether delete replication is enabled. If set to `true`,
+    #   the service replicates image deletions and image tag removals from
+    #   the source registry to each replication destination. If set to
+    #   `false`, the service does not replicate image deletions or image tag
+    #   removals.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/DeleteReplication AWS API Documentation
+    #
+    class DeleteReplication < Struct.new(
+      :enabled)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] prefix
     #   The repository namespace prefix associated with the repository
     #   creation template.
@@ -4520,11 +4541,21 @@ module Aws::ECR
     #   replicated.
     #   @return [Array<Types::RepositoryFilter>]
     #
+    # @!attribute [rw] delete_replication
+    #   The delete replication settings for the replication rule. When
+    #   delete replication is enabled, the service replicates image
+    #   deletions and image tag removals from the source registry to the
+    #   replication destinations. If you do not specify this parameter, the
+    #   service does not replicate image deletions or image tag removals for
+    #   the replication rule.
+    #   @return [Types::DeleteReplication]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/ReplicationRule AWS API Documentation
     #
     class ReplicationRule < Struct.new(
       :destinations,
-      :repository_filters)
+      :repository_filters,
+      :delete_replication)
       SENSITIVE = []
       include Aws::Structure
     end

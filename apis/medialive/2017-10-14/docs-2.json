@@ -21,7 +21,7 @@
     "DeleteInputSecurityGroup": "Deletes an Input Security Group",
     "DeleteMultiplex": "Delete a multiplex. The multiplex must be idle.",
     "DeleteMultiplexProgram": "Delete a program from a multiplex.",
-    "DeleteReservation": "Delete an expired reservation.",
+    "DeleteReservation": "Delete an expired reservation, or cancel an active reservation during the calendar month (UTC) in which you purchased it. You can't cancel an active reservation that you purchased in an earlier month, including one that renewed automatically. You also can't cancel an active reservation during the last hour of the month, from 23:00 UTC on the last day of the month.",
     "DeleteSchedule": "Delete all schedule actions on a channel.",
     "DeleteTags": "Removes tags for a resource",
     "DescribeAccountConfiguration": "Describe account configuration",
@@ -1830,7 +1830,8 @@
     "InputCodec": {
       "base": "codec in increasing order of complexity",
       "refs": {
-        "InputSpecification$Codec": "Input codec"
+        "InputSpecification$Codec": "Input codec",
+        "JpegXsInputSpecification$Codec": "Input codec. Must be JPEGXS."
       }
     },
     "InputDeblockFilter": {
@@ -3792,7 +3793,7 @@
     "WebvttDestinationStyleControl": {
       "base": "Webvtt Destination Style Control",
       "refs": {
-        "WebvttDestinationSettings$StyleControl": "Controls whether the color and position of the source captions is passed through to the WebVTT output captions.  PASSTHROUGH - Valid only if the source captions are EMBEDDED, TELETEXT, or SMART SUBTITLES.  NO_STYLE_DATA - Don't pass through the style. The output captions will not contain any font styling information. MANUAL - Applies the specified styling and positioning. All other styling and positioning is given default values."
+        "WebvttDestinationSettings$StyleControl": "Controls whether the color and position of the source captions is passed through to the WebVTT output captions.  PASSTHROUGH - Valid only if the source captions are EMBEDDED, TELETEXT, SMART SUBTITLES, or WEBVTT.  NO_STYLE_DATA - Don't pass through the style. The output captions will not contain any font styling information. MANUAL - Applies the specified styling and positioning. All other styling and positioning is given default values."
       }
     },
     "__boolean": {
@@ -5382,7 +5383,9 @@
         "MediaPackageOutputDestinationSettings$ChannelGroup": "Name of the channel group in MediaPackageV2. Only use if you are sending CMAF Ingest output to a CMAF ingest endpoint on a MediaPackage channel that uses MediaPackage v2.",
         "MediaPackageOutputDestinationSettings$ChannelName": "Name of the channel in MediaPackageV2. Only use if you are sending CMAF Ingest output to a CMAF ingest endpoint on a MediaPackage channel that uses MediaPackage v2.",
         "MediaPackageOutputDestinationSettings$ChannelEndpointId": "Endpoint 1 or 2 of the channel in MediaPackageV2. Only use if you are sending CMAF Ingest output to a CMAF ingest endpoint on a MediaPackage channel that uses MediaPackage v2.",
-        "MediaPackageOutputDestinationSettings$MediaPackageRegionName": "Region the channel group and channel are located in for MediaPackageV2. Only use if you are sending CMAF Ingest output to a CMAF ingest endpoint on a MediaPackage channel that uses MediaPackage v2."
+        "MediaPackageOutputDestinationSettings$MediaPackageRegionName": "Region the channel group and channel are located in for MediaPackageV2. Only use if you are sending CMAF Ingest output to a CMAF ingest endpoint on a MediaPackage channel that uses MediaPackage v2.",
+        "WebvttSourceSettings$GroupId": "Optional. The \"GROUP-ID\" attribute of the #EXT-X-MEDIA subtitle rendition to use from the HLS source. Specify it\ntogether with name; the pair must exactly match one rendition, otherwise this caption selector produces no\ncaptions. If neither groupId nor name is specified, MediaLive selects the rendition whose LANGUAGE matches the\ncaption selector's language code (case-insensitive), then the DEFAULT=YES rendition, then the first subtitle\nrendition listed in the master playlist.",
+        "WebvttSourceSettings$Name": "Optional. The \"NAME\" attribute of the #EXT-X-MEDIA subtitle rendition to use from the HLS source. Specify it\ntogether with groupId; the pair must exactly match one rendition, otherwise this caption selector produces no\ncaptions. If neither groupId nor name is specified, MediaLive selects the rendition whose LANGUAGE matches the\ncaption selector's language code (case-insensitive), then the DEFAULT=YES rendition, then the first subtitle\nrendition listed in the master playlist."
       }
     },
     "__stringMin1Max255": {
@@ -7892,6 +7895,51 @@
       "base": "Perceptual Filter Strength",
       "refs": {
         "PerceptualFilterSettings$Strength": "Selects the perceptual noise filter strength. Strength 1 (perceptual lite) is the recommended default and adds\napproximately 30% of an AVC encode of compute on the highest rendition. Strength 2 adds approximately 60% of an\nAVC encode of compute and can introduce slight softening on noisy content."
+      }
+    },
+    "MediaPackageV2CaptionLanguageSetting": {
+      "base": "Media Package V2 Caption Language Setting",
+      "refs": {
+        "MediaPackageV2GroupSettings$CaptionLanguageSetting": "Applies only to 608 Embedded output captions. Controls the CLOSED-CAPTIONS signaling that MediaPackage v2 writes into the HLS manifest it delivers.\nauto: The default. If captionLanguageMappings is non-empty, the HLS manifest includes a CLOSED-CAPTIONS line for each mapped caption channel. If captionLanguageMappings is empty, the HLS manifest omits any CLOSED-CAPTIONS line.\nnone: The HLS manifest carries CLOSED-CAPTIONS=NONE on each EXT-X-STREAM-INF tag, which signals to players that the stream has no closed captions, so they stop offering a CC track. The API rejects none combined with a non-empty captionLanguageMappings."
+      }
+    },
+    "JpegXsInputMaximumBitrate": {
+      "base": "Maximum JPEG XS input bitrate in megabits per second",
+      "refs": {
+        "JpegXsInputSpecification$MaximumBitrate": "Maximum JPEG XS input bitrate"
+      }
+    },
+    "JpegXsInputResolution": {
+      "base": "Maximum JPEG XS input resolution; HD is 720 to 1080 lines of vertical resolution",
+      "refs": {
+        "JpegXsInputSpecification$Resolution": "Maximum JPEG XS input resolution"
+      }
+    },
+    "JpegXsInputSpecification": {
+      "base": "Specification of the JPEG XS input for this channel. Use instead of inputSpecification when the input codec is JPEG XS.",
+      "refs": {
+        "Channel$JpegXsInputSpecification": "Specification of JPEG XS inputs for this channel",
+        "ChannelSummary$JpegXsInputSpecification": "Specification of JPEG XS inputs for this channel",
+        "CreateChannel$JpegXsInputSpecification": "Specification of JPEG XS inputs for this channel",
+        "UpdateChannel$JpegXsInputSpecification": "Specification of JPEG XS inputs for this channel"
+      }
+    },
+    "EmbeddedModeType": {
+      "base": "Controls what the embedded encoder generates.\n- \"embedded_608_only\": CEA-608 CC pairs only\n- \"embedded_708_only\": CEA-708 service blocks only\n- \"embedded_608_and_708\": Both 608 and 708",
+      "refs": {
+        "EmbeddedDestinationSettings$EmbeddedMode": "Controls what the encoder generates when in encode mode (non-embedded source \u2192 embedded destination).\nIgnored in passthrough mode (embedded source \u2192 embedded destination).\n\n- \"embedded608Only\": Generate CEA-608 CC pairs only (channel must be 1-4)\n- \"embedded708Only\": Generate CEA-708 service blocks only (channel 1-63)\n- \"embedded608And708\": Generate both 608 CC pairs and 708 service blocks (channel 1-4 gets both, 5-63 gets 708 only)"
+      }
+    },
+    "WebvttSourceSettings": {
+      "base": "Webvtt Source Settings",
+      "refs": {
+        "CaptionSelectorSettings$WebvttSourceSettings": null
+      }
+    },
+    "__integerMin1Max63": {
+      "base": null,
+      "refs": {
+        "EmbeddedDestinationSettings$CaptionServiceChannel": "CC Channel / Service number for 608/708 encode mode. Serves as both the 608 CC channel\nand the 708 service number (e.g., 1 = CC1 + Service 1). Only takes effect when the source\nis non-embedded (teletext, smart captions, etc.) \u2014 ignored in passthrough mode.\n\nRange 1-4: valid for embedded608Only, embedded708Only, or embedded608And708.\nRange 5-63: valid for embedded708Only."
       }
     }
   },

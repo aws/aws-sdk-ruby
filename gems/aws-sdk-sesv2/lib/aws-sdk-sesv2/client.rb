@@ -264,7 +264,8 @@ module Aws::SESV2
     #     An integer representing the maximum number attempts that will be made for
     #     a single request, including the initial attempt.  For example,
     #     setting this value to 5 will result in a request being retried up to
-    #     4 times. Used in `standard` and `adaptive` retry modes.
+    #     4 times. Used in `standard` and `adaptive` retry modes. Defaults to 3,
+    #     except for DynamoDB and DynamoDB Streams, which default to 4.
     #
     #   @option options [String] :profile ("default")
     #     Used when loading credentials from the shared credentials file at `HOME/.aws/credentials`.
@@ -327,15 +328,15 @@ module Aws::SESV2
     #     used by the default backoff function. This option is only used in the
     #     `legacy` retry mode.
     #
-    #   @option options [String] :retry_mode ("legacy")
+    #   @option options [String] :retry_mode ("standard")
     #     Specifies which retry algorithm to use. Values are:
     #
-    #     * `legacy` - The pre-existing retry behavior. This is the default
-    #       value if no retry mode is provided.
+    #     * `legacy` - The pre-existing retry behavior.
     #
     #     * `standard` - A standardized set of retry rules across the AWS SDKs.
     #       This includes support for retry quotas, which limit the number of
-    #       unsuccessful retries a client can make.
+    #       unsuccessful retries a client can make. This is the default value
+    #       if no retry mode is provided.
     #
     #     * `adaptive` - A retry mode that includes all the functionality of
     #       `standard` mode along with automatic client side throttling.
@@ -687,6 +688,7 @@ module Aws::SESV2
     #       tls_policy: "REQUIRE", # accepts REQUIRE, OPTIONAL
     #       sending_pool_name: "PoolName",
     #       max_delivery_seconds: 1,
+    #       shared_pool_delivery_mode: "GLOBAL", # accepts GLOBAL, REGIONAL, ACCOUNT
     #     },
     #     reputation_options: {
     #       reputation_metrics_enabled: false,
@@ -2156,6 +2158,7 @@ module Aws::SESV2
     #   * {Types::GetAccountResponse#details #details} => Types::AccountDetails
     #   * {Types::GetAccountResponse#vdm_attributes #vdm_attributes} => Types::VdmAttributes
     #   * {Types::GetAccountResponse#pricing_attributes #pricing_attributes} => Types::PricingAttributes
+    #   * {Types::GetAccountResponse#delivery_attributes #delivery_attributes} => Types::DeliveryAttributes
     #
     # @example Response structure
     #
@@ -2183,6 +2186,7 @@ module Aws::SESV2
     #   resp.vdm_attributes.guardian_attributes.optimized_shared_delivery #=> String, one of "ENABLED", "DISABLED"
     #   resp.pricing_attributes.current_plan #=> String, one of "NONE", "ESSENTIALS", "PRO", "ENTERPRISE"
     #   resp.pricing_attributes.next_plan #=> String, one of "NONE", "ESSENTIALS", "PRO", "ENTERPRISE"
+    #   resp.delivery_attributes.shared_pool_delivery_mode #=> String, one of "GLOBAL", "REGIONAL"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/GetAccount AWS API Documentation
     #
@@ -2268,6 +2272,7 @@ module Aws::SESV2
     #   resp.delivery_options.tls_policy #=> String, one of "REQUIRE", "OPTIONAL"
     #   resp.delivery_options.sending_pool_name #=> String
     #   resp.delivery_options.max_delivery_seconds #=> Integer
+    #   resp.delivery_options.shared_pool_delivery_mode #=> String, one of "GLOBAL", "REGIONAL", "ACCOUNT"
     #   resp.reputation_options.reputation_metrics_enabled #=> Boolean
     #   resp.reputation_options.last_fresh_start #=> Time
     #   resp.sending_options.sending_enabled #=> Boolean
@@ -4740,6 +4745,44 @@ module Aws::SESV2
       req.send_request(options)
     end
 
+    # Set the shared pool delivery mode for your Amazon SES account in the
+    # current Amazon Web Services Region. The mode controls whether Amazon
+    # SES can deliver your email from shared IP addresses in other Amazon
+    # Web Services Regions within the same Amazon Web Services partition.
+    #
+    # A change may take a few minutes to take effect. Messages that are
+    # already queued for delivery keep the mode that they were sent with.
+    #
+    # @option params [required, String] :shared_pool_delivery_mode
+    #   The shared pool delivery mode for your Amazon SES account in the
+    #   current Amazon Web Services Region. This mode applies to email that
+    #   you send from shared IP addresses. Can be one of the following:
+    #
+    #   * `GLOBAL` – Amazon SES delivers from your sending Region first and,
+    #     when it improves your deliverability, also uses Amazon SES shared IP
+    #     addresses with established sending history in other Amazon Web
+    #     Services Regions within the same Amazon Web Services partition.
+    #
+    #   * `REGIONAL` – Amazon SES delivers your email only from shared IP
+    #     addresses in your sending Region.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_account_delivery_attributes({
+    #     shared_pool_delivery_mode: "GLOBAL", # required, accepts GLOBAL, REGIONAL
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/PutAccountDeliveryAttributes AWS API Documentation
+    #
+    # @overload put_account_delivery_attributes(params = {})
+    # @param [Hash] params ({})
+    def put_account_delivery_attributes(params = {}, options = {})
+      req = build_request(:put_account_delivery_attributes, params)
+      req.send_request(options)
+    end
+
     # Update your Amazon SES account details.
     #
     # @option params [required, String] :mail_type
@@ -4750,7 +4793,8 @@ module Aws::SESV2
     #   the type of content that you plan to send.
     #
     # @option params [String] :contact_language
-    #   The language you would prefer to be contacted with.
+    #   The language you would prefer to be contacted with. The contact
+    #   language can be one of `EN` or `JA`.
     #
     # @option params [String] :use_case_description
     #   A description of the types of email that you plan to send.
@@ -4991,9 +5035,9 @@ module Aws::SESV2
     #
     # @option params [String] :tls_policy
     #   Specifies whether messages that use the configuration set are required
-    #   to use Transport Layer Security (TLS). If the value is `Require`,
+    #   to use Transport Layer Security (TLS). If the value is `REQUIRE`,
     #   messages are only delivered if a TLS connection can be established. If
-    #   the value is `Optional`, messages can be delivered in plain text if a
+    #   the value is `OPTIONAL`, messages can be delivered in plain text if a
     #   TLS connection can't be established.
     #
     # @option params [String] :sending_pool_name
@@ -5006,6 +5050,25 @@ module Aws::SESV2
     #   or equal to 300 seconds (5 minutes) and less than or equal to 50400
     #   seconds (840 minutes).
     #
+    # @option params [String] :shared_pool_delivery_mode
+    #   The shared pool delivery mode for email that you send with the
+    #   configuration set from shared IP addresses. This setting overrides the
+    #   shared pool delivery mode of your account. Can be one of the
+    #   following:
+    #
+    #   * `GLOBAL` – Amazon SES delivers from your sending Region first and,
+    #     when it improves your deliverability, also uses Amazon SES shared IP
+    #     addresses with established sending history in other Amazon Web
+    #     Services Regions within the same Amazon Web Services partition.
+    #
+    #   * `REGIONAL` – Amazon SES delivers your email only from shared IP
+    #     addresses in your sending Region.
+    #
+    #   * `ACCOUNT` – The configuration set uses the shared pool delivery mode
+    #     of your account.
+    #
+    #   If you don't specify a value, the current value doesn't change.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -5015,6 +5078,7 @@ module Aws::SESV2
     #     tls_policy: "REQUIRE", # accepts REQUIRE, OPTIONAL
     #     sending_pool_name: "SendingPoolName",
     #     max_delivery_seconds: 1,
+    #     shared_pool_delivery_mode: "GLOBAL", # accepts GLOBAL, REGIONAL, ACCOUNT
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/PutConfigurationSetDeliveryOptions AWS API Documentation
@@ -5584,14 +5648,14 @@ module Aws::SESV2
     #
     # @option params [String] :behavior_on_mx_failure
     #   The action to take if the required MX record isn't found when you
-    #   send an email. When you set this value to `UseDefaultValue`, the mail
-    #   is sent using *amazonses.com* as the MAIL FROM domain. When you set
-    #   this value to `RejectMessage`, the Amazon SES API v2 returns a
-    #   `MailFromDomainNotVerified` error, and doesn't attempt to deliver the
-    #   email.
+    #   send an email. When you set this value to `USE_DEFAULT_VALUE`, the
+    #   mail is sent using *amazonses.com* as the MAIL FROM domain. When you
+    #   set this value to `REJECT_MESSAGE`, the Amazon SES API v2 returns a
+    #   `MailFromDomainNotVerifiedException` error, and doesn't attempt to
+    #   deliver the email.
     #
     #   These behaviors are taken when the custom MAIL FROM domain
-    #   configuration is in the `Pending`, `Failed`, and `TemporaryFailure`
+    #   configuration is in the `PENDING`, `FAILED`, and `TEMPORARY_FAILURE`
     #   states.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
@@ -5757,7 +5821,7 @@ module Aws::SESV2
     #
     # @option params [Array<Types::MessageTag>] :default_email_tags
     #   A list of tags, in the form of name/value pairs, to apply to an email
-    #   that you send using the `SendEmail` operation. Tags correspond to
+    #   that you send using the `SendBulkEmail` operation. Tags correspond to
     #   characteristics of the email that you define, so that you can publish
     #   email sending events.
     #
@@ -6745,7 +6809,7 @@ module Aws::SESV2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-sesv2'
-      context[:gem_version] = '1.117.0'
+      context[:gem_version] = '1.124.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

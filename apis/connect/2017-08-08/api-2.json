@@ -1347,6 +1347,23 @@
         {"shape":"ResourceConflictException"}
       ]
     },
+    "DeleteAllEntitySessions":{
+      "name":"DeleteAllEntitySessions",
+      "http":{
+        "method":"POST",
+        "requestUri":"/auth/sessions/delete-all-entity-sessions"
+      },
+      "input":{"shape":"DeleteAllEntitySessionsRequest"},
+      "output":{"shape":"DeleteAllEntitySessionsResponse"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InternalServiceException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"AccessDeniedException"}
+      ]
+    },
     "DeleteAttachedFile":{
       "name":"DeleteAttachedFile",
       "http":{
@@ -6814,6 +6831,7 @@
         "UPDATE_CASE",
         "ASSIGN_SLA",
         "END_ASSOCIATED_TASKS",
+        "END_ASSOCIATED_EMAILS",
         "SUBMIT_AUTO_EVALUATION",
         "EXTRACT_INFORMATION",
         "SEND_IN_APP_NOTIFICATION"
@@ -8735,6 +8753,27 @@
       "max":100,
       "min":1
     },
+    "CaseEntries":{
+      "type":"list",
+      "member":{"shape":"CaseEntry"}
+    },
+    "CaseEntry":{
+      "type":"structure",
+      "members":{
+        "CaseId":{"shape":"CaseId"},
+        "CaseReferenceNumber":{"shape":"CaseReferenceNumber"}
+      }
+    },
+    "CaseId":{
+      "type":"string",
+      "max":36,
+      "min":1
+    },
+    "CaseReferenceNumber":{
+      "type":"string",
+      "max":50,
+      "min":1
+    },
     "CaseSlaConfiguration":{
       "type":"structure",
       "required":[
@@ -8749,6 +8788,24 @@
         "TargetFieldValues":{"shape":"SlaFieldValueUnionList"},
         "TargetSlaMinutes":{"shape":"TargetSlaMinutes"}
       }
+    },
+    "CategoriesAttributeAndCondition":{
+      "type":"structure",
+      "members":{
+        "TagConditions":{"shape":"TagAndConditionList"}
+      }
+    },
+    "CategoriesAttributeFilter":{
+      "type":"structure",
+      "members":{
+        "OrConditions":{"shape":"CategoriesAttributeOrConditionList"},
+        "AndCondition":{"shape":"CategoriesAttributeAndCondition"},
+        "TagCondition":{"shape":"TagCondition"}
+      }
+    },
+    "CategoriesAttributeOrConditionList":{
+      "type":"list",
+      "member":{"shape":"CategoriesAttributeAndCondition"}
     },
     "Channel":{
       "type":"string",
@@ -9096,11 +9153,14 @@
         "DisconnectReason":{"shape":"String"},
         "ContactEvaluations":{"shape":"ContactEvaluations"},
         "TaskTemplateInfo":{"shape":"TaskTemplateInfoV2"},
+        "Cases":{"shape":"CaseEntries"},
         "ContactDetails":{"shape":"ContactDetails"},
         "OutboundStrategy":{"shape":"OutboundStrategy"},
         "Attributes":{"shape":"Attributes"},
         "NextContacts":{"shape":"NextContacts"},
-        "GlobalResiliencyMetadata":{"shape":"GlobalResiliencyMetadata"}
+        "GlobalResiliencyMetadata":{"shape":"GlobalResiliencyMetadata"},
+        "ContactLens":{"shape":"ContactLens"},
+        "VoicemailInfo":{"shape":"VoicemailInfo"}
       }
     },
     "ContactAnalysis":{
@@ -9118,6 +9178,13 @@
         "Arn":{"shape":"ARN"},
         "AnalyticsMode":{"shape":"AnalyticsMode"},
         "IsRedacted":{"shape":"NullableBoolean"}
+      }
+    },
+    "ContactAnalysisReferenceState":{
+      "type":"structure",
+      "members":{
+        "Status":{"shape":"String"},
+        "StatusReason":{"shape":"String"}
       }
     },
     "ContactConfiguration":{
@@ -9593,6 +9660,51 @@
         "CUSTOMER"
       ]
     },
+    "ContactLens":{
+      "type":"structure",
+      "members":{
+        "ConversationalAnalytics":{"shape":"ConversationalAnalytics"}
+      }
+    },
+    "ContactLensAnalyticsModeList":{
+      "type":"list",
+      "member":{"shape":"String"}
+    },
+    "ContactLensChannelConfiguration":{
+      "type":"structure",
+      "members":{
+        "AnalyticsModes":{"shape":"ContactLensAnalyticsModeList"}
+      }
+    },
+    "ContactLensRedactionConfiguration":{
+      "type":"structure",
+      "members":{
+        "Behavior":{"shape":"String"},
+        "Policy":{"shape":"String"},
+        "Entities":{"shape":"ContactLensRedactionEntitiesList"},
+        "MaskMode":{"shape":"String"}
+      }
+    },
+    "ContactLensRedactionEntitiesList":{
+      "type":"list",
+      "member":{"shape":"String"}
+    },
+    "ContactLensSentimentConfiguration":{
+      "type":"structure",
+      "members":{
+        "Behavior":{"shape":"String"}
+      }
+    },
+    "ContactLensSummaryConfiguration":{
+      "type":"structure",
+      "members":{
+        "SummaryModes":{"shape":"ContactLensSummaryModeList"}
+      }
+    },
+    "ContactLensSummaryModeList":{
+      "type":"list",
+      "member":{"shape":"String"}
+    },
     "ContactMediaProcessingFailureMode":{
       "type":"string",
       "enum":[
@@ -9835,6 +9947,28 @@
         "AndCondition":{"shape":"AttributeAndCondition"},
         "TagCondition":{"shape":"TagCondition"},
         "HierarchyGroupCondition":{"shape":"HierarchyGroupCondition"}
+      }
+    },
+    "ConversationalAnalytics":{
+      "type":"structure",
+      "members":{
+        "Configuration":{"shape":"ConversationalAnalyticsConfiguration"},
+        "ContactAnalysisReferenceState":{"shape":"ContactAnalysisReferenceState"}
+      }
+    },
+    "ConversationalAnalyticsConfiguration":{
+      "type":"structure",
+      "members":{
+        "Enabled":{
+          "shape":"Boolean",
+          "box":true
+        },
+        "LanguageLocale":{"shape":"String"},
+        "LanguageLocales":{"shape":"LanguageLocales"},
+        "ChannelConfiguration":{"shape":"ContactLensChannelConfiguration"},
+        "RedactionConfiguration":{"shape":"ContactLensRedactionConfiguration"},
+        "SummaryConfiguration":{"shape":"ContactLensSummaryConfiguration"},
+        "SentimentConfiguration":{"shape":"ContactLensSentimentConfiguration"}
       }
     },
     "Count":{"type":"integer"},
@@ -11731,6 +11865,23 @@
       "type":"integer",
       "max":9999,
       "min":0
+    },
+    "DeleteAllEntitySessionsRequest":{
+      "type":"structure",
+      "required":[
+        "InstanceId",
+        "EntityId",
+        "EntityType"
+      ],
+      "members":{
+        "InstanceId":{"shape":"InstanceId"},
+        "EntityId":{"shape":"EntityId"},
+        "EntityType":{"shape":"SessionEntityType"}
+      }
+    },
+    "DeleteAllEntitySessionsResponse":{
+      "type":"structure",
+      "members":{}
     },
     "DeleteAttachedFileRequest":{
       "type":"structure",
@@ -14479,6 +14630,10 @@
       "type":"string",
       "enum":["KMS"]
     },
+    "EndAssociatedEmailsActionDefinition":{
+      "type":"structure",
+      "members":{}
+    },
     "EndAssociatedTasksActionDefinition":{
       "type":"structure",
       "members":{}
@@ -14624,7 +14779,10 @@
         "CreatedTime":{"shape":"Timestamp"},
         "LastModifiedTime":{"shape":"Timestamp"},
         "EvaluationType":{"shape":"EvaluationType"},
-        "Tags":{"shape":"TagMap"}
+        "Tags":{"shape":"TagMap"},
+        "ItemEnablementStatus":{"shape":"EvaluationEnablementStatusMap"},
+        "SourceResolutionStatus":{"shape":"EvaluationItemResolutionStatus"},
+        "SourceValues":{"shape":"EvaluationResolvedSourceList"}
       }
     },
     "EvaluationAcknowledgement":{
@@ -14729,6 +14887,19 @@
         "ContactParticipantId":{"shape":"ResourceId"}
       }
     },
+    "EvaluationEnablementStatus":{
+      "type":"string",
+      "enum":[
+        "ENABLED",
+        "DISABLED"
+      ]
+    },
+    "EvaluationEnablementStatusMap":{
+      "type":"map",
+      "key":{"shape":"ReferenceId"},
+      "value":{"shape":"EvaluationEnablementStatus"},
+      "max":100
+    },
     "EvaluationForm":{
       "type":"structure",
       "required":[
@@ -14809,12 +14980,58 @@
       "type":"list",
       "member":{"shape":"EvaluationFormAIVersionSummary"}
     },
+    "EvaluationFormAiMetricsField":{
+      "type":"string",
+      "enum":[
+        "AI_SESSION_IS_HANDED_OFF",
+        "AI_SESSION_SELF_SERVICE_DURATION",
+        "AI_SESSION_GOAL_SUCCESS_RATE",
+        "AI_SESSION_COMPLETENESS_SCORE",
+        "AI_SESSION_FAITHFULNESS_SCORE",
+        "AI_AGENT_MAX_PROMPT_LATENCY",
+        "AI_TOOL_MAX_LATENCY",
+        "AI_TOOL_SELECTION_ACCURACY",
+        "AI_TOOL_PARAMETER_ACCURACY",
+        "AI_TOOL_UTILIZATION_ACCURACY"
+      ]
+    },
     "EvaluationFormAutoEvaluationConfiguration":{
       "type":"structure",
       "required":["Enabled"],
       "members":{
         "Enabled":{"shape":"Boolean"}
       }
+    },
+    "EvaluationFormContactAttributeKey":{
+      "type":"string",
+      "max":32767,
+      "min":1
+    },
+    "EvaluationFormContactField":{
+      "type":"string",
+      "enum":[
+        "CATEGORIES",
+        "AGENT_ARN",
+        "QUEUE_ARN",
+        "ROUTING_PROFILE_ARN",
+        "CHANNEL",
+        "INITIATION_METHOD",
+        "IS_QUEUED",
+        "OVERALL_CUSTOMER_SENTIMENT_SCORE",
+        "OVERALL_AGENT_SENTIMENT_SCORE",
+        "CUSTOMER_SENTIMENT_SCORE_WITHOUT_AGENT",
+        "CUSTOMER_SENTIMENT_SCORE_WITH_AGENT",
+        "NON_TALK_TIME",
+        "NON_TALK_TIME_PERCENTAGE",
+        "NUMBER_OF_INTERRUPTIONS",
+        "CONTACT_DURATION",
+        "AGENT_INTERACTION_DURATION",
+        "CUSTOMER_HOLD_TIME",
+        "LONGEST_HOLD_DURATION",
+        "NUMBER_OF_HOLDS",
+        "AGENT_INTERACTION_AND_HOLD_DURATION",
+        "RECORDING_MEDIA_STREAM_TYPES"
+      ]
     },
     "EvaluationFormContent":{
       "type":"structure",
@@ -14841,6 +15058,17 @@
       }
     },
     "EvaluationFormDescription":{"type":"string"},
+    "EvaluationFormEnablementBooleanValue":{"type":"boolean"},
+    "EvaluationFormEnablementNumericValue":{"type":"double"},
+    "EvaluationFormEnablementStringValue":{
+      "type":"string",
+      "max":512,
+      "min":0
+    },
+    "EvaluationFormEvaluationMetadataField":{
+      "type":"string",
+      "enum":["EVALUATION_TYPE"]
+    },
     "EvaluationFormId":{
       "type":"string",
       "max":256,
@@ -14918,19 +15146,40 @@
       "required":["Type"],
       "members":{
         "Type":{"shape":"EvaluationFormItemEnablementSourceType"},
-        "RefId":{"shape":"ReferenceId"}
+        "RefId":{"shape":"ReferenceId"},
+        "ContactField":{"shape":"EvaluationFormContactField"},
+        "ContactAttributeKey":{"shape":"EvaluationFormContactAttributeKey"},
+        "SegmentAttributeKey":{"shape":"EvaluationFormSegmentAttributeKey"},
+        "EvaluationMetadataField":{"shape":"EvaluationFormEvaluationMetadataField"},
+        "AiMetricsField":{"shape":"EvaluationFormAiMetricsField"}
       }
     },
     "EvaluationFormItemEnablementSourceType":{
       "type":"string",
-      "enum":["QUESTION_REF_ID"]
+      "enum":[
+        "QUESTION_REF_ID",
+        "CONTACT",
+        "EVALUATION_METADATA",
+        "FORM_METADATA",
+        "AI_METRICS"
+      ]
     },
     "EvaluationFormItemEnablementSourceValue":{
       "type":"structure",
       "required":["Type"],
       "members":{
         "Type":{"shape":"EvaluationFormItemEnablementSourceValueType"},
-        "RefId":{"shape":"ReferenceId"}
+        "RefId":{"shape":"ReferenceId"},
+        "StringValue":{"shape":"EvaluationFormEnablementStringValue"},
+        "NumericValue":{
+          "shape":"EvaluationFormEnablementNumericValue",
+          "box":true
+        },
+        "BooleanValue":{
+          "shape":"EvaluationFormEnablementBooleanValue",
+          "box":true
+        },
+        "DateTimeValue":{"shape":"Timestamp"}
       }
     },
     "EvaluationFormItemEnablementSourceValueList":{
@@ -14939,7 +15188,13 @@
     },
     "EvaluationFormItemEnablementSourceValueType":{
       "type":"string",
-      "enum":["OPTION_REF_ID"]
+      "enum":[
+        "OPTION_REF_ID",
+        "STRING_VALUE",
+        "NUMERIC_VALUE",
+        "BOOLEAN_VALUE",
+        "DATETIME_VALUE"
+      ]
     },
     "EvaluationFormItemSourceValuesComparator":{
       "type":"string",
@@ -14947,7 +15202,13 @@
         "IN",
         "NOT_IN",
         "ALL_IN",
-        "EXACT"
+        "EXACT",
+        "GREATER_THAN",
+        "LESS_THAN",
+        "GREATER_THAN_OR_EQUAL_TO",
+        "LESS_THAN_OR_EQUAL_TO",
+        "EQUAL_TO",
+        "NOT_EQUAL_TO"
       ]
     },
     "EvaluationFormItemWeight":{"type":"double"},
@@ -14967,7 +15228,103 @@
         "ja-JP",
         "ko-KR",
         "zh-CN",
-        "ms-MY"
+        "ms-MY",
+        "af-ZA",
+        "sq-AL",
+        "am-ET",
+        "ar-AE",
+        "ar-SA",
+        "hy-AM",
+        "eu-ES",
+        "be-BY",
+        "bs-BA",
+        "bg-BG",
+        "ca-ES",
+        "ckb-IR",
+        "ckb-IQ",
+        "zh-TW",
+        "hr-HR",
+        "cs-CZ",
+        "da-DK",
+        "nl-BE",
+        "nl-NL",
+        "en-AU",
+        "en-IN",
+        "en-IE",
+        "en-NZ",
+        "en-AB",
+        "en-SG",
+        "en-ZA",
+        "en-GB",
+        "en-WL",
+        "fa-IR",
+        "fa-AF",
+        "fi-FI",
+        "fr-BE",
+        "fr-CA",
+        "ga-IE",
+        "gl-ES",
+        "ka-GE",
+        "de-AT",
+        "de-CH",
+        "el-GR",
+        "gu-IN",
+        "ht-HT",
+        "he-IL",
+        "hi-IN",
+        "hu-HU",
+        "is-IS",
+        "id-ID",
+        "jv-ID",
+        "km-KH",
+        "kn-IN",
+        "kk-KZ",
+        "lo-LA",
+        "lv-LV",
+        "lt-LT",
+        "mk-MK",
+        "ml-IN",
+        "mr-IN",
+        "ne-NP",
+        "no-NO",
+        "or-IN",
+        "ps-AF",
+        "pl-PL",
+        "pt-PT",
+        "pa-IN",
+        "ro-RO",
+        "ru-RU",
+        "sr-RS",
+        "si-LK",
+        "sk-SK",
+        "sl-SI",
+        "es-MX",
+        "es-US",
+        "su-ID",
+        "sw-BI",
+        "sw-KE",
+        "sw-RW",
+        "sw-TZ",
+        "sw-UG",
+        "sv-SE",
+        "tl-PH",
+        "ta-IN",
+        "te-IN",
+        "th-TH",
+        "tr-TR",
+        "uk-UA",
+        "uz-UZ",
+        "vi-VN",
+        "zu-ZA",
+        "my-MM",
+        "so-SO",
+        "yue-HK",
+        "et-EE",
+        "hmn",
+        "lg-UG",
+        "cy-GB",
+        "xh-ZA",
+        "bn-BD"
       ]
     },
     "EvaluationFormLanguageConfiguration":{
@@ -15128,7 +15485,8 @@
       "type":"string",
       "enum":[
         "CONTACT_LENS_DATA",
-        "GEN_AI"
+        "GEN_AI",
+        "CONDITION"
       ]
     },
     "EvaluationFormQuestionInstructions":{"type":"string"},
@@ -15280,10 +15638,16 @@
         "Items":{"shape":"EvaluationFormItemsList"},
         "Weight":{"shape":"EvaluationFormItemWeight"},
         "IsExcludedFromScoring":{"shape":"Boolean"},
-        "ScoreThresholds":{"shape":"EvaluationFormScoreThresholdList"}
+        "ScoreThresholds":{"shape":"EvaluationFormScoreThresholdList"},
+        "Enablement":{"shape":"EvaluationFormItemEnablementConfiguration"}
       }
     },
     "EvaluationFormSectionTitle":{"type":"string"},
+    "EvaluationFormSegmentAttributeKey":{
+      "type":"string",
+      "max":128,
+      "min":1
+    },
     "EvaluationFormSingleSelectQuestionAutomation":{
       "type":"structure",
       "members":{
@@ -15295,7 +15659,8 @@
     "EvaluationFormSingleSelectQuestionAutomationOption":{
       "type":"structure",
       "members":{
-        "RuleCategory":{"shape":"SingleSelectQuestionRuleCategoryAutomation"}
+        "RuleCategory":{"shape":"SingleSelectQuestionRuleCategoryAutomation"},
+        "AutomationRule":{"shape":"SingleSelectQuestionAutomationRule"}
       },
       "union":true
     },
@@ -15487,6 +15852,14 @@
       }
     },
     "EvaluationId":{"type":"string"},
+    "EvaluationItemResolutionStatus":{
+      "type":"string",
+      "enum":[
+        "PENDING",
+        "RESOLVED",
+        "FAILED"
+      ]
+    },
     "EvaluationMetadata":{
       "type":"structure",
       "required":[
@@ -15535,7 +15908,8 @@
       "type":"string",
       "enum":[
         "CONTACT_LENS_DATA",
-        "GEN_AI"
+        "GEN_AI",
+        "CONDITION"
       ]
     },
     "EvaluationQuestionInputDetails":{
@@ -15543,6 +15917,28 @@
       "members":{
         "TranscriptType":{"shape":"EvaluationTranscriptType"}
       }
+    },
+    "EvaluationResolvedSource":{
+      "type":"structure",
+      "required":[
+        "Source",
+        "Status"
+      ],
+      "members":{
+        "Source":{"shape":"EvaluationFormItemEnablementSource"},
+        "Status":{"shape":"EvaluationItemResolutionStatus"},
+        "Values":{"shape":"EvaluationResolvedSourceValueList"}
+      }
+    },
+    "EvaluationResolvedSourceList":{
+      "type":"list",
+      "member":{"shape":"EvaluationResolvedSource"},
+      "max":100
+    },
+    "EvaluationResolvedSourceValueList":{
+      "type":"list",
+      "member":{"shape":"EvaluationFormItemEnablementSourceValue"},
+      "max":100
     },
     "EvaluationReviewConfiguration":{
       "type":"structure",
@@ -16158,7 +16554,11 @@
         "EMAIL_MESSAGE_REDACTED",
         "EMAIL_MESSAGE_PLAIN_TEXT_REDACTED",
         "ATTACHMENT",
-        "VOICE_RECORDING"
+        "VOICE_RECORDING",
+        "VOICEMAIL_RECORDING",
+        "VOICEMAIL_RECORDING_REDACTED",
+        "VOICEMAIL_ANALYSIS",
+        "VOICEMAIL_ANALYSIS_REDACTED"
       ]
     },
     "FilterId":{
@@ -17518,7 +17918,9 @@
         "IntegrationArn":{"shape":"ARN"},
         "SourceApplicationUrl":{"shape":"URI"},
         "SourceApplicationName":{"shape":"SourceApplicationName"},
-        "SourceType":{"shape":"SourceType"}
+        "SourceType":{"shape":"SourceType"},
+        "LastModifiedTime":{"shape":"Timestamp"},
+        "LastModifiedRegion":{"shape":"RegionName"}
       }
     },
     "IntegrationAssociationSummaryList":{
@@ -17705,6 +18107,12 @@
       }
     },
     "LanguageLocale":{"type":"string"},
+    "LanguageLocales":{
+      "type":"list",
+      "member":{"shape":"LanguageLocale"},
+      "max":5,
+      "min":0
+    },
     "LargeNextToken":{
       "type":"string",
       "max":100000,
@@ -19352,7 +19760,8 @@
         "MaxResults":{"shape":"MaxResult100"},
         "NextToken":{"shape":"LargeNextToken"},
         "OutputType":{"shape":"RealTimeContactAnalysisOutputType"},
-        "SegmentTypes":{"shape":"RealTimeContactAnalysisSegmentTypes"}
+        "SegmentTypes":{"shape":"RealTimeContactAnalysisSegmentTypes"},
+        "ListFilter":{"shape":"RealTimeContactAnalysisSegmentsFilter"}
       }
     },
     "ListRealtimeContactAnalysisSegmentsV2Response":{
@@ -21152,6 +21561,11 @@
         "ComparisonType":{"shape":"NumberComparisonType"}
       }
     },
+    "NumberOfVoicemails":{
+      "type":"integer",
+      "max":3,
+      "min":1
+    },
     "NumberReference":{
       "type":"structure",
       "members":{
@@ -21180,7 +21594,16 @@
         "CUSTOMER_HOLD_TIME",
         "LONGEST_HOLD_DURATION",
         "NUMBER_OF_HOLDS",
-        "AGENT_INTERACTION_AND_HOLD_DURATION"
+        "AGENT_INTERACTION_AND_HOLD_DURATION",
+        "AI_SESSION_SELF_SERVICE_DURATION",
+        "AI_SESSION_GOAL_SUCCESS_RATE",
+        "AI_SESSION_COMPLETENESS_SCORE",
+        "AI_SESSION_FAITHFULNESS_SCORE",
+        "AI_AGENT_MAX_PROMPT_LATENCY",
+        "AI_TOOL_MAX_LATENCY",
+        "AI_TOOL_SELECTION_ACCURACY",
+        "AI_TOOL_PARAMETER_ACCURACY",
+        "AI_TOOL_UTILIZATION_ACCURACY"
       ]
     },
     "NumericQuestionPropertyValueAutomation":{
@@ -22091,7 +22514,10 @@
     },
     "PreEvaluationFilterResourceType":{
       "type":"string",
-      "enum":["CONTACT"]
+      "enum":[
+        "CONTACT",
+        "CONTACT_EVALUATION"
+      ]
     },
     "PreEvaluationFilterType":{
       "type":"string",
@@ -22773,6 +23199,7 @@
       "type":"structure",
       "required":["PointsOfInterest"],
       "members":{
+        "RuleId":{"shape":"RuleId256"},
         "PointsOfInterest":{"shape":"RealTimeContactAnalysisPointsOfInterest"}
       }
     },
@@ -23012,6 +23439,12 @@
       "type":"list",
       "member":{"shape":"RealTimeContactAnalysisSegmentType"},
       "max":7
+    },
+    "RealTimeContactAnalysisSegmentsFilter":{
+      "type":"structure",
+      "members":{
+        "CategoriesAttributeFilter":{"shape":"CategoriesAttributeFilter"}
+      }
     },
     "RealTimeContactAnalysisSentimentLabel":{
       "type":"string",
@@ -23293,7 +23726,11 @@
         "Number":{"shape":"NumberReference"},
         "Date":{"shape":"DateReference"},
         "Email":{"shape":"EmailReference"},
-        "ContactAnalysis":{"shape":"ContactAnalysisReference"}
+        "ContactAnalysis":{"shape":"ContactAnalysisReference"},
+        "VoicemailRecording":{"shape":"VoicemailRecordingReference"},
+        "VoicemailRecordingRedacted":{"shape":"VoicemailRecordingReference"},
+        "VoicemailAnalysis":{"shape":"VoicemailAnalysisReference"},
+        "VoicemailAnalysisRedacted":{"shape":"VoicemailAnalysisReference"}
       },
       "union":true
     },
@@ -23314,7 +23751,11 @@
         "EMAIL_MESSAGE",
         "EMAIL_MESSAGE_PLAIN_TEXT",
         "EMAIL_MESSAGE_PLAIN_TEXT_REDACTED",
-        "EMAIL_MESSAGE_REDACTED"
+        "EMAIL_MESSAGE_REDACTED",
+        "VOICEMAIL_RECORDING",
+        "VOICEMAIL_RECORDING_REDACTED",
+        "VOICEMAIL_ANALYSIS",
+        "VOICEMAIL_ANALYSIS_REDACTED"
       ]
     },
     "ReferenceTypes":{
@@ -23890,6 +24331,7 @@
         "UpdateCaseAction":{"shape":"UpdateCaseActionDefinition"},
         "AssignSlaAction":{"shape":"AssignSlaActionDefinition"},
         "EndAssociatedTasksAction":{"shape":"EndAssociatedTasksActionDefinition"},
+        "EndAssociatedEmailsAction":{"shape":"EndAssociatedEmailsActionDefinition"},
         "SubmitAutoEvaluationAction":{"shape":"SubmitAutoEvaluationActionDefinition"},
         "ExtractInformationAction":{"shape":"ExtractInformationActionDefinition"},
         "SendInAppNotificationAction":{"shape":"SendInAppNotificationActionDefinition"}
@@ -23927,6 +24369,11 @@
     },
     "RuleFunction":{"type":"string"},
     "RuleId":{
+      "type":"string",
+      "max":256,
+      "min":1
+    },
+    "RuleId256":{
       "type":"string",
       "max":256,
       "min":1
@@ -25222,6 +25669,10 @@
       },
       "union":true
     },
+    "SessionEntityType":{
+      "type":"string",
+      "enum":["USER"]
+    },
     "SessionId":{
       "type":"string",
       "max":36
@@ -25256,6 +25707,17 @@
     "SingleSelectOptions":{
       "type":"list",
       "member":{"shape":"TaskTemplateSingleSelectOption"}
+    },
+    "SingleSelectQuestionAutomationRule":{
+      "type":"structure",
+      "required":[
+        "Condition",
+        "OptionRefId"
+      ],
+      "members":{
+        "Condition":{"shape":"EvaluationFormItemEnablementCondition"},
+        "OptionRefId":{"shape":"ReferenceId"}
+      }
     },
     "SingleSelectQuestionRuleCategoryAutomation":{
       "type":"structure",
@@ -29518,6 +29980,30 @@
         "TO_AGENT",
         "ALL"
       ]
+    },
+    "VoicemailAnalysisReference":{
+      "type":"structure",
+      "members":{
+        "Name":{"shape":"ReferenceKey"},
+        "Value":{"shape":"ReferenceValue"},
+        "Status":{"shape":"ReferenceStatus"},
+        "Arn":{"shape":"ARN"}
+      }
+    },
+    "VoicemailInfo":{
+      "type":"structure",
+      "members":{
+        "NumberOfVoicemails":{"shape":"NumberOfVoicemails"}
+      }
+    },
+    "VoicemailRecordingReference":{
+      "type":"structure",
+      "members":{
+        "Name":{"shape":"ReferenceKey"},
+        "Value":{"shape":"ReferenceValue"},
+        "Status":{"shape":"ReferenceStatus"},
+        "Arn":{"shape":"ARN"}
+      }
     },
     "WebBrowserId":{
       "type":"string",

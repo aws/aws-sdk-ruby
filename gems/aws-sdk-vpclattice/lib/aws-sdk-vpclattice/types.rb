@@ -672,9 +672,9 @@ module Aws::VPCLattice
     #
     # @!attribute [rw] resource_config_dns_resolution
     #   Indicates how DNS is resolved for resource configurations associated
-    #   with this resource gateway. This value is set when you create the
-    #   resource gateway and can't be changed afterward. The default is
-    #   `PUBLIC`.
+    #   with this resource gateway. The default is `PUBLIC`. To change the
+    #   value after you create the resource gateway, use
+    #   `UpdateResourceGateway`.
     #
     #   * `IN_VPC` - DNS resolution occurs privately within the resource
     #     gateway's VPC. DNS queries for resources behind this resource
@@ -687,10 +687,20 @@ module Aws::VPCLattice
     #     single resource gateway can't serve both ARN and CIDR resource
     #     configurations.
     #
+    #     DNS queries for an `IN_VPC` resource gateway use UDP only, with no
+    #     TCP fallback. If responses exceed 8.4 KB, DNS resolution fails.
+    #     The DNS resolver must be recursive. For more information, see
+    #     [Resource Config DNS Resolution][1] in the *Amazon VPC Lattice
+    #     User Guide*.
+    #
     #   * `PUBLIC` - DNS resolution occurs against public DNS resolvers. DNS
     #     queries for resources behind this resource gateway resolve using
     #     standard public DNS. Use this when your resource domain names are
     #     publicly resolvable.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpc-lattice/latest/ug/resource-gateway.html#resource-config-dns-resolution
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -4080,7 +4090,9 @@ module Aws::VPCLattice
     #   @return [Types::PathMatchType]
     #
     # @!attribute [rw] case_sensitive
-    #   Indicates whether the match is case sensitive.
+    #   Specifies whether the match is case sensitive. Defaults to `true`
+    #   (case-sensitive matching). Set to `false` to match the path
+    #   case-insensitively.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/vpc-lattice-2022-11-30/PathMatch AWS API Documentation
@@ -5833,11 +5845,25 @@ module Aws::VPCLattice
     #   The IDs of the security groups associated with the resource gateway.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] resource_config_dns_resolution
+    #   Indicates how DNS is resolved for resource configurations associated
+    #   with this resource gateway.
+    #
+    #   * `IN_VPC` - DNS resolution occurs privately within the resource
+    #     gateway's VPC. Use this when your resource domain names are
+    #     hosted in private Route 53 hosted zones or on-premises DNS servers
+    #     reachable from the VPC.
+    #
+    #   * `PUBLIC` - DNS resolution occurs against public DNS resolvers. Use
+    #     this when your resource domain names are publicly resolvable.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/vpc-lattice-2022-11-30/UpdateResourceGatewayRequest AWS API Documentation
     #
     class UpdateResourceGatewayRequest < Struct.new(
       :resource_gateway_identifier,
-      :security_group_ids)
+      :security_group_ids,
+      :resource_config_dns_resolution)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5874,6 +5900,11 @@ module Aws::VPCLattice
     #   The type of IP address used by the resource gateway.
     #   @return [String]
     #
+    # @!attribute [rw] resource_config_dns_resolution
+    #   The DNS resolution type for resource configurations that are
+    #   associated with this resource gateway.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/vpc-lattice-2022-11-30/UpdateResourceGatewayResponse AWS API Documentation
     #
     class UpdateResourceGatewayResponse < Struct.new(
@@ -5884,7 +5915,8 @@ module Aws::VPCLattice
       :vpc_id,
       :subnet_ids,
       :security_group_ids,
-      :ip_address_type)
+      :ip_address_type,
+      :resource_config_dns_resolution)
       SENSITIVE = []
       include Aws::Structure
     end

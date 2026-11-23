@@ -116,9 +116,16 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataSync/Client.html#create_location_azure_blob-instance_method
       def create_location_azure_blob: (
                                         container_url: ::String,
-                                        authentication_type: ("SAS" | "NONE"),
+                                        authentication_type: ("SAS" | "NONE" | "OIDC"),
                                         ?sas_configuration: {
                                           token: ::String
+                                        },
+                                        ?federated_identity: {
+                                          aws_iam_role: ::String?,
+                                          azure_oidc: {
+                                            tenant_id: ::String,
+                                            client_id: ::String
+                                          }?
                                         },
                                         ?blob_type: ("BLOCK"),
                                         ?access_tier: ("HOT" | "COOL" | "ARCHIVE"),
@@ -329,6 +336,7 @@ module Aws
                                             bucket_name: ::String,
                                             ?access_key: ::String,
                                             ?secret_key: ::String,
+                                            ?federated_identity: Params::object_storage_federated_identity_config,
                                             ?agent_arns: Array[::String],
                                             ?tags: Array[
                                               {
@@ -494,7 +502,8 @@ module Aws
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeLocationAzureBlobResponse]
         def location_arn: () -> ::String
         def location_uri: () -> ::String
-        def authentication_type: () -> ("SAS" | "NONE")
+        def authentication_type: () -> ("SAS" | "NONE" | "OIDC")
+        def federated_identity: () -> Types::AzureFederatedIdentityConfig
         def blob_type: () -> ("BLOCK")
         def access_tier: () -> ("HOT" | "COOL" | "ARCHIVE")
         def agent_arns: () -> ::Array[::String]
@@ -629,6 +638,7 @@ module Aws
         def location_arn: () -> ::String
         def location_uri: () -> ::String
         def access_key: () -> ::String
+        def federated_identity: () -> Types::ObjectStorageFederatedIdentityConfig
         def server_port: () -> ::Integer
         def server_protocol: () -> ("HTTPS" | "HTTP")
         def agent_arns: () -> ::Array[::String]
@@ -903,9 +913,16 @@ module Aws
       def update_location_azure_blob: (
                                         location_arn: ::String,
                                         ?subdirectory: ::String,
-                                        ?authentication_type: ("SAS" | "NONE"),
+                                        ?authentication_type: ("SAS" | "NONE" | "OIDC"),
                                         ?sas_configuration: {
                                           token: ::String
+                                        },
+                                        ?federated_identity: {
+                                          aws_iam_role: ::String?,
+                                          azure_oidc: {
+                                            tenant_id: ::String,
+                                            client_id: ::String
+                                          }?
                                         },
                                         ?blob_type: ("BLOCK"),
                                         ?access_tier: ("HOT" | "COOL" | "ARCHIVE"),
@@ -1075,6 +1092,7 @@ module Aws
                                             ?server_hostname: ::String,
                                             ?access_key: ::String,
                                             ?secret_key: ::String,
+                                            ?federated_identity: Params::object_storage_federated_identity_config,
                                             ?agent_arns: Array[::String],
                                             ?server_certificate: ::String,
                                             ?cmk_secret_config: {

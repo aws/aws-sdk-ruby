@@ -89,7 +89,7 @@ module Aws::DynamoDBStreams
 
     BinarySetAttributeValue.member = Shapes::ShapeRef.new(shape: BinaryAttributeValue)
 
-    DescribeStreamInput.add_member(:stream_arn, Shapes::ShapeRef.new(shape: StreamArn, required: true, location_name: "StreamArn"))
+    DescribeStreamInput.add_member(:stream_arn, Shapes::ShapeRef.new(shape: StreamArn, required: true, location_name: "StreamArn", metadata: {"contextParam" => {"name" => "StreamArn"}}))
     DescribeStreamInput.add_member(:limit, Shapes::ShapeRef.new(shape: PositiveIntegerObject, location_name: "Limit"))
     DescribeStreamInput.add_member(:exclusive_start_shard_id, Shapes::ShapeRef.new(shape: ShardId, location_name: "ExclusiveStartShardId"))
     DescribeStreamInput.add_member(:shard_filter, Shapes::ShapeRef.new(shape: ShardFilter, location_name: "ShardFilter"))
@@ -101,7 +101,7 @@ module Aws::DynamoDBStreams
     ExpiredIteratorException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     ExpiredIteratorException.struct_class = Types::ExpiredIteratorException
 
-    GetRecordsInput.add_member(:shard_iterator, Shapes::ShapeRef.new(shape: ShardIterator, required: true, location_name: "ShardIterator"))
+    GetRecordsInput.add_member(:shard_iterator, Shapes::ShapeRef.new(shape: ShardIterator, required: true, location_name: "ShardIterator", metadata: {"contextParam" => {"name" => "ShardIterator"}}))
     GetRecordsInput.add_member(:limit, Shapes::ShapeRef.new(shape: PositiveIntegerObject, location_name: "Limit"))
     GetRecordsInput.struct_class = Types::GetRecordsInput
 
@@ -109,7 +109,7 @@ module Aws::DynamoDBStreams
     GetRecordsOutput.add_member(:next_shard_iterator, Shapes::ShapeRef.new(shape: ShardIterator, location_name: "NextShardIterator"))
     GetRecordsOutput.struct_class = Types::GetRecordsOutput
 
-    GetShardIteratorInput.add_member(:stream_arn, Shapes::ShapeRef.new(shape: StreamArn, required: true, location_name: "StreamArn"))
+    GetShardIteratorInput.add_member(:stream_arn, Shapes::ShapeRef.new(shape: StreamArn, required: true, location_name: "StreamArn", metadata: {"contextParam" => {"name" => "StreamArn"}}))
     GetShardIteratorInput.add_member(:shard_id, Shapes::ShapeRef.new(shape: ShardId, required: true, location_name: "ShardId"))
     GetShardIteratorInput.add_member(:shard_iterator_type, Shapes::ShapeRef.new(shape: ShardIteratorType, required: true, location_name: "ShardIteratorType"))
     GetShardIteratorInput.add_member(:sequence_number, Shapes::ShapeRef.new(shape: SequenceNumber, location_name: "SequenceNumber"))

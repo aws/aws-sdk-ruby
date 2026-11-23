@@ -532,7 +532,7 @@ module Aws
                                application_id: ::String,
                                agent_space_id: ::String,
                                membership_id: ::String,
-                               member_type: ("USER"),
+                               member_type: ("USER" | "GROUP"),
                                ?config: {
                                  user: {
                                    role: ("MEMBER")?
@@ -575,6 +575,7 @@ module Aws
                             },
                             ?network_traffic_config: Params::network_traffic_config,
                             ?code_remediation_strategy: ("AUTOMATIC" | "DISABLED"),
+                            ?clean_up_strategy: ("BEST_EFFORT_DELETE" | "RETAIN_ALL"),
                             ?disable_managed_skills: Array[("FINDING_PERSONALIZATION" | "LOGIN_OPTIMIZATION")],
                             ?max_task_hours: ::Float,
                             ?report_destination: {
@@ -799,7 +800,7 @@ module Aws
                                application_id: ::String,
                                agent_space_id: ::String,
                                membership_id: ::String,
-                               ?member_type: ("USER")
+                               ?member_type: ("USER" | "GROUP")
                              ) -> _DeleteMembershipResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteMembershipResponseSuccess
 
@@ -1135,7 +1136,7 @@ module Aws
       def list_memberships: (
                               application_id: ::String,
                               agent_space_id: ::String,
-                              ?member_type: ("USER" | "ALL"),
+                              ?member_type: ("USER" | "GROUP" | "ALL"),
                               ?max_results: ::Integer,
                               ?next_token: ::String
                             ) -> _ListMembershipsResponseSuccess
@@ -1303,6 +1304,34 @@ module Aws
                         ) -> _ListThreatsResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListThreatsResponseSuccess
 
+      interface _ResumePentestJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ResumePentestJobOutput]
+        def title: () -> ::String
+        def status: () -> ("IN_PROGRESS" | "STOPPING" | "STOPPED" | "PAUSING" | "PAUSED" | "FAILED" | "COMPLETED")
+        def created_at: () -> ::Time
+        def updated_at: () -> ::Time
+        def pentest_id: () -> ::String
+        def pentest_job_id: () -> ::String
+        def version: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SecurityAgent/Client.html#resume_pentest_job-instance_method
+      def resume_pentest_job: (
+                                ?agent_space_id: ::String,
+                                ?pentest_job_id: ::String,
+                                ?actors: Array[
+                                  Params::actor
+                                ],
+                                ?network_traffic_config: Params::network_traffic_config,
+                                ?vpc_config: {
+                                  vpc_arn: ::String?,
+                                  security_group_arns: Array[::String]?,
+                                  subnet_arns: Array[::String]?
+                                },
+                                ?max_task_hours: ::Float,
+                                ?copy_config_from_pentest: bool
+                              ) -> _ResumePentestJobResponseSuccess
+                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ResumePentestJobResponseSuccess
+
       interface _StartCodeRemediationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::StartCodeRemediationOutput]
       end
@@ -1318,7 +1347,7 @@ module Aws
       interface _StartCodeReviewJobResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::StartCodeReviewJobOutput]
         def title: () -> ::String
-        def status: () -> ("IN_PROGRESS" | "STOPPING" | "STOPPED" | "FAILED" | "COMPLETED")
+        def status: () -> ("IN_PROGRESS" | "STOPPING" | "STOPPED" | "PAUSING" | "PAUSED" | "FAILED" | "COMPLETED")
         def created_at: () -> ::Time
         def updated_at: () -> ::Time
         def code_review_id: () -> ::String
@@ -1338,7 +1367,7 @@ module Aws
       interface _StartPentestJobResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::StartPentestJobOutput]
         def title: () -> ::String
-        def status: () -> ("IN_PROGRESS" | "STOPPING" | "STOPPED" | "FAILED" | "COMPLETED")
+        def status: () -> ("IN_PROGRESS" | "STOPPING" | "STOPPED" | "PAUSING" | "PAUSED" | "FAILED" | "COMPLETED")
         def created_at: () -> ::Time
         def updated_at: () -> ::Time
         def pentest_id: () -> ::String
@@ -1366,7 +1395,7 @@ module Aws
       interface _StartThreatModelJobResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::StartThreatModelJobOutput]
         def title: () -> ::String
-        def status: () -> ("IN_PROGRESS" | "STOPPING" | "STOPPED" | "FAILED" | "COMPLETED")
+        def status: () -> ("IN_PROGRESS" | "STOPPING" | "STOPPED" | "PAUSING" | "PAUSED" | "FAILED" | "COMPLETED")
         def created_at: () -> ::Time
         def updated_at: () -> ::Time
         def threat_model_id: () -> ::String
@@ -1396,7 +1425,8 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SecurityAgent/Client.html#stop_pentest_job-instance_method
       def stop_pentest_job: (
                               agent_space_id: ::String,
-                              pentest_job_id: ::String
+                              pentest_job_id: ::String,
+                              ?pause: bool
                             ) -> _StopPentestJobResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopPentestJobResponseSuccess
 
@@ -1659,6 +1689,7 @@ module Aws
                             },
                             ?network_traffic_config: Params::network_traffic_config,
                             ?code_remediation_strategy: ("AUTOMATIC" | "DISABLED"),
+                            ?clean_up_strategy: ("BEST_EFFORT_DELETE" | "RETAIN_ALL"),
                             ?disable_managed_skills: Array[("FINDING_PERSONALIZATION" | "LOGIN_OPTIMIZATION")],
                             ?max_task_hours: ::Float,
                             ?report_destination: {

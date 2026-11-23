@@ -272,7 +272,8 @@ module Aws::BedrockAgentCore
     #     An integer representing the maximum number attempts that will be made for
     #     a single request, including the initial attempt.  For example,
     #     setting this value to 5 will result in a request being retried up to
-    #     4 times. Used in `standard` and `adaptive` retry modes.
+    #     4 times. Used in `standard` and `adaptive` retry modes. Defaults to 3,
+    #     except for DynamoDB and DynamoDB Streams, which default to 4.
     #
     #   @option options [Proc] :output_event_stream_handler
     #     When an EventStream or Proc object is provided, it will be used as callback for each chunk of event stream response received along the way.
@@ -338,15 +339,15 @@ module Aws::BedrockAgentCore
     #     used by the default backoff function. This option is only used in the
     #     `legacy` retry mode.
     #
-    #   @option options [String] :retry_mode ("legacy")
+    #   @option options [String] :retry_mode ("standard")
     #     Specifies which retry algorithm to use. Values are:
     #
-    #     * `legacy` - The pre-existing retry behavior. This is the default
-    #       value if no retry mode is provided.
+    #     * `legacy` - The pre-existing retry behavior.
     #
     #     * `standard` - A standardized set of retry rules across the AWS SDKs.
     #       This includes support for retry quotas, which limit the number of
-    #       unsuccessful retries a client can make.
+    #       unsuccessful retries a client can make. This is the default value
+    #       if no retry mode is provided.
     #
     #     * `adaptive` - A retry mode that includes all the functionality of
     #       `standard` mode along with automatic client side throttling.
@@ -1311,6 +1312,43 @@ module Aws::BedrockAgentCore
       req.send_request(options)
     end
 
+    # Deletes the record of a dataset generation. The examples the
+    # generation added stay in the dataset's draft. To remove them, find
+    # them with the `generationIds` filter of `ListDatasetExamples`, then
+    # call `DeleteDatasetExamples`.
+    #
+    # @option params [required, String] :dataset_id
+    #   The unique identifier of the dataset.
+    #
+    # @option params [required, String] :generation_id
+    #   The unique identifier of the dataset generation.
+    #
+    # @return [Types::DeleteDatasetGenerationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteDatasetGenerationResponse#generation_id #generation_id} => String
+    #   * {Types::DeleteDatasetGenerationResponse#status #status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_dataset_generation({
+    #     dataset_id: "DatasetId", # required
+    #     generation_id: "DatasetGenerationId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.generation_id #=> String
+    #   resp.status #=> String, one of "IN_PROGRESS", "COMPLETED", "COMPLETED_WITH_ERRORS", "FAILED", "DELETING"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/DeleteDatasetGeneration AWS API Documentation
+    #
+    # @overload delete_dataset_generation(params = {})
+    # @param [Hash] params ({})
+    def delete_dataset_generation(params = {}, options = {})
+      req = build_request(:delete_dataset_generation, params)
+      req.send_request(options)
+    end
+
     # Deletes an event from an AgentCore Memory resource. When you delete an
     # event, it is permanently removed.
     #
@@ -1747,6 +1785,91 @@ module Aws::BedrockAgentCore
       req.send_request(options)
     end
 
+    # Amazon Bedrock AgentCore Agent Insights identifies patterns detected
+    # across your agent sessions. Use Agent Insights to identify recurring
+    # issues and prioritize fixes.
+    #
+    # Retrieves detailed information about an Amazon Bedrock AgentCore Agent
+    # Insight, including its archive status, affected sessions, and, when
+    # applicable, the batch evaluation that produced it.
+    #
+    # @option params [required, String] :application_name
+    #   The application that the Agent Insight belongs to.
+    #
+    # @option params [required, String] :agent_insight_id
+    #   The unique identifier of the Agent Insight to retrieve.
+    #
+    # @return [Types::GetAgentInsightResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetAgentInsightResponse#type #type} => String
+    #   * {Types::GetAgentInsightResponse#name #name} => String
+    #   * {Types::GetAgentInsightResponse#description #description} => String
+    #   * {Types::GetAgentInsightResponse#created_at #created_at} => Time
+    #   * {Types::GetAgentInsightResponse#affected_session_count #affected_session_count} => Integer
+    #   * {Types::GetAgentInsightResponse#sample_sessions #sample_sessions} => Array&lt;Types::SampleSession&gt;
+    #   * {Types::GetAgentInsightResponse#root_causes #root_causes} => Array&lt;Types::InsightRootCause&gt;
+    #   * {Types::GetAgentInsightResponse#agent_insight_id #agent_insight_id} => String
+    #   * {Types::GetAgentInsightResponse#application_name #application_name} => String
+    #   * {Types::GetAgentInsightResponse#batch_evaluation_id #batch_evaluation_id} => String
+    #   * {Types::GetAgentInsightResponse#customer_metadata_status #customer_metadata_status} => String
+    #   * {Types::GetAgentInsightResponse#updated_at #updated_at} => Time
+    #   * {Types::GetAgentInsightResponse#archive_status #archive_status} => String
+    #   * {Types::GetAgentInsightResponse#last_seen_at #last_seen_at} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_agent_insight({
+    #     application_name: "AgentApplicationName", # required
+    #     agent_insight_id: "AgentInsightId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.type #=> String, one of "FAILURE"
+    #   resp.name #=> String
+    #   resp.description #=> String
+    #   resp.created_at #=> Time
+    #   resp.affected_session_count #=> Integer
+    #   resp.sample_sessions #=> Array
+    #   resp.sample_sessions[0].session_id #=> String
+    #   resp.sample_sessions[0].last_seen_at #=> Time
+    #   resp.sample_sessions[0].findings #=> Array
+    #   resp.sample_sessions[0].findings[0].target_id #=> String
+    #   resp.sample_sessions[0].findings[0].target_type #=> String, one of "SPAN_ID", "TRACE_ID", "SPAN_NAME"
+    #   resp.sample_sessions[0].findings[0].description #=> String
+    #   resp.sample_sessions[0].findings[0].category #=> String
+    #   resp.sample_sessions[0].findings[0].confidence #=> Float
+    #   resp.root_causes #=> Array
+    #   resp.root_causes[0].name #=> String
+    #   resp.root_causes[0].explanation #=> String
+    #   resp.root_causes[0].affected_session_count #=> Integer
+    #   resp.root_causes[0].suggested_fix #=> String
+    #   resp.root_causes[0].sample_sessions #=> Array
+    #   resp.root_causes[0].sample_sessions[0].session_id #=> String
+    #   resp.root_causes[0].sample_sessions[0].last_seen_at #=> Time
+    #   resp.root_causes[0].sample_sessions[0].findings #=> Array
+    #   resp.root_causes[0].sample_sessions[0].findings[0].target_id #=> String
+    #   resp.root_causes[0].sample_sessions[0].findings[0].target_type #=> String, one of "SPAN_ID", "TRACE_ID", "SPAN_NAME"
+    #   resp.root_causes[0].sample_sessions[0].findings[0].description #=> String
+    #   resp.root_causes[0].sample_sessions[0].findings[0].category #=> String
+    #   resp.root_causes[0].sample_sessions[0].findings[0].confidence #=> Float
+    #   resp.agent_insight_id #=> String
+    #   resp.application_name #=> String
+    #   resp.batch_evaluation_id #=> String
+    #   resp.customer_metadata_status #=> String, one of "AVAILABLE", "CUSTOMER_KEY_UNAVAILABLE", "UNAVAILABLE"
+    #   resp.updated_at #=> Time
+    #   resp.archive_status #=> String, one of "ACTIVE", "ARCHIVED"
+    #   resp.last_seen_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/GetAgentInsight AWS API Documentation
+    #
+    # @overload get_agent_insight(params = {})
+    # @param [Hash] params ({})
+    def get_agent_insight(params = {}, options = {})
+      req = build_request(:get_agent_insight, params)
+      req.send_request(options)
+    end
+
     # Retrieves detailed information about a batch evaluation, including its
     # status, configuration, results, and any error details.
     #
@@ -1773,6 +1896,7 @@ module Aws::BedrockAgentCore
     #   * {Types::GetBatchEvaluationResponse#description #description} => String
     #   * {Types::GetBatchEvaluationResponse#updated_at #updated_at} => Time
     #   * {Types::GetBatchEvaluationResponse#kms_key_arn #kms_key_arn} => String
+    #   * {Types::GetBatchEvaluationResponse#dataset_execution_details #dataset_execution_details} => Types::DatasetExecutionDetails
     #
     # @example Request syntax with placeholder values
     #
@@ -1903,6 +2027,11 @@ module Aws::BedrockAgentCore
     #   resp.description #=> String
     #   resp.updated_at #=> Time
     #   resp.kms_key_arn #=> String
+    #   resp.dataset_execution_details.dataset.dataset_id #=> String
+    #   resp.dataset_execution_details.dataset.dataset_version #=> String
+    #   resp.dataset_execution_details.agent_invocation.agent_core_runtime.agent_runtime_endpoint_arn #=> String
+    #   resp.dataset_execution_details.agent_invocation.agent_core_runtime.agent_runtime_version #=> String
+    #   resp.dataset_execution_details.agent_invocation.agent_core_runtime.request_template #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/GetBatchEvaluation AWS API Documentation
     #
@@ -2091,6 +2220,126 @@ module Aws::BedrockAgentCore
     # @param [Hash] params ({})
     def get_code_interpreter_session(params = {}, options = {})
       req = build_request(:get_code_interpreter_session, params)
+      req.send_request(options)
+    end
+
+    # Gets a dataset generation, including its status, the request it was
+    # started with, its progress counts, its redaction summary and its
+    # errors. Call this operation to track a generation that you started
+    # with `StartDatasetGeneration`.
+    #
+    # @option params [required, String] :dataset_id
+    #   The unique identifier of the dataset.
+    #
+    # @option params [required, String] :generation_id
+    #   The unique identifier of the dataset generation.
+    #
+    # @return [Types::GetDatasetGenerationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetDatasetGenerationResponse#generation_id #generation_id} => String
+    #   * {Types::GetDatasetGenerationResponse#name #name} => String
+    #   * {Types::GetDatasetGenerationResponse#description #description} => String
+    #   * {Types::GetDatasetGenerationResponse#dataset_id #dataset_id} => String
+    #   * {Types::GetDatasetGenerationResponse#scenario_type #scenario_type} => String
+    #   * {Types::GetDatasetGenerationResponse#status #status} => String
+    #   * {Types::GetDatasetGenerationResponse#failure_reason #failure_reason} => String
+    #   * {Types::GetDatasetGenerationResponse#created_at #created_at} => Time
+    #   * {Types::GetDatasetGenerationResponse#updated_at #updated_at} => Time
+    #   * {Types::GetDatasetGenerationResponse#completed_at #completed_at} => Time
+    #   * {Types::GetDatasetGenerationResponse#source #source} => Types::GenerationSourceRecord
+    #   * {Types::GetDatasetGenerationResponse#generation_results #generation_results} => Types::GenerationResults
+    #   * {Types::GetDatasetGenerationResponse#redaction_summary #redaction_summary} => Types::RedactionSummary
+    #   * {Types::GetDatasetGenerationResponse#error_details #error_details} => Array&lt;Types::GenerationErrorDetail&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_dataset_generation({
+    #     dataset_id: "DatasetId", # required
+    #     generation_id: "DatasetGenerationId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.generation_id #=> String
+    #   resp.name #=> String
+    #   resp.description #=> String
+    #   resp.dataset_id #=> String
+    #   resp.scenario_type #=> String, one of "FIXED", "DYNAMIC"
+    #   resp.status #=> String, one of "IN_PROGRESS", "COMPLETED", "COMPLETED_WITH_ERRORS", "FAILED", "DELETING"
+    #   resp.failure_reason #=> String
+    #   resp.created_at #=> Time
+    #   resp.updated_at #=> Time
+    #   resp.completed_at #=> Time
+    #   resp.source.trace_generation.source_config.cloud_watch_logs.log_group_names #=> Array
+    #   resp.source.trace_generation.source_config.cloud_watch_logs.log_group_names[0] #=> String
+    #   resp.source.trace_generation.source_config.cloud_watch_logs.log_group_name_prefixes #=> Array
+    #   resp.source.trace_generation.source_config.cloud_watch_logs.log_group_name_prefixes[0] #=> String
+    #   resp.source.trace_generation.source_config.cloud_watch_logs.service_names #=> Array
+    #   resp.source.trace_generation.source_config.cloud_watch_logs.service_names[0] #=> String
+    #   resp.source.trace_generation.source_config.cloud_watch_logs.start_time #=> Time
+    #   resp.source.trace_generation.source_config.cloud_watch_logs.end_time #=> Time
+    #   resp.source.trace_generation.source_config.online_evaluation.online_evaluation_config_arn #=> String
+    #   resp.source.trace_generation.source_config.online_evaluation.start_time #=> Time
+    #   resp.source.trace_generation.source_config.online_evaluation.end_time #=> Time
+    #   resp.source.trace_generation.source_config.batch_evaluation.batch_evaluation_arn #=> String
+    #   resp.source.trace_generation.selection.filters.attribute_filters #=> Array
+    #   resp.source.trace_generation.selection.filters.attribute_filters[0].key #=> String
+    #   resp.source.trace_generation.selection.filters.attribute_filters[0].operator #=> String, one of "Equals", "NotEquals", "GreaterThan", "LessThan", "GreaterThanOrEqual", "LessThanOrEqual", "Contains", "NotContains"
+    #   resp.source.trace_generation.selection.filters.attribute_filters[0].value.string_value #=> String
+    #   resp.source.trace_generation.selection.filters.attribute_filters[0].value.double_value #=> Float
+    #   resp.source.trace_generation.selection.filters.attribute_filters[0].value.boolean_value #=> Boolean
+    #   resp.source.trace_generation.selection.filters.turn_count.min #=> Integer
+    #   resp.source.trace_generation.selection.filters.turn_count.max #=> Integer
+    #   resp.source.trace_generation.selection.filters.evaluator_filters #=> Array
+    #   resp.source.trace_generation.selection.filters.evaluator_filters[0].evaluator_id #=> String
+    #   resp.source.trace_generation.selection.filters.evaluator_filters[0].evaluation_dimension_name #=> String
+    #   resp.source.trace_generation.selection.filters.evaluator_filters[0].operator #=> String, one of "Equals", "NotEquals", "GreaterThan", "LessThan", "GreaterThanOrEqual", "LessThanOrEqual", "Contains", "NotContains"
+    #   resp.source.trace_generation.selection.filters.evaluator_filters[0].value.string_value #=> String
+    #   resp.source.trace_generation.selection.filters.evaluator_filters[0].value.double_value #=> Float
+    #   resp.source.trace_generation.selection.filters.evaluator_filters[0].value.boolean_value #=> Boolean
+    #   resp.source.trace_generation.selection.filters.evaluator_filters[0].aggregation #=> String, one of "Min", "Max", "Mean", "AllMatch", "AnyMatch"
+    #   resp.source.trace_generation.selection.identifiers.session_id_count #=> Integer
+    #   resp.source.trace_generation.selection.identifiers.trace_id_count #=> Integer
+    #   resp.source.trace_generation.sampling.max_scenarios #=> Integer
+    #   resp.source.trace_generation.ground_truth.fields #=> Array
+    #   resp.source.trace_generation.ground_truth.fields[0] #=> String, one of "expected_response", "expected_trajectory"
+    #   resp.source.trace_generation.ground_truth.quality_filters #=> Array
+    #   resp.source.trace_generation.ground_truth.quality_filters[0].evaluator_id #=> String
+    #   resp.source.trace_generation.ground_truth.quality_filters[0].evaluation_dimension_name #=> String
+    #   resp.source.trace_generation.ground_truth.quality_filters[0].operator #=> String, one of "Equals", "NotEquals", "GreaterThan", "LessThan", "GreaterThanOrEqual", "LessThanOrEqual", "Contains", "NotContains"
+    #   resp.source.trace_generation.ground_truth.quality_filters[0].value.string_value #=> String
+    #   resp.source.trace_generation.ground_truth.quality_filters[0].value.double_value #=> Float
+    #   resp.source.trace_generation.ground_truth.quality_filters[0].value.boolean_value #=> Boolean
+    #   resp.source.trace_generation.ground_truth.quality_filters[0].aggregation #=> String, one of "Min", "Max", "Mean", "AllMatch", "AnyMatch"
+    #   resp.source.trace_generation.redaction_configuration.identifiers #=> Array
+    #   resp.source.trace_generation.redaction_configuration.identifiers[0] #=> String, one of "ADDRESS", "AWS_SECRET_KEY", "BANK_ACCOUNT_NUMBER_DE", "BANK_ACCOUNT_NUMBER_ES", "BANK_ACCOUNT_NUMBER_FR", "BANK_ACCOUNT_NUMBER_GB", "BANK_ACCOUNT_NUMBER_IT", "BANK_ACCOUNT_NUMBER_US", "CEP_CODE_BR", "CNPJ_BR", "CPF_CODE_BR", "CREDIT_CARD_EXPIRATION", "CREDIT_CARD_MAGNETIC_STRIPE", "CREDIT_CARD_NUMBER", "CREDIT_CARD_SECURITY_CODE", "DATE_OF_BIRTH", "DRIVERS_LICENSE_AT", "DRIVERS_LICENSE_AU", "DRIVERS_LICENSE_BE", "DRIVERS_LICENSE_BG", "DRIVERS_LICENSE_CA", "DRIVERS_LICENSE_CY", "DRIVERS_LICENSE_CZ", "DRIVERS_LICENSE_DE", "DRIVERS_LICENSE_DK", "DRIVERS_LICENSE_EE", "DRIVERS_LICENSE_ES", "DRIVERS_LICENSE_FI", "DRIVERS_LICENSE_FR", "DRIVERS_LICENSE_GB", "DRIVERS_LICENSE_GR", "DRIVERS_LICENSE_HR", "DRIVERS_LICENSE_HU", "DRIVERS_LICENSE_IE", "DRIVERS_LICENSE_IT", "DRIVERS_LICENSE_LT", "DRIVERS_LICENSE_LU", "DRIVERS_LICENSE_LV", "DRIVERS_LICENSE_MT", "DRIVERS_LICENSE_NL", "DRIVERS_LICENSE_PL", "DRIVERS_LICENSE_PT", "DRIVERS_LICENSE_RO", "DRIVERS_LICENSE_SE", "DRIVERS_LICENSE_SI", "DRIVERS_LICENSE_SK", "DRIVERS_LICENSE_US", "DRUG_ENFORCEMENT_AGENCY_NUMBER_US", "ELECTORAL_ROLL_NUMBER_GB", "EMAIL_ADDRESS", "HEALTH_INSURANCE_CARD_NUMBER_EU", "HEALTH_INSURANCE_CLAIM_NUMBER_US", "HEALTH_INSURANCE_NUMBER_FR", "HEALTHCARE_PROCEDURE_CODE_US", "INDIVIDUAL_TAX_IDENTIFICATION_NUMBER_US", "INSEE_CODE_FR", "IP_ADDRESS", "LAT_LONG", "MEDICARE_BENEFICIARY_NUMBER_US", "NAME", "NATIONAL_DRUG_CODE_US", "NATIONAL_IDENTIFICATION_NUMBER_DE", "NATIONAL_IDENTIFICATION_NUMBER_ES", "NATIONAL_IDENTIFICATION_NUMBER_IT", "NATIONAL_INSURANCE_NUMBER_GB", "NATIONAL_PROVIDER_ID_US", "NHS_NUMBER_GB", "NIE_NUMBER_ES", "NIF_NUMBER_ES", "OPEN_SSH_PRIVATE_KEY", "PASSPORT_NUMBER_CA", "PASSPORT_NUMBER_DE", "PASSPORT_NUMBER_ES", "PASSPORT_NUMBER_FR", "PASSPORT_NUMBER_GB", "PASSPORT_NUMBER_IT", "PASSPORT_NUMBER_US", "PERMANENT_RESIDENCE_NUMBER_CA", "PERSONAL_HEALTH_NUMBER_CA", "PGP_PRIVATE_KEY", "PHONE_NUMBER_BR", "PHONE_NUMBER_DE", "PHONE_NUMBER_ES", "PHONE_NUMBER_FR", "PHONE_NUMBER_GB", "PHONE_NUMBER_IT", "PHONE_NUMBER_US", "PKCS_PRIVATE_KEY", "POSTAL_CODE_CA", "PUTTY_PRIVATE_KEY", "RG_NUMBER_BR", "SOCIAL_INSURANCE_NUMBER_CA", "SSN_ES", "SSN_US", "TAX_ID_DE", "TAX_ID_ES", "TAX_ID_FR", "TAX_ID_GB", "VEHICLE_IDENTIFICATION_NUMBER", "ZIP_CODE_US"
+    #   resp.source.trace_generation.redaction_configuration.custom_data_identifiers #=> Array
+    #   resp.source.trace_generation.redaction_configuration.custom_data_identifiers[0].name #=> String
+    #   resp.source.trace_generation.redaction_configuration.custom_data_identifiers[0].regex #=> String
+    #   resp.generation_results.sessions_matched #=> Integer
+    #   resp.generation_results.sessions_selected #=> Integer
+    #   resp.generation_results.sessions_unscored #=> Integer
+    #   resp.generation_results.sessions_failed #=> Integer
+    #   resp.generation_results.scenarios_generated #=> Integer
+    #   resp.generation_results.scenarios_deduplicated #=> Integer
+    #   resp.generation_results.examples_written #=> Integer
+    #   resp.generation_results.examples_with_ground_truth #=> Integer
+    #   resp.redaction_summary.scenarios_scanned #=> Integer
+    #   resp.redaction_summary.finding_counts #=> Hash
+    #   resp.redaction_summary.finding_counts["FindingIdentifierKey"] #=> Integer
+    #   resp.error_details #=> Array
+    #   resp.error_details[0].error_code #=> String
+    #   resp.error_details[0].error_message #=> String
+    #   resp.error_details[0].count #=> Integer
+    #   resp.error_details[0].session_ids #=> Array
+    #   resp.error_details[0].session_ids[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/GetDatasetGeneration AWS API Documentation
+    #
+    # @overload get_dataset_generation(params = {})
+    # @param [Hash] params ({})
+    def get_dataset_generation(params = {}, options = {})
+      req = build_request(:get_dataset_generation, params)
       req.send_request(options)
     end
 
@@ -4139,6 +4388,14 @@ module Aws::BedrockAgentCore
     #             headers: {
     #               "HttpHeaderKey" => "HttpHeaderValue",
     #             },
+    #             outbound_auth: {
+    #               aws_iam: {
+    #                 service: "IamCredentialProviderServiceString", # required
+    #                 region: "IamCredentialProviderRegionString",
+    #               },
+    #               none: {
+    #               },
+    #             },
     #           },
     #           agent_core_browser: {
     #             browser_arn: "HarnessBrowserArn",
@@ -4288,6 +4545,98 @@ module Aws::BedrockAgentCore
       req.send_request(options, &block)
     end
 
+    # Searches the web and returns a ranked list of results. Each result
+    # includes a text extract from the page.
+    #
+    # You can filter the results by domain and by publication date.
+    #
+    # To use this operation, you must have the
+    # `bedrock-agentcore:InvokeWebSearch` permission on the resource
+    # `arn:${Partition}:bedrock-agentcore:${Region}:aws:tool/web-search.v1`.
+    #
+    # @option params [required, String] :web_search_id
+    #   The identifier of the web search tool to invoke. The Amazon Web
+    #   Services-managed web search tool is `web-search.v1`.
+    #
+    # @option params [required, String] :search_query
+    #   The text to search for.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return. Defaults to 25.
+    #
+    # @option params [Types::WebSearchFilters] :filters
+    #   The filters to apply to the search results.
+    #
+    # @return [Types::InvokeWebSearchOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::InvokeWebSearchOutput#results #results} => Array&lt;Types::WebSearchResult&gt;
+    #
+    #
+    # @example Example: Search the web for recent pages from one domain
+    #
+    #   resp = client.invoke_web_search({
+    #     filters: {
+    #       domain_filter: {
+    #         include: [
+    #           "example.com", 
+    #         ], 
+    #       }, 
+    #       published_date_filter: {
+    #         published_after: Time.parse("2026-01-01T00:00:00Z"), 
+    #       }, 
+    #     }, 
+    #     max_results: 1, 
+    #     search_query: "Amazon Bedrock AgentCore web search", 
+    #     web_search_id: "web-search.v1", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     results: [
+    #       {
+    #         published_at: Time.parse("2026-03-15T08:00:00Z"), 
+    #         text: "Web search lets an agent find current information on the public web and cite its sources.", 
+    #         title: "Getting started with web search", 
+    #         url: "https://docs.example.com/web-search/getting-started", 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.invoke_web_search({
+    #     web_search_id: "WebSearchId", # required
+    #     search_query: "InvokeWebSearchInputSearchQueryString", # required
+    #     max_results: 1,
+    #     filters: {
+    #       domain_filter: {
+    #         include: ["DomainName"],
+    #         exclude: ["DomainName"],
+    #       },
+    #       published_date_filter: {
+    #         published_after: Time.now,
+    #         published_before: Time.now,
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.results #=> Array
+    #   resp.results[0].title #=> String
+    #   resp.results[0].url #=> String
+    #   resp.results[0].text #=> String
+    #   resp.results[0].published_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/InvokeWebSearch AWS API Documentation
+    #
+    # @overload invoke_web_search(params = {})
+    # @param [Hash] params ({})
+    def invoke_web_search(params = {}, options = {})
+      req = build_request(:invoke_web_search, params)
+      req.send_request(options)
+    end
+
     # Lists all A/B tests in the account.
     #
     # @option params [Integer] :max_results
@@ -4386,6 +4735,73 @@ module Aws::BedrockAgentCore
     # @param [Hash] params ({})
     def list_actors(params = {}, options = {})
       req = build_request(:list_actors, params)
+      req.send_request(options)
+    end
+
+    # Lists Amazon Bedrock AgentCore Agent Insight summaries in your account
+    # and Region. Use this operation to review patterns across sessions
+    # before you investigate or archive an insight. The response paginates
+    # the results. Use the `nextToken` parameter to retrieve additional
+    # results.
+    #
+    # @option params [String] :application_name
+    #   Filters the results to Agent Insights for an application.
+    #
+    # @option params [String] :batch_evaluation_id
+    #   Filters the results to Agent Insights produced by a batch evaluation.
+    #
+    # @option params [String] :archive_status
+    #   Filters the results by archive status.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of Agent Insight summaries to return in one
+    #   response. If you don't specify a value, the operation returns up to
+    #   50 summaries.
+    #
+    # @option params [String] :next_token
+    #   A token to specify where to start paginating the results. This token
+    #   is returned in a previous response.
+    #
+    # @return [Types::ListAgentInsightsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListAgentInsightsResponse#agent_insights #agent_insights} => Array&lt;Types::AgentInsightSummary&gt;
+    #   * {Types::ListAgentInsightsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_agent_insights({
+    #     application_name: "AgentApplicationName",
+    #     batch_evaluation_id: "BatchEvaluationId",
+    #     archive_status: "ACTIVE", # accepts ACTIVE, ARCHIVED
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.agent_insights #=> Array
+    #   resp.agent_insights[0].type #=> String, one of "FAILURE"
+    #   resp.agent_insights[0].name #=> String
+    #   resp.agent_insights[0].description #=> String
+    #   resp.agent_insights[0].created_at #=> Time
+    #   resp.agent_insights[0].affected_session_count #=> Integer
+    #   resp.agent_insights[0].agent_insight_id #=> String
+    #   resp.agent_insights[0].application_name #=> String
+    #   resp.agent_insights[0].batch_evaluation_id #=> String
+    #   resp.agent_insights[0].customer_metadata_status #=> String, one of "AVAILABLE", "CUSTOMER_KEY_UNAVAILABLE", "UNAVAILABLE"
+    #   resp.agent_insights[0].updated_at #=> Time
+    #   resp.agent_insights[0].archive_status #=> String, one of "ACTIVE", "ARCHIVED"
+    #   resp.agent_insights[0].last_seen_at #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/ListAgentInsights AWS API Documentation
+    #
+    # @overload list_agent_insights(params = {})
+    # @param [Hash] params ({})
+    def list_agent_insights(params = {}, options = {})
+      req = build_request(:list_agent_insights, params)
       req.send_request(options)
     end
 
@@ -4612,6 +5028,63 @@ module Aws::BedrockAgentCore
     # @param [Hash] params ({})
     def list_code_interpreter_sessions(params = {}, options = {})
       req = build_request(:list_code_interpreter_sessions, params)
+      req.send_request(options)
+    end
+
+    # Lists the generations for a dataset. AgentCore keeps a generation
+    # until you delete it with `DeleteDatasetGeneration` or delete the
+    # dataset. To get a generation's counts and the request it was started
+    # with, call `GetDatasetGeneration`.
+    #
+    # @option params [required, String] :dataset_id
+    #   The unique identifier of the dataset.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in the response. The default
+    #   is 20. If the total number of results is greater than this value, use
+    #   the token returned in the response in the `nextToken` field when
+    #   making another request to return the next batch of results.
+    #
+    # @option params [String] :next_token
+    #   If the total number of results is greater than the `maxResults` value
+    #   provided in the request, enter the token returned in the `nextToken`
+    #   field in the response in this field to return the next batch of
+    #   results.
+    #
+    # @return [Types::ListDatasetGenerationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListDatasetGenerationsResponse#dataset_generations #dataset_generations} => Array&lt;Types::DatasetGenerationSummary&gt;
+    #   * {Types::ListDatasetGenerationsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_dataset_generations({
+    #     dataset_id: "DatasetId", # required
+    #     max_results: 1,
+    #     next_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.dataset_generations #=> Array
+    #   resp.dataset_generations[0].generation_id #=> String
+    #   resp.dataset_generations[0].dataset_id #=> String
+    #   resp.dataset_generations[0].name #=> String
+    #   resp.dataset_generations[0].description #=> String
+    #   resp.dataset_generations[0].scenario_type #=> String, one of "FIXED", "DYNAMIC"
+    #   resp.dataset_generations[0].status #=> String, one of "IN_PROGRESS", "COMPLETED", "COMPLETED_WITH_ERRORS", "FAILED", "DELETING"
+    #   resp.dataset_generations[0].created_at #=> Time
+    #   resp.dataset_generations[0].completed_at #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/ListDatasetGenerations AWS API Documentation
+    #
+    # @overload list_dataset_generations(params = {})
+    # @param [Hash] params ({})
+    def list_dataset_generations(params = {}, options = {})
+      req = build_request(:list_dataset_generations, params)
       req.send_request(options)
     end
 
@@ -5126,7 +5599,12 @@ module Aws::BedrockAgentCore
     #   The ID of the payment session.
     #
     # @option params [required, String] :payment_instrument_id
-    #   The ID of the payment instrument to use.
+    #   The ID of the payment instrument to use. For the `CRYPTO_X402` and
+    #   `MPP` payment types, specify the ID of a payment instrument that you
+    #   created. For the `AWS_BILLING_X402` payment type, specify the
+    #   service-managed instrument ID `aws.agentcorepayments.awsbilling.v1`.
+    #   You don't create this instrument; it's available for any payment
+    #   manager that has an AWS Billing payment connector.
     #
     # @option params [required, String] :payment_type
     #   The type of payment to process.
@@ -5161,7 +5639,7 @@ module Aws::BedrockAgentCore
     #     payment_manager_arn: "PaymentManagerArn", # required
     #     payment_session_id: "PaymentSessionId", # required
     #     payment_instrument_id: "PaymentInstrumentId", # required
-    #     payment_type: "CRYPTO_X402", # required, accepts CRYPTO_X402, MPP
+    #     payment_type: "CRYPTO_X402", # required, accepts CRYPTO_X402, MPP, AWS_BILLING_X402
     #     payment_input: { # required
     #       crypto_x402: {
     #         version: "String", # required
@@ -5174,6 +5652,19 @@ module Aws::BedrockAgentCore
     #         www_authenticate_headers: ["WwwAuthenticateHeader"], # required
     #         buyer_pays_gas_fees: false,
     #       },
+    #       aws_billing_x402: {
+    #         version: "Version", # required
+    #         payload: { # required
+    #         },
+    #         options: {
+    #           dpop_jwk: {
+    #             kty: "EC", # required, accepts EC
+    #             crv: "P-256", # required, accepts P-256, P-384, P-521
+    #             x: "DpopJwkXString", # required
+    #             y: "DpopJwkYString", # required
+    #           },
+    #         },
+    #       },
     #     },
     #     client_token: "ClientToken",
     #   })
@@ -5184,12 +5675,14 @@ module Aws::BedrockAgentCore
     #   resp.payment_manager_arn #=> String
     #   resp.payment_session_id #=> String
     #   resp.payment_instrument_id #=> String
-    #   resp.payment_type #=> String, one of "CRYPTO_X402", "MPP"
+    #   resp.payment_type #=> String, one of "CRYPTO_X402", "MPP", "AWS_BILLING_X402"
     #   resp.status #=> String, one of "PROOF_GENERATED"
     #   resp.payment_output.crypto_x402.version #=> String
     #   resp.payment_output.mpp.version #=> String
     #   resp.payment_output.mpp.selected_payment_id #=> String
     #   resp.payment_output.mpp.payment_credential #=> String
+    #   resp.payment_output.aws_billing_x402.version #=> String
+    #   resp.payment_output.aws_billing_x402.payment_token #=> String
     #   resp.created_at #=> Time
     #   resp.updated_at #=> Time
     #
@@ -5519,6 +6012,17 @@ module Aws::BedrockAgentCore
     # @option params [Types::OutputConfig] :output_config
     #   Output destination configuration.
     #
+    # @option params [Types::DatasetExecutionConfig] :dataset_execution_config
+    #   The configuration for running the scenarios in a dataset against an
+    #   agent before evaluating the resulting sessions. When you specify this
+    #   field, the batch evaluation runs each scenario in the dataset against
+    #   the agent. It then evaluates the sessions that the agent produces. You
+    #   must also specify `evaluators` and a `dataSourceConfig` that uses
+    #   `cloudWatchLogs`. Configure `cloudWatchLogs` with the service name and
+    #   log groups that the agent uses for its traces. You can't specify
+    #   `insights` or an `onlineEvaluationConfigSource` data source with this
+    #   field.
+    #
     # @return [Types::StartBatchEvaluationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartBatchEvaluationResponse#batch_evaluation_id #batch_evaluation_id} => String
@@ -5619,6 +6123,18 @@ module Aws::BedrockAgentCore
     #         log_stream_name: "LogStreamName",
     #         metrics_namespace: "MetricsNamespace",
     #         result_destination: "DEDICATED_LOG_GROUP", # accepts DEDICATED_LOG_GROUP, SOURCE_LOG_GROUP
+    #       },
+    #     },
+    #     dataset_execution_config: {
+    #       dataset: { # required
+    #         dataset_id: "DatasetId", # required
+    #         dataset_version: "DatasetVersion",
+    #       },
+    #       agent_invocation: { # required
+    #         agent_core_runtime: {
+    #           agent_runtime_endpoint_arn: "AgentRuntimeEndpointArn", # required
+    #           request_template: "RequestTemplate",
+    #         },
     #       },
     #     },
     #   })
@@ -5975,6 +6491,174 @@ module Aws::BedrockAgentCore
     # @param [Hash] params ({})
     def start_code_interpreter_session(params = {}, options = {})
       req = build_request(:start_code_interpreter_session, params)
+      req.send_request(options)
+    end
+
+    # Starts a dataset generation, which creates examples for an existing
+    # dataset from your agent's traces. The dataset must be `ACTIVE`. Each
+    # generation produces one scenario type, set by `scenarioType`. When the
+    # generation finishes, AgentCore adds the examples to the dataset's
+    # draft. Examples that duplicate each other, or that duplicate examples
+    # already in the draft, are left out.
+    #
+    # A dataset can have only one generation in progress at a time. While it
+    # runs, requests that change the dataset's draft or publish a version
+    # are rejected with a `ConflictException`.
+    #
+    # AgentCore reads the traces with your credentials, so you need read
+    # access to the trace log groups, and to the dataset's KMS key if the
+    # dataset uses a customer managed key. The draft can hold at most 1,000
+    # examples, including the examples this generation can add
+    # (`maxScenarios`).
+    #
+    # The operation returns immediately. To track progress, call
+    # `GetDatasetGeneration`.
+    #
+    # @option params [required, String] :dataset_id
+    #   The unique identifier of the dataset to add the generated examples to.
+    #   The dataset must be `ACTIVE`.
+    #
+    # @option params [required, String] :name
+    #   The name of the dataset generation. The generation ID starts with this
+    #   name.
+    #
+    # @option params [String] :description
+    #   A description of the dataset generation.
+    #
+    # @option params [String] :scenario_type
+    #   The type of scenario to generate. If you don't specify a value, the
+    #   generation produces `DYNAMIC` scenarios.
+    #
+    # @option params [required, Types::GenerationSource] :source
+    #   Where the generation reads sessions from, and how it selects, samples,
+    #   labels and redacts them.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier to ensure that the API request
+    #   completes no more than one time. If this token matches a previous
+    #   request, the service ignores the request, but does not return an
+    #   error.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::StartDatasetGenerationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartDatasetGenerationResponse#generation_id #generation_id} => String
+    #   * {Types::StartDatasetGenerationResponse#name #name} => String
+    #   * {Types::StartDatasetGenerationResponse#dataset_id #dataset_id} => String
+    #   * {Types::StartDatasetGenerationResponse#status #status} => String
+    #   * {Types::StartDatasetGenerationResponse#created_at #created_at} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_dataset_generation({
+    #     dataset_id: "DatasetId", # required
+    #     name: "DatasetGenerationName", # required
+    #     description: "DatasetGenerationDescription",
+    #     scenario_type: "FIXED", # accepts FIXED, DYNAMIC
+    #     source: { # required
+    #       trace_generation: {
+    #         source_config: { # required
+    #           cloud_watch_logs: {
+    #             log_group_names: ["LogGroupName"],
+    #             log_group_name_prefixes: ["LogGroupNamePrefix"],
+    #             service_names: ["ServiceName"], # required
+    #             start_time: Time.now,
+    #             end_time: Time.now,
+    #           },
+    #           online_evaluation: {
+    #             online_evaluation_config_arn: "OnlineEvaluationConfigArn", # required
+    #             start_time: Time.now,
+    #             end_time: Time.now,
+    #           },
+    #           batch_evaluation: {
+    #             batch_evaluation_arn: "BatchEvaluationArn", # required
+    #           },
+    #         },
+    #         selection: {
+    #           filters: {
+    #             attribute_filters: [
+    #               {
+    #                 key: "GenerationAttributeFilterKeyString", # required
+    #                 operator: "Equals", # required, accepts Equals, NotEquals, GreaterThan, LessThan, GreaterThanOrEqual, LessThanOrEqual, Contains, NotContains
+    #                 value: { # required
+    #                   string_value: "GenerationFilterStringValue",
+    #                   double_value: 1.0,
+    #                   boolean_value: false,
+    #                 },
+    #               },
+    #             ],
+    #             turn_count: {
+    #               min: 1,
+    #               max: 1,
+    #             },
+    #             evaluator_filters: [
+    #               {
+    #                 evaluator_id: "EvaluatorId", # required
+    #                 evaluation_dimension_name: "EvaluationDimensionName",
+    #                 operator: "Equals", # required, accepts Equals, NotEquals, GreaterThan, LessThan, GreaterThanOrEqual, LessThanOrEqual, Contains, NotContains
+    #                 value: { # required
+    #                   string_value: "GenerationFilterStringValue",
+    #                   double_value: 1.0,
+    #                   boolean_value: false,
+    #                 },
+    #                 aggregation: "Min", # accepts Min, Max, Mean, AllMatch, AnyMatch
+    #               },
+    #             ],
+    #           },
+    #           identifiers: {
+    #             session_ids: ["SessionId"],
+    #             trace_ids: ["TraceId"],
+    #           },
+    #         },
+    #         sampling: {
+    #           max_scenarios: 1,
+    #         },
+    #         ground_truth: {
+    #           fields: ["expected_response"], # required, accepts expected_response, expected_trajectory
+    #           quality_filters: [
+    #             {
+    #               evaluator_id: "EvaluatorId", # required
+    #               evaluation_dimension_name: "EvaluationDimensionName",
+    #               operator: "Equals", # required, accepts Equals, NotEquals, GreaterThan, LessThan, GreaterThanOrEqual, LessThanOrEqual, Contains, NotContains
+    #               value: { # required
+    #                 string_value: "GenerationFilterStringValue",
+    #                 double_value: 1.0,
+    #                 boolean_value: false,
+    #               },
+    #               aggregation: "Min", # accepts Min, Max, Mean, AllMatch, AnyMatch
+    #             },
+    #           ],
+    #         },
+    #         redaction_configuration: {
+    #           identifiers: ["ADDRESS"], # accepts ADDRESS, AWS_SECRET_KEY, BANK_ACCOUNT_NUMBER_DE, BANK_ACCOUNT_NUMBER_ES, BANK_ACCOUNT_NUMBER_FR, BANK_ACCOUNT_NUMBER_GB, BANK_ACCOUNT_NUMBER_IT, BANK_ACCOUNT_NUMBER_US, CEP_CODE_BR, CNPJ_BR, CPF_CODE_BR, CREDIT_CARD_EXPIRATION, CREDIT_CARD_MAGNETIC_STRIPE, CREDIT_CARD_NUMBER, CREDIT_CARD_SECURITY_CODE, DATE_OF_BIRTH, DRIVERS_LICENSE_AT, DRIVERS_LICENSE_AU, DRIVERS_LICENSE_BE, DRIVERS_LICENSE_BG, DRIVERS_LICENSE_CA, DRIVERS_LICENSE_CY, DRIVERS_LICENSE_CZ, DRIVERS_LICENSE_DE, DRIVERS_LICENSE_DK, DRIVERS_LICENSE_EE, DRIVERS_LICENSE_ES, DRIVERS_LICENSE_FI, DRIVERS_LICENSE_FR, DRIVERS_LICENSE_GB, DRIVERS_LICENSE_GR, DRIVERS_LICENSE_HR, DRIVERS_LICENSE_HU, DRIVERS_LICENSE_IE, DRIVERS_LICENSE_IT, DRIVERS_LICENSE_LT, DRIVERS_LICENSE_LU, DRIVERS_LICENSE_LV, DRIVERS_LICENSE_MT, DRIVERS_LICENSE_NL, DRIVERS_LICENSE_PL, DRIVERS_LICENSE_PT, DRIVERS_LICENSE_RO, DRIVERS_LICENSE_SE, DRIVERS_LICENSE_SI, DRIVERS_LICENSE_SK, DRIVERS_LICENSE_US, DRUG_ENFORCEMENT_AGENCY_NUMBER_US, ELECTORAL_ROLL_NUMBER_GB, EMAIL_ADDRESS, HEALTH_INSURANCE_CARD_NUMBER_EU, HEALTH_INSURANCE_CLAIM_NUMBER_US, HEALTH_INSURANCE_NUMBER_FR, HEALTHCARE_PROCEDURE_CODE_US, INDIVIDUAL_TAX_IDENTIFICATION_NUMBER_US, INSEE_CODE_FR, IP_ADDRESS, LAT_LONG, MEDICARE_BENEFICIARY_NUMBER_US, NAME, NATIONAL_DRUG_CODE_US, NATIONAL_IDENTIFICATION_NUMBER_DE, NATIONAL_IDENTIFICATION_NUMBER_ES, NATIONAL_IDENTIFICATION_NUMBER_IT, NATIONAL_INSURANCE_NUMBER_GB, NATIONAL_PROVIDER_ID_US, NHS_NUMBER_GB, NIE_NUMBER_ES, NIF_NUMBER_ES, OPEN_SSH_PRIVATE_KEY, PASSPORT_NUMBER_CA, PASSPORT_NUMBER_DE, PASSPORT_NUMBER_ES, PASSPORT_NUMBER_FR, PASSPORT_NUMBER_GB, PASSPORT_NUMBER_IT, PASSPORT_NUMBER_US, PERMANENT_RESIDENCE_NUMBER_CA, PERSONAL_HEALTH_NUMBER_CA, PGP_PRIVATE_KEY, PHONE_NUMBER_BR, PHONE_NUMBER_DE, PHONE_NUMBER_ES, PHONE_NUMBER_FR, PHONE_NUMBER_GB, PHONE_NUMBER_IT, PHONE_NUMBER_US, PKCS_PRIVATE_KEY, POSTAL_CODE_CA, PUTTY_PRIVATE_KEY, RG_NUMBER_BR, SOCIAL_INSURANCE_NUMBER_CA, SSN_ES, SSN_US, TAX_ID_DE, TAX_ID_ES, TAX_ID_FR, TAX_ID_GB, VEHICLE_IDENTIFICATION_NUMBER, ZIP_CODE_US
+    #           custom_data_identifiers: [
+    #             {
+    #               name: "CustomDataIdentifierNameString", # required
+    #               regex: "CustomDataIdentifierRegexString", # required
+    #             },
+    #           ],
+    #         },
+    #       },
+    #     },
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.generation_id #=> String
+    #   resp.name #=> String
+    #   resp.dataset_id #=> String
+    #   resp.status #=> String, one of "IN_PROGRESS", "COMPLETED", "COMPLETED_WITH_ERRORS", "FAILED", "DELETING"
+    #   resp.created_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/StartDatasetGeneration AWS API Documentation
+    #
+    # @overload start_dataset_generation(params = {})
+    # @param [Hash] params ({})
+    def start_dataset_generation(params = {}, options = {})
+      req = build_request(:start_dataset_generation, params)
       req.send_request(options)
     end
 
@@ -6591,6 +7275,51 @@ module Aws::BedrockAgentCore
       req.send_request(options)
     end
 
+    # Updates the archive status of an Amazon Bedrock AgentCore Agent
+    # Insight.
+    #
+    # @option params [required, String] :application_name
+    #   The application that the Agent Insight belongs to.
+    #
+    # @option params [required, String] :agent_insight_id
+    #   The unique identifier of the Agent Insight to update.
+    #
+    # @option params [required, String] :archive_status
+    #   The archive status to apply to the Agent Insight. Valid values:
+    #
+    #   * `ACTIVE` - Marks the insight as active.
+    #
+    #   * `ARCHIVED` - Marks the insight as archived.
+    #
+    # @return [Types::UpdateAgentInsightResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateAgentInsightResponse#agent_insight_id #agent_insight_id} => String
+    #   * {Types::UpdateAgentInsightResponse#archive_status #archive_status} => String
+    #   * {Types::UpdateAgentInsightResponse#updated_at #updated_at} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_agent_insight({
+    #     application_name: "AgentApplicationName", # required
+    #     agent_insight_id: "AgentInsightId", # required
+    #     archive_status: "ACTIVE", # required, accepts ACTIVE, ARCHIVED
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.agent_insight_id #=> String
+    #   resp.archive_status #=> String, one of "ACTIVE", "ARCHIVED"
+    #   resp.updated_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/UpdateAgentInsight AWS API Documentation
+    #
+    # @overload update_agent_insight(params = {})
+    # @param [Hash] params ({})
+    def update_agent_insight(params = {}, options = {})
+      req = build_request(:update_agent_insight, params)
+      req.send_request(options)
+    end
+
     # Updates a browser stream. To use this operation, you must have
     # permissions to perform the bedrock:UpdateBrowserStream action.
     #
@@ -6668,7 +7397,7 @@ module Aws::BedrockAgentCore
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrockagentcore'
-      context[:gem_version] = '1.64.0'
+      context[:gem_version] = '1.73.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

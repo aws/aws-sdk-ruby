@@ -26,11 +26,16 @@ module Aws::PartnerCentralRevenueMeasurement
     ClientToken = Shapes::StringShape.new(name: 'ClientToken')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     ConflictExceptionReason = Shapes::StringShape.new(name: 'ConflictExceptionReason')
+    ContextFilter = Shapes::StructureShape.new(name: 'ContextFilter')
+    ContextFilterList = Shapes::ListShape.new(name: 'ContextFilterList')
+    ContextFilterValueList = Shapes::ListShape.new(name: 'ContextFilterValueList')
+    ContextKey = Shapes::StringShape.new(name: 'ContextKey')
+    ContextValue = Shapes::StringShape.new(name: 'ContextValue')
     CreateMarketplaceRevenueShareAllocationInput = Shapes::StructureShape.new(name: 'CreateMarketplaceRevenueShareAllocationInput')
     CreateMarketplaceRevenueShareAllocationOutput = Shapes::StructureShape.new(name: 'CreateMarketplaceRevenueShareAllocationOutput')
     CreateMarketplaceRevenueShareInput = Shapes::StructureShape.new(name: 'CreateMarketplaceRevenueShareInput')
+    CreateMarketplaceRevenueShareInputProductsList = Shapes::ListShape.new(name: 'CreateMarketplaceRevenueShareInputProductsList')
     CreateMarketplaceRevenueShareOutput = Shapes::StructureShape.new(name: 'CreateMarketplaceRevenueShareOutput')
-    CreateMarketplaceRevenueShareOutputRevisionInteger = Shapes::IntegerShape.new(name: 'CreateMarketplaceRevenueShareOutputRevisionInteger')
     CreateRevenueAttributionInput = Shapes::StructureShape.new(name: 'CreateRevenueAttributionInput')
     CreateRevenueAttributionInputDescriptionString = Shapes::StringShape.new(name: 'CreateRevenueAttributionInputDescriptionString')
     CreateRevenueAttributionInputNameString = Shapes::StringShape.new(name: 'CreateRevenueAttributionInputNameString')
@@ -46,10 +51,7 @@ module Aws::PartnerCentralRevenueMeasurement
     GetMarketplaceRevenueShareAllocationInput = Shapes::StructureShape.new(name: 'GetMarketplaceRevenueShareAllocationInput')
     GetMarketplaceRevenueShareAllocationOutput = Shapes::StructureShape.new(name: 'GetMarketplaceRevenueShareAllocationOutput')
     GetMarketplaceRevenueShareInput = Shapes::StructureShape.new(name: 'GetMarketplaceRevenueShareInput')
-    GetMarketplaceRevenueShareInputRevisionInteger = Shapes::IntegerShape.new(name: 'GetMarketplaceRevenueShareInputRevisionInteger')
     GetMarketplaceRevenueShareOutput = Shapes::StructureShape.new(name: 'GetMarketplaceRevenueShareOutput')
-    GetMarketplaceRevenueShareOutputLatestRevisionInteger = Shapes::IntegerShape.new(name: 'GetMarketplaceRevenueShareOutputLatestRevisionInteger')
-    GetMarketplaceRevenueShareOutputRevisionInteger = Shapes::IntegerShape.new(name: 'GetMarketplaceRevenueShareOutputRevisionInteger')
     GetRevenueAttributionAllocationInput = Shapes::StructureShape.new(name: 'GetRevenueAttributionAllocationInput')
     GetRevenueAttributionAllocationOutput = Shapes::StructureShape.new(name: 'GetRevenueAttributionAllocationOutput')
     GetRevenueAttributionAllocationsTaskInput = Shapes::StructureShape.new(name: 'GetRevenueAttributionAllocationsTaskInput')
@@ -76,17 +78,28 @@ module Aws::PartnerCentralRevenueMeasurement
     ListTagsForResourceOutput = Shapes::StructureShape.new(name: 'ListTagsForResourceOutput')
     MarketplaceProductId = Shapes::StringShape.new(name: 'MarketplaceProductId')
     MarketplaceProductIdList = Shapes::ListShape.new(name: 'MarketplaceProductIdList')
+    MarketplaceProductIdentifier = Shapes::StringShape.new(name: 'MarketplaceProductIdentifier')
     MarketplaceProductSummary = Shapes::StructureShape.new(name: 'MarketplaceProductSummary')
     MarketplaceProductSummaryProductIdString = Shapes::StringShape.new(name: 'MarketplaceProductSummaryProductIdString')
     MarketplaceRevenueShareAllocationId = Shapes::StringShape.new(name: 'MarketplaceRevenueShareAllocationId')
     MarketplaceRevenueShareAllocationSortField = Shapes::StringShape.new(name: 'MarketplaceRevenueShareAllocationSortField')
     MarketplaceRevenueShareAllocationSummary = Shapes::StructureShape.new(name: 'MarketplaceRevenueShareAllocationSummary')
     MarketplaceRevenueShareAllocationSummaryList = Shapes::ListShape.new(name: 'MarketplaceRevenueShareAllocationSummaryList')
+    MarketplaceRevenueShareArn = Shapes::StringShape.new(name: 'MarketplaceRevenueShareArn')
+    MarketplaceRevenueShareId = Shapes::StringShape.new(name: 'MarketplaceRevenueShareId')
+    MarketplaceRevenueShareIdentifier = Shapes::StringShape.new(name: 'MarketplaceRevenueShareIdentifier')
+    MarketplaceRevenueShareIdentifierList = Shapes::ListShape.new(name: 'MarketplaceRevenueShareIdentifierList')
+    MarketplaceRevenueShareProductDetail = Shapes::StructureShape.new(name: 'MarketplaceRevenueShareProductDetail')
+    MarketplaceRevenueShareProductDetailList = Shapes::ListShape.new(name: 'MarketplaceRevenueShareProductDetailList')
+    MarketplaceRevenueShareProductEntry = Shapes::StructureShape.new(name: 'MarketplaceRevenueShareProductEntry')
+    MarketplaceRevenueShareProductEntryList = Shapes::ListShape.new(name: 'MarketplaceRevenueShareProductEntryList')
+    MarketplaceRevenueShareProductSummary = Shapes::StructureShape.new(name: 'MarketplaceRevenueShareProductSummary')
+    MarketplaceRevenueShareProductSummaryList = Shapes::ListShape.new(name: 'MarketplaceRevenueShareProductSummaryList')
     MarketplaceRevenueShareSortBy = Shapes::StringShape.new(name: 'MarketplaceRevenueShareSortBy')
     MarketplaceRevenueShareSummary = Shapes::StructureShape.new(name: 'MarketplaceRevenueShareSummary')
     MarketplaceRevenueShareSummaryList = Shapes::ListShape.new(name: 'MarketplaceRevenueShareSummaryList')
-    MarketplaceRevenueShareTagList = Shapes::ListShape.new(name: 'MarketplaceRevenueShareTagList')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
+    ProductCode = Shapes::StringShape.new(name: 'ProductCode')
     ProductCodeList = Shapes::ListShape.new(name: 'ProductCodeList')
     ResourceARN = Shapes::StringShape.new(name: 'ResourceARN')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
@@ -101,6 +114,7 @@ module Aws::PartnerCentralRevenueMeasurement
     RevenueAttributionAllocationSummaryList = Shapes::ListShape.new(name: 'RevenueAttributionAllocationSummaryList')
     RevenueAttributionAllocationTaskId = Shapes::StringShape.new(name: 'RevenueAttributionAllocationTaskId')
     RevenueAttributionAllocationTaskStatus = Shapes::StringShape.new(name: 'RevenueAttributionAllocationTaskStatus')
+    RevenueAttributionContext = Shapes::MapShape.new(name: 'RevenueAttributionContext')
     RevenueAttributionId = Shapes::StringShape.new(name: 'RevenueAttributionId')
     RevenueAttributionIdentifier = Shapes::StringShape.new(name: 'RevenueAttributionIdentifier')
     RevenueAttributionIdentifierList = Shapes::ListShape.new(name: 'RevenueAttributionIdentifierList')
@@ -108,6 +122,16 @@ module Aws::PartnerCentralRevenueMeasurement
     RevenueShareAllocation = Shapes::StructureShape.new(name: 'RevenueShareAllocation')
     RevenueShareAllocationChangeList = Shapes::ListShape.new(name: 'RevenueShareAllocationChangeList')
     RevenueSharePercent = Shapes::StringShape.new(name: 'RevenueSharePercent')
+    RevenueShareProductAccountCount = Shapes::IntegerShape.new(name: 'RevenueShareProductAccountCount')
+    RevenueShareProductAccountDetail = Shapes::StructureShape.new(name: 'RevenueShareProductAccountDetail')
+    RevenueShareProductAccountDetailList = Shapes::ListShape.new(name: 'RevenueShareProductAccountDetailList')
+    RevenueShareProductAccountEntry = Shapes::StructureShape.new(name: 'RevenueShareProductAccountEntry')
+    RevenueShareProductAccountEntryList = Shapes::ListShape.new(name: 'RevenueShareProductAccountEntryList')
+    RevenueShareProductAccountId = Shapes::StringShape.new(name: 'RevenueShareProductAccountId')
+    RevenueShareProductAccountIdList = Shapes::ListShape.new(name: 'RevenueShareProductAccountIdList')
+    RevenueShareProductAccountSummary = Shapes::StructureShape.new(name: 'RevenueShareProductAccountSummary')
+    RevenueShareProductAccountSummaryList = Shapes::ListShape.new(name: 'RevenueShareProductAccountSummaryList')
+    RevenueShareProductAccountType = Shapes::StringShape.new(name: 'RevenueShareProductAccountType')
     RevisionToken = Shapes::StringShape.new(name: 'RevisionToken')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
     ServiceQuotaExceededExceptionReason = Shapes::StringShape.new(name: 'ServiceQuotaExceededExceptionReason')
@@ -128,6 +152,8 @@ module Aws::PartnerCentralRevenueMeasurement
     UntagResourceInput = Shapes::StructureShape.new(name: 'UntagResourceInput')
     UpdateMarketplaceRevenueShareAllocationInput = Shapes::StructureShape.new(name: 'UpdateMarketplaceRevenueShareAllocationInput')
     UpdateMarketplaceRevenueShareAllocationOutput = Shapes::StructureShape.new(name: 'UpdateMarketplaceRevenueShareAllocationOutput')
+    UpdateMarketplaceRevenueShareInput = Shapes::StructureShape.new(name: 'UpdateMarketplaceRevenueShareInput')
+    UpdateMarketplaceRevenueShareOutput = Shapes::StructureShape.new(name: 'UpdateMarketplaceRevenueShareOutput')
     UpdateRevenueAttributionInput = Shapes::StructureShape.new(name: 'UpdateRevenueAttributionInput')
     UpdateRevenueAttributionInputDescriptionString = Shapes::StringShape.new(name: 'UpdateRevenueAttributionInputDescriptionString')
     UpdateRevenueAttributionOutput = Shapes::StructureShape.new(name: 'UpdateRevenueAttributionOutput')
@@ -153,47 +179,57 @@ module Aws::PartnerCentralRevenueMeasurement
     AttributionSummary.add_member(:effective_until, Shapes::ShapeRef.new(shape: AllocationEffectiveDateString, location_name: "EffectiveUntil"))
     AttributionSummary.add_member(:total_active_revenue_attribution_allocation_count, Shapes::ShapeRef.new(shape: AllocationCount, location_name: "TotalActiveRevenueAttributionAllocationCount"))
     AttributionSummary.add_member(:total_revenue_attribution_allocation_count, Shapes::ShapeRef.new(shape: AllocationCount, location_name: "TotalRevenueAttributionAllocationCount"))
+    AttributionSummary.add_member(:context, Shapes::ShapeRef.new(shape: RevenueAttributionContext, location_name: "Context"))
     AttributionSummary.struct_class = Types::AttributionSummary
 
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Message"))
     ConflictException.add_member(:reason, Shapes::ShapeRef.new(shape: ConflictExceptionReason, required: true, location_name: "Reason"))
     ConflictException.struct_class = Types::ConflictException
 
+    ContextFilter.add_member(:key, Shapes::ShapeRef.new(shape: ContextKey, required: true, location_name: "Key"))
+    ContextFilter.add_member(:values, Shapes::ShapeRef.new(shape: ContextFilterValueList, location_name: "Values"))
+    ContextFilter.struct_class = Types::ContextFilter
+
+    ContextFilterList.member = Shapes::ShapeRef.new(shape: ContextFilter)
+
+    ContextFilterValueList.member = Shapes::ShapeRef.new(shape: ContextValue)
+
     CreateMarketplaceRevenueShareAllocationInput.add_member(:catalog, Shapes::ShapeRef.new(shape: CatalogName, required: true, location_name: "Catalog"))
-    CreateMarketplaceRevenueShareAllocationInput.add_member(:product_id, Shapes::ShapeRef.new(shape: MarketplaceProductId, required: true, location_name: "ProductId"))
+    CreateMarketplaceRevenueShareAllocationInput.add_member(:marketplace_revenue_share_identifier, Shapes::ShapeRef.new(shape: MarketplaceRevenueShareIdentifier, required: true, location_name: "MarketplaceRevenueShareIdentifier"))
     CreateMarketplaceRevenueShareAllocationInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
+    CreateMarketplaceRevenueShareAllocationInput.add_member(:marketplace_revenue_share_revision, Shapes::ShapeRef.new(shape: RevisionToken, required: true, location_name: "MarketplaceRevenueShareRevision"))
     CreateMarketplaceRevenueShareAllocationInput.add_member(:effective_from, Shapes::ShapeRef.new(shape: AllocationEffectiveDateString, required: true, location_name: "EffectiveFrom"))
-    CreateMarketplaceRevenueShareAllocationInput.add_member(:effective_until, Shapes::ShapeRef.new(shape: AllocationEffectiveDateString, location_name: "EffectiveUntil"))
+    CreateMarketplaceRevenueShareAllocationInput.add_member(:effective_until, Shapes::ShapeRef.new(shape: AllocationEffectiveDateString, required: true, location_name: "EffectiveUntil"))
     CreateMarketplaceRevenueShareAllocationInput.add_member(:revenue_share_percent, Shapes::ShapeRef.new(shape: RevenueSharePercent, required: true, location_name: "RevenueSharePercent"))
     CreateMarketplaceRevenueShareAllocationInput.struct_class = Types::CreateMarketplaceRevenueShareAllocationInput
 
     CreateMarketplaceRevenueShareAllocationOutput.add_member(:marketplace_revenue_share_allocation_id, Shapes::ShapeRef.new(shape: MarketplaceRevenueShareAllocationId, required: true, location_name: "MarketplaceRevenueShareAllocationId"))
-    CreateMarketplaceRevenueShareAllocationOutput.add_member(:product_id, Shapes::ShapeRef.new(shape: MarketplaceProductId, required: true, location_name: "ProductId"))
-    CreateMarketplaceRevenueShareAllocationOutput.add_member(:product_name, Shapes::ShapeRef.new(shape: String, location_name: "ProductName"))
-    CreateMarketplaceRevenueShareAllocationOutput.add_member(:arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Arn"))
+    CreateMarketplaceRevenueShareAllocationOutput.add_member(:marketplace_revenue_share_identifier, Shapes::ShapeRef.new(shape: MarketplaceRevenueShareId, required: true, location_name: "MarketplaceRevenueShareIdentifier"))
     CreateMarketplaceRevenueShareAllocationOutput.add_member(:effective_from, Shapes::ShapeRef.new(shape: AllocationEffectiveDateString, required: true, location_name: "EffectiveFrom"))
-    CreateMarketplaceRevenueShareAllocationOutput.add_member(:effective_until, Shapes::ShapeRef.new(shape: AllocationEffectiveDateString, location_name: "EffectiveUntil"))
+    CreateMarketplaceRevenueShareAllocationOutput.add_member(:effective_until, Shapes::ShapeRef.new(shape: AllocationEffectiveDateString, required: true, location_name: "EffectiveUntil"))
     CreateMarketplaceRevenueShareAllocationOutput.add_member(:revenue_share_percent, Shapes::ShapeRef.new(shape: RevenueSharePercent, required: true, location_name: "RevenueSharePercent"))
     CreateMarketplaceRevenueShareAllocationOutput.add_member(:status, Shapes::ShapeRef.new(shape: AllocationStatus, required: true, location_name: "Status"))
-    CreateMarketplaceRevenueShareAllocationOutput.add_member(:created_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedDate"))
-    CreateMarketplaceRevenueShareAllocationOutput.add_member(:last_modified_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedDate"))
-    CreateMarketplaceRevenueShareAllocationOutput.add_member(:latest_marketplace_revenue_share_revision, Shapes::ShapeRef.new(shape: RevisionToken, location_name: "LatestMarketplaceRevenueShareRevision"))
+    CreateMarketplaceRevenueShareAllocationOutput.add_member(:created_date, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreatedDate"))
+    CreateMarketplaceRevenueShareAllocationOutput.add_member(:last_modified_date, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "LastModifiedDate"))
+    CreateMarketplaceRevenueShareAllocationOutput.add_member(:marketplace_revenue_share_revision, Shapes::ShapeRef.new(shape: RevisionToken, required: true, location_name: "MarketplaceRevenueShareRevision"))
+    CreateMarketplaceRevenueShareAllocationOutput.add_member(:marketplace_revenue_share_latest_revision, Shapes::ShapeRef.new(shape: RevisionToken, required: true, location_name: "MarketplaceRevenueShareLatestRevision"))
     CreateMarketplaceRevenueShareAllocationOutput.struct_class = Types::CreateMarketplaceRevenueShareAllocationOutput
 
     CreateMarketplaceRevenueShareInput.add_member(:catalog, Shapes::ShapeRef.new(shape: CatalogName, required: true, location_name: "Catalog"))
     CreateMarketplaceRevenueShareInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
-    CreateMarketplaceRevenueShareInput.add_member(:product_id, Shapes::ShapeRef.new(shape: MarketplaceProductId, required: true, location_name: "ProductId"))
-    CreateMarketplaceRevenueShareInput.add_member(:tags, Shapes::ShapeRef.new(shape: MarketplaceRevenueShareTagList, location_name: "Tags"))
+    CreateMarketplaceRevenueShareInput.add_member(:products, Shapes::ShapeRef.new(shape: CreateMarketplaceRevenueShareInputProductsList, required: true, location_name: "Products"))
+    CreateMarketplaceRevenueShareInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateMarketplaceRevenueShareInput.struct_class = Types::CreateMarketplaceRevenueShareInput
 
-    CreateMarketplaceRevenueShareOutput.add_member(:product_id, Shapes::ShapeRef.new(shape: MarketplaceProductId, required: true, location_name: "ProductId"))
-    CreateMarketplaceRevenueShareOutput.add_member(:arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Arn"))
-    CreateMarketplaceRevenueShareOutput.add_member(:catalog, Shapes::ShapeRef.new(shape: CatalogName, location_name: "Catalog"))
-    CreateMarketplaceRevenueShareOutput.add_member(:product_code, Shapes::ShapeRef.new(shape: String, location_name: "ProductCode"))
-    CreateMarketplaceRevenueShareOutput.add_member(:product_name, Shapes::ShapeRef.new(shape: String, location_name: "ProductName"))
-    CreateMarketplaceRevenueShareOutput.add_member(:created_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedDate"))
-    CreateMarketplaceRevenueShareOutput.add_member(:last_modified_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedDate"))
-    CreateMarketplaceRevenueShareOutput.add_member(:revision, Shapes::ShapeRef.new(shape: CreateMarketplaceRevenueShareOutputRevisionInteger, location_name: "Revision"))
+    CreateMarketplaceRevenueShareInputProductsList.member = Shapes::ShapeRef.new(shape: MarketplaceRevenueShareProductEntry)
+
+    CreateMarketplaceRevenueShareOutput.add_member(:id, Shapes::ShapeRef.new(shape: MarketplaceRevenueShareId, required: true, location_name: "Id"))
+    CreateMarketplaceRevenueShareOutput.add_member(:arn, Shapes::ShapeRef.new(shape: MarketplaceRevenueShareArn, required: true, location_name: "Arn"))
+    CreateMarketplaceRevenueShareOutput.add_member(:catalog, Shapes::ShapeRef.new(shape: CatalogName, required: true, location_name: "Catalog"))
+    CreateMarketplaceRevenueShareOutput.add_member(:products, Shapes::ShapeRef.new(shape: MarketplaceRevenueShareProductSummaryList, required: true, location_name: "Products"))
+    CreateMarketplaceRevenueShareOutput.add_member(:created_date, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreatedDate"))
+    CreateMarketplaceRevenueShareOutput.add_member(:last_modified_date, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "LastModifiedDate"))
+    CreateMarketplaceRevenueShareOutput.add_member(:revision, Shapes::ShapeRef.new(shape: RevisionToken, required: true, location_name: "Revision"))
     CreateMarketplaceRevenueShareOutput.struct_class = Types::CreateMarketplaceRevenueShareOutput
 
     CreateRevenueAttributionInput.add_member(:catalog, Shapes::ShapeRef.new(shape: CatalogName, required: true, location_name: "Catalog"))
@@ -203,6 +239,7 @@ module Aws::PartnerCentralRevenueMeasurement
     CreateRevenueAttributionInput.add_member(:tenancy_model, Shapes::ShapeRef.new(shape: TenancyModel, required: true, location_name: "TenancyModel"))
     CreateRevenueAttributionInput.add_member(:product_identifier, Shapes::ShapeRef.new(shape: CreateRevenueAttributionInputProductIdentifierString, location_name: "ProductIdentifier"))
     CreateRevenueAttributionInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateRevenueAttributionInput.add_member(:context, Shapes::ShapeRef.new(shape: RevenueAttributionContext, location_name: "Context"))
     CreateRevenueAttributionInput.struct_class = Types::CreateRevenueAttributionInput
 
     CreateRevenueAttributionOutput.add_member(:id, Shapes::ShapeRef.new(shape: RevenueAttributionId, required: true, location_name: "Id"))
@@ -212,6 +249,7 @@ module Aws::PartnerCentralRevenueMeasurement
     CreateRevenueAttributionOutput.add_member(:tenancy_model, Shapes::ShapeRef.new(shape: TenancyModel, required: true, location_name: "TenancyModel"))
     CreateRevenueAttributionOutput.add_member(:marketplace_product, Shapes::ShapeRef.new(shape: MarketplaceProductSummary, location_name: "MarketplaceProduct"))
     CreateRevenueAttributionOutput.add_member(:revision, Shapes::ShapeRef.new(shape: RevisionToken, location_name: "Revision"))
+    CreateRevenueAttributionOutput.add_member(:context, Shapes::ShapeRef.new(shape: RevenueAttributionContext, location_name: "Context"))
     CreateRevenueAttributionOutput.struct_class = Types::CreateRevenueAttributionOutput
 
     CustomerAwsAccountIdFilterList.member = Shapes::ShapeRef.new(shape: CustomerAwsAccountId)
@@ -221,40 +259,40 @@ module Aws::PartnerCentralRevenueMeasurement
     EntityTypeFilterList.member = Shapes::ShapeRef.new(shape: EntityType)
 
     GetMarketplaceRevenueShareAllocationInput.add_member(:catalog, Shapes::ShapeRef.new(shape: CatalogName, required: true, location_name: "Catalog"))
-    GetMarketplaceRevenueShareAllocationInput.add_member(:product_id, Shapes::ShapeRef.new(shape: MarketplaceProductId, required: true, location_name: "ProductId"))
+    GetMarketplaceRevenueShareAllocationInput.add_member(:marketplace_revenue_share_identifier, Shapes::ShapeRef.new(shape: MarketplaceRevenueShareIdentifier, required: true, location_name: "MarketplaceRevenueShareIdentifier"))
     GetMarketplaceRevenueShareAllocationInput.add_member(:marketplace_revenue_share_allocation_id, Shapes::ShapeRef.new(shape: MarketplaceRevenueShareAllocationId, required: true, location_name: "MarketplaceRevenueShareAllocationId"))
     GetMarketplaceRevenueShareAllocationInput.add_member(:marketplace_revenue_share_revision, Shapes::ShapeRef.new(shape: RevisionToken, location_name: "MarketplaceRevenueShareRevision"))
     GetMarketplaceRevenueShareAllocationInput.struct_class = Types::GetMarketplaceRevenueShareAllocationInput
 
     GetMarketplaceRevenueShareAllocationOutput.add_member(:marketplace_revenue_share_allocation_id, Shapes::ShapeRef.new(shape: MarketplaceRevenueShareAllocationId, required: true, location_name: "MarketplaceRevenueShareAllocationId"))
-    GetMarketplaceRevenueShareAllocationOutput.add_member(:product_id, Shapes::ShapeRef.new(shape: MarketplaceProductId, required: true, location_name: "ProductId"))
-    GetMarketplaceRevenueShareAllocationOutput.add_member(:product_name, Shapes::ShapeRef.new(shape: String, location_name: "ProductName"))
-    GetMarketplaceRevenueShareAllocationOutput.add_member(:arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Arn"))
+    GetMarketplaceRevenueShareAllocationOutput.add_member(:marketplace_revenue_share_identifier, Shapes::ShapeRef.new(shape: MarketplaceRevenueShareId, required: true, location_name: "MarketplaceRevenueShareIdentifier"))
     GetMarketplaceRevenueShareAllocationOutput.add_member(:effective_from, Shapes::ShapeRef.new(shape: AllocationEffectiveDateString, required: true, location_name: "EffectiveFrom"))
-    GetMarketplaceRevenueShareAllocationOutput.add_member(:effective_until, Shapes::ShapeRef.new(shape: AllocationEffectiveDateString, location_name: "EffectiveUntil"))
+    GetMarketplaceRevenueShareAllocationOutput.add_member(:effective_until, Shapes::ShapeRef.new(shape: AllocationEffectiveDateString, required: true, location_name: "EffectiveUntil"))
     GetMarketplaceRevenueShareAllocationOutput.add_member(:revenue_share_percent, Shapes::ShapeRef.new(shape: RevenueSharePercent, required: true, location_name: "RevenueSharePercent"))
     GetMarketplaceRevenueShareAllocationOutput.add_member(:status, Shapes::ShapeRef.new(shape: AllocationStatus, required: true, location_name: "Status"))
-    GetMarketplaceRevenueShareAllocationOutput.add_member(:created_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedDate"))
-    GetMarketplaceRevenueShareAllocationOutput.add_member(:last_modified_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedDate"))
-    GetMarketplaceRevenueShareAllocationOutput.add_member(:latest_marketplace_revenue_share_revision, Shapes::ShapeRef.new(shape: RevisionToken, location_name: "LatestMarketplaceRevenueShareRevision"))
+    GetMarketplaceRevenueShareAllocationOutput.add_member(:created_date, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreatedDate"))
+    GetMarketplaceRevenueShareAllocationOutput.add_member(:last_modified_date, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "LastModifiedDate"))
+    GetMarketplaceRevenueShareAllocationOutput.add_member(:marketplace_revenue_share_revision, Shapes::ShapeRef.new(shape: RevisionToken, required: true, location_name: "MarketplaceRevenueShareRevision"))
+    GetMarketplaceRevenueShareAllocationOutput.add_member(:marketplace_revenue_share_latest_revision, Shapes::ShapeRef.new(shape: RevisionToken, required: true, location_name: "MarketplaceRevenueShareLatestRevision"))
     GetMarketplaceRevenueShareAllocationOutput.struct_class = Types::GetMarketplaceRevenueShareAllocationOutput
 
     GetMarketplaceRevenueShareInput.add_member(:catalog, Shapes::ShapeRef.new(shape: CatalogName, required: true, location_name: "Catalog"))
-    GetMarketplaceRevenueShareInput.add_member(:product_id, Shapes::ShapeRef.new(shape: MarketplaceProductId, required: true, location_name: "ProductId"))
-    GetMarketplaceRevenueShareInput.add_member(:revision, Shapes::ShapeRef.new(shape: GetMarketplaceRevenueShareInputRevisionInteger, location_name: "Revision"))
+    GetMarketplaceRevenueShareInput.add_member(:identifier, Shapes::ShapeRef.new(shape: MarketplaceRevenueShareIdentifier, required: true, location_name: "Identifier"))
+    GetMarketplaceRevenueShareInput.add_member(:revision, Shapes::ShapeRef.new(shape: RevisionToken, location_name: "Revision"))
     GetMarketplaceRevenueShareInput.struct_class = Types::GetMarketplaceRevenueShareInput
 
-    GetMarketplaceRevenueShareOutput.add_member(:product_id, Shapes::ShapeRef.new(shape: MarketplaceProductId, required: true, location_name: "ProductId"))
-    GetMarketplaceRevenueShareOutput.add_member(:arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Arn"))
+    GetMarketplaceRevenueShareOutput.add_member(:id, Shapes::ShapeRef.new(shape: MarketplaceRevenueShareId, required: true, location_name: "Id"))
+    GetMarketplaceRevenueShareOutput.add_member(:arn, Shapes::ShapeRef.new(shape: MarketplaceRevenueShareArn, required: true, location_name: "Arn"))
     GetMarketplaceRevenueShareOutput.add_member(:catalog, Shapes::ShapeRef.new(shape: CatalogName, required: true, location_name: "Catalog"))
-    GetMarketplaceRevenueShareOutput.add_member(:product_code, Shapes::ShapeRef.new(shape: String, location_name: "ProductCode"))
-    GetMarketplaceRevenueShareOutput.add_member(:product_name, Shapes::ShapeRef.new(shape: String, location_name: "ProductName"))
-    GetMarketplaceRevenueShareOutput.add_member(:created_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedDate"))
-    GetMarketplaceRevenueShareOutput.add_member(:last_modified_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedDate"))
-    GetMarketplaceRevenueShareOutput.add_member(:revision, Shapes::ShapeRef.new(shape: GetMarketplaceRevenueShareOutputRevisionInteger, location_name: "Revision"))
-    GetMarketplaceRevenueShareOutput.add_member(:latest_revision, Shapes::ShapeRef.new(shape: GetMarketplaceRevenueShareOutputLatestRevisionInteger, location_name: "LatestRevision"))
-    GetMarketplaceRevenueShareOutput.add_member(:total_active_marketplace_revenue_share_allocation_count, Shapes::ShapeRef.new(shape: Integer, location_name: "TotalActiveMarketplaceRevenueShareAllocationCount"))
-    GetMarketplaceRevenueShareOutput.add_member(:total_marketplace_revenue_share_allocation_count, Shapes::ShapeRef.new(shape: Integer, location_name: "TotalMarketplaceRevenueShareAllocationCount"))
+    GetMarketplaceRevenueShareOutput.add_member(:products, Shapes::ShapeRef.new(shape: MarketplaceRevenueShareProductDetailList, required: true, location_name: "Products"))
+    GetMarketplaceRevenueShareOutput.add_member(:created_date, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreatedDate"))
+    GetMarketplaceRevenueShareOutput.add_member(:last_modified_date, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "LastModifiedDate"))
+    GetMarketplaceRevenueShareOutput.add_member(:revision, Shapes::ShapeRef.new(shape: RevisionToken, required: true, location_name: "Revision"))
+    GetMarketplaceRevenueShareOutput.add_member(:latest_revision, Shapes::ShapeRef.new(shape: RevisionToken, required: true, location_name: "LatestRevision"))
+    GetMarketplaceRevenueShareOutput.add_member(:effective_from, Shapes::ShapeRef.new(shape: AllocationEffectiveDateString, location_name: "EffectiveFrom"))
+    GetMarketplaceRevenueShareOutput.add_member(:effective_until, Shapes::ShapeRef.new(shape: AllocationEffectiveDateString, location_name: "EffectiveUntil"))
+    GetMarketplaceRevenueShareOutput.add_member(:total_active_marketplace_revenue_share_allocation_count, Shapes::ShapeRef.new(shape: AllocationCount, required: true, location_name: "TotalActiveMarketplaceRevenueShareAllocationCount"))
+    GetMarketplaceRevenueShareOutput.add_member(:total_marketplace_revenue_share_allocation_count, Shapes::ShapeRef.new(shape: AllocationCount, required: true, location_name: "TotalMarketplaceRevenueShareAllocationCount"))
     GetMarketplaceRevenueShareOutput.struct_class = Types::GetMarketplaceRevenueShareOutput
 
     GetRevenueAttributionAllocationInput.add_member(:catalog, Shapes::ShapeRef.new(shape: CatalogName, required: true, location_name: "Catalog"))
@@ -315,16 +353,19 @@ module Aws::PartnerCentralRevenueMeasurement
     GetRevenueAttributionOutput.add_member(:effective_until, Shapes::ShapeRef.new(shape: AllocationEffectiveDateString, location_name: "EffectiveUntil"))
     GetRevenueAttributionOutput.add_member(:total_active_revenue_attribution_allocation_count, Shapes::ShapeRef.new(shape: AllocationCount, location_name: "TotalActiveRevenueAttributionAllocationCount"))
     GetRevenueAttributionOutput.add_member(:total_revenue_attribution_allocation_count, Shapes::ShapeRef.new(shape: AllocationCount, location_name: "TotalRevenueAttributionAllocationCount"))
+    GetRevenueAttributionOutput.add_member(:context, Shapes::ShapeRef.new(shape: RevenueAttributionContext, location_name: "Context"))
     GetRevenueAttributionOutput.struct_class = Types::GetRevenueAttributionOutput
 
     InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Message"))
     InternalServerException.struct_class = Types::InternalServerException
 
     ListMarketplaceRevenueShareAllocationsInput.add_member(:catalog, Shapes::ShapeRef.new(shape: CatalogName, required: true, location_name: "Catalog"))
-    ListMarketplaceRevenueShareAllocationsInput.add_member(:product_id, Shapes::ShapeRef.new(shape: MarketplaceProductId, required: true, location_name: "ProductId"))
-    ListMarketplaceRevenueShareAllocationsInput.add_member(:status, Shapes::ShapeRef.new(shape: AllocationStatus, location_name: "Status"))
+    ListMarketplaceRevenueShareAllocationsInput.add_member(:marketplace_revenue_share_identifier, Shapes::ShapeRef.new(shape: MarketplaceRevenueShareIdentifier, required: true, location_name: "MarketplaceRevenueShareIdentifier"))
+    ListMarketplaceRevenueShareAllocationsInput.add_member(:status_filter, Shapes::ShapeRef.new(shape: AllocationStatus, location_name: "StatusFilter"))
     ListMarketplaceRevenueShareAllocationsInput.add_member(:after_effective_from, Shapes::ShapeRef.new(shape: AllocationEffectiveDateString, location_name: "AfterEffectiveFrom"))
     ListMarketplaceRevenueShareAllocationsInput.add_member(:before_effective_from, Shapes::ShapeRef.new(shape: AllocationEffectiveDateString, location_name: "BeforeEffectiveFrom"))
+    ListMarketplaceRevenueShareAllocationsInput.add_member(:after_effective_until, Shapes::ShapeRef.new(shape: AllocationEffectiveDateString, location_name: "AfterEffectiveUntil"))
+    ListMarketplaceRevenueShareAllocationsInput.add_member(:before_effective_until, Shapes::ShapeRef.new(shape: AllocationEffectiveDateString, location_name: "BeforeEffectiveUntil"))
     ListMarketplaceRevenueShareAllocationsInput.add_member(:sort_by, Shapes::ShapeRef.new(shape: MarketplaceRevenueShareAllocationSortField, location_name: "SortBy"))
     ListMarketplaceRevenueShareAllocationsInput.add_member(:sort_order, Shapes::ShapeRef.new(shape: SortOrder, location_name: "SortOrder"))
     ListMarketplaceRevenueShareAllocationsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: ListMarketplaceRevenueShareAllocationsInputMaxResultsInteger, location_name: "MaxResults"))
@@ -337,6 +378,7 @@ module Aws::PartnerCentralRevenueMeasurement
     ListMarketplaceRevenueShareAllocationsOutput.struct_class = Types::ListMarketplaceRevenueShareAllocationsOutput
 
     ListMarketplaceRevenueSharesInput.add_member(:catalog, Shapes::ShapeRef.new(shape: CatalogName, required: true, location_name: "Catalog"))
+    ListMarketplaceRevenueSharesInput.add_member(:identifiers, Shapes::ShapeRef.new(shape: MarketplaceRevenueShareIdentifierList, location_name: "Identifiers"))
     ListMarketplaceRevenueSharesInput.add_member(:product_ids, Shapes::ShapeRef.new(shape: MarketplaceProductIdList, location_name: "ProductIds"))
     ListMarketplaceRevenueSharesInput.add_member(:product_codes, Shapes::ShapeRef.new(shape: ProductCodeList, location_name: "ProductCodes"))
     ListMarketplaceRevenueSharesInput.add_member(:max_results, Shapes::ShapeRef.new(shape: ListMarketplaceRevenueSharesInputMaxResultsInteger, location_name: "MaxResults"))
@@ -380,6 +422,7 @@ module Aws::PartnerCentralRevenueMeasurement
     ListRevenueAttributionsInput.add_member(:sort_order, Shapes::ShapeRef.new(shape: SortOrder, location_name: "SortOrder"))
     ListRevenueAttributionsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: ListRevenueAttributionsInputMaxResultsInteger, location_name: "MaxResults"))
     ListRevenueAttributionsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListRevenueAttributionsInput.add_member(:context_filters, Shapes::ShapeRef.new(shape: ContextFilterList, location_name: "ContextFilters"))
     ListRevenueAttributionsInput.struct_class = Types::ListRevenueAttributionsInput
 
     ListRevenueAttributionsOutput.add_member(:revenue_attribution_summaries, Shapes::ShapeRef.new(shape: RevenueAttributionSummaries, location_name: "RevenueAttributionSummaries"))
@@ -392,7 +435,7 @@ module Aws::PartnerCentralRevenueMeasurement
     ListTagsForResourceOutput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     ListTagsForResourceOutput.struct_class = Types::ListTagsForResourceOutput
 
-    MarketplaceProductIdList.member = Shapes::ShapeRef.new(shape: MarketplaceProductId)
+    MarketplaceProductIdList.member = Shapes::ShapeRef.new(shape: MarketplaceProductIdentifier)
 
     MarketplaceProductSummary.add_member(:product_id, Shapes::ShapeRef.new(shape: MarketplaceProductSummaryProductIdString, location_name: "ProductId"))
     MarketplaceProductSummary.add_member(:product_code, Shapes::ShapeRef.new(shape: String, location_name: "ProductCode"))
@@ -400,36 +443,57 @@ module Aws::PartnerCentralRevenueMeasurement
     MarketplaceProductSummary.struct_class = Types::MarketplaceProductSummary
 
     MarketplaceRevenueShareAllocationSummary.add_member(:marketplace_revenue_share_allocation_id, Shapes::ShapeRef.new(shape: MarketplaceRevenueShareAllocationId, required: true, location_name: "MarketplaceRevenueShareAllocationId"))
-    MarketplaceRevenueShareAllocationSummary.add_member(:product_id, Shapes::ShapeRef.new(shape: MarketplaceProductId, required: true, location_name: "ProductId"))
-    MarketplaceRevenueShareAllocationSummary.add_member(:product_name, Shapes::ShapeRef.new(shape: String, location_name: "ProductName"))
-    MarketplaceRevenueShareAllocationSummary.add_member(:arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Arn"))
+    MarketplaceRevenueShareAllocationSummary.add_member(:marketplace_revenue_share_identifier, Shapes::ShapeRef.new(shape: MarketplaceRevenueShareId, required: true, location_name: "MarketplaceRevenueShareIdentifier"))
     MarketplaceRevenueShareAllocationSummary.add_member(:effective_from, Shapes::ShapeRef.new(shape: AllocationEffectiveDateString, required: true, location_name: "EffectiveFrom"))
-    MarketplaceRevenueShareAllocationSummary.add_member(:effective_until, Shapes::ShapeRef.new(shape: AllocationEffectiveDateString, location_name: "EffectiveUntil"))
+    MarketplaceRevenueShareAllocationSummary.add_member(:effective_until, Shapes::ShapeRef.new(shape: AllocationEffectiveDateString, required: true, location_name: "EffectiveUntil"))
     MarketplaceRevenueShareAllocationSummary.add_member(:revenue_share_percent, Shapes::ShapeRef.new(shape: RevenueSharePercent, required: true, location_name: "RevenueSharePercent"))
     MarketplaceRevenueShareAllocationSummary.add_member(:status, Shapes::ShapeRef.new(shape: AllocationStatus, required: true, location_name: "Status"))
-    MarketplaceRevenueShareAllocationSummary.add_member(:created_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedDate"))
-    MarketplaceRevenueShareAllocationSummary.add_member(:last_modified_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedDate"))
+    MarketplaceRevenueShareAllocationSummary.add_member(:created_date, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreatedDate"))
+    MarketplaceRevenueShareAllocationSummary.add_member(:last_modified_date, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "LastModifiedDate"))
     MarketplaceRevenueShareAllocationSummary.struct_class = Types::MarketplaceRevenueShareAllocationSummary
 
     MarketplaceRevenueShareAllocationSummaryList.member = Shapes::ShapeRef.new(shape: MarketplaceRevenueShareAllocationSummary)
 
-    MarketplaceRevenueShareSummary.add_member(:product_id, Shapes::ShapeRef.new(shape: MarketplaceProductId, required: true, location_name: "ProductId"))
-    MarketplaceRevenueShareSummary.add_member(:arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Arn"))
-    MarketplaceRevenueShareSummary.add_member(:catalog, Shapes::ShapeRef.new(shape: CatalogName, location_name: "Catalog"))
-    MarketplaceRevenueShareSummary.add_member(:product_code, Shapes::ShapeRef.new(shape: String, location_name: "ProductCode"))
-    MarketplaceRevenueShareSummary.add_member(:product_name, Shapes::ShapeRef.new(shape: String, location_name: "ProductName"))
-    MarketplaceRevenueShareSummary.add_member(:created_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedDate"))
-    MarketplaceRevenueShareSummary.add_member(:last_modified_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedDate"))
-    MarketplaceRevenueShareSummary.add_member(:latest_revision, Shapes::ShapeRef.new(shape: Integer, location_name: "LatestRevision"))
-    MarketplaceRevenueShareSummary.add_member(:total_active_marketplace_revenue_share_allocation_count, Shapes::ShapeRef.new(shape: Integer, location_name: "TotalActiveMarketplaceRevenueShareAllocationCount"))
-    MarketplaceRevenueShareSummary.add_member(:total_marketplace_revenue_share_allocation_count, Shapes::ShapeRef.new(shape: Integer, location_name: "TotalMarketplaceRevenueShareAllocationCount"))
+    MarketplaceRevenueShareIdentifierList.member = Shapes::ShapeRef.new(shape: MarketplaceRevenueShareIdentifier)
+
+    MarketplaceRevenueShareProductDetail.add_member(:product_id, Shapes::ShapeRef.new(shape: MarketplaceProductId, required: true, location_name: "ProductId"))
+    MarketplaceRevenueShareProductDetail.add_member(:product_code, Shapes::ShapeRef.new(shape: ProductCode, location_name: "ProductCode"))
+    MarketplaceRevenueShareProductDetail.add_member(:product_name, Shapes::ShapeRef.new(shape: String, location_name: "ProductName"))
+    MarketplaceRevenueShareProductDetail.add_member(:accounts, Shapes::ShapeRef.new(shape: RevenueShareProductAccountDetailList, location_name: "Accounts"))
+    MarketplaceRevenueShareProductDetail.struct_class = Types::MarketplaceRevenueShareProductDetail
+
+    MarketplaceRevenueShareProductDetailList.member = Shapes::ShapeRef.new(shape: MarketplaceRevenueShareProductDetail)
+
+    MarketplaceRevenueShareProductEntry.add_member(:product_id, Shapes::ShapeRef.new(shape: MarketplaceProductIdentifier, required: true, location_name: "ProductId"))
+    MarketplaceRevenueShareProductEntry.add_member(:accounts, Shapes::ShapeRef.new(shape: RevenueShareProductAccountEntryList, location_name: "Accounts"))
+    MarketplaceRevenueShareProductEntry.struct_class = Types::MarketplaceRevenueShareProductEntry
+
+    MarketplaceRevenueShareProductEntryList.member = Shapes::ShapeRef.new(shape: MarketplaceRevenueShareProductEntry)
+
+    MarketplaceRevenueShareProductSummary.add_member(:product_id, Shapes::ShapeRef.new(shape: MarketplaceProductId, required: true, location_name: "ProductId"))
+    MarketplaceRevenueShareProductSummary.add_member(:product_code, Shapes::ShapeRef.new(shape: ProductCode, location_name: "ProductCode"))
+    MarketplaceRevenueShareProductSummary.add_member(:product_name, Shapes::ShapeRef.new(shape: String, location_name: "ProductName"))
+    MarketplaceRevenueShareProductSummary.add_member(:accounts, Shapes::ShapeRef.new(shape: RevenueShareProductAccountSummaryList, location_name: "Accounts"))
+    MarketplaceRevenueShareProductSummary.struct_class = Types::MarketplaceRevenueShareProductSummary
+
+    MarketplaceRevenueShareProductSummaryList.member = Shapes::ShapeRef.new(shape: MarketplaceRevenueShareProductSummary)
+
+    MarketplaceRevenueShareSummary.add_member(:id, Shapes::ShapeRef.new(shape: MarketplaceRevenueShareId, required: true, location_name: "Id"))
+    MarketplaceRevenueShareSummary.add_member(:arn, Shapes::ShapeRef.new(shape: MarketplaceRevenueShareArn, required: true, location_name: "Arn"))
+    MarketplaceRevenueShareSummary.add_member(:catalog, Shapes::ShapeRef.new(shape: CatalogName, required: true, location_name: "Catalog"))
+    MarketplaceRevenueShareSummary.add_member(:products, Shapes::ShapeRef.new(shape: MarketplaceRevenueShareProductSummaryList, required: true, location_name: "Products"))
+    MarketplaceRevenueShareSummary.add_member(:created_date, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreatedDate"))
+    MarketplaceRevenueShareSummary.add_member(:last_modified_date, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "LastModifiedDate"))
+    MarketplaceRevenueShareSummary.add_member(:latest_revision, Shapes::ShapeRef.new(shape: RevisionToken, required: true, location_name: "LatestRevision"))
+    MarketplaceRevenueShareSummary.add_member(:effective_from, Shapes::ShapeRef.new(shape: AllocationEffectiveDateString, location_name: "EffectiveFrom"))
+    MarketplaceRevenueShareSummary.add_member(:effective_until, Shapes::ShapeRef.new(shape: AllocationEffectiveDateString, location_name: "EffectiveUntil"))
+    MarketplaceRevenueShareSummary.add_member(:total_active_marketplace_revenue_share_allocation_count, Shapes::ShapeRef.new(shape: AllocationCount, required: true, location_name: "TotalActiveMarketplaceRevenueShareAllocationCount"))
+    MarketplaceRevenueShareSummary.add_member(:total_marketplace_revenue_share_allocation_count, Shapes::ShapeRef.new(shape: AllocationCount, required: true, location_name: "TotalMarketplaceRevenueShareAllocationCount"))
     MarketplaceRevenueShareSummary.struct_class = Types::MarketplaceRevenueShareSummary
 
     MarketplaceRevenueShareSummaryList.member = Shapes::ShapeRef.new(shape: MarketplaceRevenueShareSummary)
 
-    MarketplaceRevenueShareTagList.member = Shapes::ShapeRef.new(shape: Tag)
-
-    ProductCodeList.member = Shapes::ShapeRef.new(shape: String)
+    ProductCodeList.member = Shapes::ShapeRef.new(shape: ProductCode)
 
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Message"))
     ResourceNotFoundException.add_member(:reason, Shapes::ShapeRef.new(shape: ResourceNotFoundExceptionReason, required: true, location_name: "Reason"))
@@ -462,6 +526,9 @@ module Aws::PartnerCentralRevenueMeasurement
 
     RevenueAttributionAllocationSummaryList.member = Shapes::ShapeRef.new(shape: RevenueAttributionAllocationSummary)
 
+    RevenueAttributionContext.key = Shapes::ShapeRef.new(shape: ContextKey)
+    RevenueAttributionContext.value = Shapes::ShapeRef.new(shape: ContextValue)
+
     RevenueAttributionIdentifierList.member = Shapes::ShapeRef.new(shape: RevenueAttributionIdentifier)
 
     RevenueAttributionSummaries.member = Shapes::ShapeRef.new(shape: AttributionSummary)
@@ -478,6 +545,27 @@ module Aws::PartnerCentralRevenueMeasurement
     RevenueShareAllocation.struct_class = Types::RevenueShareAllocation
 
     RevenueShareAllocationChangeList.member = Shapes::ShapeRef.new(shape: RevenueShareAllocation)
+
+    RevenueShareProductAccountDetail.add_member(:account_type, Shapes::ShapeRef.new(shape: RevenueShareProductAccountType, required: true, location_name: "AccountType"))
+    RevenueShareProductAccountDetail.add_member(:count, Shapes::ShapeRef.new(shape: RevenueShareProductAccountCount, required: true, location_name: "Count"))
+    RevenueShareProductAccountDetail.add_member(:account_ids, Shapes::ShapeRef.new(shape: RevenueShareProductAccountIdList, required: true, location_name: "AccountIds"))
+    RevenueShareProductAccountDetail.struct_class = Types::RevenueShareProductAccountDetail
+
+    RevenueShareProductAccountDetailList.member = Shapes::ShapeRef.new(shape: RevenueShareProductAccountDetail)
+
+    RevenueShareProductAccountEntry.add_member(:account_type, Shapes::ShapeRef.new(shape: RevenueShareProductAccountType, required: true, location_name: "AccountType"))
+    RevenueShareProductAccountEntry.add_member(:account_ids, Shapes::ShapeRef.new(shape: RevenueShareProductAccountIdList, required: true, location_name: "AccountIds"))
+    RevenueShareProductAccountEntry.struct_class = Types::RevenueShareProductAccountEntry
+
+    RevenueShareProductAccountEntryList.member = Shapes::ShapeRef.new(shape: RevenueShareProductAccountEntry)
+
+    RevenueShareProductAccountIdList.member = Shapes::ShapeRef.new(shape: RevenueShareProductAccountId)
+
+    RevenueShareProductAccountSummary.add_member(:account_type, Shapes::ShapeRef.new(shape: RevenueShareProductAccountType, required: true, location_name: "AccountType"))
+    RevenueShareProductAccountSummary.add_member(:count, Shapes::ShapeRef.new(shape: RevenueShareProductAccountCount, required: true, location_name: "Count"))
+    RevenueShareProductAccountSummary.struct_class = Types::RevenueShareProductAccountSummary
+
+    RevenueShareProductAccountSummaryList.member = Shapes::ShapeRef.new(shape: RevenueShareProductAccountSummary)
 
     ServiceQuotaExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Message"))
     ServiceQuotaExceededException.add_member(:reason, Shapes::ShapeRef.new(shape: ServiceQuotaExceededExceptionReason, required: true, location_name: "Reason"))
@@ -521,34 +609,46 @@ module Aws::PartnerCentralRevenueMeasurement
     UntagResourceInput.struct_class = Types::UntagResourceInput
 
     UpdateMarketplaceRevenueShareAllocationInput.add_member(:catalog, Shapes::ShapeRef.new(shape: CatalogName, required: true, location_name: "Catalog"))
-    UpdateMarketplaceRevenueShareAllocationInput.add_member(:product_id, Shapes::ShapeRef.new(shape: MarketplaceProductId, required: true, location_name: "ProductId"))
+    UpdateMarketplaceRevenueShareAllocationInput.add_member(:marketplace_revenue_share_identifier, Shapes::ShapeRef.new(shape: MarketplaceRevenueShareIdentifier, required: true, location_name: "MarketplaceRevenueShareIdentifier"))
     UpdateMarketplaceRevenueShareAllocationInput.add_member(:marketplace_revenue_share_allocation_id, Shapes::ShapeRef.new(shape: MarketplaceRevenueShareAllocationId, required: true, location_name: "MarketplaceRevenueShareAllocationId"))
     UpdateMarketplaceRevenueShareAllocationInput.add_member(:marketplace_revenue_share_revision, Shapes::ShapeRef.new(shape: RevisionToken, required: true, location_name: "MarketplaceRevenueShareRevision"))
     UpdateMarketplaceRevenueShareAllocationInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
-    UpdateMarketplaceRevenueShareAllocationInput.add_member(:effective_from, Shapes::ShapeRef.new(shape: AllocationEffectiveDateString, location_name: "EffectiveFrom"))
-    UpdateMarketplaceRevenueShareAllocationInput.add_member(:effective_until, Shapes::ShapeRef.new(shape: AllocationEffectiveDateString, location_name: "EffectiveUntil"))
     UpdateMarketplaceRevenueShareAllocationInput.add_member(:revenue_share_percent, Shapes::ShapeRef.new(shape: RevenueSharePercent, location_name: "RevenueSharePercent"))
     UpdateMarketplaceRevenueShareAllocationInput.add_member(:status, Shapes::ShapeRef.new(shape: AllocationStatus, location_name: "Status"))
     UpdateMarketplaceRevenueShareAllocationInput.struct_class = Types::UpdateMarketplaceRevenueShareAllocationInput
 
     UpdateMarketplaceRevenueShareAllocationOutput.add_member(:marketplace_revenue_share_allocation_id, Shapes::ShapeRef.new(shape: MarketplaceRevenueShareAllocationId, required: true, location_name: "MarketplaceRevenueShareAllocationId"))
-    UpdateMarketplaceRevenueShareAllocationOutput.add_member(:product_id, Shapes::ShapeRef.new(shape: MarketplaceProductId, required: true, location_name: "ProductId"))
-    UpdateMarketplaceRevenueShareAllocationOutput.add_member(:product_name, Shapes::ShapeRef.new(shape: String, location_name: "ProductName"))
-    UpdateMarketplaceRevenueShareAllocationOutput.add_member(:arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Arn"))
+    UpdateMarketplaceRevenueShareAllocationOutput.add_member(:marketplace_revenue_share_identifier, Shapes::ShapeRef.new(shape: MarketplaceRevenueShareId, required: true, location_name: "MarketplaceRevenueShareIdentifier"))
     UpdateMarketplaceRevenueShareAllocationOutput.add_member(:effective_from, Shapes::ShapeRef.new(shape: AllocationEffectiveDateString, required: true, location_name: "EffectiveFrom"))
-    UpdateMarketplaceRevenueShareAllocationOutput.add_member(:effective_until, Shapes::ShapeRef.new(shape: AllocationEffectiveDateString, location_name: "EffectiveUntil"))
+    UpdateMarketplaceRevenueShareAllocationOutput.add_member(:effective_until, Shapes::ShapeRef.new(shape: AllocationEffectiveDateString, required: true, location_name: "EffectiveUntil"))
     UpdateMarketplaceRevenueShareAllocationOutput.add_member(:revenue_share_percent, Shapes::ShapeRef.new(shape: RevenueSharePercent, required: true, location_name: "RevenueSharePercent"))
     UpdateMarketplaceRevenueShareAllocationOutput.add_member(:status, Shapes::ShapeRef.new(shape: AllocationStatus, required: true, location_name: "Status"))
-    UpdateMarketplaceRevenueShareAllocationOutput.add_member(:created_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedDate"))
-    UpdateMarketplaceRevenueShareAllocationOutput.add_member(:last_modified_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedDate"))
-    UpdateMarketplaceRevenueShareAllocationOutput.add_member(:latest_marketplace_revenue_share_revision, Shapes::ShapeRef.new(shape: RevisionToken, location_name: "LatestMarketplaceRevenueShareRevision"))
+    UpdateMarketplaceRevenueShareAllocationOutput.add_member(:created_date, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreatedDate"))
+    UpdateMarketplaceRevenueShareAllocationOutput.add_member(:last_modified_date, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "LastModifiedDate"))
+    UpdateMarketplaceRevenueShareAllocationOutput.add_member(:marketplace_revenue_share_revision, Shapes::ShapeRef.new(shape: RevisionToken, required: true, location_name: "MarketplaceRevenueShareRevision"))
+    UpdateMarketplaceRevenueShareAllocationOutput.add_member(:marketplace_revenue_share_latest_revision, Shapes::ShapeRef.new(shape: RevisionToken, required: true, location_name: "MarketplaceRevenueShareLatestRevision"))
     UpdateMarketplaceRevenueShareAllocationOutput.struct_class = Types::UpdateMarketplaceRevenueShareAllocationOutput
+
+    UpdateMarketplaceRevenueShareInput.add_member(:catalog, Shapes::ShapeRef.new(shape: CatalogName, required: true, location_name: "Catalog"))
+    UpdateMarketplaceRevenueShareInput.add_member(:identifier, Shapes::ShapeRef.new(shape: MarketplaceRevenueShareIdentifier, required: true, location_name: "Identifier"))
+    UpdateMarketplaceRevenueShareInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
+    UpdateMarketplaceRevenueShareInput.add_member(:revision, Shapes::ShapeRef.new(shape: RevisionToken, required: true, location_name: "Revision"))
+    UpdateMarketplaceRevenueShareInput.add_member(:products, Shapes::ShapeRef.new(shape: MarketplaceRevenueShareProductEntryList, required: true, location_name: "Products"))
+    UpdateMarketplaceRevenueShareInput.struct_class = Types::UpdateMarketplaceRevenueShareInput
+
+    UpdateMarketplaceRevenueShareOutput.add_member(:id, Shapes::ShapeRef.new(shape: MarketplaceRevenueShareId, required: true, location_name: "Id"))
+    UpdateMarketplaceRevenueShareOutput.add_member(:arn, Shapes::ShapeRef.new(shape: MarketplaceRevenueShareArn, required: true, location_name: "Arn"))
+    UpdateMarketplaceRevenueShareOutput.add_member(:products, Shapes::ShapeRef.new(shape: MarketplaceRevenueShareProductSummaryList, required: true, location_name: "Products"))
+    UpdateMarketplaceRevenueShareOutput.add_member(:last_modified_date, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "LastModifiedDate"))
+    UpdateMarketplaceRevenueShareOutput.add_member(:latest_revision, Shapes::ShapeRef.new(shape: RevisionToken, required: true, location_name: "LatestRevision"))
+    UpdateMarketplaceRevenueShareOutput.struct_class = Types::UpdateMarketplaceRevenueShareOutput
 
     UpdateRevenueAttributionInput.add_member(:catalog, Shapes::ShapeRef.new(shape: CatalogName, required: true, location_name: "Catalog"))
     UpdateRevenueAttributionInput.add_member(:identifier, Shapes::ShapeRef.new(shape: RevenueAttributionIdentifier, required: true, location_name: "Identifier"))
     UpdateRevenueAttributionInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     UpdateRevenueAttributionInput.add_member(:description, Shapes::ShapeRef.new(shape: UpdateRevenueAttributionInputDescriptionString, location_name: "Description"))
     UpdateRevenueAttributionInput.add_member(:revision, Shapes::ShapeRef.new(shape: RevisionToken, required: true, location_name: "Revision"))
+    UpdateRevenueAttributionInput.add_member(:context, Shapes::ShapeRef.new(shape: RevenueAttributionContext, location_name: "Context"))
     UpdateRevenueAttributionInput.struct_class = Types::UpdateRevenueAttributionInput
 
     UpdateRevenueAttributionOutput.add_member(:id, Shapes::ShapeRef.new(shape: RevenueAttributionId, required: true, location_name: "Id"))
@@ -556,6 +656,7 @@ module Aws::PartnerCentralRevenueMeasurement
     UpdateRevenueAttributionOutput.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
     UpdateRevenueAttributionOutput.add_member(:last_modified_date, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "LastModifiedDate"))
     UpdateRevenueAttributionOutput.add_member(:latest_revision, Shapes::ShapeRef.new(shape: RevisionToken, location_name: "LatestRevision"))
+    UpdateRevenueAttributionOutput.add_member(:context, Shapes::ShapeRef.new(shape: RevenueAttributionContext, location_name: "Context"))
     UpdateRevenueAttributionOutput.struct_class = Types::UpdateRevenueAttributionOutput
 
     ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Message"))
@@ -611,6 +712,7 @@ module Aws::PartnerCentralRevenueMeasurement
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: CreateMarketplaceRevenueShareAllocationInput)
         o.output = Shapes::ShapeRef.new(shape: CreateMarketplaceRevenueShareAllocationOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
@@ -729,6 +831,7 @@ module Aws::PartnerCentralRevenueMeasurement
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -828,6 +931,21 @@ module Aws::PartnerCentralRevenueMeasurement
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:update_marketplace_revenue_share, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateMarketplaceRevenueShare"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateMarketplaceRevenueShareInput)
+        o.output = Shapes::ShapeRef.new(shape: UpdateMarketplaceRevenueShareOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:update_marketplace_revenue_share_allocation, Seahorse::Model::Operation.new.tap do |o|

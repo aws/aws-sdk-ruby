@@ -264,7 +264,8 @@ module Aws::MarketplaceDiscovery
     #     An integer representing the maximum number attempts that will be made for
     #     a single request, including the initial attempt.  For example,
     #     setting this value to 5 will result in a request being retried up to
-    #     4 times. Used in `standard` and `adaptive` retry modes.
+    #     4 times. Used in `standard` and `adaptive` retry modes. Defaults to 3,
+    #     except for DynamoDB and DynamoDB Streams, which default to 4.
     #
     #   @option options [String] :profile ("default")
     #     Used when loading credentials from the shared credentials file at `HOME/.aws/credentials`.
@@ -327,15 +328,15 @@ module Aws::MarketplaceDiscovery
     #     used by the default backoff function. This option is only used in the
     #     `legacy` retry mode.
     #
-    #   @option options [String] :retry_mode ("legacy")
+    #   @option options [String] :retry_mode ("standard")
     #     Specifies which retry algorithm to use. Values are:
     #
-    #     * `legacy` - The pre-existing retry behavior. This is the default
-    #       value if no retry mode is provided.
+    #     * `legacy` - The pre-existing retry behavior.
     #
     #     * `standard` - A standardized set of retry rules across the AWS SDKs.
     #       This includes support for retry quotas, which limit the number of
-    #       unsuccessful retries a client can make.
+    #       unsuccessful retries a client can make. This is the default value
+    #       if no retry mode is provided.
     #
     #     * `adaptive` - A retry mode that includes all the functionality of
     #       `standard` mode along with automatic client side throttling.
@@ -486,10 +487,11 @@ module Aws::MarketplaceDiscovery
     # and offers.
     #
     # @option params [String] :locale
-    #   A BCP 47 language tag or comma-separated priority list specifying the
-    #   preferred locale for response content. See `Locale` for supported
-    #   values, constraints, fallback behavior, and the default locale. If
-    #   omitted, the service returns content in the default locale.
+    #   The preferred locale for response content, as a Best Current Practice
+    #   47 (BCP 47) language tag or a comma-separated priority list of
+    #   language tags. See `Locale` for supported values, constraints,
+    #   fallback behavior, and the default locale. If you omit this field, the
+    #   service returns content in the default locale.
     #
     # @option params [required, String] :listing_id
     #   The unique identifier of the listing to retrieve.
@@ -517,6 +519,7 @@ module Aws::MarketplaceDiscovery
     #   * {Types::GetListingOutput#seller_engagements #seller_engagements} => Array&lt;Types::SellerEngagement&gt;
     #   * {Types::GetListingOutput#short_description #short_description} => String
     #   * {Types::GetListingOutput#use_cases #use_cases} => Array&lt;Types::UseCaseEntry&gt;
+    #   * {Types::GetListingOutput#purchase_indicators #purchase_indicators} => Array&lt;Types::PurchaseIndicator&gt;
     #
     #
     # @example Example: GetListing for SaaS listing
@@ -541,6 +544,10 @@ module Aws::MarketplaceDiscovery
     #       }, 
     #     ], 
     #     badges: [
+    #       {
+    #         badge_type: "QUICK_LAUNCH", 
+    #         display_name: "Quick Launch", 
+    #       }, 
     #     ], 
     #     catalog: "AWSMarketplace", 
     #     categories: [
@@ -594,6 +601,8 @@ module Aws::MarketplaceDiscovery
     #       display_name: "sample SaaS seller", 
     #       seller_profile_id: "seller-sampleSaasId", 
     #     }, 
+    #     purchase_indicators: [
+    #     ], 
     #     resources: [
     #       {
     #         value: "https://example.com/demo", 
@@ -610,6 +619,20 @@ module Aws::MarketplaceDiscovery
     #           source_name: "AWS Marketplace", 
     #           source_url: "https://aws.amazon.com/marketplace/reviews/prodview-sampleSaasId", 
     #           total_reviews: 128, 
+    #         }, 
+    #         {
+    #           average_rating: "4.6", 
+    #           source_id: "G2", 
+    #           source_name: "G2", 
+    #           source_url: "https://www.g2.com/products/sample-product/reviews", 
+    #           total_reviews: 1368, 
+    #         }, 
+    #         {
+    #           average_rating: "4.2", 
+    #           source_id: "PEERSPOT", 
+    #           source_name: "PeerSpot", 
+    #           source_url: "https://www.peerspot.com/products/sample-product-reviews", 
+    #           total_reviews: 19, 
     #         }, 
     #       ], 
     #     }, 
@@ -671,10 +694,6 @@ module Aws::MarketplaceDiscovery
     #         badge_type: "DEPLOYED_ON_AWS", 
     #         display_name: "Deployed on AWS", 
     #       }, 
-    #       {
-    #         badge_type: "QUICK_LAUNCH", 
-    #         display_name: "Quick Launch", 
-    #       }, 
     #     ], 
     #     catalog: "AWSMarketplace", 
     #     categories: [
@@ -689,8 +708,8 @@ module Aws::MarketplaceDiscovery
     #     ], 
     #     fulfillment_option_summaries: [
     #       {
-    #         display_name: "SaaS", 
-    #         fulfillment_option_type: "SAAS", 
+    #         display_name: "Amazon Machine Image", 
+    #         fulfillment_option_type: "AMAZON_MACHINE_IMAGE", 
     #       }, 
     #     ], 
     #     highlights: [
@@ -731,6 +750,8 @@ module Aws::MarketplaceDiscovery
     #       display_name: "sample AMI seller", 
     #       seller_profile_id: "seller-sampleAmiId", 
     #     }, 
+    #     purchase_indicators: [
+    #     ], 
     #     resources: [
     #       {
     #         value: "https://example.com/request-demo", 
@@ -852,6 +873,8 @@ module Aws::MarketplaceDiscovery
     #       display_name: "sample multi-product seller", 
     #       seller_profile_id: "seller-sampleMultiProductId", 
     #     }, 
+    #     purchase_indicators: [
+    #     ], 
     #     resources: [
     #       {
     #         value: "https://developer.box.com/guides/box-mcp/remote/#amazon-quick-suite", 
@@ -892,6 +915,177 @@ module Aws::MarketplaceDiscovery
     #           display_name: "Intelligent Document Processing", 
     #         }, 
     #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Example: GetListing for listing available without a subscription
+    #
+    #   resp = client.get_listing({
+    #     listing_id: "prodview-sampleNoSubscriptionId", 
+    #     locale: "en-US", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     associated_entities: [
+    #       {
+    #         offer: {
+    #           offer_id: "offer-sampleNoSubscriptionId", 
+    #           seller_of_record: {
+    #             display_name: "sample operating system seller", 
+    #             seller_profile_id: "seller-sampleNoSubscriptionId", 
+    #           }, 
+    #         }, 
+    #         product: {
+    #           manufacturer: {
+    #             display_name: "sample operating system seller", 
+    #             seller_profile_id: "seller-sampleNoSubscriptionId", 
+    #           }, 
+    #           product_id: "prod-sampleNoSubscriptionId", 
+    #           product_name: "sample operating system product", 
+    #         }, 
+    #       }, 
+    #     ], 
+    #     badges: [
+    #       {
+    #         badge_type: "DEPLOYED_ON_AWS", 
+    #         display_name: "Deployed on AWS", 
+    #       }, 
+    #       {
+    #         badge_type: "AWS_FREE_TIER", 
+    #         display_name: "AWS Free Tier", 
+    #       }, 
+    #     ], 
+    #     catalog: "AWSMarketplace", 
+    #     categories: [
+    #       {
+    #         category_id: "operating-systems", 
+    #         display_name: "Operating Systems", 
+    #       }, 
+    #     ], 
+    #     fulfillment_option_summaries: [
+    #       {
+    #         display_name: "Amazon Machine Image", 
+    #         fulfillment_option_type: "AMAZON_MACHINE_IMAGE", 
+    #       }, 
+    #     ], 
+    #     highlights: [
+    #       "Enterprise Linux optimized for Amazon EC2", 
+    #     ], 
+    #     listing_id: "prodview-sampleNoSubscriptionId", 
+    #     listing_name: "sample operating system listing", 
+    #     locale: "en-US", 
+    #     logo_thumbnail_url: "https://example.com/logos/sample-os-logo.png", 
+    #     long_description: "A sample enterprise Linux operating system for development, test, and production workloads on Amazon EC2.", 
+    #     pricing_models: [
+    #       {
+    #         display_name: "Free", 
+    #         pricing_model_type: "FREE", 
+    #       }, 
+    #     ], 
+    #     pricing_units: [
+    #     ], 
+    #     promotional_media: [
+    #     ], 
+    #     publisher: {
+    #       display_name: "sample operating system seller", 
+    #       seller_profile_id: "seller-sampleNoSubscriptionId", 
+    #     }, 
+    #     purchase_indicators: [
+    #       {
+    #         indicator_type: "AVAILABLE_FOR_USE_WITHOUT_SUBSCRIPTION", 
+    #       }, 
+    #     ], 
+    #     resources: [
+    #       {
+    #         value: "https://example.com/docs/getting-started", 
+    #         content_type: "LINK", 
+    #         display_name: "Getting started", 
+    #         resource_type: "MANUFACTURER_INSTRUCTIONS", 
+    #       }, 
+    #     ], 
+    #     seller_engagements: [
+    #     ], 
+    #     short_description: "A sample enterprise Linux image optimized for Amazon EC2.", 
+    #     use_cases: [
+    #     ], 
+    #   }
+    #
+    # @example Example: GetListing for listing not available for new subscriptions
+    #
+    #   resp = client.get_listing({
+    #     listing_id: "prodview-sampleUnavailableId", 
+    #     locale: "en-US", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     associated_entities: [
+    #       {
+    #         product: {
+    #           manufacturer: {
+    #             display_name: "sample network infrastructure seller", 
+    #             seller_profile_id: "seller-sampleUnavailableId", 
+    #           }, 
+    #           product_id: "prod-sampleUnavailableId", 
+    #           product_name: "sample network infrastructure product", 
+    #         }, 
+    #       }, 
+    #     ], 
+    #     badges: [
+    #       {
+    #         badge_type: "DEPLOYED_ON_AWS", 
+    #         display_name: "Deployed on AWS", 
+    #       }, 
+    #     ], 
+    #     catalog: "AWSMarketplace", 
+    #     categories: [
+    #       {
+    #         category_id: "network-infrastructure", 
+    #         display_name: "Network Infrastructure", 
+    #       }, 
+    #     ], 
+    #     fulfillment_option_summaries: [
+    #       {
+    #         display_name: "Helm", 
+    #         fulfillment_option_type: "HELM", 
+    #       }, 
+    #     ], 
+    #     highlights: [
+    #       "Secure application access across clouds", 
+    #     ], 
+    #     listing_id: "prodview-sampleUnavailableId", 
+    #     listing_name: "sample network infrastructure listing", 
+    #     locale: "en-US", 
+    #     logo_thumbnail_url: "https://example.com/logos/sample-network-logo.png", 
+    #     long_description: "A sample application networking platform that provides secure access and performance insights for applications that run across clouds.", 
+    #     pricing_models: [
+    #     ], 
+    #     pricing_units: [
+    #     ], 
+    #     promotional_media: [
+    #     ], 
+    #     publisher: {
+    #       display_name: "sample network infrastructure seller", 
+    #       seller_profile_id: "seller-sampleUnavailableId", 
+    #     }, 
+    #     purchase_indicators: [
+    #       {
+    #         indicator_type: "NOT_AVAILABLE_FOR_SUBSCRIPTION", 
+    #       }, 
+    #     ], 
+    #     resources: [
+    #       {
+    #         value: "Email support@example.com for technical support.", 
+    #         content_type: "OTHER", 
+    #         display_name: "Support", 
+    #         resource_type: "MANUFACTURER_SUPPORT", 
+    #       }, 
+    #     ], 
+    #     seller_engagements: [
+    #     ], 
+    #     short_description: "A sample application networking platform for multi-cloud environments.", 
+    #     use_cases: [
     #     ], 
     #   }
     #
@@ -955,12 +1149,12 @@ module Aws::MarketplaceDiscovery
     #   resp.resources[0].display_name #=> String
     #   resp.review_summary.review_source_summaries #=> Array
     #   resp.review_summary.review_source_summaries[0].source_name #=> String
-    #   resp.review_summary.review_source_summaries[0].source_id #=> String, one of "AWS_MARKETPLACE"
+    #   resp.review_summary.review_source_summaries[0].source_id #=> String, one of "AWS_MARKETPLACE", "G2", "PEERSPOT"
     #   resp.review_summary.review_source_summaries[0].source_url #=> String
     #   resp.review_summary.review_source_summaries[0].average_rating #=> String
     #   resp.review_summary.review_source_summaries[0].total_reviews #=> Integer
     #   resp.seller_engagements #=> Array
-    #   resp.seller_engagements[0].engagement_type #=> String, one of "REQUEST_FOR_PRIVATE_OFFER", "REQUEST_FOR_DEMO"
+    #   resp.seller_engagements[0].engagement_type #=> String, one of "REQUEST_FOR_PRIVATE_OFFER", "REQUEST_FOR_DEMO", "EXPRESS_PRIVATE_OFFER", "BUY_NOW", "TRY_FOR_FREE"
     #   resp.seller_engagements[0].content_type #=> String, one of "LINK"
     #   resp.seller_engagements[0].value #=> String
     #   resp.short_description #=> String
@@ -968,6 +1162,8 @@ module Aws::MarketplaceDiscovery
     #   resp.use_cases[0].use_case.description #=> String
     #   resp.use_cases[0].use_case.display_name #=> String
     #   resp.use_cases[0].use_case.value #=> String
+    #   resp.purchase_indicators #=> Array
+    #   resp.purchase_indicators[0].indicator_type #=> String, one of "NOT_AVAILABLE_FOR_SUBSCRIPTION", "AVAILABLE_FOR_USE_WITHOUT_SUBSCRIPTION"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-discovery-2026-02-05/GetListing AWS API Documentation
     #
@@ -982,10 +1178,11 @@ module Aws::MarketplaceDiscovery
     # record, availability dates, badges, and associated products.
     #
     # @option params [String] :locale
-    #   A BCP 47 language tag or comma-separated priority list specifying the
-    #   preferred locale for response content. See `Locale` for supported
-    #   values, constraints, fallback behavior, and the default locale. If
-    #   omitted, the service returns content in the default locale.
+    #   The preferred locale for response content, as a Best Current Practice
+    #   47 (BCP 47) language tag or a comma-separated priority list of
+    #   language tags. See `Locale` for supported values, constraints,
+    #   fallback behavior, and the default locale. If you omit this field, the
+    #   service returns content in the default locale.
     #
     # @option params [required, String] :offer_id
     #   The unique identifier of the offer to retrieve.
@@ -1233,10 +1430,11 @@ module Aws::MarketplaceDiscovery
     # buyer notes, and associated product-offer pairs.
     #
     # @option params [String] :locale
-    #   A BCP 47 language tag or comma-separated priority list specifying the
-    #   preferred locale for response content. See `Locale` for supported
-    #   values, constraints, fallback behavior, and the default locale. If
-    #   omitted, the service returns content in the default locale.
+    #   The preferred locale for response content, as a Best Current Practice
+    #   47 (BCP 47) language tag or a comma-separated priority list of
+    #   language tags. See `Locale` for supported values, constraints,
+    #   fallback behavior, and the default locale. If you omit this field, the
+    #   service returns content in the default locale.
     #
     # @option params [required, String] :offer_set_id
     #   The unique identifier of the offer set to retrieve.
@@ -1453,26 +1651,32 @@ module Aws::MarketplaceDiscovery
       req.send_request(options)
     end
 
-    # Returns the terms attached to an offer, such as pricing terms
-    # (usage-based, contract, BYOL, free trial), legal terms, payment
-    # schedules, validity terms, support terms, and renewal terms.
+    # Retrieves the terms attached to an offer, such as pricing terms
+    # (usage-based, contract, Bring Your Own License (BYOL), free trial),
+    # legal terms, payment schedules, validity terms, support terms, and
+    # renewal terms. The operation returns results in pages. Use `nextToken`
+    # to retrieve the next page.
     #
     # @option params [String] :locale
-    #   A BCP 47 language tag or comma-separated priority list specifying the
-    #   preferred locale for response content. See `Locale` for supported
-    #   values, constraints, fallback behavior, and the default locale. If
-    #   omitted, the service returns content in the default locale.
+    #   The preferred locale for response content, as a Best Current Practice
+    #   47 (BCP 47) language tag or a comma-separated priority list of
+    #   language tags. See `Locale` for supported values, constraints,
+    #   fallback behavior, and the default locale. If you omit this field, the
+    #   service returns content in the default locale.
     #
     # @option params [required, String] :offer_id
     #   The unique identifier of the offer whose terms to retrieve.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results that are returned per call. You can use
-    #   `nextToken` to get more results.
+    #   The maximum number of terms to return in each call. If you omit this
+    #   field, the default is 10. Use `nextToken` to retrieve the next page.
     #
     # @option params [String] :next_token
-    #   If `nextToken` is returned, there are more results available. Make the
-    #   call again using the returned token to retrieve the next page.
+    #   If the service returns `nextToken`, more results are available. The
+    #   value of `nextToken` is a unique pagination token for each page. Make
+    #   the call again with the returned token to retrieve the next page. Keep
+    #   all other arguments unchanged. Each pagination token expires after 24
+    #   hours. An expired pagination token returns a `ValidationException`.
     #
     # @return [Types::GetOfferTermsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1514,6 +1718,8 @@ module Aws::MarketplaceDiscovery
     #                   ], 
     #                   display_name: "ml.m5.2xlarge Inference (Batch)", 
     #                   price: "2.00000000", 
+    #                   regional_prices: [
+    #                   ], 
     #                   unit: "HostHrs", 
     #                 }, 
     #                 {
@@ -1528,6 +1734,8 @@ module Aws::MarketplaceDiscovery
     #                   ], 
     #                   display_name: "ml.m5.2xlarge Inference (Real-Time)", 
     #                   price: "2.00000000", 
+    #                   regional_prices: [
+    #                   ], 
     #                   unit: "HostHrs", 
     #                 }, 
     #                 {
@@ -1542,6 +1750,8 @@ module Aws::MarketplaceDiscovery
     #                   ], 
     #                   display_name: "ml.m5.large Inference (Batch)", 
     #                   price: "2.00000000", 
+    #                   regional_prices: [
+    #                   ], 
     #                   unit: "HostHrs", 
     #                 }, 
     #                 {
@@ -1556,6 +1766,8 @@ module Aws::MarketplaceDiscovery
     #                   ], 
     #                   display_name: "ml.m5.large Inference (Real-Time)", 
     #                   price: "2.00000000", 
+    #                   regional_prices: [
+    #                   ], 
     #                   unit: "HostHrs", 
     #                 }, 
     #               ], 
@@ -1665,6 +1877,70 @@ module Aws::MarketplaceDiscovery
     #     ], 
     #   }
     #
+    # @example Example: GetOfferTerms for Usage-based offer with regional pricing
+    #
+    #   resp = client.get_offer_terms({
+    #     locale: "en-US", 
+    #     offer_id: "offer-sampleRegionalPricingId", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     locale: "en-US", 
+    #     offer_terms: [
+    #       {
+    #         usage_based_pricing_term: {
+    #           type: "UsageBasedPricingTerm", 
+    #           currency_code: "USD", 
+    #           id: "term-sampleRegionalUsageBasedPricingId", 
+    #           rate_cards: [
+    #             {
+    #               rate_card: [
+    #                 {
+    #                   description: "Software usage on the t3.medium instance type", 
+    #                   dimension_key: "t3.medium", 
+    #                   dimension_labels: [
+    #                   ], 
+    #                   display_name: "t3.medium", 
+    #                   price: "0.10000000", 
+    #                   regional_prices: [
+    #                     {
+    #                       display_name: "Europe (Ireland)", 
+    #                       price: "0.12000000", 
+    #                       region: "eu-west-1", 
+    #                     }, 
+    #                     {
+    #                       display_name: "Asia Pacific (Tokyo)", 
+    #                       price: "0.14000000", 
+    #                       region: "ap-northeast-1", 
+    #                     }, 
+    #                   ], 
+    #                   unit: "Hrs", 
+    #                 }, 
+    #                 {
+    #                   description: "Software usage on the m5.large instance type", 
+    #                   dimension_key: "m5.large", 
+    #                   dimension_labels: [
+    #                   ], 
+    #                   display_name: "m5.large", 
+    #                   price: "0.20000000", 
+    #                   regional_prices: [
+    #                     {
+    #                       display_name: "Europe (Ireland)", 
+    #                       price: "0.24000000", 
+    #                       region: "eu-west-1", 
+    #                     }, 
+    #                   ], 
+    #                   unit: "Hrs", 
+    #                 }, 
+    #               ], 
+    #             }, 
+    #           ], 
+    #         }, 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Example: GetOfferTerms for BYOL offer
     #
     #   resp = client.get_offer_terms({
@@ -1721,29 +1997,33 @@ module Aws::MarketplaceDiscovery
     #               }, 
     #               rate_card: [
     #                 {
-    #                   dimension_key: "api_calls_us_east_1", 
+    #                   dimension_key: "api_calls_batch", 
     #                   dimension_labels: [
     #                     {
-    #                       display_name: "US East (N. Virginia)", 
-    #                       label_type: "Region", 
-    #                       label_value: "us-east-1", 
+    #                       display_name: "Model Batch Transform", 
+    #                       label_type: "SagemakerOption", 
+    #                       label_value: "Model Batch Transform", 
     #                     }, 
     #                   ], 
-    #                   display_name: "API Calls (US East)", 
+    #                   display_name: "API Calls (Batch)", 
     #                   price: "0.001", 
+    #                   regional_prices: [
+    #                   ], 
     #                   unit: "Requests", 
     #                 }, 
     #                 {
-    #                   dimension_key: "api_calls_us_west_2", 
+    #                   dimension_key: "api_calls_realtime", 
     #                   dimension_labels: [
     #                     {
-    #                       display_name: "US West (Oregon)", 
-    #                       label_type: "Region", 
-    #                       label_value: "us-west-2", 
+    #                       display_name: "Model Real-Time Inference", 
+    #                       label_type: "SagemakerOption", 
+    #                       label_value: "Model Real-Time Inference", 
     #                     }, 
     #                   ], 
-    #                   display_name: "API Calls (US West)", 
+    #                   display_name: "API Calls (Real-Time)", 
     #                   price: "0.001", 
+    #                   regional_prices: [
+    #                   ], 
     #                   unit: "Requests", 
     #                 }, 
     #               ], 
@@ -2038,6 +2318,10 @@ module Aws::MarketplaceDiscovery
     #   resp.offer_terms[0].configurable_upfront_pricing_term.rate_cards[0].rate_card[0].dimension_labels[0].display_name #=> String
     #   resp.offer_terms[0].configurable_upfront_pricing_term.rate_cards[0].rate_card[0].unit #=> String
     #   resp.offer_terms[0].configurable_upfront_pricing_term.rate_cards[0].rate_card[0].price #=> String
+    #   resp.offer_terms[0].configurable_upfront_pricing_term.rate_cards[0].rate_card[0].regional_prices #=> Array
+    #   resp.offer_terms[0].configurable_upfront_pricing_term.rate_cards[0].rate_card[0].regional_prices[0].region #=> String
+    #   resp.offer_terms[0].configurable_upfront_pricing_term.rate_cards[0].rate_card[0].regional_prices[0].display_name #=> String
+    #   resp.offer_terms[0].configurable_upfront_pricing_term.rate_cards[0].rate_card[0].regional_prices[0].price #=> String
     #   resp.offer_terms[0].fixed_upfront_pricing_term.id #=> String
     #   resp.offer_terms[0].fixed_upfront_pricing_term.type #=> String, one of "ByolPricingTerm", "ConfigurableUpfrontPricingTerm", "FixedUpfrontPricingTerm", "UsageBasedPricingTerm", "FreeTrialPricingTerm", "LegalTerm", "PaymentScheduleTerm", "RecurringPaymentTerm", "RenewalTerm", "SupportTerm", "ValidityTerm", "VariablePaymentTerm", "NetPaymentTerm"
     #   resp.offer_terms[0].fixed_upfront_pricing_term.currency_code #=> String
@@ -2114,6 +2398,10 @@ module Aws::MarketplaceDiscovery
     #   resp.offer_terms[0].usage_based_pricing_term.rate_cards[0].rate_card[0].dimension_labels[0].display_name #=> String
     #   resp.offer_terms[0].usage_based_pricing_term.rate_cards[0].rate_card[0].unit #=> String
     #   resp.offer_terms[0].usage_based_pricing_term.rate_cards[0].rate_card[0].price #=> String
+    #   resp.offer_terms[0].usage_based_pricing_term.rate_cards[0].rate_card[0].regional_prices #=> Array
+    #   resp.offer_terms[0].usage_based_pricing_term.rate_cards[0].rate_card[0].regional_prices[0].region #=> String
+    #   resp.offer_terms[0].usage_based_pricing_term.rate_cards[0].rate_card[0].regional_prices[0].display_name #=> String
+    #   resp.offer_terms[0].usage_based_pricing_term.rate_cards[0].rate_card[0].regional_prices[0].price #=> String
     #   resp.offer_terms[0].validity_term.id #=> String
     #   resp.offer_terms[0].validity_term.type #=> String, one of "ByolPricingTerm", "ConfigurableUpfrontPricingTerm", "FixedUpfrontPricingTerm", "UsageBasedPricingTerm", "FreeTrialPricingTerm", "LegalTerm", "PaymentScheduleTerm", "RecurringPaymentTerm", "RenewalTerm", "SupportTerm", "ValidityTerm", "VariablePaymentTerm", "NetPaymentTerm"
     #   resp.offer_terms[0].validity_term.agreement_duration #=> String
@@ -2142,10 +2430,11 @@ module Aws::MarketplaceDiscovery
     # seller engagement options.
     #
     # @option params [String] :locale
-    #   A BCP 47 language tag or comma-separated priority list specifying the
-    #   preferred locale for response content. See `Locale` for supported
-    #   values, constraints, fallback behavior, and the default locale. If
-    #   omitted, the service returns content in the default locale.
+    #   The preferred locale for response content, as a Best Current Practice
+    #   47 (BCP 47) language tag or a comma-separated priority list of
+    #   language tags. See `Locale` for supported values, constraints,
+    #   fallback behavior, and the default locale. If you omit this field, the
+    #   service returns content in the default locale.
     #
     # @option params [required, String] :product_id
     #   The unique identifier of the product to retrieve.
@@ -2168,6 +2457,7 @@ module Aws::MarketplaceDiscovery
     #   * {Types::GetProductOutput#resources #resources} => Array&lt;Types::Resource&gt;
     #   * {Types::GetProductOutput#seller_engagements #seller_engagements} => Array&lt;Types::SellerEngagement&gt;
     #   * {Types::GetProductOutput#listing_id #listing_id} => String
+    #   * {Types::GetProductOutput#purchase_indicators #purchase_indicators} => Array&lt;Types::PurchaseIndicator&gt;
     #
     #
     # @example Example: GetProduct for SaaS product with DEPLOYED status
@@ -2222,6 +2512,8 @@ module Aws::MarketplaceDiscovery
     #           url: "https://assets.example.com/images/dashboard-main.png", 
     #         }, 
     #       }, 
+    #     ], 
+    #     purchase_indicators: [
     #     ], 
     #     resources: [
     #       {
@@ -2306,6 +2598,8 @@ module Aws::MarketplaceDiscovery
     #         }, 
     #       }, 
     #     ], 
+    #     purchase_indicators: [
+    #     ], 
     #     resources: [
     #       {
     #         value: "+1-555-123-4567", 
@@ -2384,6 +2678,8 @@ module Aws::MarketplaceDiscovery
     #     product_name: "sample professional services product", 
     #     promotional_media: [
     #     ], 
+    #     purchase_indicators: [
+    #     ], 
     #     resources: [
     #       {
     #         value: "https://www.cloudexperts.example.com/docs", 
@@ -2400,6 +2696,118 @@ module Aws::MarketplaceDiscovery
     #       }, 
     #     ], 
     #     short_description: "Expert cloud migration and modernization consulting services.", 
+    #   }
+    #
+    # @example Example: GetProduct for product available without a subscription
+    #
+    #   resp = client.get_product({
+    #     locale: "en-US", 
+    #     product_id: "prod-sampleNoSubscriptionId", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     catalog: "AWSMarketplace", 
+    #     categories: [
+    #       {
+    #         category_id: "operating-systems", 
+    #         display_name: "Operating Systems", 
+    #       }, 
+    #     ], 
+    #     deployed_on_aws: "DEPLOYED", 
+    #     fulfillment_option_summaries: [
+    #       {
+    #         display_name: "Amazon Machine Image", 
+    #         fulfillment_option_type: "AMAZON_MACHINE_IMAGE", 
+    #       }, 
+    #     ], 
+    #     highlights: [
+    #       "Enterprise Linux optimized for Amazon EC2", 
+    #     ], 
+    #     listing_id: "listing-sampleNoSubscriptionId", 
+    #     locale: "en-US", 
+    #     logo_thumbnail_url: "https://example.com/logos/sample-os-logo.png", 
+    #     long_description: "A sample enterprise Linux operating system for development, test, and production workloads on Amazon EC2.", 
+    #     manufacturer: {
+    #       display_name: "sample operating system seller", 
+    #       seller_profile_id: "seller-sampleNoSubscriptionId", 
+    #     }, 
+    #     product_id: "prod-sampleNoSubscriptionId", 
+    #     product_name: "sample operating system product", 
+    #     promotional_media: [
+    #     ], 
+    #     purchase_indicators: [
+    #       {
+    #         indicator_type: "AVAILABLE_FOR_USE_WITHOUT_SUBSCRIPTION", 
+    #       }, 
+    #     ], 
+    #     resources: [
+    #       {
+    #         value: "https://example.com/docs/getting-started", 
+    #         content_type: "LINK", 
+    #         display_name: "Getting started", 
+    #         resource_type: "MANUFACTURER_INSTRUCTIONS", 
+    #       }, 
+    #     ], 
+    #     seller_engagements: [
+    #     ], 
+    #     short_description: "A sample enterprise Linux image optimized for Amazon EC2.", 
+    #   }
+    #
+    # @example Example: GetProduct for product not available for new subscriptions
+    #
+    #   resp = client.get_product({
+    #     locale: "en-US", 
+    #     product_id: "prod-sampleUnavailableId", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     catalog: "AWSMarketplace", 
+    #     categories: [
+    #       {
+    #         category_id: "network-infrastructure", 
+    #         display_name: "Network Infrastructure", 
+    #       }, 
+    #     ], 
+    #     deployed_on_aws: "DEPLOYED", 
+    #     fulfillment_option_summaries: [
+    #       {
+    #         display_name: "Helm", 
+    #         fulfillment_option_type: "HELM", 
+    #       }, 
+    #     ], 
+    #     highlights: [
+    #       "Secure application access across clouds", 
+    #     ], 
+    #     listing_id: "listing-sampleUnavailableId", 
+    #     locale: "en-US", 
+    #     logo_thumbnail_url: "https://example.com/logos/sample-network-logo.png", 
+    #     long_description: "A sample application networking platform that provides secure access and performance insights for applications that run across clouds.", 
+    #     manufacturer: {
+    #       display_name: "sample network infrastructure seller", 
+    #       seller_profile_id: "seller-sampleUnavailableId", 
+    #     }, 
+    #     product_id: "prod-sampleUnavailableId", 
+    #     product_name: "sample network infrastructure product", 
+    #     promotional_media: [
+    #     ], 
+    #     purchase_indicators: [
+    #       {
+    #         indicator_type: "NOT_AVAILABLE_FOR_SUBSCRIPTION", 
+    #       }, 
+    #     ], 
+    #     resources: [
+    #       {
+    #         value: "Email support@example.com for technical support.", 
+    #         content_type: "OTHER", 
+    #         display_name: "Support", 
+    #         resource_type: "MANUFACTURER_SUPPORT", 
+    #       }, 
+    #     ], 
+    #     seller_engagements: [
+    #     ], 
+    #     short_description: "A sample application networking platform for multi-cloud environments.", 
     #   }
     #
     # @example Request syntax with placeholder values
@@ -2444,10 +2852,12 @@ module Aws::MarketplaceDiscovery
     #   resp.resources[0].value #=> String
     #   resp.resources[0].display_name #=> String
     #   resp.seller_engagements #=> Array
-    #   resp.seller_engagements[0].engagement_type #=> String, one of "REQUEST_FOR_PRIVATE_OFFER", "REQUEST_FOR_DEMO"
+    #   resp.seller_engagements[0].engagement_type #=> String, one of "REQUEST_FOR_PRIVATE_OFFER", "REQUEST_FOR_DEMO", "EXPRESS_PRIVATE_OFFER", "BUY_NOW", "TRY_FOR_FREE"
     #   resp.seller_engagements[0].content_type #=> String, one of "LINK"
     #   resp.seller_engagements[0].value #=> String
     #   resp.listing_id #=> String
+    #   resp.purchase_indicators #=> Array
+    #   resp.purchase_indicators[0].indicator_type #=> String, one of "NOT_AVAILABLE_FOR_SUBSCRIPTION", "AVAILABLE_FOR_USE_WITHOUT_SUBSCRIPTION"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-discovery-2026-02-05/GetProduct AWS API Documentation
     #
@@ -2458,27 +2868,33 @@ module Aws::MarketplaceDiscovery
       req.send_request(options)
     end
 
-    # Returns the fulfillment options available for a product, including
+    # Retrieves the fulfillment options available for a product, including
     # deployment details such as version information, operating systems,
-    # usage instructions, and release notes.
+    # usage instructions, and release notes. The operation returns results
+    # in pages. Use `nextToken` to retrieve the next page.
     #
     # @option params [String] :locale
-    #   A BCP 47 language tag or comma-separated priority list specifying the
-    #   preferred locale for response content. See `Locale` for supported
-    #   values, constraints, fallback behavior, and the default locale. If
-    #   omitted, the service returns content in the default locale.
+    #   The preferred locale for response content, as a Best Current Practice
+    #   47 (BCP 47) language tag or a comma-separated priority list of
+    #   language tags. See `Locale` for supported values, constraints,
+    #   fallback behavior, and the default locale. If you omit this field, the
+    #   service returns content in the default locale.
     #
     # @option params [required, String] :product_id
     #   The unique identifier of the product for which to list fulfillment
     #   options.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results that are returned per call. You can use
-    #   `nextToken` to get more results.
+    #   The maximum number of fulfillment options to return in each call. If
+    #   you omit this field, the default is 25. Use `nextToken` to retrieve
+    #   the next page.
     #
     # @option params [String] :next_token
-    #   If `nextToken` is returned, there are more results available. Make the
-    #   call again using the returned token to retrieve the next page.
+    #   If the service returns `nextToken`, more results are available. The
+    #   value of `nextToken` is a unique pagination token for each page. Make
+    #   the call again with the returned token to retrieve the next page. Keep
+    #   all other arguments unchanged. Each pagination token expires after 24
+    #   hours. An expired pagination token returns a `ValidationException`.
     #
     # @return [Types::ListFulfillmentOptionsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2573,35 +2989,6 @@ module Aws::MarketplaceDiscovery
     #     locale: "en-US", 
     #   }
     #
-    # @example Example: List API Fulfillment Options with Dynamic Endpoint
-    #
-    #   resp = client.list_fulfillment_options({
-    #     locale: "en-US", 
-    #     product_id: "prod-sampleApiDynamicId", 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     fulfillment_options: [
-    #       {
-    #         api_fulfillment_option: {
-    #           aws_supported_services: [
-    #             {
-    #               description: "A managed service that enables you to develop, deploy, and maintain AI agents seamlessly.", 
-    #               display_name: "Amazon Bedrock AgentCore", 
-    #               supported_service_type: "BEDROCK_AGENTCORE", 
-    #             }, 
-    #           ], 
-    #           fulfillment_option_display_name: "API-Based Agents & Tools", 
-    #           fulfillment_option_id: "fo-sampleApiDynamicId", 
-    #           fulfillment_option_type: "API", 
-    #           usage_instructions: "Deploy to your preferred region using the dynamic endpoint.", 
-    #         }, 
-    #       }, 
-    #     ], 
-    #     locale: "en-US", 
-    #   }
-    #
     # @example Example: List CloudFormation Template Fulfillment Options
     #
     #   resp = client.list_fulfillment_options({
@@ -2614,7 +3001,9 @@ module Aws::MarketplaceDiscovery
     #     fulfillment_options: [
     #       {
     #         cloud_formation_fulfillment_option: {
+    #           architecture_diagram_url: "https://example.com/cft/architecture-diagram.png", 
     #           available_from_time: Time.parse("2021-12-15T00:00:00Z"), 
+    #           deployment_template_url: "https://example.com/cft/template.yaml", 
     #           fulfillment_option_display_name: "CloudFormation Template", 
     #           fulfillment_option_id: "fo-sampleCftId", 
     #           fulfillment_option_name: "Sophos Standalone Firewall for AWS", 
@@ -2845,6 +3234,17 @@ module Aws::MarketplaceDiscovery
     #       {
     #         saas_fulfillment_option: {
     #           available_from_time: Time.parse("2018-08-07T00:00:00.000Z"), 
+    #           deployment_templates: [
+    #             {
+    #               cloud_formation_deployment_template: {
+    #                 default_stack_name: "example-saas-quick-launch", 
+    #                 description: "Deploys the IAM role that the product needs in your AWS account.", 
+    #                 iam_policy: "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Effect\":\"Allow\",\"Action\":[\"example:Action\"],\"Resource\":[\"arn:aws:example:::EXAMPLE-RESOURCE\"]}]}", 
+    #                 template_name: "Primary deployment template", 
+    #                 template_url: "https://example.com/templates/primary.yaml", 
+    #               }, 
+    #             }, 
+    #           ], 
     #           fulfillment_option_display_name: "SaaS", 
     #           fulfillment_option_id: "fo-sampleSaasId", 
     #           fulfillment_option_type: "SAAS", 
@@ -2977,6 +3377,8 @@ module Aws::MarketplaceDiscovery
     #   resp.fulfillment_options[0].cloud_formation_fulfillment_option.release_notes #=> String
     #   resp.fulfillment_options[0].cloud_formation_fulfillment_option.usage_instructions #=> String
     #   resp.fulfillment_options[0].cloud_formation_fulfillment_option.available_from_time #=> Time
+    #   resp.fulfillment_options[0].cloud_formation_fulfillment_option.architecture_diagram_url #=> String
+    #   resp.fulfillment_options[0].cloud_formation_fulfillment_option.deployment_template_url #=> String
     #   resp.fulfillment_options[0].cloud_formation_fulfillment_option.short_description #=> String
     #   resp.fulfillment_options[0].cloud_formation_fulfillment_option.long_description #=> String
     #   resp.fulfillment_options[0].container_fulfillment_option.fulfillment_option_id #=> String
@@ -3054,6 +3456,12 @@ module Aws::MarketplaceDiscovery
     #   resp.fulfillment_options[0].saas_fulfillment_option.available_from_time #=> Time
     #   resp.fulfillment_options[0].saas_fulfillment_option.launch_url #=> String
     #   resp.fulfillment_options[0].saas_fulfillment_option.quick_launch #=> String, one of "ENABLED", "DISABLED"
+    #   resp.fulfillment_options[0].saas_fulfillment_option.deployment_templates #=> Array
+    #   resp.fulfillment_options[0].saas_fulfillment_option.deployment_templates[0].cloud_formation_deployment_template.template_name #=> String
+    #   resp.fulfillment_options[0].saas_fulfillment_option.deployment_templates[0].cloud_formation_deployment_template.description #=> String
+    #   resp.fulfillment_options[0].saas_fulfillment_option.deployment_templates[0].cloud_formation_deployment_template.default_stack_name #=> String
+    #   resp.fulfillment_options[0].saas_fulfillment_option.deployment_templates[0].cloud_formation_deployment_template.template_url #=> String
+    #   resp.fulfillment_options[0].saas_fulfillment_option.deployment_templates[0].cloud_formation_deployment_template.iam_policy #=> String
     #   resp.fulfillment_options[0].sage_maker_algorithm_fulfillment_option.fulfillment_option_id #=> String
     #   resp.fulfillment_options[0].sage_maker_algorithm_fulfillment_option.fulfillment_option_type #=> String, one of "AMAZON_MACHINE_IMAGE", "API", "CLOUDFORMATION_TEMPLATE", "CONTAINER", "HELM", "EKS_ADD_ON", "EC2_IMAGE_BUILDER_COMPONENT", "DATA_EXCHANGE", "PROFESSIONAL_SERVICES", "SAAS", "SAGEMAKER_ALGORITHM", "SAGEMAKER_MODEL"
     #   resp.fulfillment_options[0].sage_maker_algorithm_fulfillment_option.fulfillment_option_display_name #=> String
@@ -3086,9 +3494,560 @@ module Aws::MarketplaceDiscovery
       req.send_request(options)
     end
 
-    # Returns the purchase options (offers and offer sets) available to the
-    # buyer. You can filter results by product, seller, purchase option
-    # type, visibility scope, and availability status.
+    # Retrieves the requested attributes for a listing, including case
+    # studies and trust center information. The operation returns results in
+    # pages. Use `nextToken` to retrieve the next page.
+    #
+    # @option params [String] :locale
+    #   The preferred locale for response content, as a Best Current Practice
+    #   47 (BCP 47) language tag or a comma-separated priority list of
+    #   language tags. See `Locale` for supported values, constraints,
+    #   fallback behavior, and the default locale. If you omit this field, the
+    #   service returns content in the default locale.
+    #
+    # @option params [required, String] :listing_id
+    #   The unique identifier of the listing whose attributes are requested.
+    #
+    # @option params [required, Array<String>] :attribute_types
+    #   The attribute types to retrieve. Specify one or more of the following
+    #   values:
+    #
+    #   CASE\_STUDY
+    #
+    #   : Case studies associated with the listing.
+    #
+    #   SPECIALIZATION\_DETAIL
+    #
+    #   : Specializations earned for the listing.
+    #
+    #   TRUST\_CENTER\_CERTIFICATION
+    #
+    #   : Trust center certifications associated with the listing.
+    #
+    #   TRUST\_CENTER\_CONTROL
+    #
+    #   : Trust center controls associated with the listing.
+    #
+    #   TRUST\_CENTER\_DOCUMENT
+    #
+    #   : Trust center documents associated with the listing.
+    #
+    #   TRUST\_CENTER\_FAQ
+    #
+    #   : The trust center FAQ associated with the listing.
+    #
+    #   TRUST\_CENTER\_SOURCE
+    #
+    #   : Trust center sources associated with the listing.
+    #
+    #   TRUST\_CENTER\_UPDATE
+    #
+    #   : Trust center updates associated with the listing.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of attributes to return in each call. If you omit
+    #   this field, the default is 25. Use `nextToken` to retrieve the next
+    #   page.
+    #
+    # @option params [String] :next_token
+    #   If the service returns `nextToken`, more results are available. The
+    #   value of `nextToken` is a unique pagination token for each page. Make
+    #   the call again with the returned token to retrieve the next page. Keep
+    #   all other arguments unchanged. Each pagination token expires after 24
+    #   hours. An expired pagination token returns a `ValidationException`.
+    #
+    # @return [Types::ListListingAttributesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListListingAttributesOutput#locale #locale} => String
+    #   * {Types::ListListingAttributesOutput#listing_attributes #listing_attributes} => Array&lt;Types::ListingAttributeResults&gt;
+    #   * {Types::ListListingAttributesOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: List case studies for a listing
+    #
+    #   resp = client.list_listing_attributes({
+    #     attribute_types: [
+    #       "CASE_STUDY", 
+    #     ], 
+    #     listing_id: "prodview-sampleListingId", 
+    #     locale: "en-US", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     listing_attributes: [
+    #       {
+    #         case_study: {
+    #           case_study_id: "cs-sampleOne", 
+    #           case_study_name: "Disaster recovery for a connected vehicle platform", 
+    #           challenge: "The customer needed a multi-region failover strategy without doubling steady-state infrastructure cost.", 
+    #           engagement_dates: {
+    #             completion_date: Time.parse("2025-06-30T00:00:00Z"), 
+    #             start_date: Time.parse("2025-01-15T00:00:00Z"), 
+    #           }, 
+    #           implementation_approach: "Delivered in three phases over six months: assessment, pilot region build-out, and full production cutover.", 
+    #           outcome: "Achieved a 5-minute RTO, passed a full regional failover audit, and reduced DR spend by 30%.", 
+    #           resolution: "Deployed a multi-region active-passive architecture with automated cross-Region failover.", 
+    #           resources: [
+    #             {
+    #               value: "https://partner.example.com/case-studies/connected-vehicle-dr", 
+    #               content_type: "LINK", 
+    #               resource_type: "CASE_STUDY_WEBSITE", 
+    #             }, 
+    #           ], 
+    #           short_description: "Multi-region failover for a connected vehicle platform, cutting RTO to minutes.", 
+    #         }, 
+    #       }, 
+    #       {
+    #         case_study: {
+    #           case_study_id: "cs-sampleTwo", 
+    #           case_study_name: "Scaling analytics for a global retailer", 
+    #           resources: [
+    #             {
+    #               value: "https://partner.example.com/case-studies/global-retail-analytics", 
+    #               content_type: "LINK", 
+    #               resource_type: "CASE_STUDY_WEBSITE", 
+    #             }, 
+    #           ], 
+    #           short_description: "Rebuilt a retailer's analytics pipeline to handle peak-season load at a fraction of the cost.", 
+    #         }, 
+    #       }, 
+    #     ], 
+    #     locale: "en-US", 
+    #   }
+    #
+    # @example Example: List case studies with pagination
+    #
+    #   resp = client.list_listing_attributes({
+    #     attribute_types: [
+    #       "CASE_STUDY", 
+    #     ], 
+    #     listing_id: "prodview-sampleListingId", 
+    #     locale: "en-US", 
+    #     max_results: 1, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     listing_attributes: [
+    #       {
+    #         case_study: {
+    #           case_study_id: "cs-sampleOne", 
+    #           case_study_name: "Disaster recovery for a connected vehicle platform", 
+    #           challenge: "The customer needed a multi-region failover strategy without doubling steady-state infrastructure cost.", 
+    #           engagement_dates: {
+    #             completion_date: Time.parse("2025-06-30T00:00:00Z"), 
+    #             start_date: Time.parse("2025-01-15T00:00:00Z"), 
+    #           }, 
+    #           implementation_approach: "Delivered in three phases over six months: assessment, pilot region build-out, and full production cutover.", 
+    #           outcome: "Achieved a 5-minute RTO, passed a full regional failover audit, and reduced DR spend by 30%.", 
+    #           resolution: "Deployed a multi-region active-passive architecture with automated cross-Region failover.", 
+    #           resources: [
+    #             {
+    #               value: "https://partner.example.com/case-studies/connected-vehicle-dr", 
+    #               content_type: "LINK", 
+    #               resource_type: "CASE_STUDY_WEBSITE", 
+    #             }, 
+    #           ], 
+    #           short_description: "Multi-region failover for a connected vehicle platform, cutting RTO to minutes.", 
+    #         }, 
+    #       }, 
+    #     ], 
+    #     locale: "en-US", 
+    #     next_token: "bW9jay10b2tlbg==", 
+    #   }
+    #
+    # @example Example: List specializations for a listing
+    #
+    #   resp = client.list_listing_attributes({
+    #     attribute_types: [
+    #       "SPECIALIZATION_DETAIL", 
+    #     ], 
+    #     listing_id: "prodview-sampleListingId", 
+    #     locale: "en-US", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     listing_attributes: [
+    #       {
+    #         specialization_detail: {
+    #           specialization: {
+    #             case_study_ids: [
+    #               "cs-sampleOne", 
+    #             ], 
+    #             description: "Recognizes partners with validated expertise designing and operating storage solutions on AWS.", 
+    #             specialization_id: "spec-9d2f6h4j8k1m5n3p", 
+    #             specialization_name: "Storage Services Competency", 
+    #             specialization_types: [
+    #               {
+    #                 display_name: "Services", 
+    #                 specialization_type: "SERVICES", 
+    #               }, 
+    #             ], 
+    #           }, 
+    #         }, 
+    #       }, 
+    #       {
+    #         specialization_detail: {
+    #           specialization_category: {
+    #             parent_specialization_id: "spec-9d2f6h4j8k1m5n3p", 
+    #             specialization_category_id: "spec-4k8n2p6x9m3q7w1z", 
+    #             specialization_category_name: "Data Migration", 
+    #           }, 
+    #         }, 
+    #       }, 
+    #       {
+    #         specialization_detail: {
+    #           specialization_category: {
+    #             parent_specialization_id: "spec-9d2f6h4j8k1m5n3p", 
+    #             specialization_category_id: "spec-7a3c5e1g9j2l6n4r", 
+    #             specialization_category_name: "Backup and Recovery", 
+    #           }, 
+    #         }, 
+    #       }, 
+    #     ], 
+    #     locale: "en-US", 
+    #   }
+    #
+    # @example Example: Request multiple Trust Center attribute types
+    #
+    #   resp = client.list_listing_attributes({
+    #     attribute_types: [
+    #       "TRUST_CENTER_SOURCE", 
+    #       "TRUST_CENTER_CERTIFICATION", 
+    #       "TRUST_CENTER_DOCUMENT", 
+    #     ], 
+    #     listing_id: "prodview-sampleListingId", 
+    #     locale: "en-US", 
+    #     max_results: 25, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     listing_attributes: [
+    #       {
+    #         trust_center_source: {
+    #           value: "https://trust.example.com/", 
+    #           content_type: "LINK", 
+    #           provider: "DRATA", 
+    #         }, 
+    #       }, 
+    #       {
+    #         trust_center_certification: {
+    #           certification_type: "SOC2_TYPE_2", 
+    #           display_name: "SOC 2 Type II", 
+    #           logo_url: "https://assets.example.com/certifications/soc2.svg", 
+    #         }, 
+    #       }, 
+    #       {
+    #         trust_center_document: {
+    #           value: "https://trust.example.com/documents/request-access", 
+    #           access_type: "REQUEST_ACCESS", 
+    #           content_type: "LINK", 
+    #           display_name: "Penetration Test Report", 
+    #           subject_area: "Security", 
+    #         }, 
+    #       }, 
+    #     ], 
+    #     locale: "en-US", 
+    #   }
+    #
+    # @example Example: List a Trust Center certification
+    #
+    #   resp = client.list_listing_attributes({
+    #     attribute_types: [
+    #       "TRUST_CENTER_CERTIFICATION", 
+    #     ], 
+    #     listing_id: "prodview-sampleListingId", 
+    #     locale: "en-US", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     listing_attributes: [
+    #       {
+    #         trust_center_certification: {
+    #           certification_type: "SOC2_TYPE_2", 
+    #           display_name: "SOC 2 Type II", 
+    #           logo_url: "https://assets.example.com/certifications/soc2.svg", 
+    #         }, 
+    #       }, 
+    #     ], 
+    #     locale: "en-US", 
+    #   }
+    #
+    # @example Example: List a Trust Center document that requires access
+    #
+    #   resp = client.list_listing_attributes({
+    #     attribute_types: [
+    #       "TRUST_CENTER_DOCUMENT", 
+    #     ], 
+    #     listing_id: "prodview-sampleListingId", 
+    #     locale: "en-US", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     listing_attributes: [
+    #       {
+    #         trust_center_document: {
+    #           value: "https://trust.example.com/documents/request-access", 
+    #           access_type: "REQUEST_ACCESS", 
+    #           content_type: "LINK", 
+    #           display_name: "Penetration Test Report", 
+    #           subject_area: "Security", 
+    #         }, 
+    #       }, 
+    #     ], 
+    #     locale: "en-US", 
+    #   }
+    #
+    # @example Example: List a view-only Trust Center document
+    #
+    #   resp = client.list_listing_attributes({
+    #     attribute_types: [
+    #       "TRUST_CENTER_DOCUMENT", 
+    #     ], 
+    #     listing_id: "prodview-sampleListingId", 
+    #     locale: "en-US", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     listing_attributes: [
+    #       {
+    #         trust_center_document: {
+    #           value: "https://trust.example.com/documents/privacy-policy", 
+    #           access_type: "VIEW", 
+    #           content_type: "LINK", 
+    #           display_name: "Privacy Policy", 
+    #           subject_area: "Privacy", 
+    #         }, 
+    #       }, 
+    #     ], 
+    #     locale: "en-US", 
+    #   }
+    #
+    # @example Example: List a downloadable Trust Center document
+    #
+    #   resp = client.list_listing_attributes({
+    #     attribute_types: [
+    #       "TRUST_CENTER_DOCUMENT", 
+    #     ], 
+    #     listing_id: "prodview-sampleListingId", 
+    #     locale: "en-US", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     listing_attributes: [
+    #       {
+    #         trust_center_document: {
+    #           value: "https://trust.example.com/documents/soc2-report.pdf", 
+    #           access_type: "DOWNLOAD", 
+    #           content_type: "LINK", 
+    #           display_name: "SOC 2 Type II Report", 
+    #           subject_area: "Compliance", 
+    #         }, 
+    #       }, 
+    #     ], 
+    #     locale: "en-US", 
+    #   }
+    #
+    # @example Example: List Trust Center controls
+    #
+    #   resp = client.list_listing_attributes({
+    #     attribute_types: [
+    #       "TRUST_CENTER_CONTROL", 
+    #     ], 
+    #     listing_id: "prodview-sampleListingId", 
+    #     locale: "en-US", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     listing_attributes: [
+    #       {
+    #         trust_center_control: {
+    #           name: "Data Access", 
+    #           domains: [
+    #             "SECURITY", 
+    #           ], 
+    #         }, 
+    #       }, 
+    #       {
+    #         trust_center_control: {
+    #           name: "Disaster Recovery Testing", 
+    #           description: "Disaster recovery testing is performed annually.", 
+    #           domains: [
+    #             "RESILIENCE", 
+    #           ], 
+    #         }, 
+    #       }, 
+    #       {
+    #         trust_center_control: {
+    #           name: "Customer Data Use", 
+    #           description: "Customer data is not used for model training.", 
+    #           domains: [
+    #             "AI_GOVERNANCE", 
+    #           ], 
+    #         }, 
+    #       }, 
+    #     ], 
+    #     locale: "en-US", 
+    #   }
+    #
+    # @example Example: List a Trust Center frequently asked question
+    #
+    #   resp = client.list_listing_attributes({
+    #     attribute_types: [
+    #       "TRUST_CENTER_FAQ", 
+    #     ], 
+    #     listing_id: "prodview-sampleListingId", 
+    #     locale: "en-US", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     listing_attributes: [
+    #       {
+    #         trust_center_faq: {
+    #           answer: "Customer data is encrypted in transit and at rest.", 
+    #           question: "Is customer data encrypted?", 
+    #           subject_area: "Privacy", 
+    #         }, 
+    #       }, 
+    #     ], 
+    #     locale: "en-US", 
+    #   }
+    #
+    # @example Example: List Trust Center updates
+    #
+    #   resp = client.list_listing_attributes({
+    #     attribute_types: [
+    #       "TRUST_CENTER_UPDATE", 
+    #     ], 
+    #     listing_id: "prodview-sampleListingId", 
+    #     locale: "en-US", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     listing_attributes: [
+    #       {
+    #         trust_center_update: {
+    #           description: "The current SOC 2 Type II report is now available.", 
+    #           published_time: Time.parse("2026-09-01T12:00:00Z"), 
+    #           title: "SOC 2 report renewed", 
+    #         }, 
+    #       }, 
+    #       {
+    #         trust_center_update: {
+    #           description: "The previous SOC 2 Type II report remains available for reference.", 
+    #           published_time: Time.parse("2026-09-01T12:00:00Z"), 
+    #           title: "SOC 2 report renewed", 
+    #         }, 
+    #       }, 
+    #     ], 
+    #     locale: "en-US", 
+    #   }
+    #
+    # @example Example: Valid attribute types that do not apply to the listing
+    #
+    #   resp = client.list_listing_attributes({
+    #     attribute_types: [
+    #       "TRUST_CENTER_CERTIFICATION", 
+    #     ], 
+    #     listing_id: "prodview-sampleNonApplicableId", 
+    #     locale: "en-US", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     listing_attributes: [
+    #     ], 
+    #     locale: "en-US", 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_listing_attributes({
+    #     locale: "Locale",
+    #     listing_id: "ListingId", # required
+    #     attribute_types: ["CASE_STUDY"], # required, accepts CASE_STUDY, SPECIALIZATION_DETAIL, TRUST_CENTER_SOURCE, TRUST_CENTER_CERTIFICATION, TRUST_CENTER_DOCUMENT, TRUST_CENTER_CONTROL, TRUST_CENTER_FAQ, TRUST_CENTER_UPDATE
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.locale #=> String
+    #   resp.listing_attributes #=> Array
+    #   resp.listing_attributes[0].case_study.case_study_id #=> String
+    #   resp.listing_attributes[0].case_study.case_study_name #=> String
+    #   resp.listing_attributes[0].case_study.short_description #=> String
+    #   resp.listing_attributes[0].case_study.engagement_dates.start_date #=> Time
+    #   resp.listing_attributes[0].case_study.engagement_dates.completion_date #=> Time
+    #   resp.listing_attributes[0].case_study.challenge #=> String
+    #   resp.listing_attributes[0].case_study.resolution #=> String
+    #   resp.listing_attributes[0].case_study.implementation_approach #=> String
+    #   resp.listing_attributes[0].case_study.outcome #=> String
+    #   resp.listing_attributes[0].case_study.resources #=> Array
+    #   resp.listing_attributes[0].case_study.resources[0].content_type #=> String, one of "EMAIL", "PHONE_NUMBER", "LINK", "OTHER"
+    #   resp.listing_attributes[0].case_study.resources[0].value #=> String
+    #   resp.listing_attributes[0].case_study.resources[0].display_name #=> String
+    #   resp.listing_attributes[0].case_study.resources[0].resource_type #=> String, one of "CASE_STUDY_WEBSITE"
+    #   resp.listing_attributes[0].specialization_detail.specialization.specialization_id #=> String
+    #   resp.listing_attributes[0].specialization_detail.specialization.specialization_name #=> String
+    #   resp.listing_attributes[0].specialization_detail.specialization.description #=> String
+    #   resp.listing_attributes[0].specialization_detail.specialization.specialization_types #=> Array
+    #   resp.listing_attributes[0].specialization_detail.specialization.specialization_types[0].specialization_type #=> String, one of "USE_CASE", "INDUSTRY", "SERVICES"
+    #   resp.listing_attributes[0].specialization_detail.specialization.specialization_types[0].display_name #=> String
+    #   resp.listing_attributes[0].specialization_detail.specialization.case_study_ids #=> Array
+    #   resp.listing_attributes[0].specialization_detail.specialization.case_study_ids[0] #=> String
+    #   resp.listing_attributes[0].specialization_detail.specialization_category.specialization_category_id #=> String
+    #   resp.listing_attributes[0].specialization_detail.specialization_category.specialization_category_name #=> String
+    #   resp.listing_attributes[0].specialization_detail.specialization_category.parent_specialization_id #=> String
+    #   resp.listing_attributes[0].trust_center_source.content_type #=> String, one of "EMAIL", "PHONE_NUMBER", "LINK", "OTHER"
+    #   resp.listing_attributes[0].trust_center_source.value #=> String
+    #   resp.listing_attributes[0].trust_center_source.display_name #=> String
+    #   resp.listing_attributes[0].trust_center_source.provider #=> String, one of "DRATA", "VANTA", "OTHER"
+    #   resp.listing_attributes[0].trust_center_certification.certification_type #=> String
+    #   resp.listing_attributes[0].trust_center_certification.display_name #=> String
+    #   resp.listing_attributes[0].trust_center_certification.logo_url #=> String
+    #   resp.listing_attributes[0].trust_center_document.content_type #=> String, one of "EMAIL", "PHONE_NUMBER", "LINK", "OTHER"
+    #   resp.listing_attributes[0].trust_center_document.value #=> String
+    #   resp.listing_attributes[0].trust_center_document.display_name #=> String
+    #   resp.listing_attributes[0].trust_center_document.subject_area #=> String
+    #   resp.listing_attributes[0].trust_center_document.access_type #=> String, one of "DOWNLOAD", "VIEW", "REQUEST_ACCESS"
+    #   resp.listing_attributes[0].trust_center_control.name #=> String
+    #   resp.listing_attributes[0].trust_center_control.description #=> String
+    #   resp.listing_attributes[0].trust_center_control.domains #=> Array
+    #   resp.listing_attributes[0].trust_center_control.domains[0] #=> String, one of "SECURITY", "AI_GOVERNANCE", "RESILIENCE"
+    #   resp.listing_attributes[0].trust_center_faq.question #=> String
+    #   resp.listing_attributes[0].trust_center_faq.answer #=> String
+    #   resp.listing_attributes[0].trust_center_faq.subject_area #=> String
+    #   resp.listing_attributes[0].trust_center_update.title #=> String
+    #   resp.listing_attributes[0].trust_center_update.description #=> String
+    #   resp.listing_attributes[0].trust_center_update.published_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-discovery-2026-02-05/ListListingAttributes AWS API Documentation
+    #
+    # @overload list_listing_attributes(params = {})
+    # @param [Hash] params ({})
+    def list_listing_attributes(params = {}, options = {})
+      req = build_request(:list_listing_attributes, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the purchase options (offers and offer sets) available to
+    # you. You can filter results by product, seller, purchase option type,
+    # visibility scope, and availability status. The operation returns
+    # results in pages. Use `nextToken` to retrieve the next page.
     #
     # <note markdown="1"> You must include at least one of the following filters in the request:
     # a `PRODUCT_ID` filter to specify the product for which to retrieve
@@ -3098,23 +4057,27 @@ module Aws::MarketplaceDiscovery
     #  </note>
     #
     # @option params [String] :locale
-    #   A BCP 47 language tag or comma-separated priority list specifying the
-    #   preferred locale for response content. See `Locale` for supported
-    #   values, constraints, fallback behavior, and the default locale. If
-    #   omitted, the service returns content in the default locale.
+    #   The preferred locale for response content, as a Best Current Practice
+    #   47 (BCP 47) language tag or a comma-separated priority list of
+    #   language tags. See `Locale` for supported values, constraints,
+    #   fallback behavior, and the default locale. If you omit this field, the
+    #   service returns content in the default locale.
     #
     # @option params [Array<Types::PurchaseOptionFilter>] :filters
-    #   Filters to narrow the results. Multiple filters are combined with AND
-    #   logic. Multiple values within the same filter are combined with OR
-    #   logic.
+    #   Filters to narrow the results. A result must match every filter.
+    #   Within one filter, a result matches if it has any of the values.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results that are returned per call. You can use
-    #   `nextToken` to get more results.
+    #   The maximum number of purchase options to return in each call. If you
+    #   omit this field, the default is 25. Use `nextToken` to retrieve the
+    #   next page.
     #
     # @option params [String] :next_token
-    #   If `nextToken` is returned, there are more results available. Make the
-    #   call again using the returned token to retrieve the next page.
+    #   If the service returns `nextToken`, more results are available. The
+    #   value of `nextToken` is a unique pagination token for each page. Make
+    #   the call again with the returned token to retrieve the next page. Keep
+    #   all other arguments unchanged. Each pagination token expires after 24
+    #   hours. An expired pagination token returns a `ValidationException`.
     #
     # @return [Types::ListPurchaseOptionsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3313,32 +4276,36 @@ module Aws::MarketplaceDiscovery
       req.send_request(options)
     end
 
-    # Returns available facet values for filtering listings, such as
+    # Retrieves the available facet values for filtering listings, such as
     # categories, pricing models, fulfillment option types, publishers, and
     # customer ratings. Each facet value includes a count of matching
     # listings.
     #
     # @option params [String] :locale
-    #   A BCP 47 language tag or comma-separated priority list specifying the
-    #   preferred locale for response content. See `Locale` for supported
-    #   values, constraints, fallback behavior, and the default locale. If
-    #   omitted, the service returns content in the default locale.
+    #   The preferred locale for response content, as a Best Current Practice
+    #   47 (BCP 47) language tag or a comma-separated priority list of
+    #   language tags. See `Locale` for supported values, constraints,
+    #   fallback behavior, and the default locale. If you omit this field, the
+    #   service returns content in the default locale.
     #
     # @option params [String] :search_text
     #   The search query text to filter listings before retrieving facets.
     #
     # @option params [Array<Types::SearchFilter>] :filters
-    #   Filters to apply before retrieving facets. Multiple filters are
-    #   combined with AND logic. Multiple values within the same filter are
-    #   combined with OR logic.
+    #   Filters to apply before retrieving facets. A result must match every
+    #   filter. Within one filter, a result matches if it has any of the
+    #   values.
     #
     # @option params [Array<String>] :facet_types
-    #   A list of specific facet types to retrieve. If empty or null, all
-    #   available facets are returned.
+    #   The facet types to retrieve. If you omit this field or leave it empty,
+    #   the service returns all available facets.
     #
     # @option params [String] :next_token
-    #   If `nextToken` is returned, there are more results available. Make the
-    #   call again using the returned token to retrieve the next page.
+    #   If the service returns `nextToken`, more results are available. The
+    #   value of `nextToken` is a unique pagination token for each page. Make
+    #   the call again with the returned token to retrieve the next page. Keep
+    #   all other arguments unchanged. Each pagination token expires after 24
+    #   hours. An expired pagination token returns a `ValidationException`.
     #
     # @return [Types::SearchFacetsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3479,6 +4446,121 @@ module Aws::MarketplaceDiscovery
     #     total_results: 85, 
     #   }
     #
+    # @example Example: Get specialization facets
+    #
+    #   # Retrieve specialization and specialization category facets for listings that earned the Travel and Hospitality Services
+    #   # Competency
+    #
+    #   resp = client.search_facets({
+    #     facet_types: [
+    #       "SPECIALIZATION", 
+    #       "SPECIALIZATION_CATEGORY", 
+    #     ], 
+    #     filters: [
+    #       {
+    #         filter_type: "SPECIALIZATION", 
+    #         filter_values: [
+    #           "spec-0ae8wm2xxde76e", 
+    #         ], 
+    #       }, 
+    #     ], 
+    #     locale: "en-US", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     listing_facets: {
+    #       "SPECIALIZATION" => [
+    #         {
+    #           value: "spec-0ae8wm2xxde76e", 
+    #           count: 12, 
+    #           display_name: "Travel and Hospitality Services Competency", 
+    #         }, 
+    #         {
+    #           value: "spec-znwmf49a15h7a6", 
+    #           count: 3, 
+    #           display_name: "Migration and Modernization Software Competency", 
+    #         }, 
+    #       ], 
+    #       "SPECIALIZATION_CATEGORY" => [
+    #         {
+    #           value: "spec-4xtf39u7bve512", 
+    #           count: 9, 
+    #           display_name: "Digital Customer Engagement", 
+    #           parent: "spec-0ae8wm2xxde76e", 
+    #         }, 
+    #         {
+    #           value: "spec-avu0aodtdpco2t", 
+    #           count: 4, 
+    #           display_name: "Internet of Things", 
+    #           parent: "spec-0ae8wm2xxde76e", 
+    #         }, 
+    #         {
+    #           value: "spec-a9vn6mto0omjgr", 
+    #           count: 2, 
+    #           display_name: "Data Mobility", 
+    #           parent: "spec-znwmf49a15h7a6", 
+    #         }, 
+    #       ], 
+    #     }, 
+    #     total_results: 12, 
+    #   }
+    #
+    # @example Example: Get certification facets
+    #
+    #   # Retrieve certification values available for filtering
+    #
+    #   resp = client.search_facets({
+    #     facet_types: [
+    #       "CERTIFICATES", 
+    #     ], 
+    #     locale: "en-US", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     listing_facets: {
+    #       "CERTIFICATES" => [
+    #         {
+    #           value: "SOC2_TYPE_2", 
+    #           count: 80, 
+    #           display_name: "SOC 2 Type II", 
+    #         }, 
+    #         {
+    #           value: "ISO_27001", 
+    #           count: 65, 
+    #           display_name: "ISO 27001", 
+    #         }, 
+    #       ], 
+    #     }, 
+    #     total_results: 4500, 
+    #   }
+    #
+    # @example Example: Get Trust Center availability facets
+    #
+    #   # Retrieve Trust Center availability for filtering
+    #
+    #   resp = client.search_facets({
+    #     facet_types: [
+    #       "TRUST_CENTER", 
+    #     ], 
+    #     locale: "en-US", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     listing_facets: {
+    #       "TRUST_CENTER" => [
+    #         {
+    #           value: "HAS_TRUST_CENTER", 
+    #           count: 125, 
+    #           display_name: "Trust Center available", 
+    #         }, 
+    #       ], 
+    #     }, 
+    #     total_results: 4500, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.search_facets({
@@ -3486,11 +4568,11 @@ module Aws::MarketplaceDiscovery
     #     search_text: "SearchText",
     #     filters: [
     #       {
-    #         filter_type: "MIN_AVERAGE_CUSTOMER_RATING", # required, accepts MIN_AVERAGE_CUSTOMER_RATING, MAX_AVERAGE_CUSTOMER_RATING, CATEGORY, PUBLISHER, FULFILLMENT_OPTION_TYPE, PRICING_MODEL, PRICING_UNIT, DEPLOYED_ON_AWS, NUMBER_OF_PRODUCTS
+    #         filter_type: "MIN_AVERAGE_CUSTOMER_RATING", # required, accepts MIN_AVERAGE_CUSTOMER_RATING, MAX_AVERAGE_CUSTOMER_RATING, CATEGORY, PUBLISHER, FULFILLMENT_OPTION_TYPE, PRICING_MODEL, PRICING_UNIT, DEPLOYED_ON_AWS, NUMBER_OF_PRODUCTS, CERTIFICATES, PRODUCT_ID, SPECIALIZATION, SPECIALIZATION_CATEGORY, SELLER_ENGAGEMENT, TRUST_CENTER
     #         filter_values: ["SearchFilterValue"], # required
     #       },
     #     ],
-    #     facet_types: ["AVERAGE_CUSTOMER_RATING"], # accepts AVERAGE_CUSTOMER_RATING, CATEGORY, PUBLISHER, FULFILLMENT_OPTION_TYPE, PRICING_MODEL, PRICING_UNIT, DEPLOYED_ON_AWS, NUMBER_OF_PRODUCTS
+    #     facet_types: ["AVERAGE_CUSTOMER_RATING"], # accepts AVERAGE_CUSTOMER_RATING, CATEGORY, PUBLISHER, FULFILLMENT_OPTION_TYPE, PRICING_MODEL, PRICING_UNIT, DEPLOYED_ON_AWS, NUMBER_OF_PRODUCTS, CERTIFICATES, SPECIALIZATION, SPECIALIZATION_CATEGORY, SELLER_ENGAGEMENT, TRUST_CENTER
     #     next_token: "NextToken",
     #   })
     #
@@ -3514,39 +4596,62 @@ module Aws::MarketplaceDiscovery
       req.send_request(options)
     end
 
-    # Returns a list of product listings based on search criteria and
-    # filters. You can search by keyword, filter by category, pricing model,
-    # fulfillment type, and other attributes, and sort results by relevance
-    # or customer rating.
+    # Searches for listings that match your search criteria and filters. You
+    # can search by keyword, filter by category, pricing model, fulfillment
+    # type, and other attributes, and sort results by relevance or customer
+    # rating. The operation returns results in pages. Use `nextToken` to
+    # retrieve the next page.
     #
     # @option params [String] :locale
-    #   A BCP 47 language tag or comma-separated priority list specifying the
-    #   preferred locale for response content. See `Locale` for supported
-    #   values, constraints, fallback behavior, and the default locale. If
-    #   omitted, the service returns content in the default locale.
+    #   The preferred locale for response content, as a Best Current Practice
+    #   47 (BCP 47) language tag or a comma-separated priority list of
+    #   language tags. See `Locale` for supported values, constraints,
+    #   fallback behavior, and the default locale. If you omit this field, the
+    #   service returns content in the default locale.
     #
     # @option params [String] :search_text
     #   The search query text to find relevant listings.
     #
     # @option params [Array<Types::SearchFilter>] :filters
-    #   Filters to narrow search results. Multiple filters are combined with
-    #   AND logic. Multiple values within the same filter are combined with OR
-    #   logic.
+    #   Filters to narrow search results. A result must match every filter.
+    #   Within one filter, a result matches if it has any of the values.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results that are returned per call. You can use
-    #   `nextToken` to get more results.
+    #   The maximum number of listings to return in each call. If you omit
+    #   this field, the default is 25. Use `nextToken` to retrieve the next
+    #   page.
     #
     # @option params [String] :sort_by
-    #   The field to sort results by. Valid values are `RELEVANCE` and
-    #   `AVERAGE_CUSTOMER_RATING`.
+    #   The field to sort results by. If you do not specify a value, the
+    #   service sorts by `RELEVANCE`. This field has one of the following
+    #   values:
+    #
+    #   AVERAGE\_CUSTOMER\_RATING
+    #
+    #   : Sorts by average customer rating.
+    #
+    #   RELEVANCE
+    #
+    #   : Sorts by relevance to the search query.
     #
     # @option params [String] :sort_order
-    #   The sort direction. Valid values are `DESCENDING` and `ASCENDING`.
+    #   The sort direction. If you do not specify a value, the service sorts
+    #   in `DESCENDING` order. This field has one of the following values:
+    #
+    #   ASCENDING
+    #
+    #   : Sorts from lowest to highest.
+    #
+    #   DESCENDING
+    #
+    #   : Sorts from highest to lowest.
     #
     # @option params [String] :next_token
-    #   If `nextToken` is returned, there are more results available. Make the
-    #   call again using the returned token to retrieve the next page.
+    #   If the service returns `nextToken`, more results are available. The
+    #   value of `nextToken` is a unique pagination token for each page. Make
+    #   the call again with the returned token to retrieve the next page. Keep
+    #   all other arguments unchanged. Each pagination token expires after 24
+    #   hours. An expired pagination token returns a `ValidationException`.
     #
     # @return [Types::SearchListingsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3559,7 +4664,7 @@ module Aws::MarketplaceDiscovery
     #
     # @example Example: Search for machine learning listings
     #
-    #   # Search for SaaS listings in the machine learning category with sorting by relevance
+    #   # Search for ISO 27001 certified SaaS listings in the machine learning category, sorted by relevance
     #
     #   resp = client.search_listings({
     #     filters: [
@@ -3573,6 +4678,12 @@ module Aws::MarketplaceDiscovery
     #         filter_type: "FULFILLMENT_OPTION_TYPE", 
     #         filter_values: [
     #           "SAAS", 
+    #         ], 
+    #       }, 
+    #       {
+    #         filter_type: "CERTIFICATES", 
+    #         filter_values: [
+    #           "ISO_27001", 
     #         ], 
     #       }, 
     #     ], 
@@ -3605,6 +4716,9 @@ module Aws::MarketplaceDiscovery
     #             display_name: "Free Trial", 
     #           }, 
     #         ], 
+    #         case_studies_summary: {
+    #           case_study_count: 7, 
+    #         }, 
     #         catalog: "AWSMarketplace", 
     #         categories: [
     #           {
@@ -3645,13 +4759,157 @@ module Aws::MarketplaceDiscovery
     #               source_name: "AWS Marketplace", 
     #               total_reviews: 100, 
     #             }, 
+    #             {
+    #               average_rating: "4.6", 
+    #               source_id: "G2", 
+    #               source_name: "G2", 
+    #               total_reviews: 1368, 
+    #             }, 
+    #             {
+    #               average_rating: "4.2", 
+    #               source_id: "PEERSPOT", 
+    #               source_name: "PeerSpot", 
+    #               total_reviews: 19, 
+    #             }, 
     #           ], 
     #         }, 
+    #         seller_engagements: [
+    #           {
+    #             value: "https://aws.amazon.com/marketplace/customer-connect/private-offer/prodview-sampleSearchId?campaignId=sampleCampaignId", 
+    #             content_type: "LINK", 
+    #             engagement_type: "REQUEST_FOR_PRIVATE_OFFER", 
+    #           }, 
+    #           {
+    #             value: "https://aws.amazon.com/marketplace/customer-connect/demo/prodview-sampleSearchId?campaignId=sampleCampaignId", 
+    #             content_type: "LINK", 
+    #             engagement_type: "REQUEST_FOR_DEMO", 
+    #           }, 
+    #           {
+    #             value: "https://aws.amazon.com/marketplace/epo/#/offer?productId=prod-sampleSearchId&listingId=prodview-sampleSearchId", 
+    #             content_type: "LINK", 
+    #             engagement_type: "EXPRESS_PRIVATE_OFFER", 
+    #           }, 
+    #           {
+    #             value: "https://aws.amazon.com/marketplace/procurement?productId=prod-sampleSearchId", 
+    #             content_type: "LINK", 
+    #             engagement_type: "BUY_NOW", 
+    #           }, 
+    #           {
+    #             value: "https://aws.amazon.com/marketplace/procurement?productId=prod-sampleSearchId&tryForFree=true", 
+    #             content_type: "LINK", 
+    #             engagement_type: "TRY_FOR_FREE", 
+    #           }, 
+    #         ], 
     #         short_description: "Advanced computer vision solution for object detection and classification.", 
+    #         trust_center_summary: {
+    #           certification_summaries: [
+    #             {
+    #               certification_type: "SOC2_TYPE_2", 
+    #               display_name: "SOC 2 Type II", 
+    #               logo_url: "https://awsmp-logos.s3.amazonaws.com/certification-logos/soc2.svg", 
+    #             }, 
+    #             {
+    #               certification_type: "ISO_27001", 
+    #               display_name: "ISO 27001", 
+    #               logo_url: "https://awsmp-logos.s3.amazonaws.com/certification-logos/iso27001.svg", 
+    #             }, 
+    #           ], 
+    #           source_summaries: [
+    #             {
+    #               value: "https://trust.example.com/", 
+    #               content_type: "LINK", 
+    #               display_name: "Drata", 
+    #               provider: "DRATA", 
+    #             }, 
+    #           ], 
+    #           total_certification_count: 2, 
+    #         }, 
+    #         use_case_summary: {
+    #           use_cases: [
+    #             {
+    #               use_case: {
+    #                 value: "CONTEXTUAL_ANALYSIS", 
+    #                 display_name: "Contextual Analysis", 
+    #               }, 
+    #             }, 
+    #           ], 
+    #         }, 
     #       }, 
     #     ], 
     #     next_token: "eyJsYXN0RXZhbHVhdGVkS2V5Ijp7Imxpc3RpbmdJZCI6InByb2R2aWV3LXNhbXBsZVNlYXJjaElkIn19", 
-    #     total_results: 1250, 
+    #     total_results: 42, 
+    #   }
+    #
+    # @example Example: Search listings with a Trust Center source and no certifications
+    #
+    #   # Return Trust Center source information when no certifications are available
+    #
+    #   resp = client.search_listings({
+    #     filters: [
+    #       {
+    #         filter_type: "TRUST_CENTER", 
+    #         filter_values: [
+    #           "HAS_TRUST_CENTER", 
+    #         ], 
+    #       }, 
+    #     ], 
+    #     locale: "en-US", 
+    #     max_results: 1, 
+    #     search_text: "security", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     listing_summaries: [
+    #       {
+    #         associated_entities: [
+    #         ], 
+    #         badges: [
+    #         ], 
+    #         catalog: "AWSMarketplace", 
+    #         categories: [
+    #         ], 
+    #         fulfillment_option_summaries: [
+    #         ], 
+    #         listing_id: "prodview-sourceOnlyId", 
+    #         listing_name: "sample source-only listing", 
+    #         logo_thumbnail_url: "https://awsmp-logos.s3.amazonaws.com/product-logos/source-only.png", 
+    #         pricing_models: [
+    #         ], 
+    #         pricing_units: [
+    #         ], 
+    #         publisher: {
+    #           display_name: "sample source-only seller", 
+    #           seller_profile_id: "seller-sourceOnlyId", 
+    #         }, 
+    #         review_summary: {
+    #           review_source_summaries: [
+    #           ], 
+    #         }, 
+    #         seller_engagements: [
+    #         ], 
+    #         short_description: "Continuous cloud security posture monitoring with automated compliance checks.", 
+    #         trust_center_summary: {
+    #           certification_summaries: [
+    #           ], 
+    #           source_summaries: [
+    #             {
+    #               value: "https://example.com/trust-center", 
+    #               content_type: "LINK", 
+    #               display_name: "Example Trust Center", 
+    #               provider: "OTHER", 
+    #             }, 
+    #           ], 
+    #           total_certification_count: 0, 
+    #         }, 
+    #         use_case_summary: {
+    #           use_cases: [
+    #           ], 
+    #         }, 
+    #       }, 
+    #     ], 
+    #     next_token: "eyJsYXN0RXZhbHVhdGVkS2V5Ijp7Imxpc3RpbmdJZCI6InByb2R2aWV3LXNvdXJjZU9ubHlJZCJ9fQ==", 
+    #     total_results: 38, 
     #   }
     #
     # @example Request syntax with placeholder values
@@ -3661,7 +4919,7 @@ module Aws::MarketplaceDiscovery
     #     search_text: "SearchText",
     #     filters: [
     #       {
-    #         filter_type: "MIN_AVERAGE_CUSTOMER_RATING", # required, accepts MIN_AVERAGE_CUSTOMER_RATING, MAX_AVERAGE_CUSTOMER_RATING, CATEGORY, PUBLISHER, FULFILLMENT_OPTION_TYPE, PRICING_MODEL, PRICING_UNIT, DEPLOYED_ON_AWS, NUMBER_OF_PRODUCTS
+    #         filter_type: "MIN_AVERAGE_CUSTOMER_RATING", # required, accepts MIN_AVERAGE_CUSTOMER_RATING, MAX_AVERAGE_CUSTOMER_RATING, CATEGORY, PUBLISHER, FULFILLMENT_OPTION_TYPE, PRICING_MODEL, PRICING_UNIT, DEPLOYED_ON_AWS, NUMBER_OF_PRODUCTS, CERTIFICATES, PRODUCT_ID, SPECIALIZATION, SPECIALIZATION_CATEGORY, SELLER_ENGAGEMENT, TRUST_CENTER
     #         filter_values: ["SearchFilterValue"], # required
     #       },
     #     ],
@@ -3693,7 +4951,7 @@ module Aws::MarketplaceDiscovery
     #   resp.listing_summaries[0].badges[0].badge_type #=> String, one of "AWS_FREE_TIER", "FREE_TRIAL", "DEPLOYED_ON_AWS", "QUICK_LAUNCH", "MULTI_PRODUCT"
     #   resp.listing_summaries[0].review_summary.review_source_summaries #=> Array
     #   resp.listing_summaries[0].review_summary.review_source_summaries[0].source_name #=> String
-    #   resp.listing_summaries[0].review_summary.review_source_summaries[0].source_id #=> String, one of "AWS_MARKETPLACE"
+    #   resp.listing_summaries[0].review_summary.review_source_summaries[0].source_id #=> String, one of "AWS_MARKETPLACE", "G2", "PEERSPOT"
     #   resp.listing_summaries[0].review_summary.review_source_summaries[0].source_url #=> String
     #   resp.listing_summaries[0].review_summary.review_source_summaries[0].average_rating #=> String
     #   resp.listing_summaries[0].review_summary.review_source_summaries[0].total_reviews #=> Integer
@@ -3708,6 +4966,24 @@ module Aws::MarketplaceDiscovery
     #   resp.listing_summaries[0].associated_entities[0].product.product_name #=> String
     #   resp.listing_summaries[0].associated_entities[0].product.manufacturer.seller_profile_id #=> String
     #   resp.listing_summaries[0].associated_entities[0].product.manufacturer.display_name #=> String
+    #   resp.listing_summaries[0].trust_center_summary.source_summaries #=> Array
+    #   resp.listing_summaries[0].trust_center_summary.source_summaries[0].content_type #=> String, one of "EMAIL", "PHONE_NUMBER", "LINK", "OTHER"
+    #   resp.listing_summaries[0].trust_center_summary.source_summaries[0].value #=> String
+    #   resp.listing_summaries[0].trust_center_summary.source_summaries[0].display_name #=> String
+    #   resp.listing_summaries[0].trust_center_summary.source_summaries[0].provider #=> String, one of "DRATA", "VANTA", "OTHER"
+    #   resp.listing_summaries[0].trust_center_summary.certification_summaries #=> Array
+    #   resp.listing_summaries[0].trust_center_summary.certification_summaries[0].certification_type #=> String
+    #   resp.listing_summaries[0].trust_center_summary.certification_summaries[0].display_name #=> String
+    #   resp.listing_summaries[0].trust_center_summary.certification_summaries[0].logo_url #=> String
+    #   resp.listing_summaries[0].trust_center_summary.total_certification_count #=> Integer
+    #   resp.listing_summaries[0].case_studies_summary.case_study_count #=> Integer
+    #   resp.listing_summaries[0].use_case_summary.use_cases #=> Array
+    #   resp.listing_summaries[0].use_case_summary.use_cases[0].use_case.display_name #=> String
+    #   resp.listing_summaries[0].use_case_summary.use_cases[0].use_case.value #=> String
+    #   resp.listing_summaries[0].seller_engagements #=> Array
+    #   resp.listing_summaries[0].seller_engagements[0].engagement_type #=> String, one of "REQUEST_FOR_PRIVATE_OFFER", "REQUEST_FOR_DEMO", "EXPRESS_PRIVATE_OFFER", "BUY_NOW", "TRY_FOR_FREE"
+    #   resp.listing_summaries[0].seller_engagements[0].content_type #=> String, one of "LINK"
+    #   resp.listing_summaries[0].seller_engagements[0].value #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-discovery-2026-02-05/SearchListings AWS API Documentation
@@ -3737,7 +5013,7 @@ module Aws::MarketplaceDiscovery
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-marketplacediscovery'
-      context[:gem_version] = '1.15.0'
+      context[:gem_version] = '1.23.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

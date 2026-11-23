@@ -132,7 +132,8 @@ module Aws
                                       ?delivery_options: {
                                         tls_policy: ("REQUIRE" | "OPTIONAL")?,
                                         sending_pool_name: ::String?,
-                                        max_delivery_seconds: ::Integer?
+                                        max_delivery_seconds: ::Integer?,
+                                        shared_pool_delivery_mode: ("GLOBAL" | "REGIONAL" | "ACCOUNT")?
                                       },
                                       ?reputation_options: {
                                         reputation_metrics_enabled: bool?,
@@ -584,6 +585,7 @@ module Aws
         def details: () -> Types::AccountDetails
         def vdm_attributes: () -> Types::VdmAttributes
         def pricing_attributes: () -> Types::PricingAttributes
+        def delivery_attributes: () -> Types::DeliveryAttributes
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SESV2/Client.html#get_account-instance_method
       def get_account: (
@@ -1183,6 +1185,15 @@ module Aws
                                                       ) -> _PutAccountDedicatedIpWarmupAttributesResponseSuccess
                                                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutAccountDedicatedIpWarmupAttributesResponseSuccess
 
+      interface _PutAccountDeliveryAttributesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutAccountDeliveryAttributesResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SESV2/Client.html#put_account_delivery_attributes-instance_method
+      def put_account_delivery_attributes: (
+                                             shared_pool_delivery_mode: ("GLOBAL" | "REGIONAL")
+                                           ) -> _PutAccountDeliveryAttributesResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutAccountDeliveryAttributesResponseSuccess
+
       interface _PutAccountDetailsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::PutAccountDetailsResponse]
       end
@@ -1267,7 +1278,8 @@ module Aws
                                                     configuration_set_name: ::String,
                                                     ?tls_policy: ("REQUIRE" | "OPTIONAL"),
                                                     ?sending_pool_name: ::String,
-                                                    ?max_delivery_seconds: ::Integer
+                                                    ?max_delivery_seconds: ::Integer,
+                                                    ?shared_pool_delivery_mode: ("GLOBAL" | "REGIONAL" | "ACCOUNT")
                                                   ) -> _PutConfigurationSetDeliveryOptionsResponseSuccess
                                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutConfigurationSetDeliveryOptionsResponseSuccess
 

@@ -127,6 +127,36 @@ module Aws::NetworkManager
       include Aws::Structure
     end
 
+    # @!attribute [rw] context_store_id
+    #   The ID of the context store.
+    #   @return [String]
+    #
+    # @!attribute [rw] transit_gateway_arn
+    #   The Amazon Resource Name (ARN) of the transit gateway to associate
+    #   with the context store.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/AssociateContextStoreRequest AWS API Documentation
+    #
+    class AssociateContextStoreRequest < Struct.new(
+      :context_store_id,
+      :transit_gateway_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] context_store_association
+    #   Information about the context store association.
+    #   @return [Types::ContextStoreAssociation]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/AssociateContextStoreResponse AWS API Documentation
+    #
+    class AssociateContextStoreResponse < Struct.new(
+      :context_store_association)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] customer_gateway_arn
     #   The Amazon Resource Name (ARN) of the customer gateway.
     #   @return [String]
@@ -867,6 +897,179 @@ module Aws::NetworkManager
       include Aws::Structure
     end
 
+    # Describes a context entry that was added to or removed from a context
+    # store.
+    #
+    # @!attribute [rw] change_type
+    #   The type of change. The possible values are the following:
+    #
+    #   * `ADDED`: The context entry was added to the context store.
+    #
+    #   * `REMOVED`: The context entry was removed from the context store.
+    #   @return [String]
+    #
+    # @!attribute [rw] context
+    #   The context entry that was added or removed.
+    #   @return [Types::ContextEntry]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/ContextChange AWS API Documentation
+    #
+    class ContextChange < Struct.new(
+      :change_type,
+      :context)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes a context entry in a context store. A context entry
+    # describes a resource, such as a security group, subnet, or attachment.
+    #
+    # @!attribute [rw] context_id
+    #   The ID of the context entry.
+    #   @return [String]
+    #
+    # @!attribute [rw] context_type
+    #   The type of the context entry, for example `SegmentId`, `Subnet`, or
+    #   `Attachment`.
+    #   @return [String]
+    #
+    # @!attribute [rw] segment_type
+    #   The type of the segment, for example `SecurityGroup`. Network
+    #   Manager returns this value only when the context type is
+    #   `SegmentId`.
+    #   @return [String]
+    #
+    # @!attribute [rw] public_id
+    #   The ID of the resource, for example a security group ID, subnet ID,
+    #   or transit gateway attachment ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] region
+    #   The Amazon Web Services Region of the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] availability_zone
+    #   The ID of the Availability Zone of the resource, for example
+    #   `use1-az2`. Network Manager returns this value only when the context
+    #   type is `Subnet`.
+    #   @return [String]
+    #
+    # @!attribute [rw] attachment_type
+    #   The type of the attachment, for example `VPC`. Network Manager
+    #   returns this value only when the context type is `Attachment`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/ContextEntry AWS API Documentation
+    #
+    class ContextEntry < Struct.new(
+      :context_id,
+      :context_type,
+      :segment_type,
+      :public_id,
+      :region,
+      :availability_zone,
+      :attachment_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes a context store.
+    #
+    # @!attribute [rw] global_network_id
+    #   The ID of the global network that the context store belongs to.
+    #   @return [String]
+    #
+    # @!attribute [rw] context_store_id
+    #   The ID of the context store.
+    #   @return [String]
+    #
+    # @!attribute [rw] context_store_arn
+    #   The Amazon Resource Name (ARN) of the context store.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the context store.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The date and time that the context store was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] state
+    #   The state of the context store. The possible values are the
+    #   following:
+    #
+    #   * `PENDING`: The context store is being created.
+    #
+    #   * `AVAILABLE`: The context store is ready to use.
+    #
+    #   * `UPDATING`: The context store is being updated.
+    #
+    #   * `DELETING`: The context store is being deleted.
+    #
+    #   * `DELETED`: The context store is deleted.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags associated with the context store.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/ContextStore AWS API Documentation
+    #
+    class ContextStore < Struct.new(
+      :global_network_id,
+      :context_store_id,
+      :context_store_arn,
+      :description,
+      :created_at,
+      :state,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the association between a context store and a transit
+    # gateway.
+    #
+    # @!attribute [rw] context_store_id
+    #   The ID of the context store.
+    #   @return [String]
+    #
+    # @!attribute [rw] transit_gateway_arn
+    #   The Amazon Resource Name (ARN) of the transit gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The date and time that the association was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] state
+    #   The state of the association. The possible values are the following:
+    #
+    #   * `ASSOCIATING`: The transit gateway is being associated with the
+    #     context store.
+    #
+    #   * `ASSOCIATED`: The transit gateway is associated with the context
+    #     store.
+    #
+    #   * `DISASSOCIATING`: The transit gateway is being disassociated from
+    #     the context store.
+    #
+    #   * `FAILED`: The association failed. To remove it, disassociate the
+    #     transit gateway.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/ContextStoreAssociation AWS API Documentation
+    #
+    class ContextStoreAssociation < Struct.new(
+      :context_store_id,
+      :transit_gateway_arn,
+      :created_at,
+      :state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes a core network.
     #
     # @!attribute [rw] global_network_id
@@ -1137,6 +1340,11 @@ module Aws::NetworkManager
     #   the core network change values.
     #   @return [Array<Types::RoutingPolicyAssociationDetail>]
     #
+    # @!attribute [rw] multipath_resilience
+    #   The change in multipath resilience configuration in the core network
+    #   change values.
+    #   @return [Types::MultipathResilienceChangeValues]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/CoreNetworkChangeValues AWS API Documentation
     #
     class CoreNetworkChangeValues < Struct.new(
@@ -1156,7 +1364,8 @@ module Aws::NetworkManager
       :routing_policy,
       :peer_edge_locations,
       :attachment_id,
-      :routing_policy_association_details)
+      :routing_policy_association_details,
+      :multipath_resilience)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1690,6 +1899,52 @@ module Aws::NetworkManager
     #
     class CreateConnectionResponse < Struct.new(
       :connection)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] global_network_id
+    #   The ID of the global network to create the context store in.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the context store.
+    #
+    #   Constraints: Maximum length of 256 characters. Only printable ASCII
+    #   characters are allowed.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags to apply to the context store during creation.
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/CreateContextStoreRequest AWS API Documentation
+    #
+    class CreateContextStoreRequest < Struct.new(
+      :global_network_id,
+      :description,
+      :tags,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] context_store
+    #   Information about the context store.
+    #   @return [Types::ContextStore]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/CreateContextStoreResponse AWS API Documentation
+    #
+    class CreateContextStoreResponse < Struct.new(
+      :context_store)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2447,6 +2702,30 @@ module Aws::NetworkManager
       include Aws::Structure
     end
 
+    # @!attribute [rw] context_store_id
+    #   The ID of the context store to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/DeleteContextStoreRequest AWS API Documentation
+    #
+    class DeleteContextStoreRequest < Struct.new(
+      :context_store_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] context_store
+    #   Information about the context store.
+    #   @return [Types::ContextStore]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/DeleteContextStoreResponse AWS API Documentation
+    #
+    class DeleteContextStoreResponse < Struct.new(
+      :context_store)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] core_network_id
     #   The ID of a core network for the deleted policy.
     #   @return [String]
@@ -2883,6 +3162,36 @@ module Aws::NetworkManager
       include Aws::Structure
     end
 
+    # @!attribute [rw] context_store_id
+    #   The ID of the context store.
+    #   @return [String]
+    #
+    # @!attribute [rw] transit_gateway_arn
+    #   The Amazon Resource Name (ARN) of the transit gateway to
+    #   disassociate from the context store.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/DisassociateContextStoreRequest AWS API Documentation
+    #
+    class DisassociateContextStoreRequest < Struct.new(
+      :context_store_id,
+      :transit_gateway_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] context_store_association
+    #   Information about the context store association.
+    #   @return [Types::ContextStoreAssociation]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/DisassociateContextStoreResponse AWS API Documentation
+    #
+    class DisassociateContextStoreResponse < Struct.new(
+      :context_store_association)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] global_network_id
     #   The ID of the global network.
     #   @return [String]
@@ -3152,6 +3461,83 @@ module Aws::NetworkManager
     class GetConnectionsResponse < Struct.new(
       :connections,
       :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] context_store_id
+    #   The ID of the context store.
+    #   @return [String]
+    #
+    # @!attribute [rw] transit_gateway_arn
+    #   The Amazon Resource Name (ARN) of the transit gateway.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/GetContextStoreAssociationRequest AWS API Documentation
+    #
+    class GetContextStoreAssociationRequest < Struct.new(
+      :context_store_id,
+      :transit_gateway_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] context_store_association
+    #   Information about the context store association.
+    #   @return [Types::ContextStoreAssociation]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/GetContextStoreAssociationResponse AWS API Documentation
+    #
+    class GetContextStoreAssociationResponse < Struct.new(
+      :context_store_association)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] context_store_id
+    #   The ID of the context store.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/GetContextStoreRequest AWS API Documentation
+    #
+    class GetContextStoreRequest < Struct.new(
+      :context_store_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] context_store
+    #   Information about the context store.
+    #   @return [Types::ContextStore]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/GetContextStoreResponse AWS API Documentation
+    #
+    class GetContextStoreResponse < Struct.new(
+      :context_store)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] context_store_id
+    #   The ID of the context store.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/GetContextVersionRequest AWS API Documentation
+    #
+    class GetContextVersionRequest < Struct.new(
+      :context_store_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] version_id
+    #   The current version of the context entries.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/GetContextVersionResponse AWS API Documentation
+    #
+    class GetContextVersionResponse < Struct.new(
+      :version_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4672,6 +5058,190 @@ module Aws::NetworkManager
       include Aws::Structure
     end
 
+    # @!attribute [rw] context_store_id
+    #   The ID of the context store.
+    #   @return [String]
+    #
+    # @!attribute [rw] from_version_id
+    #   The version to return changes from. Specify a version returned by
+    #   `ListContexts`, `GetContextVersion`, or the `ToVersionId` of a
+    #   previous `ListContextChanges` request. If the version is no longer
+    #   available, the request fails, and you must call `ListContexts` to
+    #   get the current context entries.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/ListContextChangesRequest AWS API Documentation
+    #
+    class ListContextChangesRequest < Struct.new(
+      :context_store_id,
+      :from_version_id,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] context_changes
+    #   The context entries that were added or removed.
+    #   @return [Array<Types::ContextChange>]
+    #
+    # @!attribute [rw] from_version_id
+    #   The version that the changes start from.
+    #   @return [String]
+    #
+    # @!attribute [rw] to_version_id
+    #   The version that the changes bring the context entries up to. To get
+    #   later changes, specify this value as `FromVersionId` in your next
+    #   request. All pages of the same request return the same version.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/ListContextChangesResponse AWS API Documentation
+    #
+    class ListContextChangesResponse < Struct.new(
+      :context_changes,
+      :from_version_id,
+      :to_version_id,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] context_store_id
+    #   The ID of the context store.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/ListContextStoreAssociationsRequest AWS API Documentation
+    #
+    class ListContextStoreAssociationsRequest < Struct.new(
+      :context_store_id,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] context_store_associations
+    #   The context store associations.
+    #   @return [Array<Types::ContextStoreAssociation>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/ListContextStoreAssociationsResponse AWS API Documentation
+    #
+    class ListContextStoreAssociationsResponse < Struct.new(
+      :context_store_associations,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] global_network_id
+    #   The ID of a global network. If you specify this parameter, only the
+    #   context stores in the global network are returned.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/ListContextStoresRequest AWS API Documentation
+    #
+    class ListContextStoresRequest < Struct.new(
+      :global_network_id,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] context_stores
+    #   The context stores.
+    #   @return [Array<Types::ContextStore>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/ListContextStoresResponse AWS API Documentation
+    #
+    class ListContextStoresResponse < Struct.new(
+      :context_stores,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] context_store_id
+    #   The ID of the context store.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/ListContextsRequest AWS API Documentation
+    #
+    class ListContextsRequest < Struct.new(
+      :context_store_id,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] contexts
+    #   The context entries.
+    #   @return [Array<Types::ContextEntry>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] version_id
+    #   The version of the returned context entries. All pages of the same
+    #   request return the same version.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/ListContextsResponse AWS API Documentation
+    #
+    class ListContextsResponse < Struct.new(
+      :contexts,
+      :next_token,
+      :version_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] core_network_id
     #   The ID of a core network.
     #   @return [String]
@@ -5049,6 +5619,25 @@ module Aws::NetworkManager
       :address,
       :latitude,
       :longitude)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about a change in multipath resilience.
+    #
+    # @!attribute [rw] mode
+    #   The mode (best-effort/disabled) of multipath resilience.
+    #   @return [String]
+    #
+    # @!attribute [rw] edge_sets
+    #   A set of two edge locations.
+    #   @return [Array<Array<String>>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/MultipathResilienceChangeValues AWS API Documentation
+    #
+    class MultipathResilienceChangeValues < Struct.new(
+      :mode,
+      :edge_sets)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6831,6 +7420,38 @@ module Aws::NetworkManager
     #
     class UpdateConnectionResponse < Struct.new(
       :connection)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] context_store_id
+    #   The ID of the context store.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The new description of the context store.
+    #
+    #   Constraints: Maximum length of 256 characters. Only printable ASCII
+    #   characters are allowed.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/UpdateContextStoreRequest AWS API Documentation
+    #
+    class UpdateContextStoreRequest < Struct.new(
+      :context_store_id,
+      :description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] context_store
+    #   Information about the context store.
+    #   @return [Types::ContextStore]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/UpdateContextStoreResponse AWS API Documentation
+    #
+    class UpdateContextStoreResponse < Struct.new(
+      :context_store)
       SENSITIVE = []
       include Aws::Structure
     end

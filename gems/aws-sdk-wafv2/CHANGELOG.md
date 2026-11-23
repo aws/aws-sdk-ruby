@@ -1,6 +1,51 @@
 Unreleased Changes
 ------------------
 
+1.153.0 (2026-11-20)
+------------------
+
+* Feature - This release adds AI Security AMR configuration and five read-only APIs for AWS WAF API Security events. Use ListEvents and ListEventsByWebACL to list events, GetEvent to get event details including the timeline, and ListEventActors and GetEventActor to view the clients attributed to events
+
+1.152.0 (2026-11-18)
+------------------
+
+* Feature - Adds the AnalyticsConfig parameter to CreateWebACL and UpdateWebACL to enable or disable cross-Region security analytics for a WebACL. When you enable security analytics, you authorize AWS to transfer and store full request logs outside the AWS Region where the WebACL is hosted.
+
+1.151.0 (2026-11-16)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.150.0 (2026-11-11)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.149.0 (2026-11-10)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.148.0 (2026-11-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.147.0 (2026-11-06)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.146.0 (2026-11-05)
+------------------
+
+* Feature - AWS WAF customers who monetize AI traffic on Web ACLs can now configure payments through connected accounts (Stripe).
+
+1.145.0 (2026-11-04)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.144.0 (2026-10-29)
 ------------------
 

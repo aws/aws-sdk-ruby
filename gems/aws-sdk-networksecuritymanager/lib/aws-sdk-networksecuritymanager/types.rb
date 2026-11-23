@@ -1274,6 +1274,16 @@ module Aws::NetworkSecurityManager
     #   scope.
     #   @return [Types::ScopeConfiguration]
     #
+    # @!attribute [rw] specialized_scope_type
+    #   The specialized type of the scope. Omit this value to create a
+    #   standard scope that you can associate with a deployment. Set it to
+    #   create a scope that is built for one specific purpose: a specialized
+    #   scope can be used only for the purpose that its type defines, is
+    #   validated against that use, and can't be associated with a
+    #   deployment. This value is set when the scope is created and can't
+    #   be changed.
+    #   @return [String]
+    #
     # @!attribute [rw] is_published
     #   Specifies whether to publish the resource. When `true`, the resource
     #   is saved in published (`ACTIVE`) state. When `false`, it is saved as
@@ -1291,6 +1301,7 @@ module Aws::NetworkSecurityManager
       :scope_name,
       :scope_description,
       :scope_configuration,
+      :specialized_scope_type,
       :is_published,
       :tags)
       SENSITIVE = []
@@ -1317,6 +1328,15 @@ module Aws::NetworkSecurityManager
     #   The configuration that defines which accounts and resources are in
     #   scope.
     #   @return [Types::ScopeConfiguration]
+    #
+    # @!attribute [rw] specialized_scope_type
+    #   The specialized type of the scope, if the scope is built for one
+    #   specific purpose. A scope with no `specializedScopeType` is a
+    #   standard scope that you can associate with a deployment. A
+    #   specialized scope can be used only for the purpose that its type
+    #   defines and can't be associated with a deployment. This value is
+    #   set when the scope is created and can't be changed.
+    #   @return [String]
     #
     # @!attribute [rw] status
     #   The current status of the resource: `DRAFT` (unpublished, editable)
@@ -1353,6 +1373,7 @@ module Aws::NetworkSecurityManager
       :scope_name,
       :scope_description,
       :scope_configuration,
+      :specialized_scope_type,
       :status,
       :version,
       :update_token,
@@ -1413,6 +1434,15 @@ module Aws::NetworkSecurityManager
     #   scope.
     #   @return [Types::ScopeConfiguration]
     #
+    # @!attribute [rw] specialized_scope_type
+    #   The specialized type of the scope, if the scope is built for one
+    #   specific purpose. A scope with no `specializedScopeType` is a
+    #   standard scope that you can associate with a deployment. A
+    #   specialized scope can be used only for the purpose that its type
+    #   defines and can't be associated with a deployment. This value is
+    #   set when the scope is created and can't be changed.
+    #   @return [String]
+    #
     # @!attribute [rw] status
     #   The current status of the resource: `DRAFT` (unpublished, editable)
     #   or `ACTIVE` (published, in use).
@@ -1448,6 +1478,7 @@ module Aws::NetworkSecurityManager
       :scope_name,
       :scope_description,
       :scope_configuration,
+      :specialized_scope_type,
       :status,
       :version,
       :update_token,
@@ -1872,7 +1903,8 @@ module Aws::NetworkSecurityManager
     end
 
     # Describes why a firewall is out of sync. Exactly one of
-    # `missingFirewall` or `invalidFirewall` is set.
+    # `missingFirewall`, `invalidFirewall`, or `invalidResource` contains a
+    # value.
     #
     # @note FirewallSyncReason is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of FirewallSyncReason corresponding to the set member.
     #
@@ -1886,11 +1918,20 @@ module Aws::NetworkSecurityManager
     #   intended configuration.
     #   @return [Types::InvalidFirewallReasons]
     #
+    # @!attribute [rw] invalid_resource
+    #   A map of related resources whose configuration does not match the
+    #   intended configuration, grouped by resource type. Each entry lists
+    #   the resources of that type that are out of sync. For example,
+    #   subnets whose connectivity type differs from the connectivity type
+    #   that the policy specifies.
+    #   @return [Hash<String,Array<Types::InvalidResourceIssue>>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-security-manager-2025-10-30/FirewallSyncReason AWS API Documentation
     #
     class FirewallSyncReason < Struct.new(
       :missing_firewall,
       :invalid_firewall,
+      :invalid_resource,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
@@ -1898,6 +1939,7 @@ module Aws::NetworkSecurityManager
 
       class MissingFirewall < FirewallSyncReason; end
       class InvalidFirewall < FirewallSyncReason; end
+      class InvalidResource < FirewallSyncReason; end
       class Unknown < FirewallSyncReason; end
     end
 
@@ -2318,6 +2360,15 @@ module Aws::NetworkSecurityManager
     #   scope.
     #   @return [Types::ScopeConfiguration]
     #
+    # @!attribute [rw] specialized_scope_type
+    #   The specialized type of the scope, if the scope is built for one
+    #   specific purpose. A scope with no `specializedScopeType` is a
+    #   standard scope that you can associate with a deployment. A
+    #   specialized scope can be used only for the purpose that its type
+    #   defines and can't be associated with a deployment. This value is
+    #   set when the scope is created and can't be changed.
+    #   @return [String]
+    #
     # @!attribute [rw] status
     #   The current status of the resource: `DRAFT` (unpublished, editable),
     #   `ACTIVE` (published, in use), or `DISABLED` (deactivated; changes
@@ -2354,6 +2405,7 @@ module Aws::NetworkSecurityManager
       :scope_name,
       :scope_description,
       :scope_configuration,
+      :specialized_scope_type,
       :status,
       :version,
       :update_token,
@@ -2447,6 +2499,53 @@ module Aws::NetworkSecurityManager
       include Aws::Structure
     end
 
+    # Policy configuration settings for Network Firewall automated internet
+    # firewall policies.
+    #
+    # @!attribute [rw] default_subnet_connectivity
+    #   The default internet connectivity treatment that AWS Network
+    #   Security Manager applies to subnets in scope, unless a subnet
+    #   connectivity override applies. Required for Network Firewall
+    #   automated internet firewall policies. Valid values:
+    #
+    #   * `flexible` – Sets the connectivity for each network interface in
+    #     the subnet based on whether it is associated with a public IP
+    #     address. A network interface with a public IP address gets
+    #     bidirectional internet connectivity. A network interface without a
+    #     public IP address gets outbound-only connectivity. All traffic is
+    #     inspected against your firewall rules.
+    #
+    #   * `bidirectional` – Provides bidirectional internet connectivity to
+    #     every network interface that has a public IP association. Any
+    #     network interface without a public IP cannot communicate with the
+    #     internet unless a NAT device is explicitly inserted in the path.
+    #     All inbound and outbound traffic is inspected against your
+    #     firewall rules.
+    #
+    #   * `outbound-only` – Provides egress-only connectivity for all
+    #     network interfaces in the subnet. All outbound traffic and inbound
+    #     responses are inspected against your firewall rules. Unsolicited
+    #     inbound connections are dropped. For IPv4 traffic, the Network
+    #     Firewall automated internet firewall performs NAT.
+    #   @return [String]
+    #
+    # @!attribute [rw] subnet_connectivity_overrides
+    #   An ordered list of overrides that apply a different connectivity
+    #   treatment to the subnets that a scope selects. When a subnet matches
+    #   more than one override, the first matching override in the list
+    #   applies. You can specify at most one override for each connectivity
+    #   type.
+    #   @return [Array<Types::SubnetConnectivityOverride>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-security-manager-2025-10-30/IgwFirewallConfig AWS API Documentation
+    #
+    class IgwFirewallConfig < Struct.new(
+      :default_subnet_connectivity,
+      :subnet_connectivity_overrides)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The request processing failed because of an internal error in the
     # service. This is a retryable error.
     #
@@ -2499,6 +2598,32 @@ module Aws::NetworkSecurityManager
       :incorrect_appendable_configuration_order,
       :missing_mergeable_configuration_values,
       :unexpected_mergeable_configuration_values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes a single related resource whose configuration does not match
+    # the intended configuration.
+    #
+    # @!attribute [rw] resource_id
+    #   The identifier of the resource, such as a subnet ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] expected_value
+    #   The attribute value that the policy configuration requires, such as
+    #   the connectivity type for a subnet.
+    #   @return [String]
+    #
+    # @!attribute [rw] actual_value
+    #   The current attribute value on the resource.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-security-manager-2025-10-30/InvalidResourceIssue AWS API Documentation
+    #
+    class InvalidResourceIssue < Struct.new(
+      :resource_id,
+      :expected_value,
+      :actual_value)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2680,6 +2805,60 @@ module Aws::NetworkSecurityManager
       include Aws::Structure
     end
 
+    # @!attribute [rw] entity_arn
+    #   The Amazon Resource Name (ARN) of the Network Security Manager
+    #   entity to list covered resources for. The ARN must not include a
+    #   `:DRAFT` qualifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_owner_account_id
+    #   Filters the results to the protected resources owned by the
+    #   specified AWS account.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in a single call. Valid
+    #   range: 1–100. The default value is 100. To retrieve the remaining
+    #   results, use the returned `nextToken` value in a subsequent call.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results. To retrieve the next page,
+    #   call the operation again and provide this value. When there are no
+    #   more results, this value is null.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-security-manager-2025-10-30/ListEntityCoveragesInput AWS API Documentation
+    #
+    class ListEntityCoveragesInput < Struct.new(
+      :entity_arn,
+      :resource_owner_account_id,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   The token for the next page of results. To retrieve the next page,
+    #   call the operation again and provide this value. When there are no
+    #   more results, this value is null.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_coverages
+    #   The list of resource coverages for the Network Security Manager
+    #   entity.
+    #   @return [Array<Types::ResourceCoverageSummary>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-security-manager-2025-10-30/ListEntityCoveragesOutput AWS API Documentation
+    #
+    class ListEntityCoveragesOutput < Struct.new(
+      :next_token,
+      :resource_coverages)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] max_results
     #   The maximum number of results to return in a single call. Valid
     #   range: 1-100. To retrieve the remaining results, use the returned
@@ -2767,6 +2946,58 @@ module Aws::NetworkSecurityManager
     class ListPolicySnapshotsOutput < Struct.new(
       :next_token,
       :snapshots)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the protected resource to list
+    #   coverage for. You must own the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] entity_type
+    #   Filters the results by the type of the entity that covers the
+    #   resource. The only supported value is `Policy`.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in a single call. Valid
+    #   range: 1–100. The default value is 100. To retrieve the remaining
+    #   results, use the returned `nextToken` value in a subsequent call.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results. To retrieve the next page,
+    #   call the operation again and provide this value. When there are no
+    #   more results, this value is null.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-security-manager-2025-10-30/ListProtectedResourceCoveragesInput AWS API Documentation
+    #
+    class ListProtectedResourceCoveragesInput < Struct.new(
+      :resource_arn,
+      :entity_type,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   The token for the next page of results. To retrieve the next page,
+    #   call the operation again and provide this value. When there are no
+    #   more results, this value is null.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_coverages
+    #   The list of resource coverages for the protected resource.
+    #   @return [Array<Types::ResourceCoverageSummary>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-security-manager-2025-10-30/ListProtectedResourceCoveragesOutput AWS API Documentation
+    #
+    class ListProtectedResourceCoveragesOutput < Struct.new(
+      :next_token,
+      :resource_coverages)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3138,12 +3369,22 @@ module Aws::NetworkSecurityManager
     #   Filters the results by status, either `ACTIVE` or `DRAFT`.
     #   @return [String]
     #
+    # @!attribute [rw] template_owner
+    #   Specifies which templates to list. The default is `CUSTOMER`. Valid
+    #   values:
+    #
+    #   * `CUSTOMER` – Lists the templates in your account.
+    #
+    #   * `AWS` – Lists the AWS managed templates.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-security-manager-2025-10-30/ListTemplatesInput AWS API Documentation
     #
     class ListTemplatesInput < Struct.new(
       :max_results,
       :next_token,
-      :status)
+      :status,
+      :template_owner)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3240,8 +3481,8 @@ module Aws::NetworkSecurityManager
     #
     # @!attribute [rw] resources_clean_up
     #   Specifies whether AWS Network Security Manager automatically removes
-    #   the resources it created when they are no longer needed. Default:
-    #   `false`.
+    #   the resources it created when they are no longer needed. This member
+    #   is required, and the only supported value is `true`.
     #   @return [Boolean]
     #
     # @!attribute [rw] waf_config
@@ -3249,12 +3490,18 @@ module Aws::NetworkSecurityManager
     #   policies.
     #   @return [Types::WafConfig]
     #
+    # @!attribute [rw] igw_firewall_config
+    #   Policy settings for Network Firewall automated internet firewall
+    #   policies. Specify these settings only for this policy type.
+    #   @return [Types::IgwFirewallConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-security-manager-2025-10-30/PolicyConfiguration AWS API Documentation
     #
     class PolicyConfiguration < Struct.new(
       :remediation_enabled,
       :resources_clean_up,
-      :waf_config)
+      :waf_config,
+      :igw_firewall_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3437,6 +3684,71 @@ module Aws::NetworkSecurityManager
     class ResourceAssociation < Struct.new(
       :arn,
       :resource_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes how an AWS Network Security Manager entity covers a
+    # protected resource.
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the protected resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] entity_type
+    #   The type of the entity that covers the resource, such as `Policy`.
+    #   @return [String]
+    #
+    # @!attribute [rw] entity_arn
+    #   The Amazon Resource Name (ARN) of the entity that covers the
+    #   resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_owner_account_id
+    #   The AWS account ID that owns the protected resource. This can differ
+    #   from the account that owns the entity.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   The type of the protected resource, in AWS CloudFormation format.
+    #   @return [String]
+    #
+    # @!attribute [rw] firewall_type
+    #   The firewall type of the policy that covers the resource. This is
+    #   present when `entityType` is `Policy`.
+    #   @return [String]
+    #
+    # @!attribute [rw] coverage_status
+    #   Specifies whether the entity contributes to the effective
+    #   configuration of the resource for its firewall type. For firewall
+    #   types that combine policies, such as AWS WAF and AWS Shield
+    #   Advanced, every policy that covers the resource is `IN_EFFECT`. For
+    #   firewall types that apply a single policy, only the highest-priority
+    #   policy is `IN_EFFECT` and the others are `SUPERSEDED`.
+    #   @return [String]
+    #
+    # @!attribute [rw] deployment_arns
+    #   The Amazon Resource Names (ARNs) of the deployments through which
+    #   the entity covers the resource.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] updated_at
+    #   The time when AWS Network Security Manager last evaluated the
+    #   coverage.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-security-manager-2025-10-30/ResourceCoverageSummary AWS API Documentation
+    #
+    class ResourceCoverageSummary < Struct.new(
+      :resource_arn,
+      :entity_type,
+      :entity_arn,
+      :resource_owner_account_id,
+      :resource_type,
+      :firewall_type,
+      :coverage_status,
+      :deployment_arns,
+      :updated_at)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3777,6 +4089,15 @@ module Aws::NetworkSecurityManager
     #   The name of the scope.
     #   @return [String]
     #
+    # @!attribute [rw] specialized_scope_type
+    #   The specialized type of the scope, if the scope is built for one
+    #   specific purpose. A scope with no `specializedScopeType` is a
+    #   standard scope that you can associate with a deployment. A
+    #   specialized scope can be used only for the purpose that its type
+    #   defines and can't be associated with a deployment. This value is
+    #   set when the scope is created and can't be changed.
+    #   @return [String]
+    #
     # @!attribute [rw] status
     #   The current status of the resource: `DRAFT` (unpublished, editable),
     #   `ACTIVE` (published, in use), or `DISABLED` (deactivated; changes
@@ -3802,6 +4123,7 @@ module Aws::NetworkSecurityManager
       :scope_id,
       :scope_arn,
       :scope_name,
+      :specialized_scope_type,
       :status,
       :version,
       :has_published_version,
@@ -3858,6 +4180,60 @@ module Aws::NetworkSecurityManager
     class ServiceUnavailableException < Struct.new(
       :message,
       :retry_after_seconds)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An override that applies a connectivity treatment to the subnets that
+    # a scope selects, instead of the policy's `defaultSubnetConnectivity`.
+    #
+    # @!attribute [rw] connectivity_type
+    #   The connectivity treatment to apply to the selected subnets. You
+    #   select both the override value as well as the subnets they apply to.
+    #   The Network Firewall automated internet firewall applies the
+    #   override value to the specified subnets, and applies the default
+    #   connectivity to the rest of the subnets. Valid values:
+    #
+    #   * `flexible` – Sets the connectivity for each network interface in
+    #     the subnet based on whether it is associated with a public IP
+    #     address. A network interface with a public IP address gets
+    #     bidirectional internet connectivity. A network interface without a
+    #     public IP address gets outbound-only connectivity. All traffic is
+    #     inspected against your firewall rules.
+    #
+    #   * `bidirectional` – Provides bidirectional internet connectivity to
+    #     every network interface that has a public IP association. Any
+    #     network interface without a public IP cannot communicate with the
+    #     internet unless a NAT device is explicitly inserted in the path.
+    #     All inbound and outbound traffic is inspected against your
+    #     firewall rules.
+    #
+    #   * `outbound-only` – Provides egress-only connectivity for all
+    #     network interfaces in the subnet. All outbound traffic and inbound
+    #     responses are inspected against your firewall rules. Unsolicited
+    #     inbound connections are dropped. For IPv4 traffic, the Network
+    #     Firewall automated internet firewall performs NAT.
+    #
+    #   * `exclude` – The Network Firewall automated internet firewall
+    #     doesn't inspect traffic for the selected subnets. The subnets
+    #     bypass the firewall entirely, and their traffic passes directly
+    #     through the internet gateway. You can specify this value only in
+    #     an override, not as the `defaultSubnetConnectivity`.
+    #   @return [String]
+    #
+    # @!attribute [rw] scopes
+    #   A list that contains the Amazon Resource Name (ARN) of the scope
+    #   that selects the subnets to override. The list must contain exactly
+    #   one scope ARN. The deployment determines which accounts are in
+    #   scope, and the referenced scope selects subnets within those
+    #   accounts.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-security-manager-2025-10-30/SubnetConnectivityOverride AWS API Documentation
+    #
+    class SubnetConnectivityOverride < Struct.new(
+      :connectivity_type,
+      :scopes)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3942,6 +4318,14 @@ module Aws::NetworkSecurityManager
     #   The name of the template.
     #   @return [String]
     #
+    # @!attribute [rw] template_owner
+    #   The owner of the template. Valid values:
+    #
+    #   * `CUSTOMER` – The template is in your account.
+    #
+    #   * `AWS` – The template is an AWS managed template.
+    #   @return [String]
+    #
     # @!attribute [rw] status
     #   The current status of the resource: `DRAFT` (unpublished, editable)
     #   or `ACTIVE` (published, in use).
@@ -3970,6 +4354,7 @@ module Aws::NetworkSecurityManager
       :template_id,
       :template_arn,
       :template_name,
+      :template_owner,
       :status,
       :version,
       :has_published_version,
@@ -4540,6 +4925,15 @@ module Aws::NetworkSecurityManager
     #   scope.
     #   @return [Types::ScopeConfiguration]
     #
+    # @!attribute [rw] specialized_scope_type
+    #   The specialized type of the scope, if the scope is built for one
+    #   specific purpose. A scope with no `specializedScopeType` is a
+    #   standard scope that you can associate with a deployment. A
+    #   specialized scope can be used only for the purpose that its type
+    #   defines and can't be associated with a deployment. This value is
+    #   set when the scope is created and can't be changed.
+    #   @return [String]
+    #
     # @!attribute [rw] status
     #   The current status of the resource: `DRAFT` (unpublished, editable)
     #   or `ACTIVE` (published, in use).
@@ -4575,6 +4969,7 @@ module Aws::NetworkSecurityManager
       :scope_name,
       :scope_description,
       :scope_configuration,
+      :specialized_scope_type,
       :status,
       :version,
       :update_token,

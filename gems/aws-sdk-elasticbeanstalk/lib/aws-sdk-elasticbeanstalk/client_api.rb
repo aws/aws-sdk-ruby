@@ -20,6 +20,7 @@ module Aws::ElasticBeanstalk
     ActionHistoryStatus = Shapes::StringShape.new(name: 'ActionHistoryStatus')
     ActionStatus = Shapes::StringShape.new(name: 'ActionStatus')
     ActionType = Shapes::StringShape.new(name: 'ActionType')
+    AmiArchitecture = Shapes::StringShape.new(name: 'AmiArchitecture')
     ApplicationArn = Shapes::StringShape.new(name: 'ApplicationArn')
     ApplicationDescription = Shapes::StructureShape.new(name: 'ApplicationDescription')
     ApplicationDescriptionList = Shapes::ListShape.new(name: 'ApplicationDescriptionList')
@@ -94,6 +95,8 @@ module Aws::ElasticBeanstalk
     CustomAmiList = Shapes::ListShape.new(name: 'CustomAmiList')
     DNSCname = Shapes::StringShape.new(name: 'DNSCname')
     DNSCnamePrefix = Shapes::StringShape.new(name: 'DNSCnamePrefix')
+    DefaultAmi = Shapes::StructureShape.new(name: 'DefaultAmi')
+    DefaultAmiList = Shapes::ListShape.new(name: 'DefaultAmiList')
     DeleteApplicationMessage = Shapes::StructureShape.new(name: 'DeleteApplicationMessage')
     DeleteApplicationVersionMessage = Shapes::StructureShape.new(name: 'DeleteApplicationVersionMessage')
     DeleteConfigurationTemplateMessage = Shapes::StructureShape.new(name: 'DeleteConfigurationTemplateMessage')
@@ -585,6 +588,12 @@ module Aws::ElasticBeanstalk
 
     CustomAmiList.member = Shapes::ShapeRef.new(shape: CustomAmi)
 
+    DefaultAmi.add_member(:architecture, Shapes::ShapeRef.new(shape: AmiArchitecture, location_name: "Architecture"))
+    DefaultAmi.add_member(:image_id, Shapes::ShapeRef.new(shape: ImageId, location_name: "ImageId"))
+    DefaultAmi.struct_class = Types::DefaultAmi
+
+    DefaultAmiList.member = Shapes::ShapeRef.new(shape: DefaultAmi)
+
     DeleteApplicationMessage.add_member(:application_name, Shapes::ShapeRef.new(shape: ApplicationName, required: true, location_name: "ApplicationName"))
     DeleteApplicationMessage.add_member(:terminate_env_by_force, Shapes::ShapeRef.new(shape: TerminateEnvForce, location_name: "TerminateEnvByForce"))
     DeleteApplicationMessage.struct_class = Types::DeleteApplicationMessage
@@ -984,6 +993,7 @@ module Aws::ElasticBeanstalk
     PlatformDescription.add_member(:programming_languages, Shapes::ShapeRef.new(shape: PlatformProgrammingLanguages, location_name: "ProgrammingLanguages"))
     PlatformDescription.add_member(:frameworks, Shapes::ShapeRef.new(shape: PlatformFrameworks, location_name: "Frameworks"))
     PlatformDescription.add_member(:custom_ami_list, Shapes::ShapeRef.new(shape: CustomAmiList, location_name: "CustomAmiList"))
+    PlatformDescription.add_member(:default_ami_list, Shapes::ShapeRef.new(shape: DefaultAmiList, location_name: "DefaultAmiList"))
     PlatformDescription.add_member(:supported_tier_list, Shapes::ShapeRef.new(shape: SupportedTierList, location_name: "SupportedTierList"))
     PlatformDescription.add_member(:supported_addon_list, Shapes::ShapeRef.new(shape: SupportedAddonList, location_name: "SupportedAddonList"))
     PlatformDescription.add_member(:platform_lifecycle_state, Shapes::ShapeRef.new(shape: PlatformLifecycleState, location_name: "PlatformLifecycleState"))

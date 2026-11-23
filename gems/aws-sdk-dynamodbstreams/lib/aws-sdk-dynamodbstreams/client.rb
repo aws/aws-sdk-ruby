@@ -266,7 +266,8 @@ module Aws::DynamoDBStreams
     #     An integer representing the maximum number attempts that will be made for
     #     a single request, including the initial attempt.  For example,
     #     setting this value to 5 will result in a request being retried up to
-    #     4 times. Used in `standard` and `adaptive` retry modes.
+    #     4 times. Used in `standard` and `adaptive` retry modes. Defaults to 3,
+    #     except for DynamoDB and DynamoDB Streams, which default to 4.
     #
     #   @option options [String] :profile ("default")
     #     Used when loading credentials from the shared credentials file at `HOME/.aws/credentials`.
@@ -329,15 +330,15 @@ module Aws::DynamoDBStreams
     #     used by the default backoff function. This option is only used in the
     #     `legacy` retry mode.
     #
-    #   @option options [String] :retry_mode ("legacy")
+    #   @option options [String] :retry_mode ("standard")
     #     Specifies which retry algorithm to use. Values are:
     #
-    #     * `legacy` - The pre-existing retry behavior. This is the default
-    #       value if no retry mode is provided.
+    #     * `legacy` - The pre-existing retry behavior.
     #
     #     * `standard` - A standardized set of retry rules across the AWS SDKs.
     #       This includes support for retry quotas, which limit the number of
-    #       unsuccessful retries a client can make.
+    #       unsuccessful retries a client can make. This is the default value
+    #       if no retry mode is provided.
     #
     #     * `adaptive` - A retry mode that includes all the functionality of
     #       `standard` mode along with automatic client side throttling.
@@ -416,6 +417,15 @@ module Aws::DynamoDBStreams
     #   @option options [Boolean] :validate_params (true)
     #     When `true`, request parameters are validated before
     #     sending the request.
+    #
+    #   @option options [String] :account_id_endpoint_mode
+    #     The account ID endpoint mode to use. This can be one of the following values:
+    #     * `preferred` - The default behavior. Use the account ID endpoint if
+    #       available, otherwise use the standard endpoint.
+    #     * `disabled` - Never use the account ID endpoint. Only use the standard
+    #       endpoint.
+    #     * `required` - Always use the account ID endpoint. If the account ID
+    #       cannot be retrieved from credentials, an error is raised.
     #
     #   @option options [Aws::DynamoDBStreams::EndpointProvider] :endpoint_provider
     #     The endpoint provider used to resolve endpoints. Any object that responds to
@@ -973,7 +983,7 @@ module Aws::DynamoDBStreams
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-dynamodbstreams'
-      context[:gem_version] = '1.102.0'
+      context[:gem_version] = '1.109.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

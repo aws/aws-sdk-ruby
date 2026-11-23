@@ -1690,6 +1690,49 @@ module Aws::CognitoIdentityProvider
     end
 
     # @!attribute [rw] user_pool_id
+    #   The ID of the user pool that contains the user.
+    #   @return [String]
+    #
+    # @!attribute [rw] username
+    #   The username of the user whose sessions you want to list.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   A pagination token that Amazon Cognito returned in a previous
+    #   response. Use this value to retrieve the next page of results if a
+    #   `NextToken` was included in a prior response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminListUserSessionsRequest AWS API Documentation
+    #
+    class AdminListUserSessionsRequest < Struct.new(
+      :user_pool_id,
+      :username,
+      :next_token)
+      SENSITIVE = [:username]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] sessions
+    #   A list of the user's active sessions. Each element describes one
+    #   token session or SSO session.
+    #   @return [Array<Types::SessionDescriptionType>]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token to use in a subsequent request to retrieve the
+    #   next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminListUserSessionsResponse AWS API Documentation
+    #
+    class AdminListUserSessionsResponse < Struct.new(
+      :sessions,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] user_pool_id
     #   The ID of the user pool that contains the group and the user that
     #   you want to remove.
     #   @return [String]
@@ -2278,6 +2321,49 @@ module Aws::CognitoIdentityProvider
       SENSITIVE = [:session]
       include Aws::Structure
     end
+
+    # @!attribute [rw] user_pool_id
+    #   The ID of the user pool that contains the session.
+    #   @return [String]
+    #
+    # @!attribute [rw] username
+    #   The username of the user who owns the session. The username must
+    #   match the user associated with the `SessionId`, to confirm they are
+    #   the intended target user.
+    #   @return [String]
+    #
+    # @!attribute [rw] session_id
+    #   The ID of the session to revoke. This is a 28-character string of
+    #   lowercase letters and digits, prefixed with `tkn` for a token
+    #   session or `sso` for an SSO session.
+    #   @return [String]
+    #
+    # @!attribute [rw] revoke_associated_sessions
+    #   Specifies whether to also revoke the sessions that are linked to the
+    #   targeted session. `NONE`, the default, revokes only the targeted
+    #   session. `LINKED` also revokes the directly linked session or
+    #   sessions, interpreted relative to the type of the targeted session:
+    #   revoking a token session also revokes the parent SSO session it came
+    #   through, and revoking an SSO session also revokes the token sessions
+    #   that came through it. The set of linked sessions is eventually
+    #   consistent, so associated sessions are typically revoked within a
+    #   few seconds.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminRevokeUserSessionRequest AWS API Documentation
+    #
+    class AdminRevokeUserSessionRequest < Struct.new(
+      :user_pool_id,
+      :username,
+      :session_id,
+      :revoke_associated_sessions)
+      SENSITIVE = [:username]
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminRevokeUserSessionResponse AWS API Documentation
+    #
+    class AdminRevokeUserSessionResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] sms_mfa_settings
     #   User preferences for SMS message MFA. Activates or deactivates SMS
@@ -2977,6 +3063,150 @@ module Aws::CognitoIdentityProvider
       include Aws::Structure
     end
 
+    # A summary of a Client ID Metadata Document (CIMD) policy, returned by
+    # .
+    #
+    # @!attribute [rw] cimd_policy_id
+    #   The ID of the CIMD policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_id
+    #   The ID of the app client that the CIMD policy is associated with.
+    #   Amazon Cognito omits this value when the app client no longer
+    #   exists.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy_name
+    #   The friendly name of the CIMD policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] cache_duration
+    #   The length of time, in seconds, that Amazon Cognito caches a client
+    #   metadata document that it retrieved from a URL that matches the
+    #   policy.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] creation_date
+    #   The date and time when the CIMD policy was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_date
+    #   The date and time when the CIMD policy was last modified.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/CIMDPolicySummaryType AWS API Documentation
+    #
+    class CIMDPolicySummaryType < Struct.new(
+      :cimd_policy_id,
+      :client_id,
+      :policy_name,
+      :cache_duration,
+      :creation_date,
+      :last_modified_date)
+      SENSITIVE = [:client_id]
+      include Aws::Structure
+    end
+
+    # The configuration of a Client ID Metadata Document (CIMD) policy.
+    #
+    # @!attribute [rw] user_pool_id
+    #   The ID of the user pool that contains the CIMD policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] cimd_policy_id
+    #   The ID of the CIMD policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_id
+    #   The ID of the app client that the CIMD policy is associated with.
+    #   Amazon Cognito omits this value when the app client no longer
+    #   exists.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy_name
+    #   The friendly name of the CIMD policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] cache_duration
+    #   The length of time, in seconds, that Amazon Cognito caches a client
+    #   metadata document that it retrieved from a URL that matches the
+    #   policy.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] url_patterns
+    #   The HTTPS URL patterns that a client ID metadata document URL must
+    #   match.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] creation_date
+    #   The date and time when the CIMD policy was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_date
+    #   The date and time when the CIMD policy was last modified.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/CIMDPolicyType AWS API Documentation
+    #
+    class CIMDPolicyType < Struct.new(
+      :user_pool_id,
+      :cimd_policy_id,
+      :client_id,
+      :policy_name,
+      :cache_duration,
+      :url_patterns,
+      :creation_date,
+      :last_modified_date)
+      SENSITIVE = [:client_id]
+      include Aws::Structure
+    end
+
+    # This exception is thrown when Amazon Cognito doesn't have a cached
+    # client metadata document for the URL in the request.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/CachedCIMDURLDoesNotExistException AWS API Documentation
+    #
+    class CachedCIMDURLDoesNotExistException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] user_pool_id
+    #   The ID of the user pool that contains the recovery that you want to
+    #   cancel.
+    #   @return [String]
+    #
+    # @!attribute [rw] restore_id
+    #   The ID of the recovery that you want to cancel. Amazon Cognito
+    #   returns this ID in the response to an `InitiatePointInTimeRecovery`
+    #   request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/CancelPointInTimeRecoveryRequest AWS API Documentation
+    #
+    class CancelPointInTimeRecoveryRequest < Struct.new(
+      :user_pool_id,
+      :restore_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] restoration
+    #   The details of the canceled recovery, including its status.
+    #   @return [Types::RestorationType]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/CancelPointInTimeRecoveryResponse AWS API Documentation
+    #
+    class CancelPointInTimeRecoveryResponse < Struct.new(
+      :restoration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The responses to the challenge that you received in the previous
     # request. Each challenge has its own required response parameters. The
     # following examples are partial JSON request bodies that highlight
@@ -3209,6 +3439,55 @@ module Aws::CognitoIdentityProvider
       :expires_in,
       :token_type)
       SENSITIVE = [:access_token]
+      include Aws::Structure
+    end
+
+    # A client metadata document URL that Amazon Cognito has received for a
+    # Client ID Metadata Document (CIMD) policy, with its cache state.
+    #
+    # @!attribute [rw] url
+    #   The client metadata document URL.
+    #   @return [String]
+    #
+    # @!attribute [rw] cached_date
+    #   The date and time when Amazon Cognito cached the client metadata
+    #   document from this URL.
+    #   @return [Time]
+    #
+    # @!attribute [rw] expiration_date
+    #   The date and time when the cached client metadata document expires.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ClientMetadataURLType AWS API Documentation
+    #
+    class ClientMetadataURLType < Struct.new(
+      :url,
+      :cached_date,
+      :expiration_date)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The SSO session settings for a user pool app client.
+    #
+    # @!attribute [rw] max_validity_minutes
+    #   The maximum amount of time, in minutes, that this app client
+    #   silently reuses an existing SSO session, returning a new set of
+    #   tokens without requiring the user to re-authenticate, measured from
+    #   the user's last fresh authentication. The minimum value is `0` and
+    #   the maximum value is `129600` (90 days). The default is `60`. A
+    #   value of `0` means that this app client never silently reuses the
+    #   SSO session and always re-authenticates the user. The SSO session
+    #   record and its cookie are still created regardless of this value,
+    #   and other app clients in the same user pool can still reuse the
+    #   session.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ClientSSOSessionConfigType AWS API Documentation
+    #
+    class ClientSSOSessionConfigType < Struct.new(
+      :max_validity_minutes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3770,6 +4049,56 @@ module Aws::CognitoIdentityProvider
       :server_path,
       :http_headers,
       :encoded_data)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] user_pool_id
+    #   The ID of the user pool where you want to create the CIMD policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_id
+    #   The ID of the app client that you want to associate with the CIMD
+    #   policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy_name
+    #   A friendly name for the CIMD policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] cache_duration
+    #   The length of time, in seconds, that Amazon Cognito caches a client
+    #   metadata document that it retrieved from a URL that matches the
+    #   policy. The value must be between 86,400 seconds (one day) and
+    #   31,556,952 seconds (one year).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] url_patterns
+    #   One to five HTTPS URL patterns. Amazon Cognito accepts a client ID
+    #   metadata document URL only when it matches one of these patterns.
+    #   Patterns can contain the `*` wildcard character.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/CreateCIMDPolicyRequest AWS API Documentation
+    #
+    class CreateCIMDPolicyRequest < Struct.new(
+      :user_pool_id,
+      :client_id,
+      :policy_name,
+      :cache_duration,
+      :url_patterns)
+      SENSITIVE = [:client_id]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] cimd_policy
+    #   The CIMD policy that you created.
+    #   @return [Types::CIMDPolicyType]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/CreateCIMDPolicyResponse AWS API Documentation
+    #
+    class CreateCIMDPolicyResponse < Struct.new(
+      :cimd_policy)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4454,6 +4783,15 @@ module Aws::CognitoIdentityProvider
     #
     #   * `ALLOW_REFRESH_TOKEN_AUTH`: Enable authflow to refresh tokens.
     #
+    #   * `ALLOW_TOKEN_EXCHANGE_IMPERSONATION` – Use this flow to request
+    #     `GetDerivedToken` token exchanges without an `ActorToken`. The
+    #     issued token represents the subject user directly.
+    #
+    #   * `ALLOW_TOKEN_EXCHANGE_DELEGATION` – Use this flow to request
+    #     `GetDerivedToken` token exchanges that include an `ActorToken`.
+    #     The issued token carries an `act` claim that identifies the
+    #     intermediary acting on the behalf of the subject.
+    #
     #   In some environments, you will see the values `ADMIN_NO_SRP_AUTH`,
     #   `CUSTOM_AUTH_FLOW_ONLY`, or `USER_PASSWORD_AUTH`. You can't assign
     #   these legacy `ExplicitAuthFlows` values to user pool clients at the
@@ -4671,6 +5009,27 @@ module Aws::CognitoIdentityProvider
     #   disabled, token refresh issues only ID and access tokens.
     #   @return [Types::RefreshTokenRotationType]
     #
+    # @!attribute [rw] publish_secrets_in_aws_secrets_manager
+    #   Specifies whether Amazon Cognito stores and manages this app
+    #   client's secret in [Amazon Web Services Secrets Manager][1] instead
+    #   of returning the plaintext value. Applies only when `GenerateSecret`
+    #   is `true`. When you set this parameter to `true`, the response
+    #   returns `ClientSecretArn` instead of `ClientSecret`. Amazon Cognito
+    #   starts the first rotation of the secret right away, and then rotates
+    #   the secret every 7 days by default. You can change the rotation
+    #   schedule in Secrets Manager.
+    #
+    #   Defaults to `false`. If you don't set this parameter, Amazon
+    #   Cognito doesn't manage the secret in Secrets Manager and returns
+    #   the plaintext `ClientSecret` value. The Amazon Cognito console turns
+    #   on this option by default when it creates an app client with a
+    #   generated client secret.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/CreateUserPoolClientRequest AWS API Documentation
     #
     class CreateUserPoolClientRequest < Struct.new(
@@ -4697,7 +5056,8 @@ module Aws::CognitoIdentityProvider
       :enable_token_revocation,
       :enable_propagate_additional_user_context_data,
       :auth_session_validity,
-      :refresh_token_rotation)
+      :refresh_token_rotation,
+      :publish_secrets_in_aws_secrets_manager)
       SENSITIVE = [:client_secret]
       include Aws::Structure
     end
@@ -5077,6 +5437,18 @@ module Aws::CognitoIdentityProvider
     #   [2]: https://docs.aws.amazon.com/cognito/latest/developerguide/feature-plans-features-plus.html
     #   @return [Types::UserPoolAddOnsType]
     #
+    # @!attribute [rw] dcr_configuration
+    #   The dynamic client registration configuration for the user pool.
+    #   With dynamic client registration, applications can register their
+    #   own app clients at runtime through the registration endpoint of your
+    #   user pool domain. To activate this setting, your user pool must be
+    #   in the [ Essentials tier][1] or higher.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cognito/latest/developerguide/feature-plans-features-essentials.html
+    #   @return [Types::DcrConfigurationType]
+    #
     # @!attribute [rw] username_configuration
     #   Sets the case sensitivity option for sign-in usernames. When
     #   `CaseSensitive` is `false` (case insensitive), users can sign in
@@ -5180,6 +5552,7 @@ module Aws::CognitoIdentityProvider
       :admin_create_user_config,
       :schema,
       :user_pool_add_ons,
+      :dcr_configuration,
       :username_configuration,
       :account_recovery_setting,
       :user_pool_tier,
@@ -5303,6 +5676,130 @@ module Aws::CognitoIdentityProvider
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # The dynamic client registration configuration for a user pool. Dynamic
+    # client registration lets applications register their own app clients
+    # at runtime through the registration endpoint of your user pool domain.
+    # To activate this setting, your user pool must be in the [ Essentials
+    # tier][1] or higher.
+    #
+    # Applications register app clients at the `/oauth2/register` endpoint
+    # of your user pool domain. In authenticated registration, the
+    # application sends an access token from your user pool that has the
+    # `aws.cognito/dcr/register` scope. In open registration, the
+    # application doesn't send a token.
+    #
+    # When you include this configuration in an `UpdateUserPool` request,
+    # Amazon Cognito replaces the existing configuration with the one that
+    # you provide.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/cognito/latest/developerguide/feature-plans-features-essentials.html
+    #
+    # @!attribute [rw] enable_status
+    #   Specifies whether dynamic client registration is turned on for the
+    #   user pool. If you provide a dynamic client registration
+    #   configuration without this value, Amazon Cognito turns dynamic
+    #   client registration on.
+    #   @return [String]
+    #
+    # @!attribute [rw] open_dcr_enabled
+    #   Specifies whether open registration is turned on. When open
+    #   registration is on, applications can register app clients without an
+    #   initial access token. The default value is `false`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] authenticated_grant_types
+    #   The OAuth grant types that an app client created through
+    #   authenticated registration can request. If you don't set this
+    #   value, authenticated registration permits the `code` and
+    #   `client_credentials` grant types. If you set an empty list, Amazon
+    #   Cognito rejects authenticated registration requests. Dynamic client
+    #   registration supports the following values. Amazon Cognito accepts
+    #   `implicit` in this list but ignores it.
+    #
+    #   code
+    #
+    #   : Use a code grant flow, which provides an authorization code as the
+    #     response. This code can be exchanged for access tokens with the
+    #     `/oauth2/token` endpoint.
+    #
+    #   client\_credentials
+    #
+    #   : Issue the access token from the `/oauth2/token` endpoint directly
+    #     to a non-person user using a combination of the client ID and
+    #     client secret.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] open_dcr_grant_types
+    #   The OAuth grant types that an app client created through open
+    #   registration can request. If you don't set this value, open
+    #   registration permits only the `code` grant type. If you set an empty
+    #   list, Amazon Cognito rejects open registration requests. If you add
+    #   `client_credentials`, anyone can register an app client that
+    #   requests machine-to-machine (M2M) access tokens, and you pay for the
+    #   M2M token requests that those app clients make. Dynamic client
+    #   registration supports the following values. Amazon Cognito accepts
+    #   `implicit` in this list but ignores it.
+    #
+    #   code
+    #
+    #   : Use a code grant flow, which provides an authorization code as the
+    #     response. This code can be exchanged for access tokens with the
+    #     `/oauth2/token` endpoint.
+    #
+    #   client\_credentials
+    #
+    #   : Issue the access token from the `/oauth2/token` endpoint directly
+    #     to a non-person user using a combination of the client ID and
+    #     client secret.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] allowed_scopes
+    #   The scopes that an app client created through dynamic client
+    #   registration can request, in addition to the standard OpenID Connect
+    #   (OIDC) scopes. You can include custom scopes from your resource
+    #   servers and `aws.cognito.signin.user.admin`. Registered app clients
+    #   can request the OIDC scopes `openid`, `email`, `phone`, and
+    #   `profile` without listing them here. If you don't set this value,
+    #   registered app clients can request only the OIDC scopes. A
+    #   registered app client can't request the `aws.cognito/dcr/register`
+    #   scope, even if you include it in this list.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DcrConfigurationType AWS API Documentation
+    #
+    class DcrConfigurationType < Struct.new(
+      :enable_status,
+      :open_dcr_enabled,
+      :authenticated_grant_types,
+      :open_dcr_grant_types,
+      :allowed_scopes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] user_pool_id
+    #   The ID of the user pool that contains the CIMD policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] cimd_policy_id
+    #   The ID of the CIMD policy that you want to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DeleteCIMDPolicyRequest AWS API Documentation
+    #
+    class DeleteCIMDPolicyRequest < Struct.new(
+      :user_pool_id,
+      :cimd_policy_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DeleteCIMDPolicyResponse AWS API Documentation
+    #
+    class DeleteCIMDPolicyResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] group_name
     #   The name of the group that you want to delete.
@@ -5580,6 +6077,35 @@ module Aws::CognitoIdentityProvider
     class DeleteWebAuthnCredentialResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] user_pool_id
+    #   The ID of the user pool that contains the CIMD policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] cimd_policy_id
+    #   The ID of the CIMD policy that you want to describe.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DescribeCIMDPolicyRequest AWS API Documentation
+    #
+    class DescribeCIMDPolicyRequest < Struct.new(
+      :user_pool_id,
+      :cimd_policy_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] cimd_policy
+    #   The configuration of the requested CIMD policy.
+    #   @return [Types::CIMDPolicyType]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DescribeCIMDPolicyResponse AWS API Documentation
+    #
+    class DescribeCIMDPolicyResponse < Struct.new(
+      :cimd_policy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] user_pool_id
     #   The ID of the user pool that has the IdP that you want to describe..
     #   @return [String]
     #
@@ -5682,6 +6208,40 @@ module Aws::CognitoIdentityProvider
     #
     class DescribeManagedLoginBrandingResponse < Struct.new(
       :managed_login_branding)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] user_pool_id
+    #   The ID of the user pool that contains the recovery that you want to
+    #   describe.
+    #   @return [String]
+    #
+    # @!attribute [rw] restore_id
+    #   The ID of the recovery that you want to describe. Amazon Cognito
+    #   returns this ID in the response to an `InitiatePointInTimeRecovery`
+    #   request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DescribePointInTimeRecoveryRequest AWS API Documentation
+    #
+    class DescribePointInTimeRecoveryRequest < Struct.new(
+      :user_pool_id,
+      :restore_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] restoration
+    #   The details of the requested recovery, including its status, the
+    #   point in time that it restores the user pool to, and the recovery
+    #   preview.
+    #   @return [Types::RestorationType]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DescribePointInTimeRecoveryResponse AWS API Documentation
+    #
+    class DescribePointInTimeRecoveryResponse < Struct.new(
+      :restoration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6925,6 +7485,158 @@ module Aws::CognitoIdentityProvider
       include Aws::Structure
     end
 
+    # Represents the request to exchange a subject token for a new token.
+    #
+    # @!attribute [rw] client_id
+    #   The ID of the app client that requests the token exchange.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_secret
+    #   The client secret of the requested app client, if the client has a
+    #   secret.
+    #   @return [String]
+    #
+    # @!attribute [rw] subject_token
+    #   The token that you want to exchange for a new token. This is the
+    #   credential that represents the identity of the party on behalf of
+    #   whom the request is being made.
+    #   @return [String]
+    #
+    # @!attribute [rw] subject_token_type
+    #   The type of the `SubjectToken` that you want to exchange. Valid
+    #   values:
+    #
+    #   * `ACCESS_TOKEN` – The subject token is an access token.
+    #
+    #   * `ID_TOKEN` – The subject token is an ID token.
+    #
+    #   * `SAML2` – The subject token is a SAML 2.0 assertion.
+    #   @return [String]
+    #
+    # @!attribute [rw] subject_token_provider_name
+    #   The name of the third-party identity provider that issued the
+    #   `SubjectToken`, if the subject token isn't a Amazon Cognito token.
+    #   Provide this value when your `SubjectToken` came from a SAML or OIDC
+    #   provider that you registered with your user pool, so that Amazon
+    #   Cognito can validate it against that provider's configuration. Omit
+    #   this parameter for a Amazon Cognito ID or access token.
+    #   @return [String]
+    #
+    # @!attribute [rw] actor_token
+    #   A token that identifies the intermediary service that is exchanging
+    #   the token on behalf of the user. When you provide an `ActorToken`,
+    #   the token that Amazon Cognito issues carries an `act` claim that
+    #   identifies the intermediary, so that downstream services can
+    #   distinguish a user acting directly from an intermediary acting on
+    #   the user's behalf.
+    #   @return [String]
+    #
+    # @!attribute [rw] actor_token_type
+    #   The type of the `ActorToken` that you provide. Required when you
+    #   provide an `ActorToken`. Valid values:
+    #
+    #   * `ACCESS_TOKEN` – The actor token is an access token.
+    #
+    #   * `ID_TOKEN` – The actor token is an ID token.
+    #
+    #   * `SAML2` – The actor token is a SAML 2.0 assertion.
+    #   @return [String]
+    #
+    # @!attribute [rw] actor_token_provider_name
+    #   The name of the third-party identity provider that issued the
+    #   `ActorToken`, if the actor token isn't a Amazon Cognito token.
+    #   @return [String]
+    #
+    # @!attribute [rw] scopes
+    #   The scopes that you want the new token to have. Amazon Cognito
+    #   issues a token with the intersection of these requested scopes, the
+    #   scopes of your `SubjectToken`, and the scopes that are allowed for
+    #   the requesting app client. If you don't specify any scopes, Amazon
+    #   Cognito issues a token with the same scopes as your `SubjectToken`.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] audiences
+    #   The logical name of the target service where you intend to use the
+    #   issued token. You can't request both `Audiences` and `Resources` in
+    #   the same request.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] resources
+    #   The identifier of a resource server in your user pool where you
+    #   intend to use the issued token. You can't request both `Resources`
+    #   and `Audiences` in the same request.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] requested_token_type
+    #   The type of token that you want Amazon Cognito to issue. Valid
+    #   values:
+    #
+    #   * `ACCESS_TOKEN` – Issues an access token.
+    #
+    #   * `ID_TOKEN` – Issues an ID token.
+    #
+    #   Amazon Cognito can't issue a SAML assertion, so `SAML2` isn't a
+    #   valid value for this parameter.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/GetDerivedTokenRequest AWS API Documentation
+    #
+    class GetDerivedTokenRequest < Struct.new(
+      :client_id,
+      :client_secret,
+      :subject_token,
+      :subject_token_type,
+      :subject_token_provider_name,
+      :actor_token,
+      :actor_token_type,
+      :actor_token_provider_name,
+      :scopes,
+      :audiences,
+      :resources,
+      :requested_token_type)
+      SENSITIVE = [:client_id, :client_secret, :subject_token, :actor_token]
+      include Aws::Structure
+    end
+
+    # Represents the response to a token exchange request.
+    #
+    # @!attribute [rw] issued_token
+    #   The token that Amazon Cognito issued in response to the token
+    #   exchange request.
+    #   @return [String]
+    #
+    # @!attribute [rw] issued_token_type
+    #   The type of the token in the `IssuedToken` parameter. Valid values:
+    #
+    #   * `ACCESS_TOKEN` – The issued token is an access token.
+    #
+    #   * `ID_TOKEN` – The issued token is an ID token.
+    #   @return [String]
+    #
+    # @!attribute [rw] token_type
+    #   The type of the issued token. For example, `Bearer`.
+    #   @return [String]
+    #
+    # @!attribute [rw] expires_in
+    #   The number of seconds until the issued token expires.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] scopes
+    #   The scopes that Amazon Cognito granted in the issued token.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/GetDerivedTokenResponse AWS API Documentation
+    #
+    class GetDerivedTokenResponse < Struct.new(
+      :issued_token,
+      :issued_token_type,
+      :token_type,
+      :expires_in,
+      :scopes)
+      SENSITIVE = [:issued_token]
+      include Aws::Structure
+    end
+
     # Represents the request to get the device.
     #
     # @!attribute [rw] device_key
@@ -7366,6 +8078,46 @@ module Aws::CognitoIdentityProvider
     end
 
     # @!attribute [rw] user_pool_id
+    #   The ID of the user pool that contains the app client.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_id
+    #   The ID of the app client where you want to retrieve the session
+    #   configuration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/GetUserPoolClientSessionConfigurationRequest AWS API Documentation
+    #
+    class GetUserPoolClientSessionConfigurationRequest < Struct.new(
+      :user_pool_id,
+      :client_id)
+      SENSITIVE = [:client_id]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] user_pool_id
+    #   The ID of the user pool that contains the app client.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_id
+    #   The ID of the app client that the session configuration applies to.
+    #   @return [String]
+    #
+    # @!attribute [rw] sso_session
+    #   The SSO session settings for the app client.
+    #   @return [Types::ClientSSOSessionConfigType]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/GetUserPoolClientSessionConfigurationResponse AWS API Documentation
+    #
+    class GetUserPoolClientSessionConfigurationResponse < Struct.new(
+      :user_pool_id,
+      :client_id,
+      :sso_session)
+      SENSITIVE = [:client_id]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] user_pool_id
     #   The ID of the user pool where you want to query WebAuthn and MFA
     #   configuration.
     #   @return [String]
@@ -7430,6 +8182,41 @@ module Aws::CognitoIdentityProvider
       :email_mfa_configuration,
       :mfa_configuration,
       :web_authn_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] user_pool_id
+    #   The ID of the user pool where you want to retrieve the session
+    #   configuration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/GetUserPoolSessionConfigurationRequest AWS API Documentation
+    #
+    class GetUserPoolSessionConfigurationRequest < Struct.new(
+      :user_pool_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] user_pool_id
+    #   The ID of the user pool that the session configuration applies to.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_session_tracking
+    #   Indicates whether session tracking is enabled for the user pool.
+    #   @return [String]
+    #
+    # @!attribute [rw] token_session
+    #   The pool-wide token session settings for the user pool.
+    #   @return [Types::UserPoolTokenSessionConfigType]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/GetUserPoolSessionConfigurationResponse AWS API Documentation
+    #
+    class GetUserPoolSessionConfigurationResponse < Struct.new(
+      :user_pool_id,
+      :user_session_tracking,
+      :token_session)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8245,6 +9032,42 @@ module Aws::CognitoIdentityProvider
       include Aws::Structure
     end
 
+    # @!attribute [rw] user_pool_id
+    #   The ID of the user pool that you want to recover.
+    #   @return [String]
+    #
+    # @!attribute [rw] restore_timestamp
+    #   The point in time that you want to recover your user pool to. Amazon
+    #   Cognito reverts changes to user data that occurred after this time.
+    #   The recovery point must be at least 15 minutes in the past and
+    #   within the recovery period of your user pool feature plan: up to 1
+    #   day in the past with the Essentials feature plan, or up to 14 days
+    #   in the past with the Plus feature plan.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/InitiatePointInTimeRecoveryRequest AWS API Documentation
+    #
+    class InitiatePointInTimeRecoveryRequest < Struct.new(
+      :user_pool_id,
+      :restore_timestamp)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] restoration
+    #   The details of the recovery that you initiated. Includes the
+    #   recovery ID that you can use in later requests to describe, start,
+    #   or cancel the recovery.
+    #   @return [Types::RestorationType]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/InitiatePointInTimeRecoveryResponse AWS API Documentation
+    #
+    class InitiatePointInTimeRecoveryResponse < Struct.new(
+      :restoration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # This exception is thrown when Amazon Cognito encounters an internal
     # error.
     #
@@ -8707,6 +9530,113 @@ module Aws::CognitoIdentityProvider
       include Aws::Structure
     end
 
+    # @!attribute [rw] user_pool_id
+    #   The ID of the user pool whose CIMD policies you want to list.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   This API operation returns a limited number of results. The
+    #   pagination token is an identifier that you can present in an
+    #   additional API request with the same parameters. When you include
+    #   the pagination token, Amazon Cognito returns the next set of items
+    #   after the current list. Subsequent requests return a new pagination
+    #   token. By use of this token, you can paginate through the full list
+    #   of items.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of CIMD policies that you want Amazon Cognito to
+    #   return in the response.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ListCIMDPoliciesRequest AWS API Documentation
+    #
+    class ListCIMDPoliciesRequest < Struct.new(
+      :user_pool_id,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   The identifier that Amazon Cognito returned with the previous
+    #   request to this operation. When you include a pagination token in
+    #   your request, Amazon Cognito returns the next set of items in the
+    #   list. By use of this token, you can paginate through the full list
+    #   of items.
+    #   @return [String]
+    #
+    # @!attribute [rw] cimd_policies
+    #   A summary of each CIMD policy in the user pool.
+    #   @return [Array<Types::CIMDPolicySummaryType>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ListCIMDPoliciesResponse AWS API Documentation
+    #
+    class ListCIMDPoliciesResponse < Struct.new(
+      :next_token,
+      :cimd_policies)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] user_pool_id
+    #   The ID of the user pool that contains the CIMD policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] cimd_policy_id
+    #   The ID of the CIMD policy whose client metadata document URLs you
+    #   want to list.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   This API operation returns a limited number of results. The
+    #   pagination token is an identifier that you can present in an
+    #   additional API request with the same parameters. When you include
+    #   the pagination token, Amazon Cognito returns the next set of items
+    #   after the current list. Subsequent requests return a new pagination
+    #   token. By use of this token, you can paginate through the full list
+    #   of items.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of URLs that you want Amazon Cognito to return in
+    #   the response.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ListClientMetadataURLsRequest AWS API Documentation
+    #
+    class ListClientMetadataURLsRequest < Struct.new(
+      :user_pool_id,
+      :cimd_policy_id,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   The identifier that Amazon Cognito returned with the previous
+    #   request to this operation. When you include a pagination token in
+    #   your request, Amazon Cognito returns the next set of items in the
+    #   list. By use of this token, you can paginate through the full list
+    #   of items.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_metadata_urls
+    #   The client metadata document URLs for the CIMD policy, with the
+    #   cache state of each URL.
+    #   @return [Array<Types::ClientMetadataURLType>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ListClientMetadataURLsResponse AWS API Documentation
+    #
+    class ListClientMetadataURLsResponse < Struct.new(
+      :next_token,
+      :client_metadata_urls)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Represents the request to list the devices.
     #
     # @!attribute [rw] access_token
@@ -8863,6 +9793,59 @@ module Aws::CognitoIdentityProvider
     #
     class ListIdentityProvidersResponse < Struct.new(
       :providers,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] user_pool_id
+    #   The ID of the user pool where you want to list point-in-time
+    #   recoveries.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   This API operation returns a limited number of results. The
+    #   pagination token is an identifier that you can present in an
+    #   additional API request with the same parameters. When you include
+    #   the pagination token, Amazon Cognito returns the next set of items
+    #   after the current list. Subsequent requests return a new pagination
+    #   token. By use of this token, you can paginate through the full list
+    #   of items.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of recoveries that you want Amazon Cognito to
+    #   return in the response. Valid values are 1 through 60. The default
+    #   value is 60.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ListPointInTimeRecoveriesRequest AWS API Documentation
+    #
+    class ListPointInTimeRecoveriesRequest < Struct.new(
+      :user_pool_id,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] restorations
+    #   A summary of each requested recovery, including its ID, status, and
+    #   the point in time that it restores the user pool to.
+    #   @return [Array<Types::RestorationDescriptionType>]
+    #
+    # @!attribute [rw] next_token
+    #   The identifier that Amazon Cognito returned with the previous
+    #   request to this operation. When you include a pagination token in
+    #   your request, Amazon Cognito returns the next set of items in the
+    #   list. By use of this token, you can paginate through the full list
+    #   of items.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ListPointInTimeRecoveriesResponse AWS API Documentation
+    #
+    class ListPointInTimeRecoveriesResponse < Struct.new(
+      :restorations,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -9133,12 +10116,35 @@ module Aws::CognitoIdentityProvider
     #   of items.
     #   @return [String]
     #
+    # @!attribute [rw] client_type
+    #   Returns only app clients of this type. For dynamic client
+    #   registration (`DCR`) and other app clients, the following values are
+    #   valid.
+    #
+    #   REGULAR
+    #
+    #   : An app client not created through dynamic client registration.
+    #
+    #   DCR
+    #
+    #   : An app client created through dynamic client registration.
+    #
+    #   If you omit `ClientType`, the response includes app clients of all
+    #   types. When you set this filter, a page of results can contain fewer
+    #   app clients than `MaxResults`, or none, while the response still
+    #   includes a `NextToken`. Continue to request pages until the response
+    #   has no `NextToken`. The app clients in the response don't include
+    #   their type. To get the type of an app client, call
+    #   `DescribeUserPoolClient`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ListUserPoolClientsRequest AWS API Documentation
     #
     class ListUserPoolClientsRequest < Struct.new(
       :user_pool_id,
       :max_results,
-      :next_token)
+      :next_token,
+      :client_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9249,6 +10255,46 @@ module Aws::CognitoIdentityProvider
     #
     class ListUserPoolsResponse < Struct.new(
       :user_pools,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] access_token
+    #   A valid access token that Amazon Cognito issued to the user whose
+    #   sessions you want to list. Amazon Cognito derives the user pool and
+    #   username from this token.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   A pagination token that Amazon Cognito returned in a previous
+    #   response. Use this value to retrieve the next page of results if a
+    #   `NextToken` was included in a prior response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ListUserSessionsRequest AWS API Documentation
+    #
+    class ListUserSessionsRequest < Struct.new(
+      :access_token,
+      :next_token)
+      SENSITIVE = [:access_token]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] sessions
+    #   A list of the user's active sessions. Each element describes one
+    #   token session or SSO session.
+    #   @return [Array<Types::SessionDescriptionType>]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token to use in a subsequent request to retrieve the
+    #   next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ListUserSessionsResponse AWS API Documentation
+    #
+    class ListUserSessionsResponse < Struct.new(
+      :sessions,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -10376,13 +11422,19 @@ module Aws::CognitoIdentityProvider
     #   A list of scopes that are defined for the resource server.
     #   @return [Array<Types::ResourceServerScopeType>]
     #
+    # @!attribute [rw] managed_by
+    #   This value is reserved for resource servers that Amazon Cognito
+    #   manages. Resource servers that you create don't have this value.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ResourceServerType AWS API Documentation
     #
     class ResourceServerType < Struct.new(
       :user_pool_id,
       :identifier,
       :name,
-      :scopes)
+      :scopes,
+      :managed_by)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10878,6 +11930,177 @@ module Aws::CognitoIdentityProvider
       include Aws::Structure
     end
 
+    # A summary of a point-in-time recovery of a user pool.
+    #
+    # @!attribute [rw] restore_id
+    #   The ID of the recovery.
+    #   @return [String]
+    #
+    # @!attribute [rw] restore_status
+    #   The status of the recovery. For a description of each status, see
+    #   the `RestoreStatus` parameter of `RestorationType`.
+    #   @return [String]
+    #
+    # @!attribute [rw] restore_timestamp
+    #   The point in time that the recovery restores the user pool to.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/RestorationDescriptionType AWS API Documentation
+    #
+    class RestorationDescriptionType < Struct.new(
+      :restore_id,
+      :restore_status,
+      :restore_timestamp)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The details of a point-in-time recovery of a user pool.
+    #
+    # @!attribute [rw] restore_id
+    #   The ID of the recovery. Use this ID in requests to describe, start,
+    #   or cancel the recovery.
+    #   @return [String]
+    #
+    # @!attribute [rw] restore_status
+    #   The status of the recovery. Can be one of the following values.
+    #
+    #   PREVIEW\_GENERATING
+    #
+    #   : Amazon Cognito is generating the recovery preview, which might not
+    #     be available immediately. Write operations in the user pool are
+    #     paused.
+    #
+    #   PREVIEW\_GENERATED
+    #
+    #   : The recovery preview is ready for review. Write operations in the
+    #     user pool are paused. Within 24 hours after you initiate the
+    #     recovery, apply it with a `StartPointInTimeRecovery` request or
+    #     discard it with a `CancelPointInTimeRecovery` request.
+    #
+    #   PREVIEW\_CANCELLED
+    #
+    #   : You canceled the recovery. Amazon Cognito resumed write operations
+    #     and didn't change your user pool data.
+    #
+    #   PREVIEW\_GENERATION\_FAILED
+    #
+    #   : Amazon Cognito couldn't generate the recovery preview. Amazon
+    #     Cognito resumed write operations and didn't change your user pool
+    #     data. You can initiate a new recovery.
+    #
+    #   PREVIEW\_EXPIRED
+    #
+    #   : You didn't start or cancel the recovery within 24 hours after you
+    #     initiated it. Amazon Cognito resumed write operations and didn't
+    #     change your user pool data.
+    #
+    #   RESTORING
+    #
+    #   : Amazon Cognito is restoring user data in the user pool to its
+    #     state at the recovery point. Write operations in the user pool are
+    #     paused.
+    #
+    #   RESTORE\_COMPLETED
+    #
+    #   : Amazon Cognito restored your user pool to its state at the
+    #     recovery point and resumed write operations.
+    #
+    #   TEMPORARY\_INTERNAL\_ERROR\_SEE\_SUPPORT\_CASE
+    #
+    #   : The recovery encountered an internal error. Write operations in
+    #     the user pool remain paused. Amazon Web Services Support contacts
+    #     you through a support case to resolve the issue.
+    #
+    #   AWS\_ABORTED
+    #
+    #   : Amazon Cognito stopped the recovery because of an internal
+    #     failure. Write operations in the user pool remain paused, and you
+    #     can't cancel or retry the recovery. Amazon Web Services Support
+    #     contacts you through a support case to resolve the issue.
+    #   @return [String]
+    #
+    # @!attribute [rw] restore_timestamp
+    #   The point in time that the recovery restores the user pool to.
+    #   @return [Time]
+    #
+    # @!attribute [rw] trigger_timestamp
+    #   The end of the period of changes that the recovery reverts. This
+    #   time is shortly after the time that you initiated the recovery. The
+    #   recovery reverts changes to user data that occurred between
+    #   `RestoreTimestamp` and `TriggerTimestamp`.
+    #   @return [Time]
+    #
+    # @!attribute [rw] restore_preview
+    #   The recovery preview. For each type of entity, the preview shows the
+    #   number of entities that the recovery creates, updates, and deletes.
+    #   The preview doesn't include user data. Amazon Cognito returns the
+    #   preview when it's available.
+    #   @return [Array<Types::RestorePreviewType>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/RestorationType AWS API Documentation
+    #
+    class RestorationType < Struct.new(
+      :restore_id,
+      :restore_status,
+      :restore_timestamp,
+      :trigger_timestamp,
+      :restore_preview)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The number of entities of one type that a point-in-time recovery
+    # creates, updates, and deletes.
+    #
+    # @!attribute [rw] entity
+    #   The type of user pool entity that the recovery changes. Can be one
+    #   of the following values.
+    #
+    #   Users
+    #
+    #   : User profiles, including their attributes.
+    #
+    #   Groups
+    #
+    #   : User pool groups.
+    #
+    #   User MFAs
+    #
+    #   : The MFA settings of users.
+    #
+    #   Passkeys
+    #
+    #   : The passkeys that users registered.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_count
+    #   The number of entities of this type that the recovery creates. These
+    #   entities existed at the recovery point and were deleted after it.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] update_count
+    #   The number of entities of this type that the recovery reverts to
+    #   their state at the recovery point. These entities were modified
+    #   after the recovery point.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] delete_count
+    #   The number of entities of this type that the recovery deletes. These
+    #   entities were created after the recovery point.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/RestorePreviewType AWS API Documentation
+    #
+    class RestorePreviewType < Struct.new(
+      :entity,
+      :create_count,
+      :update_count,
+      :delete_count)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] token
     #   The refresh token that you want to revoke.
     #   @return [String]
@@ -10892,12 +12115,24 @@ module Aws::CognitoIdentityProvider
     #   secret.
     #   @return [String]
     #
+    # @!attribute [rw] revoke_associated_sessions
+    #   Specifies whether to also revoke the SSO session that is linked to
+    #   the token session being revoked. `NONE`, the default, revokes only
+    #   the token session that is associated with the refresh token.
+    #   `LINKED` also revokes the parent SSO session that the token session
+    #   came through; the other token sessions that came through that SSO
+    #   session aren't revoked. `LINKED` has no effect when session
+    #   tracking is disabled or when the token session has no parent SSO
+    #   session.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/RevokeTokenRequest AWS API Documentation
     #
     class RevokeTokenRequest < Struct.new(
       :token,
       :client_id,
-      :client_secret)
+      :client_secret,
+      :revoke_associated_sessions)
       SENSITIVE = [:token, :client_id, :client_secret]
       include Aws::Structure
     end
@@ -10905,6 +12140,45 @@ module Aws::CognitoIdentityProvider
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/RevokeTokenResponse AWS API Documentation
     #
     class RevokeTokenResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] access_token
+    #   A valid access token that Amazon Cognito issued to the user. Amazon
+    #   Cognito uses this token to authorize the request and to identify the
+    #   user.
+    #   @return [String]
+    #
+    # @!attribute [rw] session_id
+    #   The ID of the session to revoke. This is a 28-character string of
+    #   lowercase letters and digits, prefixed with `tkn` for a token
+    #   session or `sso` for an SSO session. This value can't identify the
+    #   caller's own current session.
+    #   @return [String]
+    #
+    # @!attribute [rw] revoke_associated_sessions
+    #   Specifies whether to also revoke the sessions that are linked to the
+    #   targeted session. `NONE`, the default, revokes only the targeted
+    #   session. `LINKED` also revokes the directly linked session or
+    #   sessions, interpreted relative to the type of the targeted session:
+    #   revoking a token session also revokes the parent SSO session it came
+    #   through, and revoking an SSO session also revokes the token sessions
+    #   that came through it. The set of linked sessions is eventually
+    #   consistent, so associated sessions are typically revoked within a
+    #   few seconds.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/RevokeUserSessionRequest AWS API Documentation
+    #
+    class RevokeUserSessionRequest < Struct.new(
+      :access_token,
+      :session_id,
+      :revoke_associated_sessions)
+      SENSITIVE = [:access_token]
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/RevokeUserSessionResponse AWS API Documentation
+    #
+    class RevokeUserSessionResponse < Aws::EmptyStructure; end
 
     # The settings of risk configuration for threat protection with threat
     # protection in a user pool.
@@ -11162,6 +12436,112 @@ module Aws::CognitoIdentityProvider
       include Aws::Structure
     end
 
+    # Describes an active user session. Amazon Cognito returns this type in
+    # the responses of `ListUserSessions` and `AdminListUserSessions`, for
+    # both token sessions and SSO sessions.
+    #
+    # @!attribute [rw] session_id
+    #   The unique identifier for the session. This is a 28-character string
+    #   of lowercase letters and digits, prefixed with `tkn` for a token
+    #   session or `sso` for an SSO session.
+    #   @return [String]
+    #
+    # @!attribute [rw] session_type
+    #   The type of the session. Valid values are `TOKEN` and `SSO`.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_id
+    #   The ID of the app client that the session belongs to.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_date
+    #   The date and time when the session was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_active_date
+    #   The date and time of the most recent activity on the session. For a
+    #   token session, this is the most recent token refresh or rotation; a
+    #   new authentication creates a new token session rather than updating
+    #   an existing one. For an SSO session, this is the most recent
+    #   authentication, token grant, or token rotation.
+    #   @return [Time]
+    #
+    # @!attribute [rw] device_type
+    #   A description of the device associated with the most recent activity
+    #   on the session, derived from the parsed user agent (operating system
+    #   and browser or app). Amazon Cognito overwrites this value on each
+    #   sign-in, refresh, and rotation. The value can be `unknown`. The
+    #   maximum length is 1,024 characters.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_ip_address
+    #   The IP address associated with the most recent activity on the
+    #   session. Amazon Cognito overwrites this value on each refresh and
+    #   rotation. The maximum length is 128 characters.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_location
+    #   The geographic location of the most recent activity on the session,
+    #   derived from the IP address.
+    #   @return [Types::SessionLocationType]
+    #
+    # @!attribute [rw] origin_session_id
+    #   For a token session, the ID of the SSO session that the token
+    #   session originated from. This value is null for sessions that were
+    #   initiated through the API and didn't come through an SSO session.
+    #   Amazon Cognito returns this value for token sessions only.
+    #   @return [String]
+    #
+    # @!attribute [rw] is_current_session
+    #   Specifies whether this session matches the access token supplied in
+    #   the request. This value is always `false` for the
+    #   `AdminListUserSessions` operation, which doesn't take an access
+    #   token.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/SessionDescriptionType AWS API Documentation
+    #
+    class SessionDescriptionType < Struct.new(
+      :session_id,
+      :session_type,
+      :client_id,
+      :create_date,
+      :last_active_date,
+      :device_type,
+      :last_ip_address,
+      :last_location,
+      :origin_session_id,
+      :is_current_session)
+      SENSITIVE = [:client_id, :last_ip_address]
+      include Aws::Structure
+    end
+
+    # The geographic location of the most recent activity on a session,
+    # derived from the IP address.
+    #
+    # @!attribute [rw] city
+    #   The city of the most recent activity on the session, derived from
+    #   the IP address. This value can be null if geo-IP resolution fails.
+    #   The maximum length is 256 characters.
+    #   @return [String]
+    #
+    # @!attribute [rw] country
+    #   The country of the most recent activity on the session, derived from
+    #   the IP address and returned in English (for example, `United
+    #   States`). This is a country name as returned by the geo-IP database,
+    #   not an ISO country code, and can be `unknown` if geo-IP resolution
+    #   fails.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/SessionLocationType AWS API Documentation
+    #
+    class SessionLocationType < Struct.new(
+      :city,
+      :country)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] user_pool_id
     #   The ID of the user pool where you want to configure logging.
     #   @return [String]
@@ -11363,6 +12743,51 @@ module Aws::CognitoIdentityProvider
     class SetUserMFAPreferenceResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] user_pool_id
+    #   The ID of the user pool that contains the app client.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_id
+    #   The ID of the app client that you want to configure.
+    #   @return [String]
+    #
+    # @!attribute [rw] sso_session
+    #   The SSO session settings for the app client.
+    #   @return [Types::ClientSSOSessionConfigType]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/SetUserPoolClientSessionConfigurationRequest AWS API Documentation
+    #
+    class SetUserPoolClientSessionConfigurationRequest < Struct.new(
+      :user_pool_id,
+      :client_id,
+      :sso_session)
+      SENSITIVE = [:client_id]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] user_pool_id
+    #   The ID of the user pool that contains the app client.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_id
+    #   The ID of the app client that the session configuration was applied
+    #   to.
+    #   @return [String]
+    #
+    # @!attribute [rw] sso_session
+    #   The SSO session settings that were applied to the app client.
+    #   @return [Types::ClientSSOSessionConfigType]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/SetUserPoolClientSessionConfigurationResponse AWS API Documentation
+    #
+    class SetUserPoolClientSessionConfigurationResponse < Struct.new(
+      :user_pool_id,
+      :client_id,
+      :sso_session)
+      SENSITIVE = [:client_id]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] user_pool_id
     #   The user pool ID.
     #   @return [String]
     #
@@ -11474,6 +12899,57 @@ module Aws::CognitoIdentityProvider
       :email_mfa_configuration,
       :mfa_configuration,
       :web_authn_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] user_pool_id
+    #   The ID of the user pool where you want to configure session
+    #   tracking.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_session_tracking
+    #   Specifies whether Amazon Cognito tracks sessions for users in the
+    #   user pool. Set this value to `ENABLED` to turn on server-side
+    #   session tracking, or `DISABLED` to turn it off. When you set this
+    #   value to `DISABLED` while the user pool remains active, existing
+    #   client-level session configurations are retained but dormant, and
+    #   are reactivated when you enable tracking again.
+    #   @return [String]
+    #
+    # @!attribute [rw] token_session
+    #   The pool-wide token session settings to apply.
+    #   @return [Types::UserPoolTokenSessionConfigType]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/SetUserPoolSessionConfigurationRequest AWS API Documentation
+    #
+    class SetUserPoolSessionConfigurationRequest < Struct.new(
+      :user_pool_id,
+      :user_session_tracking,
+      :token_session)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] user_pool_id
+    #   The ID of the user pool that the session configuration was applied
+    #   to.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_session_tracking
+    #   The session tracking setting that was applied to the user pool.
+    #   @return [String]
+    #
+    # @!attribute [rw] token_session
+    #   The pool-wide token session settings that were applied.
+    #   @return [Types::UserPoolTokenSessionConfigType]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/SetUserPoolSessionConfigurationResponse AWS API Documentation
+    #
+    class SetUserPoolSessionConfigurationResponse < Struct.new(
+      :user_pool_id,
+      :user_session_tracking,
+      :token_session)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11870,6 +13346,38 @@ module Aws::CognitoIdentityProvider
     class SoftwareTokenMfaSettingsType < Struct.new(
       :enabled,
       :preferred_mfa)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] user_pool_id
+    #   The ID of the user pool that contains the recovery that you want to
+    #   start.
+    #   @return [String]
+    #
+    # @!attribute [rw] restore_id
+    #   The ID of the recovery that you want to start. Amazon Cognito
+    #   returns this ID in the response to an `InitiatePointInTimeRecovery`
+    #   request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/StartPointInTimeRecoveryRequest AWS API Documentation
+    #
+    class StartPointInTimeRecoveryRequest < Struct.new(
+      :user_pool_id,
+      :restore_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] restoration
+    #   The details of the recovery that you started, including its status.
+    #   @return [Types::RestorationType]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/StartPointInTimeRecoveryResponse AWS API Documentation
+    #
+    class StartPointInTimeRecoveryResponse < Struct.new(
+      :restoration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -12441,6 +13949,95 @@ module Aws::CognitoIdentityProvider
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UpdateAuthEventFeedbackResponse AWS API Documentation
     #
     class UpdateAuthEventFeedbackResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] user_pool_id
+    #   The ID of the user pool that contains the CIMD policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] cimd_policy_id
+    #   The ID of the CIMD policy that you want to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_id
+    #   The ID of the app client that you want to associate with the CIMD
+    #   policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy_name
+    #   A friendly name for the CIMD policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] cache_duration
+    #   The length of time, in seconds, that Amazon Cognito caches a client
+    #   metadata document that it retrieved from a URL that matches the
+    #   policy. The value must be between 86,400 seconds (one day) and
+    #   31,556,952 seconds (one year).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] url_patterns
+    #   One to five HTTPS URL patterns. Amazon Cognito accepts a client ID
+    #   metadata document URL only when it matches one of these patterns.
+    #   Patterns can contain the `*` wildcard character.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UpdateCIMDPolicyRequest AWS API Documentation
+    #
+    class UpdateCIMDPolicyRequest < Struct.new(
+      :user_pool_id,
+      :cimd_policy_id,
+      :client_id,
+      :policy_name,
+      :cache_duration,
+      :url_patterns)
+      SENSITIVE = [:client_id]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] cimd_policy
+    #   The updated CIMD policy.
+    #   @return [Types::CIMDPolicyType]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UpdateCIMDPolicyResponse AWS API Documentation
+    #
+    class UpdateCIMDPolicyResponse < Struct.new(
+      :cimd_policy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] user_pool_id
+    #   The ID of the user pool that contains the CIMD policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] cimd_policy_id
+    #   The ID of the CIMD policy that the URL belongs to.
+    #   @return [String]
+    #
+    # @!attribute [rw] url
+    #   The client metadata document URL whose cache state you want to
+    #   change.
+    #   @return [String]
+    #
+    # @!attribute [rw] action
+    #   The action to take on the cached client metadata document. `REFRESH`
+    #   retrieves the document from the URL again. `INVALIDATE` removes the
+    #   cached document.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UpdateClientMetadataURLStateRequest AWS API Documentation
+    #
+    class UpdateClientMetadataURLStateRequest < Struct.new(
+      :user_pool_id,
+      :cimd_policy_id,
+      :url,
+      :action)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UpdateClientMetadataURLStateResponse AWS API Documentation
+    #
+    class UpdateClientMetadataURLStateResponse < Aws::EmptyStructure; end
 
     # Represents the request to update the device status.
     #
@@ -13198,6 +14795,15 @@ module Aws::CognitoIdentityProvider
     #
     #   * `ALLOW_REFRESH_TOKEN_AUTH`: Enable authflow to refresh tokens.
     #
+    #   * `ALLOW_TOKEN_EXCHANGE_IMPERSONATION` – Use this flow to request
+    #     `GetDerivedToken` token exchanges without an `ActorToken`. The
+    #     issued token represents the subject user directly.
+    #
+    #   * `ALLOW_TOKEN_EXCHANGE_DELEGATION` – Use this flow to request
+    #     `GetDerivedToken` token exchanges that include an `ActorToken`.
+    #     The issued token carries an `act` claim that identifies the
+    #     intermediary acting on the behalf of the subject.
+    #
     #   In some environments, you will see the values `ADMIN_NO_SRP_AUTH`,
     #   `CUSTOM_AUTH_FLOW_ONLY`, or `USER_PASSWORD_AUTH`. You can't assign
     #   these legacy `ExplicitAuthFlows` values to user pool clients at the
@@ -13409,6 +15015,35 @@ module Aws::CognitoIdentityProvider
     #   disabled, token refresh issues only ID and access tokens.
     #   @return [Types::RefreshTokenRotationType]
     #
+    # @!attribute [rw] publish_secrets_in_aws_secrets_manager
+    #   Specifies whether Amazon Cognito stores and manages this app
+    #   client's secret in [Amazon Web Services Secrets Manager][1] instead
+    #   of returning the plaintext value. When you set this parameter to
+    #   `true`, the response returns `ClientSecretArn` instead of
+    #   `ClientSecret`. By default, Amazon Cognito rotates the secret every
+    #   7 days. You can change the rotation schedule in Secrets Manager.
+    #
+    #   Set to `true` to migrate an existing generated secret into Secrets
+    #   Manager, or `false` to move it back to Amazon Cognito and delete the
+    #   Secrets Manager secret. If you omit this parameter, Amazon Cognito
+    #   doesn't change how it manages the existing secret. Applies only to
+    #   app clients that already have a generated secret.
+    #
+    #   When you set it to `true`, Amazon Cognito starts managing the app
+    #   client's secret in Secrets Manager and rotates it right away. If
+    #   the app client has two secrets, that first rotation deletes the
+    #   older one.
+    #
+    #   When you set this parameter to `false`, Amazon Cognito immediately
+    #   and permanently deletes the Secrets Manager secret. There's no
+    #   recovery window. Applications that read the secret from Secrets
+    #   Manager can no longer get it.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UpdateUserPoolClientRequest AWS API Documentation
     #
     class UpdateUserPoolClientRequest < Struct.new(
@@ -13434,7 +15069,8 @@ module Aws::CognitoIdentityProvider
       :enable_token_revocation,
       :enable_propagate_additional_user_context_data,
       :auth_session_validity,
-      :refresh_token_rotation)
+      :refresh_token_rotation,
+      :publish_secrets_in_aws_secrets_manager)
       SENSITIVE = [:client_id]
       include Aws::Structure
     end
@@ -13753,6 +15389,27 @@ module Aws::CognitoIdentityProvider
     #   [2]: https://docs.aws.amazon.com/cognito/latest/developerguide/feature-plans-features-plus.html
     #   @return [Types::UserPoolAddOnsType]
     #
+    # @!attribute [rw] dcr_configuration
+    #   The dynamic client registration configuration for the user pool.
+    #   With dynamic client registration, applications can register their
+    #   own app clients at runtime through the registration endpoint of your
+    #   user pool domain. To activate this setting, your user pool must be
+    #   in the [ Essentials tier][1] or higher.
+    #
+    #   If you omit this parameter, Amazon Cognito keeps the existing
+    #   configuration. If you include it, Amazon Cognito replaces the
+    #   existing configuration with the one that you provide. Members that
+    #   you omit revert to their default values, and an omitted
+    #   `EnableStatus` turns dynamic client registration on.
+    #
+    #   To change the feature plan of the user pool to Lite, you must also
+    #   set `EnableStatus` to `Disabled`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cognito/latest/developerguide/feature-plans-features-essentials.html
+    #   @return [Types::DcrConfigurationType]
+    #
     # @!attribute [rw] account_recovery_setting
     #   The available verified method a user can use to recover their
     #   password when they call `ForgotPassword`. You can use this setting
@@ -13830,6 +15487,7 @@ module Aws::CognitoIdentityProvider
       :user_pool_tags,
       :admin_create_user_config,
       :user_pool_add_ons,
+      :dcr_configuration,
       :account_recovery_setting,
       :pool_name,
       :user_pool_tier,
@@ -14176,6 +15834,22 @@ module Aws::CognitoIdentityProvider
     #   The app client secret.
     #   @return [String]
     #
+    # @!attribute [rw] client_secret_arn
+    #   The Amazon Resource Name (ARN) of the [Amazon Web Services Secrets
+    #   Manager][1] secret that stores this app client's secret, when
+    #   Amazon Cognito manages the secret in Secrets Manager. Retrieve the
+    #   secret from Secrets Manager by this ARN. The `SecretString` value is
+    #   a JSON object with `userPoolId`, `userPoolClientId`, and
+    #   `clientSecretValue` fields. Use `clientSecretValue` as the app
+    #   client secret. Amazon Cognito returns this ARN instead of
+    #   `ClientSecret` for app clients whose secret it manages in Secrets
+    #   Manager.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html
+    #   @return [String]
+    #
     # @!attribute [rw] last_modified_date
     #   The date and time when the item was modified. Amazon Cognito returns
     #   this timestamp in UNIX epoch time format. Your SDK might render the
@@ -14337,6 +16011,15 @@ module Aws::CognitoIdentityProvider
     #   * `ALLOW_USER_SRP_AUTH`: Enable SRP-based authentication.
     #
     #   * `ALLOW_REFRESH_TOKEN_AUTH`: Enable authflow to refresh tokens.
+    #
+    #   * `ALLOW_TOKEN_EXCHANGE_IMPERSONATION` – Use this flow to request
+    #     `GetDerivedToken` token exchanges without an `ActorToken`. The
+    #     issued token represents the subject user directly.
+    #
+    #   * `ALLOW_TOKEN_EXCHANGE_DELEGATION` – Use this flow to request
+    #     `GetDerivedToken` token exchanges that include an `ActorToken`.
+    #     The issued token carries an `act` claim that identifies the
+    #     intermediary acting on the behalf of the subject.
     #
     #   In some environments, you will see the values `ADMIN_NO_SRP_AUTH`,
     #   `CUSTOM_AUTH_FLOW_ONLY`, or `USER_PASSWORD_AUTH`. You can't assign
@@ -14556,6 +16239,23 @@ module Aws::CognitoIdentityProvider
     #   disabled, token refresh issues only ID and access tokens.
     #   @return [Types::RefreshTokenRotationType]
     #
+    # @!attribute [rw] client_type
+    #   How the app client was created.
+    #
+    #   REGULAR
+    #
+    #   : The app client wasn't created through dynamic client
+    #     registration. For example, you created it with
+    #     `CreateUserPoolClient`.
+    #
+    #   DCR
+    #
+    #   : An application registered the app client through dynamic client
+    #     registration. These app clients don't support client secret
+    #     operations such as `AddUserPoolClientSecret`, and they can't hold
+    #     the `aws.cognito/dcr/register` scope.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UserPoolClientType AWS API Documentation
     #
     class UserPoolClientType < Struct.new(
@@ -14563,6 +16263,7 @@ module Aws::CognitoIdentityProvider
       :client_name,
       :client_id,
       :client_secret,
+      :client_secret_arn,
       :last_modified_date,
       :creation_date,
       :refresh_token_validity,
@@ -14584,7 +16285,8 @@ module Aws::CognitoIdentityProvider
       :enable_token_revocation,
       :enable_propagate_additional_user_context_data,
       :auth_session_validity,
-      :refresh_token_rotation)
+      :refresh_token_rotation,
+      :client_type)
       SENSITIVE = [:client_id, :client_secret]
       include Aws::Structure
     end
@@ -14735,6 +16437,26 @@ module Aws::CognitoIdentityProvider
     #
     class UserPoolTaggingException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The pool-wide token session settings for a user pool.
+    #
+    # @!attribute [rw] max_per_user
+    #   The maximum number of active token sessions that a user can have
+    #   across the user pool. The minimum value is `1` and the maximum value
+    #   is `100`. The default is `20`. When a user reaches this limit, the
+    #   next successful authentication automatically evicts that user's
+    #   least recently used token session before it creates the new session.
+    #   Lowering this value doesn't evict existing sessions on its own; the
+    #   user is brought back within the limit on their next sign-in.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UserPoolTokenSessionConfigType AWS API Documentation
+    #
+    class UserPoolTokenSessionConfigType < Struct.new(
+      :max_per_user)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -14978,6 +16700,18 @@ module Aws::CognitoIdentityProvider
     #   [2]: https://docs.aws.amazon.com/cognito/latest/developerguide/feature-plans-features-plus.html
     #   @return [Types::UserPoolAddOnsType]
     #
+    # @!attribute [rw] dcr_configuration
+    #   The dynamic client registration configuration for the user pool.
+    #   With dynamic client registration, applications can register their
+    #   own app clients at runtime through the registration endpoint of your
+    #   user pool domain. To activate this setting, your user pool must be
+    #   in the [ Essentials tier][1] or higher.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cognito/latest/developerguide/feature-plans-features-essentials.html
+    #   @return [Types::DcrConfigurationType]
+    #
     # @!attribute [rw] username_configuration
     #   Case sensitivity of the username input for the selected sign-in
     #   option. When case sensitivity is set to `False` (case insensitive),
@@ -15075,6 +16809,7 @@ module Aws::CognitoIdentityProvider
       :custom_domain,
       :admin_create_user_config,
       :user_pool_add_ons,
+      :dcr_configuration,
       :username_configuration,
       :arn,
       :account_recovery_setting,

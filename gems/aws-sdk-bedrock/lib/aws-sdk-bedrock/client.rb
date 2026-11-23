@@ -266,7 +266,8 @@ module Aws::Bedrock
     #     An integer representing the maximum number attempts that will be made for
     #     a single request, including the initial attempt.  For example,
     #     setting this value to 5 will result in a request being retried up to
-    #     4 times. Used in `standard` and `adaptive` retry modes.
+    #     4 times. Used in `standard` and `adaptive` retry modes. Defaults to 3,
+    #     except for DynamoDB and DynamoDB Streams, which default to 4.
     #
     #   @option options [String] :profile ("default")
     #     Used when loading credentials from the shared credentials file at `HOME/.aws/credentials`.
@@ -329,15 +330,15 @@ module Aws::Bedrock
     #     used by the default backoff function. This option is only used in the
     #     `legacy` retry mode.
     #
-    #   @option options [String] :retry_mode ("legacy")
+    #   @option options [String] :retry_mode ("standard")
     #     Specifies which retry algorithm to use. Values are:
     #
-    #     * `legacy` - The pre-existing retry behavior. This is the default
-    #       value if no retry mode is provided.
+    #     * `legacy` - The pre-existing retry behavior.
     #
     #     * `standard` - A standardized set of retry rules across the AWS SDKs.
     #       This includes support for retry quotas, which limit the number of
-    #       unsuccessful retries a client can make.
+    #       unsuccessful retries a client can make. This is the default value
+    #       if no retry mode is provided.
     #
     #     * `adaptive` - A retry mode that includes all the functionality of
     #       `standard` mode along with automatic client side throttling.
@@ -482,6 +483,48 @@ module Aws::Bedrock
     end
 
     # @!group API Operations
+
+    # Archives a project. Archiving is terminal; there is no delete.
+    # Archiving an already-archived project succeeds without effect. The
+    # default project cannot be archived.
+    #
+    # @option params [required, String] :project_identifier
+    #   The id or ARN of the project to archive.
+    #
+    # @return [Types::ArchiveProjectResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ArchiveProjectResponse#id #id} => String
+    #   * {Types::ArchiveProjectResponse#arn #arn} => String
+    #   * {Types::ArchiveProjectResponse#name #name} => String
+    #   * {Types::ArchiveProjectResponse#status #status} => String
+    #   * {Types::ArchiveProjectResponse#created_at #created_at} => Time
+    #   * {Types::ArchiveProjectResponse#archived_at #archived_at} => Time
+    #   * {Types::ArchiveProjectResponse#data_retention #data_retention} => Types::ProjectDataRetention
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.archive_project({
+    #     project_identifier: "ProjectIdentifier", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.id #=> String
+    #   resp.arn #=> String
+    #   resp.name #=> String
+    #   resp.status #=> String, one of "active", "archived"
+    #   resp.created_at #=> Time
+    #   resp.archived_at #=> Time
+    #   resp.data_retention.mode #=> String, one of "default", "none", "aws_review", "provider_data_share", "inherit"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/ArchiveProject AWS API Documentation
+    #
+    # @overload archive_project(params = {})
+    # @param [Hash] params ({})
+    def archive_project(params = {}, options = {})
+      req = build_request(:archive_project, params)
+      req.send_request(options)
+    end
 
     # Deletes one or more advanced prompt optimization jobs.
     #
@@ -2767,6 +2810,65 @@ module Aws::Bedrock
       req.send_request(options)
     end
 
+    # Creates a project: a workload boundary within the account that
+    # inference requests can be associated with.
+    #
+    # @option params [required, String] :name
+    #   The display name for the project. Project names do not have to be
+    #   unique.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   The tags to associate with the project.
+    #
+    # @option params [Types::ProjectDataRetention] :data_retention
+    #   The project's data-retention mode. If you omit this field, Amazon
+    #   Bedrock sets the mode to `inherit`. The project then uses the account
+    #   setting or the model default.
+    #
+    # @return [Types::CreateProjectResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateProjectResponse#id #id} => String
+    #   * {Types::CreateProjectResponse#arn #arn} => String
+    #   * {Types::CreateProjectResponse#name #name} => String
+    #   * {Types::CreateProjectResponse#status #status} => String
+    #   * {Types::CreateProjectResponse#created_at #created_at} => Time
+    #   * {Types::CreateProjectResponse#archived_at #archived_at} => Time
+    #   * {Types::CreateProjectResponse#data_retention #data_retention} => Types::ProjectDataRetention
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_project({
+    #     name: "ProjectName", # required
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #     data_retention: {
+    #       mode: "default", # required, accepts default, none, aws_review, provider_data_share, inherit
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.id #=> String
+    #   resp.arn #=> String
+    #   resp.name #=> String
+    #   resp.status #=> String, one of "active", "archived"
+    #   resp.created_at #=> Time
+    #   resp.archived_at #=> Time
+    #   resp.data_retention.mode #=> String, one of "default", "none", "aws_review", "provider_data_share", "inherit"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/CreateProject AWS API Documentation
+    #
+    # @overload create_project(params = {})
+    # @param [Hash] params ({})
+    def create_project(params = {}, options = {})
+      req = build_request(:create_project, params)
+      req.send_request(options)
+    end
+
     # Creates a prompt router that manages the routing of requests between
     # multiple foundation models based on the routing criteria.
     #
@@ -2951,6 +3053,33 @@ module Aws::Bedrock
     # @param [Hash] params ({})
     def create_provisioned_model_throughput(params = {}, options = {})
       req = build_request(:create_provisioned_model_throughput, params)
+      req.send_request(options)
+    end
+
+    # Deletes your account's retention storage configuration for a model
+    # provider. Deleting an absent configuration succeeds. You do not need
+    # to participate in the program to delete the configuration. You can
+    # delete it even if your account is ineligible or its eligibility is
+    # revoked.
+    #
+    # @option params [required, String] :model_provider
+    #   The model provider whose retention storage configuration is addressed
+    #   by this request.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_account_data_retention_storage({
+    #     model_provider: "anthropic", # required, accepts anthropic, openai
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/DeleteAccountDataRetentionStorage AWS API Documentation
+    #
+    # @overload delete_account_data_retention_storage(params = {})
+    # @param [Hash] params ({})
+    def delete_account_data_retention_storage(params = {}, options = {})
+      req = build_request(:delete_account_data_retention_storage, params)
       req.send_request(options)
     end
 
@@ -3296,6 +3425,68 @@ module Aws::Bedrock
       req.send_request(options)
     end
 
+    # Deletes the organization's retention storage configuration for a
+    # model provider. The caller must be the organization's management
+    # account or a delegated administrator. Deleting an absent configuration
+    # succeeds; no program participation is required to delete.
+    #
+    # @option params [required, String] :model_provider
+    #   The model provider whose retention storage configuration is addressed
+    #   by this request.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_organization_data_retention_storage({
+    #     model_provider: "anthropic", # required, accepts anthropic, openai
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/DeleteOrganizationDataRetentionStorage AWS API Documentation
+    #
+    # @overload delete_organization_data_retention_storage(params = {})
+    # @param [Hash] params ({})
+    def delete_organization_data_retention_storage(params = {}, options = {})
+      req = build_request(:delete_organization_data_retention_storage, params)
+      req.send_request(options)
+    end
+
+    # Deletes a project's retention storage configuration for a model
+    # provider. Deleting an absent configuration on an active project
+    # succeeds. If the project does not exist or your account does not own
+    # it, the operation returns `ResourceNotFoundException`. For an archived
+    # project, the operation returns `ValidationException`. You can read the
+    # archived project's stored configuration until Amazon Bedrock purges
+    # the project. You do not need to participate in the program to delete
+    # the configuration.
+    #
+    # @option params [required, String] :project_identifier
+    #   The ID or ARN of a named project owned by the calling account in this
+    #   AWS Region. The default project is not supported; use the
+    #   account-level retention storage operations instead.
+    #
+    # @option params [required, String] :model_provider
+    #   The model provider whose retention storage configuration is addressed
+    #   by this request.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_project_data_retention_storage({
+    #     project_identifier: "ProjectIdentifier", # required
+    #     model_provider: "anthropic", # required, accepts anthropic, openai
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/DeleteProjectDataRetentionStorage AWS API Documentation
+    #
+    # @overload delete_project_data_retention_storage(params = {})
+    # @param [Hash] params ({})
+    def delete_project_data_retention_storage(params = {}, options = {})
+      req = build_request(:delete_project_data_retention_storage, params)
+      req.send_request(options)
+    end
+
     # Deletes a specified prompt router. This action cannot be undone.
     #
     # @option params [required, String] :prompt_router_arn
@@ -3457,6 +3648,52 @@ module Aws::Bedrock
     # @param [Hash] params ({})
     def get_account_data_retention(params = {}, options = {})
       req = build_request(:get_account_data_retention, params)
+      req.send_request(options)
+    end
+
+    # Returns your account's stored retention storage configuration for a
+    # model provider. Amazon Bedrock determines whether the configuration
+    # applies when processing an inference request. Returns
+    # `ResourceNotFoundException` when no configuration exists.
+    #
+    # @option params [required, String] :model_provider
+    #   The model provider whose retention storage configuration is addressed
+    #   by this request.
+    #
+    # @return [Types::GetAccountDataRetentionStorageResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetAccountDataRetentionStorageResponse#scope #scope} => String
+    #   * {Types::GetAccountDataRetentionStorageResponse#model_provider #model_provider} => String
+    #   * {Types::GetAccountDataRetentionStorageResponse#storage_destination #storage_destination} => String
+    #   * {Types::GetAccountDataRetentionStorageResponse#storage_configuration #storage_configuration} => Types::DataRetentionStorageConfiguration
+    #   * {Types::GetAccountDataRetentionStorageResponse#updated_at #updated_at} => Time
+    #   * {Types::GetAccountDataRetentionStorageResponse#kms_key_status #kms_key_status} => String
+    #   * {Types::GetAccountDataRetentionStorageResponse#s3_bucket_status #s3_bucket_status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_account_data_retention_storage({
+    #     model_provider: "anthropic", # required, accepts anthropic, openai
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.scope #=> String, one of "account", "organization", "project"
+    #   resp.model_provider #=> String, one of "anthropic", "openai"
+    #   resp.storage_destination #=> String, one of "customer_managed", "amazon_managed"
+    #   resp.storage_configuration.kms_key_arn #=> String
+    #   resp.storage_configuration.s3_bucket_arn #=> String
+    #   resp.storage_configuration.s3_bucket_owner #=> String
+    #   resp.updated_at #=> Time
+    #   resp.kms_key_status #=> String, one of "pending", "active", "access_denied"
+    #   resp.s3_bucket_status #=> String, one of "pending", "active", "access_denied"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/GetAccountDataRetentionStorage AWS API Documentation
+    #
+    # @overload get_account_data_retention_storage(params = {})
+    # @param [Hash] params ({})
+    def get_account_data_retention_storage(params = {}, options = {})
+      req = build_request(:get_account_data_retention_storage, params)
       req.send_request(options)
     end
 
@@ -4499,6 +4736,19 @@ module Aws::Bedrock
     # @option params [required, String] :model_identifier
     #   The model identifier.
     #
+    # @option params [String] :project_identifier
+    #   The ID or Amazon Resource Name (ARN) of a project. Amazon Bedrock uses
+    #   the project's trusted access program participation when determining
+    #   whether to return the model. The project must belong to your account
+    #   in the same AWS Region and partition as the request.
+    #
+    #   If you omit this parameter or specify `default`, Amazon Bedrock uses
+    #   your account's participation, including organization inheritance.
+    #
+    #   A project that doesn't exist or is archived causes a
+    #   `ValidationException`. A model outside the project's available model
+    #   catalog causes a `ResourceNotFoundException`.
+    #
     # @return [Types::GetFoundationModelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetFoundationModelResponse#model_details #model_details} => Types::FoundationModelDetails
@@ -4507,6 +4757,7 @@ module Aws::Bedrock
     #
     #   resp = client.get_foundation_model({
     #     model_identifier: "GetFoundationModelIdentifier", # required
+    #     project_identifier: "ProjectIdentifier",
     #   })
     #
     # @example Response structure
@@ -4766,6 +5017,20 @@ module Aws::Bedrock
     # @option params [required, String] :inference_profile_identifier
     #   The ID or Amazon Resource Name (ARN) of the inference profile.
     #
+    # @option params [String] :project_identifier
+    #   The ID or Amazon Resource Name (ARN) of a project. Amazon Bedrock uses
+    #   the project's trusted access program participation when determining
+    #   whether to return a system-defined inference profile. The project must
+    #   belong to your account in the same AWS Region and partition as the
+    #   request.
+    #
+    #   If you omit this parameter or specify `default`, Amazon Bedrock uses
+    #   your account's participation, including organization inheritance.
+    #
+    #   A project that doesn't exist or is archived causes a
+    #   `ValidationException`. Specifying a project other than `default` for
+    #   an application inference profile also causes a `ValidationException`.
+    #
     # @return [Types::GetInferenceProfileResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetInferenceProfileResponse#inference_profile_name #inference_profile_name} => String
@@ -4782,6 +5047,7 @@ module Aws::Bedrock
     #
     #   resp = client.get_inference_profile({
     #     inference_profile_identifier: "InferenceProfileIdentifier", # required
+    #     project_identifier: "ProjectIdentifier",
     #   })
     #
     # @example Response structure
@@ -5196,6 +5462,145 @@ module Aws::Bedrock
       req.send_request(options)
     end
 
+    # Returns the organization's retention storage configuration for a
+    # model provider. The caller must be the organization's management
+    # account or a delegated administrator. Returns
+    # ResourceNotFoundException when no configuration exists.
+    #
+    # @option params [required, String] :model_provider
+    #   The model provider whose retention storage configuration is addressed
+    #   by this request.
+    #
+    # @return [Types::GetOrganizationDataRetentionStorageResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetOrganizationDataRetentionStorageResponse#scope #scope} => String
+    #   * {Types::GetOrganizationDataRetentionStorageResponse#model_provider #model_provider} => String
+    #   * {Types::GetOrganizationDataRetentionStorageResponse#storage_destination #storage_destination} => String
+    #   * {Types::GetOrganizationDataRetentionStorageResponse#storage_configuration #storage_configuration} => Types::DataRetentionStorageConfiguration
+    #   * {Types::GetOrganizationDataRetentionStorageResponse#updated_at #updated_at} => Time
+    #   * {Types::GetOrganizationDataRetentionStorageResponse#kms_key_status #kms_key_status} => String
+    #   * {Types::GetOrganizationDataRetentionStorageResponse#s3_bucket_status #s3_bucket_status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_organization_data_retention_storage({
+    #     model_provider: "anthropic", # required, accepts anthropic, openai
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.scope #=> String, one of "account", "organization", "project"
+    #   resp.model_provider #=> String, one of "anthropic", "openai"
+    #   resp.storage_destination #=> String, one of "customer_managed", "amazon_managed"
+    #   resp.storage_configuration.kms_key_arn #=> String
+    #   resp.storage_configuration.s3_bucket_arn #=> String
+    #   resp.storage_configuration.s3_bucket_owner #=> String
+    #   resp.updated_at #=> Time
+    #   resp.kms_key_status #=> String, one of "pending", "active", "access_denied"
+    #   resp.s3_bucket_status #=> String, one of "pending", "active", "access_denied"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/GetOrganizationDataRetentionStorage AWS API Documentation
+    #
+    # @overload get_organization_data_retention_storage(params = {})
+    # @param [Hash] params ({})
+    def get_organization_data_retention_storage(params = {}, options = {})
+      req = build_request(:get_organization_data_retention_storage, params)
+      req.send_request(options)
+    end
+
+    # Retrieves a project.
+    #
+    # @option params [required, String] :project_identifier
+    #   The id or ARN of the project to retrieve.
+    #
+    # @return [Types::GetProjectResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetProjectResponse#id #id} => String
+    #   * {Types::GetProjectResponse#arn #arn} => String
+    #   * {Types::GetProjectResponse#name #name} => String
+    #   * {Types::GetProjectResponse#status #status} => String
+    #   * {Types::GetProjectResponse#created_at #created_at} => Time
+    #   * {Types::GetProjectResponse#archived_at #archived_at} => Time
+    #   * {Types::GetProjectResponse#data_retention #data_retention} => Types::ProjectDataRetention
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_project({
+    #     project_identifier: "ProjectIdentifier", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.id #=> String
+    #   resp.arn #=> String
+    #   resp.name #=> String
+    #   resp.status #=> String, one of "active", "archived"
+    #   resp.created_at #=> Time
+    #   resp.archived_at #=> Time
+    #   resp.data_retention.mode #=> String, one of "default", "none", "aws_review", "provider_data_share", "inherit"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/GetProject AWS API Documentation
+    #
+    # @overload get_project(params = {})
+    # @param [Hash] params ({})
+    def get_project(params = {}, options = {})
+      req = build_request(:get_project, params)
+      req.send_request(options)
+    end
+
+    # Returns a project's retention storage configuration for a model
+    # provider. Returns ResourceNotFoundException when the project does not
+    # exist, is not owned by the calling account, or has no configuration.
+    #
+    # @option params [required, String] :project_identifier
+    #   The ID or ARN of a named project owned by the calling account in this
+    #   AWS Region. The default project is not supported; use the
+    #   account-level retention storage operations instead.
+    #
+    # @option params [required, String] :model_provider
+    #   The model provider whose retention storage configuration is addressed
+    #   by this request.
+    #
+    # @return [Types::GetProjectDataRetentionStorageResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetProjectDataRetentionStorageResponse#scope #scope} => String
+    #   * {Types::GetProjectDataRetentionStorageResponse#model_provider #model_provider} => String
+    #   * {Types::GetProjectDataRetentionStorageResponse#storage_destination #storage_destination} => String
+    #   * {Types::GetProjectDataRetentionStorageResponse#storage_configuration #storage_configuration} => Types::DataRetentionStorageConfiguration
+    #   * {Types::GetProjectDataRetentionStorageResponse#updated_at #updated_at} => Time
+    #   * {Types::GetProjectDataRetentionStorageResponse#kms_key_status #kms_key_status} => String
+    #   * {Types::GetProjectDataRetentionStorageResponse#s3_bucket_status #s3_bucket_status} => String
+    #   * {Types::GetProjectDataRetentionStorageResponse#project_arn #project_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_project_data_retention_storage({
+    #     project_identifier: "ProjectIdentifier", # required
+    #     model_provider: "anthropic", # required, accepts anthropic, openai
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.scope #=> String, one of "account", "organization", "project"
+    #   resp.model_provider #=> String, one of "anthropic", "openai"
+    #   resp.storage_destination #=> String, one of "customer_managed", "amazon_managed"
+    #   resp.storage_configuration.kms_key_arn #=> String
+    #   resp.storage_configuration.s3_bucket_arn #=> String
+    #   resp.storage_configuration.s3_bucket_owner #=> String
+    #   resp.updated_at #=> Time
+    #   resp.kms_key_status #=> String, one of "pending", "active", "access_denied"
+    #   resp.s3_bucket_status #=> String, one of "pending", "active", "access_denied"
+    #   resp.project_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/GetProjectDataRetentionStorage AWS API Documentation
+    #
+    # @overload get_project_data_retention_storage(params = {})
+    # @param [Hash] params ({})
+    def get_project_data_retention_storage(params = {}, options = {})
+      req = build_request(:get_project_data_retention_storage, params)
+      req.send_request(options)
+    end
+
     # Retrieves details about a prompt router.
     #
     # @option params [required, String] :prompt_router_arn
@@ -5326,6 +5731,191 @@ module Aws::Bedrock
     # @param [Hash] params ({})
     def get_resource_policy(params = {}, options = {})
       req = build_request(:get_resource_policy, params)
+      req.send_request(options)
+    end
+
+    # Gets trusted access program details and resolves participation for
+    # your account and its current organization. If you specify a project,
+    # Amazon Bedrock resolves participation for the project, including
+    # inheritance from the account and organization. Archived projects
+    # remain readable until they expire. Returns the same flat summary as a
+    # ListTrustedAccessPrograms item. An absent or invisible program returns
+    # ResourceNotFoundException.
+    #
+    # @option params [required, String] :program_identifier
+    #   Identifier of the trusted access program.
+    #
+    # @option params [String] :project_identifier
+    #   The ID or ARN of a named Bedrock project owned by the calling account
+    #   in this Region. When omitted, resolves participation for the calling
+    #   account, including participation inherited from its current
+    #   organization. When specified, resolves participation for the project,
+    #   including participation inherited from the account and its current
+    #   organization. You cannot specify the default project. Omit this field
+    #   to resolve its inherited participation. An ARN from another account,
+    #   Region, or partition returns ValidationException. A project that does
+    #   not exist in the calling account returns ResourceNotFoundException.
+    #
+    # @return [Types::GetTrustedAccessProgramResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetTrustedAccessProgramResponse#program_id #program_id} => String
+    #   * {Types::GetTrustedAccessProgramResponse#name #name} => String
+    #   * {Types::GetTrustedAccessProgramResponse#description #description} => String
+    #   * {Types::GetTrustedAccessProgramResponse#provider_name #provider_name} => String
+    #   * {Types::GetTrustedAccessProgramResponse#details_url #details_url} => String
+    #   * {Types::GetTrustedAccessProgramResponse#enrollment_url #enrollment_url} => String
+    #   * {Types::GetTrustedAccessProgramResponse#status #status} => String
+    #   * {Types::GetTrustedAccessProgramResponse#status_reason #status_reason} => String
+    #   * {Types::GetTrustedAccessProgramResponse#source #source} => String
+    #   * {Types::GetTrustedAccessProgramResponse#eligibility_scope #eligibility_scope} => String
+    #   * {Types::GetTrustedAccessProgramResponse#resolved_for #resolved_for} => Types::TrustedAccessResolutionContext
+    #   * {Types::GetTrustedAccessProgramResponse#opt_in #opt_in} => String
+    #   * {Types::GetTrustedAccessProgramResponse#updated_at #updated_at} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_trusted_access_program({
+    #     program_identifier: "TrustedAccessProgramIdentifier", # required
+    #     project_identifier: "ProjectIdentifier",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.program_id #=> String
+    #   resp.name #=> String
+    #   resp.description #=> String
+    #   resp.provider_name #=> String
+    #   resp.details_url #=> String
+    #   resp.enrollment_url #=> String
+    #   resp.status #=> String, one of "requestable", "eligible", "enabled", "disabled", "revoked"
+    #   resp.status_reason #=> String
+    #   resp.source #=> String, one of "organization", "account", "project", "program_default"
+    #   resp.eligibility_scope #=> String, one of "organization", "account", "project", "program_default"
+    #   resp.resolved_for.account_id #=> String
+    #   resp.resolved_for.project_arn #=> String
+    #   resp.opt_in #=> String, one of "inherit", "enabled", "disabled"
+    #   resp.updated_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/GetTrustedAccessProgram AWS API Documentation
+    #
+    # @overload get_trusted_access_program(params = {})
+    # @param [Hash] params ({})
+    def get_trusted_access_program(params = {}, options = {})
+      req = build_request(:get_trusted_access_program, params)
+      req.send_request(options)
+    end
+
+    # Gets the calling account's stored enrollment setting for a trusted
+    # access program. The account is derived from the authenticated caller.
+    # Use GetTrustedAccessProgram to retrieve the resolved participation
+    # status, including organization inheritance. If no enrollment is
+    # stored, returns inherit without timestamps.
+    #
+    # @option params [required, String] :program_identifier
+    #   The identifier of the trusted access program.
+    #
+    # @return [Types::GetTrustedAccessProgramAccountEnrollmentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetTrustedAccessProgramAccountEnrollmentResponse#opt_in #opt_in} => String
+    #   * {Types::GetTrustedAccessProgramAccountEnrollmentResponse#updated_at #updated_at} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_trusted_access_program_account_enrollment({
+    #     program_identifier: "TrustedAccessProgramIdentifier", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.opt_in #=> String, one of "inherit", "enabled", "disabled"
+    #   resp.updated_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/GetTrustedAccessProgramAccountEnrollment AWS API Documentation
+    #
+    # @overload get_trusted_access_program_account_enrollment(params = {})
+    # @param [Hash] params ({})
+    def get_trusted_access_program_account_enrollment(params = {}, options = {})
+      req = build_request(:get_trusted_access_program_account_enrollment, params)
+      req.send_request(options)
+    end
+
+    # Gets the current organization's stored enrollment setting for a
+    # trusted access program. The organization and payer account are derived
+    # from the authenticated context. Requires operation permission and
+    # management-account or Bedrock-specific delegated-administrator
+    # authority. The setting can differ from the caller's resolved status
+    # returned by GetTrustedAccessProgram. If no enrollment is stored,
+    # returns inherit without timestamps.
+    #
+    # @option params [required, String] :program_identifier
+    #   The identifier of the trusted access program.
+    #
+    # @return [Types::GetTrustedAccessProgramOrganizationEnrollmentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetTrustedAccessProgramOrganizationEnrollmentResponse#opt_in #opt_in} => String
+    #   * {Types::GetTrustedAccessProgramOrganizationEnrollmentResponse#updated_at #updated_at} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_trusted_access_program_organization_enrollment({
+    #     program_identifier: "TrustedAccessProgramIdentifier", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.opt_in #=> String, one of "inherit", "enabled", "disabled"
+    #   resp.updated_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/GetTrustedAccessProgramOrganizationEnrollment AWS API Documentation
+    #
+    # @overload get_trusted_access_program_organization_enrollment(params = {})
+    # @param [Hash] params ({})
+    def get_trusted_access_program_organization_enrollment(params = {}, options = {})
+      req = build_request(:get_trusted_access_program_organization_enrollment, params)
+      req.send_request(options)
+    end
+
+    # Gets a named project's stored enrollment setting for a trusted access
+    # program. The project must exist in this Region and be owned by the
+    # calling account. Archived projects remain readable until they expire.
+    # Use GetTrustedAccessProgram with projectIdentifier to retrieve
+    # resolved participation, including account and organization
+    # inheritance. If no enrollment is stored, returns inherit without
+    # timestamps.
+    #
+    # @option params [required, String] :program_identifier
+    #   The identifier of the trusted access program.
+    #
+    # @option params [required, String] :project_identifier
+    #   The id or ARN of the named Bedrock project. The default project is not
+    #   supported; use GetTrustedAccessProgramAccountEnrollment for
+    #   account-level enrollment. An ARN from another account, Region, or
+    #   partition returns ValidationException. A project that does not exist
+    #   in the calling account returns ResourceNotFoundException.
+    #
+    # @return [Types::GetTrustedAccessProgramProjectEnrollmentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetTrustedAccessProgramProjectEnrollmentResponse#opt_in #opt_in} => String
+    #   * {Types::GetTrustedAccessProgramProjectEnrollmentResponse#updated_at #updated_at} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_trusted_access_program_project_enrollment({
+    #     program_identifier: "TrustedAccessProgramIdentifier", # required
+    #     project_identifier: "ProjectIdentifier", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.opt_in #=> String, one of "inherit", "enabled", "disabled"
+    #   resp.updated_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/GetTrustedAccessProgramProjectEnrollment AWS API Documentation
+    #
+    # @overload get_trusted_access_program_project_enrollment(params = {})
+    # @param [Hash] params ({})
+    def get_trusted_access_program_project_enrollment(params = {}, options = {})
+      req = build_request(:get_trusted_access_program_project_enrollment, params)
       req.send_request(options)
     end
 
@@ -6146,6 +6736,17 @@ module Aws::Bedrock
     #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/prov-throughput.html
     #   [2]: https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-service.html
     #
+    # @option params [String] :project_identifier
+    #   The ID or Amazon Resource Name (ARN) of a project. Amazon Bedrock uses
+    #   the project's trusted access program participation when determining
+    #   which models to return. The project must belong to your account in the
+    #   same AWS Region and partition as the request.
+    #
+    #   If you omit this parameter or specify `default`, Amazon Bedrock uses
+    #   your account's participation, including organization inheritance. A
+    #   project that doesn't exist or is archived causes a
+    #   `ValidationException`.
+    #
     # @return [Types::ListFoundationModelsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListFoundationModelsResponse#model_summaries #model_summaries} => Array&lt;Types::FoundationModelSummary&gt;
@@ -6157,6 +6758,7 @@ module Aws::Bedrock
     #     by_customization_type: "FINE_TUNING", # accepts FINE_TUNING, CONTINUED_PRE_TRAINING, DISTILLATION
     #     by_output_modality: "TEXT", # accepts TEXT, IMAGE, EMBEDDING
     #     by_inference_type: "ON_DEMAND", # accepts ON_DEMAND, PROVISIONED
+    #     project_identifier: "ProjectIdentifier",
     #   })
     #
     # @example Response structure
@@ -6358,6 +6960,22 @@ module Aws::Bedrock
     #     the model in it. The inference profile may route requests to one or
     #     multiple regions.
     #
+    # @option params [String] :project_identifier
+    #   The ID or Amazon Resource Name (ARN) of a project. Amazon Bedrock uses
+    #   the project's trusted access program participation when determining
+    #   which system-defined inference profiles to return. The project must
+    #   belong to your account in the same AWS Region and partition as the
+    #   request.
+    #
+    #   If you omit this parameter or specify `default`, Amazon Bedrock uses
+    #   your account's participation, including organization inheritance.
+    #
+    #   A project that doesn't exist or is archived causes a
+    #   `ValidationException`. Specifying a project other than `default` with
+    #   `typeEquals` set to `APPLICATION` also causes a `ValidationException`.
+    #   Omit `typeEquals` or set it to `SYSTEM_DEFINED` to list system-defined
+    #   inference profiles for the project.
+    #
     # @return [Types::ListInferenceProfilesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListInferenceProfilesResponse#inference_profile_summaries #inference_profile_summaries} => Array&lt;Types::InferenceProfileSummary&gt;
@@ -6371,6 +6989,7 @@ module Aws::Bedrock
     #     max_results: 1,
     #     next_token: "PaginationToken",
     #     type_equals: "SYSTEM_DEFINED", # accepts SYSTEM_DEFINED, APPLICATION
+    #     project_identifier: "ProjectIdentifier",
     #   })
     #
     # @example Response structure
@@ -6874,6 +7493,61 @@ module Aws::Bedrock
       req.send_request(options)
     end
 
+    # Lists the account's projects. Results are paginated: when the
+    # response includes `nextToken`, pass it in the next request to fetch
+    # the following page. Page size is 1-100, default 20. By default every
+    # project is returned regardless of status; set `statusFilter` to list
+    # only active or only archived projects.
+    #
+    # @option params [String] :next_token
+    #   Continuation token from a previous ListProjects response.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of projects to return in one response, from 1 to
+    #   100. The default is 20.
+    #
+    # @option params [String] :status_filter
+    #   Returns only the projects in this lifecycle status. When absent, no
+    #   status filtering is applied and every project is returned. New
+    #   lifecycle states extend the `ProjectStatus` enum, and with it this
+    #   filter, compatibly.
+    #
+    # @return [Types::ListProjectsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListProjectsResponse#project_summaries #project_summaries} => Array&lt;Types::ProjectSummary&gt;
+    #   * {Types::ListProjectsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_projects({
+    #     next_token: "PaginationToken",
+    #     max_results: 1,
+    #     status_filter: "active", # accepts active, archived
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.project_summaries #=> Array
+    #   resp.project_summaries[0].id #=> String
+    #   resp.project_summaries[0].arn #=> String
+    #   resp.project_summaries[0].name #=> String
+    #   resp.project_summaries[0].status #=> String, one of "active", "archived"
+    #   resp.project_summaries[0].created_at #=> Time
+    #   resp.project_summaries[0].archived_at #=> Time
+    #   resp.project_summaries[0].data_retention.mode #=> String, one of "default", "none", "aws_review", "provider_data_share", "inherit"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/ListProjects AWS API Documentation
+    #
+    # @overload list_projects(params = {})
+    # @param [Hash] params ({})
+    def list_projects(params = {}, options = {})
+      req = build_request(:list_projects, params)
+      req.send_request(options)
+    end
+
     # Retrieves a list of prompt routers.
     #
     # @option params [Integer] :max_results
@@ -7059,6 +7733,74 @@ module Aws::Bedrock
       req.send_request(options)
     end
 
+    # Lists all trusted access programs visible to your account, ordered by
+    # program ID. Amazon Bedrock resolves participation for your account and
+    # its current organization. If you specify a project, Amazon Bedrock
+    # resolves participation for the project, including inheritance from the
+    # account and organization. Archived projects remain readable until they
+    # expire. Amazon Bedrock returns all visible programs in one response.
+    #
+    # @option params [String] :project_identifier
+    #   The ID or ARN of a named Bedrock project owned by the calling account
+    #   in this Region. When omitted, resolves participation for the calling
+    #   account, including participation inherited from its current
+    #   organization. When specified, resolves participation for the project,
+    #   including participation inherited from the account and its current
+    #   organization. You cannot specify the default project. Omit this field
+    #   to resolve its inherited participation. An ARN from another account,
+    #   Region, or partition returns ValidationException. A project that does
+    #   not exist in the calling account returns ResourceNotFoundException.
+    #
+    # @option params [Integer] :max_results
+    #   Reserved for future pagination support. Currently ignored; the
+    #   response includes all visible programs.
+    #
+    # @option params [String] :next_token
+    #   Reserved for future pagination support. Omit this field.
+    #
+    # @return [Types::ListTrustedAccessProgramsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTrustedAccessProgramsResponse#program_summaries #program_summaries} => Array&lt;Types::TrustedAccessProgramSummary&gt;
+    #   * {Types::ListTrustedAccessProgramsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_trusted_access_programs({
+    #     project_identifier: "ProjectIdentifier",
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.program_summaries #=> Array
+    #   resp.program_summaries[0].program_id #=> String
+    #   resp.program_summaries[0].name #=> String
+    #   resp.program_summaries[0].description #=> String
+    #   resp.program_summaries[0].provider_name #=> String
+    #   resp.program_summaries[0].details_url #=> String
+    #   resp.program_summaries[0].enrollment_url #=> String
+    #   resp.program_summaries[0].status #=> String, one of "requestable", "eligible", "enabled", "disabled", "revoked"
+    #   resp.program_summaries[0].status_reason #=> String
+    #   resp.program_summaries[0].source #=> String, one of "organization", "account", "project", "program_default"
+    #   resp.program_summaries[0].eligibility_scope #=> String, one of "organization", "account", "project", "program_default"
+    #   resp.program_summaries[0].resolved_for.account_id #=> String
+    #   resp.program_summaries[0].resolved_for.project_arn #=> String
+    #   resp.program_summaries[0].opt_in #=> String, one of "inherit", "enabled", "disabled"
+    #   resp.program_summaries[0].updated_at #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/ListTrustedAccessPrograms AWS API Documentation
+    #
+    # @overload list_trusted_access_programs(params = {})
+    # @param [Hash] params ({})
+    def list_trusted_access_programs(params = {}, options = {})
+      req = build_request(:list_trusted_access_programs, params)
+      req.send_request(options)
+    end
+
     # Sets the account-wide data retention mode for Amazon Bedrock.
     #
     # @option params [required, String] :mode
@@ -7086,6 +7828,74 @@ module Aws::Bedrock
     # @param [Hash] params ({})
     def put_account_data_retention(params = {}, options = {})
       req = build_request(:put_account_data_retention, params)
+      req.send_request(options)
+    end
+
+    # Creates or replaces the calling account's retention storage record
+    # for a model provider. Amazon Bedrock identifies the account from your
+    # authenticated request. Requires resolved trusted access eligibility
+    # for a storage-capable program of the provider at a covering scope;
+    # otherwise returns ConflictException. Writes replace the whole record;
+    # the last write wins.
+    #
+    # For `customer_managed` destinations, Amazon Bedrock validates the
+    # caller's and service's access to the bucket and key before saving
+    # the configuration. The bucket and key must be in the AWS Region where
+    # you register the configuration. Validation failures reject the write.
+    #
+    # @option params [required, String] :model_provider
+    #   The model provider whose retention storage configuration is addressed
+    #   by this request.
+    #
+    # @option params [required, String] :storage_destination
+    #   Where retained data is delivered for this scope. customer\_managed
+    #   requires storageConfiguration; amazon\_managed forbids it.
+    #
+    # @option params [Types::DataRetentionStorageConfiguration] :storage_configuration
+    #   Destination bucket and key. Required when storageDestination is
+    #   customer\_managed; rejected with ValidationException when
+    #   amazon\_managed.
+    #
+    # @return [Types::PutAccountDataRetentionStorageResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutAccountDataRetentionStorageResponse#scope #scope} => String
+    #   * {Types::PutAccountDataRetentionStorageResponse#model_provider #model_provider} => String
+    #   * {Types::PutAccountDataRetentionStorageResponse#storage_destination #storage_destination} => String
+    #   * {Types::PutAccountDataRetentionStorageResponse#storage_configuration #storage_configuration} => Types::DataRetentionStorageConfiguration
+    #   * {Types::PutAccountDataRetentionStorageResponse#updated_at #updated_at} => Time
+    #   * {Types::PutAccountDataRetentionStorageResponse#kms_key_status #kms_key_status} => String
+    #   * {Types::PutAccountDataRetentionStorageResponse#s3_bucket_status #s3_bucket_status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_account_data_retention_storage({
+    #     model_provider: "anthropic", # required, accepts anthropic, openai
+    #     storage_destination: "customer_managed", # required, accepts customer_managed, amazon_managed
+    #     storage_configuration: {
+    #       kms_key_arn: "KmsKeyArn", # required
+    #       s3_bucket_arn: "DataRetentionStorageBucketArn", # required
+    #       s3_bucket_owner: "AccountId", # required
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.scope #=> String, one of "account", "organization", "project"
+    #   resp.model_provider #=> String, one of "anthropic", "openai"
+    #   resp.storage_destination #=> String, one of "customer_managed", "amazon_managed"
+    #   resp.storage_configuration.kms_key_arn #=> String
+    #   resp.storage_configuration.s3_bucket_arn #=> String
+    #   resp.storage_configuration.s3_bucket_owner #=> String
+    #   resp.updated_at #=> Time
+    #   resp.kms_key_status #=> String, one of "pending", "active", "access_denied"
+    #   resp.s3_bucket_status #=> String, one of "pending", "active", "access_denied"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/PutAccountDataRetentionStorage AWS API Documentation
+    #
+    # @overload put_account_data_retention_storage(params = {})
+    # @param [Hash] params ({})
+    def put_account_data_retention_storage(params = {}, options = {})
+      req = build_request(:put_account_data_retention_storage, params)
       req.send_request(options)
     end
 
@@ -7176,6 +7986,159 @@ module Aws::Bedrock
       req.send_request(options)
     end
 
+    # Creates or replaces the organization's retention storage record for a
+    # model provider. The organization is resolved from the authenticated
+    # caller's management context; the caller must be the organization's
+    # management account or a delegated administrator. Requires resolved
+    # organization-scope trusted access eligibility for a storage-capable
+    # program of the provider; otherwise returns ConflictException. Writes
+    # replace the whole record; the last write wins.
+    #
+    # For `customer_managed` destinations, Amazon Bedrock validates the
+    # caller's and service's access to the bucket and key before saving
+    # the configuration. The bucket and key must be in the AWS Region where
+    # you register the configuration. Validation failures reject the write.
+    #
+    # @option params [required, String] :model_provider
+    #   The model provider whose retention storage configuration is addressed
+    #   by this request.
+    #
+    # @option params [required, String] :storage_destination
+    #   Where retained data is delivered for this scope. customer\_managed
+    #   requires storageConfiguration; amazon\_managed forbids it.
+    #
+    # @option params [Types::DataRetentionStorageConfiguration] :storage_configuration
+    #   Destination bucket and key. Required when storageDestination is
+    #   customer\_managed; rejected with ValidationException when
+    #   amazon\_managed.
+    #
+    # @return [Types::PutOrganizationDataRetentionStorageResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutOrganizationDataRetentionStorageResponse#scope #scope} => String
+    #   * {Types::PutOrganizationDataRetentionStorageResponse#model_provider #model_provider} => String
+    #   * {Types::PutOrganizationDataRetentionStorageResponse#storage_destination #storage_destination} => String
+    #   * {Types::PutOrganizationDataRetentionStorageResponse#storage_configuration #storage_configuration} => Types::DataRetentionStorageConfiguration
+    #   * {Types::PutOrganizationDataRetentionStorageResponse#updated_at #updated_at} => Time
+    #   * {Types::PutOrganizationDataRetentionStorageResponse#kms_key_status #kms_key_status} => String
+    #   * {Types::PutOrganizationDataRetentionStorageResponse#s3_bucket_status #s3_bucket_status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_organization_data_retention_storage({
+    #     model_provider: "anthropic", # required, accepts anthropic, openai
+    #     storage_destination: "customer_managed", # required, accepts customer_managed, amazon_managed
+    #     storage_configuration: {
+    #       kms_key_arn: "KmsKeyArn", # required
+    #       s3_bucket_arn: "DataRetentionStorageBucketArn", # required
+    #       s3_bucket_owner: "AccountId", # required
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.scope #=> String, one of "account", "organization", "project"
+    #   resp.model_provider #=> String, one of "anthropic", "openai"
+    #   resp.storage_destination #=> String, one of "customer_managed", "amazon_managed"
+    #   resp.storage_configuration.kms_key_arn #=> String
+    #   resp.storage_configuration.s3_bucket_arn #=> String
+    #   resp.storage_configuration.s3_bucket_owner #=> String
+    #   resp.updated_at #=> Time
+    #   resp.kms_key_status #=> String, one of "pending", "active", "access_denied"
+    #   resp.s3_bucket_status #=> String, one of "pending", "active", "access_denied"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/PutOrganizationDataRetentionStorage AWS API Documentation
+    #
+    # @overload put_organization_data_retention_storage(params = {})
+    # @param [Hash] params ({})
+    def put_organization_data_retention_storage(params = {}, options = {})
+      req = build_request(:put_organization_data_retention_storage, params)
+      req.send_request(options)
+    end
+
+    # Creates or replaces a project's retention storage record for a model
+    # provider. The project must be active in this AWS Region and owned by
+    # the calling account. A missing or unowned project returns
+    # `ResourceNotFoundException`; an archived project returns
+    # `ValidationException`.
+    #
+    # Requires applicable project, account, or organization approval for a
+    # storage-capable trusted access program of the provider, with no
+    # applicable revocation. Otherwise, the operation returns
+    # `ConflictException`. Enrollment is not required to save the
+    # configuration.
+    #
+    # The request replaces the complete stored configuration. The last
+    # successful write wins.
+    #
+    # For `customer_managed` destinations, Amazon Bedrock validates the
+    # caller's and service's access to the bucket and key before saving
+    # the configuration. The bucket and key must be in the AWS Region where
+    # you register the configuration. Validation failures reject the write.
+    #
+    # @option params [required, String] :project_identifier
+    #   The ID or ARN of a named project owned by the calling account in this
+    #   AWS Region. The default project is not supported; use the
+    #   account-level retention storage operations instead.
+    #
+    # @option params [required, String] :model_provider
+    #   The model provider whose retention storage configuration is addressed
+    #   by this request.
+    #
+    # @option params [required, String] :storage_destination
+    #   Where retained data is delivered for this scope. customer\_managed
+    #   requires storageConfiguration; amazon\_managed forbids it.
+    #
+    # @option params [Types::DataRetentionStorageConfiguration] :storage_configuration
+    #   Destination bucket and key. Required when storageDestination is
+    #   customer\_managed; rejected with ValidationException when
+    #   amazon\_managed.
+    #
+    # @return [Types::PutProjectDataRetentionStorageResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutProjectDataRetentionStorageResponse#scope #scope} => String
+    #   * {Types::PutProjectDataRetentionStorageResponse#model_provider #model_provider} => String
+    #   * {Types::PutProjectDataRetentionStorageResponse#storage_destination #storage_destination} => String
+    #   * {Types::PutProjectDataRetentionStorageResponse#storage_configuration #storage_configuration} => Types::DataRetentionStorageConfiguration
+    #   * {Types::PutProjectDataRetentionStorageResponse#updated_at #updated_at} => Time
+    #   * {Types::PutProjectDataRetentionStorageResponse#kms_key_status #kms_key_status} => String
+    #   * {Types::PutProjectDataRetentionStorageResponse#s3_bucket_status #s3_bucket_status} => String
+    #   * {Types::PutProjectDataRetentionStorageResponse#project_arn #project_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_project_data_retention_storage({
+    #     project_identifier: "ProjectIdentifier", # required
+    #     model_provider: "anthropic", # required, accepts anthropic, openai
+    #     storage_destination: "customer_managed", # required, accepts customer_managed, amazon_managed
+    #     storage_configuration: {
+    #       kms_key_arn: "KmsKeyArn", # required
+    #       s3_bucket_arn: "DataRetentionStorageBucketArn", # required
+    #       s3_bucket_owner: "AccountId", # required
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.scope #=> String, one of "account", "organization", "project"
+    #   resp.model_provider #=> String, one of "anthropic", "openai"
+    #   resp.storage_destination #=> String, one of "customer_managed", "amazon_managed"
+    #   resp.storage_configuration.kms_key_arn #=> String
+    #   resp.storage_configuration.s3_bucket_arn #=> String
+    #   resp.storage_configuration.s3_bucket_owner #=> String
+    #   resp.updated_at #=> Time
+    #   resp.kms_key_status #=> String, one of "pending", "active", "access_denied"
+    #   resp.s3_bucket_status #=> String, one of "pending", "active", "access_denied"
+    #   resp.project_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/PutProjectDataRetentionStorage AWS API Documentation
+    #
+    # @overload put_project_data_retention_storage(params = {})
+    # @param [Hash] params ({})
+    def put_project_data_retention_storage(params = {}, options = {})
+      req = build_request(:put_project_data_retention_storage, params)
+      req.send_request(options)
+    end
+
     # Adds a resource policy for a Bedrock resource.
     #
     # @option params [required, String] :resource_arn
@@ -7205,6 +8168,146 @@ module Aws::Bedrock
     # @param [Hash] params ({})
     def put_resource_policy(params = {}, options = {})
       req = build_request(:put_resource_policy, params)
+      req.send_request(options)
+    end
+
+    # Sets your account's enrollment preference for a trusted access
+    # program. Amazon Bedrock identifies the account from your authenticated
+    # request. To enable enrollment, your account needs applicable approval
+    # and no applicable revocation, including when you repeat an enabled
+    # setting. Otherwise, Amazon Bedrock returns `ConflictException` and
+    # preserves the stored setting. With the required permissions, you can
+    # set `disabled` or `inherit` even if your account is ineligible or its
+    # eligibility is revoked.
+    #
+    # @option params [required, String] :program_identifier
+    #   The identifier of the trusted access program.
+    #
+    # @option params [required, String] :opt_in
+    #   The enrollment preference to store. A transition to enabled accepts
+    #   the program's terms. Changing the preference records a new updatedAt.
+    #   Repeating the same stored preference preserves updatedAt.
+    #
+    # @return [Types::PutTrustedAccessProgramAccountEnrollmentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutTrustedAccessProgramAccountEnrollmentResponse#opt_in #opt_in} => String
+    #   * {Types::PutTrustedAccessProgramAccountEnrollmentResponse#updated_at #updated_at} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_trusted_access_program_account_enrollment({
+    #     program_identifier: "TrustedAccessProgramIdentifier", # required
+    #     opt_in: "inherit", # required, accepts inherit, enabled, disabled
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.opt_in #=> String, one of "inherit", "enabled", "disabled"
+    #   resp.updated_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/PutTrustedAccessProgramAccountEnrollment AWS API Documentation
+    #
+    # @overload put_trusted_access_program_account_enrollment(params = {})
+    # @param [Hash] params ({})
+    def put_trusted_access_program_account_enrollment(params = {}, options = {})
+      req = build_request(:put_trusted_access_program_account_enrollment, params)
+      req.send_request(options)
+    end
+
+    # Sets the current organization's enrollment preference for a trusted
+    # access program. The organization and payer account are derived from
+    # the authenticated context. Every write requires operation permission
+    # and management-account or Bedrock-specific delegated-administrator
+    # authority. Enabling requires approval and no revocation for the
+    # organization, including when repeating an enabled setting; otherwise
+    # returns ConflictException and preserves the stored setting. Account
+    # approval alone is insufficient. If you have the required permissions,
+    # you can set the enrollment preference to `disabled` or `inherit` even
+    # if your organization is ineligible or its eligibility is revoked.
+    #
+    # @option params [required, String] :program_identifier
+    #   The identifier of the trusted access program.
+    #
+    # @option params [required, String] :opt_in
+    #   The enrollment preference to store for the organization. A transition
+    #   to enabled accepts the program's terms. Changing the preference
+    #   records a new updatedAt. Repeating the same stored preference
+    #   preserves updatedAt.
+    #
+    # @return [Types::PutTrustedAccessProgramOrganizationEnrollmentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutTrustedAccessProgramOrganizationEnrollmentResponse#opt_in #opt_in} => String
+    #   * {Types::PutTrustedAccessProgramOrganizationEnrollmentResponse#updated_at #updated_at} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_trusted_access_program_organization_enrollment({
+    #     program_identifier: "TrustedAccessProgramIdentifier", # required
+    #     opt_in: "inherit", # required, accepts inherit, enabled, disabled
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.opt_in #=> String, one of "inherit", "enabled", "disabled"
+    #   resp.updated_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/PutTrustedAccessProgramOrganizationEnrollment AWS API Documentation
+    #
+    # @overload put_trusted_access_program_organization_enrollment(params = {})
+    # @param [Hash] params ({})
+    def put_trusted_access_program_organization_enrollment(params = {}, options = {})
+      req = build_request(:put_trusted_access_program_organization_enrollment, params)
+      req.send_request(options)
+    end
+
+    # Sets a named project's enrollment preference for a trusted access
+    # program. The project must be active in this Region and owned by the
+    # calling account. Enabling requires applicable project, account, or
+    # organization approval and no applicable revocation, including when
+    # repeating an enabled setting; otherwise returns ConflictException and
+    # preserves the stored setting. Authorized disable and inherit writes
+    # are allowed while ineligible or revoked. Archived projects reject all
+    # writes with ValidationException.
+    #
+    # @option params [required, String] :program_identifier
+    #   The identifier of the trusted access program.
+    #
+    # @option params [required, String] :project_identifier
+    #   The id or ARN of the named Bedrock project. The default project is not
+    #   supported; use PutTrustedAccessProgramAccountEnrollment for
+    #   account-level enrollment. An ARN from another account, Region, or
+    #   partition returns ValidationException. A project that does not exist
+    #   in the calling account returns ResourceNotFoundException.
+    #
+    # @option params [required, String] :opt_in
+    #   The enrollment preference to store. A transition to enabled accepts
+    #   the program's terms. Changing the preference records a new updatedAt.
+    #   Repeating the same stored preference preserves updatedAt.
+    #
+    # @return [Types::PutTrustedAccessProgramProjectEnrollmentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutTrustedAccessProgramProjectEnrollmentResponse#opt_in #opt_in} => String
+    #   * {Types::PutTrustedAccessProgramProjectEnrollmentResponse#updated_at #updated_at} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_trusted_access_program_project_enrollment({
+    #     program_identifier: "TrustedAccessProgramIdentifier", # required
+    #     project_identifier: "ProjectIdentifier", # required
+    #     opt_in: "inherit", # required, accepts inherit, enabled, disabled
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.opt_in #=> String, one of "inherit", "enabled", "disabled"
+    #   resp.updated_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/PutTrustedAccessProgramProjectEnrollment AWS API Documentation
+    #
+    # @overload put_trusted_access_program_project_enrollment(params = {})
+    # @param [Hash] params ({})
+    def put_trusted_access_program_project_enrollment(params = {}, options = {})
+      req = build_request(:put_trusted_access_program_project_enrollment, params)
       req.send_request(options)
     end
 
@@ -7520,6 +8623,122 @@ module Aws::Bedrock
     # @param [Hash] params ({})
     def start_automated_reasoning_policy_test_workflow(params = {}, options = {})
       req = build_request(:start_automated_reasoning_policy_test_workflow, params)
+      req.send_request(options)
+    end
+
+    # Prepare a provider application handoff for the calling account. This
+    # does not submit an application, grant eligibility, or change
+    # enrollment. Programs without self-service applications return
+    # ValidationException with guidance to contact the AWS account team.
+    # Repeated calls can issue fresh tokens. Successful responses use
+    # Cache-Control: no-store.
+    #
+    # @option params [required, String] :program_identifier
+    #   Identifier of the trusted access program.
+    #
+    # @return [Types::StartTrustedAccessProgramAccountApplicationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartTrustedAccessProgramAccountApplicationResponse#result #result} => Types::TrustedAccessProgramApplicationResult
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_trusted_access_program_account_application({
+    #     program_identifier: "TrustedAccessProgramIdentifier", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.result.provider_handoff.enrollment_url #=> String
+    #   resp.result.provider_handoff.application_token #=> String
+    #   resp.result.provider_handoff.application_token_expires_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/StartTrustedAccessProgramAccountApplication AWS API Documentation
+    #
+    # @overload start_trusted_access_program_account_application(params = {})
+    # @param [Hash] params ({})
+    def start_trusted_access_program_account_application(params = {}, options = {})
+      req = build_request(:start_trusted_access_program_account_application, params)
+      req.send_request(options)
+    end
+
+    # Prepare a provider application handoff for the calling account's
+    # current organization. Requires operation permission and
+    # management-account or Bedrock-specific delegated-administrator
+    # authority. This does not submit an application, grant eligibility, or
+    # change enrollment. Programs without self-service applications return
+    # ValidationException with guidance to contact the AWS account team.
+    # Repeated calls can issue fresh tokens. Successful responses use
+    # Cache-Control: no-store.
+    #
+    # @option params [required, String] :program_identifier
+    #   Identifier of the trusted access program.
+    #
+    # @return [Types::StartTrustedAccessProgramOrganizationApplicationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartTrustedAccessProgramOrganizationApplicationResponse#result #result} => Types::TrustedAccessProgramApplicationResult
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_trusted_access_program_organization_application({
+    #     program_identifier: "TrustedAccessProgramIdentifier", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.result.provider_handoff.enrollment_url #=> String
+    #   resp.result.provider_handoff.application_token #=> String
+    #   resp.result.provider_handoff.application_token_expires_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/StartTrustedAccessProgramOrganizationApplication AWS API Documentation
+    #
+    # @overload start_trusted_access_program_organization_application(params = {})
+    # @param [Hash] params ({})
+    def start_trusted_access_program_organization_application(params = {}, options = {})
+      req = build_request(:start_trusted_access_program_organization_application, params)
+      req.send_request(options)
+    end
+
+    # Prepare a provider application handoff for a named project. The
+    # project must be active in this Region and owned by the calling
+    # account. Archived projects return ValidationException. This does not
+    # submit an application, grant eligibility, or change enrollment.
+    # Programs without self-service applications return ValidationException
+    # with guidance to contact the AWS account team. Repeated calls can
+    # issue fresh tokens. Successful responses use Cache-Control: no-store.
+    #
+    # @option params [required, String] :program_identifier
+    #   Identifier of the trusted access program.
+    #
+    # @option params [required, String] :project_identifier
+    #   The id or ARN of the named Bedrock project. The default project is not
+    #   supported; use StartTrustedAccessProgramAccountApplication for an
+    #   account-level application. An ARN from another account, Region, or
+    #   partition returns ValidationException. A project that does not exist
+    #   in the calling account returns ResourceNotFoundException.
+    #
+    # @return [Types::StartTrustedAccessProgramProjectApplicationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartTrustedAccessProgramProjectApplicationResponse#result #result} => Types::TrustedAccessProgramApplicationResult
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_trusted_access_program_project_application({
+    #     program_identifier: "TrustedAccessProgramIdentifier", # required
+    #     project_identifier: "ProjectIdentifier", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.result.provider_handoff.enrollment_url #=> String
+    #   resp.result.provider_handoff.application_token #=> String
+    #   resp.result.provider_handoff.application_token_expires_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/StartTrustedAccessProgramProjectApplication AWS API Documentation
+    #
+    # @overload start_trusted_access_program_project_application(params = {})
+    # @param [Hash] params ({})
+    def start_trusted_access_program_project_application(params = {}, options = {})
+      req = build_request(:start_trusted_access_program_project_application, params)
       req.send_request(options)
     end
 
@@ -8294,6 +9513,59 @@ module Aws::Bedrock
       req.send_request(options)
     end
 
+    # Updates one mutable project field per call: exactly one of `name` or
+    # `dataRetention` must be set. The default project and archived projects
+    # cannot be updated.
+    #
+    # @option params [required, String] :project_identifier
+    #   The id or ARN of the project to update.
+    #
+    # @option params [String] :name
+    #   The project's new display name. Specify this field only when
+    #   `dataRetention` is omitted. Project names do not have to be unique.
+    #
+    # @option params [Types::ProjectDataRetention] :data_retention
+    #   The project's new data-retention mode. Must be set on its own.
+    #
+    # @return [Types::UpdateProjectResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateProjectResponse#id #id} => String
+    #   * {Types::UpdateProjectResponse#arn #arn} => String
+    #   * {Types::UpdateProjectResponse#name #name} => String
+    #   * {Types::UpdateProjectResponse#status #status} => String
+    #   * {Types::UpdateProjectResponse#created_at #created_at} => Time
+    #   * {Types::UpdateProjectResponse#archived_at #archived_at} => Time
+    #   * {Types::UpdateProjectResponse#data_retention #data_retention} => Types::ProjectDataRetention
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_project({
+    #     project_identifier: "ProjectIdentifier", # required
+    #     name: "ProjectName",
+    #     data_retention: {
+    #       mode: "default", # required, accepts default, none, aws_review, provider_data_share, inherit
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.id #=> String
+    #   resp.arn #=> String
+    #   resp.name #=> String
+    #   resp.status #=> String, one of "active", "archived"
+    #   resp.created_at #=> Time
+    #   resp.archived_at #=> Time
+    #   resp.data_retention.mode #=> String, one of "default", "none", "aws_review", "provider_data_share", "inherit"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/UpdateProject AWS API Documentation
+    #
+    # @overload update_project(params = {})
+    # @param [Hash] params ({})
+    def update_project(params = {}, options = {})
+      req = build_request(:update_project, params)
+      req.send_request(options)
+    end
+
     # Updates the name or associated model for a Provisioned Throughput. For
     # more information, see [Provisioned Throughput][1] in the [Amazon
     # Bedrock User Guide][2].
@@ -8360,7 +9632,7 @@ module Aws::Bedrock
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrock'
-      context[:gem_version] = '1.100.0'
+      context[:gem_version] = '1.108.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

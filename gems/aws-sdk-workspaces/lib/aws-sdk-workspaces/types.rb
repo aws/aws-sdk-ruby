@@ -4358,6 +4358,12 @@ module Aws::WorkSpaces
     #   The type of identity management the user is using.
     #   @return [String]
     #
+    # @!attribute [rw] workspace_os_user_mode
+    #   Indicates how users are set up on the WorkSpace operating system. To
+    #   use local users with an AWS IAM Identity Center directory, specify
+    #   `LOCAL_USER`.
+    #   @return [String]
+    #
     # @!attribute [rw] idc_instance_arn
     #   The Amazon Resource Name (ARN) of the identity center instance.
     #   @return [String]
@@ -4386,6 +4392,7 @@ module Aws::WorkSpaces
       :workspace_directory_name,
       :workspace_directory_description,
       :user_identity_type,
+      :workspace_os_user_mode,
       :idc_instance_arn,
       :microsoft_entra_config,
       :workspace_type,
@@ -4716,6 +4723,24 @@ module Aws::WorkSpaces
     #   WorkSpace to its original state.
     #   @return [String]
     #
+    # @!attribute [rw] nested_virtualization
+    #   Specifies whether users can enable or disable nested virtualization
+    #   on their WorkSpace. The default value is `DISABLED`. For more
+    #   information, see [Nested virtualization for Amazon WorkSpaces][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/workspaces/latest/adminguide/nested-virtualization.html
+    #   @return [String]
+    #
+    # @!attribute [rw] enable_end_user_advisor
+    #   Specifies whether users can use End User Advisor in the WorkSpaces
+    #   client for Windows to see their session health and get recommended
+    #   actions for common issues. The default value is `ENABLED`. For more
+    #   information, see Proactive troubleshooting for your WorkSpaces
+    #   users.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/SelfservicePermissions AWS API Documentation
     #
     class SelfservicePermissions < Struct.new(
@@ -4723,7 +4748,9 @@ module Aws::WorkSpaces
       :increase_volume_size,
       :change_compute_type,
       :switch_running_mode,
-      :rebuild_workspace)
+      :rebuild_workspace,
+      :nested_virtualization,
+      :enable_end_user_advisor)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6020,6 +6047,10 @@ module Aws::WorkSpaces
     #   The streaming properties to configure.
     #   @return [Types::StreamingProperties]
     #
+    # @!attribute [rw] workspace_os_user_mode
+    #   Indicates how users are set up on the WorkSpace operating system.
+    #   @return [String]
+    #
     # @!attribute [rw] error_message
     #   The error message returned.
     #   @return [String]
@@ -6055,6 +6086,7 @@ module Aws::WorkSpaces
       :idc_config,
       :active_directory_config,
       :streaming_properties,
+      :workspace_os_user_mode,
       :error_message)
       SENSITIVE = []
       include Aws::Structure
@@ -6203,8 +6235,8 @@ module Aws::WorkSpaces
     #
     #   <note markdown="1"> * Only available for WorkSpaces created with PCoIP bundles.
     #
-    #   * The `Protocols` property is case sensitive. Ensure you use `PCOIP`
-    #     or `DCV` (formerly WSP).
+    #   * The `Protocols` property is case sensitive. Make sure you specify
+    #     `PCOIP` or `WSP`. To use DCV, specify `WSP`.
     #
     #   * Unavailable for Windows 7 WorkSpaces and WorkSpaces using
     #     GPU-based bundles (Graphics, GraphicsPro, Graphics.g4dn,

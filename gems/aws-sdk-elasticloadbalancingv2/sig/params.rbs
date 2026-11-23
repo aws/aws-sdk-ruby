@@ -84,6 +84,22 @@ module Aws
       jwt_validation_config: Params::jwt_validation_action_config?
     }
 
+      type mutual_authentication_attributes = {
+      mode: ::String?,
+      trust_store_arn: ::String?,
+      ignore_client_certificate_expiry: bool?,
+      trust_store_association_status: ("active" | "removed")?,
+      advertise_trust_store_ca_names: ("on" | "off")?,
+      client_certificate_identity_filters: Array[
+        {
+          field: ("subject-cn" | "subject-ou" | "san-dns" | "san-uri"),
+          action: ("accept"),
+          match_type: ("exact" | "prefix"),
+          value: ::String
+        }
+      ]?
+    }
+
       type rule_condition = {
       field: ::String?,
       values: Array[::String]?,

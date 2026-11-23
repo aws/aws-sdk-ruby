@@ -91,6 +91,25 @@ module Aws
                                         ) -> _BatchAssociateScramSecretResponseSuccess
                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchAssociateScramSecretResponseSuccess
 
+      interface _CreateAssessmentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateAssessmentResponse]
+        def assessment_arn: () -> ::String
+        def assessment_type: () -> ("UPDATE_BROKER_TYPE")
+        def cluster_arn: () -> ::String
+        def creation_time: () -> ::Time
+        def status: () -> ("IN_PROGRESS" | "COMPLETE" | "FAILED" | "DELETING")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kafka/Client.html#create_assessment-instance_method
+      def create_assessment: (
+                               ?assessment_parameters: {
+                                 target_instance_type: ::String?
+                               },
+                               assessment_type: ("UPDATE_BROKER_TYPE"),
+                               cluster_arn: ::String,
+                               ?tags: Hash[::String, ::String]
+                             ) -> _CreateAssessmentResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAssessmentResponseSuccess
+
       interface _CreateClusterResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateClusterResponse]
         def cluster_arn: () -> ::String
@@ -408,6 +427,18 @@ module Aws
                                  ) -> _CreateVpcConnectionResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateVpcConnectionResponseSuccess
 
+      interface _DeleteAssessmentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteAssessmentResponse]
+        def assessment_arn: () -> ::String
+        def status: () -> ("IN_PROGRESS" | "COMPLETE" | "FAILED" | "DELETING")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kafka/Client.html#delete_assessment-instance_method
+      def delete_assessment: (
+                               assessment_arn: ::String,
+                               cluster_arn: ::String
+                             ) -> _DeleteAssessmentResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteAssessmentResponseSuccess
+
       interface _DeleteClusterResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteClusterResponse]
         def cluster_arn: () -> ::String
@@ -478,6 +509,26 @@ module Aws
                                    arn: ::String
                                  ) -> _DeleteVpcConnectionResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteVpcConnectionResponseSuccess
+
+      interface _DescribeAssessmentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeAssessmentResponse]
+        def assessment_arn: () -> ::String
+        def assessment_parameters: () -> Types::AssessmentParameters
+        def assessment_type: () -> ("UPDATE_BROKER_TYPE")
+        def cluster_arn: () -> ::String
+        def completion_time: () -> ::Time
+        def creation_time: () -> ::Time
+        def status: () -> ("IN_PROGRESS" | "COMPLETE" | "FAILED" | "DELETING")
+        def status_message: () -> ::String
+        def summary: () -> Types::AssessmentSummary
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kafka/Client.html#describe_assessment-instance_method
+      def describe_assessment: (
+                                 assessment_arn: ::String,
+                                 cluster_arn: ::String
+                               ) -> _DescribeAssessmentResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeAssessmentResponseSuccess
 
       interface _DescribeClusterResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeClusterResponse]
@@ -604,6 +655,7 @@ module Aws
         def partition_count: () -> ::Integer
         def configs: () -> ::String
         def status: () -> ("CREATING" | "UPDATING" | "DELETING" | "ACTIVE")
+        def replica_ids: () -> ::Array[::Integer]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kafka/Client.html#describe_topic-instance_method
       def describe_topic: (
@@ -625,6 +677,29 @@ module Aws
                                        ?next_token: ::String
                                      ) -> _DescribeTopicPartitionsResponseSuccess
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeTopicPartitionsResponseSuccess
+
+      interface _DescribeTopicReassignmentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeTopicReassignmentResponse]
+        def cluster_arn: () -> ::String
+        def completed_topics: () -> ::Integer
+        def creation_time: () -> ::Time
+        def error_info: () -> Types::ErrorInfo
+        def last_update_time: () -> ::Time
+        def migrated_partitions: () -> ::Integer
+        def status: () -> ("PENDING" | "IN_PROGRESS" | "STOPPING" | "COMPLETE" | "FAILED" | "STOPPED")
+        def target_instance_type: () -> ::String
+        def topic_reassignment_operation_arn: () -> ::String
+        def topics_to_exclude: () -> ::Array[::String]
+        def topics_to_include: () -> ::Array[::String]
+        def total_partitions: () -> ::Integer
+        def total_topics: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kafka/Client.html#describe_topic_reassignment-instance_method
+      def describe_topic_reassignment: (
+                                         cluster_arn: ::String,
+                                         topic_reassignment_operation_arn: ::String
+                                       ) -> _DescribeTopicReassignmentResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeTopicReassignmentResponseSuccess
 
       interface _DescribeVpcConnectionResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeVpcConnectionResponse]
@@ -688,6 +763,36 @@ module Aws
                                            ?cluster_arn: ::String
                                          ) -> _GetCompatibleKafkaVersionsResponseSuccess
                                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCompatibleKafkaVersionsResponseSuccess
+
+      interface _ListAssessmentFindingsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAssessmentFindingsResponse]
+        def findings: () -> ::Array[Types::AssessmentFinding]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kafka/Client.html#list_assessment_findings-instance_method
+      def list_assessment_findings: (
+                                      assessment_arn: ::String,
+                                      ?category: ::String,
+                                      cluster_arn: ::String,
+                                      ?max_results: ::Integer,
+                                      ?next_token: ::String,
+                                      ?severity: ::String
+                                    ) -> _ListAssessmentFindingsResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAssessmentFindingsResponseSuccess
+
+      interface _ListAssessmentsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAssessmentsResponse]
+        def assessments: () -> ::Array[Types::AssessmentInfo]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kafka/Client.html#list_assessments-instance_method
+      def list_assessments: (
+                              ?assessment_type: ::String,
+                              cluster_arn: ::String,
+                              ?max_results: ::Integer,
+                              ?next_token: ::String
+                            ) -> _ListAssessmentsResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAssessmentsResponseSuccess
 
       interface _ListChannelsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListChannelsResponse]
@@ -855,6 +960,20 @@ module Aws
                                        ) -> _ListClientVpcConnectionsResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListClientVpcConnectionsResponseSuccess
 
+      interface _ListTopicReassignmentsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTopicReassignmentsResponse]
+        def next_token: () -> ::String
+        def reassignments: () -> ::Array[Types::TopicReassignmentInfo]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kafka/Client.html#list_topic_reassignments-instance_method
+      def list_topic_reassignments: (
+                                      cluster_arn: ::String,
+                                      ?max_results: ::Integer,
+                                      ?next_token: ::String,
+                                      ?status_filter: ::String
+                                    ) -> _ListTopicReassignmentsResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTopicReassignmentsResponseSuccess
+
       interface _ListVpcConnectionsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListVpcConnectionsResponse]
         def next_token: () -> ::String
@@ -935,6 +1054,34 @@ module Aws
                          ) -> _RebootBrokerResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RebootBrokerResponseSuccess
 
+      interface _StartTopicReassignmentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartTopicReassignmentResponse]
+        def cluster_arn: () -> ::String
+        def status: () -> ("PENDING" | "IN_PROGRESS" | "STOPPING" | "COMPLETE" | "FAILED" | "STOPPED")
+        def topic_reassignment_operation_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kafka/Client.html#start_topic_reassignment-instance_method
+      def start_topic_reassignment: (
+                                      ?client_token: ::String,
+                                      cluster_arn: ::String,
+                                      target_instance_type: ::String,
+                                      ?topics_to_exclude: Array[::String],
+                                      topics_to_include: Array[::String]
+                                    ) -> _StartTopicReassignmentResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartTopicReassignmentResponseSuccess
+
+      interface _StopTopicReassignmentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StopTopicReassignmentResponse]
+        def status: () -> ("PENDING" | "IN_PROGRESS" | "STOPPING" | "COMPLETE" | "FAILED" | "STOPPED")
+        def topic_reassignment_operation_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kafka/Client.html#stop_topic_reassignment-instance_method
+      def stop_topic_reassignment: (
+                                     cluster_arn: ::String,
+                                     topic_reassignment_operation_arn: ::String
+                                   ) -> _StopTopicReassignmentResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopTopicReassignmentResponseSuccess
+
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kafka/Client.html#tag_resource-instance_method
       def tag_resource: (
                           resource_arn: ::String,
@@ -971,7 +1118,8 @@ module Aws
       def update_broker_type: (
                                 cluster_arn: ::String,
                                 current_version: ::String,
-                                target_instance_type: ::String
+                                target_instance_type: ::String,
+                                ?topic_reassignment: ("AUTO" | "MANUAL")
                               ) -> _UpdateBrokerTypeResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateBrokerTypeResponseSuccess
 

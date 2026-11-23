@@ -254,6 +254,14 @@ module Aws::PCS
     #   Cgroup settings.
     #   @return [Array<Types::CgroupCustomSetting>]
     #
+    # @!attribute [rw] job_submit_plugins
+    #   The job submit plugins to run on the cluster controller. Use job
+    #   submit plugins to execute custom scripts during job submission and
+    #   job modification to validate or modify the job's configuration.
+    #   Custom scripts can accept or reject jobs based on their
+    #   configuration or modify the configuration before job execution.
+    #   @return [Array<Types::JobSubmitPlugin>]
+    #
     # @!attribute [rw] auth_key
     #   The shared Slurm key for authentication, also known as the **cluster
     #   secret**.
@@ -279,6 +287,7 @@ module Aws::PCS
       :slurm_custom_settings,
       :slurmdbd_custom_settings,
       :cgroup_custom_settings,
+      :job_submit_plugins,
       :auth_key,
       :jwt_auth,
       :accounting,
@@ -310,6 +319,14 @@ module Aws::PCS
     #   Cgroup settings.
     #   @return [Array<Types::CgroupCustomSetting>]
     #
+    # @!attribute [rw] job_submit_plugins
+    #   The job submit plugins to run on the cluster controller. Use job
+    #   submit plugins to execute custom scripts during job submission and
+    #   job modification to validate or modify the job's configuration.
+    #   Custom scripts can accept or reject jobs based on their
+    #   configuration or modify the configuration before job execution.
+    #   @return [Array<Types::JobSubmitPlugin>]
+    #
     # @!attribute [rw] accounting
     #   The accounting configuration includes configurable settings for
     #   Slurm accounting.
@@ -326,6 +343,7 @@ module Aws::PCS
       :slurm_custom_settings,
       :slurmdbd_custom_settings,
       :cgroup_custom_settings,
+      :job_submit_plugins,
       :accounting,
       :slurm_rest)
       SENSITIVE = []
@@ -391,6 +409,30 @@ module Aws::PCS
 
     # A compute node group associated with a cluster.
     #
+    # @!attribute [rw] ami_id
+    #   The ID of the Amazon Machine Image (AMI) that PCS uses to launch
+    #   instances. If not present, PCS uses the AMI ID specified in the
+    #   custom launch template.
+    #   @return [String]
+    #
+    # @!attribute [rw] security_group_ids
+    #   The IDs of the EC2 security groups configured directly on the
+    #   compute node group. PCS uses these security groups instead of the
+    #   security groups in the custom launch template. This value isn't
+    #   present if security groups aren't configured directly on the
+    #   compute node group. In that case, PCS uses the security groups in
+    #   the custom launch template.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] ssh_key_name
+    #   The name of the EC2 key pair configured directly on the compute node
+    #   group. PCS uses this key pair instead of the key pair in the custom
+    #   launch template. This value isn't present if a key pair isn't
+    #   configured directly on the compute node group. In that case, PCS
+    #   uses the key pair in the custom launch template, if one is
+    #   specified.
+    #   @return [String]
+    #
     # @!attribute [rw] name
     #   The name that identifies the compute node group.
     #   @return [String]
@@ -437,12 +479,6 @@ module Aws::PCS
     #   [1]: https://docs.aws.amazon.com/pcs/latest/userguide/slurm-versions_faq.html
     #   @return [String]
     #
-    # @!attribute [rw] ami_id
-    #   The ID of the Amazon Machine Image (AMI) that PCS uses to launch
-    #   instances. If not provided, PCS uses the AMI ID specified in the
-    #   custom launch template.
-    #   @return [String]
-    #
     # @!attribute [rw] subnet_ids
     #   The list of subnet IDs where instances are provisioned by the
     #   compute node group. The subnets must be in the same VPC as the
@@ -472,8 +508,23 @@ module Aws::PCS
     #   [4]: https://docs.aws.amazon.com/pcs/latest/userguide/capacity-reservations-odcr.html
     #   @return [String]
     #
+    # @!attribute [rw] launch_template_mode
+    #   Indicates whether the compute node group uses a custom launch
+    #   template or a launch template that PCS manages. The default value is
+    #   `CUSTOM`.
+    #
+    #   Valid values:
+    #
+    #   * `CUSTOM` – The compute node group uses the launch template in
+    #     `customLaunchTemplate`.
+    #
+    #   * `MANAGED` – PCS creates and manages the launch template.
+    #   @return [String]
+    #
     # @!attribute [rw] custom_launch_template
-    #   An Amazon EC2 launch template PCS uses to launch compute nodes.
+    #   The custom Amazon EC2 launch template associated with the compute
+    #   node group. This value is present when `launchTemplateMode` is
+    #   `CUSTOM` and isn't present when `launchTemplateMode` is `MANAGED`.
     #   @return [Types::CustomLaunchTemplate]
     #
     # @!attribute [rw] iam_instance_profile_arn
@@ -515,6 +566,12 @@ module Aws::PCS
     #   bootstrapping or becomes ready to accept jobs.
     #   @return [Types::NodeLifecycleActions]
     #
+    # @!attribute [rw] instance_health_checks
+    #   The instance health check settings of the compute node group.
+    #   Instance health checks detect faults on instances in the compute
+    #   node group and respond with the repair action that you choose.
+    #   @return [Types::InstanceHealthChecks]
+    #
     # @!attribute [rw] error_info
     #   The list of errors that occurred during compute node group
     #   provisioning.
@@ -523,6 +580,9 @@ module Aws::PCS
     # @see http://docs.aws.amazon.com/goto/WebAPI/pcs-2023-02-10/ComputeNodeGroup AWS API Documentation
     #
     class ComputeNodeGroup < Struct.new(
+      :ami_id,
+      :security_group_ids,
+      :ssh_key_name,
       :name,
       :id,
       :arn,
@@ -530,9 +590,9 @@ module Aws::PCS
       :created_at,
       :modified_at,
       :status,
-      :ami_id,
       :subnet_ids,
       :purchase_option,
+      :launch_template_mode,
       :custom_launch_template,
       :iam_instance_profile_arn,
       :scaling_configuration,
@@ -540,6 +600,7 @@ module Aws::PCS
       :spot_options,
       :slurm_configuration,
       :node_lifecycle_actions,
+      :instance_health_checks,
       :error_info)
       SENSITIVE = []
       include Aws::Structure
@@ -761,7 +822,7 @@ module Aws::PCS
     #   request completes successfully, the subsequent retries with the same
     #   client token return the result from the original successful request
     #   and they have no additional effect. If you don't specify a client
-    #   token, the CLI and SDK automatically generate 1 for you.
+    #   token, the CLI and SDK automatically generate one for you.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -798,18 +859,53 @@ module Aws::PCS
       include Aws::Structure
     end
 
+    # @!attribute [rw] ami_id
+    #   The ID of the Amazon Machine Image (AMI) that PCS uses to launch
+    #   compute nodes (Amazon EC2 instances). This value overrides the AMI
+    #   ID in the custom launch template. If you don't provide this value,
+    #   PCS uses the AMI ID specified in the custom launch template. You
+    #   must provide this value if `launchTemplateMode` is `MANAGED`.
+    #   @return [String]
+    #
+    # @!attribute [rw] security_group_ids
+    #   The IDs of the EC2 security groups to configure directly on the
+    #   compute node group. The security groups must be in the same VPC as
+    #   the cluster. PCS uses these security groups instead of the security
+    #   groups in the custom launch template. You can't specify this value
+    #   if the custom launch template defines network interfaces. If you
+    #   don't provide this value, PCS uses the security groups in the
+    #   custom launch template. You must provide this value if
+    #   `launchTemplateMode` is `MANAGED`. For more information, see
+    #   [Configuring instance settings for compute node groups in PCS][1] in
+    #   the *PCS User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/pcs/latest/userguide/working-with_cng_instance-settings.html
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] ssh_key_name
+    #   The name of the EC2 key pair to configure directly on the compute
+    #   node group. The key pair must exist in your account and Amazon Web
+    #   Services Region. PCS uses this key pair instead of the key pair in
+    #   the custom launch template. If you don't provide this value, PCS
+    #   uses the key pair in the custom launch template, if one is
+    #   specified. You must have permission for `ec2:DescribeKeyPairs`. If
+    #   you delete the key pair later, future instance launches can fail.
+    #   For more information, see [Configuring instance settings for compute
+    #   node groups in PCS][1] in the *PCS User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/pcs/latest/userguide/working-with_cng_instance-settings.html
+    #   @return [String]
+    #
     # @!attribute [rw] cluster_identifier
     #   The name or ID of the cluster to create a compute node group in.
     #   @return [String]
     #
     # @!attribute [rw] compute_node_group_name
     #   A name to identify the cluster. Example: `MyCluster`
-    #   @return [String]
-    #
-    # @!attribute [rw] ami_id
-    #   The ID of the Amazon Machine Image (AMI) that PCS uses to launch
-    #   compute nodes (Amazon EC2 instances). If you don't provide this
-    #   value, PCS uses the AMI ID specified in the custom launch template.
     #   @return [String]
     #
     # @!attribute [rw] subnet_ids
@@ -840,8 +936,21 @@ module Aws::PCS
     #   [4]: https://docs.aws.amazon.com/pcs/latest/userguide/capacity-reservations-odcr.html
     #   @return [String]
     #
+    # @!attribute [rw] launch_template_mode
+    #   Specifies whether the compute node group uses a custom launch
+    #   template or a launch template that PCS manages. The default value is
+    #   `CUSTOM`.
+    #
+    #   If the value is `CUSTOM`, provide `customLaunchTemplate`. If the
+    #   value is `MANAGED`, omit `customLaunchTemplate` and provide `amiId`
+    #   and `securityGroupIds`.
+    #   @return [String]
+    #
     # @!attribute [rw] custom_launch_template
-    #   An Amazon EC2 launch template PCS uses to launch compute nodes.
+    #   The custom Amazon EC2 launch template to associate with the compute
+    #   node group. Specify the launch template `id` and `version` when
+    #   `launchTemplateMode` is `CUSTOM`. Don't specify this value when
+    #   `launchTemplateMode` is `MANAGED`.
     #   @return [Types::CustomLaunchTemplate]
     #
     # @!attribute [rw] iam_instance_profile_arn
@@ -883,6 +992,15 @@ module Aws::PCS
     #   bootstrapping or becomes ready to accept jobs.
     #   @return [Types::NodeLifecycleActionsRequest]
     #
+    # @!attribute [rw] instance_health_checks
+    #   The instance health check settings for the compute node group.
+    #   Instance health checks detect faults on instances in the compute
+    #   node group and respond with the repair action that you choose. You
+    #   can configure health monitoring, deep health checks, or both. You
+    #   can't specify an empty object (`{}`). Instance health checks
+    #   require Slurm version 26.05 or later.
+    #   @return [Types::InstanceHealthChecksRequest]
+    #
     # @!attribute [rw] client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. Idempotency ensures that an API request
@@ -890,7 +1008,7 @@ module Aws::PCS
     #   request completes successfully, the subsequent retries with the same
     #   client token return the result from the original successful request
     #   and they have no additional effect. If you don't specify a client
-    #   token, the CLI and SDK automatically generate 1 for you.
+    #   token, the CLI and SDK automatically generate one for you.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -904,11 +1022,14 @@ module Aws::PCS
     # @see http://docs.aws.amazon.com/goto/WebAPI/pcs-2023-02-10/CreateComputeNodeGroupRequest AWS API Documentation
     #
     class CreateComputeNodeGroupRequest < Struct.new(
+      :ami_id,
+      :security_group_ids,
+      :ssh_key_name,
       :cluster_identifier,
       :compute_node_group_name,
-      :ami_id,
       :subnet_ids,
       :purchase_option,
+      :launch_template_mode,
       :custom_launch_template,
       :iam_instance_profile_arn,
       :scaling_configuration,
@@ -916,6 +1037,7 @@ module Aws::PCS
       :spot_options,
       :slurm_configuration,
       :node_lifecycle_actions,
+      :instance_health_checks,
       :client_token,
       :tags)
       SENSITIVE = []
@@ -958,7 +1080,7 @@ module Aws::PCS
     #   request completes successfully, the subsequent retries with the same
     #   client token return the result from the original successful request
     #   and they have no additional effect. If you don't specify a client
-    #   token, the CLI and SDK automatically generate 1 for you.
+    #   token, the CLI and SDK automatically generate one for you.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -994,17 +1116,19 @@ module Aws::PCS
       include Aws::Structure
     end
 
-    # An Amazon EC2 launch template PCS uses to launch compute nodes.
+    # An Amazon EC2 launch template PCS uses to launch compute nodes. The
+    # structure contains the launch template ID and version.
     #
     # @!attribute [rw] id
     #   The ID of the EC2 launch template to use to provision instances.
+    #   Specify this value together with `version`.
     #
     #   Example: `lt-xxxx`
     #   @return [String]
     #
     # @!attribute [rw] version
     #   The version of the EC2 launch template to use to provision
-    #   instances.
+    #   instances. Specify this value together with `id`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pcs-2023-02-10/CustomLaunchTemplate AWS API Documentation
@@ -1012,6 +1136,83 @@ module Aws::PCS
     class CustomLaunchTemplate < Struct.new(
       :id,
       :version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The deep health check that runs each time an instance starts,
+    # including after a reboot, before the compute node accepts jobs.
+    #
+    # @!attribute [rw] profile
+    #   The deep health check profile to run. Each profile other than `NONE`
+    #   runs NVIDIA Data Center GPU Manager (DCGM) diagnostics. More
+    #   thorough profiles run more tests and add more time to instance
+    #   launch. A profile other than `NONE` requires instance types with
+    #   NVIDIA GPUs. This value is required when you specify `onStart`.
+    #   There is no default value. Valid values:
+    #
+    #   * `NONE` – Turns off the deep health check. You can't specify
+    #     `repairAction` with this profile.
+    #
+    #   * `QUICK` – Runs basic GPU tests (DCGM diagnostics level 1). This
+    #     profile adds the least time to instance launch.
+    #
+    #   * `MEDIUM` – Runs extended GPU tests (DCGM diagnostics level 2).
+    #
+    #   * `LONG` – Runs GPU stress and diagnostic tests (DCGM diagnostics
+    #     level 3). This profile adds the most time to instance launch.
+    #   @return [String]
+    #
+    # @!attribute [rw] repair_action
+    #   The action that PCS takes when an instance fails the deep health
+    #   check. You can't specify this value when `profile` is `NONE`. If
+    #   you don't specify this value and `profile` isn't `NONE`, PCS uses
+    #   `AUTO`. `GetComputeNodeGroup` doesn't return a `repairAction` that
+    #   you didn't specify. Valid values:
+    #
+    #   * `AUTO` – PCS chooses the repair action based on the fault.
+    #
+    #   * `REPLACE` – Replaces the instance before it accepts jobs.
+    #
+    #   * `ISOLATE` – Stops new jobs on the instance and keeps the instance
+    #     running until you investigate.
+    #
+    #   * `NONE` – Records the fault in Slurm and leaves the instance
+    #     available for jobs.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pcs-2023-02-10/DeepHealthCheckOnStart AWS API Documentation
+    #
+    class DeepHealthCheckOnStart < Struct.new(
+      :profile,
+      :repair_action)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The deep health check settings of a compute node group. Deep health
+    # checks test the graphics processing units (GPUs) of an instance each
+    # time it starts, including after a reboot, before it accepts jobs. Deep
+    # health checks with a profile other than `NONE` require instance types
+    # with NVIDIA GPUs.
+    #
+    # @!attribute [rw] on_start
+    #   The deep health check to run each time an instance starts, including
+    #   after a reboot, before the compute node accepts jobs. If the check
+    #   fails after a reboot, PCS takes the same `repairAction` as at
+    #   launch. For example, with `REPLACE`, PCS replaces the instance
+    #   instead of returning it to service. If the compute node group has
+    #   scripts in the `nodeBootstrapped` stage of `nodeLifecycleActions`,
+    #   the deep health check runs after those scripts. If a script fails
+    #   and its `onError` setting terminates the compute node, the deep
+    #   health check doesn't run. This value is required when you specify
+    #   `deepHealthChecks`.
+    #   @return [Types::DeepHealthCheckOnStart]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pcs-2023-02-10/DeepHealthChecks AWS API Documentation
+    #
+    class DeepHealthChecks < Struct.new(
+      :on_start)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1027,7 +1228,7 @@ module Aws::PCS
     #   request completes successfully, the subsequent retries with the same
     #   client token return the result from the original successful request
     #   and they have no additional effect. If you don't specify a client
-    #   token, the CLI and SDK automatically generate 1 for you.
+    #   token, the CLI and SDK automatically generate one for you.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -1061,7 +1262,7 @@ module Aws::PCS
     #   request completes successfully, the subsequent retries with the same
     #   client token return the result from the original successful request
     #   and they have no additional effect. If you don't specify a client
-    #   token, the CLI and SDK automatically generate 1 for you.
+    #   token, the CLI and SDK automatically generate one for you.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -1096,7 +1297,7 @@ module Aws::PCS
     #   request completes successfully, the subsequent retries with the same
     #   client token return the result from the original successful request
     #   and they have no additional effect. If you don't specify a client
-    #   token, the CLI and SDK automatically generate 1 for you.
+    #   token, the CLI and SDK automatically generate one for you.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -1262,6 +1463,48 @@ module Aws::PCS
       include Aws::Structure
     end
 
+    # The health monitoring settings of a compute node group. Health
+    # monitoring continuously checks running instances for hardware and
+    # software faults.
+    #
+    # @!attribute [rw] mode
+    #   The health monitoring mode. This value is required when you specify
+    #   `healthMonitoring`. There is no default value. Valid values:
+    #
+    #   * `NONE` – Turns off health monitoring. You can't specify
+    #     `repairAction` with this mode.
+    #
+    #   * `STANDARD` – Continuously checks running instances for hardware
+    #     and software faults.
+    #   @return [String]
+    #
+    # @!attribute [rw] repair_action
+    #   The action that PCS takes when health monitoring finds a fault on an
+    #   instance. You can't specify this value when `mode` is `NONE`. If
+    #   you don't specify this value and `mode` isn't `NONE`, PCS uses
+    #   `AUTO`. `GetComputeNodeGroup` doesn't return a `repairAction` that
+    #   you didn't specify. Valid values:
+    #
+    #   * `AUTO` – PCS chooses the repair action based on the fault.
+    #
+    #   * `REPLACE` – Replaces the instance after running jobs finish.
+    #
+    #   * `ISOLATE` – Stops new jobs on the instance and keeps the instance
+    #     running until you investigate.
+    #
+    #   * `NONE` – Records the fault in Slurm and leaves the instance
+    #     available for jobs.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pcs-2023-02-10/HealthMonitoring AWS API Documentation
+    #
+    class HealthMonitoring < Struct.new(
+      :mode,
+      :repair_action)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An EC2 instance configuration PCS uses to launch compute nodes.
     #
     # @!attribute [rw] instance_type
@@ -1279,6 +1522,57 @@ module Aws::PCS
       include Aws::Structure
     end
 
+    # The instance health check settings of a compute node group. Instance
+    # health checks detect faults on instances in the compute node group and
+    # respond with the repair action that you choose.
+    #
+    # @!attribute [rw] health_monitoring
+    #   The health monitoring settings. Health monitoring continuously
+    #   checks running instances for hardware and software faults.
+    #   @return [Types::HealthMonitoring]
+    #
+    # @!attribute [rw] deep_health_checks
+    #   The deep health check settings. Deep health checks test the graphics
+    #   processing units (GPUs) of an instance each time it starts,
+    #   including after a reboot, before it accepts jobs.
+    #   @return [Types::DeepHealthChecks]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pcs-2023-02-10/InstanceHealthChecks AWS API Documentation
+    #
+    class InstanceHealthChecks < Struct.new(
+      :health_monitoring,
+      :deep_health_checks)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The instance health check settings to configure on a compute node
+    # group when you create it. Specify `healthMonitoring`,
+    # `deepHealthChecks`, or both. You can't specify an empty object
+    # (`{}`).
+    #
+    # @!attribute [rw] health_monitoring
+    #   The health monitoring settings. Health monitoring continuously
+    #   checks running instances for hardware and software faults. If you
+    #   specify this object, it can't be empty.
+    #   @return [Types::HealthMonitoring]
+    #
+    # @!attribute [rw] deep_health_checks
+    #   The deep health check settings. Deep health checks test the graphics
+    #   processing units (GPUs) of an instance each time it starts,
+    #   including after a reboot, before it accepts jobs. If you specify
+    #   this object, it can't be empty.
+    #   @return [Types::DeepHealthChecks]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pcs-2023-02-10/InstanceHealthChecksRequest AWS API Documentation
+    #
+    class InstanceHealthChecksRequest < Struct.new(
+      :health_monitoring,
+      :deep_health_checks)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # PCS can't process your request right now. Try again later.
     #
     # @!attribute [rw] message
@@ -1288,6 +1582,67 @@ module Aws::PCS
     #
     class InternalServerException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A job submit plugin configuration, including its name, runtime
+    # language, and script source.
+    #
+    # @!attribute [rw] name
+    #   A unique name for the plugin. The name can be up to 64 characters
+    #   long. Valid characters are letters, numbers, spaces, underscores
+    #   (`_`), and hyphens (`-`). The first character must be a letter or a
+    #   number.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The runtime language used to execute the custom script. Valid
+    #   values:
+    #
+    #   * `STARLARK` – The script uses Starlark syntax.
+    #
+    #   ^
+    #   @return [String]
+    #
+    # @!attribute [rw] script_source
+    #   The source location and integrity information for the script.
+    #   @return [Types::JobSubmitScriptSource]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pcs-2023-02-10/JobSubmitPlugin AWS API Documentation
+    #
+    class JobSubmitPlugin < Struct.new(
+      :name,
+      :type,
+      :script_source)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The source location and integrity information for the script.
+    #
+    # @!attribute [rw] script_location
+    #   The location of the script. Specify an Amazon S3 URI in the format
+    #   `s3://bucket-name/key`.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_version_id
+    #   The Amazon S3 version ID of the script. Use this value to pin the
+    #   script to a specific version in a versioned Amazon S3 bucket.
+    #   @return [String]
+    #
+    # @!attribute [rw] checksum
+    #   The SHA-256 checksum of the script content, as a 64-character
+    #   hexadecimal string. This value is optional. When specified, PCS uses
+    #   this value to verify the integrity of the downloaded script.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pcs-2023-02-10/JobSubmitScriptSource AWS API Documentation
+    #
+    class JobSubmitScriptSource < Struct.new(
+      :script_location,
+      :s3_version_id,
+      :checksum)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1956,6 +2311,13 @@ module Aws::PCS
     #   uses this value to run the matching scheduler version.
     #   @return [String]
     #
+    # @!attribute [rw] instance_health_checks
+    #   The instance health check settings configured for the compute node
+    #   group that the compute node registered into. The compute node uses
+    #   these settings to configure health monitoring and deep health
+    #   checks.
+    #   @return [Types::InstanceHealthChecks]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pcs-2023-02-10/RegisterComputeNodeGroupInstanceResponse AWS API Documentation
     #
     class RegisterComputeNodeGroupInstanceResponse < Struct.new(
@@ -1966,7 +2328,8 @@ module Aws::PCS
       :compute_node_group_id,
       :compute_node_group_name,
       :node_lifecycle_actions,
-      :scheduler_version)
+      :scheduler_version,
+      :instance_health_checks)
       SENSITIVE = [:shared_secret]
       include Aws::Structure
     end
@@ -2435,7 +2798,7 @@ module Aws::PCS
     #   request completes successfully, the subsequent retries with the same
     #   client token return the result from the original successful request
     #   and they have no additional effect. If you don't specify a client
-    #   token, the CLI and SDK automatically generate 1 for you.
+    #   token, the CLI and SDK automatically generate one for you.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -2501,6 +2864,14 @@ module Aws::PCS
     #   Cgroup settings.
     #   @return [Array<Types::CgroupCustomSetting>]
     #
+    # @!attribute [rw] job_submit_plugins
+    #   The job submit plugins to run on the cluster controller. Use job
+    #   submit plugins to execute custom scripts during job submission and
+    #   job modification to validate or modify the job's configuration.
+    #   Custom scripts can accept or reject jobs based on their
+    #   configuration or modify the configuration before job execution.
+    #   @return [Array<Types::JobSubmitPlugin>]
+    #
     # @!attribute [rw] accounting
     #   The accounting configuration includes configurable settings for
     #   Slurm accounting.
@@ -2517,12 +2888,45 @@ module Aws::PCS
       :slurm_custom_settings,
       :slurmdbd_custom_settings,
       :cgroup_custom_settings,
+      :job_submit_plugins,
       :accounting,
       :slurm_rest)
       SENSITIVE = []
       include Aws::Structure
     end
 
+    # @!attribute [rw] ami_id
+    #   The ID of the Amazon Machine Image (AMI) that PCS uses to launch
+    #   instances. This value overrides the AMI ID in the custom launch
+    #   template. Specify an empty string (`""`) to remove the AMI ID from
+    #   the compute node group and use the AMI ID specified in the custom
+    #   launch template. Omit this value to leave the current setting
+    #   unchanged.
+    #   @return [String]
+    #
+    # @!attribute [rw] security_group_ids
+    #   The IDs of the EC2 security groups to configure directly on the
+    #   compute node group. The security groups must be in the same VPC as
+    #   the cluster. PCS uses these security groups instead of the security
+    #   groups in the custom launch template. You can't specify this value
+    #   if the custom launch template defines network interfaces. Specify an
+    #   empty list (`[]`) to remove the security groups from the compute
+    #   node group and use the security groups in the custom launch
+    #   template. Omit this value to leave the current setting unchanged.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] ssh_key_name
+    #   The name of the EC2 key pair to configure directly on the compute
+    #   node group. The key pair must exist in your account and Amazon Web
+    #   Services Region. PCS uses this key pair instead of the key pair in
+    #   the custom launch template. Specify an empty string (`""`) to remove
+    #   the key pair from the compute node group and use the key pair in the
+    #   custom launch template. Omit this value to leave the current setting
+    #   unchanged. You must have permission for `ec2:DescribeKeyPairs` to
+    #   specify a key pair. If you delete the key pair later, future
+    #   instance launches can fail.
+    #   @return [String]
+    #
     # @!attribute [rw] cluster_identifier
     #   The name or ID of the cluster of the compute node group.
     #   @return [String]
@@ -2531,19 +2935,49 @@ module Aws::PCS
     #   The name or ID of the compute node group.
     #   @return [String]
     #
-    # @!attribute [rw] ami_id
-    #   The ID of the Amazon Machine Image (AMI) that PCS uses to launch
-    #   instances. If not provided, PCS uses the AMI ID specified in the
-    #   custom launch template.
-    #   @return [String]
-    #
     # @!attribute [rw] subnet_ids
     #   The list of subnet IDs where the compute node group provisions
     #   instances. The subnets must be in the same VPC as the cluster.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] launch_template_mode
+    #   Specifies whether the compute node group uses a custom launch
+    #   template or a launch template that PCS manages. Omit this value to
+    #   keep the current mode.
+    #
+    #   Valid values:
+    #
+    #   * `CUSTOM` – Use a custom launch template. To switch from `MANAGED`,
+    #     also provide `customLaunchTemplate`. If the compute node group
+    #     already uses `CUSTOM` and you omit `customLaunchTemplate`, the
+    #     existing launch template is unchanged.
+    #
+    #   * `MANAGED` – Use a launch template created and managed by PCS. Omit
+    #     `customLaunchTemplate`. Switching to this mode removes the custom
+    #     launch template association but doesn't delete the launch
+    #     template.
+    #
+    #   When switching to `MANAGED`, the compute node group must have
+    #   `amiId` and `securityGroupIds` configured. You can set these values
+    #   in the same request.
+    #   @return [String]
+    #
     # @!attribute [rw] custom_launch_template
-    #   An Amazon EC2 launch template PCS uses to launch compute nodes.
+    #   The custom Amazon EC2 launch template to associate with the compute
+    #   node group. To set or change the custom launch template, specify
+    #   `id` and `version`. If you provide this value and omit
+    #   `launchTemplateMode`, the compute node group must already use
+    #   `CUSTOM` mode. To switch from `MANAGED` to `CUSTOM`, specify
+    #   `launchTemplateMode` as `CUSTOM` and provide this value. If the
+    #   compute node group already uses `CUSTOM`, omit this value while also
+    #   omitting `launchTemplateMode`, or while specifying `CUSTOM`, to keep
+    #   the existing custom launch template. For more information, see
+    #   [Migrating a compute node group from a custom launch template][1] in
+    #   the *PCS User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/pcs/latest/userguide/working-with_cng_instance-settings-migrate.html
     #   @return [Types::CustomLaunchTemplate]
     #
     # @!attribute [rw] purchase_option
@@ -2603,6 +3037,25 @@ module Aws::PCS
     #   bootstrapping or becomes ready to accept jobs.
     #   @return [Types::UpdateNodeLifecycleActionsRequest]
     #
+    # @!attribute [rw] instance_health_checks
+    #   The instance health check settings for the compute node group.
+    #   Instance health checks detect faults on instances in the compute
+    #   node group and respond with the repair action that you choose. You
+    #   can configure health monitoring, deep health checks, or both. You
+    #   can't specify an empty object (`{}`). Instance health checks
+    #   require Slurm version 26.05 or later.
+    #
+    #   The settings that you specify replace all of the current instance
+    #   health check settings of the compute node group. Include every
+    #   setting that you want to keep. If you omit this member, the current
+    #   settings don't change. If you omit `healthMonitoring` or
+    #   `deepHealthChecks`, that check is turned off. You can also turn off
+    #   a check: set `healthMonitoring.mode` or
+    #   `deepHealthChecks.onStart.profile` to `NONE` and omit its
+    #   `repairAction`. When you change these settings, PCS drains and
+    #   replaces the instances in the compute node group.
+    #   @return [Types::UpdateInstanceHealthChecksRequest]
+    #
     # @!attribute [rw] client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. Idempotency ensures that an API request
@@ -2610,7 +3063,7 @@ module Aws::PCS
     #   request completes successfully, the subsequent retries with the same
     #   client token return the result from the original successful request
     #   and they have no additional effect. If you don't specify a client
-    #   token, the CLI and SDK automatically generate 1 for you.
+    #   token, the CLI and SDK automatically generate one for you.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -2619,10 +3072,13 @@ module Aws::PCS
     # @see http://docs.aws.amazon.com/goto/WebAPI/pcs-2023-02-10/UpdateComputeNodeGroupRequest AWS API Documentation
     #
     class UpdateComputeNodeGroupRequest < Struct.new(
+      :ami_id,
+      :security_group_ids,
+      :ssh_key_name,
       :cluster_identifier,
       :compute_node_group_identifier,
-      :ami_id,
       :subnet_ids,
+      :launch_template_mode,
       :custom_launch_template,
       :purchase_option,
       :spot_options,
@@ -2630,6 +3086,7 @@ module Aws::PCS
       :iam_instance_profile_arn,
       :slurm_configuration,
       :node_lifecycle_actions,
+      :instance_health_checks,
       :client_token)
       SENSITIVE = []
       include Aws::Structure
@@ -2676,6 +3133,36 @@ module Aws::PCS
       :scale_down_idle_time_in_seconds,
       :slurm_custom_settings,
       :gres_custom_settings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The instance health check settings to configure on a compute node
+    # group when you update it. These settings replace all of the current
+    # instance health check settings of the compute node group. Specify
+    # `healthMonitoring`, `deepHealthChecks`, or both. You can't specify an
+    # empty object (`{}`).
+    #
+    # @!attribute [rw] health_monitoring
+    #   The health monitoring settings. Health monitoring continuously
+    #   checks running instances for hardware and software faults. If you
+    #   specify this object, it can't be empty. If you omit this object,
+    #   health monitoring is turned off.
+    #   @return [Types::HealthMonitoring]
+    #
+    # @!attribute [rw] deep_health_checks
+    #   The deep health check settings. Deep health checks test the graphics
+    #   processing units (GPUs) of an instance each time it starts,
+    #   including after a reboot, before it accepts jobs. If you specify
+    #   this object, it can't be empty. If you omit this object, deep
+    #   health checks are turned off.
+    #   @return [Types::DeepHealthChecks]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pcs-2023-02-10/UpdateInstanceHealthChecksRequest AWS API Documentation
+    #
+    class UpdateInstanceHealthChecksRequest < Struct.new(
+      :health_monitoring,
+      :deep_health_checks)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2731,7 +3218,7 @@ module Aws::PCS
     #   request completes successfully, the subsequent retries with the same
     #   client token return the result from the original successful request
     #   and they have no additional effect. If you don't specify a client
-    #   token, the CLI and SDK automatically generate 1 for you.
+    #   token, the CLI and SDK automatically generate one for you.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.

@@ -1,6 +1,51 @@
 Unreleased Changes
 ------------------
 
+1.245.1 (2026-11-20)
+------------------
+
+* Issue - Fix `upload_file` raising `NoMethodError` instead of `MultipartUploadError` on JRuby when several parts fail at the same time.
+
+1.245.0 (2026-11-18)
+------------------
+
+* Feature - Adds exclusions and Multi-Region key resolution to S3 Replication. Rule filters support a Not element to exclude prefixes and object tags. Destination EncryptionConfiguration supports UseSourceMultiRegionKey to encrypt replicas with the related replica KMS multi-Region key in the destination Region.
+
+1.244.0 (2026-11-17)
+------------------
+
+* Feature - For the S3 operations AbortMultipartUpload, CreateMultipartUpload, ListParts, UploadPart, UploadPartCopy, the Object Version ID is returned as a response header, if the bucket has versioning enabled. For ListMultipartUploads, it will be returned in the response body.
+
+1.243.0 (2026-11-16)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.242.0 (2026-11-11)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.241.0 (2026-11-10)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.240.0 (2026-11-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.239.0 (2026-11-06)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.238.0 (2026-11-04)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.237.0 (2026-10-29)
 ------------------
 

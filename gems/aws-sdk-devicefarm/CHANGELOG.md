@@ -1,6 +1,46 @@
 Unreleased Changes
 ------------------
 
+1.125.0 (2026-11-20)
+------------------
+
+* Feature - Add support for the use of virtual devices on Device Farm.
+
+1.124.0 (2026-11-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.123.0 (2026-11-16)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.122.0 (2026-11-11)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.121.0 (2026-11-10)
+------------------
+
+* Feature - Adds the NONE insights type to disable insights generation for a run, a testPackageArn field in run details, and a new artifact type for device connect command logs.
+
+1.120.0 (2026-11-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.119.0 (2026-11-06)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.118.0 (2026-11-04)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.117.0 (2026-10-29)
 ------------------
 

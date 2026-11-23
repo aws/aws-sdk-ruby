@@ -264,7 +264,8 @@ module Aws::Route53Resolver
     #     An integer representing the maximum number attempts that will be made for
     #     a single request, including the initial attempt.  For example,
     #     setting this value to 5 will result in a request being retried up to
-    #     4 times. Used in `standard` and `adaptive` retry modes.
+    #     4 times. Used in `standard` and `adaptive` retry modes. Defaults to 3,
+    #     except for DynamoDB and DynamoDB Streams, which default to 4.
     #
     #   @option options [String] :profile ("default")
     #     Used when loading credentials from the shared credentials file at `HOME/.aws/credentials`.
@@ -327,15 +328,15 @@ module Aws::Route53Resolver
     #     used by the default backoff function. This option is only used in the
     #     `legacy` retry mode.
     #
-    #   @option options [String] :retry_mode ("legacy")
+    #   @option options [String] :retry_mode ("standard")
     #     Specifies which retry algorithm to use. Values are:
     #
-    #     * `legacy` - The pre-existing retry behavior. This is the default
-    #       value if no retry mode is provided.
+    #     * `legacy` - The pre-existing retry behavior.
     #
     #     * `standard` - A standardized set of retry rules across the AWS SDKs.
     #       This includes support for retry quotas, which limit the number of
-    #       unsuccessful retries a client can make.
+    #       unsuccessful retries a client can make. This is the default value
+    #       if no retry mode is provided.
     #
     #     * `adaptive` - A retry mode that includes all the functionality of
     #       `standard` mode along with automatic client side throttling.
@@ -820,6 +821,11 @@ module Aws::Route53Resolver
     #             value: "DnsThreatProtectionRuleTypeValue", # required
     #             confidence_threshold: "LOW", # required, accepts LOW, MEDIUM, HIGH
     #           },
+    #           auto_allowlist: {
+    #             initial_data_timeframe_hours: 1, # required
+    #             import_from_firewall_domain_list_id: "ResourceId",
+    #             auto_allowlist_firewall_domain_list_id: "ResourceId",
+    #           },
     #         },
     #       },
     #     ],
@@ -850,6 +856,9 @@ module Aws::Route53Resolver
     #   resp.created_firewall_rules[0].firewall_rule_type.firewall_advanced_threat_category.category #=> String
     #   resp.created_firewall_rules[0].firewall_rule_type.dns_threat_protection.value #=> String
     #   resp.created_firewall_rules[0].firewall_rule_type.dns_threat_protection.confidence_threshold #=> String, one of "LOW", "MEDIUM", "HIGH"
+    #   resp.created_firewall_rules[0].firewall_rule_type.auto_allowlist.initial_data_timeframe_hours #=> Integer
+    #   resp.created_firewall_rules[0].firewall_rule_type.auto_allowlist.import_from_firewall_domain_list_id #=> String
+    #   resp.created_firewall_rules[0].firewall_rule_type.auto_allowlist.auto_allowlist_firewall_domain_list_id #=> String
     #   resp.created_firewall_rules[0].status #=> String
     #   resp.created_firewall_rules[0].status_message #=> String
     #   resp.create_errors #=> Array
@@ -872,6 +881,9 @@ module Aws::Route53Resolver
     #   resp.create_errors[0].firewall_rule.firewall_rule_type.firewall_advanced_threat_category.category #=> String
     #   resp.create_errors[0].firewall_rule.firewall_rule_type.dns_threat_protection.value #=> String
     #   resp.create_errors[0].firewall_rule.firewall_rule_type.dns_threat_protection.confidence_threshold #=> String, one of "LOW", "MEDIUM", "HIGH"
+    #   resp.create_errors[0].firewall_rule.firewall_rule_type.auto_allowlist.initial_data_timeframe_hours #=> Integer
+    #   resp.create_errors[0].firewall_rule.firewall_rule_type.auto_allowlist.import_from_firewall_domain_list_id #=> String
+    #   resp.create_errors[0].firewall_rule.firewall_rule_type.auto_allowlist.auto_allowlist_firewall_domain_list_id #=> String
     #   resp.create_errors[0].code #=> String
     #   resp.create_errors[0].message #=> String
     #
@@ -932,6 +944,9 @@ module Aws::Route53Resolver
     #   resp.deleted_firewall_rules[0].firewall_rule_type.firewall_advanced_threat_category.category #=> String
     #   resp.deleted_firewall_rules[0].firewall_rule_type.dns_threat_protection.value #=> String
     #   resp.deleted_firewall_rules[0].firewall_rule_type.dns_threat_protection.confidence_threshold #=> String, one of "LOW", "MEDIUM", "HIGH"
+    #   resp.deleted_firewall_rules[0].firewall_rule_type.auto_allowlist.initial_data_timeframe_hours #=> Integer
+    #   resp.deleted_firewall_rules[0].firewall_rule_type.auto_allowlist.import_from_firewall_domain_list_id #=> String
+    #   resp.deleted_firewall_rules[0].firewall_rule_type.auto_allowlist.auto_allowlist_firewall_domain_list_id #=> String
     #   resp.deleted_firewall_rules[0].status #=> String
     #   resp.deleted_firewall_rules[0].status_message #=> String
     #   resp.delete_errors #=> Array
@@ -994,6 +1009,11 @@ module Aws::Route53Resolver
     #             value: "DnsThreatProtectionRuleTypeValue", # required
     #             confidence_threshold: "LOW", # required, accepts LOW, MEDIUM, HIGH
     #           },
+    #           auto_allowlist: {
+    #             initial_data_timeframe_hours: 1, # required
+    #             import_from_firewall_domain_list_id: "ResourceId",
+    #             auto_allowlist_firewall_domain_list_id: "ResourceId",
+    #           },
     #         },
     #       },
     #     ],
@@ -1024,6 +1044,9 @@ module Aws::Route53Resolver
     #   resp.updated_firewall_rules[0].firewall_rule_type.firewall_advanced_threat_category.category #=> String
     #   resp.updated_firewall_rules[0].firewall_rule_type.dns_threat_protection.value #=> String
     #   resp.updated_firewall_rules[0].firewall_rule_type.dns_threat_protection.confidence_threshold #=> String, one of "LOW", "MEDIUM", "HIGH"
+    #   resp.updated_firewall_rules[0].firewall_rule_type.auto_allowlist.initial_data_timeframe_hours #=> Integer
+    #   resp.updated_firewall_rules[0].firewall_rule_type.auto_allowlist.import_from_firewall_domain_list_id #=> String
+    #   resp.updated_firewall_rules[0].firewall_rule_type.auto_allowlist.auto_allowlist_firewall_domain_list_id #=> String
     #   resp.updated_firewall_rules[0].status #=> String
     #   resp.updated_firewall_rules[0].status_message #=> String
     #   resp.update_errors #=> Array
@@ -1046,6 +1069,9 @@ module Aws::Route53Resolver
     #   resp.update_errors[0].firewall_rule.firewall_rule_type.firewall_advanced_threat_category.category #=> String
     #   resp.update_errors[0].firewall_rule.firewall_rule_type.dns_threat_protection.value #=> String
     #   resp.update_errors[0].firewall_rule.firewall_rule_type.dns_threat_protection.confidence_threshold #=> String, one of "LOW", "MEDIUM", "HIGH"
+    #   resp.update_errors[0].firewall_rule.firewall_rule_type.auto_allowlist.initial_data_timeframe_hours #=> Integer
+    #   resp.update_errors[0].firewall_rule.firewall_rule_type.auto_allowlist.import_from_firewall_domain_list_id #=> String
+    #   resp.update_errors[0].firewall_rule.firewall_rule_type.auto_allowlist.auto_allowlist_firewall_domain_list_id #=> String
     #   resp.update_errors[0].code #=> String
     #   resp.update_errors[0].message #=> String
     #
@@ -1109,7 +1135,7 @@ module Aws::Route53Resolver
     #   resp.firewall_domain_list.creation_time #=> String
     #   resp.firewall_domain_list.modification_time #=> String
     #   resp.firewall_domain_list.category #=> String
-    #   resp.firewall_domain_list.managed_list_type #=> String, one of "THREAT", "CONTENT"
+    #   resp.firewall_domain_list.managed_list_type #=> String, one of "THREAT", "CONTENT", "AUTOALLOWLIST"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/CreateFirewallDomainList AWS API Documentation
     #
@@ -1131,20 +1157,23 @@ module Aws::Route53Resolver
     # * `DnsThreatProtection` — match a built-in DNS Firewall Advanced
     #   threat detector (`DGA`, `DNS_TUNNELING`, or `DICTIONARY_DGA`).
     #
-    # * `FirewallRuleType` — match one of the rule-type variants returned by
-    #   ListFirewallRuleTypes: `FirewallAdvancedContentCategory`,
-    #   `FirewallAdvancedThreatCategory`, `DnsThreatProtection`, or
-    #   `PartnerThreatProtection`. The `PartnerThreatProtection` variant
-    #   requires an active Amazon Web Services Marketplace subscription to
-    #   the named partner product.
+    # * `FirewallRuleType` — match one of the rule-type variants:
+    #   `FirewallAdvancedContentCategory`, `FirewallAdvancedThreatCategory`,
+    #   `DnsThreatProtection`, `PartnerThreatProtection`, or
+    #   `AutoAllowlist`. ListFirewallRuleTypes returns the first four. The
+    #   `PartnerThreatProtection` variant requires an active Amazon Web
+    #   Services Marketplace subscription to the named partner product.
     #
-    # For rules that require asynchronous provisioning (today, the
-    # `PartnerThreatProtection` rule type), the rule's `Status` begins at
-    # `CREATING` and transitions to `COMPLETE` once the rule is provisioned
-    # and the marketplace entitlement is verified. If provisioning fails,
-    # `Status` becomes `CREATION_FAILED` and `StatusMessage` contains a
-    # human-readable reason; the rule is then immutable and must be removed
-    # with DeleteFirewallRule.
+    # For rules that require asynchronous provisioning (the
+    # `PartnerThreatProtection` and `AutoAllowlist` rule types), the rule's
+    # `Status` begins at `CREATING` and transitions to `COMPLETE` once the
+    # rule is provisioned: for `PartnerThreatProtection`, when the
+    # marketplace entitlement is verified, and for `AutoAllowlist`, when DNS
+    # Firewall has read the look-back window of every VPC that uses the rule
+    # group, which can take hours for a rule group that many VPCs use. If
+    # provisioning fails, `Status` becomes `CREATION_FAILED` and
+    # `StatusMessage` contains a human-readable reason; the rule is then
+    # immutable and must be removed with DeleteFirewallRule.
     #
     # @option params [required, String] :creator_request_id
     #   A unique string that identifies the request and that allows you to
@@ -1238,6 +1267,9 @@ module Aws::Route53Resolver
     #   redirection chain. You don't need to add the subsequent domains in
     #   the domain in the redirection list to the domain list.
     #
+    #   You can't set this value on an AutoAllowlist rule, which always
+    #   inspects the redirection chain.
+    #
     # @option params [String] :qtype
     #   The DNS query type you want the rule to evaluate. Allowed values are;
     #
@@ -1273,6 +1305,9 @@ module Aws::Route53Resolver
     #     AAAA. The values must be defined as TYPENUMBER, where the NUMBER can
     #     be 1-65534, for example, TYPE28. For more information, see [List of
     #     DNS record types][1].
+    #
+    #   You can't set `Qtype` on an AutoAllowlist rule, because the rule
+    #   applies to all query types.
     #
     #
     #
@@ -1330,8 +1365,12 @@ module Aws::Route53Resolver
     #     delivered through Amazon Web Services Marketplace. The selected
     #     partner must be an active subscription on the calling account.
     #
+    #   * `AutoAllowlist` — automatically observe the domains that the VPCs
+    #     associated with the rule group resolve, and allow the ones that you
+    #     approve. See AutoAllowlistConfig.
+    #
     #   To enumerate the values supported in your account, call
-    #   ListFirewallRuleTypes.
+    #   ListFirewallRuleTypes. It doesn't return `AutoAllowlist`.
     #
     # @return [Types::CreateFirewallRuleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1368,6 +1407,11 @@ module Aws::Route53Resolver
     #         value: "DnsThreatProtectionRuleTypeValue", # required
     #         confidence_threshold: "LOW", # required, accepts LOW, MEDIUM, HIGH
     #       },
+    #       auto_allowlist: {
+    #         initial_data_timeframe_hours: 1, # required
+    #         import_from_firewall_domain_list_id: "ResourceId",
+    #         auto_allowlist_firewall_domain_list_id: "ResourceId",
+    #       },
     #     },
     #   })
     #
@@ -1395,6 +1439,9 @@ module Aws::Route53Resolver
     #   resp.firewall_rule.firewall_rule_type.firewall_advanced_threat_category.category #=> String
     #   resp.firewall_rule.firewall_rule_type.dns_threat_protection.value #=> String
     #   resp.firewall_rule.firewall_rule_type.dns_threat_protection.confidence_threshold #=> String, one of "LOW", "MEDIUM", "HIGH"
+    #   resp.firewall_rule.firewall_rule_type.auto_allowlist.initial_data_timeframe_hours #=> Integer
+    #   resp.firewall_rule.firewall_rule_type.auto_allowlist.import_from_firewall_domain_list_id #=> String
+    #   resp.firewall_rule.firewall_rule_type.auto_allowlist.auto_allowlist_firewall_domain_list_id #=> String
     #   resp.firewall_rule.status #=> String
     #   resp.firewall_rule.status_message #=> String
     #
@@ -2062,7 +2109,7 @@ module Aws::Route53Resolver
     #   resp.firewall_domain_list.creation_time #=> String
     #   resp.firewall_domain_list.modification_time #=> String
     #   resp.firewall_domain_list.category #=> String
-    #   resp.firewall_domain_list.managed_list_type #=> String, one of "THREAT", "CONTENT"
+    #   resp.firewall_domain_list.managed_list_type #=> String, one of "THREAT", "CONTENT", "AUTOALLOWLIST"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/DeleteFirewallDomainList AWS API Documentation
     #
@@ -2169,6 +2216,9 @@ module Aws::Route53Resolver
     #   resp.firewall_rule.firewall_rule_type.firewall_advanced_threat_category.category #=> String
     #   resp.firewall_rule.firewall_rule_type.dns_threat_protection.value #=> String
     #   resp.firewall_rule.firewall_rule_type.dns_threat_protection.confidence_threshold #=> String, one of "LOW", "MEDIUM", "HIGH"
+    #   resp.firewall_rule.firewall_rule_type.auto_allowlist.initial_data_timeframe_hours #=> Integer
+    #   resp.firewall_rule.firewall_rule_type.auto_allowlist.import_from_firewall_domain_list_id #=> String
+    #   resp.firewall_rule.firewall_rule_type.auto_allowlist.auto_allowlist_firewall_domain_list_id #=> String
     #   resp.firewall_rule.status #=> String
     #   resp.firewall_rule.status_message #=> String
     #
@@ -2682,6 +2732,8 @@ module Aws::Route53Resolver
     # @return [Types::GetFirewallDomainListResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetFirewallDomainListResponse#firewall_domain_list #firewall_domain_list} => Types::FirewallDomainList
+    #   * {Types::GetFirewallDomainListResponse#firewall_rule_group_id #firewall_rule_group_id} => String
+    #   * {Types::GetFirewallDomainListResponse#firewall_threat_protection_id #firewall_threat_protection_id} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -2702,7 +2754,9 @@ module Aws::Route53Resolver
     #   resp.firewall_domain_list.creation_time #=> String
     #   resp.firewall_domain_list.modification_time #=> String
     #   resp.firewall_domain_list.category #=> String
-    #   resp.firewall_domain_list.managed_list_type #=> String, one of "THREAT", "CONTENT"
+    #   resp.firewall_domain_list.managed_list_type #=> String, one of "THREAT", "CONTENT", "AUTOALLOWLIST"
+    #   resp.firewall_rule_group_id #=> String
+    #   resp.firewall_threat_protection_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/GetFirewallDomainList AWS API Documentation
     #
@@ -3213,6 +3267,10 @@ module Aws::Route53Resolver
     # Imports domain names from a file into a domain list, for use in a DNS
     # firewall rule group.
     #
+    # You can't import into an AutoAllowlist rule's managed domain list.
+    # To seed such a list, specify `ImportFromFirewallDomainListId` when you
+    # create the rule.
+    #
     # Each domain specification in your domain list must satisfy the
     # following requirements:
     #
@@ -3377,8 +3435,11 @@ module Aws::Route53Resolver
     #   resp.firewall_domain_lists[0].name #=> String
     #   resp.firewall_domain_lists[0].creator_request_id #=> String
     #   resp.firewall_domain_lists[0].managed_owner_name #=> String
-    #   resp.firewall_domain_lists[0].managed_list_type #=> String, one of "THREAT", "CONTENT"
+    #   resp.firewall_domain_lists[0].managed_list_type #=> String, one of "THREAT", "CONTENT", "AUTOALLOWLIST"
     #   resp.firewall_domain_lists[0].category #=> String
+    #   resp.firewall_domain_lists[0].firewall_rule_group_id #=> String
+    #   resp.firewall_domain_lists[0].firewall_threat_protection_id #=> String
+    #   resp.firewall_domain_lists[0].status #=> String, one of "COMPLETE", "COMPLETE_IMPORT_FAILED", "IMPORTING", "DELETING", "UPDATING"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/ListFirewallDomainLists AWS API Documentation
     #
@@ -3443,6 +3504,94 @@ module Aws::Route53Resolver
     # @param [Hash] params ({})
     def list_firewall_domains(params = {}, options = {})
       req = build_request(:list_firewall_domains, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the domains of an AutoAllowlist firewall rule. Only the
+    # owner of the rule group can call this operation. Results are
+    # paginated. Use `MaxResults` and `NextToken` to retrieve additional
+    # domains.
+    #
+    # Identify the rule by `FirewallThreatProtectionId` to get the domains
+    # that DNS Firewall observed in the VPCs that use the rule group,
+    # through a rule group association or through a Route 53 Profile that
+    # includes the rule group, including VPCs in other accounts. Each domain
+    # is returned with its `DomainStatus` and request counts. Use
+    # `QueryOptions` to filter and sort the results.
+    #
+    # Identify the rule's managed domain list by `FirewallDomainListId` to
+    # get the domains that the rule currently allows. For any other domain
+    # list, use ListFirewallDomains.
+    #
+    # @option params [required, String] :firewall_rule_group_id
+    #   The unique identifier of the firewall rule group that contains the
+    #   rule.
+    #
+    # @option params [String] :firewall_threat_protection_id
+    #   The threat protection ID that identifies an AutoAllowlist rule.
+    #   Provide this to list an AutoAllowlist rule's domains.
+    #
+    # @option params [String] :firewall_domain_list_id
+    #   The ID of the AutoAllowlist rule's managed domain list. Provide this
+    #   to list the domains that the rule currently allows.
+    #
+    # @option params [Types::ListFirewallRuleDomainsQueryOptions] :query_options
+    #   Optional filters and sort order for the returned domains. If you
+    #   don't specify this, the operation returns the `OBSERVED` domains
+    #   sorted by `TIME_ADDED` in descending order. See
+    #   ListFirewallRuleDomainsQueryOptions.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of domains that you want to return in a single
+    #   call. If more domains remain than can be returned, the response
+    #   includes a `NextToken` value that you can use in a subsequent call to
+    #   get the next batch. The default is 100.
+    #
+    # @option params [String] :next_token
+    #   For the first call to this operation, omit this value. If more domains
+    #   remain than can be returned in a single call, the response includes a
+    #   `NextToken` value. In your next call, specify that value to get the
+    #   next batch of domains.
+    #
+    # @return [Types::ListFirewallRuleDomainsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListFirewallRuleDomainsResponse#domains #domains} => Array&lt;Types::FirewallRuleDomain&gt;
+    #   * {Types::ListFirewallRuleDomainsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_firewall_rule_domains({
+    #     firewall_rule_group_id: "ResourceId", # required
+    #     firewall_threat_protection_id: "ResourceId",
+    #     firewall_domain_list_id: "ResourceId",
+    #     query_options: {
+    #       domain_status: "OBSERVED", # accepts OBSERVED, ALLOWED, DENIED
+    #       sort_by: "TIME_ADDED", # accepts TIME_ADDED, DAILY_TOTAL, TOTAL_REQUESTS
+    #       sort_order: "ASC", # accepts ASC, DESC
+    #       domain_name_filter: "FirewallDomainName",
+    #     },
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.domains #=> Array
+    #   resp.domains[0].domain_name #=> String
+    #   resp.domains[0].domain_status #=> String, one of "OBSERVED", "ALLOWED", "DENIED", "UNKNOWN"
+    #   resp.domains[0].last_24_hour_requests #=> Integer
+    #   resp.domains[0].total_requests #=> Integer
+    #   resp.domains[0].added_time #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/ListFirewallRuleDomains AWS API Documentation
+    #
+    # @overload list_firewall_rule_domains(params = {})
+    # @param [Hash] params ({})
+    def list_firewall_rule_domains(params = {}, options = {})
+      req = build_request(:list_firewall_rule_domains, params)
       req.send_request(options)
     end
 
@@ -3611,6 +3760,9 @@ module Aws::Route53Resolver
     # is fully managed by Amazon Web Services and requires no separate
     # subscription.
     #
+    # This operation doesn't return the `AutoAllowlist` variant. Configure
+    # an AutoAllowlist rule with AutoAllowlistConfig.
+    #
     # @option params [String] :rule_type
     #   An optional filter that restricts the response to a single
     #   FirewallRuleType variant. Supported values:
@@ -3675,8 +3827,8 @@ module Aws::Route53Resolver
     # information, see `MaxResults`.
     #
     # For rules that require asynchronous provisioning, the response
-    # includes `Status` (see FirewallRuleStatus) and, on failure,
-    # `StatusMessage` with the reason.
+    # includes `Status` (see FirewallRule) and, on failure, `StatusMessage`
+    # with the reason.
     #
     # @option params [required, String] :firewall_rule_group_id
     #   The unique identifier of the firewall rule group that you want to
@@ -3767,6 +3919,9 @@ module Aws::Route53Resolver
     #   resp.firewall_rules[0].firewall_rule_type.firewall_advanced_threat_category.category #=> String
     #   resp.firewall_rules[0].firewall_rule_type.dns_threat_protection.value #=> String
     #   resp.firewall_rules[0].firewall_rule_type.dns_threat_protection.confidence_threshold #=> String, one of "LOW", "MEDIUM", "HIGH"
+    #   resp.firewall_rules[0].firewall_rule_type.auto_allowlist.initial_data_timeframe_hours #=> Integer
+    #   resp.firewall_rules[0].firewall_rule_type.auto_allowlist.import_from_firewall_domain_list_id #=> String
+    #   resp.firewall_rules[0].firewall_rule_type.auto_allowlist.auto_allowlist_firewall_domain_list_id #=> String
     #   resp.firewall_rules[0].status #=> String
     #   resp.firewall_rules[0].status_message #=> String
     #
@@ -4876,6 +5031,23 @@ module Aws::Route53Resolver
     # Updates the firewall domain list from an array of domain
     # specifications.
     #
+    # For an AutoAllowlist rule's managed domain list, use `ADD` to approve
+    # observed domains, `REMOVE` to stop allowing domains, unless a wildcard
+    # entry that's still on the list matches them, and `DENY` to dismiss
+    # observed domains. `REPLACE` and ImportFirewallDomains aren't
+    # supported for these lists.
+    #
+    # DNS Firewall throttles `UpdateFirewallDomains` requests based on both
+    # the request rate and the total number of domains across your requests.
+    #
+    # **Best Practice for Updating Domain Lists**
+    #
+    # If you only need to modify a subset of domains, use the `ADD` or
+    # `REMOVE` operations instead of `REPLACE`. With `REPLACE`, you send the
+    # complete list you want to end up with, and throttling counts every
+    # domain in that request, including domains that aren't changing, which
+    # can use up your available throttling capacity.
+    #
     # @option params [required, String] :firewall_domain_list_id
     #   The ID of the domain list whose domains you want to update.
     #
@@ -4884,13 +5056,23 @@ module Aws::Route53Resolver
     #   providing:
     #
     #   * `ADD` - Add the domains to the ones that are already in the domain
-    #     list.
+    #     list. For an AutoAllowlist rule's managed domain list, this also
+    #     marks the observed domains as allowed.
     #
     #   * `REMOVE` - Search the domain list for the domains and remove them
-    #     from the list.
+    #     from the list. For an AutoAllowlist rule's managed domain list, the
+    #     rule no longer allows the removed domains, unless a wildcard entry
+    #     that's still on the list matches them.
     #
     #   * `REPLACE` - Update the domain list to exactly match the list that
-    #     you are providing.
+    #     you are providing. Not supported for an AutoAllowlist rule's
+    #     managed domain list.
+    #
+    #   * `DENY` - For an AutoAllowlist rule's managed domain list only, mark
+    #     the specified observed domains as denied so that they're no longer
+    #     listed for review. If a domain is on the managed domain list, `DENY`
+    #     also removes it from the list. Specify fully qualified domain names.
+    #     Wildcards aren't accepted.
     #
     # @option params [required, Array<String>] :domains
     #   A list of domains to use in the update operation.
@@ -4918,7 +5100,7 @@ module Aws::Route53Resolver
     #
     #   resp = client.update_firewall_domains({
     #     firewall_domain_list_id: "ResourceId", # required
-    #     operation: "ADD", # required, accepts ADD, REMOVE, REPLACE
+    #     operation: "ADD", # required, accepts ADD, REMOVE, REPLACE, DENY
     #     domains: ["FirewallDomainName"], # required
     #   })
     #
@@ -5020,6 +5202,9 @@ module Aws::Route53Resolver
     #   redirection chain. You don't need to add the subsequent domains in
     #   the domain in the redirection list to the domain list.
     #
+    #   You can't set this value on an AutoAllowlist rule, which always
+    #   inspects the redirection chain.
+    #
     # @option params [String] :qtype
     #   The DNS query type you want the rule to evaluate. Allowed values are;
     #
@@ -5061,6 +5246,9 @@ module Aws::Route53Resolver
     #     addresses generated when DNS64 is enabled.
     #
     #      </note>
+    #
+    #   You can't set `Qtype` on an AutoAllowlist rule, because the rule
+    #   applies to all query types.
     #
     #
     #
@@ -5119,7 +5307,13 @@ module Aws::Route53Resolver
     #     partner must be an active subscription on the calling account.
     #
     #   To enumerate the values supported in your account, call
-    #   ListFirewallRuleTypes.
+    #   ListFirewallRuleTypes. It doesn't return `AutoAllowlist`.
+    #
+    #   You can't specify `FirewallRuleType` when you update an AutoAllowlist
+    #   rule, even with its current values. `InitialDataTimeframeHours` and
+    #   `ImportFromFirewallDomainListId` can't be changed. To change them,
+    #   delete the rule and create a new one. Deleting an AutoAllowlist rule
+    #   also deletes its managed domain list and the domains that you allowed.
     #
     # @return [Types::UpdateFirewallRuleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5156,6 +5350,11 @@ module Aws::Route53Resolver
     #         value: "DnsThreatProtectionRuleTypeValue", # required
     #         confidence_threshold: "LOW", # required, accepts LOW, MEDIUM, HIGH
     #       },
+    #       auto_allowlist: {
+    #         initial_data_timeframe_hours: 1, # required
+    #         import_from_firewall_domain_list_id: "ResourceId",
+    #         auto_allowlist_firewall_domain_list_id: "ResourceId",
+    #       },
     #     },
     #   })
     #
@@ -5183,6 +5382,9 @@ module Aws::Route53Resolver
     #   resp.firewall_rule.firewall_rule_type.firewall_advanced_threat_category.category #=> String
     #   resp.firewall_rule.firewall_rule_type.dns_threat_protection.value #=> String
     #   resp.firewall_rule.firewall_rule_type.dns_threat_protection.confidence_threshold #=> String, one of "LOW", "MEDIUM", "HIGH"
+    #   resp.firewall_rule.firewall_rule_type.auto_allowlist.initial_data_timeframe_hours #=> Integer
+    #   resp.firewall_rule.firewall_rule_type.auto_allowlist.import_from_firewall_domain_list_id #=> String
+    #   resp.firewall_rule.firewall_rule_type.auto_allowlist.auto_allowlist_firewall_domain_list_id #=> String
     #   resp.firewall_rule.status #=> String
     #   resp.firewall_rule.status_message #=> String
     #
@@ -5671,7 +5873,7 @@ module Aws::Route53Resolver
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-route53resolver'
-      context[:gem_version] = '1.110.0'
+      context[:gem_version] = '1.118.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -6,11 +6,23 @@
       "limit_key": "MaxResults",
       "result_key": "AuthorizedUrlConfigs"
     },
+    "DescribeResourceAssociations": {
+      "input_token": "NextToken",
+      "output_token": "NextToken",
+      "limit_key": "MaxResults",
+      "result_key": "ResourceAssociations"
+    },
     "DescribeTrainingPlanExtensionHistory": {
       "input_token": "NextToken",
       "output_token": "NextToken",
       "limit_key": "MaxResults",
       "result_key": "TrainingPlanExtensions"
+    },
+    "GetCapacityReservationUsage": {
+      "input_token": "NextToken",
+      "output_token": "NextToken",
+      "limit_key": "MaxResults",
+      "result_key": "InstanceUsageSet"
     },
     "ListAIBenchmarkJobs": {
       "input_token": "NextToken",
@@ -84,17 +96,41 @@
       "limit_key": "MaxResults",
       "result_key": "Candidates"
     },
+    "ListCapacityReservations": {
+      "input_token": "NextToken",
+      "output_token": "NextToken",
+      "limit_key": "MaxResults",
+      "result_key": "CapacityReservationSummaries"
+    },
     "ListClusterEvents": {
       "input_token": "NextToken",
       "output_token": "NextToken",
       "limit_key": "MaxResults",
       "result_key": "Events"
     },
+    "ListClusterExtensionVersions": {
+      "input_token": "NextToken",
+      "output_token": "NextToken",
+      "limit_key": "MaxResults",
+      "result_key": "ExtensionVersions"
+    },
+    "ListClusterExtensions": {
+      "input_token": "NextToken",
+      "output_token": "NextToken",
+      "limit_key": "MaxResults",
+      "result_key": "Extensions"
+    },
     "ListClusterNodes": {
       "input_token": "NextToken",
       "output_token": "NextToken",
       "limit_key": "MaxResults",
       "result_key": "ClusterNodeSummaries"
+    },
+    "ListClusterOperations": {
+      "input_token": "NextToken",
+      "output_token": "NextToken",
+      "limit_key": "MaxResults",
+      "result_key": "ClusterOperationSummaries"
     },
     "ListClusterSchedulerConfigs": {
       "input_token": "NextToken",
@@ -198,6 +234,12 @@
       "limit_key": "MaxResults",
       "result_key": "FlowDefinitionSummaries"
     },
+    "ListGlobalInferenceGateways": {
+      "input_token": "NextToken",
+      "output_token": "NextToken",
+      "limit_key": "MaxResults",
+      "result_key": "GlobalInferenceGatewaySummaries"
+    },
     "ListHumanTaskUis": {
       "input_token": "NextToken",
       "output_token": "NextToken",
@@ -234,6 +276,12 @@
       "limit_key": "MaxResults",
       "result_key": "InferenceExperiments"
     },
+    "ListInferenceGateways": {
+      "input_token": "NextToken",
+      "output_token": "NextToken",
+      "limit_key": "MaxResults",
+      "result_key": "InferenceGatewaySummaries"
+    },
     "ListInferenceRecommendationsJobSteps": {
       "input_token": "NextToken",
       "output_token": "NextToken",
@@ -245,6 +293,12 @@
       "output_token": "NextToken",
       "limit_key": "MaxResults",
       "result_key": "InferenceRecommendationsJobs"
+    },
+    "ListInferenceRouters": {
+      "input_token": "NextToken",
+      "output_token": "NextToken",
+      "limit_key": "MaxResults",
+      "result_key": "InferenceRouters"
     },
     "ListJobSchemaVersions": {
       "input_token": "NextToken",
@@ -435,7 +489,8 @@
     "ListProjects": {
       "input_token": "NextToken",
       "output_token": "NextToken",
-      "limit_key": "MaxResults"
+      "limit_key": "MaxResults",
+      "result_key": "ProjectSummaryList"
     },
     "ListResourceCatalogs": {
       "input_token": "NextToken",

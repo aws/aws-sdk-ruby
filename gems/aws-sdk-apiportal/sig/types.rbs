@@ -1,0 +1,1003 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::APIPortal
+  module Types
+
+    class ACMManaged
+      attr_accessor domain_name: ::String
+      attr_accessor certificate_arn: ::String
+      SENSITIVE: []
+    end
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ApiId
+      attr_accessor identifier_parts: Types::IdentifierParts
+      SENSITIVE: []
+    end
+
+    class ApiInventoryFilters
+      attr_accessor discovery_source: ("API_GATEWAY" | "ELB" | "CLOUDFRONT")
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ApiInventoryItem
+      attr_accessor method: ("GET" | "POST" | "PUT" | "DELETE" | "PATCH" | "ANY" | "HEAD" | "OPTIONS")
+      attr_accessor host: ::String
+      attr_accessor port: ::Integer
+      attr_accessor path: ::String
+      attr_accessor account_id: ::String
+      attr_accessor resource_arn: ::String
+      attr_accessor region: ::String
+      attr_accessor discovery_source: ("API_GATEWAY" | "ELB" | "CLOUDFRONT")
+      attr_accessor first_seen: ::Time
+      attr_accessor last_seen: ::Time
+      attr_accessor visibility: ("PUBLIC" | "PRIVATE")
+      attr_accessor waf_status: ("ENABLED" | "DISABLED")
+      attr_accessor classification: ("SHADOW" | "MANAGED" | "MANAGED_ZOMBIE" | "MANAGED_ORPHANED")
+      attr_accessor managed_by: ("SELF" | "ORGANIZATION")
+      attr_accessor workloads: ::Array[("MCP" | "LLM" | "A2A")]
+      SENSITIVE: []
+    end
+
+    class ApiInventoryItemDetail
+      attr_accessor method: ("GET" | "POST" | "PUT" | "DELETE" | "PATCH" | "ANY" | "HEAD" | "OPTIONS")
+      attr_accessor host: ::String
+      attr_accessor port: ::Integer
+      attr_accessor path: ::String
+      attr_accessor account_id: ::String
+      attr_accessor resource_arn: ::String
+      attr_accessor region: ::String
+      attr_accessor discovery_source: ("API_GATEWAY" | "ELB" | "CLOUDFRONT")
+      attr_accessor visibility: ("PUBLIC" | "PRIVATE")
+      attr_accessor waf_status: ("ENABLED" | "DISABLED")
+      attr_accessor classification: ("SHADOW" | "MANAGED" | "MANAGED_ZOMBIE" | "MANAGED_ORPHANED")
+      attr_accessor managed_by: ("SELF" | "ORGANIZATION")
+      attr_accessor workloads: ::Array[("MCP" | "LLM" | "A2A")]
+      attr_accessor managed_api_id: ::String
+      SENSITIVE: []
+    end
+
+    class ApiPageDisplayContent
+      attr_accessor none: Types::None
+      attr_accessor overrides: Types::DisplayContentOverrides
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class None < ApiPageDisplayContent
+      end
+      class Overrides < ApiPageDisplayContent
+      end
+      class Unknown < ApiPageDisplayContent
+      end
+    end
+
+    class ApiPageDisplayContentResponse
+      attr_accessor operation_name: ::String
+      attr_accessor api_url: ::String
+      attr_accessor body: ::String
+      SENSITIVE: []
+    end
+
+    class ApiSelectionConfiguration
+      attr_accessor api_selection_mode: ("CUSTOM" | "RULE_BASED")
+      attr_accessor rule_filters: ::Array[Types::RuleFilter]
+      SENSITIVE: []
+    end
+
+    class ApiSignature
+      attr_accessor resource_arn: ::String
+      attr_accessor method: ("GET" | "POST" | "PUT" | "DELETE" | "PATCH" | "ANY" | "HEAD" | "OPTIONS")
+      attr_accessor hostname: ::String
+      attr_accessor port: ::Integer
+      attr_accessor path: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateManagedApisRequest
+      attr_accessor product_id: ::String
+      attr_accessor managed_api_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class AssociateManagedApisResponse
+      attr_accessor failed_items: ::Array[Types::FailedManagedApiItem]
+      SENSITIVE: []
+    end
+
+    class Authorization
+      attr_accessor authorization_config: Types::AuthorizationConfig
+      attr_accessor fine_grained_access_control: ("ENABLED" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class AuthorizationConfig
+      attr_accessor none: Types::None
+      attr_accessor cognito_config: Types::CognitoConfig
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class None < AuthorizationConfig
+      end
+      class CognitoConfig < AuthorizationConfig
+      end
+      class Unknown < AuthorizationConfig
+      end
+    end
+
+    class BadRequestException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CognitoConfig
+      attr_accessor user_pool_arn: ::String
+      attr_accessor app_client_id: ::String
+      attr_accessor user_pool_domain: ::String
+      attr_accessor identity_pool_id: ::String
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CreateManagedApiRequest
+      attr_accessor api_signature: Types::ApiSignature
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateManagedApiResponse
+      attr_accessor managed_api_id: ::String
+      attr_accessor managed_api_arn: ::String
+      attr_accessor api_signature: Types::ApiSignature
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreatePortalPreviewRequest
+      attr_accessor portal_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreatePortalRequest
+      attr_accessor portal_content: Types::PortalContent
+      attr_accessor endpoint_configuration: Types::EndpointConfigurationRequest
+      attr_accessor authorization: Types::Authorization
+      attr_accessor included_product_arns: ::Array[::String]
+      attr_accessor logo_uri: ::String
+      attr_accessor rum_app_monitor_name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreatePortalResponse
+      attr_accessor portal_id: ::String
+      attr_accessor portal_arn: ::String
+      attr_accessor endpoint_configuration: Types::EndpointConfigurationResponse
+      attr_accessor authorization: Types::Authorization
+      attr_accessor portal_content: Types::PortalContent
+      attr_accessor included_product_arns: ::Array[::String]
+      attr_accessor publish_status: ("PUBLISHED" | "PUBLISH_IN_PROGRESS" | "PUBLISH_FAILED" | "DISABLE_IN_PROGRESS" | "DISABLE_FAILED" | "DISABLED")
+      attr_accessor status_exception: Types::PortalStatusException
+      attr_accessor updated_at: ::Time
+      attr_accessor published_at: ::Time
+      attr_accessor publish_description: ::String
+      attr_accessor rum_app_monitor_name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateProductApiPageRequest
+      attr_accessor product_id: ::String
+      attr_accessor managed_api_id: ::String
+      attr_accessor display_content: Types::ApiPageDisplayContent
+      attr_accessor try_it_state: ("ENABLED" | "DISABLED")
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateProductApiPageResponse
+      attr_accessor product_api_page_id: ::String
+      attr_accessor product_api_page_arn: ::String
+      attr_accessor api_id: Types::ApiId
+      attr_accessor display_content: Types::ApiPageDisplayContentResponse
+      attr_accessor try_it_state: ("ENABLED" | "DISABLED")
+      attr_accessor updated_at: ::Time
+      attr_accessor status: ("AVAILABLE" | "IN_PROGRESS" | "FAILED")
+      attr_accessor status_exception: Types::ProductApiPageStatusException
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateProductPageRequest
+      attr_accessor product_id: ::String
+      attr_accessor display_content: Types::DisplayContent
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateProductPageResponse
+      attr_accessor product_page_id: ::String
+      attr_accessor product_page_arn: ::String
+      attr_accessor display_content: Types::DisplayContent
+      attr_accessor updated_at: ::Time
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateProductRequest
+      attr_accessor display_name: ::String
+      attr_accessor description: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor api_selection_configuration: Types::ApiSelectionConfiguration
+      SENSITIVE: []
+    end
+
+    class CreateProductResponse
+      attr_accessor product_id: ::String
+      attr_accessor product_arn: ::String
+      attr_accessor display_name: ::String
+      attr_accessor display_order: Types::DisplayOrder
+      attr_accessor description: ::String
+      attr_accessor updated_at: ::Time
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor api_selection_configuration: Types::ApiSelectionConfiguration
+      attr_accessor status: ("ACTIVE" | "IN_PROGRESS" | "FAILED")
+      attr_accessor failure_reason: ("API_PAGE_ATTACHED" | "EVALUATION_ERROR")
+      SENSITIVE: []
+    end
+
+    class CustomColors
+      attr_accessor background_color: ::String
+      attr_accessor navigation_color: ::String
+      attr_accessor header_color: ::String
+      attr_accessor text_color: ::String
+      attr_accessor accent_color: ::String
+      attr_accessor error_validation_color: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteDiscoveryConfigurationRequest < Aws::EmptyStructure
+    end
+
+    class DeleteManagedApiRequest
+      attr_accessor managed_api_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteManagedApiResponse < Aws::EmptyStructure
+    end
+
+    class DeleteOrganizationDiscoveryConfigurationRequest < Aws::EmptyStructure
+    end
+
+    class DeletePortalRequest
+      attr_accessor portal_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteProductApiPageRequest
+      attr_accessor product_id: ::String
+      attr_accessor product_api_page_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteProductPageRequest
+      attr_accessor product_id: ::String
+      attr_accessor product_page_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteProductRequest
+      attr_accessor product_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteProductSharingPolicyRequest
+      attr_accessor product_id: ::String
+      SENSITIVE: []
+    end
+
+    class DisassociateManagedApisRequest
+      attr_accessor product_id: ::String
+      attr_accessor managed_api_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DisassociateManagedApisResponse
+      attr_accessor failed_items: ::Array[Types::FailedManagedApiItem]
+      SENSITIVE: []
+    end
+
+    class DiscoveryConfigurationData
+      attr_accessor arn: ::String
+      attr_accessor status: ("DISABLED" | "ENABLED" | "UPDATING")
+      attr_accessor discovery_sources: ::Array[("API_GATEWAY" | "ELB" | "CLOUDFRONT")]
+      attr_accessor excluded_resources: ::Array[::String]
+      attr_accessor features: ::Array[("AI_DISCOVERY")]
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class DiscoveryExclusionFilters
+      attr_accessor organizational_unit_ids: ::Array[::String]
+      attr_accessor account_ids: ::Array[::String]
+      attr_accessor resource_arns: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DiscoveryInclusionFilters
+      attr_accessor organizational_unit_ids: ::Array[::String]
+      attr_accessor account_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DiscoveryStatus
+      attr_accessor account_id: ::String
+      attr_accessor discovery_source: ("API_GATEWAY" | "ELB" | "CLOUDFRONT")
+      attr_accessor status: ("STOPPED" | "PROVISIONING" | "RUNNING" | "FAILED")
+      attr_accessor failure_reason: ("ACCESS_DENIED" | "DEPENDENCY_ERROR" | "THROTTLED" | "INVALID_CONFIGURATION" | "INTERNAL_ERROR")
+      SENSITIVE: []
+    end
+
+    class DisplayContent
+      attr_accessor title: ::String
+      attr_accessor body: ::String
+      SENSITIVE: []
+    end
+
+    class DisplayContentOverrides
+      attr_accessor operation_name: ::String
+      attr_accessor api_url: ::String
+      attr_accessor body: ::String
+      SENSITIVE: []
+    end
+
+    class DisplayOrder
+      attr_accessor overview_page_arn: ::String
+      attr_accessor product_page_arns: ::Array[::String]
+      attr_accessor contents: ::Array[Types::Section]
+      SENSITIVE: []
+    end
+
+    class EndpointConfigurationRequest
+      attr_accessor none: Types::None
+      attr_accessor acm_managed: Types::ACMManaged
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class None < EndpointConfigurationRequest
+      end
+      class AcmManaged < EndpointConfigurationRequest
+      end
+      class Unknown < EndpointConfigurationRequest
+      end
+    end
+
+    class EndpointConfigurationResponse
+      attr_accessor domain_name: ::String
+      attr_accessor certificate_arn: ::String
+      attr_accessor portal_domain_hosted_zone_id: ::String
+      attr_accessor portal_default_domain_name: ::String
+      SENSITIVE: []
+    end
+
+    class FailedManagedApiItem
+      attr_accessor managed_api_id: ::String
+      attr_accessor error_code: ("MANAGED_API_NOT_FOUND" | "INTERNAL_ERROR")
+      attr_accessor error_message: ::String
+      SENSITIVE: []
+    end
+
+    class GetApiInventoryItemRequest
+      attr_accessor method: ("GET" | "POST" | "PUT" | "DELETE" | "PATCH" | "ANY" | "HEAD" | "OPTIONS")
+      attr_accessor host: ::String
+      attr_accessor port: ::Integer
+      attr_accessor path: ::String
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetApiInventoryItemResponse
+      attr_accessor item: Types::ApiInventoryItemDetail
+      SENSITIVE: []
+    end
+
+    class GetDiscoveryConfigurationRequest < Aws::EmptyStructure
+    end
+
+    class GetDiscoveryConfigurationResponse
+      attr_accessor discovery_configuration: Types::DiscoveryConfigurationData
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class GetManagedApiRequest
+      attr_accessor managed_api_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetManagedApiResponse
+      attr_accessor managed_api_id: ::String
+      attr_accessor managed_api_arn: ::String
+      attr_accessor api_signature: Types::ApiSignature
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor findings: ::Array[Types::ManagedApiFinding]
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class GetOrganizationDiscoveryConfigurationRequest < Aws::EmptyStructure
+    end
+
+    class GetOrganizationDiscoveryConfigurationResponse
+      attr_accessor discovery_configuration: Types::OrganizationDiscoveryConfigurationData
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class GetPortalRequest
+      attr_accessor portal_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetPortalResponse
+      attr_accessor portal_id: ::String
+      attr_accessor portal_arn: ::String
+      attr_accessor endpoint_configuration: Types::EndpointConfigurationResponse
+      attr_accessor authorization: Types::Authorization
+      attr_accessor portal_content: Types::PortalContent
+      attr_accessor included_product_arns: ::Array[::String]
+      attr_accessor publish_status: ("PUBLISHED" | "PUBLISH_IN_PROGRESS" | "PUBLISH_FAILED" | "DISABLE_IN_PROGRESS" | "DISABLE_FAILED" | "DISABLED")
+      attr_accessor status_exception: Types::PortalStatusException
+      attr_accessor updated_at: ::Time
+      attr_accessor published_at: ::Time
+      attr_accessor publish_description: ::String
+      attr_accessor rum_app_monitor_name: ::String
+      attr_accessor preview: Types::Preview
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class GetProductApiPageRequest
+      attr_accessor product_id: ::String
+      attr_accessor product_api_page_id: ::String
+      attr_accessor resource_owner_account_id: ::String
+      attr_accessor include_raw_display_content: bool
+      SENSITIVE: []
+    end
+
+    class GetProductApiPageResponse
+      attr_accessor product_api_page_id: ::String
+      attr_accessor product_api_page_arn: ::String
+      attr_accessor api_id: Types::ApiId
+      attr_accessor display_content: Types::ApiPageDisplayContentResponse
+      attr_accessor try_it_state: ("ENABLED" | "DISABLED")
+      attr_accessor updated_at: ::Time
+      attr_accessor status: ("AVAILABLE" | "IN_PROGRESS" | "FAILED")
+      attr_accessor raw_display_content: ::String
+      attr_accessor status_exception: Types::ProductApiPageStatusException
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class GetProductPageRequest
+      attr_accessor product_id: ::String
+      attr_accessor product_page_id: ::String
+      attr_accessor resource_owner_account_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetProductPageResponse
+      attr_accessor product_page_id: ::String
+      attr_accessor product_page_arn: ::String
+      attr_accessor display_content: Types::DisplayContent
+      attr_accessor updated_at: ::Time
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class GetProductRequest
+      attr_accessor product_id: ::String
+      attr_accessor resource_owner_account_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetProductResponse
+      attr_accessor product_id: ::String
+      attr_accessor product_arn: ::String
+      attr_accessor display_name: ::String
+      attr_accessor display_order: Types::DisplayOrder
+      attr_accessor description: ::String
+      attr_accessor updated_at: ::Time
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor api_selection_configuration: Types::ApiSelectionConfiguration
+      attr_accessor status: ("ACTIVE" | "IN_PROGRESS" | "FAILED")
+      attr_accessor failure_reason: ("API_PAGE_ATTACHED" | "EVALUATION_ERROR")
+      SENSITIVE: []
+    end
+
+    class GetProductSharingPolicyRequest
+      attr_accessor product_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetProductSharingPolicyResponse
+      attr_accessor product_id: ::String
+      attr_accessor policy_document: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class IdentifierParts
+      attr_accessor path: ::String
+      attr_accessor method: ::String
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class LimitExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListApiInventoryItemsRequest
+      attr_accessor filters: Types::ApiInventoryFilters
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListApiInventoryItemsResponse
+      attr_accessor items: ::Array[Types::ApiInventoryItem]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDiscoveryStatusesRequest
+      attr_accessor discovery_source: ("API_GATEWAY" | "ELB" | "CLOUDFRONT")
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDiscoveryStatusesResponse
+      attr_accessor items: ::Array[Types::DiscoveryStatus]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListManagedApiEventsRequest
+      attr_accessor managed_api_id: ::String
+      attr_accessor started_after: ::Time
+      attr_accessor started_before: ::Time
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListManagedApiEventsResponse
+      attr_accessor items: ::Array[Types::ManagedApiEventSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListManagedApisRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor product_id: ::String
+      SENSITIVE: []
+    end
+
+    class ListManagedApisResponse
+      attr_accessor next_token: ::String
+      attr_accessor items: ::Array[Types::ManagedApiSummary]
+      SENSITIVE: []
+    end
+
+    class ListPortalsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListPortalsResponse
+      attr_accessor items: ::Array[Types::PortalSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListProductApiPagesRequest
+      attr_accessor product_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor resource_owner_account_id: ::String
+      SENSITIVE: []
+    end
+
+    class ListProductApiPagesResponse
+      attr_accessor next_token: ::String
+      attr_accessor items: ::Array[Types::ProductApiPageSummaryNoBody]
+      SENSITIVE: []
+    end
+
+    class ListProductPagesRequest
+      attr_accessor product_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor resource_owner_account_id: ::String
+      SENSITIVE: []
+    end
+
+    class ListProductPagesResponse
+      attr_accessor next_token: ::String
+      attr_accessor items: ::Array[Types::ProductPageSummaryNoBody]
+      SENSITIVE: []
+    end
+
+    class ListProductsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor resource_owner: ("ALL" | "SELF" | "OTHER_ACCOUNTS")
+      attr_accessor managed_api_id: ::String
+      SENSITIVE: []
+    end
+
+    class ListProductsResponse
+      attr_accessor next_token: ::String
+      attr_accessor items: ::Array[Types::ProductSummary]
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class ManagedApiEventSummary
+      attr_accessor event_id: ::String
+      attr_accessor event_type: ("WAF_API_SECURITY")
+      attr_accessor status: ("EVENT_STARTED" | "EVENT_IN_PROGRESS" | "EVENT_ENDED")
+      attr_accessor waf_api_security_event_detail: Types::WafApiSecurityEventDetail
+      attr_accessor started_at: ::Time
+      attr_accessor ended_at: ::Time
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class ManagedApiFinding
+      attr_accessor posture_id: ::String
+      attr_accessor posture_status: ("TRUE" | "FALSE" | "NOT_APPLICABLE" | "INSUFFICIENT_DATA")
+      attr_accessor reason: ("AUTHENTICATION_NOT_CONFIGURED" | "REQUEST_VALIDATION_NOT_ENABLED" | "API_KEY_NOT_CONFIGURED" | "THROTTLING_NOT_ENABLED" | "THROTTLING_RATE_LIMIT_NOT_SET" | "THROTTLING_BURST_LIMIT_NOT_SET" | "RESPONSE_CACHING_NOT_ENABLED" | "STAGE_WAF_NOT_ASSOCIATED" | "STAGE_ACCESS_LOGGING_NOT_ENABLED" | "PRIVATE_API_RESOURCE_POLICY_MISSING" | "REST_API_TLS_BELOW_1_2" | "LOAD_BALANCER_WAF_NOT_ASSOCIATED" | "LISTENER_TLS_BELOW_1_2" | "DISTRIBUTION_TLS_BELOW_1_2" | "DISTRIBUTION_WAF_NOT_ASSOCIATED" | "DISTRIBUTION_SERVES_PLAINTEXT_HTTP" | "DISTRIBUTION_ACCESS_LOGGING_NOT_ENABLED" | "GEO_RESTRICTION_NOT_CONFIGURED" | "UNKNOWN")
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class ManagedApiSummary
+      attr_accessor managed_api_id: ::String
+      attr_accessor managed_api_arn: ::String
+      attr_accessor api_signature: Types::ApiSignature
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class None < Aws::EmptyStructure
+    end
+
+    class OrganizationDiscoveryConfigurationData
+      attr_accessor arn: ::String
+      attr_accessor status: ("DISABLED" | "ENABLED" | "UPDATING")
+      attr_accessor discovery_sources: ::Array[("API_GATEWAY" | "ELB" | "CLOUDFRONT")]
+      attr_accessor exclusion_filters: Types::DiscoveryExclusionFilters
+      attr_accessor discovery_filters: Types::OrganizationDiscoveryFilters
+      attr_accessor features: ::Array[("AI_DISCOVERY")]
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class OrganizationDiscoveryFilters
+      attr_accessor exclusion_filters: Types::DiscoveryExclusionFilters
+      attr_accessor inclusion_filters: Types::DiscoveryInclusionFilters
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class ExclusionFilters < OrganizationDiscoveryFilters
+      end
+      class InclusionFilters < OrganizationDiscoveryFilters
+      end
+      class Unknown < OrganizationDiscoveryFilters
+      end
+    end
+
+    class PortalContent
+      attr_accessor display_name: ::String
+      attr_accessor description: ::String
+      attr_accessor theme: Types::PortalTheme
+      SENSITIVE: []
+    end
+
+    class PortalStatusException
+      attr_accessor exception: ("INTERNAL_FAILURE" | "UNSHARED_PRODUCT_EXCEPTION" | "CLOUDFRONT_DOMAIN_IN_USE" | "MISSING_CLOUDFRONT_PERMISSIONS")
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class PortalSummary
+      attr_accessor portal_id: ::String
+      attr_accessor portal_arn: ::String
+      attr_accessor endpoint_configuration: Types::EndpointConfigurationResponse
+      attr_accessor authorization: Types::Authorization
+      attr_accessor portal_content: Types::PortalContent
+      attr_accessor included_product_arns: ::Array[::String]
+      attr_accessor publish_status: ("PUBLISHED" | "PUBLISH_IN_PROGRESS" | "PUBLISH_FAILED" | "DISABLE_IN_PROGRESS" | "DISABLE_FAILED" | "DISABLED")
+      attr_accessor status_exception: Types::PortalStatusException
+      attr_accessor updated_at: ::Time
+      attr_accessor published_at: ::Time
+      attr_accessor publish_description: ::String
+      attr_accessor rum_app_monitor_name: ::String
+      attr_accessor preview: Types::Preview
+      SENSITIVE: []
+    end
+
+    class PortalTheme
+      attr_accessor custom_colors: Types::CustomColors
+      attr_accessor logo_uploaded_at: ::Time
+      SENSITIVE: []
+    end
+
+    class Preview
+      attr_accessor preview_status: ("PREVIEW_IN_PROGRESS" | "PREVIEW_FAILED" | "PREVIEW_READY")
+      attr_accessor status_exception: Types::PortalStatusException
+      attr_accessor preview_url: ::String
+      SENSITIVE: []
+    end
+
+    class ProductApiPageStatusException
+      attr_accessor exception: ("INTERNAL_FAILURE" | "RESOURCE_DELETED" | "MEMBER_LEFT_ORG")
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ProductApiPageSummaryNoBody
+      attr_accessor product_api_page_id: ::String
+      attr_accessor product_api_page_arn: ::String
+      attr_accessor api_id: Types::ApiId
+      attr_accessor operation_name: ::String
+      attr_accessor api_url: ::String
+      attr_accessor try_it_state: ("ENABLED" | "DISABLED")
+      attr_accessor updated_at: ::Time
+      attr_accessor status: ("AVAILABLE" | "IN_PROGRESS" | "FAILED")
+      attr_accessor status_exception: Types::ProductApiPageStatusException
+      SENSITIVE: []
+    end
+
+    class ProductPageSummaryNoBody
+      attr_accessor product_page_id: ::String
+      attr_accessor product_page_arn: ::String
+      attr_accessor page_title: ::String
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class ProductSummary
+      attr_accessor product_id: ::String
+      attr_accessor product_arn: ::String
+      attr_accessor display_name: ::String
+      attr_accessor description: ::String
+      attr_accessor updated_at: ::Time
+      attr_accessor api_selection_configuration: Types::ApiSelectionConfiguration
+      attr_accessor status: ("ACTIVE" | "IN_PROGRESS" | "FAILED")
+      attr_accessor failure_reason: ("API_PAGE_ATTACHED" | "EVALUATION_ERROR")
+      SENSITIVE: []
+    end
+
+    class PutDiscoveryConfigurationRequest
+      attr_accessor discovery_sources: ::Array[("API_GATEWAY" | "ELB" | "CLOUDFRONT")]
+      attr_accessor excluded_resources: ::Array[::String]
+      attr_accessor features: ::Array[("AI_DISCOVERY")]
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class PutDiscoveryConfigurationResponse
+      attr_accessor discovery_configuration: Types::DiscoveryConfigurationData
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class PutOrganizationDiscoveryConfigurationRequest
+      attr_accessor discovery_sources: ::Array[("API_GATEWAY" | "ELB" | "CLOUDFRONT")]
+      attr_accessor exclusion_filters: Types::DiscoveryExclusionFilters
+      attr_accessor discovery_filters: Types::OrganizationDiscoveryFilters
+      attr_accessor features: ::Array[("AI_DISCOVERY")]
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class PutOrganizationDiscoveryConfigurationResponse
+      attr_accessor discovery_configuration: Types::OrganizationDiscoveryConfigurationData
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class PutProductSharingPolicyRequest
+      attr_accessor product_id: ::String
+      attr_accessor policy_document: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class RuleFilter
+      attr_accessor key: ("RESOURCE_ARN" | "HOST" | "METHOD" | "PATH" | "PORT" | "ACCOUNT")
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class Section
+      attr_accessor section_name: ::String
+      attr_accessor product_api_page_arns: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class StartDiscoveryRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class StopDiscoveryRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdatePortalPublishStatusRequest
+      attr_accessor portal_id: ::String
+      attr_accessor status: ("PUBLISHED" | "DISABLED")
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class UpdatePortalRequest
+      attr_accessor portal_id: ::String
+      attr_accessor portal_content: Types::PortalContent
+      attr_accessor endpoint_configuration: Types::EndpointConfigurationRequest
+      attr_accessor authorization: Types::Authorization
+      attr_accessor rum_app_monitor_name: ::String
+      attr_accessor included_product_arns: ::Array[::String]
+      attr_accessor logo_uri: ::String
+      SENSITIVE: []
+    end
+
+    class UpdatePortalResponse
+      attr_accessor portal_id: ::String
+      attr_accessor portal_arn: ::String
+      attr_accessor endpoint_configuration: Types::EndpointConfigurationResponse
+      attr_accessor authorization: Types::Authorization
+      attr_accessor portal_content: Types::PortalContent
+      attr_accessor included_product_arns: ::Array[::String]
+      attr_accessor publish_status: ("PUBLISHED" | "PUBLISH_IN_PROGRESS" | "PUBLISH_FAILED" | "DISABLE_IN_PROGRESS" | "DISABLE_FAILED" | "DISABLED")
+      attr_accessor status_exception: Types::PortalStatusException
+      attr_accessor updated_at: ::Time
+      attr_accessor published_at: ::Time
+      attr_accessor publish_description: ::String
+      attr_accessor rum_app_monitor_name: ::String
+      attr_accessor preview: Types::Preview
+      SENSITIVE: []
+    end
+
+    class UpdateProductApiPageRequest
+      attr_accessor product_id: ::String
+      attr_accessor product_api_page_id: ::String
+      attr_accessor display_content: Types::ApiPageDisplayContent
+      attr_accessor try_it_state: ("ENABLED" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class UpdateProductApiPageResponse
+      attr_accessor product_api_page_id: ::String
+      attr_accessor product_api_page_arn: ::String
+      attr_accessor api_id: Types::ApiId
+      attr_accessor display_content: Types::ApiPageDisplayContentResponse
+      attr_accessor try_it_state: ("ENABLED" | "DISABLED")
+      attr_accessor updated_at: ::Time
+      attr_accessor status: ("AVAILABLE" | "IN_PROGRESS" | "FAILED")
+      attr_accessor status_exception: Types::ProductApiPageStatusException
+      SENSITIVE: []
+    end
+
+    class UpdateProductPageRequest
+      attr_accessor product_id: ::String
+      attr_accessor product_page_id: ::String
+      attr_accessor display_content: Types::DisplayContent
+      SENSITIVE: []
+    end
+
+    class UpdateProductPageResponse
+      attr_accessor product_page_id: ::String
+      attr_accessor product_page_arn: ::String
+      attr_accessor display_content: Types::DisplayContent
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class UpdateProductRequest
+      attr_accessor product_id: ::String
+      attr_accessor display_name: ::String
+      attr_accessor description: ::String
+      attr_accessor display_order: Types::DisplayOrder
+      attr_accessor api_selection_configuration: Types::ApiSelectionConfiguration
+      SENSITIVE: []
+    end
+
+    class UpdateProductResponse
+      attr_accessor product_id: ::String
+      attr_accessor product_arn: ::String
+      attr_accessor display_name: ::String
+      attr_accessor display_order: Types::DisplayOrder
+      attr_accessor description: ::String
+      attr_accessor updated_at: ::Time
+      attr_accessor api_selection_configuration: Types::ApiSelectionConfiguration
+      attr_accessor status: ("ACTIVE" | "IN_PROGRESS" | "FAILED")
+      attr_accessor failure_reason: ("API_PAGE_ATTACHED" | "EVALUATION_ERROR")
+      SENSITIVE: []
+    end
+
+    class WafApiSecurityEventDetail
+      attr_accessor label: ::String
+      attr_accessor category: ::String
+      attr_accessor confidence: ("LOW" | "MEDIUM" | "HIGH")
+      attr_accessor web_acl_arn: ::String
+      SENSITIVE: []
+    end
+  end
+end

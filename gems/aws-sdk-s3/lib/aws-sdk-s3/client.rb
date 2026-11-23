@@ -341,7 +341,8 @@ module Aws::S3
     #     An integer representing the maximum number attempts that will be made for
     #     a single request, including the initial attempt.  For example,
     #     setting this value to 5 will result in a request being retried up to
-    #     4 times. Used in `standard` and `adaptive` retry modes.
+    #     4 times. Used in `standard` and `adaptive` retry modes. Defaults to 3,
+    #     except for DynamoDB and DynamoDB Streams, which default to 4.
     #
     #   @option options [Proc] :output_event_stream_handler
     #     When an EventStream or Proc object is provided, it will be used as callback for each chunk of event stream response received along the way.
@@ -412,15 +413,15 @@ module Aws::S3
     #     used by the default backoff function. This option is only used in the
     #     `legacy` retry mode.
     #
-    #   @option options [String] :retry_mode ("legacy")
+    #   @option options [String] :retry_mode ("standard")
     #     Specifies which retry algorithm to use. Values are:
     #
-    #     * `legacy` - The pre-existing retry behavior. This is the default
-    #       value if no retry mode is provided.
+    #     * `legacy` - The pre-existing retry behavior.
     #
     #     * `standard` - A standardized set of retry rules across the AWS SDKs.
     #       This includes support for retry quotas, which limit the number of
-    #       unsuccessful retries a client can make.
+    #       unsuccessful retries a client can make. This is the default value
+    #       if no retry mode is provided.
     #
     #     * `adaptive` - A retry mode that includes all the functionality of
     #       `standard` mode along with automatic client side throttling.
@@ -759,6 +760,7 @@ module Aws::S3
     # @return [Types::AbortMultipartUploadOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::AbortMultipartUploadOutput#request_charged #request_charged} => String
+    #   * {Types::AbortMultipartUploadOutput#version_id #version_id} => String
     #
     #
     # @example Example: To abort a multipart upload
@@ -789,6 +791,7 @@ module Aws::S3
     # @example Response structure
     #
     #   resp.request_charged #=> String, one of "requester"
+    #   resp.version_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/AbortMultipartUpload AWS API Documentation
     #
@@ -3232,11 +3235,19 @@ module Aws::S3
     # multipart uploads, see [Multipart Upload Overview][2] in the *Amazon
     # S3 User Guide*.
     #
-    # <note markdown="1"> After you initiate a multipart upload and upload one or more parts, to
-    # stop being charged for storing the uploaded parts, you must either
-    # complete or abort the multipart upload. Amazon S3 frees up the space
-    # used to store the parts and stops charging you for storing them only
-    # after you either complete or abort a multipart upload.
+    # <note markdown="1"> * After you initiate a multipart upload and upload one or more parts,
+    #   to stop being charged for storing the uploaded parts, you must
+    #   either complete or abort the multipart upload. Amazon S3 frees up
+    #   the space used to store the parts and stops charging you for storing
+    #   them only after you either complete or abort a multipart upload.
+    #
+    # * When you initiate a multipart upload, Amazon S3 records the bucket
+    #   configuration in place at that time and uses it for the rest of the
+    #   upload. Changes that you make to the bucket configuration after you
+    #   initiate the upload don't apply to that upload. To apply new bucket
+    #   configuration to uploads in progress, use [ListMultipartUploads][3]
+    #   to find them and [AbortMultipartUpload][4] to stop them. Then start
+    #   the uploads again.
     #
     #  </note>
     #
@@ -3246,7 +3257,7 @@ module Aws::S3
     # Otherwise, the incomplete multipart upload becomes eligible for an
     # abort action and Amazon S3 aborts the multipart upload. For more
     # information, see [Aborting Incomplete Multipart Uploads Using a Bucket
-    # Lifecycle Configuration][3].
+    # Lifecycle Configuration][5].
     #
     # <note markdown="1"> * <b>Directory buckets </b> - S3 Lifecycle is not supported by
     #   directory buckets.
@@ -3257,9 +3268,9 @@ module Aws::S3
     #   `https://amzn-s3-demo-bucket.s3express-zone-id.region-code.amazonaws.com/key-name
     #   `. Path-style requests are not supported. For more information about
     #   endpoints in Availability Zones, see [Regional and Zonal endpoints
-    #   for directory buckets in Availability Zones][4] in the *Amazon S3
+    #   for directory buckets in Availability Zones][6] in the *Amazon S3
     #   User Guide*. For more information about endpoints in Local Zones,
-    #   see [Concepts for directory buckets in Local Zones][5] in the
+    #   see [Concepts for directory buckets in Local Zones][7] in the
     #   *Amazon S3 User Guide*.
     #
     #  </note>
@@ -3272,7 +3283,7 @@ module Aws::S3
     #   sign each request individually. There is nothing special about
     #   signing multipart upload requests. For more information about
     #   signing, see [Authenticating Requests (Amazon Web Services Signature
-    #   Version 4)][6] in the *Amazon S3 User Guide*.
+    #   Version 4)][8] in the *Amazon S3 User Guide*.
     #
     # Permissions
     # : * **General purpose bucket permissions** - To perform a multipart
@@ -3285,13 +3296,13 @@ module Aws::S3
     #     `UploadPartCopy` APIs. These permissions are required because
     #     Amazon S3 must decrypt and read data from the encrypted file parts
     #     before it completes the multipart upload. For more information,
-    #     see [Multipart upload API and permissions][7] and [Protecting data
-    #     using server-side encryption with Amazon Web Services KMS][8] in
+    #     see [Multipart upload API and permissions][9] and [Protecting data
+    #     using server-side encryption with Amazon Web Services KMS][10] in
     #     the *Amazon S3 User Guide*.
     #
     #   * **Directory bucket permissions** - To grant access to this API
     #     operation on a directory bucket, we recommend that you use the [
-    #     `CreateSession` ][9] API operation for session-based
+    #     `CreateSession` ][11] API operation for session-based
     #     authorization. Specifically, you grant the
     #     `s3express:CreateSession` permission to the directory bucket in a
     #     bucket policy or an IAM identity-based policy. Then, you make the
@@ -3302,7 +3313,7 @@ module Aws::S3
     #     token for use. Amazon Web Services CLI or SDKs create session and
     #     refresh the session token automatically to avoid service
     #     interruptions when a session expires. For more information about
-    #     authorization, see [ `CreateSession` ][9].
+    #     authorization, see [ `CreateSession` ][11].
     #
     # Encryption
     # : * **General purpose buckets** - Server-side encryption is for data
@@ -3329,7 +3340,7 @@ module Aws::S3
     #     the destination bucket, the encryption setting in your request
     #     takes precedence. If you choose to provide your own encryption
     #     key, the request headers you provide in [UploadPart][1] and
-    #     [UploadPartCopy][10] requests must match the headers you used in
+    #     [UploadPartCopy][12] requests must match the headers you used in
     #     the `CreateMultipartUpload` request.
     #
     #     * Use KMS keys (SSE-KMS) that include the Amazon Web Services
@@ -3354,9 +3365,9 @@ module Aws::S3
     #         actions on the key. These permissions are required because
     #         Amazon S3 must decrypt and read data from the encrypted file
     #         parts before it completes the multipart upload. For more
-    #         information, see [Multipart upload API and permissions][7] and
+    #         information, see [Multipart upload API and permissions][9] and
     #         [Protecting data using server-side encryption with Amazon Web
-    #         Services KMS][8] in the *Amazon S3 User Guide*.
+    #         Services KMS][10] in the *Amazon S3 User Guide*.
     #
     #       * If your Identity and Access Management (IAM) user or role is
     #         in the same Amazon Web Services account as the KMS key, then
@@ -3371,13 +3382,13 @@ module Aws::S3
     #         For information about configuring any of the officially
     #         supported Amazon Web Services SDKs and Amazon Web Services
     #         CLI, see [Specifying the Signature Version in Request
-    #         Authentication][11] in the *Amazon S3 User Guide*.
+    #         Authentication][13] in the *Amazon S3 User Guide*.
     #
     #        </note>
     #
     #       For more information about server-side encryption with KMS keys
     #       (SSE-KMS), see [Protecting Data Using Server-Side Encryption
-    #       with KMS keys][8] in the *Amazon S3 User Guide*.
+    #       with KMS keys][10] in the *Amazon S3 User Guide*.
     #
     #     * Use customer-provided encryption keys (SSE-C) – If you want to
     #       manage your own encryption keys, provide all the following
@@ -3391,7 +3402,7 @@ module Aws::S3
     #       For more information about server-side encryption with
     #       customer-provided encryption keys (SSE-C), see [ Protecting data
     #       using server-side encryption with customer-provided encryption
-    #       keys (SSE-C)][12] in the *Amazon S3 User Guide*.
+    #       keys (SSE-C)][14] in the *Amazon S3 User Guide*.
     #   * **Directory buckets** - For directory buckets, there are only two
     #     supported options for server-side encryption: server-side
     #     encryption with Amazon S3 managed keys (SSE-S3) (`AES256`) and
@@ -3401,13 +3412,13 @@ module Aws::S3
     #     default encryption in your `CreateSession` requests or `PUT`
     #     object requests. Then, new objects are automatically encrypted
     #     with the desired encryption settings. For more information, see
-    #     [Protecting data with server-side encryption][13] in the *Amazon
+    #     [Protecting data with server-side encryption][15] in the *Amazon
     #     S3 User Guide*. For more information about the encryption
     #     overriding behaviors in directory buckets, see [Specifying
-    #     server-side encryption with KMS for new object uploads][14].
+    #     server-side encryption with KMS for new object uploads][16].
     #
-    #     In the Zonal endpoint API calls (except [CopyObject][15] and
-    #     [UploadPartCopy][10]) using the REST API, the encryption request
+    #     In the Zonal endpoint API calls (except [CopyObject][17] and
+    #     [UploadPartCopy][12]) using the REST API, the encryption request
     #     headers must match the encryption settings that are specified in
     #     the `CreateSession` request. You can't override the values of the
     #     encryption settings (`x-amz-server-side-encryption`,
@@ -3427,7 +3438,7 @@ module Aws::S3
     #     configuration for the `CreateSession` request. It's not supported
     #     to override the encryption settings values in the `CreateSession`
     #     request. So in the Zonal endpoint API calls (except
-    #     [CopyObject][15] and [UploadPartCopy][10]), the encryption request
+    #     [CopyObject][17] and [UploadPartCopy][12]), the encryption request
     #     headers must match the default encryption configuration of the
     #     directory bucket.
     #
@@ -3449,13 +3460,13 @@ module Aws::S3
     #
     # * [UploadPart][1]
     #
-    # * [CompleteMultipartUpload][16]
+    # * [CompleteMultipartUpload][18]
     #
-    # * [AbortMultipartUpload][17]
+    # * [AbortMultipartUpload][4]
     #
-    # * [ListParts][18]
+    # * [ListParts][19]
     #
-    # * [ListMultipartUploads][19]
+    # * [ListMultipartUploads][3]
     #
     # You must URL encode any signed header values that contain spaces. For
     # example, if your header value is `my file.txt`, containing two spaces
@@ -3465,23 +3476,23 @@ module Aws::S3
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_UploadPart.html
     # [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/mpuoverview.html
-    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/dev/mpuoverview.html#mpu-abort-incomplete-mpu-lifecycle-config
-    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/endpoint-directory-buckets-AZ.html
-    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-lzs-for-directory-buckets.html
-    # [6]: https://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html
-    # [7]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/mpuoverview.html#mpuAndPermissions
-    # [8]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/UsingKMSEncryption.html
-    # [9]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateSession.html
-    # [10]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_UploadPartCopy.html
-    # [11]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingAWSSDK.html#specify-signature-version
-    # [12]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/ServerSideEncryptionCustomerKeys.html
-    # [13]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-serv-side-encryption.html
-    # [14]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-specifying-kms-encryption.html
-    # [15]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_CopyObject.html
-    # [16]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_CompleteMultipartUpload.html
-    # [17]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_AbortMultipartUpload.html
-    # [18]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListParts.html
-    # [19]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListMultipartUploads.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListMultipartUploads.html
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_AbortMultipartUpload.html
+    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/dev/mpuoverview.html#mpu-abort-incomplete-mpu-lifecycle-config
+    # [6]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/endpoint-directory-buckets-AZ.html
+    # [7]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-lzs-for-directory-buckets.html
+    # [8]: https://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html
+    # [9]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/mpuoverview.html#mpuAndPermissions
+    # [10]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/UsingKMSEncryption.html
+    # [11]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateSession.html
+    # [12]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_UploadPartCopy.html
+    # [13]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingAWSSDK.html#specify-signature-version
+    # [14]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/ServerSideEncryptionCustomerKeys.html
+    # [15]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-serv-side-encryption.html
+    # [16]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-specifying-kms-encryption.html
+    # [17]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_CopyObject.html
+    # [18]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_CompleteMultipartUpload.html
+    # [19]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListParts.html
     #
     # @option params [String] :acl
     #   The canned ACL to apply to the object. Amazon S3 supports a set of
@@ -4137,6 +4148,7 @@ module Aws::S3
     #   * {Types::CreateMultipartUploadOutput#request_charged #request_charged} => String
     #   * {Types::CreateMultipartUploadOutput#checksum_algorithm #checksum_algorithm} => String
     #   * {Types::CreateMultipartUploadOutput#checksum_type #checksum_type} => String
+    #   * {Types::CreateMultipartUploadOutput#version_id #version_id} => String
     #
     #
     # @example Example: To initiate a multipart upload
@@ -4212,6 +4224,7 @@ module Aws::S3
     #   resp.request_charged #=> String, one of "requester"
     #   resp.checksum_algorithm #=> String, one of "CRC32", "CRC32C", "SHA1", "SHA256", "CRC64NVME", "SHA512", "MD5", "XXHASH64", "XXHASH3", "XXHASH128"
     #   resp.checksum_type #=> String, one of "COMPOSITE", "FULL_OBJECT"
+    #   resp.version_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/CreateMultipartUpload AWS API Documentation
     #
@@ -5286,9 +5299,9 @@ module Aws::S3
     end
 
     # We recommend that you delete your S3 Metadata configurations by using
-    # the V2 [DeleteBucketMetadataTableConfiguration][1] API operation. We
-    # no longer recommend using the V1
-    # `DeleteBucketMetadataTableConfiguration` API operation.
+    # the V2 [DeleteBucketMetadataConfiguration][1] API operation. We no
+    # longer recommend using the V1 `DeleteBucketMetadataTableConfiguration`
+    # API operation.
     #
     #  If you created your S3 Metadata configuration before July 15, 2025,
     # we
@@ -5333,7 +5346,7 @@ module Aws::S3
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketMetadataTableConfiguration.html
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketMetadataConfiguration.html
     # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucketMetadataConfiguration.html
     # [3]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/metadata-tables-overview.html
     # [4]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/metadata-tables-permissions.html
@@ -7771,8 +7784,6 @@ module Aws::S3
     #
     #   * HTTP Status Code: 404 Not Found
     #
-    #   * SOAP Fault Code Prefix: Client
-    #
     # The following operations are related to `GetBucketLifecycle`:
     #
     # * [GetBucketLifecycleConfiguration][1]
@@ -7934,8 +7945,6 @@ module Aws::S3
     #   * Description: The lifecycle configuration does not exist.
     #
     #   * HTTP Status Code: 404 Not Found
-    #
-    #   * SOAP Fault Code Prefix: Client
     #
     # The following operations are related to
     # `GetBucketLifecycleConfiguration`:
@@ -8331,9 +8340,9 @@ module Aws::S3
     end
 
     # We recommend that you retrieve your S3 Metadata configurations by
-    # using the V2 [GetBucketMetadataTableConfiguration][1] API operation.
-    # We no longer recommend using the V1
-    # `GetBucketMetadataTableConfiguration` API operation.
+    # using the V2 [GetBucketMetadataConfiguration][1] API operation. We no
+    # longer recommend using the V1 `GetBucketMetadataTableConfiguration`
+    # API operation.
     #
     #  If you created your S3 Metadata configuration before July 15, 2025,
     # we
@@ -8378,7 +8387,7 @@ module Aws::S3
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketMetadataTableConfiguration.html
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketMetadataConfiguration.html
     # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucketMetadataConfiguration.html
     # [3]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/metadata-tables-overview.html
     # [4]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/metadata-tables-permissions.html
@@ -9237,6 +9246,22 @@ module Aws::S3
     #   resp.replication_configuration.rules[0].filter.and.tags #=> Array
     #   resp.replication_configuration.rules[0].filter.and.tags[0].key #=> String
     #   resp.replication_configuration.rules[0].filter.and.tags[0].value #=> String
+    #   resp.replication_configuration.rules[0].filter.and.not.prefix #=> String
+    #   resp.replication_configuration.rules[0].filter.and.not.tag.key #=> String
+    #   resp.replication_configuration.rules[0].filter.and.not.tag.value #=> String
+    #   resp.replication_configuration.rules[0].filter.and.not.or.prefixes #=> Array
+    #   resp.replication_configuration.rules[0].filter.and.not.or.prefixes[0] #=> String
+    #   resp.replication_configuration.rules[0].filter.and.not.or.tags #=> Array
+    #   resp.replication_configuration.rules[0].filter.and.not.or.tags[0].key #=> String
+    #   resp.replication_configuration.rules[0].filter.and.not.or.tags[0].value #=> String
+    #   resp.replication_configuration.rules[0].filter.not.prefix #=> String
+    #   resp.replication_configuration.rules[0].filter.not.tag.key #=> String
+    #   resp.replication_configuration.rules[0].filter.not.tag.value #=> String
+    #   resp.replication_configuration.rules[0].filter.not.or.prefixes #=> Array
+    #   resp.replication_configuration.rules[0].filter.not.or.prefixes[0] #=> String
+    #   resp.replication_configuration.rules[0].filter.not.or.tags #=> Array
+    #   resp.replication_configuration.rules[0].filter.not.or.tags[0].key #=> String
+    #   resp.replication_configuration.rules[0].filter.not.or.tags[0].value #=> String
     #   resp.replication_configuration.rules[0].status #=> String, one of "Enabled", "Disabled"
     #   resp.replication_configuration.rules[0].source_selection_criteria.sse_kms_encrypted_objects.status #=> String, one of "Enabled", "Disabled"
     #   resp.replication_configuration.rules[0].source_selection_criteria.replica_modifications.status #=> String, one of "Enabled", "Disabled"
@@ -9246,6 +9271,7 @@ module Aws::S3
     #   resp.replication_configuration.rules[0].destination.storage_class #=> String, one of "STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE", "OUTPOSTS", "GLACIER_IR", "SNOW", "EXPRESS_ONEZONE", "FSX_OPENZFS", "FSX_ONTAP", "AWS_BACKUP_WARM", "AWS_BACKUP_LOW_COST_WARM"
     #   resp.replication_configuration.rules[0].destination.access_control_translation.owner #=> String, one of "Destination"
     #   resp.replication_configuration.rules[0].destination.encryption_configuration.replica_kms_key_id #=> String
+    #   resp.replication_configuration.rules[0].destination.encryption_configuration.use_source_multi_region_key.status #=> String, one of "Enabled", "Disabled"
     #   resp.replication_configuration.rules[0].destination.replication_time.status #=> String, one of "Enabled", "Disabled"
     #   resp.replication_configuration.rules[0].destination.replication_time.time.minutes #=> Integer
     #   resp.replication_configuration.rules[0].destination.metrics.status #=> String, one of "Enabled", "Disabled"
@@ -13619,6 +13645,7 @@ module Aws::S3
     #   resp.uploads[0].initiator.display_name #=> String
     #   resp.uploads[0].checksum_algorithm #=> String, one of "CRC32", "CRC32C", "SHA1", "SHA256", "CRC64NVME", "SHA512", "MD5", "XXHASH64", "XXHASH3", "XXHASH128"
     #   resp.uploads[0].checksum_type #=> String, one of "COMPOSITE", "FULL_OBJECT"
+    #   resp.uploads[0].version_id #=> String
     #   resp.common_prefixes #=> Array
     #   resp.common_prefixes[0].prefix #=> String
     #   resp.encoding_type #=> String, one of "url"
@@ -14840,6 +14867,7 @@ module Aws::S3
     #   * {Types::ListPartsOutput#request_charged #request_charged} => String
     #   * {Types::ListPartsOutput#checksum_algorithm #checksum_algorithm} => String
     #   * {Types::ListPartsOutput#checksum_type #checksum_type} => String
+    #   * {Types::ListPartsOutput#version_id #version_id} => String
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
@@ -14930,6 +14958,7 @@ module Aws::S3
     #   resp.request_charged #=> String, one of "requester"
     #   resp.checksum_algorithm #=> String, one of "CRC32", "CRC32C", "SHA1", "SHA256", "CRC64NVME", "SHA512", "MD5", "XXHASH64", "XXHASH3", "XXHASH128"
     #   resp.checksum_type #=> String, one of "COMPOSITE", "FULL_OBJECT"
+    #   resp.version_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ListParts AWS API Documentation
     #
@@ -17941,6 +17970,38 @@ module Aws::S3
     #                   value: "Value", # required
     #                 },
     #               ],
+    #               not: {
+    #                 prefix: "Prefix",
+    #                 tag: {
+    #                   key: "ObjectKey", # required
+    #                   value: "Value", # required
+    #                 },
+    #                 or: {
+    #                   prefixes: ["Prefix"],
+    #                   tags: [
+    #                     {
+    #                       key: "ObjectKey", # required
+    #                       value: "Value", # required
+    #                     },
+    #                   ],
+    #                 },
+    #               },
+    #             },
+    #             not: {
+    #               prefix: "Prefix",
+    #               tag: {
+    #                 key: "ObjectKey", # required
+    #                 value: "Value", # required
+    #               },
+    #               or: {
+    #                 prefixes: ["Prefix"],
+    #                 tags: [
+    #                   {
+    #                     key: "ObjectKey", # required
+    #                     value: "Value", # required
+    #                   },
+    #                 ],
+    #               },
     #             },
     #           },
     #           status: "Enabled", # required, accepts Enabled, Disabled
@@ -17964,6 +18025,9 @@ module Aws::S3
     #             },
     #             encryption_configuration: {
     #               replica_kms_key_id: "ReplicaKmsKeyID",
+    #               use_source_multi_region_key: {
+    #                 status: "Enabled", # required, accepts Enabled, Disabled
+    #               },
     #             },
     #             replication_time: {
     #               status: "Enabled", # required, accepts Enabled, Disabled
@@ -21375,8 +21439,6 @@ module Aws::S3
     #     * *Cause: Object restore is already in progress.*
     #
     #     * *HTTP Status Code: 409 Conflict*
-    #
-    #     * *SOAP Fault Code Prefix: Client*
     #   * * *Code: GlacierExpeditedRetrievalNotAvailable*
     #
     #     * *Cause: expedited retrievals are currently not available. Try
@@ -21386,8 +21448,6 @@ module Aws::S3
     #       retrievals.)*
     #
     #     * *HTTP Status Code: 503*
-    #
-    #     * *SOAP Fault Code Prefix: N/A*
     #
     # The following operations are related to `RestoreObject`:
     #
@@ -22720,8 +22780,6 @@ module Aws::S3
     #
     #     * HTTP Status Code: 404 Not Found
     #
-    #     * SOAP Fault Code Prefix: Client
-    #
     # HTTP Host header syntax
     #
     # : <b>Directory buckets </b> - The HTTP Host header syntax is `
@@ -23035,6 +23093,7 @@ module Aws::S3
     #   * {Types::UploadPartOutput#ssekms_key_id #ssekms_key_id} => String
     #   * {Types::UploadPartOutput#bucket_key_enabled #bucket_key_enabled} => Boolean
     #   * {Types::UploadPartOutput#request_charged #request_charged} => String
+    #   * {Types::UploadPartOutput#version_id #version_id} => String
     #
     #
     # @example Example: To upload a part
@@ -23102,6 +23161,7 @@ module Aws::S3
     #   resp.ssekms_key_id #=> String
     #   resp.bucket_key_enabled #=> Boolean
     #   resp.request_charged #=> String, one of "requester"
+    #   resp.version_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/UploadPart AWS API Documentation
     #
@@ -23616,6 +23676,7 @@ module Aws::S3
     #   * {Types::UploadPartCopyOutput#ssekms_key_id #ssekms_key_id} => String
     #   * {Types::UploadPartCopyOutput#bucket_key_enabled #bucket_key_enabled} => Boolean
     #   * {Types::UploadPartCopyOutput#request_charged #request_charged} => String
+    #   * {Types::UploadPartCopyOutput#version_id #version_id} => String
     #
     #
     # @example Example: To upload a part by copying data from an existing object as data source
@@ -23705,6 +23766,7 @@ module Aws::S3
     #   resp.ssekms_key_id #=> String
     #   resp.bucket_key_enabled #=> Boolean
     #   resp.request_charged #=> String, one of "requester"
+    #   resp.version_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/UploadPartCopy AWS API Documentation
     #
@@ -24216,7 +24278,7 @@ module Aws::S3
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-s3'
-      context[:gem_version] = '1.237.0'
+      context[:gem_version] = '1.245.1'
       Seahorse::Client::Request.new(handlers, context)
     end
 

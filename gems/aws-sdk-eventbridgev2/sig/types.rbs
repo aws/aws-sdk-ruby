@@ -78,6 +78,7 @@ module Aws::EventBridgeV2
       attr_accessor name: ::String
       attr_accessor event_bus_arn: ::String
       attr_accessor state: ("CREATING" | "ACTIVE" | "UPDATING" | "CREATE_FAILED" | "UPDATE_FAILED" | "DELETING" | "DELETE_FAILED")
+      attr_accessor event_source_details: Types::EventSourceDetails
       attr_accessor creation_time: ::Time
       SENSITIVE: []
     end
@@ -111,6 +112,7 @@ module Aws::EventBridgeV2
       attr_accessor point_in_time_configuration: Types::PointInTimeConfiguration
       attr_accessor state: ("RUNNING" | "STOPPED")
       attr_accessor creation_time: ::Time
+      attr_accessor subscriber_details: Types::SubscriberDetails
       SENSITIVE: []
     end
 
@@ -186,6 +188,7 @@ module Aws::EventBridgeV2
       attr_accessor description: ::String
       attr_accessor state: ("CREATING" | "ACTIVE" | "UPDATING" | "CREATE_FAILED" | "UPDATE_FAILED" | "DELETING" | "DELETE_FAILED")
       attr_accessor revoked: bool
+      attr_accessor event_source_details: Types::EventSourceDetails
       attr_accessor creation_time: ::Time
       attr_accessor last_modified_time: ::Time
       SENSITIVE: []
@@ -215,6 +218,7 @@ module Aws::EventBridgeV2
       attr_accessor revoked: bool
       attr_accessor creation_time: ::Time
       attr_accessor last_modified_time: ::Time
+      attr_accessor subscriber_details: Types::SubscriberDetails
       SENSITIVE: []
     end
 
@@ -251,6 +255,7 @@ module Aws::EventBridgeV2
     class EventSourceConfiguration
       attr_accessor aws_service_events_configuration: Types::AwsServiceEventsSourceConfiguration
       attr_accessor partner_events_configuration: Types::PartnerEventsSourceConfiguration
+      attr_accessor webhook_events_configuration: Types::WebhookEventsSourceConfiguration
       attr_accessor unknown: untyped
       SENSITIVE: []
 
@@ -258,15 +263,22 @@ module Aws::EventBridgeV2
       end
       class PartnerEventsConfiguration < EventSourceConfiguration
       end
+      class WebhookEventsConfiguration < EventSourceConfiguration
+      end
       class Unknown < EventSourceConfiguration
       end
+    end
+
+    class EventSourceDetails
+      attr_accessor webhook_details: Types::WebhookDetails
+      SENSITIVE: []
     end
 
     class EventSourceSummary
       attr_accessor event_source_arn: ::String
       attr_accessor name: ::String
       attr_accessor event_bus_arn: ::String
-      attr_accessor type: ("AWS_SERVICE_EVENTS" | "PARTNER_EVENTS")
+      attr_accessor type: ("AWS_SERVICE_EVENTS" | "PARTNER_EVENTS" | "WEBHOOK_EVENTS")
       attr_accessor state: ("CREATING" | "ACTIVE" | "UPDATING" | "CREATE_FAILED" | "UPDATE_FAILED" | "DELETING" | "DELETE_FAILED")
       attr_accessor revoked: bool
       attr_accessor creation_time: ::Time
@@ -339,8 +351,9 @@ module Aws::EventBridgeV2
       attr_accessor http_parameters: Types::HttpParameters
       attr_accessor universal_target_parameters: Types::UniversalTargetParameters
       attr_accessor event_bus_v2_parameters: Types::EventBusV2Parameters
+      attr_accessor msk_parameters: Types::MskParameters
       attr_accessor target_arn: ::String
-      SENSITIVE: [:lambda_parameters, :sqs_parameters, :sns_parameters, :kinesis_parameters, :step_functions_parameters, :http_parameters, :universal_target_parameters, :event_bus_v2_parameters]
+      SENSITIVE: [:lambda_parameters, :sqs_parameters, :sns_parameters, :kinesis_parameters, :step_functions_parameters, :http_parameters, :universal_target_parameters, :event_bus_v2_parameters, :msk_parameters]
     end
 
     class JsonataConfiguration
@@ -439,6 +452,30 @@ module Aws::EventBridgeV2
       SENSITIVE: []
     end
 
+    class MskDetails
+      attr_accessor connectivity_state: ("PROVISIONING" | "PROVISION_FAILED" | "ACTIVE")
+      attr_accessor state_reason: ::String
+      attr_accessor vpc_connection_arn: ::String
+      SENSITIVE: []
+    end
+
+    class MskHeader
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class MskParameters
+      attr_accessor topic_name: ::String
+      attr_accessor compression: ("NONE" | "GZIP" | "SNAPPY" | "LZ4" | "ZSTD")
+      attr_accessor acks: ("ALL" | "LEADER")
+      attr_accessor partition_key: ::String
+      attr_accessor headers: ::Array[Types::MskHeader]
+      attr_accessor client_id: ::String
+      attr_accessor connectivity: ("PUBLIC" | "PRIVATE")
+      SENSITIVE: []
+    end
+
     class OnFailureConfiguration
       attr_accessor arn: ::String
       SENSITIVE: []
@@ -519,7 +556,7 @@ module Aws::EventBridgeV2
       attr_accessor data: ::String
       attr_accessor metadata: ::Hash[::String, ::String]
       attr_accessor system_metadata: Types::PutRawEventsSystemMetadata
-      SENSITIVE: [:data]
+      SENSITIVE: [:data, :metadata]
     end
 
     class PutRawEventsResponse
@@ -597,6 +634,18 @@ module Aws::EventBridgeV2
       SENSITIVE: []
     end
 
+    class RotateWebhookCredentialsRequest
+      attr_accessor event_source_arn: ::String
+      attr_accessor credential: Types::WebhookCredential
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class RotateWebhookCredentialsResponse
+      attr_accessor secret_arn: ::String
+      SENSITIVE: []
+    end
+
     class SchemaRegistryConfiguration
       attr_accessor registry_uri: ::String
       attr_accessor confluent_public_registry_configuration: Types::ConfluentPublicRegistryConfiguration
@@ -656,6 +705,11 @@ module Aws::EventBridgeV2
     class StorageConfigurationOutput
       attr_accessor retention_period_in_days: ::Integer
       attr_accessor retention_window_start_time: ::Time
+      SENSITIVE: []
+    end
+
+    class SubscriberDetails
+      attr_accessor msk_details: Types::MskDetails
       SENSITIVE: []
     end
 
@@ -754,7 +808,8 @@ module Aws::EventBridgeV2
       attr_accessor http_parameters: Types::HttpParameters
       attr_accessor universal_target_parameters: Types::UniversalTargetParameters
       attr_accessor event_bus_v2_parameters: Types::EventBusV2Parameters
-      SENSITIVE: [:lambda_parameters, :sqs_parameters, :sns_parameters, :kinesis_parameters, :step_functions_parameters, :http_parameters, :universal_target_parameters, :event_bus_v2_parameters]
+      attr_accessor msk_parameters: Types::MskParameters
+      SENSITIVE: [:lambda_parameters, :sqs_parameters, :sns_parameters, :kinesis_parameters, :step_functions_parameters, :http_parameters, :universal_target_parameters, :event_bus_v2_parameters, :msk_parameters]
     end
 
     class UpdateSubscriberRequest
@@ -781,7 +836,91 @@ module Aws::EventBridgeV2
       attr_accessor point_in_time_configuration: Types::PointInTimeConfiguration
       attr_accessor state: ("RUNNING" | "STOPPED")
       attr_accessor last_modified_time: ::Time
+      attr_accessor subscriber_details: Types::SubscriberDetails
       SENSITIVE: []
+    end
+
+    class WebhookAuthConfiguration
+      attr_accessor static_token_auth_configuration: Types::WebhookStaticTokenAuthConfiguration
+      attr_accessor basic_http_auth_configuration: Types::WebhookBasicHttpAuthConfiguration
+      attr_accessor hmac_auth_configuration: Types::WebhookHmacAuthConfiguration
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class StaticTokenAuthConfiguration < WebhookAuthConfiguration
+      end
+      class BasicHttpAuthConfiguration < WebhookAuthConfiguration
+      end
+      class HmacAuthConfiguration < WebhookAuthConfiguration
+      end
+      class Unknown < WebhookAuthConfiguration
+      end
+    end
+
+    class WebhookBasicHttpAuthConfiguration
+      attr_accessor username: ::String
+      attr_accessor password: ::String
+      SENSITIVE: [:password]
+    end
+
+    class WebhookCredential
+      attr_accessor static_token_secret_value: ::String
+      attr_accessor basic_http_password: ::String
+      attr_accessor hmac_secret_value: ::String
+      attr_accessor unknown: untyped
+      SENSITIVE: [:static_token_secret_value, :basic_http_password, :hmac_secret_value]
+
+      class StaticTokenSecretValue < WebhookCredential
+      end
+      class BasicHttpPassword < WebhookCredential
+      end
+      class HmacSecretValue < WebhookCredential
+      end
+      class Unknown < WebhookCredential
+      end
+    end
+
+    class WebhookDeduplicationConfiguration
+      attr_accessor deduplication_type: ("CONTENT_BASED")
+      SENSITIVE: []
+    end
+
+    class WebhookDetails
+      attr_accessor webhook_url: ::String
+      attr_accessor secret_arn: ::String
+      SENSITIVE: [:webhook_url]
+    end
+
+    class WebhookEventsSourceConfiguration
+      attr_accessor auth_configuration: Types::WebhookAuthConfiguration
+      attr_accessor kms_key_identifier: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor metadata_http_headers: ::Array[::String]
+      attr_accessor deduplication_configuration: Types::WebhookDeduplicationConfiguration
+      attr_accessor log_configuration: Types::LogConfiguration
+      SENSITIVE: []
+    end
+
+    class WebhookHmacAuthConfiguration
+      attr_accessor algorithm: ("SHA256" | "SHA1")
+      attr_accessor encoding: ("HEX" | "BASE64")
+      attr_accessor signature_http_header: ::String
+      attr_accessor signature_prefix: ::String
+      attr_accessor delimiter: ::String
+      attr_accessor timestamp_http_header: ::String
+      attr_accessor timestamp_prefix: ::String
+      attr_accessor timestamp_tolerance_in_seconds: ::Integer
+      attr_accessor message_id_http_header: ::String
+      attr_accessor signed_message_composition: ("BODY" | "TIMESTAMP_DOT_BODY" | "MESSAGE_ID_DOT_TIMESTAMP_DOT_BODY")
+      attr_accessor secret_value: ::String
+      attr_accessor secret_encoding: ("RAW" | "BASE64")
+      SENSITIVE: [:secret_value]
+    end
+
+    class WebhookStaticTokenAuthConfiguration
+      attr_accessor token_http_header: ::String
+      attr_accessor secret_value: ::String
+      SENSITIVE: [:secret_value]
     end
   end
 end

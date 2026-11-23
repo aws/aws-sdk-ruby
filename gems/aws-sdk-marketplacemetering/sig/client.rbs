@@ -93,16 +93,9 @@ module Aws
                                    customer_identifier: ::String?,
                                    dimension: ::String,
                                    quantity: ::Integer?,
+                                   quantity_as_decimal: ::String?,
                                    usage_allocations: Array[
-                                     {
-                                       allocated_usage_quantity: ::Integer,
-                                       tags: Array[
-                                         {
-                                           key: ::String,
-                                           value: ::String
-                                         }
-                                       ]?
-                                     }
+                                     Params::usage_allocation
                                    ]?,
                                    customer_aws_account_id: ::String?,
                                    license_arn: ::String?
@@ -122,17 +115,10 @@ module Aws
                          timestamp: ::Time,
                          usage_dimension: ::String,
                          ?usage_quantity: ::Integer,
+                         ?usage_quantity_as_decimal: ::String,
                          ?dry_run: bool,
                          ?usage_allocations: Array[
-                           {
-                             allocated_usage_quantity: ::Integer,
-                             tags: Array[
-                               {
-                                 key: ::String,
-                                 value: ::String
-                               }
-                             ]?
-                           }
+                           Params::usage_allocation
                          ],
                          ?client_token: ::String
                        ) -> _MeterUsageResponseSuccess

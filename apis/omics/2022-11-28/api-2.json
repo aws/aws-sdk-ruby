@@ -3309,7 +3309,8 @@
         "configurationName":{"shape":"ConfigurationName"},
         "sessionPolicy":{"shape":"SessionPolicy"},
         "engineSettings":{"shape":"EngineSettings"},
-        "scratchStorageMode":{"shape":"ScratchStorageMode"}
+        "scratchStorageMode":{"shape":"ScratchStorageMode"},
+        "requesterPaysEnabled":{"shape":"Boolean"}
       }
     },
     "DefaultRunSettingPriorityInteger":{
@@ -4519,7 +4520,10 @@
         "configuration":{"shape":"ConfigurationDetails"},
         "vpcConfig":{"shape":"VpcConfigResponse"},
         "engineSettings":{"shape":"EngineSettings"},
-        "sessionPolicy":{"shape":"SessionPolicy"}
+        "sessionPolicy":{"shape":"SessionPolicy"},
+        "outputUriPrefixMode":{"shape":"RunOutputUriPrefixMode"},
+        "requesterPaysEnabled":{"shape":"Boolean"},
+        "parametersUri":{"shape":"RunParametersUriOrPresignedUrl"}
       }
     },
     "GetRunResponsePriorityInteger":{
@@ -6971,10 +6975,28 @@
       "min":1,
       "pattern":"[\\p{L}||\\p{M}||\\p{Z}||\\p{S}||\\p{N}||\\p{P}]+"
     },
+    "RunOutputUriPrefixMode":{
+      "type":"string",
+      "enum":[
+        "SERVICE_DEFINED",
+        "NONE_WITH_OVERWRITE"
+      ]
+    },
     "RunParameters":{
       "type":"structure",
       "members":{},
       "document":true
+    },
+    "RunParametersUri":{
+      "type":"string",
+      "max":1093,
+      "min":1,
+      "pattern":"s3://[a-z0-9][a-z0-9.-]{1,61}[a-z0-9]/.+"
+    },
+    "RunParametersUriOrPresignedUrl":{
+      "type":"string",
+      "max":8192,
+      "min":1
     },
     "RunRequestId":{
       "type":"string",
@@ -7649,7 +7671,10 @@
         "scratchStorageMode":{"shape":"ScratchStorageMode"},
         "configurationName":{"shape":"ConfigurationName"},
         "sessionPolicy":{"shape":"SessionPolicy"},
-        "engineSettings":{"shape":"EngineSettings"}
+        "engineSettings":{"shape":"EngineSettings"},
+        "outputUriPrefixMode":{"shape":"RunOutputUriPrefixMode"},
+        "requesterPaysEnabled":{"shape":"Boolean"},
+        "parametersUri":{"shape":"RunParametersUri"}
       }
     },
     "StartRunRequestPriorityInteger":{

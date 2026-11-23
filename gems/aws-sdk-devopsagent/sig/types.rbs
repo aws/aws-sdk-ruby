@@ -14,6 +14,7 @@ module Aws::DevOpsAgent
       attr_accessor account_type: ("monitor")
       attr_accessor agent_elevated_role_arn: ::String
       attr_accessor agent_elevated_role_arn_status: ("valid" | "invalid" | "pending-confirmation")
+      attr_accessor service_management_role_arn: ::String
       SENSITIVE: []
     end
 
@@ -95,6 +96,7 @@ module Aws::DevOpsAgent
       attr_accessor kms_key_arn: ::String
       attr_accessor agent_space_id: ::String
       attr_accessor preferences: ::Hash[("elevatedActionsEnabled"), bool]
+      attr_accessor aws_source_mode: ("standalone" | "organization")
       SENSITIVE: [:description]
     end
 
@@ -221,7 +223,7 @@ module Aws::DevOpsAgent
       attr_accessor agent_space_id: ::String
       attr_accessor service_id: ::String
       attr_accessor configuration: Types::ServiceConfiguration
-      attr_accessor capabilities: ::Hash[("RELEASE_READINESS_REVIEW" | "RELEASE_READINESS_REVIEW_AUTOMATED_TESTING"), Types::CapabilityConfiguration]
+      attr_accessor capabilities: ::Hash[("RELEASE_READINESS_REVIEW" | "RELEASE_READINESS_REVIEW_AUTOMATED_TESTING" | "CODE_CHANGE_RISK_ANALYSIS" | "CODE_CHANGE_RISK_ANALYSIS_AUTOMATED_TESTING"), Types::CapabilityConfiguration]
       SENSITIVE: []
     end
 
@@ -239,7 +241,7 @@ module Aws::DevOpsAgent
       attr_accessor association_id: ::String
       attr_accessor service_id: ::String
       attr_accessor configuration: Types::ServiceConfiguration
-      attr_accessor capabilities: ::Hash[("RELEASE_READINESS_REVIEW" | "RELEASE_READINESS_REVIEW_AUTOMATED_TESTING"), Types::CapabilityConfiguration]
+      attr_accessor capabilities: ::Hash[("RELEASE_READINESS_REVIEW" | "RELEASE_READINESS_REVIEW_AUTOMATED_TESTING" | "CODE_CHANGE_RISK_ANALYSIS" | "CODE_CHANGE_RISK_ANALYSIS_AUTOMATED_TESTING"), Types::CapabilityConfiguration]
       SENSITIVE: []
     end
 
@@ -266,11 +268,13 @@ module Aws::DevOpsAgent
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
       attr_accessor summary: ::String
+      attr_accessor archive_status: ("ACTIVE" | "ARCHIVED")
       SENSITIVE: []
     end
 
     class ConflictException
       attr_accessor message: ::String
+      attr_accessor reason: ("CHAT_ARCHIVED")
       SENSITIVE: []
     end
 
@@ -287,6 +291,7 @@ module Aws::DevOpsAgent
       attr_accessor client_token: ::String
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor preferences: ::Hash[("elevatedActionsEnabled"), bool]
+      attr_accessor aws_source_mode: ("standalone" | "organization")
       SENSITIVE: [:description]
     end
 
@@ -328,7 +333,7 @@ module Aws::DevOpsAgent
     class CreateBacklogTaskRequest
       attr_accessor agent_space_id: ::String
       attr_accessor reference: Types::ReferenceInput
-      attr_accessor task_type: ("INVESTIGATION" | "EVALUATION" | "RELEASE_READINESS_REVIEW" | "RELEASE_TESTING")
+      attr_accessor task_type: ("INVESTIGATION" | "EVALUATION" | "RELEASE_READINESS_REVIEW" | "RELEASE_TESTING" | "CODE_CHANGE_RISK_ANALYSIS")
       attr_accessor title: ::String
       attr_accessor description: ::String
       attr_accessor priority: ("CRITICAL" | "HIGH" | "MEDIUM" | "LOW" | "MINIMAL")
@@ -519,7 +524,7 @@ module Aws::DevOpsAgent
       attr_accessor client_id: ::String
       attr_accessor exchange_parameters: ::Hash[::String, ::String]
       attr_accessor client_secret: ::String
-      SENSITIVE: [:client_id, :client_secret]
+      SENSITIVE: [:client_id, :exchange_parameters, :client_secret]
     end
 
     class DynatraceServiceAuthorizationConfig
@@ -673,6 +678,21 @@ module Aws::DevOpsAgent
 
     class GetBacklogTaskResponse
       attr_accessor task: Types::Task
+      SENSITIVE: []
+    end
+
+    class GetChatRequest
+      attr_accessor agent_space_id: ::String
+      attr_accessor execution_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetChatResponse
+      attr_accessor execution_id: ::String
+      attr_accessor summary: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor archive_status: ("ACTIVE" | "ARCHIVED")
       SENSITIVE: []
     end
 
@@ -951,6 +971,7 @@ module Aws::DevOpsAgent
       attr_accessor user_id: ::String
       attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
+      attr_accessor archive_status: ("ACTIVE" | "ARCHIVED")
       SENSITIVE: []
     end
 
@@ -1145,7 +1166,7 @@ module Aws::DevOpsAgent
 
     class MCPServerCustomHeadersConfig
       attr_accessor headers: ::Hash[::String, ::String]
-      SENSITIVE: []
+      SENSITIVE: [:headers]
     end
 
     class MCPServerDatadogConfiguration
@@ -1185,7 +1206,7 @@ module Aws::DevOpsAgent
       attr_accessor client_secret: ::String
       attr_accessor support_code_challenge: bool
       attr_accessor scopes: ::Array[::String]
-      SENSITIVE: [:client_id, :client_secret]
+      SENSITIVE: [:client_id, :exchange_parameters, :client_secret]
     end
 
     class MCPServerOAuthClientCredentialsConfig
@@ -1195,7 +1216,7 @@ module Aws::DevOpsAgent
       attr_accessor client_secret: ::String
       attr_accessor exchange_url: ::String
       attr_accessor scopes: ::Array[::String]
-      SENSITIVE: [:client_id, :client_secret]
+      SENSITIVE: [:client_id, :exchange_parameters, :client_secret]
     end
 
     class MCPServerSigV4AuthorizationConfig
@@ -1204,7 +1225,7 @@ module Aws::DevOpsAgent
       attr_accessor role_arn: ::String
       attr_accessor mcp_role_arn: ::String
       attr_accessor custom_headers: ::Hash[::String, ::String]
-      SENSITIVE: []
+      SENSITIVE: [:custom_headers]
     end
 
     class MCPServerSigV4Configuration
@@ -1230,6 +1251,12 @@ module Aws::DevOpsAgent
       SENSITIVE: []
     end
 
+    class MSTeamsBidirectionalConfiguration
+      attr_accessor role_arn: ::String
+      attr_accessor enabled: bool
+      SENSITIVE: []
+    end
+
     class MSTeamsChannel
       attr_accessor channel_name: ::String
       attr_accessor channel_id: ::String
@@ -1240,6 +1267,7 @@ module Aws::DevOpsAgent
       attr_accessor team_id: ::String
       attr_accessor team_name: ::String
       attr_accessor transmission_target: Types::MSTeamsTransmissionTarget
+      attr_accessor bidirectional: Types::MSTeamsBidirectionalConfiguration
       SENSITIVE: []
     end
 
@@ -1310,6 +1338,21 @@ module Aws::DevOpsAgent
       SENSITIVE: []
     end
 
+    class OrgSourceDeploymentState
+      attr_accessor deployed_account_count: ::Integer
+      attr_accessor issues: ::Array[Types::OrgSourceIssue]
+      attr_accessor last_evaluated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class OrgSourceIssue
+      attr_accessor reason_code: ("accountSuspended" | "accountNotInScope" | "managementAccountNotSupported" | "stackInstanceInoperable" | "accessDenied" | "deploymentFailed" | "secondaryAccountLimitExceeded")
+      attr_accessor account_count: ::Integer
+      attr_accessor account_ids: ::Array[::String]
+      attr_accessor message: ::String
+      SENSITIVE: [:message]
+    end
+
     class PagerDutyAuthorizationConfig
       attr_accessor o_auth_client_credentials: Types::PagerDutyOAuthClientCredentialsConfig
       attr_accessor unknown: untyped
@@ -1338,7 +1381,7 @@ module Aws::DevOpsAgent
       attr_accessor client_id: ::String
       attr_accessor exchange_parameters: ::Hash[::String, ::String]
       attr_accessor client_secret: ::String
-      SENSITIVE: [:client_id, :client_secret]
+      SENSITIVE: [:client_id, :exchange_parameters, :client_secret]
     end
 
     class PatternFilter
@@ -1518,7 +1561,7 @@ module Aws::DevOpsAgent
       attr_accessor role_arn: ::String
       attr_accessor mcp_role_arn: ::String
       attr_accessor custom_headers: ::Hash[::String, ::String]
-      SENSITIVE: [:description]
+      SENSITIVE: [:description, :custom_headers]
     end
 
     class RegisteredNewRelicDetails
@@ -1623,7 +1666,7 @@ module Aws::DevOpsAgent
       attr_accessor client_secret: ::String
       attr_accessor exchange_url: ::String
       attr_accessor scopes: ::Array[::String]
-      SENSITIVE: [:client_id, :client_secret]
+      SENSITIVE: [:client_id, :exchange_parameters, :client_secret]
     end
 
     class RemoteAgentServiceDetails
@@ -1811,6 +1854,7 @@ module Aws::DevOpsAgent
 
     class ServiceConfiguration
       attr_accessor source_aws: Types::SourceAwsConfiguration
+      attr_accessor source_aws_org: Types::SourceAwsOrgConfiguration
       attr_accessor aws: Types::AWSConfiguration
       attr_accessor github: Types::GitHubConfiguration
       attr_accessor slack: Types::SlackConfiguration
@@ -1835,6 +1879,8 @@ module Aws::DevOpsAgent
       SENSITIVE: []
 
       class SourceAws < ServiceConfiguration
+      end
+      class SourceAwsOrg < ServiceConfiguration
       end
       class Aws < ServiceConfiguration
       end
@@ -1954,7 +2000,7 @@ module Aws::DevOpsAgent
       attr_accessor client_id: ::String
       attr_accessor exchange_parameters: ::Hash[::String, ::String]
       attr_accessor client_secret: ::String
-      SENSITIVE: [:client_id, :client_secret]
+      SENSITIVE: [:client_id, :exchange_parameters, :client_secret]
     end
 
     class ServiceNowServiceAuthorizationConfig
@@ -2015,6 +2061,19 @@ module Aws::DevOpsAgent
       SENSITIVE: []
     end
 
+    class SourceAwsOrgConfiguration
+      attr_accessor account_type: ("source")
+      attr_accessor organizational_unit: Types::SourceAwsOrgUnit
+      attr_accessor deployment_state: Types::OrgSourceDeploymentState
+      SENSITIVE: []
+    end
+
+    class SourceAwsOrgUnit
+      attr_accessor organizational_unit_id: ::String
+      attr_accessor account_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
     class TagResourceRequest
       attr_accessor resource_arn: ::String
       attr_accessor tags: ::Hash[::String, ::String]
@@ -2031,7 +2090,7 @@ module Aws::DevOpsAgent
       attr_accessor title: ::String
       attr_accessor description: ::String
       attr_accessor reference: Types::ReferenceOutput
-      attr_accessor task_type: ("INVESTIGATION" | "EVALUATION" | "RELEASE_READINESS_REVIEW" | "RELEASE_TESTING")
+      attr_accessor task_type: ("INVESTIGATION" | "EVALUATION" | "RELEASE_READINESS_REVIEW" | "RELEASE_TESTING" | "CODE_CHANGE_RISK_ANALYSIS")
       attr_accessor priority: ("CRITICAL" | "HIGH" | "MEDIUM" | "LOW" | "MINIMAL")
       attr_accessor status: ("PENDING_TRIAGE" | "LINKED" | "PENDING_START" | "IN_PROGRESS" | "PENDING_CUSTOMER_APPROVAL" | "COMPLETED" | "FAILED" | "TIMED_OUT" | "CANCELED" | "SKIPPED" | "WAITING")
       attr_accessor created_at: ::Time
@@ -2050,7 +2109,7 @@ module Aws::DevOpsAgent
       attr_accessor created_before: ::Time
       attr_accessor priority: ::Array[("CRITICAL" | "HIGH" | "MEDIUM" | "LOW" | "MINIMAL")]
       attr_accessor status: ::Array[("PENDING_TRIAGE" | "LINKED" | "PENDING_START" | "IN_PROGRESS" | "PENDING_CUSTOMER_APPROVAL" | "COMPLETED" | "FAILED" | "TIMED_OUT" | "CANCELED" | "SKIPPED" | "WAITING")]
-      attr_accessor task_type: ::Array[("INVESTIGATION" | "EVALUATION" | "RELEASE_READINESS_REVIEW" | "RELEASE_TESTING")]
+      attr_accessor task_type: ::Array[("INVESTIGATION" | "EVALUATION" | "RELEASE_READINESS_REVIEW" | "RELEASE_TESTING" | "CODE_CHANGE_RISK_ANALYSIS")]
       attr_accessor primary_task_id: ::String
       SENSITIVE: []
     end
@@ -2111,6 +2170,7 @@ module Aws::DevOpsAgent
       attr_accessor description: ::String
       attr_accessor locale: ::String
       attr_accessor preferences: ::Hash[("elevatedActionsEnabled"), bool]
+      attr_accessor aws_source_mode: ("standalone" | "organization")
       SENSITIVE: [:description]
     end
 
@@ -2170,7 +2230,7 @@ module Aws::DevOpsAgent
       attr_accessor agent_space_id: ::String
       attr_accessor association_id: ::String
       attr_accessor configuration: Types::ServiceConfiguration
-      attr_accessor capabilities: ::Hash[("RELEASE_READINESS_REVIEW" | "RELEASE_READINESS_REVIEW_AUTOMATED_TESTING"), Types::CapabilityConfiguration]
+      attr_accessor capabilities: ::Hash[("RELEASE_READINESS_REVIEW" | "RELEASE_READINESS_REVIEW_AUTOMATED_TESTING" | "CODE_CHANGE_RISK_ANALYSIS" | "CODE_CHANGE_RISK_ANALYSIS_AUTOMATED_TESTING"), Types::CapabilityConfiguration]
       SENSITIVE: []
     end
 
@@ -2190,6 +2250,23 @@ module Aws::DevOpsAgent
 
     class UpdateBacklogTaskResponse
       attr_accessor task: Types::Task
+      SENSITIVE: []
+    end
+
+    class UpdateChatRequest
+      attr_accessor agent_space_id: ::String
+      attr_accessor execution_id: ::String
+      attr_accessor summary: ::String
+      attr_accessor archive_status: ("ACTIVE" | "ARCHIVED")
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateChatResponse
+      attr_accessor execution_id: ::String
+      attr_accessor summary: ::String
+      attr_accessor updated_at: ::Time
+      attr_accessor archive_status: ("ACTIVE" | "ARCHIVED")
       SENSITIVE: []
     end
 

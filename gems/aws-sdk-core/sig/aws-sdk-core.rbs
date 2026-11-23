@@ -4,4 +4,6 @@ module Aws
   def self.config=: (Hash[Symbol, untyped] config) -> Hash[Symbol, untyped]
 
   def self.use_bundled_cert!: () -> String
+
+  def self.eager_load!: () -> nil
 end

@@ -37,6 +37,7 @@ module Aws::SSOAdmin
     AddRegionResponse = Shapes::StructureShape.new(name: 'AddRegionResponse')
     Application = Shapes::StructureShape.new(name: 'Application')
     ApplicationArn = Shapes::StringShape.new(name: 'ApplicationArn')
+    ApplicationArnList = Shapes::ListShape.new(name: 'ApplicationArnList')
     ApplicationAssignment = Shapes::StructureShape.new(name: 'ApplicationAssignment')
     ApplicationAssignmentForPrincipal = Shapes::StructureShape.new(name: 'ApplicationAssignmentForPrincipal')
     ApplicationAssignmentListForPrincipal = Shapes::ListShape.new(name: 'ApplicationAssignmentListForPrincipal')
@@ -138,6 +139,7 @@ module Aws::SSOAdmin
     EncryptionConfiguration = Shapes::StructureShape.new(name: 'EncryptionConfiguration')
     EncryptionConfigurationDetails = Shapes::StructureShape.new(name: 'EncryptionConfigurationDetails')
     FederationProtocol = Shapes::StringShape.new(name: 'FederationProtocol')
+    FirstOrThirdPartyApplicationArnType = Shapes::StringShape.new(name: 'FirstOrThirdPartyApplicationArnType')
     GetApplicationAccessScopeRequest = Shapes::StructureShape.new(name: 'GetApplicationAccessScopeRequest')
     GetApplicationAccessScopeResponse = Shapes::StructureShape.new(name: 'GetApplicationAccessScopeResponse')
     GetApplicationAssignmentConfigurationRequest = Shapes::StructureShape.new(name: 'GetApplicationAssignmentConfigurationRequest')
@@ -170,6 +172,8 @@ module Aws::SSOAdmin
     InstanceStatus = Shapes::StringShape.new(name: 'InstanceStatus')
     InternalFailureMessage = Shapes::StringShape.new(name: 'InternalFailureMessage')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
+    IpCidrList = Shapes::ListShape.new(name: 'IpCidrList')
+    IpCidrType = Shapes::StringShape.new(name: 'IpCidrType')
     IsPrimaryRegion = Shapes::BooleanShape.new(name: 'IsPrimaryRegion')
     JMESPath = Shapes::StringShape.new(name: 'JMESPath')
     JwksRetrievalOption = Shapes::StringShape.new(name: 'JwksRetrievalOption')
@@ -229,6 +233,7 @@ module Aws::SSOAdmin
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     Name = Shapes::StringShape.new(name: 'Name')
     NameType = Shapes::StringShape.new(name: 'NameType')
+    NetworkConfigurationInfo = Shapes::StructureShape.new(name: 'NetworkConfigurationInfo')
     OidcJwtConfiguration = Shapes::StructureShape.new(name: 'OidcJwtConfiguration')
     OidcJwtUpdateConfiguration = Shapes::StructureShape.new(name: 'OidcJwtUpdateConfiguration')
     OperationStatusFilter = Shapes::StructureShape.new(name: 'OperationStatusFilter')
@@ -332,6 +337,8 @@ module Aws::SSOAdmin
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
     ValidationExceptionMessage = Shapes::StringShape.new(name: 'ValidationExceptionMessage')
     ValidationExceptionReason = Shapes::StringShape.new(name: 'ValidationExceptionReason')
+    VpcArn = Shapes::StringShape.new(name: 'VpcArn')
+    VpcArnList = Shapes::ListShape.new(name: 'VpcArnList')
 
     AccessControlAttribute.add_member(:key, Shapes::ShapeRef.new(shape: AccessControlAttributeKey, required: true, location_name: "Key"))
     AccessControlAttribute.add_member(:value, Shapes::ShapeRef.new(shape: AccessControlAttributeValue, required: true, location_name: "Value"))
@@ -403,6 +410,8 @@ module Aws::SSOAdmin
     Application.add_member(:created_date, Shapes::ShapeRef.new(shape: Date, location_name: "CreatedDate"))
     Application.add_member(:created_from, Shapes::ShapeRef.new(shape: RegionName, location_name: "CreatedFrom"))
     Application.struct_class = Types::Application
+
+    ApplicationArnList.member = Shapes::ShapeRef.new(shape: FirstOrThirdPartyApplicationArnType)
 
     ApplicationAssignment.add_member(:application_arn, Shapes::ShapeRef.new(shape: ApplicationArn, required: true, location_name: "ApplicationArn"))
     ApplicationAssignment.add_member(:principal_id, Shapes::ShapeRef.new(shape: PrincipalId, required: true, location_name: "PrincipalId"))
@@ -686,6 +695,7 @@ module Aws::SSOAdmin
     DescribeInstanceResponse.add_member(:primary_region, Shapes::ShapeRef.new(shape: RegionName, location_name: "PrimaryRegion"))
     DescribeInstanceResponse.add_member(:regions, Shapes::ShapeRef.new(shape: RegionMetadataList, location_name: "Regions"))
     DescribeInstanceResponse.add_member(:encryption_configuration_details, Shapes::ShapeRef.new(shape: EncryptionConfigurationDetails, location_name: "EncryptionConfigurationDetails"))
+    DescribeInstanceResponse.add_member(:network_configuration_details, Shapes::ShapeRef.new(shape: NetworkConfigurationInfo, location_name: "NetworkConfigurationDetails"))
     DescribeInstanceResponse.add_member(:permission_sets_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "PermissionSetsEnabled"))
     DescribeInstanceResponse.struct_class = Types::DescribeInstanceResponse
 
@@ -839,6 +849,8 @@ module Aws::SSOAdmin
 
     InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: InternalFailureMessage, location_name: "Message"))
     InternalServerException.struct_class = Types::InternalServerException
+
+    IpCidrList.member = Shapes::ShapeRef.new(shape: IpCidrType)
 
     JwtBearerGrant.add_member(:authorized_token_issuers, Shapes::ShapeRef.new(shape: AuthorizedTokenIssuers, location_name: "AuthorizedTokenIssuers"))
     JwtBearerGrant.struct_class = Types::JwtBearerGrant
@@ -1057,6 +1069,12 @@ module Aws::SSOAdmin
     ListTrustedTokenIssuersResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
     ListTrustedTokenIssuersResponse.struct_class = Types::ListTrustedTokenIssuersResponse
 
+    NetworkConfigurationInfo.add_member(:vpce_access_required, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "VpceAccessRequired"))
+    NetworkConfigurationInfo.add_member(:restrict_source_vpcs, Shapes::ShapeRef.new(shape: VpcArnList, location_name: "RestrictSourceVpcs"))
+    NetworkConfigurationInfo.add_member(:allow_source_ips, Shapes::ShapeRef.new(shape: IpCidrList, location_name: "AllowSourceIps"))
+    NetworkConfigurationInfo.add_member(:exclude_application_arns, Shapes::ShapeRef.new(shape: ApplicationArnList, location_name: "ExcludeApplicationArns"))
+    NetworkConfigurationInfo.struct_class = Types::NetworkConfigurationInfo
+
     OidcJwtConfiguration.add_member(:issuer_url, Shapes::ShapeRef.new(shape: TrustedTokenIssuerUrl, required: true, location_name: "IssuerUrl"))
     OidcJwtConfiguration.add_member(:claim_attribute_path, Shapes::ShapeRef.new(shape: ClaimAttributePath, required: true, location_name: "ClaimAttributePath"))
     OidcJwtConfiguration.add_member(:identity_store_attribute_path, Shapes::ShapeRef.new(shape: JMESPath, required: true, location_name: "IdentityStoreAttributePath"))
@@ -1273,6 +1291,7 @@ module Aws::SSOAdmin
     UpdateInstanceRequest.add_member(:instance_arn, Shapes::ShapeRef.new(shape: InstanceArn, required: true, location_name: "InstanceArn"))
     UpdateInstanceRequest.add_member(:encryption_configuration, Shapes::ShapeRef.new(shape: EncryptionConfiguration, location_name: "EncryptionConfiguration"))
     UpdateInstanceRequest.add_member(:permission_sets_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "PermissionSetsEnabled"))
+    UpdateInstanceRequest.add_member(:network_configuration, Shapes::ShapeRef.new(shape: NetworkConfigurationInfo, location_name: "NetworkConfiguration"))
     UpdateInstanceRequest.struct_class = Types::UpdateInstanceRequest
 
     UpdateInstanceResponse.struct_class = Types::UpdateInstanceResponse
@@ -1296,6 +1315,8 @@ module Aws::SSOAdmin
     ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: ValidationExceptionMessage, location_name: "Message"))
     ValidationException.add_member(:reason, Shapes::ShapeRef.new(shape: ValidationExceptionReason, location_name: "Reason"))
     ValidationException.struct_class = Types::ValidationException
+
+    VpcArnList.member = Shapes::ShapeRef.new(shape: VpcArn)
 
 
     # @api private

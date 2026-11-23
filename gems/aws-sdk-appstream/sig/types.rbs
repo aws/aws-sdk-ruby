@@ -29,6 +29,8 @@ module Aws::AppStream
       attr_accessor settings: ::Array[Types::AgentAccessSetting]
       attr_accessor s3_bucket_arn: ::String
       attr_accessor screenshots_upload_enabled: bool
+      attr_accessor replay_session_enabled: bool
+      attr_accessor kms_key_arn: ::String
       attr_accessor screen_resolution: ("W_1280xH_720")
       attr_accessor screen_image_format: ("PNG" | "JPEG")
       attr_accessor user_control_mode: ("VIEW_ONLY" | "VIEW_STOP" | "DISABLED")
@@ -39,6 +41,8 @@ module Aws::AppStream
       attr_accessor settings: ::Array[Types::AgentAccessSetting]
       attr_accessor s3_bucket_arn: ::String
       attr_accessor screenshots_upload_enabled: bool
+      attr_accessor replay_session_enabled: bool
+      attr_accessor kms_key_arn: ::String
       attr_accessor screen_resolution: ("W_1280xH_720")
       attr_accessor screen_image_format: ("PNG" | "JPEG")
       attr_accessor user_control_mode: ("VIEW_ONLY" | "VIEW_STOP" | "DISABLED")
@@ -295,7 +299,7 @@ module Aws::AppStream
     class CreateAppBlockBuilderStreamingURLResult
       attr_accessor streaming_url: ::String
       attr_accessor expires: ::Time
-      SENSITIVE: []
+      SENSITIVE: [:streaming_url]
     end
 
     class CreateAppBlockRequest
@@ -427,6 +431,7 @@ module Aws::AppStream
       attr_accessor softwares_to_install: ::Array[::String]
       attr_accessor softwares_to_uninstall: ::Array[::String]
       attr_accessor disable_imdsv1: bool
+      attr_accessor agent_access_config: Types::ImageBuilderAgentAccessConfig
       SENSITIVE: []
     end
 
@@ -444,7 +449,7 @@ module Aws::AppStream
     class CreateImageBuilderStreamingURLResult
       attr_accessor streaming_url: ::String
       attr_accessor expires: ::Time
-      SENSITIVE: []
+      SENSITIVE: [:streaming_url]
     end
 
     class CreateImportedImageRequest
@@ -459,7 +464,7 @@ module Aws::AppStream
       attr_accessor agent_software_version: ("CURRENT_LATEST" | "ALWAYS_LATEST")
       attr_accessor app_catalog_config: ::Array[Types::ApplicationConfig]
       attr_accessor dry_run: bool
-      SENSITIVE: []
+      SENSITIVE: [:app_catalog_config]
     end
 
     class CreateImportedImageResult
@@ -481,6 +486,7 @@ module Aws::AppStream
       attr_accessor embed_host_domains: ::Array[::String]
       attr_accessor streaming_experience_settings: Types::StreamingExperienceSettings
       attr_accessor content_redirection: Types::ContentRedirection
+      attr_accessor web_authn_redirection: Types::WebAuthnRedirection
       attr_accessor agent_access_config: Types::AgentAccessConfig
       attr_accessor storage_connector_authentication: ("FORCE_REAUTHENTICATION" | "REUSE_CREDENTIALS")
       SENSITIVE: []
@@ -504,7 +510,7 @@ module Aws::AppStream
     class CreateStreamingURLResult
       attr_accessor streaming_url: ::String
       attr_accessor expires: ::Time
-      SENSITIVE: []
+      SENSITIVE: [:streaming_url]
     end
 
     class CreateThemeForStackRequest
@@ -1177,6 +1183,27 @@ module Aws::AppStream
       attr_accessor root_volume_config: Types::VolumeConfig
       attr_accessor latest_appstream_agent_version: ("TRUE" | "FALSE")
       attr_accessor disable_imdsv1: bool
+      attr_accessor agent_access_config: Types::ImageBuilderAgentAccessConfig
+      SENSITIVE: []
+    end
+
+    class ImageBuilderAgentAccessConfig
+      attr_accessor settings: ::Array[Types::AgentAccessSetting]
+      attr_accessor s3_bucket_arn: ::String
+      attr_accessor screenshots_upload_enabled: bool
+      attr_accessor screen_resolution: ("W_1280xH_720")
+      attr_accessor screen_image_format: ("PNG" | "JPEG")
+      attr_accessor user_control_mode: ("VIEW_ONLY" | "VIEW_STOP" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class ImageBuilderAgentAccessConfigForUpdate
+      attr_accessor settings: ::Array[Types::AgentAccessSetting]
+      attr_accessor s3_bucket_arn: ::String
+      attr_accessor screenshots_upload_enabled: bool
+      attr_accessor screen_resolution: ("W_1280xH_720")
+      attr_accessor screen_image_format: ("PNG" | "JPEG")
+      attr_accessor user_control_mode: ("VIEW_ONLY" | "VIEW_STOP" | "DISABLED")
       SENSITIVE: []
     end
 
@@ -1409,6 +1436,7 @@ module Aws::AppStream
       attr_accessor embed_host_domains: ::Array[::String]
       attr_accessor streaming_experience_settings: Types::StreamingExperienceSettings
       attr_accessor content_redirection: Types::ContentRedirection
+      attr_accessor web_authn_redirection: Types::WebAuthnRedirection
       attr_accessor agent_access_config: Types::AgentAccessConfig
       attr_accessor storage_connector_authentication: ("FORCE_REAUTHENTICATION" | "REUSE_CREDENTIALS")
       SENSITIVE: []
@@ -1633,6 +1661,20 @@ module Aws::AppStream
       SENSITIVE: []
     end
 
+    class UpdateImageBuilderRequest
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor display_name: ::String
+      attr_accessor agent_access_config: Types::ImageBuilderAgentAccessConfigForUpdate
+      attr_accessor attributes_to_delete: ::Array[("AGENT_ACCESS_CONFIG")]
+      SENSITIVE: []
+    end
+
+    class UpdateImageBuilderResult
+      attr_accessor image_builder: Types::ImageBuilder
+      SENSITIVE: []
+    end
+
     class UpdateImagePermissionsRequest
       attr_accessor name: ::String
       attr_accessor shared_account_id: ::String
@@ -1651,13 +1693,14 @@ module Aws::AppStream
       attr_accessor delete_storage_connectors: bool
       attr_accessor redirect_url: ::String
       attr_accessor feedback_url: ::String
-      attr_accessor attributes_to_delete: ::Array[("STORAGE_CONNECTORS" | "STORAGE_CONNECTOR_HOMEFOLDERS" | "STORAGE_CONNECTOR_GOOGLE_DRIVE" | "STORAGE_CONNECTOR_ONE_DRIVE" | "REDIRECT_URL" | "FEEDBACK_URL" | "THEME_NAME" | "USER_SETTINGS" | "EMBED_HOST_DOMAINS" | "IAM_ROLE_ARN" | "ACCESS_ENDPOINTS" | "STREAMING_EXPERIENCE_SETTINGS" | "CONTENT_REDIRECTION" | "AGENT_ACCESS_CONFIG" | "STORAGE_CONNECTOR_AUTHENTICATION")]
+      attr_accessor attributes_to_delete: ::Array[("STORAGE_CONNECTORS" | "STORAGE_CONNECTOR_HOMEFOLDERS" | "STORAGE_CONNECTOR_GOOGLE_DRIVE" | "STORAGE_CONNECTOR_ONE_DRIVE" | "REDIRECT_URL" | "FEEDBACK_URL" | "THEME_NAME" | "USER_SETTINGS" | "EMBED_HOST_DOMAINS" | "IAM_ROLE_ARN" | "ACCESS_ENDPOINTS" | "STREAMING_EXPERIENCE_SETTINGS" | "CONTENT_REDIRECTION" | "WEB_AUTHN_REDIRECTION" | "AGENT_ACCESS_CONFIG" | "STORAGE_CONNECTOR_AUTHENTICATION" | "AGENT_ACCESS_CONFIG_KMS_KEY_ARN")]
       attr_accessor user_settings: ::Array[Types::UserSetting]
       attr_accessor application_settings: Types::ApplicationSettings
       attr_accessor access_endpoints: ::Array[Types::AccessEndpoint]
       attr_accessor embed_host_domains: ::Array[::String]
       attr_accessor streaming_experience_settings: Types::StreamingExperienceSettings
       attr_accessor content_redirection: Types::ContentRedirection
+      attr_accessor web_authn_redirection: Types::WebAuthnRedirection
       attr_accessor agent_access_config: Types::AgentAccessConfigForUpdate
       attr_accessor storage_connector_authentication: ("FORCE_REAUTHENTICATION" | "REUSE_CREDENTIALS")
       SENSITIVE: []
@@ -1713,7 +1756,7 @@ module Aws::AppStream
     end
 
     class UserSetting
-      attr_accessor action: ("CLIPBOARD_COPY_FROM_LOCAL_DEVICE" | "CLIPBOARD_COPY_TO_LOCAL_DEVICE" | "FILE_UPLOAD" | "FILE_DOWNLOAD" | "PRINTING_TO_LOCAL_DEVICE" | "DOMAIN_PASSWORD_SIGNIN" | "DOMAIN_SMART_CARD_SIGNIN" | "AUTO_TIME_ZONE_REDIRECTION")
+      attr_accessor action: ("CLIPBOARD_COPY_FROM_LOCAL_DEVICE" | "CLIPBOARD_COPY_TO_LOCAL_DEVICE" | "FILE_UPLOAD" | "FILE_DOWNLOAD" | "PRINTING_TO_LOCAL_DEVICE" | "DOMAIN_PASSWORD_SIGNIN" | "DOMAIN_SMART_CARD_SIGNIN" | "AUTO_TIME_ZONE_REDIRECTION" | "SMART_CARD_REDIRECTION")
       attr_accessor permission: ("ENABLED" | "DISABLED")
       attr_accessor maximum_length: ::Integer
       SENSITIVE: []
@@ -1742,6 +1785,12 @@ module Aws::AppStream
     class VpcConfig
       attr_accessor subnet_ids: ::Array[::String]
       attr_accessor security_group_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class WebAuthnRedirection
+      attr_accessor enabled: bool
+      attr_accessor process_compatibility_list: ::Array[::String]
       SENSITIVE: []
     end
   end

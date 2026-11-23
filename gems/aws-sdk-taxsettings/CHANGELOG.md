@@ -1,6 +1,46 @@
 Unreleased Changes
 ------------------
 
+1.60.0 (2026-11-20)
+------------------
+
+* Feature - Adds support for Norway, New Zealand and United Arab Emirates additional tax information, and the Vietnam VAT credit method and 20-digit payment voucher number.
+
+1.59.0 (2026-11-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.58.0 (2026-11-16)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.57.0 (2026-11-11)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.56.0 (2026-11-10)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.55.0 (2026-11-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.54.0 (2026-11-06)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.53.0 (2026-11-04)
+------------------
+
+* Feature - Adds Colombia additional information (responsibility codes, taxpayer type code, and RUT issue date) and a rejection reason (statusReason) to tax registration responses, and adds Argentina and Uruguay tax registration types.
+
 1.52.0 (2026-10-29)
 ------------------
 

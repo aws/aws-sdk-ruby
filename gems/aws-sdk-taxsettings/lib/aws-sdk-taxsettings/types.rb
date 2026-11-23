@@ -207,6 +207,21 @@ module Aws::TaxSettings
     #   (TRN) in Mexico.
     #   @return [Types::MexicoAdditionalInfo]
     #
+    # @!attribute [rw] united_arab_emirates_additional_info
+    #   Additional tax information to specify for a Tax Registration Number
+    #   (TRN) in the United Arab Emirates.
+    #   @return [Types::UnitedArabEmiratesAdditionalInfo]
+    #
+    # @!attribute [rw] norway_additional_info
+    #   Additional tax information to specify for a Tax Registration Number
+    #   (TRN) in Norway.
+    #   @return [Types::NorwayAdditionalInfo]
+    #
+    # @!attribute [rw] new_zealand_additional_info
+    #   Additional tax information to specify for a Tax Registration Number
+    #   (TRN) in New Zealand.
+    #   @return [Types::NewZealandAdditionalInfo]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/taxsettings-2018-05-10/AdditionalInfoRequest AWS API Documentation
     #
     class AdditionalInfoRequest < Struct.new(
@@ -235,7 +250,10 @@ module Aws::TaxSettings
       :france_additional_info,
       :monaco_additional_info,
       :germany_additional_info,
-      :mexico_additional_info)
+      :mexico_additional_info,
+      :united_arab_emirates_additional_info,
+      :norway_additional_info,
+      :new_zealand_additional_info)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -362,6 +380,26 @@ module Aws::TaxSettings
     #   Number (TRN) in Mexico.
     #   @return [Types::MexicoAdditionalInfo]
     #
+    # @!attribute [rw] colombia_additional_info
+    #   Additional tax information associated with your Tax Registration
+    #   Number (TRN) in Colombia.
+    #   @return [Types::ColombiaAdditionalInfo]
+    #
+    # @!attribute [rw] united_arab_emirates_additional_info
+    #   Additional tax information associated with your Tax Registration
+    #   Number (TRN) in the United Arab Emirates.
+    #   @return [Types::UnitedArabEmiratesAdditionalInfo]
+    #
+    # @!attribute [rw] norway_additional_info
+    #   Additional tax information associated with your Tax Registration
+    #   Number (TRN) in Norway.
+    #   @return [Types::NorwayAdditionalInfo]
+    #
+    # @!attribute [rw] new_zealand_additional_info
+    #   Additional tax information associated with your Tax Registration
+    #   Number (TRN) in New Zealand.
+    #   @return [Types::NewZealandAdditionalInfo]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/taxsettings-2018-05-10/AdditionalInfoResponse AWS API Documentation
     #
     class AdditionalInfoResponse < Struct.new(
@@ -392,7 +430,11 @@ module Aws::TaxSettings
       :france_additional_info,
       :monaco_additional_info,
       :germany_additional_info,
-      :mexico_additional_info)
+      :mexico_additional_info,
+      :colombia_additional_info,
+      :united_arab_emirates_additional_info,
+      :norway_additional_info,
+      :new_zealand_additional_info)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -777,6 +819,35 @@ module Aws::TaxSettings
     class ChileAdditionalInfo < Struct.new(
       :document_type,
       :business_activity)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains additional tax information associated with your Tax
+    # Registration Number (TRN) in Colombia, derived from your Registro
+    # Único Tributario (RUT) document.
+    #
+    # @!attribute [rw] responsibility_codes
+    #   The DIAN fiscal responsibility codes from Box 53 of the RUT document
+    #   (for example, `48` for value-added tax (VAT) responsibility).
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] taxpayer_type_code
+    #   The taxpayer category from Box 24 of the RUT document (`1` for a
+    #   legal entity, `2` for a natural person).
+    #   @return [String]
+    #
+    # @!attribute [rw] issue_date
+    #   The issue date of the RUT document from Box 61, in `YYYY-MM-DD`
+    #   format.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/taxsettings-2018-05-10/ColombiaAdditionalInfo AWS API Documentation
+    #
+    class ColombiaAdditionalInfo < Struct.new(
+      :responsibility_codes,
+      :taxpayer_type_code,
+      :issue_date)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1449,6 +1520,49 @@ module Aws::TaxSettings
       include Aws::Structure
     end
 
+    # Contains additional tax information associated with your Tax
+    # Registration Number (TRN) in New Zealand, such as the Peppol ID used
+    # for electronic invoicing (e-invoicing).
+    #
+    # @!attribute [rw] peppol_id
+    #   The Peppol ID used for electronic invoicing (e-invoicing) in New
+    #   Zealand. Must be your 13-digit New Zealand Business Number (NZBN),
+    #   without the `0088` scheme prefix. Only accepted when the `sector` is
+    #   `Government`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/taxsettings-2018-05-10/NewZealandAdditionalInfo AWS API Documentation
+    #
+    class NewZealandAdditionalInfo < Struct.new(
+      :peppol_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains additional tax information associated with your Tax
+    # Registration Number (TRN) in Norway, such as the tax registration
+    # number type and the Peppol ID used for electronic invoicing
+    # (e-invoicing).
+    #
+    # @!attribute [rw] tax_registration_number_type
+    #   Treated as TaxRegistrationNumber when absent.
+    #   @return [String]
+    #
+    # @!attribute [rw] peppol_id
+    #   The Peppol ID used for electronic invoicing (e-invoicing) in Norway.
+    #   Must be a valid 9-digit Norwegian Organisation Number, without the
+    #   `0192` scheme prefix.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/taxsettings-2018-05-10/NorwayAdditionalInfo AWS API Documentation
+    #
+    class NorwayAdditionalInfo < Struct.new(
+      :tax_registration_number_type,
+      :peppol_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Additional tax information associated with your TRN in the
     # Philippines.
     #
@@ -1949,7 +2063,8 @@ module Aws::TaxSettings
     #
     # @!attribute [rw] status
     #   The status of your TRN. This can be either `Verified`, `Pending`,
-    #   `Deleted`, or `Rejected`.
+    #   `Deleted`, or `Rejected`. If the status is `Rejected`, see
+    #   `statusReason` for the reason.
     #   @return [String]
     #
     # @!attribute [rw] sector
@@ -1973,6 +2088,11 @@ module Aws::TaxSettings
     #   Additional tax information associated with your TRN.
     #   @return [Types::AdditionalInfoResponse]
     #
+    # @!attribute [rw] status_reason
+    #   The reason that your TRN was rejected. This is returned only when
+    #   `status` is `Rejected`.
+    #   @return [Types::TaxRegistrationStatusReason]
+    #
     # @!attribute [rw] legal_address
     #   The legal address associated with your TRN registration.
     #   @return [Types::Address]
@@ -1988,6 +2108,7 @@ module Aws::TaxSettings
       :tax_document_metadatas,
       :certified_email_id,
       :additional_tax_information,
+      :status_reason,
       :legal_address)
       SENSITIVE = []
       include Aws::Structure
@@ -2110,6 +2231,27 @@ module Aws::TaxSettings
       include Aws::Structure
     end
 
+    # The reason that a tax registration was rejected.
+    #
+    # @!attribute [rw] code
+    #   A code that identifies the rejection reason (for example,
+    #   `NIT_MISMATCH` or `ENCRYPTED_PDF`). If the reason isn't recognized,
+    #   the value is `OTHER`. New codes might be added in the future.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   A description of the rejection reason in English.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/taxsettings-2018-05-10/TaxRegistrationStatusReason AWS API Documentation
+    #
+    class TaxRegistrationStatusReason < Struct.new(
+      :code,
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Your TRN information with jurisdiction details. This doesn't contain
     # the full legal address associated with the TRN information.
     #
@@ -2128,7 +2270,8 @@ module Aws::TaxSettings
     #
     # @!attribute [rw] status
     #   The status of your TRN. This can be either `Verified`, `Pending`,
-    #   `Deleted`, or `Rejected`.
+    #   `Deleted`, or `Rejected`. If the status is `Rejected`, see
+    #   `statusReason` for the reason.
     #   @return [String]
     #
     # @!attribute [rw] sector
@@ -2152,6 +2295,11 @@ module Aws::TaxSettings
     #   Additional tax information associated with your TRN.
     #   @return [Types::AdditionalInfoResponse]
     #
+    # @!attribute [rw] status_reason
+    #   The reason that your TRN was rejected. This is returned only when
+    #   `status` is `Rejected`.
+    #   @return [Types::TaxRegistrationStatusReason]
+    #
     # @!attribute [rw] jurisdiction
     #   The jurisdiction associated with your TRN information.
     #   @return [Types::Jurisdiction]
@@ -2167,6 +2315,7 @@ module Aws::TaxSettings
       :tax_document_metadatas,
       :certified_email_id,
       :additional_tax_information,
+      :status_reason,
       :jurisdiction)
       SENSITIVE = []
       include Aws::Structure
@@ -2223,6 +2372,42 @@ module Aws::TaxSettings
     #
     class UkraineAdditionalInfo < Struct.new(
       :ukraine_trn_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains additional tax information associated with your Tax
+    # Registration Number (TRN) in the United Arab Emirates, such as the TRN
+    # type and the Peppol ID used for electronic invoicing (e-invoicing).
+    #
+    # @!attribute [rw] tax_registration_number_type
+    #   The type of your TRN in the United Arab Emirates. Valid values are
+    #   `VATTaxRegistrationNumber` and `LocalTaxRegistrationNumber`
+    #   (Corporate Tax). This field must be provided.
+    #   @return [String]
+    #
+    # @!attribute [rw] peppol_id
+    #   The Peppol ID used for electronic invoicing (e-invoicing) in the
+    #   United Arab Emirates. Optional. Must be a 10-digit number.
+    #   @return [String]
+    #
+    # @!attribute [rw] trade_license_number
+    #   Your trade license number in the United Arab Emirates. Optional.
+    #   Must be a 10-digit number.
+    #   @return [String]
+    #
+    # @!attribute [rw] emirates_id
+    #   Your Emirates ID. Optional. Must be in the format
+    #   `784-YYYY-NNNNNNN-N`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/taxsettings-2018-05-10/UnitedArabEmiratesAdditionalInfo AWS API Documentation
+    #
+    class UnitedArabEmiratesAdditionalInfo < Struct.new(
+      :tax_registration_number_type,
+      :peppol_id,
+      :trade_license_number,
+      :emirates_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2311,24 +2496,34 @@ module Aws::TaxSettings
     # Additional tax information to specify for a TRN in Vietnam.
     #
     # @!attribute [rw] enterprise_identification_number
-    #   The enterprise identification number for tax registration. This
-    #   field must be provided for successful API operation.
+    #   The enterprise identification number for tax registration. Required
+    #   when `vatCreditMethod` is `true`; must not be specified when it is
+    #   `false`.
     #   @return [String]
     #
     # @!attribute [rw] electronic_transaction_code_number
     #   The electronic transaction code number on the tax return document.
-    #   This field must be provided for successful API operation.
+    #   Required when `vatCreditMethod` is `true`; must not be specified
+    #   when it is `false`.
     #   @return [String]
     #
     # @!attribute [rw] payment_voucher_number
-    #   The payment voucher number on the tax return payment document. This
-    #   field must be provided for successful API operation.
+    #   The payment voucher number on the tax return payment document.
+    #   Required when `vatCreditMethod` is `true`; must not be specified
+    #   when it is `false`.
     #   @return [String]
     #
     # @!attribute [rw] payment_voucher_number_date
-    #   The date on the tax return payment document. This field must be
-    #   provided for successful API operation.
+    #   The date on the tax return payment document. Required when
+    #   `vatCreditMethod` is `true`; must not be specified when it is
+    #   `false`.
     #   @return [String]
+    #
+    # @!attribute [rw] vat_credit_method
+    #   Whether your business applies the VAT credit method in Vietnam.
+    #   Specify `true` for a business (sector `Business`) or `false` for an
+    #   individual (sector `Individual`).
+    #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/taxsettings-2018-05-10/VietnamAdditionalInfo AWS API Documentation
     #
@@ -2336,7 +2531,8 @@ module Aws::TaxSettings
       :enterprise_identification_number,
       :electronic_transaction_code_number,
       :payment_voucher_number,
-      :payment_voucher_number_date)
+      :payment_voucher_number_date,
+      :vat_credit_method)
       SENSITIVE = []
       include Aws::Structure
     end

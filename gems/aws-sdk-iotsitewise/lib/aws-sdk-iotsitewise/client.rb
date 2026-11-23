@@ -272,7 +272,8 @@ module Aws::IoTSiteWise
     #     An integer representing the maximum number attempts that will be made for
     #     a single request, including the initial attempt.  For example,
     #     setting this value to 5 will result in a request being retried up to
-    #     4 times. Used in `standard` and `adaptive` retry modes.
+    #     4 times. Used in `standard` and `adaptive` retry modes. Defaults to 3,
+    #     except for DynamoDB and DynamoDB Streams, which default to 4.
     #
     #   @option options [Proc] :output_event_stream_handler
     #     When an EventStream or Proc object is provided, it will be used as callback for each chunk of event stream response received along the way.
@@ -338,15 +339,15 @@ module Aws::IoTSiteWise
     #     used by the default backoff function. This option is only used in the
     #     `legacy` retry mode.
     #
-    #   @option options [String] :retry_mode ("legacy")
+    #   @option options [String] :retry_mode ("standard")
     #     Specifies which retry algorithm to use. Values are:
     #
-    #     * `legacy` - The pre-existing retry behavior. This is the default
-    #       value if no retry mode is provided.
+    #     * `legacy` - The pre-existing retry behavior.
     #
     #     * `standard` - A standardized set of retry rules across the AWS SDKs.
     #       This includes support for retry quotas, which limit the number of
-    #       unsuccessful retries a client can make.
+    #       unsuccessful retries a client can make. This is the default value
+    #       if no retry mode is provided.
     #
     #     * `adaptive` - A retry mode that includes all the functionality of
     #       `standard` mode along with automatic client side throttling.
@@ -2648,6 +2649,10 @@ module Aws::IoTSiteWise
     # @option params [required, Types::ProcessingInput] :input
     #   The processing input source.
     #
+    # @option params [String] :job_name
+    #   An optional name for the export job. When omitted, one will be created
+    #   based on type of job and start time.
+    #
     # @option params [required, Types::ExportErrorReportLocation] :error_report_location
     #   The location where the error report will be written on failure.
     #
@@ -2699,6 +2704,7 @@ module Aws::IoTSiteWise
     #         export_data_types: ["VIDEO"], # accepts VIDEO, TELEMETRY, ANNOTATION
     #       },
     #     },
+    #     job_name: "DatasetExportJobNameInput",
     #     error_report_location: { # required
     #       s3_uri: "S3Uri", # required
     #     },
@@ -5266,6 +5272,7 @@ module Aws::IoTSiteWise
     #
     #   * {Types::DescribeDatasetExportJobResponse#job_id #job_id} => String
     #   * {Types::DescribeDatasetExportJobResponse#workspace_name #workspace_name} => String
+    #   * {Types::DescribeDatasetExportJobResponse#job_name #job_name} => String
     #   * {Types::DescribeDatasetExportJobResponse#status #status} => String
     #   * {Types::DescribeDatasetExportJobResponse#started_at #started_at} => Time
     #   * {Types::DescribeDatasetExportJobResponse#completed_at #completed_at} => Time
@@ -5284,6 +5291,7 @@ module Aws::IoTSiteWise
     #
     #   resp.job_id #=> String
     #   resp.workspace_name #=> String
+    #   resp.job_name #=> String
     #   resp.status #=> String, one of "SUBMITTED", "RUNNING", "COMPLETED", "COMPLETED_WITH_ERRORS", "FAILED"
     #   resp.started_at #=> Time
     #   resp.completed_at #=> Time
@@ -8538,6 +8546,7 @@ module Aws::IoTSiteWise
     #
     #   resp.jobs #=> Array
     #   resp.jobs[0].job_id #=> String
+    #   resp.jobs[0].job_name #=> String
     #   resp.jobs[0].status #=> String, one of "SUBMITTED", "RUNNING", "COMPLETED", "COMPLETED_WITH_ERRORS", "FAILED"
     #   resp.jobs[0].started_at #=> Time
     #   resp.jobs[0].completed_at #=> Time
@@ -11514,7 +11523,7 @@ module Aws::IoTSiteWise
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-iotsitewise'
-      context[:gem_version] = '1.115.0'
+      context[:gem_version] = '1.122.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

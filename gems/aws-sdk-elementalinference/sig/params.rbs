@@ -9,13 +9,68 @@ module Aws
   module ElementalInference
     module Params
       type subtitling_config = {
-      language: ("eng" | "eng-au" | "eng-gb" | "eng-us" | "fra" | "ita" | "deu" | "spa" | "por"),
+      language: ("eng" | "eng-au" | "eng-gb" | "eng-us" | "fra" | "ita" | "deu" | "spa" | "por" | "ara"),
       aspect_ratio: {
         width: ::Integer,
         height: ::Integer
       }?,
       dictionary: ::String?,
       profanity_filter: ("DISABLED" | "CENSOR" | "DROP")?
+    }
+
+      type custom_questions_config = {
+      shot: {
+        question_set_id: ::String,
+        version: ::String
+      }?,
+      scene: {
+        question_set_id: ::String,
+        version: ::String
+      }?
+    }
+
+      type contextual_metadata_config = {
+      summary_generation: ("ENABLED" | "DISABLED")?,
+      extended_analysis: ("ENABLED" | "DISABLED")?,
+      custom_questions: Params::custom_questions_config?
+    }
+
+      type trigger = {
+      fixed_interval: {
+        interval_seconds: ::Integer
+      }?,
+      per_shot: {
+      }?,
+      per_scene: {
+      }?,
+      per_clip: {
+      }?
+    }
+
+      type frame_settings = {
+      frame_sampling: {
+        mode: ("FIRST" | "UNIFORM" | "LAST"),
+        count: ::Integer?
+      },
+      frame_size: {
+        width_pixels: ::Integer,
+        height_pixels: ::Integer
+      }?
+    }
+
+      type function_config = {
+      function_arn: ::String,
+      trigger: Params::trigger,
+      frame_settings: Params::frame_settings?,
+      subtitling_settings: {
+        output_name: ::String
+      }?,
+      contextual_metadata_settings: {
+        output_name: ::String
+      }?,
+      clipping_settings: {
+        output_name: ::String
+      }?
     }
 
       type output_config = {
@@ -34,10 +89,8 @@ module Aws
         }?
       }?,
       subtitling: Params::subtitling_config?,
-      contextual_metadata: {
-        summary_generation: ("ENABLED" | "DISABLED")?,
-        extended_analysis: ("ENABLED" | "DISABLED")?
-      }?
+      contextual_metadata: Params::contextual_metadata_config?,
+      function: Params::function_config?
     }
 
       type create_output = {
@@ -45,6 +98,37 @@ module Aws
       output_config: Params::output_config,
       status: ("ENABLED" | "DISABLED"),
       description: ::String?
+    }
+
+      type function_target = {
+      bedrock: {
+        api: ("INVOKE_MODEL"),
+        model: ::String
+      }?,
+      passthrough: {
+      }?
+    }
+
+      type yes_no_per_option_question = {
+      name: ::String,
+      question: ::String,
+      options: Array[
+        {
+          name: ::String,
+          text: ::String
+        }
+      ]
+    }
+
+      type choose_one_question = {
+      name: ::String,
+      question: ::String,
+      options: Array[
+        {
+          name: ::String,
+          text: ::String
+        }
+      ]
     }
 
     end

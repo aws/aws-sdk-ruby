@@ -63,6 +63,11 @@ module Aws::DSQL
     ListTagsForResourceInput = Shapes::StructureShape.new(name: 'ListTagsForResourceInput')
     ListTagsForResourceOutput = Shapes::StructureShape.new(name: 'ListTagsForResourceOutput')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
+    MetricGroup = Shapes::StringShape.new(name: 'MetricGroup')
+    MetricGroupRequest = Shapes::StructureShape.new(name: 'MetricGroupRequest')
+    MetricGroupRequestList = Shapes::ListShape.new(name: 'MetricGroupRequestList')
+    MetricGroupResponse = Shapes::StructureShape.new(name: 'MetricGroupResponse')
+    MetricGroupResponseList = Shapes::ListShape.new(name: 'MetricGroupResponseList')
     MultiRegionProperties = Shapes::StructureShape.new(name: 'MultiRegionProperties')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     PolicyDocument = Shapes::StringShape.new(name: 'PolicyDocument')
@@ -123,6 +128,7 @@ module Aws::DSQL
     CreateClusterInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateClusterInput.add_member(:multi_region_properties, Shapes::ShapeRef.new(shape: MultiRegionProperties, location_name: "multiRegionProperties"))
     CreateClusterInput.add_member(:policy, Shapes::ShapeRef.new(shape: PolicyDocument, location_name: "policy"))
+    CreateClusterInput.add_member(:metric_groups, Shapes::ShapeRef.new(shape: MetricGroupRequestList, location_name: "metricGroups"))
     CreateClusterInput.add_member(:bypass_policy_lockout_safety_check, Shapes::ShapeRef.new(shape: BypassPolicyLockoutSafetyCheck, location_name: "bypassPolicyLockoutSafetyCheck"))
     CreateClusterInput.struct_class = Types::CreateClusterInput
 
@@ -134,6 +140,7 @@ module Aws::DSQL
     CreateClusterOutput.add_member(:encryption_details, Shapes::ShapeRef.new(shape: EncryptionDetails, location_name: "encryptionDetails"))
     CreateClusterOutput.add_member(:deletion_protection_enabled, Shapes::ShapeRef.new(shape: DeletionProtectionEnabled, required: true, location_name: "deletionProtectionEnabled"))
     CreateClusterOutput.add_member(:endpoint, Shapes::ShapeRef.new(shape: Endpoint, location_name: "endpoint"))
+    CreateClusterOutput.add_member(:metric_groups, Shapes::ShapeRef.new(shape: MetricGroupResponseList, location_name: "metricGroups"))
     CreateClusterOutput.struct_class = Types::CreateClusterOutput
 
     CreateStreamInput.add_member(:cluster_identifier, Shapes::ShapeRef.new(shape: ClusterId, required: true, location: "uri", location_name: "clusterIdentifier"))
@@ -200,6 +207,7 @@ module Aws::DSQL
     GetClusterOutput.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     GetClusterOutput.add_member(:encryption_details, Shapes::ShapeRef.new(shape: EncryptionDetails, location_name: "encryptionDetails"))
     GetClusterOutput.add_member(:endpoint, Shapes::ShapeRef.new(shape: Endpoint, location_name: "endpoint"))
+    GetClusterOutput.add_member(:metric_groups, Shapes::ShapeRef.new(shape: MetricGroupResponseList, location_name: "metricGroups"))
     GetClusterOutput.struct_class = Types::GetClusterOutput
 
     GetClusterPolicyInput.add_member(:identifier, Shapes::ShapeRef.new(shape: ClusterId, required: true, location: "uri", location_name: "identifier"))
@@ -262,6 +270,16 @@ module Aws::DSQL
 
     ListTagsForResourceOutput.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     ListTagsForResourceOutput.struct_class = Types::ListTagsForResourceOutput
+
+    MetricGroupRequest.add_member(:metric_group, Shapes::ShapeRef.new(shape: MetricGroup, required: true, location_name: "metricGroup"))
+    MetricGroupRequest.struct_class = Types::MetricGroupRequest
+
+    MetricGroupRequestList.member = Shapes::ShapeRef.new(shape: MetricGroupRequest)
+
+    MetricGroupResponse.add_member(:metric_group, Shapes::ShapeRef.new(shape: MetricGroup, required: true, location_name: "metricGroup"))
+    MetricGroupResponse.struct_class = Types::MetricGroupResponse
+
+    MetricGroupResponseList.member = Shapes::ShapeRef.new(shape: MetricGroupResponse)
 
     MultiRegionProperties.add_member(:witness_region, Shapes::ShapeRef.new(shape: Region, location_name: "witnessRegion"))
     MultiRegionProperties.add_member(:clusters, Shapes::ShapeRef.new(shape: ClusterArnList, location_name: "clusters"))
@@ -332,6 +350,7 @@ module Aws::DSQL
     UpdateClusterInput.add_member(:kms_encryption_key, Shapes::ShapeRef.new(shape: KmsEncryptionKey, location_name: "kmsEncryptionKey"))
     UpdateClusterInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     UpdateClusterInput.add_member(:multi_region_properties, Shapes::ShapeRef.new(shape: MultiRegionProperties, location_name: "multiRegionProperties"))
+    UpdateClusterInput.add_member(:metric_groups, Shapes::ShapeRef.new(shape: MetricGroupRequestList, location_name: "metricGroups"))
     UpdateClusterInput.struct_class = Types::UpdateClusterInput
 
     UpdateClusterOutput.add_member(:identifier, Shapes::ShapeRef.new(shape: ClusterId, required: true, location_name: "identifier"))

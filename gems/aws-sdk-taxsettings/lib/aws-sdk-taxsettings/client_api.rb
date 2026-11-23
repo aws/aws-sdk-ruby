@@ -62,6 +62,10 @@ module Aws::TaxSettings
     ChileDocumentType = Shapes::StringShape.new(name: 'ChileDocumentType')
     CigNumber = Shapes::StringShape.new(name: 'CigNumber')
     City = Shapes::StringShape.new(name: 'City')
+    ColombiaAdditionalInfo = Shapes::StructureShape.new(name: 'ColombiaAdditionalInfo')
+    ColombiaResponsabilidadCode = Shapes::StringShape.new(name: 'ColombiaResponsabilidadCode')
+    ColombiaResponsabilidadesList = Shapes::ListShape.new(name: 'ColombiaResponsabilidadesList')
+    ColombiaTipoContribuyenteCode = Shapes::StringShape.new(name: 'ColombiaTipoContribuyenteCode')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     ContractingAuthorityCode = Shapes::StringShape.new(name: 'ContractingAuthorityCode')
     CountryCode = Shapes::StringShape.new(name: 'CountryCode')
@@ -138,6 +142,11 @@ module Aws::TaxSettings
     MexicoTaxRegimeCode = Shapes::StringShape.new(name: 'MexicoTaxRegimeCode')
     MexicoTaxRegimeFullName = Shapes::StringShape.new(name: 'MexicoTaxRegimeFullName')
     MonacoAdditionalInfo = Shapes::StructureShape.new(name: 'MonacoAdditionalInfo')
+    NewZealandAdditionalInfo = Shapes::StructureShape.new(name: 'NewZealandAdditionalInfo')
+    NewZealandPeppolId = Shapes::StringShape.new(name: 'NewZealandPeppolId')
+    NorwayAdditionalInfo = Shapes::StructureShape.new(name: 'NorwayAdditionalInfo')
+    NorwayPeppolId = Shapes::StringShape.new(name: 'NorwayPeppolId')
+    NorwayTaxRegistrationNumberType = Shapes::StringShape.new(name: 'NorwayTaxRegistrationNumberType')
     PaginationTokenString = Shapes::StringShape.new(name: 'PaginationTokenString')
     Pan = Shapes::StringShape.new(name: 'Pan')
     PaymentVoucherNumber = Shapes::StringShape.new(name: 'PaymentVoucherNumber')
@@ -176,6 +185,8 @@ module Aws::TaxSettings
     SouthKoreaAdditionalInfo = Shapes::StructureShape.new(name: 'SouthKoreaAdditionalInfo')
     SpainAdditionalInfo = Shapes::StructureShape.new(name: 'SpainAdditionalInfo')
     State = Shapes::StringShape.new(name: 'State')
+    StatusReasonCode = Shapes::StringShape.new(name: 'StatusReasonCode')
+    StatusReasonMessage = Shapes::StringShape.new(name: 'StatusReasonMessage')
     Steuernummer = Shapes::StringShape.new(name: 'Steuernummer')
     String = Shapes::StringShape.new(name: 'String')
     SupplementalTaxRegistration = Shapes::StructureShape.new(name: 'SupplementalTaxRegistration')
@@ -203,13 +214,19 @@ module Aws::TaxSettings
     TaxRegistrationEntry = Shapes::StructureShape.new(name: 'TaxRegistrationEntry')
     TaxRegistrationNumberType = Shapes::StringShape.new(name: 'TaxRegistrationNumberType')
     TaxRegistrationStatus = Shapes::StringShape.new(name: 'TaxRegistrationStatus')
+    TaxRegistrationStatusReason = Shapes::StructureShape.new(name: 'TaxRegistrationStatusReason')
     TaxRegistrationType = Shapes::StringShape.new(name: 'TaxRegistrationType')
     TaxRegistrationWithJurisdiction = Shapes::StructureShape.new(name: 'TaxRegistrationWithJurisdiction')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     TurkeyAdditionalInfo = Shapes::StructureShape.new(name: 'TurkeyAdditionalInfo')
+    UaeEmiratesId = Shapes::StringShape.new(name: 'UaeEmiratesId')
+    UaePeppolId = Shapes::StringShape.new(name: 'UaePeppolId')
+    UaeTaxRegistrationNumberType = Shapes::StringShape.new(name: 'UaeTaxRegistrationNumberType')
+    UaeTradeLicenseNumber = Shapes::StringShape.new(name: 'UaeTradeLicenseNumber')
     UkraineAdditionalInfo = Shapes::StructureShape.new(name: 'UkraineAdditionalInfo')
     UkraineTrnType = Shapes::StringShape.new(name: 'UkraineTrnType')
     UniqueIdentificationNumber = Shapes::StringShape.new(name: 'UniqueIdentificationNumber')
+    UnitedArabEmiratesAdditionalInfo = Shapes::StructureShape.new(name: 'UnitedArabEmiratesAdditionalInfo')
     Url = Shapes::StringShape.new(name: 'Url')
     UzbekistanAdditionalInfo = Shapes::StructureShape.new(name: 'UzbekistanAdditionalInfo')
     UzbekistanTaxRegistrationNumberType = Shapes::StringShape.new(name: 'UzbekistanTaxRegistrationNumberType')
@@ -267,6 +284,9 @@ module Aws::TaxSettings
     AdditionalInfoRequest.add_member(:monaco_additional_info, Shapes::ShapeRef.new(shape: MonacoAdditionalInfo, location_name: "monacoAdditionalInfo"))
     AdditionalInfoRequest.add_member(:germany_additional_info, Shapes::ShapeRef.new(shape: GermanyAdditionalInfo, location_name: "germanyAdditionalInfo"))
     AdditionalInfoRequest.add_member(:mexico_additional_info, Shapes::ShapeRef.new(shape: MexicoAdditionalInfo, location_name: "mexicoAdditionalInfo"))
+    AdditionalInfoRequest.add_member(:united_arab_emirates_additional_info, Shapes::ShapeRef.new(shape: UnitedArabEmiratesAdditionalInfo, location_name: "unitedArabEmiratesAdditionalInfo"))
+    AdditionalInfoRequest.add_member(:norway_additional_info, Shapes::ShapeRef.new(shape: NorwayAdditionalInfo, location_name: "norwayAdditionalInfo"))
+    AdditionalInfoRequest.add_member(:new_zealand_additional_info, Shapes::ShapeRef.new(shape: NewZealandAdditionalInfo, location_name: "newZealandAdditionalInfo"))
     AdditionalInfoRequest.struct_class = Types::AdditionalInfoRequest
 
     AdditionalInfoResponse.add_member(:malaysia_additional_info, Shapes::ShapeRef.new(shape: MalaysiaAdditionalInfo, location_name: "malaysiaAdditionalInfo"))
@@ -297,6 +317,10 @@ module Aws::TaxSettings
     AdditionalInfoResponse.add_member(:monaco_additional_info, Shapes::ShapeRef.new(shape: MonacoAdditionalInfo, location_name: "monacoAdditionalInfo"))
     AdditionalInfoResponse.add_member(:germany_additional_info, Shapes::ShapeRef.new(shape: GermanyAdditionalInfo, location_name: "germanyAdditionalInfo"))
     AdditionalInfoResponse.add_member(:mexico_additional_info, Shapes::ShapeRef.new(shape: MexicoAdditionalInfo, location_name: "mexicoAdditionalInfo"))
+    AdditionalInfoResponse.add_member(:colombia_additional_info, Shapes::ShapeRef.new(shape: ColombiaAdditionalInfo, location_name: "colombiaAdditionalInfo"))
+    AdditionalInfoResponse.add_member(:united_arab_emirates_additional_info, Shapes::ShapeRef.new(shape: UnitedArabEmiratesAdditionalInfo, location_name: "unitedArabEmiratesAdditionalInfo"))
+    AdditionalInfoResponse.add_member(:norway_additional_info, Shapes::ShapeRef.new(shape: NorwayAdditionalInfo, location_name: "norwayAdditionalInfo"))
+    AdditionalInfoResponse.add_member(:new_zealand_additional_info, Shapes::ShapeRef.new(shape: NewZealandAdditionalInfo, location_name: "newZealandAdditionalInfo"))
     AdditionalInfoResponse.struct_class = Types::AdditionalInfoResponse
 
     Address.add_member(:address_line_1, Shapes::ShapeRef.new(shape: AddressLine1, location_name: "addressLine1"))
@@ -382,6 +406,13 @@ module Aws::TaxSettings
     ChileAdditionalInfo.add_member(:document_type, Shapes::ShapeRef.new(shape: ChileDocumentType, location_name: "documentType"))
     ChileAdditionalInfo.add_member(:business_activity, Shapes::ShapeRef.new(shape: GenericString, location_name: "businessActivity"))
     ChileAdditionalInfo.struct_class = Types::ChileAdditionalInfo
+
+    ColombiaAdditionalInfo.add_member(:responsibility_codes, Shapes::ShapeRef.new(shape: ColombiaResponsabilidadesList, location_name: "responsibilityCodes"))
+    ColombiaAdditionalInfo.add_member(:taxpayer_type_code, Shapes::ShapeRef.new(shape: ColombiaTipoContribuyenteCode, location_name: "taxpayerTypeCode"))
+    ColombiaAdditionalInfo.add_member(:issue_date, Shapes::ShapeRef.new(shape: DateString, location_name: "issueDate"))
+    ColombiaAdditionalInfo.struct_class = Types::ColombiaAdditionalInfo
+
+    ColombiaResponsabilidadesList.member = Shapes::ShapeRef.new(shape: ColombiaResponsabilidadCode)
 
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, required: true, location_name: "message"))
     ConflictException.add_member(:error_code, Shapes::ShapeRef.new(shape: ErrorCode, required: true, location_name: "errorCode"))
@@ -519,6 +550,13 @@ module Aws::TaxSettings
     MonacoAdditionalInfo.add_member(:business_number, Shapes::ShapeRef.new(shape: BusinessNumber, required: true, location_name: "businessNumber"))
     MonacoAdditionalInfo.struct_class = Types::MonacoAdditionalInfo
 
+    NewZealandAdditionalInfo.add_member(:peppol_id, Shapes::ShapeRef.new(shape: NewZealandPeppolId, location_name: "peppolId"))
+    NewZealandAdditionalInfo.struct_class = Types::NewZealandAdditionalInfo
+
+    NorwayAdditionalInfo.add_member(:tax_registration_number_type, Shapes::ShapeRef.new(shape: NorwayTaxRegistrationNumberType, location_name: "taxRegistrationNumberType"))
+    NorwayAdditionalInfo.add_member(:peppol_id, Shapes::ShapeRef.new(shape: NorwayPeppolId, location_name: "peppolId"))
+    NorwayAdditionalInfo.struct_class = Types::NorwayAdditionalInfo
+
     PhilippinesAdditionalInfo.add_member(:is_vat_registered, Shapes::ShapeRef.new(shape: Boolean, location_name: "isVatRegistered"))
     PhilippinesAdditionalInfo.struct_class = Types::PhilippinesAdditionalInfo
 
@@ -639,6 +677,7 @@ module Aws::TaxSettings
     TaxRegistration.add_member(:tax_document_metadatas, Shapes::ShapeRef.new(shape: TaxDocumentMetadatas, location_name: "taxDocumentMetadatas"))
     TaxRegistration.add_member(:certified_email_id, Shapes::ShapeRef.new(shape: CertifiedEmailId, location_name: "certifiedEmailId"))
     TaxRegistration.add_member(:additional_tax_information, Shapes::ShapeRef.new(shape: AdditionalInfoResponse, location_name: "additionalTaxInformation"))
+    TaxRegistration.add_member(:status_reason, Shapes::ShapeRef.new(shape: TaxRegistrationStatusReason, location_name: "statusReason"))
     TaxRegistration.add_member(:legal_address, Shapes::ShapeRef.new(shape: Address, required: true, location_name: "legalAddress"))
     TaxRegistration.struct_class = Types::TaxRegistration
 
@@ -662,6 +701,10 @@ module Aws::TaxSettings
     TaxRegistrationEntry.add_member(:certified_email_id, Shapes::ShapeRef.new(shape: CertifiedEmailId, location_name: "certifiedEmailId"))
     TaxRegistrationEntry.struct_class = Types::TaxRegistrationEntry
 
+    TaxRegistrationStatusReason.add_member(:code, Shapes::ShapeRef.new(shape: StatusReasonCode, location_name: "code"))
+    TaxRegistrationStatusReason.add_member(:message, Shapes::ShapeRef.new(shape: StatusReasonMessage, location_name: "message"))
+    TaxRegistrationStatusReason.struct_class = Types::TaxRegistrationStatusReason
+
     TaxRegistrationWithJurisdiction.add_member(:registration_id, Shapes::ShapeRef.new(shape: RegistrationId, required: true, location_name: "registrationId"))
     TaxRegistrationWithJurisdiction.add_member(:registration_type, Shapes::ShapeRef.new(shape: TaxRegistrationType, required: true, location_name: "registrationType"))
     TaxRegistrationWithJurisdiction.add_member(:legal_name, Shapes::ShapeRef.new(shape: LegalName, required: true, location_name: "legalName"))
@@ -670,6 +713,7 @@ module Aws::TaxSettings
     TaxRegistrationWithJurisdiction.add_member(:tax_document_metadatas, Shapes::ShapeRef.new(shape: TaxDocumentMetadatas, location_name: "taxDocumentMetadatas"))
     TaxRegistrationWithJurisdiction.add_member(:certified_email_id, Shapes::ShapeRef.new(shape: CertifiedEmailId, location_name: "certifiedEmailId"))
     TaxRegistrationWithJurisdiction.add_member(:additional_tax_information, Shapes::ShapeRef.new(shape: AdditionalInfoResponse, location_name: "additionalTaxInformation"))
+    TaxRegistrationWithJurisdiction.add_member(:status_reason, Shapes::ShapeRef.new(shape: TaxRegistrationStatusReason, location_name: "statusReason"))
     TaxRegistrationWithJurisdiction.add_member(:jurisdiction, Shapes::ShapeRef.new(shape: Jurisdiction, required: true, location_name: "jurisdiction"))
     TaxRegistrationWithJurisdiction.struct_class = Types::TaxRegistrationWithJurisdiction
 
@@ -681,6 +725,12 @@ module Aws::TaxSettings
 
     UkraineAdditionalInfo.add_member(:ukraine_trn_type, Shapes::ShapeRef.new(shape: UkraineTrnType, required: true, location_name: "ukraineTrnType"))
     UkraineAdditionalInfo.struct_class = Types::UkraineAdditionalInfo
+
+    UnitedArabEmiratesAdditionalInfo.add_member(:tax_registration_number_type, Shapes::ShapeRef.new(shape: UaeTaxRegistrationNumberType, location_name: "taxRegistrationNumberType"))
+    UnitedArabEmiratesAdditionalInfo.add_member(:peppol_id, Shapes::ShapeRef.new(shape: UaePeppolId, location_name: "peppolId"))
+    UnitedArabEmiratesAdditionalInfo.add_member(:trade_license_number, Shapes::ShapeRef.new(shape: UaeTradeLicenseNumber, location_name: "tradeLicenseNumber"))
+    UnitedArabEmiratesAdditionalInfo.add_member(:emirates_id, Shapes::ShapeRef.new(shape: UaeEmiratesId, location_name: "emiratesId"))
+    UnitedArabEmiratesAdditionalInfo.struct_class = Types::UnitedArabEmiratesAdditionalInfo
 
     UzbekistanAdditionalInfo.add_member(:tax_registration_number_type, Shapes::ShapeRef.new(shape: UzbekistanTaxRegistrationNumberType, location_name: "taxRegistrationNumberType"))
     UzbekistanAdditionalInfo.add_member(:vat_registration_number, Shapes::ShapeRef.new(shape: VatRegistrationNumber, location_name: "vatRegistrationNumber"))
@@ -704,6 +754,7 @@ module Aws::TaxSettings
     VietnamAdditionalInfo.add_member(:electronic_transaction_code_number, Shapes::ShapeRef.new(shape: ElectronicTransactionCodeNumber, location_name: "electronicTransactionCodeNumber"))
     VietnamAdditionalInfo.add_member(:payment_voucher_number, Shapes::ShapeRef.new(shape: PaymentVoucherNumber, location_name: "paymentVoucherNumber"))
     VietnamAdditionalInfo.add_member(:payment_voucher_number_date, Shapes::ShapeRef.new(shape: DateString, location_name: "paymentVoucherNumberDate"))
+    VietnamAdditionalInfo.add_member(:vat_credit_method, Shapes::ShapeRef.new(shape: Boolean, location_name: "vatCreditMethod"))
     VietnamAdditionalInfo.struct_class = Types::VietnamAdditionalInfo
 
 

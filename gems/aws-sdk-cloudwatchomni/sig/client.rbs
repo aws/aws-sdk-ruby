@@ -583,6 +583,23 @@ module Aws
                                                   ) -> _GetSpaceCredentialsForOrganizationResponseSuccess
                                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSpaceCredentialsForOrganizationResponseSuccess
 
+      interface _GetSpaceDataAccessResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetSpaceDataAccessOutput]
+        def credentials: () -> Types::AwsCredentials
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchOmni/Client.html#get_space_data_access-instance_method
+      def get_space_data_access: (
+                                   space_id: ::String,
+                                   target_scopes: Array[
+                                     {
+                                       actions: Array[::String]
+                                     }
+                                   ],
+                                   ?duration_seconds: ::Integer,
+                                   ?audit_context: Hash[::String, ::String]
+                                 ) -> _GetSpaceDataAccessResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSpaceDataAccessResponseSuccess
+
       interface _GetTelemetryQueryResultsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetTelemetryQueryResultsResponse]
         def status: () -> ("Running" | "Failed" | "Complete" | "Cancelled")

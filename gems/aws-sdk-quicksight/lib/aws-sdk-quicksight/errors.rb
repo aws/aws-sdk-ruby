@@ -50,6 +50,7 @@ module Aws::QuickSight
   # * {ThrottlingException}
   # * {UnsupportedPricingPlanException}
   # * {UnsupportedUserEditionException}
+  # * {ValidationException}
   #
   # Additionally, error classes are dynamically generated for service errors based on the error code
   # if they are not defined above.
@@ -529,6 +530,31 @@ module Aws::QuickSight
       # @return [String]
       def request_id
         @data[:request_id]
+      end
+    end
+
+    class ValidationException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::QuickSight::Types::ValidationException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+
+      # @return [String]
+      def request_id
+        @data[:request_id]
+      end
+
+      # @return [String]
+      def field_list
+        @data[:field_list]
       end
     end
 

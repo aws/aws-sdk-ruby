@@ -17,5 +17,23 @@
       "useDualstack" : false,
       "useAccountIdRouting" : true
     }
+  }, {
+    "id" : "GetRequestAuthorizationPolicyInvalidId",
+    "operationName" : "GetRequestAuthorizationPolicy",
+    "input" : {
+      "authorizationId" : "aaaaaaaaaaaaaaaaaaaa",
+      "policyUri" : "inline:0000000000000000"
+    },
+    "expectation" : {
+      "failure" : {
+        "errorId" : "ValidationException"
+      }
+    },
+    "config" : {
+      "region" : "us-east-1",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
   } ]
 }

@@ -1,0 +1,52 @@
+{
+  "version" : 2,
+  "testCases" : [ {
+    "id" : "SearchPublicRecordsSuccess",
+    "operationName" : "SearchPublicRecords",
+    "input" : {
+      "searchQuery" : "agent",
+      "maxResults" : 1
+    },
+    "expectation" : {
+      "success" : { }
+    },
+    "config" : {
+      "region" : "us-east-1",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
+    "id" : "SearchPublicRecordsSuccessEuWest1",
+    "operationName" : "SearchPublicRecords",
+    "input" : {
+      "searchQuery" : "agent",
+      "maxResults" : 1
+    },
+    "expectation" : {
+      "success" : { }
+    },
+    "config" : {
+      "region" : "eu-west-1",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
+    "id" : "SearchPublicRecordsSuccessApNortheast1",
+    "operationName" : "SearchPublicRecords",
+    "input" : {
+      "searchQuery" : "agent",
+      "maxResults" : 1
+    },
+    "expectation" : {
+      "success" : { }
+    },
+    "config" : {
+      "region" : "ap-northeast-1",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  } ]
+}

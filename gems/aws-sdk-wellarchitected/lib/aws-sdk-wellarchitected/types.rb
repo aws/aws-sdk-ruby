@@ -136,21 +136,26 @@ module Aws::WellArchitected
     #   @return [String]
     #
     # @!attribute [rw] pillars
-    #   The Well-Architected Tool Framework pillars associated with this
-    #   profile.
+    #   The Amazon Web Services Well-Architected Framework pillars
+    #   associated with this profile. Not present for basic profiles.
     #   @return [Array<String>]
     #
     # @!attribute [rw] deletion_protection
     #   Indicates whether deletion protection is enabled for the profile.
     #   @return [Boolean]
     #
+    # @!attribute [rw] profile_type
+    #   The type of the profile.
+    #   @return [String]
+    #
     # @!attribute [rw] execution_role_arn
     #   The ARN of the IAM execution role used for recommendation actions.
+    #   Not present for basic profiles.
     #   @return [String]
     #
     # @!attribute [rw] aggregation_configuration
     #   The aggregation configuration that defines which Amazon Web Services
-    #   accounts and Regions to analyze.
+    #   accounts and Regions to analyze. Not present for basic profiles.
     #   @return [Array<Types::AggregationConfiguration>]
     #
     # @!attribute [rw] arn
@@ -172,10 +177,6 @@ module Aws::WellArchitected
     #   fields.
     #   @return [Hash<String,String>]
     #
-    # @!attribute [rw] tags
-    #   The tags associated with the profile.
-    #   @return [Array<Types::Tag>]
-    #
     # @!attribute [rw] created_by
     #   The identifier of the user or system that created this profile.
     #   @return [String]
@@ -193,6 +194,11 @@ module Aws::WellArchitected
     #   The timestamp when the profile was last modified.
     #   @return [Time]
     #
+    # @!attribute [rw] organizational_aggregation_configuration
+    #   The organizational monitoring boundary. Present only for
+    #   organizational profiles.
+    #   @return [Types::OrganizationalAggregationConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/AgentProfileSummary AWS API Documentation
     #
     class AgentProfileSummary < Struct.new(
@@ -202,17 +208,18 @@ module Aws::WellArchitected
       :business_overview,
       :pillars,
       :deletion_protection,
+      :profile_type,
       :execution_role_arn,
       :aggregation_configuration,
       :arn,
       :eligible_for_scheduled_generation,
       :eligible_for_architecture_generation,
       :field_errors,
-      :tags,
       :created_by,
       :created_at,
       :last_modified_by,
-      :last_modified_at)
+      :last_modified_at,
+      :organizational_aggregation_configuration)
       SENSITIVE = [:display_name, :description, :business_overview]
       include Aws::Structure
     end
@@ -258,6 +265,26 @@ module Aws::WellArchitected
     #   The timestamp when the generation was last modified.
     #   @return [Time]
     #
+    # @!attribute [rw] generation_type
+    #   How the generation was started.
+    #   @return [String]
+    #
+    # @!attribute [rw] generation_recommendation_types
+    #   The recommendation types the generation covers.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] started_at
+    #   The timestamp when the recommendation generation process started.
+    #   @return [Time]
+    #
+    # @!attribute [rw] ended_at
+    #   The timestamp when the recommendation generation process completed.
+    #   @return [Time]
+    #
+    # @!attribute [rw] error_details
+    #   Details about the error if the generation status is ERROR.
+    #   @return [Types::ErrorDetails]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/AgentRecommendationGenerationSummary AWS API Documentation
     #
     class AgentRecommendationGenerationSummary < Struct.new(
@@ -269,7 +296,12 @@ module Aws::WellArchitected
       :created_by,
       :created_at,
       :last_modified_by,
-      :last_modified_at)
+      :last_modified_at,
+      :generation_type,
+      :generation_recommendation_types,
+      :started_at,
+      :ended_at,
+      :error_details)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -313,6 +345,12 @@ module Aws::WellArchitected
     #   The timestamp when the recommendation item was last modified.
     #   @return [Time]
     #
+    # @!attribute [rw] auto_remediation
+    #   The optional per-resource auto-remediation for this affected
+    #   resource, representing an SSM runbook execution. Present only when
+    #   the item's check is backed by an SSM automation runbook.
+    #   @return [Types::AutoRemediation]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/AgentRecommendationItemSummary AWS API Documentation
     #
     class AgentRecommendationItemSummary < Struct.new(
@@ -323,7 +361,8 @@ module Aws::WellArchitected
       :created_by,
       :created_at,
       :last_modified_by,
-      :last_modified_at)
+      :last_modified_at,
+      :auto_remediation)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -390,8 +429,7 @@ module Aws::WellArchitected
     #   @return [String]
     #
     # @!attribute [rw] generation_id
-    #   The identifier of the generation process that produced this
-    #   recommendation.
+    #   The identifier of the generation that produced this recommendation.
     #   @return [String]
     #
     # @!attribute [rw] title
@@ -407,8 +445,8 @@ module Aws::WellArchitected
     #   @return [String]
     #
     # @!attribute [rw] pillar
-    #   The Well-Architected Tool Framework pillar that the recommendation
-    #   addresses.
+    #   The Amazon Web Services Well-Architected Framework pillar that the
+    #   recommendation addresses.
     #   @return [String]
     #
     # @!attribute [rw] priority
@@ -739,6 +777,30 @@ module Aws::WellArchitected
     class AssociateProfilesInput < Struct.new(
       :workload_id,
       :profile_arns)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The per-resource auto-remediation for a single affected resource.
+    # Represents one AWS Systems Manager (SSM) runbook execution that
+    # targets the resource. Present only when the resource's check is
+    # backed by an SSM automation runbook.
+    #
+    # @!attribute [rw] deep_link
+    #   A deep link to the SSM runbook execution page in the AWS Management
+    #   Console for this resource, with the execution parameters prefilled.
+    #   @return [String]
+    #
+    # @!attribute [rw] cli_command
+    #   The AWS CLI command that triggers the same SSM runbook execution for
+    #   this resource. You can copy and run this command as-is.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/AutoRemediation AWS API Documentation
+    #
+    class AutoRemediation < Struct.new(
+      :deep_link,
+      :cli_command)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1189,6 +1251,12 @@ module Aws::WellArchitected
     #   Resource tags used to scope this application context.
     #   @return [Array<Types::ContextResourceTag>]
     #
+    # @!attribute [rw] organizational_unit_ids
+    #   The AWS Organizations organizational unit (OU) IDs associated with
+    #   this application context. Valid only for organizational profiles;
+    #   rejected for standard profiles.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] application_overview
     #   A free-form overview of the application.
     #   @return [String]
@@ -1221,6 +1289,7 @@ module Aws::WellArchitected
       :aws_services,
       :resource_types,
       :resource_tags,
+      :organizational_unit_ids,
       :application_overview,
       :industry,
       :application_type,
@@ -1320,6 +1389,127 @@ module Aws::WellArchitected
       include Aws::Structure
     end
 
+    # Counts describing the coverage of a completed Organizational Report.
+    # Includes the number of accounts in scope, how many had a profile, how
+    # many failed, and aggregated recommendation counts by pillar and
+    # priority. Returned only by GetAgentOrganizationalReport after the
+    # report reaches COMPLETED status. Not returned on the list response.
+    #
+    # @!attribute [rw] total_accounts_in_scope
+    #   Total number of accounts that were in scope for the report after
+    #   applying all filters and AWS Organizations membership validation.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] accounts_with_profile
+    #   Number of in-scope accounts that had an Agent Profile and were
+    #   successfully processed.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] accounts_without_profile
+    #   Number of in-scope accounts that had no Agent Profile at the time of
+    #   the snapshot.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] failed_account_count
+    #   Number of in-scope accounts that errored during processing. Equal to
+    #   the length of failedAccounts.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] total_profiles
+    #   Total number of Agent Profiles contributing to the report.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] total_recommendations
+    #   Total number of recommendations included in the report across all
+    #   profiles and all pillars.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] recommendation_count_by_pillar
+    #   Recommendation count grouped by Well-Architected pillar. Each entry
+    #   pairs a Pillar enum value with a non-negative long. The counts sum
+    #   to totalRecommendations.
+    #   @return [Array<Types::PillarCount>]
+    #
+    # @!attribute [rw] recommendation_count_by_priority
+    #   Recommendation count grouped by Priority. Each entry pairs a
+    #   Priority enum value with a non-negative long. The counts sum to
+    #   totalRecommendations.
+    #   @return [Array<Types::PriorityCount>]
+    #
+    # @!attribute [rw] failed_accounts
+    #   Accounts that errored during processing and the reason they failed.
+    #   @return [Array<Types::FailedAccount>]
+    #
+    # @!attribute [rw] failed_organizational_units
+    #   Organizational units named in the report's filters that could not
+    #   be expanded into their member accounts, along with the reason each
+    #   failed. A failed OU means the report is missing whatever accounts it
+    #   contained. Absent or empty when every requested OU expanded
+    #   successfully.
+    #   @return [Array<Types::FailedOrganizationalUnit>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/CoverageSummary AWS API Documentation
+    #
+    class CoverageSummary < Struct.new(
+      :total_accounts_in_scope,
+      :accounts_with_profile,
+      :accounts_without_profile,
+      :failed_account_count,
+      :total_profiles,
+      :total_recommendations,
+      :recommendation_count_by_pillar,
+      :recommendation_count_by_priority,
+      :failed_accounts,
+      :failed_organizational_units)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tags
+    #   Tags to apply to the Basic profile at creation time.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/CreateAgentBasicProfileRequest AWS API Documentation
+    #
+    class CreateAgentBasicProfileRequest < Struct.new(
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] created_by
+    #   The identifier of the user or system that created this resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp when the resource was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_by
+    #   The identifier of the user or system that last modified this
+    #   resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified_at
+    #   The timestamp when the resource was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the created Basic profile.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/CreateAgentBasicProfileResponse AWS API Documentation
+    #
+    class CreateAgentBasicProfileResponse < Struct.new(
+      :created_by,
+      :created_at,
+      :last_modified_by,
+      :last_modified_at,
+      :arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request.
@@ -1385,8 +1575,8 @@ module Aws::WellArchitected
     #   @return [String]
     #
     # @!attribute [rw] pillars
-    #   The Well-Architected Tool Framework pillars to associate with this
-    #   goal.
+    #   The Amazon Web Services Well-Architected Framework pillars to
+    #   associate with this goal.
     #   @return [Array<String>]
     #
     # @!attribute [rw] title
@@ -1422,6 +1612,216 @@ module Aws::WellArchitected
     end
 
     # @!attribute [rw] name
+    #   The system name of the organizational profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] display_name
+    #   The display name of the organizational profile shown to users.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the organizational profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] business_overview
+    #   The business overview for this organizational profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] pillars
+    #   The Amazon Web Services Well-Architected Framework pillars to
+    #   associate with this organizational profile.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] deletion_protection
+    #   Indicates whether deletion protection is enabled for the
+    #   organizational profile.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] organizational_aggregation_configuration
+    #   The organizational monitoring boundary. Contains organizational unit
+    #   or root entries and individual account entries that define the scope
+    #   for the profile.
+    #   @return [Types::OrganizationalAggregationConfiguration]
+    #
+    # @!attribute [rw] tags
+    #   The tags to associate with the organizational profile.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/CreateAgentOrganizationalProfileRequest AWS API Documentation
+    #
+    class CreateAgentOrganizationalProfileRequest < Struct.new(
+      :name,
+      :display_name,
+      :description,
+      :business_overview,
+      :pillars,
+      :deletion_protection,
+      :client_token,
+      :organizational_aggregation_configuration,
+      :tags)
+      SENSITIVE = [:display_name, :description, :business_overview]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
+    #   The system name of the created organizational profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] display_name
+    #   The display name of the created organizational profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the created organizational profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] business_overview
+    #   The business overview of the created organizational profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] pillars
+    #   The Amazon Web Services Well-Architected Framework pillars
+    #   associated with the created organizational profile.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] deletion_protection
+    #   Indicates whether deletion protection is enabled.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] organization_id
+    #   The identifier of the Amazon Web Services Organization this profile
+    #   belongs to.
+    #   @return [String]
+    #
+    # @!attribute [rw] organizational_aggregation_configuration
+    #   The organizational monitoring boundary for the created profile.
+    #   Present only for organizational profiles.
+    #   @return [Types::OrganizationalAggregationConfiguration]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the created organizational
+    #   profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] eligible_for_scheduled_generation
+    #   Indicates whether the profile is valid for scheduled recommendation
+    #   generation.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] eligible_for_architecture_generation
+    #   Indicates whether the profile is valid for manual architecture
+    #   generation.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] field_errors
+    #   A map of field paths to error messages for invalid or missing input
+    #   fields.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] tags
+    #   The tags associated with the created organizational profile.
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] created_by
+    #   The identifier of the user or system that created this
+    #   organizational profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp when the organizational profile was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_by
+    #   The identifier of the user or system that last modified this
+    #   organizational profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified_at
+    #   The timestamp when the organizational profile was last modified.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/CreateAgentOrganizationalProfileResponse AWS API Documentation
+    #
+    class CreateAgentOrganizationalProfileResponse < Struct.new(
+      :name,
+      :display_name,
+      :description,
+      :business_overview,
+      :pillars,
+      :deletion_protection,
+      :organization_id,
+      :organizational_aggregation_configuration,
+      :arn,
+      :eligible_for_scheduled_generation,
+      :eligible_for_architecture_generation,
+      :field_errors,
+      :tags,
+      :created_by,
+      :created_at,
+      :last_modified_by,
+      :last_modified_at)
+      SENSITIVE = [:display_name, :description, :business_overview]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] client_token
+    #   A caller-supplied idempotency token. Two create calls sharing the
+    #   same token within the service's idempotency window return the same
+    #   reportId.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] label
+    #   Optional human-readable label (1-500 characters) that helps callers
+    #   distinguish reports created with the same filters. Carried through
+    #   list and get responses.
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   Optional filters narrowing the report's scope. Absent means the
+    #   report covers the whole organization.
+    #   @return [Types::OrganizationalReportFilters]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/CreateAgentOrganizationalReportRequest AWS API Documentation
+    #
+    class CreateAgentOrganizationalReportRequest < Struct.new(
+      :client_token,
+      :label,
+      :filters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] report_id
+    #   Unique identifier assigned to the newly-created report.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   Lifecycle state of the report at the moment the create call
+    #   returned. For a freshly-created report this is typically
+    #   DISCOVERING.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/CreateAgentOrganizationalReportResponse AWS API Documentation
+    #
+    class CreateAgentOrganizationalReportResponse < Struct.new(
+      :report_id,
+      :state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
     #   The system name of the profile.
     #   @return [String]
     #
@@ -1438,8 +1838,8 @@ module Aws::WellArchitected
     #   @return [String]
     #
     # @!attribute [rw] pillars
-    #   The Well-Architected Tool Framework pillars to associate with this
-    #   profile.
+    #   The Amazon Web Services Well-Architected Framework pillars to
+    #   associate with this profile.
     #   @return [Array<String>]
     #
     # @!attribute [rw] deletion_protection
@@ -1501,8 +1901,8 @@ module Aws::WellArchitected
     #   @return [String]
     #
     # @!attribute [rw] pillars
-    #   The Well-Architected Tool Framework pillars associated with the
-    #   created profile.
+    #   The Amazon Web Services Well-Architected Framework pillars
+    #   associated with the created profile.
     #   @return [Array<String>]
     #
     # @!attribute [rw] deletion_protection
@@ -2370,6 +2770,38 @@ module Aws::WellArchitected
     #
     class DeleteAgentGoalResponse < Aws::EmptyStructure; end
 
+    # @!attribute [rw] report_id
+    #   Identifier of the report to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/DeleteAgentOrganizationalReportRequest AWS API Documentation
+    #
+    class DeleteAgentOrganizationalReportRequest < Struct.new(
+      :report_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/DeleteAgentOrganizationalReportResponse AWS API Documentation
+    #
+    class DeleteAgentOrganizationalReportResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] profile_arn
+    #   The ARN of the Agent Profile whose policy to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/DeleteAgentProfilePolicyRequest AWS API Documentation
+    #
+    class DeleteAgentProfilePolicyRequest < Struct.new(
+      :profile_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/DeleteAgentProfilePolicyResponse AWS API Documentation
+    #
+    class DeleteAgentProfilePolicyResponse < Aws::EmptyStructure; end
+
     # @!attribute [rw] profile_arn
     #   The Amazon Resource Name (ARN) of the profile to delete.
     #   @return [String]
@@ -2385,6 +2817,22 @@ module Aws::WellArchitected
     # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/DeleteAgentProfileResponse AWS API Documentation
     #
     class DeleteAgentProfileResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] recommendation_arn
+    #   The ARN of the Agent Recommendation whose policy to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/DeleteAgentRecommendationPolicyRequest AWS API Documentation
+    #
+    class DeleteAgentRecommendationPolicyRequest < Struct.new(
+      :recommendation_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/DeleteAgentRecommendationPolicyResponse AWS API Documentation
+    #
+    class DeleteAgentRecommendationPolicyResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] lens_alias
     #   The alias of the lens.
@@ -2787,6 +3235,49 @@ module Aws::WellArchitected
       include Aws::Structure
     end
 
+    # An account that was in scope for an Organizational Report but could
+    # not be processed, along with the reason for the failure.
+    #
+    # @!attribute [rw] account_id
+    #   The AWS account ID that failed.
+    #   @return [String]
+    #
+    # @!attribute [rw] reason
+    #   A human-readable explanation of why the account could not be
+    #   processed.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/FailedAccount AWS API Documentation
+    #
+    class FailedAccount < Struct.new(
+      :account_id,
+      :reason)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An organizational unit that was requested in an Organizational
+    # Report's filters but could not be expanded into its member accounts.
+    # A failed OU means the report is missing the accounts it contained.
+    #
+    # @!attribute [rw] organizational_unit_id
+    #   The AWS Organizations OU ID that could not be expanded.
+    #   @return [String]
+    #
+    # @!attribute [rw] reason
+    #   A human-readable explanation of why the organizational unit could
+    #   not be expanded.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/FailedOrganizationalUnit AWS API Documentation
+    #
+    class FailedOrganizationalUnit < Struct.new(
+      :organizational_unit_id,
+      :reason)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] profile_arn
     #   The Amazon Resource Name (ARN) of the profile containing the
     #   context.
@@ -2846,6 +3337,154 @@ module Aws::WellArchitected
       include Aws::Structure
     end
 
+    # @!attribute [rw] report_id
+    #   Identifier of the report whose data is being retrieved.
+    #   @return [String]
+    #
+    # @!attribute [rw] format
+    #   Format of the returned artifact (CSV, JSON, or PARQUET).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/GetAgentOrganizationalReportDataRequest AWS API Documentation
+    #
+    class GetAgentOrganizationalReportDataRequest < Struct.new(
+      :report_id,
+      :format)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] download_url
+    #   Presigned URL that can be used to download the artifact.
+    #   @return [String]
+    #
+    # @!attribute [rw] expires_at
+    #   Expiration time of downloadUrl.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/GetAgentOrganizationalReportDataResponse AWS API Documentation
+    #
+    class GetAgentOrganizationalReportDataResponse < Struct.new(
+      :download_url,
+      :expires_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] report_id
+    #   Identifier of the report to retrieve.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/GetAgentOrganizationalReportRequest AWS API Documentation
+    #
+    class GetAgentOrganizationalReportRequest < Struct.new(
+      :report_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] report_id
+    #   Unique identifier of the Organizational Report assigned by the
+    #   service at creation time.
+    #   @return [String]
+    #
+    # @!attribute [rw] owner_account_id
+    #   AWS account ID of the caller that created the report. Only this
+    #   account or a delegated administrator of the same organization may
+    #   retrieve or delete the report.
+    #   @return [String]
+    #
+    # @!attribute [rw] organization_id
+    #   Identifier of the AWS Organization the report belongs to. Derived
+    #   from the caller's authorization context at creation time and not
+    #   accepted as a client-supplied input.
+    #   @return [String]
+    #
+    # @!attribute [rw] label
+    #   Optional human-readable label supplied by the caller at creation
+    #   time.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   Current lifecycle state of the report.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   Timestamp at which the report was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] filters
+    #   Filters captured when the report was created. Absent when no filters
+    #   were supplied (meaning the report covered the whole organization).
+    #   @return [Types::OrganizationalReportFilters]
+    #
+    # @!attribute [rw] coverage_summary
+    #   Coverage and aggregate counts for the report. Present only after the
+    #   report reaches COMPLETED.
+    #   @return [Types::CoverageSummary]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/GetAgentOrganizationalReportResponse AWS API Documentation
+    #
+    class GetAgentOrganizationalReportResponse < Struct.new(
+      :report_id,
+      :owner_account_id,
+      :organization_id,
+      :label,
+      :state,
+      :created_at,
+      :filters,
+      :coverage_summary)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/GetAgentPreferencesRequest AWS API Documentation
+    #
+    class GetAgentPreferencesRequest < Aws::EmptyStructure; end
+
+    # @!attribute [rw] preferences
+    #   The caller's complete set of preferences.
+    #   @return [Array<Types::PreferenceEntry>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/GetAgentPreferencesResponse AWS API Documentation
+    #
+    class GetAgentPreferencesResponse < Struct.new(
+      :preferences)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] profile_arn
+    #   The ARN of the Agent Profile whose policy to retrieve.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/GetAgentProfilePolicyRequest AWS API Documentation
+    #
+    class GetAgentProfilePolicyRequest < Struct.new(
+      :profile_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] profile_arn
+    #   The ARN of the Agent Profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy
+    #   The IAM resource-based policy document in JSON format.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/GetAgentProfilePolicyResponse AWS API Documentation
+    #
+    class GetAgentProfilePolicyResponse < Struct.new(
+      :profile_arn,
+      :policy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] profile_arn
     #   The Amazon Resource Name (ARN) of the optimization profile to
     #   retrieve.
@@ -2876,20 +3515,24 @@ module Aws::WellArchitected
     #   @return [String]
     #
     # @!attribute [rw] pillars
-    #   The Well-Architected Tool Framework pillars associated with the
-    #   profile.
+    #   The Amazon Web Services Well-Architected Framework pillars
+    #   associated with the profile. Not present for basic profiles.
     #   @return [Array<String>]
     #
     # @!attribute [rw] deletion_protection
     #   Indicates whether deletion protection is enabled.
     #   @return [Boolean]
     #
+    # @!attribute [rw] profile_type
+    #   The type of the profile.
+    #   @return [String]
+    #
     # @!attribute [rw] execution_role_arn
-    #   The ARN of the IAM execution role.
+    #   The ARN of the IAM execution role. Not present for basic profiles.
     #   @return [String]
     #
     # @!attribute [rw] aggregation_configuration
-    #   The aggregation configuration.
+    #   The aggregation configuration. Not present for basic profiles.
     #   @return [Array<Types::AggregationConfiguration>]
     #
     # @!attribute [rw] arn
@@ -2932,6 +3575,11 @@ module Aws::WellArchitected
     #   The timestamp when the profile was last modified.
     #   @return [Time]
     #
+    # @!attribute [rw] organizational_aggregation_configuration
+    #   The organizational monitoring boundary. Present only for
+    #   organizational profiles.
+    #   @return [Types::OrganizationalAggregationConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/GetAgentProfileResponse AWS API Documentation
     #
     class GetAgentProfileResponse < Struct.new(
@@ -2941,6 +3589,7 @@ module Aws::WellArchitected
       :business_overview,
       :pillars,
       :deletion_protection,
+      :profile_type,
       :execution_role_arn,
       :aggregation_configuration,
       :arn,
@@ -2951,7 +3600,8 @@ module Aws::WellArchitected
       :created_by,
       :created_at,
       :last_modified_by,
-      :last_modified_at)
+      :last_modified_at,
+      :organizational_aggregation_configuration)
       SENSITIVE = [:display_name, :description, :business_overview]
       include Aws::Structure
     end
@@ -3011,15 +3661,13 @@ module Aws::WellArchitected
     #   The timestamp when the generation was last modified.
     #   @return [Time]
     #
-    # @!attribute [rw] additional_context
-    #   Additional context information provided to guide the recommendation
-    #   generation process.
-    #   @return [Hash,Array,String,Numeric,Boolean]
+    # @!attribute [rw] generation_type
+    #   How the generation was started.
+    #   @return [String]
     #
-    # @!attribute [rw] scope
-    #   The scope configuration that defines which pillars and goals to
-    #   focus on during generation.
-    #   @return [Types::Scope]
+    # @!attribute [rw] generation_recommendation_types
+    #   The recommendation types the generation covers.
+    #   @return [Array<String>]
     #
     # @!attribute [rw] started_at
     #   The timestamp when the recommendation generation process started.
@@ -3029,14 +3677,25 @@ module Aws::WellArchitected
     #   The timestamp when the recommendation generation process completed.
     #   @return [Time]
     #
+    # @!attribute [rw] error_details
+    #   Details about the error if the generation status is ERROR.
+    #   @return [Types::ErrorDetails]
+    #
+    # @!attribute [rw] additional_context
+    #   The additional context that was provided when the generation was
+    #   started. For `ARCHITECTURE` generations, this includes the location
+    #   of the reviewed IaC template and the lenses used.
+    #   @return [Hash,Array,String,Numeric,Boolean]
+    #
+    # @!attribute [rw] scope
+    #   The scope configuration that defines which pillars and goals to
+    #   focus on during generation.
+    #   @return [Types::Scope]
+    #
     # @!attribute [rw] progress
     #   Current progress information including steps completed and
     #   completion percentage.
     #   @return [Types::Progress]
-    #
-    # @!attribute [rw] error_details
-    #   Details about the error if the generation status is ERROR.
-    #   @return [Types::ErrorDetails]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/GetAgentRecommendationGenerationResponse AWS API Documentation
     #
@@ -3050,12 +3709,43 @@ module Aws::WellArchitected
       :created_at,
       :last_modified_by,
       :last_modified_at,
-      :additional_context,
-      :scope,
+      :generation_type,
+      :generation_recommendation_types,
       :started_at,
       :ended_at,
-      :progress,
-      :error_details)
+      :error_details,
+      :additional_context,
+      :scope,
+      :progress)
+      SENSITIVE = [:additional_context]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] recommendation_arn
+    #   The ARN of the Agent Recommendation whose policy to retrieve.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/GetAgentRecommendationPolicyRequest AWS API Documentation
+    #
+    class GetAgentRecommendationPolicyRequest < Struct.new(
+      :recommendation_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] recommendation_arn
+    #   The ARN of the Agent Recommendation.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy
+    #   The IAM resource-based policy document in JSON format.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/GetAgentRecommendationPolicyResponse AWS API Documentation
+    #
+    class GetAgentRecommendationPolicyResponse < Struct.new(
+      :recommendation_arn,
+      :policy)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3086,8 +3776,7 @@ module Aws::WellArchitected
     #   @return [String]
     #
     # @!attribute [rw] generation_id
-    #   The identifier of the generation process that produced this
-    #   recommendation.
+    #   The identifier of the generation that produced this recommendation.
     #   @return [String]
     #
     # @!attribute [rw] title
@@ -3103,8 +3792,8 @@ module Aws::WellArchitected
     #   @return [String]
     #
     # @!attribute [rw] pillar
-    #   The Well-Architected Tool Framework pillar that the recommendation
-    #   addresses.
+    #   The Amazon Web Services Well-Architected Framework pillar that the
+    #   recommendation addresses.
     #   @return [String]
     #
     # @!attribute [rw] priority
@@ -3938,8 +4627,8 @@ module Aws::WellArchitected
     #   @return [String]
     #
     # @!attribute [rw] pillars
-    #   The Well-Architected Tool Framework pillars associated with this
-    #   goal.
+    #   The Amazon Web Services Well-Architected Framework pillars
+    #   associated with this goal.
     #   @return [Array<String>]
     #
     # @!attribute [rw] title
@@ -4609,11 +5298,13 @@ module Aws::WellArchitected
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results to return for this request.
+    #   The maximum number of contexts to return in a single call. Default
+    #   is 100.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   The token to use to retrieve the next set of results.
+    #   A pagination token returned from a previous call to continue
+    #   retrieving results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/ListAgentContextsRequest AWS API Documentation
@@ -4631,7 +5322,8 @@ module Aws::WellArchitected
     #   @return [Array<Types::ContextSummary>]
     #
     # @!attribute [rw] next_token
-    #   The token to use to retrieve the next set of results.
+    #   A pagination token to retrieve the next set of results, if
+    #   available.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/ListAgentContextsResponse AWS API Documentation
@@ -4679,6 +5371,48 @@ module Aws::WellArchitected
     # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/ListAgentGoalsResponse AWS API Documentation
     #
     class ListAgentGoalsResponse < Struct.new(
+      :items,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] max_results
+    #   Maximum number of items to return in a single page. Defaults to 100.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   Pagination token from a previous ListAgentOrganizationalReports
+    #   response. Absent on the first page.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   Optional filter restricting the response to reports in a single
+    #   lifecycle state.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/ListAgentOrganizationalReportsRequest AWS API Documentation
+    #
+    class ListAgentOrganizationalReportsRequest < Struct.new(
+      :max_results,
+      :next_token,
+      :state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] items
+    #   Page of report summaries, most-recently-created first.
+    #   @return [Array<Types::OrganizationalReportSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   Pagination token to supply on the next request, or absent when there
+    #   are no more pages.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/ListAgentOrganizationalReportsResponse AWS API Documentation
+    #
+    class ListAgentOrganizationalReportsResponse < Struct.new(
       :items,
       :next_token)
       SENSITIVE = []
@@ -6092,6 +6826,209 @@ module Aws::WellArchitected
       include Aws::Structure
     end
 
+    # An individual account entry in the organizational monitoring boundary,
+    # with its associated regions.
+    #
+    # @!attribute [rw] account_id
+    #   The Amazon Web Services account ID to include in the monitoring
+    #   boundary.
+    #   @return [String]
+    #
+    # @!attribute [rw] regions
+    #   The list of regions to monitor for this account.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/OrganizationalAccountEntry AWS API Documentation
+    #
+    class OrganizationalAccountEntry < Struct.new(
+      :account_id,
+      :regions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The organizational monitoring boundary configuration. Contains
+    # organizational unit entries and individual account entries, each with
+    # their own region selections, that define the scope for organizational
+    # profile analysis.
+    #
+    # @!attribute [rw] organizational_units
+    #   A list of organizational unit or root entries that define the
+    #   organizational scope. Each entry specifies an OU or root ID and the
+    #   regions to monitor within it.
+    #   @return [Array<Types::OrganizationalUnitEntry>]
+    #
+    # @!attribute [rw] accounts
+    #   A list of individual account entries that define additional accounts
+    #   to include. Each entry specifies an account ID and the regions to
+    #   monitor within it.
+    #   @return [Array<Types::OrganizationalAccountEntry>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/OrganizationalAggregationConfiguration AWS API Documentation
+    #
+    class OrganizationalAggregationConfiguration < Struct.new(
+      :organizational_units,
+      :accounts)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Filters narrowing the scope of an Organizational Report. Every member
+    # is optional. An absent or empty member places no constraint on that
+    # dimension. When the entire structure is absent, the report covers
+    # every account and every recommendation in the organization.
+    #
+    # @!attribute [rw] account_ids
+    #   AWS account IDs to include in the report. Absent or empty means all
+    #   accounts in the organization are in scope. Each supplied account is
+    #   validated against AWS Organizations membership. Accounts that do not
+    #   belong to the caller's organization are excluded and recorded on
+    #   the report's coverage summary.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] organizational_unit_ids
+    #   AWS Organizational Unit IDs whose member accounts are included in
+    #   the report. Absent or empty means no OU-based scoping is applied.
+    #   Account and OU filters combine as a union.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] pillars
+    #   Well-Architected pillars to include. Absent or empty means all
+    #   pillars.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] recommendation_types
+    #   Recommendation types (RESOURCE, ARCHITECTURE, APPLICATION) to
+    #   include. Absent or empty means all types.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] statuses
+    #   Recommendation statuses (ACTIVE, SUPPRESSED, COMPLETED) to include.
+    #   Absent or empty means all statuses.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] priorities
+    #   Recommendation priorities (HIGH, MEDIUM, LOW) to include. Absent or
+    #   empty means all priorities.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] created_at_range
+    #   Inclusive window on recommendation creation time. Absent means no
+    #   lower or upper bound on createdAt.
+    #   @return [Types::TimeWindow]
+    #
+    # @!attribute [rw] updated_at_range
+    #   Inclusive window on recommendation last-updated time. Absent means
+    #   no lower or upper bound on updatedAt.
+    #   @return [Types::TimeWindow]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/OrganizationalReportFilters AWS API Documentation
+    #
+    class OrganizationalReportFilters < Struct.new(
+      :account_ids,
+      :organizational_unit_ids,
+      :pillars,
+      :recommendation_types,
+      :statuses,
+      :priorities,
+      :created_at_range,
+      :updated_at_range)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Summary of an Organizational Report returned in a list response.
+    # Includes the core fields of the full report and the optional label,
+    # but omits the filters and coverage summary. The filters and coverage
+    # summary are available through GetAgentOrganizationalReport. The
+    # coverage summary is populated once the report reaches COMPLETED.
+    #
+    # @!attribute [rw] report_id
+    #   Unique identifier of the Organizational Report assigned by the
+    #   service at creation time.
+    #   @return [String]
+    #
+    # @!attribute [rw] owner_account_id
+    #   AWS account ID of the caller that created the report. Only this
+    #   account or a delegated administrator of the same organization may
+    #   retrieve or delete the report.
+    #   @return [String]
+    #
+    # @!attribute [rw] organization_id
+    #   Identifier of the AWS Organization the report belongs to. Derived
+    #   from the caller's authorization context at creation time and not
+    #   accepted as a client-supplied input.
+    #   @return [String]
+    #
+    # @!attribute [rw] label
+    #   Optional human-readable label supplied by the caller at creation
+    #   time.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   Current lifecycle state of the report.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   Timestamp at which the report was created.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/OrganizationalReportSummary AWS API Documentation
+    #
+    class OrganizationalReportSummary < Struct.new(
+      :report_id,
+      :owner_account_id,
+      :organization_id,
+      :label,
+      :state,
+      :created_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An organizational unit or root entry in the organizational monitoring
+    # boundary, with its associated regions.
+    #
+    # @!attribute [rw] organizational_unit_id
+    #   The AWS Organizations organizational unit ID or root ID. Must match
+    #   the pattern `r-[a-z0-9]{4,32}` for roots or
+    #   `ou-[a-z0-9]{4,32}-[a-z0-9]{8,32}` for OUs.
+    #   @return [String]
+    #
+    # @!attribute [rw] regions
+    #   The list of regions to monitor for this organizational unit or root.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/OrganizationalUnitEntry AWS API Documentation
+    #
+    class OrganizationalUnitEntry < Struct.new(
+      :organizational_unit_id,
+      :regions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Pair of a Well-Architected pillar and the number of recommendations
+    # attributed to it in a CoverageSummary.
+    #
+    # @!attribute [rw] pillar
+    #   Well-Architected pillar this count is attributed to.
+    #   @return [String]
+    #
+    # @!attribute [rw] count
+    #   Non-negative count of recommendations in the report that are
+    #   attributed to this pillar.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/PillarCount AWS API Documentation
+    #
+    class PillarCount < Struct.new(
+      :pillar,
+      :count)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A pillar difference return object.
     #
     # @!attribute [rw] pillar_id
@@ -6123,8 +7060,8 @@ module Aws::WellArchitected
       include Aws::Structure
     end
 
-    # Item configuration for a specific Well-Architected Tool Framework
-    # pillar.
+    # Item configuration for a specific Amazon Web Services Well-Architected
+    # Framework pillar.
     #
     # @!attribute [rw] pillar
     #   The pillar this item configuration applies to.
@@ -6208,6 +7145,76 @@ module Aws::WellArchitected
       :notes,
       :risk_counts,
       :prioritized_risk_counts)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A single Well-Architected Agent preference and its current state.
+    #
+    # @!attribute [rw] key
+    #   Which preference this entry describes.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   Current state of the preference. ENABLED and DISABLED reflect the
+    #   result of the most recent successful change. FAILED reflects a
+    #   stored failure surfaced on a read and is accompanied by a detail
+    #   message.
+    #   @return [String]
+    #
+    # @!attribute [rw] detail
+    #   A human-readable explanation present only when status is FAILED,
+    #   describing what went wrong and how to recover.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/PreferenceEntry AWS API Documentation
+    #
+    class PreferenceEntry < Struct.new(
+      :key,
+      :status,
+      :detail)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A caller's requested change to one preference, supplied to
+    # PutAgentPreferences.
+    #
+    # @!attribute [rw] key
+    #   Which preference to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   State to set the preference to. FAILED is an observed state only and
+    #   cannot be requested.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/PreferenceUpdate AWS API Documentation
+    #
+    class PreferenceUpdate < Struct.new(
+      :key,
+      :state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Pair of a recommendation Priority and the number of recommendations
+    # attributed to it in a CoverageSummary.
+    #
+    # @!attribute [rw] priority
+    #   Priority this count is attributed to.
+    #   @return [String]
+    #
+    # @!attribute [rw] count
+    #   Non-negative count of recommendations in the report that are
+    #   attributed to this priority.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/PriorityCount AWS API Documentation
+    #
+    class PriorityCount < Struct.new(
+      :priority,
+      :count)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6598,6 +7605,45 @@ module Aws::WellArchitected
       include Aws::Structure
     end
 
+    # @!attribute [rw] preferences
+    #   Preference updates to apply. A given preference key may appear at
+    #   most once.
+    #   @return [Array<Types::PreferenceUpdate>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/PutAgentPreferencesRequest AWS API Documentation
+    #
+    class PutAgentPreferencesRequest < Struct.new(
+      :preferences)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/PutAgentPreferencesResponse AWS API Documentation
+    #
+    class PutAgentPreferencesResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] profile_arn
+    #   The ARN of the Agent Profile to attach the policy to.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy
+    #   The IAM resource-based policy document in JSON format. Maximum size
+    #   50KB.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/PutAgentProfilePolicyRequest AWS API Documentation
+    #
+    class PutAgentProfilePolicyRequest < Struct.new(
+      :profile_arn,
+      :policy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/PutAgentProfilePolicyResponse AWS API Documentation
+    #
+    class PutAgentProfilePolicyResponse < Aws::EmptyStructure; end
+
     # @!attribute [rw] recommendation_arn
     #   The Amazon Resource Name (ARN) of the recommendation to provide
     #   feedback for.
@@ -6622,13 +7668,35 @@ module Aws::WellArchitected
       :type,
       :feedback_category,
       :comments)
-      SENSITIVE = []
+      SENSITIVE = [:comments]
       include Aws::Structure
     end
 
     # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/PutAgentRecommendationFeedbackResponse AWS API Documentation
     #
     class PutAgentRecommendationFeedbackResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] recommendation_arn
+    #   The ARN of the Agent Recommendation to attach the policy to.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy
+    #   The IAM resource-based policy document in JSON format. Maximum size
+    #   50KB.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/PutAgentRecommendationPolicyRequest AWS API Documentation
+    #
+    class PutAgentRecommendationPolicyRequest < Struct.new(
+      :recommendation_arn,
+      :policy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/PutAgentRecommendationPolicyResponse AWS API Documentation
+    #
+    class PutAgentRecommendationPolicyResponse < Aws::EmptyStructure; end
 
     # A question difference return object.
     #
@@ -7186,16 +8254,19 @@ module Aws::WellArchitected
     # pillars and goals to focus on.
     #
     # @!attribute [rw] pillars
-    #   The Well-Architected Tool Framework pillars to include in the
-    #   generation scope.
+    #   The Amazon Web Services Well-Architected Framework pillars to
+    #   include in the generation scope.
     #   @return [Array<String>]
     #
     # @!attribute [rw] goal_ids
-    #   Specific goal IDs to focus on during recommendation generation.
+    #   Specific goal IDs to focus on during recommendation generation. Use
+    #   `ListAgentGoals` to retrieve goal IDs.
     #   @return [Array<String>]
     #
     # @!attribute [rw] items
-    #   Optional per-pillar item filtering configuration.
+    #   An optional per-pillar filter. When you specify items, only the
+    #   listed items are processed for each pillar. When you omit items, all
+    #   items are processed.
     #   @return [Array<Types::PillarItem>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/Scope AWS API Documentation
@@ -7225,6 +8296,45 @@ module Aws::WellArchitected
     class SelectedPillar < Struct.new(
       :pillar_id,
       :selected_question_ids)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] report_id
+    #   Identifier of the report whose data is being delivered.
+    #   @return [String]
+    #
+    # @!attribute [rw] format
+    #   Format of the delivered artifact (CSV, JSON, or PARQUET).
+    #   @return [String]
+    #
+    # @!attribute [rw] bucket_arn
+    #   ARN of the caller-owned S3 bucket that will receive the artifact.
+    #   @return [String]
+    #
+    # @!attribute [rw] object_key
+    #   S3 object key under bucketArn where the artifact will be written.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/SendAgentOrganizationalReportDataToS3Request AWS API Documentation
+    #
+    class SendAgentOrganizationalReportDataToS3Request < Struct.new(
+      :report_id,
+      :format,
+      :bucket_arn,
+      :object_key)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] delivered_to
+    #   S3 URI (format s3://bucket/key) where the artifact was written.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/SendAgentOrganizationalReportDataToS3Response AWS API Documentation
+    #
+    class SendAgentOrganizationalReportDataToS3Response < Struct.new(
+      :delivered_to)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7406,22 +8516,37 @@ module Aws::WellArchitected
     #   @return [String]
     #
     # @!attribute [rw] types
-    #   The types of recommendations to generate.
+    #   The types of recommendations to generate. You can specify up to two
+    #   types in a single request. Currently, only `ARCHITECTURE` is
+    #   supported for this operation.
     #   @return [Array<String>]
     #
     # @!attribute [rw] name
-    #   An optional name for this generation process to help identify it in
-    #   lists and logs.
+    #   An optional name for this generation that identifies the
+    #   architecture review in the console and in
+    #   `ListAgentRecommendationGenerations` results. Applies to
+    #   `ARCHITECTURE` type only. Must be absent for other types.
     #   @return [String]
     #
     # @!attribute [rw] additional_context
-    #   Optional additional context to guide the recommendation generation,
-    #   such as specific business requirements or constraints.
+    #   The location of the infrastructure as code (IaC) template to review,
+    #   and the lenses to review it against. Required for the `ARCHITECTURE`
+    #   type. Must be absent for other types. Specify a JSON object with the
+    #   following members:
+    #
+    #   * `s3Uri`: The Amazon S3 URI of the IaC template, .zip archive, or
+    #     folder to review.
+    #
+    #   * `s3VersionId`: The version ID of the Amazon S3 object. If you omit
+    #     this member, the current version is used.
+    #
+    #   * `lensArns`: The ARNs of the lenses to review against. Only
+    #     `arn:aws:wellarchitected::aws:lens/wellarchitected` is supported.
     #   @return [Hash,Array,String,Numeric,Boolean]
     #
     # @!attribute [rw] scope
-    #   Scope configuration to focus the generation on specific pillars or
-    #   goals.
+    #   Defines which pillars, goals, and items the review covers. Required
+    #   for the `ARCHITECTURE` type. Must be absent for other types.
     #   @return [Types::Scope]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/StartAgentRecommendationGenerationRequest AWS API Documentation
@@ -7432,7 +8557,7 @@ module Aws::WellArchitected
       :name,
       :additional_context,
       :scope)
-      SENSITIVE = []
+      SENSITIVE = [:additional_context]
       include Aws::Structure
     end
 
@@ -7582,6 +8707,27 @@ module Aws::WellArchitected
       :message,
       :quota_code,
       :service_code)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An inclusive time window used by Organizational Report filters. Both
+    # bounds are optional, but at least one of from or to must be set when
+    # the structure is present.
+    #
+    # @!attribute [rw] from
+    #   Lower bound of the window (inclusive). Absent means no lower bound.
+    #   @return [Time]
+    #
+    # @!attribute [rw] to
+    #   Upper bound of the window (inclusive). Absent means no upper bound.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/TimeWindow AWS API Documentation
+    #
+    class TimeWindow < Struct.new(
+      :from,
+      :to)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7765,31 +8911,213 @@ module Aws::WellArchitected
     #   @return [String]
     #
     # @!attribute [rw] profile_arn
+    #   The Amazon Resource Name (ARN) of the organizational profile to
+    #   update.
+    #   @return [String]
+    #
+    # @!attribute [rw] display_name
+    #   The updated display name of the organizational profile. Omit this
+    #   field to keep the current display name. A display name is required,
+    #   so it cannot be cleared.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The updated description of the organizational profile. Omit this
+    #   field to keep the current description, or supply an empty string to
+    #   clear it; a cleared description is read back as absent rather than
+    #   as an empty string.
+    #   @return [String]
+    #
+    # @!attribute [rw] business_overview
+    #   The updated business overview for the organizational profile. Omit
+    #   this field to keep the current business overview, or supply an empty
+    #   string to clear it; a cleared business overview is read back as
+    #   absent rather than as an empty string.
+    #   @return [String]
+    #
+    # @!attribute [rw] pillars
+    #   The updated Amazon Web Services Well-Architected Framework pillars
+    #   for the organizational profile. Omit this field to keep the current
+    #   pillars. A profile must target at least one pillar, so an empty list
+    #   is rejected.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] deletion_protection
+    #   Indicates whether deletion protection is enabled for the
+    #   organizational profile.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] organizational_aggregation_configuration
+    #   The organizational monitoring boundary. Contains organizational unit
+    #   or root entries and individual account entries that define the scope
+    #   for the profile. Omit this field to keep the current boundary, or
+    #   supply this structure with both its `organizationalUnits` and
+    #   `accounts` lists empty to remove every monitored organizational unit
+    #   and account. The field remains set either way — an emptied boundary
+    #   is read back as a structure with two empty lists, not as an absent
+    #   field.
+    #   @return [Types::OrganizationalAggregationConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/UpdateAgentOrganizationalProfileRequest AWS API Documentation
+    #
+    class UpdateAgentOrganizationalProfileRequest < Struct.new(
+      :client_token,
+      :profile_arn,
+      :display_name,
+      :description,
+      :business_overview,
+      :pillars,
+      :deletion_protection,
+      :organizational_aggregation_configuration)
+      SENSITIVE = [:display_name, :description, :business_overview]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
+    #   The system name of the updated organizational profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] display_name
+    #   The display name of the updated organizational profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the updated organizational profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] business_overview
+    #   The business overview of the updated organizational profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] pillars
+    #   The Amazon Web Services Well-Architected Framework pillars
+    #   associated with the updated organizational profile.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] deletion_protection
+    #   Indicates whether deletion protection is enabled.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] organization_id
+    #   The identifier of the Amazon Web Services Organization this profile
+    #   belongs to.
+    #   @return [String]
+    #
+    # @!attribute [rw] organizational_aggregation_configuration
+    #   The organizational monitoring boundary for the updated profile.
+    #   @return [Types::OrganizationalAggregationConfiguration]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the updated organizational
+    #   profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] eligible_for_scheduled_generation
+    #   Indicates whether the profile is valid for scheduled recommendation
+    #   generation.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] eligible_for_architecture_generation
+    #   Indicates whether the profile is valid for manual architecture
+    #   generation.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] field_errors
+    #   A map of field paths to error messages for invalid or missing input
+    #   fields.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] created_by
+    #   The identifier of the user or system that created this
+    #   organizational profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp when the organizational profile was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_by
+    #   The identifier of the user or system that last modified this
+    #   organizational profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified_at
+    #   The timestamp when the organizational profile was last modified.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/UpdateAgentOrganizationalProfileResponse AWS API Documentation
+    #
+    class UpdateAgentOrganizationalProfileResponse < Struct.new(
+      :name,
+      :display_name,
+      :description,
+      :business_overview,
+      :pillars,
+      :deletion_protection,
+      :organization_id,
+      :organizational_aggregation_configuration,
+      :arn,
+      :eligible_for_scheduled_generation,
+      :eligible_for_architecture_generation,
+      :field_errors,
+      :created_by,
+      :created_at,
+      :last_modified_by,
+      :last_modified_at)
+      SENSITIVE = [:display_name, :description, :business_overview]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] profile_arn
     #   The Amazon Resource Name (ARN) of the profile to update.
     #   @return [String]
     #
     # @!attribute [rw] display_name
-    #   The updated display name of the profile.
+    #   The updated display name of the profile. Omit this field to keep the
+    #   current display name. A display name is required, so it cannot be
+    #   cleared.
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   The updated description of the profile.
+    #   The updated description of the profile. Omit this field to keep the
+    #   current description, or supply an empty string to clear it; a
+    #   cleared description is read back as absent rather than as an empty
+    #   string.
     #   @return [String]
     #
     # @!attribute [rw] execution_role_arn
-    #   The updated ARN of the IAM execution role.
+    #   The updated ARN of the IAM execution role. Omit this field to keep
+    #   the current execution role.
     #   @return [String]
     #
     # @!attribute [rw] aggregation_configuration
-    #   The updated aggregation configuration.
+    #   The updated aggregation configuration, as a list of per-account
+    #   entries. Omit this field to keep the current entries, or supply an
+    #   empty list to remove them all. The field remains set either way — an
+    #   emptied configuration is read back as an empty list, not as an
+    #   absent field.
     #   @return [Array<Types::AggregationConfiguration>]
     #
     # @!attribute [rw] business_overview
-    #   The updated business overview for the profile.
+    #   The updated business overview for the profile. Omit this field to
+    #   keep the current business overview, or supply an empty string to
+    #   clear it; a cleared business overview is read back as absent rather
+    #   than as an empty string.
     #   @return [String]
     #
     # @!attribute [rw] pillars
-    #   The updated Well-Architected Tool Framework pillars for the profile.
+    #   The updated Amazon Web Services Well-Architected Framework pillars
+    #   for the profile. Omit this field to keep the current pillars. A
+    #   profile must target at least one pillar, so an empty list is
+    #   rejected.
     #   @return [Array<String>]
     #
     # @!attribute [rw] deletion_protection
@@ -7829,8 +9157,8 @@ module Aws::WellArchitected
     #   @return [String]
     #
     # @!attribute [rw] pillars
-    #   The Well-Architected Tool Framework pillars associated with the
-    #   updated profile.
+    #   The Amazon Web Services Well-Architected Framework pillars
+    #   associated with the updated profile.
     #   @return [Array<String>]
     #
     # @!attribute [rw] deletion_protection
@@ -7864,10 +9192,6 @@ module Aws::WellArchitected
     #   fields.
     #   @return [Hash<String,String>]
     #
-    # @!attribute [rw] tags
-    #   The tags associated with the updated profile.
-    #   @return [Array<Types::Tag>]
-    #
     # @!attribute [rw] created_by
     #   The identifier of the user or system that created this profile.
     #   @return [String]
@@ -7900,7 +9224,6 @@ module Aws::WellArchitected
       :eligible_for_scheduled_generation,
       :eligible_for_architecture_generation,
       :field_errors,
-      :tags,
       :created_by,
       :created_at,
       :last_modified_by,

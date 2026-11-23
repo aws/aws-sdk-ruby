@@ -1,6 +1,41 @@
 Unreleased Changes
 ------------------
 
+1.166.0 (2026-11-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.165.0 (2026-11-16)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.164.0 (2026-11-11)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.163.0 (2026-11-10)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.162.0 (2026-11-09)
+------------------
+
+* Feature - Adds support for additional Amazon EKS security context settings in AWS Batch. Pod-level settings include fsGroup, runAsUser, runAsGroup, runAsNonRoot, and seccompProfile. Container-level settings add Linux capabilities and seccompProfile to existing runAsUser, runAsGroup, and runAsNonRoot support.
+
+1.161.0 (2026-11-06)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.160.0 (2026-11-04)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.159.0 (2026-10-29)
 ------------------
 

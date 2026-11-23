@@ -886,9 +886,12 @@ module Aws
       interface _ListTestTemplatesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListTestTemplatesResponse]
         def test_templates: () -> ::Array[Types::TestTemplateSummary]
+        def next_token: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Resiliencehubv2/Client.html#list_test_templates-instance_method
       def list_test_templates: (
+                                 ?max_results: ::Integer,
+                                 ?next_token: ::String
                                ) -> _ListTestTemplatesResponseSuccess
                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTestTemplatesResponseSuccess
 

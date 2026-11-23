@@ -72,6 +72,57 @@ module Aws::MWAAServerless
       include Aws::Structure
     end
 
+    # @!attribute [rw] expires_in_seconds
+    #   Specifies the number of seconds that the launch URL stays valid.
+    #   This value limits only the time to open the URL, not the length of
+    #   the UI session. The default is 300.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] session_duration_in_seconds
+    #   Specifies the number of seconds that the UI session lasts, starting
+    #   from when you call this operation. The default is 43200 (12 hours).
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mwaa-serverless-2024-07-26/CreateAirflowUiUrlRequest AWS API Documentation
+    #
+    class CreateAirflowUiUrlRequest < Struct.new(
+      :expires_in_seconds,
+      :session_duration_in_seconds)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] authorized_url
+    #   The launch URL that opens the Airflow UI. Open it in a browser
+    #   before `UrlExpiresAt`. The UI session uses the permissions of the
+    #   identity that called this operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] session_id
+    #   The URL starts a UI session that has this identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] url_expires_at
+    #   The launch URL stops being valid at this time. The value is in ISO
+    #   8601 date-time format.
+    #   @return [Time]
+    #
+    # @!attribute [rw] session_expires_at
+    #   The UI session ends at this time. The value is in ISO 8601 date-time
+    #   format. After this time, create a new URL to open the UI again.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mwaa-serverless-2024-07-26/CreateAirflowUiUrlResponse AWS API Documentation
+    #
+    class CreateAirflowUiUrlResponse < Struct.new(
+      :authorized_url,
+      :session_id,
+      :url_expires_at,
+      :session_expires_at)
+      SENSITIVE = [:authorized_url, :session_id]
+      include Aws::Structure
+    end
+
     # @!attribute [rw] name
     #   The name of the workflow. You must use unique workflow names within
     #   your Amazon Web Services account. The service generates a unique
@@ -163,6 +214,12 @@ module Aws::MWAAServerless
     #   VPC-only resources like RDS databases or private endpoints.
     #   @return [Types::NetworkConfiguration]
     #
+    # @!attribute [rw] environment
+    #   The environment variables to set for tasks in the workflow. If you
+    #   don't specify this parameter, the workflow has no environment
+    #   variables.
+    #   @return [Types::Environment]
+    #
     # @!attribute [rw] tags
     #   A map of tags to assign to the workflow resource. Tags are key-value
     #   pairs that are used for resource organization and cost allocation.
@@ -185,6 +242,7 @@ module Aws::MWAAServerless
       :logging_configuration,
       :engine_version,
       :network_configuration,
+      :environment,
       :tags,
       :trigger_mode)
       SENSITIVE = []
@@ -270,7 +328,7 @@ module Aws::MWAAServerless
     #
     # @!attribute [rw] version_id
     #   Optional. The version ID of the workflow definition file in Amazon
-    #   S3. If not specified, the latest version is used.
+    #   S3. If you don't specify a version, we use the latest version.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mwaa-serverless-2024-07-26/DefinitionS3Location AWS API Documentation
@@ -344,6 +402,42 @@ module Aws::MWAAServerless
       :type,
       :kms_key_id)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the environment variables that tasks in a workflow use during
+    # execution.
+    #
+    # @!attribute [rw] variables
+    #   A map of environment variable names to values. Your workflow tasks
+    #   use these variables while they run. You can specify up to 50
+    #   environment variables. Each name must be between 1 and 128
+    #   characters, start with a letter, and contain only letters, numbers,
+    #   and underscores. Each value can be up to 255 characters.
+    #
+    #   Names that start with `AWS_` or `AIRFLOW__` are reserved. You can
+    #   use the following Apache Airflow secrets backend settings, which are
+    #   exceptions:
+    #
+    #   * `AIRFLOW__WORKERS__SECRETS_BACKEND` – The secrets backend class
+    #     that workers use.
+    #
+    #   * `AIRFLOW__WORKERS__SECRETS_BACKEND_KWARGS` – The keyword arguments
+    #     for the secrets backend, as a JSON string.
+    #
+    #   * `AIRFLOW__WORKERS__SECRETS_BACKEND_KWARG__*` – Names with this
+    #     prefix, for additional secrets backend configuration.
+    #
+    #   If you set `EncryptionConfiguration` to use a customer managed AWS
+    #   KMS key, we encrypt the environment variables with that key.
+    #   Otherwise, we store them with default encryption at rest.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mwaa-serverless-2024-07-26/Environment AWS API Documentation
+    #
+    class Environment < Struct.new(
+      :variables)
+      SENSITIVE = [:variables]
       include Aws::Structure
     end
 
@@ -538,14 +632,8 @@ module Aws::MWAAServerless
     #   @return [Time]
     #
     # @!attribute [rw] schedule_configuration
-    #   The schedule configuration for the workflow, including cron
-    #   expressions for automated execution. Amazon Managed Workflows for
-    #   Apache Airflow Serverless uses EventBridge Scheduler for
-    #   cost-effective, timezone-aware scheduling. When a workflow includes
-    #   schedule information in its YAML definition, the service
-    #   automatically configures the appropriate triggers for automated
-    #   execution. Only one version of a workflow can have an active
-    #   schedule at any given time.
+    #   The schedule configuration for the workflow. Only one version of a
+    #   workflow can have an active schedule at any given time.
     #   @return [Types::ScheduleConfiguration]
     #
     # @!attribute [rw] role_arn
@@ -556,6 +644,11 @@ module Aws::MWAAServerless
     # @!attribute [rw] network_configuration
     #   The network configuration for the workflow execution environment.
     #   @return [Types::NetworkConfiguration]
+    #
+    # @!attribute [rw] environment
+    #   The environment variables that tasks in the workflow use during
+    #   execution.
+    #   @return [Types::Environment]
     #
     # @!attribute [rw] trigger_mode
     #   The trigger mode for the workflow execution.
@@ -584,6 +677,7 @@ module Aws::MWAAServerless
       :schedule_configuration,
       :role_arn,
       :network_configuration,
+      :environment,
       :trigger_mode,
       :workflow_definition)
       SENSITIVE = []
@@ -1005,8 +1099,8 @@ module Aws::MWAAServerless
     #   @return [String]
     #
     # @!attribute [rw] version_id
-    #   The version ID of the object in Amazon S3. If not specified, the
-    #   latest version is used.
+    #   Specifies the version ID of the object in Amazon S3. If you don't
+    #   specify a version, we use the latest version.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mwaa-serverless-2024-07-26/S3Location AWS API Documentation
@@ -1019,20 +1113,30 @@ module Aws::MWAAServerless
       include Aws::Structure
     end
 
-    # The configuration to use to schedule automated workflow execution
-    # using cron expressions. Amazon Managed Workflows for Apache Airflow
-    # Serverless integrates with EventBridge Scheduler to provide
-    # cost-effective, timezone-aware scheduling capabilities. The service
-    # supports both time-based and event-based scheduling (event-based
-    # scheduling available post-GA). When a workflow definition includes
-    # scheduling information, Amazon Managed Workflows for Apache Airflow
-    # Serverless automatically configures the appropriate triggers and
-    # ensures only one version of a workflow has an active schedule at any
-    # time.
+    # Contains the configuration used to schedule automated workflow
+    # execution. Only one version of a workflow can have an active schedule
+    # at any time.
     #
     # @!attribute [rw] cron_expression
-    #   A cron expression that defines when the workflow is automatically
-    #   executed. Uses standard cron syntax.
+    #   The schedule expression that determines when the workflow runs, as
+    #   specified in the `schedule` parameter of the workflow's YAML
+    #   definition. You can specify one of the following types of schedule
+    #   expressions:
+    #
+    #   * Apache Airflow cron expression – Five fields, such as `0 12 1 *
+    #     *`.
+    #
+    #   * Apache Airflow schedule preset – `@hourly`, `@daily`, `@weekly`,
+    #     `@monthly`, `@yearly`, or `@annually`.
+    #
+    #   * EventBridge Scheduler rate expression – For example, `rate(5
+    #     minutes)`. Supported units are minutes, hours, and days.
+    #
+    #   * EventBridge Scheduler cron expression – Six fields, such as
+    #     `cron(0 12 * * ? *)`.
+    #
+    #   In a cron expression, specify either a day-of-month or a
+    #   day-of-week, not both.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mwaa-serverless-2024-07-26/ScheduleConfiguration AWS API Documentation
@@ -1107,8 +1211,8 @@ module Aws::MWAAServerless
     #   @return [Hash<String,Hash,Array,String,Numeric,Boolean>]
     #
     # @!attribute [rw] workflow_version
-    #   Optional. The specific version of the workflow to execute. If not
-    #   specified, the latest version is used.
+    #   Optional. The specific version of the workflow to execute. If you
+    #   don't specify a version, we use the latest version.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mwaa-serverless-2024-07-26/StartWorkflowRunRequest AWS API Documentation
@@ -1360,6 +1464,15 @@ module Aws::MWAAServerless
     #   environment.
     #   @return [Types::NetworkConfiguration]
     #
+    # @!attribute [rw] environment
+    #   The environment variables to set for tasks in the workflow.
+    #
+    #   The variables that you specify replace all existing environment
+    #   variables for the workflow. If you don't specify this parameter,
+    #   the workflow has no environment variables. To keep existing
+    #   environment variables, include them in the request.
+    #   @return [Types::Environment]
+    #
     # @!attribute [rw] trigger_mode
     #   The trigger mode for the workflow execution.
     #   @return [String]
@@ -1375,6 +1488,7 @@ module Aws::MWAAServerless
       :logging_configuration,
       :engine_version,
       :network_configuration,
+      :environment,
       :trigger_mode)
       SENSITIVE = []
       include Aws::Structure

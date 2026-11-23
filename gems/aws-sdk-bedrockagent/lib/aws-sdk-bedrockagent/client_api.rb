@@ -224,6 +224,7 @@ module Aws::BedrockAgent
     FieldForReranking = Shapes::StructureShape.new(name: 'FieldForReranking')
     FieldForRerankingFieldNameString = Shapes::StringShape.new(name: 'FieldForRerankingFieldNameString')
     FieldName = Shapes::StringShape.new(name: 'FieldName')
+    FieldType = Shapes::StringShape.new(name: 'FieldType')
     FieldsForReranking = Shapes::ListShape.new(name: 'FieldsForReranking')
     FilterList = Shapes::ListShape.new(name: 'FilterList')
     FilterPattern = Shapes::StringShape.new(name: 'FilterPattern')
@@ -458,7 +459,10 @@ module Aws::BedrockAgent
     MetadataAttribute = Shapes::StructureShape.new(name: 'MetadataAttribute')
     MetadataAttributeValue = Shapes::StructureShape.new(name: 'MetadataAttributeValue')
     MetadataAttributeValueStringListValueList = Shapes::ListShape.new(name: 'MetadataAttributeValueStringListValueList')
+    MetadataConfiguration = Shapes::StructureShape.new(name: 'MetadataConfiguration')
     MetadataConfigurationForReranking = Shapes::StructureShape.new(name: 'MetadataConfigurationForReranking')
+    MetadataConfigurations = Shapes::ListShape.new(name: 'MetadataConfigurations')
+    MetadataKeyName = Shapes::StringShape.new(name: 'MetadataKeyName')
     MetadataSourceType = Shapes::StringShape.new(name: 'MetadataSourceType')
     MetadataValueType = Shapes::StringShape.new(name: 'MetadataValueType')
     Microsoft365TenantId = Shapes::StringShape.new(name: 'Microsoft365TenantId')
@@ -650,6 +654,7 @@ module Aws::BedrockAgent
     SalesforceCrawlerConfiguration = Shapes::StructureShape.new(name: 'SalesforceCrawlerConfiguration')
     SalesforceDataSourceConfiguration = Shapes::StructureShape.new(name: 'SalesforceDataSourceConfiguration')
     SalesforceSourceConfiguration = Shapes::StructureShape.new(name: 'SalesforceSourceConfiguration')
+    SearchableStatus = Shapes::StringShape.new(name: 'SearchableStatus')
     SecretArn = Shapes::StringShape.new(name: 'SecretArn')
     SeedUrl = Shapes::StructureShape.new(name: 'SeedUrl')
     SeedUrls = Shapes::ListShape.new(name: 'SeedUrls')
@@ -2126,6 +2131,7 @@ module Aws::BedrockAgent
     KnowledgeBase.add_member(:created_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "createdAt"))
     KnowledgeBase.add_member(:updated_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "updatedAt"))
     KnowledgeBase.add_member(:failure_reasons, Shapes::ShapeRef.new(shape: FailureReasons, location_name: "failureReasons"))
+    KnowledgeBase.add_member(:metadata_configurations, Shapes::ShapeRef.new(shape: MetadataConfigurations, location_name: "metadataConfigurations"))
     KnowledgeBase.struct_class = Types::KnowledgeBase
 
     KnowledgeBaseConfiguration.add_member(:type, Shapes::ShapeRef.new(shape: KnowledgeBaseType, required: true, location_name: "type"))
@@ -2418,9 +2424,16 @@ module Aws::BedrockAgent
 
     MetadataAttributeValueStringListValueList.member = Shapes::ShapeRef.new(shape: StringValue)
 
+    MetadataConfiguration.add_member(:name, Shapes::ShapeRef.new(shape: MetadataKeyName, required: true, location_name: "name"))
+    MetadataConfiguration.add_member(:type, Shapes::ShapeRef.new(shape: FieldType, required: true, location_name: "type"))
+    MetadataConfiguration.add_member(:searchability, Shapes::ShapeRef.new(shape: SearchableStatus, required: true, location_name: "searchability"))
+    MetadataConfiguration.struct_class = Types::MetadataConfiguration
+
     MetadataConfigurationForReranking.add_member(:selection_mode, Shapes::ShapeRef.new(shape: RerankingMetadataSelectionMode, required: true, location_name: "selectionMode"))
     MetadataConfigurationForReranking.add_member(:selective_mode_configuration, Shapes::ShapeRef.new(shape: RerankingMetadataSelectiveModeConfiguration, location_name: "selectiveModeConfiguration"))
     MetadataConfigurationForReranking.struct_class = Types::MetadataConfigurationForReranking
+
+    MetadataConfigurations.member = Shapes::ShapeRef.new(shape: MetadataConfiguration)
 
     MismatchedNodeInputTypeFlowValidationDetails.add_member(:node, Shapes::ShapeRef.new(shape: FlowNodeName, required: true, location_name: "node"))
     MismatchedNodeInputTypeFlowValidationDetails.add_member(:input, Shapes::ShapeRef.new(shape: FlowNodeInputName, required: true, location_name: "input"))
@@ -3221,6 +3234,7 @@ module Aws::BedrockAgent
     UpdateKnowledgeBaseRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: KnowledgeBaseRoleArn, required: true, location_name: "roleArn"))
     UpdateKnowledgeBaseRequest.add_member(:knowledge_base_configuration, Shapes::ShapeRef.new(shape: KnowledgeBaseConfiguration, required: true, location_name: "knowledgeBaseConfiguration"))
     UpdateKnowledgeBaseRequest.add_member(:storage_configuration, Shapes::ShapeRef.new(shape: StorageConfiguration, location_name: "storageConfiguration"))
+    UpdateKnowledgeBaseRequest.add_member(:metadata_configurations, Shapes::ShapeRef.new(shape: MetadataConfigurations, location_name: "metadataConfigurations"))
     UpdateKnowledgeBaseRequest.struct_class = Types::UpdateKnowledgeBaseRequest
 
     UpdateKnowledgeBaseResponse.add_member(:knowledge_base, Shapes::ShapeRef.new(shape: KnowledgeBase, required: true, location_name: "knowledgeBase"))

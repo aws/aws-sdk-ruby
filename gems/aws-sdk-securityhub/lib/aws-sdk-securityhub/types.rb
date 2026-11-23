@@ -625,7 +625,10 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] association_status
     #   The current status of the association between a target and a
-    #   configuration policy.
+    #   configuration policy. Possible values are `PENDING`, `SUCCESS`,
+    #   `FAILED`, and `DISABLED`. The value is `DISABLED` when central
+    #   configuration is disabled because the organization is managed by
+    #   Security Hub CSPM policies in Organizations.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AssociationFilters AWS API Documentation
@@ -23088,7 +23091,18 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] association_status
     #   The current status of the association between the specified target
-    #   and the configuration.
+    #   and the configuration. Possible values are:
+    #
+    #   * `PENDING` - The association is in progress.
+    #
+    #   * `SUCCESS` - The association succeeded.
+    #
+    #   * `FAILED` - The association failed. For details, see
+    #     `AssociationStatusMessage`.
+    #
+    #   * `DISABLED` - Central configuration is disabled because the
+    #     organization is managed by Security Hub CSPM policies in
+    #     Organizations.
     #   @return [String]
     #
     # @!attribute [rw] association_status_message
@@ -24101,7 +24115,7 @@ module Aws::SecurityHub
     end
 
     # The cloud provider configuration for creating a connector. This is a
-    # union type that currently supports Azure.
+    # union type that currently supports Azure and GCP.
     #
     # @note CspmProviderConfiguration is a union - when making an API calls you must set exactly one of the members.
     #
@@ -24109,21 +24123,27 @@ module Aws::SecurityHub
     #   The Azure provider configuration.
     #   @return [Types::AzureProviderConfiguration]
     #
+    # @!attribute [rw] gcp
+    #   The GCP provider configuration.
+    #   @return [Types::GcpProviderConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/CspmProviderConfiguration AWS API Documentation
     #
     class CspmProviderConfiguration < Struct.new(
       :azure,
+      :gcp,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
       include Aws::Structure::Union
 
       class Azure < CspmProviderConfiguration; end
+      class Gcp < CspmProviderConfiguration; end
       class Unknown < CspmProviderConfiguration; end
     end
 
     # The detailed cloud provider configuration for a connector. This is a
-    # union type that currently supports Azure.
+    # union type that currently supports Azure and GCP.
     #
     # @note CspmProviderDetail is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of CspmProviderDetail corresponding to the set member.
     #
@@ -24131,16 +24151,22 @@ module Aws::SecurityHub
     #   The Azure provider detail.
     #   @return [Types::AzureDetail]
     #
+    # @!attribute [rw] gcp
+    #   The GCP provider detail.
+    #   @return [Types::GcpDetail]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/CspmProviderDetail AWS API Documentation
     #
     class CspmProviderDetail < Struct.new(
       :azure,
+      :gcp,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
       include Aws::Structure::Union
 
       class Azure < CspmProviderDetail; end
+      class Gcp < CspmProviderDetail; end
       class Unknown < CspmProviderDetail; end
     end
 
@@ -24169,7 +24195,7 @@ module Aws::SecurityHub
     end
 
     # The cloud provider configuration for updating a connector. This is a
-    # union type that currently supports Azure.
+    # union type that currently supports Azure and GCP.
     #
     # @note CspmProviderUpdateConfiguration is a union - when making an API calls you must set exactly one of the members.
     #
@@ -24177,16 +24203,22 @@ module Aws::SecurityHub
     #   The Azure update configuration.
     #   @return [Types::AzureUpdateConfiguration]
     #
+    # @!attribute [rw] gcp
+    #   The GCP update configuration.
+    #   @return [Types::GcpUpdateConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/CspmProviderUpdateConfiguration AWS API Documentation
     #
     class CspmProviderUpdateConfiguration < Struct.new(
       :azure,
+      :gcp,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
       include Aws::Structure::Union
 
       class Azure < CspmProviderUpdateConfiguration; end
+      class Gcp < CspmProviderUpdateConfiguration; end
       class Unknown < CspmProviderUpdateConfiguration; end
     end
 
@@ -24960,6 +24992,7 @@ module Aws::SecurityHub
     # @!attribute [rw] providers
     #   A list of cloud providers to filter the standards by. For example,
     #   specify `Azure` to return only standards that evaluate Azure
+    #   resources, or `GCP` to return only standards that evaluate GCP
     #   resources.
     #   @return [Array<String>]
     #
@@ -26308,6 +26341,98 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # The detailed GCP configuration for a connector.
+    #
+    # @!attribute [rw] aws_config_connector_arn
+    #   The ARN of the multi-cloud configuration connector used to establish
+    #   the connection to GCP.
+    #   @return [String]
+    #
+    # @!attribute [rw] scope_configuration
+    #   The scope configuration that defines which GCP resources are
+    #   monitored.
+    #   @return [Types::GcpScopeConfiguration]
+    #
+    # @!attribute [rw] gcp_regions
+    #   The list of GCP regions being monitored.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/GcpDetail AWS API Documentation
+    #
+    class GcpDetail < Struct.new(
+      :aws_config_connector_arn,
+      :scope_configuration,
+      :gcp_regions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration for connecting to a GCP environment.
+    #
+    # @!attribute [rw] aws_config_connector_arn
+    #   The ARN of the multi-cloud configuration connector used to establish
+    #   the connection to GCP.
+    #   @return [String]
+    #
+    # @!attribute [rw] scope_configuration
+    #   The scope configuration that defines which GCP resources are
+    #   monitored.
+    #   @return [Types::GcpScopeConfiguration]
+    #
+    # @!attribute [rw] gcp_regions
+    #   The list of GCP regions to monitor.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/GcpProviderConfiguration AWS API Documentation
+    #
+    class GcpProviderConfiguration < Struct.new(
+      :aws_config_connector_arn,
+      :scope_configuration,
+      :gcp_regions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The scope configuration for a GCP connector, defining the organization
+    # or project scope.
+    #
+    # @!attribute [rw] scope_type
+    #   The type of scope. Valid values are `ORGANIZATION` and `PROJECT`.
+    #   @return [String]
+    #
+    # @!attribute [rw] scope_values
+    #   The list of scope values. Use an organization ID when the scope type
+    #   is `ORGANIZATION`, or project IDs when the scope type is `PROJECT`.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/GcpScopeConfiguration AWS API Documentation
+    #
+    class GcpScopeConfiguration < Struct.new(
+      :scope_type,
+      :scope_values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration for updating a GCP connector's scope and regions.
+    #
+    # @!attribute [rw] scope_configuration
+    #   The updated scope configuration.
+    #   @return [Types::GcpScopeConfiguration]
+    #
+    # @!attribute [rw] gcp_regions
+    #   The updated list of GCP regions to monitor.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/GcpUpdateConfiguration AWS API Documentation
+    #
+    class GcpUpdateConfiguration < Struct.new(
+      :scope_configuration,
+      :gcp_regions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] metadata_uid
     #   The unique identifier (ID) of Security Hub OCSF findings found under
     #   the `metadata.uid` field of the finding.
@@ -26545,7 +26670,18 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] association_status
     #   The current status of the association between the specified target
-    #   and the configuration.
+    #   and the configuration. Possible values are:
+    #
+    #   * `PENDING` - The association is in progress.
+    #
+    #   * `SUCCESS` - The association succeeded.
+    #
+    #   * `FAILED` - The association failed. For details, see
+    #     `AssociationStatusMessage`.
+    #
+    #   * `DISABLED` - Central configuration is disabled because the
+    #     organization is managed by Security Hub CSPM policies in
+    #     Organizations.
     #   @return [String]
     #
     # @!attribute [rw] association_status_message
@@ -26801,7 +26937,8 @@ module Aws::SecurityHub
     # @!attribute [rw] providers
     #   A list of cloud providers to filter the enabled standards by. For
     #   example, specify `Azure` to return only enabled standards that
-    #   evaluate Azure resources.
+    #   evaluate Azure resources, or `GCP` to return only enabled standards
+    #   that evaluate GCP resources.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/GetEnabledStandardsRequest AWS API Documentation
@@ -27795,6 +27932,225 @@ module Aws::SecurityHub
     #
     class GetSecurityControlDefinitionResponse < Struct.new(
       :security_control_definition)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] package_name
+    #   The name of the software package, for example `openssl`. This value
+    #   must match the `PackageName` returned by `GetSoftwareV2`.
+    #   @return [String]
+    #
+    # @!attribute [rw] package_type
+    #   The type of the software package, for example `operating-system`,
+    #   `application`, or `library`. This value must match the `PackageType`
+    #   returned by `GetSoftwareV2`.
+    #   @return [String]
+    #
+    # @!attribute [rw] package_version
+    #   The version of the software package, for example `3.0.8`. If you
+    #   omit this value, the response includes resources that contain any
+    #   version of the package.
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   Filters the returned resources based on a set of criteria. You can
+    #   nest composite filters up to three levels deep.
+    #   @return [Types::SoftwareFilters]
+    #
+    # @!attribute [rw] scopes
+    #   Limits the results to resources from specific organizational units
+    #   or from the delegated administrator's organization. Only the
+    #   delegated administrator account can use this parameter. Other
+    #   accounts receive an `AccessDeniedException`.
+    #
+    #   This parameter is optional. If you omit it, the delegated
+    #   administrator sees resources from all accounts across the entire
+    #   organization. Other accounts see only their own resources.
+    #
+    #   You can specify up to 10 entries in `Scopes.AwsOrganizations`. If
+    #   multiple entries are specified, the entries are combined using OR
+    #   logic.
+    #   @return [Types::SoftwareScopes]
+    #
+    # @!attribute [rw] sort_criteria
+    #   The resource attribute used to sort the list of returned resources,
+    #   for example `Region` or `ResourceType`. You can specify one sort
+    #   criterion.
+    #   @return [Array<Types::SortCriterion>]
+    #
+    # @!attribute [rw] next_token
+    #   The token required for pagination. On your first call, set the value
+    #   of this parameter to `NULL`. For subsequent calls, to continue
+    #   listing data, set the value of this parameter to the value returned
+    #   in the previous response.
+    #
+    #   A token expires one hour after it's issued. If you change the
+    #   request parameters between calls, the token is no longer valid and
+    #   the request fails with a `ValidationException`.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return. Valid values are 1–100. The
+    #   default is 100.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/GetSoftwareResourcesV2Request AWS API Documentation
+    #
+    class GetSoftwareResourcesV2Request < Struct.new(
+      :package_name,
+      :package_type,
+      :package_version,
+      :filters,
+      :scopes,
+      :sort_criteria,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] software_resources
+    #   An array of resources that contain the specified software package.
+    #   @return [Array<Types::SoftwareResourceResult>]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token to use to request the next page of results.
+    #   Otherwise, this parameter is null.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/GetSoftwareResourcesV2Response AWS API Documentation
+    #
+    class GetSoftwareResourcesV2Response < Struct.new(
+      :software_resources,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] group_by_rules
+    #   How software statistics should be aggregated and organized in the
+    #   response.
+    #   @return [Array<Types::SoftwareGroupByRule>]
+    #
+    # @!attribute [rw] scopes
+    #   Limits the results to software on resources from specific
+    #   organizational units or from the delegated administrator's
+    #   organization. Only the delegated administrator account can use this
+    #   parameter. Other accounts receive an `AccessDeniedException`.
+    #
+    #   This parameter is optional. If you omit it, the delegated
+    #   administrator sees statistics from all accounts across the entire
+    #   organization. Other accounts see only statistics for software on
+    #   their own resources.
+    #
+    #   You can specify up to 10 entries in `Scopes.AwsOrganizations`. If
+    #   multiple entries are specified, the entries are combined using OR
+    #   logic.
+    #   @return [Types::SoftwareScopes]
+    #
+    # @!attribute [rw] sort_order
+    #   Sorts aggregated statistics by count. The default is descending,
+    #   which returns the values with the highest counts first.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_statistic_results
+    #   The maximum number of grouping values to return. Valid values are
+    #   1–400. The default is 400.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/GetSoftwareStatisticsV2Request AWS API Documentation
+    #
+    class GetSoftwareStatisticsV2Request < Struct.new(
+      :group_by_rules,
+      :scopes,
+      :sort_order,
+      :max_statistic_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] group_by_results
+    #   The aggregated statistics about software based on the specified
+    #   grouping rule.
+    #   @return [Array<Types::GroupByResult>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/GetSoftwareStatisticsV2Response AWS API Documentation
+    #
+    class GetSoftwareStatisticsV2Response < Struct.new(
+      :group_by_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] filters
+    #   Filters software packages based on a set of criteria. You can nest
+    #   composite filters up to three levels deep.
+    #   @return [Types::SoftwareFilters]
+    #
+    # @!attribute [rw] scopes
+    #   Limits the results to software on resources from specific
+    #   organizational units or from the delegated administrator's
+    #   organization. Only the delegated administrator account can use this
+    #   parameter. Other accounts receive an `AccessDeniedException`.
+    #
+    #   This parameter is optional. If you omit it, the delegated
+    #   administrator sees software from all accounts across the entire
+    #   organization. Other accounts see only software on their own
+    #   resources.
+    #
+    #   You can specify up to 10 entries in `Scopes.AwsOrganizations`. If
+    #   multiple entries are specified, the entries are combined using OR
+    #   logic.
+    #   @return [Types::SoftwareScopes]
+    #
+    # @!attribute [rw] sort_criteria
+    #   The software attributes used to sort the list of returned software
+    #   packages. You can't sort by `ResourceCount`.
+    #   @return [Array<Types::SortCriterion>]
+    #
+    # @!attribute [rw] next_token
+    #   The token required for pagination. On your first call, set the value
+    #   of this parameter to `NULL`. For subsequent calls, to continue
+    #   listing data, set the value of this parameter to the value returned
+    #   in the previous response.
+    #
+    #   A token expires one hour after it's issued. If you change `Filters`
+    #   or `SortCriteria` between calls, the token is no longer valid and
+    #   the request fails with a `ValidationException`.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return. Valid values are 1–100. The
+    #   default is 100.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/GetSoftwareV2Request AWS API Documentation
+    #
+    class GetSoftwareV2Request < Struct.new(
+      :filters,
+      :scopes,
+      :sort_criteria,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] software
+    #   An array of software packages returned by the operation.
+    #   @return [Array<Types::SoftwareResult>]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token to use to request the next page of results.
+    #   Otherwise, this parameter is null.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/GetSoftwareV2Response AWS API Documentation
+    #
+    class GetSoftwareV2Response < Struct.new(
+      :software,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -29215,7 +29571,8 @@ module Aws::SecurityHub
     # @!attribute [rw] providers
     #   A list of cloud providers to filter the security control definitions
     #   by. For example, specify `Azure` to return only controls that
-    #   evaluate Azure resources.
+    #   evaluate Azure resources, or `GCP` to return only controls that
+    #   evaluate GCP resources.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ListSecurityControlDefinitionsRequest AWS API Documentation
@@ -30234,6 +30591,10 @@ module Aws::SecurityHub
     #   `ConfigurationType` for the organization. If your
     #   `ConfigurationType` is local configuration, then the value of
     #   `Status` is always `ENABLED`.
+    #
+    #   If the value of `Status` is `DISABLED`, central configuration is
+    #   disabled because the organization is managed by Security Hub CSPM
+    #   policies in Organizations.
     #   @return [String]
     #
     # @!attribute [rw] status_message
@@ -30871,12 +31232,18 @@ module Aws::SecurityHub
     #   with Microsoft Azure.
     #   @return [Types::AzureProviderConfiguration]
     #
+    # @!attribute [rw] gcp
+    #   The configuration settings required to establish a CSPM integration
+    #   with Google Cloud Platform (GCP).
+    #   @return [Types::GcpProviderConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ProviderConfiguration AWS API Documentation
     #
     class ProviderConfiguration < Struct.new(
       :jira_cloud,
       :service_now,
       :azure,
+      :gcp,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
@@ -30885,6 +31252,7 @@ module Aws::SecurityHub
       class JiraCloud < ProviderConfiguration; end
       class ServiceNow < ProviderConfiguration; end
       class Azure < ProviderConfiguration; end
+      class Gcp < ProviderConfiguration; end
       class Unknown < ProviderConfiguration; end
     end
 
@@ -30904,12 +31272,17 @@ module Aws::SecurityHub
     #   Details about a Microsoft Azure CSPM integration.
     #   @return [Types::AzureDetail]
     #
+    # @!attribute [rw] gcp
+    #   Details about a Google Cloud Platform (GCP) CSPM integration.
+    #   @return [Types::GcpDetail]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ProviderDetail AWS API Documentation
     #
     class ProviderDetail < Struct.new(
       :jira_cloud,
       :service_now,
       :azure,
+      :gcp,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
@@ -30918,6 +31291,7 @@ module Aws::SecurityHub
       class JiraCloud < ProviderDetail; end
       class ServiceNow < ProviderDetail; end
       class Azure < ProviderDetail; end
+      class Gcp < ProviderDetail; end
       class Unknown < ProviderDetail; end
     end
 
@@ -30965,12 +31339,18 @@ module Aws::SecurityHub
     #   Azure CSPM integration.
     #   @return [Types::AzureUpdateConfiguration]
     #
+    # @!attribute [rw] gcp
+    #   The parameters required to update the configuration for a Google
+    #   Cloud Platform (GCP) CSPM integration.
+    #   @return [Types::GcpUpdateConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ProviderUpdateConfiguration AWS API Documentation
     #
     class ProviderUpdateConfiguration < Struct.new(
       :jira_cloud,
       :service_now,
       :azure,
+      :gcp,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
@@ -30979,6 +31359,7 @@ module Aws::SecurityHub
       class JiraCloud < ProviderUpdateConfiguration; end
       class ServiceNow < ProviderUpdateConfiguration; end
       class Azure < ProviderUpdateConfiguration; end
+      class Gcp < ProviderUpdateConfiguration; end
       class Unknown < ProviderUpdateConfiguration; end
     end
 
@@ -32356,6 +32737,10 @@ module Aws::SecurityHub
     #   Details about an Azure resource that is related to a finding.
     #   @return [Hash,Array,String,Numeric,Boolean]
     #
+    # @!attribute [rw] gcp_resource
+    #   Details about a GCP resource that is related to a finding.
+    #   @return [Hash,Array,String,Numeric,Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ResourceDetails AWS API Documentation
     #
     class ResourceDetails < Struct.new(
@@ -32459,7 +32844,8 @@ module Aws::SecurityHub
       :aws_s3_access_point,
       :aws_ec2_client_vpn_endpoint,
       :code_repository,
-      :azure_resource)
+      :azure_resource,
+      :gcp_resource)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -33832,7 +34218,7 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] provider
     #   The cloud provider whose resources the security control evaluates.
-    #   For example, `AWS` or `Azure`.
+    #   For example, `AWS`, `Azure`, or `GCP`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/SecurityControl AWS API Documentation
@@ -33935,7 +34321,7 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] provider
     #   The cloud provider whose resources the security control evaluates.
-    #   For example, `AWS` or `Azure`.
+    #   For example, `AWS`, `Azure`, or `GCP`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/SecurityControlDefinition AWS API Documentation
@@ -34559,6 +34945,81 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # Enables the creation of criteria for software packages in Security
+    # Hub.
+    #
+    # @!attribute [rw] string_filters
+    #   Enables filtering based on string field values.
+    #   @return [Array<Types::SoftwareStringFilter>]
+    #
+    # @!attribute [rw] nested_composite_filters
+    #   Provides an additional level of filtering, creating a three-layer
+    #   nested structure. The first layer is a `CompositeFilters` array with
+    #   a `CompositeOperator` (`AND`/`OR`). The second layer is a
+    #   `CompositeFilter` object that contains direct filters and
+    #   `NestedCompositeFilters`. The third layer is
+    #   `NestedCompositeFilters`, which contains additional filter
+    #   conditions.
+    #   @return [Array<Types::SoftwareCompositeFilter>]
+    #
+    # @!attribute [rw] operator
+    #   The logical operator used to combine multiple filter conditions.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/SoftwareCompositeFilter AWS API Documentation
+    #
+    class SoftwareCompositeFilter < Struct.new(
+      :string_filters,
+      :nested_composite_filters,
+      :operator)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Enables filtering of software packages and the resources that contain
+    # them.
+    #
+    # @!attribute [rw] composite_filters
+    #   A collection of complex filtering conditions that can be applied to
+    #   software packages.
+    #   @return [Array<Types::SoftwareCompositeFilter>]
+    #
+    # @!attribute [rw] composite_operator
+    #   The logical operator used to combine multiple filter conditions in
+    #   the structure.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/SoftwareFilters AWS API Documentation
+    #
+    class SoftwareFilters < Struct.new(
+      :composite_filters,
+      :composite_operator)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Defines the configuration for organizing and categorizing software
+    # packages installed on your resources.
+    #
+    # @!attribute [rw] group_by_field
+    #   Specifies the attribute that software statistics should be grouped
+    #   by.
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   The criteria used to select the software packages included in the
+    #   statistics. You can nest composite filters up to three levels deep.
+    #   @return [Types::SoftwareFilters]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/SoftwareGroupByRule AWS API Documentation
+    #
+    class SoftwareGroupByRule < Struct.new(
+      :group_by_field,
+      :filters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Information about a software package.
     #
     # @!attribute [rw] name
@@ -34625,6 +35086,146 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # Provides information about a resource that contains a software
+    # package.
+    #
+    # @!attribute [rw] account_id
+    #   The Amazon Web Services account that recorded the resource data in
+    #   Security Hub.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   The type of resource, for example `AWS::EC2::Instance` or
+    #   `AWS::Lambda::Function`.
+    #   @return [String]
+    #
+    # @!attribute [rw] region
+    #   The Amazon Web Services Region that recorded the resource data in
+    #   Security Hub.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_id
+    #   The unique identifier for a resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_provider
+    #   The cloud provider where the resource exists. Valid values are `AWS`
+    #   and `Azure`.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_owner_org_id
+    #   The identifier of the cloud organization that owns the resource. For
+    #   Amazon Web Services resources, this is the Organizations ID. For
+    #   Azure resources, this is the Azure tenant ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_owner_account_id
+    #   The identifier of the cloud account that owns the resource. For
+    #   Amazon Web Services resources, this is the Amazon Web Services
+    #   account ID. For Azure resources, this is the Azure subscription ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_cloud_partition
+    #   The cloud partition where the resource exists. For Amazon Web
+    #   Services, valid values include `aws`, `aws-cn`, and `aws-us-gov`.
+    #   This field isn't returned for cloud providers that don't use
+    #   partitions.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_region
+    #   The native cloud region where the resource is located. For Amazon
+    #   Web Services, this is an Amazon Web Services Region (for example,
+    #   `us-east-1`). For Azure resources, this is the Azure region (for
+    #   example, `westus2`).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/SoftwareResourceResult AWS API Documentation
+    #
+    class SoftwareResourceResult < Struct.new(
+      :account_id,
+      :resource_type,
+      :region,
+      :resource_id,
+      :resource_provider,
+      :resource_owner_org_id,
+      :resource_owner_account_id,
+      :resource_cloud_partition,
+      :resource_region)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides information about a software package installed on one or more
+    # of your resources.
+    #
+    # @!attribute [rw] package_name
+    #   The name of the software package.
+    #   @return [String]
+    #
+    # @!attribute [rw] package_version
+    #   The version of the software package.
+    #   @return [String]
+    #
+    # @!attribute [rw] package_type
+    #   The type of the software package, for example `operating-system`,
+    #   `application`, or `library`.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_count
+    #   The number of resources that contain this software package. To list
+    #   these resources, call `GetSoftwareResourcesV2`.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/SoftwareResult AWS API Documentation
+    #
+    class SoftwareResult < Struct.new(
+      :package_name,
+      :package_version,
+      :package_type,
+      :resource_count)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Defines the data boundary for a software query. Scopes determine which
+    # organizational units or organizations to retrieve data from.
+    #
+    # @!attribute [rw] aws_organizations
+    #   A list of Organizations scopes to include in the query results. Each
+    #   entry in the list specifies an organization or organizational unit
+    #   to include for the delegated administrator's account. If the list
+    #   specifies multiple entries, the entries are combined using OR logic.
+    #   @return [Array<Types::AwsOrganizationScope>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/SoftwareScopes AWS API Documentation
+    #
+    class SoftwareScopes < Struct.new(
+      :aws_organizations)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Enables filtering of software packages based on string field values.
+    #
+    # @!attribute [rw] field_name
+    #   The name of the field.
+    #   @return [String]
+    #
+    # @!attribute [rw] filter
+    #   The string value and comparison operator to filter on. Supported
+    #   comparisons are `EQUALS`, `NOT_EQUALS`, `PREFIX`, and
+    #   `PREFIX_NOT_EQUALS`.
+    #   @return [Types::StringFilter]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/SoftwareStringFilter AWS API Documentation
+    #
+    class SoftwareStringFilter < Struct.new(
+      :field_name,
+      :filter)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A collection of finding attributes used to sort findings.
     #
     # @!attribute [rw] field
@@ -34670,7 +35271,7 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] provider
     #   The cloud provider whose resources the standard evaluates. For
-    #   example, `AWS` or `Azure`.
+    #   example, `AWS`, `Azure`, or `GCP`.
     #   @return [String]
     #
     # @!attribute [rw] standards_managed_by
@@ -35056,7 +35657,7 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] provider
     #   The cloud provider whose resources the standard evaluates. For
-    #   example, `AWS` or `Azure`.
+    #   example, `AWS`, `Azure`, or `GCP`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/StandardsSubscription AWS API Documentation
@@ -35142,7 +35743,18 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] association_status
     #   The current status of the association between the specified target
-    #   and the configuration.
+    #   and the configuration. Possible values are:
+    #
+    #   * `PENDING` - The association is in progress.
+    #
+    #   * `SUCCESS` - The association succeeded.
+    #
+    #   * `FAILED` - The association failed. For details, see
+    #     `AssociationStatusMessage`.
+    #
+    #   * `DISABLED` - Central configuration is disabled because the
+    #     organization is managed by Security Hub CSPM policies in
+    #     Organizations.
     #   @return [String]
     #
     # @!attribute [rw] association_status_message

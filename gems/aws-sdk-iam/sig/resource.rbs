@@ -150,6 +150,7 @@ module Aws
                          assume_role_policy_document: ::String,
                          ?description: ::String,
                          ?max_session_duration: ::Integer,
+                         ?max_signin_session_duration: ::Integer,
                          ?permissions_boundary: ::String,
                          ?tags: Array[
                            {
@@ -171,7 +172,19 @@ module Aws
                                     }
                                   ],
                                   ?assertion_encryption_mode: ("Required" | "Allowed"),
-                                  ?add_private_key: ::String
+                                  ?add_private_key: ::String,
+                                  ?context_provider: {
+                                    key_definition_list: Array[
+                                      {
+                                        source_key: ::String,
+                                        target_key: ::String?
+                                      }
+                                    ]?,
+                                    subject_source_key: ::String,
+                                    subject_type_value: ::String?,
+                                    subject_type_source_key: ::String?
+                                  },
+                                  ?identity_center_instance_arn: ::String
                                 ) -> SamlProvider
                               | (?Hash[Symbol, untyped]) -> SamlProvider
 

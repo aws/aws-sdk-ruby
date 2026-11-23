@@ -91,6 +91,19 @@ module Aws
                                     ) -> _AcceptChannelHandshakeResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AcceptChannelHandshakeResponseSuccess
 
+      interface _CancelChannelContractResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CancelChannelContractResponse]
+        def channel_contract_detail: () -> Types::CancelChannelContractDetail
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PartnerCentralChannel/Client.html#cancel_channel_contract-instance_method
+      def cancel_channel_contract: (
+                                     catalog: ::String,
+                                     identifier: ::String,
+                                     ?reason: ::String,
+                                     ?client_token: ::String
+                                   ) -> _CancelChannelContractResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CancelChannelContractResponseSuccess
+
       interface _CancelChannelHandshakeResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CancelChannelHandshakeResponse]
         def channel_handshake_detail: () -> Types::CancelChannelHandshakeDetail
@@ -101,6 +114,44 @@ module Aws
                                       identifier: ::String
                                     ) -> _CancelChannelHandshakeResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CancelChannelHandshakeResponseSuccess
+
+      interface _CreateChannelContractResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateChannelContractResponse]
+        def channel_contract_detail: () -> Types::CreateChannelContractDetail
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PartnerCentralChannel/Client.html#create_channel_contract-instance_method
+      def create_channel_contract: (
+                                     contract_type: ("MANAGED_SERVICES_ATTESTATION"),
+                                     catalog: ::String,
+                                     payload: {
+                                       managed_services_attestation_payload: {
+                                         legal_entity_name: ::String,
+                                         relationship_identifier: ::String,
+                                         program_management_account_identifier: ::String,
+                                         member_account_ids: Array[::String]?,
+                                         end_date: ::Time,
+                                         supported_services: Array[("MONITORING" | "PATCHING" | "SECURITY" | "BACKUP_AND_DISASTER_RECOVERY" | "FINANCIAL_OPERATIONS" | "INFRASTRUCTURE_AS_CODE_AND_AUTOMATION" | "WELL_ARCHITECTED" | "ARTIFICIAL_INTELLIGENCE_AND_MACHINE_LEARNING_OPERATIONS")],
+                                         legal_entity_address: {
+                                           city: ::String,
+                                           state_or_region: ::String,
+                                           postal_code: ::String,
+                                           country_code: ::String,
+                                           address_line: ::String,
+                                           address_line_2: ::String?
+                                         },
+                                         signatory_name: ::String,
+                                         signatory_email: ::String
+                                       }?
+                                     },
+                                     ?client_token: ::String,
+                                     ?tags: Array[
+                                       {
+                                         key: ::String,
+                                         value: ::String
+                                       }
+                                     ]
+                                   ) -> _CreateChannelContractResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateChannelContractResponseSuccess
 
       interface _CreateChannelHandshakeResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateChannelHandshakeResponse]
@@ -141,7 +192,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PartnerCentralChannel/Client.html#create_program_management_account-instance_method
       def create_program_management_account: (
                                                catalog: ::String,
-                                               program: ("SOLUTION_PROVIDER" | "DISTRIBUTION" | "DISTRIBUTION_SELLER"),
+                                               program: ("SOLUTION_PROVIDER" | "DISTRIBUTION" | "DISTRIBUTION_SELLER" | "MANAGED_SERVICES_PROVIDER"),
                                                display_name: ::String,
                                                account_id: ::String,
                                                ?client_token: ::String,
@@ -150,7 +201,8 @@ module Aws
                                                    key: ::String,
                                                    value: ::String
                                                  }
-                                               ]
+                                               ],
+                                               ?type: ("RESALE_BILLING_TRANSFER" | "MANAGED_SERVICES")
                                              ) -> _CreateProgramManagementAccountResponseSuccess
                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateProgramManagementAccountResponseSuccess
 
@@ -161,9 +213,9 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PartnerCentralChannel/Client.html#create_relationship-instance_method
       def create_relationship: (
                                  catalog: ::String,
-                                 association_type: ("DOWNSTREAM_SELLER" | "END_CUSTOMER" | "INTERNAL"),
+                                 association_type: ("DOWNSTREAM_SELLER" | "END_CUSTOMER" | "INTERNAL" | "MANAGED_SERVICES_END_CUSTOMER"),
                                  program_management_account_identifier: ::String,
-                                 associated_account_id: ::String,
+                                 ?associated_account_id: ::String,
                                  display_name: ::String,
                                  ?resale_account_model: ("DISTRIBUTOR" | "END_CUSTOMER" | "SOLUTION_PROVIDER"),
                                  sector: ("COMMERCIAL" | "GOVERNMENT" | "GOVERNMENT_EXCEPTION"),
@@ -174,7 +226,9 @@ module Aws
                                      value: ::String
                                    }
                                  ],
-                                 ?requested_support_plan: Params::support_plan
+                                 ?requested_support_plan: Params::support_plan,
+                                 ?account_scope: ("ENTIRE_ORGANIZATION" | "SPECIFIC_MEMBER_ACCOUNTS"),
+                                 ?start_date: ::Time
                                ) -> _CreateRelationshipResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateRelationshipResponseSuccess
 
@@ -201,6 +255,17 @@ module Aws
                                ) -> _DeleteRelationshipResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteRelationshipResponseSuccess
 
+      interface _GetChannelContractResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetChannelContractResponse]
+        def channel_contract_detail: () -> Types::ChannelContractDetail
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PartnerCentralChannel/Client.html#get_channel_contract-instance_method
+      def get_channel_contract: (
+                                  catalog: ::String,
+                                  identifier: ::String
+                                ) -> _GetChannelContractResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetChannelContractResponseSuccess
+
       interface _GetRelationshipResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetRelationshipResponse]
         def relationship_detail: () -> Types::RelationshipDetail
@@ -212,6 +277,33 @@ module Aws
                               identifier: ::String
                             ) -> _GetRelationshipResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetRelationshipResponseSuccess
+
+      interface _ListChannelContractsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListChannelContractsResponse]
+        def items: () -> ::Array[Types::ChannelContractSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PartnerCentralChannel/Client.html#list_channel_contracts-instance_method
+      def list_channel_contracts: (
+                                    catalog: ::String,
+                                    contract_type: ("MANAGED_SERVICES_ATTESTATION"),
+                                    ?statuses: Array[("PENDING" | "ACCEPTED" | "EXPIRED" | "CANCELED" | "INACTIVE")],
+                                    ?contract_type_filters: {
+                                      managed_services_attestation_type_filters: {
+                                        relationship_identifiers: Array[::String]?,
+                                        legal_entity_names: Array[::String]?
+                                      }?
+                                    },
+                                    ?contract_type_sort: {
+                                      managed_services_attestation_type_sort: {
+                                        sort_order: ("Ascending" | "Descending"),
+                                        sort_by: ("UpdatedAt")
+                                      }?
+                                    },
+                                    ?max_results: ::Integer,
+                                    ?next_token: ::String
+                                  ) -> _ListChannelContractsResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListChannelContractsResponseSuccess
 
       interface _ListChannelHandshakesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListChannelHandshakesResponse]
@@ -234,7 +326,7 @@ module Aws
                                          service_period_types: Array[("MINIMUM_NOTICE_PERIOD" | "FIXED_COMMITMENT_PERIOD")]?
                                        }?,
                                        program_management_account_type_filters: {
-                                         programs: Array[("SOLUTION_PROVIDER" | "DISTRIBUTION" | "DISTRIBUTION_SELLER")]?
+                                         programs: Array[("SOLUTION_PROVIDER" | "DISTRIBUTION" | "DISTRIBUTION_SELLER" | "MANAGED_SERVICES_PROVIDER")]?
                                        }?
                                      },
                                      ?handshake_type_sort: {
@@ -265,14 +357,15 @@ module Aws
                                               catalog: ::String,
                                               ?max_results: ::Integer,
                                               ?display_names: Array[::String],
-                                              ?programs: Array[("SOLUTION_PROVIDER" | "DISTRIBUTION" | "DISTRIBUTION_SELLER")],
+                                              ?programs: Array[("SOLUTION_PROVIDER" | "DISTRIBUTION" | "DISTRIBUTION_SELLER" | "MANAGED_SERVICES_PROVIDER")],
                                               ?account_ids: Array[::String],
                                               ?statuses: Array[("PENDING" | "ACTIVE" | "INACTIVE")],
                                               ?sort: {
                                                 sort_order: ("Ascending" | "Descending"),
                                                 sort_by: ("UpdatedAt")
                                               },
-                                              ?next_token: ::String
+                                              ?next_token: ::String,
+                                              ?type: ("RESALE_BILLING_TRANSFER" | "MANAGED_SERVICES")
                                             ) -> _ListProgramManagementAccountsResponseSuccess
                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListProgramManagementAccountsResponseSuccess
 
@@ -286,7 +379,7 @@ module Aws
                                 catalog: ::String,
                                 ?max_results: ::Integer,
                                 ?associated_account_ids: Array[::String],
-                                ?association_types: Array[("DOWNSTREAM_SELLER" | "END_CUSTOMER" | "INTERNAL")],
+                                ?association_types: Array[("DOWNSTREAM_SELLER" | "END_CUSTOMER" | "INTERNAL" | "MANAGED_SERVICES_END_CUSTOMER")],
                                 ?display_names: Array[::String],
                                 ?program_management_account_identifiers: Array[::String],
                                 ?sort: {

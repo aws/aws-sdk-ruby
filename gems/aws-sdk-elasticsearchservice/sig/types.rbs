@@ -235,6 +235,25 @@ module Aws::ElasticsearchService
       attr_accessor config_change_status: ("Pending" | "Initializing" | "Validating" | "ValidationFailed" | "ApplyingChanges" | "Completed" | "PendingUserInput" | "Cancelled")
       attr_accessor last_updated_time: ::Time
       attr_accessor initiated_by: ("CUSTOMER" | "SERVICE")
+      attr_accessor cloned_blue_green_upgrade_details: Types::ClonedBlueGreenUpgradeDetails
+      SENSITIVE: []
+    end
+
+    class ClonedBlueGreenOptions
+      attr_accessor retention_options: Types::RetentionOptions
+      SENSITIVE: []
+    end
+
+    class ClonedBlueGreenScheduledAction
+      attr_accessor action: ("AutomaticCutoverToPrimaryCluster" | "DeletePrimaryCluster")
+      attr_accessor scheduled_time: ::Time
+      SENSITIVE: []
+    end
+
+    class ClonedBlueGreenUpgradeDetails
+      attr_accessor traffic_split: Types::TrafficPercents
+      attr_accessor scheduled_action: Types::ClonedBlueGreenScheduledAction
+      attr_accessor retention_in_hours: ::Integer
       SENSITIVE: []
     end
 
@@ -336,6 +355,17 @@ module Aws::ElasticsearchService
       SENSITIVE: []
     end
 
+    class CutoverOptions
+      attr_accessor target: ("ClonedCluster" | "PrimaryCluster")
+      attr_accessor status: ("InProgress" | "Completed" | "Failed")
+      SENSITIVE: []
+    end
+
+    class CutoverRequestOptions
+      attr_accessor target: ("ClonedCluster" | "PrimaryCluster")
+      SENSITIVE: []
+    end
+
     class DeleteElasticsearchDomainRequest
       attr_accessor domain_name: ::String
       SENSITIVE: []
@@ -394,6 +424,12 @@ module Aws::ElasticsearchService
     class DeploymentStrategyOptionsStatus
       attr_accessor options: Types::DeploymentStrategyOptions
       attr_accessor status: Types::OptionStatus
+      SENSITIVE: []
+    end
+
+    class DeploymentStrategyOverrideOptions
+      attr_accessor deployment_strategy: ("ClonedBlueGreen")
+      attr_accessor cloned_blue_green_options: Types::ClonedBlueGreenOptions
       SENSITIVE: []
     end
 
@@ -1101,6 +1137,20 @@ module Aws::ElasticsearchService
     class ResourceNotFoundException < Aws::EmptyStructure
     end
 
+    class RetentionOptions
+      attr_accessor retention_in_hours: ::Integer
+      attr_accessor retention_action: ("RollbackToPrimaryCluster" | "DeletePrimaryCluster")
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class RetentionInHours < RetentionOptions
+      end
+      class RetentionAction < RetentionOptions
+      end
+      class Unknown < RetentionOptions
+      end
+    end
+
     class RevokeVpcEndpointAccessRequest
       attr_accessor domain_name: ::String
       attr_accessor account: ::String
@@ -1196,6 +1246,42 @@ module Aws::ElasticsearchService
       SENSITIVE: []
     end
 
+    class TrafficPercents
+      attr_accessor primary_read_traffic_percent: ::Integer
+      attr_accessor clone_read_traffic_percent: ::Integer
+      SENSITIVE: []
+    end
+
+    class TrafficSplitOptions
+      attr_accessor current: Types::TrafficPercents
+      attr_accessor target: Types::TrafficPercents
+      attr_accessor status: ("InProgress" | "Completed" | "Failed")
+      SENSITIVE: []
+    end
+
+    class TrafficSplitRequestOptions
+      attr_accessor strategy: ("ShiftReadTrafficPercent")
+      attr_accessor clone_read_traffic_percent: ::Integer
+      SENSITIVE: []
+    end
+
+    class UpdateCloneRequest
+      attr_accessor domain_name: ::String
+      attr_accessor traffic_split_options: Types::TrafficSplitRequestOptions
+      attr_accessor cutover_options: Types::CutoverRequestOptions
+      attr_accessor retention_options: Types::RetentionOptions
+      SENSITIVE: []
+    end
+
+    class UpdateCloneResponse
+      attr_accessor domain_name: ::String
+      attr_accessor change_id: ::String
+      attr_accessor cutover_options: Types::CutoverOptions
+      attr_accessor traffic_split_options: Types::TrafficSplitOptions
+      attr_accessor retention_options: Types::RetentionOptions
+      SENSITIVE: []
+    end
+
     class UpdateElasticsearchDomainConfigRequest
       attr_accessor domain_name: ::String
       attr_accessor elasticsearch_cluster_config: Types::ElasticsearchClusterConfig
@@ -1253,6 +1339,7 @@ module Aws::ElasticsearchService
       attr_accessor domain_name: ::String
       attr_accessor target_version: ::String
       attr_accessor perform_check_only: bool
+      attr_accessor deployment_strategy_options: Types::DeploymentStrategyOverrideOptions
       SENSITIVE: []
     end
 
@@ -1260,6 +1347,7 @@ module Aws::ElasticsearchService
       attr_accessor domain_name: ::String
       attr_accessor target_version: ::String
       attr_accessor perform_check_only: bool
+      attr_accessor deployment_strategy_options: Types::DeploymentStrategyOverrideOptions
       attr_accessor change_progress_details: Types::ChangeProgressDetails
       SENSITIVE: []
     end

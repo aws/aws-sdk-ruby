@@ -376,6 +376,7 @@ module Aws::MediaLive
     EmbeddedConvert608To708 = Shapes::StringShape.new(name: 'EmbeddedConvert608To708')
     EmbeddedDestinationSettings = Shapes::StructureShape.new(name: 'EmbeddedDestinationSettings')
     EmbeddedDestinationStyleControl = Shapes::StringShape.new(name: 'EmbeddedDestinationStyleControl')
+    EmbeddedModeType = Shapes::StringShape.new(name: 'EmbeddedModeType')
     EmbeddedPlusScte20DestinationSettings = Shapes::StructureShape.new(name: 'EmbeddedPlusScte20DestinationSettings')
     EmbeddedScte20Detection = Shapes::StringShape.new(name: 'EmbeddedScte20Detection')
     EmbeddedSourceSettings = Shapes::StructureShape.new(name: 'EmbeddedSourceSettings')
@@ -614,6 +615,9 @@ module Aws::MediaLive
     IpPool = Shapes::StructureShape.new(name: 'IpPool')
     IpPoolCreateRequest = Shapes::StructureShape.new(name: 'IpPoolCreateRequest')
     IpPoolUpdateRequest = Shapes::StructureShape.new(name: 'IpPoolUpdateRequest')
+    JpegXsInputMaximumBitrate = Shapes::StringShape.new(name: 'JpegXsInputMaximumBitrate')
+    JpegXsInputResolution = Shapes::StringShape.new(name: 'JpegXsInputResolution')
+    JpegXsInputSpecification = Shapes::StructureShape.new(name: 'JpegXsInputSpecification')
     KeyProviderSettings = Shapes::StructureShape.new(name: 'KeyProviderSettings')
     LastFrameClippingBehavior = Shapes::StringShape.new(name: 'LastFrameClippingBehavior')
     LimitExceeded = Shapes::StructureShape.new(name: 'LimitExceeded')
@@ -735,6 +739,7 @@ module Aws::MediaLive
     MediaPackageOutputDestinationSettings = Shapes::StructureShape.new(name: 'MediaPackageOutputDestinationSettings')
     MediaPackageOutputSettings = Shapes::StructureShape.new(name: 'MediaPackageOutputSettings')
     MediaPackageV2AbWatermarkerIrdetoSettings = Shapes::StructureShape.new(name: 'MediaPackageV2AbWatermarkerIrdetoSettings')
+    MediaPackageV2CaptionLanguageSetting = Shapes::StringShape.new(name: 'MediaPackageV2CaptionLanguageSetting')
     MediaPackageV2DestinationSettings = Shapes::StructureShape.new(name: 'MediaPackageV2DestinationSettings')
     MediaPackageV2GroupSettings = Shapes::StructureShape.new(name: 'MediaPackageV2GroupSettings')
     MediaPackageV2WatermarkingSettings = Shapes::StructureShape.new(name: 'MediaPackageV2WatermarkingSettings')
@@ -1111,6 +1116,7 @@ module Aws::MediaLive
     WavSettings = Shapes::StructureShape.new(name: 'WavSettings')
     WebvttDestinationSettings = Shapes::StructureShape.new(name: 'WebvttDestinationSettings')
     WebvttDestinationStyleControl = Shapes::StringShape.new(name: 'WebvttDestinationStyleControl')
+    WebvttSourceSettings = Shapes::StructureShape.new(name: 'WebvttSourceSettings')
     __boolean = Shapes::BooleanShape.new(name: '__boolean')
     __double = Shapes::FloatShape.new(name: '__double')
     __doubleMin0 = Shapes::FloatShape.new(name: '__doubleMin0')
@@ -1175,6 +1181,7 @@ module Aws::MediaLive
     __integerMin1Max51 = Shapes::IntegerShape.new(name: '__integerMin1Max51')
     __integerMin1Max511 = Shapes::IntegerShape.new(name: '__integerMin1Max511')
     __integerMin1Max6 = Shapes::IntegerShape.new(name: '__integerMin1Max6')
+    __integerMin1Max63 = Shapes::IntegerShape.new(name: '__integerMin1Max63')
     __integerMin1Max65535 = Shapes::IntegerShape.new(name: '__integerMin1Max65535')
     __integerMin1Max8 = Shapes::IntegerShape.new(name: '__integerMin1Max8')
     __integerMin1Max800 = Shapes::IntegerShape.new(name: '__integerMin1Max800')
@@ -1753,6 +1760,7 @@ module Aws::MediaLive
     CaptionSelectorSettings.add_member(:scte_27_source_settings, Shapes::ShapeRef.new(shape: Scte27SourceSettings, location_name: "scte27SourceSettings"))
     CaptionSelectorSettings.add_member(:teletext_source_settings, Shapes::ShapeRef.new(shape: TeletextSourceSettings, location_name: "teletextSourceSettings"))
     CaptionSelectorSettings.add_member(:smart_subtitle_source_settings, Shapes::ShapeRef.new(shape: SmartSubtitleSourceSettings, location_name: "smartSubtitleSourceSettings"))
+    CaptionSelectorSettings.add_member(:webvtt_source_settings, Shapes::ShapeRef.new(shape: WebvttSourceSettings, location_name: "webvttSourceSettings"))
     CaptionSelectorSettings.struct_class = Types::CaptionSelectorSettings
 
     CdiInputSpecification.add_member(:resolution, Shapes::ShapeRef.new(shape: CdiInputResolution, location_name: "resolution"))
@@ -1781,6 +1789,7 @@ module Aws::MediaLive
     Channel.add_member(:linked_channel_settings, Shapes::ShapeRef.new(shape: DescribeLinkedChannelSettings, location_name: "linkedChannelSettings"))
     Channel.add_member(:channel_security_groups, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "channelSecurityGroups"))
     Channel.add_member(:inference_settings, Shapes::ShapeRef.new(shape: DescribeInferenceSettings, location_name: "inferenceSettings"))
+    Channel.add_member(:jpeg_xs_input_specification, Shapes::ShapeRef.new(shape: JpegXsInputSpecification, location_name: "jpegXsInputSpecification"))
     Channel.struct_class = Types::Channel
 
     ChannelAlert.add_member(:alert_type, Shapes::ShapeRef.new(shape: __string, location_name: "alertType"))
@@ -1828,6 +1837,7 @@ module Aws::MediaLive
     ChannelSummary.add_member(:linked_channel_settings, Shapes::ShapeRef.new(shape: DescribeLinkedChannelSettings, location_name: "linkedChannelSettings"))
     ChannelSummary.add_member(:channel_security_groups, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "channelSecurityGroups"))
     ChannelSummary.add_member(:inference_settings, Shapes::ShapeRef.new(shape: DescribeInferenceSettings, location_name: "inferenceSettings"))
+    ChannelSummary.add_member(:jpeg_xs_input_specification, Shapes::ShapeRef.new(shape: JpegXsInputSpecification, location_name: "jpegXsInputSpecification"))
     ChannelSummary.struct_class = Types::ChannelSummary
 
     ClaimDeviceRequest.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "id"))
@@ -1962,6 +1972,7 @@ module Aws::MediaLive
     CreateChannel.add_member(:linked_channel_settings, Shapes::ShapeRef.new(shape: LinkedChannelSettings, location_name: "linkedChannelSettings"))
     CreateChannel.add_member(:channel_security_groups, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "channelSecurityGroups"))
     CreateChannel.add_member(:inference_settings, Shapes::ShapeRef.new(shape: InferenceSettings, location_name: "inferenceSettings"))
+    CreateChannel.add_member(:jpeg_xs_input_specification, Shapes::ShapeRef.new(shape: JpegXsInputSpecification, location_name: "jpegXsInputSpecification"))
     CreateChannel.struct_class = Types::CreateChannel
 
     CreateChannelPlacementGroupRequest.add_member(:cluster_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "clusterId"))
@@ -2000,6 +2011,7 @@ module Aws::MediaLive
     CreateChannelRequest.add_member(:linked_channel_settings, Shapes::ShapeRef.new(shape: LinkedChannelSettings, location_name: "linkedChannelSettings"))
     CreateChannelRequest.add_member(:channel_security_groups, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "channelSecurityGroups"))
     CreateChannelRequest.add_member(:inference_settings, Shapes::ShapeRef.new(shape: InferenceSettings, location_name: "inferenceSettings"))
+    CreateChannelRequest.add_member(:jpeg_xs_input_specification, Shapes::ShapeRef.new(shape: JpegXsInputSpecification, location_name: "jpegXsInputSpecification"))
     CreateChannelRequest.struct_class = Types::CreateChannelRequest
 
     CreateChannelResponse.add_member(:channel, Shapes::ShapeRef.new(shape: Channel, location_name: "channel"))
@@ -2466,6 +2478,7 @@ module Aws::MediaLive
     DeleteChannelResponse.add_member(:linked_channel_settings, Shapes::ShapeRef.new(shape: DescribeLinkedChannelSettings, location_name: "linkedChannelSettings"))
     DeleteChannelResponse.add_member(:channel_security_groups, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "channelSecurityGroups"))
     DeleteChannelResponse.add_member(:inference_settings, Shapes::ShapeRef.new(shape: DescribeInferenceSettings, location_name: "inferenceSettings"))
+    DeleteChannelResponse.add_member(:jpeg_xs_input_specification, Shapes::ShapeRef.new(shape: JpegXsInputSpecification, location_name: "jpegXsInputSpecification"))
     DeleteChannelResponse.struct_class = Types::DeleteChannelResponse
 
     DeleteCloudWatchAlarmTemplateGroupRequest.add_member(:identifier, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "identifier"))
@@ -2669,6 +2682,7 @@ module Aws::MediaLive
     DescribeChannelResponse.add_member(:linked_channel_settings, Shapes::ShapeRef.new(shape: DescribeLinkedChannelSettings, location_name: "linkedChannelSettings"))
     DescribeChannelResponse.add_member(:channel_security_groups, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "channelSecurityGroups"))
     DescribeChannelResponse.add_member(:inference_settings, Shapes::ShapeRef.new(shape: DescribeInferenceSettings, location_name: "inferenceSettings"))
+    DescribeChannelResponse.add_member(:jpeg_xs_input_specification, Shapes::ShapeRef.new(shape: JpegXsInputSpecification, location_name: "jpegXsInputSpecification"))
     DescribeChannelResponse.struct_class = Types::DescribeChannelResponse
 
     DescribeClusterRequest.add_member(:cluster_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "clusterId"))
@@ -3047,6 +3061,8 @@ module Aws::MediaLive
 
     EmbeddedDestinationSettings.add_member(:position, Shapes::ShapeRef.new(shape: EmbeddedCaptionPositionSettings, location_name: "position"))
     EmbeddedDestinationSettings.add_member(:style_control, Shapes::ShapeRef.new(shape: EmbeddedDestinationStyleControl, location_name: "styleControl"))
+    EmbeddedDestinationSettings.add_member(:caption_service_channel, Shapes::ShapeRef.new(shape: __integerMin1Max63, location_name: "captionServiceChannel"))
+    EmbeddedDestinationSettings.add_member(:embedded_mode, Shapes::ShapeRef.new(shape: EmbeddedModeType, location_name: "embeddedMode"))
     EmbeddedDestinationSettings.struct_class = Types::EmbeddedDestinationSettings
 
     EmbeddedPlusScte20DestinationSettings.struct_class = Types::EmbeddedPlusScte20DestinationSettings
@@ -3875,6 +3891,11 @@ module Aws::MediaLive
     IpPoolUpdateRequest.add_member(:cidr, Shapes::ShapeRef.new(shape: __string, location_name: "cidr"))
     IpPoolUpdateRequest.struct_class = Types::IpPoolUpdateRequest
 
+    JpegXsInputSpecification.add_member(:codec, Shapes::ShapeRef.new(shape: InputCodec, location_name: "codec"))
+    JpegXsInputSpecification.add_member(:maximum_bitrate, Shapes::ShapeRef.new(shape: JpegXsInputMaximumBitrate, location_name: "maximumBitrate"))
+    JpegXsInputSpecification.add_member(:resolution, Shapes::ShapeRef.new(shape: JpegXsInputResolution, location_name: "resolution"))
+    JpegXsInputSpecification.struct_class = Types::JpegXsInputSpecification
+
     KeyProviderSettings.add_member(:static_key_settings, Shapes::ShapeRef.new(shape: StaticKeySettings, location_name: "staticKeySettings"))
     KeyProviderSettings.struct_class = Types::KeyProviderSettings
 
@@ -4357,6 +4378,7 @@ module Aws::MediaLive
     MediaPackageV2GroupSettings.add_member(:timed_metadata_passthrough, Shapes::ShapeRef.new(shape: CmafTimedMetadataPassthrough, location_name: "timedMetadataPassthrough"))
     MediaPackageV2GroupSettings.add_member(:additional_destinations, Shapes::ShapeRef.new(shape: __listOfMediaPackageAdditionalDestinations, location_name: "additionalDestinations"))
     MediaPackageV2GroupSettings.add_member(:watermarking_settings, Shapes::ShapeRef.new(shape: MediaPackageV2WatermarkingSettings, location_name: "watermarkingSettings"))
+    MediaPackageV2GroupSettings.add_member(:caption_language_setting, Shapes::ShapeRef.new(shape: MediaPackageV2CaptionLanguageSetting, location_name: "captionLanguageSetting"))
     MediaPackageV2GroupSettings.struct_class = Types::MediaPackageV2GroupSettings
 
     MediaPackageV2WatermarkingSettings.add_member(:media_package_v2_ab_watermarker_irdeto_settings, Shapes::ShapeRef.new(shape: MediaPackageV2AbWatermarkerIrdetoSettings, location_name: "mediaPackageV2AbWatermarkerIrdetoSettings"))
@@ -4884,6 +4906,7 @@ module Aws::MediaLive
     RestartChannelPipelinesResponse.add_member(:linked_channel_settings, Shapes::ShapeRef.new(shape: DescribeLinkedChannelSettings, location_name: "linkedChannelSettings"))
     RestartChannelPipelinesResponse.add_member(:channel_security_groups, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "channelSecurityGroups"))
     RestartChannelPipelinesResponse.add_member(:inference_settings, Shapes::ShapeRef.new(shape: DescribeInferenceSettings, location_name: "inferenceSettings"))
+    RestartChannelPipelinesResponse.add_member(:jpeg_xs_input_specification, Shapes::ShapeRef.new(shape: JpegXsInputSpecification, location_name: "jpegXsInputSpecification"))
     RestartChannelPipelinesResponse.struct_class = Types::RestartChannelPipelinesResponse
 
     Route.add_member(:cidr, Shapes::ShapeRef.new(shape: __string, location_name: "cidr"))
@@ -5187,6 +5210,7 @@ module Aws::MediaLive
     StartChannelResponse.add_member(:linked_channel_settings, Shapes::ShapeRef.new(shape: DescribeLinkedChannelSettings, location_name: "linkedChannelSettings"))
     StartChannelResponse.add_member(:channel_security_groups, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "channelSecurityGroups"))
     StartChannelResponse.add_member(:inference_settings, Shapes::ShapeRef.new(shape: DescribeInferenceSettings, location_name: "inferenceSettings"))
+    StartChannelResponse.add_member(:jpeg_xs_input_specification, Shapes::ShapeRef.new(shape: JpegXsInputSpecification, location_name: "jpegXsInputSpecification"))
     StartChannelResponse.struct_class = Types::StartChannelResponse
 
     StartDeleteMonitorDeploymentRequest.add_member(:identifier, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "identifier"))
@@ -5428,6 +5452,7 @@ module Aws::MediaLive
     StopChannelResponse.add_member(:linked_channel_settings, Shapes::ShapeRef.new(shape: DescribeLinkedChannelSettings, location_name: "linkedChannelSettings"))
     StopChannelResponse.add_member(:channel_security_groups, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "channelSecurityGroups"))
     StopChannelResponse.add_member(:inference_settings, Shapes::ShapeRef.new(shape: DescribeInferenceSettings, location_name: "inferenceSettings"))
+    StopChannelResponse.add_member(:jpeg_xs_input_specification, Shapes::ShapeRef.new(shape: JpegXsInputSpecification, location_name: "jpegXsInputSpecification"))
     StopChannelResponse.struct_class = Types::StopChannelResponse
 
     StopInputDeviceRequest.add_member(:input_device_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "inputDeviceId"))
@@ -5585,6 +5610,7 @@ module Aws::MediaLive
     UpdateChannel.add_member(:channel_security_groups, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "channelSecurityGroups"))
     UpdateChannel.add_member(:inference_settings, Shapes::ShapeRef.new(shape: InferenceSettings, location_name: "inferenceSettings"))
     UpdateChannel.add_member(:special_router_settings, Shapes::ShapeRef.new(shape: SpecialRouterSettings, location_name: "specialRouterSettings"))
+    UpdateChannel.add_member(:jpeg_xs_input_specification, Shapes::ShapeRef.new(shape: JpegXsInputSpecification, location_name: "jpegXsInputSpecification"))
     UpdateChannel.struct_class = Types::UpdateChannel
 
     UpdateChannelClass.add_member(:channel_class, Shapes::ShapeRef.new(shape: ChannelClass, required: true, location_name: "channelClass"))
@@ -5631,6 +5657,7 @@ module Aws::MediaLive
     UpdateChannelRequest.add_member(:channel_security_groups, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "channelSecurityGroups"))
     UpdateChannelRequest.add_member(:inference_settings, Shapes::ShapeRef.new(shape: InferenceSettings, location_name: "inferenceSettings"))
     UpdateChannelRequest.add_member(:special_router_settings, Shapes::ShapeRef.new(shape: SpecialRouterSettings, location_name: "specialRouterSettings"))
+    UpdateChannelRequest.add_member(:jpeg_xs_input_specification, Shapes::ShapeRef.new(shape: JpegXsInputSpecification, location_name: "jpegXsInputSpecification"))
     UpdateChannelRequest.struct_class = Types::UpdateChannelRequest
 
     UpdateChannelResponse.add_member(:channel, Shapes::ShapeRef.new(shape: Channel, location_name: "channel"))
@@ -6083,6 +6110,10 @@ module Aws::MediaLive
     WebvttDestinationSettings.add_member(:style_control, Shapes::ShapeRef.new(shape: WebvttDestinationStyleControl, location_name: "styleControl"))
     WebvttDestinationSettings.add_member(:position, Shapes::ShapeRef.new(shape: TextCaptionPositionSettings, location_name: "position"))
     WebvttDestinationSettings.struct_class = Types::WebvttDestinationSettings
+
+    WebvttSourceSettings.add_member(:group_id, Shapes::ShapeRef.new(shape: __stringMin1, location_name: "groupId"))
+    WebvttSourceSettings.add_member(:name, Shapes::ShapeRef.new(shape: __stringMin1, location_name: "name"))
+    WebvttSourceSettings.struct_class = Types::WebvttSourceSettings
 
     __listOfAdditionalDestinations.member = Shapes::ShapeRef.new(shape: AdditionalDestinations)
 

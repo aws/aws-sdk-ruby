@@ -92,6 +92,26 @@ module Aws
             expect(api_requests(:create_multipart_upload).size).to eq(1)
             expect(api_requests(:complete_multipart_upload).size).to eq(1)
           end
+
+          it 'uses a source client in copy_source_region' do
+            client
+            source_client = instance_double(S3::Client)
+            multipart_copier = instance_double(ObjectMultipartCopier)
+
+            expect(S3::Client).to receive(:new).with(
+              hash_including(region: 'us-west-2', stub_responses: true)
+            ).and_return(source_client)
+            allow(ObjectMultipartCopier).to receive(:new).and_return(multipart_copier)
+            expect(multipart_copier).to receive(:copy).with(
+              hash_including(copy_source_client: source_client)
+            )
+
+            copier.copy_from(
+              'source-bucket/source-key',
+              multipart_copy: true,
+              copy_source_region: 'us-west-2'
+            )
+          end
         end
       end
 

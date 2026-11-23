@@ -264,7 +264,8 @@ module Aws::VPCLattice
     #     An integer representing the maximum number attempts that will be made for
     #     a single request, including the initial attempt.  For example,
     #     setting this value to 5 will result in a request being retried up to
-    #     4 times. Used in `standard` and `adaptive` retry modes.
+    #     4 times. Used in `standard` and `adaptive` retry modes. Defaults to 3,
+    #     except for DynamoDB and DynamoDB Streams, which default to 4.
     #
     #   @option options [String] :profile ("default")
     #     Used when loading credentials from the shared credentials file at `HOME/.aws/credentials`.
@@ -327,15 +328,15 @@ module Aws::VPCLattice
     #     used by the default backoff function. This option is only used in the
     #     `legacy` retry mode.
     #
-    #   @option options [String] :retry_mode ("legacy")
+    #   @option options [String] :retry_mode ("standard")
     #     Specifies which retry algorithm to use. Values are:
     #
-    #     * `legacy` - The pre-existing retry behavior. This is the default
-    #       value if no retry mode is provided.
+    #     * `legacy` - The pre-existing retry behavior.
     #
     #     * `standard` - A standardized set of retry rules across the AWS SDKs.
     #       This includes support for retry quotas, which limit the number of
-    #       unsuccessful retries a client can make.
+    #       unsuccessful retries a client can make. This is the default value
+    #       if no retry mode is provided.
     #
     #     * `adaptive` - A retry mode that includes all the functionality of
     #       `standard` mode along with automatic client side throttling.
@@ -1030,9 +1031,9 @@ module Aws::VPCLattice
     #
     # @option params [String] :resource_config_dns_resolution
     #   Indicates how DNS is resolved for resource configurations associated
-    #   with this resource gateway. This value is set when you create the
-    #   resource gateway and can't be changed afterward. The default is
-    #   `PUBLIC`.
+    #   with this resource gateway. The default is `PUBLIC`. To change the
+    #   value after you create the resource gateway, use
+    #   `UpdateResourceGateway`.
     #
     #   * `IN_VPC` - DNS resolution occurs privately within the resource
     #     gateway's VPC. DNS queries for resources behind this resource
@@ -1044,10 +1045,19 @@ module Aws::VPCLattice
     #     be used for ARN resource configurations, so a single resource
     #     gateway can't serve both ARN and CIDR resource configurations.
     #
+    #     DNS queries for an `IN_VPC` resource gateway use UDP only, with no
+    #     TCP fallback. If responses exceed 8.4 KB, DNS resolution fails. The
+    #     DNS resolver must be recursive. For more information, see [Resource
+    #     Config DNS Resolution][1] in the *Amazon VPC Lattice User Guide*.
+    #
     #   * `PUBLIC` - DNS resolution occurs against public DNS resolvers. DNS
     #     queries for resources behind this resource gateway resolve using
     #     standard public DNS. Use this when your resource domain names are
     #     publicly resolvable.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpc-lattice/latest/ug/resource-gateway.html#resource-config-dns-resolution
     #
     # @option params [Hash<String,String>] :tags
     #   The tags for the resource gateway.
@@ -2082,11 +2092,13 @@ module Aws::VPCLattice
     end
 
     # Deletes a service network. You can only delete the service network if
-    # there is no service or VPC associated with it. If you delete a service
-    # network, all resources related to the service network, such as the
-    # resource policy, auth policy, and access log subscriptions, are also
-    # deleted. For more information, see [Delete a service network][1] in
-    # the *Amazon VPC Lattice User Guide*.
+    # there are no services, VPCs, resource configurations, or service
+    # network endpoints associated with it. Only the owner of a service
+    # network endpoint can remove it from the service network, by deleting
+    # the endpoint. If you delete a service network, all resources related
+    # to the service network, such as the resource policy, auth policy, and
+    # access log subscriptions, are also deleted. For more information, see
+    # [Delete a service network][1] in the *Amazon VPC Lattice User Guide*.
     #
     #
     #
@@ -4325,6 +4337,18 @@ module Aws::VPCLattice
     # @option params [Array<String>] :security_group_ids
     #   The IDs of the security groups associated with the resource gateway.
     #
+    # @option params [String] :resource_config_dns_resolution
+    #   Indicates how DNS is resolved for resource configurations associated
+    #   with this resource gateway.
+    #
+    #   * `IN_VPC` - DNS resolution occurs privately within the resource
+    #     gateway's VPC. Use this when your resource domain names are hosted
+    #     in private Route 53 hosted zones or on-premises DNS servers
+    #     reachable from the VPC.
+    #
+    #   * `PUBLIC` - DNS resolution occurs against public DNS resolvers. Use
+    #     this when your resource domain names are publicly resolvable.
+    #
     # @return [Types::UpdateResourceGatewayResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateResourceGatewayResponse#name #name} => String
@@ -4335,12 +4359,14 @@ module Aws::VPCLattice
     #   * {Types::UpdateResourceGatewayResponse#subnet_ids #subnet_ids} => Array&lt;String&gt;
     #   * {Types::UpdateResourceGatewayResponse#security_group_ids #security_group_ids} => Array&lt;String&gt;
     #   * {Types::UpdateResourceGatewayResponse#ip_address_type #ip_address_type} => String
+    #   * {Types::UpdateResourceGatewayResponse#resource_config_dns_resolution #resource_config_dns_resolution} => String
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_resource_gateway({
     #     resource_gateway_identifier: "ResourceGatewayIdentifier", # required
     #     security_group_ids: ["SecurityGroupId"],
+    #     resource_config_dns_resolution: "IN_VPC", # accepts IN_VPC, PUBLIC
     #   })
     #
     # @example Response structure
@@ -4355,6 +4381,7 @@ module Aws::VPCLattice
     #   resp.security_group_ids #=> Array
     #   resp.security_group_ids[0] #=> String
     #   resp.ip_address_type #=> String, one of "IPV4", "IPV6"
+    #   resp.resource_config_dns_resolution #=> String, one of "IN_VPC", "PUBLIC"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/vpc-lattice-2022-11-30/UpdateResourceGateway AWS API Documentation
     #
@@ -4731,7 +4758,7 @@ module Aws::VPCLattice
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-vpclattice'
-      context[:gem_version] = '1.61.0'
+      context[:gem_version] = '1.69.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

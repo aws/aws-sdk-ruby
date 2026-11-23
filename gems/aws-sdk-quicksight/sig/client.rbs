@@ -127,6 +127,20 @@ module Aws
                                        ) -> _BatchDeleteKnowledgeBaseResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchDeleteKnowledgeBaseResponseSuccess
 
+      interface _BatchDeletePolicyAssignmentByPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchDeletePolicyAssignmentByPolicyResponse]
+        def policy_arn: () -> ::String
+        def success: () -> ::Array[Types::BatchDeletePolicyAssignmentSuccess]
+        def errors: () -> ::Array[Types::BatchDeletePolicyAssignmentError]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QuickSight/Client.html#batch_delete_policy_assignment_by_policy-instance_method
+      def batch_delete_policy_assignment_by_policy: (
+                                                      account_id: ::String,
+                                                      policy_arn: ::String,
+                                                      principal_arns: Array[::String]
+                                                    ) -> _BatchDeletePolicyAssignmentByPolicyResponseSuccess
+                                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchDeletePolicyAssignmentByPolicyResponseSuccess
+
       interface _BatchDeleteTopicReviewedAnswerResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::BatchDeleteTopicReviewedAnswerResponse]
         def topic_id: () -> ::String
@@ -162,6 +176,26 @@ module Aws
                                       ) -> _BatchDescribeUserLimitsResponseSuccess
                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchDescribeUserLimitsResponseSuccess
 
+      interface _BatchPutPolicyAssignmentByPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchPutPolicyAssignmentByPolicyResponse]
+        def policy_arn: () -> ::String
+        def success: () -> ::Array[Types::BatchPutPolicyAssignmentSuccess]
+        def errors: () -> ::Array[Types::BatchPutPolicyAssignmentError]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QuickSight/Client.html#batch_put_policy_assignment_by_policy-instance_method
+      def batch_put_policy_assignment_by_policy: (
+                                                   account_id: ::String,
+                                                   policy_arn: ::String,
+                                                   assignments: Array[
+                                                     {
+                                                       principal_arn: ::String,
+                                                       existing_policy_arn: ::String?,
+                                                       revision: ::Integer?
+                                                     }
+                                                   ]
+                                                 ) -> _BatchPutPolicyAssignmentByPolicyResponseSuccess
+                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchPutPolicyAssignmentByPolicyResponseSuccess
+
       interface _CancelIngestionResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CancelIngestionResponse]
         def arn: () -> ::String
@@ -176,6 +210,78 @@ module Aws
                               ingestion_id: ::String
                             ) -> _CancelIngestionResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CancelIngestionResponseSuccess
+
+      interface _CreateAccessControlApplicationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateAccessControlApplicationResponse]
+        def status: () -> ::Integer
+        def request_id: () -> ::String
+        def application_id: () -> ::String
+        def arn: () -> ::String
+        def access_control_application_status: () -> ("ENABLED" | "DISABLED")
+        def created_time: () -> ::Time
+        def tenant_url: () -> ::String
+        def idc_application_arn: () -> ::String
+        def quick_authentication_configuration: () -> Types::QuickAuthenticationConfigCreateOutput
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QuickSight/Client.html#create_access_control_application-instance_method
+      def create_access_control_application: (
+                                               aws_account_id: ::String,
+                                               application_id: ::String,
+                                               name: ::String,
+                                               ?description: ::String,
+                                               namespace: ::String,
+                                               authentication_type: ("OIDC"),
+                                               idp_authorizing_configuration: {
+                                                 idp_authorizing_type: ("EXTERNAL_IDP_PUBLIC_AUTH_CODE" | "EXTERNAL_IDP_CONFIDENTIAL_AUTH_CODE" | "QUICK_MANAGED_AUTH_CODE" | "IDC_AUTH_CODE"),
+                                                 idp_authorizing_configuration_detail_input: {
+                                                   external_idp_public_auth_code: {
+                                                     client_id: ::String,
+                                                     issuer_url: ::String
+                                                   }?,
+                                                   external_idp_confidential_auth_code: {
+                                                     client_id: ::String,
+                                                     issuer_url: ::String,
+                                                     client_secret: {
+                                                       regional_secret_manager_arns: Hash[::String, ::String]
+                                                     }
+                                                   }?
+                                                 }?,
+                                                 idc_trusted_token_issuer_configuration: {
+                                                   idc_trusted_token_issuer_arn: ::String
+                                                 }?
+                                               },
+                                               quick_authentication_configuration: Params::quick_authentication_config_input,
+                                               ?tags: Array[
+                                                 {
+                                                   key: ::String,
+                                                   value: ::String
+                                                 }
+                                               ]
+                                             ) -> _CreateAccessControlApplicationResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAccessControlApplicationResponseSuccess
+
+      interface _CreateAccessControlApplicationSecretResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateAccessControlApplicationSecretResponse]
+        def status: () -> ::Integer
+        def request_id: () -> ::String
+        def client_secret_id: () -> ::String
+        def created_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QuickSight/Client.html#create_access_control_application_secret-instance_method
+      def create_access_control_application_secret: (
+                                                      aws_account_id: ::String,
+                                                      application_id: ::String,
+                                                      ?description: ::String,
+                                                      client_secret_configuration: {
+                                                        client_secret_source_type: ("IDP_PROVIDED"),
+                                                        client_secret_configuration_detail: {
+                                                          idp: {
+                                                            regional_secret_manager_arns: Hash[::String, ::String]
+                                                          }?
+                                                        }?
+                                                      }
+                                                    ) -> _CreateAccessControlApplicationSecretResponseSuccess
+                                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAccessControlApplicationSecretResponseSuccess
 
       interface _CreateAccountCustomizationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateAccountCustomizationResponse]
@@ -334,8 +440,8 @@ module Aws
                                     policy_id: ::String,
                                     name: ::String,
                                     ?description: ::String,
-                                    actions: Array[("SHARE")],
-                                    asset_types: Array[("AGENT" | "SPACE" | "KNOWLEDGE_BASE")],
+                                    actions: Array[("SHARE" | "PUBLISH")],
+                                    asset_types: Array[("AGENT" | "SPACE" | "KNOWLEDGE_BASE" | "FLOW")],
                                     applicable_to: {
                                       type: ("GROUP"),
                                       group_arns: Array[::String]?
@@ -508,7 +614,16 @@ module Aws
                              },
                              ?use_as: ("RLS_RULES"),
                              ?data_prep_configuration: Params::data_prep_configuration,
-                             ?semantic_model_configuration: Params::semantic_model_configuration
+                             ?semantic_model_configuration: Params::semantic_model_configuration,
+                             ?unmaterialized_calculated_columns: Array[
+                               {
+                                 column_id: ::String,
+                                 column_name: ::String,
+                                 expression: ::String,
+                                 type: ("STRING" | "INTEGER" | "DECIMAL" | "DATETIME")?,
+                                 sub_type: ("FLOAT" | "FIXED")?
+                               }
+                             ]
                            ) -> _CreateDataSetResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDataSetResponseSuccess
 
@@ -694,6 +809,34 @@ module Aws
                                         ) -> _CreateIAMPolicyAssignmentResponseSuccess
                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateIAMPolicyAssignmentResponseSuccess
 
+      interface _CreateInboundConnectorResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateInboundConnectorResponse]
+        def status: () -> ::Integer
+        def request_id: () -> ::String
+        def inbound_connector_id: () -> ::String
+        def arn: () -> ::String
+        def tenant_url: () -> ::String
+        def inbound_connector_status: () -> ("ENABLED" | "DISABLED")
+        def created_time: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QuickSight/Client.html#create_inbound_connector-instance_method
+      def create_inbound_connector: (
+                                      aws_account_id: ::String,
+                                      inbound_connector_id: ::String,
+                                      name: ::String,
+                                      ?description: ::String,
+                                      inbound_connector_configuration: {
+                                        inbound_connector_type: ("QUICK_DESKTOP")
+                                      },
+                                      ?tags: Array[
+                                        {
+                                          key: ::String,
+                                          value: ::String
+                                        }
+                                      ]
+                                    ) -> _CreateInboundConnectorResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateInboundConnectorResponseSuccess
+
       interface _CreateIngestionResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateIngestionResponse]
         def arn: () -> ::String
@@ -751,6 +894,30 @@ module Aws
                                    ]
                                  ) -> _CreateKnowledgeBaseResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateKnowledgeBaseResponseSuccess
+
+      interface _CreateKnowledgeBaseRefreshScheduleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateKnowledgeBaseRefreshScheduleResponse]
+        def schedule_id: () -> ::String
+        def knowledge_base_arn: () -> ::String
+        def request_id: () -> ::String
+        def status: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QuickSight/Client.html#create_knowledge_base_refresh_schedule-instance_method
+      def create_knowledge_base_refresh_schedule: (
+                                                    aws_account_id: ::String,
+                                                    knowledge_base_id: ::String,
+                                                    schedule_id: ::String,
+                                                    schedule_frequency: {
+                                                      interval: ("DAILY" | "WEEKLY" | "MONTHLY" | "HOURLY"),
+                                                      refresh_on_day: {
+                                                        day_of_week: ("SUNDAY" | "MONDAY" | "TUESDAY" | "WEDNESDAY" | "THURSDAY" | "FRIDAY" | "SATURDAY")?,
+                                                        day_of_month: ::String?
+                                                      }?
+                                                    },
+                                                    ?start_time: ::Time,
+                                                    ?state: ("ENABLED" | "DISABLED")
+                                                  ) -> _CreateKnowledgeBaseRefreshScheduleResponseSuccess
+                                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateKnowledgeBaseRefreshScheduleResponseSuccess
 
       interface _CreateLimitsProfileResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateLimitsProfileResponse]
@@ -1063,6 +1230,33 @@ module Aws
                                  ) -> _CreateVPCConnectionResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateVPCConnectionResponseSuccess
 
+      interface _DeleteAccessControlApplicationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteAccessControlApplicationResponse]
+        def status: () -> ::Integer
+        def request_id: () -> ::String
+        def application_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QuickSight/Client.html#delete_access_control_application-instance_method
+      def delete_access_control_application: (
+                                               aws_account_id: ::String,
+                                               ?application_id: ::String,
+                                               ?idc_application_arn: ::String
+                                             ) -> _DeleteAccessControlApplicationResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteAccessControlApplicationResponseSuccess
+
+      interface _DeleteAccessControlApplicationSecretResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteAccessControlApplicationSecretResponse]
+        def status: () -> ::Integer
+        def request_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QuickSight/Client.html#delete_access_control_application_secret-instance_method
+      def delete_access_control_application_secret: (
+                                                      aws_account_id: ::String,
+                                                      application_id: ::String,
+                                                      client_secret_id: ::String
+                                                    ) -> _DeleteAccessControlApplicationSecretResponseSuccess
+                                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteAccessControlApplicationSecretResponseSuccess
+
       interface _DeleteAccountCustomPermissionResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteAccountCustomPermissionResponse]
         def request_id: () -> ::String
@@ -1366,6 +1560,19 @@ module Aws
                                               ) -> _DeleteIdentityPropagationConfigResponseSuccess
                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteIdentityPropagationConfigResponseSuccess
 
+      interface _DeleteInboundConnectorResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteInboundConnectorResponse]
+        def status: () -> ::Integer
+        def request_id: () -> ::String
+        def inbound_connector_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QuickSight/Client.html#delete_inbound_connector-instance_method
+      def delete_inbound_connector: (
+                                      aws_account_id: ::String,
+                                      inbound_connector_id: ::String
+                                    ) -> _DeleteInboundConnectorResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteInboundConnectorResponseSuccess
+
       interface _DeleteKnowledgeBaseResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteKnowledgeBaseResponse]
         def knowledge_base_arn: () -> ::String
@@ -1379,6 +1586,21 @@ module Aws
                                    knowledge_base_id: ::String
                                  ) -> _DeleteKnowledgeBaseResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteKnowledgeBaseResponseSuccess
+
+      interface _DeleteKnowledgeBaseRefreshScheduleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteKnowledgeBaseRefreshScheduleResponse]
+        def schedule_id: () -> ::String
+        def knowledge_base_arn: () -> ::String
+        def request_id: () -> ::String
+        def status: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QuickSight/Client.html#delete_knowledge_base_refresh_schedule-instance_method
+      def delete_knowledge_base_refresh_schedule: (
+                                                    aws_account_id: ::String,
+                                                    knowledge_base_id: ::String,
+                                                    schedule_id: ::String
+                                                  ) -> _DeleteKnowledgeBaseRefreshScheduleResponseSuccess
+                                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteKnowledgeBaseRefreshScheduleResponseSuccess
 
       interface _DeleteLimitsProfileResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteLimitsProfileResponse]
@@ -1416,6 +1638,18 @@ module Aws
                                               o_auth_client_application_id: ::String
                                             ) -> _DeleteOAuthClientApplicationResponseSuccess
                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteOAuthClientApplicationResponseSuccess
+
+      interface _DeletePolicyAssignmentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeletePolicyAssignmentResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QuickSight/Client.html#delete_policy_assignment-instance_method
+      def delete_policy_assignment: (
+                                      account_id: ::String,
+                                      policy_arn: ::String,
+                                      principal_arn: ::String,
+                                      ?revision: ::Integer
+                                    ) -> _DeletePolicyAssignmentResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeletePolicyAssignmentResponseSuccess
 
       interface _DeleteRefreshScheduleResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteRefreshScheduleResponse]
@@ -1632,6 +1866,19 @@ module Aws
                                    vpc_connection_id: ::String
                                  ) -> _DeleteVPCConnectionResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteVPCConnectionResponseSuccess
+
+      interface _DescribeAccessControlApplicationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeAccessControlApplicationResponse]
+        def status: () -> ::Integer
+        def request_id: () -> ::String
+        def access_control_application: () -> Types::AccessControlApplication
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QuickSight/Client.html#describe_access_control_application-instance_method
+      def describe_access_control_application: (
+                                                 aws_account_id: ::String,
+                                                 application_id: ::String
+                                               ) -> _DescribeAccessControlApplicationResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeAccessControlApplicationResponseSuccess
 
       interface _DescribeAccountCustomPermissionResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeAccountCustomPermissionResponse]
@@ -2257,6 +2504,19 @@ module Aws
                                           ) -> _DescribeIAMPolicyAssignmentResponseSuccess
                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeIAMPolicyAssignmentResponseSuccess
 
+      interface _DescribeInboundConnectorResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeInboundConnectorResponse]
+        def status: () -> ::Integer
+        def request_id: () -> ::String
+        def inbound_connector: () -> Types::InboundConnector
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QuickSight/Client.html#describe_inbound_connector-instance_method
+      def describe_inbound_connector: (
+                                        aws_account_id: ::String,
+                                        inbound_connector_id: ::String
+                                      ) -> _DescribeInboundConnectorResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeInboundConnectorResponseSuccess
+
       interface _DescribeIngestionResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeIngestionResponse]
         def ingestion: () -> Types::Ingestion
@@ -2329,6 +2589,21 @@ module Aws
                                                  knowledge_base_id: ::String
                                                ) -> _DescribeKnowledgeBasePermissionsResponseSuccess
                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeKnowledgeBasePermissionsResponseSuccess
+
+      interface _DescribeKnowledgeBaseRefreshScheduleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeKnowledgeBaseRefreshScheduleResponse]
+        def schedule: () -> Types::KnowledgeBaseRefreshScheduleSummary
+        def knowledge_base_arn: () -> ::String
+        def request_id: () -> ::String
+        def status: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QuickSight/Client.html#describe_knowledge_base_refresh_schedule-instance_method
+      def describe_knowledge_base_refresh_schedule: (
+                                                      aws_account_id: ::String,
+                                                      knowledge_base_id: ::String,
+                                                      schedule_id: ::String
+                                                    ) -> _DescribeKnowledgeBaseRefreshScheduleResponseSuccess
+                                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeKnowledgeBaseRefreshScheduleResponseSuccess
 
       interface _DescribeLimitsProfileResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeLimitsProfileResponse]
@@ -2405,6 +2680,19 @@ module Aws
                                        schedule_id: ::String
                                      ) -> _DescribeRefreshScheduleResponseSuccess
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeRefreshScheduleResponseSuccess
+
+      interface _DescribeResourcePermissionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeResourcePermissionsResponse]
+        def role_type: () -> ("QUICKSIGHT_MANAGED" | "CUSTOMER_MANAGED")
+        def customer_managed_role_arn: () -> ::String
+        def request_id: () -> ::String
+        def status: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QuickSight/Client.html#describe_resource_permissions-instance_method
+      def describe_resource_permissions: (
+                                           aws_account_id: ::String
+                                         ) -> _DescribeResourcePermissionsResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeResourcePermissionsResponseSuccess
 
       interface _DescribeRoleCustomPermissionResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeRoleCustomPermissionResponse]
@@ -2846,6 +3134,21 @@ module Aws
                                 ) -> _GetIdentityContextResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetIdentityContextResponseSuccess
 
+      interface _GetPolicyAssignmentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetPolicyAssignmentResponse]
+        def policy_arn: () -> ::String
+        def policy_name: () -> ::String
+        def updated_at: () -> ::Time
+        def revision: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QuickSight/Client.html#get_policy_assignment-instance_method
+      def get_policy_assignment: (
+                                   account_id: ::String,
+                                   policy_type: ("LIMITS_PROFILE" | "CUSTOM_PERMISSIONS"),
+                                   principal_arn: ::String
+                                 ) -> _GetPolicyAssignmentResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetPolicyAssignmentResponseSuccess
+
       interface _GetSessionEmbedUrlResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetSessionEmbedUrlResponse]
         def embed_url: () -> ::String
@@ -2860,6 +3163,22 @@ module Aws
                                    ?user_arn: ::String
                                  ) -> _GetSessionEmbedUrlResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSessionEmbedUrlResponseSuccess
+
+      interface _ListAccessControlApplicationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAccessControlApplicationsResponse]
+        def status: () -> ::Integer
+        def request_id: () -> ::String
+        def access_control_applications: () -> ::Array[Types::AccessControlApplicationSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QuickSight/Client.html#list_access_control_applications-instance_method
+      def list_access_control_applications: (
+                                              aws_account_id: ::String,
+                                              ?namespace: ::String,
+                                              ?max_results: ::Integer,
+                                              ?next_token: ::String
+                                            ) -> _ListAccessControlApplicationsResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAccessControlApplicationsResponseSuccess
 
       interface _ListActionConnectorsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListActionConnectorsResponse]
@@ -3208,6 +3527,38 @@ module Aws
                                              ) -> _ListIdentityPropagationConfigsResponseSuccess
                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListIdentityPropagationConfigsResponseSuccess
 
+      interface _ListInboundConnectorApplicationAssociationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListInboundConnectorApplicationAssociationsResponse]
+        def status: () -> ::Integer
+        def request_id: () -> ::String
+        def application_associations: () -> ::Array[Types::InboundConnectorApplicationAssociationSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QuickSight/Client.html#list_inbound_connector_application_associations-instance_method
+      def list_inbound_connector_application_associations: (
+                                                             aws_account_id: ::String,
+                                                             inbound_connector_id: ::String,
+                                                             ?max_results: ::Integer,
+                                                             ?next_token: ::String
+                                                           ) -> _ListInboundConnectorApplicationAssociationsResponseSuccess
+                                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListInboundConnectorApplicationAssociationsResponseSuccess
+
+      interface _ListInboundConnectorsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListInboundConnectorsResponse]
+        def status: () -> ::Integer
+        def request_id: () -> ::String
+        def inbound_connector_summaries: () -> ::Array[Types::InboundConnectorSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QuickSight/Client.html#list_inbound_connectors-instance_method
+      def list_inbound_connectors: (
+                                     aws_account_id: ::String,
+                                     ?max_results: ::Integer,
+                                     ?next_token: ::String,
+                                     ?type: Array[("QUICK_DESKTOP")]
+                                   ) -> _ListInboundConnectorsResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListInboundConnectorsResponseSuccess
+
       interface _ListIngestionsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListIngestionsResponse]
         def ingestions: () -> ::Array[Types::Ingestion]
@@ -3223,6 +3574,23 @@ module Aws
                              ?max_results: ::Integer
                            ) -> _ListIngestionsResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListIngestionsResponseSuccess
+
+      interface _ListKnowledgeBaseRefreshSchedulesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListKnowledgeBaseRefreshSchedulesResponse]
+        def schedule_summaries: () -> ::Array[Types::KnowledgeBaseRefreshScheduleSummary]
+        def knowledge_base_arn: () -> ::String
+        def next_token: () -> ::String
+        def request_id: () -> ::String
+        def status: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QuickSight/Client.html#list_knowledge_base_refresh_schedules-instance_method
+      def list_knowledge_base_refresh_schedules: (
+                                                   aws_account_id: ::String,
+                                                   knowledge_base_id: ::String,
+                                                   ?next_token: ::String,
+                                                   ?max_results: ::Integer
+                                                 ) -> _ListKnowledgeBaseRefreshSchedulesResponseSuccess
+                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListKnowledgeBaseRefreshSchedulesResponseSuccess
 
       interface _ListKnowledgeBasesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListKnowledgeBasesResponse]
@@ -3282,6 +3650,21 @@ module Aws
                                              ?max_results: ::Integer
                                            ) -> _ListOAuthClientApplicationsResponseSuccess
                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListOAuthClientApplicationsResponseSuccess
+
+      interface _ListPrincipalsForPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListPrincipalsForPolicyResponse]
+        def principals: () -> ::Array[Types::PolicyPrincipal]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QuickSight/Client.html#list_principals_for_policy-instance_method
+      def list_principals_for_policy: (
+                                        account_id: ::String,
+                                        policy_arn: ::String,
+                                        ?principal_type: ("USER" | "GROUP" | "ACCOUNT"),
+                                        ?max_results: ::Integer,
+                                        ?next_token: ::String
+                                      ) -> _ListPrincipalsForPolicyResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPrincipalsForPolicyResponseSuccess
 
       interface _ListRefreshSchedulesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListRefreshSchedulesResponse]
@@ -3631,6 +4014,22 @@ module Aws
                                              data_set_refresh_properties: Params::data_set_refresh_properties
                                            ) -> _PutDataSetRefreshPropertiesResponseSuccess
                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutDataSetRefreshPropertiesResponseSuccess
+
+      interface _PutPolicyAssignmentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutPolicyAssignmentResponse]
+        def policy_arn: () -> ::String
+        def replaced_policy_arn: () -> ::String
+        def revision: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QuickSight/Client.html#put_policy_assignment-instance_method
+      def put_policy_assignment: (
+                                   account_id: ::String,
+                                   policy_arn: ::String,
+                                   principal_arn: ::String,
+                                   ?existing_policy_arn: ::String,
+                                   ?revision: ::Integer
+                                 ) -> _PutPolicyAssignmentResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutPolicyAssignmentResponseSuccess
 
       interface _RegisterUserResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::RegisterUserResponse]
@@ -4452,6 +4851,60 @@ module Aws
                           ) -> _UntagResourceResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
 
+      interface _UpdateAccessControlApplicationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateAccessControlApplicationResponse]
+        def status: () -> ::Integer
+        def request_id: () -> ::String
+        def application_id: () -> ::String
+        def arn: () -> ::String
+        def access_control_application_status: () -> ("ENABLED" | "DISABLED")
+        def last_updated_time: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QuickSight/Client.html#update_access_control_application-instance_method
+      def update_access_control_application: (
+                                               aws_account_id: ::String,
+                                               application_id: ::String,
+                                               ?name: ::String,
+                                               ?description: ::String,
+                                               ?idp_authorizing_configuration: {
+                                                 idp_authorizing_type: ("EXTERNAL_IDP_PUBLIC_AUTH_CODE" | "EXTERNAL_IDP_CONFIDENTIAL_AUTH_CODE" | "QUICK_MANAGED_AUTH_CODE" | "IDC_AUTH_CODE"),
+                                                 idp_authorizing_configuration_detail_input: {
+                                                   external_idp_public_auth_code: {
+                                                     client_id: ::String,
+                                                     issuer_url: ::String
+                                                   }?,
+                                                   external_idp_confidential_auth_code: {
+                                                     client_id: ::String,
+                                                     issuer_url: ::String
+                                                   }?
+                                                 }?,
+                                                 idc_trusted_token_issuer_configuration: {
+                                                   idc_trusted_token_issuer_arn: ::String
+                                                 }?
+                                               },
+                                               ?quick_authentication_configuration: Params::quick_authentication_config_input,
+                                               ?status: ("ENABLED" | "DISABLED")
+                                             ) -> _UpdateAccessControlApplicationResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAccessControlApplicationResponseSuccess
+
+      interface _UpdateAccessControlApplicationSecretResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateAccessControlApplicationSecretResponse]
+        def status: () -> ::Integer
+        def request_id: () -> ::String
+        def client_secret_id: () -> ::String
+        def updated_at: () -> ::Time
+        def regional_secret_manager_arns: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QuickSight/Client.html#update_access_control_application_secret-instance_method
+      def update_access_control_application_secret: (
+                                                      aws_account_id: ::String,
+                                                      application_id: ::String,
+                                                      client_secret_id: ::String,
+                                                      ?update_regional_secret_manager_arns: Hash[::String, ::String],
+                                                      ?remove_regional_secret_manager_arns: Array[::String]
+                                                    ) -> _UpdateAccessControlApplicationSecretResponseSuccess
+                                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAccessControlApplicationSecretResponseSuccess
+
       interface _UpdateAccountCustomPermissionResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateAccountCustomPermissionResponse]
         def request_id: () -> ::String
@@ -4697,8 +5150,8 @@ module Aws
                                     policy_id: ::String,
                                     ?name: ::String,
                                     ?description: ::String,
-                                    ?actions: Array[("SHARE")],
-                                    ?asset_types: Array[("AGENT" | "SPACE" | "KNOWLEDGE_BASE")],
+                                    ?actions: Array[("SHARE" | "PUBLISH")],
+                                    ?asset_types: Array[("AGENT" | "SPACE" | "KNOWLEDGE_BASE" | "FLOW")],
                                     ?applicable_to: {
                                       type: ("GROUP"),
                                       group_arns: Array[::String]?
@@ -4931,7 +5384,16 @@ module Aws
                                ]?
                              },
                              ?data_prep_configuration: Params::data_prep_configuration,
-                             ?semantic_model_configuration: Params::semantic_model_configuration
+                             ?semantic_model_configuration: Params::semantic_model_configuration,
+                             ?unmaterialized_calculated_columns: Array[
+                               {
+                                 column_id: ::String,
+                                 column_name: ::String,
+                                 expression: ::String,
+                                 type: ("STRING" | "INTEGER" | "DECIMAL" | "DATETIME")?,
+                                 sub_type: ("FLOAT" | "FIXED")?
+                               }
+                             ]
                            ) -> _UpdateDataSetResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDataSetResponseSuccess
 
@@ -5179,6 +5641,42 @@ module Aws
                                               ) -> _UpdateIdentityPropagationConfigResponseSuccess
                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateIdentityPropagationConfigResponseSuccess
 
+      interface _UpdateInboundConnectorResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateInboundConnectorResponse]
+        def status: () -> ::Integer
+        def request_id: () -> ::String
+        def inbound_connector_id: () -> ::String
+        def arn: () -> ::String
+        def inbound_connector_status: () -> ("ENABLED" | "DISABLED")
+        def last_updated_time: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QuickSight/Client.html#update_inbound_connector-instance_method
+      def update_inbound_connector: (
+                                      aws_account_id: ::String,
+                                      inbound_connector_id: ::String,
+                                      ?name: ::String,
+                                      ?description: ::String,
+                                      ?inbound_connector_configuration: {
+                                        inbound_connector_type: ("QUICK_DESKTOP")
+                                      },
+                                      ?inbound_connector_status: ("ENABLED" | "DISABLED")
+                                    ) -> _UpdateInboundConnectorResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateInboundConnectorResponseSuccess
+
+      interface _UpdateInboundConnectorApplicationAssociationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateInboundConnectorApplicationAssociationsResponse]
+        def status: () -> ::Integer
+        def request_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QuickSight/Client.html#update_inbound_connector_application_associations-instance_method
+      def update_inbound_connector_application_associations: (
+                                                               aws_account_id: ::String,
+                                                               inbound_connector_id: ::String,
+                                                               ?associate_access_control_applications: Array[::String],
+                                                               ?disassociate_access_control_applications: Array[::String]
+                                                             ) -> _UpdateInboundConnectorApplicationAssociationsResponseSuccess
+                                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateInboundConnectorApplicationAssociationsResponseSuccess
+
       interface _UpdateIpRestrictionResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateIpRestrictionResponse]
         def aws_account_id: () -> ::String
@@ -5266,6 +5764,30 @@ module Aws
                                                ]
                                              ) -> _UpdateKnowledgeBasePermissionsResponseSuccess
                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateKnowledgeBasePermissionsResponseSuccess
+
+      interface _UpdateKnowledgeBaseRefreshScheduleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateKnowledgeBaseRefreshScheduleResponse]
+        def schedule_id: () -> ::String
+        def knowledge_base_arn: () -> ::String
+        def request_id: () -> ::String
+        def status: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QuickSight/Client.html#update_knowledge_base_refresh_schedule-instance_method
+      def update_knowledge_base_refresh_schedule: (
+                                                    aws_account_id: ::String,
+                                                    knowledge_base_id: ::String,
+                                                    schedule_id: ::String,
+                                                    ?schedule_frequency: {
+                                                      interval: ("DAILY" | "WEEKLY" | "MONTHLY" | "HOURLY"),
+                                                      refresh_on_day: {
+                                                        day_of_week: ("SUNDAY" | "MONDAY" | "TUESDAY" | "WEDNESDAY" | "THURSDAY" | "FRIDAY" | "SATURDAY")?,
+                                                        day_of_month: ::String?
+                                                      }?
+                                                    },
+                                                    ?start_time: ::Time,
+                                                    ?state: ("ENABLED" | "DISABLED")
+                                                  ) -> _UpdateKnowledgeBaseRefreshScheduleResponseSuccess
+                                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateKnowledgeBaseRefreshScheduleResponseSuccess
 
       interface _UpdateLimitsProfileResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateLimitsProfileResponse]
@@ -5361,6 +5883,21 @@ module Aws
                                      schedule: Params::refresh_schedule
                                    ) -> _UpdateRefreshScheduleResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateRefreshScheduleResponseSuccess
+
+      interface _UpdateResourcePermissionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateResourcePermissionsResponse]
+        def role_type: () -> ("QUICKSIGHT_MANAGED" | "CUSTOMER_MANAGED")
+        def customer_managed_role_arn: () -> ::String
+        def request_id: () -> ::String
+        def status: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QuickSight/Client.html#update_resource_permissions-instance_method
+      def update_resource_permissions: (
+                                         aws_account_id: ::String,
+                                         role_type: ("QUICKSIGHT_MANAGED" | "CUSTOMER_MANAGED"),
+                                         customer_managed_role_arn: ::String
+                                       ) -> _UpdateResourcePermissionsResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateResourcePermissionsResponseSuccess
 
       interface _UpdateRoleCustomPermissionResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateRoleCustomPermissionResponse]

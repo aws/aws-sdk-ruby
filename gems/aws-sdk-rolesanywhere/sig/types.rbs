@@ -29,6 +29,8 @@ module Aws::RolesAnywhere
       attr_accessor enabled: bool
       attr_accessor tags: ::Array[Types::Tag]
       attr_accessor accept_role_session_name: bool
+      attr_accessor alias_name: ::String
+      attr_accessor tip_configuration: Types::TipConfiguration
       SENSITIVE: []
     end
 
@@ -36,8 +38,10 @@ module Aws::RolesAnywhere
       attr_accessor name: ::String
       attr_accessor source: Types::Source
       attr_accessor enabled: bool
+      attr_accessor crl_dp_revocation_enabled: bool
       attr_accessor tags: ::Array[Types::Tag]
       attr_accessor notification_settings: ::Array[Types::NotificationSetting]
+      attr_accessor alias_name: ::String
       SENSITIVE: []
     end
 
@@ -60,6 +64,9 @@ module Aws::RolesAnywhere
       attr_accessor trust_anchor_arn: ::String
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
+      attr_accessor alias_name: ::String
+      attr_accessor alias_arn: ::String
+      attr_accessor previous_alias_name: ::String
       SENSITIVE: []
     end
 
@@ -86,6 +93,7 @@ module Aws::RolesAnywhere
       attr_accessor enabled: bool
       attr_accessor tags: ::Array[Types::Tag]
       attr_accessor trust_anchor_arn: ::String
+      attr_accessor alias_name: ::String
       SENSITIVE: []
     end
 
@@ -179,6 +187,10 @@ module Aws::RolesAnywhere
       attr_accessor duration_seconds: ::Integer
       attr_accessor accept_role_session_name: bool
       attr_accessor attribute_mappings: ::Array[Types::AttributeMapping]
+      attr_accessor alias_name: ::String
+      attr_accessor alias_arn: ::String
+      attr_accessor tip_configuration: Types::TipConfiguration
+      attr_accessor previous_alias_name: ::String
       SENSITIVE: []
     end
 
@@ -246,6 +258,12 @@ module Aws::RolesAnywhere
       SENSITIVE: []
     end
 
+    class ServiceUnavailableException
+      attr_accessor message: ::String
+      attr_accessor retry_after_seconds: ::Integer
+      SENSITIVE: []
+    end
+
     class Source
       attr_accessor source_type: ("AWS_ACM_PCA" | "CERTIFICATE_BUNDLE" | "SELF_SIGNED_REPOSITORY")
       attr_accessor source_data: Types::SourceData
@@ -310,6 +328,13 @@ module Aws::RolesAnywhere
     class TagResourceResponse < Aws::EmptyStructure
     end
 
+    class TipConfiguration
+      attr_accessor status: ("ENABLED" | "DISABLED")
+      attr_accessor subject_type: ("user" | "workload")
+      attr_accessor subject_source: ("x509SAN/URI" | "x509Subject/CN")
+      SENSITIVE: []
+    end
+
     class TooManyTagsException
       attr_accessor message: ::String
       SENSITIVE: []
@@ -321,9 +346,13 @@ module Aws::RolesAnywhere
       attr_accessor name: ::String
       attr_accessor source: Types::Source
       attr_accessor enabled: bool
+      attr_accessor crl_dp_revocation_enabled: bool
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
       attr_accessor notification_settings: ::Array[Types::NotificationSettingDetail]
+      attr_accessor alias_name: ::String
+      attr_accessor alias_arn: ::String
+      attr_accessor previous_alias_name: ::String
       SENSITIVE: []
     end
 
@@ -335,7 +364,7 @@ module Aws::RolesAnywhere
     class UntagResourceRequest
       attr_accessor resource_arn: ::String
       attr_accessor tag_keys: ::Array[::String]
-      SENSITIVE: []
+      SENSITIVE: [:tag_keys]
     end
 
     class UntagResourceResponse < Aws::EmptyStructure
@@ -345,6 +374,7 @@ module Aws::RolesAnywhere
       attr_accessor crl_id: ::String
       attr_accessor name: ::String
       attr_accessor crl_data: ::String
+      attr_accessor alias_name: ::String
       SENSITIVE: []
     end
 
@@ -356,6 +386,8 @@ module Aws::RolesAnywhere
       attr_accessor managed_policy_arns: ::Array[::String]
       attr_accessor duration_seconds: ::Integer
       attr_accessor accept_role_session_name: bool
+      attr_accessor alias_name: ::String
+      attr_accessor tip_configuration: Types::TipConfiguration
       SENSITIVE: []
     end
 
@@ -363,6 +395,8 @@ module Aws::RolesAnywhere
       attr_accessor trust_anchor_id: ::String
       attr_accessor name: ::String
       attr_accessor source: Types::Source
+      attr_accessor crl_dp_revocation_enabled: bool
+      attr_accessor alias_name: ::String
       SENSITIVE: []
     end
 

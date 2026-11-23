@@ -49,7 +49,7 @@
     "DescribeDirectoryConfigs": "<p>Retrieves a list that describes one or more specified Directory Config objects for WorkSpaces Applications, if the names for these objects are provided. Otherwise, all Directory Config objects in the account are described. These objects include the configuration information required to join fleets and image builders to Microsoft Active Directory domains. </p> <p>Although the response syntax in this topic includes the account password, this password is not returned in the actual response.</p>",
     "DescribeEntitlements": "<p>Retrieves a list that describes one of more entitlements.</p>",
     "DescribeFleets": "<p>Retrieves a list that describes one or more specified fleets, if the fleet names are provided. Otherwise, all fleets in the account are described.</p>",
-    "DescribeImageBuilders": "<p>Retrieves a list that describes one or more specified image builders, if the image builder names are provided. Otherwise, all image builders in the account are described.</p>",
+    "DescribeImageBuilders": "<p>Retrieves a list that describes one or more specified image builders, if the image builder names are provided. Otherwise, all image builders in the account are described.</p> <p>The description of each image builder includes its agent access configuration, if agent access is enabled.</p>",
     "DescribeImagePermissions": "<p>Retrieves a list that describes the permissions for shared AWS account IDs on a private image that you own. </p>",
     "DescribeImages": "<p>Retrieves a list that describes one or more specified images, if the image names or image ARNs are provided. Otherwise, all images in the account are described.</p>",
     "DescribeSessions": "<p>Retrieves a list that describes the streaming sessions for a specified stack and fleet. If a UserId is provided for the stack and fleet, only streaming sessions for that user are described. If an authentication type is not provided, the default is to authenticate users using a streaming URL.</p>",
@@ -88,6 +88,7 @@
     "UpdateDirectoryConfig": "<p>Updates the specified Directory Config object in WorkSpaces Applications. This object includes the configuration information required to join fleets and image builders to Microsoft Active Directory domains.</p>",
     "UpdateEntitlement": "<p>Updates the specified entitlement.</p>",
     "UpdateFleet": "<p>Updates the specified fleet.</p> <p>If the fleet is in the <code>STOPPED</code> state, you can update any attribute except the fleet name.</p> <p>If the fleet is in the <code>RUNNING</code> state, you can update the following based on the fleet type:</p> <ul> <li> <p>Always-On and On-Demand fleet types</p> <p>You can update the <code>DisplayName</code>, <code>ComputeCapacity</code>, <code>ImageARN</code>, <code>ImageName</code>, <code>IdleDisconnectTimeoutInSeconds</code>, and <code>DisconnectTimeoutInSeconds</code> attributes.</p> </li> <li> <p>Elastic fleet type</p> <p>You can update the <code>DisplayName</code>, <code>IdleDisconnectTimeoutInSeconds</code>, <code>DisconnectTimeoutInSeconds</code>, <code>MaxConcurrentSessions</code>, <code>SessionScriptS3Location</code> and <code>UsbDeviceFilterStrings</code> attributes.</p> </li> </ul> <p>If the fleet is in the <code>STARTING</code> or <code>STOPPED</code> state, you can't update it.</p>",
+    "UpdateImageBuilder": "<p>Updates the specified fields for the specified image builder. The image builder must be in the STOPPED state.</p>",
     "UpdateImagePermissions": "<p>Adds or updates permissions for the specified private image. </p>",
     "UpdateStack": "<p>Updates the specified fields for the specified stack.</p>",
     "UpdateThemeForStack": "<p>Updates custom branding that customizes the appearance of the streaming application catalog page.</p>"
@@ -133,7 +134,7 @@
     "Action": {
       "base": null,
       "refs": {
-        "UserSetting$Action": "<p>The action that is enabled or disabled.</p>"
+        "UserSetting$Action": "<p>The action you want to enable or disable. Choose from the following:</p> <dl> <dt>AUTO_TIME_ZONE_REDIRECTION</dt> <dd> <p>Controls whether the streaming session's time zone matches the time zone of your local device.</p> </dd> <dt>CLIPBOARD_COPY_FROM_LOCAL_DEVICE</dt> <dd> <p>Controls whether you can copy data from your local device and paste it into the streaming session.</p> </dd> <dt>CLIPBOARD_COPY_TO_LOCAL_DEVICE</dt> <dd> <p>Controls whether you can copy data from the streaming session and paste it to your local device.</p> </dd> <dt>DOMAIN_PASSWORD_SIGNIN</dt> <dd> <p>Controls whether you can sign in to a domain-joined streaming session by using your password.</p> </dd> <dt>DOMAIN_SMART_CARD_SIGNIN</dt> <dd> <p>Controls whether you can sign in to a domain-joined streaming session by using a smart card.</p> </dd> <dt>FILE_DOWNLOAD</dt> <dd> <p>Controls whether you can download files from the streaming session to your local device.</p> </dd> <dt>FILE_UPLOAD</dt> <dd> <p>Controls whether you can upload files from your local device to the streaming session.</p> </dd> <dt>PRINTING_TO_LOCAL_DEVICE</dt> <dd> <p>Controls whether you can print from the streaming session to a printer on your local device.</p> </dd> <dt>SMART_CARD_REDIRECTION</dt> <dd> <p>Controls whether smart cards connected to your local device are redirected into the streaming session. Applications in the session can access the local smart card for use cases such as authentication, digital signing, and email encryption.</p> </dd> </dl> <note> <p>Smart card redirection was on by default for existing streaming sessions that use a Windows single-session fleet. To preserve that behavior, <code>SMART_CARD_REDIRECTION</code> is <code>ENABLED</code> by default on existing stacks associated with Windows single-session fleets. To turn it off, call <code>UpdateStack</code> with <code>SMART_CARD_REDIRECTION</code> set to <code>DISABLED</code>, and use an image that includes the latest WorkSpaces Applications agent version.</p> </note>"
       }
     },
     "AdminAppLicenseUsageList": {
@@ -170,8 +171,10 @@
     "AgentAccessSettingList": {
       "base": "<p>A list of AgentAccessSetting objects.</p>",
       "refs": {
-        "AgentAccessConfig$Settings": "<p>The list of agent access settings that define permissions for each agent action. You must specify at least one setting.</p>",
-        "AgentAccessConfigForUpdate$Settings": "<p>The list of agent access settings that define permissions for each agent action.</p>"
+        "AgentAccessConfig$Settings": "<p>The list of agent access settings that define permissions for each agent action. You must specify at least one setting, and at least one agent action must be enabled.</p>",
+        "AgentAccessConfigForUpdate$Settings": "<p>The list of agent access settings that define permissions for each agent action. The merged settings must have at least one agent action enabled.</p>",
+        "ImageBuilderAgentAccessConfig$Settings": "<p>The list of agent access settings that define permissions for each agent action. You must specify at least one setting, and at least one agent action must be enabled.</p>",
+        "ImageBuilderAgentAccessConfigForUpdate$Settings": "<p>The list of agent access settings that define permissions for each agent action. These settings are merged with the stored settings by agent action. A setting that you specify replaces the stored setting for the same agent action. The merged settings must have at least one agent action enabled.</p>"
       }
     },
     "AgentAction": {
@@ -537,7 +540,9 @@
       "base": null,
       "refs": {
         "AgentAccessConfig$ScreenshotsUploadEnabled": "<p>Indicates whether screenshot uploads to Amazon S3 are enabled for agent sessions.</p>",
+        "AgentAccessConfig$ReplaySessionEnabled": "<p>Indicates whether Replay Session is enabled for agent sessions. WorkSpaces Applications delivers a video combining session screenshots, a transcript, and a report for each session. Requires the COMPUTER_VISION agent action.</p>",
         "AgentAccessConfigForUpdate$ScreenshotsUploadEnabled": "<p>Indicates whether screenshot uploads to Amazon S3 are enabled for agent sessions.</p>",
+        "AgentAccessConfigForUpdate$ReplaySessionEnabled": "<p>Indicates whether Replay Session is enabled for agent sessions. Setting this attribute to false also removes the KmsKeyArn value from the stack.</p>",
         "AppBlockBuilder$EnableDefaultInternetAccess": "<p>Indicates whether default internet access is enabled for the app block builder.</p>",
         "AppBlockBuilder$DisableIMDSV1": "<p>Indicates whether Instance Metadata Service Version 1 (IMDSv1) is disabled for the app block builder.</p>",
         "CreateAppBlockBuilderRequest$EnableDefaultInternetAccess": "<p>Enables or disables default internet access for the app block builder.</p>",
@@ -550,13 +555,16 @@
         "Fleet$DisableIMDSV1": "<p>Indicates whether Instance Metadata Service Version 1 (IMDSv1) is disabled for the fleet.</p>",
         "ImageBuilder$EnableDefaultInternetAccess": "<p>Enables or disables default internet access for the image builder.</p>",
         "ImageBuilder$DisableIMDSV1": "<p>Indicates whether Instance Metadata Service Version 1 (IMDSv1) is disabled for the image builder.</p>",
+        "ImageBuilderAgentAccessConfig$ScreenshotsUploadEnabled": "<p>Specifies whether screenshot uploads to Amazon S3 are enabled for agent sessions.</p>",
+        "ImageBuilderAgentAccessConfigForUpdate$ScreenshotsUploadEnabled": "<p>Specifies whether screenshot uploads to Amazon S3 are enabled for agent sessions.</p>",
         "ImagePermissions$allowFleet": "<p>Indicates whether the image can be used for a fleet.</p>",
         "ImagePermissions$allowImageBuilder": "<p>Indicates whether the image can be used for an image builder.</p>",
         "UpdateAppBlockBuilderRequest$EnableDefaultInternetAccess": "<p>Enables or disables default internet access for the app block builder.</p>",
         "UpdateAppBlockBuilderRequest$DisableIMDSV1": "<p>Set to true to disable Instance Metadata Service Version 1 (IMDSv1) and enforce IMDSv2. Set to false to enable both IMDSv1 and IMDSv2.</p>",
         "UpdateFleetRequest$EnableDefaultInternetAccess": "<p>Enables or disables default internet access for the fleet.</p>",
         "UpdateFleetRequest$DisableIMDSV1": "<p>Set to true to disable Instance Metadata Service Version 1 (IMDSv1) and enforce IMDSv2. Set to false to enable both IMDSv1 and IMDSv2.</p> <note> <p>Before disabling IMDSv1, ensure your WorkSpaces Applications images are running the agent version or managed image update released on or after January 16, 2024 to support IMDSv2 enforcement.</p> </note>",
-        "UrlRedirectionConfig$Enabled": "<p>Whether URL redirection is enabled for this direction.</p>"
+        "UrlRedirectionConfig$Enabled": "<p>Whether URL redirection is enabled for this direction.</p>",
+        "WebAuthnRedirection$Enabled": "<p>Specifies whether WebAuthn redirection is enabled for the stack.</p>"
       }
     },
     "CertificateBasedAuthProperties": {
@@ -1023,6 +1031,7 @@
         "UpdateApplicationRequest$Description": "<p>The description of the application.</p>",
         "UpdateEntitlementRequest$Description": "<p>The description of the entitlement.</p>",
         "UpdateFleetRequest$Description": "<p>The description to display.</p>",
+        "UpdateImageBuilderRequest$Description": "<p>The description to display.</p>",
         "UpdateStackRequest$Description": "<p>The description to display.</p>"
       }
     },
@@ -1118,6 +1127,7 @@
         "UpdateAppBlockBuilderRequest$DisplayName": "<p>The display name of the app block builder.</p>",
         "UpdateApplicationRequest$DisplayName": "<p>The display name of the application. This name is visible to users in the application catalog.</p>",
         "UpdateFleetRequest$DisplayName": "<p>The fleet name to display.</p>",
+        "UpdateImageBuilderRequest$DisplayName": "<p>The image builder name to display.</p>",
         "UpdateStackRequest$DisplayName": "<p>The stack name to display.</p>"
       }
     },
@@ -1423,7 +1433,33 @@
         "DeleteImageBuilderResult$ImageBuilder": "<p>Information about the image builder.</p>",
         "ImageBuilderList$member": null,
         "StartImageBuilderResult$ImageBuilder": "<p>Information about the image builder.</p>",
-        "StopImageBuilderResult$ImageBuilder": "<p>Information about the image builder.</p>"
+        "StopImageBuilderResult$ImageBuilder": "<p>Information about the image builder.</p>",
+        "UpdateImageBuilderResult$ImageBuilder": "<p>Information about the image builder.</p>"
+      }
+    },
+    "ImageBuilderAgentAccessConfig": {
+      "base": "<p>The configuration for agent access on an image builder. Agent access enables AI agents to interact with desktop applications during streaming sessions to the image builder.</p>",
+      "refs": {
+        "CreateImageBuilderRequest$AgentAccessConfig": "<p>The configuration for agent access on the image builder. If specified, agent access is enabled for the image builder.</p>",
+        "ImageBuilder$AgentAccessConfig": "<p>The agent access configuration of the image builder, if agent access is enabled.</p>"
+      }
+    },
+    "ImageBuilderAgentAccessConfigForUpdate": {
+      "base": "<p>The configuration for updating agent access on an image builder. This type supports partial updates, so you only need to specify the fields you want to change. Fields that you omit keep their stored values.</p>",
+      "refs": {
+        "UpdateImageBuilderRequest$AgentAccessConfig": "<p>The configuration for agent access on the image builder. Specify this to update agent access settings. To remove agent access, use AttributesToDelete with the AGENT_ACCESS_CONFIG value.</p>"
+      }
+    },
+    "ImageBuilderAttribute": {
+      "base": "<p>An image builder attribute that you can delete by using the AttributesToDelete parameter of UpdateImageBuilder.</p> <ul> <li> <p>AGENT_ACCESS_CONFIG - Removes the stored agent access configuration from the image builder.</p> </li> </ul>",
+      "refs": {
+        "ImageBuilderAttributes$member": null
+      }
+    },
+    "ImageBuilderAttributes": {
+      "base": "<p>The image builder attributes.</p>",
+      "refs": {
+        "UpdateImageBuilderRequest$AttributesToDelete": "<p>The image builder attributes to delete.</p>"
       }
     },
     "ImageBuilderList": {
@@ -1590,6 +1626,13 @@
       "base": "<p>The specified role is invalid.</p>",
       "refs": {}
     },
+    "KmsKeyArn": {
+      "base": null,
+      "refs": {
+        "AgentAccessConfig$KmsKeyArn": "<p>The Amazon Resource Name (ARN) of the customer managed symmetric encryption KMS key that encrypts Replay Session artifacts while WorkSpaces Applications processes them. The key must be in the same Region as the stack, and ReplaySessionEnabled must be true.</p>",
+        "AgentAccessConfigForUpdate$KmsKeyArn": "<p>The Amazon Resource Name (ARN) of the customer managed symmetric encryption KMS key that encrypts Replay Session artifacts while WorkSpaces Applications processes them. To remove the key, use AttributesToDelete with the AGENT_ACCESS_CONFIG_KMS_KEY_ARN value.</p>"
+      }
+    },
     "LastReportGenerationExecutionError": {
       "base": "<p>Describes the error that is returned when a usage report can't be generated.</p>",
       "refs": {
@@ -1750,6 +1793,7 @@
         "UpdateEntitlementRequest$Name": "<p>The name of the entitlement.</p>",
         "UpdateEntitlementRequest$StackName": "<p>The name of the stack with which the entitlement is associated.</p>",
         "UpdateFleetRequest$Name": "<p>A unique name for the fleet.</p>",
+        "UpdateImageBuilderRequest$Name": "<p>The name of the image builder.</p>",
         "UpdateImagePermissionsRequest$Name": "<p>The name of the private image.</p>",
         "UpdateThemeForStackRequest$StackName": "<p>The name of the stack for the theme.</p>"
       }
@@ -1797,7 +1841,7 @@
       "base": null,
       "refs": {
         "AgentAccessSetting$Permission": "<p>Whether the agent action is enabled or disabled.</p>",
-        "UserSetting$Permission": "<p>Indicates whether the action is enabled or disabled.</p>"
+        "UserSetting$Permission": "<p>Specifies whether to turn the action on or off.</p>"
       }
     },
     "PhotonAmiId": {
@@ -1830,6 +1874,18 @@
       "base": null,
       "refs": {
         "StreamingExperienceSettings$PreferredProtocol": "<p>The preferred protocol that you want to use while streaming your application.</p>"
+      }
+    },
+    "ProcessCompatibilityList": {
+      "base": "<p>The list of process executable names on the remote host for which you enable WebAuthn redirection. Matching is case-insensitive, and duplicates are not allowed.</p> <p>If you omit this field on a Windows fleet, WorkSpaces Applications uses a built-in default list of common browser and sign-in processes. If you specify a list, your list replaces the default list rather than adding to it. Include any default entries that your workloads still need.</p> <p>WorkSpaces Applications does not support this field on Linux fleets.</p>",
+      "refs": {
+        "WebAuthnRedirection$ProcessCompatibilityList": "<p>The list of process executable names for which you enable WebAuthn redirection. For example, chrome.exe.</p>"
+      }
+    },
+    "ProcessImageName": {
+      "base": "<p>The file name of a process executable on the remote host for which you want to redirect WebAuthn requests. For example, chrome.exe.</p>",
+      "refs": {
+        "ProcessCompatibilityList$member": null
       }
     },
     "RedirectURL": {
@@ -1901,8 +1957,10 @@
     "S3BucketArn": {
       "base": null,
       "refs": {
-        "AgentAccessConfig$S3BucketArn": "<p>The Amazon Resource Name (ARN) of the Amazon S3 bucket where agent screenshots are stored. Required when ScreenshotsUploadEnabled is true.</p>",
-        "AgentAccessConfigForUpdate$S3BucketArn": "<p>The Amazon Resource Name (ARN) of the Amazon S3 bucket where agent screenshots are stored.</p>"
+        "AgentAccessConfig$S3BucketArn": "<p>The Amazon Resource Name (ARN) of the Amazon S3 bucket where agent screenshots and Replay Session artifacts are stored. Required when ScreenshotsUploadEnabled or ReplaySessionEnabled is true.</p>",
+        "AgentAccessConfigForUpdate$S3BucketArn": "<p>The Amazon Resource Name (ARN) of the Amazon S3 bucket where agent screenshots and Replay Session artifacts are stored.</p>",
+        "ImageBuilderAgentAccessConfig$S3BucketArn": "<p>The Amazon Resource Name (ARN) of the Amazon S3 bucket where agent screenshots are stored. Required when ScreenshotsUploadEnabled is true.</p>",
+        "ImageBuilderAgentAccessConfigForUpdate$S3BucketArn": "<p>The Amazon Resource Name (ARN) of the Amazon S3 bucket where agent screenshots are stored. If ScreenshotsUploadEnabled is false after the merge, the stored bucket ARN is removed.</p>"
       }
     },
     "S3Key": {
@@ -1933,14 +1991,18 @@
       "base": "<p>The image format for agent screen captures.</p> <ul> <li> <p>PNG - PNG format.</p> </li> <li> <p>JPEG - JPEG format.</p> </li> </ul>",
       "refs": {
         "AgentAccessConfig$ScreenImageFormat": "<p>The image format for agent screen captures.</p>",
-        "AgentAccessConfigForUpdate$ScreenImageFormat": "<p>The image format for agent screen captures.</p>"
+        "AgentAccessConfigForUpdate$ScreenImageFormat": "<p>The image format for agent screen captures.</p>",
+        "ImageBuilderAgentAccessConfig$ScreenImageFormat": "<p>The image format for agent screen captures.</p> <ul> <li> <p>PNG - PNG format.</p> </li> <li> <p>JPEG - JPEG format.</p> </li> </ul>",
+        "ImageBuilderAgentAccessConfigForUpdate$ScreenImageFormat": "<p>The image format for agent screen captures.</p> <ul> <li> <p>PNG - PNG format.</p> </li> <li> <p>JPEG - JPEG format.</p> </li> </ul>"
       }
     },
     "ScreenResolution": {
       "base": "<p>The screen resolution for the agent streaming environment.</p> <ul> <li> <p>W_1280xH_720 - 1280 x 720 pixels.</p> </li> </ul>",
       "refs": {
         "AgentAccessConfig$ScreenResolution": "<p>The screen resolution for the agent streaming environment.</p>",
-        "AgentAccessConfigForUpdate$ScreenResolution": "<p>The screen resolution for the agent streaming environment.</p>"
+        "AgentAccessConfigForUpdate$ScreenResolution": "<p>The screen resolution for the agent streaming environment.</p>",
+        "ImageBuilderAgentAccessConfig$ScreenResolution": "<p>The screen resolution for the agent streaming environment.</p> <ul> <li> <p>W_1280xH_720 - 1280 x 720 pixels.</p> </li> </ul>",
+        "ImageBuilderAgentAccessConfigForUpdate$ScreenResolution": "<p>The screen resolution for the agent streaming environment.</p> <ul> <li> <p>W_1280xH_720 - 1280 x 720 pixels.</p> </li> </ul>"
       }
     },
     "ScriptDetails": {
@@ -2036,7 +2098,7 @@
       }
     },
     "StackAttribute": {
-      "base": "<p>The stack attributes to delete.</p> <ul> <li> <p>STORAGE_CONNECTORS</p> </li> <li> <p>STORAGE_CONNECTOR_HOMEFOLDERS</p> </li> <li> <p>STORAGE_CONNECTOR_GOOGLE_DRIVE</p> </li> <li> <p>STORAGE_CONNECTOR_ONE_DRIVE</p> </li> <li> <p>REDIRECT_URL</p> </li> <li> <p>FEEDBACK_URL</p> </li> <li> <p>THEME_NAME</p> </li> <li> <p>USER_SETTINGS</p> </li> <li> <p>EMBED_HOST_DOMAINS</p> </li> <li> <p>IAM_ROLE_ARN</p> </li> <li> <p>ACCESS_ENDPOINTS</p> </li> <li> <p>STREAMING_EXPERIENCE_SETTINGS</p> </li> <li> <p>AGENT_ACCESS_CONFIG</p> </li> <li> <p>STORAGE_CONNECTOR_AUTHENTICATION</p> </li> </ul>",
+      "base": "<p>The stack attributes to delete.</p> <ul> <li> <p>STORAGE_CONNECTORS</p> </li> <li> <p>STORAGE_CONNECTOR_HOMEFOLDERS</p> </li> <li> <p>STORAGE_CONNECTOR_GOOGLE_DRIVE</p> </li> <li> <p>STORAGE_CONNECTOR_ONE_DRIVE</p> </li> <li> <p>REDIRECT_URL</p> </li> <li> <p>FEEDBACK_URL</p> </li> <li> <p>THEME_NAME</p> </li> <li> <p>USER_SETTINGS</p> </li> <li> <p>EMBED_HOST_DOMAINS</p> </li> <li> <p>IAM_ROLE_ARN</p> </li> <li> <p>ACCESS_ENDPOINTS</p> </li> <li> <p>STREAMING_EXPERIENCE_SETTINGS</p> </li> <li> <p>AGENT_ACCESS_CONFIG</p> </li> <li> <p>AGENT_ACCESS_CONFIG_KMS_KEY_ARN</p> </li> <li> <p>STORAGE_CONNECTOR_AUTHENTICATION</p> </li> <li> <p>WEB_AUTHN_REDIRECTION</p> </li> </ul>",
       "refs": {
         "StackAttributes$member": null
       }
@@ -2171,6 +2233,14 @@
         "UpdateStackRequest$StreamingExperienceSettings": "<p>The streaming protocol you want your stack to prefer. This can be UDP or TCP. Currently, UDP is only supported in the Windows native client.</p>"
       }
     },
+    "StreamingUrl": {
+      "base": null,
+      "refs": {
+        "CreateAppBlockBuilderStreamingURLResult$StreamingURL": "<p>The URL to start the streaming session.</p>",
+        "CreateImageBuilderStreamingURLResult$StreamingURL": "<p>The URL to start the WorkSpaces Applications streaming session.</p>",
+        "CreateStreamingURLResult$StreamingURL": "<p>The URL to start the WorkSpaces Applications streaming session.</p>"
+      }
+    },
     "StreamingUrlUserId": {
       "base": null,
       "refs": {
@@ -2206,20 +2276,17 @@
         "AssociateFleetRequest$FleetName": "<p>The name of the fleet. </p>",
         "AssociateFleetRequest$StackName": "<p>The name of the stack.</p>",
         "CreateAppBlockBuilderRequest$InstanceType": "<p>The instance type to use when launching the app block builder. The following instance types are available:</p> <ul> <li> <p>stream.standard.small</p> </li> <li> <p>stream.standard.medium</p> </li> <li> <p>stream.standard.large</p> </li> <li> <p>stream.standard.xlarge</p> </li> <li> <p>stream.standard.2xlarge</p> </li> </ul>",
-        "CreateAppBlockBuilderStreamingURLResult$StreamingURL": "<p>The URL to start the streaming session.</p>",
         "CreateApplicationRequest$LaunchPath": "<p>The launch path of the application.</p>",
         "CreateApplicationRequest$WorkingDirectory": "<p>The working directory of the application.</p>",
         "CreateApplicationRequest$LaunchParameters": "<p>The launch parameters of the application.</p>",
-        "CreateFleetRequest$InstanceType": "<p>The instance type to use when launching fleet instances. The following instance types are available:</p> <ul> <li> <p>stream.standard.small</p> </li> <li> <p>stream.standard.medium</p> </li> <li> <p>stream.standard.large</p> </li> <li> <p>stream.standard.xlarge</p> </li> <li> <p>stream.standard.2xlarge</p> </li> <li> <p>stream.compute.large</p> </li> <li> <p>stream.compute.xlarge</p> </li> <li> <p>stream.compute.2xlarge</p> </li> <li> <p>stream.compute.4xlarge</p> </li> <li> <p>stream.compute.8xlarge</p> </li> <li> <p>stream.memory.large</p> </li> <li> <p>stream.memory.xlarge</p> </li> <li> <p>stream.memory.2xlarge</p> </li> <li> <p>stream.memory.4xlarge</p> </li> <li> <p>stream.memory.8xlarge</p> </li> <li> <p>stream.memory.z1d.large</p> </li> <li> <p>stream.memory.z1d.xlarge</p> </li> <li> <p>stream.memory.z1d.2xlarge</p> </li> <li> <p>stream.memory.z1d.3xlarge</p> </li> <li> <p>stream.memory.z1d.6xlarge</p> </li> <li> <p>stream.memory.z1d.12xlarge</p> </li> <li> <p>stream.graphics.g4dn.xlarge</p> </li> <li> <p>stream.graphics.g4dn.2xlarge</p> </li> <li> <p>stream.graphics.g4dn.4xlarge</p> </li> <li> <p>stream.graphics.g4dn.8xlarge</p> </li> <li> <p>stream.graphics.g4dn.12xlarge</p> </li> <li> <p>stream.graphics.g4dn.16xlarge</p> </li> <li> <p>stream.graphics.g5.xlarge</p> </li> <li> <p>stream.graphics.g5.2xlarge</p> </li> <li> <p>stream.graphics.g5.4xlarge</p> </li> <li> <p>stream.graphics.g5.8xlarge</p> </li> <li> <p>stream.graphics.g5.12xlarge</p> </li> <li> <p>stream.graphics.g5.16xlarge</p> </li> <li> <p>stream.graphics.g5.24xlarge</p> </li> <li> <p>stream.graphics.g6.xlarge</p> </li> <li> <p>stream.graphics.g6.2xlarge</p> </li> <li> <p>stream.graphics.g6.4xlarge</p> </li> <li> <p>stream.graphics.g6.8xlarge</p> </li> <li> <p>stream.graphics.g6.16xlarge</p> </li> <li> <p>stream.graphics.g6.12xlarge</p> </li> <li> <p>stream.graphics.g6.24xlarge</p> </li> <li> <p>stream.graphics.gr6.4xlarge</p> </li> <li> <p>stream.graphics.gr6.8xlarge</p> </li> <li> <p>stream.graphics.g6f.large</p> </li> <li> <p>stream.graphics.g6f.xlarge</p> </li> <li> <p>stream.graphics.g6f.2xlarge</p> </li> <li> <p>stream.graphics.g6f.4xlarge</p> </li> <li> <p>stream.graphics.gr6f.4xlarge</p> </li> </ul> <p>The following instance types are available for Elastic fleets:</p> <ul> <li> <p>stream.standard.small</p> </li> <li> <p>stream.standard.medium</p> </li> <li> <p>stream.standard.large</p> </li> <li> <p>stream.standard.xlarge</p> </li> <li> <p>stream.standard.2xlarge</p> </li> </ul>",
+        "CreateFleetRequest$InstanceType": "<p>The instance type to use when launching fleet instances. The following instance types are available:</p> <ul> <li> <p>stream.standard.small</p> </li> <li> <p>stream.standard.medium</p> </li> <li> <p>stream.standard.large</p> </li> <li> <p>stream.standard.xlarge</p> </li> <li> <p>stream.standard.2xlarge</p> </li> <li> <p>stream.compute.large</p> </li> <li> <p>stream.compute.xlarge</p> </li> <li> <p>stream.compute.2xlarge</p> </li> <li> <p>stream.compute.4xlarge</p> </li> <li> <p>stream.compute.8xlarge</p> </li> <li> <p>stream.memory.large</p> </li> <li> <p>stream.memory.xlarge</p> </li> <li> <p>stream.memory.2xlarge</p> </li> <li> <p>stream.memory.4xlarge</p> </li> <li> <p>stream.memory.8xlarge</p> </li> <li> <p>stream.memory.z1d.large</p> </li> <li> <p>stream.memory.z1d.xlarge</p> </li> <li> <p>stream.memory.z1d.2xlarge</p> </li> <li> <p>stream.memory.z1d.3xlarge</p> </li> <li> <p>stream.memory.z1d.6xlarge</p> </li> <li> <p>stream.memory.z1d.12xlarge</p> </li> <li> <p>stream.graphics.g4dn.xlarge</p> </li> <li> <p>stream.graphics.g4dn.2xlarge</p> </li> <li> <p>stream.graphics.g4dn.4xlarge</p> </li> <li> <p>stream.graphics.g4dn.8xlarge</p> </li> <li> <p>stream.graphics.g4dn.12xlarge</p> </li> <li> <p>stream.graphics.g4dn.16xlarge</p> </li> <li> <p>stream.graphics.g5.xlarge</p> </li> <li> <p>stream.graphics.g5.2xlarge</p> </li> <li> <p>stream.graphics.g5.4xlarge</p> </li> <li> <p>stream.graphics.g5.8xlarge</p> </li> <li> <p>stream.graphics.g5.12xlarge</p> </li> <li> <p>stream.graphics.g5.16xlarge</p> </li> <li> <p>stream.graphics.g5.24xlarge</p> </li> <li> <p>stream.graphics.g6.xlarge</p> </li> <li> <p>stream.graphics.g6.2xlarge</p> </li> <li> <p>stream.graphics.g6.4xlarge</p> </li> <li> <p>stream.graphics.g6.8xlarge</p> </li> <li> <p>stream.graphics.g6.16xlarge</p> </li> <li> <p>stream.graphics.g6.12xlarge</p> </li> <li> <p>stream.graphics.g6.24xlarge</p> </li> <li> <p>stream.graphics.gr6.4xlarge</p> </li> <li> <p>stream.graphics.gr6.8xlarge</p> </li> <li> <p>stream.graphics.g6f.large</p> </li> <li> <p>stream.graphics.g6f.xlarge</p> </li> <li> <p>stream.graphics.g6f.2xlarge</p> </li> <li> <p>stream.graphics.g6f.4xlarge</p> </li> <li> <p>stream.graphics.gr6f.4xlarge</p> </li> <li> <p>stream.graphics.g7.2xlarge</p> </li> <li> <p>stream.graphics.g7.4xlarge</p> </li> <li> <p>stream.graphics.g7.8xlarge</p> </li> <li> <p>stream.graphics.g7.12xlarge</p> </li> <li> <p>stream.graphics.g7.24xlarge</p> </li> <li> <p>stream.graphics.g7.48xlarge</p> </li> </ul> <p>The following instance types are available for Elastic fleets:</p> <ul> <li> <p>stream.standard.small</p> </li> <li> <p>stream.standard.medium</p> </li> <li> <p>stream.standard.large</p> </li> <li> <p>stream.standard.xlarge</p> </li> <li> <p>stream.standard.2xlarge</p> </li> </ul>",
         "CreateImageBuilderRequest$ImageName": "<p>The name of the image used to create the image builder.</p>",
-        "CreateImageBuilderRequest$InstanceType": "<p>The instance type to use when launching the image builder. The following instance types are available:</p> <ul> <li> <p>stream.standard.small</p> </li> <li> <p>stream.standard.medium</p> </li> <li> <p>stream.standard.large</p> </li> <li> <p>stream.compute.large</p> </li> <li> <p>stream.compute.xlarge</p> </li> <li> <p>stream.compute.2xlarge</p> </li> <li> <p>stream.compute.4xlarge</p> </li> <li> <p>stream.compute.8xlarge</p> </li> <li> <p>stream.memory.large</p> </li> <li> <p>stream.memory.xlarge</p> </li> <li> <p>stream.memory.2xlarge</p> </li> <li> <p>stream.memory.4xlarge</p> </li> <li> <p>stream.memory.8xlarge</p> </li> <li> <p>stream.memory.z1d.large</p> </li> <li> <p>stream.memory.z1d.xlarge</p> </li> <li> <p>stream.memory.z1d.2xlarge</p> </li> <li> <p>stream.memory.z1d.3xlarge</p> </li> <li> <p>stream.memory.z1d.6xlarge</p> </li> <li> <p>stream.memory.z1d.12xlarge</p> </li> <li> <p>stream.graphics.g4dn.xlarge</p> </li> <li> <p>stream.graphics.g4dn.2xlarge</p> </li> <li> <p>stream.graphics.g4dn.4xlarge</p> </li> <li> <p>stream.graphics.g4dn.8xlarge</p> </li> <li> <p>stream.graphics.g4dn.12xlarge</p> </li> <li> <p>stream.graphics.g4dn.16xlarge</p> </li> <li> <p>stream.graphics.g5.xlarge</p> </li> <li> <p>stream.graphics.g5.2xlarge</p> </li> <li> <p>stream.graphics.g5.4xlarge</p> </li> <li> <p>stream.graphics.g5.8xlarge</p> </li> <li> <p>stream.graphics.g5.16xlarge</p> </li> <li> <p>stream.graphics.g5.12xlarge</p> </li> <li> <p>stream.graphics.g5.24xlarge</p> </li> <li> <p>stream.graphics.g6.xlarge</p> </li> <li> <p>stream.graphics.g6.2xlarge</p> </li> <li> <p>stream.graphics.g6.4xlarge</p> </li> <li> <p>stream.graphics.g6.8xlarge</p> </li> <li> <p>stream.graphics.g6.16xlarge</p> </li> <li> <p>stream.graphics.g6.12xlarge</p> </li> <li> <p>stream.graphics.g6.24xlarge</p> </li> <li> <p>stream.graphics.gr6.4xlarge</p> </li> <li> <p>stream.graphics.gr6.8xlarge</p> </li> <li> <p>stream.graphics.g6f.large</p> </li> <li> <p>stream.graphics.g6f.xlarge</p> </li> <li> <p>stream.graphics.g6f.2xlarge</p> </li> <li> <p>stream.graphics.g6f.4xlarge</p> </li> <li> <p>stream.graphics.gr6f.4xlarge</p> </li> </ul>",
+        "CreateImageBuilderRequest$InstanceType": "<p>The instance type to use when launching the image builder. The following instance types are available:</p> <ul> <li> <p>stream.standard.small</p> </li> <li> <p>stream.standard.medium</p> </li> <li> <p>stream.standard.large</p> </li> <li> <p>stream.compute.large</p> </li> <li> <p>stream.compute.xlarge</p> </li> <li> <p>stream.compute.2xlarge</p> </li> <li> <p>stream.compute.4xlarge</p> </li> <li> <p>stream.compute.8xlarge</p> </li> <li> <p>stream.memory.large</p> </li> <li> <p>stream.memory.xlarge</p> </li> <li> <p>stream.memory.2xlarge</p> </li> <li> <p>stream.memory.4xlarge</p> </li> <li> <p>stream.memory.8xlarge</p> </li> <li> <p>stream.memory.z1d.large</p> </li> <li> <p>stream.memory.z1d.xlarge</p> </li> <li> <p>stream.memory.z1d.2xlarge</p> </li> <li> <p>stream.memory.z1d.3xlarge</p> </li> <li> <p>stream.memory.z1d.6xlarge</p> </li> <li> <p>stream.memory.z1d.12xlarge</p> </li> <li> <p>stream.graphics.g4dn.xlarge</p> </li> <li> <p>stream.graphics.g4dn.2xlarge</p> </li> <li> <p>stream.graphics.g4dn.4xlarge</p> </li> <li> <p>stream.graphics.g4dn.8xlarge</p> </li> <li> <p>stream.graphics.g4dn.12xlarge</p> </li> <li> <p>stream.graphics.g4dn.16xlarge</p> </li> <li> <p>stream.graphics.g5.xlarge</p> </li> <li> <p>stream.graphics.g5.2xlarge</p> </li> <li> <p>stream.graphics.g5.4xlarge</p> </li> <li> <p>stream.graphics.g5.8xlarge</p> </li> <li> <p>stream.graphics.g5.16xlarge</p> </li> <li> <p>stream.graphics.g5.12xlarge</p> </li> <li> <p>stream.graphics.g5.24xlarge</p> </li> <li> <p>stream.graphics.g6.xlarge</p> </li> <li> <p>stream.graphics.g6.2xlarge</p> </li> <li> <p>stream.graphics.g6.4xlarge</p> </li> <li> <p>stream.graphics.g6.8xlarge</p> </li> <li> <p>stream.graphics.g6.16xlarge</p> </li> <li> <p>stream.graphics.g6.12xlarge</p> </li> <li> <p>stream.graphics.g6.24xlarge</p> </li> <li> <p>stream.graphics.gr6.4xlarge</p> </li> <li> <p>stream.graphics.gr6.8xlarge</p> </li> <li> <p>stream.graphics.g6f.large</p> </li> <li> <p>stream.graphics.g6f.xlarge</p> </li> <li> <p>stream.graphics.g6f.2xlarge</p> </li> <li> <p>stream.graphics.g6f.4xlarge</p> </li> <li> <p>stream.graphics.gr6f.4xlarge</p> </li> <li> <p>stream.graphics.g7.2xlarge</p> </li> <li> <p>stream.graphics.g7.4xlarge</p> </li> <li> <p>stream.graphics.g7.8xlarge</p> </li> <li> <p>stream.graphics.g7.12xlarge</p> </li> <li> <p>stream.graphics.g7.24xlarge</p> </li> <li> <p>stream.graphics.g7.48xlarge</p> </li> </ul>",
         "CreateImageBuilderStreamingURLRequest$Name": "<p>The name of the image builder.</p>",
-        "CreateImageBuilderStreamingURLResult$StreamingURL": "<p>The URL to start the WorkSpaces Applications streaming session.</p>",
         "CreateStreamingURLRequest$StackName": "<p>The name of the stack.</p>",
         "CreateStreamingURLRequest$FleetName": "<p>The name of the fleet.</p>",
         "CreateStreamingURLRequest$ApplicationId": "<p>The name of the application to launch after the session starts. This is the name that you specified as <b>Name</b> in the Image Assistant. If your fleet is enabled for the <b>Desktop</b> stream view, you can also choose to launch directly to the operating system desktop. To do so, specify <b>Desktop</b>.</p>",
         "CreateStreamingURLRequest$SessionContext": "<p>The session context. For more information, see <a href=\"https://docs.aws.amazon.com/appstream2/latest/developerguide/managing-stacks-fleets.html#managing-stacks-fleets-parameters\">Session Context</a> in the <i>Amazon WorkSpaces Applications Administration Guide</i>.</p>",
-        "CreateStreamingURLResult$StreamingURL": "<p>The URL to start the WorkSpaces Applications streaming session.</p>",
         "CreateUsageReportSubscriptionResult$S3BucketName": "<p>The Amazon S3 bucket where generated reports are stored.</p> <p>If you enabled on-instance session scripts and Amazon S3 logging for your session script configuration, WorkSpaces Applications created an S3 bucket to store the script output. The bucket is unique to your account and Region. When you enable usage reporting in this case, WorkSpaces Applications uses the same bucket to store your usage reports. If you haven't already enabled on-instance session scripts, when you enable usage reports, WorkSpaces Applications creates a new S3 bucket.</p>",
         "DeleteFleetRequest$Name": "<p>The name of the fleet.</p>",
         "DeleteStackRequest$Name": "<p>The name of the stack.</p>",
@@ -2276,7 +2343,7 @@
         "Fleet$DisplayName": "<p>The fleet name to display.</p>",
         "Fleet$Description": "<p>The description to display.</p>",
         "Fleet$ImageName": "<p>The name of the image used to create the fleet.</p>",
-        "Fleet$InstanceType": "<p>The instance type to use when launching fleet instances. The following instance types are available:</p> <ul> <li> <p>stream.standard.small</p> </li> <li> <p>stream.standard.medium</p> </li> <li> <p>stream.standard.large</p> </li> <li> <p>stream.compute.large</p> </li> <li> <p>stream.compute.xlarge</p> </li> <li> <p>stream.compute.2xlarge</p> </li> <li> <p>stream.compute.4xlarge</p> </li> <li> <p>stream.compute.8xlarge</p> </li> <li> <p>stream.memory.large</p> </li> <li> <p>stream.memory.xlarge</p> </li> <li> <p>stream.memory.2xlarge</p> </li> <li> <p>stream.memory.4xlarge</p> </li> <li> <p>stream.memory.8xlarge</p> </li> <li> <p>stream.memory.z1d.large</p> </li> <li> <p>stream.memory.z1d.xlarge</p> </li> <li> <p>stream.memory.z1d.2xlarge</p> </li> <li> <p>stream.memory.z1d.3xlarge</p> </li> <li> <p>stream.memory.z1d.6xlarge</p> </li> <li> <p>stream.memory.z1d.12xlarge</p> </li> <li> <p>stream.graphics.g4dn.xlarge</p> </li> <li> <p>stream.graphics.g4dn.2xlarge</p> </li> <li> <p>stream.graphics.g4dn.4xlarge</p> </li> <li> <p>stream.graphics.g4dn.8xlarge</p> </li> <li> <p>stream.graphics.g4dn.12xlarge</p> </li> <li> <p>stream.graphics.g4dn.16xlarge</p> </li> <li> <p>stream.graphics.g5.xlarge</p> </li> <li> <p>stream.graphics.g5.2xlarge</p> </li> <li> <p>stream.graphics.g5.4xlarge</p> </li> <li> <p>stream.graphics.g5.8xlarge</p> </li> <li> <p>stream.graphics.g5.16xlarge</p> </li> <li> <p>stream.graphics.g5.12xlarge</p> </li> <li> <p>stream.graphics.g5.24xlarge</p> </li> <li> <p>stream.graphics.g6.xlarge</p> </li> <li> <p>stream.graphics.g6.2xlarge</p> </li> <li> <p>stream.graphics.g6.4xlarge</p> </li> <li> <p>stream.graphics.g6.8xlarge</p> </li> <li> <p>stream.graphics.g6.16xlarge</p> </li> <li> <p>stream.graphics.g6.12xlarge</p> </li> <li> <p>stream.graphics.g6.24xlarge</p> </li> <li> <p>stream.graphics.gr6.4xlarge</p> </li> <li> <p>stream.graphics.gr6.8xlarge</p> </li> <li> <p>stream.graphics.g6f.large</p> </li> <li> <p>stream.graphics.g6f.xlarge</p> </li> <li> <p>stream.graphics.g6f.2xlarge</p> </li> <li> <p>stream.graphics.g6f.4xlarge</p> </li> <li> <p>stream.graphics.gr6f.4xlarge</p> </li> </ul>",
+        "Fleet$InstanceType": "<p>The instance type to use when launching fleet instances. The following instance types are available:</p> <ul> <li> <p>stream.standard.small</p> </li> <li> <p>stream.standard.medium</p> </li> <li> <p>stream.standard.large</p> </li> <li> <p>stream.compute.large</p> </li> <li> <p>stream.compute.xlarge</p> </li> <li> <p>stream.compute.2xlarge</p> </li> <li> <p>stream.compute.4xlarge</p> </li> <li> <p>stream.compute.8xlarge</p> </li> <li> <p>stream.memory.large</p> </li> <li> <p>stream.memory.xlarge</p> </li> <li> <p>stream.memory.2xlarge</p> </li> <li> <p>stream.memory.4xlarge</p> </li> <li> <p>stream.memory.8xlarge</p> </li> <li> <p>stream.memory.z1d.large</p> </li> <li> <p>stream.memory.z1d.xlarge</p> </li> <li> <p>stream.memory.z1d.2xlarge</p> </li> <li> <p>stream.memory.z1d.3xlarge</p> </li> <li> <p>stream.memory.z1d.6xlarge</p> </li> <li> <p>stream.memory.z1d.12xlarge</p> </li> <li> <p>stream.graphics.g4dn.xlarge</p> </li> <li> <p>stream.graphics.g4dn.2xlarge</p> </li> <li> <p>stream.graphics.g4dn.4xlarge</p> </li> <li> <p>stream.graphics.g4dn.8xlarge</p> </li> <li> <p>stream.graphics.g4dn.12xlarge</p> </li> <li> <p>stream.graphics.g4dn.16xlarge</p> </li> <li> <p>stream.graphics.g5.xlarge</p> </li> <li> <p>stream.graphics.g5.2xlarge</p> </li> <li> <p>stream.graphics.g5.4xlarge</p> </li> <li> <p>stream.graphics.g5.8xlarge</p> </li> <li> <p>stream.graphics.g5.16xlarge</p> </li> <li> <p>stream.graphics.g5.12xlarge</p> </li> <li> <p>stream.graphics.g5.24xlarge</p> </li> <li> <p>stream.graphics.g6.xlarge</p> </li> <li> <p>stream.graphics.g6.2xlarge</p> </li> <li> <p>stream.graphics.g6.4xlarge</p> </li> <li> <p>stream.graphics.g6.8xlarge</p> </li> <li> <p>stream.graphics.g6.16xlarge</p> </li> <li> <p>stream.graphics.g6.12xlarge</p> </li> <li> <p>stream.graphics.g6.24xlarge</p> </li> <li> <p>stream.graphics.gr6.4xlarge</p> </li> <li> <p>stream.graphics.gr6.8xlarge</p> </li> <li> <p>stream.graphics.g6f.large</p> </li> <li> <p>stream.graphics.g6f.xlarge</p> </li> <li> <p>stream.graphics.g6f.2xlarge</p> </li> <li> <p>stream.graphics.g6f.4xlarge</p> </li> <li> <p>stream.graphics.gr6f.4xlarge</p> </li> <li> <p>stream.graphics.g7.2xlarge</p> </li> <li> <p>stream.graphics.g7.4xlarge</p> </li> <li> <p>stream.graphics.g7.8xlarge</p> </li> <li> <p>stream.graphics.g7.12xlarge</p> </li> <li> <p>stream.graphics.g7.24xlarge</p> </li> <li> <p>stream.graphics.g7.48xlarge</p> </li> </ul>",
         "FleetError$ErrorMessage": "<p>The error message.</p>",
         "Image$Name": "<p>The name of the image.</p>",
         "Image$DisplayName": "<p>The image name to display.</p>",
@@ -2285,7 +2352,7 @@
         "ImageBuilder$Name": "<p>The name of the image builder.</p>",
         "ImageBuilder$Description": "<p>The description to display.</p>",
         "ImageBuilder$DisplayName": "<p>The image builder name to display.</p>",
-        "ImageBuilder$InstanceType": "<p>The instance type for the image builder. The following instance types are available:</p> <ul> <li> <p>stream.standard.small</p> </li> <li> <p>stream.standard.medium</p> </li> <li> <p>stream.standard.large</p> </li> <li> <p>stream.compute.large</p> </li> <li> <p>stream.compute.xlarge</p> </li> <li> <p>stream.compute.2xlarge</p> </li> <li> <p>stream.compute.4xlarge</p> </li> <li> <p>stream.compute.8xlarge</p> </li> <li> <p>stream.memory.large</p> </li> <li> <p>stream.memory.xlarge</p> </li> <li> <p>stream.memory.2xlarge</p> </li> <li> <p>stream.memory.4xlarge</p> </li> <li> <p>stream.memory.8xlarge</p> </li> <li> <p>stream.memory.z1d.large</p> </li> <li> <p>stream.memory.z1d.xlarge</p> </li> <li> <p>stream.memory.z1d.2xlarge</p> </li> <li> <p>stream.memory.z1d.3xlarge</p> </li> <li> <p>stream.memory.z1d.6xlarge</p> </li> <li> <p>stream.memory.z1d.12xlarge</p> </li> <li> <p>stream.graphics.g4dn.xlarge</p> </li> <li> <p>stream.graphics.g4dn.2xlarge</p> </li> <li> <p>stream.graphics.g4dn.4xlarge</p> </li> <li> <p>stream.graphics.g4dn.8xlarge</p> </li> <li> <p>stream.graphics.g4dn.12xlarge</p> </li> <li> <p>stream.graphics.g4dn.16xlarge</p> </li> <li> <p>stream.graphics.g5.xlarge</p> </li> <li> <p>stream.graphics.g5.2xlarge</p> </li> <li> <p>stream.graphics.g5.4xlarge</p> </li> <li> <p>stream.graphics.g5.8xlarge</p> </li> <li> <p>stream.graphics.g5.16xlarge</p> </li> <li> <p>stream.graphics.g5.12xlarge</p> </li> <li> <p>stream.graphics.g5.24xlarge</p> </li> <li> <p>stream.graphics.g6.xlarge</p> </li> <li> <p>stream.graphics.g6.2xlarge</p> </li> <li> <p>stream.graphics.g6.4xlarge</p> </li> <li> <p>stream.graphics.g6.8xlarge</p> </li> <li> <p>stream.graphics.g6.16xlarge</p> </li> <li> <p>stream.graphics.g6.12xlarge</p> </li> <li> <p>stream.graphics.g6.24xlarge</p> </li> <li> <p>stream.graphics.gr6.4xlarge</p> </li> <li> <p>stream.graphics.gr6.8xlarge</p> </li> <li> <p>stream.graphics.g6f.large</p> </li> <li> <p>stream.graphics.g6f.xlarge</p> </li> <li> <p>stream.graphics.g6f.2xlarge</p> </li> <li> <p>stream.graphics.g6f.4xlarge</p> </li> <li> <p>stream.graphics.gr6f.4xlarge</p> </li> </ul>",
+        "ImageBuilder$InstanceType": "<p>The instance type for the image builder. The following instance types are available:</p> <ul> <li> <p>stream.standard.small</p> </li> <li> <p>stream.standard.medium</p> </li> <li> <p>stream.standard.large</p> </li> <li> <p>stream.compute.large</p> </li> <li> <p>stream.compute.xlarge</p> </li> <li> <p>stream.compute.2xlarge</p> </li> <li> <p>stream.compute.4xlarge</p> </li> <li> <p>stream.compute.8xlarge</p> </li> <li> <p>stream.memory.large</p> </li> <li> <p>stream.memory.xlarge</p> </li> <li> <p>stream.memory.2xlarge</p> </li> <li> <p>stream.memory.4xlarge</p> </li> <li> <p>stream.memory.8xlarge</p> </li> <li> <p>stream.memory.z1d.large</p> </li> <li> <p>stream.memory.z1d.xlarge</p> </li> <li> <p>stream.memory.z1d.2xlarge</p> </li> <li> <p>stream.memory.z1d.3xlarge</p> </li> <li> <p>stream.memory.z1d.6xlarge</p> </li> <li> <p>stream.memory.z1d.12xlarge</p> </li> <li> <p>stream.graphics.g4dn.xlarge</p> </li> <li> <p>stream.graphics.g4dn.2xlarge</p> </li> <li> <p>stream.graphics.g4dn.4xlarge</p> </li> <li> <p>stream.graphics.g4dn.8xlarge</p> </li> <li> <p>stream.graphics.g4dn.12xlarge</p> </li> <li> <p>stream.graphics.g4dn.16xlarge</p> </li> <li> <p>stream.graphics.g5.xlarge</p> </li> <li> <p>stream.graphics.g5.2xlarge</p> </li> <li> <p>stream.graphics.g5.4xlarge</p> </li> <li> <p>stream.graphics.g5.8xlarge</p> </li> <li> <p>stream.graphics.g5.16xlarge</p> </li> <li> <p>stream.graphics.g5.12xlarge</p> </li> <li> <p>stream.graphics.g5.24xlarge</p> </li> <li> <p>stream.graphics.g6.xlarge</p> </li> <li> <p>stream.graphics.g6.2xlarge</p> </li> <li> <p>stream.graphics.g6.4xlarge</p> </li> <li> <p>stream.graphics.g6.8xlarge</p> </li> <li> <p>stream.graphics.g6.16xlarge</p> </li> <li> <p>stream.graphics.g6.12xlarge</p> </li> <li> <p>stream.graphics.g6.24xlarge</p> </li> <li> <p>stream.graphics.gr6.4xlarge</p> </li> <li> <p>stream.graphics.gr6.8xlarge</p> </li> <li> <p>stream.graphics.g6f.large</p> </li> <li> <p>stream.graphics.g6f.xlarge</p> </li> <li> <p>stream.graphics.g6f.2xlarge</p> </li> <li> <p>stream.graphics.g6f.4xlarge</p> </li> <li> <p>stream.graphics.gr6f.4xlarge</p> </li> <li> <p>stream.graphics.g7.2xlarge</p> </li> <li> <p>stream.graphics.g7.4xlarge</p> </li> <li> <p>stream.graphics.g7.8xlarge</p> </li> <li> <p>stream.graphics.g7.12xlarge</p> </li> <li> <p>stream.graphics.g7.24xlarge</p> </li> <li> <p>stream.graphics.g7.48xlarge</p> </li> </ul>",
         "ImageBuilderStateChangeReason$Message": "<p>The state change reason message.</p>",
         "ImageStateChangeReason$Message": "<p>The state change reason message.</p>",
         "LastReportGenerationExecutionError$ErrorMessage": "<p>The error message for the error that is returned when a usage report can't be generated.</p>",
@@ -2329,7 +2396,7 @@
         "UpdateApplicationRequest$WorkingDirectory": "<p>The working directory of the application.</p>",
         "UpdateApplicationRequest$LaunchParameters": "<p>The launch parameters of the application.</p>",
         "UpdateFleetRequest$ImageName": "<p>The name of the image used to create the fleet.</p>",
-        "UpdateFleetRequest$InstanceType": "<p>The instance type to use when launching fleet instances. The following instance types are available:</p> <ul> <li> <p>stream.standard.small</p> </li> <li> <p>stream.standard.medium</p> </li> <li> <p>stream.standard.large</p> </li> <li> <p>stream.standard.xlarge</p> </li> <li> <p>stream.standard.2xlarge</p> </li> <li> <p>stream.compute.large</p> </li> <li> <p>stream.compute.xlarge</p> </li> <li> <p>stream.compute.2xlarge</p> </li> <li> <p>stream.compute.4xlarge</p> </li> <li> <p>stream.compute.8xlarge</p> </li> <li> <p>stream.memory.large</p> </li> <li> <p>stream.memory.xlarge</p> </li> <li> <p>stream.memory.2xlarge</p> </li> <li> <p>stream.memory.4xlarge</p> </li> <li> <p>stream.memory.8xlarge</p> </li> <li> <p>stream.memory.z1d.large</p> </li> <li> <p>stream.memory.z1d.xlarge</p> </li> <li> <p>stream.memory.z1d.2xlarge</p> </li> <li> <p>stream.memory.z1d.3xlarge</p> </li> <li> <p>stream.memory.z1d.6xlarge</p> </li> <li> <p>stream.memory.z1d.12xlarge</p> </li> <li> <p>stream.graphics.g4dn.xlarge</p> </li> <li> <p>stream.graphics.g4dn.2xlarge</p> </li> <li> <p>stream.graphics.g4dn.4xlarge</p> </li> <li> <p>stream.graphics.g4dn.8xlarge</p> </li> <li> <p>stream.graphics.g4dn.12xlarge</p> </li> <li> <p>stream.graphics.g4dn.16xlarge</p> </li> <li> <p>stream.graphics.g5.xlarge</p> </li> <li> <p>stream.graphics.g5.2xlarge</p> </li> <li> <p>stream.graphics.g5.4xlarge</p> </li> <li> <p>stream.graphics.g5.8xlarge</p> </li> <li> <p>stream.graphics.g5.16xlarge</p> </li> <li> <p>stream.graphics.g5.12xlarge</p> </li> <li> <p>stream.graphics.g5.24xlarge</p> </li> <li> <p>stream.graphics.g6.xlarge</p> </li> <li> <p>stream.graphics.g6.2xlarge</p> </li> <li> <p>stream.graphics.g6.4xlarge</p> </li> <li> <p>stream.graphics.g6.8xlarge</p> </li> <li> <p>stream.graphics.g6.16xlarge</p> </li> <li> <p>stream.graphics.g6.12xlarge</p> </li> <li> <p>stream.graphics.g6.24xlarge</p> </li> <li> <p>stream.graphics.gr6.4xlarge</p> </li> <li> <p>stream.graphics.gr6.8xlarge</p> </li> <li> <p>stream.graphics.g6f.large</p> </li> <li> <p>stream.graphics.g6f.xlarge</p> </li> <li> <p>stream.graphics.g6f.2xlarge</p> </li> <li> <p>stream.graphics.g6f.4xlarge</p> </li> <li> <p>stream.graphics.gr6f.4xlarge</p> </li> </ul> <p>The following instance types are available for Elastic fleets:</p> <ul> <li> <p>stream.standard.small</p> </li> <li> <p>stream.standard.medium</p> </li> <li> <p>stream.standard.large</p> </li> <li> <p>stream.standard.xlarge</p> </li> <li> <p>stream.standard.2xlarge</p> </li> </ul>",
+        "UpdateFleetRequest$InstanceType": "<p>The instance type to use when launching fleet instances. The following instance types are available:</p> <ul> <li> <p>stream.standard.small</p> </li> <li> <p>stream.standard.medium</p> </li> <li> <p>stream.standard.large</p> </li> <li> <p>stream.standard.xlarge</p> </li> <li> <p>stream.standard.2xlarge</p> </li> <li> <p>stream.compute.large</p> </li> <li> <p>stream.compute.xlarge</p> </li> <li> <p>stream.compute.2xlarge</p> </li> <li> <p>stream.compute.4xlarge</p> </li> <li> <p>stream.compute.8xlarge</p> </li> <li> <p>stream.memory.large</p> </li> <li> <p>stream.memory.xlarge</p> </li> <li> <p>stream.memory.2xlarge</p> </li> <li> <p>stream.memory.4xlarge</p> </li> <li> <p>stream.memory.8xlarge</p> </li> <li> <p>stream.memory.z1d.large</p> </li> <li> <p>stream.memory.z1d.xlarge</p> </li> <li> <p>stream.memory.z1d.2xlarge</p> </li> <li> <p>stream.memory.z1d.3xlarge</p> </li> <li> <p>stream.memory.z1d.6xlarge</p> </li> <li> <p>stream.memory.z1d.12xlarge</p> </li> <li> <p>stream.graphics.g4dn.xlarge</p> </li> <li> <p>stream.graphics.g4dn.2xlarge</p> </li> <li> <p>stream.graphics.g4dn.4xlarge</p> </li> <li> <p>stream.graphics.g4dn.8xlarge</p> </li> <li> <p>stream.graphics.g4dn.12xlarge</p> </li> <li> <p>stream.graphics.g4dn.16xlarge</p> </li> <li> <p>stream.graphics.g5.xlarge</p> </li> <li> <p>stream.graphics.g5.2xlarge</p> </li> <li> <p>stream.graphics.g5.4xlarge</p> </li> <li> <p>stream.graphics.g5.8xlarge</p> </li> <li> <p>stream.graphics.g5.16xlarge</p> </li> <li> <p>stream.graphics.g5.12xlarge</p> </li> <li> <p>stream.graphics.g5.24xlarge</p> </li> <li> <p>stream.graphics.g6.xlarge</p> </li> <li> <p>stream.graphics.g6.2xlarge</p> </li> <li> <p>stream.graphics.g6.4xlarge</p> </li> <li> <p>stream.graphics.g6.8xlarge</p> </li> <li> <p>stream.graphics.g6.16xlarge</p> </li> <li> <p>stream.graphics.g6.12xlarge</p> </li> <li> <p>stream.graphics.g6.24xlarge</p> </li> <li> <p>stream.graphics.gr6.4xlarge</p> </li> <li> <p>stream.graphics.gr6.8xlarge</p> </li> <li> <p>stream.graphics.g6f.large</p> </li> <li> <p>stream.graphics.g6f.xlarge</p> </li> <li> <p>stream.graphics.g6f.2xlarge</p> </li> <li> <p>stream.graphics.g6f.4xlarge</p> </li> <li> <p>stream.graphics.gr6f.4xlarge</p> </li> <li> <p>stream.graphics.g7.2xlarge</p> </li> <li> <p>stream.graphics.g7.4xlarge</p> </li> <li> <p>stream.graphics.g7.8xlarge</p> </li> <li> <p>stream.graphics.g7.12xlarge</p> </li> <li> <p>stream.graphics.g7.24xlarge</p> </li> <li> <p>stream.graphics.g7.48xlarge</p> </li> </ul> <p>The following instance types are available for Elastic fleets:</p> <ul> <li> <p>stream.standard.small</p> </li> <li> <p>stream.standard.medium</p> </li> <li> <p>stream.standard.large</p> </li> <li> <p>stream.standard.xlarge</p> </li> <li> <p>stream.standard.2xlarge</p> </li> </ul>",
         "UpdateStackRequest$Name": "<p>The name of the stack.</p>",
         "UsageReportSubscription$S3BucketName": "<p>The Amazon S3 bucket where generated reports are stored.</p> <p>If you enabled on-instance session scripts and Amazon S3 logging for your session script configuration, WorkSpaces Applications created an S3 bucket to store the script output. The bucket is unique to your account and Region. When you enable usage reporting in this case, WorkSpaces Applications uses the same bucket to store your usage reports. If you haven't already enabled on-instance session scripts, when you enable usage reports, WorkSpaces Applications creates a new S3 bucket.</p>",
         "User$Status": "<p>The status of the user in the user pool. The status can be one of the following:</p> <ul> <li> <p>UNCONFIRMED – The user is created but not confirmed.</p> </li> <li> <p>CONFIRMED – The user is confirmed.</p> </li> <li> <p>ARCHIVED – The user is no longer active.</p> </li> <li> <p>COMPROMISED – The user is disabled because of a potential security threat.</p> </li> <li> <p>UNKNOWN – The user status is not known.</p> </li> </ul>",
@@ -2559,6 +2626,14 @@
       "base": null,
       "refs": {}
     },
+    "UpdateImageBuilderRequest": {
+      "base": null,
+      "refs": {}
+    },
+    "UpdateImageBuilderResult": {
+      "base": null,
+      "refs": {}
+    },
     "UpdateImagePermissionsRequest": {
       "base": null,
       "refs": {}
@@ -2584,7 +2659,7 @@
       "refs": {}
     },
     "UrlPattern": {
-      "base": "<p>A glob pattern using wildcards (* for zero or more characters, ? for exactly one character) to match URLs for redirection rules. Patterns do not include a protocol prefix; HTTPS is enforced automatically. Valid examples: *, *.example.com, github.com/myorg/*, api?.example.com Invalid examples: https://example.com (no protocol), empty string</p>",
+      "base": "<p>A glob pattern using wildcards (* for zero or more characters, ? for exactly one character) to match URLs for redirection rules. The pattern must begin with a supported scheme prefix — http://, https://, ftp://, sftp://, or mailto: — and cannot contain whitespace, commas, semicolons, or angle brackets; maximum length 2048 characters. Valid examples: https://*.example.com, , sftp://files.example.com/*, mailto:*@example.com. Invalid examples: *.example.com (no scheme), https://exam ple.com (contains whitespace), empty string.</p>",
       "refs": {
         "UrlPatternList$member": null
       }
@@ -2660,7 +2735,9 @@
       "base": "<p>The user control mode for agent sessions.</p> <ul> <li> <p>VIEW_ONLY - Users can view and observe agent actions as they happen.</p> </li> <li> <p>VIEW_STOP - Users can view agent actions and stop the agent if needed.</p> </li> <li> <p>DISABLED - Users cannot view or stop the agent session.</p> </li> </ul>",
       "refs": {
         "AgentAccessConfig$UserControlMode": "<p>The user control mode for agent sessions. This setting determines how users can interact with agent sessions.</p>",
-        "AgentAccessConfigForUpdate$UserControlMode": "<p>The user control mode for agent sessions. This setting determines how users can interact with agent sessions.</p>"
+        "AgentAccessConfigForUpdate$UserControlMode": "<p>The user control mode for agent sessions. This setting determines how users can interact with agent sessions.</p>",
+        "ImageBuilderAgentAccessConfig$UserControlMode": "<p>The user control mode for agent sessions. This setting determines how users can interact with agent sessions.</p> <ul> <li> <p>VIEW_ONLY - Users can view and observe agent actions as they happen.</p> </li> <li> <p>VIEW_STOP - Users can view agent actions and stop the agent if needed.</p> </li> <li> <p>DISABLED - Users cannot view or stop the agent session.</p> </li> </ul>",
+        "ImageBuilderAgentAccessConfigForUpdate$UserControlMode": "<p>The user control mode for agent sessions. This setting determines how users can interact with agent sessions.</p> <ul> <li> <p>VIEW_ONLY - Users can view and observe agent actions as they happen.</p> </li> <li> <p>VIEW_STOP - Users can view agent actions and stop the agent if needed.</p> </li> <li> <p>DISABLED - Users cannot view or stop the agent session.</p> </li> </ul>"
       }
     },
     "UserId": {
@@ -2764,6 +2841,14 @@
         "ImageBuilder$VpcConfig": "<p>The VPC configuration of the image builder.</p>",
         "UpdateAppBlockBuilderRequest$VpcConfig": "<p>The VPC configuration for the app block builder.</p> <p>App block builders require that you specify at least two subnets in different availability zones.</p>",
         "UpdateFleetRequest$VpcConfig": "<p>The VPC configuration for the fleet. This is required for Elastic fleets, but not required for other fleet types. Elastic fleets require that you specify at least two subnets in different availability zones. </p>"
+      }
+    },
+    "WebAuthnRedirection": {
+      "base": "<p>Describes the WebAuthn redirection configuration for a stack. With WebAuthn redirection, your users can complete passkey and security-key authentication from a streaming session by using an authenticator attached to their local device.</p>",
+      "refs": {
+        "CreateStackRequest$WebAuthnRedirection": "<p>Configuration for WebAuthn redirection between the streaming session and the user's local device. Use ProcessCompatibilityList to specify which processes can use WebAuthn redirection on Windows fleets.</p>",
+        "Stack$WebAuthnRedirection": "<p>Configuration for WebAuthn redirection between the streaming session and the user's local device. Use ProcessCompatibilityList to specify which processes can use WebAuthn redirection on Windows fleets.</p>",
+        "UpdateStackRequest$WebAuthnRedirection": "<p>Configuration for WebAuthn redirection between the streaming session and the user's local device. Use ProcessCompatibilityList to specify which processes can use WebAuthn redirection on Windows fleets. To remove WebAuthn redirection, use AttributesToDelete with the WEB_AUTHN_REDIRECTION value.</p>"
       }
     },
     "WorkspaceImageId": {

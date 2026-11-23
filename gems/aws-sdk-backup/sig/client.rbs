@@ -647,6 +647,7 @@ module Aws
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeRegionSettingsOutput]
         def resource_type_opt_in_preference: () -> ::Hash[::String, bool]
         def resource_type_management_preference: () -> ::Hash[::String, bool]
+        def resource_type_opt_in_incremental: () -> ::Hash[::String, bool]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Backup/Client.html#describe_region_settings-instance_method
       def describe_region_settings: (
@@ -840,7 +841,7 @@ module Aws
         def backup_vault_name: () -> ::String
         def backup_vault_arn: () -> ::String
         def sns_topic_arn: () -> ::String
-        def backup_vault_events: () -> ::Array[("BACKUP_JOB_STARTED" | "BACKUP_JOB_COMPLETED" | "BACKUP_JOB_SUCCESSFUL" | "BACKUP_JOB_FAILED" | "BACKUP_JOB_EXPIRED" | "RESTORE_JOB_STARTED" | "RESTORE_JOB_COMPLETED" | "RESTORE_JOB_SUCCESSFUL" | "RESTORE_JOB_FAILED" | "COPY_JOB_STARTED" | "COPY_JOB_SUCCESSFUL" | "COPY_JOB_FAILED" | "RECOVERY_POINT_MODIFIED" | "BACKUP_PLAN_CREATED" | "BACKUP_PLAN_MODIFIED" | "S3_BACKUP_OBJECT_FAILED" | "S3_RESTORE_OBJECT_FAILED" | "CONTINUOUS_BACKUP_INTERRUPTED" | "RECOVERY_POINT_INDEX_COMPLETED" | "RECOVERY_POINT_INDEX_DELETED" | "RECOVERY_POINT_INDEXING_FAILED" | "EKS_RESTORE_OBJECT_FAILED" | "EKS_RESTORE_OBJECT_SKIPPED" | "EKS_BACKUP_OBJECT_FAILED" | "ACCESS_POINT_AVAILABLE" | "ACCESS_POINT_CREATION_FAILED" | "ACCESS_POINT_DELETED" | "ACCESS_POINT_DELETION_FAILED" | "ACCESS_POINT_EXPIRED" | "ACCESS_POINT_DISASSOCIATED")]
+        def backup_vault_events: () -> ::Array[("BACKUP_JOB_STARTED" | "BACKUP_JOB_COMPLETED" | "BACKUP_JOB_SUCCESSFUL" | "BACKUP_JOB_FAILED" | "BACKUP_JOB_EXPIRED" | "RESTORE_JOB_STARTED" | "RESTORE_JOB_COMPLETED" | "RESTORE_JOB_SUCCESSFUL" | "RESTORE_JOB_FAILED" | "COPY_JOB_STARTED" | "COPY_JOB_SUCCESSFUL" | "COPY_JOB_FAILED" | "RECOVERY_POINT_MODIFIED" | "BACKUP_PLAN_CREATED" | "BACKUP_PLAN_MODIFIED" | "S3_BACKUP_OBJECT_FAILED" | "S3_RESTORE_OBJECT_FAILED" | "CONTINUOUS_BACKUP_INTERRUPTED" | "RECOVERY_POINT_INDEX_COMPLETED" | "RECOVERY_POINT_INDEX_DELETED" | "RECOVERY_POINT_INDEXING_FAILED" | "EKS_RESTORE_OBJECT_FAILED" | "EKS_RESTORE_OBJECT_SKIPPED" | "EKS_BACKUP_OBJECT_FAILED" | "EKS_RESTORE_MODIFICATION_SUCCESS" | "EKS_RESTORE_MODIFICATION_FAILED" | "ACCESS_POINT_AVAILABLE" | "ACCESS_POINT_CREATION_FAILED" | "ACCESS_POINT_DELETED" | "ACCESS_POINT_DELETION_FAILED" | "ACCESS_POINT_EXPIRED" | "ACCESS_POINT_DISASSOCIATED")]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Backup/Client.html#get_backup_vault_notifications-instance_method
       def get_backup_vault_notifications: (
@@ -1486,7 +1487,7 @@ module Aws
       def put_backup_vault_notifications: (
                                             backup_vault_name: ::String,
                                             sns_topic_arn: ::String,
-                                            backup_vault_events: Array[("BACKUP_JOB_STARTED" | "BACKUP_JOB_COMPLETED" | "BACKUP_JOB_SUCCESSFUL" | "BACKUP_JOB_FAILED" | "BACKUP_JOB_EXPIRED" | "RESTORE_JOB_STARTED" | "RESTORE_JOB_COMPLETED" | "RESTORE_JOB_SUCCESSFUL" | "RESTORE_JOB_FAILED" | "COPY_JOB_STARTED" | "COPY_JOB_SUCCESSFUL" | "COPY_JOB_FAILED" | "RECOVERY_POINT_MODIFIED" | "BACKUP_PLAN_CREATED" | "BACKUP_PLAN_MODIFIED" | "S3_BACKUP_OBJECT_FAILED" | "S3_RESTORE_OBJECT_FAILED" | "CONTINUOUS_BACKUP_INTERRUPTED" | "RECOVERY_POINT_INDEX_COMPLETED" | "RECOVERY_POINT_INDEX_DELETED" | "RECOVERY_POINT_INDEXING_FAILED" | "EKS_RESTORE_OBJECT_FAILED" | "EKS_RESTORE_OBJECT_SKIPPED" | "EKS_BACKUP_OBJECT_FAILED" | "ACCESS_POINT_AVAILABLE" | "ACCESS_POINT_CREATION_FAILED" | "ACCESS_POINT_DELETED" | "ACCESS_POINT_DELETION_FAILED" | "ACCESS_POINT_EXPIRED" | "ACCESS_POINT_DISASSOCIATED")]
+                                            backup_vault_events: Array[("BACKUP_JOB_STARTED" | "BACKUP_JOB_COMPLETED" | "BACKUP_JOB_SUCCESSFUL" | "BACKUP_JOB_FAILED" | "BACKUP_JOB_EXPIRED" | "RESTORE_JOB_STARTED" | "RESTORE_JOB_COMPLETED" | "RESTORE_JOB_SUCCESSFUL" | "RESTORE_JOB_FAILED" | "COPY_JOB_STARTED" | "COPY_JOB_SUCCESSFUL" | "COPY_JOB_FAILED" | "RECOVERY_POINT_MODIFIED" | "BACKUP_PLAN_CREATED" | "BACKUP_PLAN_MODIFIED" | "S3_BACKUP_OBJECT_FAILED" | "S3_RESTORE_OBJECT_FAILED" | "CONTINUOUS_BACKUP_INTERRUPTED" | "RECOVERY_POINT_INDEX_COMPLETED" | "RECOVERY_POINT_INDEX_DELETED" | "RECOVERY_POINT_INDEXING_FAILED" | "EKS_RESTORE_OBJECT_FAILED" | "EKS_RESTORE_OBJECT_SKIPPED" | "EKS_BACKUP_OBJECT_FAILED" | "EKS_RESTORE_MODIFICATION_SUCCESS" | "EKS_RESTORE_MODIFICATION_FAILED" | "ACCESS_POINT_AVAILABLE" | "ACCESS_POINT_CREATION_FAILED" | "ACCESS_POINT_DELETED" | "ACCESS_POINT_DELETION_FAILED" | "ACCESS_POINT_EXPIRED" | "ACCESS_POINT_DISASSOCIATED")]
                                           ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 
@@ -1699,7 +1700,8 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Backup/Client.html#update_region_settings-instance_method
       def update_region_settings: (
                                     ?resource_type_opt_in_preference: Hash[::String, bool],
-                                    ?resource_type_management_preference: Hash[::String, bool]
+                                    ?resource_type_management_preference: Hash[::String, bool],
+                                    ?resource_type_opt_in_incremental: Hash[::String, bool]
                                   ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 

@@ -1,6 +1,51 @@
 Unreleased Changes
 ------------------
 
+1.69.0 (2026-11-20)
+------------------
+
+* Feature - Added support for Instance Health Checks in AWS PCS.
+
+1.68.0 (2026-11-19)
+------------------
+
+* Feature - Added support for Job Submit Plugins in AWS PCS.
+
+1.67.0 (2026-11-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.66.0 (2026-11-16)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.65.0 (2026-11-11)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.64.0 (2026-11-10)
+------------------
+
+* Feature - Added support for configuring AMIs, Amazon EC2 security groups, SSH key pairs, and launch template modes when creating or updating AWS PCS compute node groups.
+
+1.63.0 (2026-11-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.62.0 (2026-11-06)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.61.0 (2026-11-04)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.60.0 (2026-10-29)
 ------------------
 

@@ -66,6 +66,7 @@ module Aws::ACM
     CertificateSummaryList = Shapes::ListShape.new(name: 'CertificateSummaryList')
     CertificateTransparencyLoggingPreference = Shapes::StringShape.new(name: 'CertificateTransparencyLoggingPreference')
     CertificateType = Shapes::StringShape.new(name: 'CertificateType')
+    CertificateUsage = Shapes::StringShape.new(name: 'CertificateUsage')
     CommonNameFilter = Shapes::StructureShape.new(name: 'CommonNameFilter')
     ComparisonOperator = Shapes::StringShape.new(name: 'ComparisonOperator')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
@@ -212,6 +213,8 @@ module Aws::ACM
     RevokeCertificateRequest = Shapes::StructureShape.new(name: 'RevokeCertificateRequest')
     RevokeCertificateResponse = Shapes::StructureShape.new(name: 'RevokeCertificateResponse')
     RoleArn = Shapes::StringShape.new(name: 'RoleArn')
+    RootHierarchyType = Shapes::StringShape.new(name: 'RootHierarchyType')
+    RootHierarchyTypes = Shapes::ListShape.new(name: 'RootHierarchyTypes')
     SearchCertificatesRequest = Shapes::StructureShape.new(name: 'SearchCertificatesRequest')
     SearchCertificatesResponse = Shapes::StructureShape.new(name: 'SearchCertificatesResponse')
     SearchCertificatesSortBy = Shapes::StringShape.new(name: 'SearchCertificatesSortBy')
@@ -275,6 +278,8 @@ module Aws::ACM
     AcmCertificateMetadata.add_member(:certificate_key_pair_origin, Shapes::ShapeRef.new(shape: CertificateKeyPairOrigin, location_name: "CertificateKeyPairOrigin"))
     AcmCertificateMetadata.add_member(:acme_endpoint_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "AcmeEndpointArn"))
     AcmCertificateMetadata.add_member(:acme_account_id, Shapes::ShapeRef.new(shape: AcmeAccountId, location_name: "AcmeAccountId"))
+    AcmCertificateMetadata.add_member(:certificate_usage, Shapes::ShapeRef.new(shape: CertificateUsage, location_name: "CertificateUsage"))
+    AcmCertificateMetadata.add_member(:root_hierarchy_type, Shapes::ShapeRef.new(shape: RootHierarchyType, location_name: "RootHierarchyType"))
     AcmCertificateMetadata.struct_class = Types::AcmCertificateMetadata
 
     AcmCertificateMetadataFilter.add_member(:status, Shapes::ShapeRef.new(shape: CertificateStatus, location_name: "Status"))
@@ -288,6 +293,7 @@ module Aws::ACM
     AcmCertificateMetadataFilter.add_member(:certificate_key_pair_origin, Shapes::ShapeRef.new(shape: CertificateKeyPairOrigin, location_name: "CertificateKeyPairOrigin"))
     AcmCertificateMetadataFilter.add_member(:acme_endpoint_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "AcmeEndpointArn"))
     AcmCertificateMetadataFilter.add_member(:acme_account_id, Shapes::ShapeRef.new(shape: AcmeAccountId, location_name: "AcmeAccountId"))
+    AcmCertificateMetadataFilter.add_member(:root_hierarchy_type, Shapes::ShapeRef.new(shape: RootHierarchyType, location_name: "RootHierarchyType"))
     AcmCertificateMetadataFilter.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     AcmCertificateMetadataFilter.add_member_subclass(:status, Types::AcmCertificateMetadataFilter::Status)
     AcmCertificateMetadataFilter.add_member_subclass(:renewal_status, Types::AcmCertificateMetadataFilter::RenewalStatus)
@@ -300,6 +306,7 @@ module Aws::ACM
     AcmCertificateMetadataFilter.add_member_subclass(:certificate_key_pair_origin, Types::AcmCertificateMetadataFilter::CertificateKeyPairOrigin)
     AcmCertificateMetadataFilter.add_member_subclass(:acme_endpoint_arn, Types::AcmCertificateMetadataFilter::AcmeEndpointArn)
     AcmCertificateMetadataFilter.add_member_subclass(:acme_account_id, Types::AcmCertificateMetadataFilter::AcmeAccountId)
+    AcmCertificateMetadataFilter.add_member_subclass(:root_hierarchy_type, Types::AcmCertificateMetadataFilter::RootHierarchyType)
     AcmCertificateMetadataFilter.add_member_subclass(:unknown, Types::AcmCertificateMetadataFilter::Unknown)
     AcmCertificateMetadataFilter.struct_class = Types::AcmCertificateMetadataFilter
 
@@ -434,6 +441,8 @@ module Aws::ACM
     CertificateDetail.add_member(:certificate_key_pair_origin, Shapes::ShapeRef.new(shape: CertificateKeyPairOrigin, location_name: "CertificateKeyPairOrigin"))
     CertificateDetail.add_member(:acme_endpoint_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "AcmeEndpointArn"))
     CertificateDetail.add_member(:acme_account_id, Shapes::ShapeRef.new(shape: AcmeAccountId, location_name: "AcmeAccountId"))
+    CertificateDetail.add_member(:certificate_usage, Shapes::ShapeRef.new(shape: CertificateUsage, location_name: "CertificateUsage"))
+    CertificateDetail.add_member(:root_hierarchy_type, Shapes::ShapeRef.new(shape: RootHierarchyType, location_name: "RootHierarchyType"))
     CertificateDetail.struct_class = Types::CertificateDetail
 
     CertificateFilter.add_member(:certificate_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "CertificateArn"))
@@ -503,6 +512,8 @@ module Aws::ACM
     CertificateSummary.add_member(:revoked_at, Shapes::ShapeRef.new(shape: TStamp, location_name: "RevokedAt"))
     CertificateSummary.add_member(:managed_by, Shapes::ShapeRef.new(shape: CertificateManagedBy, location_name: "ManagedBy"))
     CertificateSummary.add_member(:certificate_key_pair_origin, Shapes::ShapeRef.new(shape: CertificateKeyPairOrigin, location_name: "CertificateKeyPairOrigin"))
+    CertificateSummary.add_member(:certificate_usage, Shapes::ShapeRef.new(shape: CertificateUsage, location_name: "CertificateUsage"))
+    CertificateSummary.add_member(:root_hierarchy_type, Shapes::ShapeRef.new(shape: RootHierarchyType, location_name: "RootHierarchyType"))
     CertificateSummary.struct_class = Types::CertificateSummary
 
     CertificateSummaryList.member = Shapes::ShapeRef.new(shape: CertificateSummary)
@@ -842,6 +853,7 @@ module Aws::ACM
 
     ListCertificatesRequest.add_member(:certificate_statuses, Shapes::ShapeRef.new(shape: CertificateStatuses, location_name: "CertificateStatuses"))
     ListCertificatesRequest.add_member(:certificate_key_pair_origins, Shapes::ShapeRef.new(shape: CertificateKeyPairOrigins, location_name: "CertificateKeyPairOrigins"))
+    ListCertificatesRequest.add_member(:root_hierarchy_types, Shapes::ShapeRef.new(shape: RootHierarchyTypes, location_name: "RootHierarchyTypes"))
     ListCertificatesRequest.add_member(:includes, Shapes::ShapeRef.new(shape: Filters, location_name: "Includes"))
     ListCertificatesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListCertificatesRequest.add_member(:max_items, Shapes::ShapeRef.new(shape: MaxItems, location_name: "MaxItems"))
@@ -913,6 +925,8 @@ module Aws::ACM
     RequestCertificateRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     RequestCertificateRequest.add_member(:key_algorithm, Shapes::ShapeRef.new(shape: KeyAlgorithm, location_name: "KeyAlgorithm"))
     RequestCertificateRequest.add_member(:managed_by, Shapes::ShapeRef.new(shape: CertificateManagedBy, location_name: "ManagedBy"))
+    RequestCertificateRequest.add_member(:certificate_usage, Shapes::ShapeRef.new(shape: CertificateUsage, location_name: "CertificateUsage"))
+    RequestCertificateRequest.add_member(:root_hierarchy_type, Shapes::ShapeRef.new(shape: RootHierarchyType, location_name: "RootHierarchyType"))
     RequestCertificateRequest.struct_class = Types::RequestCertificateRequest
 
     RequestCertificateResponse.add_member(:certificate_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "CertificateArn"))
@@ -950,6 +964,8 @@ module Aws::ACM
 
     RevokeCertificateResponse.add_member(:certificate_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "CertificateArn"))
     RevokeCertificateResponse.struct_class = Types::RevokeCertificateResponse
+
+    RootHierarchyTypes.member = Shapes::ShapeRef.new(shape: RootHierarchyType)
 
     SearchCertificatesRequest.add_member(:filter_statement, Shapes::ShapeRef.new(shape: CertificateFilterStatement, location_name: "FilterStatement"))
     SearchCertificatesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: SearchMaxResults, location_name: "MaxResults"))

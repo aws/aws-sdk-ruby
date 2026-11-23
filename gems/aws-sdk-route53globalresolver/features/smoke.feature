@@ -8,18 +8,6 @@
 Feature: Smoke tests for Route53GlobalResolver
 
   @route53globalresolver @smoke
-  Scenario: GetFirewallDomainListFailure
-    Given I create a 'Aws::Route53GlobalResolver' client with config:
-      """
-{"region":"us-east-2","use_fips_endpoint":false,"use_dualstack_endpoint":true}
-      """
-    When I call the operation 'get_firewall_domain_list' with params:
-      """
-{"firewall_domain_list_id":"fdl-doesnotexist1111"}
-      """
-    Then I expect a 'Aws::Route53GlobalResolver::Errors::ResourceNotFoundException' was raised
-
-  @route53globalresolver @smoke
   Scenario: GetFirewallRuleFailure
     Given I create a 'Aws::Route53GlobalResolver' client with config:
       """
@@ -28,6 +16,18 @@ Feature: Smoke tests for Route53GlobalResolver
     When I call the operation 'get_firewall_rule' with params:
       """
 {"firewall_rule_id":"fr-doesnotexist1111"}
+      """
+    Then I expect a 'Aws::Route53GlobalResolver::Errors::ResourceNotFoundException' was raised
+
+  @route53globalresolver @smoke
+  Scenario: GetAccessSourceFailure
+    Given I create a 'Aws::Route53GlobalResolver' client with config:
+      """
+{"region":"us-east-2","use_fips_endpoint":false,"use_dualstack_endpoint":true}
+      """
+    When I call the operation 'get_access_source' with params:
+      """
+{"access_source_id":"as-doesnotexist1111"}
       """
     Then I expect a 'Aws::Route53GlobalResolver::Errors::ResourceNotFoundException' was raised
 
@@ -56,18 +56,6 @@ Feature: Smoke tests for Route53GlobalResolver
     Then I expect a 'Aws::Route53GlobalResolver::Errors::ResourceNotFoundException' was raised
 
   @route53globalresolver @smoke
-  Scenario: GetHostedZoneAssociationFailure
-    Given I create a 'Aws::Route53GlobalResolver' client with config:
-      """
-{"region":"us-east-2","use_fips_endpoint":false,"use_dualstack_endpoint":true}
-      """
-    When I call the operation 'get_hosted_zone_association' with params:
-      """
-{"hosted_zone_association_id":"phza-doesnotexist1111"}
-      """
-    Then I expect a 'Aws::Route53GlobalResolver::Errors::ResourceNotFoundException' was raised
-
-  @route53globalresolver @smoke
   Scenario: GetGlobalResolverFailure
     Given I create a 'Aws::Route53GlobalResolver' client with config:
       """
@@ -80,14 +68,26 @@ Feature: Smoke tests for Route53GlobalResolver
     Then I expect a 'Aws::Route53GlobalResolver::Errors::ResourceNotFoundException' was raised
 
   @route53globalresolver @smoke
-  Scenario: GetAccessSourceFailure
+  Scenario: GetFirewallDomainListFailure
     Given I create a 'Aws::Route53GlobalResolver' client with config:
       """
 {"region":"us-east-2","use_fips_endpoint":false,"use_dualstack_endpoint":true}
       """
-    When I call the operation 'get_access_source' with params:
+    When I call the operation 'get_firewall_domain_list' with params:
       """
-{"access_source_id":"as-doesnotexist1111"}
+{"firewall_domain_list_id":"fdl-doesnotexist1111"}
+      """
+    Then I expect a 'Aws::Route53GlobalResolver::Errors::ResourceNotFoundException' was raised
+
+  @route53globalresolver @smoke
+  Scenario: GetHostedZoneAssociationFailure
+    Given I create a 'Aws::Route53GlobalResolver' client with config:
+      """
+{"region":"us-east-2","use_fips_endpoint":false,"use_dualstack_endpoint":true}
+      """
+    When I call the operation 'get_hosted_zone_association' with params:
+      """
+{"hosted_zone_association_id":"phza-doesnotexist1111"}
       """
     Then I expect a 'Aws::Route53GlobalResolver::Errors::ResourceNotFoundException' was raised
 

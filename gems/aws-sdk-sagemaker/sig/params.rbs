@@ -264,11 +264,16 @@ module Aws
     }
 
       type cluster_auto_patch_config = {
-      patching_strategy: ("WhenIdle" | "WhenAllIdle"),
+      patching_strategy: ("WhenIdle" | "WhenAllIdle" | "DrainFirst"),
       patch_schedule: {
         next_patch_date: ::Time?
       }?,
-      deployment_config: Params::deployment_configuration?
+      deployment_config: Params::deployment_configuration?,
+      idle_wait_window_in_seconds: ::Integer?,
+      drain_policy: {
+        drain_timeout_in_seconds: ::Integer?,
+        on_drain_timeout: ("Force" | "Skip")?
+      }?
     }
 
       type cluster_kubernetes_config = {
@@ -818,7 +823,7 @@ module Aws
       enable_ssm_access: bool?,
       managed_instance_scaling: Params::production_variant_managed_instance_scaling?,
       routing_config: {
-        routing_strategy: ("LEAST_OUTSTANDING_REQUESTS" | "RANDOM" | "PREFIX_AWARE"),
+        routing_strategy: ("LEAST_OUTSTANDING_REQUESTS" | "RANDOM" | "PREFIX_AWARE" | "KV_AWARE"),
         prefix_aware_routing_config: {
           prefix_length: ::Integer?,
           concurrency_threshold: ::Integer?
@@ -828,7 +833,12 @@ module Aws
       capacity_reservation_config: {
         capacity_reservation_preference: ("capacity-reservations-only")?,
         ml_reservation_arn: ::String?
-      }?
+      }?,
+      accelerator_partition_layouts: Array[
+        {
+          accelerator_partition_types: Array[::String]?
+        }
+      ]?
     }
 
       type feature_definition = {
@@ -840,6 +850,15 @@ module Aws
           dimension: ::Integer
         }?
       }?
+    }
+
+      type global_inference_gateway_routing = {
+      weights: {
+        kv_headroom: ::Float?,
+        queue_depth: ::Float?,
+        region_proximity: ::Float?,
+        error_rate: ::Float?
+      }
     }
 
       type parameter_ranges = {
@@ -968,7 +987,8 @@ module Aws
         number_of_cpu_cores_required: ::Float?,
         number_of_accelerator_devices_required: ::Float?,
         min_memory_required_in_mb: ::Integer,
-        max_memory_required_in_mb: ::Integer?
+        max_memory_required_in_mb: ::Integer?,
+        accelerator_partition_type: ::String?
       }?,
       base_inference_component_name: ::String?,
       data_cache_config: {
@@ -1002,6 +1022,35 @@ module Aws
         csv_content_types: Array[::String]?,
         json_content_types: Array[::String]?
       }?
+    }
+
+      type routing_target_async_inference_output_config = {
+      s3_output_path: ::String,
+      s3_failure_path: ::String,
+      kms_key_id: ::String?,
+      notification_config: {
+        success_topic: ::String?,
+        error_topic: ::String?
+      }?
+    }
+
+      type routing_target_async_inference_config = {
+      output_config: Params::routing_target_async_inference_output_config,
+      client_config: {
+        max_time_in_backlog_seconds: ::Integer?
+      }?
+    }
+
+      type routing_target = {
+      name: ::String,
+      destinations: Array[
+        {
+          resource_arn: ::String,
+          routing_status: ("Routable" | "Unroutable" | "Unknown")?
+        }
+      ],
+      async_inference_config: Params::routing_target_async_inference_config?,
+      routing_preference: ("LocalRegionFirst" | "InstancePoolOrder")?
     }
 
       type container_definition = {

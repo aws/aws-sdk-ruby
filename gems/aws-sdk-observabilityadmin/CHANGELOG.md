@@ -1,6 +1,51 @@
 Unreleased Changes
 ------------------
 
+1.56.0 (2026-11-20)
+------------------
+
+* Feature - Enablement for Network Firewall and Omni Events via Observability Admin Telemetry Rule for account and organization level
+
+1.55.0 (2026-11-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.54.0 (2026-11-17)
+------------------
+
+* Feature - This release adds Microsoft Azure connectors, third-party telemetry enrichment and StartTelemetryPipelineRefresh, to discover Azure resources, enrich their telemetry and refresh external-cloud pipelines.
+
+1.53.0 (2026-11-16)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.52.0 (2026-11-11)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.51.0 (2026-11-10)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.50.0 (2026-11-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.49.0 (2026-11-06)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.48.0 (2026-11-04)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.47.0 (2026-10-29)
 ------------------
 

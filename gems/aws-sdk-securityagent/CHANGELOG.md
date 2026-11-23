@@ -1,6 +1,56 @@
 Unreleased Changes
 ------------------
 
+1.38.0 (2026-11-19)
+------------------
+
+* Feature - This release exposes additional per-job metadata within code remediation tasks.
+
+1.37.0 (2026-11-18)
+------------------
+
+* Feature - This release adds support for resuming a paused penetration test job from its last saved checkpoint.
+
+1.36.0 (2026-11-16)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.35.0 (2026-11-12)
+------------------
+
+* Feature - Adds support for cleanup strategy in CreatePentestInput and UpdatePentestInput.
+
+1.34.0 (2026-11-11)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.33.0 (2026-11-10)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.32.0 (2026-11-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.31.0 (2026-11-06)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.30.0 (2026-11-05)
+------------------
+
+* Feature - Adds support for IAM Identity Center groups as Agent Space members. CreateMembership, DeleteMembership, and ListMemberships now accept the GROUP member type. ListMemberships can filter by USER, GROUP, or ALL, and returns group display name and description.
+
+1.29.0 (2026-11-04)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.28.0 (2026-10-29)
 ------------------
 

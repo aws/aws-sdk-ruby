@@ -100,6 +100,12 @@ module Aws::EKSAuth
     #   credentials.
     #   @return [Types::Credentials]
     #
+    # @!attribute [rw] workload_identity_provider_arn
+    #   The ARN of the workload identity provider for the returned
+    #   credentials. Returned only for associations with workload identity
+    #   enabled.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-auth-2023-11-26/AssumeRoleForPodIdentityResponse AWS API Documentation
     #
     class AssumeRoleForPodIdentityResponse < Struct.new(
@@ -107,7 +113,8 @@ module Aws::EKSAuth
       :audience,
       :pod_identity_association,
       :assumed_role_user,
-      :credentials)
+      :credentials,
+      :workload_identity_provider_arn)
       SENSITIVE = [:credentials]
       include Aws::Structure
     end

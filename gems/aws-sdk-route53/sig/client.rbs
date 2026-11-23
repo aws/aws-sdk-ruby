@@ -173,6 +173,10 @@ module Aws
                                                      longitude: ::String
                                                    }?,
                                                    bias: ::Integer?
+                                                 }?,
+                                                 az_affinity: {
+                                                   location_type: ("AvailabilityZone" | "AvailabilityZoneGroup" | "Region" | "Partition" | "Global")?,
+                                                   location_id: ::String?
                                                  }?
                                                }
                                              }
@@ -186,7 +190,7 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53/Client.html#change_tags_for_resource-instance_method
       def change_tags_for_resource: (
-                                      resource_type: ("healthcheck" | "hostedzone"),
+                                      resource_type: ("healthcheck" | "hostedzone" | "healthchecksource"),
                                       resource_id: ::String,
                                       ?add_tags: Array[
                                         {
@@ -239,10 +243,40 @@ module Aws
                                      name: ::String
                                    }?,
                                    insufficient_data_health_status: ("Healthy" | "Unhealthy" | "LastKnownStatus")?,
-                                   routing_control_arn: ::String?
+                                   routing_control_arn: ::String?,
+                                   endpoint_type: ("PUBLIC" | "PRIVATE")?,
+                                   health_check_source_id: ::String?
                                  }
                                ) -> _CreateHealthCheckResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateHealthCheckResponseSuccess
+
+      interface _CreateHealthCheckSourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateHealthCheckSourceResponse]
+        def health_check_source_id: () -> ::String
+        def health_check_source_status: () -> ("CREATE_PENDING" | "CREATE_IN_PROGRESS" | "CREATE_COMPLETED" | "CREATE_FAILED" | "DELETE_PENDING" | "DELETE_IN_PROGRESS" | "DELETE_COMPLETED" | "DELETE_FAILED")
+        def location: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53/Client.html#create_health_check_source-instance_method
+      def create_health_check_source: (
+                                        ?caller_reference: ::String,
+                                        health_check_source_config: {
+                                          vpc_id: ::String,
+                                          subnet_configuration_list: Array[
+                                            {
+                                              subnet_id: ::String,
+                                              availability_zone_id: ::String,
+                                              security_group_id_list: Array[::String]
+                                            }
+                                          ]
+                                        },
+                                        ?tags: Array[
+                                          {
+                                            key: ::String?,
+                                            value: ::String?
+                                          }
+                                        ]
+                                      ) -> _CreateHealthCheckSourceResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateHealthCheckSourceResponseSuccess
 
       interface _CreateHostedZoneResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateHostedZoneResponse]
@@ -262,9 +296,17 @@ module Aws
                                 caller_reference: ::String,
                                 ?hosted_zone_config: {
                                   comment: ::String?,
-                                  private_zone: bool?
+                                  private_zone: bool?,
+                                  hosted_zone_tier: ("STANDARD" | "ADVANCED")?
                                 },
-                                ?delegation_set_id: ::String
+                                ?delegation_set_id: ::String,
+                                ?enable_public_dns_fallback: bool,
+                                ?change_guardrails: Array[
+                                  {
+                                    name: ("NS_FORMAT_CHECK" | "NS_DELEGATION_AUTHORITY_CHECK" | "NS_OCCLUSION_CHECK" | "ALIAS_TARGET_CHECK" | "ACTIVE_RECORD_CHECK" | "ACTIVE_DELEGATION_CHECK"),
+                                    status: ("ENABLED" | "DISABLED")
+                                  }
+                                ]
                               ) -> _CreateHostedZoneResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateHostedZoneResponseSuccess
 
@@ -295,6 +337,22 @@ module Aws
                                          cloud_watch_logs_log_group_arn: ::String
                                        ) -> _CreateQueryLoggingConfigResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateQueryLoggingConfigResponseSuccess
+
+      interface _CreateResourceRecordSetProtectionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateResourceRecordSetProtectionsResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53/Client.html#create_resource_record_set_protections-instance_method
+      def create_resource_record_set_protections: (
+                                                    hosted_zone_id: ::String,
+                                                    protections: Array[
+                                                      {
+                                                        record_name: ::String,
+                                                        record_type: ("SOA" | "A" | "TXT" | "NS" | "CNAME" | "MX" | "NAPTR" | "PTR" | "SRV" | "SPF" | "AAAA" | "CAA" | "DS" | "TLSA" | "SSHFP" | "SVCB" | "HTTPS"),
+                                                        comment: ::String?
+                                                      }
+                                                    ]
+                                                  ) -> _CreateResourceRecordSetProtectionsResponseSuccess
+                                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateResourceRecordSetProtectionsResponseSuccess
 
       interface _CreateReusableDelegationSetResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateReusableDelegationSetResponse]
@@ -393,6 +451,17 @@ module Aws
                                ) -> _DeleteHealthCheckResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteHealthCheckResponseSuccess
 
+      interface _DeleteHealthCheckSourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteHealthCheckSourceResponse]
+        def health_check_source_id: () -> ::String
+        def health_check_source_status: () -> ("CREATE_PENDING" | "CREATE_IN_PROGRESS" | "CREATE_COMPLETED" | "CREATE_FAILED" | "DELETE_PENDING" | "DELETE_IN_PROGRESS" | "DELETE_COMPLETED" | "DELETE_FAILED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53/Client.html#delete_health_check_source-instance_method
+      def delete_health_check_source: (
+                                        health_check_source_id: ::String
+                                      ) -> _DeleteHealthCheckSourceResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteHealthCheckSourceResponseSuccess
+
       interface _DeleteHostedZoneResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteHostedZoneResponse]
         def change_info: () -> Types::ChangeInfo
@@ -422,6 +491,21 @@ module Aws
                                          id: ::String
                                        ) -> _DeleteQueryLoggingConfigResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteQueryLoggingConfigResponseSuccess
+
+      interface _DeleteResourceRecordSetProtectionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteResourceRecordSetProtectionsResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53/Client.html#delete_resource_record_set_protections-instance_method
+      def delete_resource_record_set_protections: (
+                                                    hosted_zone_id: ::String,
+                                                    protections: Array[
+                                                      {
+                                                        record_name: ::String,
+                                                        record_type: ("SOA" | "A" | "TXT" | "NS" | "CNAME" | "MX" | "NAPTR" | "PTR" | "SRV" | "SPF" | "AAAA" | "CAA" | "DS" | "TLSA" | "SSHFP" | "SVCB" | "HTTPS")
+                                                      }
+                                                    ]
+                                                  ) -> _DeleteResourceRecordSetProtectionsResponseSuccess
+                                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteResourceRecordSetProtectionsResponseSuccess
 
       interface _DeleteReusableDelegationSetResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteReusableDelegationSetResponse]
@@ -506,7 +590,7 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53/Client.html#get_account_limit-instance_method
       def get_account_limit: (
-                               type: ("MAX_HEALTH_CHECKS_BY_OWNER" | "MAX_HOSTED_ZONES_BY_OWNER" | "MAX_TRAFFIC_POLICY_INSTANCES_BY_OWNER" | "MAX_REUSABLE_DELEGATION_SETS_BY_OWNER" | "MAX_TRAFFIC_POLICIES_BY_OWNER")
+                               type: ("MAX_HEALTH_CHECKS_BY_OWNER" | "MAX_HOSTED_ZONES_BY_OWNER" | "MAX_TRAFFIC_POLICY_INSTANCES_BY_OWNER" | "MAX_REUSABLE_DELEGATION_SETS_BY_OWNER" | "MAX_TRAFFIC_POLICIES_BY_OWNER" | "MAX_HEALTH_CHECK_SOURCES_BY_OWNER")
                              ) -> _GetAccountLimitResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAccountLimitResponseSuccess
 
@@ -581,6 +665,16 @@ module Aws
                                                 ) -> _GetHealthCheckLastFailureReasonResponseSuccess
                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetHealthCheckLastFailureReasonResponseSuccess
 
+      interface _GetHealthCheckSourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetHealthCheckSourceResponse]
+        def health_check_source: () -> Types::HealthCheckSource
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53/Client.html#get_health_check_source-instance_method
+      def get_health_check_source: (
+                                     health_check_source_id: ::String
+                                   ) -> _GetHealthCheckSourceResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetHealthCheckSourceResponseSuccess
+
       interface _GetHealthCheckStatusResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetHealthCheckStatusResponse]
         def health_check_observations: () -> ::Array[Types::HealthCheckObservation]
@@ -602,6 +696,18 @@ module Aws
                              id: ::String
                            ) -> _GetHostedZoneResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetHostedZoneResponseSuccess
+
+      interface _GetHostedZoneChangeBatchResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetHostedZoneChangeBatchResponse]
+        def change_batch_summary: () -> Types::ChangeBatchSummary
+        def change_batch: () -> Types::ChangeBatch
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53/Client.html#get_hosted_zone_change_batch-instance_method
+      def get_hosted_zone_change_batch: (
+                                          hosted_zone_id: ::String,
+                                          change_id: ::String
+                                        ) -> _GetHostedZoneChangeBatchResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetHostedZoneChangeBatchResponseSuccess
 
       interface _GetHostedZoneCountResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetHostedZoneCountResponse]
@@ -743,6 +849,18 @@ module Aws
                               ) -> _ListGeoLocationsResponseSuccess
                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListGeoLocationsResponseSuccess
 
+      interface _ListHealthCheckSourcesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListHealthCheckSourcesResponse]
+        def health_check_sources: () -> ::Array[Types::HealthCheckSource]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53/Client.html#list_health_check_sources-instance_method
+      def list_health_check_sources: (
+                                       ?next_token: ::String,
+                                       ?max_results: ::String
+                                     ) -> _ListHealthCheckSourcesResponseSuccess
+                                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListHealthCheckSourcesResponseSuccess
+
       interface _ListHealthChecksResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListHealthChecksResponse]
         def health_checks: () -> ::Array[Types::HealthCheck]
@@ -757,6 +875,39 @@ module Aws
                                 ?max_items: ::Integer
                               ) -> _ListHealthChecksResponseSuccess
                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListHealthChecksResponseSuccess
+
+      interface _ListHealthChecksBySourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListHealthChecksBySourceResponse]
+        def health_checks: () -> ::Array[Types::HealthCheck]
+        def marker: () -> ::String
+        def is_truncated: () -> bool
+        def next_marker: () -> ::String
+        def max_items: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53/Client.html#list_health_checks_by_source-instance_method
+      def list_health_checks_by_source: (
+                                          health_check_source_id: ::String,
+                                          ?marker: ::String,
+                                          ?max_items: ::Integer
+                                        ) -> _ListHealthChecksBySourceResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListHealthChecksBySourceResponseSuccess
+
+      interface _ListHostedZoneChangeBatchesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListHostedZoneChangeBatchesResponse]
+        def change_batch_summaries: () -> ::Array[Types::ChangeBatchSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53/Client.html#list_hosted_zone_change_batches-instance_method
+      def list_hosted_zone_change_batches: (
+                                             hosted_zone_id: ::String,
+                                             ?submitted_after: ::String,
+                                             ?submitted_before: ::String,
+                                             ?start_after_change_id: ::String,
+                                             ?sort_order: ("ASCENDING" | "DESCENDING"),
+                                             ?max_results: ::String,
+                                             ?next_token: ::String
+                                           ) -> _ListHostedZoneChangeBatchesResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListHostedZoneChangeBatchesResponseSuccess
 
       interface _ListHostedZonesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListHostedZonesResponse]
@@ -821,6 +972,39 @@ module Aws
                                       ) -> _ListQueryLoggingConfigsResponseSuccess
                                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListQueryLoggingConfigsResponseSuccess
 
+      interface _ListResourceRecordSetChangesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListResourceRecordSetChangesResponse]
+        def resource_record_set_changes: () -> ::Array[Types::ResourceRecordSetChange]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53/Client.html#list_resource_record_set_changes-instance_method
+      def list_resource_record_set_changes: (
+                                              hosted_zone_id: ::String,
+                                              ?record_name: ::String,
+                                              ?record_type: ("SOA" | "A" | "TXT" | "NS" | "CNAME" | "MX" | "NAPTR" | "PTR" | "SRV" | "SPF" | "AAAA" | "CAA" | "DS" | "TLSA" | "SSHFP" | "SVCB" | "HTTPS"),
+                                              ?submitted_after: ::String,
+                                              ?submitted_before: ::String,
+                                              ?sort_order: ("ASCENDING" | "DESCENDING"),
+                                              ?max_results: ::String,
+                                              ?next_token: ::String
+                                            ) -> _ListResourceRecordSetChangesResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListResourceRecordSetChangesResponseSuccess
+
+      interface _ListResourceRecordSetProtectionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListResourceRecordSetProtectionsResponse]
+        def resource_record_set_protections: () -> ::Array[Types::ResourceRecordSetProtection]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53/Client.html#list_resource_record_set_protections-instance_method
+      def list_resource_record_set_protections: (
+                                                  hosted_zone_id: ::String,
+                                                  ?start_record_name: ::String,
+                                                  ?start_record_type: ("SOA" | "A" | "TXT" | "NS" | "CNAME" | "MX" | "NAPTR" | "PTR" | "SRV" | "SPF" | "AAAA" | "CAA" | "DS" | "TLSA" | "SSHFP" | "SVCB" | "HTTPS"),
+                                                  ?max_results: ::String,
+                                                  ?next_token: ::String
+                                                ) -> _ListResourceRecordSetProtectionsResponseSuccess
+                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListResourceRecordSetProtectionsResponseSuccess
+
       interface _ListResourceRecordSetsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListResourceRecordSetsResponse]
         def resource_record_sets: () -> ::Array[Types::ResourceRecordSet]
@@ -861,7 +1045,7 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53/Client.html#list_tags_for_resource-instance_method
       def list_tags_for_resource: (
-                                    resource_type: ("healthcheck" | "hostedzone"),
+                                    resource_type: ("healthcheck" | "hostedzone" | "healthchecksource"),
                                     resource_id: ::String
                                   ) -> _ListTagsForResourceResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
@@ -872,7 +1056,7 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53/Client.html#list_tags_for_resources-instance_method
       def list_tags_for_resources: (
-                                     resource_type: ("healthcheck" | "hostedzone"),
+                                     resource_type: ("healthcheck" | "hostedzone" | "healthchecksource"),
                                      resource_ids: Array[::String]
                                    ) -> _ListTagsForResourcesResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourcesResponseSuccess
@@ -1020,7 +1204,8 @@ module Aws
                                    name: ::String
                                  },
                                  ?insufficient_data_health_status: ("Healthy" | "Unhealthy" | "LastKnownStatus"),
-                                 ?reset_elements: Array[("FullyQualifiedDomainName" | "Regions" | "ResourcePath" | "ChildHealthChecks")]
+                                 ?reset_elements: Array[("FullyQualifiedDomainName" | "Regions" | "ResourcePath" | "ChildHealthChecks")],
+                                 ?health_check_source_id: ::String
                                ) -> _UpdateHealthCheckResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateHealthCheckResponseSuccess
 
@@ -1041,9 +1226,28 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53/Client.html#update_hosted_zone_features-instance_method
       def update_hosted_zone_features: (
                                          hosted_zone_id: ::String,
-                                         ?enable_accelerated_recovery: bool
+                                         ?enable_accelerated_recovery: bool,
+                                         ?enable_public_dns_fallback: bool,
+                                         ?change_guardrails: Array[
+                                           {
+                                             name: ("NS_FORMAT_CHECK" | "NS_DELEGATION_AUTHORITY_CHECK" | "NS_OCCLUSION_CHECK" | "ALIAS_TARGET_CHECK" | "ACTIVE_RECORD_CHECK" | "ACTIVE_DELEGATION_CHECK"),
+                                             status: ("ENABLED" | "DISABLED")
+                                           }
+                                         ],
+                                         ?dry_run: bool
                                        ) -> _UpdateHostedZoneFeaturesResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateHostedZoneFeaturesResponseSuccess
+
+      interface _UpdateHostedZoneTierResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateHostedZoneTierResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53/Client.html#update_hosted_zone_tier-instance_method
+      def update_hosted_zone_tier: (
+                                     hosted_zone_id: ::String,
+                                     hosted_zone_tier: ("STANDARD" | "ADVANCED"),
+                                     ?dry_run: bool
+                                   ) -> _UpdateHostedZoneTierResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateHostedZoneTierResponseSuccess
 
       interface _UpdateTrafficPolicyCommentResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateTrafficPolicyCommentResponse]
@@ -1071,7 +1275,15 @@ module Aws
                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateTrafficPolicyInstanceResponseSuccess
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53/Client.html#wait_until-instance_method
-      def wait_until: (:resource_record_sets_changed waiter_name, 
+      def wait_until: (:health_check_source_created waiter_name, 
+                    health_check_source_id: ::String
+                  ) -> Client::_GetHealthCheckSourceResponseSuccess
+                    | (:health_check_source_created waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetHealthCheckSourceResponseSuccess
+                    | (:health_check_source_deleted waiter_name, 
+                    health_check_source_id: ::String
+                  ) -> Client::_GetHealthCheckSourceResponseSuccess
+                    | (:health_check_source_deleted waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetHealthCheckSourceResponseSuccess
+                    | (:resource_record_sets_changed waiter_name, 
                     id: ::String
                   ) -> Client::_GetChangeResponseSuccess
                     | (:resource_record_sets_changed waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetChangeResponseSuccess

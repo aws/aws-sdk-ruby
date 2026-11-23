@@ -310,6 +310,15 @@ module Aws::DataZone
       SENSITIVE: []
     end
 
+    class AssetOwnershipTransfer
+      attr_accessor status: ("IN_PROGRESS" | "SUCCEEDED" | "FAILED")
+      attr_accessor source_project_id: ::String
+      attr_accessor target_project_id: ::String
+      attr_accessor started_at: ::Time
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
     class AssetPermission
       attr_accessor asset_id: ::String
       attr_accessor permissions: Types::Permissions
@@ -431,6 +440,7 @@ module Aws::DataZone
     class AuthenticationConfigurationPatch
       attr_accessor secret_arn: ::String
       attr_accessor basic_authentication_credentials: Types::BasicAuthenticationCredentials
+      attr_accessor o_auth_2_properties: Types::OAuth2PropertiesPatch
       SENSITIVE: [:basic_authentication_credentials]
     end
 
@@ -766,7 +776,7 @@ module Aws::DataZone
       attr_accessor physical_endpoints: ::Array[Types::PhysicalEndpoint]
       attr_accessor project_id: ::String
       attr_accessor props: Types::ConnectionPropertiesOutput
-      attr_accessor type: ("ATHENA" | "BIGQUERY" | "DATABRICKS" | "DOCUMENTDB" | "DYNAMODB" | "HYPERPOD" | "IAM" | "MYSQL" | "OPENSEARCH" | "ORACLE" | "POSTGRESQL" | "REDSHIFT" | "S3" | "SAPHANA" | "SNOWFLAKE" | "SPARK" | "SQLSERVER" | "TERADATA" | "VERTICA" | "WORKFLOWS_MWAA" | "AMAZON_Q" | "MLFLOW" | "VPC" | "GIT" | "ICEBERGRESTCATALOG" | "SNOWFLAKEICEBERGRESTCATALOG" | "DATABRICKSICEBERGRESTCATALOG")
+      attr_accessor type: ("ATHENA" | "BIGQUERY" | "DATABRICKS" | "DOCUMENTDB" | "DYNAMODB" | "HYPERPOD" | "IAM" | "MYSQL" | "OPENSEARCH" | "ORACLE" | "POSTGRESQL" | "REDSHIFT" | "S3" | "SAPHANA" | "SNOWFLAKE" | "SPARK" | "SQLSERVER" | "TERADATA" | "VERTICA" | "WORKFLOWS_MWAA" | "AMAZON_Q" | "MLFLOW" | "VPC" | "GIT" | "ICEBERGRESTCATALOG" | "SNOWFLAKEICEBERGRESTCATALOG" | "DATABRICKSICEBERGRESTCATALOG" | "WORKDAYICEBERGRESTCATALOG" | "WORKDAYLDQ")
       attr_accessor scope: ("DOMAIN" | "PROJECT")
       SENSITIVE: []
     end
@@ -972,7 +982,7 @@ module Aws::DataZone
       attr_accessor physical_endpoints: ::Array[Types::PhysicalEndpoint]
       attr_accessor project_id: ::String
       attr_accessor props: Types::ConnectionPropertiesOutput
-      attr_accessor type: ("ATHENA" | "BIGQUERY" | "DATABRICKS" | "DOCUMENTDB" | "DYNAMODB" | "HYPERPOD" | "IAM" | "MYSQL" | "OPENSEARCH" | "ORACLE" | "POSTGRESQL" | "REDSHIFT" | "S3" | "SAPHANA" | "SNOWFLAKE" | "SPARK" | "SQLSERVER" | "TERADATA" | "VERTICA" | "WORKFLOWS_MWAA" | "AMAZON_Q" | "MLFLOW" | "VPC" | "GIT" | "ICEBERGRESTCATALOG" | "SNOWFLAKEICEBERGRESTCATALOG" | "DATABRICKSICEBERGRESTCATALOG")
+      attr_accessor type: ("ATHENA" | "BIGQUERY" | "DATABRICKS" | "DOCUMENTDB" | "DYNAMODB" | "HYPERPOD" | "IAM" | "MYSQL" | "OPENSEARCH" | "ORACLE" | "POSTGRESQL" | "REDSHIFT" | "S3" | "SAPHANA" | "SNOWFLAKE" | "SPARK" | "SQLSERVER" | "TERADATA" | "VERTICA" | "WORKFLOWS_MWAA" | "AMAZON_Q" | "MLFLOW" | "VPC" | "GIT" | "ICEBERGRESTCATALOG" | "SNOWFLAKEICEBERGRESTCATALOG" | "DATABRICKSICEBERGRESTCATALOG" | "WORKDAYICEBERGRESTCATALOG" | "WORKDAYLDQ")
       attr_accessor scope: ("DOMAIN" | "PROJECT")
       SENSITIVE: [:description]
     end
@@ -1403,7 +1413,7 @@ module Aws::DataZone
       attr_accessor metadata: ::Hash[::String, ::String]
       attr_accessor parameters: ::Hash[::String, ::String]
       attr_accessor client_token: ::String
-      SENSITIVE: [:name, :description, :parameters]
+      SENSITIVE: [:name, :description, :metadata, :parameters]
     end
 
     class CreateNotebookOutput
@@ -1428,7 +1438,7 @@ module Aws::DataZone
       attr_accessor environment_configuration: Types::EnvironmentConfig
       attr_accessor error: Types::NotebookError
       attr_accessor git_metadata: Types::GitMetadata
-      SENSITIVE: [:name, :description, :parameters]
+      SENSITIVE: [:name, :description, :metadata, :parameters]
     end
 
     class CreateProjectFromProjectProfilePolicyGrantDetail
@@ -1581,7 +1591,7 @@ module Aws::DataZone
       attr_accessor metadata_forms: ::Array[Types::FormInput]
       attr_accessor asset_permissions: ::Array[Types::AssetPermission]
       attr_accessor asset_scopes: ::Array[Types::AcceptedAssetScope]
-      SENSITIVE: [:request_reason]
+      SENSITIVE: [:request_reason, :metadata_forms]
     end
 
     class CreateSubscriptionRequestOutput
@@ -2365,6 +2375,7 @@ module Aws::DataZone
 
     class EnvironmentConfigurationUserParameter
       attr_accessor environment_id: ::String
+      attr_accessor environment_blueprint_id: ::String
       attr_accessor environment_resolved_account: Types::EnvironmentResolvedAccount
       attr_accessor environment_configuration_name: ::String
       attr_accessor environment_parameters: ::Array[Types::EnvironmentParameter]
@@ -2605,6 +2616,7 @@ module Aws::DataZone
       attr_accessor forms_output: ::Array[Types::FormOutput]
       attr_accessor read_only_forms_output: ::Array[Types::FormOutput]
       attr_accessor latest_time_series_data_point_forms_output: ::Array[Types::TimeSeriesDataPointSummaryFormOutput]
+      attr_accessor ownership_transfer: Types::AssetOwnershipTransfer
       SENSITIVE: [:name, :description]
     end
 
@@ -2651,7 +2663,7 @@ module Aws::DataZone
       attr_accessor physical_endpoints: ::Array[Types::PhysicalEndpoint]
       attr_accessor project_id: ::String
       attr_accessor props: Types::ConnectionPropertiesOutput
-      attr_accessor type: ("ATHENA" | "BIGQUERY" | "DATABRICKS" | "DOCUMENTDB" | "DYNAMODB" | "HYPERPOD" | "IAM" | "MYSQL" | "OPENSEARCH" | "ORACLE" | "POSTGRESQL" | "REDSHIFT" | "S3" | "SAPHANA" | "SNOWFLAKE" | "SPARK" | "SQLSERVER" | "TERADATA" | "VERTICA" | "WORKFLOWS_MWAA" | "AMAZON_Q" | "MLFLOW" | "VPC" | "GIT" | "ICEBERGRESTCATALOG" | "SNOWFLAKEICEBERGRESTCATALOG" | "DATABRICKSICEBERGRESTCATALOG")
+      attr_accessor type: ("ATHENA" | "BIGQUERY" | "DATABRICKS" | "DOCUMENTDB" | "DYNAMODB" | "HYPERPOD" | "IAM" | "MYSQL" | "OPENSEARCH" | "ORACLE" | "POSTGRESQL" | "REDSHIFT" | "S3" | "SAPHANA" | "SNOWFLAKE" | "SPARK" | "SQLSERVER" | "TERADATA" | "VERTICA" | "WORKFLOWS_MWAA" | "AMAZON_Q" | "MLFLOW" | "VPC" | "GIT" | "ICEBERGRESTCATALOG" | "SNOWFLAKEICEBERGRESTCATALOG" | "DATABRICKSICEBERGRESTCATALOG" | "WORKDAYICEBERGRESTCATALOG" | "WORKDAYLDQ")
       attr_accessor scope: ("DOMAIN" | "PROJECT")
       SENSITIVE: [:connection_credentials, :description]
     end
@@ -3199,7 +3211,7 @@ module Aws::DataZone
       attr_accessor environment_configuration: Types::EnvironmentConfig
       attr_accessor error: Types::NotebookError
       attr_accessor git_metadata: Types::GitMetadata
-      SENSITIVE: [:name, :description, :parameters]
+      SENSITIVE: [:name, :description, :metadata, :parameters]
     end
 
     class GetNotebookRunInput
@@ -3232,7 +3244,7 @@ module Aws::DataZone
       attr_accessor updated_by: ::String
       attr_accessor started_at: ::Time
       attr_accessor completed_at: ::Time
-      SENSITIVE: [:parameters]
+      SENSITIVE: [:metadata, :parameters]
     end
 
     class GetProjectInput
@@ -3523,7 +3535,7 @@ module Aws::DataZone
     class GlueConnection
       attr_accessor name: ::String
       attr_accessor description: ::String
-      attr_accessor connection_type: ("ATHENA" | "BIGQUERY" | "DATABRICKS" | "DOCUMENTDB" | "DYNAMODB" | "HYPERPOD" | "IAM" | "MYSQL" | "OPENSEARCH" | "ORACLE" | "POSTGRESQL" | "REDSHIFT" | "S3" | "SAPHANA" | "SNOWFLAKE" | "SPARK" | "SQLSERVER" | "TERADATA" | "VERTICA" | "WORKFLOWS_MWAA" | "AMAZON_Q" | "MLFLOW" | "VPC" | "GIT" | "ICEBERGRESTCATALOG" | "SNOWFLAKEICEBERGRESTCATALOG" | "DATABRICKSICEBERGRESTCATALOG")
+      attr_accessor connection_type: ("ATHENA" | "BIGQUERY" | "DATABRICKS" | "DOCUMENTDB" | "DYNAMODB" | "HYPERPOD" | "IAM" | "MYSQL" | "OPENSEARCH" | "ORACLE" | "POSTGRESQL" | "REDSHIFT" | "S3" | "SAPHANA" | "SNOWFLAKE" | "SPARK" | "SQLSERVER" | "TERADATA" | "VERTICA" | "WORKFLOWS_MWAA" | "AMAZON_Q" | "MLFLOW" | "VPC" | "GIT" | "ICEBERGRESTCATALOG" | "SNOWFLAKEICEBERGRESTCATALOG" | "DATABRICKSICEBERGRESTCATALOG" | "WORKDAYICEBERGRESTCATALOG" | "WORKDAYLDQ")
       attr_accessor match_criteria: ::Array[::String]
       attr_accessor connection_properties: ::Hash[::String, ::String]
       attr_accessor spark_properties: ::Hash[::String, ::String]
@@ -3547,7 +3559,7 @@ module Aws::DataZone
       attr_accessor physical_connection_requirements: Types::PhysicalConnectionRequirements
       attr_accessor name: ::String
       attr_accessor description: ::String
-      attr_accessor connection_type: ("SNOWFLAKE" | "BIGQUERY" | "DOCUMENTDB" | "DYNAMODB" | "MYSQL" | "OPENSEARCH" | "ORACLE" | "POSTGRESQL" | "REDSHIFT" | "SAPHANA" | "SQLSERVER" | "TERADATA" | "VERTICA" | "ICEBERGRESTCATALOG" | "SNOWFLAKEICEBERGRESTCATALOG" | "DATABRICKSICEBERGRESTCATALOG")
+      attr_accessor connection_type: ("SNOWFLAKE" | "BIGQUERY" | "DOCUMENTDB" | "DYNAMODB" | "MYSQL" | "OPENSEARCH" | "ORACLE" | "POSTGRESQL" | "REDSHIFT" | "SAPHANA" | "SQLSERVER" | "TERADATA" | "VERTICA" | "ICEBERGRESTCATALOG" | "SNOWFLAKEICEBERGRESTCATALOG" | "DATABRICKSICEBERGRESTCATALOG" | "WORKDAYICEBERGRESTCATALOG" | "WORKDAYLDQ")
       attr_accessor match_criteria: ::String
       attr_accessor validate_credentials: bool
       attr_accessor validate_for_compute_environments: ::Array[("SPARK" | "ATHENA" | "PYTHON")]
@@ -3986,7 +3998,7 @@ module Aws::DataZone
       attr_accessor name: ::String
       attr_accessor environment_identifier: ::String
       attr_accessor project_identifier: ::String
-      attr_accessor type: ("ATHENA" | "BIGQUERY" | "DATABRICKS" | "DOCUMENTDB" | "DYNAMODB" | "HYPERPOD" | "IAM" | "MYSQL" | "OPENSEARCH" | "ORACLE" | "POSTGRESQL" | "REDSHIFT" | "S3" | "SAPHANA" | "SNOWFLAKE" | "SPARK" | "SQLSERVER" | "TERADATA" | "VERTICA" | "WORKFLOWS_MWAA" | "AMAZON_Q" | "MLFLOW" | "VPC" | "GIT" | "ICEBERGRESTCATALOG" | "SNOWFLAKEICEBERGRESTCATALOG" | "DATABRICKSICEBERGRESTCATALOG")
+      attr_accessor type: ("ATHENA" | "BIGQUERY" | "DATABRICKS" | "DOCUMENTDB" | "DYNAMODB" | "HYPERPOD" | "IAM" | "MYSQL" | "OPENSEARCH" | "ORACLE" | "POSTGRESQL" | "REDSHIFT" | "S3" | "SAPHANA" | "SNOWFLAKE" | "SPARK" | "SQLSERVER" | "TERADATA" | "VERTICA" | "WORKFLOWS_MWAA" | "AMAZON_Q" | "MLFLOW" | "VPC" | "GIT" | "ICEBERGRESTCATALOG" | "SNOWFLAKEICEBERGRESTCATALOG" | "DATABRICKSICEBERGRESTCATALOG" | "WORKDAYICEBERGRESTCATALOG" | "WORKDAYLDQ")
       attr_accessor scope: ("DOMAIN" | "PROJECT")
       SENSITIVE: []
     end
@@ -4811,6 +4823,14 @@ module Aws::DataZone
       attr_accessor authorization_code_properties: Types::AuthorizationCodeProperties
       attr_accessor o_auth_2_credentials: Types::GlueOAuth2Credentials
       SENSITIVE: [:o_auth_2_credentials]
+    end
+
+    class OAuth2PropertiesPatch
+      attr_accessor o_auth_2_grant_type: ("AUTHORIZATION_CODE" | "CLIENT_CREDENTIALS" | "JWT_BEARER")
+      attr_accessor o_auth_2_client_application: Types::OAuth2ClientApplication
+      attr_accessor token_url: ::String
+      attr_accessor token_url_parameters_map: ::Hash[::String, ::String]
+      SENSITIVE: []
     end
 
     class OpenLineageRunEventSummary
@@ -6101,7 +6121,7 @@ module Aws::DataZone
       attr_accessor metadata: ::Hash[::String, ::String]
       attr_accessor parameters: ::Hash[::String, ::String]
       attr_accessor client_token: ::String
-      SENSITIVE: [:parameters]
+      SENSITIVE: [:metadata, :parameters]
     end
 
     class StartNotebookRunOutput
@@ -6128,7 +6148,7 @@ module Aws::DataZone
       attr_accessor updated_by: ::String
       attr_accessor started_at: ::Time
       attr_accessor completed_at: ::Time
-      SENSITIVE: [:parameters]
+      SENSITIVE: [:metadata, :parameters]
     end
 
     class StartNotebookSyncInput
@@ -6541,6 +6561,21 @@ module Aws::DataZone
       SENSITIVE: [:name, :description]
     end
 
+    class UpdateAssetOwnerInput
+      attr_accessor domain_identifier: ::String
+      attr_accessor identifier: ::String
+      attr_accessor target_project_identifier: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateAssetOwnerOutput
+      attr_accessor id: ::String
+      attr_accessor revision: ::String
+      attr_accessor ownership_transfer: Types::AssetOwnershipTransfer
+      SENSITIVE: []
+    end
+
     class UpdateConnectionInput
       attr_accessor configurations: ::Array[Types::Configuration]
       attr_accessor domain_identifier: ::String
@@ -6562,7 +6597,7 @@ module Aws::DataZone
       attr_accessor physical_endpoints: ::Array[Types::PhysicalEndpoint]
       attr_accessor project_id: ::String
       attr_accessor props: Types::ConnectionPropertiesOutput
-      attr_accessor type: ("ATHENA" | "BIGQUERY" | "DATABRICKS" | "DOCUMENTDB" | "DYNAMODB" | "HYPERPOD" | "IAM" | "MYSQL" | "OPENSEARCH" | "ORACLE" | "POSTGRESQL" | "REDSHIFT" | "S3" | "SAPHANA" | "SNOWFLAKE" | "SPARK" | "SQLSERVER" | "TERADATA" | "VERTICA" | "WORKFLOWS_MWAA" | "AMAZON_Q" | "MLFLOW" | "VPC" | "GIT" | "ICEBERGRESTCATALOG" | "SNOWFLAKEICEBERGRESTCATALOG" | "DATABRICKSICEBERGRESTCATALOG")
+      attr_accessor type: ("ATHENA" | "BIGQUERY" | "DATABRICKS" | "DOCUMENTDB" | "DYNAMODB" | "HYPERPOD" | "IAM" | "MYSQL" | "OPENSEARCH" | "ORACLE" | "POSTGRESQL" | "REDSHIFT" | "S3" | "SAPHANA" | "SNOWFLAKE" | "SPARK" | "SQLSERVER" | "TERADATA" | "VERTICA" | "WORKFLOWS_MWAA" | "AMAZON_Q" | "MLFLOW" | "VPC" | "GIT" | "ICEBERGRESTCATALOG" | "SNOWFLAKEICEBERGRESTCATALOG" | "DATABRICKSICEBERGRESTCATALOG" | "WORKDAYICEBERGRESTCATALOG" | "WORKDAYLDQ")
       attr_accessor scope: ("DOMAIN" | "PROJECT")
       SENSITIVE: [:description]
     end
@@ -6864,7 +6899,7 @@ module Aws::DataZone
       attr_accessor parameters: ::Hash[::String, ::String]
       attr_accessor environment_configuration: Types::EnvironmentConfig
       attr_accessor client_token: ::String
-      SENSITIVE: [:description, :name, :parameters]
+      SENSITIVE: [:description, :name, :metadata, :parameters]
     end
 
     class UpdateNotebookOutput
@@ -6889,7 +6924,7 @@ module Aws::DataZone
       attr_accessor environment_configuration: Types::EnvironmentConfig
       attr_accessor error: Types::NotebookError
       attr_accessor git_metadata: Types::GitMetadata
-      SENSITIVE: [:name, :description, :parameters]
+      SENSITIVE: [:name, :description, :metadata, :parameters]
     end
 
     class UpdateProjectInput
@@ -6903,6 +6938,7 @@ module Aws::DataZone
       attr_accessor environment_deployment_details: Types::EnvironmentDeploymentDetails
       attr_accessor user_parameters: ::Array[Types::EnvironmentConfigurationUserParameter]
       attr_accessor project_profile_version: ::String
+      attr_accessor project_profile_action: ("DISASSOCIATE")
       SENSITIVE: [:name, :description]
     end
 

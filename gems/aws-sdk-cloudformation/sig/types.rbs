@@ -281,6 +281,9 @@ module Aws::CloudFormation
       attr_accessor call_as: ("SELF" | "DELEGATED_ADMIN")
       attr_accessor client_request_token: ::String
       attr_accessor managed_execution: Types::ManagedExecution
+      attr_accessor execution_role_template_body: ::String
+      attr_accessor execution_role_template_url: ::String
+      attr_accessor stack_set_output_bucket: ::String
       SENSITIVE: []
     end
 
@@ -1383,6 +1386,29 @@ module Aws::CloudFormation
     class RecordHandlerProgressOutput < Aws::EmptyStructure
     end
 
+    class RegionalStackInstancesDeployment
+      attr_accessor status: ("PENDING" | "NOT_APPLICABLE" | "NOT_STARTED" | "IN_PROGRESS" | "SUCCEEDED" | "PARTIAL_SUCCESS" | "FAILED")
+      attr_accessor succeeded_stack_instances_count: ::Integer
+      attr_accessor failed_stack_instances_count: ::Integer
+      attr_accessor completed_stack_instances_count: ::Integer
+      attr_accessor pending_stack_instances_count: ::Integer
+      attr_accessor cancelled_stack_instances_count: ::Integer
+      attr_accessor skipped_stack_instances_count: ::Integer
+      attr_accessor total_stack_instances_count: ::Integer
+      attr_accessor percentage_completed: ::Float
+      SENSITIVE: []
+    end
+
+    class RegionalStages
+      attr_accessor regional_stack_instances_deployment: Types::RegionalStackInstancesDeployment
+      SENSITIVE: []
+    end
+
+    class RegionalStatusDetail
+      attr_accessor stages: Types::RegionalStages
+      SENSITIVE: []
+    end
+
     class RegisterPublisherInput
       attr_accessor accept_terms_and_conditions: bool
       attr_accessor connection_arn: ::String
@@ -1406,6 +1432,11 @@ module Aws::CloudFormation
 
     class RegisterTypeOutput
       attr_accessor registration_token: ::String
+      SENSITIVE: []
+    end
+
+    class RemoveAliasInput
+      attr_accessor alias_name: ::String
       SENSITIVE: []
     end
 
@@ -1527,6 +1558,16 @@ module Aws::CloudFormation
       SENSITIVE: []
     end
 
+    class RoleProvisioning
+      attr_accessor status: ("PENDING" | "NOT_APPLICABLE" | "NOT_STARTED" | "IN_PROGRESS" | "SUCCEEDED" | "PARTIAL_SUCCESS" | "FAILED")
+      attr_accessor succeeded_accounts_count: ::Integer
+      attr_accessor failed_accounts_count: ::Integer
+      attr_accessor completed_accounts_count: ::Integer
+      attr_accessor pending_accounts_count: ::Integer
+      attr_accessor percentage_completed: ::Float
+      SENSITIVE: []
+    end
+
     class RollbackConfiguration
       attr_accessor rollback_triggers: ::Array[Types::RollbackTrigger]
       attr_accessor monitoring_time_in_minutes: ::Integer
@@ -1569,6 +1610,12 @@ module Aws::CloudFormation
     class ScannedResourceIdentifier
       attr_accessor resource_type: ::String
       attr_accessor resource_identifier: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class SetAliasInput
+      attr_accessor stack_name: ::String
+      attr_accessor alias_name: ::String
       SENSITIVE: []
     end
 
@@ -1640,6 +1687,7 @@ module Aws::CloudFormation
       attr_accessor deletion_mode: ("STANDARD" | "FORCE_DELETE_STACK")
       attr_accessor detailed_status: ("CONFIGURATION_COMPLETE" | "VALIDATION_FAILED")
       attr_accessor last_operations: ::Array[Types::OperationEntry]
+      attr_accessor alias_name: ::String
       SENSITIVE: []
     end
 
@@ -1739,6 +1787,18 @@ module Aws::CloudFormation
       attr_accessor drift_status: ("DRIFTED" | "IN_SYNC" | "UNKNOWN" | "NOT_CHECKED")
       attr_accessor last_drift_check_timestamp: ::Time
       attr_accessor last_operation_id: ::String
+      SENSITIVE: []
+    end
+
+    class StackInstancesDeployment
+      attr_accessor status: ("PENDING" | "NOT_APPLICABLE" | "NOT_STARTED" | "IN_PROGRESS" | "SUCCEEDED" | "PARTIAL_SUCCESS" | "FAILED")
+      attr_accessor succeeded_stack_instances_count: ::Integer
+      attr_accessor failed_stack_instances_count: ::Integer
+      attr_accessor completed_stack_instances_count: ::Integer
+      attr_accessor pending_stack_instances_count: ::Integer
+      attr_accessor cancelled_stack_instances_count: ::Integer
+      attr_accessor skipped_stack_instances_count: ::Integer
+      attr_accessor percentage_completed: ::Float
       SENSITIVE: []
     end
 
@@ -1861,6 +1921,7 @@ module Aws::CloudFormation
       attr_accessor organizational_unit_ids: ::Array[::String]
       attr_accessor managed_execution: Types::ManagedExecution
       attr_accessor regions: ::Array[::String]
+      attr_accessor stack_set_output_bucket_path: ::String
       SENSITIVE: []
     end
 
@@ -1903,6 +1964,7 @@ module Aws::CloudFormation
       attr_accessor stack_set_drift_detection_details: Types::StackSetDriftDetectionDetails
       attr_accessor status_reason: ::String
       attr_accessor status_details: Types::StackSetOperationStatusDetails
+      attr_accessor regional_status_details: ::Hash[::String, Types::RegionalStatusDetail]
       SENSITIVE: []
     end
 
@@ -1928,6 +1990,9 @@ module Aws::CloudFormation
     end
 
     class StackSetOperationStatusDetails
+      attr_accessor stages: Types::Stages
+      attr_accessor total_accounts_count: ::Integer
+      attr_accessor total_stack_instances_count: ::Integer
       attr_accessor failed_stack_instances_count: ::Integer
       SENSITIVE: []
     end
@@ -1970,6 +2035,12 @@ module Aws::CloudFormation
       attr_accessor root_id: ::String
       attr_accessor drift_information: Types::StackDriftInformationSummary
       attr_accessor last_operations: ::Array[Types::OperationEntry]
+      SENSITIVE: []
+    end
+
+    class Stages
+      attr_accessor role_provisioning: Types::RoleProvisioning
+      attr_accessor stack_instances_deployment: Types::StackInstancesDeployment
       SENSITIVE: []
     end
 
@@ -2202,6 +2273,10 @@ module Aws::CloudFormation
       attr_accessor regions: ::Array[::String]
       attr_accessor call_as: ("SELF" | "DELEGATED_ADMIN")
       attr_accessor managed_execution: Types::ManagedExecution
+      attr_accessor execution_role_template_body: ::String
+      attr_accessor execution_role_template_url: ::String
+      attr_accessor use_admin_execution_role: bool
+      attr_accessor stack_set_output_bucket: ::String
       SENSITIVE: []
     end
 

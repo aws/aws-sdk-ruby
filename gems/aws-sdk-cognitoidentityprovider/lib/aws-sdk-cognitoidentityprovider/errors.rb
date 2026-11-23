@@ -29,6 +29,7 @@ module Aws::CognitoIdentityProvider
   # ## Error Classes
   # * {AccessDeniedException}
   # * {AliasExistsException}
+  # * {CachedCIMDURLDoesNotExistException}
   # * {CodeDeliveryFailureException}
   # * {CodeMismatchException}
   # * {ConcurrentModificationException}
@@ -113,6 +114,21 @@ module Aws::CognitoIdentityProvider
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::CognitoIdentityProvider::Types::AliasExistsException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class CachedCIMDURLDoesNotExistException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::CognitoIdentityProvider::Types::CachedCIMDURLDoesNotExistException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

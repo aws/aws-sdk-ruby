@@ -1,6 +1,46 @@
 Unreleased Changes
 ------------------
 
+1.208.0 (2026-11-20)
+------------------
+
+* Feature - This release adds support for the DTS-X and DTS audio codecs, AV1 encoding improvements including Fast decode, GOP size in seconds, and temporal adaptive quantization, and Dynamic Multiview for H.264 and H.265 outputs.
+
+1.207.0 (2026-11-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.206.0 (2026-11-16)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.205.0 (2026-11-11)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.204.0 (2026-11-10)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.203.0 (2026-11-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.202.0 (2026-11-06)
+------------------
+
+* Feature - Smart subtitling uses AWS Elemental Inference to generate captions from your content's audio, in embedded, burn-in, DVB-Sub, IMSC, SMI, SRT, teletext, TTML, or WebVTT outputs. Also fixes HEVC passthrough writing an incomplete codecs string to DASH and HLS manifests.
+
+1.201.0 (2026-11-04)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.200.0 (2026-10-29)
 ------------------
 

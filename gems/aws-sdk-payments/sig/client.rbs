@@ -1,0 +1,165 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module Payments
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Payments/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?account_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?auth_scheme_preference: Array[String],
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_clock_skew_correction: bool,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_checksum_calculation: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?response_checksum_validation: String,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?sigv4a_signing_region_set: Array[String],
+                      ?simple_json: bool,
+                      ?stub_responses: untyped,
+                      ?telemetry_provider: Aws::Telemetry::TelemetryProviderBase,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _BatchGetFinancialRecordResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchGetFinancialRecordResponse]
+        def financial_records: () -> ::Array[Types::FinancialRecord]
+        def errors: () -> ::Array[Types::FinancialRecordError]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Payments/Client.html#batch_get_financial_record-instance_method
+      def batch_get_financial_record: (
+                                        keys: Array[
+                                          {
+                                            identifier: ::String?,
+                                            invoice_identifier: ::String?
+                                          }
+                                        ]
+                                      ) -> _BatchGetFinancialRecordResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchGetFinancialRecordResponseSuccess
+
+      interface _GetAccountBalanceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAccountBalanceResponse]
+        def account_balances: () -> ::Array[Types::AccountBalance]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Payments/Client.html#get_account_balance-instance_method
+      def get_account_balance: (
+                                 balance_type: ("INVOICES_DUE" | "INVOICES_PAST_DUE" | "OUTSTANDING_CREDIT_MEMOS"),
+                                 ?next_token: ::String,
+                                 ?max_results: ::Integer
+                               ) -> _GetAccountBalanceResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAccountBalanceResponseSuccess
+
+      interface _GetFinancialRecordResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetFinancialRecordResponse]
+        def financial_record: () -> Types::FinancialRecord
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Payments/Client.html#get_financial_record-instance_method
+      def get_financial_record: (
+                                  ?identifier: ::String,
+                                  ?invoice_identifier: ::String
+                                ) -> _GetFinancialRecordResponseSuccess
+                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetFinancialRecordResponseSuccess
+
+      interface _GetPaymentInstrumentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetPaymentInstrumentResponse]
+        def payment_instrument: () -> Types::PaymentInstrument
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Payments/Client.html#get_payment_instrument-instance_method
+      def get_payment_instrument: (
+                                    identifier: ::String
+                                  ) -> _GetPaymentInstrumentResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetPaymentInstrumentResponseSuccess
+
+      interface _ListFinancialRecordsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListFinancialRecordsResponse]
+        def financial_record_summaries: () -> ::Array[Types::FinancialRecordSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Payments/Client.html#list_financial_records-instance_method
+      def list_financial_records: (
+                                    types: Array[("INVOICE" | "CREDIT_MEMO")],
+                                    ?settlement_statuses: Array[("OPEN" | "CLOSED")],
+                                    ?issued_after: ::Time,
+                                    ?issued_before: ::Time,
+                                    ?sort_by: ("ISSUED_AT"),
+                                    ?sort_order: ("ASCENDING" | "DESCENDING"),
+                                    ?next_token: ::String,
+                                    ?max_results: ::Integer
+                                  ) -> _ListFinancialRecordsResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListFinancialRecordsResponseSuccess
+
+      interface _ListPaymentInstrumentsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListPaymentInstrumentsResponse]
+        def payment_instrument_summaries: () -> ::Array[Types::PaymentInstrumentSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Payments/Client.html#list_payment_instruments-instance_method
+      def list_payment_instruments: (
+                                      ?next_token: ::String,
+                                      ?max_results: ::Integer
+                                    ) -> _ListPaymentInstrumentsResponseSuccess
+                                  | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPaymentInstrumentsResponseSuccess
+    end
+  end
+end
+

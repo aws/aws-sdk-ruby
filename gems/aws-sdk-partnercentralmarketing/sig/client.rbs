@@ -1,0 +1,476 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module PartnerCentralMarketing
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PartnerCentralMarketing/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?account_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?auth_scheme_preference: Array[String],
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_clock_skew_correction: bool,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_checksum_calculation: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?response_checksum_validation: String,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?sigv4a_signing_region_set: Array[String],
+                      ?stub_responses: untyped,
+                      ?telemetry_provider: Aws::Telemetry::TelemetryProviderBase,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _BatchCreateCampaignAssetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchCreateCampaignAssetResponse]
+        def errors: () -> ::Array[Types::BatchCreateCampaignAssetError]
+        def successful: () -> ::Array[Types::BatchCreateCampaignAssetResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PartnerCentralMarketing/Client.html#batch_create_campaign_asset-instance_method
+      def batch_create_campaign_asset: (
+                                         catalog: ("AWS" | "Sandbox"),
+                                         campaign_identifier: ::String,
+                                         entries: Array[
+                                           {
+                                             source_asset_template_identifier: ::String
+                                           }
+                                         ]
+                                       ) -> _BatchCreateCampaignAssetResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchCreateCampaignAssetResponseSuccess
+
+      interface _CreateCampaignResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateCampaignResponse]
+        def id: () -> ::String
+        def arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PartnerCentralMarketing/Client.html#create_campaign-instance_method
+      def create_campaign: (
+                             catalog: ("AWS" | "Sandbox"),
+                             name: ::String,
+                             campaign_template_id: ::String,
+                             ?sender_email: ::String,
+                             ?privacy_policy_url: ::String,
+                             ?partner_address: ::String,
+                             ?partner_badge: {
+                               s3_uri: ::String,
+                               version_id: ::String
+                             },
+                             ?email_target: {
+                               s3_uri: ::String,
+                               version_id: ::String
+                             },
+                             ?email_target_engagement_group_ids: Array[::String],
+                             ?target_audience: {
+                               industries: Array[("FINANCIAL_SERVICES" | "HEALTHCARE" | "MANUFACTURING" | "RETAIL" | "MEDIA_ENTERTAINMENT" | "ENERGY" | "EDUCATION" | "GOVERNMENT" | "TELECOMMUNICATIONS" | "AUTOMOTIVE" | "INSURANCE" | "OTHER")]?,
+                               company_sizes: Array[("STARTUP" | "SMALL_BUSINESS" | "MID_MARKET" | "ENTERPRISE" | "GLOBAL_ENTERPRISE")]?,
+                               countries: Array[::String]?
+                             },
+                             ?estimated_budget: {
+                               amount: ::String,
+                               currency_code: ::String
+                             },
+                             ?total_budget: {
+                               amount: ::String,
+                               currency_code: ::String
+                             },
+                             ?start_on: ::String,
+                             ?end_on: ::String,
+                             ?client_token: ::String,
+                             ?tags: Array[
+                               {
+                                 key: ::String,
+                                 value: ::String
+                               }
+                             ]
+                           ) -> _CreateCampaignResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateCampaignResponseSuccess
+
+      interface _CreateSocialConnectionAuthorizationUrlResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateSocialConnectionAuthorizationUrlResponse]
+        def platform: () -> ("FACEBOOK" | "LINKEDIN" | "X")
+        def authorization_url: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PartnerCentralMarketing/Client.html#create_social_connection_authorization_url-instance_method
+      def create_social_connection_authorization_url: (
+                                                        catalog: ("AWS" | "Sandbox"),
+                                                        platform: ("FACEBOOK" | "LINKEDIN" | "X")
+                                                      ) -> _CreateSocialConnectionAuthorizationUrlResponseSuccess
+                                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateSocialConnectionAuthorizationUrlResponseSuccess
+
+      interface _DeactivateCampaignAssetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeactivateCampaignAssetResponse]
+        def id: () -> ::String
+        def state: () -> ("INACTIVE" | "ACTIVE")
+        def last_activation_status: () -> ("IN_PROGRESS" | "SUCCEEDED" | "FAILED")
+        def state_reason: () -> ("ASSET_NOT_FOUND" | "ASSET_NOT_STARTABLE" | "ASSET_START_IN_PROGRESS" | "ASSET_ALREADY_ACTIVE" | "SEND_WINDOW_TOO_SOON" | "REQUIRED_FIELD_MISSING" | "RECIPIENT_LIST_MISSING" | "ENGAGEMENT_GROUPS_UNAVAILABLE" | "SENDER_EMAIL_MISSING" | "END_ON_MISSING" | "ASSET_CONTENT_MISSING" | "ASSET_NOT_ACTIVATABLE" | "TEMPLATE_CHANGED" | "PARTNER_IMAGE_REJECTED" | "PREREQUISITE_ASSET_NOT_ACTIVE" | "PARTNER_NOT_PROVISIONED" | "RECIPIENT_LIST_EMPTY" | "RECIPIENT_LIMIT_EXCEEDED" | "CONTACT_OPT_IN_REQUIRED" | "MAILING_CREDITS_EXHAUSTED" | "SENDER_EMAIL_INVALID" | "SOCIAL_CONNECTION_MISSING" | "SOCIAL_CONNECTION_EXPIRED" | "SOCIAL_CONNECTION_PAGE_REQUIRED" | "DELIVERY_FAILED" | "INTERNAL_ERROR" | "MAILING_CREDITS_INSUFFICIENT" | "PARTNER_PROFILE_FIELD_MISSING" | "PARTNER_PROFILE_FIELD_DOES_NOT_FIT" | "SOCIAL_CONNECTION_NOT_CHOSEN" | "PRIVACY_POLICY_URL_MISSING" | "PARTNER_ADDRESS_MISSING" | "SEND_MODE_MISSING" | "CONTENT_REJECTED" | "URL_NOT_ALLOWED" | "SENDER_NOT_APPROVED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PartnerCentralMarketing/Client.html#deactivate_campaign_asset-instance_method
+      def deactivate_campaign_asset: (
+                                       catalog: ("AWS" | "Sandbox"),
+                                       campaign_identifier: ::String,
+                                       campaign_asset_identifier: ::String
+                                     ) -> _DeactivateCampaignAssetResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeactivateCampaignAssetResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PartnerCentralMarketing/Client.html#delete_campaign-instance_method
+      def delete_campaign: (
+                             catalog: ("AWS" | "Sandbox"),
+                             campaign_identifier: ::String
+                           ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PartnerCentralMarketing/Client.html#delete_campaign_asset-instance_method
+      def delete_campaign_asset: (
+                                   catalog: ("AWS" | "Sandbox"),
+                                   campaign_identifier: ::String,
+                                   campaign_asset_identifier: ::String
+                                 ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PartnerCentralMarketing/Client.html#delete_social_connection-instance_method
+      def delete_social_connection: (
+                                      catalog: ("AWS" | "Sandbox"),
+                                      identifier: ::String,
+                                      ?client_token: ::String
+                                    ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _GetCampaignResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetCampaignResponse]
+        def campaign: () -> Types::Campaign
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PartnerCentralMarketing/Client.html#get_campaign-instance_method
+      def get_campaign: (
+                          catalog: ("AWS" | "Sandbox"),
+                          campaign_identifier: ::String
+                        ) -> _GetCampaignResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCampaignResponseSuccess
+
+      interface _GetCampaignAssetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetCampaignAssetResponse]
+        def asset: () -> Types::CampaignAsset
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PartnerCentralMarketing/Client.html#get_campaign_asset-instance_method
+      def get_campaign_asset: (
+                                catalog: ("AWS" | "Sandbox"),
+                                campaign_identifier: ::String,
+                                campaign_asset_identifier: ::String
+                              ) -> _GetCampaignAssetResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCampaignAssetResponseSuccess
+
+      interface _GetCampaignAssetActivationTaskResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetCampaignAssetActivationTaskResponse]
+        def campaign_id: () -> ::String
+        def task_id: () -> ::String
+        def task_status: () -> ("IN_PROGRESS" | "SUCCEEDED" | "PARTIAL_FAILURE" | "FAILED")
+        def started_at: () -> ::Time
+        def ended_at: () -> ::Time
+        def assets: () -> ::Array[Types::CampaignAssetActivationOutcome]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PartnerCentralMarketing/Client.html#get_campaign_asset_activation_task-instance_method
+      def get_campaign_asset_activation_task: (
+                                                catalog: ("AWS" | "Sandbox"),
+                                                campaign_identifier: ::String
+                                              ) -> _GetCampaignAssetActivationTaskResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCampaignAssetActivationTaskResponseSuccess
+
+      interface _GetCampaignAssetExportTaskResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetCampaignAssetExportTaskResponse]
+        def id: () -> ::String
+        def status: () -> ("IN_PROGRESS" | "COMPLETED" | "FAILED")
+        def created_at: () -> ::Time
+        def download_url: () -> ::String
+        def expires_at: () -> ::Time
+        def failure_reason: () -> Types::CampaignAssetExportFailureReason
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PartnerCentralMarketing/Client.html#get_campaign_asset_export_task-instance_method
+      def get_campaign_asset_export_task: (
+                                            catalog: ("AWS" | "Sandbox"),
+                                            campaign_identifier: ::String,
+                                            campaign_asset_export_task_identifier: ::String
+                                          ) -> _GetCampaignAssetExportTaskResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCampaignAssetExportTaskResponseSuccess
+
+      interface _GetCampaignTemplateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetCampaignTemplateResponse]
+        def campaign_template: () -> Types::CampaignTemplate
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PartnerCentralMarketing/Client.html#get_campaign_template-instance_method
+      def get_campaign_template: (
+                                   catalog: ("AWS" | "Sandbox"),
+                                   identifier: ::String
+                                 ) -> _GetCampaignTemplateResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCampaignTemplateResponseSuccess
+
+      interface _ListCampaignAssetsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListCampaignAssetsResponse]
+        def items: () -> ::Array[Types::CampaignAssetSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PartnerCentralMarketing/Client.html#list_campaign_assets-instance_method
+      def list_campaign_assets: (
+                                  catalog: ("AWS" | "Sandbox"),
+                                  campaign_identifier: ::String,
+                                  ?max_results: ::Integer,
+                                  ?next_token: ::String
+                                ) -> _ListCampaignAssetsResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCampaignAssetsResponseSuccess
+
+      interface _ListCampaignsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListCampaignsResponse]
+        def items: () -> ::Array[Types::CampaignSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PartnerCentralMarketing/Client.html#list_campaigns-instance_method
+      def list_campaigns: (
+                            catalog: ("AWS" | "Sandbox"),
+                            ?campaign_identifiers: Array[::String],
+                            ?name: ::String,
+                            ?states: Array[("DRAFT" | "ACTIVE" | "COMPLETED")],
+                            ?sort: {
+                              sort_by: ("NAME" | "STATE" | "START_ON" | "CREATED_AT"),
+                              sort_order: ("ASCENDING" | "DESCENDING")
+                            },
+                            ?max_results: ::Integer,
+                            ?next_token: ::String
+                          ) -> _ListCampaignsResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCampaignsResponseSuccess
+
+      interface _ListSocialConnectionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListSocialConnectionsResponse]
+        def items: () -> ::Array[Types::SocialConnectionSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PartnerCentralMarketing/Client.html#list_social_connections-instance_method
+      def list_social_connections: (
+                                     catalog: ("AWS" | "Sandbox"),
+                                     ?platform: ("FACEBOOK" | "LINKEDIN" | "X"),
+                                     ?max_results: ::Integer,
+                                     ?next_token: ::String
+                                   ) -> _ListSocialConnectionsResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSocialConnectionsResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def resource_arn: () -> ::String
+        def tags: () -> ::Array[Types::Tag]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PartnerCentralMarketing/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _SearchCampaignTemplatesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SearchCampaignTemplatesResponse]
+        def total_results: () -> ::Integer
+        def campaign_templates: () -> ::Array[Types::CampaignTemplateSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PartnerCentralMarketing/Client.html#search_campaign_templates-instance_method
+      def search_campaign_templates: (
+                                       catalog: ("AWS" | "Sandbox"),
+                                       ?search_text: ::String,
+                                       ?industry: Array[("FINANCIAL_SERVICES" | "HEALTHCARE" | "MANUFACTURING" | "RETAIL" | "MEDIA_ENTERTAINMENT" | "ENERGY" | "EDUCATION" | "GOVERNMENT" | "TELECOMMUNICATIONS" | "AUTOMOTIVE" | "INSURANCE" | "OTHER")],
+                                       ?use_case: Array[::String],
+                                       ?language: Array[("en" | "es" | "es-419" | "fr" | "de" | "it" | "pt-BR" | "id" | "tr" | "ja" | "ko" | "zh-Hans" | "zh-Hant" | "ar")],
+                                       ?aws_services: Array[::String],
+                                       ?customer_segments: Array[("ENTERPRISE" | "SMB" | "PUBLIC_SECTOR" | "ISV")],
+                                       ?themes: Array[("AI" | "MIGRATION_MODERNIZATION" | "SECURITY" | "DATA_ANALYTICS" | "AWS_TRAINING_CERTIFICATION" | "AWS_MARKETPLACE" | "CONNECT" | "EVENTS")],
+                                       ?collection: Array[("GENERAL" | "BUILD_WITH_AI")],
+                                       ?max_results: ::Integer,
+                                       ?next_token: ::String
+                                     ) -> _SearchCampaignTemplatesResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SearchCampaignTemplatesResponseSuccess
+
+      interface _StartCampaignAssetActivationTaskResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartCampaignAssetActivationTaskResponse]
+        def campaign_id: () -> ::String
+        def task_id: () -> ::String
+        def task_status: () -> ("IN_PROGRESS" | "SUCCEEDED" | "PARTIAL_FAILURE" | "FAILED")
+        def started_at: () -> ::Time
+        def ended_at: () -> ::Time
+        def assets: () -> ::Array[Types::CampaignAssetActivationOutcome]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PartnerCentralMarketing/Client.html#start_campaign_asset_activation_task-instance_method
+      def start_campaign_asset_activation_task: (
+                                                  catalog: ("AWS" | "Sandbox"),
+                                                  campaign_identifier: ::String,
+                                                  campaign_asset_identifiers: Array[::String],
+                                                  ?client_token: ::String
+                                                ) -> _StartCampaignAssetActivationTaskResponseSuccess
+                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartCampaignAssetActivationTaskResponseSuccess
+
+      interface _StartCampaignAssetExportTaskResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartCampaignAssetExportTaskResponse]
+        def id: () -> ::String
+        def status: () -> ("IN_PROGRESS" | "COMPLETED" | "FAILED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PartnerCentralMarketing/Client.html#start_campaign_asset_export_task-instance_method
+      def start_campaign_asset_export_task: (
+                                              catalog: ("AWS" | "Sandbox"),
+                                              campaign_identifier: ::String,
+                                              ?client_token: ::String
+                                            ) -> _StartCampaignAssetExportTaskResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartCampaignAssetExportTaskResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PartnerCentralMarketing/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Array[
+                            {
+                              key: ::String,
+                              value: ::String
+                            }
+                          ]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PartnerCentralMarketing/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateCampaignResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateCampaignResponse]
+        def id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PartnerCentralMarketing/Client.html#update_campaign-instance_method
+      def update_campaign: (
+                             catalog: ("AWS" | "Sandbox"),
+                             campaign_identifier: ::String,
+                             ?name: ::String,
+                             ?sender_email: ::String,
+                             ?privacy_policy_url: ::String,
+                             ?partner_address: ::String,
+                             ?partner_badge: {
+                               s3_uri: ::String,
+                               version_id: ::String
+                             },
+                             ?email_target: {
+                               s3_uri: ::String,
+                               version_id: ::String
+                             },
+                             ?email_target_engagement_group_ids: Array[::String],
+                             ?social_connections: Hash[("FACEBOOK" | "LINKEDIN" | "X"), Array[::String]],
+                             ?estimated_budget: {
+                               amount: ::String,
+                               currency_code: ::String
+                             },
+                             ?total_budget: {
+                               amount: ::String,
+                               currency_code: ::String
+                             },
+                             ?target_audience: {
+                               industries: Array[("FINANCIAL_SERVICES" | "HEALTHCARE" | "MANUFACTURING" | "RETAIL" | "MEDIA_ENTERTAINMENT" | "ENERGY" | "EDUCATION" | "GOVERNMENT" | "TELECOMMUNICATIONS" | "AUTOMOTIVE" | "INSURANCE" | "OTHER")]?,
+                               company_sizes: Array[("STARTUP" | "SMALL_BUSINESS" | "MID_MARKET" | "ENTERPRISE" | "GLOBAL_ENTERPRISE")]?,
+                               countries: Array[::String]?
+                             },
+                             ?client_token: ::String,
+                             ?start_on: ::String,
+                             ?end_on: ::String
+                           ) -> _UpdateCampaignResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateCampaignResponseSuccess
+
+      interface _UpdateCampaignAssetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateCampaignAssetResponse]
+        def id: () -> ::String
+        def state: () -> ("INACTIVE" | "ACTIVE")
+        def activation_issues: () -> ::Array[Types::ActivationIssue]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PartnerCentralMarketing/Client.html#update_campaign_asset-instance_method
+      def update_campaign_asset: (
+                                   catalog: ("AWS" | "Sandbox"),
+                                   campaign_identifier: ::String,
+                                   campaign_asset_identifier: ::String,
+                                   ?field_values: Array[
+                                     {
+                                       field_id: ::String,
+                                       value: {
+                                         text: ::String?,
+                                         image_reference: ::String?,
+                                         linked_asset_id: ::String?,
+                                         campaign_asset_image: {
+                                           campaign_identifier: ::String,
+                                           campaign_asset_identifier: ::String,
+                                           field_id: ::String
+                                         }?
+                                       }?
+                                     }
+                                   ],
+                                   ?layout: ::String,
+                                   ?send_mode: ("ON_ACTIVATION" | "SCHEDULED"),
+                                   ?scheduled_send_at: ::Time,
+                                   ?client_token: ::String
+                                 ) -> _UpdateCampaignAssetResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateCampaignAssetResponseSuccess
+    end
+  end
+end
+

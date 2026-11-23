@@ -833,7 +833,10 @@ module Aws
                                                      filter: ::String,
                                                      filter_type: ("PREFIX_MATCH")
                                                    }
-                                                 ]?
+                                                 ]?,
+                                                 delete_replication: {
+                                                   enabled: bool
+                                                 }?
                                                }
                                              ]
                                            }

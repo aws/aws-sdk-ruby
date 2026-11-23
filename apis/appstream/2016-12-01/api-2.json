@@ -1274,6 +1274,24 @@
         {"shape":"OperationNotPermittedException"}
       ]
     },
+    "UpdateImageBuilder":{
+      "name":"UpdateImageBuilder",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"UpdateImageBuilderRequest"},
+      "output":{"shape":"UpdateImageBuilderResult"},
+      "errors":[
+        {"shape":"ConcurrentModificationException"},
+        {"shape":"IncompatibleImageException"},
+        {"shape":"InvalidAccountStatusException"},
+        {"shape":"InvalidParameterCombinationException"},
+        {"shape":"OperationNotPermittedException"},
+        {"shape":"RequestLimitExceededException"},
+        {"shape":"ResourceNotFoundException"}
+      ]
+    },
     "UpdateImagePermissions":{
       "name":"UpdateImagePermissions",
       "http":{
@@ -1366,7 +1384,8 @@
         "PRINTING_TO_LOCAL_DEVICE",
         "DOMAIN_PASSWORD_SIGNIN",
         "DOMAIN_SMART_CARD_SIGNIN",
-        "AUTO_TIME_ZONE_REDIRECTION"
+        "AUTO_TIME_ZONE_REDIRECTION",
+        "SMART_CARD_REDIRECTION"
       ]
     },
     "AdminAppLicenseUsageList":{
@@ -1405,6 +1424,8 @@
         "Settings":{"shape":"AgentAccessSettingList"},
         "S3BucketArn":{"shape":"S3BucketArn"},
         "ScreenshotsUploadEnabled":{"shape":"BooleanObject"},
+        "ReplaySessionEnabled":{"shape":"BooleanObject"},
+        "KmsKeyArn":{"shape":"KmsKeyArn"},
         "ScreenResolution":{"shape":"ScreenResolution"},
         "ScreenImageFormat":{"shape":"ScreenImageFormat"},
         "UserControlMode":{"shape":"UserControlMode"}
@@ -1416,6 +1437,8 @@
         "Settings":{"shape":"AgentAccessSettingList"},
         "S3BucketArn":{"shape":"S3BucketArn"},
         "ScreenshotsUploadEnabled":{"shape":"BooleanObject"},
+        "ReplaySessionEnabled":{"shape":"BooleanObject"},
+        "KmsKeyArn":{"shape":"KmsKeyArn"},
         "ScreenResolution":{"shape":"ScreenResolution"},
         "ScreenImageFormat":{"shape":"ScreenImageFormat"},
         "UserControlMode":{"shape":"UserControlMode"}
@@ -1935,7 +1958,7 @@
     "CreateAppBlockBuilderStreamingURLResult":{
       "type":"structure",
       "members":{
-        "StreamingURL":{"shape":"String"},
+        "StreamingURL":{"shape":"StreamingUrl"},
         "Expires":{"shape":"Timestamp"}
       }
     },
@@ -2116,7 +2139,8 @@
         "RootVolumeConfig":{"shape":"VolumeConfig"},
         "SoftwaresToInstall":{"shape":"StringList"},
         "SoftwaresToUninstall":{"shape":"StringList"},
-        "DisableIMDSV1":{"shape":"BooleanObject"}
+        "DisableIMDSV1":{"shape":"BooleanObject"},
+        "AgentAccessConfig":{"shape":"ImageBuilderAgentAccessConfig"}
       }
     },
     "CreateImageBuilderResult":{
@@ -2136,7 +2160,7 @@
     "CreateImageBuilderStreamingURLResult":{
       "type":"structure",
       "members":{
-        "StreamingURL":{"shape":"String"},
+        "StreamingURL":{"shape":"StreamingUrl"},
         "Expires":{"shape":"Timestamp"}
       }
     },
@@ -2180,6 +2204,7 @@
         "EmbedHostDomains":{"shape":"EmbedHostDomains"},
         "StreamingExperienceSettings":{"shape":"StreamingExperienceSettings"},
         "ContentRedirection":{"shape":"ContentRedirection"},
+        "WebAuthnRedirection":{"shape":"WebAuthnRedirection"},
         "AgentAccessConfig":{"shape":"AgentAccessConfig"},
         "StorageConnectorAuthentication":{"shape":"StorageConnectorAuthentication"}
       }
@@ -2209,7 +2234,7 @@
     "CreateStreamingURLResult":{
       "type":"structure",
       "members":{
-        "StreamingURL":{"shape":"String"},
+        "StreamingURL":{"shape":"StreamingUrl"},
         "Expires":{"shape":"Timestamp"}
       }
     },
@@ -3290,8 +3315,45 @@
         "AccessEndpoints":{"shape":"AccessEndpointList"},
         "RootVolumeConfig":{"shape":"VolumeConfig"},
         "LatestAppstreamAgentVersion":{"shape":"LatestAppstreamAgentVersion"},
-        "DisableIMDSV1":{"shape":"BooleanObject"}
+        "DisableIMDSV1":{"shape":"BooleanObject"},
+        "AgentAccessConfig":{"shape":"ImageBuilderAgentAccessConfig"}
       }
+    },
+    "ImageBuilderAgentAccessConfig":{
+      "type":"structure",
+      "required":[
+        "Settings",
+        "ScreenResolution",
+        "ScreenImageFormat"
+      ],
+      "members":{
+        "Settings":{"shape":"AgentAccessSettingList"},
+        "S3BucketArn":{"shape":"S3BucketArn"},
+        "ScreenshotsUploadEnabled":{"shape":"BooleanObject"},
+        "ScreenResolution":{"shape":"ScreenResolution"},
+        "ScreenImageFormat":{"shape":"ScreenImageFormat"},
+        "UserControlMode":{"shape":"UserControlMode"}
+      }
+    },
+    "ImageBuilderAgentAccessConfigForUpdate":{
+      "type":"structure",
+      "members":{
+        "Settings":{"shape":"AgentAccessSettingList"},
+        "S3BucketArn":{"shape":"S3BucketArn"},
+        "ScreenshotsUploadEnabled":{"shape":"BooleanObject"},
+        "ScreenResolution":{"shape":"ScreenResolution"},
+        "ScreenImageFormat":{"shape":"ScreenImageFormat"},
+        "UserControlMode":{"shape":"UserControlMode"}
+      }
+    },
+    "ImageBuilderAttribute":{
+      "type":"string",
+      "enum":["AGENT_ACCESS_CONFIG"]
+    },
+    "ImageBuilderAttributes":{
+      "type":"list",
+      "member":{"shape":"ImageBuilderAttribute"},
+      "max":2
     },
     "ImageBuilderList":{
       "type":"list",
@@ -3448,6 +3510,10 @@
       },
       "error":{"httpStatusCode":400},
       "exception":true
+    },
+    "KmsKeyArn":{
+      "type":"string",
+      "pattern":"^arn:aws(?:\\-cn|\\-iso\\-b|\\-iso|\\-us\\-gov)?:kms:[a-z0-9\\-]+:\\d{12}:key/[A-Za-z0-9\\-]+$"
     },
     "LastReportGenerationExecutionError":{
       "type":"structure",
@@ -3657,6 +3723,18 @@
         "TCP",
         "UDP"
       ]
+    },
+    "ProcessCompatibilityList":{
+      "type":"list",
+      "member":{"shape":"ProcessImageName"},
+      "max":100,
+      "min":1
+    },
+    "ProcessImageName":{
+      "type":"string",
+      "max":260,
+      "min":1,
+      "pattern":"^[\\p{L}0-9_](?:[\\p{L}0-9._ ()+-]*[\\p{L}0-9._()+-])?(?<!\\.[eE][xX][eE])\\.[eE][xX][eE]$"
     },
     "RedirectURL":{
       "type":"string",
@@ -3899,6 +3977,7 @@
         "EmbedHostDomains":{"shape":"EmbedHostDomains"},
         "StreamingExperienceSettings":{"shape":"StreamingExperienceSettings"},
         "ContentRedirection":{"shape":"ContentRedirection"},
+        "WebAuthnRedirection":{"shape":"WebAuthnRedirection"},
         "AgentAccessConfig":{"shape":"AgentAccessConfig"},
         "StorageConnectorAuthentication":{"shape":"StorageConnectorAuthentication"}
       }
@@ -3919,8 +3998,10 @@
         "ACCESS_ENDPOINTS",
         "STREAMING_EXPERIENCE_SETTINGS",
         "CONTENT_REDIRECTION",
+        "WEB_AUTHN_REDIRECTION",
         "AGENT_ACCESS_CONFIG",
-        "STORAGE_CONNECTOR_AUTHENTICATION"
+        "STORAGE_CONNECTOR_AUTHENTICATION",
+        "AGENT_ACCESS_CONFIG_KMS_KEY_ARN"
       ]
     },
     "StackAttributes":{
@@ -4077,6 +4158,10 @@
       "members":{
         "PreferredProtocol":{"shape":"PreferredProtocol"}
       }
+    },
+    "StreamingUrl":{
+      "type":"string",
+      "sensitive":true
     },
     "StreamingUrlUserId":{
       "type":"string",
@@ -4339,6 +4424,23 @@
         "Fleet":{"shape":"Fleet"}
       }
     },
+    "UpdateImageBuilderRequest":{
+      "type":"structure",
+      "required":["Name"],
+      "members":{
+        "Name":{"shape":"Name"},
+        "Description":{"shape":"Description"},
+        "DisplayName":{"shape":"DisplayName"},
+        "AgentAccessConfig":{"shape":"ImageBuilderAgentAccessConfigForUpdate"},
+        "AttributesToDelete":{"shape":"ImageBuilderAttributes"}
+      }
+    },
+    "UpdateImageBuilderResult":{
+      "type":"structure",
+      "members":{
+        "ImageBuilder":{"shape":"ImageBuilder"}
+      }
+    },
     "UpdateImagePermissionsRequest":{
       "type":"structure",
       "required":[
@@ -4377,6 +4479,7 @@
         "EmbedHostDomains":{"shape":"EmbedHostDomains"},
         "StreamingExperienceSettings":{"shape":"StreamingExperienceSettings"},
         "ContentRedirection":{"shape":"ContentRedirection"},
+        "WebAuthnRedirection":{"shape":"WebAuthnRedirection"},
         "AgentAccessConfig":{"shape":"AgentAccessConfigForUpdate"},
         "StorageConnectorAuthentication":{"shape":"StorageConnectorAuthentication"}
       }
@@ -4411,7 +4514,7 @@
       "type":"string",
       "max":2048,
       "min":1,
-      "pattern":"^(\\*|https?://[^\\s,;]+)$"
+      "pattern":"^((https?|ftp|sftp)://|mailto:)[^\\s,;<>]+$"
     },
     "UrlPatternList":{
       "type":"list",
@@ -4584,6 +4687,14 @@
       "members":{
         "SubnetIds":{"shape":"SubnetIdList"},
         "SecurityGroupIds":{"shape":"SecurityGroupIdList"}
+      }
+    },
+    "WebAuthnRedirection":{
+      "type":"structure",
+      "required":["Enabled"],
+      "members":{
+        "Enabled":{"shape":"BooleanObject"},
+        "ProcessCompatibilityList":{"shape":"ProcessCompatibilityList"}
       }
     },
     "WorkspaceImageId":{

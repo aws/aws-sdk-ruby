@@ -542,6 +542,17 @@ module Aws::RDS
     #     snapshot_target: "String",
     #     copy_option_group: false,
     #     snapshot_availability_zone: "String",
+    #     tag_specifications: [
+    #       {
+    #         resource_type: "String",
+    #         tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #       },
+    #     ],
     #     source_region: "String",
     #   })
     # @param [Hash] options ({})
@@ -695,13 +706,27 @@ module Aws::RDS
     #   * `region` (Amazon Web Services Region)
     # @option options [Boolean] :copy_option_group
     #   Specifies whether to copy the DB option group associated with the
-    #   source DB snapshot to the target Amazon Web Services account and
-    #   associate with the target DB snapshot. The associated option group can
-    #   be copied only with cross-account snapshot copy calls.
+    #   source DB snapshot to the target Amazon Web Services account or Amazon
+    #   Web Services Region and associate it with the target DB snapshot.
     # @option options [String] :snapshot_availability_zone
     #   Specifies the name of the Availability Zone where RDS stores the DB
     #   snapshot. This value is valid only for snapshots that RDS stores on a
     #   Dedicated Local Zone.
+    # @option options [Array<Types::TagSpecification>] :tag_specifications
+    #   Tags to assign to the copied option group. By default, the copied
+    #   option group isn't tagged.
+    #
+    #   Valid Values:
+    #
+    #   * `og` - The copied option group.
+    #
+    #   ^
+    #
+    #   Constraints:
+    #
+    #   * Can only be specified when `CopyOptionGroup` is `true`
+    #
+    #   ^
     # @option options [String] :source_region
     #   The source region of the snapshot. This is only needed when the
     #   shapshot is encrypted and in a different region.

@@ -659,6 +659,14 @@ module Aws::MediaConvert
     #   https://docs.aws.amazon.com/mediaconvert/latest/ug/reference-codecs-containers.html#audio-only-output
     #   @return [String]
     #
+    # @!attribute [rw] dtsc_settings
+    #   Required when you set Codec to the value DTSC.
+    #   @return [Types::DtscSettings]
+    #
+    # @!attribute [rw] dtsx_settings
+    #   Required when you set Codec to the value DTSX.
+    #   @return [Types::DtsxSettings]
+    #
     # @!attribute [rw] eac_3_atmos_settings
     #   Required when you set Codec to the value EAC3\_ATMOS.
     #   @return [Types::Eac3AtmosSettings]
@@ -703,6 +711,8 @@ module Aws::MediaConvert
       :ac_4_settings,
       :aiff_settings,
       :codec,
+      :dtsc_settings,
+      :dtsx_settings,
       :eac_3_atmos_settings,
       :eac_3_settings,
       :flac_settings,
@@ -1406,9 +1416,21 @@ module Aws::MediaConvert
     # the value AV1.
     #
     # @!attribute [rw] adaptive_quantization
-    #   Specify the strength of any adaptive quantization filters that you
-    #   enable. The value that you choose here applies to Spatial adaptive
-    #   quantization.
+    #   Specify whether MediaConvert applies adaptive quantization in this
+    #   output. With AV1, adaptive quantization is on or off; there is no
+    #   strength to choose. Choose Auto to let MediaConvert manage adaptive
+    #   quantization for you. MediaConvert enables both Spatial adaptive
+    #   quantization and Temporal adaptive quantization, and you can't
+    #   specify either one yourself. To choose the filters yourself, set
+    #   Adaptive quantization to any of the strength values, Low, Medium,
+    #   High, Higher or Max, and then use the related settings Spatial
+    #   adaptive quantization and Temporal adaptive quantization. With AV1
+    #   these strength values all behave the same, because AV1 adaptive
+    #   quantization has no strength. If you don't want MediaConvert to do
+    #   any adaptive quantization in this transcode, set Adaptive
+    #   quantization to Off. Related settings: The value that you choose
+    #   here applies to the following settings:
+    #   Av1SpatialAdaptiveQuantization and Av1TemporalAdaptiveQuantization.
     #   @return [String]
     #
     # @!attribute [rw] bit_depth
@@ -1419,6 +1441,14 @@ module Aws::MediaConvert
     #   Specify the average bitrate in bits per second. Required when Rate
     #   control mode is CBR.
     #   @return [Integer]
+    #
+    # @!attribute [rw] fast_decode
+    #   Choose Enabled to limit the AV1 feature set that MediaConvert uses,
+    #   which reduces the complexity of decoding your output in software.
+    #   Keep the default value, Disabled, unless your playback devices need
+    #   the simpler bitstream. Encoding with Fast decode is slightly slower
+    #   and gives comparable video quality.
+    #   @return [String]
     #
     # @!attribute [rw] film_grain_synthesis
     #   Film grain synthesis replaces film grain present in your content
@@ -1481,11 +1511,19 @@ module Aws::MediaConvert
     #   @return [Integer]
     #
     # @!attribute [rw] gop_size
-    #   Specify the GOP length (keyframe interval) in frames. With AV1,
-    #   MediaConvert doesn't support GOP length in seconds. This value must
-    #   be greater than zero and preferably equal to 1 + ((numberBFrames +
-    #   1) * x), where x is an integer value.
+    #   Specify the GOP length (keyframe interval). Use GOP size units to
+    #   say whether this value is in frames or in seconds. This value must
+    #   be greater than zero. With AV1, MediaConvert can't choose the GOP
+    #   length for you, so you must specify it.
     #   @return [Float]
+    #
+    # @!attribute [rw] gop_size_units
+    #   Specify the units for GOP size. If you don't specify a value,
+    #   MediaConvert treats GOP size as a number of frames. With AV1,
+    #   MediaConvert can't choose the GOP length for you, so there is no
+    #   automatic option here: specify the GOP length in the related setting
+    #   GOP size, in frames or in seconds.
+    #   @return [String]
     #
     # @!attribute [rw] max_bitrate
     #   Maximum bitrate in bits/second. For example, enter five megabits per
@@ -1493,10 +1531,10 @@ module Aws::MediaConvert
     #   @return [Integer]
     #
     # @!attribute [rw] number_b_frames_between_reference_frames
-    #   Specify from the number of B-frames, in the range of 0-15. For AV1
-    #   encoding, we recommend using 7 or 15. Choose a larger number for a
-    #   lower bitrate and smaller file size; choose a smaller number for
-    #   better video quality.
+    #   Specify the number of B-frames between reference frames, in the
+    #   range of 0-15. For AV1 encoding, we recommend the default value, 15,
+    #   which gives the lowest bitrate and smallest file size. Choose a
+    #   smaller number for better video quality at a higher bitrate.
     #   @return [Integer]
     #
     # @!attribute [rw] per_frame_metrics
@@ -1536,13 +1574,16 @@ module Aws::MediaConvert
     #   @return [String]
     #
     # @!attribute [rw] scene_change_detect
-    #   Optional. Use this setting to have the service insert I-frames at
-    #   scene changes that it automatically detects. For AV1, scene change
-    #   detection is disabled by default. Choose Enabled to insert I-frames
-    #   at detected scene changes, which can improve video quality. If this
-    #   output uses QVBR, you can instead choose Transition detection for
-    #   further video quality improvement. For more information about QVBR,
-    #   see https://docs.aws.amazon.com/console/mediaconvert/cbr-vbr-qvbr.
+    #   Keep the default value, Enabled, to have MediaConvert insert
+    #   I-frames at scene changes that it automatically detects, which
+    #   improves video quality. Choose Disabled if you need a strictly fixed
+    #   keyframe cadence instead. With AV1, MediaConvert doesn't support
+    #   Transition detection. Transition detection is accepted for backward
+    #   compatibility but behaves exactly the same as Enabled, so we
+    #   recommend that you use Enabled instead. It also keeps the QVBR
+    #   requirement it has for other codecs: if you choose Transition
+    #   detection in an AV1 output, Rate control mode must be QVBR. Choose
+    #   Enabled to get the same result with any rate control mode.
     #   @return [String]
     #
     # @!attribute [rw] slices
@@ -1569,11 +1610,16 @@ module Aws::MediaConvert
     #   @return [Integer]
     #
     # @!attribute [rw] spatial_adaptive_quantization
-    #   Keep the default value, Enabled, to adjust quantization within each
-    #   frame based on spatial variation of content complexity. When you
-    #   enable this feature, the encoder uses fewer bits on areas that can
-    #   sustain more distortion with no noticeable visual degradation and
-    #   uses more bits on areas where any small distortion will be
+    #   Only use this setting when you set Adaptive quantization to one of
+    #   the strength values, Low, Medium, High, Higher or Max. When you set
+    #   Adaptive quantization to Auto, MediaConvert enables this feature for
+    #   you and you can't specify it manually. When you enable adaptive
+    #   quantization, the default value for Av1SpatialAdaptiveQuantization
+    #   is Enabled. Keep this default value to adjust quantization within
+    #   each frame based on spatial variation of content complexity. When
+    #   you enable this feature, the encoder uses fewer bits on areas that
+    #   can sustain more distortion with no noticeable visual degradation
+    #   and uses more bits on areas where any small distortion will be
     #   noticeable. For example, complex textured blocks are encoded with
     #   fewer bits and smooth textured blocks are encoded with more bits.
     #   Enabling this feature will almost always improve your video quality.
@@ -1581,11 +1627,30 @@ module Aws::MediaConvert
     #   viewer's attention is likely to be. If viewers are likely to be
     #   focusing their attention on a part of the screen with a lot of
     #   complex texture, you might choose to disable this feature. Related
-    #   setting: When you enable spatial adaptive quantization, set the
-    #   value for Adaptive quantization depending on your content. For
-    #   homogeneous content, such as cartoons and video games, set it to
-    #   Low. For content with a wider variety of textures, set it to High or
-    #   Higher.
+    #   setting: With AV1 this filter is on or off; the Adaptive
+    #   quantization value does not change its strength.
+    #   @return [String]
+    #
+    # @!attribute [rw] temporal_adaptive_quantization
+    #   Only use this setting when you set Adaptive quantization to one of
+    #   the strength values, Low, Medium, High, Higher or Max. When you set
+    #   Adaptive quantization to Auto, MediaConvert enables this feature for
+    #   you and you can't specify it manually. When you enable adaptive
+    #   quantization, the default value for Av1TemporalAdaptiveQuantization
+    #   is Enabled. Keep this default value to adjust quantization within
+    #   each frame based on temporal variation of content complexity. When
+    #   you enable this feature, the encoder uses fewer bits on areas of the
+    #   frame that aren't moving and uses more bits on complex objects with
+    #   sharp edges that move a lot. For example, this feature improves the
+    #   readability of text tickers on newscasts and scoreboards on sports
+    #   matches. Enabling this feature will almost always improve your video
+    #   quality. Note, though, that this feature doesn't take into account
+    #   where the viewer's attention is likely to be. If viewers are likely
+    #   to be focusing their attention on a part of the screen that doesn't
+    #   have moving objects with sharp edges, such as sports athletes'
+    #   faces, you might choose to set Av1TemporalAdaptiveQuantization to
+    #   Disabled. Related setting: With AV1 this filter is on or off; the
+    #   Adaptive quantization value does not change its strength.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/Av1Settings AWS API Documentation
@@ -1594,12 +1659,14 @@ module Aws::MediaConvert
       :adaptive_quantization,
       :bit_depth,
       :bitrate,
+      :fast_decode,
       :film_grain_synthesis,
       :framerate_control,
       :framerate_conversion_algorithm,
       :framerate_denominator,
       :framerate_numerator,
       :gop_size,
+      :gop_size_units,
       :max_bitrate,
       :number_b_frames_between_reference_frames,
       :per_frame_metrics,
@@ -1609,7 +1676,8 @@ module Aws::MediaConvert
       :slices,
       :sliding_window_ms,
       :sliding_window_peak_bitrate,
-      :spatial_adaptive_quantization)
+      :spatial_adaptive_quantization,
+      :temporal_adaptive_quantization)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2132,6 +2200,14 @@ module Aws::MediaConvert
     # output. For each output that has captions, include one instance of
     # CaptionDescriptions.
     #
+    # @!attribute [rw] audio_source_names
+    #   Specifies the audio selector or audio selector group that
+    #   MediaConvert uses to generate Smart subtitles. The audio selector
+    #   you choose must exist in all inputs for the job. If MediaConvert
+    #   can't detect speech in the audio, it can't generate subtitles.
+    #   Required when source is SMART\_SUBTITLE; not allowed otherwise.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] caption_selector_name
     #   Specifies which "Caption Selector":#inputs-caption\_selector to use from each input when generating captions. The name should be of the format "Caption Selector <N>", which denotes that the Nth Caption Selector will be used from each input. </N>
     #   @return [String]
@@ -2173,14 +2249,25 @@ module Aws::MediaConvert
     #   outputs in other output groups, the service ignores this setting.
     #   @return [String]
     #
+    # @!attribute [rw] source
+    #   Specify the source of the captions for this caption description.
+    #   Choose Captions input source (INPUT\_CAPTION\_SELECTOR) to use a
+    #   caption selector from your input. Choose Smart subtitling
+    #   (SMART\_SUBTITLE) to have MediaConvert and Elemental Inference
+    #   generate subtitles automatically from an audio source that you
+    #   specify.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/CaptionDescription AWS API Documentation
     #
     class CaptionDescription < Struct.new(
+      :audio_source_names,
       :caption_selector_name,
       :custom_language_code,
       :destination_settings,
       :language_code,
-      :language_description)
+      :language_description,
+      :source)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3815,6 +3902,10 @@ module Aws::MediaConvert
     #   not need to pass this option.
     #   @return [String]
     #
+    # @!attribute [rw] elemental_inference_settings
+    #   The Elemental Inference settings used in this job.
+    #   @return [Types::ElementalInferenceSettings]
+    #
     # @!attribute [rw] hop_destinations
     #   Optional. Use queue hopping to avoid overly long waits in the
     #   backlog of the queue that you submit your job to. Specify an
@@ -3899,6 +3990,7 @@ module Aws::MediaConvert
       :acceleration_settings,
       :billing_tags_source,
       :client_request_token,
+      :elemental_inference_settings,
       :hop_destinations,
       :job_engine_version,
       :job_template,
@@ -3950,6 +4042,10 @@ module Aws::MediaConvert
     #   Optional. A description of the job template you are creating.
     #   @return [String]
     #
+    # @!attribute [rw] elemental_inference_settings
+    #   The Elemental Inference settings used in this job.
+    #   @return [Types::ElementalInferenceSettings]
+    #
     # @!attribute [rw] hop_destinations
     #   Optional. Use queue hopping to avoid overly long waits in the
     #   backlog of the queue that you submit your job to. Specify an
@@ -4000,6 +4096,7 @@ module Aws::MediaConvert
       :acceleration_settings,
       :category,
       :description,
+      :elemental_inference_settings,
       :hop_destinations,
       :name,
       :priority,
@@ -4980,6 +5077,55 @@ module Aws::MediaConvert
       include Aws::Structure
     end
 
+    # Required when you set Codec to the value DTSC.
+    #
+    # @!attribute [rw] bitrate
+    #   Specify the bitrate for the DTS Digital Surround stream, in bits per
+    #   second. The only valid value is 768000.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] sample_rate
+    #   This value must be 48000. It represents the sample rate in Hz.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/DtscSettings AWS API Documentation
+    #
+    class DtscSettings < Struct.new(
+      :bitrate,
+      :sample_rate)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Required when you set Codec to the value DTSX.
+    #
+    # @!attribute [rw] bitrate
+    #   Specify the average bitrate for the DTS:X Profile 2 stream, in bits
+    #   per second. Valid values depend on the coding mode: 160000, 192000,
+    #   224000, 256000, 288000 and 320000 for CODING\_MODE\_5\_1, and
+    #   288000, 384000 and 448000 for CODING\_MODE\_5\_1\_4.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] coding_mode
+    #   DTS:X coding mode. Determines the number of input channels and the
+    #   channel layout that the encoder emits. - CODING\_MODE\_5\_1: 5.1
+    #   surround - CODING\_MODE\_5\_1\_4: 5.1.4 immersive
+    #   @return [String]
+    #
+    # @!attribute [rw] sample_rate
+    #   This value must be 48000. It represents the sample rate in Hz.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/DtsxSettings AWS API Documentation
+    #
+    class DtsxSettings < Struct.new(
+      :bitrate,
+      :coding_mode,
+      :sample_rate)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Settings for integer-second duration normalization. When this
     # preprocessor is present, the output duration will be adjusted to an
     # exact integer-second boundary. If the input is within the trim
@@ -5504,6 +5650,40 @@ module Aws::MediaConvert
       include Aws::Structure
     end
 
+    # Dynamic Multiview settings. Encodes this video output so that a
+    # downstream packager can combine it with other outputs in a Dynamic
+    # Multiview presentation, or replace parts of it. Available for H.264
+    # and H.265 outputs. Enabling Dynamic Multiview reduces compression
+    # efficiency.
+    #
+    # @!attribute [rw] enabled
+    #   Choose Enabled to encode this video output for Dynamic Multiview.
+    #   With no regions, the whole frame is one view in the presentation.
+    #   With regions, only those rectangles can be replaced. Keep the
+    #   default value, Disabled, to leave Dynamic Multiview off; regions
+    #   must then be empty. Dynamic Multiview outputs must be progressive
+    #   and use a Dynamic sub-GOP of Static. MediaConvert also overrides
+    #   some encoder settings on these outputs: Explicit weighted prediction
+    #   for H.264, and Tree block size and MV temporal predictor for H.265.
+    #   @return [String]
+    #
+    # @!attribute [rw] regions
+    #   Optional rectangles that a downstream packager can replace with
+    #   other content, such as an ad. MediaConvert fills each region with
+    #   black and encodes it independently of the rest of the frame. Leave
+    #   empty to use the whole frame as one view. H.264 outputs support up
+    #   to 8 regions; H.265 outputs support 1.
+    #   @return [Array<Types::Rectangle>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/DynamicMultiviewSettings AWS API Documentation
+    #
+    class DynamicMultiviewSettings < Struct.new(
+      :enabled,
+      :regions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Required when you set Codec to the value EAC3\_ATMOS.
     #
     # @!attribute [rw] bitrate
@@ -5864,7 +6044,7 @@ module Aws::MediaConvert
     #   @return [Array<String>]
     #
     # @!attribute [rw] feeds
-    #   A list of Elemental Inference feeds used by this job.
+    #   A list of Elemental Inference feeds created during this job.
     #   @return [Array<Types::ElementalInferenceFeed>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/ElementalInferenceConfiguration AWS API Documentation
@@ -5876,10 +6056,10 @@ module Aws::MediaConvert
       include Aws::Structure
     end
 
-    # Elemental Inference Feed.
+    # An AWS Elemental Inference Feed.
     #
     # @!attribute [rw] arn
-    #   Feed ARN.
+    #   The ARN of an AWS Elemental Inference Feed.
     #   @return [String]
     #
     # @!attribute [rw] feed_management_state
@@ -5891,6 +6071,36 @@ module Aws::MediaConvert
     class ElementalInferenceFeed < Struct.new(
       :arn,
       :feed_management_state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The source of your Elemental Inference Feed configuration.
+    #
+    # @!attribute [rw] feed_arn
+    #   The ARN of an Elemental Inference Feed.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/ElementalInferenceFeedConfigurationSource AWS API Documentation
+    #
+    class ElementalInferenceFeedConfigurationSource < Struct.new(
+      :feed_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The Elemental Inference settings used in this job.
+    #
+    # @!attribute [rw] feed_configuration_source
+    #   Optional. The source of your Elemental Inference Feed configuration.
+    #   MediaConvert will reference this configuration source when you
+    #   specify job settings which use Elemental Inference.
+    #   @return [Types::ElementalInferenceFeedConfigurationSource]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/ElementalInferenceSettings AWS API Documentation
+    #
+    class ElementalInferenceSettings < Struct.new(
+      :feed_configuration_source)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9788,6 +9998,10 @@ module Aws::MediaConvert
     #   The Elemental Inference configuration used in this job.
     #   @return [Types::ElementalInferenceConfiguration]
     #
+    # @!attribute [rw] elemental_inference_settings
+    #   The Elemental Inference settings used in this job.
+    #   @return [Types::ElementalInferenceSettings]
+    #
     # @!attribute [rw] error_code
     #   Error code for the job
     #   @return [Integer]
@@ -9937,6 +10151,7 @@ module Aws::MediaConvert
       :created_at,
       :current_phase,
       :elemental_inference_configuration,
+      :elemental_inference_settings,
       :error_code,
       :error_message,
       :hop_destinations,
@@ -10179,6 +10394,10 @@ module Aws::MediaConvert
     #   An optional description you create for each job template.
     #   @return [String]
     #
+    # @!attribute [rw] elemental_inference_settings
+    #   The Elemental Inference settings used in this job.
+    #   @return [Types::ElementalInferenceSettings]
+    #
     # @!attribute [rw] hop_destinations
     #   Optional list of hop destinations.
     #   @return [Array<Types::HopDestination>]
@@ -10229,6 +10448,7 @@ module Aws::MediaConvert
       :category,
       :created_at,
       :description,
+      :elemental_inference_settings,
       :hop_destinations,
       :last_updated,
       :name,
@@ -12924,8 +13144,11 @@ module Aws::MediaConvert
 
     # Enable the Noise reducer feature to remove noise from your video
     # output if necessary. Enable or disable this feature for each output
-    # individually. This setting is disabled by default. When you enable
-    # Noise reducer, you must also select a value for Noise reducer filter.
+    # individually. When you enable Noise reducer, you must also select a
+    # value for Noise reducer filter. Note that MediaConvert applies the
+    # Perceptual filter at Strength 1 by default to AVC, HEVC, AV1, MPEG-2,
+    # VP8, and VP9 outputs, whether or not you enable Noise reducer. To turn
+    # that off, enable Noise reducer and set Noise reducer filter to None.
     # For AVC outputs, when you include Noise reducer, you cannot include
     # the Bandwidth reduction filter.
     #
@@ -14331,7 +14554,9 @@ module Aws::MediaConvert
     # Retrieve a JSON array that includes job details for up to twenty of
     # your most recent jobs. Optionally filter results further according to
     # input file, queue, or status. To retrieve the twenty next most recent
-    # jobs, use the nextToken string returned with the array.
+    # jobs, use the nextToken string returned with the array. Note that
+    # SearchJobs has been deprecated. We recommend that you instead use the
+    # StartJobsQuery and GetJobsQueryResults APIs to query your job history.
     #
     # @!attribute [rw] input_file
     #   Optional. Provide your input file URL or your partial input file
@@ -15243,6 +15468,10 @@ module Aws::MediaConvert
     #   The new description for the job template, if you are changing it.
     #   @return [String]
     #
+    # @!attribute [rw] elemental_inference_settings
+    #   The Elemental Inference settings used in this job.
+    #   @return [Types::ElementalInferenceSettings]
+    #
     # @!attribute [rw] hop_destinations
     #   Optional list of hop destinations.
     #   @return [Array<Types::HopDestination>]
@@ -15282,6 +15511,7 @@ module Aws::MediaConvert
       :acceleration_settings,
       :category,
       :description,
+      :elemental_inference_settings,
       :hop_destinations,
       :name,
       :priority,
@@ -15714,6 +15944,14 @@ module Aws::MediaConvert
     #   insertion or Timecode track is enabled.
     #   @return [String]
     #
+    # @!attribute [rw] dynamic_multiview_settings
+    #   Dynamic Multiview settings. Encodes this video output so that a
+    #   downstream packager can combine it with other outputs in a Dynamic
+    #   Multiview presentation, or replace parts of it. Available for H.264
+    #   and H.265 outputs. Enabling Dynamic Multiview reduces compression
+    #   efficiency.
+    #   @return [Types::DynamicMultiviewSettings]
+    #
     # @!attribute [rw] fixed_afd
     #   Applies only if you set AFD Signaling to Fixed. Use Fixed to specify
     #   a four-bit AFD value which the service will write on all frames of
@@ -15814,6 +16052,7 @@ module Aws::MediaConvert
       :color_metadata,
       :crop,
       :drop_frame_timecode,
+      :dynamic_multiview_settings,
       :fixed_afd,
       :height,
       :position,

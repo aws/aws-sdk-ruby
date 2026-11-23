@@ -59,7 +59,7 @@ module Aws::APIGateway
     class Authorizer
       attr_accessor id: ::String
       attr_accessor name: ::String
-      attr_accessor type: ("TOKEN" | "REQUEST" | "COGNITO_USER_POOLS")
+      attr_accessor type: ("TOKEN" | "REQUEST" | "COGNITO_USER_POOLS" | "JWT")
       attr_accessor provider_arns: ::Array[::String]
       attr_accessor auth_type: ::String
       attr_accessor authorizer_uri: ::String
@@ -67,6 +67,7 @@ module Aws::APIGateway
       attr_accessor identity_source: ::String
       attr_accessor identity_validation_expression: ::String
       attr_accessor authorizer_result_ttl_in_seconds: ::Integer
+      attr_accessor jwt_configuration: Types::JwtConfiguration
       SENSITIVE: []
     end
 
@@ -138,7 +139,7 @@ module Aws::APIGateway
     class CreateAuthorizerRequest
       attr_accessor rest_api_id: ::String
       attr_accessor name: ::String
-      attr_accessor type: ("TOKEN" | "REQUEST" | "COGNITO_USER_POOLS")
+      attr_accessor type: ("TOKEN" | "REQUEST" | "COGNITO_USER_POOLS" | "JWT")
       attr_accessor provider_arns: ::Array[::String]
       attr_accessor auth_type: ::String
       attr_accessor authorizer_uri: ::String
@@ -146,6 +147,7 @@ module Aws::APIGateway
       attr_accessor identity_source: ::String
       attr_accessor identity_validation_expression: ::String
       attr_accessor authorizer_result_ttl_in_seconds: ::Integer
+      attr_accessor jwt_configuration: Types::JwtConfigurationInput
       SENSITIVE: []
     end
 
@@ -951,6 +953,41 @@ module Aws::APIGateway
       attr_accessor response_parameters: ::Hash[::String, ::String]
       attr_accessor response_templates: ::Hash[::String, ::String]
       attr_accessor content_handling: ("CONVERT_TO_BINARY" | "CONVERT_TO_TEXT")
+      SENSITIVE: []
+    end
+
+    class JwtAdditionalClaim
+      attr_accessor claim_name: ::String
+      attr_accessor format: ("SINGLE_STRING")
+      attr_accessor required: bool
+      attr_accessor expected_values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class JwtConfiguration
+      attr_accessor issuers: ::Array[Types::JwtIssuer]
+      attr_accessor default_algorithms: ::Array[("RS256" | "RS384" | "RS512" | "ES256" | "ES384" | "ES512")]
+      SENSITIVE: []
+    end
+
+    class JwtConfigurationInput
+      attr_accessor issuers: ::Array[Types::JwtIssuerInput]
+      attr_accessor default_algorithms: ::Array[("RS256" | "RS384" | "RS512" | "ES256" | "ES384" | "ES512")]
+      SENSITIVE: []
+    end
+
+    class JwtIssuer
+      attr_accessor issuer: ::String
+      attr_accessor audiences: ::Array[::String]
+      attr_accessor additional_claims: ::Array[Types::JwtAdditionalClaim]
+      attr_accessor jwks_uri: ::String
+      SENSITIVE: []
+    end
+
+    class JwtIssuerInput
+      attr_accessor issuer: ::String
+      attr_accessor audiences: ::Array[::String]
+      attr_accessor additional_claims: ::Array[Types::JwtAdditionalClaim]
       SENSITIVE: []
     end
 

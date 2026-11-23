@@ -264,7 +264,8 @@ module Aws::Signin
     #     An integer representing the maximum number attempts that will be made for
     #     a single request, including the initial attempt.  For example,
     #     setting this value to 5 will result in a request being retried up to
-    #     4 times. Used in `standard` and `adaptive` retry modes.
+    #     4 times. Used in `standard` and `adaptive` retry modes. Defaults to 3,
+    #     except for DynamoDB and DynamoDB Streams, which default to 4.
     #
     #   @option options [String] :profile ("default")
     #     Used when loading credentials from the shared credentials file at `HOME/.aws/credentials`.
@@ -327,15 +328,15 @@ module Aws::Signin
     #     used by the default backoff function. This option is only used in the
     #     `legacy` retry mode.
     #
-    #   @option options [String] :retry_mode ("legacy")
+    #   @option options [String] :retry_mode ("standard")
     #     Specifies which retry algorithm to use. Values are:
     #
-    #     * `legacy` - The pre-existing retry behavior. This is the default
-    #       value if no retry mode is provided.
+    #     * `legacy` - The pre-existing retry behavior.
     #
     #     * `standard` - A standardized set of retry rules across the AWS SDKs.
     #       This includes support for retry quotas, which limit the number of
-    #       unsuccessful retries a client can make.
+    #       unsuccessful retries a client can make. This is the default value
+    #       if no retry mode is provided.
     #
     #     * `adaptive` - A retry mode that includes all the functionality of
     #       `standard` mode along with automatic client side throttling.
@@ -481,6 +482,171 @@ module Aws::Signin
 
     # @!group API Operations
 
+    # Revokes up to five sign-in sessions. A revoked session can no longer
+    # be refreshed. Revoking a session that is already revoked succeeds.
+    # Each session must belong to the identity specified by principalArn, or
+    # to the caller if principalArn is omitted. Failures for individual
+    # sessions are returned in the errors list and do not fail the whole
+    # request.
+    #
+    # @option params [String] :principal_arn
+    #   The identity that owns the sessions. Omit to use the caller. Specify
+    #   arn:aws:iam::\{account-id}:* to revoke any session in the account.
+    #
+    # @option params [required, Array<String>] :session_arns
+    #   The ARNs of the sessions to revoke
+    #
+    # @option params [String] :reason
+    #   The reason for revoking the sessions
+    #
+    # @return [Types::BatchRevokeSessionsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchRevokeSessionsOutput#revoked_sessions #revoked_sessions} => Array&lt;Types::RevokedSession&gt;
+    #   * {Types::BatchRevokeSessionsOutput#errors #errors} => Array&lt;Types::BatchRevokeSessionError&gt;
+    #
+    #
+    # @example Example: Revoke one of your own sessions
+    #
+    #   # Revokes a session owned by the caller and records the reason.
+    #
+    #   resp = client.batch_revoke_sessions({
+    #     reason: "Signed out of a lost device", 
+    #     session_arns: [
+    #       "arn:aws:signin:us-east-1:123456789012:session/3b0a6152-ba23-447d-83cf-b3b3cc7b95f7", 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     errors: [
+    #     ], 
+    #     revoked_sessions: [
+    #       {
+    #         session_arn: "arn:aws:signin:us-east-1:123456789012:session/3b0a6152-ba23-447d-83cf-b3b3cc7b95f7", 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Example: Revoke another identity's session as an account administrator
+    #
+    #   # Uses the account wildcard principal ARN to revoke another IAM identity's session.
+    #
+    #   resp = client.batch_revoke_sessions({
+    #     principal_arn: "arn:aws:iam::123456789012:*", 
+    #     reason: "Revoked by account administrator", 
+    #     session_arns: [
+    #       "arn:aws:signin:us-east-1:123456789012:session/5dbdd43b-4135-4c59-ad06-5ddbcc2c1d77", 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     errors: [
+    #     ], 
+    #     revoked_sessions: [
+    #       {
+    #         session_arn: "arn:aws:signin:us-east-1:123456789012:session/5dbdd43b-4135-4c59-ad06-5ddbcc2c1d77", 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Example: Revoke a batch of sessions with a partial failure
+    #
+    #   # Revokes the caller's session and reports a session that was not found in the errors list.
+    #
+    #   resp = client.batch_revoke_sessions({
+    #     session_arns: [
+    #       "arn:aws:signin:us-east-1:123456789012:session/ac148df8-7f37-48eb-b0cf-8987fc4a55a4", 
+    #       "arn:aws:signin:us-east-1:123456789012:session/36b6ae9d-4fa9-40d9-8eff-eeeb4d15f79d", 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     errors: [
+    #       {
+    #         code: "ResourceNotFoundException", 
+    #         message: "No session found for the given sessionArn", 
+    #         session_arn: "arn:aws:signin:us-east-1:123456789012:session/36b6ae9d-4fa9-40d9-8eff-eeeb4d15f79d", 
+    #       }, 
+    #     ], 
+    #     revoked_sessions: [
+    #       {
+    #         session_arn: "arn:aws:signin:us-east-1:123456789012:session/ac148df8-7f37-48eb-b0cf-8987fc4a55a4", 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_revoke_sessions({
+    #     principal_arn: "PrincipalArnFilter",
+    #     session_arns: ["SessionArn"], # required
+    #     reason: "RevocationReason",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.revoked_sessions #=> Array
+    #   resp.revoked_sessions[0].session_arn #=> String
+    #   resp.errors #=> Array
+    #   resp.errors[0].session_arn #=> String
+    #   resp.errors[0].code #=> String
+    #   resp.errors[0].message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/signin-2023-01-01/BatchRevokeSessions AWS API Documentation
+    #
+    # @overload batch_revoke_sessions(params = {})
+    # @param [Hash] params ({})
+    def batch_revoke_sessions(params = {}, options = {})
+      req = build_request(:batch_revoke_sessions, params)
+      req.send_request(options)
+    end
+
+    # Creates a bearer token that represents your IAM credentials and can be
+    # used to access a supported AWS service. By default, the token is valid
+    # for 12 hours.
+    #
+    # @option params [required, String] :grant_type
+    #   The grant type. Must be "client\_credentials".
+    #
+    # @option params [required, String] :resource
+    #   The AWS service the bearer token is for. Example: "ecr.amazonaws.com".
+    #
+    # @option params [Integer] :duration_seconds
+    #   The requested token lifetime in seconds, from 300 (5 minutes) up to
+    #   the maximum allowed for the service, currently 43200 (12 hours). If
+    #   omitted, the token is valid for 12 hours.
+    #
+    # @return [Types::CreateBearerTokenResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateBearerTokenResponse#access_token #access_token} => String
+    #   * {Types::CreateBearerTokenResponse#token_type #token_type} => String
+    #   * {Types::CreateBearerTokenResponse#expires_in #expires_in} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_bearer_token({
+    #     grant_type: "ClientCredentialsGrantType", # required
+    #     resource: "Resource", # required
+    #     duration_seconds: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.access_token #=> String
+    #   resp.token_type #=> String
+    #   resp.expires_in #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/signin-2023-01-01/CreateBearerToken AWS API Documentation
+    #
+    # @overload create_bearer_token(params = {})
+    # @param [Hash] params ({})
+    def create_bearer_token(params = {}, options = {})
+      req = build_request(:create_bearer_token, params)
+      req.send_request(options)
+    end
+
     # Exchanges an authorization code or refresh token for an OAuth 2.0
     # access token and refresh token.
     #
@@ -566,8 +732,9 @@ module Aws::Signin
     # resource, which you can use to access AWS services from applications.
     #
     # @option params [required, String] :grant_type
-    #   The OAuth 2.0 grant type. Currently only supports
-    #   "urn:ietf:params:oauth:grant-type:token-exchange".
+    #   The OAuth 2.0 grant type. Currently supports
+    #   "urn:ietf:params:oauth:grant-type:token-exchange" and
+    #   "urn:ietf:params:oauth:grant-type:jwt-bearer".
     #
     # @option params [String] :subject_token
     #   The subject token that represents the identity of the party on whose
@@ -579,16 +746,34 @@ module Aws::Signin
     #   "urn:ietf:params:oauth:token-type:jwt". Required when
     #   "grant\_type=urn:ietf:params:oauth:grant-type:token-exchange".
     #
+    # @option params [String] :assertion
+    #   The JWT authorization grant, as defined in RFC 7523. Required when
+    #   "grant\_type=urn:ietf:params:oauth:grant-type:jwt-bearer".
+    #
+    # @option params [String] :client_id
+    #   The OAuth 2.0 client identifier. If provided with
+    #   "grant\_type=urn:ietf:params:oauth:grant-type:jwt-bearer", must match
+    #   the assertion's "client\_id" claim.
+    #
     # @option params [String] :resource
-    #   The OAuth resource for which the access token is requested. Required
-    #   when "grant\_type=urn:ietf:params:oauth:grant-type:token-exchange".
-    #   Example: "glue.amazonaws.com".
+    #   The OAuth resource for which the access token is requested:
+    #
+    #   * "grant\_type=urn:ietf:params:oauth:grant-type:token-exchange":
+    #     Required. Must be a service principal. Example:
+    #     "glue.amazonaws.com".
+    #   * "grant\_type=urn:ietf:params:oauth:grant-type:jwt-bearer": Required
+    #     when the assertion has no "resource" claim, otherwise must match it.
+    #     Must be a URI. Example: "https://aws-mcp.us-east-1.api.aws/mcp".
     #
     # @option params [String] :scope
-    #   IAM managed policy Amazon Resource Names (ARNs) to apply as session
-    #   policies that further scope down the permissions of the issued access
-    #   token, provided as a space-delimited list. Example:
+    #   The IAM managed policy Amazon Resource Names (ARNs) to apply as
+    #   session policies that further scope down the permissions of the issued
+    #   access token, provided as a space-delimited list. Example:
     #   "arn:aws:iam::444455556666:policy/MyPolicy".
+    #
+    #   If provided with
+    #   "grant\_type=urn:ietf:params:oauth:grant-type:jwt-bearer", must match
+    #   the assertion's "scope" claim.
     #
     # @return [Types::CreateOAuth2TokenWithTokenExchangeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -596,6 +781,8 @@ module Aws::Signin
     #   * {Types::CreateOAuth2TokenWithTokenExchangeResponse#issued_token_type #issued_token_type} => String
     #   * {Types::CreateOAuth2TokenWithTokenExchangeResponse#token_type #token_type} => String
     #   * {Types::CreateOAuth2TokenWithTokenExchangeResponse#expires_in #expires_in} => Integer
+    #   * {Types::CreateOAuth2TokenWithTokenExchangeResponse#resource #resource} => String
+    #   * {Types::CreateOAuth2TokenWithTokenExchangeResponse#scope #scope} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -603,6 +790,8 @@ module Aws::Signin
     #     grant_type: "TokenExchangeGrantType", # required
     #     subject_token: "SubjectToken",
     #     subject_token_type: "SubjectTokenType",
+    #     assertion: "Assertion",
+    #     client_id: "JwtBearerClientId",
     #     resource: "Resource",
     #     scope: "Scope",
     #   })
@@ -613,6 +802,8 @@ module Aws::Signin
     #   resp.issued_token_type #=> String
     #   resp.token_type #=> String
     #   resp.expires_in #=> Integer
+    #   resp.resource #=> String
+    #   resp.scope #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/signin-2023-01-01/CreateOAuth2TokenWithTokenExchange AWS API Documentation
     #
@@ -748,6 +939,110 @@ module Aws::Signin
       req.send_request(options)
     end
 
+    # Returns the details of a single sign-in session. The session must
+    # belong to the identity specified by principalArn, or to the caller if
+    # principalArn is omitted. A session that belongs to a different
+    # identity or account is reported as not found.
+    #
+    # @option params [required, String] :session_arn
+    #   The ARN of the session to retrieve
+    #
+    # @option params [String] :principal_arn
+    #   The identity that owns the session. Omit to use the caller. Specify
+    #   arn:aws:iam::\{account-id}:* to retrieve any session in the account.
+    #
+    # @return [Types::GetSessionOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetSessionOutput#session_arn #session_arn} => String
+    #   * {Types::GetSessionOutput#principal_arn #principal_arn} => String
+    #   * {Types::GetSessionOutput#role #role} => String
+    #   * {Types::GetSessionOutput#status #status} => String
+    #   * {Types::GetSessionOutput#client_id #client_id} => String
+    #   * {Types::GetSessionOutput#client_type #client_type} => String
+    #   * {Types::GetSessionOutput#resource #resource} => String
+    #   * {Types::GetSessionOutput#issued_at #issued_at} => Integer
+    #   * {Types::GetSessionOutput#expires_at #expires_at} => Integer
+    #   * {Types::GetSessionOutput#last_used_at #last_used_at} => Integer
+    #   * {Types::GetSessionOutput#issued_in_region #issued_in_region} => String
+    #   * {Types::GetSessionOutput#origin_session_arn #origin_session_arn} => String
+    #   * {Types::GetSessionOutput#user_agent #user_agent} => String
+    #
+    #
+    # @example Example: Get one of your own sessions
+    #
+    #   # Returns a session owned by the caller when principalArn is omitted.
+    #
+    #   resp = client.get_session({
+    #     session_arn: "arn:aws:signin:us-east-1:123456789012:session/3b0a6152-ba23-447d-83cf-b3b3cc7b95f7", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     client_id: "arn:aws:signin:::devtools/same-device", 
+    #     client_type: "CLI", 
+    #     expires_at: 1794431207, 
+    #     issued_at: 1793825807, 
+    #     issued_in_region: "us-east-1", 
+    #     principal_arn: "arn:aws:iam::123456789012:role/Developer", 
+    #     role: "arn:aws:iam::123456789012:role/Developer", 
+    #     session_arn: "arn:aws:signin:us-east-1:123456789012:session/3b0a6152-ba23-447d-83cf-b3b3cc7b95f7", 
+    #     status: "ACTIVE", 
+    #   }
+    #
+    # @example Example: Get another identity's session as an account administrator
+    #
+    #   # Uses the account wildcard principal ARN to get a session owned by another IAM identity.
+    #
+    #   resp = client.get_session({
+    #     principal_arn: "arn:aws:iam::123456789012:*", 
+    #     session_arn: "arn:aws:signin:us-east-1:123456789012:session/5dbdd43b-4135-4c59-ad06-5ddbcc2c1d77", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     client_id: "arn:aws:signin:::devtools/same-device", 
+    #     client_type: "CLI", 
+    #     expires_at: 1794431214, 
+    #     issued_at: 1793826107, 
+    #     issued_in_region: "us-east-1", 
+    #     principal_arn: "arn:aws:iam::123456789012:role/ReadOnly", 
+    #     role: "arn:aws:iam::123456789012:role/ReadOnly", 
+    #     session_arn: "arn:aws:signin:us-east-1:123456789012:session/5dbdd43b-4135-4c59-ad06-5ddbcc2c1d77", 
+    #     status: "ACTIVE", 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_session({
+    #     session_arn: "SessionArn", # required
+    #     principal_arn: "PrincipalArnFilter",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.session_arn #=> String
+    #   resp.principal_arn #=> String
+    #   resp.role #=> String
+    #   resp.status #=> String, one of "ACTIVE", "REVOKED"
+    #   resp.client_id #=> String
+    #   resp.client_type #=> String, one of "CLI", "MCP"
+    #   resp.resource #=> String
+    #   resp.issued_at #=> Integer
+    #   resp.expires_at #=> Integer
+    #   resp.last_used_at #=> Integer
+    #   resp.issued_in_region #=> String
+    #   resp.origin_session_arn #=> String
+    #   resp.user_agent #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/signin-2023-01-01/GetSession AWS API Documentation
+    #
+    # @overload get_session(params = {})
+    # @param [Hash] params ({})
+    def get_session(params = {}, options = {})
+      req = build_request(:get_session, params)
+      req.send_request(options)
+    end
+
     # Inspects the metadata and active state of an OAuth 2.0 access token or
     # refresh token.
     #
@@ -853,6 +1148,138 @@ module Aws::Signin
     # @param [Hash] params ({})
     def list_resource_permission_statements(params = {}, options = {})
       req = build_request(:list_resource_permission_statements, params)
+      req.send_request(options)
+    end
+
+    # Lists sign-in sessions for an IAM identity in your account. If you
+    # omit principalArn, the operation lists the caller's own sessions.
+    # Specify a user or role ARN to list that identity's sessions, or
+    # specify arn:aws:iam::\{account-id}:* to list all sessions in the
+    # account. Filters are combined with a logical AND.
+    #
+    # @option params [String] :principal_arn
+    #   The identity whose sessions to list. Omit to list the caller's own
+    #   sessions. Specify arn:aws:iam::\{account-id}:* to list all sessions
+    #   in the account.
+    #
+    # @option params [Integer] :max_results
+    #   Maximum number of results to return
+    #
+    # @option params [String] :next_token
+    #   Token for pagination
+    #
+    # @option params [String] :status
+    #   Returns only sessions with this status
+    #
+    # @option params [String] :client_id
+    #   Returns only sessions created by this OAuth client
+    #
+    # @option params [Integer] :issued_after
+    #   Returns only sessions created at or after this time, in Unix epoch
+    #   seconds
+    #
+    # @option params [Integer] :issued_before
+    #   Returns only sessions created before this time, in Unix epoch seconds
+    #
+    # @return [Types::ListSessionsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListSessionsOutput#items #items} => Array&lt;Types::Session&gt;
+    #   * {Types::ListSessionsOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: List your own sessions
+    #
+    #   # Lists the caller's sessions when principalArn is omitted.
+    #
+    #   resp = client.list_sessions({
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     items: [
+    #       {
+    #         client_id: "arn:aws:signin:::devtools/same-device", 
+    #         client_type: "CLI", 
+    #         expires_at: 1794431207, 
+    #         issued_at: 1793825807, 
+    #         principal_arn: "arn:aws:iam::123456789012:role/Developer", 
+    #         role: "arn:aws:iam::123456789012:role/Developer", 
+    #         session_arn: "arn:aws:signin:us-east-1:123456789012:session/3b0a6152-ba23-447d-83cf-b3b3cc7b95f7", 
+    #         status: "ACTIVE", 
+    #       }, 
+    #       {
+    #         client_id: "arn:aws:signin:::devtools/same-device", 
+    #         client_type: "CLI", 
+    #         expires_at: 1794431212, 
+    #         issued_at: 1793824607, 
+    #         principal_arn: "arn:aws:iam::123456789012:role/Developer", 
+    #         role: "arn:aws:iam::123456789012:role/Developer", 
+    #         session_arn: "arn:aws:signin:us-east-1:123456789012:session/4c63f231-2128-42cf-aa83-83589f9a0df2", 
+    #         status: "ACTIVE", 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Example: List active sessions one page at a time
+    #
+    #   # Returns one active session and a token to request the next page.
+    #
+    #   resp = client.list_sessions({
+    #     max_results: 1, 
+    #     status: "ACTIVE", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     items: [
+    #       {
+    #         client_id: "arn:aws:signin:::devtools/same-device", 
+    #         client_type: "CLI", 
+    #         expires_at: 1794431207, 
+    #         issued_at: 1793825807, 
+    #         principal_arn: "arn:aws:iam::123456789012:role/Developer", 
+    #         role: "arn:aws:iam::123456789012:role/Developer", 
+    #         session_arn: "arn:aws:signin:us-east-1:123456789012:session/3b0a6152-ba23-447d-83cf-b3b3cc7b95f7", 
+    #         status: "ACTIVE", 
+    #       }, 
+    #     ], 
+    #     next_token: "AAMA-EXAMPLE-NEXT-TOKEN", 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_sessions({
+    #     principal_arn: "PrincipalArnFilter",
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #     status: "ACTIVE", # accepts ACTIVE, REVOKED
+    #     client_id: "String",
+    #     issued_after: 1,
+    #     issued_before: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.items #=> Array
+    #   resp.items[0].session_arn #=> String
+    #   resp.items[0].principal_arn #=> String
+    #   resp.items[0].role #=> String
+    #   resp.items[0].status #=> String, one of "ACTIVE", "REVOKED"
+    #   resp.items[0].issued_at #=> Integer
+    #   resp.items[0].expires_at #=> Integer
+    #   resp.items[0].client_id #=> String
+    #   resp.items[0].client_type #=> String, one of "CLI", "MCP"
+    #   resp.items[0].resource #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/signin-2023-01-01/ListSessions AWS API Documentation
+    #
+    # @overload list_sessions(params = {})
+    # @param [Hash] params ({})
+    def list_sessions(params = {}, options = {})
+      req = build_request(:list_sessions, params)
       req.send_request(options)
     end
 
@@ -991,7 +1418,7 @@ module Aws::Signin
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-core'
-      context[:gem_version] = '3.263.0'
+      context[:gem_version] = '3.271.1'
       Seahorse::Client::Request.new(handlers, context)
     end
 

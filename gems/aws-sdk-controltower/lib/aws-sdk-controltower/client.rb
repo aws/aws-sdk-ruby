@@ -264,7 +264,8 @@ module Aws::ControlTower
     #     An integer representing the maximum number attempts that will be made for
     #     a single request, including the initial attempt.  For example,
     #     setting this value to 5 will result in a request being retried up to
-    #     4 times. Used in `standard` and `adaptive` retry modes.
+    #     4 times. Used in `standard` and `adaptive` retry modes. Defaults to 3,
+    #     except for DynamoDB and DynamoDB Streams, which default to 4.
     #
     #   @option options [String] :profile ("default")
     #     Used when loading credentials from the shared credentials file at `HOME/.aws/credentials`.
@@ -327,15 +328,15 @@ module Aws::ControlTower
     #     used by the default backoff function. This option is only used in the
     #     `legacy` retry mode.
     #
-    #   @option options [String] :retry_mode ("legacy")
+    #   @option options [String] :retry_mode ("standard")
     #     Specifies which retry algorithm to use. Values are:
     #
-    #     * `legacy` - The pre-existing retry behavior. This is the default
-    #       value if no retry mode is provided.
+    #     * `legacy` - The pre-existing retry behavior.
     #
     #     * `standard` - A standardized set of retry rules across the AWS SDKs.
     #       This includes support for retry quotas, which limit the number of
-    #       unsuccessful retries a client can make.
+    #       unsuccessful retries a client can make. This is the default value
+    #       if no retry mode is provided.
     #
     #     * `adaptive` - A retry mode that includes all the functionality of
     #       `standard` mode along with automatic client side throttling.
@@ -951,6 +952,7 @@ module Aws::ControlTower
     #   resp.enabled_baseline_details.baseline_identifier #=> String
     #   resp.enabled_baseline_details.baseline_version #=> String
     #   resp.enabled_baseline_details.drift_status_summary.types.inheritance.status #=> String, one of "IN_SYNC", "DRIFTED"
+    #   resp.enabled_baseline_details.drift_status_summary.types.source.status #=> String, one of "IN_SYNC", "DRIFTED"
     #   resp.enabled_baseline_details.target_identifier #=> String
     #   resp.enabled_baseline_details.parent_identifier #=> String
     #   resp.enabled_baseline_details.status_summary.status #=> String, one of "SUCCEEDED", "FAILED", "UNDER_CHANGE"
@@ -1226,6 +1228,7 @@ module Aws::ControlTower
     #       parent_identifiers: ["Arn"],
     #       statuses: ["SUCCEEDED"], # accepts SUCCEEDED, FAILED, UNDER_CHANGE
     #       inheritance_drift_statuses: ["IN_SYNC"], # accepts IN_SYNC, DRIFTED
+    #       source_drift_statuses: ["IN_SYNC"], # accepts IN_SYNC, DRIFTED
     #     },
     #     next_token: "ListEnabledBaselinesNextToken",
     #     max_results: 1,
@@ -1239,6 +1242,7 @@ module Aws::ControlTower
     #   resp.enabled_baselines[0].baseline_identifier #=> String
     #   resp.enabled_baselines[0].baseline_version #=> String
     #   resp.enabled_baselines[0].drift_status_summary.types.inheritance.status #=> String, one of "IN_SYNC", "DRIFTED"
+    #   resp.enabled_baselines[0].drift_status_summary.types.source.status #=> String, one of "IN_SYNC", "DRIFTED"
     #   resp.enabled_baselines[0].target_identifier #=> String
     #   resp.enabled_baselines[0].parent_identifier #=> String
     #   resp.enabled_baselines[0].status_summary.status #=> String, one of "SUCCEEDED", "FAILED", "UNDER_CHANGE"
@@ -1810,7 +1814,7 @@ module Aws::ControlTower
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-controltower'
-      context[:gem_version] = '1.70.0'
+      context[:gem_version] = '1.78.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

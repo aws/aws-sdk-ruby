@@ -264,7 +264,8 @@ module Aws::Odb
     #     An integer representing the maximum number attempts that will be made for
     #     a single request, including the initial attempt.  For example,
     #     setting this value to 5 will result in a request being retried up to
-    #     4 times. Used in `standard` and `adaptive` retry modes.
+    #     4 times. Used in `standard` and `adaptive` retry modes. Defaults to 3,
+    #     except for DynamoDB and DynamoDB Streams, which default to 4.
     #
     #   @option options [String] :profile ("default")
     #     Used when loading credentials from the shared credentials file at `HOME/.aws/credentials`.
@@ -327,15 +328,15 @@ module Aws::Odb
     #     used by the default backoff function. This option is only used in the
     #     `legacy` retry mode.
     #
-    #   @option options [String] :retry_mode ("legacy")
+    #   @option options [String] :retry_mode ("standard")
     #     Specifies which retry algorithm to use. Values are:
     #
-    #     * `legacy` - The pre-existing retry behavior. This is the default
-    #       value if no retry mode is provided.
+    #     * `legacy` - The pre-existing retry behavior.
     #
     #     * `standard` - A standardized set of retry rules across the AWS SDKs.
     #       This includes support for retry quotas, which limit the number of
-    #       unsuccessful retries a client can make.
+    #       unsuccessful retries a client can make. This is the default value
+    #       if no retry mode is provided.
     #
     #     * `adaptive` - A retry mode that includes all the functionality of
     #       `standard` mode along with automatic client side throttling.
@@ -547,6 +548,45 @@ module Aws::Odb
     # @param [Hash] params ({})
     def associate_iam_role_to_resource(params = {}, options = {})
       req = build_request(:associate_iam_role_to_resource, params)
+      req.send_request(options)
+    end
+
+    # Adds virtual machines to the specified VM cluster.
+    #
+    # @option params [required, String] :cloud_vm_cluster_id
+    #   The unique identifier of the VM cluster to add virtual machines to.
+    #
+    # @option params [required, Array<String>] :db_servers
+    #   The list of database server IDs for the virtual machines to add to the
+    #   VM cluster.
+    #
+    # @return [Types::AssociateVirtualMachinesToCloudVmClusterOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::AssociateVirtualMachinesToCloudVmClusterOutput#display_name #display_name} => String
+    #   * {Types::AssociateVirtualMachinesToCloudVmClusterOutput#status #status} => String
+    #   * {Types::AssociateVirtualMachinesToCloudVmClusterOutput#status_reason #status_reason} => String
+    #   * {Types::AssociateVirtualMachinesToCloudVmClusterOutput#cloud_vm_cluster_id #cloud_vm_cluster_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.associate_virtual_machines_to_cloud_vm_cluster({
+    #     cloud_vm_cluster_id: "ResourceId", # required
+    #     db_servers: ["String"], # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.display_name #=> String
+    #   resp.status #=> String, one of "AVAILABLE", "FAILED", "PROVISIONING", "TERMINATED", "TERMINATING", "UPDATING", "MAINTENANCE_IN_PROGRESS"
+    #   resp.status_reason #=> String
+    #   resp.cloud_vm_cluster_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/odb-2024-08-20/AssociateVirtualMachinesToCloudVmCluster AWS API Documentation
+    #
+    # @overload associate_virtual_machines_to_cloud_vm_cluster(params = {})
+    # @param [Hash] params ({})
+    def associate_virtual_machines_to_cloud_vm_cluster(params = {}, options = {})
+      req = build_request(:associate_virtual_machines_to_cloud_vm_cluster, params)
       req.send_request(options)
     end
 
@@ -2185,6 +2225,46 @@ module Aws::Odb
       req.send_request(options)
     end
 
+    # Removes virtual machines from the specified VM cluster.
+    #
+    # @option params [required, String] :cloud_vm_cluster_id
+    #   The unique identifier of the VM cluster to remove virtual machines
+    #   from.
+    #
+    # @option params [required, Array<String>] :db_servers
+    #   The list of database server IDs for the virtual machines to remove
+    #   from the VM cluster.
+    #
+    # @return [Types::DisassociateVirtualMachinesFromCloudVmClusterOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DisassociateVirtualMachinesFromCloudVmClusterOutput#display_name #display_name} => String
+    #   * {Types::DisassociateVirtualMachinesFromCloudVmClusterOutput#status #status} => String
+    #   * {Types::DisassociateVirtualMachinesFromCloudVmClusterOutput#status_reason #status_reason} => String
+    #   * {Types::DisassociateVirtualMachinesFromCloudVmClusterOutput#cloud_vm_cluster_id #cloud_vm_cluster_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disassociate_virtual_machines_from_cloud_vm_cluster({
+    #     cloud_vm_cluster_id: "ResourceId", # required
+    #     db_servers: ["String"], # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.display_name #=> String
+    #   resp.status #=> String, one of "AVAILABLE", "FAILED", "PROVISIONING", "TERMINATED", "TERMINATING", "UPDATING", "MAINTENANCE_IN_PROGRESS"
+    #   resp.status_reason #=> String
+    #   resp.cloud_vm_cluster_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/odb-2024-08-20/DisassociateVirtualMachinesFromCloudVmCluster AWS API Documentation
+    #
+    # @overload disassociate_virtual_machines_from_cloud_vm_cluster(params = {})
+    # @param [Hash] params ({})
+    def disassociate_virtual_machines_from_cloud_vm_cluster(params = {}, options = {})
+      req = build_request(:disassociate_virtual_machines_from_cloud_vm_cluster, params)
+      req.send_request(options)
+    end
+
     # Removes virtual machines from the specified Exascale VM cluster.
     #
     # @option params [required, String] :exadb_vm_cluster_id
@@ -2621,6 +2701,7 @@ module Aws::Odb
     #   resp.cloud_autonomous_vm_cluster.memory_size_in_g_bs #=> Integer
     #   resp.cloud_autonomous_vm_cluster.node_count #=> Integer
     #   resp.cloud_autonomous_vm_cluster.non_provisionable_autonomous_container_databases #=> Integer
+    #   resp.cloud_autonomous_vm_cluster.ocpus_lowest_scaled_value #=> Integer
     #   resp.cloud_autonomous_vm_cluster.provisionable_autonomous_container_databases #=> Integer
     #   resp.cloud_autonomous_vm_cluster.provisioned_autonomous_container_databases #=> Integer
     #   resp.cloud_autonomous_vm_cluster.provisioned_cpus #=> Float
@@ -3716,6 +3797,54 @@ module Aws::Odb
       req.send_request(options)
     end
 
+    # Lists the refreshable clones of the specified Autonomous Database.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output.
+    #
+    # @option params [String] :next_token
+    #   The token returned from a previous paginated request. Pagination
+    #   continues from the end of the items returned by the previous request.
+    #
+    # @option params [required, String] :autonomous_database_id
+    #   The unique identifier of the source Autonomous Database whose
+    #   refreshable clones you want to list.
+    #
+    # @return [Types::ListAutonomousDatabaseRefreshableClonesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListAutonomousDatabaseRefreshableClonesOutput#next_token #next_token} => String
+    #   * {Types::ListAutonomousDatabaseRefreshableClonesOutput#autonomous_database_refreshable_clones #autonomous_database_refreshable_clones} => Array&lt;Types::AutonomousDatabaseRefreshableCloneSummary&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_autonomous_database_refreshable_clones({
+    #     max_results: 1,
+    #     next_token: "ListAutonomousDatabaseRefreshableClonesInputNextTokenString",
+    #     autonomous_database_id: "ResourceIdOrArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.autonomous_database_refreshable_clones #=> Array
+    #   resp.autonomous_database_refreshable_clones[0].autonomous_database_id #=> String
+    #   resp.autonomous_database_refreshable_clones[0].autonomous_database_arn #=> String
+    #   resp.autonomous_database_refreshable_clones[0].ocid #=> String
+    #   resp.autonomous_database_refreshable_clones[0].region #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/odb-2024-08-20/ListAutonomousDatabaseRefreshableClones AWS API Documentation
+    #
+    # @overload list_autonomous_database_refreshable_clones(params = {})
+    # @param [Hash] params ({})
+    def list_autonomous_database_refreshable_clones(params = {}, options = {})
+      req = build_request(:list_autonomous_database_refreshable_clones, params)
+      req.send_request(options)
+    end
+
     # Lists the available Oracle Database software versions for Autonomous
     # Databases.
     #
@@ -4125,6 +4254,7 @@ module Aws::Odb
     #   resp.cloud_autonomous_vm_clusters[0].memory_size_in_g_bs #=> Integer
     #   resp.cloud_autonomous_vm_clusters[0].node_count #=> Integer
     #   resp.cloud_autonomous_vm_clusters[0].non_provisionable_autonomous_container_databases #=> Integer
+    #   resp.cloud_autonomous_vm_clusters[0].ocpus_lowest_scaled_value #=> Integer
     #   resp.cloud_autonomous_vm_clusters[0].provisionable_autonomous_container_databases #=> Integer
     #   resp.cloud_autonomous_vm_clusters[0].provisioned_autonomous_container_databases #=> Integer
     #   resp.cloud_autonomous_vm_clusters[0].provisioned_cpus #=> Float
@@ -5385,6 +5515,54 @@ module Aws::Odb
       req.send_request(options)
     end
 
+    # Starts a refresh of the specified refreshable clone Autonomous
+    # Database with data from its source database. The refresh runs
+    # asynchronously. To track its progress, check the `refreshableStatus`
+    # of the Autonomous Database.
+    #
+    # @option params [required, String] :autonomous_database_id
+    #   The unique identifier of the refreshable clone Autonomous Database to
+    #   refresh.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :time_of_refresh_cutoff
+    #   The date and time up to which the refreshable clone Autonomous
+    #   Database is refreshed from its source database. Data committed on the
+    #   source database after this time isn't applied to the refreshable
+    #   clone. The time must be at least 1 minute and at most 7 days in the
+    #   past, and later than the clone's last refresh point.
+    #
+    # @return [Types::StartAutonomousDatabaseRefreshOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartAutonomousDatabaseRefreshOutput#autonomous_database_id #autonomous_database_id} => String
+    #   * {Types::StartAutonomousDatabaseRefreshOutput#display_name #display_name} => String
+    #   * {Types::StartAutonomousDatabaseRefreshOutput#status #status} => String
+    #   * {Types::StartAutonomousDatabaseRefreshOutput#status_reason #status_reason} => String
+    #   * {Types::StartAutonomousDatabaseRefreshOutput#refreshable_status #refreshable_status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_autonomous_database_refresh({
+    #     autonomous_database_id: "ResourceIdOrArn", # required
+    #     time_of_refresh_cutoff: Time.now,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.autonomous_database_id #=> String
+    #   resp.display_name #=> String
+    #   resp.status #=> String, one of "AVAILABLE", "FAILED", "PROVISIONING", "TERMINATED", "TERMINATING", "UPDATING", "MAINTENANCE_IN_PROGRESS", "STOPPING", "STOPPED", "STARTING", "UNAVAILABLE", "RESTORE_IN_PROGRESS", "RESTORE_FAILED", "BACKUP_IN_PROGRESS", "SCALE_IN_PROGRESS", "AVAILABLE_NEEDS_ATTENTION", "RESTARTING", "RECREATING", "ROLE_CHANGE_IN_PROGRESS", "UPGRADING", "INACCESSIBLE", "STANDBY"
+    #   resp.status_reason #=> String
+    #   resp.refreshable_status #=> String, one of "REFRESHING", "NOT_REFRESHING"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/odb-2024-08-20/StartAutonomousDatabaseRefresh AWS API Documentation
+    #
+    # @overload start_autonomous_database_refresh(params = {})
+    # @param [Hash] params ({})
+    def start_autonomous_database_refresh(params = {}, options = {})
+      req = build_request(:start_autonomous_database_refresh, params)
+      req.send_request(options)
+    end
+
     # Starts the specified DB node in a VM cluster.
     #
     # @option params [String] :cloud_vm_cluster_id
@@ -5918,26 +6096,53 @@ module Aws::Odb
       req.send_request(options)
     end
 
-    # Updates the properties of an Exadata infrastructure resource.
+    # Updates the properties of the specified Autonomous VM cluster.
     #
-    # @option params [required, String] :cloud_exadata_infrastructure_id
-    #   The unique identifier of the Exadata infrastructure to update.
+    # @option params [required, String] :cloud_autonomous_vm_cluster_id
+    #   The unique identifier of the Autonomous VM cluster to update.
+    #
+    # @option params [Float] :autonomous_data_storage_size_in_t_bs
+    #   The data storage size to allocate for Autonomous Databases in the
+    #   Autonomous VM cluster, in terabytes (TB).
+    #
+    # @option params [Integer] :cpu_core_count_per_node
+    #   The number of CPU cores to enable per node in the Autonomous VM
+    #   cluster. If you don't specify a value, the existing number of CPU
+    #   cores per node is retained.
+    #
+    # @option params [String] :description
+    #   A user-provided description of the Autonomous VM cluster.
+    #
+    # @option params [String] :display_name
+    #   A new user-friendly name for the Autonomous VM cluster.
+    #
+    # @option params [String] :license_model
+    #   The Oracle license model to apply to the Autonomous VM cluster.
     #
     # @option params [Types::MaintenanceWindow] :maintenance_window
     #   The scheduling details for the maintenance window. Patching and system
     #   updates take place during the maintenance window.
     #
-    # @return [Types::UpdateCloudExadataInfrastructureOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    # @option params [Integer] :total_container_databases
+    #   The total number of Autonomous Container Databases that can be created
+    #   in the Autonomous VM cluster.
     #
-    #   * {Types::UpdateCloudExadataInfrastructureOutput#display_name #display_name} => String
-    #   * {Types::UpdateCloudExadataInfrastructureOutput#status #status} => String
-    #   * {Types::UpdateCloudExadataInfrastructureOutput#status_reason #status_reason} => String
-    #   * {Types::UpdateCloudExadataInfrastructureOutput#cloud_exadata_infrastructure_id #cloud_exadata_infrastructure_id} => String
+    # @return [Types::UpdateCloudAutonomousVmClusterOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateCloudAutonomousVmClusterOutput#display_name #display_name} => String
+    #   * {Types::UpdateCloudAutonomousVmClusterOutput#status #status} => String
+    #   * {Types::UpdateCloudAutonomousVmClusterOutput#status_reason #status_reason} => String
+    #   * {Types::UpdateCloudAutonomousVmClusterOutput#cloud_autonomous_vm_cluster_id #cloud_autonomous_vm_cluster_id} => String
     #
     # @example Request syntax with placeholder values
     #
-    #   resp = client.update_cloud_exadata_infrastructure({
-    #     cloud_exadata_infrastructure_id: "ResourceIdOrArn", # required
+    #   resp = client.update_cloud_autonomous_vm_cluster({
+    #     cloud_autonomous_vm_cluster_id: "ResourceId", # required
+    #     autonomous_data_storage_size_in_t_bs: 1.0,
+    #     cpu_core_count_per_node: 1,
+    #     description: "UpdateCloudAutonomousVmClusterInputDescriptionString",
+    #     display_name: "ResourceDisplayName",
+    #     license_model: "BRING_YOUR_OWN_LICENSE", # accepts BRING_YOUR_OWN_LICENSE, LICENSE_INCLUDED
     #     maintenance_window: {
     #       custom_action_timeout_in_mins: 1,
     #       days_of_week: [
@@ -5958,6 +6163,81 @@ module Aws::Odb
     #       skip_ru: false,
     #       weeks_of_month: [1],
     #     },
+    #     total_container_databases: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.display_name #=> String
+    #   resp.status #=> String, one of "AVAILABLE", "FAILED", "PROVISIONING", "TERMINATED", "TERMINATING", "UPDATING", "MAINTENANCE_IN_PROGRESS"
+    #   resp.status_reason #=> String
+    #   resp.cloud_autonomous_vm_cluster_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/odb-2024-08-20/UpdateCloudAutonomousVmCluster AWS API Documentation
+    #
+    # @overload update_cloud_autonomous_vm_cluster(params = {})
+    # @param [Hash] params ({})
+    def update_cloud_autonomous_vm_cluster(params = {}, options = {})
+      req = build_request(:update_cloud_autonomous_vm_cluster, params)
+      req.send_request(options)
+    end
+
+    # Updates the properties of an Exadata infrastructure resource.
+    #
+    # @option params [required, String] :cloud_exadata_infrastructure_id
+    #   The unique identifier of the Exadata infrastructure to update.
+    #
+    # @option params [String] :display_name
+    #   A new user-friendly name for the Exadata infrastructure.
+    #
+    # @option params [Integer] :compute_count
+    #   The number of database servers for the Exadata infrastructure.
+    #
+    # @option params [Types::MaintenanceWindow] :maintenance_window
+    #   The maintenance window configuration for the Exadata Cloud
+    #   infrastructure.
+    #
+    #   This allows you to define when maintenance operations such as patching
+    #   and updates can be performed on the infrastructure.
+    #
+    # @option params [Integer] :storage_count
+    #   The number of storage servers to activate for the Exadata
+    #   infrastructure.
+    #
+    # @return [Types::UpdateCloudExadataInfrastructureOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateCloudExadataInfrastructureOutput#display_name #display_name} => String
+    #   * {Types::UpdateCloudExadataInfrastructureOutput#status #status} => String
+    #   * {Types::UpdateCloudExadataInfrastructureOutput#status_reason #status_reason} => String
+    #   * {Types::UpdateCloudExadataInfrastructureOutput#cloud_exadata_infrastructure_id #cloud_exadata_infrastructure_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_cloud_exadata_infrastructure({
+    #     cloud_exadata_infrastructure_id: "ResourceIdOrArn", # required
+    #     display_name: "ResourceDisplayName",
+    #     compute_count: 1,
+    #     maintenance_window: {
+    #       custom_action_timeout_in_mins: 1,
+    #       days_of_week: [
+    #         {
+    #           name: "MONDAY", # accepts MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY
+    #         },
+    #       ],
+    #       hours_of_day: [1],
+    #       is_custom_action_timeout_enabled: false,
+    #       lead_time_in_weeks: 1,
+    #       months: [
+    #         {
+    #           name: "JANUARY", # accepts JANUARY, FEBRUARY, MARCH, APRIL, MAY, JUNE, JULY, AUGUST, SEPTEMBER, OCTOBER, NOVEMBER, DECEMBER
+    #         },
+    #       ],
+    #       patching_mode: "ROLLING", # accepts ROLLING, NONROLLING
+    #       preference: "NO_PREFERENCE", # accepts NO_PREFERENCE, CUSTOM_PREFERENCE
+    #       skip_ru: false,
+    #       weeks_of_month: [1],
+    #     },
+    #     storage_count: 1,
     #   })
     #
     # @example Response structure
@@ -5973,6 +6253,122 @@ module Aws::Odb
     # @param [Hash] params ({})
     def update_cloud_exadata_infrastructure(params = {}, options = {})
       req = build_request(:update_cloud_exadata_infrastructure, params)
+      req.send_request(options)
+    end
+
+    # Adds storage capacity to the specified Exadata infrastructure.
+    #
+    # @option params [required, String] :cloud_exadata_infrastructure_id
+    #   The unique identifier or Amazon Resource Name (ARN) of the Exadata
+    #   infrastructure to update.
+    #
+    # @return [Types::UpdateCloudExadataInfrastructureStorageCapacityOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateCloudExadataInfrastructureStorageCapacityOutput#display_name #display_name} => String
+    #   * {Types::UpdateCloudExadataInfrastructureStorageCapacityOutput#status #status} => String
+    #   * {Types::UpdateCloudExadataInfrastructureStorageCapacityOutput#status_reason #status_reason} => String
+    #   * {Types::UpdateCloudExadataInfrastructureStorageCapacityOutput#cloud_exadata_infrastructure_id #cloud_exadata_infrastructure_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_cloud_exadata_infrastructure_storage_capacity({
+    #     cloud_exadata_infrastructure_id: "ResourceIdOrArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.display_name #=> String
+    #   resp.status #=> String, one of "AVAILABLE", "FAILED", "PROVISIONING", "TERMINATED", "TERMINATING", "UPDATING", "MAINTENANCE_IN_PROGRESS"
+    #   resp.status_reason #=> String
+    #   resp.cloud_exadata_infrastructure_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/odb-2024-08-20/UpdateCloudExadataInfrastructureStorageCapacity AWS API Documentation
+    #
+    # @overload update_cloud_exadata_infrastructure_storage_capacity(params = {})
+    # @param [Hash] params ({})
+    def update_cloud_exadata_infrastructure_storage_capacity(params = {}, options = {})
+      req = build_request(:update_cloud_exadata_infrastructure_storage_capacity, params)
+      req.send_request(options)
+    end
+
+    # Updates the properties of the specified VM cluster.
+    #
+    # @option params [required, String] :cloud_vm_cluster_id
+    #   The unique identifier of the VM cluster to update.
+    #
+    # @option params [Integer] :cpu_core_count
+    #   The number of CPU cores to enable on the VM cluster. If you don't
+    #   specify a value, the existing number of CPU cores is retained.
+    #
+    # @option params [Types::DataCollectionOptions] :data_collection_options
+    #   The set of preferences for the diagnostic collection options for the
+    #   VM cluster.
+    #
+    # @option params [Float] :data_storage_size_in_t_bs
+    #   The size of the data disk group, in terabytes (TB), to allocate for
+    #   the VM cluster.
+    #
+    # @option params [Integer] :db_node_storage_size_in_g_bs
+    #   The amount of local node storage, in gigabytes (GB), to allocate for
+    #   the VM cluster.
+    #
+    # @option params [String] :display_name
+    #   A new user-friendly name for the VM cluster.
+    #
+    # @option params [Array<String>] :ssh_public_keys
+    #   The public key portion of one or more key pairs used for SSH access to
+    #   the VM cluster.
+    #
+    # @option params [String] :license_model
+    #   The Oracle license model to apply to the VM cluster.
+    #
+    # @option params [Integer] :memory_size_in_g_bs
+    #   The amount of memory, in gigabytes (GB), to allocate for the VM
+    #   cluster.
+    #
+    # @option params [Integer] :storage_size_in_g_bs
+    #   The amount of local node storage, in gigabytes (GB), to allocate to
+    #   the VM cluster.
+    #
+    # @return [Types::UpdateCloudVmClusterOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateCloudVmClusterOutput#display_name #display_name} => String
+    #   * {Types::UpdateCloudVmClusterOutput#status #status} => String
+    #   * {Types::UpdateCloudVmClusterOutput#status_reason #status_reason} => String
+    #   * {Types::UpdateCloudVmClusterOutput#cloud_vm_cluster_id #cloud_vm_cluster_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_cloud_vm_cluster({
+    #     cloud_vm_cluster_id: "ResourceId", # required
+    #     cpu_core_count: 1,
+    #     data_collection_options: {
+    #       is_diagnostics_events_enabled: false,
+    #       is_health_monitoring_enabled: false,
+    #       is_incident_logs_enabled: false,
+    #     },
+    #     data_storage_size_in_t_bs: 1.0,
+    #     db_node_storage_size_in_g_bs: 1,
+    #     display_name: "ResourceDisplayName",
+    #     ssh_public_keys: ["String"],
+    #     license_model: "BRING_YOUR_OWN_LICENSE", # accepts BRING_YOUR_OWN_LICENSE, LICENSE_INCLUDED
+    #     memory_size_in_g_bs: 1,
+    #     storage_size_in_g_bs: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.display_name #=> String
+    #   resp.status #=> String, one of "AVAILABLE", "FAILED", "PROVISIONING", "TERMINATED", "TERMINATING", "UPDATING", "MAINTENANCE_IN_PROGRESS"
+    #   resp.status_reason #=> String
+    #   resp.cloud_vm_cluster_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/odb-2024-08-20/UpdateCloudVmCluster AWS API Documentation
+    #
+    # @overload update_cloud_vm_cluster(params = {})
+    # @param [Hash] params ({})
+    def update_cloud_vm_cluster(params = {}, options = {})
+      req = build_request(:update_cloud_vm_cluster, params)
       req.send_request(options)
     end
 
@@ -6333,7 +6729,7 @@ module Aws::Odb
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-odb'
-      context[:gem_version] = '1.36.0'
+      context[:gem_version] = '1.45.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

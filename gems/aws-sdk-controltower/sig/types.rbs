@@ -170,6 +170,7 @@ module Aws::ControlTower
 
     class EnabledBaselineDriftTypes
       attr_accessor inheritance: Types::EnabledBaselineInheritanceDrift
+      attr_accessor source: Types::EnabledBaselineSourceDrift
       SENSITIVE: []
     end
 
@@ -179,6 +180,7 @@ module Aws::ControlTower
       attr_accessor parent_identifiers: ::Array[::String]
       attr_accessor statuses: ::Array[("SUCCEEDED" | "FAILED" | "UNDER_CHANGE")]
       attr_accessor inheritance_drift_statuses: ::Array[("IN_SYNC" | "DRIFTED")]
+      attr_accessor source_drift_statuses: ::Array[("IN_SYNC" | "DRIFTED")]
       SENSITIVE: []
     end
 
@@ -196,6 +198,11 @@ module Aws::ControlTower
     class EnabledBaselineParameterSummary
       attr_accessor key: ::String
       attr_accessor value: untyped
+      SENSITIVE: []
+    end
+
+    class EnabledBaselineSourceDrift
+      attr_accessor status: ("IN_SYNC" | "DRIFTED")
       SENSITIVE: []
     end
 

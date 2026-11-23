@@ -26,6 +26,7 @@ module Aws::AgentRegistry
     BatchGetDiscoverableRegistryRecordRequest = Shapes::StructureShape.new(name: 'BatchGetDiscoverableRegistryRecordRequest')
     BatchGetDiscoverableRegistryRecordRequestEntriesList = Shapes::ListShape.new(name: 'BatchGetDiscoverableRegistryRecordRequestEntriesList')
     BatchGetDiscoverableRegistryRecordResponse = Shapes::StructureShape.new(name: 'BatchGetDiscoverableRegistryRecordResponse')
+    BotCategory = Shapes::StringShape.new(name: 'BotCategory')
     CustomDescriptor = Shapes::StructureShape.new(name: 'CustomDescriptor')
     CustomMetadataDocument = Shapes::DocumentShape.new(name: 'CustomMetadataDocument', document: true)
     DataSchemaVersion = Shapes::StringShape.new(name: 'DataSchemaVersion')
@@ -52,11 +53,13 @@ module Aws::AgentRegistry
     McpToolsDescriptor = Shapes::StructureShape.new(name: 'McpToolsDescriptor')
     MetadataFilterExpression = Shapes::DocumentShape.new(name: 'MetadataFilterExpression', document: true)
     NonBlankString = Shapes::StringShape.new(name: 'NonBlankString')
+    PresignedDownloadUrl = Shapes::StringShape.new(name: 'PresignedDownloadUrl')
     RecordIdentifier = Shapes::StringShape.new(name: 'RecordIdentifier')
     RecordType = Shapes::StringShape.new(name: 'RecordType')
     RegistryArn = Shapes::StringShape.new(name: 'RegistryArn')
     RegistryIdentifier = Shapes::StringShape.new(name: 'RegistryIdentifier')
     RegistryRecordArn = Shapes::StringShape.new(name: 'RegistryRecordArn')
+    RegistryRecordArtifactDownload = Shapes::StructureShape.new(name: 'RegistryRecordArtifactDownload')
     RegistryRecordDisplayName = Shapes::StringShape.new(name: 'RegistryRecordDisplayName')
     RegistryRecordFilter = Shapes::StructureShape.new(name: 'RegistryRecordFilter')
     RegistryRecordFilterList = Shapes::ListShape.new(name: 'RegistryRecordFilterList')
@@ -72,9 +75,14 @@ module Aws::AgentRegistry
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     SearchDiscoverableRegistryRecordsRequest = Shapes::StructureShape.new(name: 'SearchDiscoverableRegistryRecordsRequest')
     SearchDiscoverableRegistryRecordsRequestMaxResultsInteger = Shapes::IntegerShape.new(name: 'SearchDiscoverableRegistryRecordsRequestMaxResultsInteger')
+    SearchDiscoverableRegistryRecordsRequestNextTokenString = Shapes::StringShape.new(name: 'SearchDiscoverableRegistryRecordsRequestNextTokenString')
     SearchDiscoverableRegistryRecordsRequestRegistryIdsList = Shapes::ListShape.new(name: 'SearchDiscoverableRegistryRecordsRequestRegistryIdsList')
     SearchDiscoverableRegistryRecordsResponse = Shapes::StructureShape.new(name: 'SearchDiscoverableRegistryRecordsResponse')
     SearchQuery = Shapes::StringShape.new(name: 'SearchQuery')
+    SearchType = Shapes::StringShape.new(name: 'SearchType')
+    Sha256Hash = Shapes::StringShape.new(name: 'Sha256Hash')
+    SignatureAgentCardAdditionalData = Shapes::StructureShape.new(name: 'SignatureAgentCardAdditionalData')
+    SignatureAgentCardDescriptor = Shapes::StructureShape.new(name: 'SignatureAgentCardDescriptor')
     String = Shapes::StringShape.new(name: 'String')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
     UnauthorizedException = Shapes::StructureShape.new(name: 'UnauthorizedException')
@@ -141,6 +149,7 @@ module Aws::AgentRegistry
     Descriptors.add_member(:custom, Shapes::ShapeRef.new(shape: CustomDescriptor, location_name: "custom"))
     Descriptors.add_member(:http, Shapes::ShapeRef.new(shape: HttpDescriptor, location_name: "http"))
     Descriptors.add_member(:agui, Shapes::ShapeRef.new(shape: AgUiDescriptor, location_name: "agui"))
+    Descriptors.add_member(:signature_agent_card, Shapes::ShapeRef.new(shape: SignatureAgentCardDescriptor, location_name: "signatureAgentCard"))
     Descriptors.struct_class = Types::Descriptors
 
     DiscoverableFilterValues.member = Shapes::ShapeRef.new(shape: FilterValue)
@@ -190,6 +199,10 @@ module Aws::AgentRegistry
     McpToolsDescriptor.add_member(:data_schema_version, Shapes::ShapeRef.new(shape: DataSchemaVersion, location_name: "dataSchemaVersion"))
     McpToolsDescriptor.struct_class = Types::McpToolsDescriptor
 
+    RegistryRecordArtifactDownload.add_member(:sha256, Shapes::ShapeRef.new(shape: Sha256Hash, location_name: "sha256"))
+    RegistryRecordArtifactDownload.add_member(:download_url, Shapes::ShapeRef.new(shape: PresignedDownloadUrl, location_name: "downloadUrl"))
+    RegistryRecordArtifactDownload.struct_class = Types::RegistryRecordArtifactDownload
+
     RegistryRecordFilter.add_member(:name, Shapes::ShapeRef.new(shape: RegistryRecordFilterName, required: true, location_name: "name"))
     RegistryRecordFilter.add_member(:values, Shapes::ShapeRef.new(shape: DiscoverableFilterValues, required: true, location_name: "values"))
     RegistryRecordFilter.struct_class = Types::RegistryRecordFilter
@@ -209,6 +222,7 @@ module Aws::AgentRegistry
     RegistryRecordSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "createdAt"))
     RegistryRecordSummary.add_member(:updated_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "updatedAt"))
     RegistryRecordSummary.add_member(:custom_metadata, Shapes::ShapeRef.new(shape: CustomMetadataDocument, location_name: "customMetadata"))
+    RegistryRecordSummary.add_member(:artifact, Shapes::ShapeRef.new(shape: RegistryRecordArtifactDownload, location_name: "artifact"))
     RegistryRecordSummary.struct_class = Types::RegistryRecordSummary
 
     RegistryRecordSummaryList.member = Shapes::ShapeRef.new(shape: RegistryRecordSummary)
@@ -226,12 +240,25 @@ module Aws::AgentRegistry
     SearchDiscoverableRegistryRecordsRequest.add_member(:registry_ids, Shapes::ShapeRef.new(shape: SearchDiscoverableRegistryRecordsRequestRegistryIdsList, required: true, location_name: "registryIds"))
     SearchDiscoverableRegistryRecordsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: SearchDiscoverableRegistryRecordsRequestMaxResultsInteger, location_name: "maxResults"))
     SearchDiscoverableRegistryRecordsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: MetadataFilterExpression, location_name: "filters"))
+    SearchDiscoverableRegistryRecordsRequest.add_member(:search_type, Shapes::ShapeRef.new(shape: SearchType, location_name: "searchType"))
+    SearchDiscoverableRegistryRecordsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: SearchDiscoverableRegistryRecordsRequestNextTokenString, location_name: "nextToken"))
     SearchDiscoverableRegistryRecordsRequest.struct_class = Types::SearchDiscoverableRegistryRecordsRequest
 
     SearchDiscoverableRegistryRecordsRequestRegistryIdsList.member = Shapes::ShapeRef.new(shape: RegistryIdentifier)
 
     SearchDiscoverableRegistryRecordsResponse.add_member(:registry_records, Shapes::ShapeRef.new(shape: RegistryRecordSummaryList, required: true, location_name: "registryRecords"))
+    SearchDiscoverableRegistryRecordsResponse.add_member(:search_type, Shapes::ShapeRef.new(shape: SearchType, location_name: "searchType"))
+    SearchDiscoverableRegistryRecordsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     SearchDiscoverableRegistryRecordsResponse.struct_class = Types::SearchDiscoverableRegistryRecordsResponse
+
+    SignatureAgentCardAdditionalData.add_member(:category, Shapes::ShapeRef.new(shape: BotCategory, location_name: "category"))
+    SignatureAgentCardAdditionalData.struct_class = Types::SignatureAgentCardAdditionalData
+
+    SignatureAgentCardDescriptor.add_member(:data, Shapes::ShapeRef.new(shape: DescriptorData, location_name: "data"))
+    SignatureAgentCardDescriptor.add_member(:data_schema_version, Shapes::ShapeRef.new(shape: DataSchemaVersion, location_name: "dataSchemaVersion"))
+    SignatureAgentCardDescriptor.add_member(:source, Shapes::ShapeRef.new(shape: DescriptorSource, location_name: "source"))
+    SignatureAgentCardDescriptor.add_member(:additional_data, Shapes::ShapeRef.new(shape: SignatureAgentCardAdditionalData, location_name: "additionalData"))
+    SignatureAgentCardDescriptor.struct_class = Types::SignatureAgentCardDescriptor
 
     ThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: NonBlankString, location_name: "message"))
     ThrottlingException.struct_class = Types::ThrottlingException
@@ -258,7 +285,7 @@ module Aws::AgentRegistry
 
       api.metadata = {
         "apiVersion" => "2025-12-01",
-        "auth" => ["aws.auth#sigv4"],
+        "auth" => ["aws.auth#sigv4", "smithy.api#httpBearerAuth"],
         "endpointPrefix" => "agent-registry",
         "protocol" => "rest-json",
         "protocols" => ["rest-json"],
@@ -315,6 +342,12 @@ module Aws::AgentRegistry
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
     end
 

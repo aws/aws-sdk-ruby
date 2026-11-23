@@ -1,6 +1,61 @@
 Unreleased Changes
 ------------------
 
+1.216.0 (2026-11-19)
+------------------
+
+* Feature - Increase function timeout limit to 30 minutes for Lambda Event Functions.
+
+1.215.0 (2026-11-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.214.0 (2026-11-17)
+------------------
+
+* Feature - AWS Lambda durable functions now supports pausing, resuming, and deleting durable executions with the new PauseDurableExecution, ResumeDurableExecution, and DeleteDurableExecution APIs.
+
+1.213.0 (2026-11-16)
+------------------
+
+* Feature - Adds support for GPU instances on Lambda Managed Instances in the CreateFunction and UpdateFunctionConfiguration APIs. Lambda Event Functions on Lambda Managed Instances can now set the accelerator memory using the new AcceleratorConfig parameter and run on capacity providers with GPU instances.
+
+1.212.0 (2026-11-13)
+------------------
+
+* Feature - Adds support for customer-managed runtimes in the CreateFunction and UpdateFunctionConfiguration APIs. Functions can now use a customer-managed runtime and receive its updates automatically, or pin to a specific runtime version using the existing runtime controls.
+
+1.211.0 (2026-11-11)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.210.0 (2026-11-10)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.209.0 (2026-11-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.208.0 (2026-11-06)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.207.0 (2026-11-04)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.206.0 (2026-10-30)
+------------------
+
+* Feature - Adds ConsumptionMode to SelfManagedKafkaEventSourceConfig, letting Lambda event source mappings consume self-managed Apache Kafka topics as a queue. Set ConsumptionMode to Queue when creating an event source mapping.
+
 1.205.0 (2026-10-29)
 ------------------
 

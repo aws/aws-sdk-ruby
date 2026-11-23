@@ -266,7 +266,8 @@ module Aws::APIGateway
     #     An integer representing the maximum number attempts that will be made for
     #     a single request, including the initial attempt.  For example,
     #     setting this value to 5 will result in a request being retried up to
-    #     4 times. Used in `standard` and `adaptive` retry modes.
+    #     4 times. Used in `standard` and `adaptive` retry modes. Defaults to 3,
+    #     except for DynamoDB and DynamoDB Streams, which default to 4.
     #
     #   @option options [String] :profile ("default")
     #     Used when loading credentials from the shared credentials file at `HOME/.aws/credentials`.
@@ -329,15 +330,15 @@ module Aws::APIGateway
     #     used by the default backoff function. This option is only used in the
     #     `legacy` retry mode.
     #
-    #   @option options [String] :retry_mode ("legacy")
+    #   @option options [String] :retry_mode ("standard")
     #     Specifies which retry algorithm to use. Values are:
     #
-    #     * `legacy` - The pre-existing retry behavior. This is the default
-    #       value if no retry mode is provided.
+    #     * `legacy` - The pre-existing retry behavior.
     #
     #     * `standard` - A standardized set of retry rules across the AWS SDKs.
     #       This includes support for retry quotas, which limit the number of
-    #       unsuccessful retries a client can make.
+    #       unsuccessful retries a client can make. This is the default value
+    #       if no retry mode is provided.
     #
     #     * `adaptive` - A retry mode that includes all the functionality of
     #       `standard` mode along with automatic client side throttling.
@@ -581,14 +582,17 @@ module Aws::APIGateway
     # @option params [required, String] :type
     #   The authorizer type. Valid values are `TOKEN` for a Lambda function
     #   using a single authorization token submitted in a custom header,
-    #   `REQUEST` for a Lambda function using incoming request parameters, and
-    #   `COGNITO_USER_POOLS` for using an Amazon Cognito user pool.
+    #   `REQUEST` for a Lambda function using incoming request parameters,
+    #   `COGNITO_USER_POOLS` for using an Amazon Cognito user pool, and `JWT`
+    #   for using a native JWT authorizer with the trusted issuers, audiences,
+    #   and signing algorithms that you declare.
     #
     # @option params [Array<String>] :provider_arns
     #   A list of the Amazon Cognito user pool ARNs for the
     #   `COGNITO_USER_POOLS` authorizer. Each element is of this format:
     #   `arn:aws:cognito-idp:{region}:{account_id}:userpool/{user_pool_id}`.
-    #   For a `TOKEN` or `REQUEST` authorizer, this is not defined.
+    #   For a `TOKEN` or `REQUEST` authorizer, this is not defined. This
+    #   property is not supported for `JWT` authorizers.
     #
     # @option params [String] :auth_type
     #   Optional customer-defined field, used in OpenAPI imports and exports
@@ -605,13 +609,15 @@ module Aws::APIGateway
     #   `path` indicates that the remaining substring in the URI should be
     #   treated as the path to the resource, including the initial `/`. For
     #   Lambda functions, this is usually of the form
-    #   `/2015-03-31/functions/[FunctionARN]/invocations`.
+    #   `/2015-03-31/functions/[FunctionARN]/invocations`. This property is
+    #   not supported for `JWT` authorizers.
     #
     # @option params [String] :authorizer_credentials
     #   Specifies the required credentials as an IAM role for API Gateway to
     #   invoke the authorizer. To specify an IAM role for API Gateway to
     #   assume, use the role's Amazon Resource Name (ARN). To use
-    #   resource-based permissions on the Lambda function, specify null.
+    #   resource-based permissions on the Lambda function, specify null. This
+    #   property is not supported for `JWT` authorizers.
     #
     # @option params [String] :identity_source
     #   The identity source for which authorization is requested. For a
@@ -633,7 +639,11 @@ module Aws::APIGateway
     #   otherwise, it returns a 401 Unauthorized response without calling the
     #   Lambda function. The valid value is a string of comma-separated
     #   mapping expressions of the specified request parameters. When the
-    #   authorization caching is not enabled, this property is optional.
+    #   authorization caching is not enabled, this property is optional. For a
+    #   `JWT` authorizer, this is required and must be a single request-header
+    #   mapping expression, `method.request.header.<name>`, for example,
+    #   `method.request.header.Authorization`. Query string parameters are not
+    #   supported, and there is no default.
     #
     # @option params [String] :identity_validation_expression
     #   A validation expression for the incoming identity token. For `TOKEN`
@@ -643,13 +653,17 @@ module Aws::APIGateway
     #   regular expression. It will invoke the authorizer's Lambda function
     #   when there is a match. Otherwise, it will return a 401 Unauthorized
     #   response without calling the Lambda function. The validation
-    #   expression does not apply to the `REQUEST` authorizer.
+    #   expression does not apply to the `REQUEST` or `JWT` authorizer.
     #
     # @option params [Integer] :authorizer_result_ttl_in_seconds
     #   The TTL in seconds of cached authorizer results. If it equals 0,
     #   authorization caching is disabled. If it is greater than 0, API
     #   Gateway will cache authorizer responses. If this field is not set, the
-    #   default value is 300. The maximum value is 3600, or 1 hour.
+    #   default value is 300. The maximum value is 3600, or 1 hour. This
+    #   property is not supported for `JWT` authorizers.
+    #
+    # @option params [Types::JwtConfigurationInput] :jwt_configuration
+    #   The configuration for a JWT authorizer. Required for JWT authorizers.
     #
     # @return [Types::Authorizer] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -663,13 +677,14 @@ module Aws::APIGateway
     #   * {Types::Authorizer#identity_source #identity_source} => String
     #   * {Types::Authorizer#identity_validation_expression #identity_validation_expression} => String
     #   * {Types::Authorizer#authorizer_result_ttl_in_seconds #authorizer_result_ttl_in_seconds} => Integer
+    #   * {Types::Authorizer#jwt_configuration #jwt_configuration} => Types::JwtConfiguration
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_authorizer({
     #     rest_api_id: "String", # required
     #     name: "String", # required
-    #     type: "TOKEN", # required, accepts TOKEN, REQUEST, COGNITO_USER_POOLS
+    #     type: "TOKEN", # required, accepts TOKEN, REQUEST, COGNITO_USER_POOLS, JWT
     #     provider_arns: ["ProviderARN"],
     #     auth_type: "String",
     #     authorizer_uri: "String",
@@ -677,13 +692,30 @@ module Aws::APIGateway
     #     identity_source: "String",
     #     identity_validation_expression: "String",
     #     authorizer_result_ttl_in_seconds: 1,
+    #     jwt_configuration: {
+    #       issuers: [ # required
+    #         {
+    #           issuer: "String", # required
+    #           audiences: ["String"], # required
+    #           additional_claims: [
+    #             {
+    #               claim_name: "String", # required
+    #               format: "SINGLE_STRING", # required, accepts SINGLE_STRING
+    #               required: false,
+    #               expected_values: ["String"],
+    #             },
+    #           ],
+    #         },
+    #       ],
+    #       default_algorithms: ["RS256"], # required, accepts RS256, RS384, RS512, ES256, ES384, ES512
+    #     },
     #   })
     #
     # @example Response structure
     #
     #   resp.id #=> String
     #   resp.name #=> String
-    #   resp.type #=> String, one of "TOKEN", "REQUEST", "COGNITO_USER_POOLS"
+    #   resp.type #=> String, one of "TOKEN", "REQUEST", "COGNITO_USER_POOLS", "JWT"
     #   resp.provider_arns #=> Array
     #   resp.provider_arns[0] #=> String
     #   resp.auth_type #=> String
@@ -692,6 +724,19 @@ module Aws::APIGateway
     #   resp.identity_source #=> String
     #   resp.identity_validation_expression #=> String
     #   resp.authorizer_result_ttl_in_seconds #=> Integer
+    #   resp.jwt_configuration.issuers #=> Array
+    #   resp.jwt_configuration.issuers[0].issuer #=> String
+    #   resp.jwt_configuration.issuers[0].audiences #=> Array
+    #   resp.jwt_configuration.issuers[0].audiences[0] #=> String
+    #   resp.jwt_configuration.issuers[0].additional_claims #=> Array
+    #   resp.jwt_configuration.issuers[0].additional_claims[0].claim_name #=> String
+    #   resp.jwt_configuration.issuers[0].additional_claims[0].format #=> String, one of "SINGLE_STRING"
+    #   resp.jwt_configuration.issuers[0].additional_claims[0].required #=> Boolean
+    #   resp.jwt_configuration.issuers[0].additional_claims[0].expected_values #=> Array
+    #   resp.jwt_configuration.issuers[0].additional_claims[0].expected_values[0] #=> String
+    #   resp.jwt_configuration.issuers[0].jwks_uri #=> String
+    #   resp.jwt_configuration.default_algorithms #=> Array
+    #   resp.jwt_configuration.default_algorithms[0] #=> String, one of "RS256", "RS384", "RS512", "ES256", "ES384", "ES512"
     #
     # @overload create_authorizer(params = {})
     # @param [Hash] params ({})
@@ -2016,10 +2061,11 @@ module Aws::APIGateway
 
     # Deletes the DomainNameAccessAssociation resource.
     #
-    # Only the AWS account that created the DomainNameAccessAssociation
-    # resource can delete it. To stop an access association source in
-    # another AWS account from accessing your private custom domain name,
-    # use the RejectDomainNameAccessAssociation operation.
+    # Only the Amazon Web Services account that created the
+    # DomainNameAccessAssociation resource can delete it. To stop an access
+    # association source in another Amazon Web Services account from
+    # accessing your private custom domain name, use the
+    # RejectDomainNameAccessAssociation operation.
     #
     # @option params [required, String] :domain_name_access_association_arn
     #   The ARN of the domain name access association resource.
@@ -2622,6 +2668,7 @@ module Aws::APIGateway
     #   * {Types::Authorizer#identity_source #identity_source} => String
     #   * {Types::Authorizer#identity_validation_expression #identity_validation_expression} => String
     #   * {Types::Authorizer#authorizer_result_ttl_in_seconds #authorizer_result_ttl_in_seconds} => Integer
+    #   * {Types::Authorizer#jwt_configuration #jwt_configuration} => Types::JwtConfiguration
     #
     # @example Request syntax with placeholder values
     #
@@ -2634,7 +2681,7 @@ module Aws::APIGateway
     #
     #   resp.id #=> String
     #   resp.name #=> String
-    #   resp.type #=> String, one of "TOKEN", "REQUEST", "COGNITO_USER_POOLS"
+    #   resp.type #=> String, one of "TOKEN", "REQUEST", "COGNITO_USER_POOLS", "JWT"
     #   resp.provider_arns #=> Array
     #   resp.provider_arns[0] #=> String
     #   resp.auth_type #=> String
@@ -2643,6 +2690,19 @@ module Aws::APIGateway
     #   resp.identity_source #=> String
     #   resp.identity_validation_expression #=> String
     #   resp.authorizer_result_ttl_in_seconds #=> Integer
+    #   resp.jwt_configuration.issuers #=> Array
+    #   resp.jwt_configuration.issuers[0].issuer #=> String
+    #   resp.jwt_configuration.issuers[0].audiences #=> Array
+    #   resp.jwt_configuration.issuers[0].audiences[0] #=> String
+    #   resp.jwt_configuration.issuers[0].additional_claims #=> Array
+    #   resp.jwt_configuration.issuers[0].additional_claims[0].claim_name #=> String
+    #   resp.jwt_configuration.issuers[0].additional_claims[0].format #=> String, one of "SINGLE_STRING"
+    #   resp.jwt_configuration.issuers[0].additional_claims[0].required #=> Boolean
+    #   resp.jwt_configuration.issuers[0].additional_claims[0].expected_values #=> Array
+    #   resp.jwt_configuration.issuers[0].additional_claims[0].expected_values[0] #=> String
+    #   resp.jwt_configuration.issuers[0].jwks_uri #=> String
+    #   resp.jwt_configuration.default_algorithms #=> Array
+    #   resp.jwt_configuration.default_algorithms[0] #=> String, one of "RS256", "RS384", "RS512", "ES256", "ES384", "ES512"
     #
     # @overload get_authorizer(params = {})
     # @param [Hash] params ({})
@@ -2682,7 +2742,7 @@ module Aws::APIGateway
     #   resp.items #=> Array
     #   resp.items[0].id #=> String
     #   resp.items[0].name #=> String
-    #   resp.items[0].type #=> String, one of "TOKEN", "REQUEST", "COGNITO_USER_POOLS"
+    #   resp.items[0].type #=> String, one of "TOKEN", "REQUEST", "COGNITO_USER_POOLS", "JWT"
     #   resp.items[0].provider_arns #=> Array
     #   resp.items[0].provider_arns[0] #=> String
     #   resp.items[0].auth_type #=> String
@@ -2691,6 +2751,19 @@ module Aws::APIGateway
     #   resp.items[0].identity_source #=> String
     #   resp.items[0].identity_validation_expression #=> String
     #   resp.items[0].authorizer_result_ttl_in_seconds #=> Integer
+    #   resp.items[0].jwt_configuration.issuers #=> Array
+    #   resp.items[0].jwt_configuration.issuers[0].issuer #=> String
+    #   resp.items[0].jwt_configuration.issuers[0].audiences #=> Array
+    #   resp.items[0].jwt_configuration.issuers[0].audiences[0] #=> String
+    #   resp.items[0].jwt_configuration.issuers[0].additional_claims #=> Array
+    #   resp.items[0].jwt_configuration.issuers[0].additional_claims[0].claim_name #=> String
+    #   resp.items[0].jwt_configuration.issuers[0].additional_claims[0].format #=> String, one of "SINGLE_STRING"
+    #   resp.items[0].jwt_configuration.issuers[0].additional_claims[0].required #=> Boolean
+    #   resp.items[0].jwt_configuration.issuers[0].additional_claims[0].expected_values #=> Array
+    #   resp.items[0].jwt_configuration.issuers[0].additional_claims[0].expected_values[0] #=> String
+    #   resp.items[0].jwt_configuration.issuers[0].jwks_uri #=> String
+    #   resp.items[0].jwt_configuration.default_algorithms #=> Array
+    #   resp.items[0].jwt_configuration.default_algorithms[0] #=> String, one of "RS256", "RS384", "RS512", "ES256", "ES384", "ES512"
     #
     # @overload get_authorizers(params = {})
     # @param [Hash] params ({})
@@ -3238,7 +3311,8 @@ module Aws::APIGateway
     #   The owner of the domain name access association. Use `SELF` to only
     #   list the domain name access associations owned by your own account.
     #   Use `OTHER_ACCOUNTS` to list the domain name access associations with
-    #   your private custom domain names that are owned by other AWS accounts.
+    #   your private custom domain names that are owned by other Amazon Web
+    #   Services accounts.
     #
     # @return [Types::DomainNameAccessAssociations] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5268,7 +5342,7 @@ module Aws::APIGateway
     #   The response transfer mode of the integration.
     #
     # @option params [String] :integration_target
-    #   The ALB or NLB listener to send the request to.
+    #   The ALB or NLB ARN to send the request to.
     #
     # @return [Types::Integration] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5455,9 +5529,9 @@ module Aws::APIGateway
     #
     # @option params [required, String] :authorization_type
     #   The method's authorization type. Valid values are `NONE` for open
-    #   access, `AWS_IAM` for using AWS IAM permissions, `CUSTOM` for using a
-    #   custom authorizer, or `COGNITO_USER_POOLS` for using a Cognito user
-    #   pool.
+    #   access, `AWS_IAM` for using Amazon Web Services IAM permissions,
+    #   `CUSTOM` for using a custom authorizer, `COGNITO_USER_POOLS` for using
+    #   a Cognito user pool, or `JWT` for using a JWT authorizer.
     #
     # @option params [String] :authorizer_id
     #   Specifies the identifier of an Authorizer to use on this Method, if
@@ -5501,7 +5575,9 @@ module Aws::APIGateway
     #   matches a claimed scope in the access token. Otherwise, the invocation
     #   is not authorized. When the method scope is configured, the client
     #   must provide an access token instead of an identity token for
-    #   authorization purposes.
+    #   authorization purposes. The scopes are also used with a `JWT`
+    #   authorizer. When scopes are configured, the `scope` (or `scp`) claim
+    #   of the token must contain at least one of the configured scopes.
     #
     # @return [Types::Method] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5684,9 +5760,9 @@ module Aws::APIGateway
     # @option params [Hash<String,String>] :parameters
     #   Custom header parameters as part of the request. For example, to
     #   exclude DocumentationParts from an imported API, set
-    #   `ignore=documentation` as a `parameters` value, as in the AWS CLI
-    #   command of `aws apigateway import-rest-api --parameters
-    #   ignore=documentation --body 'file:///path/to/imported-api-body.json'`.
+    #   `ignore=documentation` as a `parameters` value, as in the CLI command
+    #   of `aws apigateway import-rest-api --parameters ignore=documentation
+    #   --body 'file:///path/to/imported-api-body.json'`.
     #
     # @option params [required, String, StringIO, File] :body
     #   The PUT request body containing external API definitions. Currently,
@@ -5765,9 +5841,10 @@ module Aws::APIGateway
     # name.
     #
     # To reject a domain name access association with an access association
-    # source in another AWS account, use this operation. To remove a domain
-    # name access association with an access association source in your own
-    # account, use the DeleteDomainNameAccessAssociation operation.
+    # source in another Amazon Web Services account, use this operation. To
+    # remove a domain name access association with an access association
+    # source in your own account, use the DeleteDomainNameAccessAssociation
+    # operation.
     #
     # @option params [required, String] :domain_name_access_association_arn
     #   The ARN of the domain name access association resource.
@@ -6120,7 +6197,12 @@ module Aws::APIGateway
       req.send_request(options)
     end
 
-    # Updates an existing Authorizer resource.
+    # Updates an existing Authorizer resource. For a `JWT` authorizer, the
+    # only JWT patch operation is `replace` on the path `/jwtConfiguration`.
+    # Its value is the complete configuration as a JSON string in the
+    # `JwtConfigurationInput` shape. This replaces the entire configuration;
+    # nothing from the previous configuration is retained. A `replace`
+    # operation on the path `/type` is supported in both directions.
     #
     # @option params [required, String] :rest_api_id
     #   The string identifier of the associated RestApi.
@@ -6148,6 +6230,7 @@ module Aws::APIGateway
     #   * {Types::Authorizer#identity_source #identity_source} => String
     #   * {Types::Authorizer#identity_validation_expression #identity_validation_expression} => String
     #   * {Types::Authorizer#authorizer_result_ttl_in_seconds #authorizer_result_ttl_in_seconds} => Integer
+    #   * {Types::Authorizer#jwt_configuration #jwt_configuration} => Types::JwtConfiguration
     #
     # @example Request syntax with placeholder values
     #
@@ -6168,7 +6251,7 @@ module Aws::APIGateway
     #
     #   resp.id #=> String
     #   resp.name #=> String
-    #   resp.type #=> String, one of "TOKEN", "REQUEST", "COGNITO_USER_POOLS"
+    #   resp.type #=> String, one of "TOKEN", "REQUEST", "COGNITO_USER_POOLS", "JWT"
     #   resp.provider_arns #=> Array
     #   resp.provider_arns[0] #=> String
     #   resp.auth_type #=> String
@@ -6177,6 +6260,19 @@ module Aws::APIGateway
     #   resp.identity_source #=> String
     #   resp.identity_validation_expression #=> String
     #   resp.authorizer_result_ttl_in_seconds #=> Integer
+    #   resp.jwt_configuration.issuers #=> Array
+    #   resp.jwt_configuration.issuers[0].issuer #=> String
+    #   resp.jwt_configuration.issuers[0].audiences #=> Array
+    #   resp.jwt_configuration.issuers[0].audiences[0] #=> String
+    #   resp.jwt_configuration.issuers[0].additional_claims #=> Array
+    #   resp.jwt_configuration.issuers[0].additional_claims[0].claim_name #=> String
+    #   resp.jwt_configuration.issuers[0].additional_claims[0].format #=> String, one of "SINGLE_STRING"
+    #   resp.jwt_configuration.issuers[0].additional_claims[0].required #=> Boolean
+    #   resp.jwt_configuration.issuers[0].additional_claims[0].expected_values #=> Array
+    #   resp.jwt_configuration.issuers[0].additional_claims[0].expected_values[0] #=> String
+    #   resp.jwt_configuration.issuers[0].jwks_uri #=> String
+    #   resp.jwt_configuration.default_algorithms #=> Array
+    #   resp.jwt_configuration.default_algorithms[0] #=> String, one of "RS256", "RS384", "RS512", "ES256", "ES384", "ES512"
     #
     # @overload update_authorizer(params = {})
     # @param [Hash] params ({})
@@ -7515,7 +7611,7 @@ module Aws::APIGateway
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-apigateway'
-      context[:gem_version] = '1.145.0'
+      context[:gem_version] = '1.153.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

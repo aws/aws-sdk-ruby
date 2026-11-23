@@ -2,21 +2,30 @@
   "version": "2.0",
   "service": "<p>Amazon Web Services Agent Registry is a managed catalog for publishing and discovering resources such as MCP servers, agents, and agent skills. Agent Registry Control is its control-plane API: use it to create and manage registries and the records they contain, configure discovery and authorization, govern record approval and curation workflows, and manage automatic detection of resources. Data-plane search and MCP invocation operations are provided by the companion Agent Registry API.</p>",
   "operations": {
+    "AssociatePublisher": "<p>Associate a registry record with a publisher and assign the record a public identifier under the publisher's domain. The registry record must be APPROVED and the publisher must be ACTIVE. A registry record can have only one publisher association. The new association starts in PENDING_APPROVAL until a curator approves or rejects it. A ConflictException (HTTP 409) means the publisher is not ACTIVE yet, the registry record already has an association, or another registry record already holds the public identifier. To retry safely, repeat the request with the same clientToken; a retry returns the original association. If the publisher has reached its association quota, the request fails with ServiceQuotaExceededException (HTTP 402). Remove an unused association or request a quota increase.</p>",
+    "CreatePublisher": "<p>Create a publisher for a domain you control. The publisher starts in ACTION_REQUIRED, and the response includes a domainChallenge. To verify the domain, create a DNS TXT record with the challenge's recordName and recordValue. When the registry finds the record, the publisher becomes ACTIVE and you can associate registry records with it. Your account can have one publisher per domain. Creating a second publisher for the same domain fails with ConflictException unless the request repeats the original clientToken, which returns the existing publisher. The request also fails with ConflictException when another account has already verified the domain. If your account has reached its Publisher quota, the request fails with ServiceQuotaExceededException (HTTP 402). Delete an unused Publisher or request a quota increase.</p>",
     "CreateRegistry": "<p>Creates a new registry, a catalog that organizes registry records and defines their discovery authorization and record approval behavior. Creation is asynchronous: the registry begins in the CREATING status and becomes usable once it reaches READY.</p>",
-    "CreateRegistryRecord": "<p>Creates a registry record within a registry. A registry record describes a discoverable resource, such as an MCP server, an agent, an agent skill, or a custom resource. Creation is asynchronous: the record is returned with the CREATING status while it is processed.</p>",
+    "CreateRegistryRecord": "<p>Creates a registry record within a registry. A registry record describes a discoverable resource, such as an MCP server, an agent, an agent skill, or a custom resource. For an agent skill, you can upload a skill package in <code>artifact</code>, or synchronize the skill from an Amazon S3 or GitHub source. Creation is asynchronous: the operation returns the record with the <code>CREATING</code> status while the registry processes it. If a GitHub user must first authorize access to the source, the operation returns the record with the <code>CREATE_PENDING_AUTH</code> status instead.</p>",
+    "DeletePublisher": "<p>Delete a publisher. A successful call returns an empty response. You can't delete a publisher that has registry record associations; disassociate every registry record from it first. The request fails with ConflictException while the publisher has associations or another delete is in progress. Association removals can take a few seconds to be reflected, so a delete that follows a disassociation can briefly fail with ConflictException; retry after a short wait. If the publisher ARN names your account and the publisher doesn't exist, the request fails with ResourceNotFoundException.</p>",
     "DeleteRegistry": "<p>Deletes a registry. Deletion is asynchronous: the registry transitions to the DELETING status and is removed along with its registry records.</p>",
     "DeleteRegistryRecord": "<p>Deletes a registry record</p>",
+    "DisassociatePublisher": "<p>Remove a registry record's publisher association and release its public identifier. A successful call returns an empty response. Disassociating a registry record that has no association succeeds. If another account created the association, the request fails with AccessDeniedException.</p>",
+    "GetPublisher": "<p>Get a publisher, including its verification status and the DNS challenge for its domain. If the publisher ARN names your account and the publisher doesn't exist, the request fails with ResourceNotFoundException.</p>",
     "GetRegistry": "<p>Gets a registry by identifier (ARN or ID)</p>",
-    "GetRegistryRecord": "<p>Retrieves the details of a registry record</p>",
+    "GetRegistryRecord": "<p>Retrieves the details of a registry record. The response describes the record's latest revision, including a revision that isn't approved yet. For a skill record, the operation also returns the skill package in <code>artifact</code> and the source that the registry last synchronized the skill from in <code>synchronizedSource</code>.</p>",
+    "ListPublisherAssociations": "<p>List the registry record associations your account created. Pass publisherArn to list only the associations for that publisher; omit it to list associations across all publishers. Results are eventually consistent, so an association you just created or removed can take a few seconds to appear in or disappear from the list.</p>",
+    "ListPublishers": "<p>List the publishers your account owns, followed by the ACTIVE publishers shared with your account.</p>",
     "ListRegistries": "<p>Lists the registries in the caller's account and Region, with optional filtering by status and discovery authorizer type</p>",
     "ListRegistryRecords": "<p>Lists the registry records within a registry, with optional filtering by name, status, and record type</p>",
     "ListTagsForResource": "<p>Lists the tags associated with the specified Amazon Web Services Agent Registry resource. Returns the current tag key-value pairs on the resource.</p>",
     "SubmitRegistryRecordForApproval": "<p>Submits a DRAFT registry record for approval, moving it into the registry's approval workflow. Depending on the registry's approval configuration, the record is either auto-approved or set to PENDING_APPROVAL for a curator to approve or reject.</p>",
     "TagResource": "<p>Adds or overwrites one or more tags for the specified Amazon Web Services Agent Registry resource. Tags are key-value pairs that you can use to categorize and manage Amazon Web Services resources. If a tag with the same key already exists on the resource, the service replaces its value with the value you specify.</p>",
     "UntagResource": "<p>Removes one or more tags from the specified Amazon Web Services Agent Registry resource. The operation removes only the tags whose keys you supply; other tags on the resource remain unchanged.</p>",
+    "UpdatePublisherAssociationApprovalStatus": "<p>Record the curator's decision (APPROVED or REJECTED) on a registry record's publisher association. A successful call returns an empty response. Repeating the decision the association already holds changes nothing; the same approvalStatus with a different approvalStatusReason updates the reason. If the caller has no publisher association for the registry record, the request fails with AccessDeniedException. A ConflictException (HTTP 409) means the association is not in a state that accepts the decision (e.g. not PENDING_APPROVAL/APPROVED/REJECTED) or it changed while the request was being applied; read it again before deciding whether to resubmit.</p>",
     "UpdateRegistry": "<p>Updates an existing registry. This operation uses PATCH semantics: specify only the fields you want to change, and omit the rest to leave them unchanged. Updates are applied asynchronously and the registry transitions to the UPDATING status while they are processed.</p>",
-    "UpdateRegistryRecord": "<p>Updates a registry record. The update is asynchronous: the record is returned with the UPDATING status while it is processed. Fields that use update wrappers follow PATCH semantics: omit the field to leave it unchanged.</p>",
-    "UpdateRegistryRecordStatus": "<p>Updates the status of a registry record as part of the registry's curation workflow, for example to approve or reject a record that is pending approval, or to deprecate an approved record so that it is no longer discoverable</p>"
+    "UpdateRegistryRecord": "<p>Updates a registry record. The update is asynchronous: the operation returns the record with the <code>UPDATING</code> status while the registry processes it. If a GitHub user must first authorize access to the record's skill source, the operation returns the record with the <code>UPDATE_PENDING_AUTH</code> status instead. Fields that use update wrappers follow PATCH semantics: omit the field to leave it unchanged.</p>",
+    "UpdateRegistryRecordStatus": "<p>Updates the status of a registry record as part of the registry's curation workflow, for example to approve or reject a record that is pending approval, or to deprecate an approved record so that it is no longer discoverable</p>",
+    "ValidatePublisher": "<p>Restart domain verification for a publisher in FAILED or SUSPENDED. The publisher returns to ACTION_REQUIRED with a new domainChallenge, which the response includes. Update the DNS TXT record with the new recordValue; the previous value no longer verifies the domain. The request fails with ConflictException when the publisher is ACTIVE, verification is already in progress (ACTION_REQUIRED), or the publisher is being deleted.</p>"
   },
   "shapes": {
     "A2aAgentCardDescriptor": {
@@ -66,7 +75,7 @@
       }
     },
     "AgentSkillsAdditionalData": {
-      "base": "<p>Additional data associated with an agent skills definition descriptor.</p>",
+      "base": "<p>Additional data associated with an agent skills definition descriptor: the skill's SKILL.md and the source that the registry synchronizes the skill from. A record synchronizes from one source at most, either <code>skillMd.source</code> for SKILL.md only or <code>skillPackage.source</code> for the full skill package. When the record has a skill package or a synchronized source, the registry sets <code>skillMd.data</code> from the SKILL.md in that package or source.</p>",
       "refs": {
         "AgentSkillsDefinitionDescriptor$additionalData": "<p>Additional data associated with the agent skills definition descriptor.</p>"
       }
@@ -81,6 +90,27 @@
       "base": "<p>Markdown-format descriptor containing an agent skills document.</p>",
       "refs": {
         "AgentSkillsAdditionalData$skillMd": "<p>The markdown skill content associated with an agent skills definition.</p>"
+      }
+    },
+    "AgentSkillsPackageDescriptor": {
+      "base": "<p>Descriptor that names the source that the registry synchronizes a full skill package from. It holds only the source. The record's <code>artifact</code> member returns the package that the registry reads from this source.</p>",
+      "refs": {
+        "AgentSkillsAdditionalData$skillPackage": "<p>The source that the registry synchronizes the full skill package from. The registry validates and stores the package, sets <code>skillMd.data</code> from its SKILL.md, and returns the package in the <code>artifact</code> member of <code>GetRegistryRecord</code>. You can't set both this source and <code>skillMd.source</code>.</p>",
+        "UpdatedAgentSkillsPackageDescriptor$optionalValue": "<p>The value to set for this field. Omit the wrapper to leave the field unchanged.</p>"
+      }
+    },
+    "AgentSkillsRepositoryProvider": {
+      "base": "<p>The repository provider of a skill source. <code>GITHUB</code> covers GitHub.com, GitHub Enterprise Cloud with data residency (<code>*.ghe.com</code>), and GitHub Enterprise Server hosts that are reachable from the internet.</p>",
+      "refs": {
+        "AgentSkillsAdditionalData$repositoryProvider": "<p>The repository provider of the record's skill source. Set it to <code>GITHUB</code> when <code>skillMd.source</code> or <code>skillPackage.source</code> is a GitHub folder URL. The registry treats an <code>https://</code> source as a GitHub source only when this member is set. Don't set it for an Amazon S3 source.</p>",
+        "UpdatedAgentSkillsRepositoryProvider$optionalValue": "<p>The value to set for this field. Omit the wrapper to leave the field unchanged.</p>"
+      }
+    },
+    "AgentSkillsSourceConfiguration": {
+      "base": "<p>The provider-specific settings of a skill source. Specify the member that matches the source's provider, such as <code>s3</code> for an Amazon S3 source.</p>",
+      "refs": {
+        "AgentSkillsAdditionalData$sourceConfiguration": "<p>The provider-specific settings of the record's skill source. For an Amazon S3 source, <code>s3.bucketOwnerAccountId</code> specifies the account that owns the source bucket.</p>",
+        "UpdatedAgentSkillsSourceConfiguration$optionalValue": "<p>The value to set for this field. Omit the wrapper to leave the field unchanged.</p>"
       }
     },
     "AllowedAudience": {
@@ -126,6 +156,46 @@
         "GetRegistryResponse$approvalConfiguration": "<p>Approval configuration for registry records</p>",
         "UpdateRegistryResponse$approvalConfiguration": "<p>Approval configuration for registry records</p>",
         "UpdatedApprovalConfiguration$optionalValue": "<p>The value to set for this field. Omit the wrapper to leave the field unchanged.</p>"
+      }
+    },
+    "ArtifactContent": {
+      "base": "<p>The bytes of a skill package ZIP archive, up to 5 MiB (5,242,880 bytes) before base64 encoding.</p>",
+      "refs": {
+        "RegistryRecordArtifactUpload$content": "<p>The ZIP archive of the skill package, up to 5 MiB (5,242,880 bytes). In a JSON request, the content is base64-encoded. The Amazon Web Services SDKs encode it for you.</p>"
+      }
+    },
+    "AssociatePublisherRequest": {
+      "base": null,
+      "refs": {}
+    },
+    "AssociatePublisherResponse": {
+      "base": "<p>The new association between the registry record and the publisher, including the record's public identifier. A retry with the original clientToken returns the original association.</p>",
+      "refs": {}
+    },
+    "AssociationApprovalStatus": {
+      "base": "<p>The curator's decision on a Record's Publisher association.</p>",
+      "refs": {
+        "UpdatePublisherAssociationApprovalStatusRequest$approvalStatus": null
+      }
+    },
+    "AssociationStatus": {
+      "base": "<p>The Record&lt;-&gt;Publisher association's status.</p>",
+      "refs": {
+        "AssociatePublisherResponse$status": null,
+        "PublisherAssociation$status": null
+      }
+    },
+    "AuthorizationAttemptId": {
+      "base": "<p>The identifier of an OAuth 2.0 authorization attempt.</p>",
+      "refs": {
+        "OAuth2AuthorizationData$authorizationAttemptId": "<p>The identifier of this authorization attempt.</p>"
+      }
+    },
+    "AuthorizationData": {
+      "base": "<p>The authorization that a user must complete before a registry record can synchronize from its source. Only <code>CreateRegistryRecord</code> and <code>UpdateRegistryRecord</code> return it. <code>GetRegistryRecord</code> and <code>ListRegistryRecords</code> never do.</p>",
+      "refs": {
+        "CreateRegistryRecordResponse$authorizationData": "<p>The authorization that a GitHub user must complete before the record's synchronization starts. Present only in this response, and only while the status is <code>CREATE_PENDING_AUTH</code>. If the status is <code>CREATE_PENDING_AUTH</code> but this member is absent, call <code>UpdateRegistryRecord</code> with <code>triggerSynchronization</code> to get a new authorization link.</p>",
+        "UpdateRegistryRecordResponse$authorizationData": "<p>The authorization that a GitHub user must complete before the record's synchronization starts. Present only in this response, and only while the status is <code>UPDATE_PENDING_AUTH</code>. If the status is <code>UPDATE_PENDING_AUTH</code> but this member is absent, call <code>UpdateRegistryRecord</code> again with <code>triggerSynchronization</code> to get a new authorization link.</p>"
       }
     },
     "AuthorizerConfiguration": {
@@ -189,8 +259,40 @@
         "AutoDetectionConfiguration$enabled": "<p>Specifies whether auto-detection is requested for the registry. Setting this to <code>true</code> is necessary but not sufficient for auto-detection to become active; the preconditions of the configured scope must also be met.</p>",
         "GetRegistryRecordResponse$createdByAutoDetection": "<p>Specifies whether the registry record was created by auto-detection. <code>true</code> indicates the record was automatically created by the service based on the registry's auto-detection configuration; <code>false</code> indicates the record was created through a control-plane API call.</p>",
         "RegistryRecordSummary$createdByAutoDetection": "<p>Specifies whether the registry record was created by auto-detection. <code>true</code> indicates the record was automatically created by the service based on the registry's auto-detection configuration; <code>false</code> indicates the record was created through a control-plane API call.</p>",
-        "UpdateRegistryRecordRequest$triggerSynchronization": "<p>Whether to trigger synchronization of the record's descriptor content from its source</p>",
+        "UpdateRegistryRecordRequest$triggerSynchronization": "<p>Specifies whether to synchronize the record's descriptor content from its source. For a skill record, the registry reads the stored <code>skillMd.source</code> or <code>skillPackage.source</code> again, because it doesn't watch the source for changes. For a GitHub source, the operation also returns a new authorization link when one is needed. An update that sets a different skill source starts a synchronization even if you omit this member.</p>",
+        "UpdateRegistryRecordRequest$forceAuthentication": "<p>Specifies whether to ask a GitHub user to authorize access again, even when the current authorization still works, for example to use a different GitHub account. You can use it only together with <code>triggerSynchronization</code>, for a GitHub source whose credential provider uses the <code>AUTHORIZATION_CODE</code> grant. The new authorization also replaces the one that the same IAM principal's other records in the registry use for the same host, credential provider, scopes, and custom parameters.</p>",
         "UpdateRegistryRecordResponse$createdByAutoDetection": "<p>Specifies whether the registry record was created by auto-detection. <code>true</code> indicates the record was automatically created by the service based on the registry's auto-detection configuration; <code>false</code> indicates the record was created through a control-plane API call.</p>"
+      }
+    },
+    "BotCategory": {
+      "base": "<p>The category that describes a web bot's purpose. The categories follow AWS WAF Bot Control bot categories. Valid values:</p> <ul> <li> <p> <code>advertising</code> - Bots used for advertising, such as third-party ad services that access a website programmatically.</p> </li> <li> <p> <code>archiver</code> - Bots that crawl the web and capture content to create archives.</p> </li> <li> <p> <code>content_fetcher</code> - Bots that visit a website on behalf of a user to fetch content, such as RSS feeds, or to verify content.</p> </li> <li> <p> <code>email_client</code> - Bots that check links in emails, such as those run by email providers to flag suspicious emails.</p> </li> <li> <p> <code>http_library</code> - Requests generated by the HTTP libraries of programming languages, such as API clients.</p> </li> <li> <p> <code>link_checker</code> - Bots that check for broken links.</p> </li> <li> <p> <code>miscellaneous</code> - Bots that don't match another category.</p> </li> <li> <p> <code>monitoring</code> - Bots that periodically access a website to monitor performance and uptime.</p> </li> <li> <p> <code>page_preview</code> - Bots that generate page and link previews when content is shared on messaging, social media, or collaboration tools.</p> </li> <li> <p> <code>scraping_framework</code> - Bots from web scraping frameworks that automate crawling and extracting website content.</p> </li> <li> <p> <code>search_engine</code> - Bots that crawl websites to index content for search engine results.</p> </li> <li> <p> <code>security</code> - Bots that scan web applications for vulnerabilities or perform security audits.</p> </li> <li> <p> <code>seo</code> - Bots that crawl a website to help improve its search engine rankings.</p> </li> <li> <p> <code>social_media</code> - Bots that social media platforms use to provide content summaries when users share content.</p> </li> <li> <p> <code>ai_training</code> - AI bots that collect content to train AI models.</p> </li> <li> <p> <code>ai_search</code> - AI bots that retrieve content to answer AI search queries.</p> </li> <li> <p> <code>ai_assistant</code> - AI bots that access content on behalf of a user's AI assistant or agent.</p> </li> <li> <p> <code>ai_content_optimization</code> - AI bots that analyze content to optimize it for AI-generated results.</p> </li> </ul>",
+      "refs": {
+        "SignatureAgentCardAdditionalData$category": "<p>The bot category that describes the purpose of the web bot identified by the signature agent card descriptor.</p>",
+        "UpdatedBotCategory$optionalValue": "<p>The value to set for this field. Omit the wrapper to leave the field unchanged.</p>"
+      }
+    },
+    "Category": {
+      "base": "<p>A single category token applied to a public identifier: lower-case letters, digits, <code>.</code>, <code>_</code> and <code>-</code>.</p>",
+      "refs": {
+        "CategoryList$member": null
+      }
+    },
+    "CategoryList": {
+      "base": "<p>Ordered categories/hierarchy applied to a public identifier. Bounded to keep identifiers small.</p>",
+      "refs": {
+        "AssociatePublisherRequest$categories": "<p>Optional categorization/hierarchy applied to the public identifier.</p>"
+      }
+    },
+    "ChallengeRecordName": {
+      "base": null,
+      "refs": {
+        "DomainChallenge$recordName": "<p>The name of the DNS TXT record to create, such as <code>_acme-challenge.example.com</code>.</p>"
+      }
+    },
+    "ChallengeRecordValue": {
+      "base": null,
+      "refs": {
+        "DomainChallenge$recordValue": "<p>The value to publish in the DNS TXT record. A new value is issued each time verification restarts, and earlier values no longer verify the domain.</p>"
       }
     },
     "ClaimMatchOperatorType": {
@@ -208,12 +310,22 @@
     "ClientToken": {
       "base": "<p>Client specified token used for idempotency checks</p>",
       "refs": {
+        "AssociatePublisherRequest$clientToken": "<p>Optional client-provided idempotency token. Retries carrying the same token return the originally-created association instead of creating a duplicate.</p>",
+        "CreatePublisherRequest$clientToken": "<p>Optional client-provided idempotency token. Retries of the same Create request carrying the same token return the originally-created resource instead of creating a duplicate. Forwarded to BelfryGlobalCP. Optional and backward-compatible.</p>",
         "CreateRegistryRecordRequest$clientToken": "<p>Client token for idempotency</p>",
         "CreateRegistryRequest$clientToken": "<p>A unique, case-sensitive identifier to ensure that the operation completes no more than one time. If this token matches a previous request, the service ignores the request, but does not return an error.</p>"
       }
     },
     "ConflictException": {
       "base": "<p>The request conflicts with the current state of the resource.</p>",
+      "refs": {}
+    },
+    "CreatePublisherRequest": {
+      "base": null,
+      "refs": {}
+    },
+    "CreatePublisherResponse": {
+      "base": "<p>The new publisher, in ACTION_REQUIRED, with the domainChallenge to publish as a DNS TXT record. A retry with the original clientToken returns the existing publisher.</p>",
       "refs": {}
     },
     "CreateRegistryRecordRequest": {
@@ -317,6 +429,7 @@
         "AgentSkillsMdDescriptor$dataSchemaVersion": "<p>The schema version of the descriptor payload.</p>",
         "McpServerDescriptor$dataSchemaVersion": "<p>The schema version of the descriptor payload.</p>",
         "McpToolsDescriptor$dataSchemaVersion": "<p>The schema version of the descriptor payload.</p>",
+        "SignatureAgentCardDescriptor$dataSchemaVersion": "<p>The schema version of the descriptor payload.</p>",
         "UpdatedDataSchemaVersion$optionalValue": "<p>The value to set for this field. Omit the wrapper to leave the field unchanged.</p>"
       }
     },
@@ -327,10 +440,13 @@
         "GetRegistryRecordResponse$updatedAt": "<p>The timestamp when the registry record was last updated.</p>",
         "GetRegistryResponse$createdAt": "<p>The timestamp when the registry was created</p>",
         "GetRegistryResponse$updatedAt": "<p>The timestamp when the registry was last updated</p>",
+        "GitHubSynchronizedSource$synchronizedAt": "<p>The timestamp when the registry read the source.</p>",
+        "OAuth2AuthorizationData$expiresAt": "<p>The timestamp when the authorization link expires, 10 minutes after the authorization started. A request that joins an authorization in progress gets less time, and the link might stop working shortly before this time.</p>",
         "RegistryRecordSummary$createdAt": "<p>The timestamp when the registry record was created.</p>",
         "RegistryRecordSummary$updatedAt": "<p>The timestamp when the registry record was last updated.</p>",
         "RegistrySummary$createdAt": "<p>The timestamp when the registry was created</p>",
         "RegistrySummary$updatedAt": "<p>The timestamp when the registry was last updated</p>",
+        "S3SynchronizedSource$synchronizedAt": "<p>The timestamp when the registry read the source.</p>",
         "SubmitRegistryRecordForApprovalResponse$updatedAt": "<p>The timestamp when the record was last updated</p>",
         "UpdateRegistryRecordResponse$createdAt": "<p>The timestamp when the registry record was created.</p>",
         "UpdateRegistryRecordResponse$updatedAt": "<p>The timestamp when the registry record was last updated.</p>",
@@ -338,6 +454,10 @@
         "UpdateRegistryResponse$createdAt": "<p>The timestamp when the registry was created</p>",
         "UpdateRegistryResponse$updatedAt": "<p>The timestamp when the registry was last updated</p>"
       }
+    },
+    "DeletePublisherRequest": {
+      "base": null,
+      "refs": {}
     },
     "DeleteRegistryRecordRequest": {
       "base": null,
@@ -353,6 +473,10 @@
     },
     "DeleteRegistryResponse": {
       "base": "<p>Response structure for deleting a registry</p>",
+      "refs": {}
+    },
+    "DependencyException": {
+      "base": "<p>This exception is thrown on a database (or other dependency) error. Modeled as a server error so SDKs retry it (5xx) and it feeds server-error alarming. Marked @retryable because it represents a transient downstream failure that is safe to retry (matches the forwarder's own retry-on-DependencyException behavior).</p>",
       "refs": {}
     },
     "Description": {
@@ -378,6 +502,7 @@
         "CustomDescriptor$data": "<p>The custom descriptor content, serialized as descriptor payload data.</p>",
         "McpServerDescriptor$data": "<p>The MCP server descriptor content, serialized as descriptor payload data.</p>",
         "McpToolsDescriptor$data": "<p>The MCP tools descriptor content, serialized as descriptor payload data.</p>",
+        "SignatureAgentCardDescriptor$data": "<p>The signature agent card content, serialized as descriptor payload data.</p>",
         "UpdatedDescriptorData$optionalValue": "<p>The value to set for this field. Omit the wrapper to leave the field unchanged.</p>"
       }
     },
@@ -386,9 +511,11 @@
       "refs": {
         "A2aAgentCardDescriptor$source": "<p>The optional source configuration used to synchronize the A2A agent card descriptor content.</p>",
         "AgUiDescriptor$source": null,
-        "AgentSkillsMdDescriptor$source": "<p>The optional source configuration used to synchronize the agent skills markdown content.</p>",
+        "AgentSkillsMdDescriptor$source": "<p>The optional source of the skill's SKILL.md only. The registry synchronizes the SKILL.md from this source into <code>data</code>. Specify an <code>s3://</code> URL of a SKILL.md object, or a GitHub folder URL together with <code>repositoryProvider</code> set to <code>GITHUB</code>. The registry rejects a new <code>https://</code> URL without <code>repositoryProvider</code>, and you can't set both this source and <code>skillPackage.source</code>.</p>",
+        "AgentSkillsPackageDescriptor$source": "<p>The source of the skill package. Specify an <code>s3://</code> URL of a ZIP object, or a GitHub folder URL together with <code>repositoryProvider</code> set to <code>GITHUB</code>. For a GitHub folder, the registry builds the package from every file in the folder.</p>",
         "HttpDescriptor$source": null,
         "McpServerDescriptor$source": "<p>The optional source configuration used to synchronize the MCP server descriptor content.</p>",
+        "SignatureAgentCardDescriptor$source": "<p>The optional source configuration used to synchronize the signature agent card descriptor content.</p>",
         "UpdatedDescriptorSource$optionalValue": "<p>The value to set for this field. Omit the wrapper to leave the field unchanged.</p>"
       }
     },
@@ -399,18 +526,22 @@
       }
     },
     "DescriptorSourceUrl": {
-      "base": "<p>URL source for descriptor content</p>",
+      "base": "<p>The URL of a descriptor source, up to 2,048 characters, that starts with <code>https://</code> or <code>s3://</code>. The registry accepts <code>s3://</code> URLs only for agent skill sources, and its discovery operations never return them.</p>",
       "refs": {
-        "DescriptorSourceFromUrl$url": "<p>The URL from which the descriptor content is retrieved.</p>"
+        "DescriptorSourceFromUrl$url": "<p>The URL from which the descriptor content is retrieved. For an agent skill source, specify an <code>s3://</code> URL of an object in a bucket in the same Amazon Web Services Region as the registry. For a GitHub skill source, specify a GitHub folder URL in the form <code>https://host/owner/repo/tree/branch-or-tag/path</code>. Other descriptor sources use <code>https://</code> URLs.</p>"
       }
     },
     "Descriptors": {
       "base": "<p>The typed set of descriptors for a registry record. Exactly one descriptor field is populated based on the record type.</p>",
       "refs": {
         "CreateRegistryRecordRequest$descriptors": "<p>The typed descriptor content for the registry record</p>",
-        "GetRegistryRecordResponse$descriptors": "<p>The typed descriptors that define the content of the registry record.</p>",
+        "GetRegistryRecordResponse$descriptors": "<p>The typed descriptors that define the content of the registry record. For a skill record with a skill package or a synchronized source, <code>skillMd.data</code> contains the SKILL.md that the registry took from the package or the source.</p>",
         "UpdateRegistryRecordResponse$descriptors": "<p>The typed descriptors that define the content of the registry record.</p>"
       }
+    },
+    "DisassociatePublisherRequest": {
+      "base": null,
+      "refs": {}
     },
     "DiscoveryConfiguration": {
       "base": "<p>Discovery configuration for the registry. Controls how consumers are authorized to search the registry and invoke its MCP endpoint.</p>",
@@ -422,9 +553,23 @@
       }
     },
     "DiscoveryUrl": {
-      "base": "<p>The OpenID Connect discovery URL, ending in /.well-known/openid-configuration, used to retrieve the identity provider's metadata and signing keys.</p>",
+      "base": "<p>The OpenID Connect discovery or OAuth 2.0 authorization server metadata URL used to retrieve the identity provider's metadata and signing keys. The URL contains /.well-known/openid-configuration or /.well-known/oauth-authorization-server, respectively.</p>",
       "refs": {
-        "CustomJWTAuthorizerConfiguration$discoveryUrl": "<p>The OpenID Connect discovery URL used to retrieve the identity provider's metadata and signing keys.</p>"
+        "CustomJWTAuthorizerConfiguration$discoveryUrl": "<p>The OpenID Connect discovery or OAuth 2.0 authorization server metadata URL used to retrieve the identity provider's metadata and signing keys.</p>"
+      }
+    },
+    "DomainChallenge": {
+      "base": "<p>Server-generated DNS-01 challenge the caller must publish to prove ownership.</p>",
+      "refs": {
+        "CreatePublisherResponse$domainChallenge": null,
+        "Publisher$domainChallenge": null,
+        "ValidatePublisherResponse$domainChallenge": null
+      }
+    },
+    "DomainName": {
+      "base": "<p>FQDN per RFC-1035/1123, case-insensitive, at least two labels.</p>",
+      "refs": {
+        "Identifier$domain": null
       }
     },
     "EncryptionConfiguration": {
@@ -454,6 +599,10 @@
         "RegistryRecordFilter$values": "<p>The values to match for the attribute</p>"
       }
     },
+    "GetPublisherRequest": {
+      "base": null,
+      "refs": {}
+    },
     "GetRegistryRecordRequest": {
       "base": null,
       "refs": {}
@@ -470,6 +619,18 @@
       "base": "<p>Response structure for getting a registry</p>",
       "refs": {}
     },
+    "GitCommitId": {
+      "base": "<p>The full hash of a Git commit, as 40 lowercase hexadecimal characters, or 64 in a repository that uses SHA-256.</p>",
+      "refs": {
+        "GitHubSynchronizedSource$commitId": "<p>The commit that the source's branch or tag pointed to when the registry read it.</p>"
+      }
+    },
+    "GitHubSynchronizedSource": {
+      "base": "<p>A GitHub source that a skill record's content was synchronized from, and the commit that the registry read.</p>",
+      "refs": {
+        "RegistryRecordSynchronizedSource$gitHub": "<p>The GitHub source that the registry read.</p>"
+      }
+    },
     "HttpDescriptor": {
       "base": "<p>A registry record descriptor for the HTTP protocol. This descriptor is source-only: its content is synchronized from the configured source URL rather than supplied inline.</p>",
       "refs": {
@@ -485,13 +646,32 @@
     "IamSigningRegion": {
       "base": null,
       "refs": {
-        "RegistryRecordIamCredentialProvider$region": "<p>The Amazon Web Services Region to use for request signing. If not specified, the Region is derived from the source URL hostname, falling back to the Region of the registry.</p>"
+        "RegistryRecordIamCredentialProvider$region": "<p>The Amazon Web Services Region to use for request signing. If not specified, the Region is derived from the source URL hostname, falling back to the Region of the registry. For an Amazon S3 skill source, omit it or set it to the Region of the registry.</p>"
       }
     },
     "IamSigningServiceName": {
       "base": null,
       "refs": {
-        "RegistryRecordIamCredentialProvider$service": "<p>The service name to use for request signing, such as execute-api.</p>"
+        "RegistryRecordIamCredentialProvider$service": "<p>The service name to use for request signing, such as execute-api. For an Amazon S3 skill source, omit it or set it to <code>s3</code>.</p>"
+      }
+    },
+    "Identifier": {
+      "base": "<p>The identifier value. Discriminated union — exactly one member is set. GA supports <code>domain</code> only; other identifier types are added as new members (backward-compatible) in a later task.</p>",
+      "refs": {
+        "CreatePublisherRequest$value": null,
+        "CreatePublisherResponse$value": null,
+        "Publisher$value": null,
+        "PublisherSummary$value": null,
+        "ValidatePublisherResponse$value": null
+      }
+    },
+    "IdentifierType": {
+      "base": null,
+      "refs": {
+        "CreatePublisherResponse$identifierType": "<p>The identifier type. <code>DOMAIN</code> is the only supported value.</p>",
+        "Publisher$identifierType": "<p>The identifier type. <code>DOMAIN</code> is the only supported value.</p>",
+        "PublisherSummary$identifierType": "<p>The identifier type. <code>DOMAIN</code> is the only supported value.</p>",
+        "ValidatePublisherResponse$identifierType": "<p>The identifier type. <code>DOMAIN</code> is the only supported value.</p>"
       }
     },
     "InboundTokenClaimNameType": {
@@ -515,6 +695,22 @@
       "refs": {
         "EncryptionConfiguration$kmsKeyArn": "<p>The Amazon Resource Name (ARN) of the customer-managed Amazon Web Services KMS key used to encrypt the registry's content. The key must be a symmetric encryption key in the same Amazon Web Services account and Region as the registry.</p>"
       }
+    },
+    "ListPublisherAssociationsRequest": {
+      "base": null,
+      "refs": {}
+    },
+    "ListPublisherAssociationsResponse": {
+      "base": null,
+      "refs": {}
+    },
+    "ListPublishersRequest": {
+      "base": null,
+      "refs": {}
+    },
+    "ListPublishersResponse": {
+      "base": null,
+      "refs": {}
     },
     "ListRegistriesRequest": {
       "base": "<p>Request structure for listing registries</p>",
@@ -562,6 +758,8 @@
     "MaxResults": {
       "base": "<p>Maximum number of items to be listed</p>",
       "refs": {
+        "ListPublisherAssociationsRequest$maxResults": null,
+        "ListPublishersRequest$maxResults": null,
         "ListRegistriesRequest$maxResults": "<p>Maximum number of results to return</p>",
         "ListRegistryRecordsRequest$maxResults": "<p>Maximum number of records to return</p>"
       }
@@ -587,6 +785,10 @@
     "NextToken": {
       "base": "<p>Opaque continuation token of previous paginated response</p>",
       "refs": {
+        "ListPublisherAssociationsRequest$nextToken": null,
+        "ListPublisherAssociationsResponse$nextToken": null,
+        "ListPublishersRequest$nextToken": null,
+        "ListPublishersResponse$nextToken": null,
         "ListRegistriesRequest$nextToken": "<p>Token for pagination</p>",
         "ListRegistriesResponse$nextToken": "<p>Token for next page of results</p>",
         "ListRegistryRecordsRequest$nextToken": "<p>Token for pagination</p>",
@@ -602,6 +804,36 @@
         "ResourceNotFoundException$message": null,
         "ServiceQuotaExceededException$message": null,
         "ThrottlingException$message": null
+      }
+    },
+    "OAuth2AuthorizationData": {
+      "base": "<p>An OAuth 2.0 authorization that waits for a user's approval. The user opens <code>authorizationUrl</code> and approves access on GitHub. Amazon Bedrock AgentCore Identity then redirects the browser to the source's <code>returnUrl</code>. There, your application completes the authorization by calling the AgentCore Identity <code>CompleteResourceTokenAuth</code> operation with <code>userId</code>. If the source has no <code>returnUrl</code>, the user returns to the Amazon Web Services Agent Registry console, which completes the authorization. After the authorization completes, the registry synchronizes the record without another request. If the user doesn't approve access before <code>expiresAt</code>, the record moves to <code>CREATE_FAILED</code> or <code>UPDATE_FAILED</code>. To start again, call <code>UpdateRegistryRecord</code> with <code>triggerSynchronization</code>.</p>",
+      "refs": {
+        "AuthorizationData$oauth2": "<p>The OAuth 2.0 authorization that a GitHub user must approve.</p>"
+      }
+    },
+    "OAuthAuthorizationUrl": {
+      "base": "<p>A URL that a user opens to approve an OAuth 2.0 authorization. It carries the authorization session, so treat it as sensitive.</p>",
+      "refs": {
+        "OAuth2AuthorizationData$authorizationUrl": "<p>The URL that the user opens to approve access. The link is valid for up to 10 minutes. Treat it as sensitive and give it only to the user who approves access.</p>"
+      }
+    },
+    "OAuthReturnUrl": {
+      "base": "<p>A URL of up to 2,048 characters that uses the <code>https</code> scheme, in lowercase, and a public domain name rather than an IP address. The URL can include a query string, but not a user name, password, or fragment. Only <code>localhost</code>, <code>127.0.0.1</code>, and <code>[::1]</code> can also use <code>http</code>.</p>",
+      "refs": {
+        "RegistryRecordOAuthCredentialProvider$returnUrl": "<p>The URL that the user's browser returns to after the user approves access on GitHub, for the <code>AUTHORIZATION_CODE</code> grant. There, your application completes the authorization by calling the Amazon Bedrock AgentCore Identity <code>CompleteResourceTokenAuth</code> operation with the <code>userId</code> from <code>authorizationData</code>. If you omit it, the user returns to the Amazon Web Services Agent Registry console, which completes the authorization when the user is signed in as the IAM principal that made the request. A request that joins an authorization already in progress uses the return URL of the request that started it.</p>"
+      }
+    },
+    "OAuthUserId": {
+      "base": "<p>The AgentCore Identity user ID that an OAuth 2.0 authorization, and the tokens that it yields, are bound to.</p>",
+      "refs": {
+        "OAuth2AuthorizationData$userId": "<p>The AgentCore Identity user ID that the authorization is for. Store it with your signed-in user and pass it as <code>userIdentifier.userId</code> when your application calls <code>CompleteResourceTokenAuth</code>.</p>"
+      }
+    },
+    "PresignedDownloadUrl": {
+      "base": "<p>A presigned URL that downloads a stored file until the URL expires. It's a bearer credential. Anyone who has the URL can download the file, so don't log, store, or share it.</p>",
+      "refs": {
+        "RegistryRecordArtifactDownload$downloadUrl": "<p>A presigned Amazon S3 URL that downloads the package. The URL is valid for up to 5 minutes, and the response doesn't include its expiry time. To get a new URL, call the operation again. Anyone who has the URL can download the package until it expires, so don't log, store, or share it.</p>"
       }
     },
     "PrivateEndpoint": {
@@ -661,6 +893,69 @@
       "base": null,
       "refs": {
         "RegistryRecordSummary$provenanceSummaryList": "<p>The condensed provenance lineage for the registry record. Each entry contains the source relation, source identifier, and source type of an auto-detection lineage entry. Populated for records created by auto-detection.</p>"
+      }
+    },
+    "PublicIdentifier": {
+      "base": "<p>Server-generated public identifier. This is a URN, NOT an ARN: the public identifier is a public-facing, provider-neutral name (a Record may be hosted outside AWS), so it deliberately does not use the arn: scheme.</p> <p>Layout: <code>urn:air:[&lt;subdomain&gt;.]&lt;domain&gt;:&lt;namespace&gt;:&lt;identity&gt;[;&lt;kind&gt;]</code></p> <ul> <li>authority <code>[&lt;subdomain&gt;.]&lt;domain&gt;</code> — the publisher FQDN, with the optional subdomain folded in as a leading label (e.g. <code>agents.acme.com</code>; without a subdomain, just <code>acme.com</code>).</li> <li><code>&lt;namespace&gt;</code> — the association's category values concatenated with <code>:</code> (zero-or-more segments; absent when no categories were supplied).</li> <li><code>&lt;identity&gt;</code> — the Record name: letters, digits, <code>.</code>, <code>_</code>, <code>/</code> and <code>-</code>, as Vestry allows.</li> <li><code>&lt;kind&gt;</code> — the artifact kind from the Record's <code>recordType</code> (ai-catalog issue 59): <code>MCP</code> is <code>mcp</code>, <code>AGENT</code> and <code>CUSTOM</code> are <code>agent</code>, <code>SKILL</code> is <code>skill</code>, <code>WEB_BOT</code> is <code>webbot</code>. Absent for <code>GATEWAY</code> and when the association carried no <code>recordType</code>. The kind is part of the identifier, so <code>urn:air:acme.com:x;mcp</code> and <code>urn:air:acme.com:x</code> are two identifiers. Belfry mints <code>;</code>; the pattern also admits <code>#</code>, <code>+</code>, <code>$</code> and <code>@</code>, so identifiers minted with <code>#</code> before the delimiter settled on <code>;</code> stay valid until they're re-minted. Examples: <code>urn:air:acme.com:finance-agent</code> (no subdomain/categories), <code>urn:air:agents.acme.com:financial:money:finance-agent</code>, <code>urn:air:acme.com:weather;mcp</code>.</li> </ul>",
+      "refs": {
+        "AssociatePublisherResponse$publicIdentifier": null,
+        "PublisherAssociation$publicIdentifier": null
+      }
+    },
+    "Publisher": {
+      "base": "<p>A publisher, including its verification status and the DNS challenge for its domain.</p>",
+      "refs": {}
+    },
+    "PublisherAssociation": {
+      "base": "<p>An association between a registry record and a publisher, including the record's public identifier.</p>",
+      "refs": {
+        "PublisherAssociationList$member": null
+      }
+    },
+    "PublisherAssociationList": {
+      "base": null,
+      "refs": {
+        "ListPublisherAssociationsResponse$items": "<p>The publisher associations on this page of results.</p>"
+      }
+    },
+    "PublisherIdentifierArn": {
+      "base": "<p>ARN for an Identifier resource. Global (region-less) resource, so the region field is empty; the resource segment carries the identifier value, which may contain dots.</p> <p>Named <code>PublisherIdentifierArn</code> (RegionalCP's local name) so RegionalCP consumes it without a rename — which keeps its c2j/SDK model (generated from the un-projected source, where the top-level c2j plugin runs to preserve @idempotencyToken) showing the correct shape name. GlobalCP renames this to <code>identifierArn</code> in its own coral-export projection.</p>",
+      "refs": {
+        "AssociatePublisherRequest$publisherArn": "<p>The Publisher to associate the Record with.</p>",
+        "AssociatePublisherResponse$publisher": null,
+        "CreatePublisherResponse$publisherArn": null,
+        "DeletePublisherRequest$publisherArn": null,
+        "GetPublisherRequest$publisherArn": null,
+        "ListPublisherAssociationsRequest$publisherArn": null,
+        "Publisher$publisherArn": null,
+        "PublisherAssociation$publisher": null,
+        "PublisherSummary$publisherArn": null,
+        "ValidatePublisherRequest$publisherArn": null,
+        "ValidatePublisherResponse$publisherArn": null
+      }
+    },
+    "PublisherSummary": {
+      "base": "<p>Lightweight projection for list results.</p>",
+      "refs": {
+        "PublisherSummaryList$member": null
+      }
+    },
+    "PublisherSummaryAssociationCountInteger": {
+      "base": null,
+      "refs": {
+        "PublisherSummary$associationCount": "<p>The number of registry records associated with the publisher, in any association status. Omitted when the count isn't available.</p>"
+      }
+    },
+    "PublisherSummaryList": {
+      "base": null,
+      "refs": {
+        "ListPublishersResponse$items": "<p>Summaries of the publishers on this page of results.</p>"
+      }
+    },
+    "PublisherSummaryPendingAssociationApprovalCountInteger": {
+      "base": null,
+      "refs": {
+        "PublisherSummary$pendingAssociationApprovalCount": "<p>The number of the publisher's associations that are in PENDING_APPROVAL. Omitted when the count isn't available.</p>"
       }
     },
     "RecordIdentifier": {
@@ -770,12 +1065,30 @@
     "RegistryRecordArn": {
       "base": "<p>Registry Record Amazon Resource Name</p>",
       "refs": {
+        "AssociatePublisherRequest$recordArn": "<p>The Record being associated.</p>",
+        "AssociatePublisherResponse$recordArn": null,
         "CreateRegistryRecordResponse$recordArn": "<p>The ARN of the created registry record</p>",
+        "DisassociatePublisherRequest$recordArn": null,
         "GetRegistryRecordResponse$recordArn": "<p>The Amazon Resource Name (ARN) of the registry record.</p>",
+        "PublisherAssociation$recordArn": null,
         "RegistryRecordSummary$recordArn": "<p>The Amazon Resource Name (ARN) of the registry record.</p>",
         "SubmitRegistryRecordForApprovalResponse$recordArn": "<p>The ARN of the registry record</p>",
+        "UpdatePublisherAssociationApprovalStatusRequest$recordArn": null,
         "UpdateRegistryRecordResponse$recordArn": "<p>The Amazon Resource Name (ARN) of the registry record.</p>",
         "UpdateRegistryRecordStatusResponse$recordArn": "<p>The ARN of the registry record</p>"
+      }
+    },
+    "RegistryRecordArtifactDownload": {
+      "base": "<p>The skill package of a registry record, as a short-lived download URL and the package's SHA-256 checksum. Responses never include the package bytes.</p>",
+      "refs": {
+        "GetRegistryRecordResponse$artifact": "<p>The skill package of the record's latest revision, including a revision in <code>DRAFT</code> or <code>PENDING_APPROVAL</code> status, as a download URL and a SHA-256 checksum. While an update of the record is in progress or after it fails, this is the last package that passed validation, unless the update switches between an uploaded package and a synchronized one: then it is absent until the update succeeds. Absent while the record is being created or after its creation fails, and when the record has no package, for example when its content is inline or it synchronizes only SKILL.md.</p>"
+      }
+    },
+    "RegistryRecordArtifactUpload": {
+      "base": "<p>A skill package to upload with a registry record: a ZIP archive of a skill that follows the Agent Skills specification. The registry validates the package asynchronously, stores it, and sets <code>skillMd.data</code> from the package's SKILL.md.</p>",
+      "refs": {
+        "CreateRegistryRecordRequest$artifact": "<p>The skill package to store with the record, for a record of type <code>SKILL</code> with an <code>agentSkillsDefinition</code> descriptor. The registry validates the package after the operation returns and sets <code>skillMd.data</code> from the package's SKILL.md. A request that uploads a package can't also set a skill source or send new <code>skillMd.data</code>.</p>",
+        "UpdatedRegistryRecordArtifact$optionalValue": "<p>The skill package to upload. It replaces the record's current package or its synchronized content.</p>"
       }
     },
     "RegistryRecordCredentialProviderConfiguration": {
@@ -831,7 +1144,7 @@
       }
     },
     "RegistryRecordIamCredentialProvider": {
-      "base": "<p>The configuration for an IAM role credential provider that signs requests to a registry record's source with Amazon Web Services Signature Version 4 (SigV4).</p>",
+      "base": "<p>The configuration for an IAM role credential provider that signs requests to a registry record's source with Amazon Web Services Signature Version 4 (SigV4). For an Amazon S3 skill source (an <code>s3://</code> URL), Amazon Web Services Agent Registry assumes the role to read the object. The role must be in your Amazon Web Services account.</p>",
       "refs": {
         "RegistryRecordCredentialProviderUnion$iamCredentialProvider": "<p>The IAM role credential provider details.</p>"
       }
@@ -863,19 +1176,19 @@
       }
     },
     "RegistryRecordOAuthGrantType": {
-      "base": null,
+      "base": "<p>The OAuth 2.0 grant type that a credential provider uses to obtain access tokens. <code>CLIENT_CREDENTIALS</code> obtains tokens for the client application itself and is the grant for sources such as MCP server and A2A agent card sources. <code>AUTHORIZATION_CODE</code> obtains tokens with a user's approval and is required for GitHub skill sources. A GitHub user approves access once. Later requests from the same IAM principal for the same registry, host, credential provider, scopes, and custom parameters reuse that approval.</p>",
       "refs": {
-        "RegistryRecordOAuthCredentialProvider$grantType": "<p>The OAuth 2.0 grant type used to obtain access tokens.</p>"
+        "RegistryRecordOAuthCredentialProvider$grantType": "<p>The OAuth 2.0 grant type used to obtain access tokens. A GitHub skill source requires <code>AUTHORIZATION_CODE</code>. Other sources, such as MCP server and A2A agent card sources, use <code>CLIENT_CREDENTIALS</code>. A GitHub source takes exactly one OAuth credential provider, in the registry's Amazon Web Services account and Region. Only an IAM role or IAM user in the account that owns the registry can set, synchronize, or reauthorize it, and the caller needs <code>bedrock-agentcore:GetWorkloadAccessTokenForUserId</code> and <code>bedrock-agentcore:GetResourceOauth2Token</code> on the registry's workload identity, <code>registry-</code> followed by the registry ID.</p>"
       }
     },
     "RegistryRecordStatus": {
-      "base": "<p>Registry record status</p>",
+      "base": "<p>The lifecycle status of a registry record. A record is <code>DRAFT</code> before it is submitted, <code>PENDING_APPROVAL</code> while it awaits curator review, and <code>APPROVED</code> after it is approved and discoverable. Rejecting a newer revision keeps the last approved revision discoverable. A <code>DEPRECATED</code> record isn't discoverable. <code>CREATING</code>, <code>UPDATING</code>, <code>CREATE_FAILED</code>, and <code>UPDATE_FAILED</code> reflect an asynchronous change that is in progress or has failed. <code>CREATE_PENDING_AUTH</code> and <code>UPDATE_PENDING_AUTH</code> mean that the record waits for a GitHub user to authorize access before it synchronizes from its GitHub source.</p>",
       "refs": {
-        "CreateRegistryRecordResponse$status": "<p>The status of the registry record, set to CREATING while the asynchronous workflow is in progress</p>",
+        "CreateRegistryRecordResponse$status": "<p>The status of the registry record. <code>CREATING</code> means that the asynchronous workflow is in progress. <code>CREATE_PENDING_AUTH</code> means that the record waits for a GitHub user to authorize access before it synchronizes from its GitHub source. For the authorization link, see <code>authorizationData</code>.</p>",
         "GetRegistryRecordResponse$status": "<p>The lifecycle status of the registry record.</p>",
         "RegistryRecordSummary$status": "<p>The lifecycle status of the registry record.</p>",
         "SubmitRegistryRecordForApprovalResponse$status": "<p>The resulting status of the registry record</p>",
-        "UpdateRegistryRecordResponse$status": "<p>The lifecycle status of the registry record.</p>",
+        "UpdateRegistryRecordResponse$status": "<p>The lifecycle status of the registry record. <code>UPDATE_PENDING_AUTH</code> means that the update waits for a GitHub user to authorize access before the record synchronizes from its GitHub source. For the authorization link, see <code>authorizationData</code>.</p>",
         "UpdateRegistryRecordStatusRequest$status": "<p>The target status for the registry record</p>",
         "UpdateRegistryRecordStatusResponse$status": "<p>The resulting status of the registry record</p>"
       }
@@ -890,6 +1203,12 @@
       "base": null,
       "refs": {
         "ListRegistryRecordsResponse$registryRecords": "<p>List of registry record summaries</p>"
+      }
+    },
+    "RegistryRecordSynchronizedSource": {
+      "base": "<p>The source that a skill record's content was last synchronized from. Exactly one member is set, for the source's provider.</p>",
+      "refs": {
+        "GetRegistryRecordResponse$synchronizedSource": "<p>The source that the registry last synchronized the record's skill content from, including when the registry read the source and which version it read. Absent until the first successful synchronization, and after an update replaces the synchronized content, for example with an uploaded package. A failed synchronization leaves this member unchanged. After you change the source, this member shows the previous source until the registry successfully synchronizes from the new source.</p>"
       }
     },
     "RegistryRecordVersion": {
@@ -953,6 +1272,36 @@
         "ManagedVpcResource$routingDomain": "<p>The routing domain used to resolve traffic through the private endpoint.</p>"
       }
     },
+    "S3BucketOwnerAccountId": {
+      "base": "<p>A 12-digit Amazon Web Services account ID.</p>",
+      "refs": {
+        "S3SourceConfiguration$bucketOwnerAccountId": "<p>The ID of the Amazon Web Services account that owns the source bucket. The registry checks that the bucket belongs to this account each time it reads the source. If you omit it for a source that uses an IAM role, the registry expects the bucket to be in the role's account. If you omit it for a source that has no credential provider, which the registry reads as a public object, the request fails with a <code>ValidationException</code>.</p>"
+      }
+    },
+    "S3ObjectETag": {
+      "base": "<p>The entity tag (ETag) of an Amazon S3 object, without quotes.</p>",
+      "refs": {
+        "S3SynchronizedSource$eTag": "<p>The entity tag (ETag) of the object that the registry read, without quotes, when the object has no version ID. Not recorded for a SKILL.md source on a registry that is encrypted with a customer managed key.</p>"
+      }
+    },
+    "S3ObjectVersionId": {
+      "base": "<p>The version ID of an Amazon S3 object in a versioned bucket.</p>",
+      "refs": {
+        "S3SynchronizedSource$versionId": "<p>The version ID of the object that the registry read. Absent when the bucket isn't versioned.</p>"
+      }
+    },
+    "S3SourceConfiguration": {
+      "base": "<p>The settings of a source that the registry reads from Amazon S3.</p>",
+      "refs": {
+        "AgentSkillsSourceConfiguration$s3": "<p>The settings of an Amazon S3 source.</p>"
+      }
+    },
+    "S3SynchronizedSource": {
+      "base": "<p>An Amazon S3 source that a skill record's content was synchronized from, and the object version that the registry read. At most one of <code>versionId</code> and <code>eTag</code> is set.</p>",
+      "refs": {
+        "RegistryRecordSynchronizedSource$s3": "<p>The Amazon S3 source that the registry read.</p>"
+      }
+    },
     "ScopeList": {
       "base": null,
       "refs": {
@@ -981,6 +1330,25 @@
       "base": "<p>The request would exceed a service quota.</p>",
       "refs": {}
     },
+    "Sha256Hash": {
+      "base": "<p>A SHA-256 checksum, as 64 lowercase hexadecimal characters.</p>",
+      "refs": {
+        "RegistryRecordArtifactDownload$sha256": "<p>The SHA-256 checksum of the package, as 64 lowercase hexadecimal characters. The download response carries no signature that you can check, so compare the checksum of the file that you download with this value before you use the package.</p>",
+        "RegistryRecordArtifactUpload$sha256": "<p>The optional SHA-256 checksum of the ZIP archive, as 64 lowercase hexadecimal characters, computed over the archive's bytes rather than its base64 text. If it doesn't match the content, the request fails with a <code>ValidationException</code>.</p>"
+      }
+    },
+    "SignatureAgentCardAdditionalData": {
+      "base": "<p>The additional data for a signature agent card descriptor, such as the bot category of the web bot.</p>",
+      "refs": {
+        "SignatureAgentCardDescriptor$additionalData": "<p>Additional data associated with the signature agent card descriptor, such as the bot category.</p>"
+      }
+    },
+    "SignatureAgentCardDescriptor": {
+      "base": "<p>Descriptor that defines the content of a signature agent card, which identifies a web bot and references the JSON Web Key Set used to verify its HTTP message signatures.</p>",
+      "refs": {
+        "Descriptors$signatureAgentCard": "<p>The signature agent card descriptor, populated when the record type is WEB_BOT.</p>"
+      }
+    },
     "SourceDetails": {
       "base": "<p>The details about the upstream source from which a registry record was detected. Exactly one member is populated, corresponding to the source type.</p>",
       "refs": {
@@ -1001,6 +1369,17 @@
         "ProvenanceSummary$sourceType": "<p>The type of the upstream source that the registry record was detected from.</p>"
       }
     },
+    "StatusReason": {
+      "base": null,
+      "refs": {
+        "AssociatePublisherResponse$statusReason": "<p>The reason for the association's current status, such as why it is suspended. Present only when a reason is available.</p>",
+        "CreatePublisherResponse$statusReason": "<p>The reason for the publisher's current status, such as why verification failed. Present only when a reason is available.</p>",
+        "Publisher$statusReason": "<p>The reason for the publisher's current status, such as why verification failed. Present only when a reason is available.</p>",
+        "PublisherAssociation$statusReason": "<p>The reason for the association's current status, such as why it is suspended. Present only when a reason is available.</p>",
+        "UpdatePublisherAssociationApprovalStatusRequest$approvalStatusReason": "<p>The curator's reason for the decision; may be empty.</p>",
+        "ValidatePublisherResponse$statusReason": "<p>The reason for the publisher's current status, such as why verification failed. Present only when a reason is available.</p>"
+      }
+    },
     "String": {
       "base": null,
       "refs": {
@@ -1018,6 +1397,12 @@
         "ValidationException$message": null,
         "ValidationExceptionField$name": "<p>The name of the field that failed validation.</p>",
         "ValidationExceptionField$message": "<p>A description of why the field failed validation.</p>"
+      }
+    },
+    "Subdomain": {
+      "base": "<p>A single DNS label (RFC-1035): letters, digits, hyphens; no leading/trailing hyphen.</p>",
+      "refs": {
+        "AssociatePublisherRequest$subdomain": "<p>Optional single DNS label placed in front of the publisher domain (e.g. &quot;agents&quot; -&gt; agents.acme.com). Absent means the Record sits directly on the publisher domain.</p>"
       }
     },
     "SubmitRegistryRecordForApprovalRequest": {
@@ -1040,11 +1425,19 @@
         "ManagedVpcResource$subnetIds": "<p>The identifiers of the subnets in which the private endpoint network interfaces are placed.</p>"
       }
     },
+    "SynchronizedSourceUrl": {
+      "base": "<p>The URL of a source that a registry record's content was synchronized from.</p>",
+      "refs": {
+        "GitHubSynchronizedSource$url": "<p>The source URL that the registry read.</p>",
+        "S3SynchronizedSource$url": "<p>The source URL that the registry read.</p>"
+      }
+    },
     "TagKey": {
       "base": "<p>Key of a tag.</p>",
       "refs": {
         "ResourceTagsMap$key": null,
         "TagKeyList$member": null,
+        "TagMap$key": null,
         "TagsMap$key": null
       }
     },
@@ -1052,6 +1445,15 @@
       "base": "<p>A list of tag keys.</p>",
       "refs": {
         "UntagResourceRequest$tagKeys": "<p>The keys of the tags to remove from the resource. Tags with keys not included in this list remain on the resource.</p>"
+      }
+    },
+    "TagMap": {
+      "base": null,
+      "refs": {
+        "CreatePublisherRequest$tags": "<p>The tags to attach to the publisher. Each tag is a key-value pair. You can attach up to 50 tags.</p>",
+        "CreatePublisherResponse$tags": "<p>The tags attached to the publisher.</p>",
+        "Publisher$tags": "<p>The tags attached to the publisher.</p>",
+        "ValidatePublisherResponse$tags": "<p>The tags attached to the publisher.</p>"
       }
     },
     "TagResourceRequest": {
@@ -1066,6 +1468,7 @@
       "base": "<p>Value of a tag.</p>",
       "refs": {
         "ResourceTagsMap$value": null,
+        "TagMap$value": null,
         "TagsMap$value": null
       }
     },
@@ -1082,11 +1485,31 @@
       "base": "<p>The request was denied due to request throttling; the caller may retry after a delay.</p>",
       "refs": {}
     },
+    "Timestamp": {
+      "base": null,
+      "refs": {
+        "CreatePublisherResponse$createdAt": "<p>The date and time that the publisher was created.</p>",
+        "CreatePublisherResponse$updatedAt": "<p>The date and time that the publisher was last updated.</p>",
+        "Publisher$createdAt": "<p>The date and time that the publisher was created.</p>",
+        "Publisher$updatedAt": "<p>The date and time that the publisher was last updated.</p>",
+        "PublisherSummary$createdAt": "<p>The date and time that the publisher was created.</p>",
+        "ValidatePublisherResponse$createdAt": "<p>The date and time that the publisher was created.</p>",
+        "ValidatePublisherResponse$updatedAt": "<p>The date and time that the publisher was last updated.</p>"
+      }
+    },
     "UntagResourceRequest": {
       "base": null,
       "refs": {}
     },
     "UntagResourceResponse": {
+      "base": null,
+      "refs": {}
+    },
+    "UpdatePublisherAssociationApprovalStatusRequest": {
+      "base": null,
+      "refs": {}
+    },
+    "UpdatePublisherAssociationApprovalStatusResponse": {
       "base": null,
       "refs": {}
     },
@@ -1180,6 +1603,24 @@
         "UpdatedAgentSkillsMdDescriptor$optionalValue": "<p>The value to set for this field. Omit the wrapper to leave the field unchanged.</p>"
       }
     },
+    "UpdatedAgentSkillsPackageDescriptor": {
+      "base": "<p>The skill package source patch wrapper. Omit to leave the source unchanged; supply an empty object to remove it and stop synchronizing the package; supply optionalValue to replace it.</p>",
+      "refs": {
+        "UpdatedAgentSkillsAdditionalDataFields$skillPackage": "<p>The patch for the skill package source field.</p>"
+      }
+    },
+    "UpdatedAgentSkillsRepositoryProvider": {
+      "base": "<p>The repository provider patch wrapper. Omit to leave the repository provider unchanged; supply an empty object to remove it; supply optionalValue to set it. When you remove it, also remove or replace the GitHub source in the same request.</p>",
+      "refs": {
+        "UpdatedAgentSkillsAdditionalDataFields$repositoryProvider": "<p>The patch for the repository provider field.</p>"
+      }
+    },
+    "UpdatedAgentSkillsSourceConfiguration": {
+      "base": "<p>The source configuration patch wrapper. Omit to leave the configuration unchanged; supply an empty object to remove it; supply optionalValue to replace it. When you move an Amazon S3 source to another bucket, the record keeps its configuration. In the same request, specify the new bucket's owner, or specify an empty object so that the registry expects the bucket in the role's account.</p>",
+      "refs": {
+        "UpdatedAgentSkillsAdditionalDataFields$sourceConfiguration": "<p>The patch for the source configuration field.</p>"
+      }
+    },
     "UpdatedApprovalConfiguration": {
       "base": "<p>A wrapper for updating the approval configuration of a registry. Include this wrapper to replace the approval configuration with the specified value; omit it to leave the approval configuration unchanged.</p>",
       "refs": {
@@ -1196,6 +1637,12 @@
       "base": "<p>A wrapper for updating the auto-detection configuration of a registry with PATCH semantics. Include this wrapper to replace the auto-detection configuration with the specified value. Omit it to leave the auto-detection configuration unchanged. To clear the configuration, include the wrapper with a null <code>optionalValue</code>.</p>",
       "refs": {
         "UpdateRegistryRequest$autoDetectionConfiguration": "<p>The updated auto-detection configuration for the registry, with PATCH semantics. Omit this field to leave the current configuration unchanged. Supply an empty wrapper to unset it. Supply <code>optionalValue</code> to replace it.</p>"
+      }
+    },
+    "UpdatedBotCategory": {
+      "base": "<p>Leaf patch wrapper for a bot category. Omit to leave unchanged; supply an empty object to unset; supply optionalValue to set.</p>",
+      "refs": {
+        "UpdatedSignatureAgentCardAdditionalDataFields$category": "<p>The patch for the bot category field.</p>"
       }
     },
     "UpdatedCustomDescriptor": {
@@ -1229,7 +1676,8 @@
         "UpdatedAgentSkillsDefinitionDescriptorFields$dataSchemaVersion": "<p>The patch for the descriptor's data schema version field.</p>",
         "UpdatedAgentSkillsMdDescriptorFields$dataSchemaVersion": "<p>The patch for the descriptor's data schema version field.</p>",
         "UpdatedMcpServerDescriptorFields$dataSchemaVersion": "<p>The patch for the descriptor's data schema version field.</p>",
-        "UpdatedMcpToolsDescriptorFields$dataSchemaVersion": "<p>The patch for the descriptor's data schema version field.</p>"
+        "UpdatedMcpToolsDescriptorFields$dataSchemaVersion": "<p>The patch for the descriptor's data schema version field.</p>",
+        "UpdatedSignatureAgentCardDescriptorFields$dataSchemaVersion": "<p>The patch for the descriptor's data schema version field.</p>"
       }
     },
     "UpdatedDescription": {
@@ -1247,7 +1695,8 @@
         "UpdatedAgentSkillsMdDescriptorFields$data": "<p>The patch for the descriptor's data field.</p>",
         "UpdatedCustomDescriptorFields$data": "<p>The patch for the descriptor's data field.</p>",
         "UpdatedMcpServerDescriptorFields$data": "<p>The patch for the descriptor's data field.</p>",
-        "UpdatedMcpToolsDescriptorFields$data": "<p>The patch for the descriptor's data field.</p>"
+        "UpdatedMcpToolsDescriptorFields$data": "<p>The patch for the descriptor's data field.</p>",
+        "UpdatedSignatureAgentCardDescriptorFields$data": "<p>The patch for the descriptor's data field.</p>"
       }
     },
     "UpdatedDescriptorSource": {
@@ -1257,7 +1706,8 @@
         "UpdatedAgUiDescriptorFields$source": "<p>The patch for the descriptor's source field.</p>",
         "UpdatedAgentSkillsMdDescriptorFields$source": "<p>The patch for the descriptor's source field.</p>",
         "UpdatedHttpDescriptorFields$source": "<p>The patch for the descriptor's source field.</p>",
-        "UpdatedMcpServerDescriptorFields$source": "<p>The patch for the descriptor's source field.</p>"
+        "UpdatedMcpServerDescriptorFields$source": "<p>The patch for the descriptor's source field.</p>",
+        "UpdatedSignatureAgentCardDescriptorFields$source": "<p>The patch for the descriptor's source field.</p>"
       }
     },
     "UpdatedDescriptors": {
@@ -1332,6 +1782,44 @@
         "UpdatedMcpToolsDescriptor$optionalValue": "<p>The value to set for this field. Omit the wrapper to leave the field unchanged.</p>"
       }
     },
+    "UpdatedRegistryRecordArtifact": {
+      "base": "<p>The skill package patch wrapper. Omit to leave the package unchanged; supply an empty object to remove an uploaded package; supply optionalValue to upload a new package.</p>",
+      "refs": {
+        "UpdateRegistryRecordRequest$artifact": "<p>The change to the record's uploaded skill package. Omit it to keep the current package, specify an empty object to remove an uploaded package, or specify <code>optionalValue</code> to upload a new package. An empty object doesn't remove a package that the record synchronizes from a source. To stop that synchronization, remove <code>skillPackage</code>. A request that changes <code>skillMd.data</code> replaces the record's package with that text, even if you omit this member.</p>"
+      }
+    },
+    "UpdatedSignatureAgentCardAdditionalData": {
+      "base": "<p>The signature agent card additional-data patch wrapper. Omit to leave the additional data unchanged; supply an empty object to remove it; supply optionalValue to patch its fields.</p>",
+      "refs": {
+        "UpdatedSignatureAgentCardDescriptorFields$additionalData": "<p>The patch for the descriptor's additional data field.</p>"
+      }
+    },
+    "UpdatedSignatureAgentCardAdditionalDataFields": {
+      "base": "<p>The set of signature agent card additional-data fields that can be individually updated.</p>",
+      "refs": {
+        "UpdatedSignatureAgentCardAdditionalData$optionalValue": "<p>The value to set for this field. Omit the wrapper to leave the field unchanged.</p>"
+      }
+    },
+    "UpdatedSignatureAgentCardDescriptor": {
+      "base": "<p>The signature agent card descriptor patch wrapper. Omit to leave the descriptor unchanged; supply an empty object to remove it; supply optionalValue to patch its fields.</p>",
+      "refs": {
+        "UpdatedDescriptorsFields$signatureAgentCard": "<p>The patch for the signature agent card descriptor.</p>"
+      }
+    },
+    "UpdatedSignatureAgentCardDescriptorFields": {
+      "base": "<p>The set of signature agent card descriptor fields that can be individually updated.</p>",
+      "refs": {
+        "UpdatedSignatureAgentCardDescriptor$optionalValue": "<p>The value to set for this field. Omit the wrapper to leave the field unchanged.</p>"
+      }
+    },
+    "ValidatePublisherRequest": {
+      "base": null,
+      "refs": {}
+    },
+    "ValidatePublisherResponse": {
+      "base": "<p>The publisher after verification restarts, in ACTION_REQUIRED with a new domainChallenge.</p>",
+      "refs": {}
+    },
     "ValidationException": {
       "base": "<p>The request failed validation of one or more input fields.</p>",
       "refs": {}
@@ -1354,6 +1842,15 @@
         "ValidationException$reason": "<p>The reason the request failed validation.</p>"
       }
     },
+    "VerificationStatus": {
+      "base": null,
+      "refs": {
+        "CreatePublisherResponse$status": "<p>The domain verification status of the publisher:</p> <ul> <li><code>ACTION_REQUIRED</code>: The registry is waiting to find the DNS TXT record described by <code>domainChallenge</code>.</li> <li><code>ACTIVE</code>: The domain is verified. You can associate registry records with the publisher.</li> <li><code>SUSPENDED</code>: The domain was verified, but a later check found the TXT record missing or changed. The publisher returns to <code>ACTIVE</code> when the record is found again, and becomes <code>FAILED</code> if the record stays missing.</li> <li><code>FAILED</code>: Verification didn't succeed, for example because the TXT record wasn't found in time or another account verified the domain first. Call <code>ValidatePublisher</code> to try again.</li> <li><code>DELETING</code>: A delete is in progress.</li> </ul>",
+        "Publisher$status": "<p>The domain verification status of the publisher:</p> <ul> <li><code>ACTION_REQUIRED</code>: The registry is waiting to find the DNS TXT record described by <code>domainChallenge</code>.</li> <li><code>ACTIVE</code>: The domain is verified. You can associate registry records with the publisher.</li> <li><code>SUSPENDED</code>: The domain was verified, but a later check found the TXT record missing or changed. The publisher returns to <code>ACTIVE</code> when the record is found again, and becomes <code>FAILED</code> if the record stays missing.</li> <li><code>FAILED</code>: Verification didn't succeed, for example because the TXT record wasn't found in time or another account verified the domain first. Call <code>ValidatePublisher</code> to try again.</li> <li><code>DELETING</code>: A delete is in progress.</li> </ul>",
+        "PublisherSummary$status": "<p>The domain verification status of the publisher: <code>ACTION_REQUIRED</code>, <code>ACTIVE</code>, <code>SUSPENDED</code>, <code>FAILED</code>, or <code>DELETING</code>. Only an <code>ACTIVE</code> publisher accepts new registry record associations.</p>",
+        "ValidatePublisherResponse$status": "<p>The domain verification status of the publisher:</p> <ul> <li><code>ACTION_REQUIRED</code>: The registry is waiting to find the DNS TXT record described by <code>domainChallenge</code>.</li> <li><code>ACTIVE</code>: The domain is verified. You can associate registry records with the publisher.</li> <li><code>SUSPENDED</code>: The domain was verified, but a later check found the TXT record missing or changed. The publisher returns to <code>ACTIVE</code> when the record is found again, and becomes <code>FAILED</code> if the record stays missing.</li> <li><code>FAILED</code>: Verification didn't succeed, for example because the TXT record wasn't found in time or another account verified the domain first. Call <code>ValidatePublisher</code> to try again.</li> <li><code>DELETING</code>: A delete is in progress.</li> </ul>"
+      }
+    },
     "VpcIdentifier": {
       "base": "<p>The identifier of a VPC.</p>",
       "refs": {
@@ -1371,6 +1868,12 @@
       "base": null,
       "refs": {
         "WorkloadIdentityDetails$workloadIdentityArn": "<p>The Amazon Resource Name (ARN) of the workload identity associated with the source resource.</p>"
+      }
+    },
+    "errorMessage": {
+      "base": null,
+      "refs": {
+        "DependencyException$message": null
       }
     }
   }

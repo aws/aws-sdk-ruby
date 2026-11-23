@@ -184,6 +184,15 @@ module Aws
       ]?
     }
 
+      type quick_authentication_config_input = {
+      quick_authentication_type: ("QUICK_MANAGED_PUBLIC_AUTH_CODE"),
+      quick_authentication_configuration_detail_input: {
+        quick_managed_public_auth_code: {
+          redirect_uris: Array[::String]
+        }?
+      }?
+    }
+
       type authorization_code_grant_credentials_details = {
       authorization_code_grant_details: {
         client_id: ::String,
@@ -5371,6 +5380,9 @@ module Aws
       create_and_update_mcp_action: ("DENY" | "ALLOW")?,
       share_mcp_action: ("DENY" | "ALLOW")?,
       use_mcp_action: ("DENY" | "ALLOW")?,
+      local_mcp_action: ("DENY" | "ALLOW")?,
+      create_and_update_local_mcp_action: ("DENY" | "ALLOW")?,
+      use_local_mcp_action: ("DENY" | "ALLOW")?,
       open_api_action: ("DENY" | "ALLOW")?,
       create_and_update_open_api_action: ("DENY" | "ALLOW")?,
       share_open_api_action: ("DENY" | "ALLOW")?,
@@ -6536,6 +6548,7 @@ module Aws
       host: ::String?,
       port: ::Integer?,
       database: ::String,
+      federated_catalog: ::String?,
       cluster_id: ::String?,
       iam_parameters: {
         role_arn: ::String,

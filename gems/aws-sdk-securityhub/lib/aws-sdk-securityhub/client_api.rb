@@ -996,6 +996,13 @@ module Aws::SecurityHub
     FreeTrialStatusValue = Shapes::StringShape.new(name: 'FreeTrialStatusValue')
     FreeTrialStatusValueList = Shapes::ListShape.new(name: 'FreeTrialStatusValueList')
     FreeTrialType = Shapes::StringShape.new(name: 'FreeTrialType')
+    GcpDetail = Shapes::StructureShape.new(name: 'GcpDetail')
+    GcpProviderConfiguration = Shapes::StructureShape.new(name: 'GcpProviderConfiguration')
+    GcpRegionList = Shapes::ListShape.new(name: 'GcpRegionList')
+    GcpResourceDetails = Shapes::DocumentShape.new(name: 'GcpResourceDetails', document: true)
+    GcpScopeConfiguration = Shapes::StructureShape.new(name: 'GcpScopeConfiguration')
+    GcpScopeType = Shapes::StringShape.new(name: 'GcpScopeType')
+    GcpUpdateConfiguration = Shapes::StructureShape.new(name: 'GcpUpdateConfiguration')
     GenerateRecommendedPolicyV2Request = Shapes::StructureShape.new(name: 'GenerateRecommendedPolicyV2Request')
     GenerateRecommendedPolicyV2Response = Shapes::StructureShape.new(name: 'GenerateRecommendedPolicyV2Response')
     GeneratorDetails = Shapes::StructureShape.new(name: 'GeneratorDetails')
@@ -1052,6 +1059,12 @@ module Aws::SecurityHub
     GetResourcesV2Response = Shapes::StructureShape.new(name: 'GetResourcesV2Response')
     GetSecurityControlDefinitionRequest = Shapes::StructureShape.new(name: 'GetSecurityControlDefinitionRequest')
     GetSecurityControlDefinitionResponse = Shapes::StructureShape.new(name: 'GetSecurityControlDefinitionResponse')
+    GetSoftwareResourcesV2Request = Shapes::StructureShape.new(name: 'GetSoftwareResourcesV2Request')
+    GetSoftwareResourcesV2Response = Shapes::StructureShape.new(name: 'GetSoftwareResourcesV2Response')
+    GetSoftwareStatisticsV2Request = Shapes::StructureShape.new(name: 'GetSoftwareStatisticsV2Request')
+    GetSoftwareStatisticsV2Response = Shapes::StructureShape.new(name: 'GetSoftwareStatisticsV2Response')
+    GetSoftwareV2Request = Shapes::StructureShape.new(name: 'GetSoftwareV2Request')
+    GetSoftwareV2Response = Shapes::StructureShape.new(name: 'GetSoftwareV2Response')
     GranularityField = Shapes::StringShape.new(name: 'GranularityField')
     GroupByField = Shapes::StringShape.new(name: 'GroupByField')
     GroupByResult = Shapes::StructureShape.new(name: 'GroupByResult')
@@ -1402,8 +1415,22 @@ module Aws::SecurityHub
     Signal = Shapes::StructureShape.new(name: 'Signal')
     SignalsList = Shapes::ListShape.new(name: 'SignalsList')
     SizeBytes = Shapes::IntegerShape.new(name: 'SizeBytes')
+    SoftwareCompositeFilter = Shapes::StructureShape.new(name: 'SoftwareCompositeFilter')
+    SoftwareCompositeFilterList = Shapes::ListShape.new(name: 'SoftwareCompositeFilterList')
+    SoftwareFilters = Shapes::StructureShape.new(name: 'SoftwareFilters')
+    SoftwareGroupByField = Shapes::StringShape.new(name: 'SoftwareGroupByField')
+    SoftwareGroupByRule = Shapes::StructureShape.new(name: 'SoftwareGroupByRule')
+    SoftwareGroupByRules = Shapes::ListShape.new(name: 'SoftwareGroupByRules')
+    SoftwareList = Shapes::ListShape.new(name: 'SoftwareList')
     SoftwarePackage = Shapes::StructureShape.new(name: 'SoftwarePackage')
     SoftwarePackageList = Shapes::ListShape.new(name: 'SoftwarePackageList')
+    SoftwareResourceResult = Shapes::StructureShape.new(name: 'SoftwareResourceResult')
+    SoftwareResourceResultList = Shapes::ListShape.new(name: 'SoftwareResourceResultList')
+    SoftwareResult = Shapes::StructureShape.new(name: 'SoftwareResult')
+    SoftwareScopes = Shapes::StructureShape.new(name: 'SoftwareScopes')
+    SoftwareStringField = Shapes::StringShape.new(name: 'SoftwareStringField')
+    SoftwareStringFilter = Shapes::StructureShape.new(name: 'SoftwareStringFilter')
+    SoftwareStringFilterList = Shapes::ListShape.new(name: 'SoftwareStringFilterList')
     SortCriteria = Shapes::ListShape.new(name: 'SortCriteria')
     SortCriterion = Shapes::StructureShape.new(name: 'SortCriterion')
     SortOrder = Shapes::StringShape.new(name: 'SortOrder')
@@ -5988,14 +6015,18 @@ module Aws::SecurityHub
     CspmHealthCheck.struct_class = Types::CspmHealthCheck
 
     CspmProviderConfiguration.add_member(:azure, Shapes::ShapeRef.new(shape: AzureProviderConfiguration, location_name: "Azure"))
+    CspmProviderConfiguration.add_member(:gcp, Shapes::ShapeRef.new(shape: GcpProviderConfiguration, location_name: "GCP"))
     CspmProviderConfiguration.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     CspmProviderConfiguration.add_member_subclass(:azure, Types::CspmProviderConfiguration::Azure)
+    CspmProviderConfiguration.add_member_subclass(:gcp, Types::CspmProviderConfiguration::Gcp)
     CspmProviderConfiguration.add_member_subclass(:unknown, Types::CspmProviderConfiguration::Unknown)
     CspmProviderConfiguration.struct_class = Types::CspmProviderConfiguration
 
     CspmProviderDetail.add_member(:azure, Shapes::ShapeRef.new(shape: AzureDetail, location_name: "Azure"))
+    CspmProviderDetail.add_member(:gcp, Shapes::ShapeRef.new(shape: GcpDetail, location_name: "GCP"))
     CspmProviderDetail.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     CspmProviderDetail.add_member_subclass(:azure, Types::CspmProviderDetail::Azure)
+    CspmProviderDetail.add_member_subclass(:gcp, Types::CspmProviderDetail::Gcp)
     CspmProviderDetail.add_member_subclass(:unknown, Types::CspmProviderDetail::Unknown)
     CspmProviderDetail.struct_class = Types::CspmProviderDetail
 
@@ -6005,8 +6036,10 @@ module Aws::SecurityHub
     CspmProviderSummary.struct_class = Types::CspmProviderSummary
 
     CspmProviderUpdateConfiguration.add_member(:azure, Shapes::ShapeRef.new(shape: AzureUpdateConfiguration, location_name: "Azure"))
+    CspmProviderUpdateConfiguration.add_member(:gcp, Shapes::ShapeRef.new(shape: GcpUpdateConfiguration, location_name: "GCP"))
     CspmProviderUpdateConfiguration.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     CspmProviderUpdateConfiguration.add_member_subclass(:azure, Types::CspmProviderUpdateConfiguration::Azure)
+    CspmProviderUpdateConfiguration.add_member_subclass(:gcp, Types::CspmProviderUpdateConfiguration::Gcp)
     CspmProviderUpdateConfiguration.add_member_subclass(:unknown, Types::CspmProviderUpdateConfiguration::Unknown)
     CspmProviderUpdateConfiguration.struct_class = Types::CspmProviderUpdateConfiguration
 
@@ -6445,6 +6478,26 @@ module Aws::SecurityHub
 
     FreeTrialStatusValueList.member = Shapes::ShapeRef.new(shape: FreeTrialStatusValue)
 
+    GcpDetail.add_member(:aws_config_connector_arn, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "AWSConfigConnectorArn"))
+    GcpDetail.add_member(:scope_configuration, Shapes::ShapeRef.new(shape: GcpScopeConfiguration, required: true, location_name: "ScopeConfiguration"))
+    GcpDetail.add_member(:gcp_regions, Shapes::ShapeRef.new(shape: GcpRegionList, required: true, location_name: "GCPRegions"))
+    GcpDetail.struct_class = Types::GcpDetail
+
+    GcpProviderConfiguration.add_member(:aws_config_connector_arn, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "AWSConfigConnectorArn"))
+    GcpProviderConfiguration.add_member(:scope_configuration, Shapes::ShapeRef.new(shape: GcpScopeConfiguration, required: true, location_name: "ScopeConfiguration"))
+    GcpProviderConfiguration.add_member(:gcp_regions, Shapes::ShapeRef.new(shape: GcpRegionList, required: true, location_name: "GCPRegions"))
+    GcpProviderConfiguration.struct_class = Types::GcpProviderConfiguration
+
+    GcpRegionList.member = Shapes::ShapeRef.new(shape: NonEmptyString)
+
+    GcpScopeConfiguration.add_member(:scope_type, Shapes::ShapeRef.new(shape: GcpScopeType, required: true, location_name: "ScopeType"))
+    GcpScopeConfiguration.add_member(:scope_values, Shapes::ShapeRef.new(shape: ScopeValueList, location_name: "ScopeValues"))
+    GcpScopeConfiguration.struct_class = Types::GcpScopeConfiguration
+
+    GcpUpdateConfiguration.add_member(:scope_configuration, Shapes::ShapeRef.new(shape: GcpScopeConfiguration, required: true, location_name: "ScopeConfiguration"))
+    GcpUpdateConfiguration.add_member(:gcp_regions, Shapes::ShapeRef.new(shape: GcpRegionList, required: true, location_name: "GCPRegions"))
+    GcpUpdateConfiguration.struct_class = Types::GcpUpdateConfiguration
+
     GenerateRecommendedPolicyV2Request.add_member(:metadata_uid, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "MetadataUid"))
     GenerateRecommendedPolicyV2Request.struct_class = Types::GenerateRecommendedPolicyV2Request
 
@@ -6726,6 +6779,40 @@ module Aws::SecurityHub
 
     GetSecurityControlDefinitionResponse.add_member(:security_control_definition, Shapes::ShapeRef.new(shape: SecurityControlDefinition, required: true, location_name: "SecurityControlDefinition"))
     GetSecurityControlDefinitionResponse.struct_class = Types::GetSecurityControlDefinitionResponse
+
+    GetSoftwareResourcesV2Request.add_member(:package_name, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "PackageName"))
+    GetSoftwareResourcesV2Request.add_member(:package_type, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "PackageType"))
+    GetSoftwareResourcesV2Request.add_member(:package_version, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "PackageVersion"))
+    GetSoftwareResourcesV2Request.add_member(:filters, Shapes::ShapeRef.new(shape: SoftwareFilters, location_name: "Filters"))
+    GetSoftwareResourcesV2Request.add_member(:scopes, Shapes::ShapeRef.new(shape: SoftwareScopes, location_name: "Scopes"))
+    GetSoftwareResourcesV2Request.add_member(:sort_criteria, Shapes::ShapeRef.new(shape: SortCriteria, location_name: "SortCriteria"))
+    GetSoftwareResourcesV2Request.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    GetSoftwareResourcesV2Request.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    GetSoftwareResourcesV2Request.struct_class = Types::GetSoftwareResourcesV2Request
+
+    GetSoftwareResourcesV2Response.add_member(:software_resources, Shapes::ShapeRef.new(shape: SoftwareResourceResultList, required: true, location_name: "SoftwareResources"))
+    GetSoftwareResourcesV2Response.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    GetSoftwareResourcesV2Response.struct_class = Types::GetSoftwareResourcesV2Response
+
+    GetSoftwareStatisticsV2Request.add_member(:group_by_rules, Shapes::ShapeRef.new(shape: SoftwareGroupByRules, required: true, location_name: "GroupByRules"))
+    GetSoftwareStatisticsV2Request.add_member(:scopes, Shapes::ShapeRef.new(shape: SoftwareScopes, location_name: "Scopes"))
+    GetSoftwareStatisticsV2Request.add_member(:sort_order, Shapes::ShapeRef.new(shape: SortOrder, location_name: "SortOrder"))
+    GetSoftwareStatisticsV2Request.add_member(:max_statistic_results, Shapes::ShapeRef.new(shape: MaxStatisticResults, location_name: "MaxStatisticResults"))
+    GetSoftwareStatisticsV2Request.struct_class = Types::GetSoftwareStatisticsV2Request
+
+    GetSoftwareStatisticsV2Response.add_member(:group_by_results, Shapes::ShapeRef.new(shape: GroupByResults, required: true, location_name: "GroupByResults"))
+    GetSoftwareStatisticsV2Response.struct_class = Types::GetSoftwareStatisticsV2Response
+
+    GetSoftwareV2Request.add_member(:filters, Shapes::ShapeRef.new(shape: SoftwareFilters, location_name: "Filters"))
+    GetSoftwareV2Request.add_member(:scopes, Shapes::ShapeRef.new(shape: SoftwareScopes, location_name: "Scopes"))
+    GetSoftwareV2Request.add_member(:sort_criteria, Shapes::ShapeRef.new(shape: SortCriteria, location_name: "SortCriteria"))
+    GetSoftwareV2Request.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    GetSoftwareV2Request.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    GetSoftwareV2Request.struct_class = Types::GetSoftwareV2Request
+
+    GetSoftwareV2Response.add_member(:software, Shapes::ShapeRef.new(shape: SoftwareList, required: true, location_name: "Software"))
+    GetSoftwareV2Response.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    GetSoftwareV2Response.struct_class = Types::GetSoftwareV2Response
 
     GroupByResult.add_member(:group_by_field, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "GroupByField"))
     GroupByResult.add_member(:group_by_values, Shapes::ShapeRef.new(shape: GroupByValues, location_name: "GroupByValues"))
@@ -7360,20 +7447,24 @@ module Aws::SecurityHub
     ProviderConfiguration.add_member(:jira_cloud, Shapes::ShapeRef.new(shape: JiraCloudProviderConfiguration, location_name: "JiraCloud"))
     ProviderConfiguration.add_member(:service_now, Shapes::ShapeRef.new(shape: ServiceNowProviderConfiguration, location_name: "ServiceNow"))
     ProviderConfiguration.add_member(:azure, Shapes::ShapeRef.new(shape: AzureProviderConfiguration, location_name: "Azure"))
+    ProviderConfiguration.add_member(:gcp, Shapes::ShapeRef.new(shape: GcpProviderConfiguration, location_name: "GCP"))
     ProviderConfiguration.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     ProviderConfiguration.add_member_subclass(:jira_cloud, Types::ProviderConfiguration::JiraCloud)
     ProviderConfiguration.add_member_subclass(:service_now, Types::ProviderConfiguration::ServiceNow)
     ProviderConfiguration.add_member_subclass(:azure, Types::ProviderConfiguration::Azure)
+    ProviderConfiguration.add_member_subclass(:gcp, Types::ProviderConfiguration::Gcp)
     ProviderConfiguration.add_member_subclass(:unknown, Types::ProviderConfiguration::Unknown)
     ProviderConfiguration.struct_class = Types::ProviderConfiguration
 
     ProviderDetail.add_member(:jira_cloud, Shapes::ShapeRef.new(shape: JiraCloudDetail, location_name: "JiraCloud"))
     ProviderDetail.add_member(:service_now, Shapes::ShapeRef.new(shape: ServiceNowDetail, location_name: "ServiceNow"))
     ProviderDetail.add_member(:azure, Shapes::ShapeRef.new(shape: AzureDetail, location_name: "Azure"))
+    ProviderDetail.add_member(:gcp, Shapes::ShapeRef.new(shape: GcpDetail, location_name: "GCP"))
     ProviderDetail.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     ProviderDetail.add_member_subclass(:jira_cloud, Types::ProviderDetail::JiraCloud)
     ProviderDetail.add_member_subclass(:service_now, Types::ProviderDetail::ServiceNow)
     ProviderDetail.add_member_subclass(:azure, Types::ProviderDetail::Azure)
+    ProviderDetail.add_member_subclass(:gcp, Types::ProviderDetail::Gcp)
     ProviderDetail.add_member_subclass(:unknown, Types::ProviderDetail::Unknown)
     ProviderDetail.struct_class = Types::ProviderDetail
 
@@ -7385,10 +7476,12 @@ module Aws::SecurityHub
     ProviderUpdateConfiguration.add_member(:jira_cloud, Shapes::ShapeRef.new(shape: JiraCloudUpdateConfiguration, location_name: "JiraCloud"))
     ProviderUpdateConfiguration.add_member(:service_now, Shapes::ShapeRef.new(shape: ServiceNowUpdateConfiguration, location_name: "ServiceNow"))
     ProviderUpdateConfiguration.add_member(:azure, Shapes::ShapeRef.new(shape: AzureUpdateConfiguration, location_name: "Azure"))
+    ProviderUpdateConfiguration.add_member(:gcp, Shapes::ShapeRef.new(shape: GcpUpdateConfiguration, location_name: "GCP"))
     ProviderUpdateConfiguration.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     ProviderUpdateConfiguration.add_member_subclass(:jira_cloud, Types::ProviderUpdateConfiguration::JiraCloud)
     ProviderUpdateConfiguration.add_member_subclass(:service_now, Types::ProviderUpdateConfiguration::ServiceNow)
     ProviderUpdateConfiguration.add_member_subclass(:azure, Types::ProviderUpdateConfiguration::Azure)
+    ProviderUpdateConfiguration.add_member_subclass(:gcp, Types::ProviderUpdateConfiguration::Gcp)
     ProviderUpdateConfiguration.add_member_subclass(:unknown, Types::ProviderUpdateConfiguration::Unknown)
     ProviderUpdateConfiguration.struct_class = Types::ProviderUpdateConfiguration
 
@@ -7681,6 +7774,7 @@ module Aws::SecurityHub
     ResourceDetails.add_member(:aws_ec2_client_vpn_endpoint, Shapes::ShapeRef.new(shape: AwsEc2ClientVpnEndpointDetails, location_name: "AwsEc2ClientVpnEndpoint"))
     ResourceDetails.add_member(:code_repository, Shapes::ShapeRef.new(shape: CodeRepositoryDetails, location_name: "CodeRepository"))
     ResourceDetails.add_member(:azure_resource, Shapes::ShapeRef.new(shape: AzureResourceDetails, location_name: "AzureResource"))
+    ResourceDetails.add_member(:gcp_resource, Shapes::ShapeRef.new(shape: GcpResourceDetails, location_name: "GcpResource"))
     ResourceDetails.struct_class = Types::ResourceDetails
 
     ResourceFindingsSummary.add_member(:finding_type, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "FindingType"))
@@ -8103,6 +8197,25 @@ module Aws::SecurityHub
 
     SignalsList.member = Shapes::ShapeRef.new(shape: Signal)
 
+    SoftwareCompositeFilter.add_member(:string_filters, Shapes::ShapeRef.new(shape: SoftwareStringFilterList, location_name: "StringFilters"))
+    SoftwareCompositeFilter.add_member(:nested_composite_filters, Shapes::ShapeRef.new(shape: SoftwareCompositeFilterList, location_name: "NestedCompositeFilters"))
+    SoftwareCompositeFilter.add_member(:operator, Shapes::ShapeRef.new(shape: AllowedOperators, location_name: "Operator"))
+    SoftwareCompositeFilter.struct_class = Types::SoftwareCompositeFilter
+
+    SoftwareCompositeFilterList.member = Shapes::ShapeRef.new(shape: SoftwareCompositeFilter)
+
+    SoftwareFilters.add_member(:composite_filters, Shapes::ShapeRef.new(shape: SoftwareCompositeFilterList, location_name: "CompositeFilters"))
+    SoftwareFilters.add_member(:composite_operator, Shapes::ShapeRef.new(shape: AllowedOperators, location_name: "CompositeOperator"))
+    SoftwareFilters.struct_class = Types::SoftwareFilters
+
+    SoftwareGroupByRule.add_member(:group_by_field, Shapes::ShapeRef.new(shape: SoftwareGroupByField, required: true, location_name: "GroupByField"))
+    SoftwareGroupByRule.add_member(:filters, Shapes::ShapeRef.new(shape: SoftwareFilters, location_name: "Filters"))
+    SoftwareGroupByRule.struct_class = Types::SoftwareGroupByRule
+
+    SoftwareGroupByRules.member = Shapes::ShapeRef.new(shape: SoftwareGroupByRule)
+
+    SoftwareList.member = Shapes::ShapeRef.new(shape: SoftwareResult)
+
     SoftwarePackage.add_member(:name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Name"))
     SoftwarePackage.add_member(:version, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Version"))
     SoftwarePackage.add_member(:epoch, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Epoch"))
@@ -8117,6 +8230,34 @@ module Aws::SecurityHub
     SoftwarePackage.struct_class = Types::SoftwarePackage
 
     SoftwarePackageList.member = Shapes::ShapeRef.new(shape: SoftwarePackage)
+
+    SoftwareResourceResult.add_member(:account_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "AccountId"))
+    SoftwareResourceResult.add_member(:resource_type, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "ResourceType"))
+    SoftwareResourceResult.add_member(:region, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "Region"))
+    SoftwareResourceResult.add_member(:resource_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "ResourceId"))
+    SoftwareResourceResult.add_member(:resource_provider, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ResourceProvider"))
+    SoftwareResourceResult.add_member(:resource_owner_org_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ResourceOwnerOrgId"))
+    SoftwareResourceResult.add_member(:resource_owner_account_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ResourceOwnerAccountId"))
+    SoftwareResourceResult.add_member(:resource_cloud_partition, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ResourceCloudPartition"))
+    SoftwareResourceResult.add_member(:resource_region, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ResourceRegion"))
+    SoftwareResourceResult.struct_class = Types::SoftwareResourceResult
+
+    SoftwareResourceResultList.member = Shapes::ShapeRef.new(shape: SoftwareResourceResult)
+
+    SoftwareResult.add_member(:package_name, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "PackageName"))
+    SoftwareResult.add_member(:package_version, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "PackageVersion"))
+    SoftwareResult.add_member(:package_type, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "PackageType"))
+    SoftwareResult.add_member(:resource_count, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "ResourceCount"))
+    SoftwareResult.struct_class = Types::SoftwareResult
+
+    SoftwareScopes.add_member(:aws_organizations, Shapes::ShapeRef.new(shape: AwsOrganizationScopeList, location_name: "AwsOrganizations"))
+    SoftwareScopes.struct_class = Types::SoftwareScopes
+
+    SoftwareStringFilter.add_member(:field_name, Shapes::ShapeRef.new(shape: SoftwareStringField, location_name: "FieldName"))
+    SoftwareStringFilter.add_member(:filter, Shapes::ShapeRef.new(shape: StringFilter, location_name: "Filter"))
+    SoftwareStringFilter.struct_class = Types::SoftwareStringFilter
+
+    SoftwareStringFilterList.member = Shapes::ShapeRef.new(shape: SoftwareStringFilter)
 
     SortCriteria.member = Shapes::ShapeRef.new(shape: SortCriterion)
 
@@ -9830,6 +9971,66 @@ module Aws::SecurityHub
         o.errors << Shapes::ShapeRef.new(shape: InvalidAccessException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:get_software_resources_v2, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetSoftwareResourcesV2"
+        o.http_method = "POST"
+        o.http_request_uri = "/softwarev2/resources"
+        o.input = Shapes::ShapeRef.new(shape: GetSoftwareResourcesV2Request)
+        o.output = Shapes::ShapeRef.new(shape: GetSoftwareResourcesV2Response)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OrganizationalUnitNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:get_software_statistics_v2, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetSoftwareStatisticsV2"
+        o.http_method = "POST"
+        o.http_request_uri = "/softwarev2/statistics"
+        o.input = Shapes::ShapeRef.new(shape: GetSoftwareStatisticsV2Request)
+        o.output = Shapes::ShapeRef.new(shape: GetSoftwareStatisticsV2Response)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OrganizationalUnitNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
+      end)
+
+      api.add_operation(:get_software_v2, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetSoftwareV2"
+        o.http_method = "POST"
+        o.http_request_uri = "/softwarev2"
+        o.input = Shapes::ShapeRef.new(shape: GetSoftwareV2Request)
+        o.output = Shapes::ShapeRef.new(shape: GetSoftwareV2Response)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OrganizationalUnitNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:invite_members, Seahorse::Model::Operation.new.tap do |o|

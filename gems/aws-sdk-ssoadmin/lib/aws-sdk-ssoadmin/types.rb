@@ -1718,6 +1718,14 @@ module Aws::SSOAdmin
     #   ARN.
     #   @return [Types::EncryptionConfigurationDetails]
     #
+    # @!attribute [rw] network_configuration_details
+    #   The network access controls configured for your Identity Center
+    #   instance, including whether VPC endpoint access is required, and any
+    #   VPC, IP address range, or application controls applied to instance
+    #   traffic. Present only after a network configuration has been set on
+    #   the instance.
+    #   @return [Types::NetworkConfigurationInfo]
+    #
     # @!attribute [rw] permission_sets_enabled
     #   Indicates whether permission sets are enabled for this Identity
     #   Center instance.
@@ -1737,6 +1745,7 @@ module Aws::SSOAdmin
       :primary_region,
       :regions,
       :encryption_configuration_details,
+      :network_configuration_details,
       :permission_sets_enabled)
       SENSITIVE = []
       include Aws::Structure
@@ -3663,6 +3672,55 @@ module Aws::SSOAdmin
       include Aws::Structure
     end
 
+    # The network access controls for your Identity Center instance. These
+    # controls restrict which networks can reach your instance and
+    # applications.
+    #
+    # @!attribute [rw] vpce_access_required
+    #   Specifies whether access to your Identity Center instance and to
+    #   applications must originate from a VPC endpoint. When this value is
+    #   `true` and no other field is specified, access is allowed from any
+    #   VPC in your organization, or from any VPC in the Amazon Web Services
+    #   account for an account instance, and applies to all applications.
+    #   When this value is `false`, no network access control is enforced
+    #   and the values of `RestrictSourceVpcs`, `AllowSourceIps`, and
+    #   `ExcludeApplicationArns` are cleared.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] restrict_source_vpcs
+    #   Limits access to the VPC endpoints in the VPCs that you specify.
+    #   These VPCs must be in your organization, or in the Amazon Web
+    #   Services account for an account instance. If you don't specify this
+    #   value, access is allowed from any VPC in your organization or Amazon
+    #   Web Services account.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] allow_source_ips
+    #   Allows access from the IPv4 or IPv6 CIDR blocks that you specify, in
+    #   addition to the VPCs allowed by `RestrictSourceVpcs`. If you don't
+    #   specify this value, no additional IP address ranges are allowed.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] exclude_application_arns
+    #   Exempts the applications that you specify from the network access
+    #   control, so that access to them is unchanged. You can specify both
+    #   Amazon Web Services managed applications and customer managed
+    #   applications, and you can use wildcards. These applications are not
+    #   restricted by `RestrictSourceVpcs` or `AllowSourceIps`. If you
+    #   don't specify this value, the controls apply to all applications.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/NetworkConfigurationInfo AWS API Documentation
+    #
+    class NetworkConfigurationInfo < Struct.new(
+      :vpce_access_required,
+      :restrict_source_vpcs,
+      :allow_source_ips,
+      :exclude_application_arns)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A structure that describes configuration settings for a trusted token
     # issuer that supports OpenID Connect (OIDC) and JSON Web Tokens (JWTs).
     #
@@ -4645,19 +4703,34 @@ module Aws::SSOAdmin
     #   instance. You can use this to configure customer managed KMS keys or
     #   Amazon Web Services owned KMS keys for encrypting your instance
     #   data.
+    #
+    #   <note markdown="1"> You can't set more than one of `EncryptionConfiguration`,
+    #   `PermissionSetsEnabled`, and `NetworkConfiguration` in the same
+    #   request. To configure more than one of them, make a separate
+    #   `UpdateInstance` call for each. These calls can be made in parallel.
+    #
+    #    </note>
     #   @return [Types::EncryptionConfiguration]
     #
     # @!attribute [rw] permission_sets_enabled
     #   Enables permission sets for this Identity Center instance. The only
     #   accepted value is `true `. After permission sets are enabled, they
     #   cannot be disabled.
-    #
-    #   <note markdown="1"> You can't set `EncryptionConfiguration` and `PermissionSetsEnabled`
-    #   in the same request. To configure both, make two separate
-    #   `UpdateInstance` calls. You can make these calls in parallel.
-    #
-    #    </note>
     #   @return [Boolean]
+    #
+    # @!attribute [rw] network_configuration
+    #   Specifies the network access controls for your Identity Center
+    #   instance. Use this to require that access to your instance and to
+    #   applications originates from VPC endpoints, and to optionally
+    #   restrict which VPCs are permitted, allow specific IP address ranges
+    #   that bypass the VPC endpoint requirement, or exempt specific
+    #   applications from the controls.
+    #
+    #   If you omit `NetworkConfiguration`, the stored network configuration
+    #   is preserved. If you specify `NetworkConfiguration`, it replaces the
+    #   stored network configuration in its entirety. Any list that you omit
+    #   from the object, or include as an empty list, is cleared.
+    #   @return [Types::NetworkConfigurationInfo]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/UpdateInstanceRequest AWS API Documentation
     #
@@ -4665,7 +4738,8 @@ module Aws::SSOAdmin
       :name,
       :instance_arn,
       :encryption_configuration,
-      :permission_sets_enabled)
+      :permission_sets_enabled,
+      :network_configuration)
       SENSITIVE = []
       include Aws::Structure
     end

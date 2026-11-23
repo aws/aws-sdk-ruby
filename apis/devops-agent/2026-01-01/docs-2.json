@@ -27,6 +27,7 @@
     "GetAssetFile": "<p>Gets a file from an asset</p>",
     "GetAssociation": "<p>Retrieves given associations configured for a specific AgentSpace.</p>",
     "GetBacklogTask": "<p>Gets a backlog task for the specified agent space and task id</p>",
+    "GetChat": "<p>Retrieves the details of a chat execution, including its execution ID, summary, timestamps, and archive status.</p>",
     "GetOperatorApp": "<p>Get the full auth configuration of operator including any enabled auth flow</p>",
     "GetRecommendation": "<p>Retrieves a specific recommendation by its ID</p>",
     "GetService": "<p>Retrieves given service by it's unique identifier</p>",
@@ -59,6 +60,7 @@
     "UpdateAssetFile": "<p>Updates a file in an asset</p>",
     "UpdateAssociation": "<p>Partially updates the configuration of an existing service association for an AgentSpace. Present fields are fully replaced; absent fields are left unchanged. Returns 200 OK on success.</p>",
     "UpdateBacklogTask": "<p>Update an existing backlog task.</p>",
+    "UpdateChat": "<p>Updates a chat execution. You can use this operation to change the chat execution's summary or to archive or unarchive it.</p><p>Archiving a chat execution hides it from the default chat list. Unarchiving a chat execution restores it to the default chat list.</p>",
     "UpdateGoal": "<p>Update an existing goal</p>",
     "UpdateOperatorAppIdpConfig": "<p>Update the external Identity Provider configuration for the Operator App</p>",
     "UpdatePrivateConnectionCertificate": "<p>Updates the certificate associated with a Private Connection.</p>",
@@ -82,6 +84,13 @@
     "AccessDeniedException": {
       "base": "<p>Access to the requested resource is denied due to insufficient permissions.</p>",
       "refs": {}
+    },
+    "AccountIdList": {
+      "base": null,
+      "refs": {
+        "OrgSourceIssue$accountIds": "<p>The Amazon Web Services account IDs affected by this issue.</p>",
+        "SourceAwsOrgUnit$accountIds": "<p>The Amazon Web Services account IDs that belong to this organizational unit and are targeted for source monitoring.</p>"
+      }
     },
     "AdditionalServiceDetails": {
       "base": "<p>Union of service-specific details for different service types.</p>",
@@ -145,6 +154,7 @@
         "GetAssetFileRequest$agentSpaceId": "<p>The unique identifier for the agent space containing the asset</p>",
         "GetAssetRequest$agentSpaceId": "<p>The unique identifier for the agent space containing the asset</p>",
         "GetBacklogTaskRequest$agentSpaceId": "<p>The unique identifier for the agent space containing the task</p>",
+        "GetChatRequest$agentSpaceId": "<p>The unique identifier of the agent space that contains the chat execution.</p>",
         "GetRecommendationRequest$agentSpaceId": "<p>The unique identifier for the agent space containing the recommendation</p>",
         "GetTriggerRequest$agentSpaceId": "<p>The unique identifier for the agent space containing the Trigger</p>",
         "ListAssetFilesRequest$agentSpaceId": "<p>The unique identifier for the agent space containing the asset</p>",
@@ -162,6 +172,7 @@
         "UpdateAssetFileRequest$agentSpaceId": "<p>The unique identifier for the agent space containing the asset</p>",
         "UpdateAssetRequest$agentSpaceId": "<p>The unique identifier for the agent space containing the asset</p>",
         "UpdateBacklogTaskRequest$agentSpaceId": "<p>The unique identifier for the agent space containing the task</p>",
+        "UpdateChatRequest$agentSpaceId": "<p>The unique identifier of the agent space that contains the chat execution to update.</p>",
         "UpdateGoalRequest$agentSpaceId": "<p>The unique identifier for the agent space containing the goal</p>",
         "UpdateRecommendationRequest$agentSpaceId": "<p>The unique identifier for the agent space containing the recommendation</p>",
         "UpdateTriggerRequest$agentSpaceId": "<p>The unique identifier for the agent space containing the Trigger</p>"
@@ -471,6 +482,20 @@
         "EnableOperatorAppInput$authFlow": "<p>The authentication flow configured for the operator App. e.g. iam or idc</p>"
       }
     },
+    "AwsAccountId": {
+      "base": null,
+      "refs": {
+        "AccountIdList$member": null
+      }
+    },
+    "AwsSourceMode": {
+      "base": null,
+      "refs": {
+        "AgentSpace$awsSourceMode": "<p>The Amazon Web Services source mode for the AgentSpace, indicating whether its Amazon Web Services source configuration targets an individual Amazon Web Services account or an Amazon Web Services Organization.</p>",
+        "CreateAgentSpaceInput$awsSourceMode": "<p>Specifies whether the AgentSpace's Amazon Web Services source configuration targets an individual Amazon Web Services account or an Amazon Web Services Organization.</p>",
+        "UpdateAgentSpaceInput$awsSourceMode": "<p>Specifies whether the AgentSpace's Amazon Web Services source configuration targets an individual Amazon Web Services account or an Amazon Web Services Organization. Use this parameter to switch an existing AgentSpace between source modes.</p>"
+      }
+    },
     "AzureConfiguration": {
       "base": "<p>Configuration for Azure subscription integration.</p>",
       "refs": {
@@ -516,6 +541,7 @@
         "AgentSpacePreferences$value": null,
         "CapabilityConfiguration$enabled": "<p>Whether the capability is enabled.</p>",
         "MCPServerOAuth3LOConfig$supportCodeChallenge": "<p>Whether the service supports PKCE (Proof Key for Code Exchange) for enhanced security during the OAuth flow.</p>",
+        "MSTeamsBidirectionalConfiguration$enabled": "<p>Specifies whether bidirectional communication is enabled for this association. If you set this value to <code>true</code>, you can mention the agent in the configured Microsoft Teams channel and it responds in that channel. If you omit this parameter or set it to <code>false</code>, the agent only sends one-way notifications.</p>",
         "SendMessageContentBlockStopEvent$last": "<p>Whether this is the final content block in the response</p>",
         "SlackBidirectionalConfiguration$enabled": "<p>Whether bidirectional communication is enabled for this association. When you set this value to true, you can mention the agent in a configured Slack channel and it responds in that channel. When you omit this value or set it to false, the agent ignores mentions and only sends notifications.</p>",
         "Task$hasLinkedTasks": "<p>Indicates if this task has other tasks linked to it</p>",
@@ -546,6 +572,16 @@
         "SelfManagedInput$certificate": "<p>Certificate for the Private Connection.</p>",
         "ServiceManagedInput$certificate": "<p>Certificate for the Private Connection.</p>",
         "UpdatePrivateConnectionCertificateInput$certificate": "<p>The new certificate for the Private Connection.</p>"
+      }
+    },
+    "ChatArchiveStatus": {
+      "base": null,
+      "refs": {
+        "ChatExecution$archiveStatus": "<p>Indicates whether the chat execution is archived or active.</p>",
+        "GetChatResponse$archiveStatus": "<p>Indicates whether the chat execution is archived or active.</p>",
+        "ListChatsRequest$archiveStatus": "<p>The archive status to filter by. Use this parameter to list only archived chat executions or only active ones.</p>",
+        "UpdateChatRequest$archiveStatus": "<p>The archive status to set for the chat execution. Use this parameter to archive the chat execution, hiding it from the default chat list, or to unarchive it, restoring it to the default chat list.</p>",
+        "UpdateChatResponse$archiveStatus": "<p>The archive status of the chat execution after the update.</p>"
       }
     },
     "ChatExecution": {
@@ -590,6 +626,12 @@
     "ConflictException": {
       "base": "<p>The request conflicts with the current state of the resource.</p>",
       "refs": {}
+    },
+    "ConflictExceptionReason": {
+      "base": null,
+      "refs": {
+        "ConflictException$reason": "<p>A machine-readable reason code that explains why the request conflicted with the current state of the resource. For example, <code>CHAT_ARCHIVED</code> indicates that the request acted on a chat that is archived. This field is absent when no specific reason applies.</p>"
+      }
     },
     "ContentSizeExceededException": {
       "base": "<p>This exception is thrown when the content size exceeds the allowed limit.</p>",
@@ -1064,6 +1106,14 @@
     },
     "GetBacklogTaskResponse": {
       "base": "<p>Response structure containing the requested backlog task</p>",
+      "refs": {}
+    },
+    "GetChatRequest": {
+      "base": null,
+      "refs": {}
+    },
+    "GetChatResponse": {
+      "base": null,
       "refs": {}
     },
     "GetOperatorAppInput": {
@@ -1909,6 +1959,12 @@
         "MCPToolsList$member": null
       }
     },
+    "MSTeamsBidirectionalConfiguration": {
+      "base": "<p>Configuration for bidirectional communication with a Microsoft Teams channel. When enabled, the agent receives and responds to mentions in the configured channel in addition to sending notifications.</p>",
+      "refs": {
+        "MSTeamsConfiguration$bidirectional": "<p>The bidirectional communication configuration for the Microsoft Teams integration. Provide this configuration with <code>enabled</code> set to <code>true</code> to allow users to interact with the agent directly from Microsoft Teams.</p>"
+      }
+    },
     "MSTeamsChannel": {
       "base": "<p>Represents a channel in a Microsoft Teams team that the DevOps Agent service can send notifications to.</p>",
       "refs": {
@@ -2098,6 +2154,54 @@
       "base": "<p>Sort order options for journal operations</p>",
       "refs": {
         "ListJournalRecordsRequest$order": "<p>Sort order for the records based on timestamp (default: DESC)</p>"
+      }
+    },
+    "OrgSourceAccountReasonCode": {
+      "base": null,
+      "refs": {
+        "OrgSourceIssue$reasonCode": "<p>A code that identifies the reason for the issue.</p>"
+      }
+    },
+    "OrgSourceDeploymentState": {
+      "base": "<p>Describes the current rollout state of an Amazon Web Services Organization source configuration, including the number of accounts that have been deployed to and any issues encountered during deployment.</p>",
+      "refs": {
+        "SourceAwsOrgConfiguration$deploymentState": "<p>The current deployment state of the Amazon Web Services Organization-wide source configuration.</p>"
+      }
+    },
+    "OrgSourceDeploymentStateDeployedAccountCountInteger": {
+      "base": null,
+      "refs": {
+        "OrgSourceDeploymentState$deployedAccountCount": "<p>The number of accounts in the targeted Amazon Web Services Organization or organizational unit that have successfully been deployed to.</p>"
+      }
+    },
+    "OrgSourceIssue": {
+      "base": "<p>Describes an issue encountered while deploying or evaluating an Amazon Web Services Organization source configuration.</p>",
+      "refs": {
+        "OrgSourceIssueList$member": null
+      }
+    },
+    "OrgSourceIssueAccountCountInteger": {
+      "base": null,
+      "refs": {
+        "OrgSourceIssue$accountCount": "<p>The number of accounts affected by this issue.</p>"
+      }
+    },
+    "OrgSourceIssueList": {
+      "base": null,
+      "refs": {
+        "OrgSourceDeploymentState$issues": "<p>The issues encountered while deploying the source configuration across the accounts in the Amazon Web Services Organization.</p>"
+      }
+    },
+    "OrgSourceIssueMessage": {
+      "base": null,
+      "refs": {
+        "OrgSourceIssue$message": "<p>A description of the issue.</p>"
+      }
+    },
+    "OrgUnitId": {
+      "base": null,
+      "refs": {
+        "SourceAwsOrgUnit$organizationalUnitId": "<p>The identifier of the Organizations organizational unit.</p>"
       }
     },
     "PagerDutyAuthorizationConfig": {
@@ -2669,6 +2773,8 @@
         "GetAssetFileRequest$assetId": "<p>The unique identifier of the asset containing the file</p>",
         "GetAssetRequest$assetId": "<p>The unique identifier of the asset to retrieve</p>",
         "GetBacklogTaskRequest$taskId": "<p>The unique identifier of the task to retrieve</p>",
+        "GetChatRequest$executionId": "<p>The unique identifier of the chat execution to retrieve.</p>",
+        "GetChatResponse$executionId": "<p>The unique identifier of the chat execution.</p>",
         "GetRecommendationRequest$recommendationId": "<p>The unique identifier for the recommendation to retrieve</p>",
         "GetTriggerRequest$triggerId": "<p>The unique identifier of the Trigger to retrieve</p>",
         "ListAssetFilesRequest$assetId": "<p>The unique identifier of the asset whose files to list</p>",
@@ -2687,6 +2793,8 @@
         "UpdateAssetFileRequest$assetId": "<p>The unique identifier of the asset containing the file</p>",
         "UpdateAssetRequest$assetId": "<p>The unique identifier of the asset to update</p>",
         "UpdateBacklogTaskRequest$taskId": "<p>The unique identifier of the task to update</p>",
+        "UpdateChatRequest$executionId": "<p>The unique identifier of the chat execution to update.</p>",
+        "UpdateChatResponse$executionId": "<p>The unique identifier of the updated chat execution.</p>",
         "UpdateRecommendationRequest$recommendationId": "<p>The unique identifier for the recommendation to update</p>",
         "UpdateTriggerRequest$triggerId": "<p>The unique identifier of the Trigger to update</p>"
       }
@@ -2700,10 +2808,12 @@
       "refs": {
         "AWSConfiguration$assumableRoleArn": "<p>Role ARN to be assumed by AIDevOps to operate on behalf of customer.</p>",
         "AWSConfiguration$agentElevatedRoleArn": "<p>Optional IAM role ARN to be assumed by AIDevOps for elevated directed actions on behalf of the customer. Used for mutating operations gated by elevatedActionsEnabled on the AgentSpace. When not provided, only non-elevated directed actions are available for this AWS account.</p>",
+        "AWSConfiguration$serviceManagementRoleArn": "<p>The Amazon Resource Name (ARN) of the Organizations service-managed role that AIDevOps uses to deploy and manage resources across the accounts in your Amazon Web Services Organization.</p>",
         "EnableOperatorAppInput$operatorAppRoleArn": "<p>The IAM role end users assume to access AIDevOps APIs</p>",
         "GitHubConfiguration$runtimeRoleArn": "<p>Optional role ARN that AIDevOps assumes at runtime for automatic verification testing and VPC connectivity on this association.</p>",
         "GitLabConfiguration$runtimeRoleArn": "<p>Optional role ARN that AIDevOps assumes at runtime for automatic verification testing and VPC connectivity on this association.</p>",
         "MCPServerSigV4AuthorizationConfig$mcpRoleArn": "<p>IAM role ARN to assume for SigV4 signing. Optional — when omitted, credentials are resolved at runtime via a monitor account association.</p>",
+        "MSTeamsBidirectionalConfiguration$roleArn": "<p>The Amazon Resource Name (ARN) of the IAM role that the agent assumes to exchange messages with the Microsoft Teams team for this association.</p>",
         "PrivateNetworkAccess$runtimeRoleArn": "<p>Role ARN that AWS DevOps Agent assumes at runtime to connect to your VPC.</p>",
         "RegisteredAzureIdentityDetails$webIdentityRoleArn": "<p>The role ARN to be assumed by DevOps Agent for requesting Web Identity Token.</p>",
         "RegisteredMCPServerSigV4Details$mcpRoleArn": null,
@@ -3004,7 +3114,8 @@
     "SourceAccountType": {
       "base": "<p>AWS association type for source account.</p>",
       "refs": {
-        "SourceAwsConfiguration$accountType": "<p>Account Type 'source' for AIDevOps monitoring.</p>"
+        "SourceAwsConfiguration$accountType": "<p>Account Type 'source' for AIDevOps monitoring.</p>",
+        "SourceAwsOrgConfiguration$accountType": "<p>The account type for this configuration. For Amazon Web Services Organization-level configurations, this value is <code>source</code>.</p>"
       }
     },
     "SourceAwsConfiguration": {
@@ -3017,6 +3128,18 @@
       "base": null,
       "refs": {
         "SourceAwsConfiguration$accountId": "<p>AWS Account Id corresponding to provided resources.</p>"
+      }
+    },
+    "SourceAwsOrgConfiguration": {
+      "base": "<p>Configuration for Amazon Web Services Organization-wide source account integration. Use this configuration to monitor Amazon Web Services resources across multiple accounts within an organization or within targeted organizational units.</p>",
+      "refs": {
+        "ServiceConfiguration$sourceAwsOrg": "<p>The Amazon Web Services Organization source configuration used to monitor resources across an entire Amazon Web Services Organization or specified organizational units.</p>"
+      }
+    },
+    "SourceAwsOrgUnit": {
+      "base": "<p>Identifies an Organizations organizational unit and its member accounts that are targeted for source monitoring.</p>",
+      "refs": {
+        "SourceAwsOrgConfiguration$organizationalUnit": "<p>The organizational units within the Amazon Web Services Organization that are targeted for source monitoring.</p>"
       }
     },
     "String": {
@@ -3046,6 +3169,7 @@
         "Execution$uid": "<p>The unique identifier for the user session associated with this execution</p>",
         "GenericWebhook$webhookUrl": "<p>The webhook URL endpoint</p>",
         "GenericWebhook$webhookId": "<p>The unique webhook identifier</p>",
+        "GetChatResponse$summary": "<p>The summary of the chat execution.</p>",
         "GitHubConfiguration$repoName": "<p>Associated Github repo name</p>",
         "GitHubConfiguration$repoId": "<p>Associated Github repo ID</p>",
         "GitHubConfiguration$owner": "<p>The GitHub repository owner name.</p>",
@@ -3151,6 +3275,7 @@
         "Task$primaryTaskId": "<p>The task ID of the primary investigation this task is linked to</p>",
         "Task$statusReason": "<p>Explanation for why the task status was changed (e.g., linked reason)</p>",
         "ThrottlingException$message": "<p>Detailed error message describing the throttling condition.</p>",
+        "UpdateChatResponse$summary": "<p>The summary of the chat execution after the update.</p>",
         "UpdateGoalRequest$goalId": "<p>The unique identifier of the goal to update</p>",
         "UpdateRecommendationRequest$additionalContext": "<p>Additional context for recommendation</p>",
         "UserMessageBlock$text": "<p>Text content from the user.</p>",
@@ -3182,6 +3307,7 @@
         "IdcAuthConfiguration$updatedAt": "<p>The timestamp when the Operator App IdC auth flow was updated.</p>",
         "IdpAuthConfiguration$createdAt": "<p>The timestamp when the Operator App IdP auth flow was enabled.</p>",
         "IdpAuthConfiguration$updatedAt": "<p>The timestamp when the Operator App IdP auth flow was updated.</p>",
+        "OrgSourceDeploymentState$lastEvaluatedAt": "<p>The timestamp of the most recent evaluation of the organization-wide deployment state.</p>",
         "PrivateConnectionSummary$certificateExpiryTime": "<p>The expiry time of the certificate associated with the Private Connection. Only present when a certificate is associated.</p>",
         "RegisteredService$createdAt": "<p>The timestamp when the service was registered.</p>",
         "RegisteredService$updatedAt": "<p>The timestamp when the service was last updated.</p>",
@@ -3335,12 +3461,15 @@
         "ChatExecution$createdAt": "<p>Timestamp when the chat was created</p>",
         "ChatExecution$updatedAt": "<p>Timestamp when the chat was last updated</p>",
         "CreateChatResponse$createdAt": "<p>Timestamp when the chat was created</p>",
+        "GetChatResponse$createdAt": "<p>The date and time at which the chat execution was created.</p>",
+        "GetChatResponse$updatedAt": "<p>The date and time at which the chat execution was last updated.</p>",
         "ListAssetsRequest$updatedAfter": "<p>Filter results to only assets updated after this timestamp</p>",
         "ListAssetsRequest$updatedBefore": "<p>Filter results to only assets updated before this timestamp</p>",
         "ListPendingMessagesResponse$createdAt": "<p>Timestamp when the pending messages were created.</p>",
         "Trigger$createdAt": "<p>Timestamp when this Trigger was created</p>",
         "Trigger$updatedAt": "<p>Timestamp when this Trigger was last updated</p>",
-        "UpdateApprovalActionResponse$expiresAt": "<p>Absolute timestamp at which the approval expires. Set when status is APPROVED (computed as the submission time plus ttlSeconds); absent when status is REJECTED.</p>"
+        "UpdateApprovalActionResponse$expiresAt": "<p>Absolute timestamp at which the approval expires. Set when status is APPROVED (computed as the submission time plus ttlSeconds); absent when status is REJECTED.</p>",
+        "UpdateChatResponse$updatedAt": "<p>The date and time at which the chat execution was last updated.</p>"
       }
     },
     "ToolClassification": {
@@ -3526,6 +3655,26 @@
     },
     "UpdateBacklogTaskResponse": {
       "base": "<p>Response structure containing the updated task</p>",
+      "refs": {}
+    },
+    "UpdateChatRequest": {
+      "base": null,
+      "refs": {}
+    },
+    "UpdateChatRequestClientTokenString": {
+      "base": null,
+      "refs": {
+        "UpdateChatRequest$clientToken": "<p>A unique, case-sensitive identifier to ensure that the operation completes no more than one time. If this token matches a previous request, the service ignores the request, but does not return an error.</p>"
+      }
+    },
+    "UpdateChatRequestSummaryString": {
+      "base": null,
+      "refs": {
+        "UpdateChatRequest$summary": "<p>The new summary to set for the chat execution.</p>"
+      }
+    },
+    "UpdateChatResponse": {
+      "base": null,
       "refs": {}
     },
     "UpdateGoalRequest": {

@@ -644,7 +644,7 @@ module Aws::StorageGateway
       attr_accessor supported_gateway_capacities: ::Array[("Small" | "Medium" | "Large")]
       attr_accessor host_environment_id: ::String
       attr_accessor software_version: ::String
-      SENSITIVE: []
+      SENSITIVE: [:gateway_network_interfaces]
     end
 
     class DescribeMaintenanceStartTimeInput

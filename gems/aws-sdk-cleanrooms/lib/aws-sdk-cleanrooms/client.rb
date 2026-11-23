@@ -264,7 +264,8 @@ module Aws::CleanRooms
     #     An integer representing the maximum number attempts that will be made for
     #     a single request, including the initial attempt.  For example,
     #     setting this value to 5 will result in a request being retried up to
-    #     4 times. Used in `standard` and `adaptive` retry modes.
+    #     4 times. Used in `standard` and `adaptive` retry modes. Defaults to 3,
+    #     except for DynamoDB and DynamoDB Streams, which default to 4.
     #
     #   @option options [String] :profile ("default")
     #     Used when loading credentials from the shared credentials file at `HOME/.aws/credentials`.
@@ -327,15 +328,15 @@ module Aws::CleanRooms
     #     used by the default backoff function. This option is only used in the
     #     `legacy` retry mode.
     #
-    #   @option options [String] :retry_mode ("legacy")
+    #   @option options [String] :retry_mode ("standard")
     #     Specifies which retry algorithm to use. Values are:
     #
-    #     * `legacy` - The pre-existing retry behavior. This is the default
-    #       value if no retry mode is provided.
+    #     * `legacy` - The pre-existing retry behavior.
     #
     #     * `standard` - A standardized set of retry rules across the AWS SDKs.
     #       This includes support for retry quotas, which limit the number of
-    #       unsuccessful retries a client can make.
+    #       unsuccessful retries a client can make. This is the default value
+    #       if no retry mode is provided.
     #
     #     * `adaptive` - A retry mode that includes all the functionality of
     #       `standard` mode along with automatic client side throttling.
@@ -1987,6 +1988,9 @@ module Aws::CleanRooms
     #         query_string: "PopulationAnalysisSqlParametersQueryStringString",
     #         analysis_template_arn: "AnalysisTemplateArn",
     #       },
+    #       job_parameters: {
+    #         analysis_template_arn: "AnalysisTemplateArn", # required
+    #       },
     #     },
     #     kms_key_arn: "KMSKeyArn",
     #     retention_in_days: 1,
@@ -2018,6 +2022,7 @@ module Aws::CleanRooms
     #   resp.intermediate_table.kms_key_arn #=> String
     #   resp.intermediate_table.population_analysis_configuration.sql_parameters.query_string #=> String
     #   resp.intermediate_table.population_analysis_configuration.sql_parameters.analysis_template_arn #=> String
+    #   resp.intermediate_table.population_analysis_configuration.job_parameters.analysis_template_arn #=> String
     #   resp.intermediate_table.retention_in_days #=> Integer
     #   resp.intermediate_table.table_dependencies #=> Array
     #   resp.intermediate_table.table_dependencies[0].id #=> String
@@ -2027,7 +2032,7 @@ module Aws::CleanRooms
     #   resp.intermediate_table.table_dependencies[0].creator_account_id #=> String
     #   resp.intermediate_table.intermediate_table_version.version_id #=> String
     #   resp.intermediate_table.intermediate_table_version.analysis_id #=> String
-    #   resp.intermediate_table.intermediate_table_version.analysis_type #=> String, one of "QUERY"
+    #   resp.intermediate_table.intermediate_table_version.analysis_type #=> String, one of "QUERY", "JOB"
     #   resp.intermediate_table.intermediate_table_version.kms_key_arn #=> String
     #   resp.intermediate_table.intermediate_table_version.parameters #=> Hash
     #   resp.intermediate_table.intermediate_table_version.parameters["ParameterName"] #=> String
@@ -3753,6 +3758,7 @@ module Aws::CleanRooms
     #   resp.intermediate_table.kms_key_arn #=> String
     #   resp.intermediate_table.population_analysis_configuration.sql_parameters.query_string #=> String
     #   resp.intermediate_table.population_analysis_configuration.sql_parameters.analysis_template_arn #=> String
+    #   resp.intermediate_table.population_analysis_configuration.job_parameters.analysis_template_arn #=> String
     #   resp.intermediate_table.retention_in_days #=> Integer
     #   resp.intermediate_table.table_dependencies #=> Array
     #   resp.intermediate_table.table_dependencies[0].id #=> String
@@ -3762,7 +3768,7 @@ module Aws::CleanRooms
     #   resp.intermediate_table.table_dependencies[0].creator_account_id #=> String
     #   resp.intermediate_table.intermediate_table_version.version_id #=> String
     #   resp.intermediate_table.intermediate_table_version.analysis_id #=> String
-    #   resp.intermediate_table.intermediate_table_version.analysis_type #=> String, one of "QUERY"
+    #   resp.intermediate_table.intermediate_table_version.analysis_type #=> String, one of "QUERY", "JOB"
     #   resp.intermediate_table.intermediate_table_version.kms_key_arn #=> String
     #   resp.intermediate_table.intermediate_table_version.parameters #=> Hash
     #   resp.intermediate_table.intermediate_table_version.parameters["ParameterName"] #=> String
@@ -4025,6 +4031,9 @@ module Aws::CleanRooms
     #   resp.protected_job.result_configuration.output_configuration.s3.bucket #=> String
     #   resp.protected_job.result_configuration.output_configuration.s3.key_prefix #=> String
     #   resp.protected_job.result_configuration.output_configuration.member.account_id #=> String
+    #   resp.protected_job.result_configuration.output_configuration.intermediate_table.id #=> String
+    #   resp.protected_job.result_configuration.output_configuration.intermediate_table.arn #=> String
+    #   resp.protected_job.result_configuration.output_configuration.intermediate_table.name #=> String
     #   resp.protected_job.statistics.total_duration_in_millis #=> Integer
     #   resp.protected_job.statistics.billed_resource_utilization.units #=> Float
     #   resp.protected_job.result.output.s3.location #=> String
@@ -4032,6 +4041,7 @@ module Aws::CleanRooms
     #   resp.protected_job.result.output.member_list[0].account_id #=> String
     #   resp.protected_job.error.message #=> String
     #   resp.protected_job.error.code #=> String
+    #   resp.protected_job.error.retry.retryable #=> Boolean
     #   resp.protected_job.compute_configuration.worker.type #=> String, one of "CR.1X", "CR.4X"
     #   resp.protected_job.compute_configuration.worker.number #=> Integer
     #   resp.protected_job.compute_configuration.worker.properties.spark #=> Hash
@@ -4101,6 +4111,7 @@ module Aws::CleanRooms
     #   resp.protected_query.result.output.distribute.member_list[0].account_id #=> String
     #   resp.protected_query.error.message #=> String
     #   resp.protected_query.error.code #=> String
+    #   resp.protected_query.error.retry.retryable #=> Boolean
     #   resp.protected_query.differential_privacy.sensitivity_parameters #=> Array
     #   resp.protected_query.differential_privacy.sensitivity_parameters[0].aggregation_type #=> String, one of "AVG", "COUNT", "COUNT_DISTINCT", "SUM", "STDDEV"
     #   resp.protected_query.differential_privacy.sensitivity_parameters[0].aggregation_expression #=> String
@@ -5210,7 +5221,7 @@ module Aws::CleanRooms
     #   resp.intermediate_table_version_summaries[0].create_time #=> Time
     #   resp.intermediate_table_version_summaries[0].analysis_id #=> String
     #   resp.intermediate_table_version_summaries[0].status #=> String, one of "POPULATE_STARTED", "POPULATE_SUCCESS", "POPULATE_FAILED", "RETENTION_PERIOD_EXPIRED"
-    #   resp.intermediate_table_version_summaries[0].analysis_type #=> String, one of "QUERY"
+    #   resp.intermediate_table_version_summaries[0].analysis_type #=> String, one of "QUERY", "JOB"
     #   resp.intermediate_table_version_summaries[0].kms_key_arn #=> String
     #   resp.intermediate_table_version_summaries[0].expiration_time #=> Time
     #   resp.next_token #=> String
@@ -5586,6 +5597,9 @@ module Aws::CleanRooms
     #   resp.protected_jobs[0].receiver_configurations[0].configuration_details.direct_analysis_configuration_details.receiver_account_ids #=> Array
     #   resp.protected_jobs[0].receiver_configurations[0].configuration_details.direct_analysis_configuration_details.receiver_account_ids[0] #=> String
     #   resp.protected_jobs[0].job_compute_payer_account_id #=> String
+    #   resp.protected_jobs[0].intermediate_table_configuration.id #=> String
+    #   resp.protected_jobs[0].intermediate_table_configuration.arn #=> String
+    #   resp.protected_jobs[0].intermediate_table_configuration.name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ListProtectedJobs AWS API Documentation
     #
@@ -5851,6 +5865,17 @@ module Aws::CleanRooms
     #           },
     #         },
     #       },
+    #       job_compute_configuration: {
+    #         worker: {
+    #           type: "CR.1X", # required, accepts CR.1X, CR.4X
+    #           number: 1, # required
+    #           properties: {
+    #             spark: {
+    #               "SparkPropertyKey" => "SparkPropertyValue",
+    #             },
+    #           },
+    #         },
+    #       },
     #     },
     #     analysis_payer_account_id: "AccountId",
     #   })
@@ -5858,7 +5883,7 @@ module Aws::CleanRooms
     # @example Response structure
     #
     #   resp.analysis_id #=> String
-    #   resp.analysis_type #=> String, one of "QUERY"
+    #   resp.analysis_type #=> String, one of "QUERY", "JOB"
     #   resp.version_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/PopulateIntermediateTable AWS API Documentation
@@ -6082,6 +6107,9 @@ module Aws::CleanRooms
     #   resp.protected_job.result_configuration.output_configuration.s3.bucket #=> String
     #   resp.protected_job.result_configuration.output_configuration.s3.key_prefix #=> String
     #   resp.protected_job.result_configuration.output_configuration.member.account_id #=> String
+    #   resp.protected_job.result_configuration.output_configuration.intermediate_table.id #=> String
+    #   resp.protected_job.result_configuration.output_configuration.intermediate_table.arn #=> String
+    #   resp.protected_job.result_configuration.output_configuration.intermediate_table.name #=> String
     #   resp.protected_job.statistics.total_duration_in_millis #=> Integer
     #   resp.protected_job.statistics.billed_resource_utilization.units #=> Float
     #   resp.protected_job.result.output.s3.location #=> String
@@ -6089,6 +6117,7 @@ module Aws::CleanRooms
     #   resp.protected_job.result.output.member_list[0].account_id #=> String
     #   resp.protected_job.error.message #=> String
     #   resp.protected_job.error.code #=> String
+    #   resp.protected_job.error.retry.retryable #=> Boolean
     #   resp.protected_job.compute_configuration.worker.type #=> String, one of "CR.1X", "CR.4X"
     #   resp.protected_job.compute_configuration.worker.number #=> Integer
     #   resp.protected_job.compute_configuration.worker.properties.spark #=> Hash
@@ -6223,6 +6252,7 @@ module Aws::CleanRooms
     #   resp.protected_query.result.output.distribute.member_list[0].account_id #=> String
     #   resp.protected_query.error.message #=> String
     #   resp.protected_query.error.code #=> String
+    #   resp.protected_query.error.retry.retryable #=> Boolean
     #   resp.protected_query.differential_privacy.sensitivity_parameters #=> Array
     #   resp.protected_query.differential_privacy.sensitivity_parameters[0].aggregation_type #=> String, one of "AVG", "COUNT", "COUNT_DISTINCT", "SUM", "STDDEV"
     #   resp.protected_query.differential_privacy.sensitivity_parameters[0].aggregation_expression #=> String
@@ -7187,6 +7217,7 @@ module Aws::CleanRooms
     #   resp.intermediate_table.kms_key_arn #=> String
     #   resp.intermediate_table.population_analysis_configuration.sql_parameters.query_string #=> String
     #   resp.intermediate_table.population_analysis_configuration.sql_parameters.analysis_template_arn #=> String
+    #   resp.intermediate_table.population_analysis_configuration.job_parameters.analysis_template_arn #=> String
     #   resp.intermediate_table.retention_in_days #=> Integer
     #   resp.intermediate_table.table_dependencies #=> Array
     #   resp.intermediate_table.table_dependencies[0].id #=> String
@@ -7196,7 +7227,7 @@ module Aws::CleanRooms
     #   resp.intermediate_table.table_dependencies[0].creator_account_id #=> String
     #   resp.intermediate_table.intermediate_table_version.version_id #=> String
     #   resp.intermediate_table.intermediate_table_version.analysis_id #=> String
-    #   resp.intermediate_table.intermediate_table_version.analysis_type #=> String, one of "QUERY"
+    #   resp.intermediate_table.intermediate_table_version.analysis_type #=> String, one of "QUERY", "JOB"
     #   resp.intermediate_table.intermediate_table_version.kms_key_arn #=> String
     #   resp.intermediate_table.intermediate_table_version.parameters #=> Hash
     #   resp.intermediate_table.intermediate_table_version.parameters["ParameterName"] #=> String
@@ -7597,6 +7628,9 @@ module Aws::CleanRooms
     #   resp.protected_job.result_configuration.output_configuration.s3.bucket #=> String
     #   resp.protected_job.result_configuration.output_configuration.s3.key_prefix #=> String
     #   resp.protected_job.result_configuration.output_configuration.member.account_id #=> String
+    #   resp.protected_job.result_configuration.output_configuration.intermediate_table.id #=> String
+    #   resp.protected_job.result_configuration.output_configuration.intermediate_table.arn #=> String
+    #   resp.protected_job.result_configuration.output_configuration.intermediate_table.name #=> String
     #   resp.protected_job.statistics.total_duration_in_millis #=> Integer
     #   resp.protected_job.statistics.billed_resource_utilization.units #=> Float
     #   resp.protected_job.result.output.s3.location #=> String
@@ -7604,6 +7638,7 @@ module Aws::CleanRooms
     #   resp.protected_job.result.output.member_list[0].account_id #=> String
     #   resp.protected_job.error.message #=> String
     #   resp.protected_job.error.code #=> String
+    #   resp.protected_job.error.retry.retryable #=> Boolean
     #   resp.protected_job.compute_configuration.worker.type #=> String, one of "CR.1X", "CR.4X"
     #   resp.protected_job.compute_configuration.worker.number #=> Integer
     #   resp.protected_job.compute_configuration.worker.properties.spark #=> Hash
@@ -7678,6 +7713,7 @@ module Aws::CleanRooms
     #   resp.protected_query.result.output.distribute.member_list[0].account_id #=> String
     #   resp.protected_query.error.message #=> String
     #   resp.protected_query.error.code #=> String
+    #   resp.protected_query.error.retry.retryable #=> Boolean
     #   resp.protected_query.differential_privacy.sensitivity_parameters #=> Array
     #   resp.protected_query.differential_privacy.sensitivity_parameters[0].aggregation_type #=> String, one of "AVG", "COUNT", "COUNT_DISTINCT", "SUM", "STDDEV"
     #   resp.protected_query.differential_privacy.sensitivity_parameters[0].aggregation_expression #=> String
@@ -7717,7 +7753,7 @@ module Aws::CleanRooms
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-cleanrooms'
-      context[:gem_version] = '1.86.0'
+      context[:gem_version] = '1.94.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -47,7 +47,17 @@ module Aws::Textract
     Block = Shapes::StructureShape.new(name: 'Block')
     BlockList = Shapes::ListShape.new(name: 'BlockList')
     BlockType = Shapes::StringShape.new(name: 'BlockType')
+    BlueprintArn = Shapes::StringShape.new(name: 'BlueprintArn')
+    BlueprintFilter = Shapes::StructureShape.new(name: 'BlueprintFilter')
+    BlueprintItem = Shapes::StructureShape.new(name: 'BlueprintItem')
+    BlueprintItems = Shapes::ListShape.new(name: 'BlueprintItems')
+    BlueprintName = Shapes::StringShape.new(name: 'BlueprintName')
+    BlueprintSchema = Shapes::StringShape.new(name: 'BlueprintSchema')
+    BlueprintSummary = Shapes::StructureShape.new(name: 'BlueprintSummary')
+    BlueprintSummaryList = Shapes::ListShape.new(name: 'BlueprintSummaryList')
+    BlueprintVersion = Shapes::StringShape.new(name: 'BlueprintVersion')
     BoundingBox = Shapes::StructureShape.new(name: 'BoundingBox')
+    BoundingBoxConfiguration = Shapes::StructureShape.new(name: 'BoundingBoxConfiguration')
     ClientRequestToken = Shapes::StringShape.new(name: 'ClientRequestToken')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     ContentClassifier = Shapes::StringShape.new(name: 'ContentClassifier')
@@ -56,11 +66,22 @@ module Aws::Textract
     CreateAdapterResponse = Shapes::StructureShape.new(name: 'CreateAdapterResponse')
     CreateAdapterVersionRequest = Shapes::StructureShape.new(name: 'CreateAdapterVersionRequest')
     CreateAdapterVersionResponse = Shapes::StructureShape.new(name: 'CreateAdapterVersionResponse')
+    CreateBlueprintRequest = Shapes::StructureShape.new(name: 'CreateBlueprintRequest')
+    CreateBlueprintResponse = Shapes::StructureShape.new(name: 'CreateBlueprintResponse')
+    CreateBlueprintVersionRequest = Shapes::StructureShape.new(name: 'CreateBlueprintVersionRequest')
+    CreateBlueprintVersionResponse = Shapes::StructureShape.new(name: 'CreateBlueprintVersionResponse')
+    CreateProjectRequest = Shapes::StructureShape.new(name: 'CreateProjectRequest')
+    CreateProjectResponse = Shapes::StructureShape.new(name: 'CreateProjectResponse')
+    CustomConfiguration = Shapes::StructureShape.new(name: 'CustomConfiguration')
     DateTime = Shapes::TimestampShape.new(name: 'DateTime')
     DeleteAdapterRequest = Shapes::StructureShape.new(name: 'DeleteAdapterRequest')
     DeleteAdapterResponse = Shapes::StructureShape.new(name: 'DeleteAdapterResponse')
     DeleteAdapterVersionRequest = Shapes::StructureShape.new(name: 'DeleteAdapterVersionRequest')
     DeleteAdapterVersionResponse = Shapes::StructureShape.new(name: 'DeleteAdapterVersionResponse')
+    DeleteBlueprintRequest = Shapes::StructureShape.new(name: 'DeleteBlueprintRequest')
+    DeleteBlueprintResponse = Shapes::StructureShape.new(name: 'DeleteBlueprintResponse')
+    DeleteProjectRequest = Shapes::StructureShape.new(name: 'DeleteProjectRequest')
+    DeleteProjectResponse = Shapes::StructureShape.new(name: 'DeleteProjectResponse')
     DetectDocumentTextRequest = Shapes::StructureShape.new(name: 'DetectDocumentTextRequest')
     DetectDocumentTextResponse = Shapes::StructureShape.new(name: 'DetectDocumentTextResponse')
     DetectedSignature = Shapes::StructureShape.new(name: 'DetectedSignature')
@@ -72,10 +93,17 @@ module Aws::Textract
     DocumentMetadata = Shapes::StructureShape.new(name: 'DocumentMetadata')
     DocumentPages = Shapes::ListShape.new(name: 'DocumentPages')
     DocumentTooLargeException = Shapes::StructureShape.new(name: 'DocumentTooLargeException')
+    EncryptionConfiguration = Shapes::StructureShape.new(name: 'EncryptionConfiguration')
+    EncryptionContextKey = Shapes::StringShape.new(name: 'EncryptionContextKey')
+    EncryptionContextValue = Shapes::StringShape.new(name: 'EncryptionContextValue')
+    EncryptionKmsKeyId = Shapes::StringShape.new(name: 'EncryptionKmsKeyId')
     EntityType = Shapes::StringShape.new(name: 'EntityType')
     EntityTypes = Shapes::ListShape.new(name: 'EntityTypes')
     ErrorCode = Shapes::StringShape.new(name: 'ErrorCode')
+    ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
+    ErrorType = Shapes::StringShape.new(name: 'ErrorType')
     EvaluationMetric = Shapes::StructureShape.new(name: 'EvaluationMetric')
+    EventBridgeConfiguration = Shapes::StructureShape.new(name: 'EventBridgeConfiguration')
     ExpenseCurrency = Shapes::StructureShape.new(name: 'ExpenseCurrency')
     ExpenseDetection = Shapes::StructureShape.new(name: 'ExpenseDetection')
     ExpenseDocument = Shapes::StructureShape.new(name: 'ExpenseDocument')
@@ -86,18 +114,29 @@ module Aws::Textract
     ExpenseGroupPropertyList = Shapes::ListShape.new(name: 'ExpenseGroupPropertyList')
     ExpenseType = Shapes::StructureShape.new(name: 'ExpenseType')
     Extraction = Shapes::StructureShape.new(name: 'Extraction')
+    ExtractionConfiguration = Shapes::StructureShape.new(name: 'ExtractionConfiguration')
+    ExtractionGranularity = Shapes::StructureShape.new(name: 'ExtractionGranularity')
+    ExtractionGranularityType = Shapes::StringShape.new(name: 'ExtractionGranularityType')
+    ExtractionGranularityTypes = Shapes::ListShape.new(name: 'ExtractionGranularityTypes')
     ExtractionList = Shapes::ListShape.new(name: 'ExtractionList')
+    FallbackBlueprintItems = Shapes::ListShape.new(name: 'FallbackBlueprintItems')
     FeatureType = Shapes::StringShape.new(name: 'FeatureType')
     FeatureTypes = Shapes::ListShape.new(name: 'FeatureTypes')
+    FigureCaptionConfiguration = Shapes::StructureShape.new(name: 'FigureCaptionConfiguration')
     Float = Shapes::FloatShape.new(name: 'Float')
     FlowDefinitionArn = Shapes::StringShape.new(name: 'FlowDefinitionArn')
+    GenerativeConfiguration = Shapes::StructureShape.new(name: 'GenerativeConfiguration')
     Geometry = Shapes::StructureShape.new(name: 'Geometry')
     GetAdapterRequest = Shapes::StructureShape.new(name: 'GetAdapterRequest')
     GetAdapterResponse = Shapes::StructureShape.new(name: 'GetAdapterResponse')
     GetAdapterVersionRequest = Shapes::StructureShape.new(name: 'GetAdapterVersionRequest')
     GetAdapterVersionResponse = Shapes::StructureShape.new(name: 'GetAdapterVersionResponse')
+    GetBlueprintRequest = Shapes::StructureShape.new(name: 'GetBlueprintRequest')
+    GetBlueprintResponse = Shapes::StructureShape.new(name: 'GetBlueprintResponse')
     GetDocumentAnalysisRequest = Shapes::StructureShape.new(name: 'GetDocumentAnalysisRequest')
     GetDocumentAnalysisResponse = Shapes::StructureShape.new(name: 'GetDocumentAnalysisResponse')
+    GetDocumentInsightsRequest = Shapes::StructureShape.new(name: 'GetDocumentInsightsRequest')
+    GetDocumentInsightsResponse = Shapes::StructureShape.new(name: 'GetDocumentInsightsResponse')
     GetDocumentTextDetectionRequest = Shapes::StructureShape.new(name: 'GetDocumentTextDetectionRequest')
     GetDocumentTextDetectionResponse = Shapes::StructureShape.new(name: 'GetDocumentTextDetectionResponse')
     GetExpenseAnalysisRequest = Shapes::StructureShape.new(name: 'GetExpenseAnalysisRequest')
@@ -106,6 +145,8 @@ module Aws::Textract
     GetLendingAnalysisResponse = Shapes::StructureShape.new(name: 'GetLendingAnalysisResponse')
     GetLendingAnalysisSummaryRequest = Shapes::StructureShape.new(name: 'GetLendingAnalysisSummaryRequest')
     GetLendingAnalysisSummaryResponse = Shapes::StructureShape.new(name: 'GetLendingAnalysisSummaryResponse')
+    GetProjectRequest = Shapes::StructureShape.new(name: 'GetProjectRequest')
+    GetProjectResponse = Shapes::StructureShape.new(name: 'GetProjectResponse')
     HumanLoopActivationConditionsEvaluationResults = Shapes::StringShape.new(name: 'HumanLoopActivationConditionsEvaluationResults')
     HumanLoopActivationOutput = Shapes::StructureShape.new(name: 'HumanLoopActivationOutput')
     HumanLoopActivationReason = Shapes::StringShape.new(name: 'HumanLoopActivationReason')
@@ -122,15 +163,19 @@ module Aws::Textract
     IdentityDocumentFieldList = Shapes::ListShape.new(name: 'IdentityDocumentFieldList')
     IdentityDocumentList = Shapes::ListShape.new(name: 'IdentityDocumentList')
     ImageBlob = Shapes::BlobShape.new(name: 'ImageBlob')
+    InputConfiguration = Shapes::StructureShape.new(name: 'InputConfiguration')
+    IntelligencePaginationToken = Shapes::StringShape.new(name: 'IntelligencePaginationToken')
     InternalServerError = Shapes::StructureShape.new(name: 'InternalServerError')
     InvalidJobIdException = Shapes::StructureShape.new(name: 'InvalidJobIdException')
     InvalidKMSKeyException = Shapes::StructureShape.new(name: 'InvalidKMSKeyException')
     InvalidParameterException = Shapes::StructureShape.new(name: 'InvalidParameterException')
     InvalidS3ObjectException = Shapes::StructureShape.new(name: 'InvalidS3ObjectException')
+    JobArn = Shapes::StringShape.new(name: 'JobArn')
     JobId = Shapes::StringShape.new(name: 'JobId')
     JobStatus = Shapes::StringShape.new(name: 'JobStatus')
     JobTag = Shapes::StringShape.new(name: 'JobTag')
     KMSKeyId = Shapes::StringShape.new(name: 'KMSKeyId')
+    KmsEncryptionContext = Shapes::MapShape.new(name: 'KmsEncryptionContext')
     LendingDetection = Shapes::StructureShape.new(name: 'LendingDetection')
     LendingDetectionList = Shapes::ListShape.new(name: 'LendingDetectionList')
     LendingDocument = Shapes::StructureShape.new(name: 'LendingDocument')
@@ -148,13 +193,28 @@ module Aws::Textract
     ListAdapterVersionsResponse = Shapes::StructureShape.new(name: 'ListAdapterVersionsResponse')
     ListAdaptersRequest = Shapes::StructureShape.new(name: 'ListAdaptersRequest')
     ListAdaptersResponse = Shapes::StructureShape.new(name: 'ListAdaptersResponse')
+    ListBlueprintsRequest = Shapes::StructureShape.new(name: 'ListBlueprintsRequest')
+    ListBlueprintsResponse = Shapes::StructureShape.new(name: 'ListBlueprintsResponse')
+    ListProjectsRequest = Shapes::StructureShape.new(name: 'ListProjectsRequest')
+    ListProjectsResponse = Shapes::StructureShape.new(name: 'ListProjectsResponse')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     NonEmptyString = Shapes::StringShape.new(name: 'NonEmptyString')
     NormalizedValue = Shapes::StructureShape.new(name: 'NormalizedValue')
     NotificationChannel = Shapes::StructureShape.new(name: 'NotificationChannel')
+    NotificationConfiguration = Shapes::StructureShape.new(name: 'NotificationConfiguration')
+    OutputAdditionalFileFormat = Shapes::StructureShape.new(name: 'OutputAdditionalFileFormat')
     OutputConfig = Shapes::StructureShape.new(name: 'OutputConfig')
+    OutputConfiguration = Shapes::StructureShape.new(name: 'OutputConfiguration')
+    OutputFormat = Shapes::StructureShape.new(name: 'OutputFormat')
+    OutputTextFormat = Shapes::StructureShape.new(name: 'OutputTextFormat')
+    OutputTextFormatType = Shapes::StringShape.new(name: 'OutputTextFormatType')
+    OutputTextFormatTypes = Shapes::ListShape.new(name: 'OutputTextFormatTypes')
+    PIIEntitiesConfiguration = Shapes::StructureShape.new(name: 'PIIEntitiesConfiguration')
+    PIIEntityType = Shapes::StringShape.new(name: 'PIIEntityType')
+    PIIEntityTypes = Shapes::ListShape.new(name: 'PIIEntityTypes')
+    PIIRedactionMaskMode = Shapes::StringShape.new(name: 'PIIRedactionMaskMode')
     PageClassification = Shapes::StructureShape.new(name: 'PageClassification')
     PageList = Shapes::ListShape.new(name: 'PageList')
     Pages = Shapes::ListShape.new(name: 'Pages')
@@ -164,6 +224,13 @@ module Aws::Textract
     Polygon = Shapes::ListShape.new(name: 'Polygon')
     Prediction = Shapes::StructureShape.new(name: 'Prediction')
     PredictionList = Shapes::ListShape.new(name: 'PredictionList')
+    ProjectArn = Shapes::StringShape.new(name: 'ProjectArn')
+    ProjectDescription = Shapes::StringShape.new(name: 'ProjectDescription')
+    ProjectFilter = Shapes::StructureShape.new(name: 'ProjectFilter')
+    ProjectName = Shapes::StringShape.new(name: 'ProjectName')
+    ProjectStatus = Shapes::StringShape.new(name: 'ProjectStatus')
+    ProjectSummary = Shapes::StructureShape.new(name: 'ProjectSummary')
+    ProjectSummaryList = Shapes::ListShape.new(name: 'ProjectSummaryList')
     ProvisionedThroughputExceededException = Shapes::StructureShape.new(name: 'ProvisionedThroughputExceededException')
     Queries = Shapes::ListShape.new(name: 'Queries')
     QueriesConfig = Shapes::StructureShape.new(name: 'QueriesConfig')
@@ -175,29 +242,38 @@ module Aws::Textract
     RelationshipList = Shapes::ListShape.new(name: 'RelationshipList')
     RelationshipType = Shapes::StringShape.new(name: 'RelationshipType')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
+    ResourceOwner = Shapes::StringShape.new(name: 'ResourceOwner')
     RoleArn = Shapes::StringShape.new(name: 'RoleArn')
     S3Bucket = Shapes::StringShape.new(name: 'S3Bucket')
     S3Object = Shapes::StructureShape.new(name: 'S3Object')
     S3ObjectName = Shapes::StringShape.new(name: 'S3ObjectName')
     S3ObjectVersion = Shapes::StringShape.new(name: 'S3ObjectVersion')
+    S3Uri = Shapes::StringShape.new(name: 'S3Uri')
     SNSTopicArn = Shapes::StringShape.new(name: 'SNSTopicArn')
     SelectionStatus = Shapes::StringShape.new(name: 'SelectionStatus')
+    SensitiveDataConfiguration = Shapes::StructureShape.new(name: 'SensitiveDataConfiguration')
+    SensitiveDataDetectionMode = Shapes::StringShape.new(name: 'SensitiveDataDetectionMode')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
     SignatureDetection = Shapes::StructureShape.new(name: 'SignatureDetection')
     SignatureDetectionList = Shapes::ListShape.new(name: 'SignatureDetectionList')
     SplitDocument = Shapes::StructureShape.new(name: 'SplitDocument')
     SplitDocumentList = Shapes::ListShape.new(name: 'SplitDocumentList')
+    SplitterConfiguration = Shapes::StructureShape.new(name: 'SplitterConfiguration')
     StartDocumentAnalysisRequest = Shapes::StructureShape.new(name: 'StartDocumentAnalysisRequest')
     StartDocumentAnalysisResponse = Shapes::StructureShape.new(name: 'StartDocumentAnalysisResponse')
+    StartDocumentInsightsRequest = Shapes::StructureShape.new(name: 'StartDocumentInsightsRequest')
+    StartDocumentInsightsResponse = Shapes::StructureShape.new(name: 'StartDocumentInsightsResponse')
     StartDocumentTextDetectionRequest = Shapes::StructureShape.new(name: 'StartDocumentTextDetectionRequest')
     StartDocumentTextDetectionResponse = Shapes::StructureShape.new(name: 'StartDocumentTextDetectionResponse')
     StartExpenseAnalysisRequest = Shapes::StructureShape.new(name: 'StartExpenseAnalysisRequest')
     StartExpenseAnalysisResponse = Shapes::StructureShape.new(name: 'StartExpenseAnalysisResponse')
     StartLendingAnalysisRequest = Shapes::StructureShape.new(name: 'StartLendingAnalysisRequest')
     StartLendingAnalysisResponse = Shapes::StructureShape.new(name: 'StartLendingAnalysisResponse')
+    State = Shapes::StringShape.new(name: 'State')
     StatusMessage = Shapes::StringShape.new(name: 'StatusMessage')
     String = Shapes::StringShape.new(name: 'String')
     StringList = Shapes::ListShape.new(name: 'StringList')
+    SummarizationConfiguration = Shapes::StructureShape.new(name: 'SummarizationConfiguration')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
     TagMap = Shapes::MapShape.new(name: 'TagMap')
@@ -215,6 +291,10 @@ module Aws::Textract
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
     UpdateAdapterRequest = Shapes::StructureShape.new(name: 'UpdateAdapterRequest')
     UpdateAdapterResponse = Shapes::StructureShape.new(name: 'UpdateAdapterResponse')
+    UpdateBlueprintRequest = Shapes::StructureShape.new(name: 'UpdateBlueprintRequest')
+    UpdateBlueprintResponse = Shapes::StructureShape.new(name: 'UpdateBlueprintResponse')
+    UpdateProjectRequest = Shapes::StructureShape.new(name: 'UpdateProjectRequest')
+    UpdateProjectResponse = Shapes::StructureShape.new(name: 'UpdateProjectResponse')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
     ValueType = Shapes::StringShape.new(name: 'ValueType')
     Warning = Shapes::StructureShape.new(name: 'Warning')
@@ -316,11 +396,34 @@ module Aws::Textract
 
     BlockList.member = Shapes::ShapeRef.new(shape: Block)
 
+    BlueprintFilter.add_member(:blueprint_arn, Shapes::ShapeRef.new(shape: BlueprintArn, required: true, location_name: "BlueprintArn"))
+    BlueprintFilter.add_member(:blueprint_version, Shapes::ShapeRef.new(shape: BlueprintVersion, location_name: "BlueprintVersion"))
+    BlueprintFilter.struct_class = Types::BlueprintFilter
+
+    BlueprintItem.add_member(:blueprint_arn, Shapes::ShapeRef.new(shape: BlueprintArn, required: true, location_name: "BlueprintArn"))
+    BlueprintItem.add_member(:blueprint_version, Shapes::ShapeRef.new(shape: BlueprintVersion, location_name: "BlueprintVersion"))
+    BlueprintItem.struct_class = Types::BlueprintItem
+
+    BlueprintItems.member = Shapes::ShapeRef.new(shape: BlueprintItem)
+
+    BlueprintSummary.add_member(:blueprint_arn, Shapes::ShapeRef.new(shape: BlueprintArn, required: true, location_name: "BlueprintArn"))
+    BlueprintSummary.add_member(:blueprint_name, Shapes::ShapeRef.new(shape: BlueprintName, location_name: "BlueprintName"))
+    BlueprintSummary.add_member(:blueprint_version, Shapes::ShapeRef.new(shape: BlueprintVersion, location_name: "BlueprintVersion"))
+    BlueprintSummary.add_member(:resource_owner, Shapes::ShapeRef.new(shape: ResourceOwner, location_name: "ResourceOwner"))
+    BlueprintSummary.add_member(:creation_time, Shapes::ShapeRef.new(shape: DateTime, required: true, location_name: "CreationTime"))
+    BlueprintSummary.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "LastModifiedTime"))
+    BlueprintSummary.struct_class = Types::BlueprintSummary
+
+    BlueprintSummaryList.member = Shapes::ShapeRef.new(shape: BlueprintSummary)
+
     BoundingBox.add_member(:width, Shapes::ShapeRef.new(shape: Float, location_name: "Width"))
     BoundingBox.add_member(:height, Shapes::ShapeRef.new(shape: Float, location_name: "Height"))
     BoundingBox.add_member(:left, Shapes::ShapeRef.new(shape: Float, location_name: "Left"))
     BoundingBox.add_member(:top, Shapes::ShapeRef.new(shape: Float, location_name: "Top"))
     BoundingBox.struct_class = Types::BoundingBox
+
+    BoundingBoxConfiguration.add_member(:state, Shapes::ShapeRef.new(shape: State, required: true, location_name: "State"))
+    BoundingBoxConfiguration.struct_class = Types::BoundingBoxConfiguration
 
     ConflictException.struct_class = Types::ConflictException
 
@@ -349,6 +452,44 @@ module Aws::Textract
     CreateAdapterVersionResponse.add_member(:adapter_version, Shapes::ShapeRef.new(shape: AdapterVersion, location_name: "AdapterVersion"))
     CreateAdapterVersionResponse.struct_class = Types::CreateAdapterVersionResponse
 
+    CreateBlueprintRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken" => true}))
+    CreateBlueprintRequest.add_member(:blueprint_name, Shapes::ShapeRef.new(shape: BlueprintName, required: true, location_name: "BlueprintName"))
+    CreateBlueprintRequest.add_member(:schema, Shapes::ShapeRef.new(shape: BlueprintSchema, required: true, location_name: "Schema"))
+    CreateBlueprintRequest.add_member(:encryption_configuration, Shapes::ShapeRef.new(shape: EncryptionConfiguration, location_name: "EncryptionConfiguration"))
+    CreateBlueprintRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
+    CreateBlueprintRequest.struct_class = Types::CreateBlueprintRequest
+
+    CreateBlueprintResponse.add_member(:blueprint_arn, Shapes::ShapeRef.new(shape: BlueprintArn, required: true, location_name: "BlueprintArn"))
+    CreateBlueprintResponse.struct_class = Types::CreateBlueprintResponse
+
+    CreateBlueprintVersionRequest.add_member(:blueprint_arn, Shapes::ShapeRef.new(shape: BlueprintArn, required: true, location_name: "BlueprintArn"))
+    CreateBlueprintVersionRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken" => true}))
+    CreateBlueprintVersionRequest.struct_class = Types::CreateBlueprintVersionRequest
+
+    CreateBlueprintVersionResponse.add_member(:blueprint_arn, Shapes::ShapeRef.new(shape: BlueprintArn, required: true, location_name: "BlueprintArn"))
+    CreateBlueprintVersionResponse.add_member(:blueprint_version, Shapes::ShapeRef.new(shape: BlueprintVersion, required: true, location_name: "BlueprintVersion"))
+    CreateBlueprintVersionResponse.struct_class = Types::CreateBlueprintVersionResponse
+
+    CreateProjectRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken" => true}))
+    CreateProjectRequest.add_member(:project_name, Shapes::ShapeRef.new(shape: ProjectName, required: true, location_name: "ProjectName"))
+    CreateProjectRequest.add_member(:project_description, Shapes::ShapeRef.new(shape: ProjectDescription, location_name: "ProjectDescription"))
+    CreateProjectRequest.add_member(:extraction_configuration, Shapes::ShapeRef.new(shape: ExtractionConfiguration, required: true, location_name: "ExtractionConfiguration"))
+    CreateProjectRequest.add_member(:generative_configuration, Shapes::ShapeRef.new(shape: GenerativeConfiguration, location_name: "GenerativeConfiguration"))
+    CreateProjectRequest.add_member(:custom_configuration, Shapes::ShapeRef.new(shape: CustomConfiguration, location_name: "CustomConfiguration"))
+    CreateProjectRequest.add_member(:splitter_configuration, Shapes::ShapeRef.new(shape: SplitterConfiguration, location_name: "SplitterConfiguration"))
+    CreateProjectRequest.add_member(:sensitive_data_configuration, Shapes::ShapeRef.new(shape: SensitiveDataConfiguration, location_name: "SensitiveDataConfiguration"))
+    CreateProjectRequest.add_member(:encryption_configuration, Shapes::ShapeRef.new(shape: EncryptionConfiguration, location_name: "EncryptionConfiguration"))
+    CreateProjectRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
+    CreateProjectRequest.struct_class = Types::CreateProjectRequest
+
+    CreateProjectResponse.add_member(:project_arn, Shapes::ShapeRef.new(shape: ProjectArn, required: true, location_name: "ProjectArn"))
+    CreateProjectResponse.add_member(:status, Shapes::ShapeRef.new(shape: ProjectStatus, location_name: "Status"))
+    CreateProjectResponse.struct_class = Types::CreateProjectResponse
+
+    CustomConfiguration.add_member(:blueprints, Shapes::ShapeRef.new(shape: BlueprintItems, required: true, location_name: "Blueprints"))
+    CustomConfiguration.add_member(:fallback_blueprints, Shapes::ShapeRef.new(shape: FallbackBlueprintItems, location_name: "FallbackBlueprints"))
+    CustomConfiguration.struct_class = Types::CustomConfiguration
+
     DeleteAdapterRequest.add_member(:adapter_id, Shapes::ShapeRef.new(shape: AdapterId, required: true, location_name: "AdapterId"))
     DeleteAdapterRequest.struct_class = Types::DeleteAdapterRequest
 
@@ -359,6 +500,17 @@ module Aws::Textract
     DeleteAdapterVersionRequest.struct_class = Types::DeleteAdapterVersionRequest
 
     DeleteAdapterVersionResponse.struct_class = Types::DeleteAdapterVersionResponse
+
+    DeleteBlueprintRequest.add_member(:blueprint_arn, Shapes::ShapeRef.new(shape: BlueprintArn, required: true, location_name: "BlueprintArn"))
+    DeleteBlueprintRequest.add_member(:blueprint_version, Shapes::ShapeRef.new(shape: BlueprintVersion, location_name: "BlueprintVersion"))
+    DeleteBlueprintRequest.struct_class = Types::DeleteBlueprintRequest
+
+    DeleteBlueprintResponse.struct_class = Types::DeleteBlueprintResponse
+
+    DeleteProjectRequest.add_member(:project_arn, Shapes::ShapeRef.new(shape: ProjectArn, required: true, location_name: "ProjectArn"))
+    DeleteProjectRequest.struct_class = Types::DeleteProjectRequest
+
+    DeleteProjectResponse.struct_class = Types::DeleteProjectResponse
 
     DetectDocumentTextRequest.add_member(:document, Shapes::ShapeRef.new(shape: Document, required: true, location_name: "Document"))
     DetectDocumentTextRequest.struct_class = Types::DetectDocumentTextRequest
@@ -395,12 +547,19 @@ module Aws::Textract
 
     DocumentTooLargeException.struct_class = Types::DocumentTooLargeException
 
+    EncryptionConfiguration.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: EncryptionKmsKeyId, required: true, location_name: "KmsKeyId"))
+    EncryptionConfiguration.add_member(:kms_encryption_context, Shapes::ShapeRef.new(shape: KmsEncryptionContext, location_name: "KmsEncryptionContext"))
+    EncryptionConfiguration.struct_class = Types::EncryptionConfiguration
+
     EntityTypes.member = Shapes::ShapeRef.new(shape: EntityType)
 
     EvaluationMetric.add_member(:f1_score, Shapes::ShapeRef.new(shape: Float, location_name: "F1Score"))
     EvaluationMetric.add_member(:precision, Shapes::ShapeRef.new(shape: Float, location_name: "Precision"))
     EvaluationMetric.add_member(:recall, Shapes::ShapeRef.new(shape: Float, location_name: "Recall"))
     EvaluationMetric.struct_class = Types::EvaluationMetric
+
+    EventBridgeConfiguration.add_member(:state, Shapes::ShapeRef.new(shape: State, required: true, location_name: "State"))
+    EventBridgeConfiguration.struct_class = Types::EventBridgeConfiguration
 
     ExpenseCurrency.add_member(:code, Shapes::ShapeRef.new(shape: String, location_name: "Code"))
     ExpenseCurrency.add_member(:confidence, Shapes::ShapeRef.new(shape: Percent, location_name: "Confidence"))
@@ -444,9 +603,28 @@ module Aws::Textract
     Extraction.add_member(:identity_document, Shapes::ShapeRef.new(shape: IdentityDocument, location_name: "IdentityDocument"))
     Extraction.struct_class = Types::Extraction
 
+    ExtractionConfiguration.add_member(:bounding_box, Shapes::ShapeRef.new(shape: BoundingBoxConfiguration, required: true, location_name: "BoundingBox"))
+    ExtractionConfiguration.add_member(:granularity, Shapes::ShapeRef.new(shape: ExtractionGranularity, required: true, location_name: "Granularity"))
+    ExtractionConfiguration.add_member(:output_format, Shapes::ShapeRef.new(shape: OutputFormat, required: true, location_name: "OutputFormat"))
+    ExtractionConfiguration.struct_class = Types::ExtractionConfiguration
+
+    ExtractionGranularity.add_member(:types, Shapes::ShapeRef.new(shape: ExtractionGranularityTypes, location_name: "Types"))
+    ExtractionGranularity.struct_class = Types::ExtractionGranularity
+
+    ExtractionGranularityTypes.member = Shapes::ShapeRef.new(shape: ExtractionGranularityType)
+
     ExtractionList.member = Shapes::ShapeRef.new(shape: Extraction)
 
+    FallbackBlueprintItems.member = Shapes::ShapeRef.new(shape: BlueprintItem)
+
     FeatureTypes.member = Shapes::ShapeRef.new(shape: FeatureType)
+
+    FigureCaptionConfiguration.add_member(:state, Shapes::ShapeRef.new(shape: State, required: true, location_name: "State"))
+    FigureCaptionConfiguration.struct_class = Types::FigureCaptionConfiguration
+
+    GenerativeConfiguration.add_member(:summarization, Shapes::ShapeRef.new(shape: SummarizationConfiguration, location_name: "Summarization"))
+    GenerativeConfiguration.add_member(:figure_caption, Shapes::ShapeRef.new(shape: FigureCaptionConfiguration, location_name: "FigureCaption"))
+    GenerativeConfiguration.struct_class = Types::GenerativeConfiguration
 
     Geometry.add_member(:bounding_box, Shapes::ShapeRef.new(shape: BoundingBox, location_name: "BoundingBox"))
     Geometry.add_member(:polygon, Shapes::ShapeRef.new(shape: Polygon, location_name: "Polygon"))
@@ -482,6 +660,20 @@ module Aws::Textract
     GetAdapterVersionResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     GetAdapterVersionResponse.struct_class = Types::GetAdapterVersionResponse
 
+    GetBlueprintRequest.add_member(:blueprint_arn, Shapes::ShapeRef.new(shape: BlueprintArn, required: true, location_name: "BlueprintArn"))
+    GetBlueprintRequest.add_member(:blueprint_version, Shapes::ShapeRef.new(shape: BlueprintVersion, location_name: "BlueprintVersion"))
+    GetBlueprintRequest.struct_class = Types::GetBlueprintRequest
+
+    GetBlueprintResponse.add_member(:blueprint_arn, Shapes::ShapeRef.new(shape: BlueprintArn, required: true, location_name: "BlueprintArn"))
+    GetBlueprintResponse.add_member(:blueprint_name, Shapes::ShapeRef.new(shape: BlueprintName, required: true, location_name: "BlueprintName"))
+    GetBlueprintResponse.add_member(:blueprint_version, Shapes::ShapeRef.new(shape: BlueprintVersion, location_name: "BlueprintVersion"))
+    GetBlueprintResponse.add_member(:schema, Shapes::ShapeRef.new(shape: BlueprintSchema, required: true, location_name: "Schema"))
+    GetBlueprintResponse.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KMSKeyId, location_name: "KmsKeyId"))
+    GetBlueprintResponse.add_member(:kms_encryption_context, Shapes::ShapeRef.new(shape: KmsEncryptionContext, location_name: "KmsEncryptionContext"))
+    GetBlueprintResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: DateTime, required: true, location_name: "CreationTime"))
+    GetBlueprintResponse.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: DateTime, required: true, location_name: "LastModifiedTime"))
+    GetBlueprintResponse.struct_class = Types::GetBlueprintResponse
+
     GetDocumentAnalysisRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location_name: "JobId"))
     GetDocumentAnalysisRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
     GetDocumentAnalysisRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
@@ -495,6 +687,15 @@ module Aws::Textract
     GetDocumentAnalysisResponse.add_member(:status_message, Shapes::ShapeRef.new(shape: StatusMessage, location_name: "StatusMessage"))
     GetDocumentAnalysisResponse.add_member(:analyze_document_model_version, Shapes::ShapeRef.new(shape: String, location_name: "AnalyzeDocumentModelVersion"))
     GetDocumentAnalysisResponse.struct_class = Types::GetDocumentAnalysisResponse
+
+    GetDocumentInsightsRequest.add_member(:job_arn, Shapes::ShapeRef.new(shape: JobArn, required: true, location_name: "JobArn"))
+    GetDocumentInsightsRequest.struct_class = Types::GetDocumentInsightsRequest
+
+    GetDocumentInsightsResponse.add_member(:status, Shapes::ShapeRef.new(shape: JobStatus, required: true, location_name: "Status"))
+    GetDocumentInsightsResponse.add_member(:output_configuration, Shapes::ShapeRef.new(shape: OutputConfiguration, location_name: "OutputConfiguration"))
+    GetDocumentInsightsResponse.add_member(:error_type, Shapes::ShapeRef.new(shape: ErrorType, location_name: "ErrorType"))
+    GetDocumentInsightsResponse.add_member(:error_message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "ErrorMessage"))
+    GetDocumentInsightsResponse.struct_class = Types::GetDocumentInsightsResponse
 
     GetDocumentTextDetectionRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location_name: "JobId"))
     GetDocumentTextDetectionRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
@@ -549,6 +750,23 @@ module Aws::Textract
     GetLendingAnalysisSummaryResponse.add_member(:analyze_lending_model_version, Shapes::ShapeRef.new(shape: String, location_name: "AnalyzeLendingModelVersion"))
     GetLendingAnalysisSummaryResponse.struct_class = Types::GetLendingAnalysisSummaryResponse
 
+    GetProjectRequest.add_member(:project_arn, Shapes::ShapeRef.new(shape: ProjectArn, required: true, location_name: "ProjectArn"))
+    GetProjectRequest.struct_class = Types::GetProjectRequest
+
+    GetProjectResponse.add_member(:project_arn, Shapes::ShapeRef.new(shape: ProjectArn, required: true, location_name: "ProjectArn"))
+    GetProjectResponse.add_member(:project_name, Shapes::ShapeRef.new(shape: ProjectName, required: true, location_name: "ProjectName"))
+    GetProjectResponse.add_member(:project_description, Shapes::ShapeRef.new(shape: ProjectDescription, location_name: "ProjectDescription"))
+    GetProjectResponse.add_member(:status, Shapes::ShapeRef.new(shape: ProjectStatus, required: true, location_name: "Status"))
+    GetProjectResponse.add_member(:extraction_configuration, Shapes::ShapeRef.new(shape: ExtractionConfiguration, location_name: "ExtractionConfiguration"))
+    GetProjectResponse.add_member(:generative_configuration, Shapes::ShapeRef.new(shape: GenerativeConfiguration, location_name: "GenerativeConfiguration"))
+    GetProjectResponse.add_member(:custom_configuration, Shapes::ShapeRef.new(shape: CustomConfiguration, location_name: "CustomConfiguration"))
+    GetProjectResponse.add_member(:splitter_configuration, Shapes::ShapeRef.new(shape: SplitterConfiguration, location_name: "SplitterConfiguration"))
+    GetProjectResponse.add_member(:sensitive_data_configuration, Shapes::ShapeRef.new(shape: SensitiveDataConfiguration, location_name: "SensitiveDataConfiguration"))
+    GetProjectResponse.add_member(:encryption_configuration, Shapes::ShapeRef.new(shape: EncryptionConfiguration, location_name: "EncryptionConfiguration"))
+    GetProjectResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: DateTime, required: true, location_name: "CreationTime"))
+    GetProjectResponse.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: DateTime, required: true, location_name: "LastModifiedTime"))
+    GetProjectResponse.struct_class = Types::GetProjectResponse
+
     HumanLoopActivationOutput.add_member(:human_loop_arn, Shapes::ShapeRef.new(shape: HumanLoopArn, location_name: "HumanLoopArn"))
     HumanLoopActivationOutput.add_member(:human_loop_activation_reasons, Shapes::ShapeRef.new(shape: HumanLoopActivationReasons, location_name: "HumanLoopActivationReasons"))
     HumanLoopActivationOutput.add_member(:human_loop_activation_conditions_evaluation_results, Shapes::ShapeRef.new(shape: HumanLoopActivationConditionsEvaluationResults, location_name: "HumanLoopActivationConditionsEvaluationResults", metadata: {"jsonvalue" => true}))
@@ -586,6 +804,9 @@ module Aws::Textract
 
     IdentityDocumentList.member = Shapes::ShapeRef.new(shape: IdentityDocument)
 
+    InputConfiguration.add_member(:s3_uri, Shapes::ShapeRef.new(shape: S3Uri, required: true, location_name: "S3Uri"))
+    InputConfiguration.struct_class = Types::InputConfiguration
+
     InternalServerError.struct_class = Types::InternalServerError
 
     InvalidJobIdException.struct_class = Types::InvalidJobIdException
@@ -595,6 +816,9 @@ module Aws::Textract
     InvalidParameterException.struct_class = Types::InvalidParameterException
 
     InvalidS3ObjectException.struct_class = Types::InvalidS3ObjectException
+
+    KmsEncryptionContext.key = Shapes::ShapeRef.new(shape: EncryptionContextKey)
+    KmsEncryptionContext.value = Shapes::ShapeRef.new(shape: EncryptionContextValue)
 
     LendingDetection.add_member(:text, Shapes::ShapeRef.new(shape: String, location_name: "Text"))
     LendingDetection.add_member(:selection_status, Shapes::ShapeRef.new(shape: SelectionStatus, location_name: "SelectionStatus"))
@@ -660,6 +884,26 @@ module Aws::Textract
     ListAdaptersResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
     ListAdaptersResponse.struct_class = Types::ListAdaptersResponse
 
+    ListBlueprintsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    ListBlueprintsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: IntelligencePaginationToken, location_name: "NextToken"))
+    ListBlueprintsRequest.add_member(:blueprint_arn, Shapes::ShapeRef.new(shape: BlueprintArn, location_name: "BlueprintArn"))
+    ListBlueprintsRequest.add_member(:project_filter, Shapes::ShapeRef.new(shape: ProjectFilter, location_name: "ProjectFilter"))
+    ListBlueprintsRequest.add_member(:resource_owner, Shapes::ShapeRef.new(shape: ResourceOwner, location_name: "ResourceOwner"))
+    ListBlueprintsRequest.struct_class = Types::ListBlueprintsRequest
+
+    ListBlueprintsResponse.add_member(:blueprints, Shapes::ShapeRef.new(shape: BlueprintSummaryList, required: true, location_name: "Blueprints"))
+    ListBlueprintsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: IntelligencePaginationToken, location_name: "NextToken"))
+    ListBlueprintsResponse.struct_class = Types::ListBlueprintsResponse
+
+    ListProjectsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    ListProjectsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: IntelligencePaginationToken, location_name: "NextToken"))
+    ListProjectsRequest.add_member(:blueprint_filter, Shapes::ShapeRef.new(shape: BlueprintFilter, location_name: "BlueprintFilter"))
+    ListProjectsRequest.struct_class = Types::ListProjectsRequest
+
+    ListProjectsResponse.add_member(:projects, Shapes::ShapeRef.new(shape: ProjectSummaryList, required: true, location_name: "Projects"))
+    ListProjectsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: IntelligencePaginationToken, location_name: "NextToken"))
+    ListProjectsResponse.struct_class = Types::ListProjectsResponse
+
     ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "ResourceARN"))
     ListTagsForResourceRequest.struct_class = Types::ListTagsForResourceRequest
 
@@ -674,9 +918,33 @@ module Aws::Textract
     NotificationChannel.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "RoleArn"))
     NotificationChannel.struct_class = Types::NotificationChannel
 
+    NotificationConfiguration.add_member(:event_bridge_configuration, Shapes::ShapeRef.new(shape: EventBridgeConfiguration, required: true, location_name: "EventBridgeConfiguration"))
+    NotificationConfiguration.struct_class = Types::NotificationConfiguration
+
+    OutputAdditionalFileFormat.add_member(:state, Shapes::ShapeRef.new(shape: State, required: true, location_name: "State"))
+    OutputAdditionalFileFormat.struct_class = Types::OutputAdditionalFileFormat
+
     OutputConfig.add_member(:s3_bucket, Shapes::ShapeRef.new(shape: S3Bucket, required: true, location_name: "S3Bucket"))
     OutputConfig.add_member(:s3_prefix, Shapes::ShapeRef.new(shape: S3ObjectName, location_name: "S3Prefix"))
     OutputConfig.struct_class = Types::OutputConfig
+
+    OutputConfiguration.add_member(:s3_uri, Shapes::ShapeRef.new(shape: S3Uri, required: true, location_name: "S3Uri"))
+    OutputConfiguration.struct_class = Types::OutputConfiguration
+
+    OutputFormat.add_member(:additional_file_format, Shapes::ShapeRef.new(shape: OutputAdditionalFileFormat, required: true, location_name: "AdditionalFileFormat"))
+    OutputFormat.add_member(:text_format, Shapes::ShapeRef.new(shape: OutputTextFormat, required: true, location_name: "TextFormat"))
+    OutputFormat.struct_class = Types::OutputFormat
+
+    OutputTextFormat.add_member(:types, Shapes::ShapeRef.new(shape: OutputTextFormatTypes, location_name: "Types"))
+    OutputTextFormat.struct_class = Types::OutputTextFormat
+
+    OutputTextFormatTypes.member = Shapes::ShapeRef.new(shape: OutputTextFormatType)
+
+    PIIEntitiesConfiguration.add_member(:pii_entity_types, Shapes::ShapeRef.new(shape: PIIEntityTypes, required: true, location_name: "PiiEntityTypes"))
+    PIIEntitiesConfiguration.add_member(:redaction_mask_mode, Shapes::ShapeRef.new(shape: PIIRedactionMaskMode, required: true, location_name: "RedactionMaskMode"))
+    PIIEntitiesConfiguration.struct_class = Types::PIIEntitiesConfiguration
+
+    PIIEntityTypes.member = Shapes::ShapeRef.new(shape: PIIEntityType)
 
     PageClassification.add_member(:page_type, Shapes::ShapeRef.new(shape: PredictionList, required: true, location_name: "PageType"))
     PageClassification.add_member(:page_number, Shapes::ShapeRef.new(shape: PredictionList, required: true, location_name: "PageNumber"))
@@ -697,6 +965,17 @@ module Aws::Textract
     Prediction.struct_class = Types::Prediction
 
     PredictionList.member = Shapes::ShapeRef.new(shape: Prediction)
+
+    ProjectFilter.add_member(:project_arn, Shapes::ShapeRef.new(shape: ProjectArn, required: true, location_name: "ProjectArn"))
+    ProjectFilter.struct_class = Types::ProjectFilter
+
+    ProjectSummary.add_member(:project_arn, Shapes::ShapeRef.new(shape: ProjectArn, required: true, location_name: "ProjectArn"))
+    ProjectSummary.add_member(:project_name, Shapes::ShapeRef.new(shape: ProjectName, location_name: "ProjectName"))
+    ProjectSummary.add_member(:creation_time, Shapes::ShapeRef.new(shape: DateTime, required: true, location_name: "CreationTime"))
+    ProjectSummary.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "LastModifiedTime"))
+    ProjectSummary.struct_class = Types::ProjectSummary
+
+    ProjectSummaryList.member = Shapes::ShapeRef.new(shape: ProjectSummary)
 
     ProvisionedThroughputExceededException.struct_class = Types::ProvisionedThroughputExceededException
 
@@ -725,6 +1004,10 @@ module Aws::Textract
     S3Object.add_member(:version, Shapes::ShapeRef.new(shape: S3ObjectVersion, location_name: "Version"))
     S3Object.struct_class = Types::S3Object
 
+    SensitiveDataConfiguration.add_member(:detection_mode, Shapes::ShapeRef.new(shape: SensitiveDataDetectionMode, required: true, location_name: "DetectionMode"))
+    SensitiveDataConfiguration.add_member(:pii_entities_configuration, Shapes::ShapeRef.new(shape: PIIEntitiesConfiguration, location_name: "PiiEntitiesConfiguration"))
+    SensitiveDataConfiguration.struct_class = Types::SensitiveDataConfiguration
+
     ServiceQuotaExceededException.struct_class = Types::ServiceQuotaExceededException
 
     SignatureDetection.add_member(:confidence, Shapes::ShapeRef.new(shape: Percent, location_name: "Confidence"))
@@ -739,6 +1022,9 @@ module Aws::Textract
 
     SplitDocumentList.member = Shapes::ShapeRef.new(shape: SplitDocument)
 
+    SplitterConfiguration.add_member(:state, Shapes::ShapeRef.new(shape: State, required: true, location_name: "State"))
+    SplitterConfiguration.struct_class = Types::SplitterConfiguration
+
     StartDocumentAnalysisRequest.add_member(:document_location, Shapes::ShapeRef.new(shape: DocumentLocation, required: true, location_name: "DocumentLocation"))
     StartDocumentAnalysisRequest.add_member(:feature_types, Shapes::ShapeRef.new(shape: FeatureTypes, required: true, location_name: "FeatureTypes"))
     StartDocumentAnalysisRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken"))
@@ -752,6 +1038,18 @@ module Aws::Textract
 
     StartDocumentAnalysisResponse.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, location_name: "JobId"))
     StartDocumentAnalysisResponse.struct_class = Types::StartDocumentAnalysisResponse
+
+    StartDocumentInsightsRequest.add_member(:input_configuration, Shapes::ShapeRef.new(shape: InputConfiguration, required: true, location_name: "InputConfiguration"))
+    StartDocumentInsightsRequest.add_member(:output_configuration, Shapes::ShapeRef.new(shape: OutputConfiguration, required: true, location_name: "OutputConfiguration"))
+    StartDocumentInsightsRequest.add_member(:project_arn, Shapes::ShapeRef.new(shape: ProjectArn, location_name: "ProjectArn"))
+    StartDocumentInsightsRequest.add_member(:blueprints, Shapes::ShapeRef.new(shape: BlueprintItems, location_name: "Blueprints"))
+    StartDocumentInsightsRequest.add_member(:encryption_configuration, Shapes::ShapeRef.new(shape: EncryptionConfiguration, location_name: "EncryptionConfiguration"))
+    StartDocumentInsightsRequest.add_member(:notification_configuration, Shapes::ShapeRef.new(shape: NotificationConfiguration, location_name: "NotificationConfiguration"))
+    StartDocumentInsightsRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
+    StartDocumentInsightsRequest.struct_class = Types::StartDocumentInsightsRequest
+
+    StartDocumentInsightsResponse.add_member(:job_arn, Shapes::ShapeRef.new(shape: JobArn, required: true, location_name: "JobArn"))
+    StartDocumentInsightsResponse.struct_class = Types::StartDocumentInsightsResponse
 
     StartDocumentTextDetectionRequest.add_member(:document_location, Shapes::ShapeRef.new(shape: DocumentLocation, required: true, location_name: "DocumentLocation"))
     StartDocumentTextDetectionRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken"))
@@ -787,6 +1085,9 @@ module Aws::Textract
     StartLendingAnalysisResponse.struct_class = Types::StartLendingAnalysisResponse
 
     StringList.member = Shapes::ShapeRef.new(shape: String)
+
+    SummarizationConfiguration.add_member(:state, Shapes::ShapeRef.new(shape: State, required: true, location_name: "State"))
+    SummarizationConfiguration.struct_class = Types::SummarizationConfiguration
 
     TagKeyList.member = Shapes::ShapeRef.new(shape: TagKey)
 
@@ -830,6 +1131,28 @@ module Aws::Textract
     UpdateAdapterResponse.add_member(:auto_update, Shapes::ShapeRef.new(shape: AutoUpdate, location_name: "AutoUpdate"))
     UpdateAdapterResponse.struct_class = Types::UpdateAdapterResponse
 
+    UpdateBlueprintRequest.add_member(:blueprint_arn, Shapes::ShapeRef.new(shape: BlueprintArn, required: true, location_name: "BlueprintArn"))
+    UpdateBlueprintRequest.add_member(:schema, Shapes::ShapeRef.new(shape: BlueprintSchema, location_name: "Schema"))
+    UpdateBlueprintRequest.add_member(:encryption_configuration, Shapes::ShapeRef.new(shape: EncryptionConfiguration, location_name: "EncryptionConfiguration"))
+    UpdateBlueprintRequest.struct_class = Types::UpdateBlueprintRequest
+
+    UpdateBlueprintResponse.add_member(:blueprint_arn, Shapes::ShapeRef.new(shape: BlueprintArn, required: true, location_name: "BlueprintArn"))
+    UpdateBlueprintResponse.struct_class = Types::UpdateBlueprintResponse
+
+    UpdateProjectRequest.add_member(:project_arn, Shapes::ShapeRef.new(shape: ProjectArn, required: true, location_name: "ProjectArn"))
+    UpdateProjectRequest.add_member(:project_description, Shapes::ShapeRef.new(shape: ProjectDescription, location_name: "ProjectDescription"))
+    UpdateProjectRequest.add_member(:extraction_configuration, Shapes::ShapeRef.new(shape: ExtractionConfiguration, location_name: "ExtractionConfiguration"))
+    UpdateProjectRequest.add_member(:generative_configuration, Shapes::ShapeRef.new(shape: GenerativeConfiguration, location_name: "GenerativeConfiguration"))
+    UpdateProjectRequest.add_member(:custom_configuration, Shapes::ShapeRef.new(shape: CustomConfiguration, location_name: "CustomConfiguration"))
+    UpdateProjectRequest.add_member(:splitter_configuration, Shapes::ShapeRef.new(shape: SplitterConfiguration, location_name: "SplitterConfiguration"))
+    UpdateProjectRequest.add_member(:sensitive_data_configuration, Shapes::ShapeRef.new(shape: SensitiveDataConfiguration, location_name: "SensitiveDataConfiguration"))
+    UpdateProjectRequest.add_member(:encryption_configuration, Shapes::ShapeRef.new(shape: EncryptionConfiguration, location_name: "EncryptionConfiguration"))
+    UpdateProjectRequest.struct_class = Types::UpdateProjectRequest
+
+    UpdateProjectResponse.add_member(:project_arn, Shapes::ShapeRef.new(shape: ProjectArn, required: true, location_name: "ProjectArn"))
+    UpdateProjectResponse.add_member(:status, Shapes::ShapeRef.new(shape: ProjectStatus, location_name: "Status"))
+    UpdateProjectResponse.struct_class = Types::UpdateProjectResponse
+
     ValidationException.struct_class = Types::ValidationException
 
     Warning.add_member(:error_code, Shapes::ShapeRef.new(shape: ErrorCode, location_name: "ErrorCode"))
@@ -849,8 +1172,8 @@ module Aws::Textract
         "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "textract",
         "jsonVersion" => "1.1",
-        "protocol" => "json",
-        "protocols" => ["json"],
+        "protocol" => "smithy-rpc-v2-cbor",
+        "protocols" => ["smithy-rpc-v2-cbor", "json"],
         "serviceFullName" => "Amazon Textract",
         "serviceId" => "Textract",
         "signatureVersion" => "v4",
@@ -949,6 +1272,53 @@ module Aws::Textract
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
+      api.add_operation(:create_blueprint, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateBlueprint"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateBlueprintRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateBlueprintResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ProvisionedThroughputExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+      end)
+
+      api.add_operation(:create_blueprint_version, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateBlueprintVersion"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateBlueprintVersionRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateBlueprintVersionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ProvisionedThroughputExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+      end)
+
+      api.add_operation(:create_project, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateProject"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateProjectRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateProjectResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ProvisionedThroughputExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+      end)
+
       api.add_operation(:delete_adapter, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteAdapter"
         o.http_method = "POST"
@@ -979,6 +1349,35 @@ module Aws::Textract
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:delete_blueprint, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteBlueprint"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteBlueprintRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteBlueprintResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ProvisionedThroughputExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+      end)
+
+      api.add_operation(:delete_project, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteProject"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteProjectRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteProjectResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ProvisionedThroughputExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
       end)
 
       api.add_operation(:detect_document_text, Seahorse::Model::Operation.new.tap do |o|
@@ -1028,6 +1427,20 @@ module Aws::Textract
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
+      api.add_operation(:get_blueprint, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetBlueprint"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetBlueprintRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetBlueprintResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ProvisionedThroughputExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+      end)
+
       api.add_operation(:get_document_analysis, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetDocumentAnalysis"
         o.http_method = "POST"
@@ -1042,6 +1455,20 @@ module Aws::Textract
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidS3ObjectException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidKMSKeyException)
+      end)
+
+      api.add_operation(:get_document_insights, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetDocumentInsights"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetDocumentInsightsRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetDocumentInsightsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidJobIdException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ProvisionedThroughputExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
       end)
 
       api.add_operation(:get_document_text_detection, Seahorse::Model::Operation.new.tap do |o|
@@ -1108,6 +1535,20 @@ module Aws::Textract
         o.errors << Shapes::ShapeRef.new(shape: InvalidKMSKeyException)
       end)
 
+      api.add_operation(:get_project, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetProject"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetProjectRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetProjectResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ProvisionedThroughputExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+      end)
+
       api.add_operation(:list_adapter_versions, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListAdapterVersions"
         o.http_method = "POST"
@@ -1149,6 +1590,46 @@ module Aws::Textract
         )
       end)
 
+      api.add_operation(:list_blueprints, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListBlueprints"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListBlueprintsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListBlueprintsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ProvisionedThroughputExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_projects, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListProjects"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListProjectsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListProjectsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ProvisionedThroughputExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListTagsForResource"
         o.http_method = "POST"
@@ -1182,6 +1663,21 @@ module Aws::Textract
         o.errors << Shapes::ShapeRef.new(shape: IdempotentParameterMismatchException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+      end)
+
+      api.add_operation(:start_document_insights, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartDocumentInsights"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: StartDocumentInsightsRequest)
+        o.output = Shapes::ShapeRef.new(shape: StartDocumentInsightsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ProvisionedThroughputExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
       end)
 
       api.add_operation(:start_document_text_detection, Seahorse::Model::Operation.new.tap do |o|
@@ -1289,6 +1785,37 @@ module Aws::Textract
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:update_blueprint, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateBlueprint"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateBlueprintRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateBlueprintResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ProvisionedThroughputExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+      end)
+
+      api.add_operation(:update_project, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateProject"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateProjectRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateProjectResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ProvisionedThroughputExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
       end)
     end
 

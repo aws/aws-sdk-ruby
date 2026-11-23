@@ -17,6 +17,7 @@ module Aws::DevOpsAgent
     AWSConfiguration = Shapes::StructureShape.new(name: 'AWSConfiguration')
     AWSConfigurationAccountIdString = Shapes::StringShape.new(name: 'AWSConfigurationAccountIdString')
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
+    AccountIdList = Shapes::ListShape.new(name: 'AccountIdList')
     AdditionalServiceDetails = Shapes::UnionShape.new(name: 'AdditionalServiceDetails')
     AdditionalServiceRegistrationStep = Shapes::UnionShape.new(name: 'AdditionalServiceRegistrationStep')
     AgentSpace = Shapes::StructureShape.new(name: 'AgentSpace')
@@ -67,6 +68,8 @@ module Aws::DevOpsAgent
     AssociationId = Shapes::StringShape.new(name: 'AssociationId')
     AssociationsList = Shapes::ListShape.new(name: 'AssociationsList')
     AuthFlow = Shapes::StringShape.new(name: 'AuthFlow')
+    AwsAccountId = Shapes::StringShape.new(name: 'AwsAccountId')
+    AwsSourceMode = Shapes::StringShape.new(name: 'AwsSourceMode')
     AzureConfiguration = Shapes::StructureShape.new(name: 'AzureConfiguration')
     AzureDevOpsConfiguration = Shapes::StructureShape.new(name: 'AzureDevOpsConfiguration')
     BackLogTimestamp = Shapes::TimestampShape.new(name: 'BackLogTimestamp', timestampFormat: "iso8601")
@@ -77,12 +80,14 @@ module Aws::DevOpsAgent
     CapabilityConfiguration = Shapes::StructureShape.new(name: 'CapabilityConfiguration')
     CapabilityType = Shapes::StringShape.new(name: 'CapabilityType')
     CertificateString = Shapes::StringShape.new(name: 'CertificateString')
+    ChatArchiveStatus = Shapes::StringShape.new(name: 'ChatArchiveStatus')
     ChatExecution = Shapes::StructureShape.new(name: 'ChatExecution')
     ChatExecutionId = Shapes::StringShape.new(name: 'ChatExecutionId')
     ChatExecutionList = Shapes::ListShape.new(name: 'ChatExecutionList')
     ClientId = Shapes::StringShape.new(name: 'ClientId')
     ClientSecret = Shapes::StringShape.new(name: 'ClientSecret')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
+    ConflictExceptionReason = Shapes::StringShape.new(name: 'ConflictExceptionReason')
     ContentSizeExceededException = Shapes::StructureShape.new(name: 'ContentSizeExceededException')
     CreateAgentSpaceInput = Shapes::StructureShape.new(name: 'CreateAgentSpaceInput')
     CreateAgentSpaceInputClientTokenString = Shapes::StringShape.new(name: 'CreateAgentSpaceInputClientTokenString')
@@ -173,6 +178,8 @@ module Aws::DevOpsAgent
     GetAssociationOutput = Shapes::StructureShape.new(name: 'GetAssociationOutput')
     GetBacklogTaskRequest = Shapes::StructureShape.new(name: 'GetBacklogTaskRequest')
     GetBacklogTaskResponse = Shapes::StructureShape.new(name: 'GetBacklogTaskResponse')
+    GetChatRequest = Shapes::StructureShape.new(name: 'GetChatRequest')
+    GetChatResponse = Shapes::StructureShape.new(name: 'GetChatResponse')
     GetOperatorAppInput = Shapes::StructureShape.new(name: 'GetOperatorAppInput')
     GetOperatorAppOutput = Shapes::StructureShape.new(name: 'GetOperatorAppOutput')
     GetRecommendationRequest = Shapes::StructureShape.new(name: 'GetRecommendationRequest')
@@ -318,6 +325,7 @@ module Aws::DevOpsAgent
     MCPToolDetailsList = Shapes::ListShape.new(name: 'MCPToolDetailsList')
     MCPToolsList = Shapes::ListShape.new(name: 'MCPToolsList')
     MCPToolsListMemberString = Shapes::StringShape.new(name: 'MCPToolsListMemberString')
+    MSTeamsBidirectionalConfiguration = Shapes::StructureShape.new(name: 'MSTeamsBidirectionalConfiguration')
     MSTeamsChannel = Shapes::StructureShape.new(name: 'MSTeamsChannel')
     MSTeamsChannelId = Shapes::StringShape.new(name: 'MSTeamsChannelId')
     MSTeamsConfiguration = Shapes::StructureShape.new(name: 'MSTeamsConfiguration')
@@ -346,6 +354,14 @@ module Aws::DevOpsAgent
     OAuthScope = Shapes::StringShape.new(name: 'OAuthScope')
     OperatorAppUrl = Shapes::StringShape.new(name: 'OperatorAppUrl')
     OrderType = Shapes::StringShape.new(name: 'OrderType')
+    OrgSourceAccountReasonCode = Shapes::StringShape.new(name: 'OrgSourceAccountReasonCode')
+    OrgSourceDeploymentState = Shapes::StructureShape.new(name: 'OrgSourceDeploymentState')
+    OrgSourceDeploymentStateDeployedAccountCountInteger = Shapes::IntegerShape.new(name: 'OrgSourceDeploymentStateDeployedAccountCountInteger')
+    OrgSourceIssue = Shapes::StructureShape.new(name: 'OrgSourceIssue')
+    OrgSourceIssueAccountCountInteger = Shapes::IntegerShape.new(name: 'OrgSourceIssueAccountCountInteger')
+    OrgSourceIssueList = Shapes::ListShape.new(name: 'OrgSourceIssueList')
+    OrgSourceIssueMessage = Shapes::StringShape.new(name: 'OrgSourceIssueMessage')
+    OrgUnitId = Shapes::StringShape.new(name: 'OrgUnitId')
     PagerDutyAuthorizationConfig = Shapes::UnionShape.new(name: 'PagerDutyAuthorizationConfig')
     PagerDutyConfiguration = Shapes::StructureShape.new(name: 'PagerDutyConfiguration')
     PagerDutyDetails = Shapes::StructureShape.new(name: 'PagerDutyDetails')
@@ -483,6 +499,8 @@ module Aws::DevOpsAgent
     SourceAccountType = Shapes::StringShape.new(name: 'SourceAccountType')
     SourceAwsConfiguration = Shapes::StructureShape.new(name: 'SourceAwsConfiguration')
     SourceAwsConfigurationAccountIdString = Shapes::StringShape.new(name: 'SourceAwsConfigurationAccountIdString')
+    SourceAwsOrgConfiguration = Shapes::StructureShape.new(name: 'SourceAwsOrgConfiguration')
+    SourceAwsOrgUnit = Shapes::StructureShape.new(name: 'SourceAwsOrgUnit')
     String = Shapes::StringShape.new(name: 'String')
     SubnetId = Shapes::StringShape.new(name: 'SubnetId')
     SyntheticTimestamp_date_time = Shapes::TimestampShape.new(name: 'SyntheticTimestamp_date_time', timestampFormat: "iso8601")
@@ -541,6 +559,10 @@ module Aws::DevOpsAgent
     UpdateBacklogTaskRequest = Shapes::StructureShape.new(name: 'UpdateBacklogTaskRequest')
     UpdateBacklogTaskRequestClientTokenString = Shapes::StringShape.new(name: 'UpdateBacklogTaskRequestClientTokenString')
     UpdateBacklogTaskResponse = Shapes::StructureShape.new(name: 'UpdateBacklogTaskResponse')
+    UpdateChatRequest = Shapes::StructureShape.new(name: 'UpdateChatRequest')
+    UpdateChatRequestClientTokenString = Shapes::StringShape.new(name: 'UpdateChatRequestClientTokenString')
+    UpdateChatRequestSummaryString = Shapes::StringShape.new(name: 'UpdateChatRequestSummaryString')
+    UpdateChatResponse = Shapes::StructureShape.new(name: 'UpdateChatResponse')
     UpdateGoalRequest = Shapes::StructureShape.new(name: 'UpdateGoalRequest')
     UpdateGoalRequestClientTokenString = Shapes::StringShape.new(name: 'UpdateGoalRequestClientTokenString')
     UpdateGoalResponse = Shapes::StructureShape.new(name: 'UpdateGoalResponse')
@@ -580,10 +602,13 @@ module Aws::DevOpsAgent
     AWSConfiguration.add_member(:account_type, Shapes::ShapeRef.new(shape: MonitorAccountType, required: true, location_name: "accountType"))
     AWSConfiguration.add_member(:agent_elevated_role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "agentElevatedRoleArn"))
     AWSConfiguration.add_member(:agent_elevated_role_arn_status, Shapes::ShapeRef.new(shape: ValidationStatus, location_name: "agentElevatedRoleArnStatus"))
+    AWSConfiguration.add_member(:service_management_role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "serviceManagementRoleArn"))
     AWSConfiguration.struct_class = Types::AWSConfiguration
 
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     AccessDeniedException.struct_class = Types::AccessDeniedException
+
+    AccountIdList.member = Shapes::ShapeRef.new(shape: AwsAccountId)
 
     AdditionalServiceDetails.add_member(:github, Shapes::ShapeRef.new(shape: RegisteredGithubServiceDetails, location_name: "github"))
     AdditionalServiceDetails.add_member(:slack, Shapes::ShapeRef.new(shape: RegisteredSlackServiceDetails, location_name: "slack"))
@@ -633,6 +658,7 @@ module Aws::DevOpsAgent
     AgentSpace.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "kmsKeyArn"))
     AgentSpace.add_member(:agent_space_id, Shapes::ShapeRef.new(shape: AgentSpaceId, required: true, location_name: "agentSpaceId"))
     AgentSpace.add_member(:preferences, Shapes::ShapeRef.new(shape: AgentSpacePreferences, location_name: "preferences"))
+    AgentSpace.add_member(:aws_source_mode, Shapes::ShapeRef.new(shape: AwsSourceMode, location_name: "awsSourceMode"))
     AgentSpace.struct_class = Types::AgentSpace
 
     AgentSpaceList.member = Shapes::ShapeRef.new(shape: AgentSpace)
@@ -776,11 +802,13 @@ module Aws::DevOpsAgent
     ChatExecution.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createdAt"))
     ChatExecution.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "updatedAt"))
     ChatExecution.add_member(:summary, Shapes::ShapeRef.new(shape: String, location_name: "summary"))
+    ChatExecution.add_member(:archive_status, Shapes::ShapeRef.new(shape: ChatArchiveStatus, location_name: "archiveStatus"))
     ChatExecution.struct_class = Types::ChatExecution
 
     ChatExecutionList.member = Shapes::ShapeRef.new(shape: ChatExecution)
 
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
+    ConflictException.add_member(:reason, Shapes::ShapeRef.new(shape: ConflictExceptionReason, location_name: "reason"))
     ConflictException.struct_class = Types::ConflictException
 
     ContentSizeExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
@@ -793,6 +821,7 @@ module Aws::DevOpsAgent
     CreateAgentSpaceInput.add_member(:client_token, Shapes::ShapeRef.new(shape: CreateAgentSpaceInputClientTokenString, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateAgentSpaceInput.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     CreateAgentSpaceInput.add_member(:preferences, Shapes::ShapeRef.new(shape: AgentSpacePreferences, location_name: "preferences"))
+    CreateAgentSpaceInput.add_member(:aws_source_mode, Shapes::ShapeRef.new(shape: AwsSourceMode, location_name: "awsSourceMode"))
     CreateAgentSpaceInput.struct_class = Types::CreateAgentSpaceInput
 
     CreateAgentSpaceOutput.add_member(:agent_space, Shapes::ShapeRef.new(shape: AgentSpace, required: true, location_name: "agentSpace"))
@@ -1082,6 +1111,17 @@ module Aws::DevOpsAgent
     GetBacklogTaskResponse.add_member(:task, Shapes::ShapeRef.new(shape: Task, required: true, location_name: "task"))
     GetBacklogTaskResponse.struct_class = Types::GetBacklogTaskResponse
 
+    GetChatRequest.add_member(:agent_space_id, Shapes::ShapeRef.new(shape: AgentSpaceIdentifier, required: true, location: "uri", location_name: "agentSpaceId"))
+    GetChatRequest.add_member(:execution_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location: "uri", location_name: "executionId"))
+    GetChatRequest.struct_class = Types::GetChatRequest
+
+    GetChatResponse.add_member(:execution_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "executionId"))
+    GetChatResponse.add_member(:summary, Shapes::ShapeRef.new(shape: String, location_name: "summary"))
+    GetChatResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createdAt"))
+    GetChatResponse.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "updatedAt"))
+    GetChatResponse.add_member(:archive_status, Shapes::ShapeRef.new(shape: ChatArchiveStatus, required: true, location_name: "archiveStatus"))
+    GetChatResponse.struct_class = Types::GetChatResponse
+
     GetOperatorAppInput.add_member(:agent_space_id, Shapes::ShapeRef.new(shape: AgentSpaceId, required: true, location: "uri", location_name: "agentSpaceId"))
     GetOperatorAppInput.struct_class = Types::GetOperatorAppInput
 
@@ -1286,6 +1326,7 @@ module Aws::DevOpsAgent
     ListChatsRequest.add_member(:user_id, Shapes::ShapeRef.new(shape: ResourceId, deprecated: true, location: "querystring", location_name: "userId", metadata: {"deprecatedMessage" => "userId is managed by the service and should not be provided by the caller", "deprecatedSince" => "2026-04-15"}))
     ListChatsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListChatsRequestMaxResultsInteger, location: "querystring", location_name: "maxResults"))
     ListChatsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "nextToken"))
+    ListChatsRequest.add_member(:archive_status, Shapes::ShapeRef.new(shape: ChatArchiveStatus, location: "querystring", location_name: "archiveStatus"))
     ListChatsRequest.struct_class = Types::ListChatsRequest
 
     ListChatsResponse.add_member(:executions, Shapes::ShapeRef.new(shape: ChatExecutionList, required: true, location_name: "executions"))
@@ -1493,6 +1534,10 @@ module Aws::DevOpsAgent
 
     MCPToolsList.member = Shapes::ShapeRef.new(shape: MCPToolsListMemberString)
 
+    MSTeamsBidirectionalConfiguration.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "roleArn"))
+    MSTeamsBidirectionalConfiguration.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "enabled"))
+    MSTeamsBidirectionalConfiguration.struct_class = Types::MSTeamsBidirectionalConfiguration
+
     MSTeamsChannel.add_member(:channel_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "channelName"))
     MSTeamsChannel.add_member(:channel_id, Shapes::ShapeRef.new(shape: MSTeamsChannelId, required: true, location_name: "channelId"))
     MSTeamsChannel.struct_class = Types::MSTeamsChannel
@@ -1500,6 +1545,7 @@ module Aws::DevOpsAgent
     MSTeamsConfiguration.add_member(:team_id, Shapes::ShapeRef.new(shape: Guid, required: true, location_name: "teamId"))
     MSTeamsConfiguration.add_member(:team_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "teamName"))
     MSTeamsConfiguration.add_member(:transmission_target, Shapes::ShapeRef.new(shape: MSTeamsTransmissionTarget, required: true, location_name: "transmissionTarget"))
+    MSTeamsConfiguration.add_member(:bidirectional, Shapes::ShapeRef.new(shape: MSTeamsBidirectionalConfiguration, location_name: "bidirectional"))
     MSTeamsConfiguration.struct_class = Types::MSTeamsConfiguration
 
     MSTeamsTransmissionTarget.add_member(:ops_oncall_target, Shapes::ShapeRef.new(shape: MSTeamsChannel, location_name: "opsOncallTarget"))
@@ -1548,6 +1594,19 @@ module Aws::DevOpsAgent
 
     OAuthAdditionalStepDetails.add_member(:authorization_url, Shapes::ShapeRef.new(shape: String, required: true, location_name: "authorizationUrl"))
     OAuthAdditionalStepDetails.struct_class = Types::OAuthAdditionalStepDetails
+
+    OrgSourceDeploymentState.add_member(:deployed_account_count, Shapes::ShapeRef.new(shape: OrgSourceDeploymentStateDeployedAccountCountInteger, location_name: "deployedAccountCount"))
+    OrgSourceDeploymentState.add_member(:issues, Shapes::ShapeRef.new(shape: OrgSourceIssueList, location_name: "issues"))
+    OrgSourceDeploymentState.add_member(:last_evaluated_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "lastEvaluatedAt"))
+    OrgSourceDeploymentState.struct_class = Types::OrgSourceDeploymentState
+
+    OrgSourceIssue.add_member(:reason_code, Shapes::ShapeRef.new(shape: OrgSourceAccountReasonCode, required: true, location_name: "reasonCode"))
+    OrgSourceIssue.add_member(:account_count, Shapes::ShapeRef.new(shape: OrgSourceIssueAccountCountInteger, required: true, location_name: "accountCount"))
+    OrgSourceIssue.add_member(:account_ids, Shapes::ShapeRef.new(shape: AccountIdList, required: true, location_name: "accountIds"))
+    OrgSourceIssue.add_member(:message, Shapes::ShapeRef.new(shape: OrgSourceIssueMessage, location_name: "message"))
+    OrgSourceIssue.struct_class = Types::OrgSourceIssue
+
+    OrgSourceIssueList.member = Shapes::ShapeRef.new(shape: OrgSourceIssue)
 
     PagerDutyAuthorizationConfig.add_member(:o_auth_client_credentials, Shapes::ShapeRef.new(shape: PagerDutyOAuthClientCredentialsConfig, location_name: "oAuthClientCredentials"))
     PagerDutyAuthorizationConfig.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
@@ -1928,6 +1987,7 @@ module Aws::DevOpsAgent
     SendMessageUsageInfo.struct_class = Types::SendMessageUsageInfo
 
     ServiceConfiguration.add_member(:source_aws, Shapes::ShapeRef.new(shape: SourceAwsConfiguration, location_name: "sourceAws"))
+    ServiceConfiguration.add_member(:source_aws_org, Shapes::ShapeRef.new(shape: SourceAwsOrgConfiguration, location_name: "sourceAwsOrg"))
     ServiceConfiguration.add_member(:aws, Shapes::ShapeRef.new(shape: AWSConfiguration, location_name: "aws"))
     ServiceConfiguration.add_member(:github, Shapes::ShapeRef.new(shape: GitHubConfiguration, location_name: "github"))
     ServiceConfiguration.add_member(:slack, Shapes::ShapeRef.new(shape: SlackConfiguration, location_name: "slack"))
@@ -1950,6 +2010,7 @@ module Aws::DevOpsAgent
     ServiceConfiguration.add_member(:release_management, Shapes::ShapeRef.new(shape: ReleaseManagementConfiguration, location_name: "releaseManagement"))
     ServiceConfiguration.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     ServiceConfiguration.add_member_subclass(:source_aws, Types::ServiceConfiguration::SourceAws)
+    ServiceConfiguration.add_member_subclass(:source_aws_org, Types::ServiceConfiguration::SourceAwsOrg)
     ServiceConfiguration.add_member_subclass(:aws, Types::ServiceConfiguration::Aws)
     ServiceConfiguration.add_member_subclass(:github, Types::ServiceConfiguration::Github)
     ServiceConfiguration.add_member_subclass(:slack, Types::ServiceConfiguration::Slack)
@@ -2067,6 +2128,15 @@ module Aws::DevOpsAgent
     SourceAwsConfiguration.add_member(:agent_elevated_role_arn_status, Shapes::ShapeRef.new(shape: ValidationStatus, location_name: "agentElevatedRoleArnStatus"))
     SourceAwsConfiguration.struct_class = Types::SourceAwsConfiguration
 
+    SourceAwsOrgConfiguration.add_member(:account_type, Shapes::ShapeRef.new(shape: SourceAccountType, required: true, location_name: "accountType"))
+    SourceAwsOrgConfiguration.add_member(:organizational_unit, Shapes::ShapeRef.new(shape: SourceAwsOrgUnit, required: true, location_name: "organizationalUnit"))
+    SourceAwsOrgConfiguration.add_member(:deployment_state, Shapes::ShapeRef.new(shape: OrgSourceDeploymentState, location_name: "deploymentState"))
+    SourceAwsOrgConfiguration.struct_class = Types::SourceAwsOrgConfiguration
+
+    SourceAwsOrgUnit.add_member(:organizational_unit_id, Shapes::ShapeRef.new(shape: OrgUnitId, required: true, location_name: "organizationalUnitId"))
+    SourceAwsOrgUnit.add_member(:account_ids, Shapes::ShapeRef.new(shape: AccountIdList, location_name: "accountIds"))
+    SourceAwsOrgUnit.struct_class = Types::SourceAwsOrgUnit
+
     TagKeyList.member = Shapes::ShapeRef.new(shape: TagKey)
 
     TagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: TagResourceRequestResourceArnString, required: true, location: "uri", location_name: "resourceArn"))
@@ -2160,6 +2230,7 @@ module Aws::DevOpsAgent
     UpdateAgentSpaceInput.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     UpdateAgentSpaceInput.add_member(:locale, Shapes::ShapeRef.new(shape: Locale, location_name: "locale"))
     UpdateAgentSpaceInput.add_member(:preferences, Shapes::ShapeRef.new(shape: AgentSpacePreferences, location_name: "preferences"))
+    UpdateAgentSpaceInput.add_member(:aws_source_mode, Shapes::ShapeRef.new(shape: AwsSourceMode, location_name: "awsSourceMode"))
     UpdateAgentSpaceInput.struct_class = Types::UpdateAgentSpaceInput
 
     UpdateAgentSpaceOutput.add_member(:agent_space, Shapes::ShapeRef.new(shape: AgentSpace, required: true, location_name: "agentSpace"))
@@ -2218,6 +2289,19 @@ module Aws::DevOpsAgent
 
     UpdateBacklogTaskResponse.add_member(:task, Shapes::ShapeRef.new(shape: Task, required: true, location_name: "task"))
     UpdateBacklogTaskResponse.struct_class = Types::UpdateBacklogTaskResponse
+
+    UpdateChatRequest.add_member(:agent_space_id, Shapes::ShapeRef.new(shape: AgentSpaceIdentifier, required: true, location: "uri", location_name: "agentSpaceId"))
+    UpdateChatRequest.add_member(:execution_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location: "uri", location_name: "executionId"))
+    UpdateChatRequest.add_member(:summary, Shapes::ShapeRef.new(shape: UpdateChatRequestSummaryString, location_name: "summary"))
+    UpdateChatRequest.add_member(:archive_status, Shapes::ShapeRef.new(shape: ChatArchiveStatus, location_name: "archiveStatus"))
+    UpdateChatRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: UpdateChatRequestClientTokenString, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
+    UpdateChatRequest.struct_class = Types::UpdateChatRequest
+
+    UpdateChatResponse.add_member(:execution_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "executionId"))
+    UpdateChatResponse.add_member(:summary, Shapes::ShapeRef.new(shape: String, location_name: "summary"))
+    UpdateChatResponse.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "updatedAt"))
+    UpdateChatResponse.add_member(:archive_status, Shapes::ShapeRef.new(shape: ChatArchiveStatus, required: true, location_name: "archiveStatus"))
+    UpdateChatResponse.struct_class = Types::UpdateChatResponse
 
     UpdateGoalRequest.add_member(:agent_space_id, Shapes::ShapeRef.new(shape: AgentSpaceIdentifier, required: true, location: "uri", location_name: "agentSpaceId"))
     UpdateGoalRequest.add_member(:goal_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "goalId"))
@@ -2826,6 +2910,26 @@ module Aws::DevOpsAgent
         }
         o.input = Shapes::ShapeRef.new(shape: GetBacklogTaskRequest)
         o.output = Shapes::ShapeRef.new(shape: GetBacklogTaskResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ContentSizeExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+      end)
+
+      api.add_operation(:get_chat, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetChat"
+        o.http_method = "GET"
+        o.http_request_uri = "/agents/agent-space/{agentSpaceId}/chat/get/{executionId}"
+        o.endpoint_pattern = {
+          "hostPrefix" => "dp.",
+        }
+        o.input = Shapes::ShapeRef.new(shape: GetChatRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetChatResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ContentSizeExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
@@ -3538,6 +3642,26 @@ module Aws::DevOpsAgent
         }
         o.input = Shapes::ShapeRef.new(shape: UpdateBacklogTaskRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateBacklogTaskResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ContentSizeExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+      end)
+
+      api.add_operation(:update_chat, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateChat"
+        o.http_method = "PATCH"
+        o.http_request_uri = "/agents/agent-space/{agentSpaceId}/chat/{executionId}"
+        o.endpoint_pattern = {
+          "hostPrefix" => "dp.",
+        }
+        o.input = Shapes::ShapeRef.new(shape: UpdateChatRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateChatResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ContentSizeExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)

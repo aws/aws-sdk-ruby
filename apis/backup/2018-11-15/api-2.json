@@ -2211,6 +2211,8 @@
         "EKS_RESTORE_OBJECT_FAILED",
         "EKS_RESTORE_OBJECT_SKIPPED",
         "EKS_BACKUP_OBJECT_FAILED",
+        "EKS_RESTORE_MODIFICATION_SUCCESS",
+        "EKS_RESTORE_MODIFICATION_FAILED",
         "ACCESS_POINT_AVAILABLE",
         "ACCESS_POINT_CREATION_FAILED",
         "ACCESS_POINT_DELETED",
@@ -3237,7 +3239,8 @@
       "type":"structure",
       "members":{
         "ResourceTypeOptInPreference":{"shape":"ResourceTypeOptInPreference"},
-        "ResourceTypeManagementPreference":{"shape":"ResourceTypeManagementPreference"}
+        "ResourceTypeManagementPreference":{"shape":"ResourceTypeManagementPreference"},
+        "ResourceTypeOptInIncremental":{"shape":"ResourceTypeOptInIncremental"}
       }
     },
     "DescribeReportJobInput":{
@@ -5704,6 +5707,11 @@
       "key":{"shape":"ResourceType"},
       "value":{"shape":"IsEnabled"}
     },
+    "ResourceTypeOptInIncremental":{
+      "type":"map",
+      "key":{"shape":"ResourceType"},
+      "value":{"shape":"IsEnabled"}
+    },
     "ResourceTypeOptInPreference":{
       "type":"map",
       "key":{"shape":"ResourceType"},
@@ -6647,7 +6655,8 @@
       "type":"structure",
       "members":{
         "ResourceTypeOptInPreference":{"shape":"ResourceTypeOptInPreference"},
-        "ResourceTypeManagementPreference":{"shape":"ResourceTypeManagementPreference"}
+        "ResourceTypeManagementPreference":{"shape":"ResourceTypeManagementPreference"},
+        "ResourceTypeOptInIncremental":{"shape":"ResourceTypeOptInIncremental"}
       }
     },
     "UpdateReportPlanInput":{

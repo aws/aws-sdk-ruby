@@ -17,6 +17,9 @@ module Aws
       class AliasExistsException < ServiceError
         def message: () -> ::String
       end
+      class CachedCIMDURLDoesNotExistException < ServiceError
+        def message: () -> ::String
+      end
       class CodeDeliveryFailureException < ServiceError
         def message: () -> ::String
       end

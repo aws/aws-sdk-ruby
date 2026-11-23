@@ -24,7 +24,7 @@ module Seahorse
       describe '#config' do
 
         it 'returns a Configuration struct' do
-          expect(client.config).to be_kind_of(Struct)
+          expect(client.config).to be_kind_of(Configuration::DynamicStruct)
         end
 
         it 'contains the client api' do
@@ -277,7 +277,10 @@ module Seahorse
 
           it 'instructs plugins to #add_handlers' do
             expect(plugin).to receive(:add_handlers).
-              with(kind_of(HandlerList), kind_of(Struct))
+              with(
+                kind_of(HandlerList),
+                kind_of(Configuration::DynamicStruct)
+              )
             client_class.add_plugin(plugin)
             client_class.new(endpoint: 'http://foo.com')
           end
@@ -321,7 +324,10 @@ module Seahorse
 
           it 'instructs plugins to #add_handlers' do
             expect(plugin).to receive(:add_handlers).
-              with(kind_of(HandlerList), kind_of(Struct))
+              with(
+                kind_of(HandlerList),
+                kind_of(Configuration::DynamicStruct)
+              )
             client_class.new(endpoint: 'http://foo.com', plugins: [plugin])
           end
 

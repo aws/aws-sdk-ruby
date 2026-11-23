@@ -510,6 +510,8 @@ module Aws
       interface _GetFirewallDomainListResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetFirewallDomainListResponse]
         def firewall_domain_list: () -> Types::FirewallDomainList
+        def firewall_rule_group_id: () -> ::String
+        def firewall_threat_protection_id: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53Resolver/Client.html#get_firewall_domain_list-instance_method
       def get_firewall_domain_list: (
@@ -698,6 +700,27 @@ module Aws
                                    ?next_token: ::String
                                  ) -> _ListFirewallDomainsResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListFirewallDomainsResponseSuccess
+
+      interface _ListFirewallRuleDomainsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListFirewallRuleDomainsResponse]
+        def domains: () -> ::Array[Types::FirewallRuleDomain]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53Resolver/Client.html#list_firewall_rule_domains-instance_method
+      def list_firewall_rule_domains: (
+                                        firewall_rule_group_id: ::String,
+                                        ?firewall_threat_protection_id: ::String,
+                                        ?firewall_domain_list_id: ::String,
+                                        ?query_options: {
+                                          domain_status: ("OBSERVED" | "ALLOWED" | "DENIED")?,
+                                          sort_by: ("TIME_ADDED" | "DAILY_TOTAL" | "TOTAL_REQUESTS")?,
+                                          sort_order: ("ASC" | "DESC")?,
+                                          domain_name_filter: ::String?
+                                        },
+                                        ?max_results: ::Integer,
+                                        ?next_token: ::String
+                                      ) -> _ListFirewallRuleDomainsResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListFirewallRuleDomainsResponseSuccess
 
       interface _ListFirewallRuleGroupAssociationsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListFirewallRuleGroupAssociationsResponse]
@@ -1005,7 +1028,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53Resolver/Client.html#update_firewall_domains-instance_method
       def update_firewall_domains: (
                                      firewall_domain_list_id: ::String,
-                                     operation: ("ADD" | "REMOVE" | "REPLACE"),
+                                     operation: ("ADD" | "REMOVE" | "REPLACE" | "DENY"),
                                      domains: Array[::String]
                                    ) -> _UpdateFirewallDomainsResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateFirewallDomainsResponseSuccess

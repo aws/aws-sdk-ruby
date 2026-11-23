@@ -8,8 +8,14 @@
 module Aws::Route53
   module Types
 
+    class AZAffinity
+      attr_accessor location_type: ("AvailabilityZone" | "AvailabilityZoneGroup" | "Region" | "Partition" | "Global")
+      attr_accessor location_id: ::String
+      SENSITIVE: []
+    end
+
     class AccountLimit
-      attr_accessor type: ("MAX_HEALTH_CHECKS_BY_OWNER" | "MAX_HOSTED_ZONES_BY_OWNER" | "MAX_TRAFFIC_POLICY_INSTANCES_BY_OWNER" | "MAX_REUSABLE_DELEGATION_SETS_BY_OWNER" | "MAX_TRAFFIC_POLICIES_BY_OWNER")
+      attr_accessor type: ("MAX_HEALTH_CHECKS_BY_OWNER" | "MAX_HOSTED_ZONES_BY_OWNER" | "MAX_TRAFFIC_POLICY_INSTANCES_BY_OWNER" | "MAX_REUSABLE_DELEGATION_SETS_BY_OWNER" | "MAX_TRAFFIC_POLICIES_BY_OWNER" | "MAX_HEALTH_CHECK_SOURCES_BY_OWNER")
       attr_accessor value: ::Integer
       SENSITIVE: []
     end
@@ -62,6 +68,17 @@ module Aws::Route53
       SENSITIVE: []
     end
 
+    class ChangeBatchSummary
+      attr_accessor change_id: ::String
+      attr_accessor operation: ("CreateHostedZone" | "DeleteHostedZone" | "ChangeResourceRecordSets")
+      attr_accessor submitted_at: ::Time
+      attr_accessor submitted_by: ::String
+      attr_accessor request_id: ::String
+      attr_accessor comment: ::String
+      attr_accessor change_count: ::Integer
+      SENSITIVE: []
+    end
+
     class ChangeCidrCollectionRequest
       attr_accessor id: ::String
       attr_accessor collection_version: ::Integer
@@ -71,6 +88,18 @@ module Aws::Route53
 
     class ChangeCidrCollectionResponse
       attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class ChangeGuardrail
+      attr_accessor name: ("NS_FORMAT_CHECK" | "NS_DELEGATION_AUTHORITY_CHECK" | "NS_OCCLUSION_CHECK" | "ALIAS_TARGET_CHECK" | "ACTIVE_RECORD_CHECK" | "ACTIVE_DELEGATION_CHECK")
+      attr_accessor status: ("ENABLED" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class ChangeHistoryFeature
+      attr_accessor status: ("ENABLED" | "DISABLED")
+      attr_accessor retention_starts_at: ::Time
       SENSITIVE: []
     end
 
@@ -94,7 +123,7 @@ module Aws::Route53
     end
 
     class ChangeTagsForResourceRequest
-      attr_accessor resource_type: ("healthcheck" | "hostedzone")
+      attr_accessor resource_type: ("healthcheck" | "hostedzone" | "healthchecksource")
       attr_accessor resource_id: ::String
       attr_accessor add_tags: ::Array[Types::Tag]
       attr_accessor remove_tag_keys: ::Array[::String]
@@ -216,12 +245,28 @@ module Aws::Route53
       SENSITIVE: []
     end
 
+    class CreateHealthCheckSourceRequest
+      attr_accessor caller_reference: ::String
+      attr_accessor health_check_source_config: Types::HealthCheckSourceConfig
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateHealthCheckSourceResponse
+      attr_accessor health_check_source_id: ::String
+      attr_accessor health_check_source_status: ("CREATE_PENDING" | "CREATE_IN_PROGRESS" | "CREATE_COMPLETED" | "CREATE_FAILED" | "DELETE_PENDING" | "DELETE_IN_PROGRESS" | "DELETE_COMPLETED" | "DELETE_FAILED")
+      attr_accessor location: ::String
+      SENSITIVE: []
+    end
+
     class CreateHostedZoneRequest
       attr_accessor name: ::String
       attr_accessor vpc: Types::VPC
       attr_accessor caller_reference: ::String
       attr_accessor hosted_zone_config: Types::HostedZoneConfig
       attr_accessor delegation_set_id: ::String
+      attr_accessor enable_public_dns_fallback: bool
+      attr_accessor change_guardrails: ::Array[Types::ChangeGuardrail]
       SENSITIVE: []
     end
 
@@ -260,6 +305,15 @@ module Aws::Route53
       attr_accessor query_logging_config: Types::QueryLoggingConfig
       attr_accessor location: ::String
       SENSITIVE: []
+    end
+
+    class CreateResourceRecordSetProtectionsRequest
+      attr_accessor hosted_zone_id: ::String
+      attr_accessor protections: ::Array[Types::ResourceRecordSetProtectionConfig]
+      SENSITIVE: []
+    end
+
+    class CreateResourceRecordSetProtectionsResponse < Aws::EmptyStructure
     end
 
     class CreateReusableDelegationSetRequest
@@ -397,6 +451,17 @@ module Aws::Route53
     class DeleteHealthCheckResponse < Aws::EmptyStructure
     end
 
+    class DeleteHealthCheckSourceRequest
+      attr_accessor health_check_source_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteHealthCheckSourceResponse
+      attr_accessor health_check_source_id: ::String
+      attr_accessor health_check_source_status: ("CREATE_PENDING" | "CREATE_IN_PROGRESS" | "CREATE_COMPLETED" | "CREATE_FAILED" | "DELETE_PENDING" | "DELETE_IN_PROGRESS" | "DELETE_COMPLETED" | "DELETE_FAILED")
+      SENSITIVE: []
+    end
+
     class DeleteHostedZoneRequest
       attr_accessor id: ::String
       SENSITIVE: []
@@ -424,6 +489,15 @@ module Aws::Route53
     end
 
     class DeleteQueryLoggingConfigResponse < Aws::EmptyStructure
+    end
+
+    class DeleteResourceRecordSetProtectionsRequest
+      attr_accessor hosted_zone_id: ::String
+      attr_accessor protections: ::Array[Types::ResourceRecordSetProtectionKey]
+      SENSITIVE: []
+    end
+
+    class DeleteResourceRecordSetProtectionsResponse < Aws::EmptyStructure
     end
 
     class DeleteReusableDelegationSetRequest
@@ -498,6 +572,11 @@ module Aws::Route53
       SENSITIVE: []
     end
 
+    class FeatureNotEnabled
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
     class GeoLocation
       attr_accessor continent_code: ::String
       attr_accessor country_code: ::String
@@ -524,7 +603,7 @@ module Aws::Route53
     end
 
     class GetAccountLimitRequest
-      attr_accessor type: ("MAX_HEALTH_CHECKS_BY_OWNER" | "MAX_HOSTED_ZONES_BY_OWNER" | "MAX_TRAFFIC_POLICY_INSTANCES_BY_OWNER" | "MAX_REUSABLE_DELEGATION_SETS_BY_OWNER" | "MAX_TRAFFIC_POLICIES_BY_OWNER")
+      attr_accessor type: ("MAX_HEALTH_CHECKS_BY_OWNER" | "MAX_HOSTED_ZONES_BY_OWNER" | "MAX_TRAFFIC_POLICY_INSTANCES_BY_OWNER" | "MAX_REUSABLE_DELEGATION_SETS_BY_OWNER" | "MAX_TRAFFIC_POLICIES_BY_OWNER" | "MAX_HEALTH_CHECK_SOURCES_BY_OWNER")
       SENSITIVE: []
     end
 
@@ -603,6 +682,16 @@ module Aws::Route53
       SENSITIVE: []
     end
 
+    class GetHealthCheckSourceRequest
+      attr_accessor health_check_source_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetHealthCheckSourceResponse
+      attr_accessor health_check_source: Types::HealthCheckSource
+      SENSITIVE: []
+    end
+
     class GetHealthCheckStatusRequest
       attr_accessor health_check_id: ::String
       SENSITIVE: []
@@ -610,6 +699,18 @@ module Aws::Route53
 
     class GetHealthCheckStatusResponse
       attr_accessor health_check_observations: ::Array[Types::HealthCheckObservation]
+      SENSITIVE: []
+    end
+
+    class GetHostedZoneChangeBatchRequest
+      attr_accessor hosted_zone_id: ::String
+      attr_accessor change_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetHostedZoneChangeBatchResponse
+      attr_accessor change_batch_summary: Types::ChangeBatchSummary
+      attr_accessor change_batch: Types::ChangeBatch
       SENSITIVE: []
     end
 
@@ -740,6 +841,8 @@ module Aws::Route53
       attr_accessor alarm_identifier: Types::AlarmIdentifier
       attr_accessor insufficient_data_health_status: ("Healthy" | "Unhealthy" | "LastKnownStatus")
       attr_accessor routing_control_arn: ::String
+      attr_accessor endpoint_type: ("PUBLIC" | "PRIVATE")
+      attr_accessor health_check_source_id: ::String
       SENSITIVE: []
     end
 
@@ -752,6 +855,26 @@ module Aws::Route53
       attr_accessor region: ("us-east-1" | "us-west-1" | "us-west-2" | "eu-west-1" | "ap-southeast-1" | "ap-southeast-2" | "ap-northeast-1" | "sa-east-1")
       attr_accessor ip_address: ::String
       attr_accessor status_report: Types::StatusReport
+      SENSITIVE: []
+    end
+
+    class HealthCheckSource
+      attr_accessor health_check_source_id: ::String
+      attr_accessor health_check_source_status: ("CREATE_PENDING" | "CREATE_IN_PROGRESS" | "CREATE_COMPLETED" | "CREATE_FAILED" | "DELETE_PENDING" | "DELETE_IN_PROGRESS" | "DELETE_COMPLETED" | "DELETE_FAILED")
+      attr_accessor health_check_source_config: Types::HealthCheckSourceConfig
+      attr_accessor status_reason_code: ("INSUFFICIENT_SUBNET_IPS" | "EC2_LIMIT_EXCEEDED" | "INVALID_SUBNET" | "INVALID_SECURITY_GROUP" | "INVALID_CONFIGURATION" | "SLR_MISSING_OR_NOT_ASSUMABLE" | "INTERNAL_ERROR")
+      attr_accessor status_reason: ::String
+      SENSITIVE: []
+    end
+
+    class HealthCheckSourceAlreadyExists
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class HealthCheckSourceConfig
+      attr_accessor vpc_id: ::String
+      attr_accessor subnet_configuration_list: ::Array[Types::SubnetConfiguration]
       SENSITIVE: []
     end
 
@@ -779,6 +902,7 @@ module Aws::Route53
     class HostedZoneConfig
       attr_accessor comment: ::String
       attr_accessor private_zone: bool
+      attr_accessor hosted_zone_tier: ("STANDARD" | "ADVANCED")
       SENSITIVE: []
     end
 
@@ -789,7 +913,10 @@ module Aws::Route53
 
     class HostedZoneFeatures
       attr_accessor accelerated_recovery_status: ("ENABLING" | "ENABLE_FAILED" | "ENABLING_HOSTED_ZONE_LOCKED" | "ENABLED" | "DISABLING" | "DISABLE_FAILED" | "DISABLED" | "DISABLING_HOSTED_ZONE_LOCKED")
+      attr_accessor public_dns_fallback_status: ("ENABLED" | "DISABLED" | "ENABLING" | "DISABLING")
+      attr_accessor change_history: Types::ChangeHistoryFeature
       attr_accessor failure_reasons: Types::HostedZoneFailureReasons
+      attr_accessor change_guardrails: ::Array[Types::ChangeGuardrail]
       SENSITIVE: []
     end
 
@@ -880,6 +1007,12 @@ module Aws::Route53
 
     class InvalidPaginationToken
       attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidResourceRecordSetProtectionBatch
+      attr_accessor message: ::String
+      attr_accessor errors: ::Array[Types::ProtectionError]
       SENSITIVE: []
     end
 
@@ -1011,6 +1144,34 @@ module Aws::Route53
       SENSITIVE: []
     end
 
+    class ListHealthCheckSourcesRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::String
+      SENSITIVE: []
+    end
+
+    class ListHealthCheckSourcesResponse
+      attr_accessor health_check_sources: ::Array[Types::HealthCheckSource]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListHealthChecksBySourceRequest
+      attr_accessor health_check_source_id: ::String
+      attr_accessor marker: ::String
+      attr_accessor max_items: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListHealthChecksBySourceResponse
+      attr_accessor health_checks: ::Array[Types::HealthCheck]
+      attr_accessor marker: ::String
+      attr_accessor is_truncated: bool
+      attr_accessor next_marker: ::String
+      attr_accessor max_items: ::Integer
+      SENSITIVE: []
+    end
+
     class ListHealthChecksRequest
       attr_accessor marker: ::String
       attr_accessor max_items: ::Integer
@@ -1023,6 +1184,23 @@ module Aws::Route53
       attr_accessor is_truncated: bool
       attr_accessor next_marker: ::String
       attr_accessor max_items: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListHostedZoneChangeBatchesRequest
+      attr_accessor hosted_zone_id: ::String
+      attr_accessor submitted_after: ::String
+      attr_accessor submitted_before: ::String
+      attr_accessor start_after_change_id: ::String
+      attr_accessor sort_order: ("ASCENDING" | "DESCENDING")
+      attr_accessor max_results: ::String
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListHostedZoneChangeBatchesResponse
+      attr_accessor change_batch_summaries: ::Array[Types::ChangeBatchSummary]
+      attr_accessor next_token: ::String
       SENSITIVE: []
     end
 
@@ -1089,6 +1267,39 @@ module Aws::Route53
       SENSITIVE: []
     end
 
+    class ListResourceRecordSetChangesRequest
+      attr_accessor hosted_zone_id: ::String
+      attr_accessor record_name: ::String
+      attr_accessor record_type: ("SOA" | "A" | "TXT" | "NS" | "CNAME" | "MX" | "NAPTR" | "PTR" | "SRV" | "SPF" | "AAAA" | "CAA" | "DS" | "TLSA" | "SSHFP" | "SVCB" | "HTTPS")
+      attr_accessor submitted_after: ::String
+      attr_accessor submitted_before: ::String
+      attr_accessor sort_order: ("ASCENDING" | "DESCENDING")
+      attr_accessor max_results: ::String
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListResourceRecordSetChangesResponse
+      attr_accessor resource_record_set_changes: ::Array[Types::ResourceRecordSetChange]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListResourceRecordSetProtectionsRequest
+      attr_accessor hosted_zone_id: ::String
+      attr_accessor start_record_name: ::String
+      attr_accessor start_record_type: ("SOA" | "A" | "TXT" | "NS" | "CNAME" | "MX" | "NAPTR" | "PTR" | "SRV" | "SPF" | "AAAA" | "CAA" | "DS" | "TLSA" | "SSHFP" | "SVCB" | "HTTPS")
+      attr_accessor max_results: ::String
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListResourceRecordSetProtectionsResponse
+      attr_accessor resource_record_set_protections: ::Array[Types::ResourceRecordSetProtection]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class ListResourceRecordSetsRequest
       attr_accessor hosted_zone_id: ::String
       attr_accessor start_record_name: ::String
@@ -1124,7 +1335,7 @@ module Aws::Route53
     end
 
     class ListTagsForResourceRequest
-      attr_accessor resource_type: ("healthcheck" | "hostedzone")
+      attr_accessor resource_type: ("healthcheck" | "hostedzone" | "healthchecksource")
       attr_accessor resource_id: ::String
       SENSITIVE: []
     end
@@ -1135,7 +1346,7 @@ module Aws::Route53
     end
 
     class ListTagsForResourcesRequest
-      attr_accessor resource_type: ("healthcheck" | "hostedzone")
+      attr_accessor resource_type: ("healthcheck" | "hostedzone" | "healthchecksource")
       attr_accessor resource_ids: ::Array[::String]
       SENSITIVE: []
     end
@@ -1283,6 +1494,11 @@ module Aws::Route53
       SENSITIVE: []
     end
 
+    class NoSuchHealthCheckSource
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
     class NoSuchHostedZone
       attr_accessor message: ::String
       SENSITIVE: []
@@ -1314,6 +1530,20 @@ module Aws::Route53
     end
 
     class PriorRequestNotComplete
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ProtectionAlreadyExists
+      attr_accessor message: ::String
+      attr_accessor errors: ::Array[Types::ProtectionError]
+      SENSITIVE: []
+    end
+
+    class ProtectionError
+      attr_accessor record_name: ::String
+      attr_accessor record_type: ("SOA" | "A" | "TXT" | "NS" | "CNAME" | "MX" | "NAPTR" | "PTR" | "SRV" | "SPF" | "AAAA" | "CAA" | "DS" | "TLSA" | "SSHFP" | "SVCB" | "HTTPS")
+      attr_accessor code: ::String
       attr_accessor message: ::String
       SENSITIVE: []
     end
@@ -1356,11 +1586,43 @@ module Aws::Route53
       attr_accessor traffic_policy_instance_id: ::String
       attr_accessor cidr_routing_config: Types::CidrRoutingConfig
       attr_accessor geo_proximity_location: Types::GeoProximityLocation
+      attr_accessor az_affinity: Types::AZAffinity
+      SENSITIVE: []
+    end
+
+    class ResourceRecordSetChange
+      attr_accessor change_id: ::String
+      attr_accessor operation: ("CreateHostedZone" | "DeleteHostedZone" | "ChangeResourceRecordSets")
+      attr_accessor submitted_at: ::Time
+      attr_accessor submitted_by: ::String
+      attr_accessor request_id: ::String
+      attr_accessor action: ("CREATE" | "DELETE" | "UPSERT")
+      attr_accessor resource_record_set: Types::ResourceRecordSet
+      SENSITIVE: []
+    end
+
+    class ResourceRecordSetProtection
+      attr_accessor record_name: ::String
+      attr_accessor record_type: ("SOA" | "A" | "TXT" | "NS" | "CNAME" | "MX" | "NAPTR" | "PTR" | "SRV" | "SPF" | "AAAA" | "CAA" | "DS" | "TLSA" | "SSHFP" | "SVCB" | "HTTPS")
+      attr_accessor comment: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceRecordSetProtectionConfig
+      attr_accessor record_name: ::String
+      attr_accessor record_type: ("SOA" | "A" | "TXT" | "NS" | "CNAME" | "MX" | "NAPTR" | "PTR" | "SRV" | "SPF" | "AAAA" | "CAA" | "DS" | "TLSA" | "SSHFP" | "SVCB" | "HTTPS")
+      attr_accessor comment: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceRecordSetProtectionKey
+      attr_accessor record_name: ::String
+      attr_accessor record_type: ("SOA" | "A" | "TXT" | "NS" | "CNAME" | "MX" | "NAPTR" | "PTR" | "SRV" | "SPF" | "AAAA" | "CAA" | "DS" | "TLSA" | "SSHFP" | "SVCB" | "HTTPS")
       SENSITIVE: []
     end
 
     class ResourceTagSet
-      attr_accessor resource_type: ("healthcheck" | "hostedzone")
+      attr_accessor resource_type: ("healthcheck" | "hostedzone" | "healthchecksource")
       attr_accessor resource_id: ::String
       attr_accessor tags: ::Array[Types::Tag]
       SENSITIVE: []
@@ -1375,6 +1637,13 @@ module Aws::Route53
     class StatusReport
       attr_accessor status: ::String
       attr_accessor checked_time: ::Time
+      SENSITIVE: []
+    end
+
+    class SubnetConfiguration
+      attr_accessor subnet_id: ::String
+      attr_accessor availability_zone_id: ::String
+      attr_accessor security_group_id_list: ::Array[::String]
       SENSITIVE: []
     end
 
@@ -1405,6 +1674,11 @@ module Aws::Route53
     end
 
     class ThrottlingException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TooManyHealthCheckSources
       attr_accessor message: ::String
       SENSITIVE: []
     end
@@ -1509,6 +1783,7 @@ module Aws::Route53
       attr_accessor alarm_identifier: Types::AlarmIdentifier
       attr_accessor insufficient_data_health_status: ("Healthy" | "Unhealthy" | "LastKnownStatus")
       attr_accessor reset_elements: ::Array[("FullyQualifiedDomainName" | "Regions" | "ResourcePath" | "ChildHealthChecks")]
+      attr_accessor health_check_source_id: ::String
       SENSITIVE: []
     end
 
@@ -1531,10 +1806,23 @@ module Aws::Route53
     class UpdateHostedZoneFeaturesRequest
       attr_accessor hosted_zone_id: ::String
       attr_accessor enable_accelerated_recovery: bool
+      attr_accessor enable_public_dns_fallback: bool
+      attr_accessor change_guardrails: ::Array[Types::ChangeGuardrail]
+      attr_accessor dry_run: bool
       SENSITIVE: []
     end
 
     class UpdateHostedZoneFeaturesResponse < Aws::EmptyStructure
+    end
+
+    class UpdateHostedZoneTierRequest
+      attr_accessor hosted_zone_id: ::String
+      attr_accessor hosted_zone_tier: ("STANDARD" | "ADVANCED")
+      attr_accessor dry_run: bool
+      SENSITIVE: []
+    end
+
+    class UpdateHostedZoneTierResponse < Aws::EmptyStructure
     end
 
     class UpdateTrafficPolicyCommentRequest

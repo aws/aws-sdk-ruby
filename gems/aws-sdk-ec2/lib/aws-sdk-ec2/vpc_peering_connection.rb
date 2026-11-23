@@ -67,6 +67,22 @@ module Aws::EC2
       data[:tags]
     end
 
+    # The multipath resilience status of the VPC peering connection. The
+    # possible values are:
+    #
+    # * `enabled` – Both the requester and the accepter allow multipath
+    #   resilience.
+    #
+    # * `pending` – Either the requester or the accepter allows multipath
+    #   resilience, but not both.
+    #
+    # * `disabled` – Neither the requester nor the accepter allows multipath
+    #   resilience.
+    # @return [String]
+    def multipath_resilience_status
+      data[:multipath_resilience_status]
+    end
+
     # @!endgroup
 
     # @return [Client]

@@ -23,11 +23,13 @@ module Aws::Deadline
     #
     # * `a10g`: Uses G5 instance family
     #
-    # * `l4`: Uses G6 and Gr6 instance families
+    # * `l4`: Uses G6, G6f, Gr6, and Gr6f instance families
     #
     # * `l40s`: Uses G6e instance family
     #
     # * `rtx-pro-server-6000`: Uses G7e instance family
+    #
+    # * `rtx-pro-4500`: Uses G7 instance family
     #
     #  </note>
     #
@@ -105,6 +107,8 @@ module Aws::Deadline
     #
     #   * `rtx-pro-server-6000` - NVIDIA RTX PRO Server 6000 GPU (96 GiB
     #     memory)
+    #
+    #   * `rtx-pro-4500` - NVIDIA RTX PRO 4500 GPU (32 GiB memory)
     #   @return [String]
     #
     # @!attribute [rw] runtime
@@ -117,26 +121,29 @@ module Aws::Deadline
     #     specify `latest` and a new version of the runtime is released, the
     #     new version of the runtime is used.
     #
-    #   * `grid:r580` - [NVIDIA vGPU software 19][1]
+    #   * `grid:r595` - [NVIDIA vGPU software 20][1]
+    #
+    #   * `grid:r580` - [NVIDIA vGPU software 19][2]
     #
     #   If you don't specify a runtime, Amazon Web Services Deadline Cloud
     #   uses `latest` as the default. However, if you have multiple
     #   accelerators and specify `latest` for some and leave others blank,
     #   Amazon Web Services Deadline Cloud raises an exception.
     #
-    #   All accelerator types support `grid:r580`.
+    #   All accelerator types support `grid:r595` and `grid:r580`.
     #
     #    All accelerators in a fleet must use the same runtime version. You
     #   cannot mix different runtime versions within a single fleet.
     #
-    #   <note markdown="1"> When you specify `latest`, it resolves to `grid:r580` for all
+    #   <note markdown="1"> When you specify `latest`, it resolves to `grid:r595` for all
     #   currently supported accelerators.
     #
     #    </note>
     #
     #
     #
-    #   [1]: https://docs.nvidia.com/vgpu/19.0/index.html
+    #   [1]: https://docs.nvidia.com/vgpu/20.0/index.html
+    #   [2]: https://docs.nvidia.com/vgpu/19.0/index.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/deadline-2023-10-12/AcceleratorSelection AWS API Documentation
@@ -912,7 +919,8 @@ module Aws::Deadline
     #   @return [String]
     #
     # @!attribute [rw] updated_at
-    #   The date and time the resource was updated.
+    #   The date and time the resource was updated. Task status changes
+    #   don't update this value.
     #   @return [Time]
     #
     # @!attribute [rw] updated_by
@@ -920,11 +928,13 @@ module Aws::Deadline
     #   @return [String]
     #
     # @!attribute [rw] started_at
-    #   The date and time the resource started running.
+    #   The date and time the resource started running. Requeuing the job
+    #   doesn't change this value.
     #   @return [Time]
     #
     # @!attribute [rw] ended_at
-    #   The date and time the resource ended running.
+    #   The date and time the resource ended running. Returned only when the
+    #   job has finished.
     #   @return [Time]
     #
     # @!attribute [rw] task_run_status
@@ -2305,9 +2315,9 @@ module Aws::Deadline
     # @!attribute [rw] status
     #   The status of the budget.
     #
-    #   * `ACTIVE`–The budget is being evaluated.
+    #   * `ACTIVE` - The budget is being evaluated.
     #
-    #   * `INACTIVE`–The budget is inactive. This can include Expired,
+    #   * `INACTIVE` - The budget is inactive. This can include Expired,
     #     Canceled, or deleted Deleted statuses.
     #   @return [String]
     #
@@ -3452,7 +3462,8 @@ module Aws::Deadline
     #   @return [String]
     #
     # @!attribute [rw] operator
-    #   The type of comparison to use to filter the results.
+    #   The type of comparison to use to filter the results. `NOT_EQUAL`,
+    #   `ANY_EQUALS`, and `ALL_NOT_EQUALS` aren't supported.
     #   @return [String]
     #
     # @!attribute [rw] date_time
@@ -4496,9 +4507,9 @@ module Aws::Deadline
     # @!attribute [rw] status
     #   The status of the budget.
     #
-    #   * `ACTIVE`–Get a budget being evaluated.
+    #   * `ACTIVE` - Get a budget being evaluated.
     #
-    #   * `INACTIVE`–Get an inactive budget. This can include expired,
+    #   * `INACTIVE` - Get an inactive budget. This can include expired,
     #     canceled, or deleted statuses.
     #   @return [String]
     #
@@ -4871,7 +4882,8 @@ module Aws::Deadline
     #   @return [String]
     #
     # @!attribute [rw] updated_at
-    #   The date and time the resource was updated.
+    #   The date and time the resource was updated. Task status changes
+    #   don't update this value.
     #   @return [Time]
     #
     # @!attribute [rw] updated_by
@@ -4879,11 +4891,13 @@ module Aws::Deadline
     #   @return [String]
     #
     # @!attribute [rw] started_at
-    #   The date and time the resource started running.
+    #   The date and time the resource started running. Requeuing the job
+    #   doesn't change this value.
     #   @return [Time]
     #
     # @!attribute [rw] ended_at
-    #   The date and time the resource ended running.
+    #   The date and time the resource ended running. Returned only when the
+    #   job has finished.
     #   @return [Time]
     #
     # @!attribute [rw] task_run_status
@@ -5488,11 +5502,11 @@ module Aws::Deadline
     # @!attribute [rw] status
     #   The status of the queue.
     #
-    #   * `ACTIVE`–The queue is active.
+    #   * `ACTIVE` - The queue is active.
     #
-    #   * `SCHEDULING`–The queue is scheduling.
+    #   * `SCHEDULING` - The queue is scheduling.
     #
-    #   * `SCHEDULING_BLOCKED`–The queue scheduling is blocked. See the
+    #   * `SCHEDULING_BLOCKED` - The queue scheduling is blocked. See the
     #     provided reason.
     #   @return [String]
     #
@@ -6964,25 +6978,25 @@ module Aws::Deadline
     # @!attribute [rw] task_run_status
     #   The task run status for the job.
     #
-    #   * `PENDING`–pending and waiting for resources.
+    #   * `PENDING` - pending and waiting for resources.
     #
-    #   * `READY`–ready to be processed.
+    #   * `READY` - ready to be processed.
     #
-    #   * `ASSIGNED`–assigned and will run next on a worker.
+    #   * `ASSIGNED` - assigned and will run next on a worker.
     #
-    #   * `SCHEDULED`–scheduled to be run on a worker.
+    #   * `SCHEDULED` - scheduled to be run on a worker.
     #
-    #   * `INTERRUPTING`–being interrupted.
+    #   * `INTERRUPTING` - being interrupted.
     #
-    #   * `RUNNING`–running on a worker.
+    #   * `RUNNING` - running on a worker.
     #
-    #   * `SUSPENDED`–the task is suspended.
+    #   * `SUSPENDED` - the task is suspended.
     #
-    #   * `CANCELED`–the task has been canceled.
+    #   * `CANCELED` - the task has been canceled.
     #
-    #   * `FAILED`–the task has failed.
+    #   * `FAILED` - the task has failed.
     #
-    #   * `SUCCEEDED`–the task has succeeded.
+    #   * `SUCCEEDED` - the task has succeeded.
     #   @return [String]
     #
     # @!attribute [rw] target_task_run_status
@@ -7132,25 +7146,25 @@ module Aws::Deadline
     # @!attribute [rw] task_run_status
     #   The task run status for the job.
     #
-    #   * `PENDING`–pending and waiting for resources.
+    #   * `PENDING` - pending and waiting for resources.
     #
-    #   * `READY`–ready to be processed.
+    #   * `READY` - ready to be processed.
     #
-    #   * `ASSIGNED`–assigned and will run next on a worker.
+    #   * `ASSIGNED` - assigned and will run next on a worker.
     #
-    #   * `SCHEDULED`–scheduled to be run on a worker.
+    #   * `SCHEDULED` - scheduled to be run on a worker.
     #
-    #   * `INTERRUPTING`–being interrupted.
+    #   * `INTERRUPTING` - being interrupted.
     #
-    #   * `RUNNING`–running on a worker.
+    #   * `RUNNING` - running on a worker.
     #
-    #   * `SUSPENDED`–the task is suspended.
+    #   * `SUSPENDED` - the task is suspended.
     #
-    #   * `CANCELED`–the task has been canceled.
+    #   * `CANCELED` - the task has been canceled.
     #
-    #   * `FAILED`–the task has failed.
+    #   * `FAILED` - the task has failed.
     #
-    #   * `SUCCEEDED`–the task has succeeded.
+    #   * `SUCCEEDED` - the task has succeeded.
     #   @return [String]
     #
     # @!attribute [rw] target_task_run_status
@@ -8291,11 +8305,11 @@ module Aws::Deadline
     # @!attribute [rw] status
     #   The status of the queues listed.
     #
-    #   * `ACTIVE`–The queues are active.
+    #   * `ACTIVE` - The queues are active.
     #
-    #   * `SCHEDULING`–The queues are scheduling.
+    #   * `SCHEDULING` - The queues are scheduling.
     #
-    #   * `SCHEDULING_BLOCKED`–The queue scheduling is blocked for these
+    #   * `SCHEDULING_BLOCKED` - The queue scheduling is blocked for these
     #     queues.
     #   @return [String]
     #
@@ -9448,15 +9462,15 @@ module Aws::Deadline
     # @!attribute [rw] status
     #   The status of task scheduling in the queue-fleet association.
     #
-    #   * `ACTIVE`–Association is active.
+    #   * `ACTIVE` - Association is active.
     #
-    #   * `STOP_SCHEDULING_AND_COMPLETE_TASKS`–Association has stopped
+    #   * `STOP_SCHEDULING_AND_COMPLETE_TASKS` - Association has stopped
     #     scheduling new tasks and is completing current tasks.
     #
-    #   * `STOP_SCHEDULING_AND_CANCEL_TASKS`–Association has stopped
+    #   * `STOP_SCHEDULING_AND_CANCEL_TASKS` - Association has stopped
     #     scheduling new tasks and is canceling current tasks.
     #
-    #   * `STOPPED`–Association has been stopped.
+    #   * `STOPPED` - Association has been stopped.
     #   @return [String]
     #
     # @!attribute [rw] created_at
@@ -11093,25 +11107,25 @@ module Aws::Deadline
     # @!attribute [rw] task_run_status
     #   The task run status for the job.
     #
-    #   * `PENDING`–pending and waiting for resources.
+    #   * `PENDING` - pending and waiting for resources.
     #
-    #   * `READY`–ready to be processed.
+    #   * `READY` - ready to be processed.
     #
-    #   * `ASSIGNED`–assigned and will run next on a worker.
+    #   * `ASSIGNED` - assigned and will run next on a worker.
     #
-    #   * `SCHEDULED`–scheduled to be run on a worker.
+    #   * `SCHEDULED` - scheduled to be run on a worker.
     #
-    #   * `INTERRUPTING`–being interrupted.
+    #   * `INTERRUPTING` - being interrupted.
     #
-    #   * `RUNNING`–running on a worker.
+    #   * `RUNNING` - running on a worker.
     #
-    #   * `SUSPENDED`–the task is suspended.
+    #   * `SUSPENDED` - the task is suspended.
     #
-    #   * `CANCELED`–the task has been canceled.
+    #   * `CANCELED` - the task has been canceled.
     #
-    #   * `FAILED`–the task has failed.
+    #   * `FAILED` - the task has failed.
     #
-    #   * `SUCCEEDED`–the task has succeeded.
+    #   * `SUCCEEDED` - the task has succeeded.
     #   @return [String]
     #
     # @!attribute [rw] target_task_run_status
@@ -11200,25 +11214,25 @@ module Aws::Deadline
     # @!attribute [rw] task_run_status
     #   The task run status for the job.
     #
-    #   * `PENDING`–pending and waiting for resources.
+    #   * `PENDING` - pending and waiting for resources.
     #
-    #   * `READY`–ready to process.
+    #   * `READY` - ready to process.
     #
-    #   * `ASSIGNED`–assigned and will run next on a worker.
+    #   * `ASSIGNED` - assigned and will run next on a worker.
     #
-    #   * `SCHEDULED`–scheduled to run on a worker.
+    #   * `SCHEDULED` - scheduled to run on a worker.
     #
-    #   * `INTERRUPTING`–being interrupted.
+    #   * `INTERRUPTING` - being interrupted.
     #
-    #   * `RUNNING`–running on a worker.
+    #   * `RUNNING` - running on a worker.
     #
-    #   * `SUSPENDED`–the task is suspended.
+    #   * `SUSPENDED` - the task is suspended.
     #
-    #   * `CANCELED`–the task has been canceled.
+    #   * `CANCELED` - the task has been canceled.
     #
-    #   * `FAILED`–the task has failed.
+    #   * `FAILED` - the task has failed.
     #
-    #   * `SUCCEEDED`–the task has succeeded.
+    #   * `SUCCEEDED` - the task has succeeded.
     #   @return [String]
     #
     # @!attribute [rw] task_run_status_counts
@@ -11319,7 +11333,8 @@ module Aws::Deadline
     #   @return [String]
     #
     # @!attribute [rw] operator
-    #   The type of comparison to use for this search.
+    #   The type of comparison to use for this search. Only `EQUAL` and
+    #   `NOT_EQUAL` are supported.
     #   @return [String]
     #
     # @!attribute [rw] value
@@ -11343,7 +11358,8 @@ module Aws::Deadline
     #   @return [String]
     #
     # @!attribute [rw] operator
-    #   The type of comparison to use for this search.
+    #   The type of comparison to use for this search. Only `ANY_EQUALS` and
+    #   `ALL_NOT_EQUALS` are supported.
     #   @return [String]
     #
     # @!attribute [rw] values
@@ -11781,9 +11797,9 @@ module Aws::Deadline
     # @!attribute [rw] status
     #   Updates the status of the budget.
     #
-    #   * `ACTIVE`–The budget is being evaluated.
+    #   * `ACTIVE` - The budget is being evaluated.
     #
-    #   * `INACTIVE`–The budget is inactive. This can include Expired,
+    #   * `INACTIVE` - The budget is inactive. This can include Expired,
     #     Canceled, or deleted Deleted statuses.
     #   @return [String]
     #
@@ -11922,7 +11938,9 @@ module Aws::Deadline
     #   @return [Integer]
     #
     # @!attribute [rw] configuration
-    #   The fleet configuration to update.
+    #   The fleet configuration to update. The new configuration replaces
+    #   the existing one, so include every setting you want to keep.
+    #   Settings that you omit revert to their defaults.
     #   @return [Types::FleetConfiguration]
     #
     # @!attribute [rw] host_configuration

@@ -765,15 +765,17 @@ module Aws
     }
 
       type av_1_settings = {
-      adaptive_quantization: ("OFF" | "LOW" | "MEDIUM" | "HIGH" | "HIGHER" | "MAX")?,
+      adaptive_quantization: ("OFF" | "AUTO" | "LOW" | "MEDIUM" | "HIGH" | "HIGHER" | "MAX")?,
       bit_depth: ("BIT_8" | "BIT_10")?,
       bitrate: ::Integer?,
+      fast_decode: ("DISABLED" | "ENABLED")?,
       film_grain_synthesis: ("DISABLED" | "ENABLED")?,
       framerate_control: ("INITIALIZE_FROM_SOURCE" | "SPECIFIED")?,
       framerate_conversion_algorithm: ("DUPLICATE_DROP" | "INTERPOLATE" | "FRAMEFORMER" | "MAINTAIN_FRAME_COUNT")?,
       framerate_denominator: ::Integer?,
       framerate_numerator: ::Integer?,
       gop_size: ::Float?,
+      gop_size_units: ("FRAMES" | "SECONDS")?,
       max_bitrate: ::Integer?,
       number_b_frames_between_reference_frames: ::Integer?,
       per_frame_metrics: Array[("PSNR" | "SSIM" | "MS_SSIM" | "PSNR_HVS" | "VMAF" | "QVBR" | "SHOT_CHANGE")]?,
@@ -786,7 +788,8 @@ module Aws
       slices: ::Integer?,
       sliding_window_ms: ::Integer?,
       sliding_window_peak_bitrate: ::Integer?,
-      spatial_adaptive_quantization: ("DISABLED" | "ENABLED")?
+      spatial_adaptive_quantization: ("DISABLED" | "ENABLED")?,
+      temporal_adaptive_quantization: ("DISABLED" | "ENABLED")?
     }
 
       type avc_intra_settings = {
@@ -1122,6 +1125,18 @@ module Aws
       xavc_settings: Params::xavc_settings?
     }
 
+      type dynamic_multiview_settings = {
+      enabled: ("DISABLED" | "ENABLED")?,
+      regions: Array[
+        {
+          height: ::Integer?,
+          width: ::Integer?,
+          x: ::Integer?,
+          y: ::Integer?
+        }
+      ]?
+    }
+
       type color_corrector = {
       brightness: ::Integer?,
       clip_limits: {
@@ -1220,6 +1235,7 @@ module Aws
         y: ::Integer?
       }?,
       drop_frame_timecode: ("DISABLED" | "ENABLED")?,
+      dynamic_multiview_settings: Params::dynamic_multiview_settings?,
       fixed_afd: ::Integer?,
       height: ::Integer?,
       position: {
@@ -1360,7 +1376,16 @@ module Aws
         channels: ::Integer?,
         sample_rate: ::Integer?
       }?,
-      codec: ("AAC" | "MP2" | "MP3" | "WAV" | "AIFF" | "AC3" | "AC4" | "EAC3" | "EAC3_ATMOS" | "VORBIS" | "OPUS" | "PASSTHROUGH" | "FLAC")?,
+      codec: ("AAC" | "MP2" | "MP3" | "WAV" | "AIFF" | "AC3" | "AC4" | "DTSX" | "DTSC" | "EAC3" | "EAC3_ATMOS" | "VORBIS" | "OPUS" | "PASSTHROUGH" | "FLAC")?,
+      dtsc_settings: {
+        bitrate: ::Integer?,
+        sample_rate: ::Integer?
+      }?,
+      dtsx_settings: {
+        bitrate: ::Integer?,
+        coding_mode: ("CODING_MODE_5_1" | "CODING_MODE_5_1_4")?,
+        sample_rate: ::Integer?
+      }?,
       eac_3_atmos_settings: Params::eac_3_atmos_settings?,
       eac_3_settings: Params::eac_3_settings?,
       flac_settings: {
@@ -1524,11 +1549,13 @@ module Aws
     }
 
       type caption_description = {
+      audio_source_names: Array[::String]?,
       caption_selector_name: ::String?,
       custom_language_code: ::String?,
       destination_settings: Params::caption_destination_settings?,
       language_code: ("ENG" | "SPA" | "FRA" | "DEU" | "GER" | "ZHO" | "ARA" | "HIN" | "JPN" | "RUS" | "POR" | "ITA" | "URD" | "VIE" | "KOR" | "PAN" | "ABK" | "AAR" | "AFR" | "AKA" | "SQI" | "AMH" | "ARG" | "HYE" | "ASM" | "AVA" | "AVE" | "AYM" | "AZE" | "BAM" | "BAK" | "EUS" | "BEL" | "BEN" | "BIH" | "BIS" | "BOS" | "BRE" | "BUL" | "MYA" | "CAT" | "KHM" | "CHA" | "CHE" | "NYA" | "CHU" | "CHV" | "COR" | "COS" | "CRE" | "HRV" | "CES" | "DAN" | "DIV" | "NLD" | "DZO" | "ENM" | "EPO" | "EST" | "EWE" | "FAO" | "FIJ" | "FIN" | "FRM" | "FUL" | "GLA" | "GLG" | "LUG" | "KAT" | "ELL" | "GRN" | "GUJ" | "HAT" | "HAU" | "HEB" | "HER" | "HMO" | "HUN" | "ISL" | "IDO" | "IBO" | "IND" | "INA" | "ILE" | "IKU" | "IPK" | "GLE" | "JAV" | "KAL" | "KAN" | "KAU" | "KAS" | "KAZ" | "KIK" | "KIN" | "KIR" | "KOM" | "KON" | "KUA" | "KUR" | "LAO" | "LAT" | "LAV" | "LIM" | "LIN" | "LIT" | "LUB" | "LTZ" | "MKD" | "MLG" | "MSA" | "MAL" | "MLT" | "GLV" | "MRI" | "MAR" | "MAH" | "MON" | "NAU" | "NAV" | "NDE" | "NBL" | "NDO" | "NEP" | "SME" | "NOR" | "NOB" | "NNO" | "OCI" | "OJI" | "ORI" | "ORM" | "OSS" | "PLI" | "FAS" | "POL" | "PUS" | "QUE" | "QAA" | "RON" | "ROH" | "RUN" | "SMO" | "SAG" | "SAN" | "SRD" | "SRB" | "SNA" | "III" | "SND" | "SIN" | "SLK" | "SLV" | "SOM" | "SOT" | "SUN" | "SWA" | "SSW" | "SWE" | "TGL" | "TAH" | "TGK" | "TAM" | "TAT" | "TEL" | "THA" | "BOD" | "TIR" | "TON" | "TSO" | "TSN" | "TUR" | "TUK" | "TWI" | "UIG" | "UKR" | "UZB" | "VEN" | "VOL" | "WLN" | "CYM" | "FRY" | "WOL" | "XHO" | "YID" | "YOR" | "ZHA" | "ZUL" | "ORJ" | "QPC" | "TNG" | "SRP")?,
-      language_description: ::String?
+      language_description: ::String?,
+      source: ("INPUT_CAPTION_SELECTOR" | "SMART_SUBTITLE")?
     }
 
       type job_template_settings = {

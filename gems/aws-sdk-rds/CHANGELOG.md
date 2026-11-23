@@ -1,6 +1,46 @@
 Unreleased Changes
 ------------------
 
+1.337.0 (2026-11-19)
+------------------
+
+* Feature - Adds the PrimaryEndpoint structure to DBInstance. It returns the connection endpoint for the current primary instance, so no need to reconnect to a different DNS name after the switchover. Create Aurora clusters with express configuration in a VPC, and move clusters into, out of, or between VPCs.
+
+1.336.0 (2026-11-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.335.0 (2026-11-16)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.334.0 (2026-11-11)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.333.0 (2026-11-10)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.332.0 (2026-11-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.331.0 (2026-11-06)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.330.0 (2026-11-04)
+------------------
+
+* Feature - Adding support for copying and tagging option groups with cross-Region DB snapshot copies, in the same account or across accounts.
+
 1.329.0 (2026-10-29)
 ------------------
 

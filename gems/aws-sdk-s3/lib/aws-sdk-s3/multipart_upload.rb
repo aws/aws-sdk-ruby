@@ -117,6 +117,19 @@ module Aws::S3
       data[:checksum_type]
     end
 
+    # Version ID of the object.
+    #
+    # Returns the Version ID of the object for the multipart upload, if
+    # bucket versioning is enabled.
+    #
+    # <note markdown="1"> This functionality is not supported for directory buckets.
+    #
+    #  </note>
+    # @return [String]
+    def version_id
+      data[:version_id]
+    end
+
     # @!endgroup
 
     # @return [Client]

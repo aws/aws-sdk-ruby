@@ -1,6 +1,51 @@
 Unreleased Changes
 ------------------
 
+1.182.0 (2026-11-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.181.0 (2026-11-17)
+------------------
+
+* Feature - Security Hub now supports Google Cloud. Use connector APIs to connect GCP organizations or projects and monitor their security posture. It also infers resource criticality from tags, CloudWatch metrics, and SBOM data to help you prioritize findings
+
+1.180.0 (2026-11-16)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.179.0 (2026-11-13)
+------------------
+
+* Feature - New DISABLED status for Security Hub CSPM Central Configuration.
+
+1.178.0 (2026-11-11)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.177.0 (2026-11-10)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.176.0 (2026-11-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.175.0 (2026-11-06)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.174.0 (2026-11-04)
+------------------
+
+* Feature - Release Software APIs- GetSoftwareV2, GetSoftwareStatisticsV2 and GetSoftwareResourcesV2 to list software packages with aggregated resource count, get aggregated software statistics, and find the resources that contain a specific software package.
+
 1.173.0 (2026-10-29)
 ------------------
 

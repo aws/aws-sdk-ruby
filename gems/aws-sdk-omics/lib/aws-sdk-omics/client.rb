@@ -264,7 +264,8 @@ module Aws::Omics
     #     An integer representing the maximum number attempts that will be made for
     #     a single request, including the initial attempt.  For example,
     #     setting this value to 5 will result in a request being retried up to
-    #     4 times. Used in `standard` and `adaptive` retry modes.
+    #     4 times. Used in `standard` and `adaptive` retry modes. Defaults to 3,
+    #     except for DynamoDB and DynamoDB Streams, which default to 4.
     #
     #   @option options [String] :profile ("default")
     #     Used when loading credentials from the shared credentials file at `HOME/.aws/credentials`.
@@ -327,15 +328,15 @@ module Aws::Omics
     #     used by the default backoff function. This option is only used in the
     #     `legacy` retry mode.
     #
-    #   @option options [String] :retry_mode ("legacy")
+    #   @option options [String] :retry_mode ("standard")
     #     Specifies which retry algorithm to use. Values are:
     #
-    #     * `legacy` - The pre-existing retry behavior. This is the default
-    #       value if no retry mode is provided.
+    #     * `legacy` - The pre-existing retry behavior.
     #
     #     * `standard` - A standardized set of retry rules across the AWS SDKs.
     #       This includes support for retry quotas, which limit the number of
-    #       unsuccessful retries a client can make.
+    #       unsuccessful retries a client can make. This is the default value
+    #       if no retry mode is provided.
     #
     #     * `adaptive` - A retry mode that includes all the functionality of
     #       `standard` mode along with automatic client side throttling.
@@ -2965,6 +2966,7 @@ module Aws::Omics
     #   resp.default_run_setting.configuration_name #=> String
     #   resp.default_run_setting.session_policy #=> String
     #   resp.default_run_setting.scratch_storage_mode #=> String, one of "LOCAL", "SHARED"
+    #   resp.default_run_setting.requester_pays_enabled #=> Boolean
     #   resp.submission_summary.successful_start_submission_count #=> Integer
     #   resp.submission_summary.failed_start_submission_count #=> Integer
     #   resp.submission_summary.pending_start_submission_count #=> Integer
@@ -3622,6 +3624,9 @@ module Aws::Omics
     #   * {Types::GetRunResponse#vpc_config #vpc_config} => Types::VpcConfigResponse
     #   * {Types::GetRunResponse#engine_settings #engine_settings} => Hash,Array,String,Numeric,Boolean
     #   * {Types::GetRunResponse#session_policy #session_policy} => String
+    #   * {Types::GetRunResponse#output_uri_prefix_mode #output_uri_prefix_mode} => String
+    #   * {Types::GetRunResponse#requester_pays_enabled #requester_pays_enabled} => Boolean
+    #   * {Types::GetRunResponse#parameters_uri #parameters_uri} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -3683,6 +3688,9 @@ module Aws::Omics
     #   resp.vpc_config.vpc_id #=> String
     #   resp.vpc_config.vpc_owner_account_id #=> String
     #   resp.session_policy #=> String
+    #   resp.output_uri_prefix_mode #=> String, one of "SERVICE_DEFINED", "NONE_WITH_OVERWRITE"
+    #   resp.requester_pays_enabled #=> Boolean
+    #   resp.parameters_uri #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -6452,7 +6460,9 @@ module Aws::Omics
     #   Parameters for the run. The run needs all required parameters and can
     #   include optional parameters. The run cannot include any parameters
     #   that are not defined in the parameter template. To retrieve parameters
-    #   from the run, use the GetRun API operation.
+    #   from the run, use the GetRun API operation. To supply the parameters
+    #   in a file in S3 instead, use `parametersUri`. Specify either
+    #   `parameters` or `parametersUri`, not both.
     #
     #   Document type used to carry open content
     #   (Hash,Array,String,Numeric,Boolean). A document type value is
@@ -6562,12 +6572,41 @@ module Aws::Omics
     # @option params [Hash,Array,String,Numeric,Boolean] :engine_settings
     #   Engine-specific settings for the workflow run. Use this field to
     #   specify configuration options that are specific to the workflow engine
-    #   (for example, Nextflow profiles).
+    #   (for example, Nextflow profiles, Nextflow runtime configuration).
     #
     #   Document type used to carry open content
     #   (Hash,Array,String,Numeric,Boolean). A document type value is
     #   serialized using the same format as its surroundings and requires no
     #   additional encoding or escaping.
+    #
+    # @option params [String] :output_uri_prefix_mode
+    #   You can control the path prefixes that the service adds beneath
+    #   `outputUri`. If you don't specify a value, the service uses
+    #   `SERVICE_DEFINED`, which adds a run-specific prefix.
+    #
+    # @option params [Boolean] :requester_pays_enabled
+    #   Specifies whether the workflow run that this request starts can read
+    #   inputs from Amazon S3 buckets that use Requester Pays. Your account
+    #   pays the request and data transfer charges for those reads. The
+    #   default is `false`.
+    #
+    # @option params [String] :parameters_uri
+    #   The S3 URI of a JSON file that contains the run parameters. Use this
+    #   field instead of `parameters` when your parameters are too large for
+    #   the request. Specify either `parameters` or `parametersUri`, not both.
+    #
+    #   Amazon Web Services HealthOmics validates the file after `StartRun`
+    #   returns. If the file isn't valid, Amazon Web Services HealthOmics
+    #   fails the run with the failure reason `INVALID_RUN_PARAMETERS`. For
+    #   more information about permissions, limits, and other requirements,
+    #   see [Amazon Web Services HealthOmics run inputs][1] and [Amazon Web
+    #   Services HealthOmics service quotas][2] in the *Amazon Web Services
+    #   HealthOmics User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/omics/latest/dev/workflows-run-inputs.html
+    #   [2]: https://docs.aws.amazon.com/omics/latest/dev/fixed-quotas.html
     #
     # @return [Types::StartRunResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -6611,6 +6650,9 @@ module Aws::Omics
     #     session_policy: "SessionPolicy",
     #     engine_settings: {
     #     },
+    #     output_uri_prefix_mode: "SERVICE_DEFINED", # accepts SERVICE_DEFINED, NONE_WITH_OVERWRITE
+    #     requester_pays_enabled: false,
+    #     parameters_uri: "RunParametersUri",
     #   })
     #
     # @example Response structure
@@ -6715,6 +6757,7 @@ module Aws::Omics
     #       engine_settings: {
     #       },
     #       scratch_storage_mode: "LOCAL", # accepts LOCAL, SHARED
+    #       requester_pays_enabled: false,
     #     },
     #     batch_run_settings: { # required
     #       inline_settings: [
@@ -7439,7 +7482,7 @@ module Aws::Omics
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-omics'
-      context[:gem_version] = '1.86.0'
+      context[:gem_version] = '1.95.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

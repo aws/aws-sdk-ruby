@@ -359,6 +359,7 @@ module Aws::CloudFront
       attr_accessor status: ::String
       attr_accessor enabled: bool
       attr_accessor is_default: bool
+      attr_accessor viewer_fallback: Types::ViewerFallback
       SENSITIVE: []
     end
 
@@ -379,6 +380,7 @@ module Aws::CloudFront
       attr_accessor enabled: bool
       attr_accessor status: ::String
       attr_accessor is_default: bool
+      attr_accessor viewer_fallback: Types::ViewerFallback
       SENSITIVE: []
     end
 
@@ -538,6 +540,7 @@ module Aws::CloudFront
       attr_accessor tags: Types::Tags
       attr_accessor anycast_ip_list_id: ::String
       attr_accessor enabled: bool
+      attr_accessor viewer_fallback: Types::ViewerFallback
       SENSITIVE: []
     end
 
@@ -581,6 +584,7 @@ module Aws::CloudFront
       attr_accessor connection_group_id: ::String
       attr_accessor managed_certificate_request: Types::ManagedCertificateRequest
       attr_accessor enabled: bool
+      attr_accessor on_domain_takeover: ("allow" | "reject")
       SENSITIVE: []
     end
 
@@ -844,6 +848,7 @@ module Aws::CloudFront
       attr_accessor origin_keepalive_timeout: ::Integer
       attr_accessor ip_address_type: ("ipv4" | "ipv6" | "dualstack")
       attr_accessor origin_mtls_config: Types::OriginMtlsConfig
+      attr_accessor origin_http_version: ("http1.1" | "http2")
       SENSITIVE: []
     end
 
@@ -1268,12 +1273,14 @@ module Aws::CloudFront
 
     class DomainItem
       attr_accessor domain: ::String
+      attr_accessor serve_on: ("any" | "anycast-ip-list-only")
       SENSITIVE: []
     end
 
     class DomainResult
       attr_accessor domain: ::String
       attr_accessor status: ("active" | "inactive")
+      attr_accessor serve_on: ("any" | "anycast-ip-list-only")
       SENSITIVE: []
     end
 
@@ -3934,6 +3941,7 @@ module Aws::CloudFront
       attr_accessor if_match: ::String
       attr_accessor anycast_ip_list_id: ::String
       attr_accessor enabled: bool
+      attr_accessor viewer_fallback: Types::ViewerFallback
       SENSITIVE: []
     end
 
@@ -3979,6 +3987,7 @@ module Aws::CloudFront
       attr_accessor if_match: ::String
       attr_accessor managed_certificate_request: Types::ManagedCertificateRequest
       attr_accessor enabled: bool
+      attr_accessor on_domain_takeover: ("allow" | "reject")
       SENSITIVE: []
     end
 
@@ -4216,6 +4225,11 @@ module Aws::CloudFront
       SENSITIVE: []
     end
 
+    class ViewerFallback
+      attr_accessor distribution_id: ::String
+      SENSITIVE: []
+    end
+
     class ViewerMtlsConfig
       attr_accessor mode: ("required" | "optional" | "passthrough")
       attr_accessor trust_store_config: Types::TrustStoreConfig
@@ -4238,6 +4252,7 @@ module Aws::CloudFront
       attr_accessor owner_account_id: ::String
       attr_accessor origin_read_timeout: ::Integer
       attr_accessor origin_keepalive_timeout: ::Integer
+      attr_accessor origin_http_version: ("http1.1" | "http2")
       SENSITIVE: []
     end
 

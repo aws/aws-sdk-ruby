@@ -193,6 +193,7 @@ module Aws::Inspector2
     ClusterInformationClusterDetailsList = Shapes::ListShape.new(name: 'ClusterInformationClusterDetailsList')
     ClusterInformationList = Shapes::ListShape.new(name: 'ClusterInformationList')
     ClusterMetadata = Shapes::UnionShape.new(name: 'ClusterMetadata')
+    CodeConnectionsHostArn = Shapes::StringShape.new(name: 'CodeConnectionsHostArn')
     CodeFilePath = Shapes::StructureShape.new(name: 'CodeFilePath')
     CodeLine = Shapes::StructureShape.new(name: 'CodeLine')
     CodeLineContentString = Shapes::StringShape.new(name: 'CodeLineContentString')
@@ -213,6 +214,7 @@ module Aws::Inspector2
     CodeSecurityClientToken = Shapes::StringShape.new(name: 'CodeSecurityClientToken')
     CodeSecurityIntegrationArn = Shapes::StringShape.new(name: 'CodeSecurityIntegrationArn')
     CodeSecurityIntegrationSummary = Shapes::StructureShape.new(name: 'CodeSecurityIntegrationSummary')
+    CodeSecurityIntegrationVpcConfiguration = Shapes::StructureShape.new(name: 'CodeSecurityIntegrationVpcConfiguration')
     CodeSecurityResource = Shapes::UnionShape.new(name: 'CodeSecurityResource')
     CodeSecurityScanConfiguration = Shapes::StructureShape.new(name: 'CodeSecurityScanConfiguration')
     CodeSecurityScanConfigurationAssociationSummaries = Shapes::ListShape.new(name: 'CodeSecurityScanConfigurationAssociationSummaries')
@@ -299,6 +301,7 @@ module Aws::Inspector2
     CreateFilterResponse = Shapes::StructureShape.new(name: 'CreateFilterResponse')
     CreateFindingsReportRequest = Shapes::StructureShape.new(name: 'CreateFindingsReportRequest')
     CreateFindingsReportResponse = Shapes::StructureShape.new(name: 'CreateFindingsReportResponse')
+    CreateGitHubEnterpriseIntegrationDetail = Shapes::StructureShape.new(name: 'CreateGitHubEnterpriseIntegrationDetail')
     CreateGitLabSelfManagedIntegrationDetail = Shapes::StructureShape.new(name: 'CreateGitLabSelfManagedIntegrationDetail')
     CreateIntegrationDetail = Shapes::UnionShape.new(name: 'CreateIntegrationDetail')
     CreateSbomExportRequest = Shapes::StructureShape.new(name: 'CreateSbomExportRequest')
@@ -440,6 +443,16 @@ module Aws::Inspector2
     FreeTrialType = Shapes::StringShape.new(name: 'FreeTrialType')
     FrequencyExpression = Shapes::StringShape.new(name: 'FrequencyExpression')
     FunctionName = Shapes::StringShape.new(name: 'FunctionName')
+    GcpCapabilityScope = Shapes::StructureShape.new(name: 'GcpCapabilityScope')
+    GcpCapabilityScopeInput = Shapes::StructureShape.new(name: 'GcpCapabilityScopeInput')
+    GcpProviderDetailCreate = Shapes::StructureShape.new(name: 'GcpProviderDetailCreate')
+    GcpProviderDetailUpdate = Shapes::StructureShape.new(name: 'GcpProviderDetailUpdate')
+    GcpRegion = Shapes::StringShape.new(name: 'GcpRegion')
+    GcpRegionList = Shapes::ListShape.new(name: 'GcpRegionList')
+    GcpScopeConfiguration = Shapes::StructureShape.new(name: 'GcpScopeConfiguration')
+    GcpScopeConfigurationInput = Shapes::StructureShape.new(name: 'GcpScopeConfigurationInput')
+    GcpScopeValue = Shapes::StringShape.new(name: 'GcpScopeValue')
+    GcpScopeValueList = Shapes::ListShape.new(name: 'GcpScopeValueList')
     GetCisScanReportRequest = Shapes::StructureShape.new(name: 'GetCisScanReportRequest')
     GetCisScanReportResponse = Shapes::StructureShape.new(name: 'GetCisScanReportResponse')
     GetCisScanResultDetailsMaxResults = Shapes::IntegerShape.new(name: 'GetCisScanResultDetailsMaxResults')
@@ -472,6 +485,8 @@ module Aws::Inspector2
     GetSbomExportRequest = Shapes::StructureShape.new(name: 'GetSbomExportRequest')
     GetSbomExportResponse = Shapes::StructureShape.new(name: 'GetSbomExportResponse')
     GitHubAuthCode = Shapes::StringShape.new(name: 'GitHubAuthCode')
+    GitHubEnterpriseServerAppRegistrationDetail = Shapes::StructureShape.new(name: 'GitHubEnterpriseServerAppRegistrationDetail')
+    GitHubEnterpriseServerManifestCode = Shapes::StringShape.new(name: 'GitHubEnterpriseServerManifestCode')
     GitHubInstallationId = Shapes::StringShape.new(name: 'GitHubInstallationId')
     GitLabAccessToken = Shapes::StringShape.new(name: 'GitLabAccessToken')
     GitLabAuthCode = Shapes::StringShape.new(name: 'GitLabAuthCode')
@@ -618,6 +633,7 @@ module Aws::Inspector2
     PackageRelease = Shapes::StringShape.new(name: 'PackageRelease')
     PackageSortBy = Shapes::StringShape.new(name: 'PackageSortBy')
     PackageType = Shapes::StringShape.new(name: 'PackageType')
+    PackageUrl = Shapes::StringShape.new(name: 'PackageUrl')
     PackageVersion = Shapes::StringShape.new(name: 'PackageVersion')
     PackageVulnerabilityDetails = Shapes::StructureShape.new(name: 'PackageVulnerabilityDetails')
     Path = Shapes::StringShape.new(name: 'Path')
@@ -626,6 +642,7 @@ module Aws::Inspector2
     PeriodicScanFrequency = Shapes::StringShape.new(name: 'PeriodicScanFrequency')
     Permission = Shapes::StructureShape.new(name: 'Permission')
     Permissions = Shapes::ListShape.new(name: 'Permissions')
+    PkceState = Shapes::StringShape.new(name: 'PkceState')
     Platform = Shapes::StringShape.new(name: 'Platform')
     PlatformFilterList = Shapes::ListShape.new(name: 'PlatformFilterList')
     PlatformVersion = Shapes::StringShape.new(name: 'PlatformVersion')
@@ -651,6 +668,8 @@ module Aws::Inspector2
     ProviderOrgId = Shapes::StringShape.new(name: 'ProviderOrgId')
     ProviderPartition = Shapes::StringShape.new(name: 'ProviderPartition')
     ProviderRegion = Shapes::StringShape.new(name: 'ProviderRegion')
+    PurlQualifierFilter = Shapes::StructureShape.new(name: 'PurlQualifierFilter')
+    PurlQualifierKey = Shapes::StringShape.new(name: 'PurlQualifierKey')
     Reason = Shapes::StringShape.new(name: 'Reason')
     Recommendation = Shapes::StructureShape.new(name: 'Recommendation')
     ReferenceUrls = Shapes::ListShape.new(name: 'ReferenceUrls')
@@ -692,6 +711,11 @@ module Aws::Inspector2
     RuleSetCategories = Shapes::ListShape.new(name: 'RuleSetCategories')
     RuleSetCategory = Shapes::StringShape.new(name: 'RuleSetCategory')
     Runtime = Shapes::StringShape.new(name: 'Runtime')
+    RuntimeReachability = Shapes::StringShape.new(name: 'RuntimeReachability')
+    RuntimeReachabilityComparison = Shapes::StringShape.new(name: 'RuntimeReachabilityComparison')
+    RuntimeReachabilityFilter = Shapes::StructureShape.new(name: 'RuntimeReachabilityFilter')
+    RuntimeReachabilityReason = Shapes::StringShape.new(name: 'RuntimeReachabilityReason')
+    RuntimeReachabilityReasonFilter = Shapes::StructureShape.new(name: 'RuntimeReachabilityReasonFilter')
     SbomReportFormat = Shapes::StringShape.new(name: 'SbomReportFormat')
     ScanConfigurationArn = Shapes::StringShape.new(name: 'ScanConfigurationArn')
     ScanConfigurationName = Shapes::StringShape.new(name: 'ScanConfigurationName')
@@ -794,6 +818,7 @@ module Aws::Inspector2
     TitleAggregationResponse = Shapes::StructureShape.new(name: 'TitleAggregationResponse')
     TitleFilterList = Shapes::ListShape.new(name: 'TitleFilterList')
     TitleSortBy = Shapes::StringShape.new(name: 'TitleSortBy')
+    TlsCertificate = Shapes::StringShape.new(name: 'TlsCertificate')
     Tool = Shapes::StringShape.new(name: 'Tool')
     Tools = Shapes::ListShape.new(name: 'Tools')
     Ttp = Shapes::StringShape.new(name: 'Ttp')
@@ -821,6 +846,8 @@ module Aws::Inspector2
     UpdateEncryptionKeyResponse = Shapes::StructureShape.new(name: 'UpdateEncryptionKeyResponse')
     UpdateFilterRequest = Shapes::StructureShape.new(name: 'UpdateFilterRequest')
     UpdateFilterResponse = Shapes::StructureShape.new(name: 'UpdateFilterResponse')
+    UpdateGitHubEnterpriseServerAppInstallationDetail = Shapes::StructureShape.new(name: 'UpdateGitHubEnterpriseServerAppInstallationDetail')
+    UpdateGitHubEnterpriseServerIntegrationDetail = Shapes::UnionShape.new(name: 'UpdateGitHubEnterpriseServerIntegrationDetail')
     UpdateGitHubIntegrationDetail = Shapes::StructureShape.new(name: 'UpdateGitHubIntegrationDetail')
     UpdateGitLabSelfManagedIntegrationDetail = Shapes::StructureShape.new(name: 'UpdateGitLabSelfManagedIntegrationDetail')
     UpdateIntegrationDetails = Shapes::UnionShape.new(name: 'UpdateIntegrationDetails')
@@ -855,6 +882,7 @@ module Aws::Inspector2
     VmInstanceMetadataVmImageReferenceString = Shapes::StringShape.new(name: 'VmInstanceMetadataVmImageReferenceString')
     VmInstanceSortBy = Shapes::StringShape.new(name: 'VmInstanceSortBy')
     VmPlatform = Shapes::StringShape.new(name: 'VmPlatform')
+    VpcEndpointId = Shapes::StringShape.new(name: 'VpcEndpointId')
     VpcId = Shapes::StringShape.new(name: 'VpcId')
     VulnId = Shapes::StringShape.new(name: 'VulnId')
     VulnIdList = Shapes::ListShape.new(name: 'VulnIdList')
@@ -1480,6 +1508,14 @@ module Aws::Inspector2
     CodeSecurityIntegrationSummary.add_member(:last_update_on, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "lastUpdateOn"))
     CodeSecurityIntegrationSummary.struct_class = Types::CodeSecurityIntegrationSummary
 
+    CodeSecurityIntegrationVpcConfiguration.add_member(:vpc_id, Shapes::ShapeRef.new(shape: VpcId, required: true, location_name: "vpcId"))
+    CodeSecurityIntegrationVpcConfiguration.add_member(:vpc_endpoint_id, Shapes::ShapeRef.new(shape: VpcEndpointId, required: true, location_name: "vpcEndpointId"))
+    CodeSecurityIntegrationVpcConfiguration.add_member(:code_connections_host_arn, Shapes::ShapeRef.new(shape: CodeConnectionsHostArn, location_name: "codeConnectionsHostArn"))
+    CodeSecurityIntegrationVpcConfiguration.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: SubnetIdList, location_name: "subnetIds"))
+    CodeSecurityIntegrationVpcConfiguration.add_member(:security_groups, Shapes::ShapeRef.new(shape: SecurityGroupIdList, location_name: "securityGroups"))
+    CodeSecurityIntegrationVpcConfiguration.add_member(:tls_certificate, Shapes::ShapeRef.new(shape: TlsCertificate, location_name: "tlsCertificate"))
+    CodeSecurityIntegrationVpcConfiguration.struct_class = Types::CodeSecurityIntegrationVpcConfiguration
+
     CodeSecurityResource.add_member(:project_id, Shapes::ShapeRef.new(shape: ProjectId, location_name: "projectId"))
     CodeSecurityResource.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     CodeSecurityResource.add_member_subclass(:project_id, Types::CodeSecurityResource::ProjectId)
@@ -1558,6 +1594,8 @@ module Aws::Inspector2
     Connector.add_member(:scope_configuration, Shapes::ShapeRef.new(shape: AzureScopeConfiguration, location_name: "scopeConfiguration"))
     Connector.add_member(:tags, Shapes::ShapeRef.new(shape: ConnectorTagMap, location_name: "tags"))
     Connector.add_member(:auto_install_vm_scanner, Shapes::ShapeRef.new(shape: Boolean, location_name: "autoInstallVMScanner"))
+    Connector.add_member(:gcp_regions, Shapes::ShapeRef.new(shape: GcpRegionList, location_name: "gcpRegions"))
+    Connector.add_member(:gcp_scope_configuration, Shapes::ShapeRef.new(shape: GcpScopeConfiguration, location_name: "gcpScopeConfiguration"))
     Connector.struct_class = Types::Connector
 
     ConnectorArnFilter.add_member(:comparison, Shapes::ShapeRef.new(shape: ConnectorArnComparison, required: true, location_name: "comparison"))
@@ -1807,13 +1845,20 @@ module Aws::Inspector2
     CreateFindingsReportResponse.add_member(:report_id, Shapes::ShapeRef.new(shape: ReportId, location_name: "reportId"))
     CreateFindingsReportResponse.struct_class = Types::CreateFindingsReportResponse
 
+    CreateGitHubEnterpriseIntegrationDetail.add_member(:instance_url, Shapes::ShapeRef.new(shape: InstanceUrl, required: true, location_name: "instanceUrl"))
+    CreateGitHubEnterpriseIntegrationDetail.add_member(:vpc_configuration, Shapes::ShapeRef.new(shape: CodeSecurityIntegrationVpcConfiguration, location_name: "vpcConfiguration"))
+    CreateGitHubEnterpriseIntegrationDetail.struct_class = Types::CreateGitHubEnterpriseIntegrationDetail
+
     CreateGitLabSelfManagedIntegrationDetail.add_member(:instance_url, Shapes::ShapeRef.new(shape: InstanceUrl, required: true, location_name: "instanceUrl"))
     CreateGitLabSelfManagedIntegrationDetail.add_member(:access_token, Shapes::ShapeRef.new(shape: GitLabAccessToken, required: true, location_name: "accessToken"))
+    CreateGitLabSelfManagedIntegrationDetail.add_member(:vpc_configuration, Shapes::ShapeRef.new(shape: CodeSecurityIntegrationVpcConfiguration, location_name: "vpcConfiguration"))
     CreateGitLabSelfManagedIntegrationDetail.struct_class = Types::CreateGitLabSelfManagedIntegrationDetail
 
     CreateIntegrationDetail.add_member(:gitlab_self_managed, Shapes::ShapeRef.new(shape: CreateGitLabSelfManagedIntegrationDetail, location_name: "gitlabSelfManaged"))
+    CreateIntegrationDetail.add_member(:github_enterprise, Shapes::ShapeRef.new(shape: CreateGitHubEnterpriseIntegrationDetail, location_name: "githubEnterprise"))
     CreateIntegrationDetail.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     CreateIntegrationDetail.add_member_subclass(:gitlab_self_managed, Types::CreateIntegrationDetail::GitlabSelfManaged)
+    CreateIntegrationDetail.add_member_subclass(:github_enterprise, Types::CreateIntegrationDetail::GithubEnterprise)
     CreateIntegrationDetail.add_member_subclass(:unknown, Types::CreateIntegrationDetail::Unknown)
     CreateIntegrationDetail.struct_class = Types::CreateIntegrationDetail
 
@@ -2252,6 +2297,41 @@ module Aws::Inspector2
 
     FreeTrialInfoList.member = Shapes::ShapeRef.new(shape: FreeTrialInfo)
 
+    GcpCapabilityScope.add_member(:scope_type, Shapes::ShapeRef.new(shape: ScopeType, required: true, location_name: "scopeType"))
+    GcpCapabilityScope.add_member(:scope_values, Shapes::ShapeRef.new(shape: GcpScopeValueList, location_name: "scopeValues"))
+    GcpCapabilityScope.add_member(:state, Shapes::ShapeRef.new(shape: ScopeState, location_name: "state"))
+    GcpCapabilityScope.add_member(:state_reason, Shapes::ShapeRef.new(shape: String, location_name: "stateReason"))
+    GcpCapabilityScope.struct_class = Types::GcpCapabilityScope
+
+    GcpCapabilityScopeInput.add_member(:scope_type, Shapes::ShapeRef.new(shape: ScopeType, required: true, location_name: "scopeType"))
+    GcpCapabilityScopeInput.add_member(:scope_values, Shapes::ShapeRef.new(shape: GcpScopeValueList, location_name: "scopeValues"))
+    GcpCapabilityScopeInput.struct_class = Types::GcpCapabilityScopeInput
+
+    GcpProviderDetailCreate.add_member(:aws_config_connector_arn, Shapes::ShapeRef.new(shape: AwsConfigConnectorArn, required: true, location_name: "awsConfigConnectorArn"))
+    GcpProviderDetailCreate.add_member(:scope_configuration, Shapes::ShapeRef.new(shape: GcpScopeConfigurationInput, required: true, location_name: "scopeConfiguration"))
+    GcpProviderDetailCreate.add_member(:gcp_regions, Shapes::ShapeRef.new(shape: GcpRegionList, required: true, location_name: "gcpRegions"))
+    GcpProviderDetailCreate.add_member(:auto_install_vm_scanner, Shapes::ShapeRef.new(shape: Boolean, location_name: "autoInstallVMScanner"))
+    GcpProviderDetailCreate.struct_class = Types::GcpProviderDetailCreate
+
+    GcpProviderDetailUpdate.add_member(:gcp_regions, Shapes::ShapeRef.new(shape: GcpRegionList, location_name: "gcpRegions"))
+    GcpProviderDetailUpdate.add_member(:scope_configuration, Shapes::ShapeRef.new(shape: GcpScopeConfigurationInput, location_name: "scopeConfiguration"))
+    GcpProviderDetailUpdate.add_member(:auto_install_vm_scanner, Shapes::ShapeRef.new(shape: Boolean, location_name: "autoInstallVMScanner"))
+    GcpProviderDetailUpdate.struct_class = Types::GcpProviderDetailUpdate
+
+    GcpRegionList.member = Shapes::ShapeRef.new(shape: GcpRegion)
+
+    GcpScopeConfiguration.add_member(:vm_scanning, Shapes::ShapeRef.new(shape: GcpCapabilityScope, location_name: "vmScanning"))
+    GcpScopeConfiguration.add_member(:container_image_scanning, Shapes::ShapeRef.new(shape: GcpCapabilityScope, location_name: "containerImageScanning"))
+    GcpScopeConfiguration.add_member(:serverless_scanning, Shapes::ShapeRef.new(shape: GcpCapabilityScope, location_name: "serverlessScanning"))
+    GcpScopeConfiguration.struct_class = Types::GcpScopeConfiguration
+
+    GcpScopeConfigurationInput.add_member(:vm_scanning, Shapes::ShapeRef.new(shape: GcpCapabilityScopeInput, location_name: "vmScanning"))
+    GcpScopeConfigurationInput.add_member(:container_image_scanning, Shapes::ShapeRef.new(shape: GcpCapabilityScopeInput, location_name: "containerImageScanning"))
+    GcpScopeConfigurationInput.add_member(:serverless_scanning, Shapes::ShapeRef.new(shape: GcpCapabilityScopeInput, location_name: "serverlessScanning"))
+    GcpScopeConfigurationInput.struct_class = Types::GcpScopeConfigurationInput
+
+    GcpScopeValueList.member = Shapes::ShapeRef.new(shape: GcpScopeValue)
+
     GetCisScanReportRequest.add_member(:scan_arn, Shapes::ShapeRef.new(shape: CisScanArn, required: true, location_name: "scanArn"))
     GetCisScanReportRequest.add_member(:target_accounts, Shapes::ShapeRef.new(shape: ReportTargetAccounts, location_name: "targetAccounts"))
     GetCisScanReportRequest.add_member(:report_format, Shapes::ShapeRef.new(shape: CisReportFormat, location_name: "reportFormat"))
@@ -2296,6 +2376,8 @@ module Aws::Inspector2
     GetCodeSecurityIntegrationResponse.add_member(:created_on, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createdOn"))
     GetCodeSecurityIntegrationResponse.add_member(:last_update_on, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "lastUpdateOn"))
     GetCodeSecurityIntegrationResponse.add_member(:authorization_url, Shapes::ShapeRef.new(shape: AuthorizationUrl, location_name: "authorizationUrl"))
+    GetCodeSecurityIntegrationResponse.add_member(:vpc_configuration, Shapes::ShapeRef.new(shape: CodeSecurityIntegrationVpcConfiguration, location_name: "vpcConfiguration"))
+    GetCodeSecurityIntegrationResponse.add_member(:instance_url, Shapes::ShapeRef.new(shape: InstanceUrl, location_name: "instanceUrl"))
     GetCodeSecurityIntegrationResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     GetCodeSecurityIntegrationResponse.struct_class = Types::GetCodeSecurityIntegrationResponse
 
@@ -2396,6 +2478,9 @@ module Aws::Inspector2
     GetSbomExportResponse.add_member(:s3_destination, Shapes::ShapeRef.new(shape: Destination, location_name: "s3Destination"))
     GetSbomExportResponse.add_member(:filter_criteria, Shapes::ShapeRef.new(shape: ResourceFilterCriteria, location_name: "filterCriteria"))
     GetSbomExportResponse.struct_class = Types::GetSbomExportResponse
+
+    GitHubEnterpriseServerAppRegistrationDetail.add_member(:manifest_code, Shapes::ShapeRef.new(shape: GitHubEnterpriseServerManifestCode, required: true, location_name: "manifestCode"))
+    GitHubEnterpriseServerAppRegistrationDetail.struct_class = Types::GitHubEnterpriseServerAppRegistrationDetail
 
     Image.add_member(:repository_name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "repositoryName"))
     Image.add_member(:registry, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "registry"))
@@ -2801,6 +2886,9 @@ module Aws::Inspector2
     PackageFilter.add_member(:source_layer_hash, Shapes::ShapeRef.new(shape: StringFilter, location_name: "sourceLayerHash"))
     PackageFilter.add_member(:source_lambda_layer_arn, Shapes::ShapeRef.new(shape: StringFilter, location_name: "sourceLambdaLayerArn"))
     PackageFilter.add_member(:file_path, Shapes::ShapeRef.new(shape: StringFilter, location_name: "filePath"))
+    PackageFilter.add_member(:runtime_reachability, Shapes::ShapeRef.new(shape: RuntimeReachabilityFilter, location_name: "runtimeReachability"))
+    PackageFilter.add_member(:runtime_reachability_reason, Shapes::ShapeRef.new(shape: RuntimeReachabilityReasonFilter, location_name: "runtimeReachabilityReason"))
+    PackageFilter.add_member(:purl_qualifier, Shapes::ShapeRef.new(shape: PurlQualifierFilter, location_name: "purlQualifier"))
     PackageFilter.struct_class = Types::PackageFilter
 
     PackageFilterList.member = Shapes::ShapeRef.new(shape: PackageFilter)
@@ -2858,14 +2946,18 @@ module Aws::Inspector2
     ProjectPeriodicScanConfigurationList.member = Shapes::ShapeRef.new(shape: ProjectPeriodicScanConfiguration)
 
     ProviderDetailCreate.add_member(:azure, Shapes::ShapeRef.new(shape: AzureProviderDetailCreate, location_name: "azure"))
+    ProviderDetailCreate.add_member(:gcp, Shapes::ShapeRef.new(shape: GcpProviderDetailCreate, location_name: "gcp"))
     ProviderDetailCreate.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     ProviderDetailCreate.add_member_subclass(:azure, Types::ProviderDetailCreate::Azure)
+    ProviderDetailCreate.add_member_subclass(:gcp, Types::ProviderDetailCreate::Gcp)
     ProviderDetailCreate.add_member_subclass(:unknown, Types::ProviderDetailCreate::Unknown)
     ProviderDetailCreate.struct_class = Types::ProviderDetailCreate
 
     ProviderDetailUpdate.add_member(:azure, Shapes::ShapeRef.new(shape: AzureProviderDetailUpdate, location_name: "azure"))
+    ProviderDetailUpdate.add_member(:gcp, Shapes::ShapeRef.new(shape: GcpProviderDetailUpdate, location_name: "gcp"))
     ProviderDetailUpdate.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     ProviderDetailUpdate.add_member_subclass(:azure, Types::ProviderDetailUpdate::Azure)
+    ProviderDetailUpdate.add_member_subclass(:gcp, Types::ProviderDetailUpdate::Gcp)
     ProviderDetailUpdate.add_member_subclass(:unknown, Types::ProviderDetailUpdate::Unknown)
     ProviderDetailUpdate.struct_class = Types::ProviderDetailUpdate
 
@@ -2874,6 +2966,11 @@ module Aws::Inspector2
     ProviderFilter.struct_class = Types::ProviderFilter
 
     ProviderFilterList.member = Shapes::ShapeRef.new(shape: ProviderFilter)
+
+    PurlQualifierFilter.add_member(:comparison, Shapes::ShapeRef.new(shape: MapComparison, required: true, location_name: "comparison"))
+    PurlQualifierFilter.add_member(:key, Shapes::ShapeRef.new(shape: PurlQualifierKey, required: true, location_name: "key"))
+    PurlQualifierFilter.add_member(:value, Shapes::ShapeRef.new(shape: MapValue, location_name: "value"))
+    PurlQualifierFilter.struct_class = Types::PurlQualifierFilter
 
     Recommendation.add_member(:text, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "text"))
     Recommendation.add_member(:url, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Url"))
@@ -3004,6 +3101,14 @@ module Aws::Inspector2
     ResourceTagFilterList.member = Shapes::ShapeRef.new(shape: TagFilter)
 
     RuleSetCategories.member = Shapes::ShapeRef.new(shape: RuleSetCategory)
+
+    RuntimeReachabilityFilter.add_member(:comparison, Shapes::ShapeRef.new(shape: RuntimeReachabilityComparison, required: true, location_name: "comparison"))
+    RuntimeReachabilityFilter.add_member(:value, Shapes::ShapeRef.new(shape: RuntimeReachability, required: true, location_name: "value"))
+    RuntimeReachabilityFilter.struct_class = Types::RuntimeReachabilityFilter
+
+    RuntimeReachabilityReasonFilter.add_member(:comparison, Shapes::ShapeRef.new(shape: RuntimeReachabilityComparison, required: true, location_name: "comparison"))
+    RuntimeReachabilityReasonFilter.add_member(:value, Shapes::ShapeRef.new(shape: RuntimeReachabilityReason, required: true, location_name: "value"))
+    RuntimeReachabilityReasonFilter.struct_class = Types::RuntimeReachabilityReasonFilter
 
     ScanSourceList.member = Shapes::ShapeRef.new(shape: ScanSource)
 
@@ -3370,18 +3475,35 @@ module Aws::Inspector2
     UpdateFilterResponse.add_member(:arn, Shapes::ShapeRef.new(shape: FilterArn, required: true, location_name: "arn"))
     UpdateFilterResponse.struct_class = Types::UpdateFilterResponse
 
+    UpdateGitHubEnterpriseServerAppInstallationDetail.add_member(:code, Shapes::ShapeRef.new(shape: GitHubAuthCode, required: true, location_name: "code"))
+    UpdateGitHubEnterpriseServerAppInstallationDetail.add_member(:installation_id, Shapes::ShapeRef.new(shape: GitHubInstallationId, required: true, location_name: "installationId"))
+    UpdateGitHubEnterpriseServerAppInstallationDetail.add_member(:state_token, Shapes::ShapeRef.new(shape: PkceState, location_name: "stateToken"))
+    UpdateGitHubEnterpriseServerAppInstallationDetail.struct_class = Types::UpdateGitHubEnterpriseServerAppInstallationDetail
+
+    UpdateGitHubEnterpriseServerIntegrationDetail.add_member(:app_installation, Shapes::ShapeRef.new(shape: UpdateGitHubEnterpriseServerAppInstallationDetail, location_name: "appInstallation"))
+    UpdateGitHubEnterpriseServerIntegrationDetail.add_member(:app_registration, Shapes::ShapeRef.new(shape: GitHubEnterpriseServerAppRegistrationDetail, location_name: "appRegistration"))
+    UpdateGitHubEnterpriseServerIntegrationDetail.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    UpdateGitHubEnterpriseServerIntegrationDetail.add_member_subclass(:app_installation, Types::UpdateGitHubEnterpriseServerIntegrationDetail::AppInstallation)
+    UpdateGitHubEnterpriseServerIntegrationDetail.add_member_subclass(:app_registration, Types::UpdateGitHubEnterpriseServerIntegrationDetail::AppRegistration)
+    UpdateGitHubEnterpriseServerIntegrationDetail.add_member_subclass(:unknown, Types::UpdateGitHubEnterpriseServerIntegrationDetail::Unknown)
+    UpdateGitHubEnterpriseServerIntegrationDetail.struct_class = Types::UpdateGitHubEnterpriseServerIntegrationDetail
+
     UpdateGitHubIntegrationDetail.add_member(:code, Shapes::ShapeRef.new(shape: GitHubAuthCode, required: true, location_name: "code"))
     UpdateGitHubIntegrationDetail.add_member(:installation_id, Shapes::ShapeRef.new(shape: GitHubInstallationId, required: true, location_name: "installationId"))
+    UpdateGitHubIntegrationDetail.add_member(:state_token, Shapes::ShapeRef.new(shape: PkceState, location_name: "stateToken"))
     UpdateGitHubIntegrationDetail.struct_class = Types::UpdateGitHubIntegrationDetail
 
     UpdateGitLabSelfManagedIntegrationDetail.add_member(:auth_code, Shapes::ShapeRef.new(shape: GitLabAuthCode, required: true, location_name: "authCode"))
+    UpdateGitLabSelfManagedIntegrationDetail.add_member(:state_token, Shapes::ShapeRef.new(shape: PkceState, location_name: "stateToken"))
     UpdateGitLabSelfManagedIntegrationDetail.struct_class = Types::UpdateGitLabSelfManagedIntegrationDetail
 
     UpdateIntegrationDetails.add_member(:gitlab_self_managed, Shapes::ShapeRef.new(shape: UpdateGitLabSelfManagedIntegrationDetail, location_name: "gitlabSelfManaged"))
     UpdateIntegrationDetails.add_member(:github, Shapes::ShapeRef.new(shape: UpdateGitHubIntegrationDetail, location_name: "github"))
+    UpdateIntegrationDetails.add_member(:github_enterprise_server, Shapes::ShapeRef.new(shape: UpdateGitHubEnterpriseServerIntegrationDetail, location_name: "githubEnterpriseServer"))
     UpdateIntegrationDetails.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     UpdateIntegrationDetails.add_member_subclass(:gitlab_self_managed, Types::UpdateIntegrationDetails::GitlabSelfManaged)
     UpdateIntegrationDetails.add_member_subclass(:github, Types::UpdateIntegrationDetails::Github)
+    UpdateIntegrationDetails.add_member_subclass(:github_enterprise_server, Types::UpdateIntegrationDetails::GithubEnterpriseServer)
     UpdateIntegrationDetails.add_member_subclass(:unknown, Types::UpdateIntegrationDetails::Unknown)
     UpdateIntegrationDetails.struct_class = Types::UpdateIntegrationDetails
 
@@ -3517,6 +3639,9 @@ module Aws::Inspector2
     VulnerablePackage.add_member(:fixed_in_version, Shapes::ShapeRef.new(shape: PackageVersion, location_name: "fixedInVersion"))
     VulnerablePackage.add_member(:remediation, Shapes::ShapeRef.new(shape: VulnerablePackageRemediation, location_name: "remediation"))
     VulnerablePackage.add_member(:source_lambda_layer_arn, Shapes::ShapeRef.new(shape: LambdaLayerArn, location_name: "sourceLambdaLayerArn"))
+    VulnerablePackage.add_member(:runtime_reachability, Shapes::ShapeRef.new(shape: RuntimeReachability, location_name: "runtimeReachability"))
+    VulnerablePackage.add_member(:runtime_reachability_reason, Shapes::ShapeRef.new(shape: RuntimeReachabilityReason, location_name: "runtimeReachabilityReason"))
+    VulnerablePackage.add_member(:purl, Shapes::ShapeRef.new(shape: PackageUrl, location_name: "purl"))
     VulnerablePackage.struct_class = Types::VulnerablePackage
 
     VulnerablePackageList.member = Shapes::ShapeRef.new(shape: VulnerablePackage)

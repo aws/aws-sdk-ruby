@@ -1,6 +1,71 @@
 Unreleased Changes
 ------------------
 
+1.419.0 (2026-11-21)
+------------------
+
+* Feature - Amazon SageMaker AI adds APIs to view capacity reservations and their usage.
+
+1.418.0 (2026-11-20)
+------------------
+
+* Feature - Adds HyperPod Global Inference Gateway APIs to route inference across HyperPod clusters in multiple Regions. Adds the MoveClusterNodes API, which moves running nodes between instance groups, within a cluster or between clusters in the same region, account and subnet, without releasing the instances.
+
+1.417.0 (2026-11-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.416.0 (2026-11-16)
+------------------
+
+* Feature - Amazon SageMaker adds Synthetic Data Generation, Auto-labeling, Data Quality Evaluation, and Data Transformation capabilities, Cross-Region Inference Routing, KV Aware routing for realtime inference endpoints.
+
+1.415.0 (2026-11-13)
+------------------
+
+* Feature - New feature for Sagemaker Hyperpod Slurm clusters to install Extensions and view cluster operations.
+
+1.414.0 (2026-11-12)
+------------------
+
+* Feature - Adds CreatedBy and LastModifiedBy to the DescribeHub and DescribeHubContent responses and to HubContent records returned by the Search API, identifying the IAM identity or SageMaker Studio user profile that created or last modified a hub or hub content.
+
+1.413.0 (2026-11-11)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.412.0 (2026-11-10)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.411.0 (2026-11-09)
+------------------
+
+* Feature - Adds support for pipelines that AWS manages, filter ListPipelines by ManagedBy and run them with your own role via RoleArn on StartPipelineExecution. Adds pipeline version aliases to reference versions by name. Adds HubContent step metadata to ListPipelineExecutionSteps.
+
+1.410.0 (2026-11-06)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.409.0 (2026-11-05)
+------------------
+
+* Feature - Fixed the ImageDeleted and ImageVersionDeleted waiters to succeed on the ResourceNotFound error returned by DescribeImage and DescribeImageVersion
+
+1.408.0 (2026-11-04)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.407.0 (2026-10-30)
+------------------
+
+* Feature - Create endpoints with AcceleratorPartitionLayouts on ProductionVariant and deploy inference components with AcceleratorPartitionType in ComputeResourceRequirements to divide accelerators into hardware-isolated NVIDIA MIG partitions, running multiple models per GPU. P4d, P5, G7, G7e.
+
 1.406.0 (2026-10-29)
 ------------------
 

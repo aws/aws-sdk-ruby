@@ -17,6 +17,37 @@ module Aws
       agent_elevated_role_arn_status: ("valid" | "invalid" | "pending-confirmation")?
     }
 
+      type org_source_deployment_state = {
+      deployed_account_count: ::Integer?,
+      issues: Array[
+        {
+          reason_code: ("accountSuspended" | "accountNotInScope" | "managementAccountNotSupported" | "stackInstanceInoperable" | "accessDenied" | "deploymentFailed" | "secondaryAccountLimitExceeded"),
+          account_count: ::Integer,
+          account_ids: Array[::String],
+          message: ::String?
+        }
+      ]?,
+      last_evaluated_at: ::Time?
+    }
+
+      type source_aws_org_configuration = {
+      account_type: ("source"),
+      organizational_unit: {
+        organizational_unit_id: ::String,
+        account_ids: Array[::String]?
+      },
+      deployment_state: Params::org_source_deployment_state?
+    }
+
+      type aws_configuration = {
+      assumable_role_arn: ::String,
+      account_id: ::String,
+      account_type: ("monitor"),
+      agent_elevated_role_arn: ::String?,
+      agent_elevated_role_arn_status: ("valid" | "invalid" | "pending-confirmation")?,
+      service_management_role_arn: ::String?
+    }
+
       type git_hub_configuration = {
       repo_name: ::String,
       repo_id: ::String,
@@ -74,7 +105,11 @@ module Aws
       type ms_teams_configuration = {
       team_id: ::String,
       team_name: ::String,
-      transmission_target: Params::ms_teams_transmission_target
+      transmission_target: Params::ms_teams_transmission_target,
+      bidirectional: {
+        role_arn: ::String,
+        enabled: bool?
+      }?
     }
 
       type release_management_configuration = {
@@ -89,13 +124,8 @@ module Aws
 
       type service_configuration = {
       source_aws: Params::source_aws_configuration?,
-      aws: {
-        assumable_role_arn: ::String,
-        account_id: ::String,
-        account_type: ("monitor"),
-        agent_elevated_role_arn: ::String?,
-        agent_elevated_role_arn_status: ("valid" | "invalid" | "pending-confirmation")?
-      }?,
+      source_aws_org: Params::source_aws_org_configuration?,
+      aws: Params::aws_configuration?,
       github: Params::git_hub_configuration?,
       slack: Params::slack_configuration?,
       dynatrace: {

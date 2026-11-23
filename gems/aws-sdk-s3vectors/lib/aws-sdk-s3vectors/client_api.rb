@@ -15,6 +15,9 @@ module Aws::S3Vectors
     include Seahorse::Model
 
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
+    AnalyzerStatus = Shapes::StringShape.new(name: 'AnalyzerStatus')
+    Bm25Score = Shapes::StructureShape.new(name: 'Bm25Score')
+    Bm25ScoreList = Shapes::ListShape.new(name: 'Bm25ScoreList')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     CreateIndexInput = Shapes::StructureShape.new(name: 'CreateIndexInput')
@@ -60,6 +63,7 @@ module Aws::S3Vectors
     KmsInvalidStateException = Shapes::StructureShape.new(name: 'KmsInvalidStateException')
     KmsKeyArn = Shapes::StringShape.new(name: 'KmsKeyArn')
     KmsNotFoundException = Shapes::StructureShape.new(name: 'KmsNotFoundException')
+    LanguageCode = Shapes::StringShape.new(name: 'LanguageCode')
     ListIndexesInput = Shapes::StructureShape.new(name: 'ListIndexesInput')
     ListIndexesMaxResults = Shapes::IntegerShape.new(name: 'ListIndexesMaxResults')
     ListIndexesNextToken = Shapes::StringShape.new(name: 'ListIndexesNextToken')
@@ -83,6 +87,10 @@ module Aws::S3Vectors
     ListVectorsSegmentCount = Shapes::IntegerShape.new(name: 'ListVectorsSegmentCount')
     ListVectorsSegmentIndex = Shapes::IntegerShape.new(name: 'ListVectorsSegmentIndex')
     MetadataConfiguration = Shapes::StructureShape.new(name: 'MetadataConfiguration')
+    MetadataConfigurationAdd = Shapes::StructureShape.new(name: 'MetadataConfigurationAdd')
+    MetadataConfigurationAddTextSearchConfigurationsList = Shapes::ListShape.new(name: 'MetadataConfigurationAddTextSearchConfigurationsList')
+    MetadataConfigurationDelete = Shapes::StructureShape.new(name: 'MetadataConfigurationDelete')
+    MetadataConfigurationTextSearchConfigurationsList = Shapes::ListShape.new(name: 'MetadataConfigurationTextSearchConfigurationsList')
     MetadataKey = Shapes::StringShape.new(name: 'MetadataKey')
     NonFilterableMetadataKeys = Shapes::ListShape.new(name: 'NonFilterableMetadataKeys')
     NotFoundException = Shapes::StructureShape.new(name: 'NotFoundException')
@@ -95,6 +103,10 @@ module Aws::S3Vectors
     PutVectorsInputList = Shapes::ListShape.new(name: 'PutVectorsInputList')
     PutVectorsOutput = Shapes::StructureShape.new(name: 'PutVectorsOutput')
     QueryOutputVector = Shapes::StructureShape.new(name: 'QueryOutputVector')
+    QueryScores = Shapes::StructureShape.new(name: 'QueryScores')
+    QueryText = Shapes::StructureShape.new(name: 'QueryText')
+    QueryTextList = Shapes::ListShape.new(name: 'QueryTextList')
+    QueryTextString = Shapes::StringShape.new(name: 'QueryTextString')
     QueryVectorsInput = Shapes::StructureShape.new(name: 'QueryVectorsInput')
     QueryVectorsNextToken = Shapes::StringShape.new(name: 'QueryVectorsNextToken')
     QueryVectorsOutput = Shapes::StructureShape.new(name: 'QueryVectorsOutput')
@@ -111,6 +123,9 @@ module Aws::S3Vectors
     TagResourceOutput = Shapes::StructureShape.new(name: 'TagResourceOutput')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
     TagsMap = Shapes::MapShape.new(name: 'TagsMap')
+    TextSearchConfiguration = Shapes::StructureShape.new(name: 'TextSearchConfiguration')
+    TextSearchConfigurationKey = Shapes::StructureShape.new(name: 'TextSearchConfigurationKey')
+    TextSearchConfigurationKeys = Shapes::ListShape.new(name: 'TextSearchConfigurationKeys')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     TooManyRequestsException = Shapes::StructureShape.new(name: 'TooManyRequestsException')
     TopK = Shapes::IntegerShape.new(name: 'TopK')
@@ -118,6 +133,8 @@ module Aws::S3Vectors
     UntagResourceOutput = Shapes::StructureShape.new(name: 'UntagResourceOutput')
     UpdateIndexModeInput = Shapes::StructureShape.new(name: 'UpdateIndexModeInput')
     UpdateIndexModeOutput = Shapes::StructureShape.new(name: 'UpdateIndexModeOutput')
+    UpdateMetadataConfigurationInput = Shapes::StructureShape.new(name: 'UpdateMetadataConfigurationInput')
+    UpdateMetadataConfigurationOutput = Shapes::StructureShape.new(name: 'UpdateMetadataConfigurationOutput')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
     ValidationExceptionField = Shapes::StructureShape.new(name: 'ValidationExceptionField')
     ValidationExceptionFieldList = Shapes::ListShape.new(name: 'ValidationExceptionFieldList')
@@ -132,6 +149,12 @@ module Aws::S3Vectors
 
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, required: true, location_name: "message"))
     AccessDeniedException.struct_class = Types::AccessDeniedException
+
+    Bm25Score.add_member(:metadata_key, Shapes::ShapeRef.new(shape: MetadataKey, required: true, location_name: "metadataKey"))
+    Bm25Score.add_member(:score, Shapes::ShapeRef.new(shape: Float, required: true, location_name: "score"))
+    Bm25Score.struct_class = Types::Bm25Score
+
+    Bm25ScoreList.member = Shapes::ShapeRef.new(shape: Bm25Score)
 
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, required: true, location_name: "message"))
     ConflictException.struct_class = Types::ConflictException
@@ -320,8 +343,19 @@ module Aws::S3Vectors
 
     ListVectorsOutputList.member = Shapes::ShapeRef.new(shape: ListOutputVector)
 
-    MetadataConfiguration.add_member(:non_filterable_metadata_keys, Shapes::ShapeRef.new(shape: NonFilterableMetadataKeys, required: true, location_name: "nonFilterableMetadataKeys"))
+    MetadataConfiguration.add_member(:non_filterable_metadata_keys, Shapes::ShapeRef.new(shape: NonFilterableMetadataKeys, location_name: "nonFilterableMetadataKeys"))
+    MetadataConfiguration.add_member(:text_search_configurations, Shapes::ShapeRef.new(shape: MetadataConfigurationTextSearchConfigurationsList, location_name: "textSearchConfigurations"))
     MetadataConfiguration.struct_class = Types::MetadataConfiguration
+
+    MetadataConfigurationAdd.add_member(:text_search_configurations, Shapes::ShapeRef.new(shape: MetadataConfigurationAddTextSearchConfigurationsList, location_name: "textSearchConfigurations"))
+    MetadataConfigurationAdd.struct_class = Types::MetadataConfigurationAdd
+
+    MetadataConfigurationAddTextSearchConfigurationsList.member = Shapes::ShapeRef.new(shape: TextSearchConfiguration)
+
+    MetadataConfigurationDelete.add_member(:text_search_configurations, Shapes::ShapeRef.new(shape: TextSearchConfigurationKeys, location_name: "textSearchConfigurations"))
+    MetadataConfigurationDelete.struct_class = Types::MetadataConfigurationDelete
+
+    MetadataConfigurationTextSearchConfigurationsList.member = Shapes::ShapeRef.new(shape: TextSearchConfiguration)
 
     NonFilterableMetadataKeys.member = Shapes::ShapeRef.new(shape: MetadataKey)
 
@@ -358,19 +392,33 @@ module Aws::S3Vectors
     PutVectorsOutput.struct_class = Types::PutVectorsOutput
 
     QueryOutputVector.add_member(:distance, Shapes::ShapeRef.new(shape: Float, location_name: "distance"))
+    QueryOutputVector.add_member(:scores, Shapes::ShapeRef.new(shape: QueryScores, location_name: "scores"))
     QueryOutputVector.add_member(:key, Shapes::ShapeRef.new(shape: VectorKey, required: true, location_name: "key"))
     QueryOutputVector.add_member(:metadata, Shapes::ShapeRef.new(shape: VectorMetadata, location_name: "metadata"))
     QueryOutputVector.struct_class = Types::QueryOutputVector
+
+    QueryScores.add_member(:fused, Shapes::ShapeRef.new(shape: Float, location_name: "fused"))
+    QueryScores.add_member(:bm25_scores, Shapes::ShapeRef.new(shape: Bm25ScoreList, location_name: "bm25Scores"))
+    QueryScores.add_member(:vector_distance, Shapes::ShapeRef.new(shape: Float, location_name: "vectorDistance"))
+    QueryScores.struct_class = Types::QueryScores
+
+    QueryText.add_member(:text, Shapes::ShapeRef.new(shape: QueryTextString, required: true, location_name: "text"))
+    QueryText.add_member(:metadata_key, Shapes::ShapeRef.new(shape: MetadataKey, required: true, location_name: "metadataKey"))
+    QueryText.struct_class = Types::QueryText
+
+    QueryTextList.member = Shapes::ShapeRef.new(shape: QueryText)
 
     QueryVectorsInput.add_member(:vector_bucket_name, Shapes::ShapeRef.new(shape: VectorBucketName, location_name: "vectorBucketName"))
     QueryVectorsInput.add_member(:index_name, Shapes::ShapeRef.new(shape: IndexName, location_name: "indexName"))
     QueryVectorsInput.add_member(:index_arn, Shapes::ShapeRef.new(shape: IndexArn, location_name: "indexArn"))
     QueryVectorsInput.add_member(:top_k, Shapes::ShapeRef.new(shape: TopK, required: true, location_name: "topK"))
-    QueryVectorsInput.add_member(:query_vector, Shapes::ShapeRef.new(shape: VectorData, required: true, location_name: "queryVector"))
+    QueryVectorsInput.add_member(:query_vector, Shapes::ShapeRef.new(shape: VectorData, location_name: "queryVector"))
     QueryVectorsInput.add_member(:filter, Shapes::ShapeRef.new(shape: Document, location_name: "filter"))
     QueryVectorsInput.add_member(:query_mode, Shapes::ShapeRef.new(shape: IndexMode, location_name: "queryMode"))
     QueryVectorsInput.add_member(:return_metadata, Shapes::ShapeRef.new(shape: Boolean, location_name: "returnMetadata"))
     QueryVectorsInput.add_member(:return_distance, Shapes::ShapeRef.new(shape: Boolean, location_name: "returnDistance"))
+    QueryVectorsInput.add_member(:query_texts, Shapes::ShapeRef.new(shape: QueryTextList, location_name: "queryTexts"))
+    QueryVectorsInput.add_member(:return_scores, Shapes::ShapeRef.new(shape: Boolean, location_name: "returnScores"))
     QueryVectorsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: QueryVectorsNextToken, location_name: "nextToken"))
     QueryVectorsInput.struct_class = Types::QueryVectorsInput
 
@@ -401,6 +449,16 @@ module Aws::S3Vectors
     TagsMap.key = Shapes::ShapeRef.new(shape: TagKey)
     TagsMap.value = Shapes::ShapeRef.new(shape: TagValue)
 
+    TextSearchConfiguration.add_member(:metadata_key, Shapes::ShapeRef.new(shape: MetadataKey, required: true, location_name: "metadataKey"))
+    TextSearchConfiguration.add_member(:language, Shapes::ShapeRef.new(shape: LanguageCode, location_name: "language"))
+    TextSearchConfiguration.add_member(:status, Shapes::ShapeRef.new(shape: AnalyzerStatus, location_name: "status"))
+    TextSearchConfiguration.struct_class = Types::TextSearchConfiguration
+
+    TextSearchConfigurationKey.add_member(:metadata_key, Shapes::ShapeRef.new(shape: MetadataKey, required: true, location_name: "metadataKey"))
+    TextSearchConfigurationKey.struct_class = Types::TextSearchConfigurationKey
+
+    TextSearchConfigurationKeys.member = Shapes::ShapeRef.new(shape: TextSearchConfigurationKey)
+
     TooManyRequestsException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, required: true, location_name: "message"))
     TooManyRequestsException.struct_class = Types::TooManyRequestsException
 
@@ -417,6 +475,16 @@ module Aws::S3Vectors
     UpdateIndexModeInput.struct_class = Types::UpdateIndexModeInput
 
     UpdateIndexModeOutput.struct_class = Types::UpdateIndexModeOutput
+
+    UpdateMetadataConfigurationInput.add_member(:vector_bucket_name, Shapes::ShapeRef.new(shape: VectorBucketName, location_name: "vectorBucketName"))
+    UpdateMetadataConfigurationInput.add_member(:index_name, Shapes::ShapeRef.new(shape: IndexName, location_name: "indexName"))
+    UpdateMetadataConfigurationInput.add_member(:index_arn, Shapes::ShapeRef.new(shape: IndexArn, location_name: "indexArn"))
+    UpdateMetadataConfigurationInput.add_member(:add, Shapes::ShapeRef.new(shape: MetadataConfigurationAdd, location_name: "add"))
+    UpdateMetadataConfigurationInput.add_member(:delete, Shapes::ShapeRef.new(shape: MetadataConfigurationDelete, location_name: "delete"))
+    UpdateMetadataConfigurationInput.struct_class = Types::UpdateMetadataConfigurationInput
+
+    UpdateMetadataConfigurationOutput.add_member(:index_arn, Shapes::ShapeRef.new(shape: IndexArn, required: true, location_name: "indexArn"))
+    UpdateMetadataConfigurationOutput.struct_class = Types::UpdateMetadataConfigurationOutput
 
     ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     ValidationException.add_member(:field_list, Shapes::ShapeRef.new(shape: ValidationExceptionFieldList, location_name: "fieldList"))
@@ -822,6 +890,22 @@ module Aws::S3Vectors
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: RequestTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+      end)
+
+      api.add_operation(:update_metadata_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateMetadataConfiguration"
+        o.http_method = "POST"
+        o.http_request_uri = "/UpdateMetadataConfiguration"
+        o.input = Shapes::ShapeRef.new(shape: UpdateMetadataConfigurationInput)
+        o.output = Shapes::ShapeRef.new(shape: UpdateMetadataConfigurationOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: RequestTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
       end)
     end

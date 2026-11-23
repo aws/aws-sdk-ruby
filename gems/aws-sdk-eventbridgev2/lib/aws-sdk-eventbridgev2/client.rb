@@ -264,7 +264,8 @@ module Aws::EventBridgeV2
     #     An integer representing the maximum number attempts that will be made for
     #     a single request, including the initial attempt.  For example,
     #     setting this value to 5 will result in a request being retried up to
-    #     4 times. Used in `standard` and `adaptive` retry modes.
+    #     4 times. Used in `standard` and `adaptive` retry modes. Defaults to 3,
+    #     except for DynamoDB and DynamoDB Streams, which default to 4.
     #
     #   @option options [String] :profile ("default")
     #     Used when loading credentials from the shared credentials file at `HOME/.aws/credentials`.
@@ -327,15 +328,15 @@ module Aws::EventBridgeV2
     #     used by the default backoff function. This option is only used in the
     #     `legacy` retry mode.
     #
-    #   @option options [String] :retry_mode ("legacy")
+    #   @option options [String] :retry_mode ("standard")
     #     Specifies which retry algorithm to use. Values are:
     #
-    #     * `legacy` - The pre-existing retry behavior. This is the default
-    #       value if no retry mode is provided.
+    #     * `legacy` - The pre-existing retry behavior.
     #
     #     * `standard` - A standardized set of retry rules across the AWS SDKs.
     #       This includes support for retry quotas, which limit the number of
-    #       unsuccessful retries a client can make.
+    #       unsuccessful retries a client can make. This is the default value
+    #       if no retry mode is provided.
     #
     #     * `adaptive` - A retry mode that includes all the functionality of
     #       `standard` mode along with automatic client side throttling.
@@ -499,9 +500,9 @@ module Aws::EventBridgeV2
     #   Name of an event bus. The first character must be alphanumeric; the
     #   remaining characters may also include '.', '-', and '\_'. The
     #   grammar matches the name segment of EventBusArn
-    #   (event-busv2/<name>/<id>), so every valid name can be represented in
-    #   the bus's ARN. The same type is used everywhere a bus name
-    #   appears.</p> </id></name>
+    #   (event-busv2/&lt;name&gt;/&lt;id&gt;), so every valid name can be
+    #   represented in the bus's ARN. The same type is used everywhere a bus
+    #   name appears.
     #
     # @option params [String] :description
     #   Free-text description. Used by every resource type that has one: event
@@ -574,16 +575,18 @@ module Aws::EventBridgeV2
     end
 
     # Creates an EventSource, which forwards events from an origin (an AWS
-    # service or another account) onto an event bus. The bus must be ACTIVE.
-    # Retries carrying the same ClientToken are idempotent.
+    # service, a partner, or a third-party webhook provider) to an event
+    # bus. The event bus must be in the ACTIVE state. This operation is
+    # idempotent: retries that use the same ClientToken return the same
+    # result.
     #
     # @option params [required, String] :name
     #   EventSource name. First character alphanumeric; the rest may add
     #   '.', '-', '\_'. Names may not begin with the reserved "aws."
     #   prefix. The grammar matches the ARN local-name segment in
-    #   EventSourceArn (event-sourcev2/<type>/<name>/<id>), mirroring
-    #   EventBusName, so a name the ARN cannot represent cannot be
-    #   created.</p> </id></name></type>
+    #   EventSourceArn (event-sourcev2/&lt;type&gt;/&lt;name&gt;/&lt;id&gt;),
+    #   mirroring EventBusName, so a name the ARN cannot represent cannot be
+    #   created.
     #
     # @option params [required, String] :event_bus_arn
     #   The Amazon Resource Name (ARN) that uniquely identifies an event bus.
@@ -613,6 +616,7 @@ module Aws::EventBridgeV2
     #   * {Types::CreateEventSourceResponse#name #name} => String
     #   * {Types::CreateEventSourceResponse#event_bus_arn #event_bus_arn} => String
     #   * {Types::CreateEventSourceResponse#state #state} => String
+    #   * {Types::CreateEventSourceResponse#event_source_details #event_source_details} => Types::EventSourceDetails
     #   * {Types::CreateEventSourceResponse#creation_time #creation_time} => Time
     #
     # @example Request syntax with placeholder values
@@ -636,6 +640,42 @@ module Aws::EventBridgeV2
     #           arn: "DeadLetterQueueArn",
     #         },
     #       },
+    #       webhook_events_configuration: {
+    #         auth_configuration: { # required
+    #           static_token_auth_configuration: {
+    #             token_http_header: "WebhookHeaderName", # required
+    #             secret_value: "WebhookSecretValue",
+    #           },
+    #           basic_http_auth_configuration: {
+    #             username: "WebhookUsername",
+    #             password: "WebhookSecretValue",
+    #           },
+    #           hmac_auth_configuration: {
+    #             algorithm: "SHA256", # required, accepts SHA256, SHA1
+    #             encoding: "HEX", # required, accepts HEX, BASE64
+    #             signature_http_header: "WebhookHeaderName", # required
+    #             signature_prefix: "WebhookSignaturePrefix",
+    #             delimiter: "WebhookDelimiter",
+    #             timestamp_http_header: "WebhookHeaderName",
+    #             timestamp_prefix: "WebhookTimestampPrefix",
+    #             timestamp_tolerance_in_seconds: 1,
+    #             message_id_http_header: "WebhookHeaderName",
+    #             signed_message_composition: "BODY", # required, accepts BODY, TIMESTAMP_DOT_BODY, MESSAGE_ID_DOT_TIMESTAMP_DOT_BODY
+    #             secret_value: "WebhookSecretValue",
+    #             secret_encoding: "RAW", # accepts RAW, BASE64
+    #           },
+    #         },
+    #         kms_key_identifier: "KmsKeyIdentifier",
+    #         role_arn: "RoleArn", # required
+    #         metadata_http_headers: ["WebhookMetadataHttpHeaderName"],
+    #         deduplication_configuration: {
+    #           deduplication_type: "CONTENT_BASED", # required, accepts CONTENT_BASED
+    #         },
+    #         log_configuration: {
+    #           level: "OFF", # accepts OFF, ERROR, INFO
+    #           include_payload: "FULL", # accepts FULL, ON_ERROR_ONLY
+    #         },
+    #       },
     #     },
     #     description: "Description",
     #     tags: {
@@ -650,6 +690,8 @@ module Aws::EventBridgeV2
     #   resp.name #=> String
     #   resp.event_bus_arn #=> String
     #   resp.state #=> String, one of "CREATING", "ACTIVE", "UPDATING", "CREATE_FAILED", "UPDATE_FAILED", "DELETING", "DELETE_FAILED"
+    #   resp.event_source_details.webhook_details.webhook_url #=> String
+    #   resp.event_source_details.webhook_details.secret_arn #=> String
     #   resp.creation_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridgev2-2025-05-15/CreateEventSource AWS API Documentation
@@ -663,7 +705,10 @@ module Aws::EventBridgeV2
 
     # Creates a subscriber on an event bus, which delivers matching events
     # to the configured target. The bus must be ACTIVE. Retries carrying the
-    # same ClientToken are idempotent.
+    # same ClientToken are idempotent. A subscriber that targets an Amazon
+    # MSK cluster provisions its connectivity asynchronously after this call
+    # returns and begins delivering when its ConnectivityState reaches
+    # ACTIVE (see the MskSubscriberActive waiter).
     #
     # @option params [required, String] :name
     #   Name of a subscriber. The first character must be alphanumeric; the
@@ -706,9 +751,7 @@ module Aws::EventBridgeV2
     #   Batching configuration for a subscriber.
     #
     # @option params [Types::Transformer] :transformer
-    #   Not applicable to universal (aws-sdk) targets, whose input
-    #   transformation is UniversalTargetParameters.Input; a Transformer on
-    #   such a target is rejected.
+    #   Transformer configuration for a subscriber.
     #
     # @option params [Types::RetryPolicy] :retry_policy
     #   Retry policy for a subscriber.
@@ -747,6 +790,7 @@ module Aws::EventBridgeV2
     #   * {Types::CreateSubscriberResponse#point_in_time_configuration #point_in_time_configuration} => Types::PointInTimeConfiguration
     #   * {Types::CreateSubscriberResponse#state #state} => String
     #   * {Types::CreateSubscriberResponse#creation_time #creation_time} => Time
+    #   * {Types::CreateSubscriberResponse#subscriber_details #subscriber_details} => Types::SubscriberDetails
     #
     # @example Request syntax with placeholder values
     #
@@ -830,6 +874,20 @@ module Aws::EventBridgeV2
     #           deduplication_type: "CONTENT_BASED", # required, accepts CONTENT_BASED
     #         },
     #       },
+    #       msk_parameters: {
+    #         topic_name: "MskTopicName", # required
+    #         compression: "NONE", # accepts NONE, GZIP, SNAPPY, LZ4, ZSTD
+    #         acks: "ALL", # accepts ALL, LEADER
+    #         partition_key: "MskParametersPartitionKeyString",
+    #         headers: [
+    #           {
+    #             key: "MskHeaderKeyString", # required
+    #             value: "MskHeaderValueString",
+    #           },
+    #         ],
+    #         client_id: "MskClientId",
+    #         connectivity: "PUBLIC", # required, accepts PUBLIC, PRIVATE
+    #       },
     #       target_arn: "TargetResourceArn", # required
     #     },
     #     description: "Description",
@@ -890,6 +948,9 @@ module Aws::EventBridgeV2
     #   resp.point_in_time_configuration.end_point #=> Time
     #   resp.state #=> String, one of "RUNNING", "STOPPED"
     #   resp.creation_time #=> Time
+    #   resp.subscriber_details.msk_details.connectivity_state #=> String, one of "PROVISIONING", "PROVISION_FAILED", "ACTIVE"
+    #   resp.subscriber_details.msk_details.state_reason #=> String
+    #   resp.subscriber_details.msk_details.vpc_connection_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridgev2-2025-05-15/CreateSubscriber AWS API Documentation
     #
@@ -927,11 +988,11 @@ module Aws::EventBridgeV2
     # Deletes an EventSource. Forwarding from its origin stops.
     #
     # @option params [required, String] :event_source_arn
-    #   EventSource ARN: event-sourcev2/<type>/<name>/<id>. The type segment
-    #   is set by the service (aws.service for AWS service events, aws.partner
-    #   for partner events) and is not part of the resource's name. The id
-    #   segment is a 25-character identifier generated by the service.</p>
-    #   </id></name></type>
+    #   EventSource ARN: event-sourcev2/&lt;type&gt;/&lt;name&gt;/&lt;id&gt;.
+    #   The type segment is set by the service (aws.service for AWS service
+    #   events, aws.partner for partner events, webhook for webhook events)
+    #   and is not part of the resource's name. The id segment is a
+    #   25-character identifier generated by the service.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -958,11 +1019,12 @@ module Aws::EventBridgeV2
     # @option params [String] :policy_name
     #   Which named policy to delete. Defaults to "default" when omitted (a
     #   delete AWS Resource Access Manager makes on the owner's behalf
-    #   resolves to "AWS\_RAM" instead). The two writers are exclusive in both
-    #   directions — only Resource Access Manager can delete "AWS\_RAM", and
-    #   only the bus owner can delete "default" — so naming the other party's
-    #   policy fails with AccessDeniedException. A well-formed name that is
-    #   neither of the two fails with InvalidInputException.
+    #   resolves to "AWS\_RAM" instead). The two writers are exclusive in
+    #   both directions — only Resource Access Manager can delete
+    #   "AWS\_RAM", and only the bus owner can delete "default" — so
+    #   naming the other party's policy fails with AccessDeniedException. A
+    #   well-formed name that is neither of the two fails with
+    #   InvalidInputException.
     #
     # @option params [String] :expected_revision_id
     #   The delete succeeds only if the named policy's current revision ID
@@ -1076,11 +1138,11 @@ module Aws::EventBridgeV2
     # Returns the full configuration and lifecycle state of an EventSource.
     #
     # @option params [required, String] :event_source_arn
-    #   EventSource ARN: event-sourcev2/<type>/<name>/<id>. The type segment
-    #   is set by the service (aws.service for AWS service events, aws.partner
-    #   for partner events) and is not part of the resource's name. The id
-    #   segment is a 25-character identifier generated by the service.</p>
-    #   </id></name></type>
+    #   EventSource ARN: event-sourcev2/&lt;type&gt;/&lt;name&gt;/&lt;id&gt;.
+    #   The type segment is set by the service (aws.service for AWS service
+    #   events, aws.partner for partner events, webhook for webhook events)
+    #   and is not part of the resource's name. The id segment is a
+    #   25-character identifier generated by the service.
     #
     # @return [Types::DescribeEventSourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1091,6 +1153,7 @@ module Aws::EventBridgeV2
     #   * {Types::DescribeEventSourceResponse#description #description} => String
     #   * {Types::DescribeEventSourceResponse#state #state} => String
     #   * {Types::DescribeEventSourceResponse#revoked #revoked} => Boolean
+    #   * {Types::DescribeEventSourceResponse#event_source_details #event_source_details} => Types::EventSourceDetails
     #   * {Types::DescribeEventSourceResponse#creation_time #creation_time} => Time
     #   * {Types::DescribeEventSourceResponse#last_modified_time #last_modified_time} => Time
     #
@@ -1112,9 +1175,34 @@ module Aws::EventBridgeV2
     #   resp.configuration.partner_events_configuration.pattern #=> String
     #   resp.configuration.partner_events_configuration.partner_bus_kms_key_identifier #=> String
     #   resp.configuration.partner_events_configuration.on_failure_configuration.arn #=> String
+    #   resp.configuration.webhook_events_configuration.auth_configuration.static_token_auth_configuration.token_http_header #=> String
+    #   resp.configuration.webhook_events_configuration.auth_configuration.static_token_auth_configuration.secret_value #=> String
+    #   resp.configuration.webhook_events_configuration.auth_configuration.basic_http_auth_configuration.username #=> String
+    #   resp.configuration.webhook_events_configuration.auth_configuration.basic_http_auth_configuration.password #=> String
+    #   resp.configuration.webhook_events_configuration.auth_configuration.hmac_auth_configuration.algorithm #=> String, one of "SHA256", "SHA1"
+    #   resp.configuration.webhook_events_configuration.auth_configuration.hmac_auth_configuration.encoding #=> String, one of "HEX", "BASE64"
+    #   resp.configuration.webhook_events_configuration.auth_configuration.hmac_auth_configuration.signature_http_header #=> String
+    #   resp.configuration.webhook_events_configuration.auth_configuration.hmac_auth_configuration.signature_prefix #=> String
+    #   resp.configuration.webhook_events_configuration.auth_configuration.hmac_auth_configuration.delimiter #=> String
+    #   resp.configuration.webhook_events_configuration.auth_configuration.hmac_auth_configuration.timestamp_http_header #=> String
+    #   resp.configuration.webhook_events_configuration.auth_configuration.hmac_auth_configuration.timestamp_prefix #=> String
+    #   resp.configuration.webhook_events_configuration.auth_configuration.hmac_auth_configuration.timestamp_tolerance_in_seconds #=> Integer
+    #   resp.configuration.webhook_events_configuration.auth_configuration.hmac_auth_configuration.message_id_http_header #=> String
+    #   resp.configuration.webhook_events_configuration.auth_configuration.hmac_auth_configuration.signed_message_composition #=> String, one of "BODY", "TIMESTAMP_DOT_BODY", "MESSAGE_ID_DOT_TIMESTAMP_DOT_BODY"
+    #   resp.configuration.webhook_events_configuration.auth_configuration.hmac_auth_configuration.secret_value #=> String
+    #   resp.configuration.webhook_events_configuration.auth_configuration.hmac_auth_configuration.secret_encoding #=> String, one of "RAW", "BASE64"
+    #   resp.configuration.webhook_events_configuration.kms_key_identifier #=> String
+    #   resp.configuration.webhook_events_configuration.role_arn #=> String
+    #   resp.configuration.webhook_events_configuration.metadata_http_headers #=> Array
+    #   resp.configuration.webhook_events_configuration.metadata_http_headers[0] #=> String
+    #   resp.configuration.webhook_events_configuration.deduplication_configuration.deduplication_type #=> String, one of "CONTENT_BASED"
+    #   resp.configuration.webhook_events_configuration.log_configuration.level #=> String, one of "OFF", "ERROR", "INFO"
+    #   resp.configuration.webhook_events_configuration.log_configuration.include_payload #=> String, one of "FULL", "ON_ERROR_ONLY"
     #   resp.description #=> String
     #   resp.state #=> String, one of "CREATING", "ACTIVE", "UPDATING", "CREATE_FAILED", "UPDATE_FAILED", "DELETING", "DELETE_FAILED"
     #   resp.revoked #=> Boolean
+    #   resp.event_source_details.webhook_details.webhook_url #=> String
+    #   resp.event_source_details.webhook_details.secret_arn #=> String
     #   resp.creation_time #=> Time
     #   resp.last_modified_time #=> Time
     #
@@ -1152,6 +1240,7 @@ module Aws::EventBridgeV2
     #   * {Types::DescribeSubscriberResponse#revoked #revoked} => Boolean
     #   * {Types::DescribeSubscriberResponse#creation_time #creation_time} => Time
     #   * {Types::DescribeSubscriberResponse#last_modified_time #last_modified_time} => Time
+    #   * {Types::DescribeSubscriberResponse#subscriber_details #subscriber_details} => Types::SubscriberDetails
     #
     # @example Request syntax with placeholder values
     #
@@ -1209,6 +1298,15 @@ module Aws::EventBridgeV2
     #   resp.invoke_configuration.event_bus_v2_parameters.system_metadata.event_group_id #=> String
     #   resp.invoke_configuration.event_bus_v2_parameters.system_metadata.deduplication_id #=> String
     #   resp.invoke_configuration.event_bus_v2_parameters.deduplication_configuration.deduplication_type #=> String, one of "CONTENT_BASED"
+    #   resp.invoke_configuration.msk_parameters.topic_name #=> String
+    #   resp.invoke_configuration.msk_parameters.compression #=> String, one of "NONE", "GZIP", "SNAPPY", "LZ4", "ZSTD"
+    #   resp.invoke_configuration.msk_parameters.acks #=> String, one of "ALL", "LEADER"
+    #   resp.invoke_configuration.msk_parameters.partition_key #=> String
+    #   resp.invoke_configuration.msk_parameters.headers #=> Array
+    #   resp.invoke_configuration.msk_parameters.headers[0].key #=> String
+    #   resp.invoke_configuration.msk_parameters.headers[0].value #=> String
+    #   resp.invoke_configuration.msk_parameters.client_id #=> String
+    #   resp.invoke_configuration.msk_parameters.connectivity #=> String, one of "PUBLIC", "PRIVATE"
     #   resp.invoke_configuration.target_arn #=> String
     #   resp.description #=> String
     #   resp.filter_configuration.language #=> String, one of "EVENT_BRIDGE_PATTERN"
@@ -1234,6 +1332,14 @@ module Aws::EventBridgeV2
     #   resp.revoked #=> Boolean
     #   resp.creation_time #=> Time
     #   resp.last_modified_time #=> Time
+    #   resp.subscriber_details.msk_details.connectivity_state #=> String, one of "PROVISIONING", "PROVISION_FAILED", "ACTIVE"
+    #   resp.subscriber_details.msk_details.state_reason #=> String
+    #   resp.subscriber_details.msk_details.vpc_connection_arn #=> String
+    #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
+    #
+    #   * msk_subscriber_active
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridgev2-2025-05-15/DescribeSubscriber AWS API Documentation
     #
@@ -1252,10 +1358,10 @@ module Aws::EventBridgeV2
     #   The Amazon Resource Name (ARN) that uniquely identifies an event bus.
     #
     # @option params [String] :policy_name
-    #   Which named policy to read. Defaults to "default" when omitted (a read
-    #   AWS Resource Access Manager makes on the owner's behalf resolves to
-    #   "AWS\_RAM" instead). Unlike writing, neither name is reserved on a
-    #   read: the bus owner can read both. There is no fallback between the
+    #   Which named policy to read. Defaults to "default" when omitted (a
+    #   read AWS Resource Access Manager makes on the owner's behalf resolves
+    #   to "AWS\_RAM" instead). Unlike writing, neither name is reserved on
+    #   a read: the bus owner can read both. There is no fallback between the
     #   two, so a bus shared only through Resource Access Manager fails with
     #   ResourceNotFoundException until "AWS\_RAM" is named explicitly. A
     #   well-formed name that is neither of the two fails with
@@ -1301,9 +1407,9 @@ module Aws::EventBridgeV2
     #   Name of an event bus. The first character must be alphanumeric; the
     #   remaining characters may also include '.', '-', and '\_'. The
     #   grammar matches the name segment of EventBusArn
-    #   (event-busv2/<name>/<id>), so every valid name can be represented in
-    #   the bus's ARN. The same type is used everywhere a bus name
-    #   appears.</p> </id></name>
+    #   (event-busv2/&lt;name&gt;/&lt;id&gt;), so every valid name can be
+    #   represented in the bus's ARN. The same type is used everywhere a bus
+    #   name appears.
     #
     # @option params [String] :event_bus_account_id
     #   AWS Account Id.
@@ -1364,9 +1470,9 @@ module Aws::EventBridgeV2
     #   EventSource name. First character alphanumeric; the rest may add
     #   '.', '-', '\_'. Names may not begin with the reserved "aws."
     #   prefix. The grammar matches the ARN local-name segment in
-    #   EventSourceArn (event-sourcev2/<type>/<name>/<id>), mirroring
-    #   EventBusName, so a name the ARN cannot represent cannot be
-    #   created.</p> </id></name></type>
+    #   EventSourceArn (event-sourcev2/&lt;type&gt;/&lt;name&gt;/&lt;id&gt;),
+    #   mirroring EventBusName, so a name the ARN cannot represent cannot be
+    #   created.
     #
     # @option params [String] :next_token
     #   Opaque pagination token returned by a List operation. Pass it back in
@@ -1397,7 +1503,7 @@ module Aws::EventBridgeV2
     #   resp.event_sources[0].event_source_arn #=> String
     #   resp.event_sources[0].name #=> String
     #   resp.event_sources[0].event_bus_arn #=> String
-    #   resp.event_sources[0].type #=> String, one of "AWS_SERVICE_EVENTS", "PARTNER_EVENTS"
+    #   resp.event_sources[0].type #=> String, one of "AWS_SERVICE_EVENTS", "PARTNER_EVENTS", "WEBHOOK_EVENTS"
     #   resp.event_sources[0].state #=> String, one of "CREATING", "ACTIVE", "UPDATING", "CREATE_FAILED", "UPDATE_FAILED", "DELETING", "DELETE_FAILED"
     #   resp.event_sources[0].revoked #=> Boolean
     #   resp.event_sources[0].creation_time #=> Time
@@ -1550,6 +1656,12 @@ module Aws::EventBridgeV2
 
     # Publishes events to an event bus.
     #
+    # The total size of all event entries in a request must not exceed 1 MB
+    # (1,048,576 bytes). The limit applies to the request as a whole, not to
+    # individual entries. If you exceed the limit, the request fails with
+    # `InvalidInputException` and the service publishes none of the entries
+    # in the request.
+    #
     # @option params [required, String] :event_bus_arn
     #   The Amazon Resource Name (ARN) that uniquely identifies an event bus.
     #
@@ -1607,6 +1719,15 @@ module Aws::EventBridgeV2
     end
 
     # Publishes pre-shaped events to an event bus.
+    #
+    # The total size of all event entries in a request must not exceed 1 MB
+    # (1,048,576 bytes), including the `Data` payload and the keys and
+    # values of `Metadata` for each entry. The limit applies to the request
+    # as a whole, not to individual entries.
+    #
+    # If you exceed the limit, the request fails with
+    # `InvalidInputException`, and the service doesn't publish any of the
+    # entries in the request.
     #
     # @option params [required, String] :event_bus_arn
     #   The Amazon Resource Name (ARN) that uniquely identifies an event bus.
@@ -1679,10 +1800,10 @@ module Aws::EventBridgeV2
     # Attaches a named resource policy to an event bus — the only resource
     # type that supports policies; other resource ARNs are rejected. Each
     # bus holds two named policies: "default" (customer-managed, full IAM
-    # policy language including Deny) and "AWS\_RAM" (written exclusively by
-    # AWS Resource Access Manager to reflect resource shares). Both policies
-    # are evaluated on cross-account authorization; an explicit Deny in
-    # either overrides an Allow in the other. Operations that omit
+    # policy language including Deny) and "AWS\_RAM" (written exclusively
+    # by AWS Resource Access Manager to reflect resource shares). Both
+    # policies are evaluated on cross-account authorization; an explicit
+    # Deny in either overrides an Allow in the other. Operations that omit
     # PolicyName target "default". A "default" policy that would grant
     # public access is rejected with PublicPolicyException and is not
     # attached; this check is always on and cannot be disabled.
@@ -1691,19 +1812,16 @@ module Aws::EventBridgeV2
     #   The Amazon Resource Name (ARN) that uniquely identifies an event bus.
     #
     # @option params [required, String] :policy_document
-    #   A resource policy document, as a JSON string. The "default" policy can
-    #   be up to 20 KB (20,480 bytes of UTF-8) by default. This quota is
-    #   adjustable in Service Quotas. A "default" policy that exceeds the
-    #   quota is rejected with PolicyLengthExceededException. No policy
-    #   document can exceed 389,120 bytes of UTF-8, regardless of the quota.
+    #   A resource policy document, as a JSON string. The maximum size is
+    #   389,120 bytes of UTF-8; the byte limit is enforced by the service.
     #
     # @option params [String] :policy_name
     #   Which named policy to write. Defaults to "default", the
     #   customer-managed policy, when omitted (a write AWS Resource Access
-    #   Manager makes on the owner's behalf resolves to "AWS\_RAM" instead).
-    #   The two writers are exclusive in both directions — only Resource
-    #   Access Manager can write "AWS\_RAM", and only the bus owner can write
-    #   "default" — so naming the other party's policy fails with
+    #   Manager makes on the owner's behalf resolves to "AWS\_RAM"
+    #   instead). The two writers are exclusive in both directions — only
+    #   Resource Access Manager can write "AWS\_RAM", and only the bus owner
+    #   can write "default" — so naming the other party's policy fails with
     #   AccessDeniedException. A well-formed name that is neither of the two
     #   fails with InvalidInputException.
     #
@@ -1778,6 +1896,103 @@ module Aws::EventBridgeV2
     # @param [Hash] params ({})
     def revoke_resource(params = {}, options = {})
       req = build_request(:revoke_resource, params)
+      req.send_request(options)
+    end
+
+    # Sets a new credential on a webhook EventSource. If you supply
+    # Credential, EventBridge uses that value. Otherwise, EventBridge
+    # generates one. For HTTP Basic authentication, only the password
+    # changes. The username does not change. EventBridge never returns the
+    # credential. To read a generated value, call
+    # secretsmanager:GetSecretValue on the secret that SecretArn identifies.
+    #
+    # You can rotate the credential of an EventSource in the ACTIVE,
+    # UPDATING, or UPDATE\_FAILED state. For a revoked EventSource or an
+    # EventSource in any other state, EventBridge returns
+    # InvalidStateException. EventBridge also returns InvalidStateException
+    # if the secret of the EventSource is scheduled for deletion or has been
+    # deleted.
+    #
+    # If you rotate the credential of one EventSource too many times in 24
+    # hours, EventBridge returns LimitExceededException. Retry later. The
+    # limit becomes available again automatically.
+    #
+    # If AWS Secrets Manager throttles the call, EventBridge returns
+    # ThrottlingException. Retry later.
+    #
+    # To use this operation, you must have the following permissions in your
+    # IAM policy:
+    #
+    # * secretsmanager:PutSecretValue on the secret of the EventSource
+    #
+    # * secretsmanager:GetSecretValue on the secret of the EventSource, for
+    #   HTTP Basic authentication only
+    #
+    # * kms:GenerateDataKey and kms:Decrypt on the AWS KMS key that encrypts
+    #   the secret
+    #
+    # The resource policy of the secret must not deny the secretsmanager
+    # actions.
+    #
+    # EventBridge accepts the new credential when this call returns. In rare
+    # cases, the new credential takes up to 2 minutes to reach every
+    # EventBridge endpoint.
+    #
+    # EventBridge also accepts the previous credential for 15 minutes after
+    # the rotation. The window ends at the CreatedDate of the AWSCURRENT
+    # secret version plus 15 minutes. Only the credential that the most
+    # recent rotation replaced stays valid. If you rotate again within 15
+    # minutes, the older credential stops working immediately.
+    #
+    # A retry with the same ClientToken within 8 hours returns the same
+    # result and does not rotate again. A retry of a rotation that supplied
+    # a value can arrive after a later rotation completed. In that case, the
+    # retried value becomes the current credential, and the credential it
+    # replaces does not stay valid.
+    #
+    # @option params [required, String] :event_source_arn
+    #   The ARN of the webhook EventSource.
+    #
+    # @option params [Types::WebhookCredential] :credential
+    #   The new credential. Set the member that matches the authentication
+    #   type of the EventSource. If you set a member that does not match the
+    #   authentication type, EventBridge returns InvalidInputException. If you
+    #   omit Credential, EventBridge generates a value.
+    #
+    # @option params [String] :client_token
+    #   Unique, case-sensitive identifier that ensures the idempotency of the
+    #   request. The SDK generates one automatically when the field is
+    #   omitted.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::RotateWebhookCredentialsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::RotateWebhookCredentialsResponse#secret_arn #secret_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.rotate_webhook_credentials({
+    #     event_source_arn: "WebhookEventSourceArn", # required
+    #     credential: {
+    #       static_token_secret_value: "WebhookSecretValue",
+    #       basic_http_password: "WebhookSecretValue",
+    #       hmac_secret_value: "WebhookSecretValue",
+    #     },
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.secret_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridgev2-2025-05-15/RotateWebhookCredentials AWS API Documentation
+    #
+    # @overload rotate_webhook_credentials(params = {})
+    # @param [Hash] params ({})
+    def rotate_webhook_credentials(params = {}, options = {})
+      req = build_request(:rotate_webhook_credentials, params)
       req.send_request(options)
     end
 
@@ -1903,11 +2118,11 @@ module Aws::EventBridgeV2
     # unchanged.
     #
     # @option params [required, String] :event_source_arn
-    #   EventSource ARN: event-sourcev2/<type>/<name>/<id>. The type segment
-    #   is set by the service (aws.service for AWS service events, aws.partner
-    #   for partner events) and is not part of the resource's name. The id
-    #   segment is a 25-character identifier generated by the service.</p>
-    #   </id></name></type>
+    #   EventSource ARN: event-sourcev2/&lt;type&gt;/&lt;name&gt;/&lt;id&gt;.
+    #   The type segment is set by the service (aws.service for AWS service
+    #   events, aws.partner for partner events, webhook for webhook events)
+    #   and is not part of the resource's name. The id segment is a
+    #   25-character identifier generated by the service.
     #
     # @option params [Types::EventSourceConfiguration] :configuration
     #   Discriminated EventSource configuration. Exactly one variant must be
@@ -1945,6 +2160,42 @@ module Aws::EventBridgeV2
     #           arn: "DeadLetterQueueArn",
     #         },
     #       },
+    #       webhook_events_configuration: {
+    #         auth_configuration: { # required
+    #           static_token_auth_configuration: {
+    #             token_http_header: "WebhookHeaderName", # required
+    #             secret_value: "WebhookSecretValue",
+    #           },
+    #           basic_http_auth_configuration: {
+    #             username: "WebhookUsername",
+    #             password: "WebhookSecretValue",
+    #           },
+    #           hmac_auth_configuration: {
+    #             algorithm: "SHA256", # required, accepts SHA256, SHA1
+    #             encoding: "HEX", # required, accepts HEX, BASE64
+    #             signature_http_header: "WebhookHeaderName", # required
+    #             signature_prefix: "WebhookSignaturePrefix",
+    #             delimiter: "WebhookDelimiter",
+    #             timestamp_http_header: "WebhookHeaderName",
+    #             timestamp_prefix: "WebhookTimestampPrefix",
+    #             timestamp_tolerance_in_seconds: 1,
+    #             message_id_http_header: "WebhookHeaderName",
+    #             signed_message_composition: "BODY", # required, accepts BODY, TIMESTAMP_DOT_BODY, MESSAGE_ID_DOT_TIMESTAMP_DOT_BODY
+    #             secret_value: "WebhookSecretValue",
+    #             secret_encoding: "RAW", # accepts RAW, BASE64
+    #           },
+    #         },
+    #         kms_key_identifier: "KmsKeyIdentifier",
+    #         role_arn: "RoleArn", # required
+    #         metadata_http_headers: ["WebhookMetadataHttpHeaderName"],
+    #         deduplication_configuration: {
+    #           deduplication_type: "CONTENT_BASED", # required, accepts CONTENT_BASED
+    #         },
+    #         log_configuration: {
+    #           level: "OFF", # accepts OFF, ERROR, INFO
+    #           include_payload: "FULL", # accepts FULL, ON_ERROR_ONLY
+    #         },
+    #       },
     #     },
     #     description: "Description",
     #   })
@@ -1967,7 +2218,10 @@ module Aws::EventBridgeV2
     end
 
     # Updates a subscriber. Fields omitted from the request are left
-    # unchanged.
+    # unchanged. Changing an Amazon MSK subscriber's connectivity can
+    # re-provision it; when it does, the subscriber resumes delivering once
+    # its ConnectivityState returns to ACTIVE (see the MskSubscriberActive
+    # waiter).
     #
     # @option params [required, String] :subscriber_arn
     #   The Amazon Resource Name (ARN) that uniquely identifies a subscriber.
@@ -2006,9 +2260,7 @@ module Aws::EventBridgeV2
     #   Batching configuration for a subscriber.
     #
     # @option params [Types::Transformer] :transformer
-    #   Not applicable to universal (aws-sdk) targets, whose input
-    #   transformation is UniversalTargetParameters.Input; a Transformer on
-    #   such a target is rejected.
+    #   Transformer configuration for a subscriber.
     #
     # @option params [Types::RetryPolicy] :retry_policy
     #   Retry policy for a subscriber.
@@ -2030,6 +2282,7 @@ module Aws::EventBridgeV2
     #   * {Types::UpdateSubscriberResponse#point_in_time_configuration #point_in_time_configuration} => Types::PointInTimeConfiguration
     #   * {Types::UpdateSubscriberResponse#state #state} => String
     #   * {Types::UpdateSubscriberResponse#last_modified_time #last_modified_time} => Time
+    #   * {Types::UpdateSubscriberResponse#subscriber_details #subscriber_details} => Types::SubscriberDetails
     #
     # @example Request syntax with placeholder values
     #
@@ -2115,6 +2368,20 @@ module Aws::EventBridgeV2
     #           deduplication_type: "CONTENT_BASED", # required, accepts CONTENT_BASED
     #         },
     #       },
+    #       msk_parameters: {
+    #         topic_name: "MskTopicName", # required
+    #         compression: "NONE", # accepts NONE, GZIP, SNAPPY, LZ4, ZSTD
+    #         acks: "ALL", # accepts ALL, LEADER
+    #         partition_key: "MskParametersPartitionKeyString",
+    #         headers: [
+    #           {
+    #             key: "MskHeaderKeyString", # required
+    #             value: "MskHeaderValueString",
+    #           },
+    #         ],
+    #         client_id: "MskClientId",
+    #         connectivity: "PUBLIC", # required, accepts PUBLIC, PRIVATE
+    #       },
     #     },
     #     filter_configuration: {
     #       language: "EVENT_BRIDGE_PATTERN", # accepts EVENT_BRIDGE_PATTERN
@@ -2161,6 +2428,9 @@ module Aws::EventBridgeV2
     #   resp.point_in_time_configuration.end_point #=> Time
     #   resp.state #=> String, one of "RUNNING", "STOPPED"
     #   resp.last_modified_time #=> Time
+    #   resp.subscriber_details.msk_details.connectivity_state #=> String, one of "PROVISIONING", "PROVISION_FAILED", "ACTIVE"
+    #   resp.subscriber_details.msk_details.state_reason #=> String
+    #   resp.subscriber_details.msk_details.vpc_connection_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridgev2-2025-05-15/UpdateSubscriber AWS API Documentation
     #
@@ -2189,7 +2459,7 @@ module Aws::EventBridgeV2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-eventbridgev2'
-      context[:gem_version] = '1.5.0'
+      context[:gem_version] = '1.13.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
@@ -2255,10 +2525,11 @@ module Aws::EventBridgeV2
     # The following table lists the valid waiter names, the operations they call,
     # and the default `:delay` and `:max_attempts` values.
     #
-    # | waiter_name       | params                      | :delay   | :max_attempts |
-    # | ----------------- | --------------------------- | -------- | ------------- |
-    # | event_bus_active  | {Client#describe_event_bus} | 2        | 60            |
-    # | event_bus_deleted | {Client#describe_event_bus} | 2        | 60            |
+    # | waiter_name           | params                       | :delay   | :max_attempts |
+    # | --------------------- | ---------------------------- | -------- | ------------- |
+    # | event_bus_active      | {Client#describe_event_bus}  | 2        | 60            |
+    # | event_bus_deleted     | {Client#describe_event_bus}  | 2        | 60            |
+    # | msk_subscriber_active | {Client#describe_subscriber} | 2        | 150           |
     #
     # @raise [Errors::FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition
@@ -2310,7 +2581,8 @@ module Aws::EventBridgeV2
     def waiters
       {
         event_bus_active: Waiters::EventBusActive,
-        event_bus_deleted: Waiters::EventBusDeleted
+        event_bus_deleted: Waiters::EventBusDeleted,
+        msk_subscriber_active: Waiters::MskSubscriberActive
       }
     end
 

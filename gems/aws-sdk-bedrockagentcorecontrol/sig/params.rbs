@@ -99,6 +99,9 @@ module Aws
       private_endpoint_overrides: Array[
         Params::private_endpoint_override
       ]?,
+      certificate_configurations: Array[
+        Params::certificate_configuration
+      ]?,
       allowed_workload_configuration: {
         hosting_environments: Array[
           {
@@ -130,6 +133,33 @@ module Aws
       private_endpoint: Params::private_endpoint
     }
 
+      type certificate_configuration = {
+      s3: {
+        uri: ::String,
+        bucket_owner_account_id: ::String?
+      }?,
+      secrets_manager: {
+        secret_arn: ::String
+      }?
+    }
+
+      type lifecycle_hook = {
+      action: {
+        http_post: {
+          path: ::String,
+          port: ::Integer?
+        }?
+      }
+    }
+
+      type build_lifecycle_hooks = {
+      warmup: Params::lifecycle_hook?
+    }
+
+      type runtime_hooks_configuration = {
+      build: Params::build_lifecycle_hooks?
+    }
+
       type filesystem_configuration = {
       session_storage: {
         mount_path: ::String
@@ -145,6 +175,22 @@ module Aws
       capacity_provider_volume: {
         volume_name: ::String,
         mount_path: ::String
+      }?,
+      s3_bucket_mount: {
+        bucket: ::String,
+        mount_path: ::String,
+        prefix: ::String?,
+        s3_bucket_owner: ::String?,
+        s3_bucket_region: ::String?
+      }?
+    }
+
+      type capacity_provider_configuration = {
+      capacity_provider_arn: ::String,
+      operating_system_configuration: {
+        linux: {
+          privilege_mode: ("STANDARD" | "PRIVILEGED")?
+        }?
       }?
     }
 
@@ -286,7 +332,11 @@ module Aws
         }?
       },
       interception_points: Array[("REQUEST" | "RESPONSE")],
-      input_configuration: Params::interceptor_input_configuration?
+      input_configuration: Params::interceptor_input_configuration?,
+      response_interception_mode: ("BUFFERED" | "STREAM")?,
+      response_streaming_configuration: {
+        max_events_per_invocation: ::Integer?
+      }?
     }
 
       type match_principals = {
@@ -621,16 +671,6 @@ module Aws
       credential_provider: Params::credential_provider?
     }
 
-      type certificate_configuration = {
-      s3: {
-        uri: ::String,
-        bucket_owner_account_id: ::String?
-      }?,
-      secrets_manager: {
-        secret_arn: ::String
-      }?
-    }
-
       type harness_agent_core_runtime_environment_request = {
       lifecycle_configuration: {
         idle_runtime_session_timeout: ::Integer?,
@@ -697,6 +737,21 @@ module Aws
       lite_llm_model_config: Params::harness_lite_llm_model_config?
     }
 
+      type harness_remote_mcp_outbound_auth = {
+      aws_iam: {
+        service: ::String,
+        region: ::String?
+      }?,
+      none: {
+      }?
+    }
+
+      type harness_remote_mcp_config = {
+      url: ::String,
+      headers: Hash[::String, ::String]?,
+      outbound_auth: Params::harness_remote_mcp_outbound_auth?
+    }
+
       type harness_gateway_outbound_auth = {
       aws_iam: {
       }?,
@@ -717,10 +772,7 @@ module Aws
     }
 
       type harness_tool_configuration = {
-      remote_mcp: {
-        url: ::String,
-        headers: Hash[::String, ::String]?
-      }?,
+      remote_mcp: Params::harness_remote_mcp_config?,
       agent_core_browser: {
         browser_arn: ::String?
       }?,
@@ -1098,6 +1150,9 @@ module Aws
       private_endpoint: Params::private_endpoint?,
       private_endpoint_overrides: Array[
         Params::private_endpoint_override
+      ]?,
+      certificate_configurations: Array[
+        Params::certificate_configuration
       ]?
     }
 
@@ -1225,6 +1280,9 @@ module Aws
       }?,
       stripe_privy: {
         credential_provider_arn: ::String
+      }?,
+      aws_billing: {
+        iam_role_arn: ::String
       }?
     }
 

@@ -34,6 +34,12 @@ module Aws::NetworkFirewall
       SENSITIVE: []
     end
 
+    class AddressTranslations
+      attr_accessor public_i_pv_6_addresses: ::Array[::String]
+      attr_accessor public_i_pv_4_addresses: ::Array[::String]
+      SENSITIVE: []
+    end
+
     class AnalysisReport
       attr_accessor analysis_report_id: ::String
       attr_accessor analysis_type: ("TLS_SNI" | "HTTP_HOST")
@@ -64,6 +70,7 @@ module Aws::NetworkFirewall
       attr_accessor firewall_arn: ::String
       attr_accessor firewall_name: ::String
       attr_accessor availability_zone_mappings: ::Array[Types::AvailabilityZoneMapping]
+      attr_accessor firewall_type: ("FIREWALL" | "IGW_FIREWALL")
       SENSITIVE: []
     end
 
@@ -80,6 +87,7 @@ module Aws::NetworkFirewall
       attr_accessor firewall_arn: ::String
       attr_accessor firewall_name: ::String
       attr_accessor firewall_policy_arn: ::String
+      attr_accessor firewall_type: ("FIREWALL" | "IGW_FIREWALL")
       SENSITIVE: []
     end
 
@@ -96,6 +104,7 @@ module Aws::NetworkFirewall
       attr_accessor firewall_arn: ::String
       attr_accessor firewall_name: ::String
       attr_accessor subnet_mappings: ::Array[Types::SubnetMapping]
+      attr_accessor nat_gateway_create_mappings: ::Array[Types::NatGatewayCreateMapping]
       SENSITIVE: []
     end
 
@@ -107,24 +116,10 @@ module Aws::NetworkFirewall
       SENSITIVE: []
     end
 
-    class AttachRuleGroupsToProxyConfigurationRequest
-      attr_accessor proxy_configuration_name: ::String
-      attr_accessor proxy_configuration_arn: ::String
-      attr_accessor rule_groups: ::Array[Types::ProxyRuleGroupAttachment]
-      attr_accessor update_token: ::String
-      SENSITIVE: []
-    end
-
-    class AttachRuleGroupsToProxyConfigurationResponse
-      attr_accessor proxy_configuration: Types::ProxyConfiguration
-      attr_accessor update_token: ::String
-      SENSITIVE: []
-    end
-
     class Attachment
       attr_accessor subnet_id: ::String
       attr_accessor endpoint_id: ::String
-      attr_accessor status: ("CREATING" | "DELETING" | "FAILED" | "ERROR" | "SCALING" | "READY")
+      attr_accessor status: ("CREATING" | "DELETING" | "FAILED" | "ERROR" | "SCALING" | "READY" | "STANDBY")
       attr_accessor status_message: ::String
       attr_accessor dns_name: ::String
       SENSITIVE: []
@@ -176,6 +171,29 @@ module Aws::NetworkFirewall
       SENSITIVE: []
     end
 
+    class ContextFilters
+      attr_accessor region: ::String
+      attr_accessor resource_type: ("SecurityGroup" | "VPC" | "Subnet" | "TGWAttachment")
+      SENSITIVE: []
+    end
+
+    class ContextSet
+      attr_accessor definition: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ContextStore
+      attr_accessor context_store_id: ::String
+      attr_accessor context_store_owner_account_id: ::String
+      SENSITIVE: []
+    end
+
+    class ContextStoreSyncState
+      attr_accessor sync_status: ("SYNCING" | "PARTIALLY_RESOLVED" | "FULLY_RESOLVED" | "SYNC_FAILED" | "UNRESOLVED")
+      attr_accessor status_message: ::String
+      SENSITIVE: []
+    end
+
     class CreateContainerAssociationRequest
       attr_accessor container_association_name: ::String
       attr_accessor description: ::String
@@ -213,6 +231,22 @@ module Aws::NetworkFirewall
       SENSITIVE: []
     end
 
+    class CreateFirewallPolicyV2Request
+      attr_accessor firewall_policy_v2_name: ::String
+      attr_accessor firewall_policy_v2: Types::FirewallPolicyV2
+      attr_accessor description: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor dry_run: bool
+      attr_accessor encryption_configuration: Types::EncryptionConfiguration
+      SENSITIVE: []
+    end
+
+    class CreateFirewallPolicyV2Response
+      attr_accessor update_token: ::String
+      attr_accessor firewall_policy_v2_response: Types::FirewallPolicyV2Response
+      SENSITIVE: []
+    end
+
     class CreateFirewallRequest
       attr_accessor firewall_name: ::String
       attr_accessor firewall_policy_arn: ::String
@@ -228,10 +262,11 @@ module Aws::NetworkFirewall
       attr_accessor transit_gateway_id: ::String
       attr_accessor availability_zone_mappings: ::Array[Types::AvailabilityZoneMapping]
       attr_accessor availability_zone_change_protection: bool
-      attr_accessor nat_gateway_mappings: ::Array[Types::NatGatewayMapping]
+      attr_accessor igw_firewall_configuration: Types::IgwFirewallConfiguration
+      attr_accessor nat_gateway_create_mappings: ::Array[Types::NatGatewayCreateMapping]
       attr_accessor proxy_settings: Types::ProxySettings
-      attr_accessor no_source_preservation: bool
       attr_accessor vpc_endpoint: Types::VpcEndpoint
+      attr_accessor transparent_filtering_nat_scope: ("NAT_ALL" | "NAT_NONE")
       SENSITIVE: []
     end
 
@@ -241,87 +276,13 @@ module Aws::NetworkFirewall
       SENSITIVE: []
     end
 
-    class CreateProxyConfigurationRequest
-      attr_accessor proxy_configuration_name: ::String
-      attr_accessor description: ::String
-      attr_accessor rule_group_names: ::Array[::String]
-      attr_accessor rule_group_arns: ::Array[::String]
-      attr_accessor default_rule_phase_actions: Types::ProxyConfigDefaultRulePhaseActionsRequest
-      attr_accessor tags: ::Array[Types::Tag]
-      SENSITIVE: []
-    end
-
-    class CreateProxyConfigurationResponse
-      attr_accessor proxy_configuration: Types::ProxyConfiguration
-      attr_accessor update_token: ::String
-      SENSITIVE: []
-    end
-
-    class CreateProxyRequest
-      attr_accessor proxy_name: ::String
-      attr_accessor nat_gateway_id: ::String
-      attr_accessor proxy_configuration_name: ::String
-      attr_accessor proxy_configuration_arn: ::String
-      attr_accessor listener_properties: ::Array[Types::ListenerPropertyRequest]
-      attr_accessor tls_intercept_properties: Types::TlsInterceptPropertiesRequest
-      attr_accessor tags: ::Array[Types::Tag]
-      SENSITIVE: []
-    end
-
-    class CreateProxyResponse
-      attr_accessor proxy: Types::Proxy
-      attr_accessor update_token: ::String
-      SENSITIVE: []
-    end
-
-    class CreateProxyRule
-      attr_accessor proxy_rule_name: ::String
-      attr_accessor description: ::String
-      attr_accessor action: ("ALLOW" | "DENY" | "ALERT")
-      attr_accessor conditions: ::Array[Types::ProxyRuleCondition]
-      attr_accessor insert_position: ::Integer
-      SENSITIVE: []
-    end
-
-    class CreateProxyRuleGroupRequest
-      attr_accessor proxy_rule_group_name: ::String
-      attr_accessor description: ::String
-      attr_accessor rules: Types::ProxyRulesByRequestPhase
-      attr_accessor tags: ::Array[Types::Tag]
-      SENSITIVE: []
-    end
-
-    class CreateProxyRuleGroupResponse
-      attr_accessor proxy_rule_group: Types::ProxyRuleGroup
-      attr_accessor update_token: ::String
-      SENSITIVE: []
-    end
-
-    class CreateProxyRulesByRequestPhase
-      attr_accessor pre_dns: ::Array[Types::CreateProxyRule]
-      attr_accessor pre_request: ::Array[Types::CreateProxyRule]
-      attr_accessor post_response: ::Array[Types::CreateProxyRule]
-      SENSITIVE: []
-    end
-
-    class CreateProxyRulesRequest
-      attr_accessor proxy_rule_group_arn: ::String
-      attr_accessor proxy_rule_group_name: ::String
-      attr_accessor rules: Types::CreateProxyRulesByRequestPhase
-      SENSITIVE: []
-    end
-
-    class CreateProxyRulesResponse
-      attr_accessor proxy_rule_group: Types::ProxyRuleGroup
-      attr_accessor update_token: ::String
-      SENSITIVE: []
-    end
-
     class CreateRuleGroupRequest
       attr_accessor rule_group_name: ::String
       attr_accessor rule_group: Types::RuleGroup
+      attr_accessor firewall_rule_group: Types::FirewallRuleGroup
+      attr_accessor ips_rule_group: Types::IpsRuleGroup
       attr_accessor rules: ::String
-      attr_accessor type: ("STATELESS" | "STATEFUL" | "STATEFUL_DOMAIN")
+      attr_accessor type: ("STATELESS" | "STATEFUL" | "STATEFUL_DOMAIN" | "FIREWALL" | "IPS")
       attr_accessor description: ::String
       attr_accessor capacity: ::Integer
       attr_accessor tags: ::Array[Types::Tag]
@@ -399,9 +360,22 @@ module Aws::NetworkFirewall
       SENSITIVE: []
     end
 
+    class DeleteFirewallPolicyV2Request
+      attr_accessor firewall_policy_v2_arn: ::String
+      attr_accessor firewall_policy_v2_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteFirewallPolicyV2Response
+      attr_accessor firewall_policy_v2_response: Types::FirewallPolicyV2Response
+      SENSITIVE: []
+    end
+
     class DeleteFirewallRequest
       attr_accessor firewall_name: ::String
       attr_accessor firewall_arn: ::String
+      attr_accessor firewall_type: ("FIREWALL" | "IGW_FIREWALL")
+      attr_accessor delete_associated_nat_gateways: bool
       SENSITIVE: []
     end
 
@@ -422,18 +396,6 @@ module Aws::NetworkFirewall
       SENSITIVE: []
     end
 
-    class DeleteProxyConfigurationRequest
-      attr_accessor proxy_configuration_name: ::String
-      attr_accessor proxy_configuration_arn: ::String
-      SENSITIVE: []
-    end
-
-    class DeleteProxyConfigurationResponse
-      attr_accessor proxy_configuration_name: ::String
-      attr_accessor proxy_configuration_arn: ::String
-      SENSITIVE: []
-    end
-
     class DeleteProxyRequest
       attr_accessor nat_gateway_id: ::String
       attr_accessor proxy_name: ::String
@@ -448,30 +410,6 @@ module Aws::NetworkFirewall
       SENSITIVE: []
     end
 
-    class DeleteProxyRuleGroupRequest
-      attr_accessor proxy_rule_group_name: ::String
-      attr_accessor proxy_rule_group_arn: ::String
-      SENSITIVE: []
-    end
-
-    class DeleteProxyRuleGroupResponse
-      attr_accessor proxy_rule_group_name: ::String
-      attr_accessor proxy_rule_group_arn: ::String
-      SENSITIVE: []
-    end
-
-    class DeleteProxyRulesRequest
-      attr_accessor proxy_rule_group_arn: ::String
-      attr_accessor proxy_rule_group_name: ::String
-      attr_accessor rules: ::Array[::String]
-      SENSITIVE: []
-    end
-
-    class DeleteProxyRulesResponse
-      attr_accessor proxy_rule_group: Types::ProxyRuleGroup
-      SENSITIVE: []
-    end
-
     class DeleteResourcePolicyRequest
       attr_accessor resource_arn: ::String
       SENSITIVE: []
@@ -483,7 +421,7 @@ module Aws::NetworkFirewall
     class DeleteRuleGroupRequest
       attr_accessor rule_group_name: ::String
       attr_accessor rule_group_arn: ::String
-      attr_accessor type: ("STATELESS" | "STATEFUL" | "STATEFUL_DOMAIN")
+      attr_accessor type: ("STATELESS" | "STATEFUL" | "STATEFUL_DOMAIN" | "FIREWALL" | "IPS")
       SENSITIVE: []
     end
 
@@ -543,7 +481,7 @@ module Aws::NetworkFirewall
       attr_accessor firewall_arn: ::String
       attr_accessor firewall_policy_arn: ::String
       attr_accessor description: ::String
-      attr_accessor status: ("PROVISIONING" | "DELETING" | "READY" | "FAILED")
+      attr_accessor status: ("PROVISIONING" | "DELETING" | "READY" | "FAILED" | "STANDBY")
       attr_accessor supported_availability_zones: ::Hash[::String, Types::AvailabilityZoneMetadata]
       attr_accessor transit_gateway_attachment_id: ::String
       SENSITIVE: []
@@ -562,9 +500,24 @@ module Aws::NetworkFirewall
       SENSITIVE: []
     end
 
+    class DescribeFirewallPolicyV2Request
+      attr_accessor firewall_policy_v2_arn: ::String
+      attr_accessor firewall_policy_v2_name: ::String
+      attr_accessor rule_output_format: ("FIREWALL_RULES" | "RULES_STRING")
+      SENSITIVE: []
+    end
+
+    class DescribeFirewallPolicyV2Response
+      attr_accessor update_token: ::String
+      attr_accessor firewall_policy_v2_response: Types::FirewallPolicyV2Response
+      attr_accessor firewall_policy_v2: Types::FirewallPolicyV2
+      SENSITIVE: []
+    end
+
     class DescribeFirewallRequest
       attr_accessor firewall_name: ::String
       attr_accessor firewall_arn: ::String
+      attr_accessor firewall_type: ("FIREWALL" | "IGW_FIREWALL")
       SENSITIVE: []
     end
 
@@ -603,6 +556,7 @@ module Aws::NetworkFirewall
     class DescribeLoggingConfigurationRequest
       attr_accessor firewall_arn: ::String
       attr_accessor firewall_name: ::String
+      attr_accessor firewall_type: ("FIREWALL" | "IGW_FIREWALL")
       SENSITIVE: []
     end
 
@@ -610,18 +564,6 @@ module Aws::NetworkFirewall
       attr_accessor firewall_arn: ::String
       attr_accessor logging_configuration: Types::LoggingConfiguration
       attr_accessor enable_monitoring_dashboard: bool
-      SENSITIVE: []
-    end
-
-    class DescribeProxyConfigurationRequest
-      attr_accessor proxy_configuration_name: ::String
-      attr_accessor proxy_configuration_arn: ::String
-      SENSITIVE: []
-    end
-
-    class DescribeProxyConfigurationResponse
-      attr_accessor proxy_configuration: Types::ProxyConfiguration
-      attr_accessor update_token: ::String
       SENSITIVE: []
     end
 
@@ -658,31 +600,6 @@ module Aws::NetworkFirewall
       SENSITIVE: []
     end
 
-    class DescribeProxyRuleGroupRequest
-      attr_accessor proxy_rule_group_name: ::String
-      attr_accessor proxy_rule_group_arn: ::String
-      SENSITIVE: []
-    end
-
-    class DescribeProxyRuleGroupResponse
-      attr_accessor proxy_rule_group: Types::ProxyRuleGroup
-      attr_accessor update_token: ::String
-      SENSITIVE: []
-    end
-
-    class DescribeProxyRuleRequest
-      attr_accessor proxy_rule_name: ::String
-      attr_accessor proxy_rule_group_name: ::String
-      attr_accessor proxy_rule_group_arn: ::String
-      SENSITIVE: []
-    end
-
-    class DescribeProxyRuleResponse
-      attr_accessor proxy_rule: Types::ProxyRule
-      attr_accessor update_token: ::String
-      SENSITIVE: []
-    end
-
     class DescribeResourcePolicyRequest
       attr_accessor resource_arn: ::String
       SENSITIVE: []
@@ -696,7 +613,7 @@ module Aws::NetworkFirewall
     class DescribeRuleGroupMetadataRequest
       attr_accessor rule_group_name: ::String
       attr_accessor rule_group_arn: ::String
-      attr_accessor type: ("STATELESS" | "STATEFUL" | "STATEFUL_DOMAIN")
+      attr_accessor type: ("STATELESS" | "STATEFUL" | "STATEFUL_DOMAIN" | "FIREWALL" | "IPS")
       SENSITIVE: []
     end
 
@@ -704,7 +621,7 @@ module Aws::NetworkFirewall
       attr_accessor rule_group_arn: ::String
       attr_accessor rule_group_name: ::String
       attr_accessor description: ::String
-      attr_accessor type: ("STATELESS" | "STATEFUL" | "STATEFUL_DOMAIN")
+      attr_accessor type: ("STATELESS" | "STATEFUL" | "STATEFUL_DOMAIN" | "FIREWALL" | "IPS")
       attr_accessor capacity: ::Integer
       attr_accessor stateful_rule_options: Types::StatefulRuleOptions
       attr_accessor last_modified_time: ::Time
@@ -717,14 +634,17 @@ module Aws::NetworkFirewall
     class DescribeRuleGroupRequest
       attr_accessor rule_group_name: ::String
       attr_accessor rule_group_arn: ::String
-      attr_accessor type: ("STATELESS" | "STATEFUL" | "STATEFUL_DOMAIN")
+      attr_accessor type: ("STATELESS" | "STATEFUL" | "STATEFUL_DOMAIN" | "FIREWALL" | "IPS")
       attr_accessor analyze_rule_group: bool
+      attr_accessor rule_output_format: ("FIREWALL_RULES" | "RULES_STRING")
       SENSITIVE: []
     end
 
     class DescribeRuleGroupResponse
       attr_accessor update_token: ::String
       attr_accessor rule_group: Types::RuleGroup
+      attr_accessor firewall_rule_group: Types::FirewallRuleGroup
+      attr_accessor ips_rule_group: Types::IpsRuleGroup
       attr_accessor rule_group_response: Types::RuleGroupResponse
       SENSITIVE: []
     end
@@ -732,7 +652,7 @@ module Aws::NetworkFirewall
     class DescribeRuleGroupSummaryRequest
       attr_accessor rule_group_name: ::String
       attr_accessor rule_group_arn: ::String
-      attr_accessor type: ("STATELESS" | "STATEFUL" | "STATEFUL_DOMAIN")
+      attr_accessor type: ("STATELESS" | "STATEFUL" | "STATEFUL_DOMAIN" | "FIREWALL" | "IPS")
       SENSITIVE: []
     end
 
@@ -767,21 +687,6 @@ module Aws::NetworkFirewall
       SENSITIVE: []
     end
 
-    class DetachRuleGroupsFromProxyConfigurationRequest
-      attr_accessor proxy_configuration_name: ::String
-      attr_accessor proxy_configuration_arn: ::String
-      attr_accessor rule_group_names: ::Array[::String]
-      attr_accessor rule_group_arns: ::Array[::String]
-      attr_accessor update_token: ::String
-      SENSITIVE: []
-    end
-
-    class DetachRuleGroupsFromProxyConfigurationResponse
-      attr_accessor proxy_configuration: Types::ProxyConfiguration
-      attr_accessor update_token: ::String
-      SENSITIVE: []
-    end
-
     class Dimension
       attr_accessor value: ::String
       SENSITIVE: []
@@ -792,6 +697,7 @@ module Aws::NetworkFirewall
       attr_accessor firewall_arn: ::String
       attr_accessor firewall_name: ::String
       attr_accessor availability_zone_mappings: ::Array[Types::AvailabilityZoneMapping]
+      attr_accessor firewall_type: ("FIREWALL" | "IGW_FIREWALL")
       SENSITIVE: []
     end
 
@@ -816,6 +722,11 @@ module Aws::NetworkFirewall
       attr_accessor firewall_name: ::String
       attr_accessor subnet_mappings: ::Array[Types::SubnetMapping]
       attr_accessor update_token: ::String
+      SENSITIVE: []
+    end
+
+    class DomainMatch
+      attr_accessor domains: ::Array[::String]
       SENSITIVE: []
     end
 
@@ -844,10 +755,13 @@ module Aws::NetworkFirewall
       attr_accessor transit_gateway_owner_account_id: ::String
       attr_accessor availability_zone_mappings: ::Array[Types::AvailabilityZoneMapping]
       attr_accessor availability_zone_change_protection: bool
-      attr_accessor nat_gateway_mappings: ::Array[Types::NatGatewayMapping]
+      attr_accessor igw_firewall_configuration: Types::IgwFirewallConfiguration
+      attr_accessor nat_gateway_create_mappings: ::Array[Types::NatGatewayCreateMapping]
       attr_accessor proxy_settings: Types::ProxySettings
-      attr_accessor no_source_preservation: bool
       attr_accessor vpc_endpoint: Types::VpcEndpoint
+      attr_accessor context_store_id: ::String
+      attr_accessor context_store_owner_account_id: ::String
+      attr_accessor transparent_filtering_nat_scope: ("NAT_ALL" | "NAT_NONE")
       SENSITIVE: []
     end
 
@@ -904,12 +818,87 @@ module Aws::NetworkFirewall
       SENSITIVE: []
     end
 
+    class FirewallPolicyV2
+      attr_accessor firewall_rule_group_entries: ::Array[Types::FirewallRuleGroupEntry]
+      attr_accessor ips_rule_group_entries: ::Array[Types::IpsRuleGroupEntry]
+      attr_accessor policy_mode: ("ENFORCE" | "MONITOR")
+      attr_accessor firewall_default_action: ("DROP" | "ACCEPT" | "REJECT" | "ALERT")
+      attr_accessor stateful_engine_options: Types::StatefulEngineOptionsV2
+      attr_accessor tls_inspection_configuration_arn: ::String
+      attr_accessor policy_variables: Types::PolicyVariables
+      attr_accessor route_53_resolved_ip_validation: Types::Route53ResolvedIPValidation
+      SENSITIVE: []
+    end
+
+    class FirewallPolicyV2Metadata
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class FirewallPolicyV2Response
+      attr_accessor firewall_policy_v2_name: ::String
+      attr_accessor firewall_policy_v2_arn: ::String
+      attr_accessor firewall_policy_v2_id: ::String
+      attr_accessor description: ::String
+      attr_accessor firewall_policy_v2_status: ("ACTIVE" | "DELETING" | "ERROR" | "UPDATING")
+      attr_accessor status_message: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor consumed_firewall_rule_capacity: ::Integer
+      attr_accessor consumed_ips_rule_capacity: ::Integer
+      attr_accessor consumed_ips_domain_capacity: ::Integer
+      attr_accessor number_of_associations: ::Integer
+      attr_accessor encryption_configuration: Types::EncryptionConfiguration
+      attr_accessor errors: ::Array[Types::FirewallPolicyError]
+      attr_accessor last_modified_time: ::Time
+      SENSITIVE: []
+    end
+
+    class FirewallRule
+      attr_accessor action: ("ACCEPT" | "DROP" | "REJECT" | "REJECT_DST" | "REJECT_BOTH")
+      attr_accessor action_scope: ("FLOW" | "TX" | "HOOK" | "PACKET")
+      attr_accessor hook: ("TCP_ALL" | "TCP_FLOW_START" | "TCP_PRE_FLOW" | "TCP_PRE_STREAM" | "SCTP_ALL" | "SCTP_FLOW_START" | "SCTP_PRE_FLOW" | "SCTP_PRE_STREAM" | "IPV6_ALL" | "IPV6_FLOW_START" | "IPV6_PRE_FLOW" | "IPV6_PRE_STREAM" | "ICMPV6_ALL" | "ICMPV6_FLOW_START" | "ICMPV6_PRE_FLOW" | "ICMPV6_PRE_STREAM" | "UDP_ALL" | "UDP_FLOW_START" | "UDP_PRE_FLOW" | "UDP_PRE_STREAM" | "ICMP_ALL" | "ICMP_FLOW_START" | "ICMP_PRE_FLOW" | "ICMP_PRE_STREAM" | "ICMPV4_ALL" | "ICMPV4_FLOW_START" | "ICMPV4_PRE_FLOW" | "ICMPV4_PRE_STREAM" | "IP_ALL" | "IP_FLOW_START" | "IP_PRE_FLOW" | "IP_PRE_STREAM" | "IPV4_ALL" | "IPV4_FLOW_START" | "IPV4_PRE_FLOW" | "IPV4_PRE_STREAM" | "TLS_CLIENT_STARTED" | "TLS_CLIENT_HELLO" | "TLS_CLIENT_CERT" | "TLS_CLIENT_DATA" | "TLS_CLIENT_FINISHED" | "TLS_SERVER_STARTED" | "TLS_SERVER_HELLO" | "TLS_SERVER_CERT" | "TLS_SERVER_DATA" | "TLS_SERVER_FINISHED" | "HTTP1_REQUEST_STARTED" | "HTTP1_REQUEST_LINE" | "HTTP1_REQUEST_HEADERS" | "HTTP1_REQUEST_BODY" | "HTTP1_REQUEST_TRAILER" | "HTTP1_REQUEST_COMPLETE" | "HTTP1_RESPONSE_STARTED" | "HTTP1_RESPONSE_LINE" | "HTTP1_RESPONSE_HEADERS" | "HTTP1_RESPONSE_BODY" | "HTTP1_RESPONSE_TRAILER" | "HTTP1_RESPONSE_COMPLETE" | "HTTP2_STREAM_REQUEST_STARTED" | "HTTP2_STREAM_REQUEST_HEADERS" | "HTTP2_STREAM_REQUEST_DATA" | "HTTP2_STREAM_REQUEST_CLOSED" | "HTTP2_STREAM_REQUEST_COMPLETE" | "HTTP2_STREAM_RESPONSE_STARTED" | "HTTP2_STREAM_RESPONSE_HEADERS" | "HTTP2_STREAM_RESPONSE_DATA" | "HTTP2_STREAM_RESPONSE_CLOSED" | "HTTP2_STREAM_RESPONSE_COMPLETE" | "HTTP2_GLOBAL_REQUEST_STARTED" | "HTTP2_GLOBAL_REQUEST_COMPLETE" | "HTTP2_GLOBAL_RESPONSE_STARTED" | "HTTP2_GLOBAL_RESPONSE_COMPLETE" | "DOH2_STREAM_REQUEST_STARTED" | "DOH2_STREAM_REQUEST_HEADERS" | "DOH2_STREAM_REQUEST_DATA" | "DOH2_STREAM_REQUEST_CLOSED" | "DOH2_STREAM_REQUEST_COMPLETE" | "DOH2_STREAM_RESPONSE_STARTED" | "DOH2_STREAM_RESPONSE_HEADERS" | "DOH2_STREAM_RESPONSE_DATA" | "DOH2_STREAM_RESPONSE_CLOSED" | "DOH2_STREAM_RESPONSE_COMPLETE" | "DOH2_GLOBAL_REQUEST_STARTED" | "DOH2_GLOBAL_REQUEST_COMPLETE" | "DOH2_GLOBAL_RESPONSE_STARTED" | "DOH2_GLOBAL_RESPONSE_COMPLETE" | "DNS_REQUEST_STARTED" | "DNS_REQUEST_COMPLETE" | "DNS_RESPONSE_STARTED" | "DNS_RESPONSE_COMPLETE" | "SMTP_REQUEST_STARTED" | "SMTP_REQUEST_DATA" | "SMTP_REQUEST_COMPLETE" | "SMTP_RESPONSE_STARTED" | "SMTP_RESPONSE_DATA" | "SMTP_RESPONSE_COMPLETE" | "FTP_REQUEST_STARTED" | "FTP_REQUEST_COMPLETE" | "FTP_RESPONSE_STARTED" | "FTP_RESPONSE_COMPLETE" | "FTP_DATA_REQUEST_STARTED" | "FTP_DATA_REQUEST_COMPLETE" | "FTP_DATA_RESPONSE_STARTED" | "FTP_DATA_RESPONSE_COMPLETE" | "SMB_REQUEST_STARTED" | "SMB_REQUEST_COMPLETE" | "SMB_RESPONSE_STARTED" | "SMB_RESPONSE_COMPLETE" | "DCERPC_REQUEST_STARTED" | "DCERPC_REQUEST_COMPLETE" | "DCERPC_RESPONSE_STARTED" | "DCERPC_RESPONSE_COMPLETE" | "NFS_REQUEST_STARTED" | "NFS_REQUEST_COMPLETE" | "NFS_RESPONSE_STARTED" | "NFS_RESPONSE_COMPLETE" | "KRB5_REQUEST_STARTED" | "KRB5_REQUEST_COMPLETE" | "KRB5_RESPONSE_STARTED" | "KRB5_RESPONSE_COMPLETE" | "IKE_REQUEST_STARTED" | "IKE_REQUEST_COMPLETE" | "IKE_RESPONSE_STARTED" | "IKE_RESPONSE_COMPLETE" | "TFTP_REQUEST_STARTED" | "TFTP_REQUEST_COMPLETE" | "TFTP_RESPONSE_STARTED" | "TFTP_RESPONSE_COMPLETE" | "DHCP_REQUEST_STARTED" | "DHCP_REQUEST_COMPLETE" | "DHCP_RESPONSE_STARTED" | "DHCP_RESPONSE_COMPLETE" | "QUIC_REQUEST_STARTED" | "QUIC_REQUEST_COMPLETE" | "QUIC_RESPONSE_STARTED" | "QUIC_RESPONSE_COMPLETE" | "RDP_REQUEST_STARTED" | "RDP_REQUEST_COMPLETE" | "RDP_RESPONSE_STARTED" | "RDP_RESPONSE_COMPLETE" | "RFB_REQUEST_STARTED" | "RFB_REQUEST_COMPLETE" | "RFB_RESPONSE_STARTED" | "RFB_RESPONSE_COMPLETE" | "MQTT_REQUEST_STARTED" | "MQTT_REQUEST_COMPLETE" | "MQTT_RESPONSE_STARTED" | "MQTT_RESPONSE_COMPLETE" | "PGSQL_REQUEST_STARTED" | "PGSQL_REQUEST_COMPLETE" | "PGSQL_RESPONSE_STARTED" | "PGSQL_RESPONSE_COMPLETE" | "SNMP_REQUEST_STARTED" | "SNMP_REQUEST_COMPLETE" | "SNMP_RESPONSE_STARTED" | "SNMP_RESPONSE_COMPLETE" | "NTP_REQUEST_STARTED" | "NTP_REQUEST_COMPLETE" | "NTP_RESPONSE_STARTED" | "NTP_RESPONSE_COMPLETE" | "TELNET_REQUEST_STARTED" | "TELNET_REQUEST_COMPLETE" | "TELNET_RESPONSE_STARTED" | "TELNET_RESPONSE_COMPLETE" | "WEBSOCKET_REQUEST_STARTED" | "WEBSOCKET_REQUEST_COMPLETE" | "WEBSOCKET_RESPONSE_STARTED" | "WEBSOCKET_RESPONSE_COMPLETE" | "LDAP_REQUEST_STARTED" | "LDAP_REQUEST_COMPLETE" | "LDAP_RESPONSE_STARTED" | "LDAP_RESPONSE_COMPLETE" | "POP3_REQUEST_STARTED" | "POP3_REQUEST_COMPLETE" | "POP3_RESPONSE_STARTED" | "POP3_RESPONSE_COMPLETE" | "MDNS_REQUEST_STARTED" | "MDNS_REQUEST_COMPLETE" | "MDNS_RESPONSE_STARTED" | "MDNS_RESPONSE_COMPLETE" | "BITTORRENT_DHT_REQUEST_STARTED" | "BITTORRENT_DHT_REQUEST_COMPLETE" | "BITTORRENT_DHT_RESPONSE_STARTED" | "BITTORRENT_DHT_RESPONSE_COMPLETE" | "DNP3_REQUEST_STARTED" | "DNP3_REQUEST_COMPLETE" | "DNP3_RESPONSE_STARTED" | "DNP3_RESPONSE_COMPLETE" | "SSH_REQUEST_IN_PROGRESS" | "SSH_REQUEST_BANNER_WAIT_EOL" | "SSH_REQUEST_BANNER_DONE" | "SSH_REQUEST_FINISHED" | "SSH_RESPONSE_IN_PROGRESS" | "SSH_RESPONSE_BANNER_WAIT_EOL" | "SSH_RESPONSE_BANNER_DONE" | "SSH_RESPONSE_FINISHED")
+      attr_accessor protocol: ("IP" | "TCP" | "UDP" | "ICMP" | "HTTP" | "FTP" | "TLS" | "SMB" | "DNS" | "DCERPC" | "SSH" | "SMTP" | "MSN" | "KRB5" | "IKEV2" | "TFTP" | "NTP" | "DHCP" | "HTTP2" | "QUIC" | "ICMPV4" | "ICMPV6" | "SCTP" | "IPV4" | "IPV6" | "DOH2" | "FTP_DATA" | "NFS" | "RDP" | "RFB" | "MQTT" | "PGSQL" | "SNMP" | "TELNET" | "WEBSOCKET" | "LDAP" | "POP3" | "MDNS" | "BITTORRENT_DHT" | "DNP3")
+      attr_accessor source_i_ps: ::String
+      attr_accessor dest_i_ps: ::String
+      attr_accessor source_ports: ::String
+      attr_accessor dest_ports: ::String
+      attr_accessor rule_options: ::Array[Types::RuleOption]
+      attr_accessor accept_prior_hooks: bool
+      attr_accessor alert_enabled: bool
+      attr_accessor bypass_ips_enabled: bool
+      attr_accessor rule_metadata: Types::RuleMetadata
+      SENSITIVE: []
+    end
+
+    class FirewallRuleGroup
+      attr_accessor rules_source: Types::FirewallRulesSource
+      attr_accessor rule_variables: Types::RuleVariables
+      attr_accessor reference_sets: Types::ReferenceSets
+      SENSITIVE: []
+    end
+
+    class FirewallRuleGroupEntry
+      attr_accessor priority: ::Integer
+      attr_accessor resource_arn: ::String
+      attr_accessor inline_rule_group: Types::FirewallRuleGroup
+      SENSITIVE: []
+    end
+
+    class FirewallRulesSource
+      attr_accessor rules_string: ::String
+      attr_accessor firewall_rules: ::Array[Types::FirewallRule]
+      attr_accessor rules_source_list: Types::RulesSourceList
+      SENSITIVE: []
+    end
+
     class FirewallStatus
-      attr_accessor status: ("PROVISIONING" | "DELETING" | "READY" | "FAILED")
+      attr_accessor status: ("PROVISIONING" | "DELETING" | "READY" | "FAILED" | "STANDBY")
       attr_accessor configuration_sync_state_summary: ("PENDING" | "IN_SYNC" | "CAPACITY_CONSTRAINED")
       attr_accessor sync_states: ::Hash[::String, Types::SyncState]
       attr_accessor capacity_usage_summary: Types::CapacityUsageSummary
       attr_accessor transit_gateway_attachment_sync_state: Types::TransitGatewayAttachmentSyncState
+      attr_accessor context_store_sync_state: Types::ContextStoreSyncState
       SENSITIVE: []
     end
 
@@ -1003,6 +992,11 @@ module Aws::NetworkFirewall
       SENSITIVE: []
     end
 
+    class IgwFirewallConfiguration
+      attr_accessor enforcement_mode: ("POLICY_CONTROLLED")
+      SENSITIVE: []
+    end
+
     class InsufficientCapacityException
       attr_accessor message: ::String
       SENSITIVE: []
@@ -1030,6 +1024,30 @@ module Aws::NetworkFirewall
 
     class InvalidTokenException
       attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class IpsRuleGroup
+      attr_accessor rules_source: Types::IpsRulesSource
+      attr_accessor rule_variables: Types::RuleVariables
+      attr_accessor reference_sets: Types::ReferenceSets
+      SENSITIVE: []
+    end
+
+    class IpsRuleGroupEntry
+      attr_accessor resource_arn: ::String
+      attr_accessor inline_rule_group: Types::IpsRuleGroup
+      attr_accessor override: Types::IpsRuleGroupOverride
+      SENSITIVE: []
+    end
+
+    class IpsRuleGroupOverride
+      attr_accessor action: ("DROP_TO_ALERT")
+      SENSITIVE: []
+    end
+
+    class IpsRulesSource
+      attr_accessor rules_string: ::String
       SENSITIVE: []
     end
 
@@ -1064,6 +1082,18 @@ module Aws::NetworkFirewall
       SENSITIVE: []
     end
 
+    class ListContextStoresRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListContextStoresResponse
+      attr_accessor next_token: ::String
+      attr_accessor context_stores: ::Array[Types::ContextStore]
+      SENSITIVE: []
+    end
+
     class ListFirewallPoliciesRequest
       attr_accessor next_token: ::String
       attr_accessor max_results: ::Integer
@@ -1076,10 +1106,23 @@ module Aws::NetworkFirewall
       SENSITIVE: []
     end
 
+    class ListFirewallPoliciesV2Request
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListFirewallPoliciesV2Response
+      attr_accessor next_token: ::String
+      attr_accessor firewall_policies_v2: ::Array[Types::FirewallPolicyV2Metadata]
+      SENSITIVE: []
+    end
+
     class ListFirewallsRequest
       attr_accessor next_token: ::String
       attr_accessor vpc_ids: ::Array[::String]
       attr_accessor max_results: ::Integer
+      attr_accessor firewall_type: ("FIREWALL" | "IGW_FIREWALL")
       SENSITIVE: []
     end
 
@@ -1134,38 +1177,16 @@ module Aws::NetworkFirewall
       SENSITIVE: []
     end
 
-    class ListProxiesRequest
-      attr_accessor next_token: ::String
+    class ListResourcesInContextStoreRequest
+      attr_accessor context_store_id: ::String
+      attr_accessor filters: Types::ContextFilters
       attr_accessor max_results: ::Integer
-      SENSITIVE: []
-    end
-
-    class ListProxiesResponse
-      attr_accessor proxies: ::Array[Types::ProxyMetadata]
       attr_accessor next_token: ::String
       SENSITIVE: []
     end
 
-    class ListProxyConfigurationsRequest
-      attr_accessor next_token: ::String
-      attr_accessor max_results: ::Integer
-      SENSITIVE: []
-    end
-
-    class ListProxyConfigurationsResponse
-      attr_accessor proxy_configurations: ::Array[Types::ProxyConfigurationMetadata]
-      attr_accessor next_token: ::String
-      SENSITIVE: []
-    end
-
-    class ListProxyRuleGroupsRequest
-      attr_accessor next_token: ::String
-      attr_accessor max_results: ::Integer
-      SENSITIVE: []
-    end
-
-    class ListProxyRuleGroupsResponse
-      attr_accessor proxy_rule_groups: ::Array[Types::ProxyRuleGroupMetadata]
+    class ListResourcesInContextStoreResponse
+      attr_accessor resource_contexts: ::Array[Types::ResourceContext]
       attr_accessor next_token: ::String
       SENSITIVE: []
     end
@@ -1176,7 +1197,7 @@ module Aws::NetworkFirewall
       attr_accessor scope: ("MANAGED" | "ACCOUNT")
       attr_accessor managed_type: ("AWS_MANAGED_THREAT_SIGNATURES" | "AWS_MANAGED_DOMAIN_LISTS" | "ACTIVE_THREAT_DEFENSE" | "PARTNER_MANAGED")
       attr_accessor subscription_status: ("NOT_SUBSCRIBED" | "SUBSCRIBED")
-      attr_accessor type: ("STATELESS" | "STATEFUL" | "STATEFUL_DOMAIN")
+      attr_accessor type: ("STATELESS" | "STATEFUL" | "STATEFUL_DOMAIN" | "FIREWALL" | "IPS")
       SENSITIVE: []
     end
 
@@ -1230,12 +1251,6 @@ module Aws::NetworkFirewall
       SENSITIVE: []
     end
 
-    class ListenerPropertyRequest
-      attr_accessor port: ::Integer
-      attr_accessor type: ("HTTP" | "HTTPS")
-      SENSITIVE: []
-    end
-
     class LogDestinationConfig
       attr_accessor log_type: ("ALERT" | "FLOW" | "TLS")
       attr_accessor log_destination_type: ("S3" | "CloudWatchLogs" | "KinesisDataFirehose")
@@ -1271,8 +1286,10 @@ module Aws::NetworkFirewall
       SENSITIVE: []
     end
 
-    class NatGatewayMapping
-      attr_accessor nat_gateway_id: ::String
+    class NatGatewayCreateMapping
+      attr_accessor subnet_id: ::String
+      attr_accessor allocation_ids: ::Array[::String]
+      attr_accessor private_ips: ::Array[::String]
       SENSITIVE: []
     end
 
@@ -1298,129 +1315,10 @@ module Aws::NetworkFirewall
       SENSITIVE: []
     end
 
-    class Proxy
-      attr_accessor create_time: ::Time
-      attr_accessor delete_time: ::Time
-      attr_accessor update_time: ::Time
-      attr_accessor failure_code: ::String
-      attr_accessor failure_message: ::String
-      attr_accessor proxy_state: ("ATTACHING" | "ATTACHED" | "DETACHING" | "DETACHED" | "ATTACH_FAILED" | "DETACH_FAILED")
-      attr_accessor proxy_modify_state: ("MODIFYING" | "COMPLETED" | "FAILED")
-      attr_accessor nat_gateway_id: ::String
-      attr_accessor proxy_configuration_name: ::String
-      attr_accessor proxy_configuration_arn: ::String
-      attr_accessor proxy_name: ::String
-      attr_accessor proxy_arn: ::String
-      attr_accessor listener_properties: ::Array[Types::ListenerProperty]
-      attr_accessor tls_intercept_properties: Types::TlsInterceptProperties
-      attr_accessor tags: ::Array[Types::Tag]
-      SENSITIVE: []
-    end
-
-    class ProxyConfigDefaultRulePhaseActionsRequest
-      attr_accessor pre_dns: ("ALLOW" | "DENY" | "ALERT")
-      attr_accessor pre_request: ("ALLOW" | "DENY" | "ALERT")
-      attr_accessor post_response: ("ALLOW" | "DENY" | "ALERT")
-      SENSITIVE: []
-    end
-
-    class ProxyConfigRuleGroup
-      attr_accessor proxy_rule_group_name: ::String
-      attr_accessor proxy_rule_group_arn: ::String
-      attr_accessor type: ::String
-      attr_accessor priority: ::Integer
-      SENSITIVE: []
-    end
-
-    class ProxyConfiguration
-      attr_accessor proxy_configuration_name: ::String
-      attr_accessor proxy_configuration_arn: ::String
-      attr_accessor description: ::String
-      attr_accessor create_time: ::Time
-      attr_accessor delete_time: ::Time
-      attr_accessor rule_groups: ::Array[Types::ProxyConfigRuleGroup]
-      attr_accessor default_rule_phase_actions: Types::ProxyConfigDefaultRulePhaseActionsRequest
-      attr_accessor tags: ::Array[Types::Tag]
-      SENSITIVE: []
-    end
-
-    class ProxyConfigurationMetadata
-      attr_accessor name: ::String
-      attr_accessor arn: ::String
-      SENSITIVE: []
-    end
-
-    class ProxyMetadata
-      attr_accessor name: ::String
-      attr_accessor arn: ::String
-      SENSITIVE: []
-    end
-
-    class ProxyRule
-      attr_accessor proxy_rule_name: ::String
-      attr_accessor description: ::String
-      attr_accessor action: ("ALLOW" | "DENY" | "ALERT")
-      attr_accessor conditions: ::Array[Types::ProxyRuleCondition]
-      SENSITIVE: []
-    end
-
-    class ProxyRuleCondition
-      attr_accessor condition_operator: ::String
-      attr_accessor condition_key: ::String
-      attr_accessor condition_values: ::Array[::String]
-      SENSITIVE: []
-    end
-
-    class ProxyRuleGroup
-      attr_accessor proxy_rule_group_name: ::String
-      attr_accessor proxy_rule_group_arn: ::String
-      attr_accessor create_time: ::Time
-      attr_accessor delete_time: ::Time
-      attr_accessor rules: Types::ProxyRulesByRequestPhase
-      attr_accessor description: ::String
-      attr_accessor tags: ::Array[Types::Tag]
-      SENSITIVE: []
-    end
-
-    class ProxyRuleGroupAttachment
-      attr_accessor proxy_rule_group_name: ::String
-      attr_accessor insert_position: ::Integer
-      SENSITIVE: []
-    end
-
-    class ProxyRuleGroupMetadata
-      attr_accessor name: ::String
-      attr_accessor arn: ::String
-      SENSITIVE: []
-    end
-
-    class ProxyRuleGroupPriority
-      attr_accessor proxy_rule_group_name: ::String
-      attr_accessor new_position: ::Integer
-      SENSITIVE: []
-    end
-
-    class ProxyRuleGroupPriorityResult
-      attr_accessor proxy_rule_group_name: ::String
-      attr_accessor priority: ::Integer
-      SENSITIVE: []
-    end
-
-    class ProxyRulePriority
-      attr_accessor proxy_rule_name: ::String
-      attr_accessor new_position: ::Integer
-      SENSITIVE: []
-    end
-
-    class ProxyRulesByRequestPhase
-      attr_accessor pre_dns: ::Array[Types::ProxyRule]
-      attr_accessor pre_request: ::Array[Types::ProxyRule]
-      attr_accessor post_response: ::Array[Types::ProxyRule]
-      SENSITIVE: []
-    end
-
     class ProxySettings
       attr_accessor listener_properties: ::Array[Types::ListenerProperty]
+      attr_accessor certificate_arn: ::String
+      attr_accessor domain_name: ::String
       SENSITIVE: []
     end
 
@@ -1451,6 +1349,15 @@ module Aws::NetworkFirewall
     class RejectNetworkFirewallTransitGatewayAttachmentResponse
       attr_accessor transit_gateway_attachment_id: ::String
       attr_accessor transit_gateway_attachment_status: ("CREATING" | "DELETING" | "DELETED" | "FAILED" | "ERROR" | "READY" | "PENDING_ACCEPTANCE" | "REJECTING" | "REJECTED")
+      SENSITIVE: []
+    end
+
+    class ResourceContext
+      attr_accessor context_type: ("ResourceId" | "SegmentId" | "Subnet" | "Attachment")
+      attr_accessor region: ::String
+      attr_accessor availability_zone: ::String
+      attr_accessor attachment_type: ::String
+      attr_accessor public_id: ::String
       SENSITIVE: []
     end
 
@@ -1499,7 +1406,7 @@ module Aws::NetworkFirewall
       attr_accessor rule_group_name: ::String
       attr_accessor rule_group_id: ::String
       attr_accessor description: ::String
-      attr_accessor type: ("STATELESS" | "STATEFUL" | "STATEFUL_DOMAIN")
+      attr_accessor type: ("STATELESS" | "STATEFUL" | "STATEFUL_DOMAIN" | "FIREWALL" | "IPS")
       attr_accessor capacity: ::Integer
       attr_accessor rule_group_status: ("ACTIVE" | "DELETING" | "ERROR" | "UPDATING")
       attr_accessor tags: ::Array[Types::Tag]
@@ -1511,6 +1418,12 @@ module Aws::NetworkFirewall
       attr_accessor last_modified_time: ::Time
       attr_accessor analysis_results: ::Array[Types::AnalysisResult]
       attr_accessor summary_configuration: Types::SummaryConfiguration
+      SENSITIVE: []
+    end
+
+    class RuleMetadata
+      attr_accessor rule_enabled: bool
+      attr_accessor rule_description: ::String
       SENSITIVE: []
     end
 
@@ -1530,6 +1443,7 @@ module Aws::NetworkFirewall
     class RuleVariables
       attr_accessor ip_sets: ::Hash[::String, Types::IPSet]
       attr_accessor port_sets: ::Hash[::String, Types::PortSet]
+      attr_accessor context_sets: ::Hash[::String, Types::ContextSet]
       SENSITIVE: []
     end
 
@@ -1558,6 +1472,7 @@ module Aws::NetworkFirewall
       attr_accessor scopes: ::Array[Types::ServerCertificateScope]
       attr_accessor certificate_authority_arn: ::String
       attr_accessor check_certificate_revocation_status: Types::CheckCertificateRevocationStatusActions
+      attr_accessor default_decryption_behavior: ("DECRYPT" | "BYPASS")
       SENSITIVE: []
     end
 
@@ -1567,6 +1482,9 @@ module Aws::NetworkFirewall
       attr_accessor source_ports: ::Array[Types::PortRange]
       attr_accessor destination_ports: ::Array[Types::PortRange]
       attr_accessor protocols: ::Array[::Integer]
+      attr_accessor domain_match: Types::DomainMatch
+      attr_accessor decryption_action: ("DECRYPT" | "BYPASS")
+      attr_accessor deployment_mode: ("TRANSPARENT_FIREWALL_ONLY" | "EXPLICIT_PROXY_ONLY" | "ALL")
       SENSITIVE: []
     end
 
@@ -1627,6 +1545,12 @@ module Aws::NetworkFirewall
     class StatefulEngineOptions
       attr_accessor rule_order: ("DEFAULT_ACTION_ORDER" | "STRICT_ORDER")
       attr_accessor stream_exception_policy: ("DROP" | "CONTINUE" | "REJECT")
+      attr_accessor flow_timeouts: Types::FlowTimeouts
+      SENSITIVE: []
+    end
+
+    class StatefulEngineOptionsV2
+      attr_accessor stream_exception_policy: ("DROP" | "REJECT")
       attr_accessor flow_timeouts: Types::FlowTimeouts
       SENSITIVE: []
     end
@@ -1693,6 +1617,7 @@ module Aws::NetworkFirewall
     class SyncState
       attr_accessor attachment: Types::Attachment
       attr_accessor config: ::Hash[::String, Types::PerObjectStatus]
+      attr_accessor address_translations: Types::AddressTranslations
       attr_accessor nat_gateway_attachments: ::Array[Types::NatGatewayAttachment]
       SENSITIVE: []
     end
@@ -1758,12 +1683,6 @@ module Aws::NetworkFirewall
     end
 
     class TlsInterceptProperties
-      attr_accessor pca_arn: ::String
-      attr_accessor tls_intercept_mode: ("ENABLED" | "DISABLED")
-      SENSITIVE: []
-    end
-
-    class TlsInterceptPropertiesRequest
       attr_accessor pca_arn: ::String
       attr_accessor tls_intercept_mode: ("ENABLED" | "DISABLED")
       SENSITIVE: []
@@ -1839,6 +1758,7 @@ module Aws::NetworkFirewall
       attr_accessor firewall_arn: ::String
       attr_accessor firewall_name: ::String
       attr_accessor update_token: ::String
+      attr_accessor firewall_type: ("FIREWALL" | "IGW_FIREWALL")
       SENSITIVE: []
     end
 
@@ -1855,6 +1775,7 @@ module Aws::NetworkFirewall
       attr_accessor firewall_arn: ::String
       attr_accessor firewall_name: ::String
       attr_accessor delete_protection: bool
+      attr_accessor firewall_type: ("FIREWALL" | "IGW_FIREWALL")
       SENSITIVE: []
     end
 
@@ -1871,6 +1792,7 @@ module Aws::NetworkFirewall
       attr_accessor firewall_arn: ::String
       attr_accessor firewall_name: ::String
       attr_accessor description: ::String
+      attr_accessor firewall_type: ("FIREWALL" | "IGW_FIREWALL")
       SENSITIVE: []
     end
 
@@ -1887,6 +1809,7 @@ module Aws::NetworkFirewall
       attr_accessor firewall_arn: ::String
       attr_accessor firewall_name: ::String
       attr_accessor encryption_configuration: Types::EncryptionConfiguration
+      attr_accessor firewall_type: ("FIREWALL" | "IGW_FIREWALL")
       SENSITIVE: []
     end
 
@@ -1903,6 +1826,7 @@ module Aws::NetworkFirewall
       attr_accessor firewall_arn: ::String
       attr_accessor firewall_name: ::String
       attr_accessor firewall_policy_change_protection: bool
+      attr_accessor firewall_type: ("FIREWALL" | "IGW_FIREWALL")
       SENSITIVE: []
     end
 
@@ -1931,9 +1855,27 @@ module Aws::NetworkFirewall
       SENSITIVE: []
     end
 
+    class UpdateFirewallPolicyV2Request
+      attr_accessor update_token: ::String
+      attr_accessor firewall_policy_v2_arn: ::String
+      attr_accessor firewall_policy_v2_name: ::String
+      attr_accessor firewall_policy_v2: Types::FirewallPolicyV2
+      attr_accessor description: ::String
+      attr_accessor dry_run: bool
+      attr_accessor encryption_configuration: Types::EncryptionConfiguration
+      SENSITIVE: []
+    end
+
+    class UpdateFirewallPolicyV2Response
+      attr_accessor update_token: ::String
+      attr_accessor firewall_policy_v2_response: Types::FirewallPolicyV2Response
+      SENSITIVE: []
+    end
+
     class UpdateLoggingConfigurationRequest
       attr_accessor firewall_arn: ::String
       attr_accessor firewall_name: ::String
+      attr_accessor firewall_type: ("FIREWALL" | "IGW_FIREWALL")
       attr_accessor logging_configuration: Types::LoggingConfiguration
       attr_accessor enable_monitoring_dashboard: bool
       SENSITIVE: []
@@ -1944,88 +1886,6 @@ module Aws::NetworkFirewall
       attr_accessor firewall_name: ::String
       attr_accessor logging_configuration: Types::LoggingConfiguration
       attr_accessor enable_monitoring_dashboard: bool
-      SENSITIVE: []
-    end
-
-    class UpdateProxyConfigurationRequest
-      attr_accessor proxy_configuration_name: ::String
-      attr_accessor proxy_configuration_arn: ::String
-      attr_accessor default_rule_phase_actions: Types::ProxyConfigDefaultRulePhaseActionsRequest
-      attr_accessor update_token: ::String
-      SENSITIVE: []
-    end
-
-    class UpdateProxyConfigurationResponse
-      attr_accessor proxy_configuration: Types::ProxyConfiguration
-      attr_accessor update_token: ::String
-      SENSITIVE: []
-    end
-
-    class UpdateProxyRequest
-      attr_accessor nat_gateway_id: ::String
-      attr_accessor proxy_name: ::String
-      attr_accessor proxy_arn: ::String
-      attr_accessor listener_properties_to_add: ::Array[Types::ListenerPropertyRequest]
-      attr_accessor listener_properties_to_remove: ::Array[Types::ListenerPropertyRequest]
-      attr_accessor tls_intercept_properties: Types::TlsInterceptPropertiesRequest
-      attr_accessor update_token: ::String
-      SENSITIVE: []
-    end
-
-    class UpdateProxyResponse
-      attr_accessor proxy: Types::Proxy
-      attr_accessor update_token: ::String
-      SENSITIVE: []
-    end
-
-    class UpdateProxyRuleGroupPrioritiesRequest
-      attr_accessor proxy_configuration_name: ::String
-      attr_accessor proxy_configuration_arn: ::String
-      attr_accessor rule_groups: ::Array[Types::ProxyRuleGroupPriority]
-      attr_accessor update_token: ::String
-      SENSITIVE: []
-    end
-
-    class UpdateProxyRuleGroupPrioritiesResponse
-      attr_accessor proxy_rule_groups: ::Array[Types::ProxyRuleGroupPriorityResult]
-      attr_accessor update_token: ::String
-      SENSITIVE: []
-    end
-
-    class UpdateProxyRulePrioritiesRequest
-      attr_accessor proxy_rule_group_name: ::String
-      attr_accessor proxy_rule_group_arn: ::String
-      attr_accessor rule_group_request_phase: ("PRE_DNS" | "PRE_REQ" | "POST_RES")
-      attr_accessor rules: ::Array[Types::ProxyRulePriority]
-      attr_accessor update_token: ::String
-      SENSITIVE: []
-    end
-
-    class UpdateProxyRulePrioritiesResponse
-      attr_accessor proxy_rule_group_name: ::String
-      attr_accessor proxy_rule_group_arn: ::String
-      attr_accessor rule_group_request_phase: ("PRE_DNS" | "PRE_REQ" | "POST_RES")
-      attr_accessor rules: ::Array[Types::ProxyRulePriority]
-      attr_accessor update_token: ::String
-      SENSITIVE: []
-    end
-
-    class UpdateProxyRuleRequest
-      attr_accessor proxy_rule_group_name: ::String
-      attr_accessor proxy_rule_group_arn: ::String
-      attr_accessor proxy_rule_name: ::String
-      attr_accessor description: ::String
-      attr_accessor action: ("ALLOW" | "DENY" | "ALERT")
-      attr_accessor add_conditions: ::Array[Types::ProxyRuleCondition]
-      attr_accessor remove_conditions: ::Array[Types::ProxyRuleCondition]
-      attr_accessor update_token: ::String
-      SENSITIVE: []
-    end
-
-    class UpdateProxyRuleResponse
-      attr_accessor proxy_rule: Types::ProxyRule
-      attr_accessor removed_conditions: ::Array[Types::ProxyRuleCondition]
-      attr_accessor update_token: ::String
       SENSITIVE: []
     end
 
@@ -2050,8 +1910,10 @@ module Aws::NetworkFirewall
       attr_accessor rule_group_arn: ::String
       attr_accessor rule_group_name: ::String
       attr_accessor rule_group: Types::RuleGroup
+      attr_accessor firewall_rule_group: Types::FirewallRuleGroup
+      attr_accessor ips_rule_group: Types::IpsRuleGroup
       attr_accessor rules: ::String
-      attr_accessor type: ("STATELESS" | "STATEFUL" | "STATEFUL_DOMAIN")
+      attr_accessor type: ("STATELESS" | "STATEFUL" | "STATEFUL_DOMAIN" | "FIREWALL" | "IPS")
       attr_accessor description: ::String
       attr_accessor dry_run: bool
       attr_accessor encryption_configuration: Types::EncryptionConfiguration
@@ -2122,7 +1984,7 @@ module Aws::NetworkFirewall
     end
 
     class VpcEndpointAssociationStatus
-      attr_accessor status: ("PROVISIONING" | "DELETING" | "READY" | "FAILED")
+      attr_accessor status: ("PROVISIONING" | "DELETING" | "READY" | "FAILED" | "STANDBY")
       attr_accessor association_sync_state: ::Hash[::String, Types::AZSyncState]
       SENSITIVE: []
     end

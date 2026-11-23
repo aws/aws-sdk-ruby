@@ -1,6 +1,46 @@
 Unreleased Changes
 ------------------
 
+1.142.0 (2026-11-19)
+------------------
+
+* Feature - Adds voice cloning to Amazon Polly. The new CreateVoice, GetVoice and DeleteVoice operations create and manage a custom voice from a speaker's recording, usable with the generative engine in all synthesis operations.
+
+1.141.0 (2026-11-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.140.0 (2026-11-16)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.139.0 (2026-11-11)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.138.0 (2026-11-10)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.137.0 (2026-11-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.136.0 (2026-11-06)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.135.0 (2026-11-04)
+------------------
+
+* Feature - Amazon Polly now supports tagging lexicons. Use the new TagResource, UntagResource and ListTagsForResource APIs, or add tags when creating a lexicon with PutLexicon, to organize lexicons and control access with tag-based (ABAC) IAM policies.
+
 1.134.0 (2026-10-29)
 ------------------
 

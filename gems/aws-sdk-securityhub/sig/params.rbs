@@ -798,6 +798,15 @@ module Aws
       azure_regions: Array[::String]
     }
 
+      type gcp_provider_configuration = {
+      aws_config_connector_arn: ::String,
+      scope_configuration: {
+        scope_type: ("PROJECT" | "ORGANIZATION"),
+        scope_values: Array[::String]?
+      },
+      gcp_regions: Array[::String]
+    }
+
       type aws_security_finding_filters = {
       product_arn: Array[
         {
@@ -1479,6 +1488,41 @@ module Aws
           string_filters: Array[
             {
               field_name: ("account_id" | "region" | "resource_type" | "resource_category" | "resource_cloud_provider" | "resource_region" | "resource_owner_id" | "resource_owner_organization_id")?,
+              filter: {
+                value: ::String?,
+                comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS" | "PREFIX_NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS" | "CONTAINS_WORD")?
+              }?
+            }
+          ]?,
+          nested_composite_filters: untyped?,
+          operator: ("AND" | "OR")?
+        }
+      ]?,
+      operator: ("AND" | "OR")?
+    }
+
+      type software_filters = {
+      composite_filters: Array[
+        Params::software_composite_filter
+      ]?,
+      composite_operator: ("AND" | "OR")?
+    }
+
+      type software_composite_filter = {
+      string_filters: Array[
+        {
+          field_name: ("AccountId" | "PackageName" | "PackageVersion" | "PackageType" | "Region" | "ResourceRegion" | "ResourceType" | "ResourceId" | "ResourceProvider" | "ResourceOwnerAccountId" | "ResourceOwnerOrgId" | "ResourceCloudPartition")?,
+          filter: {
+            value: ::String?,
+            comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS" | "PREFIX_NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS" | "CONTAINS_WORD")?
+          }?
+        }
+      ]?,
+      nested_composite_filters: Array[
+        {
+          string_filters: Array[
+            {
+              field_name: ("AccountId" | "PackageName" | "PackageVersion" | "PackageType" | "Region" | "ResourceRegion" | "ResourceType" | "ResourceId" | "ResourceProvider" | "ResourceOwnerAccountId" | "ResourceOwnerOrgId" | "ResourceCloudPartition")?,
               filter: {
                 value: ::String?,
                 comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS" | "PREFIX_NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS" | "CONTAINS_WORD")?

@@ -270,6 +270,7 @@ module Aws::ConnectCampaignsV2
     Campaign.add_member(:entry_limits_config, Shapes::ShapeRef.new(shape: EntryLimitsConfig, location_name: "entryLimitsConfig"))
     Campaign.add_member(:communication_time_config, Shapes::ShapeRef.new(shape: CommunicationTimeConfig, location_name: "communicationTimeConfig"))
     Campaign.add_member(:communication_limits_override, Shapes::ShapeRef.new(shape: CommunicationLimitsConfig, location_name: "communicationLimitsOverride"))
+    Campaign.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: TimeStamp, location_name: "lastModifiedTime"))
     Campaign.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     Campaign.struct_class = Types::Campaign
 
@@ -285,6 +286,7 @@ module Aws::ConnectCampaignsV2
     CampaignSummary.add_member(:schedule, Shapes::ShapeRef.new(shape: Schedule, location_name: "schedule"))
     CampaignSummary.add_member(:entry_limits_config, Shapes::ShapeRef.new(shape: EntryLimitsConfig, location_name: "entryLimitsConfig"))
     CampaignSummary.add_member(:connect_campaign_flow_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "connectCampaignFlowArn"))
+    CampaignSummary.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: TimeStamp, location_name: "lastModifiedTime"))
     CampaignSummary.struct_class = Types::CampaignSummary
 
     CampaignSummaryList.member = Shapes::ShapeRef.new(shape: CampaignSummary)

@@ -242,7 +242,7 @@ module Aws::HealthLake
       attr_accessor options: ::Array[::String]
       attr_accessor conversation_id: ::String
       attr_accessor event_type: untyped
-      SENSITIVE: [:final_response_message]
+      SENSITIVE: [:final_response_message, :options]
     end
 
     class ErrorCause

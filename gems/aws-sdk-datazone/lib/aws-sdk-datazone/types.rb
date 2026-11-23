@@ -1108,6 +1108,50 @@ module Aws::DataZone
       include Aws::Structure
     end
 
+    # The details of an asset ownership transfer.
+    #
+    # @!attribute [rw] status
+    #   The status of the ownership transfer. Valid values:
+    #
+    #   * `IN_PROGRESS` — The transfer is in progress. Requests that change
+    #     the asset or its listing fail until the transfer completes.
+    #
+    #   * `SUCCEEDED` — The transfer completed. The target project owns the
+    #     asset, its listing, and the subscriptions to the asset.
+    #
+    #   * `FAILED` — The transfer didn't complete, and the service rolled
+    #     back its changes. The source project owns the asset.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_project_id
+    #   The ID of the project that owned the asset when the transfer
+    #   started.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_project_id
+    #   The ID of the project that the asset is transferred to.
+    #   @return [String]
+    #
+    # @!attribute [rw] started_at
+    #   The timestamp of when the transfer started.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The timestamp of when the status of the transfer was last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/AssetOwnershipTransfer AWS API Documentation
+    #
+    class AssetOwnershipTransfer < Struct.new(
+      :status,
+      :source_project_id,
+      :target_project_id,
+      :started_at,
+      :updated_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The asset permissions.
     #
     # @!attribute [rw] asset_id
@@ -1525,11 +1569,19 @@ module Aws::DataZone
     #   The basic authentication credentials of a connection.
     #   @return [Types::BasicAuthenticationCredentials]
     #
+    # @!attribute [rw] o_auth_2_properties
+    #   The OAuth2 properties, such as the client application, grant type,
+    #   and token URL, that you want to update for a connection. Only the
+    #   properties that you specify are updated; the connection keeps its
+    #   existing values for the properties that you omit.
+    #   @return [Types::OAuth2PropertiesPatch]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/AuthenticationConfigurationPatch AWS API Documentation
     #
     class AuthenticationConfigurationPatch < Struct.new(
       :secret_arn,
-      :basic_authentication_credentials)
+      :basic_authentication_credentials,
+      :o_auth_2_properties)
       SENSITIVE = [:basic_authentication_credentials]
       include Aws::Structure
     end
@@ -3827,13 +3879,15 @@ module Aws::DataZone
     #   @return [String]
     #
     # @!attribute [rw] policy
-    #   The Cedar permit policy that defines what actions holders of this
+    #   The Cedar permit policy that defines the actions holders of this
     #   designation are allowed to perform.
     #   @return [String]
     #
     # @!attribute [rw] deletion_protection
-    #   Whether deletion protection is enabled for this designation.
-    #   Defaults to true when omitted.
+    #   Specifies whether deletion protection is enabled for this
+    #   designation. Defaults to `true` when omitted. When enabled,
+    #   `DeleteDesignation` is rejected until protection is disabled through
+    #   `UpdateDesignation`.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/CreateDesignationInput AWS API Documentation
@@ -3871,19 +3925,23 @@ module Aws::DataZone
     #   @return [String]
     #
     # @!attribute [rw] designation_type
-    #   The classification of this designation. MANAGED designations are
-    #   system-defined and cannot be modified or deleted.
+    #   The classification of this designation. Valid values:
+    #
+    #   * `MANAGED` — System-defined designations that cannot be modified or
+    #     deleted.
+    #
+    #   * `USER_CREATED` — Designations created through `CreateDesignation`.
     #   @return [String]
     #
     # @!attribute [rw] policy
-    #   The Cedar permit policy that governs what actions holders of this
+    #   The Cedar permit policy that governs the actions holders of this
     #   designation are allowed to perform.
     #   @return [String]
     #
     # @!attribute [rw] deletion_protection
-    #   Whether deletion protection is enabled for this designation. When
-    #   true, DeleteDesignation is rejected until protection is disabled via
-    #   UpdateDesignation.
+    #   Specifies whether deletion protection is enabled for this
+    #   designation. When `true`, `DeleteDesignation` is rejected until
+    #   protection is disabled through `UpdateDesignation`.
     #   @return [Boolean]
     #
     # @!attribute [rw] created_by
@@ -7928,7 +7986,10 @@ module Aws::DataZone
       include Aws::Structure
     end
 
-    # Summary representation of a designation returned by list operations.
+    # The summary representation of a designation returned by
+    # `ListDesignations`. The summary omits the Cedar permit policy. Call
+    # `GetDesignation` to retrieve the full designation record including the
+    # policy.
     #
     # @!attribute [rw] domain_id
     #   The identifier of the Amazon DataZone domain that contains the
@@ -7949,11 +8010,17 @@ module Aws::DataZone
     #   @return [String]
     #
     # @!attribute [rw] designation_type
-    #   The classification of this designation.
+    #   The classification of this designation. Valid values:
+    #
+    #   * `MANAGED` — System-defined designation.
+    #
+    #   * `USER_CREATED` — User-created designation.
     #   @return [String]
     #
     # @!attribute [rw] deletion_protection
-    #   Whether deletion protection is enabled for this designation.
+    #   Specifies whether deletion protection is enabled for this
+    #   designation. When `true`, `DeleteDesignation` is rejected until
+    #   protection is disabled through `UpdateDesignation`.
     #   @return [Boolean]
     #
     # @!attribute [rw] created_by
@@ -8641,6 +8708,10 @@ module Aws::DataZone
     #   The ID of the environment.
     #   @return [String]
     #
+    # @!attribute [rw] environment_blueprint_id
+    #   The ID of the environment blueprint.
+    #   @return [String]
+    #
     # @!attribute [rw] environment_resolved_account
     #   Specifies the account/Region that is to be used during project
     #   creation for a particular blueprint.
@@ -8658,6 +8729,7 @@ module Aws::DataZone
     #
     class EnvironmentConfigurationUserParameter < Struct.new(
       :environment_id,
+      :environment_blueprint_id,
       :environment_resolved_account,
       :environment_configuration_name,
       :environment_parameters)
@@ -9513,6 +9585,11 @@ module Aws::DataZone
     #   for the asset.
     #   @return [Array<Types::TimeSeriesDataPointSummaryFormOutput>]
     #
+    # @!attribute [rw] ownership_transfer
+    #   The most recent ownership transfer of the asset. The response omits
+    #   this member if the asset has never had an ownership transfer.
+    #   @return [Types::AssetOwnershipTransfer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/GetAssetOutput AWS API Documentation
     #
     class GetAssetOutput < Struct.new(
@@ -9534,7 +9611,8 @@ module Aws::DataZone
       :listing,
       :forms_output,
       :read_only_forms_output,
-      :latest_time_series_data_point_forms_output)
+      :latest_time_series_data_point_forms_output,
+      :ownership_transfer)
       SENSITIVE = [:name, :description]
       include Aws::Structure
     end
@@ -10166,19 +10244,23 @@ module Aws::DataZone
     #   @return [String]
     #
     # @!attribute [rw] designation_type
-    #   The classification of this designation. MANAGED designations are
-    #   system-defined and cannot be modified or deleted.
+    #   The classification of this designation. Valid values:
+    #
+    #   * `MANAGED` — System-defined designations that cannot be modified or
+    #     deleted.
+    #
+    #   * `USER_CREATED` — Designations created through `CreateDesignation`.
     #   @return [String]
     #
     # @!attribute [rw] policy
-    #   The Cedar permit policy that governs what actions holders of this
+    #   The Cedar permit policy that governs the actions holders of this
     #   designation are allowed to perform.
     #   @return [String]
     #
     # @!attribute [rw] deletion_protection
-    #   Whether deletion protection is enabled for this designation. When
-    #   true, DeleteDesignation is rejected until protection is disabled via
-    #   UpdateDesignation.
+    #   Specifies whether deletion protection is enabled for this
+    #   designation. When `true`, `DeleteDesignation` is rejected until
+    #   protection is disabled through `UpdateDesignation`.
     #   @return [Boolean]
     #
     # @!attribute [rw] created_by
@@ -18105,6 +18187,38 @@ module Aws::DataZone
       include Aws::Structure
     end
 
+    # Contains the OAuth2 properties, such as the client application, grant
+    # type, and token URL, that you want to update for a connection.
+    #
+    # @!attribute [rw] o_auth_2_grant_type
+    #   The OAuth2 grant type of the OAuth2 properties to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] o_auth_2_client_application
+    #   The OAuth2 client application of the OAuth2 properties to update.
+    #   @return [Types::OAuth2ClientApplication]
+    #
+    # @!attribute [rw] token_url
+    #   The OAuth2 token URL of the OAuth2 properties to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] token_url_parameters_map
+    #   The OAuth2 token URL parameter map of the OAuth2 properties to
+    #   update, for example the scope. If you specify an empty map, the
+    #   existing parameters are kept.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/OAuth2PropertiesPatch AWS API Documentation
+    #
+    class OAuth2PropertiesPatch < Struct.new(
+      :o_auth_2_grant_type,
+      :o_auth_2_client_application,
+      :token_url,
+      :token_url_parameters_map)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The open lineage run event summary.
     #
     # @!attribute [rw] event_type
@@ -24021,6 +24135,69 @@ module Aws::DataZone
       include Aws::Structure
     end
 
+    # @!attribute [rw] domain_identifier
+    #   The ID of the Amazon DataZone domain that contains the asset.
+    #   @return [String]
+    #
+    # @!attribute [rw] identifier
+    #   The ID of the asset whose ownership is transferred.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_project_identifier
+    #   The ID of the project that the asset is transferred to. The project
+    #   must be in the same domain and must be different from the project
+    #   that currently owns the asset.
+    #
+    #   If the domain's administration project owns the asset, the target
+    #   can be any project. Otherwise, the target must be the administration
+    #   project.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier to ensure that the operation
+    #   completes no more than one time. If this token matches a previous
+    #   request while its transfer is in progress, the service returns that
+    #   transfer and doesn't start a new one. This field is automatically
+    #   populated if not provided.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/UpdateAssetOwnerInput AWS API Documentation
+    #
+    class UpdateAssetOwnerInput < Struct.new(
+      :domain_identifier,
+      :identifier,
+      :target_project_identifier,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] id
+    #   The ID of the asset.
+    #   @return [String]
+    #
+    # @!attribute [rw] revision
+    #   The revision of the asset that was created when the transfer
+    #   started.
+    #   @return [String]
+    #
+    # @!attribute [rw] ownership_transfer
+    #   The state of the ownership transfer that the request started.
+    #   @return [Types::AssetOwnershipTransfer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/UpdateAssetOwnerOutput AWS API Documentation
+    #
+    class UpdateAssetOwnerOutput < Struct.new(
+      :id,
+      :revision,
+      :ownership_transfer)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] configurations
     #   The configurations of the connection.
     #   @return [Array<Types::Configuration>]
@@ -24346,12 +24523,12 @@ module Aws::DataZone
     #   @return [String]
     #
     # @!attribute [rw] policy
-    #   The updated Cedar permit policy.
+    #   The updated Cedar permit policy. Omit to keep the existing policy.
     #   @return [String]
     #
     # @!attribute [rw] deletion_protection
-    #   Whether deletion protection is enabled for this designation. Omit to
-    #   keep the existing value.
+    #   Specifies whether deletion protection is enabled for this
+    #   designation. Omit to keep the existing value.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/UpdateDesignationInput AWS API Documentation
@@ -24390,19 +24567,23 @@ module Aws::DataZone
     #   @return [String]
     #
     # @!attribute [rw] designation_type
-    #   The classification of this designation. MANAGED designations are
-    #   system-defined and cannot be modified or deleted.
+    #   The classification of this designation. Valid values:
+    #
+    #   * `MANAGED` — System-defined designations that cannot be modified or
+    #     deleted.
+    #
+    #   * `USER_CREATED` — Designations created through `CreateDesignation`.
     #   @return [String]
     #
     # @!attribute [rw] policy
-    #   The Cedar permit policy that governs what actions holders of this
+    #   The Cedar permit policy that governs the actions holders of this
     #   designation are allowed to perform.
     #   @return [String]
     #
     # @!attribute [rw] deletion_protection
-    #   Whether deletion protection is enabled for this designation. When
-    #   true, DeleteDesignation is rejected until protection is disabled via
-    #   UpdateDesignation.
+    #   Specifies whether deletion protection is enabled for this
+    #   designation. When `true`, `DeleteDesignation` is rejected until
+    #   protection is disabled through `UpdateDesignation`.
     #   @return [Boolean]
     #
     # @!attribute [rw] created_by
@@ -25590,6 +25771,11 @@ module Aws::DataZone
     #   `latest`.
     #   @return [String]
     #
+    # @!attribute [rw] project_profile_action
+    #   The action to perform on the project profile of the project. Specify
+    #   `DISASSOCIATE` to disassociate the project from its project profile.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/UpdateProjectInput AWS API Documentation
     #
     class UpdateProjectInput < Struct.new(
@@ -25602,7 +25788,8 @@ module Aws::DataZone
       :domain_unit_id,
       :environment_deployment_details,
       :user_parameters,
-      :project_profile_version)
+      :project_profile_version,
+      :project_profile_action)
       SENSITIVE = [:name, :description]
       include Aws::Structure
     end

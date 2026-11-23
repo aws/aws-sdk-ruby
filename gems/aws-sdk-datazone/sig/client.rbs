@@ -498,7 +498,7 @@ module Aws
         def physical_endpoints: () -> ::Array[Types::PhysicalEndpoint]
         def project_id: () -> ::String
         def props: () -> Types::ConnectionPropertiesOutput
-        def type: () -> ("ATHENA" | "BIGQUERY" | "DATABRICKS" | "DOCUMENTDB" | "DYNAMODB" | "HYPERPOD" | "IAM" | "MYSQL" | "OPENSEARCH" | "ORACLE" | "POSTGRESQL" | "REDSHIFT" | "S3" | "SAPHANA" | "SNOWFLAKE" | "SPARK" | "SQLSERVER" | "TERADATA" | "VERTICA" | "WORKFLOWS_MWAA" | "AMAZON_Q" | "MLFLOW" | "VPC" | "GIT" | "ICEBERGRESTCATALOG" | "SNOWFLAKEICEBERGRESTCATALOG" | "DATABRICKSICEBERGRESTCATALOG")
+        def type: () -> ("ATHENA" | "BIGQUERY" | "DATABRICKS" | "DOCUMENTDB" | "DYNAMODB" | "HYPERPOD" | "IAM" | "MYSQL" | "OPENSEARCH" | "ORACLE" | "POSTGRESQL" | "REDSHIFT" | "S3" | "SAPHANA" | "SNOWFLAKE" | "SPARK" | "SQLSERVER" | "TERADATA" | "VERTICA" | "WORKFLOWS_MWAA" | "AMAZON_Q" | "MLFLOW" | "VPC" | "GIT" | "ICEBERGRESTCATALOG" | "SNOWFLAKEICEBERGRESTCATALOG" | "DATABRICKSICEBERGRESTCATALOG" | "WORKDAYICEBERGRESTCATALOG" | "WORKDAYLDQ")
         def scope: () -> ("DOMAIN" | "PROJECT")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#create_connection-instance_method
@@ -535,7 +535,7 @@ module Aws
                                      }?,
                                      name: ::String?,
                                      description: ::String?,
-                                     connection_type: ("SNOWFLAKE" | "BIGQUERY" | "DOCUMENTDB" | "DYNAMODB" | "MYSQL" | "OPENSEARCH" | "ORACLE" | "POSTGRESQL" | "REDSHIFT" | "SAPHANA" | "SQLSERVER" | "TERADATA" | "VERTICA" | "ICEBERGRESTCATALOG" | "SNOWFLAKEICEBERGRESTCATALOG" | "DATABRICKSICEBERGRESTCATALOG")?,
+                                     connection_type: ("SNOWFLAKE" | "BIGQUERY" | "DOCUMENTDB" | "DYNAMODB" | "MYSQL" | "OPENSEARCH" | "ORACLE" | "POSTGRESQL" | "REDSHIFT" | "SAPHANA" | "SQLSERVER" | "TERADATA" | "VERTICA" | "ICEBERGRESTCATALOG" | "SNOWFLAKEICEBERGRESTCATALOG" | "DATABRICKSICEBERGRESTCATALOG" | "WORKDAYICEBERGRESTCATALOG" | "WORKDAYLDQ")?,
                                      match_criteria: ::String?,
                                      validate_credentials: bool?,
                                      validate_for_compute_environments: Array[("SPARK" | "ATHENA" | "PYTHON")]?,
@@ -1856,6 +1856,7 @@ module Aws
         def forms_output: () -> ::Array[Types::FormOutput]
         def read_only_forms_output: () -> ::Array[Types::FormOutput]
         def latest_time_series_data_point_forms_output: () -> ::Array[Types::TimeSeriesDataPointSummaryFormOutput]
+        def ownership_transfer: () -> Types::AssetOwnershipTransfer
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#get_asset-instance_method
       def get_asset: (
@@ -1924,7 +1925,7 @@ module Aws
         def physical_endpoints: () -> ::Array[Types::PhysicalEndpoint]
         def project_id: () -> ::String
         def props: () -> Types::ConnectionPropertiesOutput
-        def type: () -> ("ATHENA" | "BIGQUERY" | "DATABRICKS" | "DOCUMENTDB" | "DYNAMODB" | "HYPERPOD" | "IAM" | "MYSQL" | "OPENSEARCH" | "ORACLE" | "POSTGRESQL" | "REDSHIFT" | "S3" | "SAPHANA" | "SNOWFLAKE" | "SPARK" | "SQLSERVER" | "TERADATA" | "VERTICA" | "WORKFLOWS_MWAA" | "AMAZON_Q" | "MLFLOW" | "VPC" | "GIT" | "ICEBERGRESTCATALOG" | "SNOWFLAKEICEBERGRESTCATALOG" | "DATABRICKSICEBERGRESTCATALOG")
+        def type: () -> ("ATHENA" | "BIGQUERY" | "DATABRICKS" | "DOCUMENTDB" | "DYNAMODB" | "HYPERPOD" | "IAM" | "MYSQL" | "OPENSEARCH" | "ORACLE" | "POSTGRESQL" | "REDSHIFT" | "S3" | "SAPHANA" | "SNOWFLAKE" | "SPARK" | "SQLSERVER" | "TERADATA" | "VERTICA" | "WORKFLOWS_MWAA" | "AMAZON_Q" | "MLFLOW" | "VPC" | "GIT" | "ICEBERGRESTCATALOG" | "SNOWFLAKEICEBERGRESTCATALOG" | "DATABRICKSICEBERGRESTCATALOG" | "WORKDAYICEBERGRESTCATALOG" | "WORKDAYLDQ")
         def scope: () -> ("DOMAIN" | "PROJECT")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#get_connection-instance_method
@@ -2787,7 +2788,7 @@ module Aws
                               ?name: ::String,
                               ?environment_identifier: ::String,
                               ?project_identifier: ::String,
-                              ?type: ("ATHENA" | "BIGQUERY" | "DATABRICKS" | "DOCUMENTDB" | "DYNAMODB" | "HYPERPOD" | "IAM" | "MYSQL" | "OPENSEARCH" | "ORACLE" | "POSTGRESQL" | "REDSHIFT" | "S3" | "SAPHANA" | "SNOWFLAKE" | "SPARK" | "SQLSERVER" | "TERADATA" | "VERTICA" | "WORKFLOWS_MWAA" | "AMAZON_Q" | "MLFLOW" | "VPC" | "GIT" | "ICEBERGRESTCATALOG" | "SNOWFLAKEICEBERGRESTCATALOG" | "DATABRICKSICEBERGRESTCATALOG"),
+                              ?type: ("ATHENA" | "BIGQUERY" | "DATABRICKS" | "DOCUMENTDB" | "DYNAMODB" | "HYPERPOD" | "IAM" | "MYSQL" | "OPENSEARCH" | "ORACLE" | "POSTGRESQL" | "REDSHIFT" | "S3" | "SAPHANA" | "SNOWFLAKE" | "SPARK" | "SQLSERVER" | "TERADATA" | "VERTICA" | "WORKFLOWS_MWAA" | "AMAZON_Q" | "MLFLOW" | "VPC" | "GIT" | "ICEBERGRESTCATALOG" | "SNOWFLAKEICEBERGRESTCATALOG" | "DATABRICKSICEBERGRESTCATALOG" | "WORKDAYICEBERGRESTCATALOG" | "WORKDAYLDQ"),
                               ?scope: ("DOMAIN" | "PROJECT")
                             ) -> _ListConnectionsResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListConnectionsResponseSuccess
@@ -3928,6 +3929,21 @@ module Aws
                                ) -> _UpdateAssetFilterResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAssetFilterResponseSuccess
 
+      interface _UpdateAssetOwnerResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateAssetOwnerOutput]
+        def id: () -> ::String
+        def revision: () -> ::String
+        def ownership_transfer: () -> Types::AssetOwnershipTransfer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#update_asset_owner-instance_method
+      def update_asset_owner: (
+                                domain_identifier: ::String,
+                                identifier: ::String,
+                                target_project_identifier: ::String,
+                                ?client_token: ::String
+                              ) -> _UpdateAssetOwnerResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAssetOwnerResponseSuccess
+
       interface _UpdateConnectionResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateConnectionOutput]
         def configurations: () -> ::Array[Types::Configuration]
@@ -3940,7 +3956,7 @@ module Aws
         def physical_endpoints: () -> ::Array[Types::PhysicalEndpoint]
         def project_id: () -> ::String
         def props: () -> Types::ConnectionPropertiesOutput
-        def type: () -> ("ATHENA" | "BIGQUERY" | "DATABRICKS" | "DOCUMENTDB" | "DYNAMODB" | "HYPERPOD" | "IAM" | "MYSQL" | "OPENSEARCH" | "ORACLE" | "POSTGRESQL" | "REDSHIFT" | "S3" | "SAPHANA" | "SNOWFLAKE" | "SPARK" | "SQLSERVER" | "TERADATA" | "VERTICA" | "WORKFLOWS_MWAA" | "AMAZON_Q" | "MLFLOW" | "VPC" | "GIT" | "ICEBERGRESTCATALOG" | "SNOWFLAKEICEBERGRESTCATALOG" | "DATABRICKSICEBERGRESTCATALOG")
+        def type: () -> ("ATHENA" | "BIGQUERY" | "DATABRICKS" | "DOCUMENTDB" | "DYNAMODB" | "HYPERPOD" | "IAM" | "MYSQL" | "OPENSEARCH" | "ORACLE" | "POSTGRESQL" | "REDSHIFT" | "S3" | "SAPHANA" | "SNOWFLAKE" | "SPARK" | "SQLSERVER" | "TERADATA" | "VERTICA" | "WORKFLOWS_MWAA" | "AMAZON_Q" | "MLFLOW" | "VPC" | "GIT" | "ICEBERGRESTCATALOG" | "SNOWFLAKEICEBERGRESTCATALOG" | "DATABRICKSICEBERGRESTCATALOG" | "WORKDAYICEBERGRESTCATALOG" | "WORKDAYLDQ")
         def scope: () -> ("DOMAIN" | "PROJECT")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#update_connection-instance_method
@@ -3968,13 +3984,7 @@ module Aws
                                    glue_connection_input: {
                                      description: ::String?,
                                      connection_properties: Hash[::String, ::String]?,
-                                     authentication_configuration: {
-                                       secret_arn: ::String?,
-                                       basic_authentication_credentials: {
-                                         user_name: ::String?,
-                                         password: ::String?
-                                       }?
-                                     }?
+                                     authentication_configuration: Params::authentication_configuration_patch?
                                    }?
                                  }?,
                                  iam_properties: {
@@ -4021,13 +4031,7 @@ module Aws
                                    connectivity_properties_patch: {
                                      description: ::String?,
                                      connection_properties: Hash[::String, ::String]?,
-                                     authentication_configuration: {
-                                       secret_arn: ::String?,
-                                       basic_authentication_credentials: {
-                                         user_name: ::String?,
-                                         password: ::String?
-                                       }?
-                                     }?
+                                     authentication_configuration: Params::authentication_configuration_patch?
                                    }?,
                                    snowflake_role: ::String?,
                                    lineage_sync: {
@@ -4472,7 +4476,8 @@ module Aws
                             ?user_parameters: Array[
                               Params::environment_configuration_user_parameter
                             ],
-                            ?project_profile_version: ::String
+                            ?project_profile_version: ::String,
+                            ?project_profile_action: ("DISASSOCIATE")
                           ) -> _UpdateProjectResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateProjectResponseSuccess
 

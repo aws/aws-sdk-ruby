@@ -4,13 +4,17 @@
     "apiVersion":"2015-04-08",
     "endpointPrefix":"workspaces",
     "jsonVersion":"1.1",
-    "protocol":"json",
-    "protocols":["json"],
+    "protocol":"smithy-rpc-v2-cbor",
+    "protocols":[
+      "smithy-rpc-v2-cbor",
+      "json"
+    ],
     "serviceFullName":"Amazon WorkSpaces",
     "serviceId":"WorkSpaces",
     "signatureVersion":"v4",
     "targetPrefix":"WorkspacesService",
     "uid":"workspaces-2015-04-08",
+    "xmlNamespace":"http://workspaces.amazonaws.com/api/v1",
     "auth":["aws.auth#sigv4"]
   },
   "operations":{
@@ -3833,7 +3837,13 @@
         "WINDOWS_SERVER_2022",
         "WINDOWS_SERVER_2025",
         "RHEL_8",
-        "ROCKY_8"
+        "ROCKY_8",
+        "UBUNTU_24_04",
+        "RHEL_9",
+        "ROCKY_9",
+        "UBUNTU_26_04",
+        "RHEL_10",
+        "ROCKY_10"
       ]
     },
     "OperatingSystemNameList":{
@@ -3988,6 +3998,7 @@
         "WorkspaceDirectoryName":{"shape":"WorkspaceDirectoryName"},
         "WorkspaceDirectoryDescription":{"shape":"WorkspaceDirectoryDescription"},
         "UserIdentityType":{"shape":"UserIdentityType"},
+        "WorkspaceOsUserMode":{"shape":"WorkspaceOSUserMode"},
         "IdcInstanceArn":{"shape":"ARN"},
         "MicrosoftEntraConfig":{"shape":"MicrosoftEntraConfig"},
         "WorkspaceType":{"shape":"WorkspaceType"},
@@ -4179,7 +4190,9 @@
         "IncreaseVolumeSize":{"shape":"ReconnectEnum"},
         "ChangeComputeType":{"shape":"ReconnectEnum"},
         "SwitchRunningMode":{"shape":"ReconnectEnum"},
-        "RebuildWorkspace":{"shape":"ReconnectEnum"}
+        "RebuildWorkspace":{"shape":"ReconnectEnum"},
+        "NestedVirtualization":{"shape":"ReconnectEnum"},
+        "EnableEndUserAdvisor":{"shape":"ReconnectEnum"}
       }
     },
     "SessionConnectionState":{
@@ -4855,6 +4868,7 @@
         "IDCConfig":{"shape":"IDCConfig"},
         "ActiveDirectoryConfig":{"shape":"ActiveDirectoryConfig"},
         "StreamingProperties":{"shape":"StreamingProperties"},
+        "WorkspaceOsUserMode":{"shape":"WorkspaceOSUserMode"},
         "ErrorMessage":{"shape":"Description"}
       }
     },
@@ -5034,6 +5048,15 @@
     "WorkspaceName":{
       "type":"string",
       "pattern":"^[a-zA-Z0-9_()][a-zA-Z0-9_.()-]{1,63}$"
+    },
+    "WorkspaceOSUserMode":{
+      "type":"string",
+      "enum":[
+        "LOCAL_USER",
+        "DOMAIN_JOIN",
+        "ENTRA_JOIN",
+        "SELF_MANAGED"
+      ]
     },
     "WorkspaceProperties":{
       "type":"structure",

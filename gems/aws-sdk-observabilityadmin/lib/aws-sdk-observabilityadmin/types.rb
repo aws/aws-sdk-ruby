@@ -117,6 +117,702 @@ module Aws::ObservabilityAdmin
       include Aws::Structure
     end
 
+    # Selects every Azure subscription that Azure role-based access control
+    # (Azure RBAC) allows the connector to read. Subscriptions that the
+    # connector can read later are included automatically.
+    #
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/AllSubscriptions AWS API Documentation
+    #
+    class AllSubscriptions < Aws::EmptyStructure; end
+
+    # Configuration for Flow Log Storage Accounts that the setup creates,
+    # one in each Region that ingests Flow Logs.
+    #
+    # @!attribute [rw] retention_days
+    #   The number of days that the created Storage Accounts keep Flow Logs.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/AzureAwsManagedFlowLogs AWS API Documentation
+    #
+    class AzureAwsManagedFlowLogs < Struct.new(
+      :retention_days)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration of a connector to Microsoft Azure.
+    #
+    # @!attribute [rw] tenant_identifier
+    #   The ID of the Microsoft Entra ID tenant.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_identifier
+    #   The application (client) ID of the Azure app registration. The app
+    #   registration must have a federated identity credential that trusts
+    #   the Amazon Web Services OpenID Connect (OIDC) issuer for your
+    #   account.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/AzureConnectorConfiguration AWS API Documentation
+    #
+    class AzureConnectorConfiguration < Struct.new(
+      :tenant_identifier,
+      :client_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The type of Azure resource to list. Specify one type.
+    #
+    # @note AzureConnectorQuery is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @!attribute [rw] management_groups
+    #   Lists Azure management groups.
+    #   @return [Types::AzureManagementGroupsQuery]
+    #
+    # @!attribute [rw] subscriptions
+    #   Lists Azure subscriptions.
+    #   @return [Types::AzureSubscriptionsQuery]
+    #
+    # @!attribute [rw] resource_types
+    #   Lists the Azure resource types that have resources in scope.
+    #   @return [Types::AzureResourceTypesQuery]
+    #
+    # @!attribute [rw] regions
+    #   Lists the Azure Regions that have resources in scope.
+    #   @return [Types::AzureRegionsQuery]
+    #
+    # @!attribute [rw] resource_ids
+    #   Lists Azure resources.
+    #   @return [Types::AzureResourceIdsQuery]
+    #
+    # @!attribute [rw] event_hubs
+    #   Lists Azure Event Hubs.
+    #   @return [Types::AzureEventHubsQuery]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/AzureConnectorQuery AWS API Documentation
+    #
+    class AzureConnectorQuery < Struct.new(
+      :management_groups,
+      :subscriptions,
+      :resource_types,
+      :regions,
+      :resource_ids,
+      :event_hubs,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class ManagementGroups < AzureConnectorQuery; end
+      class Subscriptions < AzureConnectorQuery; end
+      class ResourceTypes < AzureConnectorQuery; end
+      class Regions < AzureConnectorQuery; end
+      class ResourceIds < AzureConnectorQuery; end
+      class EventHubs < AzureConnectorQuery; end
+      class Unknown < AzureConnectorQuery; end
+    end
+
+    # The results of an Azure discovery query. The populated member matches
+    # the member of the query.
+    #
+    # @note AzureConnectorQueryResults is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of AzureConnectorQueryResults corresponding to the set member.
+    #
+    # @!attribute [rw] management_groups
+    #   The Azure management groups.
+    #   @return [Array<Types::AzureManagementGroupSummary>]
+    #
+    # @!attribute [rw] subscriptions
+    #   The Azure subscriptions.
+    #   @return [Array<Types::AzureSubscriptionSummary>]
+    #
+    # @!attribute [rw] resource_types
+    #   The Azure resource types.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] regions
+    #   The Azure Regions.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] resource_ids
+    #   The Azure resources.
+    #   @return [Array<Types::AzureResourceIdentifierSummary>]
+    #
+    # @!attribute [rw] event_hubs
+    #   The Azure Event Hubs.
+    #   @return [Array<Types::AzureEventHubSummary>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/AzureConnectorQueryResults AWS API Documentation
+    #
+    class AzureConnectorQueryResults < Struct.new(
+      :management_groups,
+      :subscriptions,
+      :resource_types,
+      :regions,
+      :resource_ids,
+      :event_hubs,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class ManagementGroups < AzureConnectorQueryResults; end
+      class Subscriptions < AzureConnectorQueryResults; end
+      class ResourceTypes < AzureConnectorQueryResults; end
+      class Regions < AzureConnectorQueryResults; end
+      class ResourceIds < AzureConnectorQueryResults; end
+      class EventHubs < AzureConnectorQueryResults; end
+      class Unknown < AzureConnectorQueryResults; end
+    end
+
+    # Configuration for existing Azure Storage Accounts that already receive
+    # your Flow Logs.
+    #
+    # @!attribute [rw] storage_accounts
+    #   The Storage Accounts that store your Flow Logs, listed by Azure
+    #   Region. Each Region can appear only once, and each Storage Account
+    #   can appear only once across all Regions.
+    #   @return [Array<Types::AzureFlowLogStorageAccountScope>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/AzureCustomerManagedFlowLogs AWS API Documentation
+    #
+    class AzureCustomerManagedFlowLogs < Struct.new(
+      :storage_accounts)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration of the Azure Event Hubs that the setup creates to
+    # deliver resource logs.
+    #
+    # @!attribute [rw] tier
+    #   The Event Hubs namespace tier.
+    #   @return [String]
+    #
+    # @!attribute [rw] partition_count
+    #   The number of partitions in each Event Hub. The Standard tier allows
+    #   1–32 partitions and the Premium tier allows 1–100. On the Standard
+    #   tier, you can't change this value after the setup creates the Event
+    #   Hub.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/AzureEventHubConfiguration AWS API Documentation
+    #
+    class AzureEventHubConfiguration < Struct.new(
+      :tier,
+      :partition_count)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about an Azure Event Hub.
+    #
+    # @!attribute [rw] resource_id
+    #   The Azure Resource Manager ID of the Event Hub.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_hub_name
+    #   The name of the Event Hub.
+    #   @return [String]
+    #
+    # @!attribute [rw] namespace_name
+    #   The name of the Event Hubs namespace that contains the Event Hub.
+    #   @return [String]
+    #
+    # @!attribute [rw] fully_qualified_namespace
+    #   The fully qualified host name of the Event Hubs namespace, for
+    #   example `<namespace>.servicebus.windows.net`. The suffix differs in
+    #   sovereign clouds.
+    #   @return [String]
+    #
+    # @!attribute [rw] region
+    #   The Azure Region of the Event Hub, for example `eastus`.
+    #   @return [String]
+    #
+    # @!attribute [rw] subscription_id
+    #   The Azure subscription that contains the Event Hub.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/AzureEventHubSummary AWS API Documentation
+    #
+    class AzureEventHubSummary < Struct.new(
+      :resource_id,
+      :event_hub_name,
+      :namespace_name,
+      :fully_qualified_namespace,
+      :region,
+      :subscription_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A query that lists Azure Event Hubs.
+    #
+    # @!attribute [rw] scope
+    #   Limits the query to a management group or to specific subscriptions.
+    #   @return [Types::AzureQueryScope]
+    #
+    # @!attribute [rw] namespace_name
+    #   Limits the results to Event Hubs in this namespace.
+    #   @return [String]
+    #
+    # @!attribute [rw] region
+    #   Limits the results to one Azure Region, for example `eastus`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/AzureEventHubsQuery AWS API Documentation
+    #
+    class AzureEventHubsQuery < Struct.new(
+      :scope,
+      :namespace_name,
+      :region)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The Azure Storage Accounts in one Azure Region that store Flow Logs.
+    #
+    # @!attribute [rw] region
+    #   The Azure Region of the Storage Accounts, for example `eastus`.
+    #   @return [String]
+    #
+    # @!attribute [rw] storage_account_ids
+    #   The Azure Resource Manager IDs of the Storage Accounts.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/AzureFlowLogStorageAccountScope AWS API Documentation
+    #
+    class AzureFlowLogStorageAccountScope < Struct.new(
+      :region,
+      :storage_account_ids)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The location of your Flow Logs: your existing Storage Accounts, or
+    # Storage Accounts that the setup creates. Specify one.
+    #
+    # @note AzureFlowLogsInfrastructure is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note AzureFlowLogsInfrastructure is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of AzureFlowLogsInfrastructure corresponding to the set member.
+    #
+    # @!attribute [rw] customer_managed
+    #   Use your existing Storage Accounts that already store Flow Logs.
+    #   @return [Types::AzureCustomerManagedFlowLogs]
+    #
+    # @!attribute [rw] aws_managed
+    #   Create one Storage Account in each Azure Region that ingests Flow
+    #   Logs, in the subscription specified by `SubscriptionId`.
+    #   @return [Types::AzureAwsManagedFlowLogs]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/AzureFlowLogsInfrastructure AWS API Documentation
+    #
+    class AzureFlowLogsInfrastructure < Struct.new(
+      :customer_managed,
+      :aws_managed,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class CustomerManaged < AzureFlowLogsInfrastructure; end
+      class AwsManaged < AzureFlowLogsInfrastructure; end
+      class Unknown < AzureFlowLogsInfrastructure; end
+    end
+
+    # The choices for the Azure infrastructure that the setup creates.
+    #
+    # @!attribute [rw] subscription_id
+    #   The Azure subscription in which the setup creates the Event Hubs
+    #   namespaces and, for `AwsManaged` Flow Logs, the Storage Accounts.
+    #   You must specify this value if an `AzureScopeItem` collects
+    #   `ResourceLogs`, or if you specify `EventHubs` or `AwsManaged` Flow
+    #   Logs.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_hubs
+    #   The Event Hubs configuration. Specify exactly one entry, which
+    #   applies to the Event Hubs in every Azure Region. This value applies
+    #   only if an `AzureScopeItem` collects `ResourceLogs`. If you omit it,
+    #   the setup uses default settings.
+    #   @return [Array<Types::AzureEventHubConfiguration>]
+    #
+    # @!attribute [rw] flow_logs
+    #   The location of your Flow Logs. You must specify this value if an
+    #   `AzureScopeItem` collects `FlowLogs`, and you can specify it only in
+    #   that case.
+    #   @return [Types::AzureFlowLogsInfrastructure]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/AzureInfrastructure AWS API Documentation
+    #
+    class AzureInfrastructure < Struct.new(
+      :subscription_id,
+      :event_hubs,
+      :flow_logs)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about an Azure management group.
+    #
+    # @!attribute [rw] id
+    #   The ID of the management group.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the management group.
+    #   @return [String]
+    #
+    # @!attribute [rw] display_name
+    #   The display name of the management group.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/AzureManagementGroupSummary AWS API Documentation
+    #
+    class AzureManagementGroupSummary < Struct.new(
+      :id,
+      :name,
+      :display_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A query that lists Azure management groups.
+    #
+    # @!attribute [rw] parent_management_group_id
+    #   Lists the management groups under this management group. If you omit
+    #   this value, the query starts at the tenant root group.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/AzureManagementGroupsQuery AWS API Documentation
+    #
+    class AzureManagementGroupsQuery < Struct.new(
+      :parent_management_group_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Limits a query to a management group or to specific subscriptions.
+    #
+    # @!attribute [rw] management_group_id
+    #   Limits the query to resources under this management group.
+    #   @return [String]
+    #
+    # @!attribute [rw] subscription_ids
+    #   Limits the query to these subscriptions. You can specify 1–1000
+    #   subscriptions.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/AzureQueryScope AWS API Documentation
+    #
+    class AzureQueryScope < Struct.new(
+      :management_group_id,
+      :subscription_ids)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A query that lists the Azure Regions that have resources in scope.
+    #
+    # @!attribute [rw] scope
+    #   Limits the query to a management group or to specific subscriptions.
+    #   @return [Types::AzureQueryScope]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/AzureRegionsQuery AWS API Documentation
+    #
+    class AzureRegionsQuery < Struct.new(
+      :scope)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Azure resources in one Azure Region.
+    #
+    # @!attribute [rw] region
+    #   The Azure Region of the resources, for example `eastus`. Required
+    #   because an Azure resource ID doesn't include the Region.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_ids
+    #   The Azure Resource Manager IDs of the resources.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/AzureResourceIdScope AWS API Documentation
+    #
+    class AzureResourceIdScope < Struct.new(
+      :region,
+      :resource_ids)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about an Azure resource.
+    #
+    # @!attribute [rw] resource_id
+    #   The Azure Resource Manager ID of the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   The Azure resource type, for example
+    #   `Microsoft.Compute/virtualMachines`.
+    #   @return [String]
+    #
+    # @!attribute [rw] region
+    #   The Azure Region of the resource, for example `eastus`.
+    #   @return [String]
+    #
+    # @!attribute [rw] subscription_id
+    #   The Azure subscription that contains the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags on the resource. Absent if the resource has no tags.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/AzureResourceIdentifierSummary AWS API Documentation
+    #
+    class AzureResourceIdentifierSummary < Struct.new(
+      :resource_id,
+      :resource_type,
+      :region,
+      :subscription_id,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A query that lists Azure resources.
+    #
+    # @!attribute [rw] scope
+    #   Limits the query to a management group or to specific subscriptions.
+    #   @return [Types::AzureQueryScope]
+    #
+    # @!attribute [rw] resource_type
+    #   Limits the results to one Azure resource type, for example
+    #   `Microsoft.Compute/virtualMachines`.
+    #   @return [String]
+    #
+    # @!attribute [rw] region
+    #   Limits the results to one Azure Region, for example `eastus`.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_filters
+    #   Limits the results to resources that have these tags. A resource
+    #   must match the filters for all tag keys, and any of the values for
+    #   each key. The service matches tag keys and values
+    #   case-insensitively, as Azure does.
+    #   @return [Array<Types::TagFilter>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/AzureResourceIdsQuery AWS API Documentation
+    #
+    class AzureResourceIdsQuery < Struct.new(
+      :scope,
+      :resource_type,
+      :region,
+      :tag_filters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A query that lists the Azure resource types that have resources in
+    # scope.
+    #
+    # @!attribute [rw] scope
+    #   Limits the query to a management group or to specific subscriptions.
+    #   @return [Types::AzureQueryScope]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/AzureResourceTypesQuery AWS API Documentation
+    #
+    class AzureResourceTypesQuery < Struct.new(
+      :scope)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The Azure resources to collect telemetry from. These are the resources
+    # found by `Subscriptions`, `Regions`, and `ResourceTypes`, optionally
+    # narrowed by `TagFilters`, plus any resources listed in `Resources`.
+    # You can specify:
+    #
+    # * `Subscriptions`, `Regions`, and `ResourceTypes` together
+    #
+    # * `Resources`
+    #
+    # * Both
+    #
+    # @!attribute [rw] subscriptions
+    #   The subscriptions to find resources in: all subscriptions that the
+    #   connector can read, or a list of subscriptions. Required when you
+    #   use `Regions` and `ResourceTypes`.
+    #   @return [Types::AzureSubscriptionScope]
+    #
+    # @!attribute [rw] regions
+    #   The Azure Regions to find resources in. Required when you use
+    #   `Subscriptions` and `ResourceTypes`.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] resource_types
+    #   The Azure resource types to find. Required when you use
+    #   `Subscriptions` and `Regions`.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] tag_filters
+    #   Limits the resources found by `Subscriptions`, `Regions`, and
+    #   `ResourceTypes` to those that have these tags. You can specify up to
+    #   50 filters.
+    #   @return [Array<Types::TagFilter>]
+    #
+    # @!attribute [rw] resources
+    #   Specific Azure resources, listed by Azure Region.
+    #   @return [Array<Types::AzureResourceIdScope>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/AzureScope AWS API Documentation
+    #
+    class AzureScope < Struct.new(
+      :subscriptions,
+      :regions,
+      :resource_types,
+      :tag_filters,
+      :resources)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The telemetry types to collect from a set of Azure resources.
+    #
+    # @!attribute [rw] telemetry_types
+    #   The telemetry types to collect.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] scope
+    #   The Azure resources to collect telemetry from.
+    #   @return [Types::AzureScope]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/AzureScopeItem AWS API Documentation
+    #
+    class AzureScopeItem < Struct.new(
+      :telemetry_types,
+      :scope)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The subscriptions to find resources in: all subscriptions that the
+    # connector can read, or a list of subscriptions. Specify one.
+    #
+    # @note AzureSubscriptionScope is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note AzureSubscriptionScope is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of AzureSubscriptionScope corresponding to the set member.
+    #
+    # @!attribute [rw] all
+    #   All subscriptions that Azure role-based access control (Azure RBAC)
+    #   allows the connector to read. Subscriptions that the connector can
+    #   read later are included automatically.
+    #   @return [Types::AllSubscriptions]
+    #
+    # @!attribute [rw] ids
+    #   A list of 1–1000 subscription IDs.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/AzureSubscriptionScope AWS API Documentation
+    #
+    class AzureSubscriptionScope < Struct.new(
+      :all,
+      :ids,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class All < AzureSubscriptionScope; end
+      class Ids < AzureSubscriptionScope; end
+      class Unknown < AzureSubscriptionScope; end
+    end
+
+    # Information about an Azure subscription.
+    #
+    # @!attribute [rw] subscription_id
+    #   The ID of the subscription.
+    #   @return [String]
+    #
+    # @!attribute [rw] display_name
+    #   The display name of the subscription.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The state of the subscription in Azure, for example `Enabled`.
+    #   @return [String]
+    #
+    # @!attribute [rw] management_group_id
+    #   The ID of the management group that contains the subscription.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/AzureSubscriptionSummary AWS API Documentation
+    #
+    class AzureSubscriptionSummary < Struct.new(
+      :subscription_id,
+      :display_name,
+      :state,
+      :management_group_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A query that lists Azure subscriptions.
+    #
+    # @!attribute [rw] management_group_id
+    #   Limits the results to subscriptions under this management group.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/AzureSubscriptionsQuery AWS API Documentation
+    #
+    class AzureSubscriptionsQuery < Struct.new(
+      :management_group_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The Microsoft Azure source configuration for a third-party telemetry
+    # enrichment.
+    #
+    # @!attribute [rw] aws_config_connector_arn
+    #   The Amazon Resource Name (ARN) of the Amazon Web Services Config
+    #   connector for the Microsoft Azure tenant to collect resource
+    #   metadata from.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/AzureTelemetrySourceConfigurationInput AWS API Documentation
+    #
+    class AzureTelemetrySourceConfigurationInput < Struct.new(
+      :aws_config_connector_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The Microsoft Azure source configuration of a third-party telemetry
+    # enrichment.
+    #
+    # @!attribute [rw] aws_config_connector_arn
+    #   The Amazon Resource Name (ARN) of the Amazon Web Services Config
+    #   connector that the enrichment uses.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_linked_recorder_arn
+    #   The Amazon Resource Name (ARN) of the service-linked configuration
+    #   recorder that CloudWatch created in your account for the enrichment.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/AzureTelemetrySourceConfigurationOutput AWS API Documentation
+    #
+    class AzureTelemetrySourceConfigurationOutput < Struct.new(
+      :aws_config_connector_arn,
+      :service_linked_recorder_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Defines how telemetry data should be centralized across an Amazon Web
     # Services Organization, including source and destination
     # configurations.
@@ -164,13 +860,19 @@ module Aws::ObservabilityAdmin
     #   metrics.
     #   @return [Types::DestinationMetricsConfiguration]
     #
+    # @!attribute [rw] destination_profiles_configuration
+    #   Profile-specific configuration for centralization destination
+    #   profiles.
+    #   @return [Types::DestinationProfilesConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/CentralizationRuleDestination AWS API Documentation
     #
     class CentralizationRuleDestination < Struct.new(
       :region,
       :account,
       :destination_logs_configuration,
-      :destination_metrics_configuration)
+      :destination_metrics_configuration,
+      :destination_profiles_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -197,6 +899,10 @@ module Aws::ObservabilityAdmin
     #   Metric specific configuration for centralization source metrics.
     #   @return [Types::SourceMetricsConfiguration]
     #
+    # @!attribute [rw] source_profiles_configuration
+    #   Profile-specific configuration for centralization source profiles.
+    #   @return [Types::SourceProfilesConfiguration]
+    #
     # @!attribute [rw] source_context_graph_configuration
     #   Configuration that enables centralization of the context graph for
     #   the selected sources. Including this configuration in a rule's
@@ -211,6 +917,7 @@ module Aws::ObservabilityAdmin
       :scope,
       :source_logs_configuration,
       :source_metrics_configuration,
+      :source_profiles_configuration,
       :source_context_graph_configuration)
       SENSITIVE = []
       include Aws::Structure
@@ -404,6 +1111,145 @@ module Aws::ObservabilityAdmin
       include Aws::Structure
     end
 
+    # A connector to a third-party cloud provider.
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the connector.
+    #   @return [String]
+    #
+    # @!attribute [rw] provider
+    #   The cloud provider that the connector connects to.
+    #   @return [String]
+    #
+    # @!attribute [rw] connector_configuration
+    #   The configuration for connecting to the third-party cloud provider.
+    #   @return [Types::ConnectorConfiguration]
+    #
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of the Amazon Web Services Identity
+    #   and Access Management (IAM) role that CloudWatch assumes to obtain
+    #   credentials for the third-party cloud provider.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the connector.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_time_stamp
+    #   The time when the connector was created, in milliseconds since the
+    #   Unix epoch.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/Connector AWS API Documentation
+    #
+    class Connector < Struct.new(
+      :arn,
+      :provider,
+      :connector_configuration,
+      :role_arn,
+      :name,
+      :created_time_stamp)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration for connecting to a third-party cloud provider.
+    # Specify one provider.
+    #
+    # @note ConnectorConfiguration is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note ConnectorConfiguration is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of ConnectorConfiguration corresponding to the set member.
+    #
+    # @!attribute [rw] azure
+    #   The configuration of a connector to Microsoft Azure.
+    #   @return [Types::AzureConnectorConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/ConnectorConfiguration AWS API Documentation
+    #
+    class ConnectorConfiguration < Struct.new(
+      :azure,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Azure < ConnectorConfiguration; end
+      class Unknown < ConnectorConfiguration; end
+    end
+
+    # What to list in a cloud provider. Specify one provider.
+    #
+    # @note ConnectorQuery is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @!attribute [rw] azure
+    #   The type of Azure resource to list.
+    #   @return [Types::AzureConnectorQuery]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/ConnectorQuery AWS API Documentation
+    #
+    class ConnectorQuery < Struct.new(
+      :azure,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Azure < ConnectorQuery; end
+      class Unknown < ConnectorQuery; end
+    end
+
+    # The results of a query. The populated member matches the member of the
+    # query.
+    #
+    # @note ConnectorQueryResults is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of ConnectorQueryResults corresponding to the set member.
+    #
+    # @!attribute [rw] azure
+    #   The results of an Azure discovery query.
+    #   @return [Types::AzureConnectorQueryResults]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/ConnectorQueryResults AWS API Documentation
+    #
+    class ConnectorQueryResults < Struct.new(
+      :azure,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Azure < ConnectorQueryResults; end
+      class Unknown < ConnectorQueryResults; end
+    end
+
+    # Summary information about a connector.
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the connector.
+    #   @return [String]
+    #
+    # @!attribute [rw] provider
+    #   The cloud provider that the connector connects to.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the connector.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_time_stamp
+    #   The time when the connector was created, in milliseconds since the
+    #   Unix epoch.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/ConnectorSummary AWS API Documentation
+    #
+    class ConnectorSummary < Struct.new(
+      :arn,
+      :provider,
+      :name,
+      :created_time_stamp)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] rule_name
     #   A unique name for the organization-wide centralization rule being
     #   created.
@@ -439,6 +1285,69 @@ module Aws::ObservabilityAdmin
     #
     class CreateCentralizationRuleForOrganizationOutput < Struct.new(
       :rule_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] connector_configuration
+    #   The configuration for connecting to the third-party cloud provider.
+    #   @return [Types::ConnectorConfiguration]
+    #
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of the Amazon Web Services Identity
+    #   and Access Management (IAM) role that CloudWatch assumes to get
+    #   credentials for the third-party cloud provider. The role must trust
+    #   the Amazon CloudWatch Observability Admin service principal,
+    #   `observabilityadmin.amazonaws.com`. The role must also allow
+    #   `sts:GetWebIdentityToken` for the provider's token exchange
+    #   audience.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the connector. The name must be unique in the account
+    #   and Region (case-sensitive). If another connector already uses the
+    #   name, the request fails with a `ConflictException`.
+    #
+    #   The name can contain letters, digits, hyphens (-), underscores (\_)
+    #   and periods (.), and must start with a letter.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags that you want to apply to the connector.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   operation completes no more than one time. If you use an Amazon Web
+    #   Services SDK, the SDK generates this value and reuses it on retries.
+    #   If this token matches a previous request with the same parameters,
+    #   the service returns the connector from the first request without an
+    #   error. If you use the same token with different parameters,
+    #   including different tags, the service returns a
+    #   `ValidationException`. This operation is idempotent when you use the
+    #   same token and parameters.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/CreateConnectorInput AWS API Documentation
+    #
+    class CreateConnectorInput < Struct.new(
+      :connector_configuration,
+      :role_arn,
+      :name,
+      :tags,
+      :client_token)
+      SENSITIVE = [:client_token]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] connector
+    #   The connector that this request created.
+    #   @return [Types::Connector]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/CreateConnectorOutput AWS API Documentation
+    #
+    class CreateConnectorOutput < Struct.new(
+      :connector)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -722,6 +1631,26 @@ module Aws::ObservabilityAdmin
       include Aws::Structure
     end
 
+    # @!attribute [rw] connector_identifier
+    #   The connector to delete. Specify one of the following:
+    #
+    #   * The Amazon Resource Name (ARN) of the connector
+    #
+    #   * The ID of the connector
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/DeleteConnectorInput AWS API Documentation
+    #
+    class DeleteConnectorInput < Struct.new(
+      :connector_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/DeleteConnectorOutput AWS API Documentation
+    #
+    class DeleteConnectorOutput < Aws::EmptyStructure; end
+
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) of the dataset integration to delete.
     #   @return [String]
@@ -857,6 +1786,22 @@ module Aws::ObservabilityAdmin
     # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/DestinationMetricsConfiguration AWS API Documentation
     #
     class DestinationMetricsConfiguration < Struct.new(
+      :backup_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration for centralization destination profiles, including
+    # backup settings.
+    #
+    # @!attribute [rw] backup_configuration
+    #   Configuration that defines the backup Region for the profiles backup
+    #   destination.
+    #   @return [Types::ProfilesBackupConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/DestinationProfilesConfiguration AWS API Documentation
+    #
+    class DestinationProfilesConfiguration < Struct.new(
       :backup_configuration)
       SENSITIVE = []
       include Aws::Structure
@@ -1051,6 +1996,135 @@ module Aws::ObservabilityAdmin
       :tag_propagation_failure_reason,
       :context_graph_status,
       :centralization_rule)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] connector_identifier
+    #   The connector. Specify one of the following:
+    #
+    #   * The Amazon Resource Name (ARN) of the connector
+    #
+    #   * The ID of the connector
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/GetConnectorInput AWS API Documentation
+    #
+    class GetConnectorInput < Struct.new(
+      :connector_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] connector
+    #   The connector.
+    #   @return [Types::Connector]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/GetConnectorOutput AWS API Documentation
+    #
+    class GetConnectorOutput < Struct.new(
+      :connector)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] connector_identifier
+    #   The connector. Specify one of the following:
+    #
+    #   * The Amazon Resource Name (ARN) of the connector
+    #
+    #   * The ID of the connector
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/GetConnectorTelemetryManifestInput AWS API Documentation
+    #
+    class GetConnectorTelemetryManifestInput < Struct.new(
+      :connector_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] manifest
+    #   The telemetry manifest.
+    #   @return [Types::TelemetryManifest]
+    #
+    # @!attribute [rw] version
+    #   The current version of the telemetry manifest. Pass this value as
+    #   `ExpectedVersion` when you next call
+    #   `PutConnectorTelemetryManifest`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] last_update_time_stamp
+    #   The time when the telemetry manifest was last updated, in
+    #   milliseconds since the Unix epoch.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/GetConnectorTelemetryManifestOutput AWS API Documentation
+    #
+    class GetConnectorTelemetryManifestOutput < Struct.new(
+      :manifest,
+      :version,
+      :last_update_time_stamp)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] connector_identifier
+    #   The connector whose telemetry manifest you want to generate the
+    #   setup from. Specify one of the following:
+    #
+    #   * The Amazon Resource Name (ARN) of the connector
+    #
+    #   * The ID of the connector
+    #   @return [String]
+    #
+    # @!attribute [rw] format
+    #   The format of the setup artifacts. If you omit this value, the
+    #   service uses the default format for the connector's provider
+    #   (`BICEP` for an Azure connector). If the provider doesn't support
+    #   the format, the service returns a `ValidationException`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/GetConnectorTelemetrySetupInput AWS API Documentation
+    #
+    class GetConnectorTelemetrySetupInput < Struct.new(
+      :connector_identifier,
+      :format)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] artifacts
+    #   The setup artifacts to apply in your cloud provider.
+    #   @return [Array<Types::SetupArtifact>]
+    #
+    # @!attribute [rw] required_permissions_to_apply
+    #   The permissions or roles in your cloud provider that you need to
+    #   apply the artifacts, for example Azure Contributor and User Access
+    #   Administrator.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] format
+    #   The format of the setup artifacts.
+    #   @return [String]
+    #
+    # @!attribute [rw] provider
+    #   The cloud provider that the setup artifacts are for.
+    #   @return [String]
+    #
+    # @!attribute [rw] manifest_version
+    #   The version of the telemetry manifest that the service generated the
+    #   setup artifacts from.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/GetConnectorTelemetrySetupOutput AWS API Documentation
+    #
+    class GetConnectorTelemetrySetupOutput < Struct.new(
+      :artifacts,
+      :required_permissions_to_apply,
+      :format,
+      :provider,
+      :manifest_version)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1404,6 +2478,71 @@ module Aws::ObservabilityAdmin
       include Aws::Structure
     end
 
+    # @!attribute [rw] telemetry_enrichment_identifier
+    #   The identifier of the enrichment to return. You can specify one of
+    #   the following:
+    #
+    #   * The name of the enrichment.
+    #
+    #   * The Amazon Resource Name (ARN) of the enrichment.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/GetThirdPartyTelemetryEnrichmentInput AWS API Documentation
+    #
+    class GetThirdPartyTelemetryEnrichmentInput < Struct.new(
+      :telemetry_enrichment_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the enrichment.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the enrichment.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the enrichment. Valid values:
+    #
+    #   * `Initializing` - CloudWatch is setting up the enrichment. Some
+    #     telemetry can be enriched before setup completes.
+    #
+    #   * `Running` - The enrichment is active.
+    #
+    #   * `Stopped` - The enrichment is stopped.
+    #
+    #   * `Impaired` - The enrichment has a problem. `StatusReason`
+    #     describes the problem.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_reason
+    #   The reason for the current status. This field is present when the
+    #   status is `Impaired`.
+    #   @return [String]
+    #
+    # @!attribute [rw] telemetry_source_configuration
+    #   The source configuration of the enrichment.
+    #   @return [Types::TelemetrySourceConfigurationOutput]
+    #
+    # @!attribute [rw] tags
+    #   The tags associated with the enrichment.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/GetThirdPartyTelemetryEnrichmentOutput AWS API Documentation
+    #
+    class GetThirdPartyTelemetryEnrichmentOutput < Struct.new(
+      :arn,
+      :name,
+      :status,
+      :status_reason,
+      :telemetry_source_configuration,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains summary information about an S3 Table integration for listing
     # operations.
     #
@@ -1467,7 +2606,7 @@ module Aws::ObservabilityAdmin
     #
     # @!attribute [rw] label_name
     #   The label name to match, supporting alphanumeric characters,
-    #   underscores, hyphens, and colons.
+    #   underscores, hyphens, colons, and periods.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/LabelNameCondition AWS API Documentation
@@ -1523,6 +2662,42 @@ module Aws::ObservabilityAdmin
       :centralization_rule_summaries,
       :next_token)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] max_results
+    #   The maximum number of connectors to return in one call. The default
+    #   is 100.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results, returned by a previous call.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/ListConnectorsInput AWS API Documentation
+    #
+    class ListConnectorsInput < Struct.new(
+      :max_results,
+      :next_token)
+      SENSITIVE = [:next_token]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] connector_summaries
+    #   The connectors in the account and Region.
+    #   @return [Array<Types::ConnectorSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use in the next call to get the next page of results.
+    #   Absent when there are no more results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/ListConnectorsOutput AWS API Documentation
+    #
+    class ListConnectorsOutput < Struct.new(
+      :connector_summaries,
+      :next_token)
+      SENSITIVE = [:next_token]
       include Aws::Structure
     end
 
@@ -1733,6 +2908,57 @@ module Aws::ObservabilityAdmin
       include Aws::Structure
     end
 
+    # @!attribute [rw] connector_identifier
+    #   The connector to use for the query. Specify one of the following:
+    #
+    #   * The Amazon Resource Name (ARN) of the connector
+    #
+    #   * The ID of the connector
+    #   @return [String]
+    #
+    # @!attribute [rw] selector
+    #   What to list: one cloud provider, and one type of resource in that
+    #   provider.
+    #   @return [Types::ConnectorQuery]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in one call. For an
+    #   `EventHubs` query, a page can contain more results than this value.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results, returned by a previous call.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/ListResourcesByConnectorInput AWS API Documentation
+    #
+    class ListResourcesByConnectorInput < Struct.new(
+      :connector_identifier,
+      :selector,
+      :max_results,
+      :next_token)
+      SENSITIVE = [:next_token]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] results
+    #   The results, in the same shape as the `Selector` that you specified.
+    #   @return [Types::ConnectorQueryResults]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use in the next call to get the next page of results.
+    #   Absent when there are no more results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/ListResourcesByConnectorOutput AWS API Documentation
+    #
+    class ListResourcesByConnectorOutput < Struct.new(
+      :results,
+      :next_token)
+      SENSITIVE = [:next_token]
+      include Aws::Structure
+    end
+
     # @!attribute [rw] max_results
     #   The maximum number of S3 Table integrations to return in a single
     #   call.
@@ -1927,11 +3153,68 @@ module Aws::ObservabilityAdmin
       include Aws::Structure
     end
 
+    # @!attribute [rw] status
+    #   Returns only the enrichments that have this status. Valid values:
+    #
+    #   * `Initializing` - CloudWatch is setting up the enrichment. Some
+    #     telemetry can be enriched before setup completes.
+    #
+    #   * `Running` - The enrichment is active.
+    #
+    #   * `Stopped` - The enrichment is stopped.
+    #
+    #   * `Impaired` - The enrichment has a problem. `StatusReason`
+    #     describes the problem.
+    #   @return [String]
+    #
+    # @!attribute [rw] telemetry_source
+    #   Returns only the enrichments for this third-party telemetry source.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in a single call. If you
+    #   omit this parameter, the operation returns up to 100 results.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results. A previous call generates
+    #   this token. If you omit this parameter, the operation returns the
+    #   first page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/ListThirdPartyTelemetryEnrichmentsInput AWS API Documentation
+    #
+    class ListThirdPartyTelemetryEnrichmentsInput < Struct.new(
+      :status,
+      :telemetry_source,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] telemetry_enrichments
+    #   The enrichments in your account and Region.
+    #   @return [Array<Types::ThirdPartyTelemetryEnrichmentSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   A token to resume pagination of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/ListThirdPartyTelemetryEnrichmentsOutput AWS API Documentation
+    #
+    class ListThirdPartyTelemetryEnrichmentsOutput < Struct.new(
+      :telemetry_enrichments,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The configuration parameters for log delivery, including `logType`
     # settings. Applies to resource types that support configurable log
     # delivery, such as Amazon Bedrock Knowledge Bases, Amazon Bedrock
-    # AgentCore payment managers, and Elastic Load Balancing Application
-    # Load Balancers.
+    # AgentCore payment managers, Amazon Web Services Network Firewall
+    # firewalls, and Elastic Load Balancing Application Load Balancers.
     #
     # @!attribute [rw] log_types
     #   The types of logs to collect from the resource.
@@ -2158,6 +3441,75 @@ module Aws::ObservabilityAdmin
       include Aws::Structure
     end
 
+    # Configuration for backing up centralized profiles data to a secondary
+    # Region.
+    #
+    # @!attribute [rw] region
+    #   The backup Region for profiles, within the primary destination
+    #   account, to which the service centralizes profiles data.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/ProfilesBackupConfiguration AWS API Documentation
+    #
+    class ProfilesBackupConfiguration < Struct.new(
+      :region)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] connector_identifier
+    #   The connector. Specify one of the following:
+    #
+    #   * The Amazon Resource Name (ARN) of the connector
+    #
+    #   * The ID of the connector
+    #   @return [String]
+    #
+    # @!attribute [rw] manifest
+    #   The telemetry manifest.
+    #   @return [Types::TelemetryManifest]
+    #
+    # @!attribute [rw] expected_version
+    #   The version of the telemetry manifest that you expect to replace, as
+    #   returned by `GetConnectorTelemetryManifest`. Omit this value when
+    #   you create the first telemetry manifest. If the value doesn't match
+    #   the current version, the request fails with a `ConflictException`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   operation completes no more than one time. If you use an Amazon Web
+    #   Services SDK, the SDK generates this value and reuses it on retries.
+    #   If this token matches a previous request with the same telemetry
+    #   manifest, the service returns the stored version without an error.
+    #   If you use the same token with a different telemetry manifest, the
+    #   service returns a `ValidationException`. This operation is
+    #   idempotent when you use the same token and parameters.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/PutConnectorTelemetryManifestInput AWS API Documentation
+    #
+    class PutConnectorTelemetryManifestInput < Struct.new(
+      :connector_identifier,
+      :manifest,
+      :expected_version,
+      :client_token)
+      SENSITIVE = [:client_token]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] version
+    #   The version of the telemetry manifest after this update.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/PutConnectorTelemetryManifestOutput AWS API Documentation
+    #
+    class PutConnectorTelemetryManifestOutput < Struct.new(
+      :version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Represents a test record structure used for pipeline testing
     # operations to validate data processing.
     #
@@ -2280,6 +3632,35 @@ module Aws::ObservabilityAdmin
       include Aws::Structure
     end
 
+    # A setup artifact, which is one file in the requested format.
+    #
+    # @!attribute [rw] file_name
+    #   The suggested file name, for example `main.bicep`.
+    #   @return [String]
+    #
+    # @!attribute [rw] content
+    #   The content of the artifact.
+    #   @return [String]
+    #
+    # @!attribute [rw] format
+    #   The format of the artifact.
+    #   @return [String]
+    #
+    # @!attribute [rw] content_type
+    #   The content type of the artifact, for example `text/plain`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/SetupArtifact AWS API Documentation
+    #
+    class SetupArtifact < Struct.new(
+      :file_name,
+      :content,
+      :format,
+      :content_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Structure containing a name field limited to 64 characters for header
     # or query parameter identification.
     #
@@ -2348,12 +3729,32 @@ module Aws::ObservabilityAdmin
     #   SKIP will skip CMK encrypted source log groups from centralization.
     #   @return [String]
     #
+    # @!attribute [rw] centralize_with_data_protection
+    #   Specifies whether this centralization rule centralizes log events
+    #   with data protection applied. If you don't specify this setting, or
+    #   you set it to `DISABLED`, the rule centralizes the original log
+    #   events, including any sensitive data that a data protection policy
+    #   on the source log group masks.
+    #
+    #   When you set this to `ENABLED`, the rule centralizes the same masked
+    #   data that anyone in the source account without the `logs:Unmask`
+    #   permission sees. The rule doesn't copy the original values to the
+    #   destination, so you can't unmask them in the destination account.
+    #   The rule centralizes log events from source log groups that don't
+    #   have a data protection policy without changes.
+    #
+    #   The setting applies only to log events that the rule centralizes
+    #   after you enable it. It doesn't change log events that the rule
+    #   already centralized.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/SourceLogsConfiguration AWS API Documentation
     #
     class SourceLogsConfiguration < Struct.new(
       :log_group_selection_criteria,
       :data_source_selection_criteria,
-      :encrypted_log_group_strategy)
+      :encrypted_log_group_strategy,
+      :centralize_with_data_protection)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2370,6 +3771,43 @@ module Aws::ObservabilityAdmin
     #
     class SourceMetricsConfiguration < Struct.new(
       :metrics_selection_criteria)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration for selecting source profiles for centralization.
+    #
+    # @!attribute [rw] profiles_selection_criteria
+    #   The filter expression that selects which source profiles to
+    #   centralize.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/SourceProfilesConfiguration AWS API Documentation
+    #
+    class SourceProfilesConfiguration < Struct.new(
+      :profiles_selection_criteria)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A summary of source activation for an external-cloud telemetry
+    # pipeline, with the number of active sources and the total number of
+    # discovered sources.
+    #
+    # @!attribute [rw] active
+    #   The number of discovered sources that are active and sending
+    #   telemetry to the pipeline.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] total
+    #   The total number of sources discovered for the pipeline.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/SourceProgress AWS API Documentation
+    #
+    class SourceProgress < Struct.new(
+      :active,
+      :total)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2451,6 +3889,96 @@ module Aws::ObservabilityAdmin
       include Aws::Structure
     end
 
+    # @!attribute [rw] pipeline_identifier
+    #   The Amazon Resource Name (ARN) of the telemetry pipeline to refresh.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/StartTelemetryPipelineRefreshInput AWS API Documentation
+    #
+    class StartTelemetryPipelineRefreshInput < Struct.new(
+      :pipeline_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/StartTelemetryPipelineRefreshOutput AWS API Documentation
+    #
+    class StartTelemetryPipelineRefreshOutput < Aws::EmptyStructure; end
+
+    # @!attribute [rw] name
+    #   A name for the enrichment. The name must be unique in your account
+    #   and Region. You can use the name instead of the ARN to identify the
+    #   enrichment in other operations.
+    #   @return [String]
+    #
+    # @!attribute [rw] telemetry_source_configuration
+    #   The third-party telemetry source to collect resource metadata from.
+    #   Specify exactly one telemetry source.
+    #   @return [Types::TelemetrySourceConfigurationInput]
+    #
+    # @!attribute [rw] tags
+    #   The tags to associate with the enrichment resource.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/StartThirdPartyTelemetryEnrichmentInput AWS API Documentation
+    #
+    class StartThirdPartyTelemetryEnrichmentInput < Struct.new(
+      :name,
+      :telemetry_source_configuration,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the enrichment.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the enrichment.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the enrichment after the start operation. Valid
+    #   values:
+    #
+    #   * `Initializing` - CloudWatch is setting up the enrichment. Some
+    #     telemetry can be enriched before setup completes.
+    #
+    #   * `Running` - The enrichment is active.
+    #
+    #   * `Stopped` - The enrichment is stopped.
+    #
+    #   * `Impaired` - The enrichment has a problem. `StatusReason`
+    #     describes the problem.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_reason
+    #   The reason for the current status. This field is present when the
+    #   status is `Impaired`.
+    #   @return [String]
+    #
+    # @!attribute [rw] telemetry_source_configuration
+    #   The source configuration of the enrichment.
+    #   @return [Types::TelemetrySourceConfigurationOutput]
+    #
+    # @!attribute [rw] tags
+    #   The tags associated with the enrichment.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/StartThirdPartyTelemetryEnrichmentOutput AWS API Documentation
+    #
+    class StartThirdPartyTelemetryEnrichmentOutput < Struct.new(
+      :arn,
+      :name,
+      :status,
+      :status_reason,
+      :telemetry_source_configuration,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] status
     #   The status of the resource tags for telemetry feature after the stop
     #   operation (`Running`, `Stopped`, or `Impaired`).
@@ -2460,6 +3988,84 @@ module Aws::ObservabilityAdmin
     #
     class StopTelemetryEnrichmentOutput < Struct.new(
       :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] telemetry_enrichment_identifier
+    #   The identifier of the enrichment to stop. You can specify one of the
+    #   following:
+    #
+    #   * The name of the enrichment.
+    #
+    #   * The Amazon Resource Name (ARN) of the enrichment.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/StopThirdPartyTelemetryEnrichmentInput AWS API Documentation
+    #
+    class StopThirdPartyTelemetryEnrichmentInput < Struct.new(
+      :telemetry_enrichment_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
+    #   The name of the enrichment.
+    #   @return [String]
+    #
+    # @!attribute [rw] telemetry_source
+    #   The third-party telemetry source of the enrichment.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the enrichment after the stop operation. Valid values:
+    #
+    #   * `Initializing` - CloudWatch is setting up the enrichment. Some
+    #     telemetry can be enriched before setup completes.
+    #
+    #   * `Running` - The enrichment is active.
+    #
+    #   * `Stopped` - The enrichment is stopped.
+    #
+    #   * `Impaired` - The enrichment has a problem. `StatusReason`
+    #     describes the problem.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_reason
+    #   The reason for the current status. This field is present when the
+    #   status is `Impaired`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/StopThirdPartyTelemetryEnrichmentOutput AWS API Documentation
+    #
+    class StopThirdPartyTelemetryEnrichmentOutput < Struct.new(
+      :name,
+      :telemetry_source,
+      :status,
+      :status_reason)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A tag filter. A resource matches only if it has the tag. Filters for
+    # different tag keys must all match; for one tag key, any of the values
+    # can match.
+    #
+    # @!attribute [rw] key
+    #   The tag key. Up to 512 characters. The characters &lt; &gt; % &amp;
+    #   \\ ? / $ \{ } ' " ` and control characters aren't allowed.
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   The tag values to match. A resource matches if it has any of these
+    #   values for the tag key.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/TagFilter AWS API Documentation
+    #
+    class TagFilter < Struct.new(
+      :key,
+      :values)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2530,7 +4136,8 @@ module Aws::ObservabilityAdmin
     #
     # @!attribute [rw] telemetry_configuration_state
     #   The configuration state for the resource, for example `{ Logs:
-    #   NotApplicable; Metrics: Enabled; Traces: NotApplicable; }`.
+    #   NotApplicable; Metrics: Enabled; Traces: NotApplicable; Insights:
+    #   NotApplicable; }`.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] resource_type
@@ -2613,8 +4220,9 @@ module Aws::ObservabilityAdmin
     # @!attribute [rw] log_delivery_parameters
     #   The configuration parameters for log delivery when the resource type
     #   supports configurable log types, such as Amazon Bedrock Knowledge
-    #   Bases, Amazon Bedrock AgentCore payment managers, or Elastic Load
-    #   Balancing Application Load Balancers.
+    #   Bases, Amazon Bedrock AgentCore payment managers, Amazon Web
+    #   Services Network Firewall firewalls, or Elastic Load Balancing
+    #   Application Load Balancers.
     #   @return [Types::LogDeliveryParameters]
     #
     # @!attribute [rw] msk_monitoring_parameters
@@ -2643,6 +4251,81 @@ module Aws::ObservabilityAdmin
       :kms_key_arn)
       SENSITIVE = []
       include Aws::Structure
+    end
+
+    # Declares which resources in a cloud provider to collect telemetry from
+    # and which telemetry types to collect.
+    #
+    # @!attribute [rw] source
+    #   The resources to collect telemetry from and the telemetry types to
+    #   collect.
+    #   @return [Types::TelemetryManifestSource]
+    #
+    # @!attribute [rw] infrastructure
+    #   The choices for the infrastructure that the setup creates in your
+    #   cloud provider, such as the subscription that contains the Event
+    #   Hubs and their size. If you omit this value, the setup uses default
+    #   settings. If an `AzureScopeItem` collects `ResourceLogs`, you must
+    #   specify at least the Azure `SubscriptionId`.
+    #   @return [Types::TelemetryManifestInfrastructure]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/TelemetryManifest AWS API Documentation
+    #
+    class TelemetryManifest < Struct.new(
+      :source,
+      :infrastructure)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The choices for the infrastructure that the setup creates. Specify one
+    # provider, which must match the provider in `Source`.
+    #
+    # @note TelemetryManifestInfrastructure is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note TelemetryManifestInfrastructure is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of TelemetryManifestInfrastructure corresponding to the set member.
+    #
+    # @!attribute [rw] azure
+    #   The choices for the Azure infrastructure that the setup creates.
+    #   @return [Types::AzureInfrastructure]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/TelemetryManifestInfrastructure AWS API Documentation
+    #
+    class TelemetryManifestInfrastructure < Struct.new(
+      :azure,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Azure < TelemetryManifestInfrastructure; end
+      class Unknown < TelemetryManifestInfrastructure; end
+    end
+
+    # The resources to collect telemetry from, for one cloud provider.
+    # Specify one provider.
+    #
+    # @note TelemetryManifestSource is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note TelemetryManifestSource is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of TelemetryManifestSource corresponding to the set member.
+    #
+    # @!attribute [rw] azure
+    #   The Azure scope items. Each `AzureScopeItem` specifies a set of
+    #   Azure resources and the telemetry types to collect from them. You
+    #   can specify up to 100 scope items.
+    #   @return [Array<Types::AzureScopeItem>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/TelemetryManifestSource AWS API Documentation
+    #
+    class TelemetryManifestSource < Struct.new(
+      :azure,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Azure < TelemetryManifestSource; end
+      class Unknown < TelemetryManifestSource; end
     end
 
     # Represents a complete telemetry pipeline resource with configuration,
@@ -2682,6 +4365,21 @@ module Aws::ObservabilityAdmin
     #   The key-value pairs associated with the telemetry pipeline resource.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] last_refresh_time_stamp
+    #   The timestamp when the most recent refresh of the telemetry pipeline
+    #   started. This field is only present for external-cloud pipelines
+    #   that you have refreshed.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] source_progress
+    #   The progress of source activation for the telemetry pipeline. This
+    #   field is only present for external-cloud pipelines.
+    #   @return [Types::SourceProgress]
+    #
+    # @!attribute [rw] configuration_summary
+    #   A summary of the pipeline configuration components.
+    #   @return [Types::ConfigurationSummary]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/TelemetryPipeline AWS API Documentation
     #
     class TelemetryPipeline < Struct.new(
@@ -2692,7 +4390,10 @@ module Aws::ObservabilityAdmin
       :configuration,
       :status,
       :status_reason,
-      :tags)
+      :tags,
+      :last_refresh_time_stamp,
+      :source_progress,
+      :configuration_summary)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2813,12 +4514,14 @@ module Aws::ObservabilityAdmin
     #   (for example, `AWS::EC2::VPC`, `AWS::EKS::Cluster`,
     #   `AWS::ElasticLoadBalancingV2::LoadBalancer`,
     #   `AWS::Bedrock::KnowledgeBase`,
-    #   `AWS::BedrockAgentCore::PaymentManager`, or
-    #   `AWS::XRay::TransactionSearchConfig`).
+    #   `AWS::BedrockAgentCore::PaymentManager`,
+    #   `AWS::XRay::TransactionSearchConfig`, `AWS::CloudWatchOmni`, or
+    #   `AWS::NetworkFirewall::Firewall`).
     #   @return [String]
     #
     # @!attribute [rw] telemetry_type
-    #   The type of telemetry to collect (Logs, Metrics, or Traces).
+    #   The type of telemetry to collect (Logs, Metrics, Traces, or
+    #   Insights).
     #   @return [String]
     #
     # @!attribute [rw] telemetry_source_types
@@ -2907,7 +4610,7 @@ module Aws::ObservabilityAdmin
     #   @return [String]
     #
     # @!attribute [rw] telemetry_type
-    #   The type of telemetry (Logs, Metrics, or Traces) the rule
+    #   The type of telemetry (Logs, Metrics, Traces, or Insights) the rule
     #   configures.
     #   @return [String]
     #
@@ -2929,6 +4632,50 @@ module Aws::ObservabilityAdmin
       :telemetry_source_types)
       SENSITIVE = []
       include Aws::Structure
+    end
+
+    # The configuration of the third-party telemetry source that a new
+    # enrichment collects resource metadata from. Specify exactly one
+    # member.
+    #
+    # @note TelemetrySourceConfigurationInput is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @!attribute [rw] azure
+    #   The configuration for a Microsoft Azure source.
+    #   @return [Types::AzureTelemetrySourceConfigurationInput]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/TelemetrySourceConfigurationInput AWS API Documentation
+    #
+    class TelemetrySourceConfigurationInput < Struct.new(
+      :azure,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Azure < TelemetrySourceConfigurationInput; end
+      class Unknown < TelemetrySourceConfigurationInput; end
+    end
+
+    # The third-party source configuration of an enrichment.
+    #
+    # @note TelemetrySourceConfigurationOutput is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of TelemetrySourceConfigurationOutput corresponding to the set member.
+    #
+    # @!attribute [rw] azure
+    #   The configuration of the Microsoft Azure source.
+    #   @return [Types::AzureTelemetrySourceConfigurationOutput]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/TelemetrySourceConfigurationOutput AWS API Documentation
+    #
+    class TelemetrySourceConfigurationOutput < Struct.new(
+      :azure,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Azure < TelemetrySourceConfigurationOutput; end
+      class Unknown < TelemetrySourceConfigurationOutput; end
     end
 
     # @!attribute [rw] records
@@ -2964,6 +4711,41 @@ module Aws::ObservabilityAdmin
     #
     class TestTelemetryPipelineOutput < Struct.new(
       :results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Summary information about a third-party telemetry enrichment, as
+    # returned by `ListThirdPartyTelemetryEnrichments`.
+    #
+    # @!attribute [rw] name
+    #   The name of the enrichment.
+    #   @return [String]
+    #
+    # @!attribute [rw] telemetry_source
+    #   The third-party telemetry source of the enrichment.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the enrichment. Valid values:
+    #
+    #   * `Initializing` - CloudWatch is setting up the enrichment. Some
+    #     telemetry can be enriched before setup completes.
+    #
+    #   * `Running` - The enrichment is active.
+    #
+    #   * `Stopped` - The enrichment is stopped.
+    #
+    #   * `Impaired` - The enrichment has a problem. `StatusReason`
+    #     describes the problem.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/ThirdPartyTelemetryEnrichmentSummary AWS API Documentation
+    #
+    class ThirdPartyTelemetryEnrichmentSummary < Struct.new(
+      :name,
+      :telemetry_source,
+      :status)
       SENSITIVE = []
       include Aws::Structure
     end

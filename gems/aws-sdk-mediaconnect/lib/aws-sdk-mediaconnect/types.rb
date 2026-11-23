@@ -633,6 +633,12 @@ module Aws::MediaConnect
     #   `-20`.
     #   @return [Integer]
     #
+    # @!attribute [rw] rtmp_push_settings
+    #   The settings for an output that pushes a stream to a destination
+    #   using the RTMP (Real-Time Messaging Protocol) protocol, or RTMPS
+    #   (RTMP over TLS) when TLS encryption is specified.
+    #   @return [Types::RtmpPushOutputSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/AddOutputRequest AWS API Documentation
     #
     class AddOutputRequest < Struct.new(
@@ -658,7 +664,8 @@ module Aws::MediaConnect
       :router_integration_state,
       :router_integration_transit_encryption,
       :ndi_output_timecode_source,
-      :ndi_audio_reference_level)
+      :ndi_audio_reference_level,
+      :rtmp_push_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -673,6 +680,27 @@ module Aws::MediaConnect
     #
     class AudioMonitoringSetting < Struct.new(
       :silent_audio)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration settings for automatic Packet ID (PID) assignment.
+    # These settings apply to any PID mapping rule that uses the `auto`
+    # action, including the default action.
+    #
+    # @!attribute [rw] start_pid
+    #   The first PID in the range for automatic PID assignment.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] pids_per_program
+    #   The number of PIDs in the range for automatic PID assignment.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/AutoPidMapConfiguration AWS API Documentation
+    #
+    class AutoPidMapConfiguration < Struct.new(
+      :start_pid,
+      :pids_per_program)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -695,6 +723,16 @@ module Aws::MediaConnect
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/AutomaticEndpointEncryptionConfiguration AWS API Documentation
     #
     class AutomaticEndpointEncryptionConfiguration < Aws::EmptyStructure; end
+
+    # The automatic RTMP naming configuration, where MediaConnect generates
+    # the application and stream names. This type does not require any
+    # additional settings.
+    #
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/AutomaticRtmpPushNamingConfiguration AWS API Documentation
+    #
+    class AutomaticRtmpPushNamingConfiguration < Aws::EmptyStructure; end
 
     # This exception is thrown if the request contains a semantic error. The
     # precise meaning depends on the API, and is documented in the error
@@ -1882,6 +1920,10 @@ module Aws::MediaConnect
     #   not need to pass this option.
     #   @return [String]
     #
+    # @!attribute [rw] processors
+    #   The processor settings for the router output.
+    #   @return [Types::RouterOutputProcessors]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/CreateRouterOutputRequest AWS API Documentation
     #
     class CreateRouterOutputRequest < Struct.new(
@@ -1895,7 +1937,8 @@ module Aws::MediaConnect
       :maintenance_configuration,
       :tags,
       :fabric_configuration,
-      :client_token)
+      :client_token,
+      :processors)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2297,6 +2340,12 @@ module Aws::MediaConnect
     #   any relevant status messages.
     #   @return [Types::NdiSourceMetadataInfo]
     #
+    # @!attribute [rw] rtmp_info
+    #   The RTMP (Real-Time Messaging Protocol) specific information about
+    #   the flow's source. This includes the application name, the stream
+    #   name, and the associated audio and video streams.
+    #   @return [Types::RtmpSourceMetadataInfo]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/DescribeFlowSourceMetadataResponse AWS API Documentation
     #
     class DescribeFlowSourceMetadataResponse < Struct.new(
@@ -2304,7 +2353,8 @@ module Aws::MediaConnect
       :messages,
       :timestamp,
       :transport_media_info,
-      :ndi_info)
+      :ndi_info,
+      :rtmp_info)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3231,12 +3281,62 @@ module Aws::MediaConnect
     #     quality under adverse network conditions.
     #   @return [String]
     #
+    # @!attribute [rw] switching_mode
+    #   The switching mode that the router output uses when it switches to a
+    #   new router input. Valid values include the following:
+    #
+    #   * `IMMEDIATE` (default) – Switches to the new router input
+    #     immediately.
+    #
+    #   * `KEY_FRAME` – Waits for a key frame on the new router input before
+    #     it switches.
+    #
+    #   If you specify it, it must match the switching configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] switching_configuration
+    #   The configuration settings for the switching mode.
+    #   @return [Types::FabricSwitchingConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/FabricConfiguration AWS API Documentation
     #
     class FabricConfiguration < Struct.new(
-      :recovery_latency_mode)
+      :recovery_latency_mode,
+      :switching_mode,
+      :switching_configuration)
       SENSITIVE = []
       include Aws::Structure
+    end
+
+    # The configuration settings for switching between router inputs.
+    #
+    # @note FabricSwitchingConfiguration is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note FabricSwitchingConfiguration is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of FabricSwitchingConfiguration corresponding to the set member.
+    #
+    # @!attribute [rw] immediate
+    #   The switching configuration where the router output switches to the
+    #   new router input immediately.
+    #   @return [Types::ImmediateFabricSwitchingConfiguration]
+    #
+    # @!attribute [rw] key_frame
+    #   The switching configuration where the router output waits for a key
+    #   frame on the new router input before it switches.
+    #   @return [Types::KeyFrameFabricSwitchingConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/FabricSwitchingConfiguration AWS API Documentation
+    #
+    class FabricSwitchingConfiguration < Struct.new(
+      :immediate,
+      :key_frame,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Immediate < FabricSwitchingConfiguration; end
+      class KeyFrame < FabricSwitchingConfiguration; end
+      class Unknown < FabricSwitchingConfiguration; end
     end
 
     # The settings for source failover.
@@ -3321,11 +3421,17 @@ module Aws::MediaConnect
     #   The IP address of the source for this indexed stream.
     #   @return [String]
     #
+    # @!attribute [rw] rtmp_push
+    #   The RTMP stream details for this indexed stream, including the
+    #   application and stream names.
+    #   @return [Types::RtmpPushStreamDetails]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/FailoverRouterInputIndexedStreamDetails AWS API Documentation
     #
     class FailoverRouterInputIndexedStreamDetails < Struct.new(
       :source_index,
-      :source_ip_address)
+      :source_ip_address,
+      :rtmp_push)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3348,6 +3454,11 @@ module Aws::MediaConnect
     #   minimum latency, and decryption key configuration.
     #   @return [Types::SrtListenerRouterInputConfiguration]
     #
+    # @!attribute [rw] rtmp_push
+    #   The configuration settings for a failover router input that uses the
+    #   RTMP protocol.
+    #   @return [Types::RtmpPushRouterInputConfiguration]
+    #
     # @!attribute [rw] srt_caller
     #   The configuration settings for a router input using the SRT (Secure
     #   Reliable Transport) protocol in caller mode, including the source
@@ -3366,6 +3477,7 @@ module Aws::MediaConnect
     class FailoverRouterInputProtocolConfiguration < Struct.new(
       :rist,
       :srt_listener,
+      :rtmp_push,
       :srt_caller,
       :rtp,
       :unknown)
@@ -3375,6 +3487,7 @@ module Aws::MediaConnect
 
       class Rist < FailoverRouterInputProtocolConfiguration; end
       class SrtListener < FailoverRouterInputProtocolConfiguration; end
+      class RtmpPush < FailoverRouterInputProtocolConfiguration; end
       class SrtCaller < FailoverRouterInputProtocolConfiguration; end
       class Rtp < FailoverRouterInputProtocolConfiguration; end
       class Unknown < FailoverRouterInputProtocolConfiguration; end
@@ -4173,6 +4286,16 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
+    # The switching configuration where the router output switches to the
+    # new router input immediately. This type does not require any
+    # additional settings.
+    #
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/ImmediateFabricSwitchingConfiguration AWS API Documentation
+    #
+    class ImmediateFabricSwitchingConfiguration < Aws::EmptyStructure; end
+
     # Create a bridge with the ingress bridge type. An ingress bridge is a
     # ground-to-cloud bridge. The content originates at your premises and is
     # delivered to the cloud.
@@ -4287,6 +4410,26 @@ module Aws::MediaConnect
     #
     class InternalServerErrorException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The switching configuration where the router output waits for a key
+    # frame on the new router input before it switches.
+    #
+    # @!attribute [rw] key_frame_wait_milliseconds
+    #   The maximum time, in milliseconds, that the router output waits for
+    #   a key frame on the new input before it switches. Set this value to
+    #   at least the GOP (Group of Pictures) duration of your content, which
+    #   your upstream encoder determines. If the wait time is shorter than
+    #   the GOP duration, MediaConnect makes a best effort to switch without
+    #   a key frame. The default is 3000.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/KeyFrameFabricSwitchingConfiguration AWS API Documentation
+    #
+    class KeyFrameFabricSwitchingConfiguration < Struct.new(
+      :key_frame_wait_milliseconds)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5731,6 +5874,29 @@ module Aws::MediaConnect
       class Unknown < MaintenanceSchedule; end
     end
 
+    # The manual RTMP naming configuration, where you specify the
+    # application and stream names.
+    #
+    # @!attribute [rw] application_name
+    #   The name of the RTMP application. Together with the stream name, the
+    #   application name forms the RTMP URL path, in the pattern
+    #   `rtmp://ingestAddress/applicationName/streamName`.
+    #   @return [String]
+    #
+    # @!attribute [rw] stream_name
+    #   The name of the RTMP stream. The stream name forms the final segment
+    #   of the RTMP URL path.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/ManualRtmpPushNamingConfiguration AWS API Documentation
+    #
+    class ManualRtmpPushNamingConfiguration < Struct.new(
+      :application_name,
+      :stream_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Configuration settings for connecting a router input to a flow output.
     #
     # To connect the router input to the flow output, provide both `flowArn`
@@ -6259,11 +6425,26 @@ module Aws::MediaConnect
     #   and recovery latency.
     #   @return [Types::RistRouterInputConfiguration]
     #
+    # @!attribute [rw] srt_listener
+    #   The configuration settings for a router input using the SRT (Secure
+    #   Reliable Transport) protocol in listener mode, including the port,
+    #   minimum latency, and decryption key configuration.
+    #   @return [Types::SrtListenerRouterInputConfiguration]
+    #
+    # @!attribute [rw] srt_caller
+    #   The configuration settings for a router input using the SRT (Secure
+    #   Reliable Transport) protocol in caller mode, including the source
+    #   address and port, minimum latency, stream ID, and decryption key
+    #   configuration.
+    #   @return [Types::SrtCallerRouterInputConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/MergeRouterInputProtocolConfiguration AWS API Documentation
     #
     class MergeRouterInputProtocolConfiguration < Struct.new(
       :rtp,
       :rist,
+      :srt_listener,
+      :srt_caller,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
@@ -6271,6 +6452,8 @@ module Aws::MediaConnect
 
       class Rtp < MergeRouterInputProtocolConfiguration; end
       class Rist < MergeRouterInputProtocolConfiguration; end
+      class SrtListener < MergeRouterInputProtocolConfiguration; end
+      class SrtCaller < MergeRouterInputProtocolConfiguration; end
       class Unknown < MergeRouterInputProtocolConfiguration; end
     end
 
@@ -6829,6 +7012,36 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
+    # The configuration that passes through the value from the source. This
+    # type does not require any additional settings.
+    #
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/Passthrough AWS API Documentation
+    #
+    class Passthrough < Aws::EmptyStructure; end
+
+    # A rule that selects elementary streams and specifies the action to
+    # apply to them.
+    #
+    # @!attribute [rw] match_expression
+    #   An expression that selects the elementary streams that this rule
+    #   applies to.
+    #   @return [String]
+    #
+    # @!attribute [rw] action
+    #   The action to apply to the elementary streams that match this rule.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/PidMapRule AWS API Documentation
+    #
+    class PidMapRule < Struct.new(
+      :match_expression,
+      :action)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Configuration for preferred day and time maintenance settings.
     #
     # @!attribute [rw] day
@@ -6846,6 +7059,102 @@ module Aws::MediaConnect
       :time)
       SENSITIVE = []
       include Aws::Structure
+    end
+
+    # The configuration settings for the Program Clock Reference (PCR)
+    # Packet ID (PID).
+    #
+    # @note ProgramClockReferencePidConfiguration is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note ProgramClockReferencePidConfiguration is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of ProgramClockReferencePidConfiguration corresponding to the set member.
+    #
+    # @!attribute [rw] passthrough
+    #   The PCR PID configuration that passes through the PCR PID from the
+    #   source.
+    #   @return [Types::Passthrough]
+    #
+    # @!attribute [rw] set
+    #   The PCR PID to use for the router output. MediaConnect applies this
+    #   value only when the PCR is carried on its own PID. If the PCR is
+    #   carried on an elementary stream, this value has no effect. If you
+    #   also set the PMT PID, the two values must be different.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/ProgramClockReferencePidConfiguration AWS API Documentation
+    #
+    class ProgramClockReferencePidConfiguration < Struct.new(
+      :passthrough,
+      :set,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Passthrough < ProgramClockReferencePidConfiguration; end
+      class Set < ProgramClockReferencePidConfiguration; end
+      class Unknown < ProgramClockReferencePidConfiguration; end
+    end
+
+    # The configuration settings for the Program Map Table (PMT) Packet ID
+    # (PID).
+    #
+    # @note ProgramMapTablePidConfiguration is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note ProgramMapTablePidConfiguration is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of ProgramMapTablePidConfiguration corresponding to the set member.
+    #
+    # @!attribute [rw] passthrough
+    #   The PMT PID configuration that passes through the PMT PID from the
+    #   source.
+    #   @return [Types::Passthrough]
+    #
+    # @!attribute [rw] set
+    #   The PMT PID to use for the router output. If you also set the PCR
+    #   PID, the two values must be different.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/ProgramMapTablePidConfiguration AWS API Documentation
+    #
+    class ProgramMapTablePidConfiguration < Struct.new(
+      :passthrough,
+      :set,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Passthrough < ProgramMapTablePidConfiguration; end
+      class Set < ProgramMapTablePidConfiguration; end
+      class Unknown < ProgramMapTablePidConfiguration; end
+    end
+
+    # The configuration settings for the program number.
+    #
+    # @note ProgramNumberConfiguration is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note ProgramNumberConfiguration is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of ProgramNumberConfiguration corresponding to the set member.
+    #
+    # @!attribute [rw] passthrough
+    #   The program number configuration that passes through the program
+    #   number from the source.
+    #   @return [Types::Passthrough]
+    #
+    # @!attribute [rw] set
+    #   The program number to use for the router output.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/ProgramNumberConfiguration AWS API Documentation
+    #
+    class ProgramNumberConfiguration < Struct.new(
+      :passthrough,
+      :set,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Passthrough < ProgramNumberConfiguration; end
+      class Set < ProgramNumberConfiguration; end
+      class Unknown < ProgramNumberConfiguration; end
     end
 
     # The networking configuration for a publicly accessible destination
@@ -8089,16 +8398,24 @@ module Aws::MediaConnect
     #   The metadata of the transport stream in the current flow's source.
     #   @return [Types::TransportMediaInfo]
     #
+    # @!attribute [rw] rtmp_info
+    #   The RTMP (Real-Time Messaging Protocol) specific information about
+    #   the router input's source. This includes the application name, the
+    #   stream name, and the associated audio and video streams.
+    #   @return [Types::RtmpSourceMetadataInfo]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/RouterInputMetadata AWS API Documentation
     #
     class RouterInputMetadata < Struct.new(
       :transport_stream_media_info,
+      :rtmp_info,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
       include Aws::Structure::Union
 
       class TransportStreamMediaInfo < RouterInputMetadata; end
+      class RtmpInfo < RouterInputMetadata; end
       class Unknown < RouterInputMetadata; end
     end
 
@@ -8120,6 +8437,11 @@ module Aws::MediaConnect
     #   minimum latency, and decryption key configuration.
     #   @return [Types::SrtListenerRouterInputConfiguration]
     #
+    # @!attribute [rw] rtmp_push
+    #   The configuration settings for a router input that uses the RTMP
+    #   protocol.
+    #   @return [Types::RtmpPushRouterInputConfiguration]
+    #
     # @!attribute [rw] srt_caller
     #   The configuration settings for a router input using the SRT (Secure
     #   Reliable Transport) protocol in caller mode, including the source
@@ -8138,6 +8460,7 @@ module Aws::MediaConnect
     class RouterInputProtocolConfiguration < Struct.new(
       :rist,
       :srt_listener,
+      :rtmp_push,
       :srt_caller,
       :rtp,
       :unknown)
@@ -8147,6 +8470,7 @@ module Aws::MediaConnect
 
       class Rist < RouterInputProtocolConfiguration; end
       class SrtListener < RouterInputProtocolConfiguration; end
+      class RtmpPush < RouterInputProtocolConfiguration; end
       class SrtCaller < RouterInputProtocolConfiguration; end
       class Rtp < RouterInputProtocolConfiguration; end
       class Unknown < RouterInputProtocolConfiguration; end
@@ -8607,6 +8931,10 @@ module Aws::MediaConnect
     #   The fabric configuration settings for the router output.
     #   @return [Types::FabricConfiguration]
     #
+    # @!attribute [rw] processors
+    #   The processor settings for the router output.
+    #   @return [Types::RouterOutputProcessors]
+    #
     # @!attribute [rw] associated_source_endpoint_arns
     #   The Amazon Resource Names (ARNs) of one or more source endpoints
     #   that are associated with this router output.
@@ -8639,6 +8967,7 @@ module Aws::MediaConnect
       :maintenance_schedule_type,
       :maintenance_schedule,
       :fabric_configuration,
+      :processors,
       :associated_source_endpoint_arns)
       SENSITIVE = []
       include Aws::Structure
@@ -8780,6 +9109,22 @@ module Aws::MediaConnect
     class RouterOutputMessage < Struct.new(
       :code,
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The processor settings for a router output.
+    #
+    # @!attribute [rw] single_program_transport_stream_pid_map
+    #   The configuration settings for remapping the identification numbers
+    #   of elementary streams and program identifiers of a single-program
+    #   transport stream.
+    #   @return [Types::SingleProgramTransportStreamPidMapConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/RouterOutputProcessors AWS API Documentation
+    #
+    class RouterOutputProcessors < Struct.new(
+      :single_program_transport_stream_pid_map)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8980,6 +9325,191 @@ module Aws::MediaConnect
       class Unknown < RouterOutputStreamDetails; end
     end
 
+    # Metadata about the audio and video media that is part of the RTMP
+    # source content. This includes details about the individual streams.
+    #
+    # @!attribute [rw] streams
+    #   A list of the individual audio and video streams that make up the
+    #   RTMP source. This includes details about each stream's codec,
+    #   resolution, frame rate, audio channels, and other parameters.
+    #   @return [Array<Types::RtmpMediaStreamInfo>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/RtmpMediaInfo AWS API Documentation
+    #
+    class RtmpMediaInfo < Struct.new(
+      :streams)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about a single audio or video stream that is part of an
+    # RTMP source. This includes details about the stream type, codec,
+    # resolution, frame rate, audio channels, and sample rate.
+    #
+    # @!attribute [rw] stream_id
+    #   A unique identifier for the stream.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] stream_type
+    #   The type of stream (for example, `VIDEO` or `AUDIO`).
+    #   @return [String]
+    #
+    # @!attribute [rw] codec
+    #   The codec used for the stream.
+    #   @return [String]
+    #
+    # @!attribute [rw] frame_rate
+    #   The number of video frames displayed per second. Used when the
+    #   `streamType` is `VIDEO`.
+    #   @return [String]
+    #
+    # @!attribute [rw] frame_resolution
+    #   The width and height dimensions of the video frame in pixels. Used
+    #   when the `streamType` is `VIDEO`.
+    #   @return [Types::FrameResolution]
+    #
+    # @!attribute [rw] scan_mode
+    #   The method used to display video frames. Used when the `streamType`
+    #   is `VIDEO`.
+    #   @return [String]
+    #
+    # @!attribute [rw] color
+    #   The color signaling of the video stream. Used when the `streamType`
+    #   is `VIDEO`.
+    #   @return [Types::ColorInformation]
+    #
+    # @!attribute [rw] channels
+    #   The number of audio channels in the stream. Used when the
+    #   `streamType` is `AUDIO`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] sample_rate
+    #   The number of audio samples captured per second. Used when the
+    #   `streamType` is `AUDIO`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] sample_size
+    #   The sample bit size used by the audio stream. Used when the
+    #   `streamType` is `AUDIO`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] language
+    #   The language of the audio stream. Used when the `streamType` is
+    #   `AUDIO`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/RtmpMediaStreamInfo AWS API Documentation
+    #
+    class RtmpMediaStreamInfo < Struct.new(
+      :stream_id,
+      :stream_type,
+      :codec,
+      :frame_rate,
+      :frame_resolution,
+      :scan_mode,
+      :color,
+      :channels,
+      :sample_rate,
+      :sample_size,
+      :language)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration settings for the RTMP (Real-Time Messaging Protocol)
+    # application and stream names.
+    #
+    # @note RtmpPushNamingConfiguration is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note RtmpPushNamingConfiguration is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of RtmpPushNamingConfiguration corresponding to the set member.
+    #
+    # @!attribute [rw] manual
+    #   The naming configuration where you specify the application and
+    #   stream names.
+    #   @return [Types::ManualRtmpPushNamingConfiguration]
+    #
+    # @!attribute [rw] automatic
+    #   The naming configuration where MediaConnect generates the
+    #   application and stream names.
+    #   @return [Types::AutomaticRtmpPushNamingConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/RtmpPushNamingConfiguration AWS API Documentation
+    #
+    class RtmpPushNamingConfiguration < Struct.new(
+      :manual,
+      :automatic,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Manual < RtmpPushNamingConfiguration; end
+      class Automatic < RtmpPushNamingConfiguration; end
+      class Unknown < RtmpPushNamingConfiguration; end
+    end
+
+    # The settings for an output that pushes a stream to a destination using
+    # the RTMP (Real-Time Messaging Protocol) protocol, or RTMPS (RTMP over
+    # TLS) when TLS encryption is specified. These settings include the
+    # application and stream names, and optional TLS encryption
+    # configuration.
+    #
+    # @!attribute [rw] application_name
+    #   The name of the RTMP application on the destination server. Together
+    #   with the stream name, the application name forms the RTMP URL path,
+    #   in the pattern
+    #   `rtmp://destinationAddress/applicationName/streamName`.
+    #   @return [String]
+    #
+    # @!attribute [rw] stream_name
+    #   The name of the RTMP stream that the output publishes to the
+    #   destination application. The stream name forms the final segment of
+    #   the RTMP URL path.
+    #   @return [String]
+    #
+    # @!attribute [rw] tls_encryption
+    #   The TLS encryption settings for the output. When you specify these
+    #   settings, the output uses RTMPS (RTMP over TLS) to establish a
+    #   secure, encrypted connection to the destination server.
+    #   @return [Types::TlsEncryption]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/RtmpPushOutputSettings AWS API Documentation
+    #
+    class RtmpPushOutputSettings < Struct.new(
+      :application_name,
+      :stream_name,
+      :tls_encryption)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration settings for a router input using the RTMP
+    # (Real-Time Messaging Protocol) protocol.
+    #
+    # @!attribute [rw] port
+    #   The port number for the RTMP protocol. The only valid value is
+    #   `1935`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] naming_type
+    #   The naming type. If you specify it, it must match the naming
+    #   configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] naming_configuration
+    #   The configuration settings for the application and stream names.
+    #   @return [Types::RtmpPushNamingConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/RtmpPushRouterInputConfiguration AWS API Documentation
+    #
+    class RtmpPushRouterInputConfiguration < Struct.new(
+      :port,
+      :naming_type,
+      :naming_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The configuration settings for a router output that pushes a stream to
     # a destination using the RTMP (Real-Time Messaging Protocol) protocol,
     # or RTMPS (RTMP over TLS) when TLS encryption is specified. These
@@ -9026,6 +9556,81 @@ module Aws::MediaConnect
       :application_name,
       :stream_name,
       :tls_encryption)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The settings for the RTMP (Real-Time Messaging Protocol) source.
+    #
+    # @!attribute [rw] application_name
+    #   The name of the RTMP application. Together with the stream name, the
+    #   application name forms the RTMP URL path, in the pattern
+    #   `rtmp://ingestAddress/applicationName/streamName`.
+    #   @return [String]
+    #
+    # @!attribute [rw] stream_name
+    #   The name of the RTMP stream. The stream name forms the final segment
+    #   of the RTMP URL path.
+    #   @return [String]
+    #
+    # @!attribute [rw] naming_type
+    #   The naming type that the source uses. With `AUTOMATIC` naming,
+    #   MediaConnect generates the application and stream names.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/RtmpPushSourceSettings AWS API Documentation
+    #
+    class RtmpPushSourceSettings < Struct.new(
+      :application_name,
+      :stream_name,
+      :naming_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration details for an RTMP (Real-Time Messaging Protocol)
+    # router input stream, including the application and stream names.
+    #
+    # @!attribute [rw] application_name
+    #   The name of the RTMP application.
+    #   @return [String]
+    #
+    # @!attribute [rw] stream_name
+    #   The name of the RTMP stream.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/RtmpPushStreamDetails AWS API Documentation
+    #
+    class RtmpPushStreamDetails < Struct.new(
+      :application_name,
+      :stream_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the RTMP (Real-Time Messaging Protocol) source. This
+    # includes the application name, the stream name, and metadata about the
+    # audio and video streams.
+    #
+    # @!attribute [rw] application_name
+    #   The name of the RTMP application.
+    #   @return [String]
+    #
+    # @!attribute [rw] stream_name
+    #   The name of the RTMP stream.
+    #   @return [String]
+    #
+    # @!attribute [rw] media_info
+    #   Information about the audio and video streams that are part of the
+    #   RTMP source.
+    #   @return [Types::RtmpMediaInfo]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/RtmpSourceMetadataInfo AWS API Documentation
+    #
+    class RtmpSourceMetadataInfo < Struct.new(
+      :application_name,
+      :stream_name,
+      :media_info)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9216,6 +9821,20 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
+    # The settings for the RTMP (Real-Time Messaging Protocol) source.
+    #
+    # @!attribute [rw] naming_configuration
+    #   The configuration settings for the application and stream names.
+    #   @return [Types::RtmpPushNamingConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/SetRtmpPushSourceSettings AWS API Documentation
+    #
+    class SetRtmpPushSourceSettings < Struct.new(
+      :naming_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The settings for the source of the flow.
     #
     # @!attribute [rw] decryption
@@ -9339,6 +9958,10 @@ module Aws::MediaConnect
     #   decrypted when router integration is used.
     #   @return [Types::FlowTransitEncryption]
     #
+    # @!attribute [rw] rtmp_push_settings
+    #   The settings for the RTMP (Real-Time Messaging Protocol) source.
+    #   @return [Types::SetRtmpPushSourceSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/SetSourceRequest AWS API Documentation
     #
     class SetSourceRequest < Struct.new(
@@ -9364,7 +9987,8 @@ module Aws::MediaConnect
       :ndi_source_settings,
       :source_tags,
       :router_integration_state,
-      :router_integration_transit_decryption)
+      :router_integration_transit_decryption,
+      :rtmp_push_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9407,6 +10031,62 @@ module Aws::MediaConnect
     class SilentAudioConfiguration < Struct.new(
       :state,
       :threshold_seconds)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration settings for remapping the identification numbers of
+    # elementary streams and program identifiers of a single-program
+    # transport stream.
+    #
+    # @!attribute [rw] rules
+    #   The ordered list of up to 32 rules that determine the action for
+    #   each elementary stream. MediaConnect applies the first rule that
+    #   matches.
+    #   @return [Array<Types::PidMapRule>]
+    #
+    # @!attribute [rw] default_action
+    #   The action to apply to an elementary stream that doesn't match any
+    #   rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] transport_stream_id
+    #   The transport stream ID (TSID) settings for the router output. By
+    #   default, the router output passes through the TSID from the source.
+    #   @return [Types::TransportStreamIdConfiguration]
+    #
+    # @!attribute [rw] program_number
+    #   The program number settings for the router output. By default, the
+    #   router output passes through the program number from the source.
+    #   @return [Types::ProgramNumberConfiguration]
+    #
+    # @!attribute [rw] program_map_table_pid
+    #   The Program Map Table (PMT) PID settings for the router output. By
+    #   default, the router output passes through the PMT PID from the
+    #   source.
+    #   @return [Types::ProgramMapTablePidConfiguration]
+    #
+    # @!attribute [rw] program_clock_reference_pid
+    #   The Program Clock Reference (PCR) PID settings for the router
+    #   output. By default, the router output passes through the PCR PID
+    #   from the source.
+    #   @return [Types::ProgramClockReferencePidConfiguration]
+    #
+    # @!attribute [rw] auto
+    #   The settings for automatic Packet ID (PID) assignment. The default
+    #   start PID is 512, with 32 PIDs per program.
+    #   @return [Types::AutoPidMapConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/SingleProgramTransportStreamPidMapConfiguration AWS API Documentation
+    #
+    class SingleProgramTransportStreamPidMapConfiguration < Struct.new(
+      :rules,
+      :default_action,
+      :transport_stream_id,
+      :program_number,
+      :program_map_table_pid,
+      :program_clock_reference_pid,
+      :auto)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10463,10 +11143,16 @@ module Aws::MediaConnect
     #   The source IP address for the standard router input stream.
     #   @return [String]
     #
+    # @!attribute [rw] rtmp_push
+    #   The RTMP stream details for the standard router input stream,
+    #   including the application and stream names.
+    #   @return [Types::RtmpPushStreamDetails]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/StandardRouterInputStreamDetails AWS API Documentation
     #
     class StandardRouterInputStreamDetails < Struct.new(
-      :source_ip_address)
+      :source_ip_address,
+      :rtmp_push)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11200,6 +11886,16 @@ module Aws::MediaConnect
     #   defaults to `-20`.
     #   @return [Integer]
     #
+    # @!attribute [rw] rtmp_push_source_settings
+    #   The settings for the RTMP (Real-Time Messaging Protocol) source.
+    #   @return [Types::RtmpPushSourceSettings]
+    #
+    # @!attribute [rw] rtmp_push_output_settings
+    #   The settings for an output that pushes a stream to a destination
+    #   using the RTMP (Real-Time Messaging Protocol) protocol, or RTMPS
+    #   (RTMP over TLS) when TLS encryption is specified.
+    #   @return [Types::RtmpPushOutputSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/Transport AWS API Documentation
     #
     class Transport < Struct.new(
@@ -11220,7 +11916,9 @@ module Aws::MediaConnect
       :ndi_program_name,
       :ndi_source_settings,
       :ndi_output_timecode_source,
-      :ndi_audio_reference_level)
+      :ndi_audio_reference_level,
+      :rtmp_push_source_settings,
+      :rtmp_push_output_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11279,8 +11977,16 @@ module Aws::MediaConnect
     #   The sample bit size used by the audio stream.
     #   @return [Integer]
     #
+    # @!attribute [rw] scan_mode
+    #   The scan mode used by the video stream.
+    #   @return [String]
+    #
     # @!attribute [rw] stream_type
     #   The Stream Type as it is reported in the Program Map Table.
+    #   @return [String]
+    #
+    # @!attribute [rw] language
+    #   The language of the elementary stream.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/TransportStream AWS API Documentation
@@ -11294,9 +12000,40 @@ module Aws::MediaConnect
       :pid,
       :sample_rate,
       :sample_size,
-      :stream_type)
+      :scan_mode,
+      :stream_type,
+      :language)
       SENSITIVE = []
       include Aws::Structure
+    end
+
+    # The configuration settings for the transport stream ID (TSID).
+    #
+    # @note TransportStreamIdConfiguration is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note TransportStreamIdConfiguration is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of TransportStreamIdConfiguration corresponding to the set member.
+    #
+    # @!attribute [rw] passthrough
+    #   The TSID configuration that passes through the TSID from the source.
+    #   @return [Types::Passthrough]
+    #
+    # @!attribute [rw] set
+    #   The TSID to use for the router output.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/TransportStreamIdConfiguration AWS API Documentation
+    #
+    class TransportStreamIdConfiguration < Struct.new(
+      :passthrough,
+      :set,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Passthrough < TransportStreamIdConfiguration; end
+      class Set < TransportStreamIdConfiguration; end
+      class Unknown < TransportStreamIdConfiguration; end
     end
 
     # The metadata of a single transport stream program.
@@ -12051,6 +12788,12 @@ module Aws::MediaConnect
     #   the value unchanged.
     #   @return [Integer]
     #
+    # @!attribute [rw] rtmp_push_settings
+    #   The settings for an output that pushes a stream to a destination
+    #   using the RTMP (Real-Time Messaging Protocol) protocol, or RTMPS
+    #   (RTMP over TLS) when TLS encryption is specified.
+    #   @return [Types::RtmpPushOutputSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/UpdateFlowOutputRequest AWS API Documentation
     #
     class UpdateFlowOutputRequest < Struct.new(
@@ -12077,7 +12820,8 @@ module Aws::MediaConnect
       :router_integration_state,
       :router_integration_transit_encryption,
       :ndi_output_timecode_source,
-      :ndi_audio_reference_level)
+      :ndi_audio_reference_level,
+      :rtmp_push_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -12278,6 +13022,10 @@ module Aws::MediaConnect
     #   integration is enabled.
     #   @return [Types::FlowTransitEncryption]
     #
+    # @!attribute [rw] rtmp_push_settings
+    #   The settings for the RTMP (Real-Time Messaging Protocol) source.
+    #   @return [Types::SetRtmpPushSourceSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/UpdateFlowSourceRequest AWS API Documentation
     #
     class UpdateFlowSourceRequest < Struct.new(
@@ -12303,7 +13051,8 @@ module Aws::MediaConnect
       :gateway_bridge_source,
       :ndi_source_settings,
       :router_integration_state,
-      :router_integration_transit_decryption)
+      :router_integration_transit_decryption,
+      :rtmp_push_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -12604,6 +13353,13 @@ module Aws::MediaConnect
     #   configuration.
     #   @return [Types::FabricConfiguration]
     #
+    # @!attribute [rw] processors
+    #   The updated processor settings for the router output. When you
+    #   update the processors, include every setting that you want to keep.
+    #   MediaConnect resets the settings that you don't specify to their
+    #   defaults.
+    #   @return [Types::RouterOutputProcessors]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/UpdateRouterOutputRequest AWS API Documentation
     #
     class UpdateRouterOutputRequest < Struct.new(
@@ -12614,7 +13370,8 @@ module Aws::MediaConnect
       :routing_scope,
       :tier,
       :maintenance_configuration,
-      :fabric_configuration)
+      :fabric_configuration,
+      :processors)
       SENSITIVE = []
       include Aws::Structure
     end

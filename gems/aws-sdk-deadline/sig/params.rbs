@@ -58,7 +58,7 @@ module Aws
       type accelerator_capabilities = {
       selections: Array[
         {
-          name: ("t4" | "a10g" | "l4" | "l40s" | "rtx-pro-server-6000"),
+          name: ("t4" | "a10g" | "l4" | "l40s" | "rtx-pro-server-6000" | "rtx-pro-4500"),
           runtime: ::String?
         }
       ],

@@ -264,7 +264,8 @@ module Aws::CloudWatchRUM
     #     An integer representing the maximum number attempts that will be made for
     #     a single request, including the initial attempt.  For example,
     #     setting this value to 5 will result in a request being retried up to
-    #     4 times. Used in `standard` and `adaptive` retry modes.
+    #     4 times. Used in `standard` and `adaptive` retry modes. Defaults to 3,
+    #     except for DynamoDB and DynamoDB Streams, which default to 4.
     #
     #   @option options [String] :profile ("default")
     #     Used when loading credentials from the shared credentials file at `HOME/.aws/credentials`.
@@ -327,15 +328,15 @@ module Aws::CloudWatchRUM
     #     used by the default backoff function. This option is only used in the
     #     `legacy` retry mode.
     #
-    #   @option options [String] :retry_mode ("legacy")
+    #   @option options [String] :retry_mode ("standard")
     #     Specifies which retry algorithm to use. Values are:
     #
-    #     * `legacy` - The pre-existing retry behavior. This is the default
-    #       value if no retry mode is provided.
+    #     * `legacy` - The pre-existing retry behavior.
     #
     #     * `standard` - A standardized set of retry rules across the AWS SDKs.
     #       This includes support for retry quotas, which limit the number of
-    #       unsuccessful retries a client can make.
+    #       unsuccessful retries a client can make. This is the default value
+    #       if no retry mode is provided.
     #
     #     * `adaptive` - A retry mode that includes all the functionality of
     #       `standard` mode along with automatic client side throttling.
@@ -1378,6 +1379,18 @@ module Aws::CloudWatchRUM
     #
     #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-RUM-resource-policies.html
     #
+    # @option params [String] :session_metadata
+    #   A JSON serialization of attributes that apply to every event in this
+    #   batch, such as the browser, device, and operating system of the end
+    #   user. CloudWatch RUM merges these attributes into each event in the
+    #   batch, so you send them once for the batch instead of once for each
+    #   event. If an attribute appears both here and in an individual event's
+    #   `metadata`, CloudWatch RUM uses the value in the event's `metadata`.
+    #
+    #   **SDK automatically handles json encoding and base64 encoding for you
+    #   when the required value (Hash, Array, etc.) is provided according to
+    #   the description.**
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -1404,6 +1417,7 @@ module Aws::CloudWatchRUM
     #       },
     #     ],
     #     alias: "Alias",
+    #     session_metadata: "JsonValue",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rum-2018-05-10/PutRumEvents AWS API Documentation
@@ -1751,7 +1765,7 @@ module Aws::CloudWatchRUM
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-cloudwatchrum'
-      context[:gem_version] = '1.67.0'
+      context[:gem_version] = '1.75.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

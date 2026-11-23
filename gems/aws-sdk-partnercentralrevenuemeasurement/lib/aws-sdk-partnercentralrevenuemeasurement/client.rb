@@ -264,7 +264,8 @@ module Aws::PartnerCentralRevenueMeasurement
     #     An integer representing the maximum number attempts that will be made for
     #     a single request, including the initial attempt.  For example,
     #     setting this value to 5 will result in a request being retried up to
-    #     4 times. Used in `standard` and `adaptive` retry modes.
+    #     4 times. Used in `standard` and `adaptive` retry modes. Defaults to 3,
+    #     except for DynamoDB and DynamoDB Streams, which default to 4.
     #
     #   @option options [String] :profile ("default")
     #     Used when loading credentials from the shared credentials file at `HOME/.aws/credentials`.
@@ -327,15 +328,15 @@ module Aws::PartnerCentralRevenueMeasurement
     #     used by the default backoff function. This option is only used in the
     #     `legacy` retry mode.
     #
-    #   @option options [String] :retry_mode ("legacy")
+    #   @option options [String] :retry_mode ("standard")
     #     Specifies which retry algorithm to use. Values are:
     #
-    #     * `legacy` - The pre-existing retry behavior. This is the default
-    #       value if no retry mode is provided.
+    #     * `legacy` - The pre-existing retry behavior.
     #
     #     * `standard` - A standardized set of retry rules across the AWS SDKs.
     #       This includes support for retry quotas, which limit the number of
-    #       unsuccessful retries a client can make.
+    #       unsuccessful retries a client can make. This is the default value
+    #       if no retry mode is provided.
     #
     #     * `adaptive` - A retry mode that includes all the functionality of
     #       `standard` mode along with automatic client side throttling.
@@ -493,35 +494,62 @@ module Aws::PartnerCentralRevenueMeasurement
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
-    # @option params [required, String] :product_id
-    #   The AWS Marketplace product identifier for this revenue share.
+    # @option params [required, Array<Types::MarketplaceRevenueShareProductEntry>] :products
+    #   The products in the marketplace revenue share, each with its typed
+    #   account lists. 1 to 25 products.
     #
     # @option params [Array<Types::Tag>] :tags
     #   Tags to associate with the marketplace revenue share upon creation.
     #
     # @return [Types::CreateMarketplaceRevenueShareOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::CreateMarketplaceRevenueShareOutput#product_id #product_id} => String
+    #   * {Types::CreateMarketplaceRevenueShareOutput#id #id} => String
     #   * {Types::CreateMarketplaceRevenueShareOutput#arn #arn} => String
     #   * {Types::CreateMarketplaceRevenueShareOutput#catalog #catalog} => String
-    #   * {Types::CreateMarketplaceRevenueShareOutput#product_code #product_code} => String
-    #   * {Types::CreateMarketplaceRevenueShareOutput#product_name #product_name} => String
+    #   * {Types::CreateMarketplaceRevenueShareOutput#products #products} => Array&lt;Types::MarketplaceRevenueShareProductSummary&gt;
     #   * {Types::CreateMarketplaceRevenueShareOutput#created_date #created_date} => Time
     #   * {Types::CreateMarketplaceRevenueShareOutput#last_modified_date #last_modified_date} => Time
-    #   * {Types::CreateMarketplaceRevenueShareOutput#revision #revision} => Integer
+    #   * {Types::CreateMarketplaceRevenueShareOutput#revision #revision} => String
     #
     #
     # @example Example: Example for CreateMarketplaceRevenueShare
     #
     #   resp = client.create_marketplace_revenue_share({
     #     catalog: "AWS", 
-    #     product_id: "prod-abc123def4567", 
+    #     products: [
+    #       {
+    #         accounts: [
+    #           {
+    #             account_ids: [
+    #               "111122223333", 
+    #             ], 
+    #             account_type: "DEPLOYMENT", 
+    #           }, 
+    #         ], 
+    #         product_id: "prod-abc123def4567", 
+    #       }, 
+    #     ], 
     #   })
     #
     #   resp.to_h outputs the following:
     #   {
-    #     arn: "arn:aws:partnercentral:us-east-1:123456789012:catalog/AWS/marketplace-revenue-share/prod-abc123def4567", 
-    #     product_id: "prod-abc123def4567", 
+    #     arn: "arn:aws:partnercentral:us-east-1:123456789012:catalog/AWS/marketplace-revenue-share/mrs-abc123def4567", 
+    #     catalog: "AWS", 
+    #     created_date: Time.parse(1784419200), 
+    #     id: "mrs-abc123def4567", 
+    #     last_modified_date: Time.parse(1784419200), 
+    #     products: [
+    #       {
+    #         accounts: [
+    #           {
+    #             account_type: "DEPLOYMENT", 
+    #             count: 1, 
+    #           }, 
+    #         ], 
+    #         product_id: "prod-abc123def4567", 
+    #       }, 
+    #     ], 
+    #     revision: "1", 
     #   }
     #
     # @example Request syntax with placeholder values
@@ -529,7 +557,17 @@ module Aws::PartnerCentralRevenueMeasurement
     #   resp = client.create_marketplace_revenue_share({
     #     catalog: "AWS", # required, accepts AWS, Sandbox
     #     client_token: "ClientToken",
-    #     product_id: "MarketplaceProductId", # required
+    #     products: [ # required
+    #       {
+    #         product_id: "MarketplaceProductIdentifier", # required
+    #         accounts: [
+    #           {
+    #             account_type: "DEPLOYMENT", # required, accepts DEPLOYMENT, ORGANIZATION
+    #             account_ids: ["RevenueShareProductAccountId"], # required
+    #           },
+    #         ],
+    #       },
+    #     ],
     #     tags: [
     #       {
     #         key: "TagKey", # required
@@ -540,14 +578,19 @@ module Aws::PartnerCentralRevenueMeasurement
     #
     # @example Response structure
     #
-    #   resp.product_id #=> String
+    #   resp.id #=> String
     #   resp.arn #=> String
     #   resp.catalog #=> String, one of "AWS", "Sandbox"
-    #   resp.product_code #=> String
-    #   resp.product_name #=> String
+    #   resp.products #=> Array
+    #   resp.products[0].product_id #=> String
+    #   resp.products[0].product_code #=> String
+    #   resp.products[0].product_name #=> String
+    #   resp.products[0].accounts #=> Array
+    #   resp.products[0].accounts[0].account_type #=> String, one of "DEPLOYMENT", "ORGANIZATION"
+    #   resp.products[0].accounts[0].count #=> Integer
     #   resp.created_date #=> Time
     #   resp.last_modified_date #=> Time
-    #   resp.revision #=> Integer
+    #   resp.revision #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-revenue-measurement-2022-07-26/CreateMarketplaceRevenueShare AWS API Documentation
     #
@@ -558,14 +601,14 @@ module Aws::PartnerCentralRevenueMeasurement
       req.send_request(options)
     end
 
-    # Creates a new marketplace revenue share allocation for the specified
-    # product.
+    # Creates a new allocation under the specified marketplace revenue
+    # share.
     #
     # @option params [required, String] :catalog
     #   The catalog in which to create the allocation.
     #
-    # @option params [required, String] :product_id
-    #   The AWS Marketplace product identifier for the parent revenue share.
+    # @option params [required, String] :marketplace_revenue_share_identifier
+    #   The parent marketplace revenue share, by ID (mrs-...) or ARN.
     #
     # @option params [String] :client_token
     #   A unique token to ensure idempotency of the create request.
@@ -573,13 +616,18 @@ module Aws::PartnerCentralRevenueMeasurement
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
+    # @option params [required, String] :marketplace_revenue_share_revision
+    #   The revision of the parent marketplace revenue share that the caller
+    #   last read, for optimistic concurrency control. A stale value returns
+    #   ConflictException with Reason REVISION\_MISMATCH.
+    #
     # @option params [required, String] :effective_from
     #   The effective start date for the allocation. Must be the first day of
     #   a month.
     #
-    # @option params [String] :effective_until
+    # @option params [required, String] :effective_until
     #   The effective end date for the allocation. Must be the last day of a
-    #   month (YYYY-MM-DD). Omit for open-ended allocations.
+    #   month (YYYY-MM-DD).
     #
     # @option params [required, String] :revenue_share_percent
     #   The revenue share percentage for this allocation.
@@ -587,16 +635,15 @@ module Aws::PartnerCentralRevenueMeasurement
     # @return [Types::CreateMarketplaceRevenueShareAllocationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateMarketplaceRevenueShareAllocationOutput#marketplace_revenue_share_allocation_id #marketplace_revenue_share_allocation_id} => String
-    #   * {Types::CreateMarketplaceRevenueShareAllocationOutput#product_id #product_id} => String
-    #   * {Types::CreateMarketplaceRevenueShareAllocationOutput#product_name #product_name} => String
-    #   * {Types::CreateMarketplaceRevenueShareAllocationOutput#arn #arn} => String
+    #   * {Types::CreateMarketplaceRevenueShareAllocationOutput#marketplace_revenue_share_identifier #marketplace_revenue_share_identifier} => String
     #   * {Types::CreateMarketplaceRevenueShareAllocationOutput#effective_from #effective_from} => String
     #   * {Types::CreateMarketplaceRevenueShareAllocationOutput#effective_until #effective_until} => String
     #   * {Types::CreateMarketplaceRevenueShareAllocationOutput#revenue_share_percent #revenue_share_percent} => String
     #   * {Types::CreateMarketplaceRevenueShareAllocationOutput#status #status} => String
     #   * {Types::CreateMarketplaceRevenueShareAllocationOutput#created_date #created_date} => Time
     #   * {Types::CreateMarketplaceRevenueShareAllocationOutput#last_modified_date #last_modified_date} => Time
-    #   * {Types::CreateMarketplaceRevenueShareAllocationOutput#latest_marketplace_revenue_share_revision #latest_marketplace_revenue_share_revision} => String
+    #   * {Types::CreateMarketplaceRevenueShareAllocationOutput#marketplace_revenue_share_revision #marketplace_revenue_share_revision} => String
+    #   * {Types::CreateMarketplaceRevenueShareAllocationOutput#marketplace_revenue_share_latest_revision #marketplace_revenue_share_latest_revision} => String
     #
     #
     # @example Example: Example for CreateMarketplaceRevenueShareAllocation
@@ -604,16 +651,22 @@ module Aws::PartnerCentralRevenueMeasurement
     #   resp = client.create_marketplace_revenue_share_allocation({
     #     catalog: "AWS", 
     #     effective_from: "2026-07-01", 
-    #     product_id: "prod-abc123def4567", 
+    #     effective_until: "2026-12-31", 
+    #     marketplace_revenue_share_identifier: "mrs-abc123def4567", 
+    #     marketplace_revenue_share_revision: "1", 
     #     revenue_share_percent: "15.50", 
     #   })
     #
     #   resp.to_h outputs the following:
     #   {
-    #     arn: "arn:aws:partnercentral:us-east-1:123456789012:catalog/AWS/marketplace-revenue-share-allocation/mrsa-abc123def4567", 
+    #     created_date: Time.parse(1784505600), 
     #     effective_from: "2026-07-01", 
+    #     effective_until: "2026-12-31", 
+    #     last_modified_date: Time.parse(1784505600), 
     #     marketplace_revenue_share_allocation_id: "mrsa-abc123def4567", 
-    #     product_id: "prod-abc123def4567", 
+    #     marketplace_revenue_share_identifier: "mrs-abc123def4567", 
+    #     marketplace_revenue_share_latest_revision: "2", 
+    #     marketplace_revenue_share_revision: "2", 
     #     revenue_share_percent: "15.50", 
     #     status: "ACTIVE", 
     #   }
@@ -622,26 +675,26 @@ module Aws::PartnerCentralRevenueMeasurement
     #
     #   resp = client.create_marketplace_revenue_share_allocation({
     #     catalog: "AWS", # required, accepts AWS, Sandbox
-    #     product_id: "MarketplaceProductId", # required
+    #     marketplace_revenue_share_identifier: "MarketplaceRevenueShareIdentifier", # required
     #     client_token: "ClientToken",
+    #     marketplace_revenue_share_revision: "RevisionToken", # required
     #     effective_from: "AllocationEffectiveDateString", # required
-    #     effective_until: "AllocationEffectiveDateString",
+    #     effective_until: "AllocationEffectiveDateString", # required
     #     revenue_share_percent: "RevenueSharePercent", # required
     #   })
     #
     # @example Response structure
     #
     #   resp.marketplace_revenue_share_allocation_id #=> String
-    #   resp.product_id #=> String
-    #   resp.product_name #=> String
-    #   resp.arn #=> String
+    #   resp.marketplace_revenue_share_identifier #=> String
     #   resp.effective_from #=> String
     #   resp.effective_until #=> String
     #   resp.revenue_share_percent #=> String
     #   resp.status #=> String, one of "ACTIVE", "INACTIVE"
     #   resp.created_date #=> Time
     #   resp.last_modified_date #=> Time
-    #   resp.latest_marketplace_revenue_share_revision #=> String
+    #   resp.marketplace_revenue_share_revision #=> String
+    #   resp.marketplace_revenue_share_latest_revision #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-revenue-measurement-2022-07-26/CreateMarketplaceRevenueShareAllocation AWS API Documentation
     #
@@ -680,6 +733,9 @@ module Aws::PartnerCentralRevenueMeasurement
     # @option params [Array<Types::Tag>] :tags
     #   Tags to associate with the revenue attribution upon creation.
     #
+    # @option params [Hash<String,String>] :context
+    #   Program-defined key-value attributes for the revenue attribution.
+    #
     # @return [Types::CreateRevenueAttributionOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateRevenueAttributionOutput#id #id} => String
@@ -689,6 +745,7 @@ module Aws::PartnerCentralRevenueMeasurement
     #   * {Types::CreateRevenueAttributionOutput#tenancy_model #tenancy_model} => String
     #   * {Types::CreateRevenueAttributionOutput#marketplace_product #marketplace_product} => Types::MarketplaceProductSummary
     #   * {Types::CreateRevenueAttributionOutput#revision #revision} => String
+    #   * {Types::CreateRevenueAttributionOutput#context #context} => Hash&lt;String,String&gt;
     #
     #
     # @example Example: Example for CreateRevenueAttribution
@@ -721,6 +778,9 @@ module Aws::PartnerCentralRevenueMeasurement
     #         value: "TagValue", # required
     #       },
     #     ],
+    #     context: {
+    #       "ContextKey" => "ContextValue",
+    #     },
     #   })
     #
     # @example Response structure
@@ -734,6 +794,8 @@ module Aws::PartnerCentralRevenueMeasurement
     #   resp.marketplace_product.product_code #=> String
     #   resp.marketplace_product.product_name #=> String
     #   resp.revision #=> String
+    #   resp.context #=> Hash
+    #   resp.context["ContextKey"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-revenue-measurement-2022-07-26/CreateRevenueAttribution AWS API Documentation
     #
@@ -749,25 +811,25 @@ module Aws::PartnerCentralRevenueMeasurement
     # @option params [required, String] :catalog
     #   The catalog that the marketplace revenue share belongs to.
     #
-    # @option params [required, String] :product_id
-    #   The AWS Marketplace product identifier of the revenue share to
-    #   retrieve.
+    # @option params [required, String] :identifier
+    #   The marketplace revenue share to retrieve, by ID (mrs-...) or ARN.
     #
-    # @option params [Integer] :revision
+    # @option params [String] :revision
     #   The revision of the marketplace revenue share to retrieve. Omit to
     #   return the latest revision.
     #
     # @return [Types::GetMarketplaceRevenueShareOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::GetMarketplaceRevenueShareOutput#product_id #product_id} => String
+    #   * {Types::GetMarketplaceRevenueShareOutput#id #id} => String
     #   * {Types::GetMarketplaceRevenueShareOutput#arn #arn} => String
     #   * {Types::GetMarketplaceRevenueShareOutput#catalog #catalog} => String
-    #   * {Types::GetMarketplaceRevenueShareOutput#product_code #product_code} => String
-    #   * {Types::GetMarketplaceRevenueShareOutput#product_name #product_name} => String
+    #   * {Types::GetMarketplaceRevenueShareOutput#products #products} => Array&lt;Types::MarketplaceRevenueShareProductDetail&gt;
     #   * {Types::GetMarketplaceRevenueShareOutput#created_date #created_date} => Time
     #   * {Types::GetMarketplaceRevenueShareOutput#last_modified_date #last_modified_date} => Time
-    #   * {Types::GetMarketplaceRevenueShareOutput#revision #revision} => Integer
-    #   * {Types::GetMarketplaceRevenueShareOutput#latest_revision #latest_revision} => Integer
+    #   * {Types::GetMarketplaceRevenueShareOutput#revision #revision} => String
+    #   * {Types::GetMarketplaceRevenueShareOutput#latest_revision #latest_revision} => String
+    #   * {Types::GetMarketplaceRevenueShareOutput#effective_from #effective_from} => String
+    #   * {Types::GetMarketplaceRevenueShareOutput#effective_until #effective_until} => String
     #   * {Types::GetMarketplaceRevenueShareOutput#total_active_marketplace_revenue_share_allocation_count #total_active_marketplace_revenue_share_allocation_count} => Integer
     #   * {Types::GetMarketplaceRevenueShareOutput#total_marketplace_revenue_share_allocation_count #total_marketplace_revenue_share_allocation_count} => Integer
     #
@@ -776,35 +838,66 @@ module Aws::PartnerCentralRevenueMeasurement
     #
     #   resp = client.get_marketplace_revenue_share({
     #     catalog: "AWS", 
-    #     product_id: "prod-abc123def4567", 
+    #     identifier: "mrs-abc123def4567", 
     #   })
     #
     #   resp.to_h outputs the following:
     #   {
-    #     arn: "arn:aws:partnercentral:us-east-1:123456789012:catalog/AWS/marketplace-revenue-share/prod-abc123def4567", 
+    #     arn: "arn:aws:partnercentral:us-east-1:123456789012:catalog/AWS/marketplace-revenue-share/mrs-abc123def4567", 
     #     catalog: "AWS", 
-    #     product_id: "prod-abc123def4567", 
+    #     created_date: Time.parse(1784419200), 
+    #     effective_from: "2026-07-01", 
+    #     effective_until: "2026-12-31", 
+    #     id: "mrs-abc123def4567", 
+    #     last_modified_date: Time.parse(1784505600), 
+    #     latest_revision: "2", 
+    #     products: [
+    #       {
+    #         accounts: [
+    #           {
+    #             account_ids: [
+    #               "111122223333", 
+    #             ], 
+    #             account_type: "DEPLOYMENT", 
+    #             count: 1, 
+    #           }, 
+    #         ], 
+    #         product_id: "prod-abc123def4567", 
+    #       }, 
+    #     ], 
+    #     revision: "2", 
+    #     total_active_marketplace_revenue_share_allocation_count: 1, 
+    #     total_marketplace_revenue_share_allocation_count: 1, 
     #   }
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_marketplace_revenue_share({
     #     catalog: "AWS", # required, accepts AWS, Sandbox
-    #     product_id: "MarketplaceProductId", # required
-    #     revision: 1,
+    #     identifier: "MarketplaceRevenueShareIdentifier", # required
+    #     revision: "RevisionToken",
     #   })
     #
     # @example Response structure
     #
-    #   resp.product_id #=> String
+    #   resp.id #=> String
     #   resp.arn #=> String
     #   resp.catalog #=> String, one of "AWS", "Sandbox"
-    #   resp.product_code #=> String
-    #   resp.product_name #=> String
+    #   resp.products #=> Array
+    #   resp.products[0].product_id #=> String
+    #   resp.products[0].product_code #=> String
+    #   resp.products[0].product_name #=> String
+    #   resp.products[0].accounts #=> Array
+    #   resp.products[0].accounts[0].account_type #=> String, one of "DEPLOYMENT", "ORGANIZATION"
+    #   resp.products[0].accounts[0].count #=> Integer
+    #   resp.products[0].accounts[0].account_ids #=> Array
+    #   resp.products[0].accounts[0].account_ids[0] #=> String
     #   resp.created_date #=> Time
     #   resp.last_modified_date #=> Time
-    #   resp.revision #=> Integer
-    #   resp.latest_revision #=> Integer
+    #   resp.revision #=> String
+    #   resp.latest_revision #=> String
+    #   resp.effective_from #=> String
+    #   resp.effective_until #=> String
     #   resp.total_active_marketplace_revenue_share_allocation_count #=> Integer
     #   resp.total_marketplace_revenue_share_allocation_count #=> Integer
     #
@@ -823,8 +916,8 @@ module Aws::PartnerCentralRevenueMeasurement
     # @option params [required, String] :catalog
     #   The catalog that the allocation belongs to.
     #
-    # @option params [required, String] :product_id
-    #   The AWS Marketplace product identifier of the parent revenue share.
+    # @option params [required, String] :marketplace_revenue_share_identifier
+    #   The parent marketplace revenue share, by ID (mrs-...) or ARN.
     #
     # @option params [required, String] :marketplace_revenue_share_allocation_id
     #   The unique identifier of the allocation to retrieve.
@@ -836,16 +929,15 @@ module Aws::PartnerCentralRevenueMeasurement
     # @return [Types::GetMarketplaceRevenueShareAllocationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetMarketplaceRevenueShareAllocationOutput#marketplace_revenue_share_allocation_id #marketplace_revenue_share_allocation_id} => String
-    #   * {Types::GetMarketplaceRevenueShareAllocationOutput#product_id #product_id} => String
-    #   * {Types::GetMarketplaceRevenueShareAllocationOutput#product_name #product_name} => String
-    #   * {Types::GetMarketplaceRevenueShareAllocationOutput#arn #arn} => String
+    #   * {Types::GetMarketplaceRevenueShareAllocationOutput#marketplace_revenue_share_identifier #marketplace_revenue_share_identifier} => String
     #   * {Types::GetMarketplaceRevenueShareAllocationOutput#effective_from #effective_from} => String
     #   * {Types::GetMarketplaceRevenueShareAllocationOutput#effective_until #effective_until} => String
     #   * {Types::GetMarketplaceRevenueShareAllocationOutput#revenue_share_percent #revenue_share_percent} => String
     #   * {Types::GetMarketplaceRevenueShareAllocationOutput#status #status} => String
     #   * {Types::GetMarketplaceRevenueShareAllocationOutput#created_date #created_date} => Time
     #   * {Types::GetMarketplaceRevenueShareAllocationOutput#last_modified_date #last_modified_date} => Time
-    #   * {Types::GetMarketplaceRevenueShareAllocationOutput#latest_marketplace_revenue_share_revision #latest_marketplace_revenue_share_revision} => String
+    #   * {Types::GetMarketplaceRevenueShareAllocationOutput#marketplace_revenue_share_revision #marketplace_revenue_share_revision} => String
+    #   * {Types::GetMarketplaceRevenueShareAllocationOutput#marketplace_revenue_share_latest_revision #marketplace_revenue_share_latest_revision} => String
     #
     #
     # @example Example: Example for GetMarketplaceRevenueShareAllocation
@@ -853,15 +945,19 @@ module Aws::PartnerCentralRevenueMeasurement
     #   resp = client.get_marketplace_revenue_share_allocation({
     #     catalog: "AWS", 
     #     marketplace_revenue_share_allocation_id: "mrsa-abc123def4567", 
-    #     product_id: "prod-abc123def4567", 
+    #     marketplace_revenue_share_identifier: "mrs-abc123def4567", 
     #   })
     #
     #   resp.to_h outputs the following:
     #   {
-    #     arn: "arn:aws:partnercentral:us-east-1:123456789012:catalog/AWS/marketplace-revenue-share-allocation/mrsa-abc123def4567", 
+    #     created_date: Time.parse(1784505600), 
     #     effective_from: "2026-07-01", 
+    #     effective_until: "2026-12-31", 
+    #     last_modified_date: Time.parse(1784505600), 
     #     marketplace_revenue_share_allocation_id: "mrsa-abc123def4567", 
-    #     product_id: "prod-abc123def4567", 
+    #     marketplace_revenue_share_identifier: "mrs-abc123def4567", 
+    #     marketplace_revenue_share_latest_revision: "2", 
+    #     marketplace_revenue_share_revision: "2", 
     #     revenue_share_percent: "15.50", 
     #     status: "ACTIVE", 
     #   }
@@ -870,7 +966,7 @@ module Aws::PartnerCentralRevenueMeasurement
     #
     #   resp = client.get_marketplace_revenue_share_allocation({
     #     catalog: "AWS", # required, accepts AWS, Sandbox
-    #     product_id: "MarketplaceProductId", # required
+    #     marketplace_revenue_share_identifier: "MarketplaceRevenueShareIdentifier", # required
     #     marketplace_revenue_share_allocation_id: "MarketplaceRevenueShareAllocationId", # required
     #     marketplace_revenue_share_revision: "RevisionToken",
     #   })
@@ -878,16 +974,15 @@ module Aws::PartnerCentralRevenueMeasurement
     # @example Response structure
     #
     #   resp.marketplace_revenue_share_allocation_id #=> String
-    #   resp.product_id #=> String
-    #   resp.product_name #=> String
-    #   resp.arn #=> String
+    #   resp.marketplace_revenue_share_identifier #=> String
     #   resp.effective_from #=> String
     #   resp.effective_until #=> String
     #   resp.revenue_share_percent #=> String
     #   resp.status #=> String, one of "ACTIVE", "INACTIVE"
     #   resp.created_date #=> Time
     #   resp.last_modified_date #=> Time
-    #   resp.latest_marketplace_revenue_share_revision #=> String
+    #   resp.marketplace_revenue_share_revision #=> String
+    #   resp.marketplace_revenue_share_latest_revision #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-revenue-measurement-2022-07-26/GetMarketplaceRevenueShareAllocation AWS API Documentation
     #
@@ -928,6 +1023,7 @@ module Aws::PartnerCentralRevenueMeasurement
     #   * {Types::GetRevenueAttributionOutput#effective_until #effective_until} => String
     #   * {Types::GetRevenueAttributionOutput#total_active_revenue_attribution_allocation_count #total_active_revenue_attribution_allocation_count} => Integer
     #   * {Types::GetRevenueAttributionOutput#total_revenue_attribution_allocation_count #total_revenue_attribution_allocation_count} => Integer
+    #   * {Types::GetRevenueAttributionOutput#context #context} => Hash&lt;String,String&gt;
     #
     #
     # @example Example: Example for GetRevenueAttribution
@@ -972,6 +1068,8 @@ module Aws::PartnerCentralRevenueMeasurement
     #   resp.effective_until #=> String
     #   resp.total_active_revenue_attribution_allocation_count #=> Integer
     #   resp.total_revenue_attribution_allocation_count #=> Integer
+    #   resp.context #=> Hash
+    #   resp.context["ContextKey"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-revenue-measurement-2022-07-26/GetRevenueAttribution AWS API Documentation
     #
@@ -1161,10 +1259,10 @@ module Aws::PartnerCentralRevenueMeasurement
     # @option params [required, String] :catalog
     #   The catalog containing the allocations.
     #
-    # @option params [required, String] :product_id
-    #   The AWS Marketplace product identifier for the parent revenue share.
+    # @option params [required, String] :marketplace_revenue_share_identifier
+    #   The parent marketplace revenue share, by ID (mrs-...) or ARN.
     #
-    # @option params [String] :status
+    # @option params [String] :status_filter
     #   Filter by allocation status.
     #
     # @option params [String] :after_effective_from
@@ -1173,11 +1271,18 @@ module Aws::PartnerCentralRevenueMeasurement
     # @option params [String] :before_effective_from
     #   Exclusive upper bound for EffectiveFrom date filter (half-open range).
     #
+    # @option params [String] :after_effective_until
+    #   Inclusive lower bound for EffectiveUntil date filter.
+    #
+    # @option params [String] :before_effective_until
+    #   Exclusive upper bound for EffectiveUntil date filter (half-open
+    #   range).
+    #
     # @option params [String] :sort_by
     #   The field to sort marketplace revenue share allocations by.
     #
     # @option params [String] :sort_order
-    #   The direction to sort results. Defaults to DESCENDING.
+    #   The direction to sort results. Defaults to ASCENDING.
     #
     # @option params [Integer] :max_results
     #   Maximum number of results per page.
@@ -1201,12 +1306,23 @@ module Aws::PartnerCentralRevenueMeasurement
     #
     #   resp = client.list_marketplace_revenue_share_allocations({
     #     catalog: "AWS", 
-    #     product_id: "prod-abc123def4567", 
+    #     marketplace_revenue_share_identifier: "mrs-abc123def4567", 
+    #     status_filter: "ACTIVE", 
     #   })
     #
     #   resp.to_h outputs the following:
     #   {
     #     marketplace_revenue_share_allocation_summaries: [
+    #       {
+    #         created_date: Time.parse(1784505600), 
+    #         effective_from: "2026-07-01", 
+    #         effective_until: "2026-12-31", 
+    #         last_modified_date: Time.parse(1784505600), 
+    #         marketplace_revenue_share_allocation_id: "mrsa-abc123def4567", 
+    #         marketplace_revenue_share_identifier: "mrs-abc123def4567", 
+    #         revenue_share_percent: "15.50", 
+    #         status: "ACTIVE", 
+    #       }, 
     #     ], 
     #   }
     #
@@ -1214,10 +1330,12 @@ module Aws::PartnerCentralRevenueMeasurement
     #
     #   resp = client.list_marketplace_revenue_share_allocations({
     #     catalog: "AWS", # required, accepts AWS, Sandbox
-    #     product_id: "MarketplaceProductId", # required
-    #     status: "ACTIVE", # accepts ACTIVE, INACTIVE
+    #     marketplace_revenue_share_identifier: "MarketplaceRevenueShareIdentifier", # required
+    #     status_filter: "ACTIVE", # accepts ACTIVE, INACTIVE
     #     after_effective_from: "AllocationEffectiveDateString",
     #     before_effective_from: "AllocationEffectiveDateString",
+    #     after_effective_until: "AllocationEffectiveDateString",
+    #     before_effective_until: "AllocationEffectiveDateString",
     #     sort_by: "EffectiveFrom", # accepts EffectiveFrom
     #     sort_order: "ASCENDING", # accepts ASCENDING, DESCENDING
     #     max_results: 1,
@@ -1229,9 +1347,7 @@ module Aws::PartnerCentralRevenueMeasurement
     #
     #   resp.marketplace_revenue_share_allocation_summaries #=> Array
     #   resp.marketplace_revenue_share_allocation_summaries[0].marketplace_revenue_share_allocation_id #=> String
-    #   resp.marketplace_revenue_share_allocation_summaries[0].product_id #=> String
-    #   resp.marketplace_revenue_share_allocation_summaries[0].product_name #=> String
-    #   resp.marketplace_revenue_share_allocation_summaries[0].arn #=> String
+    #   resp.marketplace_revenue_share_allocation_summaries[0].marketplace_revenue_share_identifier #=> String
     #   resp.marketplace_revenue_share_allocation_summaries[0].effective_from #=> String
     #   resp.marketplace_revenue_share_allocation_summaries[0].effective_until #=> String
     #   resp.marketplace_revenue_share_allocation_summaries[0].revenue_share_percent #=> String
@@ -1255,11 +1371,19 @@ module Aws::PartnerCentralRevenueMeasurement
     # @option params [required, String] :catalog
     #   The catalog to list marketplace revenue shares from.
     #
+    # @option params [Array<String>] :identifiers
+    #   Filter results to only include these marketplace revenue shares, by ID
+    #   or ARN. 1 to 100 identifiers. When several filters are sent, a share
+    #   must match all of them.
+    #
     # @option params [Array<String>] :product_ids
-    #   Filter results to only include shares with these product identifiers.
+    #   Filter results to the marketplace revenue shares that contain any of
+    #   these products. 1 to 10 product IDs or product ARNs. Shares the caller
+    #   does not own are never returned.
     #
     # @option params [Array<String>] :product_codes
-    #   Filter results to only include shares with these product codes.
+    #   Filter results to the marketplace revenue shares that contain a
+    #   product with any of these product codes. 1 to 10 product codes.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return in a single call.
@@ -1275,12 +1399,12 @@ module Aws::PartnerCentralRevenueMeasurement
     #   The direction to sort results.
     #
     # @option params [Time,DateTime,Date,Integer,String] :created_after
-    #   Filter results to only include marketplace revenue shares created
-    #   after this timestamp.
+    #   Filter results to marketplace revenue shares created at or after this
+    #   timestamp (inclusive).
     #
     # @option params [Time,DateTime,Date,Integer,String] :created_before
-    #   Filter results to only include marketplace revenue shares created
-    #   before this timestamp.
+    #   Filter results to marketplace revenue shares created before this
+    #   timestamp (exclusive).
     #
     # @return [Types::ListMarketplaceRevenueSharesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1300,6 +1424,29 @@ module Aws::PartnerCentralRevenueMeasurement
     #   resp.to_h outputs the following:
     #   {
     #     marketplace_revenue_share_summaries: [
+    #       {
+    #         arn: "arn:aws:partnercentral:us-east-1:123456789012:catalog/AWS/marketplace-revenue-share/mrs-abc123def4567", 
+    #         catalog: "AWS", 
+    #         created_date: Time.parse(1784419200), 
+    #         effective_from: "2026-07-01", 
+    #         effective_until: "2026-12-31", 
+    #         id: "mrs-abc123def4567", 
+    #         last_modified_date: Time.parse(1784505600), 
+    #         latest_revision: "2", 
+    #         products: [
+    #           {
+    #             accounts: [
+    #               {
+    #                 account_type: "DEPLOYMENT", 
+    #                 count: 1, 
+    #               }, 
+    #             ], 
+    #             product_id: "prod-abc123def4567", 
+    #           }, 
+    #         ], 
+    #         total_active_marketplace_revenue_share_allocation_count: 1, 
+    #         total_marketplace_revenue_share_allocation_count: 1, 
+    #       }, 
     #     ], 
     #   }
     #
@@ -1307,8 +1454,9 @@ module Aws::PartnerCentralRevenueMeasurement
     #
     #   resp = client.list_marketplace_revenue_shares({
     #     catalog: "AWS", # required, accepts AWS, Sandbox
-    #     product_ids: ["MarketplaceProductId"],
-    #     product_codes: ["String"],
+    #     identifiers: ["MarketplaceRevenueShareIdentifier"],
+    #     product_ids: ["MarketplaceProductIdentifier"],
+    #     product_codes: ["ProductCode"],
     #     max_results: 1,
     #     next_token: "NextToken",
     #     sort_by: "LastModifiedDate", # accepts LastModifiedDate
@@ -1320,14 +1468,21 @@ module Aws::PartnerCentralRevenueMeasurement
     # @example Response structure
     #
     #   resp.marketplace_revenue_share_summaries #=> Array
-    #   resp.marketplace_revenue_share_summaries[0].product_id #=> String
+    #   resp.marketplace_revenue_share_summaries[0].id #=> String
     #   resp.marketplace_revenue_share_summaries[0].arn #=> String
     #   resp.marketplace_revenue_share_summaries[0].catalog #=> String, one of "AWS", "Sandbox"
-    #   resp.marketplace_revenue_share_summaries[0].product_code #=> String
-    #   resp.marketplace_revenue_share_summaries[0].product_name #=> String
+    #   resp.marketplace_revenue_share_summaries[0].products #=> Array
+    #   resp.marketplace_revenue_share_summaries[0].products[0].product_id #=> String
+    #   resp.marketplace_revenue_share_summaries[0].products[0].product_code #=> String
+    #   resp.marketplace_revenue_share_summaries[0].products[0].product_name #=> String
+    #   resp.marketplace_revenue_share_summaries[0].products[0].accounts #=> Array
+    #   resp.marketplace_revenue_share_summaries[0].products[0].accounts[0].account_type #=> String, one of "DEPLOYMENT", "ORGANIZATION"
+    #   resp.marketplace_revenue_share_summaries[0].products[0].accounts[0].count #=> Integer
     #   resp.marketplace_revenue_share_summaries[0].created_date #=> Time
     #   resp.marketplace_revenue_share_summaries[0].last_modified_date #=> Time
-    #   resp.marketplace_revenue_share_summaries[0].latest_revision #=> Integer
+    #   resp.marketplace_revenue_share_summaries[0].latest_revision #=> String
+    #   resp.marketplace_revenue_share_summaries[0].effective_from #=> String
+    #   resp.marketplace_revenue_share_summaries[0].effective_until #=> String
     #   resp.marketplace_revenue_share_summaries[0].total_active_marketplace_revenue_share_allocation_count #=> Integer
     #   resp.marketplace_revenue_share_summaries[0].total_marketplace_revenue_share_allocation_count #=> Integer
     #   resp.next_token #=> String
@@ -1486,6 +1641,10 @@ module Aws::PartnerCentralRevenueMeasurement
     #   Token for pagination. Use the value returned in the previous response
     #   to retrieve the next page.
     #
+    # @option params [Array<Types::ContextFilter>] :context_filters
+    #   Filter results by context. Filters are combined with AND; values
+    #   within a filter are combined with OR.
+    #
     # @return [Types::ListRevenueAttributionsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListRevenueAttributionsOutput#revenue_attribution_summaries #revenue_attribution_summaries} => Array&lt;Types::AttributionSummary&gt;
@@ -1517,6 +1676,12 @@ module Aws::PartnerCentralRevenueMeasurement
     #     sort_order: "ASCENDING", # accepts ASCENDING, DESCENDING
     #     max_results: 1,
     #     next_token: "NextToken",
+    #     context_filters: [
+    #       {
+    #         key: "ContextKey", # required
+    #         values: ["ContextValue"],
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -1537,6 +1702,8 @@ module Aws::PartnerCentralRevenueMeasurement
     #   resp.revenue_attribution_summaries[0].effective_until #=> String
     #   resp.revenue_attribution_summaries[0].total_active_revenue_attribution_allocation_count #=> Integer
     #   resp.revenue_attribution_summaries[0].total_revenue_attribution_allocation_count #=> Integer
+    #   resp.revenue_attribution_summaries[0].context #=> Hash
+    #   resp.revenue_attribution_summaries[0].context["ContextKey"] #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-revenue-measurement-2022-07-26/ListRevenueAttributions AWS API Documentation
@@ -1740,15 +1907,155 @@ module Aws::PartnerCentralRevenueMeasurement
       req.send_request(options)
     end
 
+    # Replaces the products of a marketplace revenue share. The request
+    # carries the complete desired set of products and their typed account
+    # lists; a product not listed is removed and its account lists cleared,
+    # and an empty Products list closes the marketplace revenue share.
+    # Closing is one-way.
+    #
+    # @option params [required, String] :catalog
+    #   The catalog that the marketplace revenue share belongs to.
+    #
+    # @option params [required, String] :identifier
+    #   The marketplace revenue share to update, by ID (mrs-...) or ARN.
+    #
+    # @option params [String] :client_token
+    #   A unique token to ensure idempotency of the update request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, String] :revision
+    #   The current revision of the marketplace revenue share, for optimistic
+    #   concurrency control. A stale value returns ConflictException with
+    #   Reason REVISION\_MISMATCH.
+    #
+    # @option params [required, Array<Types::MarketplaceRevenueShareProductEntry>] :products
+    #   The complete desired set of products in the marketplace revenue share,
+    #   each with its typed account lists. 0 to 25 products; an empty list
+    #   closes the marketplace revenue share.
+    #
+    # @return [Types::UpdateMarketplaceRevenueShareOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateMarketplaceRevenueShareOutput#id #id} => String
+    #   * {Types::UpdateMarketplaceRevenueShareOutput#arn #arn} => String
+    #   * {Types::UpdateMarketplaceRevenueShareOutput#products #products} => Array&lt;Types::MarketplaceRevenueShareProductSummary&gt;
+    #   * {Types::UpdateMarketplaceRevenueShareOutput#last_modified_date #last_modified_date} => Time
+    #   * {Types::UpdateMarketplaceRevenueShareOutput#latest_revision #latest_revision} => String
+    #
+    #
+    # @example Example: Example for UpdateMarketplaceRevenueShare
+    #
+    #   resp = client.update_marketplace_revenue_share({
+    #     catalog: "AWS", 
+    #     identifier: "mrs-abc123def4567", 
+    #     products: [
+    #       {
+    #         accounts: [
+    #           {
+    #             account_ids: [
+    #               "111122223333", 
+    #             ], 
+    #             account_type: "DEPLOYMENT", 
+    #           }, 
+    #         ], 
+    #         product_id: "prod-abc123def4567", 
+    #       }, 
+    #     ], 
+    #     revision: "1", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     arn: "arn:aws:partnercentral:us-east-1:123456789012:catalog/AWS/marketplace-revenue-share/mrs-abc123def4567", 
+    #     id: "mrs-abc123def4567", 
+    #     last_modified_date: Time.parse(1784505600), 
+    #     latest_revision: "2", 
+    #     products: [
+    #       {
+    #         accounts: [
+    #           {
+    #             account_type: "DEPLOYMENT", 
+    #             count: 1, 
+    #           }, 
+    #         ], 
+    #         product_id: "prod-abc123def4567", 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Example: Example for closing a marketplace revenue share
+    #
+    #   resp = client.update_marketplace_revenue_share({
+    #     catalog: "AWS", 
+    #     identifier: "mrs-abc123def4567", 
+    #     products: [
+    #     ], 
+    #     revision: "2", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     arn: "arn:aws:partnercentral:us-east-1:123456789012:catalog/AWS/marketplace-revenue-share/mrs-abc123def4567", 
+    #     id: "mrs-abc123def4567", 
+    #     last_modified_date: Time.parse(1784592000), 
+    #     latest_revision: "3", 
+    #     products: [
+    #     ], 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_marketplace_revenue_share({
+    #     catalog: "AWS", # required, accepts AWS, Sandbox
+    #     identifier: "MarketplaceRevenueShareIdentifier", # required
+    #     client_token: "ClientToken",
+    #     revision: "RevisionToken", # required
+    #     products: [ # required
+    #       {
+    #         product_id: "MarketplaceProductIdentifier", # required
+    #         accounts: [
+    #           {
+    #             account_type: "DEPLOYMENT", # required, accepts DEPLOYMENT, ORGANIZATION
+    #             account_ids: ["RevenueShareProductAccountId"], # required
+    #           },
+    #         ],
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.id #=> String
+    #   resp.arn #=> String
+    #   resp.products #=> Array
+    #   resp.products[0].product_id #=> String
+    #   resp.products[0].product_code #=> String
+    #   resp.products[0].product_name #=> String
+    #   resp.products[0].accounts #=> Array
+    #   resp.products[0].accounts[0].account_type #=> String, one of "DEPLOYMENT", "ORGANIZATION"
+    #   resp.products[0].accounts[0].count #=> Integer
+    #   resp.last_modified_date #=> Time
+    #   resp.latest_revision #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-revenue-measurement-2022-07-26/UpdateMarketplaceRevenueShare AWS API Documentation
+    #
+    # @overload update_marketplace_revenue_share(params = {})
+    # @param [Hash] params ({})
+    def update_marketplace_revenue_share(params = {}, options = {})
+      req = build_request(:update_marketplace_revenue_share, params)
+      req.send_request(options)
+    end
+
     # Updates an existing marketplace revenue share allocation. Supports
-    # modifying effective dates, revenue share percentage, and status with
+    # modifying the revenue share percentage and status only, with
     # time-based mutability rules.
     #
     # @option params [required, String] :catalog
     #   The catalog containing the allocation.
     #
-    # @option params [required, String] :product_id
-    #   The AWS Marketplace product identifier for the parent revenue share.
+    # @option params [required, String] :marketplace_revenue_share_identifier
+    #   The parent marketplace revenue share, by ID (mrs-...) or ARN.
     #
     # @option params [required, String] :marketplace_revenue_share_allocation_id
     #   The identifier of the allocation to update.
@@ -1763,14 +2070,6 @@ module Aws::PartnerCentralRevenueMeasurement
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
-    # @option params [String] :effective_from
-    #   The new effective start date. Must be the first day of a month. Only
-    #   modifiable on future-dated allocations.
-    #
-    # @option params [String] :effective_until
-    #   The new effective end date. Must be the last day of a month and on or
-    #   after today.
-    #
     # @option params [String] :revenue_share_percent
     #   The new revenue share percentage. Only modifiable on future-dated
     #   allocations.
@@ -1782,16 +2081,15 @@ module Aws::PartnerCentralRevenueMeasurement
     # @return [Types::UpdateMarketplaceRevenueShareAllocationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateMarketplaceRevenueShareAllocationOutput#marketplace_revenue_share_allocation_id #marketplace_revenue_share_allocation_id} => String
-    #   * {Types::UpdateMarketplaceRevenueShareAllocationOutput#product_id #product_id} => String
-    #   * {Types::UpdateMarketplaceRevenueShareAllocationOutput#product_name #product_name} => String
-    #   * {Types::UpdateMarketplaceRevenueShareAllocationOutput#arn #arn} => String
+    #   * {Types::UpdateMarketplaceRevenueShareAllocationOutput#marketplace_revenue_share_identifier #marketplace_revenue_share_identifier} => String
     #   * {Types::UpdateMarketplaceRevenueShareAllocationOutput#effective_from #effective_from} => String
     #   * {Types::UpdateMarketplaceRevenueShareAllocationOutput#effective_until #effective_until} => String
     #   * {Types::UpdateMarketplaceRevenueShareAllocationOutput#revenue_share_percent #revenue_share_percent} => String
     #   * {Types::UpdateMarketplaceRevenueShareAllocationOutput#status #status} => String
     #   * {Types::UpdateMarketplaceRevenueShareAllocationOutput#created_date #created_date} => Time
     #   * {Types::UpdateMarketplaceRevenueShareAllocationOutput#last_modified_date #last_modified_date} => Time
-    #   * {Types::UpdateMarketplaceRevenueShareAllocationOutput#latest_marketplace_revenue_share_revision #latest_marketplace_revenue_share_revision} => String
+    #   * {Types::UpdateMarketplaceRevenueShareAllocationOutput#marketplace_revenue_share_revision #marketplace_revenue_share_revision} => String
+    #   * {Types::UpdateMarketplaceRevenueShareAllocationOutput#marketplace_revenue_share_latest_revision #marketplace_revenue_share_latest_revision} => String
     #
     #
     # @example Example: Example for UpdateMarketplaceRevenueShareAllocation
@@ -1799,17 +2097,21 @@ module Aws::PartnerCentralRevenueMeasurement
     #   resp = client.update_marketplace_revenue_share_allocation({
     #     catalog: "AWS", 
     #     marketplace_revenue_share_allocation_id: "mrsa-abc123def4567", 
-    #     marketplace_revenue_share_revision: "1", 
-    #     product_id: "prod-abc123def4567", 
+    #     marketplace_revenue_share_identifier: "mrs-abc123def4567", 
+    #     marketplace_revenue_share_revision: "2", 
     #     revenue_share_percent: "20.00", 
     #   })
     #
     #   resp.to_h outputs the following:
     #   {
-    #     arn: "arn:aws:partnercentral:us-east-1:123456789012:catalog/AWS/marketplace-revenue-share-allocation/mrsa-abc123def4567", 
+    #     created_date: Time.parse(1784505600), 
     #     effective_from: "2026-07-01", 
+    #     effective_until: "2026-12-31", 
+    #     last_modified_date: Time.parse(1784592000), 
     #     marketplace_revenue_share_allocation_id: "mrsa-abc123def4567", 
-    #     product_id: "prod-abc123def4567", 
+    #     marketplace_revenue_share_identifier: "mrs-abc123def4567", 
+    #     marketplace_revenue_share_latest_revision: "3", 
+    #     marketplace_revenue_share_revision: "3", 
     #     revenue_share_percent: "20.00", 
     #     status: "ACTIVE", 
     #   }
@@ -1818,12 +2120,10 @@ module Aws::PartnerCentralRevenueMeasurement
     #
     #   resp = client.update_marketplace_revenue_share_allocation({
     #     catalog: "AWS", # required, accepts AWS, Sandbox
-    #     product_id: "MarketplaceProductId", # required
+    #     marketplace_revenue_share_identifier: "MarketplaceRevenueShareIdentifier", # required
     #     marketplace_revenue_share_allocation_id: "MarketplaceRevenueShareAllocationId", # required
     #     marketplace_revenue_share_revision: "RevisionToken", # required
     #     client_token: "ClientToken",
-    #     effective_from: "AllocationEffectiveDateString",
-    #     effective_until: "AllocationEffectiveDateString",
     #     revenue_share_percent: "RevenueSharePercent",
     #     status: "ACTIVE", # accepts ACTIVE, INACTIVE
     #   })
@@ -1831,16 +2131,15 @@ module Aws::PartnerCentralRevenueMeasurement
     # @example Response structure
     #
     #   resp.marketplace_revenue_share_allocation_id #=> String
-    #   resp.product_id #=> String
-    #   resp.product_name #=> String
-    #   resp.arn #=> String
+    #   resp.marketplace_revenue_share_identifier #=> String
     #   resp.effective_from #=> String
     #   resp.effective_until #=> String
     #   resp.revenue_share_percent #=> String
     #   resp.status #=> String, one of "ACTIVE", "INACTIVE"
     #   resp.created_date #=> Time
     #   resp.last_modified_date #=> Time
-    #   resp.latest_marketplace_revenue_share_revision #=> String
+    #   resp.marketplace_revenue_share_revision #=> String
+    #   resp.marketplace_revenue_share_latest_revision #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-revenue-measurement-2022-07-26/UpdateMarketplaceRevenueShareAllocation AWS API Documentation
     #
@@ -1873,6 +2172,10 @@ module Aws::PartnerCentralRevenueMeasurement
     #   The current revision of the revenue attribution. Must match the
     #   server's current value.
     #
+    # @option params [Hash<String,String>] :context
+    #   Full-replacement context map. Omit to leave the stored context
+    #   unchanged; pass an empty map to clear it.
+    #
     # @return [Types::UpdateRevenueAttributionOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateRevenueAttributionOutput#id #id} => String
@@ -1880,6 +2183,7 @@ module Aws::PartnerCentralRevenueMeasurement
     #   * {Types::UpdateRevenueAttributionOutput#description #description} => String
     #   * {Types::UpdateRevenueAttributionOutput#last_modified_date #last_modified_date} => Time
     #   * {Types::UpdateRevenueAttributionOutput#latest_revision #latest_revision} => String
+    #   * {Types::UpdateRevenueAttributionOutput#context #context} => Hash&lt;String,String&gt;
     #
     #
     # @example Example: Example for UpdateRevenueAttribution
@@ -1905,6 +2209,9 @@ module Aws::PartnerCentralRevenueMeasurement
     #     client_token: "ClientToken",
     #     description: "UpdateRevenueAttributionInputDescriptionString",
     #     revision: "RevisionToken", # required
+    #     context: {
+    #       "ContextKey" => "ContextValue",
+    #     },
     #   })
     #
     # @example Response structure
@@ -1914,6 +2221,8 @@ module Aws::PartnerCentralRevenueMeasurement
     #   resp.description #=> String
     #   resp.last_modified_date #=> Time
     #   resp.latest_revision #=> String
+    #   resp.context #=> Hash
+    #   resp.context["ContextKey"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-revenue-measurement-2022-07-26/UpdateRevenueAttribution AWS API Documentation
     #
@@ -1942,7 +2251,7 @@ module Aws::PartnerCentralRevenueMeasurement
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-partnercentralrevenuemeasurement'
-      context[:gem_version] = '1.8.0'
+      context[:gem_version] = '1.16.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

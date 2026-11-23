@@ -110,6 +110,7 @@
       "errors":[
         {"shape":"InvalidInput"},
         {"shape":"NoSuchHealthCheck"},
+        {"shape":"NoSuchHealthCheckSource"},
         {"shape":"NoSuchHostedZone"},
         {"shape":"PriorRequestNotComplete"},
         {"shape":"ThrottlingException"}
@@ -152,6 +153,26 @@
         {"shape":"TooManyHealthChecks"},
         {"shape":"HealthCheckAlreadyExists"},
         {"shape":"InvalidInput"}
+      ]
+    },
+    "CreateHealthCheckSource":{
+      "name":"CreateHealthCheckSource",
+      "http":{
+        "method":"POST",
+        "requestUri":"/2013-04-01/healthchecksource",
+        "responseCode":201
+      },
+      "input":{
+        "shape":"CreateHealthCheckSourceRequest",
+        "locationName":"CreateHealthCheckSourceRequest",
+        "xmlNamespace":{"uri":"https://route53.amazonaws.com/doc/2013-04-01/"}
+      },
+      "output":{"shape":"CreateHealthCheckSourceResponse"},
+      "errors":[
+        {"shape":"HealthCheckSourceAlreadyExists"},
+        {"shape":"InvalidInput"},
+        {"shape":"InvalidVPCId"},
+        {"shape":"TooManyHealthCheckSources"}
       ]
     },
     "CreateHostedZone":{
@@ -225,6 +246,27 @@
         {"shape":"InvalidInput"},
         {"shape":"QueryLoggingConfigAlreadyExists"},
         {"shape":"InsufficientCloudWatchLogsResourcePolicy"}
+      ]
+    },
+    "CreateResourceRecordSetProtections":{
+      "name":"CreateResourceRecordSetProtections",
+      "http":{
+        "method":"POST",
+        "requestUri":"/2013-04-01/hostedzone/{Id}/rrsetprotection"
+      },
+      "input":{
+        "shape":"CreateResourceRecordSetProtectionsRequest",
+        "locationName":"CreateResourceRecordSetProtectionsRequest",
+        "xmlNamespace":{"uri":"https://route53.amazonaws.com/doc/2013-04-01/"}
+      },
+      "output":{"shape":"CreateResourceRecordSetProtectionsResponse"},
+      "errors":[
+        {"shape":"InvalidInput"},
+        {"shape":"InvalidResourceRecordSetProtectionBatch"},
+        {"shape":"NoSuchHostedZone"},
+        {"shape":"ProtectionAlreadyExists"},
+        {"shape":"LimitsExceeded"},
+        {"shape":"PriorRequestNotComplete"}
       ]
     },
     "CreateReusableDelegationSet":{
@@ -379,6 +421,20 @@
         {"shape":"InvalidInput"}
       ]
     },
+    "DeleteHealthCheckSource":{
+      "name":"DeleteHealthCheckSource",
+      "http":{
+        "method":"DELETE",
+        "requestUri":"/2013-04-01/healthchecksource/{HealthCheckSourceId}"
+      },
+      "input":{"shape":"DeleteHealthCheckSourceRequest"},
+      "output":{"shape":"DeleteHealthCheckSourceResponse"},
+      "errors":[
+        {"shape":"NoSuchHealthCheckSource"},
+        {"shape":"InvalidInput"},
+        {"shape":"PriorRequestNotComplete"}
+      ]
+    },
     "DeleteHostedZone":{
       "name":"DeleteHostedZone",
       "http":{
@@ -424,6 +480,25 @@
         {"shape":"ConcurrentModification"},
         {"shape":"NoSuchQueryLoggingConfig"},
         {"shape":"InvalidInput"}
+      ]
+    },
+    "DeleteResourceRecordSetProtections":{
+      "name":"DeleteResourceRecordSetProtections",
+      "http":{
+        "method":"POST",
+        "requestUri":"/2013-04-01/hostedzone/{Id}/rrsetprotection/delete"
+      },
+      "input":{
+        "shape":"DeleteResourceRecordSetProtectionsRequest",
+        "locationName":"DeleteResourceRecordSetProtectionsRequest",
+        "xmlNamespace":{"uri":"https://route53.amazonaws.com/doc/2013-04-01/"}
+      },
+      "output":{"shape":"DeleteResourceRecordSetProtectionsResponse"},
+      "errors":[
+        {"shape":"InvalidInput"},
+        {"shape":"InvalidResourceRecordSetProtectionBatch"},
+        {"shape":"NoSuchHostedZone"},
+        {"shape":"PriorRequestNotComplete"}
       ]
     },
     "DeleteReusableDelegationSet":{
@@ -646,6 +721,19 @@
         {"shape":"InvalidInput"}
       ]
     },
+    "GetHealthCheckSource":{
+      "name":"GetHealthCheckSource",
+      "http":{
+        "method":"GET",
+        "requestUri":"/2013-04-01/healthchecksource/{HealthCheckSourceId}"
+      },
+      "input":{"shape":"GetHealthCheckSourceRequest"},
+      "output":{"shape":"GetHealthCheckSourceResponse"},
+      "errors":[
+        {"shape":"NoSuchHealthCheckSource"},
+        {"shape":"InvalidInput"}
+      ]
+    },
     "GetHealthCheckStatus":{
       "name":"GetHealthCheckStatus",
       "http":{
@@ -669,6 +757,21 @@
       "output":{"shape":"GetHostedZoneResponse"},
       "errors":[
         {"shape":"NoSuchHostedZone"},
+        {"shape":"InvalidInput"}
+      ]
+    },
+    "GetHostedZoneChangeBatch":{
+      "name":"GetHostedZoneChangeBatch",
+      "http":{
+        "method":"GET",
+        "requestUri":"/2013-04-01/hostedzone/{Id}/changebatches/{ChangeId}"
+      },
+      "input":{"shape":"GetHostedZoneChangeBatchRequest"},
+      "output":{"shape":"GetHostedZoneChangeBatchResponse"},
+      "errors":[
+        {"shape":"NoSuchHostedZone"},
+        {"shape":"NoSuchChange"},
+        {"shape":"FeatureNotEnabled"},
         {"shape":"InvalidInput"}
       ]
     },
@@ -824,6 +927,18 @@
         {"shape":"InvalidInput"}
       ]
     },
+    "ListHealthCheckSources":{
+      "name":"ListHealthCheckSources",
+      "http":{
+        "method":"GET",
+        "requestUri":"/2013-04-01/healthchecksource"
+      },
+      "input":{"shape":"ListHealthCheckSourcesRequest"},
+      "output":{"shape":"ListHealthCheckSourcesResponse"},
+      "errors":[
+        {"shape":"InvalidInput"}
+      ]
+    },
     "ListHealthChecks":{
       "name":"ListHealthChecks",
       "http":{
@@ -835,6 +950,34 @@
       "errors":[
         {"shape":"InvalidInput"},
         {"shape":"IncompatibleVersion"}
+      ]
+    },
+    "ListHealthChecksBySource":{
+      "name":"ListHealthChecksBySource",
+      "http":{
+        "method":"GET",
+        "requestUri":"/2013-04-01/healthchecks/source/{HealthCheckSourceId}"
+      },
+      "input":{"shape":"ListHealthChecksBySourceRequest"},
+      "output":{"shape":"ListHealthChecksBySourceResponse"},
+      "errors":[
+        {"shape":"InvalidInput"},
+        {"shape":"NoSuchHealthCheckSource"}
+      ]
+    },
+    "ListHostedZoneChangeBatches":{
+      "name":"ListHostedZoneChangeBatches",
+      "http":{
+        "method":"GET",
+        "requestUri":"/2013-04-01/hostedzone/{Id}/changebatches"
+      },
+      "input":{"shape":"ListHostedZoneChangeBatchesRequest"},
+      "output":{"shape":"ListHostedZoneChangeBatchesResponse"},
+      "errors":[
+        {"shape":"NoSuchHostedZone"},
+        {"shape":"FeatureNotEnabled"},
+        {"shape":"InvalidInput"},
+        {"shape":"InvalidPaginationToken"}
       ]
     },
     "ListHostedZones":{
@@ -891,6 +1034,35 @@
         {"shape":"NoSuchHostedZone"}
       ]
     },
+    "ListResourceRecordSetChanges":{
+      "name":"ListResourceRecordSetChanges",
+      "http":{
+        "method":"GET",
+        "requestUri":"/2013-04-01/hostedzone/{Id}/rrsetchanges"
+      },
+      "input":{"shape":"ListResourceRecordSetChangesRequest"},
+      "output":{"shape":"ListResourceRecordSetChangesResponse"},
+      "errors":[
+        {"shape":"NoSuchHostedZone"},
+        {"shape":"FeatureNotEnabled"},
+        {"shape":"InvalidInput"},
+        {"shape":"InvalidPaginationToken"}
+      ]
+    },
+    "ListResourceRecordSetProtections":{
+      "name":"ListResourceRecordSetProtections",
+      "http":{
+        "method":"GET",
+        "requestUri":"/2013-04-01/hostedzone/{Id}/rrsetprotection"
+      },
+      "input":{"shape":"ListResourceRecordSetProtectionsRequest"},
+      "output":{"shape":"ListResourceRecordSetProtectionsResponse"},
+      "errors":[
+        {"shape":"InvalidInput"},
+        {"shape":"NoSuchHostedZone"},
+        {"shape":"InvalidPaginationToken"}
+      ]
+    },
     "ListResourceRecordSets":{
       "name":"ListResourceRecordSets",
       "http":{
@@ -927,6 +1099,7 @@
       "errors":[
         {"shape":"InvalidInput"},
         {"shape":"NoSuchHealthCheck"},
+        {"shape":"NoSuchHealthCheckSource"},
         {"shape":"NoSuchHostedZone"},
         {"shape":"PriorRequestNotComplete"},
         {"shape":"ThrottlingException"}
@@ -947,6 +1120,7 @@
       "errors":[
         {"shape":"InvalidInput"},
         {"shape":"NoSuchHealthCheck"},
+        {"shape":"NoSuchHealthCheckSource"},
         {"shape":"NoSuchHostedZone"},
         {"shape":"PriorRequestNotComplete"},
         {"shape":"ThrottlingException"}
@@ -1100,6 +1274,24 @@
         {"shape":"LimitsExceeded"}
       ]
     },
+    "UpdateHostedZoneTier":{
+      "name":"UpdateHostedZoneTier",
+      "http":{
+        "method":"POST",
+        "requestUri":"/2013-04-01/hostedzone/{Id}/tier"
+      },
+      "input":{
+        "shape":"UpdateHostedZoneTierRequest",
+        "locationName":"UpdateHostedZoneTierRequest",
+        "xmlNamespace":{"uri":"https://route53.amazonaws.com/doc/2013-04-01/"}
+      },
+      "output":{"shape":"UpdateHostedZoneTierResponse"},
+      "errors":[
+        {"shape":"NoSuchHostedZone"},
+        {"shape":"InvalidInput"},
+        {"shape":"PriorRequestNotComplete"}
+      ]
+    },
     "UpdateTrafficPolicyComment":{
       "name":"UpdateTrafficPolicyComment",
       "http":{
@@ -1152,6 +1344,28 @@
       "max":64,
       "min":1
     },
+    "AZAffinity":{
+      "type":"structure",
+      "members":{
+        "LocationType":{"shape":"AZAffinityLocationType"},
+        "LocationId":{"shape":"AZAffinityLocationId"}
+      }
+    },
+    "AZAffinityLocationId":{
+      "type":"string",
+      "max":64,
+      "min":1
+    },
+    "AZAffinityLocationType":{
+      "type":"string",
+      "enum":[
+        "AvailabilityZone",
+        "AvailabilityZoneGroup",
+        "Region",
+        "Partition",
+        "Global"
+      ]
+    },
     "AcceleratedRecoveryEnabled":{"type":"boolean"},
     "AcceleratedRecoveryStatus":{
       "type":"string",
@@ -1184,7 +1398,8 @@
         "MAX_HOSTED_ZONES_BY_OWNER",
         "MAX_TRAFFIC_POLICY_INSTANCES_BY_OWNER",
         "MAX_REUSABLE_DELEGATION_SETS_BY_OWNER",
-        "MAX_TRAFFIC_POLICIES_BY_OWNER"
+        "MAX_TRAFFIC_POLICIES_BY_OWNER",
+        "MAX_HEALTH_CHECK_SOURCES_BY_OWNER"
       ]
     },
     "ActivateKeySigningKeyRequest":{
@@ -1267,6 +1482,11 @@
         "ChangeInfo":{"shape":"ChangeInfo"}
       }
     },
+    "AvailabilityZoneId":{
+      "type":"string",
+      "max":64,
+      "min":1
+    },
     "Bias":{
       "type":"integer",
       "max":99,
@@ -1299,6 +1519,31 @@
         "Changes":{"shape":"Changes"}
       }
     },
+    "ChangeBatchSummaries":{
+      "type":"list",
+      "member":{
+        "shape":"ChangeBatchSummary",
+        "locationName":"ChangeBatchSummary"
+      }
+    },
+    "ChangeBatchSummary":{
+      "type":"structure",
+      "required":[
+        "ChangeId",
+        "Operation",
+        "SubmittedAt",
+        "ChangeCount"
+      ],
+      "members":{
+        "ChangeId":{"shape":"ResourceId"},
+        "Operation":{"shape":"ChangeHistoryOperation"},
+        "SubmittedAt":{"shape":"TimeStamp"},
+        "SubmittedBy":{"shape":"ChangeSubmitter"},
+        "RequestId":{"shape":"ChangeRequestId"},
+        "Comment":{"shape":"ResourceDescription"},
+        "ChangeCount":{"shape":"ChangeCount"}
+      }
+    },
     "ChangeCidrCollectionRequest":{
       "type":"structure",
       "required":[
@@ -1322,6 +1567,74 @@
         "Id":{"shape":"ChangeId"}
       }
     },
+    "ChangeCount":{
+      "type":"long",
+      "min":0
+    },
+    "ChangeGuardrail":{
+      "type":"structure",
+      "required":[
+        "Name",
+        "Status"
+      ],
+      "members":{
+        "Name":{"shape":"ChangeGuardrailName"},
+        "Status":{"shape":"ChangeGuardrailStatus"}
+      }
+    },
+    "ChangeGuardrailName":{
+      "type":"string",
+      "enum":[
+        "NS_FORMAT_CHECK",
+        "NS_DELEGATION_AUTHORITY_CHECK",
+        "NS_OCCLUSION_CHECK",
+        "ALIAS_TARGET_CHECK",
+        "ACTIVE_RECORD_CHECK",
+        "ACTIVE_DELEGATION_CHECK"
+      ]
+    },
+    "ChangeGuardrailStatus":{
+      "type":"string",
+      "enum":[
+        "ENABLED",
+        "DISABLED"
+      ]
+    },
+    "ChangeGuardrails":{
+      "type":"list",
+      "member":{
+        "shape":"ChangeGuardrail",
+        "locationName":"ChangeGuardrail"
+      },
+      "min":1
+    },
+    "ChangeHistoryFeature":{
+      "type":"structure",
+      "members":{
+        "Status":{"shape":"FeatureEnablement"},
+        "RetentionStartsAt":{"shape":"TimeStamp"}
+      }
+    },
+    "ChangeHistoryOperation":{
+      "type":"string",
+      "enum":[
+        "CreateHostedZone",
+        "DeleteHostedZone",
+        "ChangeResourceRecordSets"
+      ]
+    },
+    "ChangeHistorySortOrder":{
+      "type":"string",
+      "enum":[
+        "ASCENDING",
+        "DESCENDING"
+      ]
+    },
+    "ChangeHistoryTimeBound":{
+      "type":"string",
+      "max":35,
+      "pattern":"^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\\.[0-9]{1,9})?(Z|[+-]([01][0-9]|2[0-3]):[0-5][0-9])$"
+    },
     "ChangeId":{
       "type":"string",
       "max":6500,
@@ -1340,6 +1653,11 @@
         "SubmittedAt":{"shape":"TimeStamp"},
         "Comment":{"shape":"ResourceDescription"}
       }
+    },
+    "ChangeRequestId":{
+      "type":"string",
+      "max":64,
+      "min":1
     },
     "ChangeResourceRecordSetsRequest":{
       "type":"structure",
@@ -1369,6 +1687,11 @@
         "PENDING",
         "INSYNC"
       ]
+    },
+    "ChangeSubmitter":{
+      "type":"string",
+      "max":2048,
+      "min":1
     },
     "ChangeTagsForResourceRequest":{
       "type":"structure",
@@ -1726,6 +2049,35 @@
         }
       }
     },
+    "CreateHealthCheckSourceRequest":{
+      "type":"structure",
+      "required":["HealthCheckSourceConfig"],
+      "members":{
+        "CallerReference":{
+          "shape":"HealthCheckNonce",
+          "idempotencyToken":true
+        },
+        "HealthCheckSourceConfig":{"shape":"HealthCheckSourceConfig"},
+        "Tags":{"shape":"TagList"}
+      }
+    },
+    "CreateHealthCheckSourceResponse":{
+      "type":"structure",
+      "required":[
+        "HealthCheckSourceId",
+        "HealthCheckSourceStatus",
+        "Location"
+      ],
+      "members":{
+        "HealthCheckSourceId":{"shape":"HealthCheckSourceId"},
+        "HealthCheckSourceStatus":{"shape":"HealthCheckSourceStatus"},
+        "Location":{
+          "shape":"ResourceURI",
+          "location":"header",
+          "locationName":"Location"
+        }
+      }
+    },
     "CreateHostedZoneRequest":{
       "type":"structure",
       "required":[
@@ -1737,7 +2089,9 @@
         "VPC":{"shape":"VPC"},
         "CallerReference":{"shape":"Nonce"},
         "HostedZoneConfig":{"shape":"HostedZoneConfig"},
-        "DelegationSetId":{"shape":"ResourceId"}
+        "DelegationSetId":{"shape":"ResourceId"},
+        "EnablePublicDNSFallback":{"shape":"PublicDNSFallbackEnabled"},
+        "ChangeGuardrails":{"shape":"ChangeGuardrails"}
       }
     },
     "CreateHostedZoneResponse":{
@@ -1819,6 +2173,25 @@
           "locationName":"Location"
         }
       }
+    },
+    "CreateResourceRecordSetProtectionsRequest":{
+      "type":"structure",
+      "required":[
+        "HostedZoneId",
+        "Protections"
+      ],
+      "members":{
+        "HostedZoneId":{
+          "shape":"ResourceId",
+          "location":"uri",
+          "locationName":"Id"
+        },
+        "Protections":{"shape":"ResourceRecordSetProtectionConfigBatch"}
+      }
+    },
+    "CreateResourceRecordSetProtectionsResponse":{
+      "type":"structure",
+      "members":{}
     },
     "CreateReusableDelegationSetRequest":{
       "type":"structure",
@@ -2094,6 +2467,28 @@
       "type":"structure",
       "members":{}
     },
+    "DeleteHealthCheckSourceRequest":{
+      "type":"structure",
+      "required":["HealthCheckSourceId"],
+      "members":{
+        "HealthCheckSourceId":{
+          "shape":"HealthCheckSourceId",
+          "location":"uri",
+          "locationName":"HealthCheckSourceId"
+        }
+      }
+    },
+    "DeleteHealthCheckSourceResponse":{
+      "type":"structure",
+      "required":[
+        "HealthCheckSourceId",
+        "HealthCheckSourceStatus"
+      ],
+      "members":{
+        "HealthCheckSourceId":{"shape":"HealthCheckSourceId"},
+        "HealthCheckSourceStatus":{"shape":"HealthCheckSourceStatus"}
+      }
+    },
     "DeleteHostedZoneRequest":{
       "type":"structure",
       "required":["Id"],
@@ -2150,6 +2545,25 @@
       }
     },
     "DeleteQueryLoggingConfigResponse":{
+      "type":"structure",
+      "members":{}
+    },
+    "DeleteResourceRecordSetProtectionsRequest":{
+      "type":"structure",
+      "required":[
+        "HostedZoneId",
+        "Protections"
+      ],
+      "members":{
+        "HostedZoneId":{
+          "shape":"ResourceId",
+          "location":"uri",
+          "locationName":"Id"
+        },
+        "Protections":{"shape":"ResourceRecordSetProtectionKeyBatch"}
+      }
+    },
+    "DeleteResourceRecordSetProtectionsResponse":{
       "type":"structure",
       "members":{}
     },
@@ -2292,6 +2706,7 @@
         "ChangeInfo":{"shape":"ChangeInfo"}
       }
     },
+    "DryRun":{"type":"boolean"},
     "EnableHostedZoneDNSSECRequest":{
       "type":"structure",
       "required":["HostedZoneId"],
@@ -2311,6 +2726,13 @@
       }
     },
     "EnableSNI":{"type":"boolean"},
+    "EndpointType":{
+      "type":"string",
+      "enum":[
+        "PUBLIC",
+        "PRIVATE"
+      ]
+    },
     "ErrorMessage":{"type":"string"},
     "ErrorMessages":{
       "type":"list",
@@ -2328,6 +2750,30 @@
       "type":"integer",
       "max":10,
       "min":1
+    },
+    "FeatureEnablement":{
+      "type":"string",
+      "enum":[
+        "ENABLED",
+        "DISABLED"
+      ]
+    },
+    "FeatureNotEnabled":{
+      "type":"structure",
+      "members":{
+        "message":{"shape":"ErrorMessage"}
+      },
+      "error":{"httpStatusCode":403},
+      "exception":true
+    },
+    "FeatureStatus":{
+      "type":"string",
+      "enum":[
+        "ENABLED",
+        "DISABLED",
+        "ENABLING",
+        "DISABLING"
+      ]
     },
     "FullyQualifiedDomainName":{
       "type":"string",
@@ -2545,6 +2991,24 @@
         "HealthCheck":{"shape":"HealthCheck"}
       }
     },
+    "GetHealthCheckSourceRequest":{
+      "type":"structure",
+      "required":["HealthCheckSourceId"],
+      "members":{
+        "HealthCheckSourceId":{
+          "shape":"HealthCheckSourceId",
+          "location":"uri",
+          "locationName":"HealthCheckSourceId"
+        }
+      }
+    },
+    "GetHealthCheckSourceResponse":{
+      "type":"structure",
+      "required":["HealthCheckSource"],
+      "members":{
+        "HealthCheckSource":{"shape":"HealthCheckSource"}
+      }
+    },
     "GetHealthCheckStatusRequest":{
       "type":"structure",
       "required":["HealthCheckId"],
@@ -2561,6 +3025,36 @@
       "required":["HealthCheckObservations"],
       "members":{
         "HealthCheckObservations":{"shape":"HealthCheckObservations"}
+      }
+    },
+    "GetHostedZoneChangeBatchRequest":{
+      "type":"structure",
+      "required":[
+        "HostedZoneId",
+        "ChangeId"
+      ],
+      "members":{
+        "HostedZoneId":{
+          "shape":"ResourceId",
+          "location":"uri",
+          "locationName":"Id"
+        },
+        "ChangeId":{
+          "shape":"ResourceId",
+          "location":"uri",
+          "locationName":"ChangeId"
+        }
+      }
+    },
+    "GetHostedZoneChangeBatchResponse":{
+      "type":"structure",
+      "required":[
+        "ChangeBatchSummary",
+        "ChangeBatch"
+      ],
+      "members":{
+        "ChangeBatchSummary":{"shape":"ChangeBatchSummary"},
+        "ChangeBatch":{"shape":"ChangeBatch"}
       }
     },
     "GetHostedZoneCountRequest":{
@@ -2791,7 +3285,9 @@
         "Regions":{"shape":"HealthCheckRegionList"},
         "AlarmIdentifier":{"shape":"AlarmIdentifier"},
         "InsufficientDataHealthStatus":{"shape":"InsufficientDataHealthStatus"},
-        "RoutingControlArn":{"shape":"RoutingControlArn"}
+        "RoutingControlArn":{"shape":"RoutingControlArn"},
+        "EndpointType":{"shape":"EndpointType"},
+        "HealthCheckSourceId":{"shape":"HealthCheckSourceId"}
       }
     },
     "HealthCheckCount":{"type":"long"},
@@ -2851,6 +3347,78 @@
       },
       "max":64,
       "min":3
+    },
+    "HealthCheckSource":{
+      "type":"structure",
+      "required":[
+        "HealthCheckSourceId",
+        "HealthCheckSourceStatus",
+        "HealthCheckSourceConfig"
+      ],
+      "members":{
+        "HealthCheckSourceId":{"shape":"HealthCheckSourceId"},
+        "HealthCheckSourceStatus":{"shape":"HealthCheckSourceStatus"},
+        "HealthCheckSourceConfig":{"shape":"HealthCheckSourceConfig"},
+        "StatusReasonCode":{"shape":"HealthCheckSourceStatusReasonCode"},
+        "StatusReason":{"shape":"HealthCheckSourceStatusReason"}
+      }
+    },
+    "HealthCheckSourceAlreadyExists":{
+      "type":"structure",
+      "members":{
+        "message":{"shape":"ErrorMessage"}
+      },
+      "error":{"httpStatusCode":409},
+      "exception":true
+    },
+    "HealthCheckSourceConfig":{
+      "type":"structure",
+      "required":[
+        "VpcId",
+        "SubnetConfigurationList"
+      ],
+      "members":{
+        "VpcId":{"shape":"VPCId"},
+        "SubnetConfigurationList":{"shape":"SubnetConfigurationList"}
+      }
+    },
+    "HealthCheckSourceId":{
+      "type":"string",
+      "max":64,
+      "min":1
+    },
+    "HealthCheckSourceStatus":{
+      "type":"string",
+      "enum":[
+        "CREATE_PENDING",
+        "CREATE_IN_PROGRESS",
+        "CREATE_COMPLETED",
+        "CREATE_FAILED",
+        "DELETE_PENDING",
+        "DELETE_IN_PROGRESS",
+        "DELETE_COMPLETED",
+        "DELETE_FAILED"
+      ]
+    },
+    "HealthCheckSourceStatusReason":{"type":"string"},
+    "HealthCheckSourceStatusReasonCode":{
+      "type":"string",
+      "enum":[
+        "INSUFFICIENT_SUBNET_IPS",
+        "EC2_LIMIT_EXCEEDED",
+        "INVALID_SUBNET",
+        "INVALID_SECURITY_GROUP",
+        "INVALID_CONFIGURATION",
+        "SLR_MISSING_OR_NOT_ASSUMABLE",
+        "INTERNAL_ERROR"
+      ]
+    },
+    "HealthCheckSources":{
+      "type":"list",
+      "member":{
+        "shape":"HealthCheckSource",
+        "locationName":"HealthCheckSource"
+      }
     },
     "HealthCheckType":{
       "type":"string",
@@ -2918,7 +3486,8 @@
       "type":"structure",
       "members":{
         "Comment":{"shape":"ResourceDescription"},
-        "PrivateZone":{"shape":"IsPrivateZone"}
+        "PrivateZone":{"shape":"IsPrivateZone"},
+        "HostedZoneTier":{"shape":"HostedZoneTier"}
       }
     },
     "HostedZoneCount":{"type":"long"},
@@ -2932,7 +3501,10 @@
       "type":"structure",
       "members":{
         "AcceleratedRecoveryStatus":{"shape":"AcceleratedRecoveryStatus"},
-        "FailureReasons":{"shape":"HostedZoneFailureReasons"}
+        "PublicDNSFallbackStatus":{"shape":"FeatureStatus"},
+        "ChangeHistory":{"shape":"ChangeHistoryFeature"},
+        "FailureReasons":{"shape":"HostedZoneFailureReasons"},
+        "ChangeGuardrails":{"shape":"ChangeGuardrails"}
       }
     },
     "HostedZoneLimit":{
@@ -3013,6 +3585,13 @@
         "Name":{"shape":"DNSName"},
         "Owner":{"shape":"HostedZoneOwner"}
       }
+    },
+    "HostedZoneTier":{
+      "type":"string",
+      "enum":[
+        "STANDARD",
+        "ADVANCED"
+      ]
     },
     "HostedZoneType":{
       "type":"string",
@@ -3113,6 +3692,16 @@
       "type":"structure",
       "members":{
         "message":{"shape":"ErrorMessage"}
+      },
+      "error":{"httpStatusCode":400},
+      "exception":true
+    },
+    "InvalidResourceRecordSetProtectionBatch":{
+      "type":"structure",
+      "required":["Errors"],
+      "members":{
+        "Message":{"shape":"ErrorMessage"},
+        "Errors":{"shape":"ProtectionErrors"}
       },
       "error":{"httpStatusCode":400},
       "exception":true
@@ -3353,6 +3942,65 @@
         "MaxItems":{"shape":"PageMaxItems"}
       }
     },
+    "ListHealthCheckSourcesRequest":{
+      "type":"structure",
+      "members":{
+        "NextToken":{
+          "shape":"PageMarker",
+          "location":"querystring",
+          "locationName":"nexttoken"
+        },
+        "MaxResults":{
+          "shape":"MaxResults",
+          "location":"querystring",
+          "locationName":"maxresults"
+        }
+      }
+    },
+    "ListHealthCheckSourcesResponse":{
+      "type":"structure",
+      "required":["HealthCheckSources"],
+      "members":{
+        "HealthCheckSources":{"shape":"HealthCheckSources"},
+        "NextToken":{"shape":"PageMarker"}
+      }
+    },
+    "ListHealthChecksBySourceRequest":{
+      "type":"structure",
+      "required":["HealthCheckSourceId"],
+      "members":{
+        "HealthCheckSourceId":{
+          "shape":"HealthCheckSourceId",
+          "location":"uri",
+          "locationName":"HealthCheckSourceId"
+        },
+        "Marker":{
+          "shape":"PageMarker",
+          "location":"querystring",
+          "locationName":"marker"
+        },
+        "MaxItems":{
+          "shape":"PageMaxItems",
+          "location":"querystring",
+          "locationName":"maxitems"
+        }
+      }
+    },
+    "ListHealthChecksBySourceResponse":{
+      "type":"structure",
+      "required":[
+        "HealthChecks",
+        "IsTruncated",
+        "MaxItems"
+      ],
+      "members":{
+        "HealthChecks":{"shape":"HealthChecks"},
+        "Marker":{"shape":"PageMarker"},
+        "IsTruncated":{"shape":"PageTruncated"},
+        "NextMarker":{"shape":"PageMarker"},
+        "MaxItems":{"shape":"PageMaxItems"}
+      }
+    },
     "ListHealthChecksRequest":{
       "type":"structure",
       "members":{
@@ -3382,6 +4030,55 @@
         "IsTruncated":{"shape":"PageTruncated"},
         "NextMarker":{"shape":"PageMarker"},
         "MaxItems":{"shape":"PageMaxItems"}
+      }
+    },
+    "ListHostedZoneChangeBatchesRequest":{
+      "type":"structure",
+      "required":["HostedZoneId"],
+      "members":{
+        "HostedZoneId":{
+          "shape":"ResourceId",
+          "location":"uri",
+          "locationName":"Id"
+        },
+        "SubmittedAfter":{
+          "shape":"ChangeHistoryTimeBound",
+          "location":"querystring",
+          "locationName":"submittedafter"
+        },
+        "SubmittedBefore":{
+          "shape":"ChangeHistoryTimeBound",
+          "location":"querystring",
+          "locationName":"submittedbefore"
+        },
+        "StartAfterChangeId":{
+          "shape":"ResourceId",
+          "location":"querystring",
+          "locationName":"startafterchangeid"
+        },
+        "SortOrder":{
+          "shape":"ChangeHistorySortOrder",
+          "location":"querystring",
+          "locationName":"sortorder"
+        },
+        "MaxResults":{
+          "shape":"MaxResults",
+          "location":"querystring",
+          "locationName":"maxresults"
+        },
+        "NextToken":{
+          "shape":"PaginationToken",
+          "location":"querystring",
+          "locationName":"nexttoken"
+        }
+      }
+    },
+    "ListHostedZoneChangeBatchesResponse":{
+      "type":"structure",
+      "required":["ChangeBatchSummaries"],
+      "members":{
+        "ChangeBatchSummaries":{"shape":"ChangeBatchSummaries"},
+        "NextToken":{"shape":"PaginationToken"}
       }
     },
     "ListHostedZonesByNameRequest":{
@@ -3528,6 +4225,99 @@
       "required":["QueryLoggingConfigs"],
       "members":{
         "QueryLoggingConfigs":{"shape":"QueryLoggingConfigs"},
+        "NextToken":{"shape":"PaginationToken"}
+      }
+    },
+    "ListResourceRecordSetChangesRequest":{
+      "type":"structure",
+      "required":["HostedZoneId"],
+      "members":{
+        "HostedZoneId":{
+          "shape":"ResourceId",
+          "location":"uri",
+          "locationName":"Id"
+        },
+        "RecordName":{
+          "shape":"DNSName",
+          "location":"querystring",
+          "locationName":"recordname"
+        },
+        "RecordType":{
+          "shape":"RRType",
+          "location":"querystring",
+          "locationName":"recordtype"
+        },
+        "SubmittedAfter":{
+          "shape":"ChangeHistoryTimeBound",
+          "location":"querystring",
+          "locationName":"submittedafter"
+        },
+        "SubmittedBefore":{
+          "shape":"ChangeHistoryTimeBound",
+          "location":"querystring",
+          "locationName":"submittedbefore"
+        },
+        "SortOrder":{
+          "shape":"ChangeHistorySortOrder",
+          "location":"querystring",
+          "locationName":"sortorder"
+        },
+        "MaxResults":{
+          "shape":"MaxResults",
+          "location":"querystring",
+          "locationName":"maxresults"
+        },
+        "NextToken":{
+          "shape":"PaginationToken",
+          "location":"querystring",
+          "locationName":"nexttoken"
+        }
+      }
+    },
+    "ListResourceRecordSetChangesResponse":{
+      "type":"structure",
+      "required":["ResourceRecordSetChanges"],
+      "members":{
+        "ResourceRecordSetChanges":{"shape":"ResourceRecordSetChanges"},
+        "NextToken":{"shape":"PaginationToken"}
+      }
+    },
+    "ListResourceRecordSetProtectionsRequest":{
+      "type":"structure",
+      "required":["HostedZoneId"],
+      "members":{
+        "HostedZoneId":{
+          "shape":"ResourceId",
+          "location":"uri",
+          "locationName":"Id"
+        },
+        "StartRecordName":{
+          "shape":"DNSName",
+          "location":"querystring",
+          "locationName":"name"
+        },
+        "StartRecordType":{
+          "shape":"RRType",
+          "location":"querystring",
+          "locationName":"type"
+        },
+        "MaxResults":{
+          "shape":"MaxResults",
+          "location":"querystring",
+          "locationName":"maxresults"
+        },
+        "NextToken":{
+          "shape":"PaginationToken",
+          "location":"querystring",
+          "locationName":"nexttoken"
+        }
+      }
+    },
+    "ListResourceRecordSetProtectionsResponse":{
+      "type":"structure",
+      "required":["ResourceRecordSetProtections"],
+      "members":{
+        "ResourceRecordSetProtections":{"shape":"ResourceRecordSetProtections"},
         "NextToken":{"shape":"PaginationToken"}
       }
     },
@@ -3990,6 +4780,14 @@
       "error":{"httpStatusCode":404},
       "exception":true
     },
+    "NoSuchHealthCheckSource":{
+      "type":"structure",
+      "members":{
+        "message":{"shape":"ErrorMessage"}
+      },
+      "error":{"httpStatusCode":404},
+      "exception":true
+    },
     "NoSuchHostedZone":{
       "type":"structure",
       "members":{
@@ -4070,6 +4868,40 @@
       "error":{"httpStatusCode":400},
       "exception":true
     },
+    "ProtectionAlreadyExists":{
+      "type":"structure",
+      "required":["Errors"],
+      "members":{
+        "Message":{"shape":"ErrorMessage"},
+        "Errors":{"shape":"ProtectionErrors"}
+      },
+      "error":{"httpStatusCode":409},
+      "exception":true
+    },
+    "ProtectionError":{
+      "type":"structure",
+      "required":[
+        "RecordName",
+        "RecordType",
+        "Code",
+        "Message"
+      ],
+      "members":{
+        "RecordName":{"shape":"DNSName"},
+        "RecordType":{"shape":"RRType"},
+        "Code":{"shape":"ProtectionErrorCode"},
+        "Message":{"shape":"ErrorMessage"}
+      }
+    },
+    "ProtectionErrorCode":{"type":"string"},
+    "ProtectionErrors":{
+      "type":"list",
+      "member":{
+        "shape":"ProtectionError",
+        "locationName":"ProtectionError"
+      }
+    },
+    "PublicDNSFallbackEnabled":{"type":"boolean"},
     "PublicZoneVPCAssociation":{
       "type":"structure",
       "members":{
@@ -4213,7 +5045,34 @@
         "HealthCheckId":{"shape":"HealthCheckId"},
         "TrafficPolicyInstanceId":{"shape":"TrafficPolicyInstanceId"},
         "CidrRoutingConfig":{"shape":"CidrRoutingConfig"},
-        "GeoProximityLocation":{"shape":"GeoProximityLocation"}
+        "GeoProximityLocation":{"shape":"GeoProximityLocation"},
+        "AZAffinity":{"shape":"AZAffinity"}
+      }
+    },
+    "ResourceRecordSetChange":{
+      "type":"structure",
+      "required":[
+        "ChangeId",
+        "Operation",
+        "SubmittedAt",
+        "Action",
+        "ResourceRecordSet"
+      ],
+      "members":{
+        "ChangeId":{"shape":"ResourceId"},
+        "Operation":{"shape":"ChangeHistoryOperation"},
+        "SubmittedAt":{"shape":"TimeStamp"},
+        "SubmittedBy":{"shape":"ChangeSubmitter"},
+        "RequestId":{"shape":"ChangeRequestId"},
+        "Action":{"shape":"ChangeAction"},
+        "ResourceRecordSet":{"shape":"ResourceRecordSet"}
+      }
+    },
+    "ResourceRecordSetChanges":{
+      "type":"list",
+      "member":{
+        "shape":"ResourceRecordSetChange",
+        "locationName":"ResourceRecordSetChange"
       }
     },
     "ResourceRecordSetFailover":{
@@ -4229,6 +5088,64 @@
       "min":1
     },
     "ResourceRecordSetMultiValueAnswer":{"type":"boolean"},
+    "ResourceRecordSetProtection":{
+      "type":"structure",
+      "required":[
+        "RecordName",
+        "RecordType"
+      ],
+      "members":{
+        "RecordName":{"shape":"DNSName"},
+        "RecordType":{"shape":"RRType"},
+        "Comment":{"shape":"ResourceDescription"}
+      }
+    },
+    "ResourceRecordSetProtectionConfig":{
+      "type":"structure",
+      "required":[
+        "RecordName",
+        "RecordType"
+      ],
+      "members":{
+        "RecordName":{"shape":"DNSName"},
+        "RecordType":{"shape":"RRType"},
+        "Comment":{"shape":"ResourceDescription"}
+      }
+    },
+    "ResourceRecordSetProtectionConfigBatch":{
+      "type":"list",
+      "member":{
+        "shape":"ResourceRecordSetProtectionConfig",
+        "locationName":"ResourceRecordSetProtectionConfig"
+      },
+      "min":1
+    },
+    "ResourceRecordSetProtectionKey":{
+      "type":"structure",
+      "required":[
+        "RecordName",
+        "RecordType"
+      ],
+      "members":{
+        "RecordName":{"shape":"DNSName"},
+        "RecordType":{"shape":"RRType"}
+      }
+    },
+    "ResourceRecordSetProtectionKeyBatch":{
+      "type":"list",
+      "member":{
+        "shape":"ResourceRecordSetProtectionKey",
+        "locationName":"ResourceRecordSetProtectionKey"
+      },
+      "min":1
+    },
+    "ResourceRecordSetProtections":{
+      "type":"list",
+      "member":{
+        "shape":"ResourceRecordSetProtection",
+        "locationName":"ResourceRecordSetProtection"
+      }
+    },
     "ResourceRecordSetRegion":{
       "type":"string",
       "enum":[
@@ -4338,6 +5255,20 @@
       "type":"string",
       "max":255
     },
+    "SecurityGroupId":{
+      "type":"string",
+      "max":64,
+      "min":1
+    },
+    "SecurityGroupIdList":{
+      "type":"list",
+      "member":{
+        "shape":"SecurityGroupId",
+        "locationName":"SecurityGroupId"
+      },
+      "max":10,
+      "min":1
+    },
     "ServeSignature":{
       "type":"string",
       "max":1024,
@@ -4386,6 +5317,33 @@
         "Status":{"shape":"Status"},
         "CheckedTime":{"shape":"TimeStamp"}
       }
+    },
+    "SubnetConfiguration":{
+      "type":"structure",
+      "required":[
+        "SubnetId",
+        "AvailabilityZoneId",
+        "SecurityGroupIdList"
+      ],
+      "members":{
+        "SubnetId":{"shape":"SubnetId"},
+        "AvailabilityZoneId":{"shape":"AvailabilityZoneId"},
+        "SecurityGroupIdList":{"shape":"SecurityGroupIdList"}
+      }
+    },
+    "SubnetConfigurationList":{
+      "type":"list",
+      "member":{
+        "shape":"SubnetConfiguration",
+        "locationName":"SubnetConfiguration"
+      },
+      "max":3,
+      "min":2
+    },
+    "SubnetId":{
+      "type":"string",
+      "max":64,
+      "min":1
     },
     "SubnetMask":{
       "type":"string",
@@ -4443,7 +5401,8 @@
       "type":"string",
       "enum":[
         "healthcheck",
-        "hostedzone"
+        "hostedzone",
+        "healthchecksource"
       ]
     },
     "TagValue":{
@@ -4519,6 +5478,13 @@
       "exception":true
     },
     "TimeStamp":{"type":"timestamp"},
+    "TooManyHealthCheckSources":{
+      "type":"structure",
+      "members":{
+        "message":{"shape":"ErrorMessage"}
+      },
+      "exception":true
+    },
     "TooManyHealthChecks":{
       "type":"structure",
       "members":{
@@ -4740,7 +5706,8 @@
         "Regions":{"shape":"HealthCheckRegionList"},
         "AlarmIdentifier":{"shape":"AlarmIdentifier"},
         "InsufficientDataHealthStatus":{"shape":"InsufficientDataHealthStatus"},
-        "ResetElements":{"shape":"ResettableElementNameList"}
+        "ResetElements":{"shape":"ResettableElementNameList"},
+        "HealthCheckSourceId":{"shape":"HealthCheckSourceId"}
       }
     },
     "UpdateHealthCheckResponse":{
@@ -4778,10 +5745,33 @@
           "location":"uri",
           "locationName":"Id"
         },
-        "EnableAcceleratedRecovery":{"shape":"AcceleratedRecoveryEnabled"}
+        "EnableAcceleratedRecovery":{"shape":"AcceleratedRecoveryEnabled"},
+        "EnablePublicDNSFallback":{"shape":"PublicDNSFallbackEnabled"},
+        "ChangeGuardrails":{"shape":"ChangeGuardrails"},
+        "DryRun":{"shape":"DryRun"}
       }
     },
     "UpdateHostedZoneFeaturesResponse":{
+      "type":"structure",
+      "members":{}
+    },
+    "UpdateHostedZoneTierRequest":{
+      "type":"structure",
+      "required":[
+        "HostedZoneId",
+        "HostedZoneTier"
+      ],
+      "members":{
+        "HostedZoneId":{
+          "shape":"ResourceId",
+          "location":"uri",
+          "locationName":"Id"
+        },
+        "HostedZoneTier":{"shape":"HostedZoneTier"},
+        "DryRun":{"shape":"DryRun"}
+      }
+    },
+    "UpdateHostedZoneTierResponse":{
       "type":"structure",
       "members":{}
     },

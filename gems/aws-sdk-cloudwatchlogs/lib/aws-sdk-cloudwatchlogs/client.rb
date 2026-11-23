@@ -272,7 +272,8 @@ module Aws::CloudWatchLogs
     #     An integer representing the maximum number attempts that will be made for
     #     a single request, including the initial attempt.  For example,
     #     setting this value to 5 will result in a request being retried up to
-    #     4 times. Used in `standard` and `adaptive` retry modes.
+    #     4 times. Used in `standard` and `adaptive` retry modes. Defaults to 3,
+    #     except for DynamoDB and DynamoDB Streams, which default to 4.
     #
     #   @option options [Proc] :output_event_stream_handler
     #     When an EventStream or Proc object is provided, it will be used as callback for each chunk of event stream response received along the way.
@@ -338,15 +339,15 @@ module Aws::CloudWatchLogs
     #     used by the default backoff function. This option is only used in the
     #     `legacy` retry mode.
     #
-    #   @option options [String] :retry_mode ("legacy")
+    #   @option options [String] :retry_mode ("standard")
     #     Specifies which retry algorithm to use. Values are:
     #
-    #     * `legacy` - The pre-existing retry behavior. This is the default
-    #       value if no retry mode is provided.
+    #     * `legacy` - The pre-existing retry behavior.
     #
     #     * `standard` - A standardized set of retry rules across the AWS SDKs.
     #       This includes support for retry quotas, which limit the number of
-    #       unsuccessful retries a client can make.
+    #       unsuccessful retries a client can make. This is the default value
+    #       if no retry mode is provided.
     #
     #     * `adaptive` - A retry mode that includes all the functionality of
     #       `standard` mode along with automatic client side throttling.
@@ -1257,12 +1258,15 @@ module Aws::CloudWatchLogs
     #
     # @option params [String] :log_group_class
     #   Use this parameter to specify the log group class for this log group.
-    #   There are three classes:
+    #   There are four classes:
     #
     #   * The `Standard` log class supports all CloudWatch Logs features.
     #
     #   * The `Infrequent Access` log class supports a subset of CloudWatch
     #     Logs features and incurs lower costs.
+    #
+    #   * The `Essentials` log class supports a subset of CloudWatch Logs
+    #     features and incurs lower costs.
     #
     #   * Use the `Delivery` log class only for delivering Lambda logs to
     #     store in Amazon S3 or Amazon Data Firehose. Log events in log groups
@@ -1298,7 +1302,7 @@ module Aws::CloudWatchLogs
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
-    #     log_group_class: "STANDARD", # accepts STANDARD, INFREQUENT_ACCESS, DELIVERY
+    #     log_group_class: "STANDARD", # accepts STANDARD, INFREQUENT_ACCESS, DELIVERY, ESSENTIALS
     #     deletion_protection_enabled: false,
     #   })
     #
@@ -1559,10 +1563,13 @@ module Aws::CloudWatchLogs
     # Deletes a CloudWatch Logs account policy. This stops the account-wide
     # policy from applying to log groups or data sources in the account. If
     # you delete a data protection policy or subscription filter policy, any
-    # log-group level policies of those types remain in effect. This
-    # operation supports deletion of data source-based field index policies,
-    # including facet configurations, in addition to log group-based
-    # policies.
+    # log-group level policies of those types remain in effect. If you
+    # delete a retention policy, the log groups that it applied to use their
+    # own retention setting, unless another retention policy applies to
+    # them. Deleting a retention policy does not restore log events that
+    # CloudWatch Logs has already deleted. This operation supports deletion
+    # of data source-based field index policies, including facet
+    # configurations, in addition to log group-based policies.
     #
     # To use this operation, you must be signed on with the correct
     # permissions depending on the type of policy that you are deleting.
@@ -1586,6 +1593,12 @@ module Aws::CloudWatchLogs
     #   interactive exploration in the CloudWatch Logs Insights console.
     #   However, facet data is retained for up to 30 days.
     #
+    # * To delete a retention policy, you must have the
+    #   `logs:DeleteRetentionPolicy` and `logs:DeleteAccountPolicy`
+    #   permissions. To preview the impact of deleting a retention policy,
+    #   specify `true` for `dryRun`. A dry run requires the same permissions
+    #   as the operation that it previews, and no additional permissions.
+    #
     # If you delete a field index policy, the indexing of the log events
     # that happened before you deleted the policy will still be used for up
     # to 30 days to improve CloudWatch Logs Insights queries.
@@ -1596,14 +1609,40 @@ module Aws::CloudWatchLogs
     # @option params [required, String] :policy_type
     #   The type of policy to delete.
     #
-    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    # @option params [Boolean] :dry_run
+    #   Specifies whether to preview the impact of deleting the policy without
+    #   deleting it. If you specify `true`, CloudWatch Logs does not delete
+    #   the policy and returns the estimated impact in `dryRunResult`. The
+    #   default is `false`.
+    #
+    #   Specifying `dryRun` is valid only when you specify `RETENTION_POLICY`
+    #   for `policyType`. Only one dry run can be in progress for an account
+    #   at a time.
+    #
+    # @return [Types::DeleteAccountPolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteAccountPolicyResponse#dry_run_result #dry_run_result} => Types::DryRunResult
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_account_policy({
     #     policy_name: "PolicyName", # required
-    #     policy_type: "DATA_PROTECTION_POLICY", # required, accepts DATA_PROTECTION_POLICY, SUBSCRIPTION_FILTER_POLICY, FIELD_INDEX_POLICY, TRANSFORMER_POLICY, METRIC_EXTRACTION_POLICY
+    #     policy_type: "DATA_PROTECTION_POLICY", # required, accepts DATA_PROTECTION_POLICY, SUBSCRIPTION_FILTER_POLICY, FIELD_INDEX_POLICY, TRANSFORMER_POLICY, METRIC_EXTRACTION_POLICY, RETENTION_POLICY
+    #     dry_run: false,
     #   })
+    #
+    # @example Response structure
+    #
+    #   resp.dry_run_result.total_matched_log_groups #=> Integer
+    #   resp.dry_run_result.increased_retention_log_group_count #=> Integer
+    #   resp.dry_run_result.decreased_retention_log_group_count #=> Integer
+    #   resp.dry_run_result.unchanged_retention_log_group_count #=> Integer
+    #   resp.dry_run_result.failed_analysis_count #=> Integer
+    #   resp.dry_run_result.top_log_groups_impacted #=> Array
+    #   resp.dry_run_result.top_log_groups_impacted[0].log_group_name #=> String
+    #   resp.dry_run_result.top_log_groups_impacted[0].current_retention #=> String
+    #   resp.dry_run_result.top_log_groups_impacted[0].proposed_retention #=> String
+    #   resp.dry_run_result.top_log_groups_impacted[0].stored_bytes #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DeleteAccountPolicy AWS API Documentation
     #
@@ -2091,6 +2130,15 @@ module Aws::CloudWatchLogs
     # Log events do not expire if they belong to log groups without a
     # retention policy.
     #
+    # If an account-level retention policy applies to this log group, the
+    # log group uses the retention period from that policy. For more
+    # information about account-level retention policies, see
+    # [PutAccountPolicy][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutAccountPolicy.html
+    #
     # @option params [required, String] :log_group_name
     #   The name of the log group.
     #
@@ -2244,6 +2292,9 @@ module Aws::CloudWatchLogs
     #   `logs:DescribeIndexPolicies` and `logs:DescribeAccountPolicies`
     #   permissions.
     #
+    # * To see retention policies, you must have the
+    #   `logs:DescribeAccountPolicies` permission.
+    #
     # @option params [required, String] :policy_type
     #   Use this parameter to limit the returned policies to only the policies
     #   that match the policy type that you specify.
@@ -2274,7 +2325,7 @@ module Aws::CloudWatchLogs
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_account_policies({
-    #     policy_type: "DATA_PROTECTION_POLICY", # required, accepts DATA_PROTECTION_POLICY, SUBSCRIPTION_FILTER_POLICY, FIELD_INDEX_POLICY, TRANSFORMER_POLICY, METRIC_EXTRACTION_POLICY
+    #     policy_type: "DATA_PROTECTION_POLICY", # required, accepts DATA_PROTECTION_POLICY, SUBSCRIPTION_FILTER_POLICY, FIELD_INDEX_POLICY, TRANSFORMER_POLICY, METRIC_EXTRACTION_POLICY, RETENTION_POLICY
     #     policy_name: "PolicyName",
     #     account_identifiers: ["AccountId"],
     #     next_token: "NextToken",
@@ -2286,7 +2337,7 @@ module Aws::CloudWatchLogs
     #   resp.account_policies[0].policy_name #=> String
     #   resp.account_policies[0].policy_document #=> String
     #   resp.account_policies[0].last_updated_time #=> Integer
-    #   resp.account_policies[0].policy_type #=> String, one of "DATA_PROTECTION_POLICY", "SUBSCRIPTION_FILTER_POLICY", "FIELD_INDEX_POLICY", "TRANSFORMER_POLICY", "METRIC_EXTRACTION_POLICY"
+    #   resp.account_policies[0].policy_type #=> String, one of "DATA_PROTECTION_POLICY", "SUBSCRIPTION_FILTER_POLICY", "FIELD_INDEX_POLICY", "TRANSFORMER_POLICY", "METRIC_EXTRACTION_POLICY", "RETENTION_POLICY"
     #   resp.account_policies[0].scope #=> String, one of "ALL"
     #   resp.account_policies[0].selection_criteria #=> String
     #   resp.account_policies[0].account_id #=> String
@@ -2948,6 +2999,10 @@ module Aws::CloudWatchLogs
     # filter the results by prefix. The results are ASCII-sorted by log
     # group name.
     #
+    # If an account-level retention policy applies to a log group,
+    # `retentionInDays` shows the retention period from that policy, and
+    # `retentionPolicyName` shows the name of the policy.
+    #
     # CloudWatch Logs doesn't support IAM policies that control access to
     # the `DescribeLogGroups` action by using the `aws:ResourceTag/key-name
     # ` condition key. Other CloudWatch Logs actions do support the use of
@@ -3019,13 +3074,20 @@ module Aws::CloudWatchLogs
     #   the specified log group class. If you omit this parameter, log groups
     #   of all classes can be returned.
     #
-    #   Specifies the log group class for this log group. There are three
+    #   If you specify either `INFREQUENT_ACCESS` or `ESSENTIALS`, the results
+    #   include log groups in both the Infrequent Access and Essentials log
+    #   classes.
+    #
+    #   Specifies the log group class for this log group. There are four
     #   classes:
     #
     #   * The `Standard` log class supports all CloudWatch Logs features.
     #
     #   * The `Infrequent Access` log class supports a subset of CloudWatch
     #     Logs features and incurs lower costs.
+    #
+    #   * The `Essentials` log class supports a subset of CloudWatch Logs
+    #     features and incurs lower costs.
     #
     #   * Use the `Delivery` log class only for delivering Lambda logs to
     #     store in Amazon S3 or Amazon Data Firehose. Log events in log groups
@@ -3067,7 +3129,7 @@ module Aws::CloudWatchLogs
     #     next_token: "NextToken",
     #     limit: 1,
     #     include_linked_accounts: false,
-    #     log_group_class: "STANDARD", # accepts STANDARD, INFREQUENT_ACCESS, DELIVERY
+    #     log_group_class: "STANDARD", # accepts STANDARD, INFREQUENT_ACCESS, DELIVERY, ESSENTIALS
     #     log_group_identifiers: ["LogGroupIdentifier"],
     #   })
     #
@@ -3084,10 +3146,11 @@ module Aws::CloudWatchLogs
     #   resp.log_groups[0].data_protection_status #=> String, one of "ACTIVATED", "DELETED", "ARCHIVED", "DISABLED"
     #   resp.log_groups[0].inherited_properties #=> Array
     #   resp.log_groups[0].inherited_properties[0] #=> String, one of "ACCOUNT_DATA_PROTECTION"
-    #   resp.log_groups[0].log_group_class #=> String, one of "STANDARD", "INFREQUENT_ACCESS", "DELIVERY"
+    #   resp.log_groups[0].log_group_class #=> String, one of "STANDARD", "INFREQUENT_ACCESS", "DELIVERY", "ESSENTIALS"
     #   resp.log_groups[0].log_group_arn #=> String
     #   resp.log_groups[0].deletion_protection_enabled #=> Boolean
     #   resp.log_groups[0].bearer_token_authentication_enabled #=> Boolean
+    #   resp.log_groups[0].retention_policy_name #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DescribeLogGroups AWS API Documentation
@@ -5248,7 +5311,7 @@ module Aws::CloudWatchLogs
     #   resp = client.list_aggregate_log_group_summaries({
     #     account_identifiers: ["AccountId"],
     #     include_linked_accounts: false,
-    #     log_group_class: "STANDARD", # accepts STANDARD, INFREQUENT_ACCESS, DELIVERY
+    #     log_group_class: "STANDARD", # accepts STANDARD, INFREQUENT_ACCESS, DELIVERY, ESSENTIALS
     #     log_group_name_pattern: "LogGroupNameRegexPattern",
     #     data_sources: [
     #       {
@@ -5553,7 +5616,7 @@ module Aws::CloudWatchLogs
     #
     #   resp = client.list_log_groups({
     #     log_group_name_pattern: "LogGroupNameRegexPattern",
-    #     log_group_class: "STANDARD", # accepts STANDARD, INFREQUENT_ACCESS, DELIVERY
+    #     log_group_class: "STANDARD", # accepts STANDARD, INFREQUENT_ACCESS, DELIVERY, ESSENTIALS
     #     include_linked_accounts: false,
     #     account_identifiers: ["AccountId"],
     #     next_token: "NextToken",
@@ -5578,7 +5641,7 @@ module Aws::CloudWatchLogs
     #   resp.log_groups #=> Array
     #   resp.log_groups[0].log_group_name #=> String
     #   resp.log_groups[0].log_group_arn #=> String
-    #   resp.log_groups[0].log_group_class #=> String, one of "STANDARD", "INFREQUENT_ACCESS", "DELIVERY"
+    #   resp.log_groups[0].log_group_class #=> String, one of "STANDARD", "INFREQUENT_ACCESS", "DELIVERY", "ESSENTIALS"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/ListLogGroups AWS API Documentation
@@ -5897,12 +5960,13 @@ module Aws::CloudWatchLogs
     end
 
     # Creates an account-level data protection policy, subscription filter
-    # policy, field index policy, transformer policy, or metric extraction
-    # policy that applies to all log groups, a subset of log groups, or a
-    # data source name and type combination in the account. Account-level
-    # policies are Region-specific: a policy applies only to log groups in
-    # the Region where you create it. To apply a policy across multiple
-    # Regions, create the policy separately in each Region.
+    # policy, field index policy, transformer policy, metric extraction
+    # policy, or retention policy that applies to all log groups, a subset
+    # of log groups, or a data source name and type combination in the
+    # account. Account-level policies are Region-specific: a policy applies
+    # only to log groups in the Region where you create it. To apply a
+    # policy across multiple Regions, create the policy separately in each
+    # Region.
     #
     # `PutAccountPolicy` is an account-wide administrative operation
     # intended for CloudWatch Logs administrators. Because it affects all
@@ -5942,6 +6006,9 @@ module Aws::CloudWatchLogs
     #   account-level only and have no log-group-level equivalent, so no
     #   conflict resolution applies.
     #
+    # * *Retention policies* — An account-level retention policy overrides
+    #   the retention setting of the log group.
+    #
     # For field index policies, you can configure indexed fields as *facets*
     # to enable interactive exploration of your logs. Facets provide value
     # distributions and counts for indexed fields in the CloudWatch Logs
@@ -5971,6 +6038,11 @@ module Aws::CloudWatchLogs
     # * To create a metric extraction policy, you must have the
     #   `logs:PutMetricExtractionPolicy` and `logs:PutAccountPolicy`
     #   permissions.
+    #
+    # * To create a retention policy, you must have the
+    #   `logs:PutRetentionPolicy` and `logs:PutAccountPolicy` permissions. A
+    #   dry run requires the same permissions as the operation that it
+    #   previews, and no additional permissions.
     #
     # **Data protection policy**
     #
@@ -6292,6 +6364,60 @@ module Aws::CloudWatchLogs
     #   groups matching `"/aws"` is not a subset of the log groups matching
     #   `"/aws/lambda"`.
     #
+    # **Retention policy**
+    #
+    # A retention policy sets the retention period for log groups in your
+    # account. You can use an account-level retention policy to set a
+    # default retention period for all log groups in the account, or for a
+    # subset of log groups that you specify with the `selectionCriteria`
+    # parameter. CloudWatch Logs automatically deletes log events that are
+    # older than the retention period.
+    #
+    # Each account can have up to 20 account-level retention policies in
+    # each Region. To scope a retention policy to a subset of log groups,
+    # use `LogGroupNamePrefix` in `selectionCriteria`. Retention policies
+    # support log group name prefixes only. If you omit `selectionCriteria`,
+    # the policy applies to all log groups in the account.
+    #
+    # Unlike other account-level policy types, retention policies can have
+    # overlapping selection criteria. When more than one retention policy
+    # applies to a log group, the policy with the longest retention period
+    # is used. A policy that specifies `NEVER_EXPIRE` is treated as the
+    # longest retention period. This lets you set a baseline retention
+    # period for the account, apply longer retention periods to specific log
+    # groups, and exempt specific log groups from expiring at all. If two
+    # policies that apply to the same log group specify the same retention
+    # period, the policy that was created first is the one reported in
+    # `retentionPolicyName`.
+    #
+    # <note markdown="1"> Account-level retention policies require a minimum retention period of
+    # 30 days.
+    #
+    #  </note>
+    #
+    # <note markdown="1"> A retention policy takes effect 24 hours after you create it. If you
+    # update a policy, the new retention period takes effect 24 hours after
+    # the update, and the previous retention period stays in effect until
+    # then. During this period, `DescribeLogGroups` and log event expiration
+    # use the retention period that is currently in effect, but a dry run
+    # reports the impact as if the policy were already in effect.
+    #
+    #  </note>
+    #
+    # Before you create, update, or delete a retention policy, you can
+    # specify `true` for `dryRun` to preview how many log groups would have
+    # a longer, shorter, or unchanged retention period. For more
+    # information, see [DryRunResult][14].
+    #
+    # An account-level retention policy replaces the retention period set on
+    # a log group, including when the log group's own retention period is
+    # longer. For example, if a log group is set to retain log events for 10
+    # years and you create a retention policy that sets a 90-day retention
+    # period for that log group, CloudWatch Logs deletes the log events in
+    # that log group that are older than 90 days. Specify `true` for
+    # `dryRun` to see which log groups would have a shorter retention period
+    # before you create or update the policy.
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatchLogs-Facets.html
@@ -6307,6 +6433,7 @@ module Aws::CloudWatchLogs
     # [11]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_GetLogFields.html
     # [12]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatchLogs-Field-Indexing-Syntax
     # [13]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutIndexPolicy.html
+    # [14]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_DryRunResult.html
     #
     # @option params [required, String] :policy_name
     #   A name for the policy. This must be unique within the account and
@@ -6418,6 +6545,36 @@ module Aws::CloudWatchLogs
     #   types are `FIELD_INDEX` and `FACET`. Field names within `Fields` and
     #   `FieldsV2` must be mutually exclusive.
     #
+    #   **Retention policy**
+    #
+    #   A retention policy must include the following attributes in a JSON
+    #   block:
+    #
+    #   retentionInDays
+    #
+    #   : The number of days to retain log events. Valid values are 30, 60,
+    #     90, 120, 150, 180, 365, 400, 545, 731, 1096, 1827, 2192, 2557, 2922,
+    #     3288, and 3653. To retain log events indefinitely, specify the
+    #     string `NEVER_EXPIRE`.
+    #
+    #   enforcementMode
+    #
+    #   : Specifies which log groups the policy applies to. Valid values are
+    #     `NEW_ONLY` and `RETROACTIVE`.
+    #
+    #     `RETROACTIVE` applies the policy to every log group that matches the
+    #     selection criteria, including log groups that existed before you
+    #     created the policy.
+    #
+    #     `NEW_ONLY` applies the policy only to log groups that are created
+    #     after you create the policy. Log groups that already existed when
+    #     you created the policy keep their own retention period.
+    #
+    #   The following is an example of a retention policy document.
+    #
+    #   `"policyDocument": "{"retentionInDays": 90, "enforcementMode":
+    #   "RETROACTIVE"}"`
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/mask-sensitive-log-data-types.html
@@ -6437,8 +6594,8 @@ module Aws::CloudWatchLogs
     #   in the account or a data source name and type combination.
     #
     #   Specifying `selectionCriteria` is valid only when you specify
-    #   `SUBSCRIPTION_FILTER_POLICY`, `FIELD_INDEX_POLICY` or
-    #   `TRANSFORMER_POLICY`for `policyType`.
+    #   `SUBSCRIPTION_FILTER_POLICY`, `FIELD_INDEX_POLICY`,
+    #   `TRANSFORMER_POLICY`, or `RETENTION_POLICY` for `policyType`.
     #
     #   * If `policyType` is `SUBSCRIPTION_FILTER_POLICY`, the only supported
     #     `selectionCriteria` filter is `LogGroupName NOT IN []`
@@ -6456,6 +6613,11 @@ module Aws::CloudWatchLogs
     #     can use either `LogGroupNamePrefix` by itself or `DataSourceName`
     #     and `DataSourceType` together.
     #
+    #   * If `policyType` is `RETENTION_POLICY`, the only supported
+    #     `selectionCriteria` filter is `LogGroupNamePrefix`. If you omit
+    #     `selectionCriteria`, the retention policy applies to all log groups
+    #     in the account.
+    #
     #   The `selectionCriteria` string can be up to 25KB in length. The length
     #   is determined by using its UTF-8 bytes.
     #
@@ -6467,18 +6629,30 @@ module Aws::CloudWatchLogs
     #
     #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/Subscriptions-recursion-prevention.html
     #
+    # @option params [Boolean] :dry_run
+    #   Specifies whether to preview the impact of the policy without creating
+    #   or updating it. If you specify `true`, CloudWatch Logs validates the
+    #   request, does not save the policy, and returns the estimated impact in
+    #   `dryRunResult` instead of `accountPolicy`. The default is `false`.
+    #
+    #   Specifying `dryRun` is valid only when you specify `RETENTION_POLICY`
+    #   for `policyType`. Only one dry run can be in progress for an account
+    #   at a time.
+    #
     # @return [Types::PutAccountPolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::PutAccountPolicyResponse#account_policy #account_policy} => Types::AccountPolicy
+    #   * {Types::PutAccountPolicyResponse#dry_run_result #dry_run_result} => Types::DryRunResult
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.put_account_policy({
     #     policy_name: "PolicyName", # required
     #     policy_document: "AccountPolicyDocument", # required
-    #     policy_type: "DATA_PROTECTION_POLICY", # required, accepts DATA_PROTECTION_POLICY, SUBSCRIPTION_FILTER_POLICY, FIELD_INDEX_POLICY, TRANSFORMER_POLICY, METRIC_EXTRACTION_POLICY
+    #     policy_type: "DATA_PROTECTION_POLICY", # required, accepts DATA_PROTECTION_POLICY, SUBSCRIPTION_FILTER_POLICY, FIELD_INDEX_POLICY, TRANSFORMER_POLICY, METRIC_EXTRACTION_POLICY, RETENTION_POLICY
     #     scope: "ALL", # accepts ALL
     #     selection_criteria: "SelectionCriteria",
+    #     dry_run: false,
     #   })
     #
     # @example Response structure
@@ -6486,10 +6660,20 @@ module Aws::CloudWatchLogs
     #   resp.account_policy.policy_name #=> String
     #   resp.account_policy.policy_document #=> String
     #   resp.account_policy.last_updated_time #=> Integer
-    #   resp.account_policy.policy_type #=> String, one of "DATA_PROTECTION_POLICY", "SUBSCRIPTION_FILTER_POLICY", "FIELD_INDEX_POLICY", "TRANSFORMER_POLICY", "METRIC_EXTRACTION_POLICY"
+    #   resp.account_policy.policy_type #=> String, one of "DATA_PROTECTION_POLICY", "SUBSCRIPTION_FILTER_POLICY", "FIELD_INDEX_POLICY", "TRANSFORMER_POLICY", "METRIC_EXTRACTION_POLICY", "RETENTION_POLICY"
     #   resp.account_policy.scope #=> String, one of "ALL"
     #   resp.account_policy.selection_criteria #=> String
     #   resp.account_policy.account_id #=> String
+    #   resp.dry_run_result.total_matched_log_groups #=> Integer
+    #   resp.dry_run_result.increased_retention_log_group_count #=> Integer
+    #   resp.dry_run_result.decreased_retention_log_group_count #=> Integer
+    #   resp.dry_run_result.unchanged_retention_log_group_count #=> Integer
+    #   resp.dry_run_result.failed_analysis_count #=> Integer
+    #   resp.dry_run_result.top_log_groups_impacted #=> Array
+    #   resp.dry_run_result.top_log_groups_impacted[0].log_group_name #=> String
+    #   resp.dry_run_result.top_log_groups_impacted[0].current_retention #=> String
+    #   resp.dry_run_result.top_log_groups_impacted[0].proposed_retention #=> String
+    #   resp.dry_run_result.top_log_groups_impacted[0].stored_bytes #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/PutAccountPolicy AWS API Documentation
     #
@@ -7924,6 +8108,17 @@ module Aws::CloudWatchLogs
     # policy, you can configure the number of days for which to retain log
     # events in the specified log group.
     #
+    # Account-level retention policies created with [PutAccountPolicy][1]
+    # override the retention that you set with `PutRetentionPolicy`. If an
+    # account-level retention policy applies to the log group, this
+    # operation succeeds and CloudWatch Logs saves the retention period that
+    # you specify, but the retention period from the account-level policy
+    # continues to determine when log events in the log group expire.
+    # `DescribeLogGroups` returns the retention period from the policy in
+    # `retentionInDays` and the name of the policy in `retentionPolicyName`.
+    # The retention period that you set with this operation takes effect if
+    # the account-level policy no longer applies to the log group.
+    #
     # <note markdown="1"> CloudWatch Logs doesn't immediately delete log events when they reach
     # their retention setting. It typically takes up to 72 hours after that
     # before log events are deleted, but in rare situations might take
@@ -7946,6 +8141,10 @@ module Aws::CloudWatchLogs
     # see how many bytes a log group is storing.
     #
     #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutAccountPolicy.html
     #
     # @option params [required, String] :log_group_name
     #   The name of the log group.
@@ -9737,7 +9936,7 @@ module Aws::CloudWatchLogs
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-cloudwatchlogs'
-      context[:gem_version] = '1.170.0'
+      context[:gem_version] = '1.179.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

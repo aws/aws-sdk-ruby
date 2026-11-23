@@ -54,6 +54,8 @@ module Aws::IAM
     ContextKeyTypeEnum = Shapes::StringShape.new(name: 'ContextKeyTypeEnum')
     ContextKeyValueListType = Shapes::ListShape.new(name: 'ContextKeyValueListType')
     ContextKeyValueType = Shapes::StringShape.new(name: 'ContextKeyValueType')
+    ContextProvider = Shapes::StructureShape.new(name: 'ContextProvider')
+    ContextProviderKeyDefinition = Shapes::StructureShape.new(name: 'ContextProviderKeyDefinition')
     CreateAccessKeyRequest = Shapes::StructureShape.new(name: 'CreateAccessKeyRequest')
     CreateAccessKeyResponse = Shapes::StructureShape.new(name: 'CreateAccessKeyResponse')
     CreateAccountAliasRequest = Shapes::StructureShape.new(name: 'CreateAccountAliasRequest')
@@ -219,6 +221,7 @@ module Aws::IAM
     InvalidInputException = Shapes::StructureShape.new(name: 'InvalidInputException', error: {"code" => "InvalidInput", "httpStatusCode" => 400, "senderFault" => true})
     InvalidPublicKeyException = Shapes::StructureShape.new(name: 'InvalidPublicKeyException', error: {"code" => "InvalidPublicKey", "httpStatusCode" => 400, "senderFault" => true})
     InvalidUserTypeException = Shapes::StructureShape.new(name: 'InvalidUserTypeException', error: {"code" => "InvalidUserType", "httpStatusCode" => 400, "senderFault" => true})
+    KeyHashListType = Shapes::ListShape.new(name: 'KeyHashListType')
     KeyPairMismatchException = Shapes::StructureShape.new(name: 'KeyPairMismatchException', error: {"code" => "KeyPairMismatch", "httpStatusCode" => 400, "senderFault" => true})
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException', error: {"code" => "LimitExceeded", "httpStatusCode" => 409, "senderFault" => true})
     LineNumber = Shapes::IntegerShape.new(name: 'LineNumber')
@@ -375,6 +378,9 @@ module Aws::IAM
     RoleTemplateVersion = Shapes::StructureShape.new(name: 'RoleTemplateVersion')
     RoleUsageListType = Shapes::ListShape.new(name: 'RoleUsageListType')
     RoleUsageType = Shapes::StructureShape.new(name: 'RoleUsageType')
+    SAMLIssuerURLType = Shapes::StringShape.new(name: 'SAMLIssuerURLType')
+    SAMLKeyHashEntry = Shapes::StructureShape.new(name: 'SAMLKeyHashEntry')
+    SAMLKeyHashListType = Shapes::ListShape.new(name: 'SAMLKeyHashListType')
     SAMLMetadataDocumentType = Shapes::StringShape.new(name: 'SAMLMetadataDocumentType')
     SAMLPrivateKey = Shapes::StructureShape.new(name: 'SAMLPrivateKey')
     SAMLProviderListEntry = Shapes::StructureShape.new(name: 'SAMLProviderListEntry')
@@ -432,6 +438,7 @@ module Aws::IAM
     UpdateDelegationRequestRequest = Shapes::StructureShape.new(name: 'UpdateDelegationRequestRequest')
     UpdateGroupRequest = Shapes::StructureShape.new(name: 'UpdateGroupRequest')
     UpdateLoginProfileRequest = Shapes::StructureShape.new(name: 'UpdateLoginProfileRequest')
+    UpdateOpenIDConnectProviderRequest = Shapes::StructureShape.new(name: 'UpdateOpenIDConnectProviderRequest')
     UpdateOpenIDConnectProviderThumbprintRequest = Shapes::StructureShape.new(name: 'UpdateOpenIDConnectProviderThumbprintRequest')
     UpdateRoleDescriptionRequest = Shapes::StructureShape.new(name: 'UpdateRoleDescriptionRequest')
     UpdateRoleDescriptionResponse = Shapes::StructureShape.new(name: 'UpdateRoleDescriptionResponse')
@@ -478,6 +485,8 @@ module Aws::IAM
     clientIDListType = Shapes::ListShape.new(name: 'clientIDListType')
     clientIDType = Shapes::StringShape.new(name: 'clientIDType')
     consoleDeepLinkType = Shapes::StringShape.new(name: 'consoleDeepLinkType')
+    contextProviderSourceKeyType = Shapes::StringShape.new(name: 'contextProviderSourceKeyType')
+    contextProviderTargetKeyType = Shapes::StringShape.new(name: 'contextProviderTargetKeyType')
     credentialAgeDays = Shapes::IntegerShape.new(name: 'credentialAgeDays')
     credentialReportExpiredExceptionMessage = Shapes::StringShape.new(name: 'credentialReportExpiredExceptionMessage')
     credentialReportNotPresentExceptionMessage = Shapes::StringShape.new(name: 'credentialReportNotPresentExceptionMessage')
@@ -503,6 +512,7 @@ module Aws::IAM
     groupNameListType = Shapes::ListShape.new(name: 'groupNameListType')
     groupNameType = Shapes::StringShape.new(name: 'groupNameType')
     idType = Shapes::StringShape.new(name: 'idType')
+    identityCenterInstanceArnType = Shapes::StringShape.new(name: 'identityCenterInstanceArnType')
     inlinePolicyTemplateListType = Shapes::ListShape.new(name: 'inlinePolicyTemplateListType')
     instanceProfileListType = Shapes::ListShape.new(name: 'instanceProfileListType')
     instanceProfileNameType = Shapes::StringShape.new(name: 'instanceProfileNameType')
@@ -514,6 +524,7 @@ module Aws::IAM
     invalidUserTypeMessage = Shapes::StringShape.new(name: 'invalidUserTypeMessage')
     jobIDType = Shapes::StringShape.new(name: 'jobIDType')
     jobStatusType = Shapes::StringShape.new(name: 'jobStatusType')
+    keyDefinitionListType = Shapes::ListShape.new(name: 'keyDefinitionListType')
     keyPairMismatchMessage = Shapes::StringShape.new(name: 'keyPairMismatchMessage')
     limitExceededMessage = Shapes::StringShape.new(name: 'limitExceededMessage')
     listPolicyGrantingServiceAccessResponseListType = Shapes::ListShape.new(name: 'listPolicyGrantingServiceAccessResponseListType')
@@ -527,6 +538,7 @@ module Aws::IAM
     markerType = Shapes::StringShape.new(name: 'markerType')
     maxItemsType = Shapes::IntegerShape.new(name: 'maxItemsType')
     maxPasswordAgeType = Shapes::IntegerShape.new(name: 'maxPasswordAgeType')
+    maxSigninSessionDurationType = Shapes::IntegerShape.new(name: 'maxSigninSessionDurationType')
     mfaDeviceListType = Shapes::ListShape.new(name: 'mfaDeviceListType')
     minimumPasswordLengthType = Shapes::IntegerShape.new(name: 'minimumPasswordLengthType')
     minorVersionType = Shapes::IntegerShape.new(name: 'minorVersionType')
@@ -616,6 +628,7 @@ module Aws::IAM
     stateType = Shapes::StringShape.new(name: 'stateType')
     statusType = Shapes::StringShape.new(name: 'statusType')
     stringType = Shapes::StringShape.new(name: 'stringType')
+    subjectTypeValueType = Shapes::StringShape.new(name: 'subjectTypeValueType')
     summaryContentType = Shapes::StringShape.new(name: 'summaryContentType')
     summaryKeyType = Shapes::StringShape.new(name: 'summaryKeyType')
     summaryMapType = Shapes::MapShape.new(name: 'summaryMapType')
@@ -741,6 +754,16 @@ module Aws::IAM
 
     ContextKeyValueListType.member = Shapes::ShapeRef.new(shape: ContextKeyValueType)
 
+    ContextProvider.add_member(:key_definition_list, Shapes::ShapeRef.new(shape: keyDefinitionListType, location_name: "KeyDefinitionList"))
+    ContextProvider.add_member(:subject_source_key, Shapes::ShapeRef.new(shape: contextProviderSourceKeyType, required: true, location_name: "SubjectSourceKey"))
+    ContextProvider.add_member(:subject_type_value, Shapes::ShapeRef.new(shape: subjectTypeValueType, location_name: "SubjectTypeValue"))
+    ContextProvider.add_member(:subject_type_source_key, Shapes::ShapeRef.new(shape: contextProviderSourceKeyType, location_name: "SubjectTypeSourceKey"))
+    ContextProvider.struct_class = Types::ContextProvider
+
+    ContextProviderKeyDefinition.add_member(:source_key, Shapes::ShapeRef.new(shape: contextProviderSourceKeyType, required: true, location_name: "SourceKey"))
+    ContextProviderKeyDefinition.add_member(:target_key, Shapes::ShapeRef.new(shape: contextProviderTargetKeyType, location_name: "TargetKey"))
+    ContextProviderKeyDefinition.struct_class = Types::ContextProviderKeyDefinition
+
     CreateAccessKeyRequest.add_member(:user_name, Shapes::ShapeRef.new(shape: existingUserNameType, location_name: "UserName"))
     CreateAccessKeyRequest.struct_class = Types::CreateAccessKeyRequest
 
@@ -783,6 +806,7 @@ module Aws::IAM
     CreateLoginProfileRequest.add_member(:user_name, Shapes::ShapeRef.new(shape: userNameType, location_name: "UserName"))
     CreateLoginProfileRequest.add_member(:password, Shapes::ShapeRef.new(shape: passwordType, location_name: "Password"))
     CreateLoginProfileRequest.add_member(:password_reset_required, Shapes::ShapeRef.new(shape: booleanType, location_name: "PasswordResetRequired"))
+    CreateLoginProfileRequest.add_member(:max_signin_session_duration, Shapes::ShapeRef.new(shape: maxSigninSessionDurationType, location_name: "MaxSigninSessionDuration"))
     CreateLoginProfileRequest.struct_class = Types::CreateLoginProfileRequest
 
     CreateLoginProfileResponse.add_member(:login_profile, Shapes::ShapeRef.new(shape: LoginProfile, required: true, location_name: "LoginProfile"))
@@ -792,6 +816,8 @@ module Aws::IAM
     CreateOpenIDConnectProviderRequest.add_member(:client_id_list, Shapes::ShapeRef.new(shape: clientIDListType, location_name: "ClientIDList"))
     CreateOpenIDConnectProviderRequest.add_member(:thumbprint_list, Shapes::ShapeRef.new(shape: thumbprintListType, location_name: "ThumbprintList"))
     CreateOpenIDConnectProviderRequest.add_member(:tags, Shapes::ShapeRef.new(shape: tagListType, location_name: "Tags"))
+    CreateOpenIDConnectProviderRequest.add_member(:context_provider, Shapes::ShapeRef.new(shape: ContextProvider, location_name: "ContextProvider"))
+    CreateOpenIDConnectProviderRequest.add_member(:identity_center_instance_arn, Shapes::ShapeRef.new(shape: identityCenterInstanceArnType, location_name: "IdentityCenterInstanceArn"))
     CreateOpenIDConnectProviderRequest.struct_class = Types::CreateOpenIDConnectProviderRequest
 
     CreateOpenIDConnectProviderResponse.add_member(:open_id_connect_provider_arn, Shapes::ShapeRef.new(shape: arnType, location_name: "OpenIDConnectProviderArn"))
@@ -821,6 +847,7 @@ module Aws::IAM
     CreateRoleRequest.add_member(:assume_role_policy_document, Shapes::ShapeRef.new(shape: policyDocumentType, required: true, location_name: "AssumeRolePolicyDocument"))
     CreateRoleRequest.add_member(:description, Shapes::ShapeRef.new(shape: roleDescriptionType, location_name: "Description"))
     CreateRoleRequest.add_member(:max_session_duration, Shapes::ShapeRef.new(shape: roleMaxSessionDurationType, location_name: "MaxSessionDuration"))
+    CreateRoleRequest.add_member(:max_signin_session_duration, Shapes::ShapeRef.new(shape: maxSigninSessionDurationType, location_name: "MaxSigninSessionDuration"))
     CreateRoleRequest.add_member(:permissions_boundary, Shapes::ShapeRef.new(shape: arnType, location_name: "PermissionsBoundary"))
     CreateRoleRequest.add_member(:tags, Shapes::ShapeRef.new(shape: tagListType, location_name: "Tags"))
     CreateRoleRequest.struct_class = Types::CreateRoleRequest
@@ -833,6 +860,8 @@ module Aws::IAM
     CreateSAMLProviderRequest.add_member(:tags, Shapes::ShapeRef.new(shape: tagListType, location_name: "Tags"))
     CreateSAMLProviderRequest.add_member(:assertion_encryption_mode, Shapes::ShapeRef.new(shape: assertionEncryptionModeType, location_name: "AssertionEncryptionMode"))
     CreateSAMLProviderRequest.add_member(:add_private_key, Shapes::ShapeRef.new(shape: privateKeyType, location_name: "AddPrivateKey"))
+    CreateSAMLProviderRequest.add_member(:context_provider, Shapes::ShapeRef.new(shape: ContextProvider, location_name: "ContextProvider"))
+    CreateSAMLProviderRequest.add_member(:identity_center_instance_arn, Shapes::ShapeRef.new(shape: identityCenterInstanceArnType, location_name: "IdentityCenterInstanceArn"))
     CreateSAMLProviderRequest.struct_class = Types::CreateSAMLProviderRequest
 
     CreateSAMLProviderResponse.add_member(:saml_provider_arn, Shapes::ShapeRef.new(shape: arnType, location_name: "SAMLProviderArn"))
@@ -1223,6 +1252,9 @@ module Aws::IAM
     GetOpenIDConnectProviderResponse.add_member(:thumbprint_list, Shapes::ShapeRef.new(shape: thumbprintListType, location_name: "ThumbprintList"))
     GetOpenIDConnectProviderResponse.add_member(:create_date, Shapes::ShapeRef.new(shape: dateType, location_name: "CreateDate"))
     GetOpenIDConnectProviderResponse.add_member(:tags, Shapes::ShapeRef.new(shape: tagListType, location_name: "Tags"))
+    GetOpenIDConnectProviderResponse.add_member(:context_provider, Shapes::ShapeRef.new(shape: ContextProvider, location_name: "ContextProvider"))
+    GetOpenIDConnectProviderResponse.add_member(:identity_center_instance_arn, Shapes::ShapeRef.new(shape: identityCenterInstanceArnType, location_name: "IdentityCenterInstanceArn"))
+    GetOpenIDConnectProviderResponse.add_member(:identity_store_arn, Shapes::ShapeRef.new(shape: arnType, location_name: "IdentityStoreArn"))
     GetOpenIDConnectProviderResponse.struct_class = Types::GetOpenIDConnectProviderResponse
 
     GetOrganizationsAccessReportRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: jobIDType, required: true, location_name: "JobId"))
@@ -1286,11 +1318,15 @@ module Aws::IAM
 
     GetSAMLProviderResponse.add_member(:saml_provider_uuid, Shapes::ShapeRef.new(shape: privateKeyIdType, location_name: "SAMLProviderUUID"))
     GetSAMLProviderResponse.add_member(:saml_metadata_document, Shapes::ShapeRef.new(shape: SAMLMetadataDocumentType, location_name: "SAMLMetadataDocument"))
+    GetSAMLProviderResponse.add_member(:context_provider, Shapes::ShapeRef.new(shape: ContextProvider, location_name: "ContextProvider"))
+    GetSAMLProviderResponse.add_member(:saml_key_hashes, Shapes::ShapeRef.new(shape: SAMLKeyHashListType, location_name: "SAMLKeyHashes"))
     GetSAMLProviderResponse.add_member(:create_date, Shapes::ShapeRef.new(shape: dateType, location_name: "CreateDate"))
     GetSAMLProviderResponse.add_member(:valid_until, Shapes::ShapeRef.new(shape: dateType, location_name: "ValidUntil"))
     GetSAMLProviderResponse.add_member(:tags, Shapes::ShapeRef.new(shape: tagListType, location_name: "Tags"))
     GetSAMLProviderResponse.add_member(:assertion_encryption_mode, Shapes::ShapeRef.new(shape: assertionEncryptionModeType, location_name: "AssertionEncryptionMode"))
     GetSAMLProviderResponse.add_member(:private_key_list, Shapes::ShapeRef.new(shape: privateKeyList, location_name: "PrivateKeyList"))
+    GetSAMLProviderResponse.add_member(:identity_center_instance_arn, Shapes::ShapeRef.new(shape: identityCenterInstanceArnType, location_name: "IdentityCenterInstanceArn"))
+    GetSAMLProviderResponse.add_member(:identity_store_arn, Shapes::ShapeRef.new(shape: arnType, location_name: "IdentityStoreArn"))
     GetSAMLProviderResponse.struct_class = Types::GetSAMLProviderResponse
 
     GetSSHPublicKeyRequest.add_member(:user_name, Shapes::ShapeRef.new(shape: userNameType, required: true, location_name: "UserName"))
@@ -1407,6 +1443,8 @@ module Aws::IAM
 
     InvalidUserTypeException.add_member(:message, Shapes::ShapeRef.new(shape: invalidUserTypeMessage, location_name: "message"))
     InvalidUserTypeException.struct_class = Types::InvalidUserTypeException
+
+    KeyHashListType.member = Shapes::ShapeRef.new(shape: stringType)
 
     KeyPairMismatchException.add_member(:message, Shapes::ShapeRef.new(shape: keyPairMismatchMessage, location_name: "message"))
     KeyPairMismatchException.struct_class = Types::KeyPairMismatchException
@@ -1779,6 +1817,7 @@ module Aws::IAM
     LoginProfile.add_member(:user_name, Shapes::ShapeRef.new(shape: userNameType, required: true, location_name: "UserName"))
     LoginProfile.add_member(:create_date, Shapes::ShapeRef.new(shape: dateType, required: true, location_name: "CreateDate"))
     LoginProfile.add_member(:password_reset_required, Shapes::ShapeRef.new(shape: booleanType, location_name: "PasswordResetRequired"))
+    LoginProfile.add_member(:max_signin_session_duration, Shapes::ShapeRef.new(shape: maxSigninSessionDurationType, location_name: "MaxSigninSessionDuration"))
     LoginProfile.struct_class = Types::LoginProfile
 
     MFADevice.add_member(:user_name, Shapes::ShapeRef.new(shape: userNameType, required: true, location_name: "UserName"))
@@ -1815,6 +1854,7 @@ module Aws::IAM
     NoSuchEntityException.struct_class = Types::NoSuchEntityException
 
     OpenIDConnectProviderListEntry.add_member(:arn, Shapes::ShapeRef.new(shape: arnType, location_name: "Arn"))
+    OpenIDConnectProviderListEntry.add_member(:is_trusted_identity_propagation_enabled, Shapes::ShapeRef.new(shape: booleanType, location_name: "IsTrustedIdentityPropagationEnabled"))
     OpenIDConnectProviderListEntry.struct_class = Types::OpenIDConnectProviderListEntry
 
     OpenIDConnectProviderListType.member = Shapes::ShapeRef.new(shape: OpenIDConnectProviderListEntry)
@@ -2020,6 +2060,7 @@ module Aws::IAM
     Role.add_member(:assume_role_policy_document, Shapes::ShapeRef.new(shape: policyDocumentType, location_name: "AssumeRolePolicyDocument"))
     Role.add_member(:description, Shapes::ShapeRef.new(shape: roleDescriptionType, location_name: "Description"))
     Role.add_member(:max_session_duration, Shapes::ShapeRef.new(shape: roleMaxSessionDurationType, location_name: "MaxSessionDuration"))
+    Role.add_member(:max_signin_session_duration, Shapes::ShapeRef.new(shape: maxSigninSessionDurationType, location_name: "MaxSigninSessionDuration"))
     Role.add_member(:permissions_boundary, Shapes::ShapeRef.new(shape: AttachedPermissionsBoundary, location_name: "PermissionsBoundary"))
     Role.add_member(:tags, Shapes::ShapeRef.new(shape: tagListType, location_name: "Tags"))
     Role.add_member(:role_last_used, Shapes::ShapeRef.new(shape: RoleLastUsed, location_name: "RoleLastUsed"))
@@ -2081,6 +2122,12 @@ module Aws::IAM
     RoleUsageType.add_member(:resources, Shapes::ShapeRef.new(shape: ArnListType, location_name: "Resources"))
     RoleUsageType.struct_class = Types::RoleUsageType
 
+    SAMLKeyHashEntry.add_member(:issuer_url, Shapes::ShapeRef.new(shape: SAMLIssuerURLType, location_name: "IssuerURL"))
+    SAMLKeyHashEntry.add_member(:key_hashes, Shapes::ShapeRef.new(shape: KeyHashListType, location_name: "KeyHashes"))
+    SAMLKeyHashEntry.struct_class = Types::SAMLKeyHashEntry
+
+    SAMLKeyHashListType.member = Shapes::ShapeRef.new(shape: SAMLKeyHashEntry)
+
     SAMLPrivateKey.add_member(:key_id, Shapes::ShapeRef.new(shape: privateKeyIdType, location_name: "KeyId"))
     SAMLPrivateKey.add_member(:timestamp, Shapes::ShapeRef.new(shape: dateType, location_name: "Timestamp"))
     SAMLPrivateKey.struct_class = Types::SAMLPrivateKey
@@ -2088,6 +2135,7 @@ module Aws::IAM
     SAMLProviderListEntry.add_member(:arn, Shapes::ShapeRef.new(shape: arnType, location_name: "Arn"))
     SAMLProviderListEntry.add_member(:valid_until, Shapes::ShapeRef.new(shape: dateType, location_name: "ValidUntil"))
     SAMLProviderListEntry.add_member(:create_date, Shapes::ShapeRef.new(shape: dateType, location_name: "CreateDate"))
+    SAMLProviderListEntry.add_member(:is_trusted_identity_propagation_enabled, Shapes::ShapeRef.new(shape: booleanType, location_name: "IsTrustedIdentityPropagationEnabled"))
     SAMLProviderListEntry.struct_class = Types::SAMLProviderListEntry
 
     SAMLProviderListType.member = Shapes::ShapeRef.new(shape: SAMLProviderListEntry)
@@ -2348,7 +2396,16 @@ module Aws::IAM
     UpdateLoginProfileRequest.add_member(:user_name, Shapes::ShapeRef.new(shape: userNameType, required: true, location_name: "UserName"))
     UpdateLoginProfileRequest.add_member(:password, Shapes::ShapeRef.new(shape: passwordType, location_name: "Password"))
     UpdateLoginProfileRequest.add_member(:password_reset_required, Shapes::ShapeRef.new(shape: booleanObjectType, location_name: "PasswordResetRequired"))
+    UpdateLoginProfileRequest.add_member(:max_signin_session_duration, Shapes::ShapeRef.new(shape: maxSigninSessionDurationType, location_name: "MaxSigninSessionDuration"))
+    UpdateLoginProfileRequest.add_member(:reset_max_signin_session_duration, Shapes::ShapeRef.new(shape: booleanObjectType, location_name: "ResetMaxSigninSessionDuration"))
     UpdateLoginProfileRequest.struct_class = Types::UpdateLoginProfileRequest
+
+    UpdateOpenIDConnectProviderRequest.add_member(:open_id_connect_provider_arn, Shapes::ShapeRef.new(shape: arnType, required: true, location_name: "OpenIDConnectProviderArn"))
+    UpdateOpenIDConnectProviderRequest.add_member(:context_provider, Shapes::ShapeRef.new(shape: ContextProvider, location_name: "ContextProvider"))
+    UpdateOpenIDConnectProviderRequest.add_member(:identity_center_instance_arn, Shapes::ShapeRef.new(shape: identityCenterInstanceArnType, location_name: "IdentityCenterInstanceArn"))
+    UpdateOpenIDConnectProviderRequest.add_member(:remove_context_provider, Shapes::ShapeRef.new(shape: booleanType, location_name: "RemoveContextProvider"))
+    UpdateOpenIDConnectProviderRequest.add_member(:remove_identity_center_instance, Shapes::ShapeRef.new(shape: booleanType, location_name: "RemoveIdentityCenterInstance"))
+    UpdateOpenIDConnectProviderRequest.struct_class = Types::UpdateOpenIDConnectProviderRequest
 
     UpdateOpenIDConnectProviderThumbprintRequest.add_member(:open_id_connect_provider_arn, Shapes::ShapeRef.new(shape: arnType, required: true, location_name: "OpenIDConnectProviderArn"))
     UpdateOpenIDConnectProviderThumbprintRequest.add_member(:thumbprint_list, Shapes::ShapeRef.new(shape: thumbprintListType, required: true, location_name: "ThumbprintList"))
@@ -2364,6 +2421,8 @@ module Aws::IAM
     UpdateRoleRequest.add_member(:role_name, Shapes::ShapeRef.new(shape: roleNameType, required: true, location_name: "RoleName"))
     UpdateRoleRequest.add_member(:description, Shapes::ShapeRef.new(shape: roleDescriptionType, location_name: "Description"))
     UpdateRoleRequest.add_member(:max_session_duration, Shapes::ShapeRef.new(shape: roleMaxSessionDurationType, location_name: "MaxSessionDuration"))
+    UpdateRoleRequest.add_member(:max_signin_session_duration, Shapes::ShapeRef.new(shape: maxSigninSessionDurationType, location_name: "MaxSigninSessionDuration"))
+    UpdateRoleRequest.add_member(:reset_max_signin_session_duration, Shapes::ShapeRef.new(shape: booleanObjectType, location_name: "ResetMaxSigninSessionDuration"))
     UpdateRoleRequest.struct_class = Types::UpdateRoleRequest
 
     UpdateRoleResponse.struct_class = Types::UpdateRoleResponse
@@ -2373,6 +2432,10 @@ module Aws::IAM
     UpdateSAMLProviderRequest.add_member(:assertion_encryption_mode, Shapes::ShapeRef.new(shape: assertionEncryptionModeType, location_name: "AssertionEncryptionMode"))
     UpdateSAMLProviderRequest.add_member(:add_private_key, Shapes::ShapeRef.new(shape: privateKeyType, location_name: "AddPrivateKey"))
     UpdateSAMLProviderRequest.add_member(:remove_private_key, Shapes::ShapeRef.new(shape: privateKeyIdType, location_name: "RemovePrivateKey"))
+    UpdateSAMLProviderRequest.add_member(:context_provider, Shapes::ShapeRef.new(shape: ContextProvider, location_name: "ContextProvider"))
+    UpdateSAMLProviderRequest.add_member(:identity_center_instance_arn, Shapes::ShapeRef.new(shape: identityCenterInstanceArnType, location_name: "IdentityCenterInstanceArn"))
+    UpdateSAMLProviderRequest.add_member(:remove_context_provider, Shapes::ShapeRef.new(shape: booleanType, location_name: "RemoveContextProvider"))
+    UpdateSAMLProviderRequest.add_member(:remove_identity_center_instance, Shapes::ShapeRef.new(shape: booleanType, location_name: "RemoveIdentityCenterInstance"))
     UpdateSAMLProviderRequest.struct_class = Types::UpdateSAMLProviderRequest
 
     UpdateSAMLProviderResponse.add_member(:saml_provider_arn, Shapes::ShapeRef.new(shape: arnType, location_name: "SAMLProviderArn"))
@@ -2487,6 +2550,8 @@ module Aws::IAM
     inlinePolicyTemplateListType.member = Shapes::ShapeRef.new(shape: InlinePolicy)
 
     instanceProfileListType.member = Shapes::ShapeRef.new(shape: InstanceProfile)
+
+    keyDefinitionListType.member = Shapes::ShapeRef.new(shape: ContextProviderKeyDefinition)
 
     listPolicyGrantingServiceAccessResponseListType.member = Shapes::ShapeRef.new(shape: ListPoliciesGrantingServiceAccessEntry)
 
@@ -2991,6 +3056,7 @@ module Aws::IAM
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchEntityException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
       end)
 
@@ -3066,6 +3132,7 @@ module Aws::IAM
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchEntityException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
       end)
 
@@ -4693,6 +4760,19 @@ module Aws::IAM
         o.errors << Shapes::ShapeRef.new(shape: NoSuchEntityException)
         o.errors << Shapes::ShapeRef.new(shape: PasswordPolicyViolationException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
+      api.add_operation(:update_open_id_connect_provider, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateOpenIDConnectProvider"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateOpenIDConnectProviderRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchEntityException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
       end)
 
@@ -4716,6 +4796,7 @@ module Aws::IAM
         o.output = Shapes::ShapeRef.new(shape: UpdateRoleResponse)
         o.errors << Shapes::ShapeRef.new(shape: UnmodifiableEntityException)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchEntityException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
       end)
 

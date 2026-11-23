@@ -1668,14 +1668,15 @@ module Aws::CodePipeline
         "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "codepipeline",
         "jsonVersion" => "1.1",
-        "protocol" => "json",
-        "protocols" => ["json"],
+        "protocol" => "smithy-rpc-v2-cbor",
+        "protocols" => ["smithy-rpc-v2-cbor", "json"],
         "serviceAbbreviation" => "CodePipeline",
         "serviceFullName" => "AWS CodePipeline",
         "serviceId" => "CodePipeline",
         "signatureVersion" => "v4",
         "targetPrefix" => "CodePipeline_20150709",
         "uid" => "codepipeline-2015-07-09",
+        "xmlNamespace" => "http://codepipeline.amazonaws.com/doc/2015-07-09/",
       }
 
       api.add_operation(:acknowledge_job, Seahorse::Model::Operation.new.tap do |o|

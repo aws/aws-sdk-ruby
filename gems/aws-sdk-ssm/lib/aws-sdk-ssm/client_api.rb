@@ -179,6 +179,8 @@ module Aws::SSM
     CloudConnectorMaxResults = Shapes::IntegerShape.new(name: 'CloudConnectorMaxResults')
     CloudConnectorSummary = Shapes::StructureShape.new(name: 'CloudConnectorSummary')
     CloudConnectorSummaryList = Shapes::ListShape.new(name: 'CloudConnectorSummaryList')
+    CloudProvider = Shapes::StringShape.new(name: 'CloudProvider')
+    CloudProviderList = Shapes::ListShape.new(name: 'CloudProviderList')
     CloudWatchLogGroupName = Shapes::StringShape.new(name: 'CloudWatchLogGroupName')
     CloudWatchOutputConfig = Shapes::StructureShape.new(name: 'CloudWatchOutputConfig')
     CloudWatchOutputEnabled = Shapes::BooleanShape.new(name: 'CloudWatchOutputEnabled')
@@ -262,6 +264,8 @@ module Aws::SSM
     CreatedDate = Shapes::TimestampShape.new(name: 'CreatedDate')
     Credentials = Shapes::StructureShape.new(name: 'Credentials')
     CustomSchemaCountLimitExceededException = Shapes::StructureShape.new(name: 'CustomSchemaCountLimitExceededException')
+    DHMCPermissionModel = Shapes::StringShape.new(name: 'DHMCPermissionModel')
+    DHMCRoleArn = Shapes::StringShape.new(name: 'DHMCRoleArn')
     DateTime = Shapes::TimestampShape.new(name: 'DateTime')
     DefaultBaseline = Shapes::BooleanShape.new(name: 'DefaultBaseline')
     DefaultInstanceName = Shapes::StringShape.new(name: 'DefaultInstanceName')
@@ -293,6 +297,8 @@ module Aws::SSM
     DeleteResourcePolicyResponse = Shapes::StructureShape.new(name: 'DeleteResourcePolicyResponse')
     DeletionMode = Shapes::StringShape.new(name: 'DeletionMode')
     DeliveryTimedOutCount = Shapes::IntegerShape.new(name: 'DeliveryTimedOutCount')
+    DeregisterDefaultHostManagementConfigurationRequest = Shapes::StructureShape.new(name: 'DeregisterDefaultHostManagementConfigurationRequest')
+    DeregisterDefaultHostManagementConfigurationResult = Shapes::StructureShape.new(name: 'DeregisterDefaultHostManagementConfigurationResult')
     DeregisterManagedInstanceRequest = Shapes::StructureShape.new(name: 'DeregisterManagedInstanceRequest')
     DeregisterManagedInstanceResult = Shapes::StructureShape.new(name: 'DeregisterManagedInstanceResult')
     DeregisterPatchBaselineForPatchGroupRequest = Shapes::StructureShape.new(name: 'DeregisterPatchBaselineForPatchGroupRequest')
@@ -456,6 +462,15 @@ module Aws::SSM
     FailureDetails = Shapes::StructureShape.new(name: 'FailureDetails')
     Fault = Shapes::StringShape.new(name: 'Fault')
     FeatureNotAvailableException = Shapes::StructureShape.new(name: 'FeatureNotAvailableException')
+    GcpConfiguration = Shapes::StructureShape.new(name: 'GcpConfiguration')
+    GcpConfigurationTargets = Shapes::UnionShape.new(name: 'GcpConfigurationTargets')
+    GcpOrganizationId = Shapes::StringShape.new(name: 'GcpOrganizationId')
+    GcpProject = Shapes::StructureShape.new(name: 'GcpProject')
+    GcpProjectDisplayName = Shapes::StringShape.new(name: 'GcpProjectDisplayName')
+    GcpProjectId = Shapes::StringShape.new(name: 'GcpProjectId')
+    GcpProjectList = Shapes::ListShape.new(name: 'GcpProjectList')
+    GcpServiceAccountEmail = Shapes::StringShape.new(name: 'GcpServiceAccountEmail')
+    GcpWorkloadIdentityPoolProvider = Shapes::StringShape.new(name: 'GcpWorkloadIdentityPoolProvider')
     GetAccessTokenRequest = Shapes::StructureShape.new(name: 'GetAccessTokenRequest')
     GetAccessTokenResponse = Shapes::StructureShape.new(name: 'GetAccessTokenResponse')
     GetAutomationExecutionRequest = Shapes::StructureShape.new(name: 'GetAutomationExecutionRequest')
@@ -1086,6 +1101,7 @@ module Aws::SSM
     PolicyId = Shapes::StringShape.new(name: 'PolicyId')
     Product = Shapes::StringShape.new(name: 'Product')
     ProgressCounters = Shapes::StructureShape.new(name: 'ProgressCounters')
+    Provider = Shapes::StringShape.new(name: 'Provider')
     PutComplianceItemsRequest = Shapes::StructureShape.new(name: 'PutComplianceItemsRequest')
     PutComplianceItemsResult = Shapes::StructureShape.new(name: 'PutComplianceItemsResult')
     PutInventoryMessage = Shapes::StringShape.new(name: 'PutInventoryMessage')
@@ -1099,6 +1115,8 @@ module Aws::SSM
     Region = Shapes::StringShape.new(name: 'Region')
     RegionList = Shapes::ListShape.new(name: 'RegionList')
     Regions = Shapes::ListShape.new(name: 'Regions')
+    RegisterDefaultHostManagementConfigurationRequest = Shapes::StructureShape.new(name: 'RegisterDefaultHostManagementConfigurationRequest')
+    RegisterDefaultHostManagementConfigurationResult = Shapes::StructureShape.new(name: 'RegisterDefaultHostManagementConfigurationResult')
     RegisterDefaultPatchBaselineRequest = Shapes::StructureShape.new(name: 'RegisterDefaultPatchBaselineRequest')
     RegisterDefaultPatchBaselineResult = Shapes::StructureShape.new(name: 'RegisterDefaultPatchBaselineResult')
     RegisterPatchBaselineForPatchGroupRequest = Shapes::StructureShape.new(name: 'RegisterPatchBaselineForPatchGroupRequest')
@@ -1291,6 +1309,7 @@ module Aws::SSM
     TargetValue = Shapes::StringShape.new(name: 'TargetValue')
     TargetValues = Shapes::ListShape.new(name: 'TargetValues')
     Targets = Shapes::ListShape.new(name: 'Targets')
+    TargetsSummary = Shapes::StructureShape.new(name: 'TargetsSummary')
     TerminateSessionRequest = Shapes::StructureShape.new(name: 'TerminateSessionRequest')
     TerminateSessionResponse = Shapes::StructureShape.new(name: 'TerminateSessionResponse')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
@@ -1638,6 +1657,7 @@ module Aws::SSM
     AutomationExecution.add_member(:association_id, Shapes::ShapeRef.new(shape: String, location_name: "AssociationId"))
     AutomationExecution.add_member(:change_request_name, Shapes::ShapeRef.new(shape: ChangeRequestName, location_name: "ChangeRequestName"))
     AutomationExecution.add_member(:variables, Shapes::ShapeRef.new(shape: AutomationParameterMap, location_name: "Variables"))
+    AutomationExecution.add_member(:targets_summary, Shapes::ShapeRef.new(shape: TargetsSummary, location_name: "TargetsSummary"))
     AutomationExecution.struct_class = Types::AutomationExecution
 
     AutomationExecutionFilter.add_member(:key, Shapes::ShapeRef.new(shape: AutomationExecutionFilterKey, required: true, location_name: "Key"))
@@ -1758,8 +1778,10 @@ module Aws::SSM
     CategoryList.member = Shapes::ShapeRef.new(shape: Category)
 
     CloudConnectorConfiguration.add_member(:azure_configuration, Shapes::ShapeRef.new(shape: AzureConfiguration, location_name: "AzureConfiguration"))
+    CloudConnectorConfiguration.add_member(:gcp_configuration, Shapes::ShapeRef.new(shape: GcpConfiguration, location_name: "GcpConfiguration"))
     CloudConnectorConfiguration.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     CloudConnectorConfiguration.add_member_subclass(:azure_configuration, Types::CloudConnectorConfiguration::AzureConfiguration)
+    CloudConnectorConfiguration.add_member_subclass(:gcp_configuration, Types::CloudConnectorConfiguration::GcpConfiguration)
     CloudConnectorConfiguration.add_member_subclass(:unknown, Types::CloudConnectorConfiguration::Unknown)
     CloudConnectorConfiguration.struct_class = Types::CloudConnectorConfiguration
 
@@ -1777,9 +1799,13 @@ module Aws::SSM
     CloudConnectorSummary.add_member(:role_arn, Shapes::ShapeRef.new(shape: CloudConnectorIamRoleArn, location_name: "RoleArn"))
     CloudConnectorSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: DateTime, location_name: "CreatedAt"))
     CloudConnectorSummary.add_member(:updated_at, Shapes::ShapeRef.new(shape: DateTime, location_name: "UpdatedAt"))
+    CloudConnectorSummary.add_member(:provider, Shapes::ShapeRef.new(shape: Provider, location_name: "Provider"))
+    CloudConnectorSummary.add_member(:config_connector_arn, Shapes::ShapeRef.new(shape: ConfigConnectorArn, location_name: "ConfigConnectorArn"))
     CloudConnectorSummary.struct_class = Types::CloudConnectorSummary
 
     CloudConnectorSummaryList.member = Shapes::ShapeRef.new(shape: CloudConnectorSummary)
+
+    CloudProviderList.member = Shapes::ShapeRef.new(shape: CloudProvider)
 
     CloudWatchOutputConfig.add_member(:cloud_watch_log_group_name, Shapes::ShapeRef.new(shape: CloudWatchLogGroupName, location_name: "CloudWatchLogGroupName"))
     CloudWatchOutputConfig.add_member(:cloud_watch_output_enabled, Shapes::ShapeRef.new(shape: CloudWatchOutputEnabled, location_name: "CloudWatchOutputEnabled"))
@@ -1999,7 +2025,7 @@ module Aws::SSM
     CreateCloudConnectorRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: CloudConnectorIamRoleArn, required: true, location_name: "RoleArn"))
     CreateCloudConnectorRequest.add_member(:description, Shapes::ShapeRef.new(shape: CloudConnectorDescription, location_name: "Description"))
     CreateCloudConnectorRequest.add_member(:configuration, Shapes::ShapeRef.new(shape: CloudConnectorConfiguration, required: true, location_name: "Configuration"))
-    CreateCloudConnectorRequest.add_member(:config_connector_arn, Shapes::ShapeRef.new(shape: ConfigConnectorArn, required: true, location_name: "ConfigConnectorArn"))
+    CreateCloudConnectorRequest.add_member(:config_connector_arn, Shapes::ShapeRef.new(shape: ConfigConnectorArn, location_name: "ConfigConnectorArn"))
     CreateCloudConnectorRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateCloudConnectorRequest.struct_class = Types::CreateCloudConnectorRequest
 
@@ -2016,6 +2042,7 @@ module Aws::SSM
     CreateDocumentRequest.add_member(:document_format, Shapes::ShapeRef.new(shape: DocumentFormat, location_name: "DocumentFormat"))
     CreateDocumentRequest.add_member(:target_type, Shapes::ShapeRef.new(shape: TargetType, location_name: "TargetType"))
     CreateDocumentRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateDocumentRequest.add_member(:cloud_providers, Shapes::ShapeRef.new(shape: CloudProviderList, location_name: "CloudProviders"))
     CreateDocumentRequest.struct_class = Types::CreateDocumentRequest
 
     CreateDocumentResult.add_member(:document_description, Shapes::ShapeRef.new(shape: DocumentDescription, location_name: "DocumentDescription"))
@@ -2188,6 +2215,10 @@ module Aws::SSM
     DeleteResourcePolicyRequest.struct_class = Types::DeleteResourcePolicyRequest
 
     DeleteResourcePolicyResponse.struct_class = Types::DeleteResourcePolicyResponse
+
+    DeregisterDefaultHostManagementConfigurationRequest.struct_class = Types::DeregisterDefaultHostManagementConfigurationRequest
+
+    DeregisterDefaultHostManagementConfigurationResult.struct_class = Types::DeregisterDefaultHostManagementConfigurationResult
 
     DeregisterManagedInstanceRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: ManagedInstanceId, required: true, location_name: "InstanceId"))
     DeregisterManagedInstanceRequest.struct_class = Types::DeregisterManagedInstanceRequest
@@ -2600,6 +2631,7 @@ module Aws::SSM
     DocumentDescription.add_member(:review_status, Shapes::ShapeRef.new(shape: ReviewStatus, location_name: "ReviewStatus"))
     DocumentDescription.add_member(:category, Shapes::ShapeRef.new(shape: CategoryList, location_name: "Category"))
     DocumentDescription.add_member(:category_enum, Shapes::ShapeRef.new(shape: CategoryEnumList, location_name: "CategoryEnum"))
+    DocumentDescription.add_member(:cloud_providers, Shapes::ShapeRef.new(shape: CloudProviderList, location_name: "CloudProviders"))
     DocumentDescription.struct_class = Types::DocumentDescription
 
     DocumentFilter.add_member(:key, Shapes::ShapeRef.new(shape: DocumentFilterKey, required: true, location_name: "key"))
@@ -2623,6 +2655,7 @@ module Aws::SSM
     DocumentIdentifier.add_member(:requires, Shapes::ShapeRef.new(shape: DocumentRequiresList, location_name: "Requires"))
     DocumentIdentifier.add_member(:review_status, Shapes::ShapeRef.new(shape: ReviewStatus, location_name: "ReviewStatus"))
     DocumentIdentifier.add_member(:author, Shapes::ShapeRef.new(shape: DocumentAuthor, location_name: "Author"))
+    DocumentIdentifier.add_member(:cloud_providers, Shapes::ShapeRef.new(shape: CloudProviderList, location_name: "CloudProviders"))
     DocumentIdentifier.struct_class = Types::DocumentIdentifier
 
     DocumentIdentifierList.member = Shapes::ShapeRef.new(shape: DocumentIdentifier)
@@ -2689,6 +2722,7 @@ module Aws::SSM
     DocumentVersionInfo.add_member(:status, Shapes::ShapeRef.new(shape: DocumentStatus, location_name: "Status"))
     DocumentVersionInfo.add_member(:status_information, Shapes::ShapeRef.new(shape: DocumentStatusInformation, location_name: "StatusInformation"))
     DocumentVersionInfo.add_member(:review_status, Shapes::ShapeRef.new(shape: ReviewStatus, location_name: "ReviewStatus"))
+    DocumentVersionInfo.add_member(:cloud_providers, Shapes::ShapeRef.new(shape: CloudProviderList, location_name: "CloudProviders"))
     DocumentVersionInfo.struct_class = Types::DocumentVersionInfo
 
     DocumentVersionLimitExceeded.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
@@ -2741,6 +2775,24 @@ module Aws::SSM
 
     FeatureNotAvailableException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     FeatureNotAvailableException.struct_class = Types::FeatureNotAvailableException
+
+    GcpConfiguration.add_member(:organization_id, Shapes::ShapeRef.new(shape: GcpOrganizationId, location_name: "OrganizationId"))
+    GcpConfiguration.add_member(:workload_identity_pool_provider, Shapes::ShapeRef.new(shape: GcpWorkloadIdentityPoolProvider, required: true, location_name: "WorkloadIdentityPoolProvider"))
+    GcpConfiguration.add_member(:service_account_email, Shapes::ShapeRef.new(shape: GcpServiceAccountEmail, required: true, location_name: "ServiceAccountEmail"))
+    GcpConfiguration.add_member(:targets, Shapes::ShapeRef.new(shape: GcpConfigurationTargets, location_name: "Targets"))
+    GcpConfiguration.struct_class = Types::GcpConfiguration
+
+    GcpConfigurationTargets.add_member(:projects, Shapes::ShapeRef.new(shape: GcpProjectList, location_name: "Projects"))
+    GcpConfigurationTargets.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    GcpConfigurationTargets.add_member_subclass(:projects, Types::GcpConfigurationTargets::Projects)
+    GcpConfigurationTargets.add_member_subclass(:unknown, Types::GcpConfigurationTargets::Unknown)
+    GcpConfigurationTargets.struct_class = Types::GcpConfigurationTargets
+
+    GcpProject.add_member(:project_id, Shapes::ShapeRef.new(shape: GcpProjectId, required: true, location_name: "ProjectId"))
+    GcpProject.add_member(:project_display_name, Shapes::ShapeRef.new(shape: GcpProjectDisplayName, location_name: "ProjectDisplayName"))
+    GcpProject.struct_class = Types::GcpProject
+
+    GcpProjectList.member = Shapes::ShapeRef.new(shape: GcpProject)
 
     GetAccessTokenRequest.add_member(:access_request_id, Shapes::ShapeRef.new(shape: AccessRequestId, required: true, location_name: "AccessRequestId"))
     GetAccessTokenRequest.struct_class = Types::GetAccessTokenRequest
@@ -4480,6 +4532,14 @@ module Aws::SSM
 
     Regions.member = Shapes::ShapeRef.new(shape: Region)
 
+    RegisterDefaultHostManagementConfigurationRequest.add_member(:permission_model, Shapes::ShapeRef.new(shape: DHMCPermissionModel, required: true, location_name: "PermissionModel"))
+    RegisterDefaultHostManagementConfigurationRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: DHMCRoleArn, location_name: "RoleArn"))
+    RegisterDefaultHostManagementConfigurationRequest.add_member(:overwrite, Shapes::ShapeRef.new(shape: Boolean, location_name: "Overwrite"))
+    RegisterDefaultHostManagementConfigurationRequest.struct_class = Types::RegisterDefaultHostManagementConfigurationRequest
+
+    RegisterDefaultHostManagementConfigurationResult.add_member(:role_arn, Shapes::ShapeRef.new(shape: DHMCRoleArn, location_name: "RoleArn"))
+    RegisterDefaultHostManagementConfigurationResult.struct_class = Types::RegisterDefaultHostManagementConfigurationResult
+
     RegisterDefaultPatchBaselineRequest.add_member(:baseline_id, Shapes::ShapeRef.new(shape: BaselineId, required: true, location_name: "BaselineId"))
     RegisterDefaultPatchBaselineRequest.struct_class = Types::RegisterDefaultPatchBaselineRequest
 
@@ -4966,6 +5026,13 @@ module Aws::SSM
 
     Targets.member = Shapes::ShapeRef.new(shape: Target)
 
+    TargetsSummary.add_member(:total_count, Shapes::ShapeRef.new(shape: Integer, location_name: "TotalCount"))
+    TargetsSummary.add_member(:started_count, Shapes::ShapeRef.new(shape: Integer, location_name: "StartedCount"))
+    TargetsSummary.add_member(:completed_count, Shapes::ShapeRef.new(shape: Integer, location_name: "CompletedCount"))
+    TargetsSummary.add_member(:successful_count, Shapes::ShapeRef.new(shape: Integer, location_name: "SuccessfulCount"))
+    TargetsSummary.add_member(:failed_count, Shapes::ShapeRef.new(shape: Integer, location_name: "FailedCount"))
+    TargetsSummary.struct_class = Types::TargetsSummary
+
     TerminateSessionRequest.add_member(:session_id, Shapes::ShapeRef.new(shape: SessionId, required: true, location_name: "SessionId"))
     TerminateSessionRequest.struct_class = Types::TerminateSessionRequest
 
@@ -5085,6 +5152,7 @@ module Aws::SSM
     UpdateDocumentRequest.add_member(:document_version, Shapes::ShapeRef.new(shape: DocumentVersion, location_name: "DocumentVersion"))
     UpdateDocumentRequest.add_member(:document_format, Shapes::ShapeRef.new(shape: DocumentFormat, location_name: "DocumentFormat"))
     UpdateDocumentRequest.add_member(:target_type, Shapes::ShapeRef.new(shape: TargetType, location_name: "TargetType"))
+    UpdateDocumentRequest.add_member(:cloud_providers, Shapes::ShapeRef.new(shape: CloudProviderList, location_name: "CloudProviders"))
     UpdateDocumentRequest.struct_class = Types::UpdateDocumentRequest
 
     UpdateDocumentResult.add_member(:document_description, Shapes::ShapeRef.new(shape: DocumentDescription, location_name: "DocumentDescription"))
@@ -5630,6 +5698,15 @@ module Aws::SSM
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: MalformedResourcePolicyDocumentException)
         o.errors << Shapes::ShapeRef.new(shape: ResourcePolicyNotFoundException)
+      end)
+
+      api.add_operation(:deregister_default_host_management_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeregisterDefaultHostManagementConfiguration"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeregisterDefaultHostManagementConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeregisterDefaultHostManagementConfigurationResult)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
       end)
 
       api.add_operation(:deregister_managed_instance, Seahorse::Model::Operation.new.tap do |o|
@@ -6977,6 +7054,15 @@ module Aws::SSM
         o.errors << Shapes::ShapeRef.new(shape: ResourcePolicyNotFoundException)
       end)
 
+      api.add_operation(:register_default_host_management_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "RegisterDefaultHostManagementConfiguration"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: RegisterDefaultHostManagementConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: RegisterDefaultHostManagementConfigurationResult)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+      end)
+
       api.add_operation(:register_default_patch_baseline, Seahorse::Model::Operation.new.tap do |o|
         o.name = "RegisterDefaultPatchBaseline"
         o.http_method = "POST"
@@ -7241,6 +7327,7 @@ module Aws::SSM
         o.output = Shapes::ShapeRef.new(shape: UpdateCloudConnectorResult)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 

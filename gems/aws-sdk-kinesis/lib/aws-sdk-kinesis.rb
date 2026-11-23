@@ -23,7 +23,7 @@ Aws::Plugins::GlobalConfiguration.add_identifier(:kinesis)
 # structure.
 #
 #     kinesis = Aws::Kinesis::Client.new
-#     resp = kinesis.add_tags_to_stream(params)
+#     resp = kinesis.acknowledge_dead_letter_queue_records(params)
 #
 # See {Client} for more information.
 #
@@ -35,7 +35,7 @@ Aws::Plugins::GlobalConfiguration.add_identifier(:kinesis)
 # output event callbacks before waiting on the response.
 #
 #     kinesis = Aws::Kinesis::AsyncClient.new
-#     resp = kinesis.add_tags_to_stream(
+#     resp = kinesis.acknowledge_dead_letter_queue_records(
 #       # params and input stream
 #      ) do |output_stream|
 #       # register callbacks for events
@@ -73,7 +73,7 @@ module Aws::Kinesis
   autoload :AsyncClient, 'aws-sdk-kinesis/async_client'
   autoload :EventStreams, 'aws-sdk-kinesis/event_streams'
 
-  GEM_VERSION = '1.114.0'
+  GEM_VERSION = '1.122.0'
 
 end
 

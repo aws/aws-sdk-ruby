@@ -415,10 +415,13 @@ module Aws::PrometheusService
 
     class ExporterConfiguration
       attr_accessor open_search_configuration: Types::OpenSearchExporterConfiguration
+      attr_accessor kafka_configuration: Types::KafkaExporterConfiguration
       attr_accessor unknown: untyped
       SENSITIVE: []
 
       class OpenSearchConfiguration < ExporterConfiguration
+      end
+      class KafkaConfiguration < ExporterConfiguration
       end
       class Unknown < ExporterConfiguration
       end
@@ -449,6 +452,13 @@ module Aws::PrometheusService
     class InternalServerException
       attr_accessor message: ::String
       attr_accessor retry_after_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class KafkaExporterConfiguration
+      attr_accessor cluster_arn: ::String
+      attr_accessor topic_filter: ::String
+      attr_accessor consumer_group_filter: ::String
       SENSITIVE: []
     end
 

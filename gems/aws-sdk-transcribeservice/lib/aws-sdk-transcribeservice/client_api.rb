@@ -16,6 +16,7 @@ module Aws::TranscribeService
 
     AbsoluteTimeRange = Shapes::StructureShape.new(name: 'AbsoluteTimeRange')
     BadRequestException = Shapes::StructureShape.new(name: 'BadRequestException')
+    BadRequestExceptionReason = Shapes::StringShape.new(name: 'BadRequestExceptionReason')
     BaseModelName = Shapes::StringShape.new(name: 'BaseModelName')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     CLMLanguageCode = Shapes::StringShape.new(name: 'CLMLanguageCode')
@@ -64,6 +65,7 @@ module Aws::TranscribeService
     DeleteVocabularyRequest = Shapes::StructureShape.new(name: 'DeleteVocabularyRequest')
     DescribeLanguageModelRequest = Shapes::StructureShape.new(name: 'DescribeLanguageModelRequest')
     DescribeLanguageModelResponse = Shapes::StructureShape.new(name: 'DescribeLanguageModelResponse')
+    Double = Shapes::FloatShape.new(name: 'Double')
     DurationInSeconds = Shapes::FloatShape.new(name: 'DurationInSeconds')
     EncryptionConfiguration = Shapes::StructureShape.new(name: 'EncryptionConfiguration')
     FailureReason = Shapes::StringShape.new(name: 'FailureReason')
@@ -88,12 +90,14 @@ module Aws::TranscribeService
     InputType = Shapes::StringShape.new(name: 'InputType')
     InternalFailureException = Shapes::StructureShape.new(name: 'InternalFailureException')
     InterruptionFilter = Shapes::StructureShape.new(name: 'InterruptionFilter')
+    ItemId = Shapes::IntegerShape.new(name: 'ItemId')
     JobExecutionSettings = Shapes::StructureShape.new(name: 'JobExecutionSettings')
     KMSEncryptionContextMap = Shapes::MapShape.new(name: 'KMSEncryptionContextMap')
     KMSKeyId = Shapes::StringShape.new(name: 'KMSKeyId')
     LanguageCode = Shapes::StringShape.new(name: 'LanguageCode')
     LanguageCodeItem = Shapes::StructureShape.new(name: 'LanguageCodeItem')
     LanguageCodeList = Shapes::ListShape.new(name: 'LanguageCodeList')
+    LanguageDetectionMode = Shapes::StringShape.new(name: 'LanguageDetectionMode')
     LanguageIdSettings = Shapes::StructureShape.new(name: 'LanguageIdSettings')
     LanguageIdSettingsMap = Shapes::MapShape.new(name: 'LanguageIdSettingsMap')
     LanguageModel = Shapes::StructureShape.new(name: 'LanguageModel')
@@ -123,6 +127,7 @@ module Aws::TranscribeService
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     MaxSpeakers = Shapes::IntegerShape.new(name: 'MaxSpeakers')
     Media = Shapes::StructureShape.new(name: 'Media')
+    MediaBytesBlob = Shapes::BlobShape.new(name: 'MediaBytesBlob')
     MediaFormat = Shapes::StringShape.new(name: 'MediaFormat')
     MediaSampleRateHertz = Shapes::IntegerShape.new(name: 'MediaSampleRateHertz')
     MedicalContentIdentificationType = Shapes::StringShape.new(name: 'MedicalContentIdentificationType')
@@ -154,6 +159,8 @@ module Aws::TranscribeService
     NonEmptyString = Shapes::StringShape.new(name: 'NonEmptyString')
     NonTalkTimeFilter = Shapes::StructureShape.new(name: 'NonTalkTimeFilter')
     NotFoundException = Shapes::StructureShape.new(name: 'NotFoundException')
+    NumberOfChannels = Shapes::IntegerShape.new(name: 'NumberOfChannels')
+    NumberOfSpeakers = Shapes::IntegerShape.new(name: 'NumberOfSpeakers')
     OutputBucketName = Shapes::StringShape.new(name: 'OutputBucketName')
     OutputKey = Shapes::StringShape.new(name: 'OutputKey')
     OutputLocationType = Shapes::StringShape.new(name: 'OutputLocationType')
@@ -192,6 +199,17 @@ module Aws::TranscribeService
     Subtitles = Shapes::StructureShape.new(name: 'Subtitles')
     SubtitlesOutput = Shapes::StructureShape.new(name: 'SubtitlesOutput')
     Summarization = Shapes::StructureShape.new(name: 'Summarization')
+    SyncItem = Shapes::StructureShape.new(name: 'SyncItem')
+    SyncItemList = Shapes::ListShape.new(name: 'SyncItemList')
+    SyncLanguage = Shapes::StringShape.new(name: 'SyncLanguage')
+    SyncLanguageCode = Shapes::StringShape.new(name: 'SyncLanguageCode')
+    SyncLanguageCodeItem = Shapes::StructureShape.new(name: 'SyncLanguageCodeItem')
+    SyncLanguageCodeList = Shapes::ListShape.new(name: 'SyncLanguageCodeList')
+    SyncLanguageOptions = Shapes::ListShape.new(name: 'SyncLanguageOptions')
+    SyncMedia = Shapes::UnionShape.new(name: 'SyncMedia')
+    SyncOutputConfiguration = Shapes::StructureShape.new(name: 'SyncOutputConfiguration')
+    SyncRedaction = Shapes::StructureShape.new(name: 'SyncRedaction')
+    SyncRedactionList = Shapes::ListShape.new(name: 'SyncRedactionList')
     Tag = Shapes::StructureShape.new(name: 'Tag')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
@@ -205,9 +223,14 @@ module Aws::TranscribeService
     ToxicityDetection = Shapes::ListShape.new(name: 'ToxicityDetection')
     ToxicityDetectionSettings = Shapes::StructureShape.new(name: 'ToxicityDetectionSettings')
     TranscribeArn = Shapes::StringShape.new(name: 'TranscribeArn')
+    TranscribeAudioMetadata = Shapes::StructureShape.new(name: 'TranscribeAudioMetadata')
+    TranscribeAudioRequest = Shapes::StructureShape.new(name: 'TranscribeAudioRequest')
+    TranscribeAudioResponse = Shapes::StructureShape.new(name: 'TranscribeAudioResponse')
+    TranscribeAudioResults = Shapes::StructureShape.new(name: 'TranscribeAudioResults')
     Transcript = Shapes::StructureShape.new(name: 'Transcript')
     TranscriptFilter = Shapes::StructureShape.new(name: 'TranscriptFilter')
     TranscriptFilterType = Shapes::StringShape.new(name: 'TranscriptFilterType')
+    TranscriptResponse = Shapes::StructureShape.new(name: 'TranscriptResponse')
     TranscriptionJob = Shapes::StructureShape.new(name: 'TranscriptionJob')
     TranscriptionJobName = Shapes::StringShape.new(name: 'TranscriptionJobName')
     TranscriptionJobStatus = Shapes::StringShape.new(name: 'TranscriptionJobStatus')
@@ -228,13 +251,21 @@ module Aws::TranscribeService
     UpdateVocabularyResponse = Shapes::StructureShape.new(name: 'UpdateVocabularyResponse')
     Uri = Shapes::StringShape.new(name: 'Uri')
     Vocabularies = Shapes::ListShape.new(name: 'Vocabularies')
+    VocabularyFilterEntry = Shapes::StructureShape.new(name: 'VocabularyFilterEntry')
+    VocabularyFilterEntryList = Shapes::ListShape.new(name: 'VocabularyFilterEntryList')
     VocabularyFilterInfo = Shapes::StructureShape.new(name: 'VocabularyFilterInfo')
     VocabularyFilterMethod = Shapes::StringShape.new(name: 'VocabularyFilterMethod')
     VocabularyFilterName = Shapes::StringShape.new(name: 'VocabularyFilterName')
+    VocabularyFilterSettings = Shapes::StructureShape.new(name: 'VocabularyFilterSettings')
     VocabularyFilters = Shapes::ListShape.new(name: 'VocabularyFilters')
     VocabularyInfo = Shapes::StructureShape.new(name: 'VocabularyInfo')
     VocabularyName = Shapes::StringShape.new(name: 'VocabularyName')
+    VocabularyPhrase = Shapes::StructureShape.new(name: 'VocabularyPhrase')
+    VocabularyPhraseList = Shapes::ListShape.new(name: 'VocabularyPhraseList')
+    VocabularySettingsEntry = Shapes::StructureShape.new(name: 'VocabularySettingsEntry')
+    VocabularySettingsList = Shapes::ListShape.new(name: 'VocabularySettingsList')
     VocabularyState = Shapes::StringShape.new(name: 'VocabularyState')
+    VocabularyText = Shapes::StringShape.new(name: 'VocabularyText')
     Word = Shapes::StringShape.new(name: 'Word')
     Words = Shapes::ListShape.new(name: 'Words')
 
@@ -245,6 +276,7 @@ module Aws::TranscribeService
     AbsoluteTimeRange.struct_class = Types::AbsoluteTimeRange
 
     BadRequestException.add_member(:message, Shapes::ShapeRef.new(shape: FailureReason, location_name: "Message"))
+    BadRequestException.add_member(:reason, Shapes::ShapeRef.new(shape: BadRequestExceptionReason, location_name: "Reason"))
     BadRequestException.struct_class = Types::BadRequestException
 
     CallAnalyticsJob.add_member(:call_analytics_job_name, Shapes::ShapeRef.new(shape: CallAnalyticsJobName, location_name: "CallAnalyticsJobName"))
@@ -898,6 +930,43 @@ module Aws::TranscribeService
     Summarization.add_member(:generate_abstractive_summary, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "GenerateAbstractiveSummary"))
     Summarization.struct_class = Types::Summarization
 
+    SyncItem.add_member(:id, Shapes::ShapeRef.new(shape: ItemId, location_name: "Id"))
+    SyncItem.add_member(:content, Shapes::ShapeRef.new(shape: String, location_name: "Content"))
+    SyncItem.add_member(:start_time, Shapes::ShapeRef.new(shape: Double, location_name: "StartTime"))
+    SyncItem.add_member(:end_time, Shapes::ShapeRef.new(shape: Double, location_name: "EndTime"))
+    SyncItem.add_member(:language_code, Shapes::ShapeRef.new(shape: SyncLanguageCode, location_name: "LanguageCode"))
+    SyncItem.add_member(:channel_label, Shapes::ShapeRef.new(shape: String, location_name: "ChannelLabel"))
+    SyncItem.add_member(:speaker_label, Shapes::ShapeRef.new(shape: String, location_name: "SpeakerLabel"))
+    SyncItem.add_member(:vocabulary_filter_match, Shapes::ShapeRef.new(shape: Boolean, location_name: "VocabularyFilterMatch"))
+    SyncItem.add_member(:redactions, Shapes::ShapeRef.new(shape: SyncRedactionList, location_name: "Redactions"))
+    SyncItem.struct_class = Types::SyncItem
+
+    SyncItemList.member = Shapes::ShapeRef.new(shape: SyncItem)
+
+    SyncLanguageCodeItem.add_member(:language_code, Shapes::ShapeRef.new(shape: SyncLanguageCode, location_name: "LanguageCode"))
+    SyncLanguageCodeItem.add_member(:duration_in_seconds, Shapes::ShapeRef.new(shape: DurationInSeconds, location_name: "DurationInSeconds"))
+    SyncLanguageCodeItem.struct_class = Types::SyncLanguageCodeItem
+
+    SyncLanguageCodeList.member = Shapes::ShapeRef.new(shape: SyncLanguageCodeItem)
+
+    SyncLanguageOptions.member = Shapes::ShapeRef.new(shape: SyncLanguage)
+
+    SyncMedia.add_member(:media_bytes, Shapes::ShapeRef.new(shape: MediaBytesBlob, location_name: "MediaBytes"))
+    SyncMedia.add_member(:media_file_uri, Shapes::ShapeRef.new(shape: Uri, location_name: "MediaFileUri"))
+    SyncMedia.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    SyncMedia.add_member_subclass(:media_bytes, Types::SyncMedia::MediaBytes)
+    SyncMedia.add_member_subclass(:media_file_uri, Types::SyncMedia::MediaFileUri)
+    SyncMedia.add_member_subclass(:unknown, Types::SyncMedia::Unknown)
+    SyncMedia.struct_class = Types::SyncMedia
+
+    SyncOutputConfiguration.add_member(:output_media_file_uri, Shapes::ShapeRef.new(shape: Uri, required: true, location_name: "OutputMediaFileUri"))
+    SyncOutputConfiguration.struct_class = Types::SyncOutputConfiguration
+
+    SyncRedaction.add_member(:type, Shapes::ShapeRef.new(shape: PiiEntityType, location_name: "Type"))
+    SyncRedaction.struct_class = Types::SyncRedaction
+
+    SyncRedactionList.member = Shapes::ShapeRef.new(shape: SyncRedaction)
+
     Tag.add_member(:key, Shapes::ShapeRef.new(shape: TagKey, required: true, location_name: "Key"))
     Tag.add_member(:value, Shapes::ShapeRef.new(shape: TagValue, required: true, location_name: "Value"))
     Tag.struct_class = Types::Tag
@@ -919,6 +988,35 @@ module Aws::TranscribeService
     ToxicityDetectionSettings.add_member(:toxicity_categories, Shapes::ShapeRef.new(shape: ToxicityCategories, required: true, location_name: "ToxicityCategories"))
     ToxicityDetectionSettings.struct_class = Types::ToxicityDetectionSettings
 
+    TranscribeAudioMetadata.add_member(:language_code, Shapes::ShapeRef.new(shape: SyncLanguageCode, location_name: "LanguageCode"))
+    TranscribeAudioMetadata.add_member(:language_codes, Shapes::ShapeRef.new(shape: SyncLanguageCodeList, location_name: "LanguageCodes"))
+    TranscribeAudioMetadata.add_member(:media_format, Shapes::ShapeRef.new(shape: MediaFormat, location_name: "MediaFormat"))
+    TranscribeAudioMetadata.add_member(:media_sample_rate_hertz, Shapes::ShapeRef.new(shape: MediaSampleRateHertz, location_name: "MediaSampleRateHertz"))
+    TranscribeAudioMetadata.add_member(:speakers_count, Shapes::ShapeRef.new(shape: NumberOfSpeakers, location_name: "SpeakersCount"))
+    TranscribeAudioMetadata.add_member(:number_of_channels, Shapes::ShapeRef.new(shape: NumberOfChannels, location_name: "NumberOfChannels"))
+    TranscribeAudioMetadata.struct_class = Types::TranscribeAudioMetadata
+
+    TranscribeAudioRequest.add_member(:media, Shapes::ShapeRef.new(shape: SyncMedia, required: true, location_name: "Media"))
+    TranscribeAudioRequest.add_member(:language, Shapes::ShapeRef.new(shape: SyncLanguage, location_name: "Language"))
+    TranscribeAudioRequest.add_member(:language_detection_mode, Shapes::ShapeRef.new(shape: LanguageDetectionMode, location_name: "LanguageDetectionMode"))
+    TranscribeAudioRequest.add_member(:language_options, Shapes::ShapeRef.new(shape: SyncLanguageOptions, location_name: "LanguageOptions"))
+    TranscribeAudioRequest.add_member(:channel_identification, Shapes::ShapeRef.new(shape: Boolean, location_name: "ChannelIdentification"))
+    TranscribeAudioRequest.add_member(:show_speaker_labels, Shapes::ShapeRef.new(shape: Boolean, location_name: "ShowSpeakerLabels"))
+    TranscribeAudioRequest.add_member(:max_speaker_labels, Shapes::ShapeRef.new(shape: MaxSpeakers, location_name: "MaxSpeakerLabels"))
+    TranscribeAudioRequest.add_member(:vocabulary_settings, Shapes::ShapeRef.new(shape: VocabularySettingsList, location_name: "VocabularySettings"))
+    TranscribeAudioRequest.add_member(:vocabulary_filter_settings, Shapes::ShapeRef.new(shape: VocabularyFilterSettings, location_name: "VocabularyFilterSettings"))
+    TranscribeAudioRequest.add_member(:content_redaction, Shapes::ShapeRef.new(shape: ContentRedaction, location_name: "ContentRedaction"))
+    TranscribeAudioRequest.add_member(:output_configuration, Shapes::ShapeRef.new(shape: SyncOutputConfiguration, location_name: "OutputConfiguration"))
+    TranscribeAudioRequest.struct_class = Types::TranscribeAudioRequest
+
+    TranscribeAudioResponse.add_member(:output_configuration, Shapes::ShapeRef.new(shape: SyncOutputConfiguration, location_name: "OutputConfiguration"))
+    TranscribeAudioResponse.add_member(:transcript_response, Shapes::ShapeRef.new(shape: TranscriptResponse, location_name: "TranscriptResponse"))
+    TranscribeAudioResponse.struct_class = Types::TranscribeAudioResponse
+
+    TranscribeAudioResults.add_member(:transcript, Shapes::ShapeRef.new(shape: String, location_name: "Transcript"))
+    TranscribeAudioResults.add_member(:items, Shapes::ShapeRef.new(shape: SyncItemList, location_name: "Items"))
+    TranscribeAudioResults.struct_class = Types::TranscribeAudioResults
+
     Transcript.add_member(:transcript_file_uri, Shapes::ShapeRef.new(shape: Uri, location_name: "TranscriptFileUri"))
     Transcript.add_member(:redacted_transcript_file_uri, Shapes::ShapeRef.new(shape: Uri, location_name: "RedactedTranscriptFileUri"))
     Transcript.struct_class = Types::Transcript
@@ -930,6 +1028,11 @@ module Aws::TranscribeService
     TranscriptFilter.add_member(:negate, Shapes::ShapeRef.new(shape: Boolean, location_name: "Negate"))
     TranscriptFilter.add_member(:targets, Shapes::ShapeRef.new(shape: StringTargetList, required: true, location_name: "Targets"))
     TranscriptFilter.struct_class = Types::TranscriptFilter
+
+    TranscriptResponse.add_member(:metadata, Shapes::ShapeRef.new(shape: TranscribeAudioMetadata, location_name: "Metadata"))
+    TranscriptResponse.add_member(:results, Shapes::ShapeRef.new(shape: TranscribeAudioResults, location_name: "Results"))
+    TranscriptResponse.add_member(:redacted_results, Shapes::ShapeRef.new(shape: TranscribeAudioResults, location_name: "RedactedResults"))
+    TranscriptResponse.struct_class = Types::TranscriptResponse
 
     TranscriptionJob.add_member(:transcription_job_name, Shapes::ShapeRef.new(shape: TranscriptionJobName, location_name: "TranscriptionJobName"))
     TranscriptionJob.add_member(:transcription_job_status, Shapes::ShapeRef.new(shape: TranscriptionJobStatus, location_name: "TranscriptionJobStatus"))
@@ -1039,10 +1142,21 @@ module Aws::TranscribeService
 
     Vocabularies.member = Shapes::ShapeRef.new(shape: VocabularyInfo)
 
+    VocabularyFilterEntry.add_member(:language, Shapes::ShapeRef.new(shape: SyncLanguage, required: true, location_name: "Language"))
+    VocabularyFilterEntry.add_member(:vocabulary_filter_name, Shapes::ShapeRef.new(shape: VocabularyFilterName, location_name: "VocabularyFilterName"))
+    VocabularyFilterEntry.add_member(:words, Shapes::ShapeRef.new(shape: Words, location_name: "Words"))
+    VocabularyFilterEntry.struct_class = Types::VocabularyFilterEntry
+
+    VocabularyFilterEntryList.member = Shapes::ShapeRef.new(shape: VocabularyFilterEntry)
+
     VocabularyFilterInfo.add_member(:vocabulary_filter_name, Shapes::ShapeRef.new(shape: VocabularyFilterName, location_name: "VocabularyFilterName"))
     VocabularyFilterInfo.add_member(:language_code, Shapes::ShapeRef.new(shape: LanguageCode, location_name: "LanguageCode"))
     VocabularyFilterInfo.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "LastModifiedTime"))
     VocabularyFilterInfo.struct_class = Types::VocabularyFilterInfo
+
+    VocabularyFilterSettings.add_member(:vocabulary_filter_method, Shapes::ShapeRef.new(shape: VocabularyFilterMethod, required: true, location_name: "VocabularyFilterMethod"))
+    VocabularyFilterSettings.add_member(:filters, Shapes::ShapeRef.new(shape: VocabularyFilterEntryList, required: true, location_name: "Filters"))
+    VocabularyFilterSettings.struct_class = Types::VocabularyFilterSettings
 
     VocabularyFilters.member = Shapes::ShapeRef.new(shape: VocabularyFilterInfo)
 
@@ -1051,6 +1165,19 @@ module Aws::TranscribeService
     VocabularyInfo.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "LastModifiedTime"))
     VocabularyInfo.add_member(:vocabulary_state, Shapes::ShapeRef.new(shape: VocabularyState, location_name: "VocabularyState"))
     VocabularyInfo.struct_class = Types::VocabularyInfo
+
+    VocabularyPhrase.add_member(:text, Shapes::ShapeRef.new(shape: VocabularyText, required: true, location_name: "Text"))
+    VocabularyPhrase.add_member(:display_as, Shapes::ShapeRef.new(shape: VocabularyText, location_name: "DisplayAs"))
+    VocabularyPhrase.struct_class = Types::VocabularyPhrase
+
+    VocabularyPhraseList.member = Shapes::ShapeRef.new(shape: VocabularyPhrase)
+
+    VocabularySettingsEntry.add_member(:language, Shapes::ShapeRef.new(shape: SyncLanguage, required: true, location_name: "Language"))
+    VocabularySettingsEntry.add_member(:vocabulary_name, Shapes::ShapeRef.new(shape: VocabularyName, location_name: "VocabularyName"))
+    VocabularySettingsEntry.add_member(:phrases, Shapes::ShapeRef.new(shape: VocabularyPhraseList, location_name: "Phrases"))
+    VocabularySettingsEntry.struct_class = Types::VocabularySettingsEntry
+
+    VocabularySettingsList.member = Shapes::ShapeRef.new(shape: VocabularySettingsEntry)
 
     Words.member = Shapes::ShapeRef.new(shape: Word)
 
@@ -1065,8 +1192,8 @@ module Aws::TranscribeService
         "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "transcribe",
         "jsonVersion" => "1.1",
-        "protocol" => "json",
-        "protocols" => ["json"],
+        "protocol" => "smithy-rpc-v2-cbor",
+        "protocols" => ["smithy-rpc-v2-cbor", "json"],
         "serviceFullName" => "Amazon Transcribe Service",
         "serviceId" => "Transcribe",
         "signatureVersion" => "v4",
@@ -1568,6 +1695,17 @@ module Aws::TranscribeService
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+      end)
+
+      api.add_operation(:transcribe_audio, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "TranscribeAudio"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: TranscribeAudioRequest)
+        o.output = Shapes::ShapeRef.new(shape: TranscribeAudioResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
       end)

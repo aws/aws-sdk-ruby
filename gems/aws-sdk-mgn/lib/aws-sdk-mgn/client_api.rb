@@ -40,6 +40,10 @@ module Aws::Mgn
     AssociateSourceServersRequest = Shapes::StructureShape.new(name: 'AssociateSourceServersRequest')
     AssociateSourceServersRequestSourceServerIDs = Shapes::ListShape.new(name: 'AssociateSourceServersRequestSourceServerIDs')
     AssociateSourceServersResponse = Shapes::StructureShape.new(name: 'AssociateSourceServersResponse')
+    AssociationCidrList = Shapes::ListShape.new(name: 'AssociationCidrList')
+    AssociationUserProvidedID = Shapes::StringShape.new(name: 'AssociationUserProvidedID')
+    AssociationUserProvidedIDList = Shapes::ListShape.new(name: 'AssociationUserProvidedIDList')
+    AssociationVmUUIDList = Shapes::ListShape.new(name: 'AssociationVmUUIDList')
     BandwidthThrottling = Shapes::IntegerShape.new(name: 'BandwidthThrottling')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     BootMode = Shapes::StringShape.new(name: 'BootMode')
@@ -70,6 +74,7 @@ module Aws::Mgn
     ConnectorSsmCommandConfig = Shapes::StructureShape.new(name: 'ConnectorSsmCommandConfig')
     ConnectorsList = Shapes::ListShape.new(name: 'ConnectorsList')
     ConstructID = Shapes::StringShape.new(name: 'ConstructID')
+    ConstructLogicalID = Shapes::StringShape.new(name: 'ConstructLogicalID')
     ConstructProperties = Shapes::MapShape.new(name: 'ConstructProperties')
     ConstructPropertyKey = Shapes::StringShape.new(name: 'ConstructPropertyKey')
     Cpus = Shapes::ListShape.new(name: 'Cpus')
@@ -77,6 +82,9 @@ module Aws::Mgn
     CreateConnectorRequest = Shapes::StructureShape.new(name: 'CreateConnectorRequest')
     CreateLaunchConfigurationTemplateRequest = Shapes::StructureShape.new(name: 'CreateLaunchConfigurationTemplateRequest')
     CreateNetworkMigrationDefinitionRequest = Shapes::StructureShape.new(name: 'CreateNetworkMigrationDefinitionRequest')
+    CreateOperation = Shapes::StructureShape.new(name: 'CreateOperation')
+    CreateRemoteSourceActionRequest = Shapes::StructureShape.new(name: 'CreateRemoteSourceActionRequest')
+    CreateRemoteSourceActionResponse = Shapes::StructureShape.new(name: 'CreateRemoteSourceActionResponse')
     CreateReplicationConfigurationTemplateRequest = Shapes::StructureShape.new(name: 'CreateReplicationConfigurationTemplateRequest')
     CreateWaveRequest = Shapes::StructureShape.new(name: 'CreateWaveRequest')
     DataReplicationError = Shapes::StructureShape.new(name: 'DataReplicationError')
@@ -90,6 +98,7 @@ module Aws::Mgn
     DataReplicationInitiationStepStatus = Shapes::StringShape.new(name: 'DataReplicationInitiationStepStatus')
     DataReplicationInitiationSteps = Shapes::ListShape.new(name: 'DataReplicationInitiationSteps')
     DataReplicationState = Shapes::StringShape.new(name: 'DataReplicationState')
+    DefinitionType = Shapes::StringShape.new(name: 'DefinitionType')
     DeleteApplicationRequest = Shapes::StructureShape.new(name: 'DeleteApplicationRequest')
     DeleteApplicationResponse = Shapes::StructureShape.new(name: 'DeleteApplicationResponse')
     DeleteConnectorRequest = Shapes::StructureShape.new(name: 'DeleteConnectorRequest')
@@ -99,7 +108,10 @@ module Aws::Mgn
     DeleteLaunchConfigurationTemplateResponse = Shapes::StructureShape.new(name: 'DeleteLaunchConfigurationTemplateResponse')
     DeleteNetworkMigrationDefinitionRequest = Shapes::StructureShape.new(name: 'DeleteNetworkMigrationDefinitionRequest')
     DeleteNetworkMigrationDefinitionResponse = Shapes::StructureShape.new(name: 'DeleteNetworkMigrationDefinitionResponse')
+    DeleteOnTermination = Shapes::StringShape.new(name: 'DeleteOnTermination')
     DeleteOperation = Shapes::StructureShape.new(name: 'DeleteOperation')
+    DeleteRemoteSourceActionRequest = Shapes::StructureShape.new(name: 'DeleteRemoteSourceActionRequest')
+    DeleteRemoteSourceActionResponse = Shapes::StructureShape.new(name: 'DeleteRemoteSourceActionResponse')
     DeleteReplicationConfigurationTemplateRequest = Shapes::StructureShape.new(name: 'DeleteReplicationConfigurationTemplateRequest')
     DeleteReplicationConfigurationTemplateResponse = Shapes::StructureShape.new(name: 'DeleteReplicationConfigurationTemplateResponse')
     DeleteSourceServerRequest = Shapes::StructureShape.new(name: 'DeleteSourceServerRequest')
@@ -132,11 +144,14 @@ module Aws::Mgn
     DisconnectFromServiceRequest = Shapes::StructureShape.new(name: 'DisconnectFromServiceRequest')
     Disk = Shapes::StructureShape.new(name: 'Disk')
     Disks = Shapes::ListShape.new(name: 'Disks')
+    Document = Shapes::DocumentShape.new(name: 'Document', document: true)
     DocumentVersion = Shapes::StringShape.new(name: 'DocumentVersion')
     EC2InstanceID = Shapes::StringShape.new(name: 'EC2InstanceID')
     EC2InstanceType = Shapes::StringShape.new(name: 'EC2InstanceType')
     EC2LaunchConfigurationTemplateID = Shapes::StringShape.new(name: 'EC2LaunchConfigurationTemplateID')
     EncryptionAlgorithm = Shapes::StringShape.new(name: 'EncryptionAlgorithm')
+    EnrichedProperties = Shapes::MapShape.new(name: 'EnrichedProperties')
+    EnrichedPropertyKey = Shapes::StringShape.new(name: 'EnrichedPropertyKey')
     EnrichmentSourceS3Configuration = Shapes::StructureShape.new(name: 'EnrichmentSourceS3Configuration')
     EnrichmentTargetS3Configuration = Shapes::StructureShape.new(name: 'EnrichmentTargetS3Configuration')
     ErrorDetails = Shapes::StructureShape.new(name: 'ErrorDetails')
@@ -156,6 +171,8 @@ module Aws::Mgn
     Float = Shapes::FloatShape.new(name: 'Float')
     FqdnForActionFramework = Shapes::StringShape.new(name: 'FqdnForActionFramework')
     FsxOntapConfiguration = Shapes::StructureShape.new(name: 'FsxOntapConfiguration')
+    GetLaunchConfigurationDefaultsRequest = Shapes::StructureShape.new(name: 'GetLaunchConfigurationDefaultsRequest')
+    GetLaunchConfigurationDefaultsResponse = Shapes::StructureShape.new(name: 'GetLaunchConfigurationDefaultsResponse')
     GetLaunchConfigurationRequest = Shapes::StructureShape.new(name: 'GetLaunchConfigurationRequest')
     GetNetworkMigrationDefinitionRequest = Shapes::StructureShape.new(name: 'GetNetworkMigrationDefinitionRequest')
     GetNetworkMigrationMapperSegmentConstructRequest = Shapes::StructureShape.new(name: 'GetNetworkMigrationMapperSegmentConstructRequest')
@@ -187,6 +204,14 @@ module Aws::Mgn
     InitializeServiceRequest = Shapes::StructureShape.new(name: 'InitializeServiceRequest')
     InitializeServiceResponse = Shapes::StructureShape.new(name: 'InitializeServiceResponse')
     InitiatedBy = Shapes::StringShape.new(name: 'InitiatedBy')
+    InsightID = Shapes::StringShape.new(name: 'InsightID')
+    InsightLevel = Shapes::StringShape.new(name: 'InsightLevel')
+    InsightMessage = Shapes::StructureShape.new(name: 'InsightMessage')
+    InsightMessageText = Shapes::StringShape.new(name: 'InsightMessageText')
+    InsightProducerID = Shapes::StringShape.new(name: 'InsightProducerID')
+    InsightProducerName = Shapes::StringShape.new(name: 'InsightProducerName')
+    InsightProducerType = Shapes::StringShape.new(name: 'InsightProducerType')
+    InsightType = Shapes::StringShape.new(name: 'InsightType')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
     InternetProtocol = Shapes::StringShape.new(name: 'InternetProtocol')
     Iops = Shapes::IntegerShape.new(name: 'Iops')
@@ -278,6 +303,10 @@ module Aws::Mgn
     ListNetworkMigrationExecutionRequestFilters = Shapes::StructureShape.new(name: 'ListNetworkMigrationExecutionRequestFilters')
     ListNetworkMigrationExecutionsRequest = Shapes::StructureShape.new(name: 'ListNetworkMigrationExecutionsRequest')
     ListNetworkMigrationExecutionsResponse = Shapes::StructureShape.new(name: 'ListNetworkMigrationExecutionsResponse')
+    ListNetworkMigrationInsightsFilters = Shapes::StructureShape.new(name: 'ListNetworkMigrationInsightsFilters')
+    ListNetworkMigrationInsightsRequest = Shapes::StructureShape.new(name: 'ListNetworkMigrationInsightsRequest')
+    ListNetworkMigrationInsightsResponse = Shapes::StructureShape.new(name: 'ListNetworkMigrationInsightsResponse')
+    ListNetworkMigrationInsightsTypesFilter = Shapes::ListShape.new(name: 'ListNetworkMigrationInsightsTypesFilter')
     ListNetworkMigrationMapperSegmentConstructTypesFilter = Shapes::ListShape.new(name: 'ListNetworkMigrationMapperSegmentConstructTypesFilter')
     ListNetworkMigrationMapperSegmentConstructsFilters = Shapes::StructureShape.new(name: 'ListNetworkMigrationMapperSegmentConstructsFilters')
     ListNetworkMigrationMapperSegmentConstructsIDsFilter = Shapes::ListShape.new(name: 'ListNetworkMigrationMapperSegmentConstructsIDsFilter')
@@ -295,6 +324,17 @@ module Aws::Mgn
     ListNetworkMigrationMappingsIDsFilter = Shapes::ListShape.new(name: 'ListNetworkMigrationMappingsIDsFilter')
     ListNetworkMigrationMappingsRequest = Shapes::StructureShape.new(name: 'ListNetworkMigrationMappingsRequest')
     ListNetworkMigrationMappingsResponse = Shapes::StructureShape.new(name: 'ListNetworkMigrationMappingsResponse')
+    ListRemoteSourceActionInvocationResultsRequest = Shapes::StructureShape.new(name: 'ListRemoteSourceActionInvocationResultsRequest')
+    ListRemoteSourceActionInvocationResultsResponse = Shapes::StructureShape.new(name: 'ListRemoteSourceActionInvocationResultsResponse')
+    ListRemoteSourceActionInvocationsRequest = Shapes::StructureShape.new(name: 'ListRemoteSourceActionInvocationsRequest')
+    ListRemoteSourceActionInvocationsRequestFilters = Shapes::StructureShape.new(name: 'ListRemoteSourceActionInvocationsRequestFilters')
+    ListRemoteSourceActionInvocationsResponse = Shapes::StructureShape.new(name: 'ListRemoteSourceActionInvocationsResponse')
+    ListRemoteSourceActionJobsRequest = Shapes::StructureShape.new(name: 'ListRemoteSourceActionJobsRequest')
+    ListRemoteSourceActionJobsRequestFilters = Shapes::StructureShape.new(name: 'ListRemoteSourceActionJobsRequestFilters')
+    ListRemoteSourceActionJobsResponse = Shapes::StructureShape.new(name: 'ListRemoteSourceActionJobsResponse')
+    ListRemoteSourceActionsRequest = Shapes::StructureShape.new(name: 'ListRemoteSourceActionsRequest')
+    ListRemoteSourceActionsRequestFilters = Shapes::StructureShape.new(name: 'ListRemoteSourceActionsRequestFilters')
+    ListRemoteSourceActionsResponse = Shapes::StructureShape.new(name: 'ListRemoteSourceActionsResponse')
     ListSourceServerActionsRequest = Shapes::StructureShape.new(name: 'ListSourceServerActionsRequest')
     ListSourceServerActionsResponse = Shapes::StructureShape.new(name: 'ListSourceServerActionsResponse')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
@@ -352,6 +392,8 @@ module Aws::Mgn
     NetworkMigrationFailedResourceDetails = Shapes::StructureShape.new(name: 'NetworkMigrationFailedResourceDetails')
     NetworkMigrationFailedResourceStatus = Shapes::StringShape.new(name: 'NetworkMigrationFailedResourceStatus')
     NetworkMigrationFailedResourcesList = Shapes::ListShape.new(name: 'NetworkMigrationFailedResourcesList')
+    NetworkMigrationInsight = Shapes::StructureShape.new(name: 'NetworkMigrationInsight')
+    NetworkMigrationInsightsList = Shapes::ListShape.new(name: 'NetworkMigrationInsightsList')
     NetworkMigrationJobID = Shapes::StringShape.new(name: 'NetworkMigrationJobID')
     NetworkMigrationJobStatus = Shapes::StringShape.new(name: 'NetworkMigrationJobStatus')
     NetworkMigrationMapperSegment = Shapes::StructureShape.new(name: 'NetworkMigrationMapperSegment')
@@ -366,8 +408,11 @@ module Aws::Mgn
     NetworkMigrationMappingsList = Shapes::ListShape.new(name: 'NetworkMigrationMappingsList')
     OS = Shapes::StructureShape.new(name: 'OS')
     OperatingSystemString = Shapes::StringShape.new(name: 'OperatingSystemString')
+    OperationConfigurationUnion = Shapes::UnionShape.new(name: 'OperationConfigurationUnion')
     OperationUnion = Shapes::UnionShape.new(name: 'OperationUnion')
     OrderType = Shapes::IntegerShape.new(name: 'OrderType')
+    OutpostARN = Shapes::StringShape.new(name: 'OutpostARN')
+    OutpostSnapshotLocation = Shapes::StringShape.new(name: 'OutpostSnapshotLocation')
     PaginationToken = Shapes::StringShape.new(name: 'PaginationToken')
     ParticipatingServer = Shapes::StructureShape.new(name: 'ParticipatingServer')
     ParticipatingServers = Shapes::ListShape.new(name: 'ParticipatingServers')
@@ -379,8 +424,31 @@ module Aws::Mgn
     PostLaunchActionsDeploymentType = Shapes::StringShape.new(name: 'PostLaunchActionsDeploymentType')
     PostLaunchActionsLaunchStatusList = Shapes::ListShape.new(name: 'PostLaunchActionsLaunchStatusList')
     PostLaunchActionsStatus = Shapes::StructureShape.new(name: 'PostLaunchActionsStatus')
+    PropertiesToDelete = Shapes::ListShape.new(name: 'PropertiesToDelete')
     PutSourceServerActionRequest = Shapes::StructureShape.new(name: 'PutSourceServerActionRequest')
     PutTemplateActionRequest = Shapes::StructureShape.new(name: 'PutTemplateActionRequest')
+    RemoteSourceAction = Shapes::StructureShape.new(name: 'RemoteSourceAction')
+    RemoteSourceActionArn = Shapes::StringShape.new(name: 'RemoteSourceActionArn')
+    RemoteSourceActionArns = Shapes::ListShape.new(name: 'RemoteSourceActionArns')
+    RemoteSourceActionArnsFilter = Shapes::ListShape.new(name: 'RemoteSourceActionArnsFilter')
+    RemoteSourceActionDescription = Shapes::StringShape.new(name: 'RemoteSourceActionDescription')
+    RemoteSourceActionID = Shapes::StringShape.new(name: 'RemoteSourceActionID')
+    RemoteSourceActionIDsFilter = Shapes::ListShape.new(name: 'RemoteSourceActionIDsFilter')
+    RemoteSourceActionInvocation = Shapes::StructureShape.new(name: 'RemoteSourceActionInvocation')
+    RemoteSourceActionInvocationResult = Shapes::StructureShape.new(name: 'RemoteSourceActionInvocationResult')
+    RemoteSourceActionInvocationResultsList = Shapes::ListShape.new(name: 'RemoteSourceActionInvocationResultsList')
+    RemoteSourceActionInvocationStatus = Shapes::StringShape.new(name: 'RemoteSourceActionInvocationStatus')
+    RemoteSourceActionInvocationStatusesFilter = Shapes::ListShape.new(name: 'RemoteSourceActionInvocationStatusesFilter')
+    RemoteSourceActionInvocationsList = Shapes::ListShape.new(name: 'RemoteSourceActionInvocationsList')
+    RemoteSourceActionJob = Shapes::StructureShape.new(name: 'RemoteSourceActionJob')
+    RemoteSourceActionJobID = Shapes::StringShape.new(name: 'RemoteSourceActionJobID')
+    RemoteSourceActionJobIDsFilter = Shapes::ListShape.new(name: 'RemoteSourceActionJobIDsFilter')
+    RemoteSourceActionJobStatus = Shapes::StringShape.new(name: 'RemoteSourceActionJobStatus')
+    RemoteSourceActionJobsList = Shapes::ListShape.new(name: 'RemoteSourceActionJobsList')
+    RemoteSourceActionName = Shapes::StringShape.new(name: 'RemoteSourceActionName')
+    RemoteSourceActionOperatingSystem = Shapes::StringShape.new(name: 'RemoteSourceActionOperatingSystem')
+    RemoteSourceActionTimeoutSeconds = Shapes::IntegerShape.new(name: 'RemoteSourceActionTimeoutSeconds')
+    RemoteSourceActionsList = Shapes::ListShape.new(name: 'RemoteSourceActionsList')
     RemoveSourceServerActionRequest = Shapes::StructureShape.new(name: 'RemoveSourceServerActionRequest')
     RemoveSourceServerActionResponse = Shapes::StructureShape.new(name: 'RemoveSourceServerActionResponse')
     RemoveTemplateActionRequest = Shapes::StructureShape.new(name: 'RemoveTemplateActionRequest')
@@ -413,13 +481,21 @@ module Aws::Mgn
     ScopeTagValue = Shapes::StringShape.new(name: 'ScopeTagValue')
     ScopeTagsMap = Shapes::MapShape.new(name: 'ScopeTagsMap')
     SecretArn = Shapes::StringShape.new(name: 'SecretArn')
+    SecurityGroupAssociations = Shapes::StructureShape.new(name: 'SecurityGroupAssociations')
+    SecurityGroupConfiguration = Shapes::StructureShape.new(name: 'SecurityGroupConfiguration')
     SecurityGroupID = Shapes::StringShape.new(name: 'SecurityGroupID')
     SecurityGroupMappingStrategy = Shapes::StringShape.new(name: 'SecurityGroupMappingStrategy')
+    SecurityGroupRuleConfiguration = Shapes::StructureShape.new(name: 'SecurityGroupRuleConfiguration')
     SegmentConstructDescription = Shapes::StringShape.new(name: 'SegmentConstructDescription')
     SegmentConstructName = Shapes::StringShape.new(name: 'SegmentConstructName')
+    SegmentCreateOperation = Shapes::StructureShape.new(name: 'SegmentCreateOperation')
+    SegmentDeleteOperation = Shapes::StructureShape.new(name: 'SegmentDeleteOperation')
     SegmentDescription = Shapes::StringShape.new(name: 'SegmentDescription')
     SegmentID = Shapes::StringShape.new(name: 'SegmentID')
+    SegmentLogicalID = Shapes::StringShape.new(name: 'SegmentLogicalID')
     SegmentName = Shapes::StringShape.new(name: 'SegmentName')
+    SegmentOperation = Shapes::UnionShape.new(name: 'SegmentOperation')
+    SegmentUpdateOperation = Shapes::StructureShape.new(name: 'SegmentUpdateOperation')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
     SmallBoundedString = Shapes::StringShape.new(name: 'SmallBoundedString')
     SourceConfiguration = Shapes::StructureShape.new(name: 'SourceConfiguration')
@@ -431,12 +507,17 @@ module Aws::Mgn
     SourceServerActionDocument = Shapes::StructureShape.new(name: 'SourceServerActionDocument')
     SourceServerActionDocuments = Shapes::ListShape.new(name: 'SourceServerActionDocuments')
     SourceServerActionsRequestFilters = Shapes::StructureShape.new(name: 'SourceServerActionsRequestFilters')
+    SourceServerArn = Shapes::StringShape.new(name: 'SourceServerArn')
+    SourceServerArns = Shapes::ListShape.new(name: 'SourceServerArns')
+    SourceServerArnsFilter = Shapes::ListShape.new(name: 'SourceServerArnsFilter')
     SourceServerConnectorAction = Shapes::StructureShape.new(name: 'SourceServerConnectorAction')
     SourceServerID = Shapes::StringShape.new(name: 'SourceServerID')
+    SourceServerVolumeConfiguration = Shapes::StructureShape.new(name: 'SourceServerVolumeConfiguration')
     SourceServersList = Shapes::ListShape.new(name: 'SourceServersList')
     SplitConstruct = Shapes::StructureShape.new(name: 'SplitConstruct')
     SplitConstructs = Shapes::ListShape.new(name: 'SplitConstructs')
     SplitOperation = Shapes::StructureShape.new(name: 'SplitOperation')
+    SsmCommandInvocationID = Shapes::StringShape.new(name: 'SsmCommandInvocationID')
     SsmDocument = Shapes::StructureShape.new(name: 'SsmDocument')
     SsmDocumentExternalParameters = Shapes::MapShape.new(name: 'SsmDocumentExternalParameters')
     SsmDocumentName = Shapes::StringShape.new(name: 'SsmDocumentName')
@@ -473,6 +554,8 @@ module Aws::Mgn
     StartNetworkMigrationMappingUpdateResponse = Shapes::StructureShape.new(name: 'StartNetworkMigrationMappingUpdateResponse')
     StartNetworkMigrationMappingUpdateSegment = Shapes::StructureShape.new(name: 'StartNetworkMigrationMappingUpdateSegment')
     StartNetworkMigrationMappingUpdateSegments = Shapes::ListShape.new(name: 'StartNetworkMigrationMappingUpdateSegments')
+    StartRemoteSourceActionJobRequest = Shapes::StructureShape.new(name: 'StartRemoteSourceActionJobRequest')
+    StartRemoteSourceActionJobResponse = Shapes::StructureShape.new(name: 'StartRemoteSourceActionJobResponse')
     StartReplicationRequest = Shapes::StructureShape.new(name: 'StartReplicationRequest')
     StartTestRequest = Shapes::StructureShape.new(name: 'StartTestRequest')
     StartTestRequestSourceServerIDs = Shapes::ListShape.new(name: 'StartTestRequestSourceServerIDs')
@@ -511,11 +594,16 @@ module Aws::Mgn
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UpdateApplicationRequest = Shapes::StructureShape.new(name: 'UpdateApplicationRequest')
     UpdateConnectorRequest = Shapes::StructureShape.new(name: 'UpdateConnectorRequest')
+    UpdateLaunchConfigurationDefaultsRequest = Shapes::StructureShape.new(name: 'UpdateLaunchConfigurationDefaultsRequest')
+    UpdateLaunchConfigurationDefaultsResponse = Shapes::StructureShape.new(name: 'UpdateLaunchConfigurationDefaultsResponse')
     UpdateLaunchConfigurationRequest = Shapes::StructureShape.new(name: 'UpdateLaunchConfigurationRequest')
     UpdateLaunchConfigurationTemplateRequest = Shapes::StructureShape.new(name: 'UpdateLaunchConfigurationTemplateRequest')
     UpdateNetworkMigrationDefinitionRequest = Shapes::StructureShape.new(name: 'UpdateNetworkMigrationDefinitionRequest')
     UpdateNetworkMigrationMapperSegmentRequest = Shapes::StructureShape.new(name: 'UpdateNetworkMigrationMapperSegmentRequest')
     UpdateOperation = Shapes::StructureShape.new(name: 'UpdateOperation')
+    UpdateOperationV2 = Shapes::StructureShape.new(name: 'UpdateOperationV2')
+    UpdateRemoteSourceActionRequest = Shapes::StructureShape.new(name: 'UpdateRemoteSourceActionRequest')
+    UpdateRemoteSourceActionResponse = Shapes::StructureShape.new(name: 'UpdateRemoteSourceActionResponse')
     UpdateReplicationConfigurationRequest = Shapes::StructureShape.new(name: 'UpdateReplicationConfigurationRequest')
     UpdateReplicationConfigurationTemplateRequest = Shapes::StructureShape.new(name: 'UpdateReplicationConfigurationTemplateRequest')
     UpdateSourceServerReplicationTypeRequest = Shapes::StructureShape.new(name: 'UpdateSourceServerReplicationTypeRequest')
@@ -529,6 +617,7 @@ module Aws::Mgn
     VcenterClient = Shapes::StructureShape.new(name: 'VcenterClient')
     VcenterClientID = Shapes::StringShape.new(name: 'VcenterClientID')
     VcenterClientList = Shapes::ListShape.new(name: 'VcenterClientList')
+    VmUUID = Shapes::StringShape.new(name: 'VmUUID')
     VolumeInitializationRate = Shapes::IntegerShape.new(name: 'VolumeInitializationRate')
     VolumeType = Shapes::StringShape.new(name: 'VolumeType')
     VpcID = Shapes::StringShape.new(name: 'VpcID')
@@ -598,6 +687,12 @@ module Aws::Mgn
     AssociateSourceServersRequestSourceServerIDs.member = Shapes::ShapeRef.new(shape: SourceServerID)
 
     AssociateSourceServersResponse.struct_class = Types::AssociateSourceServersResponse
+
+    AssociationCidrList.member = Shapes::ShapeRef.new(shape: CidrBlock)
+
+    AssociationUserProvidedIDList.member = Shapes::ShapeRef.new(shape: AssociationUserProvidedID)
+
+    AssociationVmUUIDList.member = Shapes::ShapeRef.new(shape: VmUUID)
 
     CPU.add_member(:cores, Shapes::ShapeRef.new(shape: PositiveInteger, location_name: "cores"))
     CPU.add_member(:model_name, Shapes::ShapeRef.new(shape: BoundedString, location_name: "modelName"))
@@ -677,6 +772,7 @@ module Aws::Mgn
     CreateLaunchConfigurationTemplateRequest.add_member(:post_launch_actions, Shapes::ShapeRef.new(shape: PostLaunchActions, location_name: "postLaunchActions"))
     CreateLaunchConfigurationTemplateRequest.add_member(:enable_map_auto_tagging, Shapes::ShapeRef.new(shape: Boolean, location_name: "enableMapAutoTagging"))
     CreateLaunchConfigurationTemplateRequest.add_member(:map_auto_tagging_mpe_id, Shapes::ShapeRef.new(shape: TagValue, location_name: "mapAutoTaggingMpeID"))
+    CreateLaunchConfigurationTemplateRequest.add_member(:map_auto_tagging_key, Shapes::ShapeRef.new(shape: TagKey, location_name: "mapAutoTaggingKey"))
     CreateLaunchConfigurationTemplateRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
     CreateLaunchConfigurationTemplateRequest.add_member(:launch_disposition, Shapes::ShapeRef.new(shape: LaunchDisposition, location_name: "launchDisposition"))
     CreateLaunchConfigurationTemplateRequest.add_member(:target_instance_type_right_sizing_method, Shapes::ShapeRef.new(shape: TargetInstanceTypeRightSizingMethod, location_name: "targetInstanceTypeRightSizingMethod"))
@@ -692,9 +788,11 @@ module Aws::Mgn
     CreateLaunchConfigurationTemplateRequest.add_member(:parameters_encryption_key, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "parametersEncryptionKey"))
     CreateLaunchConfigurationTemplateRequest.struct_class = Types::CreateLaunchConfigurationTemplateRequest
 
+    CreateNetworkMigrationDefinitionRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientIdempotencyToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateNetworkMigrationDefinitionRequest.add_member(:name, Shapes::ShapeRef.new(shape: NetworkMigrationDefinitionName, required: true, location_name: "name"))
     CreateNetworkMigrationDefinitionRequest.add_member(:description, Shapes::ShapeRef.new(shape: NetworkMigrationDefinitionDescription, location_name: "description"))
     CreateNetworkMigrationDefinitionRequest.add_member(:source_configurations, Shapes::ShapeRef.new(shape: SourceConfigurationList, location_name: "sourceConfigurations"))
+    CreateNetworkMigrationDefinitionRequest.add_member(:definition_type, Shapes::ShapeRef.new(shape: DefinitionType, location_name: "definitionType"))
     CreateNetworkMigrationDefinitionRequest.add_member(:target_s3_configuration, Shapes::ShapeRef.new(shape: TargetS3Configuration, required: true, location_name: "targetS3Configuration"))
     CreateNetworkMigrationDefinitionRequest.add_member(:target_network, Shapes::ShapeRef.new(shape: TargetNetwork, required: true, location_name: "targetNetwork"))
     CreateNetworkMigrationDefinitionRequest.add_member(:target_deployment, Shapes::ShapeRef.new(shape: TargetDeployment, location_name: "targetDeployment"))
@@ -703,6 +801,31 @@ module Aws::Mgn
     CreateNetworkMigrationDefinitionRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
     CreateNetworkMigrationDefinitionRequest.add_member(:scope_tags, Shapes::ShapeRef.new(shape: ScopeTagsMap, location_name: "scopeTags"))
     CreateNetworkMigrationDefinitionRequest.struct_class = Types::CreateNetworkMigrationDefinitionRequest
+
+    CreateOperation.add_member(:name, Shapes::ShapeRef.new(shape: SegmentConstructName, location_name: "name"))
+    CreateOperation.add_member(:excluded, Shapes::ShapeRef.new(shape: Boolean, location_name: "excluded"))
+    CreateOperation.add_member(:properties, Shapes::ShapeRef.new(shape: EnrichedProperties, location_name: "properties"))
+    CreateOperation.add_member(:configuration, Shapes::ShapeRef.new(shape: OperationConfigurationUnion, location_name: "configuration"))
+    CreateOperation.struct_class = Types::CreateOperation
+
+    CreateRemoteSourceActionRequest.add_member(:name, Shapes::ShapeRef.new(shape: RemoteSourceActionName, required: true, location_name: "name"))
+    CreateRemoteSourceActionRequest.add_member(:description, Shapes::ShapeRef.new(shape: RemoteSourceActionDescription, location_name: "description"))
+    CreateRemoteSourceActionRequest.add_member(:ssm_parameter_name, Shapes::ShapeRef.new(shape: SsmParameterStoreParameterName, required: true, location_name: "ssmParameterName"))
+    CreateRemoteSourceActionRequest.add_member(:timeout_seconds, Shapes::ShapeRef.new(shape: RemoteSourceActionTimeoutSeconds, location_name: "timeoutSeconds"))
+    CreateRemoteSourceActionRequest.add_member(:operating_system, Shapes::ShapeRef.new(shape: RemoteSourceActionOperatingSystem, location_name: "operatingSystem"))
+    CreateRemoteSourceActionRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
+    CreateRemoteSourceActionRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountID, location_name: "accountID"))
+    CreateRemoteSourceActionRequest.struct_class = Types::CreateRemoteSourceActionRequest
+
+    CreateRemoteSourceActionResponse.add_member(:remote_source_action_id, Shapes::ShapeRef.new(shape: RemoteSourceActionID, location_name: "remoteSourceActionID"))
+    CreateRemoteSourceActionResponse.add_member(:arn, Shapes::ShapeRef.new(shape: ARN, location_name: "arn"))
+    CreateRemoteSourceActionResponse.add_member(:name, Shapes::ShapeRef.new(shape: RemoteSourceActionName, location_name: "name"))
+    CreateRemoteSourceActionResponse.add_member(:description, Shapes::ShapeRef.new(shape: RemoteSourceActionDescription, location_name: "description"))
+    CreateRemoteSourceActionResponse.add_member(:ssm_parameter_name, Shapes::ShapeRef.new(shape: SsmParameterStoreParameterName, location_name: "ssmParameterName"))
+    CreateRemoteSourceActionResponse.add_member(:timeout_seconds, Shapes::ShapeRef.new(shape: RemoteSourceActionTimeoutSeconds, location_name: "timeoutSeconds"))
+    CreateRemoteSourceActionResponse.add_member(:operating_system, Shapes::ShapeRef.new(shape: OperatingSystemString, location_name: "operatingSystem"))
+    CreateRemoteSourceActionResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
+    CreateRemoteSourceActionResponse.struct_class = Types::CreateRemoteSourceActionResponse
 
     CreateReplicationConfigurationTemplateRequest.add_member(:staging_area_subnet_id, Shapes::ShapeRef.new(shape: SubnetID, required: true, location_name: "stagingAreaSubnetId"))
     CreateReplicationConfigurationTemplateRequest.add_member(:associate_default_security_group, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "associateDefaultSecurityGroup"))
@@ -720,6 +843,7 @@ module Aws::Mgn
     CreateReplicationConfigurationTemplateRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
     CreateReplicationConfigurationTemplateRequest.add_member(:internet_protocol, Shapes::ShapeRef.new(shape: InternetProtocol, location_name: "internetProtocol"))
     CreateReplicationConfigurationTemplateRequest.add_member(:store_snapshot_on_local_zone, Shapes::ShapeRef.new(shape: Boolean, location_name: "storeSnapshotOnLocalZone"))
+    CreateReplicationConfigurationTemplateRequest.add_member(:outpost_snapshot_location, Shapes::ShapeRef.new(shape: OutpostSnapshotLocation, location_name: "outpostSnapshotLocation"))
     CreateReplicationConfigurationTemplateRequest.add_member(:storage_configuration, Shapes::ShapeRef.new(shape: StorageConfiguration, location_name: "storageConfiguration"))
     CreateReplicationConfigurationTemplateRequest.struct_class = Types::CreateReplicationConfigurationTemplateRequest
 
@@ -741,6 +865,7 @@ module Aws::Mgn
     DataReplicationInfo.add_member(:data_replication_error, Shapes::ShapeRef.new(shape: DataReplicationError, location_name: "dataReplicationError"))
     DataReplicationInfo.add_member(:last_snapshot_date_time, Shapes::ShapeRef.new(shape: ISO8601DatetimeString, location_name: "lastSnapshotDateTime"))
     DataReplicationInfo.add_member(:replicator_id, Shapes::ShapeRef.new(shape: ReplicatorID, location_name: "replicatorId"))
+    DataReplicationInfo.add_member(:staging_outpost_arn, Shapes::ShapeRef.new(shape: OutpostARN, location_name: "stagingOutpostArn"))
     DataReplicationInfo.struct_class = Types::DataReplicationInfo
 
     DataReplicationInfoReplicatedDisk.add_member(:device_name, Shapes::ShapeRef.new(shape: BoundedString, location_name: "deviceName"))
@@ -789,6 +914,12 @@ module Aws::Mgn
     DeleteNetworkMigrationDefinitionResponse.struct_class = Types::DeleteNetworkMigrationDefinitionResponse
 
     DeleteOperation.struct_class = Types::DeleteOperation
+
+    DeleteRemoteSourceActionRequest.add_member(:remote_source_action_id, Shapes::ShapeRef.new(shape: RemoteSourceActionID, required: true, location_name: "remoteSourceActionID"))
+    DeleteRemoteSourceActionRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountID, location_name: "accountID"))
+    DeleteRemoteSourceActionRequest.struct_class = Types::DeleteRemoteSourceActionRequest
+
+    DeleteRemoteSourceActionResponse.struct_class = Types::DeleteRemoteSourceActionResponse
 
     DeleteReplicationConfigurationTemplateRequest.add_member(:replication_configuration_template_id, Shapes::ShapeRef.new(shape: ReplicationConfigurationTemplateID, required: true, location_name: "replicationConfigurationTemplateID"))
     DeleteReplicationConfigurationTemplateRequest.struct_class = Types::DeleteReplicationConfigurationTemplateRequest
@@ -910,6 +1041,9 @@ module Aws::Mgn
 
     Disks.member = Shapes::ShapeRef.new(shape: Disk)
 
+    EnrichedProperties.key = Shapes::ShapeRef.new(shape: EnrichedPropertyKey)
+    EnrichedProperties.value = Shapes::ShapeRef.new(shape: Document)
+
     EnrichmentSourceS3Configuration.add_member(:s3_bucket, Shapes::ShapeRef.new(shape: S3BucketName, required: true, location_name: "s3Bucket"))
     EnrichmentSourceS3Configuration.add_member(:s3_bucket_owner, Shapes::ShapeRef.new(shape: AccountID, required: true, location_name: "s3BucketOwner"))
     EnrichmentSourceS3Configuration.add_member(:s3_key, Shapes::ShapeRef.new(shape: S3KeyName, required: true, location_name: "s3Key"))
@@ -962,6 +1096,16 @@ module Aws::Mgn
     FsxOntapConfiguration.add_member(:storage_virtual_machine_id, Shapes::ShapeRef.new(shape: StorageVirtualMachineId, required: true, location_name: "storageVirtualMachineId"))
     FsxOntapConfiguration.add_member(:credentials_secret_arn, Shapes::ShapeRef.new(shape: SecretArn, required: true, location_name: "credentialsSecretArn"))
     FsxOntapConfiguration.struct_class = Types::FsxOntapConfiguration
+
+    GetLaunchConfigurationDefaultsRequest.add_member(:source_server_id, Shapes::ShapeRef.new(shape: SourceServerID, required: true, location_name: "sourceServerID"))
+    GetLaunchConfigurationDefaultsRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountID, location_name: "accountID"))
+    GetLaunchConfigurationDefaultsRequest.struct_class = Types::GetLaunchConfigurationDefaultsRequest
+
+    GetLaunchConfigurationDefaultsResponse.add_member(:source_server_id, Shapes::ShapeRef.new(shape: SourceServerID, location_name: "sourceServerID"))
+    GetLaunchConfigurationDefaultsResponse.add_member(:small_volume_max_size, Shapes::ShapeRef.new(shape: PositiveInteger, location_name: "smallVolumeMaxSize"))
+    GetLaunchConfigurationDefaultsResponse.add_member(:small_volume_configuration, Shapes::ShapeRef.new(shape: SourceServerVolumeConfiguration, location_name: "smallVolumeConfiguration"))
+    GetLaunchConfigurationDefaultsResponse.add_member(:large_volume_configuration, Shapes::ShapeRef.new(shape: SourceServerVolumeConfiguration, location_name: "largeVolumeConfiguration"))
+    GetLaunchConfigurationDefaultsResponse.struct_class = Types::GetLaunchConfigurationDefaultsResponse
 
     GetLaunchConfigurationRequest.add_member(:source_server_id, Shapes::ShapeRef.new(shape: SourceServerID, required: true, location_name: "sourceServerID"))
     GetLaunchConfigurationRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountID, location_name: "accountID"))
@@ -1057,6 +1201,11 @@ module Aws::Mgn
 
     InitializeServiceResponse.struct_class = Types::InitializeServiceResponse
 
+    InsightMessage.add_member(:code, Shapes::ShapeRef.new(shape: BoundedString, location_name: "code"))
+    InsightMessage.add_member(:message, Shapes::ShapeRef.new(shape: InsightMessageText, location_name: "message"))
+    InsightMessage.add_member(:topic, Shapes::ShapeRef.new(shape: BoundedString, location_name: "topic"))
+    InsightMessage.struct_class = Types::InsightMessage
+
     InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: LargeBoundedString, required: true, location_name: "message"))
     InternalServerException.add_member(:retry_after_seconds, Shapes::ShapeRef.new(shape: PositiveInteger, location: "header", location_name: "Retry-After"))
     InternalServerException.struct_class = Types::InternalServerException
@@ -1117,6 +1266,7 @@ module Aws::Mgn
     LaunchConfiguration.add_member(:post_launch_actions, Shapes::ShapeRef.new(shape: PostLaunchActions, location_name: "postLaunchActions"))
     LaunchConfiguration.add_member(:enable_map_auto_tagging, Shapes::ShapeRef.new(shape: Boolean, location_name: "enableMapAutoTagging"))
     LaunchConfiguration.add_member(:map_auto_tagging_mpe_id, Shapes::ShapeRef.new(shape: TagValue, location_name: "mapAutoTaggingMpeID"))
+    LaunchConfiguration.add_member(:map_auto_tagging_key, Shapes::ShapeRef.new(shape: TagKey, location_name: "mapAutoTaggingKey"))
     LaunchConfiguration.struct_class = Types::LaunchConfiguration
 
     LaunchConfigurationTemplate.add_member(:launch_configuration_template_id, Shapes::ShapeRef.new(shape: LaunchConfigurationTemplateID, required: true, location_name: "launchConfigurationTemplateID"))
@@ -1124,6 +1274,7 @@ module Aws::Mgn
     LaunchConfigurationTemplate.add_member(:post_launch_actions, Shapes::ShapeRef.new(shape: PostLaunchActions, location_name: "postLaunchActions"))
     LaunchConfigurationTemplate.add_member(:enable_map_auto_tagging, Shapes::ShapeRef.new(shape: Boolean, location_name: "enableMapAutoTagging"))
     LaunchConfigurationTemplate.add_member(:map_auto_tagging_mpe_id, Shapes::ShapeRef.new(shape: TagValue, location_name: "mapAutoTaggingMpeID"))
+    LaunchConfigurationTemplate.add_member(:map_auto_tagging_key, Shapes::ShapeRef.new(shape: TagKey, location_name: "mapAutoTaggingKey"))
     LaunchConfigurationTemplate.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
     LaunchConfigurationTemplate.add_member(:ec2_launch_template_id, Shapes::ShapeRef.new(shape: EC2LaunchConfigurationTemplateID, location_name: "ec2LaunchTemplateID"))
     LaunchConfigurationTemplate.add_member(:launch_disposition, Shapes::ShapeRef.new(shape: LaunchDisposition, location_name: "launchDisposition"))
@@ -1407,6 +1558,25 @@ module Aws::Mgn
     ListNetworkMigrationExecutionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListNetworkMigrationExecutionsResponse.struct_class = Types::ListNetworkMigrationExecutionsResponse
 
+    ListNetworkMigrationInsightsFilters.add_member(:insight_types, Shapes::ShapeRef.new(shape: ListNetworkMigrationInsightsTypesFilter, location_name: "insightTypes"))
+    ListNetworkMigrationInsightsFilters.struct_class = Types::ListNetworkMigrationInsightsFilters
+
+    ListNetworkMigrationInsightsRequest.add_member(:network_migration_definition_id, Shapes::ShapeRef.new(shape: NetworkMigrationDefinitionID, required: true, location_name: "networkMigrationDefinitionID"))
+    ListNetworkMigrationInsightsRequest.add_member(:network_migration_execution_id, Shapes::ShapeRef.new(shape: NetworkMigrationExecutionID, location_name: "networkMigrationExecutionID"))
+    ListNetworkMigrationInsightsRequest.add_member(:producer_id, Shapes::ShapeRef.new(shape: InsightProducerID, location_name: "producerID"))
+    ListNetworkMigrationInsightsRequest.add_member(:segment_id, Shapes::ShapeRef.new(shape: SegmentID, location_name: "segmentID"))
+    ListNetworkMigrationInsightsRequest.add_member(:construct_id, Shapes::ShapeRef.new(shape: ConstructID, location_name: "constructID"))
+    ListNetworkMigrationInsightsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: ListNetworkMigrationInsightsFilters, location_name: "filters"))
+    ListNetworkMigrationInsightsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResultsType, location_name: "maxResults"))
+    ListNetworkMigrationInsightsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListNetworkMigrationInsightsRequest.struct_class = Types::ListNetworkMigrationInsightsRequest
+
+    ListNetworkMigrationInsightsResponse.add_member(:items, Shapes::ShapeRef.new(shape: NetworkMigrationInsightsList, location_name: "items"))
+    ListNetworkMigrationInsightsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListNetworkMigrationInsightsResponse.struct_class = Types::ListNetworkMigrationInsightsResponse
+
+    ListNetworkMigrationInsightsTypesFilter.member = Shapes::ShapeRef.new(shape: InsightType)
+
     ListNetworkMigrationMapperSegmentConstructTypesFilter.member = Shapes::ShapeRef.new(shape: NetworkMigrationMapperSegmentConstructType)
 
     ListNetworkMigrationMapperSegmentConstructsFilters.add_member(:construct_i_ds, Shapes::ShapeRef.new(shape: ListNetworkMigrationMapperSegmentConstructsIDsFilter, location_name: "constructIDs"))
@@ -1421,6 +1591,8 @@ module Aws::Mgn
     ListNetworkMigrationMapperSegmentConstructsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: ListNetworkMigrationMapperSegmentConstructsFilters, location_name: "filters"))
     ListNetworkMigrationMapperSegmentConstructsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResultsType, location_name: "maxResults"))
     ListNetworkMigrationMapperSegmentConstructsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListNetworkMigrationMapperSegmentConstructsRequest.add_member(:include_enriched_properties, Shapes::ShapeRef.new(shape: Boolean, location_name: "includeEnrichedProperties"))
+    ListNetworkMigrationMapperSegmentConstructsRequest.add_member(:include_configuration, Shapes::ShapeRef.new(shape: Boolean, location_name: "includeConfiguration"))
     ListNetworkMigrationMapperSegmentConstructsRequest.struct_class = Types::ListNetworkMigrationMapperSegmentConstructsRequest
 
     ListNetworkMigrationMapperSegmentConstructsResponse.add_member(:items, Shapes::ShapeRef.new(shape: NetworkMigrationMapperSegmentConstructs, location_name: "items"))
@@ -1474,6 +1646,58 @@ module Aws::Mgn
     ListNetworkMigrationMappingsResponse.add_member(:items, Shapes::ShapeRef.new(shape: NetworkMigrationMappingsList, location_name: "items"))
     ListNetworkMigrationMappingsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListNetworkMigrationMappingsResponse.struct_class = Types::ListNetworkMigrationMappingsResponse
+
+    ListRemoteSourceActionInvocationResultsRequest.add_member(:source_server_id, Shapes::ShapeRef.new(shape: SourceServerID, required: true, location_name: "sourceServerID"))
+    ListRemoteSourceActionInvocationResultsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResultsType, location_name: "maxResults"))
+    ListRemoteSourceActionInvocationResultsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListRemoteSourceActionInvocationResultsRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountID, location_name: "accountID"))
+    ListRemoteSourceActionInvocationResultsRequest.struct_class = Types::ListRemoteSourceActionInvocationResultsRequest
+
+    ListRemoteSourceActionInvocationResultsResponse.add_member(:items, Shapes::ShapeRef.new(shape: RemoteSourceActionInvocationResultsList, location_name: "items"))
+    ListRemoteSourceActionInvocationResultsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListRemoteSourceActionInvocationResultsResponse.struct_class = Types::ListRemoteSourceActionInvocationResultsResponse
+
+    ListRemoteSourceActionInvocationsRequest.add_member(:remote_source_action_job_id, Shapes::ShapeRef.new(shape: RemoteSourceActionJobID, required: true, location_name: "remoteSourceActionJobID"))
+    ListRemoteSourceActionInvocationsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: ListRemoteSourceActionInvocationsRequestFilters, location_name: "filters"))
+    ListRemoteSourceActionInvocationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResultsType, location_name: "maxResults"))
+    ListRemoteSourceActionInvocationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListRemoteSourceActionInvocationsRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountID, location_name: "accountID"))
+    ListRemoteSourceActionInvocationsRequest.struct_class = Types::ListRemoteSourceActionInvocationsRequest
+
+    ListRemoteSourceActionInvocationsRequestFilters.add_member(:source_server_arns, Shapes::ShapeRef.new(shape: SourceServerArnsFilter, location_name: "sourceServerArns"))
+    ListRemoteSourceActionInvocationsRequestFilters.add_member(:remote_source_action_arns, Shapes::ShapeRef.new(shape: RemoteSourceActionArnsFilter, location_name: "remoteSourceActionArns"))
+    ListRemoteSourceActionInvocationsRequestFilters.add_member(:statuses, Shapes::ShapeRef.new(shape: RemoteSourceActionInvocationStatusesFilter, location_name: "statuses"))
+    ListRemoteSourceActionInvocationsRequestFilters.struct_class = Types::ListRemoteSourceActionInvocationsRequestFilters
+
+    ListRemoteSourceActionInvocationsResponse.add_member(:items, Shapes::ShapeRef.new(shape: RemoteSourceActionInvocationsList, location_name: "items"))
+    ListRemoteSourceActionInvocationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListRemoteSourceActionInvocationsResponse.struct_class = Types::ListRemoteSourceActionInvocationsResponse
+
+    ListRemoteSourceActionJobsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: ListRemoteSourceActionJobsRequestFilters, location_name: "filters"))
+    ListRemoteSourceActionJobsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResultsType, location_name: "maxResults"))
+    ListRemoteSourceActionJobsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListRemoteSourceActionJobsRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountID, location_name: "accountID"))
+    ListRemoteSourceActionJobsRequest.struct_class = Types::ListRemoteSourceActionJobsRequest
+
+    ListRemoteSourceActionJobsRequestFilters.add_member(:remote_source_action_job_i_ds, Shapes::ShapeRef.new(shape: RemoteSourceActionJobIDsFilter, location_name: "remoteSourceActionJobIDs"))
+    ListRemoteSourceActionJobsRequestFilters.struct_class = Types::ListRemoteSourceActionJobsRequestFilters
+
+    ListRemoteSourceActionJobsResponse.add_member(:items, Shapes::ShapeRef.new(shape: RemoteSourceActionJobsList, location_name: "items"))
+    ListRemoteSourceActionJobsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListRemoteSourceActionJobsResponse.struct_class = Types::ListRemoteSourceActionJobsResponse
+
+    ListRemoteSourceActionsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: ListRemoteSourceActionsRequestFilters, location_name: "filters"))
+    ListRemoteSourceActionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResultsType, location_name: "maxResults"))
+    ListRemoteSourceActionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListRemoteSourceActionsRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountID, location_name: "accountID"))
+    ListRemoteSourceActionsRequest.struct_class = Types::ListRemoteSourceActionsRequest
+
+    ListRemoteSourceActionsRequestFilters.add_member(:remote_source_action_i_ds, Shapes::ShapeRef.new(shape: RemoteSourceActionIDsFilter, location_name: "remoteSourceActionIDs"))
+    ListRemoteSourceActionsRequestFilters.struct_class = Types::ListRemoteSourceActionsRequestFilters
+
+    ListRemoteSourceActionsResponse.add_member(:items, Shapes::ShapeRef.new(shape: RemoteSourceActionsList, location_name: "items"))
+    ListRemoteSourceActionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListRemoteSourceActionsResponse.struct_class = Types::ListRemoteSourceActionsResponse
 
     ListSourceServerActionsRequest.add_member(:source_server_id, Shapes::ShapeRef.new(shape: SourceServerID, required: true, location_name: "sourceServerID"))
     ListSourceServerActionsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: SourceServerActionsRequestFilters, location_name: "filters"))
@@ -1614,6 +1838,7 @@ module Aws::Mgn
     NetworkMigrationDefinition.add_member(:name, Shapes::ShapeRef.new(shape: NetworkMigrationDefinitionName, location_name: "name"))
     NetworkMigrationDefinition.add_member(:description, Shapes::ShapeRef.new(shape: NetworkMigrationDefinitionDescription, location_name: "description"))
     NetworkMigrationDefinition.add_member(:source_configurations, Shapes::ShapeRef.new(shape: SourceConfigurationList, location_name: "sourceConfigurations"))
+    NetworkMigrationDefinition.add_member(:definition_type, Shapes::ShapeRef.new(shape: DefinitionType, location_name: "definitionType"))
     NetworkMigrationDefinition.add_member(:target_s3_configuration, Shapes::ShapeRef.new(shape: TargetS3Configuration, location_name: "targetS3Configuration"))
     NetworkMigrationDefinition.add_member(:target_network, Shapes::ShapeRef.new(shape: TargetNetwork, location_name: "targetNetwork"))
     NetworkMigrationDefinition.add_member(:target_deployment, Shapes::ShapeRef.new(shape: TargetDeployment, location_name: "targetDeployment"))
@@ -1633,6 +1858,7 @@ module Aws::Mgn
     NetworkMigrationDefinitionSummary.add_member(:arn, Shapes::ShapeRef.new(shape: ARN, location_name: "arn"))
     NetworkMigrationDefinitionSummary.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
     NetworkMigrationDefinitionSummary.add_member(:scope_tags, Shapes::ShapeRef.new(shape: ScopeTagsMap, location_name: "scopeTags"))
+    NetworkMigrationDefinitionSummary.add_member(:definition_type, Shapes::ShapeRef.new(shape: DefinitionType, location_name: "definitionType"))
     NetworkMigrationDefinitionSummary.struct_class = Types::NetworkMigrationDefinitionSummary
 
     NetworkMigrationDefintionsIDsFilter.member = Shapes::ShapeRef.new(shape: NetworkMigrationDefinitionID)
@@ -1681,6 +1907,22 @@ module Aws::Mgn
 
     NetworkMigrationFailedResourcesList.member = Shapes::ShapeRef.new(shape: NetworkMigrationFailedResourceDetails)
 
+    NetworkMigrationInsight.add_member(:network_migration_definition_id, Shapes::ShapeRef.new(shape: NetworkMigrationDefinitionID, location_name: "networkMigrationDefinitionID"))
+    NetworkMigrationInsight.add_member(:network_migration_execution_id, Shapes::ShapeRef.new(shape: NetworkMigrationExecutionID, location_name: "networkMigrationExecutionID"))
+    NetworkMigrationInsight.add_member(:producer_id, Shapes::ShapeRef.new(shape: InsightProducerID, location_name: "producerID"))
+    NetworkMigrationInsight.add_member(:producer_type, Shapes::ShapeRef.new(shape: InsightProducerType, location_name: "producerType"))
+    NetworkMigrationInsight.add_member(:producer_name, Shapes::ShapeRef.new(shape: InsightProducerName, location_name: "producerName"))
+    NetworkMigrationInsight.add_member(:segment_id, Shapes::ShapeRef.new(shape: SegmentID, location_name: "segmentID"))
+    NetworkMigrationInsight.add_member(:construct_id, Shapes::ShapeRef.new(shape: ConstructID, location_name: "constructID"))
+    NetworkMigrationInsight.add_member(:insight_id, Shapes::ShapeRef.new(shape: InsightID, location_name: "insightID"))
+    NetworkMigrationInsight.add_member(:insight_level, Shapes::ShapeRef.new(shape: InsightLevel, location_name: "insightLevel"))
+    NetworkMigrationInsight.add_member(:insight_type, Shapes::ShapeRef.new(shape: InsightType, location_name: "insightType"))
+    NetworkMigrationInsight.add_member(:insight_message, Shapes::ShapeRef.new(shape: InsightMessage, location_name: "insightMessage"))
+    NetworkMigrationInsight.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdAt"))
+    NetworkMigrationInsight.struct_class = Types::NetworkMigrationInsight
+
+    NetworkMigrationInsightsList.member = Shapes::ShapeRef.new(shape: NetworkMigrationInsight)
+
     NetworkMigrationMapperSegment.add_member(:job_id, Shapes::ShapeRef.new(shape: NetworkMigrationJobID, location_name: "jobID"))
     NetworkMigrationMapperSegment.add_member(:network_migration_execution_id, Shapes::ShapeRef.new(shape: NetworkMigrationExecutionID, location_name: "networkMigrationExecutionID"))
     NetworkMigrationMapperSegment.add_member(:network_migration_definition_id, Shapes::ShapeRef.new(shape: NetworkMigrationDefinitionID, location_name: "networkMigrationDefinitionID"))
@@ -1707,6 +1949,8 @@ module Aws::Mgn
     NetworkMigrationMapperSegmentConstruct.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdAt"))
     NetworkMigrationMapperSegmentConstruct.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "updatedAt"))
     NetworkMigrationMapperSegmentConstruct.add_member(:properties, Shapes::ShapeRef.new(shape: ConstructProperties, location_name: "properties"))
+    NetworkMigrationMapperSegmentConstruct.add_member(:enriched_properties, Shapes::ShapeRef.new(shape: EnrichedProperties, location_name: "enrichedProperties"))
+    NetworkMigrationMapperSegmentConstruct.add_member(:configuration, Shapes::ShapeRef.new(shape: OperationConfigurationUnion, location_name: "configuration"))
     NetworkMigrationMapperSegmentConstruct.struct_class = Types::NetworkMigrationMapperSegmentConstruct
 
     NetworkMigrationMapperSegmentConstructs.member = Shapes::ShapeRef.new(shape: NetworkMigrationMapperSegmentConstruct)
@@ -1738,15 +1982,27 @@ module Aws::Mgn
     OS.add_member(:full_string, Shapes::ShapeRef.new(shape: BoundedString, location_name: "fullString"))
     OS.struct_class = Types::OS
 
+    OperationConfigurationUnion.add_member(:security_group, Shapes::ShapeRef.new(shape: SecurityGroupConfiguration, location_name: "securityGroup"))
+    OperationConfigurationUnion.add_member(:security_group_rule, Shapes::ShapeRef.new(shape: SecurityGroupRuleConfiguration, location_name: "securityGroupRule"))
+    OperationConfigurationUnion.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    OperationConfigurationUnion.add_member_subclass(:security_group, Types::OperationConfigurationUnion::SecurityGroup)
+    OperationConfigurationUnion.add_member_subclass(:security_group_rule, Types::OperationConfigurationUnion::SecurityGroupRule)
+    OperationConfigurationUnion.add_member_subclass(:unknown, Types::OperationConfigurationUnion::Unknown)
+    OperationConfigurationUnion.struct_class = Types::OperationConfigurationUnion
+
     OperationUnion.add_member(:merge, Shapes::ShapeRef.new(shape: MergeOperation, location_name: "merge"))
     OperationUnion.add_member(:split, Shapes::ShapeRef.new(shape: SplitOperation, location_name: "split"))
     OperationUnion.add_member(:delete, Shapes::ShapeRef.new(shape: DeleteOperation, location_name: "delete"))
     OperationUnion.add_member(:update, Shapes::ShapeRef.new(shape: UpdateOperation, location_name: "update"))
+    OperationUnion.add_member(:update_v2, Shapes::ShapeRef.new(shape: UpdateOperationV2, location_name: "updateV2"))
+    OperationUnion.add_member(:create, Shapes::ShapeRef.new(shape: CreateOperation, location_name: "create"))
     OperationUnion.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     OperationUnion.add_member_subclass(:merge, Types::OperationUnion::Merge)
     OperationUnion.add_member_subclass(:split, Types::OperationUnion::Split)
     OperationUnion.add_member_subclass(:delete, Types::OperationUnion::Delete)
     OperationUnion.add_member_subclass(:update, Types::OperationUnion::Update)
+    OperationUnion.add_member_subclass(:update_v2, Types::OperationUnion::UpdateV2)
+    OperationUnion.add_member_subclass(:create, Types::OperationUnion::Create)
     OperationUnion.add_member_subclass(:unknown, Types::OperationUnion::Unknown)
     OperationUnion.struct_class = Types::OperationUnion
 
@@ -1774,6 +2030,8 @@ module Aws::Mgn
     PostLaunchActionsStatus.add_member(:ssm_agent_discovery_datetime, Shapes::ShapeRef.new(shape: ISO8601DatetimeString, location_name: "ssmAgentDiscoveryDatetime"))
     PostLaunchActionsStatus.add_member(:post_launch_actions_launch_status_list, Shapes::ShapeRef.new(shape: PostLaunchActionsLaunchStatusList, location_name: "postLaunchActionsLaunchStatusList"))
     PostLaunchActionsStatus.struct_class = Types::PostLaunchActionsStatus
+
+    PropertiesToDelete.member = Shapes::ShapeRef.new(shape: EnrichedPropertyKey)
 
     PutSourceServerActionRequest.add_member(:source_server_id, Shapes::ShapeRef.new(shape: SourceServerID, required: true, location_name: "sourceServerID"))
     PutSourceServerActionRequest.add_member(:action_name, Shapes::ShapeRef.new(shape: ActionName, required: true, location_name: "actionName"))
@@ -1807,6 +2065,61 @@ module Aws::Mgn
     PutTemplateActionRequest.add_member(:category, Shapes::ShapeRef.new(shape: ActionCategory, location_name: "category"))
     PutTemplateActionRequest.struct_class = Types::PutTemplateActionRequest
 
+    RemoteSourceAction.add_member(:remote_source_action_id, Shapes::ShapeRef.new(shape: RemoteSourceActionID, location_name: "remoteSourceActionID"))
+    RemoteSourceAction.add_member(:arn, Shapes::ShapeRef.new(shape: ARN, location_name: "arn"))
+    RemoteSourceAction.add_member(:name, Shapes::ShapeRef.new(shape: RemoteSourceActionName, location_name: "name"))
+    RemoteSourceAction.add_member(:description, Shapes::ShapeRef.new(shape: RemoteSourceActionDescription, location_name: "description"))
+    RemoteSourceAction.add_member(:ssm_parameter_name, Shapes::ShapeRef.new(shape: SsmParameterStoreParameterName, location_name: "ssmParameterName"))
+    RemoteSourceAction.add_member(:timeout_seconds, Shapes::ShapeRef.new(shape: RemoteSourceActionTimeoutSeconds, location_name: "timeoutSeconds"))
+    RemoteSourceAction.add_member(:operating_system, Shapes::ShapeRef.new(shape: OperatingSystemString, location_name: "operatingSystem"))
+    RemoteSourceAction.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
+    RemoteSourceAction.struct_class = Types::RemoteSourceAction
+
+    RemoteSourceActionArns.member = Shapes::ShapeRef.new(shape: RemoteSourceActionArn)
+
+    RemoteSourceActionArnsFilter.member = Shapes::ShapeRef.new(shape: RemoteSourceActionArn)
+
+    RemoteSourceActionIDsFilter.member = Shapes::ShapeRef.new(shape: RemoteSourceActionID)
+
+    RemoteSourceActionInvocation.add_member(:source_server_arn, Shapes::ShapeRef.new(shape: SourceServerArn, location_name: "sourceServerArn"))
+    RemoteSourceActionInvocation.add_member(:remote_source_action_arn, Shapes::ShapeRef.new(shape: RemoteSourceActionArn, location_name: "remoteSourceActionArn"))
+    RemoteSourceActionInvocation.add_member(:ssm_command_invocation_id, Shapes::ShapeRef.new(shape: SsmCommandInvocationID, location_name: "ssmCommandInvocationID"))
+    RemoteSourceActionInvocation.add_member(:status, Shapes::ShapeRef.new(shape: RemoteSourceActionInvocationStatus, location_name: "status"))
+    RemoteSourceActionInvocation.add_member(:started_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "startedAt"))
+    RemoteSourceActionInvocation.add_member(:ended_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "endedAt"))
+    RemoteSourceActionInvocation.struct_class = Types::RemoteSourceActionInvocation
+
+    RemoteSourceActionInvocationResult.add_member(:remote_source_action_id, Shapes::ShapeRef.new(shape: RemoteSourceActionID, location_name: "remoteSourceActionID"))
+    RemoteSourceActionInvocationResult.add_member(:connector_owner_account_id, Shapes::ShapeRef.new(shape: AccountID, location_name: "connectorOwnerAccountID"))
+    RemoteSourceActionInvocationResult.add_member(:status, Shapes::ShapeRef.new(shape: RemoteSourceActionInvocationStatus, location_name: "status"))
+    RemoteSourceActionInvocationResult.add_member(:started_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "startedAt"))
+    RemoteSourceActionInvocationResult.add_member(:ended_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "endedAt"))
+    RemoteSourceActionInvocationResult.struct_class = Types::RemoteSourceActionInvocationResult
+
+    RemoteSourceActionInvocationResultsList.member = Shapes::ShapeRef.new(shape: RemoteSourceActionInvocationResult)
+
+    RemoteSourceActionInvocationStatusesFilter.member = Shapes::ShapeRef.new(shape: RemoteSourceActionInvocationStatus)
+
+    RemoteSourceActionInvocationsList.member = Shapes::ShapeRef.new(shape: RemoteSourceActionInvocation)
+
+    RemoteSourceActionJob.add_member(:remote_source_action_job_id, Shapes::ShapeRef.new(shape: RemoteSourceActionJobID, location_name: "remoteSourceActionJobID"))
+    RemoteSourceActionJob.add_member(:arn, Shapes::ShapeRef.new(shape: ARN, location_name: "arn"))
+    RemoteSourceActionJob.add_member(:status, Shapes::ShapeRef.new(shape: RemoteSourceActionJobStatus, location_name: "status"))
+    RemoteSourceActionJob.add_member(:source_server_arns, Shapes::ShapeRef.new(shape: SourceServerArns, location_name: "sourceServerArns"))
+    RemoteSourceActionJob.add_member(:remote_source_action_arns, Shapes::ShapeRef.new(shape: RemoteSourceActionArns, location_name: "remoteSourceActionArns"))
+    RemoteSourceActionJob.add_member(:connector_arn, Shapes::ShapeRef.new(shape: ConnectorArn, location_name: "connectorArn"))
+    RemoteSourceActionJob.add_member(:started_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "startedAt"))
+    RemoteSourceActionJob.add_member(:ended_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "endedAt"))
+    RemoteSourceActionJob.add_member(:status_reason, Shapes::ShapeRef.new(shape: LargeBoundedString, location_name: "statusReason"))
+    RemoteSourceActionJob.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
+    RemoteSourceActionJob.struct_class = Types::RemoteSourceActionJob
+
+    RemoteSourceActionJobIDsFilter.member = Shapes::ShapeRef.new(shape: RemoteSourceActionJobID)
+
+    RemoteSourceActionJobsList.member = Shapes::ShapeRef.new(shape: RemoteSourceActionJob)
+
+    RemoteSourceActionsList.member = Shapes::ShapeRef.new(shape: RemoteSourceAction)
+
     RemoveSourceServerActionRequest.add_member(:source_server_id, Shapes::ShapeRef.new(shape: SourceServerID, required: true, location_name: "sourceServerID"))
     RemoveSourceServerActionRequest.add_member(:action_id, Shapes::ShapeRef.new(shape: ActionID, required: true, location_name: "actionID"))
     RemoveSourceServerActionRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountID, location_name: "accountID"))
@@ -1838,6 +2151,7 @@ module Aws::Mgn
     ReplicationConfiguration.add_member(:use_fips_endpoint, Shapes::ShapeRef.new(shape: Boolean, location_name: "useFipsEndpoint"))
     ReplicationConfiguration.add_member(:internet_protocol, Shapes::ShapeRef.new(shape: InternetProtocol, location_name: "internetProtocol"))
     ReplicationConfiguration.add_member(:store_snapshot_on_local_zone, Shapes::ShapeRef.new(shape: Boolean, location_name: "storeSnapshotOnLocalZone"))
+    ReplicationConfiguration.add_member(:outpost_snapshot_location, Shapes::ShapeRef.new(shape: OutpostSnapshotLocation, location_name: "outpostSnapshotLocation"))
     ReplicationConfiguration.add_member(:storage_configuration, Shapes::ShapeRef.new(shape: StorageConfiguration, location_name: "storageConfiguration"))
     ReplicationConfiguration.struct_class = Types::ReplicationConfiguration
 
@@ -1868,6 +2182,7 @@ module Aws::Mgn
     ReplicationConfigurationTemplate.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
     ReplicationConfigurationTemplate.add_member(:internet_protocol, Shapes::ShapeRef.new(shape: InternetProtocol, location_name: "internetProtocol"))
     ReplicationConfigurationTemplate.add_member(:store_snapshot_on_local_zone, Shapes::ShapeRef.new(shape: Boolean, location_name: "storeSnapshotOnLocalZone"))
+    ReplicationConfigurationTemplate.add_member(:outpost_snapshot_location, Shapes::ShapeRef.new(shape: OutpostSnapshotLocation, location_name: "outpostSnapshotLocation"))
     ReplicationConfigurationTemplate.add_member(:storage_configuration, Shapes::ShapeRef.new(shape: StorageConfiguration, location_name: "storageConfiguration"))
     ReplicationConfigurationTemplate.struct_class = Types::ReplicationConfigurationTemplate
 
@@ -1905,6 +2220,41 @@ module Aws::Mgn
 
     ScopeTagsMap.key = Shapes::ShapeRef.new(shape: ScopeTagKey)
     ScopeTagsMap.value = Shapes::ShapeRef.new(shape: ScopeTagValue)
+
+    SecurityGroupAssociations.add_member(:cidrs, Shapes::ShapeRef.new(shape: AssociationCidrList, location_name: "cidrs"))
+    SecurityGroupAssociations.add_member(:vm_uui_ds, Shapes::ShapeRef.new(shape: AssociationVmUUIDList, location_name: "vmUUIDs"))
+    SecurityGroupAssociations.add_member(:user_provided_i_ds, Shapes::ShapeRef.new(shape: AssociationUserProvidedIDList, location_name: "userProvidedIDs"))
+    SecurityGroupAssociations.struct_class = Types::SecurityGroupAssociations
+
+    SecurityGroupConfiguration.add_member(:associations, Shapes::ShapeRef.new(shape: SecurityGroupAssociations, location_name: "associations"))
+    SecurityGroupConfiguration.struct_class = Types::SecurityGroupConfiguration
+
+    SecurityGroupRuleConfiguration.add_member(:enable_referencing, Shapes::ShapeRef.new(shape: Boolean, location_name: "enableReferencing"))
+    SecurityGroupRuleConfiguration.struct_class = Types::SecurityGroupRuleConfiguration
+
+    SegmentCreateOperation.add_member(:name, Shapes::ShapeRef.new(shape: SegmentName, required: true, location_name: "name"))
+    SegmentCreateOperation.add_member(:description, Shapes::ShapeRef.new(shape: SegmentDescription, location_name: "description"))
+    SegmentCreateOperation.add_member(:target_account, Shapes::ShapeRef.new(shape: AccountID, location_name: "targetAccount"))
+    SegmentCreateOperation.add_member(:scope_tags, Shapes::ShapeRef.new(shape: ScopeTagsMap, location_name: "scopeTags"))
+    SegmentCreateOperation.struct_class = Types::SegmentCreateOperation
+
+    SegmentDeleteOperation.struct_class = Types::SegmentDeleteOperation
+
+    SegmentOperation.add_member(:create, Shapes::ShapeRef.new(shape: SegmentCreateOperation, location_name: "create"))
+    SegmentOperation.add_member(:update, Shapes::ShapeRef.new(shape: SegmentUpdateOperation, location_name: "update"))
+    SegmentOperation.add_member(:delete, Shapes::ShapeRef.new(shape: SegmentDeleteOperation, location_name: "delete"))
+    SegmentOperation.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    SegmentOperation.add_member_subclass(:create, Types::SegmentOperation::Create)
+    SegmentOperation.add_member_subclass(:update, Types::SegmentOperation::Update)
+    SegmentOperation.add_member_subclass(:delete, Types::SegmentOperation::Delete)
+    SegmentOperation.add_member_subclass(:unknown, Types::SegmentOperation::Unknown)
+    SegmentOperation.struct_class = Types::SegmentOperation
+
+    SegmentUpdateOperation.add_member(:name, Shapes::ShapeRef.new(shape: SegmentName, location_name: "name"))
+    SegmentUpdateOperation.add_member(:description, Shapes::ShapeRef.new(shape: SegmentDescription, location_name: "description"))
+    SegmentUpdateOperation.add_member(:target_account, Shapes::ShapeRef.new(shape: AccountID, location_name: "targetAccount"))
+    SegmentUpdateOperation.add_member(:scope_tags, Shapes::ShapeRef.new(shape: ScopeTagsMap, location_name: "scopeTags"))
+    SegmentUpdateOperation.struct_class = Types::SegmentUpdateOperation
 
     ServiceQuotaExceededException.add_member(:message, Shapes::ShapeRef.new(shape: LargeBoundedString, location_name: "message"))
     ServiceQuotaExceededException.add_member(:code, Shapes::ShapeRef.new(shape: LargeBoundedString, location_name: "code"))
@@ -1971,9 +2321,20 @@ module Aws::Mgn
     SourceServerActionsRequestFilters.add_member(:action_i_ds, Shapes::ShapeRef.new(shape: ActionIDs, location_name: "actionIDs"))
     SourceServerActionsRequestFilters.struct_class = Types::SourceServerActionsRequestFilters
 
+    SourceServerArns.member = Shapes::ShapeRef.new(shape: SourceServerArn)
+
+    SourceServerArnsFilter.member = Shapes::ShapeRef.new(shape: SourceServerArn)
+
     SourceServerConnectorAction.add_member(:credentials_secret_arn, Shapes::ShapeRef.new(shape: SecretArn, location_name: "credentialsSecretArn"))
     SourceServerConnectorAction.add_member(:connector_arn, Shapes::ShapeRef.new(shape: ConnectorArn, location_name: "connectorArn"))
     SourceServerConnectorAction.struct_class = Types::SourceServerConnectorAction
+
+    SourceServerVolumeConfiguration.add_member(:volume_type, Shapes::ShapeRef.new(shape: VolumeType, location_name: "volumeType"))
+    SourceServerVolumeConfiguration.add_member(:iops, Shapes::ShapeRef.new(shape: Iops, location_name: "iops"))
+    SourceServerVolumeConfiguration.add_member(:throughput, Shapes::ShapeRef.new(shape: Throughput, location_name: "throughput"))
+    SourceServerVolumeConfiguration.add_member(:volume_initialization_rate, Shapes::ShapeRef.new(shape: VolumeInitializationRate, location_name: "volumeInitializationRate"))
+    SourceServerVolumeConfiguration.add_member(:delete_on_termination, Shapes::ShapeRef.new(shape: DeleteOnTermination, location_name: "deleteOnTermination"))
+    SourceServerVolumeConfiguration.struct_class = Types::SourceServerVolumeConfiguration
 
     SourceServersList.member = Shapes::ShapeRef.new(shape: SourceServer)
 
@@ -2079,9 +2440,11 @@ module Aws::Mgn
     StartNetworkMigrationMappingResponse.add_member(:job_id, Shapes::ShapeRef.new(shape: NetworkMigrationJobID, location_name: "jobID"))
     StartNetworkMigrationMappingResponse.struct_class = Types::StartNetworkMigrationMappingResponse
 
-    StartNetworkMigrationMappingUpdateConstruct.add_member(:segment_id, Shapes::ShapeRef.new(shape: SegmentID, required: true, location_name: "segmentID"))
-    StartNetworkMigrationMappingUpdateConstruct.add_member(:construct_id, Shapes::ShapeRef.new(shape: ConstructID, required: true, location_name: "constructID"))
+    StartNetworkMigrationMappingUpdateConstruct.add_member(:segment_id, Shapes::ShapeRef.new(shape: SegmentID, location_name: "segmentID"))
+    StartNetworkMigrationMappingUpdateConstruct.add_member(:segment_logical_id, Shapes::ShapeRef.new(shape: LogicalID, location_name: "segmentLogicalID"))
+    StartNetworkMigrationMappingUpdateConstruct.add_member(:construct_id, Shapes::ShapeRef.new(shape: ConstructID, location_name: "constructID"))
     StartNetworkMigrationMappingUpdateConstruct.add_member(:construct_type, Shapes::ShapeRef.new(shape: NetworkMigrationMapperSegmentConstructType, required: true, location_name: "constructType"))
+    StartNetworkMigrationMappingUpdateConstruct.add_member(:construct_logical_id, Shapes::ShapeRef.new(shape: ConstructLogicalID, location_name: "constructLogicalID"))
     StartNetworkMigrationMappingUpdateConstruct.add_member(:operation, Shapes::ShapeRef.new(shape: OperationUnion, location_name: "operation"))
     StartNetworkMigrationMappingUpdateConstruct.struct_class = Types::StartNetworkMigrationMappingUpdateConstruct
 
@@ -2096,12 +2459,25 @@ module Aws::Mgn
     StartNetworkMigrationMappingUpdateResponse.add_member(:job_id, Shapes::ShapeRef.new(shape: NetworkMigrationJobID, location_name: "jobID"))
     StartNetworkMigrationMappingUpdateResponse.struct_class = Types::StartNetworkMigrationMappingUpdateResponse
 
-    StartNetworkMigrationMappingUpdateSegment.add_member(:segment_id, Shapes::ShapeRef.new(shape: SegmentID, required: true, location_name: "segmentID"))
+    StartNetworkMigrationMappingUpdateSegment.add_member(:segment_id, Shapes::ShapeRef.new(shape: SegmentID, location_name: "segmentID"))
+    StartNetworkMigrationMappingUpdateSegment.add_member(:segment_logical_id, Shapes::ShapeRef.new(shape: SegmentLogicalID, location_name: "segmentLogicalID"))
+    StartNetworkMigrationMappingUpdateSegment.add_member(:operation, Shapes::ShapeRef.new(shape: SegmentOperation, location_name: "operation"))
     StartNetworkMigrationMappingUpdateSegment.add_member(:target_account, Shapes::ShapeRef.new(shape: AccountID, location_name: "targetAccount"))
     StartNetworkMigrationMappingUpdateSegment.add_member(:scope_tags, Shapes::ShapeRef.new(shape: ScopeTagsMap, location_name: "scopeTags"))
     StartNetworkMigrationMappingUpdateSegment.struct_class = Types::StartNetworkMigrationMappingUpdateSegment
 
     StartNetworkMigrationMappingUpdateSegments.member = Shapes::ShapeRef.new(shape: StartNetworkMigrationMappingUpdateSegment)
+
+    StartRemoteSourceActionJobRequest.add_member(:remote_source_action_arns, Shapes::ShapeRef.new(shape: RemoteSourceActionArns, required: true, location_name: "remoteSourceActionArns"))
+    StartRemoteSourceActionJobRequest.add_member(:connector_arn, Shapes::ShapeRef.new(shape: ConnectorArn, required: true, location_name: "connectorArn"))
+    StartRemoteSourceActionJobRequest.add_member(:source_server_arns, Shapes::ShapeRef.new(shape: SourceServerArns, required: true, location_name: "sourceServerArns"))
+    StartRemoteSourceActionJobRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientIdempotencyToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
+    StartRemoteSourceActionJobRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
+    StartRemoteSourceActionJobRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountID, location_name: "accountID"))
+    StartRemoteSourceActionJobRequest.struct_class = Types::StartRemoteSourceActionJobRequest
+
+    StartRemoteSourceActionJobResponse.add_member(:remote_source_action_job, Shapes::ShapeRef.new(shape: RemoteSourceActionJob, location_name: "remoteSourceActionJob"))
+    StartRemoteSourceActionJobResponse.struct_class = Types::StartRemoteSourceActionJobResponse
 
     StartReplicationRequest.add_member(:source_server_id, Shapes::ShapeRef.new(shape: SourceServerID, required: true, location_name: "sourceServerID"))
     StartReplicationRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountID, location_name: "accountID"))
@@ -2217,6 +2593,19 @@ module Aws::Mgn
     UpdateConnectorRequest.add_member(:ssm_command_config, Shapes::ShapeRef.new(shape: ConnectorSsmCommandConfig, location_name: "ssmCommandConfig"))
     UpdateConnectorRequest.struct_class = Types::UpdateConnectorRequest
 
+    UpdateLaunchConfigurationDefaultsRequest.add_member(:source_server_id, Shapes::ShapeRef.new(shape: SourceServerID, required: true, location_name: "sourceServerID"))
+    UpdateLaunchConfigurationDefaultsRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountID, location_name: "accountID"))
+    UpdateLaunchConfigurationDefaultsRequest.add_member(:small_volume_max_size, Shapes::ShapeRef.new(shape: PositiveInteger, location_name: "smallVolumeMaxSize"))
+    UpdateLaunchConfigurationDefaultsRequest.add_member(:small_volume_configuration, Shapes::ShapeRef.new(shape: SourceServerVolumeConfiguration, location_name: "smallVolumeConfiguration"))
+    UpdateLaunchConfigurationDefaultsRequest.add_member(:large_volume_configuration, Shapes::ShapeRef.new(shape: SourceServerVolumeConfiguration, location_name: "largeVolumeConfiguration"))
+    UpdateLaunchConfigurationDefaultsRequest.struct_class = Types::UpdateLaunchConfigurationDefaultsRequest
+
+    UpdateLaunchConfigurationDefaultsResponse.add_member(:source_server_id, Shapes::ShapeRef.new(shape: SourceServerID, location_name: "sourceServerID"))
+    UpdateLaunchConfigurationDefaultsResponse.add_member(:small_volume_max_size, Shapes::ShapeRef.new(shape: PositiveInteger, location_name: "smallVolumeMaxSize"))
+    UpdateLaunchConfigurationDefaultsResponse.add_member(:small_volume_configuration, Shapes::ShapeRef.new(shape: SourceServerVolumeConfiguration, location_name: "smallVolumeConfiguration"))
+    UpdateLaunchConfigurationDefaultsResponse.add_member(:large_volume_configuration, Shapes::ShapeRef.new(shape: SourceServerVolumeConfiguration, location_name: "largeVolumeConfiguration"))
+    UpdateLaunchConfigurationDefaultsResponse.struct_class = Types::UpdateLaunchConfigurationDefaultsResponse
+
     UpdateLaunchConfigurationRequest.add_member(:source_server_id, Shapes::ShapeRef.new(shape: SourceServerID, required: true, location_name: "sourceServerID"))
     UpdateLaunchConfigurationRequest.add_member(:name, Shapes::ShapeRef.new(shape: SmallBoundedString, location_name: "name"))
     UpdateLaunchConfigurationRequest.add_member(:launch_disposition, Shapes::ShapeRef.new(shape: LaunchDisposition, location_name: "launchDisposition"))
@@ -2228,6 +2617,7 @@ module Aws::Mgn
     UpdateLaunchConfigurationRequest.add_member(:post_launch_actions, Shapes::ShapeRef.new(shape: PostLaunchActions, location_name: "postLaunchActions"))
     UpdateLaunchConfigurationRequest.add_member(:enable_map_auto_tagging, Shapes::ShapeRef.new(shape: Boolean, location_name: "enableMapAutoTagging"))
     UpdateLaunchConfigurationRequest.add_member(:map_auto_tagging_mpe_id, Shapes::ShapeRef.new(shape: TagValue, location_name: "mapAutoTaggingMpeID"))
+    UpdateLaunchConfigurationRequest.add_member(:map_auto_tagging_key, Shapes::ShapeRef.new(shape: TagKey, location_name: "mapAutoTaggingKey"))
     UpdateLaunchConfigurationRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountID, location_name: "accountID"))
     UpdateLaunchConfigurationRequest.struct_class = Types::UpdateLaunchConfigurationRequest
 
@@ -2235,6 +2625,7 @@ module Aws::Mgn
     UpdateLaunchConfigurationTemplateRequest.add_member(:post_launch_actions, Shapes::ShapeRef.new(shape: PostLaunchActions, location_name: "postLaunchActions"))
     UpdateLaunchConfigurationTemplateRequest.add_member(:enable_map_auto_tagging, Shapes::ShapeRef.new(shape: Boolean, location_name: "enableMapAutoTagging"))
     UpdateLaunchConfigurationTemplateRequest.add_member(:map_auto_tagging_mpe_id, Shapes::ShapeRef.new(shape: TagValue, location_name: "mapAutoTaggingMpeID"))
+    UpdateLaunchConfigurationTemplateRequest.add_member(:map_auto_tagging_key, Shapes::ShapeRef.new(shape: TagKey, location_name: "mapAutoTaggingKey"))
     UpdateLaunchConfigurationTemplateRequest.add_member(:launch_disposition, Shapes::ShapeRef.new(shape: LaunchDisposition, location_name: "launchDisposition"))
     UpdateLaunchConfigurationTemplateRequest.add_member(:target_instance_type_right_sizing_method, Shapes::ShapeRef.new(shape: TargetInstanceTypeRightSizingMethod, location_name: "targetInstanceTypeRightSizingMethod"))
     UpdateLaunchConfigurationTemplateRequest.add_member(:copy_private_ip, Shapes::ShapeRef.new(shape: Boolean, location_name: "copyPrivateIp"))
@@ -2259,6 +2650,7 @@ module Aws::Mgn
     UpdateNetworkMigrationDefinitionRequest.add_member(:vpc_provisioning_strategy, Shapes::ShapeRef.new(shape: VpcProvisioningStrategy, location_name: "vpcProvisioningStrategy"))
     UpdateNetworkMigrationDefinitionRequest.add_member(:cidr_mappings, Shapes::ShapeRef.new(shape: CidrMappingsList, location_name: "cidrMappings"))
     UpdateNetworkMigrationDefinitionRequest.add_member(:scope_tags, Shapes::ShapeRef.new(shape: ScopeTagsMap, location_name: "scopeTags"))
+    UpdateNetworkMigrationDefinitionRequest.add_member(:definition_type, Shapes::ShapeRef.new(shape: DefinitionType, location_name: "definitionType"))
     UpdateNetworkMigrationDefinitionRequest.struct_class = Types::UpdateNetworkMigrationDefinitionRequest
 
     UpdateNetworkMigrationMapperSegmentRequest.add_member(:network_migration_definition_id, Shapes::ShapeRef.new(shape: NetworkMigrationDefinitionID, required: true, location_name: "networkMigrationDefinitionID"))
@@ -2271,6 +2663,32 @@ module Aws::Mgn
     UpdateOperation.add_member(:excluded, Shapes::ShapeRef.new(shape: Boolean, location_name: "excluded"))
     UpdateOperation.add_member(:properties, Shapes::ShapeRef.new(shape: ConstructProperties, location_name: "properties"))
     UpdateOperation.struct_class = Types::UpdateOperation
+
+    UpdateOperationV2.add_member(:name, Shapes::ShapeRef.new(shape: SegmentConstructName, location_name: "name"))
+    UpdateOperationV2.add_member(:excluded, Shapes::ShapeRef.new(shape: Boolean, location_name: "excluded"))
+    UpdateOperationV2.add_member(:properties, Shapes::ShapeRef.new(shape: EnrichedProperties, location_name: "properties"))
+    UpdateOperationV2.add_member(:properties_to_delete, Shapes::ShapeRef.new(shape: PropertiesToDelete, location_name: "propertiesToDelete"))
+    UpdateOperationV2.add_member(:configuration, Shapes::ShapeRef.new(shape: OperationConfigurationUnion, location_name: "configuration"))
+    UpdateOperationV2.struct_class = Types::UpdateOperationV2
+
+    UpdateRemoteSourceActionRequest.add_member(:remote_source_action_id, Shapes::ShapeRef.new(shape: RemoteSourceActionID, required: true, location_name: "remoteSourceActionID"))
+    UpdateRemoteSourceActionRequest.add_member(:name, Shapes::ShapeRef.new(shape: RemoteSourceActionName, location_name: "name"))
+    UpdateRemoteSourceActionRequest.add_member(:description, Shapes::ShapeRef.new(shape: RemoteSourceActionDescription, location_name: "description"))
+    UpdateRemoteSourceActionRequest.add_member(:ssm_parameter_name, Shapes::ShapeRef.new(shape: SsmParameterStoreParameterName, location_name: "ssmParameterName"))
+    UpdateRemoteSourceActionRequest.add_member(:timeout_seconds, Shapes::ShapeRef.new(shape: RemoteSourceActionTimeoutSeconds, location_name: "timeoutSeconds"))
+    UpdateRemoteSourceActionRequest.add_member(:operating_system, Shapes::ShapeRef.new(shape: RemoteSourceActionOperatingSystem, location_name: "operatingSystem"))
+    UpdateRemoteSourceActionRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountID, location_name: "accountID"))
+    UpdateRemoteSourceActionRequest.struct_class = Types::UpdateRemoteSourceActionRequest
+
+    UpdateRemoteSourceActionResponse.add_member(:remote_source_action_id, Shapes::ShapeRef.new(shape: RemoteSourceActionID, location_name: "remoteSourceActionID"))
+    UpdateRemoteSourceActionResponse.add_member(:arn, Shapes::ShapeRef.new(shape: ARN, location_name: "arn"))
+    UpdateRemoteSourceActionResponse.add_member(:name, Shapes::ShapeRef.new(shape: RemoteSourceActionName, location_name: "name"))
+    UpdateRemoteSourceActionResponse.add_member(:description, Shapes::ShapeRef.new(shape: RemoteSourceActionDescription, location_name: "description"))
+    UpdateRemoteSourceActionResponse.add_member(:ssm_parameter_name, Shapes::ShapeRef.new(shape: SsmParameterStoreParameterName, location_name: "ssmParameterName"))
+    UpdateRemoteSourceActionResponse.add_member(:timeout_seconds, Shapes::ShapeRef.new(shape: RemoteSourceActionTimeoutSeconds, location_name: "timeoutSeconds"))
+    UpdateRemoteSourceActionResponse.add_member(:operating_system, Shapes::ShapeRef.new(shape: OperatingSystemString, location_name: "operatingSystem"))
+    UpdateRemoteSourceActionResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
+    UpdateRemoteSourceActionResponse.struct_class = Types::UpdateRemoteSourceActionResponse
 
     UpdateReplicationConfigurationRequest.add_member(:source_server_id, Shapes::ShapeRef.new(shape: SourceServerID, required: true, location_name: "sourceServerID"))
     UpdateReplicationConfigurationRequest.add_member(:name, Shapes::ShapeRef.new(shape: SmallBoundedString, location_name: "name"))
@@ -2291,6 +2709,7 @@ module Aws::Mgn
     UpdateReplicationConfigurationRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountID, location_name: "accountID"))
     UpdateReplicationConfigurationRequest.add_member(:internet_protocol, Shapes::ShapeRef.new(shape: InternetProtocol, location_name: "internetProtocol"))
     UpdateReplicationConfigurationRequest.add_member(:store_snapshot_on_local_zone, Shapes::ShapeRef.new(shape: Boolean, location_name: "storeSnapshotOnLocalZone"))
+    UpdateReplicationConfigurationRequest.add_member(:outpost_snapshot_location, Shapes::ShapeRef.new(shape: OutpostSnapshotLocation, location_name: "outpostSnapshotLocation"))
     UpdateReplicationConfigurationRequest.add_member(:storage_configuration, Shapes::ShapeRef.new(shape: StorageConfiguration, location_name: "storageConfiguration"))
     UpdateReplicationConfigurationRequest.struct_class = Types::UpdateReplicationConfigurationRequest
 
@@ -2311,6 +2730,7 @@ module Aws::Mgn
     UpdateReplicationConfigurationTemplateRequest.add_member(:use_fips_endpoint, Shapes::ShapeRef.new(shape: Boolean, location_name: "useFipsEndpoint"))
     UpdateReplicationConfigurationTemplateRequest.add_member(:internet_protocol, Shapes::ShapeRef.new(shape: InternetProtocol, location_name: "internetProtocol"))
     UpdateReplicationConfigurationTemplateRequest.add_member(:store_snapshot_on_local_zone, Shapes::ShapeRef.new(shape: Boolean, location_name: "storeSnapshotOnLocalZone"))
+    UpdateReplicationConfigurationTemplateRequest.add_member(:outpost_snapshot_location, Shapes::ShapeRef.new(shape: OutpostSnapshotLocation, location_name: "outpostSnapshotLocation"))
     UpdateReplicationConfigurationTemplateRequest.add_member(:storage_configuration, Shapes::ShapeRef.new(shape: StorageConfiguration, location_name: "storageConfiguration"))
     UpdateReplicationConfigurationTemplateRequest.struct_class = Types::UpdateReplicationConfigurationTemplateRequest
 
@@ -2505,6 +2925,18 @@ module Aws::Mgn
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
       end)
 
+      api.add_operation(:create_remote_source_action, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateRemoteSourceAction"
+        o.http_method = "POST"
+        o.http_request_uri = "/CreateRemoteSourceAction"
+        o.input = Shapes::ShapeRef.new(shape: CreateRemoteSourceActionRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateRemoteSourceActionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: UninitializedAccountException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
       api.add_operation(:create_replication_configuration_template, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateReplicationConfigurationTemplate"
         o.http_method = "POST"
@@ -2579,6 +3011,18 @@ module Aws::Mgn
         o.output = Shapes::ShapeRef.new(shape: DeleteNetworkMigrationDefinitionResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:delete_remote_source_action, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteRemoteSourceAction"
+        o.http_method = "POST"
+        o.http_request_uri = "/DeleteRemoteSourceAction"
+        o.input = Shapes::ShapeRef.new(shape: DeleteRemoteSourceActionRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteRemoteSourceActionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: UninitializedAccountException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
@@ -2778,6 +3222,17 @@ module Aws::Mgn
         o.output = Shapes::ShapeRef.new(shape: LaunchConfiguration)
         o.errors << Shapes::ShapeRef.new(shape: UninitializedAccountException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:get_launch_configuration_defaults, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetLaunchConfigurationDefaults"
+        o.http_method = "POST"
+        o.http_request_uri = "/GetLaunchConfigurationDefaults"
+        o.input = Shapes::ShapeRef.new(shape: GetLaunchConfigurationDefaultsRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetLaunchConfigurationDefaultsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: UninitializedAccountException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
       api.add_operation(:get_network_migration_definition, Seahorse::Model::Operation.new.tap do |o|
@@ -3085,6 +3540,24 @@ module Aws::Mgn
         )
       end)
 
+      api.add_operation(:list_network_migration_insights, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListNetworkMigrationInsights"
+        o.http_method = "POST"
+        o.http_request_uri = "/network-migration/ListNetworkMigrationInsights"
+        o.input = Shapes::ShapeRef.new(shape: ListNetworkMigrationInsightsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListNetworkMigrationInsightsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_network_migration_mapper_segment_constructs, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListNetworkMigrationMapperSegmentConstructs"
         o.http_method = "POST"
@@ -3148,6 +3621,72 @@ module Aws::Mgn
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_remote_source_action_invocation_results, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListRemoteSourceActionInvocationResults"
+        o.http_method = "POST"
+        o.http_request_uri = "/ListRemoteSourceActionInvocationResults"
+        o.input = Shapes::ShapeRef.new(shape: ListRemoteSourceActionInvocationResultsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListRemoteSourceActionInvocationResultsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: UninitializedAccountException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_remote_source_action_invocations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListRemoteSourceActionInvocations"
+        o.http_method = "POST"
+        o.http_request_uri = "/ListRemoteSourceActionInvocations"
+        o.input = Shapes::ShapeRef.new(shape: ListRemoteSourceActionInvocationsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListRemoteSourceActionInvocationsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: UninitializedAccountException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_remote_source_action_jobs, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListRemoteSourceActionJobs"
+        o.http_method = "POST"
+        o.http_request_uri = "/ListRemoteSourceActionJobs"
+        o.input = Shapes::ShapeRef.new(shape: ListRemoteSourceActionJobsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListRemoteSourceActionJobsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: UninitializedAccountException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_remote_source_actions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListRemoteSourceActions"
+        o.http_method = "POST"
+        o.http_request_uri = "/ListRemoteSourceActions"
+        o.input = Shapes::ShapeRef.new(shape: ListRemoteSourceActionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListRemoteSourceActionsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: UninitializedAccountException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
@@ -3429,6 +3968,19 @@ module Aws::Mgn
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
+      api.add_operation(:start_remote_source_action_job, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartRemoteSourceActionJob"
+        o.http_method = "POST"
+        o.http_request_uri = "/StartRemoteSourceActionJob"
+        o.input = Shapes::ShapeRef.new(shape: StartRemoteSourceActionJobRequest)
+        o.output = Shapes::ShapeRef.new(shape: StartRemoteSourceActionJobResponse)
+        o.errors << Shapes::ShapeRef.new(shape: UninitializedAccountException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
       api.add_operation(:start_replication, Seahorse::Model::Operation.new.tap do |o|
         o.name = "StartReplication"
         o.http_method = "POST"
@@ -3559,6 +4111,17 @@ module Aws::Mgn
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
+      api.add_operation(:update_launch_configuration_defaults, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateLaunchConfigurationDefaults"
+        o.http_method = "POST"
+        o.http_request_uri = "/UpdateLaunchConfigurationDefaults"
+        o.input = Shapes::ShapeRef.new(shape: UpdateLaunchConfigurationDefaultsRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateLaunchConfigurationDefaultsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: UninitializedAccountException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
       api.add_operation(:update_launch_configuration_template, Seahorse::Model::Operation.new.tap do |o|
         o.name = "UpdateLaunchConfigurationTemplate"
         o.http_method = "POST"
@@ -3591,6 +4154,18 @@ module Aws::Mgn
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
+      api.add_operation(:update_remote_source_action, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateRemoteSourceAction"
+        o.http_method = "POST"
+        o.http_request_uri = "/UpdateRemoteSourceAction"
+        o.input = Shapes::ShapeRef.new(shape: UpdateRemoteSourceActionRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateRemoteSourceActionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: UninitializedAccountException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
       api.add_operation(:update_replication_configuration, Seahorse::Model::Operation.new.tap do |o|

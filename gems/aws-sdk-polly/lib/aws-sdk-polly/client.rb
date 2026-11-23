@@ -272,7 +272,8 @@ module Aws::Polly
     #     An integer representing the maximum number attempts that will be made for
     #     a single request, including the initial attempt.  For example,
     #     setting this value to 5 will result in a request being retried up to
-    #     4 times. Used in `standard` and `adaptive` retry modes.
+    #     4 times. Used in `standard` and `adaptive` retry modes. Defaults to 3,
+    #     except for DynamoDB and DynamoDB Streams, which default to 4.
     #
     #   @option options [Proc] :output_event_stream_handler
     #     When an EventStream or Proc object is provided, it will be used as callback for each chunk of event stream response received along the way.
@@ -338,15 +339,15 @@ module Aws::Polly
     #     used by the default backoff function. This option is only used in the
     #     `legacy` retry mode.
     #
-    #   @option options [String] :retry_mode ("legacy")
+    #   @option options [String] :retry_mode ("standard")
     #     Specifies which retry algorithm to use. Values are:
     #
-    #     * `legacy` - The pre-existing retry behavior. This is the default
-    #       value if no retry mode is provided.
+    #     * `legacy` - The pre-existing retry behavior.
     #
     #     * `standard` - A standardized set of retry rules across the AWS SDKs.
     #       This includes support for retry quotas, which limit the number of
-    #       unsuccessful retries a client can make.
+    #       unsuccessful retries a client can make. This is the default value
+    #       if no retry mode is provided.
     #
     #     * `adaptive` - A retry mode that includes all the functionality of
     #       `standard` mode along with automatic client side throttling.
@@ -492,6 +493,150 @@ module Aws::Polly
 
     # @!group API Operations
 
+    # Creates a custom voice from recordings of a speaker and returns it in
+    # `pending` status. Use `GetVoice` to check the status. When the status
+    # is `active`, you can use the voice ID in `SynthesizeSpeech`,
+    # `StartSpeechSynthesisTask`, and `StartSpeechSynthesisStream`.
+    #
+    # The `custom-voice-max-count` service quota limits the number of custom
+    # voices in your account in each Region. If you reach the quota, the
+    # request fails with `ServiceQuotaExceededException`.
+    #
+    # This operation requires permissions to perform the `polly:CreateVoice`
+    # action. You also need `s3:GetObject` permission on each recording that
+    # you specify by `S3Url`. If you specify a customer managed key, you
+    # also need `kms:DescribeKey`, `kms:GenerateDataKey`, and `kms:Decrypt`
+    # permissions on the key. If you specify `Tags`, you also need the
+    # `polly:TagResource` permission.
+    #
+    # @option params [required, String] :name
+    #   The name of the voice. Use the name to identify the voice in your
+    #   application. The name can contain letters, digits, hyphens, and
+    #   underscores, and can be up to 64 characters long. The name doesn't
+    #   have to be unique. The name isn't the voice ID, which Amazon Polly
+    #   assigns.
+    #
+    # @option params [required, String] :language_code
+    #   The language of the recordings, for example, `en-US`. Amazon Polly
+    #   doesn't detect the language from the recordings.
+    #
+    # @option params [required, Boolean] :terms_accepted
+    #   Confirms the following two statements:
+    #
+    #   * "I confirm that I have obtained all necessary consents required
+    #     under any applicable laws and regulations, including biometric
+    #     privacy laws, from the owner of this voice to clone these voice
+    #     samples."
+    #
+    #   * "I confirm that I will not use the generated content for any
+    #     illegal, fraudulent, or harmful purpose and reaffirm my obligation
+    #     to abide by the AWS Service Terms, Biometric Notice and Consent
+    #     Terms, AWS Responsible AI Policy, and AWS Acceptable Use Policy."
+    #
+    #   You can read the [AWS Service Terms][1], the [Biometric Notice and
+    #   Consent Terms][2], the [AWS Responsible AI Policy][3], and the [AWS
+    #   Acceptable Use Policy][4] on the Amazon Web Services website.
+    #
+    #   You must set this parameter to `true` to create a voice. Otherwise,
+    #   the request fails with `ValidationException`.
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/service-terms/
+    #   [2]: https://aws.amazon.com/legal/biometric-notice-and-consent-terms/
+    #   [3]: https://aws.amazon.com/ai/responsible-ai/policy/
+    #   [4]: https://aws.amazon.com/aup/
+    #
+    # @option params [required, Types::VoiceCreationData] :voice_creation_data
+    #   The recordings that Amazon Polly uses to create the voice.
+    #
+    # @option params [Types::CustomerManagedEncryption] :customer_managed_encryption
+    #   The customer managed key that you want Amazon Polly to encrypt the
+    #   voice with. If you omit this parameter, Amazon Polly encrypts the
+    #   voice with an Amazon Web Services owned key.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   The tags that you apply to the voice to help you categorize and
+    #   organize it. Each tag consists of a key and an optional value, both of
+    #   which you define.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. If you don't specify a client token, the
+    #   Amazon Web Services SDKs generate one for you. If you retry a request
+    #   that succeeded with the same client token and the same parameters,
+    #   Amazon Polly returns the voice that the first request created and
+    #   doesn't create a second voice.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::CreateVoiceOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateVoiceOutput#voice #voice} => Types::Voice
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_voice({
+    #     name: "CustomVoiceName", # required
+    #     language_code: "de-DE", # required, accepts de-DE, en-US, es-US, fr-FR, hi-IN, it-IT, pt-BR
+    #     terms_accepted: false, # required
+    #     voice_creation_data: { # required
+    #       recordings: [ # required
+    #         {
+    #           format: "wav", # required, accepts wav, flac, ogg_vorbis, mp3
+    #           data: { # required
+    #             s3_url: "S3Url",
+    #             bytes: "data",
+    #           },
+    #         },
+    #       ],
+    #     },
+    #     customer_managed_encryption: {
+    #       kms_key_arn: "KmsKeyArn", # required
+    #       encryption_context: {
+    #         "EncryptionContextKey" => "EncryptionContextValue",
+    #       },
+    #     },
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.voice.arn #=> String
+    #   resp.voice.gender #=> String, one of "Female", "Male"
+    #   resp.voice.id #=> String, one of "Aditi", "Amy", "Astrid", "Bianca", "Brian", "Camila", "Carla", "Carmen", "Celine", "Chantal", "Conchita", "Cristiano", "Dora", "Emma", "Enrique", "Ewa", "Filiz", "Gabrielle", "Geraint", "Giorgio", "Gwyneth", "Hans", "Ines", "Ivy", "Jacek", "Jan", "Joanna", "Joey", "Justin", "Karl", "Kendra", "Kevin", "Kimberly", "Lea", "Liv", "Lotte", "Lucia", "Lupe", "Mads", "Maja", "Marlene", "Mathieu", "Matthew", "Maxim", "Mia", "Miguel", "Mizuki", "Naja", "Nicole", "Olivia", "Penelope", "Raveena", "Ricardo", "Ruben", "Russell", "Salli", "Seoyeon", "Takumi", "Tatyana", "Vicki", "Vitoria", "Zeina", "Zhiyu", "Aria", "Ayanda", "Arlet", "Hannah", "Arthur", "Daniel", "Liam", "Pedro", "Kajal", "Hiujin", "Laura", "Elin", "Ida", "Suvi", "Ola", "Hala", "Andres", "Sergio", "Remi", "Adriano", "Thiago", "Ruth", "Stephen", "Kazuha", "Tomoko", "Niamh", "Sofie", "Lisa", "Isabelle", "Zayd", "Danielle", "Gregory", "Burcu", "Jitka", "Sabrina", "Jasmine", "Jihye", "Ambre", "Beatrice", "Florian", "Lennart", "Lorenzo", "Tiffany", "Arjun", "Carlos", "Carolina", "Curtis", "Hyunduk", "Kenneth", "Kiara", "Leo", "Nate", "Tina"
+    #   resp.voice.language_code #=> String, one of "arb", "cmn-CN", "cy-GB", "da-DK", "de-DE", "en-AU", "en-GB", "en-GB-WLS", "en-IN", "en-US", "es-ES", "es-MX", "es-US", "fr-CA", "fr-FR", "is-IS", "it-IT", "ja-JP", "hi-IN", "ko-KR", "nb-NO", "nl-NL", "pl-PL", "pt-BR", "pt-PT", "ro-RO", "ru-RU", "sv-SE", "tr-TR", "en-NZ", "en-ZA", "ca-ES", "de-AT", "yue-CN", "ar-AE", "fi-FI", "en-IE", "nl-BE", "fr-BE", "cs-CZ", "de-CH", "en-SG"
+    #   resp.voice.language_name #=> String
+    #   resp.voice.name #=> String
+    #   resp.voice.origin #=> String, one of "aws", "customer"
+    #   resp.voice.status #=> String, one of "pending", "active", "failed"
+    #   resp.voice.status_reason #=> String
+    #   resp.voice.additional_language_codes #=> Array
+    #   resp.voice.additional_language_codes[0] #=> String, one of "arb", "cmn-CN", "cy-GB", "da-DK", "de-DE", "en-AU", "en-GB", "en-GB-WLS", "en-IN", "en-US", "es-ES", "es-MX", "es-US", "fr-CA", "fr-FR", "is-IS", "it-IT", "ja-JP", "hi-IN", "ko-KR", "nb-NO", "nl-NL", "pl-PL", "pt-BR", "pt-PT", "ro-RO", "ru-RU", "sv-SE", "tr-TR", "en-NZ", "en-ZA", "ca-ES", "de-AT", "yue-CN", "ar-AE", "fi-FI", "en-IE", "nl-BE", "fr-BE", "cs-CZ", "de-CH", "en-SG"
+    #   resp.voice.supported_engines #=> Array
+    #   resp.voice.supported_engines[0] #=> String, one of "standard", "neural", "long-form", "generative"
+    #   resp.voice.voice_creation_data.recordings #=> Array
+    #   resp.voice.voice_creation_data.recordings[0].format #=> String, one of "wav", "flac", "ogg_vorbis", "mp3"
+    #   resp.voice.voice_creation_data.recordings[0].data.s3_url #=> String
+    #   resp.voice.voice_creation_data.recordings[0].data.bytes #=> String
+    #   resp.voice.customer_managed_encryption.kms_key_arn #=> String
+    #   resp.voice.customer_managed_encryption.encryption_context #=> Hash
+    #   resp.voice.customer_managed_encryption.encryption_context["EncryptionContextKey"] #=> String
+    #   resp.voice.creation_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/CreateVoice AWS API Documentation
+    #
+    # @overload create_voice(params = {})
+    # @param [Hash] params ({})
+    def create_voice(params = {}, options = {})
+      req = build_request(:create_voice, params)
+      req.send_request(options)
+    end
+
     # Deletes the specified pronunciation lexicon stored in an Amazon Web
     # Services Region. A lexicon which has been deleted is not available for
     # speech synthesis, nor is it possible to retrieve it using either the
@@ -537,23 +682,72 @@ module Aws::Polly
       req.send_request(options)
     end
 
-    # Returns the list of voices that are available for use when requesting
-    # speech synthesis. Each voice speaks a specified language, is either
-    # male or female, and is identified by an ID, which is the ASCII version
-    # of the voice name.
+    # Deletes a custom voice. `DescribeVoices` and `GetVoice` stop returning
+    # the voice immediately. You can't restore a deleted voice.
     #
-    # When synthesizing speech ( `SynthesizeSpeech` ), you provide the voice
+    # You can delete a voice in `active` or `failed` status. If the voice is
+    # in `pending` status, the request fails with `ConflictException`. If no
+    # custom voice with the specified ID exists in your account and Region,
+    # the request fails with `ResourceNotFoundException`. You can delete the
+    # voice even if you disabled its Amazon Web Services KMS key or
+    # scheduled it for deletion.
+    #
+    # This operation requires permissions to perform the `polly:DeleteVoice`
+    # action.
+    #
+    # @option params [required, String] :voice_id
+    #   The ID of the custom voice to delete, for example, `vc-9a8fa85dd3`.
+    #   You can't specify the ARN of the voice.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_voice({
+    #     voice_id: "CustomVoiceId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/DeleteVoice AWS API Documentation
+    #
+    # @overload delete_voice(params = {})
+    # @param [Hash] params ({})
+    def delete_voice(params = {}, options = {})
+      req = build_request(:delete_voice, params)
+      req.send_request(options)
+    end
+
+    # Returns the list of voices: the voices that Amazon Polly provides and
+    # the custom voices in your account. Each voice speaks a specified
+    # language and is identified by an ID. A voice that Amazon Polly
+    # provides is either male or female, and its ID is the ASCII version of
+    # the voice name.
+    #
+    # When synthesizing speech (`SynthesizeSpeech`), you provide the voice
     # ID for the voice you want from the list of voices returned by
     # `DescribeVoices`.
     #
-    # For example, you want your news reader application to read news in a
-    # specific language, but giving a user the option to choose the voice.
-    # Using the `DescribeVoices` operation you can provide the user with a
-    # list of available voices to select from.
+    # For example, your news reader application reads news in a specific
+    # language, and you want to give users the option to choose the voice.
+    # With the `DescribeVoices` operation, you can provide a list of
+    # available voices for users to choose from.
     #
     # You can optionally specify a language code to filter the available
     # voices. For example, if you specify `en-US`, the operation returns a
     # list of all available US English voices.
+    #
+    # The list includes custom voices in every status. For each voice,
+    # `Origin` indicates whether Amazon Polly provides the voice or you
+    # created it. You can use a custom voice for synthesis only when its
+    # status is `active`. A voice in `failed` status stays in the list until
+    # you delete it.
+    #
+    # For a custom voice, `DescribeVoices` returns `Origin`, `Id`, `Name`,
+    # `Status`, `LanguageCode`, `LanguageName`, `SupportedEngines`, and
+    # `CreationTime`. To get `Arn`, `StatusReason`, `VoiceCreationData`, and
+    # `CustomerManagedEncryption`, use `GetVoice`.
+    #
+    # The `LanguageCode` and `Engine` filters apply to custom voices in the
+    # same way as to voices that Amazon Polly provides.
     #
     # This operation requires permissions to perform the
     # `polly:DescribeVoices` action.
@@ -635,15 +829,27 @@ module Aws::Polly
     # @example Response structure
     #
     #   resp.voices #=> Array
+    #   resp.voices[0].arn #=> String
     #   resp.voices[0].gender #=> String, one of "Female", "Male"
     #   resp.voices[0].id #=> String, one of "Aditi", "Amy", "Astrid", "Bianca", "Brian", "Camila", "Carla", "Carmen", "Celine", "Chantal", "Conchita", "Cristiano", "Dora", "Emma", "Enrique", "Ewa", "Filiz", "Gabrielle", "Geraint", "Giorgio", "Gwyneth", "Hans", "Ines", "Ivy", "Jacek", "Jan", "Joanna", "Joey", "Justin", "Karl", "Kendra", "Kevin", "Kimberly", "Lea", "Liv", "Lotte", "Lucia", "Lupe", "Mads", "Maja", "Marlene", "Mathieu", "Matthew", "Maxim", "Mia", "Miguel", "Mizuki", "Naja", "Nicole", "Olivia", "Penelope", "Raveena", "Ricardo", "Ruben", "Russell", "Salli", "Seoyeon", "Takumi", "Tatyana", "Vicki", "Vitoria", "Zeina", "Zhiyu", "Aria", "Ayanda", "Arlet", "Hannah", "Arthur", "Daniel", "Liam", "Pedro", "Kajal", "Hiujin", "Laura", "Elin", "Ida", "Suvi", "Ola", "Hala", "Andres", "Sergio", "Remi", "Adriano", "Thiago", "Ruth", "Stephen", "Kazuha", "Tomoko", "Niamh", "Sofie", "Lisa", "Isabelle", "Zayd", "Danielle", "Gregory", "Burcu", "Jitka", "Sabrina", "Jasmine", "Jihye", "Ambre", "Beatrice", "Florian", "Lennart", "Lorenzo", "Tiffany", "Arjun", "Carlos", "Carolina", "Curtis", "Hyunduk", "Kenneth", "Kiara", "Leo", "Nate", "Tina"
     #   resp.voices[0].language_code #=> String, one of "arb", "cmn-CN", "cy-GB", "da-DK", "de-DE", "en-AU", "en-GB", "en-GB-WLS", "en-IN", "en-US", "es-ES", "es-MX", "es-US", "fr-CA", "fr-FR", "is-IS", "it-IT", "ja-JP", "hi-IN", "ko-KR", "nb-NO", "nl-NL", "pl-PL", "pt-BR", "pt-PT", "ro-RO", "ru-RU", "sv-SE", "tr-TR", "en-NZ", "en-ZA", "ca-ES", "de-AT", "yue-CN", "ar-AE", "fi-FI", "en-IE", "nl-BE", "fr-BE", "cs-CZ", "de-CH", "en-SG"
     #   resp.voices[0].language_name #=> String
     #   resp.voices[0].name #=> String
+    #   resp.voices[0].origin #=> String, one of "aws", "customer"
+    #   resp.voices[0].status #=> String, one of "pending", "active", "failed"
+    #   resp.voices[0].status_reason #=> String
     #   resp.voices[0].additional_language_codes #=> Array
     #   resp.voices[0].additional_language_codes[0] #=> String, one of "arb", "cmn-CN", "cy-GB", "da-DK", "de-DE", "en-AU", "en-GB", "en-GB-WLS", "en-IN", "en-US", "es-ES", "es-MX", "es-US", "fr-CA", "fr-FR", "is-IS", "it-IT", "ja-JP", "hi-IN", "ko-KR", "nb-NO", "nl-NL", "pl-PL", "pt-BR", "pt-PT", "ro-RO", "ru-RU", "sv-SE", "tr-TR", "en-NZ", "en-ZA", "ca-ES", "de-AT", "yue-CN", "ar-AE", "fi-FI", "en-IE", "nl-BE", "fr-BE", "cs-CZ", "de-CH", "en-SG"
     #   resp.voices[0].supported_engines #=> Array
     #   resp.voices[0].supported_engines[0] #=> String, one of "standard", "neural", "long-form", "generative"
+    #   resp.voices[0].voice_creation_data.recordings #=> Array
+    #   resp.voices[0].voice_creation_data.recordings[0].format #=> String, one of "wav", "flac", "ogg_vorbis", "mp3"
+    #   resp.voices[0].voice_creation_data.recordings[0].data.s3_url #=> String
+    #   resp.voices[0].voice_creation_data.recordings[0].data.bytes #=> String
+    #   resp.voices[0].customer_managed_encryption.kms_key_arn #=> String
+    #   resp.voices[0].customer_managed_encryption.encryption_context #=> Hash
+    #   resp.voices[0].customer_managed_encryption.encryption_context["EncryptionContextKey"] #=> String
+    #   resp.voices[0].creation_time #=> Time
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/DescribeVoices AWS API Documentation
@@ -766,6 +972,69 @@ module Aws::Polly
     # @param [Hash] params ({})
     def get_speech_synthesis_task(params = {}, options = {})
       req = build_request(:get_speech_synthesis_task, params)
+      req.send_request(options)
+    end
+
+    # Returns the status and properties of a custom voice. Use this
+    # operation after `CreateVoice` to check whether the status of the voice
+    # is `active` or `failed`. Unlike `DescribeVoices`, `GetVoice` also
+    # returns `Arn`, `VoiceCreationData`, `CustomerManagedEncryption`, and
+    # `StatusReason`. If no custom voice with the specified ID exists in
+    # your account and Region, the request fails with
+    # `ResourceNotFoundException`.
+    #
+    # This operation requires permissions to perform the `polly:GetVoice`
+    # action.
+    #
+    # @option params [required, String] :voice_id
+    #   The ID of the custom voice that `CreateVoice` returned, for example,
+    #   `vc-9a8fa85dd3`. You can't specify the ARN of the voice.
+    #
+    # @return [Types::GetVoiceOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetVoiceOutput#voice #voice} => Types::Voice
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_voice({
+    #     voice_id: "CustomVoiceId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.voice.arn #=> String
+    #   resp.voice.gender #=> String, one of "Female", "Male"
+    #   resp.voice.id #=> String, one of "Aditi", "Amy", "Astrid", "Bianca", "Brian", "Camila", "Carla", "Carmen", "Celine", "Chantal", "Conchita", "Cristiano", "Dora", "Emma", "Enrique", "Ewa", "Filiz", "Gabrielle", "Geraint", "Giorgio", "Gwyneth", "Hans", "Ines", "Ivy", "Jacek", "Jan", "Joanna", "Joey", "Justin", "Karl", "Kendra", "Kevin", "Kimberly", "Lea", "Liv", "Lotte", "Lucia", "Lupe", "Mads", "Maja", "Marlene", "Mathieu", "Matthew", "Maxim", "Mia", "Miguel", "Mizuki", "Naja", "Nicole", "Olivia", "Penelope", "Raveena", "Ricardo", "Ruben", "Russell", "Salli", "Seoyeon", "Takumi", "Tatyana", "Vicki", "Vitoria", "Zeina", "Zhiyu", "Aria", "Ayanda", "Arlet", "Hannah", "Arthur", "Daniel", "Liam", "Pedro", "Kajal", "Hiujin", "Laura", "Elin", "Ida", "Suvi", "Ola", "Hala", "Andres", "Sergio", "Remi", "Adriano", "Thiago", "Ruth", "Stephen", "Kazuha", "Tomoko", "Niamh", "Sofie", "Lisa", "Isabelle", "Zayd", "Danielle", "Gregory", "Burcu", "Jitka", "Sabrina", "Jasmine", "Jihye", "Ambre", "Beatrice", "Florian", "Lennart", "Lorenzo", "Tiffany", "Arjun", "Carlos", "Carolina", "Curtis", "Hyunduk", "Kenneth", "Kiara", "Leo", "Nate", "Tina"
+    #   resp.voice.language_code #=> String, one of "arb", "cmn-CN", "cy-GB", "da-DK", "de-DE", "en-AU", "en-GB", "en-GB-WLS", "en-IN", "en-US", "es-ES", "es-MX", "es-US", "fr-CA", "fr-FR", "is-IS", "it-IT", "ja-JP", "hi-IN", "ko-KR", "nb-NO", "nl-NL", "pl-PL", "pt-BR", "pt-PT", "ro-RO", "ru-RU", "sv-SE", "tr-TR", "en-NZ", "en-ZA", "ca-ES", "de-AT", "yue-CN", "ar-AE", "fi-FI", "en-IE", "nl-BE", "fr-BE", "cs-CZ", "de-CH", "en-SG"
+    #   resp.voice.language_name #=> String
+    #   resp.voice.name #=> String
+    #   resp.voice.origin #=> String, one of "aws", "customer"
+    #   resp.voice.status #=> String, one of "pending", "active", "failed"
+    #   resp.voice.status_reason #=> String
+    #   resp.voice.additional_language_codes #=> Array
+    #   resp.voice.additional_language_codes[0] #=> String, one of "arb", "cmn-CN", "cy-GB", "da-DK", "de-DE", "en-AU", "en-GB", "en-GB-WLS", "en-IN", "en-US", "es-ES", "es-MX", "es-US", "fr-CA", "fr-FR", "is-IS", "it-IT", "ja-JP", "hi-IN", "ko-KR", "nb-NO", "nl-NL", "pl-PL", "pt-BR", "pt-PT", "ro-RO", "ru-RU", "sv-SE", "tr-TR", "en-NZ", "en-ZA", "ca-ES", "de-AT", "yue-CN", "ar-AE", "fi-FI", "en-IE", "nl-BE", "fr-BE", "cs-CZ", "de-CH", "en-SG"
+    #   resp.voice.supported_engines #=> Array
+    #   resp.voice.supported_engines[0] #=> String, one of "standard", "neural", "long-form", "generative"
+    #   resp.voice.voice_creation_data.recordings #=> Array
+    #   resp.voice.voice_creation_data.recordings[0].format #=> String, one of "wav", "flac", "ogg_vorbis", "mp3"
+    #   resp.voice.voice_creation_data.recordings[0].data.s3_url #=> String
+    #   resp.voice.voice_creation_data.recordings[0].data.bytes #=> String
+    #   resp.voice.customer_managed_encryption.kms_key_arn #=> String
+    #   resp.voice.customer_managed_encryption.encryption_context #=> Hash
+    #   resp.voice.customer_managed_encryption.encryption_context["EncryptionContextKey"] #=> String
+    #   resp.voice.creation_time #=> Time
+    #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
+    #
+    #   * voice_active
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/GetVoice AWS API Documentation
+    #
+    # @overload get_voice(params = {})
+    # @param [Hash] params ({})
+    def get_voice(params = {}, options = {})
+      req = build_request(:get_voice, params)
       req.send_request(options)
     end
 
@@ -898,11 +1167,64 @@ module Aws::Polly
       req.send_request(options)
     end
 
+    # Lists the tags for an Amazon Polly resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the resource to list the tags for.
+    #   You can tag Amazon Polly lexicons and custom voices.
+    #
+    # @return [Types::ListTagsForResourceOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTagsForResourceOutput#tags #tags} => Hash&lt;String,String&gt;
+    #
+    #
+    # @example Example: To list the tags on a lexicon
+    #
+    #   # The following example lists the tags associated with a pronunciation lexicon.
+    #
+    #   resp = client.list_tags_for_resource({
+    #     resource_arn: "arn:aws:polly:us-east-1:111122223333:lexicon/example", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     tags: {
+    #       "Environment" => "Production", 
+    #       "Project" => "Narration", 
+    #     }, 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_tags_for_resource({
+    #     resource_arn: "AmazonResourceName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/ListTagsForResource AWS API Documentation
+    #
+    # @overload list_tags_for_resource(params = {})
+    # @param [Hash] params ({})
+    def list_tags_for_resource(params = {}, options = {})
+      req = build_request(:list_tags_for_resource, params)
+      req.send_request(options)
+    end
+
     # Stores a pronunciation lexicon in an Amazon Web Services Region. If a
     # lexicon with the same name already exists in the region, it is
     # overwritten by the new lexicon. Lexicon operations have eventual
     # consistency, therefore, it might take some time before the lexicon is
     # available to the SynthesizeSpeech operation.
+    #
+    # Overwriting a lexicon keeps its existing tags. You can specify tags
+    # only when you create a lexicon. If you specify tags for a lexicon that
+    # already exists, the request fails with a `ValidationException`. To
+    # change the tags of an existing lexicon, use `TagResource` and
+    # `UntagResource`.
     #
     # For more information, see [Managing Lexicons][1].
     #
@@ -911,12 +1233,20 @@ module Aws::Polly
     # [1]: https://docs.aws.amazon.com/polly/latest/dg/managing-lexicons.html
     #
     # @option params [required, String] :name
-    #   Name of the lexicon. The name must follow the regular express format
-    #   \[0-9A-Za-z\]\{1,20}. That is, the name is a case-sensitive
+    #   Name of the lexicon. The name must follow the regular expression
+    #   format \[0-9A-Za-z\]\{1,20}. That is, the name is a case-sensitive
     #   alphanumeric string up to 20 characters long.
     #
     # @option params [required, String] :content
     #   Content of the PLS lexicon as string data.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   The metadata that you apply to the lexicon to help you categorize and
+    #   organize it. Each tag consists of a key and an optional value, both of
+    #   which you define. Tag keys can have a maximum character length of 128
+    #   characters, and tag values can have a maximum length of 256
+    #   characters. You can't replace the tags of an existing lexicon by
+    #   overwriting it with PutLexicon.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -939,6 +1269,9 @@ module Aws::Polly
     #   resp = client.put_lexicon({
     #     name: "LexiconName", # required
     #     content: "LexiconContent", # required
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/PutLexicon AWS API Documentation
@@ -950,16 +1283,24 @@ module Aws::Polly
       req.send_request(options)
     end
 
-    # Allows the creation of an asynchronous synthesis task, by starting a
-    # new `SpeechSynthesisTask`. This operation requires all the standard
+    # Starts an asynchronous synthesis task by creating a new
+    # `SpeechSynthesisTask`. This operation requires all the standard
     # information needed for speech synthesis, plus the name of an Amazon S3
     # bucket for the service to store the output of the synthesis task and
-    # two optional parameters (`OutputS3KeyPrefix` and `SnsTopicArn`). Once
-    # the synthesis task is created, this operation will return a
-    # `SpeechSynthesisTask` object, which will include an identifier of this
-    # task as well as the current status. The `SpeechSynthesisTask` object
-    # is available for 72 hours after starting the asynchronous synthesis
-    # task.
+    # two optional parameters (`OutputS3KeyPrefix` and `SnsTopicArn`). After
+    # Amazon Polly creates the synthesis task, the operation returns a
+    # `SpeechSynthesisTask` object that includes an identifier for the task
+    # and its current status. The `SpeechSynthesisTask` object is available
+    # for 72 hours after you start the asynchronous synthesis task.
+    #
+    # To use a custom voice, specify its ID in `VoiceId`. The voice must be
+    # in `active` status. If the voice is in `pending` or `failed` status,
+    # the request fails with `ConflictException`. If no custom voice with
+    # the specified ID exists in your account and Region, the request fails
+    # with `ResourceNotFoundException`. If the custom voice uses a customer
+    # managed key, you need `kms:Decrypt` permission on the key. If you
+    # disable the key or schedule it for deletion before the task runs, the
+    # task fails and `TaskStatusReason` describes the cause.
     #
     # @option params [String] :engine
     #   Specifies the engine (`standard`, `neural`, `long-form` or
@@ -1031,7 +1372,9 @@ module Aws::Polly
     #   value is plain text.
     #
     # @option params [required, String] :voice_id
-    #   Voice ID to use for the synthesis.
+    #   The voice ID to use for the synthesis. To use a custom voice, specify
+    #   the voice ID that `CreateVoice` returned, for example,
+    #   `vc-9a8fa85dd3`. You can't specify the ARN of a voice.
     #
     # @return [Types::StartSpeechSynthesisTaskOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1088,6 +1431,20 @@ module Aws::Polly
     # be available with all the voices (for example, Cyrillic might not be
     # read at all by English voices) unless phoneme mapping is used. For
     # more information, see [How it Works][1].
+    #
+    # To use a custom voice, specify its ID in `VoiceId`. The voice must be
+    # in `active` status. If the voice is in `pending` or `failed` status,
+    # the request fails with `ConflictException`. If no custom voice with
+    # the specified ID exists in your account and Region, the request fails
+    # with `ResourceNotFoundException`.
+    #
+    # If the custom voice uses a customer managed key, you need
+    # `kms:Decrypt` permission on the key. If you disabled the key or
+    # scheduled it for deletion, the request fails with
+    # `ValidationException`. If you don't have permission to use the key,
+    # the request fails with `AccessDeniedException`. If Amazon Web Services
+    # KMS throttles Amazon Polly's request to use the key, the request
+    # fails with `ThrottlingException`.
     #
     #
     #
@@ -1173,8 +1530,10 @@ module Aws::Polly
     #   [1]: https://docs.aws.amazon.com/polly/latest/dg/ssml.html
     #
     # @option params [required, String] :voice_id
-    #   Voice ID to use for the synthesis. You can get a list of available
-    #   voice IDs by calling the [DescribeVoices][1] operation.
+    #   The voice ID to use for the synthesis. You can get a list of available
+    #   voice IDs by calling the [DescribeVoices][1] operation. To use a
+    #   custom voice, specify the voice ID that `CreateVoice` returned, for
+    #   example, `vc-9a8fa85dd3`. You can't specify the ARN of a voice.
     #
     #
     #
@@ -1238,6 +1597,100 @@ module Aws::Polly
       req.send_request(options, &block)
     end
 
+    # Adds specified tags to a resource with the specified ARN. Existing
+    # tags on a resource are not changed if they are not specified in the
+    # request parameters. If you specify a tag key that already exists on
+    # the resource, the value in the request replaces the existing value.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the resource to add tags to. You can
+    #   tag Amazon Polly lexicons and custom voices.
+    #
+    # @option params [required, Hash<String,String>] :tags
+    #   The tags to add to the resource, as key-value pairs. Tag keys can have
+    #   a maximum character length of 128 characters, and tag values can have
+    #   a maximum length of 256 characters.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To add tags to a lexicon
+    #
+    #   # The following example adds the specified tags to a pronunciation lexicon.
+    #
+    #   resp = client.tag_resource({
+    #     resource_arn: "arn:aws:polly:us-east-1:111122223333:lexicon/example", 
+    #     tags: {
+    #       "Environment" => "Production", 
+    #       "Project" => "Narration", 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.tag_resource({
+    #     resource_arn: "AmazonResourceName", # required
+    #     tags: { # required
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/TagResource AWS API Documentation
+    #
+    # @overload tag_resource(params = {})
+    # @param [Hash] params ({})
+    def tag_resource(params = {}, options = {})
+      req = build_request(:tag_resource, params)
+      req.send_request(options)
+    end
+
+    # Deletes specified tags from a resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the resource to remove tags from.
+    #   You can tag Amazon Polly lexicons and custom voices.
+    #
+    # @option params [required, Array<String>] :tag_keys
+    #   The keys of the tags to be removed.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To remove tags from a lexicon
+    #
+    #   # The following example removes the tags with the specified keys from a pronunciation lexicon.
+    #
+    #   resp = client.untag_resource({
+    #     resource_arn: "arn:aws:polly:us-east-1:111122223333:lexicon/example", 
+    #     tag_keys: [
+    #       "Environment", 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.untag_resource({
+    #     resource_arn: "AmazonResourceName", # required
+    #     tag_keys: ["TagKey"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/UntagResource AWS API Documentation
+    #
+    # @overload untag_resource(params = {})
+    # @param [Hash] params ({})
+    def untag_resource(params = {}, options = {})
+      req = build_request(:untag_resource, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -1256,14 +1709,127 @@ module Aws::Polly
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-polly'
-      context[:gem_version] = '1.134.0'
+      context[:gem_version] = '1.142.0'
       Seahorse::Client::Request.new(handlers, context)
+    end
+
+    # Polls an API operation until a resource enters a desired state.
+    #
+    # ## Basic Usage
+    #
+    # A waiter will call an API operation until:
+    #
+    # * It is successful
+    # * It enters a terminal state
+    # * It makes the maximum number of attempts
+    #
+    # In between attempts, the waiter will sleep.
+    #
+    #     # polls in a loop, sleeping between attempts
+    #     client.wait_until(waiter_name, params)
+    #
+    # ## Configuration
+    #
+    # You can configure the maximum number of polling attempts, and the
+    # delay (in seconds) between each polling attempt. You can pass
+    # configuration as the final arguments hash.
+    #
+    #     # poll for ~25 seconds
+    #     client.wait_until(waiter_name, params, {
+    #       max_attempts: 5,
+    #       delay: 5,
+    #     })
+    #
+    # ## Callbacks
+    #
+    # You can be notified before each polling attempt and before each
+    # delay. If you throw `:success` or `:failure` from these callbacks,
+    # it will terminate the waiter.
+    #
+    #     started_at = Time.now
+    #     client.wait_until(waiter_name, params, {
+    #
+    #       # disable max attempts
+    #       max_attempts: nil,
+    #
+    #       # poll for 1 hour, instead of a number of attempts
+    #       before_wait: -> (attempts, response) do
+    #         throw :failure if Time.now - started_at > 3600
+    #       end
+    #     })
+    #
+    # ## Handling Errors
+    #
+    # When a waiter is unsuccessful, it will raise an error.
+    # All of the failure errors extend from
+    # {Aws::Waiters::Errors::WaiterFailed}.
+    #
+    #     begin
+    #       client.wait_until(...)
+    #     rescue Aws::Waiters::Errors::WaiterFailed
+    #       # resource did not enter the desired state in time
+    #     end
+    #
+    # ## Valid Waiters
+    #
+    # The following table lists the valid waiter names, the operations they call,
+    # and the default `:delay` and `:max_attempts` values.
+    #
+    # | waiter_name  | params             | :delay   | :max_attempts |
+    # | ------------ | ------------------ | -------- | ------------- |
+    # | voice_active | {Client#get_voice} | 15       | 480           |
+    #
+    # @raise [Errors::FailureStateError] Raised when the waiter terminates
+    #   because the waiter has entered a state that it will not transition
+    #   out of, preventing success.
+    #
+    # @raise [Errors::TooManyAttemptsError] Raised when the configured
+    #   maximum number of attempts have been made, and the waiter is not
+    #   yet successful.
+    #
+    # @raise [Errors::UnexpectedError] Raised when an error is encounted
+    #   while polling for a resource that is not expected.
+    #
+    # @raise [Errors::NoSuchWaiterError] Raised when you request to wait
+    #   for an unknown state.
+    #
+    # @return [Boolean] Returns `true` if the waiter was successful.
+    # @param [Symbol] waiter_name
+    # @param [Hash] params ({})
+    # @param [Hash] options ({})
+    # @option options [Integer] :max_attempts
+    # @option options [Integer] :delay
+    # @option options [Proc] :before_attempt
+    # @option options [Proc] :before_wait
+    def wait_until(waiter_name, params = {}, options = {})
+      w = waiter(waiter_name, options)
+      yield(w.waiter) if block_given? # deprecated
+      w.wait(params)
     end
 
     # @api private
     # @deprecated
     def waiter_names
-      []
+      waiters.keys
+    end
+
+    private
+
+    # @param [Symbol] waiter_name
+    # @param [Hash] options ({})
+    def waiter(waiter_name, options = {})
+      waiter_class = waiters[waiter_name]
+      if waiter_class
+        waiter_class.new(options.merge(client: self))
+      else
+        raise Aws::Waiters::Errors::NoSuchWaiterError.new(waiter_name, waiters.keys)
+      end
+    end
+
+    def waiters
+      {
+        voice_active: Waiters::VoiceActive
+      }
     end
 
     class << self

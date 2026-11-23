@@ -1,0 +1,588 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::OpenSearchMemory
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class BatchGetEventError
+      attr_accessor event_id: ::String
+      attr_accessor error_code: ("RESOURCE_NOT_FOUND" | "THROTTLING" | "ACCESS_DENIED" | "INTERNAL_SERVER")
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class BatchGetEventInput
+      attr_accessor space_id: ::String
+      attr_accessor actor_id: ::String
+      attr_accessor session_id: ::String
+      attr_accessor event_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class BatchGetEventOutput
+      attr_accessor events: ::Array[Types::Event]
+      attr_accessor errors: ::Array[Types::BatchGetEventError]
+      SENSITIVE: []
+    end
+
+    class BlobPayload
+      attr_accessor content_type: ("application/pdf" | "image/png" | "image/jpeg")
+      attr_accessor source: Types::BlobSource
+      SENSITIVE: [:source]
+    end
+
+    class BlobSource
+      attr_accessor s3_location: Types::S3Location
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class S3Location < BlobSource
+      end
+      class Unknown < BlobSource
+      end
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ::String
+      SENSITIVE: []
+    end
+
+    class ConversationalPayload
+      attr_accessor unified: Types::UnifiedConversational
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Unified < ConversationalPayload
+      end
+      class Unknown < ConversationalPayload
+      end
+    end
+
+    class CreateEventInput
+      attr_accessor space_id: ::String
+      attr_accessor actor_id: ::String
+      attr_accessor session_id: ::String
+      attr_accessor event_timestamp: ::Time
+      attr_accessor payload: Types::EventPayload
+      attr_accessor metadata: ::Hash[::String, ::String]
+      attr_accessor client_token: ::String
+      attr_accessor infer: bool
+      SENSITIVE: []
+    end
+
+    class CreateEventOutput
+      attr_accessor event: Types::EventDetail
+      SENSITIVE: []
+    end
+
+    class CreateMemoryDetail
+      attr_accessor memory_id: ::String
+      attr_accessor space_id: ::String
+      attr_accessor name: ::String
+      attr_accessor actor_id: ::String
+      attr_accessor session_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateMemoryInput
+      attr_accessor space_id: ::String
+      attr_accessor name: ::String
+      attr_accessor content: ::String
+      attr_accessor actor_id: ::String
+      attr_accessor session_id: ::String
+      attr_accessor metadata: ::Hash[::String, ::String]
+      attr_accessor client_token: ::String
+      SENSITIVE: [:content]
+    end
+
+    class CreateMemoryOutput
+      attr_accessor memory: Types::CreateMemoryDetail
+      SENSITIVE: []
+    end
+
+    class CreateSpaceRequest
+      attr_accessor name: ::String
+      attr_accessor memory_strategies: ::Array[Types::MemoryStrategy]
+      attr_accessor event_expiry_days: ::Integer
+      attr_accessor memory_expiry_days: ::Integer
+      attr_accessor extraction_model_id: ::String
+      attr_accessor encryption_configuration: Types::EncryptionConfiguration
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateSpaceResponse
+      attr_accessor space_id: ::String
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor status: ("CREATING" | "ACTIVE" | "UPDATING" | "DELETING" | "DELETED" | "FAILED")
+      attr_accessor created_at: ::Time
+      SENSITIVE: []
+    end
+
+    class DeleteEventInput
+      attr_accessor space_id: ::String
+      attr_accessor event_id: ::String
+      attr_accessor actor_id: ::String
+      attr_accessor session_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteEventOutput
+      attr_accessor event_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteMemoryInput
+      attr_accessor space_id: ::String
+      attr_accessor memory_id: ::String
+      attr_accessor actor_id: ::String
+      attr_accessor strategy_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteMemoryOutput
+      attr_accessor memory_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteSpaceRequest
+      attr_accessor space_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteSpaceResponse
+      attr_accessor space_id: ::String
+      attr_accessor status: ("CREATING" | "ACTIVE" | "UPDATING" | "DELETING" | "DELETED" | "FAILED")
+      SENSITIVE: []
+    end
+
+    class EncryptionConfiguration
+      attr_accessor kms_key_arn: ::String
+      SENSITIVE: []
+    end
+
+    class Event
+      attr_accessor event_id: ::String
+      attr_accessor space_id: ::String
+      attr_accessor actor_id: ::String
+      attr_accessor session_id: ::String
+      attr_accessor payload: Types::EventPayload
+      attr_accessor metadata: ::Hash[::String, ::String]
+      attr_accessor event_timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class EventDetail
+      attr_accessor event_id: ::String
+      attr_accessor space_id: ::String
+      attr_accessor actor_id: ::String
+      attr_accessor session_id: ::String
+      attr_accessor event_timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class EventPayload
+      attr_accessor conversational: Types::ConversationalPayload
+      attr_accessor structured_data: Types::StructuredDataPayload
+      attr_accessor blob: Types::BlobPayload
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Conversational < EventPayload
+      end
+      class StructuredData < EventPayload
+      end
+      class Blob < EventPayload
+      end
+      class Unknown < EventPayload
+      end
+    end
+
+    class EventSearchSummary
+      attr_accessor event_id: ::String
+      attr_accessor score: ::Float
+      attr_accessor system_metadata: Types::SystemMetadata
+      attr_accessor metadata: ::Hash[::String, ::String]
+      attr_accessor matched_content: ::String
+      SENSITIVE: [:matched_content]
+    end
+
+    class EventSummary
+      attr_accessor event_id: ::String
+      attr_accessor metadata: ::Hash[::String, ::String]
+      attr_accessor event_timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class GetEventInput
+      attr_accessor space_id: ::String
+      attr_accessor event_id: ::String
+      attr_accessor actor_id: ::String
+      attr_accessor session_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetEventOutput
+      attr_accessor event: Types::Event
+      SENSITIVE: []
+    end
+
+    class GetMemoryInput
+      attr_accessor space_id: ::String
+      attr_accessor memory_id: ::String
+      attr_accessor actor_id: ::String
+      attr_accessor strategy_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetMemoryOutput
+      attr_accessor memory: Types::Memory
+      SENSITIVE: []
+    end
+
+    class GetSpaceRequest
+      attr_accessor space_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetSpaceResponse
+      attr_accessor space_id: ::String
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor status: ("CREATING" | "ACTIVE" | "UPDATING" | "DELETING" | "DELETED" | "FAILED")
+      attr_accessor status_reason: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor memory_strategies: ::Array[Types::MemoryStrategy]
+      attr_accessor event_expiry_days: ::Integer
+      attr_accessor memory_expiry_days: ::Integer
+      attr_accessor extraction_model_id: ::String
+      attr_accessor encryption_configuration: Types::EncryptionConfiguration
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListEventsInput
+      attr_accessor space_id: ::String
+      attr_accessor actor_id: ::String
+      attr_accessor session_id: ::String
+      attr_accessor event_timestamp_before: ::Time
+      attr_accessor event_timestamp_after: ::Time
+      attr_accessor sort_order: ("ASC" | "DESC")
+      attr_accessor metadata_filters: ::Hash[::String, ::String]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListEventsOutput
+      attr_accessor events: ::Array[Types::EventSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListMemoriesInput
+      attr_accessor space_id: ::String
+      attr_accessor memory_strategies: ::Array[Types::StrategySelector]
+      attr_accessor actor_ids: ::Array[::String]
+      attr_accessor session_ids: ::Array[::String]
+      attr_accessor sort_by: ("CREATED_AT" | "UPDATED_AT")
+      attr_accessor sort_order: ("ASC" | "DESC")
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListMemoriesOutput
+      attr_accessor memories: ::Array[Types::MemoryListSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSpacesRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSpacesResponse
+      attr_accessor spaces: ::Array[Types::SpaceSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class Memory
+      attr_accessor memory_id: ::String
+      attr_accessor memory_type: ("SEMANTIC" | "SUMMARY" | "CUSTOM")
+      attr_accessor strategy_name: ::String
+      attr_accessor content: ::String
+      attr_accessor system_metadata: Types::SystemMetadata
+      attr_accessor metadata: ::Hash[::String, ::String]
+      SENSITIVE: [:content]
+    end
+
+    class MemoryListSummary
+      attr_accessor memory_id: ::String
+      attr_accessor memory_type: ("SEMANTIC" | "SUMMARY" | "CUSTOM")
+      attr_accessor strategy_name: ::String
+      attr_accessor system_metadata: Types::SystemMetadata
+      attr_accessor metadata: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class MemorySearchSummary
+      attr_accessor memory_id: ::String
+      attr_accessor memory_type: ("SEMANTIC" | "SUMMARY" | "CUSTOM")
+      attr_accessor strategy_name: ::String
+      attr_accessor content: ::String
+      attr_accessor score: ::Float
+      attr_accessor system_metadata: Types::SystemMetadata
+      attr_accessor metadata: ::Hash[::String, ::String]
+      attr_accessor source_event_ids: ::Array[::String]
+      SENSITIVE: [:content]
+    end
+
+    class MemoryStrategy
+      attr_accessor type: ("SEMANTIC" | "SUMMARY" | "CUSTOM")
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor configuration: Types::MemoryStrategyConfiguration
+      SENSITIVE: []
+    end
+
+    class MemoryStrategyConfiguration
+      attr_accessor extraction_prompt: ::String
+      attr_accessor extract_every_n_messages: ::Integer
+      attr_accessor extract_every_n_tokens: ::Integer
+      attr_accessor idle_timeout_seconds: ::Integer
+      attr_accessor extraction_seed_top_k: ::Integer
+      attr_accessor extraction_seed_recent_n: ::Integer
+      attr_accessor consolidation_enabled: bool
+      SENSITIVE: [:extraction_prompt]
+    end
+
+    class Message
+      attr_accessor role: ("USER" | "ASSISTANT" | "SYSTEM")
+      attr_accessor content: Types::MessageContent
+      SENSITIVE: []
+    end
+
+    class MessageContent
+      attr_accessor text: ::String
+      SENSITIVE: [:text]
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ::String
+      SENSITIVE: []
+    end
+
+    class S3Location
+      attr_accessor uri: ::String
+      SENSITIVE: []
+    end
+
+    class SearchEventsInput
+      attr_accessor space_id: ::String
+      attr_accessor actor_id: ::String
+      attr_accessor session_ids: ::Array[::String]
+      attr_accessor query: untyped
+      attr_accessor sort: untyped
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: [:query, :sort]
+    end
+
+    class SearchEventsOutput
+      attr_accessor events: ::Array[Types::EventSearchSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class SearchMemoriesInput
+      attr_accessor space_id: ::String
+      attr_accessor memory_strategies: ::Array[Types::StrategySelector]
+      attr_accessor actor_id: ::String
+      attr_accessor query: untyped
+      attr_accessor sort: untyped
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: [:query, :sort]
+    end
+
+    class SearchMemoriesOutput
+      attr_accessor memories: ::Array[Types::MemorySearchSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceQuotaExceededException
+      attr_accessor message: ::String
+      attr_accessor quota_code: ::String
+      attr_accessor service_code: ::String
+      SENSITIVE: []
+    end
+
+    class SpaceSummary
+      attr_accessor space_id: ::String
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor status: ("CREATING" | "ACTIVE" | "UPDATING" | "DELETING" | "DELETED" | "FAILED")
+      attr_accessor created_at: ::Time
+      SENSITIVE: []
+    end
+
+    class StrategySelector
+      attr_accessor memory_type: ("SEMANTIC" | "SUMMARY" | "CUSTOM")
+      attr_accessor memory_strategy_names: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class StructuredDataPayload
+      attr_accessor source: Types::StructuredDataSource
+      SENSITIVE: [:source]
+    end
+
+    class StructuredDataSource
+      attr_accessor json: untyped
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Json < StructuredDataSource
+      end
+      class Unknown < StructuredDataSource
+      end
+    end
+
+    class SystemMetadata
+      attr_accessor actor_id: ::String
+      attr_accessor session_id: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class Tag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      attr_accessor retry_after_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class UnifiedConversational
+      attr_accessor source: Types::UnifiedConversationalSource
+      SENSITIVE: []
+    end
+
+    class UnifiedConversationalObject
+      attr_accessor messages: ::Array[Types::Message]
+      SENSITIVE: []
+    end
+
+    class UnifiedConversationalSource
+      attr_accessor object: Types::UnifiedConversationalObject
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Object < UnifiedConversationalSource
+      end
+      class Unknown < UnifiedConversationalSource
+      end
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateMemoryInput
+      attr_accessor space_id: ::String
+      attr_accessor memory_id: ::String
+      attr_accessor content: ::String
+      attr_accessor metadata: ::Hash[::String, ::String]
+      attr_accessor metadata_mode: ("REPLACE" | "MERGE")
+      attr_accessor actor_id: ::String
+      attr_accessor strategy_name: ::String
+      SENSITIVE: [:content]
+    end
+
+    class UpdateMemoryOutput
+      attr_accessor memory: Types::Memory
+      SENSITIVE: []
+    end
+
+    class UpdateSpaceRequest
+      attr_accessor space_id: ::String
+      attr_accessor memory_strategies: ::Array[Types::MemoryStrategy]
+      attr_accessor event_expiry_days: ::Integer
+      attr_accessor memory_expiry_days: ::Integer
+      attr_accessor extraction_model_id: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateSpaceResponse
+      attr_accessor space_id: ::String
+      attr_accessor status: ("CREATING" | "ACTIVE" | "UPDATING" | "DELETING" | "DELETED" | "FAILED")
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      attr_accessor reason: ("disallowedQueryType" | "nonFilterableField" | "unknownField" | "fieldIndexMismatch" | "queryNestingTooDeep" | "unboundedPattern" | "queryBodyTooLarge" | "malformedQueryBody" | "invalidNextToken" | "fieldValidationFailed" | "unsupportedParameter" | "unsupportedField" | "other")
+      attr_accessor field_list: ::Array[Types::ValidationExceptionField]
+      SENSITIVE: []
+    end
+
+    class ValidationExceptionField
+      attr_accessor name: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+  end
+end

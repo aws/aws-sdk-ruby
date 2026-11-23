@@ -52,6 +52,7 @@ module Aws::PCS
       attr_accessor slurm_custom_settings: ::Array[Types::SlurmCustomSetting]
       attr_accessor slurmdbd_custom_settings: ::Array[Types::SlurmdbdCustomSetting]
       attr_accessor cgroup_custom_settings: ::Array[Types::CgroupCustomSetting]
+      attr_accessor job_submit_plugins: ::Array[Types::JobSubmitPlugin]
       attr_accessor auth_key: Types::SlurmAuthKey
       attr_accessor jwt_auth: Types::JwtAuth
       attr_accessor accounting: Types::Accounting
@@ -64,6 +65,7 @@ module Aws::PCS
       attr_accessor slurm_custom_settings: ::Array[Types::SlurmCustomSetting]
       attr_accessor slurmdbd_custom_settings: ::Array[Types::SlurmdbdCustomSetting]
       attr_accessor cgroup_custom_settings: ::Array[Types::CgroupCustomSetting]
+      attr_accessor job_submit_plugins: ::Array[Types::JobSubmitPlugin]
       attr_accessor accounting: Types::AccountingRequest
       attr_accessor slurm_rest: Types::SlurmRestRequest
       SENSITIVE: []
@@ -80,6 +82,9 @@ module Aws::PCS
     end
 
     class ComputeNodeGroup
+      attr_accessor ami_id: ::String
+      attr_accessor security_group_ids: ::Array[::String]
+      attr_accessor ssh_key_name: ::String
       attr_accessor name: ::String
       attr_accessor id: ::String
       attr_accessor arn: ::String
@@ -87,9 +92,9 @@ module Aws::PCS
       attr_accessor created_at: ::Time
       attr_accessor modified_at: ::Time
       attr_accessor status: ("CREATING" | "ACTIVE" | "UPDATING" | "DELETING" | "CREATE_FAILED" | "DELETE_FAILED" | "UPDATE_FAILED" | "DELETED" | "SUSPENDING" | "SUSPENDED" | "RESUMING")
-      attr_accessor ami_id: ::String
       attr_accessor subnet_ids: ::Array[::String]
       attr_accessor purchase_option: ("ONDEMAND" | "SPOT" | "CAPACITY_BLOCK" | "INTERRUPTIBLE_CAPACITY_RESERVATION")
+      attr_accessor launch_template_mode: ("CUSTOM" | "MANAGED")
       attr_accessor custom_launch_template: Types::CustomLaunchTemplate
       attr_accessor iam_instance_profile_arn: ::String
       attr_accessor scaling_configuration: Types::ScalingConfiguration
@@ -97,6 +102,7 @@ module Aws::PCS
       attr_accessor spot_options: Types::SpotOptions
       attr_accessor slurm_configuration: Types::ComputeNodeGroupSlurmConfiguration
       attr_accessor node_lifecycle_actions: Types::NodeLifecycleActions
+      attr_accessor instance_health_checks: Types::InstanceHealthChecks
       attr_accessor error_info: ::Array[Types::ErrorInfo]
       SENSITIVE: []
     end
@@ -155,11 +161,14 @@ module Aws::PCS
     end
 
     class CreateComputeNodeGroupRequest
+      attr_accessor ami_id: ::String
+      attr_accessor security_group_ids: ::Array[::String]
+      attr_accessor ssh_key_name: ::String
       attr_accessor cluster_identifier: ::String
       attr_accessor compute_node_group_name: ::String
-      attr_accessor ami_id: ::String
       attr_accessor subnet_ids: ::Array[::String]
       attr_accessor purchase_option: ("ONDEMAND" | "SPOT" | "CAPACITY_BLOCK" | "INTERRUPTIBLE_CAPACITY_RESERVATION")
+      attr_accessor launch_template_mode: ("CUSTOM" | "MANAGED")
       attr_accessor custom_launch_template: Types::CustomLaunchTemplate
       attr_accessor iam_instance_profile_arn: ::String
       attr_accessor scaling_configuration: Types::ScalingConfigurationRequest
@@ -167,6 +176,7 @@ module Aws::PCS
       attr_accessor spot_options: Types::SpotOptions
       attr_accessor slurm_configuration: Types::ComputeNodeGroupSlurmConfigurationRequest
       attr_accessor node_lifecycle_actions: Types::NodeLifecycleActionsRequest
+      attr_accessor instance_health_checks: Types::InstanceHealthChecksRequest
       attr_accessor client_token: ::String
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
@@ -195,6 +205,17 @@ module Aws::PCS
     class CustomLaunchTemplate
       attr_accessor id: ::String
       attr_accessor version: ::String
+      SENSITIVE: []
+    end
+
+    class DeepHealthCheckOnStart
+      attr_accessor profile: ("NONE" | "QUICK" | "MEDIUM" | "LONG")
+      attr_accessor repair_action: ("AUTO" | "REPLACE" | "ISOLATE" | "NONE")
+      SENSITIVE: []
+    end
+
+    class DeepHealthChecks
+      attr_accessor on_start: Types::DeepHealthCheckOnStart
       SENSITIVE: []
     end
 
@@ -274,13 +295,45 @@ module Aws::PCS
       SENSITIVE: []
     end
 
+    class HealthMonitoring
+      attr_accessor mode: ("NONE" | "STANDARD")
+      attr_accessor repair_action: ("AUTO" | "REPLACE" | "ISOLATE" | "NONE")
+      SENSITIVE: []
+    end
+
     class InstanceConfig
       attr_accessor instance_type: ::String
       SENSITIVE: []
     end
 
+    class InstanceHealthChecks
+      attr_accessor health_monitoring: Types::HealthMonitoring
+      attr_accessor deep_health_checks: Types::DeepHealthChecks
+      SENSITIVE: []
+    end
+
+    class InstanceHealthChecksRequest
+      attr_accessor health_monitoring: Types::HealthMonitoring
+      attr_accessor deep_health_checks: Types::DeepHealthChecks
+      SENSITIVE: []
+    end
+
     class InternalServerException
       attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class JobSubmitPlugin
+      attr_accessor name: ::String
+      attr_accessor type: ("STARLARK")
+      attr_accessor script_source: Types::JobSubmitScriptSource
+      SENSITIVE: []
+    end
+
+    class JobSubmitScriptSource
+      attr_accessor script_location: ::String
+      attr_accessor s3_version_id: ::String
+      attr_accessor checksum: ::String
       SENSITIVE: []
     end
 
@@ -434,6 +487,7 @@ module Aws::PCS
       attr_accessor compute_node_group_name: ::String
       attr_accessor node_lifecycle_actions: Types::NodeLifecycleActions
       attr_accessor scheduler_version: ::String
+      attr_accessor instance_health_checks: Types::InstanceHealthChecks
       SENSITIVE: [:shared_secret]
     end
 
@@ -565,16 +619,20 @@ module Aws::PCS
       attr_accessor slurm_custom_settings: ::Array[Types::SlurmCustomSetting]
       attr_accessor slurmdbd_custom_settings: ::Array[Types::SlurmdbdCustomSetting]
       attr_accessor cgroup_custom_settings: ::Array[Types::CgroupCustomSetting]
+      attr_accessor job_submit_plugins: ::Array[Types::JobSubmitPlugin]
       attr_accessor accounting: Types::UpdateAccountingRequest
       attr_accessor slurm_rest: Types::UpdateSlurmRestRequest
       SENSITIVE: []
     end
 
     class UpdateComputeNodeGroupRequest
+      attr_accessor ami_id: ::String
+      attr_accessor security_group_ids: ::Array[::String]
+      attr_accessor ssh_key_name: ::String
       attr_accessor cluster_identifier: ::String
       attr_accessor compute_node_group_identifier: ::String
-      attr_accessor ami_id: ::String
       attr_accessor subnet_ids: ::Array[::String]
+      attr_accessor launch_template_mode: ("CUSTOM" | "MANAGED")
       attr_accessor custom_launch_template: Types::CustomLaunchTemplate
       attr_accessor purchase_option: ("ONDEMAND" | "SPOT" | "CAPACITY_BLOCK" | "INTERRUPTIBLE_CAPACITY_RESERVATION")
       attr_accessor spot_options: Types::SpotOptions
@@ -582,6 +640,7 @@ module Aws::PCS
       attr_accessor iam_instance_profile_arn: ::String
       attr_accessor slurm_configuration: Types::UpdateComputeNodeGroupSlurmConfigurationRequest
       attr_accessor node_lifecycle_actions: Types::UpdateNodeLifecycleActionsRequest
+      attr_accessor instance_health_checks: Types::UpdateInstanceHealthChecksRequest
       attr_accessor client_token: ::String
       SENSITIVE: []
     end
@@ -595,6 +654,12 @@ module Aws::PCS
       attr_accessor scale_down_idle_time_in_seconds: ::Integer
       attr_accessor slurm_custom_settings: ::Array[Types::SlurmCustomSetting]
       attr_accessor gres_custom_settings: ::Array[::Hash[::String, ::String]]
+      SENSITIVE: []
+    end
+
+    class UpdateInstanceHealthChecksRequest
+      attr_accessor health_monitoring: Types::HealthMonitoring
+      attr_accessor deep_health_checks: Types::DeepHealthChecks
       SENSITIVE: []
     end
 

@@ -208,6 +208,7 @@ module Aws::ARCRegionswitch
     ResourceWarning = Shapes::StructureShape.new(name: 'ResourceWarning')
     ResourceWarningStatus = Shapes::StringShape.new(name: 'ResourceWarningStatus')
     Resources = Shapes::ListShape.new(name: 'Resources')
+    RetryableConflictException = Shapes::StructureShape.new(name: 'RetryableConflictException')
     RoleArn = Shapes::StringShape.new(name: 'RoleArn')
     Route53HealthCheck = Shapes::StructureShape.new(name: 'Route53HealthCheck')
     Route53HealthCheckConfiguration = Shapes::StructureShape.new(name: 'Route53HealthCheckConfiguration')
@@ -852,6 +853,11 @@ module Aws::ARCRegionswitch
 
     Resources.member = Shapes::ShapeRef.new(shape: String)
 
+    RetryableConflictException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
+    RetryableConflictException.add_member(:resource_id, Shapes::ShapeRef.new(shape: String, location_name: "resourceId"))
+    RetryableConflictException.add_member(:resource_type, Shapes::ShapeRef.new(shape: String, location_name: "resourceType"))
+    RetryableConflictException.struct_class = Types::RetryableConflictException
+
     Route53HealthCheck.add_member(:hosted_zone_id, Shapes::ShapeRef.new(shape: Route53HostedZoneId, required: true, location_name: "hostedZoneId"))
     Route53HealthCheck.add_member(:record_name, Shapes::ShapeRef.new(shape: Route53RecordName, required: true, location_name: "recordName"))
     Route53HealthCheck.add_member(:health_check_id, Shapes::ShapeRef.new(shape: Route53HealthCheckId, location_name: "healthCheckId"))
@@ -1314,6 +1320,7 @@ module Aws::ARCRegionswitch
         o.input = Shapes::ShapeRef.new(shape: UpdatePlanRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdatePlanResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: RetryableConflictException)
       end)
 
       api.add_operation(:update_plan_execution, Seahorse::Model::Operation.new.tap do |o|

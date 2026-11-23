@@ -1051,6 +1051,18 @@ module Aws::BedrockRuntime
     #   prompt resource.
     #   @return [Types::GuardrailConfiguration]
     #
+    # @!attribute [rw] project_identifier
+    #   The ID or Amazon Resource Name (ARN) of the project to use for this
+    #   invocation. The project must be active and belong to your AWS
+    #   account and the AWS Region to which you send the request. Specify
+    #   `default` or omit this field to use the default project for your
+    #   account.
+    #
+    #   For a non-default project, the inference target must resolve to a
+    #   foundation model or system-defined inference profile. Application
+    #   inference profiles don't support non-default projects.
+    #   @return [String]
+    #
     # @!attribute [rw] additional_model_request_fields
     #   Additional inference parameters that the model supports, beyond the
     #   base set of inference parameters that `Converse` and
@@ -1117,6 +1129,7 @@ module Aws::BedrockRuntime
       :inference_config,
       :tool_config,
       :guardrail_config,
+      :project_identifier,
       :additional_model_request_fields,
       :prompt_variables,
       :additional_model_response_field_paths,
@@ -1311,6 +1324,18 @@ module Aws::BedrockRuntime
     #   prompt resource.
     #   @return [Types::GuardrailStreamConfiguration]
     #
+    # @!attribute [rw] project_identifier
+    #   The ID or Amazon Resource Name (ARN) of the project to use for this
+    #   invocation. The project must be active and belong to your AWS
+    #   account and the AWS Region to which you send the request. Specify
+    #   `default` or omit this field to use the default project for your
+    #   account.
+    #
+    #   For a non-default project, the inference target must resolve to a
+    #   foundation model or system-defined inference profile. Application
+    #   inference profiles don't support non-default projects.
+    #   @return [String]
+    #
     # @!attribute [rw] additional_model_request_fields
     #   Additional inference parameters that the model supports, beyond the
     #   base set of inference parameters that `Converse` and
@@ -1377,6 +1402,7 @@ module Aws::BedrockRuntime
       :inference_config,
       :tool_config,
       :guardrail_config,
+      :project_identifier,
       :additional_model_request_fields,
       :prompt_variables,
       :additional_model_response_field_paths,
@@ -3777,6 +3803,18 @@ module Aws::BedrockRuntime
     #   Key-value pairs that you can use to filter invocation logs.
     #   @return [String]
     #
+    # @!attribute [rw] project_identifier
+    #   The ID or Amazon Resource Name (ARN) of the project to use for this
+    #   invocation. The project must be active and belong to your AWS
+    #   account and the AWS Region to which you send the request. Specify
+    #   `default` or omit this field to use the default project for your
+    #   account.
+    #
+    #   For a non-default project, the inference target must resolve to a
+    #   foundation model or system-defined inference profile. Application
+    #   inference profiles don't support non-default projects.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-runtime-2023-09-30/InvokeModelRequest AWS API Documentation
     #
     class InvokeModelRequest < Struct.new(
@@ -3789,7 +3827,8 @@ module Aws::BedrockRuntime
       :guardrail_version,
       :performance_config_latency,
       :service_tier,
-      :request_metadata)
+      :request_metadata,
+      :project_identifier)
       SENSITIVE = [:body, :request_metadata]
       include Aws::Structure
     end
@@ -3991,6 +4030,18 @@ module Aws::BedrockRuntime
     #   Key-value pairs that you can use to filter invocation logs.
     #   @return [String]
     #
+    # @!attribute [rw] project_identifier
+    #   The ID or Amazon Resource Name (ARN) of the project to use for this
+    #   invocation. The project must be active and belong to your AWS
+    #   account and the AWS Region to which you send the request. Specify
+    #   `default` or omit this field to use the default project for your
+    #   account.
+    #
+    #   For a non-default project, the inference target must resolve to a
+    #   foundation model or system-defined inference profile. Application
+    #   inference profiles don't support non-default projects.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-runtime-2023-09-30/InvokeModelWithResponseStreamRequest AWS API Documentation
     #
     class InvokeModelWithResponseStreamRequest < Struct.new(
@@ -4003,7 +4054,8 @@ module Aws::BedrockRuntime
       :guardrail_version,
       :performance_config_latency,
       :service_tier,
-      :request_metadata)
+      :request_metadata,
+      :project_identifier)
       SENSITIVE = [:body, :request_metadata]
       include Aws::Structure
     end

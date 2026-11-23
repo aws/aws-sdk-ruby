@@ -1,6 +1,51 @@
 Unreleased Changes
 ------------------
 
+1.73.0 (2026-11-19)
+------------------
+
+* Feature - Adds the AWS Billing x402 payment type to ProcessPayment. Agents can purchase x402-enabled AWS Marketplace products and have the charges billed to the AWS account, without a wallet. Requests use the service-managed payment instrument ID aws.agentcorepayments.awsbilling.v1.
+
+1.72.0 (2026-11-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.71.0 (2026-11-17)
+------------------
+
+* Feature - Adds support for continuous insights and automatic dataset generation
+
+1.70.0 (2026-11-16)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.69.0 (2026-11-11)
+------------------
+
+* Feature - Support SigV4 request signing (cryptographically signed) in the Bedrock AgentCore Harness MCP connector tool.
+
+1.68.0 (2026-11-10)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.67.0 (2026-11-09)
+------------------
+
+* Feature - Adds the InvokeWebSearch API, which searches the web using the AWS-managed web search and returns ranked results with a text extract from each page. Results can be filtered by domain and by publication time.
+
+1.66.0 (2026-11-06)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.65.0 (2026-11-04)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.64.0 (2026-10-29)
 ------------------
 

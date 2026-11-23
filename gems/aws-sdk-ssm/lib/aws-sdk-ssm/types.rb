@@ -1415,6 +1415,12 @@ module Aws::SSM
     #   Variables defined for the automation.
     #   @return [Hash<String,Array<String>>]
     #
+    # @!attribute [rw] targets_summary
+    #   A summary of the child executions that a rate control execution
+    #   started for its targets. This field is returned only for rate
+    #   control executions.
+    #   @return [Types::TargetsSummary]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/AutomationExecution AWS API Documentation
     #
     class AutomationExecution < Struct.new(
@@ -1453,7 +1459,8 @@ module Aws::SSM
       :ops_item_id,
       :association_id,
       :change_request_name,
-      :variables)
+      :variables,
+      :targets_summary)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2026,16 +2033,23 @@ module Aws::SSM
     #   environment.
     #   @return [Types::AzureConfiguration]
     #
+    # @!attribute [rw] gcp_configuration
+    #   The access details and targets for connecting to a Google Cloud
+    #   Platform (GCP) environment.
+    #   @return [Types::GcpConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CloudConnectorConfiguration AWS API Documentation
     #
     class CloudConnectorConfiguration < Struct.new(
       :azure_configuration,
+      :gcp_configuration,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
       include Aws::Structure::Union
 
       class AzureConfiguration < CloudConnectorConfiguration; end
+      class GcpConfiguration < CloudConnectorConfiguration; end
       class Unknown < CloudConnectorConfiguration; end
     end
 
@@ -2057,6 +2071,20 @@ module Aws::SSM
     #
     #   : The Azure tenant ID to filter by. Filters the results to
     #     connectors that target the specified tenant.
+    #
+    #   ProjectId
+    #
+    #   : The Google Cloud Platform (GCP) project ID to filter by. Filters
+    #     the results to connectors that target the specified project.
+    #
+    #   OrganizationId
+    #
+    #   : The GCP organization ID to filter by. Filters the results to
+    #     connectors that target the entire specified organization.
+    #
+    #   You can't combine Azure filter keys (`SubscriptionId` and
+    #   `TenantId`) with GCP filter keys (`ProjectId` and `OrganizationId`)
+    #   in the same request.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CloudConnectorFilter AWS API Documentation
@@ -2094,6 +2122,17 @@ module Aws::SSM
     #   The date and time the cloud connector was last updated.
     #   @return [Time]
     #
+    # @!attribute [rw] provider
+    #   The third-party cloud provider that the cloud connector connects to.
+    #   Valid values: `Azure` \| `GCP`.
+    #   @return [String]
+    #
+    # @!attribute [rw] config_connector_arn
+    #   The ARN of the Amazon Web Services Config connector associated with
+    #   this cloud connector. This value is returned only if the cloud
+    #   connector was created with an Amazon Web Services Config connector.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CloudConnectorSummary AWS API Documentation
     #
     class CloudConnectorSummary < Struct.new(
@@ -2102,7 +2141,9 @@ module Aws::SSM
       :description,
       :role_arn,
       :created_at,
-      :updated_at)
+      :updated_at,
+      :provider,
+      :config_connector_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3774,8 +3815,9 @@ module Aws::SSM
     #   @return [Types::CloudConnectorConfiguration]
     #
     # @!attribute [rw] config_connector_arn
-    #   The ARN of the Amazon Web Services Config connector associated with
-    #   this cloud connector.
+    #   The ARN of the Amazon Web Services Config connector to associate
+    #   with this cloud connector. If you omit it, the cloud connector is
+    #   created without Amazon Web Services Config integration.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -3931,6 +3973,19 @@ module Aws::SSM
     #    </note>
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] cloud_providers
+    #   The cloud providers that the document can run against. Valid values
+    #   include the following:
+    #
+    #   * `AWS` - The document runs against Amazon Web Services resources.
+    #
+    #   * `Azure` - The document runs against Microsoft Azure resources.
+    #
+    #   * `GCP` - The document runs against Google Cloud resources.
+    #
+    #   If you don't specify a value, the default is `AWS`.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CreateDocumentRequest AWS API Documentation
     #
     class CreateDocumentRequest < Struct.new(
@@ -3943,7 +3998,8 @@ module Aws::SSM
       :document_type,
       :document_format,
       :target_type,
-      :tags)
+      :tags,
+      :cloud_providers)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4998,6 +5054,16 @@ module Aws::SSM
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DeleteResourcePolicyResponse AWS API Documentation
     #
     class DeleteResourcePolicyResponse < Aws::EmptyStructure; end
+
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DeregisterDefaultHostManagementConfigurationRequest AWS API Documentation
+    #
+    class DeregisterDefaultHostManagementConfigurationRequest < Aws::EmptyStructure; end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DeregisterDefaultHostManagementConfigurationResult AWS API Documentation
+    #
+    class DeregisterDefaultHostManagementConfigurationResult < Aws::EmptyStructure; end
 
     # @!attribute [rw] instance_id
     #   The ID assigned to the managed node when you registered it using the
@@ -7296,6 +7362,11 @@ module Aws::SSM
     #   The value that identifies a document's category.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] cloud_providers
+    #   This field specifies the cloud providers that the returned version
+    #   of the document can run against.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DocumentDescription AWS API Documentation
     #
     class DocumentDescription < Struct.new(
@@ -7328,7 +7399,8 @@ module Aws::SSM
       :pending_review_version,
       :review_status,
       :category,
-      :category_enum)
+      :category_enum,
+      :cloud_providers)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7427,6 +7499,11 @@ module Aws::SSM
     #   The user in your organization who created the document.
     #   @return [String]
     #
+    # @!attribute [rw] cloud_providers
+    #   This field specifies the cloud providers that the default version of
+    #   the document can run against.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DocumentIdentifier AWS API Documentation
     #
     class DocumentIdentifier < Struct.new(
@@ -7444,7 +7521,8 @@ module Aws::SSM
       :tags,
       :requires,
       :review_status,
-      :author)
+      :author,
+      :cloud_providers)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7458,6 +7536,21 @@ module Aws::SSM
     # You can also use Amazon Web Services-provided keys, some of which have
     # specific allowed values. These keys and their associated values are as
     # follows:
+    #
+    # CloudProviders
+    #
+    # : Returns documents whose default version can run against any of the
+    #   specified cloud providers. The `CloudProviders` key supports the
+    #   following values:
+    #
+    #   * `AWS` - Documents that run against Amazon Web Services resources.
+    #
+    #   * `Azure` - Documents that run against Microsoft Azure resources.
+    #
+    #   * `GCP` - Documents that run against Google Cloud resources.
+    #
+    #   If you created a document before Systems Manager supported cloud
+    #   providers, the document runs against `AWS`.
     #
     # DocumentType
     # : * `ApplicationConfiguration`
@@ -7795,6 +7888,11 @@ module Aws::SSM
     #   the document.
     #   @return [String]
     #
+    # @!attribute [rw] cloud_providers
+    #   This field specifies the cloud providers that this version of the
+    #   document can run against.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DocumentVersionInfo AWS API Documentation
     #
     class DocumentVersionInfo < Struct.new(
@@ -7807,7 +7905,8 @@ module Aws::SSM
       :document_format,
       :status,
       :status_information,
-      :review_status)
+      :review_status,
+      :cloud_providers)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8020,6 +8119,82 @@ module Aws::SSM
       include Aws::Structure
     end
 
+    # The access details and targets for connecting to a Google Cloud
+    # Platform (GCP) environment, including the workload identity pool
+    # provider and service account used for authentication and the projects
+    # to target.
+    #
+    # @!attribute [rw] organization_id
+    #   The ID of the GCP organization.
+    #   @return [String]
+    #
+    # @!attribute [rw] workload_identity_pool_provider
+    #   The full resource name of the GCP workload identity pool provider
+    #   used for authentication.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_account_email
+    #   The email address of the GCP service account used for
+    #   authentication.
+    #   @return [String]
+    #
+    # @!attribute [rw] targets
+    #   The target GCP projects for the cloud connector.
+    #   @return [Types::GcpConfigurationTargets]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GcpConfiguration AWS API Documentation
+    #
+    class GcpConfiguration < Struct.new(
+      :organization_id,
+      :workload_identity_pool_provider,
+      :service_account_email,
+      :targets)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The target resources in the GCP environment.
+    #
+    # @note GcpConfigurationTargets is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note GcpConfigurationTargets is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of GcpConfigurationTargets corresponding to the set member.
+    #
+    # @!attribute [rw] projects
+    #   A list of GCP projects to target.
+    #   @return [Array<Types::GcpProject>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GcpConfigurationTargets AWS API Documentation
+    #
+    class GcpConfigurationTargets < Struct.new(
+      :projects,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Projects < GcpConfigurationTargets; end
+      class Unknown < GcpConfigurationTargets; end
+    end
+
+    # Information about a GCP project targeted by the cloud connector.
+    #
+    # @!attribute [rw] project_id
+    #   The ID of the GCP project.
+    #   @return [String]
+    #
+    # @!attribute [rw] project_display_name
+    #   The display name of the GCP project.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GcpProject AWS API Documentation
+    #
+    class GcpProject < Struct.new(
+      :project_id,
+      :project_display_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] access_request_id
     #   The ID of a just-in-time node access request.
     #   @return [String]
@@ -8174,7 +8349,8 @@ module Aws::SSM
     #
     # @!attribute [rw] config_connector_arn
     #   The ARN of the Amazon Web Services Config connector associated with
-    #   this cloud connector.
+    #   this cloud connector. This value is returned only if the cloud
+    #   connector was created with an Amazon Web Services Config connector.
     #   @return [String]
     #
     # @!attribute [rw] created_at
@@ -9614,13 +9790,6 @@ module Aws::SSM
     #
     # @!attribute [rw] recursive
     #   Retrieve all parameters within a hierarchy.
-    #
-    #   If a user has access to a path, then the user can access all levels
-    #   of that path. For example, if a user has permission to access path
-    #   `/a`, then the user can also access `/a/b`. Even if a user has
-    #   explicitly been denied access in IAM for parameter `/a/b`, they can
-    #   still call the GetParametersByPath API operation recursively for
-    #   `/a` and view `/a/b`.
     #   @return [Boolean]
     #
     # @!attribute [rw] parameter_filters
@@ -10312,7 +10481,10 @@ module Aws::SSM
     #
     # @!attribute [rw] source_type
     #   The type of the source resource. For IoT Greengrass devices,
-    #   `SourceType` is `AWS::IoT::Thing`.
+    #   `SourceType` is `AWS::IoT::Thing`. For Azure Virtual Machines,
+    #   `SourceType` is `Microsoft.Compute/virtualMachines`. For Google
+    #   Cloud Platform (GCP) Compute Engine Virtual Machines, `SourceType`
+    #   is `compute.googleapis.com/Instance`.
     #   @return [String]
     #
     # @!attribute [rw] source_id
@@ -10488,7 +10660,9 @@ module Aws::SSM
     # @!attribute [rw] source_type
     #   The type of the source resource. For IoT Greengrass devices,
     #   `SourceType` is `AWS::IoT::Thing`. For Azure Virtual Machines,
-    #   `SourceType` is `Microsoft.Compute/virtualMachines`.
+    #   `SourceType` is `Microsoft.Compute/virtualMachines`. For Google
+    #   Cloud Platform (GCP) Compute Engine Virtual Machines, `SourceType`
+    #   is `compute.googleapis.com/Instance`.
     #   @return [String]
     #
     # @!attribute [rw] source_location
@@ -10575,7 +10749,8 @@ module Aws::SSM
     #
     #   * Valid values for the `SourceType` filter key: AWS::EC2::Instance
     #     \| AWS::SSM::ManagedInstance \| AWS::IoT::Thing \|
-    #     Microsoft.Compute/virtualMachines
+    #     Microsoft.Compute/virtualMachines \|
+    #     compute.googleapis.com/Instance
     #
     #   * Valid tag examples: `Key=tag-key,Values=Purpose` \|
     #     `Key=tag:Purpose,Values=Test`.
@@ -10960,7 +11135,8 @@ module Aws::SSM
     # @!attribute [rw] source_type
     #   The type of the source resource. Valid values: `AWS::EC2::Instance`
     #   \| `AWS::SSM::ManagedInstance` \| `AWS::IoT::Thing` \|
-    #   `Microsoft.Compute/virtualMachines`.
+    #   `Microsoft.Compute/virtualMachines` \|
+    #   `compute.googleapis.com/Instance`.
     #   @return [String]
     #
     # @!attribute [rw] source_location
@@ -12690,9 +12866,10 @@ module Aws::SSM
     #   return a more specific list of results. For keys, you can specify
     #   one or more key-value pair tags that have been applied to a
     #   document. Other valid keys include `Owner`, `Name`, `PlatformTypes`,
-    #   `DocumentType`, and `TargetType`. For example, to return documents
-    #   you own use `Key=Owner,Values=Self`. To specify a custom key-value
-    #   pair, use the format `Key=tag:tagName,Values=valueName`.
+    #   `DocumentType`, `TargetType`, and `CloudProviders`. For example, to
+    #   return documents you own use `Key=Owner,Values=Self`. To specify a
+    #   custom key-value pair, use the format
+    #   `Key=tag:tagName,Values=valueName`.
     #
     #   <note markdown="1"> This API operation only supports filtering documents by using a
     #   single tag key and one or more tag values. For example:
@@ -15404,8 +15581,9 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] data_type
-    #   The data type of the parameter, such as `text` or `aws:ec2:image`.
-    #   The default is `text`.
+    #   The data type of the parameter, such as `text`, `aws:ec2:image`, or
+    #   `json`. The default is `text`. For the list of data types, see the
+    #   `DataType` parameter of `PutParameter`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/Parameter AWS API Documentation
@@ -15499,8 +15677,9 @@ module Aws::SSM
     #   @return [Array<Types::ParameterInlinePolicy>]
     #
     # @!attribute [rw] data_type
-    #   The data type of the parameter, such as `text` or `aws:ec2:image`.
-    #   The default is `text`.
+    #   The data type of the parameter, such as `text`, `aws:ec2:image`, or
+    #   `json`. The default is `text`. For the list of data types, see the
+    #   `DataType` parameter of `PutParameter`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ParameterHistory AWS API Documentation
@@ -15657,8 +15836,9 @@ module Aws::SSM
     #   @return [Array<Types::ParameterInlinePolicy>]
     #
     # @!attribute [rw] data_type
-    #   The data type of the parameter, such as `text` or `aws:ec2:image`.
-    #   The default is `text`.
+    #   The data type of the parameter, such as `text`, `aws:ec2:image`, or
+    #   `json`. The default is `text`. For the list of data types, see the
+    #   `DataType` parameter of `PutParameter`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ParameterMetadata AWS API Documentation
@@ -16759,6 +16939,8 @@ module Aws::SSM
     #
     #   * The parameter uses a parameter policy.
     #
+    #   * The parameter uses the `url`, `json`, or `jsonc` data type.
+    #
     #   * More than 10,000 parameters already exist in your Amazon Web
     #     Services account in the current Amazon Web Services Region.
     #
@@ -16804,8 +16986,9 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] data_type
-    #   The data type for a `String` parameter. Supported data types include
-    #   plain text and Amazon Machine Image (AMI) IDs.
+    #   The data type of the parameter value. Parameter Store validates the
+    #   value against the data type when you create or update the parameter.
+    #   The default is `text`, which performs no validation.
     #
     #   **The following data type values are supported.**
     #
@@ -16814,6 +16997,45 @@ module Aws::SSM
     #   * `aws:ec2:image`
     #
     #   * `aws:ssm:integration`
+    #
+    #   * `aws:region`
+    #
+    #   * `aws:account:id`
+    #
+    #   * `boolean`
+    #
+    #   * `integer`
+    #
+    #   * `float`
+    #
+    #   * `binary`
+    #
+    #   * `hostname`
+    #
+    #   * `email`
+    #
+    #   * `ipv4-address`
+    #
+    #   * `ipv6-address`
+    #
+    #   * `url`
+    #
+    #   * `json`
+    #
+    #   * `jsonc`
+    #
+    #   For more information about the supported data types, see [Working
+    #   with parameter data types in Parameter Store][1].
+    #
+    #   <note markdown="1"> Regardless of a parameter's data type, the Parameter Store API
+    #   operations that retrieve parameters, such as `GetParameter`,
+    #   `GetParameters`, and `GetParametersByPath`, return the parameter
+    #   value as a string. For example, if a parameter has the data type
+    #   `integer` and the value `443`, `GetParameter` returns the value as
+    #   the string `"443"`. Convert the value to the type your application
+    #   needs after you retrieve it.
+    #
+    #    </note>
     #
     #   When you create a `String` parameter and specify `aws:ec2:image`,
     #   Amazon Web Services Systems Manager validates the parameter value is
@@ -16832,16 +17054,17 @@ module Aws::SSM
     #   validation will fail and the parameter will not be created or
     #   updated. To monitor whether your `aws:ec2:image` parameters are
     #   created successfully, see [Setting up notifications or trigger
-    #   actions based on Parameter Store events][1]. For more information
+    #   actions based on Parameter Store events][2]. For more information
     #   about AMI format validation , see [Native parameter support for
-    #   Amazon Machine Image IDs][2].
+    #   Amazon Machine Image IDs][3].
     #
     #    </note>
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-cwe.html
-    #   [2]: https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-ec2-aliases.html
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-data-types.html
+    #   [2]: https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-cwe.html
+    #   [3]: https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-ec2-aliases.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/PutParameterRequest AWS API Documentation
@@ -16929,6 +17152,74 @@ module Aws::SSM
     class PutResourcePolicyResponse < Struct.new(
       :policy_id,
       :policy_hash)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] permission_model
+    #   The permission model that determines how the IAM role for Default
+    #   Host Management Configuration is provided.
+    #
+    #   The permission model can be one of the following values:
+    #
+    #   SERVICE\_MANAGED
+    #
+    #   : Amazon Web Services Systems Manager creates and manages the role
+    #     on your behalf.
+    #
+    #   SELF\_MANAGED
+    #
+    #   : You provide the role to register in `RoleArn`.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of the self-managed IAM role that you
+    #   register for Default Host Management Configuration. The requirement
+    #   for this value depends on the permission model:
+    #
+    #   * If `PermissionModel` is `SELF_MANAGED`, this value is required.
+    #
+    #   * If `PermissionModel` is `SERVICE_MANAGED`, this value must not be
+    #     set.
+    #   @return [String]
+    #
+    # @!attribute [rw] overwrite
+    #   Specifies whether to override the role that is currently registered
+    #   for Default Host Management Configuration. The default is `false`,
+    #   which acts as a guardrail against accidentally replacing an existing
+    #   configuration. Set this to `true` to replace the currently
+    #   registered role.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/RegisterDefaultHostManagementConfigurationRequest AWS API Documentation
+    #
+    class RegisterDefaultHostManagementConfigurationRequest < Struct.new(
+      :permission_model,
+      :role_arn,
+      :overwrite)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role registered for
+    #   Default Host Management Configuration. The value depends on the
+    #   permission model:
+    #
+    #   SERVICE\_MANAGED
+    #
+    #   : The ARN of the role that Amazon Web Services Systems Manager
+    #     created in the IAM reserved path.
+    #
+    #   SELF\_MANAGED
+    #
+    #   : The `RoleArn` that you provided.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/RegisterDefaultHostManagementConfigurationResult AWS API Documentation
+    #
+    class RegisterDefaultHostManagementConfigurationResult < Struct.new(
+      :role_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -19560,6 +19851,33 @@ module Aws::SSM
     #   * `Key=AWS::EC2::Instance,Values=*`
     #
     #   * `Key=InstanceIds,Values=*`
+    # * Automation only, to target Microsoft Azure or Google Cloud Platform
+    #   (GCP) resources:
+    #
+    #   * `Key=CloudConnector,Values=cloud-connector-id`
+    #
+    #   * `Key=CloudConnector,Values={"CloudConnectorId":"cloud-connector-id","SsmManagedNodeFilter":"MANAGED","CloudProviderRegions":["eastus"]}`
+    #   Instead of `CloudConnector`, you can use `AzureCloudConnector` or
+    #   `GcpCloudConnector` for a cloud connector to that provider. You must
+    #   specify exactly one value. A cloud connector ID alone targets every
+    #   running virtual machine (VM) in the cloud connector's scope. In the
+    #   JSON value, `CloudConnectorId` is required, and the following
+    #   optional keys narrow that scope:
+    #
+    #   * For both providers: `SsmManagedNodeFilter`, which filters VMs by
+    #     whether they are Systems Manager managed nodes.
+    #
+    #   * For Microsoft Azure: `CloudProviderRegions`, `AzureSubscriptions`,
+    #     `AzureResourceGroups`, `AzureTag`, `AzureVmPowerStates`, and
+    #     `AzureResourceType`.
+    #
+    #   * For GCP: `Zones`, `GcpProjects`, `IncludesLabels`,
+    #     `ExcludesLabels`, `GcpInstanceStates`, `OsPolicyComplianceFilter`,
+    #     `OsPolicyOrchestratorName`, `OsPolicyOrchestratorId`, and
+    #     `GcpAssetType`.
+    #   For descriptions, valid values, and defaults of these keys, see
+    #   [Cloud Connector target reference][2] in the *Amazon Web Services
+    #   Systems Manager User Guide*.
     #
     # **For Run Command and Maintenance Windows:**
     #
@@ -19586,15 +19904,24 @@ module Aws::SSM
     #   * `Key=InstanceIds,Values=*`
     #
     #   ^
+    # * For associations that run an Automation runbook, to target Microsoft
+    #   Azure or Google Cloud Platform (GCP) resources:
+    #
+    #   * `Key=CloudConnector,Values=cloud-connector-id`
+    #
+    #   * `Key=CloudConnector,Values={"CloudConnectorId":"cloud-connector-id","SsmManagedNodeFilter":"UNMANAGED"}`
+    #   Supported JSON keys: `CloudConnectorId` (required),
+    #   `SsmManagedNodeFilter`, and `CloudProviderRegions`.
     #
     # For more information about how to send commands that target managed
     # nodes using `Key,Value` parameters, see [Targeting multiple managed
-    # nodes][2] in the *Amazon Web Services Systems Manager User Guide*.
+    # nodes][3] in the *Amazon Web Services Systems Manager User Guide*.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/maintenance-windows-targetless-tasks.html
-    # [2]: https://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html#send-commands-targeting
+    # [2]: https://docs.aws.amazon.com/systems-manager/latest/userguide/automation-cloud-connector-target.html
+    # [3]: https://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html#send-commands-targeting
     #
     # @!attribute [rw] key
     #   User-defined criteria for sending commands that target managed nodes
@@ -19761,6 +20088,43 @@ module Aws::SSM
     class TargetPreview < Struct.new(
       :count,
       :target_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The number of targets in a rate control execution, and the status of
+    # the child executions that it started for those targets.
+    #
+    # @!attribute [rw] total_count
+    #   The total number of targets in the rate control execution.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] started_count
+    #   The number of child executions that started.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] completed_count
+    #   The number of child executions that finished, whether they succeeded
+    #   or failed.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] successful_count
+    #   The number of child executions that succeeded.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] failed_count
+    #   The number of child executions that failed, timed out, or were
+    #   canceled.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/TargetsSummary AWS API Documentation
+    #
+    class TargetsSummary < Struct.new(
+      :total_count,
+      :started_count,
+      :completed_count,
+      :successful_count,
+      :failed_count)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -20508,6 +20872,20 @@ module Aws::SSM
     #   Specify a new target type for the document.
     #   @return [String]
     #
+    # @!attribute [rw] cloud_providers
+    #   The cloud providers that the new document version can run against.
+    #   Valid values include the following:
+    #
+    #   * `AWS` - The document runs against Amazon Web Services resources.
+    #
+    #   * `Azure` - The document runs against Microsoft Azure resources.
+    #
+    #   * `GCP` - The document runs against Google Cloud resources.
+    #
+    #   If you don't specify a value, the new version uses the cloud
+    #   providers of the latest version.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateDocumentRequest AWS API Documentation
     #
     class UpdateDocumentRequest < Struct.new(
@@ -20518,7 +20896,8 @@ module Aws::SSM
       :version_name,
       :document_version,
       :document_format,
-      :target_type)
+      :target_type,
+      :cloud_providers)
       SENSITIVE = []
       include Aws::Structure
     end

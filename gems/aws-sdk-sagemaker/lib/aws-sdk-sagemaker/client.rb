@@ -264,7 +264,8 @@ module Aws::SageMaker
     #     An integer representing the maximum number attempts that will be made for
     #     a single request, including the initial attempt.  For example,
     #     setting this value to 5 will result in a request being retried up to
-    #     4 times. Used in `standard` and `adaptive` retry modes.
+    #     4 times. Used in `standard` and `adaptive` retry modes. Defaults to 3,
+    #     except for DynamoDB and DynamoDB Streams, which default to 4.
     #
     #   @option options [String] :profile ("default")
     #     Used when loading credentials from the shared credentials file at `HOME/.aws/credentials`.
@@ -327,15 +328,15 @@ module Aws::SageMaker
     #     used by the default backoff function. This option is only used in the
     #     `legacy` retry mode.
     #
-    #   @option options [String] :retry_mode ("legacy")
+    #   @option options [String] :retry_mode ("standard")
     #     Specifies which retry algorithm to use. Values are:
     #
-    #     * `legacy` - The pre-existing retry behavior. This is the default
-    #       value if no retry mode is provided.
+    #     * `legacy` - The pre-existing retry behavior.
     #
     #     * `standard` - A standardized set of retry rules across the AWS SDKs.
     #       This includes support for retry quotas, which limit the number of
-    #       unsuccessful retries a client can make.
+    #       unsuccessful retries a client can make. This is the default value
+    #       if no retry mode is provided.
     #
     #     * `adaptive` - A retry mode that includes all the functionality of
     #       `standard` mode along with automatic client side throttling.
@@ -546,6 +547,73 @@ module Aws::SageMaker
     # @param [Hash] params ({})
     def add_association(params = {}, options = {})
       req = build_request(:add_association, params)
+      req.send_request(options)
+    end
+
+    # Adds an in-cluster inference gateway to a global inference gateway.
+    # This operation is asynchronous: the in-cluster inference gateway
+    # starts in the `ADDING` status. To check its status, call
+    # `ListInferenceGateways`. If the in-cluster inference gateway is
+    # already in the global inference gateway, the operation succeeds and
+    # returns its current status.
+    #
+    # An in-cluster inference gateway can belong to only one global
+    # inference gateway. If it already belongs to another global inference
+    # gateway, the operation fails with `ResourceInUse`. The operation fails
+    # with `ConflictException` while another operation is in progress on the
+    # global inference gateway, or if the global inference gateway failed to
+    # create.
+    #
+    # @option params [required, String] :identifier
+    #   The name, Amazon Resource Name (ARN), or ID of the global inference
+    #   gateway.
+    #
+    # @option params [required, String] :cluster_arn
+    #   The Amazon Resource Name (ARN) of the SageMaker HyperPod cluster that
+    #   runs the in-cluster inference gateway. The cluster must be in the same
+    #   account and partition as the global inference gateway. It can be in a
+    #   different Region, but not in an opt-in Region.
+    #
+    # @option params [required, String] :namespace
+    #   The Kubernetes namespace of the in-cluster inference gateway.
+    #
+    # @option params [required, String] :name
+    #   The name of the `InferenceGatewayConfig` resource that defines the
+    #   in-cluster inference gateway.
+    #
+    # @return [Types::AddInferenceGatewayResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::AddInferenceGatewayResponse#arn #arn} => String
+    #   * {Types::AddInferenceGatewayResponse#id #id} => String
+    #   * {Types::AddInferenceGatewayResponse#name #name} => String
+    #   * {Types::AddInferenceGatewayResponse#gateway #gateway} => Types::GlobalInferenceGatewayMember
+    #   * {Types::AddInferenceGatewayResponse#status #status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.add_inference_gateway({
+    #     identifier: "GlobalInferenceGatewayIdentifier", # required
+    #     cluster_arn: "GlobalInferenceGatewayClusterArn", # required
+    #     namespace: "GlobalInferenceGatewayKubernetesNamespace", # required
+    #     name: "GlobalInferenceGatewayKubernetesResourceName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.id #=> String
+    #   resp.name #=> String
+    #   resp.gateway.name #=> String
+    #   resp.gateway.namespace #=> String
+    #   resp.gateway.cluster_arn #=> String
+    #   resp.status #=> String, one of "ADDING", "ACTIVE", "REMOVING", "FAILED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AddInferenceGateway AWS API Documentation
+    #
+    # @overload add_inference_gateway(params = {})
+    # @param [Hash] params ({})
+    def add_inference_gateway(params = {}, options = {})
+      req = build_request(:add_inference_gateway, params)
       req.send_request(options)
     end
 
@@ -833,7 +901,7 @@ module Aws::SageMaker
     #   resp.successful #=> Array
     #   resp.successful[0].node_logical_id #=> String
     #   resp.successful[0].instance_group_name #=> String
-    #   resp.successful[0].status #=> String, one of "Running", "Failure", "Pending", "ShuttingDown", "SystemUpdating", "DeepHealthCheckInProgress", "NotFound"
+    #   resp.successful[0].status #=> String, one of "Running", "Failure", "Pending", "ShuttingDown", "SystemUpdating", "DeepHealthCheckInProgress", "NotFound", "DetachInProgress", "AttachInProgress"
     #   resp.successful[0].availability_zones #=> Array
     #   resp.successful[0].availability_zones[0] #=> String
     #   resp.successful[0].instance_types #=> Array
@@ -2933,7 +3001,7 @@ module Aws::SageMaker
     #         },
     #         image_id: "ImageId",
     #         auto_patch_config: {
-    #           patching_strategy: "WhenIdle", # required, accepts WhenIdle, WhenAllIdle
+    #           patching_strategy: "WhenIdle", # required, accepts WhenIdle, WhenAllIdle, DrainFirst
     #           patch_schedule: {
     #             next_patch_date: Time.now,
     #           },
@@ -2954,6 +3022,11 @@ module Aws::SageMaker
     #                 alarm_name: "AlarmName", # required
     #               },
     #             ],
+    #           },
+    #           idle_wait_window_in_seconds: 1,
+    #           drain_policy: {
+    #             drain_timeout_in_seconds: 1,
+    #             on_drain_timeout: "Force", # accepts Force, Skip
     #           },
     #         },
     #         image_release_version: "ImageReleaseVersion",
@@ -3100,6 +3173,95 @@ module Aws::SageMaker
     # @param [Hash] params ({})
     def create_cluster(params = {}, options = {})
       req = build_request(:create_cluster, params)
+      req.send_request(options)
+    end
+
+    # Installs an extension, such as `sagemaker-observability`, on a
+    # SageMaker HyperPod cluster orchestrated by Slurm. The cluster must
+    # have `NodeProvisioningMode` set to `Continuous` and can have only one
+    # extension with a given name. To track the installation, call
+    # `DescribeClusterExtension`.
+    #
+    # @option params [required, String] :cluster_arn
+    #   The Amazon Resource Name (ARN) of the SageMaker HyperPod cluster on
+    #   which to install the extension. The cluster must use Slurm as the
+    #   orchestrator and have `NodeProvisioningMode` set to `Continuous`.
+    #
+    # @option params [required, String] :extension_name
+    #   The name of the extension to install, for example
+    #   `sagemaker-observability`.
+    #
+    # @option params [String] :extension_version
+    #   The version of the extension to install, in `MAJOR.MINOR.PATCH`
+    #   format, for example `1.0.0`. If you don't specify a version,
+    #   SageMaker HyperPod installs the latest available version of the
+    #   extension.
+    #
+    # @option params [String] :configuration_values
+    #   The configuration settings for the extension, as a JSON object
+    #   serialized as a string, for example
+    #   `{"metricsProvider":{"nodeMetrics":{"level":"ADVANCED"}}}`. Each
+    #   extension version defines which settings it accepts. SageMaker
+    #   HyperPod validates the settings against that definition, and rejects
+    #   the request if a setting is unknown or has an invalid value. Settings
+    #   that you omit use the extension's default values. If you omit
+    #   `ConfigurationValues`, all settings use their default values.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   Custom tags for managing the extension as an Amazon Web Services
+    #   resource. You can add tags to your extension in the same way you add
+    #   them in other Amazon Web Services services that support tagging. To
+    #   learn more about tagging Amazon Web Services resources in general, see
+    #   [Tagging Amazon Web Services Resources User Guide][1]. To use this
+    #   operation to add tags when you create an extension, you must have the
+    #   `sagemaker:AddTags` permission.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/tag-editor/latest/userguide/tagging.html
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that you provide so that the
+    #   operation completes no more than one time. This token is valid for 8
+    #   hours. If you retry the request with the same client token and the
+    #   same parameters within this time, the API returns the Amazon Resource
+    #   Name (ARN) of the extension that the original request created, without
+    #   creating a duplicate. If you use the same client token with different
+    #   parameters, the request fails.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::CreateClusterExtensionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateClusterExtensionResponse#extension_arn #extension_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_cluster_extension({
+    #     cluster_arn: "ClusterArn", # required
+    #     extension_name: "ExtensionName", # required
+    #     extension_version: "ExtensionVersion",
+    #     configuration_values: "ExtensionConfigurationValues",
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #     client_token: "CreateClusterExtensionRequestClientTokenString",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.extension_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateClusterExtension AWS API Documentation
+    #
+    # @overload create_cluster_extension(params = {})
+    # @param [Hash] params ({})
+    def create_cluster_extension(params = {}, options = {})
+      req = build_request(:create_cluster_extension, params)
       req.send_request(options)
     end
 
@@ -4852,6 +5014,18 @@ module Aws::SageMaker
     # @option params [Types::MetricsConfig] :metrics_config
     #   The configuration parameters for utilization metrics.
     #
+    # @option params [Types::CrossRegionTrafficConfig] :cross_region_traffic_config
+    #   The cross-Region traffic cap for the endpoint. The cap limits the
+    #   requests per second that the endpoint accepts from inference routers
+    #   in other Amazon Web Services Regions. If you don't specify it, these
+    #   requests aren't limited. You can't specify it with serverless
+    #   variants or with `AsyncInferenceConfig`. For information about the
+    #   cross-Region traffic cap, see [Limit requests from other Regions][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/inference-router.html#inference-router-cross-region-limit
+    #
     # @return [Types::CreateEndpointConfigOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateEndpointConfigOutput#endpoint_config_arn #endpoint_config_arn} => String
@@ -4900,7 +5074,7 @@ module Aws::SageMaker
     #           },
     #         },
     #         routing_config: {
-    #           routing_strategy: "LEAST_OUTSTANDING_REQUESTS", # required, accepts LEAST_OUTSTANDING_REQUESTS, RANDOM, PREFIX_AWARE
+    #           routing_strategy: "LEAST_OUTSTANDING_REQUESTS", # required, accepts LEAST_OUTSTANDING_REQUESTS, RANDOM, PREFIX_AWARE, KV_AWARE
     #           prefix_aware_routing_config: {
     #             prefix_length: 1,
     #             concurrency_threshold: 1,
@@ -4911,6 +5085,11 @@ module Aws::SageMaker
     #           capacity_reservation_preference: "capacity-reservations-only", # accepts capacity-reservations-only
     #           ml_reservation_arn: "MlReservationArn",
     #         },
+    #         accelerator_partition_layouts: [
+    #           {
+    #             accelerator_partition_types: ["AcceleratorPartitionType"],
+    #           },
+    #         ],
     #       },
     #     ],
     #     data_capture_config: {
@@ -5022,7 +5201,7 @@ module Aws::SageMaker
     #           },
     #         },
     #         routing_config: {
-    #           routing_strategy: "LEAST_OUTSTANDING_REQUESTS", # required, accepts LEAST_OUTSTANDING_REQUESTS, RANDOM, PREFIX_AWARE
+    #           routing_strategy: "LEAST_OUTSTANDING_REQUESTS", # required, accepts LEAST_OUTSTANDING_REQUESTS, RANDOM, PREFIX_AWARE, KV_AWARE
     #           prefix_aware_routing_config: {
     #             prefix_length: 1,
     #             concurrency_threshold: 1,
@@ -5033,6 +5212,11 @@ module Aws::SageMaker
     #           capacity_reservation_preference: "capacity-reservations-only", # accepts capacity-reservations-only
     #           ml_reservation_arn: "MlReservationArn",
     #         },
+    #         accelerator_partition_layouts: [
+    #           {
+    #             accelerator_partition_types: ["AcceleratorPartitionType"],
+    #           },
+    #         ],
     #       },
     #     ],
     #     execution_role_arn: "RoleArn",
@@ -5045,6 +5229,10 @@ module Aws::SageMaker
     #       enable_enhanced_metrics: false,
     #       enable_detailed_observability: false,
     #       metric_publish_frequency_in_seconds: 1,
+    #     },
+    #     cross_region_traffic_config: {
+    #       max_invocations_per_second_per_instance: 1, # required
+    #       max_cross_region_percent_per_endpoint: 1, # required
     #     },
     #   })
     #
@@ -5467,6 +5655,125 @@ module Aws::SageMaker
     # @param [Hash] params ({})
     def create_flow_definition(params = {}, options = {})
       req = build_request(:create_flow_definition, params)
+      req.send_request(options)
+    end
+
+    # Creates a global inference gateway. This operation is asynchronous:
+    # the global inference gateway starts in the `CREATING` status. To check
+    # its status, call `DescribeGlobalInferenceGateway` until the status is
+    # `ACTIVE` or `FAILED`. The operation fails with `ResourceInUse` if the
+    # name is already in use, or if one of the in-cluster inference gateways
+    # in `Gateways` already belongs to another global inference gateway.
+    #
+    # @option params [required, String] :name
+    #   The name of the global inference gateway. The name must be unique in
+    #   your account in the current Region, and is case-sensitive. The name
+    #   can't be exactly 12 lowercase letters or digits, because the global
+    #   inference gateway ID uses that format.
+    #
+    # @option params [Types::GlobalInferenceGatewayRouting] :routing
+    #   The routing configuration of the global inference gateway. If you omit
+    #   it, the global inference gateway uses default routing weights.
+    #
+    # @option params [required, String] :execution_role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role that the global
+    #   inference gateway assumes to access your SageMaker HyperPod clusters.
+    #   The role must be in your account and partition, and you must have
+    #   `iam:PassRole` permission for it. You can't change the role after you
+    #   create the global inference gateway.
+    #
+    # @option params [required, Array<Types::GlobalInferenceGatewayMember>] :gateways
+    #   The 1 to 10 in-cluster inference gateways to add to the global
+    #   inference gateway. A global inference gateway must always have at
+    #   least one in-cluster inference gateway, so `RemoveInferenceGateway`
+    #   can't remove the last one.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. An idempotent operation completes no more
+    #   than one time. If you don't specify a client token, the Amazon Web
+    #   Services SDKs and the Amazon Web Services CLI generate one for you.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   Custom tags for managing the global inference gateway as an Amazon Web
+    #   Services resource. You can add tags to your global inference gateway
+    #   in the same way you add them in other Amazon Web Services services
+    #   that support tagging. For more information about tagging Amazon Web
+    #   Services resources, see [Tagging your Amazon Web Services
+    #   resources][1] in the *Tagging Amazon Web Services Resources User
+    #   Guide*.
+    #
+    #   The global inference gateway doesn't return tags in its responses. To
+    #   read the tags, use `ListTags`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/tag-editor/latest/userguide/tagging.html
+    #
+    # @return [Types::CreateGlobalInferenceGatewayResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateGlobalInferenceGatewayResponse#arn #arn} => String
+    #   * {Types::CreateGlobalInferenceGatewayResponse#id #id} => String
+    #   * {Types::CreateGlobalInferenceGatewayResponse#name #name} => String
+    #   * {Types::CreateGlobalInferenceGatewayResponse#status #status} => String
+    #   * {Types::CreateGlobalInferenceGatewayResponse#execution_role_arn #execution_role_arn} => String
+    #   * {Types::CreateGlobalInferenceGatewayResponse#routing #routing} => Types::GlobalInferenceGatewayRouting
+    #   * {Types::CreateGlobalInferenceGatewayResponse#gateways #gateways} => Array&lt;Types::GlobalInferenceGatewayMember&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_global_inference_gateway({
+    #     name: "GlobalInferenceGatewayName", # required
+    #     routing: {
+    #       weights: { # required
+    #         kv_headroom: 1.0,
+    #         queue_depth: 1.0,
+    #         region_proximity: 1.0,
+    #         error_rate: 1.0,
+    #       },
+    #     },
+    #     execution_role_arn: "GlobalInferenceGatewayExecutionRoleArn", # required
+    #     gateways: [ # required
+    #       {
+    #         name: "GlobalInferenceGatewayKubernetesResourceName", # required
+    #         namespace: "GlobalInferenceGatewayKubernetesNamespace", # required
+    #         cluster_arn: "GlobalInferenceGatewayClusterArn", # required
+    #       },
+    #     ],
+    #     client_token: "GlobalInferenceGatewayClientToken",
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.id #=> String
+    #   resp.name #=> String
+    #   resp.status #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETING", "FAILED"
+    #   resp.execution_role_arn #=> String
+    #   resp.routing.weights.kv_headroom #=> Float
+    #   resp.routing.weights.queue_depth #=> Float
+    #   resp.routing.weights.region_proximity #=> Float
+    #   resp.routing.weights.error_rate #=> Float
+    #   resp.gateways #=> Array
+    #   resp.gateways[0].name #=> String
+    #   resp.gateways[0].namespace #=> String
+    #   resp.gateways[0].cluster_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateGlobalInferenceGateway AWS API Documentation
+    #
+    # @overload create_global_inference_gateway(params = {})
+    # @param [Hash] params ({})
+    def create_global_inference_gateway(params = {}, options = {})
+      req = build_request(:create_global_inference_gateway, params)
       req.send_request(options)
     end
 
@@ -6500,6 +6807,7 @@ module Aws::SageMaker
     #         number_of_accelerator_devices_required: 1.0,
     #         min_memory_required_in_mb: 1, # required
     #         max_memory_required_in_mb: 1,
+    #         accelerator_partition_type: "AcceleratorPartitionType",
     #       },
     #       base_inference_component_name: "InferenceComponentName",
     #       data_cache_config: {
@@ -6541,6 +6849,7 @@ module Aws::SageMaker
     #           number_of_accelerator_devices_required: 1.0,
     #           min_memory_required_in_mb: 1, # required
     #           max_memory_required_in_mb: 1,
+    #           accelerator_partition_type: "AcceleratorPartitionType",
     #         },
     #         base_inference_component_name: "InferenceComponentName",
     #         data_cache_config: {
@@ -6941,17 +7250,149 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
+    # Creates an inference router. An inference router is a Regional
+    # SageMaker AI resource that sends each inference request to one of the
+    # endpoints or inference components that you list for a routing target.
+    # These destinations can be in any Amazon Web Services account, and in
+    # any Amazon Web Services Region in the same partition as the router.
+    #
+    # The router's status is `Creating` until it's ready to use. SageMaker
+    # AI checks that each endpoint is a real-time or asynchronous endpoint,
+    # as the routing target requires, and rejects one of the wrong type. It
+    # checks endpoints in other accounts with your credentials, so the
+    # endpoint policy must allow `sagemaker:DescribeEndpoint`. SageMaker AI
+    # accepts an endpoint that it can't check, for example one that
+    # doesn't exist. Requests to it fail if it's the wrong type or
+    # doesn't exist. To see the status of each destination, call
+    # [DescribeInferenceRouter][1] and see the `RoutingStatus` of each
+    # destination.
+    #
+    # To invoke the router, use `InvokeInferenceRouter` or
+    # `InvokeInferenceRouterAsync`. For information about inference routers,
+    # see [Route requests across Regions with inference routers][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeInferenceRouter.html
+    # [2]: https://docs.aws.amazon.com/sagemaker/latest/dg/inference-router.html
+    #
+    # @option params [required, String] :inference_router_name
+    #   The name of the inference router. The name must be unique within your
+    #   account in the current Amazon Web Services Region. The name is case
+    #   sensitive.
+    #
+    # @option params [required, Array<Types::RoutingTarget>] :routing_targets
+    #   The routing targets of the inference router. Each routing target is a
+    #   model that callers name when they invoke the router, and the
+    #   destinations that serve it.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. If you reuse a client token, use the same
+    #   request parameters. Otherwise, the request fails.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   A list of key-value pairs to apply to the inference router. For
+    #   information about tagging, see [Tagging Amazon Web Services
+    #   resources][1] in the *Amazon Web Services General Reference*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+    #
+    # @return [Types::CreateInferenceRouterOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateInferenceRouterOutput#inference_router_arn #inference_router_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_inference_router({
+    #     inference_router_name: "InferenceRouterName", # required
+    #     routing_targets: [ # required
+    #       {
+    #         name: "RoutingTargetName", # required
+    #         destinations: [ # required
+    #           {
+    #             resource_arn: "DestinationResourceArn", # required
+    #             routing_status: "Routable", # accepts Routable, Unroutable, Unknown
+    #           },
+    #         ],
+    #         async_inference_config: {
+    #           output_config: { # required
+    #             s3_output_path: "InferenceRouterS3Uri", # required
+    #             s3_failure_path: "InferenceRouterS3Uri", # required
+    #             kms_key_id: "KmsKeyId",
+    #             notification_config: {
+    #               success_topic: "InferenceRouterSnsTopicArn",
+    #               error_topic: "InferenceRouterSnsTopicArn",
+    #             },
+    #           },
+    #           client_config: {
+    #             max_time_in_backlog_seconds: 1,
+    #           },
+    #         },
+    #         routing_preference: "LocalRegionFirst", # accepts LocalRegionFirst, InstancePoolOrder
+    #       },
+    #     ],
+    #     client_token: "InferenceRouterClientToken",
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.inference_router_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateInferenceRouter AWS API Documentation
+    #
+    # @overload create_inference_router(params = {})
+    # @param [Hash] params ({})
+    def create_inference_router(params = {}, options = {})
+      req = build_request(:create_inference_router, params)
+      req.send_request(options)
+    end
+
     # Creates a model customization job in Amazon SageMaker. A job runs a
     # workload based on the job category and configuration you provide. You
     # specify the job category, a schema-versioned configuration document,
     # and an IAM role that grants Amazon SageMaker permission to access
     # resources on your behalf.
     #
-    # Use the `AgentRFT` category to fine-tune a model using multi-turn
-    # reinforcement learning with reward signals. Use the
-    # `AgentRFTEvaluation` category to evaluate a fine-tuned or base model
-    # by running multi-turn rollouts against a held-out prompt dataset and
-    # computing metrics such as pass@k and mean reward.
+    # Specify one of the following job categories, which determines the type
+    # of workload that the job runs:
+    #
+    # AgentRFT
+    #
+    # : Fine-tune a model using multi-turn reinforcement learning with
+    #   reward signals.
+    #
+    # AgentRFTEvaluation
+    #
+    # : Evaluate a fine-tuned or base model by running multi-turn rollouts
+    #   against a held-out prompt dataset. This category computes metrics
+    #   such as pass@k and mean reward.
+    #
+    # DataQualityEvaluation
+    #
+    # : Evaluate the quality of a generated or bring-your-own dataset using
+    #   quality metrics or your own specification.
+    #
+    # DataTransformation
+    #
+    # : Transform datasets into the format you need, for example for model
+    #   customization.
+    #
+    # SyntheticDataGeneration
+    #
+    # : Generate synthetic training and testing datasets from your context
+    #   data and specifications.
     #
     # Before creating a job, call `ListJobSchemaVersions` and
     # `DescribeJobSchemaVersion` to retrieve the configuration schema for
@@ -7012,7 +7453,7 @@ module Aws::SageMaker
     #   resp = client.create_job({
     #     job_name: "JobName", # required
     #     role_arn: "RoleArn", # required
-    #     job_category: "AgentRFT", # required, accepts AgentRFT, AgentRFTEvaluation
+    #     job_category: "AgentRFT", # required, accepts AgentRFT, SyntheticDataGeneration, DataQualityEvaluation, AgentRFTEvaluation, DataTransformation
     #     job_config_schema_version: "JobSchemaVersion", # required
     #     job_config_document: "JobConfigDocument", # required
     #     tags: [
@@ -9884,6 +10325,14 @@ module Aws::SageMaker
     #   pipeline. If specified, it applies to all runs of this pipeline by
     #   default.
     #
+    # @option params [Array<String>] :pipeline_version_aliases
+    #   The aliases to assign to the first version of the pipeline. You can
+    #   use an alias instead of a pipeline version ID to start an execution,
+    #   describe the pipeline, or list its executions. Each alias can contain
+    #   1-128 letters, numbers, periods (.), hyphens (-), and underscores
+    #   (\_), and can't consist of numbers only. An alias must be unique
+    #   within the pipeline, and a version can have up to 10 aliases.
+    #
     # @return [Types::CreatePipelineResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreatePipelineResponse#pipeline_arn #pipeline_arn} => String
@@ -9911,6 +10360,7 @@ module Aws::SageMaker
     #     parallelism_configuration: {
     #       max_parallel_execution_steps: 1, # required
     #     },
+    #     pipeline_version_aliases: ["PipelineVersionAlias"],
     #   })
     #
     # @example Response structure
@@ -12705,6 +13155,48 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
+    # Deletes an extension from a SageMaker HyperPod cluster. SageMaker
+    # HyperPod removes the extension's software from every node in the
+    # cluster. While SageMaker HyperPod removes the extension, its status is
+    # `Deleting`. After SageMaker HyperPod removes the extension from all
+    # nodes, it no longer appears in `ListClusterExtensions`, and
+    # `DescribeClusterExtension` returns a `ResourceNotFound` error.
+    #
+    # Deleting an extension doesn't delete data that the extension sent to
+    # other Amazon Web Services services, such as metrics in Amazon
+    # CloudWatch or Amazon Managed Service for Prometheus.
+    #
+    # @option params [required, String] :cluster_arn
+    #   The Amazon Resource Name (ARN) of the SageMaker HyperPod cluster on
+    #   which the extension is installed.
+    #
+    # @option params [required, String] :extension_arn
+    #   The Amazon Resource Name (ARN) of the extension to delete.
+    #
+    # @return [Types::DeleteClusterExtensionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteClusterExtensionResponse#extension_arn #extension_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_cluster_extension({
+    #     cluster_arn: "ClusterArn", # required
+    #     extension_arn: "ExtensionArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.extension_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteClusterExtension AWS API Documentation
+    #
+    # @overload delete_cluster_extension(params = {})
+    # @param [Hash] params ({})
+    def delete_cluster_extension(params = {}, options = {})
+      req = build_request(:delete_cluster_extension, params)
+      req.send_request(options)
+    end
+
     # Deletes the cluster policy of the cluster.
     #
     # @option params [required, String] :cluster_scheduler_config_id
@@ -13026,6 +13518,42 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
+    # Deletes the resource-based policy that is attached to an endpoint.
+    # After you delete the policy, other accounts can no longer send
+    # requests to the endpoint through an inference router. The endpoint
+    # continues to serve requests from your account. If the endpoint
+    # doesn't have a policy, the operation succeeds.
+    #
+    # The change typically takes effect within 30 seconds, and can take up
+    # to 5 minutes. To revoke access for one account only, use
+    # [PutEndpointPolicy][1] to replace the policy with one that doesn't
+    # include that account.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_PutEndpointPolicy.html
+    #
+    # @option params [required, String] :endpoint_name
+    #   The name of the endpoint. The endpoint must be in your account and in
+    #   the current Amazon Web Services Region.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_endpoint_policy({
+    #     endpoint_name: "EndpointName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteEndpointPolicy AWS API Documentation
+    #
+    # @overload delete_endpoint_policy(params = {})
+    # @param [Hash] params ({})
+    def delete_endpoint_policy(params = {}, options = {})
+      req = build_request(:delete_endpoint_policy, params)
+      req.send_request(options)
+    end
+
     # Deletes an SageMaker experiment. All trials associated with the
     # experiment must be deleted first. Use the [ListTrials][1] API to get a
     # list of the trials associated with the experiment.
@@ -13112,6 +13640,47 @@ module Aws::SageMaker
     # @param [Hash] params ({})
     def delete_flow_definition(params = {}, options = {})
       req = build_request(:delete_flow_definition, params)
+      req.send_request(options)
+    end
+
+    # Delete a global inference gateway and its member inference gateways,
+    # which are then free to join another global inference gateway.
+    # Asynchronous: the global inference gateway is DELETING while its
+    # managed endpoint resources are torn down; poll
+    # DescribeGlobalInferenceGateway until it returns ResourceNotFound. Does
+    # not touch the customer's clusters. Idempotent: a Delete whose
+    # Identifier matches no global inference gateway succeeds and echoes
+    # what the Identifier says (Arn and Id for an ARN or Id, Name for a
+    # name).
+    #
+    # @option params [required, String] :identifier
+    #   The name, Amazon Resource Name (ARN), or ID of the global inference
+    #   gateway to delete.
+    #
+    # @return [Types::DeleteGlobalInferenceGatewayResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteGlobalInferenceGatewayResponse#arn #arn} => String
+    #   * {Types::DeleteGlobalInferenceGatewayResponse#id #id} => String
+    #   * {Types::DeleteGlobalInferenceGatewayResponse#name #name} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_global_inference_gateway({
+    #     identifier: "GlobalInferenceGatewayIdentifier", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.id #=> String
+    #   resp.name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteGlobalInferenceGateway AWS API Documentation
+    #
+    # @overload delete_global_inference_gateway(params = {})
+    # @param [Hash] params ({})
+    def delete_global_inference_gateway(params = {}, options = {})
+      req = build_request(:delete_global_inference_gateway, params)
       req.send_request(options)
     end
 
@@ -13371,6 +13940,32 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
+    # Deletes an inference router. The endpoints and inference components
+    # that the router sends requests to aren't deleted.
+    #
+    # If the router is being created, updated, or deleted, you get a
+    # `ConflictException`.
+    #
+    # @option params [required, String] :inference_router_name
+    #   The name of the inference router to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_inference_router({
+    #     inference_router_name: "InferenceRouterName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteInferenceRouter AWS API Documentation
+    #
+    # @overload delete_inference_router(params = {})
+    # @param [Hash] params ({})
+    def delete_inference_router(params = {}, options = {})
+      req = build_request(:delete_inference_router, params)
+      req.send_request(options)
+    end
+
     # Deletes a job. This operation is idempotent. If the job is currently
     # running, you must stop it before deleting it by calling `StopJob`.
     #
@@ -13394,7 +13989,7 @@ module Aws::SageMaker
     #
     #   resp = client.delete_job({
     #     job_name: "JobName", # required
-    #     job_category: "AgentRFT", # required, accepts AgentRFT, AgentRFTEvaluation
+    #     job_category: "AgentRFT", # required, accepts AgentRFT, SyntheticDataGeneration, DataQualityEvaluation, AgentRFTEvaluation, DataTransformation
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteJob AWS API Documentation
@@ -15247,6 +15842,48 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
+    # Returns details about a SageMaker Capacity Reservation, such as its
+    # instance type, instance count, Availability Zone, and start and end
+    # times.
+    #
+    # @option params [required, String] :sm_capacity_reservation_arn
+    #   The Amazon Resource Name (ARN) of the SageMaker Capacity Reservation.
+    #   The ARN has the format
+    #   `arn:aws:sagemaker:region:account-id:sm-capacity-reservation/smcr-id`.
+    #
+    # @return [Types::DescribeCapacityReservationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeCapacityReservationResponse#capacity_reservation #capacity_reservation} => Types::CapacityReservationDetail
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_capacity_reservation({
+    #     sm_capacity_reservation_arn: "CapacityReservationArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.capacity_reservation.sm_capacity_reservation_arn #=> String
+    #   resp.capacity_reservation.sm_capacity_reservation_id #=> String
+    #   resp.capacity_reservation.owner #=> String
+    #   resp.capacity_reservation.status #=> String, one of "Scheduled", "Active", "Expired"
+    #   resp.capacity_reservation.instance_type #=> String
+    #   resp.capacity_reservation.availability_zone #=> String
+    #   resp.capacity_reservation.availability_zone_id #=> String
+    #   resp.capacity_reservation.total_instance_count #=> Integer
+    #   resp.capacity_reservation.start_time #=> Time
+    #   resp.capacity_reservation.end_time #=> Time
+    #   resp.capacity_reservation.creation_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeCapacityReservation AWS API Documentation
+    #
+    # @overload describe_capacity_reservation(params = {})
+    # @param [Hash] params ({})
+    def describe_capacity_reservation(params = {}, options = {})
+      req = build_request(:describe_capacity_reservation, params)
+      req.send_request(options)
+    end
+
     # Retrieves information of a SageMaker HyperPod cluster.
     #
     # @option params [required, String] :cluster_name
@@ -15329,7 +15966,7 @@ module Aws::SageMaker
     #   resp.instance_groups[0].scheduled_update_config.deployment_config.wait_interval_in_seconds #=> Integer
     #   resp.instance_groups[0].scheduled_update_config.deployment_config.auto_rollback_configuration #=> Array
     #   resp.instance_groups[0].scheduled_update_config.deployment_config.auto_rollback_configuration[0].alarm_name #=> String
-    #   resp.instance_groups[0].auto_patch_config.patching_strategy #=> String, one of "WhenIdle", "WhenAllIdle"
+    #   resp.instance_groups[0].auto_patch_config.patching_strategy #=> String, one of "WhenIdle", "WhenAllIdle", "DrainFirst"
     #   resp.instance_groups[0].auto_patch_config.current_patch_schedule.next_patch_date #=> Time
     #   resp.instance_groups[0].auto_patch_config.desired_patch_schedule.next_patch_date #=> Time
     #   resp.instance_groups[0].auto_patch_config.deployment_config.rolling_update_policy.maximum_batch_size.type #=> String, one of "INSTANCE_COUNT", "CAPACITY_PERCENTAGE"
@@ -15339,6 +15976,9 @@ module Aws::SageMaker
     #   resp.instance_groups[0].auto_patch_config.deployment_config.wait_interval_in_seconds #=> Integer
     #   resp.instance_groups[0].auto_patch_config.deployment_config.auto_rollback_configuration #=> Array
     #   resp.instance_groups[0].auto_patch_config.deployment_config.auto_rollback_configuration[0].alarm_name #=> String
+    #   resp.instance_groups[0].auto_patch_config.idle_wait_window_in_seconds #=> Integer
+    #   resp.instance_groups[0].auto_patch_config.drain_policy.drain_timeout_in_seconds #=> Integer
+    #   resp.instance_groups[0].auto_patch_config.drain_policy.on_drain_timeout #=> String, one of "Force", "Skip"
     #   resp.instance_groups[0].current_image_id #=> String
     #   resp.instance_groups[0].desired_image_id #=> String
     #   resp.instance_groups[0].current_image_release_version #=> String
@@ -15359,7 +15999,7 @@ module Aws::SageMaker
     #   resp.instance_groups[0].kubernetes_config.desired_taints[0].value #=> String
     #   resp.instance_groups[0].kubernetes_config.desired_taints[0].effect #=> String, one of "NoSchedule", "PreferNoSchedule", "NoExecute"
     #   resp.instance_groups[0].target_state_count #=> Integer
-    #   resp.instance_groups[0].software_update_status #=> String, one of "Pending", "InProgress", "Succeeded", "Failed", "RollbackInProgress", "RollbackComplete"
+    #   resp.instance_groups[0].software_update_status #=> String, one of "Pending", "InProgress", "Succeeded", "Failed", "RollbackInProgress", "RollbackComplete", "PartiallySucceeded"
     #   resp.instance_groups[0].active_software_update_config.rolling_update_policy.maximum_batch_size.type #=> String, one of "INSTANCE_COUNT", "CAPACITY_PERCENTAGE"
     #   resp.instance_groups[0].active_software_update_config.rolling_update_policy.maximum_batch_size.value #=> Integer
     #   resp.instance_groups[0].active_software_update_config.rolling_update_policy.rollback_maximum_batch_size.type #=> String, one of "INSTANCE_COUNT", "CAPACITY_PERCENTAGE"
@@ -15510,6 +16150,7 @@ module Aws::SageMaker
     #   resp.event_details.event_details.event_metadata.slurm_health.reason #=> String, one of "DaemonDown", "DaemonDisabled", "DbUnreachable"
     #   resp.event_details.description #=> String
     #   resp.event_details.event_level #=> String, one of "Info", "Warn", "Error"
+    #   resp.event_details.operation_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeClusterEvent AWS API Documentation
     #
@@ -15517,6 +16158,62 @@ module Aws::SageMaker
     # @param [Hash] params ({})
     def describe_cluster_event(params = {}, options = {})
       req = build_request(:describe_cluster_event, params)
+      req.send_request(options)
+    end
+
+    # Retrieves information about an extension installed on a SageMaker
+    # HyperPod cluster. The information includes the extension's version,
+    # configuration, and status, and a summary of how many cluster nodes are
+    # running the current version and configuration of the extension. If the
+    # extension has problems on some nodes, the response also lists the
+    # problems and how many nodes each one affects.
+    #
+    # @option params [required, String] :cluster_arn
+    #   The Amazon Resource Name (ARN) of the SageMaker HyperPod cluster on
+    #   which the extension is installed.
+    #
+    # @option params [required, String] :extension_arn
+    #   The Amazon Resource Name (ARN) of the extension to describe.
+    #   `CreateClusterExtension` returns this ARN, and `ListClusterExtensions`
+    #   lists it. If you delete an extension and create it again, the new
+    #   extension has a new ARN.
+    #
+    # @return [Types::DescribeClusterExtensionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeClusterExtensionResponse#extension_details #extension_details} => Types::ExtensionDetails
+    #   * {Types::DescribeClusterExtensionResponse#node_summary #node_summary} => Types::ExtensionNodeSummary
+    #   * {Types::DescribeClusterExtensionResponse#health #health} => Types::ExtensionHealth
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_cluster_extension({
+    #     cluster_arn: "ClusterArn", # required
+    #     extension_arn: "ExtensionArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.extension_details.cluster_arn #=> String
+    #   resp.extension_details.extension_arn #=> String
+    #   resp.extension_details.extension_name #=> String
+    #   resp.extension_details.extension_version #=> String
+    #   resp.extension_details.status #=> String, one of "Creating", "Active", "CreateFailed", "Updating", "Deleting", "DeleteFailed", "Degraded", "UpdateFailed"
+    #   resp.extension_details.configuration_values #=> String
+    #   resp.extension_details.creation_time #=> Time
+    #   resp.extension_details.last_modified_time #=> Time
+    #   resp.node_summary.total_count #=> Integer
+    #   resp.node_summary.active_count #=> Integer
+    #   resp.health.issues #=> Array
+    #   resp.health.issues[0].code #=> String, one of "InvalidConfiguration", "ConfigurationConflict", "AccessDenied", "ResourceNotFound", "DependencyUnreachable", "ExtensionUnhealthy", "InternalFailure", "Other"
+    #   resp.health.issues[0].message #=> String
+    #   resp.health.issues[0].node_count #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeClusterExtension AWS API Documentation
+    #
+    # @overload describe_cluster_extension(params = {})
+    # @param [Hash] params ({})
+    def describe_cluster_extension(params = {}, options = {})
+      req = build_request(:describe_cluster_extension, params)
       req.send_request(options)
     end
 
@@ -15553,7 +16250,7 @@ module Aws::SageMaker
     #   resp.node_details.instance_group_name #=> String
     #   resp.node_details.instance_id #=> String
     #   resp.node_details.node_logical_id #=> String
-    #   resp.node_details.instance_status.status #=> String, one of "Running", "Failure", "Pending", "ShuttingDown", "SystemUpdating", "DeepHealthCheckInProgress", "NotFound"
+    #   resp.node_details.instance_status.status #=> String, one of "Running", "Failure", "Pending", "ShuttingDown", "SystemUpdating", "DeepHealthCheckInProgress", "NotFound", "DetachInProgress", "AttachInProgress"
     #   resp.node_details.instance_status.message #=> String
     #   resp.node_details.instance_type #=> String, one of "ml.p4d.24xlarge", "ml.p4de.24xlarge", "ml.p5.48xlarge", "ml.p5.4xlarge", "ml.p6e-gb200.36xlarge", "ml.trn1.32xlarge", "ml.trn1n.32xlarge", "ml.g5.xlarge", "ml.g5.2xlarge", "ml.g5.4xlarge", "ml.g5.8xlarge", "ml.g5.12xlarge", "ml.g5.16xlarge", "ml.g5.24xlarge", "ml.g5.48xlarge", "ml.c5.large", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.12xlarge", "ml.c5.18xlarge", "ml.c5.24xlarge", "ml.c5n.large", "ml.c5n.2xlarge", "ml.c5n.4xlarge", "ml.c5n.9xlarge", "ml.c5n.18xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.8xlarge", "ml.m5.12xlarge", "ml.m5.16xlarge", "ml.m5.24xlarge", "ml.t3.medium", "ml.t3.large", "ml.t3.xlarge", "ml.t3.2xlarge", "ml.g6.xlarge", "ml.g6.2xlarge", "ml.g6.4xlarge", "ml.g6.8xlarge", "ml.g6.16xlarge", "ml.g6.12xlarge", "ml.g6.24xlarge", "ml.g6.48xlarge", "ml.gr6.4xlarge", "ml.gr6.8xlarge", "ml.g6e.xlarge", "ml.g6e.2xlarge", "ml.g6e.4xlarge", "ml.g6e.8xlarge", "ml.g6e.16xlarge", "ml.g6e.12xlarge", "ml.g6e.24xlarge", "ml.g6e.48xlarge", "ml.p5e.48xlarge", "ml.p5en.48xlarge", "ml.p6-b200.48xlarge", "ml.trn2.3xlarge", "ml.trn2.48xlarge", "ml.c6i.large", "ml.c6i.xlarge", "ml.c6i.2xlarge", "ml.c6i.4xlarge", "ml.c6i.8xlarge", "ml.c6i.12xlarge", "ml.c6i.16xlarge", "ml.c6i.24xlarge", "ml.c6i.32xlarge", "ml.m6i.large", "ml.m6i.xlarge", "ml.m6i.2xlarge", "ml.m6i.4xlarge", "ml.m6i.8xlarge", "ml.m6i.12xlarge", "ml.m6i.16xlarge", "ml.m6i.24xlarge", "ml.m6i.32xlarge", "ml.r6i.large", "ml.r6i.xlarge", "ml.r6i.2xlarge", "ml.r6i.4xlarge", "ml.r6i.8xlarge", "ml.r6i.12xlarge", "ml.r6i.16xlarge", "ml.r6i.24xlarge", "ml.r6i.32xlarge", "ml.i3en.large", "ml.i3en.xlarge", "ml.i3en.2xlarge", "ml.i3en.3xlarge", "ml.i3en.6xlarge", "ml.i3en.12xlarge", "ml.i3en.24xlarge", "ml.m7i.large", "ml.m7i.xlarge", "ml.m7i.2xlarge", "ml.m7i.4xlarge", "ml.m7i.8xlarge", "ml.m7i.12xlarge", "ml.m7i.16xlarge", "ml.m7i.24xlarge", "ml.m7i.48xlarge", "ml.r7i.large", "ml.r7i.xlarge", "ml.r7i.2xlarge", "ml.r7i.4xlarge", "ml.r7i.8xlarge", "ml.r7i.12xlarge", "ml.r7i.16xlarge", "ml.r7i.24xlarge", "ml.r7i.48xlarge", "ml.r5d.16xlarge", "ml.g7e.2xlarge", "ml.g7e.4xlarge", "ml.g7e.8xlarge", "ml.g7e.12xlarge", "ml.g7e.24xlarge", "ml.g7e.48xlarge", "ml.p6-b300.48xlarge", "ml.g4dn.xlarge", "ml.g4dn.2xlarge", "ml.g4dn.4xlarge", "ml.g4dn.8xlarge", "ml.g4dn.12xlarge", "ml.g4dn.16xlarge", "ml.c6g.medium", "ml.c6g.large", "ml.c6g.xlarge", "ml.c6g.2xlarge", "ml.c6g.4xlarge", "ml.c6g.8xlarge", "ml.c6g.12xlarge", "ml.c6g.16xlarge", "ml.c7g.medium", "ml.c7g.large", "ml.c7g.xlarge", "ml.c7g.2xlarge", "ml.c7g.4xlarge", "ml.c7g.8xlarge", "ml.c7g.12xlarge", "ml.c7g.16xlarge", "ml.c8g.medium", "ml.c8g.large", "ml.c8g.xlarge", "ml.c8g.2xlarge", "ml.c8g.4xlarge", "ml.c8g.8xlarge", "ml.c8g.12xlarge", "ml.c8g.16xlarge", "ml.c8g.24xlarge", "ml.c8g.48xlarge", "ml.c6a.large", "ml.c6a.xlarge", "ml.c6a.2xlarge", "ml.c6a.4xlarge", "ml.c6a.8xlarge", "ml.c6a.12xlarge", "ml.c6a.16xlarge", "ml.c6a.24xlarge", "ml.c6a.32xlarge", "ml.c6a.48xlarge", "ml.m6a.large", "ml.m6a.xlarge", "ml.m6a.2xlarge", "ml.m6a.4xlarge", "ml.m6a.8xlarge", "ml.m6a.12xlarge", "ml.m6a.16xlarge", "ml.m6a.24xlarge", "ml.m6a.32xlarge", "ml.m6a.48xlarge", "ml.m6g.medium", "ml.m6g.large", "ml.m6g.xlarge", "ml.m6g.2xlarge", "ml.m6g.4xlarge", "ml.m6g.8xlarge", "ml.m6g.12xlarge", "ml.m6g.16xlarge", "ml.m7g.medium", "ml.m7g.large", "ml.m7g.xlarge", "ml.m7g.2xlarge", "ml.m7g.4xlarge", "ml.m7g.8xlarge", "ml.m7g.12xlarge", "ml.m7g.16xlarge", "ml.m8g.medium", "ml.m8g.large", "ml.m8g.xlarge", "ml.m8g.2xlarge", "ml.m8g.4xlarge", "ml.m8g.8xlarge", "ml.m8g.12xlarge", "ml.m8g.16xlarge", "ml.m8g.24xlarge", "ml.m8g.48xlarge", "ml.g7.2xlarge", "ml.g7.4xlarge", "ml.g7.8xlarge", "ml.g7.12xlarge", "ml.g7.24xlarge", "ml.g7.48xlarge", "ml.c8a.16xlarge", "ml.m8a.16xlarge"
     #   resp.node_details.launch_time #=> Time
@@ -15608,6 +16305,68 @@ module Aws::SageMaker
     # @param [Hash] params ({})
     def describe_cluster_node(params = {}, options = {})
       req = build_request(:describe_cluster_node, params)
+      req.send_request(options)
+    end
+
+    # Retrieves detailed information about a specific operation for a given
+    # HyperPod cluster, such as a scaling operation or a deep health check.
+    # Use the `OperationId` returned by the `ListClusterOperations`
+    # operation to identify the operation to describe.
+    #
+    # @option params [required, String] :cluster_name
+    #   The name or Amazon Resource Name (ARN) of the HyperPod cluster
+    #   associated with the operation.
+    #
+    # @option params [required, String] :operation_id
+    #   The unique identifier (UUID) of the operation to describe. This ID can
+    #   be obtained from the `ListClusterOperations` operation.
+    #
+    # @return [Types::DescribeClusterOperationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeClusterOperationResponse#operation_id #operation_id} => String
+    #   * {Types::DescribeClusterOperationResponse#cluster_arn #cluster_arn} => String
+    #   * {Types::DescribeClusterOperationResponse#type #type} => String
+    #   * {Types::DescribeClusterOperationResponse#status #status} => String
+    #   * {Types::DescribeClusterOperationResponse#creation_time #creation_time} => Time
+    #   * {Types::DescribeClusterOperationResponse#scaling_details #scaling_details} => Array&lt;Types::ClusterOperationScalingDetails&gt;
+    #   * {Types::DescribeClusterOperationResponse#deep_health_check_details #deep_health_check_details} => Array&lt;Types::InstanceGroupHealthCheckConfiguration&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_cluster_operation({
+    #     cluster_name: "ClusterNameOrArn", # required
+    #     operation_id: "ClusterOperationId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.operation_id #=> String
+    #   resp.cluster_arn #=> String
+    #   resp.type #=> String, one of "Scaling", "DeepHealthCheck"
+    #   resp.status #=> String, one of "InProgress", "Superseded", "Done"
+    #   resp.creation_time #=> Time
+    #   resp.scaling_details #=> Array
+    #   resp.scaling_details[0].instance_group_name #=> String
+    #   resp.scaling_details[0].status #=> String, one of "InProgress", "Superseded", "Done"
+    #   resp.scaling_details[0].original.current_count #=> Integer
+    #   resp.scaling_details[0].original.target_count #=> Integer
+    #   resp.scaling_details[0].original.min_count #=> Integer
+    #   resp.scaling_details[0].desired.current_count #=> Integer
+    #   resp.scaling_details[0].desired.target_count #=> Integer
+    #   resp.scaling_details[0].desired.min_count #=> Integer
+    #   resp.deep_health_check_details #=> Array
+    #   resp.deep_health_check_details[0].instance_group_name #=> String
+    #   resp.deep_health_check_details[0].instance_ids #=> Array
+    #   resp.deep_health_check_details[0].instance_ids[0] #=> String
+    #   resp.deep_health_check_details[0].deep_health_checks #=> Array
+    #   resp.deep_health_check_details[0].deep_health_checks[0] #=> String, one of "InstanceStress", "InstanceConnectivity", "MultiNodeTrainingValidation"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeClusterOperation AWS API Documentation
+    #
+    # @overload describe_cluster_operation(params = {})
+    # @param [Hash] params ({})
+    def describe_cluster_operation(params = {}, options = {})
+      req = build_request(:describe_cluster_operation, params)
       req.send_request(options)
     end
 
@@ -16598,6 +17357,7 @@ module Aws::SageMaker
     #   * {Types::DescribeEndpointOutput#explainer_config #explainer_config} => Types::ExplainerConfig
     #   * {Types::DescribeEndpointOutput#shadow_production_variants #shadow_production_variants} => Array&lt;Types::ProductionVariantSummary&gt;
     #   * {Types::DescribeEndpointOutput#metrics_config #metrics_config} => Types::MetricsConfig
+    #   * {Types::DescribeEndpointOutput#cross_region_traffic_config #cross_region_traffic_config} => Types::CrossRegionTrafficConfig
     #
     # @example Request syntax with placeholder values
     #
@@ -16639,7 +17399,7 @@ module Aws::SageMaker
     #   resp.production_variants[0].managed_instance_scaling.scale_in_policy.strategy #=> String, one of "IDLE_RELEASE", "CONSOLIDATION"
     #   resp.production_variants[0].managed_instance_scaling.scale_in_policy.maximum_step_size #=> Integer
     #   resp.production_variants[0].managed_instance_scaling.scale_in_policy.cooldown_in_minutes #=> Integer
-    #   resp.production_variants[0].routing_config.routing_strategy #=> String, one of "LEAST_OUTSTANDING_REQUESTS", "RANDOM", "PREFIX_AWARE"
+    #   resp.production_variants[0].routing_config.routing_strategy #=> String, one of "LEAST_OUTSTANDING_REQUESTS", "RANDOM", "PREFIX_AWARE", "KV_AWARE"
     #   resp.production_variants[0].routing_config.prefix_aware_routing_config.prefix_length #=> Integer
     #   resp.production_variants[0].routing_config.prefix_aware_routing_config.concurrency_threshold #=> Integer
     #   resp.production_variants[0].capacity_reservation_config.ml_reservation_arn #=> String
@@ -16652,6 +17412,9 @@ module Aws::SageMaker
     #   resp.production_variants[0].capacity_reservation_config.ec2_capacity_reservations[0].total_instance_count #=> Integer
     #   resp.production_variants[0].capacity_reservation_config.ec2_capacity_reservations[0].available_instance_count #=> Integer
     #   resp.production_variants[0].capacity_reservation_config.ec2_capacity_reservations[0].used_by_current_endpoint #=> Integer
+    #   resp.production_variants[0].accelerator_partition_layouts #=> Array
+    #   resp.production_variants[0].accelerator_partition_layouts[0].accelerator_partition_types #=> Array
+    #   resp.production_variants[0].accelerator_partition_layouts[0].accelerator_partition_types[0] #=> String
     #   resp.data_capture_config.enable_capture #=> Boolean
     #   resp.data_capture_config.capture_status #=> String, one of "Started", "Stopped"
     #   resp.data_capture_config.current_sampling_percentage #=> Integer
@@ -16717,9 +17480,12 @@ module Aws::SageMaker
     #   resp.pending_deployment_summary.production_variants[0].managed_instance_scaling.scale_in_policy.strategy #=> String, one of "IDLE_RELEASE", "CONSOLIDATION"
     #   resp.pending_deployment_summary.production_variants[0].managed_instance_scaling.scale_in_policy.maximum_step_size #=> Integer
     #   resp.pending_deployment_summary.production_variants[0].managed_instance_scaling.scale_in_policy.cooldown_in_minutes #=> Integer
-    #   resp.pending_deployment_summary.production_variants[0].routing_config.routing_strategy #=> String, one of "LEAST_OUTSTANDING_REQUESTS", "RANDOM", "PREFIX_AWARE"
+    #   resp.pending_deployment_summary.production_variants[0].routing_config.routing_strategy #=> String, one of "LEAST_OUTSTANDING_REQUESTS", "RANDOM", "PREFIX_AWARE", "KV_AWARE"
     #   resp.pending_deployment_summary.production_variants[0].routing_config.prefix_aware_routing_config.prefix_length #=> Integer
     #   resp.pending_deployment_summary.production_variants[0].routing_config.prefix_aware_routing_config.concurrency_threshold #=> Integer
+    #   resp.pending_deployment_summary.production_variants[0].accelerator_partition_layouts #=> Array
+    #   resp.pending_deployment_summary.production_variants[0].accelerator_partition_layouts[0].accelerator_partition_types #=> Array
+    #   resp.pending_deployment_summary.production_variants[0].accelerator_partition_layouts[0].accelerator_partition_types[0] #=> String
     #   resp.pending_deployment_summary.start_time #=> Time
     #   resp.pending_deployment_summary.shadow_production_variants #=> Array
     #   resp.pending_deployment_summary.shadow_production_variants[0].variant_name #=> String
@@ -16752,9 +17518,12 @@ module Aws::SageMaker
     #   resp.pending_deployment_summary.shadow_production_variants[0].managed_instance_scaling.scale_in_policy.strategy #=> String, one of "IDLE_RELEASE", "CONSOLIDATION"
     #   resp.pending_deployment_summary.shadow_production_variants[0].managed_instance_scaling.scale_in_policy.maximum_step_size #=> Integer
     #   resp.pending_deployment_summary.shadow_production_variants[0].managed_instance_scaling.scale_in_policy.cooldown_in_minutes #=> Integer
-    #   resp.pending_deployment_summary.shadow_production_variants[0].routing_config.routing_strategy #=> String, one of "LEAST_OUTSTANDING_REQUESTS", "RANDOM", "PREFIX_AWARE"
+    #   resp.pending_deployment_summary.shadow_production_variants[0].routing_config.routing_strategy #=> String, one of "LEAST_OUTSTANDING_REQUESTS", "RANDOM", "PREFIX_AWARE", "KV_AWARE"
     #   resp.pending_deployment_summary.shadow_production_variants[0].routing_config.prefix_aware_routing_config.prefix_length #=> Integer
     #   resp.pending_deployment_summary.shadow_production_variants[0].routing_config.prefix_aware_routing_config.concurrency_threshold #=> Integer
+    #   resp.pending_deployment_summary.shadow_production_variants[0].accelerator_partition_layouts #=> Array
+    #   resp.pending_deployment_summary.shadow_production_variants[0].accelerator_partition_layouts[0].accelerator_partition_types #=> Array
+    #   resp.pending_deployment_summary.shadow_production_variants[0].accelerator_partition_layouts[0].accelerator_partition_types[0] #=> String
     #   resp.explainer_config.clarify_explainer_config.enable_explanations #=> String
     #   resp.explainer_config.clarify_explainer_config.inference_config.features_attribute #=> String
     #   resp.explainer_config.clarify_explainer_config.inference_config.content_template #=> String
@@ -16807,7 +17576,7 @@ module Aws::SageMaker
     #   resp.shadow_production_variants[0].managed_instance_scaling.scale_in_policy.strategy #=> String, one of "IDLE_RELEASE", "CONSOLIDATION"
     #   resp.shadow_production_variants[0].managed_instance_scaling.scale_in_policy.maximum_step_size #=> Integer
     #   resp.shadow_production_variants[0].managed_instance_scaling.scale_in_policy.cooldown_in_minutes #=> Integer
-    #   resp.shadow_production_variants[0].routing_config.routing_strategy #=> String, one of "LEAST_OUTSTANDING_REQUESTS", "RANDOM", "PREFIX_AWARE"
+    #   resp.shadow_production_variants[0].routing_config.routing_strategy #=> String, one of "LEAST_OUTSTANDING_REQUESTS", "RANDOM", "PREFIX_AWARE", "KV_AWARE"
     #   resp.shadow_production_variants[0].routing_config.prefix_aware_routing_config.prefix_length #=> Integer
     #   resp.shadow_production_variants[0].routing_config.prefix_aware_routing_config.concurrency_threshold #=> Integer
     #   resp.shadow_production_variants[0].capacity_reservation_config.ml_reservation_arn #=> String
@@ -16820,9 +17589,14 @@ module Aws::SageMaker
     #   resp.shadow_production_variants[0].capacity_reservation_config.ec2_capacity_reservations[0].total_instance_count #=> Integer
     #   resp.shadow_production_variants[0].capacity_reservation_config.ec2_capacity_reservations[0].available_instance_count #=> Integer
     #   resp.shadow_production_variants[0].capacity_reservation_config.ec2_capacity_reservations[0].used_by_current_endpoint #=> Integer
+    #   resp.shadow_production_variants[0].accelerator_partition_layouts #=> Array
+    #   resp.shadow_production_variants[0].accelerator_partition_layouts[0].accelerator_partition_types #=> Array
+    #   resp.shadow_production_variants[0].accelerator_partition_layouts[0].accelerator_partition_types[0] #=> String
     #   resp.metrics_config.enable_enhanced_metrics #=> Boolean
     #   resp.metrics_config.enable_detailed_observability #=> Boolean
     #   resp.metrics_config.metric_publish_frequency_in_seconds #=> Integer
+    #   resp.cross_region_traffic_config.max_invocations_per_second_per_instance #=> Integer
+    #   resp.cross_region_traffic_config.max_cross_region_percent_per_endpoint #=> Integer
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -16860,6 +17634,7 @@ module Aws::SageMaker
     #   * {Types::DescribeEndpointConfigOutput#vpc_config #vpc_config} => Types::VpcConfig
     #   * {Types::DescribeEndpointConfigOutput#enable_network_isolation #enable_network_isolation} => Boolean
     #   * {Types::DescribeEndpointConfigOutput#metrics_config #metrics_config} => Types::MetricsConfig
+    #   * {Types::DescribeEndpointConfigOutput#cross_region_traffic_config #cross_region_traffic_config} => Types::CrossRegionTrafficConfig
     #
     # @example Request syntax with placeholder values
     #
@@ -16898,12 +17673,15 @@ module Aws::SageMaker
     #   resp.production_variants[0].managed_instance_scaling.scale_in_policy.strategy #=> String, one of "IDLE_RELEASE", "CONSOLIDATION"
     #   resp.production_variants[0].managed_instance_scaling.scale_in_policy.maximum_step_size #=> Integer
     #   resp.production_variants[0].managed_instance_scaling.scale_in_policy.cooldown_in_minutes #=> Integer
-    #   resp.production_variants[0].routing_config.routing_strategy #=> String, one of "LEAST_OUTSTANDING_REQUESTS", "RANDOM", "PREFIX_AWARE"
+    #   resp.production_variants[0].routing_config.routing_strategy #=> String, one of "LEAST_OUTSTANDING_REQUESTS", "RANDOM", "PREFIX_AWARE", "KV_AWARE"
     #   resp.production_variants[0].routing_config.prefix_aware_routing_config.prefix_length #=> Integer
     #   resp.production_variants[0].routing_config.prefix_aware_routing_config.concurrency_threshold #=> Integer
     #   resp.production_variants[0].inference_ami_version #=> String, one of "al2-ami-sagemaker-inference-gpu-2", "al2-ami-sagemaker-inference-gpu-2-1", "al2-ami-sagemaker-inference-gpu-3-1", "al2-ami-sagemaker-inference-neuron-2", "al2023-ami-sagemaker-inference-gpu-4-1"
     #   resp.production_variants[0].capacity_reservation_config.capacity_reservation_preference #=> String, one of "capacity-reservations-only"
     #   resp.production_variants[0].capacity_reservation_config.ml_reservation_arn #=> String
+    #   resp.production_variants[0].accelerator_partition_layouts #=> Array
+    #   resp.production_variants[0].accelerator_partition_layouts[0].accelerator_partition_types #=> Array
+    #   resp.production_variants[0].accelerator_partition_layouts[0].accelerator_partition_types[0] #=> String
     #   resp.data_capture_config.enable_capture #=> Boolean
     #   resp.data_capture_config.initial_sampling_percentage #=> Integer
     #   resp.data_capture_config.destination_s3_uri #=> String
@@ -16974,12 +17752,15 @@ module Aws::SageMaker
     #   resp.shadow_production_variants[0].managed_instance_scaling.scale_in_policy.strategy #=> String, one of "IDLE_RELEASE", "CONSOLIDATION"
     #   resp.shadow_production_variants[0].managed_instance_scaling.scale_in_policy.maximum_step_size #=> Integer
     #   resp.shadow_production_variants[0].managed_instance_scaling.scale_in_policy.cooldown_in_minutes #=> Integer
-    #   resp.shadow_production_variants[0].routing_config.routing_strategy #=> String, one of "LEAST_OUTSTANDING_REQUESTS", "RANDOM", "PREFIX_AWARE"
+    #   resp.shadow_production_variants[0].routing_config.routing_strategy #=> String, one of "LEAST_OUTSTANDING_REQUESTS", "RANDOM", "PREFIX_AWARE", "KV_AWARE"
     #   resp.shadow_production_variants[0].routing_config.prefix_aware_routing_config.prefix_length #=> Integer
     #   resp.shadow_production_variants[0].routing_config.prefix_aware_routing_config.concurrency_threshold #=> Integer
     #   resp.shadow_production_variants[0].inference_ami_version #=> String, one of "al2-ami-sagemaker-inference-gpu-2", "al2-ami-sagemaker-inference-gpu-2-1", "al2-ami-sagemaker-inference-gpu-3-1", "al2-ami-sagemaker-inference-neuron-2", "al2023-ami-sagemaker-inference-gpu-4-1"
     #   resp.shadow_production_variants[0].capacity_reservation_config.capacity_reservation_preference #=> String, one of "capacity-reservations-only"
     #   resp.shadow_production_variants[0].capacity_reservation_config.ml_reservation_arn #=> String
+    #   resp.shadow_production_variants[0].accelerator_partition_layouts #=> Array
+    #   resp.shadow_production_variants[0].accelerator_partition_layouts[0].accelerator_partition_types #=> Array
+    #   resp.shadow_production_variants[0].accelerator_partition_layouts[0].accelerator_partition_types[0] #=> String
     #   resp.execution_role_arn #=> String
     #   resp.vpc_config.security_group_ids #=> Array
     #   resp.vpc_config.security_group_ids[0] #=> String
@@ -16989,6 +17770,8 @@ module Aws::SageMaker
     #   resp.metrics_config.enable_enhanced_metrics #=> Boolean
     #   resp.metrics_config.enable_detailed_observability #=> Boolean
     #   resp.metrics_config.metric_publish_frequency_in_seconds #=> Integer
+    #   resp.cross_region_traffic_config.max_invocations_per_second_per_instance #=> Integer
+    #   resp.cross_region_traffic_config.max_cross_region_percent_per_endpoint #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeEndpointConfig AWS API Documentation
     #
@@ -17250,6 +18033,60 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
+    # Retrieves information about a global inference gateway, including its
+    # status, endpoints, and routing configuration. To list the in-cluster
+    # inference gateways of the global inference gateway, use
+    # `ListInferenceGateways`. To read the tags of the global inference
+    # gateway, use `ListTags`.
+    #
+    # @option params [required, String] :identifier
+    #   The name, Amazon Resource Name (ARN), or ID of the global inference
+    #   gateway.
+    #
+    # @return [Types::DescribeGlobalInferenceGatewayResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeGlobalInferenceGatewayResponse#arn #arn} => String
+    #   * {Types::DescribeGlobalInferenceGatewayResponse#id #id} => String
+    #   * {Types::DescribeGlobalInferenceGatewayResponse#name #name} => String
+    #   * {Types::DescribeGlobalInferenceGatewayResponse#execution_role_arn #execution_role_arn} => String
+    #   * {Types::DescribeGlobalInferenceGatewayResponse#status #status} => String
+    #   * {Types::DescribeGlobalInferenceGatewayResponse#endpoint_url #endpoint_url} => String
+    #   * {Types::DescribeGlobalInferenceGatewayResponse#vpc_endpoint_service_name #vpc_endpoint_service_name} => String
+    #   * {Types::DescribeGlobalInferenceGatewayResponse#routing #routing} => Types::GlobalInferenceGatewayRouting
+    #   * {Types::DescribeGlobalInferenceGatewayResponse#creation_time #creation_time} => Time
+    #   * {Types::DescribeGlobalInferenceGatewayResponse#failure_reason #failure_reason} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_global_inference_gateway({
+    #     identifier: "GlobalInferenceGatewayIdentifier", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.id #=> String
+    #   resp.name #=> String
+    #   resp.execution_role_arn #=> String
+    #   resp.status #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETING", "FAILED"
+    #   resp.endpoint_url #=> String
+    #   resp.vpc_endpoint_service_name #=> String
+    #   resp.routing.weights.kv_headroom #=> Float
+    #   resp.routing.weights.queue_depth #=> Float
+    #   resp.routing.weights.region_proximity #=> Float
+    #   resp.routing.weights.error_rate #=> Float
+    #   resp.creation_time #=> Time
+    #   resp.failure_reason #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeGlobalInferenceGateway AWS API Documentation
+    #
+    # @overload describe_global_inference_gateway(params = {})
+    # @param [Hash] params ({})
+    def describe_global_inference_gateway(params = {}, options = {})
+      req = build_request(:describe_global_inference_gateway, params)
+      req.send_request(options)
+    end
+
     # Describes a hub.
     #
     # @option params [required, String] :hub_name
@@ -17267,6 +18104,8 @@ module Aws::SageMaker
     #   * {Types::DescribeHubResponse#failure_reason #failure_reason} => String
     #   * {Types::DescribeHubResponse#creation_time #creation_time} => Time
     #   * {Types::DescribeHubResponse#last_modified_time #last_modified_time} => Time
+    #   * {Types::DescribeHubResponse#created_by #created_by} => Types::UserContext
+    #   * {Types::DescribeHubResponse#last_modified_by #last_modified_by} => Types::UserContext
     #
     # @example Request syntax with placeholder values
     #
@@ -17287,6 +18126,18 @@ module Aws::SageMaker
     #   resp.failure_reason #=> String
     #   resp.creation_time #=> Time
     #   resp.last_modified_time #=> Time
+    #   resp.created_by.user_profile_arn #=> String
+    #   resp.created_by.user_profile_name #=> String
+    #   resp.created_by.domain_id #=> String
+    #   resp.created_by.iam_identity.arn #=> String
+    #   resp.created_by.iam_identity.principal_id #=> String
+    #   resp.created_by.iam_identity.source_identity #=> String
+    #   resp.last_modified_by.user_profile_arn #=> String
+    #   resp.last_modified_by.user_profile_name #=> String
+    #   resp.last_modified_by.domain_id #=> String
+    #   resp.last_modified_by.iam_identity.arn #=> String
+    #   resp.last_modified_by.iam_identity.principal_id #=> String
+    #   resp.last_modified_by.iam_identity.source_identity #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeHub AWS API Documentation
     #
@@ -17333,6 +18184,8 @@ module Aws::SageMaker
     #   * {Types::DescribeHubContentResponse#failure_reason #failure_reason} => String
     #   * {Types::DescribeHubContentResponse#creation_time #creation_time} => Time
     #   * {Types::DescribeHubContentResponse#last_modified_time #last_modified_time} => Time
+    #   * {Types::DescribeHubContentResponse#created_by #created_by} => Types::UserContext
+    #   * {Types::DescribeHubContentResponse#last_modified_by #last_modified_by} => Types::UserContext
     #
     # @example Request syntax with placeholder values
     #
@@ -17368,6 +18221,18 @@ module Aws::SageMaker
     #   resp.failure_reason #=> String
     #   resp.creation_time #=> Time
     #   resp.last_modified_time #=> Time
+    #   resp.created_by.user_profile_arn #=> String
+    #   resp.created_by.user_profile_name #=> String
+    #   resp.created_by.domain_id #=> String
+    #   resp.created_by.iam_identity.arn #=> String
+    #   resp.created_by.iam_identity.principal_id #=> String
+    #   resp.created_by.iam_identity.source_identity #=> String
+    #   resp.last_modified_by.user_profile_arn #=> String
+    #   resp.last_modified_by.user_profile_name #=> String
+    #   resp.last_modified_by.domain_id #=> String
+    #   resp.last_modified_by.iam_identity.arn #=> String
+    #   resp.last_modified_by.iam_identity.principal_id #=> String
+    #   resp.last_modified_by.iam_identity.source_identity #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeHubContent AWS API Documentation
     #
@@ -17918,6 +18783,7 @@ module Aws::SageMaker
     #   resp.specification.compute_resource_requirements.number_of_accelerator_devices_required #=> Float
     #   resp.specification.compute_resource_requirements.min_memory_required_in_mb #=> Integer
     #   resp.specification.compute_resource_requirements.max_memory_required_in_mb #=> Integer
+    #   resp.specification.compute_resource_requirements.accelerator_partition_type #=> String
     #   resp.specification.base_inference_component_name #=> String
     #   resp.specification.data_cache_config.enable_caching #=> Boolean
     #   resp.specification.scheduling_config.placement_strategy #=> String, one of "SPREAD", "BINPACK"
@@ -17941,6 +18807,7 @@ module Aws::SageMaker
     #   resp.specifications[0].compute_resource_requirements.number_of_accelerator_devices_required #=> Float
     #   resp.specifications[0].compute_resource_requirements.min_memory_required_in_mb #=> Integer
     #   resp.specifications[0].compute_resource_requirements.max_memory_required_in_mb #=> Integer
+    #   resp.specifications[0].compute_resource_requirements.accelerator_partition_type #=> String
     #   resp.specifications[0].base_inference_component_name #=> String
     #   resp.specifications[0].data_cache_config.enable_caching #=> Boolean
     #   resp.specifications[0].scheduling_config.placement_strategy #=> String, one of "SPREAD", "BINPACK"
@@ -18177,6 +19044,67 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
+    # Returns information about an inference router, including the routing
+    # status of each destination.
+    #
+    # SageMaker AI checks each destination with your permissions when you
+    # call this operation, so callers with different permissions can see a
+    # different `RoutingStatus`. To get the router's tags, use
+    # [ListTags][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_ListTags.html
+    #
+    # @option params [required, String] :inference_router_name
+    #   The name of the inference router to describe.
+    #
+    # @return [Types::DescribeInferenceRouterOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeInferenceRouterOutput#inference_router_name #inference_router_name} => String
+    #   * {Types::DescribeInferenceRouterOutput#inference_router_arn #inference_router_arn} => String
+    #   * {Types::DescribeInferenceRouterOutput#routing_targets #routing_targets} => Array&lt;Types::RoutingTarget&gt;
+    #   * {Types::DescribeInferenceRouterOutput#status #status} => String
+    #   * {Types::DescribeInferenceRouterOutput#status_reason #status_reason} => String
+    #   * {Types::DescribeInferenceRouterOutput#creation_time #creation_time} => Time
+    #   * {Types::DescribeInferenceRouterOutput#last_modified_time #last_modified_time} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_inference_router({
+    #     inference_router_name: "InferenceRouterName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.inference_router_name #=> String
+    #   resp.inference_router_arn #=> String
+    #   resp.routing_targets #=> Array
+    #   resp.routing_targets[0].name #=> String
+    #   resp.routing_targets[0].destinations #=> Array
+    #   resp.routing_targets[0].destinations[0].resource_arn #=> String
+    #   resp.routing_targets[0].destinations[0].routing_status #=> String, one of "Routable", "Unroutable", "Unknown"
+    #   resp.routing_targets[0].async_inference_config.output_config.s3_output_path #=> String
+    #   resp.routing_targets[0].async_inference_config.output_config.s3_failure_path #=> String
+    #   resp.routing_targets[0].async_inference_config.output_config.kms_key_id #=> String
+    #   resp.routing_targets[0].async_inference_config.output_config.notification_config.success_topic #=> String
+    #   resp.routing_targets[0].async_inference_config.output_config.notification_config.error_topic #=> String
+    #   resp.routing_targets[0].async_inference_config.client_config.max_time_in_backlog_seconds #=> Integer
+    #   resp.routing_targets[0].routing_preference #=> String, one of "LocalRegionFirst", "InstancePoolOrder"
+    #   resp.status #=> String, one of "InService", "Creating", "Updating", "Failed", "Deleting"
+    #   resp.status_reason #=> String
+    #   resp.creation_time #=> Time
+    #   resp.last_modified_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeInferenceRouter AWS API Documentation
+    #
+    # @overload describe_inference_router(params = {})
+    # @param [Hash] params ({})
+    def describe_inference_router(params = {}, options = {})
+      req = build_request(:describe_inference_router, params)
+      req.send_request(options)
+    end
+
     # Returns detailed information about a job, including its current
     # status, secondary status, configuration, and timestamps. Use
     # `SecondaryStatus` for granular progress tracking and
@@ -18220,7 +19148,7 @@ module Aws::SageMaker
     #
     #   resp = client.describe_job({
     #     job_name: "JobName", # required
-    #     job_category: "AgentRFT", # required, accepts AgentRFT, AgentRFTEvaluation
+    #     job_category: "AgentRFT", # required, accepts AgentRFT, SyntheticDataGeneration, DataQualityEvaluation, AgentRFTEvaluation, DataTransformation
     #   })
     #
     # @example Response structure
@@ -18228,16 +19156,16 @@ module Aws::SageMaker
     #   resp.job_name #=> String
     #   resp.job_arn #=> String
     #   resp.role_arn #=> String
-    #   resp.job_category #=> String, one of "AgentRFT", "AgentRFTEvaluation"
+    #   resp.job_category #=> String, one of "AgentRFT", "SyntheticDataGeneration", "DataQualityEvaluation", "AgentRFTEvaluation", "DataTransformation"
     #   resp.job_config_schema_version #=> String
     #   resp.job_config_document #=> String
     #   resp.creation_time #=> Time
     #   resp.last_modified_time #=> Time
     #   resp.end_time #=> Time
     #   resp.job_status #=> String, one of "InProgress", "Completed", "Failed", "Stopping", "Stopped", "Deleting", "DeleteFailed"
-    #   resp.secondary_status #=> String, one of "Starting", "Downloading", "Training", "Uploading", "Stopping", "Stopped", "MaxRuntimeExceeded", "Interrupted", "Failed", "Completed", "Restarting", "Pending", "Evaluating", "Deleting", "DeleteFailed"
+    #   resp.secondary_status #=> String, one of "Starting", "Downloading", "Training", "Uploading", "Stopping", "Stopped", "MaxRuntimeExceeded", "Interrupted", "Failed", "Completed", "Restarting", "Pending", "Generating", "PartialGeneration", "Evaluating", "Validating", "Preparing", "Executing", "Publishing", "Finalizing", "Transforming", "Deleting", "DeleteFailed"
     #   resp.secondary_status_transitions #=> Array
-    #   resp.secondary_status_transitions[0].status #=> String, one of "Starting", "Downloading", "Training", "Uploading", "Stopping", "Stopped", "MaxRuntimeExceeded", "Interrupted", "Failed", "Completed", "Restarting", "Pending", "Evaluating", "Deleting", "DeleteFailed"
+    #   resp.secondary_status_transitions[0].status #=> String, one of "Starting", "Downloading", "Training", "Uploading", "Stopping", "Stopped", "MaxRuntimeExceeded", "Interrupted", "Failed", "Completed", "Restarting", "Pending", "Generating", "PartialGeneration", "Evaluating", "Validating", "Preparing", "Executing", "Publishing", "Finalizing", "Transforming", "Deleting", "DeleteFailed"
     #   resp.secondary_status_transitions[0].start_time #=> Time
     #   resp.secondary_status_transitions[0].end_time #=> Time
     #   resp.secondary_status_transitions[0].status_message #=> String
@@ -18283,13 +19211,13 @@ module Aws::SageMaker
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_job_schema_version({
-    #     job_category: "AgentRFT", # required, accepts AgentRFT, AgentRFTEvaluation
+    #     job_category: "AgentRFT", # required, accepts AgentRFT, SyntheticDataGeneration, DataQualityEvaluation, AgentRFTEvaluation, DataTransformation
     #     job_config_schema_version: "JobSchemaVersion",
     #   })
     #
     # @example Response structure
     #
-    #   resp.job_category #=> String, one of "AgentRFT", "AgentRFTEvaluation"
+    #   resp.job_category #=> String, one of "AgentRFT", "SyntheticDataGeneration", "DataQualityEvaluation", "AgentRFTEvaluation", "DataTransformation"
     #   resp.job_config_schema_version #=> String
     #   resp.job_config_schema #=> String
     #
@@ -19924,7 +20852,15 @@ module Aws::SageMaker
     #   The name or Amazon Resource Name (ARN) of the pipeline to describe.
     #
     # @option params [Integer] :pipeline_version_id
-    #   The ID of the pipeline version to describe.
+    #   The ID of the pipeline version to describe. You can't specify this
+    #   with `PipelineVersionAlias`.
+    #
+    # @option params [String] :pipeline_version_alias
+    #   The alias of the pipeline version to describe. You can't specify this
+    #   with `PipelineVersionId`. If no version of the pipeline has this
+    #   alias, the request fails with a `ResourceNotFound` error. If you
+    #   specify neither, SageMaker describes the latest version of the
+    #   pipeline.
     #
     # @return [Types::DescribePipelineResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -19943,12 +20879,14 @@ module Aws::SageMaker
     #   * {Types::DescribePipelineResponse#parallelism_configuration #parallelism_configuration} => Types::ParallelismConfiguration
     #   * {Types::DescribePipelineResponse#pipeline_version_display_name #pipeline_version_display_name} => String
     #   * {Types::DescribePipelineResponse#pipeline_version_description #pipeline_version_description} => String
+    #   * {Types::DescribePipelineResponse#pipeline_version_aliases #pipeline_version_aliases} => Array&lt;String&gt;
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_pipeline({
     #     pipeline_name: "PipelineNameOrArn", # required
     #     pipeline_version_id: 1,
+    #     pipeline_version_alias: "PipelineVersionAlias",
     #   })
     #
     # @example Response structure
@@ -19978,6 +20916,8 @@ module Aws::SageMaker
     #   resp.parallelism_configuration.max_parallel_execution_steps #=> Integer
     #   resp.pipeline_version_display_name #=> String
     #   resp.pipeline_version_description #=> String
+    #   resp.pipeline_version_aliases #=> Array
+    #   resp.pipeline_version_aliases[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribePipeline AWS API Documentation
     #
@@ -20040,6 +20980,8 @@ module Aws::SageMaker
     #   * {Types::DescribePipelineExecutionResponse#selective_execution_config #selective_execution_config} => Types::SelectiveExecutionConfig
     #   * {Types::DescribePipelineExecutionResponse#pipeline_version_id #pipeline_version_id} => Integer
     #   * {Types::DescribePipelineExecutionResponse#m_lflow_config #m_lflow_config} => Types::MLflowConfiguration
+    #   * {Types::DescribePipelineExecutionResponse#pipeline_version_aliases #pipeline_version_aliases} => Array&lt;String&gt;
+    #   * {Types::DescribePipelineExecutionResponse#role_arn #role_arn} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -20078,6 +21020,9 @@ module Aws::SageMaker
     #   resp.pipeline_version_id #=> Integer
     #   resp.m_lflow_config.mlflow_resource_arn #=> String
     #   resp.m_lflow_config.mlflow_experiment_name #=> String
+    #   resp.pipeline_version_aliases #=> Array
+    #   resp.pipeline_version_aliases[0] #=> String
+    #   resp.role_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribePipelineExecution AWS API Documentation
     #
@@ -20346,6 +21291,68 @@ module Aws::SageMaker
     # @param [Hash] params ({})
     def describe_reserved_capacity(params = {}, options = {})
       req = build_request(:describe_reserved_capacity, params)
+      req.send_request(options)
+    end
+
+    # Returns the resources in your account that are associated with a
+    # SageMaker Capacity Reservation and the status of each association.
+    # Resources include SageMaker AI HyperPod clusters and SageMaker AI
+    # endpoints.
+    #
+    # @option params [required, String] :sm_capacity_reservation_arn
+    #   The Amazon Resource Name (ARN) of the SageMaker Capacity Reservation.
+    #   The ARN has the format
+    #   `arn:aws:sagemaker:region:account-id:sm-capacity-reservation/smcr-id`.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in the response. If more
+    #   results are available, the response includes a `NextToken` value.
+    #
+    # @option params [String] :next_token
+    #   If the previous response was truncated, the response includes a
+    #   `NextToken` value. To retrieve the next set of results, use that token
+    #   in your next request.
+    #
+    # @return [Types::DescribeResourceAssociationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeResourceAssociationsResponse#sm_capacity_reservation_arn #sm_capacity_reservation_arn} => String
+    #   * {Types::DescribeResourceAssociationsResponse#sm_capacity_reservation_id #sm_capacity_reservation_id} => String
+    #   * {Types::DescribeResourceAssociationsResponse#resource_associations #resource_associations} => Array&lt;Types::CapacityReservationResourceAssociation&gt;
+    #   * {Types::DescribeResourceAssociationsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_resource_associations({
+    #     sm_capacity_reservation_arn: "CapacityReservationArn", # required
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.sm_capacity_reservation_arn #=> String
+    #   resp.sm_capacity_reservation_id #=> String
+    #   resp.resource_associations #=> Array
+    #   resp.resource_associations[0].hyper_pod_clusters.status #=> String, one of "Pending", "Active", "Inactive"
+    #   resp.resource_associations[0].hyper_pod_clusters.failure_reason #=> String
+    #   resp.resource_associations[0].hyper_pod_clusters.associated_time #=> Time
+    #   resp.resource_associations[0].endpoints.ml_reservation_id #=> String
+    #   resp.resource_associations[0].endpoints.status #=> String, one of "Pending", "Active", "Inactive"
+    #   resp.resource_associations[0].endpoints.match_criteria #=> String, one of "Open", "Targeted"
+    #   resp.resource_associations[0].endpoints.endpoint_sharing #=> String, one of "SingleEndpoint", "MultipleEndpoints"
+    #   resp.resource_associations[0].endpoints.ml_reservation_arn #=> String
+    #   resp.resource_associations[0].endpoints.failure_reason #=> String
+    #   resp.resource_associations[0].endpoints.associated_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeResourceAssociations AWS API Documentation
+    #
+    # @overload describe_resource_associations(params = {})
+    # @param [Hash] params ({})
+    def describe_resource_associations(params = {}, options = {})
+      req = build_request(:describe_resource_associations, params)
       req.send_request(options)
     end
 
@@ -21701,6 +22708,68 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
+    # Returns the number of instances in use from a SageMaker Capacity
+    # Reservation, for each account that uses them.
+    #
+    # SageMaker AI refreshes the usage counts periodically. The
+    # `LastRefreshTime` value shows when the counts were last refreshed.
+    #
+    # @option params [required, String] :sm_capacity_reservation_arn
+    #   The Amazon Resource Name (ARN) of the SageMaker Capacity Reservation.
+    #   The ARN has the format
+    #   `arn:aws:sagemaker:region:account-id:sm-capacity-reservation/smcr-id`.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in the response. If more
+    #   results are available, the response includes a `NextToken` value.
+    #
+    # @option params [String] :next_token
+    #   If the previous response was truncated, the response includes a
+    #   `NextToken` value. To retrieve the next set of results, use that token
+    #   in your next request.
+    #
+    # @return [Types::GetCapacityReservationUsageResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetCapacityReservationUsageResponse#sm_capacity_reservation_id #sm_capacity_reservation_id} => String
+    #   * {Types::GetCapacityReservationUsageResponse#total_instance_count #total_instance_count} => Integer
+    #   * {Types::GetCapacityReservationUsageResponse#available_instance_count #available_instance_count} => Integer
+    #   * {Types::GetCapacityReservationUsageResponse#last_refresh_time #last_refresh_time} => Time
+    #   * {Types::GetCapacityReservationUsageResponse#instance_usage_set #instance_usage_set} => Array&lt;Types::CapacityReservationInstanceUsage&gt;
+    #   * {Types::GetCapacityReservationUsageResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_capacity_reservation_usage({
+    #     sm_capacity_reservation_arn: "CapacityReservationArn", # required
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.sm_capacity_reservation_id #=> String
+    #   resp.total_instance_count #=> Integer
+    #   resp.available_instance_count #=> Integer
+    #   resp.last_refresh_time #=> Time
+    #   resp.instance_usage_set #=> Array
+    #   resp.instance_usage_set[0].account_id #=> String
+    #   resp.instance_usage_set[0].in_use_instance_count #=> Integer
+    #   resp.instance_usage_set[0].resources_usage #=> Array
+    #   resp.instance_usage_set[0].resources_usage[0].resource_type #=> String, one of "HyperPodClusters", "Endpoints"
+    #   resp.instance_usage_set[0].resources_usage[0].in_use_instance_count #=> Integer
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/GetCapacityReservationUsage AWS API Documentation
+    #
+    # @overload get_capacity_reservation_usage(params = {})
+    # @param [Hash] params ({})
+    def get_capacity_reservation_usage(params = {}, options = {})
+      req = build_request(:get_capacity_reservation_usage, params)
+      req.send_request(options)
+    end
+
     # Describes a fleet.
     #
     # @option params [required, String] :device_fleet_name
@@ -21752,6 +22821,40 @@ module Aws::SageMaker
     # @param [Hash] params ({})
     def get_device_fleet_report(params = {}, options = {})
       req = build_request(:get_device_fleet_report, params)
+      req.send_request(options)
+    end
+
+    # Returns the resource-based policy that is attached to an endpoint. If
+    # the endpoint doesn't have a policy, you get a `ValidationException`.
+    #
+    # @option params [required, String] :endpoint_name
+    #   The name of the endpoint. The endpoint must be in your account and in
+    #   the current Amazon Web Services Region.
+    #
+    # @return [Types::GetEndpointPolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetEndpointPolicyResponse#endpoint_name #endpoint_name} => String
+    #   * {Types::GetEndpointPolicyResponse#endpoint_arn #endpoint_arn} => String
+    #   * {Types::GetEndpointPolicyResponse#resource_policy #resource_policy} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_endpoint_policy({
+    #     endpoint_name: "EndpointName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.endpoint_name #=> String
+    #   resp.endpoint_arn #=> String
+    #   resp.resource_policy #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/GetEndpointPolicy AWS API Documentation
+    #
+    # @overload get_endpoint_policy(params = {})
+    # @param [Hash] params ({})
+    def get_endpoint_policy(params = {}, options = {})
+      req = build_request(:get_endpoint_policy, params)
       req.send_request(options)
     end
 
@@ -22971,6 +24074,69 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
+    # Lists the SageMaker Capacity Reservations in your account.
+    #
+    # An empty list is a valid response.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in the response. If more
+    #   results are available, the response includes a `NextToken` value.
+    #
+    # @option params [String] :next_token
+    #   If the previous response was truncated, the response includes a
+    #   `NextToken` value. To retrieve the next set of results, use that token
+    #   in your next request.
+    #
+    # @option params [Array<Types::CapacityReservationFilter>] :filters
+    #   A filter that returns only the reservations that match it. You can
+    #   specify one filter. If you don't specify a filter, the response
+    #   includes all reservations in your account.
+    #
+    # @return [Types::ListCapacityReservationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListCapacityReservationsResponse#capacity_reservation_summaries #capacity_reservation_summaries} => Array&lt;Types::CapacityReservationSummary&gt;
+    #   * {Types::ListCapacityReservationsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_capacity_reservations({
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #     filters: [
+    #       {
+    #         name: "Status", # required, accepts Status
+    #         values: ["CapacityReservationFilterValue"], # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.capacity_reservation_summaries #=> Array
+    #   resp.capacity_reservation_summaries[0].sm_capacity_reservation_arn #=> String
+    #   resp.capacity_reservation_summaries[0].sm_capacity_reservation_id #=> String
+    #   resp.capacity_reservation_summaries[0].owner #=> String
+    #   resp.capacity_reservation_summaries[0].status #=> String, one of "Scheduled", "Active", "Expired"
+    #   resp.capacity_reservation_summaries[0].instance_type #=> String
+    #   resp.capacity_reservation_summaries[0].availability_zone #=> String
+    #   resp.capacity_reservation_summaries[0].availability_zone_id #=> String
+    #   resp.capacity_reservation_summaries[0].total_instance_count #=> Integer
+    #   resp.capacity_reservation_summaries[0].start_time #=> Time
+    #   resp.capacity_reservation_summaries[0].end_time #=> Time
+    #   resp.capacity_reservation_summaries[0].creation_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListCapacityReservations AWS API Documentation
+    #
+    # @overload list_capacity_reservations(params = {})
+    # @param [Hash] params ({})
+    def list_capacity_reservations(params = {}, options = {})
+      req = build_request(:list_capacity_reservations, params)
+      req.send_request(options)
+    end
+
     # Retrieves a list of event summaries for a specified HyperPod cluster.
     # The operation supports filtering, sorting, and pagination of results.
     # This functionality is only supported when the `NodeProvisioningMode`
@@ -23008,6 +24174,12 @@ module Aws::SageMaker
     #   The type of resource for which to filter events. Valid values are
     #   `Cluster`, `InstanceGroup`, or `Instance`.
     #
+    # @option params [String] :operation_id
+    #   The unique identifier (UUID) of a cluster operation for which to
+    #   filter events. If specified, only events associated with this
+    #   operation are returned. This ID can be obtained from the
+    #   `ListClusterOperations` operation.
+    #
     # @option params [Integer] :max_results
     #   The maximum number of events to return in the response. Valid range is
     #   1 to 100.
@@ -23034,6 +24206,7 @@ module Aws::SageMaker
     #     sort_by: "EventTime", # accepts EventTime
     #     sort_order: "Ascending", # accepts Ascending, Descending
     #     resource_type: "Cluster", # accepts Cluster, InstanceGroup, Instance
+    #     operation_id: "ClusterOperationId",
     #     max_results: 1,
     #     next_token: "NextToken",
     #   })
@@ -23051,6 +24224,7 @@ module Aws::SageMaker
     #   resp.events[0].event_time #=> Time
     #   resp.events[0].description #=> String
     #   resp.events[0].event_level #=> String, one of "Info", "Warn", "Error"
+    #   resp.events[0].operation_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListClusterEvents AWS API Documentation
     #
@@ -23058,6 +24232,124 @@ module Aws::SageMaker
     # @param [Hash] params ({})
     def list_cluster_events(params = {}, options = {})
       req = build_request(:list_cluster_events, params)
+      req.send_request(options)
+    end
+
+    # Lists the versions of an extension that you can install on a SageMaker
+    # HyperPod cluster, from the highest version to the lowest. Use a
+    # version from this list as the `ExtensionVersion` in
+    # `CreateClusterExtension` or `UpdateClusterExtension`.
+    #
+    # The list contains only versions that you can install. Versions that
+    # SageMaker HyperPod no longer offers for new installations don't
+    # appear. If SageMaker HyperPod doesn't offer an extension with the
+    # name that you specify, the response contains an empty list.
+    #
+    # @option params [required, String] :extension_name
+    #   The name of the extension whose versions you want to list, for example
+    #   `sagemaker-observability`.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of versions to return in the response. If you
+    #   don't specify a value, SageMaker HyperPod returns up to 100 versions.
+    #
+    # @option params [String] :next_token
+    #   If the result of the previous `ListClusterExtensionVersions` request
+    #   was truncated, the response includes a `NextToken`. To retrieve the
+    #   next set of versions, use the token in the next request.
+    #
+    # @return [Types::ListClusterExtensionVersionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListClusterExtensionVersionsResponse#extension_versions #extension_versions} => Array&lt;Types::ExtensionVersionSummary&gt;
+    #   * {Types::ListClusterExtensionVersionsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_cluster_extension_versions({
+    #     extension_name: "ExtensionName", # required
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.extension_versions #=> Array
+    #   resp.extension_versions[0].extension_version #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListClusterExtensionVersions AWS API Documentation
+    #
+    # @overload list_cluster_extension_versions(params = {})
+    # @param [Hash] params ({})
+    def list_cluster_extension_versions(params = {}, options = {})
+      req = build_request(:list_cluster_extension_versions, params)
+      req.send_request(options)
+    end
+
+    # Lists the extensions installed on a SageMaker HyperPod cluster.
+    #
+    # @option params [required, String] :cluster_arn
+    #   The Amazon Resource Name (ARN) of the SageMaker HyperPod cluster whose
+    #   extensions you want to list.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of extensions to return in the response. If you
+    #   don't specify a value, SageMaker HyperPod returns up to 100
+    #   extensions.
+    #
+    # @option params [String] :next_token
+    #   If the result of the previous `ListClusterExtensions` request was
+    #   truncated, the response includes a `NextToken`. To retrieve the next
+    #   set of extensions, use the token in the next request. When you use the
+    #   `CreationTimeAfter` or `CreationTimeBefore` filters, a response can
+    #   contain fewer extensions than `MaxResults`, or none, and still include
+    #   a `NextToken`. Continue until the response doesn't include a
+    #   `NextToken`.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :creation_time_after
+    #   A filter that returns extensions created at or after the specified
+    #   time. Timestamps are formatted according to the ISO 8601 standard.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :creation_time_before
+    #   A filter that returns extensions created at or before the specified
+    #   time. The acceptable formats are the same as the timestamp formats for
+    #   `CreationTimeAfter`.
+    #
+    # @return [Types::ListClusterExtensionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListClusterExtensionsResponse#extensions #extensions} => Array&lt;Types::ExtensionSummary&gt;
+    #   * {Types::ListClusterExtensionsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_cluster_extensions({
+    #     cluster_arn: "ClusterArn", # required
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #     creation_time_after: Time.now,
+    #     creation_time_before: Time.now,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.extensions #=> Array
+    #   resp.extensions[0].extension_arn #=> String
+    #   resp.extensions[0].extension_name #=> String
+    #   resp.extensions[0].extension_version #=> String
+    #   resp.extensions[0].status #=> String, one of "Creating", "Active", "CreateFailed", "Updating", "Deleting", "DeleteFailed", "Degraded", "UpdateFailed"
+    #   resp.extensions[0].creation_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListClusterExtensions AWS API Documentation
+    #
+    # @overload list_cluster_extensions(params = {})
+    # @param [Hash] params ({})
+    def list_cluster_extensions(params = {}, options = {})
+      req = build_request(:list_cluster_extensions, params)
       req.send_request(options)
     end
 
@@ -23161,7 +24453,7 @@ module Aws::SageMaker
     #   resp.cluster_node_summaries[0].instance_type #=> String, one of "ml.p4d.24xlarge", "ml.p4de.24xlarge", "ml.p5.48xlarge", "ml.p5.4xlarge", "ml.p6e-gb200.36xlarge", "ml.trn1.32xlarge", "ml.trn1n.32xlarge", "ml.g5.xlarge", "ml.g5.2xlarge", "ml.g5.4xlarge", "ml.g5.8xlarge", "ml.g5.12xlarge", "ml.g5.16xlarge", "ml.g5.24xlarge", "ml.g5.48xlarge", "ml.c5.large", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.12xlarge", "ml.c5.18xlarge", "ml.c5.24xlarge", "ml.c5n.large", "ml.c5n.2xlarge", "ml.c5n.4xlarge", "ml.c5n.9xlarge", "ml.c5n.18xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.8xlarge", "ml.m5.12xlarge", "ml.m5.16xlarge", "ml.m5.24xlarge", "ml.t3.medium", "ml.t3.large", "ml.t3.xlarge", "ml.t3.2xlarge", "ml.g6.xlarge", "ml.g6.2xlarge", "ml.g6.4xlarge", "ml.g6.8xlarge", "ml.g6.16xlarge", "ml.g6.12xlarge", "ml.g6.24xlarge", "ml.g6.48xlarge", "ml.gr6.4xlarge", "ml.gr6.8xlarge", "ml.g6e.xlarge", "ml.g6e.2xlarge", "ml.g6e.4xlarge", "ml.g6e.8xlarge", "ml.g6e.16xlarge", "ml.g6e.12xlarge", "ml.g6e.24xlarge", "ml.g6e.48xlarge", "ml.p5e.48xlarge", "ml.p5en.48xlarge", "ml.p6-b200.48xlarge", "ml.trn2.3xlarge", "ml.trn2.48xlarge", "ml.c6i.large", "ml.c6i.xlarge", "ml.c6i.2xlarge", "ml.c6i.4xlarge", "ml.c6i.8xlarge", "ml.c6i.12xlarge", "ml.c6i.16xlarge", "ml.c6i.24xlarge", "ml.c6i.32xlarge", "ml.m6i.large", "ml.m6i.xlarge", "ml.m6i.2xlarge", "ml.m6i.4xlarge", "ml.m6i.8xlarge", "ml.m6i.12xlarge", "ml.m6i.16xlarge", "ml.m6i.24xlarge", "ml.m6i.32xlarge", "ml.r6i.large", "ml.r6i.xlarge", "ml.r6i.2xlarge", "ml.r6i.4xlarge", "ml.r6i.8xlarge", "ml.r6i.12xlarge", "ml.r6i.16xlarge", "ml.r6i.24xlarge", "ml.r6i.32xlarge", "ml.i3en.large", "ml.i3en.xlarge", "ml.i3en.2xlarge", "ml.i3en.3xlarge", "ml.i3en.6xlarge", "ml.i3en.12xlarge", "ml.i3en.24xlarge", "ml.m7i.large", "ml.m7i.xlarge", "ml.m7i.2xlarge", "ml.m7i.4xlarge", "ml.m7i.8xlarge", "ml.m7i.12xlarge", "ml.m7i.16xlarge", "ml.m7i.24xlarge", "ml.m7i.48xlarge", "ml.r7i.large", "ml.r7i.xlarge", "ml.r7i.2xlarge", "ml.r7i.4xlarge", "ml.r7i.8xlarge", "ml.r7i.12xlarge", "ml.r7i.16xlarge", "ml.r7i.24xlarge", "ml.r7i.48xlarge", "ml.r5d.16xlarge", "ml.g7e.2xlarge", "ml.g7e.4xlarge", "ml.g7e.8xlarge", "ml.g7e.12xlarge", "ml.g7e.24xlarge", "ml.g7e.48xlarge", "ml.p6-b300.48xlarge", "ml.g4dn.xlarge", "ml.g4dn.2xlarge", "ml.g4dn.4xlarge", "ml.g4dn.8xlarge", "ml.g4dn.12xlarge", "ml.g4dn.16xlarge", "ml.c6g.medium", "ml.c6g.large", "ml.c6g.xlarge", "ml.c6g.2xlarge", "ml.c6g.4xlarge", "ml.c6g.8xlarge", "ml.c6g.12xlarge", "ml.c6g.16xlarge", "ml.c7g.medium", "ml.c7g.large", "ml.c7g.xlarge", "ml.c7g.2xlarge", "ml.c7g.4xlarge", "ml.c7g.8xlarge", "ml.c7g.12xlarge", "ml.c7g.16xlarge", "ml.c8g.medium", "ml.c8g.large", "ml.c8g.xlarge", "ml.c8g.2xlarge", "ml.c8g.4xlarge", "ml.c8g.8xlarge", "ml.c8g.12xlarge", "ml.c8g.16xlarge", "ml.c8g.24xlarge", "ml.c8g.48xlarge", "ml.c6a.large", "ml.c6a.xlarge", "ml.c6a.2xlarge", "ml.c6a.4xlarge", "ml.c6a.8xlarge", "ml.c6a.12xlarge", "ml.c6a.16xlarge", "ml.c6a.24xlarge", "ml.c6a.32xlarge", "ml.c6a.48xlarge", "ml.m6a.large", "ml.m6a.xlarge", "ml.m6a.2xlarge", "ml.m6a.4xlarge", "ml.m6a.8xlarge", "ml.m6a.12xlarge", "ml.m6a.16xlarge", "ml.m6a.24xlarge", "ml.m6a.32xlarge", "ml.m6a.48xlarge", "ml.m6g.medium", "ml.m6g.large", "ml.m6g.xlarge", "ml.m6g.2xlarge", "ml.m6g.4xlarge", "ml.m6g.8xlarge", "ml.m6g.12xlarge", "ml.m6g.16xlarge", "ml.m7g.medium", "ml.m7g.large", "ml.m7g.xlarge", "ml.m7g.2xlarge", "ml.m7g.4xlarge", "ml.m7g.8xlarge", "ml.m7g.12xlarge", "ml.m7g.16xlarge", "ml.m8g.medium", "ml.m8g.large", "ml.m8g.xlarge", "ml.m8g.2xlarge", "ml.m8g.4xlarge", "ml.m8g.8xlarge", "ml.m8g.12xlarge", "ml.m8g.16xlarge", "ml.m8g.24xlarge", "ml.m8g.48xlarge", "ml.g7.2xlarge", "ml.g7.4xlarge", "ml.g7.8xlarge", "ml.g7.12xlarge", "ml.g7.24xlarge", "ml.g7.48xlarge", "ml.c8a.16xlarge", "ml.m8a.16xlarge"
     #   resp.cluster_node_summaries[0].launch_time #=> Time
     #   resp.cluster_node_summaries[0].last_software_update_time #=> Time
-    #   resp.cluster_node_summaries[0].instance_status.status #=> String, one of "Running", "Failure", "Pending", "ShuttingDown", "SystemUpdating", "DeepHealthCheckInProgress", "NotFound"
+    #   resp.cluster_node_summaries[0].instance_status.status #=> String, one of "Running", "Failure", "Pending", "ShuttingDown", "SystemUpdating", "DeepHealthCheckInProgress", "NotFound", "DetachInProgress", "AttachInProgress"
     #   resp.cluster_node_summaries[0].instance_status.message #=> String
     #   resp.cluster_node_summaries[0].ultra_server_info.id #=> String
     #   resp.cluster_node_summaries[0].ultra_server_info.type #=> String
@@ -23175,6 +24467,87 @@ module Aws::SageMaker
     # @param [Hash] params ({})
     def list_cluster_nodes(params = {}, options = {})
       req = build_request(:list_cluster_nodes, params)
+      req.send_request(options)
+    end
+
+    # Retrieves a list of operation summaries for a specified HyperPod
+    # cluster, such as scaling operations and deep health checks. The
+    # operation supports filtering, sorting, and pagination of results.
+    #
+    # @option params [required, String] :cluster_name
+    #   The name or Amazon Resource Name (ARN) of the HyperPod cluster for
+    #   which to list operations.
+    #
+    # @option params [String] :status
+    #   The operation status to filter by. If specified, only operations with
+    #   this status are returned. Valid values are `InProgress`, `Superseded`,
+    #   or `Done`.
+    #
+    # @option params [String] :type
+    #   The operation type to filter by. If specified, only operations of this
+    #   type are returned. Valid values are `Scaling` or `DeepHealthCheck`.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :creation_time_after
+    #   The start of the time range for filtering operations. Only operations
+    #   created after this time are included in the results.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :creation_time_before
+    #   The end of the time range for filtering operations. Only operations
+    #   created before this time are included in the results.
+    #
+    # @option params [String] :sort_by
+    #   The field to use for sorting the operation list. Currently, the only
+    #   supported value is `CreationTime`.
+    #
+    # @option params [String] :sort_order
+    #   The order in which to sort the results. Valid values are `Ascending`
+    #   or `Descending` (the default is `Descending`).
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of operations to return in the response. Valid
+    #   range is 1 to 100.
+    #
+    # @option params [String] :next_token
+    #   A token to retrieve the next set of results. This token is obtained
+    #   from the output of a previous `ListClusterOperations` call.
+    #
+    # @return [Types::ListClusterOperationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListClusterOperationsResponse#next_token #next_token} => String
+    #   * {Types::ListClusterOperationsResponse#cluster_operation_summaries #cluster_operation_summaries} => Array&lt;Types::ClusterOperationSummary&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_cluster_operations({
+    #     cluster_name: "ClusterNameOrArn", # required
+    #     status: "InProgress", # accepts InProgress, Superseded, Done
+    #     type: "Scaling", # accepts Scaling, DeepHealthCheck
+    #     creation_time_after: Time.now,
+    #     creation_time_before: Time.now,
+    #     sort_by: "CreationTime", # accepts CreationTime
+    #     sort_order: "Ascending", # accepts Ascending, Descending
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.cluster_operation_summaries #=> Array
+    #   resp.cluster_operation_summaries[0].operation_id #=> String
+    #   resp.cluster_operation_summaries[0].cluster_arn #=> String
+    #   resp.cluster_operation_summaries[0].type #=> String, one of "Scaling", "DeepHealthCheck"
+    #   resp.cluster_operation_summaries[0].status #=> String, one of "InProgress", "Superseded", "Done"
+    #   resp.cluster_operation_summaries[0].creation_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListClusterOperations AWS API Documentation
+    #
+    # @overload list_cluster_operations(params = {})
+    # @param [Hash] params ({})
+    def list_cluster_operations(params = {}, options = {})
+      req = build_request(:list_cluster_operations, params)
       req.send_request(options)
     end
 
@@ -24493,6 +25866,62 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
+    # Lists summaries of the global inference gateways in your account. You
+    # can filter the results by status.
+    #
+    # @option params [Array<Types::GlobalInferenceGatewayFilter>] :filters
+    #   The filters to apply to the results. You can filter by `Status`.
+    #   Multiple filters are combined with a logical AND.
+    #
+    # @option params [String] :next_token
+    #   If the result of the previous `ListGlobalInferenceGateways` request
+    #   was truncated, the response includes a `NextToken`. To retrieve the
+    #   next set of global inference gateways, use the token in the next
+    #   request.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of global inference gateways to return in the
+    #   response.
+    #
+    # @return [Types::ListGlobalInferenceGatewaysResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListGlobalInferenceGatewaysResponse#global_inference_gateway_summaries #global_inference_gateway_summaries} => Array&lt;Types::GlobalInferenceGatewaySummary&gt;
+    #   * {Types::ListGlobalInferenceGatewaysResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_global_inference_gateways({
+    #     filters: [
+    #       {
+    #         name: "Status", # required, accepts Status
+    #         value: "GlobalInferenceGatewayFilterValue", # required
+    #       },
+    #     ],
+    #     next_token: "GlobalInferenceGatewayNextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.global_inference_gateway_summaries #=> Array
+    #   resp.global_inference_gateway_summaries[0].arn #=> String
+    #   resp.global_inference_gateway_summaries[0].id #=> String
+    #   resp.global_inference_gateway_summaries[0].name #=> String
+    #   resp.global_inference_gateway_summaries[0].status #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETING", "FAILED"
+    #   resp.global_inference_gateway_summaries[0].creation_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListGlobalInferenceGateways AWS API Documentation
+    #
+    # @overload list_global_inference_gateways(params = {})
+    # @param [Hash] params ({})
+    def list_global_inference_gateways(params = {}, options = {})
+      req = build_request(:list_global_inference_gateways, params)
+      req.send_request(options)
+    end
+
     # List hub content versions.
     #
     # @option params [required, String] :hub_name
@@ -25249,6 +26678,71 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
+    # Lists the in-cluster inference gateways in a global inference gateway,
+    # in the order that they were added. Each summary includes the status of
+    # the in-cluster inference gateway and, if the status is `FAILED`, the
+    # reason for the failure. `DescribeGlobalInferenceGateway` doesn't
+    # return the in-cluster inference gateways; use this operation to list
+    # them.
+    #
+    # @option params [required, String] :identifier
+    #   The name, Amazon Resource Name (ARN), or ID of the global inference
+    #   gateway.
+    #
+    # @option params [Array<Types::GlobalInferenceGatewayMemberFilter>] :filters
+    #   The filters to apply to the results. You can filter by `Status` and
+    #   `ClusterArn`. Multiple filters are combined with a logical AND.
+    #
+    # @option params [String] :next_token
+    #   If the result of the previous `ListInferenceGateways` request was
+    #   truncated, the response includes a `NextToken`. To retrieve the next
+    #   set of in-cluster inference gateways, use the token in the next
+    #   request.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of in-cluster inference gateways to return in the
+    #   response.
+    #
+    # @return [Types::ListInferenceGatewaysResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListInferenceGatewaysResponse#inference_gateway_summaries #inference_gateway_summaries} => Array&lt;Types::GlobalInferenceGatewayMemberSummary&gt;
+    #   * {Types::ListInferenceGatewaysResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_inference_gateways({
+    #     identifier: "GlobalInferenceGatewayIdentifier", # required
+    #     filters: [
+    #       {
+    #         name: "Status", # required, accepts Status, ClusterArn
+    #         value: "GlobalInferenceGatewayMemberFilterValue", # required
+    #       },
+    #     ],
+    #     next_token: "GlobalInferenceGatewayNextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.inference_gateway_summaries #=> Array
+    #   resp.inference_gateway_summaries[0].name #=> String
+    #   resp.inference_gateway_summaries[0].namespace #=> String
+    #   resp.inference_gateway_summaries[0].cluster_arn #=> String
+    #   resp.inference_gateway_summaries[0].status #=> String, one of "ADDING", "ACTIVE", "REMOVING", "FAILED"
+    #   resp.inference_gateway_summaries[0].failure_reason #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListInferenceGateways AWS API Documentation
+    #
+    # @overload list_inference_gateways(params = {})
+    # @param [Hash] params ({})
+    def list_inference_gateways(params = {}, options = {})
+      req = build_request(:list_inference_gateways, params)
+      req.send_request(options)
+    end
+
     # Returns a list of the subtasks for an Inference Recommender job.
     #
     # The supported subtasks are benchmarks, which evaluate the performance
@@ -25433,6 +26927,49 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
+    # Lists the inference routers in your account in the current Amazon Web
+    # Services Region. A router that you just created might not appear in
+    # the list right away.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of inference routers to return in the response.
+    #
+    # @option params [String] :next_token
+    #   If the previous response was truncated, you receive this token. To get
+    #   the next set of inference routers, use it in your next request.
+    #
+    # @return [Types::ListInferenceRoutersOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListInferenceRoutersOutput#inference_routers #inference_routers} => Array&lt;Types::InferenceRouterSummary&gt;
+    #   * {Types::ListInferenceRoutersOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_inference_routers({
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.inference_routers #=> Array
+    #   resp.inference_routers[0].inference_router_name #=> String
+    #   resp.inference_routers[0].inference_router_arn #=> String
+    #   resp.inference_routers[0].creation_time #=> Time
+    #   resp.inference_routers[0].last_modified_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListInferenceRouters AWS API Documentation
+    #
+    # @overload list_inference_routers(params = {})
+    # @param [Hash] params ({})
+    def list_inference_routers(params = {}, options = {})
+      req = build_request(:list_inference_routers, params)
+      req.send_request(options)
+    end
+
     # Lists available configuration schema versions for a specified job
     # category. Use the schema versions with `DescribeJobSchemaVersion` to
     # retrieve the full schema document.
@@ -25464,7 +27001,7 @@ module Aws::SageMaker
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_job_schema_versions({
-    #     job_category: "AgentRFT", # required, accepts AgentRFT, AgentRFTEvaluation
+    #     job_category: "AgentRFT", # required, accepts AgentRFT, SyntheticDataGeneration, DataQualityEvaluation, AgentRFTEvaluation, DataTransformation
     #     next_token: "NextToken",
     #     max_results: 1,
     #   })
@@ -25542,7 +27079,7 @@ module Aws::SageMaker
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_jobs({
-    #     job_category: "AgentRFT", # required, accepts AgentRFT, AgentRFTEvaluation
+    #     job_category: "AgentRFT", # required, accepts AgentRFT, SyntheticDataGeneration, DataQualityEvaluation, AgentRFTEvaluation, DataTransformation
     #     next_token: "NextToken",
     #     max_results: 1,
     #     creation_time_after: Time.now,
@@ -25561,9 +27098,9 @@ module Aws::SageMaker
     #   resp.job_summaries #=> Array
     #   resp.job_summaries[0].job_arn #=> String
     #   resp.job_summaries[0].job_name #=> String
-    #   resp.job_summaries[0].job_category #=> String, one of "AgentRFT", "AgentRFTEvaluation"
+    #   resp.job_summaries[0].job_category #=> String, one of "AgentRFT", "SyntheticDataGeneration", "DataQualityEvaluation", "AgentRFTEvaluation", "DataTransformation"
     #   resp.job_summaries[0].job_status #=> String, one of "InProgress", "Completed", "Failed", "Stopping", "Stopped", "Deleting", "DeleteFailed"
-    #   resp.job_summaries[0].job_secondary_status #=> String, one of "Starting", "Downloading", "Training", "Uploading", "Stopping", "Stopped", "MaxRuntimeExceeded", "Interrupted", "Failed", "Completed", "Restarting", "Pending", "Evaluating", "Deleting", "DeleteFailed"
+    #   resp.job_summaries[0].job_secondary_status #=> String, one of "Starting", "Downloading", "Training", "Uploading", "Stopping", "Stopped", "MaxRuntimeExceeded", "Interrupted", "Failed", "Completed", "Restarting", "Pending", "Generating", "PartialGeneration", "Evaluating", "Validating", "Preparing", "Executing", "Publishing", "Finalizing", "Transforming", "Deleting", "DeleteFailed"
     #   resp.job_summaries[0].creation_time #=> Time
     #   resp.job_summaries[0].last_modified_time #=> Time
     #   resp.job_summaries[0].end_time #=> Time
@@ -27506,6 +29043,8 @@ module Aws::SageMaker
     #   resp.pipeline_execution_steps[0].metadata.for_each.stopped_step_count #=> Integer
     #   resp.pipeline_execution_steps[0].metadata.for_each.selector.step_name #=> String
     #   resp.pipeline_execution_steps[0].metadata.for_each.selector.index #=> Integer
+    #   resp.pipeline_execution_steps[0].metadata.hub_content.hub_arn #=> String
+    #   resp.pipeline_execution_steps[0].metadata.hub_content.hub_content_arn #=> String
     #   resp.pipeline_execution_steps[0].attempt_count #=> Integer
     #   resp.pipeline_execution_steps[0].selective_execution_result.source_pipeline_execution_arn #=> String
     #   resp.pipeline_execution_steps[0].iteration_context.parent_step_name #=> String
@@ -27549,6 +29088,12 @@ module Aws::SageMaker
     # @option params [Integer] :max_results
     #   The maximum number of pipeline executions to return in the response.
     #
+    # @option params [String] :pipeline_version_alias
+    #   The alias of a pipeline version. The response includes only the
+    #   executions of the version that has this alias when you make the
+    #   request. If no version of the pipeline has this alias, the request
+    #   fails with a `ResourceNotFound` error.
+    #
     # @return [Types::ListPipelineExecutionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListPipelineExecutionsResponse#pipeline_execution_summaries #pipeline_execution_summaries} => Array&lt;Types::PipelineExecutionSummary&gt;
@@ -27566,6 +29111,7 @@ module Aws::SageMaker
     #     sort_order: "Ascending", # accepts Ascending, Descending
     #     next_token: "NextToken",
     #     max_results: 1,
+    #     pipeline_version_alias: "PipelineVersionAlias",
     #   })
     #
     # @example Response structure
@@ -27577,6 +29123,8 @@ module Aws::SageMaker
     #   resp.pipeline_execution_summaries[0].pipeline_execution_description #=> String
     #   resp.pipeline_execution_summaries[0].pipeline_execution_display_name #=> String
     #   resp.pipeline_execution_summaries[0].pipeline_execution_failure_reason #=> String
+    #   resp.pipeline_execution_summaries[0].pipeline_version_aliases #=> Array
+    #   resp.pipeline_execution_summaries[0].pipeline_version_aliases[0] #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListPipelineExecutions AWS API Documentation
@@ -27684,6 +29232,8 @@ module Aws::SageMaker
     #   resp.pipeline_version_summaries[0].pipeline_version_description #=> String
     #   resp.pipeline_version_summaries[0].pipeline_version_display_name #=> String
     #   resp.pipeline_version_summaries[0].last_execution_pipeline_execution_arn #=> String
+    #   resp.pipeline_version_summaries[0].pipeline_version_aliases #=> Array
+    #   resp.pipeline_version_summaries[0].pipeline_version_aliases[0] #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListPipelineVersions AWS API Documentation
@@ -27722,6 +29272,12 @@ module Aws::SageMaker
     # @option params [Integer] :max_results
     #   The maximum number of pipelines to return in the response.
     #
+    # @option params [String] :managed_by
+    #   Filters the pipelines by who manages them. Specify `AWS` to return
+    #   pipelines that Amazon Web Services manages, or `CUSTOMER` to return
+    #   pipelines that you created. If you don't specify a value, the
+    #   response includes only pipelines that you created.
+    #
     # @return [Types::ListPipelinesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListPipelinesResponse#pipeline_summaries #pipeline_summaries} => Array&lt;Types::PipelineSummary&gt;
@@ -27739,6 +29295,7 @@ module Aws::SageMaker
     #     sort_order: "Ascending", # accepts Ascending, Descending
     #     next_token: "NextToken",
     #     max_results: 1,
+    #     managed_by: "AWS", # accepts AWS, CUSTOMER
     #   })
     #
     # @example Response structure
@@ -29191,6 +30748,191 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
+    # Moves running nodes from one instance group to another instance group.
+    # The target instance group can be in the same HyperPod cluster or in a
+    # different HyperPod cluster in the same account and Region. The
+    # underlying instances aren't terminated.
+    #
+    # Each node keeps its instance ID, its `NodeLogicalId`, its network
+    # interfaces and IP addresses, and its capacity. The node then joins the
+    # target instance group with the target's configuration and lifecycle
+    # scripts.
+    #
+    # The move replaces the node's root Amazon Elastic Block Store (Amazon
+    # EBS) volume and secondary EBS volume, which deletes any data stored on
+    # them. Back up any data that you need before you move the node.
+    #
+    # Specify the nodes to move with exactly one of `NodeIds`,
+    # `NodeLogicalIds`, or `InstanceCount`. The operation is asynchronous
+    # and returns after it accepts the nodes for the move. While a node
+    # moves, its status is `DetachInProgress` and then `AttachInProgress`.
+    # The node appears in the source cluster while it detaches. After
+    # HyperPod hands the node off to the target instance group, the node
+    # appears in the target cluster. To track the node, call
+    # `DescribeClusterNode` or `ListClusterNodes` on the source or target
+    # cluster.
+    #
+    # <note markdown="1"> Both clusters must be `InService`, use Amazon EKS orchestration, and
+    # use `Continuous` as the `NodeProvisioningMode`.
+    #
+    #  The source and target instance groups must also use compatible
+    # configurations.
+    #
+    #  </note>
+    #
+    # @option params [required, String] :source_cluster_arn
+    #   The Amazon Resource Name (ARN) of the HyperPod cluster that the nodes
+    #   are moved from.
+    #
+    # @option params [required, String] :source_instance_group_name
+    #   The name of the instance group in the source cluster that the nodes
+    #   are moved from.
+    #
+    # @option params [required, String] :target_cluster_arn
+    #   The Amazon Resource Name (ARN) of the HyperPod cluster that the nodes
+    #   are moved to. The target cluster must be in the same account and
+    #   Region as the source cluster, and can be the same cluster as the
+    #   source.
+    #
+    # @option params [required, String] :target_instance_group_name
+    #   The name of the instance group in the target cluster that the nodes
+    #   are moved to. If the target cluster is the same as the source cluster,
+    #   the target instance group must be different from the source instance
+    #   group.
+    #
+    # @option params [Integer] :instance_count
+    #   The number of nodes to move, from 1 to 50. HyperPod selects the nodes
+    #   from the source instance group. If fewer than this number of nodes are
+    #   eligible to move, the request fails and no nodes are moved. Specify
+    #   exactly one of `NodeIds`, `NodeLogicalIds`, or `InstanceCount`.
+    #
+    # @option params [Array<String>] :node_ids
+    #   A list of instance IDs of the nodes to move. You can specify up to 50
+    #   instance IDs. Each node is evaluated separately, so some nodes can be
+    #   moved while others fail. The request fails if moving the eligible
+    #   nodes would reduce the source instance group below its minimum
+    #   instance count. Specify exactly one of `NodeIds`, `NodeLogicalIds`, or
+    #   `InstanceCount`.
+    #
+    # @option params [Array<String>] :node_logical_ids
+    #   A list of `NodeLogicalIds` of the nodes to move. You can specify up to
+    #   50 `NodeLogicalIds`. Each node is evaluated separately, so some nodes
+    #   can be moved while others fail. The request fails if moving the
+    #   eligible nodes would reduce the source instance group below its
+    #   minimum instance count. Specify exactly one of `NodeIds`,
+    #   `NodeLogicalIds`, or `InstanceCount`.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that you provide to ensure that
+    #   the operation completes no more than one time. If you retry the
+    #   request with the same client token and the same parameters within 8
+    #   hours, the service returns the original response. It doesn't start a
+    #   new move. If you reuse a client token with different parameters, the
+    #   request fails.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::MoveClusterNodesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::MoveClusterNodesResponse#successful #successful} => Array&lt;String&gt;
+    #   * {Types::MoveClusterNodesResponse#failed #failed} => Array&lt;Types::MoveClusterNodesError&gt;
+    #   * {Types::MoveClusterNodesResponse#successful_node_logical_ids #successful_node_logical_ids} => Array&lt;String&gt;
+    #   * {Types::MoveClusterNodesResponse#failed_node_logical_ids #failed_node_logical_ids} => Array&lt;Types::MoveClusterNodeLogicalIdsError&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.move_cluster_nodes({
+    #     source_cluster_arn: "ClusterArn", # required
+    #     source_instance_group_name: "ClusterInstanceGroupName", # required
+    #     target_cluster_arn: "ClusterArn", # required
+    #     target_instance_group_name: "ClusterInstanceGroupName", # required
+    #     instance_count: 1,
+    #     node_ids: ["ClusterNodeId"],
+    #     node_logical_ids: ["ClusterNodeLogicalId"],
+    #     client_token: "MoveClusterNodesRequestClientTokenString",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.successful #=> Array
+    #   resp.successful[0] #=> String
+    #   resp.failed #=> Array
+    #   resp.failed[0].code #=> String, one of "NodeIdNotFound", "InvalidNodeStatus", "NodeIdInUse", "NodeInstanceTypeMismatch"
+    #   resp.failed[0].message #=> String
+    #   resp.failed[0].node_id #=> String
+    #   resp.successful_node_logical_ids #=> Array
+    #   resp.successful_node_logical_ids[0] #=> String
+    #   resp.failed_node_logical_ids #=> Array
+    #   resp.failed_node_logical_ids[0].code #=> String, one of "NodeIdNotFound", "InvalidNodeStatus", "NodeIdInUse", "NodeInstanceTypeMismatch"
+    #   resp.failed_node_logical_ids[0].message #=> String
+    #   resp.failed_node_logical_ids[0].node_logical_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/MoveClusterNodes AWS API Documentation
+    #
+    # @overload move_cluster_nodes(params = {})
+    # @param [Hash] params ({})
+    def move_cluster_nodes(params = {}, options = {})
+      req = build_request(:move_cluster_nodes, params)
+      req.send_request(options)
+    end
+
+    # Attaches a resource-based policy to an endpoint. With an endpoint
+    # policy, you can allow other Amazon Web Services accounts to send
+    # requests to your endpoint, or to inference components on it, through
+    # an inference router. The policy that you specify replaces the
+    # endpoint's existing policy, if it has one.
+    #
+    # You can't attach a policy to an endpoint whose status is `Deleting`
+    # or `Failed`. SageMaker AI rejects a policy that doesn't follow the
+    # endpoint policy rules. For information about the policy rules, see
+    # [Use destinations in other accounts][1].
+    #
+    # Policy changes typically take effect within 30 seconds, and can take
+    # up to 5 minutes. If you delete the endpoint, its policy is also
+    # deleted, and a new endpoint with the same name has no policy.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/inference-router-cross-account.html
+    #
+    # @option params [required, String] :endpoint_name
+    #   The name of the endpoint. The endpoint must be in your account and in
+    #   the current Amazon Web Services Region.
+    #
+    # @option params [required, String] :resource_policy
+    #   The endpoint policy, as a JSON policy document. The policy can contain
+    #   only ASCII characters. For information about the policy rules, see
+    #   [Use destinations in other accounts][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/inference-router-cross-account.html
+    #
+    # @return [Types::PutEndpointPolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutEndpointPolicyResponse#endpoint_arn #endpoint_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_endpoint_policy({
+    #     endpoint_name: "EndpointName", # required
+    #     resource_policy: "EndpointPolicyDocument", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.endpoint_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/PutEndpointPolicy AWS API Documentation
+    #
+    # @overload put_endpoint_policy(params = {})
+    # @param [Hash] params ({})
+    def put_endpoint_policy(params = {}, options = {})
+      req = build_request(:put_endpoint_policy, params)
+      req.send_request(options)
+    end
+
     # Adds a resouce policy to control access to a model group. For
     # information about resoure policies, see [Identity-based policies and
     # resource-based policies][1] in the *Amazon Web Services Identity and
@@ -29375,6 +31117,70 @@ module Aws::SageMaker
     # @param [Hash] params ({})
     def register_devices(params = {}, options = {})
       req = build_request(:register_devices, params)
+      req.send_request(options)
+    end
+
+    # Removes an in-cluster inference gateway from a global inference
+    # gateway. This operation is asynchronous: the in-cluster inference
+    # gateway moves to the `REMOVING` status, and then no longer appears in
+    # `ListInferenceGateways`. If the in-cluster inference gateway isn't in
+    # the global inference gateway, the operation succeeds and returns no
+    # status. The operation returns `ResourceNotFound` only if the global
+    # inference gateway doesn't exist.
+    #
+    # The operation fails with `ConflictException` while another operation
+    # is in progress on the global inference gateway. It fails with
+    # `ValidationException` if the in-cluster inference gateway is the last
+    # one, because a global inference gateway must have at least one.
+    #
+    # @option params [required, String] :identifier
+    #   The name, Amazon Resource Name (ARN), or ID of the global inference
+    #   gateway.
+    #
+    # @option params [required, String] :cluster_arn
+    #   The Amazon Resource Name (ARN) of the SageMaker HyperPod cluster that
+    #   runs the in-cluster inference gateway.
+    #
+    # @option params [required, String] :namespace
+    #   The Kubernetes namespace of the in-cluster inference gateway.
+    #
+    # @option params [required, String] :name
+    #   The name of the `InferenceGatewayConfig` resource that defines the
+    #   in-cluster inference gateway.
+    #
+    # @return [Types::RemoveInferenceGatewayResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::RemoveInferenceGatewayResponse#arn #arn} => String
+    #   * {Types::RemoveInferenceGatewayResponse#id #id} => String
+    #   * {Types::RemoveInferenceGatewayResponse#name #name} => String
+    #   * {Types::RemoveInferenceGatewayResponse#gateway #gateway} => Types::GlobalInferenceGatewayMember
+    #   * {Types::RemoveInferenceGatewayResponse#status #status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.remove_inference_gateway({
+    #     identifier: "GlobalInferenceGatewayIdentifier", # required
+    #     cluster_arn: "GlobalInferenceGatewayClusterArn", # required
+    #     namespace: "GlobalInferenceGatewayKubernetesNamespace", # required
+    #     name: "GlobalInferenceGatewayKubernetesResourceName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.id #=> String
+    #   resp.name #=> String
+    #   resp.gateway.name #=> String
+    #   resp.gateway.namespace #=> String
+    #   resp.gateway.cluster_arn #=> String
+    #   resp.status #=> String, one of "ADDING", "ACTIVE", "REMOVING", "FAILED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/RemoveInferenceGateway AWS API Documentation
+    #
+    # @overload remove_inference_gateway(params = {})
+    # @param [Hash] params ({})
+    def remove_inference_gateway(params = {}, options = {})
+      req = build_request(:remove_inference_gateway, params)
       req.send_request(options)
     end
 
@@ -30043,10 +31849,24 @@ module Aws::SageMaker
     #   The selective execution configuration applied to the pipeline run.
     #
     # @option params [Integer] :pipeline_version_id
-    #   The ID of the pipeline version to start execution from.
+    #   The ID of the pipeline version to start execution from. You can't
+    #   specify this with `PipelineVersionAlias`.
     #
     # @option params [String] :mlflow_experiment_name
     #   The MLflow experiment name of the pipeline execution.
+    #
+    # @option params [String] :pipeline_version_alias
+    #   The alias of the pipeline version to start the execution from. You
+    #   can't specify this with `PipelineVersionId`. If no version of the
+    #   pipeline has this alias, the request fails with a `ResourceNotFound`
+    #   error.
+    #
+    # @option params [String] :role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role that the execution
+    #   uses. You must specify this parameter when you start an execution of a
+    #   pipeline that Amazon Web Services manages. You can't specify it for a
+    #   pipeline that you create, because its executions use the pipeline's
+    #   role.
     #
     # @return [Types::StartPipelineExecutionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -30078,6 +31898,8 @@ module Aws::SageMaker
     #     },
     #     pipeline_version_id: 1,
     #     mlflow_experiment_name: "MlflowExperimentEntityName",
+    #     pipeline_version_alias: "PipelineVersionAlias",
+    #     role_arn: "RoleArn",
     #   })
     #
     # @example Response structure
@@ -30435,7 +32257,7 @@ module Aws::SageMaker
     #
     #   resp = client.stop_job({
     #     job_name: "JobName", # required
-    #     job_category: "AgentRFT", # required, accepts AgentRFT, AgentRFTEvaluation
+    #     job_category: "AgentRFT", # required, accepts AgentRFT, SyntheticDataGeneration, DataQualityEvaluation, AgentRFTEvaluation, DataTransformation
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/StopJob AWS API Documentation
@@ -31037,7 +32859,7 @@ module Aws::SageMaker
     #         },
     #         image_id: "ImageId",
     #         auto_patch_config: {
-    #           patching_strategy: "WhenIdle", # required, accepts WhenIdle, WhenAllIdle
+    #           patching_strategy: "WhenIdle", # required, accepts WhenIdle, WhenAllIdle, DrainFirst
     #           patch_schedule: {
     #             next_patch_date: Time.now,
     #           },
@@ -31058,6 +32880,11 @@ module Aws::SageMaker
     #                 alarm_name: "AlarmName", # required
     #               },
     #             ],
+    #           },
+    #           idle_wait_window_in_seconds: 1,
+    #           drain_policy: {
+    #             drain_timeout_in_seconds: 1,
+    #             on_drain_timeout: "Force", # accepts Force, Skip
     #           },
     #         },
     #         image_release_version: "ImageReleaseVersion",
@@ -31195,6 +33022,82 @@ module Aws::SageMaker
     # @param [Hash] params ({})
     def update_cluster(params = {}, options = {})
       req = build_request(:update_cluster, params)
+      req.send_request(options)
+    end
+
+    # Updates the configuration or the version of an extension installed on
+    # a SageMaker HyperPod cluster. SageMaker HyperPod applies the change to
+    # every node in the cluster. You can change the configuration, the
+    # version, or both in one request.
+    #
+    # * **Configuration:** You can change settings by sending
+    #   `ConfigurationValues`. Settings that you include are changed.
+    #   Settings that you omit keep their current values. A setting with the
+    #   value `null` is removed and returns to its default value.
+    #
+    # * **Version:** You can update to a later version. You can't update to
+    #   an earlier version. To use an earlier version, delete the extension
+    #   and create it again with that version.
+    #
+    # To retry the operation on nodes where it failed, fix the cause that
+    # `DescribeClusterExtension` reports in `Health`, and then send an
+    # `UpdateClusterExtension` request that doesn't change the version or
+    # the configuration.
+    #
+    # You can't update an extension while it is being deleted.
+    #
+    # @option params [required, String] :cluster_arn
+    #   The Amazon Resource Name (ARN) of the SageMaker HyperPod cluster on
+    #   which the extension is installed.
+    #
+    # @option params [required, String] :extension_arn
+    #   The Amazon Resource Name (ARN) of the extension to update.
+    #
+    # @option params [String] :extension_version
+    #   The version to update the extension to, in `MAJOR.MINOR.PATCH` format.
+    #   The version must be later than the extension's current version. If
+    #   you omit this parameter, the extension keeps its current version.
+    #
+    # @option params [String] :configuration_values
+    #   The configuration changes to apply, as a JSON object serialized as a
+    #   string. Settings that you include are changed, settings that you omit
+    #   are unchanged, and a setting with the value `null` returns to its
+    #   default value. The resulting configuration must be valid for the
+    #   target extension version. If you omit `ConfigurationValues`, the
+    #   configuration is unchanged.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that you provide so that the
+    #   request is idempotent. If you send the same update more than once,
+    #   SageMaker HyperPod applies it once and doesn't return an error.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::UpdateClusterExtensionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateClusterExtensionResponse#extension_arn #extension_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_cluster_extension({
+    #     cluster_arn: "ClusterArn", # required
+    #     extension_arn: "ExtensionArn", # required
+    #     extension_version: "ExtensionVersion",
+    #     configuration_values: "ExtensionConfigurationValues",
+    #     client_token: "UpdateClusterExtensionRequestClientTokenString",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.extension_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateClusterExtension AWS API Documentation
+    #
+    # @overload update_cluster_extension(params = {})
+    # @param [Hash] params ({})
+    def update_cluster_extension(params = {}, options = {})
+      req = build_request(:update_cluster_extension, params)
       req.send_request(options)
     end
 
@@ -32401,6 +34304,62 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
+    # Updates the routing configuration of a global inference gateway. To
+    # add or remove in-cluster inference gateways, use `AddInferenceGateway`
+    # and `RemoveInferenceGateway`. This operation is asynchronous: the
+    # global inference gateway moves to the `UPDATING` status. The operation
+    # fails with `ConflictException` while another operation is in progress
+    # on the global inference gateway.
+    #
+    # @option params [required, String] :identifier
+    #   The name, Amazon Resource Name (ARN), or ID of the global inference
+    #   gateway to update.
+    #
+    # @option params [required, Types::GlobalInferenceGatewayRouting] :routing
+    #   The new routing configuration of the global inference gateway.
+    #
+    # @return [Types::UpdateGlobalInferenceGatewayResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateGlobalInferenceGatewayResponse#arn #arn} => String
+    #   * {Types::UpdateGlobalInferenceGatewayResponse#id #id} => String
+    #   * {Types::UpdateGlobalInferenceGatewayResponse#name #name} => String
+    #   * {Types::UpdateGlobalInferenceGatewayResponse#status #status} => String
+    #   * {Types::UpdateGlobalInferenceGatewayResponse#routing #routing} => Types::GlobalInferenceGatewayRouting
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_global_inference_gateway({
+    #     identifier: "GlobalInferenceGatewayIdentifier", # required
+    #     routing: { # required
+    #       weights: { # required
+    #         kv_headroom: 1.0,
+    #         queue_depth: 1.0,
+    #         region_proximity: 1.0,
+    #         error_rate: 1.0,
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.id #=> String
+    #   resp.name #=> String
+    #   resp.status #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETING", "FAILED"
+    #   resp.routing.weights.kv_headroom #=> Float
+    #   resp.routing.weights.queue_depth #=> Float
+    #   resp.routing.weights.region_proximity #=> Float
+    #   resp.routing.weights.error_rate #=> Float
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateGlobalInferenceGateway AWS API Documentation
+    #
+    # @overload update_global_inference_gateway(params = {})
+    # @param [Hash] params ({})
+    def update_global_inference_gateway(params = {}, options = {})
+      req = build_request(:update_global_inference_gateway, params)
+      req.send_request(options)
+    end
+
     # Update a hub.
     #
     # @option params [required, String] :hub_name
@@ -32812,6 +34771,7 @@ module Aws::SageMaker
     #         number_of_accelerator_devices_required: 1.0,
     #         min_memory_required_in_mb: 1, # required
     #         max_memory_required_in_mb: 1,
+    #         accelerator_partition_type: "AcceleratorPartitionType",
     #       },
     #       base_inference_component_name: "InferenceComponentName",
     #       data_cache_config: {
@@ -32853,6 +34813,7 @@ module Aws::SageMaker
     #           number_of_accelerator_devices_required: 1.0,
     #           min_memory_required_in_mb: 1, # required
     #           max_memory_required_in_mb: 1,
+    #           accelerator_partition_type: "AcceleratorPartitionType",
     #         },
     #         base_inference_component_name: "InferenceComponentName",
     #         data_cache_config: {
@@ -33033,6 +34994,80 @@ module Aws::SageMaker
     # @param [Hash] params ({})
     def update_inference_experiment(params = {}, options = {})
       req = build_request(:update_inference_experiment, params)
+      req.send_request(options)
+    end
+
+    # Updates the routing targets of an inference router. The routing
+    # targets that you specify replace all of the router's existing routing
+    # targets. To change one routing target, call
+    # [DescribeInferenceRouter][1], edit the routing targets, and send all
+    # of them.
+    #
+    # The update is applied in full or not at all, and each request uses
+    # either the previous configuration or the new one. Updates typically
+    # take effect within about 2 minutes.
+    #
+    # If the router is being created, updated, or deleted, or another
+    # request changes it at the same time, you get a `ConflictException`.
+    # Describe the router, and then send your update again.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeInferenceRouter.html
+    #
+    # @option params [required, String] :inference_router_name
+    #   The name of the inference router to update.
+    #
+    # @option params [required, Array<Types::RoutingTarget>] :routing_targets
+    #   The complete list of routing targets for the inference router. To
+    #   remove the last routing target, delete the router.
+    #
+    # @return [Types::UpdateInferenceRouterOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateInferenceRouterOutput#inference_router_arn #inference_router_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_inference_router({
+    #     inference_router_name: "InferenceRouterName", # required
+    #     routing_targets: [ # required
+    #       {
+    #         name: "RoutingTargetName", # required
+    #         destinations: [ # required
+    #           {
+    #             resource_arn: "DestinationResourceArn", # required
+    #             routing_status: "Routable", # accepts Routable, Unroutable, Unknown
+    #           },
+    #         ],
+    #         async_inference_config: {
+    #           output_config: { # required
+    #             s3_output_path: "InferenceRouterS3Uri", # required
+    #             s3_failure_path: "InferenceRouterS3Uri", # required
+    #             kms_key_id: "KmsKeyId",
+    #             notification_config: {
+    #               success_topic: "InferenceRouterSnsTopicArn",
+    #               error_topic: "InferenceRouterSnsTopicArn",
+    #             },
+    #           },
+    #           client_config: {
+    #             max_time_in_backlog_seconds: 1,
+    #           },
+    #         },
+    #         routing_preference: "LocalRegionFirst", # accepts LocalRegionFirst, InstancePoolOrder
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.inference_router_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateInferenceRouter AWS API Documentation
+    #
+    # @overload update_inference_router(params = {})
+    # @param [Hash] params ({})
+    def update_inference_router(params = {}, options = {})
+      req = build_request(:update_inference_router, params)
       req.send_request(options)
     end
 
@@ -34027,6 +36062,16 @@ module Aws::SageMaker
     #   If specified, it applies to all executions of this pipeline by
     #   default.
     #
+    # @option params [Array<String>] :pipeline_version_aliases
+    #   The aliases to assign to the new pipeline version that this update
+    #   creates. You can specify aliases only when the update changes the
+    #   pipeline definition. To change the aliases of an existing version, use
+    #   `UpdatePipelineVersion`.
+    #
+    #   An alias must be unique within the pipeline. To move an alias from an
+    #   existing version to the new version, first remove the alias from the
+    #   existing version with `UpdatePipelineVersion`.
+    #
     # @return [Types::UpdatePipelineResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdatePipelineResponse#pipeline_arn #pipeline_arn} => String
@@ -34048,6 +36093,7 @@ module Aws::SageMaker
     #     parallelism_configuration: {
     #       max_parallel_execution_steps: 1, # required
     #     },
+    #     pipeline_version_aliases: ["PipelineVersionAlias"],
     #   })
     #
     # @example Response structure
@@ -34121,6 +36167,9 @@ module Aws::SageMaker
     # @option params [String] :pipeline_version_description
     #   The description of the pipeline version.
     #
+    # @option params [Types::AliasOperations] :pipeline_version_alias_operations
+    #   The aliases to add to or remove from the pipeline version.
+    #
     # @return [Types::UpdatePipelineVersionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdatePipelineVersionResponse#pipeline_arn #pipeline_arn} => String
@@ -34133,6 +36182,10 @@ module Aws::SageMaker
     #     pipeline_version_id: 1, # required
     #     pipeline_version_display_name: "PipelineVersionName",
     #     pipeline_version_description: "PipelineVersionDescription",
+    #     pipeline_version_alias_operations: {
+    #       add: ["PipelineVersionAlias"],
+    #       remove: ["PipelineVersionAlias"],
+    #     },
     #   })
     #
     # @example Response structure
@@ -35120,7 +37173,7 @@ module Aws::SageMaker
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.406.0'
+      context[:gem_version] = '1.419.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

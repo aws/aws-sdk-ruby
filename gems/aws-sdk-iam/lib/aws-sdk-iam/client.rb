@@ -264,7 +264,8 @@ module Aws::IAM
     #     An integer representing the maximum number attempts that will be made for
     #     a single request, including the initial attempt.  For example,
     #     setting this value to 5 will result in a request being retried up to
-    #     4 times. Used in `standard` and `adaptive` retry modes.
+    #     4 times. Used in `standard` and `adaptive` retry modes. Defaults to 3,
+    #     except for DynamoDB and DynamoDB Streams, which default to 4.
     #
     #   @option options [String] :profile ("default")
     #     Used when loading credentials from the shared credentials file at `HOME/.aws/credentials`.
@@ -327,15 +328,15 @@ module Aws::IAM
     #     used by the default backoff function. This option is only used in the
     #     `legacy` retry mode.
     #
-    #   @option options [String] :retry_mode ("legacy")
+    #   @option options [String] :retry_mode ("standard")
     #     Specifies which retry algorithm to use. Values are:
     #
-    #     * `legacy` - The pre-existing retry behavior. This is the default
-    #       value if no retry mode is provided.
+    #     * `legacy` - The pre-existing retry behavior.
     #
     #     * `standard` - A standardized set of retry rules across the AWS SDKs.
     #       This includes support for retry quotas, which limit the number of
-    #       unsuccessful retries a client can make.
+    #       unsuccessful retries a client can make. This is the default value
+    #       if no retry mode is provided.
     #
     #     * `adaptive` - A retry mode that includes all the functionality of
     #       `standard` mode along with automatic client side throttling.
@@ -579,6 +580,7 @@ module Aws::IAM
     #   resp.role.assume_role_policy_document #=> String
     #   resp.role.description #=> String
     #   resp.role.max_session_duration #=> Integer
+    #   resp.role.max_signin_session_duration #=> Integer
     #   resp.role.permissions_boundary.permissions_boundary_type #=> String, one of "PermissionsBoundaryPolicy"
     #   resp.role.permissions_boundary.permissions_boundary_arn #=> String
     #   resp.role.tags #=> Array
@@ -1571,6 +1573,7 @@ module Aws::IAM
     #   resp.instance_profile.roles[0].assume_role_policy_document #=> String
     #   resp.instance_profile.roles[0].description #=> String
     #   resp.instance_profile.roles[0].max_session_duration #=> Integer
+    #   resp.instance_profile.roles[0].max_signin_session_duration #=> Integer
     #   resp.instance_profile.roles[0].permissions_boundary.permissions_boundary_type #=> String, one of "PermissionsBoundaryPolicy"
     #   resp.instance_profile.roles[0].permissions_boundary.permissions_boundary_arn #=> String
     #   resp.instance_profile.roles[0].tags #=> Array
@@ -1655,6 +1658,17 @@ module Aws::IAM
     #   Specifies whether the user is required to set a new password on next
     #   sign-in.
     #
+    # @option params [Integer] :max_signin_session_duration
+    #   The maximum duration (in seconds) of an Amazon Web Services Sign-In
+    #   session for this IAM user. This setting can have a value from 1 hour
+    #   (3600 seconds) to 90 days (7776000 seconds), inclusive. If you do not
+    #   specify a value, the setting remains unset and the existing sign-in
+    #   session behavior applies.
+    #
+    #   <note markdown="1"> This setting is not supported for the root user.
+    #
+    #    </note>
+    #
     # @return [Types::CreateLoginProfileResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateLoginProfileResponse#login_profile #login_profile} => Types::LoginProfile
@@ -1686,6 +1700,7 @@ module Aws::IAM
     #     user_name: "userNameType",
     #     password: "passwordType",
     #     password_reset_required: false,
+    #     max_signin_session_duration: 1,
     #   })
     #
     # @example Response structure
@@ -1693,6 +1708,7 @@ module Aws::IAM
     #   resp.login_profile.user_name #=> String
     #   resp.login_profile.create_date #=> Time
     #   resp.login_profile.password_reset_required #=> Boolean
+    #   resp.login_profile.max_signin_session_duration #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateLoginProfile AWS API Documentation
     #
@@ -1731,8 +1747,18 @@ module Aws::IAM
     # * A list of thumbprints of one or more server certificates that the
     #   IdP uses
     #
-    # You get all of this information from the OIDC IdP you want to use to
-    # access Amazon Web Services.
+    # * A trusted identity propagation context provider that defines how the
+    #   subject is derived and how keys from the provider's token are
+    #   mapped into trusted context keys. Specifying a context provider
+    #   enables trusted identity propagation for the provider. For more
+    #   information, see [ContextProvider][3].
+    #
+    # * The ARN of an IAM Identity Center instance to associate with the
+    #   OIDC provider. If you specify an IAM Identity Center instance, you
+    #   must also specify a context provider.
+    #
+    # You get the URL, client IDs, and thumbprints from the OIDC IdP you
+    # want to use to access Amazon Web Services.
     #
     # <note markdown="1"> Amazon Web Services secures communication with OIDC identity providers
     # (IdPs) using our library of trusted root certificate authorities (CAs)
@@ -1745,15 +1771,32 @@ module Aws::IAM
     #
     # <note markdown="1"> The trust for the OIDC provider is derived from the IAM provider that
     # this operation creates. Therefore, it is best to limit access to the
-    # [CreateOpenIDConnectProvider][3] operation to highly privileged users.
+    # [CreateOpenIDConnectProvider][4] operation to highly privileged users.
     #
     #  </note>
+    #
+    # To control who can configure trusted identity propagation on an OIDC
+    # provider, use the [iam:EnableIdentityPropagation][5],
+    # [iam:EnableIdentityCenterAssociation][6],
+    # [iam:RequestIdentityProviderIssuers][7],
+    # [iam:ResourceIdentityProviderIssuers][8],
+    # [iam:RequestIdentityCenterInstanceArn][9], and
+    # [iam:ResourceIdentityCenterInstanceArn][10] condition keys in IAM
+    # policies. The `Request` keys contain the values in the request. The
+    # `Resource` keys contain the values stored on the provider.
     #
     #
     #
     # [1]: http://openid.net/connect/
     # [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-idp_oidc.html
-    # [3]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateOpenIDConnectProvider.html
+    # [3]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_ContextProvider.html
+    # [4]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateOpenIDConnectProvider.html
+    # [5]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_iam-condition-keys.html#ck_EnableIdentityPropagation
+    # [6]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_iam-condition-keys.html#ck_EnableIdentityCenterAssociation
+    # [7]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_iam-condition-keys.html#ck_RequestIdentityProviderIssuers
+    # [8]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_iam-condition-keys.html#ck_ResourceIdentityProviderIssuers
+    # [9]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_iam-condition-keys.html#ck_RequestIdentityCenterInstanceArn
+    # [10]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_iam-condition-keys.html#ck_ResourceIdentityCenterInstanceArn
     #
     # @option params [required, String] :url
     #   The URL of the identity provider. The URL must begin with `https://`
@@ -1834,6 +1877,30 @@ module Aws::IAM
     #
     #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html
     #
+    # @option params [Types::ContextProvider] :context_provider
+    #   The trusted identity propagation context provider configuration to
+    #   associate with the OpenID Connect (OIDC) provider. The context
+    #   provider defines how the subject is derived and how keys from the
+    #   provider's token are mapped into trusted context keys. Specifying a
+    #   context provider enables trusted identity propagation for the
+    #   provider. For more information, see [ContextProvider][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_ContextProvider.html
+    #
+    # @option params [String] :identity_center_instance_arn
+    #   The Amazon Resource Name (ARN) of the IAM Identity Center instance to
+    #   associate with the OpenID Connect (OIDC) provider. If you specify this
+    #   parameter, you must also specify `ContextProvider`.
+    #
+    #   For the format, see [InstanceMetadata][1] in the *IAM Identity Center
+    #   API Reference*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/singlesignon/latest/APIReference/API_InstanceMetadata.html
+    #
     # @return [Types::CreateOpenIDConnectProviderResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateOpenIDConnectProviderResponse#open_id_connect_provider_arn #open_id_connect_provider_arn} => String
@@ -1860,6 +1927,37 @@ module Aws::IAM
     #     open_id_connect_provider_arn: "arn:aws:iam::123456789012:oidc-provider/server.example.com", 
     #   }
     #
+    # @example Example: To create an OIDC provider with trusted identity propagation
+    #
+    #   # The following example creates an OIDC provider with a context provider that uses the sub claim as the subject and maps
+    #   # the department claim to a trusted context key. It also associates an IAM Identity Center instance with the provider.
+    #
+    #   resp = client.create_open_id_connect_provider({
+    #     client_id_list: [
+    #       "my-application-id", 
+    #     ], 
+    #     context_provider: {
+    #       key_definition_list: [
+    #         {
+    #           source_key: "department", 
+    #           target_key: "department", 
+    #         }, 
+    #       ], 
+    #       subject_source_key: "sub", 
+    #       subject_type_value: "user", 
+    #     }, 
+    #     identity_center_instance_arn: "arn:aws:sso:::instance/ssoins-1234567890abcdef", 
+    #     thumbprint_list: [
+    #       "3768084dfb3d2b68b7897bf5f565da8efEXAMPLE", 
+    #     ], 
+    #     url: "https://server.example.com", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     open_id_connect_provider_arn: "arn:aws:iam::123456789012:oidc-provider/server.example.com", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_open_id_connect_provider({
@@ -1872,6 +1970,18 @@ module Aws::IAM
     #         value: "tagValueType", # required
     #       },
     #     ],
+    #     context_provider: {
+    #       key_definition_list: [
+    #         {
+    #           source_key: "contextProviderSourceKeyType", # required
+    #           target_key: "contextProviderTargetKeyType",
+    #         },
+    #       ],
+    #       subject_source_key: "contextProviderSourceKeyType", # required
+    #       subject_type_value: "subjectTypeValueType",
+    #       subject_type_source_key: "contextProviderSourceKeyType",
+    #     },
+    #     identity_center_instance_arn: "identityCenterInstanceArnType",
     #   })
     #
     # @example Response structure
@@ -2249,6 +2359,15 @@ module Aws::IAM
     #
     #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html
     #
+    # @option params [Integer] :max_signin_session_duration
+    #   The maximum duration (in seconds) of an Amazon Web Services Sign-In
+    #   session for users who sign in with this role. This setting can have a
+    #   value from 1 hour (3600 seconds) to 90 days (7776000 seconds),
+    #   inclusive. If you do not specify a value, the setting remains unset
+    #   and the existing sign-in session behavior applies.
+    #
+    #   This setting is independent of `MaxSessionDuration`.
+    #
     # @option params [String] :permissions_boundary
     #   The ARN of the managed policy that is used to set the permissions
     #   boundary for the role.
@@ -2319,6 +2438,7 @@ module Aws::IAM
     #     assume_role_policy_document: "policyDocumentType", # required
     #     description: "roleDescriptionType",
     #     max_session_duration: 1,
+    #     max_signin_session_duration: 1,
     #     permissions_boundary: "arnType",
     #     tags: [
     #       {
@@ -2338,6 +2458,7 @@ module Aws::IAM
     #   resp.role.assume_role_policy_document #=> String
     #   resp.role.description #=> String
     #   resp.role.max_session_duration #=> Integer
+    #   resp.role.max_signin_session_duration #=> Integer
     #   resp.role.permissions_boundary.permissions_boundary_type #=> String, one of "PermissionsBoundaryPolicy"
     #   resp.role.permissions_boundary.permissions_boundary_arn #=> String
     #   resp.role.tags #=> Array
@@ -2382,11 +2503,27 @@ module Aws::IAM
     # the Amazon Web Services Management Console][2] and [About SAML
     # 2.0-based federation][3] in the *IAM User Guide*.
     #
+    # To control who can configure trusted identity propagation on a SAML
+    # provider, use the [iam:EnableIdentityPropagation][4],
+    # [iam:EnableIdentityCenterAssociation][5],
+    # [iam:RequestIdentityProviderIssuers][6],
+    # [iam:ResourceIdentityProviderIssuers][7],
+    # [iam:RequestIdentityCenterInstanceArn][8], and
+    # [iam:ResourceIdentityCenterInstanceArn][9] condition keys in IAM
+    # policies. The `Request` keys contain the values in the request. The
+    # `Resource` keys contain the values stored on the provider.
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
     # [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_enable-console-saml.html
     # [3]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_saml.html
+    # [4]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_iam-condition-keys.html#ck_EnableIdentityPropagation
+    # [5]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_iam-condition-keys.html#ck_EnableIdentityCenterAssociation
+    # [6]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_iam-condition-keys.html#ck_RequestIdentityProviderIssuers
+    # [7]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_iam-condition-keys.html#ck_ResourceIdentityProviderIssuers
+    # [8]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_iam-condition-keys.html#ck_RequestIdentityCenterInstanceArn
+    # [9]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_iam-condition-keys.html#ck_ResourceIdentityCenterInstanceArn
     #
     # @option params [required, String] :saml_metadata_document
     #   An XML document generated by an identity provider (IdP) that supports
@@ -2439,10 +2576,76 @@ module Aws::IAM
     #   private key must be a .pem file that uses AES-GCM or AES-CBC
     #   encryption algorithm to decrypt SAML assertions.
     #
+    # @option params [Types::ContextProvider] :context_provider
+    #   The trusted identity propagation context provider configuration to
+    #   associate with the SAML provider. The context provider defines how the
+    #   subject is derived and how keys from the provider's SAML assertion
+    #   are mapped into trusted context keys. Specifying a context provider
+    #   enables trusted identity propagation for the provider. For more
+    #   information, see [ContextProvider][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_ContextProvider.html
+    #
+    # @option params [String] :identity_center_instance_arn
+    #   The Amazon Resource Name (ARN) of the IAM Identity Center instance to
+    #   associate with the SAML provider. If you specify this parameter, you
+    #   must also specify `ContextProvider`.
+    #
+    #   For the format, see [InstanceMetadata][1] in the *IAM Identity Center
+    #   API Reference*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/singlesignon/latest/APIReference/API_InstanceMetadata.html
+    #
     # @return [Types::CreateSAMLProviderResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateSAMLProviderResponse#saml_provider_arn #saml_provider_arn} => String
     #   * {Types::CreateSAMLProviderResponse#tags #tags} => Array&lt;Types::Tag&gt;
+    #
+    #
+    # @example Example: To create a SAML provider
+    #
+    #   # The following example creates a SAML provider named MyUniversity from a SAML metadata document.
+    #
+    #   resp = client.create_saml_provider({
+    #     name: "MyUniversity", 
+    #     saml_metadata_document: "<?xml version=\"1.0\" encoding=\"UTF-8\"?><md:EntityDescriptor xmlns:md=\"urn:oasis:names:tc:SAML:2.0:metadata\" entityID=\"https://idp.example.com/saml\"><md:IDPSSODescriptor WantAuthnRequestsSigned=\"false\" protocolSupportEnumeration=\"urn:oasis:names:tc:SAML:2.0:protocol\"><md:KeyDescriptor use=\"signing\"><ds:KeyInfo xmlns:ds=\"http://www.w3.org/2000/09/xmldsig#\"><ds:X509Data><ds:X509Certificate>MIIDdzCCAl+gAwIBAgIEbySuqTANBgkqhkiG9w0BAQsFADBsMRAwDgYDVQQGEwdVbmtub3duMRAwDgYDVQQIEwdVbmtub3duMRAwDgYDVQQHEwdVbmtub3duMRAwDgYDVQQKEwdVbmtub3duMRAwDgYDVQQLEwdVbmtub3duMRAwDgYDVQQDEwdFWEFNUExFMB4XDTI2MTEwMTAwMDAwMFoXDTM2MTEwMTAwMDAwMFowbDEQMA4GA1UEBhMHVW5rbm93bjEQMA4GA1UECBMHVW5rbm93bjEQMA4GA1UEBxMHVW5rbm93bjEQMA4GA1UEChMHVW5rbm93bjEQMA4GA1UECxMHVW5rbm93bjEQMA4GA1UEAxMHRVhBTVBMRTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAEXAMPLE</ds:X509Certificate></ds:X509Data></ds:KeyInfo></md:KeyDescriptor><md:NameIDFormat>urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress</md:NameIDFormat><md:SingleSignOnService Binding=\"urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect\" Location=\"https://idp.example.com/saml/sso\"/></md:IDPSSODescriptor></md:EntityDescriptor>", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     saml_provider_arn: "arn:aws:iam::123456789012:saml-provider/MyUniversity", 
+    #   }
+    #
+    # @example Example: To create a SAML provider with trusted identity propagation
+    #
+    #   # The following example creates a SAML provider with a context provider that uses the email attribute as the subject and
+    #   # maps the department attribute to a trusted context key. It also associates an IAM Identity Center instance with the
+    #   # provider.
+    #
+    #   resp = client.create_saml_provider({
+    #     context_provider: {
+    #       key_definition_list: [
+    #         {
+    #           source_key: "department", 
+    #           target_key: "department", 
+    #         }, 
+    #       ], 
+    #       subject_source_key: "email", 
+    #       subject_type_value: "user", 
+    #     }, 
+    #     identity_center_instance_arn: "arn:aws:sso:::instance/ssoins-1234567890abcdef", 
+    #     name: "MyUniversity", 
+    #     saml_metadata_document: "<?xml version=\"1.0\" encoding=\"UTF-8\"?><md:EntityDescriptor xmlns:md=\"urn:oasis:names:tc:SAML:2.0:metadata\" entityID=\"https://idp.example.com/saml\"><md:IDPSSODescriptor WantAuthnRequestsSigned=\"false\" protocolSupportEnumeration=\"urn:oasis:names:tc:SAML:2.0:protocol\"><md:KeyDescriptor use=\"signing\"><ds:KeyInfo xmlns:ds=\"http://www.w3.org/2000/09/xmldsig#\"><ds:X509Data><ds:X509Certificate>MIIDdzCCAl+gAwIBAgIEbySuqTANBgkqhkiG9w0BAQsFADBsMRAwDgYDVQQGEwdVbmtub3duMRAwDgYDVQQIEwdVbmtub3duMRAwDgYDVQQHEwdVbmtub3duMRAwDgYDVQQKEwdVbmtub3duMRAwDgYDVQQLEwdVbmtub3duMRAwDgYDVQQDEwdFWEFNUExFMB4XDTI2MTEwMTAwMDAwMFoXDTM2MTEwMTAwMDAwMFowbDEQMA4GA1UEBhMHVW5rbm93bjEQMA4GA1UECBMHVW5rbm93bjEQMA4GA1UEBxMHVW5rbm93bjEQMA4GA1UEChMHVW5rbm93bjEQMA4GA1UECxMHVW5rbm93bjEQMA4GA1UEAxMHRVhBTVBMRTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAEXAMPLE</ds:X509Certificate></ds:X509Data></ds:KeyInfo></md:KeyDescriptor><md:NameIDFormat>urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress</md:NameIDFormat><md:SingleSignOnService Binding=\"urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect\" Location=\"https://idp.example.com/saml/sso\"/></md:IDPSSODescriptor></md:EntityDescriptor>", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     saml_provider_arn: "arn:aws:iam::123456789012:saml-provider/MyUniversity", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -2457,6 +2660,18 @@ module Aws::IAM
     #     ],
     #     assertion_encryption_mode: "Required", # accepts Required, Allowed
     #     add_private_key: "privateKeyType",
+    #     context_provider: {
+    #       key_definition_list: [
+    #         {
+    #           source_key: "contextProviderSourceKeyType", # required
+    #           target_key: "contextProviderTargetKeyType",
+    #         },
+    #       ],
+    #       subject_source_key: "contextProviderSourceKeyType", # required
+    #       subject_type_value: "subjectTypeValueType",
+    #       subject_type_source_key: "contextProviderSourceKeyType",
+    #     },
+    #     identity_center_instance_arn: "identityCenterInstanceArnType",
     #   })
     #
     # @example Response structure
@@ -2545,6 +2760,7 @@ module Aws::IAM
     #   resp.role.assume_role_policy_document #=> String
     #   resp.role.description #=> String
     #   resp.role.max_session_duration #=> Integer
+    #   resp.role.max_signin_session_duration #=> Integer
     #   resp.role.permissions_boundary.permissions_boundary_type #=> String, one of "PermissionsBoundaryPolicy"
     #   resp.role.permissions_boundary.permissions_boundary_arn #=> String
     #   resp.role.tags #=> Array
@@ -3320,14 +3536,13 @@ module Aws::IAM
     end
 
     # Deletes an OpenID Connect identity provider (IdP) resource object in
-    # IAM.
+    # IAM. Deleting the provider also deletes its trusted identity
+    # propagation context provider and removes any IAM Identity Center
+    # instance association.
     #
     # Deleting an IAM OIDC provider resource does not update any roles that
     # reference the provider as a principal in their trust policies. Any
     # attempt to assume a role that references a deleted provider fails.
-    #
-    # This operation is idempotent; it does not fail or return an error if
-    # you call the operation for a provider that does not exist.
     #
     # @option params [required, String] :open_id_connect_provider_arn
     #   The Amazon Resource Name (ARN) of the IAM OpenID Connect provider
@@ -5147,6 +5362,7 @@ module Aws::IAM
     #   resp.role_detail_list[0].instance_profile_list[0].roles[0].assume_role_policy_document #=> String
     #   resp.role_detail_list[0].instance_profile_list[0].roles[0].description #=> String
     #   resp.role_detail_list[0].instance_profile_list[0].roles[0].max_session_duration #=> Integer
+    #   resp.role_detail_list[0].instance_profile_list[0].roles[0].max_signin_session_duration #=> Integer
     #   resp.role_detail_list[0].instance_profile_list[0].roles[0].permissions_boundary.permissions_boundary_type #=> String, one of "PermissionsBoundaryPolicy"
     #   resp.role_detail_list[0].instance_profile_list[0].roles[0].permissions_boundary.permissions_boundary_arn #=> String
     #   resp.role_detail_list[0].instance_profile_list[0].roles[0].tags #=> Array
@@ -5927,6 +6143,7 @@ module Aws::IAM
     #   resp.instance_profile.roles[0].assume_role_policy_document #=> String
     #   resp.instance_profile.roles[0].description #=> String
     #   resp.instance_profile.roles[0].max_session_duration #=> Integer
+    #   resp.instance_profile.roles[0].max_signin_session_duration #=> Integer
     #   resp.instance_profile.roles[0].permissions_boundary.permissions_boundary_type #=> String, one of "PermissionsBoundaryPolicy"
     #   resp.instance_profile.roles[0].permissions_boundary.permissions_boundary_arn #=> String
     #   resp.instance_profile.roles[0].tags #=> Array
@@ -6020,6 +6237,7 @@ module Aws::IAM
     #   resp.login_profile.user_name #=> String
     #   resp.login_profile.create_date #=> Time
     #   resp.login_profile.password_reset_required #=> Boolean
+    #   resp.login_profile.max_signin_session_duration #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetLoginProfile AWS API Documentation
     #
@@ -6097,6 +6315,45 @@ module Aws::IAM
     #   * {Types::GetOpenIDConnectProviderResponse#thumbprint_list #thumbprint_list} => Array&lt;String&gt;
     #   * {Types::GetOpenIDConnectProviderResponse#create_date #create_date} => Time
     #   * {Types::GetOpenIDConnectProviderResponse#tags #tags} => Array&lt;Types::Tag&gt;
+    #   * {Types::GetOpenIDConnectProviderResponse#context_provider #context_provider} => Types::ContextProvider
+    #   * {Types::GetOpenIDConnectProviderResponse#identity_center_instance_arn #identity_center_instance_arn} => String
+    #   * {Types::GetOpenIDConnectProviderResponse#identity_store_arn #identity_store_arn} => String
+    #
+    #
+    # @example Example: To get information about an OIDC provider
+    #
+    #   # The following example returns the configuration of an OIDC provider, including its trusted identity propagation context
+    #   # provider and the associated IAM Identity Center instance.
+    #
+    #   resp = client.get_open_id_connect_provider({
+    #     open_id_connect_provider_arn: "arn:aws:iam::123456789012:oidc-provider/server.example.com", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     client_id_list: [
+    #       "my-application-id", 
+    #     ], 
+    #     context_provider: {
+    #       key_definition_list: [
+    #         {
+    #           source_key: "department", 
+    #           target_key: "department", 
+    #         }, 
+    #       ], 
+    #       subject_source_key: "sub", 
+    #       subject_type_value: "user", 
+    #     }, 
+    #     create_date: Time.parse("2026-11-01T17:22:18Z"), 
+    #     identity_center_instance_arn: "arn:aws:sso:::instance/ssoins-1234567890abcdef", 
+    #     identity_store_arn: "arn:aws:identitystore::123456789012:identitystore/d-1234567890", 
+    #     tags: [
+    #     ], 
+    #     thumbprint_list: [
+    #       "3768084dfb3d2b68b7897bf5f565da8efEXAMPLE", 
+    #     ], 
+    #     url: "server.example.com", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -6115,6 +6372,14 @@ module Aws::IAM
     #   resp.tags #=> Array
     #   resp.tags[0].key #=> String
     #   resp.tags[0].value #=> String
+    #   resp.context_provider.key_definition_list #=> Array
+    #   resp.context_provider.key_definition_list[0].source_key #=> String
+    #   resp.context_provider.key_definition_list[0].target_key #=> String
+    #   resp.context_provider.subject_source_key #=> String
+    #   resp.context_provider.subject_type_value #=> String
+    #   resp.context_provider.subject_type_source_key #=> String
+    #   resp.identity_center_instance_arn #=> String
+    #   resp.identity_store_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetOpenIDConnectProvider AWS API Documentation
     #
@@ -6541,6 +6806,7 @@ module Aws::IAM
     #   resp.role.assume_role_policy_document #=> String
     #   resp.role.description #=> String
     #   resp.role.max_session_duration #=> Integer
+    #   resp.role.max_signin_session_duration #=> Integer
     #   resp.role.permissions_boundary.permissions_boundary_type #=> String, one of "PermissionsBoundaryPolicy"
     #   resp.role.permissions_boundary.permissions_boundary_arn #=> String
     #   resp.role.tags #=> Array
@@ -6761,11 +7027,55 @@ module Aws::IAM
     #
     #   * {Types::GetSAMLProviderResponse#saml_provider_uuid #saml_provider_uuid} => String
     #   * {Types::GetSAMLProviderResponse#saml_metadata_document #saml_metadata_document} => String
+    #   * {Types::GetSAMLProviderResponse#context_provider #context_provider} => Types::ContextProvider
+    #   * {Types::GetSAMLProviderResponse#saml_key_hashes #saml_key_hashes} => Array&lt;Types::SAMLKeyHashEntry&gt;
     #   * {Types::GetSAMLProviderResponse#create_date #create_date} => Time
     #   * {Types::GetSAMLProviderResponse#valid_until #valid_until} => Time
     #   * {Types::GetSAMLProviderResponse#tags #tags} => Array&lt;Types::Tag&gt;
     #   * {Types::GetSAMLProviderResponse#assertion_encryption_mode #assertion_encryption_mode} => String
     #   * {Types::GetSAMLProviderResponse#private_key_list #private_key_list} => Array&lt;Types::SAMLPrivateKey&gt;
+    #   * {Types::GetSAMLProviderResponse#identity_center_instance_arn #identity_center_instance_arn} => String
+    #   * {Types::GetSAMLProviderResponse#identity_store_arn #identity_store_arn} => String
+    #
+    #
+    # @example Example: To get information about a SAML provider
+    #
+    #   # The following example returns the configuration of a SAML provider, including its trusted identity propagation context
+    #   # provider, the issuer key hashes, and the associated IAM Identity Center instance.
+    #
+    #   resp = client.get_saml_provider({
+    #     saml_provider_arn: "arn:aws:iam::123456789012:saml-provider/MyUniversity", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     assertion_encryption_mode: "Allowed", 
+    #     context_provider: {
+    #       key_definition_list: [
+    #         {
+    #           source_key: "department", 
+    #           target_key: "department", 
+    #         }, 
+    #       ], 
+    #       subject_source_key: "email", 
+    #       subject_type_value: "user", 
+    #     }, 
+    #     create_date: Time.parse("2026-11-01T17:22:18Z"), 
+    #     identity_center_instance_arn: "arn:aws:sso:::instance/ssoins-1234567890abcdef", 
+    #     identity_store_arn: "arn:aws:identitystore::123456789012:identitystore/d-1234567890", 
+    #     saml_key_hashes: [
+    #       {
+    #         issuer_url: "https://idp.example.com/saml", 
+    #         key_hashes: [
+    #           "a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8EXAMPLE", 
+    #         ], 
+    #       }, 
+    #     ], 
+    #     saml_provider_uuid: "SAMLPROVIDERUUIDEXAMPLE", 
+    #     tags: [
+    #     ], 
+    #     valid_until: Time.parse("2036-11-01T17:22:18Z"), 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -6777,6 +7087,16 @@ module Aws::IAM
     #
     #   resp.saml_provider_uuid #=> String
     #   resp.saml_metadata_document #=> String
+    #   resp.context_provider.key_definition_list #=> Array
+    #   resp.context_provider.key_definition_list[0].source_key #=> String
+    #   resp.context_provider.key_definition_list[0].target_key #=> String
+    #   resp.context_provider.subject_source_key #=> String
+    #   resp.context_provider.subject_type_value #=> String
+    #   resp.context_provider.subject_type_source_key #=> String
+    #   resp.saml_key_hashes #=> Array
+    #   resp.saml_key_hashes[0].issuer_url #=> String
+    #   resp.saml_key_hashes[0].key_hashes #=> Array
+    #   resp.saml_key_hashes[0].key_hashes[0] #=> String
     #   resp.create_date #=> Time
     #   resp.valid_until #=> Time
     #   resp.tags #=> Array
@@ -6786,6 +7106,8 @@ module Aws::IAM
     #   resp.private_key_list #=> Array
     #   resp.private_key_list[0].key_id #=> String
     #   resp.private_key_list[0].timestamp #=> Time
+    #   resp.identity_center_instance_arn #=> String
+    #   resp.identity_store_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetSAMLProvider AWS API Documentation
     #
@@ -8600,6 +8922,7 @@ module Aws::IAM
     #   resp.instance_profiles[0].roles[0].assume_role_policy_document #=> String
     #   resp.instance_profiles[0].roles[0].description #=> String
     #   resp.instance_profiles[0].roles[0].max_session_duration #=> Integer
+    #   resp.instance_profiles[0].roles[0].max_signin_session_duration #=> Integer
     #   resp.instance_profiles[0].roles[0].permissions_boundary.permissions_boundary_type #=> String, one of "PermissionsBoundaryPolicy"
     #   resp.instance_profiles[0].roles[0].permissions_boundary.permissions_boundary_arn #=> String
     #   resp.instance_profiles[0].roles[0].tags #=> Array
@@ -8698,6 +9021,7 @@ module Aws::IAM
     #   resp.instance_profiles[0].roles[0].assume_role_policy_document #=> String
     #   resp.instance_profiles[0].roles[0].description #=> String
     #   resp.instance_profiles[0].roles[0].max_session_duration #=> Integer
+    #   resp.instance_profiles[0].roles[0].max_signin_session_duration #=> Integer
     #   resp.instance_profiles[0].roles[0].permissions_boundary.permissions_boundary_type #=> String, one of "PermissionsBoundaryPolicy"
     #   resp.instance_profiles[0].roles[0].permissions_boundary.permissions_boundary_arn #=> String
     #   resp.instance_profiles[0].roles[0].tags #=> Array
@@ -8962,10 +9286,34 @@ module Aws::IAM
     #
     #   * {Types::ListOpenIDConnectProvidersResponse#open_id_connect_provider_list #open_id_connect_provider_list} => Array&lt;Types::OpenIDConnectProviderListEntry&gt;
     #
+    #
+    # @example Example: To list the OIDC providers in an account
+    #
+    #   # The following example lists the OIDC providers in the current account and shows whether trusted identity propagation is
+    #   # enabled for each provider.
+    #
+    #   resp = client.list_open_id_connect_providers({
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     open_id_connect_provider_list: [
+    #       {
+    #         arn: "arn:aws:iam::123456789012:oidc-provider/server.example.com", 
+    #         is_trusted_identity_propagation_enabled: true, 
+    #       }, 
+    #       {
+    #         arn: "arn:aws:iam::123456789012:oidc-provider/server.example.org", 
+    #         is_trusted_identity_propagation_enabled: false, 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Response structure
     #
     #   resp.open_id_connect_provider_list #=> Array
     #   resp.open_id_connect_provider_list[0].arn #=> String
+    #   resp.open_id_connect_provider_list[0].is_trusted_identity_propagation_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListOpenIDConnectProviders AWS API Documentation
     #
@@ -9715,6 +10063,7 @@ module Aws::IAM
     #   resp.roles[0].assume_role_policy_document #=> String
     #   resp.roles[0].description #=> String
     #   resp.roles[0].max_session_duration #=> Integer
+    #   resp.roles[0].max_signin_session_duration #=> Integer
     #   resp.roles[0].permissions_boundary.permissions_boundary_type #=> String, one of "PermissionsBoundaryPolicy"
     #   resp.roles[0].permissions_boundary.permissions_boundary_arn #=> String
     #   resp.roles[0].tags #=> Array
@@ -9830,12 +10179,40 @@ module Aws::IAM
     #
     #   * {Types::ListSAMLProvidersResponse#saml_provider_list #saml_provider_list} => Array&lt;Types::SAMLProviderListEntry&gt;
     #
+    #
+    # @example Example: To list the SAML providers in an account
+    #
+    #   # The following example lists the SAML providers in the current account and shows whether trusted identity propagation is
+    #   # enabled for each provider.
+    #
+    #   resp = client.list_saml_providers({
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     saml_provider_list: [
+    #       {
+    #         arn: "arn:aws:iam::123456789012:saml-provider/MyUniversity", 
+    #         create_date: Time.parse("2026-11-01T17:22:18Z"), 
+    #         is_trusted_identity_propagation_enabled: true, 
+    #         valid_until: Time.parse("2036-11-01T17:22:18Z"), 
+    #       }, 
+    #       {
+    #         arn: "arn:aws:iam::123456789012:saml-provider/MyCompany", 
+    #         create_date: Time.parse("2020-03-11T13:11:02Z"), 
+    #         is_trusted_identity_propagation_enabled: false, 
+    #         valid_until: Time.parse("2030-03-11T13:11:02Z"), 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Response structure
     #
     #   resp.saml_provider_list #=> Array
     #   resp.saml_provider_list[0].arn #=> String
     #   resp.saml_provider_list[0].valid_until #=> Time
     #   resp.saml_provider_list[0].create_date #=> Time
+    #   resp.saml_provider_list[0].is_trusted_identity_propagation_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListSAMLProviders AWS API Documentation
     #
@@ -13960,11 +14337,12 @@ module Aws::IAM
       req.send_request(options)
     end
 
-    # Changes the password for the specified IAM user. You can use the CLI,
-    # the Amazon Web Services API, or the **Users** page in the IAM console
-    # to change the password for any IAM user. Use [ChangePassword][1] to
-    # change your own password in the **My Security Credentials** page in
-    # the Amazon Web Services Management Console.
+    # Changes the password or the maximum sign-in session duration for the
+    # specified IAM user. You can use the CLI, the Amazon Web Services API,
+    # or the **Users** page in the IAM console to change the password for
+    # any IAM user. Use [ChangePassword][1] to change your own password in
+    # the **My Security Credentials** page in the Amazon Web Services
+    # Management Console.
     #
     # For more information about modifying passwords, see [Managing
     # passwords][2] in the *IAM User Guide*.
@@ -14014,6 +14392,37 @@ module Aws::IAM
     #   Allows this new password to be used only once by requiring the
     #   specified IAM user to set a new password on next sign-in.
     #
+    # @option params [Integer] :max_signin_session_duration
+    #   The maximum duration (in seconds) of an Amazon Web Services Sign-In
+    #   session for the specified IAM user. This setting can have a value from
+    #   1 hour (3600 seconds) to 90 days (7776000 seconds), inclusive, and
+    #   replaces any value currently configured for the user.
+    #
+    #   If you omit both this parameter and `ResetMaxSigninSessionDuration`,
+    #   the current setting is unchanged. You cannot specify this parameter
+    #   and set `ResetMaxSigninSessionDuration` to `true` in the same request.
+    #   If you update only the sign-in session duration, the user's password
+    #   and `PasswordResetRequired` setting do not change.
+    #
+    #   Changes to this setting apply to new sign-in sessions. Sessions that
+    #   are already established are not affected.
+    #
+    #   <note markdown="1"> This setting is not supported for the root user.
+    #
+    #    </note>
+    #
+    # @option params [Boolean] :reset_max_signin_session_duration
+    #   Specifies whether to clear the maximum sign-in session duration for
+    #   the specified IAM user. Set this value to `true` to return the setting
+    #   to its unset state, so that the existing sign-in session behavior
+    #   applies. When the setting is unset, the user's
+    #   `MaxSigninSessionDuration` is omitted from responses.
+    #
+    #   If you set this value to `false` or omit it, the current setting is
+    #   not cleared. You cannot set this value to `true` and specify
+    #   `MaxSigninSessionDuration` in the same request. Clearing a setting
+    #   that is already unset has no effect.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     #
@@ -14032,6 +14441,8 @@ module Aws::IAM
     #     user_name: "userNameType", # required
     #     password: "passwordType",
     #     password_reset_required: false,
+    #     max_signin_session_duration: 1,
+    #     reset_max_signin_session_duration: false,
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateLoginProfile AWS API Documentation
@@ -14040,6 +14451,179 @@ module Aws::IAM
     # @param [Hash] params ({})
     def update_login_profile(params = {}, options = {})
       req = build_request(:update_login_profile, params)
+      req.send_request(options)
+    end
+
+    # Updates the configuration of an existing IAM OpenID Connect (OIDC)
+    # identity provider resource object. Use this operation to set, change,
+    # or remove the trusted identity propagation context provider, and to
+    # associate or disassociate an IAM Identity Center instance with the
+    # provider.
+    #
+    # <note markdown="1"> This operation does not update the OIDC provider's server certificate
+    # thumbprints. Thumbprints are managed only by the
+    # [UpdateOpenIDConnectProviderThumbprint][1] operation. To change a
+    # provider's thumbprints, call that operation instead.
+    #
+    #  </note>
+    #
+    # To remove a configuration rather than replace it, use the
+    # `RemoveContextProvider` and `RemoveIdentityCenterInstance` parameters.
+    # For each configuration, provide either the new value or the
+    # corresponding `Remove` flag in a single request, but not both. For
+    # example, specifying both `ContextProvider` and `RemoveContextProvider`
+    # in the same request is not allowed.
+    #
+    # A single request can change either the context provider or the IAM
+    # Identity Center association, but not both. To change both, make
+    # separate `UpdateOpenIDConnectProvider` requests. To remove the context
+    # provider, first remove the IAM Identity Center association in a
+    # separate request.
+    #
+    # To control who can configure trusted identity propagation on an OIDC
+    # provider, use the [iam:EnableIdentityPropagation][2],
+    # [iam:EnableIdentityCenterAssociation][3],
+    # [iam:ResourceIdentityProviderIssuers][4],
+    # [iam:RequestIdentityCenterInstanceArn][5], and
+    # [iam:ResourceIdentityCenterInstanceArn][6] condition keys in IAM
+    # policies. The `Request` keys contain the values in the request. The
+    # `Resource` keys contain the values stored on the provider.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_UpdateOpenIDConnectProviderThumbprint.html
+    # [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_iam-condition-keys.html#ck_EnableIdentityPropagation
+    # [3]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_iam-condition-keys.html#ck_EnableIdentityCenterAssociation
+    # [4]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_iam-condition-keys.html#ck_ResourceIdentityProviderIssuers
+    # [5]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_iam-condition-keys.html#ck_RequestIdentityCenterInstanceArn
+    # [6]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_iam-condition-keys.html#ck_ResourceIdentityCenterInstanceArn
+    #
+    # @option params [required, String] :open_id_connect_provider_arn
+    #   The Amazon Resource Name (ARN) of the IAM OIDC provider resource
+    #   object to update. You can get a list of OIDC provider resource ARNs by
+    #   using the [ListOpenIDConnectProviders][1] operation.
+    #
+    #   For more information about ARNs, see [Amazon Resource Names (ARNs)][2]
+    #   in the *Amazon Web Services General Reference*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_ListOpenIDConnectProviders.html
+    #   [2]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #
+    # @option params [Types::ContextProvider] :context_provider
+    #   The trusted identity propagation context provider configuration to set
+    #   on the OIDC provider. This configuration defines the subject mapping
+    #   and the source-to-target key mappings that are used when trusted
+    #   context is injected. For more information, see [ContextProvider][1].
+    #
+    #   To remove the existing context provider instead of replacing it, use
+    #   `RemoveContextProvider`. Do not specify both `ContextProvider` and
+    #   `RemoveContextProvider` in the same request.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_ContextProvider.html
+    #
+    # @option params [String] :identity_center_instance_arn
+    #   The Amazon Resource Name (ARN) of the IAM Identity Center instance to
+    #   associate with the OIDC provider.
+    #
+    #   For the format, see [InstanceMetadata][1] in the *IAM Identity Center
+    #   API Reference*.
+    #
+    #   To disassociate the currently associated instance instead of changing
+    #   it, use `RemoveIdentityCenterInstance`. Do not specify both
+    #   `IdentityCenterInstanceArn` and `RemoveIdentityCenterInstance` in the
+    #   same request.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/singlesignon/latest/APIReference/API_InstanceMetadata.html
+    #
+    # @option params [Boolean] :remove_context_provider
+    #   Specifies whether to remove the existing context provider
+    #   configuration from the OIDC provider. Set this value to `true` to
+    #   remove the context provider.
+    #
+    #   This parameter is mutually exclusive with `ContextProvider`. In a
+    #   single request, specify either a new `ContextProvider` value or
+    #   `RemoveContextProvider`, but not both.
+    #
+    # @option params [Boolean] :remove_identity_center_instance
+    #   Specifies whether to disassociate the IAM Identity Center instance
+    #   from the OIDC provider. Set this value to `true` to remove the
+    #   association.
+    #
+    #   This parameter is mutually exclusive with `IdentityCenterInstanceArn`.
+    #   In a single request, specify either a new `IdentityCenterInstanceArn`
+    #   value or `RemoveIdentityCenterInstance`, but not both.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To set the context provider for an OIDC provider
+    #
+    #   # The following example sets a trusted identity propagation context provider on an existing OIDC provider. The context
+    #   # provider uses the sub claim as the subject and maps the department claim to a trusted context key.
+    #
+    #   resp = client.update_open_id_connect_provider({
+    #     context_provider: {
+    #       key_definition_list: [
+    #         {
+    #           source_key: "department", 
+    #           target_key: "department", 
+    #         }, 
+    #       ], 
+    #       subject_source_key: "sub", 
+    #       subject_type_value: "user", 
+    #     }, 
+    #     open_id_connect_provider_arn: "arn:aws:iam::123456789012:oidc-provider/server.example.com", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
+    #
+    # @example Example: To associate an IAM Identity Center instance with an OIDC provider
+    #
+    #   # The following example associates an IAM Identity Center instance with an existing OIDC provider.
+    #
+    #   resp = client.update_open_id_connect_provider({
+    #     identity_center_instance_arn: "arn:aws:sso:::instance/ssoins-1234567890abcdef", 
+    #     open_id_connect_provider_arn: "arn:aws:iam::123456789012:oidc-provider/server.example.com", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_open_id_connect_provider({
+    #     open_id_connect_provider_arn: "arnType", # required
+    #     context_provider: {
+    #       key_definition_list: [
+    #         {
+    #           source_key: "contextProviderSourceKeyType", # required
+    #           target_key: "contextProviderTargetKeyType",
+    #         },
+    #       ],
+    #       subject_source_key: "contextProviderSourceKeyType", # required
+    #       subject_type_value: "subjectTypeValueType",
+    #       subject_type_source_key: "contextProviderSourceKeyType",
+    #     },
+    #     identity_center_instance_arn: "identityCenterInstanceArnType",
+    #     remove_context_provider: false,
+    #     remove_identity_center_instance: false,
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateOpenIDConnectProvider AWS API Documentation
+    #
+    # @overload update_open_id_connect_provider(params = {})
+    # @param [Hash] params ({})
+    def update_open_id_connect_provider(params = {}, options = {})
+      req = build_request(:update_open_id_connect_provider, params)
       req.send_request(options)
     end
 
@@ -14113,7 +14697,9 @@ module Aws::IAM
       req.send_request(options)
     end
 
-    # Updates the description or maximum session duration setting of a role.
+    # Updates the description, maximum session duration, or maximum sign-in
+    # session duration of a role. You cannot change the maximum sign-in
+    # session duration of a service-linked role.
     #
     # @option params [required, String] :role_name
     #   The name of the role that you want to modify.
@@ -14147,6 +14733,40 @@ module Aws::IAM
     #
     #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html
     #
+    # @option params [Integer] :max_signin_session_duration
+    #   The maximum duration (in seconds) of an Amazon Web Services Sign-In
+    #   session for users who sign in with the specified role. This setting
+    #   can have a value from 1 hour (3600 seconds) to 90 days (7776000
+    #   seconds), inclusive, and replaces any value currently configured for
+    #   the role. This setting is independent of `MaxSessionDuration`.
+    #
+    #   If you omit both this parameter and `ResetMaxSigninSessionDuration`,
+    #   the current setting is unchanged. You cannot specify this parameter
+    #   and set `ResetMaxSigninSessionDuration` to `true` in the same request.
+    #
+    #   Changes to this setting apply to new sign-in sessions. Sessions that
+    #   are already established are not affected.
+    #
+    #   <note markdown="1"> You cannot set this value on a service-linked role.
+    #
+    #    </note>
+    #
+    # @option params [Boolean] :reset_max_signin_session_duration
+    #   Specifies whether to clear the role's maximum sign-in session
+    #   duration. Set this value to `true` to return the setting to its unset
+    #   state, so that the existing sign-in session behavior applies. When the
+    #   setting is unset, the role's `MaxSigninSessionDuration` is omitted
+    #   from responses.
+    #
+    #   If you set this value to `false` or omit it, the current setting is
+    #   not cleared. You cannot set this value to `true` and specify
+    #   `MaxSigninSessionDuration` in the same request. Clearing a setting
+    #   that is already unset has no effect.
+    #
+    #   <note markdown="1"> You cannot reset this value on a service-linked role.
+    #
+    #    </note>
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -14155,6 +14775,8 @@ module Aws::IAM
     #     role_name: "roleNameType", # required
     #     description: "roleDescriptionType",
     #     max_session_duration: 1,
+    #     max_signin_session_duration: 1,
+    #     reset_max_signin_session_duration: false,
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateRole AWS API Documentation
@@ -14203,6 +14825,7 @@ module Aws::IAM
     #   resp.role.assume_role_policy_document #=> String
     #   resp.role.description #=> String
     #   resp.role.max_session_duration #=> Integer
+    #   resp.role.max_signin_session_duration #=> Integer
     #   resp.role.permissions_boundary.permissions_boundary_type #=> String, one of "PermissionsBoundaryPolicy"
     #   resp.role.permissions_boundary.permissions_boundary_arn #=> String
     #   resp.role.tags #=> Array
@@ -14225,6 +14848,40 @@ module Aws::IAM
     # Updates the metadata document, SAML encryption settings, and private
     # keys for an existing SAML provider. To rotate private keys, add your
     # new private key and then remove the old key in a separate request.
+    #
+    # You can also use this operation to set, change, or remove the trusted
+    # identity propagation context provider, and to associate or
+    # disassociate an IAM Identity Center instance with the provider. To
+    # remove a configuration rather than replace it, use the
+    # `RemoveContextProvider` and `RemoveIdentityCenterInstance` parameters.
+    # For each configuration, provide either the new value or the
+    # corresponding `Remove` flag in a single request, but not both.
+    #
+    # A single request can change either the context provider or the
+    # provider metadata, but not both. Provider metadata includes the SAML
+    # metadata document, assertion encryption mode, private keys, and IAM
+    # Identity Center association. To change both, make separate
+    # `UpdateSAMLProvider` requests. To remove the context provider, first
+    # remove the IAM Identity Center association in a separate request.
+    #
+    # To control who can configure trusted identity propagation on a SAML
+    # provider, use the [iam:EnableIdentityPropagation][1],
+    # [iam:EnableIdentityCenterAssociation][2],
+    # [iam:RequestIdentityProviderIssuers][3],
+    # [iam:ResourceIdentityProviderIssuers][4],
+    # [iam:RequestIdentityCenterInstanceArn][5], and
+    # [iam:ResourceIdentityCenterInstanceArn][6] condition keys in IAM
+    # policies. The `Request` keys contain the values in the request. The
+    # `Resource` keys contain the values stored on the provider.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_iam-condition-keys.html#ck_EnableIdentityPropagation
+    # [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_iam-condition-keys.html#ck_EnableIdentityCenterAssociation
+    # [3]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_iam-condition-keys.html#ck_RequestIdentityProviderIssuers
+    # [4]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_iam-condition-keys.html#ck_ResourceIdentityProviderIssuers
+    # [5]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_iam-condition-keys.html#ck_RequestIdentityCenterInstanceArn
+    # [6]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_iam-condition-keys.html#ck_ResourceIdentityCenterInstanceArn
     #
     # @option params [String] :saml_metadata_document
     #   An XML document generated by an identity provider (IdP) that supports
@@ -14255,9 +14912,81 @@ module Aws::IAM
     # @option params [String] :remove_private_key
     #   The Key ID of the private key to remove.
     #
+    # @option params [Types::ContextProvider] :context_provider
+    #   The trusted identity propagation context provider configuration to
+    #   associate with the SAML provider. This replaces the existing context
+    #   provider configuration. For more information, see
+    #   [ContextProvider][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_ContextProvider.html
+    #
+    # @option params [String] :identity_center_instance_arn
+    #   The Amazon Resource Name (ARN) of the IAM Identity Center instance to
+    #   associate with the SAML provider.
+    #
+    #   For the format, see [InstanceMetadata][1] in the *IAM Identity Center
+    #   API Reference*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/singlesignon/latest/APIReference/API_InstanceMetadata.html
+    #
+    # @option params [Boolean] :remove_context_provider
+    #   Specifies whether to remove the existing trusted identity propagation
+    #   context provider configuration from the SAML provider. When set to
+    #   `true`, the context provider is removed. This parameter is mutually
+    #   exclusive with `ContextProvider`.
+    #
+    # @option params [Boolean] :remove_identity_center_instance
+    #   Specifies whether to disassociate the IAM Identity Center instance
+    #   from the SAML provider. When set to `true`, the instance is
+    #   disassociated. This parameter is mutually exclusive with
+    #   `IdentityCenterInstanceArn`.
+    #
     # @return [Types::UpdateSAMLProviderResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateSAMLProviderResponse#saml_provider_arn #saml_provider_arn} => String
+    #
+    #
+    # @example Example: To set the context provider for a SAML provider
+    #
+    #   # The following example sets a trusted identity propagation context provider on an existing SAML provider. The context
+    #   # provider uses the email attribute as the subject and maps the department attribute to a trusted context key.
+    #
+    #   resp = client.update_saml_provider({
+    #     context_provider: {
+    #       key_definition_list: [
+    #         {
+    #           source_key: "department", 
+    #           target_key: "department", 
+    #         }, 
+    #       ], 
+    #       subject_source_key: "email", 
+    #       subject_type_value: "user", 
+    #     }, 
+    #     saml_provider_arn: "arn:aws:iam::123456789012:saml-provider/MyUniversity", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     saml_provider_arn: "arn:aws:iam::123456789012:saml-provider/MyUniversity", 
+    #   }
+    #
+    # @example Example: To associate an IAM Identity Center instance with a SAML provider
+    #
+    #   # The following example associates an IAM Identity Center instance with an existing SAML provider.
+    #
+    #   resp = client.update_saml_provider({
+    #     identity_center_instance_arn: "arn:aws:sso:::instance/ssoins-1234567890abcdef", 
+    #     saml_provider_arn: "arn:aws:iam::123456789012:saml-provider/MyUniversity", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     saml_provider_arn: "arn:aws:iam::123456789012:saml-provider/MyUniversity", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -14267,6 +14996,20 @@ module Aws::IAM
     #     assertion_encryption_mode: "Required", # accepts Required, Allowed
     #     add_private_key: "privateKeyType",
     #     remove_private_key: "privateKeyIdType",
+    #     context_provider: {
+    #       key_definition_list: [
+    #         {
+    #           source_key: "contextProviderSourceKeyType", # required
+    #           target_key: "contextProviderTargetKeyType",
+    #         },
+    #       ],
+    #       subject_source_key: "contextProviderSourceKeyType", # required
+    #       subject_type_value: "subjectTypeValueType",
+    #       subject_type_source_key: "contextProviderSourceKeyType",
+    #     },
+    #     identity_center_instance_arn: "identityCenterInstanceArnType",
+    #     remove_context_provider: false,
+    #     remove_identity_center_instance: false,
     #   })
     #
     # @example Response structure
@@ -15064,7 +15807,7 @@ module Aws::IAM
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-iam'
-      context[:gem_version] = '1.159.0'
+      context[:gem_version] = '1.168.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

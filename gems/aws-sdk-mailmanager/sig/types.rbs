@@ -1079,7 +1079,7 @@ module Aws::MailManager
 
     class ReplaceRecipientAction
       attr_accessor replace_with: ::Array[::String]
-      SENSITIVE: []
+      SENSITIVE: [:replace_with]
     end
 
     class ResourceNotFoundException
@@ -1270,7 +1270,7 @@ module Aws::MailManager
       attr_accessor evaluate: Types::RuleStringToEvaluate
       attr_accessor operator: ("EQUALS" | "NOT_EQUALS" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS")
       attr_accessor values: ::Array[::String]
-      SENSITIVE: []
+      SENSITIVE: [:values]
     end
 
     class RuleStringToEvaluate

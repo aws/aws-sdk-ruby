@@ -1,0 +1,30 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module OpenSearchMemory
+    module Params
+      type memory_strategy_configuration = {
+      extraction_prompt: ::String?,
+      extract_every_n_messages: ::Integer?,
+      extract_every_n_tokens: ::Integer?,
+      idle_timeout_seconds: ::Integer?,
+      extraction_seed_top_k: ::Integer?,
+      extraction_seed_recent_n: ::Integer?,
+      consolidation_enabled: bool?
+    }
+
+      type memory_strategy = {
+      type: ("SEMANTIC" | "SUMMARY" | "CUSTOM"),
+      name: ::String?,
+      description: ::String?,
+      configuration: Params::memory_strategy_configuration?
+    }
+
+    end
+  end
+end

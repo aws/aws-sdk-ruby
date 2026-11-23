@@ -1,6 +1,61 @@
 Unreleased Changes
 ------------------
 
+1.97.0 (2026-11-20)
+------------------
+
+* Feature - Adds responseInterceptionMode and responseStreamingConfiguration to gateway interceptor configurations. Set responseInterceptionMode to STREAM to have the response interceptor process streaming responses from HTTP and inference targets in batches of events.
+
+1.96.0 (2026-11-19)
+------------------
+
+* Feature - Adds AWS Billing payments to ProcessPayment. Agents can pay x402 sellers that accept AWS Marketplace billing, and the charge goes on the buyer's AWS bill. Adds support for nested virtualization in Runtime Instances. When you turn on nested virtualization, Runtime launches instances with KVM enabled.
+
+1.95.0 (2026-11-18)
+------------------
+
+* Feature - Adds s3BucketMount to mount an Amazon S3 bucket as a file system in AgentCore Runtime, with an optional per-session key prefix and adds operatingSystemConfiguration with a Linux privilegeMode (STANDARD or PRIVILEGED) to the capacity provider configuration
+
+1.94.0 (2026-11-17)
+------------------
+
+* Feature - Adds support for agent insight stores that help frame insight evaluators, and dataset source support for batch evaluation
+
+1.93.0 (2026-11-16)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.92.0 (2026-11-11)
+------------------
+
+* Feature - Adds private certificate authority (CA) support for AgentCore Identity custom OAuth2.0 credential providers and custom JWT authorizers, enabling connections to IdPs with private CAs. Support SigV4 request signing (cryptographically signed) in the Bedrock AgentCore Harness MCP connector tool.
+
+1.91.0 (2026-11-10)
+------------------
+
+* Feature - Amazon Bedrock AgentCore Gateway now supports domainOverride so JWT-authorized gateways can advertise your public domain in OAuth discovery behind a proxy or custom domain. AgentCore Runtime adds warmup lifecycle hooks and specifying runtime memory via hooksConfiguration and resourceConfigurations.
+
+1.90.0 (2026-11-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.89.0 (2026-11-06)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.88.0 (2026-11-05)
+------------------
+
+* Feature - Adds support for OAuth2 Authorization Server Metadata (RFC 8414) discovery URLs in custom JWT authorizer and OAuth2 credential provider configurations.
+
+1.87.0 (2026-11-04)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.86.0 (2026-10-29)
 ------------------
 

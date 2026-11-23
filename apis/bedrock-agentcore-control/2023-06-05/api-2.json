@@ -1195,6 +1195,24 @@
       ],
       "idempotent":true
     },
+    "GetAgentInsightStore":{
+      "name":"GetAgentInsightStore",
+      "http":{
+        "method":"GET",
+        "requestUri":"/agent-insight-stores/{agentInsightStoreId}",
+        "responseCode":200
+      },
+      "input":{"shape":"GetAgentInsightStoreRequest"},
+      "output":{"shape":"GetAgentInsightStoreResponse"},
+      "errors":[
+        {"shape":"ValidationException"},
+        {"shape":"AccessDeniedException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"InternalServerException"}
+      ],
+      "readonly":true
+    },
     "GetAgentRuntime":{
       "name":"GetAgentRuntime",
       "http":{
@@ -1836,6 +1854,23 @@
       ],
       "readonly":true
     },
+    "ListAgentInsightStores":{
+      "name":"ListAgentInsightStores",
+      "http":{
+        "method":"POST",
+        "requestUri":"/agent-insight-stores",
+        "responseCode":200
+      },
+      "input":{"shape":"ListAgentInsightStoresRequest"},
+      "output":{"shape":"ListAgentInsightStoresResponse"},
+      "errors":[
+        {"shape":"ValidationException"},
+        {"shape":"AccessDeniedException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"InternalServerException"}
+      ],
+      "readonly":true
+    },
     "ListAgentRuntimeEndpoints":{
       "name":"ListAgentRuntimeEndpoints",
       "http":{
@@ -2048,8 +2083,8 @@
     "ListDatasetExamples":{
       "name":"ListDatasetExamples",
       "http":{
-        "method":"GET",
-        "requestUri":"/datasets/{datasetId}/examples",
+        "method":"POST",
+        "requestUri":"/datasets/{datasetId}/examples/list",
         "responseCode":200
       },
       "input":{"shape":"ListDatasetExamplesRequest"},
@@ -2067,8 +2102,8 @@
     "ListDatasetVersions":{
       "name":"ListDatasetVersions",
       "http":{
-        "method":"GET",
-        "requestUri":"/datasets/{datasetId}/versions",
+        "method":"POST",
+        "requestUri":"/datasets/{datasetId}/versions/list",
         "responseCode":200
       },
       "input":{"shape":"ListDatasetVersionsRequest"},
@@ -2085,8 +2120,8 @@
     "ListDatasets":{
       "name":"ListDatasets",
       "http":{
-        "method":"GET",
-        "requestUri":"/datasets",
+        "method":"POST",
+        "requestUri":"/datasets/list",
         "responseCode":200
       },
       "input":{"shape":"ListDatasetsRequest"},
@@ -2709,6 +2744,26 @@
         {"shape":"AccessDeniedException"},
         {"shape":"ThrottlingException"},
         {"shape":"ResourceNotFoundException"},
+        {"shape":"InternalServerException"}
+      ],
+      "idempotent":true
+    },
+    "UpdateAgentInsightStore":{
+      "name":"UpdateAgentInsightStore",
+      "http":{
+        "method":"PUT",
+        "requestUri":"/agent-insight-stores/{agentInsightStoreId}",
+        "responseCode":202
+      },
+      "input":{"shape":"UpdateAgentInsightStoreRequest"},
+      "output":{"shape":"UpdateAgentInsightStoreResponse"},
+      "errors":[
+        {"shape":"ServiceQuotaExceededException"},
+        {"shape":"ValidationException"},
+        {"shape":"AccessDeniedException"},
+        {"shape":"ConflictException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ThrottlingException"},
         {"shape":"InternalServerException"}
       ],
       "idempotent":true
@@ -3370,6 +3425,78 @@
       "max":256,
       "min":1
     },
+    "AgentInsightStoreArn":{
+      "type":"string",
+      "pattern":"arn:aws(-[a-z]+)*:bedrock-agentcore:[a-z0-9-]+:[0-9]{12}:agent-insight-store\\/[a-z0-9-]{1,64}"
+    },
+    "AgentInsightStoreEnablementStatus":{
+      "type":"string",
+      "enum":[
+        "ENABLED",
+        "DISABLED"
+      ]
+    },
+    "AgentInsightStoreEncryptionConfiguration":{
+      "type":"structure",
+      "required":["mode"],
+      "members":{
+        "mode":{"shape":"AgentInsightStoreEncryptionMode"},
+        "kmsKeyArn":{"shape":"KmsKeyArn"}
+      }
+    },
+    "AgentInsightStoreEncryptionMode":{
+      "type":"string",
+      "enum":[
+        "AWS_OWNED_KMS_KEY",
+        "CUSTOMER_MANAGED_KMS"
+      ]
+    },
+    "AgentInsightStoreFailureReason":{
+      "type":"string",
+      "max":2048,
+      "min":0,
+      "sensitive":true
+    },
+    "AgentInsightStoreId":{
+      "type":"string",
+      "max":64,
+      "min":1,
+      "pattern":"[a-z0-9-]+"
+    },
+    "AgentInsightStoreStatus":{
+      "type":"string",
+      "enum":[
+        "ACTIVE",
+        "UPDATING",
+        "INACTIVE",
+        "ERROR"
+      ]
+    },
+    "AgentInsightStoreSummary":{
+      "type":"structure",
+      "required":[
+        "agentInsightStoreArn",
+        "agentInsightStoreId",
+        "status",
+        "enablementStatus",
+        "encryptionConfiguration",
+        "createdAt",
+        "updatedAt"
+      ],
+      "members":{
+        "agentInsightStoreArn":{"shape":"AgentInsightStoreArn"},
+        "agentInsightStoreId":{"shape":"AgentInsightStoreId"},
+        "status":{"shape":"AgentInsightStoreStatus"},
+        "enablementStatus":{"shape":"AgentInsightStoreEnablementStatus"},
+        "encryptionConfiguration":{"shape":"AgentInsightStoreEncryptionConfiguration"},
+        "createdAt":{"shape":"Timestamp"},
+        "updatedAt":{"shape":"Timestamp"}
+      }
+    },
+    "AgentInsightStoreSummaryList":{
+      "type":"list",
+      "member":{"shape":"AgentInsightStoreSummary"}
+    },
     "AgentManagedRuntimeType":{
       "type":"string",
       "enum":[
@@ -3790,6 +3917,13 @@
       "type":"string",
       "pattern":"[0-9]{12}"
     },
+    "AwsBillingConnectorConfiguration":{
+      "type":"structure",
+      "required":["iamRoleArn"],
+      "members":{
+        "iamRoleArn":{"shape":"RoleArn"}
+      }
+    },
     "BatchPutGatewayRateLimitsRequest":{
       "type":"structure",
       "required":[
@@ -4002,6 +4136,12 @@
         "lastUpdatedAt":{"shape":"DateTimestamp"}
       }
     },
+    "BuildLifecycleHooks":{
+      "type":"structure",
+      "members":{
+        "warmup":{"shape":"LifecycleHook"}
+      }
+    },
     "CapacityProviderArn":{
       "type":"string",
       "pattern":"arn:aws(-[^:]+)?:bedrock-agentcore:[a-z0-9-]+:[0-9]{12}:capacity-provider/[a-zA-Z][a-zA-Z0-9_]{0,47}-[a-zA-Z0-9]{10}"
@@ -4010,7 +4150,8 @@
       "type":"structure",
       "required":["capacityProviderArn"],
       "members":{
-        "capacityProviderArn":{"shape":"CapacityProviderArn"}
+        "capacityProviderArn":{"shape":"CapacityProviderArn"},
+        "operatingSystemConfiguration":{"shape":"OperatingSystemConfiguration"}
       }
     },
     "CapacityProviderId":{
@@ -4838,6 +4979,12 @@
       "type":"string",
       "enum":["MEMORY_RECORDS"]
     },
+    "CpuOptions":{
+      "type":"structure",
+      "members":{
+        "nestedVirtualization":{"shape":"NestedVirtualization"}
+      }
+    },
     "CreateAgentRuntimeEndpointRequest":{
       "type":"structure",
       "required":[
@@ -4900,12 +5047,14 @@
         "requestHeaderConfiguration":{"shape":"RequestHeaderConfiguration"},
         "protocolConfiguration":{"shape":"ProtocolConfiguration"},
         "lifecycleConfiguration":{"shape":"LifecycleConfiguration"},
+        "hooksConfiguration":{"shape":"RuntimeHooksConfiguration"},
         "environmentVariables":{"shape":"EnvironmentVariablesMap"},
         "filesystemConfigurations":{"shape":"FilesystemConfigurations"},
         "capacityProviderConfiguration":{"shape":"CapacityProviderConfiguration"},
         "tags":{"shape":"TagsMap"},
         "platformVersion":{"shape":"PlatformVersion"},
-        "allowedPorts":{"shape":"AllowedPorts"}
+        "allowedPorts":{"shape":"AllowedPorts"},
+        "resourceConfigurations":{"shape":"ResourceConfigurations"}
       }
     },
     "CreateAgentRuntimeResponse":{
@@ -5175,11 +5324,7 @@
     },
     "CreateDatasetRequest":{
       "type":"structure",
-      "required":[
-        "datasetName",
-        "source",
-        "schemaType"
-      ],
+      "required":["datasetName"],
       "members":{
         "clientToken":{
           "shape":"ClientToken",
@@ -5348,7 +5493,8 @@
         "interceptorConfigurations":{"shape":"GatewayInterceptorConfigurations"},
         "policyEngineConfiguration":{"shape":"GatewayPolicyEngineConfiguration"},
         "exceptionLevel":{"shape":"ExceptionLevel"},
-        "tags":{"shape":"TagsMap"}
+        "tags":{"shape":"TagsMap"},
+        "domainOverride":{"shape":"DomainOverride"}
       }
     },
     "CreateGatewayResponse":{
@@ -5384,7 +5530,8 @@
         "workloadIdentityDetails":{"shape":"WorkloadIdentityDetails"},
         "exceptionLevel":{"shape":"ExceptionLevel"},
         "webAclArn":{"shape":"WebAclArn"},
-        "wafConfiguration":{"shape":"WafConfiguration"}
+        "wafConfiguration":{"shape":"WafConfiguration"},
+        "domainOverride":{"shape":"DomainOverride"}
       }
     },
     "CreateGatewayRuleRequest":{
@@ -5587,7 +5734,7 @@
     "CreateMemoryInputEventExpiryDurationInteger":{
       "type":"integer",
       "box":true,
-      "max":365,
+      "max":3650,
       "min":3
     },
     "CreateMemoryOutput":{
@@ -5679,8 +5826,7 @@
       "required":[
         "paymentManagerId",
         "name",
-        "type",
-        "credentialProviderConfigurations"
+        "type"
       ],
       "members":{
         "paymentManagerId":{
@@ -6054,7 +6200,8 @@
       "type":"structure",
       "members":{
         "coinbaseCDP":{"shape":"PaymentCredentialProviderConfiguration"},
-        "stripePrivy":{"shape":"PaymentCredentialProviderConfiguration"}
+        "stripePrivy":{"shape":"PaymentCredentialProviderConfiguration"},
+        "awsBilling":{"shape":"AwsBillingConnectorConfiguration"}
       },
       "union":true
     },
@@ -6157,6 +6304,7 @@
         "customClaims":{"shape":"CustomClaimValidationsType"},
         "privateEndpoint":{"shape":"PrivateEndpoint"},
         "privateEndpointOverrides":{"shape":"PrivateEndpointOverrides"},
+        "certificateConfigurations":{"shape":"CertificateConfigurationList"},
         "allowedWorkloadConfiguration":{"shape":"AllowedWorkloadConfiguration"}
       }
     },
@@ -6191,7 +6339,8 @@
         "clientAuthenticationMethod":{"shape":"ClientAuthenticationMethodType"},
         "privateKeyJwtConfig":{"shape":"PrivateKeyJwtConfig"},
         "privateEndpoint":{"shape":"PrivateEndpoint"},
-        "privateEndpointOverrides":{"shape":"PrivateEndpointOverrides"}
+        "privateEndpointOverrides":{"shape":"PrivateEndpointOverrides"},
+        "certificateConfigurations":{"shape":"CertificateConfigurationList"}
       }
     },
     "CustomOauth2ProviderConfigOutput":{
@@ -6204,6 +6353,7 @@
         "clientAuthenticationMethod":{"shape":"ClientAuthenticationMethodType"},
         "privateEndpoint":{"shape":"PrivateEndpoint"},
         "privateEndpointOverrides":{"shape":"PrivateEndpointOverrides"},
+        "certificateConfigurations":{"shape":"CertificateConfigurationList"},
         "privateKeyJwtConfig":{"shape":"PrivateKeyJwtConfig"}
       }
     },
@@ -6255,6 +6405,10 @@
       "type":"list",
       "member":{"shape":"SensitiveJson"}
     },
+    "DatasetGenerationId":{
+      "type":"string",
+      "pattern":"[a-zA-Z][a-zA-Z0-9-_]{0,99}-[a-zA-Z0-9]{10}"
+    },
     "DatasetId":{
       "type":"string",
       "pattern":"[a-zA-Z0-9_-]{1,110}"
@@ -6290,7 +6444,6 @@
         "datasetId",
         "datasetName",
         "status",
-        "schemaType",
         "exampleCount",
         "createdAt",
         "updatedAt"
@@ -6304,6 +6457,7 @@
         "draftStatus":{"shape":"DraftStatus"},
         "schemaType":{"shape":"DatasetSchemaType"},
         "exampleCount":{"shape":"Long"},
+        "exampleCountByField":{"shape":"ExampleCountByField"},
         "createdAt":{"shape":"Timestamp"},
         "updatedAt":{"shape":"Timestamp"}
       }
@@ -6326,6 +6480,7 @@
       "members":{
         "datasetVersion":{"shape":"DatasetVersion"},
         "exampleCount":{"shape":"Long"},
+        "exampleCountByField":{"shape":"ExampleCountByField"},
         "createdAt":{"shape":"Timestamp"}
       }
     },
@@ -7268,11 +7423,11 @@
     },
     "DiscoveryUrl":{
       "type":"string",
-      "pattern":".+/\\.well-known/openid-configuration"
+      "pattern":"[^\\s?#]+/\\.well-known/(openid-configuration|oauth-authorization-server)(/[^\\s?#]+)?"
     },
     "DiscoveryUrlType":{
       "type":"string",
-      "pattern":".+/\\.well-known/(openid-configuration|oauth-authorization-server)"
+      "pattern":"[^\\s?#]+/\\.well-known/(openid-configuration|oauth-authorization-server)(/[^\\s?#]+)?"
     },
     "Document":{
       "type":"structure",
@@ -7280,6 +7435,17 @@
       "document":true
     },
     "DomainName":{"type":"string"},
+    "DomainOverride":{
+      "type":"structure",
+      "required":["defaultDomain"],
+      "members":{
+        "defaultDomain":{
+          "shape":"PublicDomainName",
+          "locationName":"default"
+        },
+        "alternateDomains":{"shape":"PublicDomainNameList"}
+      }
+    },
     "Double":{
       "type":"double",
       "box":true
@@ -7778,6 +7944,69 @@
         "CustomDerived"
       ]
     },
+    "ExampleCountByField":{
+      "type":"structure",
+      "required":[
+        "turns",
+        "input",
+        "actorProfile"
+      ],
+      "members":{
+        "turns":{"shape":"Long"},
+        "input":{"shape":"Long"},
+        "actorProfile":{"shape":"Long"}
+      }
+    },
+    "ExampleCountByFieldCondition":{
+      "type":"structure",
+      "members":{
+        "anyOf":{"shape":"ExampleFieldList"},
+        "min":{"shape":"ExampleCountByFieldConditionMinLong"},
+        "max":{"shape":"ExampleCountByFieldConditionMaxLong"}
+      }
+    },
+    "ExampleCountByFieldConditionList":{
+      "type":"list",
+      "member":{"shape":"ExampleCountByFieldCondition"},
+      "max":3,
+      "min":1
+    },
+    "ExampleCountByFieldConditionMaxLong":{
+      "type":"long",
+      "box":true,
+      "min":0
+    },
+    "ExampleCountByFieldConditionMinLong":{
+      "type":"long",
+      "box":true,
+      "min":0
+    },
+    "ExampleField":{
+      "type":"string",
+      "enum":[
+        "TURNS",
+        "INPUT",
+        "ACTOR_PROFILE"
+      ]
+    },
+    "ExampleFieldCondition":{
+      "type":"structure",
+      "members":{
+        "anyOf":{"shape":"ExampleFieldList"}
+      }
+    },
+    "ExampleFieldConditionList":{
+      "type":"list",
+      "member":{"shape":"ExampleFieldCondition"},
+      "max":3,
+      "min":1
+    },
+    "ExampleFieldList":{
+      "type":"list",
+      "member":{"shape":"ExampleField"},
+      "max":3,
+      "min":1
+    },
     "ExampleId":{
       "type":"string",
       "max":256,
@@ -7888,7 +8117,8 @@
         "sessionStorage":{"shape":"SessionStorageConfiguration"},
         "s3FilesAccessPoint":{"shape":"S3FilesAccessPointConfiguration"},
         "efsAccessPoint":{"shape":"EfsAccessPointConfiguration"},
-        "capacityProviderVolume":{"shape":"CapacityProviderVolumeConfiguration"}
+        "capacityProviderVolume":{"shape":"CapacityProviderVolumeConfiguration"},
+        "s3BucketMount":{"shape":"S3BucketMountConfiguration"}
       },
       "union":true
     },
@@ -8029,7 +8259,9 @@
       "members":{
         "interceptor":{"shape":"InterceptorConfiguration"},
         "interceptionPoints":{"shape":"GatewayInterceptionPoints"},
-        "inputConfiguration":{"shape":"InterceptorInputConfiguration"}
+        "inputConfiguration":{"shape":"InterceptorInputConfiguration"},
+        "responseInterceptionMode":{"shape":"ResponseInterceptionMode"},
+        "responseStreamingConfiguration":{"shape":"ResponseStreamingConfiguration"}
       }
     },
     "GatewayInterceptorConfigurations":{
@@ -8289,6 +8521,39 @@
       "max":1024,
       "min":1
     },
+    "GetAgentInsightStoreRequest":{
+      "type":"structure",
+      "required":["agentInsightStoreId"],
+      "members":{
+        "agentInsightStoreId":{
+          "shape":"AgentInsightStoreId",
+          "location":"uri",
+          "locationName":"agentInsightStoreId"
+        }
+      }
+    },
+    "GetAgentInsightStoreResponse":{
+      "type":"structure",
+      "required":[
+        "agentInsightStoreArn",
+        "agentInsightStoreId",
+        "status",
+        "enablementStatus",
+        "encryptionConfiguration",
+        "createdAt",
+        "updatedAt"
+      ],
+      "members":{
+        "agentInsightStoreArn":{"shape":"AgentInsightStoreArn"},
+        "agentInsightStoreId":{"shape":"AgentInsightStoreId"},
+        "status":{"shape":"AgentInsightStoreStatus"},
+        "enablementStatus":{"shape":"AgentInsightStoreEnablementStatus"},
+        "encryptionConfiguration":{"shape":"AgentInsightStoreEncryptionConfiguration"},
+        "createdAt":{"shape":"Timestamp"},
+        "updatedAt":{"shape":"Timestamp"},
+        "failureReason":{"shape":"AgentInsightStoreFailureReason"}
+      }
+    },
     "GetAgentRuntimeEndpointRequest":{
       "type":"structure",
       "required":[
@@ -8373,6 +8638,7 @@
         "networkConfiguration":{"shape":"NetworkConfiguration"},
         "status":{"shape":"AgentRuntimeStatus"},
         "lifecycleConfiguration":{"shape":"LifecycleConfiguration"},
+        "hooksConfiguration":{"shape":"RuntimeHooksConfiguration"},
         "failureReason":{"shape":"String"},
         "description":{"shape":"Description"},
         "workloadIdentityDetails":{"shape":"WorkloadIdentityDetails"},
@@ -8385,7 +8651,8 @@
         "filesystemConfigurations":{"shape":"FilesystemConfigurations"},
         "capacityProviderConfiguration":{"shape":"CapacityProviderConfiguration"},
         "platformVersion":{"shape":"PlatformVersion"},
-        "allowedPorts":{"shape":"AllowedPorts"}
+        "allowedPorts":{"shape":"AllowedPorts"},
+        "resourceConfigurations":{"shape":"ResourceConfigurations"}
       }
     },
     "GetApiKeyCredentialProviderRequest":{
@@ -8704,7 +8971,6 @@
         "datasetVersion",
         "datasetName",
         "status",
-        "schemaType",
         "exampleCount",
         "createdAt",
         "updatedAt"
@@ -8721,6 +8987,7 @@
         "schemaType":{"shape":"DatasetSchemaType"},
         "kmsKeyArn":{"shape":"KmsKeyArn"},
         "exampleCount":{"shape":"Long"},
+        "exampleCountByField":{"shape":"ExampleCountByField"},
         "downloadUrl":{"shape":"DownloadUrl"},
         "downloadUrlExpiresAt":{"shape":"Timestamp"},
         "createdAt":{"shape":"Timestamp"},
@@ -8857,7 +9124,8 @@
         "workloadIdentityDetails":{"shape":"WorkloadIdentityDetails"},
         "exceptionLevel":{"shape":"ExceptionLevel"},
         "webAclArn":{"shape":"WebAclArn"},
-        "wafConfiguration":{"shape":"WafConfiguration"}
+        "wafConfiguration":{"shape":"WafConfiguration"},
+        "domainOverride":{"shape":"DomainOverride"}
       }
     },
     "GetGatewayRuleRequest":{
@@ -10151,8 +10419,17 @@
       "required":["url"],
       "members":{
         "url":{"shape":"HarnessRemoteMcpUrl"},
-        "headers":{"shape":"HttpHeadersMap"}
+        "headers":{"shape":"HttpHeadersMap"},
+        "outboundAuth":{"shape":"HarnessRemoteMcpOutboundAuth"}
       }
+    },
+    "HarnessRemoteMcpOutboundAuth":{
+      "type":"structure",
+      "members":{
+        "awsIam":{"shape":"IamCredentialProvider"},
+        "none":{"shape":"Unit"}
+      },
+      "union":true
     },
     "HarnessRemoteMcpUrl":{
       "type":"string",
@@ -10452,6 +10729,14 @@
       "key":{"shape":"HttpHeaderKey"},
       "value":{"shape":"HttpHeaderValue"},
       "sensitive":true
+    },
+    "HttpPostLifecycleHookAction":{
+      "type":"structure",
+      "required":["path"],
+      "members":{
+        "path":{"shape":"LifecycleHookPath"},
+        "port":{"shape":"ServerPort"}
+      }
     },
     "HttpQueryParameterName":{
       "type":"string",
@@ -10925,7 +11210,8 @@
         "capacityReservationSpecification":{"shape":"CapacityReservationSpecification"},
         "sshKeyName":{"shape":"SSHKeyName"},
         "instanceProfileArn":{"shape":"InstanceProfileArn"},
-        "propagatedTags":{"shape":"TagsMap"}
+        "propagatedTags":{"shape":"TagsMap"},
+        "cpuOptions":{"shape":"CpuOptions"}
       }
     },
     "LaunchParametersEphemeralVolumesList":{
@@ -10979,6 +11265,26 @@
       "max":1209600,
       "min":60
     },
+    "LifecycleHook":{
+      "type":"structure",
+      "required":["action"],
+      "members":{
+        "action":{"shape":"LifecycleHookAction"}
+      }
+    },
+    "LifecycleHookAction":{
+      "type":"structure",
+      "members":{
+        "httpPost":{"shape":"HttpPostLifecycleHookAction"}
+      },
+      "union":true
+    },
+    "LifecycleHookPath":{
+      "type":"string",
+      "max":32,
+      "min":1,
+      "pattern":"/[A-Za-z0-9._~/-]*"
+    },
     "LimitEntries":{
       "type":"list",
       "member":{"shape":"LimitEntry"},
@@ -11018,6 +11324,46 @@
       "members":{
         "oauthDiscovery":{"shape":"Oauth2Discovery"},
         "clientId":{"shape":"ClientIdType"}
+      }
+    },
+    "LinuxOperatingSystemConfiguration":{
+      "type":"structure",
+      "members":{
+        "privilegeMode":{"shape":"PrivilegeMode"}
+      }
+    },
+    "ListAgentInsightStoresRequest":{
+      "type":"structure",
+      "members":{
+        "nextToken":{
+          "shape":"ListAgentInsightStoresRequestNextTokenString",
+          "location":"querystring",
+          "locationName":"nextToken"
+        },
+        "maxResults":{
+          "shape":"ListAgentInsightStoresRequestMaxResultsInteger",
+          "location":"querystring",
+          "locationName":"maxResults"
+        }
+      }
+    },
+    "ListAgentInsightStoresRequestMaxResultsInteger":{
+      "type":"integer",
+      "box":true,
+      "max":100,
+      "min":1
+    },
+    "ListAgentInsightStoresRequestNextTokenString":{
+      "type":"string",
+      "max":2048,
+      "min":0
+    },
+    "ListAgentInsightStoresResponse":{
+      "type":"structure",
+      "required":["agentInsightStores"],
+      "members":{
+        "agentInsightStores":{"shape":"AgentInsightStoreSummaryList"},
+        "nextToken":{"shape":"String"}
       }
     },
     "ListAgentRuntimeEndpointsRequest":{
@@ -11334,6 +11680,19 @@
         "nextToken":{"shape":"String"}
       }
     },
+    "ListDatasetExamplesFilter":{
+      "type":"structure",
+      "members":{
+        "generationIds":{"shape":"ListDatasetExamplesFilterGenerationIdsList"},
+        "exampleFields":{"shape":"ExampleFieldConditionList"}
+      }
+    },
+    "ListDatasetExamplesFilterGenerationIdsList":{
+      "type":"list",
+      "member":{"shape":"DatasetGenerationId"},
+      "max":1,
+      "min":1
+    },
     "ListDatasetExamplesRequest":{
       "type":"structure",
       "required":["datasetId"],
@@ -11343,21 +11702,10 @@
           "location":"uri",
           "locationName":"datasetId"
         },
-        "datasetVersion":{
-          "shape":"DatasetVersion",
-          "location":"querystring",
-          "locationName":"datasetVersion"
-        },
-        "maxResults":{
-          "shape":"ListDatasetExamplesRequestMaxResultsInteger",
-          "location":"querystring",
-          "locationName":"maxResults"
-        },
-        "nextToken":{
-          "shape":"ListDatasetExamplesRequestNextTokenString",
-          "location":"querystring",
-          "locationName":"nextToken"
-        }
+        "datasetVersion":{"shape":"DatasetVersion"},
+        "filter":{"shape":"ListDatasetExamplesFilter"},
+        "maxResults":{"shape":"ListDatasetExamplesRequestMaxResultsInteger"},
+        "nextToken":{"shape":"ListDatasetExamplesRequestNextTokenString"}
       }
     },
     "ListDatasetExamplesRequestMaxResultsInteger":{
@@ -11387,6 +11735,12 @@
         "nextToken":{"shape":"String"}
       }
     },
+    "ListDatasetVersionsFilter":{
+      "type":"structure",
+      "members":{
+        "exampleCountByField":{"shape":"ExampleCountByFieldConditionList"}
+      }
+    },
     "ListDatasetVersionsRequest":{
       "type":"structure",
       "required":["datasetId"],
@@ -11396,16 +11750,9 @@
           "location":"uri",
           "locationName":"datasetId"
         },
-        "nextToken":{
-          "shape":"String",
-          "location":"querystring",
-          "locationName":"nextToken"
-        },
-        "maxResults":{
-          "shape":"ListDatasetVersionsRequestMaxResultsInteger",
-          "location":"querystring",
-          "locationName":"maxResults"
-        }
+        "filter":{"shape":"ListDatasetVersionsFilter"},
+        "nextToken":{"shape":"ListDatasetVersionsRequestNextTokenString"},
+        "maxResults":{"shape":"ListDatasetVersionsRequestMaxResultsInteger"}
       }
     },
     "ListDatasetVersionsRequestMaxResultsInteger":{
@@ -11413,6 +11760,11 @@
       "box":true,
       "max":100,
       "min":1
+    },
+    "ListDatasetVersionsRequestNextTokenString":{
+      "type":"string",
+      "max":2048,
+      "min":0
     },
     "ListDatasetVersionsResponse":{
       "type":"structure",
@@ -11422,19 +11774,18 @@
         "nextToken":{"shape":"String"}
       }
     },
+    "ListDatasetsFilter":{
+      "type":"structure",
+      "members":{
+        "exampleCountByField":{"shape":"ExampleCountByFieldConditionList"}
+      }
+    },
     "ListDatasetsRequest":{
       "type":"structure",
       "members":{
-        "nextToken":{
-          "shape":"ListDatasetsRequestNextTokenString",
-          "location":"querystring",
-          "locationName":"nextToken"
-        },
-        "maxResults":{
-          "shape":"ListDatasetsRequestMaxResultsInteger",
-          "location":"querystring",
-          "locationName":"maxResults"
-        }
+        "filter":{"shape":"ListDatasetsFilter"},
+        "nextToken":{"shape":"ListDatasetsRequestNextTokenString"},
+        "maxResults":{"shape":"ListDatasetsRequestMaxResultsInteger"}
       }
     },
     "ListDatasetsRequestMaxResultsInteger":{
@@ -12305,6 +12656,12 @@
       "member":{"shape":"MatchValueString"},
       "min":1
     },
+    "MaxEventsPerInvocation":{
+      "type":"integer",
+      "box":true,
+      "max":8192,
+      "min":1
+    },
     "MaxResults":{
       "type":"integer",
       "box":true,
@@ -12422,7 +12779,7 @@
     "MemoryEventExpiryDurationInteger":{
       "type":"integer",
       "box":true,
-      "max":365,
+      "max":3650,
       "min":1
     },
     "MemoryId":{
@@ -12815,6 +13172,13 @@
       "max":2000,
       "min":1
     },
+    "NestedVirtualization":{
+      "type":"string",
+      "enum":[
+        "ENABLED",
+        "DISABLED"
+      ]
+    },
     "NetworkConfiguration":{
       "type":"structure",
       "required":["networkMode"],
@@ -13152,6 +13516,13 @@
         "LINUX_ARM64"
       ]
     },
+    "OperatingSystemConfiguration":{
+      "type":"structure",
+      "members":{
+        "linux":{"shape":"LinuxOperatingSystemConfiguration"}
+      },
+      "union":true
+    },
     "OptionalLogGroupName":{
       "type":"string",
       "pattern":"$|^[.\\-_/#A-Za-z0-9]+"
@@ -13271,7 +13642,8 @@
       "type":"string",
       "enum":[
         "CoinbaseCDP",
-        "StripePrivy"
+        "StripePrivy",
+        "AwsBilling"
       ]
     },
     "PaymentCredentialProviderArn":{
@@ -13808,6 +14180,13 @@
       },
       "union":true
     },
+    "PrivilegeMode":{
+      "type":"string",
+      "enum":[
+        "STANDARD",
+        "PRIVILEGED"
+      ]
+    },
     "Prompt":{
       "type":"string",
       "max":30000,
@@ -13842,6 +14221,18 @@
     "ProviderPrefixSeparatorString":{
       "type":"string",
       "max":1,
+      "min":1
+    },
+    "PublicDomainName":{
+      "type":"string",
+      "max":253,
+      "min":1,
+      "pattern":"(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)(?:\\.(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?))+"
+    },
+    "PublicDomainNameList":{
+      "type":"list",
+      "member":{"shape":"PublicDomainName"},
+      "max":10,
       "min":1
     },
     "PutResourcePolicyRequest":{
@@ -14185,11 +14576,24 @@
       "type":"string",
       "pattern":"arn:[a-z0-9\\-]+:vpc-lattice:[a-zA-Z0-9\\-]+:\\d{12}:servicenetworkresourceassociation/snra-[0-9a-f]{17}"
     },
+    "ResourceConfiguration":{
+      "type":"structure",
+      "required":["minimumMemoryInMiB"],
+      "members":{
+        "minimumMemoryInMiB":{"shape":"Integer"}
+      }
+    },
     "ResourceConfigurationIdentifier":{
       "type":"string",
       "max":2048,
       "min":20,
       "pattern":"((rcfg-[0-9a-z]{17})|(arn:[a-z0-9\\-]+:vpc-lattice:[a-zA-Z0-9\\-]+:\\d{12}:resourceconfiguration/rcfg-[0-9a-z]{17}))"
+    },
+    "ResourceConfigurations":{
+      "type":"list",
+      "member":{"shape":"ResourceConfiguration"},
+      "max":1,
+      "min":0
     },
     "ResourceGatewayArn":{
       "type":"string",
@@ -14252,9 +14656,22 @@
         "CUSTOM"
       ]
     },
+    "ResponseInterceptionMode":{
+      "type":"string",
+      "enum":[
+        "BUFFERED",
+        "STREAM"
+      ]
+    },
     "ResponseListType":{
       "type":"list",
       "member":{"shape":"ResponseType"}
+    },
+    "ResponseStreamingConfiguration":{
+      "type":"structure",
+      "members":{
+        "maxEventsPerInvocation":{"shape":"MaxEventsPerInvocation"}
+      }
     },
     "ResponseType":{"type":"string"},
     "RestApiMethod":{
@@ -14394,6 +14811,12 @@
       "min":1,
       "pattern":"(([0-9]{12})\\.dkr\\.ecr\\.([a-z0-9-]+)\\.amazonaws\\.com(\\.cn)?|public\\.ecr\\.aws)/((?:[a-z0-9]+(?:[._-][a-z0-9]+)*/)*[a-z0-9]+(?:[._-][a-z0-9]+)*)(?::([^:@]{1,300}))?(?:@(.+))?"
     },
+    "RuntimeHooksConfiguration":{
+      "type":"structure",
+      "members":{
+        "build":{"shape":"BuildLifecycleHooks"}
+      }
+    },
     "RuntimeMetadataConfiguration":{
       "type":"structure",
       "required":["requireMMDSV2"],
@@ -14413,6 +14836,41 @@
         "qualifier":{"shape":"RuntimeQualifier"},
         "schema":{"shape":"HttpApiSchemaConfiguration"}
       }
+    },
+    "S3BucketMountConfiguration":{
+      "type":"structure",
+      "required":[
+        "bucket",
+        "mountPath"
+      ],
+      "members":{
+        "bucket":{"shape":"S3BucketMountConfigurationBucketString"},
+        "mountPath":{"shape":"MountPath"},
+        "prefix":{"shape":"S3BucketMountConfigurationPrefixString"},
+        "s3BucketOwner":{"shape":"S3BucketMountConfigurationS3BucketOwnerString"},
+        "s3BucketRegion":{"shape":"S3BucketMountConfigurationS3BucketRegionString"}
+      }
+    },
+    "S3BucketMountConfigurationBucketString":{
+      "type":"string",
+      "max":63,
+      "min":3
+    },
+    "S3BucketMountConfigurationPrefixString":{
+      "type":"string",
+      "max":1024,
+      "min":1,
+      "pattern":"[a-zA-Z0-9{][a-zA-Z0-9!_.*'()/{}-]*"
+    },
+    "S3BucketMountConfigurationS3BucketOwnerString":{
+      "type":"string",
+      "pattern":"[0-9]{12}"
+    },
+    "S3BucketMountConfigurationS3BucketRegionString":{
+      "type":"string",
+      "max":32,
+      "min":1,
+      "pattern":"([a-z]+-){2,3}\\d+"
     },
     "S3BucketUri":{
       "type":"string",
@@ -15815,6 +16273,41 @@
       "type":"structure",
       "members":{}
     },
+    "UpdateAgentInsightStoreRequest":{
+      "type":"structure",
+      "required":["agentInsightStoreId"],
+      "members":{
+        "clientToken":{
+          "shape":"ClientToken",
+          "idempotencyToken":true
+        },
+        "agentInsightStoreId":{
+          "shape":"AgentInsightStoreId",
+          "location":"uri",
+          "locationName":"agentInsightStoreId"
+        },
+        "enablementStatus":{"shape":"AgentInsightStoreEnablementStatus"},
+        "encryptionConfiguration":{"shape":"AgentInsightStoreEncryptionConfiguration"}
+      }
+    },
+    "UpdateAgentInsightStoreResponse":{
+      "type":"structure",
+      "required":[
+        "agentInsightStoreArn",
+        "agentInsightStoreId",
+        "status",
+        "enablementStatus",
+        "updatedAt"
+      ],
+      "members":{
+        "agentInsightStoreArn":{"shape":"AgentInsightStoreArn"},
+        "agentInsightStoreId":{"shape":"AgentInsightStoreId"},
+        "status":{"shape":"AgentInsightStoreStatus"},
+        "enablementStatus":{"shape":"AgentInsightStoreEnablementStatus"},
+        "updatedAt":{"shape":"Timestamp"},
+        "failureReason":{"shape":"AgentInsightStoreFailureReason"}
+      }
+    },
     "UpdateAgentRuntimeEndpointRequest":{
       "type":"structure",
       "required":[
@@ -15880,12 +16373,14 @@
         "requestHeaderConfiguration":{"shape":"RequestHeaderConfiguration"},
         "protocolConfiguration":{"shape":"ProtocolConfiguration"},
         "lifecycleConfiguration":{"shape":"LifecycleConfiguration"},
+        "hooksConfiguration":{"shape":"RuntimeHooksConfiguration"},
         "metadataConfiguration":{"shape":"RuntimeMetadataConfiguration"},
         "environmentVariables":{"shape":"EnvironmentVariablesMap"},
         "filesystemConfigurations":{"shape":"FilesystemConfigurations"},
         "capacityProviderConfiguration":{"shape":"CapacityProviderConfiguration"},
         "platformVersion":{"shape":"PlatformVersion"},
         "allowedPorts":{"shape":"AllowedPorts"},
+        "resourceConfigurations":{"shape":"ResourceConfigurations"},
         "clientToken":{
           "shape":"ClientToken",
           "idempotencyToken":true
@@ -16241,7 +16736,8 @@
         "interceptorConfigurations":{"shape":"GatewayInterceptorConfigurations"},
         "policyEngineConfiguration":{"shape":"GatewayPolicyEngineConfiguration"},
         "exceptionLevel":{"shape":"ExceptionLevel"},
-        "wafConfiguration":{"shape":"WafConfiguration"}
+        "wafConfiguration":{"shape":"WafConfiguration"},
+        "domainOverride":{"shape":"DomainOverride"}
       }
     },
     "UpdateGatewayResponse":{
@@ -16277,7 +16773,8 @@
         "workloadIdentityDetails":{"shape":"WorkloadIdentityDetails"},
         "exceptionLevel":{"shape":"ExceptionLevel"},
         "webAclArn":{"shape":"WebAclArn"},
-        "wafConfiguration":{"shape":"WafConfiguration"}
+        "wafConfiguration":{"shape":"WafConfiguration"},
+        "domainOverride":{"shape":"DomainOverride"}
       }
     },
     "UpdateGatewayRuleRequest":{
@@ -16485,7 +16982,7 @@
     "UpdateMemoryInputEventExpiryDurationInteger":{
       "type":"integer",
       "box":true,
-      "max":365,
+      "max":3650,
       "min":3
     },
     "UpdateMemoryOutput":{

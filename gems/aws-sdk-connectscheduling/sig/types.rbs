@@ -1,0 +1,178 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::ConnectScheduling
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ActorInfo
+      attr_accessor connect_user_arn: ::String
+      attr_accessor aws_identity_arn: ::String
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class ConnectUserArn < ActorInfo
+      end
+      class AwsIdentityArn < ActorInfo
+      end
+      class Unknown < ActorInfo
+      end
+    end
+
+    class ApproveTimeOffRequest
+      attr_accessor instance_id: ::String
+      attr_accessor user_id: ::String
+      attr_accessor time_off_id: ::String
+      attr_accessor description: ::String
+      attr_accessor rule_failure_action: ("REJECT" | "OVERRIDE")
+      SENSITIVE: [:description]
+    end
+
+    class ApproveTimeOffResponse < Aws::EmptyStructure
+    end
+
+    class CancelTimeOffRequest
+      attr_accessor instance_id: ::String
+      attr_accessor user_id: ::String
+      attr_accessor time_off_id: ::String
+      attr_accessor description: ::String
+      SENSITIVE: [:description]
+    end
+
+    class CancelTimeOffResponse < Aws::EmptyStructure
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ::String
+      SENSITIVE: []
+    end
+
+    class CreateTimeOffRequest
+      attr_accessor instance_id: ::String
+      attr_accessor user_id: ::String
+      attr_accessor shift_activity_id: ::String
+      attr_accessor start_at: ::Time
+      attr_accessor end_at: ::Time
+      attr_accessor description: ::String
+      attr_accessor approval_type: ("AWAIT_APPROVAL" | "AUTOMATIC")
+      attr_accessor rule_failure_action: ("REJECT" | "OVERRIDE")
+      attr_accessor client_token: ::String
+      SENSITIVE: [:description]
+    end
+
+    class CreateTimeOffResponse
+      attr_accessor time_off_id: ::String
+      SENSITIVE: []
+    end
+
+    class Duration
+      attr_accessor value: ::Integer
+      attr_accessor unit: ("MINUTES" | "HOURS" | "DAYS")
+      SENSITIVE: []
+    end
+
+    class GetTimeOffRequest
+      attr_accessor instance_id: ::String
+      attr_accessor user_id: ::String
+      attr_accessor time_off_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetTimeOffResponse
+      attr_accessor time_off_id: ::String
+      attr_accessor user_id: ::String
+      attr_accessor shift_activity_id: ::String
+      attr_accessor start_at: ::Time
+      attr_accessor end_at: ::Time
+      attr_accessor status: ("PENDING" | "APPROVED" | "REJECTED" | "CANCELLED" | "AWAITING_APPROVAL")
+      attr_accessor description: ::String
+      attr_accessor validation_results: ::Array[Types::TimeOffValidationResult]
+      attr_accessor created_by: Types::ActorInfo
+      attr_accessor created_at: ::Time
+      attr_accessor updated_by: Types::ActorInfo
+      attr_accessor updated_at: ::Time
+      SENSITIVE: [:description]
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      attr_accessor retry_after_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class PutTimeOffBalanceRequest
+      attr_accessor instance_id: ::String
+      attr_accessor user_id: ::String
+      attr_accessor shift_activity_id: ::String
+      attr_accessor balance: Types::Duration
+      SENSITIVE: []
+    end
+
+    class PutTimeOffBalanceResponse < Aws::EmptyStructure
+    end
+
+    class RejectTimeOffRequest
+      attr_accessor instance_id: ::String
+      attr_accessor user_id: ::String
+      attr_accessor time_off_id: ::String
+      attr_accessor description: ::String
+      SENSITIVE: [:description]
+    end
+
+    class RejectTimeOffResponse < Aws::EmptyStructure
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceQuotaExceededException
+      attr_accessor message: ::String
+      attr_accessor quota_code: ::String
+      attr_accessor service_code: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ::String
+      SENSITIVE: []
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      attr_accessor quota_code: ::String
+      attr_accessor service_code: ::String
+      attr_accessor retry_after_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class TimeOffValidationResult
+      attr_accessor severity: ("WARNING" | "ERROR")
+      attr_accessor code: ("INSUFFICIENT_USER_TIME_OFF_BALANCE" | "INSUFFICIENT_GROUP_TIME_OFF_ALLOWANCE" | "INSUFFICIENT_STAFFING_GROUP_TIME_OFF_ALLOWANCE" | "CONFLICTING_TIME_OFF_REQUEST")
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      attr_accessor reason: ("UNKNOWN_OPERATION" | "CANNOT_PARSE" | "FIELD_VALIDATION_FAILED" | "OTHER")
+      attr_accessor field_list: ::Array[Types::ValidationExceptionField]
+      SENSITIVE: []
+    end
+
+    class ValidationExceptionField
+      attr_accessor name: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+  end
+end

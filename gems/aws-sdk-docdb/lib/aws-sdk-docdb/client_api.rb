@@ -133,6 +133,7 @@ module Aws::DocDB
     DescribeGlobalClustersMessage = Shapes::StructureShape.new(name: 'DescribeGlobalClustersMessage')
     DescribeOrderableDBInstanceOptionsMessage = Shapes::StructureShape.new(name: 'DescribeOrderableDBInstanceOptionsMessage')
     DescribePendingMaintenanceActionsMessage = Shapes::StructureShape.new(name: 'DescribePendingMaintenanceActionsMessage')
+    DescribeServerlessV2PlatformVersionsMessage = Shapes::StructureShape.new(name: 'DescribeServerlessV2PlatformVersionsMessage')
     DoubleOptional = Shapes::FloatShape.new(name: 'DoubleOptional')
     Endpoint = Shapes::StructureShape.new(name: 'Endpoint')
     EngineDefaults = Shapes::StructureShape.new(name: 'EngineDefaults')
@@ -235,6 +236,9 @@ module Aws::DocDB
     SNSNoAuthorizationFault = Shapes::StructureShape.new(name: 'SNSNoAuthorizationFault', error: {"code" => "SNSNoAuthorization", "httpStatusCode" => 400, "senderFault" => true})
     SNSTopicArnNotFoundFault = Shapes::StructureShape.new(name: 'SNSTopicArnNotFoundFault', error: {"code" => "SNSTopicArnNotFound", "httpStatusCode" => 404, "senderFault" => true})
     ServerlessV2FeaturesSupport = Shapes::StructureShape.new(name: 'ServerlessV2FeaturesSupport')
+    ServerlessV2PlatformVersionInfo = Shapes::StructureShape.new(name: 'ServerlessV2PlatformVersionInfo')
+    ServerlessV2PlatformVersionList = Shapes::ListShape.new(name: 'ServerlessV2PlatformVersionList')
+    ServerlessV2PlatformVersionsMessage = Shapes::StructureShape.new(name: 'ServerlessV2PlatformVersionsMessage')
     ServerlessV2ScalingConfiguration = Shapes::StructureShape.new(name: 'ServerlessV2ScalingConfiguration')
     ServerlessV2ScalingConfigurationInfo = Shapes::StructureShape.new(name: 'ServerlessV2ScalingConfigurationInfo')
     SharedSnapshotQuotaExceededFault = Shapes::StructureShape.new(name: 'SharedSnapshotQuotaExceededFault', error: {"code" => "SharedSnapshotQuotaExceeded", "httpStatusCode" => 400, "senderFault" => true})
@@ -485,6 +489,7 @@ module Aws::DocDB
     DBCluster.add_member(:io_optimized_next_allowed_modification_time, Shapes::ShapeRef.new(shape: TStamp, location_name: "IOOptimizedNextAllowedModificationTime"))
     DBCluster.add_member(:storage_type, Shapes::ShapeRef.new(shape: String, location_name: "StorageType"))
     DBCluster.add_member(:serverless_v2_scaling_configuration, Shapes::ShapeRef.new(shape: ServerlessV2ScalingConfigurationInfo, location_name: "ServerlessV2ScalingConfiguration"))
+    DBCluster.add_member(:serverless_v2_platform_version, Shapes::ShapeRef.new(shape: String, location_name: "ServerlessV2PlatformVersion"))
     DBCluster.add_member(:master_user_secret, Shapes::ShapeRef.new(shape: ClusterMasterUserSecret, location_name: "MasterUserSecret"))
     DBCluster.add_member(:network_type, Shapes::ShapeRef.new(shape: String, location_name: "NetworkType"))
     DBCluster.add_member(:copy_tags_to_snapshot, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "CopyTagsToSnapshot"))
@@ -838,6 +843,15 @@ module Aws::DocDB
     DescribePendingMaintenanceActionsMessage.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
     DescribePendingMaintenanceActionsMessage.add_member(:max_records, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxRecords"))
     DescribePendingMaintenanceActionsMessage.struct_class = Types::DescribePendingMaintenanceActionsMessage
+
+    DescribeServerlessV2PlatformVersionsMessage.add_member(:serverless_v2_platform_version, Shapes::ShapeRef.new(shape: String, location_name: "ServerlessV2PlatformVersion"))
+    DescribeServerlessV2PlatformVersionsMessage.add_member(:engine, Shapes::ShapeRef.new(shape: String, location_name: "Engine"))
+    DescribeServerlessV2PlatformVersionsMessage.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filters"))
+    DescribeServerlessV2PlatformVersionsMessage.add_member(:default_only, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "DefaultOnly"))
+    DescribeServerlessV2PlatformVersionsMessage.add_member(:include_all, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "IncludeAll"))
+    DescribeServerlessV2PlatformVersionsMessage.add_member(:max_records, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxRecords"))
+    DescribeServerlessV2PlatformVersionsMessage.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
+    DescribeServerlessV2PlatformVersionsMessage.struct_class = Types::DescribeServerlessV2PlatformVersionsMessage
 
     Endpoint.add_member(:address, Shapes::ShapeRef.new(shape: String, location_name: "Address"))
     Endpoint.add_member(:port, Shapes::ShapeRef.new(shape: Integer, location_name: "Port"))
@@ -1245,6 +1259,20 @@ module Aws::DocDB
     ServerlessV2FeaturesSupport.add_member(:min_capacity, Shapes::ShapeRef.new(shape: DoubleOptional, location_name: "MinCapacity"))
     ServerlessV2FeaturesSupport.add_member(:max_capacity, Shapes::ShapeRef.new(shape: DoubleOptional, location_name: "MaxCapacity"))
     ServerlessV2FeaturesSupport.struct_class = Types::ServerlessV2FeaturesSupport
+
+    ServerlessV2PlatformVersionInfo.add_member(:serverless_v2_platform_version, Shapes::ShapeRef.new(shape: String, location_name: "ServerlessV2PlatformVersion"))
+    ServerlessV2PlatformVersionInfo.add_member(:serverless_v2_platform_version_description, Shapes::ShapeRef.new(shape: String, location_name: "ServerlessV2PlatformVersionDescription"))
+    ServerlessV2PlatformVersionInfo.add_member(:engine, Shapes::ShapeRef.new(shape: String, location_name: "Engine"))
+    ServerlessV2PlatformVersionInfo.add_member(:serverless_v2_features_support, Shapes::ShapeRef.new(shape: ServerlessV2FeaturesSupport, location_name: "ServerlessV2FeaturesSupport"))
+    ServerlessV2PlatformVersionInfo.add_member(:status, Shapes::ShapeRef.new(shape: String, location_name: "Status"))
+    ServerlessV2PlatformVersionInfo.add_member(:is_default, Shapes::ShapeRef.new(shape: Boolean, location_name: "IsDefault"))
+    ServerlessV2PlatformVersionInfo.struct_class = Types::ServerlessV2PlatformVersionInfo
+
+    ServerlessV2PlatformVersionList.member = Shapes::ShapeRef.new(shape: ServerlessV2PlatformVersionInfo, location_name: "ServerlessV2PlatformVersionInfo")
+
+    ServerlessV2PlatformVersionsMessage.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
+    ServerlessV2PlatformVersionsMessage.add_member(:serverless_v2_platform_versions, Shapes::ShapeRef.new(shape: ServerlessV2PlatformVersionList, location_name: "ServerlessV2PlatformVersions"))
+    ServerlessV2PlatformVersionsMessage.struct_class = Types::ServerlessV2PlatformVersionsMessage
 
     ServerlessV2ScalingConfiguration.add_member(:min_capacity, Shapes::ShapeRef.new(shape: DoubleOptional, location_name: "MinCapacity"))
     ServerlessV2ScalingConfiguration.add_member(:max_capacity, Shapes::ShapeRef.new(shape: DoubleOptional, location_name: "MaxCapacity"))
@@ -1804,6 +1832,20 @@ module Aws::DocDB
         o.input = Shapes::ShapeRef.new(shape: DescribePendingMaintenanceActionsMessage)
         o.output = Shapes::ShapeRef.new(shape: PendingMaintenanceActionsMessage)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundFault)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_records",
+          tokens: {
+            "marker" => "marker"
+          }
+        )
+      end)
+
+      api.add_operation(:describe_serverless_v2_platform_versions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeServerlessV2PlatformVersions"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeServerlessV2PlatformVersionsMessage)
+        o.output = Shapes::ShapeRef.new(shape: ServerlessV2PlatformVersionsMessage)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_records",
           tokens: {

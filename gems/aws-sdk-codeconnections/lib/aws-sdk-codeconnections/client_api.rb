@@ -183,6 +183,7 @@ module Aws::CodeConnections
     Connection.add_member(:owner_account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "OwnerAccountId"))
     Connection.add_member(:connection_status, Shapes::ShapeRef.new(shape: ConnectionStatus, location_name: "ConnectionStatus"))
     Connection.add_member(:host_arn, Shapes::ShapeRef.new(shape: HostArn, location_name: "HostArn"))
+    Connection.add_member(:provider_endpoint, Shapes::ShapeRef.new(shape: Url, location_name: "ProviderEndpoint"))
     Connection.struct_class = Types::Connection
 
     ConnectionList.member = Shapes::ShapeRef.new(shape: Connection)
@@ -191,6 +192,7 @@ module Aws::CodeConnections
     CreateConnectionInput.add_member(:connection_name, Shapes::ShapeRef.new(shape: ConnectionName, required: true, location_name: "ConnectionName"))
     CreateConnectionInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateConnectionInput.add_member(:host_arn, Shapes::ShapeRef.new(shape: HostArn, location_name: "HostArn"))
+    CreateConnectionInput.add_member(:provider_endpoint, Shapes::ShapeRef.new(shape: Url, location_name: "ProviderEndpoint"))
     CreateConnectionInput.struct_class = Types::CreateConnectionInput
 
     CreateConnectionOutput.add_member(:connection_arn, Shapes::ShapeRef.new(shape: ConnectionArn, required: true, location_name: "ConnectionArn"))
@@ -328,8 +330,8 @@ module Aws::CodeConnections
     LimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     LimitExceededException.struct_class = Types::LimitExceededException
 
-    ListConnectionsInput.add_member(:provider_type_filter, Shapes::ShapeRef.new(shape: ProviderType, location_name: "ProviderTypeFilter"))
     ListConnectionsInput.add_member(:host_arn_filter, Shapes::ShapeRef.new(shape: HostArn, location_name: "HostArnFilter"))
+    ListConnectionsInput.add_member(:provider_type_filter, Shapes::ShapeRef.new(shape: ProviderType, location_name: "ProviderTypeFilter"))
     ListConnectionsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
     ListConnectionsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListConnectionsInput.struct_class = Types::ListConnectionsInput
@@ -601,6 +603,8 @@ module Aws::CodeConnections
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedProviderTypeException)
       end)
 
       api.add_operation(:create_host, Seahorse::Model::Operation.new.tap do |o|
@@ -624,6 +628,7 @@ module Aws::CodeConnections
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceAlreadyExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
@@ -639,6 +644,7 @@ module Aws::CodeConnections
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceAlreadyExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 

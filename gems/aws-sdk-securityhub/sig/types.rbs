@@ -151,7 +151,7 @@ module Aws::SecurityHub
     class AssociationFilters
       attr_accessor configuration_policy_id: ::String
       attr_accessor association_type: ("INHERITED" | "APPLIED")
-      attr_accessor association_status: ("PENDING" | "SUCCESS" | "FAILED")
+      attr_accessor association_status: ("PENDING" | "SUCCESS" | "FAILED" | "DISABLED")
       SENSITIVE: []
     end
 
@@ -5057,7 +5057,7 @@ module Aws::SecurityHub
       attr_accessor target_type: ("ACCOUNT" | "ORGANIZATIONAL_UNIT" | "ROOT")
       attr_accessor association_type: ("INHERITED" | "APPLIED")
       attr_accessor updated_at: ::Time
-      attr_accessor association_status: ("PENDING" | "SUCCESS" | "FAILED")
+      attr_accessor association_status: ("PENDING" | "SUCCESS" | "FAILED" | "DISABLED")
       attr_accessor association_status_message: ::String
       SENSITIVE: []
     end
@@ -5290,7 +5290,7 @@ module Aws::SecurityHub
     end
 
     class CriticalitySource
-      attr_accessor source: ("AutomationRule" | "ResourceName" | "TagInference")
+      attr_accessor source: ("AutomationRule" | "ResourceName" | "TagInference" | "CloudWatchTelemetryInference" | "InstalledSoftwareAndPackageInference")
       attr_accessor reason: ::String
       SENSITIVE: []
     end
@@ -5317,10 +5317,13 @@ module Aws::SecurityHub
 
     class CspmProviderConfiguration
       attr_accessor azure: Types::AzureProviderConfiguration
+      attr_accessor gcp: Types::GcpProviderConfiguration
       attr_accessor unknown: untyped
       SENSITIVE: []
 
       class Azure < CspmProviderConfiguration
+      end
+      class Gcp < CspmProviderConfiguration
       end
       class Unknown < CspmProviderConfiguration
       end
@@ -5328,17 +5331,20 @@ module Aws::SecurityHub
 
     class CspmProviderDetail
       attr_accessor azure: Types::AzureDetail
+      attr_accessor gcp: Types::GcpDetail
       attr_accessor unknown: untyped
       SENSITIVE: []
 
       class Azure < CspmProviderDetail
+      end
+      class Gcp < CspmProviderDetail
       end
       class Unknown < CspmProviderDetail
       end
     end
 
     class CspmProviderSummary
-      attr_accessor provider_name: ("AZURE")
+      attr_accessor provider_name: ("AZURE" | "GCP")
       attr_accessor connector_status: ("CONNECTED" | "DEGRADED" | "FAILED_TO_CONNECT" | "UNKNOWN")
       attr_accessor provider_configuration: Types::CspmProviderDetail
       SENSITIVE: []
@@ -5346,10 +5352,13 @@ module Aws::SecurityHub
 
     class CspmProviderUpdateConfiguration
       attr_accessor azure: Types::AzureUpdateConfiguration
+      attr_accessor gcp: Types::GcpUpdateConfiguration
       attr_accessor unknown: untyped
       SENSITIVE: []
 
       class Azure < CspmProviderUpdateConfiguration
+      end
+      class Gcp < CspmProviderUpdateConfiguration
       end
       class Unknown < CspmProviderUpdateConfiguration
       end
@@ -5588,7 +5597,7 @@ module Aws::SecurityHub
     class DescribeStandardsRequest
       attr_accessor next_token: ::String
       attr_accessor max_results: ::Integer
-      attr_accessor providers: ::Array[("AWS" | "Azure")]
+      attr_accessor providers: ::Array[("AWS" | "Azure" | "GCP")]
       SENSITIVE: []
     end
 
@@ -5931,6 +5940,32 @@ module Aws::SecurityHub
       SENSITIVE: []
     end
 
+    class GcpDetail
+      attr_accessor aws_config_connector_arn: ::String
+      attr_accessor scope_configuration: Types::GcpScopeConfiguration
+      attr_accessor gcp_regions: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class GcpProviderConfiguration
+      attr_accessor aws_config_connector_arn: ::String
+      attr_accessor scope_configuration: Types::GcpScopeConfiguration
+      attr_accessor gcp_regions: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class GcpScopeConfiguration
+      attr_accessor scope_type: ("PROJECT" | "ORGANIZATION")
+      attr_accessor scope_values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class GcpUpdateConfiguration
+      attr_accessor scope_configuration: Types::GcpScopeConfiguration
+      attr_accessor gcp_regions: ::Array[::String]
+      SENSITIVE: []
+    end
+
     class GenerateRecommendedPolicyV2Request
       attr_accessor metadata_uid: ::String
       SENSITIVE: []
@@ -6003,7 +6038,7 @@ module Aws::SecurityHub
       attr_accessor target_type: ("ACCOUNT" | "ORGANIZATIONAL_UNIT" | "ROOT")
       attr_accessor association_type: ("INHERITED" | "APPLIED")
       attr_accessor updated_at: ::Time
-      attr_accessor association_status: ("PENDING" | "SUCCESS" | "FAILED")
+      attr_accessor association_status: ("PENDING" | "SUCCESS" | "FAILED" | "DISABLED")
       attr_accessor association_status_message: ::String
       SENSITIVE: []
     end
@@ -6067,7 +6102,7 @@ module Aws::SecurityHub
       attr_accessor standards_subscription_arns: ::Array[::String]
       attr_accessor next_token: ::String
       attr_accessor max_results: ::Integer
-      attr_accessor providers: ::Array[("AWS" | "Azure")]
+      attr_accessor providers: ::Array[("AWS" | "Azure" | "GCP")]
       SENSITIVE: []
     end
 
@@ -6318,6 +6353,52 @@ module Aws::SecurityHub
 
     class GetSecurityControlDefinitionResponse
       attr_accessor security_control_definition: Types::SecurityControlDefinition
+      SENSITIVE: []
+    end
+
+    class GetSoftwareResourcesV2Request
+      attr_accessor package_name: ::String
+      attr_accessor package_type: ::String
+      attr_accessor package_version: ::String
+      attr_accessor filters: Types::SoftwareFilters
+      attr_accessor scopes: Types::SoftwareScopes
+      attr_accessor sort_criteria: ::Array[Types::SortCriterion]
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetSoftwareResourcesV2Response
+      attr_accessor software_resources: ::Array[Types::SoftwareResourceResult]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetSoftwareStatisticsV2Request
+      attr_accessor group_by_rules: ::Array[Types::SoftwareGroupByRule]
+      attr_accessor scopes: Types::SoftwareScopes
+      attr_accessor sort_order: ("asc" | "desc")
+      attr_accessor max_statistic_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetSoftwareStatisticsV2Response
+      attr_accessor group_by_results: ::Array[Types::GroupByResult]
+      SENSITIVE: []
+    end
+
+    class GetSoftwareV2Request
+      attr_accessor filters: Types::SoftwareFilters
+      attr_accessor scopes: Types::SoftwareScopes
+      attr_accessor sort_criteria: ::Array[Types::SortCriterion]
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetSoftwareV2Response
+      attr_accessor software: ::Array[Types::SoftwareResult]
+      attr_accessor next_token: ::String
       SENSITIVE: []
     end
 
@@ -6572,7 +6653,7 @@ module Aws::SecurityHub
     class ListConnectorsRequest
       attr_accessor next_token: ::String
       attr_accessor max_results: ::Integer
-      attr_accessor provider_name: ("AZURE")
+      attr_accessor provider_name: ("AZURE" | "GCP")
       attr_accessor connector_status: ("CONNECTED" | "DEGRADED" | "FAILED_TO_CONNECT" | "UNKNOWN")
       attr_accessor enablement_status: ("ENABLED" | "PENDING_ENABLEMENT" | "PENDING_UPDATE" | "PENDING_DELETION")
       SENSITIVE: []
@@ -6587,7 +6668,7 @@ module Aws::SecurityHub
     class ListConnectorsV2Request
       attr_accessor next_token: ::String
       attr_accessor max_results: ::Integer
-      attr_accessor provider_name: ("JIRA_CLOUD" | "SERVICENOW" | "AZURE")
+      attr_accessor provider_name: ("JIRA_CLOUD" | "SERVICENOW" | "AZURE" | "GCP")
       attr_accessor connector_status: ("CONNECTED" | "DEGRADED" | "FAILED_TO_CONNECT" | "PENDING_AUTHORIZATION" | "PENDING_CONFIGURATION" | "UNKNOWN")
       attr_accessor enablement_status: ("ENABLED" | "PENDING_ENABLEMENT" | "FAILED_TO_ENABLE" | "PENDING_UPDATE" | "FAILED_TO_UPDATE" | "PENDING_DELETION" | "FAILED_TO_DELETE")
       SENSITIVE: []
@@ -6711,7 +6792,7 @@ module Aws::SecurityHub
       attr_accessor standards_arn: ::String
       attr_accessor next_token: ::String
       attr_accessor max_results: ::Integer
-      attr_accessor providers: ::Array[("AWS" | "Azure")]
+      attr_accessor providers: ::Array[("AWS" | "Azure" | "GCP")]
       SENSITIVE: []
     end
 
@@ -6935,7 +7016,7 @@ module Aws::SecurityHub
 
     class OrganizationConfiguration
       attr_accessor configuration_type: ("CENTRAL" | "LOCAL")
-      attr_accessor status: ("PENDING" | "ENABLED" | "FAILED")
+      attr_accessor status: ("PENDING" | "ENABLED" | "FAILED" | "DISABLED")
       attr_accessor status_message: ::String
       SENSITIVE: []
     end
@@ -7098,6 +7179,7 @@ module Aws::SecurityHub
       attr_accessor jira_cloud: Types::JiraCloudProviderConfiguration
       attr_accessor service_now: Types::ServiceNowProviderConfiguration
       attr_accessor azure: Types::AzureProviderConfiguration
+      attr_accessor gcp: Types::GcpProviderConfiguration
       attr_accessor unknown: untyped
       SENSITIVE: []
 
@@ -7107,6 +7189,8 @@ module Aws::SecurityHub
       end
       class Azure < ProviderConfiguration
       end
+      class Gcp < ProviderConfiguration
+      end
       class Unknown < ProviderConfiguration
       end
     end
@@ -7115,6 +7199,7 @@ module Aws::SecurityHub
       attr_accessor jira_cloud: Types::JiraCloudDetail
       attr_accessor service_now: Types::ServiceNowDetail
       attr_accessor azure: Types::AzureDetail
+      attr_accessor gcp: Types::GcpDetail
       attr_accessor unknown: untyped
       SENSITIVE: []
 
@@ -7124,12 +7209,14 @@ module Aws::SecurityHub
       end
       class Azure < ProviderDetail
       end
+      class Gcp < ProviderDetail
+      end
       class Unknown < ProviderDetail
       end
     end
 
     class ProviderSummary
-      attr_accessor provider_name: ("JIRA_CLOUD" | "SERVICENOW" | "AZURE")
+      attr_accessor provider_name: ("JIRA_CLOUD" | "SERVICENOW" | "AZURE" | "GCP")
       attr_accessor connector_status: ("CONNECTED" | "DEGRADED" | "FAILED_TO_CONNECT" | "PENDING_AUTHORIZATION" | "PENDING_CONFIGURATION" | "UNKNOWN")
       attr_accessor provider_configuration: Types::ProviderDetail
       SENSITIVE: []
@@ -7139,6 +7226,7 @@ module Aws::SecurityHub
       attr_accessor jira_cloud: Types::JiraCloudUpdateConfiguration
       attr_accessor service_now: Types::ServiceNowUpdateConfiguration
       attr_accessor azure: Types::AzureUpdateConfiguration
+      attr_accessor gcp: Types::GcpUpdateConfiguration
       attr_accessor unknown: untyped
       SENSITIVE: []
 
@@ -7147,6 +7235,8 @@ module Aws::SecurityHub
       class ServiceNow < ProviderUpdateConfiguration
       end
       class Azure < ProviderUpdateConfiguration
+      end
+      class Gcp < ProviderUpdateConfiguration
       end
       class Unknown < ProviderUpdateConfiguration
       end
@@ -7299,7 +7389,7 @@ module Aws::SecurityHub
       attr_accessor id: ::String
       attr_accessor resource_guid: ::String
       attr_accessor resource_region: ::String
-      attr_accessor cloud_provider: ("Azure" | "AWS")
+      attr_accessor cloud_provider: ("Azure" | "AWS" | "GCP")
       SENSITIVE: []
     end
 
@@ -7358,7 +7448,7 @@ module Aws::SecurityHub
       attr_accessor id: ::String
       attr_accessor partition: ("aws" | "aws-cn" | "aws-us-gov" | "aws-us-iso" | "aws-us-iso-b" | "AzureCloud")
       attr_accessor region: ::String
-      attr_accessor provider: ("Azure" | "AWS")
+      attr_accessor provider: ("Azure" | "AWS" | "GCP")
       attr_accessor owner: Types::ResourceOwner
       attr_accessor resource_role: ::String
       attr_accessor tags: ::Hash[::String, ::String]
@@ -7477,6 +7567,7 @@ module Aws::SecurityHub
       attr_accessor aws_ec2_client_vpn_endpoint: Types::AwsEc2ClientVpnEndpointDetails
       attr_accessor code_repository: Types::CodeRepositoryDetails
       attr_accessor azure_resource: untyped
+      attr_accessor gcp_resource: untyped
       SENSITIVE: []
     end
 
@@ -7818,7 +7909,7 @@ module Aws::SecurityHub
       attr_accessor update_status: ("READY" | "UPDATING")
       attr_accessor parameters: ::Hash[::String, Types::ParameterConfiguration]
       attr_accessor last_update_reason: ::String
-      attr_accessor provider: ("AWS" | "Azure")
+      attr_accessor provider: ("AWS" | "Azure" | "GCP")
       SENSITIVE: []
     end
 
@@ -7837,7 +7928,7 @@ module Aws::SecurityHub
       attr_accessor current_region_availability: ("AVAILABLE" | "UNAVAILABLE")
       attr_accessor customizable_properties: ::Array[("Parameters")]
       attr_accessor parameter_definitions: ::Hash[::String, Types::ParameterDefinition]
-      attr_accessor provider: ("AWS" | "Azure")
+      attr_accessor provider: ("AWS" | "Azure" | "GCP")
       SENSITIVE: []
     end
 
@@ -7954,6 +8045,25 @@ module Aws::SecurityHub
       SENSITIVE: []
     end
 
+    class SoftwareCompositeFilter
+      attr_accessor string_filters: ::Array[Types::SoftwareStringFilter]
+      attr_accessor nested_composite_filters: ::Array[Types::SoftwareCompositeFilter]
+      attr_accessor operator: ("AND" | "OR")
+      SENSITIVE: []
+    end
+
+    class SoftwareFilters
+      attr_accessor composite_filters: ::Array[Types::SoftwareCompositeFilter]
+      attr_accessor composite_operator: ("AND" | "OR")
+      SENSITIVE: []
+    end
+
+    class SoftwareGroupByRule
+      attr_accessor group_by_field: ("AccountId" | "PackageName" | "PackageVersion" | "PackageType" | "Region" | "ResourceRegion" | "ResourceType" | "ResourceId" | "ResourceProvider" | "ResourceOwnerAccountId" | "ResourceOwnerOrgId" | "ResourceCloudPartition")
+      attr_accessor filters: Types::SoftwareFilters
+      SENSITIVE: []
+    end
+
     class SoftwarePackage
       attr_accessor name: ::String
       attr_accessor version: ::String
@@ -7969,6 +8079,38 @@ module Aws::SecurityHub
       SENSITIVE: []
     end
 
+    class SoftwareResourceResult
+      attr_accessor account_id: ::String
+      attr_accessor resource_type: ::String
+      attr_accessor region: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_provider: ::String
+      attr_accessor resource_owner_org_id: ::String
+      attr_accessor resource_owner_account_id: ::String
+      attr_accessor resource_cloud_partition: ::String
+      attr_accessor resource_region: ::String
+      SENSITIVE: []
+    end
+
+    class SoftwareResult
+      attr_accessor package_name: ::String
+      attr_accessor package_version: ::String
+      attr_accessor package_type: ::String
+      attr_accessor resource_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class SoftwareScopes
+      attr_accessor aws_organizations: ::Array[Types::AwsOrganizationScope]
+      SENSITIVE: []
+    end
+
+    class SoftwareStringFilter
+      attr_accessor field_name: ("AccountId" | "PackageName" | "PackageVersion" | "PackageType" | "Region" | "ResourceRegion" | "ResourceType" | "ResourceId" | "ResourceProvider" | "ResourceOwnerAccountId" | "ResourceOwnerOrgId" | "ResourceCloudPartition")
+      attr_accessor filter: Types::StringFilter
+      SENSITIVE: []
+    end
+
     class SortCriterion
       attr_accessor field: ::String
       attr_accessor sort_order: ("asc" | "desc")
@@ -7980,7 +8122,7 @@ module Aws::SecurityHub
       attr_accessor name: ::String
       attr_accessor description: ::String
       attr_accessor enabled_by_default: bool
-      attr_accessor provider: ("AWS" | "Azure")
+      attr_accessor provider: ("AWS" | "Azure" | "GCP")
       attr_accessor standards_managed_by: Types::StandardsManagedBy
       SENSITIVE: []
     end
@@ -8058,7 +8200,7 @@ module Aws::SecurityHub
       attr_accessor standards_status: ("PENDING" | "READY" | "FAILED" | "DELETING" | "INCOMPLETE")
       attr_accessor standards_controls_updatable: ("READY_FOR_UPDATES" | "NOT_READY_FOR_UPDATES")
       attr_accessor standards_status_reason: Types::StandardsStatusReason
-      attr_accessor provider: ("AWS" | "Azure")
+      attr_accessor provider: ("AWS" | "Azure" | "GCP")
       SENSITIVE: []
     end
 
@@ -8080,7 +8222,7 @@ module Aws::SecurityHub
       attr_accessor target_type: ("ACCOUNT" | "ORGANIZATIONAL_UNIT" | "ROOT")
       attr_accessor association_type: ("INHERITED" | "APPLIED")
       attr_accessor updated_at: ::Time
-      attr_accessor association_status: ("PENDING" | "SUCCESS" | "FAILED")
+      attr_accessor association_status: ("PENDING" | "SUCCESS" | "FAILED" | "DISABLED")
       attr_accessor association_status_message: ::String
       SENSITIVE: []
     end

@@ -1940,16 +1940,18 @@ module Aws::SecurityAgent
     # security finding.
     #
     # @!attribute [rw] status
-    #   The current status of the code remediation task.
+    #   The current status of the overall code remediation task.
     #   @return [String]
     #
     # @!attribute [rw] status_reason
-    #   The reason for the current status of the code remediation task.
+    #   The reason for the current status of the overall code remediation
+    #   task.
     #   @return [String]
     #
     # @!attribute [rw] task_details
-    #   The list of details for the code remediation task, including
-    #   repository name, code diff link, and pull request link.
+    #   The list of details for a code remediation task, including
+    #   repository names, status of code remediation for each associated
+    #   repository, and generated code diff or pull request links.
     #   @return [Array<Types::CodeRemediationTaskDetails>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/CodeRemediationTask AWS API Documentation
@@ -1966,7 +1968,8 @@ module Aws::SecurityAgent
     # code diff and pull request.
     #
     # @!attribute [rw] repo_name
-    #   The name of the repository where the remediation was applied.
+    #   The name of an associated repository where the remediation was
+    #   applied.
     #   @return [String]
     #
     # @!attribute [rw] code_diff_link
@@ -1977,12 +1980,28 @@ module Aws::SecurityAgent
     #   The link to the pull request created for the remediation.
     #   @return [String]
     #
+    # @!attribute [rw] status
+    #   The current status of the code remediation task for the particular
+    #   repository.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_code
+    #   A category classifier if a repository's code remediation fails.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_reason
+    #   A descriptive reason when a repository's code remediation fails.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/CodeRemediationTaskDetails AWS API Documentation
     #
     class CodeRemediationTaskDetails < Struct.new(
       :repo_name,
       :code_diff_link,
-      :pull_request_link)
+      :pull_request_link,
+      :status,
+      :status_code,
+      :status_reason)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2894,7 +2913,9 @@ module Aws::SecurityAgent
     #   @return [String]
     #
     # @!attribute [rw] member_type
-    #   The type of member. Currently, only USER is supported.
+    #   The type of member. Use USER for an individual user or GROUP for an
+    #   IAM Identity Center group. All members of a group have access to the
+    #   agent space.
     #   @return [String]
     #
     # @!attribute [rw] config
@@ -2960,6 +2981,11 @@ module Aws::SecurityAgent
     #   AUTOMATIC and DISABLED.
     #   @return [String]
     #
+    # @!attribute [rw] clean_up_strategy
+    #   The strategy for cleaning up resources after pentest job completion.
+    #   Valid values are BEST\_EFFORT\_DELETE and RETAIN\_ALL.
+    #   @return [String]
+    #
     # @!attribute [rw] disable_managed_skills
     #   A list of managed skills to disable for this pentest. Valid values
     #   include FINDING\_PERSONALIZATION and LOGIN\_OPTIMIZATION.
@@ -3000,6 +3026,7 @@ module Aws::SecurityAgent
       :vpc_config,
       :network_traffic_config,
       :code_remediation_strategy,
+      :clean_up_strategy,
       :disable_managed_skills,
       :max_task_hours,
       :report_destination,
@@ -4951,6 +4978,26 @@ module Aws::SecurityAgent
       include Aws::Structure
     end
 
+    # Contains metadata about an IAM Identity Center group member, including
+    # the group display name and description.
+    #
+    # @!attribute [rw] display_name
+    #   The display name of the group.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the group.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/GroupMetadata AWS API Documentation
+    #
+    class GroupMetadata < Struct.new(
+      :display_name,
+      :description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains HTTP route verification details for a target domain,
     # including the route path and token to serve for domain ownership
     # verification.
@@ -6839,16 +6886,22 @@ module Aws::SecurityAgent
     #   The user metadata for the member.
     #   @return [Types::UserMetadata]
     #
+    # @!attribute [rw] group
+    #   The group metadata for the member.
+    #   @return [Types::GroupMetadata]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/MemberMetadata AWS API Documentation
     #
     class MemberMetadata < Struct.new(
       :user,
+      :group,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
       include Aws::Structure::Union
 
       class User < MemberMetadata; end
+      class Group < MemberMetadata; end
       class Unknown < MemberMetadata; end
     end
 
@@ -7247,6 +7300,12 @@ module Aws::SecurityAgent
     #   The category of application a pentest targets.
     #   @return [Types::TestScope]
     #
+    # @!attribute [rw] version
+    #   The version of the pentest job. The version increases each time the
+    #   job is resumed. This value is absent for jobs created before
+    #   versions were recorded.
+    #   @return [String]
+    #
     # @!attribute [rw] created_at
     #   The date and time the pentest job was created, in UTC format.
     #   @return [Time]
@@ -7292,6 +7351,7 @@ module Aws::SecurityAgent
       :scope_changes,
       :cicd_configuration,
       :test_scope,
+      :version,
       :created_at,
       :updated_at)
       SENSITIVE = [:trusted_ca_certificates]
@@ -7333,6 +7393,12 @@ module Aws::SecurityAgent
     #   The URL to view this pentest job's findings report in the console.
     #   @return [String]
     #
+    # @!attribute [rw] version
+    #   The version of the pentest job. The version increases each time the
+    #   job is resumed. This value is absent for jobs created before
+    #   versions were recorded.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/PentestJobSummary AWS API Documentation
     #
     class PentestJobSummary < Struct.new(
@@ -7343,7 +7409,8 @@ module Aws::SecurityAgent
       :created_at,
       :updated_at,
       :job_type,
-      :report_url)
+      :report_url,
+      :version)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7687,6 +7754,105 @@ module Aws::SecurityAgent
     #
     class ResourceNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Input for resuming a stopped or paused pentest job.
+    #
+    # @!attribute [rw] agent_space_id
+    #   The unique identifier of the agent space.
+    #   @return [String]
+    #
+    # @!attribute [rw] pentest_job_id
+    #   The unique identifier of the pentest job to resume.
+    #   @return [String]
+    #
+    # @!attribute [rw] actors
+    #   The actors to use for the resumed job. When specified, replaces the
+    #   actors the job used before it stopped.
+    #   @return [Array<Types::Actor>]
+    #
+    # @!attribute [rw] network_traffic_config
+    #   The network traffic configuration to use for the resumed job. When
+    #   specified, replaces the configuration the job used before it
+    #   stopped.
+    #   @return [Types::NetworkTrafficConfig]
+    #
+    # @!attribute [rw] vpc_config
+    #   The VPC configuration to use for the resumed job. When specified,
+    #   replaces the configuration the job used before it stopped.
+    #   @return [Types::VpcConfig]
+    #
+    # @!attribute [rw] max_task_hours
+    #   The maximum number of task hours for the resumed job. To resume a
+    #   job that stopped because it reached its task hours limit, specify a
+    #   higher value.
+    #   @return [Float]
+    #
+    # @!attribute [rw] copy_config_from_pentest
+    #   Specifies whether to copy the current actors, network traffic
+    #   configuration, VPC configuration, and maximum task hours from the
+    #   pentest to the resumed job. The job's scope, such as its target
+    #   endpoints, is never changed. Values you specify in this request take
+    #   precedence over copied values.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/ResumePentestJobInput AWS API Documentation
+    #
+    class ResumePentestJobInput < Struct.new(
+      :agent_space_id,
+      :pentest_job_id,
+      :actors,
+      :network_traffic_config,
+      :vpc_config,
+      :max_task_hours,
+      :copy_config_from_pentest)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Output for the ResumePentestJob operation.
+    #
+    # @!attribute [rw] title
+    #   The title of the pentest job.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the pentest job.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The date and time the pentest job was created, in UTC format.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The date and time the pentest job was last updated, in UTC format.
+    #   @return [Time]
+    #
+    # @!attribute [rw] pentest_id
+    #   The unique identifier of the pentest.
+    #   @return [String]
+    #
+    # @!attribute [rw] pentest_job_id
+    #   The unique identifier of the resumed pentest job.
+    #   @return [String]
+    #
+    # @!attribute [rw] version
+    #   The version of the pentest job that the resume started. The version
+    #   increases each time the job is resumed.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/ResumePentestJobOutput AWS API Documentation
+    #
+    class ResumePentestJobOutput < Struct.new(
+      :title,
+      :status,
+      :created_at,
+      :updated_at,
+      :pentest_id,
+      :pentest_job_id,
+      :version)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8292,11 +8458,19 @@ module Aws::SecurityAgent
     #   The unique identifier of the pentest job to stop.
     #   @return [String]
     #
+    # @!attribute [rw] pause
+    #   Specifies whether to pause the job instead of stopping it. A paused
+    #   job moves to `PAUSING` and then to `PAUSED`, and you can resume it
+    #   later with `ResumePentestJob`. You can pause only a job that is
+    #   `IN_PROGRESS`. The default is false.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/StopPentestJobInput AWS API Documentation
     #
     class StopPentestJobInput < Struct.new(
       :agent_space_id,
-      :pentest_job_id)
+      :pentest_job_id,
+      :pause)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9726,6 +9900,11 @@ module Aws::SecurityAgent
     #   The updated code remediation strategy for the pentest.
     #   @return [String]
     #
+    # @!attribute [rw] clean_up_strategy
+    #   The updated strategy for cleaning up resources after pentest job
+    #   completion.
+    #   @return [String]
+    #
     # @!attribute [rw] disable_managed_skills
     #   The updated list of managed skills to disable for this pentest.
     #   Valid values include FINDING\_PERSONALIZATION and
@@ -9767,6 +9946,7 @@ module Aws::SecurityAgent
       :vpc_config,
       :network_traffic_config,
       :code_remediation_strategy,
+      :clean_up_strategy,
       :disable_managed_skills,
       :max_task_hours,
       :report_destination,

@@ -264,7 +264,8 @@ module Aws::LambdaMicrovms
     #     An integer representing the maximum number attempts that will be made for
     #     a single request, including the initial attempt.  For example,
     #     setting this value to 5 will result in a request being retried up to
-    #     4 times. Used in `standard` and `adaptive` retry modes.
+    #     4 times. Used in `standard` and `adaptive` retry modes. Defaults to 3,
+    #     except for DynamoDB and DynamoDB Streams, which default to 4.
     #
     #   @option options [String] :profile ("default")
     #     Used when loading credentials from the shared credentials file at `HOME/.aws/credentials`.
@@ -327,15 +328,15 @@ module Aws::LambdaMicrovms
     #     used by the default backoff function. This option is only used in the
     #     `legacy` retry mode.
     #
-    #   @option options [String] :retry_mode ("legacy")
+    #   @option options [String] :retry_mode ("standard")
     #     Specifies which retry algorithm to use. Values are:
     #
-    #     * `legacy` - The pre-existing retry behavior. This is the default
-    #       value if no retry mode is provided.
+    #     * `legacy` - The pre-existing retry behavior.
     #
     #     * `standard` - A standardized set of retry rules across the AWS SDKs.
     #       This includes support for retry quotas, which limit the number of
-    #       unsuccessful retries a client can make.
+    #       unsuccessful retries a client can make. This is the default value
+    #       if no retry mode is provided.
     #
     #     * `adaptive` - A retry mode that includes all the functionality of
     #       `standard` mode along with automatic client side throttling.
@@ -562,7 +563,7 @@ module Aws::LambdaMicrovms
     #
     # @option params [Array<String>] :egress_network_connectors
     #   The list of egress network connectors available to the MicroVM at
-    #   runtime.
+    #   image build time.
     #
     # @option params [Array<Types::CpuConfiguration>] :cpu_configurations
     #   The list of supported CPU configurations for the MicroVM.
@@ -578,6 +579,19 @@ module Aws::LambdaMicrovms
     #
     # @option params [Hash<String,String>] :environment_variables
     #   Environment variables set in the MicroVM runtime environment.
+    #
+    # @option params [String] :kms_key_identifier
+    #   The customer managed Amazon Web Services Key Management Service
+    #   (Amazon Web Services KMS) key that encrypts the contents and metadata
+    #   of your MicroVM image version. You must have permission to use the
+    #   key. Specify the key in one of the following formats:
+    #
+    #   * Key ARN
+    #
+    #   * Alias ARN
+    #
+    #   If you don't specify a key, your MicroVM image version uses an Amazon
+    #   Web Services owned key.
     #
     # @option params [required, String] :name
     #   The name of the MicroVM image. Must be unique within the AWS account.
@@ -616,6 +630,7 @@ module Aws::LambdaMicrovms
     #   * {Types::CreateMicrovmImageResponse#additional_os_capabilities #additional_os_capabilities} => Array&lt;String&gt;
     #   * {Types::CreateMicrovmImageResponse#hooks #hooks} => Types::Hooks
     #   * {Types::CreateMicrovmImageResponse#environment_variables #environment_variables} => Hash&lt;String,String&gt;
+    #   * {Types::CreateMicrovmImageResponse#kms_key_identifier #kms_key_identifier} => String
     #   * {Types::CreateMicrovmImageResponse#tags #tags} => Hash&lt;String,String&gt;
     #   * {Types::CreateMicrovmImageResponse#updated_at #updated_at} => Time
     #   * {Types::CreateMicrovmImageResponse#image_version #image_version} => String
@@ -641,7 +656,7 @@ module Aws::LambdaMicrovms
     #     egress_network_connectors: ["NetworkConnector"],
     #     cpu_configurations: [
     #       {
-    #         architecture: "ARM_64", # required, accepts ARM_64
+    #         architecture: "ARM_64", # required, accepts ARM_64, X86_64
     #       },
     #     ],
     #     resources: [
@@ -672,6 +687,7 @@ module Aws::LambdaMicrovms
     #     environment_variables: {
     #       "EnvironmentVariableKey" => "EnvironmentVariableValue",
     #     },
+    #     kms_key_identifier: "KmsKeyIdentifier",
     #     name: "ImageName", # required
     #     tags: {
     #       "TagKey" => "TagValue",
@@ -697,7 +713,7 @@ module Aws::LambdaMicrovms
     #   resp.egress_network_connectors #=> Array
     #   resp.egress_network_connectors[0] #=> String
     #   resp.cpu_configurations #=> Array
-    #   resp.cpu_configurations[0].architecture #=> String, one of "ARM_64"
+    #   resp.cpu_configurations[0].architecture #=> String, one of "ARM_64", "X86_64"
     #   resp.resources #=> Array
     #   resp.resources[0].minimum_memory_in_mi_b #=> Integer
     #   resp.additional_os_capabilities #=> Array
@@ -717,6 +733,7 @@ module Aws::LambdaMicrovms
     #   resp.hooks.microvm_image_hooks.validate_timeout_in_seconds #=> Integer
     #   resp.environment_variables #=> Hash
     #   resp.environment_variables["EnvironmentVariableKey"] #=> String
+    #   resp.kms_key_identifier #=> String
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
     #   resp.updated_at #=> Time
@@ -856,6 +873,7 @@ module Aws::LambdaMicrovms
     #   * {Types::GetMicrovmResponse#started_at #started_at} => Time
     #   * {Types::GetMicrovmResponse#terminated_at #terminated_at} => Time
     #   * {Types::GetMicrovmResponse#state_reason #state_reason} => String
+    #   * {Types::GetMicrovmResponse#kms_key_identifier #kms_key_identifier} => String
     #   * {Types::GetMicrovmResponse#ingress_network_connectors #ingress_network_connectors} => Array&lt;String&gt;
     #   * {Types::GetMicrovmResponse#egress_network_connectors #egress_network_connectors} => Array&lt;String&gt;
     #
@@ -880,6 +898,7 @@ module Aws::LambdaMicrovms
     #   resp.started_at #=> Time
     #   resp.terminated_at #=> Time
     #   resp.state_reason #=> String
+    #   resp.kms_key_identifier #=> String
     #   resp.ingress_network_connectors #=> Array
     #   resp.ingress_network_connectors[0] #=> String
     #   resp.egress_network_connectors #=> Array
@@ -977,8 +996,8 @@ module Aws::LambdaMicrovms
     #   resp.image_version #=> String
     #   resp.build_id #=> String
     #   resp.build_state #=> String, one of "PENDING", "IN_PROGRESS", "SUCCESSFUL", "FAILED"
-    #   resp.architecture #=> String, one of "ARM_64"
-    #   resp.chipset #=> String, one of "GRAVITON"
+    #   resp.architecture #=> String, one of "ARM_64", "X86_64"
+    #   resp.chipset #=> String, one of "GRAVITON", "INTEL"
     #   resp.chipset_generation #=> String
     #   resp.state_reason #=> String
     #   resp.created_at #=> Time
@@ -1018,6 +1037,7 @@ module Aws::LambdaMicrovms
     #   * {Types::GetMicrovmImageVersionOutput#additional_os_capabilities #additional_os_capabilities} => Array&lt;String&gt;
     #   * {Types::GetMicrovmImageVersionOutput#hooks #hooks} => Types::Hooks
     #   * {Types::GetMicrovmImageVersionOutput#environment_variables #environment_variables} => Hash&lt;String,String&gt;
+    #   * {Types::GetMicrovmImageVersionOutput#kms_key_identifier #kms_key_identifier} => String
     #   * {Types::GetMicrovmImageVersionOutput#image_arn #image_arn} => String
     #   * {Types::GetMicrovmImageVersionOutput#image_version #image_version} => String
     #   * {Types::GetMicrovmImageVersionOutput#state #state} => String
@@ -1046,7 +1066,7 @@ module Aws::LambdaMicrovms
     #   resp.egress_network_connectors #=> Array
     #   resp.egress_network_connectors[0] #=> String
     #   resp.cpu_configurations #=> Array
-    #   resp.cpu_configurations[0].architecture #=> String, one of "ARM_64"
+    #   resp.cpu_configurations[0].architecture #=> String, one of "ARM_64", "X86_64"
     #   resp.resources #=> Array
     #   resp.resources[0].minimum_memory_in_mi_b #=> Integer
     #   resp.additional_os_capabilities #=> Array
@@ -1066,6 +1086,7 @@ module Aws::LambdaMicrovms
     #   resp.hooks.microvm_image_hooks.validate_timeout_in_seconds #=> Integer
     #   resp.environment_variables #=> Hash
     #   resp.environment_variables["EnvironmentVariableKey"] #=> String
+    #   resp.kms_key_identifier #=> String
     #   resp.image_arn #=> String
     #   resp.image_version #=> String
     #   resp.state #=> String, one of "PENDING", "IN_PROGRESS", "SUCCESSFUL", "FAILED", "DELETING", "DELETED", "DELETE_FAILED"
@@ -1121,7 +1142,9 @@ module Aws::LambdaMicrovms
     #   resp.items #=> Array
     #   resp.items[0].image_arn #=> String
     #   resp.items[0].image_version #=> String
-    #   resp.items[0].status #=> String, one of "AVAILABLE", "DEPRECATED"
+    #   resp.items[0].status #=> String, one of "AVAILABLE", "DEPRECATED", "RECALLED"
+    #   resp.items[0].supported_cpu_configurations #=> Array
+    #   resp.items[0].supported_cpu_configurations[0].architecture #=> String, one of "ARM_64", "X86_64"
     #   resp.items[0].created_at #=> Time
     #   resp.items[0].updated_at #=> Time
     #
@@ -1216,8 +1239,8 @@ module Aws::LambdaMicrovms
     #     next_token: "String",
     #     image_identifier: "MicrovmImageIdentifier", # required
     #     image_version: "NonBlankString", # required
-    #     architecture: "ARM_64", # accepts ARM_64
-    #     chipset: "GRAVITON", # accepts GRAVITON
+    #     architecture: "ARM_64", # accepts ARM_64, X86_64
+    #     chipset: "GRAVITON", # accepts GRAVITON, INTEL
     #     chipset_generation: "NonBlankString",
     #   })
     #
@@ -1229,8 +1252,8 @@ module Aws::LambdaMicrovms
     #   resp.items[0].image_version #=> String
     #   resp.items[0].build_id #=> String
     #   resp.items[0].build_state #=> String, one of "PENDING", "IN_PROGRESS", "SUCCESSFUL", "FAILED"
-    #   resp.items[0].architecture #=> String, one of "ARM_64"
-    #   resp.items[0].chipset #=> String, one of "GRAVITON"
+    #   resp.items[0].architecture #=> String, one of "ARM_64", "X86_64"
+    #   resp.items[0].chipset #=> String, one of "GRAVITON", "INTEL"
     #   resp.items[0].chipset_generation #=> String
     #   resp.items[0].state_reason #=> String
     #   resp.items[0].created_at #=> Time
@@ -1287,7 +1310,7 @@ module Aws::LambdaMicrovms
     #   resp.items[0].egress_network_connectors #=> Array
     #   resp.items[0].egress_network_connectors[0] #=> String
     #   resp.items[0].cpu_configurations #=> Array
-    #   resp.items[0].cpu_configurations[0].architecture #=> String, one of "ARM_64"
+    #   resp.items[0].cpu_configurations[0].architecture #=> String, one of "ARM_64", "X86_64"
     #   resp.items[0].resources #=> Array
     #   resp.items[0].resources[0].minimum_memory_in_mi_b #=> Integer
     #   resp.items[0].additional_os_capabilities #=> Array
@@ -1307,6 +1330,7 @@ module Aws::LambdaMicrovms
     #   resp.items[0].hooks.microvm_image_hooks.validate_timeout_in_seconds #=> Integer
     #   resp.items[0].environment_variables #=> Hash
     #   resp.items[0].environment_variables["EnvironmentVariableKey"] #=> String
+    #   resp.items[0].kms_key_identifier #=> String
     #   resp.items[0].image_arn #=> String
     #   resp.items[0].image_version #=> String
     #   resp.items[0].state #=> String, one of "PENDING", "IN_PROGRESS", "SUCCESSFUL", "FAILED", "DELETING", "DELETED", "DELETE_FAILED"
@@ -1489,7 +1513,8 @@ module Aws::LambdaMicrovms
     #   The list of ingress network connectors to configure for the MicroVM.
     #
     # @option params [Array<String>] :egress_network_connectors
-    #   The list of egress network connectors to configure for the MicroVM.
+    #   The list of egress network connectors available to the MicroVM at
+    #   runtime.
     #
     # @option params [required, String] :image_identifier
     #   The identifier (ARN or ID) of the MicroVM image to run.
@@ -1508,6 +1533,15 @@ module Aws::LambdaMicrovms
     #   \{"cloudWatch": \{"logGroup": "..."}} to stream application logs
     #   to a custom CloudWatch log group, or \{"disabled": \{}} to turn off
     #   logging.
+    #
+    # @option params [String] :kms_key_identifier
+    #   The customer managed Amazon Web Services Key Management Service
+    #   (Amazon Web Services KMS) key that encrypts your MicroVM configuration
+    #   at rest. To use this operation, you must have permission to use the
+    #   key. Specify the key ARN or the alias ARN.
+    #
+    #   If you don't specify a key, your MicroVM uses an Amazon Web Services
+    #   owned key.
     #
     # @option params [String] :run_hook_payload
     #   Per-MicroVM initialization data delivered as the request body of the
@@ -1538,6 +1572,7 @@ module Aws::LambdaMicrovms
     #   * {Types::RunMicrovmResponse#started_at #started_at} => Time
     #   * {Types::RunMicrovmResponse#terminated_at #terminated_at} => Time
     #   * {Types::RunMicrovmResponse#state_reason #state_reason} => String
+    #   * {Types::RunMicrovmResponse#kms_key_identifier #kms_key_identifier} => String
     #   * {Types::RunMicrovmResponse#ingress_network_connectors #ingress_network_connectors} => Array&lt;String&gt;
     #   * {Types::RunMicrovmResponse#egress_network_connectors #egress_network_connectors} => Array&lt;String&gt;
     #
@@ -1562,6 +1597,7 @@ module Aws::LambdaMicrovms
     #         log_stream: "CloudWatchLoggingLogStreamString",
     #       },
     #     },
+    #     kms_key_identifier: "KmsKeyIdentifier",
     #     run_hook_payload: "RunHookPayload",
     #     maximum_duration_in_seconds: 1,
     #     client_token: "RunMicrovmRequestClientTokenString",
@@ -1582,6 +1618,7 @@ module Aws::LambdaMicrovms
     #   resp.started_at #=> Time
     #   resp.terminated_at #=> Time
     #   resp.state_reason #=> String
+    #   resp.kms_key_identifier #=> String
     #   resp.ingress_network_connectors #=> Array
     #   resp.ingress_network_connectors[0] #=> String
     #   resp.egress_network_connectors #=> Array
@@ -1726,7 +1763,7 @@ module Aws::LambdaMicrovms
     #
     # @option params [Array<String>] :egress_network_connectors
     #   The list of egress network connectors available to the MicroVM at
-    #   runtime.
+    #   image build time.
     #
     # @option params [Array<Types::CpuConfiguration>] :cpu_configurations
     #   The list of supported CPU configurations for the MicroVM.
@@ -1742,6 +1779,19 @@ module Aws::LambdaMicrovms
     #
     # @option params [Hash<String,String>] :environment_variables
     #   Environment variables set in the MicroVM runtime environment.
+    #
+    # @option params [String] :kms_key_identifier
+    #   The customer managed Amazon Web Services Key Management Service
+    #   (Amazon Web Services KMS) key that encrypts the contents and metadata
+    #   of your MicroVM image version. You must have permission to use the
+    #   key. Specify the key in one of the following formats:
+    #
+    #   * Key ARN
+    #
+    #   * Alias ARN
+    #
+    #   If you don't specify a key, your MicroVM image version uses an Amazon
+    #   Web Services owned key.
     #
     # @option params [required, String] :image_identifier
     #   The unique identifier (ARN or ID) of the MicroVM image to update.
@@ -1773,6 +1823,7 @@ module Aws::LambdaMicrovms
     #   * {Types::UpdateMicrovmImageResponse#additional_os_capabilities #additional_os_capabilities} => Array&lt;String&gt;
     #   * {Types::UpdateMicrovmImageResponse#hooks #hooks} => Types::Hooks
     #   * {Types::UpdateMicrovmImageResponse#environment_variables #environment_variables} => Hash&lt;String,String&gt;
+    #   * {Types::UpdateMicrovmImageResponse#kms_key_identifier #kms_key_identifier} => String
     #   * {Types::UpdateMicrovmImageResponse#updated_at #updated_at} => Time
     #   * {Types::UpdateMicrovmImageResponse#image_version #image_version} => String
     #
@@ -1797,7 +1848,7 @@ module Aws::LambdaMicrovms
     #     egress_network_connectors: ["NetworkConnector"],
     #     cpu_configurations: [
     #       {
-    #         architecture: "ARM_64", # required, accepts ARM_64
+    #         architecture: "ARM_64", # required, accepts ARM_64, X86_64
     #       },
     #     ],
     #     resources: [
@@ -1828,6 +1879,7 @@ module Aws::LambdaMicrovms
     #     environment_variables: {
     #       "EnvironmentVariableKey" => "EnvironmentVariableValue",
     #     },
+    #     kms_key_identifier: "KmsKeyIdentifier",
     #     image_identifier: "MicrovmImageIdentifier", # required
     #     client_token: "UpdateMicrovmImageRequestClientTokenString",
     #   })
@@ -1850,7 +1902,7 @@ module Aws::LambdaMicrovms
     #   resp.egress_network_connectors #=> Array
     #   resp.egress_network_connectors[0] #=> String
     #   resp.cpu_configurations #=> Array
-    #   resp.cpu_configurations[0].architecture #=> String, one of "ARM_64"
+    #   resp.cpu_configurations[0].architecture #=> String, one of "ARM_64", "X86_64"
     #   resp.resources #=> Array
     #   resp.resources[0].minimum_memory_in_mi_b #=> Integer
     #   resp.additional_os_capabilities #=> Array
@@ -1870,6 +1922,7 @@ module Aws::LambdaMicrovms
     #   resp.hooks.microvm_image_hooks.validate_timeout_in_seconds #=> Integer
     #   resp.environment_variables #=> Hash
     #   resp.environment_variables["EnvironmentVariableKey"] #=> String
+    #   resp.kms_key_identifier #=> String
     #   resp.updated_at #=> Time
     #   resp.image_version #=> String
     #
@@ -1907,6 +1960,7 @@ module Aws::LambdaMicrovms
     #   * {Types::UpdateMicrovmImageVersionResponse#additional_os_capabilities #additional_os_capabilities} => Array&lt;String&gt;
     #   * {Types::UpdateMicrovmImageVersionResponse#hooks #hooks} => Types::Hooks
     #   * {Types::UpdateMicrovmImageVersionResponse#environment_variables #environment_variables} => Hash&lt;String,String&gt;
+    #   * {Types::UpdateMicrovmImageVersionResponse#kms_key_identifier #kms_key_identifier} => String
     #   * {Types::UpdateMicrovmImageVersionResponse#image_arn #image_arn} => String
     #   * {Types::UpdateMicrovmImageVersionResponse#image_version #image_version} => String
     #   * {Types::UpdateMicrovmImageVersionResponse#state #state} => String
@@ -1936,7 +1990,7 @@ module Aws::LambdaMicrovms
     #   resp.egress_network_connectors #=> Array
     #   resp.egress_network_connectors[0] #=> String
     #   resp.cpu_configurations #=> Array
-    #   resp.cpu_configurations[0].architecture #=> String, one of "ARM_64"
+    #   resp.cpu_configurations[0].architecture #=> String, one of "ARM_64", "X86_64"
     #   resp.resources #=> Array
     #   resp.resources[0].minimum_memory_in_mi_b #=> Integer
     #   resp.additional_os_capabilities #=> Array
@@ -1956,6 +2010,7 @@ module Aws::LambdaMicrovms
     #   resp.hooks.microvm_image_hooks.validate_timeout_in_seconds #=> Integer
     #   resp.environment_variables #=> Hash
     #   resp.environment_variables["EnvironmentVariableKey"] #=> String
+    #   resp.kms_key_identifier #=> String
     #   resp.image_arn #=> String
     #   resp.image_version #=> String
     #   resp.state #=> String, one of "PENDING", "IN_PROGRESS", "SUCCESSFUL", "FAILED", "DELETING", "DELETED", "DELETE_FAILED"
@@ -1993,7 +2048,7 @@ module Aws::LambdaMicrovms
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-lambdamicrovms'
-      context[:gem_version] = '1.9.0'
+      context[:gem_version] = '1.18.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

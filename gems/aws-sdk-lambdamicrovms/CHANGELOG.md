@@ -1,6 +1,51 @@
 Unreleased Changes
 ------------------
 
+1.18.0 (2026-11-20)
+------------------
+
+* Feature - AWS Lambda MicroVMs now supports customer managed keys (CMK) in AWS Key Management Service (AWS KMS), enabling you to encrypt Lambda MicroVM data at rest using keys you control.
+
+1.17.0 (2026-11-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.16.0 (2026-11-16)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.15.0 (2026-11-11)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.14.0 (2026-11-10)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.13.0 (2026-11-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.12.0 (2026-11-06)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.11.0 (2026-11-05)
+------------------
+
+* Feature - AWS Lambda MicroVMs now support the x86-64 CPU architecture, which you can select in addition to ARM64 (Graviton) when launching a MicroVM.
+
+1.10.0 (2026-11-04)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.9.0 (2026-10-29)
 ------------------
 

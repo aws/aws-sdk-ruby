@@ -264,7 +264,8 @@ module Aws::ConnectContactLens
     #     An integer representing the maximum number attempts that will be made for
     #     a single request, including the initial attempt.  For example,
     #     setting this value to 5 will result in a request being retried up to
-    #     4 times. Used in `standard` and `adaptive` retry modes.
+    #     4 times. Used in `standard` and `adaptive` retry modes. Defaults to 3,
+    #     except for DynamoDB and DynamoDB Streams, which default to 4.
     #
     #   @option options [String] :profile ("default")
     #     Used when loading credentials from the shared credentials file at `HOME/.aws/credentials`.
@@ -327,15 +328,15 @@ module Aws::ConnectContactLens
     #     used by the default backoff function. This option is only used in the
     #     `legacy` retry mode.
     #
-    #   @option options [String] :retry_mode ("legacy")
+    #   @option options [String] :retry_mode ("standard")
     #     Specifies which retry algorithm to use. Values are:
     #
-    #     * `legacy` - The pre-existing retry behavior. This is the default
-    #       value if no retry mode is provided.
+    #     * `legacy` - The pre-existing retry behavior.
     #
     #     * `standard` - A standardized set of retry rules across the AWS SDKs.
     #       This includes support for retry quotas, which limit the number of
-    #       unsuccessful retries a client can make.
+    #       unsuccessful retries a client can make. This is the default value
+    #       if no retry mode is provided.
     #
     #     * `adaptive` - A retry mode that includes all the functionality of
     #       `standard` mode along with automatic client side throttling.
@@ -503,6 +504,13 @@ module Aws::ConnectContactLens
     #   previous response in the next request to retrieve the next set of
     #   results.
     #
+    # @option params [Types::RealTimeContactAnalysisSegmentsFilter] :list_filter
+    #   A filter that limits the category segments returned by the operation.
+    #   When provided, use `CategoriesAttributeFilter` to return only the
+    #   category segments whose rules have tags that match the filter. This
+    #   enforces tag-based access control on the categories that the caller
+    #   can view.
+    #
     # @return [Types::ListRealtimeContactAnalysisSegmentsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListRealtimeContactAnalysisSegmentsResponse#segments #segments} => Array&lt;Types::RealtimeContactAnalysisSegment&gt;
@@ -517,6 +525,35 @@ module Aws::ConnectContactLens
     #     contact_id: "ContactId", # required
     #     max_results: 1,
     #     next_token: "NextToken",
+    #     list_filter: {
+    #       categories_attribute_filter: {
+    #         or_conditions: [
+    #           {
+    #             tag_conditions: [
+    #               {
+    #                 tag_key: "TagKey",
+    #                 tag_value: "TagValue",
+    #                 comparison_type: "EQUALS", # accepts EQUALS, NOT_EQUALS
+    #               },
+    #             ],
+    #           },
+    #         ],
+    #         and_condition: {
+    #           tag_conditions: [
+    #             {
+    #               tag_key: "TagKey",
+    #               tag_value: "TagValue",
+    #               comparison_type: "EQUALS", # accepts EQUALS, NOT_EQUALS
+    #             },
+    #           ],
+    #         },
+    #         tag_condition: {
+    #           tag_key: "TagKey",
+    #           tag_value: "TagValue",
+    #           comparison_type: "EQUALS", # accepts EQUALS, NOT_EQUALS
+    #         },
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
@@ -532,12 +569,14 @@ module Aws::ConnectContactLens
     #   resp.segments[0].transcript.issues_detected #=> Array
     #   resp.segments[0].transcript.issues_detected[0].character_offsets.begin_offset_char #=> Integer
     #   resp.segments[0].transcript.issues_detected[0].character_offsets.end_offset_char #=> Integer
+    #   resp.segments[0].transcript.language_code #=> String
     #   resp.segments[0].categories.matched_categories #=> Array
     #   resp.segments[0].categories.matched_categories[0] #=> String
     #   resp.segments[0].categories.matched_details #=> Hash
     #   resp.segments[0].categories.matched_details["CategoryName"].points_of_interest #=> Array
     #   resp.segments[0].categories.matched_details["CategoryName"].points_of_interest[0].begin_offset_millis #=> Integer
     #   resp.segments[0].categories.matched_details["CategoryName"].points_of_interest[0].end_offset_millis #=> Integer
+    #   resp.segments[0].categories.matched_details["CategoryName"].rule_id #=> String
     #   resp.segments[0].post_contact_summary.content #=> String
     #   resp.segments[0].post_contact_summary.status #=> String, one of "FAILED", "COMPLETED"
     #   resp.segments[0].post_contact_summary.failure_code #=> String, one of "QUOTA_EXCEEDED", "INSUFFICIENT_CONVERSATION_CONTENT", "FAILED_SAFETY_GUIDELINES", "INVALID_ANALYSIS_CONFIGURATION", "INTERNAL_ERROR"
@@ -579,7 +618,7 @@ module Aws::ConnectContactLens
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-connectcontactlens'
-      context[:gem_version] = '1.68.0'
+      context[:gem_version] = '1.76.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -318,7 +318,33 @@ module Aws::Braket
     #
     # @!attribute [rw] output_s3_key_prefix
     #   The key prefix for the location in the S3 bucket to store quantum
-    #   task results in.
+    #   task results in. For example, `results/`. Must not contain path
+    #   traversal sequences such as `../` or `./`. The following characters
+    #   are not valid in the key prefix:
+    #
+    #   * Braces (`{` or `}`)
+    #
+    #   * Brackets (`[` or `]`)
+    #
+    #   * Less than or greater than sign (`<` or `>`)
+    #
+    #   * Backslash (``)
+    #
+    #   * Vertical bar or pipe (`|`)
+    #
+    #   * Caret or circumflex (`^`)
+    #
+    #   * Tilde (`~`)
+    #
+    #   * Grave accent or backtick (`` ` ``)
+    #
+    #   * Percent character (`%`)
+    #
+    #   * Pound sign (`#`)
+    #
+    #   * Quotation mark (`"`)
+    #
+    #   * Non-printable ASCII characters (128–255 decimal characters)
     #   @return [String]
     #
     # @!attribute [rw] action
@@ -527,6 +553,36 @@ module Aws::Braket
       include Aws::Structure
     end
 
+    # Provides information about the reason for the current status of a
+    # device.
+    #
+    # @!attribute [rw] reason
+    #   The reason code for the current status of the device.
+    #   @return [String]
+    #
+    # @!attribute [rw] started_at
+    #   The time at which the device status reason started.
+    #   @return [Time]
+    #
+    # @!attribute [rw] estimated_end_at
+    #   The estimated time at which the current status reason will end.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The time of the most recent update to the device status reason.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/braket-2019-09-01/DeviceStatusReason AWS API Documentation
+    #
+    class DeviceStatusReason < Struct.new(
+      :reason,
+      :started_at,
+      :estimated_end_at,
+      :updated_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Includes information about the device.
     #
     # @!attribute [rw] device_arn
@@ -618,6 +674,11 @@ module Aws::Braket
     #   The status of the device.
     #   @return [String]
     #
+    # @!attribute [rw] device_status_reason
+    #   The reason for the current status of the device, including status
+    #   reason codes and timestamps.
+    #   @return [Types::DeviceStatusReason]
+    #
     # @!attribute [rw] device_capabilities
     #   Details about the capabilities of the device.
     #   @return [String]
@@ -635,6 +696,7 @@ module Aws::Braket
       :provider_name,
       :device_type,
       :device_status,
+      :device_status_reason,
       :device_capabilities,
       :device_queue_info)
       SENSITIVE = []
@@ -1399,20 +1461,42 @@ module Aws::Braket
       include Aws::Structure
     end
 
-    # A filter used to search for Amazon Braket hybrid jobs.
+    # A filter used to search for Amazon Braket hybrid jobs. You can combine
+    # multiple filters in a single request, except that `jobArn` cannot be
+    # combined with any other filter.
     #
     # @!attribute [rw] name
-    #   The name of the hybrid job parameter to filter based on. Filter name
-    #   can be either `jobArn` or `createdAt`.
+    #   The name of the hybrid job parameter to filter based on. Supported
+    #   filter names:
+    #
+    #   `jobArn` — Filter by the job ARN. Supports the `EQUAL` operator
+    #   only. Cannot be combined with other filters.
+    #
+    #   `jobName` — Filter by the job name. Supports the `EQUAL` operator
+    #   for exact match, or the `CONTAINS` operator for substring match. For
+    #   example, use `CONTAINS` with a value of `my-experiment` to find all
+    #   jobs whose name includes "my-experiment".
+    #
+    #   `deviceArn` — Filter by the target device. Supports the `EQUAL`
+    #   operator only. The value can be a device ARN (for example,
+    #   `arn:aws:braket:us-east-1::device/qpu/ionq/Aria-1`) or a local
+    #   simulator identifier (for example, `local:braket/default`).
+    #
+    #   `createdAt` — Filter by the job creation time. Supports the `EQUAL`,
+    #   `GT`, `GTE`, `LT`, `LTE`, and `BETWEEN` operators. Values must be in
+    #   RFC 3339 date-time format.
     #   @return [String]
     #
     # @!attribute [rw] values
     #   The values used to filter hybrid jobs based on the filter name and
-    #   operator.
+    #   operator. Each filter accepts an array of values. Most filters
+    #   accept a single value, except `createdAt` with the `BETWEEN`
+    #   operator, which requires exactly two values.
     #   @return [Array<String>]
     #
     # @!attribute [rw] operator
-    #   An operator to use for the filter.
+    #   An operator to use for the filter. The supported operators depend on
+    #   the filter name. See the `name` parameter for details.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/braket-2019-09-01/SearchJobsFilter AWS API Documentation
@@ -1546,8 +1630,8 @@ module Aws::Braket
     # to narrow down results based on specific attributes.
     #
     # @!attribute [rw] name
-    #   The name of the field to filter on. Currently only supports
-    #   `deviceArn`.
+    #   The name of the field to filter on. Currently supports `deviceArn`
+    #   and `spendingLimitArn`.
     #   @return [String]
     #
     # @!attribute [rw] values

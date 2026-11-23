@@ -23,6 +23,88 @@ module Aws::NetworkFlowMonitor
       include Aws::Structure
     end
 
+    # An account that you can add to the monitoring scope for a monitor, so
+    # that Network Flow Monitor can resolve the network paths for traffic to
+    # and from resources in the account.
+    #
+    # @!attribute [rw] account_id
+    #   The ID of the account that you can add to the monitoring scope.
+    #   @return [String]
+    #
+    # @!attribute [rw] region
+    #   The Amazon Web Services Region of the traffic that Network Flow
+    #   Monitor identified for the account.
+    #   @return [String]
+    #
+    # @!attribute [rw] membership
+    #   Whether the account is a member of the same organization as the
+    #   account that owns the monitor. The membership status can be one of
+    #   the following
+    #
+    #   * `IN_ORG`: The account is a member of the same organization.
+    #
+    #   * `NOT_IN_ORG`: The account isn't a member of the same
+    #     organization.
+    #
+    #   * `UNKNOWN`: Network Flow Monitor can't determine the organization
+    #     membership of the account.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkflowmonitor-2023-04-19/AccountToAdd AWS API Documentation
+    #
+    class AccountToAdd < Struct.new(
+      :account_id,
+      :region,
+      :membership)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Additional information about a network flow, such as the network that
+    # the remote address belongs to and the location of the client.
+    #
+    # @!attribute [rw] network
+    #   The network that the remote address of the network flow belongs to.
+    #   @return [Types::Network]
+    #
+    # @!attribute [rw] client_location
+    #   The location of the client for the network flow.
+    #   @return [Types::ClientLocation]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkflowmonitor-2023-04-19/AdditionalFlowInfo AWS API Documentation
+    #
+    class AdditionalFlowInfo < Struct.new(
+      :network,
+      :client_location)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The geographic location of the client for a network flow.
+    #
+    # @!attribute [rw] city
+    #   The city where the client is located.
+    #   @return [String]
+    #
+    # @!attribute [rw] subdivision
+    #   The subdivision, such as a state or province, where the client is
+    #   located.
+    #   @return [String]
+    #
+    # @!attribute [rw] country
+    #   The country where the client is located.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkflowmonitor-2023-04-19/ClientLocation AWS API Documentation
+    #
+    class ClientLocation < Struct.new(
+      :city,
+      :subdivision,
+      :country)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The requested resource is in use.
     #
     # @!attribute [rw] message
@@ -168,6 +250,111 @@ module Aws::NetworkFlowMonitor
       include Aws::Structure
     end
 
+    # @!attribute [rw] monitor_name
+    #   The name of the performance monitor.
+    #   @return [String]
+    #
+    # @!attribute [rw] scope_arn
+    #   The Amazon Resource Name (ARN) of the scope for the performance
+    #   monitor.
+    #   @return [String]
+    #
+    # @!attribute [rw] targets
+    #   The resources to monitor. Each target identifies a resource,
+    #   currently a VPC, for which you can track network performance. For a
+    #   VPC, specify the VPC ARN.
+    #   @return [Array<Types::PerformanceMonitorTarget>]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive string of up to 64 ASCII characters that
+    #   you specify to make an idempotent API request. If the token matches
+    #   a previous request, the service ignores the request without
+    #   returning an error. Don't reuse the same client token for other API
+    #   requests.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags for a performance monitor. You can add a maximum of 200
+    #   tags.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkflowmonitor-2023-04-19/CreatePerformanceMonitorInput AWS API Documentation
+    #
+    class CreatePerformanceMonitorInput < Struct.new(
+      :monitor_name,
+      :scope_arn,
+      :targets,
+      :client_token,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] monitor_arn
+    #   The Amazon Resource Name (ARN) of the performance monitor.
+    #   @return [String]
+    #
+    # @!attribute [rw] monitor_name
+    #   The name of the performance monitor.
+    #   @return [String]
+    #
+    # @!attribute [rw] monitor_status
+    #   The status of a performance monitor. The status can be one of the
+    #   following
+    #
+    #   * `PENDING`: The performance monitor is in the process of being
+    #     created.
+    #
+    #   * `ACTIVE`: The performance monitor is active.
+    #
+    #   * `INACTIVE`: The performance monitor is inactive.
+    #
+    #   * `ERROR`: The performance monitor can't be created or updated.
+    #
+    #   * `DELETING`: The performance monitor is in the process of being
+    #     deleted.
+    #   @return [String]
+    #
+    # @!attribute [rw] monitor_type
+    #   The type of resource that you monitor determines the type of the
+    #   performance monitor.
+    #   @return [String]
+    #
+    # @!attribute [rw] targets
+    #   The resources that the performance monitor tracks network
+    #   performance for.
+    #   @return [Array<Types::PerformanceMonitorTarget>]
+    #
+    # @!attribute [rw] created_at
+    #   The date and time when the performance monitor was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] modified_at
+    #   The date and time when the performance monitor was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] tags
+    #   The tags for a performance monitor.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkflowmonitor-2023-04-19/CreatePerformanceMonitorOutput AWS API Documentation
+    #
+    class CreatePerformanceMonitorOutput < Struct.new(
+      :monitor_arn,
+      :monitor_name,
+      :monitor_status,
+      :monitor_type,
+      :targets,
+      :created_at,
+      :modified_at,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] targets
     #   The targets to define the scope to be monitored. A target is an
     #   array of targetResources, which are currently Region-account pairs,
@@ -249,6 +436,22 @@ module Aws::NetworkFlowMonitor
     #
     class DeleteMonitorOutput < Aws::EmptyStructure; end
 
+    # @!attribute [rw] monitor_name
+    #   The name of the performance monitor.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkflowmonitor-2023-04-19/DeletePerformanceMonitorInput AWS API Documentation
+    #
+    class DeletePerformanceMonitorInput < Struct.new(
+      :monitor_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkflowmonitor-2023-04-19/DeletePerformanceMonitorOutput AWS API Documentation
+    #
+    class DeletePerformanceMonitorOutput < Aws::EmptyStructure; end
+
     # @!attribute [rw] scope_id
     #   The identifier for the scope that includes the resources you want to
     #   get data results for. A scope ID is an internally-generated
@@ -267,6 +470,40 @@ module Aws::NetworkFlowMonitor
     # @see http://docs.aws.amazon.com/goto/WebAPI/networkflowmonitor-2023-04-19/DeleteScopeOutput AWS API Documentation
     #
     class DeleteScopeOutput < Aws::EmptyStructure; end
+
+    # A filter for a query, to return a subset of the results.
+    #
+    # @!attribute [rw] field
+    #   The name of the field that you want to filter on. The fields that
+    #   you can specify depend on the type of query.
+    #   @return [String]
+    #
+    # @!attribute [rw] operator
+    #   The operator to use to compare the field with the values that you
+    #   specify. The operator can be one of the following
+    #
+    #   * `EQUALS`: The field matches a single value.
+    #
+    #   * `NOT_EQUALS`: The field doesn't match a single value.
+    #
+    #   * `IN`: The field matches any one of several values.
+    #
+    #   * `CONTAINS`: The field contains a value.
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   The values to compare the field with.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkflowmonitor-2023-04-19/FilterParameter AWS API Documentation
+    #
+    class FilterParameter < Struct.new(
+      :field,
+      :operator,
+      :values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @!attribute [rw] monitor_name
     #   The name of the monitor.
@@ -341,6 +578,147 @@ module Aws::NetworkFlowMonitor
       include Aws::Structure
     end
 
+    # @!attribute [rw] monitor_arn
+    #   The Amazon Resource Name (ARN) of the monitor that you want to
+    #   return scope suggestions for.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The number of query results that you want to return with this call.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results. You receive this token from a
+    #   previous call.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkflowmonitor-2023-04-19/GetMonitorScopeSuggestionsInput AWS API Documentation
+    #
+    class GetMonitorScopeSuggestionsInput < Struct.new(
+      :monitor_arn,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] status
+    #   The coverage status of the monitoring scope for the monitor. The
+    #   status can be one of the following
+    #
+    #   * `COMPLETE`: The scope includes every account that sends traffic
+    #     to, or receives traffic from, resources in the monitor.
+    #
+    #   * `INCOMPLETE`: There are accounts that you can add to the scope.
+    #
+    #   * `PENDING`: Network Flow Monitor is determining the coverage of the
+    #     scope.
+    #
+    #   * `STALE`: The coverage of the scope was last determined too long
+    #     ago to be current.
+    #   @return [String]
+    #
+    # @!attribute [rw] accounts_to_add
+    #   The accounts that you can add to the monitoring scope, so that
+    #   Network Flow Monitor can resolve the network paths for traffic to
+    #   and from resources in those accounts.
+    #   @return [Array<Types::AccountToAdd>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results. You receive this token from a
+    #   previous call.
+    #   @return [String]
+    #
+    # @!attribute [rw] updated_at
+    #   The date and time when Network Flow Monitor last determined the
+    #   coverage of the monitoring scope.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkflowmonitor-2023-04-19/GetMonitorScopeSuggestionsOutput AWS API Documentation
+    #
+    class GetMonitorScopeSuggestionsOutput < Struct.new(
+      :status,
+      :accounts_to_add,
+      :next_token,
+      :updated_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] monitor_name
+    #   The name of the performance monitor.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkflowmonitor-2023-04-19/GetPerformanceMonitorInput AWS API Documentation
+    #
+    class GetPerformanceMonitorInput < Struct.new(
+      :monitor_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] monitor_arn
+    #   The Amazon Resource Name (ARN) of the performance monitor.
+    #   @return [String]
+    #
+    # @!attribute [rw] monitor_name
+    #   The name of the performance monitor.
+    #   @return [String]
+    #
+    # @!attribute [rw] monitor_status
+    #   The status of a performance monitor. The status can be one of the
+    #   following
+    #
+    #   * `PENDING`: The performance monitor is in the process of being
+    #     created.
+    #
+    #   * `ACTIVE`: The performance monitor is active.
+    #
+    #   * `INACTIVE`: The performance monitor is inactive.
+    #
+    #   * `ERROR`: The performance monitor can't be created or updated.
+    #
+    #   * `DELETING`: The performance monitor is in the process of being
+    #     deleted.
+    #   @return [String]
+    #
+    # @!attribute [rw] monitor_type
+    #   The type of resource that you monitor determines the type of the
+    #   performance monitor.
+    #   @return [String]
+    #
+    # @!attribute [rw] targets
+    #   The resources that the performance monitor tracks network
+    #   performance for.
+    #   @return [Array<Types::PerformanceMonitorTarget>]
+    #
+    # @!attribute [rw] created_at
+    #   The date and time when the performance monitor was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] modified_at
+    #   The date and time when the performance monitor was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] tags
+    #   The tags for a performance monitor.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkflowmonitor-2023-04-19/GetPerformanceMonitorOutput AWS API Documentation
+    #
+    class GetPerformanceMonitorOutput < Struct.new(
+      :monitor_arn,
+      :monitor_name,
+      :monitor_status,
+      :monitor_type,
+      :targets,
+      :created_at,
+      :modified_at,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] monitor_name
     #   The name of the monitor.
     #   @return [String]
@@ -390,6 +768,61 @@ module Aws::NetworkFlowMonitor
     class GetQueryResultsMonitorTopContributorsOutput < Struct.new(
       :unit,
       :top_contributors,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] monitor_name
+    #   The name of the performance monitor.
+    #   @return [String]
+    #
+    # @!attribute [rw] query_id
+    #   The identifier for the query. A query ID is an internally-generated
+    #   identifier for a specific query returned from an API call to start a
+    #   query.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results. You receive this token from a
+    #   previous call.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The number of query results that you want to return with this call.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkflowmonitor-2023-04-19/GetQueryResultsPerformanceMonitorInput AWS API Documentation
+    #
+    class GetQueryResultsPerformanceMonitorInput < Struct.new(
+      :monitor_name,
+      :query_id,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] fields
+    #   The columns that the query returns, in the order that the values for
+    #   each row appear in `data`.
+    #   @return [Array<Types::QueryField>]
+    #
+    # @!attribute [rw] data
+    #   The results of the query. Each row contains the values for the
+    #   columns that `fields` describes, in the same order.
+    #   @return [Array<Array<String>>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results. You receive this token from a
+    #   previous call.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkflowmonitor-2023-04-19/GetQueryResultsPerformanceMonitorOutput AWS API Documentation
+    #
+    class GetQueryResultsPerformanceMonitorOutput < Struct.new(
+      :fields,
+      :data,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -541,6 +974,49 @@ module Aws::NetworkFlowMonitor
     # @see http://docs.aws.amazon.com/goto/WebAPI/networkflowmonitor-2023-04-19/GetQueryStatusMonitorTopContributorsOutput AWS API Documentation
     #
     class GetQueryStatusMonitorTopContributorsOutput < Struct.new(
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] monitor_name
+    #   The name of the performance monitor.
+    #   @return [String]
+    #
+    # @!attribute [rw] query_id
+    #   The identifier for the query. A query ID is an internally-generated
+    #   identifier for a specific query returned from an API call to start a
+    #   query.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkflowmonitor-2023-04-19/GetQueryStatusPerformanceMonitorInput AWS API Documentation
+    #
+    class GetQueryStatusPerformanceMonitorInput < Struct.new(
+      :monitor_name,
+      :query_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] status
+    #   When you run a query, use this call to check the status of the query
+    #   to make sure that the query has `SUCCEEDED` before you review the
+    #   results.
+    #
+    #   * `QUEUED`: The query is scheduled to run.
+    #
+    #   * `RUNNING`: The query is in progress but not complete.
+    #
+    #   * `SUCCEEDED`: The query completed successfully.
+    #
+    #   * `FAILED`: The query failed due to an error.
+    #
+    #   * `CANCELED`: The query was canceled.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkflowmonitor-2023-04-19/GetQueryStatusPerformanceMonitorOutput AWS API Documentation
+    #
+    class GetQueryStatusPerformanceMonitorOutput < Struct.new(
       :status)
       SENSITIVE = []
       include Aws::Structure
@@ -792,6 +1268,57 @@ module Aws::NetworkFlowMonitor
     # @see http://docs.aws.amazon.com/goto/WebAPI/networkflowmonitor-2023-04-19/ListMonitorsOutput AWS API Documentation
     #
     class ListMonitorsOutput < Struct.new(
+      :monitors,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   The token for the next set of results. You receive this token from a
+    #   previous call.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The number of performance monitors that you want to return with this
+    #   call. If you don't specify a value, the default is 25.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] monitor_status
+    #   The status of the performance monitors that you want to return. If
+    #   you don't specify a status, Network Flow Monitor returns
+    #   performance monitors with any status.
+    #   @return [String]
+    #
+    # @!attribute [rw] monitor_type
+    #   The type of the performance monitors that you want to return. If you
+    #   don't specify a type, Network Flow Monitor returns performance
+    #   monitors of any type.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkflowmonitor-2023-04-19/ListPerformanceMonitorsInput AWS API Documentation
+    #
+    class ListPerformanceMonitorsInput < Struct.new(
+      :next_token,
+      :max_results,
+      :monitor_status,
+      :monitor_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] monitors
+    #   The performance monitors in the account.
+    #   @return [Array<Types::PerformanceMonitorSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results. You receive this token from a
+    #   previous call.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkflowmonitor-2023-04-19/ListPerformanceMonitorsOutput AWS API Documentation
+    #
+    class ListPerformanceMonitorsOutput < Struct.new(
       :monitors,
       :next_token)
       SENSITIVE = []
@@ -1106,6 +1633,11 @@ module Aws::NetworkFlowMonitor
     #   The Amazon Resource Name (ARN) of a remote VPC.
     #   @return [String]
     #
+    # @!attribute [rw] additional_flow_info
+    #   Additional information about the network flow, such as the network
+    #   that the remote address belongs to and the location of the client.
+    #   @return [Types::AdditionalFlowInfo]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/networkflowmonitor-2023-04-19/MonitorTopContributorsRow AWS API Documentation
     #
     class MonitorTopContributorsRow < Struct.new(
@@ -1133,7 +1665,119 @@ module Aws::NetworkFlowMonitor
       :local_vpc_arn,
       :remote_instance_arn,
       :remote_subnet_arn,
-      :remote_vpc_arn)
+      :remote_vpc_arn,
+      :additional_flow_info)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The network that an address in a network flow belongs to.
+    #
+    # @!attribute [rw] as_name
+    #   The name of the autonomous system that the network belongs to.
+    #   @return [String]
+    #
+    # @!attribute [rw] as_number
+    #   The autonomous system number (ASN) of the autonomous system that the
+    #   network belongs to.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkflowmonitor-2023-04-19/Network AWS API Documentation
+    #
+    class Network < Struct.new(
+      :as_name,
+      :as_number)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A summary of information about a performance monitor, including the
+    # ARN, the name, the status, and the resources that it tracks network
+    # performance for.
+    #
+    # @!attribute [rw] monitor_arn
+    #   The Amazon Resource Name (ARN) of the performance monitor.
+    #   @return [String]
+    #
+    # @!attribute [rw] monitor_name
+    #   The name of the performance monitor.
+    #   @return [String]
+    #
+    # @!attribute [rw] monitor_status
+    #   The status of a performance monitor. The status can be one of the
+    #   following
+    #
+    #   * `PENDING`: The performance monitor is in the process of being
+    #     created.
+    #
+    #   * `ACTIVE`: The performance monitor is active.
+    #
+    #   * `INACTIVE`: The performance monitor is inactive.
+    #
+    #   * `ERROR`: The performance monitor can't be created or updated.
+    #
+    #   * `DELETING`: The performance monitor is in the process of being
+    #     deleted.
+    #   @return [String]
+    #
+    # @!attribute [rw] monitor_type
+    #   The type of resource that you monitor determines the type of the
+    #   performance monitor.
+    #   @return [String]
+    #
+    # @!attribute [rw] targets
+    #   The resources that the performance monitor tracks network
+    #   performance for.
+    #   @return [Array<Types::PerformanceMonitorTarget>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkflowmonitor-2023-04-19/PerformanceMonitorSummary AWS API Documentation
+    #
+    class PerformanceMonitorSummary < Struct.new(
+      :monitor_arn,
+      :monitor_name,
+      :monitor_status,
+      :monitor_type,
+      :targets)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A resource that a performance monitor tracks network performance for.
+    #
+    # @!attribute [rw] type
+    #   The type of the resource that you want Network Flow Monitor to track
+    #   network performance for. Specify `AWS::EC2::VPC`.
+    #   @return [String]
+    #
+    # @!attribute [rw] identifier
+    #   The Amazon Resource Name (ARN) of the resource that you want Network
+    #   Flow Monitor to track network performance for.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkflowmonitor-2023-04-19/PerformanceMonitorTarget AWS API Documentation
+    #
+    class PerformanceMonitorTarget < Struct.new(
+      :type,
+      :identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A column that a query returns, with its name and data type.
+    #
+    # @!attribute [rw] name
+    #   The name of the column.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The data type of the values in the column.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkflowmonitor-2023-04-19/QueryField AWS API Documentation
+    #
+    class QueryField < Struct.new(
+      :name,
+      :type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1272,6 +1916,77 @@ module Aws::NetworkFlowMonitor
     # @see http://docs.aws.amazon.com/goto/WebAPI/networkflowmonitor-2023-04-19/StartQueryMonitorTopContributorsOutput AWS API Documentation
     #
     class StartQueryMonitorTopContributorsOutput < Struct.new(
+      :query_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] monitor_name
+    #   The name of the performance monitor.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_time
+    #   The timestamp that is the date and time that is the beginning of the
+    #   period that you want to retrieve results for with your query.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   The timestamp that is the date and time end of the period that you
+    #   want to retrieve results for with your query.
+    #   @return [Time]
+    #
+    # @!attribute [rw] query_type
+    #   The type of query that you want to create. Specify `TOP_PATHS` to
+    #   return the top paths for the performance monitor.
+    #   @return [String]
+    #
+    # @!attribute [rw] filter_parameters
+    #   The filters for the query, to return a subset of the top paths. For
+    #   a `TOP_PATHS` query, you can filter on the following fields:
+    #
+    #   * `local_az_id`: The Availability Zone ID of the local end of a path
+    #
+    #   * `remote_az_id`: The Availability Zone ID of the remote end of a
+    #     path
+    #
+    #   * `impact_level`: The impact level of a path
+    #
+    #   When you filter on `impact_level`, Network Flow Monitor compares the
+    #   filter with the most severe impact level for the path over the time
+    #   period of the query, and the traffic and round-trip time that
+    #   Network Flow Monitor returns for each path still cover the full time
+    #   period. Paths that have no impact data don't match an
+    #   `impact_level` filter, including a `NOT_EQUALS` filter. Network Flow
+    #   Monitor doesn't filter the subnet pairs within a path by impact
+    #   level.
+    #   @return [Array<Types::FilterParameter>]
+    #
+    # @!attribute [rw] limit
+    #   The maximum number of top paths that you want the query to return.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkflowmonitor-2023-04-19/StartQueryPerformanceMonitorInput AWS API Documentation
+    #
+    class StartQueryPerformanceMonitorInput < Struct.new(
+      :monitor_name,
+      :start_time,
+      :end_time,
+      :query_type,
+      :filter_parameters,
+      :limit)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] query_id
+    #   The identifier for the query. A query ID is an internally-generated
+    #   identifier for a specific query returned from an API call to start a
+    #   query.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkflowmonitor-2023-04-19/StartQueryPerformanceMonitorOutput AWS API Documentation
+    #
+    class StartQueryPerformanceMonitorOutput < Struct.new(
       :query_id)
       SENSITIVE = []
       include Aws::Structure
@@ -1448,6 +2163,29 @@ module Aws::NetworkFlowMonitor
     # @see http://docs.aws.amazon.com/goto/WebAPI/networkflowmonitor-2023-04-19/StopQueryMonitorTopContributorsOutput AWS API Documentation
     #
     class StopQueryMonitorTopContributorsOutput < Aws::EmptyStructure; end
+
+    # @!attribute [rw] monitor_name
+    #   The name of the performance monitor.
+    #   @return [String]
+    #
+    # @!attribute [rw] query_id
+    #   The identifier for the query. A query ID is an internally-generated
+    #   identifier for a specific query returned from an API call to start a
+    #   query.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkflowmonitor-2023-04-19/StopQueryPerformanceMonitorInput AWS API Documentation
+    #
+    class StopQueryPerformanceMonitorInput < Struct.new(
+      :monitor_name,
+      :query_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkflowmonitor-2023-04-19/StopQueryPerformanceMonitorOutput AWS API Documentation
+    #
+    class StopQueryPerformanceMonitorOutput < Aws::EmptyStructure; end
 
     # @!attribute [rw] scope_id
     #   The identifier for the scope that includes the resources you want to
@@ -1772,6 +2510,102 @@ module Aws::NetworkFlowMonitor
       :monitor_status,
       :local_resources,
       :remote_resources,
+      :created_at,
+      :modified_at,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] monitor_name
+    #   The name of the performance monitor.
+    #   @return [String]
+    #
+    # @!attribute [rw] targets_to_add
+    #   The resources to add to the performance monitor.
+    #   @return [Array<Types::PerformanceMonitorTarget>]
+    #
+    # @!attribute [rw] targets_to_remove
+    #   The resources to remove from the performance monitor.
+    #   @return [Array<Types::PerformanceMonitorTarget>]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive string of up to 64 ASCII characters that
+    #   you specify to make an idempotent API request. If the token matches
+    #   a previous request, the service ignores the request without
+    #   returning an error. Don't reuse the same client token for other API
+    #   requests.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkflowmonitor-2023-04-19/UpdatePerformanceMonitorInput AWS API Documentation
+    #
+    class UpdatePerformanceMonitorInput < Struct.new(
+      :monitor_name,
+      :targets_to_add,
+      :targets_to_remove,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] monitor_arn
+    #   The Amazon Resource Name (ARN) of the performance monitor.
+    #   @return [String]
+    #
+    # @!attribute [rw] monitor_name
+    #   The name of the performance monitor.
+    #   @return [String]
+    #
+    # @!attribute [rw] monitor_status
+    #   The status of a performance monitor. The status can be one of the
+    #   following
+    #
+    #   * `PENDING`: The performance monitor is in the process of being
+    #     created.
+    #
+    #   * `ACTIVE`: The performance monitor is active.
+    #
+    #   * `INACTIVE`: The performance monitor is inactive.
+    #
+    #   * `ERROR`: The performance monitor can't be created or updated.
+    #
+    #   * `DELETING`: The performance monitor is in the process of being
+    #     deleted.
+    #   @return [String]
+    #
+    # @!attribute [rw] monitor_type
+    #   The type of resource that you monitor determines the type of the
+    #   performance monitor.
+    #   @return [String]
+    #
+    # @!attribute [rw] targets
+    #   The resources that the performance monitor tracks network
+    #   performance for.
+    #   @return [Array<Types::PerformanceMonitorTarget>]
+    #
+    # @!attribute [rw] created_at
+    #   The date and time when the performance monitor was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] modified_at
+    #   The date and time when the performance monitor was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] tags
+    #   The tags for a performance monitor.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkflowmonitor-2023-04-19/UpdatePerformanceMonitorOutput AWS API Documentation
+    #
+    class UpdatePerformanceMonitorOutput < Struct.new(
+      :monitor_arn,
+      :monitor_name,
+      :monitor_status,
+      :monitor_type,
+      :targets,
       :created_at,
       :modified_at,
       :tags)

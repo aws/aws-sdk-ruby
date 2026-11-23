@@ -3316,6 +3316,18 @@ module Aws::S3Control
     #   log in your account.
     #   @return [String]
     #
+    # @!attribute [rw] instance_scope
+    #   The scope of S3 Access Grants instances to search for a grant
+    #   matching the requested S3 URI path.
+    #
+    #   * `SELF` – Searches only the instance of the Amazon Web Services
+    #     account ID in the request.
+    #
+    #   * `ALL` – Searches the instance of the Amazon Web Services account
+    #     ID in the request and all instances shared with the caller's
+    #     account through Amazon Web Services Resource Access Manager (RAM).
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/GetDataAccessRequest AWS API Documentation
     #
     class GetDataAccessRequest < Struct.new(
@@ -3325,7 +3337,8 @@ module Aws::S3Control
       :duration_seconds,
       :privilege,
       :target_type,
-      :audit_context)
+      :audit_context,
+      :instance_scope)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3351,12 +3364,18 @@ module Aws::S3Control
     #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_control-access_sts-setcontext.html
     #   @return [Types::Grantee]
     #
+    # @!attribute [rw] matched_instance_arn
+    #   The Amazon Resource Name (ARN) of the S3 Access Grants instance
+    #   containing the grant that matched the requested S3 URI path.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/GetDataAccessResult AWS API Documentation
     #
     class GetDataAccessResult < Struct.new(
       :credentials,
       :matched_grant_target,
-      :grantee)
+      :grantee,
+      :matched_instance_arn)
       SENSITIVE = [:credentials]
       include Aws::Structure
     end
@@ -3735,6 +3754,34 @@ module Aws::S3Control
     class Include < Struct.new(
       :buckets,
       :regions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The container for S3 Storage Lens Intelligent-Tiering access tier
+    # metrics. When enabled, S3 Storage Lens produces metrics for each
+    # individual S3 Intelligent-Tiering access tier instead of reporting a
+    # single aggregate value for the INTELLIGENT\_TIERING storage class.
+    #
+    # For more information about S3 Storage Lens, see [Assessing your
+    # storage activity and usage with S3 Storage Lens][1] in the *Amazon S3
+    # User Guide*. For a complete list of S3 Storage Lens metrics, see [S3
+    # Storage Lens metrics glossary][2] in the *Amazon S3 User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_metrics_glossary.html
+    #
+    # @!attribute [rw] is_enabled
+    #   A container that indicates whether S3 Storage Lens
+    #   Intelligent-Tiering access tier metrics are enabled.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/IntAccessTiers AWS API Documentation
+    #
+    class IntAccessTiers < Struct.new(
+      :is_enabled)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5255,8 +5302,10 @@ module Aws::S3Control
 
     # Part of `ListCallerAccessGrantsResult`. Each entry includes the
     # permission level (READ, WRITE, or READWRITE) and the grant scope of
-    # the access grant. If the grant also includes an application ARN, the
-    # grantee can only access the S3 data through this application.
+    # the access grant. Each entry also includes the ARN of the S3 Access
+    # Grants instance in which the grant was created. If the grant also
+    # includes an application ARN, the grantee can only access the S3 data
+    # through this application.
     #
     # @!attribute [rw] permission
     #   The type of permission granted, which can be one of the following
@@ -5280,12 +5329,18 @@ module Aws::S3Control
     #   only access the S3 data through this application.
     #   @return [String]
     #
+    # @!attribute [rw] access_grants_instance_arn
+    #   The Amazon Resource Name (ARN) of the S3 Access Grants instance in
+    #   which the grant was created.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/ListCallerAccessGrantsEntry AWS API Documentation
     #
     class ListCallerAccessGrantsEntry < Struct.new(
       :permission,
       :grant_scope,
-      :application_arn)
+      :application_arn,
+      :access_grants_instance_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5321,6 +5376,18 @@ module Aws::S3Control
     #   other applications (`ALL`).
     #   @return [Boolean]
     #
+    # @!attribute [rw] instance_scope
+    #   The scope of S3 Access Grants instances to list grants from.
+    #
+    #   * `SELF` – Lists grants from the instance of the Amazon Web Services
+    #     account ID in the request.
+    #
+    #   * `ALL` – Lists grants from the instance of the Amazon Web Services
+    #     account ID in the request and all instances shared with the
+    #     caller's account through Amazon Web Services Resource Access
+    #     Manager (RAM).
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/ListCallerAccessGrantsRequest AWS API Documentation
     #
     class ListCallerAccessGrantsRequest < Struct.new(
@@ -5328,7 +5395,8 @@ module Aws::S3Control
       :grant_scope,
       :next_token,
       :max_results,
-      :allowed_by_application)
+      :allowed_by_application,
+      :instance_scope)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8468,6 +8536,12 @@ module Aws::S3Control
     #   metrics report.
     #   @return [Types::StorageLensExpandedPrefixesDataExport]
     #
+    # @!attribute [rw] cost_and_usage_reports_publish
+    #   A container for the configuration used to publish S3 Storage Lens
+    #   cost data to Amazon Web Services Cost and Usage Reports (Amazon Web
+    #   Services CUR).
+    #   @return [Types::StorageLensCostAndUsageReportsPublish]
+    #
     # @!attribute [rw] is_enabled
     #   A container for whether the S3 Storage Lens configuration is
     #   enabled.
@@ -8504,6 +8578,11 @@ module Aws::S3Control
     #    </note>
     #   @return [String]
     #
+    # @!attribute [rw] int_access_tiers
+    #   A container element for S3 Storage Lens Intelligent-Tiering access
+    #   tier metrics.
+    #   @return [Types::IntAccessTiers]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/StorageLensConfiguration AWS API Documentation
     #
     class StorageLensConfiguration < Struct.new(
@@ -8513,10 +8592,86 @@ module Aws::S3Control
       :exclude,
       :data_export,
       :expanded_prefixes_data_export,
+      :cost_and_usage_reports_publish,
       :is_enabled,
       :aws_org,
       :storage_lens_arn,
-      :prefix_delimiter)
+      :prefix_delimiter,
+      :int_access_tiers)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A container for the prefix-level configuration that determines the
+    # prefixes for which S3 Storage Lens publishes cost data to Amazon Web
+    # Services Cost and Usage Reports (Amazon Web Services CUR).
+    #
+    # @!attribute [rw] is_enabled
+    #   Indicates whether prefix-level cost data publishing to Amazon Web
+    #   Services CUR is enabled.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] selection_criteria
+    #   A container for the selection criteria that determines the prefix
+    #   depths for which cost data is published to Amazon Web Services CUR.
+    #   @return [Types::StorageLensCostAndUsageReportsSelectionCriteria]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/StorageLensCostAndUsageReportsPrefixLevel AWS API Documentation
+    #
+    class StorageLensCostAndUsageReportsPrefixLevel < Struct.new(
+      :is_enabled,
+      :selection_criteria)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A container for the configuration used to publish S3 Storage Lens cost
+    # data to Amazon Web Services Cost and Usage Reports (Amazon Web
+    # Services CUR).
+    #
+    # @!attribute [rw] prefix_level
+    #   A container for the prefix-level configuration that determines the
+    #   prefixes for which S3 Storage Lens publishes cost data to Amazon Web
+    #   Services CUR.
+    #   @return [Types::StorageLensCostAndUsageReportsPrefixLevel]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/StorageLensCostAndUsageReportsPublish AWS API Documentation
+    #
+    class StorageLensCostAndUsageReportsPublish < Struct.new(
+      :prefix_level)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A container for the selection criteria used by the S3 Storage Lens
+    # Amazon Web Services Cost and Usage Reports (Amazon Web Services CUR)
+    # publish configuration. The selection criteria specifies the minimum
+    # and maximum prefix depth (both inclusive) for which cost data is
+    # published to Amazon Web Services CUR. You must provide both `MinDepth`
+    # and `MaxDepth` together, or neither; `MinDepth` must be less than or
+    # equal to `MaxDepth`, and the difference must not exceed 4. If neither
+    # is provided, `MinDepth` defaults to `1` and `MaxDepth` defaults to
+    # `3`.
+    #
+    # @!attribute [rw] min_depth
+    #   The minimum prefix depth (inclusive) for which cost data is
+    #   published to Amazon Web Services CUR. You must provide both
+    #   `MinDepth` and `MaxDepth` together, or neither. If neither is
+    #   provided, `MinDepth` defaults to `1`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_depth
+    #   The maximum prefix depth (inclusive) for which cost data is
+    #   published to Amazon Web Services CUR. You must provide both
+    #   `MinDepth` and `MaxDepth` together, or neither. If neither is
+    #   provided, `MaxDepth` defaults to `3`.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/StorageLensCostAndUsageReportsSelectionCriteria AWS API Documentation
+    #
+    class StorageLensCostAndUsageReportsSelectionCriteria < Struct.new(
+      :min_depth,
+      :max_depth)
       SENSITIVE = []
       include Aws::Structure
     end

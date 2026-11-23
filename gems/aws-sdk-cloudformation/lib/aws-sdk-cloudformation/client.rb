@@ -264,7 +264,8 @@ module Aws::CloudFormation
     #     An integer representing the maximum number attempts that will be made for
     #     a single request, including the initial attempt.  For example,
     #     setting this value to 5 will result in a request being retried up to
-    #     4 times. Used in `standard` and `adaptive` retry modes.
+    #     4 times. Used in `standard` and `adaptive` retry modes. Defaults to 3,
+    #     except for DynamoDB and DynamoDB Streams, which default to 4.
     #
     #   @option options [String] :profile ("default")
     #     Used when loading credentials from the shared credentials file at `HOME/.aws/credentials`.
@@ -327,15 +328,15 @@ module Aws::CloudFormation
     #     used by the default backoff function. This option is only used in the
     #     `legacy` retry mode.
     #
-    #   @option options [String] :retry_mode ("legacy")
+    #   @option options [String] :retry_mode ("standard")
     #     Specifies which retry algorithm to use. Values are:
     #
-    #     * `legacy` - The pre-existing retry behavior. This is the default
-    #       value if no retry mode is provided.
+    #     * `legacy` - The pre-existing retry behavior.
     #
     #     * `standard` - A standardized set of retry rules across the AWS SDKs.
     #       This includes support for retry quotas, which limit the number of
-    #       unsuccessful retries a client can make.
+    #       unsuccessful retries a client can make. This is the default value
+    #       if no retry mode is provided.
     #
     #     * `adaptive` - A retry mode that includes all the functionality of
     #       `standard` mode along with automatic client side throttling.
@@ -761,7 +762,7 @@ module Aws::CloudFormation
     # failed update rollback, see [Update rollback failed][2].
     #
     # `ForceRollback` and `ResourcesToSkip` are mutually exclusive. For
-    # details, see ContinueUpdateRollbackInput$ForceRollback.
+    # details, see the `ForceRollback` parameter.
     #
     #
     #
@@ -2071,12 +2072,19 @@ module Aws::CloudFormation
     #     custom processing on CloudFormation templates with template
     #     macros][9].
     #
-    #     StackSets with service-managed permissions don't currently support
-    #     the use of macros in templates. (This includes the
+    #     With service-managed permissions, CloudFormation can process macros,
+    #     nested stacks, and transforms in your StackSet template only when
+    #     you provide a custom execution role template. (Macros include the
     #     [AWS::Include][10] and [AWS::Serverless][11] transforms, which are
-    #     macros hosted by CloudFormation.) Even if you specify this
-    #     capability for a StackSet with service-managed permissions, if you
-    #     reference a macro in your template the StackSet operation will fail.
+    #     macros hosted by CloudFormation.) The default service-managed
+    #     execution role can't provision them: if you reference a macro in
+    #     your template, the StackSet operation fails even when you specify
+    #     this capability.
+    #
+    #      To use macros, nested stacks, or transforms with service-managed
+    #     permissions, specify a custom execution role template in
+    #     `ExecutionRoleTemplateBody` or `ExecutionRoleTemplateUrl`, and
+    #     specify both `CAPABILITY_NAMED_IAM` and `CAPABILITY_AUTO_EXPAND`.
     #
     #
     #
@@ -2120,16 +2128,19 @@ module Aws::CloudFormation
     #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-prereqs-self-managed.html
     #
     # @option params [String] :execution_role_name
-    #   The name of the IAM execution role to use to create the StackSet. If
-    #   you do not specify an execution role, CloudFormation uses the
-    #   `AWSCloudFormationStackSetExecutionRole` role for the StackSet
-    #   operation.
+    #   The name of the IAM execution role that CloudFormation uses for
+    #   StackSet operations in your target accounts.
     #
-    #   Specify an IAM role only if you are using customized execution roles
-    #   to control which stack resources users and groups can include in their
-    #   StackSets.
+    #   \[Self-managed permissions\] If you do not specify an execution role,
+    #   CloudFormation uses the `AWSCloudFormationStackSetExecutionRole` role
+    #   for the StackSet operation. Specify an IAM role only if you are using
+    #   customized execution roles to control which stack resources users and
+    #   groups can include in their StackSets.
     #
-    #   Valid only if the permissions model is `SELF_MANAGED`.
+    #   \[Service-managed permissions\] Set this name when you use custom
+    #   execution roles. The role that your custom execution role template
+    #   provisions in your target accounts must have this same name, and the
+    #   name must begin with `stacksets-exec-custom-`.
     #
     # @option params [String] :permission_model
     #   Describes how the IAM roles required for StackSet operations are
@@ -2208,6 +2219,31 @@ module Aws::CloudFormation
     #   Describes whether CloudFormation performs non-conflicting operations
     #   concurrently and queues conflicting operations.
     #
+    # @option params [String] :execution_role_template_body
+    #   The body of the template that creates a custom execution role in
+    #   target accounts. This parameter applies only when the permissions
+    #   model is `SERVICE_MANAGED`.
+    #
+    #   Conditional: Specify either `ExecutionRoleTemplateBody` or
+    #   `ExecutionRoleTemplateUrl`, but not both. If you don't specify
+    #   either, CloudFormation uses the default service-managed execution role
+    #   in target accounts.
+    #
+    # @option params [String] :execution_role_template_url
+    #   The URL of an Amazon S3 object that contains the template that creates
+    #   a custom execution role in target accounts. This parameter applies
+    #   only when the permissions model is `SERVICE_MANAGED`.
+    #
+    #   Conditional: Specify either `ExecutionRoleTemplateBody` or
+    #   `ExecutionRoleTemplateUrl`, but not both. If you don't specify
+    #   either, CloudFormation uses the default service-managed execution role
+    #   in target accounts.
+    #
+    # @option params [String] :stack_set_output_bucket
+    #   The name of the Amazon S3 bucket that stores the execution role stack
+    #   template body. CloudFormation uses this bucket only when you specify a
+    #   custom execution role template.
+    #
     # @return [Types::CreateStackSetOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateStackSetOutput#stack_set_id #stack_set_id} => String
@@ -2248,6 +2284,9 @@ module Aws::CloudFormation
     #     managed_execution: {
     #       active: false,
     #     },
+    #     execution_role_template_body: "TemplateBody",
+    #     execution_role_template_url: "TemplateURL",
+    #     stack_set_output_bucket: "StackSetOutputBucket",
     #   })
     #
     # @example Response structure
@@ -4052,6 +4091,7 @@ module Aws::CloudFormation
     #   resp.stack_set.managed_execution.active #=> Boolean
     #   resp.stack_set.regions #=> Array
     #   resp.stack_set.regions[0] #=> String
+    #   resp.stack_set.stack_set_output_bucket_path #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeStackSet AWS API Documentation
     #
@@ -4063,6 +4103,10 @@ module Aws::CloudFormation
     end
 
     # Returns the description of the specified StackSet operation.
+    #
+    # Reports role provisioning and stack instances deployment progress in
+    # `StatusDetails.Stages`. A breakdown for each Amazon Web Services
+    # Region is available in `RegionalStatusDetails`.
     #
     # <note markdown="1"> This API provides *strongly consistent* reads meaning it will always
     # return the most up-to-date data.
@@ -4144,7 +4188,33 @@ module Aws::CloudFormation
     #   resp.stack_set_operation.stack_set_drift_detection_details.in_progress_stack_instances_count #=> Integer
     #   resp.stack_set_operation.stack_set_drift_detection_details.failed_stack_instances_count #=> Integer
     #   resp.stack_set_operation.status_reason #=> String
+    #   resp.stack_set_operation.status_details.stages.role_provisioning.status #=> String, one of "PENDING", "NOT_APPLICABLE", "NOT_STARTED", "IN_PROGRESS", "SUCCEEDED", "PARTIAL_SUCCESS", "FAILED"
+    #   resp.stack_set_operation.status_details.stages.role_provisioning.succeeded_accounts_count #=> Integer
+    #   resp.stack_set_operation.status_details.stages.role_provisioning.failed_accounts_count #=> Integer
+    #   resp.stack_set_operation.status_details.stages.role_provisioning.completed_accounts_count #=> Integer
+    #   resp.stack_set_operation.status_details.stages.role_provisioning.pending_accounts_count #=> Integer
+    #   resp.stack_set_operation.status_details.stages.role_provisioning.percentage_completed #=> Float
+    #   resp.stack_set_operation.status_details.stages.stack_instances_deployment.status #=> String, one of "PENDING", "NOT_APPLICABLE", "NOT_STARTED", "IN_PROGRESS", "SUCCEEDED", "PARTIAL_SUCCESS", "FAILED"
+    #   resp.stack_set_operation.status_details.stages.stack_instances_deployment.succeeded_stack_instances_count #=> Integer
+    #   resp.stack_set_operation.status_details.stages.stack_instances_deployment.failed_stack_instances_count #=> Integer
+    #   resp.stack_set_operation.status_details.stages.stack_instances_deployment.completed_stack_instances_count #=> Integer
+    #   resp.stack_set_operation.status_details.stages.stack_instances_deployment.pending_stack_instances_count #=> Integer
+    #   resp.stack_set_operation.status_details.stages.stack_instances_deployment.cancelled_stack_instances_count #=> Integer
+    #   resp.stack_set_operation.status_details.stages.stack_instances_deployment.skipped_stack_instances_count #=> Integer
+    #   resp.stack_set_operation.status_details.stages.stack_instances_deployment.percentage_completed #=> Float
+    #   resp.stack_set_operation.status_details.total_accounts_count #=> Integer
+    #   resp.stack_set_operation.status_details.total_stack_instances_count #=> Integer
     #   resp.stack_set_operation.status_details.failed_stack_instances_count #=> Integer
+    #   resp.stack_set_operation.regional_status_details #=> Hash
+    #   resp.stack_set_operation.regional_status_details["Region"].stages.regional_stack_instances_deployment.status #=> String, one of "PENDING", "NOT_APPLICABLE", "NOT_STARTED", "IN_PROGRESS", "SUCCEEDED", "PARTIAL_SUCCESS", "FAILED"
+    #   resp.stack_set_operation.regional_status_details["Region"].stages.regional_stack_instances_deployment.succeeded_stack_instances_count #=> Integer
+    #   resp.stack_set_operation.regional_status_details["Region"].stages.regional_stack_instances_deployment.failed_stack_instances_count #=> Integer
+    #   resp.stack_set_operation.regional_status_details["Region"].stages.regional_stack_instances_deployment.completed_stack_instances_count #=> Integer
+    #   resp.stack_set_operation.regional_status_details["Region"].stages.regional_stack_instances_deployment.pending_stack_instances_count #=> Integer
+    #   resp.stack_set_operation.regional_status_details["Region"].stages.regional_stack_instances_deployment.cancelled_stack_instances_count #=> Integer
+    #   resp.stack_set_operation.regional_status_details["Region"].stages.regional_stack_instances_deployment.skipped_stack_instances_count #=> Integer
+    #   resp.stack_set_operation.regional_status_details["Region"].stages.regional_stack_instances_deployment.total_stack_instances_count #=> Integer
+    #   resp.stack_set_operation.regional_status_details["Region"].stages.regional_stack_instances_deployment.percentage_completed #=> Float
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeStackSetOperation AWS API Documentation
     #
@@ -4263,6 +4333,7 @@ module Aws::CloudFormation
     #   resp.stacks[0].last_operations #=> Array
     #   resp.stacks[0].last_operations[0].operation_type #=> String, one of "CREATE_STACK", "UPDATE_STACK", "DELETE_STACK", "CONTINUE_ROLLBACK", "ROLLBACK", "CREATE_CHANGESET"
     #   resp.stacks[0].last_operations[0].operation_id #=> String
+    #   resp.stacks[0].alias_name #=> String
     #   resp.next_token #=> String
     #
     #
@@ -6575,6 +6646,10 @@ module Aws::CloudFormation
 
     # Returns summary information about operations performed on a StackSet.
     #
+    # Reports role provisioning and stack instances deployment progress in
+    # `StatusDetails.Stages`. The breakdown for each Amazon Web Services
+    # Region is available only from DescribeStackSetOperation.
+    #
     # <note markdown="1"> This API provides *eventually consistent* reads meaning it may take
     # some time but will eventually return the most up-to-date data.
     #
@@ -6641,6 +6716,22 @@ module Aws::CloudFormation
     #   resp.summaries[0].creation_timestamp #=> Time
     #   resp.summaries[0].end_timestamp #=> Time
     #   resp.summaries[0].status_reason #=> String
+    #   resp.summaries[0].status_details.stages.role_provisioning.status #=> String, one of "PENDING", "NOT_APPLICABLE", "NOT_STARTED", "IN_PROGRESS", "SUCCEEDED", "PARTIAL_SUCCESS", "FAILED"
+    #   resp.summaries[0].status_details.stages.role_provisioning.succeeded_accounts_count #=> Integer
+    #   resp.summaries[0].status_details.stages.role_provisioning.failed_accounts_count #=> Integer
+    #   resp.summaries[0].status_details.stages.role_provisioning.completed_accounts_count #=> Integer
+    #   resp.summaries[0].status_details.stages.role_provisioning.pending_accounts_count #=> Integer
+    #   resp.summaries[0].status_details.stages.role_provisioning.percentage_completed #=> Float
+    #   resp.summaries[0].status_details.stages.stack_instances_deployment.status #=> String, one of "PENDING", "NOT_APPLICABLE", "NOT_STARTED", "IN_PROGRESS", "SUCCEEDED", "PARTIAL_SUCCESS", "FAILED"
+    #   resp.summaries[0].status_details.stages.stack_instances_deployment.succeeded_stack_instances_count #=> Integer
+    #   resp.summaries[0].status_details.stages.stack_instances_deployment.failed_stack_instances_count #=> Integer
+    #   resp.summaries[0].status_details.stages.stack_instances_deployment.completed_stack_instances_count #=> Integer
+    #   resp.summaries[0].status_details.stages.stack_instances_deployment.pending_stack_instances_count #=> Integer
+    #   resp.summaries[0].status_details.stages.stack_instances_deployment.cancelled_stack_instances_count #=> Integer
+    #   resp.summaries[0].status_details.stages.stack_instances_deployment.skipped_stack_instances_count #=> Integer
+    #   resp.summaries[0].status_details.stages.stack_instances_deployment.percentage_completed #=> Float
+    #   resp.summaries[0].status_details.total_accounts_count #=> Integer
+    #   resp.summaries[0].status_details.total_stack_instances_count #=> Integer
     #   resp.summaries[0].status_details.failed_stack_instances_count #=> Integer
     #   resp.summaries[0].operation_preferences.region_concurrency_type #=> String, one of "SEQUENTIAL", "PARALLEL"
     #   resp.summaries[0].operation_preferences.region_order #=> Array
@@ -7484,6 +7575,39 @@ module Aws::CloudFormation
       req.send_request(options)
     end
 
+    # Removes an alias from a stack. After the alias is removed
+    # successfully, it can no longer be used to reference the stack in API
+    # calls.
+    #
+    # @option params [required, String] :alias_name
+    #   The alias name to remove.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: Example – Remove an alias from a stack
+    #
+    #   # The following example removes the alias MyAlias from your stack:
+    #
+    #   resp = client.remove_alias({
+    #     alias_name: "MyAlias", 
+    #   })
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.remove_alias({
+    #     alias_name: "AliasName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RemoveAlias AWS API Documentation
+    #
+    # @overload remove_alias(params = {})
+    # @param [Hash] params ({})
+    def remove_alias(params = {}, options = {})
+      req = build_request(:remove_alias, params)
+      req.send_request(options)
+    end
+
     # When specifying `RollbackStack`, you preserve the state of previously
     # provisioned resources when an operation fails. You can check the
     # status of the stack through the DescribeStacks operation.
@@ -7555,6 +7679,64 @@ module Aws::CloudFormation
     # @param [Hash] params ({})
     def rollback_stack(params = {}, options = {})
       req = build_request(:rollback_stack, params)
+      req.send_request(options)
+    end
+
+    # Assigns an alias to an existing stack. An alias is an alternative name
+    # for a stack that can be used in place of the stack name in any
+    # CloudFormation API call that accepts the `StackName` parameter. This
+    # enables you to effectively rename a stack without recreating it.
+    #
+    # After setting an alias, both the original stack name and the alias
+    # resolve to the same stack. Setting an alias does not change the
+    # stack's ARN, physical resource IDs, or any deployed resources.
+    #
+    # <note markdown="1"> Each stack can have at most one alias. To change a stack's alias,
+    # first remove the existing alias using RemoveAlias, then set a new one.
+    #
+    #  </note>
+    #
+    # @option params [required, String] :stack_name
+    #   The name or unique stack ID of the stack to assign an alias to.
+    #
+    # @option params [required, String] :alias_name
+    #   The alias to assign to the stack. The alias can then be used in place
+    #   of the stack name in any API call that accepts `StackName`.
+    #
+    #   The name must be unique within the same account and Region. It cannot
+    #   match an existing stack name or another active alias.
+    #
+    #   <note markdown="1"> An alias name can contain only alphanumeric characters
+    #   (case-sensitive) and hyphens. It must start with an alphabetic
+    #   character and can't be longer than 128 characters.
+    #
+    #    </note>
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: Example – Set an alias for a stack
+    #
+    #   # The following example assigns the alias MyAlias to the stack MyStack:
+    #
+    #   resp = client.set_alias({
+    #     alias_name: "MyAlias", 
+    #     stack_name: "MyStack", 
+    #   })
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.set_alias({
+    #     stack_name: "StackName", # required
+    #     alias_name: "AliasName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/SetAlias AWS API Documentation
+    #
+    # @overload set_alias(params = {})
+    # @param [Hash] params ({})
+    def set_alias(params = {}, options = {})
+      req = build_request(:set_alias, params)
       req.send_request(options)
     end
 
@@ -8817,12 +8999,19 @@ module Aws::CloudFormation
     #     custom processing on CloudFormation templates with template
     #     macros][9].
     #
-    #     StackSets with service-managed permissions do not currently support
-    #     the use of macros in templates. (This includes the
+    #     With service-managed permissions, CloudFormation can process macros,
+    #     nested stacks, and transforms in your StackSet template only when
+    #     you provide a custom execution role template. (Macros include the
     #     [AWS::Include][10] and [AWS::Serverless][11] transforms, which are
-    #     macros hosted by CloudFormation.) Even if you specify this
-    #     capability for a StackSet with service-managed permissions, if you
-    #     reference a macro in your template the StackSet operation will fail.
+    #     macros hosted by CloudFormation.) The default service-managed
+    #     execution role can't provision them: if you reference a macro in
+    #     your template, the StackSet operation fails even when you specify
+    #     this capability.
+    #
+    #      To use macros, nested stacks, or transforms with service-managed
+    #     permissions, specify a custom execution role template in
+    #     `ExecutionRoleTemplateBody` or `ExecutionRoleTemplateUrl`, and
+    #     specify both `CAPABILITY_NAMED_IAM` and `CAPABILITY_AUTO_EXPAND`.
     #
     #
     #
@@ -8892,20 +9081,28 @@ module Aws::CloudFormation
     #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-prereqs-self-managed.html
     #
     # @option params [String] :execution_role_name
+    #   The name of the IAM execution role that CloudFormation uses for
+    #   StackSet operations in your target accounts.
+    #
     #   \[Self-managed permissions\] The name of the IAM execution role to use
     #   to update the stack set. If you do not specify an execution role,
     #   CloudFormation uses the `AWSCloudFormationStackSetExecutionRole` role
-    #   for the StackSet operation.
-    #
-    #   Specify an IAM role only if you are using customized execution roles
-    #   to control which stack resources users and groups can include in their
-    #   StackSets.
+    #   for the StackSet operation. Specify an IAM role only if you are using
+    #   customized execution roles to control which stack resources users and
+    #   groups can include in their StackSets.
     #
     #   If you specify a customized execution role, CloudFormation uses that
     #   role to update the stack. If you do not specify a customized execution
     #   role, CloudFormation performs the update using the role previously
     #   associated with the StackSet, so long as you have permissions to
     #   perform operations on the StackSet.
+    #
+    #   \[Service-managed permissions\] Set this name when you use custom
+    #   execution roles. The role that your custom execution role template
+    #   provisions in your target accounts must have this same name, and the
+    #   name must begin with `stacksets-exec-custom-`. You don't need to
+    #   specify this parameter if an execution role name is already configured
+    #   for the StackSet and you aren't changing it.
     #
     # @option params [Types::DeploymentTargets] :deployment_targets
     #   \[Service-managed permissions\] The Organizations accounts in which to
@@ -9037,6 +9234,38 @@ module Aws::CloudFormation
     #   Describes whether CloudFormation performs non-conflicting operations
     #   concurrently and queues conflicting operations.
     #
+    # @option params [String] :execution_role_template_body
+    #   The body of the template that creates or updates a custom execution
+    #   role in target accounts. This parameter applies only when the
+    #   permissions model is `SERVICE_MANAGED`.
+    #
+    #   Conditional: Specify either `ExecutionRoleTemplateBody` or
+    #   `ExecutionRoleTemplateUrl`, but not both. If you don't specify
+    #   either, CloudFormation uses the default service-managed execution role
+    #   in target accounts.
+    #
+    # @option params [String] :execution_role_template_url
+    #   The URL of an Amazon S3 object that contains the template that creates
+    #   or updates a custom execution role in target accounts. This parameter
+    #   applies only when the permissions model is `SERVICE_MANAGED`.
+    #
+    #   Conditional: Specify either `ExecutionRoleTemplateBody` or
+    #   `ExecutionRoleTemplateUrl`, but not both. If you don't specify
+    #   either, CloudFormation uses the default service-managed execution role
+    #   in target accounts.
+    #
+    # @option params [Boolean] :use_admin_execution_role
+    #   Specifies whether CloudFormation uses the default service-managed
+    #   execution role instead of a custom execution role in target accounts.
+    #   If you set this to `true`, CloudFormation ignores any custom execution
+    #   role template specified in `ExecutionRoleTemplateBody` or
+    #   `ExecutionRoleTemplateUrl`.
+    #
+    # @option params [String] :stack_set_output_bucket
+    #   The name of the Amazon S3 bucket that stores the execution role stack
+    #   template body. CloudFormation uses this bucket only when you specify a
+    #   custom execution role template.
+    #
     # @return [Types::UpdateStackSetOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateStackSetOutput#operation_id #operation_id} => String
@@ -9094,6 +9323,10 @@ module Aws::CloudFormation
     #     managed_execution: {
     #       active: false,
     #     },
+    #     execution_role_template_body: "TemplateBody",
+    #     execution_role_template_url: "TemplateURL",
+    #     use_admin_execution_role: false,
+    #     stack_set_output_bucket: "StackSetOutputBucket",
     #   })
     #
     # @example Response structure
@@ -9231,7 +9464,7 @@ module Aws::CloudFormation
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-cloudformation'
-      context[:gem_version] = '1.165.0'
+      context[:gem_version] = '1.174.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -207,6 +207,12 @@ module Aws::KinesisAnalyticsV2
       SENSITIVE: []
     end
 
+    class ApplicationOperationDescription
+      attr_accessor application_operation_id: ::String
+      attr_accessor application_name: ::String
+      SENSITIVE: []
+    end
+
     class ApplicationOperationInfo
       attr_accessor operation: ::String
       attr_accessor operation_id: ::String
@@ -229,21 +235,25 @@ module Aws::KinesisAnalyticsV2
     class ApplicationRestoreConfiguration
       attr_accessor application_restore_type: ("SKIP_RESTORE_FROM_SNAPSHOT" | "RESTORE_FROM_LATEST_SNAPSHOT" | "RESTORE_FROM_CUSTOM_SNAPSHOT")
       attr_accessor snapshot_name: ::String
+      attr_accessor snapshot_arn: ::String
       SENSITIVE: []
     end
 
     class ApplicationSnapshotConfiguration
       attr_accessor snapshots_enabled: bool
+      attr_accessor snapshot_mode: ("APPLICATION_SNAPSHOTS_LEGACY" | "ENHANCED_SNAPSHOTS")
       SENSITIVE: []
     end
 
     class ApplicationSnapshotConfigurationDescription
       attr_accessor snapshots_enabled: bool
+      attr_accessor snapshot_mode: ("APPLICATION_SNAPSHOTS_LEGACY" | "ENHANCED_SNAPSHOTS")
       SENSITIVE: []
     end
 
     class ApplicationSnapshotConfigurationUpdate
       attr_accessor snapshots_enabled_update: bool
+      attr_accessor snapshot_mode_update: ("APPLICATION_SNAPSHOTS_LEGACY" | "ENHANCED_SNAPSHOTS")
       SENSITIVE: []
     end
 
@@ -417,6 +427,22 @@ module Aws::KinesisAnalyticsV2
     class CreateApplicationSnapshotResponse < Aws::EmptyStructure
     end
 
+    class CreateSnapshotRequest
+      attr_accessor application_name: ::String
+      attr_accessor snapshot_name: ::String
+      attr_accessor snapshot_description: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateSnapshotResponse
+      attr_accessor snapshot_arn: ::String
+      attr_accessor snapshot_status: ("CREATING" | "READY" | "DELETING" | "FAILED")
+      attr_accessor snapshot_operation_id: ::String
+      attr_accessor snapshot_operation_status: ("IN_PROGRESS" | "SUCCESSFUL" | "FAILED" | "CANCELLED")
+      SENSITIVE: []
+    end
+
     class CustomArtifactConfiguration
       attr_accessor artifact_type: ("UDF" | "DEPENDENCY_JAR")
       attr_accessor s3_content_location: Types::S3ContentLocation
@@ -520,6 +546,20 @@ module Aws::KinesisAnalyticsV2
       SENSITIVE: []
     end
 
+    class DeleteSnapshotRequest
+      attr_accessor snapshot_name: ::String
+      attr_accessor snapshot_creation_timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class DeleteSnapshotResponse
+      attr_accessor snapshot_arn: ::String
+      attr_accessor snapshot_status: ("CREATING" | "READY" | "DELETING" | "FAILED")
+      attr_accessor snapshot_operation_id: ::String
+      attr_accessor snapshot_operation_status: ("IN_PROGRESS" | "SUCCESSFUL" | "FAILED" | "CANCELLED")
+      SENSITIVE: []
+    end
+
     class DeployAsApplicationConfiguration
       attr_accessor s3_content_location: Types::S3ContentBaseLocation
       SENSITIVE: []
@@ -579,6 +619,27 @@ module Aws::KinesisAnalyticsV2
       SENSITIVE: []
     end
 
+    class DescribeSnapshotOperationRequest
+      attr_accessor snapshot_name: ::String
+      attr_accessor snapshot_operation_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeSnapshotOperationResponse
+      attr_accessor snapshot_operation_info_details: Types::SnapshotOperationInfoDetails
+      SENSITIVE: []
+    end
+
+    class DescribeSnapshotRequest
+      attr_accessor snapshot_name: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeSnapshotResponse
+      attr_accessor snapshot_info_details: Types::SnapshotInfoDetails
+      SENSITIVE: []
+    end
+
     class DestinationSchema
       attr_accessor record_format_type: ("JSON" | "CSV")
       SENSITIVE: []
@@ -601,6 +662,12 @@ module Aws::KinesisAnalyticsV2
       SENSITIVE: []
     end
 
+    class EncryptionConfigurationDescription
+      attr_accessor key_id: ::String
+      attr_accessor key_type: ("AWS_OWNED_KEY" | "CUSTOMER_MANAGED_KEY")
+      SENSITIVE: []
+    end
+
     class EnvironmentProperties
       attr_accessor property_groups: ::Array[Types::PropertyGroup]
       SENSITIVE: []
@@ -618,6 +685,26 @@ module Aws::KinesisAnalyticsV2
 
     class ErrorInfo
       attr_accessor error_string: ::String
+      SENSITIVE: []
+    end
+
+    class ExportDestinationConfiguration
+      attr_accessor destination_type: ("S3")
+      attr_accessor export_role_arn: ::String
+      attr_accessor destination_encryption_configuration: Types::SnapshotEncryptionConfiguration
+      attr_accessor destination_s3_prefix_location: Types::S3PrefixLocation
+      SENSITIVE: []
+    end
+
+    class ExportSnapshotRequest
+      attr_accessor snapshot_name: ::String
+      attr_accessor export_destination_configuration: Types::ExportDestinationConfiguration
+      SENSITIVE: []
+    end
+
+    class ExportSnapshotResponse
+      attr_accessor snapshot_operation_id: ::String
+      attr_accessor snapshot_operation_status: ("IN_PROGRESS" | "SUCCESSFUL" | "FAILED" | "CANCELLED")
       SENSITIVE: []
     end
 
@@ -660,6 +747,32 @@ module Aws::KinesisAnalyticsV2
 
     class GlueDataCatalogConfigurationUpdate
       attr_accessor database_arn_update: ::String
+      SENSITIVE: []
+    end
+
+    class ImportSnapshotRequest
+      attr_accessor snapshot_name: ::String
+      attr_accessor import_source_configuration: Types::ImportSourceConfiguration
+      attr_accessor destination_encryption_configuration: Types::SnapshotEncryptionConfiguration
+      attr_accessor snapshot_description: ::String
+      attr_accessor snapshot_format: ("CANONICAL")
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class ImportSnapshotResponse
+      attr_accessor snapshot_arn: ::String
+      attr_accessor snapshot_status: ("CREATING" | "READY" | "DELETING" | "FAILED")
+      attr_accessor snapshot_operation_id: ::String
+      attr_accessor snapshot_operation_status: ("IN_PROGRESS" | "SUCCESSFUL" | "FAILED" | "CANCELLED")
+      SENSITIVE: []
+    end
+
+    class ImportSourceConfiguration
+      attr_accessor source_type: ("S3")
+      attr_accessor import_role_arn: ::String
+      attr_accessor source_encryption_configuration: Types::SnapshotEncryptionConfiguration
+      attr_accessor source_s3_prefix_location: Types::S3PrefixLocation
       SENSITIVE: []
     end
 
@@ -908,6 +1021,37 @@ module Aws::KinesisAnalyticsV2
       SENSITIVE: []
     end
 
+    class ListSnapshotOperationsRequest
+      attr_accessor snapshot_name: ::String
+      attr_accessor snapshot_operation: ("CreateSnapshot" | "DeleteSnapshot" | "ImportSnapshot" | "ExportSnapshot" | "SystemCreateSnapshot")
+      attr_accessor snapshot_operation_status: ("IN_PROGRESS" | "SUCCESSFUL" | "FAILED" | "CANCELLED")
+      attr_accessor limit: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSnapshotOperationsResponse
+      attr_accessor snapshot_operation_info_list: ::Array[Types::SnapshotOperationInfo]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSnapshotsRequest
+      attr_accessor source_application_name: ::String
+      attr_accessor snapshot_initiator: ("USER" | "SYSTEM")
+      attr_accessor snapshot_initiator_operation: ("CreateSnapshot" | "ImportSnapshot" | "SystemCreateSnapshot")
+      attr_accessor snapshot_status: ("CREATING" | "READY" | "DELETING" | "FAILED")
+      attr_accessor limit: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSnapshotsResponse
+      attr_accessor snapshot_info_list: ::Array[Types::SnapshotInfo]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class ListTagsForResourceRequest
       attr_accessor resource_arn: ::String
       SENSITIVE: []
@@ -1145,6 +1289,12 @@ module Aws::KinesisAnalyticsV2
       SENSITIVE: []
     end
 
+    class S3PrefixLocation
+      attr_accessor bucket_arn: ::String
+      attr_accessor key_prefix: ::String
+      SENSITIVE: []
+    end
+
     class S3ReferenceDataSource
       attr_accessor bucket_arn: ::String
       attr_accessor file_key: ::String
@@ -1176,6 +1326,102 @@ module Aws::KinesisAnalyticsV2
       attr_accessor snapshot_creation_timestamp: ::Time
       attr_accessor runtime_environment: ("SQL-1_0" | "FLINK-1_6" | "FLINK-1_8" | "ZEPPELIN-FLINK-1_0" | "FLINK-1_11" | "FLINK-1_13" | "ZEPPELIN-FLINK-2_0" | "FLINK-1_15" | "ZEPPELIN-FLINK-3_0" | "FLINK-1_18" | "FLINK-1_19" | "FLINK-1_20" | "FLINK-2_2" | "FLINK-2_3")
       attr_accessor application_encryption_configuration_description: Types::ApplicationEncryptionConfigurationDescription
+      SENSITIVE: []
+    end
+
+    class SnapshotEncryptionConfiguration
+      attr_accessor key_id: ::String
+      attr_accessor key_type: ("AWS_OWNED_KEY" | "CUSTOMER_MANAGED_KEY")
+      SENSITIVE: []
+    end
+
+    class SnapshotErrorInfo
+      attr_accessor error_code: ::String
+      attr_accessor error_string: ::String
+      SENSITIVE: []
+    end
+
+    class SnapshotInfo
+      attr_accessor snapshot_name: ::String
+      attr_accessor snapshot_arn: ::String
+      attr_accessor snapshot_status: ("CREATING" | "READY" | "DELETING" | "FAILED")
+      attr_accessor snapshot_creation_timestamp: ::Time
+      attr_accessor snapshot_initiator: ("USER" | "SYSTEM")
+      attr_accessor snapshot_initiator_operation: ("CreateSnapshot" | "ImportSnapshot" | "SystemCreateSnapshot")
+      attr_accessor source_application_name: ::String
+      attr_accessor snapshot_format: ("CANONICAL")
+      SENSITIVE: []
+    end
+
+    class SnapshotInfoDetails
+      attr_accessor snapshot_name: ::String
+      attr_accessor snapshot_arn: ::String
+      attr_accessor snapshot_description: ::String
+      attr_accessor snapshot_status: ("CREATING" | "READY" | "DELETING" | "FAILED")
+      attr_accessor snapshot_creation_timestamp: ::Time
+      attr_accessor runtime_environment: ("SQL-1_0" | "FLINK-1_6" | "FLINK-1_8" | "ZEPPELIN-FLINK-1_0" | "FLINK-1_11" | "FLINK-1_13" | "ZEPPELIN-FLINK-2_0" | "FLINK-1_15" | "ZEPPELIN-FLINK-3_0" | "FLINK-1_18" | "FLINK-1_19" | "FLINK-1_20" | "FLINK-2_2" | "FLINK-2_3")
+      attr_accessor snapshot_size_in_bytes: ::Integer
+      attr_accessor snapshot_encryption_configuration_description: Types::SnapshotEncryptionConfiguration
+      attr_accessor snapshot_initiator: ("USER" | "SYSTEM")
+      attr_accessor snapshot_initiator_operation: ("CreateSnapshot" | "ImportSnapshot" | "SystemCreateSnapshot")
+      attr_accessor snapshot_source_description: Types::SnapshotSourceDescription
+      attr_accessor snapshot_format: ("CANONICAL")
+      SENSITIVE: []
+    end
+
+    class SnapshotOperationFailureDetails
+      attr_accessor error_info: Types::SnapshotErrorInfo
+      SENSITIVE: []
+    end
+
+    class SnapshotOperationInfo
+      attr_accessor snapshot_operation_id: ::String
+      attr_accessor snapshot_operation: ("CreateSnapshot" | "DeleteSnapshot" | "ImportSnapshot" | "ExportSnapshot" | "SystemCreateSnapshot")
+      attr_accessor snapshot_operation_status: ("IN_PROGRESS" | "SUCCESSFUL" | "FAILED" | "CANCELLED")
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      SENSITIVE: []
+    end
+
+    class SnapshotOperationInfoDetails
+      attr_accessor snapshot_operation_id: ::String
+      attr_accessor snapshot_operation: ("CreateSnapshot" | "DeleteSnapshot" | "ImportSnapshot" | "ExportSnapshot" | "SystemCreateSnapshot")
+      attr_accessor snapshot_operation_status: ("IN_PROGRESS" | "SUCCESSFUL" | "FAILED" | "CANCELLED")
+      attr_accessor snapshot_arn: ::String
+      attr_accessor source_encryption_configuration_description: Types::EncryptionConfigurationDescription
+      attr_accessor destination_encryption_configuration_description: Types::EncryptionConfigurationDescription
+      attr_accessor snapshot_source_location_description: Types::SnapshotOperationLocationDescription
+      attr_accessor snapshot_destination_location_description: Types::SnapshotOperationLocationDescription
+      attr_accessor application_operation_description: Types::ApplicationOperationDescription
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor snapshot_operation_failure_details: Types::SnapshotOperationFailureDetails
+      SENSITIVE: []
+    end
+
+    class SnapshotOperationLocationDescription
+      attr_accessor location_type: ("S3")
+      attr_accessor s3_prefix_location: Types::SnapshotOperationS3PrefixLocation
+      SENSITIVE: []
+    end
+
+    class SnapshotOperationS3PrefixLocation
+      attr_accessor bucket_arn: ::String
+      attr_accessor key_prefix: ::String
+      attr_accessor exported_prefix: ::String
+      SENSITIVE: []
+    end
+
+    class SnapshotSourceDescription
+      attr_accessor s3_prefix_location: Types::S3PrefixLocation
+      attr_accessor source_application_description: Types::SourceApplicationDescription
+      SENSITIVE: []
+    end
+
+    class SourceApplicationDescription
+      attr_accessor application_name: ::String
+      attr_accessor application_creation_timestamp: ::Time
+      attr_accessor application_version_id: ::Integer
       SENSITIVE: []
     end
 

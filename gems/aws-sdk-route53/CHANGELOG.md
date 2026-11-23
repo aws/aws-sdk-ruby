@@ -1,6 +1,56 @@
 Unreleased Changes
 ------------------
 
+1.154.0 (2026-11-20)
+------------------
+
+* Feature - Amazon Route 53 support for advanced hosted zones. Including change guardrails, public dns fallback, change history. Also support for AZAffinityRouting.
+
+1.153.0 (2026-11-19)
+------------------
+
+* Feature - Route 53 Private Endpoint Health Checks support
+
+1.152.0 (2026-11-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.151.0 (2026-11-16)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.150.0 (2026-11-12)
+------------------
+
+* Feature - Amazon Route 53 now supports Record Set Protection, which blocks changes to protected records in a hosted zone.
+
+1.149.0 (2026-11-11)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.148.0 (2026-11-10)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.147.0 (2026-11-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.146.0 (2026-11-06)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.145.0 (2026-11-04)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.144.0 (2026-10-29)
 ------------------
 

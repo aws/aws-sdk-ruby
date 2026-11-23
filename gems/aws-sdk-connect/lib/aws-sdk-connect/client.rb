@@ -264,7 +264,8 @@ module Aws::Connect
     #     An integer representing the maximum number attempts that will be made for
     #     a single request, including the initial attempt.  For example,
     #     setting this value to 5 will result in a request being retried up to
-    #     4 times. Used in `standard` and `adaptive` retry modes.
+    #     4 times. Used in `standard` and `adaptive` retry modes. Defaults to 3,
+    #     except for DynamoDB and DynamoDB Streams, which default to 4.
     #
     #   @option options [String] :profile ("default")
     #     Used when loading credentials from the shared credentials file at `HOME/.aws/credentials`.
@@ -327,15 +328,15 @@ module Aws::Connect
     #     used by the default backoff function. This option is only used in the
     #     `legacy` retry mode.
     #
-    #   @option options [String] :retry_mode ("legacy")
+    #   @option options [String] :retry_mode ("standard")
     #     Specifies which retry algorithm to use. Values are:
     #
-    #     * `legacy` - The pre-existing retry behavior. This is the default
-    #       value if no retry mode is provided.
+    #     * `legacy` - The pre-existing retry behavior.
     #
     #     * `standard` - A standardized set of retry rules across the AWS SDKs.
     #       This includes support for retry quotas, which limit the number of
-    #       unsuccessful retries a client can make.
+    #       unsuccessful retries a client can make. This is the default value
+    #       if no retry mode is provided.
     #
     #     * `adaptive` - A retry mode that includes all the functionality of
     #       `standard` mode along with automatic client side throttling.
@@ -2063,7 +2064,7 @@ module Aws::Connect
     #   resp.files[0].file_status #=> String, one of "APPROVED", "REJECTED", "PROCESSING", "FAILED", "DRAFTING"
     #   resp.files[0].created_by.connect_user_arn #=> String
     #   resp.files[0].created_by.aws_identity_arn #=> String
-    #   resp.files[0].file_use_case_type #=> String, one of "CONTACT_ANALYSIS", "EMAIL_MESSAGE", "EMAIL_MESSAGE_PLAIN_TEXT", "EMAIL_MESSAGE_REDACTED", "EMAIL_MESSAGE_PLAIN_TEXT_REDACTED", "ATTACHMENT", "VOICE_RECORDING"
+    #   resp.files[0].file_use_case_type #=> String, one of "CONTACT_ANALYSIS", "EMAIL_MESSAGE", "EMAIL_MESSAGE_PLAIN_TEXT", "EMAIL_MESSAGE_REDACTED", "EMAIL_MESSAGE_PLAIN_TEXT_REDACTED", "ATTACHMENT", "VOICE_RECORDING", "VOICEMAIL_RECORDING", "VOICEMAIL_RECORDING_REDACTED", "VOICEMAIL_ANALYSIS", "VOICEMAIL_ANALYSIS_REDACTED"
     #   resp.files[0].associated_resource_arn #=> String
     #   resp.files[0].tags #=> Hash
     #   resp.files[0].tags["TagKey"] #=> String
@@ -2596,7 +2597,7 @@ module Aws::Connect
     #   resp = client.create_attached_file({
     #     client_token: "ClientToken",
     #     instance_id: "InstanceId", # required
-    #     file_use_case_type: "CONTACT_ANALYSIS", # required, accepts CONTACT_ANALYSIS, EMAIL_MESSAGE, EMAIL_MESSAGE_PLAIN_TEXT, EMAIL_MESSAGE_REDACTED, EMAIL_MESSAGE_PLAIN_TEXT_REDACTED, ATTACHMENT, VOICE_RECORDING
+    #     file_use_case_type: "CONTACT_ANALYSIS", # required, accepts CONTACT_ANALYSIS, EMAIL_MESSAGE, EMAIL_MESSAGE_PLAIN_TEXT, EMAIL_MESSAGE_REDACTED, EMAIL_MESSAGE_PLAIN_TEXT_REDACTED, ATTACHMENT, VOICE_RECORDING, VOICEMAIL_RECORDING, VOICEMAIL_RECORDING_REDACTED, VOICEMAIL_ANALYSIS, VOICEMAIL_ANALYSIS_REDACTED
     #     file_source_uri: "FileSourceUri", # required
     #     associated_resource_arn: "ARN", # required
     #     tags: {
@@ -2829,7 +2830,7 @@ module Aws::Connect
     #     references: {
     #       "ReferenceKey" => {
     #         value: "ReferenceValue",
-    #         type: "URL", # required, accepts URL, ATTACHMENT, CONTACT_ANALYSIS, NUMBER, STRING, DATE, EMAIL, EMAIL_MESSAGE, EMAIL_MESSAGE_PLAIN_TEXT, EMAIL_MESSAGE_PLAIN_TEXT_REDACTED, EMAIL_MESSAGE_REDACTED
+    #         type: "URL", # required, accepts URL, ATTACHMENT, CONTACT_ANALYSIS, NUMBER, STRING, DATE, EMAIL, EMAIL_MESSAGE, EMAIL_MESSAGE_PLAIN_TEXT, EMAIL_MESSAGE_PLAIN_TEXT_REDACTED, EMAIL_MESSAGE_REDACTED, VOICEMAIL_RECORDING, VOICEMAIL_RECORDING_REDACTED, VOICEMAIL_ANALYSIS, VOICEMAIL_ANALYSIS_REDACTED
     #         status: "AVAILABLE", # accepts AVAILABLE, DELETED, APPROVED, REJECTED, PROCESSING, FAILED, DRAFTING
     #         arn: "ReferenceArn",
     #         status_reason: "ReferenceStatusReason",
@@ -3595,6 +3596,42 @@ module Aws::Connect
     #               max_score_percentage: 1.0,
     #             },
     #           ],
+    #           enablement: {
+    #             condition: { # required
+    #               operands: [ # required
+    #                 {
+    #                   expression: {
+    #                     source: { # required
+    #                       type: "QUESTION_REF_ID", # required, accepts QUESTION_REF_ID, CONTACT, EVALUATION_METADATA, FORM_METADATA, AI_METRICS
+    #                       ref_id: "ReferenceId",
+    #                       contact_field: "CATEGORIES", # accepts CATEGORIES, AGENT_ARN, QUEUE_ARN, ROUTING_PROFILE_ARN, CHANNEL, INITIATION_METHOD, IS_QUEUED, OVERALL_CUSTOMER_SENTIMENT_SCORE, OVERALL_AGENT_SENTIMENT_SCORE, CUSTOMER_SENTIMENT_SCORE_WITHOUT_AGENT, CUSTOMER_SENTIMENT_SCORE_WITH_AGENT, NON_TALK_TIME, NON_TALK_TIME_PERCENTAGE, NUMBER_OF_INTERRUPTIONS, CONTACT_DURATION, AGENT_INTERACTION_DURATION, CUSTOMER_HOLD_TIME, LONGEST_HOLD_DURATION, NUMBER_OF_HOLDS, AGENT_INTERACTION_AND_HOLD_DURATION, RECORDING_MEDIA_STREAM_TYPES
+    #                       contact_attribute_key: "EvaluationFormContactAttributeKey",
+    #                       segment_attribute_key: "EvaluationFormSegmentAttributeKey",
+    #                       evaluation_metadata_field: "EVALUATION_TYPE", # accepts EVALUATION_TYPE
+    #                       ai_metrics_field: "AI_SESSION_IS_HANDED_OFF", # accepts AI_SESSION_IS_HANDED_OFF, AI_SESSION_SELF_SERVICE_DURATION, AI_SESSION_GOAL_SUCCESS_RATE, AI_SESSION_COMPLETENESS_SCORE, AI_SESSION_FAITHFULNESS_SCORE, AI_AGENT_MAX_PROMPT_LATENCY, AI_TOOL_MAX_LATENCY, AI_TOOL_SELECTION_ACCURACY, AI_TOOL_PARAMETER_ACCURACY, AI_TOOL_UTILIZATION_ACCURACY
+    #                     },
+    #                     values: [ # required
+    #                       {
+    #                         type: "OPTION_REF_ID", # required, accepts OPTION_REF_ID, STRING_VALUE, NUMERIC_VALUE, BOOLEAN_VALUE, DATETIME_VALUE
+    #                         ref_id: "ReferenceId",
+    #                         string_value: "EvaluationFormEnablementStringValue",
+    #                         numeric_value: 1.0,
+    #                         boolean_value: false,
+    #                         date_time_value: Time.now,
+    #                       },
+    #                     ],
+    #                     comparator: "IN", # required, accepts IN, NOT_IN, ALL_IN, EXACT, GREATER_THAN, LESS_THAN, GREATER_THAN_OR_EQUAL_TO, LESS_THAN_OR_EQUAL_TO, EQUAL_TO, NOT_EQUAL_TO
+    #                   },
+    #                   condition: {
+    #                     # recursive EvaluationFormItemEnablementCondition
+    #                   },
+    #                 },
+    #               ],
+    #               operator: "OR", # accepts OR, AND
+    #             },
+    #             action: "DISABLE", # required, accepts DISABLE, ENABLE
+    #             default_action: "DISABLE", # accepts DISABLE, ENABLE
+    #           },
     #         },
     #         question: {
     #           title: "EvaluationFormQuestionTitle", # required
@@ -3623,10 +3660,10 @@ module Aws::Connect
     #               ],
     #               automation: {
     #                 property_value: {
-    #                   label: "OVERALL_CUSTOMER_SENTIMENT_SCORE", # required, accepts OVERALL_CUSTOMER_SENTIMENT_SCORE, OVERALL_AGENT_SENTIMENT_SCORE, CUSTOMER_SENTIMENT_SCORE_WITHOUT_AGENT, CUSTOMER_SENTIMENT_SCORE_WITH_AGENT, NON_TALK_TIME, NON_TALK_TIME_PERCENTAGE, NUMBER_OF_INTERRUPTIONS, CONTACT_DURATION, AGENT_INTERACTION_DURATION, CUSTOMER_HOLD_TIME, LONGEST_HOLD_DURATION, NUMBER_OF_HOLDS, AGENT_INTERACTION_AND_HOLD_DURATION
+    #                   label: "OVERALL_CUSTOMER_SENTIMENT_SCORE", # required, accepts OVERALL_CUSTOMER_SENTIMENT_SCORE, OVERALL_AGENT_SENTIMENT_SCORE, CUSTOMER_SENTIMENT_SCORE_WITHOUT_AGENT, CUSTOMER_SENTIMENT_SCORE_WITH_AGENT, NON_TALK_TIME, NON_TALK_TIME_PERCENTAGE, NUMBER_OF_INTERRUPTIONS, CONTACT_DURATION, AGENT_INTERACTION_DURATION, CUSTOMER_HOLD_TIME, LONGEST_HOLD_DURATION, NUMBER_OF_HOLDS, AGENT_INTERACTION_AND_HOLD_DURATION, AI_SESSION_SELF_SERVICE_DURATION, AI_SESSION_GOAL_SUCCESS_RATE, AI_SESSION_COMPLETENESS_SCORE, AI_SESSION_FAITHFULNESS_SCORE, AI_AGENT_MAX_PROMPT_LATENCY, AI_TOOL_MAX_LATENCY, AI_TOOL_SELECTION_ACCURACY, AI_TOOL_PARAMETER_ACCURACY, AI_TOOL_UTILIZATION_ACCURACY
     #                 },
     #                 answer_source: {
-    #                   source_type: "CONTACT_LENS_DATA", # required, accepts CONTACT_LENS_DATA, GEN_AI
+    #                   source_type: "CONTACT_LENS_DATA", # required, accepts CONTACT_LENS_DATA, GEN_AI, CONDITION
     #                 },
     #               },
     #             },
@@ -3655,18 +3692,53 @@ module Aws::Connect
     #                       condition: "PRESENT", # required, accepts PRESENT, NOT_PRESENT
     #                       option_ref_id: "ReferenceId", # required
     #                     },
+    #                     automation_rule: {
+    #                       condition: { # required
+    #                         operands: [ # required
+    #                           {
+    #                             expression: {
+    #                               source: { # required
+    #                                 type: "QUESTION_REF_ID", # required, accepts QUESTION_REF_ID, CONTACT, EVALUATION_METADATA, FORM_METADATA, AI_METRICS
+    #                                 ref_id: "ReferenceId",
+    #                                 contact_field: "CATEGORIES", # accepts CATEGORIES, AGENT_ARN, QUEUE_ARN, ROUTING_PROFILE_ARN, CHANNEL, INITIATION_METHOD, IS_QUEUED, OVERALL_CUSTOMER_SENTIMENT_SCORE, OVERALL_AGENT_SENTIMENT_SCORE, CUSTOMER_SENTIMENT_SCORE_WITHOUT_AGENT, CUSTOMER_SENTIMENT_SCORE_WITH_AGENT, NON_TALK_TIME, NON_TALK_TIME_PERCENTAGE, NUMBER_OF_INTERRUPTIONS, CONTACT_DURATION, AGENT_INTERACTION_DURATION, CUSTOMER_HOLD_TIME, LONGEST_HOLD_DURATION, NUMBER_OF_HOLDS, AGENT_INTERACTION_AND_HOLD_DURATION, RECORDING_MEDIA_STREAM_TYPES
+    #                                 contact_attribute_key: "EvaluationFormContactAttributeKey",
+    #                                 segment_attribute_key: "EvaluationFormSegmentAttributeKey",
+    #                                 evaluation_metadata_field: "EVALUATION_TYPE", # accepts EVALUATION_TYPE
+    #                                 ai_metrics_field: "AI_SESSION_IS_HANDED_OFF", # accepts AI_SESSION_IS_HANDED_OFF, AI_SESSION_SELF_SERVICE_DURATION, AI_SESSION_GOAL_SUCCESS_RATE, AI_SESSION_COMPLETENESS_SCORE, AI_SESSION_FAITHFULNESS_SCORE, AI_AGENT_MAX_PROMPT_LATENCY, AI_TOOL_MAX_LATENCY, AI_TOOL_SELECTION_ACCURACY, AI_TOOL_PARAMETER_ACCURACY, AI_TOOL_UTILIZATION_ACCURACY
+    #                               },
+    #                               values: [ # required
+    #                                 {
+    #                                   type: "OPTION_REF_ID", # required, accepts OPTION_REF_ID, STRING_VALUE, NUMERIC_VALUE, BOOLEAN_VALUE, DATETIME_VALUE
+    #                                   ref_id: "ReferenceId",
+    #                                   string_value: "EvaluationFormEnablementStringValue",
+    #                                   numeric_value: 1.0,
+    #                                   boolean_value: false,
+    #                                   date_time_value: Time.now,
+    #                                 },
+    #                               ],
+    #                               comparator: "IN", # required, accepts IN, NOT_IN, ALL_IN, EXACT, GREATER_THAN, LESS_THAN, GREATER_THAN_OR_EQUAL_TO, LESS_THAN_OR_EQUAL_TO, EQUAL_TO, NOT_EQUAL_TO
+    #                             },
+    #                             condition: {
+    #                               # recursive EvaluationFormItemEnablementCondition
+    #                             },
+    #                           },
+    #                         ],
+    #                         operator: "OR", # accepts OR, AND
+    #                       },
+    #                       option_ref_id: "ReferenceId", # required
+    #                     },
     #                   },
     #                 ],
     #                 default_option_ref_id: "ReferenceId",
     #                 answer_source: {
-    #                   source_type: "CONTACT_LENS_DATA", # required, accepts CONTACT_LENS_DATA, GEN_AI
+    #                   source_type: "CONTACT_LENS_DATA", # required, accepts CONTACT_LENS_DATA, GEN_AI, CONDITION
     #                 },
     #               },
     #             },
     #             text: {
     #               automation: {
     #                 answer_source: {
-    #                   source_type: "CONTACT_LENS_DATA", # required, accepts CONTACT_LENS_DATA, GEN_AI
+    #                   source_type: "CONTACT_LENS_DATA", # required, accepts CONTACT_LENS_DATA, GEN_AI, CONDITION
     #                 },
     #               },
     #             },
@@ -3699,7 +3771,7 @@ module Aws::Connect
     #                 ],
     #                 default_option_ref_ids: ["ReferenceId"],
     #                 answer_source: {
-    #                   source_type: "CONTACT_LENS_DATA", # required, accepts CONTACT_LENS_DATA, GEN_AI
+    #                   source_type: "CONTACT_LENS_DATA", # required, accepts CONTACT_LENS_DATA, GEN_AI, CONDITION
     #                 },
     #               },
     #             },
@@ -3710,16 +3782,25 @@ module Aws::Connect
     #                 {
     #                   expression: {
     #                     source: { # required
-    #                       type: "QUESTION_REF_ID", # required, accepts QUESTION_REF_ID
+    #                       type: "QUESTION_REF_ID", # required, accepts QUESTION_REF_ID, CONTACT, EVALUATION_METADATA, FORM_METADATA, AI_METRICS
     #                       ref_id: "ReferenceId",
+    #                       contact_field: "CATEGORIES", # accepts CATEGORIES, AGENT_ARN, QUEUE_ARN, ROUTING_PROFILE_ARN, CHANNEL, INITIATION_METHOD, IS_QUEUED, OVERALL_CUSTOMER_SENTIMENT_SCORE, OVERALL_AGENT_SENTIMENT_SCORE, CUSTOMER_SENTIMENT_SCORE_WITHOUT_AGENT, CUSTOMER_SENTIMENT_SCORE_WITH_AGENT, NON_TALK_TIME, NON_TALK_TIME_PERCENTAGE, NUMBER_OF_INTERRUPTIONS, CONTACT_DURATION, AGENT_INTERACTION_DURATION, CUSTOMER_HOLD_TIME, LONGEST_HOLD_DURATION, NUMBER_OF_HOLDS, AGENT_INTERACTION_AND_HOLD_DURATION, RECORDING_MEDIA_STREAM_TYPES
+    #                       contact_attribute_key: "EvaluationFormContactAttributeKey",
+    #                       segment_attribute_key: "EvaluationFormSegmentAttributeKey",
+    #                       evaluation_metadata_field: "EVALUATION_TYPE", # accepts EVALUATION_TYPE
+    #                       ai_metrics_field: "AI_SESSION_IS_HANDED_OFF", # accepts AI_SESSION_IS_HANDED_OFF, AI_SESSION_SELF_SERVICE_DURATION, AI_SESSION_GOAL_SUCCESS_RATE, AI_SESSION_COMPLETENESS_SCORE, AI_SESSION_FAITHFULNESS_SCORE, AI_AGENT_MAX_PROMPT_LATENCY, AI_TOOL_MAX_LATENCY, AI_TOOL_SELECTION_ACCURACY, AI_TOOL_PARAMETER_ACCURACY, AI_TOOL_UTILIZATION_ACCURACY
     #                     },
     #                     values: [ # required
     #                       {
-    #                         type: "OPTION_REF_ID", # required, accepts OPTION_REF_ID
+    #                         type: "OPTION_REF_ID", # required, accepts OPTION_REF_ID, STRING_VALUE, NUMERIC_VALUE, BOOLEAN_VALUE, DATETIME_VALUE
     #                         ref_id: "ReferenceId",
+    #                         string_value: "EvaluationFormEnablementStringValue",
+    #                         numeric_value: 1.0,
+    #                         boolean_value: false,
+    #                         date_time_value: Time.now,
     #                       },
     #                     ],
-    #                     comparator: "IN", # required, accepts IN, NOT_IN, ALL_IN, EXACT
+    #                     comparator: "IN", # required, accepts IN, NOT_IN, ALL_IN, EXACT, GREATER_THAN, LESS_THAN, GREATER_THAN_OR_EQUAL_TO, LESS_THAN_OR_EQUAL_TO, EQUAL_TO, NOT_EQUAL_TO
     #                   },
     #                   condition: {
     #                     # recursive EvaluationFormItemEnablementCondition
@@ -3788,7 +3869,7 @@ module Aws::Connect
     #       contact_interaction_type: "AGENT", # required, accepts AGENT, AUTOMATED, CUSTOMER
     #     },
     #     language_configuration: {
-    #       form_language: "de-DE", # accepts de-DE, en-US, es-ES, fr-FR, it-IT, pt-BR, ja-JP, ko-KR, zh-CN, ms-MY
+    #       form_language: "de-DE", # accepts de-DE, en-US, es-ES, fr-FR, it-IT, pt-BR, ja-JP, ko-KR, zh-CN, ms-MY, af-ZA, sq-AL, am-ET, ar-AE, ar-SA, hy-AM, eu-ES, be-BY, bs-BA, bg-BG, ca-ES, ckb-IR, ckb-IQ, zh-TW, hr-HR, cs-CZ, da-DK, nl-BE, nl-NL, en-AU, en-IN, en-IE, en-NZ, en-AB, en-SG, en-ZA, en-GB, en-WL, fa-IR, fa-AF, fi-FI, fr-BE, fr-CA, ga-IE, gl-ES, ka-GE, de-AT, de-CH, el-GR, gu-IN, ht-HT, he-IL, hi-IN, hu-HU, is-IS, id-ID, jv-ID, km-KH, kn-IN, kk-KZ, lo-LA, lv-LV, lt-LT, mk-MK, ml-IN, mr-IN, ne-NP, no-NO, or-IN, ps-AF, pl-PL, pt-PT, pa-IN, ro-RO, ru-RU, sr-RS, si-LK, sk-SK, sl-SI, es-MX, es-US, su-ID, sw-BI, sw-KE, sw-RW, sw-TZ, sw-UG, sv-SE, tl-PH, ta-IN, te-IN, th-TH, tr-TR, uk-UA, uz-UZ, vi-VN, zu-ZA, my-MM, so-SO, yue-HK, et-EE, hmn, lg-UG, cy-GB, xh-ZA, bn-BD
     #     },
     #     ai_version: "EvaluationFormAIVersion",
     #   })
@@ -5227,7 +5308,7 @@ module Aws::Connect
     #     function: "RuleFunction", # required
     #     actions: [ # required
     #       {
-    #         action_type: "CREATE_TASK", # required, accepts CREATE_TASK, ASSIGN_CONTACT_CATEGORY, GENERATE_EVENTBRIDGE_EVENT, SEND_NOTIFICATION, CREATE_CASE, UPDATE_CASE, ASSIGN_SLA, END_ASSOCIATED_TASKS, SUBMIT_AUTO_EVALUATION, EXTRACT_INFORMATION, SEND_IN_APP_NOTIFICATION
+    #         action_type: "CREATE_TASK", # required, accepts CREATE_TASK, ASSIGN_CONTACT_CATEGORY, GENERATE_EVENTBRIDGE_EVENT, SEND_NOTIFICATION, CREATE_CASE, UPDATE_CASE, ASSIGN_SLA, END_ASSOCIATED_TASKS, END_ASSOCIATED_EMAILS, SUBMIT_AUTO_EVALUATION, EXTRACT_INFORMATION, SEND_IN_APP_NOTIFICATION
     #         task_action: {
     #           name: "TaskNameExpression", # required
     #           description: "TaskDescriptionExpression",
@@ -5235,7 +5316,7 @@ module Aws::Connect
     #           references: {
     #             "ReferenceKey" => {
     #               value: "ReferenceValue",
-    #               type: "URL", # required, accepts URL, ATTACHMENT, CONTACT_ANALYSIS, NUMBER, STRING, DATE, EMAIL, EMAIL_MESSAGE, EMAIL_MESSAGE_PLAIN_TEXT, EMAIL_MESSAGE_PLAIN_TEXT_REDACTED, EMAIL_MESSAGE_REDACTED
+    #               type: "URL", # required, accepts URL, ATTACHMENT, CONTACT_ANALYSIS, NUMBER, STRING, DATE, EMAIL, EMAIL_MESSAGE, EMAIL_MESSAGE_PLAIN_TEXT, EMAIL_MESSAGE_PLAIN_TEXT_REDACTED, EMAIL_MESSAGE_REDACTED, VOICEMAIL_RECORDING, VOICEMAIL_RECORDING_REDACTED, VOICEMAIL_ANALYSIS, VOICEMAIL_ANALYSIS_REDACTED
     #               status: "AVAILABLE", # accepts AVAILABLE, DELETED, APPROVED, REJECTED, PROCESSING, FAILED, DRAFTING
     #               arn: "ReferenceArn",
     #               status_reason: "ReferenceStatusReason",
@@ -5314,6 +5395,8 @@ module Aws::Connect
     #         },
     #         end_associated_tasks_action: {
     #         },
+    #         end_associated_emails_action: {
+    #         },
     #         submit_auto_evaluation_action: {
     #           evaluation_form_id: "EvaluationFormId", # required
     #         },
@@ -5348,7 +5431,7 @@ module Aws::Connect
     #     pre_evaluation_filters: {
     #       and_conditions: [
     #         {
-    #           resource_type: "CONTACT", # required, accepts CONTACT
+    #           resource_type: "CONTACT", # required, accepts CONTACT, CONTACT_EVALUATION
     #           filter_type: "TAG", # required, accepts TAG
     #           filter_key: "String", # required
     #           filter_value: "String", # required
@@ -6624,6 +6707,52 @@ module Aws::Connect
     # @param [Hash] params ({})
     def deactivate_evaluation_form(params = {}, options = {})
       req = build_request(:deactivate_evaluation_form, params)
+      req.send_request(options)
+    end
+
+    # Deletes all active sessions for the specified entity in the specified
+    # Connect Customer instance. The operation supports only the `USER`
+    # entity type, so you can use it to sign out all of a user's active
+    # sessions. Use it when you need to end a user's access right away, for
+    # example when they leave your organization or you suspect that their
+    # credentials are compromised.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Connect Customer instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #
+    # @option params [required, String] :entity_id
+    #   The identifier of the entity whose sessions you want to delete. For
+    #   `USER`, use the user ID or the user ARN.
+    #
+    # @option params [required, String] :entity_type
+    #   The type of entity whose sessions you want to delete.
+    #
+    #   <note markdown="1"> The only valid value is `USER`, which signs out a user in your Connect
+    #   Customer instance.
+    #
+    #    </note>
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_all_entity_sessions({
+    #     instance_id: "InstanceId", # required
+    #     entity_id: "EntityId", # required
+    #     entity_type: "USER", # required, accepts USER
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DeleteAllEntitySessions AWS API Documentation
+    #
+    # @overload delete_all_entity_sessions(params = {})
+    # @param [Hash] params ({})
+    def delete_all_entity_sessions(params = {}, options = {})
+      req = build_request(:delete_all_entity_sessions, params)
       req.send_request(options)
     end
 
@@ -8454,6 +8583,9 @@ module Aws::Connect
     #   resp.contact.contact_evaluations["EvaluationId"].export_location #=> String
     #   resp.contact.task_template_info.arn #=> String
     #   resp.contact.task_template_info.name #=> String
+    #   resp.contact.cases #=> Array
+    #   resp.contact.cases[0].case_id #=> String
+    #   resp.contact.cases[0].case_reference_number #=> String
     #   resp.contact.contact_details.name #=> String
     #   resp.contact.contact_details.description #=> String
     #   resp.contact.outbound_strategy.type #=> String, one of "AGENT_FIRST"
@@ -8472,6 +8604,23 @@ module Aws::Connect
     #   resp.contact.global_resiliency_metadata.active_region #=> String
     #   resp.contact.global_resiliency_metadata.origin_region #=> String
     #   resp.contact.global_resiliency_metadata.traffic_distribution_group_id #=> String
+    #   resp.contact.contact_lens.conversational_analytics.configuration.enabled #=> Boolean
+    #   resp.contact.contact_lens.conversational_analytics.configuration.language_locale #=> String
+    #   resp.contact.contact_lens.conversational_analytics.configuration.language_locales #=> Array
+    #   resp.contact.contact_lens.conversational_analytics.configuration.language_locales[0] #=> String
+    #   resp.contact.contact_lens.conversational_analytics.configuration.channel_configuration.analytics_modes #=> Array
+    #   resp.contact.contact_lens.conversational_analytics.configuration.channel_configuration.analytics_modes[0] #=> String
+    #   resp.contact.contact_lens.conversational_analytics.configuration.redaction_configuration.behavior #=> String
+    #   resp.contact.contact_lens.conversational_analytics.configuration.redaction_configuration.policy #=> String
+    #   resp.contact.contact_lens.conversational_analytics.configuration.redaction_configuration.entities #=> Array
+    #   resp.contact.contact_lens.conversational_analytics.configuration.redaction_configuration.entities[0] #=> String
+    #   resp.contact.contact_lens.conversational_analytics.configuration.redaction_configuration.mask_mode #=> String
+    #   resp.contact.contact_lens.conversational_analytics.configuration.summary_configuration.summary_modes #=> Array
+    #   resp.contact.contact_lens.conversational_analytics.configuration.summary_configuration.summary_modes[0] #=> String
+    #   resp.contact.contact_lens.conversational_analytics.configuration.sentiment_configuration.behavior #=> String
+    #   resp.contact.contact_lens.conversational_analytics.contact_analysis_reference_state.status #=> String
+    #   resp.contact.contact_lens.conversational_analytics.contact_analysis_reference_state.status_reason #=> String
+    #   resp.contact.voicemail_info.number_of_voicemails #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeContact AWS API Documentation
     #
@@ -8562,7 +8711,7 @@ module Aws::Connect
     #   resp.evaluation.answers["ResourceId"].suggested_answers[0].value.not_applicable #=> Boolean
     #   resp.evaluation.answers["ResourceId"].suggested_answers[0].status #=> String, one of "IN_PROGRESS", "FAILED", "SUCCEEDED"
     #   resp.evaluation.answers["ResourceId"].suggested_answers[0].input.transcript_type #=> String, one of "RAW", "REDACTED"
-    #   resp.evaluation.answers["ResourceId"].suggested_answers[0].analysis_type #=> String, one of "CONTACT_LENS_DATA", "GEN_AI"
+    #   resp.evaluation.answers["ResourceId"].suggested_answers[0].analysis_type #=> String, one of "CONTACT_LENS_DATA", "GEN_AI", "CONDITION"
     #   resp.evaluation.answers["ResourceId"].suggested_answers[0].analysis_details.gen_ai.justification #=> String
     #   resp.evaluation.answers["ResourceId"].suggested_answers[0].analysis_details.gen_ai.points_of_interest #=> Array
     #   resp.evaluation.answers["ResourceId"].suggested_answers[0].analysis_details.gen_ai.points_of_interest[0].millisecond_offsets.begin_offset_millis #=> Integer
@@ -8589,6 +8738,25 @@ module Aws::Connect
     #   resp.evaluation.evaluation_type #=> String, one of "STANDARD", "CALIBRATION"
     #   resp.evaluation.tags #=> Hash
     #   resp.evaluation.tags["TagKey"] #=> String
+    #   resp.evaluation.item_enablement_status #=> Hash
+    #   resp.evaluation.item_enablement_status["ReferenceId"] #=> String, one of "ENABLED", "DISABLED"
+    #   resp.evaluation.source_resolution_status #=> String, one of "PENDING", "RESOLVED", "FAILED"
+    #   resp.evaluation.source_values #=> Array
+    #   resp.evaluation.source_values[0].source.type #=> String, one of "QUESTION_REF_ID", "CONTACT", "EVALUATION_METADATA", "FORM_METADATA", "AI_METRICS"
+    #   resp.evaluation.source_values[0].source.ref_id #=> String
+    #   resp.evaluation.source_values[0].source.contact_field #=> String, one of "CATEGORIES", "AGENT_ARN", "QUEUE_ARN", "ROUTING_PROFILE_ARN", "CHANNEL", "INITIATION_METHOD", "IS_QUEUED", "OVERALL_CUSTOMER_SENTIMENT_SCORE", "OVERALL_AGENT_SENTIMENT_SCORE", "CUSTOMER_SENTIMENT_SCORE_WITHOUT_AGENT", "CUSTOMER_SENTIMENT_SCORE_WITH_AGENT", "NON_TALK_TIME", "NON_TALK_TIME_PERCENTAGE", "NUMBER_OF_INTERRUPTIONS", "CONTACT_DURATION", "AGENT_INTERACTION_DURATION", "CUSTOMER_HOLD_TIME", "LONGEST_HOLD_DURATION", "NUMBER_OF_HOLDS", "AGENT_INTERACTION_AND_HOLD_DURATION", "RECORDING_MEDIA_STREAM_TYPES"
+    #   resp.evaluation.source_values[0].source.contact_attribute_key #=> String
+    #   resp.evaluation.source_values[0].source.segment_attribute_key #=> String
+    #   resp.evaluation.source_values[0].source.evaluation_metadata_field #=> String, one of "EVALUATION_TYPE"
+    #   resp.evaluation.source_values[0].source.ai_metrics_field #=> String, one of "AI_SESSION_IS_HANDED_OFF", "AI_SESSION_SELF_SERVICE_DURATION", "AI_SESSION_GOAL_SUCCESS_RATE", "AI_SESSION_COMPLETENESS_SCORE", "AI_SESSION_FAITHFULNESS_SCORE", "AI_AGENT_MAX_PROMPT_LATENCY", "AI_TOOL_MAX_LATENCY", "AI_TOOL_SELECTION_ACCURACY", "AI_TOOL_PARAMETER_ACCURACY", "AI_TOOL_UTILIZATION_ACCURACY"
+    #   resp.evaluation.source_values[0].status #=> String, one of "PENDING", "RESOLVED", "FAILED"
+    #   resp.evaluation.source_values[0].values #=> Array
+    #   resp.evaluation.source_values[0].values[0].type #=> String, one of "OPTION_REF_ID", "STRING_VALUE", "NUMERIC_VALUE", "BOOLEAN_VALUE", "DATETIME_VALUE"
+    #   resp.evaluation.source_values[0].values[0].ref_id #=> String
+    #   resp.evaluation.source_values[0].values[0].string_value #=> String
+    #   resp.evaluation.source_values[0].values[0].numeric_value #=> Float
+    #   resp.evaluation.source_values[0].values[0].boolean_value #=> Boolean
+    #   resp.evaluation.source_values[0].values[0].date_time_value #=> Time
     #   resp.evaluation_form.evaluation_form_version #=> Integer
     #   resp.evaluation_form.evaluation_form_id #=> String
     #   resp.evaluation_form.evaluation_form_arn #=> String
@@ -8605,6 +8773,26 @@ module Aws::Connect
     #   resp.evaluation_form.items[0].section.score_thresholds[0].performance_category #=> String, one of "NEEDS_IMPROVEMENT", "EXCEEDS_EXPECTATIONS"
     #   resp.evaluation_form.items[0].section.score_thresholds[0].min_score_percentage #=> Float
     #   resp.evaluation_form.items[0].section.score_thresholds[0].max_score_percentage #=> Float
+    #   resp.evaluation_form.items[0].section.enablement.condition.operands #=> Array
+    #   resp.evaluation_form.items[0].section.enablement.condition.operands[0].expression.source.type #=> String, one of "QUESTION_REF_ID", "CONTACT", "EVALUATION_METADATA", "FORM_METADATA", "AI_METRICS"
+    #   resp.evaluation_form.items[0].section.enablement.condition.operands[0].expression.source.ref_id #=> String
+    #   resp.evaluation_form.items[0].section.enablement.condition.operands[0].expression.source.contact_field #=> String, one of "CATEGORIES", "AGENT_ARN", "QUEUE_ARN", "ROUTING_PROFILE_ARN", "CHANNEL", "INITIATION_METHOD", "IS_QUEUED", "OVERALL_CUSTOMER_SENTIMENT_SCORE", "OVERALL_AGENT_SENTIMENT_SCORE", "CUSTOMER_SENTIMENT_SCORE_WITHOUT_AGENT", "CUSTOMER_SENTIMENT_SCORE_WITH_AGENT", "NON_TALK_TIME", "NON_TALK_TIME_PERCENTAGE", "NUMBER_OF_INTERRUPTIONS", "CONTACT_DURATION", "AGENT_INTERACTION_DURATION", "CUSTOMER_HOLD_TIME", "LONGEST_HOLD_DURATION", "NUMBER_OF_HOLDS", "AGENT_INTERACTION_AND_HOLD_DURATION", "RECORDING_MEDIA_STREAM_TYPES"
+    #   resp.evaluation_form.items[0].section.enablement.condition.operands[0].expression.source.contact_attribute_key #=> String
+    #   resp.evaluation_form.items[0].section.enablement.condition.operands[0].expression.source.segment_attribute_key #=> String
+    #   resp.evaluation_form.items[0].section.enablement.condition.operands[0].expression.source.evaluation_metadata_field #=> String, one of "EVALUATION_TYPE"
+    #   resp.evaluation_form.items[0].section.enablement.condition.operands[0].expression.source.ai_metrics_field #=> String, one of "AI_SESSION_IS_HANDED_OFF", "AI_SESSION_SELF_SERVICE_DURATION", "AI_SESSION_GOAL_SUCCESS_RATE", "AI_SESSION_COMPLETENESS_SCORE", "AI_SESSION_FAITHFULNESS_SCORE", "AI_AGENT_MAX_PROMPT_LATENCY", "AI_TOOL_MAX_LATENCY", "AI_TOOL_SELECTION_ACCURACY", "AI_TOOL_PARAMETER_ACCURACY", "AI_TOOL_UTILIZATION_ACCURACY"
+    #   resp.evaluation_form.items[0].section.enablement.condition.operands[0].expression.values #=> Array
+    #   resp.evaluation_form.items[0].section.enablement.condition.operands[0].expression.values[0].type #=> String, one of "OPTION_REF_ID", "STRING_VALUE", "NUMERIC_VALUE", "BOOLEAN_VALUE", "DATETIME_VALUE"
+    #   resp.evaluation_form.items[0].section.enablement.condition.operands[0].expression.values[0].ref_id #=> String
+    #   resp.evaluation_form.items[0].section.enablement.condition.operands[0].expression.values[0].string_value #=> String
+    #   resp.evaluation_form.items[0].section.enablement.condition.operands[0].expression.values[0].numeric_value #=> Float
+    #   resp.evaluation_form.items[0].section.enablement.condition.operands[0].expression.values[0].boolean_value #=> Boolean
+    #   resp.evaluation_form.items[0].section.enablement.condition.operands[0].expression.values[0].date_time_value #=> Time
+    #   resp.evaluation_form.items[0].section.enablement.condition.operands[0].expression.comparator #=> String, one of "IN", "NOT_IN", "ALL_IN", "EXACT", "GREATER_THAN", "LESS_THAN", "GREATER_THAN_OR_EQUAL_TO", "LESS_THAN_OR_EQUAL_TO", "EQUAL_TO", "NOT_EQUAL_TO"
+    #   resp.evaluation_form.items[0].section.enablement.condition.operands[0].condition #=> Types::EvaluationFormItemEnablementCondition
+    #   resp.evaluation_form.items[0].section.enablement.condition.operator #=> String, one of "OR", "AND"
+    #   resp.evaluation_form.items[0].section.enablement.action #=> String, one of "DISABLE", "ENABLE"
+    #   resp.evaluation_form.items[0].section.enablement.default_action #=> String, one of "DISABLE", "ENABLE"
     #   resp.evaluation_form.items[0].question.title #=> String
     #   resp.evaluation_form.items[0].question.instructions #=> String
     #   resp.evaluation_form.items[0].question.ref_id #=> String
@@ -8620,8 +8808,8 @@ module Aws::Connect
     #   resp.evaluation_form.items[0].question.question_type_properties.numeric.options[0].automatic_fail_configuration.target_section #=> String
     #   resp.evaluation_form.items[0].question.question_type_properties.numeric.options[0].points_configuration.point_value #=> Integer
     #   resp.evaluation_form.items[0].question.question_type_properties.numeric.options[0].points_configuration.is_bonus #=> Boolean
-    #   resp.evaluation_form.items[0].question.question_type_properties.numeric.automation.property_value.label #=> String, one of "OVERALL_CUSTOMER_SENTIMENT_SCORE", "OVERALL_AGENT_SENTIMENT_SCORE", "CUSTOMER_SENTIMENT_SCORE_WITHOUT_AGENT", "CUSTOMER_SENTIMENT_SCORE_WITH_AGENT", "NON_TALK_TIME", "NON_TALK_TIME_PERCENTAGE", "NUMBER_OF_INTERRUPTIONS", "CONTACT_DURATION", "AGENT_INTERACTION_DURATION", "CUSTOMER_HOLD_TIME", "LONGEST_HOLD_DURATION", "NUMBER_OF_HOLDS", "AGENT_INTERACTION_AND_HOLD_DURATION"
-    #   resp.evaluation_form.items[0].question.question_type_properties.numeric.automation.answer_source.source_type #=> String, one of "CONTACT_LENS_DATA", "GEN_AI"
+    #   resp.evaluation_form.items[0].question.question_type_properties.numeric.automation.property_value.label #=> String, one of "OVERALL_CUSTOMER_SENTIMENT_SCORE", "OVERALL_AGENT_SENTIMENT_SCORE", "CUSTOMER_SENTIMENT_SCORE_WITHOUT_AGENT", "CUSTOMER_SENTIMENT_SCORE_WITH_AGENT", "NON_TALK_TIME", "NON_TALK_TIME_PERCENTAGE", "NUMBER_OF_INTERRUPTIONS", "CONTACT_DURATION", "AGENT_INTERACTION_DURATION", "CUSTOMER_HOLD_TIME", "LONGEST_HOLD_DURATION", "NUMBER_OF_HOLDS", "AGENT_INTERACTION_AND_HOLD_DURATION", "AI_SESSION_SELF_SERVICE_DURATION", "AI_SESSION_GOAL_SUCCESS_RATE", "AI_SESSION_COMPLETENESS_SCORE", "AI_SESSION_FAITHFULNESS_SCORE", "AI_AGENT_MAX_PROMPT_LATENCY", "AI_TOOL_MAX_LATENCY", "AI_TOOL_SELECTION_ACCURACY", "AI_TOOL_PARAMETER_ACCURACY", "AI_TOOL_UTILIZATION_ACCURACY"
+    #   resp.evaluation_form.items[0].question.question_type_properties.numeric.automation.answer_source.source_type #=> String, one of "CONTACT_LENS_DATA", "GEN_AI", "CONDITION"
     #   resp.evaluation_form.items[0].question.question_type_properties.single_select.options #=> Array
     #   resp.evaluation_form.items[0].question.question_type_properties.single_select.options[0].ref_id #=> String
     #   resp.evaluation_form.items[0].question.question_type_properties.single_select.options[0].text #=> String
@@ -8635,9 +8823,28 @@ module Aws::Connect
     #   resp.evaluation_form.items[0].question.question_type_properties.single_select.automation.options[0].rule_category.category #=> String
     #   resp.evaluation_form.items[0].question.question_type_properties.single_select.automation.options[0].rule_category.condition #=> String, one of "PRESENT", "NOT_PRESENT"
     #   resp.evaluation_form.items[0].question.question_type_properties.single_select.automation.options[0].rule_category.option_ref_id #=> String
+    #   resp.evaluation_form.items[0].question.question_type_properties.single_select.automation.options[0].automation_rule.condition.operands #=> Array
+    #   resp.evaluation_form.items[0].question.question_type_properties.single_select.automation.options[0].automation_rule.condition.operands[0].expression.source.type #=> String, one of "QUESTION_REF_ID", "CONTACT", "EVALUATION_METADATA", "FORM_METADATA", "AI_METRICS"
+    #   resp.evaluation_form.items[0].question.question_type_properties.single_select.automation.options[0].automation_rule.condition.operands[0].expression.source.ref_id #=> String
+    #   resp.evaluation_form.items[0].question.question_type_properties.single_select.automation.options[0].automation_rule.condition.operands[0].expression.source.contact_field #=> String, one of "CATEGORIES", "AGENT_ARN", "QUEUE_ARN", "ROUTING_PROFILE_ARN", "CHANNEL", "INITIATION_METHOD", "IS_QUEUED", "OVERALL_CUSTOMER_SENTIMENT_SCORE", "OVERALL_AGENT_SENTIMENT_SCORE", "CUSTOMER_SENTIMENT_SCORE_WITHOUT_AGENT", "CUSTOMER_SENTIMENT_SCORE_WITH_AGENT", "NON_TALK_TIME", "NON_TALK_TIME_PERCENTAGE", "NUMBER_OF_INTERRUPTIONS", "CONTACT_DURATION", "AGENT_INTERACTION_DURATION", "CUSTOMER_HOLD_TIME", "LONGEST_HOLD_DURATION", "NUMBER_OF_HOLDS", "AGENT_INTERACTION_AND_HOLD_DURATION", "RECORDING_MEDIA_STREAM_TYPES"
+    #   resp.evaluation_form.items[0].question.question_type_properties.single_select.automation.options[0].automation_rule.condition.operands[0].expression.source.contact_attribute_key #=> String
+    #   resp.evaluation_form.items[0].question.question_type_properties.single_select.automation.options[0].automation_rule.condition.operands[0].expression.source.segment_attribute_key #=> String
+    #   resp.evaluation_form.items[0].question.question_type_properties.single_select.automation.options[0].automation_rule.condition.operands[0].expression.source.evaluation_metadata_field #=> String, one of "EVALUATION_TYPE"
+    #   resp.evaluation_form.items[0].question.question_type_properties.single_select.automation.options[0].automation_rule.condition.operands[0].expression.source.ai_metrics_field #=> String, one of "AI_SESSION_IS_HANDED_OFF", "AI_SESSION_SELF_SERVICE_DURATION", "AI_SESSION_GOAL_SUCCESS_RATE", "AI_SESSION_COMPLETENESS_SCORE", "AI_SESSION_FAITHFULNESS_SCORE", "AI_AGENT_MAX_PROMPT_LATENCY", "AI_TOOL_MAX_LATENCY", "AI_TOOL_SELECTION_ACCURACY", "AI_TOOL_PARAMETER_ACCURACY", "AI_TOOL_UTILIZATION_ACCURACY"
+    #   resp.evaluation_form.items[0].question.question_type_properties.single_select.automation.options[0].automation_rule.condition.operands[0].expression.values #=> Array
+    #   resp.evaluation_form.items[0].question.question_type_properties.single_select.automation.options[0].automation_rule.condition.operands[0].expression.values[0].type #=> String, one of "OPTION_REF_ID", "STRING_VALUE", "NUMERIC_VALUE", "BOOLEAN_VALUE", "DATETIME_VALUE"
+    #   resp.evaluation_form.items[0].question.question_type_properties.single_select.automation.options[0].automation_rule.condition.operands[0].expression.values[0].ref_id #=> String
+    #   resp.evaluation_form.items[0].question.question_type_properties.single_select.automation.options[0].automation_rule.condition.operands[0].expression.values[0].string_value #=> String
+    #   resp.evaluation_form.items[0].question.question_type_properties.single_select.automation.options[0].automation_rule.condition.operands[0].expression.values[0].numeric_value #=> Float
+    #   resp.evaluation_form.items[0].question.question_type_properties.single_select.automation.options[0].automation_rule.condition.operands[0].expression.values[0].boolean_value #=> Boolean
+    #   resp.evaluation_form.items[0].question.question_type_properties.single_select.automation.options[0].automation_rule.condition.operands[0].expression.values[0].date_time_value #=> Time
+    #   resp.evaluation_form.items[0].question.question_type_properties.single_select.automation.options[0].automation_rule.condition.operands[0].expression.comparator #=> String, one of "IN", "NOT_IN", "ALL_IN", "EXACT", "GREATER_THAN", "LESS_THAN", "GREATER_THAN_OR_EQUAL_TO", "LESS_THAN_OR_EQUAL_TO", "EQUAL_TO", "NOT_EQUAL_TO"
+    #   resp.evaluation_form.items[0].question.question_type_properties.single_select.automation.options[0].automation_rule.condition.operands[0].condition #=> Types::EvaluationFormItemEnablementCondition
+    #   resp.evaluation_form.items[0].question.question_type_properties.single_select.automation.options[0].automation_rule.condition.operator #=> String, one of "OR", "AND"
+    #   resp.evaluation_form.items[0].question.question_type_properties.single_select.automation.options[0].automation_rule.option_ref_id #=> String
     #   resp.evaluation_form.items[0].question.question_type_properties.single_select.automation.default_option_ref_id #=> String
-    #   resp.evaluation_form.items[0].question.question_type_properties.single_select.automation.answer_source.source_type #=> String, one of "CONTACT_LENS_DATA", "GEN_AI"
-    #   resp.evaluation_form.items[0].question.question_type_properties.text.automation.answer_source.source_type #=> String, one of "CONTACT_LENS_DATA", "GEN_AI"
+    #   resp.evaluation_form.items[0].question.question_type_properties.single_select.automation.answer_source.source_type #=> String, one of "CONTACT_LENS_DATA", "GEN_AI", "CONDITION"
+    #   resp.evaluation_form.items[0].question.question_type_properties.text.automation.answer_source.source_type #=> String, one of "CONTACT_LENS_DATA", "GEN_AI", "CONDITION"
     #   resp.evaluation_form.items[0].question.question_type_properties.multi_select.options #=> Array
     #   resp.evaluation_form.items[0].question.question_type_properties.multi_select.options[0].ref_id #=> String
     #   resp.evaluation_form.items[0].question.question_type_properties.multi_select.options[0].text #=> String
@@ -8654,14 +8861,23 @@ module Aws::Connect
     #   resp.evaluation_form.items[0].question.question_type_properties.multi_select.automation.options[0].rule_category.option_ref_ids[0] #=> String
     #   resp.evaluation_form.items[0].question.question_type_properties.multi_select.automation.default_option_ref_ids #=> Array
     #   resp.evaluation_form.items[0].question.question_type_properties.multi_select.automation.default_option_ref_ids[0] #=> String
-    #   resp.evaluation_form.items[0].question.question_type_properties.multi_select.automation.answer_source.source_type #=> String, one of "CONTACT_LENS_DATA", "GEN_AI"
+    #   resp.evaluation_form.items[0].question.question_type_properties.multi_select.automation.answer_source.source_type #=> String, one of "CONTACT_LENS_DATA", "GEN_AI", "CONDITION"
     #   resp.evaluation_form.items[0].question.enablement.condition.operands #=> Array
-    #   resp.evaluation_form.items[0].question.enablement.condition.operands[0].expression.source.type #=> String, one of "QUESTION_REF_ID"
+    #   resp.evaluation_form.items[0].question.enablement.condition.operands[0].expression.source.type #=> String, one of "QUESTION_REF_ID", "CONTACT", "EVALUATION_METADATA", "FORM_METADATA", "AI_METRICS"
     #   resp.evaluation_form.items[0].question.enablement.condition.operands[0].expression.source.ref_id #=> String
+    #   resp.evaluation_form.items[0].question.enablement.condition.operands[0].expression.source.contact_field #=> String, one of "CATEGORIES", "AGENT_ARN", "QUEUE_ARN", "ROUTING_PROFILE_ARN", "CHANNEL", "INITIATION_METHOD", "IS_QUEUED", "OVERALL_CUSTOMER_SENTIMENT_SCORE", "OVERALL_AGENT_SENTIMENT_SCORE", "CUSTOMER_SENTIMENT_SCORE_WITHOUT_AGENT", "CUSTOMER_SENTIMENT_SCORE_WITH_AGENT", "NON_TALK_TIME", "NON_TALK_TIME_PERCENTAGE", "NUMBER_OF_INTERRUPTIONS", "CONTACT_DURATION", "AGENT_INTERACTION_DURATION", "CUSTOMER_HOLD_TIME", "LONGEST_HOLD_DURATION", "NUMBER_OF_HOLDS", "AGENT_INTERACTION_AND_HOLD_DURATION", "RECORDING_MEDIA_STREAM_TYPES"
+    #   resp.evaluation_form.items[0].question.enablement.condition.operands[0].expression.source.contact_attribute_key #=> String
+    #   resp.evaluation_form.items[0].question.enablement.condition.operands[0].expression.source.segment_attribute_key #=> String
+    #   resp.evaluation_form.items[0].question.enablement.condition.operands[0].expression.source.evaluation_metadata_field #=> String, one of "EVALUATION_TYPE"
+    #   resp.evaluation_form.items[0].question.enablement.condition.operands[0].expression.source.ai_metrics_field #=> String, one of "AI_SESSION_IS_HANDED_OFF", "AI_SESSION_SELF_SERVICE_DURATION", "AI_SESSION_GOAL_SUCCESS_RATE", "AI_SESSION_COMPLETENESS_SCORE", "AI_SESSION_FAITHFULNESS_SCORE", "AI_AGENT_MAX_PROMPT_LATENCY", "AI_TOOL_MAX_LATENCY", "AI_TOOL_SELECTION_ACCURACY", "AI_TOOL_PARAMETER_ACCURACY", "AI_TOOL_UTILIZATION_ACCURACY"
     #   resp.evaluation_form.items[0].question.enablement.condition.operands[0].expression.values #=> Array
-    #   resp.evaluation_form.items[0].question.enablement.condition.operands[0].expression.values[0].type #=> String, one of "OPTION_REF_ID"
+    #   resp.evaluation_form.items[0].question.enablement.condition.operands[0].expression.values[0].type #=> String, one of "OPTION_REF_ID", "STRING_VALUE", "NUMERIC_VALUE", "BOOLEAN_VALUE", "DATETIME_VALUE"
     #   resp.evaluation_form.items[0].question.enablement.condition.operands[0].expression.values[0].ref_id #=> String
-    #   resp.evaluation_form.items[0].question.enablement.condition.operands[0].expression.comparator #=> String, one of "IN", "NOT_IN", "ALL_IN", "EXACT"
+    #   resp.evaluation_form.items[0].question.enablement.condition.operands[0].expression.values[0].string_value #=> String
+    #   resp.evaluation_form.items[0].question.enablement.condition.operands[0].expression.values[0].numeric_value #=> Float
+    #   resp.evaluation_form.items[0].question.enablement.condition.operands[0].expression.values[0].boolean_value #=> Boolean
+    #   resp.evaluation_form.items[0].question.enablement.condition.operands[0].expression.values[0].date_time_value #=> Time
+    #   resp.evaluation_form.items[0].question.enablement.condition.operands[0].expression.comparator #=> String, one of "IN", "NOT_IN", "ALL_IN", "EXACT", "GREATER_THAN", "LESS_THAN", "GREATER_THAN_OR_EQUAL_TO", "LESS_THAN_OR_EQUAL_TO", "EQUAL_TO", "NOT_EQUAL_TO"
     #   resp.evaluation_form.items[0].question.enablement.condition.operands[0].condition #=> Types::EvaluationFormItemEnablementCondition
     #   resp.evaluation_form.items[0].question.enablement.condition.operator #=> String, one of "OR", "AND"
     #   resp.evaluation_form.items[0].question.enablement.action #=> String, one of "DISABLE", "ENABLE"
@@ -8685,7 +8901,7 @@ module Aws::Connect
     #   resp.evaluation_form.scoring_strategy.score_thresholds[0].max_score_percentage #=> Float
     #   resp.evaluation_form.auto_evaluation_configuration.enabled #=> Boolean
     #   resp.evaluation_form.target_configuration.contact_interaction_type #=> String, one of "AGENT", "AUTOMATED", "CUSTOMER"
-    #   resp.evaluation_form.language_configuration.form_language #=> String, one of "de-DE", "en-US", "es-ES", "fr-FR", "it-IT", "pt-BR", "ja-JP", "ko-KR", "zh-CN", "ms-MY"
+    #   resp.evaluation_form.language_configuration.form_language #=> String, one of "de-DE", "en-US", "es-ES", "fr-FR", "it-IT", "pt-BR", "ja-JP", "ko-KR", "zh-CN", "ms-MY", "af-ZA", "sq-AL", "am-ET", "ar-AE", "ar-SA", "hy-AM", "eu-ES", "be-BY", "bs-BA", "bg-BG", "ca-ES", "ckb-IR", "ckb-IQ", "zh-TW", "hr-HR", "cs-CZ", "da-DK", "nl-BE", "nl-NL", "en-AU", "en-IN", "en-IE", "en-NZ", "en-AB", "en-SG", "en-ZA", "en-GB", "en-WL", "fa-IR", "fa-AF", "fi-FI", "fr-BE", "fr-CA", "ga-IE", "gl-ES", "ka-GE", "de-AT", "de-CH", "el-GR", "gu-IN", "ht-HT", "he-IL", "hi-IN", "hu-HU", "is-IS", "id-ID", "jv-ID", "km-KH", "kn-IN", "kk-KZ", "lo-LA", "lv-LV", "lt-LT", "mk-MK", "ml-IN", "mr-IN", "ne-NP", "no-NO", "or-IN", "ps-AF", "pl-PL", "pt-PT", "pa-IN", "ro-RO", "ru-RU", "sr-RS", "si-LK", "sk-SK", "sl-SI", "es-MX", "es-US", "su-ID", "sw-BI", "sw-KE", "sw-RW", "sw-TZ", "sw-UG", "sv-SE", "tl-PH", "ta-IN", "te-IN", "th-TH", "tr-TR", "uk-UA", "uz-UZ", "vi-VN", "zu-ZA", "my-MM", "so-SO", "yue-HK", "et-EE", "hmn", "lg-UG", "cy-GB", "xh-ZA", "bn-BD"
     #   resp.evaluation_form.review_configuration.review_notification_recipients #=> Array
     #   resp.evaluation_form.review_configuration.review_notification_recipients[0].type #=> String, one of "USER_ID"
     #   resp.evaluation_form.review_configuration.review_notification_recipients[0].value.user_id #=> String
@@ -9146,6 +9362,26 @@ module Aws::Connect
     #   resp.evaluation_form.items[0].section.score_thresholds[0].performance_category #=> String, one of "NEEDS_IMPROVEMENT", "EXCEEDS_EXPECTATIONS"
     #   resp.evaluation_form.items[0].section.score_thresholds[0].min_score_percentage #=> Float
     #   resp.evaluation_form.items[0].section.score_thresholds[0].max_score_percentage #=> Float
+    #   resp.evaluation_form.items[0].section.enablement.condition.operands #=> Array
+    #   resp.evaluation_form.items[0].section.enablement.condition.operands[0].expression.source.type #=> String, one of "QUESTION_REF_ID", "CONTACT", "EVALUATION_METADATA", "FORM_METADATA", "AI_METRICS"
+    #   resp.evaluation_form.items[0].section.enablement.condition.operands[0].expression.source.ref_id #=> String
+    #   resp.evaluation_form.items[0].section.enablement.condition.operands[0].expression.source.contact_field #=> String, one of "CATEGORIES", "AGENT_ARN", "QUEUE_ARN", "ROUTING_PROFILE_ARN", "CHANNEL", "INITIATION_METHOD", "IS_QUEUED", "OVERALL_CUSTOMER_SENTIMENT_SCORE", "OVERALL_AGENT_SENTIMENT_SCORE", "CUSTOMER_SENTIMENT_SCORE_WITHOUT_AGENT", "CUSTOMER_SENTIMENT_SCORE_WITH_AGENT", "NON_TALK_TIME", "NON_TALK_TIME_PERCENTAGE", "NUMBER_OF_INTERRUPTIONS", "CONTACT_DURATION", "AGENT_INTERACTION_DURATION", "CUSTOMER_HOLD_TIME", "LONGEST_HOLD_DURATION", "NUMBER_OF_HOLDS", "AGENT_INTERACTION_AND_HOLD_DURATION", "RECORDING_MEDIA_STREAM_TYPES"
+    #   resp.evaluation_form.items[0].section.enablement.condition.operands[0].expression.source.contact_attribute_key #=> String
+    #   resp.evaluation_form.items[0].section.enablement.condition.operands[0].expression.source.segment_attribute_key #=> String
+    #   resp.evaluation_form.items[0].section.enablement.condition.operands[0].expression.source.evaluation_metadata_field #=> String, one of "EVALUATION_TYPE"
+    #   resp.evaluation_form.items[0].section.enablement.condition.operands[0].expression.source.ai_metrics_field #=> String, one of "AI_SESSION_IS_HANDED_OFF", "AI_SESSION_SELF_SERVICE_DURATION", "AI_SESSION_GOAL_SUCCESS_RATE", "AI_SESSION_COMPLETENESS_SCORE", "AI_SESSION_FAITHFULNESS_SCORE", "AI_AGENT_MAX_PROMPT_LATENCY", "AI_TOOL_MAX_LATENCY", "AI_TOOL_SELECTION_ACCURACY", "AI_TOOL_PARAMETER_ACCURACY", "AI_TOOL_UTILIZATION_ACCURACY"
+    #   resp.evaluation_form.items[0].section.enablement.condition.operands[0].expression.values #=> Array
+    #   resp.evaluation_form.items[0].section.enablement.condition.operands[0].expression.values[0].type #=> String, one of "OPTION_REF_ID", "STRING_VALUE", "NUMERIC_VALUE", "BOOLEAN_VALUE", "DATETIME_VALUE"
+    #   resp.evaluation_form.items[0].section.enablement.condition.operands[0].expression.values[0].ref_id #=> String
+    #   resp.evaluation_form.items[0].section.enablement.condition.operands[0].expression.values[0].string_value #=> String
+    #   resp.evaluation_form.items[0].section.enablement.condition.operands[0].expression.values[0].numeric_value #=> Float
+    #   resp.evaluation_form.items[0].section.enablement.condition.operands[0].expression.values[0].boolean_value #=> Boolean
+    #   resp.evaluation_form.items[0].section.enablement.condition.operands[0].expression.values[0].date_time_value #=> Time
+    #   resp.evaluation_form.items[0].section.enablement.condition.operands[0].expression.comparator #=> String, one of "IN", "NOT_IN", "ALL_IN", "EXACT", "GREATER_THAN", "LESS_THAN", "GREATER_THAN_OR_EQUAL_TO", "LESS_THAN_OR_EQUAL_TO", "EQUAL_TO", "NOT_EQUAL_TO"
+    #   resp.evaluation_form.items[0].section.enablement.condition.operands[0].condition #=> Types::EvaluationFormItemEnablementCondition
+    #   resp.evaluation_form.items[0].section.enablement.condition.operator #=> String, one of "OR", "AND"
+    #   resp.evaluation_form.items[0].section.enablement.action #=> String, one of "DISABLE", "ENABLE"
+    #   resp.evaluation_form.items[0].section.enablement.default_action #=> String, one of "DISABLE", "ENABLE"
     #   resp.evaluation_form.items[0].question.title #=> String
     #   resp.evaluation_form.items[0].question.instructions #=> String
     #   resp.evaluation_form.items[0].question.ref_id #=> String
@@ -9161,8 +9397,8 @@ module Aws::Connect
     #   resp.evaluation_form.items[0].question.question_type_properties.numeric.options[0].automatic_fail_configuration.target_section #=> String
     #   resp.evaluation_form.items[0].question.question_type_properties.numeric.options[0].points_configuration.point_value #=> Integer
     #   resp.evaluation_form.items[0].question.question_type_properties.numeric.options[0].points_configuration.is_bonus #=> Boolean
-    #   resp.evaluation_form.items[0].question.question_type_properties.numeric.automation.property_value.label #=> String, one of "OVERALL_CUSTOMER_SENTIMENT_SCORE", "OVERALL_AGENT_SENTIMENT_SCORE", "CUSTOMER_SENTIMENT_SCORE_WITHOUT_AGENT", "CUSTOMER_SENTIMENT_SCORE_WITH_AGENT", "NON_TALK_TIME", "NON_TALK_TIME_PERCENTAGE", "NUMBER_OF_INTERRUPTIONS", "CONTACT_DURATION", "AGENT_INTERACTION_DURATION", "CUSTOMER_HOLD_TIME", "LONGEST_HOLD_DURATION", "NUMBER_OF_HOLDS", "AGENT_INTERACTION_AND_HOLD_DURATION"
-    #   resp.evaluation_form.items[0].question.question_type_properties.numeric.automation.answer_source.source_type #=> String, one of "CONTACT_LENS_DATA", "GEN_AI"
+    #   resp.evaluation_form.items[0].question.question_type_properties.numeric.automation.property_value.label #=> String, one of "OVERALL_CUSTOMER_SENTIMENT_SCORE", "OVERALL_AGENT_SENTIMENT_SCORE", "CUSTOMER_SENTIMENT_SCORE_WITHOUT_AGENT", "CUSTOMER_SENTIMENT_SCORE_WITH_AGENT", "NON_TALK_TIME", "NON_TALK_TIME_PERCENTAGE", "NUMBER_OF_INTERRUPTIONS", "CONTACT_DURATION", "AGENT_INTERACTION_DURATION", "CUSTOMER_HOLD_TIME", "LONGEST_HOLD_DURATION", "NUMBER_OF_HOLDS", "AGENT_INTERACTION_AND_HOLD_DURATION", "AI_SESSION_SELF_SERVICE_DURATION", "AI_SESSION_GOAL_SUCCESS_RATE", "AI_SESSION_COMPLETENESS_SCORE", "AI_SESSION_FAITHFULNESS_SCORE", "AI_AGENT_MAX_PROMPT_LATENCY", "AI_TOOL_MAX_LATENCY", "AI_TOOL_SELECTION_ACCURACY", "AI_TOOL_PARAMETER_ACCURACY", "AI_TOOL_UTILIZATION_ACCURACY"
+    #   resp.evaluation_form.items[0].question.question_type_properties.numeric.automation.answer_source.source_type #=> String, one of "CONTACT_LENS_DATA", "GEN_AI", "CONDITION"
     #   resp.evaluation_form.items[0].question.question_type_properties.single_select.options #=> Array
     #   resp.evaluation_form.items[0].question.question_type_properties.single_select.options[0].ref_id #=> String
     #   resp.evaluation_form.items[0].question.question_type_properties.single_select.options[0].text #=> String
@@ -9176,9 +9412,28 @@ module Aws::Connect
     #   resp.evaluation_form.items[0].question.question_type_properties.single_select.automation.options[0].rule_category.category #=> String
     #   resp.evaluation_form.items[0].question.question_type_properties.single_select.automation.options[0].rule_category.condition #=> String, one of "PRESENT", "NOT_PRESENT"
     #   resp.evaluation_form.items[0].question.question_type_properties.single_select.automation.options[0].rule_category.option_ref_id #=> String
+    #   resp.evaluation_form.items[0].question.question_type_properties.single_select.automation.options[0].automation_rule.condition.operands #=> Array
+    #   resp.evaluation_form.items[0].question.question_type_properties.single_select.automation.options[0].automation_rule.condition.operands[0].expression.source.type #=> String, one of "QUESTION_REF_ID", "CONTACT", "EVALUATION_METADATA", "FORM_METADATA", "AI_METRICS"
+    #   resp.evaluation_form.items[0].question.question_type_properties.single_select.automation.options[0].automation_rule.condition.operands[0].expression.source.ref_id #=> String
+    #   resp.evaluation_form.items[0].question.question_type_properties.single_select.automation.options[0].automation_rule.condition.operands[0].expression.source.contact_field #=> String, one of "CATEGORIES", "AGENT_ARN", "QUEUE_ARN", "ROUTING_PROFILE_ARN", "CHANNEL", "INITIATION_METHOD", "IS_QUEUED", "OVERALL_CUSTOMER_SENTIMENT_SCORE", "OVERALL_AGENT_SENTIMENT_SCORE", "CUSTOMER_SENTIMENT_SCORE_WITHOUT_AGENT", "CUSTOMER_SENTIMENT_SCORE_WITH_AGENT", "NON_TALK_TIME", "NON_TALK_TIME_PERCENTAGE", "NUMBER_OF_INTERRUPTIONS", "CONTACT_DURATION", "AGENT_INTERACTION_DURATION", "CUSTOMER_HOLD_TIME", "LONGEST_HOLD_DURATION", "NUMBER_OF_HOLDS", "AGENT_INTERACTION_AND_HOLD_DURATION", "RECORDING_MEDIA_STREAM_TYPES"
+    #   resp.evaluation_form.items[0].question.question_type_properties.single_select.automation.options[0].automation_rule.condition.operands[0].expression.source.contact_attribute_key #=> String
+    #   resp.evaluation_form.items[0].question.question_type_properties.single_select.automation.options[0].automation_rule.condition.operands[0].expression.source.segment_attribute_key #=> String
+    #   resp.evaluation_form.items[0].question.question_type_properties.single_select.automation.options[0].automation_rule.condition.operands[0].expression.source.evaluation_metadata_field #=> String, one of "EVALUATION_TYPE"
+    #   resp.evaluation_form.items[0].question.question_type_properties.single_select.automation.options[0].automation_rule.condition.operands[0].expression.source.ai_metrics_field #=> String, one of "AI_SESSION_IS_HANDED_OFF", "AI_SESSION_SELF_SERVICE_DURATION", "AI_SESSION_GOAL_SUCCESS_RATE", "AI_SESSION_COMPLETENESS_SCORE", "AI_SESSION_FAITHFULNESS_SCORE", "AI_AGENT_MAX_PROMPT_LATENCY", "AI_TOOL_MAX_LATENCY", "AI_TOOL_SELECTION_ACCURACY", "AI_TOOL_PARAMETER_ACCURACY", "AI_TOOL_UTILIZATION_ACCURACY"
+    #   resp.evaluation_form.items[0].question.question_type_properties.single_select.automation.options[0].automation_rule.condition.operands[0].expression.values #=> Array
+    #   resp.evaluation_form.items[0].question.question_type_properties.single_select.automation.options[0].automation_rule.condition.operands[0].expression.values[0].type #=> String, one of "OPTION_REF_ID", "STRING_VALUE", "NUMERIC_VALUE", "BOOLEAN_VALUE", "DATETIME_VALUE"
+    #   resp.evaluation_form.items[0].question.question_type_properties.single_select.automation.options[0].automation_rule.condition.operands[0].expression.values[0].ref_id #=> String
+    #   resp.evaluation_form.items[0].question.question_type_properties.single_select.automation.options[0].automation_rule.condition.operands[0].expression.values[0].string_value #=> String
+    #   resp.evaluation_form.items[0].question.question_type_properties.single_select.automation.options[0].automation_rule.condition.operands[0].expression.values[0].numeric_value #=> Float
+    #   resp.evaluation_form.items[0].question.question_type_properties.single_select.automation.options[0].automation_rule.condition.operands[0].expression.values[0].boolean_value #=> Boolean
+    #   resp.evaluation_form.items[0].question.question_type_properties.single_select.automation.options[0].automation_rule.condition.operands[0].expression.values[0].date_time_value #=> Time
+    #   resp.evaluation_form.items[0].question.question_type_properties.single_select.automation.options[0].automation_rule.condition.operands[0].expression.comparator #=> String, one of "IN", "NOT_IN", "ALL_IN", "EXACT", "GREATER_THAN", "LESS_THAN", "GREATER_THAN_OR_EQUAL_TO", "LESS_THAN_OR_EQUAL_TO", "EQUAL_TO", "NOT_EQUAL_TO"
+    #   resp.evaluation_form.items[0].question.question_type_properties.single_select.automation.options[0].automation_rule.condition.operands[0].condition #=> Types::EvaluationFormItemEnablementCondition
+    #   resp.evaluation_form.items[0].question.question_type_properties.single_select.automation.options[0].automation_rule.condition.operator #=> String, one of "OR", "AND"
+    #   resp.evaluation_form.items[0].question.question_type_properties.single_select.automation.options[0].automation_rule.option_ref_id #=> String
     #   resp.evaluation_form.items[0].question.question_type_properties.single_select.automation.default_option_ref_id #=> String
-    #   resp.evaluation_form.items[0].question.question_type_properties.single_select.automation.answer_source.source_type #=> String, one of "CONTACT_LENS_DATA", "GEN_AI"
-    #   resp.evaluation_form.items[0].question.question_type_properties.text.automation.answer_source.source_type #=> String, one of "CONTACT_LENS_DATA", "GEN_AI"
+    #   resp.evaluation_form.items[0].question.question_type_properties.single_select.automation.answer_source.source_type #=> String, one of "CONTACT_LENS_DATA", "GEN_AI", "CONDITION"
+    #   resp.evaluation_form.items[0].question.question_type_properties.text.automation.answer_source.source_type #=> String, one of "CONTACT_LENS_DATA", "GEN_AI", "CONDITION"
     #   resp.evaluation_form.items[0].question.question_type_properties.multi_select.options #=> Array
     #   resp.evaluation_form.items[0].question.question_type_properties.multi_select.options[0].ref_id #=> String
     #   resp.evaluation_form.items[0].question.question_type_properties.multi_select.options[0].text #=> String
@@ -9195,14 +9450,23 @@ module Aws::Connect
     #   resp.evaluation_form.items[0].question.question_type_properties.multi_select.automation.options[0].rule_category.option_ref_ids[0] #=> String
     #   resp.evaluation_form.items[0].question.question_type_properties.multi_select.automation.default_option_ref_ids #=> Array
     #   resp.evaluation_form.items[0].question.question_type_properties.multi_select.automation.default_option_ref_ids[0] #=> String
-    #   resp.evaluation_form.items[0].question.question_type_properties.multi_select.automation.answer_source.source_type #=> String, one of "CONTACT_LENS_DATA", "GEN_AI"
+    #   resp.evaluation_form.items[0].question.question_type_properties.multi_select.automation.answer_source.source_type #=> String, one of "CONTACT_LENS_DATA", "GEN_AI", "CONDITION"
     #   resp.evaluation_form.items[0].question.enablement.condition.operands #=> Array
-    #   resp.evaluation_form.items[0].question.enablement.condition.operands[0].expression.source.type #=> String, one of "QUESTION_REF_ID"
+    #   resp.evaluation_form.items[0].question.enablement.condition.operands[0].expression.source.type #=> String, one of "QUESTION_REF_ID", "CONTACT", "EVALUATION_METADATA", "FORM_METADATA", "AI_METRICS"
     #   resp.evaluation_form.items[0].question.enablement.condition.operands[0].expression.source.ref_id #=> String
+    #   resp.evaluation_form.items[0].question.enablement.condition.operands[0].expression.source.contact_field #=> String, one of "CATEGORIES", "AGENT_ARN", "QUEUE_ARN", "ROUTING_PROFILE_ARN", "CHANNEL", "INITIATION_METHOD", "IS_QUEUED", "OVERALL_CUSTOMER_SENTIMENT_SCORE", "OVERALL_AGENT_SENTIMENT_SCORE", "CUSTOMER_SENTIMENT_SCORE_WITHOUT_AGENT", "CUSTOMER_SENTIMENT_SCORE_WITH_AGENT", "NON_TALK_TIME", "NON_TALK_TIME_PERCENTAGE", "NUMBER_OF_INTERRUPTIONS", "CONTACT_DURATION", "AGENT_INTERACTION_DURATION", "CUSTOMER_HOLD_TIME", "LONGEST_HOLD_DURATION", "NUMBER_OF_HOLDS", "AGENT_INTERACTION_AND_HOLD_DURATION", "RECORDING_MEDIA_STREAM_TYPES"
+    #   resp.evaluation_form.items[0].question.enablement.condition.operands[0].expression.source.contact_attribute_key #=> String
+    #   resp.evaluation_form.items[0].question.enablement.condition.operands[0].expression.source.segment_attribute_key #=> String
+    #   resp.evaluation_form.items[0].question.enablement.condition.operands[0].expression.source.evaluation_metadata_field #=> String, one of "EVALUATION_TYPE"
+    #   resp.evaluation_form.items[0].question.enablement.condition.operands[0].expression.source.ai_metrics_field #=> String, one of "AI_SESSION_IS_HANDED_OFF", "AI_SESSION_SELF_SERVICE_DURATION", "AI_SESSION_GOAL_SUCCESS_RATE", "AI_SESSION_COMPLETENESS_SCORE", "AI_SESSION_FAITHFULNESS_SCORE", "AI_AGENT_MAX_PROMPT_LATENCY", "AI_TOOL_MAX_LATENCY", "AI_TOOL_SELECTION_ACCURACY", "AI_TOOL_PARAMETER_ACCURACY", "AI_TOOL_UTILIZATION_ACCURACY"
     #   resp.evaluation_form.items[0].question.enablement.condition.operands[0].expression.values #=> Array
-    #   resp.evaluation_form.items[0].question.enablement.condition.operands[0].expression.values[0].type #=> String, one of "OPTION_REF_ID"
+    #   resp.evaluation_form.items[0].question.enablement.condition.operands[0].expression.values[0].type #=> String, one of "OPTION_REF_ID", "STRING_VALUE", "NUMERIC_VALUE", "BOOLEAN_VALUE", "DATETIME_VALUE"
     #   resp.evaluation_form.items[0].question.enablement.condition.operands[0].expression.values[0].ref_id #=> String
-    #   resp.evaluation_form.items[0].question.enablement.condition.operands[0].expression.comparator #=> String, one of "IN", "NOT_IN", "ALL_IN", "EXACT"
+    #   resp.evaluation_form.items[0].question.enablement.condition.operands[0].expression.values[0].string_value #=> String
+    #   resp.evaluation_form.items[0].question.enablement.condition.operands[0].expression.values[0].numeric_value #=> Float
+    #   resp.evaluation_form.items[0].question.enablement.condition.operands[0].expression.values[0].boolean_value #=> Boolean
+    #   resp.evaluation_form.items[0].question.enablement.condition.operands[0].expression.values[0].date_time_value #=> Time
+    #   resp.evaluation_form.items[0].question.enablement.condition.operands[0].expression.comparator #=> String, one of "IN", "NOT_IN", "ALL_IN", "EXACT", "GREATER_THAN", "LESS_THAN", "GREATER_THAN_OR_EQUAL_TO", "LESS_THAN_OR_EQUAL_TO", "EQUAL_TO", "NOT_EQUAL_TO"
     #   resp.evaluation_form.items[0].question.enablement.condition.operands[0].condition #=> Types::EvaluationFormItemEnablementCondition
     #   resp.evaluation_form.items[0].question.enablement.condition.operator #=> String, one of "OR", "AND"
     #   resp.evaluation_form.items[0].question.enablement.action #=> String, one of "DISABLE", "ENABLE"
@@ -9236,7 +9500,7 @@ module Aws::Connect
     #   resp.evaluation_form.tags #=> Hash
     #   resp.evaluation_form.tags["TagKey"] #=> String
     #   resp.evaluation_form.target_configuration.contact_interaction_type #=> String, one of "AGENT", "AUTOMATED", "CUSTOMER"
-    #   resp.evaluation_form.language_configuration.form_language #=> String, one of "de-DE", "en-US", "es-ES", "fr-FR", "it-IT", "pt-BR", "ja-JP", "ko-KR", "zh-CN", "ms-MY"
+    #   resp.evaluation_form.language_configuration.form_language #=> String, one of "de-DE", "en-US", "es-ES", "fr-FR", "it-IT", "pt-BR", "ja-JP", "ko-KR", "zh-CN", "ms-MY", "af-ZA", "sq-AL", "am-ET", "ar-AE", "ar-SA", "hy-AM", "eu-ES", "be-BY", "bs-BA", "bg-BG", "ca-ES", "ckb-IR", "ckb-IQ", "zh-TW", "hr-HR", "cs-CZ", "da-DK", "nl-BE", "nl-NL", "en-AU", "en-IN", "en-IE", "en-NZ", "en-AB", "en-SG", "en-ZA", "en-GB", "en-WL", "fa-IR", "fa-AF", "fi-FI", "fr-BE", "fr-CA", "ga-IE", "gl-ES", "ka-GE", "de-AT", "de-CH", "el-GR", "gu-IN", "ht-HT", "he-IL", "hi-IN", "hu-HU", "is-IS", "id-ID", "jv-ID", "km-KH", "kn-IN", "kk-KZ", "lo-LA", "lv-LV", "lt-LT", "mk-MK", "ml-IN", "mr-IN", "ne-NP", "no-NO", "or-IN", "ps-AF", "pl-PL", "pt-PT", "pa-IN", "ro-RO", "ru-RU", "sr-RS", "si-LK", "sk-SK", "sl-SI", "es-MX", "es-US", "su-ID", "sw-BI", "sw-KE", "sw-RW", "sw-TZ", "sw-UG", "sv-SE", "tl-PH", "ta-IN", "te-IN", "th-TH", "tr-TR", "uk-UA", "uz-UZ", "vi-VN", "zu-ZA", "my-MM", "so-SO", "yue-HK", "et-EE", "hmn", "lg-UG", "cy-GB", "xh-ZA", "bn-BD"
     #   resp.evaluation_form.latest_validation_status #=> String, one of "IN_PROGRESS", "COMPLETED", "FAILED"
     #   resp.evaluation_form.last_validation_time #=> Time
     #   resp.evaluation_form.ai_version #=> String
@@ -10078,13 +10342,13 @@ module Aws::Connect
     #   resp.rule.rule_capability_tiers[0] #=> String, one of "GenerativeAI"
     #   resp.rule.function #=> String
     #   resp.rule.actions #=> Array
-    #   resp.rule.actions[0].action_type #=> String, one of "CREATE_TASK", "ASSIGN_CONTACT_CATEGORY", "GENERATE_EVENTBRIDGE_EVENT", "SEND_NOTIFICATION", "CREATE_CASE", "UPDATE_CASE", "ASSIGN_SLA", "END_ASSOCIATED_TASKS", "SUBMIT_AUTO_EVALUATION", "EXTRACT_INFORMATION", "SEND_IN_APP_NOTIFICATION"
+    #   resp.rule.actions[0].action_type #=> String, one of "CREATE_TASK", "ASSIGN_CONTACT_CATEGORY", "GENERATE_EVENTBRIDGE_EVENT", "SEND_NOTIFICATION", "CREATE_CASE", "UPDATE_CASE", "ASSIGN_SLA", "END_ASSOCIATED_TASKS", "END_ASSOCIATED_EMAILS", "SUBMIT_AUTO_EVALUATION", "EXTRACT_INFORMATION", "SEND_IN_APP_NOTIFICATION"
     #   resp.rule.actions[0].task_action.name #=> String
     #   resp.rule.actions[0].task_action.description #=> String
     #   resp.rule.actions[0].task_action.contact_flow_id #=> String
     #   resp.rule.actions[0].task_action.references #=> Hash
     #   resp.rule.actions[0].task_action.references["ReferenceKey"].value #=> String
-    #   resp.rule.actions[0].task_action.references["ReferenceKey"].type #=> String, one of "URL", "ATTACHMENT", "CONTACT_ANALYSIS", "NUMBER", "STRING", "DATE", "EMAIL", "EMAIL_MESSAGE", "EMAIL_MESSAGE_PLAIN_TEXT", "EMAIL_MESSAGE_PLAIN_TEXT_REDACTED", "EMAIL_MESSAGE_REDACTED"
+    #   resp.rule.actions[0].task_action.references["ReferenceKey"].type #=> String, one of "URL", "ATTACHMENT", "CONTACT_ANALYSIS", "NUMBER", "STRING", "DATE", "EMAIL", "EMAIL_MESSAGE", "EMAIL_MESSAGE_PLAIN_TEXT", "EMAIL_MESSAGE_PLAIN_TEXT_REDACTED", "EMAIL_MESSAGE_REDACTED", "VOICEMAIL_RECORDING", "VOICEMAIL_RECORDING_REDACTED", "VOICEMAIL_ANALYSIS", "VOICEMAIL_ANALYSIS_REDACTED"
     #   resp.rule.actions[0].task_action.references["ReferenceKey"].status #=> String, one of "AVAILABLE", "DELETED", "APPROVED", "REJECTED", "PROCESSING", "FAILED", "DRAFTING"
     #   resp.rule.actions[0].task_action.references["ReferenceKey"].arn #=> String
     #   resp.rule.actions[0].task_action.references["ReferenceKey"].status_reason #=> String
@@ -10137,7 +10401,7 @@ module Aws::Connect
     #   resp.rule.actions[0].send_in_app_notification_action.priority #=> String, one of "HIGH", "LOW"
     #   resp.rule.publish_status #=> String, one of "DRAFT", "PUBLISHED"
     #   resp.rule.pre_evaluation_filters.and_conditions #=> Array
-    #   resp.rule.pre_evaluation_filters.and_conditions[0].resource_type #=> String, one of "CONTACT"
+    #   resp.rule.pre_evaluation_filters.and_conditions[0].resource_type #=> String, one of "CONTACT", "CONTACT_EVALUATION"
     #   resp.rule.pre_evaluation_filters.and_conditions[0].filter_type #=> String, one of "TAG"
     #   resp.rule.pre_evaluation_filters.and_conditions[0].filter_key #=> String
     #   resp.rule.pre_evaluation_filters.and_conditions[0].filter_value #=> String
@@ -11845,7 +12109,7 @@ module Aws::Connect
     #   resp.file_name #=> String
     #   resp.file_size_in_bytes #=> Integer
     #   resp.associated_resource_arn #=> String
-    #   resp.file_use_case_type #=> String, one of "CONTACT_ANALYSIS", "EMAIL_MESSAGE", "EMAIL_MESSAGE_PLAIN_TEXT", "EMAIL_MESSAGE_REDACTED", "EMAIL_MESSAGE_PLAIN_TEXT_REDACTED", "ATTACHMENT", "VOICE_RECORDING"
+    #   resp.file_use_case_type #=> String, one of "CONTACT_ANALYSIS", "EMAIL_MESSAGE", "EMAIL_MESSAGE_PLAIN_TEXT", "EMAIL_MESSAGE_REDACTED", "EMAIL_MESSAGE_PLAIN_TEXT_REDACTED", "ATTACHMENT", "VOICE_RECORDING", "VOICEMAIL_RECORDING", "VOICEMAIL_RECORDING_REDACTED", "VOICEMAIL_ANALYSIS", "VOICEMAIL_ANALYSIS_REDACTED"
     #   resp.created_by.connect_user_arn #=> String
     #   resp.created_by.aws_identity_arn #=> String
     #   resp.download_url_metadata.url #=> String
@@ -13682,6 +13946,16 @@ module Aws::Connect
     #
     #     UI name: [Average evaluation score][27]
     #
+    #   AVG\_EVALUATION\_SCORE\_BY\_SUBMIT\_TIME
+    #
+    #   : Unit: Percent
+    #
+    #     Valid groupings and filters: Agent, Agent Hierarchy, Channel,
+    #     Evaluation Form ID, Evaluation Source, Form Version, Queue, Routing
+    #     Profile
+    #
+    #     UI name: [Average evaluation score (Submit time)][28]
+    #
     #   AVG\_FIRST\_RESPONSE\_TIME\_AGENT
     #
     #   : Unit: Seconds
@@ -13691,7 +13965,7 @@ module Aws::Connect
     #     Feature, RoutingStepExpression, Initiation method, Routing Profile,
     #     Queue, Q in Connect
     #
-    #     UI name: [Average agent first response time][28]
+    #     UI name: [Average agent first response time][29]
     #
     #   AVG\_FLOW\_TIME
     #
@@ -13703,7 +13977,7 @@ module Aws::Connect
     #     Flows outcome type, Flows resource ID, Initiation method, Resource
     #     published timestamp
     #
-    #     UI name: [Average flow time][29]
+    #     UI name: [Average flow time][30]
     #
     #   AVG\_GREETING\_TIME\_AGENT
     #
@@ -13716,7 +13990,7 @@ module Aws::Connect
     #     Agent Hierarchy, contact/segmentAttributes/connect:Subtype, Q in
     #     Connect
     #
-    #     UI name: [Average agent greeting time][30]
+    #     UI name: [Average agent greeting time][31]
     #
     #   AVG\_HANDLE\_TIME
     #
@@ -13726,7 +14000,7 @@ module Aws::Connect
     #     Agent Hierarchy, AI Use Case, Feature,
     #     contact/segmentAttributes/connect:Subtype, RoutingStepExpression
     #
-    #     UI name: [Average handle time][31]
+    #     UI name: [Average handle time][32]
     #
     #     <note markdown="1"> Feature is a valid filter but not a valid grouping.
     #
@@ -13740,7 +14014,7 @@ module Aws::Connect
     #     AI Agent Name Version, AI Agent Type, AI Use Case, Channel, Queue,
     #     Routing Profile, Session ID
     #
-    #     UI name: [Active AI Agents][32]
+    #     UI name: [Active AI Agents][33]
     #
     #   AI\_HANDOFF\_RATE
     #
@@ -13750,7 +14024,7 @@ module Aws::Connect
     #     Name Version, AI Agent Type, AI Use Case, Channel, Queue, Routing
     #     Profile, Session ID
     #
-    #     UI name: [AI Handoff Rate][33]
+    #     UI name: [AI Handoff Rate][34]
     #
     #   AI\_HANDOFFS
     #
@@ -13760,7 +14034,7 @@ module Aws::Connect
     #     Name Version, AI Agent Type, AI Use Case, Channel, Queue, Routing
     #     Profile, Session ID
     #
-    #     UI name: [AI Handoff Count][34]
+    #     UI name: [AI Handoff Count][35]
     #
     #   AI\_AGENT\_INVOCATION\_SUCCESS
     #
@@ -13770,7 +14044,7 @@ module Aws::Connect
     #     AI Agent Name Version, AI Agent Type, AI Use Case, Channel, Queue,
     #     Routing Profile, Session ID
     #
-    #     UI name: [AI Agent Invocation Success][35]
+    #     UI name: [AI Agent Invocation Success][36]
     #
     #   AI\_AGENT\_INVOCATION\_SUCCESS\_RATE
     #
@@ -13780,7 +14054,7 @@ module Aws::Connect
     #     AI Agent Name Version, AI Agent Type, AI Use Case, Channel, Queue,
     #     Routing Profile, Session ID
     #
-    #     UI name: [AI Agent Invocation Success Rate][36]
+    #     UI name: [AI Agent Invocation Success Rate][37]
     #
     #   AI\_AGENT\_INVOCATIONS
     #
@@ -13790,7 +14064,7 @@ module Aws::Connect
     #     AI Agent Name Version, AI Agent Type, AI Use Case, Channel, Queue,
     #     Routing Profile, Session ID
     #
-    #     UI name: [AI Agent Invocation Count][37]
+    #     UI name: [AI Agent Invocation Count][38]
     #
     #   AI\_AGENT\_RESPONSE\_HELPFUL
     #
@@ -13800,7 +14074,7 @@ module Aws::Connect
     #     AI Agent Name Version, AI Agent Type, AI Use Case, Channel, Queue,
     #     Routing Profile, Session ID
     #
-    #     UI name: [AI Agent Response Helpful][38]
+    #     UI name: [AI Agent Response Helpful][39]
     #
     #   AI\_AGENT\_RESPONSE\_NOT\_HELPFUL
     #
@@ -13810,7 +14084,7 @@ module Aws::Connect
     #     AI Agent Name Version, AI Agent Type, AI Use Case, Channel, Queue,
     #     Routing Profile, Session ID
     #
-    #     UI name: [AI Agent Response Not Helpful][39]
+    #     UI name: [AI Agent Response Not Helpful][40]
     #
     #   AI\_RESPONSE\_COMPLETION\_RATE
     #
@@ -13820,7 +14094,7 @@ module Aws::Connect
     #     Name Version, AI Agent Type, AI Use Case, Channel, Queue, Routing
     #     Profile, Session ID
     #
-    #     UI name: [AI Response Completion Rate][40]
+    #     UI name: [AI Response Completion Rate][41]
     #
     #   AI\_INVOLVED\_CONTACTS
     #
@@ -13830,7 +14104,7 @@ module Aws::Connect
     #     Name Version, AI Agent Type, AI Use Case, Channel, Queue, Routing
     #     Profile, Session ID
     #
-    #     UI name: [AI Involved Contacts][41]
+    #     UI name: [AI Involved Contacts][42]
     #
     #   AI\_PROMPT\_INVOCATION\_SUCCESS
     #
@@ -13841,7 +14115,7 @@ module Aws::Connect
     #     Prompt Name, AI Prompt Type, AI Use Case, Channel, Queue, Routing
     #     Profile, Session ID
     #
-    #     UI name: [AI Prompt Invocation Success][42]
+    #     UI name: [AI Prompt Invocation Success][43]
     #
     #   AI\_PROMPT\_INVOCATION\_SUCCESS\_RATE
     #
@@ -13852,7 +14126,7 @@ module Aws::Connect
     #     Prompt Name, AI Prompt Type, AI Use Case, Channel, Queue, Routing
     #     Profile, Session ID
     #
-    #     UI name: [AI Prompt Invocation Success Rate][43]
+    #     UI name: [AI Prompt Invocation Success Rate][44]
     #
     #   AI\_PROMPT\_INVOCATIONS
     #
@@ -13863,7 +14137,7 @@ module Aws::Connect
     #     Prompt Name, AI Prompt Type, AI Use Case, Channel, Queue, Routing
     #     Profile, Session ID
     #
-    #     UI name: [AI Prompt Invocations][44]
+    #     UI name: [AI Prompt Invocations][45]
     #
     #   AI\_TOOL\_INVOCATION\_SUCCESS
     #
@@ -13873,7 +14147,7 @@ module Aws::Connect
     #     AI Agent Name Version, AI Agent Type, AI Tool ID, AI Tool Name, AI
     #     Tool Type, AI Use Case, Channel, Queue, Routing Profile, Session ID
     #
-    #     UI name: [AI Tool Invocation Success][45]
+    #     UI name: [AI Tool Invocation Success][46]
     #
     #   AI\_TOOL\_INVOCATION\_SUCCESS\_RATE
     #
@@ -13883,7 +14157,7 @@ module Aws::Connect
     #     AI Agent Name Version, AI Agent Type, AI Tool ID, AI Tool Name, AI
     #     Tool Type, AI Use Case, Channel, Queue, Routing Profile, Session ID
     #
-    #     UI name: [AI Tool Invocation Success Rate][46]
+    #     UI name: [AI Tool Invocation Success Rate][47]
     #
     #   AI\_TOOL\_INVOCATIONS
     #
@@ -13893,7 +14167,7 @@ module Aws::Connect
     #     AI Agent Name Version, AI Agent Type, AI Tool ID, AI Tool Name, AI
     #     Tool Type, AI Use Case, Channel, Queue, Routing Profile, Session ID
     #
-    #     UI name: [AI Tool Invocations][47]
+    #     UI name: [AI Tool Invocations][48]
     #
     #   AVG\_AI\_AGENT\_CONVERSATION\_TURNS
     #
@@ -13903,7 +14177,7 @@ module Aws::Connect
     #     AI Agent Name Version, AI Agent Type, AI Use Case, Channel, Queue,
     #     Routing Profile, Session ID
     #
-    #     UI name: [Average AI Agent Conversation Turns][48]
+    #     UI name: [Average AI Agent Conversation Turns][49]
     #
     #   AVG\_AI\_CONVERSATION\_TURNS
     #
@@ -13913,7 +14187,7 @@ module Aws::Connect
     #     Name Version, AI Agent Type, AI Use Case, Channel, Queue, Routing
     #     Profile, Session ID
     #
-    #     UI name: [Average AI Conversation Turns][49]
+    #     UI name: [Average AI Conversation Turns][50]
     #
     #   AVG\_AI\_PROMPT\_INVOCATION\_LATENCY
     #
@@ -13924,7 +14198,7 @@ module Aws::Connect
     #     Prompt Name, AI Prompt Type, AI Use Case, Channel, Queue, Routing
     #     Profile, Session ID
     #
-    #     UI name: [Average AI Prompt Invocation Latency][50]
+    #     UI name: [Average AI Prompt Invocation Latency][51]
     #
     #   AVG\_AI\_TOOL\_INVOCATION\_LATENCY
     #
@@ -13934,7 +14208,7 @@ module Aws::Connect
     #     AI Agent Name Version, AI Agent Type, AI Tool ID, AI Tool Name, AI
     #     Tool Type, AI Use Case, Channel, Queue, Routing Profile, Session ID
     #
-    #     UI name: [Average AI Tool Invocation Latency][51]
+    #     UI name: [Average AI Tool Invocation Latency][52]
     #
     #   AI\_TOOL\_PARAMETER\_ACCURACY
     #
@@ -13944,7 +14218,7 @@ module Aws::Connect
     #     AI Agent Name Version, AI Agent Type, AI Tool ID, AI Tool Name, AI
     #     Tool Type, AI Use Case, Channel, Queue, Routing Profile, Session ID
     #
-    #     UI name: [AI Tool Parameter Accuracy][52]
+    #     UI name: [AI Tool Parameter Accuracy][53]
     #
     #   AI\_TOOL\_SELECTION\_ACCURACY
     #
@@ -13954,7 +14228,7 @@ module Aws::Connect
     #     AI Agent Name Version, AI Agent Type, AI Tool ID, AI Tool Name, AI
     #     Tool Type, AI Use Case, Channel, Queue, Routing Profile, Session ID
     #
-    #     UI name: [AI Tool Selection Accuracy][53]
+    #     UI name: [AI Tool Selection Accuracy][54]
     #
     #   AI\_TOOL\_UTILIZATION\_ACCURACY
     #
@@ -13964,7 +14238,7 @@ module Aws::Connect
     #     AI Agent Name Version, AI Agent Type, AI Tool ID, AI Tool Name, AI
     #     Tool Type, AI Use Case, Channel, Queue, Routing Profile, Session ID
     #
-    #     UI name: [AI Tool Utilization Accuracy][54]
+    #     UI name: [AI Tool Utilization Accuracy][55]
     #
     #   COMPLETENESS\_SCORE
     #
@@ -13974,7 +14248,7 @@ module Aws::Connect
     #     Name Version, AI Agent Type, AI Use Case, Channel, Queue, Routing
     #     Profile, Session ID
     #
-    #     UI name: [Completeness Score][55]
+    #     UI name: [Completeness Score][56]
     #
     #   FAITHFULNESS\_SCORE
     #
@@ -13984,7 +14258,7 @@ module Aws::Connect
     #     Name Version, AI Agent Type, AI Use Case, Channel, Queue, Routing
     #     Profile, Session ID
     #
-    #     UI name: [Faithfulness Score][56]
+    #     UI name: [Faithfulness Score][57]
     #
     #   GOAL\_SUCCESS\_RATE
     #
@@ -13994,7 +14268,7 @@ module Aws::Connect
     #     Name Version, AI Agent Type, AI Use Case, Channel, Queue, Routing
     #     Profile, Session ID
     #
-    #     UI name: [Goal Success Rate][57]
+    #     UI name: [Goal Success Rate][58]
     #
     #   KNOWLEDGE\_CONTENT\_REFERENCES
     #
@@ -14004,7 +14278,7 @@ module Aws::Connect
     #     AI Agent Name Version, AI Agent Type, AI Use Case, Channel,
     #     Knowledge Base Name, Queue, Routing Profile, Session ID
     #
-    #     UI name: [Knowledge Content References][58]
+    #     UI name: [Knowledge Content References][59]
     #
     #   PROACTIVE\_INTENT\_ENGAGEMENT\_RATE
     #
@@ -14014,7 +14288,7 @@ module Aws::Connect
     #     Name Version, AI Agent Type, AI Use Case, Channel, Queue, Routing
     #     Profile, Session ID
     #
-    #     UI name: [Proactive Intent Engagement Rate][59]
+    #     UI name: [Proactive Intent Engagement Rate][60]
     #
     #   PROACTIVE\_INTENT\_RESPONSE\_RATE
     #
@@ -14024,7 +14298,7 @@ module Aws::Connect
     #     Name Version, AI Agent Type, AI Use Case, Channel, Queue, Routing
     #     Profile, Session ID
     #
-    #     UI name: [Proactive Intent Response Rate][60]
+    #     UI name: [Proactive Intent Response Rate][61]
     #
     #   PROACTIVE\_INTENTS\_ANSWERED
     #
@@ -14034,7 +14308,7 @@ module Aws::Connect
     #     Name Version, AI Agent Type, AI Use Case, Channel, Queue, Routing
     #     Profile, Session ID
     #
-    #     UI name: [Proactive Intents Answered][61]
+    #     UI name: [Proactive Intents Answered][62]
     #
     #   PROACTIVE\_INTENTS\_DETECTED
     #
@@ -14044,7 +14318,7 @@ module Aws::Connect
     #     Name Version, AI Agent Type, AI Use Case, Channel, Queue, Routing
     #     Profile, Session ID
     #
-    #     UI name: [Proactive Intents Detected][62]
+    #     UI name: [Proactive Intents Detected][63]
     #
     #   PROACTIVE\_INTENTS\_ENGAGED
     #
@@ -14054,7 +14328,7 @@ module Aws::Connect
     #     Name Version, AI Agent Type, AI Use Case, Channel, Queue, Routing
     #     Profile, Session ID
     #
-    #     UI name: [Proactive Intents Engaged][63]
+    #     UI name: [Proactive Intents Engaged][64]
     #
     #   AVG\_HOLD\_TIME
     #
@@ -14064,7 +14338,7 @@ module Aws::Connect
     #     Agent Hierarchy, Feature, contact/segmentAttributes/connect:Subtype,
     #     Q in Connect
     #
-    #     UI name: [Average customer hold time][64]
+    #     UI name: [Average customer hold time][65]
     #
     #     <note markdown="1"> Feature is a valid filter but not a valid grouping.
     #
@@ -14078,7 +14352,7 @@ module Aws::Connect
     #     Agent Hierarchy, contact/segmentAttributes/connect:Subtype, Q in
     #     Connect
     #
-    #     UI name: [Average customer hold time all contacts][65]
+    #     UI name: [Average customer hold time all contacts][66]
     #
     #   AVG\_HOLDS
     #
@@ -14088,7 +14362,7 @@ module Aws::Connect
     #     Agent Hierarchy, Feature, contact/segmentAttributes/connect:Subtype,
     #     Q in Connect
     #
-    #     UI name: [Average holds][66]
+    #     UI name: [Average holds][67]
     #
     #     <note markdown="1"> Feature is a valid filter but not a valid grouping.
     #
@@ -14102,7 +14376,7 @@ module Aws::Connect
     #     Agent Hierarchy, contact/segmentAttributes/connect:Subtype, Q in
     #     Connect
     #
-    #     UI name: [Average agent interaction and customer hold time][67]
+    #     UI name: [Average agent interaction and customer hold time][68]
     #
     #   AVG\_INTERACTION\_TIME
     #
@@ -14113,7 +14387,7 @@ module Aws::Connect
     #     Valid groupings and filters: Queue, Channel, Routing Profile,
     #     Feature, contact/segmentAttributes/connect:Subtype, Q in Connect
     #
-    #     UI name: [Average agent interaction time][68]
+    #     UI name: [Average agent interaction time][69]
     #
     #     <note markdown="1"> Feature is a valid filter but not a valid grouping.
     #
@@ -14130,7 +14404,7 @@ module Aws::Connect
     #     Agent Hierarchy, contact/segmentAttributes/connect:Subtype, Q in
     #     Connect
     #
-    #     UI name: [Average agent interruptions][69]
+    #     UI name: [Average agent interruptions][70]
     #
     #   AVG\_INTERRUPTION\_TIME\_AGENT
     #
@@ -14143,7 +14417,7 @@ module Aws::Connect
     #     Agent Hierarchy, contact/segmentAttributes/connect:Subtype, Q in
     #     Connect
     #
-    #     UI name: [Average agent interruption time][70]
+    #     UI name: [Average agent interruption time][71]
     #
     #   AVG\_MESSAGE\_LENGTH\_AGENT
     #
@@ -14154,7 +14428,7 @@ module Aws::Connect
     #     Feature, RoutingStepExpression, Initiation method, Routing Profile,
     #     Queue, Q in Connect
     #
-    #     UI name: [Average agent message length][71]
+    #     UI name: [Average agent message length][72]
     #
     #   AVG\_MESSAGE\_LENGTH\_CUSTOMER
     #
@@ -14165,7 +14439,7 @@ module Aws::Connect
     #     Feature, RoutingStepExpression, Initiation method, Routing Profile,
     #     Queue, Q in Connect
     #
-    #     UI name: [Average customer message length][72]
+    #     UI name: [Average customer message length][73]
     #
     #   AVG\_MESSAGES
     #
@@ -14176,7 +14450,7 @@ module Aws::Connect
     #     Feature, RoutingStepExpression, Initiation method, Routing Profile,
     #     Queue, Q in Connect
     #
-    #     UI name: [Average messages][73]
+    #     UI name: [Average messages][74]
     #
     #   AVG\_MESSAGES\_AGENT
     #
@@ -14187,7 +14461,7 @@ module Aws::Connect
     #     Feature, RoutingStepExpression, Initiation method, Routing Profile,
     #     Queue, Q in Connect
     #
-    #     UI name: [Average agent messages][74]
+    #     UI name: [Average agent messages][75]
     #
     #   AVG\_MESSAGES\_BOT
     #
@@ -14198,7 +14472,7 @@ module Aws::Connect
     #     Feature, RoutingStepExpression, Initiation method, Routing Profile,
     #     Queue, Q in Connect
     #
-    #     UI name: [Average bot messages][75]
+    #     UI name: [Average bot messages][76]
     #
     #   AVG\_MESSAGES\_CUSTOMER
     #
@@ -14209,7 +14483,7 @@ module Aws::Connect
     #     Feature, RoutingStepExpression, Initiation method, Routing Profile,
     #     Queue, Q in Connect
     #
-    #     UI name: [Average customer messages][76]
+    #     UI name: [Average customer messages][77]
     #
     #   AVG\_NON\_TALK\_TIME
     #
@@ -14222,7 +14496,7 @@ module Aws::Connect
     #     Agent Hierarchy, contact/segmentAttributes/connect:Subtype, Q in
     #     Connect
     #
-    #     UI name: [Average non-talk time][77]
+    #     UI name: [Average non-talk time][78]
     #
     #   AVG\_QUEUE\_ANSWER\_TIME
     #
@@ -14231,7 +14505,7 @@ module Aws::Connect
     #     Valid groupings and filters: Queue, Channel, Routing Profile,
     #     Feature, contact/segmentAttributes/connect:Subtype, Q in Connect
     #
-    #     UI name: [Average queue answer time][78]
+    #     UI name: [Average queue answer time][79]
     #
     #     Valid metric level filters: `INITIATION_METHOD`, `FEATURE`,
     #     `DISCONNECT_REASON`
@@ -14248,7 +14522,7 @@ module Aws::Connect
     #     Feature, contact/segmentAttributes/connect:Subtype, Q in Connect,
     #     Agent Hierarchy
     #
-    #     UI name: [Avg. queue answer time - customer first callback][79]
+    #     UI name: [Avg. queue answer time - customer first callback][80]
     #
     #   AVG\_RESPONSE\_TIME\_AGENT
     #
@@ -14259,7 +14533,7 @@ module Aws::Connect
     #     Feature, RoutingStepExpression, Initiation method, Routing Profile,
     #     Queue, Q in Connect
     #
-    #     UI name: [Average agent response time][80]
+    #     UI name: [Average agent response time][81]
     #
     #   AVG\_RESPONSE\_TIME\_CUSTOMER
     #
@@ -14270,7 +14544,7 @@ module Aws::Connect
     #     Feature, RoutingStepExpression, Initiation method, Routing Profile,
     #     Queue, Q in Connect
     #
-    #     UI name: [Average customer response time][81]
+    #     UI name: [Average customer response time][82]
     #
     #   AVG\_RESOLUTION\_TIME
     #
@@ -14279,7 +14553,7 @@ module Aws::Connect
     #     Valid groupings and filters: Queue, Channel, Routing Profile,
     #     contact/segmentAttributes/connect:Subtype, Q in Connect
     #
-    #     UI name: [Average resolution time][82]
+    #     UI name: [Average resolution time][83]
     #
     #   AVG\_TALK\_TIME
     #
@@ -14292,7 +14566,7 @@ module Aws::Connect
     #     Agent Hierarchy, contact/segmentAttributes/connect:Subtype, Q in
     #     Connect
     #
-    #     UI name: [Average talk time][83]
+    #     UI name: [Average talk time][84]
     #
     #   AVG\_TALK\_TIME\_AGENT
     #
@@ -14305,7 +14579,7 @@ module Aws::Connect
     #     Agent Hierarchy, contact/segmentAttributes/connect:Subtype, Q in
     #     Connect
     #
-    #     UI name: [Average agent talk time][84]
+    #     UI name: [Average agent talk time][85]
     #
     #   AVG\_TALK\_TIME\_CUSTOMER
     #
@@ -14318,7 +14592,7 @@ module Aws::Connect
     #     Agent Hierarchy, contact/segmentAttributes/connect:Subtype, Q in
     #     Connect
     #
-    #     UI name: [Average customer talk time][85]
+    #     UI name: [Average customer talk time][86]
     #
     #   AVG\_WAIT\_TIME\_AFTER\_CUSTOMER\_CONNECTION
     #
@@ -14329,7 +14603,7 @@ module Aws::Connect
     #
     #     Valid groupings and filters: Campaign
     #
-    #     UI name: [Average wait time after customer connection][86]
+    #     UI name: [Average wait time after customer connection][87]
     #
     #   AVG\_WAIT\_TIME\_AFTER\_CUSTOMER\_FIRST\_CALLBACK\_CONNECTION
     #
@@ -14340,7 +14614,7 @@ module Aws::Connect
     #     Agent Hierarchy
     #
     #     UI name: [Avg. wait time after customer connection - customer first
-    #     callback][87]
+    #     callback][88]
     #
     #   AVG\_WEIGHTED\_EVALUATION\_SCORE
     #
@@ -14350,7 +14624,7 @@ module Aws::Connect
     #     Evaluation Form Id, Evaluation Section ID, Evaluation Question ID,
     #     Evaluation Source, Form Version, Queue, Routing Profile
     #
-    #     UI name: [Average weighted evaluation score][88]
+    #     UI name: [Average weighted evaluation score][89]
     #
     #   BOT\_CONVERSATIONS\_COMPLETED
     #
@@ -14362,7 +14636,7 @@ module Aws::Connect
     #     Flow type, Flow action ID, Invoking resource published timestamp,
     #     Initiation method, Invoking resource type, Parent flows resource ID
     #
-    #     UI name: [Bot conversations completed][89]
+    #     UI name: [Bot conversations completed][90]
     #
     #   BOT\_INTENTS\_COMPLETED
     #
@@ -14375,7 +14649,7 @@ module Aws::Connect
     #     published timestamp, Initiation method, Invoking resource type,
     #     Parent flows resource ID
     #
-    #     UI name: [Bot intents completed][90]
+    #     UI name: [Bot intents completed][91]
     #
     #   CAMPAIGN\_CONTACTS\_ABANDONED\_AFTER\_X
     #
@@ -14390,7 +14664,7 @@ module Aws::Connect
     #     604800 (inclusive), in seconds. For `Comparison`, you must enter
     #     `GT` (for *Greater than*).
     #
-    #     UI name: [Campaign contacts abandoned after X][91]
+    #     UI name: [Campaign contacts abandoned after X][92]
     #
     #   CAMPAIGN\_CONTACTS\_ABANDONED\_AFTER\_X\_RATE
     #
@@ -14405,7 +14679,7 @@ module Aws::Connect
     #     604800 (inclusive), in seconds. For `Comparison`, you must enter
     #     `GT` (for *Greater than*).
     #
-    #     UI name: [Campaign contacts abandoned after X rate][92]
+    #     UI name: [Campaign contacts abandoned after X rate][93]
     #
     #   CAMPAIGN\_INTERACTIONS
     #
@@ -14420,7 +14694,7 @@ module Aws::Connect
     #     contact/segmentAttributes/connect:Subtype, Device Model, Device
     #     Type, Web Notification Type
     #
-    #     UI name: [Campaign interactions][93]
+    #     UI name: [Campaign interactions][94]
     #
     #   CAMPAIGN\_PROGRESS\_RATE
     #
@@ -14432,7 +14706,7 @@ module Aws::Connect
     #
     #     Valid groupings and filters: Campaign, Campaign Execution Timestamp
     #
-    #     UI name: [Campaign progress rate][94]
+    #     UI name: [Campaign progress rate][95]
     #
     #   CAMPAIGN\_SEND\_ATTEMPTS
     #
@@ -14443,7 +14717,7 @@ module Aws::Connect
     #     Valid groupings and filters: Campaign, Channel,
     #     contact/segmentAttributes/connect:Subtype
     #
-    #     UI name: [Campaign send attempts][95]
+    #     UI name: [Campaign send attempts][96]
     #
     #   CAMPAIGN\_SEND\_EXCLUSIONS
     #
@@ -14456,7 +14730,7 @@ module Aws::Connect
     #     Valid groupings and filters: Campaign, Campaign Excluded Event Type,
     #     Campaign Execution Timestamp
     #
-    #     UI name: [Campaign send exclusions][96]
+    #     UI name: [Campaign send exclusions][97]
     #
     #   CASES\_CREATED
     #
@@ -14466,7 +14740,7 @@ module Aws::Connect
     #
     #     Valid groupings and filters: CASE\_TEMPLATE\_ARN, CASE\_STATUS
     #
-    #     UI name: [Cases created][97]
+    #     UI name: [Cases created][98]
     #
     #   CONTACTS\_CREATED
     #
@@ -14477,7 +14751,7 @@ module Aws::Connect
     #     Valid groupings and filters: Queue, Channel, Routing Profile,
     #     Feature, contact/segmentAttributes/connect:Subtype, Q in Connect
     #
-    #     UI name: [Contacts created][98]
+    #     UI name: [Contacts created][99]
     #
     #     <note markdown="1"> Feature is a valid filter but not a valid grouping.
     #
@@ -14493,7 +14767,7 @@ module Aws::Connect
     #     Agent Hierarchy, Feature, contact/segmentAttributes/connect:Subtype,
     #     RoutingStepExpression, Q in Connect
     #
-    #     UI name: [Contacts handled][99]
+    #     UI name: [Contacts handled][100]
     #
     #     <note markdown="1"> Feature is a valid filter but not a valid grouping.
     #
@@ -14508,7 +14782,7 @@ module Aws::Connect
     #     Valid groupings and filters: Queue, Channel, Agent, Agent Hierarchy,
     #     contact/segmentAttributes/connect:Subtype, Q in Connect
     #
-    #     UI name: [Contacts handled (connected to agent timestamp)][100]
+    #     UI name: [Contacts handled (connected to agent timestamp)][101]
     #
     #   CONTACTS\_HOLD\_ABANDONS
     #
@@ -14518,7 +14792,7 @@ module Aws::Connect
     #     Agent Hierarchy, contact/segmentAttributes/connect:Subtype, Q in
     #     Connect
     #
-    #     UI name: [Contacts hold disconnect][101]
+    #     UI name: [Contacts hold disconnect][102]
     #
     #   CONTACTS\_ON\_HOLD\_AGENT\_DISCONNECT
     #
@@ -14527,7 +14801,7 @@ module Aws::Connect
     #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
     #     Agent Hierarchy, Q in Connect
     #
-    #     UI name: [Contacts hold agent disconnect][102]
+    #     UI name: [Contacts hold agent disconnect][103]
     #
     #   CONTACTS\_ON\_HOLD\_CUSTOMER\_DISCONNECT
     #
@@ -14536,7 +14810,7 @@ module Aws::Connect
     #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
     #     Agent Hierarchy, Q in Connect
     #
-    #     UI name: [Contacts hold customer disconnect][103]
+    #     UI name: [Contacts hold customer disconnect][104]
     #
     #   CONTACTS\_PUT\_ON\_HOLD
     #
@@ -14545,7 +14819,7 @@ module Aws::Connect
     #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
     #     Agent Hierarchy, Q in Connect
     #
-    #     UI name: [Contacts put on hold][104]
+    #     UI name: [Contacts put on hold][105]
     #
     #   CONTACTS\_TRANSFERRED\_OUT\_EXTERNAL
     #
@@ -14554,7 +14828,7 @@ module Aws::Connect
     #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
     #     Agent Hierarchy, Q in Connect
     #
-    #     UI name: [Contacts transferred out external][105]
+    #     UI name: [Contacts transferred out external][106]
     #
     #   CONTACTS\_TRANSFERRED\_OUT\_INTERNAL
     #
@@ -14563,7 +14837,7 @@ module Aws::Connect
     #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
     #     Agent Hierarchy, Q in Connect
     #
-    #     UI name: [Contacts transferred out internal][106]
+    #     UI name: [Contacts transferred out internal][107]
     #
     #   CONTACTS\_QUEUED
     #
@@ -14573,7 +14847,7 @@ module Aws::Connect
     #     Agent Hierarchy, contact/segmentAttributes/connect:Subtype, Q in
     #     Connect
     #
-    #     UI name: [Contacts queued][107]
+    #     UI name: [Contacts queued][108]
     #
     #   CONTACTS\_QUEUED\_BY\_ENQUEUE
     #
@@ -14582,7 +14856,7 @@ module Aws::Connect
     #     Valid groupings and filters: Queue, Channel, Agent, Agent Hierarchy,
     #     contact/segmentAttributes/connect:Subtype
     #
-    #     UI name: [Contacts queued (enqueue timestamp)][108]
+    #     UI name: [Contacts queued (enqueue timestamp)][109]
     #
     #   CONTACTS\_REMOVED\_FROM\_QUEUE\_IN\_X
     #
@@ -14595,7 +14869,7 @@ module Aws::Connect
     #     604800 (inclusive), in seconds. For `Comparison`, you can use `LT`
     #     (for "Less than") or `LTE` (for "Less than equal").
     #
-    #     UI name: [Contacts removed from queue in X seconds][109]
+    #     UI name: [Contacts removed from queue in X seconds][110]
     #
     #   CONTACTS\_RESOLVED\_IN\_X
     #
@@ -14608,7 +14882,7 @@ module Aws::Connect
     #     604800 (inclusive), in seconds. For `Comparison`, you can use `LT`
     #     (for "Less than") or `LTE` (for "Less than equal").
     #
-    #     UI name: [Contacts resolved in X][110]
+    #     UI name: [Contacts resolved in X][111]
     #
     #   CONTACTS\_TRANSFERRED\_OUT
     #
@@ -14618,7 +14892,7 @@ module Aws::Connect
     #     Agent Hierarchy, Feature, contact/segmentAttributes/connect:Subtype,
     #     Q in Connect
     #
-    #     UI name: [Contacts transferred out][111]
+    #     UI name: [Contacts transferred out][112]
     #
     #     <note markdown="1"> Feature is a valid filter but not a valid grouping.
     #
@@ -14632,7 +14906,7 @@ module Aws::Connect
     #     Agent Hierarchy, contact/segmentAttributes/connect:Subtype, Q in
     #     Connect
     #
-    #     UI name: [Contacts transferred out by agent][112]
+    #     UI name: [Contacts transferred out by agent][113]
     #
     #   CONTACTS\_TRANSFERRED\_OUT\_FROM\_QUEUE
     #
@@ -14642,7 +14916,7 @@ module Aws::Connect
     #     Agent Hierarchy, contact/segmentAttributes/connect:Subtype, Q in
     #     Connect
     #
-    #     UI name: [Contacts transferred out queue][113]
+    #     UI name: [Contacts transferred out queue][114]
     #
     #   CURRENT\_CASES
     #
@@ -14652,7 +14926,7 @@ module Aws::Connect
     #
     #     Valid groupings and filters: CASE\_TEMPLATE\_ARN, CASE\_STATUS
     #
-    #     UI name: [Current cases][114]
+    #     UI name: [Current cases][115]
     #
     #   CONVERSATIONS\_ABANDONED
     #
@@ -14663,7 +14937,7 @@ module Aws::Connect
     #     Feature, RoutingStepExpression, Initiation method, Routing Profile,
     #     Queue, Q in Connect
     #
-    #     UI name: [Conversations abandoned][115]
+    #     UI name: [Conversations abandoned][116]
     #
     #   DELIVERY\_ATTEMPTS
     #
@@ -14680,7 +14954,7 @@ module Aws::Connect
     #     Device Type, Disconnect Reason, Queue, Routing Profile, Web
     #     Notification Type
     #
-    #     UI name: [Delivery attempts][116]
+    #     UI name: [Delivery attempts][117]
     #
     #     <note markdown="1"> Campaign Delivery EventType filter and grouping are only available
     #     for SMS, Email, WhatsApp, and web notification campaign delivery
@@ -14707,7 +14981,7 @@ module Aws::Connect
     #     Type, Disconnect Reason, Queue, Routing Profile, Web Notification
     #     Type
     #
-    #     UI name: [Delivery attempt disposition rate][117]
+    #     UI name: [Delivery attempt disposition rate][118]
     #
     #     <note markdown="1"> Campaign Delivery Event Type filter and grouping are only available
     #     for SMS, Email, WhatsApp, and web notification campaign delivery
@@ -14721,7 +14995,7 @@ module Aws::Connect
     #
     #   : This metric requires an evaluation form with business outcome
     #     questions. For more information, see [Create an evaluation
-    #     form][118] in the *Connect Customer Administrator Guide*.
+    #     form][119] in the *Connect Customer Administrator Guide*.
     #
     #     Unit: Percent
     #
@@ -14741,7 +15015,7 @@ module Aws::Connect
     #     Caller**, Resource Published Timestamp, Routing Profile, Routing
     #     Step Expression, Session ID, Subtype, Telephone Number
     #
-    #     UI name: [Evaluated churn propensity rate][119]
+    #     UI name: [Evaluated churn propensity rate][120]
     #
     #     <note markdown="1"> Feature, Flows Next Resource ID, Flows Next Resource Queue ID, Flows
     #     Next Resource Type, Flows Outcome Type, Flows Resource Type,
@@ -14761,7 +15035,7 @@ module Aws::Connect
     #
     #   : This metric requires an evaluation form with business outcome
     #     questions. For more information, see [Create an evaluation
-    #     form][118] in the *Connect Customer Administrator Guide*.
+    #     form][119] in the *Connect Customer Administrator Guide*.
     #
     #     Unit: Percent
     #
@@ -14781,7 +15055,7 @@ module Aws::Connect
     #     Caller**, Resource Published Timestamp, Routing Profile, Routing
     #     Step Expression, Session ID, Subtype, Telephone Number
     #
-    #     UI name: [Evaluated CSAT percent][120]
+    #     UI name: [Evaluated CSAT percent][121]
     #
     #     <note markdown="1"> Feature, Flows Next Resource ID, Flows Next Resource Queue ID, Flows
     #     Next Resource Type, Flows Outcome Type, Flows Resource Type,
@@ -14801,7 +15075,7 @@ module Aws::Connect
     #
     #   : This metric requires an evaluation form with business outcome
     #     questions. For more information, see [Create an evaluation
-    #     form][118] in the *Connect Customer Administrator Guide*.
+    #     form][119] in the *Connect Customer Administrator Guide*.
     #
     #     Unit: Percent
     #
@@ -14821,7 +15095,7 @@ module Aws::Connect
     #     Caller**, Resource Published Timestamp, Routing Profile, Routing
     #     Step Expression, Session ID, Subtype, Telephone Number
     #
-    #     UI name: [Evaluated partial self-service resolution rate][121]
+    #     UI name: [Evaluated partial self-service resolution rate][122]
     #
     #     <note markdown="1"> Feature, Flows Next Resource ID, Flows Next Resource Queue ID, Flows
     #     Next Resource Type, Flows Outcome Type, Flows Resource Type,
@@ -14841,7 +15115,7 @@ module Aws::Connect
     #
     #   : This metric requires an evaluation form with business outcome
     #     questions. For more information, see [Create an evaluation
-    #     form][118] in the *Connect Customer Administrator Guide*.
+    #     form][119] in the *Connect Customer Administrator Guide*.
     #
     #     Unit: Percent
     #
@@ -14861,7 +15135,7 @@ module Aws::Connect
     #     Caller**, Resource Published Timestamp, Routing Profile, Routing
     #     Step Expression, Session ID, Subtype, Telephone Number
     #
-    #     UI name: [Evaluated self-service resolution rate][122]
+    #     UI name: [Evaluated self-service resolution rate][123]
     #
     #     <note markdown="1"> Feature, Flows Next Resource ID, Flows Next Resource Queue ID, Flows
     #     Next Resource Type, Flows Outcome Type, Flows Resource Type,
@@ -14881,7 +15155,7 @@ module Aws::Connect
     #
     #   : This metric requires an evaluation form with business outcome
     #     questions. For more information, see [Create an evaluation
-    #     form][118] in the *Connect Customer Administrator Guide*.
+    #     form][119] in the *Connect Customer Administrator Guide*.
     #
     #     Unit: Percent
     #
@@ -14901,7 +15175,7 @@ module Aws::Connect
     #     Caller**, Resource Published Timestamp, Routing Profile, Routing
     #     Step Expression, Session ID, Subtype, Telephone Number
     #
-    #     UI name: [Evaluated successful sale rate][123]
+    #     UI name: [Evaluated successful sale rate][124]
     #
     #     <note markdown="1"> Feature, Flows Next Resource ID, Flows Next Resource Queue ID, Flows
     #     Next Resource Type, Flows Outcome Type, Flows Resource Type,
@@ -14925,7 +15199,17 @@ module Aws::Connect
     #     Evaluation Form ID, Evaluation Source, Form Version, Queue, Routing
     #     Profile
     #
-    #     UI name: [Evaluations performed][124]
+    #     UI name: [Evaluations performed][125]
+    #
+    #   EVALUATIONS\_PERFORMED\_BY\_SUBMIT\_TIME
+    #
+    #   : Unit: Count
+    #
+    #     Valid groupings and filters: Agent, Agent Hierarchy, Channel,
+    #     Evaluation Form ID, Evaluation Source, Form Version, Queue, Routing
+    #     Profile
+    #
+    #     UI name: [Evaluations performed (Submit time)][126]
     #
     #   FLOWS\_OUTCOME
     #
@@ -14937,7 +15221,7 @@ module Aws::Connect
     #     Flows outcome type, Flows resource ID, Initiation method, Resource
     #     published timestamp
     #
-    #     UI name: [Flows outcome][125]
+    #     UI name: [Flows outcome][127]
     #
     #   FLOWS\_STARTED
     #
@@ -14948,7 +15232,7 @@ module Aws::Connect
     #     resource ID, Flows resource ID, Initiation method, Resource
     #     published timestamp
     #
-    #     UI name: [Flows started][126]
+    #     UI name: [Flows started][128]
     #
     #   HUMAN\_ANSWERED\_CALLS
     #
@@ -14960,7 +15244,7 @@ module Aws::Connect
     #
     #     Valid groupings and filters: Agent, Campaign
     #
-    #     UI name: [Human answered][127]
+    #     UI name: [Human answered][129]
     #
     #   MAX\_FLOW\_TIME
     #
@@ -14972,7 +15256,7 @@ module Aws::Connect
     #     Flows outcome type, Flows resource ID, Initiation method, Resource
     #     published timestamp
     #
-    #     UI name: [Maximum flow time][128]
+    #     UI name: [Maximum flow time][130]
     #
     #   MAX\_QUEUED\_TIME
     #
@@ -14982,7 +15266,7 @@ module Aws::Connect
     #     Agent Hierarchy, contact/segmentAttributes/connect:Subtype, Q in
     #     Connect
     #
-    #     UI name: [Maximum queued time][129]
+    #     UI name: [Maximum queued time][131]
     #
     #   MIN\_FLOW\_TIME
     #
@@ -14994,7 +15278,7 @@ module Aws::Connect
     #     Flows outcome type, Flows resource ID, Initiation method, Resource
     #     published timestamp
     #
-    #     UI name: [Minimum flow time][130]
+    #     UI name: [Minimum flow time][132]
     #
     #   PERCENT\_AUTOMATIC\_FAILS
     #
@@ -15004,7 +15288,7 @@ module Aws::Connect
     #     Evaluation Form ID, Evaluation Source, Form Version, Queue, Routing
     #     Profile
     #
-    #     UI name: [Automatic fails percent][131]
+    #     UI name: [Automatic fails percent][133]
     #
     #   PERCENT\_BOT\_CONVERSATIONS\_OUTCOME
     #
@@ -15016,7 +15300,7 @@ module Aws::Connect
     #     Flow type, Flow action ID, Invoking resource published timestamp,
     #     Initiation method, Invoking resource type, Parent flows resource ID
     #
-    #     UI name: [Percent bot conversations outcome][132]
+    #     UI name: [Percent bot conversations outcome][134]
     #
     #   PERCENT\_BOT\_INTENTS\_OUTCOME
     #
@@ -15029,7 +15313,7 @@ module Aws::Connect
     #     published timestamp, Initiation method, Invoking resource type,
     #     Parent flows resource ID
     #
-    #     UI name: [Percent bot intents outcome][133]
+    #     UI name: [Percent bot intents outcome][135]
     #
     #   PERCENT\_CASES\_FIRST\_CONTACT\_RESOLVED
     #
@@ -15039,7 +15323,7 @@ module Aws::Connect
     #
     #     Valid groupings and filters: CASE\_TEMPLATE\_ARN, CASE\_STATUS
     #
-    #     UI name: [Cases resolved on first contact][134]
+    #     UI name: [Cases resolved on first contact][136]
     #
     #   PERCENT\_CONTACTS\_STEP\_EXPIRED
     #
@@ -15071,7 +15355,7 @@ module Aws::Connect
     #     Flows outcome type, Flows resource ID, Initiation method, Resource
     #     published timestamp
     #
-    #     UI name: [Flows outcome percentage][135].
+    #     UI name: [Flows outcome percentage][137].
     #
     #     <note markdown="1"> The `FLOWS_OUTCOME_TYPE` is not a valid grouping.
     #
@@ -15088,7 +15372,7 @@ module Aws::Connect
     #     Agent Hierarchy, contact/segmentAttributes/connect:Subtype, Q in
     #     Connect
     #
-    #     UI name: [Non-talk time percent][136]
+    #     UI name: [Non-talk time percent][138]
     #
     #   PERCENT\_TALK\_TIME
     #
@@ -15101,7 +15385,7 @@ module Aws::Connect
     #     Agent Hierarchy, contact/segmentAttributes/connect:Subtype, Q in
     #     Connect
     #
-    #     UI name: [Talk time percent][137]
+    #     UI name: [Talk time percent][139]
     #
     #   PERCENT\_TALK\_TIME\_AGENT
     #
@@ -15114,7 +15398,7 @@ module Aws::Connect
     #     Agent Hierarchy, contact/segmentAttributes/connect:Subtype, Q in
     #     Connect
     #
-    #     UI name: [Agent talk time percent][138]
+    #     UI name: [Agent talk time percent][140]
     #
     #   PERCENT\_TALK\_TIME\_CUSTOMER
     #
@@ -15127,7 +15411,7 @@ module Aws::Connect
     #     Agent Hierarchy, contact/segmentAttributes/connect:Subtype, Q in
     #     Connect
     #
-    #     UI name: [Customer talk time percent][139]
+    #     UI name: [Customer talk time percent][141]
     #
     #   RECIPIENTS\_ATTEMPTED
     #
@@ -15139,7 +15423,7 @@ module Aws::Connect
     #
     #     Valid groupings and filters: Campaign, Campaign Execution Timestamp
     #
-    #     UI name: [Recipients attempted][140]
+    #     UI name: [Recipients attempted][142]
     #
     #   RECIPIENTS\_INTERACTED
     #
@@ -15155,7 +15439,7 @@ module Aws::Connect
     #     contact/segmentAttributes/connect:Subtype, Campaign Execution
     #     Timestamp
     #
-    #     UI name: [Recipients interacted][141]
+    #     UI name: [Recipients interacted][143]
     #
     #   AI\_AGENT\_COLLABORATORS
     #
@@ -15165,7 +15449,7 @@ module Aws::Connect
     #     Name Version, AI Agent Type, AI Use Case, Channel, Queue, Routing
     #     Profile, Session ID
     #
-    #     UI name: [AI Agent Collaborators][142]
+    #     UI name: [AI Agent Collaborators][144]
     #
     #   AI\_AGENT\_COLLABORATION\_INVOCATIONS
     #
@@ -15175,7 +15459,7 @@ module Aws::Connect
     #     Name Version, AI Agent Type, AI Use Case, Channel, Queue, Routing
     #     Profile, Session ID
     #
-    #     UI name: [AI Agent Collaboration Invocations][143]
+    #     UI name: [AI Agent Collaboration Invocations][145]
     #
     #   AI\_AGENT\_SELECTION\_ACCURACY
     #
@@ -15185,7 +15469,7 @@ module Aws::Connect
     #     AI Agent Name Version, AI Agent Type, AI Use Case, Channel, Queue,
     #     Routing Profile, Session ID
     #
-    #     UI name: [AI Agent Selection Accuracy][144]
+    #     UI name: [AI Agent Selection Accuracy][146]
     #
     #     <note markdown="1"> This metric is available as part of Connect Customer AI.
     #
@@ -15199,7 +15483,7 @@ module Aws::Connect
     #     AI Agent Name Version, AI Agent Type, AI Use Case, Channel, Queue,
     #     Routing Profile, Session ID
     #
-    #     UI name: [Average AI Agent Invocation Latency][145]
+    #     UI name: [Average AI Agent Invocation Latency][147]
     #
     #   CONTEXT\_FIDELITY\_SCORE
     #
@@ -15209,7 +15493,7 @@ module Aws::Connect
     #     AI Agent Name Version, AI Agent Type, AI Use Case, Channel, Queue,
     #     Routing Profile, Session ID
     #
-    #     UI name: [Context Fidelity Score][146]
+    #     UI name: [Context Fidelity Score][148]
     #
     #     <note markdown="1"> This metric is available as part of Connect Customer AI.
     #
@@ -15225,7 +15509,7 @@ module Aws::Connect
     #
     #     Valid groupings and filters: Campaign, Campaign Execution Timestamp
     #
-    #     UI name: [Recipients targeted][147]
+    #     UI name: [Recipients targeted][149]
     #
     #   REOPENED\_CASE\_ACTIONS
     #
@@ -15235,7 +15519,7 @@ module Aws::Connect
     #
     #     Valid groupings and filters: CASE\_TEMPLATE\_ARN, CASE\_STATUS
     #
-    #     UI name: [Cases reopened][148]
+    #     UI name: [Cases reopened][150]
     #
     #   RESOLVED\_CASE\_ACTIONS
     #
@@ -15245,7 +15529,7 @@ module Aws::Connect
     #
     #     Valid groupings and filters: CASE\_TEMPLATE\_ARN, CASE\_STATUS
     #
-    #     UI name: [Cases resolved][149]
+    #     UI name: [Cases resolved][151]
     #
     #   SERVICE\_LEVEL
     #
@@ -15260,7 +15544,7 @@ module Aws::Connect
     #     604800 (inclusive), in seconds. For `Comparison`, you can use `LT`
     #     (for "Less than") or `LTE` (for "Less than equal").
     #
-    #     UI name: [Service level X][150]
+    #     UI name: [Service level X][152]
     #
     #   STEP\_CONTACTS\_QUEUED
     #
@@ -15292,7 +15576,7 @@ module Aws::Connect
     #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
     #     Agent Hierarchy
     #
-    #     UI name: [Agent API connecting time][151]
+    #     UI name: [Agent API connecting time][153]
     #
     #     <note markdown="1"> The `Negate` key in metric-level filters is not applicable for this
     #     metric.
@@ -15315,7 +15599,7 @@ module Aws::Connect
     #     Agent Hierarchy, contact/segmentAttributes/connect:Subtype,
     #     RoutingStepExpression, Q in Connect
     #
-    #     UI name: [Contact abandoned][152]
+    #     UI name: [Contact abandoned][154]
     #
     #   SUM\_CONTACTS\_ABANDONED\_IN\_X
     #
@@ -15328,7 +15612,7 @@ module Aws::Connect
     #     604800 (inclusive), in seconds. For `Comparison`, you can use `LT`
     #     (for "Less than") or `LTE` (for "Less than equal").
     #
-    #     UI name: [Contacts abandoned in X seconds][153]
+    #     UI name: [Contacts abandoned in X seconds][155]
     #
     #   SUM\_CONTACTS\_ANSWERED\_IN\_X
     #
@@ -15341,7 +15625,7 @@ module Aws::Connect
     #     604800 (inclusive), in seconds. For `Comparison`, you can use `LT`
     #     (for "Less than") or `LTE` (for "Less than equal").
     #
-    #     UI name: [Contacts answered in X seconds][154]
+    #     UI name: [Contacts answered in X seconds][156]
     #
     #   SUM\_CONTACT\_FLOW\_TIME
     #
@@ -15350,7 +15634,7 @@ module Aws::Connect
     #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
     #     Agent Hierarchy, Q in Connect
     #
-    #     UI name: [Contact flow time][155]
+    #     UI name: [Contact flow time][157]
     #
     #   SUM\_CONTACT\_TIME\_AGENT
     #
@@ -15358,7 +15642,7 @@ module Aws::Connect
     #
     #     Valid groupings and filters: Routing Profile, Agent, Agent Hierarchy
     #
-    #     UI name: [Agent on contact time][156]
+    #     UI name: [Agent on contact time][158]
     #
     #   SUM\_CONTACTS\_DISCONNECTED
     #
@@ -15370,7 +15654,7 @@ module Aws::Connect
     #     Agent Hierarchy, contact/segmentAttributes/connect:Subtype, Q in
     #     Connect
     #
-    #     UI name: [Contact disconnected][157]
+    #     UI name: [Contact disconnected][159]
     #
     #   SUM\_ERROR\_STATUS\_TIME\_AGENT
     #
@@ -15378,7 +15662,7 @@ module Aws::Connect
     #
     #     Valid groupings and filters: Routing Profile, Agent, Agent Hierarchy
     #
-    #     UI name: [Error status time][158]
+    #     UI name: [Error status time][160]
     #
     #   SUM\_HANDLE\_TIME
     #
@@ -15387,7 +15671,7 @@ module Aws::Connect
     #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
     #     Agent Hierarchy, Q in Connect
     #
-    #     UI name: [Contact handle time][159]
+    #     UI name: [Contact handle time][161]
     #
     #   SUM\_HOLD\_TIME
     #
@@ -15396,7 +15680,7 @@ module Aws::Connect
     #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
     #     Agent Hierarchy, Q in Connect
     #
-    #     UI name: [Customer hold time][160]
+    #     UI name: [Customer hold time][162]
     #
     #   SUM\_IDLE\_TIME\_AGENT
     #
@@ -15404,7 +15688,7 @@ module Aws::Connect
     #
     #     Valid groupings and filters: Routing Profile, Agent, Agent Hierarchy
     #
-    #     UI name: [Agent idle time][161]
+    #     UI name: [Agent idle time][163]
     #
     #   SUM\_INTERACTION\_AND\_HOLD\_TIME
     #
@@ -15413,7 +15697,7 @@ module Aws::Connect
     #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
     #     Agent Hierarchy, Q in Connect
     #
-    #     UI name: [Agent interaction and hold time][162]
+    #     UI name: [Agent interaction and hold time][164]
     #
     #   SUM\_INTERACTION\_TIME
     #
@@ -15422,7 +15706,7 @@ module Aws::Connect
     #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
     #     Agent Hierarchy
     #
-    #     UI name: [Agent interaction time][163]
+    #     UI name: [Agent interaction time][165]
     #
     #   SUM\_NON\_PRODUCTIVE\_TIME\_AGENT
     #
@@ -15430,7 +15714,7 @@ module Aws::Connect
     #
     #     Valid groupings and filters: Routing Profile, Agent, Agent Hierarchy
     #
-    #     UI name: [Agent non-productive time][164]
+    #     UI name: [Agent non-productive time][166]
     #
     #   SUM\_ONLINE\_TIME\_AGENT
     #
@@ -15438,7 +15722,7 @@ module Aws::Connect
     #
     #     Valid groupings and filters: Routing Profile, Agent, Agent Hierarchy
     #
-    #     UI name: [Online time][165]
+    #     UI name: [Online time][167]
     #
     #   SUM\_RETRY\_CALLBACK\_ATTEMPTS
     #
@@ -15447,7 +15731,7 @@ module Aws::Connect
     #     Valid groupings and filters: Queue, Channel, Routing Profile,
     #     contact/segmentAttributes/connect:Subtype, Q in Connect
     #
-    #     UI name: [Callback attempts][166]
+    #     UI name: [Callback attempts][168]
     #
     #
     #
@@ -15478,145 +15762,147 @@ module Aws::Connect
     #   [25]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-conversation-duration
     #   [26]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-dials-per-minute
     #   [27]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-evaluation-score
-    #   [28]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-agent-first-response-time
-    #   [29]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-flow-time
-    #   [30]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-agent-greeting-time
-    #   [31]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-handle-time
-    #   [32]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#active-ai-agents
-    #   [33]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#ai-handoff-rate
-    #   [34]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#ai-handoffs
-    #   [35]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#ai-agent-invocation-success
-    #   [36]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#ai-agent-invocation-success-rate
-    #   [37]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#ai-agent-invocations
-    #   [38]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#ai-agent-response-helpful
-    #   [39]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#ai-agent-response-not-helpful
-    #   [40]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#ai-response-completion-rate
-    #   [41]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#ai-involved-contacts
-    #   [42]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#ai-prompt-invocation-success
-    #   [43]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#ai-prompt-invocation-success-rate
-    #   [44]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#ai-prompt-invocations
-    #   [45]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#ai-tool-invocation-success
-    #   [46]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#ai-tool-invocation-success-rate
-    #   [47]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#ai-tool-invocations
-    #   [48]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-ai-agent-conversation-turns
-    #   [49]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-ai-conversation-turns
-    #   [50]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-ai-prompt-invocation-latency
-    #   [51]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-ai-tool-invocation-latency
-    #   [52]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#ai-tool-parameter-accuracy
-    #   [53]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#ai-tool-selection-accuracy
-    #   [54]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#ai-tool-utilization-accuracy
-    #   [55]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#completeness-score
-    #   [56]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#faithfulness-score
-    #   [57]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#goal-success-rate
-    #   [58]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#knowledge-content-references
-    #   [59]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#proactive-intents-engagement-rate
-    #   [60]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#proactive-intents-response-rate
-    #   [61]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#proactive-intents-answered
-    #   [62]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#proactive-intents-detected
-    #   [63]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#proactive-intents-engaged
-    #   [64]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-customer-hold-time
-    #   [65]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-customer-hold-time-all-contacts
-    #   [66]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-holds
-    #   [67]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-agent-interaction-and-customer-hold-time
-    #   [68]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-agent-interaction-time
-    #   [69]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-agent-interruptions
-    #   [70]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-agent-interruption-time
-    #   [71]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-agent-message-length
-    #   [72]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-customer-message-length
-    #   [73]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-messages
-    #   [74]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-agent-messages
-    #   [75]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-bot-messages
-    #   [76]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-customer-messages
-    #   [77]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-non-talk-time
-    #   [78]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-queue-answer-time
-    #   [79]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-queue-answer-time-customer-first-callback
-    #   [80]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-response-time-agent
-    #   [81]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-customer-time-agent
-    #   [82]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-resolution-time
-    #   [83]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-talk-time
-    #   [84]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-agent-talk-time
-    #   [85]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-customer-talk-time
-    #   [86]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-wait-time-after-customer-connection
-    #   [87]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-wait-time-after-customer-connection-customer-first-callback
-    #   [88]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-weighted-evaluation-score
-    #   [89]: https://docs.aws.amazon.com/connect/latest/adminguide/bot-metrics.html#bot-conversations-completed
-    #   [90]: https://docs.aws.amazon.com/connect/latest/adminguide/bot-metrics.html#bot-intents-completed
-    #   [91]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#campaign-contacts-abandoned-after-x
-    #   [92]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#campaign-contacts-abandoned-after-x-rate
-    #   [93]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#campaign-interactions
-    #   [94]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#campaign-progress-rate
-    #   [95]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#campaign-send-attempts
-    #   [96]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#campaign-send-exclusions
-    #   [97]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#cases-created
-    #   [98]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contacts-created
-    #   [99]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contacts-handled
-    #   [100]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contacts-handled-by-connected-to-agent-timestamp
-    #   [101]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contacts-hold-disconnect
-    #   [102]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contacts-hold-agent-disconnect
-    #   [103]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contacts-hold-customer-disconnect
-    #   [104]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contacts-put-on-hold
-    #   [105]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contacts-transferred-out-external
-    #   [106]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contacts-transferred-out-internal
-    #   [107]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contacts-queued
-    #   [108]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contacts-queued-by-enqueue
-    #   [109]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contacts-removed-from-queue
-    #   [110]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contacts-resolved
-    #   [111]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contacts-transferred-out
-    #   [112]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contacts-transferred-out-by-agent
-    #   [113]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contacts-transferred-out-queue
-    #   [114]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#current-cases
-    #   [115]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#conversations-abandoned
-    #   [116]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#delivery-attempts
-    #   [117]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#delivery-attempt-disposition-rate
-    #   [118]: https://docs.aws.amazon.com/connect/latest/adminguide/create-evaluation-forms.html
-    #   [119]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#evaluated-churn-propensity-rate
-    #   [120]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#evaluated-csat-percent
-    #   [121]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#evaluated-partial-self-service-resolution-rate
-    #   [122]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#evaluated-self-service-resolution-rate
-    #   [123]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#evaluated-successful-sale-rate
-    #   [124]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#evaluations-performed
-    #   [125]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#flows-outcome
-    #   [126]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#flows-started
-    #   [127]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#human-answered
-    #   [128]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#maximum-flow-time
-    #   [129]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#maximum-queued-time
-    #   [130]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#minimum-flow-time
-    #   [131]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#automatic-fails-percent
-    #   [132]: https://docs.aws.amazon.com/connect/latest/adminguide/bot-metrics.html#percent-bot-conversations-outcome
-    #   [133]: https://docs.aws.amazon.com/connect/latest/adminguide/bot-metrics.html#percent-bot-intents-outcome
-    #   [134]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#cases-resolved-on-first-contact
-    #   [135]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#flows-outcome-percentage
-    #   [136]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#non-talk-time-percent
-    #   [137]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#talk-time-percent
-    #   [138]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#agent-talk-time-percent
-    #   [139]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#customer-talk-time-percent
-    #   [140]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#recipients-attempted
-    #   [141]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#recipients-interacted
-    #   [142]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#ai-agent-collaborators
-    #   [143]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#ai-agent-collaboration-invocations
-    #   [144]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#ai-agent-selection-accuracy
-    #   [145]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-ai-agent-invocation-latency
-    #   [146]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#context-fidelity-score
-    #   [147]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#recipients-targeted
-    #   [148]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#cases-reopened
-    #   [149]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#cases-resolved
-    #   [150]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#service-level
-    #   [151]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#agent-api-connecting-time
-    #   [152]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contacts-abandoned
-    #   [153]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contacts-abandoned-in-x-seconds
-    #   [154]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contacts-answered-in-x-seconds
-    #   [155]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contact-flow-time
-    #   [156]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#agent-on-contact-time
-    #   [157]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contact-disconnected
-    #   [158]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#error-status-time
-    #   [159]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contact-handle-time
-    #   [160]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#customer-hold-time
-    #   [161]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#agent-idle-time
-    #   [162]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#agent-interaction-and-hold-time
-    #   [163]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#agent-interaction-time
-    #   [164]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#agent-non-productive-time
-    #   [165]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#online-time
-    #   [166]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#callback-attempts
+    #   [28]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-evaluation-score-by-submit-time
+    #   [29]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-agent-first-response-time
+    #   [30]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-flow-time
+    #   [31]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-agent-greeting-time
+    #   [32]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-handle-time
+    #   [33]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#active-ai-agents
+    #   [34]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#ai-handoff-rate
+    #   [35]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#ai-handoffs
+    #   [36]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#ai-agent-invocation-success
+    #   [37]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#ai-agent-invocation-success-rate
+    #   [38]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#ai-agent-invocations
+    #   [39]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#ai-agent-response-helpful
+    #   [40]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#ai-agent-response-not-helpful
+    #   [41]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#ai-response-completion-rate
+    #   [42]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#ai-involved-contacts
+    #   [43]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#ai-prompt-invocation-success
+    #   [44]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#ai-prompt-invocation-success-rate
+    #   [45]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#ai-prompt-invocations
+    #   [46]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#ai-tool-invocation-success
+    #   [47]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#ai-tool-invocation-success-rate
+    #   [48]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#ai-tool-invocations
+    #   [49]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-ai-agent-conversation-turns
+    #   [50]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-ai-conversation-turns
+    #   [51]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-ai-prompt-invocation-latency
+    #   [52]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-ai-tool-invocation-latency
+    #   [53]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#ai-tool-parameter-accuracy
+    #   [54]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#ai-tool-selection-accuracy
+    #   [55]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#ai-tool-utilization-accuracy
+    #   [56]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#completeness-score
+    #   [57]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#faithfulness-score
+    #   [58]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#goal-success-rate
+    #   [59]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#knowledge-content-references
+    #   [60]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#proactive-intents-engagement-rate
+    #   [61]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#proactive-intents-response-rate
+    #   [62]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#proactive-intents-answered
+    #   [63]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#proactive-intents-detected
+    #   [64]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#proactive-intents-engaged
+    #   [65]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-customer-hold-time
+    #   [66]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-customer-hold-time-all-contacts
+    #   [67]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-holds
+    #   [68]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-agent-interaction-and-customer-hold-time
+    #   [69]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-agent-interaction-time
+    #   [70]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-agent-interruptions
+    #   [71]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-agent-interruption-time
+    #   [72]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-agent-message-length
+    #   [73]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-customer-message-length
+    #   [74]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-messages
+    #   [75]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-agent-messages
+    #   [76]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-bot-messages
+    #   [77]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-customer-messages
+    #   [78]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-non-talk-time
+    #   [79]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-queue-answer-time
+    #   [80]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-queue-answer-time-customer-first-callback
+    #   [81]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-response-time-agent
+    #   [82]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-customer-time-agent
+    #   [83]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-resolution-time
+    #   [84]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-talk-time
+    #   [85]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-agent-talk-time
+    #   [86]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-customer-talk-time
+    #   [87]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-wait-time-after-customer-connection
+    #   [88]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-wait-time-after-customer-connection-customer-first-callback
+    #   [89]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-weighted-evaluation-score
+    #   [90]: https://docs.aws.amazon.com/connect/latest/adminguide/bot-metrics.html#bot-conversations-completed
+    #   [91]: https://docs.aws.amazon.com/connect/latest/adminguide/bot-metrics.html#bot-intents-completed
+    #   [92]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#campaign-contacts-abandoned-after-x
+    #   [93]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#campaign-contacts-abandoned-after-x-rate
+    #   [94]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#campaign-interactions
+    #   [95]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#campaign-progress-rate
+    #   [96]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#campaign-send-attempts
+    #   [97]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#campaign-send-exclusions
+    #   [98]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#cases-created
+    #   [99]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contacts-created
+    #   [100]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contacts-handled
+    #   [101]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contacts-handled-by-connected-to-agent-timestamp
+    #   [102]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contacts-hold-disconnect
+    #   [103]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contacts-hold-agent-disconnect
+    #   [104]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contacts-hold-customer-disconnect
+    #   [105]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contacts-put-on-hold
+    #   [106]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contacts-transferred-out-external
+    #   [107]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contacts-transferred-out-internal
+    #   [108]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contacts-queued
+    #   [109]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contacts-queued-by-enqueue
+    #   [110]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contacts-removed-from-queue
+    #   [111]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contacts-resolved
+    #   [112]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contacts-transferred-out
+    #   [113]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contacts-transferred-out-by-agent
+    #   [114]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contacts-transferred-out-queue
+    #   [115]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#current-cases
+    #   [116]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#conversations-abandoned
+    #   [117]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#delivery-attempts
+    #   [118]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#delivery-attempt-disposition-rate
+    #   [119]: https://docs.aws.amazon.com/connect/latest/adminguide/create-evaluation-forms.html
+    #   [120]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#evaluated-churn-propensity-rate
+    #   [121]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#evaluated-csat-percent
+    #   [122]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#evaluated-partial-self-service-resolution-rate
+    #   [123]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#evaluated-self-service-resolution-rate
+    #   [124]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#evaluated-successful-sale-rate
+    #   [125]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#evaluations-performed
+    #   [126]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#evaluations-performed-by-submit-time
+    #   [127]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#flows-outcome
+    #   [128]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#flows-started
+    #   [129]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#human-answered
+    #   [130]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#maximum-flow-time
+    #   [131]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#maximum-queued-time
+    #   [132]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#minimum-flow-time
+    #   [133]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#automatic-fails-percent
+    #   [134]: https://docs.aws.amazon.com/connect/latest/adminguide/bot-metrics.html#percent-bot-conversations-outcome
+    #   [135]: https://docs.aws.amazon.com/connect/latest/adminguide/bot-metrics.html#percent-bot-intents-outcome
+    #   [136]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#cases-resolved-on-first-contact
+    #   [137]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#flows-outcome-percentage
+    #   [138]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#non-talk-time-percent
+    #   [139]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#talk-time-percent
+    #   [140]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#agent-talk-time-percent
+    #   [141]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#customer-talk-time-percent
+    #   [142]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#recipients-attempted
+    #   [143]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#recipients-interacted
+    #   [144]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#ai-agent-collaborators
+    #   [145]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#ai-agent-collaboration-invocations
+    #   [146]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#ai-agent-selection-accuracy
+    #   [147]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-ai-agent-invocation-latency
+    #   [148]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#context-fidelity-score
+    #   [149]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#recipients-targeted
+    #   [150]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#cases-reopened
+    #   [151]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#cases-resolved
+    #   [152]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#service-level
+    #   [153]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#agent-api-connecting-time
+    #   [154]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contacts-abandoned
+    #   [155]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contacts-abandoned-in-x-seconds
+    #   [156]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contacts-answered-in-x-seconds
+    #   [157]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contact-flow-time
+    #   [158]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#agent-on-contact-time
+    #   [159]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contact-disconnected
+    #   [160]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#error-status-time
+    #   [161]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contact-handle-time
+    #   [162]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#customer-hold-time
+    #   [163]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#agent-idle-time
+    #   [164]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#agent-interaction-and-hold-time
+    #   [165]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#agent-interaction-time
+    #   [166]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#agent-non-productive-time
+    #   [167]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#online-time
+    #   [168]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#callback-attempts
     #
     # @option params [String] :next_token
     #   The token for the next set of results. Use the value returned in the
@@ -17043,7 +17329,7 @@ module Aws::Connect
     #   resp = client.list_contact_references({
     #     instance_id: "InstanceId", # required
     #     contact_id: "ContactId", # required
-    #     reference_types: ["URL"], # required, accepts URL, ATTACHMENT, CONTACT_ANALYSIS, NUMBER, STRING, DATE, EMAIL, EMAIL_MESSAGE, EMAIL_MESSAGE_PLAIN_TEXT, EMAIL_MESSAGE_PLAIN_TEXT_REDACTED, EMAIL_MESSAGE_REDACTED
+    #     reference_types: ["URL"], # required, accepts URL, ATTACHMENT, CONTACT_ANALYSIS, NUMBER, STRING, DATE, EMAIL, EMAIL_MESSAGE, EMAIL_MESSAGE_PLAIN_TEXT, EMAIL_MESSAGE_PLAIN_TEXT_REDACTED, EMAIL_MESSAGE_REDACTED, VOICEMAIL_RECORDING, VOICEMAIL_RECORDING_REDACTED, VOICEMAIL_ANALYSIS, VOICEMAIL_ANALYSIS_REDACTED
     #     next_token: "NextToken",
     #   })
     #
@@ -17078,6 +17364,22 @@ module Aws::Connect
     #   resp.reference_summary_list[0].contact_analysis.arn #=> String
     #   resp.reference_summary_list[0].contact_analysis.analytics_mode #=> String, one of "PostContact", "RealTime", "ContactLens", "AutomatedInteraction"
     #   resp.reference_summary_list[0].contact_analysis.is_redacted #=> Boolean
+    #   resp.reference_summary_list[0].voicemail_recording.name #=> String
+    #   resp.reference_summary_list[0].voicemail_recording.value #=> String
+    #   resp.reference_summary_list[0].voicemail_recording.status #=> String, one of "AVAILABLE", "DELETED", "APPROVED", "REJECTED", "PROCESSING", "FAILED", "DRAFTING"
+    #   resp.reference_summary_list[0].voicemail_recording.arn #=> String
+    #   resp.reference_summary_list[0].voicemail_recording_redacted.name #=> String
+    #   resp.reference_summary_list[0].voicemail_recording_redacted.value #=> String
+    #   resp.reference_summary_list[0].voicemail_recording_redacted.status #=> String, one of "AVAILABLE", "DELETED", "APPROVED", "REJECTED", "PROCESSING", "FAILED", "DRAFTING"
+    #   resp.reference_summary_list[0].voicemail_recording_redacted.arn #=> String
+    #   resp.reference_summary_list[0].voicemail_analysis.name #=> String
+    #   resp.reference_summary_list[0].voicemail_analysis.value #=> String
+    #   resp.reference_summary_list[0].voicemail_analysis.status #=> String, one of "AVAILABLE", "DELETED", "APPROVED", "REJECTED", "PROCESSING", "FAILED", "DRAFTING"
+    #   resp.reference_summary_list[0].voicemail_analysis.arn #=> String
+    #   resp.reference_summary_list[0].voicemail_analysis_redacted.name #=> String
+    #   resp.reference_summary_list[0].voicemail_analysis_redacted.value #=> String
+    #   resp.reference_summary_list[0].voicemail_analysis_redacted.status #=> String, one of "AVAILABLE", "DELETED", "APPROVED", "REJECTED", "PROCESSING", "FAILED", "DRAFTING"
+    #   resp.reference_summary_list[0].voicemail_analysis_redacted.arn #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListContactReferences AWS API Documentation
@@ -18131,6 +18433,8 @@ module Aws::Connect
     #   resp.integration_association_summary_list[0].source_application_url #=> String
     #   resp.integration_association_summary_list[0].source_application_name #=> String
     #   resp.integration_association_summary_list[0].source_type #=> String, one of "SALESFORCE", "ZENDESK", "CASES"
+    #   resp.integration_association_summary_list[0].last_modified_time #=> Time
+    #   resp.integration_association_summary_list[0].last_modified_region #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListIntegrationAssociations AWS API Documentation
@@ -18993,6 +19297,13 @@ module Aws::Connect
     #   own structure. Different channels may have different sets of supported
     #   segment types.
     #
+    # @option params [Types::RealTimeContactAnalysisSegmentsFilter] :list_filter
+    #   A filter that restricts the segments returned by the API. When
+    #   `SegmentTypes` includes `Categories`, use `CategoriesAttributeFilter`
+    #   to return only the category segments whose rules have tags that match
+    #   the filter. This enforces tag-based access control on the categories a
+    #   caller can view.
+    #
     # @return [Types::ListRealtimeContactAnalysisSegmentsV2Response] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListRealtimeContactAnalysisSegmentsV2Response#channel #channel} => String
@@ -19011,6 +19322,32 @@ module Aws::Connect
     #     next_token: "LargeNextToken",
     #     output_type: "Raw", # required, accepts Raw, Redacted
     #     segment_types: ["Transcript"], # required, accepts Transcript, Categories, Issues, Event, Attachments, PostContactSummary, ExtractedInformation
+    #     list_filter: {
+    #       categories_attribute_filter: {
+    #         or_conditions: [
+    #           {
+    #             tag_conditions: [
+    #               {
+    #                 tag_key: "String",
+    #                 tag_value: "String",
+    #               },
+    #             ],
+    #           },
+    #         ],
+    #         and_condition: {
+    #           tag_conditions: [
+    #             {
+    #               tag_key: "String",
+    #               tag_value: "String",
+    #             },
+    #           ],
+    #         },
+    #         tag_condition: {
+    #           tag_key: "String",
+    #           tag_value: "String",
+    #         },
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
@@ -19030,6 +19367,7 @@ module Aws::Connect
     #   resp.segments[0].transcript.redaction.character_offsets[0].end_offset_char #=> Integer
     #   resp.segments[0].transcript.sentiment #=> String, one of "POSITIVE", "NEGATIVE", "NEUTRAL"
     #   resp.segments[0].categories.matched_details #=> Hash
+    #   resp.segments[0].categories.matched_details["RealTimeContactAnalysisCategoryName"].rule_id #=> String
     #   resp.segments[0].categories.matched_details["RealTimeContactAnalysisCategoryName"].points_of_interest #=> Array
     #   resp.segments[0].categories.matched_details["RealTimeContactAnalysisCategoryName"].points_of_interest[0].transcript_items #=> Array
     #   resp.segments[0].categories.matched_details["RealTimeContactAnalysisCategoryName"].points_of_interest[0].transcript_items[0].id #=> String
@@ -19430,7 +19768,7 @@ module Aws::Connect
     #   resp.rule_summary_list[0].rule_capability_tiers #=> Array
     #   resp.rule_summary_list[0].rule_capability_tiers[0] #=> String, one of "GenerativeAI"
     #   resp.rule_summary_list[0].action_summaries #=> Array
-    #   resp.rule_summary_list[0].action_summaries[0].action_type #=> String, one of "CREATE_TASK", "ASSIGN_CONTACT_CATEGORY", "GENERATE_EVENTBRIDGE_EVENT", "SEND_NOTIFICATION", "CREATE_CASE", "UPDATE_CASE", "ASSIGN_SLA", "END_ASSOCIATED_TASKS", "SUBMIT_AUTO_EVALUATION", "EXTRACT_INFORMATION", "SEND_IN_APP_NOTIFICATION"
+    #   resp.rule_summary_list[0].action_summaries[0].action_type #=> String, one of "CREATE_TASK", "ASSIGN_CONTACT_CATEGORY", "GENERATE_EVENTBRIDGE_EVENT", "SEND_NOTIFICATION", "CREATE_CASE", "UPDATE_CASE", "ASSIGN_SLA", "END_ASSOCIATED_TASKS", "END_ASSOCIATED_EMAILS", "SUBMIT_AUTO_EVALUATION", "EXTRACT_INFORMATION", "SEND_IN_APP_NOTIFICATION"
     #   resp.rule_summary_list[0].created_time #=> Time
     #   resp.rule_summary_list[0].last_updated_time #=> Time
     #   resp.next_token #=> String
@@ -20799,7 +21137,7 @@ module Aws::Connect
       req.send_request(options)
     end
 
-    # Allows pausing an ongoing task contact.
+    # Pauses an ongoing task or email contact.
     #
     # @option params [required, String] :contact_id
     #   The identifier of the contact.
@@ -21009,7 +21347,7 @@ module Aws::Connect
       req.send_request(options)
     end
 
-    # Allows resuming a task contact in a paused state.
+    # Resumes a task or email contact in a paused state.
     #
     # @option params [required, String] :contact_id
     #   The identifier of the contact.
@@ -22335,7 +22673,7 @@ module Aws::Connect
     #   resp.evaluation_form_search_summary_list[0].latest_version #=> Integer
     #   resp.evaluation_form_search_summary_list[0].active_version #=> Integer
     #   resp.evaluation_form_search_summary_list[0].auto_evaluation_enabled #=> Boolean
-    #   resp.evaluation_form_search_summary_list[0].evaluation_form_language #=> String, one of "de-DE", "en-US", "es-ES", "fr-FR", "it-IT", "pt-BR", "ja-JP", "ko-KR", "zh-CN", "ms-MY"
+    #   resp.evaluation_form_search_summary_list[0].evaluation_form_language #=> String, one of "de-DE", "en-US", "es-ES", "fr-FR", "it-IT", "pt-BR", "ja-JP", "ko-KR", "zh-CN", "ms-MY", "af-ZA", "sq-AL", "am-ET", "ar-AE", "ar-SA", "hy-AM", "eu-ES", "be-BY", "bs-BA", "bg-BG", "ca-ES", "ckb-IR", "ckb-IQ", "zh-TW", "hr-HR", "cs-CZ", "da-DK", "nl-BE", "nl-NL", "en-AU", "en-IN", "en-IE", "en-NZ", "en-AB", "en-SG", "en-ZA", "en-GB", "en-WL", "fa-IR", "fa-AF", "fi-FI", "fr-BE", "fr-CA", "ga-IE", "gl-ES", "ka-GE", "de-AT", "de-CH", "el-GR", "gu-IN", "ht-HT", "he-IL", "hi-IN", "hu-HU", "is-IS", "id-ID", "jv-ID", "km-KH", "kn-IN", "kk-KZ", "lo-LA", "lv-LV", "lt-LT", "mk-MK", "ml-IN", "mr-IN", "ne-NP", "no-NO", "or-IN", "ps-AF", "pl-PL", "pt-PT", "pa-IN", "ro-RO", "ru-RU", "sr-RS", "si-LK", "sk-SK", "sl-SI", "es-MX", "es-US", "su-ID", "sw-BI", "sw-KE", "sw-RW", "sw-TZ", "sw-UG", "sv-SE", "tl-PH", "ta-IN", "te-IN", "th-TH", "tr-TR", "uk-UA", "uz-UZ", "vi-VN", "zu-ZA", "my-MM", "so-SO", "yue-HK", "et-EE", "hmn", "lg-UG", "cy-GB", "xh-ZA", "bn-BD"
     #   resp.evaluation_form_search_summary_list[0].contact_interaction_type #=> String, one of "AGENT", "AUTOMATED", "CUSTOMER"
     #   resp.evaluation_form_search_summary_list[0].tags #=> Hash
     #   resp.evaluation_form_search_summary_list[0].tags["TagKey"] #=> String
@@ -23637,12 +23975,12 @@ module Aws::Connect
     #   resp.rules[0].trigger_event_source.event_source_name #=> String, one of "OnPostCallAnalysisAvailable", "OnRealTimeCallAnalysisAvailable", "OnRealTimeChatAnalysisAvailable", "OnPostChatAnalysisAvailable", "OnAfterCallWorkAvailable", "OnAfterChatWorkAvailable", "OnEmailAnalysisAvailable", "OnZendeskTicketCreate", "OnZendeskTicketStatusUpdate", "OnSalesforceCaseCreate", "OnContactEvaluationSubmit", "OnMetricDataUpdate", "OnCaseCreate", "OnCaseUpdate", "OnSlaBreach", "OnAlertUpdate", "OnSchedulePublish", "OnScheduleUpdate", "OnScheduleTimeOffRequestActivity"
     #   resp.rules[0].trigger_event_source.integration_association_id #=> String
     #   resp.rules[0].action_summaries #=> Array
-    #   resp.rules[0].action_summaries[0].action_type #=> String, one of "CREATE_TASK", "ASSIGN_CONTACT_CATEGORY", "GENERATE_EVENTBRIDGE_EVENT", "SEND_NOTIFICATION", "CREATE_CASE", "UPDATE_CASE", "ASSIGN_SLA", "END_ASSOCIATED_TASKS", "SUBMIT_AUTO_EVALUATION", "EXTRACT_INFORMATION", "SEND_IN_APP_NOTIFICATION"
+    #   resp.rules[0].action_summaries[0].action_type #=> String, one of "CREATE_TASK", "ASSIGN_CONTACT_CATEGORY", "GENERATE_EVENTBRIDGE_EVENT", "SEND_NOTIFICATION", "CREATE_CASE", "UPDATE_CASE", "ASSIGN_SLA", "END_ASSOCIATED_TASKS", "END_ASSOCIATED_EMAILS", "SUBMIT_AUTO_EVALUATION", "EXTRACT_INFORMATION", "SEND_IN_APP_NOTIFICATION"
     #   resp.rules[0].rule_capability_tiers #=> Array
     #   resp.rules[0].rule_capability_tiers[0] #=> String, one of "GenerativeAI"
     #   resp.rules[0].publish_status #=> String, one of "DRAFT", "PUBLISHED"
     #   resp.rules[0].pre_evaluation_filters.and_conditions #=> Array
-    #   resp.rules[0].pre_evaluation_filters.and_conditions[0].resource_type #=> String, one of "CONTACT"
+    #   resp.rules[0].pre_evaluation_filters.and_conditions[0].resource_type #=> String, one of "CONTACT", "CONTACT_EVALUATION"
     #   resp.rules[0].pre_evaluation_filters.and_conditions[0].filter_type #=> String, one of "TAG"
     #   resp.rules[0].pre_evaluation_filters.and_conditions[0].filter_key #=> String
     #   resp.rules[0].pre_evaluation_filters.and_conditions[0].filter_value #=> String
@@ -25135,7 +25473,7 @@ module Aws::Connect
     #     file_name: "FileName", # required
     #     file_size_in_bytes: 1, # required
     #     url_expiry_in_seconds: 1,
-    #     file_use_case_type: "CONTACT_ANALYSIS", # required, accepts CONTACT_ANALYSIS, EMAIL_MESSAGE, EMAIL_MESSAGE_PLAIN_TEXT, EMAIL_MESSAGE_REDACTED, EMAIL_MESSAGE_PLAIN_TEXT_REDACTED, ATTACHMENT, VOICE_RECORDING
+    #     file_use_case_type: "CONTACT_ANALYSIS", # required, accepts CONTACT_ANALYSIS, EMAIL_MESSAGE, EMAIL_MESSAGE_PLAIN_TEXT, EMAIL_MESSAGE_REDACTED, EMAIL_MESSAGE_PLAIN_TEXT_REDACTED, ATTACHMENT, VOICE_RECORDING, VOICEMAIL_RECORDING, VOICEMAIL_RECORDING_REDACTED, VOICEMAIL_ANALYSIS, VOICEMAIL_ANALYSIS_REDACTED
     #     associated_resource_arn: "ARN", # required
     #     created_by: {
     #       connect_user_arn: "ARN",
@@ -25934,7 +26272,7 @@ module Aws::Connect
     #     references: {
     #       "ReferenceKey" => {
     #         value: "ReferenceValue",
-    #         type: "URL", # required, accepts URL, ATTACHMENT, CONTACT_ANALYSIS, NUMBER, STRING, DATE, EMAIL, EMAIL_MESSAGE, EMAIL_MESSAGE_PLAIN_TEXT, EMAIL_MESSAGE_PLAIN_TEXT_REDACTED, EMAIL_MESSAGE_REDACTED
+    #         type: "URL", # required, accepts URL, ATTACHMENT, CONTACT_ANALYSIS, NUMBER, STRING, DATE, EMAIL, EMAIL_MESSAGE, EMAIL_MESSAGE_PLAIN_TEXT, EMAIL_MESSAGE_PLAIN_TEXT_REDACTED, EMAIL_MESSAGE_REDACTED, VOICEMAIL_RECORDING, VOICEMAIL_RECORDING_REDACTED, VOICEMAIL_ANALYSIS, VOICEMAIL_ANALYSIS_REDACTED
     #         status: "AVAILABLE", # accepts AVAILABLE, DELETED, APPROVED, REJECTED, PROCESSING, FAILED, DRAFTING
     #         arn: "ReferenceArn",
     #         status_reason: "ReferenceStatusReason",
@@ -26518,7 +26856,7 @@ module Aws::Connect
     #     references: {
     #       "ReferenceKey" => {
     #         value: "ReferenceValue",
-    #         type: "URL", # required, accepts URL, ATTACHMENT, CONTACT_ANALYSIS, NUMBER, STRING, DATE, EMAIL, EMAIL_MESSAGE, EMAIL_MESSAGE_PLAIN_TEXT, EMAIL_MESSAGE_PLAIN_TEXT_REDACTED, EMAIL_MESSAGE_REDACTED
+    #         type: "URL", # required, accepts URL, ATTACHMENT, CONTACT_ANALYSIS, NUMBER, STRING, DATE, EMAIL, EMAIL_MESSAGE, EMAIL_MESSAGE_PLAIN_TEXT, EMAIL_MESSAGE_PLAIN_TEXT_REDACTED, EMAIL_MESSAGE_REDACTED, VOICEMAIL_RECORDING, VOICEMAIL_RECORDING_REDACTED, VOICEMAIL_ANALYSIS, VOICEMAIL_ANALYSIS_REDACTED
     #         status: "AVAILABLE", # accepts AVAILABLE, DELETED, APPROVED, REJECTED, PROCESSING, FAILED, DRAFTING
     #         arn: "ReferenceArn",
     #         status_reason: "ReferenceStatusReason",
@@ -26807,7 +27145,7 @@ module Aws::Connect
     #     references: {
     #       "ReferenceKey" => {
     #         value: "ReferenceValue",
-    #         type: "URL", # required, accepts URL, ATTACHMENT, CONTACT_ANALYSIS, NUMBER, STRING, DATE, EMAIL, EMAIL_MESSAGE, EMAIL_MESSAGE_PLAIN_TEXT, EMAIL_MESSAGE_PLAIN_TEXT_REDACTED, EMAIL_MESSAGE_REDACTED
+    #         type: "URL", # required, accepts URL, ATTACHMENT, CONTACT_ANALYSIS, NUMBER, STRING, DATE, EMAIL, EMAIL_MESSAGE, EMAIL_MESSAGE_PLAIN_TEXT, EMAIL_MESSAGE_PLAIN_TEXT_REDACTED, EMAIL_MESSAGE_REDACTED, VOICEMAIL_RECORDING, VOICEMAIL_RECORDING_REDACTED, VOICEMAIL_ANALYSIS, VOICEMAIL_ANALYSIS_REDACTED
     #         status: "AVAILABLE", # accepts AVAILABLE, DELETED, APPROVED, REJECTED, PROCESSING, FAILED, DRAFTING
     #         arn: "ReferenceArn",
     #         status_reason: "ReferenceStatusReason",
@@ -27013,7 +27351,7 @@ module Aws::Connect
     #     references: {
     #       "ReferenceKey" => {
     #         value: "ReferenceValue",
-    #         type: "URL", # required, accepts URL, ATTACHMENT, CONTACT_ANALYSIS, NUMBER, STRING, DATE, EMAIL, EMAIL_MESSAGE, EMAIL_MESSAGE_PLAIN_TEXT, EMAIL_MESSAGE_PLAIN_TEXT_REDACTED, EMAIL_MESSAGE_REDACTED
+    #         type: "URL", # required, accepts URL, ATTACHMENT, CONTACT_ANALYSIS, NUMBER, STRING, DATE, EMAIL, EMAIL_MESSAGE, EMAIL_MESSAGE_PLAIN_TEXT, EMAIL_MESSAGE_PLAIN_TEXT_REDACTED, EMAIL_MESSAGE_REDACTED, VOICEMAIL_RECORDING, VOICEMAIL_RECORDING_REDACTED, VOICEMAIL_ANALYSIS, VOICEMAIL_ANALYSIS_REDACTED
     #         status: "AVAILABLE", # accepts AVAILABLE, DELETED, APPROVED, REJECTED, PROCESSING, FAILED, DRAFTING
     #         arn: "ReferenceArn",
     #         status_reason: "ReferenceStatusReason",
@@ -27981,7 +28319,7 @@ module Aws::Connect
     #     references: {
     #       "ReferenceKey" => {
     #         value: "ReferenceValue",
-    #         type: "URL", # required, accepts URL, ATTACHMENT, CONTACT_ANALYSIS, NUMBER, STRING, DATE, EMAIL, EMAIL_MESSAGE, EMAIL_MESSAGE_PLAIN_TEXT, EMAIL_MESSAGE_PLAIN_TEXT_REDACTED, EMAIL_MESSAGE_REDACTED
+    #         type: "URL", # required, accepts URL, ATTACHMENT, CONTACT_ANALYSIS, NUMBER, STRING, DATE, EMAIL, EMAIL_MESSAGE, EMAIL_MESSAGE_PLAIN_TEXT, EMAIL_MESSAGE_PLAIN_TEXT_REDACTED, EMAIL_MESSAGE_REDACTED, VOICEMAIL_RECORDING, VOICEMAIL_RECORDING_REDACTED, VOICEMAIL_ANALYSIS, VOICEMAIL_ANALYSIS_REDACTED
     #         status: "AVAILABLE", # accepts AVAILABLE, DELETED, APPROVED, REJECTED, PROCESSING, FAILED, DRAFTING
     #         arn: "ReferenceArn",
     #         status_reason: "ReferenceStatusReason",
@@ -29190,6 +29528,42 @@ module Aws::Connect
     #               max_score_percentage: 1.0,
     #             },
     #           ],
+    #           enablement: {
+    #             condition: { # required
+    #               operands: [ # required
+    #                 {
+    #                   expression: {
+    #                     source: { # required
+    #                       type: "QUESTION_REF_ID", # required, accepts QUESTION_REF_ID, CONTACT, EVALUATION_METADATA, FORM_METADATA, AI_METRICS
+    #                       ref_id: "ReferenceId",
+    #                       contact_field: "CATEGORIES", # accepts CATEGORIES, AGENT_ARN, QUEUE_ARN, ROUTING_PROFILE_ARN, CHANNEL, INITIATION_METHOD, IS_QUEUED, OVERALL_CUSTOMER_SENTIMENT_SCORE, OVERALL_AGENT_SENTIMENT_SCORE, CUSTOMER_SENTIMENT_SCORE_WITHOUT_AGENT, CUSTOMER_SENTIMENT_SCORE_WITH_AGENT, NON_TALK_TIME, NON_TALK_TIME_PERCENTAGE, NUMBER_OF_INTERRUPTIONS, CONTACT_DURATION, AGENT_INTERACTION_DURATION, CUSTOMER_HOLD_TIME, LONGEST_HOLD_DURATION, NUMBER_OF_HOLDS, AGENT_INTERACTION_AND_HOLD_DURATION, RECORDING_MEDIA_STREAM_TYPES
+    #                       contact_attribute_key: "EvaluationFormContactAttributeKey",
+    #                       segment_attribute_key: "EvaluationFormSegmentAttributeKey",
+    #                       evaluation_metadata_field: "EVALUATION_TYPE", # accepts EVALUATION_TYPE
+    #                       ai_metrics_field: "AI_SESSION_IS_HANDED_OFF", # accepts AI_SESSION_IS_HANDED_OFF, AI_SESSION_SELF_SERVICE_DURATION, AI_SESSION_GOAL_SUCCESS_RATE, AI_SESSION_COMPLETENESS_SCORE, AI_SESSION_FAITHFULNESS_SCORE, AI_AGENT_MAX_PROMPT_LATENCY, AI_TOOL_MAX_LATENCY, AI_TOOL_SELECTION_ACCURACY, AI_TOOL_PARAMETER_ACCURACY, AI_TOOL_UTILIZATION_ACCURACY
+    #                     },
+    #                     values: [ # required
+    #                       {
+    #                         type: "OPTION_REF_ID", # required, accepts OPTION_REF_ID, STRING_VALUE, NUMERIC_VALUE, BOOLEAN_VALUE, DATETIME_VALUE
+    #                         ref_id: "ReferenceId",
+    #                         string_value: "EvaluationFormEnablementStringValue",
+    #                         numeric_value: 1.0,
+    #                         boolean_value: false,
+    #                         date_time_value: Time.now,
+    #                       },
+    #                     ],
+    #                     comparator: "IN", # required, accepts IN, NOT_IN, ALL_IN, EXACT, GREATER_THAN, LESS_THAN, GREATER_THAN_OR_EQUAL_TO, LESS_THAN_OR_EQUAL_TO, EQUAL_TO, NOT_EQUAL_TO
+    #                   },
+    #                   condition: {
+    #                     # recursive EvaluationFormItemEnablementCondition
+    #                   },
+    #                 },
+    #               ],
+    #               operator: "OR", # accepts OR, AND
+    #             },
+    #             action: "DISABLE", # required, accepts DISABLE, ENABLE
+    #             default_action: "DISABLE", # accepts DISABLE, ENABLE
+    #           },
     #         },
     #         question: {
     #           title: "EvaluationFormQuestionTitle", # required
@@ -29218,10 +29592,10 @@ module Aws::Connect
     #               ],
     #               automation: {
     #                 property_value: {
-    #                   label: "OVERALL_CUSTOMER_SENTIMENT_SCORE", # required, accepts OVERALL_CUSTOMER_SENTIMENT_SCORE, OVERALL_AGENT_SENTIMENT_SCORE, CUSTOMER_SENTIMENT_SCORE_WITHOUT_AGENT, CUSTOMER_SENTIMENT_SCORE_WITH_AGENT, NON_TALK_TIME, NON_TALK_TIME_PERCENTAGE, NUMBER_OF_INTERRUPTIONS, CONTACT_DURATION, AGENT_INTERACTION_DURATION, CUSTOMER_HOLD_TIME, LONGEST_HOLD_DURATION, NUMBER_OF_HOLDS, AGENT_INTERACTION_AND_HOLD_DURATION
+    #                   label: "OVERALL_CUSTOMER_SENTIMENT_SCORE", # required, accepts OVERALL_CUSTOMER_SENTIMENT_SCORE, OVERALL_AGENT_SENTIMENT_SCORE, CUSTOMER_SENTIMENT_SCORE_WITHOUT_AGENT, CUSTOMER_SENTIMENT_SCORE_WITH_AGENT, NON_TALK_TIME, NON_TALK_TIME_PERCENTAGE, NUMBER_OF_INTERRUPTIONS, CONTACT_DURATION, AGENT_INTERACTION_DURATION, CUSTOMER_HOLD_TIME, LONGEST_HOLD_DURATION, NUMBER_OF_HOLDS, AGENT_INTERACTION_AND_HOLD_DURATION, AI_SESSION_SELF_SERVICE_DURATION, AI_SESSION_GOAL_SUCCESS_RATE, AI_SESSION_COMPLETENESS_SCORE, AI_SESSION_FAITHFULNESS_SCORE, AI_AGENT_MAX_PROMPT_LATENCY, AI_TOOL_MAX_LATENCY, AI_TOOL_SELECTION_ACCURACY, AI_TOOL_PARAMETER_ACCURACY, AI_TOOL_UTILIZATION_ACCURACY
     #                 },
     #                 answer_source: {
-    #                   source_type: "CONTACT_LENS_DATA", # required, accepts CONTACT_LENS_DATA, GEN_AI
+    #                   source_type: "CONTACT_LENS_DATA", # required, accepts CONTACT_LENS_DATA, GEN_AI, CONDITION
     #                 },
     #               },
     #             },
@@ -29250,18 +29624,53 @@ module Aws::Connect
     #                       condition: "PRESENT", # required, accepts PRESENT, NOT_PRESENT
     #                       option_ref_id: "ReferenceId", # required
     #                     },
+    #                     automation_rule: {
+    #                       condition: { # required
+    #                         operands: [ # required
+    #                           {
+    #                             expression: {
+    #                               source: { # required
+    #                                 type: "QUESTION_REF_ID", # required, accepts QUESTION_REF_ID, CONTACT, EVALUATION_METADATA, FORM_METADATA, AI_METRICS
+    #                                 ref_id: "ReferenceId",
+    #                                 contact_field: "CATEGORIES", # accepts CATEGORIES, AGENT_ARN, QUEUE_ARN, ROUTING_PROFILE_ARN, CHANNEL, INITIATION_METHOD, IS_QUEUED, OVERALL_CUSTOMER_SENTIMENT_SCORE, OVERALL_AGENT_SENTIMENT_SCORE, CUSTOMER_SENTIMENT_SCORE_WITHOUT_AGENT, CUSTOMER_SENTIMENT_SCORE_WITH_AGENT, NON_TALK_TIME, NON_TALK_TIME_PERCENTAGE, NUMBER_OF_INTERRUPTIONS, CONTACT_DURATION, AGENT_INTERACTION_DURATION, CUSTOMER_HOLD_TIME, LONGEST_HOLD_DURATION, NUMBER_OF_HOLDS, AGENT_INTERACTION_AND_HOLD_DURATION, RECORDING_MEDIA_STREAM_TYPES
+    #                                 contact_attribute_key: "EvaluationFormContactAttributeKey",
+    #                                 segment_attribute_key: "EvaluationFormSegmentAttributeKey",
+    #                                 evaluation_metadata_field: "EVALUATION_TYPE", # accepts EVALUATION_TYPE
+    #                                 ai_metrics_field: "AI_SESSION_IS_HANDED_OFF", # accepts AI_SESSION_IS_HANDED_OFF, AI_SESSION_SELF_SERVICE_DURATION, AI_SESSION_GOAL_SUCCESS_RATE, AI_SESSION_COMPLETENESS_SCORE, AI_SESSION_FAITHFULNESS_SCORE, AI_AGENT_MAX_PROMPT_LATENCY, AI_TOOL_MAX_LATENCY, AI_TOOL_SELECTION_ACCURACY, AI_TOOL_PARAMETER_ACCURACY, AI_TOOL_UTILIZATION_ACCURACY
+    #                               },
+    #                               values: [ # required
+    #                                 {
+    #                                   type: "OPTION_REF_ID", # required, accepts OPTION_REF_ID, STRING_VALUE, NUMERIC_VALUE, BOOLEAN_VALUE, DATETIME_VALUE
+    #                                   ref_id: "ReferenceId",
+    #                                   string_value: "EvaluationFormEnablementStringValue",
+    #                                   numeric_value: 1.0,
+    #                                   boolean_value: false,
+    #                                   date_time_value: Time.now,
+    #                                 },
+    #                               ],
+    #                               comparator: "IN", # required, accepts IN, NOT_IN, ALL_IN, EXACT, GREATER_THAN, LESS_THAN, GREATER_THAN_OR_EQUAL_TO, LESS_THAN_OR_EQUAL_TO, EQUAL_TO, NOT_EQUAL_TO
+    #                             },
+    #                             condition: {
+    #                               # recursive EvaluationFormItemEnablementCondition
+    #                             },
+    #                           },
+    #                         ],
+    #                         operator: "OR", # accepts OR, AND
+    #                       },
+    #                       option_ref_id: "ReferenceId", # required
+    #                     },
     #                   },
     #                 ],
     #                 default_option_ref_id: "ReferenceId",
     #                 answer_source: {
-    #                   source_type: "CONTACT_LENS_DATA", # required, accepts CONTACT_LENS_DATA, GEN_AI
+    #                   source_type: "CONTACT_LENS_DATA", # required, accepts CONTACT_LENS_DATA, GEN_AI, CONDITION
     #                 },
     #               },
     #             },
     #             text: {
     #               automation: {
     #                 answer_source: {
-    #                   source_type: "CONTACT_LENS_DATA", # required, accepts CONTACT_LENS_DATA, GEN_AI
+    #                   source_type: "CONTACT_LENS_DATA", # required, accepts CONTACT_LENS_DATA, GEN_AI, CONDITION
     #                 },
     #               },
     #             },
@@ -29294,7 +29703,7 @@ module Aws::Connect
     #                 ],
     #                 default_option_ref_ids: ["ReferenceId"],
     #                 answer_source: {
-    #                   source_type: "CONTACT_LENS_DATA", # required, accepts CONTACT_LENS_DATA, GEN_AI
+    #                   source_type: "CONTACT_LENS_DATA", # required, accepts CONTACT_LENS_DATA, GEN_AI, CONDITION
     #                 },
     #               },
     #             },
@@ -29305,16 +29714,25 @@ module Aws::Connect
     #                 {
     #                   expression: {
     #                     source: { # required
-    #                       type: "QUESTION_REF_ID", # required, accepts QUESTION_REF_ID
+    #                       type: "QUESTION_REF_ID", # required, accepts QUESTION_REF_ID, CONTACT, EVALUATION_METADATA, FORM_METADATA, AI_METRICS
     #                       ref_id: "ReferenceId",
+    #                       contact_field: "CATEGORIES", # accepts CATEGORIES, AGENT_ARN, QUEUE_ARN, ROUTING_PROFILE_ARN, CHANNEL, INITIATION_METHOD, IS_QUEUED, OVERALL_CUSTOMER_SENTIMENT_SCORE, OVERALL_AGENT_SENTIMENT_SCORE, CUSTOMER_SENTIMENT_SCORE_WITHOUT_AGENT, CUSTOMER_SENTIMENT_SCORE_WITH_AGENT, NON_TALK_TIME, NON_TALK_TIME_PERCENTAGE, NUMBER_OF_INTERRUPTIONS, CONTACT_DURATION, AGENT_INTERACTION_DURATION, CUSTOMER_HOLD_TIME, LONGEST_HOLD_DURATION, NUMBER_OF_HOLDS, AGENT_INTERACTION_AND_HOLD_DURATION, RECORDING_MEDIA_STREAM_TYPES
+    #                       contact_attribute_key: "EvaluationFormContactAttributeKey",
+    #                       segment_attribute_key: "EvaluationFormSegmentAttributeKey",
+    #                       evaluation_metadata_field: "EVALUATION_TYPE", # accepts EVALUATION_TYPE
+    #                       ai_metrics_field: "AI_SESSION_IS_HANDED_OFF", # accepts AI_SESSION_IS_HANDED_OFF, AI_SESSION_SELF_SERVICE_DURATION, AI_SESSION_GOAL_SUCCESS_RATE, AI_SESSION_COMPLETENESS_SCORE, AI_SESSION_FAITHFULNESS_SCORE, AI_AGENT_MAX_PROMPT_LATENCY, AI_TOOL_MAX_LATENCY, AI_TOOL_SELECTION_ACCURACY, AI_TOOL_PARAMETER_ACCURACY, AI_TOOL_UTILIZATION_ACCURACY
     #                     },
     #                     values: [ # required
     #                       {
-    #                         type: "OPTION_REF_ID", # required, accepts OPTION_REF_ID
+    #                         type: "OPTION_REF_ID", # required, accepts OPTION_REF_ID, STRING_VALUE, NUMERIC_VALUE, BOOLEAN_VALUE, DATETIME_VALUE
     #                         ref_id: "ReferenceId",
+    #                         string_value: "EvaluationFormEnablementStringValue",
+    #                         numeric_value: 1.0,
+    #                         boolean_value: false,
+    #                         date_time_value: Time.now,
     #                       },
     #                     ],
-    #                     comparator: "IN", # required, accepts IN, NOT_IN, ALL_IN, EXACT
+    #                     comparator: "IN", # required, accepts IN, NOT_IN, ALL_IN, EXACT, GREATER_THAN, LESS_THAN, GREATER_THAN_OR_EQUAL_TO, LESS_THAN_OR_EQUAL_TO, EQUAL_TO, NOT_EQUAL_TO
     #                   },
     #                   condition: {
     #                     # recursive EvaluationFormItemEnablementCondition
@@ -29380,7 +29798,7 @@ module Aws::Connect
     #       contact_interaction_type: "AGENT", # required, accepts AGENT, AUTOMATED, CUSTOMER
     #     },
     #     language_configuration: {
-    #       form_language: "de-DE", # accepts de-DE, en-US, es-ES, fr-FR, it-IT, pt-BR, ja-JP, ko-KR, zh-CN, ms-MY
+    #       form_language: "de-DE", # accepts de-DE, en-US, es-ES, fr-FR, it-IT, pt-BR, ja-JP, ko-KR, zh-CN, ms-MY, af-ZA, sq-AL, am-ET, ar-AE, ar-SA, hy-AM, eu-ES, be-BY, bs-BA, bg-BG, ca-ES, ckb-IR, ckb-IQ, zh-TW, hr-HR, cs-CZ, da-DK, nl-BE, nl-NL, en-AU, en-IN, en-IE, en-NZ, en-AB, en-SG, en-ZA, en-GB, en-WL, fa-IR, fa-AF, fi-FI, fr-BE, fr-CA, ga-IE, gl-ES, ka-GE, de-AT, de-CH, el-GR, gu-IN, ht-HT, he-IL, hi-IN, hu-HU, is-IS, id-ID, jv-ID, km-KH, kn-IN, kk-KZ, lo-LA, lv-LV, lt-LT, mk-MK, ml-IN, mr-IN, ne-NP, no-NO, or-IN, ps-AF, pl-PL, pt-PT, pa-IN, ro-RO, ru-RU, sr-RS, si-LK, sk-SK, sl-SI, es-MX, es-US, su-ID, sw-BI, sw-KE, sw-RW, sw-TZ, sw-UG, sv-SE, tl-PH, ta-IN, te-IN, th-TH, tr-TR, uk-UA, uz-UZ, vi-VN, zu-ZA, my-MM, so-SO, yue-HK, et-EE, hmn, lg-UG, cy-GB, xh-ZA, bn-BD
     #     },
     #     ai_version: "EvaluationFormAIVersion",
     #   })
@@ -30966,7 +31384,7 @@ module Aws::Connect
     #     function: "RuleFunction", # required
     #     actions: [ # required
     #       {
-    #         action_type: "CREATE_TASK", # required, accepts CREATE_TASK, ASSIGN_CONTACT_CATEGORY, GENERATE_EVENTBRIDGE_EVENT, SEND_NOTIFICATION, CREATE_CASE, UPDATE_CASE, ASSIGN_SLA, END_ASSOCIATED_TASKS, SUBMIT_AUTO_EVALUATION, EXTRACT_INFORMATION, SEND_IN_APP_NOTIFICATION
+    #         action_type: "CREATE_TASK", # required, accepts CREATE_TASK, ASSIGN_CONTACT_CATEGORY, GENERATE_EVENTBRIDGE_EVENT, SEND_NOTIFICATION, CREATE_CASE, UPDATE_CASE, ASSIGN_SLA, END_ASSOCIATED_TASKS, END_ASSOCIATED_EMAILS, SUBMIT_AUTO_EVALUATION, EXTRACT_INFORMATION, SEND_IN_APP_NOTIFICATION
     #         task_action: {
     #           name: "TaskNameExpression", # required
     #           description: "TaskDescriptionExpression",
@@ -30974,7 +31392,7 @@ module Aws::Connect
     #           references: {
     #             "ReferenceKey" => {
     #               value: "ReferenceValue",
-    #               type: "URL", # required, accepts URL, ATTACHMENT, CONTACT_ANALYSIS, NUMBER, STRING, DATE, EMAIL, EMAIL_MESSAGE, EMAIL_MESSAGE_PLAIN_TEXT, EMAIL_MESSAGE_PLAIN_TEXT_REDACTED, EMAIL_MESSAGE_REDACTED
+    #               type: "URL", # required, accepts URL, ATTACHMENT, CONTACT_ANALYSIS, NUMBER, STRING, DATE, EMAIL, EMAIL_MESSAGE, EMAIL_MESSAGE_PLAIN_TEXT, EMAIL_MESSAGE_PLAIN_TEXT_REDACTED, EMAIL_MESSAGE_REDACTED, VOICEMAIL_RECORDING, VOICEMAIL_RECORDING_REDACTED, VOICEMAIL_ANALYSIS, VOICEMAIL_ANALYSIS_REDACTED
     #               status: "AVAILABLE", # accepts AVAILABLE, DELETED, APPROVED, REJECTED, PROCESSING, FAILED, DRAFTING
     #               arn: "ReferenceArn",
     #               status_reason: "ReferenceStatusReason",
@@ -31053,6 +31471,8 @@ module Aws::Connect
     #         },
     #         end_associated_tasks_action: {
     #         },
+    #         end_associated_emails_action: {
+    #         },
     #         submit_auto_evaluation_action: {
     #           evaluation_form_id: "EvaluationFormId", # required
     #         },
@@ -31087,7 +31507,7 @@ module Aws::Connect
     #     pre_evaluation_filters: {
     #       and_conditions: [
     #         {
-    #           resource_type: "CONTACT", # required, accepts CONTACT
+    #           resource_type: "CONTACT", # required, accepts CONTACT, CONTACT_EVALUATION
     #           filter_type: "TAG", # required, accepts TAG
     #           filter_key: "String", # required
     #           filter_value: "String", # required
@@ -31589,8 +32009,10 @@ module Aws::Connect
     #   for each channel. ACW timeout specifies how many seconds agents have
     #   for after contact work, such as entering notes about the contact. The
     #   minimum setting is 1 second, and the maximum is 2,000,000 seconds (24
-    #   days). Enter 0 for an indefinite amount of time, meaning agents must
-    #   manually choose to end ACW.
+    #   days). For the CHAT channel, the maximum for a specific duration is
+    #   5,400 seconds (90 minutes); higher values end ACW after 90 minutes.
+    #   For all channels, including chat, you can enter 0 for an indefinite
+    #   amount of time, meaning agents must manually choose to end ACW.
     #
     # @option params [Array<Types::PhoneNumberConfig>] :phone_number_configs
     #   The list of phone number configuration settings for each channel.
@@ -32431,7 +32853,7 @@ module Aws::Connect
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-connect'
-      context[:gem_version] = '1.292.0'
+      context[:gem_version] = '1.303.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -30,6 +30,25 @@
         {"shape":"ValidationException"}
       ]
     },
+    "CreateDataset":{
+      "name":"CreateDataset",
+      "http":{
+        "method":"POST",
+        "requestUri":"/domains/{domainId}/datasets",
+        "responseCode":201
+      },
+      "input":{"shape":"CreateDatasetInput"},
+      "output":{"shape":"CreateDatasetOutput"},
+      "errors":[
+        {"shape":"InternalServerException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"AccessDeniedException"},
+        {"shape":"ValidationException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"ConflictException"},
+        {"shape":"ServiceQuotaExceededException"}
+      ]
+    },
     "CreateDomain":{
       "name":"CreateDomain",
       "http":{
@@ -78,6 +97,25 @@
       ],
       "idempotent":true
     },
+    "DeleteDataset":{
+      "name":"DeleteDataset",
+      "http":{
+        "method":"DELETE",
+        "requestUri":"/domains/{domainId}/datasets/{datasetId}",
+        "responseCode":202
+      },
+      "input":{"shape":"DeleteDatasetInput"},
+      "output":{"shape":"DeleteDatasetOutput"},
+      "errors":[
+        {"shape":"InternalServerException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"AccessDeniedException"},
+        {"shape":"ValidationException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"ConflictException"}
+      ],
+      "idempotent":true
+    },
     "DeleteDomain":{
       "name":"DeleteDomain",
       "http":{
@@ -92,6 +130,24 @@
       ],
       "idempotent":true
     },
+    "GetDataset":{
+      "name":"GetDataset",
+      "http":{
+        "method":"GET",
+        "requestUri":"/domains/{domainId}/datasets/{datasetId}",
+        "responseCode":200
+      },
+      "input":{"shape":"GetDatasetInput"},
+      "output":{"shape":"GetDatasetOutput"},
+      "errors":[
+        {"shape":"InternalServerException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"AccessDeniedException"},
+        {"shape":"ValidationException"},
+        {"shape":"ThrottlingException"}
+      ],
+      "readonly":true
+    },
     "GetDomain":{
       "name":"GetDomain",
       "http":{
@@ -104,6 +160,25 @@
       "errors":[
         {"shape":"ResourceNotFoundException"}
       ],
+      "readonly":true
+    },
+    "GetMedicalCodingJob":{
+      "name":"GetMedicalCodingJob",
+      "http":{
+        "method":"GET",
+        "requestUri":"/domain/{domainId}/medical-coding-job/{jobId}",
+        "responseCode":200
+      },
+      "input":{"shape":"GetMedicalCodingJobRequest"},
+      "output":{"shape":"GetMedicalCodingJobResponse"},
+      "errors":[
+        {"shape":"InternalServerException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"AccessDeniedException"},
+        {"shape":"ValidationException"},
+        {"shape":"ThrottlingException"}
+      ],
+      "endpoint":{"hostPrefix":"runtime."},
       "readonly":true
     },
     "GetMedicalScribeListeningSession":{
@@ -161,6 +236,24 @@
       ],
       "readonly":true
     },
+    "ListDatasets":{
+      "name":"ListDatasets",
+      "http":{
+        "method":"GET",
+        "requestUri":"/domains/{domainId}/datasets",
+        "responseCode":200
+      },
+      "input":{"shape":"ListDatasetsInput"},
+      "output":{"shape":"ListDatasetsOutput"},
+      "errors":[
+        {"shape":"InternalServerException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"AccessDeniedException"},
+        {"shape":"ValidationException"},
+        {"shape":"ThrottlingException"}
+      ],
+      "readonly":true
+    },
     "ListDomains":{
       "name":"ListDomains",
       "http":{
@@ -200,6 +293,25 @@
       "output":{"shape":"ListTagsForResourceOutput"},
       "readonly":true
     },
+    "StartMedicalCodingJob":{
+      "name":"StartMedicalCodingJob",
+      "http":{
+        "method":"POST",
+        "requestUri":"/domain/{domainId}/medical-coding-job",
+        "responseCode":200
+      },
+      "input":{"shape":"StartMedicalCodingJobRequest"},
+      "output":{"shape":"StartMedicalCodingJobResponse"},
+      "errors":[
+        {"shape":"InternalServerException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"AccessDeniedException"},
+        {"shape":"ValidationException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"ConflictException"}
+      ],
+      "endpoint":{"hostPrefix":"runtime."}
+    },
     "StartMedicalScribeListeningSession":{
       "name":"StartMedicalScribeListeningSession",
       "http":{
@@ -235,6 +347,24 @@
         {"shape":"ValidationException"},
         {"shape":"ThrottlingException"},
         {"shape":"ConflictException"}
+      ],
+      "endpoint":{"hostPrefix":"runtime."}
+    },
+    "SubmitFeedback":{
+      "name":"SubmitFeedback",
+      "http":{
+        "method":"POST",
+        "requestUri":"/domain/{domainId}/feedback",
+        "responseCode":202
+      },
+      "input":{"shape":"SubmitFeedbackRequest"},
+      "output":{"shape":"SubmitFeedbackResponse"},
+      "errors":[
+        {"shape":"InternalServerException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"AccessDeniedException"},
+        {"shape":"ValidationException"},
+        {"shape":"ThrottlingException"}
       ],
       "endpoint":{"hostPrefix":"runtime."}
     },
@@ -304,10 +434,79 @@
         "failureReason":{"shape":"ErrorMessage"}
       }
     },
+    "ArtifactSourceId":{
+      "type":"string",
+      "max":36,
+      "min":36,
+      "pattern":"[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}"
+    },
     "AudioChunk":{"type":"blob"},
     "AudioOffset":{
       "type":"double",
       "box":true
+    },
+    "Boolean":{
+      "type":"boolean",
+      "box":true
+    },
+    "BoundedSafeString":{
+      "type":"string",
+      "max":1028,
+      "min":1,
+      "pattern":"[\\x20-\\x21\\x23\\x24\\x2A-\\x3A\\x3F-\\x7E]*"
+    },
+    "Checklist":{
+      "type":"structure",
+      "required":[
+        "checklistId",
+        "items"
+      ],
+      "members":{
+        "checklistId":{"shape":"ChecklistId"},
+        "items":{"shape":"ChecklistItemList"}
+      }
+    },
+    "ChecklistId":{
+      "type":"string",
+      "max":128,
+      "min":1
+    },
+    "ChecklistItem":{
+      "type":"structure",
+      "required":[
+        "itemKey",
+        "status"
+      ],
+      "members":{
+        "itemKey":{"shape":"ChecklistItemKey"},
+        "status":{"shape":"ChecklistItemStatus"}
+      }
+    },
+    "ChecklistItemKey":{
+      "type":"string",
+      "max":128,
+      "min":1,
+      "sensitive":true
+    },
+    "ChecklistItemList":{
+      "type":"list",
+      "member":{"shape":"ChecklistItem"},
+      "max":100,
+      "min":0
+    },
+    "ChecklistItemStatus":{
+      "type":"string",
+      "enum":[
+        "DISCUSSED",
+        "PARTIALLY_DISCUSSED",
+        "NOT_DISCUSSED"
+      ]
+    },
+    "ChecklistList":{
+      "type":"list",
+      "member":{"shape":"Checklist"},
+      "max":20,
+      "min":0
     },
     "ClinicalNoteGenerationResult":{
       "type":"structure",
@@ -340,6 +539,50 @@
         "senderFault":true
       },
       "exception":true
+    },
+    "CreateDatasetInput":{
+      "type":"structure",
+      "required":[
+        "domainId",
+        "name",
+        "config"
+      ],
+      "members":{
+        "domainId":{
+          "shape":"DomainId",
+          "location":"uri",
+          "locationName":"domainId"
+        },
+        "name":{"shape":"BoundedSafeString"},
+        "config":{"shape":"DatasetConfig"},
+        "clientToken":{
+          "shape":"CreateDatasetInputClientTokenString",
+          "idempotencyToken":true
+        }
+      }
+    },
+    "CreateDatasetInputClientTokenString":{
+      "type":"string",
+      "max":128,
+      "min":1,
+      "pattern":"[\\x21-\\x7E]+"
+    },
+    "CreateDatasetOutput":{
+      "type":"structure",
+      "required":[
+        "arn",
+        "datasetId",
+        "type",
+        "status",
+        "createdAt"
+      ],
+      "members":{
+        "arn":{"shape":"DatasetArn"},
+        "datasetId":{"shape":"DatasetId"},
+        "type":{"shape":"DatasetType"},
+        "status":{"shape":"DatasetStatus"},
+        "createdAt":{"shape":"Timestamp"}
+      }
     },
     "CreateDomainInput":{
       "type":"structure",
@@ -461,6 +704,71 @@
         "templateType":{"shape":"CustomTemplateBase"}
       }
     },
+    "DatasetArn":{
+      "type":"string",
+      "pattern":"arn:aws[a-z\\-]*:[a-z0-9\\-]+:[a-z0-9\\-]*:[0-9]{12}:.+"
+    },
+    "DatasetArtifacts":{
+      "type":"structure",
+      "members":{
+        "medicalCoding":{"shape":"MedicalCodingDatasetArtifacts"}
+      },
+      "union":true
+    },
+    "DatasetConfig":{
+      "type":"structure",
+      "members":{
+        "medicalCoding":{"shape":"MedicalCodingDatasetConfig"}
+      },
+      "union":true
+    },
+    "DatasetId":{
+      "type":"string",
+      "max":64,
+      "min":1,
+      "pattern":"[a-z0-9]{1,64}"
+    },
+    "DatasetStatus":{
+      "type":"string",
+      "enum":[
+        "CREATING",
+        "ACTIVE",
+        "CREATE_FAILED",
+        "DELETING",
+        "DELETE_FAILED",
+        "DELETED"
+      ]
+    },
+    "DatasetSummary":{
+      "type":"structure",
+      "required":[
+        "arn",
+        "datasetId",
+        "name",
+        "type",
+        "status",
+        "createdAt",
+        "updatedAt"
+      ],
+      "members":{
+        "arn":{"shape":"DatasetArn"},
+        "datasetId":{"shape":"DatasetId"},
+        "name":{"shape":"BoundedSafeString"},
+        "type":{"shape":"DatasetType"},
+        "status":{"shape":"DatasetStatus"},
+        "statusDetails":{"shape":"BoundedSafeString"},
+        "createdAt":{"shape":"Timestamp"},
+        "updatedAt":{"shape":"Timestamp"}
+      }
+    },
+    "DatasetSummaryList":{
+      "type":"list",
+      "member":{"shape":"DatasetSummary"}
+    },
+    "DatasetType":{
+      "type":"string",
+      "enum":["MEDICAL_CODING"]
+    },
     "DeactivateSubscriptionInput":{
       "type":"structure",
       "required":[
@@ -484,6 +792,38 @@
       "type":"structure",
       "members":{
         "subscription":{"shape":"SubscriptionDescription"}
+      }
+    },
+    "DeleteDatasetInput":{
+      "type":"structure",
+      "required":[
+        "domainId",
+        "datasetId"
+      ],
+      "members":{
+        "domainId":{
+          "shape":"DomainId",
+          "location":"uri",
+          "locationName":"domainId"
+        },
+        "datasetId":{
+          "shape":"DatasetId",
+          "location":"uri",
+          "locationName":"datasetId"
+        }
+      }
+    },
+    "DeleteDatasetOutput":{
+      "type":"structure",
+      "required":[
+        "arn",
+        "datasetId",
+        "status"
+      ],
+      "members":{
+        "arn":{"shape":"DatasetArn"},
+        "datasetId":{"shape":"DatasetId"},
+        "status":{"shape":"DatasetStatus"}
       }
     },
     "DeleteDomainInput":{
@@ -557,8 +897,16 @@
     "EncounterContext":{
       "type":"structure",
       "members":{
-        "unstructuredContext":{"shape":"SensitiveMarkdownString"}
+        "unstructuredContext":{"shape":"SensitiveMarkdownString"},
+        "medicalCodingContext":{"shape":"MedicalCodingContext"}
       }
+    },
+    "EncounterType":{
+      "type":"string",
+      "enum":[
+        "TELEHEALTH",
+        "IN_PERSON"
+      ]
     },
     "EncryptionContext":{
       "type":"structure",
@@ -593,6 +941,63 @@
       "type":"string",
       "pattern":"https?://[a-zA-Z0-9\\-._~:/?#\\[\\]@!$&'()*+,;=%]+"
     },
+    "FeedbackArtifactType":{
+      "type":"string",
+      "enum":[
+        "CLINICAL_DOC",
+        "MEDICAL_CODES"
+      ]
+    },
+    "FeedbackComments":{
+      "type":"string",
+      "max":4096,
+      "min":1,
+      "sensitive":true
+    },
+    "GetDatasetInput":{
+      "type":"structure",
+      "required":[
+        "domainId",
+        "datasetId"
+      ],
+      "members":{
+        "domainId":{
+          "shape":"DomainId",
+          "location":"uri",
+          "locationName":"domainId"
+        },
+        "datasetId":{
+          "shape":"DatasetId",
+          "location":"uri",
+          "locationName":"datasetId"
+        }
+      }
+    },
+    "GetDatasetOutput":{
+      "type":"structure",
+      "required":[
+        "arn",
+        "datasetId",
+        "name",
+        "type",
+        "config",
+        "status",
+        "createdAt",
+        "updatedAt"
+      ],
+      "members":{
+        "arn":{"shape":"DatasetArn"},
+        "datasetId":{"shape":"DatasetId"},
+        "name":{"shape":"BoundedSafeString"},
+        "type":{"shape":"DatasetType"},
+        "config":{"shape":"DatasetConfig"},
+        "status":{"shape":"DatasetStatus"},
+        "statusDetails":{"shape":"BoundedSafeString"},
+        "artifacts":{"shape":"DatasetArtifacts"},
+        "createdAt":{"shape":"Timestamp"},
+        "updatedAt":{"shape":"Timestamp"}
+      }
+    },
     "GetDomainInput":{
       "type":"structure",
       "required":["domainId"],
@@ -624,6 +1029,49 @@
         "webAppConfiguration":{"shape":"WebAppConfiguration"},
         "createdAt":{"shape":"Timestamp"},
         "tags":{"shape":"TagMap"}
+      }
+    },
+    "GetMedicalCodingJobRequest":{
+      "type":"structure",
+      "required":[
+        "domainId",
+        "jobId"
+      ],
+      "members":{
+        "domainId":{
+          "shape":"DomainId",
+          "location":"uri",
+          "locationName":"domainId"
+        },
+        "jobId":{
+          "shape":"JobId",
+          "location":"uri",
+          "locationName":"jobId"
+        }
+      }
+    },
+    "GetMedicalCodingJobResponse":{
+      "type":"structure",
+      "required":[
+        "jobId",
+        "jobArn",
+        "jobStatus",
+        "text",
+        "outputDataConfig"
+      ],
+      "members":{
+        "jobId":{"shape":"JobId"},
+        "jobArn":{"shape":"MedicalCodingJobArn"},
+        "jobStatus":{"shape":"JobStatus"},
+        "creationTime":{"shape":"SyntheticTimestamp_date_time"},
+        "updatedTime":{"shape":"SyntheticTimestamp_date_time"},
+        "text":{"shape":"SensitiveNonEmptyString"},
+        "patientContext":{"shape":"MedicalCodesPatientContext"},
+        "encounterContext":{"shape":"MedicalCodesEncounterContext"},
+        "outputDataConfig":{"shape":"MedicalCodingOutputDataConfig"},
+        "datasetId":{"shape":"DatasetId"},
+        "medicalCodingOutput":{"shape":"MedicalCodingOutput"},
+        "statusDetails":{"shape":"NonEmptyString"}
       }
     },
     "GetMedicalScribeListeningSessionInput":{
@@ -730,6 +1178,11 @@
         "subscription":{"shape":"SubscriptionDescription"}
       }
     },
+    "IdempotencyToken":{
+      "type":"string",
+      "max":128,
+      "min":1
+    },
     "InputDataConfig":{
       "type":"structure",
       "members":{
@@ -788,6 +1241,46 @@
     "KmsKeyArn":{
       "type":"string",
       "pattern":"arn:aws:kms:[a-z0-9-]+:[0-9]{12}:key/[a-f0-9-]+"
+    },
+    "ListDatasetsInput":{
+      "type":"structure",
+      "required":["domainId"],
+      "members":{
+        "domainId":{
+          "shape":"DomainId",
+          "location":"uri",
+          "locationName":"domainId"
+        },
+        "type":{
+          "shape":"DatasetType",
+          "location":"querystring",
+          "locationName":"type"
+        },
+        "nextToken":{
+          "shape":"String",
+          "location":"querystring",
+          "locationName":"nextToken"
+        },
+        "maxResults":{
+          "shape":"ListDatasetsInputMaxResultsInteger",
+          "location":"querystring",
+          "locationName":"maxResults"
+        }
+      }
+    },
+    "ListDatasetsInputMaxResultsInteger":{
+      "type":"integer",
+      "box":true,
+      "max":100,
+      "min":1
+    },
+    "ListDatasetsOutput":{
+      "type":"structure",
+      "required":["items"],
+      "members":{
+        "items":{"shape":"DatasetSummaryList"},
+        "nextToken":{"shape":"String"}
+      }
     },
     "ListDomainsInput":{
       "type":"structure",
@@ -875,6 +1368,10 @@
         "tags":{"shape":"TagMap"}
       }
     },
+    "Long":{
+      "type":"long",
+      "box":true
+    },
     "ManagedNoteTemplate":{
       "type":"string",
       "enum":[
@@ -898,6 +1395,115 @@
       "type":"structure",
       "members":{
         "templateType":{"shape":"ManagedNoteTemplate"}
+      }
+    },
+    "MedicalCodeGenerationResult":{
+      "type":"structure",
+      "members":{
+        "medicalCodesResult":{"shape":"ArtifactDetails"},
+        "jobId":{"shape":"JobId"}
+      }
+    },
+    "MedicalCodeGenerationSettings":{
+      "type":"structure",
+      "required":["enabled"],
+      "members":{
+        "enabled":{"shape":"Boolean"}
+      }
+    },
+    "MedicalCodeGenerationSettingsResponse":{
+      "type":"structure",
+      "members":{
+        "enabled":{"shape":"NonNullBoolean"}
+      }
+    },
+    "MedicalCodesEncounterContext":{
+      "type":"structure",
+      "members":{
+        "encounterType":{"shape":"EncounterType"},
+        "encounterReason":{"shape":"MedicalCodesEncounterContextEncounterReasonString"},
+        "afterHours":{"shape":"Boolean"},
+        "encounterDate":{"shape":"SensitiveIsoDateString"},
+        "encounterDurationMinutes":{"shape":"MedicalCodesEncounterContextEncounterDurationMinutesInteger"}
+      }
+    },
+    "MedicalCodesEncounterContextEncounterDurationMinutesInteger":{
+      "type":"integer",
+      "box":true,
+      "max":1440,
+      "min":1,
+      "sensitive":true
+    },
+    "MedicalCodesEncounterContextEncounterReasonString":{
+      "type":"string",
+      "max":256,
+      "min":0,
+      "pattern":"[a-zA-Z0-9 .,-]+",
+      "sensitive":true
+    },
+    "MedicalCodesPatientContext":{
+      "type":"structure",
+      "members":{
+        "sex":{"shape":"Sex"},
+        "status":{"shape":"PatientStatus"},
+        "dateOfBirth":{"shape":"SensitiveIsoDateString"},
+        "insurance":{"shape":"SensitiveNonEmptyString"}
+      }
+    },
+    "MedicalCodingContext":{
+      "type":"structure",
+      "members":{
+        "sex":{"shape":"Sex"},
+        "status":{"shape":"PatientStatus"},
+        "dateOfBirth":{"shape":"SensitiveIsoDateString"},
+        "encounterType":{"shape":"EncounterType"},
+        "encounterReason":{"shape":"MedicalCodingContextEncounterReasonString"},
+        "afterHours":{"shape":"Boolean"},
+        "encounterDate":{"shape":"SensitiveIsoDateString"}
+      }
+    },
+    "MedicalCodingContextEncounterReasonString":{
+      "type":"string",
+      "max":256,
+      "min":0,
+      "pattern":"[a-zA-Z0-9 .,-]+",
+      "sensitive":true
+    },
+    "MedicalCodingDatasetArtifacts":{
+      "type":"structure",
+      "members":{
+        "evaluationS3Uri":{"shape":"S3Uri"}
+      }
+    },
+    "MedicalCodingDatasetConfig":{
+      "type":"structure",
+      "required":[
+        "s3InputPath",
+        "s3OutputPath"
+      ],
+      "members":{
+        "s3InputPath":{"shape":"S3Uri"},
+        "s3OutputPath":{"shape":"S3Uri"}
+      }
+    },
+    "MedicalCodingJobArn":{
+      "type":"string",
+      "max":200,
+      "min":20,
+      "pattern":"arn:aws[-a-z]*:health-agent:[-a-z0-9]+:[0-9]{12}:domain/[-a-zA-Z0-9-]+/medical-coding-job/[-a-zA-Z0-9_/.]+"
+    },
+    "MedicalCodingOutput":{
+      "type":"structure",
+      "required":["uri"],
+      "members":{
+        "uri":{"shape":"S3Uri"}
+      }
+    },
+    "MedicalCodingOutputDataConfig":{
+      "type":"structure",
+      "required":["s3OutputPath"],
+      "members":{
+        "s3OutputPath":{"shape":"S3Uri"}
       }
     },
     "MedicalScribeAudioEvent":{
@@ -942,6 +1548,18 @@
       "max":1,
       "min":0
     },
+    "MedicalScribeChecklistEvent":{
+      "type":"structure",
+      "required":[
+        "snapshotVersion",
+        "checklists"
+      ],
+      "members":{
+        "snapshotVersion":{"shape":"Long"},
+        "checklists":{"shape":"ChecklistList"}
+      },
+      "event":true
+    },
     "MedicalScribeConfigurationEvent":{
       "type":"structure",
       "required":["postStreamActionSettings"],
@@ -982,6 +1600,7 @@
         "postStreamActionSettings":{"shape":"MedicalScribePostStreamActionSettingsResponse"},
         "postStreamActionResult":{"shape":"MedicalScribePostStreamActionsResult"},
         "encounterContextProvided":{"shape":"NonNullBoolean"},
+        "medicalCodingContextProvided":{"shape":"NonNullBoolean"},
         "streamStatus":{"shape":"MedicalScribeStreamStatus"},
         "streamCreationTime":{"shape":"Timestamp"},
         "streamEndTime":{"shape":"Timestamp"}
@@ -1005,7 +1624,9 @@
       "members":{
         "transcriptEvent":{"shape":"MedicalScribeTranscriptEvent"},
         "internalFailureException":{"shape":"InternalServerException"},
-        "validationException":{"shape":"ValidationException"}
+        "validationException":{"shape":"ValidationException"},
+        "periodontalChartEvent":{"shape":"MedicalScribePeriodontalChartEvent"},
+        "checklistEvent":{"shape":"MedicalScribeChecklistEvent"}
       },
       "eventstream":true
     },
@@ -1016,6 +1637,19 @@
         "CLINICIAN"
       ]
     },
+    "MedicalScribePeriodontalChartEvent":{
+      "type":"structure",
+      "required":[
+        "snapshotVersion",
+        "teeth"
+      ],
+      "members":{
+        "snapshotVersion":{"shape":"Long"},
+        "teeth":{"shape":"PeriodontalToothList"},
+        "reviewItems":{"shape":"PeriodontalReviewList"}
+      },
+      "event":true
+    },
     "MedicalScribePostStreamActionSettings":{
       "type":"structure",
       "required":[
@@ -1024,7 +1658,8 @@
       ],
       "members":{
         "outputS3Uri":{"shape":"S3Uri"},
-        "clinicalNoteGenerationSettings":{"shape":"ClinicalNoteGenerationSettings"}
+        "clinicalNoteGenerationSettings":{"shape":"ClinicalNoteGenerationSettings"},
+        "medicalCodeGenerationSettings":{"shape":"MedicalCodeGenerationSettings"}
       }
     },
     "MedicalScribePostStreamActionSettingsResponse":{
@@ -1035,13 +1670,15 @@
       ],
       "members":{
         "outputS3Uri":{"shape":"S3Uri"},
-        "clinicalNoteGenerationSettings":{"shape":"ClinicalNoteGenerationSettingsResponse"}
+        "clinicalNoteGenerationSettings":{"shape":"ClinicalNoteGenerationSettingsResponse"},
+        "medicalCodeGenerationSettings":{"shape":"MedicalCodeGenerationSettingsResponse"}
       }
     },
     "MedicalScribePostStreamActionsResult":{
       "type":"structure",
       "members":{
-        "clinicalNoteGenerationResult":{"shape":"ClinicalNoteGenerationResult"}
+        "clinicalNoteGenerationResult":{"shape":"ClinicalNoteGenerationResult"},
+        "medicalCodeGenerationResult":{"shape":"MedicalCodeGenerationResult"}
       }
     },
     "MedicalScribeSessionControlEvent":{
@@ -1136,12 +1773,131 @@
         "pronouns":{"shape":"Pronouns"}
       }
     },
+    "PatientStatus":{
+      "type":"string",
+      "enum":[
+        "NEW",
+        "ESTABLISHED"
+      ],
+      "sensitive":true
+    },
+    "PeriodontalGrade":{
+      "type":"integer",
+      "box":true,
+      "max":3,
+      "min":0
+    },
+    "PeriodontalProbingDepthMillimeters":{
+      "type":"integer",
+      "box":true,
+      "max":15,
+      "min":0
+    },
+    "PeriodontalRecessionMillimeters":{
+      "type":"integer",
+      "box":true,
+      "max":15,
+      "min":-5
+    },
+    "PeriodontalReview":{
+      "type":"structure",
+      "required":["reason"],
+      "members":{
+        "reason":{"shape":"PeriodontalReviewReason"},
+        "toothNumber":{"shape":"PeriodontalToothNumber"},
+        "sites":{"shape":"PeriodontalSiteNameList"}
+      },
+      "sensitive":true
+    },
+    "PeriodontalReviewList":{
+      "type":"list",
+      "member":{"shape":"PeriodontalReview"},
+      "max":100,
+      "min":0
+    },
+    "PeriodontalReviewReason":{
+      "type":"string",
+      "enum":[
+        "SITE_NOT_CHARTED",
+        "VALUE_NOT_CHARTED",
+        "READING_COUNT_MISMATCH",
+        "LINE_UNCLEAR",
+        "TOOTH_UNCLEAR",
+        "MISSING_TOOTH_CONFLICT",
+        "MEASUREMENT_NOT_CHARTED",
+        "SESSION_ISSUE"
+      ]
+    },
+    "PeriodontalSite":{
+      "type":"structure",
+      "required":["site"],
+      "members":{
+        "site":{"shape":"PeriodontalSiteName"},
+        "probingDepth":{"shape":"PeriodontalProbingDepthMillimeters"},
+        "recession":{"shape":"PeriodontalRecessionMillimeters"},
+        "bleeding":{"shape":"Boolean"},
+        "suppuration":{"shape":"Boolean"}
+      },
+      "sensitive":true
+    },
+    "PeriodontalSiteList":{
+      "type":"list",
+      "member":{"shape":"PeriodontalSite"},
+      "max":6,
+      "min":0
+    },
+    "PeriodontalSiteName":{
+      "type":"string",
+      "enum":[
+        "DB",
+        "B",
+        "MB",
+        "DL",
+        "L",
+        "ML"
+      ]
+    },
+    "PeriodontalSiteNameList":{
+      "type":"list",
+      "member":{"shape":"PeriodontalSiteName"},
+      "max":6,
+      "min":0
+    },
+    "PeriodontalTooth":{
+      "type":"structure",
+      "required":[
+        "toothNumber",
+        "missing"
+      ],
+      "members":{
+        "toothNumber":{"shape":"PeriodontalToothNumber"},
+        "missing":{"shape":"Boolean"},
+        "mobility":{"shape":"PeriodontalGrade"},
+        "furcation":{"shape":"PeriodontalGrade"},
+        "sites":{"shape":"PeriodontalSiteList"}
+      },
+      "sensitive":true
+    },
+    "PeriodontalToothList":{
+      "type":"list",
+      "member":{"shape":"PeriodontalTooth"},
+      "max":32,
+      "min":0
+    },
+    "PeriodontalToothNumber":{
+      "type":"integer",
+      "box":true,
+      "max":32,
+      "min":1
+    },
     "PostStreamArtifactGenerationStatus":{
       "type":"string",
       "enum":[
         "IN_PROGRESS",
         "FAILED",
-        "COMPLETED"
+        "COMPLETED",
+        "PENDING",
+        "SKIPPED"
       ]
     },
     "Pronouns":{
@@ -1229,9 +1985,55 @@
       "min":36,
       "pattern":".*[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}.*"
     },
+    "Sex":{
+      "type":"string",
+      "enum":[
+        "MALE",
+        "FEMALE",
+        "NON_BINARY",
+        "UNKNOWN"
+      ],
+      "sensitive":true
+    },
     "Specialty":{
       "type":"string",
       "enum":["PRIMARY_CARE"]
+    },
+    "StartMedicalCodingJobRequest":{
+      "type":"structure",
+      "required":[
+        "domainId",
+        "text",
+        "outputDataConfig"
+      ],
+      "members":{
+        "domainId":{
+          "shape":"DomainId",
+          "location":"uri",
+          "locationName":"domainId"
+        },
+        "text":{"shape":"SensitiveNonEmptyString"},
+        "patientContext":{"shape":"MedicalCodesPatientContext"},
+        "encounterContext":{"shape":"MedicalCodesEncounterContext"},
+        "outputDataConfig":{"shape":"MedicalCodingOutputDataConfig"},
+        "datasetId":{"shape":"DatasetId"},
+        "clientToken":{
+          "shape":"NonEmptyString",
+          "idempotencyToken":true
+        }
+      }
+    },
+    "StartMedicalCodingJobResponse":{
+      "type":"structure",
+      "required":[
+        "jobArn",
+        "jobId"
+      ],
+      "members":{
+        "jobArn":{"shape":"MedicalCodingJobArn"},
+        "jobId":{"shape":"JobId"},
+        "creationTime":{"shape":"SyntheticTimestamp_date_time"}
+      }
     },
     "StartMedicalScribeListeningSessionInput":{
       "type":"structure",
@@ -1362,6 +2164,36 @@
       }
     },
     "String":{"type":"string"},
+    "SubmitFeedbackRequest":{
+      "type":"structure",
+      "required":[
+        "domainId",
+        "artifactSourceId",
+        "artifactType",
+        "signedArtifactS3Uri"
+      ],
+      "members":{
+        "domainId":{
+          "shape":"DomainId",
+          "location":"uri",
+          "locationName":"domainId"
+        },
+        "artifactSourceId":{"shape":"ArtifactSourceId"},
+        "subscriptionId":{"shape":"SubscriptionId"},
+        "artifactType":{"shape":"FeedbackArtifactType"},
+        "signedArtifactS3Uri":{"shape":"S3Uri"},
+        "generatedArtifactS3Uri":{"shape":"S3Uri"},
+        "comments":{"shape":"FeedbackComments"},
+        "clientToken":{
+          "shape":"IdempotencyToken",
+          "idempotencyToken":true
+        }
+      }
+    },
+    "SubmitFeedbackResponse":{
+      "type":"structure",
+      "members":{}
+    },
     "SubscriptionArn":{
       "type":"string",
       "pattern":"arn:aws:health-agent:[a-z0-9-]+:[0-9]{12}:domain/(hai-|dom-)[a-z0-9]+/subscription/sub-[a-zA-Z0-9]{21}"

@@ -1018,11 +1018,15 @@ module Aws::Resiliencehubv2
       SENSITIVE: []
     end
 
-    class ListTestTemplatesRequest < Aws::EmptyStructure
+    class ListTestTemplatesRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
     end
 
     class ListTestTemplatesResponse
       attr_accessor test_templates: ::Array[Types::TestTemplateSummary]
+      attr_accessor next_token: ::String
       SENSITIVE: []
     end
 
@@ -1879,6 +1883,7 @@ module Aws::Resiliencehubv2
       attr_accessor test_template_arn: ::String
       attr_accessor report_configuration: Types::TestRunReportConfiguration
       attr_accessor policy: Types::TestRunPolicySnapshot
+      attr_accessor effective_policy_values: Types::TestRunEffectivePolicyValues
       attr_accessor report_output: Types::ReportGenerationResult
       attr_accessor region_switch_plan_arn: ::String
       attr_accessor region_switch_execution_id: ::String
@@ -1898,6 +1903,18 @@ module Aws::Resiliencehubv2
       attr_accessor location: ::String
       attr_accessor source_regions: ::Array[::String]
       attr_accessor provider: ::String
+      SENSITIVE: []
+    end
+
+    class TestRunEffectivePolicyValues
+      attr_accessor availability_slo: Types::SloSource
+      attr_accessor multi_az_rto: Types::TargetSource
+      attr_accessor multi_az_rpo: Types::TargetSource
+      attr_accessor multi_az_dr_approach: Types::DisasterRecoverySource
+      attr_accessor multi_region_rto: Types::TargetSource
+      attr_accessor multi_region_rpo: Types::TargetSource
+      attr_accessor multi_region_dr_approach: Types::DisasterRecoverySource
+      attr_accessor data_recovery_time_between_backups: Types::TargetSource
       SENSITIVE: []
     end
 

@@ -1,6 +1,46 @@
 Unreleased Changes
 ------------------
 
+1.76.0 (2026-11-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.75.0 (2026-11-17)
+------------------
+
+* Feature - Amazon Connect Customer now allows conversational analytics for voice contacts to be analyzed in more than one language. The languages detected will be present in the output.
+
+1.74.0 (2026-11-16)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.73.0 (2026-11-11)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.72.0 (2026-11-10)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.71.0 (2026-11-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.70.0 (2026-11-06)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.69.0 (2026-11-04)
+------------------
+
+* Feature - Rules TBAC GA (Contact Lens V1) - Adds an optional ListFilter (CategoriesAttributeFilter with OrConditions, AndCondition and TagCondition) to ListRealtimeContactAnalysisSegments. This filters matched categories by rule tags. It also adds an optional RuleId to CategoryDetails in the response.
+
 1.68.0 (2026-10-29)
 ------------------
 

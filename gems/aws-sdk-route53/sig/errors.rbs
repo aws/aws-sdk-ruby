@@ -50,10 +50,16 @@ module Aws
       class DelegationSetNotReusable < ServiceError
         def message: () -> ::String
       end
+      class FeatureNotEnabled < ServiceError
+        def message: () -> ::String
+      end
       class HealthCheckAlreadyExists < ServiceError
         def message: () -> ::String
       end
       class HealthCheckInUse < ServiceError
+        def message: () -> ::String
+      end
+      class HealthCheckSourceAlreadyExists < ServiceError
         def message: () -> ::String
       end
       class HealthCheckVersionMismatch < ServiceError
@@ -105,6 +111,10 @@ module Aws
       class InvalidPaginationToken < ServiceError
         def message: () -> ::String
       end
+      class InvalidResourceRecordSetProtectionBatch < ServiceError
+        def message: () -> ::String
+        def errors: () -> ::String
+      end
       class InvalidSigningStatus < ServiceError
         def message: () -> ::String
       end
@@ -153,6 +163,9 @@ module Aws
       class NoSuchHealthCheck < ServiceError
         def message: () -> ::String
       end
+      class NoSuchHealthCheckSource < ServiceError
+        def message: () -> ::String
+      end
       class NoSuchHostedZone < ServiceError
         def message: () -> ::String
       end
@@ -174,6 +187,10 @@ module Aws
       class PriorRequestNotComplete < ServiceError
         def message: () -> ::String
       end
+      class ProtectionAlreadyExists < ServiceError
+        def message: () -> ::String
+        def errors: () -> ::String
+      end
       class PublicZoneVPCAssociation < ServiceError
         def message: () -> ::String
       end
@@ -181,6 +198,9 @@ module Aws
         def message: () -> ::String
       end
       class ThrottlingException < ServiceError
+        def message: () -> ::String
+      end
+      class TooManyHealthCheckSources < ServiceError
         def message: () -> ::String
       end
       class TooManyHealthChecks < ServiceError

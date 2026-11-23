@@ -44,7 +44,7 @@ module Aws
                       provider: Array[
                         {
                           comparison: ("EQUALS"),
-                          value: ("AZURE")
+                          value: ("AZURE" | "GCP")
                         }
                       ]?
                     }
@@ -87,7 +87,7 @@ module Aws
                       provider: Array[
                         {
                           comparison: ("EQUALS"),
-                          value: ("AZURE")
+                          value: ("AZURE" | "GCP")
                         }
                       ]?
                     }
@@ -130,7 +130,7 @@ module Aws
                       provider: Array[
                         {
                           comparison: ("EQUALS"),
-                          value: ("AZURE")
+                          value: ("AZURE" | "GCP")
                         }
                       ]?
                     }

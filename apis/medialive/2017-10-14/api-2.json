@@ -5999,6 +5999,10 @@
         "SmartSubtitleSourceSettings": {
           "shape": "SmartSubtitleSourceSettings",
           "locationName": "smartSubtitleSourceSettings"
+        },
+        "WebvttSourceSettings": {
+          "shape": "WebvttSourceSettings",
+          "locationName": "webvttSourceSettings"
         }
       }
     },
@@ -6114,6 +6118,10 @@
         "InferenceSettings": {
           "shape": "DescribeInferenceSettings",
           "locationName": "inferenceSettings"
+        },
+        "JpegXsInputSpecification": {
+          "shape": "JpegXsInputSpecification",
+          "locationName": "jpegXsInputSpecification"
         }
       }
     },
@@ -6252,6 +6260,10 @@
         "InferenceSettings": {
           "shape": "DescribeInferenceSettings",
           "locationName": "inferenceSettings"
+        },
+        "JpegXsInputSpecification": {
+          "shape": "JpegXsInputSpecification",
+          "locationName": "jpegXsInputSpecification"
         }
       }
     },
@@ -6412,6 +6424,10 @@
         "InferenceSettings": {
           "shape": "InferenceSettings",
           "locationName": "inferenceSettings"
+        },
+        "JpegXsInputSpecification": {
+          "shape": "JpegXsInputSpecification",
+          "locationName": "jpegXsInputSpecification"
         }
       }
     },
@@ -6499,6 +6515,10 @@
         "InferenceSettings": {
           "shape": "InferenceSettings",
           "locationName": "inferenceSettings"
+        },
+        "JpegXsInputSpecification": {
+          "shape": "JpegXsInputSpecification",
+          "locationName": "jpegXsInputSpecification"
         }
       }
     },
@@ -7047,6 +7067,10 @@
         "InferenceSettings": {
           "shape": "DescribeInferenceSettings",
           "locationName": "inferenceSettings"
+        },
+        "JpegXsInputSpecification": {
+          "shape": "JpegXsInputSpecification",
+          "locationName": "jpegXsInputSpecification"
         }
       }
     },
@@ -7445,6 +7469,10 @@
         "InferenceSettings": {
           "shape": "DescribeInferenceSettings",
           "locationName": "inferenceSettings"
+        },
+        "JpegXsInputSpecification": {
+          "shape": "JpegXsInputSpecification",
+          "locationName": "jpegXsInputSpecification"
         }
       }
     },
@@ -8637,6 +8665,14 @@
         "StyleControl": {
           "shape": "EmbeddedDestinationStyleControl",
           "locationName": "styleControl"
+        },
+        "CaptionServiceChannel": {
+          "shape": "__integerMin1Max63",
+          "locationName": "captionServiceChannel"
+        },
+        "EmbeddedMode": {
+          "shape": "EmbeddedModeType",
+          "locationName": "embeddedMode"
         }
       }
     },
@@ -10672,7 +10708,8 @@
       "enum": [
         "MPEG2",
         "AVC",
-        "HEVC"
+        "HEVC",
+        "JPEGXS"
       ]
     },
     "InputDeblockFilter": {
@@ -14275,7 +14312,8 @@
         "HEVC",
         "AUDIO",
         "LINK",
-        "AV1"
+        "AV1",
+        "JPEGXS"
       ]
     },
     "ReservationMaximumBitrate": {
@@ -14283,7 +14321,8 @@
       "enum": [
         "MAX_10_MBPS",
         "MAX_20_MBPS",
-        "MAX_50_MBPS"
+        "MAX_50_MBPS",
+        "MAX_500_MBPS"
       ]
     },
     "ReservationMaximumFramerate": {
@@ -15136,6 +15175,10 @@
         "InferenceSettings": {
           "shape": "DescribeInferenceSettings",
           "locationName": "inferenceSettings"
+        },
+        "JpegXsInputSpecification": {
+          "shape": "JpegXsInputSpecification",
+          "locationName": "jpegXsInputSpecification"
         }
       }
     },
@@ -15497,6 +15540,10 @@
         "InferenceSettings": {
           "shape": "DescribeInferenceSettings",
           "locationName": "inferenceSettings"
+        },
+        "JpegXsInputSpecification": {
+          "shape": "JpegXsInputSpecification",
+          "locationName": "jpegXsInputSpecification"
         }
       }
     },
@@ -16086,6 +16133,10 @@
         "SpecialRouterSettings": {
           "shape": "SpecialRouterSettings",
           "locationName": "specialRouterSettings"
+        },
+        "JpegXsInputSpecification": {
+          "shape": "JpegXsInputSpecification",
+          "locationName": "jpegXsInputSpecification"
         }
       }
     },
@@ -16207,6 +16258,10 @@
         "SpecialRouterSettings": {
           "shape": "SpecialRouterSettings",
           "locationName": "specialRouterSettings"
+        },
+        "JpegXsInputSpecification": {
+          "shape": "JpegXsInputSpecification",
+          "locationName": "jpegXsInputSpecification"
         }
       },
       "required": [
@@ -17754,6 +17809,10 @@
         "InferenceSettings": {
           "shape": "DescribeInferenceSettings",
           "locationName": "inferenceSettings"
+        },
+        "JpegXsInputSpecification": {
+          "shape": "JpegXsInputSpecification",
+          "locationName": "jpegXsInputSpecification"
         }
       }
     },
@@ -25072,6 +25131,10 @@
         "WatermarkingSettings": {
           "shape": "MediaPackageV2WatermarkingSettings",
           "locationName": "watermarkingSettings"
+        },
+        "CaptionLanguageSetting": {
+          "shape": "MediaPackageV2CaptionLanguageSetting",
+          "locationName": "captionLanguageSetting"
         }
       }
     },
@@ -26262,6 +26325,66 @@
         "STRENGTH_1",
         "STRENGTH_2"
       ]
+    },
+    "MediaPackageV2CaptionLanguageSetting": {
+      "type": "string",
+      "enum": [
+        "AUTO",
+        "NONE"
+      ]
+    },
+    "JpegXsInputMaximumBitrate": {
+      "type": "string",
+      "enum": [
+        "MAX_500_MBPS"
+      ]
+    },
+    "JpegXsInputResolution": {
+      "type": "string",
+      "enum": [
+        "HD"
+      ]
+    },
+    "JpegXsInputSpecification": {
+      "type": "structure",
+      "members": {
+        "Codec": {
+          "shape": "InputCodec",
+          "locationName": "codec"
+        },
+        "MaximumBitrate": {
+          "shape": "JpegXsInputMaximumBitrate",
+          "locationName": "maximumBitrate"
+        },
+        "Resolution": {
+          "shape": "JpegXsInputResolution",
+          "locationName": "resolution"
+        }
+      }
+    },
+    "EmbeddedModeType": {
+      "type": "string",
+      "enum": [
+        "EMBEDDED_608_AND_708",
+        "EMBEDDED_608_ONLY",
+        "EMBEDDED_708_ONLY"
+      ]
+    },
+    "WebvttSourceSettings": {
+      "type": "structure",
+      "members": {
+        "GroupId": {
+          "shape": "__stringMin1",
+          "locationName": "groupId"
+        },
+        "Name": {
+          "shape": "__stringMin1",
+          "locationName": "name"
+        }
+      }
+    },
+    "__integerMin1Max63": {
+      "type": "integer"
     }
   }
 }

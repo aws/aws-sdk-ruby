@@ -46,10 +46,7 @@ module Aws
         end
       end
 
-      # TODO: Update retries to 2 and remove stub when new retries become default
       it 'raises a helpful error on possible incorrect regions' do
-        allow(Aws::Plugins::RetryErrors).to receive(:new_retries?).and_return(false)
-
         # simulate an error from connecting to an unknown endpoint
         stub_request(:any, /.*/).
           to_raise(SocketError.new("Failed to open TCP connection to s3.us-west-2a.amazonaws.com:443 (getaddrinfo: nodename nor servname provided, or not known"))
@@ -67,7 +64,7 @@ module Aws
         end
 
         expect(e).to be_kind_of(Errors::NoSuchEndpointError)
-        expect(e.context.retries).to be(3)
+        expect(e.context.retries).to be(2)
         expect(e.message).to include('us-east-1')
         expect(e.message).to include('us-west-1')
         expect(e.message).to include('cn-north-1')
@@ -113,6 +110,21 @@ Known AWS regions include (not specific to this service):
         client.stub_responses(:example_operation, string:'value')
         resp = client.example_operation
         expect(resp.string).to eq('value')
+      end
+
+      it 'supports response stubbing when Object defines stubs' do
+        original_stubs = Object.instance_method(:stubs) if
+          Object.instance_methods(false).include?(:stubs)
+        Object.send(:define_method, :stubs) do |_stubbed_methods|
+          raise 'Object#stubs should not be called'
+        end
+
+        client.stub_responses(:example_operation, string: 'value')
+        expect(client.example_operation.string).to eq('value')
+      ensure
+        Object.send(:remove_method, :stubs) if
+          Object.instance_methods(false).include?(:stubs)
+        Object.send(:define_method, :stubs, original_stubs) if original_stubs
       end
 
       it 'accepts a list of stubs' do

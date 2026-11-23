@@ -168,7 +168,7 @@ module Aws
           file_parts.each { |fp| expect(fp).to have_received(:close) }
         end
 
-        it 'reports when it is unable to abort a failed multipart upload', :jruby_flaky do
+        it 'reports when it is unable to abort a failed multipart upload' do
           client.stub_responses(:upload_part, lambda { |context|
             if context.params[:part_number] == 2
               RuntimeError.new('part failed')
@@ -180,6 +180,18 @@ module Aws
           expect do
             subject.upload(large_file, params)
           end.to raise_error(/failed to abort multipart upload: network-error. Multipart upload failed: part failed/)
+        end
+
+        it 'reports the error of every part when parts fail at the same time' do
+          calls = Queue.new
+          client.stub_responses(:upload_part, lambda { |_|
+            calls << :called
+            RuntimeError.new('part failed')
+          })
+          expect { subject.upload(large_file, params) }.to raise_error(MultipartUploadError) do |error|
+            expect(error.errors).to all(be_a(RuntimeError))
+            expect(error.errors.size).to eq(calls.size)
+          end
         end
 
         it 'aborts multipart upload when upload fails to complete' do

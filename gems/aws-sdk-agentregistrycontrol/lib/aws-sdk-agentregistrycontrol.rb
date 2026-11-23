@@ -23,7 +23,7 @@ Aws::Plugins::GlobalConfiguration.add_identifier(:agentregistrycontrol)
 # structure.
 #
 #     agent_registry_control = Aws::AgentRegistryControl::Client.new
-#     resp = agent_registry_control.create_registry(params)
+#     resp = agent_registry_control.associate_publisher(params)
 #
 # See {Client} for more information.
 #
@@ -55,7 +55,7 @@ module Aws::AgentRegistryControl
   autoload :EndpointProvider, 'aws-sdk-agentregistrycontrol/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-agentregistrycontrol/endpoints'
 
-  GEM_VERSION = '1.10.0'
+  GEM_VERSION = '1.20.0'
 
 end
 

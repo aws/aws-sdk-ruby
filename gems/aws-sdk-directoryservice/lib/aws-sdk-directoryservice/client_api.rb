@@ -1691,14 +1691,15 @@ module Aws::DirectoryService
         "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "ds",
         "jsonVersion" => "1.1",
-        "protocol" => "json",
-        "protocols" => ["json"],
+        "protocol" => "smithy-rpc-v2-cbor",
+        "protocols" => ["smithy-rpc-v2-cbor", "json"],
         "serviceAbbreviation" => "Directory Service",
         "serviceFullName" => "AWS Directory Service",
         "serviceId" => "Directory Service",
         "signatureVersion" => "v4",
         "targetPrefix" => "DirectoryService_20150416",
         "uid" => "ds-2015-04-16",
+        "xmlNamespace" => "http://directoryservice.amazonaws.com/doc/2015-04-16/",
       }
 
       api.add_operation(:accept_shared_directory, Seahorse::Model::Operation.new.tap do |o|

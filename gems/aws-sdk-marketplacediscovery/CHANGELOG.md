@@ -1,6 +1,46 @@
 Unreleased Changes
 ------------------
 
+1.23.0 (2026-11-20)
+------------------
+
+* Feature - AWS Marketplace Discovery adds ListListingAttributes, an API for trust center, case study, and specialization details. SearchListings adds summaries, seller engagements and filters. GetListing and GetProduct return purchase indicators when products cannot be subscribed to or require no subscription.
+
+1.22.0 (2026-11-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.21.0 (2026-11-16)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.20.0 (2026-11-11)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.19.0 (2026-11-10)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.18.0 (2026-11-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.17.0 (2026-11-06)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.16.0 (2026-11-04)
+------------------
+
+* Feature - GetListing and SearchListings APIs now return G2 and PeerSpot review sources in review summaries.
+
 1.15.0 (2026-10-29)
 ------------------
 

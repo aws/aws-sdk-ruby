@@ -165,6 +165,92 @@ module Aws::BedrockAgentCoreControl
       include Aws::Structure
     end
 
+    # Contains the encryption mode and key configuration used to encrypt new
+    # Agent Insights in an Agent Insight Store.
+    #
+    # @!attribute [rw] mode
+    #   Specifies the encryption mode used to protect new Agent Insights.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_key_arn
+    #   Specifies the Amazon Resource Name (ARN) of the customer managed AWS
+    #   KMS key that you use to encrypt new Agent Insights. This field is
+    #   required when `mode` is `CUSTOMER_MANAGED_KMS` and cannot be
+    #   specified when `mode` is `AWS_OWNED_KMS_KEY`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/AgentInsightStoreEncryptionConfiguration AWS API Documentation
+    #
+    class AgentInsightStoreEncryptionConfiguration < Struct.new(
+      :mode,
+      :kms_key_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains summary information about an Agent Insight Store.
+    #
+    # @!attribute [rw] agent_insight_store_arn
+    #   The Amazon Resource Name (ARN) of the Agent Insight Store.
+    #   @return [String]
+    #
+    # @!attribute [rw] agent_insight_store_id
+    #   The unique identifier of the Agent Insight Store.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current lifecycle status of the Agent Insight Store. Valid
+    #   values:
+    #
+    #   ACTIVE
+    #
+    #   : The store is available.
+    #
+    #   UPDATING
+    #
+    #   : The service is applying a requested change.
+    #
+    #   INACTIVE
+    #
+    #   : The store does not accept new Agent Insights.
+    #
+    #   ERROR
+    #
+    #   : The store requires intervention.
+    #   @return [String]
+    #
+    # @!attribute [rw] enablement_status
+    #   Specifies whether the Agent Insight Store accepts new Agent
+    #   Insights. The default value is enabled.
+    #   @return [String]
+    #
+    # @!attribute [rw] encryption_configuration
+    #   Specifies the encryption mode and key configuration that encrypts
+    #   new Agent Insights and protects the data at rest.
+    #   @return [Types::AgentInsightStoreEncryptionConfiguration]
+    #
+    # @!attribute [rw] created_at
+    #   The date and time when the Agent Insight Store was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The date and time when the Agent Insight Store was last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/AgentInsightStoreSummary AWS API Documentation
+    #
+    class AgentInsightStoreSummary < Struct.new(
+      :agent_insight_store_arn,
+      :agent_insight_store_id,
+      :status,
+      :enablement_status,
+      :encryption_configuration,
+      :created_at,
+      :updated_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains information about an agent runtime. An agent runtime is the
     # execution environment for a Amazon Bedrock AgentCore Agent.
     #
@@ -752,6 +838,25 @@ module Aws::BedrockAgentCoreControl
       include Aws::Structure
     end
 
+    # The configuration for an AWS Billing payment connector. Payments made
+    # through an AWS Billing payment connector are charged to the AWS
+    # account that owns the payment manager, and appear on that account's
+    # AWS bill as AWS Marketplace charges.
+    #
+    # @!attribute [rw] iam_role_arn
+    #   The Amazon Resource Name (ARN) of the AWS Marketplace service-linked
+    #   role in the account that owns the payment manager. The service sets
+    #   this value when it creates the connector.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/AwsBillingConnectorConfiguration AWS API Documentation
+    #
+    class AwsBillingConnectorConfiguration < Struct.new(
+      :iam_role_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] gateway_identifier
     #   The unique identifier of the gateway.
     #   @return [String]
@@ -1051,6 +1156,24 @@ module Aws::BedrockAgentCoreControl
       include Aws::Structure
     end
 
+    # The lifecycle hooks that run when you create or update the AgentCore
+    # Runtime, before any sessions are created.
+    #
+    # @!attribute [rw] warmup
+    #   The hook that warms up your agent before any sessions are created.
+    #   Use this hook to load the resources that your sessions need, such as
+    #   models, libraries, or caches. Your hook must complete within 120
+    #   seconds.
+    #   @return [Types::LifecycleHook]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/BuildLifecycleHooks AWS API Documentation
+    #
+    class BuildLifecycleHooks < Struct.new(
+      :warmup)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Configuration for customer-managed compute capacity for the AgentCore
     # Runtime. A capacity provider runs the AgentCore Runtime on the
     # Instances compute type, using Amazon Web Services managed compute in
@@ -1061,10 +1184,16 @@ module Aws::BedrockAgentCoreControl
     #   the AgentCore Runtime.
     #   @return [String]
     #
+    # @!attribute [rw] operating_system_configuration
+    #   The operating system configuration of the agents that Amazon Bedrock
+    #   AgentCore Runtime runs on the capacity provider.
+    #   @return [Types::OperatingSystemConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/CapacityProviderConfiguration AWS API Documentation
     #
     class CapacityProviderConfiguration < Struct.new(
-      :capacity_provider_arn)
+      :capacity_provider_arn,
+      :operating_system_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1229,11 +1358,11 @@ module Aws::BedrockAgentCoreControl
     end
 
     # A reference to a private certificate authority (CA) certificate that
-    # the gateway uses to verify TLS connections to the target endpoint. Use
-    # this when the target presents a certificate issued by a private CA
-    # that is not trusted by default. Specify exactly one certificate
-    # source. The configuration is a reference only and never contains the
-    # certificate content.
+    # AgentCore uses to verify TLS connections to an endpoint, such as a
+    # gateway target or an identity provider, that presents a certificate
+    # issued by a private CA that is not trusted by default. Specify exactly
+    # one certificate source. The configuration is a reference only and
+    # never contains the certificate content.
     #
     # @note CertificateConfiguration is a union - when making an API calls you must set exactly one of the members.
     #
@@ -2225,6 +2354,29 @@ module Aws::BedrockAgentCoreControl
       include Aws::Structure
     end
 
+    # The CPU configuration for capacity provider instances, including
+    # nested virtualization.
+    #
+    # @!attribute [rw] nested_virtualization
+    #   Specifies whether your agents can use hardware virtualization on
+    #   their instances. The following values are possible:
+    #
+    #   * `ENABLED` – Your agents can use hardware virtualization on their
+    #     instances. To use this value, choose the `LINUX_X86_64` operating
+    #     system and instance types that support nested virtualization.
+    #
+    #   * `DISABLED` – Your agents can't use hardware virtualization on
+    #     their instances. This is the default.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/CpuOptions AWS API Documentation
+    #
+    class CpuOptions < Struct.new(
+      :nested_virtualization)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] agent_runtime_id
     #   The unique identifier of the AgentCore Runtime to create an endpoint
     #   for.
@@ -2358,6 +2510,13 @@ module Aws::BedrockAgentCoreControl
     #   The life cycle configuration for the AgentCore Runtime.
     #   @return [Types::LifecycleConfiguration]
     #
+    # @!attribute [rw] hooks_configuration
+    #   The lifecycle hooks configuration for the AgentCore Runtime. Use
+    #   lifecycle hooks to run actions in the agent's container at fixed
+    #   points in the runtime's lifecycle, such as warming up the agent
+    #   before sessions are created.
+    #   @return [Types::RuntimeHooksConfiguration]
+    #
     # @!attribute [rw] environment_variables
     #   Environment variables to set in the AgentCore Runtime environment.
     #   @return [Hash<String,String>]
@@ -2394,6 +2553,12 @@ module Aws::BedrockAgentCoreControl
     #   excluding the reserved port `8443`.
     #   @return [Array<Types::AllowedPort>]
     #
+    # @!attribute [rw] resource_configurations
+    #   The resource configurations for the AgentCore Runtime, such as the
+    #   minimum amount of memory to allocate to the runtime. You can specify
+    #   at most one resource configuration.
+    #   @return [Array<Types::ResourceConfiguration>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/CreateAgentRuntimeRequest AWS API Documentation
     #
     class CreateAgentRuntimeRequest < Struct.new(
@@ -2407,12 +2572,14 @@ module Aws::BedrockAgentCoreControl
       :request_header_configuration,
       :protocol_configuration,
       :lifecycle_configuration,
+      :hooks_configuration,
       :environment_variables,
       :filesystem_configurations,
       :capacity_provider_configuration,
       :tags,
       :platform_version,
-      :allowed_ports)
+      :allowed_ports,
+      :resource_configurations)
       SENSITIVE = [:description, :environment_variables]
       include Aws::Structure
     end
@@ -3530,6 +3697,12 @@ module Aws::BedrockAgentCoreControl
     #   tags.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] domain_override
+    #   The public domain names that the gateway advertises in its OAuth
+    #   discovery URLs instead of the inbound Host header. Specify this when
+    #   clients reach the gateway through your own proxy or custom domain.
+    #   @return [Types::DomainOverride]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/CreateGatewayRequest AWS API Documentation
     #
     class CreateGatewayRequest < Struct.new(
@@ -3545,7 +3718,8 @@ module Aws::BedrockAgentCoreControl
       :interceptor_configurations,
       :policy_engine_configuration,
       :exception_level,
-      :tags)
+      :tags,
+      :domain_override)
       SENSITIVE = [:description]
       include Aws::Structure
     end
@@ -3650,6 +3824,11 @@ module Aws::BedrockAgentCoreControl
     #   The Amazon Web Services WAF configuration for the gateway.
     #   @return [Types::WafConfiguration]
     #
+    # @!attribute [rw] domain_override
+    #   The public domain names that the gateway advertises in its OAuth
+    #   discovery URLs instead of the inbound Host header.
+    #   @return [Types::DomainOverride]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/CreateGatewayResponse AWS API Documentation
     #
     class CreateGatewayResponse < Struct.new(
@@ -3674,7 +3853,8 @@ module Aws::BedrockAgentCoreControl
       :workload_identity_details,
       :exception_level,
       :web_acl_arn,
-      :waf_configuration)
+      :waf_configuration,
+      :domain_override)
       SENSITIVE = [:description]
       include Aws::Structure
     end
@@ -4177,8 +4357,8 @@ module Aws::BedrockAgentCoreControl
     #   @return [String]
     #
     # @!attribute [rw] event_expiry_duration
-    #   The duration after which memory events expire. Specified as an ISO
-    #   8601 duration.
+    #   The number of days after which memory events expire, between 7 and
+    #   3650 days.
     #   @return [Integer]
     #
     # @!attribute [rw] memory_strategies
@@ -4494,6 +4674,12 @@ module Aws::BedrockAgentCoreControl
     #   The credential provider configurations for the payment connector.
     #   These configurations specify how the connector authenticates with
     #   the payment provider.
+    #
+    #   For an `AwsBilling` payment connector, omit this parameter or
+    #   specify an empty list. The service uses the AWS Marketplace
+    #   service-linked role in your account, which must exist before you
+    #   create the connector, and you must have permission to call
+    #   `iam:GetRole` on it.
     #   @return [Array<Types::CredentialsProviderConfiguration>]
     #
     # @!attribute [rw] provision_mode
@@ -5361,9 +5547,9 @@ module Aws::BedrockAgentCoreControl
       class Unknown < CredentialRotationConfig; end
     end
 
-    # The credential provider configuration for a payment connector.
-    # Specifies the payment provider type and its associated credential
-    # provider.
+    # The configuration for a payment connector. Specifies the payment
+    # provider type and either its associated credential provider or, for an
+    # AWS Billing payment connector, its billing configuration.
     #
     # @note CredentialsProviderConfiguration is a union - when making an API calls you must set exactly one of the members.
     #
@@ -5379,11 +5565,19 @@ module Aws::BedrockAgentCoreControl
     #   connector.
     #   @return [Types::PaymentCredentialProviderConfiguration]
     #
+    # @!attribute [rw] aws_billing
+    #   The configuration for an AWS Billing payment connector. The service
+    #   sets this configuration when it creates the connector and returns it
+    #   in responses. Don't specify it when you create an AWS Billing
+    #   payment connector.
+    #   @return [Types::AwsBillingConnectorConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/CredentialsProviderConfiguration AWS API Documentation
     #
     class CredentialsProviderConfiguration < Struct.new(
       :coinbase_cdp,
       :stripe_privy,
+      :aws_billing,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
@@ -5391,6 +5585,7 @@ module Aws::BedrockAgentCoreControl
 
       class CoinbaseCdp < CredentialsProviderConfiguration; end
       class StripePrivy < CredentialsProviderConfiguration; end
+      class AwsBilling < CredentialsProviderConfiguration; end
       class Unknown < CredentialsProviderConfiguration; end
     end
 
@@ -5687,6 +5882,16 @@ module Aws::BedrockAgentCoreControl
     #   configuration.
     #   @return [Array<Types::PrivateEndpointOverride>]
     #
+    # @!attribute [rw] certificate_configurations
+    #   The private certificate authority (CA) configurations for the
+    #   identity provider. Use this to have AgentCore Identity trust a
+    #   private CA when establishing TLS connections to identity provider
+    #   endpoints. You can specify only one certificate authority
+    #   configuration in this list. Provide the certificate by reference to
+    #   an Amazon S3 object or an Amazon Web Services Secrets Manager
+    #   secret. You can use this only together with `privateEndpoint`.
+    #   @return [Array<Types::CertificateConfiguration>]
+    #
     # @!attribute [rw] allowed_workload_configuration
     #   The configuration that restricts which workloads in the request's
     #   identity chain are allowed to invoke the target, identified by their
@@ -5706,6 +5911,7 @@ module Aws::BedrockAgentCoreControl
       :custom_claims,
       :private_endpoint,
       :private_endpoint_overrides,
+      :certificate_configurations,
       :allowed_workload_configuration)
       SENSITIVE = []
       include Aws::Structure
@@ -5815,6 +6021,16 @@ module Aws::BedrockAgentCoreControl
     #   configuration.
     #   @return [Array<Types::PrivateEndpointOverride>]
     #
+    # @!attribute [rw] certificate_configurations
+    #   The private certificate authority (CA) configurations for the
+    #   identity provider. Use this to have AgentCore Identity trust a
+    #   private CA when establishing TLS connections to identity provider
+    #   endpoints. You can specify only one certificate authority
+    #   configuration in this list. Provide the certificate by reference to
+    #   an Amazon S3 object or an Amazon Web Services Secrets Manager
+    #   secret. You can use this only together with `privateEndpoint`.
+    #   @return [Array<Types::CertificateConfiguration>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/CustomOauth2ProviderConfigInput AWS API Documentation
     #
     class CustomOauth2ProviderConfigInput < Struct.new(
@@ -5827,7 +6043,8 @@ module Aws::BedrockAgentCoreControl
       :client_authentication_method,
       :private_key_jwt_config,
       :private_endpoint,
-      :private_endpoint_overrides)
+      :private_endpoint_overrides,
+      :certificate_configurations)
       SENSITIVE = [:client_secret]
       include Aws::Structure
     end
@@ -5862,6 +6079,16 @@ module Aws::BedrockAgentCoreControl
     #   configuration.
     #   @return [Array<Types::PrivateEndpointOverride>]
     #
+    # @!attribute [rw] certificate_configurations
+    #   The private certificate authority (CA) configurations for the
+    #   identity provider. Use this to have AgentCore Identity trust a
+    #   private CA when establishing TLS connections to identity provider
+    #   endpoints. You can specify only one certificate authority
+    #   configuration in this list. Provide the certificate by reference to
+    #   an Amazon S3 object or an Amazon Web Services Secrets Manager
+    #   secret. You can use this only together with `privateEndpoint`.
+    #   @return [Array<Types::CertificateConfiguration>]
+    #
     # @!attribute [rw] private_key_jwt_config
     #   The configuration for private\_key\_jwt client authentication used
     #   by this OAuth2 credential provider.
@@ -5876,6 +6103,7 @@ module Aws::BedrockAgentCoreControl
       :client_authentication_method,
       :private_endpoint,
       :private_endpoint_overrides,
+      :certificate_configurations,
       :private_key_jwt_config)
       SENSITIVE = []
       include Aws::Structure
@@ -6029,6 +6257,11 @@ module Aws::BedrockAgentCoreControl
     #   The number of examples in the dataset.
     #   @return [Integer]
     #
+    # @!attribute [rw] example_count_by_field
+    #   The number of examples that have each field, for the DRAFT. Absent
+    #   when the counts are unknown.
+    #   @return [Types::ExampleCountByField]
+    #
     # @!attribute [rw] created_at
     #   The timestamp when the dataset was created.
     #   @return [Time]
@@ -6048,6 +6281,7 @@ module Aws::BedrockAgentCoreControl
       :draft_status,
       :schema_type,
       :example_count,
+      :example_count_by_field,
       :created_at,
       :updated_at)
       SENSITIVE = []
@@ -6064,6 +6298,11 @@ module Aws::BedrockAgentCoreControl
     #   The number of examples in this version.
     #   @return [Integer]
     #
+    # @!attribute [rw] example_count_by_field
+    #   The number of examples that have each field, for this version.
+    #   Absent when the counts are unknown.
+    #   @return [Types::ExampleCountByField]
+    #
     # @!attribute [rw] created_at
     #   The timestamp when this version was published.
     #   @return [Time]
@@ -6073,6 +6312,7 @@ module Aws::BedrockAgentCoreControl
     class DatasetVersionSummary < Struct.new(
       :dataset_version,
       :example_count,
+      :example_count_by_field,
       :created_at)
       SENSITIVE = []
       include Aws::Structure
@@ -7391,6 +7631,35 @@ module Aws::BedrockAgentCoreControl
       class Unknown < DimensionRatingScale; end
     end
 
+    # The public domain names for a gateway that clients reach through your
+    # own proxy or custom domain. When you configure a domain override, the
+    # gateway advertises these domains instead of the inbound Host header in
+    # the URLs that it returns for OAuth discovery, such as the protected
+    # resource metadata and the `WWW-Authenticate` challenge.
+    #
+    # @!attribute [rw] default_domain
+    #   The default public domain name for the gateway. The gateway
+    #   advertises this domain when a request doesn't select a specific
+    #   domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] alternate_domains
+    #   Additional public domain names for the gateway, up to 10. Don't
+    #   repeat the default domain or list a domain more than once. A request
+    #   can select one of these domains, or the default domain, with the
+    #   `x-amzn-bedrock-agentcore-gateway-domain` header. The gateway
+    #   rejects a request that selects a domain that isn't configured.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/DomainOverride AWS API Documentation
+    #
+    class DomainOverride < Struct.new(
+      :default_domain,
+      :alternate_domains)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The configuration for an Amazon EBS-backed persistent volume. The
     # service creates persistent volumes when a session first launches, and
     # the volumes survive instance termination. The volumes persist until
@@ -8164,6 +8433,73 @@ module Aws::BedrockAgentCoreControl
       include Aws::Structure
     end
 
+    # The number of examples that have each field. An example can have more
+    # than one of these fields, so the counts can add up to more than
+    # `exampleCount`.
+    #
+    # @!attribute [rw] turns
+    #   The number of examples that have `turns`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] input
+    #   The number of examples that have `input`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] actor_profile
+    #   The number of examples that have `actor_profile`.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/ExampleCountByField AWS API Documentation
+    #
+    class ExampleCountByField < Struct.new(
+      :turns,
+      :input,
+      :actor_profile)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A condition on the number of examples that have the given fields. The
+    # count includes each example that has at least one of the fields in
+    # `anyOf`.
+    #
+    # @!attribute [rw] any_of
+    #   The fields to count. An example counts if it has at least one of
+    #   these fields. Required.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] min
+    #   The minimum count, inclusive.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max
+    #   The maximum count, inclusive.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/ExampleCountByFieldCondition AWS API Documentation
+    #
+    class ExampleCountByFieldCondition < Struct.new(
+      :any_of,
+      :min,
+      :max)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A condition on the fields of an example.
+    #
+    # @!attribute [rw] any_of
+    #   Matches examples that have at least one of these fields. Required.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/ExampleFieldCondition AWS API Documentation
+    #
+    class ExampleFieldCondition < Struct.new(
+      :any_of)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Configuration for metadata extraction from conversational content.
     #
     # @note ExtractionConfig is a union - when making an API calls you must set exactly one of the members.
@@ -8376,6 +8712,11 @@ module Aws::BedrockAgentCoreControl
     #   on the capacity provider, referenced by its logical name.
     #   @return [Types::CapacityProviderVolumeConfiguration]
     #
+    # @!attribute [rw] s3_bucket_mount
+    #   Mounts an Amazon S3 bucket as a file system in the AgentCore
+    #   Runtime.
+    #   @return [Types::S3BucketMountConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/FilesystemConfiguration AWS API Documentation
     #
     class FilesystemConfiguration < Struct.new(
@@ -8383,6 +8724,7 @@ module Aws::BedrockAgentCoreControl
       :s3_files_access_point,
       :efs_access_point,
       :capacity_provider_volume,
+      :s3_bucket_mount,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
@@ -8392,6 +8734,7 @@ module Aws::BedrockAgentCoreControl
       class S3FilesAccessPoint < FilesystemConfiguration; end
       class EfsAccessPoint < FilesystemConfiguration; end
       class CapacityProviderVolume < FilesystemConfiguration; end
+      class S3BucketMount < FilesystemConfiguration; end
       class Unknown < FilesystemConfiguration; end
     end
 
@@ -8530,12 +8873,36 @@ module Aws::BedrockAgentCoreControl
     #   specifies how the input to the interceptor is constructed
     #   @return [Types::InterceptorInputConfiguration]
     #
+    # @!attribute [rw] response_interception_mode
+    #   Specifies how the interceptor processes streamed target responses.
+    #   You can set this field only on an interceptor that includes the
+    #   `RESPONSE` interception point. Valid values include:
+    #
+    #   * `BUFFERED` - The gateway collects the complete target response and
+    #     then invokes the interceptor once. This is the default.
+    #
+    #   * `STREAM` - The gateway sends a streamed target response to the
+    #     interceptor in batches of events and returns each processed batch
+    #     to the client as soon as it's ready. Non-streamed responses still
+    #     use `BUFFERED` processing. If you specify `STREAM`, you must also
+    #     specify `responseStreamingConfiguration`, and the input
+    #     configuration can't exclude the response body.
+    #   @return [String]
+    #
+    # @!attribute [rw] response_streaming_configuration
+    #   Specifies the batching settings for a streamed response. Specify
+    #   this field only when `responseInterceptionMode` is `STREAM`. You
+    #   must specify it for `STREAM`.
+    #   @return [Types::ResponseStreamingConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/GatewayInterceptorConfiguration AWS API Documentation
     #
     class GatewayInterceptorConfiguration < Struct.new(
       :interceptor,
       :interception_points,
-      :input_configuration)
+      :input_configuration,
+      :response_interception_mode,
+      :response_streaming_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8867,6 +9234,86 @@ module Aws::BedrockAgentCoreControl
       include Aws::Structure
     end
 
+    # @!attribute [rw] agent_insight_store_id
+    #   Specifies the unique identifier of the Agent Insight Store to
+    #   retrieve.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/GetAgentInsightStoreRequest AWS API Documentation
+    #
+    class GetAgentInsightStoreRequest < Struct.new(
+      :agent_insight_store_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] agent_insight_store_arn
+    #   The Amazon Resource Name (ARN) of the Agent Insight Store.
+    #   @return [String]
+    #
+    # @!attribute [rw] agent_insight_store_id
+    #   The unique identifier of the Agent Insight Store.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current lifecycle status of the Agent Insight Store. Valid
+    #   values:
+    #
+    #   ACTIVE
+    #
+    #   : The store is available.
+    #
+    #   UPDATING
+    #
+    #   : The service is applying a requested change.
+    #
+    #   INACTIVE
+    #
+    #   : The store does not accept new Agent Insights.
+    #
+    #   ERROR
+    #
+    #   : The store requires intervention.
+    #   @return [String]
+    #
+    # @!attribute [rw] enablement_status
+    #   Specifies whether the Agent Insight Store accepts new Agent
+    #   Insights. The default value is enabled.
+    #   @return [String]
+    #
+    # @!attribute [rw] encryption_configuration
+    #   Specifies the encryption mode and key configuration that encrypts
+    #   new Agent Insights and protects the data at rest.
+    #   @return [Types::AgentInsightStoreEncryptionConfiguration]
+    #
+    # @!attribute [rw] created_at
+    #   The date and time when the Agent Insight Store was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The date and time when the Agent Insight Store was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] failure_reason
+    #   Describes the failure that prevented the Agent Insight Store from
+    #   reaching its requested lifecycle status.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/GetAgentInsightStoreResponse AWS API Documentation
+    #
+    class GetAgentInsightStoreResponse < Struct.new(
+      :agent_insight_store_arn,
+      :agent_insight_store_id,
+      :status,
+      :enablement_status,
+      :encryption_configuration,
+      :created_at,
+      :updated_at,
+      :failure_reason)
+      SENSITIVE = [:failure_reason]
+      include Aws::Structure
+    end
+
     # @!attribute [rw] agent_runtime_id
     #   The unique identifier of the AgentCore Runtime associated with the
     #   endpoint.
@@ -9007,6 +9454,10 @@ module Aws::BedrockAgentCoreControl
     #   The life cycle configuration for the AgentCore Runtime.
     #   @return [Types::LifecycleConfiguration]
     #
+    # @!attribute [rw] hooks_configuration
+    #   The lifecycle hooks configuration for the AgentCore Runtime.
+    #   @return [Types::RuntimeHooksConfiguration]
+    #
     # @!attribute [rw] failure_reason
     #   The reason for failure if the AgentCore Runtime is in a failed
     #   state.
@@ -9064,6 +9515,10 @@ module Aws::BedrockAgentCoreControl
     #   through the runtime's session URL.
     #   @return [Array<Types::AllowedPort>]
     #
+    # @!attribute [rw] resource_configurations
+    #   The resource configurations for the AgentCore Runtime.
+    #   @return [Array<Types::ResourceConfiguration>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/GetAgentRuntimeResponse AWS API Documentation
     #
     class GetAgentRuntimeResponse < Struct.new(
@@ -9077,6 +9532,7 @@ module Aws::BedrockAgentCoreControl
       :network_configuration,
       :status,
       :lifecycle_configuration,
+      :hooks_configuration,
       :failure_reason,
       :description,
       :workload_identity_details,
@@ -9089,7 +9545,8 @@ module Aws::BedrockAgentCoreControl
       :filesystem_configurations,
       :capacity_provider_configuration,
       :platform_version,
-      :allowed_ports)
+      :allowed_ports,
+      :resource_configurations)
       SENSITIVE = [:description, :environment_variables]
       include Aws::Structure
     end
@@ -9787,6 +10244,11 @@ module Aws::BedrockAgentCoreControl
     #   The number of examples in the DRAFT.
     #   @return [Integer]
     #
+    # @!attribute [rw] example_count_by_field
+    #   The number of examples that have each field, for the resolved
+    #   version. Absent when the counts are unknown.
+    #   @return [Types::ExampleCountByField]
+    #
     # @!attribute [rw] download_url
     #   Presigned Amazon S3 URL to download the consolidated dataset file
     #   for the resolved version. Expires after 5 minutes. Omitted if the
@@ -9823,6 +10285,7 @@ module Aws::BedrockAgentCoreControl
       :schema_type,
       :kms_key_arn,
       :example_count,
+      :example_count_by_field,
       :download_url,
       :download_url_expires_at,
       :created_at,
@@ -10127,6 +10590,11 @@ module Aws::BedrockAgentCoreControl
     #   The Amazon Web Services WAF configuration for the gateway.
     #   @return [Types::WafConfiguration]
     #
+    # @!attribute [rw] domain_override
+    #   The public domain names that the gateway advertises in its OAuth
+    #   discovery URLs instead of the inbound Host header.
+    #   @return [Types::DomainOverride]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/GetGatewayResponse AWS API Documentation
     #
     class GetGatewayResponse < Struct.new(
@@ -10151,7 +10619,8 @@ module Aws::BedrockAgentCoreControl
       :workload_identity_details,
       :exception_level,
       :web_acl_arn,
-      :waf_configuration)
+      :waf_configuration,
+      :domain_override)
       SENSITIVE = [:description]
       include Aws::Structure
     end
@@ -12042,11 +12511,11 @@ module Aws::BedrockAgentCoreControl
     #   @return [String]
     #
     # @!attribute [rw] lifecycle_configuration
-    #   LifecycleConfiguration lets you manage the lifecycle of runtime
-    #   sessions and resources in AgentCore Runtime. This configuration
-    #   helps optimize resource utilization by automatically cleaning up
-    #   idle sessions and preventing long-running instances from consuming
-    #   resources indefinitely.
+    #   The lifecycle configuration for the harness's runtime environment.
+    #   For a harness, `idleRuntimeSessionTimeout` and `maxLifetime` each
+    #   accept a value between 60 and 28800 seconds (8 hours), and
+    #   `idleRuntimeSessionTimeout` must be less than or equal to
+    #   `maxLifetime`.
     #   @return [Types::LifecycleConfiguration]
     #
     # @!attribute [rw] network_configuration
@@ -12073,11 +12542,12 @@ module Aws::BedrockAgentCoreControl
     # The AgentCore Runtime environment request configuration.
     #
     # @!attribute [rw] lifecycle_configuration
-    #   LifecycleConfiguration lets you manage the lifecycle of runtime
-    #   sessions and resources in AgentCore Runtime. This configuration
-    #   helps optimize resource utilization by automatically cleaning up
-    #   idle sessions and preventing long-running instances from consuming
-    #   resources indefinitely.
+    #   The lifecycle configuration for the harness's runtime environment.
+    #   For a harness, `idleRuntimeSessionTimeout` and `maxLifetime` each
+    #   accept a value between 60 and 28800 seconds (8 hours), and
+    #   `idleRuntimeSessionTimeout` must be less than or equal to
+    #   `maxLifetime`. Values above 28800 seconds are rejected with a
+    #   `ValidationException`.
     #   @return [Types::LifecycleConfiguration]
     #
     # @!attribute [rw] network_configuration
@@ -12779,13 +13249,50 @@ module Aws::BedrockAgentCoreControl
     #   Custom headers to include when connecting to the remote MCP server.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] outbound_auth
+    #   How the harness authenticates to this MCP server. Defaults to no
+    #   authentication.
+    #   @return [Types::HarnessRemoteMcpOutboundAuth]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/HarnessRemoteMcpConfig AWS API Documentation
     #
     class HarnessRemoteMcpConfig < Struct.new(
       :url,
-      :headers)
+      :headers,
+      :outbound_auth)
       SENSITIVE = [:url, :headers]
       include Aws::Structure
+    end
+
+    # Authentication method for calling a remote MCP server.
+    #
+    # @note HarnessRemoteMcpOutboundAuth is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note HarnessRemoteMcpOutboundAuth is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of HarnessRemoteMcpOutboundAuth corresponding to the set member.
+    #
+    # @!attribute [rw] aws_iam
+    #   Sign requests to the remote MCP server with Signature Version 4
+    #   (SigV4) using the harness execution role. If you don't specify a
+    #   Region, the harness Region is used.
+    #   @return [Types::IamCredentialProvider]
+    #
+    # @!attribute [rw] none
+    #   No authentication.
+    #   @return [Types::Unit]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/HarnessRemoteMcpOutboundAuth AWS API Documentation
+    #
+    class HarnessRemoteMcpOutboundAuth < Struct.new(
+      :aws_iam,
+      :none,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class AwsIam < HarnessRemoteMcpOutboundAuth; end
+      class None < HarnessRemoteMcpOutboundAuth; end
+      class Unknown < HarnessRemoteMcpOutboundAuth; end
     end
 
     # A skill available to the agent.
@@ -13244,6 +13751,32 @@ module Aws::BedrockAgentCoreControl
     class HttpConnectorTargetConfiguration < Struct.new(
       :source,
       :parameters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A lifecycle hook action that sends an HTTP `POST` request to the
+    # agent's container. The path and port can't conflict with a path that
+    # your agent already serves for AgentCore Runtime, such as the
+    # protocol's invocation path or the health check path.
+    #
+    # @!attribute [rw] path
+    #   The path in the agent's container that AgentCore Runtime sends the
+    #   `POST` request to.
+    #   @return [String]
+    #
+    # @!attribute [rw] port
+    #   The port in the agent's container that AgentCore Runtime sends the
+    #   `POST` request to. If you don't specify a port, the default is the
+    #   runtime's server port: the port in the protocol configuration if
+    #   one is set, otherwise the protocol's default port.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/HttpPostLifecycleHookAction AWS API Documentation
+    #
+    class HttpPostLifecycleHookAction < Struct.new(
+      :path,
+      :port)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13955,6 +14488,11 @@ module Aws::BedrockAgentCoreControl
     #   volumes, and network interfaces) that the capacity provider creates.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] cpu_options
+    #   The central processing unit (CPU) options for the instances that the
+    #   capacity provider launches.
+    #   @return [Types::CpuOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/LaunchParameters AWS API Documentation
     #
     class LaunchParameters < Struct.new(
@@ -13966,7 +14504,8 @@ module Aws::BedrockAgentCoreControl
       :capacity_reservation_specification,
       :ssh_key_name,
       :instance_profile_arn,
-      :propagated_tags)
+      :propagated_tags,
+      :cpu_options)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -14036,6 +14575,50 @@ module Aws::BedrockAgentCoreControl
       :max_lifetime)
       SENSITIVE = []
       include Aws::Structure
+    end
+
+    # A lifecycle hook, which defines the action that AgentCore Runtime runs
+    # at a point in the runtime's lifecycle.
+    #
+    # @!attribute [rw] action
+    #   The action that AgentCore Runtime runs for the hook. Specify exactly
+    #   one action.
+    #   @return [Types::LifecycleHookAction]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/LifecycleHook AWS API Documentation
+    #
+    class LifecycleHook < Struct.new(
+      :action)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The action that a lifecycle hook runs. Specify exactly one member.
+    # Currently, `httpPost` is the only supported action.
+    #
+    # @note LifecycleHookAction is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note LifecycleHookAction is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of LifecycleHookAction corresponding to the set member.
+    #
+    # @!attribute [rw] http_post
+    #   Sends an HTTP `POST` request to your agent's container on the
+    #   specified port and path to run the hook. The hook succeeds if your
+    #   container returns a `2xx` response. The hook fails if your container
+    #   returns any other response or doesn't respond before the hook times
+    #   out.
+    #   @return [Types::HttpPostLifecycleHookAction]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/LifecycleHookAction AWS API Documentation
+    #
+    class LifecycleHookAction < Struct.new(
+      :http_post,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class HttpPost < LifecycleHookAction; end
+      class Unknown < LifecycleHookAction; end
     end
 
     # A single rule entry within a rate limit that maps dimension values to
@@ -14130,6 +14713,73 @@ module Aws::BedrockAgentCoreControl
     class LinkedinOauth2ProviderConfigOutput < Struct.new(
       :oauth_discovery,
       :client_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the operating system configuration of agents that run on
+    # Linux instances, such as the privilege mode.
+    #
+    # @!attribute [rw] privilege_mode
+    #   The privilege mode of the agents. If you omit this field, the agents
+    #   run in `STANDARD` privilege mode. The following values are possible:
+    #
+    #   * `STANDARD` – The agent runs without elevated privileges. This is
+    #     the default.
+    #
+    #   * `PRIVILEGED` – The agent runs with elevated privileges on its
+    #     instance. Use this mode for agents that build container images,
+    #     run containers, or install system packages. A session that runs a
+    #     `PRIVILEGED` agent runs only that agent.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/LinuxOperatingSystemConfiguration AWS API Documentation
+    #
+    class LinuxOperatingSystemConfiguration < Struct.new(
+      :privilege_mode)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   If the total number of results is greater than the `maxResults`
+    #   value provided in the request, enter the token returned in the
+    #   `nextToken` field in the response in this field to return the next
+    #   batch of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in the response. If the
+    #   total number of results is greater than this value, use the token
+    #   returned in the response in the `nextToken` field when making
+    #   another request to return the next batch of results.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/ListAgentInsightStoresRequest AWS API Documentation
+    #
+    class ListAgentInsightStoresRequest < Struct.new(
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] agent_insight_stores
+    #   The Agent Insight Store summaries.
+    #   @return [Array<Types::AgentInsightStoreSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   If the total number of results is greater than the `maxResults`
+    #   value provided in the request, use this token when making another
+    #   request in the `nextToken` field to return the next batch of
+    #   results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/ListAgentInsightStoresResponse AWS API Documentation
+    #
+    class ListAgentInsightStoresResponse < Struct.new(
+      :agent_insight_stores,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -14630,15 +15280,43 @@ module Aws::BedrockAgentCoreControl
       include Aws::Structure
     end
 
+    # A filter for `ListDatasetExamples`.
+    #
+    # @!attribute [rw] generation_ids
+    #   Returns only examples created by this dataset generation. Specify
+    #   one ID.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] example_fields
+    #   Returns only examples that meet at least one of these conditions.
+    #   Examples last written before example field filtering was available
+    #   never match.
+    #   @return [Array<Types::ExampleFieldCondition>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/ListDatasetExamplesFilter AWS API Documentation
+    #
+    class ListDatasetExamplesFilter < Struct.new(
+      :generation_ids,
+      :example_fields)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] dataset_id
     #   The unique identifier of the dataset.
     #   @return [String]
     #
     # @!attribute [rw] dataset_version
     #   Version to paginate: "DRAFT" or a version number. Defaults to
-    #   DRAFT if absent. Only used on the first request; for subsequent
-    #   pages, the version is extracted from the pagination token.
+    #   DRAFT if absent on the first request. With a pagination token, the
+    #   version comes from the token: you can omit this member, and a value
+    #   that differs from the token's version is rejected with a
+    #   `ValidationException`.
     #   @return [String]
+    #
+    # @!attribute [rw] filter
+    #   A filter to apply to the examples.
+    #   @return [Types::ListDatasetExamplesFilter]
     #
     # @!attribute [rw] max_results
     #   Maximum number of examples to return per page.
@@ -14653,6 +15331,7 @@ module Aws::BedrockAgentCoreControl
     class ListDatasetExamplesRequest < Struct.new(
       :dataset_id,
       :dataset_version,
+      :filter,
       :max_results,
       :next_token)
       SENSITIVE = []
@@ -14694,9 +15373,28 @@ module Aws::BedrockAgentCoreControl
       include Aws::Structure
     end
 
+    # A filter for `ListDatasetVersions`.
+    #
+    # @!attribute [rw] example_count_by_field
+    #   Returns only versions whose example counts meet at least one of
+    #   these conditions.
+    #   @return [Array<Types::ExampleCountByFieldCondition>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/ListDatasetVersionsFilter AWS API Documentation
+    #
+    class ListDatasetVersionsFilter < Struct.new(
+      :example_count_by_field)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] dataset_id
     #   The unique identifier of the dataset.
     #   @return [String]
+    #
+    # @!attribute [rw] filter
+    #   A filter to apply to the dataset versions.
+    #   @return [Types::ListDatasetVersionsFilter]
     #
     # @!attribute [rw] next_token
     #   The token for the next page of results.
@@ -14710,6 +15408,7 @@ module Aws::BedrockAgentCoreControl
     #
     class ListDatasetVersionsRequest < Struct.new(
       :dataset_id,
+      :filter,
       :next_token,
       :max_results)
       SENSITIVE = []
@@ -14734,6 +15433,25 @@ module Aws::BedrockAgentCoreControl
       include Aws::Structure
     end
 
+    # A filter for `ListDatasets`.
+    #
+    # @!attribute [rw] example_count_by_field
+    #   Returns only datasets whose DRAFT example counts meet at least one
+    #   of these conditions.
+    #   @return [Array<Types::ExampleCountByFieldCondition>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/ListDatasetsFilter AWS API Documentation
+    #
+    class ListDatasetsFilter < Struct.new(
+      :example_count_by_field)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] filter
+    #   A filter to apply to the datasets.
+    #   @return [Types::ListDatasetsFilter]
+    #
     # @!attribute [rw] next_token
     #   The token for the next page of results.
     #   @return [String]
@@ -14745,6 +15463,7 @@ module Aws::BedrockAgentCoreControl
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/ListDatasetsRequest AWS API Documentation
     #
     class ListDatasetsRequest < Struct.new(
+      :filter,
       :next_token,
       :max_results)
       SENSITIVE = []
@@ -17609,6 +18328,32 @@ module Aws::BedrockAgentCoreControl
       include Aws::Structure
     end
 
+    # Contains the operating system configuration of the agents that
+    # AgentCore Runtime runs on a capacity provider. Specify the member for
+    # the operating system of the capacity provider.
+    #
+    # @note OperatingSystemConfiguration is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note OperatingSystemConfiguration is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of OperatingSystemConfiguration corresponding to the set member.
+    #
+    # @!attribute [rw] linux
+    #   The operating system configuration of agents that run on Linux
+    #   instances.
+    #   @return [Types::LinuxOperatingSystemConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/OperatingSystemConfiguration AWS API Documentation
+    #
+    class OperatingSystemConfiguration < Struct.new(
+      :linux,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Linux < OperatingSystemConfiguration; end
+      class Unknown < OperatingSystemConfiguration; end
+    end
+
     # The configuration that specifies where evaluation results should be
     # written for monitoring and analysis.
     #
@@ -19210,6 +19955,21 @@ module Aws::BedrockAgentCoreControl
       class Unknown < Resource; end
     end
 
+    # The resource configuration for an AgentCore Runtime.
+    #
+    # @!attribute [rw] minimum_memory_in_mi_b
+    #   The minimum amount of memory, in mebibytes, to allocate to the
+    #   AgentCore Runtime.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/ResourceConfiguration AWS API Documentation
+    #
+    class ResourceConfiguration < Struct.new(
+      :minimum_memory_in_mi_b)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Exception thrown when a resource limit is exceeded.
     #
     # @!attribute [rw] message
@@ -19257,6 +20017,25 @@ module Aws::BedrockAgentCoreControl
     #
     class ResourceNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the settings that the gateway uses to send a streamed target
+    # response to the interceptor in batches.
+    #
+    # @!attribute [rw] max_events_per_invocation
+    #   Specifies the maximum number of response events that the gateway
+    #   sends to the interceptor in one invocation. The interceptor's
+    #   output for the first batch determines the status code and headers of
+    #   the response. The gateway ignores the status code and headers that
+    #   the interceptor returns for later batches.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/ResponseStreamingConfiguration AWS API Documentation
+    #
+    class ResponseStreamingConfiguration < Struct.new(
+      :max_events_per_invocation)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -19459,6 +20238,22 @@ module Aws::BedrockAgentCoreControl
       include Aws::Structure
     end
 
+    # The lifecycle hooks that AgentCore Runtime runs at fixed points in the
+    # runtime's lifecycle.
+    #
+    # @!attribute [rw] build
+    #   The hooks that run when you create or update the AgentCore Runtime,
+    #   before any sessions are created.
+    #   @return [Types::BuildLifecycleHooks]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/RuntimeHooksConfiguration AWS API Documentation
+    #
+    class RuntimeHooksConfiguration < Struct.new(
+      :build)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Configuration for microVM metadata service settings.
     #
     # @!attribute [rw] require_mmdsv2
@@ -19499,6 +20294,50 @@ module Aws::BedrockAgentCoreControl
       :arn,
       :qualifier,
       :schema)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Mounts an Amazon S3 bucket in the AgentCore Runtime with Mountpoint
+    # for Amazon S3. Files under the mount path map to objects in the
+    # bucket.
+    #
+    # @!attribute [rw] bucket
+    #   The name of the S3 bucket to mount. You can specify a general
+    #   purpose bucket or a directory bucket.
+    #   @return [String]
+    #
+    # @!attribute [rw] mount_path
+    #   The mount path for the S3 bucket inside the AgentCore Runtime. The
+    #   path must be under `/mnt` with exactly one subdirectory level (for
+    #   example, `/mnt/data`).
+    #   @return [String]
+    #
+    # @!attribute [rw] prefix
+    #   The key prefix to mount. Only objects under this prefix are visible
+    #   at the mount path. To give each session its own prefix, include
+    #   `{runtimeSessionId}` (for example, `data/{runtimeSessionId}/`). If
+    #   you omit the prefix, the whole bucket is mounted.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_bucket_owner
+    #   The AWS account ID that must own the bucket. If you omit it, the
+    #   bucket must be owned by the account that owns the AgentCore Runtime.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_bucket_region
+    #   The AWS Region of the S3 bucket. If you omit it, the bucket must be
+    #   in the same Region as the AgentCore Runtime.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/S3BucketMountConfiguration AWS API Documentation
+    #
+    class S3BucketMountConfiguration < Struct.new(
+      :bucket,
+      :mount_path,
+      :prefix,
+      :s3_bucket_owner,
+      :s3_bucket_region)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -21475,6 +22314,106 @@ module Aws::BedrockAgentCoreControl
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
 
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier to ensure that the API request
+    #   completes no more than one time. If you don't specify this field, a
+    #   value is randomly generated for you. If this token matches a
+    #   previous request, the service ignores the request, but doesn't
+    #   return an error. For more information, see [Ensuring
+    #   idempotency][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   @return [String]
+    #
+    # @!attribute [rw] agent_insight_store_id
+    #   Specifies the unique identifier of the Agent Insight Store to
+    #   update.
+    #   @return [String]
+    #
+    # @!attribute [rw] enablement_status
+    #   Specifies whether the Agent Insight Store accepts new Agent
+    #   Insights. If you don't specify this parameter, the store's current
+    #   enablement setting remains unchanged.
+    #   @return [String]
+    #
+    # @!attribute [rw] encryption_configuration
+    #   Specifies the encryption mode and key configuration to use for new
+    #   Agent Insights. If you don't specify this parameter, the store's
+    #   current encryption configuration remains unchanged.
+    #   @return [Types::AgentInsightStoreEncryptionConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/UpdateAgentInsightStoreRequest AWS API Documentation
+    #
+    class UpdateAgentInsightStoreRequest < Struct.new(
+      :client_token,
+      :agent_insight_store_id,
+      :enablement_status,
+      :encryption_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] agent_insight_store_arn
+    #   The Amazon Resource Name (ARN) of the updated Agent Insight Store.
+    #   @return [String]
+    #
+    # @!attribute [rw] agent_insight_store_id
+    #   The unique identifier of the updated Agent Insight Store.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The lifecycle status of the Agent Insight Store after the update
+    #   request. Valid values:
+    #
+    #   ACTIVE
+    #
+    #   : The store is available.
+    #
+    #   UPDATING
+    #
+    #   : The service is applying a requested change.
+    #
+    #   INACTIVE
+    #
+    #   : The store does not accept new Agent Insights.
+    #
+    #   ERROR
+    #
+    #   : The store requires intervention.
+    #   @return [String]
+    #
+    # @!attribute [rw] enablement_status
+    #   Specifies whether the Agent Insight Store accepts new Agent Insights
+    #   after the update request.
+    #   @return [String]
+    #
+    # @!attribute [rw] updated_at
+    #   The date and time when the Agent Insight Store was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] failure_reason
+    #   Describes the failure that prevented the Agent Insight Store from
+    #   reaching its requested lifecycle status.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/UpdateAgentInsightStoreResponse AWS API Documentation
+    #
+    class UpdateAgentInsightStoreResponse < Struct.new(
+      :agent_insight_store_arn,
+      :agent_insight_store_id,
+      :status,
+      :enablement_status,
+      :updated_at,
+      :failure_reason)
+      SENSITIVE = [:failure_reason]
+      include Aws::Structure
+    end
+
     # @!attribute [rw] agent_runtime_id
     #   The unique identifier of the AgentCore Runtime associated with the
     #   endpoint.
@@ -21595,6 +22534,10 @@ module Aws::BedrockAgentCoreControl
     #   The updated life cycle configuration for the AgentCore Runtime.
     #   @return [Types::LifecycleConfiguration]
     #
+    # @!attribute [rw] hooks_configuration
+    #   The updated lifecycle hooks configuration for the AgentCore Runtime.
+    #   @return [Types::RuntimeHooksConfiguration]
+    #
     # @!attribute [rw] metadata_configuration
     #   The updated configuration for microVM Metadata Service (MMDS)
     #   settings for the AgentCore Runtime.
@@ -21628,6 +22571,11 @@ module Aws::BedrockAgentCoreControl
     #   excluding the reserved port `8443`.
     #   @return [Array<Types::AllowedPort>]
     #
+    # @!attribute [rw] resource_configurations
+    #   The updated resource configurations for the AgentCore Runtime. You
+    #   can specify at most one resource configuration.
+    #   @return [Array<Types::ResourceConfiguration>]
+    #
     # @!attribute [rw] client_token
     #   A unique, case-sensitive identifier to ensure idempotency of the
     #   request.
@@ -21648,12 +22596,14 @@ module Aws::BedrockAgentCoreControl
       :request_header_configuration,
       :protocol_configuration,
       :lifecycle_configuration,
+      :hooks_configuration,
       :metadata_configuration,
       :environment_variables,
       :filesystem_configurations,
       :capacity_provider_configuration,
       :platform_version,
       :allowed_ports,
+      :resource_configurations,
       :client_token)
       SENSITIVE = [:description, :environment_variables]
       include Aws::Structure
@@ -22422,6 +23372,13 @@ module Aws::BedrockAgentCoreControl
     #   The updated Amazon Web Services WAF configuration for the gateway.
     #   @return [Types::WafConfiguration]
     #
+    # @!attribute [rw] domain_override
+    #   The updated public domain names that the gateway advertises in its
+    #   OAuth discovery URLs instead of the inbound Host header. Specify
+    #   this when clients reach the gateway through your own proxy or custom
+    #   domain.
+    #   @return [Types::DomainOverride]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/UpdateGatewayRequest AWS API Documentation
     #
     class UpdateGatewayRequest < Struct.new(
@@ -22438,7 +23395,8 @@ module Aws::BedrockAgentCoreControl
       :interceptor_configurations,
       :policy_engine_configuration,
       :exception_level,
-      :waf_configuration)
+      :waf_configuration,
+      :domain_override)
       SENSITIVE = [:description]
       include Aws::Structure
     end
@@ -22542,6 +23500,11 @@ module Aws::BedrockAgentCoreControl
     #   The Amazon Web Services WAF configuration for the gateway.
     #   @return [Types::WafConfiguration]
     #
+    # @!attribute [rw] domain_override
+    #   The public domain names that the gateway advertises in its OAuth
+    #   discovery URLs instead of the inbound Host header.
+    #   @return [Types::DomainOverride]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/UpdateGatewayResponse AWS API Documentation
     #
     class UpdateGatewayResponse < Struct.new(
@@ -22566,7 +23529,8 @@ module Aws::BedrockAgentCoreControl
       :workload_identity_details,
       :exception_level,
       :web_acl_arn,
-      :waf_configuration)
+      :waf_configuration,
+      :domain_override)
       SENSITIVE = [:description]
       include Aws::Structure
     end
@@ -23037,8 +24001,8 @@ module Aws::BedrockAgentCoreControl
     #   @return [String]
     #
     # @!attribute [rw] event_expiry_duration
-    #   The number of days after which memory events will expire, between 7
-    #   and 365 days.
+    #   The number of days after which memory events expire, between 7 and
+    #   3650 days.
     #   @return [Integer]
     #
     # @!attribute [rw] memory_execution_role_arn

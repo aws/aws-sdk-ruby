@@ -1,0 +1,101 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::AgentDiscovery
+  module Types
+
+    class DescriptorEntry
+      attr_accessor data: ::String
+      attr_accessor version: ::String
+      attr_accessor source: Types::DescriptorSource
+      attr_accessor additional_data: ::Hash[::String, Types::DescriptorEntry]
+      SENSITIVE: []
+    end
+
+    class DescriptorSource
+      attr_accessor from_url: Types::DescriptorSourceUrl
+      SENSITIVE: []
+    end
+
+    class DescriptorSourceUrl
+      attr_accessor url: ::String
+      SENSITIVE: []
+    end
+
+    class Identifier
+      attr_accessor domain: ::String
+      attr_accessor uri: ::String
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Domain < Identifier
+      end
+      class Uri < Identifier
+      end
+      class Unknown < Identifier
+      end
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      attr_accessor error_code: ("INVALID_ARGUMENT" | "UNAUTHENTICATED" | "NOT_FOUND" | "RATE_LIMIT_EXCEEDED" | "INTERNAL_ERROR")
+      SENSITIVE: []
+    end
+
+    class ProvenanceLink
+      attr_accessor relation: ("publishedFrom" | "discoveredFrom" | "federatedFrom")
+      attr_accessor source_id: ::String
+      SENSITIVE: []
+    end
+
+    class PublicRecord
+      attr_accessor identifier: Types::Identifier
+      attr_accessor display_name: ::String
+      attr_accessor description: ::String
+      attr_accessor record_type: ("AGENT" | "TOOL" | "SKILL" | "CUSTOM" | "GATEWAY" | "WEB_BOT")
+      attr_accessor domain: ::String
+      attr_accessor descriptors: ::Hash[::String, Types::DescriptorEntry]
+      attr_accessor trust_manifests: ::Array[Types::TrustManifest]
+      attr_accessor record_version: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class SearchPublicRecordsRequest
+      attr_accessor search_query: ::String
+      attr_accessor filters: untyped
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class SearchPublicRecordsResponse
+      attr_accessor records: ::Array[Types::PublicRecord]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      attr_accessor error_code: ("INVALID_ARGUMENT" | "UNAUTHENTICATED" | "NOT_FOUND" | "RATE_LIMIT_EXCEEDED" | "INTERNAL_ERROR")
+      SENSITIVE: []
+    end
+
+    class TrustManifest
+      attr_accessor contributor: ::String
+      attr_accessor provenance: ::Array[Types::ProvenanceLink]
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      attr_accessor error_code: ("INVALID_ARGUMENT" | "UNAUTHENTICATED" | "NOT_FOUND" | "RATE_LIMIT_EXCEEDED" | "INTERNAL_ERROR")
+      SENSITIVE: []
+    end
+  end
+end

@@ -1,6 +1,46 @@
 Unreleased Changes
 ------------------
 
+1.90.0 (2026-11-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.89.0 (2026-11-17)
+------------------
+
+* Feature - AWS Transform adds Express Migration for MAP, remote source actions, per-server default launch settings, F5 BIG-IP to Elastic Load Balancing migration, AWS Outposts support, greenfield network design, and replication of volumes up to 64 TB.
+
+1.88.0 (2026-11-16)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.87.0 (2026-11-11)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.86.0 (2026-11-10)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.85.0 (2026-11-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.84.0 (2026-11-06)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.83.0 (2026-11-04)
+------------------
+
+* Feature - This release adds Migration Planning artifacts as a source environment for network migration definitions, and an optional clientToken on CreateNetworkMigrationDefinition so that retried requests don't create duplicate definitions.
+
 1.82.0 (2026-10-29)
 ------------------
 

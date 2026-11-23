@@ -264,7 +264,8 @@ module Aws::GameLiftStreams
     #     An integer representing the maximum number attempts that will be made for
     #     a single request, including the initial attempt.  For example,
     #     setting this value to 5 will result in a request being retried up to
-    #     4 times. Used in `standard` and `adaptive` retry modes.
+    #     4 times. Used in `standard` and `adaptive` retry modes. Defaults to 3,
+    #     except for DynamoDB and DynamoDB Streams, which default to 4.
     #
     #   @option options [String] :profile ("default")
     #     Used when loading credentials from the shared credentials file at `HOME/.aws/credentials`.
@@ -327,15 +328,15 @@ module Aws::GameLiftStreams
     #     used by the default backoff function. This option is only used in the
     #     `legacy` retry mode.
     #
-    #   @option options [String] :retry_mode ("legacy")
+    #   @option options [String] :retry_mode ("standard")
     #     Specifies which retry algorithm to use. Values are:
     #
-    #     * `legacy` - The pre-existing retry behavior. This is the default
-    #       value if no retry mode is provided.
+    #     * `legacy` - The pre-existing retry behavior.
     #
     #     * `standard` - A standardized set of retry rules across the AWS SDKs.
     #       This includes support for retry quotas, which limit the number of
-    #       unsuccessful retries a client can make.
+    #       unsuccessful retries a client can make. This is the default value
+    #       if no retry mode is provided.
     #
     #     * `adaptive` - A retry mode that includes all the functionality of
     #       `standard` mode along with automatic client side throttling.
@@ -2129,6 +2130,9 @@ module Aws::GameLiftStreams
     #   * {Types::GetStreamSessionOutput#export_files_metadata #export_files_metadata} => Types::ExportFilesMetadata
     #   * {Types::GetStreamSessionOutput#role_arn #role_arn} => String
     #   * {Types::GetStreamSessionOutput#display_configuration #display_configuration} => Types::DisplayConfiguration
+    #   * {Types::GetStreamSessionOutput#application_started_at #application_started_at} => Time
+    #   * {Types::GetStreamSessionOutput#streaming_started_at #streaming_started_at} => Time
+    #   * {Types::GetStreamSessionOutput#streaming_ended_at #streaming_ended_at} => Time
     #
     # @example Request syntax with placeholder values
     #
@@ -2167,6 +2171,9 @@ module Aws::GameLiftStreams
     #   resp.role_arn #=> String
     #   resp.display_configuration.resolution.width #=> Integer
     #   resp.display_configuration.resolution.height #=> Integer
+    #   resp.application_started_at #=> Time
+    #   resp.streaming_started_at #=> Time
+    #   resp.streaming_ended_at #=> Time
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -3113,6 +3120,9 @@ module Aws::GameLiftStreams
     #   * {Types::StartStreamSessionOutput#export_files_metadata #export_files_metadata} => Types::ExportFilesMetadata
     #   * {Types::StartStreamSessionOutput#role_arn #role_arn} => String
     #   * {Types::StartStreamSessionOutput#display_configuration #display_configuration} => Types::DisplayConfiguration
+    #   * {Types::StartStreamSessionOutput#application_started_at #application_started_at} => Time
+    #   * {Types::StartStreamSessionOutput#streaming_started_at #streaming_started_at} => Time
+    #   * {Types::StartStreamSessionOutput#streaming_ended_at #streaming_ended_at} => Time
     #
     # @example Request syntax with placeholder values
     #
@@ -3173,6 +3183,9 @@ module Aws::GameLiftStreams
     #   resp.role_arn #=> String
     #   resp.display_configuration.resolution.width #=> Integer
     #   resp.display_configuration.resolution.height #=> Integer
+    #   resp.application_started_at #=> Time
+    #   resp.streaming_started_at #=> Time
+    #   resp.streaming_ended_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gameliftstreams-2018-05-10/StartStreamSession AWS API Documentation
     #
@@ -3608,7 +3621,7 @@ module Aws::GameLiftStreams
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-gameliftstreams'
-      context[:gem_version] = '1.41.0'
+      context[:gem_version] = '1.49.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

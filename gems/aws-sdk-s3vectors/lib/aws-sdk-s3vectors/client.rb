@@ -264,7 +264,8 @@ module Aws::S3Vectors
     #     An integer representing the maximum number attempts that will be made for
     #     a single request, including the initial attempt.  For example,
     #     setting this value to 5 will result in a request being retried up to
-    #     4 times. Used in `standard` and `adaptive` retry modes.
+    #     4 times. Used in `standard` and `adaptive` retry modes. Defaults to 3,
+    #     except for DynamoDB and DynamoDB Streams, which default to 4.
     #
     #   @option options [String] :profile ("default")
     #     Used when loading credentials from the shared credentials file at `HOME/.aws/credentials`.
@@ -327,15 +328,15 @@ module Aws::S3Vectors
     #     used by the default backoff function. This option is only used in the
     #     `legacy` retry mode.
     #
-    #   @option options [String] :retry_mode ("legacy")
+    #   @option options [String] :retry_mode ("standard")
     #     Specifies which retry algorithm to use. Values are:
     #
-    #     * `legacy` - The pre-existing retry behavior. This is the default
-    #       value if no retry mode is provided.
+    #     * `legacy` - The pre-existing retry behavior.
     #
     #     * `standard` - A standardized set of retry rules across the AWS SDKs.
     #       This includes support for retry quotas, which limit the number of
-    #       unsuccessful retries a client can make.
+    #       unsuccessful retries a client can make. This is the default value
+    #       if no retry mode is provided.
     #
     #     * `adaptive` - A retry mode that includes all the functionality of
     #       `standard` mode along with automatic client side throttling.
@@ -551,7 +552,14 @@ module Aws::S3Vectors
     #     dimension: 1, # required
     #     distance_metric: "euclidean", # required, accepts euclidean, cosine
     #     metadata_configuration: {
-    #       non_filterable_metadata_keys: ["MetadataKey"], # required
+    #       non_filterable_metadata_keys: ["MetadataKey"],
+    #       text_search_configurations: [
+    #         {
+    #           metadata_key: "MetadataKey", # required
+    #           language: "en", # accepts en, fr, es, pt, it, de, nl, zh, ja, ko
+    #           status: "ACTIVE", # accepts ACTIVE, BUILDING
+    #         },
+    #       ],
     #     },
     #     encryption_configuration: {
     #       sse_type: "AES256", # accepts AES256, aws:kms
@@ -830,6 +838,10 @@ module Aws::S3Vectors
     #   resp.index.distance_metric #=> String, one of "euclidean", "cosine"
     #   resp.index.metadata_configuration.non_filterable_metadata_keys #=> Array
     #   resp.index.metadata_configuration.non_filterable_metadata_keys[0] #=> String
+    #   resp.index.metadata_configuration.text_search_configurations #=> Array
+    #   resp.index.metadata_configuration.text_search_configurations[0].metadata_key #=> String
+    #   resp.index.metadata_configuration.text_search_configurations[0].language #=> String, one of "en", "fr", "es", "pt", "it", "de", "nl", "zh", "ja", "ko"
+    #   resp.index.metadata_configuration.text_search_configurations[0].status #=> String, one of "ACTIVE", "BUILDING"
     #   resp.index.encryption_configuration.sse_type #=> String, one of "AES256", "aws:kms"
     #   resp.index.encryption_configuration.kms_key_arn #=> String
     #   resp.index.index_mode #=> String, one of "CLASSIC", "ENHANCED"
@@ -1424,11 +1436,18 @@ module Aws::S3Vectors
       req.send_request(options)
     end
 
-    # Performs an approximate nearest neighbor search query in a vector
-    # index using a query vector. By default, it returns the keys of
-    # approximate nearest neighbors. You can optionally include the computed
-    # distance (between the query vector and each vector in the response)
-    # and metadata of each vector in the response.
+    # Returns matching vector keys from a vector index ranked by vector
+    # similarity, full-text relevance, or both. Specify `queryVector` to
+    # perform a vector search, specify `queryTexts` to perform a full-text
+    # search, or specify both to perform a hybrid search. Full-text search
+    # ranks results using BM25. Hybrid search combines the vector and
+    # full-text rankings using Reciprocal Rank Fusion (RRF).
+    #
+    # Amazon S3 Vectors ranks results by distance for a vector-only search,
+    # by BM25 score for a full-text-only search, and by RRF score for a
+    # hybrid search. You can optionally include computed distances,
+    # relevance scores, and vector metadata in the response. Full-text and
+    # hybrid searches require a vector index in `ENHANCED` mode.
     #
     # To specify the vector index, you can either use both the vector bucket
     # name and the vector index name, or use the vector index Amazon
@@ -1443,15 +1462,15 @@ module Aws::S3Vectors
     #   * With only `s3vectors:QueryVectors` permission, you can retrieve
     #     vector keys of approximate nearest neighbors and computed
     #     distances between these vectors. This permission is sufficient
-    #     only when you don't set any metadata filters and don't request
-    #     metadata (by keeping the `returnMetadata` parameter set to `false`
-    #     or not specified).
+    #     only when you don't set `queryTexts`, don't set any metadata
+    #     filters, and don't request metadata (by keeping the
+    #     `returnMetadata` parameter set to `false` or not specified).
     #
-    #   * If you specify a metadata filter or set `returnMetadata` to true,
-    #     you must have both `s3vectors:QueryVectors` and
-    #     `s3vectors:GetVectors` permissions. The request fails with a `403
-    #     Forbidden error` if you request metadata filtering or metadata
-    #     without the `s3vectors:GetVectors` permission.
+    #   * To use `queryTexts`, a metadata filter, or `returnMetadata` set to
+    #     `true` with this operation, you must have both the
+    #     `s3vectors:QueryVectors` and `s3vectors:GetVectors` permissions.
+    #     If you use any of these options without the `s3vectors:GetVectors`
+    #     permission, Amazon S3 Vectors returns an `AccessDeniedException`.
     #
     # @option params [String] :vector_bucket_name
     #   The name of the vector bucket that contains the vector index.
@@ -1465,11 +1484,13 @@ module Aws::S3Vectors
     # @option params [required, Integer] :top_k
     #   The number of results to return for each query.
     #
-    # @option params [required, Types::VectorData] :query_vector
-    #   The query vector. Ensure that the query vector has the same dimension
-    #   as the dimension of the vector index that's being queried. For
-    #   example, if your vector index contains vectors with 384 dimensions,
-    #   your query vector must also have 384 dimensions.
+    # @option params [Types::VectorData] :query_vector
+    #   The query vector for vector similarity search. The query vector must
+    #   have the same dimension as the vector index. For example, if the
+    #   vector index has 384 dimensions, the query vector must also have 384
+    #   dimensions. You can omit this parameter when you supply `queryTexts`
+    #   to perform a full-text-only search. A request must include
+    #   `queryVector`, `queryTexts`, or both.
     #
     # @option params [Hash,Array,String,Numeric,Boolean] :filter
     #   Metadata filter to apply during the query. For more information about
@@ -1505,6 +1526,18 @@ module Aws::S3Vectors
     #   Indicates whether to include the computed distance in the response.
     #   The default value is `false`.
     #
+    # @option params [Array<Types::QueryText>] :query_texts
+    #   Full-text queries for searchable metadata keys. Omit `queryVector` to
+    #   run a full-text-only search, or provide both fields to run a hybrid
+    #   search. Each entry must target a distinct searchable metadata key.
+    #
+    # @option params [Boolean] :return_scores
+    #   Indicates whether to include relevance scores in the response.
+    #   Full-text-only results can include BM25 scores. Hybrid results can
+    #   also include a Reciprocal Rank Fusion (RRF) score and vector distance.
+    #   This setting doesn't add scores to vector-only requests. The default
+    #   value is `false`.
+    #
     # @option params [String] :next_token
     #   Pagination token from a previous request. The value of this field is
     #   empty for an initial request.
@@ -1524,7 +1557,7 @@ module Aws::S3Vectors
     #     index_name: "IndexName",
     #     index_arn: "IndexArn",
     #     top_k: 1, # required
-    #     query_vector: { # required
+    #     query_vector: {
     #       float32: [1.0],
     #     },
     #     filter: {
@@ -1532,6 +1565,13 @@ module Aws::S3Vectors
     #     query_mode: "CLASSIC", # accepts CLASSIC, ENHANCED
     #     return_metadata: false,
     #     return_distance: false,
+    #     query_texts: [
+    #       {
+    #         text: "QueryTextString", # required
+    #         metadata_key: "MetadataKey", # required
+    #       },
+    #     ],
+    #     return_scores: false,
     #     next_token: "QueryVectorsNextToken",
     #   })
     #
@@ -1539,6 +1579,11 @@ module Aws::S3Vectors
     #
     #   resp.vectors #=> Array
     #   resp.vectors[0].distance #=> Float
+    #   resp.vectors[0].scores.fused #=> Float
+    #   resp.vectors[0].scores.bm25_scores #=> Array
+    #   resp.vectors[0].scores.bm25_scores[0].metadata_key #=> String
+    #   resp.vectors[0].scores.bm25_scores[0].score #=> Float
+    #   resp.vectors[0].scores.vector_distance #=> Float
     #   resp.vectors[0].key #=> String
     #   resp.distance_metric #=> String, one of "euclidean", "cosine"
     #   resp.next_token #=> String
@@ -1707,6 +1752,71 @@ module Aws::S3Vectors
       req.send_request(options)
     end
 
+    # Adds or deletes text search configurations on a vector index. Specify
+    # either `add` or `delete`, but not both. The vector index must be in
+    # `ENHANCED` mode.
+    #
+    # Permissions
+    #
+    # : You must have the `s3vectors:UpdateMetadataConfiguration` permission
+    #   to use this operation.
+    #
+    # @option params [String] :vector_bucket_name
+    #   The name of the vector bucket that contains the vector index.
+    #
+    # @option params [String] :index_name
+    #   The name of the vector index to update.
+    #
+    # @option params [String] :index_arn
+    #   The Amazon Resource Name (ARN) of the vector index to update.
+    #
+    # @option params [Types::MetadataConfigurationAdd] :add
+    #   Text search configurations to add to the vector index.
+    #
+    # @option params [Types::MetadataConfigurationDelete] :delete
+    #   Text search configurations to delete from the vector index.
+    #
+    # @return [Types::UpdateMetadataConfigurationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateMetadataConfigurationOutput#index_arn #index_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_metadata_configuration({
+    #     vector_bucket_name: "VectorBucketName",
+    #     index_name: "IndexName",
+    #     index_arn: "IndexArn",
+    #     add: {
+    #       text_search_configurations: [
+    #         {
+    #           metadata_key: "MetadataKey", # required
+    #           language: "en", # accepts en, fr, es, pt, it, de, nl, zh, ja, ko
+    #           status: "ACTIVE", # accepts ACTIVE, BUILDING
+    #         },
+    #       ],
+    #     },
+    #     delete: {
+    #       text_search_configurations: [
+    #         {
+    #           metadata_key: "MetadataKey", # required
+    #         },
+    #       ],
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.index_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3vectors-2025-07-15/UpdateMetadataConfiguration AWS API Documentation
+    #
+    # @overload update_metadata_configuration(params = {})
+    # @param [Hash] params ({})
+    def update_metadata_configuration(params = {}, options = {})
+      req = build_request(:update_metadata_configuration, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -1725,7 +1835,7 @@ module Aws::S3Vectors
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-s3vectors'
-      context[:gem_version] = '1.28.0'
+      context[:gem_version] = '1.35.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

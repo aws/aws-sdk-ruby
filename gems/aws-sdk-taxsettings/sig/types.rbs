@@ -57,6 +57,9 @@ module Aws::TaxSettings
       attr_accessor monaco_additional_info: Types::MonacoAdditionalInfo
       attr_accessor germany_additional_info: Types::GermanyAdditionalInfo
       attr_accessor mexico_additional_info: Types::MexicoAdditionalInfo
+      attr_accessor united_arab_emirates_additional_info: Types::UnitedArabEmiratesAdditionalInfo
+      attr_accessor norway_additional_info: Types::NorwayAdditionalInfo
+      attr_accessor new_zealand_additional_info: Types::NewZealandAdditionalInfo
       SENSITIVE: []
     end
 
@@ -89,6 +92,10 @@ module Aws::TaxSettings
       attr_accessor monaco_additional_info: Types::MonacoAdditionalInfo
       attr_accessor germany_additional_info: Types::GermanyAdditionalInfo
       attr_accessor mexico_additional_info: Types::MexicoAdditionalInfo
+      attr_accessor colombia_additional_info: Types::ColombiaAdditionalInfo
+      attr_accessor united_arab_emirates_additional_info: Types::UnitedArabEmiratesAdditionalInfo
+      attr_accessor norway_additional_info: Types::NorwayAdditionalInfo
+      attr_accessor new_zealand_additional_info: Types::NewZealandAdditionalInfo
       SENSITIVE: []
     end
 
@@ -190,6 +197,13 @@ module Aws::TaxSettings
     class ChileAdditionalInfo
       attr_accessor document_type: ("Invoice" | "Receipt")
       attr_accessor business_activity: ::String
+      SENSITIVE: []
+    end
+
+    class ColombiaAdditionalInfo
+      attr_accessor responsibility_codes: ::Array[::String]
+      attr_accessor taxpayer_type_code: ::String
+      attr_accessor issue_date: ::String
       SENSITIVE: []
     end
 
@@ -351,7 +365,7 @@ module Aws::TaxSettings
     class ListSupplementalTaxRegistrationsResponse
       attr_accessor tax_registrations: ::Array[Types::SupplementalTaxRegistration]
       attr_accessor next_token: ::String
-      SENSITIVE: []
+      SENSITIVE: [:tax_registrations]
     end
 
     class ListTaxExemptionsRequest
@@ -375,7 +389,7 @@ module Aws::TaxSettings
     class ListTaxRegistrationsResponse
       attr_accessor account_details: ::Array[Types::AccountDetails]
       attr_accessor next_token: ::String
-      SENSITIVE: []
+      SENSITIVE: [:account_details]
     end
 
     class MalaysiaAdditionalInfo
@@ -394,6 +408,17 @@ module Aws::TaxSettings
 
     class MonacoAdditionalInfo
       attr_accessor business_number: ::String
+      SENSITIVE: []
+    end
+
+    class NewZealandAdditionalInfo
+      attr_accessor peppol_id: ::String
+      SENSITIVE: []
+    end
+
+    class NorwayAdditionalInfo
+      attr_accessor tax_registration_number_type: ("TaxRegistrationNumber" | "LocalRegistrationNumber")
+      attr_accessor peppol_id: ::String
       SENSITIVE: []
     end
 
@@ -543,13 +568,14 @@ module Aws::TaxSettings
 
     class TaxRegistration
       attr_accessor registration_id: ::String
-      attr_accessor registration_type: ("VAT" | "GST" | "CPF" | "CNPJ" | "SST" | "TIN" | "NRIC" | "PAN" | "NIP")
+      attr_accessor registration_type: ("VAT" | "GST" | "CPF" | "CNPJ" | "SST" | "TIN" | "NRIC" | "PAN" | "NIP" | "CUIT" | "CDI" | "RUT" | "NIE" | "CI")
       attr_accessor legal_name: ::String
       attr_accessor status: ("Verified" | "Pending" | "Deleted" | "Rejected")
       attr_accessor sector: ("Business" | "Individual" | "Government")
       attr_accessor tax_document_metadatas: ::Array[Types::TaxDocumentMetadata]
       attr_accessor certified_email_id: ::String
       attr_accessor additional_tax_information: Types::AdditionalInfoResponse
+      attr_accessor status_reason: Types::TaxRegistrationStatusReason
       attr_accessor legal_address: Types::Address
       SENSITIVE: []
     end
@@ -568,7 +594,7 @@ module Aws::TaxSettings
 
     class TaxRegistrationEntry
       attr_accessor registration_id: ::String
-      attr_accessor registration_type: ("VAT" | "GST" | "CPF" | "CNPJ" | "SST" | "TIN" | "NRIC" | "PAN" | "NIP")
+      attr_accessor registration_type: ("VAT" | "GST" | "CPF" | "CNPJ" | "SST" | "TIN" | "NRIC" | "PAN" | "NIP" | "CUIT" | "CDI" | "RUT" | "NIE" | "CI")
       attr_accessor legal_name: ::String
       attr_accessor legal_address: Types::Address
       attr_accessor sector: ("Business" | "Individual" | "Government")
@@ -578,15 +604,22 @@ module Aws::TaxSettings
       SENSITIVE: []
     end
 
+    class TaxRegistrationStatusReason
+      attr_accessor code: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
     class TaxRegistrationWithJurisdiction
       attr_accessor registration_id: ::String
-      attr_accessor registration_type: ("VAT" | "GST" | "CPF" | "CNPJ" | "SST" | "TIN" | "NRIC" | "PAN" | "NIP")
+      attr_accessor registration_type: ("VAT" | "GST" | "CPF" | "CNPJ" | "SST" | "TIN" | "NRIC" | "PAN" | "NIP" | "CUIT" | "CDI" | "RUT" | "NIE" | "CI")
       attr_accessor legal_name: ::String
       attr_accessor status: ("Verified" | "Pending" | "Deleted" | "Rejected")
       attr_accessor sector: ("Business" | "Individual" | "Government")
       attr_accessor tax_document_metadatas: ::Array[Types::TaxDocumentMetadata]
       attr_accessor certified_email_id: ::String
       attr_accessor additional_tax_information: Types::AdditionalInfoResponse
+      attr_accessor status_reason: Types::TaxRegistrationStatusReason
       attr_accessor jurisdiction: Types::Jurisdiction
       SENSITIVE: []
     end
@@ -601,6 +634,14 @@ module Aws::TaxSettings
 
     class UkraineAdditionalInfo
       attr_accessor ukraine_trn_type: ("Business" | "Individual")
+      SENSITIVE: []
+    end
+
+    class UnitedArabEmiratesAdditionalInfo
+      attr_accessor tax_registration_number_type: ("VATTaxRegistrationNumber" | "LocalTaxRegistrationNumber")
+      attr_accessor peppol_id: ::String
+      attr_accessor trade_license_number: ::String
+      attr_accessor emirates_id: ::String
       SENSITIVE: []
     end
 
@@ -633,6 +674,7 @@ module Aws::TaxSettings
       attr_accessor electronic_transaction_code_number: ::String
       attr_accessor payment_voucher_number: ::String
       attr_accessor payment_voucher_number_date: ::String
+      attr_accessor vat_credit_method: bool
       SENSITIVE: []
     end
   end

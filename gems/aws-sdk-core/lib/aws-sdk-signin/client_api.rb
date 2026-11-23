@@ -17,12 +17,19 @@ module Aws::Signin
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
     AccessToken = Shapes::StructureShape.new(name: 'AccessToken')
     AccountId = Shapes::StringShape.new(name: 'AccountId')
+    Assertion = Shapes::StringShape.new(name: 'Assertion')
     AuthorizationCode = Shapes::StringShape.new(name: 'AuthorizationCode')
+    BatchRevokeSessionError = Shapes::StructureShape.new(name: 'BatchRevokeSessionError')
+    BatchRevokeSessionErrorList = Shapes::ListShape.new(name: 'BatchRevokeSessionErrorList')
+    BatchRevokeSessionsInput = Shapes::StructureShape.new(name: 'BatchRevokeSessionsInput')
+    BatchRevokeSessionsOutput = Shapes::StructureShape.new(name: 'BatchRevokeSessionsOutput')
+    BearerTokenExpiresIn = Shapes::IntegerShape.new(name: 'BearerTokenExpiresIn')
     BearerTokenType = Shapes::StringShape.new(name: 'BearerTokenType')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     ClientCredentialsGrantType = Shapes::StringShape.new(name: 'ClientCredentialsGrantType')
     ClientId = Shapes::StringShape.new(name: 'ClientId')
     ClientToken = Shapes::StringShape.new(name: 'ClientToken')
+    ClientType = Shapes::StringShape.new(name: 'ClientType')
     CodeVerifier = Shapes::StringShape.new(name: 'CodeVerifier')
     Condition = Shapes::MapShape.new(name: 'Condition')
     ConditionBlock = Shapes::MapShape.new(name: 'ConditionBlock')
@@ -30,6 +37,8 @@ module Aws::Signin
     ConditionValues = Shapes::ListShape.new(name: 'ConditionValues')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     ConsolePermissionMaxResults = Shapes::IntegerShape.new(name: 'ConsolePermissionMaxResults')
+    CreateBearerTokenRequest = Shapes::StructureShape.new(name: 'CreateBearerTokenRequest')
+    CreateBearerTokenResponse = Shapes::StructureShape.new(name: 'CreateBearerTokenResponse')
     CreateOAuth2TokenRequest = Shapes::StructureShape.new(name: 'CreateOAuth2TokenRequest')
     CreateOAuth2TokenRequestBody = Shapes::StructureShape.new(name: 'CreateOAuth2TokenRequestBody')
     CreateOAuth2TokenResponse = Shapes::StructureShape.new(name: 'CreateOAuth2TokenResponse')
@@ -48,6 +57,8 @@ module Aws::Signin
     GetConsoleAuthorizationConfigurationOutput = Shapes::StructureShape.new(name: 'GetConsoleAuthorizationConfigurationOutput')
     GetResourcePolicyInput = Shapes::StructureShape.new(name: 'GetResourcePolicyInput')
     GetResourcePolicyOutput = Shapes::StructureShape.new(name: 'GetResourcePolicyOutput')
+    GetSessionInput = Shapes::StructureShape.new(name: 'GetSessionInput')
+    GetSessionOutput = Shapes::StructureShape.new(name: 'GetSessionOutput')
     GrantType = Shapes::StringShape.new(name: 'GrantType')
     IdToken = Shapes::StringShape.new(name: 'IdToken')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
@@ -58,8 +69,11 @@ module Aws::Signin
     InvalidGrantException = Shapes::StructureShape.new(name: 'InvalidGrantException')
     InvalidScopeException = Shapes::StructureShape.new(name: 'InvalidScopeException')
     IssuedOAuthAccessTokenType = Shapes::StringShape.new(name: 'IssuedOAuthAccessTokenType')
+    JwtBearerClientId = Shapes::StringShape.new(name: 'JwtBearerClientId')
     ListResourcePermissionStatementsInput = Shapes::StructureShape.new(name: 'ListResourcePermissionStatementsInput')
     ListResourcePermissionStatementsOutput = Shapes::StructureShape.new(name: 'ListResourcePermissionStatementsOutput')
+    ListSessionsInput = Shapes::StructureShape.new(name: 'ListSessionsInput')
+    ListSessionsOutput = Shapes::StructureShape.new(name: 'ListSessionsOutput')
     Long = Shapes::IntegerShape.new(name: 'Long')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     OAuth2ErrorCode = Shapes::StringShape.new(name: 'OAuth2ErrorCode')
@@ -70,6 +84,8 @@ module Aws::Signin
     PolicyStatement = Shapes::StructureShape.new(name: 'PolicyStatement')
     PolicyStatements = Shapes::ListShape.new(name: 'PolicyStatements')
     Principal = Shapes::MapShape.new(name: 'Principal')
+    PrincipalArn = Shapes::StringShape.new(name: 'PrincipalArn')
+    PrincipalArnFilter = Shapes::StringShape.new(name: 'PrincipalArnFilter')
     PutConsoleAuthorizationConfigurationInput = Shapes::StructureShape.new(name: 'PutConsoleAuthorizationConfigurationInput')
     PutConsoleAuthorizationConfigurationOutput = Shapes::StructureShape.new(name: 'PutConsoleAuthorizationConfigurationOutput')
     PutResourcePermissionStatementInput = Shapes::StructureShape.new(name: 'PutResourcePermissionStatementInput')
@@ -79,12 +95,21 @@ module Aws::Signin
     RequestedRegion = Shapes::StringShape.new(name: 'RequestedRegion')
     Resource = Shapes::StringShape.new(name: 'Resource')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
+    RevocationReason = Shapes::StringShape.new(name: 'RevocationReason')
     RevocationToken = Shapes::StringShape.new(name: 'RevocationToken')
     RevokeOAuth2TokenWithIAMRequest = Shapes::StructureShape.new(name: 'RevokeOAuth2TokenWithIAMRequest')
     RevokeOAuth2TokenWithIAMResponse = Shapes::StructureShape.new(name: 'RevokeOAuth2TokenWithIAMResponse')
+    RevokedSession = Shapes::StructureShape.new(name: 'RevokedSession')
+    RevokedSessionList = Shapes::ListShape.new(name: 'RevokedSessionList')
     Scope = Shapes::StringShape.new(name: 'Scope')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
     ServiceUnavailableException = Shapes::StructureShape.new(name: 'ServiceUnavailableException')
+    Session = Shapes::StructureShape.new(name: 'Session')
+    SessionArn = Shapes::StringShape.new(name: 'SessionArn')
+    SessionArnList = Shapes::ListShape.new(name: 'SessionArnList')
+    SessionStatus = Shapes::StringShape.new(name: 'SessionStatus')
+    SessionSummaryList = Shapes::ListShape.new(name: 'SessionSummaryList')
+    SessionsMaxResults = Shapes::IntegerShape.new(name: 'SessionsMaxResults')
     SigninResourceBasedPolicy = Shapes::StructureShape.new(name: 'SigninResourceBasedPolicy')
     SourceIp = Shapes::StringShape.new(name: 'SourceIp')
     SourceVpc = Shapes::StringShape.new(name: 'SourceVpc')
@@ -94,6 +119,7 @@ module Aws::Signin
     SubjectToken = Shapes::StringShape.new(name: 'SubjectToken')
     SubjectTokenType = Shapes::StringShape.new(name: 'SubjectTokenType')
     TargetId = Shapes::StringShape.new(name: 'TargetId')
+    TokenDuration = Shapes::IntegerShape.new(name: 'TokenDuration')
     TokenExchangeGrantType = Shapes::StringShape.new(name: 'TokenExchangeGrantType')
     TokenExpiresIn = Shapes::IntegerShape.new(name: 'TokenExpiresIn')
     TokenType = Shapes::StringShape.new(name: 'TokenType')
@@ -111,6 +137,22 @@ module Aws::Signin
     AccessToken.add_member(:session_token, Shapes::ShapeRef.new(shape: String, required: true, location_name: "sessionToken"))
     AccessToken.struct_class = Types::AccessToken
 
+    BatchRevokeSessionError.add_member(:session_arn, Shapes::ShapeRef.new(shape: SessionArn, required: true, location_name: "sessionArn"))
+    BatchRevokeSessionError.add_member(:code, Shapes::ShapeRef.new(shape: String, required: true, location_name: "code"))
+    BatchRevokeSessionError.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
+    BatchRevokeSessionError.struct_class = Types::BatchRevokeSessionError
+
+    BatchRevokeSessionErrorList.member = Shapes::ShapeRef.new(shape: BatchRevokeSessionError)
+
+    BatchRevokeSessionsInput.add_member(:principal_arn, Shapes::ShapeRef.new(shape: PrincipalArnFilter, location_name: "principalArn"))
+    BatchRevokeSessionsInput.add_member(:session_arns, Shapes::ShapeRef.new(shape: SessionArnList, required: true, location_name: "sessionArns"))
+    BatchRevokeSessionsInput.add_member(:reason, Shapes::ShapeRef.new(shape: RevocationReason, location_name: "reason"))
+    BatchRevokeSessionsInput.struct_class = Types::BatchRevokeSessionsInput
+
+    BatchRevokeSessionsOutput.add_member(:revoked_sessions, Shapes::ShapeRef.new(shape: RevokedSessionList, required: true, location_name: "revokedSessions"))
+    BatchRevokeSessionsOutput.add_member(:errors, Shapes::ShapeRef.new(shape: BatchRevokeSessionErrorList, required: true, location_name: "errors"))
+    BatchRevokeSessionsOutput.struct_class = Types::BatchRevokeSessionsOutput
+
     Condition.key = Shapes::ShapeRef.new(shape: String)
     Condition.value = Shapes::ShapeRef.new(shape: ConditionValues)
 
@@ -122,6 +164,16 @@ module Aws::Signin
     ConflictException.add_member(:error, Shapes::ShapeRef.new(shape: OAuth2ErrorCode, required: true, location_name: "error"))
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     ConflictException.struct_class = Types::ConflictException
+
+    CreateBearerTokenRequest.add_member(:grant_type, Shapes::ShapeRef.new(shape: ClientCredentialsGrantType, required: true, location_name: "grant_type"))
+    CreateBearerTokenRequest.add_member(:resource, Shapes::ShapeRef.new(shape: Resource, required: true, location_name: "resource"))
+    CreateBearerTokenRequest.add_member(:duration_seconds, Shapes::ShapeRef.new(shape: TokenDuration, location_name: "duration"))
+    CreateBearerTokenRequest.struct_class = Types::CreateBearerTokenRequest
+
+    CreateBearerTokenResponse.add_member(:access_token, Shapes::ShapeRef.new(shape: OAuthAccessToken, required: true, location_name: "access_token"))
+    CreateBearerTokenResponse.add_member(:token_type, Shapes::ShapeRef.new(shape: BearerTokenType, required: true, location_name: "token_type"))
+    CreateBearerTokenResponse.add_member(:expires_in, Shapes::ShapeRef.new(shape: BearerTokenExpiresIn, required: true, location_name: "expires_in"))
+    CreateBearerTokenResponse.struct_class = Types::CreateBearerTokenResponse
 
     CreateOAuth2TokenRequest.add_member(:token_input, Shapes::ShapeRef.new(shape: CreateOAuth2TokenRequestBody, required: true, location_name: "tokenInput"))
     CreateOAuth2TokenRequest.struct_class = Types::CreateOAuth2TokenRequest
@@ -160,6 +212,8 @@ module Aws::Signin
     CreateOAuth2TokenWithTokenExchangeRequest.add_member(:grant_type, Shapes::ShapeRef.new(shape: TokenExchangeGrantType, required: true, location_name: "grant_type"))
     CreateOAuth2TokenWithTokenExchangeRequest.add_member(:subject_token, Shapes::ShapeRef.new(shape: SubjectToken, location_name: "subject_token"))
     CreateOAuth2TokenWithTokenExchangeRequest.add_member(:subject_token_type, Shapes::ShapeRef.new(shape: SubjectTokenType, location_name: "subject_token_type"))
+    CreateOAuth2TokenWithTokenExchangeRequest.add_member(:assertion, Shapes::ShapeRef.new(shape: Assertion, location_name: "assertion"))
+    CreateOAuth2TokenWithTokenExchangeRequest.add_member(:client_id, Shapes::ShapeRef.new(shape: JwtBearerClientId, location_name: "client_id"))
     CreateOAuth2TokenWithTokenExchangeRequest.add_member(:resource, Shapes::ShapeRef.new(shape: Resource, location_name: "resource"))
     CreateOAuth2TokenWithTokenExchangeRequest.add_member(:scope, Shapes::ShapeRef.new(shape: Scope, location_name: "scope"))
     CreateOAuth2TokenWithTokenExchangeRequest.struct_class = Types::CreateOAuth2TokenWithTokenExchangeRequest
@@ -168,6 +222,8 @@ module Aws::Signin
     CreateOAuth2TokenWithTokenExchangeResponse.add_member(:issued_token_type, Shapes::ShapeRef.new(shape: IssuedOAuthAccessTokenType, location_name: "issued_token_type"))
     CreateOAuth2TokenWithTokenExchangeResponse.add_member(:token_type, Shapes::ShapeRef.new(shape: BearerTokenType, required: true, location_name: "token_type"))
     CreateOAuth2TokenWithTokenExchangeResponse.add_member(:expires_in, Shapes::ShapeRef.new(shape: TokenExpiresIn, required: true, location_name: "expires_in"))
+    CreateOAuth2TokenWithTokenExchangeResponse.add_member(:resource, Shapes::ShapeRef.new(shape: Resource, location_name: "resource"))
+    CreateOAuth2TokenWithTokenExchangeResponse.add_member(:scope, Shapes::ShapeRef.new(shape: Scope, location_name: "scope"))
     CreateOAuth2TokenWithTokenExchangeResponse.struct_class = Types::CreateOAuth2TokenWithTokenExchangeResponse
 
     DeleteConsoleAuthorizationConfigurationInput.add_member(:target_id, Shapes::ShapeRef.new(shape: TargetId, location_name: "targetId"))
@@ -196,6 +252,25 @@ module Aws::Signin
 
     GetResourcePolicyOutput.add_member(:signin_resource_based_policy, Shapes::ShapeRef.new(shape: SigninResourceBasedPolicy, required: true, location_name: "signinResourceBasedPolicy"))
     GetResourcePolicyOutput.struct_class = Types::GetResourcePolicyOutput
+
+    GetSessionInput.add_member(:session_arn, Shapes::ShapeRef.new(shape: SessionArn, required: true, location_name: "sessionArn"))
+    GetSessionInput.add_member(:principal_arn, Shapes::ShapeRef.new(shape: PrincipalArnFilter, location_name: "principalArn"))
+    GetSessionInput.struct_class = Types::GetSessionInput
+
+    GetSessionOutput.add_member(:session_arn, Shapes::ShapeRef.new(shape: SessionArn, required: true, location_name: "sessionArn"))
+    GetSessionOutput.add_member(:principal_arn, Shapes::ShapeRef.new(shape: PrincipalArn, required: true, location_name: "principalArn"))
+    GetSessionOutput.add_member(:role, Shapes::ShapeRef.new(shape: PrincipalArn, location_name: "role"))
+    GetSessionOutput.add_member(:status, Shapes::ShapeRef.new(shape: SessionStatus, location_name: "status"))
+    GetSessionOutput.add_member(:client_id, Shapes::ShapeRef.new(shape: String, location_name: "clientId"))
+    GetSessionOutput.add_member(:client_type, Shapes::ShapeRef.new(shape: ClientType, location_name: "clientType"))
+    GetSessionOutput.add_member(:resource, Shapes::ShapeRef.new(shape: String, location_name: "resource"))
+    GetSessionOutput.add_member(:issued_at, Shapes::ShapeRef.new(shape: Long, required: true, location_name: "issuedAt"))
+    GetSessionOutput.add_member(:expires_at, Shapes::ShapeRef.new(shape: Long, required: true, location_name: "expiresAt"))
+    GetSessionOutput.add_member(:last_used_at, Shapes::ShapeRef.new(shape: Long, location_name: "lastUsedAt"))
+    GetSessionOutput.add_member(:issued_in_region, Shapes::ShapeRef.new(shape: String, location_name: "issuedInRegion"))
+    GetSessionOutput.add_member(:origin_session_arn, Shapes::ShapeRef.new(shape: SessionArn, location_name: "originSessionArn"))
+    GetSessionOutput.add_member(:user_agent, Shapes::ShapeRef.new(shape: String, location_name: "userAgent"))
+    GetSessionOutput.struct_class = Types::GetSessionOutput
 
     InternalServerException.add_member(:error, Shapes::ShapeRef.new(shape: OAuth2ErrorCode, required: true, location_name: "error"))
     InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
@@ -236,6 +311,19 @@ module Aws::Signin
     ListResourcePermissionStatementsOutput.add_member(:permission_statements, Shapes::ShapeRef.new(shape: PermissionStatementSummaries, required: true, location_name: "permissionStatements"))
     ListResourcePermissionStatementsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListResourcePermissionStatementsOutput.struct_class = Types::ListResourcePermissionStatementsOutput
+
+    ListSessionsInput.add_member(:principal_arn, Shapes::ShapeRef.new(shape: PrincipalArnFilter, location_name: "principalArn"))
+    ListSessionsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: SessionsMaxResults, location_name: "maxResults"))
+    ListSessionsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListSessionsInput.add_member(:status, Shapes::ShapeRef.new(shape: SessionStatus, location_name: "status"))
+    ListSessionsInput.add_member(:client_id, Shapes::ShapeRef.new(shape: String, location_name: "clientId"))
+    ListSessionsInput.add_member(:issued_after, Shapes::ShapeRef.new(shape: Long, location_name: "issuedAfter"))
+    ListSessionsInput.add_member(:issued_before, Shapes::ShapeRef.new(shape: Long, location_name: "issuedBefore"))
+    ListSessionsInput.struct_class = Types::ListSessionsInput
+
+    ListSessionsOutput.add_member(:items, Shapes::ShapeRef.new(shape: SessionSummaryList, required: true, location_name: "items"))
+    ListSessionsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListSessionsOutput.struct_class = Types::ListSessionsOutput
 
     PermissionStatementSummaries.member = Shapes::ShapeRef.new(shape: PermissionStatementSummary)
 
@@ -287,6 +375,11 @@ module Aws::Signin
 
     RevokeOAuth2TokenWithIAMResponse.struct_class = Types::RevokeOAuth2TokenWithIAMResponse
 
+    RevokedSession.add_member(:session_arn, Shapes::ShapeRef.new(shape: SessionArn, required: true, location_name: "sessionArn"))
+    RevokedSession.struct_class = Types::RevokedSession
+
+    RevokedSessionList.member = Shapes::ShapeRef.new(shape: RevokedSession)
+
     ServiceQuotaExceededException.add_member(:error, Shapes::ShapeRef.new(shape: OAuth2ErrorCode, required: true, location_name: "error"))
     ServiceQuotaExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     ServiceQuotaExceededException.struct_class = Types::ServiceQuotaExceededException
@@ -294,6 +387,21 @@ module Aws::Signin
     ServiceUnavailableException.add_member(:error, Shapes::ShapeRef.new(shape: OAuth2ErrorCode, required: true, location_name: "error"))
     ServiceUnavailableException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     ServiceUnavailableException.struct_class = Types::ServiceUnavailableException
+
+    Session.add_member(:session_arn, Shapes::ShapeRef.new(shape: SessionArn, required: true, location_name: "sessionArn"))
+    Session.add_member(:principal_arn, Shapes::ShapeRef.new(shape: PrincipalArn, required: true, location_name: "principalArn"))
+    Session.add_member(:role, Shapes::ShapeRef.new(shape: PrincipalArn, location_name: "role"))
+    Session.add_member(:status, Shapes::ShapeRef.new(shape: SessionStatus, location_name: "status"))
+    Session.add_member(:issued_at, Shapes::ShapeRef.new(shape: Long, required: true, location_name: "issuedAt"))
+    Session.add_member(:expires_at, Shapes::ShapeRef.new(shape: Long, required: true, location_name: "expiresAt"))
+    Session.add_member(:client_id, Shapes::ShapeRef.new(shape: String, location_name: "clientId"))
+    Session.add_member(:client_type, Shapes::ShapeRef.new(shape: ClientType, location_name: "clientType"))
+    Session.add_member(:resource, Shapes::ShapeRef.new(shape: String, location_name: "resource"))
+    Session.struct_class = Types::Session
+
+    SessionArnList.member = Shapes::ShapeRef.new(shape: SessionArn)
+
+    SessionSummaryList.member = Shapes::ShapeRef.new(shape: Session)
 
     SigninResourceBasedPolicy.add_member(:version, Shapes::ShapeRef.new(shape: String, location_name: "Version"))
     SigninResourceBasedPolicy.add_member(:statement, Shapes::ShapeRef.new(shape: PolicyStatements, location_name: "Statement"))
@@ -325,6 +433,31 @@ module Aws::Signin
         "signingName" => "signin",
         "uid" => "signin-2023-01-01",
       }
+
+      api.add_operation(:batch_revoke_sessions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "BatchRevokeSessions"
+        o.http_method = "POST"
+        o.http_request_uri = "/batch-revoke-sessions"
+        o.input = Shapes::ShapeRef.new(shape: BatchRevokeSessionsInput)
+        o.output = Shapes::ShapeRef.new(shape: BatchRevokeSessionsOutput)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsError)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:create_bearer_token, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateBearerToken"
+        o.http_method = "POST"
+        o.http_request_uri = "/v1/token?x-amz-token-request-type=bearer"
+        o.input = Shapes::ShapeRef.new(shape: CreateBearerTokenRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateBearerTokenResponse)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsError)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
 
       api.add_operation(:create_o_auth_2_token, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateOAuth2Token"
@@ -419,6 +552,19 @@ module Aws::Signin
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
+      api.add_operation(:get_session, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetSession"
+        o.http_method = "POST"
+        o.http_request_uri = "/get-session"
+        o.input = Shapes::ShapeRef.new(shape: GetSessionInput)
+        o.output = Shapes::ShapeRef.new(shape: GetSessionOutput)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsError)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
       api.add_operation(:introspect_o_auth_2_token_with_iam, Seahorse::Model::Operation.new.tap do |o|
         o.name = "IntrospectOAuth2TokenWithIAM"
         o.http_method = "POST"
@@ -439,6 +585,24 @@ module Aws::Signin
         o.output = Shapes::ShapeRef.new(shape: ListResourcePermissionStatementsOutput)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsError)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_sessions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListSessions"
+        o.http_method = "POST"
+        o.http_request_uri = "/list-sessions"
+        o.input = Shapes::ShapeRef.new(shape: ListSessionsInput)
+        o.output = Shapes::ShapeRef.new(shape: ListSessionsOutput)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsError)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)

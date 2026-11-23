@@ -1,0 +1,903 @@
+# frozen_string_literal: true
+
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+require 'seahorse/client/plugins/content_length'
+require 'aws-sdk-core/plugins/credentials_configuration'
+require 'aws-sdk-core/plugins/logging'
+require 'aws-sdk-core/plugins/param_converter'
+require 'aws-sdk-core/plugins/param_validator'
+require 'aws-sdk-core/plugins/user_agent'
+require 'aws-sdk-core/plugins/helpful_socket_errors'
+require 'aws-sdk-core/plugins/retry_errors'
+require 'aws-sdk-core/plugins/global_configuration'
+require 'aws-sdk-core/plugins/regional_endpoint'
+require 'aws-sdk-core/plugins/endpoint_discovery'
+require 'aws-sdk-core/plugins/endpoint_pattern'
+require 'aws-sdk-core/plugins/response_paging'
+require 'aws-sdk-core/plugins/stub_responses'
+require 'aws-sdk-core/plugins/idempotency_token'
+require 'aws-sdk-core/plugins/invocation_id'
+require 'aws-sdk-core/plugins/jsonvalue_converter'
+require 'aws-sdk-core/plugins/client_metrics_plugin'
+require 'aws-sdk-core/plugins/client_metrics_send_plugin'
+require 'aws-sdk-core/plugins/transfer_encoding'
+require 'aws-sdk-core/plugins/http_checksum'
+require 'aws-sdk-core/plugins/checksum_algorithm'
+require 'aws-sdk-core/plugins/request_compression'
+require 'aws-sdk-core/plugins/defaults_mode'
+require 'aws-sdk-core/plugins/recursion_detection'
+require 'aws-sdk-core/plugins/telemetry'
+require 'aws-sdk-core/plugins/sign'
+require 'aws-sdk-core/plugins/protocols/rest_json'
+require 'aws-sdk-core/plugins/event_stream_configuration'
+
+module Aws::SageMakerGatewayRuntime
+  # An API client for SageMakerGatewayRuntime.  To construct a client, you need to configure a `:region` and `:credentials`.
+  #
+  #     client = Aws::SageMakerGatewayRuntime::Client.new(
+  #       region: region_name,
+  #       credentials: credentials,
+  #       # ...
+  #     )
+  #
+  # For details on configuring region and credentials see
+  # the [developer guide](/sdk-for-ruby/v3/developer-guide/setup-config.html).
+  #
+  # See {#initialize} for a full list of supported configuration options.
+  class Client < Seahorse::Client::Base
+
+    include Aws::ClientStubs
+
+    @identifier = :sagemakergatewayruntime
+
+    set_api(ClientApi::API)
+
+    add_plugin(Seahorse::Client::Plugins::ContentLength)
+    add_plugin(Aws::Plugins::CredentialsConfiguration)
+    add_plugin(Aws::Plugins::Logging)
+    add_plugin(Aws::Plugins::ParamConverter)
+    add_plugin(Aws::Plugins::ParamValidator)
+    add_plugin(Aws::Plugins::UserAgent)
+    add_plugin(Aws::Plugins::HelpfulSocketErrors)
+    add_plugin(Aws::Plugins::RetryErrors)
+    add_plugin(Aws::Plugins::GlobalConfiguration)
+    add_plugin(Aws::Plugins::RegionalEndpoint)
+    add_plugin(Aws::Plugins::EndpointDiscovery)
+    add_plugin(Aws::Plugins::EndpointPattern)
+    add_plugin(Aws::Plugins::ResponsePaging)
+    add_plugin(Aws::Plugins::StubResponses)
+    add_plugin(Aws::Plugins::IdempotencyToken)
+    add_plugin(Aws::Plugins::InvocationId)
+    add_plugin(Aws::Plugins::JsonvalueConverter)
+    add_plugin(Aws::Plugins::ClientMetricsPlugin)
+    add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
+    add_plugin(Aws::Plugins::TransferEncoding)
+    add_plugin(Aws::Plugins::HttpChecksum)
+    add_plugin(Aws::Plugins::ChecksumAlgorithm)
+    add_plugin(Aws::Plugins::RequestCompression)
+    add_plugin(Aws::Plugins::DefaultsMode)
+    add_plugin(Aws::Plugins::RecursionDetection)
+    add_plugin(Aws::Plugins::Telemetry)
+    add_plugin(Aws::Plugins::Sign)
+    add_plugin(Aws::Plugins::Protocols::RestJson)
+    add_plugin(Aws::Plugins::EventStreamConfiguration)
+    add_plugin(Aws::SageMakerGatewayRuntime::Plugins::Endpoints)
+
+    # @overload initialize(options)
+    #   @param [Hash] options
+    #
+    #   @option options [Array<Seahorse::Client::Plugin>] :plugins ([]])
+    #     A list of plugins to apply to the client. Each plugin is either a
+    #     class name or an instance of a plugin class.
+    #
+    #   @option options [required, Aws::CredentialProvider] :credentials
+    #     Your AWS credentials used for authentication. This can be any class that includes and implements
+    #     `Aws::CredentialProvider`, or instance of any one of the following classes:
+    #
+    #     * `Aws::Credentials` - Used for configuring static, non-refreshing
+    #       credentials.
+    #
+    #     * `Aws::SharedCredentials` - Used for loading static credentials from a
+    #       shared file, such as `~/.aws/config`.
+    #
+    #     * `Aws::AssumeRoleCredentials` - Used when you need to assume a role.
+    #
+    #     * `Aws::AssumeRoleWebIdentityCredentials` - Used when you need to
+    #       assume a role after providing credentials via the web.
+    #
+    #     * `Aws::SSOCredentials` - Used for loading credentials from AWS SSO using an
+    #       access token generated from `aws login`.
+    #
+    #     * `Aws::ProcessCredentials` - Used for loading credentials from a
+    #       process that outputs to stdout.
+    #
+    #     * `Aws::InstanceProfileCredentials` - Used for loading credentials
+    #       from an EC2 IMDS on an EC2 instance.
+    #
+    #     * `Aws::ECSCredentials` - Used for loading credentials from
+    #       instances running in ECS.
+    #
+    #     * `Aws::CognitoIdentityCredentials` - Used for loading credentials
+    #       from the Cognito Identity service.
+    #
+    #     When `:credentials` are not configured directly, the following locations will be searched for credentials:
+    #
+    #     * `Aws.config[:credentials]`
+    #
+    #     * The `:access_key_id`, `:secret_access_key`, `:session_token`, and
+    #       `:account_id` options.
+    #
+    #     * `ENV['AWS_ACCESS_KEY_ID']`, `ENV['AWS_SECRET_ACCESS_KEY']`,
+    #       `ENV['AWS_SESSION_TOKEN']`, and `ENV['AWS_ACCOUNT_ID']`.
+    #
+    #     * `~/.aws/credentials`
+    #
+    #     * `~/.aws/config`
+    #
+    #     * EC2/ECS IMDS instance profile - When used by default, the timeouts are very aggressive.
+    #       Construct and pass an instance of `Aws::InstanceProfileCredentials` or `Aws::ECSCredentials` to
+    #       enable retries and extended timeouts. Instance profile credential fetching can be disabled by
+    #       setting `ENV['AWS_EC2_METADATA_DISABLED']` to `true`.
+    #
+    #   @option options [required, String] :region
+    #     The AWS region to connect to.  The configured `:region` is
+    #     used to determine the service `:endpoint`. When not passed,
+    #     a default `:region` is searched for in the following locations:
+    #
+    #     * `Aws.config[:region]`
+    #     * `ENV['AWS_REGION']`
+    #     * `ENV['AMAZON_REGION']`
+    #     * `ENV['AWS_DEFAULT_REGION']`
+    #     * `~/.aws/credentials`
+    #     * `~/.aws/config`
+    #
+    #   @option options [String] :access_key_id
+    #
+    #   @option options [String] :account_id
+    #
+    #   @option options [Boolean] :active_endpoint_cache (false)
+    #     When set to `true`, a thread polling for endpoints will be running in
+    #     the background every 60 secs (default). Defaults to `false`.
+    #
+    #   @option options [Boolean] :adaptive_retry_wait_to_fill (true)
+    #     Used only in `adaptive` retry mode.  When true, the request will sleep
+    #     until there is sufficent client side capacity to retry the request.
+    #     When false, the request will raise a `RetryCapacityNotAvailableError` and will
+    #     not retry instead of sleeping.
+    #
+    #   @option options [Array<String>] :auth_scheme_preference
+    #     A list of preferred authentication schemes to use when making a request. Supported values are:
+    #     `sigv4`, `sigv4a`, `httpBearerAuth`, and `noAuth`. When set using `ENV['AWS_AUTH_SCHEME_PREFERENCE']` or in
+    #     shared config as `auth_scheme_preference`, the value should be a comma-separated list.
+    #
+    #   @option options [Boolean] :client_side_monitoring (false)
+    #     When `true`, client-side metrics will be collected for all API requests from
+    #     this client.
+    #
+    #   @option options [String] :client_side_monitoring_client_id ("")
+    #     Allows you to provide an identifier for this client which will be attached to
+    #     all generated client side metrics. Defaults to an empty string.
+    #
+    #   @option options [String] :client_side_monitoring_host ("127.0.0.1")
+    #     Allows you to specify the DNS hostname or IPv4 or IPv6 address that the client
+    #     side monitoring agent is running on, where client metrics will be published via UDP.
+    #
+    #   @option options [Integer] :client_side_monitoring_port (31000)
+    #     Required for publishing client metrics. The port that the client side monitoring
+    #     agent is running on, where client metrics will be published via UDP.
+    #
+    #   @option options [Aws::ClientSideMonitoring::Publisher] :client_side_monitoring_publisher (Aws::ClientSideMonitoring::Publisher)
+    #     Allows you to provide a custom client-side monitoring publisher class. By default,
+    #     will use the Client Side Monitoring Agent Publisher.
+    #
+    #   @option options [Boolean] :convert_params (true)
+    #     When `true`, an attempt is made to coerce request parameters into
+    #     the required types.
+    #
+    #   @option options [Boolean] :correct_clock_skew (true)
+    #     Used only in `standard` and `adaptive` retry modes. Specifies whether
+    #     to apply a clock skew correction and retry requests with skewed client
+    #     clocks. Takes effect only when `disable_clock_skew_correction` is not set.
+    #
+    #   @option options [String] :defaults_mode ("legacy")
+    #     See {Aws::DefaultsModeConfiguration} for a list of the
+    #     accepted modes and the configuration defaults that are included.
+    #
+    #   @option options [Boolean] :disable_clock_skew_correction
+    #     Used only in `standard` and `adaptive` retry modes. When `true`, the
+    #     SDK does not apply a clock skew correction, does not update its stored
+    #     skew from responses, and does not retry clock skew errors. Clock skew
+    #     correction is enabled by default.
+    #
+    #   @option options [Boolean] :disable_host_prefix_injection (false)
+    #     When `true`, the SDK will not prepend the modeled host prefix to the endpoint.
+    #
+    #   @option options [Boolean] :disable_request_compression (false)
+    #     When set to 'true' the request body will not be compressed
+    #     for supported operations.
+    #
+    #   @option options [String, URI::HTTPS, URI::HTTP] :endpoint
+    #     Normally you should not configure the `:endpoint` option
+    #     directly. This is normally constructed from the `:region`
+    #     option. Configuring `:endpoint` is normally reserved for
+    #     connecting to test or custom endpoints. The endpoint should
+    #     be a URI formatted like:
+    #
+    #         'http://example.com'
+    #         'https://example.com'
+    #         'http://example.com:123'
+    #
+    #   @option options [Integer] :endpoint_cache_max_entries (1000)
+    #     Used for the maximum size limit of the LRU cache storing endpoints data
+    #     for endpoint discovery enabled operations. Defaults to 1000.
+    #
+    #   @option options [Integer] :endpoint_cache_max_threads (10)
+    #     Used for the maximum threads in use for polling endpoints to be cached, defaults to 10.
+    #
+    #   @option options [Integer] :endpoint_cache_poll_interval (60)
+    #     When :endpoint_discovery and :active_endpoint_cache is enabled,
+    #     Use this option to config the time interval in seconds for making
+    #     requests fetching endpoints information. Defaults to 60 sec.
+    #
+    #   @option options [Boolean] :endpoint_discovery (false)
+    #     When set to `true`, endpoint discovery will be enabled for operations when available.
+    #
+    #   @option options [Proc] :event_stream_handler
+    #     When an EventStream or Proc object is provided, it will be used as callback for each chunk of event stream response received along the way.
+    #
+    #   @option options [Boolean] :ignore_configured_endpoint_urls
+    #     Setting to true disables use of endpoint URLs provided via environment
+    #     variables and the shared configuration file.
+    #
+    #   @option options [Proc] :input_event_stream_handler
+    #     When an EventStream or Proc object is provided, it can be used for sending events for the event stream.
+    #
+    #   @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
+    #     The log formatter.
+    #
+    #   @option options [Symbol] :log_level (:info)
+    #     The log level to send messages to the `:logger` at.
+    #
+    #   @option options [Logger] :logger
+    #     The Logger instance to send log messages to.  If this option
+    #     is not set, logging will be disabled.
+    #
+    #   @option options [Integer] :max_attempts (3)
+    #     An integer representing the maximum number attempts that will be made for
+    #     a single request, including the initial attempt.  For example,
+    #     setting this value to 5 will result in a request being retried up to
+    #     4 times. Used in `standard` and `adaptive` retry modes. Defaults to 3,
+    #     except for DynamoDB and DynamoDB Streams, which default to 4.
+    #
+    #   @option options [Proc] :output_event_stream_handler
+    #     When an EventStream or Proc object is provided, it will be used as callback for each chunk of event stream response received along the way.
+    #
+    #   @option options [String] :profile ("default")
+    #     Used when loading credentials from the shared credentials file at `HOME/.aws/credentials`.
+    #     When not specified, 'default' is used.
+    #
+    #   @option options [String] :request_checksum_calculation ("when_supported")
+    #     Determines when a checksum will be calculated for request payloads. Values are:
+    #
+    #     * `when_supported` - (default) When set, a checksum will be
+    #       calculated for all request payloads of operations modeled with the
+    #       `httpChecksum` trait where `requestChecksumRequired` is `true` and/or a
+    #       `requestAlgorithmMember` is modeled.
+    #     * `when_required` - When set, a checksum will only be calculated for
+    #       request payloads of operations modeled with the  `httpChecksum` trait where
+    #       `requestChecksumRequired` is `true` or where a `requestAlgorithmMember`
+    #       is modeled and supplied.
+    #
+    #   @option options [Integer] :request_min_compression_size_bytes (10240)
+    #     The minimum size in bytes that triggers compression for request
+    #     bodies. The value must be non-negative integer value between 0
+    #     and 10485780 bytes inclusive.
+    #
+    #   @option options [String] :response_checksum_validation ("when_supported")
+    #     Determines when checksum validation will be performed on response payloads. Values are:
+    #
+    #     * `when_supported` - (default) When set, checksum validation is performed on all
+    #       response payloads of operations modeled with the `httpChecksum` trait where
+    #       `responseAlgorithms` is modeled, except when no modeled checksum algorithms
+    #       are supported.
+    #     * `when_required` - When set, checksum validation is not performed on
+    #       response payloads of operations unless the checksum algorithm is supported and
+    #       the `requestValidationModeMember` member is set to `ENABLED`.
+    #
+    #   @option options [Proc] :retry_backoff
+    #     A proc or lambda used for backoff. Defaults to 2**retries * retry_base_delay.
+    #     This option is only used in the `legacy` retry mode.
+    #
+    #   @option options [Float] :retry_base_delay (0.3)
+    #     The base delay in seconds used by the default backoff function. This option
+    #     is only used in the `legacy` retry mode.
+    #
+    #   @option options [Symbol] :retry_jitter (:none)
+    #     A delay randomiser function used by the default backoff function.
+    #     Some predefined functions can be referenced by name - :none, :equal, :full,
+    #     otherwise a Proc that takes and returns a number. This option is only used
+    #     in the `legacy` retry mode.
+    #
+    #     @see https://www.awsarchitectureblog.com/2015/03/backoff.html
+    #
+    #   @option options [Integer] :retry_limit (3)
+    #     The maximum number of times to retry failed requests.  Only
+    #     ~ 500 level server errors and certain ~ 400 level client errors
+    #     are retried.  Generally, these are throttling errors, data
+    #     checksum errors, networking errors, timeout errors, auth errors,
+    #     endpoint discovery, and errors from expired credentials.
+    #     This option is only used in the `legacy` retry mode.
+    #
+    #   @option options [Integer] :retry_max_delay (0)
+    #     The maximum number of seconds to delay between retries (0 for no limit)
+    #     used by the default backoff function. This option is only used in the
+    #     `legacy` retry mode.
+    #
+    #   @option options [String] :retry_mode ("standard")
+    #     Specifies which retry algorithm to use. Values are:
+    #
+    #     * `legacy` - The pre-existing retry behavior.
+    #
+    #     * `standard` - A standardized set of retry rules across the AWS SDKs.
+    #       This includes support for retry quotas, which limit the number of
+    #       unsuccessful retries a client can make. This is the default value
+    #       if no retry mode is provided.
+    #
+    #     * `adaptive` - A retry mode that includes all the functionality of
+    #       `standard` mode along with automatic client side throttling.
+    #
+    #   @option options [String] :sdk_ua_app_id
+    #     A unique and opaque application ID that is appended to the
+    #     User-Agent header as app/sdk_ua_app_id. It should have a
+    #     maximum length of 50. This variable is sourced from environment
+    #     variable AWS_SDK_UA_APP_ID or the shared config profile attribute sdk_ua_app_id.
+    #
+    #   @option options [String] :secret_access_key
+    #
+    #   @option options [String] :session_token
+    #
+    #   @option options [Array] :sigv4a_signing_region_set
+    #     A list of regions that should be signed with SigV4a signing. When
+    #     not passed, a default `:sigv4a_signing_region_set` is searched for
+    #     in the following locations:
+    #
+    #     * `Aws.config[:sigv4a_signing_region_set]`
+    #     * `ENV['AWS_SIGV4A_SIGNING_REGION_SET']`
+    #     * `~/.aws/config`
+    #
+    #   @option options [Boolean] :stub_responses (false)
+    #     Causes the client to return stubbed responses. By default
+    #     fake responses are generated and returned. You can specify
+    #     the response data to return or errors to raise by calling
+    #     {ClientStubs#stub_responses}. See {ClientStubs} for more information.
+    #
+    #     ** Please note ** When response stubbing is enabled, no HTTP
+    #     requests are made, and retries are disabled.
+    #
+    #   @option options [Aws::Telemetry::TelemetryProviderBase] :telemetry_provider (Aws::Telemetry::NoOpTelemetryProvider)
+    #     Allows you to provide a telemetry provider, which is used to
+    #     emit telemetry data. By default, uses `NoOpTelemetryProvider` which
+    #     will not record or emit any telemetry data. The SDK supports the
+    #     following telemetry providers:
+    #
+    #     * OpenTelemetry (OTel) - To use the OTel provider, install and require the
+    #     `opentelemetry-sdk` gem and then, pass in an instance of a
+    #     `Aws::Telemetry::OTelProvider` for telemetry provider.
+    #
+    #   @option options [Aws::TokenProvider] :token_provider
+    #     Your Bearer token used for authentication. This can be any class that includes and implements
+    #     `Aws::TokenProvider`, or instance of any one of the following classes:
+    #
+    #     * `Aws::StaticTokenProvider` - Used for configuring static, non-refreshing
+    #       tokens.
+    #
+    #     * `Aws::SSOTokenProvider` - Used for loading tokens from AWS SSO using an
+    #       access token generated from `aws login`.
+    #
+    #     When `:token_provider` is not configured directly, the `Aws::TokenProviderChain`
+    #     will be used to search for tokens configured for your profile in shared configuration files.
+    #
+    #   @option options [Boolean] :use_dualstack_endpoint
+    #     When set to `true`, dualstack enabled endpoints (with `.aws` TLD)
+    #     will be used if available.
+    #
+    #   @option options [Boolean] :use_fips_endpoint
+    #     When set to `true`, fips compatible endpoints will be used if available.
+    #     When a `fips` region is used, the region is normalized and this config
+    #     is set to `true`.
+    #
+    #   @option options [Boolean] :validate_params (true)
+    #     When `true`, request parameters are validated before
+    #     sending the request.
+    #
+    #   @option options [Aws::SageMakerGatewayRuntime::EndpointProvider] :endpoint_provider
+    #     The endpoint provider used to resolve endpoints. Any object that responds to
+    #     `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to
+    #     `Aws::SageMakerGatewayRuntime::EndpointParameters`.
+    #
+    #   @option options [Float] :http_continue_timeout (1)
+    #     The number of seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has "Expect"
+    #     header set to "100-continue".  Defaults to `nil` which  disables this
+    #     behaviour.  This value can safely be set per request on the session.
+    #
+    #   @option options [Float] :http_idle_timeout (5)
+    #     The number of seconds a connection is allowed to sit idle before it
+    #     is considered stale.  Stale connections are closed and removed from the
+    #     pool before making a request.
+    #
+    #   @option options [Float] :http_open_timeout (15)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
+    #
+    #   @option options [URI::HTTP,String] :http_proxy
+    #     A proxy to send requests through.  Formatted like 'http://proxy.com:123'.
+    #
+    #   @option options [Float] :http_read_timeout (60)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
+    #
+    #   @option options [Boolean] :http_wire_trace (false)
+    #     When `true`,  HTTP debug output will be sent to the `:logger`.
+    #
+    #   @option options [Proc] :on_chunk_received
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the response body is received. It provides three arguments: the chunk,
+    #     the number of bytes received, and the total number of
+    #     bytes in the response (or nil if the server did not send a `content-length`).
+    #
+    #   @option options [Proc] :on_chunk_sent
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the request body is sent. It provides three arguments: the chunk,
+    #     the number of bytes read from the body, and the total number of
+    #     bytes in the body.
+    #
+    #   @option options [Boolean] :raise_response_errors (true)
+    #     When `true`, response errors are raised.
+    #
+    #   @option options [String] :ssl_ca_bundle
+    #     Full path to the SSL certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass `:ssl_ca_bundle` or
+    #     `:ssl_ca_directory` the the system default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory
+    #     Full path of the directory that contains the unbundled SSL certificate
+    #     authority files for verifying peer certificates.  If you do
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the system
+    #     default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_store
+    #     Sets the X509::Store to verify peer certificate.
+    #
+    #   @option options [OpenSSL::X509::Certificate] :ssl_cert
+    #     Sets a client certificate when creating http connections.
+    #
+    #   @option options [OpenSSL::PKey] :ssl_key
+    #     Sets a client key when creating http connections.
+    #
+    #   @option options [Float] :ssl_timeout
+    #     Sets the SSL timeout in seconds
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true)
+    #     When `true`, SSL peer certificates are verified when establishing a connection.
+    #
+    def initialize(*args)
+      super
+    end
+
+    # @!group API Operations
+
+    # Buffered (non-streaming) inference. Returns the full OpenAI completion
+    # body.
+    #
+    # Errors carry their origin in the `Message` prefix. Every typed
+    # error's text is in the `Message` member (JSON key `Message`), and
+    # starts with one of these prefixes:
+    #
+    # * `Global Inference Gateway:` -- the gateway rejected or failed the
+    #   request itself: validation, authorization, throttling, routing (the
+    #   gateway or model was not found, or no capacity is available), a
+    #   gateway limit or time limit, or failing to reach the inference
+    #   gateway (`Global Inference Gateway: could not reach the inference
+    #   gateway: <reason>`, or `Global Inference Gateway: timed out waiting
+    #   for the inference gateway`). This includes the 400 for an invalid
+    #   request and the 413 for a request body that is too large.
+    # * `inference gateway:` -- the inference gateway serving the model
+    #   returned an error status. The message gives that status code and up
+    #   to 256 bytes of its error message, for example `inference gateway:
+    #   503 <message>`. A BadGatewayException can instead read `inference
+    #   gateway: response ended unexpectedly`, with no status, when the
+    #   inference gateway's connection failed while it was sending the
+    #   response.
+    # * `inference gateway (<component>):` -- the same, when the inference
+    #   gateway reports which of its components produced the error, for
+    #   example `inference gateway (model server): 502 <message>`. The
+    #   component is one of:
+    #   * `config` -- the inference gateway's configuration and proxy
+    #     layer.
+    #   * `scheduler` -- the inference gateway's request scheduler.
+    #   * `model selector` -- the inference gateway's model selector.
+    #   * `model server` -- the model server.
+    #
+    # Every error status the inference gateway returns is a typed error,
+    # chosen by that status:
+    #
+    # * 400 and any other 4xx not listed here -- a 400 validation error.
+    # * 401 and 403 -- AccessDeniedException (403).
+    # * 404 -- ResourceNotFoundException.
+    # * 408 -- GatewayTimeoutException (504).
+    # * 429 -- ThrottlingException, with the `Retry-After` header.
+    # * 502, and 500, 503 or any other 5xx not listed here --
+    #   BadGatewayException (502). A 500 or 503 from the inference gateway
+    #   comes after the request was dispatched, so it is not modeled as
+    #   retryable, and the gateway may already have tried another inference
+    #   gateway. Standard SDK retry modes may still retry a 5xx status; set
+    #   max attempts to 1 if a repeated inference is unacceptable.
+    # * 504 -- GatewayTimeoutException.
+    #
+    # @option params [required, String] :gateway_id
+    #   The ID of the Global Inference Gateway to invoke. IAM policies refer
+    #   to the gateway by its ARN,
+    #   `arn:<partition>:sagemaker:<region>:<account>:global-inference-gateway/<id>`.
+    #
+    # @option params [String] :accept
+    #   The MIME type you want for the response. It is passed to the model
+    #   server.
+    #
+    # @option params [required, String] :content_type
+    #   The MIME type of the request body. Pass `application/json` (parameters
+    #   such as `charset=utf-8` are allowed): the body is one OpenAI JSON
+    #   object. The Global Inference Gateway rejects other content types with
+    #   a 415 error.
+    #
+    # @option params [String] :customer_identity_token
+    #   Per-caller customer identity token (a JWT), forwarded unchanged to the
+    #   inference gateway, which validates it. The gateway does not use it to
+    #   authorize the request. Include it in the SigV4 signed headers so it
+    #   cannot be altered in transit. Redacted from logs, metrics and traces.
+    #
+    # @option params [required, String, StringIO, File] :body
+    #   The inference request body: one OpenAI JSON object, at most 10 MiB.
+    #   Its content is passed to the model server unchanged, except that the
+    #   request is always sent with `"stream": false`: this operation returns
+    #   one JSON document, so a `"stream": true` in the body is overridden
+    #   (use InvokeGlobalInferenceGatewayWithResponseStream to stream). A body
+    #   that is not one JSON object, or that repeats the top-level `model` key
+    #   with different values, is rejected with a 400 validation error. A body
+    #   larger than 10 MiB is rejected with PayloadTooLargeException (413).
+    #   The gateway reads only `model` and `stream`, and does not store the
+    #   body.
+    #
+    #   **SDK automatically handles json encoding and base64 encoding for you
+    #   when the required value (Hash, Array, etc.) is provided according to
+    #   the description.**
+    #
+    # @return [Types::InvokeGlobalInferenceGatewayOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::InvokeGlobalInferenceGatewayOutput#body #body} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.invoke_global_inference_gateway({
+    #     gateway_id: "GatewayId", # required
+    #     accept: "String",
+    #     content_type: "RequestContentType", # required
+    #     customer_identity_token: "CustomerIdentityToken",
+    #     body: "data", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.body #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-gateway-runtime-2026-10-01/InvokeGlobalInferenceGateway AWS API Documentation
+    #
+    # @overload invoke_global_inference_gateway(params = {})
+    # @param [Hash] params ({})
+    def invoke_global_inference_gateway(params = {}, options = {})
+      req = build_request(:invoke_global_inference_gateway, params)
+      req.send_request(options)
+    end
+
+    # Streaming inference. Returns an AWS event stream of PayloadPart events
+    # that carry the model server's server-sent event (SSE) bytes, so SDKs
+    # decode the stream into events for you.
+    #
+    # The errors listed for this operation, other than ModelStreamError and
+    # InternalStreamFailure, are returned before the response starts (before
+    # the 200 status), so they end the request, not the stream. None of them
+    # can occur after the 200. ModelStreamError and InternalStreamFailure
+    # appear only as events in the stream, after the 200. Once the 200 is
+    # sent, the stream carries the response as PayloadPart events. If
+    # reading the inference gateway's response fails, the stream carries
+    # one InternalStreamFailure event and then ends. ModelStreamError is
+    # reserved and is not currently sent.
+    #
+    # Errors carry their origin in the `Message` prefix. Every typed
+    # error's text is in the `Message` member (JSON key `Message`), and
+    # starts with one of these prefixes:
+    #
+    # * `Global Inference Gateway:` -- the gateway rejected or failed the
+    #   request itself: validation, authorization, throttling, routing (the
+    #   gateway or model was not found, or no capacity is available), a
+    #   gateway limit or time limit, or failing to reach the inference
+    #   gateway (`Global Inference Gateway: could not reach the inference
+    #   gateway: <reason>`, or `Global Inference Gateway: timed out waiting
+    #   for the inference gateway`). This includes the 400 for an invalid
+    #   request and the 413 for a request body that is too large.
+    # * `inference gateway:` -- the inference gateway serving the model
+    #   returned an error status. The message gives that status code and up
+    #   to 256 bytes of its error message, for example `inference gateway:
+    #   503 <message>`.
+    # * `inference gateway (<component>):` -- the same, when the inference
+    #   gateway reports which of its components produced the error, for
+    #   example `inference gateway (model server): 502 <message>`. The
+    #   component is one of:
+    #   * `config` -- the inference gateway's configuration and proxy
+    #     layer.
+    #   * `scheduler` -- the inference gateway's request scheduler.
+    #   * `model selector` -- the inference gateway's model selector.
+    #   * `model server` -- the model server.
+    #
+    # An InternalStreamFailure event's `Message` uses the same prefixes,
+    # with the same text the buffered operation uses for the same failure.
+    # Its `inference gateway:` message carries no status: `inference
+    # gateway: response ended unexpectedly` when the inference gateway's
+    # connection failed while it was sending the response.
+    #
+    # Every error status the inference gateway returns before the 200 is a
+    # typed error, chosen by that status as for
+    # InvokeGlobalInferenceGateway:
+    #
+    # * 400 and any other 4xx not listed here -- a 400 validation error.
+    # * 401 and 403 -- AccessDeniedException (403).
+    # * 404 -- ResourceNotFoundException.
+    # * 408 -- GatewayTimeoutException (504).
+    # * 429 -- ThrottlingException, with the `Retry-After` header.
+    # * 502, and 500, 503 or any other 5xx not listed here --
+    #   BadGatewayException (502). A 500 or 503 from the inference gateway
+    #   comes after the request was dispatched, so it is not modeled as
+    #   retryable, and the gateway may already have tried another inference
+    #   gateway. Standard SDK retry modes may still retry a 5xx status; set
+    #   max attempts to 1 if a repeated inference is unacceptable.
+    # * 504 -- GatewayTimeoutException.
+    #
+    # @option params [required, String] :gateway_id
+    #   The ID of the Global Inference Gateway to invoke, as for
+    #   InvokeGlobalInferenceGateway.
+    #
+    # @option params [String] :accept
+    #   The MIME type you want for the response. It is passed to the model
+    #   server.
+    #
+    # @option params [required, String] :content_type
+    #   The MIME type of the request body, as for
+    #   InvokeGlobalInferenceGateway. Pass `application/json`.
+    #
+    # @option params [String] :customer_identity_token
+    #   The customer identity token (a JWT), as for
+    #   InvokeGlobalInferenceGateway. It is passed unchanged to the inference
+    #   gateway, which validates it.
+    #
+    # @option params [required, String, StringIO, File] :body
+    #   The inference request body, as for InvokeGlobalInferenceGateway,
+    #   except that the request is always sent with `"stream": true`: this
+    #   operation returns an event stream, so a `"stream": false` in the body
+    #   (or no `stream` key) is overridden. A body larger than 10 MiB is
+    #   rejected with PayloadTooLargeException (413).
+    #
+    #   **SDK automatically handles json encoding and base64 encoding for you
+    #   when the required value (Hash, Array, etc.) is provided according to
+    #   the description.**
+    #
+    # @return [Types::InvokeGlobalInferenceGatewayWithResponseStreamOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::InvokeGlobalInferenceGatewayWithResponseStreamOutput#body #body} => Types::ResponseStream
+    #
+    # @example EventStream Operation Example
+    #
+    #   # You can process the event once it arrives immediately, or wait until the
+    #   # full response is complete and iterate through the eventstream enumerator.
+    #
+    #   # To interact with event immediately, you need to register invoke_global_inference_gateway_with_response_stream
+    #   # with callbacks. Callbacks can be registered for specific events or for all
+    #   # events, including error events.
+    #
+    #   # Callbacks can be passed into the `:event_stream_handler` option or within a
+    #   # block statement attached to the #invoke_global_inference_gateway_with_response_stream call directly. Hybrid
+    #   # pattern of both is also supported.
+    #
+    #   # `:event_stream_handler` option takes in either a Proc object or
+    #   # Aws::SageMakerGatewayRuntime::EventStreams::ResponseStream object.
+    #
+    #   # Usage pattern a): Callbacks with a block attached to #invoke_global_inference_gateway_with_response_stream
+    #   # Example for registering callbacks for all event types and an error event
+    #   client.invoke_global_inference_gateway_with_response_stream(
+    #     # params input
+    #   ) do |stream|
+    #     stream.on_error_event do |event|
+    #       # catch unmodeled error event in the stream
+    #       raise event
+    #       # => Aws::Errors::EventError
+    #       # event.event_type => :error
+    #       # event.error_code => String
+    #       # event.error_message => String
+    #     end
+    #
+    #     stream.on_event do |event|
+    #       # process all events arrive
+    #       puts event.event_type
+    #       # ...
+    #     end
+    #   end
+    #
+    #   # Usage pattern b): Pass in `:event_stream_handler` for #invoke_global_inference_gateway_with_response_stream
+    #   #  1) Create a Aws::SageMakerGatewayRuntime::EventStreams::ResponseStream object
+    #   #  Example for registering callbacks with specific events
+    #
+    #   handler = Aws::SageMakerGatewayRuntime::EventStreams::ResponseStream.new
+    #   handler.on_payload_part_event do |event|
+    #     event # => Aws::SageMakerGatewayRuntime::Types::PayloadPart
+    #   end
+    #   handler.on_model_stream_error_event do |event|
+    #     event # => Aws::SageMakerGatewayRuntime::Types::ModelStreamError
+    #   end
+    #   handler.on_internal_stream_failure_event do |event|
+    #     event # => Aws::SageMakerGatewayRuntime::Types::InternalStreamFailure
+    #   end
+    #
+    #   client.invoke_global_inference_gateway_with_response_stream(
+    #     # params inputs
+    #     event_stream_handler: handler
+    #   )
+    #
+    #   #  2) Use a Ruby Proc object
+    #   #  Example for registering callbacks with specific events
+    #   handler = Proc.new do |stream|
+    #     stream.on_payload_part_event do |event|
+    #       event # => Aws::SageMakerGatewayRuntime::Types::PayloadPart
+    #     end
+    #     stream.on_model_stream_error_event do |event|
+    #       event # => Aws::SageMakerGatewayRuntime::Types::ModelStreamError
+    #     end
+    #     stream.on_internal_stream_failure_event do |event|
+    #       event # => Aws::SageMakerGatewayRuntime::Types::InternalStreamFailure
+    #     end
+    #   end
+    #
+    #   client.invoke_global_inference_gateway_with_response_stream(
+    #     # params inputs
+    #     event_stream_handler: handler
+    #   )
+    #
+    #   #  Usage pattern c): Hybrid pattern of a) and b)
+    #   handler = Aws::SageMakerGatewayRuntime::EventStreams::ResponseStream.new
+    #   handler.on_payload_part_event do |event|
+    #     event # => Aws::SageMakerGatewayRuntime::Types::PayloadPart
+    #   end
+    #   handler.on_model_stream_error_event do |event|
+    #     event # => Aws::SageMakerGatewayRuntime::Types::ModelStreamError
+    #   end
+    #   handler.on_internal_stream_failure_event do |event|
+    #     event # => Aws::SageMakerGatewayRuntime::Types::InternalStreamFailure
+    #   end
+    #
+    #   client.invoke_global_inference_gateway_with_response_stream(
+    #     # params input
+    #     event_stream_handler: handler
+    #   ) do |stream|
+    #     stream.on_error_event do |event|
+    #       # catch unmodeled error event in the stream
+    #       raise event
+    #       # => Aws::Errors::EventError
+    #       # event.event_type => :error
+    #       # event.error_code => String
+    #       # event.error_message => String
+    #     end
+    #   end
+    #
+    #   # You can also iterate through events after the response complete.
+    #   # Events are available at
+    #   resp.body # => Enumerator
+    #   # For parameter input example, please refer to following request syntax.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.invoke_global_inference_gateway_with_response_stream({
+    #     gateway_id: "GatewayId", # required
+    #     accept: "String",
+    #     content_type: "RequestContentType", # required
+    #     customer_identity_token: "CustomerIdentityToken",
+    #     body: "data", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   # All events are available at resp.body:
+    #   resp.body #=> Enumerator
+    #   resp.body.event_types #=> [:payload_part, :model_stream_error, :internal_stream_failure]
+    #
+    #   # For :payload_part event available at #on_payload_part_event callback and response eventstream enumerator:
+    #   event.bytes #=> String
+    #
+    #   # For :model_stream_error event available at #on_model_stream_error_event callback and response eventstream enumerator:
+    #   event.message #=> String
+    #   event.error_code #=> String, one of "StreamBroken", "ModelInvocationTimeExceeded"
+    #
+    #   # For :internal_stream_failure event available at #on_internal_stream_failure_event callback and response eventstream enumerator:
+    #   event.message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-gateway-runtime-2026-10-01/InvokeGlobalInferenceGatewayWithResponseStream AWS API Documentation
+    #
+    # @overload invoke_global_inference_gateway_with_response_stream(params = {})
+    # @param [Hash] params ({})
+    def invoke_global_inference_gateway_with_response_stream(params = {}, options = {}, &block)
+      params = params.dup
+      event_stream_handler = case handler = params.delete(:event_stream_handler)
+        when EventStreams::ResponseStream then handler
+        when Proc then EventStreams::ResponseStream.new.tap(&handler)
+        when nil then EventStreams::ResponseStream.new
+        else
+          msg = "expected :event_stream_handler to be a block or "\
+                "instance of Aws::SageMakerGatewayRuntime::EventStreams::ResponseStream"\
+                ", got `#{handler.inspect}` instead"
+          raise ArgumentError, msg
+        end
+
+      yield(event_stream_handler) if block_given?
+
+      req = build_request(:invoke_global_inference_gateway_with_response_stream, params)
+
+      req.context[:event_stream_handler] = event_stream_handler
+      req.handlers.add(Aws::Binary::DecodeHandler, priority: 95)
+
+      req.send_request(options, &block)
+    end
+
+    # @!endgroup
+
+    # @param params ({})
+    # @api private
+    def build_request(operation_name, params = {})
+      handlers = @handlers.for(operation_name)
+      tracer = config.telemetry_provider.tracer_provider.tracer(
+        Aws::Telemetry.module_to_tracer_name('Aws::SageMakerGatewayRuntime')
+      )
+      context = Seahorse::Client::RequestContext.new(
+        operation_name: operation_name,
+        operation: config.api.operation(operation_name),
+        client: self,
+        params: params,
+        config: config,
+        tracer: tracer
+      )
+      context[:gem_name] = 'aws-sdk-sagemakergatewayruntime'
+      context[:gem_version] = '1.0.0'
+      Seahorse::Client::Request.new(handlers, context)
+    end
+
+    # @api private
+    # @deprecated
+    def waiter_names
+      []
+    end
+
+    class << self
+
+      # @api private
+      attr_reader :identifier
+
+      # @api private
+      def errors_module
+        Errors
+      end
+
+    end
+  end
+end

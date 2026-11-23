@@ -341,6 +341,7 @@ module Aws::BedrockRuntime
       attr_accessor inference_config: Types::InferenceConfiguration
       attr_accessor tool_config: Types::ToolConfiguration
       attr_accessor guardrail_config: Types::GuardrailConfiguration
+      attr_accessor project_identifier: ::String
       attr_accessor additional_model_request_fields: untyped
       attr_accessor prompt_variables: ::Hash[::String, Types::PromptVariableValues]
       attr_accessor additional_model_response_field_paths: ::Array[::String]
@@ -385,6 +386,7 @@ module Aws::BedrockRuntime
       attr_accessor inference_config: Types::InferenceConfiguration
       attr_accessor tool_config: Types::ToolConfiguration
       attr_accessor guardrail_config: Types::GuardrailStreamConfiguration
+      attr_accessor project_identifier: ::String
       attr_accessor additional_model_request_fields: untyped
       attr_accessor prompt_variables: ::Hash[::String, Types::PromptVariableValues]
       attr_accessor additional_model_response_field_paths: ::Array[::String]
@@ -1075,6 +1077,7 @@ module Aws::BedrockRuntime
       attr_accessor performance_config_latency: ("standard" | "optimized")
       attr_accessor service_tier: ("priority" | "default" | "flex" | "reserved")
       attr_accessor request_metadata: ::String
+      attr_accessor project_identifier: ::String
       SENSITIVE: [:body, :request_metadata]
     end
 
@@ -1113,6 +1116,7 @@ module Aws::BedrockRuntime
       attr_accessor performance_config_latency: ("standard" | "optimized")
       attr_accessor service_tier: ("priority" | "default" | "flex" | "reserved")
       attr_accessor request_metadata: ::String
+      attr_accessor project_identifier: ::String
       SENSITIVE: [:body, :request_metadata]
     end
 

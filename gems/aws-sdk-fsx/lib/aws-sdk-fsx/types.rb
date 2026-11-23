@@ -176,9 +176,10 @@ module Aws::FSx
     #     (NFS) V3 locks on an Amazon FSx for OpenZFS file system.
     #
     #   * `DOWNLOAD_DATA_FROM_BACKUP` - An FSx for ONTAP backup is being
-    #     restored to a new volume on a second-generation file system. Once
-    #     the all the file metadata is loaded onto the volume, you can mount
-    #     the volume with read-only access. during this process.
+    #     restored to a new volume on a second-generation or
+    #     third-generation file system. Once the all the file metadata is
+    #     loaded onto the volume, you can mount the volume with read-only
+    #     access. during this process.
     #
     #   * `VOLUME_INITIALIZE_WITH_SNAPSHOT` - A volume is being created from
     #     a snapshot on a different FSx for OpenZFS file system. You can
@@ -228,25 +229,26 @@ module Aws::FSx
     #   * `COMPLETED` - Amazon FSx has finished processing the
     #     administrative task.
     #
-    #     For a backup restore to a second-generation FSx for ONTAP file
-    #     system, indicates that all data has been downloaded to the volume,
-    #     and clients now have read-write access to volume.
+    #     For a backup restore to a second-generation or third-generation
+    #     FSx for ONTAP file system, indicates that all data has been
+    #     downloaded to the volume, and clients now have read-write access
+    #     to volume.
     #
     #   * `UPDATED_OPTIMIZING` - For a storage-capacity increase update,
     #     Amazon FSx has updated the file system with the new storage
     #     capacity, and is now performing the storage-optimization process.
     #
-    #   * `PENDING` - For a backup restore to a second-generation FSx for
-    #     ONTAP file system, indicates that the file metadata is being
-    #     downloaded onto the volume. The volume's Lifecycle state is
-    #     CREATING.
+    #   * `PENDING` - For a backup restore to a second-generation or
+    #     third-generation FSx for ONTAP file system, indicates that the
+    #     file metadata is being downloaded onto the volume. The volume's
+    #     Lifecycle state is CREATING.
     #
-    #   * `IN_PROGRESS` - For a backup restore to a second-generation FSx
-    #     for ONTAP file system, indicates that all metadata has been
-    #     downloaded to the new volume and client can access data with
-    #     read-only access while Amazon FSx downloads the file data to the
-    #     volume. Track the progress of this process with the
-    #     `ProgressPercent` element.
+    #   * `IN_PROGRESS` - For a backup restore to a second-generation or
+    #     third-generation FSx for ONTAP file system, indicates that all
+    #     metadata has been downloaded to the new volume and client can
+    #     access data with read-only access while Amazon FSx downloads the
+    #     file data to the volume. Track the progress of this process with
+    #     the `ProgressPercent` element.
     #   @return [String]
     #
     # @!attribute [rw] target_file_system_values
@@ -871,9 +873,21 @@ module Aws::FSx
     #   the report on the file system's linked S3 data repository. An
     #   absolute path that defines where the completion report will be
     #   stored in the destination location. The `Path` you provide must be
-    #   located within the file system’s ExportPath. An example `Path` value
-    #   is "s3://amzn-s3-demo-bucket/myExportPath/optionalPrefix". The
-    #   report provides the following information for each file in the
+    #   within the Amazon S3 location that the file system is linked to.
+    #   That location depends on how the file system is configured:
+    #
+    #   * The `DataRepositoryPath` of one of the associations, if the file
+    #     system has data repository associations
+    #
+    #   * The `ExportPath`, if the file system was created with an
+    #     `ImportPath` and an `ExportPath`
+    #
+    #   For example, if an association links to
+    #   `s3://amzn-s3-demo-bucket/myPrefix`, then
+    #   `s3://amzn-s3-demo-bucket/myPrefix/reports` is valid. The path
+    #   `s3://amzn-s3-demo-bucket/reports` is not.
+    #
+    #   The report provides the following information for each file in the
     #   report: FilePath, FileStatus, and ErrorCode.
     #   @return [String]
     #
@@ -1177,8 +1191,8 @@ module Aws::FSx
     #   @return [String]
     #
     # @!attribute [rw] type
-    #   The type of S3 access point you want to create. Only `OpenZFS` is
-    #   supported.
+    #   The type of S3 access point you want to create. Valid values are
+    #   `OPENZFS` and `ONTAP`.
     #   @return [String]
     #
     # @!attribute [rw] open_zfs_configuration
@@ -1322,6 +1336,10 @@ module Aws::FSx
     #   repository is associated with file system path `/ns1/`, then you
     #   cannot link another data repository with file system path
     #   `/ns1/ns2`.
+    #
+    #   You must specify this path when you create a data repository
+    #   association. There is no default value; a request that omits it
+    #   fails with a `BadRequest` error.
     #
     #   This path specifies where in your file system files will be exported
     #   from or imported to. This file system directory can be linked to
@@ -2125,6 +2143,10 @@ module Aws::FSx
     #   GPUDirect Storage (GDS) support is enabled for the Amazon FSx for
     #   Lustre file system.
     #
+    #   On file systems that use the Intelligent-Tiering storage class, you
+    #   can enable EFA only when `ThroughputCapacity` is 4000 MBps or a
+    #   multiple of 4000 MBps.
+    #
     #   (Default = `false`)
     #   @return [Boolean]
     #
@@ -2150,8 +2172,9 @@ module Aws::FSx
     # @!attribute [rw] throughput_capacity
     #   Specifies the throughput of an FSx for Lustre file system using the
     #   Intelligent-Tiering storage class, measured in megabytes per second
-    #   (MBps). Valid values are 4000 MBps or multiples of 4000 MBps. You
-    #   pay for the amount of throughput that you provision.
+    #   (MBps). Valid values are 1000 MBps, 2000 MBps, and multiples of 4000
+    #   MBps, up to a maximum of 2000000 MBps. You pay for the amount of
+    #   throughput that you provision.
     #   @return [Integer]
     #
     # @!attribute [rw] data_read_cache_configuration
@@ -2207,14 +2230,19 @@ module Aws::FSx
     #   * For SSD file systems, valid values are `1500`, `3000`, `6000`,
     #     `12000`, and multiples of `12000` up to a maximum of `192000`.
     #
-    #   * For Intelligent-Tiering file systems, valid values are `6000` and
-    #     `12000`.
+    #   * For Intelligent-Tiering file systems, valid values are `1500`,
+    #     `3000`, `6000`, `12000`, and multiples of `12000` up to a maximum
+    #     of `192000`.
+    #
+    #   You can't provision fewer Metadata IOPS than AUTOMATIC mode
+    #   provisions for your file system.
     #
     #   <note markdown="1"> `Iops` doesn’t have a default value. If you're using
     #   USER\_PROVISIONED mode, you can choose to specify a valid value. If
     #   you're using AUTOMATIC mode, you cannot specify a value because FSx
-    #   for Lustre automatically sets the value based on your file system
-    #   storage capacity.
+    #   for Lustre automatically sets the value based on your file system's
+    #   storage capacity for SSD file systems, and on throughput capacity
+    #   for Intelligent-Tiering file systems.
     #
     #    </note>
     #   @return [Integer]
@@ -2224,10 +2252,10 @@ module Aws::FSx
     #   an FSx for Lustre file system using a `PERSISTENT_2` deployment
     #   type.
     #
-    #   * In AUTOMATIC mode (supported only on SSD file systems), FSx for
-    #     Lustre automatically provisions and scales the number of Metadata
-    #     IOPS for your file system based on your file system storage
-    #     capacity.
+    #   * In AUTOMATIC mode, FSx for Lustre provisions and scales Metadata
+    #     IOPS for you. For SSD file systems, the number is based on storage
+    #     capacity. For Intelligent-Tiering file systems, it is based on
+    #     throughput capacity.
     #
     #   * In USER\_PROVISIONED mode, you specify the number of Metadata IOPS
     #     to provision for your file system.
@@ -2247,8 +2275,9 @@ module Aws::FSx
     #
     # @!attribute [rw] automatic_backup_retention_days
     #   The number of days to retain automatic backups. Setting this
-    #   property to `0` disables automatic backups. You can retain automatic
-    #   backups for a maximum of 90 days. The default is `30`.
+    #   property to `0` disables automatic backups and deletes all existing
+    #   automatic backups for the file system's volumes. You can retain
+    #   automatic backups for a maximum of 90 days. The default is `30`.
     #   @return [Integer]
     #
     # @!attribute [rw] daily_automatic_backup_start_time
@@ -2276,6 +2305,14 @@ module Aws::FSx
     #   * `SINGLE_AZ_2` - A file system configured with multiple
     #     high-availability (HA) pairs for Single-AZ redundancy. This is a
     #     second-generation FSx for ONTAP file system.
+    #
+    #   * `MULTI_AZ_3` - A high availability file system configured for
+    #     Multi-AZ redundancy to tolerate temporary AZ unavailability. This
+    #     is a third-generation FSx for ONTAP file system.
+    #
+    #   * `SINGLE_AZ_3` - A file system configured with multiple
+    #     high-availability (HA) pairs for Single-AZ redundancy. This is a
+    #     third-generation FSx for ONTAP file system.
     #
     #   For information about the use cases for Multi-AZ and Single-AZ
     #   deployments, refer to [Choosing a file system deployment type][1].
@@ -2308,8 +2345,8 @@ module Aws::FSx
     #   @return [Types::DiskIopsConfiguration]
     #
     # @!attribute [rw] preferred_subnet_id
-    #   Required when `DeploymentType` is set to `MULTI_AZ_1` or
-    #   `MULTI_AZ_2`. This specifies the subnet in which you want the
+    #   Required when `DeploymentType` is set to `MULTI_AZ_1`, `MULTI_AZ_2`,
+    #   or `MULTI_AZ_3`. This specifies the subnet in which you want the
     #   preferred file server to be located.
     #   @return [String]
     #
@@ -2360,15 +2397,15 @@ module Aws::FSx
     # @!attribute [rw] ha_pairs
     #   Specifies how many high-availability (HA) pairs of file servers will
     #   power your file system. First-generation file systems are powered by
-    #   1 HA pair. Second-generation multi-AZ file systems are powered by 1
-    #   HA pair. Second generation single-AZ file systems are powered by up
-    #   to 12 HA pairs. The default value is 1. The value of this property
-    #   affects the values of `StorageCapacity`, `Iops`, and
-    #   `ThroughputCapacity`. For more information, see [High-availability
-    #   (HA) pairs][1] in the FSx for ONTAP user guide. Block storage
-    #   protocol support (iSCSI and NVMe over TCP) is disabled on file
-    #   systems with more than 6 HA pairs. For more information, see [Using
-    #   block storage protocols][2].
+    #   1 HA pair. Second-generation and third-generation multi-AZ file
+    #   systems are powered by 1 HA pair. Second-generation and
+    #   third-generation single-AZ file systems are powered by up to 12 HA
+    #   pairs. The default value is 1. The value of this property affects
+    #   the values of `StorageCapacity`, `Iops`, and `ThroughputCapacity`.
+    #   For more information, see [High-availability (HA) pairs][1] in the
+    #   FSx for ONTAP user guide. Block storage protocol support (iSCSI and
+    #   NVMe over TCP) is disabled on file systems with more than 6 HA
+    #   pairs. For more information, see [Using block storage protocols][2].
     #
     #   Amazon FSx responds with an HTTP status code 400 (Bad Request) for
     #   the following conditions:
@@ -2376,7 +2413,8 @@ module Aws::FSx
     #   * The value of `HAPairs` is less than 1 or greater than 12.
     #
     #   * The value of `HAPairs` is greater than 1 and the value of
-    #     `DeploymentType` is `SINGLE_AZ_1`, `MULTI_AZ_1`, or `MULTI_AZ_2`.
+    #     `DeploymentType` is `SINGLE_AZ_1`, `MULTI_AZ_1`, `MULTI_AZ_2`, or
+    #     `MULTI_AZ_3`.
     #
     #
     #
@@ -2402,6 +2440,12 @@ module Aws::FSx
     #   * For `MULTI_AZ_2`, valid values are 384, 768, 1536, 3072, or 6144
     #     MBps.
     #
+    #   * For `SINGLE_AZ_3`, valid values are 1536, 3072, 6144, 12288, or
+    #     18432 MBps.
+    #
+    #   * For `MULTI_AZ_3`, valid values are 384, 768, 1536, 3072, 6144,
+    #     12288, or 18432 MBps.
+    #
     #   Amazon FSx responds with an HTTP status code 400 (Bad Request) for
     #   the following conditions:
     #
@@ -2409,7 +2453,7 @@ module Aws::FSx
     #     `ThroughputCapacityPerHAPair` are not the same value for file
     #     systems with one HA pair.
     #
-    #   * The value of deployment type is `SINGLE_AZ_2` and
+    #   * The value of deployment type is `SINGLE_AZ_2` or `SINGLE_AZ_3` and
     #     `ThroughputCapacity` / `ThroughputCapacityPerHAPair` is not a
     #     valid HA pair (a value between 1 and 12).
     #
@@ -6493,18 +6537,19 @@ module Aws::FSx
     #   * For SSD file systems, valid values are `1500`, `3000`, `6000`,
     #     `12000`, and multiples of `12000` up to a maximum of `192000`.
     #
-    #   * For Intelligent-Tiering file systems, valid values are `6000` and
-    #     `12000`.
+    #   * For Intelligent-Tiering file systems, valid values are `1500`,
+    #     `3000`, `6000`, `12000`, and multiples of `12000` up to a maximum
+    #     of `192000`.
     #   @return [Integer]
     #
     # @!attribute [rw] mode
     #   The metadata configuration mode for provisioning Metadata IOPS for
     #   the file system.
     #
-    #   * In AUTOMATIC mode (supported only on SSD file systems), FSx for
-    #     Lustre automatically provisions and scales the number of Metadata
-    #     IOPS on your file system based on your file system storage
-    #     capacity.
+    #   * In AUTOMATIC mode, FSx for Lustre provisions and scales Metadata
+    #     IOPS for you. For SSD file systems, the number is based on storage
+    #     capacity. For Intelligent-Tiering file systems, it is based on
+    #     throughput capacity.
     #
     #   * In USER\_PROVISIONED mode, you can choose to specify the number of
     #     Metadata IOPS to provision for your file system.
@@ -7131,8 +7176,8 @@ module Aws::FSx
     #
     #   The SSD read cache size is distributed across provisioned file
     #   servers in your file system. Intelligent-Tiering file systems
-    #   support a minimum of 32 GiB and maximum of 131072 GiB for SSD read
-    #   cache size for every 4,000 MB/s of throughput capacity provisioned.
+    #   support a minimum of 8 GiB and maximum of 32768 GiB for SSD read
+    #   cache size for every 1000 MBps of throughput capacity provisioned.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/LustreReadCacheConfiguration AWS API Documentation
@@ -7297,8 +7342,9 @@ module Aws::FSx
     #
     # @!attribute [rw] automatic_backup_retention_days
     #   The number of days to retain automatic backups. Setting this
-    #   property to `0` disables automatic backups. You can retain automatic
-    #   backups for a maximum of 90 days. The default is `30`.
+    #   property to `0` disables automatic backups and deletes all existing
+    #   automatic backups for the file system's volumes. You can retain
+    #   automatic backups for a maximum of 90 days. The default is `30`.
     #   @return [Integer]
     #
     # @!attribute [rw] daily_automatic_backup_start_time
@@ -7326,6 +7372,14 @@ module Aws::FSx
     #   * `SINGLE_AZ_2` - A file system configured with multiple
     #     high-availability (HA) pairs for Single-AZ redundancy. This is a
     #     second-generation FSx for ONTAP file system.
+    #
+    #   * `MULTI_AZ_3` - A high availability file system configured for
+    #     Multi-AZ redundancy to tolerate temporary AZ unavailability. This
+    #     is a third-generation FSx for ONTAP file system.
+    #
+    #   * `SINGLE_AZ_3` - A file system configured with multiple
+    #     high-availability (HA) pairs for Single-AZ redundancy. This is a
+    #     third-generation FSx for ONTAP file system.
     #
     #   For information about the use cases for Multi-AZ and Single-AZ
     #   deployments, refer to [Choosing Multi-AZ or Single-AZ file system
@@ -7405,7 +7459,8 @@ module Aws::FSx
     #   * The value of `HAPairs` is less than 1 or greater than 12.
     #
     #   * The value of `HAPairs` is greater than 1 and the value of
-    #     `DeploymentType` is `SINGLE_AZ_1`, `MULTI_AZ_1`, or `MULTI_AZ_2`.
+    #     `DeploymentType` is `SINGLE_AZ_1`, `MULTI_AZ_1`, `MULTI_AZ_2`, or
+    #     `MULTI_AZ_3`.
     #
     #
     #
@@ -7431,13 +7486,19 @@ module Aws::FSx
     #   * For `MULTI_AZ_2`, valid values are 384, 768, 1536, 3072, or 6144
     #     MBps.
     #
+    #   * For `SINGLE_AZ_3`, valid values are 1536, 3072, 6144, 12288, or
+    #     18432 MBps.
+    #
+    #   * For `MULTI_AZ_3`, valid values are 384, 768, 1536, 3072, 6144,
+    #     12288, or 18432 MBps.
+    #
     #   Amazon FSx responds with an HTTP status code 400 (Bad Request) for
     #   the following conditions:
     #
     #   * The value of `ThroughputCapacity` and
     #     `ThroughputCapacityPerHAPair` are not the same value.
     #
-    #   * The value of deployment type is `SINGLE_AZ_2` and
+    #   * The value of deployment type is `SINGLE_AZ_2` or `SINGLE_AZ_3` and
     #     `ThroughputCapacity` / `ThroughputCapacityPerHAPair` is not a
     #     valid HA pair (a value between 1 and 12).
     #
@@ -8553,6 +8614,11 @@ module Aws::FSx
     #     Delete and detach the S3 access point attachment, and create a new
     #     one.
     #
+    #   * MISCONFIGURED - The S3 access point attachment has a configuration
+    #     issue that prevents it from serving requests. Amazon FSx
+    #     periodically checks for this condition and automatically returns
+    #     the access point to AVAILABLE when the issue is resolved.
+    #
     #   * UPDATING - Amazon FSx is updating the S3 access point attachment
     #   @return [String]
     #
@@ -8757,8 +8823,9 @@ module Aws::FSx
     #   @return [String]
     #
     # @!attribute [rw] dns_ips
-    #   A list of up to three IP addresses of DNS servers or domain
-    #   controllers in the self-managed AD directory.
+    #   A list of IP addresses of DNS servers or domain controllers in the
+    #   self-managed AD directory. FSx for ONTAP SVMs support up to three IP
+    #   addresses, FSx for Windows supports up to two.
     #   @return [Array<String>]
     #
     # @!attribute [rw] domain_join_service_account_secret
@@ -8838,8 +8905,9 @@ module Aws::FSx
     #   @return [String]
     #
     # @!attribute [rw] dns_ips
-    #   A list of up to three IP addresses of DNS servers or domain
-    #   controllers in the self-managed AD directory.
+    #   A list of IP addresses of DNS servers or domain controllers in the
+    #   self-managed AD directory. FSx for ONTAP SVMs support up to three IP
+    #   addresses, FSx for Windows supports up to two.
     #   @return [Array<String>]
     #
     # @!attribute [rw] domain_join_service_account_secret
@@ -8902,8 +8970,9 @@ module Aws::FSx
     #   @return [String]
     #
     # @!attribute [rw] dns_ips
-    #   A list of up to three DNS server or domain controller IP addresses
-    #   in your self-managed Active Directory domain.
+    #   A list of IP addresses of DNS servers or domain controllers in the
+    #   self-managed AD directory. FSx for ONTAP SVMs support up to three IP
+    #   addresses, FSx for Windows supports up to two.
     #   @return [Array<String>]
     #
     # @!attribute [rw] domain_name
@@ -9892,10 +9961,11 @@ module Aws::FSx
     #   @return [Types::UpdateFileSystemLustreMetadataConfiguration]
     #
     # @!attribute [rw] throughput_capacity
-    #   The throughput of an Amazon FSx for Lustre file system using an
+    #   The throughput of an FSx for Lustre file system using the
     #   Intelligent-Tiering storage class, measured in megabytes per second
-    #   (MBps). You can only increase your file system's throughput. Valid
-    #   values are 4000 MBps or multiples of 4000 MBps.
+    #   (MBps). You can only increase your file system's throughput
+    #   capacity. Valid values are 1000 MBps, 2000 MBps, and multiples of
+    #   4000 MBps, up to a maximum of 2000000 MBps.
     #   @return [Integer]
     #
     # @!attribute [rw] data_read_cache_configuration
@@ -9939,11 +10009,14 @@ module Aws::FSx
     #   * For SSD file systems, valid values are `1500`, `3000`, `6000`,
     #     `12000`, and multiples of `12000` up to a maximum of `192000`.
     #
-    #   * For Intelligent-Tiering file systems, valid values are `6000` and
-    #     `12000`.
+    #   * For Intelligent-Tiering file systems, valid values are `1500`,
+    #     `3000`, `6000`, `12000`, and multiples of `12000` up to a maximum
+    #     of `192000`.
     #
     #   The value you provide must be greater than or equal to the current
-    #   number of Metadata IOPS provisioned for the file system.
+    #   number of Metadata IOPS provisioned for the file system. You can't
+    #   provision fewer Metadata IOPS than AUTOMATIC mode provisions for
+    #   your file system.
     #   @return [Integer]
     #
     # @!attribute [rw] mode
@@ -9951,24 +10024,24 @@ module Aws::FSx
     #   an FSx for Lustre file system using a `PERSISTENT_2` deployment
     #   type.
     #
-    #   * To increase the Metadata IOPS or to switch an SSD file system from
-    #     AUTOMATIC, specify `USER_PROVISIONED` as the value for this
-    #     parameter. Then use the Iops parameter to provide a Metadata IOPS
-    #     value that is greater than or equal to the current number of
-    #     Metadata IOPS provisioned for the file system.
+    #   * To increase the Metadata IOPS or to switch from AUTOMATIC mode,
+    #     specify `USER_PROVISIONED` as the value for this parameter. Then
+    #     use the Iops parameter to provide a Metadata IOPS value that is
+    #     greater than or equal to the current number of Metadata IOPS
+    #     provisioned for the file system.
     #
-    #   * To switch from USER\_PROVISIONED mode on an SSD file system,
-    #     specify `AUTOMATIC` as the value for this parameter, but do not
-    #     input a value for Iops.
+    #   * To switch from USER\_PROVISIONED mode, specify `AUTOMATIC` as the
+    #     value for this parameter, but do not input a value for Iops.
     #
-    #     <note markdown="1"> * If you request to switch from USER\_PROVISIONED to AUTOMATIC
-    #       mode and the current Metadata IOPS value is greater than the
-    #       automated default, FSx for Lustre rejects the request because
-    #       downscaling Metadata IOPS is not supported.
+    #     <note markdown="1"> * FSx for Lustre rejects a switch to AUTOMATIC mode when your
+    #       current Metadata IOPS value is greater than what AUTOMATIC mode
+    #       provisions, because decreasing Metadata IOPS is not supported.
+    #       To unblock the switch, increase storage capacity for SSD file
+    #       systems, or throughput capacity for Intelligent-Tiering file
+    #       systems, until AUTOMATIC mode provisions at least your current
+    #       Metadata IOPS.
     #
-    #     * AUTOMATIC mode is not supported on Intelligent-Tiering file
-    #       systems. For Intelligent-Tiering file systems, use
-    #       USER\_PROVISIONED mode.
+    #     ^
     #
     #      </note>
     #   @return [String]
@@ -9987,8 +10060,9 @@ module Aws::FSx
     #
     # @!attribute [rw] automatic_backup_retention_days
     #   The number of days to retain automatic backups. Setting this
-    #   property to `0` disables automatic backups. You can retain automatic
-    #   backups for a maximum of 90 days. The default is `30`.
+    #   property to `0` disables automatic backups and deletes all existing
+    #   automatic backups for the file system's volumes. You can retain
+    #   automatic backups for a maximum of 90 days. The default is `30`.
     #   @return [Integer]
     #
     # @!attribute [rw] daily_automatic_backup_start_time
@@ -10082,6 +10156,12 @@ module Aws::FSx
     #   * For `MULTI_AZ_2`, valid values are 384, 768, 1536, 3072, or 6144
     #     MBps.
     #
+    #   * For `SINGLE_AZ_3`, valid values are 1536, 3072, 6144, 12288, or
+    #     18432 MBps.
+    #
+    #   * For `MULTI_AZ_3`, valid values are 384, 768, 1536, 3072, 6144,
+    #     12288, or 18432 MBps.
+    #
     #   Amazon FSx responds with an HTTP status code 400 (Bad Request) for
     #   the following conditions:
     #
@@ -10089,7 +10169,7 @@ module Aws::FSx
     #     `ThroughputCapacityPerHAPair` are not the same value for file
     #     systems with one HA pair.
     #
-    #   * The value of deployment type is `SINGLE_AZ_2` and
+    #   * The value of deployment type is `SINGLE_AZ_2` or `SINGLE_AZ_3` and
     #     `ThroughputCapacity` / `ThroughputCapacityPerHAPair` is not a
     #     valid HA pair (a value between 1 and 12).
     #
@@ -10098,13 +10178,14 @@ module Aws::FSx
     #
     # @!attribute [rw] ha_pairs
     #   Use to update the number of high-availability (HA) pairs for a
-    #   second-generation single-AZ file system. If you increase the number
-    #   of HA pairs for your file system, you must specify proportional
-    #   increases for `StorageCapacity`, `Iops`, and `ThroughputCapacity`.
-    #   For more information, see [High-availability (HA) pairs][1] in the
-    #   FSx for ONTAP user guide. Block storage protocol support (iSCSI and
-    #   NVMe over TCP) is disabled on file systems with more than 6 HA
-    #   pairs. For more information, see [Using block storage protocols][2].
+    #   second-generation or third-generation single-AZ file system. If you
+    #   increase the number of HA pairs for your file system, you must
+    #   specify proportional increases for `StorageCapacity`, `Iops`, and
+    #   `ThroughputCapacity`. For more information, see [High-availability
+    #   (HA) pairs][1] in the FSx for ONTAP user guide. Block storage
+    #   protocol support (iSCSI and NVMe over TCP) is disabled on file
+    #   systems with more than 6 HA pairs. For more information, see [Using
+    #   block storage protocols][2].
     #
     #
     #
@@ -10270,10 +10351,10 @@ module Aws::FSx
     # @!attribute [rw] storage_capacity
     #   Use this parameter to increase the storage capacity of an FSx for
     #   Windows File Server, FSx for Lustre, FSx for OpenZFS, or FSx for
-    #   ONTAP file system. For second-generation FSx for ONTAP file systems,
-    #   you can also decrease the storage capacity. Specifies the storage
-    #   capacity target value, in GiB, for the file system that you're
-    #   updating.
+    #   ONTAP file system. For second-generation and third-generation FSx
+    #   for ONTAP file systems, you can also decrease the storage capacity.
+    #   Specifies the storage capacity target value, in GiB, for the file
+    #   system that you're updating.
     #
     #   <note markdown="1"> You can't make a storage capacity increase request if there is an
     #   existing storage capacity increase request in progress.
@@ -10312,11 +10393,14 @@ module Aws::FSx
     #
     #   For ONTAP file systems, when increasing storage capacity, the
     #   storage capacity target value must be at least 10 percent greater
-    #   than the current storage capacity value. When decreasing storage
-    #   capacity on second-generation file systems, the target value must be
-    #   at least 9 percent smaller than the current SSD storage capacity.
-    #   For more information, see [File system storage capacity and IOPS][4]
-    #   in the Amazon FSx for NetApp ONTAP User Guide.
+    #   than the current storage capacity value. If that increase would
+    #   reach or exceed the maximum SSD storage capacity for your file
+    #   system's configuration, you can specify any greater value up to
+    #   that maximum. When decreasing storage capacity on second-generation
+    #   and third-generation file systems, the target value must be at least
+    #   9 percent smaller than the current SSD storage capacity. For more
+    #   information, see [File system storage capacity and IOPS][4] in the
+    #   Amazon FSx for NetApp ONTAP User Guide.
     #
     #
     #

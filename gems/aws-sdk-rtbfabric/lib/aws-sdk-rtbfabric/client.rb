@@ -264,7 +264,8 @@ module Aws::RTBFabric
     #     An integer representing the maximum number attempts that will be made for
     #     a single request, including the initial attempt.  For example,
     #     setting this value to 5 will result in a request being retried up to
-    #     4 times. Used in `standard` and `adaptive` retry modes.
+    #     4 times. Used in `standard` and `adaptive` retry modes. Defaults to 3,
+    #     except for DynamoDB and DynamoDB Streams, which default to 4.
     #
     #   @option options [String] :profile ("default")
     #     Used when loading credentials from the shared credentials file at `HOME/.aws/credentials`.
@@ -327,15 +328,15 @@ module Aws::RTBFabric
     #     used by the default backoff function. This option is only used in the
     #     `legacy` retry mode.
     #
-    #   @option options [String] :retry_mode ("legacy")
+    #   @option options [String] :retry_mode ("standard")
     #     Specifies which retry algorithm to use. Values are:
     #
-    #     * `legacy` - The pre-existing retry behavior. This is the default
-    #       value if no retry mode is provided.
+    #     * `legacy` - The pre-existing retry behavior.
     #
     #     * `standard` - A standardized set of retry rules across the AWS SDKs.
     #       This includes support for retry quotas, which limit the number of
-    #       unsuccessful retries a client can make.
+    #       unsuccessful retries a client can make. This is the default value
+    #       if no retry mode is provided.
     #
     #     * `adaptive` - A retry mode that includes all the functionality of
     #       `standard` mode along with automatic client side throttling.
@@ -515,6 +516,7 @@ module Aws::RTBFabric
     #   * {Types::AcceptLinkResponse#attributes #attributes} => Types::LinkAttributes
     #   * {Types::AcceptLinkResponse#log_settings #log_settings} => Types::LinkLogSettings
     #   * {Types::AcceptLinkResponse#connectivity_type #connectivity_type} => String
+    #   * {Types::AcceptLinkResponse#error_details #error_details} => Array&lt;Types::ErrorDetail&gt;
     #   * {Types::AcceptLinkResponse#link_id #link_id} => String
     #
     #
@@ -576,7 +578,7 @@ module Aws::RTBFabric
     #
     #   resp.gateway_id #=> String
     #   resp.peer_gateway_id #=> String
-    #   resp.status #=> String, one of "PENDING_CREATION", "PENDING_REQUEST", "REQUESTED", "ACCEPTED", "ACTIVE", "REJECTED", "FAILED", "PENDING_DELETION", "DELETED", "PENDING_UPDATE", "PENDING_ISOLATION", "ISOLATED", "PENDING_RESTORATION"
+    #   resp.status #=> String, one of "PENDING_CREATION", "PENDING_REQUEST", "REQUESTED", "ACCEPTED", "ACTIVE", "REJECTED", "FAILED", "PENDING_DELETION", "DELETED", "PENDING_UPDATE", "PENDING_ISOLATION", "ISOLATED", "PENDING_RESTORATION", "CREATE_FAILED", "DELETE_FAILED"
     #   resp.created_at #=> Time
     #   resp.updated_at #=> Time
     #   resp.direction #=> String, one of "RESPONSE", "REQUEST"
@@ -628,6 +630,11 @@ module Aws::RTBFabric
     #   resp.log_settings.application_logs.sampling.error_log #=> Float
     #   resp.log_settings.application_logs.sampling.filter_log #=> Float
     #   resp.connectivity_type #=> String, one of "DEFAULT", "PUBLIC_INGRESS", "PUBLIC_EGRESS", "EXTERNAL_INBOUND"
+    #   resp.error_details #=> Array
+    #   resp.error_details[0].code #=> String, one of "VPC_NOT_FOUND", "EC2_SUBNET_NOT_FOUND", "EC2_SECURITY_GROUP_NOT_FOUND", "EC2_SUBNET_IP_EXHAUSTION", "IAM_ASSUME_ROLE_ACCESS_DENIED", "INTERNAL_ERROR"
+    #   resp.error_details[0].message #=> String
+    #   resp.error_details[0].resource_ids #=> Array
+    #   resp.error_details[0].resource_ids[0] #=> String
     #   resp.link_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rtbfabric-2023-05-15/AcceptLink AWS API Documentation
@@ -819,7 +826,7 @@ module Aws::RTBFabric
     #
     #   resp.gateway_id #=> String
     #   resp.link_id #=> String
-    #   resp.status #=> String, one of "PENDING_CREATION", "PENDING_REQUEST", "REQUESTED", "ACCEPTED", "ACTIVE", "REJECTED", "FAILED", "PENDING_DELETION", "DELETED", "PENDING_UPDATE", "PENDING_ISOLATION", "ISOLATED", "PENDING_RESTORATION"
+    #   resp.status #=> String, one of "PENDING_CREATION", "PENDING_REQUEST", "REQUESTED", "ACCEPTED", "ACTIVE", "REJECTED", "FAILED", "PENDING_DELETION", "DELETED", "PENDING_UPDATE", "PENDING_ISOLATION", "ISOLATED", "PENDING_RESTORATION", "CREATE_FAILED", "DELETE_FAILED"
     #   resp.domain_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rtbfabric-2023-05-15/CreateInboundExternalLink AWS API Documentation
@@ -875,6 +882,7 @@ module Aws::RTBFabric
     #   * {Types::CreateLinkResponse#attributes #attributes} => Types::LinkAttributes
     #   * {Types::CreateLinkResponse#log_settings #log_settings} => Types::LinkLogSettings
     #   * {Types::CreateLinkResponse#connectivity_type #connectivity_type} => String
+    #   * {Types::CreateLinkResponse#error_details #error_details} => Array&lt;Types::ErrorDetail&gt;
     #   * {Types::CreateLinkResponse#link_id #link_id} => String
     #   * {Types::CreateLinkResponse#customer_provided_id #customer_provided_id} => String
     #
@@ -941,7 +949,7 @@ module Aws::RTBFabric
     #
     #   resp.gateway_id #=> String
     #   resp.peer_gateway_id #=> String
-    #   resp.status #=> String, one of "PENDING_CREATION", "PENDING_REQUEST", "REQUESTED", "ACCEPTED", "ACTIVE", "REJECTED", "FAILED", "PENDING_DELETION", "DELETED", "PENDING_UPDATE", "PENDING_ISOLATION", "ISOLATED", "PENDING_RESTORATION"
+    #   resp.status #=> String, one of "PENDING_CREATION", "PENDING_REQUEST", "REQUESTED", "ACCEPTED", "ACTIVE", "REJECTED", "FAILED", "PENDING_DELETION", "DELETED", "PENDING_UPDATE", "PENDING_ISOLATION", "ISOLATED", "PENDING_RESTORATION", "CREATE_FAILED", "DELETE_FAILED"
     #   resp.created_at #=> Time
     #   resp.updated_at #=> Time
     #   resp.direction #=> String, one of "RESPONSE", "REQUEST"
@@ -993,6 +1001,11 @@ module Aws::RTBFabric
     #   resp.log_settings.application_logs.sampling.error_log #=> Float
     #   resp.log_settings.application_logs.sampling.filter_log #=> Float
     #   resp.connectivity_type #=> String, one of "DEFAULT", "PUBLIC_INGRESS", "PUBLIC_EGRESS", "EXTERNAL_INBOUND"
+    #   resp.error_details #=> Array
+    #   resp.error_details[0].code #=> String, one of "VPC_NOT_FOUND", "EC2_SUBNET_NOT_FOUND", "EC2_SECURITY_GROUP_NOT_FOUND", "EC2_SUBNET_IP_EXHAUSTION", "IAM_ASSUME_ROLE_ACCESS_DENIED", "INTERNAL_ERROR"
+    #   resp.error_details[0].message #=> String
+    #   resp.error_details[0].resource_ids #=> Array
+    #   resp.error_details[0].resource_ids[0] #=> String
     #   resp.link_id #=> String
     #   resp.customer_provided_id #=> String
     #
@@ -1107,7 +1120,7 @@ module Aws::RTBFabric
     # @example Response structure
     #
     #   resp.rule_id #=> String
-    #   resp.status #=> String, one of "CREATION_IN_PROGRESS", "ACTIVE", "UPDATE_IN_PROGRESS", "DELETION_IN_PROGRESS", "DELETED", "FAILED"
+    #   resp.status #=> String, one of "CREATION_IN_PROGRESS", "ACTIVE", "UPDATE_IN_PROGRESS", "DELETION_IN_PROGRESS", "DELETED", "FAILED", "CREATE_FAILED", "DELETE_FAILED"
     #   resp.created_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rtbfabric-2023-05-15/CreateLinkRoutingRule AWS API Documentation
@@ -1225,7 +1238,7 @@ module Aws::RTBFabric
     #
     #   resp.gateway_id #=> String
     #   resp.link_id #=> String
-    #   resp.status #=> String, one of "PENDING_CREATION", "PENDING_REQUEST", "REQUESTED", "ACCEPTED", "ACTIVE", "REJECTED", "FAILED", "PENDING_DELETION", "DELETED", "PENDING_UPDATE", "PENDING_ISOLATION", "ISOLATED", "PENDING_RESTORATION"
+    #   resp.status #=> String, one of "PENDING_CREATION", "PENDING_REQUEST", "REQUESTED", "ACCEPTED", "ACTIVE", "REJECTED", "FAILED", "PENDING_DELETION", "DELETED", "PENDING_UPDATE", "PENDING_ISOLATION", "ISOLATED", "PENDING_RESTORATION", "CREATE_FAILED", "DELETE_FAILED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rtbfabric-2023-05-15/CreateOutboundExternalLink AWS API Documentation
     #
@@ -1324,7 +1337,7 @@ module Aws::RTBFabric
     #
     #   resp.gateway_id #=> String
     #   resp.domain_name #=> String
-    #   resp.status #=> String, one of "PENDING_CREATION", "ACTIVE", "PENDING_DELETION", "DELETED", "ERROR", "PENDING_UPDATE", "ISOLATED", "PENDING_ISOLATION", "PENDING_RESTORATION"
+    #   resp.status #=> String, one of "PENDING_CREATION", "ACTIVE", "PENDING_DELETION", "DELETED", "ERROR", "PENDING_UPDATE", "ISOLATED", "PENDING_ISOLATION", "PENDING_RESTORATION", "CREATE_FAILED", "DELETE_FAILED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rtbfabric-2023-05-15/CreateRequesterGateway AWS API Documentation
     #
@@ -1516,7 +1529,7 @@ module Aws::RTBFabric
     # @example Response structure
     #
     #   resp.gateway_id #=> String
-    #   resp.status #=> String, one of "PENDING_CREATION", "ACTIVE", "PENDING_DELETION", "DELETED", "ERROR", "PENDING_UPDATE", "ISOLATED", "PENDING_ISOLATION", "PENDING_RESTORATION"
+    #   resp.status #=> String, one of "PENDING_CREATION", "ACTIVE", "PENDING_DELETION", "DELETED", "ERROR", "PENDING_UPDATE", "ISOLATED", "PENDING_ISOLATION", "PENDING_RESTORATION", "CREATE_FAILED", "DELETE_FAILED"
     #   resp.listener_config.protocols #=> Array
     #   resp.listener_config.protocols[0] #=> String, one of "HTTP", "HTTPS"
     #   resp.external_inbound_endpoint #=> String
@@ -1570,7 +1583,7 @@ module Aws::RTBFabric
     # @example Response structure
     #
     #   resp.link_id #=> String
-    #   resp.status #=> String, one of "PENDING_CREATION", "PENDING_REQUEST", "REQUESTED", "ACCEPTED", "ACTIVE", "REJECTED", "FAILED", "PENDING_DELETION", "DELETED", "PENDING_UPDATE", "PENDING_ISOLATION", "ISOLATED", "PENDING_RESTORATION"
+    #   resp.status #=> String, one of "PENDING_CREATION", "PENDING_REQUEST", "REQUESTED", "ACCEPTED", "ACTIVE", "REJECTED", "FAILED", "PENDING_DELETION", "DELETED", "PENDING_UPDATE", "PENDING_ISOLATION", "ISOLATED", "PENDING_RESTORATION", "CREATE_FAILED", "DELETE_FAILED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rtbfabric-2023-05-15/DeleteInboundExternalLink AWS API Documentation
     #
@@ -1623,7 +1636,7 @@ module Aws::RTBFabric
     # @example Response structure
     #
     #   resp.link_id #=> String
-    #   resp.status #=> String, one of "PENDING_CREATION", "PENDING_REQUEST", "REQUESTED", "ACCEPTED", "ACTIVE", "REJECTED", "FAILED", "PENDING_DELETION", "DELETED", "PENDING_UPDATE", "PENDING_ISOLATION", "ISOLATED", "PENDING_RESTORATION"
+    #   resp.status #=> String, one of "PENDING_CREATION", "PENDING_REQUEST", "REQUESTED", "ACCEPTED", "ACTIVE", "REJECTED", "FAILED", "PENDING_DELETION", "DELETED", "PENDING_UPDATE", "PENDING_ISOLATION", "ISOLATED", "PENDING_RESTORATION", "CREATE_FAILED", "DELETE_FAILED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rtbfabric-2023-05-15/DeleteLink AWS API Documentation
     #
@@ -1678,7 +1691,7 @@ module Aws::RTBFabric
     # @example Response structure
     #
     #   resp.rule_id #=> String
-    #   resp.status #=> String, one of "CREATION_IN_PROGRESS", "ACTIVE", "UPDATE_IN_PROGRESS", "DELETION_IN_PROGRESS", "DELETED", "FAILED"
+    #   resp.status #=> String, one of "CREATION_IN_PROGRESS", "ACTIVE", "UPDATE_IN_PROGRESS", "DELETION_IN_PROGRESS", "DELETED", "FAILED", "CREATE_FAILED", "DELETE_FAILED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rtbfabric-2023-05-15/DeleteLinkRoutingRule AWS API Documentation
     #
@@ -1728,7 +1741,7 @@ module Aws::RTBFabric
     # @example Response structure
     #
     #   resp.link_id #=> String
-    #   resp.status #=> String, one of "PENDING_CREATION", "PENDING_REQUEST", "REQUESTED", "ACCEPTED", "ACTIVE", "REJECTED", "FAILED", "PENDING_DELETION", "DELETED", "PENDING_UPDATE", "PENDING_ISOLATION", "ISOLATED", "PENDING_RESTORATION"
+    #   resp.status #=> String, one of "PENDING_CREATION", "PENDING_REQUEST", "REQUESTED", "ACCEPTED", "ACTIVE", "REJECTED", "FAILED", "PENDING_DELETION", "DELETED", "PENDING_UPDATE", "PENDING_ISOLATION", "ISOLATED", "PENDING_RESTORATION", "CREATE_FAILED", "DELETE_FAILED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rtbfabric-2023-05-15/DeleteOutboundExternalLink AWS API Documentation
     #
@@ -1773,7 +1786,7 @@ module Aws::RTBFabric
     # @example Response structure
     #
     #   resp.gateway_id #=> String
-    #   resp.status #=> String, one of "PENDING_CREATION", "ACTIVE", "PENDING_DELETION", "DELETED", "ERROR", "PENDING_UPDATE", "ISOLATED", "PENDING_ISOLATION", "PENDING_RESTORATION"
+    #   resp.status #=> String, one of "PENDING_CREATION", "ACTIVE", "PENDING_DELETION", "DELETED", "ERROR", "PENDING_UPDATE", "ISOLATED", "PENDING_ISOLATION", "PENDING_RESTORATION", "CREATE_FAILED", "DELETE_FAILED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rtbfabric-2023-05-15/DeleteRequesterGateway AWS API Documentation
     #
@@ -1818,7 +1831,7 @@ module Aws::RTBFabric
     # @example Response structure
     #
     #   resp.gateway_id #=> String
-    #   resp.status #=> String, one of "PENDING_CREATION", "ACTIVE", "PENDING_DELETION", "DELETED", "ERROR", "PENDING_UPDATE", "ISOLATED", "PENDING_ISOLATION", "PENDING_RESTORATION"
+    #   resp.status #=> String, one of "PENDING_CREATION", "ACTIVE", "PENDING_DELETION", "DELETED", "ERROR", "PENDING_UPDATE", "ISOLATED", "PENDING_ISOLATION", "PENDING_RESTORATION", "CREATE_FAILED", "DELETE_FAILED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rtbfabric-2023-05-15/DeleteResponderGateway AWS API Documentation
     #
@@ -1882,6 +1895,155 @@ module Aws::RTBFabric
       req.send_request(options)
     end
 
+    # Returns a module that you can attach. If you can't attach the module,
+    # the operation returns ResourceNotFoundException, the same as for a
+    # missing one.
+    #
+    # @option params [required, String] :module_id
+    #   The module's ID.
+    #
+    # @return [Types::GetAvailableModuleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetAvailableModuleResponse#module_id #module_id} => String
+    #   * {Types::GetAvailableModuleResponse#module_arn #module_arn} => String
+    #   * {Types::GetAvailableModuleResponse#module_name #module_name} => String
+    #   * {Types::GetAvailableModuleResponse#description #description} => String
+    #   * {Types::GetAvailableModuleResponse#subscription_type #subscription_type} => String
+    #   * {Types::GetAvailableModuleResponse#subscription_status #subscription_status} => String
+    #   * {Types::GetAvailableModuleResponse#marketplace_product_id #marketplace_product_id} => String
+    #   * {Types::GetAvailableModuleResponse#created_at #created_at} => Time
+    #
+    #
+    # @example Example: Get a module
+    #
+    #   # Gets a Marketplace module that you can attach.
+    #
+    #   resp = client.get_available_module({
+    #     module_id: "module-8kq2p9wx3fnv1c5htj7bd0ral", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     created_at: Time.parse("2026-10-01T12:00:00Z"), 
+    #     description: "Drops bid requests whose floor price is below a value that you set.", 
+    #     marketplace_product_id: "prod-abcd1234efgh5", 
+    #     module_arn: "arn:aws:rtbfabric:us-east-1::modules/module-8kq2p9wx3fnv1c5htj7bd0ral", 
+    #     module_id: "module-8kq2p9wx3fnv1c5htj7bd0ral", 
+    #     module_name: "bid-floor-filter", 
+    #     subscription_status: "ACTIVE", 
+    #     subscription_type: "MARKETPLACE", 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_available_module({
+    #     module_id: "ModuleId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.module_id #=> String
+    #   resp.module_arn #=> String
+    #   resp.module_name #=> String
+    #   resp.description #=> String
+    #   resp.subscription_type #=> String, one of "MARKETPLACE", "PRIVATE", "AWS_BUILT_IN"
+    #   resp.subscription_status #=> String, one of "ACTIVE", "EXPIRED"
+    #   resp.marketplace_product_id #=> String
+    #   resp.created_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rtbfabric-2023-05-15/GetAvailableModule AWS API Documentation
+    #
+    # @overload get_available_module(params = {})
+    # @param [Hash] params ({})
+    def get_available_module(params = {}, options = {})
+      req = build_request(:get_available_module, params)
+      req.send_request(options)
+    end
+
+    # Returns an ACTIVE or DEPRECATED version of a module that you can
+    # attach. If you can't attach the module, or the version is in another
+    # status, the operation returns ResourceNotFoundException, the same as
+    # for a missing one.
+    #
+    # @option params [required, String] :module_id
+    #   The module's ID.
+    #
+    # @option params [required, String] :version
+    #   The version.
+    #
+    # @return [Types::GetAvailableModuleVersionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetAvailableModuleVersionResponse#module_id #module_id} => String
+    #   * {Types::GetAvailableModuleVersionResponse#version #version} => String
+    #   * {Types::GetAvailableModuleVersionResponse#module_version_arn #module_version_arn} => String
+    #   * {Types::GetAvailableModuleVersionResponse#status #status} => String
+    #   * {Types::GetAvailableModuleVersionResponse#permissions #permissions} => Array&lt;String&gt;
+    #   * {Types::GetAvailableModuleVersionResponse#configurable_actions #configurable_actions} => Array&lt;String&gt;
+    #   * {Types::GetAvailableModuleVersionResponse#configuration_schema #configuration_schema} => String
+    #   * {Types::GetAvailableModuleVersionResponse#release_notes #release_notes} => String
+    #   * {Types::GetAvailableModuleVersionResponse#created_at #created_at} => Time
+    #   * {Types::GetAvailableModuleVersionResponse#updated_at #updated_at} => Time
+    #
+    #
+    # @example Example: Get a module version
+    #
+    #   # Gets a version of a module that you can attach, with what it can do and the parameters it accepts.
+    #
+    #   resp = client.get_available_module_version({
+    #     version: "1.2.0", 
+    #     module_id: "module-8kq2p9wx3fnv1c5htj7bd0ral", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     version: "1.2.0", 
+    #     configurable_actions: [
+    #       "FILTER", 
+    #     ], 
+    #     configuration_schema: "{\"type\":\"object\",\"properties\":{\"floorPrice\":{\"type\":\"number\"}}}", 
+    #     created_at: Time.parse("2026-10-15T09:00:00Z"), 
+    #     module_id: "module-8kq2p9wx3fnv1c5htj7bd0ral", 
+    #     module_version_arn: "arn:aws:rtbfabric:us-east-1::modules/module-8kq2p9wx3fnv1c5htj7bd0ral/versions/1.2.0", 
+    #     permissions: [
+    #       "READ_REQUEST_BODY", 
+    #       "FILTER", 
+    #     ], 
+    #     release_notes: "Adds a configurable floor price.", 
+    #     status: "ACTIVE", 
+    #     updated_at: Time.parse("2026-10-15T09:00:00Z"), 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_available_module_version({
+    #     module_id: "ModuleId", # required
+    #     version: "SemanticVersion", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.module_id #=> String
+    #   resp.version #=> String
+    #   resp.module_version_arn #=> String
+    #   resp.status #=> String, one of "CREATING", "CREATE_FAILED", "ACTIVE", "DEPRECATED"
+    #   resp.permissions #=> Array
+    #   resp.permissions[0] #=> String, one of "READ_REQUEST_BODY", "READ_REQUEST_HEADERS", "MUTATE_REQUEST_BODY", "ENRICH_REQUEST_HEADERS", "ENRICH_REQUEST_EXT", "FILTER"
+    #   resp.configurable_actions #=> Array
+    #   resp.configurable_actions[0] #=> String, one of "FILTER", "ENRICH_REQUEST_EXT", "ENRICH_REQUEST_HEADERS", "OBSERVE"
+    #   resp.configuration_schema #=> String
+    #   resp.release_notes #=> String
+    #   resp.created_at #=> Time
+    #   resp.updated_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rtbfabric-2023-05-15/GetAvailableModuleVersion AWS API Documentation
+    #
+    # @overload get_available_module_version(params = {})
+    # @param [Hash] params ({})
+    def get_available_module_version(params = {}, options = {})
+      req = build_request(:get_available_module_version, params)
+      req.send_request(options)
+    end
+
     # Retrieves the details of a certificate association with a responder
     # gateway.
     #
@@ -1898,6 +2060,7 @@ module Aws::RTBFabric
     #   * {Types::GetCertificateAssociationResponse#status #status} => String
     #   * {Types::GetCertificateAssociationResponse#associated_at #associated_at} => Time
     #   * {Types::GetCertificateAssociationResponse#updated_at #updated_at} => Time
+    #   * {Types::GetCertificateAssociationResponse#error_details #error_details} => Array&lt;Types::ErrorDetail&gt;
     #
     #
     # @example Example: Get certificate association details from a responder gateway
@@ -1932,6 +2095,11 @@ module Aws::RTBFabric
     #   resp.status #=> String, one of "PENDING_ASSOCIATION", "ASSOCIATED", "PENDING_DISASSOCIATION", "DISASSOCIATED", "FAILED"
     #   resp.associated_at #=> Time
     #   resp.updated_at #=> Time
+    #   resp.error_details #=> Array
+    #   resp.error_details[0].code #=> String, one of "VPC_NOT_FOUND", "EC2_SUBNET_NOT_FOUND", "EC2_SECURITY_GROUP_NOT_FOUND", "EC2_SUBNET_IP_EXHAUSTION", "IAM_ASSUME_ROLE_ACCESS_DENIED", "INTERNAL_ERROR"
+    #   resp.error_details[0].message #=> String
+    #   resp.error_details[0].resource_ids #=> Array
+    #   resp.error_details[0].resource_ids[0] #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -1970,6 +2138,9 @@ module Aws::RTBFabric
     #   * {Types::GetInboundExternalLinkResponse#tags #tags} => Hash&lt;String,String&gt;
     #   * {Types::GetInboundExternalLinkResponse#log_settings #log_settings} => Types::LinkLogSettings
     #   * {Types::GetInboundExternalLinkResponse#connectivity_type #connectivity_type} => String
+    #   * {Types::GetInboundExternalLinkResponse#error_details #error_details} => Array&lt;Types::ErrorDetail&gt;
+    #   * {Types::GetInboundExternalLinkResponse#lock_token #lock_token} => String
+    #   * {Types::GetInboundExternalLinkResponse#flows #flows} => Array&lt;Types::Flow&gt;
     #
     #
     # @example Example: Get inbound external link details
@@ -2002,7 +2173,7 @@ module Aws::RTBFabric
     #
     #   resp.gateway_id #=> String
     #   resp.link_id #=> String
-    #   resp.status #=> String, one of "PENDING_CREATION", "PENDING_REQUEST", "REQUESTED", "ACCEPTED", "ACTIVE", "REJECTED", "FAILED", "PENDING_DELETION", "DELETED", "PENDING_UPDATE", "PENDING_ISOLATION", "ISOLATED", "PENDING_RESTORATION"
+    #   resp.status #=> String, one of "PENDING_CREATION", "PENDING_REQUEST", "REQUESTED", "ACCEPTED", "ACTIVE", "REJECTED", "FAILED", "PENDING_DELETION", "DELETED", "PENDING_UPDATE", "PENDING_ISOLATION", "ISOLATED", "PENDING_RESTORATION", "CREATE_FAILED", "DELETE_FAILED"
     #   resp.domain_name #=> String
     #   resp.flow_modules #=> Array
     #   resp.flow_modules[0].version #=> String
@@ -2056,6 +2227,31 @@ module Aws::RTBFabric
     #   resp.log_settings.application_logs.sampling.error_log #=> Float
     #   resp.log_settings.application_logs.sampling.filter_log #=> Float
     #   resp.connectivity_type #=> String, one of "DEFAULT", "PUBLIC_INGRESS", "PUBLIC_EGRESS", "EXTERNAL_INBOUND"
+    #   resp.error_details #=> Array
+    #   resp.error_details[0].code #=> String, one of "VPC_NOT_FOUND", "EC2_SUBNET_NOT_FOUND", "EC2_SECURITY_GROUP_NOT_FOUND", "EC2_SUBNET_IP_EXHAUSTION", "IAM_ASSUME_ROLE_ACCESS_DENIED", "INTERNAL_ERROR"
+    #   resp.error_details[0].message #=> String
+    #   resp.error_details[0].resource_ids #=> Array
+    #   resp.error_details[0].resource_ids[0] #=> String
+    #   resp.lock_token #=> String
+    #   resp.flows #=> Array
+    #   resp.flows[0].name #=> String
+    #   resp.flows[0].pipeline.sequential.modules #=> Array
+    #   resp.flows[0].pipeline.sequential.modules[0].name #=> String
+    #   resp.flows[0].pipeline.sequential.modules[0].module_version_arn #=> String
+    #   resp.flows[0].pipeline.sequential.modules[0].selected_actions #=> Array
+    #   resp.flows[0].pipeline.sequential.modules[0].selected_actions[0] #=> String, one of "FILTER", "ENRICH_REQUEST_EXT", "ENRICH_REQUEST_HEADERS", "OBSERVE"
+    #   resp.flows[0].pipeline.sequential.modules[0].failure_mode #=> String, one of "OPEN", "CLOSED"
+    #   resp.flows[0].pipeline.sequential.modules[0].activation_percentage #=> Float
+    #   resp.flows[0].pipeline.sequential.modules[0].configuration_values #=> String
+    #   resp.flows[0].pipeline.phased.phases #=> Array
+    #   resp.flows[0].pipeline.phased.phases[0].modules #=> Array
+    #   resp.flows[0].pipeline.phased.phases[0].modules[0].name #=> String
+    #   resp.flows[0].pipeline.phased.phases[0].modules[0].module_version_arn #=> String
+    #   resp.flows[0].pipeline.phased.phases[0].modules[0].selected_actions #=> Array
+    #   resp.flows[0].pipeline.phased.phases[0].modules[0].selected_actions[0] #=> String, one of "FILTER", "ENRICH_REQUEST_EXT", "ENRICH_REQUEST_HEADERS", "OBSERVE"
+    #   resp.flows[0].pipeline.phased.phases[0].modules[0].failure_mode #=> String, one of "OPEN", "CLOSED"
+    #   resp.flows[0].pipeline.phased.phases[0].modules[0].activation_percentage #=> Float
+    #   resp.flows[0].pipeline.phased.phases[0].modules[0].configuration_values #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -2096,10 +2292,13 @@ module Aws::RTBFabric
     #   * {Types::GetLinkResponse#attributes #attributes} => Types::LinkAttributes
     #   * {Types::GetLinkResponse#log_settings #log_settings} => Types::LinkLogSettings
     #   * {Types::GetLinkResponse#connectivity_type #connectivity_type} => String
+    #   * {Types::GetLinkResponse#error_details #error_details} => Array&lt;Types::ErrorDetail&gt;
     #   * {Types::GetLinkResponse#link_id #link_id} => String
     #   * {Types::GetLinkResponse#tags #tags} => Hash&lt;String,String&gt;
     #   * {Types::GetLinkResponse#http_responder_allowed #http_responder_allowed} => Boolean
     #   * {Types::GetLinkResponse#timeout_in_millis #timeout_in_millis} => Integer
+    #   * {Types::GetLinkResponse#lock_token #lock_token} => String
+    #   * {Types::GetLinkResponse#flows #flows} => Array&lt;Types::Flow&gt;
     #
     #
     # @example Example: Get link details
@@ -2132,7 +2331,7 @@ module Aws::RTBFabric
     #
     #   resp.gateway_id #=> String
     #   resp.peer_gateway_id #=> String
-    #   resp.status #=> String, one of "PENDING_CREATION", "PENDING_REQUEST", "REQUESTED", "ACCEPTED", "ACTIVE", "REJECTED", "FAILED", "PENDING_DELETION", "DELETED", "PENDING_UPDATE", "PENDING_ISOLATION", "ISOLATED", "PENDING_RESTORATION"
+    #   resp.status #=> String, one of "PENDING_CREATION", "PENDING_REQUEST", "REQUESTED", "ACCEPTED", "ACTIVE", "REJECTED", "FAILED", "PENDING_DELETION", "DELETED", "PENDING_UPDATE", "PENDING_ISOLATION", "ISOLATED", "PENDING_RESTORATION", "CREATE_FAILED", "DELETE_FAILED"
     #   resp.created_at #=> Time
     #   resp.updated_at #=> Time
     #   resp.direction #=> String, one of "RESPONSE", "REQUEST"
@@ -2184,11 +2383,36 @@ module Aws::RTBFabric
     #   resp.log_settings.application_logs.sampling.error_log #=> Float
     #   resp.log_settings.application_logs.sampling.filter_log #=> Float
     #   resp.connectivity_type #=> String, one of "DEFAULT", "PUBLIC_INGRESS", "PUBLIC_EGRESS", "EXTERNAL_INBOUND"
+    #   resp.error_details #=> Array
+    #   resp.error_details[0].code #=> String, one of "VPC_NOT_FOUND", "EC2_SUBNET_NOT_FOUND", "EC2_SECURITY_GROUP_NOT_FOUND", "EC2_SUBNET_IP_EXHAUSTION", "IAM_ASSUME_ROLE_ACCESS_DENIED", "INTERNAL_ERROR"
+    #   resp.error_details[0].message #=> String
+    #   resp.error_details[0].resource_ids #=> Array
+    #   resp.error_details[0].resource_ids[0] #=> String
     #   resp.link_id #=> String
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
     #   resp.http_responder_allowed #=> Boolean
     #   resp.timeout_in_millis #=> Integer
+    #   resp.lock_token #=> String
+    #   resp.flows #=> Array
+    #   resp.flows[0].name #=> String
+    #   resp.flows[0].pipeline.sequential.modules #=> Array
+    #   resp.flows[0].pipeline.sequential.modules[0].name #=> String
+    #   resp.flows[0].pipeline.sequential.modules[0].module_version_arn #=> String
+    #   resp.flows[0].pipeline.sequential.modules[0].selected_actions #=> Array
+    #   resp.flows[0].pipeline.sequential.modules[0].selected_actions[0] #=> String, one of "FILTER", "ENRICH_REQUEST_EXT", "ENRICH_REQUEST_HEADERS", "OBSERVE"
+    #   resp.flows[0].pipeline.sequential.modules[0].failure_mode #=> String, one of "OPEN", "CLOSED"
+    #   resp.flows[0].pipeline.sequential.modules[0].activation_percentage #=> Float
+    #   resp.flows[0].pipeline.sequential.modules[0].configuration_values #=> String
+    #   resp.flows[0].pipeline.phased.phases #=> Array
+    #   resp.flows[0].pipeline.phased.phases[0].modules #=> Array
+    #   resp.flows[0].pipeline.phased.phases[0].modules[0].name #=> String
+    #   resp.flows[0].pipeline.phased.phases[0].modules[0].module_version_arn #=> String
+    #   resp.flows[0].pipeline.phased.phases[0].modules[0].selected_actions #=> Array
+    #   resp.flows[0].pipeline.phased.phases[0].modules[0].selected_actions[0] #=> String, one of "FILTER", "ENRICH_REQUEST_EXT", "ENRICH_REQUEST_HEADERS", "OBSERVE"
+    #   resp.flows[0].pipeline.phased.phases[0].modules[0].failure_mode #=> String, one of "OPEN", "CLOSED"
+    #   resp.flows[0].pipeline.phased.phases[0].modules[0].activation_percentage #=> Float
+    #   resp.flows[0].pipeline.phased.phases[0].modules[0].configuration_values #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -2228,6 +2452,7 @@ module Aws::RTBFabric
     #   * {Types::GetLinkRoutingRuleResponse#created_at #created_at} => Time
     #   * {Types::GetLinkRoutingRuleResponse#updated_at #updated_at} => Time
     #   * {Types::GetLinkRoutingRuleResponse#tags #tags} => Hash&lt;String,String&gt;
+    #   * {Types::GetLinkRoutingRuleResponse#error_details #error_details} => Array&lt;Types::ErrorDetail&gt;
     #
     #
     # @example Example: Get link routing rule details
@@ -2276,11 +2501,16 @@ module Aws::RTBFabric
     #   resp.conditions.query_string_equals.key #=> String
     #   resp.conditions.query_string_equals.value #=> String
     #   resp.conditions.query_string_exists #=> String
-    #   resp.status #=> String, one of "CREATION_IN_PROGRESS", "ACTIVE", "UPDATE_IN_PROGRESS", "DELETION_IN_PROGRESS", "DELETED", "FAILED"
+    #   resp.status #=> String, one of "CREATION_IN_PROGRESS", "ACTIVE", "UPDATE_IN_PROGRESS", "DELETION_IN_PROGRESS", "DELETED", "FAILED", "CREATE_FAILED", "DELETE_FAILED"
     #   resp.created_at #=> Time
     #   resp.updated_at #=> Time
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
+    #   resp.error_details #=> Array
+    #   resp.error_details[0].code #=> String, one of "VPC_NOT_FOUND", "EC2_SUBNET_NOT_FOUND", "EC2_SECURITY_GROUP_NOT_FOUND", "EC2_SUBNET_IP_EXHAUSTION", "IAM_ASSUME_ROLE_ACCESS_DENIED", "INTERNAL_ERROR"
+    #   resp.error_details[0].message #=> String
+    #   resp.error_details[0].resource_ids #=> Array
+    #   resp.error_details[0].resource_ids[0] #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -2319,6 +2549,9 @@ module Aws::RTBFabric
     #   * {Types::GetOutboundExternalLinkResponse#tags #tags} => Hash&lt;String,String&gt;
     #   * {Types::GetOutboundExternalLinkResponse#log_settings #log_settings} => Types::LinkLogSettings
     #   * {Types::GetOutboundExternalLinkResponse#connectivity_type #connectivity_type} => String
+    #   * {Types::GetOutboundExternalLinkResponse#error_details #error_details} => Array&lt;Types::ErrorDetail&gt;
+    #   * {Types::GetOutboundExternalLinkResponse#lock_token #lock_token} => String
+    #   * {Types::GetOutboundExternalLinkResponse#flows #flows} => Array&lt;Types::Flow&gt;
     #
     #
     # @example Example: Get outbound external link details
@@ -2351,7 +2584,7 @@ module Aws::RTBFabric
     #
     #   resp.gateway_id #=> String
     #   resp.link_id #=> String
-    #   resp.status #=> String, one of "PENDING_CREATION", "PENDING_REQUEST", "REQUESTED", "ACCEPTED", "ACTIVE", "REJECTED", "FAILED", "PENDING_DELETION", "DELETED", "PENDING_UPDATE", "PENDING_ISOLATION", "ISOLATED", "PENDING_RESTORATION"
+    #   resp.status #=> String, one of "PENDING_CREATION", "PENDING_REQUEST", "REQUESTED", "ACCEPTED", "ACTIVE", "REJECTED", "FAILED", "PENDING_DELETION", "DELETED", "PENDING_UPDATE", "PENDING_ISOLATION", "ISOLATED", "PENDING_RESTORATION", "CREATE_FAILED", "DELETE_FAILED"
     #   resp.public_endpoint #=> String
     #   resp.flow_modules #=> Array
     #   resp.flow_modules[0].version #=> String
@@ -2405,6 +2638,31 @@ module Aws::RTBFabric
     #   resp.log_settings.application_logs.sampling.error_log #=> Float
     #   resp.log_settings.application_logs.sampling.filter_log #=> Float
     #   resp.connectivity_type #=> String, one of "DEFAULT", "PUBLIC_INGRESS", "PUBLIC_EGRESS", "EXTERNAL_INBOUND"
+    #   resp.error_details #=> Array
+    #   resp.error_details[0].code #=> String, one of "VPC_NOT_FOUND", "EC2_SUBNET_NOT_FOUND", "EC2_SECURITY_GROUP_NOT_FOUND", "EC2_SUBNET_IP_EXHAUSTION", "IAM_ASSUME_ROLE_ACCESS_DENIED", "INTERNAL_ERROR"
+    #   resp.error_details[0].message #=> String
+    #   resp.error_details[0].resource_ids #=> Array
+    #   resp.error_details[0].resource_ids[0] #=> String
+    #   resp.lock_token #=> String
+    #   resp.flows #=> Array
+    #   resp.flows[0].name #=> String
+    #   resp.flows[0].pipeline.sequential.modules #=> Array
+    #   resp.flows[0].pipeline.sequential.modules[0].name #=> String
+    #   resp.flows[0].pipeline.sequential.modules[0].module_version_arn #=> String
+    #   resp.flows[0].pipeline.sequential.modules[0].selected_actions #=> Array
+    #   resp.flows[0].pipeline.sequential.modules[0].selected_actions[0] #=> String, one of "FILTER", "ENRICH_REQUEST_EXT", "ENRICH_REQUEST_HEADERS", "OBSERVE"
+    #   resp.flows[0].pipeline.sequential.modules[0].failure_mode #=> String, one of "OPEN", "CLOSED"
+    #   resp.flows[0].pipeline.sequential.modules[0].activation_percentage #=> Float
+    #   resp.flows[0].pipeline.sequential.modules[0].configuration_values #=> String
+    #   resp.flows[0].pipeline.phased.phases #=> Array
+    #   resp.flows[0].pipeline.phased.phases[0].modules #=> Array
+    #   resp.flows[0].pipeline.phased.phases[0].modules[0].name #=> String
+    #   resp.flows[0].pipeline.phased.phases[0].modules[0].module_version_arn #=> String
+    #   resp.flows[0].pipeline.phased.phases[0].modules[0].selected_actions #=> Array
+    #   resp.flows[0].pipeline.phased.phases[0].modules[0].selected_actions[0] #=> String, one of "FILTER", "ENRICH_REQUEST_EXT", "ENRICH_REQUEST_HEADERS", "OBSERVE"
+    #   resp.flows[0].pipeline.phased.phases[0].modules[0].failure_mode #=> String, one of "OPEN", "CLOSED"
+    #   resp.flows[0].pipeline.phased.phases[0].modules[0].activation_percentage #=> Float
+    #   resp.flows[0].pipeline.phased.phases[0].modules[0].configuration_values #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -2433,6 +2691,7 @@ module Aws::RTBFabric
     #   * {Types::GetRequesterGatewayResponse#description #description} => String
     #   * {Types::GetRequesterGatewayResponse#created_at #created_at} => Time
     #   * {Types::GetRequesterGatewayResponse#updated_at #updated_at} => Time
+    #   * {Types::GetRequesterGatewayResponse#error_details #error_details} => Array&lt;Types::ErrorDetail&gt;
     #   * {Types::GetRequesterGatewayResponse#vpc_id #vpc_id} => String
     #   * {Types::GetRequesterGatewayResponse#subnet_ids #subnet_ids} => Array&lt;String&gt;
     #   * {Types::GetRequesterGatewayResponse#security_group_ids #security_group_ids} => Array&lt;String&gt;
@@ -2478,11 +2737,16 @@ module Aws::RTBFabric
     #
     # @example Response structure
     #
-    #   resp.status #=> String, one of "PENDING_CREATION", "ACTIVE", "PENDING_DELETION", "DELETED", "ERROR", "PENDING_UPDATE", "ISOLATED", "PENDING_ISOLATION", "PENDING_RESTORATION"
+    #   resp.status #=> String, one of "PENDING_CREATION", "ACTIVE", "PENDING_DELETION", "DELETED", "ERROR", "PENDING_UPDATE", "ISOLATED", "PENDING_ISOLATION", "PENDING_RESTORATION", "CREATE_FAILED", "DELETE_FAILED"
     #   resp.domain_name #=> String
     #   resp.description #=> String
     #   resp.created_at #=> Time
     #   resp.updated_at #=> Time
+    #   resp.error_details #=> Array
+    #   resp.error_details[0].code #=> String, one of "VPC_NOT_FOUND", "EC2_SUBNET_NOT_FOUND", "EC2_SECURITY_GROUP_NOT_FOUND", "EC2_SUBNET_IP_EXHAUSTION", "IAM_ASSUME_ROLE_ACCESS_DENIED", "INTERNAL_ERROR"
+    #   resp.error_details[0].message #=> String
+    #   resp.error_details[0].resource_ids #=> Array
+    #   resp.error_details[0].resource_ids[0] #=> String
     #   resp.vpc_id #=> String
     #   resp.subnet_ids #=> Array
     #   resp.subnet_ids[0] #=> String
@@ -2523,6 +2787,7 @@ module Aws::RTBFabric
     #   * {Types::GetResponderGatewayResponse#description #description} => String
     #   * {Types::GetResponderGatewayResponse#created_at #created_at} => Time
     #   * {Types::GetResponderGatewayResponse#updated_at #updated_at} => Time
+    #   * {Types::GetResponderGatewayResponse#error_details #error_details} => Array&lt;Types::ErrorDetail&gt;
     #   * {Types::GetResponderGatewayResponse#domain_name #domain_name} => String
     #   * {Types::GetResponderGatewayResponse#port #port} => Integer
     #   * {Types::GetResponderGatewayResponse#protocol #protocol} => String
@@ -2582,10 +2847,15 @@ module Aws::RTBFabric
     #   resp.subnet_ids[0] #=> String
     #   resp.security_group_ids #=> Array
     #   resp.security_group_ids[0] #=> String
-    #   resp.status #=> String, one of "PENDING_CREATION", "ACTIVE", "PENDING_DELETION", "DELETED", "ERROR", "PENDING_UPDATE", "ISOLATED", "PENDING_ISOLATION", "PENDING_RESTORATION"
+    #   resp.status #=> String, one of "PENDING_CREATION", "ACTIVE", "PENDING_DELETION", "DELETED", "ERROR", "PENDING_UPDATE", "ISOLATED", "PENDING_ISOLATION", "PENDING_RESTORATION", "CREATE_FAILED", "DELETE_FAILED"
     #   resp.description #=> String
     #   resp.created_at #=> Time
     #   resp.updated_at #=> Time
+    #   resp.error_details #=> Array
+    #   resp.error_details[0].code #=> String, one of "VPC_NOT_FOUND", "EC2_SUBNET_NOT_FOUND", "EC2_SECURITY_GROUP_NOT_FOUND", "EC2_SUBNET_IP_EXHAUSTION", "IAM_ASSUME_ROLE_ACCESS_DENIED", "INTERNAL_ERROR"
+    #   resp.error_details[0].message #=> String
+    #   resp.error_details[0].resource_ids #=> Array
+    #   resp.error_details[0].resource_ids[0] #=> String
     #   resp.domain_name #=> String
     #   resp.port #=> Integer
     #   resp.protocol #=> String, one of "HTTP", "HTTPS"
@@ -2632,6 +2902,326 @@ module Aws::RTBFabric
     # @param [Hash] params ({})
     def get_responder_gateway(params = {}, options = {})
       req = build_request(:get_responder_gateway, params)
+      req.send_request(options)
+    end
+
+    # Returns ResourceNotFoundException for an updateId past the 90-day
+    # retention window, indistinguishable in the response from an id that
+    # never existed.
+    #
+    # @option params [required, String] :gateway_id
+    #   The unique identifier of the gateway.
+    #
+    # @option params [required, String] :update_id
+    #   The unique identifier of the update.
+    #
+    # @return [Types::GetUpdateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetUpdateResponse#update #update} => Types::Update
+    #
+    #
+    # @example Example: Get an update
+    #
+    #   # Get one routing rule update on a responder gateway
+    #
+    #   resp = client.get_update({
+    #     gateway_id: "rtb-gw-12345678", 
+    #     update_id: "update-1a2b3c4d5e6f", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     update: {
+    #       type: "ROUTING_RULE_UPDATE", 
+    #       created_at: Time.parse("2026-10-01T12:00:00Z"), 
+    #       parameters: {
+    #         routing_rule: {
+    #           conditions: {
+    #             host_header: "api.customer.com", 
+    #           }, 
+    #           priority: 20, 
+    #         }, 
+    #       }, 
+    #       status: "SUCCESSFUL", 
+    #       target: {
+    #         routing_rule: {
+    #           link_id: "link-87654321", 
+    #           rule_id: "rule-abc123def456", 
+    #         }, 
+    #       }, 
+    #       update_id: "update-1a2b3c4d5e6f", 
+    #     }, 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_update({
+    #     gateway_id: "GatewayId", # required
+    #     update_id: "UpdateId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.update.update_id #=> String
+    #   resp.update.type #=> String, one of "GATEWAY_CONFIG_UPDATE", "LINK_CONFIG_UPDATE", "LINK_FLOW_UPDATE", "ROUTING_RULE_UPDATE"
+    #   resp.update.status #=> String, one of "IN_PROGRESS", "SUCCESSFUL", "FAILED"
+    #   resp.update.target.link.link_id #=> String
+    #   resp.update.target.routing_rule.link_id #=> String
+    #   resp.update.target.routing_rule.rule_id #=> String
+    #   resp.update.created_at #=> Time
+    #   resp.update.parameters.responder_gateway_config.description #=> String
+    #   resp.update.parameters.responder_gateway_config.client_routing_policy #=> String, one of "AVAILABILITY_ZONE_AFFINITY", "ANY_AVAILABILITY_ZONE"
+    #   resp.update.parameters.responder_gateway_config.domain_name #=> String
+    #   resp.update.parameters.responder_gateway_config.port #=> Integer
+    #   resp.update.parameters.responder_gateway_config.protocol #=> String, one of "HTTP", "HTTPS"
+    #   resp.update.parameters.responder_gateway_config.listener_config.protocols #=> Array
+    #   resp.update.parameters.responder_gateway_config.listener_config.protocols[0] #=> String, one of "HTTP", "HTTPS"
+    #   resp.update.parameters.responder_gateway_config.trust_store_configuration.certificate_authority_certificates #=> Array
+    #   resp.update.parameters.responder_gateway_config.trust_store_configuration.certificate_authority_certificates[0] #=> String
+    #   resp.update.parameters.responder_gateway_config.managed_endpoint_configuration.auto_scaling_groups.auto_scaling_group_names #=> Array
+    #   resp.update.parameters.responder_gateway_config.managed_endpoint_configuration.auto_scaling_groups.auto_scaling_group_names[0] #=> String
+    #   resp.update.parameters.responder_gateway_config.managed_endpoint_configuration.auto_scaling_groups.role_arn #=> String
+    #   resp.update.parameters.responder_gateway_config.managed_endpoint_configuration.auto_scaling_groups.health_check_config.port #=> Integer
+    #   resp.update.parameters.responder_gateway_config.managed_endpoint_configuration.auto_scaling_groups.health_check_config.path #=> String
+    #   resp.update.parameters.responder_gateway_config.managed_endpoint_configuration.auto_scaling_groups.health_check_config.protocol #=> String, one of "HTTP", "HTTPS"
+    #   resp.update.parameters.responder_gateway_config.managed_endpoint_configuration.auto_scaling_groups.health_check_config.timeout_ms #=> Integer
+    #   resp.update.parameters.responder_gateway_config.managed_endpoint_configuration.auto_scaling_groups.health_check_config.interval_seconds #=> Integer
+    #   resp.update.parameters.responder_gateway_config.managed_endpoint_configuration.auto_scaling_groups.health_check_config.status_code_matcher #=> String
+    #   resp.update.parameters.responder_gateway_config.managed_endpoint_configuration.auto_scaling_groups.health_check_config.healthy_threshold_count #=> Integer
+    #   resp.update.parameters.responder_gateway_config.managed_endpoint_configuration.auto_scaling_groups.health_check_config.unhealthy_threshold_count #=> Integer
+    #   resp.update.parameters.responder_gateway_config.managed_endpoint_configuration.eks_endpoints.endpoints_resource_name #=> String
+    #   resp.update.parameters.responder_gateway_config.managed_endpoint_configuration.eks_endpoints.endpoints_resource_namespace #=> String
+    #   resp.update.parameters.responder_gateway_config.managed_endpoint_configuration.eks_endpoints.cluster_api_server_endpoint_uri #=> String
+    #   resp.update.parameters.responder_gateway_config.managed_endpoint_configuration.eks_endpoints.cluster_api_server_ca_certificate_chain #=> String
+    #   resp.update.parameters.responder_gateway_config.managed_endpoint_configuration.eks_endpoints.cluster_name #=> String
+    #   resp.update.parameters.responder_gateway_config.managed_endpoint_configuration.eks_endpoints.role_arn #=> String
+    #   resp.update.parameters.link_config.log_settings.application_logs.sampling.error_log #=> Float
+    #   resp.update.parameters.link_config.log_settings.application_logs.sampling.filter_log #=> Float
+    #   resp.update.parameters.link_config.timeout_in_millis #=> Integer
+    #   resp.update.parameters.link_flow.modules #=> Array
+    #   resp.update.parameters.link_flow.modules[0].version #=> String
+    #   resp.update.parameters.link_flow.modules[0].name #=> String
+    #   resp.update.parameters.link_flow.modules[0].depends_on #=> Array
+    #   resp.update.parameters.link_flow.modules[0].depends_on[0] #=> String
+    #   resp.update.parameters.link_flow.modules[0].module_parameters.no_bid.reason #=> String
+    #   resp.update.parameters.link_flow.modules[0].module_parameters.no_bid.reason_code #=> Integer
+    #   resp.update.parameters.link_flow.modules[0].module_parameters.no_bid.pass_through_percentage #=> Float
+    #   resp.update.parameters.link_flow.modules[0].module_parameters.open_rtb_attribute.filter_type #=> String, one of "INCLUDE", "EXCLUDE"
+    #   resp.update.parameters.link_flow.modules[0].module_parameters.open_rtb_attribute.filter_configuration #=> Array
+    #   resp.update.parameters.link_flow.modules[0].module_parameters.open_rtb_attribute.filter_configuration[0].criteria #=> Array
+    #   resp.update.parameters.link_flow.modules[0].module_parameters.open_rtb_attribute.filter_configuration[0].criteria[0].path #=> String
+    #   resp.update.parameters.link_flow.modules[0].module_parameters.open_rtb_attribute.filter_configuration[0].criteria[0].values #=> Array
+    #   resp.update.parameters.link_flow.modules[0].module_parameters.open_rtb_attribute.filter_configuration[0].criteria[0].values[0] #=> String
+    #   resp.update.parameters.link_flow.modules[0].module_parameters.open_rtb_attribute.action.no_bid.no_bid_reason_code #=> Integer
+    #   resp.update.parameters.link_flow.modules[0].module_parameters.open_rtb_attribute.action.header_tag.name #=> String
+    #   resp.update.parameters.link_flow.modules[0].module_parameters.open_rtb_attribute.action.header_tag.value #=> String
+    #   resp.update.parameters.link_flow.modules[0].module_parameters.open_rtb_attribute.holdback_percentage #=> Float
+    #   resp.update.parameters.link_flow.modules[0].module_parameters.rate_limiter.tps #=> Float
+    #   resp.update.parameters.link_flow.flows #=> Array
+    #   resp.update.parameters.link_flow.flows[0].name #=> String
+    #   resp.update.parameters.link_flow.flows[0].pipeline.sequential.modules #=> Array
+    #   resp.update.parameters.link_flow.flows[0].pipeline.sequential.modules[0].name #=> String
+    #   resp.update.parameters.link_flow.flows[0].pipeline.sequential.modules[0].module_version_arn #=> String
+    #   resp.update.parameters.link_flow.flows[0].pipeline.sequential.modules[0].selected_actions #=> Array
+    #   resp.update.parameters.link_flow.flows[0].pipeline.sequential.modules[0].selected_actions[0] #=> String, one of "FILTER", "ENRICH_REQUEST_EXT", "ENRICH_REQUEST_HEADERS", "OBSERVE"
+    #   resp.update.parameters.link_flow.flows[0].pipeline.sequential.modules[0].failure_mode #=> String, one of "OPEN", "CLOSED"
+    #   resp.update.parameters.link_flow.flows[0].pipeline.sequential.modules[0].activation_percentage #=> Float
+    #   resp.update.parameters.link_flow.flows[0].pipeline.sequential.modules[0].configuration_values #=> String
+    #   resp.update.parameters.link_flow.flows[0].pipeline.phased.phases #=> Array
+    #   resp.update.parameters.link_flow.flows[0].pipeline.phased.phases[0].modules #=> Array
+    #   resp.update.parameters.link_flow.flows[0].pipeline.phased.phases[0].modules[0].name #=> String
+    #   resp.update.parameters.link_flow.flows[0].pipeline.phased.phases[0].modules[0].module_version_arn #=> String
+    #   resp.update.parameters.link_flow.flows[0].pipeline.phased.phases[0].modules[0].selected_actions #=> Array
+    #   resp.update.parameters.link_flow.flows[0].pipeline.phased.phases[0].modules[0].selected_actions[0] #=> String, one of "FILTER", "ENRICH_REQUEST_EXT", "ENRICH_REQUEST_HEADERS", "OBSERVE"
+    #   resp.update.parameters.link_flow.flows[0].pipeline.phased.phases[0].modules[0].failure_mode #=> String, one of "OPEN", "CLOSED"
+    #   resp.update.parameters.link_flow.flows[0].pipeline.phased.phases[0].modules[0].activation_percentage #=> Float
+    #   resp.update.parameters.link_flow.flows[0].pipeline.phased.phases[0].modules[0].configuration_values #=> String
+    #   resp.update.parameters.routing_rule.priority #=> Integer
+    #   resp.update.parameters.routing_rule.conditions.host_header #=> String
+    #   resp.update.parameters.routing_rule.conditions.host_header_wildcard #=> String
+    #   resp.update.parameters.routing_rule.conditions.path_prefix #=> String
+    #   resp.update.parameters.routing_rule.conditions.path_exact #=> String
+    #   resp.update.parameters.routing_rule.conditions.query_string_equals.key #=> String
+    #   resp.update.parameters.routing_rule.conditions.query_string_equals.value #=> String
+    #   resp.update.parameters.routing_rule.conditions.query_string_exists #=> String
+    #   resp.update.error_details #=> Array
+    #   resp.update.error_details[0].code #=> String, one of "VPC_NOT_FOUND", "EC2_SUBNET_NOT_FOUND", "EC2_SECURITY_GROUP_NOT_FOUND", "EC2_SUBNET_IP_EXHAUSTION", "IAM_ASSUME_ROLE_ACCESS_DENIED", "INTERNAL_ERROR"
+    #   resp.update.error_details[0].message #=> String
+    #   resp.update.error_details[0].resource_ids #=> Array
+    #   resp.update.error_details[0].resource_ids[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rtbfabric-2023-05-15/GetUpdate AWS API Documentation
+    #
+    # @overload get_update(params = {})
+    # @param [Hash] params ({})
+    def get_update(params = {}, options = {})
+      req = build_request(:get_update, params)
+      req.send_request(options)
+    end
+
+    # Lists the ACTIVE and DEPRECATED versions of a module that you can
+    # attach, highest version first (numerically by MAJOR, then MINOR, then
+    # PATCH). If you can't attach the module, the operation returns
+    # ResourceNotFoundException, the same as for a missing one. If the
+    # module has no ACTIVE or DEPRECATED versions, the operation returns an
+    # empty list. The operation lists DEPRECATED versions so that you can
+    # inspect one that you've attached, but you can't attach them. Results
+    # are paginated. Use `nextToken` to get the next page.
+    #
+    # @option params [required, String] :module_id
+    #   The module's ID.
+    #
+    # @option params [String] :status
+    #   Lists only versions in this status. Only ACTIVE and DEPRECATED
+    #   versions are listed, so another value returns an empty list.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results for each page, from 1 to 10. The default
+    #   is 10.
+    #
+    # @option params [String] :next_token
+    #   If nextToken is returned, there are more results available. Make the
+    #   call again using the returned token to retrieve the next page. Keep
+    #   all other arguments unchanged. Each pagination token expires after 24
+    #   hours; using an expired token fails with ValidationException.
+    #
+    # @return [Types::ListAvailableModuleVersionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListAvailableModuleVersionsResponse#module_id #module_id} => String
+    #   * {Types::ListAvailableModuleVersionsResponse#versions #versions} => Array&lt;Types::AvailableModuleVersionSummary&gt;
+    #   * {Types::ListAvailableModuleVersionsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: List a module's versions
+    #
+    #   # Lists the versions of a module that you can attach, highest version first.
+    #
+    #   resp = client.list_available_module_versions({
+    #     max_results: 10, 
+    #     module_id: "module-8kq2p9wx3fnv1c5htj7bd0ral", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     module_id: "module-8kq2p9wx3fnv1c5htj7bd0ral", 
+    #     versions: [
+    #       {
+    #         version: "1.2.0", 
+    #         created_at: Time.parse("2026-10-15T09:00:00Z"), 
+    #         module_version_arn: "arn:aws:rtbfabric:us-east-1::modules/module-8kq2p9wx3fnv1c5htj7bd0ral/versions/1.2.0", 
+    #         status: "ACTIVE", 
+    #       }, 
+    #       {
+    #         version: "1.1.0", 
+    #         created_at: Time.parse("2026-10-01T12:00:00Z"), 
+    #         module_version_arn: "arn:aws:rtbfabric:us-east-1::modules/module-8kq2p9wx3fnv1c5htj7bd0ral/versions/1.1.0", 
+    #         status: "DEPRECATED", 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_available_module_versions({
+    #     module_id: "ModuleId", # required
+    #     status: "CREATING", # accepts CREATING, CREATE_FAILED, ACTIVE, DEPRECATED
+    #     max_results: 1,
+    #     next_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.module_id #=> String
+    #   resp.versions #=> Array
+    #   resp.versions[0].version #=> String
+    #   resp.versions[0].module_version_arn #=> String
+    #   resp.versions[0].status #=> String, one of "CREATING", "CREATE_FAILED", "ACTIVE", "DEPRECATED"
+    #   resp.versions[0].created_at #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rtbfabric-2023-05-15/ListAvailableModuleVersions AWS API Documentation
+    #
+    # @overload list_available_module_versions(params = {})
+    # @param [Hash] params ({})
+    def list_available_module_versions(params = {}, options = {})
+      req = build_request(:list_available_module_versions, params)
+      req.send_request(options)
+    end
+
+    # Lists the modules that you can attach, newest first by `createdAt`.
+    # Results are paginated. Use `nextToken` to get the next page.
+    #
+    # @option params [String] :subscription_type
+    #   Lists only modules that you have access to this way.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results for each page, from 1 to 10. The default
+    #   is 10.
+    #
+    # @option params [String] :next_token
+    #   If nextToken is returned, there are more results available. Make the
+    #   call again using the returned token to retrieve the next page. Keep
+    #   all other arguments unchanged. Each pagination token expires after 24
+    #   hours; using an expired token fails with ValidationException.
+    #
+    # @return [Types::ListAvailableModulesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListAvailableModulesResponse#modules #modules} => Array&lt;Types::AvailableModuleSummary&gt;
+    #   * {Types::ListAvailableModulesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: List the modules you subscribe to through AWS Marketplace
+    #
+    #   # Lists the Marketplace modules that you can attach.
+    #
+    #   resp = client.list_available_modules({
+    #     max_results: 10, 
+    #     subscription_type: "MARKETPLACE", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     modules: [
+    #       {
+    #         marketplace_product_id: "prod-abcd1234efgh5", 
+    #         module_arn: "arn:aws:rtbfabric:us-east-1::modules/module-8kq2p9wx3fnv1c5htj7bd0ral", 
+    #         module_id: "module-8kq2p9wx3fnv1c5htj7bd0ral", 
+    #         module_name: "bid-floor-filter", 
+    #         subscription_status: "ACTIVE", 
+    #         subscription_type: "MARKETPLACE", 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_available_modules({
+    #     subscription_type: "MARKETPLACE", # accepts MARKETPLACE, PRIVATE, AWS_BUILT_IN
+    #     max_results: 1,
+    #     next_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.modules #=> Array
+    #   resp.modules[0].module_id #=> String
+    #   resp.modules[0].module_arn #=> String
+    #   resp.modules[0].module_name #=> String
+    #   resp.modules[0].subscription_type #=> String, one of "MARKETPLACE", "PRIVATE", "AWS_BUILT_IN"
+    #   resp.modules[0].subscription_status #=> String, one of "ACTIVE", "EXPIRED"
+    #   resp.modules[0].marketplace_product_id #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rtbfabric-2023-05-15/ListAvailableModules AWS API Documentation
+    #
+    # @overload list_available_modules(params = {})
+    # @param [Hash] params ({})
+    def list_available_modules(params = {}, options = {})
+      req = build_request(:list_available_modules, params)
       req.send_request(options)
     end
 
@@ -2790,9 +3380,14 @@ module Aws::RTBFabric
     #   resp.rules[0].conditions.query_string_equals.key #=> String
     #   resp.rules[0].conditions.query_string_equals.value #=> String
     #   resp.rules[0].conditions.query_string_exists #=> String
-    #   resp.rules[0].status #=> String, one of "CREATION_IN_PROGRESS", "ACTIVE", "UPDATE_IN_PROGRESS", "DELETION_IN_PROGRESS", "DELETED", "FAILED"
+    #   resp.rules[0].status #=> String, one of "CREATION_IN_PROGRESS", "ACTIVE", "UPDATE_IN_PROGRESS", "DELETION_IN_PROGRESS", "DELETED", "FAILED", "CREATE_FAILED", "DELETE_FAILED"
     #   resp.rules[0].created_at #=> Time
     #   resp.rules[0].updated_at #=> Time
+    #   resp.rules[0].error_details #=> Array
+    #   resp.rules[0].error_details[0].code #=> String, one of "VPC_NOT_FOUND", "EC2_SUBNET_NOT_FOUND", "EC2_SECURITY_GROUP_NOT_FOUND", "EC2_SUBNET_IP_EXHAUSTION", "IAM_ASSUME_ROLE_ACCESS_DENIED", "INTERNAL_ERROR"
+    #   resp.rules[0].error_details[0].message #=> String
+    #   resp.rules[0].error_details[0].resource_ids #=> Array
+    #   resp.rules[0].error_details[0].resource_ids[0] #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rtbfabric-2023-05-15/ListLinkRoutingRules AWS API Documentation
@@ -2871,7 +3466,7 @@ module Aws::RTBFabric
     #   resp.links #=> Array
     #   resp.links[0].gateway_id #=> String
     #   resp.links[0].peer_gateway_id #=> String
-    #   resp.links[0].status #=> String, one of "PENDING_CREATION", "PENDING_REQUEST", "REQUESTED", "ACCEPTED", "ACTIVE", "REJECTED", "FAILED", "PENDING_DELETION", "DELETED", "PENDING_UPDATE", "PENDING_ISOLATION", "ISOLATED", "PENDING_RESTORATION"
+    #   resp.links[0].status #=> String, one of "PENDING_CREATION", "PENDING_REQUEST", "REQUESTED", "ACCEPTED", "ACTIVE", "REJECTED", "FAILED", "PENDING_DELETION", "DELETED", "PENDING_UPDATE", "PENDING_ISOLATION", "ISOLATED", "PENDING_RESTORATION", "CREATE_FAILED", "DELETE_FAILED"
     #   resp.links[0].created_at #=> Time
     #   resp.links[0].updated_at #=> Time
     #   resp.links[0].direction #=> String, one of "RESPONSE", "REQUEST"
@@ -2923,6 +3518,11 @@ module Aws::RTBFabric
     #   resp.links[0].log_settings.application_logs.sampling.error_log #=> Float
     #   resp.links[0].log_settings.application_logs.sampling.filter_log #=> Float
     #   resp.links[0].connectivity_type #=> String, one of "DEFAULT", "PUBLIC_INGRESS", "PUBLIC_EGRESS", "EXTERNAL_INBOUND"
+    #   resp.links[0].error_details #=> Array
+    #   resp.links[0].error_details[0].code #=> String, one of "VPC_NOT_FOUND", "EC2_SUBNET_NOT_FOUND", "EC2_SECURITY_GROUP_NOT_FOUND", "EC2_SUBNET_IP_EXHAUSTION", "IAM_ASSUME_ROLE_ACCESS_DENIED", "INTERNAL_ERROR"
+    #   resp.links[0].error_details[0].message #=> String
+    #   resp.links[0].error_details[0].resource_ids #=> Array
+    #   resp.links[0].error_details[0].resource_ids[0] #=> String
     #   resp.links[0].link_id #=> String
     #   resp.links[0].tags #=> Hash
     #   resp.links[0].tags["TagKey"] #=> String
@@ -3147,6 +3747,312 @@ module Aws::RTBFabric
       req.send_request(options)
     end
 
+    # Lists the updates on a gateway. Results are paginated. Use `nextToken`
+    # to get the next page.
+    #
+    # @option params [required, String] :gateway_id
+    #   The unique identifier of the gateway.
+    #
+    # @option params [String] :link_id
+    #   The ID of a link on this gateway, to list only that link's updates.
+    #   Omit both `linkId` and `ruleId` to list the gateway's own updates.
+    #
+    # @option params [String] :rule_id
+    #   The ID of a routing rule, to list only that rule's updates. Requires
+    #   `linkId`, because you address a rule through its link. A `ruleId`
+    #   without `linkId` fails with ValidationException.
+    #
+    # @option params [String] :type
+    #   Lists only updates of this type.
+    #
+    # @option params [String] :status
+    #   Lists only updates in this status.
+    #
+    # @option params [String] :next_token
+    #   If nextToken is returned, there are more results available. Make the
+    #   call again using the returned token to retrieve the next page. Keep
+    #   all other arguments unchanged.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return for each call.
+    #
+    # @return [Types::ListUpdatesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListUpdatesResponse#updates #updates} => Array&lt;Types::UpdateSummary&gt;
+    #   * {Types::ListUpdatesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: List a link's updates
+    #
+    #   # List the updates that targeted one link on a responder gateway
+    #
+    #   resp = client.list_updates({
+    #     gateway_id: "rtb-gw-12345678", 
+    #     link_id: "link-87654321", 
+    #     max_results: 10, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     updates: [
+    #       {
+    #         type: "LINK_CONFIG_UPDATE", 
+    #         created_at: Time.parse("2026-10-01T12:00:00Z"), 
+    #         status: "FAILED", 
+    #         update_id: "update-1a2b3c4d5e6f", 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_updates({
+    #     gateway_id: "GatewayId", # required
+    #     link_id: "LinkId",
+    #     rule_id: "RuleId",
+    #     type: "GATEWAY_CONFIG_UPDATE", # accepts GATEWAY_CONFIG_UPDATE, LINK_CONFIG_UPDATE, LINK_FLOW_UPDATE, ROUTING_RULE_UPDATE
+    #     status: "IN_PROGRESS", # accepts IN_PROGRESS, SUCCESSFUL, FAILED
+    #     next_token: "ListUpdatesRequestNextTokenString",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.updates #=> Array
+    #   resp.updates[0].update_id #=> String
+    #   resp.updates[0].type #=> String, one of "GATEWAY_CONFIG_UPDATE", "LINK_CONFIG_UPDATE", "LINK_FLOW_UPDATE", "ROUTING_RULE_UPDATE"
+    #   resp.updates[0].status #=> String, one of "IN_PROGRESS", "SUCCESSFUL", "FAILED"
+    #   resp.updates[0].created_at #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rtbfabric-2023-05-15/ListUpdates AWS API Documentation
+    #
+    # @overload list_updates(params = {})
+    # @param [Hash] params ({})
+    def list_updates(params = {}, options = {})
+      req = build_request(:list_updates, params)
+      req.send_request(options)
+    end
+
+    # Replaces a link's flow configuration. The change applies
+    # asynchronously. The call returns once the change is accepted, and the
+    # link serves its prior flows until the update commits atomically. RTB
+    # Fabric validates the request before accepting it, and a request that
+    # fails validation changes nothing. After the call, use GetLink. Once
+    # the change completes, the link's status is ACTIVE again and its flows
+    # show the change.
+    #
+    # @option params [required, String] :gateway_id
+    #   The unique identifier of the gateway.
+    #
+    # @option params [required, String] :link_id
+    #   The unique identifier of the link.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that you provide to ensure that
+    #   the operation completes no more than one time. If you retry with the
+    #   same token and parameters, you get the original response without an
+    #   error. If you retry with the same token but different parameters, the
+    #   call fails with ValidationException. If you don't provide a token,
+    #   the SDK generates one, and RTB Fabric remembers it for 8 hours. A
+    #   retry returns the original `updateId` before `lockToken` is checked.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, String] :lock_token
+    #   The concurrency token that you read from GetLink. If the link changed
+    #   since that read, by any operation, the call fails with
+    #   ConflictException.
+    #
+    # @option params [required, Array<Types::Flow>] :flows
+    #   The link's flows, replacing the current ones. An empty list removes
+    #   every flow.
+    #
+    # @return [Types::PutLinkFlowsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutLinkFlowsResponse#gateway_id #gateway_id} => String
+    #   * {Types::PutLinkFlowsResponse#link_id #link_id} => String
+    #   * {Types::PutLinkFlowsResponse#status #status} => String
+    #   * {Types::PutLinkFlowsResponse#update_id #update_id} => String
+    #
+    #
+    # @example Example: Attach a filter module in one sequential flow
+    #
+    #   resp = client.put_link_flows({
+    #     client_token: "3f1c2a7e-0b5d-4c1e-9a8f-2d6b7e9c0a14", 
+    #     flows: [
+    #       {
+    #         name: "main", 
+    #         pipeline: {
+    #           sequential: {
+    #             modules: [
+    #               {
+    #                 name: "domain-filter", 
+    #                 module_version_arn: "arn:aws:rtbfabric:us-east-1::modules/module-a1b2c3d4e5f6g7h8i9j0k1l2m/versions/1.2.0", 
+    #                 selected_actions: [
+    #                   "FILTER", 
+    #                 ], 
+    #               }, 
+    #             ], 
+    #           }, 
+    #         }, 
+    #       }, 
+    #     ], 
+    #     gateway_id: "rtb-gw-a1b2c3d4e5", 
+    #     link_id: "link-f6g7h8i9j0", 
+    #     lock_token: "c2VxPTQy", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     gateway_id: "rtb-gw-a1b2c3d4e5", 
+    #     link_id: "link-f6g7h8i9j0", 
+    #     status: "PENDING_UPDATE", 
+    #     update_id: "update-1a2b3c4d5e6f", 
+    #   }
+    #
+    # @example Example: Run enrichment modules concurrently in a phased flow
+    #
+    #   # Filters first, then runs two enrichment modules at the same time. The second phase costs the slower of the two modules
+    #   # rather than their sum. Both enrichment modules fail open, so a slow vendor drops its enrichment instead of losing the
+    #   # bid.
+    #
+    #   resp = client.put_link_flows({
+    #     client_token: "6b1d84f2-0a97-4e53-b8c1-3d5f7a2e9048", 
+    #     flows: [
+    #       {
+    #         name: "default", 
+    #         pipeline: {
+    #           phased: {
+    #             phases: [
+    #               {
+    #                 modules: [
+    #                   {
+    #                     name: "GeoFilter", 
+    #                     configuration_values: "{\"filterType\":\"INCLUDE\",\"filterConfiguration\":[{\"criteria\":[{\"path\":\"$.device.geo.country\",\"values\":[\"USA\"]}]}]}", 
+    #                     failure_mode: "CLOSED", 
+    #                     module_version_arn: "arn:aws:rtbfabric:us-east-1::modules/module-openrtbAttributeFilter/versions/2.0.0", 
+    #                   }, 
+    #                 ], 
+    #               }, 
+    #               {
+    #                 modules: [
+    #                   {
+    #                     name: "IVTDetection", 
+    #                     configuration_values: "{\"threshold\":0.7}", 
+    #                     failure_mode: "OPEN", 
+    #                     module_version_arn: "arn:aws:rtbfabric:us-east-1::modules/module-0a1b2c3d4e5f/versions/1.0.0", 
+    #                   }, 
+    #                   {
+    #                     name: "Viewability", 
+    #                     failure_mode: "OPEN", 
+    #                     module_version_arn: "arn:aws:rtbfabric:us-east-1::modules/module-9f8e7d6c5b4a/versions/1.0.0", 
+    #                   }, 
+    #                 ], 
+    #               }, 
+    #             ], 
+    #           }, 
+    #         }, 
+    #       }, 
+    #     ], 
+    #     gateway_id: "rtb-gw-12345678", 
+    #     link_id: "link-87654321", 
+    #     lock_token: "lt-7f3a9c2e1b", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     gateway_id: "rtb-gw-12345678", 
+    #     link_id: "link-87654321", 
+    #     status: "PENDING_UPDATE", 
+    #     update_id: "update-4d5e6f7a8b9c", 
+    #   }
+    #
+    # @example Example: Detach every module from a link
+    #
+    #   # Puts an empty set of flows. There is no separate detach operation: removal is expressed by putting the flows the caller
+    #   # wants to keep, and keeping none removes all of them.
+    #
+    #   resp = client.put_link_flows({
+    #     client_token: "9c4e2a71-5d38-4b0f-8e62-7f1a4c9d3b05", 
+    #     flows: [
+    #     ], 
+    #     gateway_id: "rtb-gw-12345678", 
+    #     link_id: "link-87654321", 
+    #     lock_token: "lt-7f3a9c2e1b", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     gateway_id: "rtb-gw-12345678", 
+    #     link_id: "link-87654321", 
+    #     status: "PENDING_UPDATE", 
+    #     update_id: "update-7a8b9c1d2e3f", 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_link_flows({
+    #     gateway_id: "GatewayId", # required
+    #     link_id: "LinkId", # required
+    #     client_token: "ClientToken",
+    #     lock_token: "LockToken", # required
+    #     flows: [ # required
+    #       {
+    #         name: "FlowName", # required
+    #         pipeline: { # required
+    #           sequential: {
+    #             modules: [ # required
+    #               {
+    #                 name: "ModuleName", # required
+    #                 module_version_arn: "ModuleVersionArn", # required
+    #                 selected_actions: ["FILTER"], # accepts FILTER, ENRICH_REQUEST_EXT, ENRICH_REQUEST_HEADERS, OBSERVE
+    #                 failure_mode: "OPEN", # accepts OPEN, CLOSED
+    #                 activation_percentage: 1.0,
+    #                 configuration_values: "ConfigurationValues",
+    #               },
+    #             ],
+    #           },
+    #           phased: {
+    #             phases: [ # required
+    #               {
+    #                 modules: [ # required
+    #                   {
+    #                     name: "ModuleName", # required
+    #                     module_version_arn: "ModuleVersionArn", # required
+    #                     selected_actions: ["FILTER"], # accepts FILTER, ENRICH_REQUEST_EXT, ENRICH_REQUEST_HEADERS, OBSERVE
+    #                     failure_mode: "OPEN", # accepts OPEN, CLOSED
+    #                     activation_percentage: 1.0,
+    #                     configuration_values: "ConfigurationValues",
+    #                   },
+    #                 ],
+    #               },
+    #             ],
+    #           },
+    #         },
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.gateway_id #=> String
+    #   resp.link_id #=> String
+    #   resp.status #=> String, one of "PENDING_CREATION", "PENDING_REQUEST", "REQUESTED", "ACCEPTED", "ACTIVE", "REJECTED", "FAILED", "PENDING_DELETION", "DELETED", "PENDING_UPDATE", "PENDING_ISOLATION", "ISOLATED", "PENDING_RESTORATION", "CREATE_FAILED", "DELETE_FAILED"
+    #   resp.update_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rtbfabric-2023-05-15/PutLinkFlows AWS API Documentation
+    #
+    # @overload put_link_flows(params = {})
+    # @param [Hash] params ({})
+    def put_link_flows(params = {}, options = {})
+      req = build_request(:put_link_flows, params)
+      req.send_request(options)
+    end
+
     # Rejects a link request between gateways.
     #
     # When a requester gateway requests to link with a responder gateway,
@@ -3171,6 +4077,7 @@ module Aws::RTBFabric
     #   * {Types::RejectLinkResponse#attributes #attributes} => Types::LinkAttributes
     #   * {Types::RejectLinkResponse#log_settings #log_settings} => Types::LinkLogSettings
     #   * {Types::RejectLinkResponse#connectivity_type #connectivity_type} => String
+    #   * {Types::RejectLinkResponse#error_details #error_details} => Array&lt;Types::ErrorDetail&gt;
     #   * {Types::RejectLinkResponse#link_id #link_id} => String
     #
     #
@@ -3204,7 +4111,7 @@ module Aws::RTBFabric
     #
     #   resp.gateway_id #=> String
     #   resp.peer_gateway_id #=> String
-    #   resp.status #=> String, one of "PENDING_CREATION", "PENDING_REQUEST", "REQUESTED", "ACCEPTED", "ACTIVE", "REJECTED", "FAILED", "PENDING_DELETION", "DELETED", "PENDING_UPDATE", "PENDING_ISOLATION", "ISOLATED", "PENDING_RESTORATION"
+    #   resp.status #=> String, one of "PENDING_CREATION", "PENDING_REQUEST", "REQUESTED", "ACCEPTED", "ACTIVE", "REJECTED", "FAILED", "PENDING_DELETION", "DELETED", "PENDING_UPDATE", "PENDING_ISOLATION", "ISOLATED", "PENDING_RESTORATION", "CREATE_FAILED", "DELETE_FAILED"
     #   resp.created_at #=> Time
     #   resp.updated_at #=> Time
     #   resp.direction #=> String, one of "RESPONSE", "REQUEST"
@@ -3256,6 +4163,11 @@ module Aws::RTBFabric
     #   resp.log_settings.application_logs.sampling.error_log #=> Float
     #   resp.log_settings.application_logs.sampling.filter_log #=> Float
     #   resp.connectivity_type #=> String, one of "DEFAULT", "PUBLIC_INGRESS", "PUBLIC_EGRESS", "EXTERNAL_INBOUND"
+    #   resp.error_details #=> Array
+    #   resp.error_details[0].code #=> String, one of "VPC_NOT_FOUND", "EC2_SUBNET_NOT_FOUND", "EC2_SECURITY_GROUP_NOT_FOUND", "EC2_SUBNET_IP_EXHAUSTION", "IAM_ASSUME_ROLE_ACCESS_DENIED", "INTERNAL_ERROR"
+    #   resp.error_details[0].message #=> String
+    #   resp.error_details[0].resource_ids #=> Array
+    #   resp.error_details[0].resource_ids[0] #=> String
     #   resp.link_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rtbfabric-2023-05-15/RejectLink AWS API Documentation
@@ -3373,10 +4285,18 @@ module Aws::RTBFabric
     # @option params [Integer] :timeout_in_millis
     #   The timeout value in milliseconds.
     #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier for the request. The SDK generates
+    #   one when you don't.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
     # @return [Types::UpdateLinkResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateLinkResponse#link_id #link_id} => String
     #   * {Types::UpdateLinkResponse#status #status} => String
+    #   * {Types::UpdateLinkResponse#update_id #update_id} => String
     #
     #
     # @example Example: Update link settings
@@ -3400,6 +4320,7 @@ module Aws::RTBFabric
     #   {
     #     link_id: "link-87654321", 
     #     status: "ACTIVE", 
+    #     update_id: "update-1a2b3c4d5e6f", 
     #   }
     #
     # @example Request syntax with placeholder values
@@ -3416,12 +4337,14 @@ module Aws::RTBFabric
     #       },
     #     },
     #     timeout_in_millis: 1,
+    #     client_token: "UpdateLinkRequestClientTokenString",
     #   })
     #
     # @example Response structure
     #
     #   resp.link_id #=> String
-    #   resp.status #=> String, one of "PENDING_CREATION", "PENDING_REQUEST", "REQUESTED", "ACCEPTED", "ACTIVE", "REJECTED", "FAILED", "PENDING_DELETION", "DELETED", "PENDING_UPDATE", "PENDING_ISOLATION", "ISOLATED", "PENDING_RESTORATION"
+    #   resp.status #=> String, one of "PENDING_CREATION", "PENDING_REQUEST", "REQUESTED", "ACCEPTED", "ACTIVE", "REJECTED", "FAILED", "PENDING_DELETION", "DELETED", "PENDING_UPDATE", "PENDING_ISOLATION", "ISOLATED", "PENDING_RESTORATION", "CREATE_FAILED", "DELETE_FAILED"
+    #   resp.update_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rtbfabric-2023-05-15/UpdateLink AWS API Documentation
     #
@@ -3470,6 +4393,7 @@ module Aws::RTBFabric
     #   * {Types::UpdateLinkModuleFlowResponse#gateway_id #gateway_id} => String
     #   * {Types::UpdateLinkModuleFlowResponse#link_id #link_id} => String
     #   * {Types::UpdateLinkModuleFlowResponse#status #status} => String
+    #   * {Types::UpdateLinkModuleFlowResponse#update_id #update_id} => String
     #
     #
     # @example Example: Update link module flow
@@ -3502,6 +4426,7 @@ module Aws::RTBFabric
     #     gateway_id: "rtb-gw-12345678", 
     #     link_id: "link-87654321", 
     #     status: "ACTIVE", 
+    #     update_id: "update-3c4d5e6f7a8b", 
     #   }
     #
     # @example Request syntax with placeholder values
@@ -3556,7 +4481,8 @@ module Aws::RTBFabric
     #
     #   resp.gateway_id #=> String
     #   resp.link_id #=> String
-    #   resp.status #=> String, one of "PENDING_CREATION", "PENDING_REQUEST", "REQUESTED", "ACCEPTED", "ACTIVE", "REJECTED", "FAILED", "PENDING_DELETION", "DELETED", "PENDING_UPDATE", "PENDING_ISOLATION", "ISOLATED", "PENDING_RESTORATION"
+    #   resp.status #=> String, one of "PENDING_CREATION", "PENDING_REQUEST", "REQUESTED", "ACCEPTED", "ACTIVE", "REJECTED", "FAILED", "PENDING_DELETION", "DELETED", "PENDING_UPDATE", "PENDING_ISOLATION", "ISOLATED", "PENDING_RESTORATION", "CREATE_FAILED", "DELETE_FAILED"
+    #   resp.update_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rtbfabric-2023-05-15/UpdateLinkModuleFlow AWS API Documentation
     #
@@ -3587,11 +4513,19 @@ module Aws::RTBFabric
     #   The updated conditions for the routing rule. All specified fields must
     #   match for the rule to apply. At least one condition field must be set.
     #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier for the request. The SDK generates
+    #   one when you don't.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
     # @return [Types::UpdateLinkRoutingRuleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateLinkRoutingRuleResponse#rule_id #rule_id} => String
     #   * {Types::UpdateLinkRoutingRuleResponse#status #status} => String
     #   * {Types::UpdateLinkRoutingRuleResponse#updated_at #updated_at} => Time
+    #   * {Types::UpdateLinkRoutingRuleResponse#update_id #update_id} => String
     #
     #
     # @example Example: Update a link routing rule
@@ -3613,6 +4547,7 @@ module Aws::RTBFabric
     #   {
     #     rule_id: "rule-abc123def456", 
     #     status: "UPDATE_IN_PROGRESS", 
+    #     update_id: "update-2b3c4d5e6f7a", 
     #     updated_at: Time.parse("2024-01-01T12:30:00Z"), 
     #   }
     #
@@ -3634,13 +4569,15 @@ module Aws::RTBFabric
     #       },
     #       query_string_exists: "RuleConditionQueryStringExistsString",
     #     },
+    #     client_token: "UpdateLinkRoutingRuleRequestClientTokenString",
     #   })
     #
     # @example Response structure
     #
     #   resp.rule_id #=> String
-    #   resp.status #=> String, one of "CREATION_IN_PROGRESS", "ACTIVE", "UPDATE_IN_PROGRESS", "DELETION_IN_PROGRESS", "DELETED", "FAILED"
+    #   resp.status #=> String, one of "CREATION_IN_PROGRESS", "ACTIVE", "UPDATE_IN_PROGRESS", "DELETION_IN_PROGRESS", "DELETED", "FAILED", "CREATE_FAILED", "DELETE_FAILED"
     #   resp.updated_at #=> Time
+    #   resp.update_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rtbfabric-2023-05-15/UpdateLinkRoutingRule AWS API Documentation
     #
@@ -3714,7 +4651,7 @@ module Aws::RTBFabric
     # @example Response structure
     #
     #   resp.gateway_id #=> String
-    #   resp.status #=> String, one of "PENDING_CREATION", "ACTIVE", "PENDING_DELETION", "DELETED", "ERROR", "PENDING_UPDATE", "ISOLATED", "PENDING_ISOLATION", "PENDING_RESTORATION"
+    #   resp.status #=> String, one of "PENDING_CREATION", "ACTIVE", "PENDING_DELETION", "DELETED", "ERROR", "PENDING_UPDATE", "ISOLATED", "PENDING_ISOLATION", "PENDING_RESTORATION", "CREATE_FAILED", "DELETE_FAILED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rtbfabric-2023-05-15/UpdateRequesterGateway AWS API Documentation
     #
@@ -3820,6 +4757,7 @@ module Aws::RTBFabric
     #   * {Types::UpdateResponderGatewayResponse#gateway_id #gateway_id} => String
     #   * {Types::UpdateResponderGatewayResponse#status #status} => String
     #   * {Types::UpdateResponderGatewayResponse#client_routing_policy #client_routing_policy} => String
+    #   * {Types::UpdateResponderGatewayResponse#update_id #update_id} => String
     #
     #
     # @example Example: Update responder gateway
@@ -3838,6 +4776,7 @@ module Aws::RTBFabric
     #   {
     #     gateway_id: "rtb-gw-12345678", 
     #     status: "PENDING_UPDATE", 
+    #     update_id: "update-4d5e6f7a8b9c", 
     #   }
     #
     # @example Request syntax with placeholder values
@@ -3885,8 +4824,9 @@ module Aws::RTBFabric
     # @example Response structure
     #
     #   resp.gateway_id #=> String
-    #   resp.status #=> String, one of "PENDING_CREATION", "ACTIVE", "PENDING_DELETION", "DELETED", "ERROR", "PENDING_UPDATE", "ISOLATED", "PENDING_ISOLATION", "PENDING_RESTORATION"
+    #   resp.status #=> String, one of "PENDING_CREATION", "ACTIVE", "PENDING_DELETION", "DELETED", "ERROR", "PENDING_UPDATE", "ISOLATED", "PENDING_ISOLATION", "PENDING_RESTORATION", "CREATE_FAILED", "DELETE_FAILED"
     #   resp.client_routing_policy #=> String, one of "AVAILABILITY_ZONE_AFFINITY", "ANY_AVAILABILITY_ZONE"
+    #   resp.update_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rtbfabric-2023-05-15/UpdateResponderGateway AWS API Documentation
     #
@@ -3915,7 +4855,7 @@ module Aws::RTBFabric
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-rtbfabric'
-      context[:gem_version] = '1.24.0'
+      context[:gem_version] = '1.32.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -395,18 +395,22 @@ module Aws
       default_line_height: ::Integer?
     }
 
+      type embedded_destination_settings = {
+      position: {
+        y_position_line: ::Integer?
+      }?,
+      style_control: ("MANUAL" | "PASSTHROUGH")?,
+      caption_service_channel: ::Integer?,
+      embedded_mode: ("EMBEDDED_608_AND_708" | "EMBEDDED_608_ONLY" | "EMBEDDED_708_ONLY")?
+    }
+
       type caption_destination_settings = {
       arib_destination_settings: {
       }?,
       burn_in_destination_settings: Params::burn_in_destination_settings?,
       dvb_sub_destination_settings: Params::dvb_sub_destination_settings?,
       ebu_tt_d_destination_settings: Params::ebu_tt_d_destination_settings?,
-      embedded_destination_settings: {
-        position: {
-          y_position_line: ::Integer?
-        }?,
-        style_control: ("MANUAL" | "PASSTHROUGH")?
-      }?,
+      embedded_destination_settings: Params::embedded_destination_settings?,
       embedded_plus_scte_20_destination_settings: {
       }?,
       rtmp_caption_info_destination_settings: {
@@ -620,7 +624,8 @@ module Aws
           }
         }
       ]?,
-      watermarking_settings: Params::media_package_v2_watermarking_settings?
+      watermarking_settings: Params::media_package_v2_watermarking_settings?,
+      caption_language_setting: ("AUTO" | "NONE")?
     }
 
       type media_package_group_settings = {
@@ -1480,6 +1485,10 @@ module Aws
       smart_subtitle_source_settings: {
         caption_synchronization_mode: ("NO_VIDEO_DELAY" | "VIDEO_ALIGNED_CAPTIONS")?,
         inference_feed_output: ::String?
+      }?,
+      webvtt_source_settings: {
+        group_id: ::String?,
+        name: ::String?
       }?
     }
 

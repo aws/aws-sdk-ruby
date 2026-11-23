@@ -475,16 +475,39 @@ module Aws::Glue
       include Aws::Structure
     end
 
-    # A reference to a form type that is included in an asset type.
+    # A form to set on an asset, consisting of the form type identifier and
+    # its JSON content.
     #
     # @!attribute [rw] form_type_identifier
-    #   The identifier of the referenced form type.
+    #   The identifier of the form type that defines this form's schema.
+    #   This field is required.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/AssetTypeFormReference AWS API Documentation
+    # @!attribute [rw] content
+    #   The JSON content of the form, conforming to the schema of the
+    #   specified form type.
+    #   @return [String]
     #
-    class AssetTypeFormReference < Struct.new(
-      :form_type_identifier)
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/AssetFormInput AWS API Documentation
+    #
+    class AssetFormInput < Struct.new(
+      :form_type_identifier,
+      :content)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A form that is included in an asset type, identified by the form type
+    # that defines its schema.
+    #
+    # @!attribute [rw] form_type_id
+    #   The identifier of the form type that defines the form's schema.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/AssetTypeFormOutput AWS API Documentation
+    #
+    class AssetTypeFormOutput < Struct.new(
+      :form_type_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -504,6 +527,41 @@ module Aws::Glue
     class AssetTypeItem < Struct.new(
       :id,
       :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The export setting for asset metadata.
+    #
+    # @!attribute [rw] s3_tables_export
+    #   Whether asset metadata is exported to S3 Tables. Valid values are
+    #   `ENABLED` and `DISABLED`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/AssetsExport AWS API Documentation
+    #
+    class AssetsExport < Struct.new(
+      :s3_tables_export)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The export setting and current export state for asset metadata.
+    #
+    # @!attribute [rw] s3_tables_export
+    #   Whether asset metadata is exported to S3 Tables. Valid values are
+    #   `ENABLED` and `DISABLED`.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_tables_export_state
+    #   The current state of the asset metadata export to S3 Tables.
+    #   @return [Types::S3TablesExportState]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/AssetsExportResult AWS API Documentation
+    #
+    class AssetsExportResult < Struct.new(
+      :s3_tables_export,
+      :s3_tables_export_state)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -547,7 +605,7 @@ module Aws::Glue
       include Aws::Structure
     end
 
-    # @!attribute [rw] asset_identifier
+    # @!attribute [rw] asset_id
     #   The unique identifier of the asset.
     #   @return [String]
     #
@@ -555,7 +613,7 @@ module Aws::Glue
     #   The name of the iterable form, if the association targets an item.
     #   @return [String]
     #
-    # @!attribute [rw] item_identifier
+    # @!attribute [rw] item_id
     #   The identifier of the item within the iterable form, if applicable.
     #   @return [String]
     #
@@ -566,9 +624,9 @@ module Aws::Glue
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/AssociateGlossaryTermsResponse AWS API Documentation
     #
     class AssociateGlossaryTermsResponse < Struct.new(
-      :asset_identifier,
+      :asset_id,
       :iterable_form_name,
-      :item_identifier,
+      :item_id,
       :glossary_terms)
       SENSITIVE = []
       include Aws::Structure
@@ -806,6 +864,35 @@ module Aws::Glue
     class AutoDataQuality < Struct.new(
       :is_enabled,
       :evaluation_context)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # <text>The auto-upgrade assessment information for a job configured with glueVersion=auto.</text>
+    #
+    # @!attribute [rw] target_version
+    #   <text>The target Glue runtime version the job is being upgraded to.</text>
+    #   @return [String]
+    #
+    # @!attribute [rw] source_version
+    #   <text>The source Glue runtime version the job was running before auto-version was enabled.</text>
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   <text>The current auto-upgrade lifecycle status (OBSERVING, UPGRADING, UPGRADE_SUCCEEDED, UPGRADE_FAILED, STOPPED, WAITING_FOR_CONSENT).</text>
+    #   @return [String]
+    #
+    # @!attribute [rw] analysis_id
+    #   <text>The unique identifier of the auto-upgrade assessment analysis.</text>
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/AutoUpgradeMetadata AWS API Documentation
+    #
+    class AutoUpgradeMetadata < Struct.new(
+      :target_version,
+      :source_version,
+      :status,
+      :analysis_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5995,6 +6082,176 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # @!attribute [rw] name
+    #   A name for the data quality evaluation configuration. The name must
+    #   be unique within your account.
+    #   @return [String]
+    #
+    # @!attribute [rw] level
+    #   The Glue Data Catalog hierarchical level that the configuration
+    #   applies to. Valid values are `CATALOG`, `DATABASE`, and `TABLE`.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_source
+    #   The catalog, database, or table that the configuration applies to,
+    #   as specified by `Level`.
+    #   @return [Types::DataQualityEvaluationConfigDataSource]
+    #
+    # @!attribute [rw] ruleset_name
+    #   The name of a Data Quality Definition Language (DQDL) ruleset,
+    #   containing analyzers, rules, or both, to evaluate tables with. You
+    #   create the ruleset using the `CreateDataQualityRuleset` API. Specify
+    #   either `RulesetName` or `ManagedRulesetName`, not both.
+    #   @return [String]
+    #
+    # @!attribute [rw] managed_ruleset_name
+    #   A built-in ruleset that profiles each table, used when `RulesetName`
+    #   is not set. The default is `SIMPLE`. Choose from the following
+    #   built-in rulesets:
+    #
+    #   SIMPLE
+    #
+    #   : Row count and column count, completeness, minimum, and maximum for
+    #     every column, mean, sum, and standard deviation for numeric
+    #     columns, and column length for string columns.
+    #
+    #   ADVANCED
+    #
+    #   : Every statistic in `SIMPLE`, plus distribution, uniqueness, and
+    #     distinct values count.
+    #   @return [String]
+    #
+    # @!attribute [rw] triggers
+    #   When the configuration evaluates tables. You can choose one or more
+    #   triggers, and each table is evaluated at most once an hour. The
+    #   default is `ONCE`. Choose from the following triggers:
+    #
+    #   ONCE
+    #
+    #   : Evaluates each table one time, including when tables are added to
+    #     a database or catalog.
+    #
+    #   SCHEDULE
+    #
+    #   : Evaluates each table on the cron or rate expression in
+    #     `ScheduleExpression`, between the optional `StartAt` and `EndAt`
+    #     times.
+    #
+    #   METADATA\_CHANGE
+    #
+    #   : Evaluates a table whenever its Glue Data Catalog metadata changes,
+    #     such as a schema change or an Apache Iceberg commit.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] schedule_expression
+    #   A cron or rate expression, in UTC, for the `SCHEDULE` trigger, for
+    #   example `cron(0 6 * * ? *)`. The schedule can run at most once an
+    #   hour.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_at
+    #   The time from which the schedule runs, inclusive.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_at
+    #   The time at which the schedule stops running, exclusive.
+    #   @return [Time]
+    #
+    # @!attribute [rw] role
+    #   The IAM role that evaluations assume. You can specify the role name
+    #   or the role Amazon Resource Name (ARN).
+    #
+    #   The role must allow the `glue.amazonaws.com` service principal to
+    #   assume it, and needs permissions to read the catalog
+    #   (`glue:GetCatalog`, `glue:GetDatabase`, `glue:GetTable`,
+    #   `glue:SearchTables`, and `glue:GetPartitions`), read and create
+    #   rulesets (`glue:GetDataQualityRuleset` and
+    #   `glue:CreateDataQualityRuleset`), start evaluations
+    #   (`glue:StartDataQualityRulesetEvaluationRun`,
+    #   `glue:PublishDataQuality`, and `iam:PassRole` on the role itself),
+    #   read the tables' data in Amazon S3, and write logs to Amazon
+    #   CloudWatch Logs. If a catalog-level or database-level configuration
+    #   applies to an Amazon S3 Tables catalog, the role also needs
+    #   `s3tables:ListTableBuckets` and `s3tables:ListTables`. If you use
+    #   Lake Formation, the role needs the `DESCRIBE` permission on the
+    #   tables.
+    #   @return [String]
+    #
+    # @!attribute [rw] number_of_workers
+    #   The number of `G.1X` workers to be used in the run. The default is
+    #   5.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] timeout
+    #   The timeout for a run in minutes. This is the maximum time that a
+    #   run can consume resources before it is terminated and enters
+    #   `TIMEOUT` status. The default is 2,880 minutes (48 hours).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] additional_run_options
+    #   Additional run options you can specify for an evaluation run.
+    #   @return [Types::DataQualityEvaluationConfigAdditionalRunOptions]
+    #
+    # @!attribute [rw] additional_data_sources
+    #   A map of reference strings to additional data sources you can
+    #   specify for an evaluation run.
+    #   @return [Hash<String,Types::DataSource>]
+    #
+    # @!attribute [rw] tags
+    #   A list of tags applied to the data quality evaluation configuration.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   operation completes no more than one time. If this token matches a
+    #   previous request, the service ignores the request, but does not
+    #   return an error.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateDataQualityEvaluationConfigRequest AWS API Documentation
+    #
+    class CreateDataQualityEvaluationConfigRequest < Struct.new(
+      :name,
+      :level,
+      :data_source,
+      :ruleset_name,
+      :managed_ruleset_name,
+      :triggers,
+      :schedule_expression,
+      :start_at,
+      :end_at,
+      :role,
+      :number_of_workers,
+      :timeout,
+      :additional_run_options,
+      :additional_data_sources,
+      :tags,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
+    #   The name of the data quality evaluation configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] evaluation_run_mode
+    #   The evaluation run mode of the configuration's results, which is
+    #   `EVALUATION_CONFIG`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateDataQualityEvaluationConfigResponse AWS API Documentation
+    #
+    class CreateDataQualityEvaluationConfigResponse < Struct.new(
+      :name,
+      :evaluation_run_mode)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A request to create a data quality ruleset.
     #
     # @!attribute [rw] name
@@ -7043,11 +7300,18 @@ module Aws::Glue
     #   the developer guide.
     #
     #   Jobs that are created without specifying a Glue version default to
-    #   Glue 5.1.
+    #   Glue 6.0.
+    #
+    #   Set `GlueVersion` to `auto` to turn on automatic version upgrades
+    #   for the job. For more information, see [Automatic version upgrades
+    #   for Glue jobs][2] in the developer guide. For the job requirements,
+    #   see [Before you start][3].
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/glue/latest/dg/add-job.html
+    #   [2]: https://docs.aws.amazon.com/glue/latest/dg/auto-version-upgrades.html
+    #   [3]: https://docs.aws.amazon.com/glue/latest/dg/auto-version-upgrades.html#auto-version-upgrades-before-you-start
     #   @return [String]
     #
     # @!attribute [rw] number_of_workers
@@ -8919,6 +9183,246 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # Additional run options for each evaluation of a data quality
+    # evaluation configuration.
+    #
+    # @!attribute [rw] cloud_watch_metrics_enabled
+    #   Specifies whether to enable CloudWatch metrics.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] results_s3_prefix
+    #   Prefix for Amazon S3 to store results.
+    #   @return [String]
+    #
+    # @!attribute [rw] composite_rule_evaluation_method
+    #   Set the evaluation method for composite rules in the ruleset to
+    #   ROW/COLUMN
+    #   @return [String]
+    #
+    # @!attribute [rw] row_level_results
+    #   The configuration for writing row-level evaluation results to a Glue
+    #   Data Catalog table.
+    #   @return [Types::RowLevelResultsOptions]
+    #
+    # @!attribute [rw] profiling_results
+    #   The configuration for writing profiling results to a Glue Data
+    #   Catalog table.
+    #   @return [Types::ProfilingResultsOptions]
+    #
+    # @!attribute [rw] observation_scope
+    #   The scope of the observation for the evaluation run. Specifies
+    #   whether anomaly detection is enabled or disabled.
+    #   @return [String]
+    #
+    # @!attribute [rw] observation_mode
+    #   The observation mode for the evaluation run. Specifies how anomaly
+    #   detection bounds are calculated.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_quality_rule_results
+    #   The configuration for writing rule results to a Glue Data Catalog
+    #   table.
+    #   @return [Types::DataQualityRuleResultsOptions]
+    #
+    # @!attribute [rw] observation_results
+    #   The configuration for writing observation results to a Glue Data
+    #   Catalog table.
+    #   @return [Types::ObservationResultsOptions]
+    #
+    # @!attribute [rw] custom_log_group_prefix
+    #   A custom prefix for the CloudWatch log group names. When specified,
+    #   evaluation run logs are written to `<CustomLogGroupPrefix>/error`
+    #   and `<CustomLogGroupPrefix>/output` instead of the default
+    #   `/aws-glue/data-quality/error` and `/aws-glue/data-quality/output`
+    #   log groups.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DataQualityEvaluationConfigAdditionalRunOptions AWS API Documentation
+    #
+    class DataQualityEvaluationConfigAdditionalRunOptions < Struct.new(
+      :cloud_watch_metrics_enabled,
+      :results_s3_prefix,
+      :composite_rule_evaluation_method,
+      :row_level_results,
+      :profiling_results,
+      :observation_scope,
+      :observation_mode,
+      :data_quality_rule_results,
+      :observation_results,
+      :custom_log_group_prefix)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The data source that a data quality evaluation configuration applies
+    # to.
+    #
+    # @!attribute [rw] glue_tables
+    #   The Glue Data Catalog tables that the configuration applies to.
+    #   @return [Types::DataQualityEvaluationConfigGlueTables]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DataQualityEvaluationConfigDataSource AWS API Documentation
+    #
+    class DataQualityEvaluationConfigDataSource < Struct.new(
+      :glue_tables)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Identifies the Glue Data Catalog tables that a data quality evaluation
+    # configuration applies to.
+    #
+    # @!attribute [rw] catalog_id
+    #   A unique identifier for the Glue Data Catalog.
+    #   @return [String]
+    #
+    # @!attribute [rw] database_name
+    #   A database name in the Glue Data Catalog.
+    #   @return [String]
+    #
+    # @!attribute [rw] table_name_pattern
+    #   For the `CATALOG` and `DATABASE` levels, a glob pattern, such as
+    #   `orders_*`, that selects tables. If you don't specify a pattern,
+    #   every table at the level is in scope. For the `TABLE` level, the
+    #   name of the table.
+    #   @return [String]
+    #
+    # @!attribute [rw] pre_processing_query
+    #   SQL Query of SparkSQL format that can be used to pre-process the
+    #   data for the table in Glue Data Catalog, before running the Data
+    #   Quality Operation.
+    #
+    #   For the `CATALOG` and `DATABASE` levels, use the `{{DATABASE_NAME}}`
+    #   and `{{TABLE_NAME}}` placeholders, which are filled in for each
+    #   table.
+    #   @return [String]
+    #
+    # @!attribute [rw] connection_name
+    #   The name of the connection to the Glue Data Catalog.
+    #   @return [String]
+    #
+    # @!attribute [rw] additional_options
+    #   Options for reading the table. The following keys are supported:
+    #
+    #   * `pushDownPredicate`: to filter on partitions without having to
+    #     list and read all the files in your dataset.
+    #
+    #   * `catalogPartitionPredicate`: to use server-side partition pruning
+    #     using partition indexes in the Glue Data Catalog.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DataQualityEvaluationConfigGlueTables AWS API Documentation
+    #
+    class DataQualityEvaluationConfigGlueTables < Struct.new(
+      :catalog_id,
+      :database_name,
+      :table_name_pattern,
+      :pre_processing_query,
+      :connection_name,
+      :additional_options)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The data source that a data quality evaluation configuration applies
+    # to.
+    #
+    # @!attribute [rw] glue_tables
+    #   The Glue Data Catalog tables that the configuration applies to.
+    #   @return [Types::DataQualityEvaluationConfigListGlueTables]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DataQualityEvaluationConfigListDataSource AWS API Documentation
+    #
+    class DataQualityEvaluationConfigListDataSource < Struct.new(
+      :glue_tables)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes a data quality evaluation configuration.
+    #
+    # @!attribute [rw] name
+    #   The name of the data quality evaluation configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] evaluation_run_mode
+    #   The evaluation run mode of the configuration's results, which is
+    #   `EVALUATION_CONFIG`.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_on
+    #   The time when the configuration was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_on
+    #   The time when the configuration was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] level
+    #   The Glue Data Catalog hierarchical level that the configuration
+    #   applies to.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_source
+    #   The catalog, database, or table that the configuration applies to.
+    #   @return [Types::DataQualityEvaluationConfigListDataSource]
+    #
+    # @!attribute [rw] ruleset_name
+    #   The name of the data quality ruleset that tables are evaluated with.
+    #   @return [String]
+    #
+    # @!attribute [rw] managed_ruleset_name
+    #   The built-in ruleset that tables are evaluated with.
+    #   @return [String]
+    #
+    # @!attribute [rw] pause_runs
+    #   Specifies whether evaluations are paused.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DataQualityEvaluationConfigListDetails AWS API Documentation
+    #
+    class DataQualityEvaluationConfigListDetails < Struct.new(
+      :name,
+      :evaluation_run_mode,
+      :created_on,
+      :last_modified_on,
+      :level,
+      :data_source,
+      :ruleset_name,
+      :managed_ruleset_name,
+      :pause_runs)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Identifies the Glue Data Catalog tables that a data quality evaluation
+    # configuration applies to.
+    #
+    # @!attribute [rw] catalog_id
+    #   A unique identifier for the Glue Data Catalog.
+    #   @return [String]
+    #
+    # @!attribute [rw] database_name
+    #   A database name in the Glue Data Catalog.
+    #   @return [String]
+    #
+    # @!attribute [rw] table_name_pattern
+    #   For the `CATALOG` and `DATABASE` levels, a glob pattern, such as
+    #   `orders_*`, that selects tables. If you don't specify a pattern,
+    #   every table at the level is in scope. For the `TABLE` level, the
+    #   name of the table.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DataQualityEvaluationConfigListGlueTables AWS API Documentation
+    #
+    class DataQualityEvaluationConfigListGlueTables < Struct.new(
+      :catalog_id,
+      :database_name,
+      :table_name_pattern)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Additional run options you can specify for an evaluation run.
     #
     # @!attribute [rw] cloud_watch_metrics_enabled
@@ -9098,6 +9602,20 @@ module Aws::Glue
     #   A unique result ID for the data quality result.
     #   @return [String]
     #
+    # @!attribute [rw] evaluation_run_mode
+    #   How the evaluation run that produced the result started: `ON_DEMAND`
+    #   for a run started by `StartDataQualityRulesetEvaluationRun`, or
+    #   `EVALUATION_CONFIG` for a run started by a data quality evaluation
+    #   configuration. Not returned for results that no evaluation run
+    #   produced, such as results from any ETL job.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_quality_evaluation_config
+    #   The name of the data quality evaluation configuration that started
+    #   the evaluation run, returned when `EvaluationRunMode` is
+    #   `EVALUATION_CONFIG`.
+    #   @return [String]
+    #
     # @!attribute [rw] profile_id
     #   The Profile ID for the data quality result.
     #   @return [String]
@@ -9169,6 +9687,8 @@ module Aws::Glue
     #
     class DataQualityResult < Struct.new(
       :result_id,
+      :evaluation_run_mode,
+      :data_quality_evaluation_config,
       :profile_id,
       :score,
       :data_source,
@@ -9193,6 +9713,20 @@ module Aws::Glue
     #   The unique result ID for this data quality result.
     #   @return [String]
     #
+    # @!attribute [rw] evaluation_run_mode
+    #   How the evaluation run that produced the result started: `ON_DEMAND`
+    #   for a run started by `StartDataQualityRulesetEvaluationRun`, or
+    #   `EVALUATION_CONFIG` for a run started by a data quality evaluation
+    #   configuration. Not returned for results that no evaluation run
+    #   produced, such as results from any ETL job.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_quality_evaluation_config
+    #   The name of the data quality evaluation configuration that started
+    #   the evaluation run, returned when `EvaluationRunMode` is
+    #   `EVALUATION_CONFIG`.
+    #   @return [String]
+    #
     # @!attribute [rw] data_source
     #   The table name associated with the data quality result.
     #   @return [Types::DataSource]
@@ -9213,6 +9747,8 @@ module Aws::Glue
     #
     class DataQualityResultDescription < Struct.new(
       :result_id,
+      :evaluation_run_mode,
+      :data_quality_evaluation_config,
       :data_source,
       :job_name,
       :job_run_id,
@@ -9244,6 +9780,17 @@ module Aws::Glue
     #   Filter results by runs that started before this time.
     #   @return [Time]
     #
+    # @!attribute [rw] evaluation_run_mode
+    #   Filter results by how their evaluation run started: `ON_DEMAND` or
+    #   `EVALUATION_CONFIG`. Results that no evaluation run produced match
+    #   neither value.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_quality_evaluation_config
+    #   Filter results by the evaluation configuration name which started
+    #   the evaluation run.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DataQualityResultFilterCriteria AWS API Documentation
     #
     class DataQualityResultFilterCriteria < Struct.new(
@@ -9251,7 +9798,9 @@ module Aws::Glue
       :job_name,
       :job_run_id,
       :started_after,
-      :started_before)
+      :started_before,
+      :evaluation_run_mode,
+      :data_quality_evaluation_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9261,6 +9810,20 @@ module Aws::Glue
     #
     # @!attribute [rw] result_id
     #   A unique result ID for the data quality result.
+    #   @return [String]
+    #
+    # @!attribute [rw] evaluation_run_mode
+    #   How the evaluation run that produced the result started: `ON_DEMAND`
+    #   for a run started by `StartDataQualityRulesetEvaluationRun`, or
+    #   `EVALUATION_CONFIG` for a run started by a data quality evaluation
+    #   configuration. Not returned for results that no evaluation run
+    #   produced, such as results from any ETL job.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_quality_evaluation_config
+    #   The name of the data quality evaluation configuration that started
+    #   the evaluation run, returned when `EvaluationRunMode` is
+    #   `EVALUATION_CONFIG`.
     #   @return [String]
     #
     # @!attribute [rw] data_source
@@ -9336,6 +9899,8 @@ module Aws::Glue
     #
     class DataQualityResultV2Item < Struct.new(
       :result_id,
+      :evaluation_run_mode,
+      :data_quality_evaluation_config,
       :data_source,
       :dimensions,
       :tags,
@@ -9359,6 +9924,20 @@ module Aws::Glue
     #
     # @!attribute [rw] result_id
     #   The unique result ID for this data quality result.
+    #   @return [String]
+    #
+    # @!attribute [rw] evaluation_run_mode
+    #   How the evaluation run that produced the result started: `ON_DEMAND`
+    #   for a run started by `StartDataQualityRulesetEvaluationRun`, or
+    #   `EVALUATION_CONFIG` for a run started by a data quality evaluation
+    #   configuration. Not returned for results that no evaluation run
+    #   produced, such as results from any ETL job.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_quality_evaluation_config
+    #   The name of the data quality evaluation configuration that started
+    #   the evaluation run, returned when `EvaluationRunMode` is
+    #   `EVALUATION_CONFIG`.
     #   @return [String]
     #
     # @!attribute [rw] data_source
@@ -9391,6 +9970,8 @@ module Aws::Glue
     #
     class DataQualityResultsV2Description < Struct.new(
       :result_id,
+      :evaluation_run_mode,
+      :data_quality_evaluation_config,
       :data_source,
       :result_published_on,
       :dimensions,
@@ -9430,6 +10011,17 @@ module Aws::Glue
     #   The evaluation context to filter results by.
     #   @return [String]
     #
+    # @!attribute [rw] evaluation_run_mode
+    #   Filter results by how their evaluation run started: `ON_DEMAND` or
+    #   `EVALUATION_CONFIG`. Results that no evaluation run produced match
+    #   neither value.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_quality_evaluation_config
+    #   Filter results by the evaluation configuration name which started
+    #   the evaluation run.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DataQualityResultsV2FilterCriteria AWS API Documentation
     #
     class DataQualityResultsV2FilterCriteria < Struct.new(
@@ -9437,7 +10029,9 @@ module Aws::Glue
       :published_after,
       :published_before,
       :dimensions,
-      :evaluation_context)
+      :evaluation_context,
+      :evaluation_run_mode,
+      :data_quality_evaluation_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10182,22 +10776,6 @@ module Aws::Glue
     #
     class DeleteAssetResponse < Aws::EmptyStructure; end
 
-    # @!attribute [rw] identifier
-    #   The identifier of the asset type to delete.
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteAssetTypeRequest AWS API Documentation
-    #
-    class DeleteAssetTypeRequest < Struct.new(
-      :identifier)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteAssetTypeResponse AWS API Documentation
-    #
-    class DeleteAssetTypeResponse < Aws::EmptyStructure; end
-
     # @!attribute [rw] asset_identifier
     #   The unique identifier of the asset from which to delete the
     #   attachment.
@@ -10229,7 +10807,7 @@ module Aws::Glue
       include Aws::Structure
     end
 
-    # @!attribute [rw] asset_identifier
+    # @!attribute [rw] asset_id
     #   The unique identifier of the asset.
     #   @return [String]
     #
@@ -10237,16 +10815,16 @@ module Aws::Glue
     #   The name of the iterable form, if the deletion targets an item.
     #   @return [String]
     #
-    # @!attribute [rw] item_identifier
+    # @!attribute [rw] item_id
     #   The identifier of the item within the iterable form, if applicable.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteAttachmentResponse AWS API Documentation
     #
     class DeleteAttachmentResponse < Struct.new(
-      :asset_identifier,
+      :asset_id,
       :iterable_form_name,
-      :item_identifier)
+      :item_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10483,6 +11061,22 @@ module Aws::Glue
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @!attribute [rw] name
+    #   The name of the data quality evaluation configuration to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteDataQualityEvaluationConfigRequest AWS API Documentation
+    #
+    class DeleteDataQualityEvaluationConfigRequest < Struct.new(
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteDataQualityEvaluationConfigResponse AWS API Documentation
+    #
+    class DeleteDataQualityEvaluationConfigResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] name
     #   A name for the data quality ruleset.
@@ -11933,7 +12527,7 @@ module Aws::Glue
       include Aws::Structure
     end
 
-    # @!attribute [rw] asset_identifier
+    # @!attribute [rw] asset_id
     #   The unique identifier of the asset.
     #   @return [String]
     #
@@ -11942,7 +12536,7 @@ module Aws::Glue
     #   item.
     #   @return [String]
     #
-    # @!attribute [rw] item_identifier
+    # @!attribute [rw] item_id
     #   The identifier of the item within the iterable form, if applicable.
     #   @return [String]
     #
@@ -11953,9 +12547,9 @@ module Aws::Glue
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DisassociateGlossaryTermsResponse AWS API Documentation
     #
     class DisassociateGlossaryTermsResponse < Struct.new(
-      :asset_identifier,
+      :asset_id,
       :iterable_form_name,
-      :item_identifier,
+      :item_id,
       :glossary_terms)
       SENSITIVE = []
       include Aws::Structure
@@ -13538,7 +14132,7 @@ module Aws::Glue
     #
     # @!attribute [rw] forms
     #   The forms that make up the asset type, keyed by form name.
-    #   @return [Hash<String,Types::AssetTypeFormReference>]
+    #   @return [Hash<String,Types::AssetTypeFormOutput>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetAssetTypeResponse AWS API Documentation
     #
@@ -14378,24 +14972,6 @@ module Aws::Glue
     # The export configuration returned by the
     # `GetDataCatalogExportConfiguration` operation.
     #
-    # @!attribute [rw] export_setting
-    #   The export setting for the data catalog. Valid values are `ENABLED`
-    #   and `DISABLED`.
-    #   @return [String]
-    #
-    # @!attribute [rw] status
-    #   The current status of the export. Valid values are `ENABLING`,
-    #   `ENABLED`, `DISABLING`, `DISABLED`, and `FAILED`.
-    #   @return [String]
-    #
-    # @!attribute [rw] encryption_configuration
-    #   The encryption configuration for the exported data.
-    #   @return [Types::ExportEncryptionConfiguration]
-    #
-    # @!attribute [rw] s3_table_bucket_arn
-    #   The ARN of the S3 Tables bucket where catalog metadata is exported.
-    #   @return [String]
-    #
     # @!attribute [rw] created_at
     #   The timestamp at which the export configuration was created.
     #   @return [Time]
@@ -14404,15 +14980,154 @@ module Aws::Glue
     #   The timestamp at which the export configuration was last updated.
     #   @return [Time]
     #
+    # @!attribute [rw] s3_tables_configuration
+    #   The S3 Tables configuration for the export, including the table
+    #   bucket that holds the exported catalog metadata and its encryption
+    #   configuration.
+    #   @return [Types::S3TablesConfigurationResult]
+    #
+    # @!attribute [rw] assets
+    #   The export setting and current export state for asset metadata.
+    #   @return [Types::AssetsExportResult]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetDataCatalogExportConfigurationOutput AWS API Documentation
     #
     class GetDataCatalogExportConfigurationOutput < Struct.new(
-      :export_setting,
-      :status,
-      :encryption_configuration,
-      :s3_table_bucket_arn,
       :created_at,
-      :updated_at)
+      :updated_at,
+      :s3_tables_configuration,
+      :assets)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
+    #   The name of the data quality evaluation configuration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetDataQualityEvaluationConfigRequest AWS API Documentation
+    #
+    class GetDataQualityEvaluationConfigRequest < Struct.new(
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
+    #   The name of the data quality evaluation configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] evaluation_run_mode
+    #   The evaluation run mode of the configuration's results, which is
+    #   `EVALUATION_CONFIG`.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_on
+    #   The time when the configuration was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_on
+    #   The time when the configuration was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] level
+    #   The Glue Data Catalog hierarchical level that the configuration
+    #   applies to.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_source
+    #   The catalog, database, or table that the configuration applies to.
+    #   @return [Types::DataQualityEvaluationConfigDataSource]
+    #
+    # @!attribute [rw] ruleset_name
+    #   The name of the data quality ruleset that tables are evaluated with.
+    #   @return [String]
+    #
+    # @!attribute [rw] managed_ruleset_name
+    #   The built-in ruleset that tables are evaluated with.
+    #   @return [String]
+    #
+    # @!attribute [rw] triggers
+    #   When the configuration evaluates tables:
+    #
+    #   ONCE
+    #
+    #   : Each table is evaluated one time, including when tables are added
+    #     to a database or catalog.
+    #
+    #   SCHEDULE
+    #
+    #   : Each table is evaluated on the cron or rate expression in
+    #     `ScheduleExpression`.
+    #
+    #   METADATA\_CHANGE
+    #
+    #   : A table is evaluated whenever its Glue Data Catalog metadata
+    #     changes.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] schedule_expression
+    #   The cron or rate expression, in UTC, for the `SCHEDULE` trigger.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_at
+    #   The time from which the schedule runs, inclusive.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_at
+    #   The time at which the schedule stops running, exclusive.
+    #   @return [Time]
+    #
+    # @!attribute [rw] pause_runs
+    #   Specifies whether evaluations are paused.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] role
+    #   The Amazon Resource Name (ARN) of the IAM role that evaluation runs
+    #   assume.
+    #   @return [String]
+    #
+    # @!attribute [rw] number_of_workers
+    #   The number of `G.1X` workers to be used in the run. The default is
+    #   5.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] timeout
+    #   The timeout for a run in minutes. This is the maximum time that a
+    #   run can consume resources before it is terminated and enters
+    #   `TIMEOUT` status. The default is 2,880 minutes (48 hours).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] additional_run_options
+    #   Additional run options you can specify for an evaluation run.
+    #   @return [Types::DataQualityEvaluationConfigAdditionalRunOptions]
+    #
+    # @!attribute [rw] additional_data_sources
+    #   A map of reference strings to additional data sources you can
+    #   specify for an evaluation run.
+    #   @return [Hash<String,Types::DataSource>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetDataQualityEvaluationConfigResponse AWS API Documentation
+    #
+    class GetDataQualityEvaluationConfigResponse < Struct.new(
+      :name,
+      :evaluation_run_mode,
+      :created_on,
+      :last_modified_on,
+      :level,
+      :data_source,
+      :ruleset_name,
+      :managed_ruleset_name,
+      :triggers,
+      :schedule_expression,
+      :start_at,
+      :end_at,
+      :pause_runs,
+      :role,
+      :number_of_workers,
+      :timeout,
+      :additional_run_options,
+      :additional_data_sources)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -14513,6 +15228,20 @@ module Aws::Glue
     #   A unique result ID for the data quality result.
     #   @return [String]
     #
+    # @!attribute [rw] evaluation_run_mode
+    #   How the evaluation run that produced the result started: `ON_DEMAND`
+    #   for a run started by `StartDataQualityRulesetEvaluationRun`, or
+    #   `EVALUATION_CONFIG` for a run started by a data quality evaluation
+    #   configuration. Not returned for results that no evaluation run
+    #   produced, such as results from any ETL job.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_quality_evaluation_config
+    #   The name of the data quality evaluation configuration that started
+    #   the evaluation run, returned when `EvaluationRunMode` is
+    #   `EVALUATION_CONFIG`.
+    #   @return [String]
+    #
     # @!attribute [rw] profile_id
     #   The Profile ID for the data quality result.
     #   @return [String]
@@ -14584,6 +15313,8 @@ module Aws::Glue
     #
     class GetDataQualityResultResponse < Struct.new(
       :result_id,
+      :evaluation_run_mode,
+      :data_quality_evaluation_config,
       :profile_id,
       :score,
       :data_source,
@@ -14616,6 +15347,20 @@ module Aws::Glue
 
     # @!attribute [rw] result_id
     #   A unique result ID for the data quality result.
+    #   @return [String]
+    #
+    # @!attribute [rw] evaluation_run_mode
+    #   How the evaluation run that produced the result started: `ON_DEMAND`
+    #   for a run started by `StartDataQualityRulesetEvaluationRun`, or
+    #   `EVALUATION_CONFIG` for a run started by a data quality evaluation
+    #   configuration. Not returned for results that no evaluation run
+    #   produced, such as results from any ETL job.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_quality_evaluation_config
+    #   The name of the data quality evaluation configuration that started
+    #   the evaluation run, returned when `EvaluationRunMode` is
+    #   `EVALUATION_CONFIG`.
     #   @return [String]
     #
     # @!attribute [rw] data_source
@@ -14695,6 +15440,8 @@ module Aws::Glue
     #
     class GetDataQualityResultV2Response < Struct.new(
       :result_id,
+      :evaluation_run_mode,
+      :data_quality_evaluation_config,
       :data_source,
       :profile_id,
       :dimensions,
@@ -15626,6 +16373,84 @@ module Aws::Glue
     class GetJobRunsResponse < Struct.new(
       :job_runs,
       :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] analysis_id
+    #   The unique identifier of the upgrade analysis to retrieve.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_name
+    #   The name of the job associated with the analysis.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetJobUpgradeAnalysisRequest AWS API Documentation
+    #
+    class GetJobUpgradeAnalysisRequest < Struct.new(
+      :analysis_id,
+      :job_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] job_name
+    #   The name of the job associated with this analysis.
+    #   @return [String]
+    #
+    # @!attribute [rw] analysis_id
+    #   The unique identifier of the upgrade analysis.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the analysis.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_version
+    #   The Glue version the job was running before the upgrade, for example
+    #   `4.0`.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_version
+    #   The Glue version the job will be upgraded to, for example `6.0`.
+    #   @return [String]
+    #
+    # @!attribute [rw] analysis_type
+    #   The type of upgrade analysis. For auto-upgrade jobs, this value is
+    #   `AUTO_UPGRADE`.
+    #   @return [String]
+    #
+    # @!attribute [rw] auto_upgrade_evaluation_summary
+    #   A presigned URL for downloading the auto upgrade evaluation summary
+    #   for the analysis. Available once the analysis reaches a terminal
+    #   status (`SUCCEEDED` or `FAILED`). The URL expires after 1 hour.
+    #   Calling `GetJobUpgradeAnalysis` again returns a new URL.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   The reason the analysis did not complete.
+    #   @return [String]
+    #
+    # @!attribute [rw] auto_upgrade_eligibility_summary
+    #   A presigned URL for downloading the auto upgrade eligibility
+    #   summary, which lists the compatibility results for the job.
+    #   Available once the analysis reaches `WAITING_FOR_CONSENT` and in all
+    #   subsequent states. The URL expires after 1 hour. Calling
+    #   `GetJobUpgradeAnalysis` again returns a new URL.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetJobUpgradeAnalysisResponse AWS API Documentation
+    #
+    class GetJobUpgradeAnalysisResponse < Struct.new(
+      :job_name,
+      :analysis_id,
+      :status,
+      :source_version,
+      :target_version,
+      :analysis_type,
+      :auto_upgrade_evaluation_summary,
+      :error_message,
+      :auto_upgrade_eligibility_summary)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -20523,11 +21348,18 @@ module Aws::Glue
     #   the developer guide.
     #
     #   Jobs that are created without specifying a Glue version default to
-    #   Glue 5.1.
+    #   Glue 6.0.
+    #
+    #   Set `GlueVersion` to `auto` to turn on automatic version upgrades
+    #   for the job. For more information, see [Automatic version upgrades
+    #   for Glue jobs][2] in the developer guide. For the job requirements,
+    #   see [Before you start][3].
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/glue/latest/dg/add-job.html
+    #   [2]: https://docs.aws.amazon.com/glue/latest/dg/auto-version-upgrades.html
+    #   [3]: https://docs.aws.amazon.com/glue/latest/dg/auto-version-upgrades.html#auto-version-upgrades-before-you-start
     #   @return [String]
     #
     # @!attribute [rw] code_gen_configuration_nodes
@@ -20571,6 +21403,10 @@ module Aws::Glue
     #   The name of an Glue usage profile associated with the job.
     #   @return [String]
     #
+    # @!attribute [rw] auto_upgrade_metadata
+    #   <text>The auto-upgrade assessment information for a job configured with glueVersion=auto. This field is null when the job is not configured to auto.</text>
+    #   @return [Types::AutoUpgradeMetadata]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/Job AWS API Documentation
     #
     class Job < Struct.new(
@@ -20600,7 +21436,8 @@ module Aws::Glue
       :execution_class,
       :source_control_details,
       :maintenance_window,
-      :profile_name)
+      :profile_name,
+      :auto_upgrade_metadata)
       SENSITIVE = [:code_gen_configuration_nodes]
       include Aws::Structure
     end
@@ -21362,9 +22199,16 @@ module Aws::Glue
     #   If not provided in the update request, the Glue version retains the
     #   value from the existing job definition.
     #
+    #   Set `GlueVersion` to `auto` to turn on automatic version upgrades
+    #   for the job. For more information, see [Automatic version upgrades
+    #   for Glue jobs][2] in the developer guide. For the job requirements,
+    #   see [Before you start][3].
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/glue/latest/dg/add-job.html
+    #   [2]: https://docs.aws.amazon.com/glue/latest/dg/auto-version-upgrades.html
+    #   [3]: https://docs.aws.amazon.com/glue/latest/dg/auto-version-upgrades.html#auto-version-upgrades-before-you-start
     #   @return [String]
     #
     # @!attribute [rw] code_gen_configuration_nodes
@@ -22270,6 +23114,47 @@ module Aws::Glue
     #
     class ListCustomEntityTypesResponse < Struct.new(
       :custom_entity_types,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] level
+    #   Lists only the configurations that apply to this level.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   A paginated token to offset the results. If you don't specify a
+    #   token, the operation returns results starting from the beginning of
+    #   the list.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ListDataQualityEvaluationConfigsRequest AWS API Documentation
+    #
+    class ListDataQualityEvaluationConfigsRequest < Struct.new(
+      :level,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] data_quality_evaluation_configs
+    #   A list of `DataQualityEvaluationConfigListDetails` objects.
+    #   @return [Array<Types::DataQualityEvaluationConfigListDetails>]
+    #
+    # @!attribute [rw] next_token
+    #   A pagination token, if more results are available.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ListDataQualityEvaluationConfigsResponse AWS API Documentation
+    #
+    class ListDataQualityEvaluationConfigsResponse < Struct.new(
+      :data_quality_evaluation_configs,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -25534,8 +26419,9 @@ module Aws::Glue
       include Aws::Structure
     end
 
-    # @!attribute [rw] asset_type_id
-    #   The identifier of the asset type for the asset.
+    # @!attribute [rw] asset_type_identifier
+    #   The identifier of the asset type for the asset. This field is
+    #   required.
     #   @return [String]
     #
     # @!attribute [rw] identifier
@@ -25554,7 +26440,7 @@ module Aws::Glue
     # @!attribute [rw] forms
     #   The forms to set on the asset, keyed by form name. Each entry
     #   specifies the form type and its JSON content.
-    #   @return [Hash<String,Types::AssetFormEntry>]
+    #   @return [Hash<String,Types::AssetFormInput>]
     #
     # @!attribute [rw] client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
@@ -25567,7 +26453,7 @@ module Aws::Glue
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/PutAssetRequest AWS API Documentation
     #
     class PutAssetRequest < Struct.new(
-      :asset_type_id,
+      :asset_type_identifier,
       :identifier,
       :name,
       :description,
@@ -25589,6 +26475,10 @@ module Aws::Glue
     #   The description of the asset.
     #   @return [String]
     #
+    # @!attribute [rw] asset_type_id
+    #   The identifier of the asset type for this asset.
+    #   @return [String]
+    #
     # @!attribute [rw] created_at
     #   The timestamp at which the asset was created.
     #   @return [Time]
@@ -25603,56 +26493,8 @@ module Aws::Glue
       :id,
       :name,
       :description,
+      :asset_type_id,
       :created_at,
-      :forms)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @!attribute [rw] name
-    #   The name of the asset type.
-    #   @return [String]
-    #
-    # @!attribute [rw] forms
-    #   The forms that make up the asset type, keyed by form name. Each
-    #   entry references the form type that defines the form's schema.
-    #   @return [Hash<String,Types::AssetTypeFormReference>]
-    #
-    # @!attribute [rw] client_token
-    #   A unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request.
-    #
-    #   **A suitable default value is auto-generated.** You should normally
-    #   not need to pass this option.
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/PutAssetTypeRequest AWS API Documentation
-    #
-    class PutAssetTypeRequest < Struct.new(
-      :name,
-      :forms,
-      :client_token)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @!attribute [rw] id
-    #   The identifier of the asset type.
-    #   @return [String]
-    #
-    # @!attribute [rw] name
-    #   The name of the asset type.
-    #   @return [String]
-    #
-    # @!attribute [rw] forms
-    #   The forms that make up the asset type, keyed by form name.
-    #   @return [Hash<String,Types::AssetTypeFormReference>]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/PutAssetTypeResponse AWS API Documentation
-    #
-    class PutAssetTypeResponse < Struct.new(
-      :id,
-      :name,
       :forms)
       SENSITIVE = []
       include Aws::Structure
@@ -25682,8 +26524,9 @@ module Aws::Glue
     #   specified form type.
     #   @return [String]
     #
-    # @!attribute [rw] form_type_id
-    #   The identifier of the form type for this attachment.
+    # @!attribute [rw] form_type_identifier
+    #   The identifier of the form type for this attachment. This field is
+    #   required.
     #   @return [String]
     #
     # @!attribute [rw] client_token
@@ -25702,13 +26545,13 @@ module Aws::Glue
       :item_identifier,
       :attachment_name,
       :content,
-      :form_type_id,
+      :form_type_identifier,
       :client_token)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # @!attribute [rw] asset_identifier
+    # @!attribute [rw] asset_id
     #   The unique identifier of the asset.
     #   @return [String]
     #
@@ -25716,7 +26559,7 @@ module Aws::Glue
     #   The name of the iterable form, if the attachment targets an item.
     #   @return [String]
     #
-    # @!attribute [rw] item_identifier
+    # @!attribute [rw] item_id
     #   The identifier of the item within the iterable form, if applicable.
     #   @return [String]
     #
@@ -25731,9 +26574,9 @@ module Aws::Glue
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/PutAttachmentResponse AWS API Documentation
     #
     class PutAttachmentResponse < Struct.new(
-      :asset_identifier,
+      :asset_id,
       :iterable_form_name,
-      :item_identifier,
+      :item_id,
       :attachment_name,
       :form_type_id)
       SENSITIVE = []
@@ -25763,17 +26606,6 @@ module Aws::Glue
     #
     class PutDataCatalogEncryptionSettingsResponse < Aws::EmptyStructure; end
 
-    # @!attribute [rw] export_setting
-    #   The export setting for the data catalog. Specify `ENABLED` to start
-    #   exporting catalog metadata to S3 Tables, or `DISABLED` to stop
-    #   exporting. This field is required.
-    #   @return [String]
-    #
-    # @!attribute [rw] encryption_configuration
-    #   The encryption configuration for the exported data. If not
-    #   specified, the default encryption settings are used.
-    #   @return [Types::ExportEncryptionConfiguration]
-    #
     # @!attribute [rw] client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request.
@@ -25782,12 +26614,25 @@ module Aws::Glue
     #   not need to pass this option.
     #   @return [String]
     #
+    # @!attribute [rw] s3_tables_configuration
+    #   The S3 Tables configuration for the export. The encryption
+    #   configuration applies only when Glue creates the table bucket that
+    #   holds the exported catalog metadata. If not specified, the default
+    #   encryption settings are used.
+    #   @return [Types::S3TablesConfiguration]
+    #
+    # @!attribute [rw] assets
+    #   The export setting for asset metadata. Set `S3TablesExport` to
+    #   `ENABLED` to start exporting asset metadata to S3 Tables, or to
+    #   `DISABLED` to stop exporting.
+    #   @return [Types::AssetsExport]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/PutDataCatalogExportConfigurationInput AWS API Documentation
     #
     class PutDataCatalogExportConfigurationInput < Struct.new(
-      :export_setting,
-      :encryption_configuration,
-      :client_token)
+      :client_token,
+      :s3_tables_configuration,
+      :assets)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -25795,19 +26640,19 @@ module Aws::Glue
     # The export configuration returned by the
     # `PutDataCatalogExportConfiguration` operation.
     #
-    # @!attribute [rw] export_setting
-    #   The export setting for the data catalog.
-    #   @return [String]
+    # @!attribute [rw] s3_tables_configuration
+    #   The S3 Tables configuration for the export.
+    #   @return [Types::S3TablesConfiguration]
     #
-    # @!attribute [rw] encryption_configuration
-    #   The encryption configuration for the exported data.
-    #   @return [Types::ExportEncryptionConfiguration]
+    # @!attribute [rw] assets
+    #   The export setting for asset metadata.
+    #   @return [Types::AssetsExport]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/PutDataCatalogExportConfigurationOutput AWS API Documentation
     #
     class PutDataCatalogExportConfigurationOutput < Struct.new(
-      :export_setting,
-      :encryption_configuration)
+      :s3_tables_configuration,
+      :assets)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -26761,11 +27606,20 @@ module Aws::Glue
     #   The URI for accessing the resource.
     #   @return [String]
     #
+    # @!attribute [rw] last_modified
+    #   The time at which the resource was last modified in Amazon S3. Glue
+    #   records this value when you create or update a function whose
+    #   `GovernanceMode` is `LAKE_FORMATION`. Analytics engines use it to
+    #   verify that the resource hasn't changed. This is an output-only
+    #   field.
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ResourceUri AWS API Documentation
     #
     class ResourceUri < Struct.new(
       :resource_type,
-      :uri)
+      :uri,
+      :last_modified)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -28315,6 +29169,59 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # The S3 Tables configuration for a data catalog export.
+    #
+    # @!attribute [rw] encryption_configuration
+    #   The encryption configuration for the table bucket that holds the
+    #   exported catalog metadata. It applies only when Glue creates the
+    #   table bucket.
+    #   @return [Types::ExportEncryptionConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/S3TablesConfiguration AWS API Documentation
+    #
+    class S3TablesConfiguration < Struct.new(
+      :encryption_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The S3 Tables configuration for a data catalog export, including the
+    # table bucket that holds the exported catalog metadata.
+    #
+    # @!attribute [rw] table_bucket_arn
+    #   The ARN of the S3 table bucket that holds the exported catalog
+    #   metadata.
+    #   @return [String]
+    #
+    # @!attribute [rw] encryption_configuration
+    #   The encryption configuration for the table bucket that holds the
+    #   exported catalog metadata.
+    #   @return [Types::ExportEncryptionConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/S3TablesConfigurationResult AWS API Documentation
+    #
+    class S3TablesConfigurationResult < Struct.new(
+      :table_bucket_arn,
+      :encryption_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The state of an export to S3 Tables. Glue sets this state.
+    #
+    # @!attribute [rw] status
+    #   The current status of the export. Valid values are `ENABLING`,
+    #   `ENABLED`, `DISABLING`, `DISABLED`, and `FAILED`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/S3TablesExportState AWS API Documentation
+    #
+    class S3TablesExportState < Struct.new(
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Specifies a data store in Amazon Simple Storage Service (Amazon S3).
     #
     # @!attribute [rw] path
@@ -28701,10 +29608,10 @@ module Aws::Glue
     #   The attribute name to filter on.
     #   @return [String]
     #
-    # @!attribute [rw] operator
-    #   The comparison operator. Valid values are `equals`, `greaterThan`,
-    #   `greaterThanOrEquals`, `lessThan`, `lessThanOrEquals`, and
-    #   `notExists`.
+    # @!attribute [rw] comparator
+    #   The comparison operator. Valid values are `EQUALS`, `GREATER_THAN`,
+    #   `GREATER_THAN_OR_EQUALS`, `LESS_THAN`, `LESS_THAN_OR_EQUALS`, and
+    #   `NOT_EXISTS`. This field is required.
     #   @return [String]
     #
     # @!attribute [rw] value
@@ -28715,7 +29622,7 @@ module Aws::Glue
     #
     class SearchAttributeFilter < Struct.new(
       :attribute,
-      :operator,
+      :comparator,
       :value)
       SENSITIVE = []
       include Aws::Structure
@@ -28841,13 +29748,17 @@ module Aws::Glue
     #   The unique identifier of the matched asset.
     #   @return [String]
     #
-    # @!attribute [rw] asset_name
+    # @!attribute [rw] name
     #   The name of the matched asset.
     #   @return [String]
     #
-    # @!attribute [rw] asset_description
+    # @!attribute [rw] description
     #   The description of the matched asset.
     #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp at which the matched asset was created.
+    #   @return [Time]
     #
     # @!attribute [rw] updated_at
     #   The timestamp at which the matched asset was last updated.
@@ -28861,8 +29772,9 @@ module Aws::Glue
     #
     class SearchResultItem < Struct.new(
       :id,
-      :asset_name,
-      :asset_description,
+      :name,
+      :description,
+      :created_at,
       :updated_at,
       :asset_type_id)
       SENSITIVE = []
@@ -30536,6 +31448,46 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # @!attribute [rw] job_name
+    #   The name of the job associated with the analysis to resume.
+    #   @return [String]
+    #
+    # @!attribute [rw] analysis_id
+    #   The unique identifier of the upgrade analysis. The analysis must be
+    #   in `WAITING_FOR_CONSENT` status.
+    #   @return [String]
+    #
+    # @!attribute [rw] upgrade_consent
+    #   The customer's decision on whether to proceed with the upgrade.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/StartJobUpgradeAnalysisRequest AWS API Documentation
+    #
+    class StartJobUpgradeAnalysisRequest < Struct.new(
+      :job_name,
+      :analysis_id,
+      :upgrade_consent)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] analysis_id
+    #   The unique identifier of the upgrade analysis.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_name
+    #   The name of the job associated with this analysis.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/StartJobUpgradeAnalysisResponse AWS API Documentation
+    #
+    class StartJobUpgradeAnalysisResponse < Struct.new(
+      :analysis_id,
+      :job_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] transform_id
     #   The unique identifier of the machine learning transform.
     #   @return [String]
@@ -31054,6 +32006,27 @@ module Aws::Glue
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/StopCrawlerScheduleResponse AWS API Documentation
     #
     class StopCrawlerScheduleResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] job_name
+    #   The name of the job associated with the analysis.
+    #   @return [String]
+    #
+    # @!attribute [rw] analysis_id
+    #   The unique identifier of the analysis to stop.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/StopJobUpgradeAnalysisRequest AWS API Documentation
+    #
+    class StopJobUpgradeAnalysisRequest < Struct.new(
+      :job_name,
+      :analysis_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/StopJobUpgradeAnalysisResponse AWS API Documentation
+    #
+    class StopJobUpgradeAnalysisResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] catalog_id
     #   The ID of the Data Catalog where the table reside. If none is
@@ -33343,6 +34316,235 @@ module Aws::Glue
     end
 
     # @!attribute [rw] name
+    #   The name of the data quality evaluation configuration to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_source
+    #   The database or table that the configuration applies to. Replaces
+    #   the current data source.
+    #   @return [Types::DataQualityEvaluationConfigDataSource]
+    #
+    # @!attribute [rw] ruleset_name
+    #   The name of a Data Quality Definition Language (DQDL) ruleset,
+    #   containing analyzers, rules, or both, to evaluate tables with. You
+    #   create the ruleset using the `CreateDataQualityRuleset` API. Specify
+    #   either `RulesetName` or `ManagedRulesetName`, not both.
+    #   @return [String]
+    #
+    # @!attribute [rw] managed_ruleset_name
+    #   A built-in ruleset, `SIMPLE` or `ADVANCED`, that profiles each
+    #   table.
+    #   @return [String]
+    #
+    # @!attribute [rw] triggers
+    #   When the configuration evaluates tables. Replaces the current
+    #   triggers. Choose from the following triggers:
+    #
+    #   ONCE
+    #
+    #   : Evaluates each table one time, including when tables are added to
+    #     a database or catalog.
+    #
+    #   SCHEDULE
+    #
+    #   : Evaluates each table on the cron or rate expression in
+    #     `ScheduleExpression`, between the optional `StartAt` and `EndAt`
+    #     times.
+    #
+    #   METADATA\_CHANGE
+    #
+    #   : Evaluates a table whenever its Glue Data Catalog metadata changes,
+    #     such as a schema change or an Apache Iceberg commit.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] schedule_expression
+    #   A cron or rate expression, in UTC, for the `SCHEDULE` trigger, for
+    #   example `cron(0 6 * * ? *)`. The schedule can run at most once an
+    #   hour.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_at
+    #   The time from which the schedule runs, inclusive.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_at
+    #   The time at which the schedule stops running, exclusive.
+    #   @return [Time]
+    #
+    # @!attribute [rw] pause_runs
+    #   Specifies whether to pause the configuration. While paused, the
+    #   configuration evaluates nothing, including tables added to the
+    #   catalog or database.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] role
+    #   The IAM role that evaluations assume. You can specify the role name
+    #   or the role Amazon Resource Name (ARN). The role needs the trust
+    #   policy and permissions described for
+    #   `CreateDataQualityEvaluationConfig`.
+    #   @return [String]
+    #
+    # @!attribute [rw] number_of_workers
+    #   The number of `G.1X` workers to be used in the run. The default is
+    #   5.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] timeout
+    #   The timeout for a run in minutes. This is the maximum time that a
+    #   run can consume resources before it is terminated and enters
+    #   `TIMEOUT` status. The default is 2,880 minutes (48 hours).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] additional_run_options
+    #   Additional run options you can specify for an evaluation run.
+    #   @return [Types::DataQualityEvaluationConfigAdditionalRunOptions]
+    #
+    # @!attribute [rw] additional_data_sources
+    #   A map of reference strings to additional data sources you can
+    #   specify for an evaluation run.
+    #   @return [Hash<String,Types::DataSource>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateDataQualityEvaluationConfigRequest AWS API Documentation
+    #
+    class UpdateDataQualityEvaluationConfigRequest < Struct.new(
+      :name,
+      :data_source,
+      :ruleset_name,
+      :managed_ruleset_name,
+      :triggers,
+      :schedule_expression,
+      :start_at,
+      :end_at,
+      :pause_runs,
+      :role,
+      :number_of_workers,
+      :timeout,
+      :additional_run_options,
+      :additional_data_sources)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
+    #   The name of the data quality evaluation configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] evaluation_run_mode
+    #   The evaluation run mode of the configuration's results, which is
+    #   `EVALUATION_CONFIG`.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_on
+    #   The time when the configuration was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_on
+    #   The time when the configuration was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] level
+    #   The Glue Data Catalog hierarchical level that the configuration
+    #   applies to.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_source
+    #   The catalog, database, or table that the configuration applies to.
+    #   @return [Types::DataQualityEvaluationConfigDataSource]
+    #
+    # @!attribute [rw] ruleset_name
+    #   The name of the data quality ruleset that tables are evaluated with.
+    #   @return [String]
+    #
+    # @!attribute [rw] managed_ruleset_name
+    #   The built-in ruleset that tables are evaluated with.
+    #   @return [String]
+    #
+    # @!attribute [rw] triggers
+    #   When the configuration evaluates tables:
+    #
+    #   ONCE
+    #
+    #   : Each table is evaluated one time, including when tables are added
+    #     to a database or catalog.
+    #
+    #   SCHEDULE
+    #
+    #   : Each table is evaluated on the cron or rate expression in
+    #     `ScheduleExpression`.
+    #
+    #   METADATA\_CHANGE
+    #
+    #   : A table is evaluated whenever its Glue Data Catalog metadata
+    #     changes.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] schedule_expression
+    #   The cron or rate expression, in UTC, for the `SCHEDULE` trigger.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_at
+    #   The time from which the schedule runs, inclusive.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_at
+    #   The time at which the schedule stops running, exclusive.
+    #   @return [Time]
+    #
+    # @!attribute [rw] pause_runs
+    #   Specifies whether evaluations are paused.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] role
+    #   The Amazon Resource Name (ARN) of the IAM role that evaluation runs
+    #   assume.
+    #   @return [String]
+    #
+    # @!attribute [rw] number_of_workers
+    #   The number of `G.1X` workers to be used in the run. The default is
+    #   5.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] timeout
+    #   The timeout for a run in minutes. This is the maximum time that a
+    #   run can consume resources before it is terminated and enters
+    #   `TIMEOUT` status. The default is 2,880 minutes (48 hours).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] additional_run_options
+    #   Additional run options you can specify for an evaluation run.
+    #   @return [Types::DataQualityEvaluationConfigAdditionalRunOptions]
+    #
+    # @!attribute [rw] additional_data_sources
+    #   A map of reference strings to additional data sources you can
+    #   specify for an evaluation run.
+    #   @return [Hash<String,Types::DataSource>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateDataQualityEvaluationConfigResponse AWS API Documentation
+    #
+    class UpdateDataQualityEvaluationConfigResponse < Struct.new(
+      :name,
+      :evaluation_run_mode,
+      :created_on,
+      :last_modified_on,
+      :level,
+      :data_source,
+      :ruleset_name,
+      :managed_ruleset_name,
+      :triggers,
+      :schedule_expression,
+      :start_at,
+      :end_at,
+      :pause_runs,
+      :role,
+      :number_of_workers,
+      :timeout,
+      :additional_run_options,
+      :additional_data_sources)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
     #   The name of the data quality ruleset.
     #   @return [String]
     #
@@ -33492,7 +34694,8 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   The updated description of the glossary.
+    #   The new description. Omit it to keep the current description; set it
+    #   to an empty string to clear it.
     #   @return [String]
     #
     # @!attribute [rw] client_token
@@ -33545,11 +34748,13 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] short_description
-    #   The updated short description of the glossary term.
+    #   The new short description. Omit it to keep the current one; set it
+    #   to an empty string to clear it.
     #   @return [String]
     #
     # @!attribute [rw] long_description
-    #   The updated long description of the glossary term.
+    #   The new long description. Omit it to keep the current one; set it to
+    #   an empty string to clear it.
     #   @return [String]
     #
     # @!attribute [rw] client_token
@@ -34614,6 +35819,19 @@ module Aws::Glue
     #   The resource URIs for the function.
     #   @return [Array<Types::ResourceUri>]
     #
+    # @!attribute [rw] artifact_location
+    #   The Amazon S3 location that contains the function's artifacts. This
+    #   location must be registered with Lake Formation. Glue returns this
+    #   field only for functions whose `GovernanceMode` is `LAKE_FORMATION`.
+    #   @return [String]
+    #
+    # @!attribute [rw] governance_mode
+    #   How access to the function is governed. `IAM_ONLY` means access is
+    #   controlled by IAM permissions only. `LAKE_FORMATION` means Lake
+    #   Formation permissions (`EXECUTE`, `DESCRIBE`, `ALTER`, and `DROP`)
+    #   also control who can run, describe, update, and delete the function.
+    #   @return [String]
+    #
     # @!attribute [rw] catalog_id
     #   The ID of the Data Catalog in which the function resides.
     #   @return [String]
@@ -34629,6 +35847,8 @@ module Aws::Glue
       :owner_type,
       :create_time,
       :resource_uris,
+      :artifact_location,
+      :governance_mode,
       :catalog_id)
       SENSITIVE = []
       include Aws::Structure
@@ -34660,6 +35880,33 @@ module Aws::Glue
     #   The resource URIs for the function.
     #   @return [Array<Types::ResourceUri>]
     #
+    # @!attribute [rw] artifact_location
+    #   The Amazon S3 location that contains the function's artifacts.
+    #   Required when `GovernanceMode` is `LAKE_FORMATION`. You must
+    #   register the location with Lake Formation, and every resource URI
+    #   must be under this location.
+    #   @return [String]
+    #
+    # @!attribute [rw] governance_mode
+    #   How access to the function is governed. Specify `LAKE_FORMATION` to
+    #   manage access to the function with Lake Formation permissions. If
+    #   you don't specify a value, the default is `IAM_ONLY`. You can't
+    #   change the governance mode after the function is created.
+    #
+    #   When `GovernanceMode` is `LAKE_FORMATION`:
+    #
+    #   * You must be a data lake administrator or have all permissions on
+    #     the Data Catalog with the grant option.
+    #
+    #   * You must have the `DATA_LOCATION_ACCESS` permission on the
+    #     `ArtifactLocation`, unless you're a data lake administrator.
+    #
+    #   * You must specify from 1 to 10 resource URIs, each under the
+    #     `ArtifactLocation`.
+    #
+    #   * You can't rename the function.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UserDefinedFunctionInput AWS API Documentation
     #
     class UserDefinedFunctionInput < Struct.new(
@@ -34668,7 +35915,9 @@ module Aws::Glue
       :owner_name,
       :function_type,
       :owner_type,
-      :resource_uris)
+      :resource_uris,
+      :artifact_location,
+      :governance_mode)
       SENSITIVE = []
       include Aws::Structure
     end

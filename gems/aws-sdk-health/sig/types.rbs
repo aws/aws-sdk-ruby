@@ -8,10 +8,29 @@
 module Aws::Health
   module Types
 
+    class AccountEntity
+      attr_accessor account_id: ::String
+      attr_accessor account_tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
     class AccountEntityAggregate
       attr_accessor account_id: ::String
       attr_accessor count: ::Integer
       attr_accessor statuses: ::Hash[("IMPAIRED" | "UNIMPAIRED" | "UNKNOWN" | "PENDING" | "RESOLVED"), ::Integer]
+      SENSITIVE: []
+    end
+
+    class AccountTag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      attr_accessor type: ("ACCOUNT_RESOURCE_TAG")
+      SENSITIVE: []
+    end
+
+    class AffectedAccountFilter
+      attr_accessor event_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::Array[::String]]
       SENSITIVE: []
     end
 
@@ -23,13 +42,40 @@ module Aws::Health
       attr_accessor aws_account_id: ::String
       attr_accessor last_updated_time: ::Time
       attr_accessor status_code: ("IMPAIRED" | "UNIMPAIRED" | "UNKNOWN" | "PENDING" | "RESOLVED")
-      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor resource_tags: ::Hash[::String, ::String]
+      attr_accessor account_tags: ::Hash[::String, ::String]
       attr_accessor entity_metadata: ::Hash[::String, ::String]
       SENSITIVE: []
     end
 
     class ConcurrentModificationException
       attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ConfigureTagsForOrganizationRequest
+      attr_accessor tag_keys: ::Array[Types::TagKeyForOrganization]
+      SENSITIVE: []
+    end
+
+    class ConfigureTagsForOrganizationResponse
+      attr_accessor configured_tag_keys: ::Array[Types::OrganizationTagKey]
+      SENSITIVE: []
+    end
+
+    class ConfigureTagsRequest
+      attr_accessor tag_keys: ::Array[Types::ConfigureTagsTagKey]
+      SENSITIVE: []
+    end
+
+    class ConfigureTagsResponse
+      attr_accessor configured_tag_keys: ::Array[Types::ResourceTagKey]
+      SENSITIVE: []
+    end
+
+    class ConfigureTagsTagKey
+      attr_accessor key: ::String
+      attr_accessor enabled_for_event_bridge: bool
       SENSITIVE: []
     end
 
@@ -43,11 +89,13 @@ module Aws::Health
       attr_accessor event_arn: ::String
       attr_accessor next_token: ::String
       attr_accessor max_results: ::Integer
+      attr_accessor filter: Types::AffectedAccountFilter
       SENSITIVE: []
     end
 
     class DescribeAffectedAccountsForOrganizationResponse
       attr_accessor affected_accounts: ::Array[::String]
+      attr_accessor affected_account_entities: ::Array[Types::AccountEntity]
       attr_accessor event_scope_code: ("PUBLIC" | "ACCOUNT_SPECIFIC" | "NONE")
       attr_accessor next_token: ::String
       SENSITIVE: []
@@ -86,6 +134,7 @@ module Aws::Health
     class DescribeEntityAggregatesForOrganizationRequest
       attr_accessor event_arns: ::Array[::String]
       attr_accessor aws_account_ids: ::Array[::String]
+      attr_accessor filter: Types::OrganizationEntityAggregateFilter
       SENSITIVE: []
     end
 
@@ -96,6 +145,7 @@ module Aws::Health
 
     class DescribeEntityAggregatesRequest
       attr_accessor event_arns: ::Array[::String]
+      attr_accessor filter: Types::EntityAggregateFilter
       SENSITIVE: []
     end
 
@@ -202,10 +252,61 @@ module Aws::Health
       SENSITIVE: []
     end
 
+    class DescribeTagKeysForOrganizationResponse
+      attr_accessor keys: ::Array[Types::OrganizationTagKey]
+      SENSITIVE: []
+    end
+
+    class DescribeTagKeysResponse
+      attr_accessor keys: ::Array[Types::ResourceTagKey]
+      SENSITIVE: []
+    end
+
+    class DescribeTagsForOrganizationFilter
+      attr_accessor tag_types: ::Array[("ORGANIZATION_RESOURCE_TAG" | "ORGANIZATION_ACCOUNT_TAG")]
+      SENSITIVE: []
+    end
+
+    class DescribeTagsForOrganizationRequest
+      attr_accessor filter: Types::DescribeTagsForOrganizationFilter
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeTagsForOrganizationResponse
+      attr_accessor tags: ::Array[Types::OrganizationTag]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeTagsOnboardingStatusForOrganizationResponse
+      attr_accessor status: ("ENABLED" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class DescribeTagsOnboardingStatusResponse
+      attr_accessor status: ("ENABLED" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class DescribeTagsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeTagsResponse
+      attr_accessor tags: ::Array[Types::AccountTag]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class EntityAccountFilter
       attr_accessor event_arn: ::String
       attr_accessor aws_account_id: ::String
       attr_accessor status_codes: ::Array[("IMPAIRED" | "UNIMPAIRED" | "UNKNOWN" | "PENDING" | "RESOLVED")]
+      attr_accessor tags: ::Hash[::String, ::Array[::String]]
       SENSITIVE: []
     end
 
@@ -216,12 +317,17 @@ module Aws::Health
       SENSITIVE: []
     end
 
+    class EntityAggregateFilter
+      attr_accessor tags: ::Hash[::String, ::Array[::String]]
+      SENSITIVE: []
+    end
+
     class EntityFilter
       attr_accessor event_arns: ::Array[::String]
       attr_accessor entity_arns: ::Array[::String]
       attr_accessor entity_values: ::Array[::String]
       attr_accessor last_updated_times: ::Array[Types::DateTimeRange]
-      attr_accessor tags: ::Array[::Hash[::String, ::String]]
+      attr_accessor tags: ::Hash[::String, ::Array[::String]]
       attr_accessor status_codes: ::Array[("IMPAIRED" | "UNIMPAIRED" | "UNKNOWN" | "PENDING" | "RESOLVED")]
       SENSITIVE: []
     end
@@ -287,7 +393,7 @@ module Aws::Health
       attr_accessor entity_arns: ::Array[::String]
       attr_accessor entity_values: ::Array[::String]
       attr_accessor event_type_categories: ::Array[("issue" | "accountNotification" | "scheduledChange" | "investigation")]
-      attr_accessor tags: ::Array[::Hash[::String, ::String]]
+      attr_accessor tags: ::Hash[::String, ::Array[::String]]
       attr_accessor event_status_codes: ::Array[("open" | "closed" | "upcoming")]
       attr_accessor personas: ::Array[("OPERATIONS" | "SECURITY" | "BILLING")]
       SENSITIVE: []
@@ -341,6 +447,11 @@ module Aws::Health
       SENSITIVE: []
     end
 
+    class OrganizationEntityAggregateFilter
+      attr_accessor tags: ::Hash[::String, ::Array[::String]]
+      SENSITIVE: []
+    end
+
     class OrganizationEvent
       attr_accessor arn: ::String
       attr_accessor service: ::String
@@ -387,6 +498,28 @@ module Aws::Health
       attr_accessor event_type_categories: ::Array[("issue" | "accountNotification" | "scheduledChange" | "investigation")]
       attr_accessor event_status_codes: ::Array[("open" | "closed" | "upcoming")]
       attr_accessor personas: ::Array[("OPERATIONS" | "SECURITY" | "BILLING")]
+      attr_accessor tags: ::Hash[::String, ::Array[::String]]
+      SENSITIVE: []
+    end
+
+    class OrganizationTag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      attr_accessor type: ("ORGANIZATION_RESOURCE_TAG" | "ORGANIZATION_ACCOUNT_TAG")
+      SENSITIVE: []
+    end
+
+    class OrganizationTagKey
+      attr_accessor key: ::String
+      attr_accessor enabled_for_event_bridge: bool
+      attr_accessor status: ("PENDING" | "ACTIVE")
+      SENSITIVE: []
+    end
+
+    class ResourceTagKey
+      attr_accessor key: ::String
+      attr_accessor enabled_for_event_bridge: bool
+      attr_accessor status: ("PENDING" | "ACTIVE")
       SENSITIVE: []
     end
 
@@ -401,6 +534,12 @@ module Aws::Health
 
     class ServiceLifecycleFilter
       attr_accessor service: ::String
+      SENSITIVE: []
+    end
+
+    class TagKeyForOrganization
+      attr_accessor key: ::String
+      attr_accessor enabled_for_event_bridge: bool
       SENSITIVE: []
     end
 

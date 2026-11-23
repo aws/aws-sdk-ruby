@@ -2870,10 +2870,10 @@ module Aws::GameLift
     #
     # @!attribute [rw] priority_configuration
     #   Custom settings to use when prioritizing destinations and locations
-    #   for game session placements. This configuration replaces the FleetIQ
-    #   default prioritization process. Priority types that are not
-    #   explicitly named will be automatically applied at the end of the
-    #   prioritization process.
+    #   for game session placements. This configuration replaces the default
+    #   prioritization process. Priority types that are not explicitly named
+    #   will be automatically applied at the end of the prioritization
+    #   process.
     #   @return [Types::PriorityConfiguration]
     #
     # @!attribute [rw] custom_event_data
@@ -2904,6 +2904,15 @@ module Aws::GameLift
     #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] log_configuration
+    #   An optional configuration that delivers game session placement
+    #   insight logs to one or more destinations of your choice. Use these
+    #   logs to diagnose why a game session placement is `FULFILLED`,
+    #   `CANCELLED`, `TIMED_OUT`, or `FAILED`, which locations were
+    #   evaluated, and the latency and cost factors that influenced each
+    #   decision.
+    #   @return [Types::GameSessionQueueLogConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/CreateGameSessionQueueInput AWS API Documentation
     #
     class CreateGameSessionQueueInput < Struct.new(
@@ -2915,7 +2924,8 @@ module Aws::GameLift
       :priority_configuration,
       :custom_event_data,
       :notification_target,
-      :tags)
+      :tags,
+      :log_configuration)
       SENSITIVE = [:custom_event_data]
       include Aws::Structure
     end
@@ -3822,29 +3832,62 @@ module Aws::GameLift
     class DeleteVpcPeeringConnectionOutput < Aws::EmptyStructure; end
 
     # Set of rules for processing a deployment for a container fleet update.
+    # For how Amazon GameLift Servers validates and rolls out a deployment,
+    # see [Container fleet deployments][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/gameliftservers/latest/developerguide/containers-deployment-validation.html
     #
     # @!attribute [rw] protection_strategy
     #   Determines how fleet deployment activity affects active game
-    #   sessions on the fleet. With protection, a deployment honors game
-    #   session protection, and delays actions that would interrupt a
-    #   protected active game session until the game session ends. Without
-    #   protection, deployment activity can shut down all running tasks,
-    #   including active game sessions, regardless of game session
-    #   protection.
+    #   sessions on the fleet. A protected game session can't be terminated
+    #   while it's active; a fleet sets the default protection for its new
+    #   game sessions with `NewGameSessionProtectionPolicy`.
+    #
+    #   * `WITH_PROTECTION` -- The deployment honors game session
+    #     protection, and delays actions that would interrupt a protected
+    #     active game session until the game session ends.
+    #
+    #   * `IGNORE_PROTECTION` -- The deployment replaces containers
+    #     regardless of game session activity, including active game
+    #     sessions. This option is useful during development and testing.
+    #
+    #   This setting also affects how long deployment validation can take.
+    #   When the fleet's `NewGameSessionProtectionPolicy` is
+    #   `FullProtection` and the deployment uses `WITH_PROTECTION`,
+    #   validation waits for protected game sessions to end.
+    #
+    #   Default value: `WITH_PROTECTION`
     #   @return [String]
     #
     # @!attribute [rw] minimum_healthy_percentage
-    #   Sets a minimum level of healthy tasks to maintain during deployment
-    #   activity.
+    #   Sets the minimum percentage of the fleet's game server container
+    #   groups to keep healthy during deployment activity. A low value
+    #   favors deployment speed; a high value favors game server
+    #   availability. For example, if the fleet runs 20 game server
+    #   container groups and this value is 75, Amazon GameLift Servers keeps
+    #   at least 15 of them healthy, so it replaces no more than 5 at a
+    #   time.
+    #
+    #   Default value: 75
     #   @return [Integer]
     #
     # @!attribute [rw] impairment_strategy
-    #   Determines what actions to take if a deployment fails. If the fleet
-    #   is multi-location, this strategy applies across all fleet locations.
-    #   With a rollback strategy, updated fleet instances are rolled back to
-    #   the last successful deployment. Alternatively, you can maintain a
-    #   few impaired containers for the purpose of debugging, while all
-    #   other tasks return to the last successful deployment.
+    #   Determines what actions to take if a deployment fails validation. If
+    #   the fleet is multi-location, this strategy applies across all fleet
+    #   locations.
+    #
+    #   * `ROLLBACK` -- Returns all of the fleet's containers to the last
+    #     successful deployment.
+    #
+    #   * `MAINTAIN` -- Keeps the containers that failed validation in place
+    #     so that you can inspect them, and returns all other containers to
+    #     the last successful deployment. Use this option when you're
+    #     deploying a container image that you want to be able to debug on
+    #     failure.
+    #
+    #   Default value: `MAINTAIN`
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DeploymentConfiguration AWS API Documentation
@@ -6322,22 +6365,40 @@ module Aws::GameLift
     #   @return [String]
     #
     # @!attribute [rw] deployment_status
-    #   The status of fleet deployment activity in the location.
+    #   The status of the fleet deployment. For per-location status, see
+    #   `LocationalDeployment`.
     #
-    #   * `IN_PROGRESS` -- The deployment is in progress.
+    #   * `PENDING` -- Amazon GameLift Servers has accepted the deployment
+    #     and hasn't started it yet.
     #
-    #   * `IMPAIRED` -- The deployment failed and the fleet has some
-    #     impaired containers.
+    #   * `IN_PROGRESS` -- The deployment is in progress. This status covers
+    #     validation as well as the replacement of the fleet's containers.
     #
-    #   * `COMPLETE` -- The deployment has completed successfully.
+    #   * `IMPAIRED` -- The deployment failed validation, and the fleet kept
+    #     the containers that failed validation so that you can inspect
+    #     them. A deployment reaches this status when its impairment
+    #     strategy is `MAINTAIN`.
+    #
+    #   * `COMPLETE` -- The deployment has completed successfully in every
+    #     fleet location.
     #
     #   * `ROLLBACK_IN_PROGRESS` -- The deployment failed and rollback has
-    #     been initiated.
+    #     been initiated. A deployment reaches this status when its
+    #     impairment strategy is `ROLLBACK`.
     #
-    #   * `ROLLBACK_IN_COMPLETE` -- The deployment failed and rollback has
-    #     been completed.
+    #   * `ROLLBACK_COMPLETE` -- The deployment failed and rollback has been
+    #     completed. The fleet is running the configuration from the last
+    #     successful deployment.
     #
-    #   * `CANCELLED` -- The deployment was cancelled.
+    #   * `CANCELLED` -- The deployment was cancelled because a new
+    #     deployment started for the same fleet.
+    #
+    #   For how to debug an impaired deployment or cancel one, see
+    #   [Container fleet deployments][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/gameliftservers/latest/developerguide/containers-deployment-validation.html
     #   @return [String]
     #
     # @!attribute [rw] deployment_configuration
@@ -7818,10 +7879,10 @@ module Aws::GameLift
     #
     # @!attribute [rw] priority_configuration
     #   Custom settings to use when prioritizing destinations and locations
-    #   for game session placements. This configuration replaces the FleetIQ
-    #   default prioritization process. Priority types that are not
-    #   explicitly named will be automatically applied at the end of the
-    #   prioritization process.
+    #   for game session placements. This configuration replaces the default
+    #   prioritization process. Priority types that are not explicitly named
+    #   will be automatically applied at the end of the prioritization
+    #   process.
     #   @return [Types::PriorityConfiguration]
     #
     # @!attribute [rw] custom_event_data
@@ -7839,6 +7900,15 @@ module Aws::GameLift
     #   [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/queue-notification.html
     #   @return [String]
     #
+    # @!attribute [rw] log_configuration
+    #   An optional configuration that delivers game session placement
+    #   insight logs to one or more destinations of your choice. Use these
+    #   logs to diagnose why a game session placement is `FULFILLED`,
+    #   `CANCELLED`, `TIMED_OUT`, or `FAILED`, which locations were
+    #   evaluated, and the latency and cost factors that influenced each
+    #   decision.
+    #   @return [Types::GameSessionQueueLogConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/GameSessionQueue AWS API Documentation
     #
     class GameSessionQueue < Struct.new(
@@ -7850,7 +7920,8 @@ module Aws::GameLift
       :filter_configuration,
       :priority_configuration,
       :custom_event_data,
-      :notification_target)
+      :notification_target,
+      :log_configuration)
       SENSITIVE = [:custom_event_data]
       include Aws::Structure
     end
@@ -7869,6 +7940,23 @@ module Aws::GameLift
     #
     class GameSessionQueueDestination < Struct.new(
       :destination_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A configuration that delivers game session placement insight logs to
+    # one or more destinations of your choice.
+    #
+    # @!attribute [rw] delivery_destinations
+    #   The destinations that receive game session placement insight logs
+    #   for the queue. You can specify up to 3 destinations. Each
+    #   destination must have a unique ARN.
+    #   @return [Array<Types::LogDeliveryDestination>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/GameSessionQueueLogConfiguration AWS API Documentation
+    #
+    class GameSessionQueueLogConfiguration < Struct.new(
+      :delivery_destinations)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9402,20 +9490,28 @@ module Aws::GameLift
     # @!attribute [rw] deployment_status
     #   The status of fleet deployment activity in the location.
     #
-    #   * `IN_PROGRESS` -- The deployment is in progress.
+    #   * `IN_PROGRESS` -- The deployment is in progress in the location.
+    #     This status covers validation as well as the replacement of the
+    #     location's containers.
     #
-    #   * `IMPAIRED` -- The deployment failed and the fleet has some
-    #     impaired containers.
+    #   * `IMPAIRED` -- The deployment failed validation in the location,
+    #     and the location kept the containers that failed validation so
+    #     that you can inspect them. A location reaches this status when the
+    #     deployment's impairment strategy is `MAINTAIN`.
     #
-    #   * `COMPLETE` -- The deployment has completed successfully.
+    #   * `COMPLETE` -- The deployment has completed successfully in the
+    #     location.
     #
     #   * `ROLLBACK_IN_PROGRESS` -- The deployment failed and rollback has
-    #     been initiated.
+    #     been initiated in the location. A location reaches this status
+    #     when the deployment's impairment strategy is `ROLLBACK`.
     #
-    #   * `ROLLBACK_IN_COMPLETE` -- The deployment failed and rollback has
-    #     been completed.
+    #   * `ROLLBACK_COMPLETE` -- The deployment failed and rollback has been
+    #     completed in the location. The location is running the
+    #     configuration from the last successful deployment.
     #
-    #   * `CANCELLED` -- The deployment was cancelled.
+    #   * `CANCELLED` -- The deployment was cancelled because a new
+    #     deployment started for the same fleet.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/LocationalDeployment AWS API Documentation
@@ -9461,6 +9557,50 @@ module Aws::GameLift
       :log_destination,
       :s3_bucket_name,
       :log_group_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A single destination that receives game session placement insight logs
+    # for a game session queue.
+    #
+    # <note markdown="1"> Amazon CloudWatch Logs vended log charges apply to each destination.
+    # Amazon S3 and Amazon Data Firehose destinations also incur their own
+    # service charges. For more information, see [Amazon CloudWatch
+    # Pricing][1].
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: http://aws.amazon.com/cloudwatch/pricing/
+    #
+    # @!attribute [rw] log_destination
+    #   The type of Amazon Web Services resource that receives the game
+    #   session placement insight logs. This value is required. Valid values
+    #   are:
+    #
+    #   * `CLOUDWATCH` -- an Amazon CloudWatch Logs log group.
+    #
+    #   * `S3` -- an Amazon S3 bucket.
+    #
+    #   * `FIREHOSE` -- an Amazon Data Firehose delivery stream.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_arn
+    #   The Amazon Resource Name (ARN) of the resource that receives the
+    #   game session placement insight logs. This resource must match the
+    #   type that you specify in `LogDestination`. This value is required
+    #   for `FIREHOSE` destinations. For `CLOUDWATCH` and `S3`, you can omit
+    #   this value; Amazon GameLift Servers then creates a destination
+    #   resource of the specified type on your behalf.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/LogDeliveryDestination AWS API Documentation
+    #
+    class LogDeliveryDestination < Struct.new(
+      :log_destination,
+      :destination_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13316,11 +13456,11 @@ module Aws::GameLift
     #
     # @!attribute [rw] priority_configuration
     #   Custom settings to use when prioritizing destinations and locations
-    #   for game session placements. This configuration replaces the FleetIQ
-    #   default prioritization process. Priority types that are not
-    #   explicitly named will be automatically applied at the end of the
-    #   prioritization process. To remove an existing priority
-    #   configuration, pass in an empty set.
+    #   for game session placements. This configuration replaces the default
+    #   prioritization process. Priority types that are not explicitly named
+    #   will be automatically applied at the end of the prioritization
+    #   process. To remove an existing priority configuration, pass in an
+    #   empty set.
     #   @return [Types::PriorityConfiguration]
     #
     # @!attribute [rw] custom_event_data
@@ -13338,6 +13478,16 @@ module Aws::GameLift
     #   [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/queue-notification.html
     #   @return [String]
     #
+    # @!attribute [rw] add_log_delivery_destinations
+    #   Log delivery destinations to add to the queue's log configuration
+    #   (`LogConfiguration`).
+    #   @return [Array<Types::LogDeliveryDestination>]
+    #
+    # @!attribute [rw] remove_log_delivery_destinations
+    #   Log delivery destinations to remove from the queue's log
+    #   configuration (`LogConfiguration`).
+    #   @return [Array<Types::LogDeliveryDestination>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/UpdateGameSessionQueueInput AWS API Documentation
     #
     class UpdateGameSessionQueueInput < Struct.new(
@@ -13348,7 +13498,9 @@ module Aws::GameLift
       :filter_configuration,
       :priority_configuration,
       :custom_event_data,
-      :notification_target)
+      :notification_target,
+      :add_log_delivery_destinations,
+      :remove_log_delivery_destinations)
       SENSITIVE = [:custom_event_data]
       include Aws::Structure
     end

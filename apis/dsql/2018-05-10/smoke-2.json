@@ -1,19 +1,6 @@
 {
   "version" : 2,
   "testCases" : [ {
-    "id" : "ListClustersSuccess",
-    "operationName" : "ListClusters",
-    "input" : { },
-    "expectation" : {
-      "success" : { }
-    },
-    "config" : {
-      "region" : "us-east-1",
-      "useFips" : false,
-      "useDualstack" : false,
-      "useAccountIdRouting" : true
-    }
-  }, {
     "id" : "GetClusterNotFound",
     "operationName" : "GetCluster",
     "input" : {
@@ -40,6 +27,19 @@
       "failure" : {
         "errorId" : "ResourceNotFoundException"
       }
+    },
+    "config" : {
+      "region" : "us-east-1",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
+    "id" : "ListClustersSuccess",
+    "operationName" : "ListClusters",
+    "input" : { },
+    "expectation" : {
+      "success" : { }
     },
     "config" : {
       "region" : "us-east-1",

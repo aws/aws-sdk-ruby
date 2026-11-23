@@ -607,6 +607,57 @@ module Aws::BCMPricingCalculator
       SENSITIVE: []
     end
 
+    class GetUsageLinesEstimatedCostError
+      attr_accessor key: ::String
+      attr_accessor service_code: ::String
+      attr_accessor usage_type: ::String
+      attr_accessor operation: ::String
+      attr_accessor error_code: ("BAD_REQUEST" | "NOT_FOUND" | "CONFLICT" | "INTERNAL_SERVER_ERROR")
+      attr_accessor error_message: ::String
+      SENSITIVE: []
+    end
+
+    class GetUsageLinesEstimatedCostEstimatedCost
+      attr_accessor usage_amount: ::Float
+      attr_accessor usage_unit: ::String
+      attr_accessor cost: ::Float
+      attr_accessor currency: ("USD")
+      SENSITIVE: []
+    end
+
+    class GetUsageLinesEstimatedCostInput
+      attr_accessor service_code: ::String
+      attr_accessor usage_type: ::String
+      attr_accessor operation: ::String
+      attr_accessor key: ::String
+      attr_accessor amount: ::Float
+      SENSITIVE: []
+    end
+
+    class GetUsageLinesEstimatedCostLineItem
+      attr_accessor key: ::String
+      attr_accessor service_code: ::String
+      attr_accessor usage_type: ::String
+      attr_accessor operation: ::String
+      attr_accessor estimated_cost: Types::GetUsageLinesEstimatedCostEstimatedCost
+      SENSITIVE: []
+    end
+
+    class GetUsageLinesEstimatedCostRequest
+      attr_accessor usage: ::Array[Types::GetUsageLinesEstimatedCostInput]
+      attr_accessor rate_type: ("BEFORE_DISCOUNTS" | "AFTER_DISCOUNTS" | "AFTER_DISCOUNTS_AND_COMMITMENTS")
+      SENSITIVE: []
+    end
+
+    class GetUsageLinesEstimatedCostResponse
+      attr_accessor rate_type: ("BEFORE_DISCOUNTS" | "AFTER_DISCOUNTS" | "AFTER_DISCOUNTS_AND_COMMITMENTS")
+      attr_accessor total_cost: ::Float
+      attr_accessor currency: ("USD")
+      attr_accessor line_items: ::Array[Types::GetUsageLinesEstimatedCostLineItem]
+      attr_accessor errors: ::Array[Types::GetUsageLinesEstimatedCostError]
+      SENSITIVE: []
+    end
+
     class GetWorkloadEstimateRequest
       attr_accessor identifier: ::String
       SENSITIVE: []

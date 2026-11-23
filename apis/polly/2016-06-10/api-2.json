@@ -13,6 +13,25 @@
     "auth":["aws.auth#sigv4"]
   },
   "operations":{
+    "CreateVoice":{
+      "name":"CreateVoice",
+      "http":{
+        "method":"POST",
+        "requestUri":"/v1/voices",
+        "responseCode":200
+      },
+      "input":{"shape":"CreateVoiceInput"},
+      "output":{"shape":"CreateVoiceOutput"},
+      "errors":[
+        {"shape":"ValidationException"},
+        {"shape":"ServiceFailureException"},
+        {"shape":"ServiceQuotaExceededException"},
+        {"shape":"AccessDeniedException"},
+        {"shape":"TooManyTagsException"},
+        {"shape":"InvalidTagParameterException"},
+        {"shape":"ThrottlingException"}
+      ]
+    },
     "DeleteLexicon":{
       "name":"DeleteLexicon",
       "http":{
@@ -26,6 +45,24 @@
         {"shape":"LexiconNotFoundException"},
         {"shape":"ServiceFailureException"}
       ]
+    },
+    "DeleteVoice":{
+      "name":"DeleteVoice",
+      "http":{
+        "method":"DELETE",
+        "requestUri":"/v1/voices/{VoiceId}",
+        "responseCode":200
+      },
+      "input":{"shape":"DeleteVoiceInput"},
+      "output":{"shape":"DeleteVoiceOutput"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ConflictException"},
+        {"shape":"ValidationException"},
+        {"shape":"ServiceFailureException"},
+        {"shape":"ThrottlingException"}
+      ],
+      "idempotent":true
     },
     "DescribeVoices":{
       "name":"DescribeVoices",
@@ -70,6 +107,23 @@
         {"shape":"SynthesisTaskNotFoundException"}
       ]
     },
+    "GetVoice":{
+      "name":"GetVoice",
+      "http":{
+        "method":"GET",
+        "requestUri":"/v1/voices/{VoiceId}",
+        "responseCode":200
+      },
+      "input":{"shape":"GetVoiceInput"},
+      "output":{"shape":"GetVoiceOutput"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ValidationException"},
+        {"shape":"ServiceFailureException"},
+        {"shape":"ThrottlingException"}
+      ],
+      "readonly":true
+    },
     "ListLexicons":{
       "name":"ListLexicons",
       "http":{
@@ -98,6 +152,24 @@
         {"shape":"ServiceFailureException"}
       ]
     },
+    "ListTagsForResource":{
+      "name":"ListTagsForResource",
+      "http":{
+        "method":"GET",
+        "requestUri":"/v1/listTagsForResource/",
+        "responseCode":200
+      },
+      "input":{"shape":"ListTagsForResourceInput"},
+      "output":{"shape":"ListTagsForResourceOutput"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ValidationException"},
+        {"shape":"InvalidTagParameterException"},
+        {"shape":"ServiceFailureException"},
+        {"shape":"ThrottlingException"}
+      ],
+      "readonly":true
+    },
     "PutLexicon":{
       "name":"PutLexicon",
       "http":{
@@ -114,7 +186,10 @@
         {"shape":"LexiconSizeExceededException"},
         {"shape":"MaxLexemeLengthExceededException"},
         {"shape":"MaxLexiconsNumberExceededException"},
-        {"shape":"ServiceFailureException"}
+        {"shape":"ValidationException"},
+        {"shape":"TooManyTagsException"},
+        {"shape":"ServiceFailureException"},
+        {"shape":"InvalidTagParameterException"}
       ]
     },
     "StartSpeechSynthesisStream":{
@@ -129,7 +204,9 @@
         {"shape":"ValidationException"},
         {"shape":"ServiceQuotaExceededException"},
         {"shape":"ServiceFailureException"},
-        {"shape":"ThrottlingException"}
+        {"shape":"ThrottlingException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ConflictException"}
       ]
     },
     "StartSpeechSynthesisTask":{
@@ -153,7 +230,9 @@
         {"shape":"ServiceFailureException"},
         {"shape":"MarksNotSupportedForFormatException"},
         {"shape":"SsmlMarksNotSupportedForTextTypeException"},
-        {"shape":"LanguageNotSupportedException"}
+        {"shape":"LanguageNotSupportedException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ConflictException"}
       ]
     },
     "SynthesizeSpeech":{
@@ -174,12 +253,63 @@
         {"shape":"MarksNotSupportedForFormatException"},
         {"shape":"SsmlMarksNotSupportedForTextTypeException"},
         {"shape":"LanguageNotSupportedException"},
-        {"shape":"EngineNotSupportedException"}
+        {"shape":"EngineNotSupportedException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ConflictException"}
+      ]
+    },
+    "TagResource":{
+      "name":"TagResource",
+      "http":{
+        "method":"POST",
+        "requestUri":"/v1/tagResource",
+        "responseCode":200
+      },
+      "input":{"shape":"TagResourceInput"},
+      "output":{"shape":"TagResourceOutput"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"TooManyTagsException"},
+        {"shape":"ValidationException"},
+        {"shape":"InvalidTagParameterException"},
+        {"shape":"ServiceFailureException"},
+        {"shape":"ThrottlingException"}
+      ]
+    },
+    "UntagResource":{
+      "name":"UntagResource",
+      "http":{
+        "method":"POST",
+        "requestUri":"/v1/untagResource",
+        "responseCode":200
+      },
+      "input":{"shape":"UntagResourceInput"},
+      "output":{"shape":"UntagResourceOutput"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ValidationException"},
+        {"shape":"InvalidTagParameterException"},
+        {"shape":"ServiceFailureException"},
+        {"shape":"ThrottlingException"}
       ]
     }
   },
   "shapes":{
+    "AccessDeniedException":{
+      "type":"structure",
+      "members":{
+        "Message":{"shape":"ServiceErrorMessage"}
+      },
+      "error":{"httpStatusCode":403},
+      "exception":true,
+      "synthetic":true
+    },
     "Alphabet":{"type":"string"},
+    "AmazonResourceName":{
+      "type":"string",
+      "max":1011,
+      "min":1
+    },
     "AudioChunk":{"type":"blob"},
     "AudioEvent":{
       "type":"structure",
@@ -191,19 +321,107 @@
       },
       "event":true
     },
+    "AudioFormat":{
+      "type":"string",
+      "enum":[
+        "wav",
+        "flac",
+        "ogg_vorbis",
+        "mp3"
+      ]
+    },
     "AudioStream":{
       "type":"blob",
       "streaming":true
     },
     "AvailabilityErrorMessage":{"type":"string"},
+    "ClientToken":{
+      "type":"string",
+      "max":64,
+      "min":1,
+      "pattern":"^[!-~]+$"
+    },
     "CloseStreamEvent":{
       "type":"structure",
       "members":{},
       "event":true
     },
+    "ConflictException":{
+      "type":"structure",
+      "required":[
+        "message",
+        "resourceId",
+        "resourceType"
+      ],
+      "members":{
+        "message":{"shape":"ErrorMessage"},
+        "resourceId":{"shape":"ResourceId"},
+        "resourceType":{"shape":"ResourceType"}
+      },
+      "error":{"httpStatusCode":409},
+      "exception":true
+    },
     "ContentType":{"type":"string"},
     "CoralAvailabilityThrottledResource":{"type":"string"},
     "CoralAvailabilityThrottlingReason":{"type":"string"},
+    "CreateVoiceInput":{
+      "type":"structure",
+      "required":[
+        "Name",
+        "LanguageCode",
+        "TermsAccepted",
+        "VoiceCreationData"
+      ],
+      "members":{
+        "Name":{"shape":"CustomVoiceName"},
+        "LanguageCode":{"shape":"CustomVoiceLanguageCode"},
+        "TermsAccepted":{"shape":"TermsAccepted"},
+        "VoiceCreationData":{"shape":"VoiceCreationData"},
+        "CustomerManagedEncryption":{"shape":"CustomerManagedEncryption"},
+        "Tags":{"shape":"TagMap"},
+        "ClientToken":{
+          "shape":"ClientToken",
+          "idempotencyToken":true
+        }
+      }
+    },
+    "CreateVoiceOutput":{
+      "type":"structure",
+      "members":{
+        "Voice":{"shape":"Voice"}
+      }
+    },
+    "CustomVoiceId":{
+      "type":"string",
+      "max":32,
+      "pattern":"^vc-[0-9a-f]+$"
+    },
+    "CustomVoiceLanguageCode":{
+      "type":"string",
+      "enum":[
+        "de-DE",
+        "en-US",
+        "es-US",
+        "fr-FR",
+        "hi-IN",
+        "it-IT",
+        "pt-BR"
+      ]
+    },
+    "CustomVoiceName":{
+      "type":"string",
+      "max":64,
+      "min":1,
+      "pattern":"^[a-zA-Z0-9_-]+$"
+    },
+    "CustomerManagedEncryption":{
+      "type":"structure",
+      "required":["KmsKeyArn"],
+      "members":{
+        "KmsKeyArn":{"shape":"KmsKeyArn"},
+        "EncryptionContext":{"shape":"EncryptionContext"}
+      }
+    },
     "DateTime":{"type":"timestamp"},
     "DeleteLexiconInput":{
       "type":"structure",
@@ -217,6 +435,21 @@
       }
     },
     "DeleteLexiconOutput":{
+      "type":"structure",
+      "members":{}
+    },
+    "DeleteVoiceInput":{
+      "type":"structure",
+      "required":["VoiceId"],
+      "members":{
+        "VoiceId":{
+          "shape":"CustomVoiceId",
+          "location":"uri",
+          "locationName":"VoiceId"
+        }
+      }
+    },
+    "DeleteVoiceOutput":{
       "type":"structure",
       "members":{}
     },
@@ -252,6 +485,22 @@
         "NextToken":{"shape":"NextToken"}
       }
     },
+    "EncryptionContext":{
+      "type":"map",
+      "key":{"shape":"EncryptionContextKey"},
+      "value":{"shape":"EncryptionContextValue"},
+      "max":10
+    },
+    "EncryptionContextKey":{
+      "type":"string",
+      "max":128,
+      "min":1
+    },
+    "EncryptionContextValue":{
+      "type":"string",
+      "max":256,
+      "min":1
+    },
     "Engine":{
       "type":"string",
       "enum":[
@@ -274,6 +523,7 @@
       "exception":true
     },
     "ErrorMessage":{"type":"string"},
+    "ExceptionMessage":{"type":"string"},
     "FlushStreamConfiguration":{
       "type":"structure",
       "members":{
@@ -321,6 +571,23 @@
       "type":"structure",
       "members":{
         "SynthesisTask":{"shape":"SynthesisTask"}
+      }
+    },
+    "GetVoiceInput":{
+      "type":"structure",
+      "required":["VoiceId"],
+      "members":{
+        "VoiceId":{
+          "shape":"CustomVoiceId",
+          "location":"uri",
+          "locationName":"VoiceId"
+        }
+      }
+    },
+    "GetVoiceOutput":{
+      "type":"structure",
+      "members":{
+        "Voice":{"shape":"Voice"}
       }
     },
     "IncludeAdditionalLanguageCodes":{"type":"boolean"},
@@ -380,6 +647,14 @@
       "error":{"httpStatusCode":400},
       "exception":true
     },
+    "InvalidTagParameterException":{
+      "type":"structure",
+      "members":{
+        "message":{"shape":"ExceptionMessage"}
+      },
+      "error":{"httpStatusCode":400},
+      "exception":true
+    },
     "InvalidTaskIdException":{
       "type":"structure",
       "members":{
@@ -387,6 +662,12 @@
       },
       "error":{"httpStatusCode":400},
       "exception":true
+    },
+    "KmsKeyArn":{
+      "type":"string",
+      "max":2048,
+      "min":20,
+      "pattern":"^arn:aws(-(cn|iso(-b)?|us-gov|eusc))?:kms:[a-z0-9_-]{1,50}:\\d{12}:key/[a-zA-Z0-9-]+$"
     },
     "LanguageCode":{
       "type":"string",
@@ -553,6 +834,23 @@
         "SynthesisTasks":{"shape":"SynthesisTasks"}
       }
     },
+    "ListTagsForResourceInput":{
+      "type":"structure",
+      "required":["ResourceArn"],
+      "members":{
+        "ResourceArn":{
+          "shape":"AmazonResourceName",
+          "location":"querystring",
+          "locationName":"arn"
+        }
+      }
+    },
+    "ListTagsForResourceOutput":{
+      "type":"structure",
+      "members":{
+        "Tags":{"shape":"TagMap"}
+      }
+    },
     "MarksNotSupportedForFormatException":{
       "type":"structure",
       "members":{
@@ -620,7 +918,8 @@
           "location":"uri",
           "locationName":"LexiconName"
         },
-        "Content":{"shape":"LexiconContent"}
+        "Content":{"shape":"LexiconContent"},
+        "Tags":{"shape":"TagMap"}
       }
     },
     "PutLexiconOutput":{
@@ -631,15 +930,74 @@
       "type":"string",
       "enum":[
         "input-stream-inbound-event-timeout",
-        "input-stream-timeout"
+        "input-stream-timeout",
+        "custom-voice-max-count"
       ]
     },
+    "Recording":{
+      "type":"structure",
+      "required":[
+        "Format",
+        "Data"
+      ],
+      "members":{
+        "Format":{"shape":"AudioFormat"},
+        "Data":{"shape":"RecordingData"}
+      }
+    },
+    "RecordingBytes":{
+      "type":"blob",
+      "max":5242880,
+      "sensitive":true
+    },
+    "RecordingData":{
+      "type":"structure",
+      "members":{
+        "S3Url":{"shape":"S3Url"},
+        "Bytes":{"shape":"RecordingBytes"}
+      }
+    },
+    "RecordingList":{
+      "type":"list",
+      "member":{"shape":"Recording"},
+      "max":10,
+      "min":1
+    },
     "RequestCharacters":{"type":"integer"},
+    "ResourceId":{"type":"string"},
+    "ResourceNotFoundException":{
+      "type":"structure",
+      "required":[
+        "message",
+        "resourceId",
+        "resourceType"
+      ],
+      "members":{
+        "message":{"shape":"ErrorMessage"},
+        "resourceId":{"shape":"ResourceId"},
+        "resourceType":{"shape":"ResourceType"}
+      },
+      "error":{"httpStatusCode":404},
+      "exception":true
+    },
+    "ResourceType":{
+      "type":"string",
+      "enum":[
+        "lexicon",
+        "voice"
+      ]
+    },
+    "S3Url":{
+      "type":"string",
+      "max":1024,
+      "pattern":"^s3://[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9]/.+$"
+    },
     "SampleRate":{"type":"string"},
     "ServiceCode":{
       "type":"string",
       "enum":["polly"]
     },
+    "ServiceErrorMessage":{"type":"string"},
     "ServiceFailureException":{
       "type":"structure",
       "members":{
@@ -789,6 +1147,7 @@
         "SynthesisTask":{"shape":"SynthesisTask"}
       }
     },
+    "StatusReason":{"type":"string"},
     "StreamClosedEvent":{
       "type":"structure",
       "members":{
@@ -864,6 +1223,44 @@
       },
       "payload":"AudioStream"
     },
+    "TagKey":{
+      "type":"string",
+      "max":128,
+      "min":1
+    },
+    "TagKeyList":{
+      "type":"list",
+      "member":{"shape":"TagKey"},
+      "max":200,
+      "min":1
+    },
+    "TagMap":{
+      "type":"map",
+      "key":{"shape":"TagKey"},
+      "value":{"shape":"TagValue"},
+      "max":200,
+      "min":1
+    },
+    "TagResourceInput":{
+      "type":"structure",
+      "required":[
+        "ResourceArn",
+        "Tags"
+      ],
+      "members":{
+        "ResourceArn":{"shape":"AmazonResourceName"},
+        "Tags":{"shape":"TagMap"}
+      }
+    },
+    "TagResourceOutput":{
+      "type":"structure",
+      "members":{}
+    },
+    "TagValue":{
+      "type":"string",
+      "max":256,
+      "min":0
+    },
     "TaskId":{
       "type":"string",
       "pattern":"^[a-zA-Z0-9_-]{1,100}$"
@@ -878,6 +1275,7 @@
       ]
     },
     "TaskStatusReason":{"type":"string"},
+    "TermsAccepted":{"type":"boolean"},
     "Text":{"type":"string"},
     "TextEvent":{
       "type":"structure",
@@ -925,6 +1323,14 @@
       "type":"list",
       "member":{"shape":"ThrottlingReason"}
     },
+    "TooManyTagsException":{
+      "type":"structure",
+      "members":{
+        "message":{"shape":"ExceptionMessage"}
+      },
+      "error":{"httpStatusCode":400},
+      "exception":true
+    },
     "UnsupportedPlsAlphabetException":{
       "type":"structure",
       "members":{
@@ -940,6 +1346,21 @@
       },
       "error":{"httpStatusCode":400},
       "exception":true
+    },
+    "UntagResourceInput":{
+      "type":"structure",
+      "required":[
+        "ResourceArn",
+        "TagKeys"
+      ],
+      "members":{
+        "ResourceArn":{"shape":"AmazonResourceName"},
+        "TagKeys":{"shape":"TagKeyList"}
+      }
+    },
+    "UntagResourceOutput":{
+      "type":"structure",
+      "members":{}
     },
     "ValidationException":{
       "type":"structure",
@@ -978,19 +1399,39 @@
         "unsupportedOperation",
         "fieldValidationFailed",
         "other",
-        "invalidInboundEvent"
+        "invalidInboundEvent",
+        "kmsKeyNotFound",
+        "kmsKeyUnusable"
       ]
     },
     "Voice":{
       "type":"structure",
       "members":{
+        "Arn":{"shape":"VoiceArn"},
         "Gender":{"shape":"Gender"},
         "Id":{"shape":"VoiceId"},
         "LanguageCode":{"shape":"LanguageCode"},
         "LanguageName":{"shape":"LanguageName"},
         "Name":{"shape":"VoiceName"},
+        "Origin":{"shape":"VoiceOrigin"},
+        "Status":{"shape":"VoiceStatus"},
+        "StatusReason":{"shape":"StatusReason"},
         "AdditionalLanguageCodes":{"shape":"LanguageCodeList"},
-        "SupportedEngines":{"shape":"EngineList"}
+        "SupportedEngines":{"shape":"EngineList"},
+        "VoiceCreationData":{"shape":"VoiceCreationData"},
+        "CustomerManagedEncryption":{"shape":"CustomerManagedEncryption"},
+        "CreationTime":{"shape":"DateTime"}
+      }
+    },
+    "VoiceArn":{
+      "type":"string",
+      "pattern":"^arn:aws(-(cn|iso(-b)?|us-gov|eusc))?:polly:[a-z0-9_-]{1,50}:\\d{12}:voice/[a-zA-Z0-9_-]+$"
+    },
+    "VoiceCreationData":{
+      "type":"structure",
+      "required":["Recordings"],
+      "members":{
+        "Recordings":{"shape":"RecordingList"}
       }
     },
     "VoiceId":{
@@ -1118,6 +1559,21 @@
       "type":"list",
       "member":{"shape":"Voice"}
     },
-    "VoiceName":{"type":"string"}
+    "VoiceName":{"type":"string"},
+    "VoiceOrigin":{
+      "type":"string",
+      "enum":[
+        "aws",
+        "customer"
+      ]
+    },
+    "VoiceStatus":{
+      "type":"string",
+      "enum":[
+        "pending",
+        "active",
+        "failed"
+      ]
+    }
   }
 }

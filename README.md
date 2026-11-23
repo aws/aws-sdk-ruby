@@ -125,6 +125,23 @@ Aws.config[:credentials] = Aws::Credentials.new(
 For more information on how to configure credentials, see the developer guide
 for [configuring AWS SDK for Ruby](https://docs.aws.amazon.com/sdk-for-ruby/v3/developer-guide/setup-config.html).
 
+## Eager loading
+
+The SDK normally loads service constants when your application first uses them.
+Applications that want to load SDK constants during startup can opt in after
+requiring their service gems:
+
+```ruby
+require 'aws-sdk-s3'
+require 'aws-sdk-sqs'
+
+Aws.eager_load!
+```
+
+`Aws.eager_load!` loads SDK constants from gems that were required before the
+call. It does not make any AWS service requests. Requiring only the service
+gems your application uses limits the code loaded into memory.
+
 ## API Clients
 
 Construct a service client to make API calls. Each client provides a 1-to-1
@@ -306,9 +323,11 @@ RubyGems.org page under "LINKS" section.
 
 | Service Name                                          | Service Module                           | gem_name                                    | API Version |
 | ----------------------------------------------------- | ---------------------------------------- | ------------------------------------------- | ----------- |
+| APIPortal                                             | Aws::APIPortal                           | aws-sdk-apiportal                           | 2026-04-30  |
 | ARC - Region switch                                   | Aws::ARCRegionswitch                     | aws-sdk-arcregionswitch                     | 2022-07-26  |
 | AWS AI Ops                                            | Aws::AIOps                               | aws-sdk-aiops                               | 2018-05-10  |
 | AWS ARC - Zonal Shift                                 | Aws::ARCZonalShift                       | aws-sdk-arczonalshift                       | 2022-10-30  |
+| AWS Abuse Signal API                                  | Aws::AbuseSignal                         | aws-sdk-abusesignal                         | 2026-01-12  |
 | AWS Account                                           | Aws::Account                             | aws-sdk-account                             | 2021-02-01  |
 | AWS Amplify                                           | Aws::Amplify                             | aws-sdk-amplify                             | 2017-07-25  |
 | AWS Amplify UI Builder                                | Aws::AmplifyUIBuilder                    | aws-sdk-amplifyuibuilder                    | 2021-08-11  |
@@ -432,6 +451,7 @@ RubyGems.org page under "LINKS" section.
 | AWS Organizations                                     | Aws::Organizations                       | aws-sdk-organizations                       | 2016-11-28  |
 | AWS Outposts                                          | Aws::Outposts                            | aws-sdk-outposts                            | 2019-12-03  |
 | AWS Parallel Computing Service                        | Aws::PCS                                 | aws-sdk-pcs                                 | 2023-02-10  |
+| AWS Payments                                          | Aws::Payments                            | aws-sdk-payments                            | 2026-09-23  |
 | AWS Performance Insights                              | Aws::PI                                  | aws-sdk-pi                                  | 2018-02-27  |
 | AWS Price List Service                                | Aws::Pricing                             | aws-sdk-pricing                             | 2017-10-15  |
 | AWS Proton                                            | Aws::Proton                              | aws-sdk-proton                              | 2020-07-20  |
@@ -491,6 +511,8 @@ RubyGems.org page under "LINKS" section.
 | AWSServerlessApplicationRepository                    | Aws::ServerlessApplicationRepository     | aws-sdk-serverlessapplicationrepository     | 2017-09-08  |
 | Access Analyzer                                       | Aws::AccessAnalyzer                      | aws-sdk-accessanalyzer                      | 2019-11-01  |
 | Account Access                                        | Aws::AccountAccess                       | aws-sdk-accountaccess                       | 2018-05-10  |
+| Account Access Runtime                                | Aws::AccountAccessRuntime                | aws-sdk-accountaccessruntime                | 2018-05-10  |
+| Agent Discovery                                       | Aws::AgentDiscovery                      | aws-sdk-agentdiscovery                      | 2022-07-26  |
 | Agent Registry                                        | Aws::AgentRegistry                       | aws-sdk-agentregistry                       | 2025-12-01  |
 | Agent Registry Control                                | Aws::AgentRegistryControl                | aws-sdk-agentregistrycontrol                | 2025-12-01  |
 | Agents for Amazon Bedrock                             | Aws::BedrockAgent                        | aws-sdk-bedrockagent                        | 2023-06-05  |
@@ -538,6 +560,7 @@ RubyGems.org page under "LINKS" section.
 | Amazon Connect Contact Lens                           | Aws::ConnectContactLens                  | aws-sdk-connectcontactlens                  | 2020-08-21  |
 | Amazon Connect Customer Profiles                      | Aws::CustomerProfiles                    | aws-sdk-customerprofiles                    | 2020-08-15  |
 | Amazon Connect Participant Service                    | Aws::ConnectParticipant                  | aws-sdk-connectparticipant                  | 2018-09-07  |
+| Amazon Connect Scheduling                             | Aws::ConnectScheduling                   | aws-sdk-connectscheduling                   | 2026-07-16  |
 | Amazon Connect Service                                | Aws::Connect                             | aws-sdk-connect                             | 2017-08-08  |
 | Amazon Connect Wisdom Service                         | Aws::ConnectWisdomService                | aws-sdk-connectwisdomservice                | 2020-10-19  |
 | Amazon Data Lifecycle Manager                         | Aws::DLM                                 | aws-sdk-dlm                                 | 2018-01-12  |
@@ -614,6 +637,7 @@ RubyGems.org page under "LINKS" section.
 | Amazon NeptuneData                                    | Aws::Neptunedata                         | aws-sdk-neptunedata                         | 2023-08-01  |
 | Amazon Omics                                          | Aws::Omics                               | aws-sdk-omics                               | 2022-11-28  |
 | Amazon OpenSearch Ingestion                           | Aws::OSIS                                | aws-sdk-osis                                | 2022-01-01  |
+| Amazon OpenSearch Memory                              | Aws::OpenSearchMemory                    | aws-sdk-opensearchmemory                    | 2026-08-24  |
 | Amazon OpenSearch Service                             | Aws::OpenSearchService                   | aws-sdk-opensearchservice                   | 2021-01-01  |
 | Amazon Personalize                                    | Aws::Personalize                         | aws-sdk-personalize                         | 2018-05-22  |
 | Amazon Personalize Events                             | Aws::PersonalizeEvents                   | aws-sdk-personalizeevents                   | 2018-03-22  |
@@ -639,6 +663,8 @@ RubyGems.org page under "LINKS" section.
 | Amazon S3 Vectors                                     | Aws::S3Vectors                           | aws-sdk-s3vectors                           | 2025-07-15  |
 | Amazon S3 on Outposts                                 | Aws::S3Outposts                          | aws-sdk-s3outposts                          | 2017-07-25  |
 | Amazon SageMaker Feature Store Runtime                | Aws::SageMakerFeatureStoreRuntime        | aws-sdk-sagemakerfeaturestoreruntime        | 2020-07-01  |
+| Amazon SageMaker Gateway Runtime                      | Aws::SageMakerGatewayRuntime             | aws-sdk-sagemakergatewayruntime             | 2026-10-01  |
+| Amazon SageMaker Inference Router Runtime             | Aws::SageMakerInferenceRouterRuntime     | aws-sdk-sagemakerinferencerouterruntime     | 2026-01-01  |
 | Amazon SageMaker Metrics Service                      | Aws::SageMakerMetrics                    | aws-sdk-sagemakermetrics                    | 2022-09-30  |
 | Amazon SageMaker Runtime                              | Aws::SageMakerRuntime                    | aws-sdk-sagemakerruntime                    | 2017-05-13  |
 | Amazon SageMaker Runtime HTTP2                        | Aws::SageMakerRuntimeHTTP2               | aws-sdk-sagemakerruntimehttp2               | 2025-10-01  |
@@ -717,6 +743,7 @@ RubyGems.org page under "LINKS" section.
 | Partner Central Account API                           | Aws::PartnerCentralAccount               | aws-sdk-partnercentralaccount               | 2025-04-04  |
 | Partner Central Benefits API                          | Aws::PartnerCentralBenefits              | aws-sdk-partnercentralbenefits              | 2018-05-10  |
 | Partner Central Channel API                           | Aws::PartnerCentralChannel               | aws-sdk-partnercentralchannel               | 2024-03-18  |
+| Partner Central Marketing API                         | Aws::PartnerCentralMarketing             | aws-sdk-partnercentralmarketing             | 2026-05-31  |
 | Partner Central Revenue Measurement API               | Aws::PartnerCentralRevenueMeasurement    | aws-sdk-partnercentralrevenuemeasurement    | 2022-07-26  |
 | Partner Central Selling API                           | Aws::PartnerCentralSelling               | aws-sdk-partnercentralselling               | 2022-07-26  |
 | Payment Cryptography Control Plane                    | Aws::PaymentCryptography                 | aws-sdk-paymentcryptography                 | 2021-09-14  |

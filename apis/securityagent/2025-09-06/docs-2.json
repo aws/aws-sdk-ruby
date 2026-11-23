@@ -30,7 +30,7 @@
     "CreateApplication": "<p>Creates a new application. An application is the top-level organizational unit that supports IAM Identity Center integration.</p>",
     "CreateCodeReview": "<p>Creates a new code review configuration in an agent space. A code review defines the parameters for automated security-focused code analysis.</p>",
     "CreateIntegration": "<p>Creates a new integration with a third-party provider, such as GitHub, for code review and remediation.</p>",
-    "CreateMembership": "<p>Creates a new membership, granting a user access to an agent space within an application.</p>",
+    "CreateMembership": "<p>Creates a new membership, granting a user or group access to an agent space within an application.</p>",
     "CreatePentest": "<p>Creates a new pentest configuration in an agent space. A pentest defines the security test parameters, including target assets, risk type exclusions, and logging configuration.</p>",
     "CreatePrivateConnection": "<p>Creates a private connection for reaching a self-hosted provider instance over private networking using Amazon VPC Lattice.</p>",
     "CreateSecurityRequirementPack": "<p>Creates a customer managed security requirement pack.</p>",
@@ -41,7 +41,7 @@
     "DeleteApplication": "<p>Deletes an application and its associated configuration, including IAM Identity Center settings.</p>",
     "DeleteArtifact": "<p>Deletes an artifact from an agent space.</p>",
     "DeleteIntegration": "<p>Deletes an integration with a third-party provider.</p>",
-    "DeleteMembership": "<p>Deletes a membership, revoking a user's access to an agent space.</p>",
+    "DeleteMembership": "<p>Deletes a membership, revoking a user's or group's access to an agent space.</p>",
     "DeletePrivateConnection": "<p>Deletes a private connection.</p>",
     "DeleteSecurityRequirementPack": "<p>Deletes a customer managed security requirement pack and all its associated security requirements.</p>",
     "DeleteTargetDomain": "<p>Deletes a target domain registration. After deletion, the domain can no longer be used for penetration testing.</p>",
@@ -76,6 +76,7 @@
     "ListThreatModelJobs": "<p>Returns a paginated list of threat model job summaries for the specified threat model.</p>",
     "ListThreatModels": "<p>Returns a paginated list of threat model summaries for the specified agent space.</p>",
     "ListThreats": "<p>Returns a paginated list of threats for a threat model job.</p>",
+    "ResumePentestJob": "<p>Resumes a stopped or paused pentest job from its last saved checkpoint. The job keeps its pentest job identifier and continues as a new version, keeping the findings and progress from earlier runs. You can resume a job within 7 days of when it was created.</p>",
     "StartCodeRemediation": "<p>Initiates code remediation for one or more security findings. This creates pull requests in integrated repositories to fix the identified vulnerabilities.</p>",
     "StartCodeReviewJob": "<p>Starts a new code review job for a code review configuration. The job executes the security-focused code analysis defined in the code review.</p>",
     "StartPentestJob": "<p>Starts a new pentest job for a pentest configuration. The job executes the security tests defined in the pentest.</p>",
@@ -139,7 +140,8 @@
       "base": null,
       "refs": {
         "Assets$actors": "<p>The list of actors used during penetration testing.</p>",
-        "PentestJob$actors": "<p>The list of actors used during the pentest job.</p>"
+        "PentestJob$actors": "<p>The list of actors used during the pentest job.</p>",
+        "ResumePentestJobInput$actors": "<p>The actors to use for the resumed job. When specified, replaces the actors the job used before it stopped.</p>"
       }
     },
     "ActorMessage": {
@@ -736,7 +738,9 @@
         "JiraResourceCapabilities$createIssue": "<p>Whether to create issues in the integrated jira project.</p>",
         "JiraResourceCapabilities$commentIssue": "<p>Whether to post comments on issues in the integrated jira project.</p>",
         "ReportFilters$annotationNotes": "<p>Whether to include reviewer annotation notes under each finding.</p>",
-        "ReportFilters$complianceReport": "<p>Whether to include the compliance-ready report additions.</p>"
+        "ReportFilters$complianceReport": "<p>Whether to include the compliance-ready report additions.</p>",
+        "ResumePentestJobInput$copyConfigFromPentest": "<p>Specifies whether to copy the current actors, network traffic configuration, VPC configuration, and maximum task hours from the pentest to the resumed job. The job's scope, such as its target endpoints, is never changed. Values you specify in this request take precedence over copied values.</p>",
+        "StopPentestJobInput$pause": "<p>Specifies whether to pause the job instead of stopping it. A paused job moves to <code>PAUSING</code> and then to <code>PAUSED</code>, and you can resume it later with <code>ResumePentestJob</code>. You can pause only a job that is <code>IN_PROGRESS</code>. The default is false.</p>"
       }
     },
     "CaCertificatePem": {
@@ -786,8 +790,10 @@
     "CleanUpStrategy": {
       "base": "<p>Strategy for handling resources created during a pentest.</p>",
       "refs": {
+        "CreatePentestInput$cleanUpStrategy": "<p>The strategy for cleaning up resources after pentest job completion. Valid values are BEST_EFFORT_DELETE and RETAIN_ALL.</p>",
         "Pentest$cleanUpStrategy": "<p>Strategy for cleaning up resources after pentest job completion.</p>",
-        "PentestJob$cleanUpStrategy": "<p>Strategy for cleaning up resources after pentest job completion.</p>"
+        "PentestJob$cleanUpStrategy": "<p>Strategy for cleaning up resources after pentest job completion.</p>",
+        "UpdatePentestInput$cleanUpStrategy": "<p>The updated strategy for cleaning up resources after pentest job completion.</p>"
       }
     },
     "ClientCertificate": {
@@ -862,6 +868,12 @@
         "Finding$codeLocations": "<p>The file locations involved in the vulnerability, as reported by the code scanner.</p>"
       }
     },
+    "CodeRemediationJobStatus": {
+      "base": "<p>Code remediation status for a particular repository.</p>",
+      "refs": {
+        "CodeRemediationTaskDetails$status": "<p>The current status of the code remediation task for the particular repository.</p>"
+      }
+    },
     "CodeRemediationStrategy": {
       "base": "<p>Strategy for automated code remediation.</p>",
       "refs": {
@@ -892,13 +904,13 @@
     "CodeRemediationTaskDetailsList": {
       "base": null,
       "refs": {
-        "CodeRemediationTask$taskDetails": "<p>The list of details for the code remediation task, including repository name, code diff link, and pull request link.</p>"
+        "CodeRemediationTask$taskDetails": "<p>The list of details for a code remediation task, including repository names, status of code remediation for each associated repository, and generated code diff or pull request links.</p>"
       }
     },
     "CodeRemediationTaskStatus": {
       "base": "<p>Code remediation task status.</p>",
       "refs": {
-        "CodeRemediationTask$status": "<p>The current status of the code remediation task.</p>"
+        "CodeRemediationTask$status": "<p>The current status of the overall code remediation task.</p>"
       }
     },
     "CodeReview": {
@@ -1366,6 +1378,7 @@
         "CreatePentestInput$maxTaskHours": "<p>The maximum number of billable task hours allowed for jobs started from this pentest. Must be a positive number. If not set, jobs run to completion with no budget cap.</p>",
         "Pentest$maxTaskHours": "<p>The maximum number of billable task hours allowed for jobs started from this pentest. If a job reaches the configured limit, it is gracefully stopped. If not set, jobs run to completion with no budget cap.</p>",
         "PentestJob$maxTaskHours": "<p>The maximum number of billable task hours allowed for this pentest job. If the cumulative task hours reach this limit, the job is gracefully stopped.</p>",
+        "ResumePentestJobInput$maxTaskHours": "<p>The maximum number of task hours for the resumed job. To resume a job that stopped because it reached its task hours limit, specify a higher value.</p>",
         "Task$taskHours": "<p>The number of active work hours consumed by the task during execution.</p>",
         "TaskSummary$taskHours": "<p>The number of active work hours consumed by the task during execution.</p>",
         "UpdateCodeReviewInput$maxTaskHours": "<p>The updated maximum number of billable task hours allowed for jobs started from this code review.</p>",
@@ -1566,6 +1579,12 @@
       "base": "<p>The type of GitLab access token.</p>",
       "refs": {
         "GitLabIntegrationInput$tokenType": "<p>The type of GitLab access token provided in accessToken.</p>"
+      }
+    },
+    "GroupMetadata": {
+      "base": "<p>Contains metadata about an IAM Identity Center group member, including the group display name and description.</p>",
+      "refs": {
+        "MemberMetadata$group": "<p>The group metadata for the member.</p>"
       }
     },
     "HostAddress": {
@@ -1799,6 +1818,7 @@
         "CodeReviewJobSummary$status": "<p>The current status of the code review job.</p>",
         "PentestJob$status": "<p>The current status of the pentest job.</p>",
         "PentestJobSummary$status": "<p>The current status of the pentest job.</p>",
+        "ResumePentestJobOutput$status": "<p>The current status of the pentest job.</p>",
         "StartCodeReviewJobOutput$status": "<p>The current status of the code review job.</p>",
         "StartPentestJobOutput$status": "<p>The current status of the pentest job.</p>",
         "StartThreatModelJobOutput$status": "<p>The current status of the threat model job.</p>",
@@ -2155,7 +2175,7 @@
     "MembershipType": {
       "base": "<p>Type of membership.</p>",
       "refs": {
-        "CreateMembershipRequest$memberType": "<p>The type of member. Currently, only USER is supported.</p>",
+        "CreateMembershipRequest$memberType": "<p>The type of member. Use USER for an individual user or GROUP for an IAM Identity Center group. All members of a group have access to the agent space.</p>",
         "DeleteMembershipRequest$memberType": "<p>The type of member to remove.</p>",
         "MembershipSummary$memberType": "<p>The type of member.</p>"
       }
@@ -2172,6 +2192,7 @@
         "CreatePentestInput$networkTrafficConfig": "<p>The network traffic configuration for the pentest, including custom headers and traffic rules.</p>",
         "Pentest$networkTrafficConfig": "<p>The network traffic configuration for the pentest.</p>",
         "PentestJob$networkTrafficConfig": "<p>The network traffic configuration for the pentest job.</p>",
+        "ResumePentestJobInput$networkTrafficConfig": "<p>The network traffic configuration to use for the resumed job. When specified, replaces the configuration the job used before it stopped.</p>",
         "UpdatePentestInput$networkTrafficConfig": "<p>The updated network traffic configuration for the pentest.</p>"
       }
     },
@@ -2575,6 +2596,14 @@
       "refs": {
         "ListIntegratedResourcesInput$resourceType": "<p>The type of resource to filter by.</p>"
       }
+    },
+    "ResumePentestJobInput": {
+      "base": "<p>Input for resuming a stopped or paused pentest job.</p>",
+      "refs": {}
+    },
+    "ResumePentestJobOutput": {
+      "base": "<p>Output for the ResumePentestJob operation.</p>",
+      "refs": {}
     },
     "RiskLevel": {
       "base": "<p>Risk severity level.</p>",
@@ -3074,10 +3103,12 @@
         "CloudWatchLog$logStream": "<p>The name of the CloudWatch log stream.</p>",
         "CodeLocation$filePath": "<p>The absolute path to the file containing the code location.</p>",
         "CodeLocation$label": "<p>The role of this location in the vulnerability, such as source or sink.</p>",
-        "CodeRemediationTask$statusReason": "<p>The reason for the current status of the code remediation task.</p>",
-        "CodeRemediationTaskDetails$repoName": "<p>The name of the repository where the remediation was applied.</p>",
+        "CodeRemediationTask$statusReason": "<p>The reason for the current status of the overall code remediation task.</p>",
+        "CodeRemediationTaskDetails$repoName": "<p>The name of an associated repository where the remediation was applied.</p>",
         "CodeRemediationTaskDetails$codeDiffLink": "<p>The link to the code diff for the remediation.</p>",
         "CodeRemediationTaskDetails$pullRequestLink": "<p>The link to the pull request created for the remediation.</p>",
+        "CodeRemediationTaskDetails$statusCode": "<p>A category classifier if a repository's code remediation fails.</p>",
+        "CodeRemediationTaskDetails$statusReason": "<p>A descriptive reason when a repository's code remediation fails.</p>",
         "CodeReview$codeReviewId": "<p>The unique identifier of the code review.</p>",
         "CodeReview$agentSpaceId": "<p>The unique identifier of the agent space that contains the code review.</p>",
         "CodeReview$title": "<p>The title of the code review.</p>",
@@ -3224,6 +3255,8 @@
         "GitHubIntegrationInput$organizationName": "<p>The name of the GitHub organization to integrate with.</p>",
         "GitHubIntegrationInput$installationId": "<p>The installation identifier provided by GitHub Enterprise Server on the install callback. Required for GitHub Enterprise Server integrations and ignored for GitHub.com.</p>",
         "GitLabIntegrationInput$groupId": "<p>The identifier of the GitLab group. Required when tokenType is group and ignored for personal tokens.</p>",
+        "GroupMetadata$displayName": "<p>The display name of the group.</p>",
+        "GroupMetadata$description": "<p>The description of the group.</p>",
         "HttpVerification$token": "<p>The verification token to serve at the specified route path.</p>",
         "HttpVerification$routePath": "<p>The HTTP route path where the verification token must be served.</p>",
         "InitiateProviderRegistrationInput$organizationName": "<p>The name of the organization to connect.</p>",
@@ -3291,11 +3324,13 @@
         "PentestJob$title": "<p>The title of the pentest job.</p>",
         "PentestJob$overview": "<p>An overview of the pentest job results.</p>",
         "PentestJob$reportUrl": "<p>The URL to view this pentest job's findings report in the console.</p>",
+        "PentestJob$version": "<p>The version of the pentest job. The version increases each time the job is resumed. This value is absent for jobs created before versions were recorded.</p>",
         "PentestJobIdList$member": null,
         "PentestJobSummary$pentestJobId": "<p>The unique identifier of the pentest job.</p>",
         "PentestJobSummary$pentestId": "<p>The unique identifier of the pentest associated with the job.</p>",
         "PentestJobSummary$title": "<p>The title of the pentest job.</p>",
         "PentestJobSummary$reportUrl": "<p>The URL to view this pentest job's findings report in the console.</p>",
+        "PentestJobSummary$version": "<p>The version of the pentest job. The version increases each time the job is resumed. This value is absent for jobs created before versions were recorded.</p>",
         "PentestSummary$pentestId": "<p>The unique identifier of the pentest.</p>",
         "PentestSummary$agentSpaceId": "<p>The unique identifier of the agent space that contains the pentest.</p>",
         "PentestSummary$title": "<p>The title of the pentest.</p>",
@@ -3305,6 +3340,12 @@
         "ReportDestination$parentId": "<p>The parent document identifier under which the report will be created.</p>",
         "ReportDestination$documentId": "<p>The existing document identifier to update instead of creating a new document.</p>",
         "ResourceNotFoundException$message": "<p>Error description.</p>",
+        "ResumePentestJobInput$agentSpaceId": "<p>The unique identifier of the agent space.</p>",
+        "ResumePentestJobInput$pentestJobId": "<p>The unique identifier of the pentest job to resume.</p>",
+        "ResumePentestJobOutput$title": "<p>The title of the pentest job.</p>",
+        "ResumePentestJobOutput$pentestId": "<p>The unique identifier of the pentest.</p>",
+        "ResumePentestJobOutput$pentestJobId": "<p>The unique identifier of the resumed pentest job.</p>",
+        "ResumePentestJobOutput$version": "<p>The version of the pentest job that the resume started. The version increases each time the job is resumed.</p>",
         "ScopeChange$integrationId": "<p>The identifier of the integration for the source-code provider that hosts the repository.</p>",
         "ScopeChange$providerResourceId": "<p>The provider-specific identifier of the repository the change belongs to.</p>",
         "ScopeChange$baseCommitSha": "<p>The commit SHA that the change is compared against. When omitted, the change is evaluated against the head commit alone.</p>",
@@ -3576,6 +3617,8 @@
         "PentestSummary$createdAt": "<p>The date and time the pentest was created, in UTC format.</p>",
         "PentestSummary$updatedAt": "<p>The date and time the pentest was last updated, in UTC format.</p>",
         "PrivateConnectionSummary$certificateExpiryTime": "<p>The date and time the connection's certificate expires, in UTC format.</p>",
+        "ResumePentestJobOutput$createdAt": "<p>The date and time the pentest job was created, in UTC format.</p>",
+        "ResumePentestJobOutput$updatedAt": "<p>The date and time the pentest job was last updated, in UTC format.</p>",
         "SecurityRequirementPackSummary$createdAt": "<p>The date and time the security requirement pack was created, in UTC format.</p>",
         "SecurityRequirementPackSummary$updatedAt": "<p>The date and time the security requirement pack was last updated, in UTC format.</p>",
         "SecurityRequirementSummary$createdAt": "<p>The date and time the security requirement was created, in UTC format.</p>",
@@ -4295,6 +4338,7 @@
         "CreatePentestInput$vpcConfig": "<p>The VPC configuration for the pentest.</p>",
         "Pentest$vpcConfig": "<p>The VPC configuration for the pentest.</p>",
         "PentestJob$vpcConfig": "<p>The VPC configuration for the pentest job.</p>",
+        "ResumePentestJobInput$vpcConfig": "<p>The VPC configuration to use for the resumed job. When specified, replaces the configuration the job used before it stopped.</p>",
         "UpdatePentestInput$vpcConfig": "<p>The updated VPC configuration for the pentest.</p>",
         "VpcConfigs$member": null
       }

@@ -118,7 +118,7 @@ module Aws::VerifiedPermissions
       attr_accessor decision: ("ALLOW" | "DENY")
       attr_accessor determining_policies: ::Array[Types::DeterminingPolicyItem]
       attr_accessor errors: ::Array[Types::EvaluationErrorItem]
-      SENSITIVE: []
+      SENSITIVE: [:errors]
     end
 
     class BatchIsAuthorizedWithTokenInput
@@ -148,7 +148,7 @@ module Aws::VerifiedPermissions
       attr_accessor decision: ("ALLOW" | "DENY")
       attr_accessor determining_policies: ::Array[Types::DeterminingPolicyItem]
       attr_accessor errors: ::Array[Types::EvaluationErrorItem]
-      SENSITIVE: []
+      SENSITIVE: [:errors]
     end
 
     class CedarTagValue
@@ -208,7 +208,7 @@ module Aws::VerifiedPermissions
       attr_accessor user_pool_arn: ::String
       attr_accessor client_ids: ::Array[::String]
       attr_accessor group_configuration: Types::CognitoGroupConfiguration
-      SENSITIVE: []
+      SENSITIVE: [:client_ids]
     end
 
     class CognitoUserPoolConfigurationDetail
@@ -216,7 +216,7 @@ module Aws::VerifiedPermissions
       attr_accessor client_ids: ::Array[::String]
       attr_accessor issuer: ::String
       attr_accessor group_configuration: Types::CognitoGroupConfigurationDetail
-      SENSITIVE: []
+      SENSITIVE: [:client_ids]
     end
 
     class CognitoUserPoolConfigurationItem
@@ -224,7 +224,7 @@ module Aws::VerifiedPermissions
       attr_accessor client_ids: ::Array[::String]
       attr_accessor issuer: ::String
       attr_accessor group_configuration: Types::CognitoGroupConfigurationItem
-      SENSITIVE: []
+      SENSITIVE: [:client_ids]
     end
 
     class Configuration
@@ -599,7 +599,7 @@ module Aws::VerifiedPermissions
       attr_accessor created_date: ::Time
       attr_accessor last_updated_date: ::Time
       attr_accessor namespaces: ::Array[::String]
-      SENSITIVE: [:schema]
+      SENSITIVE: [:schema, :namespaces]
     end
 
     class IdentitySourceDetails
@@ -607,7 +607,7 @@ module Aws::VerifiedPermissions
       attr_accessor user_pool_arn: ::String
       attr_accessor discovery_url: ::String
       attr_accessor open_id_issuer: ("COGNITO")
-      SENSITIVE: []
+      SENSITIVE: [:client_ids]
     end
 
     class IdentitySourceFilter
@@ -631,7 +631,7 @@ module Aws::VerifiedPermissions
       attr_accessor user_pool_arn: ::String
       attr_accessor discovery_url: ::String
       attr_accessor open_id_issuer: ("COGNITO")
-      SENSITIVE: []
+      SENSITIVE: [:client_ids]
     end
 
     class InternalServerException
@@ -658,7 +658,7 @@ module Aws::VerifiedPermissions
       attr_accessor decision: ("ALLOW" | "DENY")
       attr_accessor determining_policies: ::Array[Types::DeterminingPolicyItem]
       attr_accessor errors: ::Array[Types::EvaluationErrorItem]
-      SENSITIVE: []
+      SENSITIVE: [:errors]
     end
 
     class IsAuthorizedWithTokenInput
@@ -677,7 +677,7 @@ module Aws::VerifiedPermissions
       attr_accessor determining_policies: ::Array[Types::DeterminingPolicyItem]
       attr_accessor errors: ::Array[Types::EvaluationErrorItem]
       attr_accessor principal: Types::EntityIdentifier
-      SENSITIVE: []
+      SENSITIVE: [:errors]
     end
 
     class KmsEncryptionSettings
@@ -831,19 +831,19 @@ module Aws::VerifiedPermissions
     class OpenIdConnectIdentityTokenConfiguration
       attr_accessor principal_id_claim: ::String
       attr_accessor client_ids: ::Array[::String]
-      SENSITIVE: [:principal_id_claim]
+      SENSITIVE: [:principal_id_claim, :client_ids]
     end
 
     class OpenIdConnectIdentityTokenConfigurationDetail
       attr_accessor principal_id_claim: ::String
       attr_accessor client_ids: ::Array[::String]
-      SENSITIVE: [:principal_id_claim]
+      SENSITIVE: [:principal_id_claim, :client_ids]
     end
 
     class OpenIdConnectIdentityTokenConfigurationItem
       attr_accessor principal_id_claim: ::String
       attr_accessor client_ids: ::Array[::String]
-      SENSITIVE: [:principal_id_claim]
+      SENSITIVE: [:principal_id_claim, :client_ids]
     end
 
     class OpenIdConnectTokenSelection
@@ -997,7 +997,7 @@ module Aws::VerifiedPermissions
       attr_accessor namespaces: ::Array[::String]
       attr_accessor created_date: ::Time
       attr_accessor last_updated_date: ::Time
-      SENSITIVE: []
+      SENSITIVE: [:namespaces]
     end
 
     class ResourceConflict
@@ -1114,7 +1114,7 @@ module Aws::VerifiedPermissions
       attr_accessor user_pool_arn: ::String
       attr_accessor client_ids: ::Array[::String]
       attr_accessor group_configuration: Types::UpdateCognitoGroupConfiguration
-      SENSITIVE: []
+      SENSITIVE: [:client_ids]
     end
 
     class UpdateConfiguration
@@ -1170,7 +1170,7 @@ module Aws::VerifiedPermissions
     class UpdateOpenIdConnectIdentityTokenConfiguration
       attr_accessor principal_id_claim: ::String
       attr_accessor client_ids: ::Array[::String]
-      SENSITIVE: [:principal_id_claim]
+      SENSITIVE: [:principal_id_claim, :client_ids]
     end
 
     class UpdateOpenIdConnectTokenSelection

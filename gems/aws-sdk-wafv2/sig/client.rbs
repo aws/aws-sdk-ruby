@@ -230,10 +230,10 @@ module Aws
                             },
                             ?token_domains: Array[::String],
                             ?association_config: {
-                              request_body: Hash[("CLOUDFRONT" | "API_GATEWAY" | "COGNITO_USER_POOL" | "APP_RUNNER_SERVICE" | "VERIFIED_ACCESS_INSTANCE" | "AGENTCORE_GATEWAY"), {
-                                  default_size_inspection_limit: ("KB_16" | "KB_32" | "KB_48" | "KB_64")
+                              request_body: Hash[("CLOUDFRONT" | "API_GATEWAY" | "COGNITO_USER_POOL" | "APP_RUNNER_SERVICE" | "VERIFIED_ACCESS_INSTANCE" | "AGENTCORE_GATEWAY" | "APPLICATION_LOAD_BALANCER"), {
+                                  default_size_inspection_limit: ("KB_8" | "KB_16" | "KB_32" | "KB_48" | "KB_64")
                                 }]?,
-                              challenge_javascript_sdk_injection: Hash[("CLOUDFRONT" | "API_GATEWAY" | "COGNITO_USER_POOL" | "APP_RUNNER_SERVICE" | "VERIFIED_ACCESS_INSTANCE" | "AGENTCORE_GATEWAY"), {
+                              challenge_javascript_sdk_injection: Hash[("CLOUDFRONT" | "API_GATEWAY" | "COGNITO_USER_POOL" | "APP_RUNNER_SERVICE" | "VERIFIED_ACCESS_INSTANCE" | "AGENTCORE_GATEWAY" | "APPLICATION_LOAD_BALANCER"), {
                                 }]?
                             },
                             ?on_source_d_do_s_protection_config: {
@@ -247,7 +247,10 @@ module Aws
                                 }
                               ]?
                             },
-                            ?monetization_config: Params::monetization_config
+                            ?monetization_config: Params::monetization_config,
+                            ?analytics_config: {
+                              mode: ("CROSS_REGION" | "DISABLED")
+                            }
                           ) -> _CreateWebACLResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateWebACLResponseSuccess
 
@@ -411,6 +414,29 @@ module Aws
                                    api_key: ::String
                                  ) -> _GetDecryptedAPIKeyResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDecryptedAPIKeyResponseSuccess
+
+      interface _GetEventResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetEventResponse]
+        def event: () -> Types::EventDetailSummary
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WAFV2/Client.html#get_event-instance_method
+      def get_event: (
+                       scope: ("CLOUDFRONT" | "REGIONAL"),
+                       event_id: ::String,
+                       web_acl_arn: ::String
+                     ) -> _GetEventResponseSuccess
+                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetEventResponseSuccess
+
+      interface _GetEventActorResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetEventActorResponse]
+        def event_actor: () -> Types::EventActorDetail
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WAFV2/Client.html#get_event_actor-instance_method
+      def get_event_actor: (
+                             scope: ("CLOUDFRONT" | "REGIONAL"),
+                             event_actor_id: ::String
+                           ) -> _GetEventActorResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetEventActorResponseSuccess
 
       interface _GetIPSetResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetIPSetResponse]
@@ -701,6 +727,93 @@ module Aws
                                                 ?limit: ::Integer
                                               ) -> _ListAvailableManagedRuleGroupsResponseSuccess
                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAvailableManagedRuleGroupsResponseSuccess
+
+      interface _ListEventActorsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListEventActorsResponse]
+        def event_actors: () -> ::Array[Types::EventActorSummary]
+        def next_marker: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WAFV2/Client.html#list_event_actors-instance_method
+      def list_event_actors: (
+                               scope: ("CLOUDFRONT" | "REGIONAL"),
+                               time_window: {
+                                 start_time: ::Time,
+                                 end_time: ::Time
+                               },
+                               ?sort_by: ("EVENT_COUNT"),
+                               ?limit: ::Integer,
+                               ?next_marker: ::String
+                             ) -> _ListEventActorsResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListEventActorsResponseSuccess
+
+      interface _ListEventsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListEventsResponse]
+        def events: () -> ::Array[Types::EventDetailSummary]
+        def next_marker: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WAFV2/Client.html#list_events-instance_method
+      def list_events: (
+                         scope: ("CLOUDFRONT" | "REGIONAL"),
+                         ?time_window: {
+                           start_time: ::Time,
+                           end_time: ::Time
+                         },
+                         ?filters: Array[
+                           {
+                             name: ("EVENT_CATEGORY" | "RESOURCE_ARN"),
+                             values: Array[::String]
+                           }
+                         ],
+                         ?api_pattern_filters: Array[
+                           {
+                             method: ::String?,
+                             path_pattern: ::String?,
+                             port: ::Integer?,
+                             domains: Array[::String]?
+                           }
+                         ],
+                         ?limit: ::Integer,
+                         ?next_marker: ::String,
+                         ?sort_order: ("ASC" | "DESC"),
+                         ?sort_by: ("START_TIME" | "END_TIME" | "CONFIDENCE"),
+                         ?include: Array[("TIMELINE")]
+                       ) -> _ListEventsResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListEventsResponseSuccess
+
+      interface _ListEventsByWebACLResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListEventsByWebACLResponse]
+        def events: () -> ::Array[Types::EventDetailSummary]
+        def next_marker: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WAFV2/Client.html#list_events_by_web_acl-instance_method
+      def list_events_by_web_acl: (
+                                    scope: ("CLOUDFRONT" | "REGIONAL"),
+                                    web_acl_arn: ::String,
+                                    ?time_window: {
+                                      start_time: ::Time,
+                                      end_time: ::Time
+                                    },
+                                    ?filters: Array[
+                                      {
+                                        name: ("EVENT_CATEGORY" | "RESOURCE_ARN"),
+                                        values: Array[::String]
+                                      }
+                                    ],
+                                    ?api_pattern_filters: Array[
+                                      {
+                                        method: ::String?,
+                                        path_pattern: ::String?,
+                                        port: ::Integer?,
+                                        domains: Array[::String]?
+                                      }
+                                    ],
+                                    ?limit: ::Integer,
+                                    ?next_marker: ::String,
+                                    ?sort_order: ("ASC" | "DESC"),
+                                    ?sort_by: ("START_TIME" | "END_TIME" | "CONFIDENCE"),
+                                    ?include: Array[("TIMELINE")]
+                                  ) -> _ListEventsByWebACLResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListEventsByWebACLResponseSuccess
 
       interface _ListIPSetsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListIPSetsResponse]
@@ -1050,10 +1163,10 @@ module Aws
                             },
                             ?token_domains: Array[::String],
                             ?association_config: {
-                              request_body: Hash[("CLOUDFRONT" | "API_GATEWAY" | "COGNITO_USER_POOL" | "APP_RUNNER_SERVICE" | "VERIFIED_ACCESS_INSTANCE" | "AGENTCORE_GATEWAY"), {
-                                  default_size_inspection_limit: ("KB_16" | "KB_32" | "KB_48" | "KB_64")
+                              request_body: Hash[("CLOUDFRONT" | "API_GATEWAY" | "COGNITO_USER_POOL" | "APP_RUNNER_SERVICE" | "VERIFIED_ACCESS_INSTANCE" | "AGENTCORE_GATEWAY" | "APPLICATION_LOAD_BALANCER"), {
+                                  default_size_inspection_limit: ("KB_8" | "KB_16" | "KB_32" | "KB_48" | "KB_64")
                                 }]?,
-                              challenge_javascript_sdk_injection: Hash[("CLOUDFRONT" | "API_GATEWAY" | "COGNITO_USER_POOL" | "APP_RUNNER_SERVICE" | "VERIFIED_ACCESS_INSTANCE" | "AGENTCORE_GATEWAY"), {
+                              challenge_javascript_sdk_injection: Hash[("CLOUDFRONT" | "API_GATEWAY" | "COGNITO_USER_POOL" | "APP_RUNNER_SERVICE" | "VERIFIED_ACCESS_INSTANCE" | "AGENTCORE_GATEWAY" | "APPLICATION_LOAD_BALANCER"), {
                                 }]?
                             },
                             ?on_source_d_do_s_protection_config: {
@@ -1067,7 +1180,10 @@ module Aws
                                 }
                               ]?
                             },
-                            ?monetization_config: Params::monetization_config
+                            ?monetization_config: Params::monetization_config,
+                            ?analytics_config: {
+                              mode: ("CROSS_REGION" | "DISABLED")
+                            }
                           ) -> _UpdateWebACLResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateWebACLResponseSuccess
     end

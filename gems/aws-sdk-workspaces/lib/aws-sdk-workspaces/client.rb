@@ -264,7 +264,8 @@ module Aws::WorkSpaces
     #     An integer representing the maximum number attempts that will be made for
     #     a single request, including the initial attempt.  For example,
     #     setting this value to 5 will result in a request being retried up to
-    #     4 times. Used in `standard` and `adaptive` retry modes.
+    #     4 times. Used in `standard` and `adaptive` retry modes. Defaults to 3,
+    #     except for DynamoDB and DynamoDB Streams, which default to 4.
     #
     #   @option options [String] :profile ("default")
     #     Used when loading credentials from the shared credentials file at `HOME/.aws/credentials`.
@@ -327,15 +328,15 @@ module Aws::WorkSpaces
     #     used by the default backoff function. This option is only used in the
     #     `legacy` retry mode.
     #
-    #   @option options [String] :retry_mode ("legacy")
+    #   @option options [String] :retry_mode ("standard")
     #     Specifies which retry algorithm to use. Values are:
     #
-    #     * `legacy` - The pre-existing retry behavior. This is the default
-    #       value if no retry mode is provided.
+    #     * `legacy` - The pre-existing retry behavior.
     #
     #     * `standard` - A standardized set of retry rules across the AWS SDKs.
     #       This includes support for retry quotas, which limit the number of
-    #       unsuccessful retries a client can make.
+    #       unsuccessful retries a client can make. This is the default value
+    #       if no retry mode is provided.
     #
     #     * `adaptive` - A retry mode that includes all the functionality of
     #       `standard` mode along with automatic client side throttling.
@@ -1255,7 +1256,7 @@ module Aws::WorkSpaces
     #   this value. For more information, see [Amazon WorkSpaces Core][1].
     #
     # * You don't need to specify the `PCOIP` protocol for Linux bundles
-    #   because `DCV` (formerly WSP) is the default protocol for those
+    #   because DCV (formerly WSP) is the default protocol for those
     #   bundles.
     #
     # * User-decoupled WorkSpaces are only supported by Amazon WorkSpaces
@@ -1298,7 +1299,7 @@ module Aws::WorkSpaces
     #           user_volume_size_gib: 1,
     #           compute_type_name: "VALUE", # accepts VALUE, STANDARD, PERFORMANCE, POWER, GRAPHICS, POWERPRO, GENERALPURPOSE_4XLARGE, GENERALPURPOSE_8XLARGE, GRAPHICSPRO, GRAPHICS_G4DN, GRAPHICSPRO_G4DN, GRAPHICS_G6_XLARGE, GRAPHICS_G6_2XLARGE, GRAPHICS_G6_4XLARGE, GRAPHICS_G6_8XLARGE, GRAPHICS_G6_16XLARGE, GRAPHICS_GR6_4XLARGE, GRAPHICS_GR6_8XLARGE, GRAPHICS_G6F_LARGE, GRAPHICS_G6F_XLARGE, GRAPHICS_G6F_2XLARGE, GRAPHICS_G6F_4XLARGE, GRAPHICS_GR6F_4XLARGE, GRAPHICS_G7_2XLARGE, GRAPHICS_G7_4XLARGE, GRAPHICS_G7_8XLARGE, GRAPHICS_G7_12XLARGE
     #           protocols: ["PCOIP"], # accepts PCOIP, WSP
-    #           operating_system_name: "AMAZON_LINUX_2", # accepts AMAZON_LINUX_2, UBUNTU_18_04, UBUNTU_20_04, UBUNTU_22_04, UNKNOWN, WINDOWS_10, WINDOWS_11, WINDOWS_7, WINDOWS_SERVER_2016, WINDOWS_SERVER_2019, WINDOWS_SERVER_2022, WINDOWS_SERVER_2025, RHEL_8, ROCKY_8
+    #           operating_system_name: "AMAZON_LINUX_2", # accepts AMAZON_LINUX_2, UBUNTU_18_04, UBUNTU_20_04, UBUNTU_22_04, UNKNOWN, WINDOWS_10, WINDOWS_11, WINDOWS_7, WINDOWS_SERVER_2016, WINDOWS_SERVER_2019, WINDOWS_SERVER_2022, WINDOWS_SERVER_2025, RHEL_8, ROCKY_8, UBUNTU_24_04, RHEL_9, ROCKY_9, UBUNTU_26_04, RHEL_10, ROCKY_10
     #           global_accelerator: {
     #             mode: "ENABLED_AUTO", # required, accepts ENABLED_AUTO, DISABLED, INHERITED
     #             preferred_protocol: "TCP", # accepts TCP, NONE, INHERITED
@@ -1333,7 +1334,7 @@ module Aws::WorkSpaces
     #   resp.failed_requests[0].workspace_request.workspace_properties.compute_type_name #=> String, one of "VALUE", "STANDARD", "PERFORMANCE", "POWER", "GRAPHICS", "POWERPRO", "GENERALPURPOSE_4XLARGE", "GENERALPURPOSE_8XLARGE", "GRAPHICSPRO", "GRAPHICS_G4DN", "GRAPHICSPRO_G4DN", "GRAPHICS_G6_XLARGE", "GRAPHICS_G6_2XLARGE", "GRAPHICS_G6_4XLARGE", "GRAPHICS_G6_8XLARGE", "GRAPHICS_G6_16XLARGE", "GRAPHICS_GR6_4XLARGE", "GRAPHICS_GR6_8XLARGE", "GRAPHICS_G6F_LARGE", "GRAPHICS_G6F_XLARGE", "GRAPHICS_G6F_2XLARGE", "GRAPHICS_G6F_4XLARGE", "GRAPHICS_GR6F_4XLARGE", "GRAPHICS_G7_2XLARGE", "GRAPHICS_G7_4XLARGE", "GRAPHICS_G7_8XLARGE", "GRAPHICS_G7_12XLARGE"
     #   resp.failed_requests[0].workspace_request.workspace_properties.protocols #=> Array
     #   resp.failed_requests[0].workspace_request.workspace_properties.protocols[0] #=> String, one of "PCOIP", "WSP"
-    #   resp.failed_requests[0].workspace_request.workspace_properties.operating_system_name #=> String, one of "AMAZON_LINUX_2", "UBUNTU_18_04", "UBUNTU_20_04", "UBUNTU_22_04", "UNKNOWN", "WINDOWS_10", "WINDOWS_11", "WINDOWS_7", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "WINDOWS_SERVER_2025", "RHEL_8", "ROCKY_8"
+    #   resp.failed_requests[0].workspace_request.workspace_properties.operating_system_name #=> String, one of "AMAZON_LINUX_2", "UBUNTU_18_04", "UBUNTU_20_04", "UBUNTU_22_04", "UNKNOWN", "WINDOWS_10", "WINDOWS_11", "WINDOWS_7", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "WINDOWS_SERVER_2025", "RHEL_8", "ROCKY_8", "UBUNTU_24_04", "RHEL_9", "ROCKY_9", "UBUNTU_26_04", "RHEL_10", "ROCKY_10"
     #   resp.failed_requests[0].workspace_request.workspace_properties.global_accelerator.mode #=> String, one of "ENABLED_AUTO", "DISABLED", "INHERITED"
     #   resp.failed_requests[0].workspace_request.workspace_properties.global_accelerator.preferred_protocol #=> String, one of "TCP", "NONE", "INHERITED"
     #   resp.failed_requests[0].workspace_request.workspace_properties.nested_virtualization_enabled #=> Boolean
@@ -1367,7 +1368,7 @@ module Aws::WorkSpaces
     #   resp.pending_requests[0].workspace_properties.compute_type_name #=> String, one of "VALUE", "STANDARD", "PERFORMANCE", "POWER", "GRAPHICS", "POWERPRO", "GENERALPURPOSE_4XLARGE", "GENERALPURPOSE_8XLARGE", "GRAPHICSPRO", "GRAPHICS_G4DN", "GRAPHICSPRO_G4DN", "GRAPHICS_G6_XLARGE", "GRAPHICS_G6_2XLARGE", "GRAPHICS_G6_4XLARGE", "GRAPHICS_G6_8XLARGE", "GRAPHICS_G6_16XLARGE", "GRAPHICS_GR6_4XLARGE", "GRAPHICS_GR6_8XLARGE", "GRAPHICS_G6F_LARGE", "GRAPHICS_G6F_XLARGE", "GRAPHICS_G6F_2XLARGE", "GRAPHICS_G6F_4XLARGE", "GRAPHICS_GR6F_4XLARGE", "GRAPHICS_G7_2XLARGE", "GRAPHICS_G7_4XLARGE", "GRAPHICS_G7_8XLARGE", "GRAPHICS_G7_12XLARGE"
     #   resp.pending_requests[0].workspace_properties.protocols #=> Array
     #   resp.pending_requests[0].workspace_properties.protocols[0] #=> String, one of "PCOIP", "WSP"
-    #   resp.pending_requests[0].workspace_properties.operating_system_name #=> String, one of "AMAZON_LINUX_2", "UBUNTU_18_04", "UBUNTU_20_04", "UBUNTU_22_04", "UNKNOWN", "WINDOWS_10", "WINDOWS_11", "WINDOWS_7", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "WINDOWS_SERVER_2025", "RHEL_8", "ROCKY_8"
+    #   resp.pending_requests[0].workspace_properties.operating_system_name #=> String, one of "AMAZON_LINUX_2", "UBUNTU_18_04", "UBUNTU_20_04", "UBUNTU_22_04", "UNKNOWN", "WINDOWS_10", "WINDOWS_11", "WINDOWS_7", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "WINDOWS_SERVER_2025", "RHEL_8", "ROCKY_8", "UBUNTU_24_04", "RHEL_9", "ROCKY_9", "UBUNTU_26_04", "RHEL_10", "ROCKY_10"
     #   resp.pending_requests[0].workspace_properties.global_accelerator.mode #=> String, one of "ENABLED_AUTO", "DISABLED", "INHERITED"
     #   resp.pending_requests[0].workspace_properties.global_accelerator.preferred_protocol #=> String, one of "TCP", "NONE", "INHERITED"
     #   resp.pending_requests[0].workspace_properties.nested_virtualization_enabled #=> Boolean
@@ -1992,7 +1993,7 @@ module Aws::WorkSpaces
     #     application_ids: ["WorkSpaceApplicationId"],
     #     compute_type_names: ["VALUE"], # accepts VALUE, STANDARD, PERFORMANCE, POWER, GRAPHICS, POWERPRO, GENERALPURPOSE_4XLARGE, GENERALPURPOSE_8XLARGE, GRAPHICSPRO, GRAPHICS_G4DN, GRAPHICSPRO_G4DN, GRAPHICS_G6_XLARGE, GRAPHICS_G6_2XLARGE, GRAPHICS_G6_4XLARGE, GRAPHICS_G6_8XLARGE, GRAPHICS_G6_16XLARGE, GRAPHICS_GR6_4XLARGE, GRAPHICS_GR6_8XLARGE, GRAPHICS_G6F_LARGE, GRAPHICS_G6F_XLARGE, GRAPHICS_G6F_2XLARGE, GRAPHICS_G6F_4XLARGE, GRAPHICS_GR6F_4XLARGE, GRAPHICS_G7_2XLARGE, GRAPHICS_G7_4XLARGE, GRAPHICS_G7_8XLARGE, GRAPHICS_G7_12XLARGE
     #     license_type: "LICENSED", # accepts LICENSED, UNLICENSED
-    #     operating_system_names: ["AMAZON_LINUX_2"], # accepts AMAZON_LINUX_2, UBUNTU_18_04, UBUNTU_20_04, UBUNTU_22_04, UNKNOWN, WINDOWS_10, WINDOWS_11, WINDOWS_7, WINDOWS_SERVER_2016, WINDOWS_SERVER_2019, WINDOWS_SERVER_2022, WINDOWS_SERVER_2025, RHEL_8, ROCKY_8
+    #     operating_system_names: ["AMAZON_LINUX_2"], # accepts AMAZON_LINUX_2, UBUNTU_18_04, UBUNTU_20_04, UBUNTU_22_04, UNKNOWN, WINDOWS_10, WINDOWS_11, WINDOWS_7, WINDOWS_SERVER_2016, WINDOWS_SERVER_2019, WINDOWS_SERVER_2022, WINDOWS_SERVER_2025, RHEL_8, ROCKY_8, UBUNTU_24_04, RHEL_9, ROCKY_9, UBUNTU_26_04, RHEL_10, ROCKY_10
     #     owner: "WorkSpaceApplicationOwner",
     #     max_results: 1,
     #     next_token: "PaginationToken",
@@ -2011,7 +2012,7 @@ module Aws::WorkSpaces
     #   resp.applications[0].supported_compute_type_names #=> Array
     #   resp.applications[0].supported_compute_type_names[0] #=> String, one of "VALUE", "STANDARD", "PERFORMANCE", "POWER", "GRAPHICS", "POWERPRO", "GENERALPURPOSE_4XLARGE", "GENERALPURPOSE_8XLARGE", "GRAPHICSPRO", "GRAPHICS_G4DN", "GRAPHICSPRO_G4DN", "GRAPHICS_G6_XLARGE", "GRAPHICS_G6_2XLARGE", "GRAPHICS_G6_4XLARGE", "GRAPHICS_G6_8XLARGE", "GRAPHICS_G6_16XLARGE", "GRAPHICS_GR6_4XLARGE", "GRAPHICS_GR6_8XLARGE", "GRAPHICS_G6F_LARGE", "GRAPHICS_G6F_XLARGE", "GRAPHICS_G6F_2XLARGE", "GRAPHICS_G6F_4XLARGE", "GRAPHICS_GR6F_4XLARGE", "GRAPHICS_G7_2XLARGE", "GRAPHICS_G7_4XLARGE", "GRAPHICS_G7_8XLARGE", "GRAPHICS_G7_12XLARGE"
     #   resp.applications[0].supported_operating_system_names #=> Array
-    #   resp.applications[0].supported_operating_system_names[0] #=> String, one of "AMAZON_LINUX_2", "UBUNTU_18_04", "UBUNTU_20_04", "UBUNTU_22_04", "UNKNOWN", "WINDOWS_10", "WINDOWS_11", "WINDOWS_7", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "WINDOWS_SERVER_2025", "RHEL_8", "ROCKY_8"
+    #   resp.applications[0].supported_operating_system_names[0] #=> String, one of "AMAZON_LINUX_2", "UBUNTU_18_04", "UBUNTU_20_04", "UBUNTU_22_04", "UNKNOWN", "WINDOWS_10", "WINDOWS_11", "WINDOWS_7", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "WINDOWS_SERVER_2025", "RHEL_8", "ROCKY_8", "UBUNTU_24_04", "RHEL_9", "ROCKY_9", "UBUNTU_26_04", "RHEL_10", "ROCKY_10"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeApplications AWS API Documentation
@@ -2689,6 +2690,8 @@ module Aws::WorkSpaces
     #   resp.directories[0].selfservice_permissions.change_compute_type #=> String, one of "ENABLED", "DISABLED"
     #   resp.directories[0].selfservice_permissions.switch_running_mode #=> String, one of "ENABLED", "DISABLED"
     #   resp.directories[0].selfservice_permissions.rebuild_workspace #=> String, one of "ENABLED", "DISABLED"
+    #   resp.directories[0].selfservice_permissions.nested_virtualization #=> String, one of "ENABLED", "DISABLED"
+    #   resp.directories[0].selfservice_permissions.enable_end_user_advisor #=> String, one of "ENABLED", "DISABLED"
     #   resp.directories[0].saml_properties.status #=> String, one of "DISABLED", "ENABLED", "ENABLED_WITH_DIRECTORY_LOGIN_FALLBACK"
     #   resp.directories[0].saml_properties.user_access_url #=> String
     #   resp.directories[0].saml_properties.relay_state_parameter_name #=> String
@@ -2715,6 +2718,7 @@ module Aws::WorkSpaces
     #   resp.directories[0].streaming_properties.storage_connectors[0].status #=> String, one of "ENABLED", "DISABLED"
     #   resp.directories[0].streaming_properties.global_accelerator.mode #=> String, one of "ENABLED_AUTO", "DISABLED"
     #   resp.directories[0].streaming_properties.global_accelerator.preferred_protocol #=> String, one of "TCP", "NONE"
+    #   resp.directories[0].workspace_os_user_mode #=> String, one of "LOCAL_USER", "DOMAIN_JOIN", "ENTRA_JOIN", "SELF_MANAGED"
     #   resp.directories[0].error_message #=> String
     #   resp.next_token #=> String
     #
@@ -2943,7 +2947,7 @@ module Aws::WorkSpaces
     #   resp.workspaces[0].workspace_properties.compute_type_name #=> String, one of "VALUE", "STANDARD", "PERFORMANCE", "POWER", "GRAPHICS", "POWERPRO", "GENERALPURPOSE_4XLARGE", "GENERALPURPOSE_8XLARGE", "GRAPHICSPRO", "GRAPHICS_G4DN", "GRAPHICSPRO_G4DN", "GRAPHICS_G6_XLARGE", "GRAPHICS_G6_2XLARGE", "GRAPHICS_G6_4XLARGE", "GRAPHICS_G6_8XLARGE", "GRAPHICS_G6_16XLARGE", "GRAPHICS_GR6_4XLARGE", "GRAPHICS_GR6_8XLARGE", "GRAPHICS_G6F_LARGE", "GRAPHICS_G6F_XLARGE", "GRAPHICS_G6F_2XLARGE", "GRAPHICS_G6F_4XLARGE", "GRAPHICS_GR6F_4XLARGE", "GRAPHICS_G7_2XLARGE", "GRAPHICS_G7_4XLARGE", "GRAPHICS_G7_8XLARGE", "GRAPHICS_G7_12XLARGE"
     #   resp.workspaces[0].workspace_properties.protocols #=> Array
     #   resp.workspaces[0].workspace_properties.protocols[0] #=> String, one of "PCOIP", "WSP"
-    #   resp.workspaces[0].workspace_properties.operating_system_name #=> String, one of "AMAZON_LINUX_2", "UBUNTU_18_04", "UBUNTU_20_04", "UBUNTU_22_04", "UNKNOWN", "WINDOWS_10", "WINDOWS_11", "WINDOWS_7", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "WINDOWS_SERVER_2025", "RHEL_8", "ROCKY_8"
+    #   resp.workspaces[0].workspace_properties.operating_system_name #=> String, one of "AMAZON_LINUX_2", "UBUNTU_18_04", "UBUNTU_20_04", "UBUNTU_22_04", "UNKNOWN", "WINDOWS_10", "WINDOWS_11", "WINDOWS_7", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "WINDOWS_SERVER_2025", "RHEL_8", "ROCKY_8", "UBUNTU_24_04", "RHEL_9", "ROCKY_9", "UBUNTU_26_04", "RHEL_10", "ROCKY_10"
     #   resp.workspaces[0].workspace_properties.global_accelerator.mode #=> String, one of "ENABLED_AUTO", "DISABLED", "INHERITED"
     #   resp.workspaces[0].workspace_properties.global_accelerator.preferred_protocol #=> String, one of "TCP", "NONE", "INHERITED"
     #   resp.workspaces[0].workspace_properties.nested_virtualization_enabled #=> Boolean
@@ -4008,6 +4012,8 @@ module Aws::WorkSpaces
     #       change_compute_type: "ENABLED", # accepts ENABLED, DISABLED
     #       switch_running_mode: "ENABLED", # accepts ENABLED, DISABLED
     #       rebuild_workspace: "ENABLED", # accepts ENABLED, DISABLED
+    #       nested_virtualization: "ENABLED", # accepts ENABLED, DISABLED
+    #       enable_end_user_advisor: "ENABLED", # accepts ENABLED, DISABLED
     #     },
     #   })
     #
@@ -4187,7 +4193,7 @@ module Aws::WorkSpaces
     #       user_volume_size_gib: 1,
     #       compute_type_name: "VALUE", # accepts VALUE, STANDARD, PERFORMANCE, POWER, GRAPHICS, POWERPRO, GENERALPURPOSE_4XLARGE, GENERALPURPOSE_8XLARGE, GRAPHICSPRO, GRAPHICS_G4DN, GRAPHICSPRO_G4DN, GRAPHICS_G6_XLARGE, GRAPHICS_G6_2XLARGE, GRAPHICS_G6_4XLARGE, GRAPHICS_G6_8XLARGE, GRAPHICS_G6_16XLARGE, GRAPHICS_GR6_4XLARGE, GRAPHICS_GR6_8XLARGE, GRAPHICS_G6F_LARGE, GRAPHICS_G6F_XLARGE, GRAPHICS_G6F_2XLARGE, GRAPHICS_G6F_4XLARGE, GRAPHICS_GR6F_4XLARGE, GRAPHICS_G7_2XLARGE, GRAPHICS_G7_4XLARGE, GRAPHICS_G7_8XLARGE, GRAPHICS_G7_12XLARGE
     #       protocols: ["PCOIP"], # accepts PCOIP, WSP
-    #       operating_system_name: "AMAZON_LINUX_2", # accepts AMAZON_LINUX_2, UBUNTU_18_04, UBUNTU_20_04, UBUNTU_22_04, UNKNOWN, WINDOWS_10, WINDOWS_11, WINDOWS_7, WINDOWS_SERVER_2016, WINDOWS_SERVER_2019, WINDOWS_SERVER_2022, WINDOWS_SERVER_2025, RHEL_8, ROCKY_8
+    #       operating_system_name: "AMAZON_LINUX_2", # accepts AMAZON_LINUX_2, UBUNTU_18_04, UBUNTU_20_04, UBUNTU_22_04, UNKNOWN, WINDOWS_10, WINDOWS_11, WINDOWS_7, WINDOWS_SERVER_2016, WINDOWS_SERVER_2019, WINDOWS_SERVER_2022, WINDOWS_SERVER_2025, RHEL_8, ROCKY_8, UBUNTU_24_04, RHEL_9, ROCKY_9, UBUNTU_26_04, RHEL_10, ROCKY_10
     #       global_accelerator: {
     #         mode: "ENABLED_AUTO", # required, accepts ENABLED_AUTO, DISABLED, INHERITED
     #         preferred_protocol: "TCP", # accepts TCP, NONE, INHERITED
@@ -4384,6 +4390,11 @@ module Aws::WorkSpaces
     # @option params [String] :user_identity_type
     #   The type of identity management the user is using.
     #
+    # @option params [String] :workspace_os_user_mode
+    #   Indicates how users are set up on the WorkSpace operating system. To
+    #   use local users with an AWS IAM Identity Center directory, specify
+    #   `LOCAL_USER`.
+    #
     # @option params [String] :idc_instance_arn
     #   The Amazon Resource Name (ARN) of the identity center instance.
     #
@@ -4418,6 +4429,7 @@ module Aws::WorkSpaces
     #     workspace_directory_name: "WorkspaceDirectoryName",
     #     workspace_directory_description: "WorkspaceDirectoryDescription",
     #     user_identity_type: "CUSTOMER_MANAGED", # accepts CUSTOMER_MANAGED, AWS_DIRECTORY_SERVICE, AWS_IAM_IDENTITY_CENTER
+    #     workspace_os_user_mode: "LOCAL_USER", # accepts LOCAL_USER, DOMAIN_JOIN, ENTRA_JOIN, SELF_MANAGED
     #     idc_instance_arn: "ARN",
     #     microsoft_entra_config: {
     #       tenant_id: "MicrosoftEntraConfigTenantId",
@@ -5172,7 +5184,7 @@ module Aws::WorkSpaces
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-workspaces'
-      context[:gem_version] = '1.172.0'
+      context[:gem_version] = '1.180.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

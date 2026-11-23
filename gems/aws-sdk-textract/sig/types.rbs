@@ -122,11 +122,38 @@ module Aws::Textract
       SENSITIVE: []
     end
 
+    class BlueprintFilter
+      attr_accessor blueprint_arn: ::String
+      attr_accessor blueprint_version: ::String
+      SENSITIVE: []
+    end
+
+    class BlueprintItem
+      attr_accessor blueprint_arn: ::String
+      attr_accessor blueprint_version: ::String
+      SENSITIVE: []
+    end
+
+    class BlueprintSummary
+      attr_accessor blueprint_arn: ::String
+      attr_accessor blueprint_name: ::String
+      attr_accessor blueprint_version: ::String
+      attr_accessor resource_owner: ("ACCOUNT" | "SERVICE")
+      attr_accessor creation_time: ::Time
+      attr_accessor last_modified_time: ::Time
+      SENSITIVE: []
+    end
+
     class BoundingBox
       attr_accessor width: ::Float
       attr_accessor height: ::Float
       attr_accessor left: ::Float
       attr_accessor top: ::Float
+      SENSITIVE: []
+    end
+
+    class BoundingBoxConfiguration
+      attr_accessor state: ("ENABLED" | "DISABLED")
       SENSITIVE: []
     end
 
@@ -164,6 +191,58 @@ module Aws::Textract
       SENSITIVE: []
     end
 
+    class CreateBlueprintRequest
+      attr_accessor client_request_token: ::String
+      attr_accessor blueprint_name: ::String
+      attr_accessor schema: ::String
+      attr_accessor encryption_configuration: Types::EncryptionConfiguration
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateBlueprintResponse
+      attr_accessor blueprint_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateBlueprintVersionRequest
+      attr_accessor blueprint_arn: ::String
+      attr_accessor client_request_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateBlueprintVersionResponse
+      attr_accessor blueprint_arn: ::String
+      attr_accessor blueprint_version: ::String
+      SENSITIVE: []
+    end
+
+    class CreateProjectRequest
+      attr_accessor client_request_token: ::String
+      attr_accessor project_name: ::String
+      attr_accessor project_description: ::String
+      attr_accessor extraction_configuration: Types::ExtractionConfiguration
+      attr_accessor generative_configuration: Types::GenerativeConfiguration
+      attr_accessor custom_configuration: Types::CustomConfiguration
+      attr_accessor splitter_configuration: Types::SplitterConfiguration
+      attr_accessor sensitive_data_configuration: Types::SensitiveDataConfiguration
+      attr_accessor encryption_configuration: Types::EncryptionConfiguration
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateProjectResponse
+      attr_accessor project_arn: ::String
+      attr_accessor status: ("COMPLETED" | "FAILED")
+      SENSITIVE: []
+    end
+
+    class CustomConfiguration
+      attr_accessor blueprints: ::Array[Types::BlueprintItem]
+      attr_accessor fallback_blueprints: ::Array[Types::BlueprintItem]
+      SENSITIVE: []
+    end
+
     class DeleteAdapterRequest
       attr_accessor adapter_id: ::String
       SENSITIVE: []
@@ -179,6 +258,23 @@ module Aws::Textract
     end
 
     class DeleteAdapterVersionResponse < Aws::EmptyStructure
+    end
+
+    class DeleteBlueprintRequest
+      attr_accessor blueprint_arn: ::String
+      attr_accessor blueprint_version: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteBlueprintResponse < Aws::EmptyStructure
+    end
+
+    class DeleteProjectRequest
+      attr_accessor project_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteProjectResponse < Aws::EmptyStructure
     end
 
     class DetectDocumentTextRequest
@@ -225,10 +321,21 @@ module Aws::Textract
     class DocumentTooLargeException < Aws::EmptyStructure
     end
 
+    class EncryptionConfiguration
+      attr_accessor kms_key_id: ::String
+      attr_accessor kms_encryption_context: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
     class EvaluationMetric
       attr_accessor f1_score: ::Float
       attr_accessor precision: ::Float
       attr_accessor recall: ::Float
+      SENSITIVE: []
+    end
+
+    class EventBridgeConfiguration
+      attr_accessor state: ("ENABLED" | "DISABLED")
       SENSITIVE: []
     end
 
@@ -282,6 +389,29 @@ module Aws::Textract
       SENSITIVE: []
     end
 
+    class ExtractionConfiguration
+      attr_accessor bounding_box: Types::BoundingBoxConfiguration
+      attr_accessor granularity: Types::ExtractionGranularity
+      attr_accessor output_format: Types::OutputFormat
+      SENSITIVE: []
+    end
+
+    class ExtractionGranularity
+      attr_accessor types: ::Array[("DOCUMENT" | "PAGE" | "ELEMENT" | "WORD" | "LINE")]
+      SENSITIVE: []
+    end
+
+    class FigureCaptionConfiguration
+      attr_accessor state: ("ENABLED" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class GenerativeConfiguration
+      attr_accessor summarization: Types::SummarizationConfiguration
+      attr_accessor figure_caption: Types::FigureCaptionConfiguration
+      SENSITIVE: []
+    end
+
     class Geometry
       attr_accessor bounding_box: Types::BoundingBox
       attr_accessor polygon: ::Array[Types::Point]
@@ -326,6 +456,24 @@ module Aws::Textract
       SENSITIVE: []
     end
 
+    class GetBlueprintRequest
+      attr_accessor blueprint_arn: ::String
+      attr_accessor blueprint_version: ::String
+      SENSITIVE: []
+    end
+
+    class GetBlueprintResponse
+      attr_accessor blueprint_arn: ::String
+      attr_accessor blueprint_name: ::String
+      attr_accessor blueprint_version: ::String
+      attr_accessor schema: ::String
+      attr_accessor kms_key_id: ::String
+      attr_accessor kms_encryption_context: ::Hash[::String, ::String]
+      attr_accessor creation_time: ::Time
+      attr_accessor last_modified_time: ::Time
+      SENSITIVE: []
+    end
+
     class GetDocumentAnalysisRequest
       attr_accessor job_id: ::String
       attr_accessor max_results: ::Integer
@@ -341,6 +489,19 @@ module Aws::Textract
       attr_accessor warnings: ::Array[Types::Warning]
       attr_accessor status_message: ::String
       attr_accessor analyze_document_model_version: ::String
+      SENSITIVE: []
+    end
+
+    class GetDocumentInsightsRequest
+      attr_accessor job_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetDocumentInsightsResponse
+      attr_accessor status: ("IN_PROGRESS" | "SUCCEEDED" | "FAILED" | "PARTIAL_SUCCESS")
+      attr_accessor output_configuration: Types::OutputConfiguration
+      attr_accessor error_type: ::String
+      attr_accessor error_message: ::String
       SENSITIVE: []
     end
 
@@ -413,6 +574,27 @@ module Aws::Textract
       SENSITIVE: []
     end
 
+    class GetProjectRequest
+      attr_accessor project_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetProjectResponse
+      attr_accessor project_arn: ::String
+      attr_accessor project_name: ::String
+      attr_accessor project_description: ::String
+      attr_accessor status: ("COMPLETED" | "FAILED")
+      attr_accessor extraction_configuration: Types::ExtractionConfiguration
+      attr_accessor generative_configuration: Types::GenerativeConfiguration
+      attr_accessor custom_configuration: Types::CustomConfiguration
+      attr_accessor splitter_configuration: Types::SplitterConfiguration
+      attr_accessor sensitive_data_configuration: Types::SensitiveDataConfiguration
+      attr_accessor encryption_configuration: Types::EncryptionConfiguration
+      attr_accessor creation_time: ::Time
+      attr_accessor last_modified_time: ::Time
+      SENSITIVE: []
+    end
+
     class HumanLoopActivationOutput
       attr_accessor human_loop_arn: ::String
       attr_accessor human_loop_activation_reasons: ::Array[::String]
@@ -452,6 +634,11 @@ module Aws::Textract
     class IdentityDocumentField
       attr_accessor type: Types::AnalyzeIDDetections
       attr_accessor value_detection: Types::AnalyzeIDDetections
+      SENSITIVE: []
+    end
+
+    class InputConfiguration
+      attr_accessor s3_uri: ::String
       SENSITIVE: []
     end
 
@@ -547,6 +734,34 @@ module Aws::Textract
       SENSITIVE: []
     end
 
+    class ListBlueprintsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor blueprint_arn: ::String
+      attr_accessor project_filter: Types::ProjectFilter
+      attr_accessor resource_owner: ("ACCOUNT" | "SERVICE")
+      SENSITIVE: []
+    end
+
+    class ListBlueprintsResponse
+      attr_accessor blueprints: ::Array[Types::BlueprintSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListProjectsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor blueprint_filter: Types::BlueprintFilter
+      SENSITIVE: []
+    end
+
+    class ListProjectsResponse
+      attr_accessor projects: ::Array[Types::ProjectSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class ListTagsForResourceRequest
       attr_accessor resource_arn: ::String
       SENSITIVE: []
@@ -569,9 +784,41 @@ module Aws::Textract
       SENSITIVE: []
     end
 
+    class NotificationConfiguration
+      attr_accessor event_bridge_configuration: Types::EventBridgeConfiguration
+      SENSITIVE: []
+    end
+
+    class OutputAdditionalFileFormat
+      attr_accessor state: ("ENABLED" | "DISABLED")
+      SENSITIVE: []
+    end
+
     class OutputConfig
       attr_accessor s3_bucket: ::String
       attr_accessor s3_prefix: ::String
+      SENSITIVE: []
+    end
+
+    class OutputConfiguration
+      attr_accessor s3_uri: ::String
+      SENSITIVE: []
+    end
+
+    class OutputFormat
+      attr_accessor additional_file_format: Types::OutputAdditionalFileFormat
+      attr_accessor text_format: Types::OutputTextFormat
+      SENSITIVE: []
+    end
+
+    class OutputTextFormat
+      attr_accessor types: ::Array[("PLAIN_TEXT" | "MARKDOWN" | "HTML" | "CSV")]
+      SENSITIVE: []
+    end
+
+    class PIIEntitiesConfiguration
+      attr_accessor pii_entity_types: ::Array[("ALL" | "ADDRESS" | "AGE" | "NAME" | "EMAIL" | "PHONE" | "USERNAME" | "PASSWORD" | "DRIVER_ID" | "LICENSE_PLATE" | "VEHICLE_IDENTIFICATION_NUMBER" | "CREDIT_DEBIT_CARD_CVV" | "CREDIT_DEBIT_CARD_EXPIRY" | "CREDIT_DEBIT_CARD_NUMBER" | "PIN" | "INTERNATIONAL_BANK_ACCOUNT_NUMBER" | "SWIFT_CODE" | "IP_ADDRESS" | "MAC_ADDRESS" | "URL" | "AWS_ACCESS_KEY" | "AWS_SECRET_KEY" | "US_BANK_ACCOUNT_NUMBER" | "US_BANK_ROUTING_NUMBER" | "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER" | "US_PASSPORT_NUMBER" | "US_SOCIAL_SECURITY_NUMBER" | "CA_HEALTH_NUMBER" | "CA_SOCIAL_INSURANCE_NUMBER" | "UK_NATIONAL_HEALTH_SERVICE_NUMBER" | "UK_NATIONAL_INSURANCE_NUMBER" | "UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER")]
+      attr_accessor redaction_mask_mode: ("PII" | "ENTITY_TYPE")
       SENSITIVE: []
     end
 
@@ -590,6 +837,19 @@ module Aws::Textract
     class Prediction
       attr_accessor value: ::String
       attr_accessor confidence: ::Float
+      SENSITIVE: []
+    end
+
+    class ProjectFilter
+      attr_accessor project_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ProjectSummary
+      attr_accessor project_arn: ::String
+      attr_accessor project_name: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor last_modified_time: ::Time
       SENSITIVE: []
     end
 
@@ -624,6 +884,12 @@ module Aws::Textract
       SENSITIVE: []
     end
 
+    class SensitiveDataConfiguration
+      attr_accessor detection_mode: ("DETECTION" | "DETECTION_AND_REDACTION" | "DISABLED")
+      attr_accessor pii_entities_configuration: Types::PIIEntitiesConfiguration
+      SENSITIVE: []
+    end
+
     class ServiceQuotaExceededException < Aws::EmptyStructure
     end
 
@@ -636,6 +902,11 @@ module Aws::Textract
     class SplitDocument
       attr_accessor index: ::Integer
       attr_accessor pages: ::Array[::Integer]
+      SENSITIVE: []
+    end
+
+    class SplitterConfiguration
+      attr_accessor state: ("ENABLED" | "DISABLED")
       SENSITIVE: []
     end
 
@@ -654,6 +925,22 @@ module Aws::Textract
 
     class StartDocumentAnalysisResponse
       attr_accessor job_id: ::String
+      SENSITIVE: []
+    end
+
+    class StartDocumentInsightsRequest
+      attr_accessor input_configuration: Types::InputConfiguration
+      attr_accessor output_configuration: Types::OutputConfiguration
+      attr_accessor project_arn: ::String
+      attr_accessor blueprints: ::Array[Types::BlueprintItem]
+      attr_accessor encryption_configuration: Types::EncryptionConfiguration
+      attr_accessor notification_configuration: Types::NotificationConfiguration
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class StartDocumentInsightsResponse
+      attr_accessor job_arn: ::String
       SENSITIVE: []
     end
 
@@ -702,6 +989,11 @@ module Aws::Textract
       SENSITIVE: []
     end
 
+    class SummarizationConfiguration
+      attr_accessor state: ("ENABLED" | "DISABLED")
+      SENSITIVE: []
+    end
+
     class TagResourceRequest
       attr_accessor resource_arn: ::String
       attr_accessor tags: ::Hash[::String, ::String]
@@ -746,6 +1038,36 @@ module Aws::Textract
       attr_accessor description: ::String
       attr_accessor feature_types: ::Array[("TABLES" | "FORMS" | "QUERIES" | "SIGNATURES" | "LAYOUT")]
       attr_accessor auto_update: ("ENABLED" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class UpdateBlueprintRequest
+      attr_accessor blueprint_arn: ::String
+      attr_accessor schema: ::String
+      attr_accessor encryption_configuration: Types::EncryptionConfiguration
+      SENSITIVE: []
+    end
+
+    class UpdateBlueprintResponse
+      attr_accessor blueprint_arn: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateProjectRequest
+      attr_accessor project_arn: ::String
+      attr_accessor project_description: ::String
+      attr_accessor extraction_configuration: Types::ExtractionConfiguration
+      attr_accessor generative_configuration: Types::GenerativeConfiguration
+      attr_accessor custom_configuration: Types::CustomConfiguration
+      attr_accessor splitter_configuration: Types::SplitterConfiguration
+      attr_accessor sensitive_data_configuration: Types::SensitiveDataConfiguration
+      attr_accessor encryption_configuration: Types::EncryptionConfiguration
+      SENSITIVE: []
+    end
+
+    class UpdateProjectResponse
+      attr_accessor project_arn: ::String
+      attr_accessor status: ("COMPLETED" | "FAILED")
       SENSITIVE: []
     end
 

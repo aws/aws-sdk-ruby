@@ -264,7 +264,8 @@ module Aws::CognitoIdentityProvider
     #     An integer representing the maximum number attempts that will be made for
     #     a single request, including the initial attempt.  For example,
     #     setting this value to 5 will result in a request being retried up to
-    #     4 times. Used in `standard` and `adaptive` retry modes.
+    #     4 times. Used in `standard` and `adaptive` retry modes. Defaults to 3,
+    #     except for DynamoDB and DynamoDB Streams, which default to 4.
     #
     #   @option options [String] :profile ("default")
     #     Used when loading credentials from the shared credentials file at `HOME/.aws/credentials`.
@@ -327,15 +328,15 @@ module Aws::CognitoIdentityProvider
     #     used by the default backoff function. This option is only used in the
     #     `legacy` retry mode.
     #
-    #   @option options [String] :retry_mode ("legacy")
+    #   @option options [String] :retry_mode ("standard")
     #     Specifies which retry algorithm to use. Values are:
     #
-    #     * `legacy` - The pre-existing retry behavior. This is the default
-    #       value if no retry mode is provided.
+    #     * `legacy` - The pre-existing retry behavior.
     #
     #     * `standard` - A standardized set of retry rules across the AWS SDKs.
     #       This includes support for retry quotas, which limit the number of
-    #       unsuccessful retries a client can make.
+    #       unsuccessful retries a client can make. This is the default value
+    #       if no retry mode is provided.
     #
     #     * `adaptive` - A retry mode that includes all the functionality of
     #       `standard` mode along with automatic client side throttling.
@@ -2440,6 +2441,108 @@ module Aws::CognitoIdentityProvider
       req.send_request(options)
     end
 
+    # Lists the active sessions for a specified user as an administrator.
+    # The response includes both token sessions and SSO sessions. Only
+    # active sessions are returned; revoked and expired sessions aren't
+    # included. Amazon Cognito returns all of a user's sessions in a single
+    # page of up to 125 sessions. The results are eventually consistent, and
+    # new sessions are typically included within a few seconds.
+    #
+    # @option params [required, String] :user_pool_id
+    #   The ID of the user pool that contains the user.
+    #
+    # @option params [required, String] :username
+    #   The username of the user whose sessions you want to list.
+    #
+    # @option params [String] :next_token
+    #   A pagination token that Amazon Cognito returned in a previous
+    #   response. Use this value to retrieve the next page of results if a
+    #   `NextToken` was included in a prior response.
+    #
+    # @return [Types::AdminListUserSessionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::AdminListUserSessionsResponse#sessions #sessions} => Array&lt;Types::SessionDescriptionType&gt;
+    #   * {Types::AdminListUserSessionsResponse#next_token #next_token} => String
+    #
+    #
+    # @example Example: Example list the active sessions of a user as an administrator
+    #
+    #   # The following example lists the active sessions for the user testuser. The response contains one token session that
+    #   # originated from an SSO session, and the SSO session it came through.
+    #
+    #   resp = client.admin_list_user_sessions({
+    #     user_pool_id: "us-east-1_EXAMPLE", 
+    #     username: "testuser", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     sessions: [
+    #       {
+    #         client_id: "1example23456789", 
+    #         create_date: Time.parse(1792454400.117), 
+    #         device_type: "Chrome 125 / macOS 15.0", 
+    #         is_current_session: false, 
+    #         last_active_date: Time.parse(1792540800.234), 
+    #         last_ip_address: "192.0.2.42", 
+    #         last_location: {
+    #           city: "Seattle", 
+    #           country: "United States", 
+    #         }, 
+    #         origin_session_id: "ssoq4r8s2t6u9v3w7x1y5z0a2b4c", 
+    #         session_id: "tkna7b3c9d2e5f8g1h4j6k0m2n5p", 
+    #         session_type: "TOKEN", 
+    #       }, 
+    #       {
+    #         client_id: "1example23456789", 
+    #         create_date: Time.parse(1792368000.351), 
+    #         device_type: "Chrome 125 / macOS 15.0", 
+    #         is_current_session: false, 
+    #         last_active_date: Time.parse(1792537200.468), 
+    #         last_ip_address: "192.0.2.42", 
+    #         last_location: {
+    #           city: "Seattle", 
+    #           country: "United States", 
+    #         }, 
+    #         session_id: "ssoq4r8s2t6u9v3w7x1y5z0a2b4c", 
+    #         session_type: "SSO", 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.admin_list_user_sessions({
+    #     user_pool_id: "UserPoolIdType", # required
+    #     username: "UsernameType", # required
+    #     next_token: "PaginationKey",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.sessions #=> Array
+    #   resp.sessions[0].session_id #=> String
+    #   resp.sessions[0].session_type #=> String, one of "TOKEN", "SSO"
+    #   resp.sessions[0].client_id #=> String
+    #   resp.sessions[0].create_date #=> Time
+    #   resp.sessions[0].last_active_date #=> Time
+    #   resp.sessions[0].device_type #=> String
+    #   resp.sessions[0].last_ip_address #=> String
+    #   resp.sessions[0].last_location.city #=> String
+    #   resp.sessions[0].last_location.country #=> String
+    #   resp.sessions[0].origin_session_id #=> String
+    #   resp.sessions[0].is_current_session #=> Boolean
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminListUserSessions AWS API Documentation
+    #
+    # @overload admin_list_user_sessions(params = {})
+    # @param [Hash] params ({})
+    def admin_list_user_sessions(params = {}, options = {})
+      req = build_request(:admin_list_user_sessions, params)
+      req.send_request(options)
+    end
+
     # Given a username and a group name, removes them from the group. User
     # pool groups are identifiers that you can reference from the contents
     # of ID and access tokens, and set preferred IAM roles for identity-pool
@@ -3050,6 +3153,73 @@ module Aws::CognitoIdentityProvider
     # @param [Hash] params ({})
     def admin_respond_to_auth_challenge(params = {}, options = {})
       req = build_request(:admin_respond_to_auth_challenge, params)
+      req.send_request(options)
+    end
+
+    # Revokes a specific user session as an administrator. Amazon Cognito
+    # revokes all refresh and access tokens that are associated with the
+    # session and deletes the session record. You can revoke either a token
+    # session or an SSO session, and you can optionally cascade the
+    # revocation to linked sessions.
+    #
+    # @option params [required, String] :user_pool_id
+    #   The ID of the user pool that contains the session.
+    #
+    # @option params [required, String] :username
+    #   The username of the user who owns the session. The username must match
+    #   the user associated with the `SessionId`, to confirm they are the
+    #   intended target user.
+    #
+    # @option params [required, String] :session_id
+    #   The ID of the session to revoke. This is a 28-character string of
+    #   lowercase letters and digits, prefixed with `tkn` for a token session
+    #   or `sso` for an SSO session.
+    #
+    # @option params [String] :revoke_associated_sessions
+    #   Specifies whether to also revoke the sessions that are linked to the
+    #   targeted session. `NONE`, the default, revokes only the targeted
+    #   session. `LINKED` also revokes the directly linked session or
+    #   sessions, interpreted relative to the type of the targeted session:
+    #   revoking a token session also revokes the parent SSO session it came
+    #   through, and revoking an SSO session also revokes the token sessions
+    #   that came through it. The set of linked sessions is eventually
+    #   consistent, so associated sessions are typically revoked within a few
+    #   seconds.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: Example revoke a user session as an administrator
+    #
+    #   # The following example revokes a token session for the user testuser and cascades the revocation to the parent SSO
+    #   # session that the token session came through.
+    #
+    #   resp = client.admin_revoke_user_session({
+    #     revoke_associated_sessions: "LINKED", 
+    #     session_id: "tknm5k9p2q7r4s8t1v6w3x0y5z2b", 
+    #     user_pool_id: "us-east-1_EXAMPLE", 
+    #     username: "testuser", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.admin_revoke_user_session({
+    #     user_pool_id: "UserPoolIdType", # required
+    #     username: "UsernameType", # required
+    #     session_id: "SessionIdType", # required
+    #     revoke_associated_sessions: "NONE", # accepts NONE, LINKED
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminRevokeUserSession AWS API Documentation
+    #
+    # @overload admin_revoke_user_session(params = {})
+    # @param [Hash] params ({})
+    def admin_revoke_user_session(params = {}, options = {})
+      req = build_request(:admin_revoke_user_session, params)
       req.send_request(options)
     end
 
@@ -3740,6 +3910,73 @@ module Aws::CognitoIdentityProvider
       req.send_request(options)
     end
 
+    # Cancels a point-in-time recovery of a user pool before Amazon Cognito
+    # applies any changes. You can cancel a recovery when its status is
+    # `PREVIEW_GENERATING` or `PREVIEW_GENERATED`. When you cancel a
+    # recovery, Amazon Cognito discards the recovery preview, resumes write
+    # operations in the user pool, and sets the status of the recovery to
+    # `PREVIEW_CANCELLED`. Your user pool data doesn't change.
+    #
+    # You can't cancel a recovery after you start it with a request.
+    #
+    # <note markdown="1"> Amazon Cognito evaluates Identity and Access Management (IAM) policies
+    # in requests for this API operation. For this operation, you must use
+    # IAM credentials to authorize requests, and you must grant yourself the
+    # corresponding IAM permission in a policy.
+    #
+    #  **Learn more**
+    #
+    #  * [Signing Amazon Web Services API Requests][1]
+    #
+    # * [Using the Amazon Cognito user pools API and user pool endpoints][2]
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-signing.html
+    # [2]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html
+    #
+    # @option params [required, String] :user_pool_id
+    #   The ID of the user pool that contains the recovery that you want to
+    #   cancel.
+    #
+    # @option params [required, String] :restore_id
+    #   The ID of the recovery that you want to cancel. Amazon Cognito returns
+    #   this ID in the response to an `InitiatePointInTimeRecovery` request.
+    #
+    # @return [Types::CancelPointInTimeRecoveryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CancelPointInTimeRecoveryResponse#restoration #restoration} => Types::RestorationType
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.cancel_point_in_time_recovery({
+    #     user_pool_id: "UserPoolIdType", # required
+    #     restore_id: "RestoreIdType", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.restoration.restore_id #=> String
+    #   resp.restoration.restore_status #=> String, one of "PREVIEW_GENERATING", "PREVIEW_GENERATED", "PREVIEW_CANCELLED", "PREVIEW_GENERATION_FAILED", "PREVIEW_EXPIRED", "RESTORING", "RESTORE_COMPLETED", "TEMPORARY_INTERNAL_ERROR_SEE_SUPPORT_CASE", "AWS_ABORTED"
+    #   resp.restoration.restore_timestamp #=> Time
+    #   resp.restoration.trigger_timestamp #=> Time
+    #   resp.restoration.restore_preview #=> Array
+    #   resp.restoration.restore_preview[0].entity #=> String
+    #   resp.restoration.restore_preview[0].create_count #=> Integer
+    #   resp.restoration.restore_preview[0].update_count #=> Integer
+    #   resp.restoration.restore_preview[0].delete_count #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/CancelPointInTimeRecovery AWS API Documentation
+    #
+    # @overload cancel_point_in_time_recovery(params = {})
+    # @param [Hash] params ({})
+    def cancel_point_in_time_recovery(params = {}, options = {})
+      req = build_request(:cancel_point_in_time_recovery, params)
+      req.send_request(options)
+    end
+
     # Changes the password for the currently signed-in user.
     #
     # Authorize this action with a signed-in user's access token. It must
@@ -4199,6 +4436,86 @@ module Aws::CognitoIdentityProvider
     # @param [Hash] params ({})
     def confirm_sign_up(params = {}, options = {})
       req = build_request(:confirm_sign_up, params)
+      req.send_request(options)
+    end
+
+    # Creates a Client ID Metadata Document (CIMD) policy for an app client.
+    # A CIMD policy lets OAuth clients identify themselves to your user pool
+    # with an HTTPS URL as their client ID. Amazon Cognito retrieves the
+    # client metadata document from that URL and accepts the client only
+    # when the URL matches one of the URL patterns in the policy.
+    #
+    # <note markdown="1"> Amazon Cognito evaluates Identity and Access Management (IAM) policies
+    # in requests for this API operation. For this operation, you must use
+    # IAM credentials to authorize requests, and you must grant yourself the
+    # corresponding IAM permission in a policy.
+    #
+    #  **Learn more**
+    #
+    #  * [Signing Amazon Web Services API Requests][1]
+    #
+    # * [Using the Amazon Cognito user pools API and user pool endpoints][2]
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-signing.html
+    # [2]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html
+    #
+    # @option params [required, String] :user_pool_id
+    #   The ID of the user pool where you want to create the CIMD policy.
+    #
+    # @option params [required, String] :client_id
+    #   The ID of the app client that you want to associate with the CIMD
+    #   policy.
+    #
+    # @option params [required, String] :policy_name
+    #   A friendly name for the CIMD policy.
+    #
+    # @option params [Integer] :cache_duration
+    #   The length of time, in seconds, that Amazon Cognito caches a client
+    #   metadata document that it retrieved from a URL that matches the
+    #   policy. The value must be between 86,400 seconds (one day) and
+    #   31,556,952 seconds (one year).
+    #
+    # @option params [required, Array<String>] :url_patterns
+    #   One to five HTTPS URL patterns. Amazon Cognito accepts a client ID
+    #   metadata document URL only when it matches one of these patterns.
+    #   Patterns can contain the `*` wildcard character.
+    #
+    # @return [Types::CreateCIMDPolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateCIMDPolicyResponse#cimd_policy #cimd_policy} => Types::CIMDPolicyType
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_cimd_policy({
+    #     user_pool_id: "UserPoolIdType", # required
+    #     client_id: "ClientIdType", # required
+    #     policy_name: "CIMDPolicyNameType", # required
+    #     cache_duration: 1,
+    #     url_patterns: ["URLPatternType"], # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.cimd_policy.user_pool_id #=> String
+    #   resp.cimd_policy.cimd_policy_id #=> String
+    #   resp.cimd_policy.client_id #=> String
+    #   resp.cimd_policy.policy_name #=> String
+    #   resp.cimd_policy.cache_duration #=> Integer
+    #   resp.cimd_policy.url_patterns #=> Array
+    #   resp.cimd_policy.url_patterns[0] #=> String
+    #   resp.cimd_policy.creation_date #=> Time
+    #   resp.cimd_policy.last_modified_date #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/CreateCIMDPolicy AWS API Documentation
+    #
+    # @overload create_cimd_policy(params = {})
+    # @param [Hash] params ({})
+    def create_cimd_policy(params = {}, options = {})
+      req = build_request(:create_cimd_policy, params)
       req.send_request(options)
     end
 
@@ -4736,6 +5053,7 @@ module Aws::CognitoIdentityProvider
     #   resp.resource_server.scopes #=> Array
     #   resp.resource_server.scopes[0].scope_name #=> String
     #   resp.resource_server.scopes[0].scope_description #=> String
+    #   resp.resource_server.managed_by #=> String, one of "COGNITO"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/CreateResourceServer AWS API Documentation
     #
@@ -5170,6 +5488,17 @@ module Aws::CognitoIdentityProvider
     #
     #   [1]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pool-settings-advanced-security.html
     #   [2]: https://docs.aws.amazon.com/cognito/latest/developerguide/feature-plans-features-plus.html
+    #
+    # @option params [Types::DcrConfigurationType] :dcr_configuration
+    #   The dynamic client registration configuration for the user pool. With
+    #   dynamic client registration, applications can register their own app
+    #   clients at runtime through the registration endpoint of your user pool
+    #   domain. To activate this setting, your user pool must be in the [
+    #   Essentials tier][1] or higher.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cognito/latest/developerguide/feature-plans-features-essentials.html
     #
     # @option params [Types::UsernameConfigurationType] :username_configuration
     #   Sets the case sensitivity option for sign-in usernames. When
@@ -5839,6 +6168,13 @@ module Aws::CognitoIdentityProvider
     #         custom_auth_mode: "AUDIT", # accepts AUDIT, ENFORCED
     #       },
     #     },
+    #     dcr_configuration: {
+    #       enable_status: "Enabled", # accepts Enabled, Disabled
+    #       open_dcr_enabled: false,
+    #       authenticated_grant_types: ["code"], # accepts code, implicit, client_credentials
+    #       open_dcr_grant_types: ["code"], # accepts code, implicit, client_credentials
+    #       allowed_scopes: ["ScopeType"],
+    #     },
     #     username_configuration: {
     #       case_sensitive: false, # required
     #     },
@@ -5961,6 +6297,14 @@ module Aws::CognitoIdentityProvider
     #   resp.user_pool.admin_create_user_config.invite_message_template.email_subject #=> String
     #   resp.user_pool.user_pool_add_ons.advanced_security_mode #=> String, one of "OFF", "AUDIT", "ENFORCED"
     #   resp.user_pool.user_pool_add_ons.advanced_security_additional_flows.custom_auth_mode #=> String, one of "AUDIT", "ENFORCED"
+    #   resp.user_pool.dcr_configuration.enable_status #=> String, one of "Enabled", "Disabled"
+    #   resp.user_pool.dcr_configuration.open_dcr_enabled #=> Boolean
+    #   resp.user_pool.dcr_configuration.authenticated_grant_types #=> Array
+    #   resp.user_pool.dcr_configuration.authenticated_grant_types[0] #=> String, one of "code", "implicit", "client_credentials"
+    #   resp.user_pool.dcr_configuration.open_dcr_grant_types #=> Array
+    #   resp.user_pool.dcr_configuration.open_dcr_grant_types[0] #=> String, one of "code", "implicit", "client_credentials"
+    #   resp.user_pool.dcr_configuration.allowed_scopes #=> Array
+    #   resp.user_pool.dcr_configuration.allowed_scopes[0] #=> String
     #   resp.user_pool.username_configuration.case_sensitive #=> Boolean
     #   resp.user_pool.arn #=> String
     #   resp.user_pool.account_recovery_setting.recovery_mechanisms #=> Array
@@ -6172,6 +6516,15 @@ module Aws::CognitoIdentityProvider
     #
     #   * `ALLOW_REFRESH_TOKEN_AUTH`: Enable authflow to refresh tokens.
     #
+    #   * `ALLOW_TOKEN_EXCHANGE_IMPERSONATION` – Use this flow to request
+    #     `GetDerivedToken` token exchanges without an `ActorToken`. The
+    #     issued token represents the subject user directly.
+    #
+    #   * `ALLOW_TOKEN_EXCHANGE_DELEGATION` – Use this flow to request
+    #     `GetDerivedToken` token exchanges that include an `ActorToken`. The
+    #     issued token carries an `act` claim that identifies the intermediary
+    #     acting on the behalf of the subject.
+    #
     #   In some environments, you will see the values `ADMIN_NO_SRP_AUTH`,
     #   `CUSTOM_AUTH_FLOW_ONLY`, or `USER_PASSWORD_AUTH`. You can't assign
     #   these legacy `ExplicitAuthFlows` values to user pool clients at the
@@ -6375,6 +6728,26 @@ module Aws::CognitoIdentityProvider
     #   when users renew their sessions with refresh tokens. When disabled,
     #   token refresh issues only ID and access tokens.
     #
+    # @option params [Boolean] :publish_secrets_in_aws_secrets_manager
+    #   Specifies whether Amazon Cognito stores and manages this app client's
+    #   secret in [Amazon Web Services Secrets Manager][1] instead of
+    #   returning the plaintext value. Applies only when `GenerateSecret` is
+    #   `true`. When you set this parameter to `true`, the response returns
+    #   `ClientSecretArn` instead of `ClientSecret`. Amazon Cognito starts the
+    #   first rotation of the secret right away, and then rotates the secret
+    #   every 7 days by default. You can change the rotation schedule in
+    #   Secrets Manager.
+    #
+    #   Defaults to `false`. If you don't set this parameter, Amazon Cognito
+    #   doesn't manage the secret in Secrets Manager and returns the
+    #   plaintext `ClientSecret` value. The Amazon Cognito console turns on
+    #   this option by default when it creates an app client with a generated
+    #   client secret.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html
+    #
     # @return [Types::CreateUserPoolClientResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateUserPoolClientResponse#user_pool_client #user_pool_client} => Types::UserPoolClientType
@@ -6524,7 +6897,7 @@ module Aws::CognitoIdentityProvider
     #     },
     #     read_attributes: ["ClientPermissionType"],
     #     write_attributes: ["ClientPermissionType"],
-    #     explicit_auth_flows: ["ADMIN_NO_SRP_AUTH"], # accepts ADMIN_NO_SRP_AUTH, CUSTOM_AUTH_FLOW_ONLY, USER_PASSWORD_AUTH, ALLOW_ADMIN_USER_PASSWORD_AUTH, ALLOW_CUSTOM_AUTH, ALLOW_USER_PASSWORD_AUTH, ALLOW_USER_SRP_AUTH, ALLOW_REFRESH_TOKEN_AUTH, ALLOW_USER_AUTH
+    #     explicit_auth_flows: ["ADMIN_NO_SRP_AUTH"], # accepts ADMIN_NO_SRP_AUTH, CUSTOM_AUTH_FLOW_ONLY, USER_PASSWORD_AUTH, ALLOW_ADMIN_USER_PASSWORD_AUTH, ALLOW_CUSTOM_AUTH, ALLOW_USER_PASSWORD_AUTH, ALLOW_USER_SRP_AUTH, ALLOW_REFRESH_TOKEN_AUTH, ALLOW_USER_AUTH, ALLOW_TOKEN_EXCHANGE_DELEGATION, ALLOW_TOKEN_EXCHANGE_IMPERSONATION
     #     supported_identity_providers: ["ProviderNameType"],
     #     callback_urls: ["RedirectUrlType"],
     #     logout_urls: ["RedirectUrlType"],
@@ -6547,6 +6920,7 @@ module Aws::CognitoIdentityProvider
     #       feature: "ENABLED", # required, accepts ENABLED, DISABLED
     #       retry_grace_period_seconds: 1,
     #     },
+    #     publish_secrets_in_aws_secrets_manager: false,
     #   })
     #
     # @example Response structure
@@ -6555,6 +6929,7 @@ module Aws::CognitoIdentityProvider
     #   resp.user_pool_client.client_name #=> String
     #   resp.user_pool_client.client_id #=> String
     #   resp.user_pool_client.client_secret #=> String
+    #   resp.user_pool_client.client_secret_arn #=> String
     #   resp.user_pool_client.last_modified_date #=> Time
     #   resp.user_pool_client.creation_date #=> Time
     #   resp.user_pool_client.refresh_token_validity #=> Integer
@@ -6568,7 +6943,7 @@ module Aws::CognitoIdentityProvider
     #   resp.user_pool_client.write_attributes #=> Array
     #   resp.user_pool_client.write_attributes[0] #=> String
     #   resp.user_pool_client.explicit_auth_flows #=> Array
-    #   resp.user_pool_client.explicit_auth_flows[0] #=> String, one of "ADMIN_NO_SRP_AUTH", "CUSTOM_AUTH_FLOW_ONLY", "USER_PASSWORD_AUTH", "ALLOW_ADMIN_USER_PASSWORD_AUTH", "ALLOW_CUSTOM_AUTH", "ALLOW_USER_PASSWORD_AUTH", "ALLOW_USER_SRP_AUTH", "ALLOW_REFRESH_TOKEN_AUTH", "ALLOW_USER_AUTH"
+    #   resp.user_pool_client.explicit_auth_flows[0] #=> String, one of "ADMIN_NO_SRP_AUTH", "CUSTOM_AUTH_FLOW_ONLY", "USER_PASSWORD_AUTH", "ALLOW_ADMIN_USER_PASSWORD_AUTH", "ALLOW_CUSTOM_AUTH", "ALLOW_USER_PASSWORD_AUTH", "ALLOW_USER_SRP_AUTH", "ALLOW_REFRESH_TOKEN_AUTH", "ALLOW_USER_AUTH", "ALLOW_TOKEN_EXCHANGE_DELEGATION", "ALLOW_TOKEN_EXCHANGE_IMPERSONATION"
     #   resp.user_pool_client.supported_identity_providers #=> Array
     #   resp.user_pool_client.supported_identity_providers[0] #=> String
     #   resp.user_pool_client.callback_urls #=> Array
@@ -6592,6 +6967,7 @@ module Aws::CognitoIdentityProvider
     #   resp.user_pool_client.auth_session_validity #=> Integer
     #   resp.user_pool_client.refresh_token_rotation.feature #=> String, one of "ENABLED", "DISABLED"
     #   resp.user_pool_client.refresh_token_rotation.retry_grace_period_seconds #=> Integer
+    #   resp.user_pool_client.client_type #=> String, one of "REGULAR", "DCR"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/CreateUserPoolClient AWS API Documentation
     #
@@ -6813,6 +7189,50 @@ module Aws::CognitoIdentityProvider
     # @param [Hash] params ({})
     def create_user_pool_replica(params = {}, options = {})
       req = build_request(:create_user_pool_replica, params)
+      req.send_request(options)
+    end
+
+    # Deletes a Client ID Metadata Document (CIMD) policy.
+    #
+    # <note markdown="1"> Amazon Cognito evaluates Identity and Access Management (IAM) policies
+    # in requests for this API operation. For this operation, you must use
+    # IAM credentials to authorize requests, and you must grant yourself the
+    # corresponding IAM permission in a policy.
+    #
+    #  **Learn more**
+    #
+    #  * [Signing Amazon Web Services API Requests][1]
+    #
+    # * [Using the Amazon Cognito user pools API and user pool endpoints][2]
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-signing.html
+    # [2]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html
+    #
+    # @option params [required, String] :user_pool_id
+    #   The ID of the user pool that contains the CIMD policy.
+    #
+    # @option params [required, String] :cimd_policy_id
+    #   The ID of the CIMD policy that you want to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_cimd_policy({
+    #     user_pool_id: "UserPoolIdType", # required
+    #     cimd_policy_id: "CIMDPolicyIdType", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DeleteCIMDPolicy AWS API Documentation
+    #
+    # @overload delete_cimd_policy(params = {})
+    # @param [Hash] params ({})
+    def delete_cimd_policy(params = {}, options = {})
+      req = build_request(:delete_cimd_policy, params)
       req.send_request(options)
     end
 
@@ -7394,6 +7814,65 @@ module Aws::CognitoIdentityProvider
       req.send_request(options)
     end
 
+    # Returns the configuration of a Client ID Metadata Document (CIMD)
+    # policy.
+    #
+    # <note markdown="1"> Amazon Cognito evaluates Identity and Access Management (IAM) policies
+    # in requests for this API operation. For this operation, you must use
+    # IAM credentials to authorize requests, and you must grant yourself the
+    # corresponding IAM permission in a policy.
+    #
+    #  **Learn more**
+    #
+    #  * [Signing Amazon Web Services API Requests][1]
+    #
+    # * [Using the Amazon Cognito user pools API and user pool endpoints][2]
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-signing.html
+    # [2]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html
+    #
+    # @option params [required, String] :user_pool_id
+    #   The ID of the user pool that contains the CIMD policy.
+    #
+    # @option params [required, String] :cimd_policy_id
+    #   The ID of the CIMD policy that you want to describe.
+    #
+    # @return [Types::DescribeCIMDPolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeCIMDPolicyResponse#cimd_policy #cimd_policy} => Types::CIMDPolicyType
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_cimd_policy({
+    #     user_pool_id: "UserPoolIdType", # required
+    #     cimd_policy_id: "CIMDPolicyIdType", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.cimd_policy.user_pool_id #=> String
+    #   resp.cimd_policy.cimd_policy_id #=> String
+    #   resp.cimd_policy.client_id #=> String
+    #   resp.cimd_policy.policy_name #=> String
+    #   resp.cimd_policy.cache_duration #=> Integer
+    #   resp.cimd_policy.url_patterns #=> Array
+    #   resp.cimd_policy.url_patterns[0] #=> String
+    #   resp.cimd_policy.creation_date #=> Time
+    #   resp.cimd_policy.last_modified_date #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DescribeCIMDPolicy AWS API Documentation
+    #
+    # @overload describe_cimd_policy(params = {})
+    # @param [Hash] params ({})
+    def describe_cimd_policy(params = {}, options = {})
+      req = build_request(:describe_cimd_policy, params)
+      req.send_request(options)
+    end
+
     # Given a user pool ID and identity provider (IdP) name, returns details
     # about the IdP.
     #
@@ -7543,6 +8022,72 @@ module Aws::CognitoIdentityProvider
       req.send_request(options)
     end
 
+    # Returns details about a point-in-time recovery of a user pool,
+    # including its status and the point in time that it restores the user
+    # pool to. After Amazon Cognito generates the recovery preview, the
+    # response also includes the number of entities that the recovery
+    # creates, updates, and deletes. Review the preview before you apply the
+    # recovery with a request or discard it with a request.
+    #
+    # <note markdown="1"> Amazon Cognito evaluates Identity and Access Management (IAM) policies
+    # in requests for this API operation. For this operation, you must use
+    # IAM credentials to authorize requests, and you must grant yourself the
+    # corresponding IAM permission in a policy.
+    #
+    #  **Learn more**
+    #
+    #  * [Signing Amazon Web Services API Requests][1]
+    #
+    # * [Using the Amazon Cognito user pools API and user pool endpoints][2]
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-signing.html
+    # [2]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html
+    #
+    # @option params [required, String] :user_pool_id
+    #   The ID of the user pool that contains the recovery that you want to
+    #   describe.
+    #
+    # @option params [required, String] :restore_id
+    #   The ID of the recovery that you want to describe. Amazon Cognito
+    #   returns this ID in the response to an `InitiatePointInTimeRecovery`
+    #   request.
+    #
+    # @return [Types::DescribePointInTimeRecoveryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribePointInTimeRecoveryResponse#restoration #restoration} => Types::RestorationType
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_point_in_time_recovery({
+    #     user_pool_id: "UserPoolIdType", # required
+    #     restore_id: "RestoreIdType", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.restoration.restore_id #=> String
+    #   resp.restoration.restore_status #=> String, one of "PREVIEW_GENERATING", "PREVIEW_GENERATED", "PREVIEW_CANCELLED", "PREVIEW_GENERATION_FAILED", "PREVIEW_EXPIRED", "RESTORING", "RESTORE_COMPLETED", "TEMPORARY_INTERNAL_ERROR_SEE_SUPPORT_CASE", "AWS_ABORTED"
+    #   resp.restoration.restore_timestamp #=> Time
+    #   resp.restoration.trigger_timestamp #=> Time
+    #   resp.restoration.restore_preview #=> Array
+    #   resp.restoration.restore_preview[0].entity #=> String
+    #   resp.restoration.restore_preview[0].create_count #=> Integer
+    #   resp.restoration.restore_preview[0].update_count #=> Integer
+    #   resp.restoration.restore_preview[0].delete_count #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DescribePointInTimeRecovery AWS API Documentation
+    #
+    # @overload describe_point_in_time_recovery(params = {})
+    # @param [Hash] params ({})
+    def describe_point_in_time_recovery(params = {}, options = {})
+      req = build_request(:describe_point_in_time_recovery, params)
+      req.send_request(options)
+    end
+
     # Describes a resource server. For more information about resource
     # servers, see [Access control with resource servers][1].
     #
@@ -7582,6 +8127,7 @@ module Aws::CognitoIdentityProvider
     #   resp.resource_server.scopes #=> Array
     #   resp.resource_server.scopes[0].scope_name #=> String
     #   resp.resource_server.scopes[0].scope_description #=> String
+    #   resp.resource_server.managed_by #=> String, one of "COGNITO"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DescribeResourceServer AWS API Documentation
     #
@@ -7983,6 +8529,14 @@ module Aws::CognitoIdentityProvider
     #   resp.user_pool.admin_create_user_config.invite_message_template.email_subject #=> String
     #   resp.user_pool.user_pool_add_ons.advanced_security_mode #=> String, one of "OFF", "AUDIT", "ENFORCED"
     #   resp.user_pool.user_pool_add_ons.advanced_security_additional_flows.custom_auth_mode #=> String, one of "AUDIT", "ENFORCED"
+    #   resp.user_pool.dcr_configuration.enable_status #=> String, one of "Enabled", "Disabled"
+    #   resp.user_pool.dcr_configuration.open_dcr_enabled #=> Boolean
+    #   resp.user_pool.dcr_configuration.authenticated_grant_types #=> Array
+    #   resp.user_pool.dcr_configuration.authenticated_grant_types[0] #=> String, one of "code", "implicit", "client_credentials"
+    #   resp.user_pool.dcr_configuration.open_dcr_grant_types #=> Array
+    #   resp.user_pool.dcr_configuration.open_dcr_grant_types[0] #=> String, one of "code", "implicit", "client_credentials"
+    #   resp.user_pool.dcr_configuration.allowed_scopes #=> Array
+    #   resp.user_pool.dcr_configuration.allowed_scopes[0] #=> String
     #   resp.user_pool.username_configuration.case_sensitive #=> Boolean
     #   resp.user_pool.arn #=> String
     #   resp.user_pool.account_recovery_setting.recovery_mechanisms #=> Array
@@ -8052,6 +8606,7 @@ module Aws::CognitoIdentityProvider
     #   resp.user_pool_client.client_name #=> String
     #   resp.user_pool_client.client_id #=> String
     #   resp.user_pool_client.client_secret #=> String
+    #   resp.user_pool_client.client_secret_arn #=> String
     #   resp.user_pool_client.last_modified_date #=> Time
     #   resp.user_pool_client.creation_date #=> Time
     #   resp.user_pool_client.refresh_token_validity #=> Integer
@@ -8065,7 +8620,7 @@ module Aws::CognitoIdentityProvider
     #   resp.user_pool_client.write_attributes #=> Array
     #   resp.user_pool_client.write_attributes[0] #=> String
     #   resp.user_pool_client.explicit_auth_flows #=> Array
-    #   resp.user_pool_client.explicit_auth_flows[0] #=> String, one of "ADMIN_NO_SRP_AUTH", "CUSTOM_AUTH_FLOW_ONLY", "USER_PASSWORD_AUTH", "ALLOW_ADMIN_USER_PASSWORD_AUTH", "ALLOW_CUSTOM_AUTH", "ALLOW_USER_PASSWORD_AUTH", "ALLOW_USER_SRP_AUTH", "ALLOW_REFRESH_TOKEN_AUTH", "ALLOW_USER_AUTH"
+    #   resp.user_pool_client.explicit_auth_flows[0] #=> String, one of "ADMIN_NO_SRP_AUTH", "CUSTOM_AUTH_FLOW_ONLY", "USER_PASSWORD_AUTH", "ALLOW_ADMIN_USER_PASSWORD_AUTH", "ALLOW_CUSTOM_AUTH", "ALLOW_USER_PASSWORD_AUTH", "ALLOW_USER_SRP_AUTH", "ALLOW_REFRESH_TOKEN_AUTH", "ALLOW_USER_AUTH", "ALLOW_TOKEN_EXCHANGE_DELEGATION", "ALLOW_TOKEN_EXCHANGE_IMPERSONATION"
     #   resp.user_pool_client.supported_identity_providers #=> Array
     #   resp.user_pool_client.supported_identity_providers[0] #=> String
     #   resp.user_pool_client.callback_urls #=> Array
@@ -8089,6 +8644,7 @@ module Aws::CognitoIdentityProvider
     #   resp.user_pool_client.auth_session_validity #=> Integer
     #   resp.user_pool_client.refresh_token_rotation.feature #=> String, one of "ENABLED", "DISABLED"
     #   resp.user_pool_client.refresh_token_rotation.retry_grace_period_seconds #=> Integer
+    #   resp.user_pool_client.client_type #=> String, one of "REGULAR", "DCR"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DescribeUserPoolClient AWS API Documentation
     #
@@ -8557,6 +9113,187 @@ module Aws::CognitoIdentityProvider
     # @param [Hash] params ({})
     def get_client_token(params = {}, options = {})
       req = build_request(:get_client_token, params)
+      req.send_request(options)
+    end
+
+    # Exchanges an existing token for a new token that is scoped and
+    # audience-bound for a specific downstream service, following the OAuth
+    # 2.0 Token Exchange grant type. For more information about the OAuth
+    # 2.0 Token Exchange grant type, see [RFC 8693 - OAuth 2.0 Token
+    # Exchange][1] on the IETF website. Present a `SubjectToken`, the
+    # credential that you already hold, to receive a new token appropriate
+    # for calling a specific resource server or audience.
+    #
+    # If you also present an `ActorToken` that identifies an intermediary
+    # service, the issued token carries an `act` claim that identifies the
+    # intermediary, and downstream services can distinguish a user acting
+    # directly from an intermediary acting on the user's behalf. If you
+    # don't present an `ActorToken`, the issued token appears as if the
+    # user acted directly.
+    #
+    # To use this operation, you must have IAM credentials, or you must
+    # present the requesting app client's `ClientId` and, if the client has
+    # a secret, `ClientSecret`, in the request.
+    #
+    # The requesting app client must have
+    # `ALLOW_TOKEN_EXCHANGE_IMPERSONATION` or
+    # `ALLOW_TOKEN_EXCHANGE_DELEGATION` in its `ExplicitAuthFlows`
+    # (depending on whether you include an `ActorToken`), or the request
+    # fails.
+    #
+    #
+    #
+    # [1]: https://tools.ietf.org/html/rfc8693
+    #
+    # @option params [required, String] :client_id
+    #   The ID of the app client that requests the token exchange.
+    #
+    # @option params [String] :client_secret
+    #   The client secret of the requested app client, if the client has a
+    #   secret.
+    #
+    # @option params [required, String] :subject_token
+    #   The token that you want to exchange for a new token. This is the
+    #   credential that represents the identity of the party on behalf of whom
+    #   the request is being made.
+    #
+    # @option params [required, String] :subject_token_type
+    #   The type of the `SubjectToken` that you want to exchange. Valid
+    #   values:
+    #
+    #   * `ACCESS_TOKEN` – The subject token is an access token.
+    #
+    #   * `ID_TOKEN` – The subject token is an ID token.
+    #
+    #   * `SAML2` – The subject token is a SAML 2.0 assertion.
+    #
+    # @option params [String] :subject_token_provider_name
+    #   The name of the third-party identity provider that issued the
+    #   `SubjectToken`, if the subject token isn't a Amazon Cognito token.
+    #   Provide this value when your `SubjectToken` came from a SAML or OIDC
+    #   provider that you registered with your user pool, so that Amazon
+    #   Cognito can validate it against that provider's configuration. Omit
+    #   this parameter for a Amazon Cognito ID or access token.
+    #
+    # @option params [String] :actor_token
+    #   A token that identifies the intermediary service that is exchanging
+    #   the token on behalf of the user. When you provide an `ActorToken`, the
+    #   token that Amazon Cognito issues carries an `act` claim that
+    #   identifies the intermediary, so that downstream services can
+    #   distinguish a user acting directly from an intermediary acting on the
+    #   user's behalf.
+    #
+    # @option params [String] :actor_token_type
+    #   The type of the `ActorToken` that you provide. Required when you
+    #   provide an `ActorToken`. Valid values:
+    #
+    #   * `ACCESS_TOKEN` – The actor token is an access token.
+    #
+    #   * `ID_TOKEN` – The actor token is an ID token.
+    #
+    #   * `SAML2` – The actor token is a SAML 2.0 assertion.
+    #
+    # @option params [String] :actor_token_provider_name
+    #   The name of the third-party identity provider that issued the
+    #   `ActorToken`, if the actor token isn't a Amazon Cognito token.
+    #
+    # @option params [Array<String>] :scopes
+    #   The scopes that you want the new token to have. Amazon Cognito issues
+    #   a token with the intersection of these requested scopes, the scopes of
+    #   your `SubjectToken`, and the scopes that are allowed for the
+    #   requesting app client. If you don't specify any scopes, Amazon
+    #   Cognito issues a token with the same scopes as your `SubjectToken`.
+    #
+    # @option params [Array<String>] :audiences
+    #   The logical name of the target service where you intend to use the
+    #   issued token. You can't request both `Audiences` and `Resources` in
+    #   the same request.
+    #
+    # @option params [Array<String>] :resources
+    #   The identifier of a resource server in your user pool where you intend
+    #   to use the issued token. You can't request both `Resources` and
+    #   `Audiences` in the same request.
+    #
+    # @option params [String] :requested_token_type
+    #   The type of token that you want Amazon Cognito to issue. Valid values:
+    #
+    #   * `ACCESS_TOKEN` – Issues an access token.
+    #
+    #   * `ID_TOKEN` – Issues an ID token.
+    #
+    #   Amazon Cognito can't issue a SAML assertion, so `SAML2` isn't a
+    #   valid value for this parameter.
+    #
+    # @return [Types::GetDerivedTokenResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetDerivedTokenResponse#issued_token #issued_token} => String
+    #   * {Types::GetDerivedTokenResponse#issued_token_type #issued_token_type} => String
+    #   * {Types::GetDerivedTokenResponse#token_type #token_type} => String
+    #   * {Types::GetDerivedTokenResponse#expires_in #expires_in} => Integer
+    #   * {Types::GetDerivedTokenResponse#scopes #scopes} => Array&lt;String&gt;
+    #
+    #
+    # @example Example: Example exchange a subject token for an audience-bound access token
+    #
+    #   # The following example exchanges an access token for a new access token that is scoped and audience-bound for the
+    #   # solar-system-data resource server.
+    #
+    #   resp = client.get_derived_token({
+    #     audiences: [
+    #       "solar-system-data", 
+    #     ], 
+    #     client_id: "1example23456789", 
+    #     client_secret: "13ka4h7u28d9oo44tqpq9djqsfvhvu8rk4d2ighvpu0k8fj1c2r9", 
+    #     scopes: [
+    #       "solar-system-data/asteroids.read", 
+    #     ], 
+    #     subject_token: "eyJra456defEXAMPLE", 
+    #     subject_token_type: "ACCESS_TOKEN", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     expires_in: 3600, 
+    #     issued_token: "eyJra789ghiEXAMPLE", 
+    #     issued_token_type: "ACCESS_TOKEN", 
+    #     scopes: [
+    #       "solar-system-data/asteroids.read", 
+    #     ], 
+    #     token_type: "Bearer", 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_derived_token({
+    #     client_id: "ClientIdType", # required
+    #     client_secret: "ClientSecretType",
+    #     subject_token: "GetDerivedTokenTokenModelType", # required
+    #     subject_token_type: "ACCESS_TOKEN", # required, accepts ACCESS_TOKEN, ID_TOKEN, SAML2
+    #     subject_token_provider_name: "ProviderNameType",
+    #     actor_token: "GetDerivedTokenTokenModelType",
+    #     actor_token_type: "ACCESS_TOKEN", # accepts ACCESS_TOKEN, ID_TOKEN, SAML2
+    #     actor_token_provider_name: "ProviderNameType",
+    #     scopes: ["ScopeType"],
+    #     audiences: ["AudienceType"],
+    #     resources: ["ResourceServerIdentifierType"],
+    #     requested_token_type: "ACCESS_TOKEN", # accepts ACCESS_TOKEN, ID_TOKEN
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.issued_token #=> String
+    #   resp.issued_token_type #=> String, one of "ACCESS_TOKEN", "ID_TOKEN"
+    #   resp.token_type #=> String, one of "Bearer", "N_A"
+    #   resp.expires_in #=> Integer
+    #   resp.scopes #=> Array
+    #   resp.scopes[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/GetDerivedToken AWS API Documentation
+    #
+    # @overload get_derived_token(params = {})
+    # @param [Hash] params ({})
+    def get_derived_token(params = {}, options = {})
+      req = build_request(:get_derived_token, params)
       req.send_request(options)
     end
 
@@ -9324,6 +10061,66 @@ module Aws::CognitoIdentityProvider
       req.send_request(options)
     end
 
+    # Retrieves the session configuration for a user pool app client. If you
+    # have never called `SetUserPoolClientSessionConfiguration` for the app
+    # client, this operation returns the default SSO session maximum
+    # validity of `60` minutes.
+    #
+    # @option params [required, String] :user_pool_id
+    #   The ID of the user pool that contains the app client.
+    #
+    # @option params [required, String] :client_id
+    #   The ID of the app client where you want to retrieve the session
+    #   configuration.
+    #
+    # @return [Types::GetUserPoolClientSessionConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetUserPoolClientSessionConfigurationResponse#user_pool_id #user_pool_id} => String
+    #   * {Types::GetUserPoolClientSessionConfigurationResponse#client_id #client_id} => String
+    #   * {Types::GetUserPoolClientSessionConfigurationResponse#sso_session #sso_session} => Types::ClientSSOSessionConfigType
+    #
+    #
+    # @example Example: Example get the session configuration of an app client
+    #
+    #   # The following example returns the per-client session configuration, showing an SSO session validity of 43200 minutes (30
+    #   # days).
+    #
+    #   resp = client.get_user_pool_client_session_configuration({
+    #     client_id: "1example23456789", 
+    #     user_pool_id: "us-east-1_EXAMPLE", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     client_id: "1example23456789", 
+    #     sso_session: {
+    #       max_validity_minutes: 43200, 
+    #     }, 
+    #     user_pool_id: "us-east-1_EXAMPLE", 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_user_pool_client_session_configuration({
+    #     user_pool_id: "UserPoolIdType", # required
+    #     client_id: "ClientIdType", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.user_pool_id #=> String
+    #   resp.client_id #=> String
+    #   resp.sso_session.max_validity_minutes #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/GetUserPoolClientSessionConfiguration AWS API Documentation
+    #
+    # @overload get_user_pool_client_session_configuration(params = {})
+    # @param [Hash] params ({})
+    def get_user_pool_client_session_configuration(params = {}, options = {})
+      req = build_request(:get_user_pool_client_session_configuration, params)
+      req.send_request(options)
+    end
+
     # Given a user pool ID, returns configuration for sign-in with WebAuthn
     # authenticators and for multi-factor authentication (MFA). This
     # operation describes the following:
@@ -9401,6 +10198,63 @@ module Aws::CognitoIdentityProvider
     # @param [Hash] params ({})
     def get_user_pool_mfa_config(params = {}, options = {})
       req = build_request(:get_user_pool_mfa_config, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the session tracking configuration for a user pool,
+    # including whether session tracking is enabled and the pool-wide
+    # maximum number of active token sessions for each user. If you have
+    # never called `SetUserPoolSessionConfiguration` for the user pool, this
+    # operation returns the default values: `UserSessionTracking` as
+    # `DISABLED` and a `MaxPerUser` value of `20`.
+    #
+    # @option params [required, String] :user_pool_id
+    #   The ID of the user pool where you want to retrieve the session
+    #   configuration.
+    #
+    # @return [Types::GetUserPoolSessionConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetUserPoolSessionConfigurationResponse#user_pool_id #user_pool_id} => String
+    #   * {Types::GetUserPoolSessionConfigurationResponse#user_session_tracking #user_session_tracking} => String
+    #   * {Types::GetUserPoolSessionConfigurationResponse#token_session #token_session} => Types::UserPoolTokenSessionConfigType
+    #
+    #
+    # @example Example: Example get the session configuration of a user pool
+    #
+    #   # The following example returns the pool-level session configuration, showing that session tracking is enabled with a
+    #   # maximum of 20 concurrent token sessions per user.
+    #
+    #   resp = client.get_user_pool_session_configuration({
+    #     user_pool_id: "us-east-1_EXAMPLE", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     token_session: {
+    #       max_per_user: 20, 
+    #     }, 
+    #     user_pool_id: "us-east-1_EXAMPLE", 
+    #     user_session_tracking: "ENABLED", 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_user_pool_session_configuration({
+    #     user_pool_id: "UserPoolIdType", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.user_pool_id #=> String
+    #   resp.user_session_tracking #=> String, one of "ENABLED", "DISABLED"
+    #   resp.token_session.max_per_user #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/GetUserPoolSessionConfiguration AWS API Documentation
+    #
+    # @overload get_user_pool_session_configuration(params = {})
+    # @param [Hash] params ({})
+    def get_user_pool_session_configuration(params = {}, options = {})
+      req = build_request(:get_user_pool_session_configuration, params)
       req.send_request(options)
     end
 
@@ -9835,6 +10689,307 @@ module Aws::CognitoIdentityProvider
       req.send_request(options)
     end
 
+    # Initiates a point-in-time recovery of a user pool to a time in the
+    # past that you specify. This operation is the first step of a recovery
+    # and doesn't change your user pool data. Amazon Cognito pauses write
+    # operations in the user pool and generates a recovery preview, which
+    # might not be available immediately. The preview shows the number of
+    # entities that the recovery creates, updates, and deletes. To check the
+    # status of the recovery and review the preview, make a request. When
+    # the status is `PREVIEW_GENERATED`, apply the recovery with a request
+    # or discard it with a request. The time that it takes to generate the
+    # recovery preview doesn't depend on the size of your user pool.
+    #
+    # Point-in-time recovery is a disaster recovery feature. Use it to
+    # recover from accidental or unauthorized changes that affect your user
+    # data, for example the deletion or corruption of many users. Don't use
+    # point-in-time recovery to remove users that were created recently or
+    # to revert changes to individual users. To delete or update individual
+    # users, use operations like and .
+    #
+    # While a recovery is in progress, Amazon Cognito blocks operations that
+    # write to the user pool, for example user sign-up, user creation, and
+    # attribute updates. Sign-in and read operations continue to work, with
+    # the following exceptions:
+    #
+    # * Users who must set a new password, set up MFA, or respond to a TOTP
+    #   MFA challenge can't complete sign-in. Sign-in with the
+    #   `NEW_PASSWORD_REQUIRED`, `MFA_SETUP`, and `SOFTWARE_TOKEN_MFA`
+    #   challenges fails until the recovery ends.
+    #
+    # * Federated users can sign in only if they have previously signed in
+    #   to the user pool and their attributes from the external identity
+    #   provider haven't changed.
+    #
+    # * You can't create or start user import jobs. Start your import jobs
+    #   after the recovery ends.
+    #
+    # If you don't start or cancel the recovery within 24 hours after you
+    # initiate it, the recovery preview expires. Amazon Cognito then resumes
+    # write operations and doesn't change your user pool data. The 24-hour
+    # period includes the time that Amazon Cognito takes to generate the
+    # recovery preview.
+    #
+    # A point-in-time recovery restores user data, including user profiles
+    # and attributes, group memberships, passwords, MFA settings, and
+    # passkeys. It doesn't restore user pool configuration, for example app
+    # clients, the attribute schema, encryption settings, or multi-Region
+    # replication settings. Users who changed their password after the
+    # recovery point keep their current password.
+    #
+    # The following requirements and limits apply to point-in-time recovery:
+    #
+    # * Your user pool must be on the Essentials or Plus [feature plan][1].
+    #   With the Essentials feature plan, you can recover your user pool to
+    #   a point in time up to 1 day in the past. With the Plus feature plan,
+    #   you can recover up to 14 days in the past. Your user pool must have
+    #   been on the required feature plan at the recovery point. For
+    #   example, to recover to a point in time 14 days ago, your user pool
+    #   must have been on the Plus feature plan for the past 14 days.
+    #
+    # * The recovery point must be at least 15 minutes in the past and
+    #   can't be earlier than the creation time of the user pool.
+    #
+    # * A user pool can have only one active recovery at a time.
+    #
+    # * An Amazon Web Services account can have up to five active recoveries
+    #   at a time across all of its user pools. An organization in Amazon
+    #   Web Services Organizations can have up to ten active recoveries at a
+    #   time across all of its accounts.
+    #
+    # * You can complete one recovery of a user pool in a 24-hour period.
+    #
+    # * You can create up to three recovery previews of a user pool, ten
+    #   recovery previews in an Amazon Web Services account, and 15 recovery
+    #   previews in an organization in Amazon Web Services Organizations in
+    #   a 24-hour period. You can create up to ten recovery previews of a
+    #   user pool in a 30-day period.
+    #
+    # * You can't initiate a recovery while a user import job is in
+    #   progress in your user pool. Wait for the import job to complete, or
+    #   stop it with a request, and then initiate the recovery.
+    #
+    # * In a user pool with multi-Region replication, you can initiate a
+    #   recovery only in the primary Amazon Web Services Region, and only
+    #   after replication is complete.
+    #
+    # * If your user pool uses a customer managed key in KMS for encryption,
+    #   the key must remain enabled and accessible to Amazon Cognito for the
+    #   duration of the recovery.
+    #
+    # * Some user pools don't support point-in-time recovery, for example
+    #   some older user pools and user pools that contain user data with
+    #   characters or formats that point-in-time recovery doesn't support.
+    #   If your user pool doesn't support it, Amazon Cognito returns an
+    #   error when you initiate a recovery. To get help with this
+    #   limitation, contact Amazon Web Services Support.
+    #
+    # <note markdown="1"> Amazon Cognito evaluates Identity and Access Management (IAM) policies
+    # in requests for this API operation. For this operation, you must use
+    # IAM credentials to authorize requests, and you must grant yourself the
+    # corresponding IAM permission in a policy.
+    #
+    #  **Learn more**
+    #
+    #  * [Signing Amazon Web Services API Requests][2]
+    #
+    # * [Using the Amazon Cognito user pools API and user pool endpoints][3]
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-sign-in-feature-plans.html
+    # [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-signing.html
+    # [3]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html
+    #
+    # @option params [required, String] :user_pool_id
+    #   The ID of the user pool that you want to recover.
+    #
+    # @option params [required, Time,DateTime,Date,Integer,String] :restore_timestamp
+    #   The point in time that you want to recover your user pool to. Amazon
+    #   Cognito reverts changes to user data that occurred after this time.
+    #   The recovery point must be at least 15 minutes in the past and within
+    #   the recovery period of your user pool feature plan: up to 1 day in the
+    #   past with the Essentials feature plan, or up to 14 days in the past
+    #   with the Plus feature plan.
+    #
+    # @return [Types::InitiatePointInTimeRecoveryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::InitiatePointInTimeRecoveryResponse#restoration #restoration} => Types::RestorationType
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.initiate_point_in_time_recovery({
+    #     user_pool_id: "UserPoolIdType", # required
+    #     restore_timestamp: Time.now, # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.restoration.restore_id #=> String
+    #   resp.restoration.restore_status #=> String, one of "PREVIEW_GENERATING", "PREVIEW_GENERATED", "PREVIEW_CANCELLED", "PREVIEW_GENERATION_FAILED", "PREVIEW_EXPIRED", "RESTORING", "RESTORE_COMPLETED", "TEMPORARY_INTERNAL_ERROR_SEE_SUPPORT_CASE", "AWS_ABORTED"
+    #   resp.restoration.restore_timestamp #=> Time
+    #   resp.restoration.trigger_timestamp #=> Time
+    #   resp.restoration.restore_preview #=> Array
+    #   resp.restoration.restore_preview[0].entity #=> String
+    #   resp.restoration.restore_preview[0].create_count #=> Integer
+    #   resp.restoration.restore_preview[0].update_count #=> Integer
+    #   resp.restoration.restore_preview[0].delete_count #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/InitiatePointInTimeRecovery AWS API Documentation
+    #
+    # @overload initiate_point_in_time_recovery(params = {})
+    # @param [Hash] params ({})
+    def initiate_point_in_time_recovery(params = {}, options = {})
+      req = build_request(:initiate_point_in_time_recovery, params)
+      req.send_request(options)
+    end
+
+    # Lists the Client ID Metadata Document (CIMD) policies in a user pool.
+    #
+    # <note markdown="1"> Amazon Cognito evaluates Identity and Access Management (IAM) policies
+    # in requests for this API operation. For this operation, you must use
+    # IAM credentials to authorize requests, and you must grant yourself the
+    # corresponding IAM permission in a policy.
+    #
+    #  **Learn more**
+    #
+    #  * [Signing Amazon Web Services API Requests][1]
+    #
+    # * [Using the Amazon Cognito user pools API and user pool endpoints][2]
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-signing.html
+    # [2]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html
+    #
+    # @option params [required, String] :user_pool_id
+    #   The ID of the user pool whose CIMD policies you want to list.
+    #
+    # @option params [String] :next_token
+    #   This API operation returns a limited number of results. The pagination
+    #   token is an identifier that you can present in an additional API
+    #   request with the same parameters. When you include the pagination
+    #   token, Amazon Cognito returns the next set of items after the current
+    #   list. Subsequent requests return a new pagination token. By use of
+    #   this token, you can paginate through the full list of items.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of CIMD policies that you want Amazon Cognito to
+    #   return in the response.
+    #
+    # @return [Types::ListCIMDPoliciesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListCIMDPoliciesResponse#next_token #next_token} => String
+    #   * {Types::ListCIMDPoliciesResponse#cimd_policies #cimd_policies} => Array&lt;Types::CIMDPolicySummaryType&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_cimd_policies({
+    #     user_pool_id: "UserPoolIdType", # required
+    #     next_token: "PaginationKeyType",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.cimd_policies #=> Array
+    #   resp.cimd_policies[0].cimd_policy_id #=> String
+    #   resp.cimd_policies[0].client_id #=> String
+    #   resp.cimd_policies[0].policy_name #=> String
+    #   resp.cimd_policies[0].cache_duration #=> Integer
+    #   resp.cimd_policies[0].creation_date #=> Time
+    #   resp.cimd_policies[0].last_modified_date #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ListCIMDPolicies AWS API Documentation
+    #
+    # @overload list_cimd_policies(params = {})
+    # @param [Hash] params ({})
+    def list_cimd_policies(params = {}, options = {})
+      req = build_request(:list_cimd_policies, params)
+      req.send_request(options)
+    end
+
+    # Lists the client ID metadata document URLs that Amazon Cognito has
+    # received for a Client ID Metadata Document (CIMD) policy, with the
+    # cache state of each URL.
+    #
+    # <note markdown="1"> Amazon Cognito evaluates Identity and Access Management (IAM) policies
+    # in requests for this API operation. For this operation, you must use
+    # IAM credentials to authorize requests, and you must grant yourself the
+    # corresponding IAM permission in a policy.
+    #
+    #  **Learn more**
+    #
+    #  * [Signing Amazon Web Services API Requests][1]
+    #
+    # * [Using the Amazon Cognito user pools API and user pool endpoints][2]
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-signing.html
+    # [2]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html
+    #
+    # @option params [required, String] :user_pool_id
+    #   The ID of the user pool that contains the CIMD policy.
+    #
+    # @option params [required, String] :cimd_policy_id
+    #   The ID of the CIMD policy whose client metadata document URLs you want
+    #   to list.
+    #
+    # @option params [String] :next_token
+    #   This API operation returns a limited number of results. The pagination
+    #   token is an identifier that you can present in an additional API
+    #   request with the same parameters. When you include the pagination
+    #   token, Amazon Cognito returns the next set of items after the current
+    #   list. Subsequent requests return a new pagination token. By use of
+    #   this token, you can paginate through the full list of items.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of URLs that you want Amazon Cognito to return in
+    #   the response.
+    #
+    # @return [Types::ListClientMetadataURLsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListClientMetadataURLsResponse#next_token #next_token} => String
+    #   * {Types::ListClientMetadataURLsResponse#client_metadata_urls #client_metadata_urls} => Array&lt;Types::ClientMetadataURLType&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_client_metadata_urls({
+    #     user_pool_id: "UserPoolIdType", # required
+    #     cimd_policy_id: "CIMDPolicyIdType", # required
+    #     next_token: "PaginationKeyType",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.client_metadata_urls #=> Array
+    #   resp.client_metadata_urls[0].url #=> String
+    #   resp.client_metadata_urls[0].cached_date #=> Time
+    #   resp.client_metadata_urls[0].expiration_date #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ListClientMetadataURLs AWS API Documentation
+    #
+    # @overload list_client_metadata_urls(params = {})
+    # @param [Hash] params ({})
+    def list_client_metadata_urls(params = {}, options = {})
+      req = build_request(:list_client_metadata_urls, params)
+      req.send_request(options)
+    end
+
     # Lists the devices that Amazon Cognito has registered to the currently
     # signed-in user. For more information about device authentication, see
     # [Working with user devices in your user pool][1].
@@ -10049,6 +11204,76 @@ module Aws::CognitoIdentityProvider
       req.send_request(options)
     end
 
+    # Lists the point-in-time recoveries of a user pool, including the
+    # active recovery and past recoveries. The response lists the most
+    # recent recoveries first and doesn't include recovery previews. To get
+    # the recovery preview of a recovery, make a request.
+    #
+    # <note markdown="1"> Amazon Cognito evaluates Identity and Access Management (IAM) policies
+    # in requests for this API operation. For this operation, you must use
+    # IAM credentials to authorize requests, and you must grant yourself the
+    # corresponding IAM permission in a policy.
+    #
+    #  **Learn more**
+    #
+    #  * [Signing Amazon Web Services API Requests][1]
+    #
+    # * [Using the Amazon Cognito user pools API and user pool endpoints][2]
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-signing.html
+    # [2]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html
+    #
+    # @option params [required, String] :user_pool_id
+    #   The ID of the user pool where you want to list point-in-time
+    #   recoveries.
+    #
+    # @option params [String] :next_token
+    #   This API operation returns a limited number of results. The pagination
+    #   token is an identifier that you can present in an additional API
+    #   request with the same parameters. When you include the pagination
+    #   token, Amazon Cognito returns the next set of items after the current
+    #   list. Subsequent requests return a new pagination token. By use of
+    #   this token, you can paginate through the full list of items.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of recoveries that you want Amazon Cognito to
+    #   return in the response. Valid values are 1 through 60. The default
+    #   value is 60.
+    #
+    # @return [Types::ListPointInTimeRecoveriesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListPointInTimeRecoveriesResponse#restorations #restorations} => Array&lt;Types::RestorationDescriptionType&gt;
+    #   * {Types::ListPointInTimeRecoveriesResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_point_in_time_recoveries({
+    #     user_pool_id: "UserPoolIdType", # required
+    #     next_token: "PaginationKeyType",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.restorations #=> Array
+    #   resp.restorations[0].restore_id #=> String
+    #   resp.restorations[0].restore_status #=> String, one of "PREVIEW_GENERATING", "PREVIEW_GENERATED", "PREVIEW_CANCELLED", "PREVIEW_GENERATION_FAILED", "PREVIEW_EXPIRED", "RESTORING", "RESTORE_COMPLETED", "TEMPORARY_INTERNAL_ERROR_SEE_SUPPORT_CASE", "AWS_ABORTED"
+    #   resp.restorations[0].restore_timestamp #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ListPointInTimeRecoveries AWS API Documentation
+    #
+    # @overload list_point_in_time_recoveries(params = {})
+    # @param [Hash] params ({})
+    def list_point_in_time_recoveries(params = {}, options = {})
+      req = build_request(:list_point_in_time_recoveries, params)
+      req.send_request(options)
+    end
+
     # Given a user pool ID, returns all resource servers and their details.
     # For more information about resource servers, see [Access control with
     # resource servers][1].
@@ -10111,6 +11336,7 @@ module Aws::CognitoIdentityProvider
     #   resp.resource_servers[0].scopes #=> Array
     #   resp.resource_servers[0].scopes[0].scope_name #=> String
     #   resp.resource_servers[0].scopes[0].scope_description #=> String
+    #   resp.resource_servers[0].managed_by #=> String, one of "COGNITO"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ListResourceServers AWS API Documentation
@@ -10393,6 +11619,26 @@ module Aws::CognitoIdentityProvider
     #   list. Subsequent requests return a new pagination token. By use of
     #   this token, you can paginate through the full list of items.
     #
+    # @option params [String] :client_type
+    #   Returns only app clients of this type. For dynamic client registration
+    #   (`DCR`) and other app clients, the following values are valid.
+    #
+    #   REGULAR
+    #
+    #   : An app client not created through dynamic client registration.
+    #
+    #   DCR
+    #
+    #   : An app client created through dynamic client registration.
+    #
+    #   If you omit `ClientType`, the response includes app clients of all
+    #   types. When you set this filter, a page of results can contain fewer
+    #   app clients than `MaxResults`, or none, while the response still
+    #   includes a `NextToken`. Continue to request pages until the response
+    #   has no `NextToken`. The app clients in the response don't include
+    #   their type. To get the type of an app client, call
+    #   `DescribeUserPoolClient`.
+    #
     # @return [Types::ListUserPoolClientsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListUserPoolClientsResponse#user_pool_clients #user_pool_clients} => Array&lt;Types::UserPoolClientDescription&gt;
@@ -10406,6 +11652,7 @@ module Aws::CognitoIdentityProvider
     #     user_pool_id: "UserPoolIdType", # required
     #     max_results: 1,
     #     next_token: "PaginationKey",
+    #     client_type: "REGULAR", # accepts REGULAR, DCR
     #   })
     #
     # @example Response structure
@@ -10595,6 +11842,105 @@ module Aws::CognitoIdentityProvider
     # @param [Hash] params ({})
     def list_user_pools(params = {}, options = {})
       req = build_request(:list_user_pools, params)
+      req.send_request(options)
+    end
+
+    # Lists the active sessions for the currently signed-in user. Amazon
+    # Cognito authorizes this operation with the user's access token and
+    # returns all of the user's active sessions across every app client in
+    # the user pool, including both token sessions and SSO sessions. The
+    # `IsCurrentSession` field identifies the session that the calling
+    # access token belongs to. The results are eventually consistent, and
+    # new sessions are typically included within a few seconds.
+    #
+    # @option params [required, String] :access_token
+    #   A valid access token that Amazon Cognito issued to the user whose
+    #   sessions you want to list. Amazon Cognito derives the user pool and
+    #   username from this token.
+    #
+    # @option params [String] :next_token
+    #   A pagination token that Amazon Cognito returned in a previous
+    #   response. Use this value to retrieve the next page of results if a
+    #   `NextToken` was included in a prior response.
+    #
+    # @return [Types::ListUserSessionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListUserSessionsResponse#sessions #sessions} => Array&lt;Types::SessionDescriptionType&gt;
+    #   * {Types::ListUserSessionsResponse#next_token #next_token} => String
+    #
+    #
+    # @example Example: Example list a user's own active sessions
+    #
+    #   # The following example lists the active sessions for the user who owns the provided access token. The IsCurrentSession
+    #   # field identifies the session that the access token belongs to.
+    #
+    #   resp = client.list_user_sessions({
+    #     access_token: "eyJra456defEXAMPLE", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     sessions: [
+    #       {
+    #         client_id: "1example23456789", 
+    #         create_date: Time.parse(1792454400.117), 
+    #         device_type: "Chrome 125 / macOS 15.0", 
+    #         is_current_session: true, 
+    #         last_active_date: Time.parse(1792540800.234), 
+    #         last_ip_address: "192.0.2.42", 
+    #         last_location: {
+    #           city: "Seattle", 
+    #           country: "United States", 
+    #         }, 
+    #         session_id: "tknb8c4d0e6f2g8h4j0k6m2n8p4q", 
+    #         session_type: "TOKEN", 
+    #       }, 
+    #       {
+    #         client_id: "1example23456789", 
+    #         create_date: Time.parse(1792195200.351), 
+    #         device_type: "Chrome 125 / Windows 11", 
+    #         is_current_session: false, 
+    #         last_active_date: Time.parse(1792281600.468), 
+    #         last_ip_address: "198.51.100.17", 
+    #         last_location: {
+    #           city: "Portland", 
+    #           country: "United States", 
+    #         }, 
+    #         session_id: "tknm5k9p2q7r4s8t1v6w3x0y5z2b", 
+    #         session_type: "TOKEN", 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_user_sessions({
+    #     access_token: "TokenModelType", # required
+    #     next_token: "PaginationKey",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.sessions #=> Array
+    #   resp.sessions[0].session_id #=> String
+    #   resp.sessions[0].session_type #=> String, one of "TOKEN", "SSO"
+    #   resp.sessions[0].client_id #=> String
+    #   resp.sessions[0].create_date #=> Time
+    #   resp.sessions[0].last_active_date #=> Time
+    #   resp.sessions[0].device_type #=> String
+    #   resp.sessions[0].last_ip_address #=> String
+    #   resp.sessions[0].last_location.city #=> String
+    #   resp.sessions[0].last_location.country #=> String
+    #   resp.sessions[0].origin_session_id #=> String
+    #   resp.sessions[0].is_current_session #=> Boolean
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ListUserSessions AWS API Documentation
+    #
+    # @overload list_user_sessions(params = {})
+    # @param [Hash] params ({})
+    def list_user_sessions(params = {}, options = {})
+      req = build_request(:list_user_sessions, params)
       req.send_request(options)
     end
 
@@ -11602,6 +12948,15 @@ module Aws::CognitoIdentityProvider
     #   The client secret of the requested app client, if the client has a
     #   secret.
     #
+    # @option params [String] :revoke_associated_sessions
+    #   Specifies whether to also revoke the SSO session that is linked to the
+    #   token session being revoked. `NONE`, the default, revokes only the
+    #   token session that is associated with the refresh token. `LINKED` also
+    #   revokes the parent SSO session that the token session came through;
+    #   the other token sessions that came through that SSO session aren't
+    #   revoked. `LINKED` has no effect when session tracking is disabled or
+    #   when the token session has no parent SSO session.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -11610,6 +12965,7 @@ module Aws::CognitoIdentityProvider
     #     token: "TokenModelType", # required
     #     client_id: "ClientIdType", # required
     #     client_secret: "ClientSecretType",
+    #     revoke_associated_sessions: "NONE", # accepts NONE, LINKED
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/RevokeToken AWS API Documentation
@@ -11618,6 +12974,69 @@ module Aws::CognitoIdentityProvider
     # @param [Hash] params ({})
     def revoke_token(params = {}, options = {})
       req = build_request(:revoke_token, params)
+      req.send_request(options)
+    end
+
+    # Revokes a specific session for the currently signed-in user. Amazon
+    # Cognito authorizes this operation with the user's access token,
+    # revokes all refresh and access tokens that are associated with the
+    # session, and deletes the session record. You can't revoke the session
+    # that the calling access token belongs to.
+    #
+    # @option params [required, String] :access_token
+    #   A valid access token that Amazon Cognito issued to the user. Amazon
+    #   Cognito uses this token to authorize the request and to identify the
+    #   user.
+    #
+    # @option params [required, String] :session_id
+    #   The ID of the session to revoke. This is a 28-character string of
+    #   lowercase letters and digits, prefixed with `tkn` for a token session
+    #   or `sso` for an SSO session. This value can't identify the caller's
+    #   own current session.
+    #
+    # @option params [String] :revoke_associated_sessions
+    #   Specifies whether to also revoke the sessions that are linked to the
+    #   targeted session. `NONE`, the default, revokes only the targeted
+    #   session. `LINKED` also revokes the directly linked session or
+    #   sessions, interpreted relative to the type of the targeted session:
+    #   revoking a token session also revokes the parent SSO session it came
+    #   through, and revoking an SSO session also revokes the token sessions
+    #   that came through it. The set of linked sessions is eventually
+    #   consistent, so associated sessions are typically revoked within a few
+    #   seconds.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: Example revoke one of a user's own sessions
+    #
+    #   # The following example revokes a single token session that belongs to the user who owns the provided access token, such
+    #   # as signing out a lost or stolen device. Only the targeted session is revoked.
+    #
+    #   resp = client.revoke_user_session({
+    #     access_token: "eyJra456defEXAMPLE", 
+    #     revoke_associated_sessions: "NONE", 
+    #     session_id: "tknm5k9p2q7r4s8t1v6w3x0y5z2b", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.revoke_user_session({
+    #     access_token: "TokenModelType", # required
+    #     session_id: "SessionIdType", # required
+    #     revoke_associated_sessions: "NONE", # accepts NONE, LINKED
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/RevokeUserSession AWS API Documentation
+    #
+    # @overload revoke_user_session(params = {})
+    # @param [Hash] params ({})
+    def revoke_user_session(params = {}, options = {})
+      req = build_request(:revoke_user_session, params)
       req.send_request(options)
     end
 
@@ -12017,6 +13436,78 @@ module Aws::CognitoIdentityProvider
       req.send_request(options)
     end
 
+    # Sets the session configuration for a user pool app client. The
+    # configurable client-level setting is the maximum validity period for
+    # silent reuse of an SSO session. This operation performs a full
+    # replacement of the client-level session configuration; every request
+    # parameter is required, and session tracking must be enabled for the
+    # user pool. The user pool must be in the Essentials or Plus tier.
+    # Otherwise, this operation returns a
+    # `FeatureUnavailableInTierException`.
+    #
+    # @option params [required, String] :user_pool_id
+    #   The ID of the user pool that contains the app client.
+    #
+    # @option params [required, String] :client_id
+    #   The ID of the app client that you want to configure.
+    #
+    # @option params [required, Types::ClientSSOSessionConfigType] :sso_session
+    #   The SSO session settings for the app client.
+    #
+    # @return [Types::SetUserPoolClientSessionConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::SetUserPoolClientSessionConfigurationResponse#user_pool_id #user_pool_id} => String
+    #   * {Types::SetUserPoolClientSessionConfigurationResponse#client_id #client_id} => String
+    #   * {Types::SetUserPoolClientSessionConfigurationResponse#sso_session #sso_session} => Types::ClientSSOSessionConfigType
+    #
+    #
+    # @example Example: Example set the SSO session validity for an app client
+    #
+    #   # The following example configures an app client to silently reuse an SSO session for up to 43200 minutes (30 days) since
+    #   # the last authentication before requiring the user to sign in again.
+    #
+    #   resp = client.set_user_pool_client_session_configuration({
+    #     client_id: "1example23456789", 
+    #     sso_session: {
+    #       max_validity_minutes: 43200, 
+    #     }, 
+    #     user_pool_id: "us-east-1_EXAMPLE", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     client_id: "1example23456789", 
+    #     sso_session: {
+    #       max_validity_minutes: 43200, 
+    #     }, 
+    #     user_pool_id: "us-east-1_EXAMPLE", 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.set_user_pool_client_session_configuration({
+    #     user_pool_id: "UserPoolIdType", # required
+    #     client_id: "ClientIdType", # required
+    #     sso_session: { # required
+    #       max_validity_minutes: 1, # required
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.user_pool_id #=> String
+    #   resp.client_id #=> String
+    #   resp.sso_session.max_validity_minutes #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/SetUserPoolClientSessionConfiguration AWS API Documentation
+    #
+    # @overload set_user_pool_client_session_configuration(params = {})
+    # @param [Hash] params ({})
+    def set_user_pool_client_session_configuration(params = {}, options = {})
+      req = build_request(:set_user_pool_client_session_configuration, params)
+      req.send_request(options)
+    end
+
     # Sets user pool multi-factor authentication (MFA) and passkey
     # configuration. For more information about user pool MFA, see [Adding
     # MFA][1]. For more information about WebAuthn passkeys see
@@ -12161,6 +13652,81 @@ module Aws::CognitoIdentityProvider
     # @param [Hash] params ({})
     def set_user_pool_mfa_config(params = {}, options = {})
       req = build_request(:set_user_pool_mfa_config, params)
+      req.send_request(options)
+    end
+
+    # Enables or disables session tracking for a user pool, and sets the
+    # pool-wide maximum number of active token sessions that each user can
+    # have. This operation performs a full replacement of the pool-level
+    # session configuration; every request parameter is required. The user
+    # pool must be in the Essentials or Plus tier. Otherwise, this operation
+    # returns a `FeatureUnavailableInTierException`.
+    #
+    # @option params [required, String] :user_pool_id
+    #   The ID of the user pool where you want to configure session tracking.
+    #
+    # @option params [required, String] :user_session_tracking
+    #   Specifies whether Amazon Cognito tracks sessions for users in the user
+    #   pool. Set this value to `ENABLED` to turn on server-side session
+    #   tracking, or `DISABLED` to turn it off. When you set this value to
+    #   `DISABLED` while the user pool remains active, existing client-level
+    #   session configurations are retained but dormant, and are reactivated
+    #   when you enable tracking again.
+    #
+    # @option params [required, Types::UserPoolTokenSessionConfigType] :token_session
+    #   The pool-wide token session settings to apply.
+    #
+    # @return [Types::SetUserPoolSessionConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::SetUserPoolSessionConfigurationResponse#user_pool_id #user_pool_id} => String
+    #   * {Types::SetUserPoolSessionConfigurationResponse#user_session_tracking #user_session_tracking} => String
+    #   * {Types::SetUserPoolSessionConfigurationResponse#token_session #token_session} => Types::UserPoolTokenSessionConfigType
+    #
+    #
+    # @example Example: Example enable session tracking for a user pool
+    #
+    #   # The following example enables server-side session tracking for a user pool and sets the pool-wide maximum to 20
+    #   # concurrent token sessions per user.
+    #
+    #   resp = client.set_user_pool_session_configuration({
+    #     token_session: {
+    #       max_per_user: 20, 
+    #     }, 
+    #     user_pool_id: "us-east-1_EXAMPLE", 
+    #     user_session_tracking: "ENABLED", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     token_session: {
+    #       max_per_user: 20, 
+    #     }, 
+    #     user_pool_id: "us-east-1_EXAMPLE", 
+    #     user_session_tracking: "ENABLED", 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.set_user_pool_session_configuration({
+    #     user_pool_id: "UserPoolIdType", # required
+    #     user_session_tracking: "ENABLED", # required, accepts ENABLED, DISABLED
+    #     token_session: { # required
+    #       max_per_user: 1, # required
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.user_pool_id #=> String
+    #   resp.user_session_tracking #=> String, one of "ENABLED", "DISABLED"
+    #   resp.token_session.max_per_user #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/SetUserPoolSessionConfiguration AWS API Documentation
+    #
+    # @overload set_user_pool_session_configuration(params = {})
+    # @param [Hash] params ({})
+    def set_user_pool_session_configuration(params = {}, options = {})
+      req = build_request(:set_user_pool_session_configuration, params)
       req.send_request(options)
     end
 
@@ -12423,6 +13989,77 @@ module Aws::CognitoIdentityProvider
     # @param [Hash] params ({})
     def sign_up(params = {}, options = {})
       req = build_request(:sign_up, params)
+      req.send_request(options)
+    end
+
+    # Applies a point-in-time recovery to a user pool. Before you start a
+    # recovery, review the recovery preview in the response to a request.
+    # You can start a recovery when its status is `PREVIEW_GENERATED`.
+    #
+    # When you start a recovery, Amazon Cognito sets its status to
+    # `RESTORING` and restores user data in the user pool to its state at
+    # the recovery point. Write operations in the user pool remain paused
+    # until the recovery is complete. Sign-in and read operations continue
+    # to work. When the status of the recovery changes to
+    # `RESTORE_COMPLETED`, Amazon Cognito resumes write operations.
+    #
+    # You can't cancel a recovery after you start it.
+    #
+    # <note markdown="1"> Amazon Cognito evaluates Identity and Access Management (IAM) policies
+    # in requests for this API operation. For this operation, you must use
+    # IAM credentials to authorize requests, and you must grant yourself the
+    # corresponding IAM permission in a policy.
+    #
+    #  **Learn more**
+    #
+    #  * [Signing Amazon Web Services API Requests][1]
+    #
+    # * [Using the Amazon Cognito user pools API and user pool endpoints][2]
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-signing.html
+    # [2]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html
+    #
+    # @option params [required, String] :user_pool_id
+    #   The ID of the user pool that contains the recovery that you want to
+    #   start.
+    #
+    # @option params [required, String] :restore_id
+    #   The ID of the recovery that you want to start. Amazon Cognito returns
+    #   this ID in the response to an `InitiatePointInTimeRecovery` request.
+    #
+    # @return [Types::StartPointInTimeRecoveryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartPointInTimeRecoveryResponse#restoration #restoration} => Types::RestorationType
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_point_in_time_recovery({
+    #     user_pool_id: "UserPoolIdType", # required
+    #     restore_id: "RestoreIdType", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.restoration.restore_id #=> String
+    #   resp.restoration.restore_status #=> String, one of "PREVIEW_GENERATING", "PREVIEW_GENERATED", "PREVIEW_CANCELLED", "PREVIEW_GENERATION_FAILED", "PREVIEW_EXPIRED", "RESTORING", "RESTORE_COMPLETED", "TEMPORARY_INTERNAL_ERROR_SEE_SUPPORT_CASE", "AWS_ABORTED"
+    #   resp.restoration.restore_timestamp #=> Time
+    #   resp.restoration.trigger_timestamp #=> Time
+    #   resp.restoration.restore_preview #=> Array
+    #   resp.restoration.restore_preview[0].entity #=> String
+    #   resp.restoration.restore_preview[0].create_count #=> Integer
+    #   resp.restoration.restore_preview[0].update_count #=> Integer
+    #   resp.restoration.restore_preview[0].delete_count #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/StartPointInTimeRecovery AWS API Documentation
+    #
+    # @overload start_point_in_time_recovery(params = {})
+    # @param [Hash] params ({})
+    def start_point_in_time_recovery(params = {}, options = {})
+      req = build_request(:start_point_in_time_recovery, params)
       req.send_request(options)
     end
 
@@ -12718,6 +14355,144 @@ module Aws::CognitoIdentityProvider
     # @param [Hash] params ({})
     def update_auth_event_feedback(params = {}, options = {})
       req = build_request(:update_auth_event_feedback, params)
+      req.send_request(options)
+    end
+
+    # Updates the configuration of a Client ID Metadata Document (CIMD)
+    # policy.
+    #
+    # <note markdown="1"> Amazon Cognito evaluates Identity and Access Management (IAM) policies
+    # in requests for this API operation. For this operation, you must use
+    # IAM credentials to authorize requests, and you must grant yourself the
+    # corresponding IAM permission in a policy.
+    #
+    #  **Learn more**
+    #
+    #  * [Signing Amazon Web Services API Requests][1]
+    #
+    # * [Using the Amazon Cognito user pools API and user pool endpoints][2]
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-signing.html
+    # [2]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html
+    #
+    # @option params [required, String] :user_pool_id
+    #   The ID of the user pool that contains the CIMD policy.
+    #
+    # @option params [required, String] :cimd_policy_id
+    #   The ID of the CIMD policy that you want to update.
+    #
+    # @option params [required, String] :client_id
+    #   The ID of the app client that you want to associate with the CIMD
+    #   policy.
+    #
+    # @option params [String] :policy_name
+    #   A friendly name for the CIMD policy.
+    #
+    # @option params [Integer] :cache_duration
+    #   The length of time, in seconds, that Amazon Cognito caches a client
+    #   metadata document that it retrieved from a URL that matches the
+    #   policy. The value must be between 86,400 seconds (one day) and
+    #   31,556,952 seconds (one year).
+    #
+    # @option params [required, Array<String>] :url_patterns
+    #   One to five HTTPS URL patterns. Amazon Cognito accepts a client ID
+    #   metadata document URL only when it matches one of these patterns.
+    #   Patterns can contain the `*` wildcard character.
+    #
+    # @return [Types::UpdateCIMDPolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateCIMDPolicyResponse#cimd_policy #cimd_policy} => Types::CIMDPolicyType
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_cimd_policy({
+    #     user_pool_id: "UserPoolIdType", # required
+    #     cimd_policy_id: "CIMDPolicyIdType", # required
+    #     client_id: "ClientIdType", # required
+    #     policy_name: "CIMDPolicyNameType",
+    #     cache_duration: 1,
+    #     url_patterns: ["URLPatternType"], # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.cimd_policy.user_pool_id #=> String
+    #   resp.cimd_policy.cimd_policy_id #=> String
+    #   resp.cimd_policy.client_id #=> String
+    #   resp.cimd_policy.policy_name #=> String
+    #   resp.cimd_policy.cache_duration #=> Integer
+    #   resp.cimd_policy.url_patterns #=> Array
+    #   resp.cimd_policy.url_patterns[0] #=> String
+    #   resp.cimd_policy.creation_date #=> Time
+    #   resp.cimd_policy.last_modified_date #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UpdateCIMDPolicy AWS API Documentation
+    #
+    # @overload update_cimd_policy(params = {})
+    # @param [Hash] params ({})
+    def update_cimd_policy(params = {}, options = {})
+      req = build_request(:update_cimd_policy, params)
+      req.send_request(options)
+    end
+
+    # Changes the cache state of a client metadata document URL for a client
+    # ID metadata document (CIMD) policy. Refresh a URL to make Amazon
+    # Cognito retrieve the client metadata document again, or invalidate it
+    # to remove the cached document.
+    #
+    # <note markdown="1"> Amazon Cognito evaluates Identity and Access Management (IAM) policies
+    # in requests for this API operation. For this operation, you must use
+    # IAM credentials to authorize requests, and you must grant yourself the
+    # corresponding IAM permission in a policy.
+    #
+    #  **Learn more**
+    #
+    #  * [Signing Amazon Web Services API Requests][1]
+    #
+    # * [Using the Amazon Cognito user pools API and user pool endpoints][2]
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-signing.html
+    # [2]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html
+    #
+    # @option params [required, String] :user_pool_id
+    #   The ID of the user pool that contains the CIMD policy.
+    #
+    # @option params [required, String] :cimd_policy_id
+    #   The ID of the CIMD policy that the URL belongs to.
+    #
+    # @option params [required, String] :url
+    #   The client metadata document URL whose cache state you want to change.
+    #
+    # @option params [required, String] :action
+    #   The action to take on the cached client metadata document. `REFRESH`
+    #   retrieves the document from the URL again. `INVALIDATE` removes the
+    #   cached document.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_client_metadata_url_state({
+    #     user_pool_id: "UserPoolIdType", # required
+    #     cimd_policy_id: "CIMDPolicyIdType", # required
+    #     url: "MetadataURLType", # required
+    #     action: "REFRESH", # required, accepts REFRESH, INVALIDATE
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UpdateClientMetadataURLState AWS API Documentation
+    #
+    # @overload update_client_metadata_url_state(params = {})
+    # @param [Hash] params ({})
+    def update_client_metadata_url_state(params = {}, options = {})
+      req = build_request(:update_client_metadata_url_state, params)
       req.send_request(options)
     end
 
@@ -13392,6 +15167,7 @@ module Aws::CognitoIdentityProvider
     #   resp.resource_server.scopes #=> Array
     #   resp.resource_server.scopes[0].scope_name #=> String
     #   resp.resource_server.scopes[0].scope_description #=> String
+    #   resp.resource_server.managed_by #=> String, one of "COGNITO"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UpdateResourceServer AWS API Documentation
     #
@@ -13843,6 +15619,26 @@ module Aws::CognitoIdentityProvider
     #   [1]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pool-settings-advanced-security.html
     #   [2]: https://docs.aws.amazon.com/cognito/latest/developerguide/feature-plans-features-plus.html
     #
+    # @option params [Types::DcrConfigurationType] :dcr_configuration
+    #   The dynamic client registration configuration for the user pool. With
+    #   dynamic client registration, applications can register their own app
+    #   clients at runtime through the registration endpoint of your user pool
+    #   domain. To activate this setting, your user pool must be in the [
+    #   Essentials tier][1] or higher.
+    #
+    #   If you omit this parameter, Amazon Cognito keeps the existing
+    #   configuration. If you include it, Amazon Cognito replaces the existing
+    #   configuration with the one that you provide. Members that you omit
+    #   revert to their default values, and an omitted `EnableStatus` turns
+    #   dynamic client registration on.
+    #
+    #   To change the feature plan of the user pool to Lite, you must also set
+    #   `EnableStatus` to `Disabled`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cognito/latest/developerguide/feature-plans-features-essentials.html
+    #
     # @option params [Types::AccountRecoverySettingType] :account_recovery_setting
     #   The available verified method a user can use to recover their password
     #   when they call `ForgotPassword`. You can use this setting to define a
@@ -14001,6 +15797,13 @@ module Aws::CognitoIdentityProvider
     #       advanced_security_additional_flows: {
     #         custom_auth_mode: "AUDIT", # accepts AUDIT, ENFORCED
     #       },
+    #     },
+    #     dcr_configuration: {
+    #       enable_status: "Enabled", # accepts Enabled, Disabled
+    #       open_dcr_enabled: false,
+    #       authenticated_grant_types: ["code"], # accepts code, implicit, client_credentials
+    #       open_dcr_grant_types: ["code"], # accepts code, implicit, client_credentials
+    #       allowed_scopes: ["ScopeType"],
     #     },
     #     account_recovery_setting: {
     #       recovery_mechanisms: [
@@ -14215,6 +16018,15 @@ module Aws::CognitoIdentityProvider
     #
     #   * `ALLOW_REFRESH_TOKEN_AUTH`: Enable authflow to refresh tokens.
     #
+    #   * `ALLOW_TOKEN_EXCHANGE_IMPERSONATION` – Use this flow to request
+    #     `GetDerivedToken` token exchanges without an `ActorToken`. The
+    #     issued token represents the subject user directly.
+    #
+    #   * `ALLOW_TOKEN_EXCHANGE_DELEGATION` – Use this flow to request
+    #     `GetDerivedToken` token exchanges that include an `ActorToken`. The
+    #     issued token carries an `act` claim that identifies the intermediary
+    #     acting on the behalf of the subject.
+    #
     #   In some environments, you will see the values `ADMIN_NO_SRP_AUTH`,
     #   `CUSTOM_AUTH_FLOW_ONLY`, or `USER_PASSWORD_AUTH`. You can't assign
     #   these legacy `ExplicitAuthFlows` values to user pool clients at the
@@ -14412,6 +16224,33 @@ module Aws::CognitoIdentityProvider
     #   when users renew their sessions with refresh tokens. When disabled,
     #   token refresh issues only ID and access tokens.
     #
+    # @option params [Boolean] :publish_secrets_in_aws_secrets_manager
+    #   Specifies whether Amazon Cognito stores and manages this app client's
+    #   secret in [Amazon Web Services Secrets Manager][1] instead of
+    #   returning the plaintext value. When you set this parameter to `true`,
+    #   the response returns `ClientSecretArn` instead of `ClientSecret`. By
+    #   default, Amazon Cognito rotates the secret every 7 days. You can
+    #   change the rotation schedule in Secrets Manager.
+    #
+    #   Set to `true` to migrate an existing generated secret into Secrets
+    #   Manager, or `false` to move it back to Amazon Cognito and delete the
+    #   Secrets Manager secret. If you omit this parameter, Amazon Cognito
+    #   doesn't change how it manages the existing secret. Applies only to
+    #   app clients that already have a generated secret.
+    #
+    #   When you set it to `true`, Amazon Cognito starts managing the app
+    #   client's secret in Secrets Manager and rotates it right away. If the
+    #   app client has two secrets, that first rotation deletes the older one.
+    #
+    #   When you set this parameter to `false`, Amazon Cognito immediately and
+    #   permanently deletes the Secrets Manager secret. There's no recovery
+    #   window. Applications that read the secret from Secrets Manager can no
+    #   longer get it.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html
+    #
     # @return [Types::UpdateUserPoolClientResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateUserPoolClientResponse#user_pool_client #user_pool_client} => Types::UserPoolClientType
@@ -14432,7 +16271,7 @@ module Aws::CognitoIdentityProvider
     #     },
     #     read_attributes: ["ClientPermissionType"],
     #     write_attributes: ["ClientPermissionType"],
-    #     explicit_auth_flows: ["ADMIN_NO_SRP_AUTH"], # accepts ADMIN_NO_SRP_AUTH, CUSTOM_AUTH_FLOW_ONLY, USER_PASSWORD_AUTH, ALLOW_ADMIN_USER_PASSWORD_AUTH, ALLOW_CUSTOM_AUTH, ALLOW_USER_PASSWORD_AUTH, ALLOW_USER_SRP_AUTH, ALLOW_REFRESH_TOKEN_AUTH, ALLOW_USER_AUTH
+    #     explicit_auth_flows: ["ADMIN_NO_SRP_AUTH"], # accepts ADMIN_NO_SRP_AUTH, CUSTOM_AUTH_FLOW_ONLY, USER_PASSWORD_AUTH, ALLOW_ADMIN_USER_PASSWORD_AUTH, ALLOW_CUSTOM_AUTH, ALLOW_USER_PASSWORD_AUTH, ALLOW_USER_SRP_AUTH, ALLOW_REFRESH_TOKEN_AUTH, ALLOW_USER_AUTH, ALLOW_TOKEN_EXCHANGE_DELEGATION, ALLOW_TOKEN_EXCHANGE_IMPERSONATION
     #     supported_identity_providers: ["ProviderNameType"],
     #     callback_urls: ["RedirectUrlType"],
     #     logout_urls: ["RedirectUrlType"],
@@ -14455,6 +16294,7 @@ module Aws::CognitoIdentityProvider
     #       feature: "ENABLED", # required, accepts ENABLED, DISABLED
     #       retry_grace_period_seconds: 1,
     #     },
+    #     publish_secrets_in_aws_secrets_manager: false,
     #   })
     #
     # @example Response structure
@@ -14463,6 +16303,7 @@ module Aws::CognitoIdentityProvider
     #   resp.user_pool_client.client_name #=> String
     #   resp.user_pool_client.client_id #=> String
     #   resp.user_pool_client.client_secret #=> String
+    #   resp.user_pool_client.client_secret_arn #=> String
     #   resp.user_pool_client.last_modified_date #=> Time
     #   resp.user_pool_client.creation_date #=> Time
     #   resp.user_pool_client.refresh_token_validity #=> Integer
@@ -14476,7 +16317,7 @@ module Aws::CognitoIdentityProvider
     #   resp.user_pool_client.write_attributes #=> Array
     #   resp.user_pool_client.write_attributes[0] #=> String
     #   resp.user_pool_client.explicit_auth_flows #=> Array
-    #   resp.user_pool_client.explicit_auth_flows[0] #=> String, one of "ADMIN_NO_SRP_AUTH", "CUSTOM_AUTH_FLOW_ONLY", "USER_PASSWORD_AUTH", "ALLOW_ADMIN_USER_PASSWORD_AUTH", "ALLOW_CUSTOM_AUTH", "ALLOW_USER_PASSWORD_AUTH", "ALLOW_USER_SRP_AUTH", "ALLOW_REFRESH_TOKEN_AUTH", "ALLOW_USER_AUTH"
+    #   resp.user_pool_client.explicit_auth_flows[0] #=> String, one of "ADMIN_NO_SRP_AUTH", "CUSTOM_AUTH_FLOW_ONLY", "USER_PASSWORD_AUTH", "ALLOW_ADMIN_USER_PASSWORD_AUTH", "ALLOW_CUSTOM_AUTH", "ALLOW_USER_PASSWORD_AUTH", "ALLOW_USER_SRP_AUTH", "ALLOW_REFRESH_TOKEN_AUTH", "ALLOW_USER_AUTH", "ALLOW_TOKEN_EXCHANGE_DELEGATION", "ALLOW_TOKEN_EXCHANGE_IMPERSONATION"
     #   resp.user_pool_client.supported_identity_providers #=> Array
     #   resp.user_pool_client.supported_identity_providers[0] #=> String
     #   resp.user_pool_client.callback_urls #=> Array
@@ -14500,6 +16341,7 @@ module Aws::CognitoIdentityProvider
     #   resp.user_pool_client.auth_session_validity #=> Integer
     #   resp.user_pool_client.refresh_token_rotation.feature #=> String, one of "ENABLED", "DISABLED"
     #   resp.user_pool_client.refresh_token_rotation.retry_grace_period_seconds #=> Integer
+    #   resp.user_pool_client.client_type #=> String, one of "REGULAR", "DCR"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UpdateUserPoolClient AWS API Documentation
     #
@@ -14848,7 +16690,7 @@ module Aws::CognitoIdentityProvider
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-cognitoidentityprovider'
-      context[:gem_version] = '1.159.0'
+      context[:gem_version] = '1.168.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

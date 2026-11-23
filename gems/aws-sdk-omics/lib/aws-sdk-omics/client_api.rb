@@ -483,7 +483,10 @@ module Aws::Omics
     RunLogStream = Shapes::StringShape.new(name: 'RunLogStream')
     RunName = Shapes::StringShape.new(name: 'RunName')
     RunOutputUri = Shapes::StringShape.new(name: 'RunOutputUri')
+    RunOutputUriPrefixMode = Shapes::StringShape.new(name: 'RunOutputUriPrefixMode')
     RunParameters = Shapes::DocumentShape.new(name: 'RunParameters', document: true)
+    RunParametersUri = Shapes::StringShape.new(name: 'RunParametersUri')
+    RunParametersUriOrPresignedUrl = Shapes::StringShape.new(name: 'RunParametersUriOrPresignedUrl')
     RunRequestId = Shapes::StringShape.new(name: 'RunRequestId')
     RunResourceDigest = Shapes::StringShape.new(name: 'RunResourceDigest')
     RunResourceDigestKey = Shapes::StringShape.new(name: 'RunResourceDigestKey')
@@ -1130,6 +1133,7 @@ module Aws::Omics
     DefaultRunSetting.add_member(:session_policy, Shapes::ShapeRef.new(shape: SessionPolicy, location_name: "sessionPolicy"))
     DefaultRunSetting.add_member(:engine_settings, Shapes::ShapeRef.new(shape: EngineSettings, location_name: "engineSettings"))
     DefaultRunSetting.add_member(:scratch_storage_mode, Shapes::ShapeRef.new(shape: ScratchStorageMode, location_name: "scratchStorageMode"))
+    DefaultRunSetting.add_member(:requester_pays_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "requesterPaysEnabled"))
     DefaultRunSetting.struct_class = Types::DefaultRunSetting
 
     DefinitionRepository.add_member(:connection_arn, Shapes::ShapeRef.new(shape: ConnectionArn, required: true, location_name: "connectionArn"))
@@ -1571,6 +1575,9 @@ module Aws::Omics
     GetRunResponse.add_member(:vpc_config, Shapes::ShapeRef.new(shape: VpcConfigResponse, location_name: "vpcConfig"))
     GetRunResponse.add_member(:engine_settings, Shapes::ShapeRef.new(shape: EngineSettings, location_name: "engineSettings"))
     GetRunResponse.add_member(:session_policy, Shapes::ShapeRef.new(shape: SessionPolicy, location_name: "sessionPolicy"))
+    GetRunResponse.add_member(:output_uri_prefix_mode, Shapes::ShapeRef.new(shape: RunOutputUriPrefixMode, location_name: "outputUriPrefixMode"))
+    GetRunResponse.add_member(:requester_pays_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "requesterPaysEnabled"))
+    GetRunResponse.add_member(:parameters_uri, Shapes::ShapeRef.new(shape: RunParametersUriOrPresignedUrl, location_name: "parametersUri"))
     GetRunResponse.struct_class = Types::GetRunResponse
 
     GetRunTaskRequest.add_member(:id, Shapes::ShapeRef.new(shape: RunId, required: true, location: "uri", location_name: "id"))
@@ -2535,6 +2542,9 @@ module Aws::Omics
     StartRunRequest.add_member(:configuration_name, Shapes::ShapeRef.new(shape: ConfigurationName, location_name: "configurationName"))
     StartRunRequest.add_member(:session_policy, Shapes::ShapeRef.new(shape: SessionPolicy, location_name: "sessionPolicy"))
     StartRunRequest.add_member(:engine_settings, Shapes::ShapeRef.new(shape: EngineSettings, location_name: "engineSettings"))
+    StartRunRequest.add_member(:output_uri_prefix_mode, Shapes::ShapeRef.new(shape: RunOutputUriPrefixMode, location_name: "outputUriPrefixMode"))
+    StartRunRequest.add_member(:requester_pays_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "requesterPaysEnabled"))
+    StartRunRequest.add_member(:parameters_uri, Shapes::ShapeRef.new(shape: RunParametersUri, location_name: "parametersUri"))
     StartRunRequest.struct_class = Types::StartRunRequest
 
     StartRunResponse.add_member(:arn, Shapes::ShapeRef.new(shape: RunArn, location_name: "arn"))

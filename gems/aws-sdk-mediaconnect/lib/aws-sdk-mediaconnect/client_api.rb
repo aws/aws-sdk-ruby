@@ -14,6 +14,7 @@ module Aws::MediaConnect
 
     include Seahorse::Model
 
+    ActionString = Shapes::StringShape.new(name: 'ActionString')
     AddBridgeFlowSourceRequest = Shapes::StructureShape.new(name: 'AddBridgeFlowSourceRequest')
     AddBridgeFlowSourceRequestFlowArnString = Shapes::StringShape.new(name: 'AddBridgeFlowSourceRequestFlowArnString')
     AddBridgeNetworkOutputRequest = Shapes::StructureShape.new(name: 'AddBridgeNetworkOutputRequest')
@@ -45,8 +46,11 @@ module Aws::MediaConnect
     AddOutputRequest = Shapes::StructureShape.new(name: 'AddOutputRequest')
     Algorithm = Shapes::StringShape.new(name: 'Algorithm')
     AudioMonitoringSetting = Shapes::StructureShape.new(name: 'AudioMonitoringSetting')
+    AutoPidMapConfiguration = Shapes::StructureShape.new(name: 'AutoPidMapConfiguration')
+    AutoPidMapConfigurationPidsPerProgramInteger = Shapes::IntegerShape.new(name: 'AutoPidMapConfigurationPidsPerProgramInteger')
     AutomaticEncryptionKeyConfiguration = Shapes::StructureShape.new(name: 'AutomaticEncryptionKeyConfiguration')
     AutomaticEndpointEncryptionConfiguration = Shapes::StructureShape.new(name: 'AutomaticEndpointEncryptionConfiguration')
+    AutomaticRtmpPushNamingConfiguration = Shapes::StructureShape.new(name: 'AutomaticRtmpPushNamingConfiguration')
     BadRequestException = Shapes::StructureShape.new(name: 'BadRequestException')
     BatchGetDestinationEndpointError = Shapes::StructureShape.new(name: 'BatchGetDestinationEndpointError')
     BatchGetDestinationEndpointErrorList = Shapes::ListShape.new(name: 'BatchGetDestinationEndpointErrorList')
@@ -203,6 +207,8 @@ module Aws::MediaConnect
     EntitlementStatus = Shapes::StringShape.new(name: 'EntitlementStatus')
     FabricConfiguration = Shapes::StructureShape.new(name: 'FabricConfiguration')
     FabricLatencyMode = Shapes::StringShape.new(name: 'FabricLatencyMode')
+    FabricSwitchingConfiguration = Shapes::UnionShape.new(name: 'FabricSwitchingConfiguration')
+    FabricSwitchingMode = Shapes::StringShape.new(name: 'FabricSwitchingMode')
     FailoverConfig = Shapes::StructureShape.new(name: 'FailoverConfig')
     FailoverInputSourcePriorityMode = Shapes::StringShape.new(name: 'FailoverInputSourcePriorityMode')
     FailoverMode = Shapes::StringShape.new(name: 'FailoverMode')
@@ -251,6 +257,7 @@ module Aws::MediaConnect
     GrantFlowEntitlementsRequest = Shapes::StructureShape.new(name: 'GrantFlowEntitlementsRequest')
     GrantFlowEntitlementsRequestFlowArnString = Shapes::StringShape.new(name: 'GrantFlowEntitlementsRequestFlowArnString')
     GrantFlowEntitlementsResponse = Shapes::StructureShape.new(name: 'GrantFlowEntitlementsResponse')
+    ImmediateFabricSwitchingConfiguration = Shapes::StructureShape.new(name: 'ImmediateFabricSwitchingConfiguration')
     IngressGatewayBridge = Shapes::StructureShape.new(name: 'IngressGatewayBridge')
     InputConfiguration = Shapes::StructureShape.new(name: 'InputConfiguration')
     InputConfigurationRequest = Shapes::StructureShape.new(name: 'InputConfigurationRequest')
@@ -259,6 +266,8 @@ module Aws::MediaConnect
     Interface = Shapes::StructureShape.new(name: 'Interface')
     InterfaceRequest = Shapes::StructureShape.new(name: 'InterfaceRequest')
     InternalServerErrorException = Shapes::StructureShape.new(name: 'InternalServerErrorException')
+    KeyFrameFabricSwitchingConfiguration = Shapes::StructureShape.new(name: 'KeyFrameFabricSwitchingConfiguration')
+    KeyFrameFabricSwitchingConfigurationKeyFrameWaitMillisecondsLong = Shapes::IntegerShape.new(name: 'KeyFrameFabricSwitchingConfigurationKeyFrameWaitMillisecondsLong')
     KeyType = Shapes::StringShape.new(name: 'KeyType')
     ListBridgesRequest = Shapes::StructureShape.new(name: 'ListBridgesRequest')
     ListBridgesResponse = Shapes::StructureShape.new(name: 'ListBridgesResponse')
@@ -315,6 +324,7 @@ module Aws::MediaConnect
     MaintenanceSchedule = Shapes::UnionShape.new(name: 'MaintenanceSchedule')
     MaintenanceScheduleType = Shapes::StringShape.new(name: 'MaintenanceScheduleType')
     MaintenanceType = Shapes::StringShape.new(name: 'MaintenanceType')
+    ManualRtmpPushNamingConfiguration = Shapes::StructureShape.new(name: 'ManualRtmpPushNamingConfiguration')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     MediaConnectFlowRouterInputConfiguration = Shapes::StructureShape.new(name: 'MediaConnectFlowRouterInputConfiguration')
     MediaConnectFlowRouterInputStreamDetails = Shapes::StructureShape.new(name: 'MediaConnectFlowRouterInputStreamDetails')
@@ -365,8 +375,17 @@ module Aws::MediaConnect
     Output = Shapes::StructureShape.new(name: 'Output')
     OutputStatus = Shapes::StringShape.new(name: 'OutputStatus')
     OwnedResourceShareDetails = Shapes::StructureShape.new(name: 'OwnedResourceShareDetails')
+    Passthrough = Shapes::StructureShape.new(name: 'Passthrough')
+    Pid = Shapes::IntegerShape.new(name: 'Pid')
+    PidMapRule = Shapes::StructureShape.new(name: 'PidMapRule')
+    PidMapRuleMatchExpressionString = Shapes::StringShape.new(name: 'PidMapRuleMatchExpressionString')
+    PidMapRules = Shapes::ListShape.new(name: 'PidMapRules')
     PreferredDayTimeMaintenanceConfiguration = Shapes::StructureShape.new(name: 'PreferredDayTimeMaintenanceConfiguration')
     PriceUnits = Shapes::StringShape.new(name: 'PriceUnits')
+    ProgramClockReferencePidConfiguration = Shapes::UnionShape.new(name: 'ProgramClockReferencePidConfiguration')
+    ProgramMapTablePidConfiguration = Shapes::UnionShape.new(name: 'ProgramMapTablePidConfiguration')
+    ProgramNumberConfiguration = Shapes::UnionShape.new(name: 'ProgramNumberConfiguration')
+    ProgramNumberConfigurationSetInteger = Shapes::IntegerShape.new(name: 'ProgramNumberConfigurationSetInteger')
     Protocol = Shapes::StringShape.new(name: 'Protocol')
     PublicDestinationEndpointNetworkingConfiguration = Shapes::StructureShape.new(name: 'PublicDestinationEndpointNetworkingConfiguration')
     PublicDestinationEndpointNetworkingConfigurationAllowRule = Shapes::StructureShape.new(name: 'PublicDestinationEndpointNetworkingConfigurationAllowRule')
@@ -485,6 +504,7 @@ module Aws::MediaConnect
     RouterOutputList = Shapes::ListShape.new(name: 'RouterOutputList')
     RouterOutputMessage = Shapes::StructureShape.new(name: 'RouterOutputMessage')
     RouterOutputMessages = Shapes::ListShape.new(name: 'RouterOutputMessages')
+    RouterOutputProcessors = Shapes::StructureShape.new(name: 'RouterOutputProcessors')
     RouterOutputProtocol = Shapes::StringShape.new(name: 'RouterOutputProtocol')
     RouterOutputProtocolConfiguration = Shapes::UnionShape.new(name: 'RouterOutputProtocolConfiguration')
     RouterOutputRoutedState = Shapes::StringShape.new(name: 'RouterOutputRoutedState')
@@ -499,8 +519,19 @@ module Aws::MediaConnect
     RouterOutputTypeList = Shapes::ListShape.new(name: 'RouterOutputTypeList')
     RoutingScope = Shapes::StringShape.new(name: 'RoutingScope')
     RoutingScopeList = Shapes::ListShape.new(name: 'RoutingScopeList')
+    RtmpMediaInfo = Shapes::StructureShape.new(name: 'RtmpMediaInfo')
+    RtmpMediaStreamInfo = Shapes::StructureShape.new(name: 'RtmpMediaStreamInfo')
+    RtmpMediaStreamInfoList = Shapes::ListShape.new(name: 'RtmpMediaStreamInfoList')
+    RtmpPushNamingConfiguration = Shapes::UnionShape.new(name: 'RtmpPushNamingConfiguration')
+    RtmpPushNamingType = Shapes::StringShape.new(name: 'RtmpPushNamingType')
+    RtmpPushOutputSettings = Shapes::StructureShape.new(name: 'RtmpPushOutputSettings')
+    RtmpPushRouterInputConfiguration = Shapes::StructureShape.new(name: 'RtmpPushRouterInputConfiguration')
+    RtmpPushRouterInputConfigurationPortInteger = Shapes::IntegerShape.new(name: 'RtmpPushRouterInputConfigurationPortInteger')
     RtmpPushRouterOutputConfiguration = Shapes::StructureShape.new(name: 'RtmpPushRouterOutputConfiguration')
     RtmpPushRouterOutputConfigurationDestinationPortInteger = Shapes::IntegerShape.new(name: 'RtmpPushRouterOutputConfigurationDestinationPortInteger')
+    RtmpPushSourceSettings = Shapes::StructureShape.new(name: 'RtmpPushSourceSettings')
+    RtmpPushStreamDetails = Shapes::StructureShape.new(name: 'RtmpPushStreamDetails')
+    RtmpSourceMetadataInfo = Shapes::StructureShape.new(name: 'RtmpSourceMetadataInfo')
     RtpRouterInputConfiguration = Shapes::StructureShape.new(name: 'RtpRouterInputConfiguration')
     RtpRouterInputConfigurationPortInteger = Shapes::IntegerShape.new(name: 'RtpRouterInputConfigurationPortInteger')
     RtpRouterOutputConfiguration = Shapes::StructureShape.new(name: 'RtpRouterOutputConfiguration')
@@ -516,10 +547,12 @@ module Aws::MediaConnect
     ServiceUnavailableException = Shapes::StructureShape.new(name: 'ServiceUnavailableException')
     SetGatewayBridgeSourceRequest = Shapes::StructureShape.new(name: 'SetGatewayBridgeSourceRequest')
     SetGatewayBridgeSourceRequestBridgeArnString = Shapes::StringShape.new(name: 'SetGatewayBridgeSourceRequestBridgeArnString')
+    SetRtmpPushSourceSettings = Shapes::StructureShape.new(name: 'SetRtmpPushSourceSettings')
     SetSourceRequest = Shapes::StructureShape.new(name: 'SetSourceRequest')
     SetSourceRequestEntitlementArnString = Shapes::StringShape.new(name: 'SetSourceRequestEntitlementArnString')
     SilentAudio = Shapes::StructureShape.new(name: 'SilentAudio')
     SilentAudioConfiguration = Shapes::StructureShape.new(name: 'SilentAudioConfiguration')
+    SingleProgramTransportStreamPidMapConfiguration = Shapes::StructureShape.new(name: 'SingleProgramTransportStreamPidMapConfiguration')
     Source = Shapes::StructureShape.new(name: 'Source')
     SourceEndpoint = Shapes::StructureShape.new(name: 'SourceEndpoint')
     SourceEndpointArn = Shapes::StringShape.new(name: 'SourceEndpointArn')
@@ -541,6 +574,7 @@ module Aws::MediaConnect
     SourceEndpointServiceQuotaExceededException = Shapes::StructureShape.new(name: 'SourceEndpointServiceQuotaExceededException')
     SourceEndpointType = Shapes::StringShape.new(name: 'SourceEndpointType')
     SourceEndpointTypeList = Shapes::ListShape.new(name: 'SourceEndpointTypeList')
+    SourceMediaStreamType = Shapes::StringShape.new(name: 'SourceMediaStreamType')
     SourcePriority = Shapes::StructureShape.new(name: 'SourcePriority')
     SourceType = Shapes::StringShape.new(name: 'SourceType')
     SrtCallerRouterInputConfiguration = Shapes::StructureShape.new(name: 'SrtCallerRouterInputConfiguration')
@@ -618,6 +652,8 @@ module Aws::MediaConnect
     Transport = Shapes::StructureShape.new(name: 'Transport')
     TransportMediaInfo = Shapes::StructureShape.new(name: 'TransportMediaInfo')
     TransportStream = Shapes::StructureShape.new(name: 'TransportStream')
+    TransportStreamIdConfiguration = Shapes::UnionShape.new(name: 'TransportStreamIdConfiguration')
+    TransportStreamIdConfigurationSetInteger = Shapes::IntegerShape.new(name: 'TransportStreamIdConfigurationSetInteger')
     TransportStreamProgram = Shapes::StructureShape.new(name: 'TransportStreamProgram')
     UntagGlobalResourceRequest = Shapes::StructureShape.new(name: 'UntagGlobalResourceRequest')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
@@ -860,14 +896,21 @@ module Aws::MediaConnect
     AddOutputRequest.add_member(:router_integration_transit_encryption, Shapes::ShapeRef.new(shape: FlowTransitEncryption, location_name: "routerIntegrationTransitEncryption"))
     AddOutputRequest.add_member(:ndi_output_timecode_source, Shapes::ShapeRef.new(shape: NdiOutputTimecodeSource, location_name: "ndiOutputTimecodeSource"))
     AddOutputRequest.add_member(:ndi_audio_reference_level, Shapes::ShapeRef.new(shape: NdiAudioReferenceLevel, location_name: "ndiAudioReferenceLevel"))
+    AddOutputRequest.add_member(:rtmp_push_settings, Shapes::ShapeRef.new(shape: RtmpPushOutputSettings, location_name: "rtmpPushSettings"))
     AddOutputRequest.struct_class = Types::AddOutputRequest
 
     AudioMonitoringSetting.add_member(:silent_audio, Shapes::ShapeRef.new(shape: SilentAudio, location_name: "silentAudio"))
     AudioMonitoringSetting.struct_class = Types::AudioMonitoringSetting
 
+    AutoPidMapConfiguration.add_member(:start_pid, Shapes::ShapeRef.new(shape: Pid, required: true, location_name: "startPid"))
+    AutoPidMapConfiguration.add_member(:pids_per_program, Shapes::ShapeRef.new(shape: AutoPidMapConfigurationPidsPerProgramInteger, required: true, location_name: "pidsPerProgram"))
+    AutoPidMapConfiguration.struct_class = Types::AutoPidMapConfiguration
+
     AutomaticEncryptionKeyConfiguration.struct_class = Types::AutomaticEncryptionKeyConfiguration
 
     AutomaticEndpointEncryptionConfiguration.struct_class = Types::AutomaticEndpointEncryptionConfiguration
+
+    AutomaticRtmpPushNamingConfiguration.struct_class = Types::AutomaticRtmpPushNamingConfiguration
 
     BadRequestException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     BadRequestException.struct_class = Types::BadRequestException
@@ -1120,6 +1163,7 @@ module Aws::MediaConnect
     CreateRouterOutputRequest.add_member(:tags, Shapes::ShapeRef.new(shape: __mapOfString, location_name: "tags"))
     CreateRouterOutputRequest.add_member(:fabric_configuration, Shapes::ShapeRef.new(shape: FabricConfiguration, location_name: "fabricConfiguration"))
     CreateRouterOutputRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
+    CreateRouterOutputRequest.add_member(:processors, Shapes::ShapeRef.new(shape: RouterOutputProcessors, location_name: "processors"))
     CreateRouterOutputRequest.struct_class = Types::CreateRouterOutputRequest
 
     CreateRouterOutputResponse.add_member(:router_output, Shapes::ShapeRef.new(shape: RouterOutput, required: true, location_name: "routerOutput"))
@@ -1213,6 +1257,7 @@ module Aws::MediaConnect
     DescribeFlowSourceMetadataResponse.add_member(:timestamp, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "timestamp"))
     DescribeFlowSourceMetadataResponse.add_member(:transport_media_info, Shapes::ShapeRef.new(shape: TransportMediaInfo, location_name: "transportMediaInfo"))
     DescribeFlowSourceMetadataResponse.add_member(:ndi_info, Shapes::ShapeRef.new(shape: NdiSourceMetadataInfo, location_name: "ndiInfo"))
+    DescribeFlowSourceMetadataResponse.add_member(:rtmp_info, Shapes::ShapeRef.new(shape: RtmpSourceMetadataInfo, location_name: "rtmpInfo"))
     DescribeFlowSourceMetadataResponse.struct_class = Types::DescribeFlowSourceMetadataResponse
 
     DescribeFlowSourceThumbnailRequest.add_member(:flow_arn, Shapes::ShapeRef.new(shape: FlowArn, required: true, location: "uri", location_name: "FlowArn"))
@@ -1397,7 +1442,17 @@ module Aws::MediaConnect
     Entitlement.struct_class = Types::Entitlement
 
     FabricConfiguration.add_member(:recovery_latency_mode, Shapes::ShapeRef.new(shape: FabricLatencyMode, required: true, location_name: "recoveryLatencyMode"))
+    FabricConfiguration.add_member(:switching_mode, Shapes::ShapeRef.new(shape: FabricSwitchingMode, location_name: "switchingMode"))
+    FabricConfiguration.add_member(:switching_configuration, Shapes::ShapeRef.new(shape: FabricSwitchingConfiguration, location_name: "switchingConfiguration"))
     FabricConfiguration.struct_class = Types::FabricConfiguration
+
+    FabricSwitchingConfiguration.add_member(:immediate, Shapes::ShapeRef.new(shape: ImmediateFabricSwitchingConfiguration, location_name: "immediate"))
+    FabricSwitchingConfiguration.add_member(:key_frame, Shapes::ShapeRef.new(shape: KeyFrameFabricSwitchingConfiguration, location_name: "keyFrame"))
+    FabricSwitchingConfiguration.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    FabricSwitchingConfiguration.add_member_subclass(:immediate, Types::FabricSwitchingConfiguration::Immediate)
+    FabricSwitchingConfiguration.add_member_subclass(:key_frame, Types::FabricSwitchingConfiguration::KeyFrame)
+    FabricSwitchingConfiguration.add_member_subclass(:unknown, Types::FabricSwitchingConfiguration::Unknown)
+    FabricSwitchingConfiguration.struct_class = Types::FabricSwitchingConfiguration
 
     FailoverConfig.add_member(:failover_mode, Shapes::ShapeRef.new(shape: FailoverMode, location_name: "failoverMode"))
     FailoverConfig.add_member(:recovery_window, Shapes::ShapeRef.new(shape: Integer, location_name: "recoveryWindow"))
@@ -1413,15 +1468,18 @@ module Aws::MediaConnect
 
     FailoverRouterInputIndexedStreamDetails.add_member(:source_index, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "sourceIndex"))
     FailoverRouterInputIndexedStreamDetails.add_member(:source_ip_address, Shapes::ShapeRef.new(shape: String, location_name: "sourceIpAddress"))
+    FailoverRouterInputIndexedStreamDetails.add_member(:rtmp_push, Shapes::ShapeRef.new(shape: RtmpPushStreamDetails, location_name: "rtmpPush"))
     FailoverRouterInputIndexedStreamDetails.struct_class = Types::FailoverRouterInputIndexedStreamDetails
 
     FailoverRouterInputProtocolConfiguration.add_member(:rist, Shapes::ShapeRef.new(shape: RistRouterInputConfiguration, location_name: "rist"))
     FailoverRouterInputProtocolConfiguration.add_member(:srt_listener, Shapes::ShapeRef.new(shape: SrtListenerRouterInputConfiguration, location_name: "srtListener"))
+    FailoverRouterInputProtocolConfiguration.add_member(:rtmp_push, Shapes::ShapeRef.new(shape: RtmpPushRouterInputConfiguration, location_name: "rtmpPush"))
     FailoverRouterInputProtocolConfiguration.add_member(:srt_caller, Shapes::ShapeRef.new(shape: SrtCallerRouterInputConfiguration, location_name: "srtCaller"))
     FailoverRouterInputProtocolConfiguration.add_member(:rtp, Shapes::ShapeRef.new(shape: RtpRouterInputConfiguration, location_name: "rtp"))
     FailoverRouterInputProtocolConfiguration.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     FailoverRouterInputProtocolConfiguration.add_member_subclass(:rist, Types::FailoverRouterInputProtocolConfiguration::Rist)
     FailoverRouterInputProtocolConfiguration.add_member_subclass(:srt_listener, Types::FailoverRouterInputProtocolConfiguration::SrtListener)
+    FailoverRouterInputProtocolConfiguration.add_member_subclass(:rtmp_push, Types::FailoverRouterInputProtocolConfiguration::RtmpPush)
     FailoverRouterInputProtocolConfiguration.add_member_subclass(:srt_caller, Types::FailoverRouterInputProtocolConfiguration::SrtCaller)
     FailoverRouterInputProtocolConfiguration.add_member_subclass(:rtp, Types::FailoverRouterInputProtocolConfiguration::Rtp)
     FailoverRouterInputProtocolConfiguration.add_member_subclass(:unknown, Types::FailoverRouterInputProtocolConfiguration::Unknown)
@@ -1590,6 +1648,8 @@ module Aws::MediaConnect
     GrantFlowEntitlementsResponse.add_member(:flow_arn, Shapes::ShapeRef.new(shape: String, location_name: "flowArn"))
     GrantFlowEntitlementsResponse.struct_class = Types::GrantFlowEntitlementsResponse
 
+    ImmediateFabricSwitchingConfiguration.struct_class = Types::ImmediateFabricSwitchingConfiguration
+
     IngressGatewayBridge.add_member(:instance_id, Shapes::ShapeRef.new(shape: String, location_name: "instanceId"))
     IngressGatewayBridge.add_member(:max_bitrate, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "maxBitrate"))
     IngressGatewayBridge.add_member(:max_outputs, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "maxOutputs"))
@@ -1612,6 +1672,9 @@ module Aws::MediaConnect
 
     InternalServerErrorException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     InternalServerErrorException.struct_class = Types::InternalServerErrorException
+
+    KeyFrameFabricSwitchingConfiguration.add_member(:key_frame_wait_milliseconds, Shapes::ShapeRef.new(shape: KeyFrameFabricSwitchingConfigurationKeyFrameWaitMillisecondsLong, location_name: "keyFrameWaitMilliseconds"))
+    KeyFrameFabricSwitchingConfiguration.struct_class = Types::KeyFrameFabricSwitchingConfiguration
 
     ListBridgesRequest.add_member(:filter_arn, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "filterArn"))
     ListBridgesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
@@ -1879,6 +1942,10 @@ module Aws::MediaConnect
     MaintenanceSchedule.add_member_subclass(:unknown, Types::MaintenanceSchedule::Unknown)
     MaintenanceSchedule.struct_class = Types::MaintenanceSchedule
 
+    ManualRtmpPushNamingConfiguration.add_member(:application_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "applicationName"))
+    ManualRtmpPushNamingConfiguration.add_member(:stream_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "streamName"))
+    ManualRtmpPushNamingConfiguration.struct_class = Types::ManualRtmpPushNamingConfiguration
+
     MediaConnectFlowRouterInputConfiguration.add_member(:flow_arn, Shapes::ShapeRef.new(shape: FlowArn, location_name: "flowArn"))
     MediaConnectFlowRouterInputConfiguration.add_member(:flow_output_arn, Shapes::ShapeRef.new(shape: FlowOutputArn, location_name: "flowOutputArn"))
     MediaConnectFlowRouterInputConfiguration.add_member(:source_transit_decryption, Shapes::ShapeRef.new(shape: FlowTransitEncryption, required: true, location_name: "sourceTransitDecryption"))
@@ -1971,9 +2038,13 @@ module Aws::MediaConnect
 
     MergeRouterInputProtocolConfiguration.add_member(:rtp, Shapes::ShapeRef.new(shape: RtpRouterInputConfiguration, location_name: "rtp"))
     MergeRouterInputProtocolConfiguration.add_member(:rist, Shapes::ShapeRef.new(shape: RistRouterInputConfiguration, location_name: "rist"))
+    MergeRouterInputProtocolConfiguration.add_member(:srt_listener, Shapes::ShapeRef.new(shape: SrtListenerRouterInputConfiguration, location_name: "srtListener"))
+    MergeRouterInputProtocolConfiguration.add_member(:srt_caller, Shapes::ShapeRef.new(shape: SrtCallerRouterInputConfiguration, location_name: "srtCaller"))
     MergeRouterInputProtocolConfiguration.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     MergeRouterInputProtocolConfiguration.add_member_subclass(:rtp, Types::MergeRouterInputProtocolConfiguration::Rtp)
     MergeRouterInputProtocolConfiguration.add_member_subclass(:rist, Types::MergeRouterInputProtocolConfiguration::Rist)
+    MergeRouterInputProtocolConfiguration.add_member_subclass(:srt_listener, Types::MergeRouterInputProtocolConfiguration::SrtListener)
+    MergeRouterInputProtocolConfiguration.add_member_subclass(:srt_caller, Types::MergeRouterInputProtocolConfiguration::SrtCaller)
     MergeRouterInputProtocolConfiguration.add_member_subclass(:unknown, Types::MergeRouterInputProtocolConfiguration::Unknown)
     MergeRouterInputProtocolConfiguration.struct_class = Types::MergeRouterInputProtocolConfiguration
 
@@ -2075,9 +2146,41 @@ module Aws::MediaConnect
     OwnedResourceShareDetails.add_member(:share_state, Shapes::ShapeRef.new(shape: ResourceShareState, required: true, location_name: "shareState"))
     OwnedResourceShareDetails.struct_class = Types::OwnedResourceShareDetails
 
+    Passthrough.struct_class = Types::Passthrough
+
+    PidMapRule.add_member(:match_expression, Shapes::ShapeRef.new(shape: PidMapRuleMatchExpressionString, required: true, location_name: "matchExpression"))
+    PidMapRule.add_member(:action, Shapes::ShapeRef.new(shape: ActionString, required: true, location_name: "action"))
+    PidMapRule.struct_class = Types::PidMapRule
+
+    PidMapRules.member = Shapes::ShapeRef.new(shape: PidMapRule)
+
     PreferredDayTimeMaintenanceConfiguration.add_member(:day, Shapes::ShapeRef.new(shape: Day, required: true, location_name: "day"))
     PreferredDayTimeMaintenanceConfiguration.add_member(:time, Shapes::ShapeRef.new(shape: String, required: true, location_name: "time"))
     PreferredDayTimeMaintenanceConfiguration.struct_class = Types::PreferredDayTimeMaintenanceConfiguration
+
+    ProgramClockReferencePidConfiguration.add_member(:passthrough, Shapes::ShapeRef.new(shape: Passthrough, location_name: "passthrough"))
+    ProgramClockReferencePidConfiguration.add_member(:set, Shapes::ShapeRef.new(shape: Pid, location_name: "set"))
+    ProgramClockReferencePidConfiguration.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    ProgramClockReferencePidConfiguration.add_member_subclass(:passthrough, Types::ProgramClockReferencePidConfiguration::Passthrough)
+    ProgramClockReferencePidConfiguration.add_member_subclass(:set, Types::ProgramClockReferencePidConfiguration::Set)
+    ProgramClockReferencePidConfiguration.add_member_subclass(:unknown, Types::ProgramClockReferencePidConfiguration::Unknown)
+    ProgramClockReferencePidConfiguration.struct_class = Types::ProgramClockReferencePidConfiguration
+
+    ProgramMapTablePidConfiguration.add_member(:passthrough, Shapes::ShapeRef.new(shape: Passthrough, location_name: "passthrough"))
+    ProgramMapTablePidConfiguration.add_member(:set, Shapes::ShapeRef.new(shape: Pid, location_name: "set"))
+    ProgramMapTablePidConfiguration.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    ProgramMapTablePidConfiguration.add_member_subclass(:passthrough, Types::ProgramMapTablePidConfiguration::Passthrough)
+    ProgramMapTablePidConfiguration.add_member_subclass(:set, Types::ProgramMapTablePidConfiguration::Set)
+    ProgramMapTablePidConfiguration.add_member_subclass(:unknown, Types::ProgramMapTablePidConfiguration::Unknown)
+    ProgramMapTablePidConfiguration.struct_class = Types::ProgramMapTablePidConfiguration
+
+    ProgramNumberConfiguration.add_member(:passthrough, Shapes::ShapeRef.new(shape: Passthrough, location_name: "passthrough"))
+    ProgramNumberConfiguration.add_member(:set, Shapes::ShapeRef.new(shape: ProgramNumberConfigurationSetInteger, location_name: "set"))
+    ProgramNumberConfiguration.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    ProgramNumberConfiguration.add_member_subclass(:passthrough, Types::ProgramNumberConfiguration::Passthrough)
+    ProgramNumberConfiguration.add_member_subclass(:set, Types::ProgramNumberConfiguration::Set)
+    ProgramNumberConfiguration.add_member_subclass(:unknown, Types::ProgramNumberConfiguration::Unknown)
+    ProgramNumberConfiguration.struct_class = Types::ProgramNumberConfiguration
 
     PublicDestinationEndpointNetworkingConfiguration.add_member(:destination_allow_rules, Shapes::ShapeRef.new(shape: PublicDestinationEndpointNetworkingConfigurationDestinationAllowRulesList, required: true, location_name: "destinationAllowRules"))
     PublicDestinationEndpointNetworkingConfiguration.struct_class = Types::PublicDestinationEndpointNetworkingConfiguration
@@ -2341,18 +2444,22 @@ module Aws::MediaConnect
     RouterInputMessages.member = Shapes::ShapeRef.new(shape: RouterInputMessage)
 
     RouterInputMetadata.add_member(:transport_stream_media_info, Shapes::ShapeRef.new(shape: TransportMediaInfo, location_name: "transportStreamMediaInfo"))
+    RouterInputMetadata.add_member(:rtmp_info, Shapes::ShapeRef.new(shape: RtmpSourceMetadataInfo, location_name: "rtmpInfo"))
     RouterInputMetadata.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     RouterInputMetadata.add_member_subclass(:transport_stream_media_info, Types::RouterInputMetadata::TransportStreamMediaInfo)
+    RouterInputMetadata.add_member_subclass(:rtmp_info, Types::RouterInputMetadata::RtmpInfo)
     RouterInputMetadata.add_member_subclass(:unknown, Types::RouterInputMetadata::Unknown)
     RouterInputMetadata.struct_class = Types::RouterInputMetadata
 
     RouterInputProtocolConfiguration.add_member(:rist, Shapes::ShapeRef.new(shape: RistRouterInputConfiguration, location_name: "rist"))
     RouterInputProtocolConfiguration.add_member(:srt_listener, Shapes::ShapeRef.new(shape: SrtListenerRouterInputConfiguration, location_name: "srtListener"))
+    RouterInputProtocolConfiguration.add_member(:rtmp_push, Shapes::ShapeRef.new(shape: RtmpPushRouterInputConfiguration, location_name: "rtmpPush"))
     RouterInputProtocolConfiguration.add_member(:srt_caller, Shapes::ShapeRef.new(shape: SrtCallerRouterInputConfiguration, location_name: "srtCaller"))
     RouterInputProtocolConfiguration.add_member(:rtp, Shapes::ShapeRef.new(shape: RtpRouterInputConfiguration, location_name: "rtp"))
     RouterInputProtocolConfiguration.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     RouterInputProtocolConfiguration.add_member_subclass(:rist, Types::RouterInputProtocolConfiguration::Rist)
     RouterInputProtocolConfiguration.add_member_subclass(:srt_listener, Types::RouterInputProtocolConfiguration::SrtListener)
+    RouterInputProtocolConfiguration.add_member_subclass(:rtmp_push, Types::RouterInputProtocolConfiguration::RtmpPush)
     RouterInputProtocolConfiguration.add_member_subclass(:srt_caller, Types::RouterInputProtocolConfiguration::SrtCaller)
     RouterInputProtocolConfiguration.add_member_subclass(:rtp, Types::RouterInputProtocolConfiguration::Rtp)
     RouterInputProtocolConfiguration.add_member_subclass(:unknown, Types::RouterInputProtocolConfiguration::Unknown)
@@ -2469,6 +2576,7 @@ module Aws::MediaConnect
     RouterOutput.add_member(:maintenance_schedule_type, Shapes::ShapeRef.new(shape: MaintenanceScheduleType, location_name: "maintenanceScheduleType"))
     RouterOutput.add_member(:maintenance_schedule, Shapes::ShapeRef.new(shape: MaintenanceSchedule, location_name: "maintenanceSchedule"))
     RouterOutput.add_member(:fabric_configuration, Shapes::ShapeRef.new(shape: FabricConfiguration, required: true, location_name: "fabricConfiguration"))
+    RouterOutput.add_member(:processors, Shapes::ShapeRef.new(shape: RouterOutputProcessors, location_name: "processors"))
     RouterOutput.add_member(:associated_source_endpoint_arns, Shapes::ShapeRef.new(shape: SourceEndpointArnList, location_name: "associatedSourceEndpointArns"))
     RouterOutput.struct_class = Types::RouterOutput
 
@@ -2509,6 +2617,9 @@ module Aws::MediaConnect
     RouterOutputMessage.struct_class = Types::RouterOutputMessage
 
     RouterOutputMessages.member = Shapes::ShapeRef.new(shape: RouterOutputMessage)
+
+    RouterOutputProcessors.add_member(:single_program_transport_stream_pid_map, Shapes::ShapeRef.new(shape: SingleProgramTransportStreamPidMapConfiguration, location_name: "singleProgramTransportStreamPidMap"))
+    RouterOutputProcessors.struct_class = Types::RouterOutputProcessors
 
     RouterOutputProtocolConfiguration.add_member(:rist, Shapes::ShapeRef.new(shape: RistRouterOutputConfiguration, location_name: "rist"))
     RouterOutputProtocolConfiguration.add_member(:srt_listener, Shapes::ShapeRef.new(shape: SrtListenerRouterOutputConfiguration, location_name: "srtListener"))
@@ -2557,12 +2668,62 @@ module Aws::MediaConnect
 
     RoutingScopeList.member = Shapes::ShapeRef.new(shape: RoutingScope)
 
+    RtmpMediaInfo.add_member(:streams, Shapes::ShapeRef.new(shape: RtmpMediaStreamInfoList, required: true, location_name: "streams"))
+    RtmpMediaInfo.struct_class = Types::RtmpMediaInfo
+
+    RtmpMediaStreamInfo.add_member(:stream_id, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "streamId"))
+    RtmpMediaStreamInfo.add_member(:stream_type, Shapes::ShapeRef.new(shape: SourceMediaStreamType, required: true, location_name: "streamType"))
+    RtmpMediaStreamInfo.add_member(:codec, Shapes::ShapeRef.new(shape: String, required: true, location_name: "codec"))
+    RtmpMediaStreamInfo.add_member(:frame_rate, Shapes::ShapeRef.new(shape: String, location_name: "frameRate"))
+    RtmpMediaStreamInfo.add_member(:frame_resolution, Shapes::ShapeRef.new(shape: FrameResolution, location_name: "frameResolution"))
+    RtmpMediaStreamInfo.add_member(:scan_mode, Shapes::ShapeRef.new(shape: ScanMode, location_name: "scanMode"))
+    RtmpMediaStreamInfo.add_member(:color, Shapes::ShapeRef.new(shape: ColorInformation, location_name: "color"))
+    RtmpMediaStreamInfo.add_member(:channels, Shapes::ShapeRef.new(shape: Integer, location_name: "channels"))
+    RtmpMediaStreamInfo.add_member(:sample_rate, Shapes::ShapeRef.new(shape: Integer, location_name: "sampleRate"))
+    RtmpMediaStreamInfo.add_member(:sample_size, Shapes::ShapeRef.new(shape: Integer, location_name: "sampleSize"))
+    RtmpMediaStreamInfo.add_member(:language, Shapes::ShapeRef.new(shape: String, location_name: "language"))
+    RtmpMediaStreamInfo.struct_class = Types::RtmpMediaStreamInfo
+
+    RtmpMediaStreamInfoList.member = Shapes::ShapeRef.new(shape: RtmpMediaStreamInfo)
+
+    RtmpPushNamingConfiguration.add_member(:manual, Shapes::ShapeRef.new(shape: ManualRtmpPushNamingConfiguration, location_name: "manual"))
+    RtmpPushNamingConfiguration.add_member(:automatic, Shapes::ShapeRef.new(shape: AutomaticRtmpPushNamingConfiguration, location_name: "automatic"))
+    RtmpPushNamingConfiguration.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    RtmpPushNamingConfiguration.add_member_subclass(:manual, Types::RtmpPushNamingConfiguration::Manual)
+    RtmpPushNamingConfiguration.add_member_subclass(:automatic, Types::RtmpPushNamingConfiguration::Automatic)
+    RtmpPushNamingConfiguration.add_member_subclass(:unknown, Types::RtmpPushNamingConfiguration::Unknown)
+    RtmpPushNamingConfiguration.struct_class = Types::RtmpPushNamingConfiguration
+
+    RtmpPushOutputSettings.add_member(:application_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "applicationName"))
+    RtmpPushOutputSettings.add_member(:stream_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "streamName"))
+    RtmpPushOutputSettings.add_member(:tls_encryption, Shapes::ShapeRef.new(shape: TlsEncryption, location_name: "tlsEncryption"))
+    RtmpPushOutputSettings.struct_class = Types::RtmpPushOutputSettings
+
+    RtmpPushRouterInputConfiguration.add_member(:port, Shapes::ShapeRef.new(shape: RtmpPushRouterInputConfigurationPortInteger, required: true, location_name: "port"))
+    RtmpPushRouterInputConfiguration.add_member(:naming_type, Shapes::ShapeRef.new(shape: RtmpPushNamingType, location_name: "namingType"))
+    RtmpPushRouterInputConfiguration.add_member(:naming_configuration, Shapes::ShapeRef.new(shape: RtmpPushNamingConfiguration, required: true, location_name: "namingConfiguration"))
+    RtmpPushRouterInputConfiguration.struct_class = Types::RtmpPushRouterInputConfiguration
+
     RtmpPushRouterOutputConfiguration.add_member(:destination_address, Shapes::ShapeRef.new(shape: String, required: true, location_name: "destinationAddress"))
     RtmpPushRouterOutputConfiguration.add_member(:destination_port, Shapes::ShapeRef.new(shape: RtmpPushRouterOutputConfigurationDestinationPortInteger, required: true, location_name: "destinationPort"))
     RtmpPushRouterOutputConfiguration.add_member(:application_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "applicationName"))
     RtmpPushRouterOutputConfiguration.add_member(:stream_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "streamName"))
     RtmpPushRouterOutputConfiguration.add_member(:tls_encryption, Shapes::ShapeRef.new(shape: TlsEncryption, location_name: "tlsEncryption"))
     RtmpPushRouterOutputConfiguration.struct_class = Types::RtmpPushRouterOutputConfiguration
+
+    RtmpPushSourceSettings.add_member(:application_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "applicationName"))
+    RtmpPushSourceSettings.add_member(:stream_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "streamName"))
+    RtmpPushSourceSettings.add_member(:naming_type, Shapes::ShapeRef.new(shape: RtmpPushNamingType, required: true, location_name: "namingType"))
+    RtmpPushSourceSettings.struct_class = Types::RtmpPushSourceSettings
+
+    RtmpPushStreamDetails.add_member(:application_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "applicationName"))
+    RtmpPushStreamDetails.add_member(:stream_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "streamName"))
+    RtmpPushStreamDetails.struct_class = Types::RtmpPushStreamDetails
+
+    RtmpSourceMetadataInfo.add_member(:application_name, Shapes::ShapeRef.new(shape: String, location_name: "applicationName"))
+    RtmpSourceMetadataInfo.add_member(:stream_name, Shapes::ShapeRef.new(shape: String, location_name: "streamName"))
+    RtmpSourceMetadataInfo.add_member(:media_info, Shapes::ShapeRef.new(shape: RtmpMediaInfo, required: true, location_name: "mediaInfo"))
+    RtmpSourceMetadataInfo.struct_class = Types::RtmpSourceMetadataInfo
 
     RtpRouterInputConfiguration.add_member(:port, Shapes::ShapeRef.new(shape: RtpRouterInputConfigurationPortInteger, required: true, location_name: "port"))
     RtpRouterInputConfiguration.add_member(:forward_error_correction, Shapes::ShapeRef.new(shape: ForwardErrorCorrectionState, location_name: "forwardErrorCorrection"))
@@ -2597,6 +2758,9 @@ module Aws::MediaConnect
     SetGatewayBridgeSourceRequest.add_member(:vpc_interface_attachment, Shapes::ShapeRef.new(shape: VpcInterfaceAttachment, location_name: "vpcInterfaceAttachment"))
     SetGatewayBridgeSourceRequest.struct_class = Types::SetGatewayBridgeSourceRequest
 
+    SetRtmpPushSourceSettings.add_member(:naming_configuration, Shapes::ShapeRef.new(shape: RtmpPushNamingConfiguration, required: true, location_name: "namingConfiguration"))
+    SetRtmpPushSourceSettings.struct_class = Types::SetRtmpPushSourceSettings
+
     SetSourceRequest.add_member(:decryption, Shapes::ShapeRef.new(shape: Encryption, location_name: "decryption"))
     SetSourceRequest.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
     SetSourceRequest.add_member(:entitlement_arn, Shapes::ShapeRef.new(shape: SetSourceRequestEntitlementArnString, location_name: "entitlementArn"))
@@ -2620,6 +2784,7 @@ module Aws::MediaConnect
     SetSourceRequest.add_member(:source_tags, Shapes::ShapeRef.new(shape: __mapOfString, location_name: "sourceTags"))
     SetSourceRequest.add_member(:router_integration_state, Shapes::ShapeRef.new(shape: State, location_name: "routerIntegrationState"))
     SetSourceRequest.add_member(:router_integration_transit_decryption, Shapes::ShapeRef.new(shape: FlowTransitEncryption, location_name: "routerIntegrationTransitDecryption"))
+    SetSourceRequest.add_member(:rtmp_push_settings, Shapes::ShapeRef.new(shape: SetRtmpPushSourceSettings, location_name: "rtmpPushSettings"))
     SetSourceRequest.struct_class = Types::SetSourceRequest
 
     SilentAudio.add_member(:state, Shapes::ShapeRef.new(shape: State, location_name: "state"))
@@ -2629,6 +2794,15 @@ module Aws::MediaConnect
     SilentAudioConfiguration.add_member(:state, Shapes::ShapeRef.new(shape: ContentQualityAnalysisState, required: true, location_name: "state"))
     SilentAudioConfiguration.add_member(:threshold_seconds, Shapes::ShapeRef.new(shape: RouterCqaThresholdSeconds, required: true, location_name: "thresholdSeconds"))
     SilentAudioConfiguration.struct_class = Types::SilentAudioConfiguration
+
+    SingleProgramTransportStreamPidMapConfiguration.add_member(:rules, Shapes::ShapeRef.new(shape: PidMapRules, required: true, location_name: "rules"))
+    SingleProgramTransportStreamPidMapConfiguration.add_member(:default_action, Shapes::ShapeRef.new(shape: ActionString, required: true, location_name: "defaultAction"))
+    SingleProgramTransportStreamPidMapConfiguration.add_member(:transport_stream_id, Shapes::ShapeRef.new(shape: TransportStreamIdConfiguration, location_name: "transportStreamId"))
+    SingleProgramTransportStreamPidMapConfiguration.add_member(:program_number, Shapes::ShapeRef.new(shape: ProgramNumberConfiguration, location_name: "programNumber"))
+    SingleProgramTransportStreamPidMapConfiguration.add_member(:program_map_table_pid, Shapes::ShapeRef.new(shape: ProgramMapTablePidConfiguration, location_name: "programMapTablePid"))
+    SingleProgramTransportStreamPidMapConfiguration.add_member(:program_clock_reference_pid, Shapes::ShapeRef.new(shape: ProgramClockReferencePidConfiguration, location_name: "programClockReferencePid"))
+    SingleProgramTransportStreamPidMapConfiguration.add_member(:auto, Shapes::ShapeRef.new(shape: AutoPidMapConfiguration, location_name: "auto"))
+    SingleProgramTransportStreamPidMapConfiguration.struct_class = Types::SingleProgramTransportStreamPidMapConfiguration
 
     Source.add_member(:data_transfer_subscriber_fee_percent, Shapes::ShapeRef.new(shape: Integer, location_name: "dataTransferSubscriberFeePercent"))
     Source.add_member(:decryption, Shapes::ShapeRef.new(shape: Encryption, location_name: "decryption"))
@@ -2833,6 +3007,7 @@ module Aws::MediaConnect
     StandardRouterInputConfiguration.struct_class = Types::StandardRouterInputConfiguration
 
     StandardRouterInputStreamDetails.add_member(:source_ip_address, Shapes::ShapeRef.new(shape: String, location_name: "sourceIpAddress"))
+    StandardRouterInputStreamDetails.add_member(:rtmp_push, Shapes::ShapeRef.new(shape: RtmpPushStreamDetails, location_name: "rtmpPush"))
     StandardRouterInputStreamDetails.struct_class = Types::StandardRouterInputStreamDetails
 
     StandardRouterOutputConfiguration.add_member(:network_interface_arn, Shapes::ShapeRef.new(shape: RouterNetworkInterfaceArn, required: true, location_name: "networkInterfaceArn"))
@@ -2988,6 +3163,8 @@ module Aws::MediaConnect
     Transport.add_member(:ndi_source_settings, Shapes::ShapeRef.new(shape: NdiSourceSettings, location_name: "ndiSourceSettings"))
     Transport.add_member(:ndi_output_timecode_source, Shapes::ShapeRef.new(shape: NdiOutputTimecodeSource, location_name: "ndiOutputTimecodeSource"))
     Transport.add_member(:ndi_audio_reference_level, Shapes::ShapeRef.new(shape: NdiAudioReferenceLevel, location_name: "ndiAudioReferenceLevel"))
+    Transport.add_member(:rtmp_push_source_settings, Shapes::ShapeRef.new(shape: RtmpPushSourceSettings, location_name: "rtmpPushSourceSettings"))
+    Transport.add_member(:rtmp_push_output_settings, Shapes::ShapeRef.new(shape: RtmpPushOutputSettings, location_name: "rtmpPushOutputSettings"))
     Transport.struct_class = Types::Transport
 
     TransportMediaInfo.add_member(:programs, Shapes::ShapeRef.new(shape: __listOfTransportStreamProgram, required: true, location_name: "programs"))
@@ -3002,8 +3179,18 @@ module Aws::MediaConnect
     TransportStream.add_member(:pid, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "pid"))
     TransportStream.add_member(:sample_rate, Shapes::ShapeRef.new(shape: Integer, location_name: "sampleRate"))
     TransportStream.add_member(:sample_size, Shapes::ShapeRef.new(shape: Integer, location_name: "sampleSize"))
+    TransportStream.add_member(:scan_mode, Shapes::ShapeRef.new(shape: ScanMode, location_name: "scanMode"))
     TransportStream.add_member(:stream_type, Shapes::ShapeRef.new(shape: String, required: true, location_name: "streamType"))
+    TransportStream.add_member(:language, Shapes::ShapeRef.new(shape: String, location_name: "language"))
     TransportStream.struct_class = Types::TransportStream
+
+    TransportStreamIdConfiguration.add_member(:passthrough, Shapes::ShapeRef.new(shape: Passthrough, location_name: "passthrough"))
+    TransportStreamIdConfiguration.add_member(:set, Shapes::ShapeRef.new(shape: TransportStreamIdConfigurationSetInteger, location_name: "set"))
+    TransportStreamIdConfiguration.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    TransportStreamIdConfiguration.add_member_subclass(:passthrough, Types::TransportStreamIdConfiguration::Passthrough)
+    TransportStreamIdConfiguration.add_member_subclass(:set, Types::TransportStreamIdConfiguration::Set)
+    TransportStreamIdConfiguration.add_member_subclass(:unknown, Types::TransportStreamIdConfiguration::Unknown)
+    TransportStreamIdConfiguration.struct_class = Types::TransportStreamIdConfiguration
 
     TransportStreamProgram.add_member(:pcr_pid, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "pcrPid"))
     TransportStreamProgram.add_member(:program_name, Shapes::ShapeRef.new(shape: String, location_name: "programName"))
@@ -3151,6 +3338,7 @@ module Aws::MediaConnect
     UpdateFlowOutputRequest.add_member(:router_integration_transit_encryption, Shapes::ShapeRef.new(shape: FlowTransitEncryption, location_name: "routerIntegrationTransitEncryption"))
     UpdateFlowOutputRequest.add_member(:ndi_output_timecode_source, Shapes::ShapeRef.new(shape: NdiOutputTimecodeSource, location_name: "ndiOutputTimecodeSource"))
     UpdateFlowOutputRequest.add_member(:ndi_audio_reference_level, Shapes::ShapeRef.new(shape: NdiAudioReferenceLevel, location_name: "ndiAudioReferenceLevel"))
+    UpdateFlowOutputRequest.add_member(:rtmp_push_settings, Shapes::ShapeRef.new(shape: RtmpPushOutputSettings, location_name: "rtmpPushSettings"))
     UpdateFlowOutputRequest.struct_class = Types::UpdateFlowOutputRequest
 
     UpdateFlowOutputResponse.add_member(:flow_arn, Shapes::ShapeRef.new(shape: String, location_name: "flowArn"))
@@ -3192,6 +3380,7 @@ module Aws::MediaConnect
     UpdateFlowSourceRequest.add_member(:ndi_source_settings, Shapes::ShapeRef.new(shape: NdiSourceSettings, location_name: "ndiSourceSettings"))
     UpdateFlowSourceRequest.add_member(:router_integration_state, Shapes::ShapeRef.new(shape: State, location_name: "routerIntegrationState"))
     UpdateFlowSourceRequest.add_member(:router_integration_transit_decryption, Shapes::ShapeRef.new(shape: FlowTransitEncryption, location_name: "routerIntegrationTransitDecryption"))
+    UpdateFlowSourceRequest.add_member(:rtmp_push_settings, Shapes::ShapeRef.new(shape: SetRtmpPushSourceSettings, location_name: "rtmpPushSettings"))
     UpdateFlowSourceRequest.struct_class = Types::UpdateFlowSourceRequest
 
     UpdateFlowSourceResponse.add_member(:flow_arn, Shapes::ShapeRef.new(shape: String, location_name: "flowArn"))
@@ -3249,6 +3438,7 @@ module Aws::MediaConnect
     UpdateRouterOutputRequest.add_member(:tier, Shapes::ShapeRef.new(shape: RouterOutputTier, location_name: "tier"))
     UpdateRouterOutputRequest.add_member(:maintenance_configuration, Shapes::ShapeRef.new(shape: MaintenanceConfiguration, location_name: "maintenanceConfiguration"))
     UpdateRouterOutputRequest.add_member(:fabric_configuration, Shapes::ShapeRef.new(shape: FabricConfiguration, location_name: "fabricConfiguration"))
+    UpdateRouterOutputRequest.add_member(:processors, Shapes::ShapeRef.new(shape: RouterOutputProcessors, location_name: "processors"))
     UpdateRouterOutputRequest.struct_class = Types::UpdateRouterOutputRequest
 
     UpdateRouterOutputResponse.add_member(:router_output, Shapes::ShapeRef.new(shape: RouterOutput, required: true, location_name: "routerOutput"))

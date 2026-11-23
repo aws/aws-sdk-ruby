@@ -264,7 +264,8 @@ module Aws::Kafka
     #     An integer representing the maximum number attempts that will be made for
     #     a single request, including the initial attempt.  For example,
     #     setting this value to 5 will result in a request being retried up to
-    #     4 times. Used in `standard` and `adaptive` retry modes.
+    #     4 times. Used in `standard` and `adaptive` retry modes. Defaults to 3,
+    #     except for DynamoDB and DynamoDB Streams, which default to 4.
     #
     #   @option options [String] :profile ("default")
     #     Used when loading credentials from the shared credentials file at `HOME/.aws/credentials`.
@@ -327,15 +328,15 @@ module Aws::Kafka
     #     used by the default backoff function. This option is only used in the
     #     `legacy` retry mode.
     #
-    #   @option options [String] :retry_mode ("legacy")
+    #   @option options [String] :retry_mode ("standard")
     #     Specifies which retry algorithm to use. Values are:
     #
-    #     * `legacy` - The pre-existing retry behavior. This is the default
-    #       value if no retry mode is provided.
+    #     * `legacy` - The pre-existing retry behavior.
     #
     #     * `standard` - A standardized set of retry rules across the AWS SDKs.
     #       This includes support for retry quotas, which limit the number of
-    #       unsuccessful retries a client can make.
+    #       unsuccessful retries a client can make. This is the default value
+    #       if no retry mode is provided.
     #
     #     * `adaptive` - A retry mode that includes all the functionality of
     #       `standard` mode along with automatic client side throttling.
@@ -517,6 +518,59 @@ module Aws::Kafka
       req.send_request(options)
     end
 
+    # Creates a new assessment for the specified cluster. Kicks off an
+    # asynchronous scan.
+    #
+    # @option params [Types::AssessmentParameters] :assessment_parameters
+    #   Optional type-specific parameters for the assessment.
+    #
+    # @option params [required, String] :assessment_type
+    #   The type of assessment to perform.
+    #
+    # @option params [required, String] :cluster_arn
+    #   The Amazon Resource Name (ARN) of the cluster to assess.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   The tags to attach to the assessment.
+    #
+    # @return [Types::CreateAssessmentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateAssessmentResponse#assessment_arn #assessment_arn} => String
+    #   * {Types::CreateAssessmentResponse#assessment_type #assessment_type} => String
+    #   * {Types::CreateAssessmentResponse#cluster_arn #cluster_arn} => String
+    #   * {Types::CreateAssessmentResponse#creation_time #creation_time} => Time
+    #   * {Types::CreateAssessmentResponse#status #status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_assessment({
+    #     assessment_parameters: {
+    #       target_instance_type: "__stringMax256",
+    #     },
+    #     assessment_type: "UPDATE_BROKER_TYPE", # required, accepts UPDATE_BROKER_TYPE
+    #     cluster_arn: "__string", # required
+    #     tags: {
+    #       "__string" => "__string",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.assessment_arn #=> String
+    #   resp.assessment_type #=> String, one of "UPDATE_BROKER_TYPE"
+    #   resp.cluster_arn #=> String
+    #   resp.creation_time #=> Time
+    #   resp.status #=> String, one of "IN_PROGRESS", "COMPLETE", "FAILED", "DELETING"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/CreateAssessment AWS API Documentation
+    #
+    # @overload create_assessment(params = {})
+    # @param [Hash] params ({})
+    def create_assessment(params = {}, options = {})
+      req = build_request(:create_assessment, params)
+      req.send_request(options)
+    end
+
     # Creates a new MSK cluster.
     #
     # @option params [required, Types::BrokerNodeGroupInfo] :broker_node_group_info
@@ -574,7 +628,7 @@ module Aws::Kafka
     #     broker_node_group_info: { # required
     #       broker_az_distribution: "DEFAULT", # accepts DEFAULT
     #       client_subnets: ["__string"], # required
-    #       instance_type: "__stringMin5Max32", # required
+    #       instance_type: "__stringMin5Max64", # required
     #       security_groups: ["__string"],
     #       storage_info: {
     #         ebs_storage_info: {
@@ -741,7 +795,7 @@ module Aws::Kafka
     #       broker_node_group_info: { # required
     #         broker_az_distribution: "DEFAULT", # accepts DEFAULT
     #         client_subnets: ["__string"], # required
-    #         instance_type: "__stringMin5Max32", # required
+    #         instance_type: "__stringMin5Max64", # required
     #         security_groups: ["__string"],
     #         storage_info: {
     #           ebs_storage_info: {
@@ -1339,6 +1393,41 @@ module Aws::Kafka
       req.send_request(options)
     end
 
+    # Deletes an assessment and its findings. Frees one slot against the
+    # cluster's assessment quota.
+    #
+    # @option params [required, String] :assessment_arn
+    #   The Amazon Resource Name (ARN) of the assessment to delete.
+    #
+    # @option params [required, String] :cluster_arn
+    #   The Amazon Resource Name (ARN) of the cluster.
+    #
+    # @return [Types::DeleteAssessmentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteAssessmentResponse#assessment_arn #assessment_arn} => String
+    #   * {Types::DeleteAssessmentResponse#status #status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_assessment({
+    #     assessment_arn: "__string", # required
+    #     cluster_arn: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.assessment_arn #=> String
+    #   resp.status #=> String, one of "IN_PROGRESS", "COMPLETE", "FAILED", "DELETING"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/DeleteAssessment AWS API Documentation
+    #
+    # @overload delete_assessment(params = {})
+    # @param [Hash] params ({})
+    def delete_assessment(params = {}, options = {})
+      req = build_request(:delete_assessment, params)
+      req.send_request(options)
+    end
+
     # Deletes the MSK cluster specified by the Amazon Resource Name (ARN) in
     # the request.
     #
@@ -1531,6 +1620,63 @@ module Aws::Kafka
     # @param [Hash] params ({})
     def delete_vpc_connection(params = {}, options = {})
       req = build_request(:delete_vpc_connection, params)
+      req.send_request(options)
+    end
+
+    # Returns the status and summary of an assessment.
+    #
+    # @option params [required, String] :assessment_arn
+    #   The Amazon Resource Name (ARN) of the assessment.
+    #
+    # @option params [required, String] :cluster_arn
+    #   The Amazon Resource Name (ARN) of the cluster.
+    #
+    # @return [Types::DescribeAssessmentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeAssessmentResponse#assessment_arn #assessment_arn} => String
+    #   * {Types::DescribeAssessmentResponse#assessment_parameters #assessment_parameters} => Types::AssessmentParameters
+    #   * {Types::DescribeAssessmentResponse#assessment_type #assessment_type} => String
+    #   * {Types::DescribeAssessmentResponse#cluster_arn #cluster_arn} => String
+    #   * {Types::DescribeAssessmentResponse#completion_time #completion_time} => Time
+    #   * {Types::DescribeAssessmentResponse#creation_time #creation_time} => Time
+    #   * {Types::DescribeAssessmentResponse#status #status} => String
+    #   * {Types::DescribeAssessmentResponse#status_message #status_message} => String
+    #   * {Types::DescribeAssessmentResponse#summary #summary} => Types::AssessmentSummary
+    #   * {Types::DescribeAssessmentResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_assessment({
+    #     assessment_arn: "__string", # required
+    #     cluster_arn: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.assessment_arn #=> String
+    #   resp.assessment_parameters.target_instance_type #=> String
+    #   resp.assessment_type #=> String, one of "UPDATE_BROKER_TYPE"
+    #   resp.cluster_arn #=> String
+    #   resp.completion_time #=> Time
+    #   resp.creation_time #=> Time
+    #   resp.status #=> String, one of "IN_PROGRESS", "COMPLETE", "FAILED", "DELETING"
+    #   resp.status_message #=> String
+    #   resp.summary.by_category #=> Hash
+    #   resp.summary.by_category["__string"] #=> Integer
+    #   resp.summary.by_severity #=> Hash
+    #   resp.summary.by_severity["__string"] #=> Integer
+    #   resp.summary.findings_capped #=> Boolean
+    #   resp.summary.has_blocking_findings #=> Boolean
+    #   resp.summary.total_findings #=> Integer
+    #   resp.tags #=> Hash
+    #   resp.tags["__string"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/DescribeAssessment AWS API Documentation
+    #
+    # @overload describe_assessment(params = {})
+    # @param [Hash] params ({})
+    def describe_assessment(params = {}, options = {})
+      req = build_request(:describe_assessment, params)
       req.send_request(options)
     end
 
@@ -1736,6 +1882,8 @@ module Aws::Kafka
     #
     # @example Response structure
     #
+    #   resp.cluster_operation_info.broker_type_upgrade_info.topic_reassignment_mode #=> String, one of "AUTO", "MANUAL"
+    #   resp.cluster_operation_info.broker_type_upgrade_info.topic_reassignment_operation_arn #=> String
     #   resp.cluster_operation_info.client_request_id #=> String
     #   resp.cluster_operation_info.cluster_arn #=> String
     #   resp.cluster_operation_info.creation_time #=> Time
@@ -1882,6 +2030,8 @@ module Aws::Kafka
     #   resp.cluster_operation_info.operation_arn #=> String
     #   resp.cluster_operation_info.operation_state #=> String
     #   resp.cluster_operation_info.operation_type #=> String
+    #   resp.cluster_operation_info.provisioned.broker_type_upgrade_info.topic_reassignment_mode #=> String, one of "AUTO", "MANUAL"
+    #   resp.cluster_operation_info.provisioned.broker_type_upgrade_info.topic_reassignment_operation_arn #=> String
     #   resp.cluster_operation_info.provisioned.operation_steps #=> Array
     #   resp.cluster_operation_info.provisioned.operation_steps[0].step_info.step_status #=> String
     #   resp.cluster_operation_info.provisioned.operation_steps[0].step_name #=> String
@@ -2295,6 +2445,7 @@ module Aws::Kafka
     #   * {Types::DescribeTopicResponse#partition_count #partition_count} => Integer
     #   * {Types::DescribeTopicResponse#configs #configs} => String
     #   * {Types::DescribeTopicResponse#status #status} => String
+    #   * {Types::DescribeTopicResponse#replica_ids #replica_ids} => Array&lt;Integer&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -2311,6 +2462,8 @@ module Aws::Kafka
     #   resp.partition_count #=> Integer
     #   resp.configs #=> String
     #   resp.status #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE"
+    #   resp.replica_ids #=> Array
+    #   resp.replica_ids[0] #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/DescribeTopic AWS API Documentation
     #
@@ -2364,6 +2517,65 @@ module Aws::Kafka
     # @param [Hash] params ({})
     def describe_topic_partitions(params = {}, options = {})
       req = build_request(:describe_topic_partitions, params)
+      req.send_request(options)
+    end
+
+    # Returns the status and progress of a topic reassignment operation.
+    #
+    # @option params [required, String] :cluster_arn
+    #   The Amazon Resource Name (ARN) of the cluster.
+    #
+    # @option params [required, String] :topic_reassignment_operation_arn
+    #   The Amazon Resource Name (ARN) of the topic reassignment operation.
+    #
+    # @return [Types::DescribeTopicReassignmentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeTopicReassignmentResponse#cluster_arn #cluster_arn} => String
+    #   * {Types::DescribeTopicReassignmentResponse#completed_topics #completed_topics} => Integer
+    #   * {Types::DescribeTopicReassignmentResponse#creation_time #creation_time} => Time
+    #   * {Types::DescribeTopicReassignmentResponse#error_info #error_info} => Types::ErrorInfo
+    #   * {Types::DescribeTopicReassignmentResponse#last_update_time #last_update_time} => Time
+    #   * {Types::DescribeTopicReassignmentResponse#migrated_partitions #migrated_partitions} => Integer
+    #   * {Types::DescribeTopicReassignmentResponse#status #status} => String
+    #   * {Types::DescribeTopicReassignmentResponse#target_instance_type #target_instance_type} => String
+    #   * {Types::DescribeTopicReassignmentResponse#topic_reassignment_operation_arn #topic_reassignment_operation_arn} => String
+    #   * {Types::DescribeTopicReassignmentResponse#topics_to_exclude #topics_to_exclude} => Array&lt;String&gt;
+    #   * {Types::DescribeTopicReassignmentResponse#topics_to_include #topics_to_include} => Array&lt;String&gt;
+    #   * {Types::DescribeTopicReassignmentResponse#total_partitions #total_partitions} => Integer
+    #   * {Types::DescribeTopicReassignmentResponse#total_topics #total_topics} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_topic_reassignment({
+    #     cluster_arn: "__string", # required
+    #     topic_reassignment_operation_arn: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.cluster_arn #=> String
+    #   resp.completed_topics #=> Integer
+    #   resp.creation_time #=> Time
+    #   resp.error_info.error_code #=> String
+    #   resp.error_info.error_string #=> String
+    #   resp.last_update_time #=> Time
+    #   resp.migrated_partitions #=> Integer
+    #   resp.status #=> String, one of "PENDING", "IN_PROGRESS", "STOPPING", "COMPLETE", "FAILED", "STOPPED"
+    #   resp.target_instance_type #=> String
+    #   resp.topic_reassignment_operation_arn #=> String
+    #   resp.topics_to_exclude #=> Array
+    #   resp.topics_to_exclude[0] #=> String
+    #   resp.topics_to_include #=> Array
+    #   resp.topics_to_include[0] #=> String
+    #   resp.total_partitions #=> Integer
+    #   resp.total_topics #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/DescribeTopicReassignment AWS API Documentation
+    #
+    # @overload describe_topic_reassignment(params = {})
+    # @param [Hash] params ({})
+    def describe_topic_reassignment(params = {}, options = {})
+      req = build_request(:describe_topic_reassignment, params)
       req.send_request(options)
     end
 
@@ -2539,6 +2751,119 @@ module Aws::Kafka
       req.send_request(options)
     end
 
+    # Returns the findings for a completed assessment. Paginated.
+    #
+    # @option params [required, String] :assessment_arn
+    #   The Amazon Resource Name (ARN) of the assessment.
+    #
+    # @option params [String] :category
+    #   Optional filter. Only return findings matching this category.
+    #
+    # @option params [required, String] :cluster_arn
+    #   The Amazon Resource Name (ARN) of the cluster.
+    #
+    # @option params [Integer] :max_results
+    #   Maximum number of findings to return. Default 100, maximum 500.
+    #
+    # @option params [String] :next_token
+    #   If the response is truncated, it returns a nextToken. Send this in the
+    #   subsequent request to get the remaining results.
+    #
+    # @option params [String] :severity
+    #   Optional filter. Only return findings matching this severity.
+    #
+    # @return [Types::ListAssessmentFindingsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListAssessmentFindingsResponse#findings #findings} => Array&lt;Types::AssessmentFinding&gt;
+    #   * {Types::ListAssessmentFindingsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_assessment_findings({
+    #     assessment_arn: "__string", # required
+    #     category: "__string",
+    #     cluster_arn: "__string", # required
+    #     max_results: 1,
+    #     next_token: "__string",
+    #     severity: "__string",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.findings #=> Array
+    #   resp.findings[0].category #=> String, one of "INFRASTRUCTURE", "BROKER_CONFIGURATION", "TOPIC_CONFIGURATION", "CAPACITY", "HEALTH"
+    #   resp.findings[0].finding_id #=> String
+    #   resp.findings[0].message #=> String
+    #   resp.findings[0].remediation.action #=> String
+    #   resp.findings[0].remediation.documentation_url #=> String
+    #   resp.findings[0].resource #=> String
+    #   resp.findings[0].severity #=> String, one of "ERROR", "WARNING", "INFO"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/ListAssessmentFindings AWS API Documentation
+    #
+    # @overload list_assessment_findings(params = {})
+    # @param [Hash] params ({})
+    def list_assessment_findings(params = {}, options = {})
+      req = build_request(:list_assessment_findings, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of assessments for the specified cluster. Optionally
+    # filterable by assessment type.
+    #
+    # @option params [String] :assessment_type
+    #   Optional filter. The type of assessment to filter by.
+    #
+    # @option params [required, String] :cluster_arn
+    #   The Amazon Resource Name (ARN) of the cluster to list assessments for.
+    #
+    # @option params [Integer] :max_results
+    #   Maximum number of assessments to return. Default 25, maximum 100.
+    #
+    # @option params [String] :next_token
+    #   If the response is truncated, it returns a nextToken. Send this in the
+    #   subsequent request to get the remaining results.
+    #
+    # @return [Types::ListAssessmentsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListAssessmentsResponse#assessments #assessments} => Array&lt;Types::AssessmentInfo&gt;
+    #   * {Types::ListAssessmentsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_assessments({
+    #     assessment_type: "__string",
+    #     cluster_arn: "__string", # required
+    #     max_results: 1,
+    #     next_token: "__string",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.assessments #=> Array
+    #   resp.assessments[0].assessment_arn #=> String
+    #   resp.assessments[0].assessment_type #=> String, one of "UPDATE_BROKER_TYPE"
+    #   resp.assessments[0].cluster_arn #=> String
+    #   resp.assessments[0].creation_time #=> Time
+    #   resp.assessments[0].status #=> String, one of "IN_PROGRESS", "COMPLETE", "FAILED", "DELETING"
+    #   resp.assessments[0].tags #=> Hash
+    #   resp.assessments[0].tags["__string"] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/ListAssessments AWS API Documentation
+    #
+    # @overload list_assessments(params = {})
+    # @param [Hash] params ({})
+    def list_assessments(params = {}, options = {})
+      req = build_request(:list_assessments, params)
+      req.send_request(options)
+    end
+
     # Returns the list of channels in a cluster.
     #
     # @option params [required, String] :cluster_arn
@@ -2617,6 +2942,8 @@ module Aws::Kafka
     # @example Response structure
     #
     #   resp.cluster_operation_info_list #=> Array
+    #   resp.cluster_operation_info_list[0].broker_type_upgrade_info.topic_reassignment_mode #=> String, one of "AUTO", "MANUAL"
+    #   resp.cluster_operation_info_list[0].broker_type_upgrade_info.topic_reassignment_operation_arn #=> String
     #   resp.cluster_operation_info_list[0].client_request_id #=> String
     #   resp.cluster_operation_info_list[0].cluster_arn #=> String
     #   resp.cluster_operation_info_list[0].creation_time #=> Time
@@ -3151,6 +3478,7 @@ module Aws::Kafka
     #   resp.node_info_list[0].added_to_cluster_time #=> String
     #   resp.node_info_list[0].broker_node_info.attached_eni_id #=> String
     #   resp.node_info_list[0].broker_node_info.broker_id #=> Float
+    #   resp.node_info_list[0].broker_node_info.broker_node_type #=> String, one of "STANDARD", "EXPRESS"
     #   resp.node_info_list[0].broker_node_info.client_subnet #=> String
     #   resp.node_info_list[0].broker_node_info.client_vpc_ip_address #=> String
     #   resp.node_info_list[0].broker_node_info.current_broker_software_info.configuration_arn #=> String
@@ -3340,6 +3668,58 @@ module Aws::Kafka
       req.send_request(options)
     end
 
+    # Lists topic reassignment operations for a cluster.
+    #
+    # @option params [required, String] :cluster_arn
+    #   The Amazon Resource Name (ARN) of the cluster.
+    #
+    # @option params [Integer] :max_results
+    #   Maximum number of reassignment operations to return. Default 50,
+    #   maximum 100.
+    #
+    # @option params [String] :next_token
+    #   If the response is truncated, it returns a nextToken. Send this in the
+    #   subsequent request to get the remaining results.
+    #
+    # @option params [String] :status_filter
+    #   Optional filter. Only return reassignments matching these statuses.
+    #
+    # @return [Types::ListTopicReassignmentsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTopicReassignmentsResponse#next_token #next_token} => String
+    #   * {Types::ListTopicReassignmentsResponse#reassignments #reassignments} => Array&lt;Types::TopicReassignmentInfo&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_topic_reassignments({
+    #     cluster_arn: "__string", # required
+    #     max_results: 1,
+    #     next_token: "__string",
+    #     status_filter: "__string",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.reassignments #=> Array
+    #   resp.reassignments[0].completed_topics #=> Integer
+    #   resp.reassignments[0].creation_time #=> Time
+    #   resp.reassignments[0].status #=> String, one of "PENDING", "IN_PROGRESS", "STOPPING", "COMPLETE", "FAILED", "STOPPED"
+    #   resp.reassignments[0].target_instance_type #=> String
+    #   resp.reassignments[0].topic_reassignment_operation_arn #=> String
+    #   resp.reassignments[0].total_topics #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/ListTopicReassignments AWS API Documentation
+    #
+    # @overload list_topic_reassignments(params = {})
+    # @param [Hash] params ({})
+    def list_topic_reassignments(params = {}, options = {})
+      req = build_request(:list_topic_reassignments, params)
+      req.send_request(options)
+    end
+
     # Displays a list of Amazon MSK VPC connections.
     #
     # @option params [Integer] :max_results
@@ -3414,6 +3794,8 @@ module Aws::Kafka
     #   resp.topics[0].replication_factor #=> Integer
     #   resp.topics[0].partition_count #=> Integer
     #   resp.topics[0].out_of_sync_replica_count #=> Integer
+    #   resp.topics[0].replica_ids #=> Array
+    #   resp.topics[0].replica_ids[0] #=> Integer
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/ListTopics AWS API Documentation
@@ -3565,6 +3947,98 @@ module Aws::Kafka
       req.send_request(options)
     end
 
+    # Initiates topic partition reassignment between broker types in a
+    # mixed-mode cluster.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. If you retry a request with the same
+    #   client token within 24 hours, the API returns the original response
+    #   without creating a duplicate operation.
+    #
+    # @option params [required, String] :cluster_arn
+    #   The Amazon Resource Name (ARN) of the cluster.
+    #
+    # @option params [required, String] :target_instance_type
+    #   Instance type of the target brokers. Must exist in the cluster. Use
+    #   Express instance type (e.g., express.m7g.large) for
+    #   Standard-to-Express migration. Use Standard instance type (e.g.,
+    #   kafka.m7g.large) to move topics back to Standard.
+    #
+    # @option params [Array<String>] :topics_to_exclude
+    #   Regex patterns for topics to exclude from reassignment. Evaluated
+    #   after include patterns.
+    #
+    # @option params [required, Array<String>] :topics_to_include
+    #   Regex patterns for topics to reassign. Use \['.*'\] for all topics.
+    #   Max 10 patterns.
+    #
+    # @return [Types::StartTopicReassignmentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartTopicReassignmentResponse#cluster_arn #cluster_arn} => String
+    #   * {Types::StartTopicReassignmentResponse#status #status} => String
+    #   * {Types::StartTopicReassignmentResponse#topic_reassignment_operation_arn #topic_reassignment_operation_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_topic_reassignment({
+    #     client_token: "__stringMin1Max64",
+    #     cluster_arn: "__string", # required
+    #     target_instance_type: "__stringMin1Max256", # required
+    #     topics_to_exclude: ["__stringMin1Max256"],
+    #     topics_to_include: ["__stringMin1Max256"], # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.cluster_arn #=> String
+    #   resp.status #=> String, one of "PENDING", "IN_PROGRESS", "STOPPING", "COMPLETE", "FAILED", "STOPPED"
+    #   resp.topic_reassignment_operation_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/StartTopicReassignment AWS API Documentation
+    #
+    # @overload start_topic_reassignment(params = {})
+    # @param [Hash] params ({})
+    def start_topic_reassignment(params = {}, options = {})
+      req = build_request(:start_topic_reassignment, params)
+      req.send_request(options)
+    end
+
+    # Stops an active topic reassignment operation.
+    #
+    # @option params [required, String] :cluster_arn
+    #   The Amazon Resource Name (ARN) of the cluster.
+    #
+    # @option params [required, String] :topic_reassignment_operation_arn
+    #   The Amazon Resource Name (ARN) of the topic reassignment operation to
+    #   stop.
+    #
+    # @return [Types::StopTopicReassignmentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StopTopicReassignmentResponse#status #status} => String
+    #   * {Types::StopTopicReassignmentResponse#topic_reassignment_operation_arn #topic_reassignment_operation_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.stop_topic_reassignment({
+    #     cluster_arn: "__string", # required
+    #     topic_reassignment_operation_arn: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.status #=> String, one of "PENDING", "IN_PROGRESS", "STOPPING", "COMPLETE", "FAILED", "STOPPED"
+    #   resp.topic_reassignment_operation_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/StopTopicReassignment AWS API Documentation
+    #
+    # @overload stop_topic_reassignment(params = {})
+    # @param [Hash] params ({})
+    def stop_topic_reassignment(params = {}, options = {})
+      req = build_request(:stop_topic_reassignment, params)
+      req.send_request(options)
+    end
+
     # Adds tags to the specified MSK resource.
     #
     # @option params [required, String] :resource_arn
@@ -3665,8 +4139,19 @@ module Aws::Kafka
     #   The current version of the cluster.
     #
     # @option params [required, String] :target_instance_type
-    #   The Amazon MSK broker type that you want all of the brokers in this
-    #   cluster to be.
+    #   The type of Amazon EC2 instances to use for Kafka brokers. For
+    #   in-place upgrades to Express, use the composite format to initiate
+    #   mixed mode, the Express instance type to complete the upgrade, or the
+    #   Standard instance type to rollback.
+    #
+    # @option params [String] :topic_reassignment
+    #   Controls automatic topic reassignment when entering mixed broker mode.
+    #   When set to AUTO, MSK automatically reassigns all topics to the target
+    #   broker type after adding new brokers. When set to MANUAL (default),
+    #   customers manage topic reassignment using the StartTopicReassignment
+    #   API. Only valid when targetInstanceType is a composite mixed-mode
+    #   value. Must be set to MANUAL before completing the upgrade or rolling
+    #   back.
     #
     # @return [Types::UpdateBrokerTypeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3679,6 +4164,7 @@ module Aws::Kafka
     #     cluster_arn: "__string", # required
     #     current_version: "__string", # required
     #     target_instance_type: "__string", # required
+    #     topic_reassignment: "AUTO", # accepts AUTO, MANUAL
     #   })
     #
     # @example Response structure
@@ -4383,7 +4869,7 @@ module Aws::Kafka
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-kafka'
-      context[:gem_version] = '1.126.0'
+      context[:gem_version] = '1.134.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

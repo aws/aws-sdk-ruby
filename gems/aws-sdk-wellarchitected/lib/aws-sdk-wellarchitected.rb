@@ -49,12 +49,13 @@ module Aws::WellArchitected
   end
   autoload :Client, 'aws-sdk-wellarchitected/client'
   autoload :Errors, 'aws-sdk-wellarchitected/errors'
+  autoload :Waiters, 'aws-sdk-wellarchitected/waiters'
   autoload :Resource, 'aws-sdk-wellarchitected/resource'
   autoload :EndpointParameters, 'aws-sdk-wellarchitected/endpoint_parameters'
   autoload :EndpointProvider, 'aws-sdk-wellarchitected/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-wellarchitected/endpoints'
 
-  GEM_VERSION = '1.80.0'
+  GEM_VERSION = '1.87.0'
 
 end
 

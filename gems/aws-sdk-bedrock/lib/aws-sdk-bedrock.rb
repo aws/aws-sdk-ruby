@@ -23,7 +23,7 @@ Aws::Plugins::GlobalConfiguration.add_identifier(:bedrock)
 # structure.
 #
 #     bedrock = Aws::Bedrock::Client.new
-#     resp = bedrock.batch_delete_advanced_prompt_optimization_job(params)
+#     resp = bedrock.archive_project(params)
 #
 # See {Client} for more information.
 #
@@ -55,7 +55,7 @@ module Aws::Bedrock
   autoload :EndpointProvider, 'aws-sdk-bedrock/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-bedrock/endpoints'
 
-  GEM_VERSION = '1.100.0'
+  GEM_VERSION = '1.108.0'
 
 end
 

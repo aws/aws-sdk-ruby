@@ -8,18 +8,6 @@
 Feature: Smoke tests for ObservabilityAdmin
 
   @observabilityadmin @smoke
-  Scenario: GetTelemetryEvaluationStatus
-    Given I create a 'Aws::ObservabilityAdmin' client with config:
-      """
-{"region":"us-east-2","use_fips_endpoint":false,"use_dualstack_endpoint":false}
-      """
-    When I call the operation 'get_telemetry_evaluation_status' with params:
-      """
-{}
-      """
-    Then I expect an error was not raised
-
-  @observabilityadmin @smoke
   Scenario: GetTelemetryEvaluationStatusForOrganization
     Given I create a 'Aws::ObservabilityAdmin' client with config:
       """
@@ -30,3 +18,15 @@ Feature: Smoke tests for ObservabilityAdmin
 {}
       """
     Then I expect a 'Aws::ObservabilityAdmin::Errors::ValidationException' was raised
+
+  @observabilityadmin @smoke
+  Scenario: GetTelemetryEvaluationStatus
+    Given I create a 'Aws::ObservabilityAdmin' client with config:
+      """
+{"region":"us-east-2","use_fips_endpoint":false,"use_dualstack_endpoint":false}
+      """
+    When I call the operation 'get_telemetry_evaluation_status' with params:
+      """
+{}
+      """
+    Then I expect an error was not raised

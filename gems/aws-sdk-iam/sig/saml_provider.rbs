@@ -23,6 +23,12 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/SamlProvider.html#saml_metadata_document-instance_method
       def saml_metadata_document: () -> ::String
 
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/SamlProvider.html#context_provider-instance_method
+      def context_provider: () -> Types::ContextProvider
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/SamlProvider.html#saml_key_hashes-instance_method
+      def saml_key_hashes: () -> ::Array[Types::SAMLKeyHashEntry]
+
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/SamlProvider.html#create_date-instance_method
       def create_date: () -> ::Time
 
@@ -37,6 +43,12 @@ module Aws
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/SamlProvider.html#private_key_list-instance_method
       def private_key_list: () -> ::Array[Types::SAMLPrivateKey]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/SamlProvider.html#identity_center_instance_arn-instance_method
+      def identity_center_instance_arn: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/SamlProvider.html#identity_store_arn-instance_method
+      def identity_store_arn: () -> ::String
 
       def client: () -> Client
 
@@ -61,7 +73,21 @@ module Aws
                     ?saml_metadata_document: ::String,
                     ?assertion_encryption_mode: ("Required" | "Allowed"),
                     ?add_private_key: ::String,
-                    ?remove_private_key: ::String
+                    ?remove_private_key: ::String,
+                    ?context_provider: {
+                      key_definition_list: Array[
+                        {
+                          source_key: ::String,
+                          target_key: ::String?
+                        }
+                      ]?,
+                      subject_source_key: ::String,
+                      subject_type_value: ::String?,
+                      subject_type_source_key: ::String?
+                    },
+                    ?identity_center_instance_arn: ::String,
+                    ?remove_context_provider: bool,
+                    ?remove_identity_center_instance: bool
                   ) -> Types::UpdateSAMLProviderResponse
                 | (?Hash[Symbol, untyped]) -> Types::UpdateSAMLProviderResponse
 

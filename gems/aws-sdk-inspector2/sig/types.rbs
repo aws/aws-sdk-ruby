@@ -22,7 +22,7 @@ module Aws::Inspector2
 
     class AccountAggregation
       attr_accessor finding_type: ("NETWORK_REACHABILITY" | "PACKAGE_VULNERABILITY" | "CODE_VULNERABILITY")
-      attr_accessor resource_type: ("AWS_EC2_INSTANCE" | "AWS_ECR_CONTAINER_IMAGE" | "AWS_LAMBDA_FUNCTION" | "CODE_REPOSITORY" | "Microsoft.Compute/virtualMachines" | "Microsoft.ContainerRegistry/registry/containerImage" | "Microsoft.Web/sites")
+      attr_accessor resource_type: ("AWS_EC2_INSTANCE" | "AWS_ECR_CONTAINER_IMAGE" | "AWS_LAMBDA_FUNCTION" | "CODE_REPOSITORY" | "Microsoft.Compute/virtualMachines" | "Microsoft.ContainerRegistry/registry/containerImage" | "Microsoft.Web/sites" | "cloudfunctions.googleapis.com/Function" | "compute.googleapis.com/Instance" | "artifactregistry.googleapis.com/DockerImage")
       attr_accessor sort_order: ("ASC" | "DESC")
       attr_accessor sort_by: ("CRITICAL" | "HIGH" | "ALL")
       SENSITIVE: []
@@ -160,7 +160,7 @@ module Aws::Inspector2
     class AmiAggregationResponse
       attr_accessor ami: ::String
       attr_accessor account_id: ::String
-      attr_accessor cloud_provider: ("AWS" | "AZURE")
+      attr_accessor cloud_provider: ("AWS" | "AZURE" | "GCP")
       attr_accessor cloud_partition: ::String
       attr_accessor cloud_region: ::String
       attr_accessor cloud_org_id: ::String
@@ -735,12 +735,22 @@ module Aws::Inspector2
     class CodeSecurityIntegrationSummary
       attr_accessor integration_arn: ::String
       attr_accessor name: ::String
-      attr_accessor type: ("GITLAB_SELF_MANAGED" | "GITHUB")
-      attr_accessor status: ("PENDING" | "IN_PROGRESS" | "ACTIVE" | "INACTIVE" | "DISABLING")
+      attr_accessor type: ("GITLAB_SELF_MANAGED" | "GITHUB" | "GITHUB_ENTERPRISE_SERVER")
+      attr_accessor status: ("PENDING" | "IN_PROGRESS" | "ACTIVE" | "INACTIVE" | "DISABLING" | "ESTABLISHING_CONNECTION_IN_PROGRESS" | "ESTABLISHING_CONNECTION_COMPLETED" | "ESTABLISHING_CONNECTION_FAILED" | "PENDING_MANIFEST_CODE" | "DELETE_IN_PROGRESS" | "DELETE_FAILED")
       attr_accessor status_reason: ::String
       attr_accessor created_on: ::Time
       attr_accessor last_update_on: ::Time
       SENSITIVE: []
+    end
+
+    class CodeSecurityIntegrationVpcConfiguration
+      attr_accessor vpc_id: ::String
+      attr_accessor vpc_endpoint_id: ::String
+      attr_accessor code_connections_host_arn: ::String
+      attr_accessor subnet_ids: ::Array[::String]
+      attr_accessor security_groups: ::Array[::String]
+      attr_accessor tls_certificate: ::String
+      SENSITIVE: [:tls_certificate]
     end
 
     class CodeSecurityResource
@@ -824,7 +834,7 @@ module Aws::Inspector2
       attr_accessor connector_arn: ::String
       attr_accessor name: ::String
       attr_accessor description: ::String
-      attr_accessor provider: ("AZURE")
+      attr_accessor provider: ("AZURE" | "GCP")
       attr_accessor enablement_status: ("ENABLED" | "PENDING_ENABLEMENT" | "FAILED_TO_ENABLE" | "PENDING_UPDATE" | "FAILED_TO_UPDATE" | "PENDING_DELETION" | "DELETED" | "FAILED_TO_DELETE")
       attr_accessor enablement_status_reason: ::String
       attr_accessor health: Types::ConnectorHealth
@@ -835,6 +845,8 @@ module Aws::Inspector2
       attr_accessor scope_configuration: Types::AzureScopeConfiguration
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor auto_install_vm_scanner: bool
+      attr_accessor gcp_regions: ::Array[::String]
+      attr_accessor gcp_scope_configuration: Types::GcpScopeConfiguration
       SENSITIVE: []
     end
 
@@ -905,7 +917,7 @@ module Aws::Inspector2
 
     class ContainerImageAggregationResponse
       attr_accessor resource_id: ::String
-      attr_accessor cloud_provider: ("AWS" | "AZURE")
+      attr_accessor cloud_provider: ("AWS" | "AZURE" | "GCP")
       attr_accessor cloud_account_id: ::String
       attr_accessor cloud_partition: ::String
       attr_accessor cloud_region: ::String
@@ -1017,7 +1029,7 @@ module Aws::Inspector2
     end
 
     class CoveredResource
-      attr_accessor resource_type: ("AWS_EC2_INSTANCE" | "AWS_ECR_CONTAINER_IMAGE" | "AWS_ECR_REPOSITORY" | "AWS_LAMBDA_FUNCTION" | "CODE_REPOSITORY" | "Microsoft.Compute/virtualMachines" | "Microsoft.ContainerRegistry/registry/containerImage" | "Microsoft.ContainerRegistry/registry/containerRepository" | "Microsoft.Web/sites" | "Microsoft.ContainerRegistry/registries" | "MACHINE_IMAGE")
+      attr_accessor resource_type: ("AWS_EC2_INSTANCE" | "AWS_ECR_CONTAINER_IMAGE" | "AWS_ECR_REPOSITORY" | "AWS_LAMBDA_FUNCTION" | "CODE_REPOSITORY" | "Microsoft.Compute/virtualMachines" | "Microsoft.ContainerRegistry/registry/containerImage" | "Microsoft.ContainerRegistry/registry/containerRepository" | "Microsoft.Web/sites" | "Microsoft.ContainerRegistry/registries" | "MACHINE_IMAGE" | "cloudfunctions.googleapis.com/Function" | "compute.googleapis.com/Instance" | "artifactregistry.googleapis.com/Repository" | "artifactregistry.googleapis.com/DockerImage")
       attr_accessor resource_id: ::String
       attr_accessor account_id: ::String
       attr_accessor scan_type: ("NETWORK" | "PACKAGE" | "CODE")
@@ -1025,7 +1037,7 @@ module Aws::Inspector2
       attr_accessor resource_metadata: Types::ResourceScanMetadata
       attr_accessor last_scanned_at: ::Time
       attr_accessor scan_mode: ("EC2_SSM_AGENT_BASED" | "EC2_AGENTLESS" | "EC2_INSPECTOR_AGENT_BASED" | "VM_INSPECTOR_AGENT_BASED")
-      attr_accessor provider: ("AWS" | "AZURE")
+      attr_accessor provider: ("AWS" | "AZURE" | "GCP")
       attr_accessor provider_account_id: ::String
       attr_accessor provider_org_id: ::String
       attr_accessor provider_region: ::String
@@ -1055,7 +1067,7 @@ module Aws::Inspector2
 
     class CreateCodeSecurityIntegrationRequest
       attr_accessor name: ::String
-      attr_accessor type: ("GITLAB_SELF_MANAGED" | "GITHUB")
+      attr_accessor type: ("GITLAB_SELF_MANAGED" | "GITHUB" | "GITHUB_ENTERPRISE_SERVER")
       attr_accessor details: Types::CreateIntegrationDetail
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
@@ -1063,7 +1075,7 @@ module Aws::Inspector2
 
     class CreateCodeSecurityIntegrationResponse
       attr_accessor integration_arn: ::String
-      attr_accessor status: ("PENDING" | "IN_PROGRESS" | "ACTIVE" | "INACTIVE" | "DISABLING")
+      attr_accessor status: ("PENDING" | "IN_PROGRESS" | "ACTIVE" | "INACTIVE" | "DISABLING" | "ESTABLISHING_CONNECTION_IN_PROGRESS" | "ESTABLISHING_CONNECTION_COMPLETED" | "ESTABLISHING_CONNECTION_FAILED" | "PENDING_MANIFEST_CODE" | "DELETE_IN_PROGRESS" | "DELETE_FAILED")
       attr_accessor authorization_url: ::String
       SENSITIVE: [:authorization_url]
     end
@@ -1085,7 +1097,7 @@ module Aws::Inspector2
     class CreateConnectorRequest
       attr_accessor client_token: ::String
       attr_accessor name: ::String
-      attr_accessor provider: ("AZURE")
+      attr_accessor provider: ("AZURE" | "GCP")
       attr_accessor description: ::String
       attr_accessor provider_detail: Types::ProviderDetailCreate
       attr_accessor tags: ::Hash[::String, ::String]
@@ -1124,18 +1136,28 @@ module Aws::Inspector2
       SENSITIVE: []
     end
 
+    class CreateGitHubEnterpriseIntegrationDetail
+      attr_accessor instance_url: ::String
+      attr_accessor vpc_configuration: Types::CodeSecurityIntegrationVpcConfiguration
+      SENSITIVE: [:instance_url]
+    end
+
     class CreateGitLabSelfManagedIntegrationDetail
       attr_accessor instance_url: ::String
       attr_accessor access_token: ::String
+      attr_accessor vpc_configuration: Types::CodeSecurityIntegrationVpcConfiguration
       SENSITIVE: [:instance_url, :access_token]
     end
 
     class CreateIntegrationDetail
       attr_accessor gitlab_self_managed: Types::CreateGitLabSelfManagedIntegrationDetail
+      attr_accessor github_enterprise: Types::CreateGitHubEnterpriseIntegrationDetail
       attr_accessor unknown: untyped
       SENSITIVE: []
 
       class GitlabSelfManaged < CreateIntegrationDetail
+      end
+      class GithubEnterprise < CreateIntegrationDetail
       end
       class Unknown < CreateIntegrationDetail
       end
@@ -1613,7 +1635,7 @@ module Aws::Inspector2
 
     class FindingTypeAggregation
       attr_accessor finding_type: ("NETWORK_REACHABILITY" | "PACKAGE_VULNERABILITY" | "CODE_VULNERABILITY")
-      attr_accessor resource_type: ("AWS_EC2_INSTANCE" | "AWS_ECR_CONTAINER_IMAGE" | "AWS_LAMBDA_FUNCTION" | "CODE_REPOSITORY" | "Microsoft.Compute/virtualMachines" | "Microsoft.ContainerRegistry/registry/containerImage" | "Microsoft.Web/sites")
+      attr_accessor resource_type: ("AWS_EC2_INSTANCE" | "AWS_ECR_CONTAINER_IMAGE" | "AWS_LAMBDA_FUNCTION" | "CODE_REPOSITORY" | "Microsoft.Compute/virtualMachines" | "Microsoft.ContainerRegistry/registry/containerImage" | "Microsoft.Web/sites" | "cloudfunctions.googleapis.com/Function" | "compute.googleapis.com/Instance" | "artifactregistry.googleapis.com/DockerImage")
       attr_accessor sort_order: ("ASC" | "DESC")
       attr_accessor sort_by: ("CRITICAL" | "HIGH" | "ALL")
       SENSITIVE: []
@@ -1643,7 +1665,7 @@ module Aws::Inspector2
       attr_accessor start: ::Time
       attr_accessor end: ::Time
       attr_accessor status: ("ACTIVE" | "INACTIVE")
-      attr_accessor cloud_provider: ("AWS" | "AZURE" | "NOT_APPLICABLE")
+      attr_accessor cloud_provider: ("AWS" | "AZURE" | "GCP" | "NOT_APPLICABLE")
       SENSITIVE: []
     end
 
@@ -1651,6 +1673,49 @@ module Aws::Inspector2
       attr_accessor account_id: ::String
       attr_accessor code: ("ACCESS_DENIED" | "INTERNAL_ERROR")
       attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class GcpCapabilityScope
+      attr_accessor scope_type: ("TENANT" | "SUBSCRIPTION" | "ORGANIZATION" | "PROJECT")
+      attr_accessor scope_values: ::Array[::String]
+      attr_accessor state: ("ACTIVE" | "PENDING" | "ERROR" | "DISABLED")
+      attr_accessor state_reason: ::String
+      SENSITIVE: []
+    end
+
+    class GcpCapabilityScopeInput
+      attr_accessor scope_type: ("TENANT" | "SUBSCRIPTION" | "ORGANIZATION" | "PROJECT")
+      attr_accessor scope_values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class GcpProviderDetailCreate
+      attr_accessor aws_config_connector_arn: ::String
+      attr_accessor scope_configuration: Types::GcpScopeConfigurationInput
+      attr_accessor gcp_regions: ::Array[::String]
+      attr_accessor auto_install_vm_scanner: bool
+      SENSITIVE: []
+    end
+
+    class GcpProviderDetailUpdate
+      attr_accessor gcp_regions: ::Array[::String]
+      attr_accessor scope_configuration: Types::GcpScopeConfigurationInput
+      attr_accessor auto_install_vm_scanner: bool
+      SENSITIVE: []
+    end
+
+    class GcpScopeConfiguration
+      attr_accessor vm_scanning: Types::GcpCapabilityScope
+      attr_accessor container_image_scanning: Types::GcpCapabilityScope
+      attr_accessor serverless_scanning: Types::GcpCapabilityScope
+      SENSITIVE: []
+    end
+
+    class GcpScopeConfigurationInput
+      attr_accessor vm_scanning: Types::GcpCapabilityScopeInput
+      attr_accessor container_image_scanning: Types::GcpCapabilityScopeInput
+      attr_accessor serverless_scanning: Types::GcpCapabilityScopeInput
       SENSITIVE: []
     end
 
@@ -1707,14 +1772,16 @@ module Aws::Inspector2
     class GetCodeSecurityIntegrationResponse
       attr_accessor integration_arn: ::String
       attr_accessor name: ::String
-      attr_accessor type: ("GITLAB_SELF_MANAGED" | "GITHUB")
-      attr_accessor status: ("PENDING" | "IN_PROGRESS" | "ACTIVE" | "INACTIVE" | "DISABLING")
+      attr_accessor type: ("GITLAB_SELF_MANAGED" | "GITHUB" | "GITHUB_ENTERPRISE_SERVER")
+      attr_accessor status: ("PENDING" | "IN_PROGRESS" | "ACTIVE" | "INACTIVE" | "DISABLING" | "ESTABLISHING_CONNECTION_IN_PROGRESS" | "ESTABLISHING_CONNECTION_COMPLETED" | "ESTABLISHING_CONNECTION_FAILED" | "PENDING_MANIFEST_CODE" | "DELETE_IN_PROGRESS" | "DELETE_FAILED")
       attr_accessor status_reason: ::String
       attr_accessor created_on: ::Time
       attr_accessor last_update_on: ::Time
       attr_accessor authorization_url: ::String
+      attr_accessor vpc_configuration: Types::CodeSecurityIntegrationVpcConfiguration
+      attr_accessor instance_url: ::String
       attr_accessor tags: ::Hash[::String, ::String]
-      SENSITIVE: [:authorization_url]
+      SENSITIVE: [:authorization_url, :instance_url]
     end
 
     class GetCodeSecurityScanConfigurationRequest
@@ -1785,7 +1852,7 @@ module Aws::Inspector2
 
     class GetEncryptionKeyRequest
       attr_accessor scan_type: ("NETWORK" | "PACKAGE" | "CODE")
-      attr_accessor resource_type: ("AWS_EC2_INSTANCE" | "AWS_ECR_CONTAINER_IMAGE" | "AWS_ECR_REPOSITORY" | "AWS_LAMBDA_FUNCTION" | "CODE_REPOSITORY" | "Microsoft.Compute/virtualMachines" | "Microsoft.ContainerRegistry/registry/containerImage" | "Microsoft.Web/sites" | "MACHINE_IMAGE")
+      attr_accessor resource_type: ("AWS_EC2_INSTANCE" | "AWS_ECR_CONTAINER_IMAGE" | "AWS_ECR_REPOSITORY" | "AWS_LAMBDA_FUNCTION" | "CODE_REPOSITORY" | "Microsoft.Compute/virtualMachines" | "Microsoft.ContainerRegistry/registry/containerImage" | "Microsoft.Web/sites" | "MACHINE_IMAGE" | "cloudfunctions.googleapis.com/Function" | "compute.googleapis.com/Instance" | "artifactregistry.googleapis.com/DockerImage")
       SENSITIVE: []
     end
 
@@ -1851,6 +1918,11 @@ module Aws::Inspector2
       attr_accessor s3_destination: Types::Destination
       attr_accessor filter_criteria: Types::ResourceFilterCriteria
       SENSITIVE: []
+    end
+
+    class GitHubEnterpriseServerAppRegistrationDetail
+      attr_accessor manifest_code: ::String
+      SENSITIVE: [:manifest_code]
     end
 
     class Image
@@ -2363,6 +2435,9 @@ module Aws::Inspector2
       attr_accessor source_layer_hash: Types::StringFilter
       attr_accessor source_lambda_layer_arn: Types::StringFilter
       attr_accessor file_path: Types::StringFilter
+      attr_accessor runtime_reachability: Types::RuntimeReachabilityFilter
+      attr_accessor runtime_reachability_reason: Types::RuntimeReachabilityReasonFilter
+      attr_accessor purl_qualifier: Types::PurlQualifierFilter
       SENSITIVE: []
     end
 
@@ -2424,10 +2499,13 @@ module Aws::Inspector2
 
     class ProviderDetailCreate
       attr_accessor azure: Types::AzureProviderDetailCreate
+      attr_accessor gcp: Types::GcpProviderDetailCreate
       attr_accessor unknown: untyped
       SENSITIVE: []
 
       class Azure < ProviderDetailCreate
+      end
+      class Gcp < ProviderDetailCreate
       end
       class Unknown < ProviderDetailCreate
       end
@@ -2435,10 +2513,13 @@ module Aws::Inspector2
 
     class ProviderDetailUpdate
       attr_accessor azure: Types::AzureProviderDetailUpdate
+      attr_accessor gcp: Types::GcpProviderDetailUpdate
       attr_accessor unknown: untyped
       SENSITIVE: []
 
       class Azure < ProviderDetailUpdate
+      end
+      class Gcp < ProviderDetailUpdate
       end
       class Unknown < ProviderDetailUpdate
       end
@@ -2446,7 +2527,14 @@ module Aws::Inspector2
 
     class ProviderFilter
       attr_accessor comparison: ("EQUALS")
-      attr_accessor value: ("AZURE")
+      attr_accessor value: ("AZURE" | "GCP")
+      SENSITIVE: []
+    end
+
+    class PurlQualifierFilter
+      attr_accessor comparison: ("EQUALS")
+      attr_accessor key: ("arch" | "collector" | "dev_dependency" | "distro" | "epoch" | "go_toolchain" | "hardened" | "private" | "rust_toolchain" | "scope" | "skip_chromium_download" | "source" | "stream" | "transitive_dependency" | "unresolved" | "vendor")
+      attr_accessor value: ::String
       SENSITIVE: []
     end
 
@@ -2471,7 +2559,7 @@ module Aws::Inspector2
     class RepositoryAggregationResponse
       attr_accessor repository: ::String
       attr_accessor account_id: ::String
-      attr_accessor cloud_provider: ("AWS" | "AZURE")
+      attr_accessor cloud_provider: ("AWS" | "AZURE" | "GCP")
       attr_accessor cloud_partition: ::String
       attr_accessor cloud_region: ::String
       attr_accessor cloud_org_id: ::String
@@ -2483,7 +2571,7 @@ module Aws::Inspector2
 
     class ResetEncryptionKeyRequest
       attr_accessor scan_type: ("NETWORK" | "PACKAGE" | "CODE")
-      attr_accessor resource_type: ("AWS_EC2_INSTANCE" | "AWS_ECR_CONTAINER_IMAGE" | "AWS_ECR_REPOSITORY" | "AWS_LAMBDA_FUNCTION" | "CODE_REPOSITORY" | "Microsoft.Compute/virtualMachines" | "Microsoft.ContainerRegistry/registry/containerImage" | "Microsoft.Web/sites" | "MACHINE_IMAGE")
+      attr_accessor resource_type: ("AWS_EC2_INSTANCE" | "AWS_ECR_CONTAINER_IMAGE" | "AWS_ECR_REPOSITORY" | "AWS_LAMBDA_FUNCTION" | "CODE_REPOSITORY" | "Microsoft.Compute/virtualMachines" | "Microsoft.ContainerRegistry/registry/containerImage" | "Microsoft.Web/sites" | "MACHINE_IMAGE" | "cloudfunctions.googleapis.com/Function" | "compute.googleapis.com/Instance" | "artifactregistry.googleapis.com/DockerImage")
       SENSITIVE: []
     end
 
@@ -2491,13 +2579,13 @@ module Aws::Inspector2
     end
 
     class Resource
-      attr_accessor type: ("AWS_EC2_INSTANCE" | "AWS_ECR_CONTAINER_IMAGE" | "AWS_ECR_REPOSITORY" | "AWS_LAMBDA_FUNCTION" | "CODE_REPOSITORY" | "Microsoft.Compute/virtualMachines" | "Microsoft.ContainerRegistry/registry/containerImage" | "Microsoft.Web/sites" | "MACHINE_IMAGE")
+      attr_accessor type: ("AWS_EC2_INSTANCE" | "AWS_ECR_CONTAINER_IMAGE" | "AWS_ECR_REPOSITORY" | "AWS_LAMBDA_FUNCTION" | "CODE_REPOSITORY" | "Microsoft.Compute/virtualMachines" | "Microsoft.ContainerRegistry/registry/containerImage" | "Microsoft.Web/sites" | "MACHINE_IMAGE" | "cloudfunctions.googleapis.com/Function" | "compute.googleapis.com/Instance" | "artifactregistry.googleapis.com/DockerImage")
       attr_accessor id: ::String
       attr_accessor partition: ::String
       attr_accessor region: ::String
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor details: Types::ResourceDetails
-      attr_accessor provider: ("AWS" | "AZURE")
+      attr_accessor provider: ("AWS" | "AZURE" | "GCP")
       attr_accessor provider_account_id: ::String
       attr_accessor provider_org_id: ::String
       SENSITIVE: []
@@ -2591,6 +2679,18 @@ module Aws::Inspector2
       SENSITIVE: []
     end
 
+    class RuntimeReachabilityFilter
+      attr_accessor comparison: ("EQUALS" | "NOT_EQUALS")
+      attr_accessor value: ("REACHABLE" | "NOT_REACHABLE" | "UNKNOWN")
+      SENSITIVE: []
+    end
+
+    class RuntimeReachabilityReasonFilter
+      attr_accessor comparison: ("EQUALS" | "NOT_EQUALS")
+      attr_accessor value: ("PACKAGE_IN_DOCKERFILE_WORKLOAD_PATH" | "PACKAGE_NOT_IN_DOCKERFILE_WORKLOAD_PATH" | "PROCESS_OBSERVED_IN_EC2_RUNTIME" | "PROCESS_NOT_OBSERVED_IN_EC2_RUNTIME")
+      SENSITIVE: []
+    end
+
     class ScanStatus
       attr_accessor status_code: ("ACTIVE" | "INACTIVE")
       attr_accessor reason: ("PENDING_INITIAL_SCAN" | "ACCESS_DENIED" | "INTERNAL_ERROR" | "UNMANAGED_EC2_INSTANCE" | "UNSUPPORTED_OS" | "SCAN_ELIGIBILITY_EXPIRED" | "RESOURCE_TERMINATED" | "SUCCESSFUL" | "NO_RESOURCES_FOUND" | "IMAGE_SIZE_EXCEEDED" | "SCAN_FREQUENCY_MANUAL" | "SCAN_FREQUENCY_SCAN_ON_PUSH" | "EC2_INSTANCE_STOPPED" | "PENDING_DISABLE" | "NO_INVENTORY" | "STALE_INVENTORY" | "EXCLUDED_BY_TAG" | "UNSUPPORTED_RUNTIME" | "UNSUPPORTED_MEDIA_TYPE" | "UNSUPPORTED_CONFIG_FILE" | "DEEP_INSPECTION_PACKAGE_COLLECTION_LIMIT_EXCEEDED" | "DEEP_INSPECTION_DAILY_SSM_INVENTORY_LIMIT_EXCEEDED" | "DEEP_INSPECTION_COLLECTION_TIME_LIMIT_EXCEEDED" | "DEEP_INSPECTION_NO_INVENTORY" | "AGENTLESS_INSTANCE_STORAGE_LIMIT_EXCEEDED" | "AGENTLESS_INSTANCE_COLLECTION_TIME_LIMIT_EXCEEDED" | "PENDING_REVIVAL_SCAN" | "INTEGRATION_CONNECTION_LOST" | "ACCESS_DENIED_TO_ENCRYPTION_KEY" | "UNSUPPORTED_LANGUAGE" | "NO_SCAN_CONFIGURATION_ASSOCIATED" | "SCAN_IN_PROGRESS" | "IMAGE_ARCHIVED" | "UNSUPPORTED_CODE_ARTIFACTS" | "RESOURCE_UNMANAGED" | "RESOURCE_STOPPED" | "EXTRACTION_COLLECTION_TIME_LIMIT_EXCEEDED" | "STORAGE_LIMIT_EXCEEDED" | "INVALID_ARTIFACT")
@@ -2618,7 +2718,7 @@ module Aws::Inspector2
     end
 
     class ScopeConfiguration
-      attr_accessor scope_type: ("TENANT" | "SUBSCRIPTION")
+      attr_accessor scope_type: ("TENANT" | "SUBSCRIPTION" | "ORGANIZATION" | "PROJECT")
       attr_accessor scope_values: ::Array[::String]
       attr_accessor state: ("ACTIVE" | "PENDING" | "ERROR" | "DISABLED")
       attr_accessor state_reason: ::String
@@ -2626,7 +2726,7 @@ module Aws::Inspector2
     end
 
     class ScopeConfigurationInput
-      attr_accessor scope_type: ("TENANT" | "SUBSCRIPTION")
+      attr_accessor scope_type: ("TENANT" | "SUBSCRIPTION" | "ORGANIZATION" | "PROJECT")
       attr_accessor scope_values: ::Array[::String]
       SENSITIVE: []
     end
@@ -2705,7 +2805,7 @@ module Aws::Inspector2
 
     class ServerlessFunctionAggregationResponse
       attr_accessor resource_id: ::String
-      attr_accessor cloud_provider: ("AWS" | "AZURE")
+      attr_accessor cloud_provider: ("AWS" | "AZURE" | "GCP")
       attr_accessor cloud_account_id: ::String
       attr_accessor cloud_partition: ::String
       attr_accessor cloud_region: ::String
@@ -2891,7 +2991,7 @@ module Aws::Inspector2
     class TitleAggregation
       attr_accessor titles: ::Array[Types::StringFilter]
       attr_accessor vulnerability_ids: ::Array[Types::StringFilter]
-      attr_accessor resource_type: ("AWS_EC2_INSTANCE" | "AWS_ECR_CONTAINER_IMAGE" | "AWS_LAMBDA_FUNCTION" | "CODE_REPOSITORY" | "Microsoft.Compute/virtualMachines" | "Microsoft.ContainerRegistry/registry/containerImage" | "Microsoft.Web/sites")
+      attr_accessor resource_type: ("AWS_EC2_INSTANCE" | "AWS_ECR_CONTAINER_IMAGE" | "AWS_LAMBDA_FUNCTION" | "CODE_REPOSITORY" | "Microsoft.Compute/virtualMachines" | "Microsoft.ContainerRegistry/registry/containerImage" | "Microsoft.Web/sites" | "cloudfunctions.googleapis.com/Function" | "compute.googleapis.com/Instance" | "artifactregistry.googleapis.com/DockerImage")
       attr_accessor finding_type: ("NETWORK_REACHABILITY" | "PACKAGE_VULNERABILITY" | "CODE_VULNERABILITY")
       attr_accessor sort_order: ("ASC" | "DESC")
       attr_accessor sort_by: ("CRITICAL" | "HIGH" | "ALL")
@@ -2943,7 +3043,7 @@ module Aws::Inspector2
 
     class UpdateCodeSecurityIntegrationResponse
       attr_accessor integration_arn: ::String
-      attr_accessor status: ("PENDING" | "IN_PROGRESS" | "ACTIVE" | "INACTIVE" | "DISABLING")
+      attr_accessor status: ("PENDING" | "IN_PROGRESS" | "ACTIVE" | "INACTIVE" | "DISABLING" | "ESTABLISHING_CONNECTION_IN_PROGRESS" | "ESTABLISHING_CONNECTION_COMPLETED" | "ESTABLISHING_CONNECTION_FAILED" | "PENDING_MANIFEST_CODE" | "DELETE_IN_PROGRESS" | "DELETE_FAILED")
       SENSITIVE: []
     end
 
@@ -3015,7 +3115,7 @@ module Aws::Inspector2
     class UpdateEncryptionKeyRequest
       attr_accessor kms_key_id: ::String
       attr_accessor scan_type: ("NETWORK" | "PACKAGE" | "CODE")
-      attr_accessor resource_type: ("AWS_EC2_INSTANCE" | "AWS_ECR_CONTAINER_IMAGE" | "AWS_ECR_REPOSITORY" | "AWS_LAMBDA_FUNCTION" | "CODE_REPOSITORY" | "Microsoft.Compute/virtualMachines" | "Microsoft.ContainerRegistry/registry/containerImage" | "Microsoft.Web/sites" | "MACHINE_IMAGE")
+      attr_accessor resource_type: ("AWS_EC2_INSTANCE" | "AWS_ECR_CONTAINER_IMAGE" | "AWS_ECR_REPOSITORY" | "AWS_LAMBDA_FUNCTION" | "CODE_REPOSITORY" | "Microsoft.Compute/virtualMachines" | "Microsoft.ContainerRegistry/registry/containerImage" | "Microsoft.Web/sites" | "MACHINE_IMAGE" | "cloudfunctions.googleapis.com/Function" | "compute.googleapis.com/Instance" | "artifactregistry.googleapis.com/DockerImage")
       SENSITIVE: []
     end
 
@@ -3037,26 +3137,52 @@ module Aws::Inspector2
       SENSITIVE: []
     end
 
+    class UpdateGitHubEnterpriseServerAppInstallationDetail
+      attr_accessor code: ::String
+      attr_accessor installation_id: ::String
+      attr_accessor state_token: ::String
+      SENSITIVE: [:code, :state_token]
+    end
+
+    class UpdateGitHubEnterpriseServerIntegrationDetail
+      attr_accessor app_installation: Types::UpdateGitHubEnterpriseServerAppInstallationDetail
+      attr_accessor app_registration: Types::GitHubEnterpriseServerAppRegistrationDetail
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class AppInstallation < UpdateGitHubEnterpriseServerIntegrationDetail
+      end
+      class AppRegistration < UpdateGitHubEnterpriseServerIntegrationDetail
+      end
+      class Unknown < UpdateGitHubEnterpriseServerIntegrationDetail
+      end
+    end
+
     class UpdateGitHubIntegrationDetail
       attr_accessor code: ::String
       attr_accessor installation_id: ::String
-      SENSITIVE: [:code]
+      attr_accessor state_token: ::String
+      SENSITIVE: [:code, :state_token]
     end
 
     class UpdateGitLabSelfManagedIntegrationDetail
       attr_accessor auth_code: ::String
-      SENSITIVE: [:auth_code]
+      attr_accessor state_token: ::String
+      SENSITIVE: [:auth_code, :state_token]
     end
 
     class UpdateIntegrationDetails
       attr_accessor gitlab_self_managed: Types::UpdateGitLabSelfManagedIntegrationDetail
       attr_accessor github: Types::UpdateGitHubIntegrationDetail
+      attr_accessor github_enterprise_server: Types::UpdateGitHubEnterpriseServerIntegrationDetail
       attr_accessor unknown: untyped
       SENSITIVE: []
 
       class GitlabSelfManaged < UpdateIntegrationDetails
       end
       class Github < UpdateIntegrationDetails
+      end
+      class GithubEnterpriseServer < UpdateIntegrationDetails
       end
       class Unknown < UpdateIntegrationDetails
       end
@@ -3081,11 +3207,11 @@ module Aws::Inspector2
     end
 
     class Usage
-      attr_accessor type: ("EC2_INSTANCE_HOURS" | "ECR_INITIAL_SCAN" | "ECR_RESCAN" | "LAMBDA_FUNCTION_HOURS" | "LAMBDA_FUNCTION_CODE_HOURS" | "CODE_REPOSITORY_SAST" | "CODE_REPOSITORY_IAC" | "CODE_REPOSITORY_SCA" | "EC2_AGENTLESS_INSTANCE_HOURS" | "AZURE_CONTAINER_IMAGE_INITIAL_SCAN" | "AZURE_CONTAINER_IMAGE_RESCAN" | "AZURE_VM_AGENT_BASED_INSTANCE_HOURS" | "AZURE_SERVERLESS_FUNCTION_HOURS" | "EC2_AMI_HOURS")
+      attr_accessor type: ("EC2_INSTANCE_HOURS" | "ECR_INITIAL_SCAN" | "ECR_RESCAN" | "LAMBDA_FUNCTION_HOURS" | "LAMBDA_FUNCTION_CODE_HOURS" | "CODE_REPOSITORY_SAST" | "CODE_REPOSITORY_IAC" | "CODE_REPOSITORY_SCA" | "EC2_AGENTLESS_INSTANCE_HOURS" | "AZURE_CONTAINER_IMAGE_INITIAL_SCAN" | "AZURE_CONTAINER_IMAGE_RESCAN" | "AZURE_VM_AGENT_BASED_INSTANCE_HOURS" | "AZURE_SERVERLESS_FUNCTION_HOURS" | "EC2_AMI_HOURS" | "EC2_AMI_ONE_SHOT_SCAN" | "GCP_VM_AGENT_BASED_INSTANCE_HOURS" | "GCP_CLOUD_RUN_HOURS" | "GCP_CONTAINER_IMAGE_INITIAL_SCAN" | "GCP_CONTAINER_IMAGE_RESCAN")
       attr_accessor total: ::Float
       attr_accessor estimated_monthly_cost: ::Float
       attr_accessor currency: ("USD")
-      attr_accessor cloud_provider: ("AWS" | "AZURE" | "NOT_APPLICABLE")
+      attr_accessor cloud_provider: ("AWS" | "AZURE" | "GCP" | "NOT_APPLICABLE")
       SENSITIVE: []
     end
 
@@ -3148,7 +3274,7 @@ module Aws::Inspector2
 
     class VmInstanceAggregationResponse
       attr_accessor resource_id: ::String
-      attr_accessor cloud_provider: ("AWS" | "AZURE")
+      attr_accessor cloud_provider: ("AWS" | "AZURE" | "GCP")
       attr_accessor cloud_account_id: ::String
       attr_accessor cloud_partition: ::String
       attr_accessor cloud_region: ::String
@@ -3206,6 +3332,9 @@ module Aws::Inspector2
       attr_accessor fixed_in_version: ::String
       attr_accessor remediation: ::String
       attr_accessor source_lambda_layer_arn: ::String
+      attr_accessor runtime_reachability: ("REACHABLE" | "NOT_REACHABLE" | "UNKNOWN")
+      attr_accessor runtime_reachability_reason: ("PACKAGE_IN_DOCKERFILE_WORKLOAD_PATH" | "PACKAGE_NOT_IN_DOCKERFILE_WORKLOAD_PATH" | "PROCESS_OBSERVED_IN_EC2_RUNTIME" | "PROCESS_NOT_OBSERVED_IN_EC2_RUNTIME")
+      attr_accessor purl: ::String
       SENSITIVE: []
     end
 

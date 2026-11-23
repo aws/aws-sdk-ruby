@@ -38,7 +38,7 @@ module Aws::LambdaMicrovms
     end
 
     class CpuConfiguration
-      attr_accessor architecture: ("ARM_64")
+      attr_accessor architecture: ("ARM_64" | "X86_64")
       SENSITIVE: []
     end
 
@@ -51,7 +51,7 @@ module Aws::LambdaMicrovms
 
     class CreateMicrovmAuthTokenResponse
       attr_accessor auth_token: ::Hash[::String, ::String]
-      SENSITIVE: []
+      SENSITIVE: [:auth_token]
     end
 
     class CreateMicrovmImageRequest
@@ -67,10 +67,11 @@ module Aws::LambdaMicrovms
       attr_accessor additional_os_capabilities: ::Array[("ALL")]
       attr_accessor hooks: Types::Hooks
       attr_accessor environment_variables: ::Hash[::String, ::String]
+      attr_accessor kms_key_identifier: ::String
       attr_accessor name: ::String
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor client_token: ::String
-      SENSITIVE: []
+      SENSITIVE: [:environment_variables]
     end
 
     class CreateMicrovmImageResponse
@@ -92,10 +93,11 @@ module Aws::LambdaMicrovms
       attr_accessor additional_os_capabilities: ::Array[("ALL")]
       attr_accessor hooks: Types::Hooks
       attr_accessor environment_variables: ::Hash[::String, ::String]
+      attr_accessor kms_key_identifier: ::String
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor updated_at: ::Time
       attr_accessor image_version: ::String
-      SENSITIVE: []
+      SENSITIVE: [:environment_variables]
     end
 
     class CreateMicrovmShellAuthTokenRequest
@@ -106,7 +108,7 @@ module Aws::LambdaMicrovms
 
     class CreateMicrovmShellAuthTokenResponse
       attr_accessor auth_token: ::Hash[::String, ::String]
-      SENSITIVE: []
+      SENSITIVE: [:auth_token]
     end
 
     class DeleteMicrovmImageInput
@@ -145,8 +147,8 @@ module Aws::LambdaMicrovms
       attr_accessor image_version: ::String
       attr_accessor build_id: ::String
       attr_accessor build_state: ("PENDING" | "IN_PROGRESS" | "SUCCESSFUL" | "FAILED")
-      attr_accessor architecture: ("ARM_64")
-      attr_accessor chipset: ("GRAVITON")
+      attr_accessor architecture: ("ARM_64" | "X86_64")
+      attr_accessor chipset: ("GRAVITON" | "INTEL")
       attr_accessor chipset_generation: ::String
       attr_accessor state_reason: ::String
       attr_accessor created_at: ::Time
@@ -190,6 +192,7 @@ module Aws::LambdaMicrovms
       attr_accessor additional_os_capabilities: ::Array[("ALL")]
       attr_accessor hooks: Types::Hooks
       attr_accessor environment_variables: ::Hash[::String, ::String]
+      attr_accessor kms_key_identifier: ::String
       attr_accessor image_arn: ::String
       attr_accessor image_version: ::String
       attr_accessor state: ("PENDING" | "IN_PROGRESS" | "SUCCESSFUL" | "FAILED" | "DELETING" | "DELETED" | "DELETE_FAILED")
@@ -198,7 +201,7 @@ module Aws::LambdaMicrovms
       attr_accessor updated_at: ::Time
       attr_accessor state_reason: ::String
       attr_accessor tags: ::Hash[::String, ::String]
-      SENSITIVE: []
+      SENSITIVE: [:environment_variables]
     end
 
     class GetMicrovmRequest
@@ -218,6 +221,7 @@ module Aws::LambdaMicrovms
       attr_accessor started_at: ::Time
       attr_accessor terminated_at: ::Time
       attr_accessor state_reason: ::String
+      attr_accessor kms_key_identifier: ::String
       attr_accessor ingress_network_connectors: ::Array[::String]
       attr_accessor egress_network_connectors: ::Array[::String]
       SENSITIVE: []
@@ -284,8 +288,8 @@ module Aws::LambdaMicrovms
       attr_accessor next_token: ::String
       attr_accessor image_identifier: ::String
       attr_accessor image_version: ::String
-      attr_accessor architecture: ("ARM_64")
-      attr_accessor chipset: ("GRAVITON")
+      attr_accessor architecture: ("ARM_64" | "X86_64")
+      attr_accessor chipset: ("GRAVITON" | "INTEL")
       attr_accessor chipset_generation: ::String
       SENSITIVE: []
     end
@@ -373,7 +377,8 @@ module Aws::LambdaMicrovms
     class ManagedMicrovmImageVersion
       attr_accessor image_arn: ::String
       attr_accessor image_version: ::String
-      attr_accessor status: ("AVAILABLE" | "DEPRECATED")
+      attr_accessor status: ("AVAILABLE" | "DEPRECATED" | "RECALLED")
+      attr_accessor supported_cpu_configurations: ::Array[Types::CpuConfiguration]
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
       SENSITIVE: []
@@ -396,8 +401,8 @@ module Aws::LambdaMicrovms
       attr_accessor image_version: ::String
       attr_accessor build_id: ::String
       attr_accessor build_state: ("PENDING" | "IN_PROGRESS" | "SUCCESSFUL" | "FAILED")
-      attr_accessor architecture: ("ARM_64")
-      attr_accessor chipset: ("GRAVITON")
+      attr_accessor architecture: ("ARM_64" | "X86_64")
+      attr_accessor chipset: ("GRAVITON" | "INTEL")
       attr_accessor chipset_generation: ::String
       attr_accessor state_reason: ::String
       attr_accessor created_at: ::Time
@@ -435,6 +440,7 @@ module Aws::LambdaMicrovms
       attr_accessor additional_os_capabilities: ::Array[("ALL")]
       attr_accessor hooks: Types::Hooks
       attr_accessor environment_variables: ::Hash[::String, ::String]
+      attr_accessor kms_key_identifier: ::String
       attr_accessor image_arn: ::String
       attr_accessor image_version: ::String
       attr_accessor state: ("PENDING" | "IN_PROGRESS" | "SUCCESSFUL" | "FAILED" | "DELETING" | "DELETED" | "DELETE_FAILED")
@@ -443,7 +449,7 @@ module Aws::LambdaMicrovms
       attr_accessor updated_at: ::Time
       attr_accessor state_reason: ::String
       attr_accessor tags: ::Hash[::String, ::String]
-      SENSITIVE: []
+      SENSITIVE: [:environment_variables]
     end
 
     class MicrovmItem
@@ -512,6 +518,7 @@ module Aws::LambdaMicrovms
       attr_accessor execution_role_arn: ::String
       attr_accessor idle_policy: Types::IdlePolicy
       attr_accessor logging: Types::Logging
+      attr_accessor kms_key_identifier: ::String
       attr_accessor run_hook_payload: ::String
       attr_accessor maximum_duration_in_seconds: ::Integer
       attr_accessor client_token: ::String
@@ -530,6 +537,7 @@ module Aws::LambdaMicrovms
       attr_accessor started_at: ::Time
       attr_accessor terminated_at: ::Time
       attr_accessor state_reason: ::String
+      attr_accessor kms_key_identifier: ::String
       attr_accessor ingress_network_connectors: ::Array[::String]
       attr_accessor egress_network_connectors: ::Array[::String]
       SENSITIVE: []
@@ -615,9 +623,10 @@ module Aws::LambdaMicrovms
       attr_accessor additional_os_capabilities: ::Array[("ALL")]
       attr_accessor hooks: Types::Hooks
       attr_accessor environment_variables: ::Hash[::String, ::String]
+      attr_accessor kms_key_identifier: ::String
       attr_accessor image_identifier: ::String
       attr_accessor client_token: ::String
-      SENSITIVE: []
+      SENSITIVE: [:environment_variables]
     end
 
     class UpdateMicrovmImageResponse
@@ -639,9 +648,10 @@ module Aws::LambdaMicrovms
       attr_accessor additional_os_capabilities: ::Array[("ALL")]
       attr_accessor hooks: Types::Hooks
       attr_accessor environment_variables: ::Hash[::String, ::String]
+      attr_accessor kms_key_identifier: ::String
       attr_accessor updated_at: ::Time
       attr_accessor image_version: ::String
-      SENSITIVE: []
+      SENSITIVE: [:environment_variables]
     end
 
     class UpdateMicrovmImageVersionRequest
@@ -664,6 +674,7 @@ module Aws::LambdaMicrovms
       attr_accessor additional_os_capabilities: ::Array[("ALL")]
       attr_accessor hooks: Types::Hooks
       attr_accessor environment_variables: ::Hash[::String, ::String]
+      attr_accessor kms_key_identifier: ::String
       attr_accessor image_arn: ::String
       attr_accessor image_version: ::String
       attr_accessor state: ("PENDING" | "IN_PROGRESS" | "SUCCESSFUL" | "FAILED" | "DELETING" | "DELETED" | "DELETE_FAILED")
@@ -672,7 +683,7 @@ module Aws::LambdaMicrovms
       attr_accessor updated_at: ::Time
       attr_accessor state_reason: ::String
       attr_accessor tags: ::Hash[::String, ::String]
-      SENSITIVE: []
+      SENSITIVE: [:environment_variables]
     end
 
     class ValidationException

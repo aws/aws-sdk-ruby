@@ -29,6 +29,7 @@ module Aws::EventBridgeV2
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     ConfluentPublicRegistryConfiguration = Shapes::StructureShape.new(name: 'ConfluentPublicRegistryConfiguration')
     ConnectionArn = Shapes::StringShape.new(name: 'ConnectionArn')
+    ConnectivityState = Shapes::StringShape.new(name: 'ConnectivityState')
     ContentType = Shapes::StringShape.new(name: 'ContentType')
     CreateEventBusRequest = Shapes::StructureShape.new(name: 'CreateEventBusRequest')
     CreateEventBusResponse = Shapes::StructureShape.new(name: 'CreateEventBusResponse')
@@ -77,6 +78,7 @@ module Aws::EventBridgeV2
     EventResource = Shapes::StringShape.new(name: 'EventResource')
     EventSourceArn = Shapes::StringShape.new(name: 'EventSourceArn')
     EventSourceConfiguration = Shapes::UnionShape.new(name: 'EventSourceConfiguration')
+    EventSourceDetails = Shapes::StructureShape.new(name: 'EventSourceDetails')
     EventSourceName = Shapes::StringShape.new(name: 'EventSourceName')
     EventSourceState = Shapes::StringShape.new(name: 'EventSourceState')
     EventSourceSummary = Shapes::StructureShape.new(name: 'EventSourceSummary')
@@ -127,6 +129,18 @@ module Aws::EventBridgeV2
     LogLevel = Shapes::StringShape.new(name: 'LogLevel')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     MessageAttributeName = Shapes::StringShape.new(name: 'MessageAttributeName')
+    MskAcks = Shapes::StringShape.new(name: 'MskAcks')
+    MskClientId = Shapes::StringShape.new(name: 'MskClientId')
+    MskCompression = Shapes::StringShape.new(name: 'MskCompression')
+    MskConnectivity = Shapes::StringShape.new(name: 'MskConnectivity')
+    MskDetails = Shapes::StructureShape.new(name: 'MskDetails')
+    MskHeader = Shapes::StructureShape.new(name: 'MskHeader')
+    MskHeaderKeyString = Shapes::StringShape.new(name: 'MskHeaderKeyString')
+    MskHeaderList = Shapes::ListShape.new(name: 'MskHeaderList')
+    MskHeaderValueString = Shapes::StringShape.new(name: 'MskHeaderValueString')
+    MskParameters = Shapes::StructureShape.new(name: 'MskParameters')
+    MskParametersPartitionKeyString = Shapes::StringShape.new(name: 'MskParametersPartitionKeyString')
+    MskTopicName = Shapes::StringShape.new(name: 'MskTopicName')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     OnFailureConfiguration = Shapes::StructureShape.new(name: 'OnFailureConfiguration')
     OrderingType = Shapes::StringShape.new(name: 'OrderingType')
@@ -177,6 +191,8 @@ module Aws::EventBridgeV2
     RevokeResourceRequest = Shapes::StructureShape.new(name: 'RevokeResourceRequest')
     RevokeResourceResponse = Shapes::StructureShape.new(name: 'RevokeResourceResponse')
     RoleArn = Shapes::StringShape.new(name: 'RoleArn')
+    RotateWebhookCredentialsRequest = Shapes::StructureShape.new(name: 'RotateWebhookCredentialsRequest')
+    RotateWebhookCredentialsResponse = Shapes::StructureShape.new(name: 'RotateWebhookCredentialsResponse')
     SchemaRegistryConfiguration = Shapes::StructureShape.new(name: 'SchemaRegistryConfiguration')
     SchemaRegistryUnavailableException = Shapes::StructureShape.new(name: 'SchemaRegistryUnavailableException')
     SchemaRegistryUri = Shapes::StringShape.new(name: 'SchemaRegistryUri')
@@ -207,6 +223,7 @@ module Aws::EventBridgeV2
     StorageConfigurationOutput = Shapes::StructureShape.new(name: 'StorageConfigurationOutput')
     String = Shapes::StringShape.new(name: 'String')
     SubscriberArn = Shapes::StringShape.new(name: 'SubscriberArn')
+    SubscriberDetails = Shapes::StructureShape.new(name: 'SubscriberDetails')
     SubscriberName = Shapes::StringShape.new(name: 'SubscriberName')
     SubscriberState = Shapes::StringShape.new(name: 'SubscriberState')
     SubscriberSummary = Shapes::StructureShape.new(name: 'SubscriberSummary')
@@ -236,6 +253,32 @@ module Aws::EventBridgeV2
     UpdateInvokeConfiguration = Shapes::StructureShape.new(name: 'UpdateInvokeConfiguration')
     UpdateSubscriberRequest = Shapes::StructureShape.new(name: 'UpdateSubscriberRequest')
     UpdateSubscriberResponse = Shapes::StructureShape.new(name: 'UpdateSubscriberResponse')
+    VpcConnectionArn = Shapes::StringShape.new(name: 'VpcConnectionArn')
+    WebhookAuthConfiguration = Shapes::UnionShape.new(name: 'WebhookAuthConfiguration')
+    WebhookBasicHttpAuthConfiguration = Shapes::StructureShape.new(name: 'WebhookBasicHttpAuthConfiguration')
+    WebhookCredential = Shapes::UnionShape.new(name: 'WebhookCredential')
+    WebhookDeduplicationConfiguration = Shapes::StructureShape.new(name: 'WebhookDeduplicationConfiguration')
+    WebhookDeduplicationType = Shapes::StringShape.new(name: 'WebhookDeduplicationType')
+    WebhookDelimiter = Shapes::StringShape.new(name: 'WebhookDelimiter')
+    WebhookDetails = Shapes::StructureShape.new(name: 'WebhookDetails')
+    WebhookEventSourceArn = Shapes::StringShape.new(name: 'WebhookEventSourceArn')
+    WebhookEventsSourceConfiguration = Shapes::StructureShape.new(name: 'WebhookEventsSourceConfiguration')
+    WebhookHeaderName = Shapes::StringShape.new(name: 'WebhookHeaderName')
+    WebhookHmacAlgorithm = Shapes::StringShape.new(name: 'WebhookHmacAlgorithm')
+    WebhookHmacAuthConfiguration = Shapes::StructureShape.new(name: 'WebhookHmacAuthConfiguration')
+    WebhookHmacEncoding = Shapes::StringShape.new(name: 'WebhookHmacEncoding')
+    WebhookMetadataHttpHeaderList = Shapes::ListShape.new(name: 'WebhookMetadataHttpHeaderList')
+    WebhookMetadataHttpHeaderName = Shapes::StringShape.new(name: 'WebhookMetadataHttpHeaderName')
+    WebhookSecretArn = Shapes::StringShape.new(name: 'WebhookSecretArn')
+    WebhookSecretEncoding = Shapes::StringShape.new(name: 'WebhookSecretEncoding')
+    WebhookSecretValue = Shapes::StringShape.new(name: 'WebhookSecretValue')
+    WebhookSignaturePrefix = Shapes::StringShape.new(name: 'WebhookSignaturePrefix')
+    WebhookSignedMessageComposition = Shapes::StringShape.new(name: 'WebhookSignedMessageComposition')
+    WebhookStaticTokenAuthConfiguration = Shapes::StructureShape.new(name: 'WebhookStaticTokenAuthConfiguration')
+    WebhookTimestampPrefix = Shapes::StringShape.new(name: 'WebhookTimestampPrefix')
+    WebhookTimestampToleranceInSeconds = Shapes::IntegerShape.new(name: 'WebhookTimestampToleranceInSeconds')
+    WebhookUrl = Shapes::StringShape.new(name: 'WebhookUrl')
+    WebhookUsername = Shapes::StringShape.new(name: 'WebhookUsername')
 
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     AccessDeniedException.struct_class = Types::AccessDeniedException
@@ -288,6 +331,7 @@ module Aws::EventBridgeV2
     CreateEventSourceResponse.add_member(:name, Shapes::ShapeRef.new(shape: EventSourceName, location_name: "Name"))
     CreateEventSourceResponse.add_member(:event_bus_arn, Shapes::ShapeRef.new(shape: EventBusArn, location_name: "EventBusArn"))
     CreateEventSourceResponse.add_member(:state, Shapes::ShapeRef.new(shape: EventSourceState, location_name: "State"))
+    CreateEventSourceResponse.add_member(:event_source_details, Shapes::ShapeRef.new(shape: EventSourceDetails, location_name: "EventSourceDetails"))
     CreateEventSourceResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTime"))
     CreateEventSourceResponse.struct_class = Types::CreateEventSourceResponse
 
@@ -317,6 +361,7 @@ module Aws::EventBridgeV2
     CreateSubscriberResponse.add_member(:point_in_time_configuration, Shapes::ShapeRef.new(shape: PointInTimeConfiguration, location_name: "PointInTimeConfiguration"))
     CreateSubscriberResponse.add_member(:state, Shapes::ShapeRef.new(shape: SubscriberState, location_name: "State"))
     CreateSubscriberResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTime"))
+    CreateSubscriberResponse.add_member(:subscriber_details, Shapes::ShapeRef.new(shape: SubscriberDetails, location_name: "SubscriberDetails"))
     CreateSubscriberResponse.struct_class = Types::CreateSubscriberResponse
 
     DeduplicationConfiguration.add_member(:deduplication_type, Shapes::ShapeRef.new(shape: DeduplicationType, required: true, location_name: "DeduplicationType"))
@@ -369,6 +414,7 @@ module Aws::EventBridgeV2
     DescribeEventSourceResponse.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
     DescribeEventSourceResponse.add_member(:state, Shapes::ShapeRef.new(shape: EventSourceState, location_name: "State"))
     DescribeEventSourceResponse.add_member(:revoked, Shapes::ShapeRef.new(shape: Boolean, location_name: "Revoked"))
+    DescribeEventSourceResponse.add_member(:event_source_details, Shapes::ShapeRef.new(shape: EventSourceDetails, location_name: "EventSourceDetails"))
     DescribeEventSourceResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTime"))
     DescribeEventSourceResponse.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTime"))
     DescribeEventSourceResponse.struct_class = Types::DescribeEventSourceResponse
@@ -394,6 +440,7 @@ module Aws::EventBridgeV2
     DescribeSubscriberResponse.add_member(:revoked, Shapes::ShapeRef.new(shape: Boolean, location_name: "Revoked"))
     DescribeSubscriberResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTime"))
     DescribeSubscriberResponse.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTime"))
+    DescribeSubscriberResponse.add_member(:subscriber_details, Shapes::ShapeRef.new(shape: SubscriberDetails, location_name: "SubscriberDetails"))
     DescribeSubscriberResponse.struct_class = Types::DescribeSubscriberResponse
 
     EncryptionConfiguration.add_member(:kms_key_identifier, Shapes::ShapeRef.new(shape: KmsKeyIdentifier, location_name: "KmsKeyIdentifier"))
@@ -428,11 +475,16 @@ module Aws::EventBridgeV2
 
     EventSourceConfiguration.add_member(:aws_service_events_configuration, Shapes::ShapeRef.new(shape: AwsServiceEventsSourceConfiguration, location_name: "AwsServiceEventsConfiguration"))
     EventSourceConfiguration.add_member(:partner_events_configuration, Shapes::ShapeRef.new(shape: PartnerEventsSourceConfiguration, location_name: "PartnerEventsConfiguration"))
+    EventSourceConfiguration.add_member(:webhook_events_configuration, Shapes::ShapeRef.new(shape: WebhookEventsSourceConfiguration, location_name: "WebhookEventsConfiguration"))
     EventSourceConfiguration.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     EventSourceConfiguration.add_member_subclass(:aws_service_events_configuration, Types::EventSourceConfiguration::AwsServiceEventsConfiguration)
     EventSourceConfiguration.add_member_subclass(:partner_events_configuration, Types::EventSourceConfiguration::PartnerEventsConfiguration)
+    EventSourceConfiguration.add_member_subclass(:webhook_events_configuration, Types::EventSourceConfiguration::WebhookEventsConfiguration)
     EventSourceConfiguration.add_member_subclass(:unknown, Types::EventSourceConfiguration::Unknown)
     EventSourceConfiguration.struct_class = Types::EventSourceConfiguration
+
+    EventSourceDetails.add_member(:webhook_details, Shapes::ShapeRef.new(shape: WebhookDetails, location_name: "WebhookDetails"))
+    EventSourceDetails.struct_class = Types::EventSourceDetails
 
     EventSourceSummary.add_member(:event_source_arn, Shapes::ShapeRef.new(shape: EventSourceArn, location_name: "EventSourceArn"))
     EventSourceSummary.add_member(:name, Shapes::ShapeRef.new(shape: EventSourceName, location_name: "Name"))
@@ -497,6 +549,7 @@ module Aws::EventBridgeV2
     InvokeConfiguration.add_member(:http_parameters, Shapes::ShapeRef.new(shape: HttpParameters, location_name: "HttpParameters"))
     InvokeConfiguration.add_member(:universal_target_parameters, Shapes::ShapeRef.new(shape: UniversalTargetParameters, location_name: "UniversalTargetParameters"))
     InvokeConfiguration.add_member(:event_bus_v2_parameters, Shapes::ShapeRef.new(shape: EventBusV2Parameters, location_name: "EventBusV2Parameters"))
+    InvokeConfiguration.add_member(:msk_parameters, Shapes::ShapeRef.new(shape: MskParameters, location_name: "MskParameters"))
     InvokeConfiguration.add_member(:target_arn, Shapes::ShapeRef.new(shape: TargetResourceArn, required: true, location_name: "TargetArn"))
     InvokeConfiguration.struct_class = Types::InvokeConfiguration
 
@@ -565,6 +618,26 @@ module Aws::EventBridgeV2
     LogConfiguration.add_member(:level, Shapes::ShapeRef.new(shape: LogLevel, location_name: "Level"))
     LogConfiguration.add_member(:include_payload, Shapes::ShapeRef.new(shape: IncludePayload, location_name: "IncludePayload"))
     LogConfiguration.struct_class = Types::LogConfiguration
+
+    MskDetails.add_member(:connectivity_state, Shapes::ShapeRef.new(shape: ConnectivityState, location_name: "ConnectivityState"))
+    MskDetails.add_member(:state_reason, Shapes::ShapeRef.new(shape: StateReason, location_name: "StateReason"))
+    MskDetails.add_member(:vpc_connection_arn, Shapes::ShapeRef.new(shape: VpcConnectionArn, location_name: "VpcConnectionArn"))
+    MskDetails.struct_class = Types::MskDetails
+
+    MskHeader.add_member(:key, Shapes::ShapeRef.new(shape: MskHeaderKeyString, required: true, location_name: "Key"))
+    MskHeader.add_member(:value, Shapes::ShapeRef.new(shape: MskHeaderValueString, location_name: "Value"))
+    MskHeader.struct_class = Types::MskHeader
+
+    MskHeaderList.member = Shapes::ShapeRef.new(shape: MskHeader)
+
+    MskParameters.add_member(:topic_name, Shapes::ShapeRef.new(shape: MskTopicName, required: true, location_name: "TopicName"))
+    MskParameters.add_member(:compression, Shapes::ShapeRef.new(shape: MskCompression, location_name: "Compression"))
+    MskParameters.add_member(:acks, Shapes::ShapeRef.new(shape: MskAcks, location_name: "Acks"))
+    MskParameters.add_member(:partition_key, Shapes::ShapeRef.new(shape: MskParametersPartitionKeyString, location_name: "PartitionKey"))
+    MskParameters.add_member(:headers, Shapes::ShapeRef.new(shape: MskHeaderList, location_name: "Headers"))
+    MskParameters.add_member(:client_id, Shapes::ShapeRef.new(shape: MskClientId, location_name: "ClientId"))
+    MskParameters.add_member(:connectivity, Shapes::ShapeRef.new(shape: MskConnectivity, required: true, location_name: "Connectivity"))
+    MskParameters.struct_class = Types::MskParameters
 
     OnFailureConfiguration.add_member(:arn, Shapes::ShapeRef.new(shape: DeadLetterQueueArn, location_name: "Arn"))
     OnFailureConfiguration.struct_class = Types::OnFailureConfiguration
@@ -693,6 +766,14 @@ module Aws::EventBridgeV2
     RevokeResourceResponse.add_member(:arn, Shapes::ShapeRef.new(shape: RevocableResourceArn, location_name: "Arn"))
     RevokeResourceResponse.struct_class = Types::RevokeResourceResponse
 
+    RotateWebhookCredentialsRequest.add_member(:event_source_arn, Shapes::ShapeRef.new(shape: WebhookEventSourceArn, required: true, location_name: "EventSourceArn"))
+    RotateWebhookCredentialsRequest.add_member(:credential, Shapes::ShapeRef.new(shape: WebhookCredential, location_name: "Credential"))
+    RotateWebhookCredentialsRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
+    RotateWebhookCredentialsRequest.struct_class = Types::RotateWebhookCredentialsRequest
+
+    RotateWebhookCredentialsResponse.add_member(:secret_arn, Shapes::ShapeRef.new(shape: WebhookSecretArn, required: true, location_name: "SecretArn"))
+    RotateWebhookCredentialsResponse.struct_class = Types::RotateWebhookCredentialsResponse
+
     SchemaRegistryConfiguration.add_member(:registry_uri, Shapes::ShapeRef.new(shape: SchemaRegistryUri, required: true, location_name: "RegistryUri"))
     SchemaRegistryConfiguration.add_member(:confluent_public_registry_configuration, Shapes::ShapeRef.new(shape: ConfluentPublicRegistryConfiguration, location_name: "ConfluentPublicRegistryConfiguration"))
     SchemaRegistryConfiguration.struct_class = Types::SchemaRegistryConfiguration
@@ -742,6 +823,9 @@ module Aws::EventBridgeV2
     StorageConfigurationOutput.add_member(:retention_period_in_days, Shapes::ShapeRef.new(shape: RetentionPeriodInDays, location_name: "RetentionPeriodInDays"))
     StorageConfigurationOutput.add_member(:retention_window_start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "RetentionWindowStartTime"))
     StorageConfigurationOutput.struct_class = Types::StorageConfigurationOutput
+
+    SubscriberDetails.add_member(:msk_details, Shapes::ShapeRef.new(shape: MskDetails, location_name: "MskDetails"))
+    SubscriberDetails.struct_class = Types::SubscriberDetails
 
     SubscriberSummary.add_member(:subscriber_arn, Shapes::ShapeRef.new(shape: SubscriberArn, location_name: "SubscriberArn"))
     SubscriberSummary.add_member(:name, Shapes::ShapeRef.new(shape: SubscriberName, location_name: "Name"))
@@ -825,6 +909,7 @@ module Aws::EventBridgeV2
     UpdateInvokeConfiguration.add_member(:http_parameters, Shapes::ShapeRef.new(shape: HttpParameters, location_name: "HttpParameters"))
     UpdateInvokeConfiguration.add_member(:universal_target_parameters, Shapes::ShapeRef.new(shape: UniversalTargetParameters, location_name: "UniversalTargetParameters"))
     UpdateInvokeConfiguration.add_member(:event_bus_v2_parameters, Shapes::ShapeRef.new(shape: EventBusV2Parameters, location_name: "EventBusV2Parameters"))
+    UpdateInvokeConfiguration.add_member(:msk_parameters, Shapes::ShapeRef.new(shape: MskParameters, location_name: "MskParameters"))
     UpdateInvokeConfiguration.struct_class = Types::UpdateInvokeConfiguration
 
     UpdateSubscriberRequest.add_member(:subscriber_arn, Shapes::ShapeRef.new(shape: SubscriberArn, required: true, location_name: "SubscriberArn"))
@@ -848,7 +933,67 @@ module Aws::EventBridgeV2
     UpdateSubscriberResponse.add_member(:point_in_time_configuration, Shapes::ShapeRef.new(shape: PointInTimeConfiguration, location_name: "PointInTimeConfiguration"))
     UpdateSubscriberResponse.add_member(:state, Shapes::ShapeRef.new(shape: SubscriberState, location_name: "State"))
     UpdateSubscriberResponse.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTime"))
+    UpdateSubscriberResponse.add_member(:subscriber_details, Shapes::ShapeRef.new(shape: SubscriberDetails, location_name: "SubscriberDetails"))
     UpdateSubscriberResponse.struct_class = Types::UpdateSubscriberResponse
+
+    WebhookAuthConfiguration.add_member(:static_token_auth_configuration, Shapes::ShapeRef.new(shape: WebhookStaticTokenAuthConfiguration, location_name: "StaticTokenAuthConfiguration"))
+    WebhookAuthConfiguration.add_member(:basic_http_auth_configuration, Shapes::ShapeRef.new(shape: WebhookBasicHttpAuthConfiguration, location_name: "BasicHttpAuthConfiguration"))
+    WebhookAuthConfiguration.add_member(:hmac_auth_configuration, Shapes::ShapeRef.new(shape: WebhookHmacAuthConfiguration, location_name: "HmacAuthConfiguration"))
+    WebhookAuthConfiguration.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    WebhookAuthConfiguration.add_member_subclass(:static_token_auth_configuration, Types::WebhookAuthConfiguration::StaticTokenAuthConfiguration)
+    WebhookAuthConfiguration.add_member_subclass(:basic_http_auth_configuration, Types::WebhookAuthConfiguration::BasicHttpAuthConfiguration)
+    WebhookAuthConfiguration.add_member_subclass(:hmac_auth_configuration, Types::WebhookAuthConfiguration::HmacAuthConfiguration)
+    WebhookAuthConfiguration.add_member_subclass(:unknown, Types::WebhookAuthConfiguration::Unknown)
+    WebhookAuthConfiguration.struct_class = Types::WebhookAuthConfiguration
+
+    WebhookBasicHttpAuthConfiguration.add_member(:username, Shapes::ShapeRef.new(shape: WebhookUsername, location_name: "Username"))
+    WebhookBasicHttpAuthConfiguration.add_member(:password, Shapes::ShapeRef.new(shape: WebhookSecretValue, location_name: "Password"))
+    WebhookBasicHttpAuthConfiguration.struct_class = Types::WebhookBasicHttpAuthConfiguration
+
+    WebhookCredential.add_member(:static_token_secret_value, Shapes::ShapeRef.new(shape: WebhookSecretValue, location_name: "StaticTokenSecretValue"))
+    WebhookCredential.add_member(:basic_http_password, Shapes::ShapeRef.new(shape: WebhookSecretValue, location_name: "BasicHttpPassword"))
+    WebhookCredential.add_member(:hmac_secret_value, Shapes::ShapeRef.new(shape: WebhookSecretValue, location_name: "HmacSecretValue"))
+    WebhookCredential.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    WebhookCredential.add_member_subclass(:static_token_secret_value, Types::WebhookCredential::StaticTokenSecretValue)
+    WebhookCredential.add_member_subclass(:basic_http_password, Types::WebhookCredential::BasicHttpPassword)
+    WebhookCredential.add_member_subclass(:hmac_secret_value, Types::WebhookCredential::HmacSecretValue)
+    WebhookCredential.add_member_subclass(:unknown, Types::WebhookCredential::Unknown)
+    WebhookCredential.struct_class = Types::WebhookCredential
+
+    WebhookDeduplicationConfiguration.add_member(:deduplication_type, Shapes::ShapeRef.new(shape: WebhookDeduplicationType, required: true, location_name: "DeduplicationType"))
+    WebhookDeduplicationConfiguration.struct_class = Types::WebhookDeduplicationConfiguration
+
+    WebhookDetails.add_member(:webhook_url, Shapes::ShapeRef.new(shape: WebhookUrl, location_name: "WebhookUrl"))
+    WebhookDetails.add_member(:secret_arn, Shapes::ShapeRef.new(shape: WebhookSecretArn, location_name: "SecretArn"))
+    WebhookDetails.struct_class = Types::WebhookDetails
+
+    WebhookEventsSourceConfiguration.add_member(:auth_configuration, Shapes::ShapeRef.new(shape: WebhookAuthConfiguration, required: true, location_name: "AuthConfiguration"))
+    WebhookEventsSourceConfiguration.add_member(:kms_key_identifier, Shapes::ShapeRef.new(shape: KmsKeyIdentifier, location_name: "KmsKeyIdentifier"))
+    WebhookEventsSourceConfiguration.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "RoleArn"))
+    WebhookEventsSourceConfiguration.add_member(:metadata_http_headers, Shapes::ShapeRef.new(shape: WebhookMetadataHttpHeaderList, location_name: "MetadataHttpHeaders"))
+    WebhookEventsSourceConfiguration.add_member(:deduplication_configuration, Shapes::ShapeRef.new(shape: WebhookDeduplicationConfiguration, location_name: "DeduplicationConfiguration"))
+    WebhookEventsSourceConfiguration.add_member(:log_configuration, Shapes::ShapeRef.new(shape: LogConfiguration, location_name: "LogConfiguration"))
+    WebhookEventsSourceConfiguration.struct_class = Types::WebhookEventsSourceConfiguration
+
+    WebhookHmacAuthConfiguration.add_member(:algorithm, Shapes::ShapeRef.new(shape: WebhookHmacAlgorithm, required: true, location_name: "Algorithm"))
+    WebhookHmacAuthConfiguration.add_member(:encoding, Shapes::ShapeRef.new(shape: WebhookHmacEncoding, required: true, location_name: "Encoding"))
+    WebhookHmacAuthConfiguration.add_member(:signature_http_header, Shapes::ShapeRef.new(shape: WebhookHeaderName, required: true, location_name: "SignatureHttpHeader"))
+    WebhookHmacAuthConfiguration.add_member(:signature_prefix, Shapes::ShapeRef.new(shape: WebhookSignaturePrefix, location_name: "SignaturePrefix"))
+    WebhookHmacAuthConfiguration.add_member(:delimiter, Shapes::ShapeRef.new(shape: WebhookDelimiter, location_name: "Delimiter"))
+    WebhookHmacAuthConfiguration.add_member(:timestamp_http_header, Shapes::ShapeRef.new(shape: WebhookHeaderName, location_name: "TimestampHttpHeader"))
+    WebhookHmacAuthConfiguration.add_member(:timestamp_prefix, Shapes::ShapeRef.new(shape: WebhookTimestampPrefix, location_name: "TimestampPrefix"))
+    WebhookHmacAuthConfiguration.add_member(:timestamp_tolerance_in_seconds, Shapes::ShapeRef.new(shape: WebhookTimestampToleranceInSeconds, location_name: "TimestampToleranceInSeconds"))
+    WebhookHmacAuthConfiguration.add_member(:message_id_http_header, Shapes::ShapeRef.new(shape: WebhookHeaderName, location_name: "MessageIdHttpHeader"))
+    WebhookHmacAuthConfiguration.add_member(:signed_message_composition, Shapes::ShapeRef.new(shape: WebhookSignedMessageComposition, required: true, location_name: "SignedMessageComposition"))
+    WebhookHmacAuthConfiguration.add_member(:secret_value, Shapes::ShapeRef.new(shape: WebhookSecretValue, location_name: "SecretValue"))
+    WebhookHmacAuthConfiguration.add_member(:secret_encoding, Shapes::ShapeRef.new(shape: WebhookSecretEncoding, location_name: "SecretEncoding"))
+    WebhookHmacAuthConfiguration.struct_class = Types::WebhookHmacAuthConfiguration
+
+    WebhookMetadataHttpHeaderList.member = Shapes::ShapeRef.new(shape: WebhookMetadataHttpHeaderName)
+
+    WebhookStaticTokenAuthConfiguration.add_member(:token_http_header, Shapes::ShapeRef.new(shape: WebhookHeaderName, required: true, location_name: "TokenHttpHeader"))
+    WebhookStaticTokenAuthConfiguration.add_member(:secret_value, Shapes::ShapeRef.new(shape: WebhookSecretValue, location_name: "SecretValue"))
+    WebhookStaticTokenAuthConfiguration.struct_class = Types::WebhookStaticTokenAuthConfiguration
 
 
     # @api private
@@ -1184,6 +1329,23 @@ module Aws::EventBridgeV2
         o.errors << Shapes::ShapeRef.new(shape: InvalidStateException)
       end)
 
+      api.add_operation(:rotate_webhook_credentials, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "RotateWebhookCredentials"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: RotateWebhookCredentialsRequest)
+        o.output = Shapes::ShapeRef.new(shape: RotateWebhookCredentialsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: IdempotentParameterMismatchException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidStateException)
+      end)
+
       api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
         o.name = "TagResource"
         o.http_method = "POST"
@@ -1236,6 +1398,7 @@ module Aws::EventBridgeV2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: UpdateEventSourceRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateEventSourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)

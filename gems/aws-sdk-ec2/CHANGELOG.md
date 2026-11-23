@@ -1,6 +1,61 @@
 Unreleased Changes
 ------------------
 
+1.674.0 (2026-11-20)
+------------------
+
+* Feature - This release adds documentation for the T9g instance family to the EC2 ModifyDefaultCreditSpecification and GetDefaultCreditSpecification APIs, adds the disable-complete state for IPAM routing policy registrations, and adds Network Firewall automated Internet firewall API changes.
+
+1.673.0 (2026-11-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.672.0 (2026-11-17)
+------------------
+
+* Feature - Adds multipath resilience for inter-Region VPC peering connections and Transit Gateway peering attachments. Adds support for quantum-resistant key exchanges to Site-to-Site VPN. Allows querying multiple instance types in a single DescribeCapacityBlockOfferings request.
+
+1.671.0 (2026-11-16)
+------------------
+
+* Feature - Adds a new Transit Gateway Attachment type called Network Function. Launches associated KMS Keys for EBS Snapshots - associated KMS keys enable customers to share and copy snapshots encrypted with AWS Managed Keys across AWS accounts.
+
+1.670.0 (2026-11-13)
+------------------
+
+* Feature - Adds support for Networking Flexible Cost Allocation APIs, enabling Network Admin, Architect, and Engineers to break down shared networking costs by the resources that generated the traffic.
+
+1.669.0 (2026-11-12)
+------------------
+
+* Feature - This release adds support for multiple features, including EC2 Image Builder image recipes and container recipes in AMI usage reports, Amazon EC2 Detailed Monitoring adds opt-in metrics, and Global Accelerator and API Gateway V2 as resource exclusions for VPC Encryption Control.
+
+1.668.0 (2026-11-11)
+------------------
+
+* Feature - Adds support for AWS Cloud WAN Flow Logs. The CreateFlowLogs API now accepts CoreNetwork, CoreNetworkEdge, and CoreNetworkAttachment resource types, enabling customers to capture information about IP traffic traversing their Cloud WAN core networks.
+
+1.667.0 (2026-11-10)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.666.0 (2026-11-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.665.0 (2026-11-06)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.664.0 (2026-11-04)
+------------------
+
+* Feature - Add the Unsupported SupportabilityScore to GetCapacityManagerSupportabilityScores.
+
 1.663.0 (2026-10-29)
 ------------------
 

@@ -184,6 +184,14 @@ module Aws
         def type: () -> ::String
         def message: () -> ::String
       end
+      class RuntimeAliasDeletedException < ServiceError
+        def type: () -> ::String
+        def message: () -> ::String
+      end
+      class RuntimeVersionDeletedException < ServiceError
+        def type: () -> ::String
+        def message: () -> ::String
+      end
       class S3FilesMountConnectivityException < ServiceError
         def type: () -> ::String
         def message: () -> ::String

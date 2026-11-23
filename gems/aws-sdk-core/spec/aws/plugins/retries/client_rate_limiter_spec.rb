@@ -152,13 +152,20 @@ module Aws
           # 2 seconds to acquire a single token
           client_rate_limiter.send(:token_bucket_update_rate, 0.5)
 
+          # Signals when a thread starts sleeping for a token
+          sleeping = Queue.new
+          allow(mutex).to receive(:sleep).and_wrap_original do |original, *args|
+            sleeping << :sleeping
+            original.call(*args)
+          end
+
           # Start a thread to acquire a token
           test_thread = Thread.new do
             client_rate_limiter.token_bucket_acquire(1)
           end
 
-          # ensure the new thread has a chance to start
-          sleep(0.1)
+          # wait until the new thread is sleeping for its token
+          sleeping.pop
 
           # Now in the main thread, update the rate to something really quick.
           # This should let us get a token back very quickly (~0.01 seconds)
@@ -176,7 +183,7 @@ module Aws
           expect(test_thread_time).to be > 1.0
         end
 
-        it 'doesnt starve any threads during a stress test' do
+        it 'doesnt starve any threads during a stress test', :jruby_flaky do
           client_rate_limiter.instance_variable_set(:@enabled, true)
           client_rate_limiter.send(:token_bucket_update_rate, 500)
 

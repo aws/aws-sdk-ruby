@@ -264,7 +264,8 @@ module Aws::CloudWatchOmni
     #     An integer representing the maximum number attempts that will be made for
     #     a single request, including the initial attempt.  For example,
     #     setting this value to 5 will result in a request being retried up to
-    #     4 times. Used in `standard` and `adaptive` retry modes.
+    #     4 times. Used in `standard` and `adaptive` retry modes. Defaults to 3,
+    #     except for DynamoDB and DynamoDB Streams, which default to 4.
     #
     #   @option options [String] :profile ("default")
     #     Used when loading credentials from the shared credentials file at `HOME/.aws/credentials`.
@@ -327,15 +328,15 @@ module Aws::CloudWatchOmni
     #     used by the default backoff function. This option is only used in the
     #     `legacy` retry mode.
     #
-    #   @option options [String] :retry_mode ("legacy")
+    #   @option options [String] :retry_mode ("standard")
     #     Specifies which retry algorithm to use. Values are:
     #
-    #     * `legacy` - The pre-existing retry behavior. This is the default
-    #       value if no retry mode is provided.
+    #     * `legacy` - The pre-existing retry behavior.
     #
     #     * `standard` - A standardized set of retry rules across the AWS SDKs.
     #       This includes support for retry quotas, which limit the number of
-    #       unsuccessful retries a client can make.
+    #       unsuccessful retries a client can make. This is the default value
+    #       if no retry mode is provided.
     #
     #     * `adaptive` - A retry mode that includes all the functionality of
     #       `standard` mode along with automatic client side throttling.
@@ -2950,6 +2951,66 @@ module Aws::CloudWatchOmni
     #     ], 
     #   }
     #
+    # @example Example: Return metric aggregation metadata
+    #
+    #   # The following example returns aggregation metadata for a metric stream observed on a service over a one-hour window. The
+    #   # metric attributes identify its producing service and instrumentation scope; additional data point dimensions can
+    #   # identify multiple time series. Payloads are shown as JSON; on the wire they are CBOR-encoded.
+    #
+    #   resp = client.get_context_graph({
+    #     depth: 0, 
+    #     end_time: Time.parse("2026-09-16T01:00:00Z"), 
+    #     include_metadata: true, 
+    #     max_results: 1, 
+    #     node_filters: {
+    #       node_id: "svc:checkout-service", 
+    #     }, 
+    #     start_time: Time.parse("2026-09-16T00:00:00Z"), 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     nodes: [
+    #       {
+    #         metadata: {
+    #           metrics: [
+    #             {
+    #               name: "traces.span.metrics.calls", 
+    #               aggregation_temporality: "cumulative", 
+    #               attributes: {
+    #                 "@instrumentation.@name" => "otel.cloudwatch.spanmetrics", 
+    #                 "@resource.service.name" => "checkout-service", 
+    #                 "@resource.service.namespace" => "ecommerce", 
+    #               }, 
+    #               metric_type: "sum", 
+    #               monotonicity: "monotonic", 
+    #               semantics: {
+    #                 unit: "{request}", 
+    #               }, 
+    #             }, 
+    #           ], 
+    #         }, 
+    #         name: "checkout-service", 
+    #         first_observed_at: Time.parse("2026-09-16T00:03:00Z"), 
+    #         last_observed_at: Time.parse("2026-09-16T00:58:00Z"), 
+    #         node_id: "svc:checkout-service", 
+    #         node_properties: {
+    #           cloud_provider: "aws", 
+    #           namespace: "ecommerce", 
+    #           region: "us-east-1", 
+    #           source_account_id: "123456789012", 
+    #         }, 
+    #         node_type: "SERVICE", 
+    #         signal_types: [
+    #           "METRICS", 
+    #         ], 
+    #         sources: [
+    #           "TELEMETRY", 
+    #         ], 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_context_graph({
@@ -3034,6 +3095,8 @@ module Aws::CloudWatchOmni
     #   resp.nodes[0].metadata.metrics[0].attributes["String"] #=> String
     #   resp.nodes[0].metadata.metrics[0].semantics.description #=> String
     #   resp.nodes[0].metadata.metrics[0].semantics.unit #=> String
+    #   resp.nodes[0].metadata.metrics[0].aggregation_temporality #=> String, one of "delta", "cumulative"
+    #   resp.nodes[0].metadata.metrics[0].monotonicity #=> String, one of "monotonic", "non_monotonic"
     #   resp.nodes[0].metadata.semantics.purpose #=> String
     #   resp.nodes[0].metadata.semantics.language #=> String
     #   resp.nodes[0].metadata.semantics.framework #=> String
@@ -3081,6 +3144,8 @@ module Aws::CloudWatchOmni
     #   resp.nodes[0].edges[0].metadata.metrics[0].attributes["String"] #=> String
     #   resp.nodes[0].edges[0].metadata.metrics[0].semantics.description #=> String
     #   resp.nodes[0].edges[0].metadata.metrics[0].semantics.unit #=> String
+    #   resp.nodes[0].edges[0].metadata.metrics[0].aggregation_temporality #=> String, one of "delta", "cumulative"
+    #   resp.nodes[0].edges[0].metadata.metrics[0].monotonicity #=> String, one of "monotonic", "non_monotonic"
     #   resp.nodes[0].edges[0].metadata.semantics.purpose #=> String
     #   resp.nodes[0].edges[0].metadata.semantics.language #=> String
     #   resp.nodes[0].edges[0].metadata.semantics.framework #=> String
@@ -3662,6 +3727,98 @@ module Aws::CloudWatchOmni
     # @param [Hash] params ({})
     def get_space_credentials_for_organization(params = {}, options = {})
       req = build_request(:get_space_credentials_for_organization, params)
+      req.send_request(options)
+    end
+
+    # Returns temporary credentials for working with data in a space,
+    # limited to the actions you request.
+    #
+    # The credentials allow only the requested actions that can be granted
+    # in the space and that your access grants allow. Requested actions that
+    # cannot be conferred are ignored rather than rejected.
+    #
+    # @option params [required, String] :space_id
+    #   The unique ID of the space to return credentials for.
+    #
+    # @option params [required, Array<Types::DataAccessTarget>] :target_scopes
+    #   The actions to include in the credentials, grouped by service.
+    #
+    # @option params [Integer] :duration_seconds
+    #   The lifetime of the credentials, in seconds. Defaults to 3600.
+    #
+    # @option params [Hash<String,String>] :audit_context
+    #   Caller-supplied key-value pairs that are recorded for auditing. They
+    #   do not affect authorization or the permissions of the credentials.
+    #
+    # @return [Types::GetSpaceDataAccessOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetSpaceDataAccessOutput#credentials #credentials} => Types::AwsCredentials
+    #
+    #
+    # @example Example: Get data credentials for log queries
+    #
+    #   # The following example requests credentials that allow running log queries and reading metric data in a space. Payloads
+    #   # are shown as JSON; on the wire they are CBOR-encoded.
+    #
+    #   resp = client.get_space_data_access({
+    #     audit_context: {
+    #       "source" => "logs-console", 
+    #     }, 
+    #     duration_seconds: 3600, 
+    #     space_id: "a1b2c3d4-5e6f-4a3b-8c9d-0e1f2a3b4c5d", 
+    #     target_scopes: [
+    #       {
+    #         actions: [
+    #           "logs:StartQuery", 
+    #           "logs:GetQueryResults", 
+    #         ], 
+    #       }, 
+    #       {
+    #         actions: [
+    #           "cloudwatch:GetMetricData", 
+    #         ], 
+    #       }, 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     credentials: {
+    #       access_key_id: "ASIAIOSFODNN7EXAMPLE", 
+    #       expiration: Time.parse("2026-10-20T19:22:31Z"), 
+    #       secret_access_key: "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY", 
+    #       session_token: "EXAMPLE-SESSION-TOKEN", 
+    #     }, 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_space_data_access({
+    #     space_id: "SpaceId", # required
+    #     target_scopes: [ # required
+    #       {
+    #         actions: ["DataAccessActionName"], # required
+    #       },
+    #     ],
+    #     duration_seconds: 1,
+    #     audit_context: {
+    #       "DataAccessAuditContextKeyString" => "DataAccessAuditContextValueString",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.credentials.access_key_id #=> String
+    #   resp.credentials.secret_access_key #=> String
+    #   resp.credentials.session_token #=> String
+    #   resp.credentials.expiration #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudwatchomni-2025-01-01/GetSpaceDataAccess AWS API Documentation
+    #
+    # @overload get_space_data_access(params = {})
+    # @param [Hash] params ({})
+    def get_space_data_access(params = {}, options = {})
+      req = build_request(:get_space_data_access, params)
       req.send_request(options)
     end
 
@@ -6066,7 +6223,7 @@ module Aws::CloudWatchOmni
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-cloudwatchomni'
-      context[:gem_version] = '1.6.0'
+      context[:gem_version] = '1.14.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

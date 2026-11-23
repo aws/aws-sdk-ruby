@@ -86,19 +86,34 @@ module Aws::AppStream
     #
     # @!attribute [rw] settings
     #   The list of agent access settings that define permissions for each
-    #   agent action. You must specify at least one setting.
+    #   agent action. You must specify at least one setting, and at least
+    #   one agent action must be enabled.
     #   @return [Array<Types::AgentAccessSetting>]
     #
     # @!attribute [rw] s3_bucket_arn
     #   The Amazon Resource Name (ARN) of the Amazon S3 bucket where agent
-    #   screenshots are stored. Required when ScreenshotsUploadEnabled is
-    #   true.
+    #   screenshots and Replay Session artifacts are stored. Required when
+    #   ScreenshotsUploadEnabled or ReplaySessionEnabled is true.
     #   @return [String]
     #
     # @!attribute [rw] screenshots_upload_enabled
     #   Indicates whether screenshot uploads to Amazon S3 are enabled for
     #   agent sessions.
     #   @return [Boolean]
+    #
+    # @!attribute [rw] replay_session_enabled
+    #   Indicates whether Replay Session is enabled for agent sessions.
+    #   WorkSpaces Applications delivers a video combining session
+    #   screenshots, a transcript, and a report for each session. Requires
+    #   the COMPUTER\_VISION agent action.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] kms_key_arn
+    #   The Amazon Resource Name (ARN) of the customer managed symmetric
+    #   encryption KMS key that encrypts Replay Session artifacts while
+    #   WorkSpaces Applications processes them. The key must be in the same
+    #   Region as the stack, and ReplaySessionEnabled must be true.
+    #   @return [String]
     #
     # @!attribute [rw] screen_resolution
     #   The screen resolution for the agent streaming environment.
@@ -119,6 +134,8 @@ module Aws::AppStream
       :settings,
       :s3_bucket_arn,
       :screenshots_upload_enabled,
+      :replay_session_enabled,
+      :kms_key_arn,
       :screen_resolution,
       :screen_image_format,
       :user_control_mode)
@@ -132,18 +149,33 @@ module Aws::AppStream
     #
     # @!attribute [rw] settings
     #   The list of agent access settings that define permissions for each
-    #   agent action.
+    #   agent action. The merged settings must have at least one agent
+    #   action enabled.
     #   @return [Array<Types::AgentAccessSetting>]
     #
     # @!attribute [rw] s3_bucket_arn
     #   The Amazon Resource Name (ARN) of the Amazon S3 bucket where agent
-    #   screenshots are stored.
+    #   screenshots and Replay Session artifacts are stored.
     #   @return [String]
     #
     # @!attribute [rw] screenshots_upload_enabled
     #   Indicates whether screenshot uploads to Amazon S3 are enabled for
     #   agent sessions.
     #   @return [Boolean]
+    #
+    # @!attribute [rw] replay_session_enabled
+    #   Indicates whether Replay Session is enabled for agent sessions.
+    #   Setting this attribute to false also removes the KmsKeyArn value
+    #   from the stack.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] kms_key_arn
+    #   The Amazon Resource Name (ARN) of the customer managed symmetric
+    #   encryption KMS key that encrypts Replay Session artifacts while
+    #   WorkSpaces Applications processes them. To remove the key, use
+    #   AttributesToDelete with the AGENT\_ACCESS\_CONFIG\_KMS\_KEY\_ARN
+    #   value.
+    #   @return [String]
     #
     # @!attribute [rw] screen_resolution
     #   The screen resolution for the agent streaming environment.
@@ -164,6 +196,8 @@ module Aws::AppStream
       :settings,
       :s3_bucket_arn,
       :screenshots_upload_enabled,
+      :replay_session_enabled,
+      :kms_key_arn,
       :screen_resolution,
       :screen_image_format,
       :user_control_mode)
@@ -1229,7 +1263,7 @@ module Aws::AppStream
     class CreateAppBlockBuilderStreamingURLResult < Struct.new(
       :streaming_url,
       :expires)
-      SENSITIVE = []
+      SENSITIVE = [:streaming_url]
       include Aws::Structure
     end
 
@@ -1633,6 +1667,18 @@ module Aws::AppStream
     #
     #   * stream.graphics.gr6f.4xlarge
     #
+    #   * stream.graphics.g7.2xlarge
+    #
+    #   * stream.graphics.g7.4xlarge
+    #
+    #   * stream.graphics.g7.8xlarge
+    #
+    #   * stream.graphics.g7.12xlarge
+    #
+    #   * stream.graphics.g7.24xlarge
+    #
+    #   * stream.graphics.g7.48xlarge
+    #
     #   The following instance types are available for Elastic fleets:
     #
     #   * stream.standard.small
@@ -1986,6 +2032,18 @@ module Aws::AppStream
     #   * stream.graphics.g6f.4xlarge
     #
     #   * stream.graphics.gr6f.4xlarge
+    #
+    #   * stream.graphics.g7.2xlarge
+    #
+    #   * stream.graphics.g7.4xlarge
+    #
+    #   * stream.graphics.g7.8xlarge
+    #
+    #   * stream.graphics.g7.12xlarge
+    #
+    #   * stream.graphics.g7.24xlarge
+    #
+    #   * stream.graphics.g7.48xlarge
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -2188,6 +2246,11 @@ module Aws::AppStream
     #    </note>
     #   @return [Boolean]
     #
+    # @!attribute [rw] agent_access_config
+    #   The configuration for agent access on the image builder. If
+    #   specified, agent access is enabled for the image builder.
+    #   @return [Types::ImageBuilderAgentAccessConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateImageBuilderRequest AWS API Documentation
     #
     class CreateImageBuilderRequest < Struct.new(
@@ -2207,7 +2270,8 @@ module Aws::AppStream
       :root_volume_config,
       :softwares_to_install,
       :softwares_to_uninstall,
-      :disable_imdsv1)
+      :disable_imdsv1,
+      :agent_access_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2256,7 +2320,7 @@ module Aws::AppStream
     class CreateImageBuilderStreamingURLResult < Struct.new(
       :streaming_url,
       :expires)
-      SENSITIVE = []
+      SENSITIVE = [:streaming_url]
       include Aws::Structure
     end
 
@@ -2436,6 +2500,13 @@ module Aws::AppStream
     #   URLs from the remote desktop to the local browser.
     #   @return [Types::ContentRedirection]
     #
+    # @!attribute [rw] web_authn_redirection
+    #   Configuration for WebAuthn redirection between the streaming session
+    #   and the user's local device. Use ProcessCompatibilityList to
+    #   specify which processes can use WebAuthn redirection on Windows
+    #   fleets.
+    #   @return [Types::WebAuthnRedirection]
+    #
     # @!attribute [rw] agent_access_config
     #   The configuration for agent access on the stack. If specified, agent
     #   access is enabled for the stack.
@@ -2466,6 +2537,7 @@ module Aws::AppStream
       :embed_host_domains,
       :streaming_experience_settings,
       :content_redirection,
+      :web_authn_redirection,
       :agent_access_config,
       :storage_connector_authentication)
       SENSITIVE = []
@@ -2545,7 +2617,7 @@ module Aws::AppStream
     class CreateStreamingURLResult < Struct.new(
       :streaming_url,
       :expires)
-      SENSITIVE = []
+      SENSITIVE = [:streaming_url]
       include Aws::Structure
     end
 
@@ -4537,6 +4609,18 @@ module Aws::AppStream
     #   * stream.graphics.g6f.4xlarge
     #
     #   * stream.graphics.gr6f.4xlarge
+    #
+    #   * stream.graphics.g7.2xlarge
+    #
+    #   * stream.graphics.g7.4xlarge
+    #
+    #   * stream.graphics.g7.8xlarge
+    #
+    #   * stream.graphics.g7.12xlarge
+    #
+    #   * stream.graphics.g7.24xlarge
+    #
+    #   * stream.graphics.g7.48xlarge
     #   @return [String]
     #
     # @!attribute [rw] fleet_type
@@ -5055,6 +5139,18 @@ module Aws::AppStream
     #   * stream.graphics.g6f.4xlarge
     #
     #   * stream.graphics.gr6f.4xlarge
+    #
+    #   * stream.graphics.g7.2xlarge
+    #
+    #   * stream.graphics.g7.4xlarge
+    #
+    #   * stream.graphics.g7.8xlarge
+    #
+    #   * stream.graphics.g7.12xlarge
+    #
+    #   * stream.graphics.g7.24xlarge
+    #
+    #   * stream.graphics.g7.48xlarge
     #   @return [String]
     #
     # @!attribute [rw] platform
@@ -5136,6 +5232,11 @@ module Aws::AppStream
     #   disabled for the image builder.
     #   @return [Boolean]
     #
+    # @!attribute [rw] agent_access_config
+    #   The agent access configuration of the image builder, if agent access
+    #   is enabled.
+    #   @return [Types::ImageBuilderAgentAccessConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/ImageBuilder AWS API Documentation
     #
     class ImageBuilder < Struct.new(
@@ -5159,7 +5260,136 @@ module Aws::AppStream
       :access_endpoints,
       :root_volume_config,
       :latest_appstream_agent_version,
-      :disable_imdsv1)
+      :disable_imdsv1,
+      :agent_access_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration for agent access on an image builder. Agent access
+    # enables AI agents to interact with desktop applications during
+    # streaming sessions to the image builder.
+    #
+    # @!attribute [rw] settings
+    #   The list of agent access settings that define permissions for each
+    #   agent action. You must specify at least one setting, and at least
+    #   one agent action must be enabled.
+    #   @return [Array<Types::AgentAccessSetting>]
+    #
+    # @!attribute [rw] s3_bucket_arn
+    #   The Amazon Resource Name (ARN) of the Amazon S3 bucket where agent
+    #   screenshots are stored. Required when ScreenshotsUploadEnabled is
+    #   true.
+    #   @return [String]
+    #
+    # @!attribute [rw] screenshots_upload_enabled
+    #   Specifies whether screenshot uploads to Amazon S3 are enabled for
+    #   agent sessions.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] screen_resolution
+    #   The screen resolution for the agent streaming environment.
+    #
+    #   * W\_1280xH\_720 - 1280 x 720 pixels.
+    #
+    #   ^
+    #   @return [String]
+    #
+    # @!attribute [rw] screen_image_format
+    #   The image format for agent screen captures.
+    #
+    #   * PNG - PNG format.
+    #
+    #   * JPEG - JPEG format.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_control_mode
+    #   The user control mode for agent sessions. This setting determines
+    #   how users can interact with agent sessions.
+    #
+    #   * VIEW\_ONLY - Users can view and observe agent actions as they
+    #     happen.
+    #
+    #   * VIEW\_STOP - Users can view agent actions and stop the agent if
+    #     needed.
+    #
+    #   * DISABLED - Users cannot view or stop the agent session.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/ImageBuilderAgentAccessConfig AWS API Documentation
+    #
+    class ImageBuilderAgentAccessConfig < Struct.new(
+      :settings,
+      :s3_bucket_arn,
+      :screenshots_upload_enabled,
+      :screen_resolution,
+      :screen_image_format,
+      :user_control_mode)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration for updating agent access on an image builder. This
+    # type supports partial updates, so you only need to specify the fields
+    # you want to change. Fields that you omit keep their stored values.
+    #
+    # @!attribute [rw] settings
+    #   The list of agent access settings that define permissions for each
+    #   agent action. These settings are merged with the stored settings by
+    #   agent action. A setting that you specify replaces the stored setting
+    #   for the same agent action. The merged settings must have at least
+    #   one agent action enabled.
+    #   @return [Array<Types::AgentAccessSetting>]
+    #
+    # @!attribute [rw] s3_bucket_arn
+    #   The Amazon Resource Name (ARN) of the Amazon S3 bucket where agent
+    #   screenshots are stored. If ScreenshotsUploadEnabled is false after
+    #   the merge, the stored bucket ARN is removed.
+    #   @return [String]
+    #
+    # @!attribute [rw] screenshots_upload_enabled
+    #   Specifies whether screenshot uploads to Amazon S3 are enabled for
+    #   agent sessions.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] screen_resolution
+    #   The screen resolution for the agent streaming environment.
+    #
+    #   * W\_1280xH\_720 - 1280 x 720 pixels.
+    #
+    #   ^
+    #   @return [String]
+    #
+    # @!attribute [rw] screen_image_format
+    #   The image format for agent screen captures.
+    #
+    #   * PNG - PNG format.
+    #
+    #   * JPEG - JPEG format.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_control_mode
+    #   The user control mode for agent sessions. This setting determines
+    #   how users can interact with agent sessions.
+    #
+    #   * VIEW\_ONLY - Users can view and observe agent actions as they
+    #     happen.
+    #
+    #   * VIEW\_STOP - Users can view agent actions and stop the agent if
+    #     needed.
+    #
+    #   * DISABLED - Users cannot view or stop the agent session.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/ImageBuilderAgentAccessConfigForUpdate AWS API Documentation
+    #
+    class ImageBuilderAgentAccessConfigForUpdate < Struct.new(
+      :settings,
+      :s3_bucket_arn,
+      :screenshots_upload_enabled,
+      :screen_resolution,
+      :screen_image_format,
+      :user_control_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6011,6 +6241,13 @@ module Aws::AppStream
     #   URLs from the remote desktop to the local browser.
     #   @return [Types::ContentRedirection]
     #
+    # @!attribute [rw] web_authn_redirection
+    #   Configuration for WebAuthn redirection between the streaming session
+    #   and the user's local device. Use ProcessCompatibilityList to
+    #   specify which processes can use WebAuthn redirection on Windows
+    #   fleets.
+    #   @return [Types::WebAuthnRedirection]
+    #
     # @!attribute [rw] agent_access_config
     #   The agent access configuration of the stack, if agent access is
     #   enabled.
@@ -6043,6 +6280,7 @@ module Aws::AppStream
       :embed_host_domains,
       :streaming_experience_settings,
       :content_redirection,
+      :web_authn_redirection,
       :agent_access_config,
       :storage_connector_authentication)
       SENSITIVE = []
@@ -6776,6 +7014,18 @@ module Aws::AppStream
     #
     #   * stream.graphics.gr6f.4xlarge
     #
+    #   * stream.graphics.g7.2xlarge
+    #
+    #   * stream.graphics.g7.4xlarge
+    #
+    #   * stream.graphics.g7.8xlarge
+    #
+    #   * stream.graphics.g7.12xlarge
+    #
+    #   * stream.graphics.g7.24xlarge
+    #
+    #   * stream.graphics.g7.48xlarge
+    #
     #   The following instance types are available for Elastic fleets:
     #
     #   * stream.standard.small
@@ -6992,6 +7242,52 @@ module Aws::AppStream
     end
 
     # @!attribute [rw] name
+    #   The name of the image builder.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description to display.
+    #   @return [String]
+    #
+    # @!attribute [rw] display_name
+    #   The image builder name to display.
+    #   @return [String]
+    #
+    # @!attribute [rw] agent_access_config
+    #   The configuration for agent access on the image builder. Specify
+    #   this to update agent access settings. To remove agent access, use
+    #   AttributesToDelete with the AGENT\_ACCESS\_CONFIG value.
+    #   @return [Types::ImageBuilderAgentAccessConfigForUpdate]
+    #
+    # @!attribute [rw] attributes_to_delete
+    #   The image builder attributes to delete.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/UpdateImageBuilderRequest AWS API Documentation
+    #
+    class UpdateImageBuilderRequest < Struct.new(
+      :name,
+      :description,
+      :display_name,
+      :agent_access_config,
+      :attributes_to_delete)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] image_builder
+    #   Information about the image builder.
+    #   @return [Types::ImageBuilder]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/UpdateImageBuilderResult AWS API Documentation
+    #
+    class UpdateImageBuilderResult < Struct.new(
+      :image_builder)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
     #   The name of the private image.
     #   @return [String]
     #
@@ -7089,6 +7385,14 @@ module Aws::AppStream
     #   URLs from the remote desktop to the local browser.
     #   @return [Types::ContentRedirection]
     #
+    # @!attribute [rw] web_authn_redirection
+    #   Configuration for WebAuthn redirection between the streaming session
+    #   and the user's local device. Use ProcessCompatibilityList to
+    #   specify which processes can use WebAuthn redirection on Windows
+    #   fleets. To remove WebAuthn redirection, use AttributesToDelete with
+    #   the WEB\_AUTHN\_REDIRECTION value.
+    #   @return [Types::WebAuthnRedirection]
+    #
     # @!attribute [rw] agent_access_config
     #   The configuration for agent access on the stack. Specify this to
     #   update agent access settings. To remove agent access, use
@@ -7122,6 +7426,7 @@ module Aws::AppStream
       :embed_host_domains,
       :streaming_experience_settings,
       :content_redirection,
+      :web_authn_redirection,
       :agent_access_config,
       :storage_connector_authentication)
       SENSITIVE = []
@@ -7348,11 +7653,68 @@ module Aws::AppStream
     # users during their streaming sessions.
     #
     # @!attribute [rw] action
-    #   The action that is enabled or disabled.
+    #   The action you want to enable or disable. Choose from the following:
+    #
+    #   AUTO\_TIME\_ZONE\_REDIRECTION
+    #
+    #   : Controls whether the streaming session's time zone matches the
+    #     time zone of your local device.
+    #
+    #   CLIPBOARD\_COPY\_FROM\_LOCAL\_DEVICE
+    #
+    #   : Controls whether you can copy data from your local device and
+    #     paste it into the streaming session.
+    #
+    #   CLIPBOARD\_COPY\_TO\_LOCAL\_DEVICE
+    #
+    #   : Controls whether you can copy data from the streaming session and
+    #     paste it to your local device.
+    #
+    #   DOMAIN\_PASSWORD\_SIGNIN
+    #
+    #   : Controls whether you can sign in to a domain-joined streaming
+    #     session by using your password.
+    #
+    #   DOMAIN\_SMART\_CARD\_SIGNIN
+    #
+    #   : Controls whether you can sign in to a domain-joined streaming
+    #     session by using a smart card.
+    #
+    #   FILE\_DOWNLOAD
+    #
+    #   : Controls whether you can download files from the streaming session
+    #     to your local device.
+    #
+    #   FILE\_UPLOAD
+    #
+    #   : Controls whether you can upload files from your local device to
+    #     the streaming session.
+    #
+    #   PRINTING\_TO\_LOCAL\_DEVICE
+    #
+    #   : Controls whether you can print from the streaming session to a
+    #     printer on your local device.
+    #
+    #   SMART\_CARD\_REDIRECTION
+    #
+    #   : Controls whether smart cards connected to your local device are
+    #     redirected into the streaming session. Applications in the session
+    #     can access the local smart card for use cases such as
+    #     authentication, digital signing, and email encryption.
+    #
+    #   <note markdown="1"> Smart card redirection was on by default for existing streaming
+    #   sessions that use a Windows single-session fleet. To preserve that
+    #   behavior, `SMART_CARD_REDIRECTION` is `ENABLED` by default on
+    #   existing stacks associated with Windows single-session fleets. To
+    #   turn it off, call `UpdateStack` with `SMART_CARD_REDIRECTION` set to
+    #   `DISABLED`, and use an image that includes the latest WorkSpaces
+    #   Applications agent version.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] permission
-    #   Indicates whether the action is enabled or disabled.
+    #   Specifies whether to turn the action on or off.
     #   @return [String]
     #
     # @!attribute [rw] maximum_length
@@ -7480,6 +7842,29 @@ module Aws::AppStream
     class VpcConfig < Struct.new(
       :subnet_ids,
       :security_group_ids)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the WebAuthn redirection configuration for a stack. With
+    # WebAuthn redirection, your users can complete passkey and security-key
+    # authentication from a streaming session by using an authenticator
+    # attached to their local device.
+    #
+    # @!attribute [rw] enabled
+    #   Specifies whether WebAuthn redirection is enabled for the stack.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] process_compatibility_list
+    #   The list of process executable names for which you enable WebAuthn
+    #   redirection. For example, chrome.exe.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/WebAuthnRedirection AWS API Documentation
+    #
+    class WebAuthnRedirection < Struct.new(
+      :enabled,
+      :process_compatibility_list)
       SENSITIVE = []
       include Aws::Structure
     end

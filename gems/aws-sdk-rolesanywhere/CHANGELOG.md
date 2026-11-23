@@ -1,6 +1,51 @@
 Unreleased Changes
 ------------------
 
+1.71.0 (2026-11-19)
+------------------
+
+* Feature - Adds the tipConfiguration field to profiles to turn on trusted identity propagation, which adds the identity from an X.509 certificate to sessions as origin identity condition keys.
+
+1.70.0 (2026-11-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.69.0 (2026-11-16)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.68.0 (2026-11-13)
+------------------
+
+* Feature - This release adds resource aliases for IAM Roles Anywhere trust anchors, profiles, and certificate revocation lists (CRLs). Assign an optional, unique alias name to a resource and use its alias ARN wherever an identifier is accepted, including CreateSession.
+
+1.67.0 (2026-11-11)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.66.0 (2026-11-10)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.65.0 (2026-11-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.64.0 (2026-11-06)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.63.0 (2026-11-04)
+------------------
+
+* Feature - Adds the crlDpRevocationEnabled field to enable automatic revocation checking using CRL distribution points in X.509 certificates.
+
 1.62.0 (2026-10-29)
 ------------------
 

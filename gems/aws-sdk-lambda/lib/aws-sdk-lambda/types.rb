@@ -10,6 +10,23 @@
 module Aws::Lambda
   module Types
 
+    # The accelerator resource settings for a Lambda execution environment,
+    # including the amount of accelerator memory to allocate.
+    #
+    # @!attribute [rw] accelerator_memory_size
+    #   The minimum amount of memory (in GB) of each accelerator device
+    #   exposed to the execution environment. Lambda might allocate more,
+    #   depending on the accelerator instance types available.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/AcceleratorConfig AWS API Documentation
+    #
+    class AcceleratorConfig < Struct.new(
+      :accelerator_memory_size)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Limits that are related to concurrency and storage. All file and
     # storage sizes are in bytes.
     #
@@ -790,9 +807,9 @@ module Aws::Lambda
     #   @return [String]
     #
     # @!attribute [rw] x_amzn_trace_id
-    #   The optional X-Ray trace header to use when starting the chained
-    #   invocation. If you omit this value, the child invocation inherits
-    #   the parent durable execution's trace header.
+    #   The X-Ray trace header to use when starting the chained invocation.
+    #   This parameter is optional. If you omit this value, the child
+    #   invocation inherits the parent durable execution's trace header.
     #
     #   Specify this value on the `START` update for the chained invocation
     #   operation. For more information about the header format, see
@@ -1624,6 +1641,9 @@ module Aws::Lambda
     #   Related setting: For Kinesis, DynamoDB, and Amazon SQS event
     #   sources, when you set `BatchSize` to a value greater than 10, you
     #   must set `MaximumBatchingWindowInSeconds` to at least 1.
+    #
+    #   Not supported for Kafka event source mappings when `ConsumptionMode`
+    #   is `Queue`.
     #   @return [Integer]
     #
     # @!attribute [rw] parallelization_factor
@@ -1636,12 +1656,18 @@ module Aws::Lambda
     #   Amazon Kinesis and Amazon DynamoDB Stream event sources.
     #   `AT_TIMESTAMP` is supported only for Amazon Kinesis streams, Amazon
     #   DocumentDB, Amazon MSK, and self-managed Apache Kafka.
+    #
+    #   Not supported for Kafka event source mappings when `ConsumptionMode`
+    #   is `Queue`.
     #   @return [String]
     #
     # @!attribute [rw] starting_position_timestamp
     #   With `StartingPosition` set to `AT_TIMESTAMP`, the time from which
     #   to start reading. `StartingPositionTimestamp` cannot be in the
     #   future.
+    #
+    #   Not supported for Kafka event source mappings when `ConsumptionMode`
+    #   is `Queue`.
     #   @return [Time]
     #
     # @!attribute [rw] destination_config
@@ -1667,6 +1693,12 @@ module Aws::Lambda
     #   Kafka) Discard records after the specified number of retries. The
     #   default value is infinite (-1). When set to infinite (-1), failed
     #   records are retried until the record expires.
+    #
+    #   For Kafka event source mappings with `ConsumptionMode` set to
+    #   `Queue`, the value -1 (infinite retries) is not supported and the
+    #   default is 0 (no retries). Lambda releases failed records back to
+    #   the broker, which redelivers them up to the share group's
+    #   `group.share.delivery.count.limit`.
     #   @return [Integer]
     #
     # @!attribute [rw] tags
@@ -1825,7 +1857,7 @@ module Aws::Lambda
     # @!attribute [rw] timeout
     #   The amount of time (in seconds) that Lambda allows a function to run
     #   before stopping it. The default is 3 seconds, and the maximum
-    #   allowed value is 900 seconds. For functions using Lambda Managed
+    #   allowed value is 1,800 seconds. For functions using Lambda Managed
     #   Instances, asynchronous invocations and event source mapping
     #   invocations (except Amazon MQ and Amazon DocumentDB) support a
     #   maximum allowed value of 5,400 seconds (90 minutes). For more
@@ -1976,7 +2008,8 @@ module Aws::Lambda
     # @!attribute [rw] ephemeral_storage
     #   The size of the function's `/tmp` directory in MB. The default
     #   value is 512, but can be any whole number between 512 and 10,240 MB.
-    #   For more information, see [Configuring ephemeral storage
+    #   For functions that use `AcceleratorConfig`, the maximum is 32,768
+    #   MB. For more information, see [Configuring ephemeral storage
     #   (console)][1].
     #
     #
@@ -2013,6 +2046,17 @@ module Aws::Lambda
     #   execution even after interruptions.
     #   @return [Types::DurableConfig]
     #
+    # @!attribute [rw] runtime_config
+    #   The customer-managed runtime configuration for your function.
+    #   Specifies the customer-managed runtime and the runtime alias that
+    #   your function uses.
+    #   @return [Types::FunctionRuntimeConfig]
+    #
+    # @!attribute [rw] accelerator_config
+    #   The accelerator resource settings for a Lambda execution
+    #   environment.
+    #   @return [Types::AcceleratorConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/CreateFunctionRequest AWS API Documentation
     #
     class CreateFunctionRequest < Struct.new(
@@ -2043,7 +2087,9 @@ module Aws::Lambda
       :logging_config,
       :tenancy_config,
       :capacity_provider_config,
-      :durable_config)
+      :durable_config,
+      :runtime_config,
+      :accelerator_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2268,6 +2314,31 @@ module Aws::Lambda
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/DeleteCodeSigningConfigResponse AWS API Documentation
     #
     class DeleteCodeSigningConfigResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] durable_execution_arn
+    #   The Amazon Resource Name (ARN) of the durable execution.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/DeleteDurableExecutionRequest AWS API Documentation
+    #
+    class DeleteDurableExecutionRequest < Struct.new(
+      :durable_execution_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] deletion_request_timestamp
+    #   The timestamp when Lambda accepted the deletion request (ISO 8601
+    #   format).
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/DeleteDurableExecutionResponse AWS API Documentation
+    #
+    class DeleteDurableExecutionResponse < Struct.new(
+      :deletion_request_timestamp)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @!attribute [rw] uuid
     #   The identifier of the event source mapping.
@@ -2861,6 +2932,7 @@ module Aws::Lambda
 
     # The size of the function's `/tmp` directory in MB. The default value
     # is 512, but can be any whole number between 512 and 10,240 MB. For
+    # functions that use `AcceleratorConfig`, the maximum is 32,768 MB. For
     # more information, see [Configuring ephemeral storage (console)][1].
     #
     #
@@ -3047,6 +3119,14 @@ module Aws::Lambda
     #   Details about a function invocation that completed.
     #   @return [Types::InvocationCompletedDetails]
     #
+    # @!attribute [rw] execution_paused_details
+    #   The details of an `ExecutionPaused` event.
+    #   @return [Types::ExecutionPausedDetails]
+    #
+    # @!attribute [rw] execution_resumed_details
+    #   The details of an `ExecutionResumed` event.
+    #   @return [Types::ExecutionResumedDetails]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/Event AWS API Documentation
     #
     class Event < Struct.new(
@@ -3080,7 +3160,9 @@ module Aws::Lambda
       :callback_succeeded_details,
       :callback_failed_details,
       :callback_timed_out_details,
-      :invocation_completed_details)
+      :invocation_completed_details,
+      :execution_paused_details,
+      :execution_resumed_details)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3123,6 +3205,29 @@ module Aws::Lambda
       include Aws::Structure
     end
 
+    # The reason for pausing a durable execution, as recorded in the
+    # execution history.
+    #
+    # @!attribute [rw] payload
+    #   The reason that you provided when you paused the execution. This
+    #   field is only present if you set `IncludeExecutionData` to `true` in
+    #   the request.
+    #   @return [String]
+    #
+    # @!attribute [rw] truncated
+    #   Specifies whether Lambda omitted the reason from the response
+    #   because `IncludeExecutionData` is `false`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/EventPauseReason AWS API Documentation
+    #
+    class EventPauseReason < Struct.new(
+      :payload,
+      :truncated)
+      SENSITIVE = [:payload]
+      include Aws::Structure
+    end
+
     # Result information for an event.
     #
     # @!attribute [rw] payload
@@ -3136,6 +3241,29 @@ module Aws::Lambda
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/EventResult AWS API Documentation
     #
     class EventResult < Struct.new(
+      :payload,
+      :truncated)
+      SENSITIVE = [:payload]
+      include Aws::Structure
+    end
+
+    # The reason for resuming a durable execution, as recorded in the
+    # execution history.
+    #
+    # @!attribute [rw] payload
+    #   The reason that you provided when you resumed the execution. This
+    #   field is only present if you set `IncludeExecutionData` to `true` in
+    #   the request.
+    #   @return [String]
+    #
+    # @!attribute [rw] truncated
+    #   Specifies whether Lambda omitted the reason from the response
+    #   because `IncludeExecutionData` is `false`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/EventResumeReason AWS API Documentation
+    #
+    class EventResumeReason < Struct.new(
       :payload,
       :truncated)
       SENSITIVE = [:payload]
@@ -3571,6 +3699,69 @@ module Aws::Lambda
     #
     class ExecutionFailedDetails < Struct.new(
       :error)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details about a [durable execution][1] that paused. The event
+    # timestamp is when the execution paused.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/lambda/latest/dg/durable-functions.html
+    #
+    # @!attribute [rw] pause_request_timestamp
+    #   The date and time when you requested the pause, in [ISO-8601
+    #   format][1] (YYYY-MM-DDThh:mm:ss.sTZD).
+    #
+    #
+    #
+    #   [1]: https://www.w3.org/TR/NOTE-datetime
+    #   @return [Time]
+    #
+    # @!attribute [rw] reason
+    #   The reason that you provided when you paused the execution.
+    #   @return [Types::EventPauseReason]
+    #
+    # @!attribute [rw] execution_timeout_paused
+    #   Specifies whether the pause also paused the execution timeout.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ExecutionPausedDetails AWS API Documentation
+    #
+    class ExecutionPausedDetails < Struct.new(
+      :pause_request_timestamp,
+      :reason,
+      :execution_timeout_paused)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details about a [durable execution][1] that resumed. The event
+    # timestamp is when the execution resumed.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/lambda/latest/dg/durable-functions.html
+    #
+    # @!attribute [rw] resume_request_timestamp
+    #   The date and time when you requested the resume, in [ISO-8601
+    #   format][1] (YYYY-MM-DDThh:mm:ss.sTZD).
+    #
+    #
+    #
+    #   [1]: https://www.w3.org/TR/NOTE-datetime
+    #   @return [Time]
+    #
+    # @!attribute [rw] reason
+    #   The reason that you provided when you resumed the execution.
+    #   @return [Types::EventResumeReason]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ExecutionResumedDetails AWS API Documentation
+    #
+    class ExecutionResumedDetails < Struct.new(
+      :resume_request_timestamp,
+      :reason)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4086,7 +4277,8 @@ module Aws::Lambda
     # @!attribute [rw] ephemeral_storage
     #   The size of the function's `/tmp` directory in MB. The default
     #   value is 512, but can be any whole number between 512 and 10,240 MB.
-    #   For more information, see [Configuring ephemeral storage
+    #   For functions that use `AcceleratorConfig`, the maximum is 32,768
+    #   MB. For more information, see [Configuring ephemeral storage
     #   (console)][1].
     #
     #
@@ -4133,6 +4325,17 @@ module Aws::Lambda
     #   function is configured for durability.
     #   @return [Types::DurableConfig]
     #
+    # @!attribute [rw] runtime_config
+    #   The customer-managed runtime configuration for your function.
+    #   Specifies the customer-managed runtime and the runtime alias that
+    #   your function uses.
+    #   @return [Types::FunctionRuntimeConfig]
+    #
+    # @!attribute [rw] accelerator_config
+    #   The accelerator resource settings for a Lambda execution
+    #   environment.
+    #   @return [Types::AcceleratorConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/FunctionConfiguration AWS API Documentation
     #
     class FunctionConfiguration < Struct.new(
@@ -4175,7 +4378,9 @@ module Aws::Lambda
       :tenancy_config,
       :capacity_provider_config,
       :config_sha_256,
-      :durable_config)
+      :durable_config,
+      :runtime_config,
+      :accelerator_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4229,6 +4434,29 @@ module Aws::Lambda
       :maximum_retry_attempts,
       :maximum_event_age_in_seconds,
       :destination_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The customer-managed runtime configuration for your function.
+    # Specifies the customer-managed runtime and the runtime alias that your
+    # function uses.
+    #
+    # @!attribute [rw] runtime_arn
+    #   The Amazon Resource Name (ARN) of the customer-managed runtime that
+    #   your function uses.
+    #   @return [String]
+    #
+    # @!attribute [rw] runtime_alias
+    #   The name of the customer-managed runtime alias that your function
+    #   uses. A runtime alias is a name that points to a runtime version.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/FunctionRuntimeConfig AWS API Documentation
+    #
+    class FunctionRuntimeConfig < Struct.new(
+      :runtime_arn,
+      :runtime_alias)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4608,8 +4836,28 @@ module Aws::Lambda
     #   @return [Time]
     #
     # @!attribute [rw] status
-    #   The current status of the durable execution. Valid values are
-    #   `RUNNING`, `SUCCEEDED`, `FAILED`, `TIMED_OUT`, and `STOPPED`.
+    #   The durable execution has one of the following statuses:
+    #
+    #   * `RUNNING` – The execution is running or waiting for pending
+    #     operations to complete.
+    #
+    #   * `PAUSING` – The execution is waiting for an in-progress invocation
+    #     to reach its next checkpoint before it pauses.
+    #
+    #   * `PAUSED` – The execution is paused, and Lambda doesn't invoke
+    #     your function.
+    #
+    #   * `SUCCEEDED` – The execution completed successfully.
+    #
+    #   * `FAILED` – The execution completed with an error.
+    #
+    #   * `TIMED_OUT` – The execution exceeded its execution timeout.
+    #
+    #   * `STOPPED` – A `StopDurableExecution` request stopped the
+    #     execution.
+    #
+    #   * `DELETING` – A `DeleteDurableExecution` request is deleting the
+    #     execution and its data.
     #   @return [String]
     #
     # @!attribute [rw] end_timestamp
@@ -4643,6 +4891,20 @@ module Aws::Lambda
     #   including input, output, and error payloads.
     #   @return [Types::DurableConfig]
     #
+    # @!attribute [rw] pause_details
+    #   The details of the pause, including when you requested it and
+    #   whether it pauses the execution timeout. This field is only present
+    #   when the execution status is `PAUSING` or `PAUSED`.
+    #   @return [Types::PauseDetails]
+    #
+    # @!attribute [rw] expected_execution_timeout_timestamp
+    #   The date and time when the durable execution will time out, in Unix
+    #   timestamp format. This value includes any extension from time the
+    #   execution spent paused. While the execution is paused with its
+    #   execution timeout paused, this value is 366 days after the start
+    #   time. This field isn't present for completed executions.
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetDurableExecutionResponse AWS API Documentation
     #
     class GetDurableExecutionResponse < Struct.new(
@@ -4658,7 +4920,9 @@ module Aws::Lambda
       :version,
       :trace_header,
       :execution_data_included,
-      :durable_config)
+      :durable_config,
+      :pause_details,
+      :expected_execution_timeout_timestamp)
       SENSITIVE = [:input_payload, :result]
       include Aws::Structure
     end
@@ -5799,6 +6063,8 @@ module Aws::Lambda
     #   to pass to the function in the context object. Lambda passes the
     #   `ClientContext` object to your function for synchronous invocations
     #   only.
+    #
+    #   `ClientContext` is logged to CloudTrail if you turn on data events.
     #   @return [String]
     #
     # @!attribute [rw] durable_execution_name
@@ -6004,6 +6270,8 @@ module Aws::Lambda
     # @!attribute [rw] client_context
     #   Up to 3,583 bytes of base64-encoded data about the invoking client
     #   to pass to the function in the context object.
+    #
+    #   `ClientContext` is logged to CloudTrail if you turn on data events.
     #   @return [String]
     #
     # @!attribute [rw] qualifier
@@ -6661,8 +6929,29 @@ module Aws::Lambda
     #   @return [String]
     #
     # @!attribute [rw] statuses
-    #   Filter executions by status. Valid values: RUNNING, SUCCEEDED,
-    #   FAILED, TIMED\_OUT, STOPPED.
+    #   Filters the executions by status. Specify one of the following
+    #   values:
+    #
+    #   * `RUNNING` – The execution is running or waiting for pending
+    #     operations to complete.
+    #
+    #   * `PAUSING` – The execution is waiting for an in-progress invocation
+    #     to reach its next checkpoint before it pauses.
+    #
+    #   * `PAUSED` – The execution is paused, and Lambda doesn't invoke
+    #     your function.
+    #
+    #   * `SUCCEEDED` – The execution completed successfully.
+    #
+    #   * `FAILED` – The execution completed with an error.
+    #
+    #   * `TIMED_OUT` – The execution exceeded its execution timeout.
+    #
+    #   * `STOPPED` – A `StopDurableExecution` request stopped the
+    #     execution.
+    #
+    #   * `DELETING` – A `DeleteDurableExecution` request is deleting the
+    #     execution and its data.
     #   @return [Array<String>]
     #
     # @!attribute [rw] started_after
@@ -7655,6 +7944,84 @@ module Aws::Lambda
       SENSITIVE = [:payload]
       include Aws::Structure
     end
+
+    # Details about a [durable execution][1] that is pausing or paused.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/lambda/latest/dg/durable-functions.html
+    #
+    # @!attribute [rw] pause_request_timestamp
+    #   The date and time when you requested the pause, in [ISO-8601
+    #   format][1] (YYYY-MM-DDThh:mm:ss.sTZD).
+    #
+    #
+    #
+    #   [1]: https://www.w3.org/TR/NOTE-datetime
+    #   @return [Time]
+    #
+    # @!attribute [rw] reason
+    #   The reason that you provided when you paused the execution. This
+    #   field is only present if you set `IncludeExecutionData` to `true` in
+    #   the request.
+    #   @return [String]
+    #
+    # @!attribute [rw] execution_timeout_paused
+    #   Specifies whether the pause also pauses the execution timeout.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/PauseDetails AWS API Documentation
+    #
+    class PauseDetails < Struct.new(
+      :pause_request_timestamp,
+      :reason,
+      :execution_timeout_paused)
+      SENSITIVE = [:reason]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] durable_execution_arn
+    #   The Amazon Resource Name (ARN) of the durable execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier that you provide so that the
+    #   request completes no more than one time. If you repeat a request
+    #   with the same client token and parameters within 15 minutes, Lambda
+    #   doesn't pause the execution again and returns a successful response
+    #   instead of an error.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] reason
+    #   A description of why you're pausing the execution. Lambda records
+    #   the reason in the execution history.
+    #   @return [String]
+    #
+    # @!attribute [rw] execution_timeout_paused
+    #   Specifies whether to pause the execution timeout while the execution
+    #   is paused. If `true`, Lambda extends the execution timeout by the
+    #   time the execution spends paused. An execution with a paused timeout
+    #   still times out 366 days after it started. The default value is
+    #   `true`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/PauseDurableExecutionRequest AWS API Documentation
+    #
+    class PauseDurableExecutionRequest < Struct.new(
+      :durable_execution_arn,
+      :client_token,
+      :reason,
+      :execution_timeout_paused)
+      SENSITIVE = [:reason]
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/PauseDurableExecutionResponse AWS API Documentation
+    #
+    class PauseDurableExecutionResponse < Aws::EmptyStructure; end
 
     # The permissions policy for the resource is too large. For more
     # information, see [Lambda quotas][1].
@@ -8762,6 +9129,40 @@ module Aws::Lambda
       include Aws::Structure
     end
 
+    # @!attribute [rw] durable_execution_arn
+    #   The Amazon Resource Name (ARN) of the durable execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier that you provide so that the
+    #   request completes no more than one time. If you repeat a request
+    #   with the same client token and parameters within 15 minutes, Lambda
+    #   doesn't resume the execution again and returns a successful
+    #   response instead of an error.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] reason
+    #   A description of why you're resuming the execution. Lambda records
+    #   the reason in the execution history.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ResumeDurableExecutionRequest AWS API Documentation
+    #
+    class ResumeDurableExecutionRequest < Struct.new(
+      :durable_execution_arn,
+      :client_token,
+      :reason)
+      SENSITIVE = [:reason]
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ResumeDurableExecutionResponse AWS API Documentation
+    #
+    class ResumeDurableExecutionResponse < Aws::EmptyStructure; end
+
     # Information about retry attempts for an operation.
     #
     # @!attribute [rw] current_attempt
@@ -8777,6 +9178,25 @@ module Aws::Lambda
     class RetryDetails < Struct.new(
       :current_attempt,
       :next_attempt_delay_seconds)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The runtime alias for your function is no longer available. Update
+    # your function to use an available runtime alias.
+    #
+    # @!attribute [rw] type
+    #   Indicates the exception type for a deleted runtime alias.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/RuntimeAliasDeletedException AWS API Documentation
+    #
+    class RuntimeAliasDeletedException < Struct.new(
+      :type,
+      :message)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8797,6 +9217,26 @@ module Aws::Lambda
     class RuntimeVersionConfig < Struct.new(
       :runtime_version_arn,
       :error)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The runtime version used by your function is no longer available.
+    # Update your function to use an available runtime version or runtime
+    # alias.
+    #
+    # @!attribute [rw] type
+    #   Indicates the exception type for a deleted runtime version.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/RuntimeVersionDeletedException AWS API Documentation
+    #
+    class RuntimeVersionDeletedException < Struct.new(
+      :type,
+      :message)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8963,11 +9403,37 @@ module Aws::Lambda
     #   Specific configuration settings for a Kafka schema registry.
     #   @return [Types::KafkaSchemaRegistryConfig]
     #
+    # @!attribute [rw] consumption_mode
+    #   The mode that Lambda uses to consume records from your self-managed
+    #   Apache Kafka topic. Valid values are the following:
+    #
+    #   * `Stream` (default) – Lambda consumes records using a Kafka
+    #     consumer group and preserves the order of records within each
+    #     partition.
+    #
+    #   * `Queue` – Lambda consumes records using a Kafka share group.
+    #     Multiple consumers can process records from the same partition
+    #     concurrently, so Lambda doesn't preserve per-partition order. To
+    #     use Queue mode, your cluster must run Apache Kafka version 4.2 or
+    #     later with share groups enabled.
+    #
+    #   If you omit this parameter, Lambda uses `Stream`.
+    #
+    #   You cannot change `ConsumptionMode` after you create the event
+    #   source mapping. To use a different consumption mode, create a new
+    #   event source mapping.
+    #
+    #   When `ConsumptionMode` is `Queue`, the `StartingPosition`,
+    #   `StartingPositionTimestamp`, and `MaximumBatchingWindowInSeconds`
+    #   parameters are not supported.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/SelfManagedKafkaEventSourceConfig AWS API Documentation
     #
     class SelfManagedKafkaEventSourceConfig < Struct.new(
       :consumer_group_id,
-      :schema_registry_config)
+      :schema_registry_config,
+      :consumption_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9922,6 +10388,9 @@ module Aws::Lambda
     #   Related setting: For Kinesis, DynamoDB, and Amazon SQS event
     #   sources, when you set `BatchSize` to a value greater than 10, you
     #   must set `MaximumBatchingWindowInSeconds` to at least 1.
+    #
+    #   Not supported for Kafka event source mappings when `ConsumptionMode`
+    #   is `Queue`.
     #   @return [Integer]
     #
     # @!attribute [rw] parallelization_factor
@@ -9952,6 +10421,12 @@ module Aws::Lambda
     #   Kafka) Discard records after the specified number of retries. The
     #   default value is infinite (-1). When set to infinite (-1), failed
     #   records are retried until the record expires.
+    #
+    #   For Kafka event source mappings with `ConsumptionMode` set to
+    #   `Queue`, the value -1 (infinite retries) is not supported and the
+    #   default is 0 (no retries). Lambda releases failed records back to
+    #   the broker, which redelivers them up to the share group's
+    #   `group.share.delivery.count.limit`.
     #   @return [Integer]
     #
     # @!attribute [rw] tumbling_window_in_seconds
@@ -10171,7 +10646,7 @@ module Aws::Lambda
     # @!attribute [rw] timeout
     #   The amount of time (in seconds) that Lambda allows a function to run
     #   before stopping it. The default is 3 seconds, and the maximum
-    #   allowed value is 900 seconds. For functions using Lambda Managed
+    #   allowed value is 1,800 seconds. For functions using Lambda Managed
     #   Instances, asynchronous invocations and event source mapping
     #   invocations (except Amazon MQ and Amazon DocumentDB) support a
     #   maximum allowed value of 5,400 seconds (90 minutes). For more
@@ -10314,7 +10789,8 @@ module Aws::Lambda
     # @!attribute [rw] ephemeral_storage
     #   The size of the function's `/tmp` directory in MB. The default
     #   value is 512, but can be any whole number between 512 and 10,240 MB.
-    #   For more information, see [Configuring ephemeral storage
+    #   For functions that use `AcceleratorConfig`, the maximum is 32,768
+    #   MB. For more information, see [Configuring ephemeral storage
     #   (console)][1].
     #
     #
@@ -10351,6 +10827,17 @@ module Aws::Lambda
     #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/durable-functions.html
     #   @return [Types::DurableConfig]
     #
+    # @!attribute [rw] runtime_config
+    #   The customer-managed runtime configuration for your function.
+    #   Specifies the customer-managed runtime and the runtime alias that
+    #   your function uses.
+    #   @return [Types::FunctionRuntimeConfig]
+    #
+    # @!attribute [rw] accelerator_config
+    #   The accelerator resource settings for a Lambda execution
+    #   environment.
+    #   @return [Types::AcceleratorConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UpdateFunctionConfigurationRequest AWS API Documentation
     #
     class UpdateFunctionConfigurationRequest < Struct.new(
@@ -10374,7 +10861,9 @@ module Aws::Lambda
       :snap_start,
       :logging_config,
       :capacity_provider_config,
-      :durable_config)
+      :durable_config,
+      :runtime_config,
+      :accelerator_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10683,7 +11172,7 @@ module Aws::Lambda
       include Aws::Structure
     end
 
-    # Specifies how long to pause the durable execution.
+    # Specifies how long the durable execution waits.
     #
     # @!attribute [rw] wait_seconds
     #   The duration to wait, in seconds.

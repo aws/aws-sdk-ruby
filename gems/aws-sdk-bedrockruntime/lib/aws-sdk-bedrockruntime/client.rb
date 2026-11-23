@@ -274,7 +274,8 @@ module Aws::BedrockRuntime
     #     An integer representing the maximum number attempts that will be made for
     #     a single request, including the initial attempt.  For example,
     #     setting this value to 5 will result in a request being retried up to
-    #     4 times. Used in `standard` and `adaptive` retry modes.
+    #     4 times. Used in `standard` and `adaptive` retry modes. Defaults to 3,
+    #     except for DynamoDB and DynamoDB Streams, which default to 4.
     #
     #   @option options [Proc] :output_event_stream_handler
     #     When an EventStream or Proc object is provided, it will be used as callback for each chunk of event stream response received along the way.
@@ -340,15 +341,15 @@ module Aws::BedrockRuntime
     #     used by the default backoff function. This option is only used in the
     #     `legacy` retry mode.
     #
-    #   @option options [String] :retry_mode ("legacy")
+    #   @option options [String] :retry_mode ("standard")
     #     Specifies which retry algorithm to use. Values are:
     #
-    #     * `legacy` - The pre-existing retry behavior. This is the default
-    #       value if no retry mode is provided.
+    #     * `legacy` - The pre-existing retry behavior.
     #
     #     * `standard` - A standardized set of retry rules across the AWS SDKs.
     #       This includes support for retry quotas, which limit the number of
-    #       unsuccessful retries a client can make.
+    #       unsuccessful retries a client can make. This is the default value
+    #       if no retry mode is provided.
     #
     #     * `adaptive` - A retry mode that includes all the functionality of
     #       `standard` mode along with automatic client side throttling.
@@ -759,8 +760,8 @@ module Aws::BedrockRuntime
     # different models. If a model has unique inference parameters, you can
     # also pass those unique parameters to the model.
     #
-    # Amazon Bedrock doesn't store any text, images, or documents that you
-    # provide as content. The data is only used to generate the response.
+    # Data retention for this request depends on the applicable account or
+    # project configuration and the model's data retention policy.
     #
     # You can submit a prompt by including it in the `messages` field,
     # specifying the `modelId` of a foundation model or inference profile to
@@ -787,7 +788,9 @@ module Aws::BedrockRuntime
     # User Guide*.
     #
     # This operation requires permission for the `bedrock:InvokeModel`
-    # action.
+    # action on both the inference target and the project. If you omit
+    # `projectIdentifier` or specify `default`, this includes permission on
+    # the default project for your account.
     #
     # To deny all inference access to resources that you specify in the
     # modelId field, you need to deny access to the `bedrock:InvokeModel`
@@ -877,6 +880,16 @@ module Aws::BedrockRuntime
     #   messages. If you include no `guardContent` blocks, the guardrail
     #   operates on all messages in the request body and in any included
     #   prompt resource.
+    #
+    # @option params [String] :project_identifier
+    #   The ID or Amazon Resource Name (ARN) of the project to use for this
+    #   invocation. The project must be active and belong to your AWS account
+    #   and the AWS Region to which you send the request. Specify `default` or
+    #   omit this field to use the default project for your account.
+    #
+    #   For a non-default project, the inference target must resolve to a
+    #   foundation model or system-defined inference profile. Application
+    #   inference profiles don't support non-default projects.
     #
     # @option params [Hash,Array,String,Numeric,Boolean] :additional_model_request_fields
     #   Additional inference parameters that the model supports, beyond the
@@ -1245,6 +1258,7 @@ module Aws::BedrockRuntime
     #       guardrail_version: "GuardrailVersion",
     #       trace: "enabled", # accepts enabled, disabled, enabled_full
     #     },
+    #     project_identifier: "ProjectIdentifier",
     #     additional_model_request_fields: {
     #     },
     #     prompt_variables: {
@@ -1755,8 +1769,8 @@ module Aws::BedrockRuntime
     #
     #  </note>
     #
-    # Amazon Bedrock doesn't store any text, images, or documents that you
-    # provide as content. The data is only used to generate the response.
+    # Data retention for this request depends on the applicable account or
+    # project configuration and the model's data retention policy.
     #
     # You can submit a prompt by including it in the `messages` field,
     # specifying the `modelId` of a foundation model or inference profile to
@@ -1783,7 +1797,10 @@ module Aws::BedrockRuntime
     # Bedrock User Guide*.
     #
     # This operation requires permission for the
-    # `bedrock:InvokeModelWithResponseStream` action.
+    # `bedrock:InvokeModelWithResponseStream` action on both the inference
+    # target and the project. If you omit `projectIdentifier` or specify
+    # `default`, this includes permission on the default project for your
+    # account.
     #
     # To deny all inference access to resources that you specify in the
     # modelId field, you need to deny access to the `bedrock:InvokeModel`
@@ -1874,6 +1891,16 @@ module Aws::BedrockRuntime
     #   messages. If you include no `guardContent` blocks, the guardrail
     #   operates on all messages in the request body and in any included
     #   prompt resource.
+    #
+    # @option params [String] :project_identifier
+    #   The ID or Amazon Resource Name (ARN) of the project to use for this
+    #   invocation. The project must be active and belong to your AWS account
+    #   and the AWS Region to which you send the request. Specify `default` or
+    #   omit this field to use the default project for your account.
+    #
+    #   For a non-default project, the inference target must resolve to a
+    #   foundation model or system-defined inference profile. Application
+    #   inference profiles don't support non-default projects.
     #
     # @option params [Hash,Array,String,Numeric,Boolean] :additional_model_request_fields
     #   Additional inference parameters that the model supports, beyond the
@@ -2415,6 +2442,7 @@ module Aws::BedrockRuntime
     #       trace: "enabled", # accepts enabled, disabled, enabled_full
     #       stream_processing_mode: "sync", # accepts sync, async
     #     },
+    #     project_identifier: "ProjectIdentifier",
     #     additional_model_request_fields: {
     #     },
     #     prompt_variables: {
@@ -3409,7 +3437,9 @@ module Aws::BedrockRuntime
     # Bedrock User Guide*.
     #
     # This operation requires permission for the `bedrock:InvokeModel`
-    # action.
+    # action on both the inference target and the project. If you omit
+    # `projectIdentifier` or specify `default`, this includes permission on
+    # the default project for your account.
     #
     # To deny all inference access to resources that you specify in the
     # modelId field, you need to deny access to the `bedrock:InvokeModel`
@@ -3518,6 +3548,16 @@ module Aws::BedrockRuntime
     # @option params [String] :request_metadata
     #   Key-value pairs that you can use to filter invocation logs.
     #
+    # @option params [String] :project_identifier
+    #   The ID or Amazon Resource Name (ARN) of the project to use for this
+    #   invocation. The project must be active and belong to your AWS account
+    #   and the AWS Region to which you send the request. Specify `default` or
+    #   omit this field to use the default project for your account.
+    #
+    #   For a non-default project, the inference target must resolve to a
+    #   foundation model or system-defined inference profile. Application
+    #   inference profiles don't support non-default projects.
+    #
     # @return [Types::InvokeModelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::InvokeModelResponse#body #body} => String
@@ -3538,6 +3578,7 @@ module Aws::BedrockRuntime
     #     performance_config_latency: "standard", # accepts standard, optimized
     #     service_tier: "priority", # accepts priority, default, flex, reserved
     #     request_metadata: "RequestMetadataJson",
+    #     project_identifier: "ProjectIdentifier",
     #   })
     #
     # @example Response structure
@@ -3571,8 +3612,11 @@ module Aws::BedrockRuntime
     # For example code, see *Invoke model with streaming code example* in
     # the *Amazon Bedrock User Guide*.
     #
-    # This operation requires permissions to perform the
-    # `bedrock:InvokeModelWithResponseStream` action.
+    # This operation requires permission for the
+    # `bedrock:InvokeModelWithResponseStream` action on both the inference
+    # target and the project. If you omit `projectIdentifier` or specify
+    # `default`, this includes permission on the default project for your
+    # account.
     #
     # To deny all inference access to resources that you specify in the
     # modelId field, you need to deny access to the `bedrock:InvokeModel`
@@ -3681,6 +3725,16 @@ module Aws::BedrockRuntime
     #
     # @option params [String] :request_metadata
     #   Key-value pairs that you can use to filter invocation logs.
+    #
+    # @option params [String] :project_identifier
+    #   The ID or Amazon Resource Name (ARN) of the project to use for this
+    #   invocation. The project must be active and belong to your AWS account
+    #   and the AWS Region to which you send the request. Specify `default` or
+    #   omit this field to use the default project for your account.
+    #
+    #   For a non-default project, the inference target must resolve to a
+    #   foundation model or system-defined inference profile. Application
+    #   inference profiles don't support non-default projects.
     #
     # @return [Types::InvokeModelWithResponseStreamResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3845,6 +3899,7 @@ module Aws::BedrockRuntime
     #     performance_config_latency: "standard", # accepts standard, optimized
     #     service_tier: "priority", # accepts priority, default, flex, reserved
     #     request_metadata: "RequestMetadataJson",
+    #     project_identifier: "ProjectIdentifier",
     #   })
     #
     # @example Response structure
@@ -4073,7 +4128,7 @@ module Aws::BedrockRuntime
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrockruntime'
-      context[:gem_version] = '1.90.0'
+      context[:gem_version] = '1.98.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

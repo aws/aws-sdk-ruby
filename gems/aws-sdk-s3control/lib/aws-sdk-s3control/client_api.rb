@@ -218,6 +218,8 @@ module Aws::S3Control
     IdentityCenterApplicationArn = Shapes::StringShape.new(name: 'IdentityCenterApplicationArn')
     IdentityCenterArn = Shapes::StringShape.new(name: 'IdentityCenterArn')
     Include = Shapes::StructureShape.new(name: 'Include')
+    InstanceScope = Shapes::StringShape.new(name: 'InstanceScope')
+    IntAccessTiers = Shapes::StructureShape.new(name: 'IntAccessTiers')
     InternalServiceException = Shapes::StructureShape.new(name: 'InternalServiceException')
     InvalidNextTokenException = Shapes::StructureShape.new(name: 'InvalidNextTokenException')
     InvalidRequestException = Shapes::StructureShape.new(name: 'InvalidRequestException')
@@ -513,6 +515,11 @@ module Aws::S3Control
     StorageLensAwsOrg = Shapes::StructureShape.new(name: 'StorageLensAwsOrg')
     StorageLensConfiguration = Shapes::StructureShape.new(name: 'StorageLensConfiguration')
     StorageLensConfigurationList = Shapes::ListShape.new(name: 'StorageLensConfigurationList', flattened: true)
+    StorageLensCostAndUsageReportsMaxDepth = Shapes::IntegerShape.new(name: 'StorageLensCostAndUsageReportsMaxDepth')
+    StorageLensCostAndUsageReportsMinDepth = Shapes::IntegerShape.new(name: 'StorageLensCostAndUsageReportsMinDepth')
+    StorageLensCostAndUsageReportsPrefixLevel = Shapes::StructureShape.new(name: 'StorageLensCostAndUsageReportsPrefixLevel')
+    StorageLensCostAndUsageReportsPublish = Shapes::StructureShape.new(name: 'StorageLensCostAndUsageReportsPublish')
+    StorageLensCostAndUsageReportsSelectionCriteria = Shapes::StructureShape.new(name: 'StorageLensCostAndUsageReportsSelectionCriteria')
     StorageLensDataExport = Shapes::StructureShape.new(name: 'StorageLensDataExport')
     StorageLensDataExportEncryption = Shapes::StructureShape.new(name: 'StorageLensDataExportEncryption')
     StorageLensExpandedPrefixesDataExport = Shapes::StructureShape.new(name: 'StorageLensExpandedPrefixesDataExport')
@@ -1118,11 +1125,13 @@ module Aws::S3Control
     GetDataAccessRequest.add_member(:privilege, Shapes::ShapeRef.new(shape: Privilege, location: "querystring", location_name: "privilege"))
     GetDataAccessRequest.add_member(:target_type, Shapes::ShapeRef.new(shape: S3PrefixType, location: "querystring", location_name: "targetType"))
     GetDataAccessRequest.add_member(:audit_context, Shapes::ShapeRef.new(shape: AuditContext, location: "querystring", location_name: "auditContext"))
+    GetDataAccessRequest.add_member(:instance_scope, Shapes::ShapeRef.new(shape: InstanceScope, location: "querystring", location_name: "instanceScope"))
     GetDataAccessRequest.struct_class = Types::GetDataAccessRequest
 
     GetDataAccessResult.add_member(:credentials, Shapes::ShapeRef.new(shape: Credentials, location_name: "Credentials"))
     GetDataAccessResult.add_member(:matched_grant_target, Shapes::ShapeRef.new(shape: S3Prefix, location_name: "MatchedGrantTarget"))
     GetDataAccessResult.add_member(:grantee, Shapes::ShapeRef.new(shape: Grantee, location_name: "Grantee"))
+    GetDataAccessResult.add_member(:matched_instance_arn, Shapes::ShapeRef.new(shape: AccessGrantsInstanceArn, location_name: "MatchedInstanceArn"))
     GetDataAccessResult.struct_class = Types::GetDataAccessResult
 
     GetJobTaggingRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-account-id", metadata: {"contextParam" => {"name" => "AccountId"}}))
@@ -1204,6 +1213,9 @@ module Aws::S3Control
     Include.add_member(:buckets, Shapes::ShapeRef.new(shape: Buckets, location_name: "Buckets"))
     Include.add_member(:regions, Shapes::ShapeRef.new(shape: Regions, location_name: "Regions"))
     Include.struct_class = Types::Include
+
+    IntAccessTiers.add_member(:is_enabled, Shapes::ShapeRef.new(shape: IsEnabled, location_name: "IsEnabled"))
+    IntAccessTiers.struct_class = Types::IntAccessTiers
 
     InternalServiceException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
     InternalServiceException.struct_class = Types::InternalServiceException
@@ -1456,6 +1468,7 @@ module Aws::S3Control
     ListCallerAccessGrantsEntry.add_member(:permission, Shapes::ShapeRef.new(shape: Permission, location_name: "Permission"))
     ListCallerAccessGrantsEntry.add_member(:grant_scope, Shapes::ShapeRef.new(shape: S3Prefix, location_name: "GrantScope"))
     ListCallerAccessGrantsEntry.add_member(:application_arn, Shapes::ShapeRef.new(shape: IdentityCenterApplicationArn, location_name: "ApplicationArn"))
+    ListCallerAccessGrantsEntry.add_member(:access_grants_instance_arn, Shapes::ShapeRef.new(shape: AccessGrantsInstanceArn, location_name: "AccessGrantsInstanceArn"))
     ListCallerAccessGrantsEntry.struct_class = Types::ListCallerAccessGrantsEntry
 
     ListCallerAccessGrantsRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-account-id", metadata: {"contextParam" => {"name" => "AccountId"}}))
@@ -1463,6 +1476,7 @@ module Aws::S3Control
     ListCallerAccessGrantsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: ContinuationToken, location: "querystring", location_name: "nextToken"))
     ListCallerAccessGrantsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListCallerAccessGrantsRequest.add_member(:allowed_by_application, Shapes::ShapeRef.new(shape: Boolean, location: "querystring", location_name: "allowedByApplication"))
+    ListCallerAccessGrantsRequest.add_member(:instance_scope, Shapes::ShapeRef.new(shape: InstanceScope, location: "querystring", location_name: "instanceScope"))
     ListCallerAccessGrantsRequest.struct_class = Types::ListCallerAccessGrantsRequest
 
     ListCallerAccessGrantsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: ContinuationToken, location_name: "NextToken"))
@@ -2029,13 +2043,26 @@ module Aws::S3Control
     StorageLensConfiguration.add_member(:exclude, Shapes::ShapeRef.new(shape: Exclude, location_name: "Exclude"))
     StorageLensConfiguration.add_member(:data_export, Shapes::ShapeRef.new(shape: StorageLensDataExport, location_name: "DataExport"))
     StorageLensConfiguration.add_member(:expanded_prefixes_data_export, Shapes::ShapeRef.new(shape: StorageLensExpandedPrefixesDataExport, location_name: "ExpandedPrefixesDataExport"))
+    StorageLensConfiguration.add_member(:cost_and_usage_reports_publish, Shapes::ShapeRef.new(shape: StorageLensCostAndUsageReportsPublish, location_name: "CostAndUsageReportsPublish"))
     StorageLensConfiguration.add_member(:is_enabled, Shapes::ShapeRef.new(shape: IsEnabled, required: true, location_name: "IsEnabled"))
     StorageLensConfiguration.add_member(:aws_org, Shapes::ShapeRef.new(shape: StorageLensAwsOrg, location_name: "AwsOrg"))
     StorageLensConfiguration.add_member(:storage_lens_arn, Shapes::ShapeRef.new(shape: StorageLensArn, location_name: "StorageLensArn"))
     StorageLensConfiguration.add_member(:prefix_delimiter, Shapes::ShapeRef.new(shape: StorageLensPrefixLevelDelimiter, location_name: "PrefixDelimiter"))
+    StorageLensConfiguration.add_member(:int_access_tiers, Shapes::ShapeRef.new(shape: IntAccessTiers, location_name: "IntAccessTiers"))
     StorageLensConfiguration.struct_class = Types::StorageLensConfiguration
 
     StorageLensConfigurationList.member = Shapes::ShapeRef.new(shape: ListStorageLensConfigurationEntry, location_name: "StorageLensConfiguration")
+
+    StorageLensCostAndUsageReportsPrefixLevel.add_member(:is_enabled, Shapes::ShapeRef.new(shape: IsEnabled, required: true, location_name: "IsEnabled"))
+    StorageLensCostAndUsageReportsPrefixLevel.add_member(:selection_criteria, Shapes::ShapeRef.new(shape: StorageLensCostAndUsageReportsSelectionCriteria, location_name: "SelectionCriteria"))
+    StorageLensCostAndUsageReportsPrefixLevel.struct_class = Types::StorageLensCostAndUsageReportsPrefixLevel
+
+    StorageLensCostAndUsageReportsPublish.add_member(:prefix_level, Shapes::ShapeRef.new(shape: StorageLensCostAndUsageReportsPrefixLevel, location_name: "PrefixLevel"))
+    StorageLensCostAndUsageReportsPublish.struct_class = Types::StorageLensCostAndUsageReportsPublish
+
+    StorageLensCostAndUsageReportsSelectionCriteria.add_member(:min_depth, Shapes::ShapeRef.new(shape: StorageLensCostAndUsageReportsMinDepth, location_name: "MinDepth"))
+    StorageLensCostAndUsageReportsSelectionCriteria.add_member(:max_depth, Shapes::ShapeRef.new(shape: StorageLensCostAndUsageReportsMaxDepth, location_name: "MaxDepth"))
+    StorageLensCostAndUsageReportsSelectionCriteria.struct_class = Types::StorageLensCostAndUsageReportsSelectionCriteria
 
     StorageLensDataExport.add_member(:s3_bucket_destination, Shapes::ShapeRef.new(shape: S3BucketDestination, location_name: "S3BucketDestination"))
     StorageLensDataExport.add_member(:cloud_watch_metrics, Shapes::ShapeRef.new(shape: CloudWatchMetrics, location_name: "CloudWatchMetrics"))

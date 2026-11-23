@@ -434,6 +434,7 @@ module Aws::IAM
     #     assume_role_policy_document: "policyDocumentType", # required
     #     description: "roleDescriptionType",
     #     max_session_duration: 1,
+    #     max_signin_session_duration: 1,
     #     permissions_boundary: "arnType",
     #     tags: [
     #       {
@@ -525,6 +526,14 @@ module Aws::IAM
     #
     #
     #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html
+    # @option options [Integer] :max_signin_session_duration
+    #   The maximum duration (in seconds) of an Amazon Web Services Sign-In
+    #   session for users who sign in with this role. This setting can have a
+    #   value from 1 hour (3600 seconds) to 90 days (7776000 seconds),
+    #   inclusive. If you do not specify a value, the setting remains unset
+    #   and the existing sign-in session behavior applies.
+    #
+    #   This setting is independent of `MaxSessionDuration`.
     # @option options [String] :permissions_boundary
     #   The ARN of the managed policy that is used to set the permissions
     #   boundary for the role.
@@ -582,6 +591,18 @@ module Aws::IAM
     #     ],
     #     assertion_encryption_mode: "Required", # accepts Required, Allowed
     #     add_private_key: "privateKeyType",
+    #     context_provider: {
+    #       key_definition_list: [
+    #         {
+    #           source_key: "contextProviderSourceKeyType", # required
+    #           target_key: "contextProviderTargetKeyType",
+    #         },
+    #       ],
+    #       subject_source_key: "contextProviderSourceKeyType", # required
+    #       subject_type_value: "subjectTypeValueType",
+    #       subject_type_source_key: "contextProviderSourceKeyType",
+    #     },
+    #     identity_center_instance_arn: "identityCenterInstanceArnType",
     #   })
     # @param [Hash] options ({})
     # @option options [required, String] :saml_metadata_document
@@ -630,6 +651,28 @@ module Aws::IAM
     #   The private key generated from your external identity provider. The
     #   private key must be a .pem file that uses AES-GCM or AES-CBC
     #   encryption algorithm to decrypt SAML assertions.
+    # @option options [Types::ContextProvider] :context_provider
+    #   The trusted identity propagation context provider configuration to
+    #   associate with the SAML provider. The context provider defines how the
+    #   subject is derived and how keys from the provider's SAML assertion
+    #   are mapped into trusted context keys. Specifying a context provider
+    #   enables trusted identity propagation for the provider. For more
+    #   information, see [ContextProvider][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_ContextProvider.html
+    # @option options [String] :identity_center_instance_arn
+    #   The Amazon Resource Name (ARN) of the IAM Identity Center instance to
+    #   associate with the SAML provider. If you specify this parameter, you
+    #   must also specify `ContextProvider`.
+    #
+    #   For the format, see [InstanceMetadata][1] in the *IAM Identity Center
+    #   API Reference*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/singlesignon/latest/APIReference/API_InstanceMetadata.html
     # @return [SamlProvider]
     def create_saml_provider(options = {})
       resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do

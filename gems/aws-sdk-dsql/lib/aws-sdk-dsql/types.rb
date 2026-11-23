@@ -105,6 +105,13 @@ module Aws::DSQL
     #   defines access permissions for the cluster.
     #   @return [String]
     #
+    # @!attribute [rw] metric_groups
+    #   The metric groups to enable for advanced monitoring on the cluster.
+    #   Advanced monitoring collects detailed, query-level database metrics
+    #   to help you analyze and resolve performance issues. If you omit this
+    #   parameter, no metric groups are enabled.
+    #   @return [Array<Types::MetricGroupRequest>]
+    #
     # @!attribute [rw] bypass_policy_lockout_safety_check
     #   An optional field that controls whether to bypass the lockout
     #   prevention check. When set to true, this parameter allows you to
@@ -121,6 +128,7 @@ module Aws::DSQL
       :client_token,
       :multi_region_properties,
       :policy,
+      :metric_groups,
       :bypass_policy_lockout_safety_check)
       SENSITIVE = []
       include Aws::Structure
@@ -163,6 +171,11 @@ module Aws::DSQL
     #   The connection endpoint for the created cluster.
     #   @return [String]
     #
+    # @!attribute [rw] metric_groups
+    #   The metric groups that you enabled for advanced monitoring on the
+    #   created cluster.
+    #   @return [Array<Types::MetricGroupResponse>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dsql-2018-05-10/CreateClusterOutput AWS API Documentation
     #
     class CreateClusterOutput < Struct.new(
@@ -173,7 +186,8 @@ module Aws::DSQL
       :multi_region_properties,
       :encryption_details,
       :deletion_protection_enabled,
-      :endpoint)
+      :endpoint,
+      :metric_groups)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -511,6 +525,12 @@ module Aws::DSQL
     #   The connection endpoint for the cluster.
     #   @return [String]
     #
+    # @!attribute [rw] metric_groups
+    #   The metric groups that you enabled for advanced monitoring on the
+    #   cluster. If you haven't enabled any metric groups, the list is
+    #   empty.
+    #   @return [Array<Types::MetricGroupResponse>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dsql-2018-05-10/GetClusterOutput AWS API Documentation
     #
     class GetClusterOutput < Struct.new(
@@ -522,7 +542,8 @@ module Aws::DSQL
       :multi_region_properties,
       :tags,
       :encryption_details,
-      :endpoint)
+      :endpoint,
+      :metric_groups)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -812,6 +833,34 @@ module Aws::DSQL
     #
     class ListTagsForResourceOutput < Struct.new(
       :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A metric group to enable for advanced monitoring.
+    #
+    # @!attribute [rw] metric_group
+    #   The name of the metric group to enable.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dsql-2018-05-10/MetricGroupRequest AWS API Documentation
+    #
+    class MetricGroupRequest < Struct.new(
+      :metric_group)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A metric group that you enabled for advanced monitoring on a cluster.
+    #
+    # @!attribute [rw] metric_group
+    #   The name of the metric group that you enabled.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dsql-2018-05-10/MetricGroupResponse AWS API Documentation
+    #
+    class MetricGroupResponse < Struct.new(
+      :metric_group)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1126,6 +1175,16 @@ module Aws::DSQL
     #   during an update operation.
     #   @return [Types::MultiRegionProperties]
     #
+    # @!attribute [rw] metric_groups
+    #   The complete set of metric groups to enable for advanced monitoring
+    #   on the cluster. This list replaces the current set, so any metric
+    #   group that you don't include is disabled. To disable all metric
+    #   groups, specify an empty list (`[]`). If you omit this parameter,
+    #   the current setting doesn't change.
+    #
+    #   To view the metric groups enabled on a cluster, use *GetCluster*.
+    #   @return [Array<Types::MetricGroupRequest>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dsql-2018-05-10/UpdateClusterInput AWS API Documentation
     #
     class UpdateClusterInput < Struct.new(
@@ -1133,7 +1192,8 @@ module Aws::DSQL
       :deletion_protection_enabled,
       :kms_encryption_key,
       :client_token,
-      :multi_region_properties)
+      :multi_region_properties,
+      :metric_groups)
       SENSITIVE = []
       include Aws::Structure
     end

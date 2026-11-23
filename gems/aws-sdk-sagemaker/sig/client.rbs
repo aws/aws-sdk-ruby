@@ -93,6 +93,23 @@ module Aws
                            ) -> _AddAssociationResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AddAssociationResponseSuccess
 
+      interface _AddInferenceGatewayResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AddInferenceGatewayResponse]
+        def arn: () -> ::String
+        def id: () -> ::String
+        def name: () -> ::String
+        def gateway: () -> Types::GlobalInferenceGatewayMember
+        def status: () -> ("ADDING" | "ACTIVE" | "REMOVING" | "FAILED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMaker/Client.html#add_inference_gateway-instance_method
+      def add_inference_gateway: (
+                                   identifier: ::String,
+                                   cluster_arn: ::String,
+                                   namespace: ::String,
+                                   name: ::String
+                                 ) -> _AddInferenceGatewayResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AddInferenceGatewayResponseSuccess
+
       interface _AddTagsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::AddTagsOutput]
         def tags: () -> ::Array[Types::Tag]
@@ -814,6 +831,26 @@ module Aws
                           ) -> _CreateClusterResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateClusterResponseSuccess
 
+      interface _CreateClusterExtensionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateClusterExtensionResponse]
+        def extension_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMaker/Client.html#create_cluster_extension-instance_method
+      def create_cluster_extension: (
+                                      cluster_arn: ::String,
+                                      extension_name: ::String,
+                                      ?extension_version: ::String,
+                                      ?configuration_values: ::String,
+                                      ?tags: Array[
+                                        {
+                                          key: ::String,
+                                          value: ::String
+                                        }
+                                      ],
+                                      ?client_token: ::String
+                                    ) -> _CreateClusterExtensionResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateClusterExtensionResponseSuccess
+
       interface _CreateClusterSchedulerConfigResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateClusterSchedulerConfigResponse]
         def cluster_scheduler_config_arn: () -> ::String
@@ -1234,6 +1271,10 @@ module Aws
                                       enable_enhanced_metrics: bool?,
                                       enable_detailed_observability: bool?,
                                       metric_publish_frequency_in_seconds: ::Integer?
+                                    },
+                                    ?cross_region_traffic_config: {
+                                      max_invocations_per_second_per_instance: ::Integer,
+                                      max_cross_region_percent_per_endpoint: ::Integer
                                     }
                                   ) -> _CreateEndpointConfigResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateEndpointConfigResponseSuccess
@@ -1354,6 +1395,38 @@ module Aws
                                     ]
                                   ) -> _CreateFlowDefinitionResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateFlowDefinitionResponseSuccess
+
+      interface _CreateGlobalInferenceGatewayResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateGlobalInferenceGatewayResponse]
+        def arn: () -> ::String
+        def id: () -> ::String
+        def name: () -> ::String
+        def status: () -> ("CREATING" | "ACTIVE" | "UPDATING" | "DELETING" | "FAILED")
+        def execution_role_arn: () -> ::String
+        def routing: () -> Types::GlobalInferenceGatewayRouting
+        def gateways: () -> ::Array[Types::GlobalInferenceGatewayMember]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMaker/Client.html#create_global_inference_gateway-instance_method
+      def create_global_inference_gateway: (
+                                             name: ::String,
+                                             ?routing: Params::global_inference_gateway_routing,
+                                             execution_role_arn: ::String,
+                                             gateways: Array[
+                                               {
+                                                 name: ::String,
+                                                 namespace: ::String,
+                                                 cluster_arn: ::String
+                                               }
+                                             ],
+                                             ?client_token: ::String,
+                                             ?tags: Array[
+                                               {
+                                                 key: ::String,
+                                                 value: ::String
+                                               }
+                                             ]
+                                           ) -> _CreateGlobalInferenceGatewayResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateGlobalInferenceGatewayResponseSuccess
 
       interface _CreateHubResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateHubResponse]
@@ -1702,6 +1775,26 @@ module Aws
                                                 ) -> _CreateInferenceRecommendationsJobResponseSuccess
                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateInferenceRecommendationsJobResponseSuccess
 
+      interface _CreateInferenceRouterResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateInferenceRouterOutput]
+        def inference_router_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMaker/Client.html#create_inference_router-instance_method
+      def create_inference_router: (
+                                     inference_router_name: ::String,
+                                     routing_targets: Array[
+                                       Params::routing_target
+                                     ],
+                                     ?client_token: ::String,
+                                     ?tags: Array[
+                                       {
+                                         key: ::String,
+                                         value: ::String
+                                       }
+                                     ]
+                                   ) -> _CreateInferenceRouterResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateInferenceRouterResponseSuccess
+
       interface _CreateJobResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateJobResponse]
         def job_arn: () -> ::String
@@ -1710,7 +1803,7 @@ module Aws
       def create_job: (
                         job_name: ::String,
                         role_arn: ::String,
-                        job_category: ("AgentRFT" | "AgentRFTEvaluation"),
+                        job_category: ("AgentRFT" | "SyntheticDataGeneration" | "DataQualityEvaluation" | "AgentRFTEvaluation" | "DataTransformation"),
                         job_config_schema_version: ::String,
                         job_config_document: ::String,
                         ?tags: Array[
@@ -2445,7 +2538,8 @@ module Aws
                              ],
                              ?parallelism_configuration: {
                                max_parallel_execution_steps: ::Integer
-                             }
+                             },
+                             ?pipeline_version_aliases: Array[::String]
                            ) -> _CreatePipelineResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreatePipelineResponseSuccess
 
@@ -3179,6 +3273,17 @@ module Aws
                           ) -> _DeleteClusterResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteClusterResponseSuccess
 
+      interface _DeleteClusterExtensionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteClusterExtensionResponse]
+        def extension_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMaker/Client.html#delete_cluster_extension-instance_method
+      def delete_cluster_extension: (
+                                      cluster_arn: ::String,
+                                      extension_arn: ::String
+                                    ) -> _DeleteClusterExtensionResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteClusterExtensionResponseSuccess
+
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMaker/Client.html#delete_cluster_scheduler_config-instance_method
       def delete_cluster_scheduler_config: (
                                              cluster_scheduler_config_id: ::String
@@ -3259,6 +3364,15 @@ module Aws
                                   ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 
+      interface _DeleteEndpointPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteEndpointPolicyResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMaker/Client.html#delete_endpoint_policy-instance_method
+      def delete_endpoint_policy: (
+                                    endpoint_name: ::String
+                                  ) -> _DeleteEndpointPolicyResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteEndpointPolicyResponseSuccess
+
       interface _DeleteExperimentResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteExperimentResponse]
         def experiment_arn: () -> ::String
@@ -3283,6 +3397,18 @@ module Aws
                                     flow_definition_name: ::String
                                   ) -> _DeleteFlowDefinitionResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteFlowDefinitionResponseSuccess
+
+      interface _DeleteGlobalInferenceGatewayResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteGlobalInferenceGatewayResponse]
+        def arn: () -> ::String
+        def id: () -> ::String
+        def name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMaker/Client.html#delete_global_inference_gateway-instance_method
+      def delete_global_inference_gateway: (
+                                             identifier: ::String
+                                           ) -> _DeleteGlobalInferenceGatewayResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteGlobalInferenceGatewayResponseSuccess
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMaker/Client.html#delete_hub-instance_method
       def delete_hub: (
@@ -3358,13 +3484,19 @@ module Aws
                                        ) -> _DeleteInferenceExperimentResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteInferenceExperimentResponseSuccess
 
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMaker/Client.html#delete_inference_router-instance_method
+      def delete_inference_router: (
+                                     inference_router_name: ::String
+                                   ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
       interface _DeleteJobResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteJobResponse]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMaker/Client.html#delete_job-instance_method
       def delete_job: (
                         job_name: ::String,
-                        job_category: ("AgentRFT" | "AgentRFTEvaluation")
+                        job_category: ("AgentRFT" | "SyntheticDataGeneration" | "DataQualityEvaluation" | "AgentRFTEvaluation" | "DataTransformation")
                       ) -> _DeleteJobResponseSuccess
                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteJobResponseSuccess
 
@@ -3817,6 +3949,16 @@ module Aws
                                    ) -> _DescribeAutoMLJobV2ResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeAutoMLJobV2ResponseSuccess
 
+      interface _DescribeCapacityReservationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeCapacityReservationResponse]
+        def capacity_reservation: () -> Types::CapacityReservationDetail
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMaker/Client.html#describe_capacity_reservation-instance_method
+      def describe_capacity_reservation: (
+                                           sm_capacity_reservation_arn: ::String
+                                         ) -> _DescribeCapacityReservationResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeCapacityReservationResponseSuccess
+
       interface _DescribeClusterResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeClusterResponse]
         def cluster_arn: () -> ::String
@@ -3852,6 +3994,19 @@ module Aws
                                   ) -> _DescribeClusterEventResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeClusterEventResponseSuccess
 
+      interface _DescribeClusterExtensionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeClusterExtensionResponse]
+        def extension_details: () -> Types::ExtensionDetails
+        def node_summary: () -> Types::ExtensionNodeSummary
+        def health: () -> Types::ExtensionHealth
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMaker/Client.html#describe_cluster_extension-instance_method
+      def describe_cluster_extension: (
+                                        cluster_arn: ::String,
+                                        extension_arn: ::String
+                                      ) -> _DescribeClusterExtensionResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeClusterExtensionResponseSuccess
+
       interface _DescribeClusterNodeResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeClusterNodeResponse]
         def node_details: () -> Types::ClusterNodeDetails
@@ -3863,6 +4018,23 @@ module Aws
                                    ?node_logical_id: ::String
                                  ) -> _DescribeClusterNodeResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeClusterNodeResponseSuccess
+
+      interface _DescribeClusterOperationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeClusterOperationResponse]
+        def operation_id: () -> ::String
+        def cluster_arn: () -> ::String
+        def type: () -> ("Scaling" | "DeepHealthCheck")
+        def status: () -> ("InProgress" | "Superseded" | "Done")
+        def creation_time: () -> ::Time
+        def scaling_details: () -> ::Array[Types::ClusterOperationScalingDetails]
+        def deep_health_check_details: () -> ::Array[Types::InstanceGroupHealthCheckConfiguration]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMaker/Client.html#describe_cluster_operation-instance_method
+      def describe_cluster_operation: (
+                                        cluster_name: ::String,
+                                        operation_id: ::String
+                                      ) -> _DescribeClusterOperationResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeClusterOperationResponseSuccess
 
       interface _DescribeClusterSchedulerConfigResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeClusterSchedulerConfigResponse]
@@ -4129,6 +4301,7 @@ module Aws
         def explainer_config: () -> Types::ExplainerConfig
         def shadow_production_variants: () -> ::Array[Types::ProductionVariantSummary]
         def metrics_config: () -> Types::MetricsConfig
+        def cross_region_traffic_config: () -> Types::CrossRegionTrafficConfig
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMaker/Client.html#describe_endpoint-instance_method
       def describe_endpoint: (
@@ -4151,6 +4324,7 @@ module Aws
         def vpc_config: () -> Types::VpcConfig
         def enable_network_isolation: () -> bool
         def metrics_config: () -> Types::MetricsConfig
+        def cross_region_traffic_config: () -> Types::CrossRegionTrafficConfig
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMaker/Client.html#describe_endpoint_config-instance_method
       def describe_endpoint_config: (
@@ -4241,6 +4415,25 @@ module Aws
                                     ) -> _DescribeFlowDefinitionResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeFlowDefinitionResponseSuccess
 
+      interface _DescribeGlobalInferenceGatewayResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeGlobalInferenceGatewayResponse]
+        def arn: () -> ::String
+        def id: () -> ::String
+        def name: () -> ::String
+        def execution_role_arn: () -> ::String
+        def status: () -> ("CREATING" | "ACTIVE" | "UPDATING" | "DELETING" | "FAILED")
+        def endpoint_url: () -> ::String
+        def vpc_endpoint_service_name: () -> ::String
+        def routing: () -> Types::GlobalInferenceGatewayRouting
+        def creation_time: () -> ::Time
+        def failure_reason: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMaker/Client.html#describe_global_inference_gateway-instance_method
+      def describe_global_inference_gateway: (
+                                               identifier: ::String
+                                             ) -> _DescribeGlobalInferenceGatewayResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeGlobalInferenceGatewayResponseSuccess
+
       interface _DescribeHubResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeHubResponse]
         def hub_name: () -> ::String
@@ -4253,6 +4446,8 @@ module Aws
         def failure_reason: () -> ::String
         def creation_time: () -> ::Time
         def last_modified_time: () -> ::Time
+        def created_by: () -> Types::UserContext
+        def last_modified_by: () -> Types::UserContext
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMaker/Client.html#describe_hub-instance_method
       def describe_hub: (
@@ -4282,6 +4477,8 @@ module Aws
         def failure_reason: () -> ::String
         def creation_time: () -> ::Time
         def last_modified_time: () -> ::Time
+        def created_by: () -> Types::UserContext
+        def last_modified_by: () -> Types::UserContext
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMaker/Client.html#describe_hub_content-instance_method
       def describe_hub_content: (
@@ -4448,19 +4645,35 @@ module Aws
                                                   ) -> _DescribeInferenceRecommendationsJobResponseSuccess
                                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeInferenceRecommendationsJobResponseSuccess
 
+      interface _DescribeInferenceRouterResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeInferenceRouterOutput]
+        def inference_router_name: () -> ::String
+        def inference_router_arn: () -> ::String
+        def routing_targets: () -> ::Array[Types::RoutingTarget]
+        def status: () -> ("InService" | "Creating" | "Updating" | "Failed" | "Deleting")
+        def status_reason: () -> ::String
+        def creation_time: () -> ::Time
+        def last_modified_time: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMaker/Client.html#describe_inference_router-instance_method
+      def describe_inference_router: (
+                                       inference_router_name: ::String
+                                     ) -> _DescribeInferenceRouterResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeInferenceRouterResponseSuccess
+
       interface _DescribeJobResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeJobResponse]
         def job_name: () -> ::String
         def job_arn: () -> ::String
         def role_arn: () -> ::String
-        def job_category: () -> ("AgentRFT" | "AgentRFTEvaluation")
+        def job_category: () -> ("AgentRFT" | "SyntheticDataGeneration" | "DataQualityEvaluation" | "AgentRFTEvaluation" | "DataTransformation")
         def job_config_schema_version: () -> ::String
         def job_config_document: () -> ::String
         def creation_time: () -> ::Time
         def last_modified_time: () -> ::Time
         def end_time: () -> ::Time
         def job_status: () -> ("InProgress" | "Completed" | "Failed" | "Stopping" | "Stopped" | "Deleting" | "DeleteFailed")
-        def secondary_status: () -> ("Starting" | "Downloading" | "Training" | "Uploading" | "Stopping" | "Stopped" | "MaxRuntimeExceeded" | "Interrupted" | "Failed" | "Completed" | "Restarting" | "Pending" | "Evaluating" | "Deleting" | "DeleteFailed")
+        def secondary_status: () -> ("Starting" | "Downloading" | "Training" | "Uploading" | "Stopping" | "Stopped" | "MaxRuntimeExceeded" | "Interrupted" | "Failed" | "Completed" | "Restarting" | "Pending" | "Generating" | "PartialGeneration" | "Evaluating" | "Validating" | "Preparing" | "Executing" | "Publishing" | "Finalizing" | "Transforming" | "Deleting" | "DeleteFailed")
         def secondary_status_transitions: () -> ::Array[Types::JobSecondaryStatusTransition]
         def failure_reason: () -> ::String
         def tags: () -> ::Array[Types::Tag]
@@ -4468,19 +4681,19 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMaker/Client.html#describe_job-instance_method
       def describe_job: (
                           job_name: ::String,
-                          job_category: ("AgentRFT" | "AgentRFTEvaluation")
+                          job_category: ("AgentRFT" | "SyntheticDataGeneration" | "DataQualityEvaluation" | "AgentRFTEvaluation" | "DataTransformation")
                         ) -> _DescribeJobResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeJobResponseSuccess
 
       interface _DescribeJobSchemaVersionResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeJobSchemaVersionResponse]
-        def job_category: () -> ("AgentRFT" | "AgentRFTEvaluation")
+        def job_category: () -> ("AgentRFT" | "SyntheticDataGeneration" | "DataQualityEvaluation" | "AgentRFTEvaluation" | "DataTransformation")
         def job_config_schema_version: () -> ::String
         def job_config_schema: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMaker/Client.html#describe_job_schema_version-instance_method
       def describe_job_schema_version: (
-                                         job_category: ("AgentRFT" | "AgentRFTEvaluation"),
+                                         job_category: ("AgentRFT" | "SyntheticDataGeneration" | "DataQualityEvaluation" | "AgentRFTEvaluation" | "DataTransformation"),
                                          ?job_config_schema_version: ::String
                                        ) -> _DescribeJobSchemaVersionResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeJobSchemaVersionResponseSuccess
@@ -4899,11 +5112,13 @@ module Aws
         def parallelism_configuration: () -> Types::ParallelismConfiguration
         def pipeline_version_display_name: () -> ::String
         def pipeline_version_description: () -> ::String
+        def pipeline_version_aliases: () -> ::Array[::String]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMaker/Client.html#describe_pipeline-instance_method
       def describe_pipeline: (
                                pipeline_name: ::String,
-                               ?pipeline_version_id: ::Integer
+                               ?pipeline_version_id: ::Integer,
+                               ?pipeline_version_alias: ::String
                              ) -> _DescribePipelineResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribePipelineResponseSuccess
 
@@ -4935,6 +5150,8 @@ module Aws
         def selective_execution_config: () -> Types::SelectiveExecutionConfig
         def pipeline_version_id: () -> ::Integer
         def m_lflow_config: () -> Types::MLflowConfiguration
+        def pipeline_version_aliases: () -> ::Array[::String]
+        def role_arn: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMaker/Client.html#describe_pipeline_execution-instance_method
       def describe_pipeline_execution: (
@@ -5014,6 +5231,21 @@ module Aws
                                         reserved_capacity_arn: ::String
                                       ) -> _DescribeReservedCapacityResponseSuccess
                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeReservedCapacityResponseSuccess
+
+      interface _DescribeResourceAssociationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeResourceAssociationsResponse]
+        def sm_capacity_reservation_arn: () -> ::String
+        def sm_capacity_reservation_id: () -> ::String
+        def resource_associations: () -> ::Array[Types::CapacityReservationResourceAssociation]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMaker/Client.html#describe_resource_associations-instance_method
+      def describe_resource_associations: (
+                                            sm_capacity_reservation_arn: ::String,
+                                            ?max_results: ::Integer,
+                                            ?next_token: ::String
+                                          ) -> _DescribeResourceAssociationsResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeResourceAssociationsResponseSuccess
 
       interface _DescribeSpaceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeSpaceResponse]
@@ -5344,6 +5576,23 @@ module Aws
                                 ) -> _ExtendTrainingPlanResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ExtendTrainingPlanResponseSuccess
 
+      interface _GetCapacityReservationUsageResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetCapacityReservationUsageResponse]
+        def sm_capacity_reservation_id: () -> ::String
+        def total_instance_count: () -> ::Integer
+        def available_instance_count: () -> ::Integer
+        def last_refresh_time: () -> ::Time
+        def instance_usage_set: () -> ::Array[Types::CapacityReservationInstanceUsage]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMaker/Client.html#get_capacity_reservation_usage-instance_method
+      def get_capacity_reservation_usage: (
+                                            sm_capacity_reservation_arn: ::String,
+                                            ?max_results: ::Integer,
+                                            ?next_token: ::String
+                                          ) -> _GetCapacityReservationUsageResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCapacityReservationUsageResponseSuccess
+
       interface _GetDeviceFleetReportResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetDeviceFleetReportResponse]
         def device_fleet_arn: () -> ::String
@@ -5360,6 +5609,18 @@ module Aws
                                      device_fleet_name: ::String
                                    ) -> _GetDeviceFleetReportResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDeviceFleetReportResponseSuccess
+
+      interface _GetEndpointPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetEndpointPolicyResponse]
+        def endpoint_name: () -> ::String
+        def endpoint_arn: () -> ::String
+        def resource_policy: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMaker/Client.html#get_endpoint_policy-instance_method
+      def get_endpoint_policy: (
+                                 endpoint_name: ::String
+                               ) -> _GetEndpointPolicyResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetEndpointPolicyResponseSuccess
 
       interface _GetLineageGroupPolicyResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetLineageGroupPolicyResponse]
@@ -5671,6 +5932,24 @@ module Aws
                                            ) -> _ListCandidatesForAutoMLJobResponseSuccess
                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCandidatesForAutoMLJobResponseSuccess
 
+      interface _ListCapacityReservationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListCapacityReservationsResponse]
+        def capacity_reservation_summaries: () -> ::Array[Types::CapacityReservationSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMaker/Client.html#list_capacity_reservations-instance_method
+      def list_capacity_reservations: (
+                                        ?max_results: ::Integer,
+                                        ?next_token: ::String,
+                                        ?filters: Array[
+                                          {
+                                            name: ("Status"),
+                                            values: Array[::String]
+                                          }
+                                        ]
+                                      ) -> _ListCapacityReservationsResponseSuccess
+                                    | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCapacityReservationsResponseSuccess
+
       interface _ListClusterEventsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListClusterEventsResponse]
         def next_token: () -> ::String
@@ -5686,10 +5965,39 @@ module Aws
                                  ?sort_by: ("EventTime"),
                                  ?sort_order: ("Ascending" | "Descending"),
                                  ?resource_type: ("Cluster" | "InstanceGroup" | "Instance"),
+                                 ?operation_id: ::String,
                                  ?max_results: ::Integer,
                                  ?next_token: ::String
                                ) -> _ListClusterEventsResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListClusterEventsResponseSuccess
+
+      interface _ListClusterExtensionVersionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListClusterExtensionVersionsResponse]
+        def extension_versions: () -> ::Array[Types::ExtensionVersionSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMaker/Client.html#list_cluster_extension_versions-instance_method
+      def list_cluster_extension_versions: (
+                                             extension_name: ::String,
+                                             ?max_results: ::Integer,
+                                             ?next_token: ::String
+                                           ) -> _ListClusterExtensionVersionsResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListClusterExtensionVersionsResponseSuccess
+
+      interface _ListClusterExtensionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListClusterExtensionsResponse]
+        def extensions: () -> ::Array[Types::ExtensionSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMaker/Client.html#list_cluster_extensions-instance_method
+      def list_cluster_extensions: (
+                                     cluster_arn: ::String,
+                                     ?max_results: ::Integer,
+                                     ?next_token: ::String,
+                                     ?creation_time_after: ::Time,
+                                     ?creation_time_before: ::Time
+                                   ) -> _ListClusterExtensionsResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListClusterExtensionsResponseSuccess
 
       interface _ListClusterNodesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListClusterNodesResponse]
@@ -5709,6 +6017,25 @@ module Aws
                                 ?include_node_logical_ids: bool
                               ) -> _ListClusterNodesResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListClusterNodesResponseSuccess
+
+      interface _ListClusterOperationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListClusterOperationsResponse]
+        def next_token: () -> ::String
+        def cluster_operation_summaries: () -> ::Array[Types::ClusterOperationSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMaker/Client.html#list_cluster_operations-instance_method
+      def list_cluster_operations: (
+                                     cluster_name: ::String,
+                                     ?status: ("InProgress" | "Superseded" | "Done"),
+                                     ?type: ("Scaling" | "DeepHealthCheck"),
+                                     ?creation_time_after: ::Time,
+                                     ?creation_time_before: ::Time,
+                                     ?sort_by: ("CreationTime"),
+                                     ?sort_order: ("Ascending" | "Descending"),
+                                     ?max_results: ::Integer,
+                                     ?next_token: ::String
+                                   ) -> _ListClusterOperationsResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListClusterOperationsResponseSuccess
 
       interface _ListClusterSchedulerConfigsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListClusterSchedulerConfigsResponse]
@@ -6015,6 +6342,24 @@ module Aws
                                  ) -> _ListFlowDefinitionsResponseSuccess
                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListFlowDefinitionsResponseSuccess
 
+      interface _ListGlobalInferenceGatewaysResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListGlobalInferenceGatewaysResponse]
+        def global_inference_gateway_summaries: () -> ::Array[Types::GlobalInferenceGatewaySummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMaker/Client.html#list_global_inference_gateways-instance_method
+      def list_global_inference_gateways: (
+                                            ?filters: Array[
+                                              {
+                                                name: ("Status"),
+                                                value: ::String
+                                              }
+                                            ],
+                                            ?next_token: ::String,
+                                            ?max_results: ::Integer
+                                          ) -> _ListGlobalInferenceGatewaysResponseSuccess
+                                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListGlobalInferenceGatewaysResponseSuccess
+
       interface _ListHubContentVersionsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListHubContentVersionsResponse]
         def hub_content_summaries: () -> ::Array[Types::HubContentInfo]
@@ -6191,6 +6536,25 @@ module Aws
                                       ) -> _ListInferenceExperimentsResponseSuccess
                                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListInferenceExperimentsResponseSuccess
 
+      interface _ListInferenceGatewaysResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListInferenceGatewaysResponse]
+        def inference_gateway_summaries: () -> ::Array[Types::GlobalInferenceGatewayMemberSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMaker/Client.html#list_inference_gateways-instance_method
+      def list_inference_gateways: (
+                                     identifier: ::String,
+                                     ?filters: Array[
+                                       {
+                                         name: ("Status" | "ClusterArn"),
+                                         value: ::String
+                                       }
+                                     ],
+                                     ?next_token: ::String,
+                                     ?max_results: ::Integer
+                                   ) -> _ListInferenceGatewaysResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListInferenceGatewaysResponseSuccess
+
       interface _ListInferenceRecommendationsJobStepsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListInferenceRecommendationsJobStepsResponse]
         def steps: () -> ::Array[Types::InferenceRecommendationsJobStep]
@@ -6228,6 +6592,18 @@ module Aws
                                                ) -> _ListInferenceRecommendationsJobsResponseSuccess
                                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListInferenceRecommendationsJobsResponseSuccess
 
+      interface _ListInferenceRoutersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListInferenceRoutersOutput]
+        def inference_routers: () -> ::Array[Types::InferenceRouterSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMaker/Client.html#list_inference_routers-instance_method
+      def list_inference_routers: (
+                                    ?max_results: ::Integer,
+                                    ?next_token: ::String
+                                  ) -> _ListInferenceRoutersResponseSuccess
+                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListInferenceRoutersResponseSuccess
+
       interface _ListJobSchemaVersionsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListJobSchemaVersionsResponse]
         def next_token: () -> ::String
@@ -6235,7 +6611,7 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMaker/Client.html#list_job_schema_versions-instance_method
       def list_job_schema_versions: (
-                                      job_category: ("AgentRFT" | "AgentRFTEvaluation"),
+                                      job_category: ("AgentRFT" | "SyntheticDataGeneration" | "DataQualityEvaluation" | "AgentRFTEvaluation" | "DataTransformation"),
                                       ?next_token: ::String,
                                       ?max_results: ::Integer
                                     ) -> _ListJobSchemaVersionsResponseSuccess
@@ -6248,7 +6624,7 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMaker/Client.html#list_jobs-instance_method
       def list_jobs: (
-                       job_category: ("AgentRFT" | "AgentRFTEvaluation"),
+                       job_category: ("AgentRFT" | "SyntheticDataGeneration" | "DataQualityEvaluation" | "AgentRFTEvaluation" | "DataTransformation"),
                        ?next_token: ::String,
                        ?max_results: ::Integer,
                        ?creation_time_after: ::Time,
@@ -6721,7 +7097,8 @@ module Aws
                                       ?sort_by: ("CreationTime" | "PipelineExecutionArn"),
                                       ?sort_order: ("Ascending" | "Descending"),
                                       ?next_token: ::String,
-                                      ?max_results: ::Integer
+                                      ?max_results: ::Integer,
+                                      ?pipeline_version_alias: ::String
                                     ) -> _ListPipelineExecutionsResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPipelineExecutionsResponseSuccess
 
@@ -6767,7 +7144,8 @@ module Aws
                             ?sort_by: ("Name" | "CreationTime"),
                             ?sort_order: ("Ascending" | "Descending"),
                             ?next_token: ::String,
-                            ?max_results: ::Integer
+                            ?max_results: ::Integer,
+                            ?managed_by: ("AWS" | "CUSTOMER")
                           ) -> _ListPipelinesResponseSuccess
                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPipelinesResponseSuccess
 
@@ -7094,6 +7472,37 @@ module Aws
                           ) -> _ListWorkteamsResponseSuccess
                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListWorkteamsResponseSuccess
 
+      interface _MoveClusterNodesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::MoveClusterNodesResponse]
+        def successful: () -> ::Array[::String]
+        def failed: () -> ::Array[Types::MoveClusterNodesError]
+        def successful_node_logical_ids: () -> ::Array[::String]
+        def failed_node_logical_ids: () -> ::Array[Types::MoveClusterNodeLogicalIdsError]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMaker/Client.html#move_cluster_nodes-instance_method
+      def move_cluster_nodes: (
+                                source_cluster_arn: ::String,
+                                source_instance_group_name: ::String,
+                                target_cluster_arn: ::String,
+                                target_instance_group_name: ::String,
+                                ?instance_count: ::Integer,
+                                ?node_ids: Array[::String],
+                                ?node_logical_ids: Array[::String],
+                                ?client_token: ::String
+                              ) -> _MoveClusterNodesResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _MoveClusterNodesResponseSuccess
+
+      interface _PutEndpointPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutEndpointPolicyResponse]
+        def endpoint_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMaker/Client.html#put_endpoint_policy-instance_method
+      def put_endpoint_policy: (
+                                 endpoint_name: ::String,
+                                 resource_policy: ::String
+                               ) -> _PutEndpointPolicyResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutEndpointPolicyResponseSuccess
+
       interface _PutModelPackageGroupPolicyResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::PutModelPackageGroupPolicyOutput]
         def model_package_group_arn: () -> ::String
@@ -7149,6 +7558,23 @@ module Aws
                               ]
                             ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _RemoveInferenceGatewayResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RemoveInferenceGatewayResponse]
+        def arn: () -> ::String
+        def id: () -> ::String
+        def name: () -> ::String
+        def gateway: () -> Types::GlobalInferenceGatewayMember
+        def status: () -> ("ADDING" | "ACTIVE" | "REMOVING" | "FAILED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMaker/Client.html#remove_inference_gateway-instance_method
+      def remove_inference_gateway: (
+                                      identifier: ::String,
+                                      cluster_arn: ::String,
+                                      namespace: ::String,
+                                      name: ::String
+                                    ) -> _RemoveInferenceGatewayResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RemoveInferenceGatewayResponseSuccess
 
       interface _RenderUiTemplateResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::RenderUiTemplateResponse]
@@ -7338,7 +7764,9 @@ module Aws
                                         ]
                                       },
                                       ?pipeline_version_id: ::Integer,
-                                      ?mlflow_experiment_name: ::String
+                                      ?mlflow_experiment_name: ::String,
+                                      ?pipeline_version_alias: ::String,
+                                      ?role_arn: ::String
                                     ) -> _StartPipelineExecutionResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartPipelineExecutionResponseSuccess
 
@@ -7433,7 +7861,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMaker/Client.html#stop_job-instance_method
       def stop_job: (
                       job_name: ::String,
-                      job_category: ("AgentRFT" | "AgentRFTEvaluation")
+                      job_category: ("AgentRFT" | "SyntheticDataGeneration" | "DataQualityEvaluation" | "AgentRFTEvaluation" | "DataTransformation")
                     ) -> _StopJobResponseSuccess
                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopJobResponseSuccess
 
@@ -7578,6 +8006,20 @@ module Aws
                             ?orchestrator: Params::cluster_orchestrator
                           ) -> _UpdateClusterResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateClusterResponseSuccess
+
+      interface _UpdateClusterExtensionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateClusterExtensionResponse]
+        def extension_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMaker/Client.html#update_cluster_extension-instance_method
+      def update_cluster_extension: (
+                                      cluster_arn: ::String,
+                                      extension_arn: ::String,
+                                      ?extension_version: ::String,
+                                      ?configuration_values: ::String,
+                                      ?client_token: ::String
+                                    ) -> _UpdateClusterExtensionResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateClusterExtensionResponseSuccess
 
       interface _UpdateClusterSchedulerConfigResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateClusterSchedulerConfigResponse]
@@ -7818,6 +8260,21 @@ module Aws
                                    ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 
+      interface _UpdateGlobalInferenceGatewayResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateGlobalInferenceGatewayResponse]
+        def arn: () -> ::String
+        def id: () -> ::String
+        def name: () -> ::String
+        def status: () -> ("CREATING" | "ACTIVE" | "UPDATING" | "DELETING" | "FAILED")
+        def routing: () -> Types::GlobalInferenceGatewayRouting
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMaker/Client.html#update_global_inference_gateway-instance_method
+      def update_global_inference_gateway: (
+                                             identifier: ::String,
+                                             routing: Params::global_inference_gateway_routing
+                                           ) -> _UpdateGlobalInferenceGatewayResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateGlobalInferenceGatewayResponseSuccess
+
       interface _UpdateHubResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateHubResponse]
         def hub_arn: () -> ::String
@@ -7977,6 +8434,19 @@ module Aws
                                          }
                                        ) -> _UpdateInferenceExperimentResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateInferenceExperimentResponseSuccess
+
+      interface _UpdateInferenceRouterResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateInferenceRouterOutput]
+        def inference_router_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMaker/Client.html#update_inference_router-instance_method
+      def update_inference_router: (
+                                     inference_router_name: ::String,
+                                     routing_targets: Array[
+                                       Params::routing_target
+                                     ]
+                                   ) -> _UpdateInferenceRouterResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateInferenceRouterResponseSuccess
 
       interface _UpdateMlflowAppResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateMlflowAppResponse]
@@ -8170,7 +8640,8 @@ module Aws
                              ?role_arn: ::String,
                              ?parallelism_configuration: {
                                max_parallel_execution_steps: ::Integer
-                             }
+                             },
+                             ?pipeline_version_aliases: Array[::String]
                            ) -> _UpdatePipelineResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdatePipelineResponseSuccess
 
@@ -8199,7 +8670,11 @@ module Aws
                                      pipeline_arn: ::String,
                                      pipeline_version_id: ::Integer,
                                      ?pipeline_version_display_name: ::String,
-                                     ?pipeline_version_description: ::String
+                                     ?pipeline_version_description: ::String,
+                                     ?pipeline_version_alias_operations: {
+                                       add: Array[::String]?,
+                                       remove: Array[::String]?
+                                     }
                                    ) -> _UpdatePipelineVersionResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdatePipelineVersionResponseSuccess
 

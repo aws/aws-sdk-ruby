@@ -222,6 +222,12 @@ module Aws::RTBFabric
               {
                 "matcher" => "path",
                 "argument" => "status",
+                "state" => "failure",
+                "expected" => "CREATE_FAILED"
+              },
+              {
+                "matcher" => "path",
+                "argument" => "status",
                 "state" => "success",
                 "expected" => "ACTIVE"
               },
@@ -284,6 +290,12 @@ module Aws::RTBFabric
               {
                 "matcher" => "path",
                 "argument" => "status",
+                "state" => "failure",
+                "expected" => "DELETE_FAILED"
+              },
+              {
+                "matcher" => "path",
+                "argument" => "status",
                 "state" => "success",
                 "expected" => "DELETED"
               },
@@ -331,6 +343,12 @@ module Aws::RTBFabric
           poller: Aws::Waiters::Poller.new(
             operation_name: :get_link,
             acceptors: [
+              {
+                "matcher" => "path",
+                "argument" => "status",
+                "state" => "failure",
+                "expected" => "CREATE_FAILED"
+              },
               {
                 "matcher" => "path",
                 "argument" => "status",
@@ -390,6 +408,12 @@ module Aws::RTBFabric
               {
                 "matcher" => "path",
                 "argument" => "status",
+                "state" => "failure",
+                "expected" => "CREATE_FAILED"
+              },
+              {
+                "matcher" => "path",
+                "argument" => "status",
                 "state" => "success",
                 "expected" => "ACTIVE"
               },
@@ -446,6 +470,12 @@ module Aws::RTBFabric
               {
                 "matcher" => "path",
                 "argument" => "status",
+                "state" => "failure",
+                "expected" => "DELETE_FAILED"
+              },
+              {
+                "matcher" => "path",
+                "argument" => "status",
                 "state" => "success",
                 "expected" => "DELETED"
               },
@@ -493,6 +523,12 @@ module Aws::RTBFabric
           poller: Aws::Waiters::Poller.new(
             operation_name: :get_link_routing_rule,
             acceptors: [
+              {
+                "matcher" => "path",
+                "argument" => "status",
+                "state" => "failure",
+                "expected" => "CREATE_FAILED"
+              },
               {
                 "matcher" => "path",
                 "argument" => "status",
@@ -546,6 +582,12 @@ module Aws::RTBFabric
               {
                 "matcher" => "path",
                 "argument" => "status",
+                "state" => "failure",
+                "expected" => "DELETE_FAILED"
+              },
+              {
+                "matcher" => "path",
+                "argument" => "status",
                 "state" => "success",
                 "expected" => "DELETED"
               },
@@ -592,6 +634,12 @@ module Aws::RTBFabric
           poller: Aws::Waiters::Poller.new(
             operation_name: :get_outbound_external_link,
             acceptors: [
+              {
+                "matcher" => "path",
+                "argument" => "status",
+                "state" => "failure",
+                "expected" => "CREATE_FAILED"
+              },
               {
                 "matcher" => "path",
                 "argument" => "status",
@@ -657,6 +705,12 @@ module Aws::RTBFabric
               {
                 "matcher" => "path",
                 "argument" => "status",
+                "state" => "failure",
+                "expected" => "DELETE_FAILED"
+              },
+              {
+                "matcher" => "path",
+                "argument" => "status",
                 "state" => "success",
                 "expected" => "DELETED"
               },
@@ -704,6 +758,12 @@ module Aws::RTBFabric
           poller: Aws::Waiters::Poller.new(
             operation_name: :get_requester_gateway,
             acceptors: [
+              {
+                "matcher" => "path",
+                "argument" => "status",
+                "state" => "failure",
+                "expected" => "CREATE_FAILED"
+              },
               {
                 "matcher" => "path",
                 "argument" => "status",
@@ -757,6 +817,12 @@ module Aws::RTBFabric
               {
                 "matcher" => "path",
                 "argument" => "status",
+                "state" => "failure",
+                "expected" => "DELETE_FAILED"
+              },
+              {
+                "matcher" => "path",
+                "argument" => "status",
                 "state" => "success",
                 "expected" => "DELETED"
               },
@@ -803,6 +869,12 @@ module Aws::RTBFabric
           poller: Aws::Waiters::Poller.new(
             operation_name: :get_responder_gateway,
             acceptors: [
+              {
+                "matcher" => "path",
+                "argument" => "status",
+                "state" => "failure",
+                "expected" => "CREATE_FAILED"
+              },
               {
                 "matcher" => "path",
                 "argument" => "status",
@@ -853,6 +925,12 @@ module Aws::RTBFabric
           poller: Aws::Waiters::Poller.new(
             operation_name: :get_responder_gateway,
             acceptors: [
+              {
+                "matcher" => "path",
+                "argument" => "status",
+                "state" => "failure",
+                "expected" => "DELETE_FAILED"
+              },
               {
                 "matcher" => "path",
                 "argument" => "status",

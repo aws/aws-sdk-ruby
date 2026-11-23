@@ -221,7 +221,7 @@ module Aws
       def get_billing_preferences: (
                                      ?next_token: ::String,
                                      ?max_results: ::Integer,
-                                     features: Array[("RI_SHARING" | "RI_SHARING_HISTORY" | "CREDIT_SHARING" | "CREDIT_SHARING_HISTORY" | "CREDIT_LEVEL_SHARING" | "BILLING_ALERTS" | "CREDIT_PREFERENCE_OPTIONS")],
+                                     features: Array[("RI_SHARING" | "RI_SHARING_HISTORY" | "CREDIT_SHARING" | "CREDIT_SHARING_HISTORY" | "CREDIT_LEVEL_SHARING" | "BILLING_ALERTS" | "CREDIT_PREFERENCE_OPTIONS" | "BENEFIT_LEVEL_SHARING")],
                                      ?filters: Array[
                                        {
                                          name: ("PREFERENCE_KEY")?,
@@ -515,6 +515,26 @@ module Aws
                           ) -> _RedeemCreditsResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RedeemCreditsResponseSuccess
 
+      interface _SplitCreditResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SplitCreditResponse]
+        def parent_credit_id: () -> ::String
+        def child_credits: () -> ::Array[Types::ChildCredit]
+        def dry_run: () -> bool
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Billing/Client.html#split_credit-instance_method
+      def split_credit: (
+                          credit_id: ::String,
+                          portions: Array[
+                            {
+                              amount: ::String,
+                              description: ::String?
+                            }
+                          ],
+                          ?client_token: ::String,
+                          ?dry_run: bool
+                        ) -> _SplitCreditResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SplitCreditResponseSuccess
+
       interface _TagResourceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
       end
@@ -529,6 +549,23 @@ module Aws
                           ]
                         ) -> _TagResourceResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _TransferCreditResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TransferCreditResponse]
+        def source_credit_id: () -> ::String
+        def new_credit_id: () -> ::String
+        def destination_account_id: () -> ::String
+        def amount: () -> ::String
+        def dry_run: () -> bool
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Billing/Client.html#transfer_credit-instance_method
+      def transfer_credit: (
+                             credit_id: ::String,
+                             destination_account_id: ::String,
+                             ?client_token: ::String,
+                             ?dry_run: bool
+                           ) -> _TransferCreditResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TransferCreditResponseSuccess
 
       interface _UntagResourceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
@@ -545,7 +582,7 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Billing/Client.html#update_billing_preferences-instance_method
       def update_billing_preferences: (
-                                        feature: ("RI_SHARING" | "RI_SHARING_HISTORY" | "CREDIT_SHARING" | "CREDIT_SHARING_HISTORY" | "CREDIT_LEVEL_SHARING" | "BILLING_ALERTS" | "CREDIT_PREFERENCE_OPTIONS"),
+                                        feature: ("RI_SHARING" | "RI_SHARING_HISTORY" | "CREDIT_SHARING" | "CREDIT_SHARING_HISTORY" | "CREDIT_LEVEL_SHARING" | "BILLING_ALERTS" | "CREDIT_PREFERENCE_OPTIONS" | "BENEFIT_LEVEL_SHARING"),
                                         billing_preferences_per_key: Array[
                                           {
                                             key: ::String,

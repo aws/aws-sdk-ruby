@@ -121,6 +121,7 @@ module Aws
         def additional_os_capabilities: () -> ::Array[("ALL")]
         def hooks: () -> Types::Hooks
         def environment_variables: () -> ::Hash[::String, ::String]
+        def kms_key_identifier: () -> ::String
         def tags: () -> ::Hash[::String, ::String]
         def updated_at: () -> ::Time
         def image_version: () -> ::String
@@ -138,7 +139,7 @@ module Aws
                                   ?egress_network_connectors: Array[::String],
                                   ?cpu_configurations: Array[
                                     {
-                                      architecture: ("ARM_64")
+                                      architecture: ("ARM_64" | "X86_64")
                                     }
                                   ],
                                   ?resources: Array[
@@ -149,6 +150,7 @@ module Aws
                                   ?additional_os_capabilities: Array[("ALL")],
                                   ?hooks: Params::hooks,
                                   ?environment_variables: Hash[::String, ::String],
+                                  ?kms_key_identifier: ::String,
                                   name: ::String,
                                   ?tags: Hash[::String, ::String],
                                   ?client_token: ::String
@@ -203,6 +205,7 @@ module Aws
         def started_at: () -> ::Time
         def terminated_at: () -> ::Time
         def state_reason: () -> ::String
+        def kms_key_identifier: () -> ::String
         def ingress_network_connectors: () -> ::Array[::String]
         def egress_network_connectors: () -> ::Array[::String]
       end
@@ -235,8 +238,8 @@ module Aws
         def image_version: () -> ::String
         def build_id: () -> ::String
         def build_state: () -> ("PENDING" | "IN_PROGRESS" | "SUCCESSFUL" | "FAILED")
-        def architecture: () -> ("ARM_64")
-        def chipset: () -> ("GRAVITON")
+        def architecture: () -> ("ARM_64" | "X86_64")
+        def chipset: () -> ("GRAVITON" | "INTEL")
         def chipset_generation: () -> ::String
         def state_reason: () -> ::String
         def created_at: () -> ::Time
@@ -264,6 +267,7 @@ module Aws
         def additional_os_capabilities: () -> ::Array[("ALL")]
         def hooks: () -> Types::Hooks
         def environment_variables: () -> ::Hash[::String, ::String]
+        def kms_key_identifier: () -> ::String
         def image_arn: () -> ::String
         def image_version: () -> ::String
         def state: () -> ("PENDING" | "IN_PROGRESS" | "SUCCESSFUL" | "FAILED" | "DELETING" | "DELETED" | "DELETE_FAILED")
@@ -316,8 +320,8 @@ module Aws
                                        ?next_token: ::String,
                                        image_identifier: ::String,
                                        image_version: ::String,
-                                       ?architecture: ("ARM_64"),
-                                       ?chipset: ("GRAVITON"),
+                                       ?architecture: ("ARM_64" | "X86_64"),
+                                       ?chipset: ("GRAVITON" | "INTEL"),
                                        ?chipset_generation: ::String
                                      ) -> _ListMicrovmImageBuildsResponseSuccess
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListMicrovmImageBuildsResponseSuccess
@@ -394,6 +398,7 @@ module Aws
         def started_at: () -> ::Time
         def terminated_at: () -> ::Time
         def state_reason: () -> ::String
+        def kms_key_identifier: () -> ::String
         def ingress_network_connectors: () -> ::Array[::String]
         def egress_network_connectors: () -> ::Array[::String]
       end
@@ -410,6 +415,7 @@ module Aws
                            auto_resume_enabled: bool
                          },
                          ?logging: Params::logging,
+                         ?kms_key_identifier: ::String,
                          ?run_hook_payload: ::String,
                          ?maximum_duration_in_seconds: ::Integer,
                          ?client_token: ::String
@@ -468,6 +474,7 @@ module Aws
         def additional_os_capabilities: () -> ::Array[("ALL")]
         def hooks: () -> Types::Hooks
         def environment_variables: () -> ::Hash[::String, ::String]
+        def kms_key_identifier: () -> ::String
         def updated_at: () -> ::Time
         def image_version: () -> ::String
       end
@@ -484,7 +491,7 @@ module Aws
                                   ?egress_network_connectors: Array[::String],
                                   ?cpu_configurations: Array[
                                     {
-                                      architecture: ("ARM_64")
+                                      architecture: ("ARM_64" | "X86_64")
                                     }
                                   ],
                                   ?resources: Array[
@@ -495,6 +502,7 @@ module Aws
                                   ?additional_os_capabilities: Array[("ALL")],
                                   ?hooks: Params::hooks,
                                   ?environment_variables: Hash[::String, ::String],
+                                  ?kms_key_identifier: ::String,
                                   image_identifier: ::String,
                                   ?client_token: ::String
                                 ) -> _UpdateMicrovmImageResponseSuccess
@@ -514,6 +522,7 @@ module Aws
         def additional_os_capabilities: () -> ::Array[("ALL")]
         def hooks: () -> Types::Hooks
         def environment_variables: () -> ::Hash[::String, ::String]
+        def kms_key_identifier: () -> ::String
         def image_arn: () -> ::String
         def image_version: () -> ::String
         def state: () -> ("PENDING" | "IN_PROGRESS" | "SUCCESSFUL" | "FAILED" | "DELETING" | "DELETED" | "DELETE_FAILED")

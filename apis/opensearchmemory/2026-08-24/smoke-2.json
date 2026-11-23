@@ -1,0 +1,36 @@
+{
+  "version" : 2,
+  "testCases" : [ {
+    "id" : "ListSpacesSuccess",
+    "operationName" : "ListSpaces",
+    "input" : {
+      "maxResults" : 1
+    },
+    "expectation" : {
+      "success" : { }
+    },
+    "config" : {
+      "region" : "us-east-1",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
+    "id" : "GetSpaceNotFound",
+    "operationName" : "GetSpace",
+    "input" : {
+      "spaceId" : "sp-000000000000"
+    },
+    "expectation" : {
+      "failure" : {
+        "errorId" : "ResourceNotFoundException"
+      }
+    },
+    "config" : {
+      "region" : "us-east-1",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  } ]
+}

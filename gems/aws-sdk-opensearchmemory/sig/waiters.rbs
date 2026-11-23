@@ -1,0 +1,33 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module OpenSearchMemory
+    module Waiters
+
+      class SpaceActive
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    space_id: ::String
+                  ) -> Client::_GetSpaceResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_GetSpaceResponseSuccess
+      end
+
+      class SpaceDeleted
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    space_id: ::String
+                  ) -> Client::_GetSpaceResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_GetSpaceResponseSuccess
+      end
+    end
+  end
+end

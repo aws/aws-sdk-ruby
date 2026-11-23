@@ -81,6 +81,32 @@ module Aws::MarketplaceDiscovery
       SENSITIVE: []
     end
 
+    class CaseStudiesSummary
+      attr_accessor case_study_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class CaseStudy
+      attr_accessor case_study_id: ::String
+      attr_accessor case_study_name: ::String
+      attr_accessor short_description: ::String
+      attr_accessor engagement_dates: Types::EngagementDates
+      attr_accessor challenge: ::String
+      attr_accessor resolution: ::String
+      attr_accessor implementation_approach: ::String
+      attr_accessor outcome: ::String
+      attr_accessor resources: ::Array[Types::CaseStudyResource]
+      SENSITIVE: []
+    end
+
+    class CaseStudyResource
+      attr_accessor content_type: ("EMAIL" | "PHONE_NUMBER" | "LINK" | "OTHER")
+      attr_accessor value: ::String
+      attr_accessor display_name: ::String
+      attr_accessor resource_type: ("CASE_STUDY_WEBSITE")
+      SENSITIVE: []
+    end
+
     class Category
       attr_accessor category_id: ::String
       attr_accessor display_name: ::String
@@ -96,6 +122,8 @@ module Aws::MarketplaceDiscovery
       attr_accessor release_notes: ::String
       attr_accessor usage_instructions: ::String
       attr_accessor available_from_time: ::Time
+      attr_accessor architecture_diagram_url: ::String
+      attr_accessor deployment_template_url: ::String
       attr_accessor short_description: ::String
       attr_accessor long_description: ::String
       SENSITIVE: []
@@ -203,6 +231,12 @@ module Aws::MarketplaceDiscovery
       SENSITIVE: []
     end
 
+    class EngagementDates
+      attr_accessor start_date: ::Time
+      attr_accessor completion_date: ::Time
+      SENSITIVE: []
+    end
+
     class FixedPercentage
       attr_accessor percentage_value: ::String
       SENSITIVE: []
@@ -304,6 +338,7 @@ module Aws::MarketplaceDiscovery
       attr_accessor seller_engagements: ::Array[Types::SellerEngagement]
       attr_accessor short_description: ::String
       attr_accessor use_cases: ::Array[Types::UseCaseEntry]
+      attr_accessor purchase_indicators: ::Array[Types::PurchaseIndicator]
       SENSITIVE: []
     end
 
@@ -387,6 +422,7 @@ module Aws::MarketplaceDiscovery
       attr_accessor resources: ::Array[Types::Resource]
       attr_accessor seller_engagements: ::Array[Types::SellerEngagement]
       attr_accessor listing_id: ::String
+      attr_accessor purchase_indicators: ::Array[Types::PurchaseIndicator]
       SENSITIVE: []
     end
 
@@ -446,6 +482,22 @@ module Aws::MarketplaceDiscovery
       SENSITIVE: []
     end
 
+    class ListListingAttributesInput
+      attr_accessor locale: ::String
+      attr_accessor listing_id: ::String
+      attr_accessor attribute_types: ::Array[("CASE_STUDY" | "SPECIALIZATION_DETAIL" | "TRUST_CENTER_SOURCE" | "TRUST_CENTER_CERTIFICATION" | "TRUST_CENTER_DOCUMENT" | "TRUST_CENTER_CONTROL" | "TRUST_CENTER_FAQ" | "TRUST_CENTER_UPDATE")]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListListingAttributesOutput
+      attr_accessor locale: ::String
+      attr_accessor listing_attributes: ::Array[Types::ListingAttributeResults]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class ListPurchaseOptionsInput
       attr_accessor locale: ::String
       attr_accessor filters: ::Array[Types::PurchaseOptionFilter]
@@ -464,6 +516,38 @@ module Aws::MarketplaceDiscovery
       attr_accessor product: Types::ProductInformation
       attr_accessor offer: Types::OfferInformation
       SENSITIVE: []
+    end
+
+    class ListingAttributeResults
+      attr_accessor case_study: Types::CaseStudy
+      attr_accessor specialization_detail: Types::SpecializationDetail
+      attr_accessor trust_center_source: Types::TrustCenterSource
+      attr_accessor trust_center_certification: Types::TrustCenterCertificationAttribute
+      attr_accessor trust_center_document: Types::TrustCenterDocumentAttribute
+      attr_accessor trust_center_control: Types::TrustCenterControl
+      attr_accessor trust_center_faq: Types::TrustCenterFaqAttribute
+      attr_accessor trust_center_update: Types::TrustCenterUpdateAttribute
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class CaseStudy < ListingAttributeResults
+      end
+      class SpecializationDetail < ListingAttributeResults
+      end
+      class TrustCenterSource < ListingAttributeResults
+      end
+      class TrustCenterCertification < ListingAttributeResults
+      end
+      class TrustCenterDocument < ListingAttributeResults
+      end
+      class TrustCenterControl < ListingAttributeResults
+      end
+      class TrustCenterFaq < ListingAttributeResults
+      end
+      class TrustCenterUpdate < ListingAttributeResults
+      end
+      class Unknown < ListingAttributeResults
+      end
     end
 
     class ListingBadge
@@ -494,6 +578,10 @@ module Aws::MarketplaceDiscovery
       attr_accessor pricing_models: ::Array[Types::PricingModel]
       attr_accessor pricing_units: ::Array[Types::PricingUnit]
       attr_accessor associated_entities: ::Array[Types::ListingSummaryAssociatedEntity]
+      attr_accessor trust_center_summary: Types::TrustCenterSummary
+      attr_accessor case_studies_summary: Types::CaseStudiesSummary
+      attr_accessor use_case_summary: Types::UseCaseSummary
+      attr_accessor seller_engagements: ::Array[Types::SellerEngagement]
       SENSITIVE: []
     end
 
@@ -678,6 +766,11 @@ module Aws::MarketplaceDiscovery
       end
     end
 
+    class PurchaseIndicator
+      attr_accessor indicator_type: ("NOT_AVAILABLE_FOR_SUBSCRIPTION" | "AVAILABLE_FOR_USE_WITHOUT_SUBSCRIPTION")
+      SENSITIVE: []
+    end
+
     class PurchaseOptionAssociatedEntity
       attr_accessor product: Types::ProductInformation
       attr_accessor offer: Types::OfferInformation
@@ -717,6 +810,7 @@ module Aws::MarketplaceDiscovery
       attr_accessor dimension_labels: ::Array[Types::DimensionLabel]
       attr_accessor unit: ::String
       attr_accessor price: ::String
+      attr_accessor regional_prices: ::Array[Types::RegionalPrice]
       SENSITIVE: []
     end
 
@@ -725,6 +819,13 @@ module Aws::MarketplaceDiscovery
       attr_accessor type: ("ByolPricingTerm" | "ConfigurableUpfrontPricingTerm" | "FixedUpfrontPricingTerm" | "UsageBasedPricingTerm" | "FreeTrialPricingTerm" | "LegalTerm" | "PaymentScheduleTerm" | "RecurringPaymentTerm" | "RenewalTerm" | "SupportTerm" | "ValidityTerm" | "VariablePaymentTerm" | "NetPaymentTerm")
       attr_accessor currency_code: ::String
       attr_accessor billing_period: ("Monthly")
+      attr_accessor price: ::String
+      SENSITIVE: []
+    end
+
+    class RegionalPrice
+      attr_accessor region: ::String
+      attr_accessor display_name: ::String
       attr_accessor price: ::String
       SENSITIVE: []
     end
@@ -755,7 +856,7 @@ module Aws::MarketplaceDiscovery
 
     class ReviewSourceSummary
       attr_accessor source_name: ::String
-      attr_accessor source_id: ("AWS_MARKETPLACE")
+      attr_accessor source_id: ("AWS_MARKETPLACE" | "G2" | "PEERSPOT")
       attr_accessor source_url: ::String
       attr_accessor average_rating: ::String
       attr_accessor total_reviews: ::Integer
@@ -767,6 +868,26 @@ module Aws::MarketplaceDiscovery
       SENSITIVE: []
     end
 
+    class SaasCloudFormationDeploymentTemplate
+      attr_accessor template_name: ::String
+      attr_accessor description: ::String
+      attr_accessor default_stack_name: ::String
+      attr_accessor template_url: ::String
+      attr_accessor iam_policy: ::String
+      SENSITIVE: []
+    end
+
+    class SaasDeploymentTemplate
+      attr_accessor cloud_formation_deployment_template: Types::SaasCloudFormationDeploymentTemplate
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class CloudFormationDeploymentTemplate < SaasDeploymentTemplate
+      end
+      class Unknown < SaasDeploymentTemplate
+      end
+    end
+
     class SaasFulfillmentOption
       attr_accessor fulfillment_option_id: ::String
       attr_accessor fulfillment_option_type: ("AMAZON_MACHINE_IMAGE" | "API" | "CLOUDFORMATION_TEMPLATE" | "CONTAINER" | "HELM" | "EKS_ADD_ON" | "EC2_IMAGE_BUILDER_COMPONENT" | "DATA_EXCHANGE" | "PROFESSIONAL_SERVICES" | "SAAS" | "SAGEMAKER_ALGORITHM" | "SAGEMAKER_MODEL")
@@ -776,6 +897,7 @@ module Aws::MarketplaceDiscovery
       attr_accessor available_from_time: ::Time
       attr_accessor launch_url: ::String
       attr_accessor quick_launch: ("ENABLED" | "DISABLED")
+      attr_accessor deployment_templates: ::Array[Types::SaasDeploymentTemplate]
       SENSITIVE: []
     end
 
@@ -826,20 +948,20 @@ module Aws::MarketplaceDiscovery
       attr_accessor locale: ::String
       attr_accessor search_text: ::String
       attr_accessor filters: ::Array[Types::SearchFilter]
-      attr_accessor facet_types: ::Array[("AVERAGE_CUSTOMER_RATING" | "CATEGORY" | "PUBLISHER" | "FULFILLMENT_OPTION_TYPE" | "PRICING_MODEL" | "PRICING_UNIT" | "DEPLOYED_ON_AWS" | "NUMBER_OF_PRODUCTS")]
+      attr_accessor facet_types: ::Array[("AVERAGE_CUSTOMER_RATING" | "CATEGORY" | "PUBLISHER" | "FULFILLMENT_OPTION_TYPE" | "PRICING_MODEL" | "PRICING_UNIT" | "DEPLOYED_ON_AWS" | "NUMBER_OF_PRODUCTS" | "CERTIFICATES" | "SPECIALIZATION" | "SPECIALIZATION_CATEGORY" | "SELLER_ENGAGEMENT" | "TRUST_CENTER")]
       attr_accessor next_token: ::String
       SENSITIVE: []
     end
 
     class SearchFacetsOutput
       attr_accessor total_results: ::Integer
-      attr_accessor listing_facets: ::Hash[("AVERAGE_CUSTOMER_RATING" | "CATEGORY" | "PUBLISHER" | "FULFILLMENT_OPTION_TYPE" | "PRICING_MODEL" | "PRICING_UNIT" | "DEPLOYED_ON_AWS" | "NUMBER_OF_PRODUCTS"), ::Array[Types::ListingFacet]]
+      attr_accessor listing_facets: ::Hash[("AVERAGE_CUSTOMER_RATING" | "CATEGORY" | "PUBLISHER" | "FULFILLMENT_OPTION_TYPE" | "PRICING_MODEL" | "PRICING_UNIT" | "DEPLOYED_ON_AWS" | "NUMBER_OF_PRODUCTS" | "CERTIFICATES" | "SPECIALIZATION" | "SPECIALIZATION_CATEGORY" | "SELLER_ENGAGEMENT" | "TRUST_CENTER"), ::Array[Types::ListingFacet]]
       attr_accessor next_token: ::String
       SENSITIVE: []
     end
 
     class SearchFilter
-      attr_accessor filter_type: ("MIN_AVERAGE_CUSTOMER_RATING" | "MAX_AVERAGE_CUSTOMER_RATING" | "CATEGORY" | "PUBLISHER" | "FULFILLMENT_OPTION_TYPE" | "PRICING_MODEL" | "PRICING_UNIT" | "DEPLOYED_ON_AWS" | "NUMBER_OF_PRODUCTS")
+      attr_accessor filter_type: ("MIN_AVERAGE_CUSTOMER_RATING" | "MAX_AVERAGE_CUSTOMER_RATING" | "CATEGORY" | "PUBLISHER" | "FULFILLMENT_OPTION_TYPE" | "PRICING_MODEL" | "PRICING_UNIT" | "DEPLOYED_ON_AWS" | "NUMBER_OF_PRODUCTS" | "CERTIFICATES" | "PRODUCT_ID" | "SPECIALIZATION" | "SPECIALIZATION_CATEGORY" | "SELLER_ENGAGEMENT" | "TRUST_CENTER")
       attr_accessor filter_values: ::Array[::String]
       SENSITIVE: []
     end
@@ -869,7 +991,7 @@ module Aws::MarketplaceDiscovery
     end
 
     class SellerEngagement
-      attr_accessor engagement_type: ("REQUEST_FOR_PRIVATE_OFFER" | "REQUEST_FOR_DEMO")
+      attr_accessor engagement_type: ("REQUEST_FOR_PRIVATE_OFFER" | "REQUEST_FOR_DEMO" | "EXPRESS_PRIVATE_OFFER" | "BUY_NOW" | "TRY_FOR_FREE")
       attr_accessor content_type: ("LINK")
       attr_accessor value: ::String
       SENSITIVE: []
@@ -877,6 +999,42 @@ module Aws::MarketplaceDiscovery
 
     class SellerInformation
       attr_accessor seller_profile_id: ::String
+      attr_accessor display_name: ::String
+      SENSITIVE: []
+    end
+
+    class Specialization
+      attr_accessor specialization_id: ::String
+      attr_accessor specialization_name: ::String
+      attr_accessor description: ::String
+      attr_accessor specialization_types: ::Array[Types::SpecializationTypeDetail]
+      attr_accessor case_study_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class SpecializationCategory
+      attr_accessor specialization_category_id: ::String
+      attr_accessor specialization_category_name: ::String
+      attr_accessor parent_specialization_id: ::String
+      SENSITIVE: []
+    end
+
+    class SpecializationDetail
+      attr_accessor specialization: Types::Specialization
+      attr_accessor specialization_category: Types::SpecializationCategory
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Specialization < SpecializationDetail
+      end
+      class SpecializationCategory < SpecializationDetail
+      end
+      class Unknown < SpecializationDetail
+      end
+    end
+
+    class SpecializationTypeDetail
+      attr_accessor specialization_type: ("USE_CASE" | "INDUSTRY" | "SERVICES")
       attr_accessor display_name: ::String
       SENSITIVE: []
     end
@@ -904,6 +1062,73 @@ module Aws::MarketplaceDiscovery
       SENSITIVE: []
     end
 
+    class TrustCenterCertificationAttribute
+      attr_accessor certification_type: ::String
+      attr_accessor display_name: ::String
+      attr_accessor logo_url: ::String
+      SENSITIVE: []
+    end
+
+    class TrustCenterCertificationSummary
+      attr_accessor certification_type: ::String
+      attr_accessor display_name: ::String
+      attr_accessor logo_url: ::String
+      SENSITIVE: []
+    end
+
+    class TrustCenterControl
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor domains: ::Array[("SECURITY" | "AI_GOVERNANCE" | "RESILIENCE")]
+      SENSITIVE: []
+    end
+
+    class TrustCenterDocumentAttribute
+      attr_accessor content_type: ("EMAIL" | "PHONE_NUMBER" | "LINK" | "OTHER")
+      attr_accessor value: ::String
+      attr_accessor display_name: ::String
+      attr_accessor subject_area: ::String
+      attr_accessor access_type: ("DOWNLOAD" | "VIEW" | "REQUEST_ACCESS")
+      SENSITIVE: []
+    end
+
+    class TrustCenterFaqAttribute
+      attr_accessor question: ::String
+      attr_accessor answer: ::String
+      attr_accessor subject_area: ::String
+      SENSITIVE: []
+    end
+
+    class TrustCenterSource
+      attr_accessor content_type: ("EMAIL" | "PHONE_NUMBER" | "LINK" | "OTHER")
+      attr_accessor value: ::String
+      attr_accessor display_name: ::String
+      attr_accessor provider: ("DRATA" | "VANTA" | "OTHER")
+      SENSITIVE: []
+    end
+
+    class TrustCenterSourceSummary
+      attr_accessor content_type: ("EMAIL" | "PHONE_NUMBER" | "LINK" | "OTHER")
+      attr_accessor value: ::String
+      attr_accessor display_name: ::String
+      attr_accessor provider: ("DRATA" | "VANTA" | "OTHER")
+      SENSITIVE: []
+    end
+
+    class TrustCenterSummary
+      attr_accessor source_summaries: ::Array[Types::TrustCenterSourceSummary]
+      attr_accessor certification_summaries: ::Array[Types::TrustCenterCertificationSummary]
+      attr_accessor total_certification_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class TrustCenterUpdateAttribute
+      attr_accessor title: ::String
+      attr_accessor description: ::String
+      attr_accessor published_time: ::Time
+      SENSITIVE: []
+    end
+
     class UsageBasedPricingTerm
       attr_accessor id: ::String
       attr_accessor type: ("ByolPricingTerm" | "ConfigurableUpfrontPricingTerm" | "FixedUpfrontPricingTerm" | "UsageBasedPricingTerm" | "FreeTrialPricingTerm" | "LegalTerm" | "PaymentScheduleTerm" | "RecurringPaymentTerm" | "RenewalTerm" | "SupportTerm" | "ValidityTerm" | "VariablePaymentTerm" | "NetPaymentTerm")
@@ -926,6 +1151,22 @@ module Aws::MarketplaceDiscovery
 
     class UseCaseEntry
       attr_accessor use_case: Types::UseCase
+      SENSITIVE: []
+    end
+
+    class UseCaseInformation
+      attr_accessor display_name: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class UseCaseSummary
+      attr_accessor use_cases: ::Array[Types::UseCaseSummaryEntry]
+      SENSITIVE: []
+    end
+
+    class UseCaseSummaryEntry
+      attr_accessor use_case: Types::UseCaseInformation
       SENSITIVE: []
     end
 

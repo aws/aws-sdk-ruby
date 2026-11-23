@@ -425,6 +425,8 @@ module Aws::RDS
     #
     #   * `os-upgrade`
     #
+    #   * `serverless-platform-version-update`
+    #
     #   * `system-update`
     #
     #   For more information about these actions, see [Maintenance actions
@@ -1280,6 +1282,21 @@ module Aws::RDS
     #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL.html
     #   @return [Types::CertificateDetails]
     #
+    # @!attribute [rw] vpc_networking_enabled
+    #   Indicates whether the DB cluster will use VPC networking after a
+    #   pending networking change completes. For a pending move to a
+    #   different DB subnet group, the value is `true`.
+    #
+    #   Valid for Cluster Type: Aurora DB clusters only
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] internet_access_gateway_enabled
+    #   Indicates whether the DB cluster will use an internet access gateway
+    #   after a pending networking change completes.
+    #
+    #   Valid for Cluster Type: Aurora PostgreSQL DB clusters only
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ClusterPendingModifiedValues AWS API Documentation
     #
     class ClusterPendingModifiedValues < Struct.new(
@@ -1293,7 +1310,9 @@ module Aws::RDS
       :allocated_storage,
       :rds_custom_cluster_configuration,
       :iops,
-      :certificate_details)
+      :certificate_details,
+      :vpc_networking_enabled,
+      :internet_access_gateway_enabled)
       SENSITIVE = [:master_user_password]
       include Aws::Structure
     end
@@ -2015,9 +2034,9 @@ module Aws::RDS
     #
     # @!attribute [rw] copy_option_group
     #   Specifies whether to copy the DB option group associated with the
-    #   source DB snapshot to the target Amazon Web Services account and
-    #   associate with the target DB snapshot. The associated option group
-    #   can be copied only with cross-account snapshot copy calls.
+    #   source DB snapshot to the target Amazon Web Services account or
+    #   Amazon Web Services Region and associate it with the target DB
+    #   snapshot.
     #   @return [Boolean]
     #
     # @!attribute [rw] snapshot_availability_zone
@@ -2025,6 +2044,23 @@ module Aws::RDS
     #   snapshot. This value is valid only for snapshots that RDS stores on
     #   a Dedicated Local Zone.
     #   @return [String]
+    #
+    # @!attribute [rw] tag_specifications
+    #   Tags to assign to the copied option group. By default, the copied
+    #   option group isn't tagged.
+    #
+    #   Valid Values:
+    #
+    #   * `og` - The copied option group.
+    #
+    #   ^
+    #
+    #   Constraints:
+    #
+    #   * Can only be specified when `CopyOptionGroup` is `true`
+    #
+    #   ^
+    #   @return [Array<Types::TagSpecification>]
     #
     # @!attribute [rw] source_region
     #   The source region of the snapshot. This is only needed when the
@@ -2045,6 +2081,7 @@ module Aws::RDS
       :snapshot_target,
       :copy_option_group,
       :snapshot_availability_zone,
+      :tag_specifications,
       :source_region)
       SENSITIVE = [:pre_signed_url]
       include Aws::Structure
@@ -2922,6 +2959,9 @@ module Aws::RDS
     # @!attribute [rw] vpc_security_group_ids
     #   A list of EC2 VPC security groups to associate with this DB cluster.
     #
+    #   Valid only for DB clusters inside a VPC. Don't specify it when you
+    #   set `EnableVPCNetworking` to `false`.
+    #
     #   Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters
     #   @return [Array<String>]
     #
@@ -2929,6 +2969,9 @@ module Aws::RDS
     #   A DB subnet group to associate with this DB cluster.
     #
     #   This setting is required to create a Multi-AZ DB cluster.
+    #
+    #   Valid only for DB clusters inside a VPC. Don't specify it when you
+    #   set `EnableVPCNetworking` to `false`.
     #
     #   Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters
     #
@@ -3553,6 +3596,8 @@ module Aws::RDS
     #   For more information, see [ Working with a DB instance in a VPC][1]
     #   in the *Amazon Aurora User Guide.*
     #
+    #   Don't specify it when you set `EnableVPCNetworking` to `false`.
+    #
     #   Valid for Cluster Type: Aurora DB clusters only
     #
     #   Valid Values: `IPV4 | DUAL`
@@ -3834,13 +3879,58 @@ module Aws::RDS
     #   PostgreSQL engines.
     #   @return [String]
     #
+    # @!attribute [rw] enable_vpc_networking
+    #   Specifies whether VPC networking is enabled for the DB cluster. Set
+    #   to `false` to create a DB cluster without VPC networking.
+    #
+    #   A DB cluster without VPC networking needs an internet access gateway
+    #   and IAM database authentication. Set `EnableInternetAccessGateway`
+    #   and `EnableIAMDatabaseAuthentication` to `true`, and set
+    #   `MasterUserAuthenticationType` to `iam-db-auth`.
+    #
+    #   Default: `true`. With `WithExpressConfiguration`, the default is
+    #   `false`.
+    #
+    #   Valid for Cluster Type: Aurora PostgreSQL DB clusters only
+    #   @return [Boolean]
+    #
     # @!attribute [rw] with_express_configuration
     #   Specifies to create an Aurora DB Cluster with express configuration
     #   in seconds. Express configuration provides a cluster with a writer
     #   instance and feature specific values set to all other input
     #   parameters of this API.
     #
+    #   By default, a DB cluster with express configuration doesn't use VPC
+    #   networking. You connect to it over the internet through an internet
+    #   access gateway.
+    #
+    #   To create the DB cluster in a VPC instead, set `EnableVPCNetworking`
+    #   to `true` and `EnableInternetAccessGateway` to `false`. You can also
+    #   specify `DBSubnetGroupName`, `VpcSecurityGroupIds`, and
+    #   `NetworkType`. If you don't specify `DBSubnetGroupName`, the DB
+    #   cluster uses the default DB subnet group for your Amazon Web
+    #   Services account, in your default VPC.
+    #
+    #   A DB cluster with express configuration in a VPC takes longer to
+    #   become available than one without VPC networking.
+    #
     #   Valid for Cluster Type: Aurora DB clusters
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] enable_internet_access_gateway
+    #   Specifies whether the DB cluster uses an internet access gateway.
+    #   With an internet access gateway, you connect to the DB cluster over
+    #   the internet without a VPC.
+    #
+    #   Set to `true` only when you set `EnableVPCNetworking` to `false`. A
+    #   DB cluster can't use VPC networking and an internet access gateway
+    #   at the same time.
+    #
+    #   Default: `false`. With `WithExpressConfiguration`, the default is
+    #   `true`. To create a DB cluster with express configuration in a VPC,
+    #   set this parameter to `false`.
+    #
+    #   Valid for Cluster Type: Aurora PostgreSQL DB clusters only
     #   @return [Boolean]
     #
     # @!attribute [rw] associated_roles
@@ -3919,7 +4009,9 @@ module Aws::RDS
       :engine_lifecycle_support,
       :tag_specifications,
       :master_user_authentication_type,
+      :enable_vpc_networking,
       :with_express_configuration,
+      :enable_internet_access_gateway,
       :associated_roles,
       :source_region)
       SENSITIVE = [:master_user_password, :pre_signed_url]
@@ -8738,18 +8830,18 @@ module Aws::RDS
     #   @return [String]
     #
     # @!attribute [rw] vpc_networking_enabled
-    #   Indicates whether the DB cluster uses VPC-based networking.
+    #   Indicates whether the DB cluster uses VPC-based networking. The
+    #   value is `false` only for an Aurora PostgreSQL DB cluster without
+    #   VPC networking.
     #
-    #   This setting is applicable only for Aurora PostgreSQL clusters
-    #   created through express configuration.
+    #   Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters
     #   @return [Boolean]
     #
     # @!attribute [rw] internet_access_gateway_enabled
     #   Indicates whether the DB cluster has internet-based connectivity
     #   enabled through an internet access gateway.
     #
-    #   This setting is applicable only for Aurora PostgreSQL clusters
-    #   created through express configuration.
+    #   Valid for Cluster Type: Aurora PostgreSQL DB clusters only
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBCluster AWS API Documentation
@@ -10318,6 +10410,18 @@ module Aws::RDS
     #    </note>
     #   @return [Types::Endpoint]
     #
+    # @!attribute [rw] primary_endpoint
+    #   Specifies the connection endpoint for the DB instance that currently
+    #   has the primary role.
+    #
+    #   This endpoint points to the new primary DB instance after a
+    #   switchover, so you don't have to connect to a different DNS name.
+    #
+    #   A read replica reports the same primary endpoint as the DB instance
+    #   it replicates from. When you promote a read replica, it reports its
+    #   own primary endpoint.
+    #   @return [Types::PrimaryEndpoint]
+    #
     # @!attribute [rw] allocated_storage
     #   The amount of storage in gibibytes (GiB) allocated for the DB
     #   instance.
@@ -10957,6 +11061,12 @@ module Aws::RDS
     #   instance doesn't use a DB capacity reservation.
     #   @return [String]
     #
+    # @!attribute [rw] vpc_networking_enabled
+    #   Indicates whether the DB instance uses VPC networking. For a DB
+    #   instance in an Aurora PostgreSQL DB cluster without VPC networking,
+    #   the value is `false`.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBInstance AWS API Documentation
     #
     class DBInstance < Struct.new(
@@ -10967,6 +11077,7 @@ module Aws::RDS
       :master_username,
       :db_name,
       :endpoint,
+      :primary_endpoint,
       :allocated_storage,
       :instance_create_time,
       :preferred_backup_window,
@@ -11053,7 +11164,8 @@ module Aws::RDS
       :storage_volume_status,
       :storage_operation_status,
       :storage_operation_percent_progress,
-      :db_capacity_reservation_identifier)
+      :db_capacity_reservation_identifier,
+      :vpc_networking_enabled)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -19628,6 +19740,19 @@ module Aws::RDS
     # @!attribute [rw] vpc_security_group_ids
     #   A list of EC2 VPC security groups to associate with this DB cluster.
     #
+    #   Valid only for DB clusters inside a VPC. For a DB cluster that uses
+    #   an internet access gateway, specify this parameter only when you
+    #   re-enable VPC networking. Set `EnableVPCNetworking` to `true` and
+    #   `EnableInternetAccessGateway` to `false`.
+    #
+    #   When you move the DB cluster to a different DB subnet group with
+    #   `DBSubnetGroupName`, or re-enable VPC networking, the security
+    #   groups must belong to the VPC of the DB subnet group. If you leave
+    #   out this parameter in those requests, the DB cluster uses the
+    #   default security group of that VPC, even for a move within the same
+    #   VPC. To keep the current security groups, specify their IDs. If the
+    #   VPC is a shared VPC, you must specify this parameter.
+    #
     #   Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters
     #   @return [Array<String>]
     #
@@ -20043,6 +20168,17 @@ module Aws::RDS
     #   the DB cluster. A `DBSubnetGroup` can support only the IPv4 protocol
     #   or the IPv4 and the IPv6 protocols (`DUAL`).
     #
+    #   If the subnets in the DB subnet group support only the IPv4
+    #   protocol, you can't set this parameter to `DUAL`.
+    #
+    #   If you don't specify this parameter when you move the DB cluster to
+    #   a different DB subnet group with `DBSubnetGroupName`, the DB cluster
+    #   uses `IPV4`, even if it currently uses `DUAL`. To keep dual-stack
+    #   mode, specify `DUAL`. The new DB subnet group must support the
+    #   network type.
+    #
+    #   Don't specify it when you set `EnableVPCNetworking` to `false`.
+    #
     #   For more information, see [ Working with a DB instance in a VPC][1]
     #   in the *Amazon Aurora User Guide.*
     #
@@ -20375,6 +20511,122 @@ module Aws::RDS
     #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support.html
     #   @return [String]
     #
+    # @!attribute [rw] enable_internet_access_gateway
+    #   Specifies whether the DB cluster uses an internet access gateway.
+    #   With an internet access gateway, you connect to the DB cluster over
+    #   the internet without a VPC.
+    #
+    #   Set to `true` together with `EnableVPCNetworking` set to `false` to
+    #   move the DB cluster out of its VPC. Set to `false` together with
+    #   `EnableVPCNetworking` set to `true` to move the DB cluster into a
+    #   VPC. A DB cluster can't use VPC networking and an internet access
+    #   gateway at the same time.
+    #
+    #   Valid for Cluster Type: Aurora PostgreSQL DB clusters only
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] enable_vpc_networking
+    #   Specifies whether VPC networking is enabled for the DB cluster. Set
+    #   to `false` to disable VPC networking for the DB cluster.
+    #
+    #   A DB cluster without VPC networking needs an internet access gateway
+    #   and IAM database authentication. Set `EnableInternetAccessGateway`
+    #   and `EnableIAMDatabaseAuthentication` to `true`, and set
+    #   `MasterUserAuthenticationType` to `iam-db-auth`.
+    #
+    #   Set to `true` to re-enable VPC networking for a DB cluster that uses
+    #   an internet access gateway. You can also specify
+    #   `DBSubnetGroupName`, `VpcSecurityGroupIds`, and `NetworkType`.
+    #
+    #   The change is applied during the next maintenance window unless
+    #   `ApplyImmediately` is enabled.
+    #
+    #   To move a DB cluster that already uses VPC networking to a different
+    #   DB subnet group, you don't need to set this parameter. Specify
+    #   `DBSubnetGroupName` instead.
+    #
+    #   Valid for Cluster Type: Aurora PostgreSQL DB clusters only
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] db_subnet_group_name
+    #   The DB subnet group for the DB cluster.
+    #
+    #   Specify this parameter for one of these purposes:
+    #
+    #   * To move an Aurora MySQL or Aurora PostgreSQL DB cluster that uses
+    #     VPC networking to a different DB subnet group. The new DB subnet
+    #     group can be in the same VPC or in a different VPC.
+    #
+    #   * To enable VPC networking for an Aurora PostgreSQL DB cluster that
+    #     uses an internet access gateway. Set `EnableVPCNetworking` to
+    #     `true` and `EnableInternetAccessGateway` to `false`.
+    #
+    #   When you move a DB cluster to a different DB subnet group, you
+    #   don't need to set `EnableVPCNetworking`. If you set it to `false`,
+    #   Aurora rejects the request. Security groups in `VpcSecurityGroupIds`
+    #   must belong to the VPC of the new DB subnet group. If you don't
+    #   specify `VpcSecurityGroupIds`, the DB cluster uses the default
+    #   security group of that VPC. If you don't specify `NetworkType`, the
+    #   DB cluster uses `IPV4`. Both defaults apply even if the DB cluster
+    #   stays in the same VPC.
+    #
+    #   An outage occurs during the move. The DB cluster uses VPC networking
+    #   before, during, and after the move, and the move doesn't turn on an
+    #   internet access gateway. If you specify the DB subnet group that the
+    #   DB cluster already uses, the DB cluster isn't moved. The change is
+    #   applied during the next maintenance window unless `ApplyImmediately`
+    #   is enabled.
+    #
+    #   Aurora rejects the move if the DB cluster:
+    #
+    #   * Is a member of an Aurora global database.
+    #
+    #   * Uses Aurora Limitless Database.
+    #
+    #   * Is a cross-Region or in-Region read replica, or is the source of
+    #     one. Aurora Replicas in the DB cluster don't block the move.
+    #
+    #   * Has enhanced binlog (Aurora MySQL), enhanced logical replication
+    #     (Aurora PostgreSQL), or Babelfish turned on.
+    #
+    #   * Is a target of an RDS Proxy.
+    #
+    #   * Is part of a blue/green deployment.
+    #
+    #   * Is the source of a zero-ETL integration.
+    #
+    #   * Has a database activity stream that isn't stopped.
+    #
+    #   The move also fails if the DB cluster is switching to a different DB
+    #   cluster parameter group, or if a change to enhanced binlog, enhanced
+    #   logical replication, or Babelfish is pending in its DB cluster
+    #   parameter group. Apply the change, and reboot if required, before
+    #   you move the DB cluster.
+    #
+    #   If the move fails, Aurora returns the DB cluster to its original DB
+    #   subnet group and cancels the change. To try again, call
+    #   `ModifyDBCluster` again.
+    #
+    #   Aurora can't always return the DB cluster. If the move fails after
+    #   Aurora starts to update the DB cluster endpoints, or if the rollback
+    #   fails, the change doesn't complete. If Aurora can't restore the
+    #   original network configuration, the DB instances in the DB cluster
+    #   enter the `incompatible-network` state. In these cases, contact
+    #   Amazon Web Services Support.
+    #
+    #   Valid for Cluster Type: Aurora DB clusters only
+    #
+    #   Default: If you don't specify this parameter when you enable VPC
+    #   networking, the DB cluster uses the default DB subnet group for your
+    #   Amazon Web Services account.
+    #
+    #   Constraints: The DB subnet group must contain a subnet in each
+    #   Availability Zone that the DB instances in the DB cluster are
+    #   located in.
+    #
+    #   Example: `mydbsubnetgroup`
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBClusterMessage AWS API Documentation
     #
     class ModifyDBClusterMessage < Struct.new(
@@ -20425,7 +20677,10 @@ module Aws::RDS
       :enable_limitless_database,
       :ca_certificate_identifier,
       :master_user_authentication_type,
-      :engine_lifecycle_support)
+      :engine_lifecycle_support,
+      :enable_internet_access_gateway,
+      :enable_vpc_networking,
+      :db_subnet_group_name)
       SENSITIVE = [:master_user_password]
       include Aws::Structure
     end
@@ -23167,6 +23422,11 @@ module Aws::RDS
     #   Indicates when the option group was copied.
     #   @return [Time]
     #
+    # @!attribute [rw] source_region
+    #   Specifies the Amazon Web Services Region for the option group from
+    #   which this option group is copied.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/OptionGroup AWS API Documentation
     #
     class OptionGroup < Struct.new(
@@ -23180,7 +23440,8 @@ module Aws::RDS
       :option_group_arn,
       :source_option_group,
       :source_account_id,
-      :copy_timestamp)
+      :copy_timestamp,
+      :source_region)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -23304,6 +23565,11 @@ module Aws::RDS
     #   Services accounts.
     #   @return [Boolean]
     #
+    # @!attribute [rw] copyable_cross_region
+    #   Indicates whether the option can be copied across Amazon Web
+    #   Services Regions.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/OptionGroupOption AWS API Documentation
     #
     class OptionGroupOption < Struct.new(
@@ -23323,7 +23589,8 @@ module Aws::RDS
       :supports_option_version_downgrade,
       :option_group_option_settings,
       :option_group_option_versions,
-      :copyable_cross_account)
+      :copyable_cross_account,
+      :copyable_cross_region)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -24298,6 +24565,31 @@ module Aws::RDS
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/PointInTimeRestoreNotEnabledFault AWS API Documentation
     #
     class PointInTimeRestoreNotEnabledFault < Aws::EmptyStructure; end
+
+    # Contains the information you need to connect to the DB instance that
+    # currently has the primary role. The endpoint stays the same when the
+    # primary role moves to another DB instance, so you don't have to
+    # connect to a different DNS name after a switchover.
+    #
+    # @!attribute [rw] address
+    #   Specifies the DNS address of the DB instance that currently has the
+    #   primary role. This address doesn't change when the DB instance is
+    #   renamed.
+    #   @return [String]
+    #
+    # @!attribute [rw] hosted_zone_id
+    #   Specifies the ID that Amazon Route 53 assigns when you create a
+    #   hosted zone.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/PrimaryEndpoint AWS API Documentation
+    #
+    class PrimaryEndpoint < Struct.new(
+      :address,
+      :hosted_zone_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # Contains the processor features of a DB instance class.
     #
@@ -31507,8 +31799,9 @@ module Aws::RDS
     end
 
     # The tags to apply to resources when creating or modifying a DB
-    # instance or DB cluster. When you specify a tag, you must specify the
-    # resource type to tag, otherwise the request will fail.
+    # instance or DB cluster, or when copying a DB instance snapshot. When
+    # you specify a tag, you must specify the resource type to tag,
+    # otherwise the request will fail.
     #
     # @!attribute [rw] resource_type
     #   The type of resource to tag on creation.
@@ -31518,6 +31811,8 @@ module Aws::RDS
     #   * `auto-backup` - The DB instance's automated backup.
     #
     #   * `cluster-auto-backup` - The DB cluster's automated backup.
+    #
+    #   * `og` - The copied option group. Valid only for `CopyDBSnapshot`.
     #   @return [String]
     #
     # @!attribute [rw] tags

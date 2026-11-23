@@ -264,7 +264,8 @@ module Aws::ComputeOptimizerAutomation
     #     An integer representing the maximum number attempts that will be made for
     #     a single request, including the initial attempt.  For example,
     #     setting this value to 5 will result in a request being retried up to
-    #     4 times. Used in `standard` and `adaptive` retry modes.
+    #     4 times. Used in `standard` and `adaptive` retry modes. Defaults to 3,
+    #     except for DynamoDB and DynamoDB Streams, which default to 4.
     #
     #   @option options [String] :profile ("default")
     #     Used when loading credentials from the shared credentials file at `HOME/.aws/credentials`.
@@ -327,15 +328,15 @@ module Aws::ComputeOptimizerAutomation
     #     used by the default backoff function. This option is only used in the
     #     `legacy` retry mode.
     #
-    #   @option options [String] :retry_mode ("legacy")
+    #   @option options [String] :retry_mode ("standard")
     #     Specifies which retry algorithm to use. Values are:
     #
-    #     * `legacy` - The pre-existing retry behavior. This is the default
-    #       value if no retry mode is provided.
+    #     * `legacy` - The pre-existing retry behavior.
     #
     #     * `standard` - A standardized set of retry rules across the AWS SDKs.
     #       This includes support for retry quotas, which limit the number of
-    #       unsuccessful retries a client can make.
+    #       unsuccessful retries a client can make. This is the default value
+    #       if no retry mode is provided.
     #
     #     * `adaptive` - A retry mode that includes all the functionality of
     #       `standard` mode along with automatic client side throttling.
@@ -499,6 +500,9 @@ module Aws::ComputeOptimizerAutomation
     # account has not previously enabled the Automation feature, the
     # association process automatically enables it.
     #
+    # Requests that include an account to which an organization enrollment
+    # configuration applies are rejected.
+    #
     # <note markdown="1"> Only the management account or a delegated administrator can perform
     # this action.
     #
@@ -509,8 +513,8 @@ module Aws::ComputeOptimizerAutomation
     #   account IDs.
     #
     # @option params [String] :client_token
-    #   A unique identifier to ensure idempotency of the request. Valid for 24
-    #   hours after creation.
+    #   A unique identifier to ensure idempotency of the request. Valid for 30
+    #   minutes after creation.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -622,6 +626,9 @@ module Aws::ComputeOptimizerAutomation
     #     organization_configuration: {
     #       rule_apply_order: "BeforeAccountRules", # accepts BeforeAccountRules, AfterAccountRules
     #       account_ids: ["AccountId"],
+    #       organizational_unit_ids: ["OrganizationalUnitId"],
+    #       excluded_organizational_unit_ids: ["OrganizationalUnitId"],
+    #       excluded_account_ids: ["AccountId"],
     #     },
     #     priority: "String",
     #     recommended_action_types: ["SnapshotAndDeleteUnattachedEbsVolume"], # required, accepts SnapshotAndDeleteUnattachedEbsVolume, UpgradeEbsVolumeType
@@ -702,6 +709,12 @@ module Aws::ComputeOptimizerAutomation
     #   resp.organization_configuration.rule_apply_order #=> String, one of "BeforeAccountRules", "AfterAccountRules"
     #   resp.organization_configuration.account_ids #=> Array
     #   resp.organization_configuration.account_ids[0] #=> String
+    #   resp.organization_configuration.organizational_unit_ids #=> Array
+    #   resp.organization_configuration.organizational_unit_ids[0] #=> String
+    #   resp.organization_configuration.excluded_organizational_unit_ids #=> Array
+    #   resp.organization_configuration.excluded_organizational_unit_ids[0] #=> String
+    #   resp.organization_configuration.excluded_account_ids #=> Array
+    #   resp.organization_configuration.excluded_account_ids[0] #=> String
     #   resp.priority #=> String
     #   resp.recommended_action_types #=> Array
     #   resp.recommended_action_types[0] #=> String, one of "SnapshotAndDeleteUnattachedEbsVolume", "UpgradeEbsVolumeType"
@@ -789,11 +802,62 @@ module Aws::ComputeOptimizerAutomation
       req.send_request(options)
     end
 
+    # Deletes the specified configuration types from an organization
+    # enrollment configuration. After deletion, Automation stays enabled for
+    # affected accounts and earlier account associations aren't restored.
+    # Affected accounts inherit the organization rule mode from the closest
+    # parent that has an organization enrollment configuration, or get None
+    # allowed if no parent has one.
+    #
+    # <note markdown="1"> Only the management account or a delegated administrator can perform
+    # this action.
+    #
+    #  </note>
+    #
+    # @option params [required, Types::OrganizationTarget] :target
+    #   The account, organizational unit (OU), or organization root whose
+    #   organization enrollment configuration you want to delete.
+    #
+    # @option params [required, Array<String>] :configuration_types
+    #   The organization enrollment configuration types to delete from the
+    #   target.
+    #
+    # @option params [String] :client_token
+    #   A unique identifier to ensure idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_organization_enrollment_configuration({
+    #     target: { # required
+    #       account_id: "AccountId",
+    #       organizational_unit_id: "OrganizationalUnitId",
+    #     },
+    #     configuration_types: ["OrganizationRuleMode"], # required, accepts OrganizationRuleMode
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-automation-2025-09-22/DeleteOrganizationEnrollmentConfiguration AWS API Documentation
+    #
+    # @overload delete_organization_enrollment_configuration(params = {})
+    # @param [Hash] params ({})
+    def delete_organization_enrollment_configuration(params = {}, options = {})
+      req = build_request(:delete_organization_enrollment_configuration, params)
+      req.send_request(options)
+    end
+
     # Disassociates member accounts from your organization's management
     # account, removing centralized automation capabilities. Once
     # disassociated, organization rules no longer apply to the member
     # account, and the management account (or delegated administrator)
-    # cannot create Automation rules for that account.
+    # can't create automation rules for that account.
+    #
+    # Requests that include an account to which an organization enrollment
+    # configuration applies are rejected.
     #
     # <note markdown="1"> Only the management account or a delegated administrator can perform
     # this action.
@@ -938,6 +1002,12 @@ module Aws::ComputeOptimizerAutomation
     #   resp.organization_configuration.rule_apply_order #=> String, one of "BeforeAccountRules", "AfterAccountRules"
     #   resp.organization_configuration.account_ids #=> Array
     #   resp.organization_configuration.account_ids[0] #=> String
+    #   resp.organization_configuration.organizational_unit_ids #=> Array
+    #   resp.organization_configuration.organizational_unit_ids[0] #=> String
+    #   resp.organization_configuration.excluded_organizational_unit_ids #=> Array
+    #   resp.organization_configuration.excluded_organizational_unit_ids[0] #=> String
+    #   resp.organization_configuration.excluded_account_ids #=> Array
+    #   resp.organization_configuration.excluded_account_ids[0] #=> String
     #   resp.priority #=> String
     #   resp.recommended_action_types #=> Array
     #   resp.recommended_action_types[0] #=> String, one of "SnapshotAndDeleteUnattachedEbsVolume", "UpgradeEbsVolumeType"
@@ -1002,6 +1072,7 @@ module Aws::ComputeOptimizerAutomation
     #   * {Types::GetEnrollmentConfigurationResponse#status_reason #status_reason} => String
     #   * {Types::GetEnrollmentConfigurationResponse#organization_rule_mode #organization_rule_mode} => String
     #   * {Types::GetEnrollmentConfigurationResponse#last_updated_timestamp #last_updated_timestamp} => Time
+    #   * {Types::GetEnrollmentConfigurationResponse#organization_enrollment_configuration_status #organization_enrollment_configuration_status} => String
     #
     # @example Response structure
     #
@@ -1009,6 +1080,7 @@ module Aws::ComputeOptimizerAutomation
     #   resp.status_reason #=> String
     #   resp.organization_rule_mode #=> String, one of "AnyAllowed", "NoneAllowed"
     #   resp.last_updated_timestamp #=> Time
+    #   resp.organization_enrollment_configuration_status #=> String, one of "Active", "Inactive"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-automation-2025-09-22/GetEnrollmentConfiguration AWS API Documentation
     #
@@ -1053,6 +1125,8 @@ module Aws::ComputeOptimizerAutomation
     #   resp.accounts[0].account_id #=> String
     #   resp.accounts[0].status #=> String, one of "Active", "Inactive", "Pending", "Failed"
     #   resp.accounts[0].organization_rule_mode #=> String, one of "AnyAllowed", "NoneAllowed"
+    #   resp.accounts[0].organization_rule_mode_source.source_type #=> String, one of "Applied", "Inherited", "Direct", "Default"
+    #   resp.accounts[0].organization_rule_mode_source.source_target_id #=> String
     #   resp.accounts[0].status_reason #=> String
     #   resp.accounts[0].last_updated_timestamp #=> Time
     #   resp.next_token #=> String
@@ -1074,7 +1148,7 @@ module Aws::ComputeOptimizerAutomation
     #
     # @option params [Integer] :max_results
     #   The maximum number of automation event steps to return in a single
-    #   response. Valid range is 1-1000.
+    #   response. If you don't specify a value, the default is 100.
     #
     # @option params [String] :next_token
     #   A token used for pagination to retrieve the next set of results when
@@ -1127,6 +1201,12 @@ module Aws::ComputeOptimizerAutomation
     # @option params [Array<Types::AutomationEventFilter>] :filters
     #   The filters to apply to the list of automation event summaries.
     #
+    # @option params [Array<String>] :organizational_unit_ids
+    #   The organizational unit (OU) or organization root IDs to use to filter
+    #   the results. The response includes event summaries for accounts in the
+    #   specified OUs and their child OUs. Only the management account or a
+    #   delegated administrator can specify this parameter.
+    #
     # @option params [String] :start_date_inclusive
     #   The start date for filtering automation event summaries, inclusive.
     #   Events created on or after this date will be included.
@@ -1137,7 +1217,7 @@ module Aws::ComputeOptimizerAutomation
     #
     # @option params [Integer] :max_results
     #   The maximum number of automation event summaries to return in a single
-    #   response. Valid range is 1-1000.
+    #   response. If you don't specify a value, the default is 100.
     #
     # @option params [String] :next_token
     #   A token used for pagination to retrieve the next set of results when
@@ -1159,6 +1239,7 @@ module Aws::ComputeOptimizerAutomation
     #         values: ["FilterValue"], # required
     #       },
     #     ],
+    #     organizational_unit_ids: ["OrganizationalUnitId"],
     #     start_date_inclusive: "String",
     #     end_date_exclusive: "String",
     #     max_results: 1,
@@ -1196,6 +1277,12 @@ module Aws::ComputeOptimizerAutomation
     # @option params [Array<Types::AutomationEventFilter>] :filters
     #   The filters to apply to the list of automation events.
     #
+    # @option params [Array<String>] :organizational_unit_ids
+    #   The organizational unit (OU) or organization root IDs to use to filter
+    #   the results. The response includes events for accounts in the
+    #   specified OUs and their child OUs. Only the management account or a
+    #   delegated administrator can specify this parameter.
+    #
     # @option params [Time,DateTime,Date,Integer,String] :start_time_inclusive
     #   The start of the time range to query for events.
     #
@@ -1203,7 +1290,8 @@ module Aws::ComputeOptimizerAutomation
     #   The end of the time range to query for events.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results to return in a single call.
+    #   The maximum number of automation events to return in a single
+    #   response. If you don't specify a value, the default is 100.
     #
     # @option params [String] :next_token
     #   The token for the next page of results.
@@ -1224,6 +1312,7 @@ module Aws::ComputeOptimizerAutomation
     #         values: ["FilterValue"], # required
     #       },
     #     ],
+    #     organizational_unit_ids: ["OrganizationalUnitId"],
     #     start_time_inclusive: Time.now,
     #     end_time_exclusive: Time.now,
     #     max_results: 1,
@@ -1274,7 +1363,9 @@ module Aws::ComputeOptimizerAutomation
     #    </note>
     #
     # @option params [Types::OrganizationScope] :organization_scope
-    #   The organizational scope for the rule preview.
+    #   The organizational scope for the rule preview. This parameter is
+    #   required when `ruleType` is `OrganizationRule`. Don't specify it when
+    #   `ruleType` is `AccountRule`.
     #
     # @option params [required, Array<String>] :recommended_action_types
     #   The types of recommended actions to include in the preview.
@@ -1287,7 +1378,7 @@ module Aws::ComputeOptimizerAutomation
     #
     # @option params [Integer] :max_results
     #   The maximum number of automation rule preview results to return in a
-    #   single response. Valid range is 1-1000.
+    #   single response. If you don't specify a value, the default is 100.
     #
     # @option params [String] :next_token
     #   A token used for pagination to retrieve the next set of results when
@@ -1306,6 +1397,9 @@ module Aws::ComputeOptimizerAutomation
     #     rule_type: "OrganizationRule", # required, accepts OrganizationRule, AccountRule
     #     organization_scope: {
     #       account_ids: ["AccountId"],
+    #       organizational_unit_ids: ["OrganizationalUnitId"],
+    #       excluded_organizational_unit_ids: ["OrganizationalUnitId"],
+    #       excluded_account_ids: ["AccountId"],
     #     },
     #     recommended_action_types: ["SnapshotAndDeleteUnattachedEbsVolume"], # required, accepts SnapshotAndDeleteUnattachedEbsVolume, UpgradeEbsVolumeType
     #     criteria: {
@@ -1410,7 +1504,9 @@ module Aws::ComputeOptimizerAutomation
     #   The type of rule.
     #
     # @option params [Types::OrganizationScope] :organization_scope
-    #   The organizational scope for the rule preview.
+    #   The organizational scope for the rule preview. This parameter is
+    #   required when `ruleType` is `OrganizationRule`. Don't specify it when
+    #   `ruleType` is `AccountRule`.
     #
     # @option params [required, Array<String>] :recommended_action_types
     #   The types of recommended actions to include in the preview.
@@ -1424,7 +1520,7 @@ module Aws::ComputeOptimizerAutomation
     #
     # @option params [Integer] :max_results
     #   The maximum number of automation rule preview summaries to return in a
-    #   single response. Valid range is 1-1000.
+    #   single response. If you don't specify a value, the default is 100.
     #
     # @option params [String] :next_token
     #   A token used for pagination to retrieve the next set of results when
@@ -1443,6 +1539,9 @@ module Aws::ComputeOptimizerAutomation
     #     rule_type: "OrganizationRule", # required, accepts OrganizationRule, AccountRule
     #     organization_scope: {
     #       account_ids: ["AccountId"],
+    #       organizational_unit_ids: ["OrganizationalUnitId"],
+    #       excluded_organizational_unit_ids: ["OrganizationalUnitId"],
+    #       excluded_account_ids: ["AccountId"],
     #     },
     #     recommended_action_types: ["SnapshotAndDeleteUnattachedEbsVolume"], # required, accepts SnapshotAndDeleteUnattachedEbsVolume, UpgradeEbsVolumeType
     #     criteria: {
@@ -1527,7 +1626,7 @@ module Aws::ComputeOptimizerAutomation
     #
     # @option params [Integer] :max_results
     #   The maximum number of automation rules to return in a single response.
-    #   Valid range is 1-1000.
+    #   If you don't specify a value, the default is 100.
     #
     # @option params [String] :next_token
     #   A token used for pagination to retrieve the next set of results when
@@ -1566,6 +1665,12 @@ module Aws::ComputeOptimizerAutomation
     #   resp.automation_rules[0].organization_configuration.rule_apply_order #=> String, one of "BeforeAccountRules", "AfterAccountRules"
     #   resp.automation_rules[0].organization_configuration.account_ids #=> Array
     #   resp.automation_rules[0].organization_configuration.account_ids[0] #=> String
+    #   resp.automation_rules[0].organization_configuration.organizational_unit_ids #=> Array
+    #   resp.automation_rules[0].organization_configuration.organizational_unit_ids[0] #=> String
+    #   resp.automation_rules[0].organization_configuration.excluded_organizational_unit_ids #=> Array
+    #   resp.automation_rules[0].organization_configuration.excluded_organizational_unit_ids[0] #=> String
+    #   resp.automation_rules[0].organization_configuration.excluded_account_ids #=> Array
+    #   resp.automation_rules[0].organization_configuration.excluded_account_ids[0] #=> String
     #   resp.automation_rules[0].priority #=> String
     #   resp.automation_rules[0].recommended_action_types #=> Array
     #   resp.automation_rules[0].recommended_action_types[0] #=> String, one of "SnapshotAndDeleteUnattachedEbsVolume", "UpgradeEbsVolumeType"
@@ -1586,11 +1691,124 @@ module Aws::ComputeOptimizerAutomation
       req.send_request(options)
     end
 
+    # Lists the organization enrollment configurations that are stored
+    # directly on accounts, organizational units (OUs), and the organization
+    # root.
+    #
+    # <note markdown="1"> Only the management account or a delegated administrator can perform
+    # this action.
+    #
+    #  </note>
+    #
+    # @option params [String] :target_type
+    #   The target type to use to filter the results. If you specify
+    #   `OrganizationalUnit`, the results also include configurations stored
+    #   on the organization root. If you don't specify a target type, the
+    #   operation returns configurations for every target type.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of organization enrollment configurations to return
+    #   in a single response. If you don't specify a value, the default is
+    #   1,000.
+    #
+    # @option params [String] :next_token
+    #   The token to use to retrieve the next page of results.
+    #
+    # @return [Types::ListOrganizationEnrollmentConfigurationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListOrganizationEnrollmentConfigurationsResponse#organization_enrollment_configurations #organization_enrollment_configurations} => Array&lt;Types::OrganizationEnrollmentConfiguration&gt;
+    #   * {Types::ListOrganizationEnrollmentConfigurationsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_organization_enrollment_configurations({
+    #     target_type: "Account", # accepts Account, OrganizationalUnit
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.organization_enrollment_configurations #=> Array
+    #   resp.organization_enrollment_configurations[0].target_id #=> String
+    #   resp.organization_enrollment_configurations[0].target_type #=> String, one of "Account", "OrganizationalUnit"
+    #   resp.organization_enrollment_configurations[0].organization_rule_mode #=> String, one of "AnyAllowed", "NoneAllowed"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-automation-2025-09-22/ListOrganizationEnrollmentConfigurations AWS API Documentation
+    #
+    # @overload list_organization_enrollment_configurations(params = {})
+    # @param [Hash] params ({})
+    def list_organization_enrollment_configurations(params = {}, options = {})
+      req = build_request(:list_organization_enrollment_configurations, params)
+      req.send_request(options)
+    end
+
+    # Lists the organization root and organizational units (OUs), including
+    # whether an applicable organization enrollment configuration enables
+    # Automation for member accounts and the effective organization rule
+    # mode for each root or OU.
+    #
+    # <note markdown="1"> Only the management account or a delegated administrator can perform
+    # this action.
+    #
+    #  </note>
+    #
+    # @option params [Array<String>] :organizational_unit_ids
+    #   The organizational unit (OU) or organization root IDs to return. If
+    #   you don't specify this parameter, the operation returns the
+    #   organization root and every OU.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of organizational units to return in a single
+    #   response. If you don't specify a value, the default is 1,000.
+    #
+    # @option params [String] :next_token
+    #   The token to use to retrieve the next page of results.
+    #
+    # @return [Types::ListOrganizationalUnitsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListOrganizationalUnitsResponse#organizational_units #organizational_units} => Array&lt;Types::OrganizationalUnitInfo&gt;
+    #   * {Types::ListOrganizationalUnitsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_organizational_units({
+    #     organizational_unit_ids: ["OrganizationalUnitId"],
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.organizational_units #=> Array
+    #   resp.organizational_units[0].organizational_unit_id #=> String
+    #   resp.organizational_units[0].auto_enroll_member_accounts #=> String, one of "All", "None"
+    #   resp.organizational_units[0].organization_rule_mode #=> String, one of "AnyAllowed", "NoneAllowed"
+    #   resp.organizational_units[0].organization_rule_mode_source.source_type #=> String, one of "Applied", "Inherited", "Direct", "Default"
+    #   resp.organizational_units[0].organization_rule_mode_source.source_target_id #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-automation-2025-09-22/ListOrganizationalUnits AWS API Documentation
+    #
+    # @overload list_organizational_units(params = {})
+    # @param [Hash] params ({})
+    def list_organizational_units(params = {}, options = {})
+      req = build_request(:list_organizational_units, params)
+      req.send_request(options)
+    end
+
     # Provides a summary of recommended actions based on specified filters.
     #
     # <note markdown="1"> Management accounts and delegated administrators can retrieve
-    # recommended actions that include associated member accounts. You can
-    # associate a member account using `AssociateAccounts`.
+    # recommended action summaries for member accounts that are associated
+    # using `AssociateAccounts` or have an applicable organization
+    # enrollment configuration with `organizationRuleMode` set to
+    # `AnyAllowed`.
     #
     #  </note>
     #
@@ -1599,9 +1817,15 @@ module Aws::ComputeOptimizerAutomation
     #   summaries. Filters can be based on resource type, action type, account
     #   ID, and other criteria.
     #
+    # @option params [Array<String>] :organizational_unit_ids
+    #   The organizational unit (OU) or organization root IDs to use to filter
+    #   the results. The response includes recommended action summaries for
+    #   accounts in the specified OUs and their child OUs. Only the management
+    #   account or a delegated administrator can specify this parameter.
+    #
     # @option params [Integer] :max_results
     #   The maximum number of recommended action summaries to return in a
-    #   single response. Valid range is 1-1000.
+    #   single response. If you don't specify a value, the default is 100.
     #
     # @option params [String] :next_token
     #   A token used for pagination to retrieve the next set of results when
@@ -1623,6 +1847,7 @@ module Aws::ComputeOptimizerAutomation
     #         values: ["FilterValue"], # required
     #       },
     #     ],
+    #     organizational_unit_ids: ["OrganizationalUnitId"],
     #     max_results: 1,
     #     next_token: "NextToken",
     #   })
@@ -1647,20 +1872,27 @@ module Aws::ComputeOptimizerAutomation
       req.send_request(options)
     end
 
-    # Lists the recommended actions based that match specified filters.
+    # Lists the recommended actions that match the specified filters.
     #
     # <note markdown="1"> Management accounts and delegated administrators can retrieve
-    # recommended actions that include associated member accounts. You can
-    # associate a member account using `AssociateAccounts`.
+    # recommended actions for member accounts that are associated using
+    # `AssociateAccounts` or have an applicable organization enrollment
+    # configuration with `organizationRuleMode` set to `AnyAllowed`.
     #
     #  </note>
     #
     # @option params [Array<Types::RecommendedActionFilter>] :filters
     #   The filters to apply to the list of recommended actions.
     #
+    # @option params [Array<String>] :organizational_unit_ids
+    #   The organizational unit (OU) or organization root IDs to use to filter
+    #   the results. The response includes recommended actions for accounts in
+    #   the specified OUs and their child OUs. Only the management account or
+    #   a delegated administrator can specify this parameter.
+    #
     # @option params [Integer] :max_results
     #   The maximum number of recommended actions to return in a single
-    #   response. Valid range is 1-1000.
+    #   response. If you don't specify a value, the default is 100.
     #
     # @option params [String] :next_token
     #   A token used for pagination to retrieve the next set of results when
@@ -1682,6 +1914,7 @@ module Aws::ComputeOptimizerAutomation
     #         values: ["FilterValue"], # required
     #       },
     #     ],
+    #     organizational_unit_ids: ["OrganizationalUnitId"],
     #     max_results: 1,
     #     next_token: "NextToken",
     #   })
@@ -1756,11 +1989,71 @@ module Aws::ComputeOptimizerAutomation
       req.send_request(options)
     end
 
+    # Creates or updates an organization enrollment configuration. The
+    # organization enrollment configuration sets the organization rule mode
+    # on the specified account, organizational unit (OU), or organization
+    # root and enables Automation for affected member accounts that have
+    # opted in to Compute Optimizer, including accounts that join later.
+    # Changes on an OU or the organization root can take up to 5 minutes.
+    # Organization enrollment configurations take precedence over settings
+    # made by `AssociateAccounts` and `DisassociateAccounts`. You must
+    # specify at least one configuration in the request.
+    #
+    # <note markdown="1"> Only the management account or a delegated administrator can perform
+    # this action.
+    #
+    #  Organization enrollment configurations can't be created for the
+    # management account.
+    #
+    #  </note>
+    #
+    # @option params [required, Types::OrganizationTarget] :target
+    #   The account, organizational unit (OU), or organization root on which
+    #   to create or update the organization enrollment configuration. You
+    #   can't specify the management account.
+    #
+    # @option params [String] :organization_rule_mode
+    #   The organization rule mode to set on the target. An organization
+    #   enrollment configuration with either `AnyAllowed` or `NoneAllowed`
+    #   enables Automation for affected member accounts. `AnyAllowed` permits
+    #   organization rules to apply to those accounts, while `NoneAllowed`
+    #   doesn't.
+    #
+    # @option params [String] :client_token
+    #   A unique identifier to ensure idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_organization_enrollment_configuration({
+    #     target: { # required
+    #       account_id: "AccountId",
+    #       organizational_unit_id: "OrganizationalUnitId",
+    #     },
+    #     organization_rule_mode: "AnyAllowed", # accepts AnyAllowed, NoneAllowed
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-automation-2025-09-22/PutOrganizationEnrollmentConfiguration AWS API Documentation
+    #
+    # @overload put_organization_enrollment_configuration(params = {})
+    # @param [Hash] params ({})
+    def put_organization_enrollment_configuration(params = {}, options = {})
+      req = build_request(:put_organization_enrollment_configuration, params)
+      req.send_request(options)
+    end
+
     # Initiates a rollback for a completed automation event.
     #
-    # <note markdown="1"> Management accounts and delegated administrators can only initiate a
-    # rollback for events belonging to associated member accounts. You can
-    # associate a member account using `AssociateAccounts`.
+    # <note markdown="1"> Management accounts and delegated administrators can initiate a
+    # rollback for events belonging to member accounts that are associated
+    # using `AssociateAccounts` or have an applicable organization
+    # enrollment configuration with `organizationRuleMode` set to
+    # `AnyAllowed`.
     #
     #  </note>
     #
@@ -1804,9 +2097,10 @@ module Aws::ComputeOptimizerAutomation
     # Initiates a one-time, on-demand automation for the specified
     # recommended action.
     #
-    # <note markdown="1"> Management accounts and delegated administrators can only initiate
-    # recommended actions for associated member accounts. You can associate
-    # a member account using `AssociateAccounts`.
+    # <note markdown="1"> Management accounts and delegated administrators can initiate
+    # recommended actions for member accounts that are associated using
+    # `AssociateAccounts` or have an applicable organization enrollment
+    # configuration with `organizationRuleMode` set to `AnyAllowed`.
     #
     #  </note>
     #
@@ -2016,6 +2310,9 @@ module Aws::ComputeOptimizerAutomation
     #     organization_configuration: {
     #       rule_apply_order: "BeforeAccountRules", # accepts BeforeAccountRules, AfterAccountRules
     #       account_ids: ["AccountId"],
+    #       organizational_unit_ids: ["OrganizationalUnitId"],
+    #       excluded_organizational_unit_ids: ["OrganizationalUnitId"],
+    #       excluded_account_ids: ["AccountId"],
     #     },
     #     priority: "String",
     #     recommended_action_types: ["SnapshotAndDeleteUnattachedEbsVolume"], # accepts SnapshotAndDeleteUnattachedEbsVolume, UpgradeEbsVolumeType
@@ -2089,6 +2386,12 @@ module Aws::ComputeOptimizerAutomation
     #   resp.organization_configuration.rule_apply_order #=> String, one of "BeforeAccountRules", "AfterAccountRules"
     #   resp.organization_configuration.account_ids #=> Array
     #   resp.organization_configuration.account_ids[0] #=> String
+    #   resp.organization_configuration.organizational_unit_ids #=> Array
+    #   resp.organization_configuration.organizational_unit_ids[0] #=> String
+    #   resp.organization_configuration.excluded_organizational_unit_ids #=> Array
+    #   resp.organization_configuration.excluded_organizational_unit_ids[0] #=> String
+    #   resp.organization_configuration.excluded_account_ids #=> Array
+    #   resp.organization_configuration.excluded_account_ids[0] #=> String
     #   resp.priority #=> String
     #   resp.recommended_action_types #=> Array
     #   resp.recommended_action_types[0] #=> String, one of "SnapshotAndDeleteUnattachedEbsVolume", "UpgradeEbsVolumeType"
@@ -2155,13 +2458,16 @@ module Aws::ComputeOptimizerAutomation
     #     run. You must wait at least 24 hours after opting out to opt in
     #     again.
     #
-    #   <note markdown="1"> The `Pending` and `Failed` options cannot be used to update the
+    #   <note markdown="1"> The `Pending` and `Failed` options can't be used to update the
     #   enrollment status of an account. They are returned in the response of
     #   a request to update the enrollment status of an account.
     #
-    #    If you are a member account, your account must be disassociated from
-    #   your organization’s management account before you can disable
-    #   Automation. Contact your administrator to make this change.
+    #    If you are a member account, you can't disable Automation while an
+    #   organization enrollment configuration applies. If no organization
+    #   enrollment configuration applies, you also can't disable Automation
+    #   while your organization rule mode is `AnyAllowed`. Ask your
+    #   administrator to delete the organization enrollment configuration or
+    #   disassociate your account, as applicable.
     #
     #    </note>
     #
@@ -2219,7 +2525,7 @@ module Aws::ComputeOptimizerAutomation
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-computeoptimizerautomation'
-      context[:gem_version] = '1.18.0'
+      context[:gem_version] = '1.26.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

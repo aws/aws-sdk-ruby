@@ -699,7 +699,8 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GuardDuty/Client.html#get_investigation-instance_method
       def get_investigation: (
                                detector_id: ::String,
-                               investigation_id: ::String
+                               investigation_id: ::String,
+                               ?summary_format: ("STRING" | "STRUCTURED")
                              ) -> _GetInvestigationResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetInvestigationResponseSuccess
 
@@ -1028,6 +1029,23 @@ module Aws
                         ) -> _ListIPSetsResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListIPSetsResponseSuccess
 
+      interface _ListInvestigationRecordsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListInvestigationRecordsResponse]
+        def investigation_id: () -> ::String
+        def status: () -> ("RUNNING" | "COMPLETED" | "FAILED")
+        def records: () -> ::Array[Types::InvestigationRecord]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GuardDuty/Client.html#list_investigation_records-instance_method
+      def list_investigation_records: (
+                                        detector_id: ::String,
+                                        investigation_id: ::String,
+                                        ?record_types: Array[("OBSERVATION" | "ANALYSIS" | "UPDATE" | "FETCH" | "METADATA")],
+                                        ?max_results: ::Integer,
+                                        ?next_token: ::String
+                                      ) -> _ListInvestigationRecordsResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListInvestigationRecordsResponseSuccess
+
       interface _ListInvestigationsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListInvestigationsResponse]
         def investigations: () -> ::Array[Types::InvestigationSummary]
@@ -1036,6 +1054,12 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GuardDuty/Client.html#list_investigations-instance_method
       def list_investigations: (
                                  detector_id: ::String,
+                                 ?filter_criteria: {
+                                   criterion: Hash[("STATUS" | "RISK_LEVEL" | "CONFIDENCE" | "FINDING_ID" | "INVESTIGATION_TYPE"), {
+                                       equals: Array[::String]?,
+                                       not_equals: Array[::String]?
+                                     }]?
+                                 },
                                  ?sort_criteria: {
                                    attribute_name: ("START_TIME" | "END_TIME" | "STATUS" | "RISK_LEVEL" | "CONFIDENCE")?,
                                    order_by: ("ASC" | "DESC")?

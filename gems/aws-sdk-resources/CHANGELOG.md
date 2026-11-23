@@ -1,6 +1,41 @@
 Unreleased Changes
 ------------------
 
+3.283.0 (2026-11-20)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-sagemakergatewayruntime` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-payments` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-agentdiscovery` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-apiportal` gem.
+
+3.282.0 (2026-11-19)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-partnercentralmarketing` gem.
+
+3.281.0 (2026-11-18)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-abusesignal` gem.
+
+3.280.0 (2026-11-16)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-sagemakerinferencerouterruntime` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-opensearchmemory` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-connectscheduling` gem.
+
+3.279.0 (2026-11-05)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-accountaccessruntime` gem.
+
 3.278.0 (2026-10-22)
 ------------------
 

@@ -1,13 +1,11 @@
 {
   "version" : 2,
   "testCases" : [ {
-    "id" : "ListAdminAccountsNotOnboarded",
-    "operationName" : "ListAdminAccounts",
+    "id" : "ListPoliciesSuccess",
+    "operationName" : "ListPolicies",
     "input" : { },
     "expectation" : {
-      "failure" : {
-        "errorId" : "ValidationException"
-      }
+      "success" : { }
     },
     "config" : {
       "region" : "us-east-1",
@@ -16,11 +14,13 @@
       "useAccountIdRouting" : true
     }
   }, {
-    "id" : "ListPoliciesSuccess",
-    "operationName" : "ListPolicies",
+    "id" : "ListAdminAccountsNotOnboarded",
+    "operationName" : "ListAdminAccounts",
     "input" : { },
     "expectation" : {
-      "success" : { }
+      "failure" : {
+        "errorId" : "ValidationException"
+      }
     },
     "config" : {
       "region" : "us-east-1",

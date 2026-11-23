@@ -7,7 +7,7 @@ GEM
     kramdown (2.5.2)
       rexml (>= 3.4.4)
     logger (1.7.0)
-    mustache (1.1.2)
+    mustache (1.1.3)
     oj (3.17.7)
       bigdecimal (>= 3.0)
       ostruct (>= 0.2)
@@ -27,7 +27,7 @@ DEPENDENCIES
   jmespath
   kramdown
   logger
-  mustache (< 1.1.3)
+  mustache (< 1.1.4)
   oj
   ox
   rexml
@@ -39,7 +39,7 @@ CHECKSUMS
   jmespath (1.6.2) sha256=238d774a58723d6c090494c8879b5e9918c19485f7e840f2c1c7532cf84ebcb1
   kramdown (2.5.2) sha256=1ba542204c66b6f9111ff00dcc26075b95b220b07f2905d8261740c82f7f02fa
   logger (1.7.0) sha256=196edec7cc44b66cfb40f9755ce11b392f21f7967696af15d274dde7edff0203
-  mustache (1.1.2) sha256=d420243400354da78ded2d81541b381ad8d94e8e9b95022d0d71d66f8ef36c00
+  mustache (1.1.3) sha256=75bdfeaa17e4af168fae2c262867b2992087aef39d8580965cb90d37a7d093c2
   oj (3.17.7) sha256=7a21d3ac8e544a850f1cdaf711b0c8144ba587d14d3e4917c0855fd7b0483db7
   ostruct (0.6.3) sha256=95a2ed4a4bd1d190784e666b47b2d3f078e4a9efda2fccf18f84ddc6538ed912
   ox (2.14.29) sha256=206736d5a8dade9dca10cf72022bc157ad6ca3eecaba3853918426ed88e12dc2

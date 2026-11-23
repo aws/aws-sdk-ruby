@@ -24,6 +24,187 @@ module Aws::Kinesis
       include Aws::Structure
     end
 
+    # A dead-letter record that was not acknowledged, and why.
+    #
+    # @!attribute [rw] receipt_handle
+    #   The receipt handle of the record that was not acknowledged.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_code
+    #   A code identifying the type of failure. One of
+    #   `ResourceNotFoundException`, `InvalidArgumentException`,
+    #   `ThrottlingException`, or `InternalFailureException`.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   A description of the cause of the failure.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/AcknowledgeDeadLetterQueueRecordsErrorEntry AWS API Documentation
+    #
+    class AcknowledgeDeadLetterQueueRecordsErrorEntry < Struct.new(
+      :receipt_handle,
+      :error_code,
+      :error_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] queue_arn
+    #   The ARN of the queue whose dead-letter records are acknowledged.
+    #   @return [String]
+    #
+    # @!attribute [rw] entries
+    #   The dead-letter records to acknowledge, identified by their receipt
+    #   handles.
+    #   @return [Array<Types::AcknowledgeDeadLetterQueueRecordsRequestEntry>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/AcknowledgeDeadLetterQueueRecordsInput AWS API Documentation
+    #
+    class AcknowledgeDeadLetterQueueRecordsInput < Struct.new(
+      :queue_arn,
+      :entries)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] successful
+    #   The records that were acknowledged.
+    #   @return [Array<Types::AcknowledgeDeadLetterQueueRecordsResultEntry>]
+    #
+    # @!attribute [rw] failed
+    #   The records that were not acknowledged, each with the reason the
+    #   entry failed.
+    #   @return [Array<Types::AcknowledgeDeadLetterQueueRecordsErrorEntry>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/AcknowledgeDeadLetterQueueRecordsOutput AWS API Documentation
+    #
+    class AcknowledgeDeadLetterQueueRecordsOutput < Struct.new(
+      :successful,
+      :failed)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A dead-letter record to acknowledge, identified by its receipt handle.
+    #
+    # @!attribute [rw] receipt_handle
+    #   The receipt handle of the record to acknowledge, as returned by
+    #   ReceiveDeadLetterQueueRecords.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/AcknowledgeDeadLetterQueueRecordsRequestEntry AWS API Documentation
+    #
+    class AcknowledgeDeadLetterQueueRecordsRequestEntry < Struct.new(
+      :receipt_handle)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A dead-letter record that was acknowledged.
+    #
+    # @!attribute [rw] receipt_handle
+    #   The receipt handle of the record that was acknowledged.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/AcknowledgeDeadLetterQueueRecordsResultEntry AWS API Documentation
+    #
+    class AcknowledgeDeadLetterQueueRecordsResultEntry < Struct.new(
+      :receipt_handle)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A record that was not acknowledged, and why.
+    #
+    # @!attribute [rw] receipt_handle
+    #   The receipt handle of the record that was not acknowledged.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_code
+    #   A code identifying the type of failure. One of
+    #   `ResourceNotFoundException`, `InvalidArgumentException`,
+    #   `ThrottlingException`, or `InternalFailureException`.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   A description of the cause of the failure.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/AcknowledgeQueueRecordsErrorEntry AWS API Documentation
+    #
+    class AcknowledgeQueueRecordsErrorEntry < Struct.new(
+      :receipt_handle,
+      :error_code,
+      :error_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] queue_arn
+    #   The ARN of the queue the records were received from.
+    #   @return [String]
+    #
+    # @!attribute [rw] entries
+    #   The records to acknowledge, identified by their receipt handles.
+    #   @return [Array<Types::AcknowledgeQueueRecordsRequestEntry>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/AcknowledgeQueueRecordsInput AWS API Documentation
+    #
+    class AcknowledgeQueueRecordsInput < Struct.new(
+      :queue_arn,
+      :entries)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] successful
+    #   The records that were acknowledged.
+    #   @return [Array<Types::AcknowledgeQueueRecordsResultEntry>]
+    #
+    # @!attribute [rw] failed
+    #   The records that were not acknowledged, each with the reason the
+    #   entry failed.
+    #   @return [Array<Types::AcknowledgeQueueRecordsErrorEntry>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/AcknowledgeQueueRecordsOutput AWS API Documentation
+    #
+    class AcknowledgeQueueRecordsOutput < Struct.new(
+      :successful,
+      :failed)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A record to acknowledge, identified by its receipt handle.
+    #
+    # @!attribute [rw] receipt_handle
+    #   The receipt handle of the record to acknowledge, as returned by
+    #   ReceiveQueueRecords.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/AcknowledgeQueueRecordsRequestEntry AWS API Documentation
+    #
+    class AcknowledgeQueueRecordsRequestEntry < Struct.new(
+      :receipt_handle)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A record that was acknowledged.
+    #
+    # @!attribute [rw] receipt_handle
+    #   The receipt handle of the record that was acknowledged.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/AcknowledgeQueueRecordsResultEntry AWS API Documentation
+    #
+    class AcknowledgeQueueRecordsResultEntry < Struct.new(
+      :receipt_handle)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Represents the input for `AddTagsToStream`.
     #
     # @!attribute [rw] stream_name
@@ -544,6 +725,53 @@ module Aws::Kinesis
       include Aws::Structure
     end
 
+    # @!attribute [rw] queue_name
+    #   A name for the queue. The name is scoped to the Amazon Web Services
+    #   account and Region used by the request, so two queues in different
+    #   accounts, or in the same account and different Regions, can have the
+    #   same name.
+    #   @return [String]
+    #
+    # @!attribute [rw] stream_configuration_list
+    #   The data stream the queue delivers records from, and the position in
+    #   that stream where delivery begins. The list must contain exactly one
+    #   entry, because a queue delivers records from a single data stream.
+    #   @return [Array<Types::QueueStreamConfiguration>]
+    #
+    # @!attribute [rw] queue_attributes
+    #   The configuration attributes for the queue, including its visibility
+    #   timeout and its dead-letter handling configuration.
+    #   @return [Types::QueueAttributes]
+    #
+    # @!attribute [rw] tags
+    #   A set of up to 50 key-value pairs to apply to the queue. You can
+    #   also add, change, and remove tags after the queue is created with
+    #   TagResource and UntagResource.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/CreateQueueInput AWS API Documentation
+    #
+    class CreateQueueInput < Struct.new(
+      :queue_name,
+      :stream_configuration_list,
+      :queue_attributes,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] queue_description
+    #   A description of the queue that was created.
+    #   @return [Types::QueueDescription]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/CreateQueueOutput AWS API Documentation
+    #
+    class CreateQueueOutput < Struct.new(
+      :queue_description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Represents the input for `CreateStream`.
     #
     # @!attribute [rw] stream_name
@@ -617,6 +845,45 @@ module Aws::Kinesis
       include Aws::Structure
     end
 
+    # The dead-letter handling configuration for a queue. Each queue has
+    # built-in dead-letter handling. When a record has been received
+    # `MaxReceiveCount` times without being acknowledged, it becomes a
+    # dead-letter record, and ReceiveQueueRecords no longer returns it. The
+    # dead-letter record stays in the same queue, and you work with it
+    # through ReceiveDeadLetterQueueRecords,
+    # AcknowledgeDeadLetterQueueRecords,
+    # UpdateDeadLetterQueueRecordsVisibility, and
+    # RestoreDeadLetterQueueRecords, which use the same queue ARN.
+    #
+    # Dead-letter handling is enabled by default, with a `MaxReceiveCount`
+    # of 6. To use a different value, or to turn dead-letter handling off,
+    # specify this configuration in `QueueAttributes`.
+    #
+    # @!attribute [rw] target_type
+    #   Whether dead-letter handling is enabled for the queue. `BUILT_IN`
+    #   enables it: when a record has been received `MaxReceiveCount` times
+    #   without being acknowledged, it becomes a dead-letter record and
+    #   ReceiveQueueRecords no longer returns it. `NONE` disables it, and an
+    #   unacknowledged record continues to be redelivered until it is
+    #   acknowledged or its retention period ends.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_receive_count
+    #   The number of times a record can be received without being
+    #   acknowledged before it becomes a dead-letter record. Required when
+    #   `TargetType` is `BUILT_IN`. A queue that you create without
+    #   `DeadLetterConfiguration` gets a `MaxReceiveCount` of 6.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/DeadLetterConfiguration AWS API Documentation
+    #
+    class DeadLetterConfiguration < Struct.new(
+      :target_type,
+      :max_receive_count)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The Amazon S3 dead-letter queue configuration for records that cannot
     # be delivered.
     #
@@ -686,8 +953,21 @@ module Aws::Kinesis
       include Aws::Structure
     end
 
+    # @!attribute [rw] queue_arn
+    #   The ARN of the queue to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/DeleteQueueInput AWS API Documentation
+    #
+    class DeleteQueueInput < Struct.new(
+      :queue_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] resource_arn
-    #   The Amazon Resource Name (ARN) of the data stream or consumer.
+    #   The Amazon Resource Name (ARN) of a data stream, a queue, or an
+    #   enhanced fan-out consumer.
     #   @return [String]
     #
     # @!attribute [rw] stream_id
@@ -711,8 +991,15 @@ module Aws::Kinesis
     #
     # @!attribute [rw] enforce_consumer_deletion
     #   If this parameter is unset (`null`) or if you set it to `false`, and
-    #   the stream has registered consumers, the call to `DeleteStream`
-    #   fails with a `ResourceInUseException`.
+    #   the stream has registered enhanced fan-out consumers, the call to
+    #   `DeleteStream` fails with a `ResourceInUseException`.
+    #
+    #   If you set it to `true`, `DeleteStream` deletes the stream and every
+    #   consumer registered with it.
+    #
+    #   This parameter does not apply to queues. A stream that has queues
+    #   cannot be deleted until every queue on it is deleted with
+    #   DeleteQueue, whatever this parameter is set to.
     #   @return [Boolean]
     #
     # @!attribute [rw] stream_arn
@@ -856,6 +1143,30 @@ module Aws::Kinesis
       :on_demand_stream_count_limit,
       :channel_count,
       :channel_count_limit)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] queue_arn
+    #   The ARN of the queue to describe.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/DescribeQueueInput AWS API Documentation
+    #
+    class DescribeQueueInput < Struct.new(
+      :queue_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] queue_description
+    #   A description of the queue.
+    #   @return [Types::QueueDescription]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/DescribeQueueOutput AWS API Documentation
+    #
+    class DescribeQueueOutput < Struct.new(
+      :queue_description)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1303,7 +1614,8 @@ module Aws::Kinesis
     end
 
     # @!attribute [rw] resource_arn
-    #   The Amazon Resource Name (ARN) of the data stream or consumer.
+    #   The Amazon Resource Name (ARN) of a data stream, a queue, or an
+    #   enhanced fan-out consumer.
     #   @return [String]
     #
     # @!attribute [rw] stream_id
@@ -1523,8 +1835,7 @@ module Aws::Kinesis
       include Aws::Structure
     end
 
-    # The request was rejected because the specified customer master key
-    # (CMK) isn't enabled.
+    # The request was rejected because the specified KMS key isn't enabled.
     #
     # @!attribute [rw] message
     #   A message that provides information about the error.
@@ -1670,6 +1981,50 @@ module Aws::Kinesis
     #
     class ListChannelsOutput < Struct.new(
       :channel_summaries,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] max_results
+    #   The maximum number of queue summaries to return in one response. The
+    #   response might contain fewer summaries than this value, and might
+    #   contain a `NextToken` even when it contains fewer.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The `NextToken` returned by a previous `ListQueues` request. Use it
+    #   to retrieve the next page of queue summaries.
+    #   @return [String]
+    #
+    # @!attribute [rw] stream_filter
+    #   Lists only the queues created on the specified data stream.
+    #   @return [Array<Types::QueueStreamFilter>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/ListQueuesInput AWS API Documentation
+    #
+    class ListQueuesInput < Struct.new(
+      :max_results,
+      :next_token,
+      :stream_filter)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] queue_summaries
+    #   A summary of each queue that matched the request.
+    #   @return [Array<Types::QueueSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to pass to the next `ListQueues` request to retrieve the
+    #   next page of queue summaries. This member is absent when no more
+    #   queues are available.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/ListQueuesOutput AWS API Documentation
+    #
+    class ListQueuesOutput < Struct.new(
+      :queue_summaries,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -2491,7 +2846,8 @@ module Aws::Kinesis
     end
 
     # @!attribute [rw] resource_arn
-    #   The Amazon Resource Name (ARN) of the data stream or consumer.
+    #   The Amazon Resource Name (ARN) of a data stream, a queue, or an
+    #   enhanced fan-out consumer.
     #   @return [String]
     #
     # @!attribute [rw] stream_id
@@ -2510,6 +2866,362 @@ module Aws::Kinesis
       :resource_arn,
       :stream_id,
       :policy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration attributes for a queue.
+    #
+    # @!attribute [rw] visibility_timeout_seconds
+    #   The duration, in seconds, that a record is in flight and not visible
+    #   to any consumer instance after it is received. A record that is not
+    #   acknowledged before this duration elapses becomes visible in the
+    #   queue again and can be received by any consumer instance. If you
+    #   omit this attribute when you create a queue, the queue uses 30
+    #   seconds.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] dead_letter_configuration
+    #   The dead-letter handling configuration for the queue. If you omit
+    #   this attribute, dead-letter handling is enabled with a
+    #   `MaxReceiveCount` of 6. If you specify it with a `TargetType` of
+    #   `BUILT_IN`, you must also specify `MaxReceiveCount`.
+    #   @return [Types::DeadLetterConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/QueueAttributes AWS API Documentation
+    #
+    class QueueAttributes < Struct.new(
+      :visibility_timeout_seconds,
+      :dead_letter_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A description of a queue. Returned by CreateQueue, UpdateQueue, and
+    # DescribeQueue.
+    #
+    # @!attribute [rw] queue_name
+    #   The name of the queue.
+    #   @return [String]
+    #
+    # @!attribute [rw] queue_arn
+    #   The ARN of the queue. The resource identifier in the ARN is
+    #   generated when the queue is created and is not derived from
+    #   `QueueName`. Use the returned `QueueARN` to identify the queue in
+    #   subsequent requests.
+    #   @return [String]
+    #
+    # @!attribute [rw] queue_status
+    #   The current status of the queue.
+    #   @return [String]
+    #
+    # @!attribute [rw] queue_creation_timestamp
+    #   The time the queue was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] stream_configuration_list
+    #   The data stream the queue delivers records from, and the position in
+    #   that stream where delivery begins. The list contains exactly one
+    #   entry, because a queue delivers records from a single data stream.
+    #   @return [Array<Types::QueueStreamConfiguration>]
+    #
+    # @!attribute [rw] queue_attributes
+    #   The configuration attributes of the queue.
+    #   @return [Types::QueueAttributes]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/QueueDescription AWS API Documentation
+    #
+    class QueueDescription < Struct.new(
+      :queue_name,
+      :queue_arn,
+      :queue_status,
+      :queue_creation_timestamp,
+      :stream_configuration_list,
+      :queue_attributes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A data stream record, as delivered through a queue.
+    #
+    # @!attribute [rw] receipt_handle
+    #   The identifier you use to acknowledge this record, change its
+    #   visibility, or restore it after it becomes a dead-letter record. A
+    #   new receipt handle is issued each time the record is received.
+    #   @return [String]
+    #
+    # @!attribute [rw] record_id
+    #   The unique identifier of the record. This value stays the same
+    #   across every delivery of the record, and it is the same in every
+    #   queue on the stream that delivers the record. To identify a single
+    #   delivery, use `ReceiptHandle` instead.
+    #   @return [String]
+    #
+    # @!attribute [rw] partition_key
+    #   The partition key the record was written to the data stream with.
+    #   @return [String]
+    #
+    # @!attribute [rw] data
+    #   The data blob of the record. Amazon Kinesis Data Streams does not
+    #   inspect, interpret, or change the data.
+    #   @return [String]
+    #
+    # @!attribute [rw] approximate_arrival_timestamp
+    #   The approximate time the record arrived in the data stream. The
+    #   difference between this value and the current time is how long the
+    #   record took to reach your queue consumer.
+    #   @return [Time]
+    #
+    # @!attribute [rw] first_receive_timestamp
+    #   The approximate time the record was first received from the queue.
+    #   @return [Time]
+    #
+    # @!attribute [rw] receive_count
+    #   The number of times this record has been received without being
+    #   acknowledged.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/QueueRecord AWS API Documentation
+    #
+    class QueueRecord < Struct.new(
+      :receipt_handle,
+      :record_id,
+      :partition_key,
+      :data,
+      :approximate_arrival_timestamp,
+      :first_receive_timestamp,
+      :receive_count)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The position in a data stream from which a queue begins delivering
+    # records.
+    #
+    # @!attribute [rw] type
+    #   You can set the starting position to one of the following values:
+    #
+    #   `LATEST`: Delivers records that arrive after you create the queue.
+    #   This is the default.
+    #
+    #   `TRIM_HORIZON`: Start delivering at the last untrimmed record in the
+    #   stream, which is the oldest record the stream still retains.
+    #
+    #   `AT_TIMESTAMP`: Delivers records that arrive at or after a time
+    #   stamp that you provide.
+    #   @return [String]
+    #
+    # @!attribute [rw] timestamp
+    #   The approximate time from which the queue begins delivering records.
+    #   Records that arrive at approximately this time or later are
+    #   delivered.
+    #
+    #   In a request, specify this value only when `Type` is `AT_TIMESTAMP`.
+    #   It is required in that case, and specifying it for any other type
+    #   returns a `ValidationException`.
+    #
+    #   In a response, this value is approximate and reflects the queue's
+    #   effective starting position. While the queue is `CREATING`, the
+    #   response echoes what you configured: for `AT_TIMESTAMP`, the
+    #   timestamp you provided, and for `TRIM_HORIZON` and `LATEST`, this
+    #   member is absent because the effective position is not yet
+    #   determined. Once the queue is `ACTIVE`, the response always includes
+    #   this member. For `AT_TIMESTAMP`, it is the timestamp you provided or
+    #   the earliest time the stream can be read from, whichever is later.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/QueueStartingPosition AWS API Documentation
+    #
+    class QueueStartingPosition < Struct.new(
+      :type,
+      :timestamp)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The data stream a queue delivers records from, and the position in
+    # that stream where delivery begins.
+    #
+    # @!attribute [rw] stream_arn
+    #   The ARN of the data stream.
+    #   @return [String]
+    #
+    # @!attribute [rw] starting_position
+    #   The position in the stream from which the queue begins delivering
+    #   records. The default is `LATEST`.
+    #   @return [Types::QueueStartingPosition]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/QueueStreamConfiguration AWS API Documentation
+    #
+    class QueueStreamConfiguration < Struct.new(
+      :stream_arn,
+      :starting_position)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Filters the queues returned by ListQueues to those created on a
+    # particular data stream.
+    #
+    # @!attribute [rw] stream_arn
+    #   The ARN of the data stream to filter on.
+    #   @return [String]
+    #
+    # @!attribute [rw] stream_creation_timestamp
+    #   The time the data stream was created. Specify this value to
+    #   distinguish between a deleted stream and a stream that was recreated
+    #   with the same name.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/QueueStreamFilter AWS API Documentation
+    #
+    class QueueStreamFilter < Struct.new(
+      :stream_arn,
+      :stream_creation_timestamp)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Identifies a data stream associated with a queue.
+    #
+    # @!attribute [rw] stream_arn
+    #   The ARN of the data stream.
+    #   @return [String]
+    #
+    # @!attribute [rw] stream_creation_timestamp
+    #   The time the data stream was created.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/QueueStreamIdentifier AWS API Documentation
+    #
+    class QueueStreamIdentifier < Struct.new(
+      :stream_arn,
+      :stream_creation_timestamp)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A summary of a queue. Returned by ListQueues. To retrieve a queue's
+    # configuration attributes, use DescribeQueue.
+    #
+    # @!attribute [rw] queue_name
+    #   The name of the queue.
+    #   @return [String]
+    #
+    # @!attribute [rw] queue_arn
+    #   The ARN of the queue.
+    #   @return [String]
+    #
+    # @!attribute [rw] queue_status
+    #   The current status of the queue.
+    #   @return [String]
+    #
+    # @!attribute [rw] queue_creation_timestamp
+    #   The time the queue was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] streams
+    #   The data stream the queue delivers records from.
+    #   @return [Array<Types::QueueStreamIdentifier>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/QueueSummary AWS API Documentation
+    #
+    class QueueSummary < Struct.new(
+      :queue_name,
+      :queue_arn,
+      :queue_status,
+      :queue_creation_timestamp,
+      :streams)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] queue_arn
+    #   The ARN of the queue whose dead-letter records are received.
+    #   @return [String]
+    #
+    # @!attribute [rw] limit
+    #   The maximum number of records to return. The queue never returns
+    #   more dead-letter records than this value, and might return fewer.
+    #   The default is 10.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] wait_time_seconds
+    #   The duration, in seconds, that the call waits for a record to become
+    #   visible before returning. The default is 9.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] visibility_timeout_seconds
+    #   The duration, in seconds, that the records returned by this request
+    #   are in flight and not visible to any consumer instance. If you do
+    #   not specify this value, the queue's visibility timeout is used.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/ReceiveDeadLetterQueueRecordsInput AWS API Documentation
+    #
+    class ReceiveDeadLetterQueueRecordsInput < Struct.new(
+      :queue_arn,
+      :limit,
+      :wait_time_seconds,
+      :visibility_timeout_seconds)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] queue_records
+    #   The dead-letter records received from the queue. This list is empty
+    #   when no dead-letter records are visible.
+    #   @return [Array<Types::QueueRecord>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/ReceiveDeadLetterQueueRecordsOutput AWS API Documentation
+    #
+    class ReceiveDeadLetterQueueRecordsOutput < Struct.new(
+      :queue_records)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] queue_arn
+    #   The ARN of the queue to receive records from.
+    #   @return [String]
+    #
+    # @!attribute [rw] limit
+    #   The maximum number of records to return. The queue never returns
+    #   more records than this value, and might return fewer. The default is
+    #   10.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] wait_time_seconds
+    #   The duration, in seconds, that the call waits for a record to become
+    #   visible before returning. The default is 9.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] visibility_timeout_seconds
+    #   The duration, in seconds, that the records returned by this request
+    #   are in flight and not visible to any consumer instance. If you do
+    #   not specify this value, the queue's visibility timeout is used.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/ReceiveQueueRecordsInput AWS API Documentation
+    #
+    class ReceiveQueueRecordsInput < Struct.new(
+      :queue_arn,
+      :limit,
+      :wait_time_seconds,
+      :visibility_timeout_seconds)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] queue_records
+    #   The records received from the queue. This list is empty when no
+    #   records are visible.
+    #   @return [Array<Types::QueueRecord>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/ReceiveQueueRecordsOutput AWS API Documentation
+    #
+    class ReceiveQueueRecordsOutput < Struct.new(
+      :queue_records)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2706,6 +3418,97 @@ module Aws::Kinesis
     class ResourceNotFoundException < Struct.new(
       :message,
       :event_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A dead-letter record that was not restored, and why.
+    #
+    # @!attribute [rw] receipt_handle
+    #   The receipt handle of the record that was not restored.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_code
+    #   A code identifying the type of failure. One of
+    #   `ResourceNotFoundException`, `InvalidArgumentException`,
+    #   `ThrottlingException`, or `InternalFailureException`.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   A description of the cause of the failure.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/RestoreDeadLetterQueueRecordsErrorEntry AWS API Documentation
+    #
+    class RestoreDeadLetterQueueRecordsErrorEntry < Struct.new(
+      :receipt_handle,
+      :error_code,
+      :error_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] queue_arn
+    #   The ARN of the queue whose dead-letter records are restored.
+    #   @return [String]
+    #
+    # @!attribute [rw] entries
+    #   The dead-letter records to restore, identified by their receipt
+    #   handles.
+    #   @return [Array<Types::RestoreDeadLetterQueueRecordsRequestEntry>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/RestoreDeadLetterQueueRecordsInput AWS API Documentation
+    #
+    class RestoreDeadLetterQueueRecordsInput < Struct.new(
+      :queue_arn,
+      :entries)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] successful
+    #   The records that were restored.
+    #   @return [Array<Types::RestoreDeadLetterQueueRecordsResultEntry>]
+    #
+    # @!attribute [rw] failed
+    #   The records that were not restored, each with the reason the entry
+    #   failed.
+    #   @return [Array<Types::RestoreDeadLetterQueueRecordsErrorEntry>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/RestoreDeadLetterQueueRecordsOutput AWS API Documentation
+    #
+    class RestoreDeadLetterQueueRecordsOutput < Struct.new(
+      :successful,
+      :failed)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A dead-letter record to restore, identified by its receipt handle.
+    #
+    # @!attribute [rw] receipt_handle
+    #   The receipt handle of the record to restore, as returned by
+    #   ReceiveDeadLetterQueueRecords.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/RestoreDeadLetterQueueRecordsRequestEntry AWS API Documentation
+    #
+    class RestoreDeadLetterQueueRecordsRequestEntry < Struct.new(
+      :receipt_handle)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A dead-letter record that was restored.
+    #
+    # @!attribute [rw] receipt_handle
+    #   The receipt handle of the record that was restored.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/RestoreDeadLetterQueueRecordsResultEntry AWS API Documentation
+    #
+    class RestoreDeadLetterQueueRecordsResultEntry < Struct.new(
+      :receipt_handle)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3395,7 +4198,7 @@ module Aws::Kinesis
     # @!attribute [rw] stream_mode_details
     #   Specifies the capacity mode to which you want to set your data
     #   stream. Currently, in Kinesis Data Streams, you can choose between
-    #   an **on-demand** ycapacity mode and a **provisioned** capacity mode
+    #   an **on-demand** capacity mode and a **provisioned** capacity mode
     #   for your data streams.
     #   @return [Types::StreamModeDetails]
     #
@@ -3446,6 +4249,9 @@ module Aws::Kinesis
     #
     # @!attribute [rw] consumer_count
     #   The number of enhanced fan-out consumers registered with the stream.
+    #   Queues are not included in this count, even though they share the
+    #   stream's registered consumer limit with enhanced fan-out consumers.
+    #   `QueueCount` reports the number of queues.
     #   @return [Integer]
     #
     # @!attribute [rw] warm_throughput
@@ -3472,6 +4278,10 @@ module Aws::Kinesis
     #   only present for streams that use the on-demand capacity mode.
     #   @return [String]
     #
+    # @!attribute [rw] queue_count
+    #   The number of queues created on the data stream.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/StreamDescriptionSummary AWS API Documentation
     #
     class StreamDescriptionSummary < Struct.new(
@@ -3490,7 +4300,8 @@ module Aws::Kinesis
       :warm_throughput,
       :max_record_size_in_ki_b,
       :channel_count,
-      :record_distribution_strategy)
+      :record_distribution_strategy,
+      :queue_count)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3710,6 +4521,22 @@ module Aws::Kinesis
       include Aws::Structure
     end
 
+    # The request was denied because the request rate is too high. Reduce
+    # the frequency of your requests, and retry them with exponential
+    # backoff.
+    #
+    # @!attribute [rw] message
+    #   A message that provides information about the error.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/ThrottlingException AWS API Documentation
+    #
+    class ThrottlingException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] tag_keys
     #   A list of tag key-value pairs. Existing tags of the resource whose
     #   keys are members of this list will be removed from the Kinesis
@@ -3808,6 +4635,109 @@ module Aws::Kinesis
       include Aws::Structure
     end
 
+    # A dead-letter record whose visibility timeout was not changed, and
+    # why.
+    #
+    # @!attribute [rw] receipt_handle
+    #   The receipt handle of the record whose visibility timeout was not
+    #   changed.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_code
+    #   A code identifying the type of failure. One of
+    #   `ResourceNotFoundException`, `InvalidArgumentException`,
+    #   `ThrottlingException`, or `InternalFailureException`.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   A description of the cause of the failure.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/UpdateDeadLetterQueueRecordsVisibilityErrorEntry AWS API Documentation
+    #
+    class UpdateDeadLetterQueueRecordsVisibilityErrorEntry < Struct.new(
+      :receipt_handle,
+      :error_code,
+      :error_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] queue_arn
+    #   The ARN of the queue whose dead-letter records are updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] entries
+    #   The dead-letter records whose visibility timeout is changed,
+    #   identified by their receipt handles, and the new visibility timeout
+    #   for each.
+    #   @return [Array<Types::UpdateDeadLetterQueueRecordsVisibilityRequestEntry>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/UpdateDeadLetterQueueRecordsVisibilityInput AWS API Documentation
+    #
+    class UpdateDeadLetterQueueRecordsVisibilityInput < Struct.new(
+      :queue_arn,
+      :entries)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] successful
+    #   The records whose visibility timeout was changed.
+    #   @return [Array<Types::UpdateDeadLetterQueueRecordsVisibilityResultEntry>]
+    #
+    # @!attribute [rw] failed
+    #   The records whose visibility timeout was not changed, each with the
+    #   reason the entry failed.
+    #   @return [Array<Types::UpdateDeadLetterQueueRecordsVisibilityErrorEntry>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/UpdateDeadLetterQueueRecordsVisibilityOutput AWS API Documentation
+    #
+    class UpdateDeadLetterQueueRecordsVisibilityOutput < Struct.new(
+      :successful,
+      :failed)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A dead-letter record whose visibility timeout is changed, and the new
+    # visibility timeout.
+    #
+    # @!attribute [rw] receipt_handle
+    #   The receipt handle of the record, as returned by
+    #   ReceiveDeadLetterQueueRecords.
+    #   @return [String]
+    #
+    # @!attribute [rw] visibility_timeout_seconds
+    #   The new duration, in seconds, that the record is in flight and not
+    #   visible to any consumer instance, measured from when this request is
+    #   processed. Specify `0` to make the record visible immediately.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/UpdateDeadLetterQueueRecordsVisibilityRequestEntry AWS API Documentation
+    #
+    class UpdateDeadLetterQueueRecordsVisibilityRequestEntry < Struct.new(
+      :receipt_handle,
+      :visibility_timeout_seconds)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A dead-letter record whose visibility timeout was changed.
+    #
+    # @!attribute [rw] receipt_handle
+    #   The receipt handle of the record whose visibility timeout was
+    #   changed.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/UpdateDeadLetterQueueRecordsVisibilityResultEntry AWS API Documentation
+    #
+    class UpdateDeadLetterQueueRecordsVisibilityResultEntry < Struct.new(
+      :receipt_handle)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] stream_arn
     #   The Amazon Resource Name (ARN) of the stream for the `MaxRecordSize`
     #   update.
@@ -3830,6 +4760,138 @@ module Aws::Kinesis
       :stream_arn,
       :stream_id,
       :max_record_size_in_ki_b)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] queue_arn
+    #   The ARN of the queue to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] queue_attributes
+    #   The configuration attributes to apply to the queue. Attributes you
+    #   do not specify are left unchanged.
+    #   @return [Types::QueueAttributes]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/UpdateQueueInput AWS API Documentation
+    #
+    class UpdateQueueInput < Struct.new(
+      :queue_arn,
+      :queue_attributes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] queue_description
+    #   A description of the queue, including the updated attributes.
+    #   @return [Types::QueueDescription]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/UpdateQueueOutput AWS API Documentation
+    #
+    class UpdateQueueOutput < Struct.new(
+      :queue_description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A record whose visibility timeout was not changed, and why.
+    #
+    # @!attribute [rw] receipt_handle
+    #   The receipt handle of the record whose visibility timeout was not
+    #   changed.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_code
+    #   A code identifying the type of failure. One of
+    #   `ResourceNotFoundException`, `InvalidArgumentException`,
+    #   `ThrottlingException`, or `InternalFailureException`.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   A description of the cause of the failure.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/UpdateQueueRecordsVisibilityErrorEntry AWS API Documentation
+    #
+    class UpdateQueueRecordsVisibilityErrorEntry < Struct.new(
+      :receipt_handle,
+      :error_code,
+      :error_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] queue_arn
+    #   The ARN of the queue the records were received from.
+    #   @return [String]
+    #
+    # @!attribute [rw] entries
+    #   The records whose visibility timeout is changed, identified by their
+    #   receipt handles, and the new visibility timeout for each.
+    #   @return [Array<Types::UpdateQueueRecordsVisibilityRequestEntry>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/UpdateQueueRecordsVisibilityInput AWS API Documentation
+    #
+    class UpdateQueueRecordsVisibilityInput < Struct.new(
+      :queue_arn,
+      :entries)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] successful
+    #   The records whose visibility timeout was changed.
+    #   @return [Array<Types::UpdateQueueRecordsVisibilityResultEntry>]
+    #
+    # @!attribute [rw] failed
+    #   The records whose visibility timeout was not changed, each with the
+    #   reason the entry failed.
+    #   @return [Array<Types::UpdateQueueRecordsVisibilityErrorEntry>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/UpdateQueueRecordsVisibilityOutput AWS API Documentation
+    #
+    class UpdateQueueRecordsVisibilityOutput < Struct.new(
+      :successful,
+      :failed)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A record whose visibility timeout is changed, and the new visibility
+    # timeout.
+    #
+    # @!attribute [rw] receipt_handle
+    #   The receipt handle of the record, as returned by
+    #   ReceiveQueueRecords.
+    #   @return [String]
+    #
+    # @!attribute [rw] visibility_timeout_seconds
+    #   The new duration, in seconds, that the record is in flight and not
+    #   visible to any consumer instance, measured from when this request is
+    #   processed. Specify `0` to make the record visible in the queue
+    #   immediately.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/UpdateQueueRecordsVisibilityRequestEntry AWS API Documentation
+    #
+    class UpdateQueueRecordsVisibilityRequestEntry < Struct.new(
+      :receipt_handle,
+      :visibility_timeout_seconds)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A record whose visibility timeout was changed.
+    #
+    # @!attribute [rw] receipt_handle
+    #   The receipt handle of the record whose visibility timeout was
+    #   changed.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/UpdateQueueRecordsVisibilityResultEntry AWS API Documentation
+    #
+    class UpdateQueueRecordsVisibilityResultEntry < Struct.new(
+      :receipt_handle)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4023,9 +5085,10 @@ module Aws::Kinesis
       include Aws::Structure
     end
 
-    # Specifies that you tried to invoke this API for a data stream with the
-    # on-demand capacity mode. This API is only supported for data streams
-    # with the provisioned capacity mode.
+    # The request failed validation. For example, a parameter value is not
+    # valid, a combination of parameters is not supported, or the operation
+    # is not supported for the stream's capacity mode. The error message
+    # describes the specific reason.
     #
     # @!attribute [rw] message
     #   @return [String]

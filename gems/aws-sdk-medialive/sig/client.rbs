@@ -314,7 +314,7 @@ module Aws
                               Params::input_attachment
                             ],
                             ?input_specification: {
-                              codec: ("MPEG2" | "AVC" | "HEVC")?,
+                              codec: ("MPEG2" | "AVC" | "HEVC" | "JPEGXS")?,
                               maximum_bitrate: ("MAX_10_MBPS" | "MAX_20_MBPS" | "MAX_50_MBPS")?,
                               resolution: ("SD" | "HD" | "UHD")?
                             },
@@ -343,7 +343,12 @@ module Aws
                             ?dry_run: bool,
                             ?linked_channel_settings: Params::linked_channel_settings,
                             ?channel_security_groups: Array[::String],
-                            ?inference_settings: Params::inference_settings
+                            ?inference_settings: Params::inference_settings,
+                            ?jpeg_xs_input_specification: {
+                              codec: ("MPEG2" | "AVC" | "HEVC" | "JPEGXS")?,
+                              maximum_bitrate: ("MAX_500_MBPS")?,
+                              resolution: ("HD")?
+                            }
                           ) -> _CreateChannelResponseSuccess
                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateChannelResponseSuccess
 
@@ -500,6 +505,7 @@ module Aws
         def linked_channel_settings: () -> Types::DescribeLinkedChannelSettings
         def channel_security_groups: () -> ::Array[::String]
         def inference_settings: () -> Types::DescribeInferenceSettings
+        def jpeg_xs_input_specification: () -> Types::JpegXsInputSpecification
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaLive/Client.html#delete_channel-instance_method
       def delete_channel: (
@@ -637,6 +643,7 @@ module Aws
         def linked_channel_settings: () -> Types::DescribeLinkedChannelSettings
         def channel_security_groups: () -> ::Array[::String]
         def inference_settings: () -> Types::DescribeInferenceSettings
+        def jpeg_xs_input_specification: () -> Types::JpegXsInputSpecification
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaLive/Client.html#describe_channel-instance_method
       def describe_channel: (
@@ -1039,6 +1046,7 @@ module Aws
         def linked_channel_settings: () -> Types::DescribeLinkedChannelSettings
         def channel_security_groups: () -> ::Array[::String]
         def inference_settings: () -> Types::DescribeInferenceSettings
+        def jpeg_xs_input_specification: () -> Types::JpegXsInputSpecification
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaLive/Client.html#start_channel-instance_method
       def start_channel: (
@@ -1108,6 +1116,7 @@ module Aws
         def linked_channel_settings: () -> Types::DescribeLinkedChannelSettings
         def channel_security_groups: () -> ::Array[::String]
         def inference_settings: () -> Types::DescribeInferenceSettings
+        def jpeg_xs_input_specification: () -> Types::JpegXsInputSpecification
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaLive/Client.html#stop_channel-instance_method
       def stop_channel: (
@@ -1185,7 +1194,7 @@ module Aws
                               Params::input_attachment
                             ],
                             ?input_specification: {
-                              codec: ("MPEG2" | "AVC" | "HEVC")?,
+                              codec: ("MPEG2" | "AVC" | "HEVC" | "JPEGXS")?,
                               maximum_bitrate: ("MAX_10_MBPS" | "MAX_20_MBPS" | "MAX_50_MBPS")?,
                               resolution: ("SD" | "HD" | "UHD")?
                             },
@@ -1210,6 +1219,11 @@ module Aws
                             ?inference_settings: Params::inference_settings,
                             ?special_router_settings: {
                               router_arn: ::String?
+                            },
+                            ?jpeg_xs_input_specification: {
+                              codec: ("MPEG2" | "AVC" | "HEVC" | "JPEGXS")?,
+                              maximum_bitrate: ("MAX_500_MBPS")?,
+                              resolution: ("HD")?
                             }
                           ) -> _UpdateChannelResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateChannelResponseSuccess
@@ -1411,6 +1425,7 @@ module Aws
         def linked_channel_settings: () -> Types::DescribeLinkedChannelSettings
         def channel_security_groups: () -> ::Array[::String]
         def inference_settings: () -> Types::DescribeInferenceSettings
+        def jpeg_xs_input_specification: () -> Types::JpegXsInputSpecification
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaLive/Client.html#restart_channel_pipelines-instance_method
       def restart_channel_pipelines: (

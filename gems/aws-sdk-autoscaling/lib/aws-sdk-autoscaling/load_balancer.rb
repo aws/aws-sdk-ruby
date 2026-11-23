@@ -52,7 +52,9 @@ module Aws::AutoScaling
     #   balancer.
     #
     # * `InService` - At least one Auto Scaling instance passed an `ELB`
-    #   health check.
+    #   health check. Note that the load balancer enters this state
+    #   immediately if you attach it in the [CreateAutoScalingGroup][1] API
+    #   call.
     #
     # * `Removing` - The Auto Scaling instances are being deregistered from
     #   the load balancer. If connection draining is enabled, Elastic Load
@@ -61,6 +63,10 @@ module Aws::AutoScaling
     #
     # * `Removed` - All Auto Scaling instances are deregistered from the
     #   load balancer.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_CreateAutoScalingGroup.html
     # @return [String]
     def state
       data[:state]

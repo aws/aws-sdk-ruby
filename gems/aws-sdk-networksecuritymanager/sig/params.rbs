@@ -14,6 +14,15 @@ module Aws
       waf_config: {
         existing_customer_web_acl_resolution: ("RETROFIT" | "OVERRIDE_ASSOCIATION" | "NO_REMEDIATION"),
         conflict_resolution: ("MERGE_WHERE_APPLICABLE")
+      }?,
+      igw_firewall_config: {
+        default_subnet_connectivity: ("flexible" | "bidirectional" | "outbound-only")?,
+        subnet_connectivity_overrides: Array[
+          {
+            connectivity_type: ("flexible" | "bidirectional" | "outbound-only" | "exclude"),
+            scopes: Array[::String]
+          }
+        ]?
       }?
     }
 
@@ -32,7 +41,7 @@ module Aws
 
       type scope_configuration = {
       account_filter: Params::account_filter?,
-      resource_scopes: Hash[("AWS::ApiGateway::Stage" | "AWS::CloudFront::Distribution" | "AWS::EC2::EIP" | "AWS::ElasticLoadBalancingV2::LoadBalancer::application" | "AWS::ElasticLoadBalancing::LoadBalancer"), Params::resource_scope]
+      resource_scopes: Hash[("AWS::ApiGateway::Stage" | "AWS::CloudFront::Distribution" | "AWS::EC2::EIP" | "AWS::ElasticLoadBalancingV2::LoadBalancer::application" | "AWS::ElasticLoadBalancing::LoadBalancer" | "AWS::EC2::VPC" | "AWS::EC2::Subnet"), Params::resource_scope]
     }
 
       type resource_logical_expression = {

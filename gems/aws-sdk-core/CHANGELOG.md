@@ -2,6 +2,76 @@ Unreleased Changes
 ------------------
 
 * Feature - Speed up request serialization and response parsing for AWS services using the Smithy RPC v2 CBOR protocol.
+* Feature - Add `Aws.eager_load!` to eagerly resolve constants registered by loaded AWS SDK gems.
+
+3.271.1 (2026-11-20)
+------------------
+
+* Issue - Fix response stubbing conflicts with other testing libraries.
+
+3.271.0 (2026-11-19)
+------------------
+
+* Feature - Updated Aws::STS::Client with the latest API changes.
+
+* Feature - AWS STS adds GetScopedCredentials and expands Trusted Identity Propagation (TIP) to IAM federation and IAM Roles Anywhere. GetScopedCredentials reduces an existing session's permissions and duration. TIP carries verified user or workload identity for authorization and CloudTrail auditing.
+
+3.270.0 (2026-11-18)
+------------------
+
+* Feature - Updated Aws::Signin::Client with the latest API changes.
+
+* Feature - These APIs enable customers and administrators to list, view, and revoke AWS Sign-In Sessions programmatically using the AWS CLI and SDKs, providing greater visibility and control over authenticated access.
+
+* Feature - Back off on retries of the Kinesis `ReceiveQueueRecords` and `ReceiveDeadLetterQueueRecords` long polling operations even when the retry quota is depleted.
+
+* Feature - Seahorse::Client::Configuration no longer generate real Ruby Struct at runtime.
+
+3.269.0 (2026-11-16)
+------------------
+
+* Feature - Reduce memory usage of loaded service APIs by allocating shape metadata Hashes on first write.
+
+* Feature - Reuse the chunk size header of full chunks when streaming request bodies with checksum trailers.
+
+3.268.0 (2026-11-11)
+------------------
+
+* Feature - Reuse read buffers to reduce allocations when calculating request checksums sent in headers.
+
+3.267.0 (2026-11-10)
+------------------
+
+* Feature - Updated Aws::STS::Client with the latest API changes.
+
+* Feature - Updated Aws::SSOOIDC::Client with the latest API changes.
+
+* Feature - Updated Aws::SSO::Client with the latest API changes.
+
+* Feature - Updated Aws::Signin::Client with the latest API changes.
+
+* Feature - AWS SDK clients now use `standard` retry mode by default, providing consistent retry quotas and backoff behavior across AWS services. To continue using the previous behavior, set the client's `retry_mode` to `legacy` or set `AWS_RETRY_MODE=legacy`. The `AWS_NEW_RETRIES_2026` environment variable is no longer used.
+
+3.266.0 (2026-11-09)
+------------------
+
+* Feature - Updated Aws::Signin::Client with the latest API changes.
+
+* Feature - Adds the CreateBearerToken API, which exchanges your IAM credentials for a bearer token that can be used to access supported AWS services.
+
+* Feature - Reduce memory allocations when streaming request bodies with checksum trailers while preserving compatibility with custom IO bodies.
+
+3.265.0 (2026-11-06)
+------------------
+
+* Feature - Improve model-aware filtering of nested request parameters and sensitivity detection for nested collections.
+
+3.264.0 (2026-11-04)
+------------------
+
+* Feature - Support refreshing login credentials in the cached sign-in region, falling back to the configured region when missing or empty.
+
+* Issue - Fix clock skew correction for long-running requests and slow response downloads by using the time response headers are received.
 
 3.263.0 (2026-10-29)
 ------------------

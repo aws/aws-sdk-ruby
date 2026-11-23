@@ -403,6 +403,29 @@ module Aws
                            ) -> _GetPreferencesResponseSuccess
                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetPreferencesResponseSuccess
 
+      interface _GetUsageLinesEstimatedCostResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetUsageLinesEstimatedCostResponse]
+        def rate_type: () -> ("BEFORE_DISCOUNTS" | "AFTER_DISCOUNTS" | "AFTER_DISCOUNTS_AND_COMMITMENTS")
+        def total_cost: () -> ::Float
+        def currency: () -> ("USD")
+        def line_items: () -> ::Array[Types::GetUsageLinesEstimatedCostLineItem]
+        def errors: () -> ::Array[Types::GetUsageLinesEstimatedCostError]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BCMPricingCalculator/Client.html#get_usage_lines_estimated_cost-instance_method
+      def get_usage_lines_estimated_cost: (
+                                            usage: Array[
+                                              {
+                                                service_code: ::String,
+                                                usage_type: ::String,
+                                                operation: ::String,
+                                                key: ::String,
+                                                amount: ::Float
+                                              }
+                                            ],
+                                            rate_type: ("BEFORE_DISCOUNTS" | "AFTER_DISCOUNTS" | "AFTER_DISCOUNTS_AND_COMMITMENTS")
+                                          ) -> _GetUsageLinesEstimatedCostResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetUsageLinesEstimatedCostResponseSuccess
+
       interface _GetWorkloadEstimateResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetWorkloadEstimateResponse]
         def id: () -> ::String

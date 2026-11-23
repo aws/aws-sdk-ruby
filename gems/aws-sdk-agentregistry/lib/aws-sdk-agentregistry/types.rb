@@ -234,7 +234,10 @@ module Aws::AgentRegistry
     # is retrieved from.
     #
     # @!attribute [rw] url
-    #   The URL from which the descriptor content is retrieved.
+    #   The URL from which the descriptor content is retrieved. For an agent
+    #   skill that synchronizes its SKILL.md from GitHub, this is the GitHub
+    #   folder URL. The data plane doesn't return Amazon S3 (`s3://`)
+    #   source URLs.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/agent-registry-2025-12-01/DescriptorSourceFromUrl AWS API Documentation
@@ -276,6 +279,12 @@ module Aws::AgentRegistry
     #   protocol endpoint.
     #   @return [Types::AgUiDescriptor]
     #
+    # @!attribute [rw] signature_agent_card
+    #   The signature agent card descriptor, populated when the record
+    #   represents a web bot. It identifies the JSON Web Key Set (JWKS) used
+    #   to verify the bot's HTTP message signatures.
+    #   @return [Types::SignatureAgentCardDescriptor]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/agent-registry-2025-12-01/Descriptors AWS API Documentation
     #
     class Descriptors < Struct.new(
@@ -284,7 +293,8 @@ module Aws::AgentRegistry
       :agent_skills_definition,
       :custom,
       :http,
-      :agui)
+      :agui,
+      :signature_agent_card)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -521,6 +531,34 @@ module Aws::AgentRegistry
       include Aws::Structure
     end
 
+    # The skill package of a registry record, as a short-lived download URL
+    # and the package's SHA-256 checksum. Responses never include the
+    # package bytes.
+    #
+    # @!attribute [rw] sha256
+    #   The SHA-256 checksum of the package, as 64 lowercase hexadecimal
+    #   characters. The download response carries no signature that you can
+    #   check, so compare the checksum of the file that you download with
+    #   this value before you use the package.
+    #   @return [String]
+    #
+    # @!attribute [rw] download_url
+    #   A presigned Amazon S3 URL that downloads the package. The URL is
+    #   valid for up to 5 minutes, and the response doesn't include its
+    #   expiry time. To get a new URL, call the operation again. Anyone who
+    #   has the URL can download the package until it expires, so don't
+    #   log, store, or share it.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/agent-registry-2025-12-01/RegistryRecordArtifactDownload AWS API Documentation
+    #
+    class RegistryRecordArtifactDownload < Struct.new(
+      :sha256,
+      :download_url)
+      SENSITIVE = [:download_url]
+      include Aws::Structure
+    end
+
     # A single filter applied to a `ListDiscoverableRegistryRecords`
     # request.
     #
@@ -610,6 +648,14 @@ module Aws::AgentRegistry
     #   present if the registry has a custom metadata schema configured.
     #   @return [Hash,Array,String,Numeric,Boolean]
     #
+    # @!attribute [rw] artifact
+    #   The skill package of the record's latest approved revision, as the
+    #   package's SHA-256 checksum and a download URL that is valid for up
+    #   to 5 minutes. Only `BatchGetDiscoverableRegistryRecord` returns this
+    #   member, not `SearchDiscoverableRegistryRecords`. Absent when the
+    #   record has no skill package.
+    #   @return [Types::RegistryRecordArtifactDownload]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/agent-registry-2025-12-01/RegistryRecordSummary AWS API Documentation
     #
     class RegistryRecordSummary < Struct.new(
@@ -625,7 +671,8 @@ module Aws::AgentRegistry
       :status,
       :created_at,
       :updated_at,
-      :custom_metadata)
+      :custom_metadata,
+      :artifact)
       SENSITIVE = [:description, :custom_metadata]
       include Aws::Structure
     end
@@ -667,6 +714,9 @@ module Aws::AgentRegistry
 
     # @!attribute [rw] search_query
     #   The natural language query to search for matching registry records.
+    #   If you specify an empty string, the operation returns the records
+    #   that match the `filters`, most recently updated first, up to the
+    #   result limit for the `searchType`.
     #   @return [String]
     #
     # @!attribute [rw] registry_ids
@@ -676,8 +726,9 @@ module Aws::AgentRegistry
     #   @return [Array<String>]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results to return. Valid values are 1 through
-    #   20. The default value is 10.
+    #   The maximum number of results to return in one page. Valid values
+    #   are 1 through 50 when `searchType` is `KEYWORD`, and 1 through 20
+    #   when it is `HYBRID` or `SEMANTIC`. The default value is 10.
     #   @return [Integer]
     #
     # @!attribute [rw] filters
@@ -693,27 +744,129 @@ module Aws::AgentRegistry
     #   {"$eq": true}}`.
     #   @return [Hash,Array,String,Numeric,Boolean]
     #
+    # @!attribute [rw] search_type
+    #   Specifies how the service ranks registry records against the search
+    #   query. If you omit this parameter, the service uses `HYBRID` in
+    #   Amazon Web Services Regions that support semantic search and
+    #   `KEYWORD` in Regions that do not. The response reports the search
+    #   type that the service used. Valid values are the following:
+    #
+    #   * `KEYWORD` – Ranks records by keyword match between the query terms
+    #     and the record name, description, descriptors, and custom metadata
+    #     text values. Available in every Amazon Web Services Region.
+    #
+    #   * `SEMANTIC` – Ranks records by semantic similarity to the query and
+    #     returns the most similar records, up to `maxResults`, even when
+    #     none of them closely matches the query.
+    #
+    #   * `HYBRID` – Combines keyword ranking and semantic ranking.
+    #
+    #   `HYBRID` and `SEMANTIC` are available in a limited number of
+    #   Regions. If you specify either one in a Region that does not support
+    #   semantic search, the request fails with a `ValidationException` that
+    #   has the reason `UnsupportedInRegion`.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token from a previous response. Use it to retrieve
+    #   the next page of results, and send the same `searchQuery`,
+    #   `registryIds`, `filters`, and `searchType` that you used for the
+    #   first page. If any of them differ, the request fails with a
+    #   `ValidationException`. A pagination token expires 15 minutes after
+    #   the service returns the first page.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/agent-registry-2025-12-01/SearchDiscoverableRegistryRecordsRequest AWS API Documentation
     #
     class SearchDiscoverableRegistryRecordsRequest < Struct.new(
       :search_query,
       :registry_ids,
       :max_results,
-      :filters)
+      :filters,
+      :search_type,
+      :next_token)
       SENSITIVE = [:search_query, :filters]
       include Aws::Structure
     end
 
     # @!attribute [rw] registry_records
     #   The registry records that match the search query, ordered by
-    #   relevance.
+    #   relevance. A page can contain fewer than `maxResults` records, or
+    #   none, even when the response includes a `nextToken`. To retrieve
+    #   every result, continue until the response has no `nextToken`.
     #   @return [Array<Types::RegistryRecordSummary>]
+    #
+    # @!attribute [rw] search_type
+    #   Specifies the search type that the service used to rank the returned
+    #   records. If you omitted `searchType` in the request, this is the
+    #   default for the Amazon Web Services Region: `HYBRID` where semantic
+    #   search is supported, and `KEYWORD` elsewhere.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token to pass to a subsequent request to retrieve the
+    #   next page of results. This field is absent when there are no more
+    #   results, or when the search has returned the maximum number of
+    #   results for its search type.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/agent-registry-2025-12-01/SearchDiscoverableRegistryRecordsResponse AWS API Documentation
     #
     class SearchDiscoverableRegistryRecordsResponse < Struct.new(
-      :registry_records)
+      :registry_records,
+      :search_type,
+      :next_token)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The additional data for a signature agent card descriptor, such as the
+    # bot category of the web bot.
+    #
+    # @!attribute [rw] category
+    #   The bot category that describes the purpose of the web bot
+    #   identified by the signature agent card descriptor.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/agent-registry-2025-12-01/SignatureAgentCardAdditionalData AWS API Documentation
+    #
+    class SignatureAgentCardAdditionalData < Struct.new(
+      :category)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Descriptor that defines the content of a signature agent card, which
+    # identifies a web bot and references the JSON Web Key Set (JWKS) used
+    # to verify its HTTP message signatures.
+    #
+    # @!attribute [rw] data
+    #   The signature agent card descriptor content, serialized as
+    #   descriptor payload data.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_schema_version
+    #   The schema version of the descriptor payload.
+    #   @return [String]
+    #
+    # @!attribute [rw] source
+    #   The source location from which the signature agent card descriptor
+    #   content was retrieved.
+    #   @return [Types::DescriptorSource]
+    #
+    # @!attribute [rw] additional_data
+    #   Additional data for the signature agent card, such as its AWS WAF
+    #   bot category.
+    #   @return [Types::SignatureAgentCardAdditionalData]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/agent-registry-2025-12-01/SignatureAgentCardDescriptor AWS API Documentation
+    #
+    class SignatureAgentCardDescriptor < Struct.new(
+      :data,
+      :data_schema_version,
+      :source,
+      :additional_data)
+      SENSITIVE = [:data]
       include Aws::Structure
     end
 

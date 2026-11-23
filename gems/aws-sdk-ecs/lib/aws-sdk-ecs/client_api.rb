@@ -38,6 +38,7 @@ module Aws::ECS
     AttachmentStateChange = Shapes::StructureShape.new(name: 'AttachmentStateChange')
     AttachmentStateChanges = Shapes::ListShape.new(name: 'AttachmentStateChanges')
     Attachments = Shapes::ListShape.new(name: 'Attachments')
+    AttestationPolicyStatus = Shapes::StringShape.new(name: 'AttestationPolicyStatus')
     Attribute = Shapes::StructureShape.new(name: 'Attribute')
     AttributeLimitExceededException = Shapes::StructureShape.new(name: 'AttributeLimitExceededException')
     Attributes = Shapes::ListShape.new(name: 'Attributes')
@@ -335,6 +336,8 @@ module Aws::ECS
     GatewayConnectionList = Shapes::ListShape.new(name: 'GatewayConnectionList')
     GatewayConnectionResources = Shapes::UnionShape.new(name: 'GatewayConnectionResources')
     GatewayConnector = Shapes::StructureShape.new(name: 'GatewayConnector')
+    GatewayConnectorDeregistrationDelay = Shapes::StructureShape.new(name: 'GatewayConnectorDeregistrationDelay')
+    GatewayConnectorDeregistrationDelayTimeoutSecondsInteger = Shapes::IntegerShape.new(name: 'GatewayConnectorDeregistrationDelayTimeoutSecondsInteger')
     GatewayConnectorFilters = Shapes::StructureShape.new(name: 'GatewayConnectorFilters')
     GatewayConnectorHealthCheck = Shapes::StructureShape.new(name: 'GatewayConnectorHealthCheck')
     GatewayConnectorHealthCheckMatcher = Shapes::StructureShape.new(name: 'GatewayConnectorHealthCheckMatcher')
@@ -403,6 +406,7 @@ module Aws::ECS
     IntegerList = Shapes::ListShape.new(name: 'IntegerList')
     InvalidParameterException = Shapes::StructureShape.new(name: 'InvalidParameterException')
     IpcMode = Shapes::StringShape.new(name: 'IpcMode')
+    IsolationMode = Shapes::StringShape.new(name: 'IsolationMode')
     KernelCapabilities = Shapes::StructureShape.new(name: 'KernelCapabilities')
     KeyValuePair = Shapes::StructureShape.new(name: 'KeyValuePair')
     LaunchType = Shapes::StringShape.new(name: 'LaunchType')
@@ -451,6 +455,7 @@ module Aws::ECS
     LogConfiguration = Shapes::StructureShape.new(name: 'LogConfiguration')
     LogConfigurationOptionsMap = Shapes::MapShape.new(name: 'LogConfigurationOptionsMap')
     LogDriver = Shapes::StringShape.new(name: 'LogDriver')
+    LogDriverVolumeConfiguration = Shapes::StructureShape.new(name: 'LogDriverVolumeConfiguration')
     Long = Shapes::IntegerShape.new(name: 'Long')
     ManagedAgent = Shapes::StructureShape.new(name: 'ManagedAgent')
     ManagedAgentName = Shapes::StringShape.new(name: 'ManagedAgentName')
@@ -704,6 +709,8 @@ module Aws::ECS
     TmpfsList = Shapes::ListShape.new(name: 'TmpfsList')
     TotalLocalStorageGBRequest = Shapes::StructureShape.new(name: 'TotalLocalStorageGBRequest')
     TransportProtocol = Shapes::StringShape.new(name: 'TransportProtocol')
+    TrustedExecutionConfiguration = Shapes::StructureShape.new(name: 'TrustedExecutionConfiguration')
+    TrustedExecutionSummary = Shapes::StructureShape.new(name: 'TrustedExecutionSummary')
     Ulimit = Shapes::StructureShape.new(name: 'Ulimit')
     UlimitList = Shapes::ListShape.new(name: 'UlimitList')
     UlimitName = Shapes::StringShape.new(name: 'UlimitName')
@@ -1420,6 +1427,7 @@ module Aws::ECS
 
     DaemonVolume.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
     DaemonVolume.add_member(:host, Shapes::ShapeRef.new(shape: HostVolumeProperties, location_name: "host"))
+    DaemonVolume.add_member(:log_driver_volume_configuration, Shapes::ShapeRef.new(shape: LogDriverVolumeConfiguration, location_name: "logDriverVolumeConfiguration"))
     DaemonVolume.struct_class = Types::DaemonVolume
 
     DaemonVolumeList.member = Shapes::ShapeRef.new(shape: DaemonVolume)
@@ -2015,7 +2023,11 @@ module Aws::ECS
     GatewayConnector.add_member(:port_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "portName"))
     GatewayConnector.add_member(:health_check, Shapes::ShapeRef.new(shape: GatewayConnectorHealthCheck, location_name: "healthCheck"))
     GatewayConnector.add_member(:filters, Shapes::ShapeRef.new(shape: GatewayConnectorFilters, location_name: "filters"))
+    GatewayConnector.add_member(:deregistration_delay, Shapes::ShapeRef.new(shape: GatewayConnectorDeregistrationDelay, location_name: "deregistrationDelay"))
     GatewayConnector.struct_class = Types::GatewayConnector
+
+    GatewayConnectorDeregistrationDelay.add_member(:timeout_seconds, Shapes::ShapeRef.new(shape: GatewayConnectorDeregistrationDelayTimeoutSecondsInteger, location_name: "timeoutSeconds"))
+    GatewayConnectorDeregistrationDelay.struct_class = Types::GatewayConnectorDeregistrationDelay
 
     GatewayConnectorFilters.add_member(:access_types, Shapes::ShapeRef.new(shape: AccessTypeList, location_name: "accessTypes"))
     GatewayConnectorFilters.struct_class = Types::GatewayConnectorFilters
@@ -2225,6 +2237,7 @@ module Aws::ECS
     InstanceLaunchTemplate.add_member(:instance_requirements, Shapes::ShapeRef.new(shape: InstanceRequirementsRequest, location_name: "instanceRequirements"))
     InstanceLaunchTemplate.add_member(:fips_enabled, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "fipsEnabled"))
     InstanceLaunchTemplate.add_member(:capacity_reservations, Shapes::ShapeRef.new(shape: CapacityReservationRequest, location_name: "capacityReservations"))
+    InstanceLaunchTemplate.add_member(:nitro_enclaves_enabled, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "nitroEnclavesEnabled"))
     InstanceLaunchTemplate.struct_class = Types::InstanceLaunchTemplate
 
     InstanceLaunchTemplateUpdate.add_member(:ec2_instance_profile_arn, Shapes::ShapeRef.new(shape: String, location_name: "ec2InstanceProfileArn"))
@@ -2497,6 +2510,9 @@ module Aws::ECS
 
     LogConfigurationOptionsMap.key = Shapes::ShapeRef.new(shape: String)
     LogConfigurationOptionsMap.value = Shapes::ShapeRef.new(shape: String)
+
+    LogDriverVolumeConfiguration.add_member(:driver, Shapes::ShapeRef.new(shape: LogDriver, required: true, location_name: "driver"))
+    LogDriverVolumeConfiguration.struct_class = Types::LogDriverVolumeConfiguration
 
     ManagedAgent.add_member(:last_started_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastStartedAt"))
     ManagedAgent.add_member(:name, Shapes::ShapeRef.new(shape: ManagedAgentName, location_name: "name"))
@@ -2835,6 +2851,7 @@ module Aws::ECS
     RegisterTaskDefinitionRequest.add_member(:ephemeral_storage, Shapes::ShapeRef.new(shape: EphemeralStorage, location_name: "ephemeralStorage"))
     RegisterTaskDefinitionRequest.add_member(:runtime_platform, Shapes::ShapeRef.new(shape: RuntimePlatform, location_name: "runtimePlatform"))
     RegisterTaskDefinitionRequest.add_member(:enable_fault_injection, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "enableFaultInjection"))
+    RegisterTaskDefinitionRequest.add_member(:trusted_execution_configuration, Shapes::ShapeRef.new(shape: TrustedExecutionConfiguration, location_name: "trustedExecutionConfiguration"))
     RegisterTaskDefinitionRequest.struct_class = Types::RegisterTaskDefinitionRequest
 
     RegisterTaskDefinitionResponse.add_member(:task_definition, Shapes::ShapeRef.new(shape: TaskDefinition, location_name: "taskDefinition"))
@@ -3341,6 +3358,7 @@ module Aws::ECS
     Task.add_member(:version, Shapes::ShapeRef.new(shape: Long, location_name: "version"))
     Task.add_member(:ephemeral_storage, Shapes::ShapeRef.new(shape: EphemeralStorage, location_name: "ephemeralStorage"))
     Task.add_member(:fargate_ephemeral_storage, Shapes::ShapeRef.new(shape: TaskEphemeralStorage, location_name: "fargateEphemeralStorage"))
+    Task.add_member(:trusted_execution_summary, Shapes::ShapeRef.new(shape: TrustedExecutionSummary, location_name: "trustedExecutionSummary"))
     Task.struct_class = Types::Task
 
     TaskDefinition.add_member(:task_definition_arn, Shapes::ShapeRef.new(shape: String, location_name: "taskDefinitionArn"))
@@ -3369,6 +3387,7 @@ module Aws::ECS
     TaskDefinition.add_member(:registered_by, Shapes::ShapeRef.new(shape: String, location_name: "registeredBy"))
     TaskDefinition.add_member(:ephemeral_storage, Shapes::ShapeRef.new(shape: EphemeralStorage, location_name: "ephemeralStorage"))
     TaskDefinition.add_member(:enable_fault_injection, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "enableFaultInjection"))
+    TaskDefinition.add_member(:trusted_execution_configuration, Shapes::ShapeRef.new(shape: TrustedExecutionConfiguration, location_name: "trustedExecutionConfiguration"))
     TaskDefinition.struct_class = Types::TaskDefinition
 
     TaskDefinitionFieldList.member = Shapes::ShapeRef.new(shape: TaskDefinitionField)
@@ -3473,6 +3492,14 @@ module Aws::ECS
     TotalLocalStorageGBRequest.add_member(:min, Shapes::ShapeRef.new(shape: BoxedDouble, location_name: "min"))
     TotalLocalStorageGBRequest.add_member(:max, Shapes::ShapeRef.new(shape: BoxedDouble, location_name: "max"))
     TotalLocalStorageGBRequest.struct_class = Types::TotalLocalStorageGBRequest
+
+    TrustedExecutionConfiguration.add_member(:isolation_mode, Shapes::ShapeRef.new(shape: IsolationMode, required: true, location_name: "isolationMode"))
+    TrustedExecutionConfiguration.add_member(:attestation_policy, Shapes::ShapeRef.new(shape: String, location_name: "attestationPolicy"))
+    TrustedExecutionConfiguration.struct_class = Types::TrustedExecutionConfiguration
+
+    TrustedExecutionSummary.add_member(:isolation_mode, Shapes::ShapeRef.new(shape: IsolationMode, required: true, location_name: "isolationMode"))
+    TrustedExecutionSummary.add_member(:attestation_policy_status, Shapes::ShapeRef.new(shape: AttestationPolicyStatus, location_name: "attestationPolicyStatus"))
+    TrustedExecutionSummary.struct_class = Types::TrustedExecutionSummary
 
     Ulimit.add_member(:name, Shapes::ShapeRef.new(shape: UlimitName, required: true, location_name: "name"))
     Ulimit.add_member(:soft_limit, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "softLimit"))

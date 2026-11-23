@@ -331,13 +331,15 @@ module Aws
             headers[algorithm_header] = checksum_properties[:algorithm]
           end
 
+          return unless %w[header trailer].include?(checksum_properties[:in])
+
+          body = context.http_request.body
+          buffer_enabled = context.http_request.buffer_supported? if body.respond_to?(:read)
           case checksum_properties[:in]
           when 'header'
-            apply_request_checksum(context, headers, checksum_properties)
+            apply_request_checksum(context, headers, checksum_properties, buffer_enabled)
           when 'trailer'
-            apply_request_trailer_checksum(context, headers, checksum_properties)
-          else
-            # nothing
+            apply_request_trailer_checksum(context, headers, checksum_properties, buffer_enabled)
           end
         end
 
@@ -355,19 +357,20 @@ module Aws
           context[:skip_trailer_checksums]
         end
 
-        def apply_request_checksum(context, headers, checksum_properties)
+        def apply_request_checksum(context, headers, checksum_properties, buffer_enabled)
           header_name = checksum_properties[:name]
           headers[header_name] = calculate_checksum(
             checksum_properties[:algorithm],
-            context.http_request.body
+            context.http_request.body,
+            buffer_enabled
           )
         end
 
-        def calculate_checksum(algorithm, body)
+        def calculate_checksum(algorithm, body, buffer_enabled)
           digest = ChecksumAlgorithm.digest_for_algorithm(algorithm)
           if body.respond_to?(:read)
             body.rewind
-            update_in_chunks(digest, body)
+            update_in_chunks(digest, body, buffer_enabled)
             body.rewind
           else
             digest.update(body)
@@ -375,17 +378,29 @@ module Aws
           digest.base64digest
         end
 
-        def update_in_chunks(digest, io)
-          loop do
-            chunk = io.read(CHECKSUM_CHUNK_SIZE)
-            break unless chunk
-
-            digest.update(chunk)
+        def update_in_chunks(digest, io, buffer_enabled)
+          if buffer_enabled
+            update_in_chunks_with_buffer(digest, io)
+          else
+            update_in_chunks_without_buffer(digest, io)
           end
           io.rewind
         end
 
-        def apply_request_trailer_checksum(context, headers, checksum_properties)
+        def update_in_chunks_with_buffer(digest, io)
+          buffer = ''.b
+          while (chunk = io.read(CHECKSUM_CHUNK_SIZE, buffer))
+            digest.update(chunk)
+          end
+        end
+
+        def update_in_chunks_without_buffer(digest, io)
+          while (chunk = io.read(CHECKSUM_CHUNK_SIZE))
+            digest.update(chunk)
+          end
+        end
+
+        def apply_request_trailer_checksum(context, headers, checksum_properties, buffer_enabled)
           location_name = checksum_properties[:name]
 
           # set required headers
@@ -410,6 +425,7 @@ module Aws
           context.http_request.body =
             AwsChunkedTrailerDigestIO.new(
               io: context.http_request.body,
+              buffer_enabled: buffer_enabled,
               algorithm: checksum_properties[:algorithm],
               location_name: location_name
             )
@@ -484,6 +500,7 @@ module Aws
         HEX_BASE = 16
 
         def initialize(options = {})
+          buffer_enabled = options.delete(:buffer_enabled) || false
           @io = options.delete(:io)
           @io.rewind if @io.respond_to?(:rewind)
           @location_name = options.delete(:location_name)
@@ -492,6 +509,9 @@ module Aws
           @chunk_size = Thread.current[:net_http_override_body_stream_chunk] || DEFAULT_TRAILER_CHUNK_SIZE
           @overhead_bytes = calculate_overhead(@chunk_size)
           @base_chunk_size = @chunk_size - @overhead_bytes
+          @full_chunk_size_hex = @base_chunk_size.to_s(HEX_BASE).freeze
+          @chunk = ''.b
+          @read_chunk = method(buffer_enabled ? :read_chunk_with_buffer : :read_chunk_without_buffer)
           @encoded_buffer = +''
           @eof = false
         end
@@ -502,7 +522,7 @@ module Aws
           n_full_chunks = orig_body_size / @base_chunk_size
           partial_bytes = orig_body_size % @base_chunk_size
 
-          full_chunk_overhead = @base_chunk_size.to_s(HEX_BASE).size + CHUNK_OVERHEAD
+          full_chunk_overhead = @full_chunk_size_hex.bytesize + CHUNK_OVERHEAD
           chunked_body_size = n_full_chunks * (@base_chunk_size + full_chunk_overhead)
           unless partial_bytes.zero?
             chunked_body_size += partial_bytes.to_s(HEX_BASE).size + partial_bytes + CHUNK_OVERHEAD
@@ -527,8 +547,9 @@ module Aws
 
           fill_encoded_buffer(length)
 
-          if length
-            output_buffer << @encoded_buffer.slice!(0, length)
+          if length && length < @encoded_buffer.bytesize
+            output_buffer << @encoded_buffer.byteslice(0, length)
+            @encoded_buffer = @encoded_buffer.byteslice(length, @encoded_buffer.bytesize - length)
           else
             output_buffer << @encoded_buffer
             @encoded_buffer.clear
@@ -547,19 +568,31 @@ module Aws
           chunk_size.to_s(HEX_BASE).size + CHUNK_OVERHEAD
         end
 
+        def read_chunk_with_buffer
+          @io.read(@base_chunk_size, @chunk)
+        end
+
+        def read_chunk_without_buffer
+          @io.read(@base_chunk_size)
+        end
+
         def fill_encoded_buffer(required_length)
           return if required_length && @encoded_buffer.bytesize >= required_length
 
           while !@eof && fill_data?(required_length)
-            chunk = @io.read(@base_chunk_size)
+            chunk = @read_chunk.call
             if chunk && !chunk.empty?
               @digest.update(chunk)
-              @encoded_buffer << "#{chunk.bytesize.to_s(HEX_BASE)}\r\n#{chunk}\r\n"
+              @encoded_buffer << chunk_size_hex(chunk.bytesize) << "\r\n" << chunk << "\r\n"
             else
-              @encoded_buffer << "0\r\n#{trailer_string}\r\n\r\n"
+              @encoded_buffer << "0\r\n" << trailer_string << "\r\n\r\n"
               @eof = true
             end
           end
+        end
+
+        def chunk_size_hex(bytesize)
+          bytesize == @base_chunk_size ? @full_chunk_size_hex : bytesize.to_s(HEX_BASE)
         end
 
         def trailer_string

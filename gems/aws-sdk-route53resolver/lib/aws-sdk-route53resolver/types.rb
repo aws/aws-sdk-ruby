@@ -219,6 +219,70 @@ module Aws::Route53Resolver
       include Aws::Structure
     end
 
+    # The configuration for an AutoAllowlist firewall rule, which observes
+    # the DNS traffic of the VPCs that use the rule group, through a rule
+    # group association or a Route 53 Profile. The rule allows the domains
+    # on its managed domain list. When you create the rule, DNS Firewall
+    # seeds the observed domains from the look-back window of each VPC.
+    # After that, a domain is listed as observed when any DNS Firewall rule
+    # blocks a query for it from a VPC that uses the rule group, including
+    # rules in other rule groups, so place a rule that blocks the domains
+    # you haven't approved after the AutoAllowlist rule. To review the
+    # observed domains, call ListFirewallRuleDomains. To approve or deny
+    # them, call UpdateFirewallDomains on the rule's managed domain list.
+    #
+    # An AutoAllowlist rule uses the `ALLOW` action, applies to all query
+    # types, and always inspects redirection domains. You can't set
+    # `Qtype`, `FirewallDomainRedirectionAction`, `BlockResponse`, or the
+    # DNS Firewall Advanced settings on it. A rule group can contain one
+    # AutoAllowlist rule.
+    #
+    # A new AutoAllowlist rule has status `CREATING` while DNS Firewall
+    # reads the look-back window of each VPC that uses the rule group, which
+    # can take hours for a rule group that many VPCs use. Until the status
+    # is `COMPLETE`, the observed domains and request counts are partial and
+    # UpdateFirewallRule rejects the rule. You can approve, remove, and deny
+    # domains while the rule is `CREATING`.
+    #
+    # @!attribute [rw] initial_data_timeframe_hours
+    #   The look-back window, in hours, of historical DNS traffic that DNS
+    #   Firewall uses to seed the initial set of observed domains when you
+    #   create the rule. Valid values are from `1` to `168` (7 days). You
+    #   can't change this value after you create the rule.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] import_from_firewall_domain_list_id
+    #   The ID of a domain list whose domains DNS Firewall copies into the
+    #   AutoAllowlist rule's managed domain list after you create the rule.
+    #   You must own the source list, and it must be in `COMPLETE` status,
+    #   in the same Region, and not a managed or AutoAllowlist list. DNS
+    #   Firewall reads the source list while the copy runs, so don't change
+    #   or delete it until the managed list's status is no longer
+    #   `IMPORTING`. A change made to the source list during the copy can be
+    #   reflected in the managed list, and deleting the source list fails
+    #   the copy. The managed list then has status `COMPLETE`, or
+    #   `COMPLETE_IMPORT_FAILED` if the copy failed. DNS Firewall uses this
+    #   value only when you create the rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] auto_allowlist_firewall_domain_list_id
+    #   The ID of the managed domain list that DNS Firewall creates and
+    #   maintains for this AutoAllowlist rule. The list is named
+    #   `AutoAllowlist - ` followed by the rule name, cut to 64 characters,
+    #   and is renamed when you rename the rule. DNS Firewall returns this
+    #   value in responses. You can't set it.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/AutoAllowlistConfig AWS API Documentation
+    #
+    class AutoAllowlistConfig < Struct.new(
+      :initial_data_timeframe_hours,
+      :import_from_firewall_domain_list_id,
+      :auto_allowlist_firewall_domain_list_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An error that occurred while creating a firewall rule in a batch
     # operation.
     #
@@ -629,8 +693,12 @@ module Aws::Route53Resolver
     #     delivered through Amazon Web Services Marketplace. The selected
     #     partner must be an active subscription on the calling account.
     #
+    #   * `AutoAllowlist` — automatically observe the domains that the VPCs
+    #     associated with the rule group resolve, and allow the ones that
+    #     you approve. See AutoAllowlistConfig.
+    #
     #   To enumerate the values supported in your account, call
-    #   ListFirewallRuleTypes.
+    #   ListFirewallRuleTypes. It doesn't return `AutoAllowlist`.
     #   @return [Types::FirewallRuleType]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/CreateFirewallRuleEntry AWS API Documentation
@@ -801,6 +869,9 @@ module Aws::Route53Resolver
     #   `TRUST_REDIRECTION_DOMAIN`: Inspects only the first domain in the
     #   redirection chain. You don't need to add the subsequent domains in
     #   the domain in the redirection list to the domain list.
+    #
+    #   You can't set this value on an AutoAllowlist rule, which always
+    #   inspects the redirection chain.
     #   @return [String]
     #
     # @!attribute [rw] qtype
@@ -839,6 +910,9 @@ module Aws::Route53Resolver
     #     for AAAA. The values must be defined as TYPENUMBER, where the
     #     NUMBER can be 1-65534, for example, TYPE28. For more information,
     #     see [List of DNS record types][1].
+    #
+    #   You can't set `Qtype` on an AutoAllowlist rule, because the rule
+    #   applies to all query types.
     #
     #
     #
@@ -900,8 +974,12 @@ module Aws::Route53Resolver
     #     delivered through Amazon Web Services Marketplace. The selected
     #     partner must be an active subscription on the calling account.
     #
+    #   * `AutoAllowlist` — automatically observe the domains that the VPCs
+    #     associated with the rule group resolve, and allow the ones that
+    #     you approve. See AutoAllowlistConfig.
+    #
     #   To enumerate the values supported in your account, call
-    #   ListFirewallRuleTypes.
+    #   ListFirewallRuleTypes. It doesn't return `AutoAllowlist`.
     #   @return [Types::FirewallRuleType]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/CreateFirewallRuleRequest AWS API Documentation
@@ -2239,6 +2317,33 @@ module Aws::Route53Resolver
     #   The category of the domain list.
     #   @return [String]
     #
+    # @!attribute [rw] firewall_rule_group_id
+    #   For an AutoAllowlist domain list, the ID of the firewall rule group
+    #   that contains the auto-allowlist rule that owns this domain list.
+    #   Use it to navigate to the rule group and its VPC associations.
+    #   Present only when `ManagedListType` is `AUTOALLOWLIST`.
+    #   @return [String]
+    #
+    # @!attribute [rw] firewall_threat_protection_id
+    #   For an AutoAllowlist domain list, the threat protection ID of the
+    #   auto-allowlist rule that owns this domain list. Provide it to
+    #   ListFirewallRuleDomains to review the observed, allowed, and denied
+    #   domains. Present only when `ManagedListType` is `AUTOALLOWLIST`.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   For an AutoAllowlist domain list, the status of the list:
+    #   `IMPORTING` while domains are being copied from the source domain
+    #   list specified at rule creation, `COMPLETE_IMPORT_FAILED` if that
+    #   copy failed, `UPDATING` while a change made with
+    #   UpdateFirewallDomains is being applied, `COMPLETE` otherwise, and
+    #   `DELETING` while the owning rule is being deleted. The first change
+    #   that you make after a failed copy replaces `COMPLETE_IMPORT_FAILED`
+    #   with `UPDATING` and then `COMPLETE`. Present only when
+    #   `ManagedListType` is `AUTOALLOWLIST`. Use GetFirewallDomainList for
+    #   the status of other domain lists.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/FirewallDomainListMetadata AWS API Documentation
     #
     class FirewallDomainListMetadata < Struct.new(
@@ -2248,7 +2353,10 @@ module Aws::Route53Resolver
       :creator_request_id,
       :managed_owner_name,
       :managed_list_type,
-      :category)
+      :category,
+      :firewall_rule_group_id,
+      :firewall_threat_protection_id,
+      :status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2447,8 +2555,11 @@ module Aws::Route53Resolver
     #   * `PartnerThreatProtection` — a third-party threat feed delivered
     #     through Amazon Web Services Marketplace.
     #
+    #   * `AutoAllowlist` — an AutoAllowlist rule, which allows the domains
+    #     on its managed domain list. See AutoAllowlistConfig.
+    #
     #   To enumerate the values supported in your account, call
-    #   ListFirewallRuleTypes.
+    #   ListFirewallRuleTypes. It doesn't return `AutoAllowlist`.
     #   @return [Types::FirewallRuleType]
     #
     # @!attribute [rw] status
@@ -2457,7 +2568,9 @@ module Aws::Route53Resolver
     #   * `CREATING` — DNS Firewall is provisioning the rule. Rules created
     #     with the `PartnerThreatProtection` rule type begin in this state
     #     while DNS Firewall verifies the calling account's Amazon Web
-    #     Services Marketplace entitlement.
+    #     Services Marketplace entitlement. Rules created with the
+    #     `AutoAllowlist` rule type begin in this state while DNS Firewall
+    #     reads the look-back window of each VPC that uses the rule group.
     #
     #   * `COMPLETE` — The rule is provisioned and enforcing matches.
     #
@@ -2499,6 +2612,73 @@ module Aws::Route53Resolver
       :firewall_rule_type,
       :status,
       :status_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A domain that DNS Firewall observed for an AutoAllowlist rule, with
+    # its review status and request volume. Counts are aggregated across all
+    # VPCs that use the rule group, through a rule group association or
+    # through a Route 53 Profile that includes the rule group, including
+    # VPCs in other accounts. The domain isn't attributed to the VPC or
+    # account in which it was observed.
+    #
+    # @!attribute [rw] domain_name
+    #   The domain name.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_status
+    #   The review status of the domain:
+    #
+    #   * `OBSERVED` - DNS Firewall saw the domain in the VPCs' DNS traffic
+    #     and you haven't allowed or denied it. The look-back window seeds
+    #     the initial observed domains. After that, a domain becomes
+    #     observed when any DNS Firewall rule blocks a query for it from a
+    #     VPC that uses the rule group, including rules in other rule
+    #     groups, or when you remove it from the managed domain list with
+    #     `REMOVE`. To keep observing new domains, place a rule that blocks
+    #     the domains you haven't approved after the AutoAllowlist rule.
+    #     Domains from the look-back period that keep being queried and
+    #     aren't blocked move to `ALLOWED` within about a day after the
+    #     rule is created. Observed domains aren't evaluated for safety, so
+    #     review them before you allow them.
+    #
+    #   * `ALLOWED` - DNS Firewall allowed queries for the domain, whether
+    #     or not the domain is in the rule's managed domain list. To get
+    #     the domains in the managed domain list (the allowlist that the
+    #     rule enforces), call ListFirewallRuleDomains with
+    #     `FirewallDomainListId`.
+    #
+    #   * `DENIED` - The domain was denied with the `DENY` operation of
+    #     UpdateFirewallDomains, which also removes it from the managed
+    #     domain list if it was there. A denied domain that is still queried
+    #     and not blocked can move to `ALLOWED`.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_24_hour_requests
+    #   The number of DNS requests observed for this domain in the last 24
+    #   hours.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] total_requests
+    #   The total number of DNS requests observed for this domain since it
+    #   was first added, including the requests in the look-back window that
+    #   seeded the rule.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] added_time
+    #   The date and time when the domain was first observed and added, in
+    #   RFC 3339 format.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/FirewallRuleDomain AWS API Documentation
+    #
+    class FirewallRuleDomain < Struct.new(
+      :domain_name,
+      :domain_status,
+      :last_24_hour_requests,
+      :total_requests,
+      :added_time)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2731,7 +2911,7 @@ module Aws::Route53Resolver
     #
     # Call ListFirewallRuleTypes to discover which rule-type variants and
     # which values within each variant are available in your account and
-    # Region.
+    # Region. It doesn't return the `AutoAllowlist` variant.
     #
     # @!attribute [rw] partner_threat_protection
     #   Configures the rule to match a third-party threat feed delivered
@@ -2760,13 +2940,21 @@ module Aws::Route53Resolver
     #   DnsThreatProtectionRuleTypeConfig.
     #   @return [Types::DnsThreatProtectionRuleTypeConfig]
     #
+    # @!attribute [rw] auto_allowlist
+    #   Configures the rule as an AutoAllowlist rule, which observes the DNS
+    #   traffic of the VPCs that use the rule group, through a rule group
+    #   association or a Route 53 Profile, so that you can review the
+    #   domains and allow them. See AutoAllowlistConfig.
+    #   @return [Types::AutoAllowlistConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/FirewallRuleType AWS API Documentation
     #
     class FirewallRuleType < Struct.new(
       :partner_threat_protection,
       :firewall_advanced_content_category,
       :firewall_advanced_threat_category,
-      :dns_threat_protection)
+      :dns_threat_protection,
+      :auto_allowlist)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2854,10 +3042,25 @@ module Aws::Route53Resolver
     #   The domain list that you requested.
     #   @return [Types::FirewallDomainList]
     #
+    # @!attribute [rw] firewall_rule_group_id
+    #   For an AutoAllowlist domain list, the ID of the firewall rule group
+    #   that contains the AutoAllowlist rule that owns this domain list.
+    #   Present only when `ManagedListType` is `AUTOALLOWLIST`.
+    #   @return [String]
+    #
+    # @!attribute [rw] firewall_threat_protection_id
+    #   For an AutoAllowlist domain list, the threat protection ID of the
+    #   auto-allowlist rule that owns this domain list. Provide it to
+    #   ListFirewallRuleDomains to review the observed, allowed, and denied
+    #   domains. Present only when `ManagedListType` is `AUTOALLOWLIST`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/GetFirewallDomainListResponse AWS API Documentation
     #
     class GetFirewallDomainListResponse < Struct.new(
-      :firewall_domain_list)
+      :firewall_domain_list,
+      :firewall_rule_group_id,
+      :firewall_threat_protection_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3673,6 +3876,131 @@ module Aws::Route53Resolver
     class ListFirewallDomainsResponse < Struct.new(
       :next_token,
       :domains)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Optional filters and sort order for ListFirewallRuleDomains.
+    #
+    # @!attribute [rw] domain_status
+    #   Filters the returned domains by review status. Valid values:
+    #
+    #   * `OBSERVED` - Domains that DNS Firewall saw in the VPCs' DNS
+    #     traffic and that you haven't allowed or denied. After the
+    #     look-back window, a domain is observed when any DNS Firewall rule
+    #     blocks a query for it from a VPC that uses the rule group,
+    #     including rules in other rule groups, or when you remove it from
+    #     the managed domain list. Domains from the look-back period that
+    #     keep being queried and aren't blocked move to `ALLOWED` within
+    #     about a day after the rule is created.
+    #
+    #   * `ALLOWED` - Domains that DNS Firewall allowed queries for, whether
+    #     or not they're in the rule's managed domain list.
+    #
+    #   * `DENIED` - Domains that were denied with the `DENY` operation. A
+    #     denied domain that is still queried and not blocked can move to
+    #     `ALLOWED`.
+    #
+    #   If you don't specify a value, the operation returns `OBSERVED`
+    #   domains.
+    #   @return [String]
+    #
+    # @!attribute [rw] sort_by
+    #   The attribute to sort the returned domains by. Valid values:
+    #
+    #   * `TIME_ADDED` - The `AddedTime` of the domain.
+    #
+    #   * `DAILY_TOTAL` - The `Last24HourRequests` count.
+    #
+    #   * `TOTAL_REQUESTS` - The `TotalRequests` count.
+    #
+    #   If you don't specify a value, the operation sorts by `TIME_ADDED`.
+    #   @return [String]
+    #
+    # @!attribute [rw] sort_order
+    #   The sort direction: `ASC` for ascending or `DESC` for descending. If
+    #   you don't specify a value, the operation sorts in descending order.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_name_filter
+    #   Returns only the domains whose name contains this substring.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/ListFirewallRuleDomainsQueryOptions AWS API Documentation
+    #
+    class ListFirewallRuleDomainsQueryOptions < Struct.new(
+      :domain_status,
+      :sort_by,
+      :sort_order,
+      :domain_name_filter)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] firewall_rule_group_id
+    #   The unique identifier of the firewall rule group that contains the
+    #   rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] firewall_threat_protection_id
+    #   The threat protection ID that identifies an AutoAllowlist rule.
+    #   Provide this to list an AutoAllowlist rule's domains.
+    #   @return [String]
+    #
+    # @!attribute [rw] firewall_domain_list_id
+    #   The ID of the AutoAllowlist rule's managed domain list. Provide
+    #   this to list the domains that the rule currently allows.
+    #   @return [String]
+    #
+    # @!attribute [rw] query_options
+    #   Optional filters and sort order for the returned domains. If you
+    #   don't specify this, the operation returns the `OBSERVED` domains
+    #   sorted by `TIME_ADDED` in descending order. See
+    #   ListFirewallRuleDomainsQueryOptions.
+    #   @return [Types::ListFirewallRuleDomainsQueryOptions]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of domains that you want to return in a single
+    #   call. If more domains remain than can be returned, the response
+    #   includes a `NextToken` value that you can use in a subsequent call
+    #   to get the next batch. The default is 100.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   For the first call to this operation, omit this value. If more
+    #   domains remain than can be returned in a single call, the response
+    #   includes a `NextToken` value. In your next call, specify that value
+    #   to get the next batch of domains.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/ListFirewallRuleDomainsRequest AWS API Documentation
+    #
+    class ListFirewallRuleDomainsRequest < Struct.new(
+      :firewall_rule_group_id,
+      :firewall_threat_protection_id,
+      :firewall_domain_list_id,
+      :query_options,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] domains
+    #   The domains for the rule. See FirewallRuleDomain.
+    #   @return [Array<Types::FirewallRuleDomain>]
+    #
+    # @!attribute [rw] next_token
+    #   If more domains remain than were returned in this response, DNS
+    #   Firewall provides a `NextToken` value that you can use in a
+    #   subsequent call to get the next batch of domains.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/ListFirewallRuleDomainsResponse AWS API Documentation
+    #
+    class ListFirewallRuleDomainsResponse < Struct.new(
+      :domains,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6012,13 +6340,23 @@ module Aws::Route53Resolver
     #   providing:
     #
     #   * `ADD` - Add the domains to the ones that are already in the domain
-    #     list.
+    #     list. For an AutoAllowlist rule's managed domain list, this also
+    #     marks the observed domains as allowed.
     #
     #   * `REMOVE` - Search the domain list for the domains and remove them
-    #     from the list.
+    #     from the list. For an AutoAllowlist rule's managed domain list,
+    #     the rule no longer allows the removed domains, unless a wildcard
+    #     entry that's still on the list matches them.
     #
     #   * `REPLACE` - Update the domain list to exactly match the list that
-    #     you are providing.
+    #     you are providing. Not supported for an AutoAllowlist rule's
+    #     managed domain list.
+    #
+    #   * `DENY` - For an AutoAllowlist rule's managed domain list only,
+    #     mark the specified observed domains as denied so that they're no
+    #     longer listed for review. If a domain is on the managed domain
+    #     list, `DENY` also removes it from the list. Specify fully
+    #     qualified domain names. Wildcards aren't accepted.
     #   @return [String]
     #
     # @!attribute [rw] domains
@@ -6263,7 +6601,14 @@ module Aws::Route53Resolver
     #     partner must be an active subscription on the calling account.
     #
     #   To enumerate the values supported in your account, call
-    #   ListFirewallRuleTypes.
+    #   ListFirewallRuleTypes. It doesn't return `AutoAllowlist`.
+    #
+    #   You can't specify `FirewallRuleType` when you update an
+    #   AutoAllowlist rule, even with its current values.
+    #   `InitialDataTimeframeHours` and `ImportFromFirewallDomainListId`
+    #   can't be changed. To change them, delete the rule and create a new
+    #   one. Deleting an AutoAllowlist rule also deletes its managed domain
+    #   list and the domains that you allowed.
     #   @return [Types::FirewallRuleType]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/UpdateFirewallRuleEntry AWS API Documentation
@@ -6424,6 +6769,9 @@ module Aws::Route53Resolver
     #   `TRUST_REDIRECTION_DOMAIN`: Inspects only the first domain in the
     #   redirection chain. You don't need to add the subsequent domains in
     #   the domain in the redirection list to the domain list.
+    #
+    #   You can't set this value on an AutoAllowlist rule, which always
+    #   inspects the redirection chain.
     #   @return [String]
     #
     # @!attribute [rw] qtype
@@ -6468,6 +6816,9 @@ module Aws::Route53Resolver
     #     IPv6 addresses generated when DNS64 is enabled.
     #
     #      </note>
+    #
+    #   You can't set `Qtype` on an AutoAllowlist rule, because the rule
+    #   applies to all query types.
     #
     #
     #
@@ -6530,7 +6881,14 @@ module Aws::Route53Resolver
     #     partner must be an active subscription on the calling account.
     #
     #   To enumerate the values supported in your account, call
-    #   ListFirewallRuleTypes.
+    #   ListFirewallRuleTypes. It doesn't return `AutoAllowlist`.
+    #
+    #   You can't specify `FirewallRuleType` when you update an
+    #   AutoAllowlist rule, even with its current values.
+    #   `InitialDataTimeframeHours` and `ImportFromFirewallDomainListId`
+    #   can't be changed. To change them, delete the rule and create a new
+    #   one. Deleting an AutoAllowlist rule also deletes its managed domain
+    #   list and the domains that you allowed.
     #   @return [Types::FirewallRuleType]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/UpdateFirewallRuleRequest AWS API Documentation

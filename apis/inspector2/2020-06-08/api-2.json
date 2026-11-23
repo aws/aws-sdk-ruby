@@ -1572,7 +1572,10 @@
         "CODE_REPOSITORY",
         "Microsoft.Compute/virtualMachines",
         "Microsoft.ContainerRegistry/registry/containerImage",
-        "Microsoft.Web/sites"
+        "Microsoft.Web/sites",
+        "cloudfunctions.googleapis.com/Function",
+        "compute.googleapis.com/Instance",
+        "artifactregistry.googleapis.com/DockerImage"
       ]
     },
     "AggregationResponse":{
@@ -2795,6 +2798,7 @@
       "enum":[
         "AWS",
         "AZURE",
+        "GCP",
         "NOT_APPLICABLE"
       ]
     },
@@ -2867,6 +2871,10 @@
         "awsEksMetadataDetails":{"shape":"AwsEksMetadataDetails"}
       },
       "union":true
+    },
+    "CodeConnectionsHostArn":{
+      "type":"string",
+      "pattern":"arn:aws(-[\\w]+)*:(codestar-connections|codeconnections):.+:[0-9]{12}:host\\/.+"
     },
     "CodeFilePath":{
       "type":"structure",
@@ -3038,6 +3046,21 @@
         "statusReason":{"shape":"String"},
         "createdOn":{"shape":"Timestamp"},
         "lastUpdateOn":{"shape":"Timestamp"}
+      }
+    },
+    "CodeSecurityIntegrationVpcConfiguration":{
+      "type":"structure",
+      "required":[
+        "vpcId",
+        "vpcEndpointId"
+      ],
+      "members":{
+        "vpcId":{"shape":"VpcId"},
+        "vpcEndpointId":{"shape":"VpcEndpointId"},
+        "codeConnectionsHostArn":{"shape":"CodeConnectionsHostArn"},
+        "subnetIds":{"shape":"SubnetIdList"},
+        "securityGroups":{"shape":"SecurityGroupIdList"},
+        "tlsCertificate":{"shape":"TlsCertificate"}
       }
     },
     "CodeSecurityResource":{
@@ -3216,7 +3239,9 @@
         "awsConfigConnectorArn":{"shape":"AwsConfigConnectorArn"},
         "scopeConfiguration":{"shape":"AzureScopeConfiguration"},
         "tags":{"shape":"ConnectorTagMap"},
-        "autoInstallVMScanner":{"shape":"Boolean"}
+        "autoInstallVMScanner":{"shape":"Boolean"},
+        "gcpRegions":{"shape":"GcpRegionList"},
+        "gcpScopeConfiguration":{"shape":"GcpScopeConfiguration"}
       }
     },
     "ConnectorArn":{
@@ -3252,7 +3277,10 @@
     },
     "ConnectorCloudProvider":{
       "type":"string",
-      "enum":["AZURE"]
+      "enum":[
+        "AZURE",
+        "GCP"
+      ]
     },
     "ConnectorContainerImageScanConfiguration":{
       "type":"structure",
@@ -3615,7 +3643,11 @@
         "Microsoft.ContainerRegistry/registry/containerRepository",
         "Microsoft.Web/sites",
         "Microsoft.ContainerRegistry/registries",
-        "MACHINE_IMAGE"
+        "MACHINE_IMAGE",
+        "cloudfunctions.googleapis.com/Function",
+        "compute.googleapis.com/Instance",
+        "artifactregistry.googleapis.com/Repository",
+        "artifactregistry.googleapis.com/DockerImage"
       ]
     },
     "CoverageStringComparison":{
@@ -3822,6 +3854,14 @@
         "reportId":{"shape":"ReportId"}
       }
     },
+    "CreateGitHubEnterpriseIntegrationDetail":{
+      "type":"structure",
+      "required":["instanceUrl"],
+      "members":{
+        "instanceUrl":{"shape":"InstanceUrl"},
+        "vpcConfiguration":{"shape":"CodeSecurityIntegrationVpcConfiguration"}
+      }
+    },
     "CreateGitLabSelfManagedIntegrationDetail":{
       "type":"structure",
       "required":[
@@ -3830,13 +3870,15 @@
       ],
       "members":{
         "instanceUrl":{"shape":"InstanceUrl"},
-        "accessToken":{"shape":"GitLabAccessToken"}
+        "accessToken":{"shape":"GitLabAccessToken"},
+        "vpcConfiguration":{"shape":"CodeSecurityIntegrationVpcConfiguration"}
       }
     },
     "CreateIntegrationDetail":{
       "type":"structure",
       "members":{
-        "gitlabSelfManaged":{"shape":"CreateGitLabSelfManagedIntegrationDetail"}
+        "gitlabSelfManaged":{"shape":"CreateGitLabSelfManagedIntegrationDetail"},
+        "githubEnterprise":{"shape":"CreateGitHubEnterpriseIntegrationDetail"}
       },
       "union":true
     },
@@ -4974,6 +5016,86 @@
       "type":"string",
       "pattern":"[a-zA-Z0-9-_\\.]+(:(\\$LATEST|[a-zA-Z0-9-_]+))?"
     },
+    "GcpCapabilityScope":{
+      "type":"structure",
+      "required":["scopeType"],
+      "members":{
+        "scopeType":{"shape":"ScopeType"},
+        "scopeValues":{"shape":"GcpScopeValueList"},
+        "state":{"shape":"ScopeState"},
+        "stateReason":{"shape":"String"}
+      }
+    },
+    "GcpCapabilityScopeInput":{
+      "type":"structure",
+      "required":["scopeType"],
+      "members":{
+        "scopeType":{"shape":"ScopeType"},
+        "scopeValues":{"shape":"GcpScopeValueList"}
+      }
+    },
+    "GcpProviderDetailCreate":{
+      "type":"structure",
+      "required":[
+        "awsConfigConnectorArn",
+        "scopeConfiguration",
+        "gcpRegions"
+      ],
+      "members":{
+        "awsConfigConnectorArn":{"shape":"AwsConfigConnectorArn"},
+        "scopeConfiguration":{"shape":"GcpScopeConfigurationInput"},
+        "gcpRegions":{"shape":"GcpRegionList"},
+        "autoInstallVMScanner":{"shape":"Boolean"}
+      }
+    },
+    "GcpProviderDetailUpdate":{
+      "type":"structure",
+      "members":{
+        "gcpRegions":{"shape":"GcpRegionList"},
+        "scopeConfiguration":{"shape":"GcpScopeConfigurationInput"},
+        "autoInstallVMScanner":{"shape":"Boolean"}
+      }
+    },
+    "GcpRegion":{
+      "type":"string",
+      "max":64,
+      "min":1,
+      "pattern":"(ALL|[a-z][a-z0-9-]*)"
+    },
+    "GcpRegionList":{
+      "type":"list",
+      "member":{"shape":"GcpRegion"},
+      "max":256,
+      "min":1
+    },
+    "GcpScopeConfiguration":{
+      "type":"structure",
+      "members":{
+        "vmScanning":{"shape":"GcpCapabilityScope"},
+        "containerImageScanning":{"shape":"GcpCapabilityScope"},
+        "serverlessScanning":{"shape":"GcpCapabilityScope"}
+      }
+    },
+    "GcpScopeConfigurationInput":{
+      "type":"structure",
+      "members":{
+        "vmScanning":{"shape":"GcpCapabilityScopeInput"},
+        "containerImageScanning":{"shape":"GcpCapabilityScopeInput"},
+        "serverlessScanning":{"shape":"GcpCapabilityScopeInput"}
+      }
+    },
+    "GcpScopeValue":{
+      "type":"string",
+      "max":30,
+      "min":6,
+      "pattern":"([a-z][a-z0-9-]{4,28}[a-z0-9]|[0-9]{6,30})"
+    },
+    "GcpScopeValueList":{
+      "type":"list",
+      "member":{"shape":"GcpScopeValue"},
+      "max":100,
+      "min":0
+    },
     "GetCisScanReportRequest":{
       "type":"structure",
       "required":["scanArn"],
@@ -5077,6 +5199,8 @@
         "createdOn":{"shape":"Timestamp"},
         "lastUpdateOn":{"shape":"Timestamp"},
         "authorizationUrl":{"shape":"AuthorizationUrl"},
+        "vpcConfiguration":{"shape":"CodeSecurityIntegrationVpcConfiguration"},
+        "instanceUrl":{"shape":"InstanceUrl"},
         "tags":{"shape":"TagMap"}
       }
     },
@@ -5274,6 +5398,20 @@
       "min":1,
       "sensitive":true
     },
+    "GitHubEnterpriseServerAppRegistrationDetail":{
+      "type":"structure",
+      "required":["manifestCode"],
+      "members":{
+        "manifestCode":{"shape":"GitHubEnterpriseServerManifestCode"}
+      }
+    },
+    "GitHubEnterpriseServerManifestCode":{
+      "type":"string",
+      "max":1024,
+      "min":1,
+      "pattern":"[a-zA-Z0-9._~+/-]+",
+      "sensitive":true
+    },
     "GitHubInstallationId":{
       "type":"string",
       "max":1024,
@@ -5409,7 +5547,13 @@
         "IN_PROGRESS",
         "ACTIVE",
         "INACTIVE",
-        "DISABLING"
+        "DISABLING",
+        "ESTABLISHING_CONNECTION_IN_PROGRESS",
+        "ESTABLISHING_CONNECTION_COMPLETED",
+        "ESTABLISHING_CONNECTION_FAILED",
+        "PENDING_MANIFEST_CODE",
+        "DELETE_IN_PROGRESS",
+        "DELETE_FAILED"
       ]
     },
     "IntegrationSummaries":{
@@ -5422,7 +5566,8 @@
       "type":"string",
       "enum":[
         "GITLAB_SELF_MANAGED",
-        "GITHUB"
+        "GITHUB",
+        "GITHUB_ENTERPRISE_SERVER"
       ]
     },
     "InternalServerException":{
@@ -6358,7 +6503,10 @@
         "architecture":{"shape":"StringFilter"},
         "sourceLayerHash":{"shape":"StringFilter"},
         "sourceLambdaLayerArn":{"shape":"StringFilter"},
-        "filePath":{"shape":"StringFilter"}
+        "filePath":{"shape":"StringFilter"},
+        "runtimeReachability":{"shape":"RuntimeReachabilityFilter"},
+        "runtimeReachabilityReason":{"shape":"RuntimeReachabilityReasonFilter"},
+        "purlQualifier":{"shape":"PurlQualifierFilter"}
       }
     },
     "PackageFilterList":{
@@ -6414,6 +6562,11 @@
         "IMAGE",
         "ZIP"
       ]
+    },
+    "PackageUrl":{
+      "type":"string",
+      "max":2048,
+      "min":1
     },
     "PackageVersion":{
       "type":"string",
@@ -6482,6 +6635,13 @@
       "member":{"shape":"Permission"},
       "max":1024,
       "min":0
+    },
+    "PkceState":{
+      "type":"string",
+      "max":1024,
+      "min":1,
+      "pattern":"[A-Za-z0-9_-]+",
+      "sensitive":true
     },
     "Platform":{
       "type":"string",
@@ -6575,14 +6735,15 @@
       "type":"string",
       "enum":[
         "AWS",
-        "AZURE"
+        "AZURE",
+        "GCP"
       ]
     },
     "ProviderAccountId":{
       "type":"string",
       "max":36,
-      "min":12,
-      "pattern":"(\\d{12}|[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12})"
+      "min":6,
+      "pattern":"(\\d{12}|[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}|[a-z][a-z0-9-]{4,28}[a-z0-9])"
     },
     "ProviderComparison":{
       "type":"string",
@@ -6591,14 +6752,16 @@
     "ProviderDetailCreate":{
       "type":"structure",
       "members":{
-        "azure":{"shape":"AzureProviderDetailCreate"}
+        "azure":{"shape":"AzureProviderDetailCreate"},
+        "gcp":{"shape":"GcpProviderDetailCreate"}
       },
       "union":true
     },
     "ProviderDetailUpdate":{
       "type":"structure",
       "members":{
-        "azure":{"shape":"AzureProviderDetailUpdate"}
+        "azure":{"shape":"AzureProviderDetailUpdate"},
+        "gcp":{"shape":"GcpProviderDetailUpdate"}
       },
       "union":true
     },
@@ -6622,8 +6785,8 @@
     "ProviderOrgId":{
       "type":"string",
       "max":36,
-      "min":12,
-      "pattern":"(o-[a-z0-9]{10,32}|[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12})"
+      "min":6,
+      "pattern":"(o-[a-z0-9]{10,32}|[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}|[0-9]{6,30})"
     },
     "ProviderPartition":{
       "type":"string",
@@ -6635,7 +6798,40 @@
       "type":"string",
       "max":64,
       "min":1,
-      "pattern":"([a-z]{2}(-[a-z]+)+-\\d+|[a-z][a-z0-9]+)"
+      "pattern":"([a-z]{2}(-[a-z]+)+-\\d+|[a-z][a-z0-9]+|[a-z]+-[a-z]+[0-9]+(-[a-z])?)"
+    },
+    "PurlQualifierFilter":{
+      "type":"structure",
+      "required":[
+        "comparison",
+        "key"
+      ],
+      "members":{
+        "comparison":{"shape":"MapComparison"},
+        "key":{"shape":"PurlQualifierKey"},
+        "value":{"shape":"MapValue"}
+      }
+    },
+    "PurlQualifierKey":{
+      "type":"string",
+      "enum":[
+        "arch",
+        "collector",
+        "dev_dependency",
+        "distro",
+        "epoch",
+        "go_toolchain",
+        "hardened",
+        "private",
+        "rust_toolchain",
+        "scope",
+        "skip_chromium_download",
+        "source",
+        "stream",
+        "transitive_dependency",
+        "unresolved",
+        "vendor"
+      ]
     },
     "Reason":{
       "type":"string",
@@ -6972,7 +7168,10 @@
         "Microsoft.Compute/virtualMachines",
         "Microsoft.ContainerRegistry/registry/containerImage",
         "Microsoft.Web/sites",
-        "MACHINE_IMAGE"
+        "MACHINE_IMAGE",
+        "cloudfunctions.googleapis.com/Function",
+        "compute.googleapis.com/Instance",
+        "artifactregistry.googleapis.com/DockerImage"
       ]
     },
     "RiskScore":{
@@ -7034,6 +7233,52 @@
         "DOTNET_8",
         "NODEJS_20_X"
       ]
+    },
+    "RuntimeReachability":{
+      "type":"string",
+      "enum":[
+        "REACHABLE",
+        "NOT_REACHABLE",
+        "UNKNOWN"
+      ]
+    },
+    "RuntimeReachabilityComparison":{
+      "type":"string",
+      "enum":[
+        "EQUALS",
+        "NOT_EQUALS"
+      ]
+    },
+    "RuntimeReachabilityFilter":{
+      "type":"structure",
+      "required":[
+        "comparison",
+        "value"
+      ],
+      "members":{
+        "comparison":{"shape":"RuntimeReachabilityComparison"},
+        "value":{"shape":"RuntimeReachability"}
+      }
+    },
+    "RuntimeReachabilityReason":{
+      "type":"string",
+      "enum":[
+        "PACKAGE_IN_DOCKERFILE_WORKLOAD_PATH",
+        "PACKAGE_NOT_IN_DOCKERFILE_WORKLOAD_PATH",
+        "PROCESS_OBSERVED_IN_EC2_RUNTIME",
+        "PROCESS_NOT_OBSERVED_IN_EC2_RUNTIME"
+      ]
+    },
+    "RuntimeReachabilityReasonFilter":{
+      "type":"structure",
+      "required":[
+        "comparison",
+        "value"
+      ],
+      "members":{
+        "comparison":{"shape":"RuntimeReachabilityComparison"},
+        "value":{"shape":"RuntimeReachabilityReason"}
+      }
     },
     "SbomReportFormat":{
       "type":"string",
@@ -7197,7 +7442,9 @@
       "type":"string",
       "enum":[
         "TENANT",
-        "SUBSCRIPTION"
+        "SUBSCRIPTION",
+        "ORGANIZATION",
+        "PROJECT"
       ]
     },
     "ScopeValue":{
@@ -7883,6 +8130,13 @@
         "ALL"
       ]
     },
+    "TlsCertificate":{
+      "type":"string",
+      "max":16384,
+      "min":1,
+      "pattern":"[\\s\\S]*",
+      "sensitive":true
+    },
     "Tool":{
       "type":"string",
       "min":0
@@ -8096,6 +8350,26 @@
         "arn":{"shape":"FilterArn"}
       }
     },
+    "UpdateGitHubEnterpriseServerAppInstallationDetail":{
+      "type":"structure",
+      "required":[
+        "code",
+        "installationId"
+      ],
+      "members":{
+        "code":{"shape":"GitHubAuthCode"},
+        "installationId":{"shape":"GitHubInstallationId"},
+        "stateToken":{"shape":"PkceState"}
+      }
+    },
+    "UpdateGitHubEnterpriseServerIntegrationDetail":{
+      "type":"structure",
+      "members":{
+        "appInstallation":{"shape":"UpdateGitHubEnterpriseServerAppInstallationDetail"},
+        "appRegistration":{"shape":"GitHubEnterpriseServerAppRegistrationDetail"}
+      },
+      "union":true
+    },
     "UpdateGitHubIntegrationDetail":{
       "type":"structure",
       "required":[
@@ -8104,21 +8378,24 @@
       ],
       "members":{
         "code":{"shape":"GitHubAuthCode"},
-        "installationId":{"shape":"GitHubInstallationId"}
+        "installationId":{"shape":"GitHubInstallationId"},
+        "stateToken":{"shape":"PkceState"}
       }
     },
     "UpdateGitLabSelfManagedIntegrationDetail":{
       "type":"structure",
       "required":["authCode"],
       "members":{
-        "authCode":{"shape":"GitLabAuthCode"}
+        "authCode":{"shape":"GitLabAuthCode"},
+        "stateToken":{"shape":"PkceState"}
       }
     },
     "UpdateIntegrationDetails":{
       "type":"structure",
       "members":{
         "gitlabSelfManaged":{"shape":"UpdateGitLabSelfManagedIntegrationDetail"},
-        "github":{"shape":"UpdateGitHubIntegrationDetail"}
+        "github":{"shape":"UpdateGitHubIntegrationDetail"},
+        "githubEnterpriseServer":{"shape":"UpdateGitHubEnterpriseServerIntegrationDetail"}
       },
       "union":true
     },
@@ -8198,7 +8475,12 @@
         "AZURE_CONTAINER_IMAGE_RESCAN",
         "AZURE_VM_AGENT_BASED_INSTANCE_HOURS",
         "AZURE_SERVERLESS_FUNCTION_HOURS",
-        "EC2_AMI_HOURS"
+        "EC2_AMI_HOURS",
+        "EC2_AMI_ONE_SHOT_SCAN",
+        "GCP_VM_AGENT_BASED_INSTANCE_HOURS",
+        "GCP_CLOUD_RUN_HOURS",
+        "GCP_CONTAINER_IMAGE_INITIAL_SCAN",
+        "GCP_CONTAINER_IMAGE_RESCAN"
       ]
     },
     "UsageValue":{
@@ -8366,6 +8648,10 @@
         "UNKNOWN"
       ]
     },
+    "VpcEndpointId":{
+      "type":"string",
+      "pattern":"vpce-[0-9a-f]{8}([0-9a-f]{9})?"
+    },
     "VpcId":{
       "type":"string",
       "pattern":"vpc-([a-z0-9]{8}|[a-z0-9]{17}|\\*)"
@@ -8455,7 +8741,10 @@
         "filePath":{"shape":"FilePath"},
         "fixedInVersion":{"shape":"PackageVersion"},
         "remediation":{"shape":"VulnerablePackageRemediation"},
-        "sourceLambdaLayerArn":{"shape":"LambdaLayerArn"}
+        "sourceLambdaLayerArn":{"shape":"LambdaLayerArn"},
+        "runtimeReachability":{"shape":"RuntimeReachability"},
+        "runtimeReachabilityReason":{"shape":"RuntimeReachabilityReason"},
+        "purl":{"shape":"PackageUrl"}
       }
     },
     "VulnerablePackageList":{

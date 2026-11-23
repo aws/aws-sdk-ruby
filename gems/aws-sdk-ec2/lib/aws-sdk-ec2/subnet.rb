@@ -142,6 +142,41 @@ module Aws::EC2
       data[:type]
     end
 
+    # The internet connectivity treatment that the Automated Internet
+    # Firewall applies to the subnet. The response includes this value only
+    # if the subnet is in a VPC that has a firewall. Possible values:
+    #
+    # * `az-unsupported`: The firewall doesn't support the subnet's
+    #   Availability Zone, so it doesn't inspect traffic for the subnet.
+    #
+    # * `bidirectional`: Provides bidirectional internet connectivity to
+    #   every network interface that has a public IP association. Any
+    #   network interface without a public IP cannot communicate with the
+    #   internet unless a NAT device is explicitly inserted in the path. All
+    #   inbound and outbound traffic is inspected against your firewall
+    #   rules.
+    #
+    # * `exclude`: The firewall doesn't inspect traffic for the subnet. The
+    #   subnet bypasses the firewall, and its traffic passes directly
+    #   through the internet gateway.
+    #
+    # * `flexible`: Sets the connectivity for each network interface in the
+    #   subnet based on whether it is associated with a public IP address. A
+    #   network interface with a public IP address gets bidirectional
+    #   internet connectivity. A network interface without a public IP
+    #   address gets outbound-only connectivity. All traffic is inspected
+    #   against your firewall rules.
+    #
+    # * `outbound-only`: Provides egress-only connectivity for all network
+    #   interfaces in the subnet. All outbound traffic and inbound responses
+    #   are inspected against your firewall rules. Unsolicited inbound
+    #   connections are dropped. For IPv4 traffic, the firewall performs
+    #   NAT.
+    # @return [String]
+    def network_firewall_connectivity_type
+      data[:network_firewall_connectivity_type]
+    end
+
     # The current state of the subnet.
     #
     # * `failed`: The underlying infrastructure to support the subnet failed
@@ -380,6 +415,7 @@ module Aws::EC2
     #     max_count: 1, # required
     #     min_count: 1, # required
     #     monitoring: {
+    #       metric_category_ids: ["MetricCategoryId"],
     #       enabled: false, # required
     #     },
     #     placement: {
@@ -411,7 +447,7 @@ module Aws::EC2
     #     ],
     #     tag_specifications: [
     #       {
-    #         resource_type: "capacity-reservation", # accepts capacity-reservation, client-vpn-endpoint, customer-gateway, carrier-gateway, coip-pool, declarative-policies-report, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, image-usage-report, import-image-task, import-snapshot-task, instance, instance-event-window, internet-gateway, ipam, ipam-pool, ipam-scope, ipv4pool-ec2, ipv6pool-ec2, key-pair, launch-template, local-gateway, local-gateway-route-table, local-gateway-virtual-interface, local-gateway-virtual-interface-group, local-gateway-route-table-vpc-association, local-gateway-route-table-virtual-interface-group-association, natgateway, network-acl, network-interface, network-insights-analysis, network-insights-path, network-insights-access-scope, network-insights-access-scope-analysis, outpost-lag, placement-group, prefix-list, replace-root-volume-task, reserved-instances, route-table, security-group, security-group-rule, service-link-virtual-interface, snapshot, spot-fleet-request, spot-instances-request, subnet, subnet-cidr-reservation, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-connect-peer, transit-gateway-multicast-domain, transit-gateway-policy-table, transit-gateway-metering-policy, transit-gateway-route-table, transit-gateway-route-table-announcement, volume, vpc, vpc-endpoint, vpc-endpoint-connection, vpc-endpoint-service, vpc-endpoint-service-permission, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log, capacity-reservation-fleet, traffic-mirror-filter-rule, vpc-endpoint-connection-device-type, verified-access-instance, verified-access-group, verified-access-endpoint, verified-access-policy, verified-access-trust-provider, vpn-connection-device-type, vpc-block-public-access-exclusion, vpc-encryption-control, route-server, route-server-endpoint, route-server-peer, ipam-resource-discovery, ipam-resource-discovery-association, instance-connect-endpoint, verified-access-endpoint-target, ipam-external-resource-verification-token, capacity-block, mac-modification-task, ipam-prefix-list-resolver, ipam-policy, ipam-prefix-list-resolver-target, ipam-internet-registry-association, secondary-interface, secondary-network, secondary-subnet, capacity-manager-data-export, vpn-concentrator, ipam-pool-allocation, capacity-reservation-cancellation-quote, application-status-check, capacity-reservation-modification-quote
+    #         resource_type: "capacity-reservation", # accepts capacity-reservation, client-vpn-endpoint, customer-gateway, carrier-gateway, coip-pool, declarative-policies-report, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fca-policy, fleet, fpga-image, host-reservation, image, image-usage-report, import-image-task, import-snapshot-task, instance, instance-event-window, internet-gateway, ipam, ipam-pool, ipam-scope, ipv4pool-ec2, ipv6pool-ec2, key-pair, launch-template, local-gateway, local-gateway-route-table, local-gateway-virtual-interface, local-gateway-virtual-interface-group, local-gateway-route-table-vpc-association, local-gateway-route-table-virtual-interface-group-association, natgateway, network-acl, network-interface, network-insights-analysis, network-insights-path, network-insights-access-scope, network-insights-access-scope-analysis, outpost-lag, placement-group, prefix-list, replace-root-volume-task, reserved-instances, route-table, security-group, security-group-rule, service-link-virtual-interface, snapshot, spot-fleet-request, spot-instances-request, subnet, subnet-cidr-reservation, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-connect-peer, transit-gateway-multicast-domain, transit-gateway-policy-table, transit-gateway-metering-policy, transit-gateway-route-table, transit-gateway-route-table-announcement, volume, vpc, vpc-endpoint, vpc-endpoint-connection, vpc-endpoint-service, vpc-endpoint-service-permission, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log, capacity-reservation-fleet, traffic-mirror-filter-rule, vpc-endpoint-connection-device-type, verified-access-instance, verified-access-group, verified-access-endpoint, verified-access-policy, verified-access-trust-provider, vpn-connection-device-type, vpc-block-public-access-exclusion, vpc-encryption-control, route-server, route-server-endpoint, route-server-peer, ipam-resource-discovery, ipam-resource-discovery-association, instance-connect-endpoint, verified-access-endpoint-target, ipam-external-resource-verification-token, capacity-block, mac-modification-task, ipam-prefix-list-resolver, ipam-policy, ipam-prefix-list-resolver-target, ipam-internet-registry-association, secondary-interface, secondary-network, secondary-subnet, capacity-manager-data-export, vpn-concentrator, ipam-pool-allocation, capacity-reservation-cancellation-quote, application-status-check, capacity-reservation-modification-quote, metric-category
     #         tags: [
     #           {
     #             key: "String",
@@ -921,7 +957,7 @@ module Aws::EC2
     #     interface_type: "efa", # accepts efa, efa-only, branch, trunk
     #     tag_specifications: [
     #       {
-    #         resource_type: "capacity-reservation", # accepts capacity-reservation, client-vpn-endpoint, customer-gateway, carrier-gateway, coip-pool, declarative-policies-report, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, image-usage-report, import-image-task, import-snapshot-task, instance, instance-event-window, internet-gateway, ipam, ipam-pool, ipam-scope, ipv4pool-ec2, ipv6pool-ec2, key-pair, launch-template, local-gateway, local-gateway-route-table, local-gateway-virtual-interface, local-gateway-virtual-interface-group, local-gateway-route-table-vpc-association, local-gateway-route-table-virtual-interface-group-association, natgateway, network-acl, network-interface, network-insights-analysis, network-insights-path, network-insights-access-scope, network-insights-access-scope-analysis, outpost-lag, placement-group, prefix-list, replace-root-volume-task, reserved-instances, route-table, security-group, security-group-rule, service-link-virtual-interface, snapshot, spot-fleet-request, spot-instances-request, subnet, subnet-cidr-reservation, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-connect-peer, transit-gateway-multicast-domain, transit-gateway-policy-table, transit-gateway-metering-policy, transit-gateway-route-table, transit-gateway-route-table-announcement, volume, vpc, vpc-endpoint, vpc-endpoint-connection, vpc-endpoint-service, vpc-endpoint-service-permission, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log, capacity-reservation-fleet, traffic-mirror-filter-rule, vpc-endpoint-connection-device-type, verified-access-instance, verified-access-group, verified-access-endpoint, verified-access-policy, verified-access-trust-provider, vpn-connection-device-type, vpc-block-public-access-exclusion, vpc-encryption-control, route-server, route-server-endpoint, route-server-peer, ipam-resource-discovery, ipam-resource-discovery-association, instance-connect-endpoint, verified-access-endpoint-target, ipam-external-resource-verification-token, capacity-block, mac-modification-task, ipam-prefix-list-resolver, ipam-policy, ipam-prefix-list-resolver-target, ipam-internet-registry-association, secondary-interface, secondary-network, secondary-subnet, capacity-manager-data-export, vpn-concentrator, ipam-pool-allocation, capacity-reservation-cancellation-quote, application-status-check, capacity-reservation-modification-quote
+    #         resource_type: "capacity-reservation", # accepts capacity-reservation, client-vpn-endpoint, customer-gateway, carrier-gateway, coip-pool, declarative-policies-report, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fca-policy, fleet, fpga-image, host-reservation, image, image-usage-report, import-image-task, import-snapshot-task, instance, instance-event-window, internet-gateway, ipam, ipam-pool, ipam-scope, ipv4pool-ec2, ipv6pool-ec2, key-pair, launch-template, local-gateway, local-gateway-route-table, local-gateway-virtual-interface, local-gateway-virtual-interface-group, local-gateway-route-table-vpc-association, local-gateway-route-table-virtual-interface-group-association, natgateway, network-acl, network-interface, network-insights-analysis, network-insights-path, network-insights-access-scope, network-insights-access-scope-analysis, outpost-lag, placement-group, prefix-list, replace-root-volume-task, reserved-instances, route-table, security-group, security-group-rule, service-link-virtual-interface, snapshot, spot-fleet-request, spot-instances-request, subnet, subnet-cidr-reservation, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-connect-peer, transit-gateway-multicast-domain, transit-gateway-policy-table, transit-gateway-metering-policy, transit-gateway-route-table, transit-gateway-route-table-announcement, volume, vpc, vpc-endpoint, vpc-endpoint-connection, vpc-endpoint-service, vpc-endpoint-service-permission, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log, capacity-reservation-fleet, traffic-mirror-filter-rule, vpc-endpoint-connection-device-type, verified-access-instance, verified-access-group, verified-access-endpoint, verified-access-policy, verified-access-trust-provider, vpn-connection-device-type, vpc-block-public-access-exclusion, vpc-encryption-control, route-server, route-server-endpoint, route-server-peer, ipam-resource-discovery, ipam-resource-discovery-association, instance-connect-endpoint, verified-access-endpoint-target, ipam-external-resource-verification-token, capacity-block, mac-modification-task, ipam-prefix-list-resolver, ipam-policy, ipam-prefix-list-resolver-target, ipam-internet-registry-association, secondary-interface, secondary-network, secondary-subnet, capacity-manager-data-export, vpn-concentrator, ipam-pool-allocation, capacity-reservation-cancellation-quote, application-status-check, capacity-reservation-modification-quote, metric-category
     #         tags: [
     #           {
     #             key: "String",

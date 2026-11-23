@@ -264,7 +264,8 @@ module Aws::ECR
     #     An integer representing the maximum number attempts that will be made for
     #     a single request, including the initial attempt.  For example,
     #     setting this value to 5 will result in a request being retried up to
-    #     4 times. Used in `standard` and `adaptive` retry modes.
+    #     4 times. Used in `standard` and `adaptive` retry modes. Defaults to 3,
+    #     except for DynamoDB and DynamoDB Streams, which default to 4.
     #
     #   @option options [String] :profile ("default")
     #     Used when loading credentials from the shared credentials file at `HOME/.aws/credentials`.
@@ -327,15 +328,15 @@ module Aws::ECR
     #     used by the default backoff function. This option is only used in the
     #     `legacy` retry mode.
     #
-    #   @option options [String] :retry_mode ("legacy")
+    #   @option options [String] :retry_mode ("standard")
     #     Specifies which retry algorithm to use. Values are:
     #
-    #     * `legacy` - The pre-existing retry behavior. This is the default
-    #       value if no retry mode is provided.
+    #     * `legacy` - The pre-existing retry behavior.
     #
     #     * `standard` - A standardized set of retry rules across the AWS SDKs.
     #       This includes support for retry quotas, which limit the number of
-    #       unsuccessful retries a client can make.
+    #       unsuccessful retries a client can make. This is the default value
+    #       if no retry mode is provided.
     #
     #     * `adaptive` - A retry mode that includes all the functionality of
     #       `standard` mode along with automatic client side throttling.
@@ -584,6 +585,9 @@ module Aws::ECR
     #     image_ids: [
     #       {
     #         image_tag: "precise", 
+    #       }, 
+    #       {
+    #         image_tag: "trusty", 
     #       }, 
     #     ], 
     #     repository_name: "ubuntu", 
@@ -1770,7 +1774,7 @@ module Aws::ECR
     #   resp.repository_name #=> String
     #   resp.image_id.image_digest #=> String
     #   resp.image_id.image_tag #=> String
-    #   resp.image_scan_status.status #=> String, one of "IN_PROGRESS", "COMPLETE", "FAILED", "UNSUPPORTED_IMAGE", "ACTIVE", "PENDING", "SCAN_ELIGIBILITY_EXPIRED", "FINDINGS_UNAVAILABLE", "LIMIT_EXCEEDED", "IMAGE_ARCHIVED"
+    #   resp.image_scan_status.status #=> String, one of "IN_PROGRESS", "COMPLETE", "FAILED", "UNSUPPORTED_IMAGE", "ACTIVE", "PENDING", "SCAN_ELIGIBILITY_EXPIRED", "FINDINGS_UNAVAILABLE", "LIMIT_EXCEEDED", "IMAGE_ARCHIVED", "IMAGE_SIZE_EXCEEDED"
     #   resp.image_scan_status.description #=> String
     #   resp.image_scan_findings.image_scan_completed_at #=> Time
     #   resp.image_scan_findings.vulnerability_source_updated_at #=> Time
@@ -2016,7 +2020,7 @@ module Aws::ECR
     #   resp.image_details[0].image_tags[0] #=> String
     #   resp.image_details[0].image_size_in_bytes #=> Integer
     #   resp.image_details[0].image_pushed_at #=> Time
-    #   resp.image_details[0].image_scan_status.status #=> String, one of "IN_PROGRESS", "COMPLETE", "FAILED", "UNSUPPORTED_IMAGE", "ACTIVE", "PENDING", "SCAN_ELIGIBILITY_EXPIRED", "FINDINGS_UNAVAILABLE", "LIMIT_EXCEEDED", "IMAGE_ARCHIVED"
+    #   resp.image_details[0].image_scan_status.status #=> String, one of "IN_PROGRESS", "COMPLETE", "FAILED", "UNSUPPORTED_IMAGE", "ACTIVE", "PENDING", "SCAN_ELIGIBILITY_EXPIRED", "FINDINGS_UNAVAILABLE", "LIMIT_EXCEEDED", "IMAGE_ARCHIVED", "IMAGE_SIZE_EXCEEDED"
     #   resp.image_details[0].image_scan_status.description #=> String
     #   resp.image_details[0].image_scan_findings_summary.image_scan_completed_at #=> Time
     #   resp.image_details[0].image_scan_findings_summary.vulnerability_source_updated_at #=> Time
@@ -2130,6 +2134,7 @@ module Aws::ECR
     #   resp.replication_configuration.rules[0].repository_filters #=> Array
     #   resp.replication_configuration.rules[0].repository_filters[0].filter #=> String
     #   resp.replication_configuration.rules[0].repository_filters[0].filter_type #=> String, one of "PREFIX_MATCH"
+    #   resp.replication_configuration.rules[0].delete_replication.enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/DescribeRegistry AWS API Documentation
     #
@@ -3884,6 +3889,9 @@ module Aws::ECR
     #               filter_type: "PREFIX_MATCH", # required, accepts PREFIX_MATCH
     #             },
     #           ],
+    #           delete_replication: {
+    #             enabled: false, # required
+    #           },
     #         },
     #       ],
     #     },
@@ -3898,6 +3906,7 @@ module Aws::ECR
     #   resp.replication_configuration.rules[0].repository_filters #=> Array
     #   resp.replication_configuration.rules[0].repository_filters[0].filter #=> String
     #   resp.replication_configuration.rules[0].repository_filters[0].filter_type #=> String, one of "PREFIX_MATCH"
+    #   resp.replication_configuration.rules[0].delete_replication.enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/PutReplicationConfiguration AWS API Documentation
     #
@@ -4126,7 +4135,7 @@ module Aws::ECR
     #   resp.repository_name #=> String
     #   resp.image_id.image_digest #=> String
     #   resp.image_id.image_tag #=> String
-    #   resp.image_scan_status.status #=> String, one of "IN_PROGRESS", "COMPLETE", "FAILED", "UNSUPPORTED_IMAGE", "ACTIVE", "PENDING", "SCAN_ELIGIBILITY_EXPIRED", "FINDINGS_UNAVAILABLE", "LIMIT_EXCEEDED", "IMAGE_ARCHIVED"
+    #   resp.image_scan_status.status #=> String, one of "IN_PROGRESS", "COMPLETE", "FAILED", "UNSUPPORTED_IMAGE", "ACTIVE", "PENDING", "SCAN_ELIGIBILITY_EXPIRED", "FINDINGS_UNAVAILABLE", "LIMIT_EXCEEDED", "IMAGE_ARCHIVED", "IMAGE_SIZE_EXCEEDED"
     #   resp.image_scan_status.description #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/StartImageScan AWS API Documentation
@@ -4837,7 +4846,7 @@ module Aws::ECR
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-ecr'
-      context[:gem_version] = '1.140.0'
+      context[:gem_version] = '1.148.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

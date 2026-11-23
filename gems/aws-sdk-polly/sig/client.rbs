@@ -82,6 +82,35 @@ module Aws
                   | (?Hash[Symbol, untyped]) -> instance
 
 
+      interface _CreateVoiceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateVoiceOutput]
+        def voice: () -> Types::Voice
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Polly/Client.html#create_voice-instance_method
+      def create_voice: (
+                          name: ::String,
+                          language_code: ("de-DE" | "en-US" | "es-US" | "fr-FR" | "hi-IN" | "it-IT" | "pt-BR"),
+                          terms_accepted: bool,
+                          voice_creation_data: {
+                            recordings: Array[
+                              {
+                                format: ("wav" | "flac" | "ogg_vorbis" | "mp3"),
+                                data: {
+                                  s3_url: ::String?,
+                                  bytes: ::String?
+                                }
+                              }
+                            ]
+                          },
+                          ?customer_managed_encryption: {
+                            kms_key_arn: ::String,
+                            encryption_context: Hash[::String, ::String]?
+                          },
+                          ?tags: Hash[::String, ::String],
+                          ?client_token: ::String
+                        ) -> _CreateVoiceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateVoiceResponseSuccess
+
       interface _DeleteLexiconResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteLexiconOutput]
       end
@@ -90,6 +119,15 @@ module Aws
                             name: ::String
                           ) -> _DeleteLexiconResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteLexiconResponseSuccess
+
+      interface _DeleteVoiceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteVoiceOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Polly/Client.html#delete_voice-instance_method
+      def delete_voice: (
+                          voice_id: ::String
+                        ) -> _DeleteVoiceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteVoiceResponseSuccess
 
       interface _DescribeVoicesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeVoicesOutput]
@@ -126,6 +164,16 @@ module Aws
                                      ) -> _GetSpeechSynthesisTaskResponseSuccess
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSpeechSynthesisTaskResponseSuccess
 
+      interface _GetVoiceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetVoiceOutput]
+        def voice: () -> Types::Voice
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Polly/Client.html#get_voice-instance_method
+      def get_voice: (
+                       voice_id: ::String
+                     ) -> _GetVoiceResponseSuccess
+                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetVoiceResponseSuccess
+
       interface _ListLexiconsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListLexiconsOutput]
         def lexicons: () -> ::Array[Types::LexiconDescription]
@@ -150,13 +198,24 @@ module Aws
                                        ) -> _ListSpeechSynthesisTasksResponseSuccess
                                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSpeechSynthesisTasksResponseSuccess
 
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceOutput]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Polly/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
       interface _PutLexiconResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::PutLexiconOutput]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Polly/Client.html#put_lexicon-instance_method
       def put_lexicon: (
                          name: ::String,
-                         content: ::String
+                         content: ::String,
+                         ?tags: Hash[::String, ::String]
                        ) -> _PutLexiconResponseSuccess
                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutLexiconResponseSuccess
 
@@ -200,6 +259,32 @@ module Aws
                                voice_id: ("Aditi" | "Amy" | "Astrid" | "Bianca" | "Brian" | "Camila" | "Carla" | "Carmen" | "Celine" | "Chantal" | "Conchita" | "Cristiano" | "Dora" | "Emma" | "Enrique" | "Ewa" | "Filiz" | "Gabrielle" | "Geraint" | "Giorgio" | "Gwyneth" | "Hans" | "Ines" | "Ivy" | "Jacek" | "Jan" | "Joanna" | "Joey" | "Justin" | "Karl" | "Kendra" | "Kevin" | "Kimberly" | "Lea" | "Liv" | "Lotte" | "Lucia" | "Lupe" | "Mads" | "Maja" | "Marlene" | "Mathieu" | "Matthew" | "Maxim" | "Mia" | "Miguel" | "Mizuki" | "Naja" | "Nicole" | "Olivia" | "Penelope" | "Raveena" | "Ricardo" | "Ruben" | "Russell" | "Salli" | "Seoyeon" | "Takumi" | "Tatyana" | "Vicki" | "Vitoria" | "Zeina" | "Zhiyu" | "Aria" | "Ayanda" | "Arlet" | "Hannah" | "Arthur" | "Daniel" | "Liam" | "Pedro" | "Kajal" | "Hiujin" | "Laura" | "Elin" | "Ida" | "Suvi" | "Ola" | "Hala" | "Andres" | "Sergio" | "Remi" | "Adriano" | "Thiago" | "Ruth" | "Stephen" | "Kazuha" | "Tomoko" | "Niamh" | "Sofie" | "Lisa" | "Isabelle" | "Zayd" | "Danielle" | "Gregory" | "Burcu" | "Jitka" | "Sabrina" | "Jasmine" | "Jihye" | "Ambre" | "Beatrice" | "Florian" | "Lennart" | "Lorenzo" | "Tiffany" | "Arjun" | "Carlos" | "Carolina" | "Curtis" | "Hyunduk" | "Kenneth" | "Kiara" | "Leo" | "Nate" | "Tina")
                              ) ?{ (*untyped) -> void } -> _SynthesizeSpeechResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) ?{ (*untyped) -> void } -> _SynthesizeSpeechResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Polly/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Hash[::String, ::String]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Polly/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Polly/Client.html#wait_until-instance_method
+      def wait_until: (:voice_active waiter_name, 
+                    voice_id: ::String
+                  ) -> Client::_GetVoiceResponseSuccess
+                    | (:voice_active waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetVoiceResponseSuccess
     end
   end
 end

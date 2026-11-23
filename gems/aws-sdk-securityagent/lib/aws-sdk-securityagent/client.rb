@@ -264,7 +264,8 @@ module Aws::SecurityAgent
     #     An integer representing the maximum number attempts that will be made for
     #     a single request, including the initial attempt.  For example,
     #     setting this value to 5 will result in a request being retried up to
-    #     4 times. Used in `standard` and `adaptive` retry modes.
+    #     4 times. Used in `standard` and `adaptive` retry modes. Defaults to 3,
+    #     except for DynamoDB and DynamoDB Streams, which default to 4.
     #
     #   @option options [String] :profile ("default")
     #     Used when loading credentials from the shared credentials file at `HOME/.aws/credentials`.
@@ -327,15 +328,15 @@ module Aws::SecurityAgent
     #     used by the default backoff function. This option is only used in the
     #     `legacy` retry mode.
     #
-    #   @option options [String] :retry_mode ("legacy")
+    #   @option options [String] :retry_mode ("standard")
     #     Specifies which retry algorithm to use. Values are:
     #
-    #     * `legacy` - The pre-existing retry behavior. This is the default
-    #       value if no retry mode is provided.
+    #     * `legacy` - The pre-existing retry behavior.
     #
     #     * `standard` - A standardized set of retry rules across the AWS SDKs.
     #       This includes support for retry quotas, which limit the number of
-    #       unsuccessful retries a client can make.
+    #       unsuccessful retries a client can make. This is the default value
+    #       if no retry mode is provided.
     #
     #     * `adaptive` - A retry mode that includes all the functionality of
     #       `standard` mode along with automatic client side throttling.
@@ -842,7 +843,7 @@ module Aws::SecurityAgent
     #
     #   resp.errors #=> Array
     #   resp.errors[0].finding_id #=> String
-    #   resp.errors[0].code #=> String, one of "CLIENT_ERROR", "INTERNAL_ERROR", "STOPPED_BY_USER"
+    #   resp.errors[0].code #=> String, one of "CLIENT_ERROR", "INTERNAL_ERROR", "STOPPED_BY_USER", "PAUSED_BY_USER"
     #   resp.errors[0].message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/BatchDisassociateFindingIssue AWS API Documentation
@@ -906,7 +907,7 @@ module Aws::SecurityAgent
     #   resp.results[0].linked_issue.site_url #=> String
     #   resp.errors #=> Array
     #   resp.errors[0].finding_id #=> String
-    #   resp.errors[0].code #=> String, one of "CLIENT_ERROR", "INTERNAL_ERROR", "STOPPED_BY_USER"
+    #   resp.errors[0].code #=> String, one of "CLIENT_ERROR", "INTERNAL_ERROR", "STOPPED_BY_USER", "PAUSED_BY_USER"
     #   resp.errors[0].message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/BatchExportFindings AWS API Documentation
@@ -1092,7 +1093,7 @@ module Aws::SecurityAgent
     #   resp.code_review_jobs[0].code_review_id #=> String
     #   resp.code_review_jobs[0].title #=> String
     #   resp.code_review_jobs[0].overview #=> String
-    #   resp.code_review_jobs[0].status #=> String, one of "IN_PROGRESS", "STOPPING", "STOPPED", "FAILED", "COMPLETED"
+    #   resp.code_review_jobs[0].status #=> String, one of "IN_PROGRESS", "STOPPING", "STOPPED", "PAUSING", "PAUSED", "FAILED", "COMPLETED"
     #   resp.code_review_jobs[0].documents #=> Array
     #   resp.code_review_jobs[0].documents[0].s3_location #=> String
     #   resp.code_review_jobs[0].documents[0].artifact_id #=> String
@@ -1112,7 +1113,7 @@ module Aws::SecurityAgent
     #   resp.code_review_jobs[0].service_role #=> String
     #   resp.code_review_jobs[0].log_config.log_group #=> String
     #   resp.code_review_jobs[0].log_config.log_stream #=> String
-    #   resp.code_review_jobs[0].error_information.code #=> String, one of "CLIENT_ERROR", "INTERNAL_ERROR", "STOPPED_BY_USER"
+    #   resp.code_review_jobs[0].error_information.code #=> String, one of "CLIENT_ERROR", "INTERNAL_ERROR", "STOPPED_BY_USER", "PAUSED_BY_USER"
     #   resp.code_review_jobs[0].error_information.message #=> String
     #   resp.code_review_jobs[0].integrated_repositories #=> Array
     #   resp.code_review_jobs[0].integrated_repositories[0].integration_id #=> String
@@ -1283,6 +1284,9 @@ module Aws::SecurityAgent
     #   resp.findings[0].code_remediation_task.task_details[0].repo_name #=> String
     #   resp.findings[0].code_remediation_task.task_details[0].code_diff_link #=> String
     #   resp.findings[0].code_remediation_task.task_details[0].pull_request_link #=> String
+    #   resp.findings[0].code_remediation_task.task_details[0].status #=> String, one of "IN_PROGRESS", "COMPLETED", "FAILED", "NO_CHANGE_REQUIRED", "UNKNOWN"
+    #   resp.findings[0].code_remediation_task.task_details[0].status_code #=> String
+    #   resp.findings[0].code_remediation_task.task_details[0].status_reason #=> String
     #   resp.findings[0].last_updated_by #=> String
     #   resp.findings[0].customer_note #=> String
     #   resp.findings[0].code_locations #=> Array
@@ -1403,7 +1407,7 @@ module Aws::SecurityAgent
     #   resp.pentest_jobs[0].pentest_id #=> String
     #   resp.pentest_jobs[0].title #=> String
     #   resp.pentest_jobs[0].overview #=> String
-    #   resp.pentest_jobs[0].status #=> String, one of "IN_PROGRESS", "STOPPING", "STOPPED", "FAILED", "COMPLETED"
+    #   resp.pentest_jobs[0].status #=> String, one of "IN_PROGRESS", "STOPPING", "STOPPED", "PAUSING", "PAUSED", "FAILED", "COMPLETED"
     #   resp.pentest_jobs[0].endpoints #=> Array
     #   resp.pentest_jobs[0].endpoints[0].uri #=> String
     #   resp.pentest_jobs[0].actors #=> Array
@@ -1452,7 +1456,7 @@ module Aws::SecurityAgent
     #   resp.pentest_jobs[0].network_traffic_config.custom_headers #=> Array
     #   resp.pentest_jobs[0].network_traffic_config.custom_headers[0].name #=> String
     #   resp.pentest_jobs[0].network_traffic_config.custom_headers[0].value #=> String
-    #   resp.pentest_jobs[0].error_information.code #=> String, one of "CLIENT_ERROR", "INTERNAL_ERROR", "STOPPED_BY_USER"
+    #   resp.pentest_jobs[0].error_information.code #=> String, one of "CLIENT_ERROR", "INTERNAL_ERROR", "STOPPED_BY_USER", "PAUSED_BY_USER"
     #   resp.pentest_jobs[0].error_information.message #=> String
     #   resp.pentest_jobs[0].integrated_repositories #=> Array
     #   resp.pentest_jobs[0].integrated_repositories[0].integration_id #=> String
@@ -1490,6 +1494,7 @@ module Aws::SecurityAgent
     #   resp.pentest_jobs[0].scope_changes[0].trigger_run_id #=> String
     #   resp.pentest_jobs[0].cicd_configuration.enabled #=> Boolean
     #   resp.pentest_jobs[0].test_scope.type #=> String, one of "WEB_APP", "GENERATIVE_AI_APP"
+    #   resp.pentest_jobs[0].version #=> String
     #   resp.pentest_jobs[0].created_at #=> Time
     #   resp.pentest_jobs[0].updated_at #=> Time
     #   resp.not_found #=> Array
@@ -1783,7 +1788,7 @@ module Aws::SecurityAgent
     #   resp.threat_model_jobs[0].threat_model_id #=> String
     #   resp.threat_model_jobs[0].agent_space_id #=> String
     #   resp.threat_model_jobs[0].title #=> String
-    #   resp.threat_model_jobs[0].status #=> String, one of "IN_PROGRESS", "STOPPING", "STOPPED", "FAILED", "COMPLETED"
+    #   resp.threat_model_jobs[0].status #=> String, one of "IN_PROGRESS", "STOPPING", "STOPPED", "PAUSING", "PAUSED", "FAILED", "COMPLETED"
     #   resp.threat_model_jobs[0].created_at #=> Time
     #   resp.threat_model_jobs[0].updated_at #=> Time
     #   resp.threat_model_jobs[0].execution_start_time #=> Time
@@ -1804,7 +1809,7 @@ module Aws::SecurityAgent
     #   resp.threat_model_jobs[0].scope_docs[0].artifact_id #=> String
     #   resp.threat_model_jobs[0].scope_docs[0].integrated_document.integration_id #=> String
     #   resp.threat_model_jobs[0].scope_docs[0].integrated_document.resource_id #=> String
-    #   resp.threat_model_jobs[0].error_information.code #=> String, one of "CLIENT_ERROR", "INTERNAL_ERROR", "STOPPED_BY_USER"
+    #   resp.threat_model_jobs[0].error_information.code #=> String, one of "CLIENT_ERROR", "INTERNAL_ERROR", "STOPPED_BY_USER", "PAUSED_BY_USER"
     #   resp.threat_model_jobs[0].error_information.message #=> String
     #   resp.threat_model_jobs[0].system_overview #=> String
     #   resp.threat_model_jobs[0].report_destination.integration_id #=> String
@@ -2484,8 +2489,8 @@ module Aws::SecurityAgent
       req.send_request(options)
     end
 
-    # Creates a new membership, granting a user access to an agent space
-    # within an application.
+    # Creates a new membership, granting a user or group access to an agent
+    # space within an application.
     #
     # @option params [required, String] :application_id
     #   The unique identifier of the application that contains the agent
@@ -2498,7 +2503,9 @@ module Aws::SecurityAgent
     #   The unique identifier for the membership.
     #
     # @option params [required, String] :member_type
-    #   The type of member. Currently, only USER is supported.
+    #   The type of member. Use USER for an individual user or GROUP for an
+    #   IAM Identity Center group. All members of a group have access to the
+    #   agent space.
     #
     # @option params [Types::MembershipConfig] :config
     #   The configuration for the membership, such as the user role.
@@ -2511,7 +2518,7 @@ module Aws::SecurityAgent
     #     application_id: "ApplicationId", # required
     #     agent_space_id: "AgentSpaceId", # required
     #     membership_id: "MembershipId", # required
-    #     member_type: "USER", # required, accepts USER
+    #     member_type: "USER", # required, accepts USER, GROUP
     #     config: {
     #       user: {
     #         role: "MEMBER", # accepts MEMBER
@@ -2561,6 +2568,10 @@ module Aws::SecurityAgent
     # @option params [String] :code_remediation_strategy
     #   The code remediation strategy for the pentest. Valid values are
     #   AUTOMATIC and DISABLED.
+    #
+    # @option params [String] :clean_up_strategy
+    #   The strategy for cleaning up resources after pentest job completion.
+    #   Valid values are BEST\_EFFORT\_DELETE and RETAIN\_ALL.
     #
     # @option params [Array<String>] :disable_managed_skills
     #   A list of managed skills to disable for this pentest. Valid values
@@ -2690,6 +2701,7 @@ module Aws::SecurityAgent
     #       ],
     #     },
     #     code_remediation_strategy: "AUTOMATIC", # accepts AUTOMATIC, DISABLED
+    #     clean_up_strategy: "BEST_EFFORT_DELETE", # accepts BEST_EFFORT_DELETE, RETAIN_ALL
     #     disable_managed_skills: ["FINDING_PERSONALIZATION"], # accepts FINDING_PERSONALIZATION, LOGIN_OPTIMIZATION
     #     max_task_hours: 1.0,
     #     report_destination: {
@@ -3409,7 +3421,8 @@ module Aws::SecurityAgent
       req.send_request(options)
     end
 
-    # Deletes a membership, revoking a user's access to an agent space.
+    # Deletes a membership, revoking a user's or group's access to an
+    # agent space.
     #
     # @option params [required, String] :application_id
     #   The unique identifier of the application that contains the agent
@@ -3432,7 +3445,7 @@ module Aws::SecurityAgent
     #     application_id: "ApplicationId", # required
     #     agent_space_id: "AgentSpaceId", # required
     #     membership_id: "MembershipId", # required
-    #     member_type: "USER", # accepts USER
+    #     member_type: "USER", # accepts USER, GROUP
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/DeleteMembership AWS API Documentation
@@ -4159,7 +4172,7 @@ module Aws::SecurityAgent
     #   resp.code_review_job_summaries[0].code_review_job_id #=> String
     #   resp.code_review_job_summaries[0].code_review_id #=> String
     #   resp.code_review_job_summaries[0].title #=> String
-    #   resp.code_review_job_summaries[0].status #=> String, one of "IN_PROGRESS", "STOPPING", "STOPPED", "FAILED", "COMPLETED"
+    #   resp.code_review_job_summaries[0].status #=> String, one of "IN_PROGRESS", "STOPPING", "STOPPED", "PAUSING", "PAUSED", "FAILED", "COMPLETED"
     #   resp.code_review_job_summaries[0].created_at #=> Time
     #   resp.code_review_job_summaries[0].updated_at #=> Time
     #   resp.next_token #=> String
@@ -4585,7 +4598,7 @@ module Aws::SecurityAgent
     #   resp = client.list_memberships({
     #     application_id: "ApplicationId", # required
     #     agent_space_id: "AgentSpaceId", # required
-    #     member_type: "USER", # accepts USER, ALL
+    #     member_type: "USER", # accepts USER, GROUP, ALL
     #     max_results: 1,
     #     next_token: "NextToken",
     #   })
@@ -4596,10 +4609,12 @@ module Aws::SecurityAgent
     #   resp.membership_summaries[0].membership_id #=> String
     #   resp.membership_summaries[0].application_id #=> String
     #   resp.membership_summaries[0].agent_space_id #=> String
-    #   resp.membership_summaries[0].member_type #=> String, one of "USER"
+    #   resp.membership_summaries[0].member_type #=> String, one of "USER", "GROUP"
     #   resp.membership_summaries[0].config.user.role #=> String, one of "MEMBER"
     #   resp.membership_summaries[0].metadata.user.username #=> String
     #   resp.membership_summaries[0].metadata.user.email #=> String
+    #   resp.membership_summaries[0].metadata.group.display_name #=> String
+    #   resp.membership_summaries[0].metadata.group.description #=> String
     #   resp.membership_summaries[0].created_at #=> Time
     #   resp.membership_summaries[0].updated_at #=> Time
     #   resp.membership_summaries[0].created_by #=> String
@@ -4727,11 +4742,12 @@ module Aws::SecurityAgent
     #   resp.pentest_job_summaries[0].pentest_job_id #=> String
     #   resp.pentest_job_summaries[0].pentest_id #=> String
     #   resp.pentest_job_summaries[0].title #=> String
-    #   resp.pentest_job_summaries[0].status #=> String, one of "IN_PROGRESS", "STOPPING", "STOPPED", "FAILED", "COMPLETED"
+    #   resp.pentest_job_summaries[0].status #=> String, one of "IN_PROGRESS", "STOPPING", "STOPPED", "PAUSING", "PAUSED", "FAILED", "COMPLETED"
     #   resp.pentest_job_summaries[0].created_at #=> Time
     #   resp.pentest_job_summaries[0].updated_at #=> Time
     #   resp.pentest_job_summaries[0].job_type #=> String, one of "FULL", "REVALIDATION", "CICD"
     #   resp.pentest_job_summaries[0].report_url #=> String
+    #   resp.pentest_job_summaries[0].version #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/ListPentestJobsForPentest AWS API Documentation
@@ -5104,7 +5120,7 @@ module Aws::SecurityAgent
     #   resp.threat_model_job_summaries[0].threat_model_id #=> String
     #   resp.threat_model_job_summaries[0].agent_space_id #=> String
     #   resp.threat_model_job_summaries[0].title #=> String
-    #   resp.threat_model_job_summaries[0].status #=> String, one of "IN_PROGRESS", "STOPPING", "STOPPED", "FAILED", "COMPLETED"
+    #   resp.threat_model_job_summaries[0].status #=> String, one of "IN_PROGRESS", "STOPPING", "STOPPED", "PAUSING", "PAUSED", "FAILED", "COMPLETED"
     #   resp.threat_model_job_summaries[0].created_at #=> Time
     #   resp.threat_model_job_summaries[0].updated_at #=> Time
     #   resp.next_token #=> String
@@ -5222,6 +5238,112 @@ module Aws::SecurityAgent
       req.send_request(options)
     end
 
+    # Resumes a stopped or paused pentest job from its last saved
+    # checkpoint. The job keeps its pentest job identifier and continues as
+    # a new version, keeping the findings and progress from earlier runs.
+    # You can resume a job within 7 days of when it was created.
+    #
+    # @option params [String] :agent_space_id
+    #   The unique identifier of the agent space.
+    #
+    # @option params [String] :pentest_job_id
+    #   The unique identifier of the pentest job to resume.
+    #
+    # @option params [Array<Types::Actor>] :actors
+    #   The actors to use for the resumed job. When specified, replaces the
+    #   actors the job used before it stopped.
+    #
+    # @option params [Types::NetworkTrafficConfig] :network_traffic_config
+    #   The network traffic configuration to use for the resumed job. When
+    #   specified, replaces the configuration the job used before it stopped.
+    #
+    # @option params [Types::VpcConfig] :vpc_config
+    #   The VPC configuration to use for the resumed job. When specified,
+    #   replaces the configuration the job used before it stopped.
+    #
+    # @option params [Float] :max_task_hours
+    #   The maximum number of task hours for the resumed job. To resume a job
+    #   that stopped because it reached its task hours limit, specify a higher
+    #   value.
+    #
+    # @option params [Boolean] :copy_config_from_pentest
+    #   Specifies whether to copy the current actors, network traffic
+    #   configuration, VPC configuration, and maximum task hours from the
+    #   pentest to the resumed job. The job's scope, such as its target
+    #   endpoints, is never changed. Values you specify in this request take
+    #   precedence over copied values.
+    #
+    # @return [Types::ResumePentestJobOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ResumePentestJobOutput#title #title} => String
+    #   * {Types::ResumePentestJobOutput#status #status} => String
+    #   * {Types::ResumePentestJobOutput#created_at #created_at} => Time
+    #   * {Types::ResumePentestJobOutput#updated_at #updated_at} => Time
+    #   * {Types::ResumePentestJobOutput#pentest_id #pentest_id} => String
+    #   * {Types::ResumePentestJobOutput#pentest_job_id #pentest_job_id} => String
+    #   * {Types::ResumePentestJobOutput#version #version} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.resume_pentest_job({
+    #     agent_space_id: "String",
+    #     pentest_job_id: "String",
+    #     actors: [
+    #       {
+    #         identifier: "String",
+    #         uris: ["String"],
+    #         authentication: {
+    #           provider_type: "SECRETS_MANAGER", # accepts SECRETS_MANAGER, AWS_LAMBDA, AWS_IAM_ROLE, AWS_INTERNAL
+    #           value: "String",
+    #         },
+    #         description: "String",
+    #         enable_email_mfa: false,
+    #         mfa_forwarding_address: "SensitiveEmailAddress",
+    #       },
+    #     ],
+    #     network_traffic_config: {
+    #       rules: [
+    #         {
+    #           effect: "ALLOW", # accepts ALLOW, DENY
+    #           pattern: "String",
+    #           network_traffic_rule_type: "URL", # accepts URL
+    #         },
+    #       ],
+    #       custom_headers: [
+    #         {
+    #           name: "String",
+    #           value: "String",
+    #         },
+    #       ],
+    #     },
+    #     vpc_config: {
+    #       vpc_arn: "VpcArn",
+    #       security_group_arns: ["SecurityGroupArn"],
+    #       subnet_arns: ["SubnetArn"],
+    #     },
+    #     max_task_hours: 1.0,
+    #     copy_config_from_pentest: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.title #=> String
+    #   resp.status #=> String, one of "IN_PROGRESS", "STOPPING", "STOPPED", "PAUSING", "PAUSED", "FAILED", "COMPLETED"
+    #   resp.created_at #=> Time
+    #   resp.updated_at #=> Time
+    #   resp.pentest_id #=> String
+    #   resp.pentest_job_id #=> String
+    #   resp.version #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/ResumePentestJob AWS API Documentation
+    #
+    # @overload resume_pentest_job(params = {})
+    # @param [Hash] params ({})
+    def resume_pentest_job(params = {}, options = {})
+      req = build_request(:resume_pentest_job, params)
+      req.send_request(options)
+    end
+
     # Initiates code remediation for one or more security findings. This
     # creates pull requests in integrated repositories to fix the identified
     # vulnerabilities.
@@ -5297,7 +5419,7 @@ module Aws::SecurityAgent
     # @example Response structure
     #
     #   resp.title #=> String
-    #   resp.status #=> String, one of "IN_PROGRESS", "STOPPING", "STOPPED", "FAILED", "COMPLETED"
+    #   resp.status #=> String, one of "IN_PROGRESS", "STOPPING", "STOPPED", "PAUSING", "PAUSED", "FAILED", "COMPLETED"
     #   resp.created_at #=> Time
     #   resp.updated_at #=> Time
     #   resp.code_review_id #=> String
@@ -5369,7 +5491,7 @@ module Aws::SecurityAgent
     # @example Response structure
     #
     #   resp.title #=> String
-    #   resp.status #=> String, one of "IN_PROGRESS", "STOPPING", "STOPPED", "FAILED", "COMPLETED"
+    #   resp.status #=> String, one of "IN_PROGRESS", "STOPPING", "STOPPED", "PAUSING", "PAUSED", "FAILED", "COMPLETED"
     #   resp.created_at #=> Time
     #   resp.updated_at #=> Time
     #   resp.pentest_id #=> String
@@ -5413,7 +5535,7 @@ module Aws::SecurityAgent
     # @example Response structure
     #
     #   resp.title #=> String
-    #   resp.status #=> String, one of "IN_PROGRESS", "STOPPING", "STOPPED", "FAILED", "COMPLETED"
+    #   resp.status #=> String, one of "IN_PROGRESS", "STOPPING", "STOPPED", "PAUSING", "PAUSED", "FAILED", "COMPLETED"
     #   resp.created_at #=> Time
     #   resp.updated_at #=> Time
     #   resp.threat_model_id #=> String
@@ -5465,6 +5587,12 @@ module Aws::SecurityAgent
     # @option params [required, String] :pentest_job_id
     #   The unique identifier of the pentest job to stop.
     #
+    # @option params [Boolean] :pause
+    #   Specifies whether to pause the job instead of stopping it. A paused
+    #   job moves to `PAUSING` and then to `PAUSED`, and you can resume it
+    #   later with `ResumePentestJob`. You can pause only a job that is
+    #   `IN_PROGRESS`. The default is false.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -5472,6 +5600,7 @@ module Aws::SecurityAgent
     #   resp = client.stop_pentest_job({
     #     agent_space_id: "String", # required
     #     pentest_job_id: "String", # required
+    #     pause: false,
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/StopPentestJob AWS API Documentation
@@ -6189,6 +6318,10 @@ module Aws::SecurityAgent
     # @option params [String] :code_remediation_strategy
     #   The updated code remediation strategy for the pentest.
     #
+    # @option params [String] :clean_up_strategy
+    #   The updated strategy for cleaning up resources after pentest job
+    #   completion.
+    #
     # @option params [Array<String>] :disable_managed_skills
     #   The updated list of managed skills to disable for this pentest. Valid
     #   values include FINDING\_PERSONALIZATION and LOGIN\_OPTIMIZATION.
@@ -6317,6 +6450,7 @@ module Aws::SecurityAgent
     #       ],
     #     },
     #     code_remediation_strategy: "AUTOMATIC", # accepts AUTOMATIC, DISABLED
+    #     clean_up_strategy: "BEST_EFFORT_DELETE", # accepts BEST_EFFORT_DELETE, RETAIN_ALL
     #     disable_managed_skills: ["FINDING_PERSONALIZATION"], # accepts FINDING_PERSONALIZATION, LOGIN_OPTIMIZATION
     #     max_task_hours: 1.0,
     #     report_destination: {
@@ -6966,7 +7100,7 @@ module Aws::SecurityAgent
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-securityagent'
-      context[:gem_version] = '1.28.0'
+      context[:gem_version] = '1.38.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

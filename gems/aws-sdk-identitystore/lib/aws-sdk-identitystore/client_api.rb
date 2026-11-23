@@ -130,8 +130,8 @@ module Aws::IdentityStore
     Users = Shapes::ListShape.new(name: 'Users')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
     ValidationExceptionReason = Shapes::StringShape.new(name: 'ValidationExceptionReason')
-    VpcIdList = Shapes::ListShape.new(name: 'VpcIdList')
-    VpcIdType = Shapes::StringShape.new(name: 'VpcIdType')
+    VpcArn = Shapes::StringShape.new(name: 'VpcArn')
+    VpcArnList = Shapes::ListShape.new(name: 'VpcArnList')
 
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
     AccessDeniedException.add_member(:request_id, Shapes::ShapeRef.new(shape: RequestId, location_name: "RequestId"))
@@ -486,13 +486,13 @@ module Aws::IdentityStore
     Name.struct_class = Types::Name
 
     NetworkConfiguration.add_member(:vpce_access_required, Shapes::ShapeRef.new(shape: BooleanType, required: true, location_name: "VpceAccessRequired", metadata: {"box" => true}))
-    NetworkConfiguration.add_member(:api_restrict_source_vpcs, Shapes::ShapeRef.new(shape: VpcIdList, location_name: "ApiRestrictSourceVpcs"))
+    NetworkConfiguration.add_member(:api_restrict_source_vpcs, Shapes::ShapeRef.new(shape: VpcArnList, location_name: "ApiRestrictSourceVpcs"))
     NetworkConfiguration.add_member(:api_allow_source_ips, Shapes::ShapeRef.new(shape: IpCidrList, location_name: "ApiAllowSourceIps"))
     NetworkConfiguration.add_member(:scim_allow_source_ips, Shapes::ShapeRef.new(shape: IpCidrList, location_name: "ScimAllowSourceIps"))
     NetworkConfiguration.struct_class = Types::NetworkConfiguration
 
     NetworkConfigurationDetails.add_member(:vpce_access_required, Shapes::ShapeRef.new(shape: BooleanType, required: true, location_name: "VpceAccessRequired", metadata: {"box" => true}))
-    NetworkConfigurationDetails.add_member(:api_restrict_source_vpcs, Shapes::ShapeRef.new(shape: VpcIdList, location_name: "ApiRestrictSourceVpcs"))
+    NetworkConfigurationDetails.add_member(:api_restrict_source_vpcs, Shapes::ShapeRef.new(shape: VpcArnList, location_name: "ApiRestrictSourceVpcs"))
     NetworkConfigurationDetails.add_member(:api_allow_source_ips, Shapes::ShapeRef.new(shape: IpCidrList, location_name: "ApiAllowSourceIps"))
     NetworkConfigurationDetails.add_member(:scim_allow_source_ips, Shapes::ShapeRef.new(shape: IpCidrList, location_name: "ScimAllowSourceIps"))
     NetworkConfigurationDetails.struct_class = Types::NetworkConfigurationDetails
@@ -609,7 +609,7 @@ module Aws::IdentityStore
     ValidationException.add_member(:reason, Shapes::ShapeRef.new(shape: ValidationExceptionReason, location_name: "Reason"))
     ValidationException.struct_class = Types::ValidationException
 
-    VpcIdList.member = Shapes::ShapeRef.new(shape: VpcIdType)
+    VpcArnList.member = Shapes::ShapeRef.new(shape: VpcArn)
 
 
     # @api private

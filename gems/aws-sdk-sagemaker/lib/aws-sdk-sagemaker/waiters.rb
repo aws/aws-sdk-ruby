@@ -245,7 +245,7 @@ module Aws::SageMaker
               {
                 "matcher" => "error",
                 "state" => "success",
-                "expected" => "ResourceNotFoundException"
+                "expected" => "ResourceNotFound"
               },
               {
                 "matcher" => "path",
@@ -391,7 +391,7 @@ module Aws::SageMaker
               {
                 "matcher" => "error",
                 "state" => "success",
-                "expected" => "ResourceNotFoundException"
+                "expected" => "ResourceNotFound"
               },
               {
                 "matcher" => "path",

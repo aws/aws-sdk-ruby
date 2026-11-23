@@ -264,7 +264,8 @@ module Aws::EKSAuth
     #     An integer representing the maximum number attempts that will be made for
     #     a single request, including the initial attempt.  For example,
     #     setting this value to 5 will result in a request being retried up to
-    #     4 times. Used in `standard` and `adaptive` retry modes.
+    #     4 times. Used in `standard` and `adaptive` retry modes. Defaults to 3,
+    #     except for DynamoDB and DynamoDB Streams, which default to 4.
     #
     #   @option options [String] :profile ("default")
     #     Used when loading credentials from the shared credentials file at `HOME/.aws/credentials`.
@@ -327,15 +328,15 @@ module Aws::EKSAuth
     #     used by the default backoff function. This option is only used in the
     #     `legacy` retry mode.
     #
-    #   @option options [String] :retry_mode ("legacy")
+    #   @option options [String] :retry_mode ("standard")
     #     Specifies which retry algorithm to use. Values are:
     #
-    #     * `legacy` - The pre-existing retry behavior. This is the default
-    #       value if no retry mode is provided.
+    #     * `legacy` - The pre-existing retry behavior.
     #
     #     * `standard` - A standardized set of retry rules across the AWS SDKs.
     #       This includes support for retry quotas, which limit the number of
-    #       unsuccessful retries a client can make.
+    #       unsuccessful retries a client can make. This is the default value
+    #       if no retry mode is provided.
     #
     #     * `adaptive` - A retry mode that includes all the functionality of
     #       `standard` mode along with automatic client side throttling.
@@ -512,6 +513,7 @@ module Aws::EKSAuth
     #   * {Types::AssumeRoleForPodIdentityResponse#pod_identity_association #pod_identity_association} => Types::PodIdentityAssociation
     #   * {Types::AssumeRoleForPodIdentityResponse#assumed_role_user #assumed_role_user} => Types::AssumedRoleUser
     #   * {Types::AssumeRoleForPodIdentityResponse#credentials #credentials} => Types::Credentials
+    #   * {Types::AssumeRoleForPodIdentityResponse#workload_identity_provider_arn #workload_identity_provider_arn} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -536,6 +538,7 @@ module Aws::EKSAuth
     #   resp.credentials.secret_access_key #=> String
     #   resp.credentials.access_key_id #=> String
     #   resp.credentials.expiration #=> Time
+    #   resp.workload_identity_provider_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-auth-2023-11-26/AssumeRoleForPodIdentity AWS API Documentation
     #
@@ -564,7 +567,7 @@ module Aws::EKSAuth
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-eksauth'
-      context[:gem_version] = '1.44.0'
+      context[:gem_version] = '1.51.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

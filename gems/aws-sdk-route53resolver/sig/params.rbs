@@ -21,6 +21,11 @@ module Aws
       dns_threat_protection: {
         value: ::String,
         confidence_threshold: ("LOW" | "MEDIUM" | "HIGH")
+      }?,
+      auto_allowlist: {
+        initial_data_timeframe_hours: ::Integer,
+        import_from_firewall_domain_list_id: ::String?,
+        auto_allowlist_firewall_domain_list_id: ::String?
       }?
     }
 

@@ -276,7 +276,8 @@ module Aws
       ip_address_type: ("ipv4" | "ipv6" | "dualstack")?,
       origin_mtls_config: {
         client_certificate_arn: ::String
-      }?
+      }?,
+      origin_http_version: ("http1.1" | "http2")?
     }
 
       type origin = {
@@ -301,7 +302,8 @@ module Aws
         vpc_origin_id: ::String,
         owner_account_id: ::String?,
         origin_read_timeout: ::Integer?,
-        origin_keepalive_timeout: ::Integer?
+        origin_keepalive_timeout: ::Integer?,
+        origin_http_version: ("http1.1" | "http2")?
       }?,
       connection_attempts: ::Integer?,
       connection_timeout: ::Integer?,

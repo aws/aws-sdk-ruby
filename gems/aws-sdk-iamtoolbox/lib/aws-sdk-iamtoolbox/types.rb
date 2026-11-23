@@ -46,6 +46,86 @@ module Aws::IAMToolbox
       include Aws::Structure
     end
 
+    # Represents one authorization requirement considered during an
+    # evaluation and its result.
+    #
+    # @!attribute [rw] check_type
+    #   The type of requirement that the check evaluates. Valid values:
+    #
+    #   * `SERVICE_CONTROL_POLICY` - The service control policies (SCPs)
+    #     attached to one organization target, such as a root,
+    #     organizational unit, or account, that apply to the principal.
+    #
+    #   * `RESOURCE_CONTROL_POLICY` - The resource control policies (RCPs)
+    #     attached to one organization target that apply to the resource.
+    #
+    #   * `VPC_ENDPOINT` - The VPC endpoint policy for the endpoint through
+    #     which the request passes.
+    #
+    #   * `RESOURCE` - The resource owner's resource-based policies, when
+    #     the owner must allow the request separately, such as a
+    #     cross-account request or a request to an AWS KMS key.
+    #
+    #   * `PRINCIPAL` - The principal's identity-based policies attached to
+    #     the IAM user or role.
+    #
+    #   * `PERMISSIONS_BOUNDARY` - The permissions boundary on the IAM user
+    #     or role.
+    #
+    #   * `SESSION` - The role session that made the request, decided by its
+    #     session policies.
+    #   @return [String]
+    #
+    # @!attribute [rw] evaluated_effect
+    #   The result of evaluating this requirement. Valid values:
+    #
+    #   * `ALLOW` - A statement that applies to this check allows the
+    #     request.
+    #
+    #   * `EXPLICIT_DENY` - A deny statement that applies to this check
+    #     matches.
+    #
+    #   * `IMPLICIT_DENY` - The check required an allow and nothing that
+    #     applies to it allows the request.
+    #
+    #   * `NO_IMPACT` - No statement in this check matched, and no allow was
+    #     needed because another path allowed the request.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_arn
+    #   The ARN that distinguishes this check from other checks of the same
+    #   type. This value is absent when the check type alone identifies the
+    #   check. For SCP and RCP checks, this is the AWS Organizations ARN of
+    #   the root, organizational unit, or account that the evaluated
+    #   policies are attached to.
+    #   @return [String]
+    #
+    # @!attribute [rw] relevant_policy_types
+    #   The policy types used to satisfy this check, plus the type of every
+    #   policy with a statement that matched in it. `matchedPolicies` lists
+    #   matching policies in the top-level `policies` list.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] matched_policies
+    #   Policies in this list have statements that matched for this check.
+    #   Each URI corresponds to an entry in the top-level `policies` list.
+    #   Only policies in the top-level list are included. The check effect
+    #   can reflect a matched policy omitted from this list, so this list
+    #   can be empty even when the effect is `ALLOW`.
+    #   @return [Array<Types::MatchedPolicy>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-toolbox-2018-05-10/Check AWS API Documentation
+    #
+    class Check < Struct.new(
+      :check_type,
+      :evaluated_effect,
+      :target_arn,
+      :relevant_policy_types,
+      :matched_policies)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Represents an individual evaluation for a single action and resource
     # pair. This includes the context, the resulting effect, and any
     # policies that matched.
@@ -72,14 +152,43 @@ module Aws::IAMToolbox
     #
     #   * `EXPLICIT_DENY` - The action was explicitly denied by a policy.
     #
-    #   * `IMPLICIT_DENY` - The action was denied because no policy allowed
-    #     it.
+    #   * `IMPLICIT_DENY` - The action was denied because at least one
+    #     required authorization check had no matching allow statement.
     #   @return [String]
     #
     # @!attribute [rw] matched_policies
-    #   The policies that matched during evaluation of this action and
-    #   resource. An implicit denial produces no matched policies.
+    #   `matchedPolicies` is deprecated. Use `checks` instead. This value
+    #   contains the policies that matched during evaluation of this action
+    #   and resource.
     #   @return [Array<Types::MatchedPolicy>]
+    #
+    # @!attribute [rw] checks
+    #   `checks` contains the authorization checks that explain an
+    #   evaluation result. Each check is one authorization requirement and
+    #   reports its result and policies from the top-level `policies` list
+    #   with matching statements. The output lists RCP checks from the
+    #   organization root to the account, then SCP checks from the
+    #   organization root to the account. It then lists VPC endpoint,
+    #   resource, principal, permissions boundary, and session checks. When
+    #   `checks` is present, an `EXPLICIT_DENY` evaluation includes an
+    #   `EXPLICIT_DENY` check. When `checks` is present for an
+    #   `IMPLICIT_DENY` evaluation, it includes an `IMPLICIT_DENY` check and
+    #   no `EXPLICIT_DENY` check. For more information about how IAM
+    #   evaluates policies, see [Policy evaluation logic][1].
+    #
+    #   `PRINCIPAL`, `PERMISSIONS_BOUNDARY`, and `SESSION` checks appear
+    #   when they apply to the principal that made the request, even if none
+    #   of their policies matched. A missing allow produces `IMPLICIT_DENY`,
+    #   or `NO_IMPACT` when another path already allowed the request.
+    #
+    #   Returned when the caller is in the request principal's account or
+    #   organization. The absence of `checks` does not mean no authorization
+    #   checks applied.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_evaluation-logic_policy-eval-denyallow.html
+    #   @return [Array<Types::Check>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-toolbox-2018-05-10/Evaluation AWS API Documentation
     #
@@ -88,7 +197,8 @@ module Aws::IAMToolbox
       :resource,
       :context,
       :evaluated_effect,
-      :matched_policies)
+      :matched_policies,
+      :checks)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -139,6 +249,44 @@ module Aws::IAMToolbox
       :evaluations,
       :policies,
       :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] authorization_id
+    #   The authorization ID received in the access denied error message.
+    #   This ID identifies the request whose evaluated policy you want to
+    #   retrieve.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy_uri
+    #   The URI of the policy to retrieve. Use the `uri` value from the
+    #   `policies` list returned by `GetRequestAuthorizationDetails` for the
+    #   same authorization ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-toolbox-2018-05-10/GetRequestAuthorizationPolicyInput AWS API Documentation
+    #
+    class GetRequestAuthorizationPolicyInput < Struct.new(
+      :authorization_id,
+      :policy_uri)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] policy_document
+    #   The policy document evaluated for the denied request, returned as a
+    #   JSON object.
+    #
+    #   For some AWS services and policy types, this document includes all
+    #   actions relevant to the service that processed the denied request,
+    #   but might omit actions for other services.
+    #   @return [Hash,Array,String,Numeric,Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-toolbox-2018-05-10/GetRequestAuthorizationPolicyOutput AWS API Documentation
+    #
+    class GetRequestAuthorizationPolicyOutput < Struct.new(
+      :policy_document)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -207,7 +355,8 @@ module Aws::IAMToolbox
 
     # Contains details about a policy evaluated during authorization.
     # Details include the policy type, whether it is inline or managed, a
-    # URI that identifies it, and the entities it is attached to.
+    # URI that identifies it, the entities it is attached to, and its
+    # source, if present.
     #
     # @!attribute [rw] type
     #   The type of policy. Valid values:
@@ -218,7 +367,9 @@ module Aws::IAMToolbox
     #   * `PERMISSIONS_BOUNDARY` - A permissions boundary for an IAM entity.
     #
     #   * `RESOURCE_BASED_POLICY` - A resource-based policy attached to a
-    #     resource.
+    #     resource. An AWS service can evaluate and report a policy kind it
+    #     defines, such as a KMS grant, as `RESOURCE_BASED_POLICY`.
+    #     `policySource` identifies the kind.
     #
     #   * `RESOURCE_CONTROL_POLICY` - A resource control policy (RCP) in AWS
     #     Organizations.
@@ -239,8 +390,10 @@ module Aws::IAMToolbox
     #
     # @!attribute [rw] uri
     #   A URI that identifies the policy. Use this URI to cross-reference
-    #   the policy with the matching policies in each evaluation. The value
-    #   depends on the policy type:
+    #   the policy with the matching policies in each evaluation. To
+    #   retrieve the policy document, pass this URI as the `policyUri`
+    #   parameter of `GetRequestAuthorizationPolicy`, together with the same
+    #   authorization ID. The value depends on the policy type:
     #
     #   * For managed policies, this is the policy ARN.
     #
@@ -255,22 +408,44 @@ module Aws::IAMToolbox
     #   entities at different levels of the organization hierarchy.
     #   @return [Array<Types::AttachedTo>]
     #
+    # @!attribute [rw] policy_source
+    #   What the policy was built from, such as a KMS key policy or grant.
+    #   Absent for other policies.
+    #
+    #   The `type` and `typeName` keys are always present. `type` identifies
+    #   the policy-source kind. `typeName` is its readable name. Compare
+    #   `type`, not `typeName`.
+    #
+    #   A policy source can include additional keys that depend on its type.
+    #   For example, a KMS grant includes a `grantId` key that identifies
+    #   the grant. A grant has no ARN. Use the grant ID with the KMS key ARN
+    #   in `attachedTo` to find the grant with the AWS KMS `ListGrants`
+    #   operation.
+    #
+    #   New types and keys can be added, so clients should ignore types and
+    #   keys they don't recognize.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-toolbox-2018-05-10/PolicyInfo AWS API Documentation
     #
     class PolicyInfo < Struct.new(
       :type,
       :inline,
       :uri,
-      :attached_to)
+      :attached_to,
+      :policy_source)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # The requested authorization details do not exist in this region or
-    # have expired. Verify that the authorization ID from the access denied
-    # error message is correct and the call is made in the region where the
-    # denial occurred. Ensure that the calling principal belongs to the same
-    # account or organization as the original denied request.
+    # The requested policy or authorization details do not exist in this
+    # region or have expired. Verify that the authorization ID from the
+    # access denied error message is correct and the call is made in the
+    # region where the denial occurred. Ensure that the calling principal
+    # belongs to the same account or organization as the original denied
+    # request. If you specified a policy URI, verify that it is from the
+    # `policies` list that `GetRequestAuthorizationDetails` returns for the
+    # same authorization ID.
     #
     # @!attribute [rw] message
     #   @return [String]

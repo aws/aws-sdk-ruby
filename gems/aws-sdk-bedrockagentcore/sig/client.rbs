@@ -380,6 +380,18 @@ module Aws
                                             ) -> _DeleteCapacityProviderSessionResponseSuccess
                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteCapacityProviderSessionResponseSuccess
 
+      interface _DeleteDatasetGenerationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteDatasetGenerationResponse]
+        def generation_id: () -> ::String
+        def status: () -> ("IN_PROGRESS" | "COMPLETED" | "COMPLETED_WITH_ERRORS" | "FAILED" | "DELETING")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCore/Client.html#delete_dataset_generation-instance_method
+      def delete_dataset_generation: (
+                                       dataset_id: ::String,
+                                       generation_id: ::String
+                                     ) -> _DeleteDatasetGenerationResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteDatasetGenerationResponseSuccess
+
       interface _DeleteEventResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteEventOutput]
         def event_id: () -> ::String
@@ -525,6 +537,30 @@ module Aws
                           ) -> _GetAgentCardResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAgentCardResponseSuccess
 
+      interface _GetAgentInsightResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAgentInsightResponse]
+        def type: () -> ("FAILURE")
+        def name: () -> ::String
+        def description: () -> ::String
+        def created_at: () -> ::Time
+        def affected_session_count: () -> ::Integer
+        def sample_sessions: () -> ::Array[Types::SampleSession]
+        def root_causes: () -> ::Array[Types::InsightRootCause]
+        def agent_insight_id: () -> ::String
+        def application_name: () -> ::String
+        def batch_evaluation_id: () -> ::String
+        def customer_metadata_status: () -> ("AVAILABLE" | "CUSTOMER_KEY_UNAVAILABLE" | "UNAVAILABLE")
+        def updated_at: () -> ::Time
+        def archive_status: () -> ("ACTIVE" | "ARCHIVED")
+        def last_seen_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCore/Client.html#get_agent_insight-instance_method
+      def get_agent_insight: (
+                               application_name: ::String,
+                               agent_insight_id: ::String
+                             ) -> _GetAgentInsightResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAgentInsightResponseSuccess
+
       interface _GetBatchEvaluationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetBatchEvaluationResponse]
         def batch_evaluation_id: () -> ::String
@@ -545,6 +581,7 @@ module Aws
         def description: () -> ::String
         def updated_at: () -> ::Time
         def kms_key_arn: () -> ::String
+        def dataset_execution_details: () -> Types::DatasetExecutionDetails
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCore/Client.html#get_batch_evaluation-instance_method
       def get_batch_evaluation: (
@@ -595,6 +632,30 @@ module Aws
                                           session_id: ::String
                                         ) -> _GetCodeInterpreterSessionResponseSuccess
                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCodeInterpreterSessionResponseSuccess
+
+      interface _GetDatasetGenerationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDatasetGenerationResponse]
+        def generation_id: () -> ::String
+        def name: () -> ::String
+        def description: () -> ::String
+        def dataset_id: () -> ::String
+        def scenario_type: () -> ("FIXED" | "DYNAMIC")
+        def status: () -> ("IN_PROGRESS" | "COMPLETED" | "COMPLETED_WITH_ERRORS" | "FAILED" | "DELETING")
+        def failure_reason: () -> ::String
+        def created_at: () -> ::Time
+        def updated_at: () -> ::Time
+        def completed_at: () -> ::Time
+        def source: () -> Types::GenerationSourceRecord
+        def generation_results: () -> Types::GenerationResults
+        def redaction_summary: () -> Types::RedactionSummary
+        def error_details: () -> ::Array[Types::GenerationErrorDetail]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCore/Client.html#get_dataset_generation-instance_method
+      def get_dataset_generation: (
+                                    dataset_id: ::String,
+                                    generation_id: ::String
+                                  ) -> _GetDatasetGenerationResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDatasetGenerationResponseSuccess
 
       interface _GetEventResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetEventOutput]
@@ -1068,7 +1129,15 @@ module Aws
                                 config: {
                                   remote_mcp: {
                                     url: ::String,
-                                    headers: Hash[::String, ::String]?
+                                    headers: Hash[::String, ::String]?,
+                                    outbound_auth: {
+                                      aws_iam: {
+                                        service: ::String,
+                                        region: ::String?
+                                      }?,
+                                      none: {
+                                      }?
+                                    }?
                                   }?,
                                   agent_core_browser: {
                                     browser_arn: ::String?
@@ -1127,6 +1196,28 @@ module Aws
                           ) ?{ (*untyped) -> void } -> _InvokeHarnessResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) ?{ (*untyped) -> void } -> _InvokeHarnessResponseSuccess
 
+      interface _InvokeWebSearchResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::InvokeWebSearchOutput]
+        def results: () -> ::Array[Types::WebSearchResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCore/Client.html#invoke_web_search-instance_method
+      def invoke_web_search: (
+                               web_search_id: ::String,
+                               search_query: ::String,
+                               ?max_results: ::Integer,
+                               ?filters: {
+                                 domain_filter: {
+                                   include: Array[::String]?,
+                                   exclude: Array[::String]?
+                                 }?,
+                                 published_date_filter: {
+                                   published_after: ::Time?,
+                                   published_before: ::Time?
+                                 }?
+                               }
+                             ) -> _InvokeWebSearchResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _InvokeWebSearchResponseSuccess
+
       interface _ListABTestsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListABTestsResponse]
         def ab_tests: () -> ::Array[Types::ABTestSummary]
@@ -1151,6 +1242,21 @@ module Aws
                          ?next_token: ::String
                        ) -> _ListActorsResponseSuccess
                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListActorsResponseSuccess
+
+      interface _ListAgentInsightsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAgentInsightsResponse]
+        def agent_insights: () -> ::Array[Types::AgentInsightSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCore/Client.html#list_agent_insights-instance_method
+      def list_agent_insights: (
+                                 ?application_name: ::String,
+                                 ?batch_evaluation_id: ::String,
+                                 ?archive_status: ("ACTIVE" | "ARCHIVED"),
+                                 ?max_results: ::Integer,
+                                 ?next_token: ::String
+                               ) -> _ListAgentInsightsResponseSuccess
+                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAgentInsightsResponseSuccess
 
       interface _ListBatchEvaluationsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListBatchEvaluationsResponse]
@@ -1191,6 +1297,19 @@ module Aws
                                             ?status: ("READY" | "TERMINATED")
                                           ) -> _ListCodeInterpreterSessionsResponseSuccess
                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCodeInterpreterSessionsResponseSuccess
+
+      interface _ListDatasetGenerationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDatasetGenerationsResponse]
+        def dataset_generations: () -> ::Array[Types::DatasetGenerationSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCore/Client.html#list_dataset_generations-instance_method
+      def list_dataset_generations: (
+                                      dataset_id: ::String,
+                                      ?max_results: ::Integer,
+                                      ?next_token: ::String
+                                    ) -> _ListDatasetGenerationsResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDatasetGenerationsResponseSuccess
 
       interface _ListEventsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListEventsOutput]
@@ -1332,7 +1451,7 @@ module Aws
         def payment_manager_arn: () -> ::String
         def payment_session_id: () -> ::String
         def payment_instrument_id: () -> ::String
-        def payment_type: () -> ("CRYPTO_X402" | "MPP")
+        def payment_type: () -> ("CRYPTO_X402" | "MPP" | "AWS_BILLING_X402")
         def status: () -> ("PROOF_GENERATED")
         def payment_output: () -> Types::PaymentOutput
         def created_at: () -> ::Time
@@ -1345,7 +1464,7 @@ module Aws
                              payment_manager_arn: ::String,
                              payment_session_id: ::String,
                              payment_instrument_id: ::String,
-                             payment_type: ("CRYPTO_X402" | "MPP"),
+                             payment_type: ("CRYPTO_X402" | "MPP" | "AWS_BILLING_X402"),
                              payment_input: {
                                crypto_x402: {
                                  version: ::String,
@@ -1357,6 +1476,19 @@ module Aws
                                  version: ::String,
                                  www_authenticate_headers: Array[::String],
                                  buyer_pays_gas_fees: bool?
+                               }?,
+                               aws_billing_x402: {
+                                 version: ::String,
+                                 payload: {
+                                 },
+                                 options: {
+                                   dpop_jwk: {
+                                     kty: ("EC"),
+                                     crv: ("P-256" | "P-384" | "P-521"),
+                                     x: ::String,
+                                     y: ::String
+                                   }?
+                                 }?
                                }?
                              },
                              ?client_token: ::String
@@ -1514,6 +1646,18 @@ module Aws
                                         metrics_namespace: ::String?,
                                         result_destination: ("DEDICATED_LOG_GROUP" | "SOURCE_LOG_GROUP")?
                                       }?
+                                    },
+                                    ?dataset_execution_config: {
+                                      dataset: {
+                                        dataset_id: ::String,
+                                        dataset_version: ::String?
+                                      },
+                                      agent_invocation: {
+                                        agent_core_runtime: {
+                                          agent_runtime_endpoint_arn: ::String,
+                                          request_template: ::String?
+                                        }?
+                                      }
                                     }
                                   ) -> _StartBatchEvaluationResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartBatchEvaluationResponseSuccess
@@ -1625,6 +1769,89 @@ module Aws
                                             ?client_token: ::String
                                           ) -> _StartCodeInterpreterSessionResponseSuccess
                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartCodeInterpreterSessionResponseSuccess
+
+      interface _StartDatasetGenerationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartDatasetGenerationResponse]
+        def generation_id: () -> ::String
+        def name: () -> ::String
+        def dataset_id: () -> ::String
+        def status: () -> ("IN_PROGRESS" | "COMPLETED" | "COMPLETED_WITH_ERRORS" | "FAILED" | "DELETING")
+        def created_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCore/Client.html#start_dataset_generation-instance_method
+      def start_dataset_generation: (
+                                      dataset_id: ::String,
+                                      name: ::String,
+                                      ?description: ::String,
+                                      ?scenario_type: ("FIXED" | "DYNAMIC"),
+                                      source: {
+                                        trace_generation: {
+                                          source_config: {
+                                            cloud_watch_logs: {
+                                              log_group_names: Array[::String]?,
+                                              log_group_name_prefixes: Array[::String]?,
+                                              service_names: Array[::String],
+                                              start_time: ::Time?,
+                                              end_time: ::Time?
+                                            }?,
+                                            online_evaluation: {
+                                              online_evaluation_config_arn: ::String,
+                                              start_time: ::Time?,
+                                              end_time: ::Time?
+                                            }?,
+                                            batch_evaluation: {
+                                              batch_evaluation_arn: ::String
+                                            }?
+                                          },
+                                          selection: {
+                                            filters: {
+                                              attribute_filters: Array[
+                                                {
+                                                  key: ::String,
+                                                  operator: ("Equals" | "NotEquals" | "GreaterThan" | "LessThan" | "GreaterThanOrEqual" | "LessThanOrEqual" | "Contains" | "NotContains"),
+                                                  value: {
+                                                    string_value: ::String?,
+                                                    double_value: ::Float?,
+                                                    boolean_value: bool?
+                                                  }
+                                                }
+                                              ]?,
+                                              turn_count: {
+                                                min: ::Integer?,
+                                                max: ::Integer?
+                                              }?,
+                                              evaluator_filters: Array[
+                                                Params::evaluator_filter
+                                              ]?
+                                            }?,
+                                            identifiers: {
+                                              session_ids: Array[::String]?,
+                                              trace_ids: Array[::String]?
+                                            }?
+                                          }?,
+                                          sampling: {
+                                            max_scenarios: ::Integer?
+                                          }?,
+                                          ground_truth: {
+                                            fields: Array[("expected_response" | "expected_trajectory")],
+                                            quality_filters: Array[
+                                              Params::evaluator_filter
+                                            ]?
+                                          }?,
+                                          redaction_configuration: {
+                                            identifiers: Array[("ADDRESS" | "AWS_SECRET_KEY" | "BANK_ACCOUNT_NUMBER_DE" | "BANK_ACCOUNT_NUMBER_ES" | "BANK_ACCOUNT_NUMBER_FR" | "BANK_ACCOUNT_NUMBER_GB" | "BANK_ACCOUNT_NUMBER_IT" | "BANK_ACCOUNT_NUMBER_US" | "CEP_CODE_BR" | "CNPJ_BR" | "CPF_CODE_BR" | "CREDIT_CARD_EXPIRATION" | "CREDIT_CARD_MAGNETIC_STRIPE" | "CREDIT_CARD_NUMBER" | "CREDIT_CARD_SECURITY_CODE" | "DATE_OF_BIRTH" | "DRIVERS_LICENSE_AT" | "DRIVERS_LICENSE_AU" | "DRIVERS_LICENSE_BE" | "DRIVERS_LICENSE_BG" | "DRIVERS_LICENSE_CA" | "DRIVERS_LICENSE_CY" | "DRIVERS_LICENSE_CZ" | "DRIVERS_LICENSE_DE" | "DRIVERS_LICENSE_DK" | "DRIVERS_LICENSE_EE" | "DRIVERS_LICENSE_ES" | "DRIVERS_LICENSE_FI" | "DRIVERS_LICENSE_FR" | "DRIVERS_LICENSE_GB" | "DRIVERS_LICENSE_GR" | "DRIVERS_LICENSE_HR" | "DRIVERS_LICENSE_HU" | "DRIVERS_LICENSE_IE" | "DRIVERS_LICENSE_IT" | "DRIVERS_LICENSE_LT" | "DRIVERS_LICENSE_LU" | "DRIVERS_LICENSE_LV" | "DRIVERS_LICENSE_MT" | "DRIVERS_LICENSE_NL" | "DRIVERS_LICENSE_PL" | "DRIVERS_LICENSE_PT" | "DRIVERS_LICENSE_RO" | "DRIVERS_LICENSE_SE" | "DRIVERS_LICENSE_SI" | "DRIVERS_LICENSE_SK" | "DRIVERS_LICENSE_US" | "DRUG_ENFORCEMENT_AGENCY_NUMBER_US" | "ELECTORAL_ROLL_NUMBER_GB" | "EMAIL_ADDRESS" | "HEALTH_INSURANCE_CARD_NUMBER_EU" | "HEALTH_INSURANCE_CLAIM_NUMBER_US" | "HEALTH_INSURANCE_NUMBER_FR" | "HEALTHCARE_PROCEDURE_CODE_US" | "INDIVIDUAL_TAX_IDENTIFICATION_NUMBER_US" | "INSEE_CODE_FR" | "IP_ADDRESS" | "LAT_LONG" | "MEDICARE_BENEFICIARY_NUMBER_US" | "NAME" | "NATIONAL_DRUG_CODE_US" | "NATIONAL_IDENTIFICATION_NUMBER_DE" | "NATIONAL_IDENTIFICATION_NUMBER_ES" | "NATIONAL_IDENTIFICATION_NUMBER_IT" | "NATIONAL_INSURANCE_NUMBER_GB" | "NATIONAL_PROVIDER_ID_US" | "NHS_NUMBER_GB" | "NIE_NUMBER_ES" | "NIF_NUMBER_ES" | "OPEN_SSH_PRIVATE_KEY" | "PASSPORT_NUMBER_CA" | "PASSPORT_NUMBER_DE" | "PASSPORT_NUMBER_ES" | "PASSPORT_NUMBER_FR" | "PASSPORT_NUMBER_GB" | "PASSPORT_NUMBER_IT" | "PASSPORT_NUMBER_US" | "PERMANENT_RESIDENCE_NUMBER_CA" | "PERSONAL_HEALTH_NUMBER_CA" | "PGP_PRIVATE_KEY" | "PHONE_NUMBER_BR" | "PHONE_NUMBER_DE" | "PHONE_NUMBER_ES" | "PHONE_NUMBER_FR" | "PHONE_NUMBER_GB" | "PHONE_NUMBER_IT" | "PHONE_NUMBER_US" | "PKCS_PRIVATE_KEY" | "POSTAL_CODE_CA" | "PUTTY_PRIVATE_KEY" | "RG_NUMBER_BR" | "SOCIAL_INSURANCE_NUMBER_CA" | "SSN_ES" | "SSN_US" | "TAX_ID_DE" | "TAX_ID_ES" | "TAX_ID_FR" | "TAX_ID_GB" | "VEHICLE_IDENTIFICATION_NUMBER" | "ZIP_CODE_US")]?,
+                                            custom_data_identifiers: Array[
+                                              {
+                                                name: ::String,
+                                                regex: ::String
+                                              }
+                                            ]?
+                                          }?
+                                        }?
+                                      },
+                                      ?client_token: ::String
+                                    ) -> _StartDatasetGenerationResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartDatasetGenerationResponseSuccess
 
       interface _StartMemoryExtractionJobResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::StartMemoryExtractionJobOutput]
@@ -1800,6 +2027,20 @@ module Aws
                             ?execution_status: ("PAUSED" | "RUNNING" | "STOPPED" | "NOT_STARTED")
                           ) -> _UpdateABTestResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateABTestResponseSuccess
+
+      interface _UpdateAgentInsightResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateAgentInsightResponse]
+        def agent_insight_id: () -> ::String
+        def archive_status: () -> ("ACTIVE" | "ARCHIVED")
+        def updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCore/Client.html#update_agent_insight-instance_method
+      def update_agent_insight: (
+                                  application_name: ::String,
+                                  agent_insight_id: ::String,
+                                  archive_status: ("ACTIVE" | "ARCHIVED")
+                                ) -> _UpdateAgentInsightResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAgentInsightResponseSuccess
 
       interface _UpdateBrowserStreamResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateBrowserStreamResponse]

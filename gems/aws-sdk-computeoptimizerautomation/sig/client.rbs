@@ -116,7 +116,10 @@ module Aws
                                     rule_type: ("OrganizationRule" | "AccountRule"),
                                     ?organization_configuration: {
                                       rule_apply_order: ("BeforeAccountRules" | "AfterAccountRules")?,
-                                      account_ids: Array[::String]?
+                                      account_ids: Array[::String]?,
+                                      organizational_unit_ids: Array[::String]?,
+                                      excluded_organizational_unit_ids: Array[::String]?,
+                                      excluded_account_ids: Array[::String]?
                                     },
                                     ?priority: ::String,
                                     recommended_action_types: Array[("SnapshotAndDeleteUnattachedEbsVolume" | "UpgradeEbsVolumeType")],
@@ -147,6 +150,20 @@ module Aws
                                     ?client_token: ::String
                                   ) -> _DeleteAutomationRuleResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteAutomationRuleResponseSuccess
+
+      interface _DeleteOrganizationEnrollmentConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteOrganizationEnrollmentConfigurationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ComputeOptimizerAutomation/Client.html#delete_organization_enrollment_configuration-instance_method
+      def delete_organization_enrollment_configuration: (
+                                                          target: {
+                                                            account_id: ::String?,
+                                                            organizational_unit_id: ::String?
+                                                          },
+                                                          configuration_types: Array[("OrganizationRuleMode")],
+                                                          ?client_token: ::String
+                                                        ) -> _DeleteOrganizationEnrollmentConfigurationResponseSuccess
+                                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteOrganizationEnrollmentConfigurationResponseSuccess
 
       interface _DisassociateAccountsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DisassociateAccountsResponse]
@@ -215,6 +232,7 @@ module Aws
         def status_reason: () -> ::String
         def organization_rule_mode: () -> ("AnyAllowed" | "NoneAllowed")
         def last_updated_timestamp: () -> ::Time
+        def organization_enrollment_configuration_status: () -> ("Active" | "Inactive")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ComputeOptimizerAutomation/Client.html#get_enrollment_configuration-instance_method
       def get_enrollment_configuration: (
@@ -259,6 +277,7 @@ module Aws
                                                  values: Array[::String]
                                                }
                                              ],
+                                             ?organizational_unit_ids: Array[::String],
                                              ?start_date_inclusive: ::String,
                                              ?end_date_exclusive: ::String,
                                              ?max_results: ::Integer,
@@ -279,6 +298,7 @@ module Aws
                                         values: Array[::String]
                                       }
                                     ],
+                                    ?organizational_unit_ids: Array[::String],
                                     ?start_time_inclusive: ::Time,
                                     ?end_time_exclusive: ::Time,
                                     ?max_results: ::Integer,
@@ -295,7 +315,10 @@ module Aws
       def list_automation_rule_preview: (
                                           rule_type: ("OrganizationRule" | "AccountRule"),
                                           ?organization_scope: {
-                                            account_ids: Array[::String]?
+                                            account_ids: Array[::String]?,
+                                            organizational_unit_ids: Array[::String]?,
+                                            excluded_organizational_unit_ids: Array[::String]?,
+                                            excluded_account_ids: Array[::String]?
                                           },
                                           recommended_action_types: Array[("SnapshotAndDeleteUnattachedEbsVolume" | "UpgradeEbsVolumeType")],
                                           ?criteria: Params::criteria,
@@ -313,7 +336,10 @@ module Aws
       def list_automation_rule_preview_summaries: (
                                                     rule_type: ("OrganizationRule" | "AccountRule"),
                                                     ?organization_scope: {
-                                                      account_ids: Array[::String]?
+                                                      account_ids: Array[::String]?,
+                                                      organizational_unit_ids: Array[::String]?,
+                                                      excluded_organizational_unit_ids: Array[::String]?,
+                                                      excluded_account_ids: Array[::String]?
                                                     },
                                                     recommended_action_types: Array[("SnapshotAndDeleteUnattachedEbsVolume" | "UpgradeEbsVolumeType")],
                                                     ?criteria: Params::criteria,
@@ -340,6 +366,32 @@ module Aws
                                  ) -> _ListAutomationRulesResponseSuccess
                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAutomationRulesResponseSuccess
 
+      interface _ListOrganizationEnrollmentConfigurationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListOrganizationEnrollmentConfigurationsResponse]
+        def organization_enrollment_configurations: () -> ::Array[Types::OrganizationEnrollmentConfiguration]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ComputeOptimizerAutomation/Client.html#list_organization_enrollment_configurations-instance_method
+      def list_organization_enrollment_configurations: (
+                                                         ?target_type: ("Account" | "OrganizationalUnit"),
+                                                         ?max_results: ::Integer,
+                                                         ?next_token: ::String
+                                                       ) -> _ListOrganizationEnrollmentConfigurationsResponseSuccess
+                                                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListOrganizationEnrollmentConfigurationsResponseSuccess
+
+      interface _ListOrganizationalUnitsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListOrganizationalUnitsResponse]
+        def organizational_units: () -> ::Array[Types::OrganizationalUnitInfo]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ComputeOptimizerAutomation/Client.html#list_organizational_units-instance_method
+      def list_organizational_units: (
+                                       ?organizational_unit_ids: Array[::String],
+                                       ?max_results: ::Integer,
+                                       ?next_token: ::String
+                                     ) -> _ListOrganizationalUnitsResponseSuccess
+                                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListOrganizationalUnitsResponseSuccess
+
       interface _ListRecommendedActionSummariesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListRecommendedActionSummariesResponse]
         def recommended_action_summaries: () -> ::Array[Types::RecommendedActionSummary]
@@ -353,6 +405,7 @@ module Aws
                                                    values: Array[::String]
                                                  }
                                                ],
+                                               ?organizational_unit_ids: Array[::String],
                                                ?max_results: ::Integer,
                                                ?next_token: ::String
                                              ) -> _ListRecommendedActionSummariesResponseSuccess
@@ -371,6 +424,7 @@ module Aws
                                           values: Array[::String]
                                         }
                                       ],
+                                      ?organizational_unit_ids: Array[::String],
                                       ?max_results: ::Integer,
                                       ?next_token: ::String
                                     ) -> _ListRecommendedActionsResponseSuccess
@@ -385,6 +439,20 @@ module Aws
                                     resource_arn: ::String
                                   ) -> _ListTagsForResourceResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _PutOrganizationEnrollmentConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutOrganizationEnrollmentConfigurationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ComputeOptimizerAutomation/Client.html#put_organization_enrollment_configuration-instance_method
+      def put_organization_enrollment_configuration: (
+                                                       target: {
+                                                         account_id: ::String?,
+                                                         organizational_unit_id: ::String?
+                                                       },
+                                                       ?organization_rule_mode: ("AnyAllowed" | "NoneAllowed"),
+                                                       ?client_token: ::String
+                                                     ) -> _PutOrganizationEnrollmentConfigurationResponseSuccess
+                                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutOrganizationEnrollmentConfigurationResponseSuccess
 
       interface _RollbackAutomationEventResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::RollbackAutomationEventResponse]
@@ -465,7 +533,10 @@ module Aws
                                     ?rule_type: ("OrganizationRule" | "AccountRule"),
                                     ?organization_configuration: {
                                       rule_apply_order: ("BeforeAccountRules" | "AfterAccountRules")?,
-                                      account_ids: Array[::String]?
+                                      account_ids: Array[::String]?,
+                                      organizational_unit_ids: Array[::String]?,
+                                      excluded_organizational_unit_ids: Array[::String]?,
+                                      excluded_account_ids: Array[::String]?
                                     },
                                     ?priority: ::String,
                                     ?recommended_action_types: Array[("SnapshotAndDeleteUnattachedEbsVolume" | "UpgradeEbsVolumeType")],

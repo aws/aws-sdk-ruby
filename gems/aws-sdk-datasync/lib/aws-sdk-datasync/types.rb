@@ -85,6 +85,59 @@ module Aws::DataSync
       include Aws::Structure
     end
 
+    # Specifies federated identity parameters that allow DataSync to obtain
+    # an OpenID Connect token for access to customer Azure Blob Storage. The
+    # token allows for temporary, short-term access to the storage. DataSync
+    # automatically refreshes the token to assure uninterrupted access to
+    # the storage.
+    #
+    # <note markdown="1"> Federated identity parameters are an alternative to the
+    # `SasConfiguration` credentials that are expected to be valid long-term
+    # (e.g. at least for the duration of DataSync task execution). Do not
+    # specify federated identity and the SAS configuration for the same
+    # Azure Blob location.
+    #
+    #  </note>
+    #
+    # @!attribute [rw] aws_iam_role
+    #   Specifies the ARN for an Amazon Web Services role that allows
+    #   DataSync to invoke STS GetWebIdentityToken API on behalf of the
+    #   customer account and to obtain Amazon Web Services STS JWT (web
+    #   token).
+    #   @return [String]
+    #
+    # @!attribute [rw] azure_oidc
+    #   External identity parameters for Azure Blob Storage.
+    #   @return [Types::AzureOidcConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/AzureFederatedIdentityConfig AWS API Documentation
+    #
+    class AzureFederatedIdentityConfig < Struct.new(
+      :aws_iam_role,
+      :azure_oidc)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # External identity parameters for Azure Blob Storage.
+    #
+    # @!attribute [rw] tenant_id
+    #   Azure tenant ID string.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_id
+    #   Azure client ID string.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/AzureOidcConfig AWS API Documentation
+    #
+    class AzureOidcConfig < Struct.new(
+      :tenant_id,
+      :client_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # CancelTaskExecutionRequest
     #
     # @!attribute [rw] task_execution_arn
@@ -248,7 +301,7 @@ module Aws::DataSync
     # @!attribute [rw] authentication_type
     #   Specifies the authentication method DataSync uses to access your
     #   Azure Blob Storage. DataSync can access blob storage using a shared
-    #   access signature (SAS).
+    #   access signature (SAS) or an OpenID Connect (OIDC) token.
     #   @return [String]
     #
     # @!attribute [rw] sas_configuration
@@ -262,6 +315,13 @@ module Aws::DataSync
     #
     #    </note>
     #   @return [Types::AzureBlobSasConfiguration]
+    #
+    # @!attribute [rw] federated_identity
+    #   Specifies the federated identity configuration that allows DataSync
+    #   to access your Azure Blob Storage using an OpenID Connect (OIDC)
+    #   token instead of a shared access signature (SAS). Provide either
+    #   `FederatedIdentity` or `SasConfiguration`, but not both.
+    #   @return [Types::AzureFederatedIdentityConfig]
     #
     # @!attribute [rw] blob_type
     #   Specifies the type of blob that you want your objects or files to be
@@ -370,6 +430,7 @@ module Aws::DataSync
       :container_url,
       :authentication_type,
       :sas_configuration,
+      :federated_identity,
       :blob_type,
       :access_tier,
       :subdirectory,
@@ -1127,6 +1188,14 @@ module Aws::DataSync
     #    </note>
     #   @return [String]
     #
+    # @!attribute [rw] federated_identity
+    #   Specifies the federated identity configuration that allows DataSync
+    #   to access your object storage using an OpenID Connect (OIDC) token
+    #   instead of a long-term access key and secret key. Provide either
+    #   `FederatedIdentity` or the `AccessKey`/`SecretKey` credentials, but
+    #   not both.
+    #   @return [Types::ObjectStorageFederatedIdentityConfig]
+    #
     # @!attribute [rw] agent_arns
     #   (Optional) Specifies the Amazon Resource Names (ARNs) of the
     #   DataSync agents that can connect with your object storage system. If
@@ -1230,6 +1299,7 @@ module Aws::DataSync
       :bucket_name,
       :access_key,
       :secret_key,
+      :federated_identity,
       :agent_arns,
       :tags,
       :server_certificate,
@@ -1688,9 +1758,7 @@ module Aws::DataSync
     #     higher performance than Basic mode. Enhanced mode tasks optimize
     #     the data transfer process by listing, preparing, transferring, and
     #     verifying data in parallel. Enhanced mode is currently available
-    #     for transfers between Amazon S3 locations, transfers between Azure
-    #     Blob and Amazon S3 without an agent, and transfers between other
-    #     clouds and Amazon S3 without an agent.
+    #     for all transfers except those that use Amazon S3 on Outposts.
     #
     #     <note markdown="1"> To create an Enhanced mode task, the IAM role that you use to call
     #     the `CreateTask` operation must have the
@@ -1950,8 +2018,13 @@ module Aws::DataSync
     # @!attribute [rw] authentication_type
     #   The authentication method DataSync uses to access your Azure Blob
     #   Storage. DataSync can access blob storage using a shared access
-    #   signature (SAS).
+    #   signature (SAS) or an OpenID Connect (OIDC) token.
     #   @return [String]
+    #
+    # @!attribute [rw] federated_identity
+    #   The federated identity configuration that DataSync uses to access
+    #   your Azure Blob Storage using an OpenID Connect (OIDC) token.
+    #   @return [Types::AzureFederatedIdentityConfig]
     #
     # @!attribute [rw] blob_type
     #   The type of blob that you want your objects or files to be when
@@ -2010,6 +2083,7 @@ module Aws::DataSync
       :location_arn,
       :location_uri,
       :authentication_type,
+      :federated_identity,
       :blob_type,
       :access_tier,
       :agent_arns,
@@ -2528,6 +2602,11 @@ module Aws::DataSync
     #   with the object storage system.
     #   @return [String]
     #
+    # @!attribute [rw] federated_identity
+    #   The federated identity configuration that DataSync uses to access
+    #   your object storage using an OpenID Connect (OIDC) token.
+    #   @return [Types::ObjectStorageFederatedIdentityConfig]
+    #
     # @!attribute [rw] server_port
     #   The port that your object storage server accepts inbound network
     #   traffic on (for example, port 443).
@@ -2581,6 +2660,7 @@ module Aws::DataSync
       :location_arn,
       :location_uri,
       :access_key,
+      :federated_identity,
       :server_port,
       :server_protocol,
       :agent_arns,
@@ -3838,6 +3918,35 @@ module Aws::DataSync
       include Aws::Structure
     end
 
+    # External identity parameters for Google Cloud Storage.
+    #
+    # @!attribute [rw] project_name
+    #   Human-readable project name (e.g. "my-project").
+    #   @return [String]
+    #
+    # @!attribute [rw] project_number
+    #   Numeric project ID as a string (e.g. "123456789").
+    #   @return [String]
+    #
+    # @!attribute [rw] identity_pool_name
+    #   Human-readable pool name (e.g. "my-pool").
+    #   @return [String]
+    #
+    # @!attribute [rw] identity_provider_name
+    #   Human-readable provider name (e.g. "my-oidc-provider").
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/GoogleOidcConfig AWS API Documentation
+    #
+    class GoogleOidcConfig < Struct.new(
+      :project_name,
+      :project_number,
+      :identity_pool_name,
+      :identity_provider_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The NameNode of the Hadoop Distributed File System (HDFS). The
     # NameNode manages the file system's namespace. The NameNode performs
     # operations such as opening, closing, and renaming files and
@@ -4330,6 +4439,58 @@ module Aws::DataSync
     #
     class NfsMountOptions < Struct.new(
       :version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies cloud-provider-specific external identity parameters used
+    # when exchanging the Amazon Web Services web token for an OpenID
+    # Connect token at the object storage provider.
+    #
+    # @!attribute [rw] google_oidc
+    #   External identity parameters for Google Cloud Storage.
+    #   @return [Types::GoogleOidcConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/ObjectStorageExternalIdentityConfig AWS API Documentation
+    #
+    class ObjectStorageExternalIdentityConfig < Struct.new(
+      :google_oidc)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies federated identity parameters that allow DataSync to obtain
+    # OpenID Connect token for access to customer object storage. The token
+    # allows for temporary, short-term access to the storage. DataSync
+    # automatically refreshes the token to assure uninterrupted access to
+    # the storage.
+    #
+    # <note markdown="1"> Federated identity parameters are an alternative to the
+    # `AccessKey`/`SecretKey` credentials that are expected to be valid
+    # long-term (e.g. at least for the duration of DataSync task execution).
+    # Do not specify federated identity and the key parameters for the same
+    # object storage location.
+    #
+    #  </note>
+    #
+    # @!attribute [rw] aws_iam_role
+    #   Specifies the ARN for an Amazon Web Services role that allows
+    #   DataSync to invoke STS GetWebIdentityToken API on behalf of the
+    #   customer account and to obtain Amazon Web Services STS JWT (web
+    #   token).
+    #   @return [String]
+    #
+    # @!attribute [rw] external_identity
+    #   Specifies cloud-provider-specific external identity parameters used
+    #   when exchanging the Amazon Web Services web token for an OpenID
+    #   Connect token at the object storage provider.
+    #   @return [Types::ObjectStorageExternalIdentityConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/ObjectStorageFederatedIdentityConfig AWS API Documentation
+    #
+    class ObjectStorageFederatedIdentityConfig < Struct.new(
+      :aws_iam_role,
+      :external_identity)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5937,13 +6098,20 @@ module Aws::DataSync
     # @!attribute [rw] authentication_type
     #   Specifies the authentication method DataSync uses to access your
     #   Azure Blob Storage. DataSync can access blob storage using a shared
-    #   access signature (SAS).
+    #   access signature (SAS) or an OpenID Connect (OIDC) token.
     #   @return [String]
     #
     # @!attribute [rw] sas_configuration
     #   Specifies the SAS configuration that allows DataSync to access your
     #   Azure Blob Storage.
     #   @return [Types::AzureBlobSasConfiguration]
+    #
+    # @!attribute [rw] federated_identity
+    #   Specifies the federated identity configuration that allows DataSync
+    #   to access your Azure Blob Storage using an OpenID Connect (OIDC)
+    #   token instead of a shared access signature (SAS). Provide either
+    #   `FederatedIdentity` or `SasConfiguration`, but not both.
+    #   @return [Types::AzureFederatedIdentityConfig]
     #
     # @!attribute [rw] blob_type
     #   Specifies the type of blob that you want your objects or files to be
@@ -6008,6 +6176,7 @@ module Aws::DataSync
       :subdirectory,
       :authentication_type,
       :sas_configuration,
+      :federated_identity,
       :blob_type,
       :access_tier,
       :agent_arns,
@@ -6473,6 +6642,14 @@ module Aws::DataSync
     #    </note>
     #   @return [String]
     #
+    # @!attribute [rw] federated_identity
+    #   Specifies the federated identity configuration that allows DataSync
+    #   to access your object storage using an OpenID Connect (OIDC) token
+    #   instead of a long-term access key and secret key. Provide either
+    #   `FederatedIdentity` or the `AccessKey`/`SecretKey` credentials, but
+    #   not both.
+    #   @return [Types::ObjectStorageFederatedIdentityConfig]
+    #
     # @!attribute [rw] agent_arns
     #   (Optional) Specifies the Amazon Resource Names (ARNs) of the
     #   DataSync agents that can connect with your object storage system. If
@@ -6539,6 +6716,7 @@ module Aws::DataSync
       :server_hostname,
       :access_key,
       :secret_key,
+      :federated_identity,
       :agent_arns,
       :server_certificate,
       :cmk_secret_config,

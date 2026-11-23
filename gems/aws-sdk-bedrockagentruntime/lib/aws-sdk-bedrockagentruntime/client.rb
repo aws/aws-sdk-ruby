@@ -272,7 +272,8 @@ module Aws::BedrockAgentRuntime
     #     An integer representing the maximum number attempts that will be made for
     #     a single request, including the initial attempt.  For example,
     #     setting this value to 5 will result in a request being retried up to
-    #     4 times. Used in `standard` and `adaptive` retry modes.
+    #     4 times. Used in `standard` and `adaptive` retry modes. Defaults to 3,
+    #     except for DynamoDB and DynamoDB Streams, which default to 4.
     #
     #   @option options [Proc] :output_event_stream_handler
     #     When an EventStream or Proc object is provided, it will be used as callback for each chunk of event stream response received along the way.
@@ -338,15 +339,15 @@ module Aws::BedrockAgentRuntime
     #     used by the default backoff function. This option is only used in the
     #     `legacy` retry mode.
     #
-    #   @option options [String] :retry_mode ("legacy")
+    #   @option options [String] :retry_mode ("standard")
     #     Specifies which retry algorithm to use. Values are:
     #
-    #     * `legacy` - The pre-existing retry behavior. This is the default
-    #       value if no retry mode is provided.
+    #     * `legacy` - The pre-existing retry behavior.
     #
     #     * `standard` - A standardized set of retry rules across the AWS SDKs.
     #       This includes support for retry quotas, which limit the number of
-    #       unsuccessful retries a client can make.
+    #       unsuccessful retries a client can make. This is the default value
+    #       if no retry mode is provided.
     #
     #     * `adaptive` - A retry mode that includes all the functionality of
     #       `standard` mode along with automatic client side throttling.
@@ -945,6 +946,9 @@ module Aws::BedrockAgentRuntime
     #
     #   # For :trace_event event available at #on_trace_event_event callback and response eventstream enumerator:
     #   event.attributes.actions #=> Array
+    #   event.attributes.actions[0].code_execution.documents #=> Array
+    #   event.attributes.actions[0].code_execution.documents[0].document_id #=> String
+    #   event.attributes.actions[0].code_execution.documents[0].source_retriever.identifier #=> String
     #   event.attributes.actions[0].full_document_expansion.document_id #=> String
     #   event.attributes.actions[0].full_document_expansion.source_retriever.identifier #=> String
     #   event.attributes.actions[0].memory_retrieve.input_query.text #=> String
@@ -970,7 +974,7 @@ module Aws::BedrockAgentRuntime
     #   event.attributes.retrieval_response[0].metadata #=> Hash
     #   event.attributes.retrieval_response[0].source_retriever.identifier #=> String
     #   event.attributes.status #=> String, one of "IN_PROGRESS", "SUCCEEDED", "FAILED"
-    #   event.attributes.step #=> String, one of "Planning", "Retrieval", "SpeculativeRetrieval", "FullDocumentExpansion", "SessionHistoryLoad"
+    #   event.attributes.step #=> String, one of "Planning", "Retrieval", "SpeculativeRetrieval", "FullDocumentExpansion", "SessionHistoryLoad", "CodeExecution"
     #   event.attributes.warnings #=> Array
     #   event.attributes.warnings[0].guardrail.action #=> String, one of "INTERVENED", "NONE"
     #   event.attributes.warnings[0].guardrail.id #=> String
@@ -1438,8 +1442,10 @@ module Aws::BedrockAgentRuntime
       req.send_request(options)
     end
 
-    # Retrieves the content of an ingested document from a knowledge base.
-    # Returns a pre-signed URL for secure document access.
+    # Retrieves the content of an ingested document from a knowledge base,
+    # or of an image embedded in the document. Returns a pre-signed URL for
+    # downloading the content. Use this operation to display the source of a
+    # `Retrieve` result.
     #
     # @option params [required, String] :data_source_id
     #   The unique identifier of the data source that contains the document.
@@ -1451,9 +1457,29 @@ module Aws::BedrockAgentRuntime
     #   The unique identifier of the knowledge base that contains the
     #   document.
     #
+    # @option params [String] :media_id
+    #   The unique identifier (in UUID format) of an image embedded in the
+    #   specified document. Set this parameter to the `_media_id` value in the
+    #   metadata of the corresponding `Retrieve` result. If you specify this
+    #   parameter, the response contains a pre-signed URL for the image
+    #   instead of the document, and you must omit `outputFormat` or set it to
+    #   `RAW`.
+    #
     # @option params [String] :output_format
-    #   The output format for the document content. `RAW` returns the original
-    #   file. `EXTRACTED` returns parsed text as JSON. Defaults to `RAW`.
+    #   The output format for the content. You can specify one of the
+    #   following values:
+    #
+    #   RAW
+    #
+    #   : Returns the original document, or the selected image if you specify
+    #     `mediaId`.
+    #
+    #   EXTRACTED
+    #
+    #   : Returns parsed document text as JSON.
+    #
+    #   If you omit this parameter, the default is `RAW`. You can't use
+    #   `EXTRACTED` with `mediaId`.
     #
     # @option params [Types::UserContext] :user_context
     #   Contains information about the user making the request. This is used
@@ -1472,6 +1498,7 @@ module Aws::BedrockAgentRuntime
     #     data_source_id: "DataSourceId", # required
     #     document_id: "DocumentId", # required
     #     knowledge_base_id: "KnowledgeBaseIdentifier", # required
+    #     media_id: "MediaId",
     #     output_format: "RAW", # accepts RAW, EXTRACTED
     #     user_context: {
     #       user_id: "String", # required
@@ -8489,7 +8516,7 @@ module Aws::BedrockAgentRuntime
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrockagentruntime'
-      context[:gem_version] = '1.88.0'
+      context[:gem_version] = '1.97.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

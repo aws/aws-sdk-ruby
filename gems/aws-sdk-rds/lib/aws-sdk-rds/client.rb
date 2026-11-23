@@ -266,7 +266,8 @@ module Aws::RDS
     #     An integer representing the maximum number attempts that will be made for
     #     a single request, including the initial attempt.  For example,
     #     setting this value to 5 will result in a request being retried up to
-    #     4 times. Used in `standard` and `adaptive` retry modes.
+    #     4 times. Used in `standard` and `adaptive` retry modes. Defaults to 3,
+    #     except for DynamoDB and DynamoDB Streams, which default to 4.
     #
     #   @option options [String] :profile ("default")
     #     Used when loading credentials from the shared credentials file at `HOME/.aws/credentials`.
@@ -329,15 +330,15 @@ module Aws::RDS
     #     used by the default backoff function. This option is only used in the
     #     `legacy` retry mode.
     #
-    #   @option options [String] :retry_mode ("legacy")
+    #   @option options [String] :retry_mode ("standard")
     #     Specifies which retry algorithm to use. Values are:
     #
-    #     * `legacy` - The pre-existing retry behavior. This is the default
-    #       value if no retry mode is provided.
+    #     * `legacy` - The pre-existing retry behavior.
     #
     #     * `standard` - A standardized set of retry rules across the AWS SDKs.
     #       This includes support for retry quotas, which limit the number of
-    #       unsuccessful retries a client can make.
+    #       unsuccessful retries a client can make. This is the default value
+    #       if no retry mode is provided.
     #
     #     * `adaptive` - A retry mode that includes all the functionality of
     #       `standard` mode along with automatic client side throttling.
@@ -768,6 +769,8 @@ module Aws::RDS
     #   * `hardware-maintenance`
     #
     #   * `os-upgrade`
+    #
+    #   * `serverless-platform-version-update`
     #
     #   * `system-update`
     #
@@ -1965,14 +1968,29 @@ module Aws::RDS
     #
     # @option params [Boolean] :copy_option_group
     #   Specifies whether to copy the DB option group associated with the
-    #   source DB snapshot to the target Amazon Web Services account and
-    #   associate with the target DB snapshot. The associated option group can
-    #   be copied only with cross-account snapshot copy calls.
+    #   source DB snapshot to the target Amazon Web Services account or Amazon
+    #   Web Services Region and associate it with the target DB snapshot.
     #
     # @option params [String] :snapshot_availability_zone
     #   Specifies the name of the Availability Zone where RDS stores the DB
     #   snapshot. This value is valid only for snapshots that RDS stores on a
     #   Dedicated Local Zone.
+    #
+    # @option params [Array<Types::TagSpecification>] :tag_specifications
+    #   Tags to assign to the copied option group. By default, the copied
+    #   option group isn't tagged.
+    #
+    #   Valid Values:
+    #
+    #   * `og` - The copied option group.
+    #
+    #   ^
+    #
+    #   Constraints:
+    #
+    #   * Can only be specified when `CopyOptionGroup` is `true`
+    #
+    #   ^
     #
     # @option params [String] :source_region
     #   The source region of the snapshot. This is only needed when the
@@ -2043,6 +2061,17 @@ module Aws::RDS
     #     snapshot_target: "String",
     #     copy_option_group: false,
     #     snapshot_availability_zone: "String",
+    #     tag_specifications: [
+    #       {
+    #         resource_type: "String",
+    #         tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #       },
+    #     ],
     #     source_region: "String",
     #   })
     #
@@ -2229,6 +2258,7 @@ module Aws::RDS
     #   resp.option_group.source_option_group #=> String
     #   resp.option_group.source_account_id #=> String
     #   resp.option_group.copy_timestamp #=> Time
+    #   resp.option_group.source_region #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CopyOptionGroup AWS API Documentation
     #
@@ -3292,6 +3322,9 @@ module Aws::RDS
     # instance and feature specific values set to all other input parameters
     # of this API.
     #
+    # To create an Aurora PostgreSQL DB cluster without VPC networking, see
+    # `EnableVPCNetworking`.
+    #
     # You can use the `AssociatedRoles` parameter to associate one or more
     # Amazon Web Services Identity and Access Management (IAM) roles with an
     # Aurora DB cluster. Each associated role lets the DB cluster access
@@ -3395,12 +3428,18 @@ module Aws::RDS
     # @option params [Array<String>] :vpc_security_group_ids
     #   A list of EC2 VPC security groups to associate with this DB cluster.
     #
+    #   Valid only for DB clusters inside a VPC. Don't specify it when you
+    #   set `EnableVPCNetworking` to `false`.
+    #
     #   Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters
     #
     # @option params [String] :db_subnet_group_name
     #   A DB subnet group to associate with this DB cluster.
     #
     #   This setting is required to create a Multi-AZ DB cluster.
+    #
+    #   Valid only for DB clusters inside a VPC. Don't specify it when you
+    #   set `EnableVPCNetworking` to `false`.
     #
     #   Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters
     #
@@ -3991,6 +4030,8 @@ module Aws::RDS
     #   For more information, see [ Working with a DB instance in a VPC][1] in
     #   the *Amazon Aurora User Guide.*
     #
+    #   Don't specify it when you set `EnableVPCNetworking` to `false`.
+    #
     #   Valid for Cluster Type: Aurora DB clusters only
     #
     #   Valid Values: `IPV4 | DUAL`
@@ -4250,13 +4291,56 @@ module Aws::RDS
     #   This option is only valid for RDS for PostgreSQL and Aurora PostgreSQL
     #   engines.
     #
+    # @option params [Boolean] :enable_vpc_networking
+    #   Specifies whether VPC networking is enabled for the DB cluster. Set to
+    #   `false` to create a DB cluster without VPC networking.
+    #
+    #   A DB cluster without VPC networking needs an internet access gateway
+    #   and IAM database authentication. Set `EnableInternetAccessGateway` and
+    #   `EnableIAMDatabaseAuthentication` to `true`, and set
+    #   `MasterUserAuthenticationType` to `iam-db-auth`.
+    #
+    #   Default: `true`. With `WithExpressConfiguration`, the default is
+    #   `false`.
+    #
+    #   Valid for Cluster Type: Aurora PostgreSQL DB clusters only
+    #
     # @option params [Boolean] :with_express_configuration
     #   Specifies to create an Aurora DB Cluster with express configuration in
     #   seconds. Express configuration provides a cluster with a writer
     #   instance and feature specific values set to all other input parameters
     #   of this API.
     #
+    #   By default, a DB cluster with express configuration doesn't use VPC
+    #   networking. You connect to it over the internet through an internet
+    #   access gateway.
+    #
+    #   To create the DB cluster in a VPC instead, set `EnableVPCNetworking`
+    #   to `true` and `EnableInternetAccessGateway` to `false`. You can also
+    #   specify `DBSubnetGroupName`, `VpcSecurityGroupIds`, and `NetworkType`.
+    #   If you don't specify `DBSubnetGroupName`, the DB cluster uses the
+    #   default DB subnet group for your Amazon Web Services account, in your
+    #   default VPC.
+    #
+    #   A DB cluster with express configuration in a VPC takes longer to
+    #   become available than one without VPC networking.
+    #
     #   Valid for Cluster Type: Aurora DB clusters
+    #
+    # @option params [Boolean] :enable_internet_access_gateway
+    #   Specifies whether the DB cluster uses an internet access gateway. With
+    #   an internet access gateway, you connect to the DB cluster over the
+    #   internet without a VPC.
+    #
+    #   Set to `true` only when you set `EnableVPCNetworking` to `false`. A DB
+    #   cluster can't use VPC networking and an internet access gateway at
+    #   the same time.
+    #
+    #   Default: `false`. With `WithExpressConfiguration`, the default is
+    #   `true`. To create a DB cluster with express configuration in a VPC,
+    #   set this parameter to `false`.
+    #
+    #   Valid for Cluster Type: Aurora PostgreSQL DB clusters only
     #
     # @option params [Array<Types::DBClusterAssociatedRole>] :associated_roles
     #   A list of Amazon Web Services Identity and Access Management (IAM)
@@ -4475,6 +4559,239 @@ module Aws::RDS
     #     }, 
     #   }
     #
+    # @example Example: To create an Aurora PostgreSQL cluster without VPC networking
+    #
+    #   # The following example creates an Aurora PostgreSQL DB cluster without VPC networking. The cluster uses internet-based
+    #   # connectivity through an internet access gateway. IAM database authentication is required for this configuration.
+    #
+    #   resp = client.create_db_cluster({
+    #     db_cluster_identifier: "sample-cluster", 
+    #     enable_iam_database_authentication: true, 
+    #     enable_internet_access_gateway: true, 
+    #     enable_vpc_networking: false, 
+    #     engine: "aurora-postgresql", 
+    #     engine_version: "17.7", 
+    #     master_user_authentication_type: "iam-db-auth", 
+    #     master_username: "postgres", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     db_cluster: {
+    #       allocated_storage: 1, 
+    #       associated_roles: [
+    #       ], 
+    #       auto_minor_version_upgrade: true, 
+    #       availability_zones: [
+    #         "us-east-1c", 
+    #         "us-east-1d", 
+    #         "us-east-1b", 
+    #       ], 
+    #       backup_retention_period: 1, 
+    #       cluster_create_time: Time.parse("2026-06-29T16:11:56.556Z"), 
+    #       copy_tags_to_snapshot: false, 
+    #       cross_account_clone: false, 
+    #       db_cluster_arn: "arn:aws:rds:us-east-1:123456789012:cluster:sample-cluster", 
+    #       db_cluster_identifier: "sample-cluster", 
+    #       db_cluster_members: [
+    #       ], 
+    #       db_cluster_parameter_group: "default.aurora-postgresql17", 
+    #       database_insights_mode: "standard", 
+    #       db_cluster_resource_id: "cluster-EXAMPLE123456789", 
+    #       deletion_protection: false, 
+    #       domain_memberships: [
+    #       ], 
+    #       engine: "aurora-postgresql", 
+    #       engine_lifecycle_support: "open-source-rds-extended-support", 
+    #       engine_mode: "provisioned", 
+    #       engine_version: "17.7", 
+    #       http_endpoint_enabled: false, 
+    #       iam_database_authentication_enabled: true, 
+    #       internet_access_gateway_enabled: true, 
+    #       local_write_forwarding_status: "disabled", 
+    #       master_username: "postgres", 
+    #       multi_az: false, 
+    #       port: 5432, 
+    #       preferred_backup_window: "10:20-10:50", 
+    #       preferred_maintenance_window: "fri:03:49-fri:04:19", 
+    #       read_replica_identifiers: [
+    #       ], 
+    #       status: "creating", 
+    #       storage_encrypted: false, 
+    #       tag_list: [
+    #       ], 
+    #       vpc_networking_enabled: false, 
+    #       vpc_security_groups: [
+    #       ], 
+    #     }, 
+    #   }
+    #
+    # @example Example: To create an Aurora DB cluster with express configuration without VPC networking
+    #
+    #   # The following example creates an Aurora PostgreSQL DB cluster with express configuration and without VPC networking.
+    #   # Express configuration automatically sets default values and creates a writer instance. Express configuration creates the
+    #   # cluster without VPC networking by default, so you don't need to specify EnableVPCNetworking or
+    #   # EnableInternetAccessGateway. The cluster uses internet-based connectivity through an internet access gateway.
+    #
+    #   resp = client.create_db_cluster({
+    #     db_cluster_identifier: "sample-express-cluster", 
+    #     engine: "aurora-postgresql", 
+    #     with_express_configuration: true, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     db_cluster: {
+    #       allocated_storage: 1, 
+    #       associated_roles: [
+    #       ], 
+    #       auto_minor_version_upgrade: true, 
+    #       availability_zones: [
+    #         "us-east-1c", 
+    #         "us-east-1a", 
+    #         "us-east-1b", 
+    #       ], 
+    #       backup_retention_period: 7, 
+    #       cluster_create_time: Time.parse("2026-06-29T16:15:02Z"), 
+    #       copy_tags_to_snapshot: false, 
+    #       cross_account_clone: false, 
+    #       db_cluster_arn: "arn:aws:rds:us-east-1:123456789012:cluster:sample-express-cluster", 
+    #       db_cluster_identifier: "sample-express-cluster", 
+    #       db_cluster_members: [
+    #         {
+    #           db_cluster_parameter_group_status: "in-sync", 
+    #           db_instance_identifier: "sample-express-cluster-instance-1", 
+    #           is_cluster_writer: true, 
+    #           promotion_tier: 1, 
+    #         }, 
+    #       ], 
+    #       db_cluster_parameter_group: "default.aurora-postgresql17", 
+    #       database_insights_mode: "standard", 
+    #       db_cluster_resource_id: "cluster-EXAMPLE987654321", 
+    #       deletion_protection: false, 
+    #       domain_memberships: [
+    #       ], 
+    #       engine: "aurora-postgresql", 
+    #       engine_lifecycle_support: "open-source-rds-extended-support", 
+    #       engine_mode: "provisioned", 
+    #       engine_version: "17.7", 
+    #       http_endpoint_enabled: false, 
+    #       iam_database_authentication_enabled: true, 
+    #       internet_access_gateway_enabled: true, 
+    #       local_write_forwarding_status: "disabled", 
+    #       master_username: "postgres", 
+    #       multi_az: false, 
+    #       performance_insights_enabled: false, 
+    #       port: 5432, 
+    #       preferred_backup_window: "06:15-06:45", 
+    #       preferred_maintenance_window: "sat:03:44-sat:04:14", 
+    #       read_replica_identifiers: [
+    #       ], 
+    #       serverless_v2_platform_version: "4", 
+    #       serverless_v2_scaling_configuration: {
+    #         max_capacity: 16.0, 
+    #         min_capacity: 0.0, 
+    #         seconds_until_auto_pause: 300, 
+    #       }, 
+    #       status: "creating", 
+    #       storage_encrypted: false, 
+    #       tag_list: [
+    #       ], 
+    #       vpc_networking_enabled: false, 
+    #       vpc_security_groups: [
+    #       ], 
+    #     }, 
+    #   }
+    #
+    # @example Example: To create an Aurora DB cluster with express configuration with VPC networking
+    #
+    #   # The following example creates an Aurora PostgreSQL DB cluster with express configuration in the VPC of the DB subnet
+    #   # group named mysubnetgroup. Express configuration uses an internet access gateway by default, so the example turns on VPC
+    #   # networking and turns off the internet access gateway. Aurora creates the DB cluster with an internet access gateway and
+    #   # then moves it into the VPC, so the response shows the VPC networking change under PendingModifiedValues. Call
+    #   # DescribeDBClusters to check when VPCNetworkingEnabled is true.
+    #
+    #   resp = client.create_db_cluster({
+    #     db_cluster_identifier: "sample-express-cluster", 
+    #     db_subnet_group_name: "mysubnetgroup", 
+    #     enable_internet_access_gateway: false, 
+    #     enable_vpc_networking: true, 
+    #     engine: "aurora-postgresql", 
+    #     network_type: "IPV4", 
+    #     vpc_security_group_ids: [
+    #       "sg-0b91305example", 
+    #     ], 
+    #     with_express_configuration: true, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     db_cluster: {
+    #       allocated_storage: 1, 
+    #       associated_roles: [
+    #       ], 
+    #       auto_minor_version_upgrade: true, 
+    #       availability_zones: [
+    #         "us-east-1c", 
+    #         "us-east-1a", 
+    #         "us-east-1b", 
+    #       ], 
+    #       backup_retention_period: 7, 
+    #       cluster_create_time: Time.parse("2026-06-29T16:25:40Z"), 
+    #       copy_tags_to_snapshot: false, 
+    #       cross_account_clone: false, 
+    #       db_cluster_arn: "arn:aws:rds:us-east-1:123456789012:cluster:sample-express-cluster", 
+    #       db_cluster_identifier: "sample-express-cluster", 
+    #       db_cluster_members: [
+    #         {
+    #           db_cluster_parameter_group_status: "in-sync", 
+    #           db_instance_identifier: "sample-express-cluster-instance-1", 
+    #           is_cluster_writer: true, 
+    #           promotion_tier: 1, 
+    #         }, 
+    #       ], 
+    #       db_cluster_parameter_group: "default.aurora-postgresql17", 
+    #       database_insights_mode: "standard", 
+    #       db_cluster_resource_id: "cluster-EXAMPLE887654321", 
+    #       deletion_protection: false, 
+    #       domain_memberships: [
+    #       ], 
+    #       engine: "aurora-postgresql", 
+    #       engine_lifecycle_support: "open-source-rds-extended-support", 
+    #       engine_mode: "provisioned", 
+    #       engine_version: "17.7", 
+    #       http_endpoint_enabled: false, 
+    #       iam_database_authentication_enabled: true, 
+    #       internet_access_gateway_enabled: true, 
+    #       local_write_forwarding_status: "disabled", 
+    #       master_username: "postgres", 
+    #       multi_az: false, 
+    #       pending_modified_values: {
+    #         internet_access_gateway_enabled: false, 
+    #         vpc_networking_enabled: true, 
+    #       }, 
+    #       performance_insights_enabled: false, 
+    #       port: 5432, 
+    #       preferred_backup_window: "06:15-06:45", 
+    #       preferred_maintenance_window: "sat:03:44-sat:04:14", 
+    #       read_replica_identifiers: [
+    #       ], 
+    #       serverless_v2_platform_version: "4", 
+    #       serverless_v2_scaling_configuration: {
+    #         max_capacity: 16.0, 
+    #         min_capacity: 0.0, 
+    #         seconds_until_auto_pause: 300, 
+    #       }, 
+    #       status: "creating", 
+    #       storage_encrypted: false, 
+    #       tag_list: [
+    #       ], 
+    #       vpc_networking_enabled: false, 
+    #       vpc_security_groups: [
+    #       ], 
+    #     }, 
+    #   }
+    #
     # @example Example: To create an Aurora DB cluster with an associated IAM role for Amazon S3 import
     #
     #   # The following example creates an Aurora PostgreSQL-compatible DB cluster and associates an IAM role for Amazon S3 import
@@ -4633,7 +4950,9 @@ module Aws::RDS
     #       },
     #     ],
     #     master_user_authentication_type: "password", # accepts password, iam-db-auth
+    #     enable_vpc_networking: false,
     #     with_express_configuration: false,
+    #     enable_internet_access_gateway: false,
     #     associated_roles: [
     #       {
     #         role_arn: "IAMRoleArn", # required
@@ -4725,6 +5044,8 @@ module Aws::RDS
     #   resp.db_cluster.pending_modified_values.iops #=> Integer
     #   resp.db_cluster.pending_modified_values.certificate_details.ca_identifier #=> String
     #   resp.db_cluster.pending_modified_values.certificate_details.valid_till #=> Time
+    #   resp.db_cluster.pending_modified_values.vpc_networking_enabled #=> Boolean
+    #   resp.db_cluster.pending_modified_values.internet_access_gateway_enabled #=> Boolean
     #   resp.db_cluster.engine_mode #=> String
     #   resp.db_cluster.scaling_configuration_info.min_capacity #=> Integer
     #   resp.db_cluster.scaling_configuration_info.max_capacity #=> Integer
@@ -6854,6 +7175,8 @@ module Aws::RDS
     #   resp.db_instance.endpoint.address #=> String
     #   resp.db_instance.endpoint.port #=> Integer
     #   resp.db_instance.endpoint.hosted_zone_id #=> String
+    #   resp.db_instance.primary_endpoint.address #=> String
+    #   resp.db_instance.primary_endpoint.hosted_zone_id #=> String
     #   resp.db_instance.allocated_storage #=> Integer
     #   resp.db_instance.instance_create_time #=> Time
     #   resp.db_instance.preferred_backup_window #=> String
@@ -7031,6 +7354,7 @@ module Aws::RDS
     #   resp.db_instance.storage_operation_status #=> String
     #   resp.db_instance.storage_operation_percent_progress #=> Integer
     #   resp.db_instance.db_capacity_reservation_identifier #=> String
+    #   resp.db_instance.vpc_networking_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBInstance AWS API Documentation
     #
@@ -7973,6 +8297,8 @@ module Aws::RDS
     #   resp.db_instance.endpoint.address #=> String
     #   resp.db_instance.endpoint.port #=> Integer
     #   resp.db_instance.endpoint.hosted_zone_id #=> String
+    #   resp.db_instance.primary_endpoint.address #=> String
+    #   resp.db_instance.primary_endpoint.hosted_zone_id #=> String
     #   resp.db_instance.allocated_storage #=> Integer
     #   resp.db_instance.instance_create_time #=> Time
     #   resp.db_instance.preferred_backup_window #=> String
@@ -8150,6 +8476,7 @@ module Aws::RDS
     #   resp.db_instance.storage_operation_status #=> String
     #   resp.db_instance.storage_operation_percent_progress #=> Integer
     #   resp.db_instance.db_capacity_reservation_identifier #=> String
+    #   resp.db_instance.vpc_networking_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBInstanceReadReplica AWS API Documentation
     #
@@ -9809,6 +10136,7 @@ module Aws::RDS
     #   resp.option_group.source_option_group #=> String
     #   resp.option_group.source_account_id #=> String
     #   resp.option_group.copy_timestamp #=> Time
+    #   resp.option_group.source_region #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateOptionGroup AWS API Documentation
     #
@@ -10561,6 +10889,8 @@ module Aws::RDS
     #   resp.db_cluster.pending_modified_values.iops #=> Integer
     #   resp.db_cluster.pending_modified_values.certificate_details.ca_identifier #=> String
     #   resp.db_cluster.pending_modified_values.certificate_details.valid_till #=> Time
+    #   resp.db_cluster.pending_modified_values.vpc_networking_enabled #=> Boolean
+    #   resp.db_cluster.pending_modified_values.internet_access_gateway_enabled #=> Boolean
     #   resp.db_cluster.engine_mode #=> String
     #   resp.db_cluster.scaling_configuration_info.min_capacity #=> Integer
     #   resp.db_cluster.scaling_configuration_info.max_capacity #=> Integer
@@ -11086,6 +11416,8 @@ module Aws::RDS
     #   resp.db_instance.endpoint.address #=> String
     #   resp.db_instance.endpoint.port #=> Integer
     #   resp.db_instance.endpoint.hosted_zone_id #=> String
+    #   resp.db_instance.primary_endpoint.address #=> String
+    #   resp.db_instance.primary_endpoint.hosted_zone_id #=> String
     #   resp.db_instance.allocated_storage #=> Integer
     #   resp.db_instance.instance_create_time #=> Time
     #   resp.db_instance.preferred_backup_window #=> String
@@ -11263,6 +11595,7 @@ module Aws::RDS
     #   resp.db_instance.storage_operation_status #=> String
     #   resp.db_instance.storage_operation_percent_progress #=> Integer
     #   resp.db_instance.db_capacity_reservation_identifier #=> String
+    #   resp.db_instance.vpc_networking_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBInstance AWS API Documentation
     #
@@ -14373,6 +14706,8 @@ module Aws::RDS
     #   resp.db_clusters[0].pending_modified_values.iops #=> Integer
     #   resp.db_clusters[0].pending_modified_values.certificate_details.ca_identifier #=> String
     #   resp.db_clusters[0].pending_modified_values.certificate_details.valid_till #=> Time
+    #   resp.db_clusters[0].pending_modified_values.vpc_networking_enabled #=> Boolean
+    #   resp.db_clusters[0].pending_modified_values.internet_access_gateway_enabled #=> Boolean
     #   resp.db_clusters[0].engine_mode #=> String
     #   resp.db_clusters[0].scaling_configuration_info.min_capacity #=> Integer
     #   resp.db_clusters[0].scaling_configuration_info.max_capacity #=> Integer
@@ -15050,6 +15385,8 @@ module Aws::RDS
     #   resp.db_instances[0].endpoint.address #=> String
     #   resp.db_instances[0].endpoint.port #=> Integer
     #   resp.db_instances[0].endpoint.hosted_zone_id #=> String
+    #   resp.db_instances[0].primary_endpoint.address #=> String
+    #   resp.db_instances[0].primary_endpoint.hosted_zone_id #=> String
     #   resp.db_instances[0].allocated_storage #=> Integer
     #   resp.db_instances[0].instance_create_time #=> Time
     #   resp.db_instances[0].preferred_backup_window #=> String
@@ -15227,6 +15564,7 @@ module Aws::RDS
     #   resp.db_instances[0].storage_operation_status #=> String
     #   resp.db_instances[0].storage_operation_percent_progress #=> Integer
     #   resp.db_instances[0].db_capacity_reservation_identifier #=> String
+    #   resp.db_instances[0].vpc_networking_enabled #=> Boolean
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -18298,6 +18636,7 @@ module Aws::RDS
     #   resp.option_group_options[0].option_group_option_versions[0].version #=> String
     #   resp.option_group_options[0].option_group_option_versions[0].is_default #=> Boolean
     #   resp.option_group_options[0].copyable_cross_account #=> Boolean
+    #   resp.option_group_options[0].copyable_cross_region #=> Boolean
     #   resp.marker #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeOptionGroupOptions AWS API Documentation
@@ -18458,6 +18797,7 @@ module Aws::RDS
     #   resp.option_groups_list[0].source_option_group #=> String
     #   resp.option_groups_list[0].source_account_id #=> String
     #   resp.option_groups_list[0].copy_timestamp #=> Time
+    #   resp.option_groups_list[0].source_region #=> String
     #   resp.marker #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeOptionGroups AWS API Documentation
@@ -20073,6 +20413,8 @@ module Aws::RDS
     #   resp.db_cluster.pending_modified_values.iops #=> Integer
     #   resp.db_cluster.pending_modified_values.certificate_details.ca_identifier #=> String
     #   resp.db_cluster.pending_modified_values.certificate_details.valid_till #=> Time
+    #   resp.db_cluster.pending_modified_values.vpc_networking_enabled #=> Boolean
+    #   resp.db_cluster.pending_modified_values.internet_access_gateway_enabled #=> Boolean
     #   resp.db_cluster.engine_mode #=> String
     #   resp.db_cluster.scaling_configuration_info.min_capacity #=> Integer
     #   resp.db_cluster.scaling_configuration_info.max_capacity #=> Integer
@@ -21001,6 +21343,11 @@ module Aws::RDS
     # cluster. You can change one or more settings by specifying these
     # parameters and the new values in the request.
     #
+    # To change the VPC networking configuration of an Aurora PostgreSQL DB
+    # cluster, see `EnableVPCNetworking`. To move an Aurora MySQL or Aurora
+    # PostgreSQL DB cluster to a different DB subnet group, in the same VPC
+    # or a different VPC, see `DBSubnetGroupName`.
+    #
     # For more information on Amazon Aurora DB clusters, see [ What is
     # Amazon Aurora?][1] in the *Amazon Aurora User Guide*.
     #
@@ -21077,6 +21424,19 @@ module Aws::RDS
     #
     # @option params [Array<String>] :vpc_security_group_ids
     #   A list of EC2 VPC security groups to associate with this DB cluster.
+    #
+    #   Valid only for DB clusters inside a VPC. For a DB cluster that uses an
+    #   internet access gateway, specify this parameter only when you
+    #   re-enable VPC networking. Set `EnableVPCNetworking` to `true` and
+    #   `EnableInternetAccessGateway` to `false`.
+    #
+    #   When you move the DB cluster to a different DB subnet group with
+    #   `DBSubnetGroupName`, or re-enable VPC networking, the security groups
+    #   must belong to the VPC of the DB subnet group. If you leave out this
+    #   parameter in those requests, the DB cluster uses the default security
+    #   group of that VPC, even for a move within the same VPC. To keep the
+    #   current security groups, specify their IDs. If the VPC is a shared
+    #   VPC, you must specify this parameter.
     #
     #   Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters
     #
@@ -21468,6 +21828,17 @@ module Aws::RDS
     #   the DB cluster. A `DBSubnetGroup` can support only the IPv4 protocol
     #   or the IPv4 and the IPv6 protocols (`DUAL`).
     #
+    #   If the subnets in the DB subnet group support only the IPv4 protocol,
+    #   you can't set this parameter to `DUAL`.
+    #
+    #   If you don't specify this parameter when you move the DB cluster to a
+    #   different DB subnet group with `DBSubnetGroupName`, the DB cluster
+    #   uses `IPV4`, even if it currently uses `DUAL`. To keep dual-stack
+    #   mode, specify `DUAL`. The new DB subnet group must support the network
+    #   type.
+    #
+    #   Don't specify it when you set `EnableVPCNetworking` to `false`.
+    #
     #   For more information, see [ Working with a DB instance in a VPC][1] in
     #   the *Amazon Aurora User Guide.*
     #
@@ -21777,6 +22148,119 @@ module Aws::RDS
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/extended-support.html
     #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support.html
     #
+    # @option params [Boolean] :enable_internet_access_gateway
+    #   Specifies whether the DB cluster uses an internet access gateway. With
+    #   an internet access gateway, you connect to the DB cluster over the
+    #   internet without a VPC.
+    #
+    #   Set to `true` together with `EnableVPCNetworking` set to `false` to
+    #   move the DB cluster out of its VPC. Set to `false` together with
+    #   `EnableVPCNetworking` set to `true` to move the DB cluster into a VPC.
+    #   A DB cluster can't use VPC networking and an internet access gateway
+    #   at the same time.
+    #
+    #   Valid for Cluster Type: Aurora PostgreSQL DB clusters only
+    #
+    # @option params [Boolean] :enable_vpc_networking
+    #   Specifies whether VPC networking is enabled for the DB cluster. Set to
+    #   `false` to disable VPC networking for the DB cluster.
+    #
+    #   A DB cluster without VPC networking needs an internet access gateway
+    #   and IAM database authentication. Set `EnableInternetAccessGateway` and
+    #   `EnableIAMDatabaseAuthentication` to `true`, and set
+    #   `MasterUserAuthenticationType` to `iam-db-auth`.
+    #
+    #   Set to `true` to re-enable VPC networking for a DB cluster that uses
+    #   an internet access gateway. You can also specify `DBSubnetGroupName`,
+    #   `VpcSecurityGroupIds`, and `NetworkType`.
+    #
+    #   The change is applied during the next maintenance window unless
+    #   `ApplyImmediately` is enabled.
+    #
+    #   To move a DB cluster that already uses VPC networking to a different
+    #   DB subnet group, you don't need to set this parameter. Specify
+    #   `DBSubnetGroupName` instead.
+    #
+    #   Valid for Cluster Type: Aurora PostgreSQL DB clusters only
+    #
+    # @option params [String] :db_subnet_group_name
+    #   The DB subnet group for the DB cluster.
+    #
+    #   Specify this parameter for one of these purposes:
+    #
+    #   * To move an Aurora MySQL or Aurora PostgreSQL DB cluster that uses
+    #     VPC networking to a different DB subnet group. The new DB subnet
+    #     group can be in the same VPC or in a different VPC.
+    #
+    #   * To enable VPC networking for an Aurora PostgreSQL DB cluster that
+    #     uses an internet access gateway. Set `EnableVPCNetworking` to `true`
+    #     and `EnableInternetAccessGateway` to `false`.
+    #
+    #   When you move a DB cluster to a different DB subnet group, you don't
+    #   need to set `EnableVPCNetworking`. If you set it to `false`, Aurora
+    #   rejects the request. Security groups in `VpcSecurityGroupIds` must
+    #   belong to the VPC of the new DB subnet group. If you don't specify
+    #   `VpcSecurityGroupIds`, the DB cluster uses the default security group
+    #   of that VPC. If you don't specify `NetworkType`, the DB cluster uses
+    #   `IPV4`. Both defaults apply even if the DB cluster stays in the same
+    #   VPC.
+    #
+    #   An outage occurs during the move. The DB cluster uses VPC networking
+    #   before, during, and after the move, and the move doesn't turn on an
+    #   internet access gateway. If you specify the DB subnet group that the
+    #   DB cluster already uses, the DB cluster isn't moved. The change is
+    #   applied during the next maintenance window unless `ApplyImmediately`
+    #   is enabled.
+    #
+    #   Aurora rejects the move if the DB cluster:
+    #
+    #   * Is a member of an Aurora global database.
+    #
+    #   * Uses Aurora Limitless Database.
+    #
+    #   * Is a cross-Region or in-Region read replica, or is the source of
+    #     one. Aurora Replicas in the DB cluster don't block the move.
+    #
+    #   * Has enhanced binlog (Aurora MySQL), enhanced logical replication
+    #     (Aurora PostgreSQL), or Babelfish turned on.
+    #
+    #   * Is a target of an RDS Proxy.
+    #
+    #   * Is part of a blue/green deployment.
+    #
+    #   * Is the source of a zero-ETL integration.
+    #
+    #   * Has a database activity stream that isn't stopped.
+    #
+    #   The move also fails if the DB cluster is switching to a different DB
+    #   cluster parameter group, or if a change to enhanced binlog, enhanced
+    #   logical replication, or Babelfish is pending in its DB cluster
+    #   parameter group. Apply the change, and reboot if required, before you
+    #   move the DB cluster.
+    #
+    #   If the move fails, Aurora returns the DB cluster to its original DB
+    #   subnet group and cancels the change. To try again, call
+    #   `ModifyDBCluster` again.
+    #
+    #   Aurora can't always return the DB cluster. If the move fails after
+    #   Aurora starts to update the DB cluster endpoints, or if the rollback
+    #   fails, the change doesn't complete. If Aurora can't restore the
+    #   original network configuration, the DB instances in the DB cluster
+    #   enter the `incompatible-network` state. In these cases, contact Amazon
+    #   Web Services Support.
+    #
+    #   Valid for Cluster Type: Aurora DB clusters only
+    #
+    #   Default: If you don't specify this parameter when you enable VPC
+    #   networking, the DB cluster uses the default DB subnet group for your
+    #   Amazon Web Services account.
+    #
+    #   Constraints: The DB subnet group must contain a subnet in each
+    #   Availability Zone that the DB instances in the DB cluster are located
+    #   in.
+    #
+    #   Example: `mydbsubnetgroup`
+    #
     # @return [Types::ModifyDBClusterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ModifyDBClusterResult#db_cluster #db_cluster} => Types::DBCluster
@@ -21856,6 +22340,269 @@ module Aws::RDS
     #     }, 
     #   }
     #
+    # @example Example: To modify a DB cluster to disable VPC networking
+    #
+    #   # The following example modifies an Aurora PostgreSQL DB cluster to disable VPC networking and connect through an internet
+    #   # access gateway instead. The example also turns on IAM database authentication, which a cluster without VPC networking
+    #   # requires. Because Aurora applies the change asynchronously, the response still shows the current networking settings,
+    #   # and PendingModifiedValues shows the new ones. Call DescribeDBClusters to check when VPCNetworkingEnabled is false.
+    #
+    #   resp = client.modify_db_cluster({
+    #     apply_immediately: true, 
+    #     db_cluster_identifier: "sample-cluster", 
+    #     enable_iam_database_authentication: true, 
+    #     enable_internet_access_gateway: true, 
+    #     enable_vpc_networking: false, 
+    #     master_user_authentication_type: "iam-db-auth", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     db_cluster: {
+    #       allocated_storage: 1, 
+    #       associated_roles: [
+    #       ], 
+    #       auto_minor_version_upgrade: true, 
+    #       availability_zones: [
+    #         "us-east-1c", 
+    #         "us-east-1d", 
+    #         "us-east-1b", 
+    #       ], 
+    #       backup_retention_period: 7, 
+    #       cluster_create_time: Time.parse("2026-06-24T18:56:02.248Z"), 
+    #       copy_tags_to_snapshot: false, 
+    #       cross_account_clone: false, 
+    #       db_cluster_arn: "arn:aws:rds:us-east-1:123456789012:cluster:sample-cluster", 
+    #       db_cluster_identifier: "sample-cluster", 
+    #       db_cluster_members: [
+    #         {
+    #           db_cluster_parameter_group_status: "in-sync", 
+    #           db_instance_identifier: "sample-cluster-instance-1", 
+    #           is_cluster_writer: true, 
+    #           promotion_tier: 1, 
+    #         }, 
+    #       ], 
+    #       db_cluster_parameter_group: "default.aurora-postgresql17", 
+    #       db_subnet_group: "default", 
+    #       database_insights_mode: "standard", 
+    #       db_cluster_resource_id: "cluster-EXAMPLE123456789", 
+    #       deletion_protection: false, 
+    #       domain_memberships: [
+    #       ], 
+    #       earliest_restorable_time: Time.parse("2026-06-24T18:57:17.573Z"), 
+    #       endpoint: "sample-cluster.cluster-############.us-east-1.rds.amazonaws.com", 
+    #       engine: "aurora-postgresql", 
+    #       engine_lifecycle_support: "open-source-rds-extended-support", 
+    #       engine_mode: "provisioned", 
+    #       engine_version: "17.7", 
+    #       hosted_zone_id: "Z1RLNU0EXAMPLE", 
+    #       http_endpoint_enabled: false, 
+    #       iam_database_authentication_enabled: false, 
+    #       internet_access_gateway_enabled: false, 
+    #       latest_restorable_time: Time.parse("2026-06-29T22:22:17.460Z"), 
+    #       local_write_forwarding_status: "disabled", 
+    #       master_username: "postgres", 
+    #       multi_az: false, 
+    #       network_type: "IPV4", 
+    #       pending_modified_values: {
+    #         iam_database_authentication_enabled: true, 
+    #         internet_access_gateway_enabled: true, 
+    #         vpc_networking_enabled: false, 
+    #       }, 
+    #       port: 5432, 
+    #       preferred_backup_window: "03:05-03:35", 
+    #       preferred_maintenance_window: "wed:03:36-wed:04:06", 
+    #       read_replica_identifiers: [
+    #       ], 
+    #       reader_endpoint: "sample-cluster.cluster-ro-############.us-east-1.rds.amazonaws.com", 
+    #       status: "available", 
+    #       storage_encrypted: false, 
+    #       tag_list: [
+    #       ], 
+    #       vpc_networking_enabled: true, 
+    #       vpc_security_groups: [
+    #         {
+    #           status: "active", 
+    #           vpc_security_group_id: "sg-0b91305example", 
+    #         }, 
+    #       ], 
+    #     }, 
+    #   }
+    #
+    # @example Example: To modify a DB cluster to re-enable VPC networking
+    #
+    #   # The following example modifies an Aurora PostgreSQL DB cluster that uses an internet access gateway so that it uses VPC
+    #   # networking instead. Aurora moves the DB cluster into the DB subnet group named default, with one security group and the
+    #   # IPV4 network type. Because Aurora applies the change asynchronously, the response still shows the current networking
+    #   # settings, and PendingModifiedValues shows the new ones. Call DescribeDBClusters to check when VPCNetworkingEnabled is
+    #   # true.
+    #
+    #   resp = client.modify_db_cluster({
+    #     apply_immediately: true, 
+    #     db_cluster_identifier: "sample-cluster", 
+    #     db_subnet_group_name: "default", 
+    #     enable_internet_access_gateway: false, 
+    #     enable_vpc_networking: true, 
+    #     network_type: "IPV4", 
+    #     vpc_security_group_ids: [
+    #       "sg-0b91305example", 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     db_cluster: {
+    #       allocated_storage: 1, 
+    #       associated_roles: [
+    #       ], 
+    #       auto_minor_version_upgrade: true, 
+    #       availability_zones: [
+    #         "us-east-1c", 
+    #         "us-east-1d", 
+    #         "us-east-1b", 
+    #       ], 
+    #       backup_retention_period: 7, 
+    #       cluster_create_time: Time.parse("2026-06-24T18:56:02.248Z"), 
+    #       copy_tags_to_snapshot: false, 
+    #       cross_account_clone: false, 
+    #       db_cluster_arn: "arn:aws:rds:us-east-1:123456789012:cluster:sample-cluster", 
+    #       db_cluster_identifier: "sample-cluster", 
+    #       db_cluster_members: [
+    #         {
+    #           db_cluster_parameter_group_status: "in-sync", 
+    #           db_instance_identifier: "sample-cluster-instance-1", 
+    #           is_cluster_writer: true, 
+    #           promotion_tier: 1, 
+    #         }, 
+    #       ], 
+    #       db_cluster_parameter_group: "default.aurora-postgresql17", 
+    #       database_insights_mode: "standard", 
+    #       db_cluster_resource_id: "cluster-EXAMPLE123456789", 
+    #       deletion_protection: false, 
+    #       domain_memberships: [
+    #       ], 
+    #       earliest_restorable_time: Time.parse("2026-06-24T18:57:17.573Z"), 
+    #       endpoint: "sample-cluster.cluster-############.us-east-1.rds.amazonaws.com", 
+    #       engine: "aurora-postgresql", 
+    #       engine_lifecycle_support: "open-source-rds-extended-support", 
+    #       engine_mode: "provisioned", 
+    #       engine_version: "17.7", 
+    #       hosted_zone_id: "Z1RLNU0EXAMPLE", 
+    #       http_endpoint_enabled: false, 
+    #       iam_database_authentication_enabled: true, 
+    #       internet_access_gateway_enabled: true, 
+    #       latest_restorable_time: Time.parse("2026-06-29T22:22:17.460Z"), 
+    #       local_write_forwarding_status: "disabled", 
+    #       master_username: "postgres", 
+    #       multi_az: false, 
+    #       pending_modified_values: {
+    #         internet_access_gateway_enabled: false, 
+    #         vpc_networking_enabled: true, 
+    #       }, 
+    #       port: 5432, 
+    #       preferred_backup_window: "03:05-03:35", 
+    #       preferred_maintenance_window: "wed:03:36-wed:04:06", 
+    #       read_replica_identifiers: [
+    #       ], 
+    #       reader_endpoint: "sample-cluster.cluster-ro-############.us-east-1.rds.amazonaws.com", 
+    #       status: "available", 
+    #       storage_encrypted: false, 
+    #       tag_list: [
+    #       ], 
+    #       vpc_networking_enabled: false, 
+    #       vpc_security_groups: [
+    #       ], 
+    #     }, 
+    #   }
+    #
+    # @example Example: To move a DB cluster to a different VPC
+    #
+    #   # The following example moves an Aurora PostgreSQL DB cluster that uses VPC networking to a different VPC. The DB subnet
+    #   # group and the security group belong to the new VPC. EnableVPCNetworking isn't set because the DB cluster already uses
+    #   # VPC networking. Because Aurora applies the move asynchronously, the response still shows the current DB subnet group and
+    #   # security group, and PendingModifiedValues shows the pending networking change. Call DescribeDBClusters to check whether
+    #   # the move has completed.
+    #
+    #   resp = client.modify_db_cluster({
+    #     apply_immediately: true, 
+    #     db_cluster_identifier: "sample-cluster", 
+    #     db_subnet_group_name: "mysubnetgroup-vpc2", 
+    #     vpc_security_group_ids: [
+    #       "sg-0d7e4a2example", 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     db_cluster: {
+    #       allocated_storage: 1, 
+    #       associated_roles: [
+    #       ], 
+    #       auto_minor_version_upgrade: true, 
+    #       availability_zones: [
+    #         "us-east-1c", 
+    #         "us-east-1d", 
+    #         "us-east-1b", 
+    #       ], 
+    #       backup_retention_period: 7, 
+    #       cluster_create_time: Time.parse("2026-06-24T18:56:02.248Z"), 
+    #       copy_tags_to_snapshot: false, 
+    #       cross_account_clone: false, 
+    #       db_cluster_arn: "arn:aws:rds:us-east-1:123456789012:cluster:sample-cluster", 
+    #       db_cluster_identifier: "sample-cluster", 
+    #       db_cluster_members: [
+    #         {
+    #           db_cluster_parameter_group_status: "in-sync", 
+    #           db_instance_identifier: "sample-cluster-instance-1", 
+    #           is_cluster_writer: true, 
+    #           promotion_tier: 1, 
+    #         }, 
+    #       ], 
+    #       db_cluster_parameter_group: "default.aurora-postgresql17", 
+    #       db_subnet_group: "mysubnetgroup", 
+    #       database_insights_mode: "standard", 
+    #       db_cluster_resource_id: "cluster-EXAMPLE123456789", 
+    #       deletion_protection: false, 
+    #       domain_memberships: [
+    #       ], 
+    #       earliest_restorable_time: Time.parse("2026-06-24T18:57:17.573Z"), 
+    #       endpoint: "sample-cluster.cluster-############.us-east-1.rds.amazonaws.com", 
+    #       engine: "aurora-postgresql", 
+    #       engine_lifecycle_support: "open-source-rds-extended-support", 
+    #       engine_mode: "provisioned", 
+    #       engine_version: "17.7", 
+    #       hosted_zone_id: "Z1RLNU0EXAMPLE", 
+    #       http_endpoint_enabled: false, 
+    #       iam_database_authentication_enabled: false, 
+    #       internet_access_gateway_enabled: false, 
+    #       latest_restorable_time: Time.parse("2026-06-29T22:22:17.460Z"), 
+    #       local_write_forwarding_status: "disabled", 
+    #       master_username: "postgres", 
+    #       multi_az: false, 
+    #       network_type: "IPV4", 
+    #       pending_modified_values: {
+    #         vpc_networking_enabled: true, 
+    #       }, 
+    #       port: 5432, 
+    #       preferred_backup_window: "03:05-03:35", 
+    #       preferred_maintenance_window: "wed:03:36-wed:04:06", 
+    #       read_replica_identifiers: [
+    #       ], 
+    #       reader_endpoint: "sample-cluster.cluster-ro-############.us-east-1.rds.amazonaws.com", 
+    #       status: "available", 
+    #       storage_encrypted: false, 
+    #       tag_list: [
+    #       ], 
+    #       vpc_networking_enabled: true, 
+    #       vpc_security_groups: [
+    #         {
+    #           status: "active", 
+    #           vpc_security_group_id: "sg-0b91305example", 
+    #         }, 
+    #       ], 
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.modify_db_cluster({
@@ -21921,6 +22668,9 @@ module Aws::RDS
     #     ca_certificate_identifier: "String",
     #     master_user_authentication_type: "password", # accepts password, iam-db-auth
     #     engine_lifecycle_support: "String",
+    #     enable_internet_access_gateway: false,
+    #     enable_vpc_networking: false,
+    #     db_subnet_group_name: "String",
     #   })
     #
     # @example Response structure
@@ -22005,6 +22755,8 @@ module Aws::RDS
     #   resp.db_cluster.pending_modified_values.iops #=> Integer
     #   resp.db_cluster.pending_modified_values.certificate_details.ca_identifier #=> String
     #   resp.db_cluster.pending_modified_values.certificate_details.valid_till #=> Time
+    #   resp.db_cluster.pending_modified_values.vpc_networking_enabled #=> Boolean
+    #   resp.db_cluster.pending_modified_values.internet_access_gateway_enabled #=> Boolean
     #   resp.db_cluster.engine_mode #=> String
     #   resp.db_cluster.scaling_configuration_info.min_capacity #=> Integer
     #   resp.db_cluster.scaling_configuration_info.max_capacity #=> Integer
@@ -23928,6 +24680,8 @@ module Aws::RDS
     #   resp.db_instance.endpoint.address #=> String
     #   resp.db_instance.endpoint.port #=> Integer
     #   resp.db_instance.endpoint.hosted_zone_id #=> String
+    #   resp.db_instance.primary_endpoint.address #=> String
+    #   resp.db_instance.primary_endpoint.hosted_zone_id #=> String
     #   resp.db_instance.allocated_storage #=> Integer
     #   resp.db_instance.instance_create_time #=> Time
     #   resp.db_instance.preferred_backup_window #=> String
@@ -24105,6 +24859,7 @@ module Aws::RDS
     #   resp.db_instance.storage_operation_status #=> String
     #   resp.db_instance.storage_operation_percent_progress #=> Integer
     #   resp.db_instance.db_capacity_reservation_identifier #=> String
+    #   resp.db_instance.vpc_networking_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBInstance AWS API Documentation
     #
@@ -25597,6 +26352,7 @@ module Aws::RDS
     #   resp.option_group.source_option_group #=> String
     #   resp.option_group.source_account_id #=> String
     #   resp.option_group.copy_timestamp #=> Time
+    #   resp.option_group.source_region #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyOptionGroup AWS API Documentation
     #
@@ -25933,6 +26689,8 @@ module Aws::RDS
     #   resp.db_instance.endpoint.address #=> String
     #   resp.db_instance.endpoint.port #=> Integer
     #   resp.db_instance.endpoint.hosted_zone_id #=> String
+    #   resp.db_instance.primary_endpoint.address #=> String
+    #   resp.db_instance.primary_endpoint.hosted_zone_id #=> String
     #   resp.db_instance.allocated_storage #=> Integer
     #   resp.db_instance.instance_create_time #=> Time
     #   resp.db_instance.preferred_backup_window #=> String
@@ -26110,6 +26868,7 @@ module Aws::RDS
     #   resp.db_instance.storage_operation_status #=> String
     #   resp.db_instance.storage_operation_percent_progress #=> Integer
     #   resp.db_instance.db_capacity_reservation_identifier #=> String
+    #   resp.db_instance.vpc_networking_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/PromoteReadReplica AWS API Documentation
     #
@@ -26226,6 +26985,8 @@ module Aws::RDS
     #   resp.db_cluster.pending_modified_values.iops #=> Integer
     #   resp.db_cluster.pending_modified_values.certificate_details.ca_identifier #=> String
     #   resp.db_cluster.pending_modified_values.certificate_details.valid_till #=> Time
+    #   resp.db_cluster.pending_modified_values.vpc_networking_enabled #=> Boolean
+    #   resp.db_cluster.pending_modified_values.internet_access_gateway_enabled #=> Boolean
     #   resp.db_cluster.engine_mode #=> String
     #   resp.db_cluster.scaling_configuration_info.min_capacity #=> Integer
     #   resp.db_cluster.scaling_configuration_info.max_capacity #=> Integer
@@ -26535,6 +27296,8 @@ module Aws::RDS
     #   resp.db_cluster.pending_modified_values.iops #=> Integer
     #   resp.db_cluster.pending_modified_values.certificate_details.ca_identifier #=> String
     #   resp.db_cluster.pending_modified_values.certificate_details.valid_till #=> Time
+    #   resp.db_cluster.pending_modified_values.vpc_networking_enabled #=> Boolean
+    #   resp.db_cluster.pending_modified_values.internet_access_gateway_enabled #=> Boolean
     #   resp.db_cluster.engine_mode #=> String
     #   resp.db_cluster.scaling_configuration_info.min_capacity #=> Integer
     #   resp.db_cluster.scaling_configuration_info.max_capacity #=> Integer
@@ -26695,6 +27458,8 @@ module Aws::RDS
     #   resp.db_instance.endpoint.address #=> String
     #   resp.db_instance.endpoint.port #=> Integer
     #   resp.db_instance.endpoint.hosted_zone_id #=> String
+    #   resp.db_instance.primary_endpoint.address #=> String
+    #   resp.db_instance.primary_endpoint.hosted_zone_id #=> String
     #   resp.db_instance.allocated_storage #=> Integer
     #   resp.db_instance.instance_create_time #=> Time
     #   resp.db_instance.preferred_backup_window #=> String
@@ -26872,6 +27637,7 @@ module Aws::RDS
     #   resp.db_instance.storage_operation_status #=> String
     #   resp.db_instance.storage_operation_percent_progress #=> Integer
     #   resp.db_instance.db_capacity_reservation_identifier #=> String
+    #   resp.db_instance.vpc_networking_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RebootDBInstance AWS API Documentation
     #
@@ -28206,6 +28972,8 @@ module Aws::RDS
     #   resp.db_cluster.pending_modified_values.iops #=> Integer
     #   resp.db_cluster.pending_modified_values.certificate_details.ca_identifier #=> String
     #   resp.db_cluster.pending_modified_values.certificate_details.valid_till #=> Time
+    #   resp.db_cluster.pending_modified_values.vpc_networking_enabled #=> Boolean
+    #   resp.db_cluster.pending_modified_values.internet_access_gateway_enabled #=> Boolean
     #   resp.db_cluster.engine_mode #=> String
     #   resp.db_cluster.scaling_configuration_info.min_capacity #=> Integer
     #   resp.db_cluster.scaling_configuration_info.max_capacity #=> Integer
@@ -29275,6 +30043,8 @@ module Aws::RDS
     #   resp.db_cluster.pending_modified_values.iops #=> Integer
     #   resp.db_cluster.pending_modified_values.certificate_details.ca_identifier #=> String
     #   resp.db_cluster.pending_modified_values.certificate_details.valid_till #=> Time
+    #   resp.db_cluster.pending_modified_values.vpc_networking_enabled #=> Boolean
+    #   resp.db_cluster.pending_modified_values.internet_access_gateway_enabled #=> Boolean
     #   resp.db_cluster.engine_mode #=> String
     #   resp.db_cluster.scaling_configuration_info.min_capacity #=> Integer
     #   resp.db_cluster.scaling_configuration_info.max_capacity #=> Integer
@@ -30267,6 +31037,8 @@ module Aws::RDS
     #   resp.db_cluster.pending_modified_values.iops #=> Integer
     #   resp.db_cluster.pending_modified_values.certificate_details.ca_identifier #=> String
     #   resp.db_cluster.pending_modified_values.certificate_details.valid_till #=> Time
+    #   resp.db_cluster.pending_modified_values.vpc_networking_enabled #=> Boolean
+    #   resp.db_cluster.pending_modified_values.internet_access_gateway_enabled #=> Boolean
     #   resp.db_cluster.engine_mode #=> String
     #   resp.db_cluster.scaling_configuration_info.min_capacity #=> Integer
     #   resp.db_cluster.scaling_configuration_info.max_capacity #=> Integer
@@ -31257,6 +32029,8 @@ module Aws::RDS
     #   resp.db_instance.endpoint.address #=> String
     #   resp.db_instance.endpoint.port #=> Integer
     #   resp.db_instance.endpoint.hosted_zone_id #=> String
+    #   resp.db_instance.primary_endpoint.address #=> String
+    #   resp.db_instance.primary_endpoint.hosted_zone_id #=> String
     #   resp.db_instance.allocated_storage #=> Integer
     #   resp.db_instance.instance_create_time #=> Time
     #   resp.db_instance.preferred_backup_window #=> String
@@ -31434,6 +32208,7 @@ module Aws::RDS
     #   resp.db_instance.storage_operation_status #=> String
     #   resp.db_instance.storage_operation_percent_progress #=> Integer
     #   resp.db_instance.db_capacity_reservation_identifier #=> String
+    #   resp.db_instance.vpc_networking_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceFromDBSnapshot AWS API Documentation
     #
@@ -32175,6 +32950,8 @@ module Aws::RDS
     #   resp.db_instance.endpoint.address #=> String
     #   resp.db_instance.endpoint.port #=> Integer
     #   resp.db_instance.endpoint.hosted_zone_id #=> String
+    #   resp.db_instance.primary_endpoint.address #=> String
+    #   resp.db_instance.primary_endpoint.hosted_zone_id #=> String
     #   resp.db_instance.allocated_storage #=> Integer
     #   resp.db_instance.instance_create_time #=> Time
     #   resp.db_instance.preferred_backup_window #=> String
@@ -32352,6 +33129,7 @@ module Aws::RDS
     #   resp.db_instance.storage_operation_status #=> String
     #   resp.db_instance.storage_operation_percent_progress #=> Integer
     #   resp.db_instance.db_capacity_reservation_identifier #=> String
+    #   resp.db_instance.vpc_networking_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceFromS3 AWS API Documentation
     #
@@ -33343,6 +34121,8 @@ module Aws::RDS
     #   resp.db_instance.endpoint.address #=> String
     #   resp.db_instance.endpoint.port #=> Integer
     #   resp.db_instance.endpoint.hosted_zone_id #=> String
+    #   resp.db_instance.primary_endpoint.address #=> String
+    #   resp.db_instance.primary_endpoint.hosted_zone_id #=> String
     #   resp.db_instance.allocated_storage #=> Integer
     #   resp.db_instance.instance_create_time #=> Time
     #   resp.db_instance.preferred_backup_window #=> String
@@ -33520,6 +34300,7 @@ module Aws::RDS
     #   resp.db_instance.storage_operation_status #=> String
     #   resp.db_instance.storage_operation_percent_progress #=> Integer
     #   resp.db_instance.db_capacity_reservation_identifier #=> String
+    #   resp.db_instance.vpc_networking_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceToPointInTime AWS API Documentation
     #
@@ -33864,6 +34645,8 @@ module Aws::RDS
     #   resp.db_cluster.pending_modified_values.iops #=> Integer
     #   resp.db_cluster.pending_modified_values.certificate_details.ca_identifier #=> String
     #   resp.db_cluster.pending_modified_values.certificate_details.valid_till #=> Time
+    #   resp.db_cluster.pending_modified_values.vpc_networking_enabled #=> Boolean
+    #   resp.db_cluster.pending_modified_values.internet_access_gateway_enabled #=> Boolean
     #   resp.db_cluster.engine_mode #=> String
     #   resp.db_cluster.scaling_configuration_info.min_capacity #=> Integer
     #   resp.db_cluster.scaling_configuration_info.max_capacity #=> Integer
@@ -34032,6 +34815,8 @@ module Aws::RDS
     #   resp.db_instance.endpoint.address #=> String
     #   resp.db_instance.endpoint.port #=> Integer
     #   resp.db_instance.endpoint.hosted_zone_id #=> String
+    #   resp.db_instance.primary_endpoint.address #=> String
+    #   resp.db_instance.primary_endpoint.hosted_zone_id #=> String
     #   resp.db_instance.allocated_storage #=> Integer
     #   resp.db_instance.instance_create_time #=> Time
     #   resp.db_instance.preferred_backup_window #=> String
@@ -34209,6 +34994,7 @@ module Aws::RDS
     #   resp.db_instance.storage_operation_status #=> String
     #   resp.db_instance.storage_operation_percent_progress #=> Integer
     #   resp.db_instance.db_capacity_reservation_identifier #=> String
+    #   resp.db_instance.vpc_networking_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StartDBInstance AWS API Documentation
     #
@@ -34785,6 +35571,8 @@ module Aws::RDS
     #   resp.db_cluster.pending_modified_values.iops #=> Integer
     #   resp.db_cluster.pending_modified_values.certificate_details.ca_identifier #=> String
     #   resp.db_cluster.pending_modified_values.certificate_details.valid_till #=> Time
+    #   resp.db_cluster.pending_modified_values.vpc_networking_enabled #=> Boolean
+    #   resp.db_cluster.pending_modified_values.internet_access_gateway_enabled #=> Boolean
     #   resp.db_cluster.engine_mode #=> String
     #   resp.db_cluster.scaling_configuration_info.min_capacity #=> Integer
     #   resp.db_cluster.scaling_configuration_info.max_capacity #=> Integer
@@ -34951,6 +35739,8 @@ module Aws::RDS
     #   resp.db_instance.endpoint.address #=> String
     #   resp.db_instance.endpoint.port #=> Integer
     #   resp.db_instance.endpoint.hosted_zone_id #=> String
+    #   resp.db_instance.primary_endpoint.address #=> String
+    #   resp.db_instance.primary_endpoint.hosted_zone_id #=> String
     #   resp.db_instance.allocated_storage #=> Integer
     #   resp.db_instance.instance_create_time #=> Time
     #   resp.db_instance.preferred_backup_window #=> String
@@ -35128,6 +35918,7 @@ module Aws::RDS
     #   resp.db_instance.storage_operation_status #=> String
     #   resp.db_instance.storage_operation_percent_progress #=> Integer
     #   resp.db_instance.db_capacity_reservation_identifier #=> String
+    #   resp.db_instance.vpc_networking_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StopDBInstance AWS API Documentation
     #
@@ -35595,6 +36386,8 @@ module Aws::RDS
     #   resp.db_instance.endpoint.address #=> String
     #   resp.db_instance.endpoint.port #=> Integer
     #   resp.db_instance.endpoint.hosted_zone_id #=> String
+    #   resp.db_instance.primary_endpoint.address #=> String
+    #   resp.db_instance.primary_endpoint.hosted_zone_id #=> String
     #   resp.db_instance.allocated_storage #=> Integer
     #   resp.db_instance.instance_create_time #=> Time
     #   resp.db_instance.preferred_backup_window #=> String
@@ -35772,6 +36565,7 @@ module Aws::RDS
     #   resp.db_instance.storage_operation_status #=> String
     #   resp.db_instance.storage_operation_percent_progress #=> Integer
     #   resp.db_instance.db_capacity_reservation_identifier #=> String
+    #   resp.db_instance.vpc_networking_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/SwitchoverReadReplica AWS API Documentation
     #
@@ -35800,7 +36594,7 @@ module Aws::RDS
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.329.0'
+      context[:gem_version] = '1.337.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

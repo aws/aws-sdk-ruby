@@ -374,6 +374,9 @@ module Aws
                            ?retry_policy: {
                              max_attempts: ::Integer?,
                              max_failed_attempts_per_hour: ::Integer?
+                           },
+                           ?flex_execution: {
+                             enabled: bool?
                            }
                          ) -> _StartJobRunResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartJobRunResponseSuccess

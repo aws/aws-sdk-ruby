@@ -40,6 +40,12 @@ module Aws::DevOpsAgent
     #   VALID (role validated), INVALID (validation failed).
     #   @return [String]
     #
+    # @!attribute [rw] service_management_role_arn
+    #   The Amazon Resource Name (ARN) of the Organizations service-managed
+    #   role that AIDevOps uses to deploy and manage resources across the
+    #   accounts in your Amazon Web Services Organization.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-agent-2026-01-01/AWSConfiguration AWS API Documentation
     #
     class AWSConfiguration < Struct.new(
@@ -47,7 +53,8 @@ module Aws::DevOpsAgent
       :account_id,
       :account_type,
       :agent_elevated_role_arn,
-      :agent_elevated_role_arn_status)
+      :agent_elevated_role_arn_status,
+      :service_management_role_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -231,6 +238,13 @@ module Aws::DevOpsAgent
     #   not set take their default values.
     #   @return [Hash<String,Boolean>]
     #
+    # @!attribute [rw] aws_source_mode
+    #   The Amazon Web Services source mode for the AgentSpace, indicating
+    #   whether its Amazon Web Services source configuration targets an
+    #   individual Amazon Web Services account or an Amazon Web Services
+    #   Organization.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-agent-2026-01-01/AgentSpace AWS API Documentation
     #
     class AgentSpace < Struct.new(
@@ -241,7 +255,8 @@ module Aws::DevOpsAgent
       :updated_at,
       :kms_key_arn,
       :agent_space_id,
-      :preferences)
+      :preferences,
+      :aws_source_mode)
       SENSITIVE = [:description]
       include Aws::Structure
     end
@@ -806,13 +821,18 @@ module Aws::DevOpsAgent
     #   Summary or title of the chat
     #   @return [String]
     #
+    # @!attribute [rw] archive_status
+    #   Indicates whether the chat execution is archived or active.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-agent-2026-01-01/ChatExecution AWS API Documentation
     #
     class ChatExecution < Struct.new(
       :execution_id,
       :created_at,
       :updated_at,
-      :summary)
+      :summary,
+      :archive_status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -823,10 +843,18 @@ module Aws::DevOpsAgent
     #   Detailed error message describing the conflict.
     #   @return [String]
     #
+    # @!attribute [rw] reason
+    #   A machine-readable reason code that explains why the request
+    #   conflicted with the current state of the resource. For example,
+    #   `CHAT_ARCHIVED` indicates that the request acted on a chat that is
+    #   archived. This field is absent when no specific reason applies.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-agent-2026-01-01/ConflictException AWS API Documentation
     #
     class ConflictException < Struct.new(
-      :message)
+      :message,
+      :reason)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -883,6 +911,12 @@ module Aws::DevOpsAgent
     #   provided take their default values.
     #   @return [Hash<String,Boolean>]
     #
+    # @!attribute [rw] aws_source_mode
+    #   Specifies whether the AgentSpace's Amazon Web Services source
+    #   configuration targets an individual Amazon Web Services account or
+    #   an Amazon Web Services Organization.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-agent-2026-01-01/CreateAgentSpaceInput AWS API Documentation
     #
     class CreateAgentSpaceInput < Struct.new(
@@ -892,7 +926,8 @@ module Aws::DevOpsAgent
       :kms_key_arn,
       :client_token,
       :tags,
-      :preferences)
+      :preferences,
+      :aws_source_mode)
       SENSITIVE = [:description]
       include Aws::Structure
     end
@@ -2215,6 +2250,56 @@ module Aws::DevOpsAgent
       include Aws::Structure
     end
 
+    # @!attribute [rw] agent_space_id
+    #   The unique identifier of the agent space that contains the chat
+    #   execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] execution_id
+    #   The unique identifier of the chat execution to retrieve.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devops-agent-2026-01-01/GetChatRequest AWS API Documentation
+    #
+    class GetChatRequest < Struct.new(
+      :agent_space_id,
+      :execution_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] execution_id
+    #   The unique identifier of the chat execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] summary
+    #   The summary of the chat execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The date and time at which the chat execution was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The date and time at which the chat execution was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] archive_status
+    #   Indicates whether the chat execution is archived or active.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devops-agent-2026-01-01/GetChatResponse AWS API Documentation
+    #
+    class GetChatResponse < Struct.new(
+      :execution_id,
+      :summary,
+      :created_at,
+      :updated_at,
+      :archive_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Input for retrieving Operator App configuration.
     #
     # @!attribute [rw] agent_space_id
@@ -3218,13 +3303,19 @@ module Aws::DevOpsAgent
     #   Token for pagination
     #   @return [String]
     #
+    # @!attribute [rw] archive_status
+    #   The archive status to filter by. Use this parameter to list only
+    #   archived chat executions or only active ones.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-agent-2026-01-01/ListChatsRequest AWS API Documentation
     #
     class ListChatsRequest < Struct.new(
       :agent_space_id,
       :user_id,
       :max_results,
-      :next_token)
+      :next_token,
+      :archive_status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4162,6 +4253,33 @@ module Aws::DevOpsAgent
       include Aws::Structure
     end
 
+    # Configuration for bidirectional communication with a Microsoft Teams
+    # channel. When enabled, the agent receives and responds to mentions in
+    # the configured channel in addition to sending notifications.
+    #
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role that the agent
+    #   assumes to exchange messages with the Microsoft Teams team for this
+    #   association.
+    #   @return [String]
+    #
+    # @!attribute [rw] enabled
+    #   Specifies whether bidirectional communication is enabled for this
+    #   association. If you set this value to `true`, you can mention the
+    #   agent in the configured Microsoft Teams channel and it responds in
+    #   that channel. If you omit this parameter or set it to `false`, the
+    #   agent only sends one-way notifications.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devops-agent-2026-01-01/MSTeamsBidirectionalConfiguration AWS API Documentation
+    #
+    class MSTeamsBidirectionalConfiguration < Struct.new(
+      :role_arn,
+      :enabled)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Represents a channel in a Microsoft Teams team that the DevOps Agent
     # service can send notifications to.
     #
@@ -4201,12 +4319,20 @@ module Aws::DevOpsAgent
     #   The Microsoft Teams channels that receive agent notifications.
     #   @return [Types::MSTeamsTransmissionTarget]
     #
+    # @!attribute [rw] bidirectional
+    #   The bidirectional communication configuration for the Microsoft
+    #   Teams integration. Provide this configuration with `enabled` set to
+    #   `true` to allow users to interact with the agent directly from
+    #   Microsoft Teams.
+    #   @return [Types::MSTeamsBidirectionalConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-agent-2026-01-01/MSTeamsConfiguration AWS API Documentation
     #
     class MSTeamsConfiguration < Struct.new(
       :team_id,
       :team_name,
-      :transmission_target)
+      :transmission_target,
+      :bidirectional)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4385,6 +4511,67 @@ module Aws::DevOpsAgent
     class OAuthAdditionalStepDetails < Struct.new(
       :authorization_url)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the current rollout state of an Amazon Web Services
+    # Organization source configuration, including the number of accounts
+    # that have been deployed to and any issues encountered during
+    # deployment.
+    #
+    # @!attribute [rw] deployed_account_count
+    #   The number of accounts in the targeted Amazon Web Services
+    #   Organization or organizational unit that have successfully been
+    #   deployed to.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] issues
+    #   The issues encountered while deploying the source configuration
+    #   across the accounts in the Amazon Web Services Organization.
+    #   @return [Array<Types::OrgSourceIssue>]
+    #
+    # @!attribute [rw] last_evaluated_at
+    #   The timestamp of the most recent evaluation of the organization-wide
+    #   deployment state.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devops-agent-2026-01-01/OrgSourceDeploymentState AWS API Documentation
+    #
+    class OrgSourceDeploymentState < Struct.new(
+      :deployed_account_count,
+      :issues,
+      :last_evaluated_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes an issue encountered while deploying or evaluating an Amazon
+    # Web Services Organization source configuration.
+    #
+    # @!attribute [rw] reason_code
+    #   A code that identifies the reason for the issue.
+    #   @return [String]
+    #
+    # @!attribute [rw] account_count
+    #   The number of accounts affected by this issue.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] account_ids
+    #   The Amazon Web Services account IDs affected by this issue.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] message
+    #   A description of the issue.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devops-agent-2026-01-01/OrgSourceIssue AWS API Documentation
+    #
+    class OrgSourceIssue < Struct.new(
+      :reason_code,
+      :account_count,
+      :account_ids,
+      :message)
+      SENSITIVE = [:message]
       include Aws::Structure
     end
 
@@ -6074,6 +6261,12 @@ module Aws::DevOpsAgent
     #   AWS source account configuration for monitoring resources.
     #   @return [Types::SourceAwsConfiguration]
     #
+    # @!attribute [rw] source_aws_org
+    #   The Amazon Web Services Organization source configuration used to
+    #   monitor resources across an entire Amazon Web Services Organization
+    #   or specified organizational units.
+    #   @return [Types::SourceAwsOrgConfiguration]
+    #
     # @!attribute [rw] aws
     #   AWS monitor account configuration.
     #   @return [Types::AWSConfiguration]
@@ -6159,6 +6352,7 @@ module Aws::DevOpsAgent
     #
     class ServiceConfiguration < Struct.new(
       :source_aws,
+      :source_aws_org,
       :aws,
       :github,
       :slack,
@@ -6185,6 +6379,7 @@ module Aws::DevOpsAgent
       include Aws::Structure::Union
 
       class SourceAws < ServiceConfiguration; end
+      class SourceAwsOrg < ServiceConfiguration; end
       class Aws < ServiceConfiguration; end
       class Github < ServiceConfiguration; end
       class Slack < ServiceConfiguration; end
@@ -6618,6 +6813,57 @@ module Aws::DevOpsAgent
       include Aws::Structure
     end
 
+    # Configuration for Amazon Web Services Organization-wide source account
+    # integration. Use this configuration to monitor Amazon Web Services
+    # resources across multiple accounts within an organization or within
+    # targeted organizational units.
+    #
+    # @!attribute [rw] account_type
+    #   The account type for this configuration. For Amazon Web Services
+    #   Organization-level configurations, this value is `source`.
+    #   @return [String]
+    #
+    # @!attribute [rw] organizational_unit
+    #   The organizational units within the Amazon Web Services Organization
+    #   that are targeted for source monitoring.
+    #   @return [Types::SourceAwsOrgUnit]
+    #
+    # @!attribute [rw] deployment_state
+    #   The current deployment state of the Amazon Web Services
+    #   Organization-wide source configuration.
+    #   @return [Types::OrgSourceDeploymentState]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devops-agent-2026-01-01/SourceAwsOrgConfiguration AWS API Documentation
+    #
+    class SourceAwsOrgConfiguration < Struct.new(
+      :account_type,
+      :organizational_unit,
+      :deployment_state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Identifies an Organizations organizational unit and its member
+    # accounts that are targeted for source monitoring.
+    #
+    # @!attribute [rw] organizational_unit_id
+    #   The identifier of the Organizations organizational unit.
+    #   @return [String]
+    #
+    # @!attribute [rw] account_ids
+    #   The Amazon Web Services account IDs that belong to this
+    #   organizational unit and are targeted for source monitoring.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devops-agent-2026-01-01/SourceAwsOrgUnit AWS API Documentation
+    #
+    class SourceAwsOrgUnit < Struct.new(
+      :organizational_unit_id,
+      :account_ids)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] resource_arn
     #   The ARN of the resource to tag.
     #   @return [String]
@@ -6959,6 +7205,13 @@ module Aws::DevOpsAgent
     #   preferences are left unchanged.
     #   @return [Hash<String,Boolean>]
     #
+    # @!attribute [rw] aws_source_mode
+    #   Specifies whether the AgentSpace's Amazon Web Services source
+    #   configuration targets an individual Amazon Web Services account or
+    #   an Amazon Web Services Organization. Use this parameter to switch an
+    #   existing AgentSpace between source modes.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-agent-2026-01-01/UpdateAgentSpaceInput AWS API Documentation
     #
     class UpdateAgentSpaceInput < Struct.new(
@@ -6966,7 +7219,8 @@ module Aws::DevOpsAgent
       :name,
       :description,
       :locale,
-      :preferences)
+      :preferences,
+      :aws_source_mode)
       SENSITIVE = [:description]
       include Aws::Structure
     end
@@ -7298,6 +7552,74 @@ module Aws::DevOpsAgent
     #
     class UpdateBacklogTaskResponse < Struct.new(
       :task)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] agent_space_id
+    #   The unique identifier of the agent space that contains the chat
+    #   execution to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] execution_id
+    #   The unique identifier of the chat execution to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] summary
+    #   The new summary to set for the chat execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] archive_status
+    #   The archive status to set for the chat execution. Use this parameter
+    #   to archive the chat execution, hiding it from the default chat list,
+    #   or to unarchive it, restoring it to the default chat list.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier to ensure that the operation
+    #   completes no more than one time. If this token matches a previous
+    #   request, the service ignores the request, but does not return an
+    #   error.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devops-agent-2026-01-01/UpdateChatRequest AWS API Documentation
+    #
+    class UpdateChatRequest < Struct.new(
+      :agent_space_id,
+      :execution_id,
+      :summary,
+      :archive_status,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] execution_id
+    #   The unique identifier of the updated chat execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] summary
+    #   The summary of the chat execution after the update.
+    #   @return [String]
+    #
+    # @!attribute [rw] updated_at
+    #   The date and time at which the chat execution was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] archive_status
+    #   The archive status of the chat execution after the update.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devops-agent-2026-01-01/UpdateChatResponse AWS API Documentation
+    #
+    class UpdateChatResponse < Struct.new(
+      :execution_id,
+      :summary,
+      :updated_at,
+      :archive_status)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -264,7 +264,8 @@ module Aws::Backup
     #     An integer representing the maximum number attempts that will be made for
     #     a single request, including the initial attempt.  For example,
     #     setting this value to 5 will result in a request being retried up to
-    #     4 times. Used in `standard` and `adaptive` retry modes.
+    #     4 times. Used in `standard` and `adaptive` retry modes. Defaults to 3,
+    #     except for DynamoDB and DynamoDB Streams, which default to 4.
     #
     #   @option options [String] :profile ("default")
     #     Used when loading credentials from the shared credentials file at `HOME/.aws/credentials`.
@@ -327,15 +328,15 @@ module Aws::Backup
     #     used by the default backoff function. This option is only used in the
     #     `legacy` retry mode.
     #
-    #   @option options [String] :retry_mode ("legacy")
+    #   @option options [String] :retry_mode ("standard")
     #     Specifies which retry algorithm to use. Values are:
     #
-    #     * `legacy` - The pre-existing retry behavior. This is the default
-    #       value if no retry mode is provided.
+    #     * `legacy` - The pre-existing retry behavior.
     #
     #     * `standard` - A standardized set of retry rules across the AWS SDKs.
     #       This includes support for retry quotas, which limit the number of
-    #       unsuccessful retries a client can make.
+    #       unsuccessful retries a client can make. This is the default value
+    #       if no retry mode is provided.
     #
     #     * `adaptive` - A retry mode that includes all the functionality of
     #       `standard` mode along with automatic client side throttling.
@@ -2454,6 +2455,7 @@ module Aws::Backup
     #
     #   * {Types::DescribeRegionSettingsOutput#resource_type_opt_in_preference #resource_type_opt_in_preference} => Hash&lt;String,Boolean&gt;
     #   * {Types::DescribeRegionSettingsOutput#resource_type_management_preference #resource_type_management_preference} => Hash&lt;String,Boolean&gt;
+    #   * {Types::DescribeRegionSettingsOutput#resource_type_opt_in_incremental #resource_type_opt_in_incremental} => Hash&lt;String,Boolean&gt;
     #
     # @example Response structure
     #
@@ -2461,6 +2463,8 @@ module Aws::Backup
     #   resp.resource_type_opt_in_preference["ResourceType"] #=> Boolean
     #   resp.resource_type_management_preference #=> Hash
     #   resp.resource_type_management_preference["ResourceType"] #=> Boolean
+    #   resp.resource_type_opt_in_incremental #=> Hash
+    #   resp.resource_type_opt_in_incremental["ResourceType"] #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/DescribeRegionSettings AWS API Documentation
     #
@@ -3186,7 +3190,7 @@ module Aws::Backup
     #   resp.backup_vault_arn #=> String
     #   resp.sns_topic_arn #=> String
     #   resp.backup_vault_events #=> Array
-    #   resp.backup_vault_events[0] #=> String, one of "BACKUP_JOB_STARTED", "BACKUP_JOB_COMPLETED", "BACKUP_JOB_SUCCESSFUL", "BACKUP_JOB_FAILED", "BACKUP_JOB_EXPIRED", "RESTORE_JOB_STARTED", "RESTORE_JOB_COMPLETED", "RESTORE_JOB_SUCCESSFUL", "RESTORE_JOB_FAILED", "COPY_JOB_STARTED", "COPY_JOB_SUCCESSFUL", "COPY_JOB_FAILED", "RECOVERY_POINT_MODIFIED", "BACKUP_PLAN_CREATED", "BACKUP_PLAN_MODIFIED", "S3_BACKUP_OBJECT_FAILED", "S3_RESTORE_OBJECT_FAILED", "CONTINUOUS_BACKUP_INTERRUPTED", "RECOVERY_POINT_INDEX_COMPLETED", "RECOVERY_POINT_INDEX_DELETED", "RECOVERY_POINT_INDEXING_FAILED", "EKS_RESTORE_OBJECT_FAILED", "EKS_RESTORE_OBJECT_SKIPPED", "EKS_BACKUP_OBJECT_FAILED", "ACCESS_POINT_AVAILABLE", "ACCESS_POINT_CREATION_FAILED", "ACCESS_POINT_DELETED", "ACCESS_POINT_DELETION_FAILED", "ACCESS_POINT_EXPIRED", "ACCESS_POINT_DISASSOCIATED"
+    #   resp.backup_vault_events[0] #=> String, one of "BACKUP_JOB_STARTED", "BACKUP_JOB_COMPLETED", "BACKUP_JOB_SUCCESSFUL", "BACKUP_JOB_FAILED", "BACKUP_JOB_EXPIRED", "RESTORE_JOB_STARTED", "RESTORE_JOB_COMPLETED", "RESTORE_JOB_SUCCESSFUL", "RESTORE_JOB_FAILED", "COPY_JOB_STARTED", "COPY_JOB_SUCCESSFUL", "COPY_JOB_FAILED", "RECOVERY_POINT_MODIFIED", "BACKUP_PLAN_CREATED", "BACKUP_PLAN_MODIFIED", "S3_BACKUP_OBJECT_FAILED", "S3_RESTORE_OBJECT_FAILED", "CONTINUOUS_BACKUP_INTERRUPTED", "RECOVERY_POINT_INDEX_COMPLETED", "RECOVERY_POINT_INDEX_DELETED", "RECOVERY_POINT_INDEXING_FAILED", "EKS_RESTORE_OBJECT_FAILED", "EKS_RESTORE_OBJECT_SKIPPED", "EKS_BACKUP_OBJECT_FAILED", "EKS_RESTORE_MODIFICATION_SUCCESS", "EKS_RESTORE_MODIFICATION_FAILED", "ACCESS_POINT_AVAILABLE", "ACCESS_POINT_CREATION_FAILED", "ACCESS_POINT_DELETED", "ACCESS_POINT_DELETION_FAILED", "ACCESS_POINT_EXPIRED", "ACCESS_POINT_DISASSOCIATED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/GetBackupVaultNotifications AWS API Documentation
     #
@@ -6442,7 +6446,7 @@ module Aws::Backup
     #   resp = client.put_backup_vault_notifications({
     #     backup_vault_name: "BackupVaultName", # required
     #     sns_topic_arn: "ARN", # required
-    #     backup_vault_events: ["BACKUP_JOB_STARTED"], # required, accepts BACKUP_JOB_STARTED, BACKUP_JOB_COMPLETED, BACKUP_JOB_SUCCESSFUL, BACKUP_JOB_FAILED, BACKUP_JOB_EXPIRED, RESTORE_JOB_STARTED, RESTORE_JOB_COMPLETED, RESTORE_JOB_SUCCESSFUL, RESTORE_JOB_FAILED, COPY_JOB_STARTED, COPY_JOB_SUCCESSFUL, COPY_JOB_FAILED, RECOVERY_POINT_MODIFIED, BACKUP_PLAN_CREATED, BACKUP_PLAN_MODIFIED, S3_BACKUP_OBJECT_FAILED, S3_RESTORE_OBJECT_FAILED, CONTINUOUS_BACKUP_INTERRUPTED, RECOVERY_POINT_INDEX_COMPLETED, RECOVERY_POINT_INDEX_DELETED, RECOVERY_POINT_INDEXING_FAILED, EKS_RESTORE_OBJECT_FAILED, EKS_RESTORE_OBJECT_SKIPPED, EKS_BACKUP_OBJECT_FAILED, ACCESS_POINT_AVAILABLE, ACCESS_POINT_CREATION_FAILED, ACCESS_POINT_DELETED, ACCESS_POINT_DELETION_FAILED, ACCESS_POINT_EXPIRED, ACCESS_POINT_DISASSOCIATED
+    #     backup_vault_events: ["BACKUP_JOB_STARTED"], # required, accepts BACKUP_JOB_STARTED, BACKUP_JOB_COMPLETED, BACKUP_JOB_SUCCESSFUL, BACKUP_JOB_FAILED, BACKUP_JOB_EXPIRED, RESTORE_JOB_STARTED, RESTORE_JOB_COMPLETED, RESTORE_JOB_SUCCESSFUL, RESTORE_JOB_FAILED, COPY_JOB_STARTED, COPY_JOB_SUCCESSFUL, COPY_JOB_FAILED, RECOVERY_POINT_MODIFIED, BACKUP_PLAN_CREATED, BACKUP_PLAN_MODIFIED, S3_BACKUP_OBJECT_FAILED, S3_RESTORE_OBJECT_FAILED, CONTINUOUS_BACKUP_INTERRUPTED, RECOVERY_POINT_INDEX_COMPLETED, RECOVERY_POINT_INDEX_DELETED, RECOVERY_POINT_INDEXING_FAILED, EKS_RESTORE_OBJECT_FAILED, EKS_RESTORE_OBJECT_SKIPPED, EKS_BACKUP_OBJECT_FAILED, EKS_RESTORE_MODIFICATION_SUCCESS, EKS_RESTORE_MODIFICATION_FAILED, ACCESS_POINT_AVAILABLE, ACCESS_POINT_CREATION_FAILED, ACCESS_POINT_DELETED, ACCESS_POINT_DELETION_FAILED, ACCESS_POINT_EXPIRED, ACCESS_POINT_DISASSOCIATED
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/PutBackupVaultNotifications AWS API Documentation
@@ -7565,6 +7569,20 @@ module Aws::Backup
     #   [1]: https://docs.aws.amazon.com/aws-backup/latest/devguide/advanced-ddb-backup.html
     #   [2]: https://docs.aws.amazon.com/aws-backup/latest/devguide/advanced-ddb-backup.html#advanced-ddb-backup-enable-cli
     #
+    # @option params [Hash<String,Boolean>] :resource_type_opt_in_incremental
+    #   Specifies whether you opt in to incremental backups for each resource
+    #   type in the Region. Opt in when you want to reduce backup storage and
+    #   backup time for large resources that change infrequently. Incremental
+    #   backup opt-in is currently available for Amazon DynamoDB.
+    #
+    #   To view your current incremental backup settings, use the
+    #   `DescribeRegionSettings` API. For the resource types that each Backup
+    #   feature supports, see the [Feature availability by resource][1] table.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/aws-backup/latest/devguide/backup-feature-availability.html#features-by-resource
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -7574,6 +7592,9 @@ module Aws::Backup
     #       "ResourceType" => false,
     #     },
     #     resource_type_management_preference: {
+    #       "ResourceType" => false,
+    #     },
+    #     resource_type_opt_in_incremental: {
     #       "ResourceType" => false,
     #     },
     #   })
@@ -7877,7 +7898,7 @@ module Aws::Backup
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-backup'
-      context[:gem_version] = '1.124.0'
+      context[:gem_version] = '1.133.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

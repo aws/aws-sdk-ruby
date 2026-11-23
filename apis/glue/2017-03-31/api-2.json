@@ -544,6 +544,26 @@
         {"shape":"ResourceNumberLimitExceededException"}
       ]
     },
+    "CreateDataQualityEvaluationConfig":{
+      "name":"CreateDataQualityEvaluationConfig",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"CreateDataQualityEvaluationConfigRequest"},
+      "output":{"shape":"CreateDataQualityEvaluationConfigResponse"},
+      "errors":[
+        {"shape":"AccessDeniedException"},
+        {"shape":"AlreadyExistsException"},
+        {"shape":"EntityNotFoundException"},
+        {"shape":"IdempotentParameterMismatchException"},
+        {"shape":"InvalidInputException"},
+        {"shape":"OperationTimeoutException"},
+        {"shape":"InternalServiceException"},
+        {"shape":"ResourceNumberLimitExceededException"}
+      ],
+      "idempotent":true
+    },
     "CreateDataQualityRuleset":{
       "name":"CreateDataQualityRuleset",
       "http":{
@@ -997,22 +1017,6 @@
         {"shape":"ThrottlingException"}
       ]
     },
-    "DeleteAssetType":{
-      "name":"DeleteAssetType",
-      "http":{
-        "method":"POST",
-        "requestUri":"/"
-      },
-      "input":{"shape":"DeleteAssetTypeRequest"},
-      "output":{"shape":"DeleteAssetTypeResponse"},
-      "errors":[
-        {"shape":"AccessDeniedException"},
-        {"shape":"InternalServiceException"},
-        {"shape":"InvalidInputException"},
-        {"shape":"ConcurrentModificationException"},
-        {"shape":"ThrottlingException"}
-      ]
-    },
     "DeleteAttachment":{
       "name":"DeleteAttachment",
       "http":{
@@ -1181,6 +1185,22 @@
         {"shape":"InternalServiceException"},
         {"shape":"InvalidInputException"},
         {"shape":"OperationTimeoutException"}
+      ]
+    },
+    "DeleteDataQualityEvaluationConfig":{
+      "name":"DeleteDataQualityEvaluationConfig",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DeleteDataQualityEvaluationConfigRequest"},
+      "output":{"shape":"DeleteDataQualityEvaluationConfigResponse"},
+      "errors":[
+        {"shape":"AccessDeniedException"},
+        {"shape":"EntityNotFoundException"},
+        {"shape":"InvalidInputException"},
+        {"shape":"OperationTimeoutException"},
+        {"shape":"InternalServiceException"}
       ]
     },
     "DeleteDataQualityRuleset":{
@@ -2056,12 +2076,29 @@
       "input":{"shape":"GetDataCatalogExportConfigurationInput"},
       "output":{"shape":"GetDataCatalogExportConfigurationOutput"},
       "errors":[
+        {"shape":"AccessDeniedException"},
         {"shape":"InvalidInputException"},
         {"shape":"EntityNotFoundException"},
         {"shape":"InternalServiceException"},
         {"shape":"ThrottlingException"}
       ],
       "readonly":true
+    },
+    "GetDataQualityEvaluationConfig":{
+      "name":"GetDataQualityEvaluationConfig",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"GetDataQualityEvaluationConfigRequest"},
+      "output":{"shape":"GetDataQualityEvaluationConfigResponse"},
+      "errors":[
+        {"shape":"AccessDeniedException"},
+        {"shape":"EntityNotFoundException"},
+        {"shape":"InvalidInputException"},
+        {"shape":"OperationTimeoutException"},
+        {"shape":"InternalServiceException"}
+      ]
     },
     "GetDataQualityModel":{
       "name":"GetDataQualityModel",
@@ -2294,6 +2331,7 @@
         {"shape":"AccessDeniedException"},
         {"shape":"EntityNotFoundException"},
         {"shape":"InternalServiceException"},
+        {"shape":"InvalidInputException"},
         {"shape":"ThrottlingException"}
       ]
     },
@@ -2309,6 +2347,7 @@
         {"shape":"AccessDeniedException"},
         {"shape":"EntityNotFoundException"},
         {"shape":"InternalServiceException"},
+        {"shape":"InvalidInputException"},
         {"shape":"ThrottlingException"}
       ]
     },
@@ -2425,6 +2464,23 @@
         {"shape":"InternalServiceException"},
         {"shape":"OperationTimeoutException"}
       ]
+    },
+    "GetJobUpgradeAnalysis":{
+      "name":"GetJobUpgradeAnalysis",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"GetJobUpgradeAnalysisRequest"},
+      "output":{"shape":"GetJobUpgradeAnalysisResponse"},
+      "errors":[
+        {"shape":"InvalidInputException"},
+        {"shape":"EntityNotFoundException"},
+        {"shape":"OperationNotSupportedException"},
+        {"shape":"AccessDeniedException"},
+        {"shape":"InternalServiceException"}
+      ],
+      "readonly":true
     },
     "GetJobs":{
       "name":"GetJobs",
@@ -3221,6 +3277,21 @@
         {"shape":"InternalServiceException"}
       ]
     },
+    "ListDataQualityEvaluationConfigs":{
+      "name":"ListDataQualityEvaluationConfigs",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ListDataQualityEvaluationConfigsRequest"},
+      "output":{"shape":"ListDataQualityEvaluationConfigsResponse"},
+      "errors":[
+        {"shape":"AccessDeniedException"},
+        {"shape":"InvalidInputException"},
+        {"shape":"OperationTimeoutException"},
+        {"shape":"InternalServiceException"}
+      ]
+    },
     "ListDataQualityResults":{
       "name":"ListDataQualityResults",
       "http":{
@@ -3686,23 +3757,6 @@
         {"shape":"ThrottlingException"}
       ]
     },
-    "PutAssetType":{
-      "name":"PutAssetType",
-      "http":{
-        "method":"POST",
-        "requestUri":"/"
-      },
-      "input":{"shape":"PutAssetTypeRequest"},
-      "output":{"shape":"PutAssetTypeResponse"},
-      "errors":[
-        {"shape":"AccessDeniedException"},
-        {"shape":"InternalServiceException"},
-        {"shape":"InvalidInputException"},
-        {"shape":"EntityNotFoundException"},
-        {"shape":"ConcurrentModificationException"},
-        {"shape":"ThrottlingException"}
-      ]
-    },
     "PutAttachment":{
       "name":"PutAttachment",
       "http":{
@@ -4134,6 +4188,24 @@
         {"shape":"ConcurrentRunsExceededException"}
       ]
     },
+    "StartJobUpgradeAnalysis":{
+      "name":"StartJobUpgradeAnalysis",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"StartJobUpgradeAnalysisRequest"},
+      "output":{"shape":"StartJobUpgradeAnalysisResponse"},
+      "errors":[
+        {"shape":"ResourceNumberLimitExceededException"},
+        {"shape":"InvalidInputException"},
+        {"shape":"ValidationException"},
+        {"shape":"EntityNotFoundException"},
+        {"shape":"OperationNotSupportedException"},
+        {"shape":"AccessDeniedException"},
+        {"shape":"InternalServiceException"}
+      ]
+    },
     "StartMLEvaluationTaskRun":{
       "name":"StartMLEvaluationTaskRun",
       "http":{
@@ -4275,6 +4347,23 @@
         {"shape":"SchedulerNotRunningException"},
         {"shape":"SchedulerTransitioningException"},
         {"shape":"OperationTimeoutException"}
+      ]
+    },
+    "StopJobUpgradeAnalysis":{
+      "name":"StopJobUpgradeAnalysis",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"StopJobUpgradeAnalysisRequest"},
+      "output":{"shape":"StopJobUpgradeAnalysisResponse"},
+      "errors":[
+        {"shape":"InvalidInputException"},
+        {"shape":"EntityNotFoundException"},
+        {"shape":"OperationNotSupportedException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"AccessDeniedException"},
+        {"shape":"InternalServiceException"}
       ]
     },
     "StopMaterializedViewRefreshTaskRun":{
@@ -4554,6 +4643,23 @@
         {"shape":"VersionMismatchException"},
         {"shape":"SchedulerTransitioningException"},
         {"shape":"OperationTimeoutException"}
+      ]
+    },
+    "UpdateDataQualityEvaluationConfig":{
+      "name":"UpdateDataQualityEvaluationConfig",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"UpdateDataQualityEvaluationConfigRequest"},
+      "output":{"shape":"UpdateDataQualityEvaluationConfigResponse"},
+      "errors":[
+        {"shape":"AccessDeniedException"},
+        {"shape":"ConcurrentModificationException"},
+        {"shape":"EntityNotFoundException"},
+        {"shape":"InvalidInputException"},
+        {"shape":"OperationTimeoutException"},
+        {"shape":"InternalServiceException"}
       ]
     },
     "UpdateDataQualityRuleset":{
@@ -5132,6 +5238,10 @@
         "Inputs":{"shape":"OneInput"}
       }
     },
+    "AnalysisType":{
+      "type":"string",
+      "enum":["AUTO_UPGRADE"]
+    },
     "AnnotationError":{
       "type":"structure",
       "members":{
@@ -5177,7 +5287,11 @@
       "max":2048,
       "min":20
     },
-    "AssetDescription":{"type":"string"},
+    "AssetDescription":{
+      "type":"string",
+      "max":2048,
+      "min":0
+    },
     "AssetFormEntry":{
       "type":"structure",
       "members":{
@@ -5185,7 +5299,23 @@
         "Content":{"shape":"FormContent"}
       }
     },
-    "AssetFormKey":{"type":"string"},
+    "AssetFormInput":{
+      "type":"structure",
+      "members":{
+        "FormTypeIdentifier":{"shape":"FormTypeId"},
+        "Content":{"shape":"FormContent"}
+      }
+    },
+    "AssetFormInputMap":{
+      "type":"map",
+      "key":{"shape":"AssetFormKey"},
+      "value":{"shape":"AssetFormInput"}
+    },
+    "AssetFormKey":{
+      "type":"string",
+      "max":128,
+      "min":1
+    },
     "AssetFormMap":{
       "type":"map",
       "key":{"shape":"AssetFormKey"},
@@ -5197,26 +5327,27 @@
       "min":1,
       "pattern":"[a-zA-Z0-9\\-\\:\\/\\.\\_\\*]+"
     },
-    "AssetName":{"type":"string"},
+    "AssetName":{
+      "type":"string",
+      "max":256,
+      "min":1
+    },
     "AssetTypeFormKey":{
       "type":"string",
       "max":128,
       "min":1,
       "pattern":"^(?![0-9_])\\w+$|^_\\w*[a-zA-Z0-9]\\w*$"
     },
-    "AssetTypeFormReference":{
+    "AssetTypeFormOutput":{
       "type":"structure",
-      "required":["FormTypeIdentifier"],
       "members":{
-        "FormTypeIdentifier":{"shape":"FormTypeId"}
+        "FormTypeId":{"shape":"FormTypeId"}
       }
     },
-    "AssetTypeFormsMap":{
+    "AssetTypeFormOutputMap":{
       "type":"map",
       "key":{"shape":"AssetTypeFormKey"},
-      "value":{"shape":"AssetTypeFormReference"},
-      "max":100,
-      "min":1
+      "value":{"shape":"AssetTypeFormOutput"}
     },
     "AssetTypeId":{
       "type":"string",
@@ -5234,11 +5365,30 @@
       "type":"list",
       "member":{"shape":"AssetTypeItem"}
     },
+    "AssetTypeMaxResults":{
+      "type":"integer",
+      "box":true,
+      "max":100,
+      "min":1
+    },
     "AssetTypeName":{
       "type":"string",
       "max":128,
       "min":1,
       "pattern":"^(?![0-9_])\\w+$|^_\\w*[a-zA-Z0-9]\\w*$"
+    },
+    "AssetsExport":{
+      "type":"structure",
+      "members":{
+        "S3TablesExport":{"shape":"ExportSetting"}
+      }
+    },
+    "AssetsExportResult":{
+      "type":"structure",
+      "members":{
+        "S3TablesExport":{"shape":"ExportSetting"},
+        "S3TablesExportState":{"shape":"S3TablesExportState"}
+      }
     },
     "AssociateGlossaryTermsRequest":{
       "type":"structure",
@@ -5260,10 +5410,10 @@
     "AssociateGlossaryTermsResponse":{
       "type":"structure",
       "members":{
-        "AssetIdentifier":{"shape":"AssetId"},
+        "AssetId":{"shape":"AssetId"},
         "IterableFormName":{"shape":"IterableFormName"},
-        "ItemIdentifier":{"shape":"ItemIdentifier"},
-        "GlossaryTerms":{"shape":"GlossaryTermIdList"}
+        "ItemId":{"shape":"ItemId"},
+        "GlossaryTerms":{"shape":"GlossaryTermIdOutputList"}
       }
     },
     "AthenaConnectorSource":{
@@ -5379,6 +5529,26 @@
         "IsEnabled":{"shape":"BooleanValue"},
         "EvaluationContext":{"shape":"EnclosedInStringProperty"}
       }
+    },
+    "AutoUpgradeMetadata":{
+      "type":"structure",
+      "members":{
+        "TargetVersion":{"shape":"GlueVersionString"},
+        "SourceVersion":{"shape":"GlueVersionString"},
+        "Status":{"shape":"AutoUpgradeStatus"},
+        "AnalysisId":{"shape":"IdString"}
+      }
+    },
+    "AutoUpgradeStatus":{
+      "type":"string",
+      "enum":[
+        "OBSERVING",
+        "UPGRADING",
+        "UPGRADE_SUCCEEDED",
+        "UPGRADE_FAILED",
+        "STOPPED",
+        "WAITING_FOR_CONSENT"
+      ]
     },
     "BackfillError":{
       "type":"structure",
@@ -7794,6 +7964,43 @@
         "Name":{"shape":"NameString"}
       }
     },
+    "CreateDataQualityEvaluationConfigRequest":{
+      "type":"structure",
+      "required":[
+        "Name",
+        "Level",
+        "DataSource",
+        "Role"
+      ],
+      "members":{
+        "Name":{"shape":"NameString"},
+        "Level":{"shape":"DataQualityEvaluationConfigLevel"},
+        "DataSource":{"shape":"DataQualityEvaluationConfigDataSource"},
+        "RulesetName":{"shape":"NameString"},
+        "ManagedRulesetName":{"shape":"DataQualityEvaluationConfigManagedRuleset"},
+        "Triggers":{"shape":"DataQualityEvaluationConfigTriggers"},
+        "ScheduleExpression":{"shape":"DataQualityEvaluationConfigScheduleExpression"},
+        "StartAt":{"shape":"Timestamp"},
+        "EndAt":{"shape":"Timestamp"},
+        "Role":{"shape":"RoleString"},
+        "NumberOfWorkers":{"shape":"NullableInteger"},
+        "Timeout":{"shape":"Timeout"},
+        "AdditionalRunOptions":{"shape":"DataQualityEvaluationConfigAdditionalRunOptions"},
+        "AdditionalDataSources":{"shape":"DataSourceMap"},
+        "Tags":{"shape":"TagsMap"},
+        "ClientToken":{
+          "shape":"ClientTokenString",
+          "idempotencyToken":true
+        }
+      }
+    },
+    "CreateDataQualityEvaluationConfigResponse":{
+      "type":"structure",
+      "members":{
+        "Name":{"shape":"NameString"},
+        "EvaluationRunMode":{"shape":"DataQualityEvaluationRunMode"}
+      }
+    },
     "CreateDataQualityRulesetRequest":{
       "type":"structure",
       "required":[
@@ -7906,8 +8113,8 @@
       "members":{
         "GlossaryIdentifier":{"shape":"GlossaryId"},
         "Name":{"shape":"GlossaryTermName"},
-        "ShortDescription":{"shape":"GlossaryShortDescription"},
-        "LongDescription":{"shape":"GlossaryLongDescription"},
+        "ShortDescription":{"shape":"GlossaryTermShortDescription"},
+        "LongDescription":{"shape":"GlossaryTermLongDescription"},
         "ClientToken":{
           "shape":"HashString",
           "idempotencyToken":true
@@ -7920,8 +8127,8 @@
         "Id":{"shape":"GlossaryTermId"},
         "GlossaryId":{"shape":"GlossaryId"},
         "Name":{"shape":"GlossaryTermName"},
-        "ShortDescription":{"shape":"GlossaryShortDescription"},
-        "LongDescription":{"shape":"GlossaryLongDescription"}
+        "ShortDescription":{"shape":"GlossaryTermShortDescription"},
+        "LongDescription":{"shape":"GlossaryTermLongDescription"}
       }
     },
     "CreateGlueIdentityCenterConfigurationRequest":{
@@ -8749,6 +8956,112 @@
         "PYTHON"
       ]
     },
+    "DataQualityEvaluationConfigAdditionalRunOptions":{
+      "type":"structure",
+      "members":{
+        "CloudWatchMetricsEnabled":{"shape":"NullableBoolean"},
+        "ResultsS3Prefix":{"shape":"UriString"},
+        "CompositeRuleEvaluationMethod":{"shape":"DQCompositeRuleEvaluationMethod"},
+        "RowLevelResults":{"shape":"RowLevelResultsOptions"},
+        "ProfilingResults":{"shape":"ProfilingResultsOptions"},
+        "ObservationScope":{"shape":"ObservationConfiguration"},
+        "ObservationMode":{"shape":"ObservationMode"},
+        "DataQualityRuleResults":{"shape":"DataQualityRuleResultsOptions"},
+        "ObservationResults":{"shape":"ObservationResultsOptions"},
+        "CustomLogGroupPrefix":{"shape":"GenericString"}
+      }
+    },
+    "DataQualityEvaluationConfigDataSource":{
+      "type":"structure",
+      "members":{
+        "GlueTables":{"shape":"DataQualityEvaluationConfigGlueTables"}
+      }
+    },
+    "DataQualityEvaluationConfigGlueTables":{
+      "type":"structure",
+      "required":["CatalogId"],
+      "members":{
+        "CatalogId":{"shape":"NameString"},
+        "DatabaseName":{"shape":"NameString"},
+        "TableNamePattern":{"shape":"NameString"},
+        "PreProcessingQuery":{"shape":"PreProcessingQueryString"},
+        "ConnectionName":{"shape":"NameString"},
+        "AdditionalOptions":{"shape":"GlueTableAdditionalOptions"}
+      }
+    },
+    "DataQualityEvaluationConfigLevel":{
+      "type":"string",
+      "enum":[
+        "CATALOG",
+        "DATABASE",
+        "TABLE"
+      ]
+    },
+    "DataQualityEvaluationConfigList":{
+      "type":"list",
+      "member":{"shape":"DataQualityEvaluationConfigListDetails"}
+    },
+    "DataQualityEvaluationConfigListDataSource":{
+      "type":"structure",
+      "members":{
+        "GlueTables":{"shape":"DataQualityEvaluationConfigListGlueTables"}
+      }
+    },
+    "DataQualityEvaluationConfigListDetails":{
+      "type":"structure",
+      "members":{
+        "Name":{"shape":"NameString"},
+        "EvaluationRunMode":{"shape":"DataQualityEvaluationRunMode"},
+        "CreatedOn":{"shape":"Timestamp"},
+        "LastModifiedOn":{"shape":"Timestamp"},
+        "Level":{"shape":"DataQualityEvaluationConfigLevel"},
+        "DataSource":{"shape":"DataQualityEvaluationConfigListDataSource"},
+        "RulesetName":{"shape":"NameString"},
+        "ManagedRulesetName":{"shape":"DataQualityEvaluationConfigManagedRuleset"},
+        "PauseRuns":{"shape":"NullableBoolean"}
+      }
+    },
+    "DataQualityEvaluationConfigListGlueTables":{
+      "type":"structure",
+      "required":["CatalogId"],
+      "members":{
+        "CatalogId":{"shape":"NameString"},
+        "DatabaseName":{"shape":"NameString"},
+        "TableNamePattern":{"shape":"NameString"}
+      }
+    },
+    "DataQualityEvaluationConfigManagedRuleset":{
+      "type":"string",
+      "enum":[
+        "SIMPLE",
+        "ADVANCED"
+      ]
+    },
+    "DataQualityEvaluationConfigPageSize":{
+      "type":"integer",
+      "box":true,
+      "max":50,
+      "min":1
+    },
+    "DataQualityEvaluationConfigScheduleExpression":{
+      "type":"string",
+      "max":256,
+      "min":1
+    },
+    "DataQualityEvaluationConfigTrigger":{
+      "type":"string",
+      "enum":[
+        "ONCE",
+        "SCHEDULE",
+        "METADATA_CHANGE"
+      ]
+    },
+    "DataQualityEvaluationConfigTriggers":{
+      "type":"list",
+      "member":{"shape":"DataQualityEvaluationConfigTrigger"},
+      "max":3,
+      "min":1
+    },
     "DataQualityEvaluationRunAdditionalRunOptions":{
       "type":"structure",
       "members":{
@@ -8763,6 +9076,13 @@
         "DataQualityRuleResults":{"shape":"DataQualityRuleResultsOptions"},
         "ObservationResults":{"shape":"ObservationResultsOptions"}
       }
+    },
+    "DataQualityEvaluationRunMode":{
+      "type":"string",
+      "enum":[
+        "ON_DEMAND",
+        "EVALUATION_CONFIG"
+      ]
     },
     "DataQualityFlagsEnabled":{
       "type":"map",
@@ -8827,6 +9147,8 @@
       "type":"structure",
       "members":{
         "ResultId":{"shape":"HashString"},
+        "EvaluationRunMode":{"shape":"DataQualityEvaluationRunMode"},
+        "DataQualityEvaluationConfig":{"shape":"NameString"},
         "ProfileId":{"shape":"HashString"},
         "Score":{"shape":"GenericBoundedDouble"},
         "DataSource":{"shape":"DataSource"},
@@ -8847,6 +9169,8 @@
       "type":"structure",
       "members":{
         "ResultId":{"shape":"HashString"},
+        "EvaluationRunMode":{"shape":"DataQualityEvaluationRunMode"},
+        "DataQualityEvaluationConfig":{"shape":"NameString"},
         "DataSource":{"shape":"DataSource"},
         "JobName":{"shape":"NameString"},
         "JobRunId":{"shape":"HashString"},
@@ -8864,7 +9188,9 @@
         "JobName":{"shape":"NameString"},
         "JobRunId":{"shape":"HashString"},
         "StartedAfter":{"shape":"Timestamp"},
-        "StartedBefore":{"shape":"Timestamp"}
+        "StartedBefore":{"shape":"Timestamp"},
+        "EvaluationRunMode":{"shape":"DataQualityEvaluationRunMode"},
+        "DataQualityEvaluationConfig":{"shape":"NameString"}
       }
     },
     "DataQualityResultIdList":{
@@ -8890,6 +9216,8 @@
       "required":["ResultId"],
       "members":{
         "ResultId":{"shape":"HashString"},
+        "EvaluationRunMode":{"shape":"DataQualityEvaluationRunMode"},
+        "DataQualityEvaluationConfig":{"shape":"NameString"},
         "DataSource":{"shape":"DataSource"},
         "Dimensions":{"shape":"PublishDataQualityResultDimensions"},
         "Tags":{"shape":"PublishDataQualityResultTags"},
@@ -8920,6 +9248,8 @@
       "type":"structure",
       "members":{
         "ResultId":{"shape":"HashString"},
+        "EvaluationRunMode":{"shape":"DataQualityEvaluationRunMode"},
+        "DataQualityEvaluationConfig":{"shape":"NameString"},
         "DataSource":{"shape":"DataSource"},
         "ResultPublishedOn":{"shape":"Timestamp"},
         "Dimensions":{"shape":"PublishDataQualityResultDimensions"},
@@ -8940,7 +9270,9 @@
         "PublishedAfter":{"shape":"Timestamp"},
         "PublishedBefore":{"shape":"Timestamp"},
         "Dimensions":{"shape":"PublishDataQualityResultDimensions"},
-        "EvaluationContext":{"shape":"NameString"}
+        "EvaluationContext":{"shape":"NameString"},
+        "EvaluationRunMode":{"shape":"DataQualityEvaluationRunMode"},
+        "DataQualityEvaluationConfig":{"shape":"NameString"}
       }
     },
     "DataQualityRuleRecommendationRunAdditionalRunOptions":{
@@ -9277,17 +9609,6 @@
       "type":"structure",
       "members":{}
     },
-    "DeleteAssetTypeRequest":{
-      "type":"structure",
-      "required":["Identifier"],
-      "members":{
-        "Identifier":{"shape":"AssetTypeId"}
-      }
-    },
-    "DeleteAssetTypeResponse":{
-      "type":"structure",
-      "members":{}
-    },
     "DeleteAttachmentRequest":{
       "type":"structure",
       "required":[
@@ -9304,9 +9625,9 @@
     "DeleteAttachmentResponse":{
       "type":"structure",
       "members":{
-        "AssetIdentifier":{"shape":"AssetId"},
+        "AssetId":{"shape":"AssetId"},
         "IterableFormName":{"shape":"IterableFormName"},
-        "ItemIdentifier":{"shape":"ItemIdentifier"}
+        "ItemId":{"shape":"ItemId"}
       }
     },
     "DeleteBehavior":{
@@ -9458,6 +9779,17 @@
       "members":{
         "Name":{"shape":"NameString"}
       }
+    },
+    "DeleteDataQualityEvaluationConfigRequest":{
+      "type":"structure",
+      "required":["Name"],
+      "members":{
+        "Name":{"shape":"NameString"}
+      }
+    },
+    "DeleteDataQualityEvaluationConfigResponse":{
+      "type":"structure",
+      "members":{}
     },
     "DeleteDataQualityRulesetRequest":{
       "type":"structure",
@@ -10091,10 +10423,10 @@
     "DisassociateGlossaryTermsResponse":{
       "type":"structure",
       "members":{
-        "AssetIdentifier":{"shape":"AssetId"},
+        "AssetId":{"shape":"AssetId"},
         "IterableFormName":{"shape":"IterableFormName"},
-        "ItemIdentifier":{"shape":"ItemIdentifier"},
-        "GlossaryTerms":{"shape":"GlossaryTermIdList"}
+        "ItemId":{"shape":"ItemId"},
+        "GlossaryTerms":{"shape":"GlossaryTermIdOutputList"}
       }
     },
     "DisplayName":{
@@ -10856,7 +11188,8 @@
     "FormTypeId":{
       "type":"string",
       "max":256,
-      "min":1
+      "min":1,
+      "pattern":"^(?![\\.:])([\\w.]+(::))?[A-Z]\\w*$"
     },
     "FormTypeItem":{
       "type":"structure",
@@ -10868,6 +11201,12 @@
     "FormTypeItemList":{
       "type":"list",
       "member":{"shape":"FormTypeItem"}
+    },
+    "FormTypeMaxResults":{
+      "type":"integer",
+      "box":true,
+      "max":100,
+      "min":1
     },
     "FormTypeName":{
       "type":"string",
@@ -10934,7 +11273,7 @@
         "CreatedAt":{"shape":"CreatedAt"},
         "UpdatedAt":{"shape":"UpdatedAt"},
         "AssetTypeId":{"shape":"AssetTypeId"},
-        "GlossaryTerms":{"shape":"GlossaryTermIdList"},
+        "GlossaryTerms":{"shape":"GlossaryTermIdOutputList"},
         "Forms":{"shape":"AssetFormMap"},
         "Attachments":{"shape":"AssetFormMap"},
         "IterableForms":{"shape":"IterableFormMap"}
@@ -10952,7 +11291,7 @@
       "members":{
         "Id":{"shape":"AssetTypeId"},
         "Name":{"shape":"AssetTypeName"},
-        "Forms":{"shape":"AssetTypeFormsMap"}
+        "Forms":{"shape":"AssetTypeFormOutputMap"}
       }
     },
     "GetBlueprintRequest":{
@@ -11312,12 +11651,40 @@
     "GetDataCatalogExportConfigurationOutput":{
       "type":"structure",
       "members":{
-        "ExportSetting":{"shape":"ExportSetting"},
-        "Status":{"shape":"ExportStatus"},
-        "EncryptionConfiguration":{"shape":"ExportEncryptionConfiguration"},
-        "S3TableBucketArn":{"shape":"S3TableBucketArn"},
         "CreatedAt":{"shape":"CreatedAt"},
-        "UpdatedAt":{"shape":"UpdatedAt"}
+        "UpdatedAt":{"shape":"UpdatedAt"},
+        "S3TablesConfiguration":{"shape":"S3TablesConfigurationResult"},
+        "Assets":{"shape":"AssetsExportResult"}
+      }
+    },
+    "GetDataQualityEvaluationConfigRequest":{
+      "type":"structure",
+      "required":["Name"],
+      "members":{
+        "Name":{"shape":"NameString"}
+      }
+    },
+    "GetDataQualityEvaluationConfigResponse":{
+      "type":"structure",
+      "members":{
+        "Name":{"shape":"NameString"},
+        "EvaluationRunMode":{"shape":"DataQualityEvaluationRunMode"},
+        "CreatedOn":{"shape":"Timestamp"},
+        "LastModifiedOn":{"shape":"Timestamp"},
+        "Level":{"shape":"DataQualityEvaluationConfigLevel"},
+        "DataSource":{"shape":"DataQualityEvaluationConfigDataSource"},
+        "RulesetName":{"shape":"NameString"},
+        "ManagedRulesetName":{"shape":"DataQualityEvaluationConfigManagedRuleset"},
+        "Triggers":{"shape":"DataQualityEvaluationConfigTriggers"},
+        "ScheduleExpression":{"shape":"DataQualityEvaluationConfigScheduleExpression"},
+        "StartAt":{"shape":"Timestamp"},
+        "EndAt":{"shape":"Timestamp"},
+        "PauseRuns":{"shape":"NullableBoolean"},
+        "Role":{"shape":"RoleString"},
+        "NumberOfWorkers":{"shape":"NullableInteger"},
+        "Timeout":{"shape":"Timeout"},
+        "AdditionalRunOptions":{"shape":"DataQualityEvaluationConfigAdditionalRunOptions"},
+        "AdditionalDataSources":{"shape":"DataSourceMap"}
       }
     },
     "GetDataQualityModelRequest":{
@@ -11366,6 +11733,8 @@
       "type":"structure",
       "members":{
         "ResultId":{"shape":"HashString"},
+        "EvaluationRunMode":{"shape":"DataQualityEvaluationRunMode"},
+        "DataQualityEvaluationConfig":{"shape":"NameString"},
         "ProfileId":{"shape":"HashString"},
         "Score":{"shape":"GenericBoundedDouble"},
         "DataSource":{"shape":"DataSource"},
@@ -11393,6 +11762,8 @@
       "type":"structure",
       "members":{
         "ResultId":{"shape":"HashString"},
+        "EvaluationRunMode":{"shape":"DataQualityEvaluationRunMode"},
+        "DataQualityEvaluationConfig":{"shape":"NameString"},
         "DataSource":{"shape":"DataSource"},
         "ProfileId":{"shape":"HashString"},
         "Dimensions":{"shape":"PublishDataQualityResultDimensions"},
@@ -11626,8 +11997,8 @@
         "Id":{"shape":"GlossaryTermId"},
         "GlossaryId":{"shape":"GlossaryId"},
         "Name":{"shape":"GlossaryTermName"},
-        "ShortDescription":{"shape":"GlossaryShortDescription"},
-        "LongDescription":{"shape":"GlossaryLongDescription"}
+        "ShortDescription":{"shape":"GlossaryTermShortDescription"},
+        "LongDescription":{"shape":"GlossaryTermLongDescription"}
       }
     },
     "GetGlueIdentityCenterConfigurationRequest":{
@@ -11738,6 +12109,37 @@
       "members":{
         "JobRuns":{"shape":"JobRunList"},
         "NextToken":{"shape":"GenericString"}
+      }
+    },
+    "GetJobUpgradeAnalysisRequest":{
+      "type":"structure",
+      "required":[
+        "analysisId",
+        "jobName"
+      ],
+      "members":{
+        "analysisId":{"shape":"Id"},
+        "jobName":{"shape":"Name"}
+      }
+    },
+    "GetJobUpgradeAnalysisResponse":{
+      "type":"structure",
+      "required":[
+        "jobName",
+        "analysisId",
+        "status",
+        "targetVersion"
+      ],
+      "members":{
+        "jobName":{"shape":"Name"},
+        "analysisId":{"shape":"Id"},
+        "status":{"shape":"Status"},
+        "sourceVersion":{"shape":"String"},
+        "targetVersion":{"shape":"String"},
+        "analysisType":{"shape":"AnalysisType"},
+        "autoUpgradeEvaluationSummary":{"shape":"String"},
+        "errorMessage":{"shape":"String"},
+        "autoUpgradeEligibilitySummary":{"shape":"String"}
       }
     },
     "GetJobsRequest":{
@@ -12583,7 +12985,12 @@
         "NextToken":{"shape":"GenericString"}
       }
     },
-    "GlossaryId":{"type":"string"},
+    "GlossaryId":{
+      "type":"string",
+      "max":36,
+      "min":1,
+      "pattern":"^[a-z0-9]+$"
+    },
     "GlossaryItem":{
       "type":"structure",
       "members":{
@@ -12596,9 +13003,10 @@
       "type":"list",
       "member":{"shape":"GlossaryItem"}
     },
-    "GlossaryLongDescription":{
-      "type":"string",
-      "max":4096,
+    "GlossaryMaxResults":{
+      "type":"integer",
+      "box":true,
+      "max":100,
       "min":1
     },
     "GlossaryName":{
@@ -12606,33 +13014,53 @@
       "max":256,
       "min":1
     },
-    "GlossaryShortDescription":{
+    "GlossaryTermId":{
       "type":"string",
-      "max":1024,
-      "min":1
+      "max":36,
+      "min":1,
+      "pattern":"^[a-z0-9]+$"
     },
-    "GlossaryTermId":{"type":"string"},
     "GlossaryTermIdList":{
       "type":"list",
       "member":{"shape":"GlossaryTermId"},
       "max":10,
       "min":1
     },
+    "GlossaryTermIdOutputList":{
+      "type":"list",
+      "member":{"shape":"GlossaryTermId"}
+    },
     "GlossaryTermItem":{
       "type":"structure",
       "members":{
         "Id":{"shape":"GlossaryTermId"},
         "Name":{"shape":"GlossaryTermName"},
-        "ShortDescription":{"shape":"GlossaryShortDescription"}
+        "ShortDescription":{"shape":"GlossaryTermShortDescription"}
       }
     },
     "GlossaryTermItemList":{
       "type":"list",
       "member":{"shape":"GlossaryTermItem"}
     },
+    "GlossaryTermLongDescription":{
+      "type":"string",
+      "max":4096,
+      "min":1
+    },
+    "GlossaryTermMaxResults":{
+      "type":"integer",
+      "box":true,
+      "max":100,
+      "min":1
+    },
     "GlossaryTermName":{
       "type":"string",
       "max":256,
+      "min":1
+    },
+    "GlossaryTermShortDescription":{
+      "type":"string",
+      "max":1024,
       "min":1
     },
     "GlueEncryptionException":{
@@ -12743,7 +13171,14 @@
       "type":"string",
       "max":255,
       "min":1,
-      "pattern":"^(\\w+\\.)+\\w+$"
+      "pattern":"^((\\w+\\.)+\\w+|auto)$"
+    },
+    "GovernanceMode":{
+      "type":"string",
+      "enum":[
+        "IAM_ONLY",
+        "LAKE_FORMATION"
+      ]
     },
     "GovernedCatalogSource":{
       "type":"structure",
@@ -13156,6 +13591,12 @@
         "remove-encryption-key"
       ]
     },
+    "Id":{
+      "type":"string",
+      "max":39,
+      "min":39,
+      "pattern":"ja-[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}"
+    },
     "IdString":{
       "type":"string",
       "max":255,
@@ -13546,7 +13987,7 @@
     "IterableFormEntry":{
       "type":"structure",
       "members":{
-        "FormTypeId":{"shape":"FormTypeId"}
+        "FormTypeId":{"shape":"IterableFormTypeId"}
       }
     },
     "IterableFormItem":{
@@ -13554,7 +13995,7 @@
       "members":{
         "ItemId":{"shape":"ItemId"},
         "ItemName":{"shape":"ItemName"},
-        "GlossaryTerms":{"shape":"GlossaryTermIdList"},
+        "GlossaryTerms":{"shape":"GlossaryTermIdOutputList"},
         "Forms":{"shape":"AssetFormMap"},
         "Attachments":{"shape":"AssetFormMap"}
       }
@@ -13570,7 +14011,7 @@
         "ItemId":{"shape":"ItemId"},
         "ItemName":{"shape":"ItemName"},
         "Description":{"shape":"ItemDescription"},
-        "GlossaryTerms":{"shape":"GlossaryTermIdList"}
+        "GlossaryTerms":{"shape":"GlossaryTermIdOutputList"}
       }
     },
     "IterableFormListItemList":{
@@ -13587,6 +14028,11 @@
       "max":256,
       "min":1,
       "pattern":"^[a-zA-Z][a-zA-Z0-9_]*(::[a-zA-Z][a-zA-Z0-9_]*)?$"
+    },
+    "IterableFormTypeId":{
+      "type":"string",
+      "max":256,
+      "min":1
     },
     "JDBCConnectionType":{
       "type":"string",
@@ -13763,7 +14209,8 @@
         "ExecutionClass":{"shape":"ExecutionClass"},
         "SourceControlDetails":{"shape":"SourceControlDetails"},
         "MaintenanceWindow":{"shape":"MaintenanceWindow"},
-        "ProfileName":{"shape":"NameString"}
+        "ProfileName":{"shape":"NameString"},
+        "AutoUpgradeMetadata":{"shape":"AutoUpgradeMetadata"}
       }
     },
     "JobBookmarkEntry":{
@@ -14164,7 +14611,7 @@
     "ListAssetTypesRequest":{
       "type":"structure",
       "members":{
-        "MaxResults":{"shape":"PageSize"},
+        "MaxResults":{"shape":"AssetTypeMaxResults"},
         "NextToken":{"shape":"Token"}
       }
     },
@@ -14262,6 +14709,21 @@
       "type":"structure",
       "members":{
         "CustomEntityTypes":{"shape":"CustomEntityTypes"},
+        "NextToken":{"shape":"PaginationToken"}
+      }
+    },
+    "ListDataQualityEvaluationConfigsRequest":{
+      "type":"structure",
+      "members":{
+        "Level":{"shape":"DataQualityEvaluationConfigLevel"},
+        "MaxResults":{"shape":"DataQualityEvaluationConfigPageSize"},
+        "NextToken":{"shape":"PaginationToken"}
+      }
+    },
+    "ListDataQualityEvaluationConfigsResponse":{
+      "type":"structure",
+      "members":{
+        "DataQualityEvaluationConfigs":{"shape":"DataQualityEvaluationConfigList"},
         "NextToken":{"shape":"PaginationToken"}
       }
     },
@@ -14413,7 +14875,7 @@
     "ListFormTypesRequest":{
       "type":"structure",
       "members":{
-        "MaxResults":{"shape":"PageSize"},
+        "MaxResults":{"shape":"FormTypeMaxResults"},
         "NextToken":{"shape":"Token"}
       }
     },
@@ -14428,7 +14890,7 @@
     "ListGlossariesRequest":{
       "type":"structure",
       "members":{
-        "MaxResults":{"shape":"PageSize"},
+        "MaxResults":{"shape":"GlossaryMaxResults"},
         "NextToken":{"shape":"Token"}
       }
     },
@@ -14444,7 +14906,7 @@
       "required":["GlossaryIdentifier"],
       "members":{
         "GlossaryIdentifier":{"shape":"GlossaryId"},
-        "MaxResults":{"shape":"PageSize"},
+        "MaxResults":{"shape":"GlossaryTermMaxResults"},
         "NextToken":{"shape":"Token"}
       }
     },
@@ -15137,6 +15599,12 @@
         "Database":{"shape":"EnclosedInStringProperty"},
         "Table":{"shape":"EnclosedInStringProperty"}
       }
+    },
+    "Name":{
+      "type":"string",
+      "max":255,
+      "min":1,
+      "pattern":"[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\t]*"
     },
     "NameString":{
       "type":"string",
@@ -16082,17 +16550,16 @@
     "PutAssetRequest":{
       "type":"structure",
       "required":[
-        "AssetTypeId",
         "Identifier",
         "Name",
         "Forms"
       ],
       "members":{
-        "AssetTypeId":{"shape":"AssetTypeId"},
+        "AssetTypeIdentifier":{"shape":"AssetTypeId"},
         "Identifier":{"shape":"AssetId"},
         "Name":{"shape":"AssetName"},
         "Description":{"shape":"AssetDescription"},
-        "Forms":{"shape":"AssetFormMap"},
+        "Forms":{"shape":"AssetFormInputMap"},
         "ClientToken":{
           "shape":"HashString",
           "idempotencyToken":true
@@ -16103,37 +16570,16 @@
       "type":"structure",
       "required":[
         "Id",
-        "Name"
+        "Name",
+        "AssetTypeId"
       ],
       "members":{
         "Id":{"shape":"AssetId"},
         "Name":{"shape":"AssetName"},
         "Description":{"shape":"AssetDescription"},
+        "AssetTypeId":{"shape":"AssetTypeId"},
         "CreatedAt":{"shape":"CreatedAt"},
         "Forms":{"shape":"AssetFormMap"}
-      }
-    },
-    "PutAssetTypeRequest":{
-      "type":"structure",
-      "required":[
-        "Name",
-        "Forms"
-      ],
-      "members":{
-        "Name":{"shape":"AssetTypeName"},
-        "Forms":{"shape":"AssetTypeFormsMap"},
-        "ClientToken":{
-          "shape":"HashString",
-          "idempotencyToken":true
-        }
-      }
-    },
-    "PutAssetTypeResponse":{
-      "type":"structure",
-      "members":{
-        "Id":{"shape":"AssetTypeId"},
-        "Name":{"shape":"AssetTypeName"},
-        "Forms":{"shape":"AssetTypeFormsMap"}
       }
     },
     "PutAttachmentRequest":{
@@ -16141,8 +16587,7 @@
       "required":[
         "AssetIdentifier",
         "AttachmentName",
-        "Content",
-        "FormTypeId"
+        "Content"
       ],
       "members":{
         "AssetIdentifier":{"shape":"AssetId"},
@@ -16150,7 +16595,7 @@
         "ItemIdentifier":{"shape":"ItemIdentifier"},
         "AttachmentName":{"shape":"AttachmentName"},
         "Content":{"shape":"FormContent"},
-        "FormTypeId":{"shape":"FormTypeId"},
+        "FormTypeIdentifier":{"shape":"FormTypeId"},
         "ClientToken":{
           "shape":"HashString",
           "idempotencyToken":true
@@ -16160,9 +16605,9 @@
     "PutAttachmentResponse":{
       "type":"structure",
       "members":{
-        "AssetIdentifier":{"shape":"AssetId"},
+        "AssetId":{"shape":"AssetId"},
         "IterableFormName":{"shape":"IterableFormName"},
-        "ItemIdentifier":{"shape":"ItemIdentifier"},
+        "ItemId":{"shape":"ItemId"},
         "AttachmentName":{"shape":"AttachmentName"},
         "FormTypeId":{"shape":"FormTypeId"}
       }
@@ -16181,21 +16626,20 @@
     },
     "PutDataCatalogExportConfigurationInput":{
       "type":"structure",
-      "required":["ExportSetting"],
       "members":{
-        "ExportSetting":{"shape":"ExportSetting"},
-        "EncryptionConfiguration":{"shape":"ExportEncryptionConfiguration"},
         "ClientToken":{
           "shape":"HashString",
           "idempotencyToken":true
-        }
+        },
+        "S3TablesConfiguration":{"shape":"S3TablesConfiguration"},
+        "Assets":{"shape":"AssetsExport"}
       }
     },
     "PutDataCatalogExportConfigurationOutput":{
       "type":"structure",
       "members":{
-        "ExportSetting":{"shape":"ExportSetting"},
-        "EncryptionConfiguration":{"shape":"ExportEncryptionConfiguration"}
+        "S3TablesConfiguration":{"shape":"S3TablesConfiguration"},
+        "Assets":{"shape":"AssetsExport"}
       }
     },
     "PutDataQualityProfileAnnotationRequest":{
@@ -16682,7 +17126,8 @@
       "type":"structure",
       "members":{
         "ResourceType":{"shape":"ResourceType"},
-        "Uri":{"shape":"URI"}
+        "Uri":{"shape":"URI"},
+        "LastModified":{"shape":"Timestamp"}
       }
     },
     "ResourceUriList":{
@@ -17256,6 +17701,25 @@
       }
     },
     "S3TableBucketArn":{"type":"string"},
+    "S3TablesConfiguration":{
+      "type":"structure",
+      "members":{
+        "EncryptionConfiguration":{"shape":"ExportEncryptionConfiguration"}
+      }
+    },
+    "S3TablesConfigurationResult":{
+      "type":"structure",
+      "members":{
+        "TableBucketArn":{"shape":"S3TableBucketArn"},
+        "EncryptionConfiguration":{"shape":"ExportEncryptionConfiguration"}
+      }
+    },
+    "S3TablesExportState":{
+      "type":"structure",
+      "members":{
+        "Status":{"shape":"ExportStatus"}
+      }
+    },
     "S3Target":{
       "type":"structure",
       "members":{
@@ -17486,13 +17950,10 @@
     },
     "SearchAttributeFilter":{
       "type":"structure",
-      "required":[
-        "Attribute",
-        "Operator"
-      ],
+      "required":["Attribute"],
       "members":{
         "Attribute":{"shape":"SearchAttribute"},
-        "Operator":{"shape":"SearchFilterOperator"},
+        "Comparator":{"shape":"SearchFilterComparator"},
         "Value":{"shape":"SearchFilterValue"}
       }
     },
@@ -17512,18 +17973,18 @@
       "max":10,
       "min":1
     },
-    "SearchFilterLongValue":{"type":"long"},
-    "SearchFilterOperator":{
+    "SearchFilterComparator":{
       "type":"string",
       "enum":[
-        "equals",
-        "greaterThan",
-        "greaterThanOrEquals",
-        "lessThan",
-        "lessThanOrEquals",
-        "notExists"
+        "EQUALS",
+        "GREATER_THAN",
+        "GREATER_THAN_OR_EQUALS",
+        "LESS_THAN",
+        "LESS_THAN_OR_EQUALS",
+        "NOT_EXISTS"
       ]
     },
+    "SearchFilterLongValue":{"type":"long"},
     "SearchFilterStringValue":{
       "type":"string",
       "max":256,
@@ -17577,8 +18038,9 @@
       "type":"structure",
       "members":{
         "Id":{"shape":"AssetId"},
-        "AssetName":{"shape":"SearchResultName"},
-        "AssetDescription":{"shape":"AssetDescription"},
+        "Name":{"shape":"AssetName"},
+        "Description":{"shape":"AssetDescription"},
+        "CreatedAt":{"shape":"CreatedAt"},
         "UpdatedAt":{"shape":"UpdatedAt"},
         "AssetTypeId":{"shape":"AssetTypeId"}
       }
@@ -17587,7 +18049,6 @@
       "type":"list",
       "member":{"shape":"SearchResultItem"}
     },
-    "SearchResultName":{"type":"string"},
     "SearchSort":{
       "type":"structure",
       "required":["Attribute"],
@@ -18264,6 +18725,22 @@
         "JobRunId":{"shape":"IdString"}
       }
     },
+    "StartJobUpgradeAnalysisRequest":{
+      "type":"structure",
+      "required":["jobName"],
+      "members":{
+        "jobName":{"shape":"Name"},
+        "analysisId":{"shape":"Id"},
+        "upgradeConsent":{"shape":"UpgradeConsent"}
+      }
+    },
+    "StartJobUpgradeAnalysisResponse":{
+      "type":"structure",
+      "members":{
+        "analysisId":{"shape":"Id"},
+        "jobName":{"shape":"Name"}
+      }
+    },
     "StartMLEvaluationTaskRunRequest":{
       "type":"structure",
       "required":["TransformId"],
@@ -18466,6 +18943,18 @@
       "type":"list",
       "member":{"shape":"StatisticSummary"}
     },
+    "Status":{
+      "type":"string",
+      "enum":[
+        "OBSERVING",
+        "WAITING_FOR_CONSENT",
+        "UPGRADING",
+        "SUCCEEDED",
+        "FAILED",
+        "TIMEOUT",
+        "STOPPED"
+      ]
+    },
     "StatusDetails":{
       "type":"structure",
       "members":{
@@ -18524,6 +19013,21 @@
       }
     },
     "StopCrawlerScheduleResponse":{
+      "type":"structure",
+      "members":{}
+    },
+    "StopJobUpgradeAnalysisRequest":{
+      "type":"structure",
+      "required":[
+        "jobName",
+        "analysisId"
+      ],
+      "members":{
+        "jobName":{"shape":"Name"},
+        "analysisId":{"shape":"Id"}
+      }
+    },
+    "StopJobUpgradeAnalysisResponse":{
       "type":"structure",
       "members":{}
     },
@@ -19634,6 +20138,49 @@
         "Serde":{"shape":"CsvSerdeOption"}
       }
     },
+    "UpdateDataQualityEvaluationConfigRequest":{
+      "type":"structure",
+      "required":["Name"],
+      "members":{
+        "Name":{"shape":"NameString"},
+        "DataSource":{"shape":"DataQualityEvaluationConfigDataSource"},
+        "RulesetName":{"shape":"NameString"},
+        "ManagedRulesetName":{"shape":"DataQualityEvaluationConfigManagedRuleset"},
+        "Triggers":{"shape":"DataQualityEvaluationConfigTriggers"},
+        "ScheduleExpression":{"shape":"DataQualityEvaluationConfigScheduleExpression"},
+        "StartAt":{"shape":"Timestamp"},
+        "EndAt":{"shape":"Timestamp"},
+        "PauseRuns":{"shape":"NullableBoolean"},
+        "Role":{"shape":"RoleString"},
+        "NumberOfWorkers":{"shape":"NullableInteger"},
+        "Timeout":{"shape":"Timeout"},
+        "AdditionalRunOptions":{"shape":"DataQualityEvaluationConfigAdditionalRunOptions"},
+        "AdditionalDataSources":{"shape":"DataSourceMap"}
+      }
+    },
+    "UpdateDataQualityEvaluationConfigResponse":{
+      "type":"structure",
+      "members":{
+        "Name":{"shape":"NameString"},
+        "EvaluationRunMode":{"shape":"DataQualityEvaluationRunMode"},
+        "CreatedOn":{"shape":"Timestamp"},
+        "LastModifiedOn":{"shape":"Timestamp"},
+        "Level":{"shape":"DataQualityEvaluationConfigLevel"},
+        "DataSource":{"shape":"DataQualityEvaluationConfigDataSource"},
+        "RulesetName":{"shape":"NameString"},
+        "ManagedRulesetName":{"shape":"DataQualityEvaluationConfigManagedRuleset"},
+        "Triggers":{"shape":"DataQualityEvaluationConfigTriggers"},
+        "ScheduleExpression":{"shape":"DataQualityEvaluationConfigScheduleExpression"},
+        "StartAt":{"shape":"Timestamp"},
+        "EndAt":{"shape":"Timestamp"},
+        "PauseRuns":{"shape":"NullableBoolean"},
+        "Role":{"shape":"RoleString"},
+        "NumberOfWorkers":{"shape":"NullableInteger"},
+        "Timeout":{"shape":"Timeout"},
+        "AdditionalRunOptions":{"shape":"DataQualityEvaluationConfigAdditionalRunOptions"},
+        "AdditionalDataSources":{"shape":"DataSourceMap"}
+      }
+    },
     "UpdateDataQualityRulesetRequest":{
       "type":"structure",
       "required":["Name"],
@@ -19685,13 +20232,18 @@
       "type":"structure",
       "members":{}
     },
+    "UpdateGlossaryDescription":{
+      "type":"string",
+      "max":2048,
+      "min":0
+    },
     "UpdateGlossaryRequest":{
       "type":"structure",
       "required":["Identifier"],
       "members":{
         "Identifier":{"shape":"GlossaryId"},
         "Name":{"shape":"GlossaryName"},
-        "Description":{"shape":"MetadataDescription"},
+        "Description":{"shape":"UpdateGlossaryDescription"},
         "ClientToken":{
           "shape":"HashString",
           "idempotencyToken":true
@@ -19706,14 +20258,19 @@
         "Description":{"shape":"MetadataDescription"}
       }
     },
+    "UpdateGlossaryTermLongDescription":{
+      "type":"string",
+      "max":4096,
+      "min":0
+    },
     "UpdateGlossaryTermRequest":{
       "type":"structure",
       "required":["Identifier"],
       "members":{
         "Identifier":{"shape":"GlossaryTermId"},
         "Name":{"shape":"GlossaryTermName"},
-        "ShortDescription":{"shape":"GlossaryShortDescription"},
-        "LongDescription":{"shape":"GlossaryLongDescription"},
+        "ShortDescription":{"shape":"UpdateGlossaryTermShortDescription"},
+        "LongDescription":{"shape":"UpdateGlossaryTermLongDescription"},
         "ClientToken":{
           "shape":"HashString",
           "idempotencyToken":true
@@ -19726,9 +20283,14 @@
         "Id":{"shape":"GlossaryTermId"},
         "GlossaryId":{"shape":"GlossaryId"},
         "Name":{"shape":"GlossaryTermName"},
-        "ShortDescription":{"shape":"GlossaryShortDescription"},
-        "LongDescription":{"shape":"GlossaryLongDescription"}
+        "ShortDescription":{"shape":"GlossaryTermShortDescription"},
+        "LongDescription":{"shape":"GlossaryTermLongDescription"}
       }
+    },
+    "UpdateGlossaryTermShortDescription":{
+      "type":"string",
+      "max":1024,
+      "min":0
     },
     "UpdateGlueIdentityCenterConfigurationRequest":{
       "type":"structure",
@@ -20071,6 +20633,13 @@
     },
     "UpdatedAt":{"type":"timestamp"},
     "UpdatedTimestamp":{"type":"string"},
+    "UpgradeConsent":{
+      "type":"string",
+      "enum":[
+        "APPROVE",
+        "DECLINE"
+      ]
+    },
     "UpsertRedshiftTargetOptions":{
       "type":"structure",
       "members":{
@@ -20109,6 +20678,8 @@
         "OwnerType":{"shape":"PrincipalType"},
         "CreateTime":{"shape":"Timestamp"},
         "ResourceUris":{"shape":"ResourceUriList"},
+        "ArtifactLocation":{"shape":"URI"},
+        "GovernanceMode":{"shape":"GovernanceMode"},
         "CatalogId":{"shape":"CatalogIdString"}
       }
     },
@@ -20120,7 +20691,9 @@
         "OwnerName":{"shape":"NameString"},
         "FunctionType":{"shape":"FunctionType"},
         "OwnerType":{"shape":"PrincipalType"},
-        "ResourceUris":{"shape":"ResourceUriList"}
+        "ResourceUris":{"shape":"ResourceUriList"},
+        "ArtifactLocation":{"shape":"URI"},
+        "GovernanceMode":{"shape":"GovernanceMode"}
       }
     },
     "UserDefinedFunctionList":{

@@ -264,7 +264,8 @@ module Aws::DeviceFarm
     #     An integer representing the maximum number attempts that will be made for
     #     a single request, including the initial attempt.  For example,
     #     setting this value to 5 will result in a request being retried up to
-    #     4 times. Used in `standard` and `adaptive` retry modes.
+    #     4 times. Used in `standard` and `adaptive` retry modes. Defaults to 3,
+    #     except for DynamoDB and DynamoDB Streams, which default to 4.
     #
     #   @option options [String] :profile ("default")
     #     Used when loading credentials from the shared credentials file at `HOME/.aws/credentials`.
@@ -327,15 +328,15 @@ module Aws::DeviceFarm
     #     used by the default backoff function. This option is only used in the
     #     `legacy` retry mode.
     #
-    #   @option options [String] :retry_mode ("legacy")
+    #   @option options [String] :retry_mode ("standard")
     #     Specifies which retry algorithm to use. Values are:
     #
-    #     * `legacy` - The pre-existing retry behavior. This is the default
-    #       value if no retry mode is provided.
+    #     * `legacy` - The pre-existing retry behavior.
     #
     #     * `standard` - A standardized set of retry rules across the AWS SDKs.
     #       This includes support for retry quotas, which limit the number of
-    #       unsuccessful retries a client can make.
+    #       unsuccessful retries a client can make. This is the default value
+    #       if no retry mode is provided.
     #
     #     * `adaptive` - A retry mode that includes all the functionality of
     #       `standard` mode along with automatic client side throttling.
@@ -502,6 +503,14 @@ module Aws::DeviceFarm
     # @option params [required, Array<Types::Rule>] :rules
     #   The device pool's rules.
     #
+    #   <note markdown="1"> A device pool contains either physical devices or virtual devices, but
+    #   not both. If you define the pool with attribute rules and those rules
+    #   do not include a `DEVICE_TYPE` rule, the pool contains only physical
+    #   devices. If you define the pool by listing device ARNs, the pool
+    #   contains the devices you list.
+    #
+    #    </note>
+    #
     # @option params [Integer] :max_devices
     #   The number of devices that Device Farm can add to your device pool.
     #   Device Farm adds devices that are available and meet the criteria that
@@ -543,7 +552,7 @@ module Aws::DeviceFarm
     #     description: "Message",
     #     rules: [ # required
     #       {
-    #         attribute: "ARN", # accepts ARN, PLATFORM, FORM_FACTOR, MANUFACTURER, REMOTE_ACCESS_ENABLED, REMOTE_DEBUG_ENABLED, APPIUM_VERSION, INSTANCE_ARN, INSTANCE_LABELS, FLEET_TYPE, OS_VERSION, MODEL, AVAILABILITY
+    #         attribute: "ARN", # accepts ARN, PLATFORM, FORM_FACTOR, DEVICE_TYPE, MANUFACTURER, REMOTE_ACCESS_ENABLED, REMOTE_DEBUG_ENABLED, APPIUM_VERSION, INSTANCE_ARN, INSTANCE_LABELS, FLEET_TYPE, OS_VERSION, MODEL, AVAILABILITY
     #         operator: "EQUALS", # accepts EQUALS, LESS_THAN, LESS_THAN_OR_EQUALS, GREATER_THAN, GREATER_THAN_OR_EQUALS, IN, NOT_IN, CONTAINS
     #         value: "String",
     #       },
@@ -558,7 +567,7 @@ module Aws::DeviceFarm
     #   resp.device_pool.description #=> String
     #   resp.device_pool.type #=> String, one of "CURATED", "PRIVATE"
     #   resp.device_pool.rules #=> Array
-    #   resp.device_pool.rules[0].attribute #=> String, one of "ARN", "PLATFORM", "FORM_FACTOR", "MANUFACTURER", "REMOTE_ACCESS_ENABLED", "REMOTE_DEBUG_ENABLED", "APPIUM_VERSION", "INSTANCE_ARN", "INSTANCE_LABELS", "FLEET_TYPE", "OS_VERSION", "MODEL", "AVAILABILITY"
+    #   resp.device_pool.rules[0].attribute #=> String, one of "ARN", "PLATFORM", "FORM_FACTOR", "DEVICE_TYPE", "MANUFACTURER", "REMOTE_ACCESS_ENABLED", "REMOTE_DEBUG_ENABLED", "APPIUM_VERSION", "INSTANCE_ARN", "INSTANCE_LABELS", "FLEET_TYPE", "OS_VERSION", "MODEL", "AVAILABILITY"
     #   resp.device_pool.rules[0].operator #=> String, one of "EQUALS", "LESS_THAN", "LESS_THAN_OR_EQUALS", "GREATER_THAN", "GREATER_THAN_OR_EQUALS", "IN", "NOT_IN", "CONTAINS"
     #   resp.device_pool.rules[0].value #=> String
     #   resp.device_pool.max_devices #=> Integer
@@ -921,6 +930,7 @@ module Aws::DeviceFarm
     #   resp.remote_access_session.device.model_id #=> String
     #   resp.remote_access_session.device.form_factor #=> String, one of "PHONE", "TABLET"
     #   resp.remote_access_session.device.platform #=> String, one of "ANDROID", "IOS"
+    #   resp.remote_access_session.device.type #=> String, one of "PHYSICAL", "VIRTUAL"
     #   resp.remote_access_session.device.os #=> String
     #   resp.remote_access_session.device.cpu.frequency #=> String
     #   resp.remote_access_session.device.cpu.architecture #=> String
@@ -1610,6 +1620,7 @@ module Aws::DeviceFarm
     #   {
     #     device: {
     #       name: "LG G2 (Sprint)", 
+    #       type: "PHYSICAL", 
     #       arn: "arn:aws:devicefarm:us-west-2::device:A0E6E6E1059E45918208DF75B2B7EF6C", 
     #       cpu: {
     #         architecture: "armeabi-v7a", 
@@ -1646,6 +1657,7 @@ module Aws::DeviceFarm
     #   resp.device.model_id #=> String
     #   resp.device.form_factor #=> String, one of "PHONE", "TABLET"
     #   resp.device.platform #=> String, one of "ANDROID", "IOS"
+    #   resp.device.type #=> String, one of "PHYSICAL", "VIRTUAL"
     #   resp.device.os #=> String
     #   resp.device.cpu.frequency #=> String
     #   resp.device.cpu.architecture #=> String
@@ -1765,7 +1777,7 @@ module Aws::DeviceFarm
     #   resp.device_pool.description #=> String
     #   resp.device_pool.type #=> String, one of "CURATED", "PRIVATE"
     #   resp.device_pool.rules #=> Array
-    #   resp.device_pool.rules[0].attribute #=> String, one of "ARN", "PLATFORM", "FORM_FACTOR", "MANUFACTURER", "REMOTE_ACCESS_ENABLED", "REMOTE_DEBUG_ENABLED", "APPIUM_VERSION", "INSTANCE_ARN", "INSTANCE_LABELS", "FLEET_TYPE", "OS_VERSION", "MODEL", "AVAILABILITY"
+    #   resp.device_pool.rules[0].attribute #=> String, one of "ARN", "PLATFORM", "FORM_FACTOR", "DEVICE_TYPE", "MANUFACTURER", "REMOTE_ACCESS_ENABLED", "REMOTE_DEBUG_ENABLED", "APPIUM_VERSION", "INSTANCE_ARN", "INSTANCE_LABELS", "FLEET_TYPE", "OS_VERSION", "MODEL", "AVAILABILITY"
     #   resp.device_pool.rules[0].operator #=> String, one of "EQUALS", "LESS_THAN", "LESS_THAN_OR_EQUALS", "GREATER_THAN", "GREATER_THAN_OR_EQUALS", "IN", "NOT_IN", "CONTAINS"
     #   resp.device_pool.rules[0].value #=> String
     #   resp.device_pool.max_devices #=> Integer
@@ -1902,7 +1914,7 @@ module Aws::DeviceFarm
     #         },
     #       ],
     #       execution_role_arn: "AmazonRoleResourceName",
-    #       insights_types: ["TEST_REPORT"], # accepts TEST_REPORT
+    #       insights_types: ["TEST_REPORT"], # accepts TEST_REPORT, NONE
     #     },
     #     project_arn: "AmazonResourceName",
     #   })
@@ -1917,6 +1929,7 @@ module Aws::DeviceFarm
     #   resp.compatible_devices[0].device.model_id #=> String
     #   resp.compatible_devices[0].device.form_factor #=> String, one of "PHONE", "TABLET"
     #   resp.compatible_devices[0].device.platform #=> String, one of "ANDROID", "IOS"
+    #   resp.compatible_devices[0].device.type #=> String, one of "PHYSICAL", "VIRTUAL"
     #   resp.compatible_devices[0].device.os #=> String
     #   resp.compatible_devices[0].device.cpu.frequency #=> String
     #   resp.compatible_devices[0].device.cpu.architecture #=> String
@@ -1950,7 +1963,7 @@ module Aws::DeviceFarm
     #   resp.compatible_devices[0].compatible #=> Boolean
     #   resp.compatible_devices[0].incompatibility_messages #=> Array
     #   resp.compatible_devices[0].incompatibility_messages[0].message #=> String
-    #   resp.compatible_devices[0].incompatibility_messages[0].type #=> String, one of "ARN", "PLATFORM", "FORM_FACTOR", "MANUFACTURER", "REMOTE_ACCESS_ENABLED", "REMOTE_DEBUG_ENABLED", "APPIUM_VERSION", "INSTANCE_ARN", "INSTANCE_LABELS", "FLEET_TYPE", "OS_VERSION", "MODEL", "AVAILABILITY"
+    #   resp.compatible_devices[0].incompatibility_messages[0].type #=> String, one of "ARN", "PLATFORM", "FORM_FACTOR", "DEVICE_TYPE", "MANUFACTURER", "REMOTE_ACCESS_ENABLED", "REMOTE_DEBUG_ENABLED", "APPIUM_VERSION", "INSTANCE_ARN", "INSTANCE_LABELS", "FLEET_TYPE", "OS_VERSION", "MODEL", "AVAILABILITY"
     #   resp.incompatible_devices #=> Array
     #   resp.incompatible_devices[0].device.arn #=> String
     #   resp.incompatible_devices[0].device.name #=> String
@@ -1959,6 +1972,7 @@ module Aws::DeviceFarm
     #   resp.incompatible_devices[0].device.model_id #=> String
     #   resp.incompatible_devices[0].device.form_factor #=> String, one of "PHONE", "TABLET"
     #   resp.incompatible_devices[0].device.platform #=> String, one of "ANDROID", "IOS"
+    #   resp.incompatible_devices[0].device.type #=> String, one of "PHYSICAL", "VIRTUAL"
     #   resp.incompatible_devices[0].device.os #=> String
     #   resp.incompatible_devices[0].device.cpu.frequency #=> String
     #   resp.incompatible_devices[0].device.cpu.architecture #=> String
@@ -1992,7 +2006,7 @@ module Aws::DeviceFarm
     #   resp.incompatible_devices[0].compatible #=> Boolean
     #   resp.incompatible_devices[0].incompatibility_messages #=> Array
     #   resp.incompatible_devices[0].incompatibility_messages[0].message #=> String
-    #   resp.incompatible_devices[0].incompatibility_messages[0].type #=> String, one of "ARN", "PLATFORM", "FORM_FACTOR", "MANUFACTURER", "REMOTE_ACCESS_ENABLED", "REMOTE_DEBUG_ENABLED", "APPIUM_VERSION", "INSTANCE_ARN", "INSTANCE_LABELS", "FLEET_TYPE", "OS_VERSION", "MODEL", "AVAILABILITY"
+    #   resp.incompatible_devices[0].incompatibility_messages[0].type #=> String, one of "ARN", "PLATFORM", "FORM_FACTOR", "DEVICE_TYPE", "MANUFACTURER", "REMOTE_ACCESS_ENABLED", "REMOTE_DEBUG_ENABLED", "APPIUM_VERSION", "INSTANCE_ARN", "INSTANCE_LABELS", "FLEET_TYPE", "OS_VERSION", "MODEL", "AVAILABILITY"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetDevicePoolCompatibility AWS API Documentation
     #
@@ -2092,6 +2106,7 @@ module Aws::DeviceFarm
     #   resp.job.device.model_id #=> String
     #   resp.job.device.form_factor #=> String, one of "PHONE", "TABLET"
     #   resp.job.device.platform #=> String, one of "ANDROID", "IOS"
+    #   resp.job.device.type #=> String, one of "PHYSICAL", "VIRTUAL"
     #   resp.job.device.os #=> String
     #   resp.job.device.cpu.frequency #=> String
     #   resp.job.device.cpu.architecture #=> String
@@ -2395,6 +2410,7 @@ module Aws::DeviceFarm
     #   resp.remote_access_session.device.model_id #=> String
     #   resp.remote_access_session.device.form_factor #=> String, one of "PHONE", "TABLET"
     #   resp.remote_access_session.device.platform #=> String, one of "ANDROID", "IOS"
+    #   resp.remote_access_session.device.type #=> String, one of "PHYSICAL", "VIRTUAL"
     #   resp.remote_access_session.device.os #=> String
     #   resp.remote_access_session.device.cpu.frequency #=> String
     #   resp.remote_access_session.device.cpu.architecture #=> String
@@ -2569,8 +2585,9 @@ module Aws::DeviceFarm
     #   resp.run.web_url #=> String
     #   resp.run.skip_app_resign #=> Boolean
     #   resp.run.test_spec_arn #=> String
+    #   resp.run.test_package_arn #=> String
     #   resp.run.device_selection_result.filters #=> Array
-    #   resp.run.device_selection_result.filters[0].attribute #=> String, one of "ARN", "PLATFORM", "OS_VERSION", "MODEL", "AVAILABILITY", "FORM_FACTOR", "MANUFACTURER", "REMOTE_ACCESS_ENABLED", "REMOTE_DEBUG_ENABLED", "INSTANCE_ARN", "INSTANCE_LABELS", "FLEET_TYPE"
+    #   resp.run.device_selection_result.filters[0].attribute #=> String, one of "ARN", "PLATFORM", "OS_VERSION", "MODEL", "AVAILABILITY", "FORM_FACTOR", "DEVICE_TYPE", "MANUFACTURER", "REMOTE_ACCESS_ENABLED", "REMOTE_DEBUG_ENABLED", "INSTANCE_ARN", "INSTANCE_LABELS", "FLEET_TYPE"
     #   resp.run.device_selection_result.filters[0].operator #=> String, one of "EQUALS", "LESS_THAN", "LESS_THAN_OR_EQUALS", "GREATER_THAN", "GREATER_THAN_OR_EQUALS", "IN", "NOT_IN", "CONTAINS"
     #   resp.run.device_selection_result.filters[0].values #=> Array
     #   resp.run.device_selection_result.filters[0].values[0] #=> String
@@ -2586,7 +2603,7 @@ module Aws::DeviceFarm
     #   resp.run.environment_variables[0].name #=> String
     #   resp.run.environment_variables[0].value #=> String
     #   resp.run.insights_types #=> Array
-    #   resp.run.insights_types[0] #=> String, one of "TEST_REPORT"
+    #   resp.run.insights_types[0] #=> String, one of "TEST_REPORT", "NONE"
     #   resp.run.insights.status #=> String, one of "PENDING", "RUNNING", "COMPLETED", "SKIPPED", "ERRORED"
     #   resp.run.insights.job_report.message #=> String
     #   resp.run.insights.job_report.metrics.jobs_total #=> Integer
@@ -3014,7 +3031,7 @@ module Aws::DeviceFarm
     #   resp.artifacts #=> Array
     #   resp.artifacts[0].arn #=> String
     #   resp.artifacts[0].name #=> String
-    #   resp.artifacts[0].type #=> String, one of "UNKNOWN", "SCREENSHOT", "DEVICE_LOG", "MESSAGE_LOG", "VIDEO_LOG", "RESULT_LOG", "SERVICE_LOG", "WEBKIT_LOG", "INSTRUMENTATION_OUTPUT", "EXERCISER_MONKEY_OUTPUT", "CALABASH_JSON_OUTPUT", "CALABASH_PRETTY_OUTPUT", "CALABASH_STANDARD_OUTPUT", "CALABASH_JAVA_XML_OUTPUT", "AUTOMATION_OUTPUT", "APPIUM_SERVER_OUTPUT", "APPIUM_JAVA_OUTPUT", "APPIUM_JAVA_XML_OUTPUT", "APPIUM_PYTHON_OUTPUT", "APPIUM_PYTHON_XML_OUTPUT", "EXPLORER_EVENT_LOG", "EXPLORER_SUMMARY_LOG", "APPLICATION_CRASH_REPORT", "XCTEST_LOG", "VIDEO", "CUSTOMER_ARTIFACT", "CUSTOMER_ARTIFACT_LOG", "TESTSPEC_OUTPUT"
+    #   resp.artifacts[0].type #=> String, one of "UNKNOWN", "SCREENSHOT", "DEVICE_LOG", "MESSAGE_LOG", "VIDEO_LOG", "RESULT_LOG", "SERVICE_LOG", "WEBKIT_LOG", "INSTRUMENTATION_OUTPUT", "EXERCISER_MONKEY_OUTPUT", "CALABASH_JSON_OUTPUT", "CALABASH_PRETTY_OUTPUT", "CALABASH_STANDARD_OUTPUT", "CALABASH_JAVA_XML_OUTPUT", "AUTOMATION_OUTPUT", "APPIUM_SERVER_OUTPUT", "APPIUM_JAVA_OUTPUT", "APPIUM_JAVA_XML_OUTPUT", "APPIUM_PYTHON_OUTPUT", "APPIUM_PYTHON_XML_OUTPUT", "EXPLORER_EVENT_LOG", "EXPLORER_SUMMARY_LOG", "APPLICATION_CRASH_REPORT", "XCTEST_LOG", "VIDEO", "CUSTOMER_ARTIFACT", "CUSTOMER_ARTIFACT_LOG", "TESTSPEC_OUTPUT", "DEVICE_CONNECT_COMMAND_LOG"
     #   resp.artifacts[0].extension #=> String
     #   resp.artifacts[0].url #=> String
     #   resp.next_token #=> String
@@ -3163,7 +3180,7 @@ module Aws::DeviceFarm
     #   resp.device_pools[0].description #=> String
     #   resp.device_pools[0].type #=> String, one of "CURATED", "PRIVATE"
     #   resp.device_pools[0].rules #=> Array
-    #   resp.device_pools[0].rules[0].attribute #=> String, one of "ARN", "PLATFORM", "FORM_FACTOR", "MANUFACTURER", "REMOTE_ACCESS_ENABLED", "REMOTE_DEBUG_ENABLED", "APPIUM_VERSION", "INSTANCE_ARN", "INSTANCE_LABELS", "FLEET_TYPE", "OS_VERSION", "MODEL", "AVAILABILITY"
+    #   resp.device_pools[0].rules[0].attribute #=> String, one of "ARN", "PLATFORM", "FORM_FACTOR", "DEVICE_TYPE", "MANUFACTURER", "REMOTE_ACCESS_ENABLED", "REMOTE_DEBUG_ENABLED", "APPIUM_VERSION", "INSTANCE_ARN", "INSTANCE_LABELS", "FLEET_TYPE", "OS_VERSION", "MODEL", "AVAILABILITY"
     #   resp.device_pools[0].rules[0].operator #=> String, one of "EQUALS", "LESS_THAN", "LESS_THAN_OR_EQUALS", "GREATER_THAN", "GREATER_THAN_OR_EQUALS", "IN", "NOT_IN", "CONTAINS"
     #   resp.device_pools[0].rules[0].value #=> String
     #   resp.device_pools[0].max_devices #=> Integer
@@ -3212,6 +3229,9 @@ module Aws::DeviceFarm
     #
     #     * FORM\_FACTOR: The device form factor. Valid values are PHONE or
     #       TABLET.
+    #
+    #     * DEVICE\_TYPE: The device type. Valid values are PHYSICAL or
+    #       VIRTUAL.
     #
     #     * MANUFACTURER: The device manufacturer (for example, Apple).
     #
@@ -3284,7 +3304,7 @@ module Aws::DeviceFarm
     #     next_token: "PaginationToken",
     #     filters: [
     #       {
-    #         attribute: "ARN", # required, accepts ARN, PLATFORM, OS_VERSION, MODEL, AVAILABILITY, FORM_FACTOR, MANUFACTURER, REMOTE_ACCESS_ENABLED, REMOTE_DEBUG_ENABLED, INSTANCE_ARN, INSTANCE_LABELS, FLEET_TYPE
+    #         attribute: "ARN", # required, accepts ARN, PLATFORM, OS_VERSION, MODEL, AVAILABILITY, FORM_FACTOR, DEVICE_TYPE, MANUFACTURER, REMOTE_ACCESS_ENABLED, REMOTE_DEBUG_ENABLED, INSTANCE_ARN, INSTANCE_LABELS, FLEET_TYPE
     #         operator: "EQUALS", # required, accepts EQUALS, LESS_THAN, LESS_THAN_OR_EQUALS, GREATER_THAN, GREATER_THAN_OR_EQUALS, IN, NOT_IN, CONTAINS
     #         values: ["String"], # required
     #       },
@@ -3301,6 +3321,7 @@ module Aws::DeviceFarm
     #   resp.devices[0].model_id #=> String
     #   resp.devices[0].form_factor #=> String, one of "PHONE", "TABLET"
     #   resp.devices[0].platform #=> String, one of "ANDROID", "IOS"
+    #   resp.devices[0].type #=> String, one of "PHYSICAL", "VIRTUAL"
     #   resp.devices[0].os #=> String
     #   resp.devices[0].cpu.frequency #=> String
     #   resp.devices[0].cpu.architecture #=> String
@@ -3445,6 +3466,7 @@ module Aws::DeviceFarm
     #   resp.jobs[0].device.model_id #=> String
     #   resp.jobs[0].device.form_factor #=> String, one of "PHONE", "TABLET"
     #   resp.jobs[0].device.platform #=> String, one of "ANDROID", "IOS"
+    #   resp.jobs[0].device.type #=> String, one of "PHYSICAL", "VIRTUAL"
     #   resp.jobs[0].device.os #=> String
     #   resp.jobs[0].device.cpu.frequency #=> String
     #   resp.jobs[0].device.cpu.architecture #=> String
@@ -4002,6 +4024,7 @@ module Aws::DeviceFarm
     #   resp.remote_access_sessions[0].device.model_id #=> String
     #   resp.remote_access_sessions[0].device.form_factor #=> String, one of "PHONE", "TABLET"
     #   resp.remote_access_sessions[0].device.platform #=> String, one of "ANDROID", "IOS"
+    #   resp.remote_access_sessions[0].device.type #=> String, one of "PHYSICAL", "VIRTUAL"
     #   resp.remote_access_sessions[0].device.os #=> String
     #   resp.remote_access_sessions[0].device.cpu.frequency #=> String
     #   resp.remote_access_sessions[0].device.cpu.architecture #=> String
@@ -4191,8 +4214,9 @@ module Aws::DeviceFarm
     #   resp.runs[0].web_url #=> String
     #   resp.runs[0].skip_app_resign #=> Boolean
     #   resp.runs[0].test_spec_arn #=> String
+    #   resp.runs[0].test_package_arn #=> String
     #   resp.runs[0].device_selection_result.filters #=> Array
-    #   resp.runs[0].device_selection_result.filters[0].attribute #=> String, one of "ARN", "PLATFORM", "OS_VERSION", "MODEL", "AVAILABILITY", "FORM_FACTOR", "MANUFACTURER", "REMOTE_ACCESS_ENABLED", "REMOTE_DEBUG_ENABLED", "INSTANCE_ARN", "INSTANCE_LABELS", "FLEET_TYPE"
+    #   resp.runs[0].device_selection_result.filters[0].attribute #=> String, one of "ARN", "PLATFORM", "OS_VERSION", "MODEL", "AVAILABILITY", "FORM_FACTOR", "DEVICE_TYPE", "MANUFACTURER", "REMOTE_ACCESS_ENABLED", "REMOTE_DEBUG_ENABLED", "INSTANCE_ARN", "INSTANCE_LABELS", "FLEET_TYPE"
     #   resp.runs[0].device_selection_result.filters[0].operator #=> String, one of "EQUALS", "LESS_THAN", "LESS_THAN_OR_EQUALS", "GREATER_THAN", "GREATER_THAN_OR_EQUALS", "IN", "NOT_IN", "CONTAINS"
     #   resp.runs[0].device_selection_result.filters[0].values #=> Array
     #   resp.runs[0].device_selection_result.filters[0].values[0] #=> String
@@ -4208,7 +4232,7 @@ module Aws::DeviceFarm
     #   resp.runs[0].environment_variables[0].name #=> String
     #   resp.runs[0].environment_variables[0].value #=> String
     #   resp.runs[0].insights_types #=> Array
-    #   resp.runs[0].insights_types[0] #=> String, one of "TEST_REPORT"
+    #   resp.runs[0].insights_types[0] #=> String, one of "TEST_REPORT", "NONE"
     #   resp.runs[0].insights.status #=> String, one of "PENDING", "RUNNING", "COMPLETED", "SKIPPED", "ERRORED"
     #   resp.runs[0].insights.job_report.message #=> String
     #   resp.runs[0].insights.job_report.metrics.jobs_total #=> Integer
@@ -4743,6 +4767,7 @@ module Aws::DeviceFarm
     #   resp.unique_problems["ExecutionResult"][0].problems[0].device.model_id #=> String
     #   resp.unique_problems["ExecutionResult"][0].problems[0].device.form_factor #=> String, one of "PHONE", "TABLET"
     #   resp.unique_problems["ExecutionResult"][0].problems[0].device.platform #=> String, one of "ANDROID", "IOS"
+    #   resp.unique_problems["ExecutionResult"][0].problems[0].device.type #=> String, one of "PHYSICAL", "VIRTUAL"
     #   resp.unique_problems["ExecutionResult"][0].problems[0].device.os #=> String
     #   resp.unique_problems["ExecutionResult"][0].problems[0].device.cpu.frequency #=> String
     #   resp.unique_problems["ExecutionResult"][0].problems[0].device.cpu.architecture #=> String
@@ -5151,6 +5176,12 @@ module Aws::DeviceFarm
     #   <code>deviceSelectionConfiguration</code> </b> is required in a
     #   request.
     #
+    #   <note markdown="1"> If the filters select devices by attribute and do not include a
+    #   `DEVICE_TYPE` filter, only physical devices are selected. If the
+    #   filters select devices by ARN, the run uses the devices you list.
+    #
+    #    </note>
+    #
     # @option params [String] :name
     #   The name for the run to be scheduled.
     #
@@ -5198,7 +5229,7 @@ module Aws::DeviceFarm
     #     device_selection_configuration: {
     #       filters: [ # required
     #         {
-    #           attribute: "ARN", # required, accepts ARN, PLATFORM, OS_VERSION, MODEL, AVAILABILITY, FORM_FACTOR, MANUFACTURER, REMOTE_ACCESS_ENABLED, REMOTE_DEBUG_ENABLED, INSTANCE_ARN, INSTANCE_LABELS, FLEET_TYPE
+    #           attribute: "ARN", # required, accepts ARN, PLATFORM, OS_VERSION, MODEL, AVAILABILITY, FORM_FACTOR, DEVICE_TYPE, MANUFACTURER, REMOTE_ACCESS_ENABLED, REMOTE_DEBUG_ENABLED, INSTANCE_ARN, INSTANCE_LABELS, FLEET_TYPE
     #           operator: "EQUALS", # required, accepts EQUALS, LESS_THAN, LESS_THAN_OR_EQUALS, GREATER_THAN, GREATER_THAN_OR_EQUALS, IN, NOT_IN, CONTAINS
     #           values: ["String"], # required
     #         },
@@ -5248,7 +5279,7 @@ module Aws::DeviceFarm
     #         },
     #       ],
     #       execution_role_arn: "AmazonRoleResourceName",
-    #       insights_types: ["TEST_REPORT"], # accepts TEST_REPORT
+    #       insights_types: ["TEST_REPORT"], # accepts TEST_REPORT, NONE
     #     },
     #     execution_configuration: {
     #       job_timeout_minutes: 1,
@@ -5321,8 +5352,9 @@ module Aws::DeviceFarm
     #   resp.run.web_url #=> String
     #   resp.run.skip_app_resign #=> Boolean
     #   resp.run.test_spec_arn #=> String
+    #   resp.run.test_package_arn #=> String
     #   resp.run.device_selection_result.filters #=> Array
-    #   resp.run.device_selection_result.filters[0].attribute #=> String, one of "ARN", "PLATFORM", "OS_VERSION", "MODEL", "AVAILABILITY", "FORM_FACTOR", "MANUFACTURER", "REMOTE_ACCESS_ENABLED", "REMOTE_DEBUG_ENABLED", "INSTANCE_ARN", "INSTANCE_LABELS", "FLEET_TYPE"
+    #   resp.run.device_selection_result.filters[0].attribute #=> String, one of "ARN", "PLATFORM", "OS_VERSION", "MODEL", "AVAILABILITY", "FORM_FACTOR", "DEVICE_TYPE", "MANUFACTURER", "REMOTE_ACCESS_ENABLED", "REMOTE_DEBUG_ENABLED", "INSTANCE_ARN", "INSTANCE_LABELS", "FLEET_TYPE"
     #   resp.run.device_selection_result.filters[0].operator #=> String, one of "EQUALS", "LESS_THAN", "LESS_THAN_OR_EQUALS", "GREATER_THAN", "GREATER_THAN_OR_EQUALS", "IN", "NOT_IN", "CONTAINS"
     #   resp.run.device_selection_result.filters[0].values #=> Array
     #   resp.run.device_selection_result.filters[0].values[0] #=> String
@@ -5338,7 +5370,7 @@ module Aws::DeviceFarm
     #   resp.run.environment_variables[0].name #=> String
     #   resp.run.environment_variables[0].value #=> String
     #   resp.run.insights_types #=> Array
-    #   resp.run.insights_types[0] #=> String, one of "TEST_REPORT"
+    #   resp.run.insights_types[0] #=> String, one of "TEST_REPORT", "NONE"
     #   resp.run.insights.status #=> String, one of "PENDING", "RUNNING", "COMPLETED", "SKIPPED", "ERRORED"
     #   resp.run.insights.job_report.message #=> String
     #   resp.run.insights.job_report.metrics.jobs_total #=> Integer
@@ -5408,6 +5440,7 @@ module Aws::DeviceFarm
     #   resp.job.device.model_id #=> String
     #   resp.job.device.form_factor #=> String, one of "PHONE", "TABLET"
     #   resp.job.device.platform #=> String, one of "ANDROID", "IOS"
+    #   resp.job.device.type #=> String, one of "PHYSICAL", "VIRTUAL"
     #   resp.job.device.os #=> String
     #   resp.job.device.cpu.frequency #=> String
     #   resp.job.device.cpu.architecture #=> String
@@ -5498,6 +5531,7 @@ module Aws::DeviceFarm
     #   resp.remote_access_session.device.model_id #=> String
     #   resp.remote_access_session.device.form_factor #=> String, one of "PHONE", "TABLET"
     #   resp.remote_access_session.device.platform #=> String, one of "ANDROID", "IOS"
+    #   resp.remote_access_session.device.type #=> String, one of "PHYSICAL", "VIRTUAL"
     #   resp.remote_access_session.device.os #=> String
     #   resp.remote_access_session.device.cpu.frequency #=> String
     #   resp.remote_access_session.device.cpu.architecture #=> String
@@ -5655,8 +5689,9 @@ module Aws::DeviceFarm
     #   resp.run.web_url #=> String
     #   resp.run.skip_app_resign #=> Boolean
     #   resp.run.test_spec_arn #=> String
+    #   resp.run.test_package_arn #=> String
     #   resp.run.device_selection_result.filters #=> Array
-    #   resp.run.device_selection_result.filters[0].attribute #=> String, one of "ARN", "PLATFORM", "OS_VERSION", "MODEL", "AVAILABILITY", "FORM_FACTOR", "MANUFACTURER", "REMOTE_ACCESS_ENABLED", "REMOTE_DEBUG_ENABLED", "INSTANCE_ARN", "INSTANCE_LABELS", "FLEET_TYPE"
+    #   resp.run.device_selection_result.filters[0].attribute #=> String, one of "ARN", "PLATFORM", "OS_VERSION", "MODEL", "AVAILABILITY", "FORM_FACTOR", "DEVICE_TYPE", "MANUFACTURER", "REMOTE_ACCESS_ENABLED", "REMOTE_DEBUG_ENABLED", "INSTANCE_ARN", "INSTANCE_LABELS", "FLEET_TYPE"
     #   resp.run.device_selection_result.filters[0].operator #=> String, one of "EQUALS", "LESS_THAN", "LESS_THAN_OR_EQUALS", "GREATER_THAN", "GREATER_THAN_OR_EQUALS", "IN", "NOT_IN", "CONTAINS"
     #   resp.run.device_selection_result.filters[0].values #=> Array
     #   resp.run.device_selection_result.filters[0].values[0] #=> String
@@ -5672,7 +5707,7 @@ module Aws::DeviceFarm
     #   resp.run.environment_variables[0].name #=> String
     #   resp.run.environment_variables[0].value #=> String
     #   resp.run.insights_types #=> Array
-    #   resp.run.insights_types[0] #=> String, one of "TEST_REPORT"
+    #   resp.run.insights_types[0] #=> String, one of "TEST_REPORT", "NONE"
     #   resp.run.insights.status #=> String, one of "PENDING", "RUNNING", "COMPLETED", "SKIPPED", "ERRORED"
     #   resp.run.insights.job_report.message #=> String
     #   resp.run.insights.job_report.metrics.jobs_total #=> Integer
@@ -5835,6 +5870,14 @@ module Aws::DeviceFarm
     #   optional. If you update rules for your request, the update replaces
     #   the existing rules.
     #
+    #   <note markdown="1"> A device pool contains either physical devices or virtual devices, but
+    #   not both. If you define the pool with attribute rules and those rules
+    #   do not include a `DEVICE_TYPE` rule, the pool contains only physical
+    #   devices. If you define the pool by listing device ARNs, the pool
+    #   contains the devices you list.
+    #
+    #    </note>
+    #
     # @option params [Integer] :max_devices
     #   The number of devices that Device Farm can add to your device pool.
     #   Device Farm adds devices that are available and that meet the criteria
@@ -5896,7 +5939,7 @@ module Aws::DeviceFarm
     #     description: "Message",
     #     rules: [
     #       {
-    #         attribute: "ARN", # accepts ARN, PLATFORM, FORM_FACTOR, MANUFACTURER, REMOTE_ACCESS_ENABLED, REMOTE_DEBUG_ENABLED, APPIUM_VERSION, INSTANCE_ARN, INSTANCE_LABELS, FLEET_TYPE, OS_VERSION, MODEL, AVAILABILITY
+    #         attribute: "ARN", # accepts ARN, PLATFORM, FORM_FACTOR, DEVICE_TYPE, MANUFACTURER, REMOTE_ACCESS_ENABLED, REMOTE_DEBUG_ENABLED, APPIUM_VERSION, INSTANCE_ARN, INSTANCE_LABELS, FLEET_TYPE, OS_VERSION, MODEL, AVAILABILITY
     #         operator: "EQUALS", # accepts EQUALS, LESS_THAN, LESS_THAN_OR_EQUALS, GREATER_THAN, GREATER_THAN_OR_EQUALS, IN, NOT_IN, CONTAINS
     #         value: "String",
     #       },
@@ -5912,7 +5955,7 @@ module Aws::DeviceFarm
     #   resp.device_pool.description #=> String
     #   resp.device_pool.type #=> String, one of "CURATED", "PRIVATE"
     #   resp.device_pool.rules #=> Array
-    #   resp.device_pool.rules[0].attribute #=> String, one of "ARN", "PLATFORM", "FORM_FACTOR", "MANUFACTURER", "REMOTE_ACCESS_ENABLED", "REMOTE_DEBUG_ENABLED", "APPIUM_VERSION", "INSTANCE_ARN", "INSTANCE_LABELS", "FLEET_TYPE", "OS_VERSION", "MODEL", "AVAILABILITY"
+    #   resp.device_pool.rules[0].attribute #=> String, one of "ARN", "PLATFORM", "FORM_FACTOR", "DEVICE_TYPE", "MANUFACTURER", "REMOTE_ACCESS_ENABLED", "REMOTE_DEBUG_ENABLED", "APPIUM_VERSION", "INSTANCE_ARN", "INSTANCE_LABELS", "FLEET_TYPE", "OS_VERSION", "MODEL", "AVAILABILITY"
     #   resp.device_pool.rules[0].operator #=> String, one of "EQUALS", "LESS_THAN", "LESS_THAN_OR_EQUALS", "GREATER_THAN", "GREATER_THAN_OR_EQUALS", "IN", "NOT_IN", "CONTAINS"
     #   resp.device_pool.rules[0].value #=> String
     #   resp.device_pool.max_devices #=> Integer
@@ -6358,7 +6401,7 @@ module Aws::DeviceFarm
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-devicefarm'
-      context[:gem_version] = '1.117.0'
+      context[:gem_version] = '1.125.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -525,6 +525,60 @@ module Aws::ElasticLoadBalancingV2
       include Aws::Structure
     end
 
+    # Describes a client certificate identity filter.
+    #
+    # @!attribute [rw] field
+    #   The client certificate field to match. The possible values are:
+    #
+    #   * `subject-cn` – The common name in the certificate subject.
+    #
+    #   * `subject-ou` – The organizational unit in the certificate subject.
+    #
+    #   * `san-dns` – A DNS name in the subject alternative name (SAN).
+    #
+    #   * `san-uri` – A URI in the subject alternative name (SAN).
+    #
+    #   If the client certificate doesn't contain the field, the filter
+    #   doesn't match. If the field has multiple values, the filter matches
+    #   if it matches any one of the values.
+    #   @return [String]
+    #
+    # @!attribute [rw] action
+    #   The action to take when the client certificate matches the filter.
+    #   The only supported action is `accept`.
+    #   @return [String]
+    #
+    # @!attribute [rw] match_type
+    #   The match type. The possible values are `exact` and `prefix`.
+    #
+    #   For the `subject-cn`, `subject-ou`, and `san-dns` fields, matching
+    #   is case-insensitive. For the `san-uri` field, the scheme and host
+    #   are matched case-insensitively, and the rest of the URI is matched
+    #   case-sensitively.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value to match. The value must be 1–256 printable ASCII
+    #   characters.
+    #
+    #   If the field is `san-uri`, the value must begin with a letter.
+    #   Before the first colon, the value can contain only letters, digits,
+    #   plus signs (+), hyphens (-), or periods (.). If the match type is
+    #   `exact`, the value must contain a colon. For example,
+    #   `spiffe://example.com/workload` is a valid value.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/ClientCertificateIdentityFilter AWS API Documentation
+    #
+    class ClientCertificateIdentityFilter < Struct.new(
+      :field,
+      :action,
+      :match_type,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] load_balancer_arn
     #   The Amazon Resource Name (ARN) of the load balancer.
     #   @return [String]
@@ -595,7 +649,7 @@ module Aws::ElasticLoadBalancingV2
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] mutual_authentication
-    #   \[HTTPS listeners\] The mutual authentication configuration
+    #   \[HTTPS and TLS listeners\] The mutual authentication configuration
     #   information.
     #   @return [Types::MutualAuthenticationAttributes]
     #
@@ -2721,6 +2775,13 @@ module Aws::ElasticLoadBalancingV2
     #     Both headers are in OpenSSL format. The possible values for the
     #     attribute are `true` and `false`. The default is `false`.
     #
+    #   * `routing.http.x_amzn_tls_kx.enabled` - Indicates whether the
+    #     `x-amzn-tls-kx` header, which contains information about the
+    #     negotiated key exchange group, is added to the client request
+    #     before sending it to the target. The `x-amzn-tls-kx` header uses
+    #     IANA TLS Supported Groups registry naming. The possible values for
+    #     the attribute are `true` and `false`. The default is `false`.
+    #
     #   * `routing.http.xff_client_port.enabled` - Indicates whether the
     #     `X-Forwarded-For` header should preserve the source port that the
     #     client used to connect to the load balancer. The possible values
@@ -3044,7 +3105,7 @@ module Aws::ElasticLoadBalancingV2
     #   @return [Array<String>]
     #
     # @!attribute [rw] mutual_authentication
-    #   \[HTTPS listeners\] The mutual authentication configuration
+    #   \[HTTPS and TLS listeners\] The mutual authentication configuration
     #   information.
     #   @return [Types::MutualAuthenticationAttributes]
     #
@@ -3319,8 +3380,13 @@ module Aws::ElasticLoadBalancingV2
     # Information about the mutual authentication attributes of a listener.
     #
     # @!attribute [rw] mode
-    #   The client certificate handling method. Options are `off`,
-    #   `passthrough` or `verify`. The default value is `off`.
+    #   The client certificate handling method. The default value is `off`.
+    #
+    #   \[Application Load Balancers\] The possible values are `off`,
+    #   `passthrough`, and `verify`.
+    #
+    #   \[Network Load Balancers\] The possible values are `off` and
+    #   `verify`.
     #   @return [String]
     #
     # @!attribute [rw] trust_store_arn
@@ -3339,6 +3405,17 @@ module Aws::ElasticLoadBalancingV2
     #   Indicates whether trust store CA certificate names are advertised.
     #   @return [String]
     #
+    # @!attribute [rw] client_certificate_identity_filters
+    #   \[Network Load Balancers\] The client certificate identity filters.
+    #   The load balancer admits a connection only if the client certificate
+    #   matches at least one filter. If you don't specify any filters, the
+    #   load balancer admits every client certificate that passes trust
+    #   store validation and revocation checks.
+    #
+    #   You can specify filters only when the mode is `verify`. You can
+    #   specify up to 100 filters per listener.
+    #   @return [Array<Types::ClientCertificateIdentityFilter>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/MutualAuthenticationAttributes AWS API Documentation
     #
     class MutualAuthenticationAttributes < Struct.new(
@@ -3346,7 +3423,8 @@ module Aws::ElasticLoadBalancingV2
       :trust_store_arn,
       :ignore_client_certificate_expiry,
       :trust_store_association_status,
-      :advertise_trust_store_ca_names)
+      :advertise_trust_store_ca_names,
+      :client_certificate_identity_filters)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4589,6 +4667,23 @@ module Aws::ElasticLoadBalancingV2
     #     balancer-generated cookie is considered stale. The range is 1
     #     second to 1 week (604800 seconds). The default value is 1 day
     #     (86400 seconds).
+    #
+    #   * `waf.http2.traffic_inspection_behavior` – Specifies when Amazon
+    #     Web Services WAF inspects HTTP/2 requests. This attribute applies
+    #     only to target groups that use the `HTTP2` protocol version. The
+    #     possible values are:
+    #
+    #     * `inspect_immediately` – Inspects each request as soon as data is
+    #       available. This is the default.
+    #
+    #     * `inspect_after_sufficient_data` – Accumulates HTTP/2 data frames
+    #       before inspection.
+    #   * `routing.http2.rst_stream_error_forwarding.enabled` – Specifies
+    #     whether the load balancer forwards an HTTP/2 or gRPC target's
+    #     `RST_STREAM` error code to the client, instead of returning an
+    #     HTTP 502 (Bad Gateway) response. This attribute applies only to
+    #     target groups that use the `HTTP2` or `GRPC` protocol version. The
+    #     value is `true` or `false`. The default is `false`.
     #
     #   The following attribute is supported only if the load balancer is an
     #   Application Load Balancer and the target is a Lambda function:

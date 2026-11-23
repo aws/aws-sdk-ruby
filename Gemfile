@@ -26,7 +26,6 @@ gem 'json'
 gem 'nokogiri'
 gem 'oga'
 gem 'rexml'
-gem 'ruby-ll', '2.1.3' # temporary
 unless defined?(JRUBY_VERSION)
   gem 'libxml-ruby'
   gem 'oj'
@@ -75,6 +74,7 @@ group :test do
   gem 'cucumber', '< 12'
   gem 'multipart-post'
   gem 'opentelemetry-sdk'
+  gem 'ostruct' # Specs require it directly; Oj 3.17.8 removed its runtime dependency.
   gem 'rspec'
   gem 'webmock'
 end

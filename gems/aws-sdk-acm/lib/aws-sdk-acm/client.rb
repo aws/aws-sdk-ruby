@@ -264,7 +264,8 @@ module Aws::ACM
     #     An integer representing the maximum number attempts that will be made for
     #     a single request, including the initial attempt.  For example,
     #     setting this value to 5 will result in a request being retried up to
-    #     4 times. Used in `standard` and `adaptive` retry modes.
+    #     4 times. Used in `standard` and `adaptive` retry modes. Defaults to 3,
+    #     except for DynamoDB and DynamoDB Streams, which default to 4.
     #
     #   @option options [String] :profile ("default")
     #     Used when loading credentials from the shared credentials file at `HOME/.aws/credentials`.
@@ -327,15 +328,15 @@ module Aws::ACM
     #     used by the default backoff function. This option is only used in the
     #     `legacy` retry mode.
     #
-    #   @option options [String] :retry_mode ("legacy")
+    #   @option options [String] :retry_mode ("standard")
     #     Specifies which retry algorithm to use. Values are:
     #
-    #     * `legacy` - The pre-existing retry behavior. This is the default
-    #       value if no retry mode is provided.
+    #     * `legacy` - The pre-existing retry behavior.
     #
     #     * `standard` - A standardized set of retry rules across the AWS SDKs.
     #       This includes support for retry quotas, which limit the number of
-    #       unsuccessful retries a client can make.
+    #       unsuccessful retries a client can make. This is the default value
+    #       if no retry mode is provided.
     #
     #     * `adaptive` - A retry mode that includes all the functionality of
     #       `standard` mode along with automatic client side throttling.
@@ -1173,6 +1174,8 @@ module Aws::ACM
     #   resp.certificate.certificate_key_pair_origin #=> String, one of "AWS_MANAGED", "ACME", "CUSTOMER_PROVIDED"
     #   resp.certificate.acme_endpoint_arn #=> String
     #   resp.certificate.acme_account_id #=> String
+    #   resp.certificate.certificate_usage #=> String, one of "CLIENT_AND_SERVER_AUTH", "CLIENT_AUTH_ONLY"
+    #   resp.certificate.root_hierarchy_type #=> String, one of "N2_AMAZON_MANAGED", "N2_SFG2_AMAZON_MANAGED"
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -1760,6 +1763,13 @@ module Aws::ACM
     #
     #  </note>
     #
+    # <note markdown="1"> By default, this action does not return certificates with a
+    # `RootHierarchyType` of `N2_AMAZON_MANAGED` or
+    # `N2_SFG2_AMAZON_MANAGED`. To list only Amazon N2 certificates, specify
+    # one or both of these values in the `RootHierarchyTypes` filter.
+    #
+    #  </note>
+    #
     # @option params [Array<String>] :certificate_statuses
     #   Filter the certificate list by status value.
     #
@@ -1768,6 +1778,14 @@ module Aws::ACM
     #   one or more `CertificateKeyPairOrigin` values. Default filtering
     #   returns only certificates with key pair origin of `AWS_MANAGED` and
     #   `CUSTOMER_PROVIDED`.
+    #
+    # @option params [Array<String>] :root_hierarchy_types
+    #   Filter the certificate list by root hierarchy type. Specify one or
+    #   more `RootHierarchyType` values. By default, this action does not
+    #   return certificates with a `RootHierarchyType` of `N2_AMAZON_MANAGED`
+    #   or `N2_SFG2_AMAZON_MANAGED`. To list only Amazon N2 certificates,
+    #   specify one or both of these values in the `RootHierarchyTypes`
+    #   filter.
     #
     # @option params [Types::Filters] :includes
     #   Filter the certificate list. For more information, see the Filters
@@ -1806,6 +1824,7 @@ module Aws::ACM
     #   resp = client.list_certificates({
     #     certificate_statuses: ["PENDING_VALIDATION"], # accepts PENDING_VALIDATION, ISSUED, INACTIVE, EXPIRED, VALIDATION_TIMED_OUT, REVOKED, FAILED
     #     certificate_key_pair_origins: ["AWS_MANAGED"], # accepts AWS_MANAGED, ACME, CUSTOMER_PROVIDED
+    #     root_hierarchy_types: ["N2_AMAZON_MANAGED"], # accepts N2_AMAZON_MANAGED, N2_SFG2_AMAZON_MANAGED
     #     includes: {
     #       extended_key_usage: ["TLS_WEB_SERVER_AUTHENTICATION"], # accepts TLS_WEB_SERVER_AUTHENTICATION, TLS_WEB_CLIENT_AUTHENTICATION, CODE_SIGNING, EMAIL_PROTECTION, TIME_STAMPING, OCSP_SIGNING, IPSEC_END_SYSTEM, IPSEC_TUNNEL, IPSEC_USER, ANY, NONE, CUSTOM
     #       key_usage: ["DIGITAL_SIGNATURE"], # accepts DIGITAL_SIGNATURE, NON_REPUDIATION, KEY_ENCIPHERMENT, DATA_ENCIPHERMENT, KEY_AGREEMENT, CERTIFICATE_SIGNING, CRL_SIGNING, ENCIPHER_ONLY, DECIPHER_ONLY, ANY, CUSTOM
@@ -1847,6 +1866,8 @@ module Aws::ACM
     #   resp.certificate_summary_list[0].revoked_at #=> Time
     #   resp.certificate_summary_list[0].managed_by #=> String, one of "CLOUDFRONT"
     #   resp.certificate_summary_list[0].certificate_key_pair_origin #=> String, one of "AWS_MANAGED", "ACME", "CUSTOMER_PROVIDED"
+    #   resp.certificate_summary_list[0].certificate_usage #=> String, one of "CLIENT_AND_SERVER_AUTH", "CLIENT_AUTH_ONLY"
+    #   resp.certificate_summary_list[0].root_hierarchy_type #=> String, one of "N2_AMAZON_MANAGED", "N2_SFG2_AMAZON_MANAGED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/ListCertificates AWS API Documentation
     #
@@ -2180,9 +2201,10 @@ module Aws::ACM
     #   You can use this parameter to specify whether to export your
     #   certificate.
     #
-    #   Certificate transparency logging opt-out is no longer available. All
-    #   public certificates are recorded in a certificate transparency log.
-    #   For more information, see [Certificate Transparency Logging][1].
+    #   Certificate transparency logging opt-out is no longer available. ACM
+    #   records all public certificates other than Amazon N2 certificates in a
+    #   certificate transparency log. For more information, see [Certificate
+    #   Transparency Logging][1].
     #
     #   You can export public ACM certificates to use with Amazon Web Services
     #   services as well as outside the Amazon Web Services Cloud. For more
@@ -2252,6 +2274,57 @@ module Aws::ACM
     #   Identifies the Amazon Web Services service that manages the
     #   certificate issued by ACM.
     #
+    # @option params [String] :certificate_usage
+    #   The Extended Key Usage profile of the certificate. You can specify
+    #   this parameter only when `RootHierarchyType` is `N2_AMAZON_MANAGED` or
+    #   `N2_SFG2_AMAZON_MANAGED`. If you specify `CertificateUsage` with any
+    #   other root hierarchy type, or without `RootHierarchyType`, the request
+    #   fails with a `ValidationException`.
+    #
+    #   * `CLIENT_AND_SERVER_AUTH` authenticates both the client and the
+    #     server. Valid for both N2 root hierarchy types.
+    #
+    #   * `CLIENT_AUTH_ONLY` authenticates only the client. Valid only for
+    #     `N2_AMAZON_MANAGED`.
+    #
+    #   Default: CLIENT\_AND\_SERVER\_AUTH
+    #
+    # @option params [String] :root_hierarchy_type
+    #   The root hierarchy from which ACM issues the certificate. Specify one
+    #   of the following values to request an Amazon N2 certificate:
+    #
+    #   * `N2_AMAZON_MANAGED` – An Amazon N2 certificate that chains to an
+    #     Amazon N2 root. The maximum validity period, which is also the
+    #     default, is 395 days.
+    #
+    #   * `N2_SFG2_AMAZON_MANAGED` – An Amazon N2 certificate that chains to
+    #     an Amazon N2 root cross-signed by Starfield G2. The maximum validity
+    #     period, which is also the default, is 98 days.
+    #
+    #   You cannot specify `RootHierarchyType` together with
+    #   `CertificateAuthorityArn`.
+    #
+    #   If you omit this parameter, ACM issues a standard public certificate.
+    #   A request that specifies any value other than `N2_AMAZON_MANAGED` or
+    #   `N2_SFG2_AMAZON_MANAGED` fails with a `ValidationException`.
+    #
+    #   An Amazon N2 certificate request must specify a `ValidationMethod` of
+    #   `DNS`. Amazon N2 certificates are not recorded in a certificate
+    #   transparency log.
+    #
+    #   A request for a validity period longer than the maximum fails with a
+    #   `ValidationException`.
+    #
+    #   <note markdown="1"> Algorithms supported for an N2 certificate request include:
+    #
+    #    * `RSA_2048`
+    #
+    #   * `EC_prime256v1`
+    #
+    #   * `EC_secp384r1`
+    #
+    #    </note>
+    #
     # @return [Types::RequestCertificateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RequestCertificateResponse#certificate_arn #certificate_arn} => String
@@ -2283,6 +2356,8 @@ module Aws::ACM
     #     ],
     #     key_algorithm: "RSA_1024", # accepts RSA_1024, RSA_2048, RSA_3072, RSA_4096, EC_prime256v1, EC_secp384r1, EC_secp521r1
     #     managed_by: "CLOUDFRONT", # accepts CLOUDFRONT
+    #     certificate_usage: "CLIENT_AND_SERVER_AUTH", # accepts CLIENT_AND_SERVER_AUTH, CLIENT_AUTH_ONLY
+    #     root_hierarchy_type: "N2_AMAZON_MANAGED", # accepts N2_AMAZON_MANAGED, N2_SFG2_AMAZON_MANAGED
     #   })
     #
     # @example Response structure
@@ -2554,6 +2629,7 @@ module Aws::ACM
     #           certificate_key_pair_origin: "AWS_MANAGED", # accepts AWS_MANAGED, ACME, CUSTOMER_PROVIDED
     #           acme_endpoint_arn: "Arn",
     #           acme_account_id: "AcmeAccountId",
+    #           root_hierarchy_type: "N2_AMAZON_MANAGED", # accepts N2_AMAZON_MANAGED, N2_SFG2_AMAZON_MANAGED
     #         },
     #       },
     #     },
@@ -2656,6 +2732,8 @@ module Aws::ACM
     #   resp.results[0].certificate_metadata.acm_certificate_metadata.certificate_key_pair_origin #=> String, one of "AWS_MANAGED", "ACME", "CUSTOMER_PROVIDED"
     #   resp.results[0].certificate_metadata.acm_certificate_metadata.acme_endpoint_arn #=> String
     #   resp.results[0].certificate_metadata.acm_certificate_metadata.acme_account_id #=> String
+    #   resp.results[0].certificate_metadata.acm_certificate_metadata.certificate_usage #=> String, one of "CLIENT_AND_SERVER_AUTH", "CLIENT_AUTH_ONLY"
+    #   resp.results[0].certificate_metadata.acm_certificate_metadata.root_hierarchy_type #=> String, one of "N2_AMAZON_MANAGED", "N2_SFG2_AMAZON_MANAGED"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/SearchCertificates AWS API Documentation
@@ -2890,7 +2968,7 @@ module Aws::ACM
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-acm'
-      context[:gem_version] = '1.116.0'
+      context[:gem_version] = '1.124.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

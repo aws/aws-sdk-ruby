@@ -71,10 +71,22 @@ module Aws::S3
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/RequesterPaysBuckets.html
     #   @return [String]
     #
+    # @!attribute [rw] version_id
+    #   Version ID of the object.
+    #
+    #   Returns the Version ID of the object for the aborted multipart
+    #   upload, if bucket versioning is enabled.
+    #
+    #   <note markdown="1"> This functionality is not supported for directory buckets.
+    #
+    #    </note>
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/AbortMultipartUploadOutput AWS API Documentation
     #
     class AbortMultipartUploadOutput < Struct.new(
-      :request_charged)
+      :request_charged,
+      :version_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3847,6 +3859,17 @@ module Aws::S3
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html
     #   @return [String]
     #
+    # @!attribute [rw] version_id
+    #   Version ID of the object.
+    #
+    #   Returns the Version ID of the object for the initiated multipart
+    #   upload, if bucket versioning is enabled.
+    #
+    #   <note markdown="1"> This functionality is not supported for directory buckets.
+    #
+    #    </note>
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/CreateMultipartUploadOutput AWS API Documentation
     #
     class CreateMultipartUploadOutput < Struct.new(
@@ -3863,7 +3886,8 @@ module Aws::S3
       :bucket_key_enabled,
       :request_charged,
       :checksum_algorithm,
-      :checksum_type)
+      :checksum_type,
+      :version_id)
       SENSITIVE = [:ssekms_key_id, :ssekms_encryption_context]
       include Aws::Structure
     end
@@ -5305,10 +5329,11 @@ module Aws::S3
     # Specifies whether Amazon S3 replicates delete markers. If you specify
     # a `Filter` in your replication configuration, you must also include a
     # `DeleteMarkerReplication` element. If your `Filter` includes a `Tag`
-    # element, the `DeleteMarkerReplication` `Status` must be set to
-    # Disabled, because Amazon S3 does not support replicating delete
-    # markers for tag-based rules. For an example configuration, see [Basic
-    # Rule Configuration][1].
+    # element, including within a `Not` or `Or` element, the
+    # `DeleteMarkerReplication` `Status` must be set to Disabled, because
+    # Amazon S3 does not support replicating delete markers for tag-based
+    # rules. For an example configuration, see [Basic Rule
+    # Configuration][1].
     #
     # For more information about delete marker replication, see [Basic Rule
     # Configuration][2].
@@ -6172,10 +6197,16 @@ module Aws::S3
     #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html
     #   @return [String]
     #
+    # @!attribute [rw] use_source_multi_region_key
+    #   Specifies whether Amazon S3 uses the related multi-Region KMS key in
+    #   the destination Amazon Web Services Region to encrypt the replica.
+    #   @return [Types::UseSourceMultiRegionKey]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/EncryptionConfiguration AWS API Documentation
     #
     class EncryptionConfiguration < Struct.new(
-      :replica_kms_key_id)
+      :replica_kms_key_id,
+      :use_source_multi_region_key)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6234,8 +6265,6 @@ module Aws::S3
     #     * *Description:* Access Denied
     #
     #     * *HTTP Status Code:* 403 Forbidden
-    #
-    #     * *SOAP Fault Code Prefix:* Client
     #   * * *Code:* AccountProblem
     #
     #     * *Description:* There is a problem with your Amazon Web Services
@@ -6243,8 +6272,6 @@ module Aws::S3
     #       Contact Amazon Web Services Support for further assistance.
     #
     #     * *HTTP Status Code:* 403 Forbidden
-    #
-    #     * *SOAP Fault Code Prefix:* Client
     #   * * *Code:* AllAccessDisabled
     #
     #     * *Description:* All access to this Amazon S3 resource has been
@@ -6252,16 +6279,12 @@ module Aws::S3
     #       assistance.
     #
     #     * *HTTP Status Code:* 403 Forbidden
-    #
-    #     * *SOAP Fault Code Prefix:* Client
     #   * * *Code:* AmbiguousGrantByEmailAddress
     #
     #     * *Description:* The email address you provided is associated with
     #       more than one account.
     #
     #     * *HTTP Status Code:* 400 Bad Request
-    #
-    #     * *SOAP Fault Code Prefix:* Client
     #   * * *Code:* AuthorizationHeaderMalformed
     #
     #     * *Description:* The authorization header you provided is invalid.
@@ -6275,8 +6298,6 @@ module Aws::S3
     #       we received.
     #
     #     * *HTTP Status Code:* 400 Bad Request
-    #
-    #     * *SOAP Fault Code Prefix:* Client
     #   * * *Code:* BucketAlreadyExists
     #
     #     * *Description:* The requested bucket name is not available. The
@@ -6284,8 +6305,6 @@ module Aws::S3
     #       select a different name and try again.
     #
     #     * *HTTP Status Code:* 409 Conflict
-    #
-    #     * *SOAP Fault Code Prefix:* Client
     #   * * *Code:* BucketAlreadyOwnedByYou
     #
     #     * *Description:* The bucket you tried to create already exists,
@@ -6297,22 +6316,16 @@ module Aws::S3
     #
     #     * *Code:* 409 Conflict (in all Regions except the North Virginia
     #       Region)
-    #
-    #     * *SOAP Fault Code Prefix:* Client
     #   * * *Code:* BucketNotEmpty
     #
     #     * *Description:* The bucket you tried to delete is not empty.
     #
     #     * *HTTP Status Code:* 409 Conflict
-    #
-    #     * *SOAP Fault Code Prefix:* Client
     #   * * *Code:* CredentialsNotSupported
     #
     #     * *Description:* This request does not support credentials.
     #
     #     * *HTTP Status Code:* 400 Bad Request
-    #
-    #     * *SOAP Fault Code Prefix:* Client
     #   * * *Code:* CrossLocationLoggingProhibited
     #
     #     * *Description:* Cross-location logging not allowed. Buckets in
@@ -6320,122 +6333,90 @@ module Aws::S3
     #       another location.
     #
     #     * *HTTP Status Code:* 403 Forbidden
-    #
-    #     * *SOAP Fault Code Prefix:* Client
     #   * * *Code:* EntityTooSmall
     #
     #     * *Description:* Your proposed upload is smaller than the minimum
     #       allowed object size.
     #
     #     * *HTTP Status Code:* 400 Bad Request
-    #
-    #     * *SOAP Fault Code Prefix:* Client
     #   * * *Code:* EntityTooLarge
     #
     #     * *Description:* Your proposed upload exceeds the maximum allowed
     #       object size.
     #
     #     * *HTTP Status Code:* 400 Bad Request
-    #
-    #     * *SOAP Fault Code Prefix:* Client
     #   * * *Code:* ExpiredToken
     #
     #     * *Description:* The provided token has expired.
     #
     #     * *HTTP Status Code:* 400 Bad Request
-    #
-    #     * *SOAP Fault Code Prefix:* Client
     #   * * *Code:* IllegalVersioningConfigurationException
     #
     #     * *Description:* Indicates that the versioning configuration
     #       specified in the request is invalid.
     #
     #     * *HTTP Status Code:* 400 Bad Request
-    #
-    #     * *SOAP Fault Code Prefix:* Client
     #   * * *Code:* IncompleteBody
     #
     #     * *Description:* You did not provide the number of bytes specified
     #       by the Content-Length HTTP header
     #
     #     * *HTTP Status Code:* 400 Bad Request
-    #
-    #     * *SOAP Fault Code Prefix:* Client
     #   * * *Code:* IncorrectNumberOfFilesInPostRequest
     #
     #     * *Description:* POST requires exactly one file upload per
     #       request.
     #
     #     * *HTTP Status Code:* 400 Bad Request
-    #
-    #     * *SOAP Fault Code Prefix:* Client
     #   * * *Code:* InlineDataTooLarge
     #
     #     * *Description:* Inline data exceeds the maximum allowed size.
     #
     #     * *HTTP Status Code:* 400 Bad Request
-    #
-    #     * *SOAP Fault Code Prefix:* Client
     #   * * *Code:* InternalError
     #
     #     * *Description:* We encountered an internal error. Please try
     #       again.
     #
     #     * *HTTP Status Code:* 500 Internal Server Error
-    #
-    #     * *SOAP Fault Code Prefix:* Server
     #   * * *Code:* InvalidAccessKeyId
     #
     #     * *Description:* The Amazon Web Services access key ID you
     #       provided does not exist in our records.
     #
     #     * *HTTP Status Code:* 403 Forbidden
-    #
-    #     * *SOAP Fault Code Prefix:* Client
     #   * * *Code:* InvalidAddressingHeader
     #
     #     * *Description:* You must specify the Anonymous role.
     #
     #     * *HTTP Status Code:* N/A
-    #
-    #     * *SOAP Fault Code Prefix:* Client
     #   * * *Code:* InvalidArgument
     #
     #     * *Description:* Invalid Argument
     #
     #     * *HTTP Status Code:* 400 Bad Request
-    #
-    #     * *SOAP Fault Code Prefix:* Client
     #   * * *Code:* InvalidBucketName
     #
     #     * *Description:* The specified bucket is not valid.
     #
     #     * *HTTP Status Code:* 400 Bad Request
-    #
-    #     * *SOAP Fault Code Prefix:* Client
     #   * * *Code:* InvalidBucketState
     #
     #     * *Description:* The request is not valid with the current state
     #       of the bucket.
     #
     #     * *HTTP Status Code:* 409 Conflict
-    #
-    #     * *SOAP Fault Code Prefix:* Client
     #   * * *Code:* InvalidDigest
     #
     #     * *Description:* The Content-MD5 you specified is not valid.
     #
     #     * *HTTP Status Code:* 400 Bad Request
-    #
-    #     * *SOAP Fault Code Prefix:* Client
     #   * * *Code:* InvalidEncryptionAlgorithmError
     #
     #     * *Description:* The encryption request you specified is not
     #       valid. The valid value is AES256.
     #
     #     * *HTTP Status Code:* 400 Bad Request
-    #
-    #     * *SOAP Fault Code Prefix:* Client
     #   * * *Code:* InvalidLocationConstraint
     #
     #     * *Description:* The specified location constraint is not valid.
@@ -6443,16 +6424,12 @@ module Aws::S3
     #       for Your Buckets][2].
     #
     #     * *HTTP Status Code:* 400 Bad Request
-    #
-    #     * *SOAP Fault Code Prefix:* Client
     #   * * *Code:* InvalidObjectState
     #
     #     * *Description:* The action is not valid for the current state of
     #       the object.
     #
     #     * *HTTP Status Code:* 403 Forbidden
-    #
-    #     * *SOAP Fault Code Prefix:* Client
     #   * * *Code:* InvalidPart
     #
     #     * *Description:* One or more of the specified parts could not be
@@ -6460,16 +6437,12 @@ module Aws::S3
     #       entity tag might not have matched the part's entity tag.
     #
     #     * *HTTP Status Code:* 400 Bad Request
-    #
-    #     * *SOAP Fault Code Prefix:* Client
     #   * * *Code:* InvalidPartOrder
     #
     #     * *Description:* The list of parts was not in ascending order.
     #       Parts list must be specified in order by part number.
     #
     #     * *HTTP Status Code:* 400 Bad Request
-    #
-    #     * *SOAP Fault Code Prefix:* Client
     #   * * *Code:* InvalidPayer
     #
     #     * *Description:* All access to this object has been disabled.
@@ -6477,23 +6450,17 @@ module Aws::S3
     #       assistance.
     #
     #     * *HTTP Status Code:* 403 Forbidden
-    #
-    #     * *SOAP Fault Code Prefix:* Client
     #   * * *Code:* InvalidPolicyDocument
     #
     #     * *Description:* The content of the form does not meet the
     #       conditions specified in the policy document.
     #
     #     * *HTTP Status Code:* 400 Bad Request
-    #
-    #     * *SOAP Fault Code Prefix:* Client
     #   * * *Code:* InvalidRange
     #
     #     * *Description:* The requested range cannot be satisfied.
     #
     #     * *HTTP Status Code:* 416 Requested Range Not Satisfiable
-    #
-    #     * *SOAP Fault Code Prefix:* Client
     #   * * *Code:* InvalidRequest
     #
     #     * *Description:* Please use `AWS4-HMAC-SHA256`.
@@ -6501,14 +6468,6 @@ module Aws::S3
     #     * *HTTP Status Code:* 400 Bad Request
     #
     #     * *Code:* N/A
-    #   * * *Code:* InvalidRequest
-    #
-    #     * *Description:* SOAP requests must be made over an HTTPS
-    #       connection.
-    #
-    #     * *HTTP Status Code:* 400 Bad Request
-    #
-    #     * *SOAP Fault Code Prefix:* Client
     #   * * *Code:* InvalidRequest
     #
     #     * *Description:* Amazon S3 Transfer Acceleration is not supported
@@ -6572,22 +6531,11 @@ module Aws::S3
     #     * *Description:* The provided security credentials are not valid.
     #
     #     * *HTTP Status Code:* 403 Forbidden
-    #
-    #     * *SOAP Fault Code Prefix:* Client
-    #   * * *Code:* InvalidSOAPRequest
-    #
-    #     * *Description:* The SOAP request body is invalid.
-    #
-    #     * *HTTP Status Code:* 400 Bad Request
-    #
-    #     * *SOAP Fault Code Prefix:* Client
     #   * * *Code:* InvalidStorageClass
     #
     #     * *Description:* The storage class you specified is not valid.
     #
     #     * *HTTP Status Code:* 400 Bad Request
-    #
-    #     * *SOAP Fault Code Prefix:* Client
     #   * * *Code:* InvalidTargetBucketForLogging
     #
     #     * *Description:* The target bucket for logging does not exist, is
@@ -6595,46 +6543,34 @@ module Aws::S3
     #       the log-delivery group.
     #
     #     * *HTTP Status Code:* 400 Bad Request
-    #
-    #     * *SOAP Fault Code Prefix:* Client
     #   * * *Code:* InvalidToken
     #
     #     * *Description:* The provided token is malformed or otherwise
     #       invalid.
     #
     #     * *HTTP Status Code:* 400 Bad Request
-    #
-    #     * *SOAP Fault Code Prefix:* Client
     #   * * *Code:* InvalidURI
     #
     #     * *Description:* Couldn't parse the specified URI.
     #
     #     * *HTTP Status Code:* 400 Bad Request
-    #
-    #     * *SOAP Fault Code Prefix:* Client
     #   * * *Code:* KeyTooLongError
     #
     #     * *Description:* Your key is too long.
     #
     #     * *HTTP Status Code:* 400 Bad Request
-    #
-    #     * *SOAP Fault Code Prefix:* Client
     #   * * *Code:* MalformedACLError
     #
     #     * *Description:* The XML you provided was not well-formed or did
     #       not validate against our published schema.
     #
     #     * *HTTP Status Code:* 400 Bad Request
-    #
-    #     * *SOAP Fault Code Prefix:* Client
     #   * * *Code:* MalformedPOSTRequest
     #
     #     * *Description:* The body of your POST request is not well-formed
     #       multipart/form-data.
     #
     #     * *HTTP Status Code:* 400 Bad Request
-    #
-    #     * *SOAP Fault Code Prefix:* Client
     #   * * *Code:* MalformedXML
     #
     #     * *Description:* This happens when the user sends malformed XML
@@ -6644,54 +6580,34 @@ module Aws::S3
     #       schema."
     #
     #     * *HTTP Status Code:* 400 Bad Request
-    #
-    #     * *SOAP Fault Code Prefix:* Client
     #   * * *Code:* MaxMessageLengthExceeded
     #
     #     * *Description:* Your request was too big.
     #
     #     * *HTTP Status Code:* 400 Bad Request
-    #
-    #     * *SOAP Fault Code Prefix:* Client
     #   * * *Code:* MaxPostPreDataLengthExceededError
     #
     #     * *Description:* Your POST request fields preceding the upload
     #       file were too large.
     #
     #     * *HTTP Status Code:* 400 Bad Request
-    #
-    #     * *SOAP Fault Code Prefix:* Client
     #   * * *Code:* MetadataTooLarge
     #
     #     * *Description:* Your metadata headers exceed the maximum allowed
     #       metadata size.
     #
     #     * *HTTP Status Code:* 400 Bad Request
-    #
-    #     * *SOAP Fault Code Prefix:* Client
     #   * * *Code:* MethodNotAllowed
     #
     #     * *Description:* The specified method is not allowed against this
     #       resource.
     #
     #     * *HTTP Status Code:* 405 Method Not Allowed
-    #
-    #     * *SOAP Fault Code Prefix:* Client
-    #   * * *Code:* MissingAttachment
-    #
-    #     * *Description:* A SOAP attachment was expected, but none were
-    #       found.
-    #
-    #     * *HTTP Status Code:* N/A
-    #
-    #     * *SOAP Fault Code Prefix:* Client
     #   * * *Code:* MissingContentLength
     #
     #     * *Description:* You must provide the Content-Length HTTP header.
     #
     #     * *HTTP Status Code:* 411 Length Required
-    #
-    #     * *SOAP Fault Code Prefix:* Client
     #   * * *Code:* MissingRequestBodyError
     #
     #     * *Description:* This happens when the user sends an empty XML
@@ -6699,60 +6615,38 @@ module Aws::S3
     #       empty."
     #
     #     * *HTTP Status Code:* 400 Bad Request
-    #
-    #     * *SOAP Fault Code Prefix:* Client
-    #   * * *Code:* MissingSecurityElement
-    #
-    #     * *Description:* The SOAP 1.1 request is missing a security
-    #       element.
-    #
-    #     * *HTTP Status Code:* 400 Bad Request
-    #
-    #     * *SOAP Fault Code Prefix:* Client
     #   * * *Code:* MissingSecurityHeader
     #
     #     * *Description:* Your request is missing a required header.
     #
     #     * *HTTP Status Code:* 400 Bad Request
-    #
-    #     * *SOAP Fault Code Prefix:* Client
     #   * * *Code:* NoLoggingStatusForKey
     #
     #     * *Description:* There is no such thing as a logging status
     #       subresource for a key.
     #
     #     * *HTTP Status Code:* 400 Bad Request
-    #
-    #     * *SOAP Fault Code Prefix:* Client
     #   * * *Code:* NoSuchBucket
     #
     #     * *Description:* The specified bucket does not exist.
     #
     #     * *HTTP Status Code:* 404 Not Found
-    #
-    #     * *SOAP Fault Code Prefix:* Client
     #   * * *Code:* NoSuchBucketPolicy
     #
     #     * *Description:* The specified bucket does not have a bucket
     #       policy.
     #
     #     * *HTTP Status Code:* 404 Not Found
-    #
-    #     * *SOAP Fault Code Prefix:* Client
     #   * * *Code:* NoSuchKey
     #
     #     * *Description:* The specified key does not exist.
     #
     #     * *HTTP Status Code:* 404 Not Found
-    #
-    #     * *SOAP Fault Code Prefix:* Client
     #   * * *Code:* NoSuchLifecycleConfiguration
     #
     #     * *Description:* The lifecycle configuration does not exist.
     #
     #     * *HTTP Status Code:* 404 Not Found
-    #
-    #     * *SOAP Fault Code Prefix:* Client
     #   * * *Code:* NoSuchUpload
     #
     #     * *Description:* The specified multipart upload does not exist.
@@ -6760,24 +6654,18 @@ module Aws::S3
     #       have been aborted or completed.
     #
     #     * *HTTP Status Code:* 404 Not Found
-    #
-    #     * *SOAP Fault Code Prefix:* Client
     #   * * *Code:* NoSuchVersion
     #
     #     * *Description:* Indicates that the version ID specified in the
     #       request does not match an existing version.
     #
     #     * *HTTP Status Code:* 404 Not Found
-    #
-    #     * *SOAP Fault Code Prefix:* Client
     #   * * *Code:* NotImplemented
     #
     #     * *Description:* A header you provided implies functionality that
     #       is not implemented.
     #
     #     * *HTTP Status Code:* 501 Not Implemented
-    #
-    #     * *SOAP Fault Code Prefix:* Server
     #   * * *Code:* NotSignedUp
     #
     #     * *Description:* Your account is not signed up for the Amazon S3
@@ -6785,16 +6673,12 @@ module Aws::S3
     #       sign up at the following URL: [Amazon S3][3]
     #
     #     * *HTTP Status Code:* 403 Forbidden
-    #
-    #     * *SOAP Fault Code Prefix:* Client
     #   * * *Code:* OperationAborted
     #
     #     * *Description:* A conflicting conditional action is currently in
     #       progress against this resource. Try again.
     #
     #     * *HTTP Status Code:* 409 Conflict
-    #
-    #     * *SOAP Fault Code Prefix:* Client
     #   * * *Code:* PermanentRedirect
     #
     #     * *Description:* The bucket you are attempting to access must be
@@ -6802,133 +6686,98 @@ module Aws::S3
     #       to this endpoint.
     #
     #     * *HTTP Status Code:* 301 Moved Permanently
-    #
-    #     * *SOAP Fault Code Prefix:* Client
     #   * * *Code:* PreconditionFailed
     #
     #     * *Description:* At least one of the preconditions you specified
     #       did not hold.
     #
     #     * *HTTP Status Code:* 412 Precondition Failed
-    #
-    #     * *SOAP Fault Code Prefix:* Client
     #   * * *Code:* Redirect
     #
     #     * *Description:* Temporary redirect.
     #
     #     * *HTTP Status Code:* 307 Moved Temporarily
-    #
-    #     * *SOAP Fault Code Prefix:* Client
     #   * * *Code:* RestoreAlreadyInProgress
     #
     #     * *Description:* Object restore is already in progress.
     #
     #     * *HTTP Status Code:* 409 Conflict
-    #
-    #     * *SOAP Fault Code Prefix:* Client
     #   * * *Code:* RequestIsNotMultiPartContent
     #
     #     * *Description:* Bucket POST must be of the enclosure-type
     #       multipart/form-data.
     #
     #     * *HTTP Status Code:* 400 Bad Request
-    #
-    #     * *SOAP Fault Code Prefix:* Client
     #   * * *Code:* RequestTimeout
     #
     #     * *Description:* Your socket connection to the server was not read
     #       from or written to within the timeout period.
     #
     #     * *HTTP Status Code:* 400 Bad Request
-    #
-    #     * *SOAP Fault Code Prefix:* Client
     #   * * *Code:* RequestTimeTooSkewed
     #
     #     * *Description:* The difference between the request time and the
     #       server's time is too large.
     #
     #     * *HTTP Status Code:* 403 Forbidden
-    #
-    #     * *SOAP Fault Code Prefix:* Client
     #   * * *Code:* RequestTorrentOfBucketError
     #
     #     * *Description:* Requesting the torrent file of a bucket is not
     #       permitted.
     #
     #     * *HTTP Status Code:* 400 Bad Request
-    #
-    #     * *SOAP Fault Code Prefix:* Client
     #   * * *Code:* SignatureDoesNotMatch
     #
     #     * *Description:* The request signature we calculated does not
     #       match the signature you provided. Check your Amazon Web Services
     #       secret access key and signing method. For more information, see
-    #       [REST Authentication][4] and [SOAP Authentication][5] for
-    #       details.
+    #       [REST Authentication][4] for details.
     #
     #     * *HTTP Status Code:* 403 Forbidden
-    #
-    #     * *SOAP Fault Code Prefix:* Client
     #   * * *Code:* ServiceUnavailable
     #
     #     * *Description:* Service is unable to handle request.
     #
     #     * *HTTP Status Code:* 503 Service Unavailable
-    #
-    #     * *SOAP Fault Code Prefix:* Server
     #   * * *Code:* SlowDown
     #
     #     * *Description:* Reduce your request rate.
     #
     #     * *HTTP Status Code:* 503 Slow Down
-    #
-    #     * *SOAP Fault Code Prefix:* Server
     #   * * *Code:* TemporaryRedirect
     #
     #     * *Description:* You are being redirected to the bucket while DNS
     #       updates.
     #
     #     * *HTTP Status Code:* 307 Moved Temporarily
-    #
-    #     * *SOAP Fault Code Prefix:* Client
     #   * * *Code:* TokenRefreshRequired
     #
     #     * *Description:* The provided token must be refreshed.
     #
     #     * *HTTP Status Code:* 400 Bad Request
-    #
-    #     * *SOAP Fault Code Prefix:* Client
     #   * * *Code:* TooManyBuckets
     #
     #     * *Description:* You have attempted to create more buckets than
     #       allowed.
     #
     #     * *HTTP Status Code:* 400 Bad Request
-    #
-    #     * *SOAP Fault Code Prefix:* Client
     #   * * *Code:* UnexpectedContent
     #
     #     * *Description:* This request does not support content.
     #
     #     * *HTTP Status Code:* 400 Bad Request
-    #
-    #     * *SOAP Fault Code Prefix:* Client
     #   * * *Code:* UnresolvableGrantByEmailAddress
     #
     #     * *Description:* The email address you provided does not match any
     #       account on record.
     #
     #     * *HTTP Status Code:* 400 Bad Request
-    #
-    #     * *SOAP Fault Code Prefix:* Client
     #   * * *Code:* UserKeyMustBeSpecified
     #
     #     * *Description:* The bucket POST must contain the specified field
     #       name. If it is specified, check the order of the fields.
     #
     #     * *HTTP Status Code:* 400 Bad Request
-    #
-    #     * *SOAP Fault Code Prefix:* Client
     #
     #
     #
@@ -6938,7 +6787,6 @@ module Aws::S3
     #   [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingBucket.html#access-bucket-intro
     #   [3]: http://aws.amazon.com/s3
     #   [4]: https://docs.aws.amazon.com/AmazonS3/latest/dev/RESTAuthentication.html
-    #   [5]: https://docs.aws.amazon.com/AmazonS3/latest/dev/SOAPAuthentication.html
     #   @return [String]
     #
     # @!attribute [rw] message
@@ -14094,6 +13942,17 @@ module Aws::S3
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html
     #   @return [String]
     #
+    # @!attribute [rw] version_id
+    #   Version ID of the object.
+    #
+    #   Returns the Version ID of the object for the listed parts, if bucket
+    #   versioning is enabled.
+    #
+    #   <note markdown="1"> This functionality is not supported for directory buckets.
+    #
+    #    </note>
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ListPartsOutput AWS API Documentation
     #
     class ListPartsOutput < Struct.new(
@@ -14112,7 +13971,8 @@ module Aws::S3
       :storage_class,
       :request_charged,
       :checksum_algorithm,
-      :checksum_type)
+      :checksum_type,
+      :version_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -14707,6 +14567,17 @@ module Aws::S3
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html
     #   @return [String]
     #
+    # @!attribute [rw] version_id
+    #   Version ID of the object.
+    #
+    #   Returns the Version ID of the object for the multipart upload, if
+    #   bucket versioning is enabled.
+    #
+    #   <note markdown="1"> This functionality is not supported for directory buckets.
+    #
+    #    </note>
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/MultipartUpload AWS API Documentation
     #
     class MultipartUpload < Struct.new(
@@ -14717,7 +14588,8 @@ module Aws::S3
       :owner,
       :initiator,
       :checksum_algorithm,
-      :checksum_type)
+      :checksum_type,
+      :version_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -19721,7 +19593,7 @@ module Aws::S3
     # @!attribute [rw] filter
     #   A filter that identifies the subset of objects to which the
     #   replication rule applies. A `Filter` must specify exactly one
-    #   `Prefix`, `Tag`, or an `And` child element.
+    #   `Prefix`, `Tag`, `And`, or `Not` child element.
     #   @return [Types::ReplicationRuleFilter]
     #
     # @!attribute [rw] status
@@ -19761,10 +19633,11 @@ module Aws::S3
     #   Specifies whether Amazon S3 replicates delete markers. If you
     #   specify a `Filter` in your replication configuration, you must also
     #   include a `DeleteMarkerReplication` element. If your `Filter`
-    #   includes a `Tag` element, the `DeleteMarkerReplication` `Status`
-    #   must be set to Disabled, because Amazon S3 does not support
-    #   replicating delete markers for tag-based rules. For an example
-    #   configuration, see [Basic Rule Configuration][1].
+    #   includes a `Tag` element, including within a `Not` or `Or` element,
+    #   the `DeleteMarkerReplication` `Status` must be set to Disabled,
+    #   because Amazon S3 does not support replicating delete markers for
+    #   tag-based rules. For an example configuration, see [Basic Rule
+    #   Configuration][1].
     #
     #   For more information about delete marker replication, see [Basic
     #   Rule Configuration][2].
@@ -19819,18 +19692,24 @@ module Aws::S3
     #   An array of tags containing key and value pairs.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] not
+    #   A container for specifying filters that exclude matching objects
+    #   from the replication rule.
+    #   @return [Types::ReplicationRuleNotOperator]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ReplicationRuleAndOperator AWS API Documentation
     #
     class ReplicationRuleAndOperator < Struct.new(
       :prefix,
-      :tags)
+      :tags,
+      :not)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # A filter that identifies the subset of objects to which the
     # replication rule applies. A `Filter` must specify exactly one
-    # `Prefix`, `Tag`, or an `And` child element.
+    # `Prefix`, `Tag`, `And`, or `Not` child element.
     #
     # @!attribute [rw] prefix
     #   An object key name prefix that identifies the subset of objects to
@@ -19863,12 +19742,67 @@ module Aws::S3
     #     elements in an `And` tag.
     #   @return [Types::ReplicationRuleAndOperator]
     #
+    # @!attribute [rw] not
+    #   A container for specifying filters that exclude matching objects
+    #   from the replication rule.
+    #   @return [Types::ReplicationRuleNotOperator]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ReplicationRuleFilter AWS API Documentation
     #
     class ReplicationRuleFilter < Struct.new(
       :prefix,
       :tag,
-      :and)
+      :and,
+      :not)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A container for specifying a filter that excludes matching objects
+    # from the replication rule. Specify exactly one `Prefix`, `Tag`, or
+    # `Or` child element.
+    #
+    # @!attribute [rw] prefix
+    #   An object key name prefix that identifies objects to exclude from
+    #   the replication rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag
+    #   A tag key and value that identify objects to exclude from the
+    #   replication rule.
+    #   @return [Types::Tag]
+    #
+    # @!attribute [rw] or
+    #   A container for specifying prefixes and tags. An object is excluded
+    #   from the replication rule if it matches any of the specified
+    #   filters.
+    #   @return [Types::ReplicationRuleOrOperator]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ReplicationRuleNotOperator AWS API Documentation
+    #
+    class ReplicationRuleNotOperator < Struct.new(
+      :prefix,
+      :tag,
+      :or)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A container for specifying one or more prefix or tag filters.
+    #
+    # @!attribute [rw] prefixes
+    #   An array of object key name prefixes.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] tags
+    #   An array of tags containing key and value pairs.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ReplicationRuleOrOperator AWS API Documentation
+    #
+    class ReplicationRuleOrOperator < Struct.new(
+      :prefixes,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -21721,6 +21655,17 @@ module Aws::S3
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/RequesterPaysBuckets.html
     #   @return [String]
     #
+    # @!attribute [rw] version_id
+    #   Version ID of the object.
+    #
+    #   Returns the Version ID of the object for the copied part, if bucket
+    #   versioning is enabled.
+    #
+    #   <note markdown="1"> This functionality is not supported for directory buckets.
+    #
+    #    </note>
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/UploadPartCopyOutput AWS API Documentation
     #
     class UploadPartCopyOutput < Struct.new(
@@ -21731,7 +21676,8 @@ module Aws::S3
       :sse_customer_key_md5,
       :ssekms_key_id,
       :bucket_key_enabled,
-      :request_charged)
+      :request_charged,
+      :version_id)
       SENSITIVE = [:ssekms_key_id]
       include Aws::Structure
     end
@@ -22239,6 +22185,17 @@ module Aws::S3
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/RequesterPaysBuckets.html
     #   @return [String]
     #
+    # @!attribute [rw] version_id
+    #   Version ID of the object.
+    #
+    #   Returns the Version ID of the object for the uploaded part, if
+    #   bucket versioning is enabled.
+    #
+    #   <note markdown="1"> This functionality is not supported for directory buckets.
+    #
+    #    </note>
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/UploadPartOutput AWS API Documentation
     #
     class UploadPartOutput < Struct.new(
@@ -22258,7 +22215,8 @@ module Aws::S3
       :sse_customer_key_md5,
       :ssekms_key_id,
       :bucket_key_enabled,
-      :request_charged)
+      :request_charged,
+      :version_id)
       SENSITIVE = [:ssekms_key_id]
       include Aws::Structure
     end
@@ -22568,6 +22526,22 @@ module Aws::S3
       :request_payer,
       :expected_bucket_owner)
       SENSITIVE = [:sse_customer_key]
+      include Aws::Structure
+    end
+
+    # A container for configuring the use of the related multi-Region KMS
+    # key in the destination Amazon Web Services Region for replication.
+    #
+    # @!attribute [rw] status
+    #   Specifies whether Amazon S3 uses the related multi-Region KMS key in
+    #   the destination Amazon Web Services Region to encrypt the replica.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/UseSourceMultiRegionKey AWS API Documentation
+    #
+    class UseSourceMultiRegionKey < Struct.new(
+      :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 

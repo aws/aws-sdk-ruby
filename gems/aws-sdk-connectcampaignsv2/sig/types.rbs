@@ -44,6 +44,7 @@ module Aws::ConnectCampaignsV2
       attr_accessor entry_limits_config: Types::EntryLimitsConfig
       attr_accessor communication_time_config: Types::CommunicationTimeConfig
       attr_accessor communication_limits_override: Types::CommunicationLimitsConfig
+      attr_accessor last_modified_time: ::Time
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
     end
@@ -63,6 +64,7 @@ module Aws::ConnectCampaignsV2
       attr_accessor schedule: Types::Schedule
       attr_accessor entry_limits_config: Types::EntryLimitsConfig
       attr_accessor connect_campaign_flow_arn: ::String
+      attr_accessor last_modified_time: ::Time
       SENSITIVE: []
     end
 

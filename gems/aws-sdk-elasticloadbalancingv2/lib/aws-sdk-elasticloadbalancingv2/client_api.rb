@@ -79,6 +79,12 @@ module Aws::ElasticLoadBalancingV2
     CipherName = Shapes::StringShape.new(name: 'CipherName')
     CipherPriority = Shapes::IntegerShape.new(name: 'CipherPriority')
     Ciphers = Shapes::ListShape.new(name: 'Ciphers')
+    ClientCertificateIdentityFilter = Shapes::StructureShape.new(name: 'ClientCertificateIdentityFilter')
+    ClientCertificateIdentityFilterAction = Shapes::StringShape.new(name: 'ClientCertificateIdentityFilterAction')
+    ClientCertificateIdentityFilterField = Shapes::StringShape.new(name: 'ClientCertificateIdentityFilterField')
+    ClientCertificateIdentityFilterMatchType = Shapes::StringShape.new(name: 'ClientCertificateIdentityFilterMatchType')
+    ClientCertificateIdentityFilterValue = Shapes::StringShape.new(name: 'ClientCertificateIdentityFilterValue')
+    ClientCertificateIdentityFilters = Shapes::ListShape.new(name: 'ClientCertificateIdentityFilters')
     ConditionFieldName = Shapes::StringShape.new(name: 'ConditionFieldName')
     CreateListenerInput = Shapes::StructureShape.new(name: 'CreateListenerInput')
     CreateListenerOutput = Shapes::StructureShape.new(name: 'CreateListenerOutput')
@@ -546,6 +552,14 @@ module Aws::ElasticLoadBalancingV2
     Cipher.struct_class = Types::Cipher
 
     Ciphers.member = Shapes::ShapeRef.new(shape: Cipher)
+
+    ClientCertificateIdentityFilter.add_member(:field, Shapes::ShapeRef.new(shape: ClientCertificateIdentityFilterField, required: true, location_name: "Field"))
+    ClientCertificateIdentityFilter.add_member(:action, Shapes::ShapeRef.new(shape: ClientCertificateIdentityFilterAction, required: true, location_name: "Action"))
+    ClientCertificateIdentityFilter.add_member(:match_type, Shapes::ShapeRef.new(shape: ClientCertificateIdentityFilterMatchType, required: true, location_name: "MatchType"))
+    ClientCertificateIdentityFilter.add_member(:value, Shapes::ShapeRef.new(shape: ClientCertificateIdentityFilterValue, required: true, location_name: "Value"))
+    ClientCertificateIdentityFilter.struct_class = Types::ClientCertificateIdentityFilter
+
+    ClientCertificateIdentityFilters.member = Shapes::ShapeRef.new(shape: ClientCertificateIdentityFilter)
 
     CreateListenerInput.add_member(:load_balancer_arn, Shapes::ShapeRef.new(shape: LoadBalancerArn, required: true, location_name: "LoadBalancerArn"))
     CreateListenerInput.add_member(:protocol, Shapes::ShapeRef.new(shape: ProtocolEnum, location_name: "Protocol"))
@@ -1074,6 +1088,7 @@ module Aws::ElasticLoadBalancingV2
     MutualAuthenticationAttributes.add_member(:ignore_client_certificate_expiry, Shapes::ShapeRef.new(shape: IgnoreClientCertificateExpiry, location_name: "IgnoreClientCertificateExpiry"))
     MutualAuthenticationAttributes.add_member(:trust_store_association_status, Shapes::ShapeRef.new(shape: TrustStoreAssociationStatusEnum, location_name: "TrustStoreAssociationStatus"))
     MutualAuthenticationAttributes.add_member(:advertise_trust_store_ca_names, Shapes::ShapeRef.new(shape: AdvertiseTrustStoreCaNamesEnum, location_name: "AdvertiseTrustStoreCaNames"))
+    MutualAuthenticationAttributes.add_member(:client_certificate_identity_filters, Shapes::ShapeRef.new(shape: ClientCertificateIdentityFilters, location_name: "ClientCertificateIdentityFilters"))
     MutualAuthenticationAttributes.struct_class = Types::MutualAuthenticationAttributes
 
     OperationNotPermittedException.struct_class = Types::OperationNotPermittedException

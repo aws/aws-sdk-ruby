@@ -113,7 +113,9 @@ module Aws::MediaConvert
       attr_accessor ac_3_settings: Types::Ac3Settings
       attr_accessor ac_4_settings: Types::Ac4Settings
       attr_accessor aiff_settings: Types::AiffSettings
-      attr_accessor codec: ("AAC" | "MP2" | "MP3" | "WAV" | "AIFF" | "AC3" | "AC4" | "EAC3" | "EAC3_ATMOS" | "VORBIS" | "OPUS" | "PASSTHROUGH" | "FLAC")
+      attr_accessor codec: ("AAC" | "MP2" | "MP3" | "WAV" | "AIFF" | "AC3" | "AC4" | "DTSX" | "DTSC" | "EAC3" | "EAC3_ATMOS" | "VORBIS" | "OPUS" | "PASSTHROUGH" | "FLAC")
+      attr_accessor dtsc_settings: Types::DtscSettings
+      attr_accessor dtsx_settings: Types::DtsxSettings
       attr_accessor eac_3_atmos_settings: Types::Eac3AtmosSettings
       attr_accessor eac_3_settings: Types::Eac3Settings
       attr_accessor flac_settings: Types::FlacSettings
@@ -222,15 +224,17 @@ module Aws::MediaConvert
     end
 
     class Av1Settings
-      attr_accessor adaptive_quantization: ("OFF" | "LOW" | "MEDIUM" | "HIGH" | "HIGHER" | "MAX")
+      attr_accessor adaptive_quantization: ("OFF" | "AUTO" | "LOW" | "MEDIUM" | "HIGH" | "HIGHER" | "MAX")
       attr_accessor bit_depth: ("BIT_8" | "BIT_10")
       attr_accessor bitrate: ::Integer
+      attr_accessor fast_decode: ("DISABLED" | "ENABLED")
       attr_accessor film_grain_synthesis: ("DISABLED" | "ENABLED")
       attr_accessor framerate_control: ("INITIALIZE_FROM_SOURCE" | "SPECIFIED")
       attr_accessor framerate_conversion_algorithm: ("DUPLICATE_DROP" | "INTERPOLATE" | "FRAMEFORMER" | "MAINTAIN_FRAME_COUNT")
       attr_accessor framerate_denominator: ::Integer
       attr_accessor framerate_numerator: ::Integer
       attr_accessor gop_size: ::Float
+      attr_accessor gop_size_units: ("FRAMES" | "SECONDS")
       attr_accessor max_bitrate: ::Integer
       attr_accessor number_b_frames_between_reference_frames: ::Integer
       attr_accessor per_frame_metrics: ::Array[("PSNR" | "SSIM" | "MS_SSIM" | "PSNR_HVS" | "VMAF" | "QVBR" | "SHOT_CHANGE")]
@@ -241,6 +245,7 @@ module Aws::MediaConvert
       attr_accessor sliding_window_ms: ::Integer
       attr_accessor sliding_window_peak_bitrate: ::Integer
       attr_accessor spatial_adaptive_quantization: ("DISABLED" | "ENABLED")
+      attr_accessor temporal_adaptive_quantization: ("DISABLED" | "ENABLED")
       SENSITIVE: []
     end
 
@@ -319,11 +324,13 @@ module Aws::MediaConvert
     end
 
     class CaptionDescription
+      attr_accessor audio_source_names: ::Array[::String]
       attr_accessor caption_selector_name: ::String
       attr_accessor custom_language_code: ::String
       attr_accessor destination_settings: Types::CaptionDestinationSettings
       attr_accessor language_code: ("ENG" | "SPA" | "FRA" | "DEU" | "GER" | "ZHO" | "ARA" | "HIN" | "JPN" | "RUS" | "POR" | "ITA" | "URD" | "VIE" | "KOR" | "PAN" | "ABK" | "AAR" | "AFR" | "AKA" | "SQI" | "AMH" | "ARG" | "HYE" | "ASM" | "AVA" | "AVE" | "AYM" | "AZE" | "BAM" | "BAK" | "EUS" | "BEL" | "BEN" | "BIH" | "BIS" | "BOS" | "BRE" | "BUL" | "MYA" | "CAT" | "KHM" | "CHA" | "CHE" | "NYA" | "CHU" | "CHV" | "COR" | "COS" | "CRE" | "HRV" | "CES" | "DAN" | "DIV" | "NLD" | "DZO" | "ENM" | "EPO" | "EST" | "EWE" | "FAO" | "FIJ" | "FIN" | "FRM" | "FUL" | "GLA" | "GLG" | "LUG" | "KAT" | "ELL" | "GRN" | "GUJ" | "HAT" | "HAU" | "HEB" | "HER" | "HMO" | "HUN" | "ISL" | "IDO" | "IBO" | "IND" | "INA" | "ILE" | "IKU" | "IPK" | "GLE" | "JAV" | "KAL" | "KAN" | "KAU" | "KAS" | "KAZ" | "KIK" | "KIN" | "KIR" | "KOM" | "KON" | "KUA" | "KUR" | "LAO" | "LAT" | "LAV" | "LIM" | "LIN" | "LIT" | "LUB" | "LTZ" | "MKD" | "MLG" | "MSA" | "MAL" | "MLT" | "GLV" | "MRI" | "MAR" | "MAH" | "MON" | "NAU" | "NAV" | "NDE" | "NBL" | "NDO" | "NEP" | "SME" | "NOR" | "NOB" | "NNO" | "OCI" | "OJI" | "ORI" | "ORM" | "OSS" | "PLI" | "FAS" | "POL" | "PUS" | "QUE" | "QAA" | "RON" | "ROH" | "RUN" | "SMO" | "SAG" | "SAN" | "SRD" | "SRB" | "SNA" | "III" | "SND" | "SIN" | "SLK" | "SLV" | "SOM" | "SOT" | "SUN" | "SWA" | "SSW" | "SWE" | "TGL" | "TAH" | "TGK" | "TAM" | "TAT" | "TEL" | "THA" | "BOD" | "TIR" | "TON" | "TSO" | "TSN" | "TUR" | "TUK" | "TWI" | "UIG" | "UKR" | "UZB" | "VEN" | "VOL" | "WLN" | "CYM" | "FRY" | "WOL" | "XHO" | "YID" | "YOR" | "ZHA" | "ZUL" | "ORJ" | "QPC" | "TNG" | "SRP")
       attr_accessor language_description: ::String
+      attr_accessor source: ("INPUT_CAPTION_SELECTOR" | "SMART_SUBTITLE")
       SENSITIVE: []
     end
 
@@ -562,6 +569,7 @@ module Aws::MediaConvert
       attr_accessor acceleration_settings: Types::AccelerationSettings
       attr_accessor billing_tags_source: ("QUEUE" | "PRESET" | "JOB_TEMPLATE" | "JOB")
       attr_accessor client_request_token: ::String
+      attr_accessor elemental_inference_settings: Types::ElementalInferenceSettings
       attr_accessor hop_destinations: ::Array[Types::HopDestination]
       attr_accessor job_engine_version: ::String
       attr_accessor job_template: ::String
@@ -585,6 +593,7 @@ module Aws::MediaConvert
       attr_accessor acceleration_settings: Types::AccelerationSettings
       attr_accessor category: ::String
       attr_accessor description: ::String
+      attr_accessor elemental_inference_settings: Types::ElementalInferenceSettings
       attr_accessor hop_destinations: ::Array[Types::HopDestination]
       attr_accessor name: ::String
       attr_accessor priority: ::Integer
@@ -792,6 +801,19 @@ module Aws::MediaConvert
       SENSITIVE: []
     end
 
+    class DtscSettings
+      attr_accessor bitrate: ::Integer
+      attr_accessor sample_rate: ::Integer
+      SENSITIVE: []
+    end
+
+    class DtsxSettings
+      attr_accessor bitrate: ::Integer
+      attr_accessor coding_mode: ("CODING_MODE_5_1" | "CODING_MODE_5_1_4")
+      attr_accessor sample_rate: ::Integer
+      SENSITIVE: []
+    end
+
     class DurationControl
       attr_accessor integer_duration_maximum_compression_denominator: ::Integer
       attr_accessor integer_duration_maximum_compression_numerator: ::Integer
@@ -868,6 +890,12 @@ module Aws::MediaConvert
       SENSITIVE: []
     end
 
+    class DynamicMultiviewSettings
+      attr_accessor enabled: ("DISABLED" | "ENABLED")
+      attr_accessor regions: ::Array[Types::Rectangle]
+      SENSITIVE: []
+    end
+
     class Eac3AtmosSettings
       attr_accessor bitrate: ::Integer
       attr_accessor bitstream_mode: ("COMPLETE_MAIN")
@@ -915,7 +943,7 @@ module Aws::MediaConvert
     end
 
     class ElementalInferenceConfiguration
-      attr_accessor features: ::Array[("SMART_CROP")]
+      attr_accessor features: ::Array[("SMART_CROP" | "SMART_SUBTITLE")]
       attr_accessor feeds: ::Array[Types::ElementalInferenceFeed]
       SENSITIVE: []
     end
@@ -923,6 +951,16 @@ module Aws::MediaConvert
     class ElementalInferenceFeed
       attr_accessor arn: ::String
       attr_accessor feed_management_state: ("CREATED" | "ASSOCIATED" | "PENDING_DELETION" | "DELETED")
+      SENSITIVE: []
+    end
+
+    class ElementalInferenceFeedConfigurationSource
+      attr_accessor feed_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ElementalInferenceSettings
+      attr_accessor feed_configuration_source: Types::ElementalInferenceFeedConfigurationSource
       SENSITIVE: []
     end
 
@@ -1501,6 +1539,7 @@ module Aws::MediaConvert
       attr_accessor created_at: ::Time
       attr_accessor current_phase: ("PROBING" | "TRANSCODING" | "UPLOADING")
       attr_accessor elemental_inference_configuration: Types::ElementalInferenceConfiguration
+      attr_accessor elemental_inference_settings: Types::ElementalInferenceSettings
       attr_accessor error_code: ::Integer
       attr_accessor error_message: ::String
       attr_accessor hop_destinations: ::Array[Types::HopDestination]
@@ -1565,6 +1604,7 @@ module Aws::MediaConvert
       attr_accessor category: ::String
       attr_accessor created_at: ::Time
       attr_accessor description: ::String
+      attr_accessor elemental_inference_settings: Types::ElementalInferenceSettings
       attr_accessor hop_destinations: ::Array[Types::HopDestination]
       attr_accessor last_updated: ::Time
       attr_accessor name: ::String
@@ -2477,6 +2517,7 @@ module Aws::MediaConvert
       attr_accessor acceleration_settings: Types::AccelerationSettings
       attr_accessor category: ::String
       attr_accessor description: ::String
+      attr_accessor elemental_inference_settings: Types::ElementalInferenceSettings
       attr_accessor hop_destinations: ::Array[Types::HopDestination]
       attr_accessor name: ::String
       attr_accessor priority: ::Integer
@@ -2559,6 +2600,7 @@ module Aws::MediaConvert
       attr_accessor color_metadata: ("IGNORE" | "INSERT")
       attr_accessor crop: Types::Rectangle
       attr_accessor drop_frame_timecode: ("DISABLED" | "ENABLED")
+      attr_accessor dynamic_multiview_settings: Types::DynamicMultiviewSettings
       attr_accessor fixed_afd: ::Integer
       attr_accessor height: ::Integer
       attr_accessor position: Types::Rectangle

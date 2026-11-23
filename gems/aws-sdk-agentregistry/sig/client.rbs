@@ -117,6 +117,8 @@ module Aws
       interface _SearchDiscoverableRegistryRecordsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::SearchDiscoverableRegistryRecordsResponse]
         def registry_records: () -> ::Array[Types::RegistryRecordSummary]
+        def search_type: () -> ("HYBRID" | "SEMANTIC" | "KEYWORD")
+        def next_token: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AgentRegistry/Client.html#search_discoverable_registry_records-instance_method
       def search_discoverable_registry_records: (
@@ -124,7 +126,9 @@ module Aws
                                                   registry_ids: Array[::String],
                                                   ?max_results: ::Integer,
                                                   ?filters: {
-                                                  }
+                                                  },
+                                                  ?search_type: ("HYBRID" | "SEMANTIC" | "KEYWORD"),
+                                                  ?next_token: ::String
                                                 ) -> _SearchDiscoverableRegistryRecordsResponseSuccess
                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SearchDiscoverableRegistryRecordsResponseSuccess
     end

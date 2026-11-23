@@ -102,6 +102,7 @@ module Aws
         def seller_engagements: () -> ::Array[Types::SellerEngagement]
         def short_description: () -> ::String
         def use_cases: () -> ::Array[Types::UseCaseEntry]
+        def purchase_indicators: () -> ::Array[Types::PurchaseIndicator]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MarketplaceDiscovery/Client.html#get_listing-instance_method
       def get_listing: (
@@ -185,6 +186,7 @@ module Aws
         def resources: () -> ::Array[Types::Resource]
         def seller_engagements: () -> ::Array[Types::SellerEngagement]
         def listing_id: () -> ::String
+        def purchase_indicators: () -> ::Array[Types::PurchaseIndicator]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MarketplaceDiscovery/Client.html#get_product-instance_method
       def get_product: (
@@ -208,6 +210,22 @@ module Aws
                                     ) -> _ListFulfillmentOptionsResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListFulfillmentOptionsResponseSuccess
 
+      interface _ListListingAttributesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListListingAttributesOutput]
+        def locale: () -> ::String
+        def listing_attributes: () -> ::Array[Types::ListingAttributeResults]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MarketplaceDiscovery/Client.html#list_listing_attributes-instance_method
+      def list_listing_attributes: (
+                                     ?locale: ::String,
+                                     listing_id: ::String,
+                                     attribute_types: Array[("CASE_STUDY" | "SPECIALIZATION_DETAIL" | "TRUST_CENTER_SOURCE" | "TRUST_CENTER_CERTIFICATION" | "TRUST_CENTER_DOCUMENT" | "TRUST_CENTER_CONTROL" | "TRUST_CENTER_FAQ" | "TRUST_CENTER_UPDATE")],
+                                     ?max_results: ::Integer,
+                                     ?next_token: ::String
+                                   ) -> _ListListingAttributesResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListListingAttributesResponseSuccess
+
       interface _ListPurchaseOptionsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListPurchaseOptionsOutput]
         def purchase_options: () -> ::Array[Types::PurchaseOptionSummary]
@@ -230,7 +248,7 @@ module Aws
       interface _SearchFacetsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::SearchFacetsOutput]
         def total_results: () -> ::Integer
-        def listing_facets: () -> ::Hash[("AVERAGE_CUSTOMER_RATING" | "CATEGORY" | "PUBLISHER" | "FULFILLMENT_OPTION_TYPE" | "PRICING_MODEL" | "PRICING_UNIT" | "DEPLOYED_ON_AWS" | "NUMBER_OF_PRODUCTS"), ::Array[Types::ListingFacet]]
+        def listing_facets: () -> ::Hash[("AVERAGE_CUSTOMER_RATING" | "CATEGORY" | "PUBLISHER" | "FULFILLMENT_OPTION_TYPE" | "PRICING_MODEL" | "PRICING_UNIT" | "DEPLOYED_ON_AWS" | "NUMBER_OF_PRODUCTS" | "CERTIFICATES" | "SPECIALIZATION" | "SPECIALIZATION_CATEGORY" | "SELLER_ENGAGEMENT" | "TRUST_CENTER"), ::Array[Types::ListingFacet]]
         def next_token: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MarketplaceDiscovery/Client.html#search_facets-instance_method
@@ -239,11 +257,11 @@ module Aws
                            ?search_text: ::String,
                            ?filters: Array[
                              {
-                               filter_type: ("MIN_AVERAGE_CUSTOMER_RATING" | "MAX_AVERAGE_CUSTOMER_RATING" | "CATEGORY" | "PUBLISHER" | "FULFILLMENT_OPTION_TYPE" | "PRICING_MODEL" | "PRICING_UNIT" | "DEPLOYED_ON_AWS" | "NUMBER_OF_PRODUCTS"),
+                               filter_type: ("MIN_AVERAGE_CUSTOMER_RATING" | "MAX_AVERAGE_CUSTOMER_RATING" | "CATEGORY" | "PUBLISHER" | "FULFILLMENT_OPTION_TYPE" | "PRICING_MODEL" | "PRICING_UNIT" | "DEPLOYED_ON_AWS" | "NUMBER_OF_PRODUCTS" | "CERTIFICATES" | "PRODUCT_ID" | "SPECIALIZATION" | "SPECIALIZATION_CATEGORY" | "SELLER_ENGAGEMENT" | "TRUST_CENTER"),
                                filter_values: Array[::String]
                              }
                            ],
-                           ?facet_types: Array[("AVERAGE_CUSTOMER_RATING" | "CATEGORY" | "PUBLISHER" | "FULFILLMENT_OPTION_TYPE" | "PRICING_MODEL" | "PRICING_UNIT" | "DEPLOYED_ON_AWS" | "NUMBER_OF_PRODUCTS")],
+                           ?facet_types: Array[("AVERAGE_CUSTOMER_RATING" | "CATEGORY" | "PUBLISHER" | "FULFILLMENT_OPTION_TYPE" | "PRICING_MODEL" | "PRICING_UNIT" | "DEPLOYED_ON_AWS" | "NUMBER_OF_PRODUCTS" | "CERTIFICATES" | "SPECIALIZATION" | "SPECIALIZATION_CATEGORY" | "SELLER_ENGAGEMENT" | "TRUST_CENTER")],
                            ?next_token: ::String
                          ) -> _SearchFacetsResponseSuccess
                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SearchFacetsResponseSuccess
@@ -260,7 +278,7 @@ module Aws
                              ?search_text: ::String,
                              ?filters: Array[
                                {
-                                 filter_type: ("MIN_AVERAGE_CUSTOMER_RATING" | "MAX_AVERAGE_CUSTOMER_RATING" | "CATEGORY" | "PUBLISHER" | "FULFILLMENT_OPTION_TYPE" | "PRICING_MODEL" | "PRICING_UNIT" | "DEPLOYED_ON_AWS" | "NUMBER_OF_PRODUCTS"),
+                                 filter_type: ("MIN_AVERAGE_CUSTOMER_RATING" | "MAX_AVERAGE_CUSTOMER_RATING" | "CATEGORY" | "PUBLISHER" | "FULFILLMENT_OPTION_TYPE" | "PRICING_MODEL" | "PRICING_UNIT" | "DEPLOYED_ON_AWS" | "NUMBER_OF_PRODUCTS" | "CERTIFICATES" | "PRODUCT_ID" | "SPECIALIZATION" | "SPECIALIZATION_CATEGORY" | "SELLER_ENGAGEMENT" | "TRUST_CENTER"),
                                  filter_values: Array[::String]
                                }
                              ],

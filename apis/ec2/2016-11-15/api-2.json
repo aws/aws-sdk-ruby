@@ -256,6 +256,15 @@
       "input":{"shape":"AssociateIpamResourceDiscoveryRequest"},
       "output":{"shape":"AssociateIpamResourceDiscoveryResult"}
     },
+    "AssociateKmsKeyId":{
+      "name":"AssociateKmsKeyId",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"AssociateKmsKeyIdRequest"},
+      "output":{"shape":"AssociateKmsKeyIdResult"}
+    },
     "AssociateNatGatewayAddress":{
       "name":"AssociateNatGatewayAddress",
       "http":{
@@ -264,6 +273,15 @@
       },
       "input":{"shape":"AssociateNatGatewayAddressRequest"},
       "output":{"shape":"AssociateNatGatewayAddressResult"}
+    },
+    "AssociateNetworkingFlexCostAllocationPolicy":{
+      "name":"AssociateNetworkingFlexCostAllocationPolicy",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"AssociateNetworkingFlexCostAllocationPolicyRequest"},
+      "output":{"shape":"AssociateNetworkingFlexCostAllocationPolicyResult"}
     },
     "AssociateRouteServer":{
       "name":"AssociateRouteServer",
@@ -1036,6 +1054,15 @@
       "input":{"shape":"CreateManagedPrefixListRequest"},
       "output":{"shape":"CreateManagedPrefixListResult"}
     },
+    "CreateMetricCategory":{
+      "name":"CreateMetricCategory",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"CreateMetricCategoryRequest"},
+      "output":{"shape":"CreateMetricCategoryResult"}
+    },
     "CreateNatGateway":{
       "name":"CreateNatGateway",
       "http":{
@@ -1097,6 +1124,15 @@
       },
       "input":{"shape":"CreateNetworkInterfacePermissionRequest"},
       "output":{"shape":"CreateNetworkInterfacePermissionResult"}
+    },
+    "CreateNetworkingFlexCostAllocationPolicy":{
+      "name":"CreateNetworkingFlexCostAllocationPolicy",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"CreateNetworkingFlexCostAllocationPolicyRequest"},
+      "output":{"shape":"CreateNetworkingFlexCostAllocationPolicyResult"}
     },
     "CreatePlacementGroup":{
       "name":"CreatePlacementGroup",
@@ -1366,6 +1402,15 @@
       },
       "input":{"shape":"CreateTransitGatewayMulticastDomainRequest"},
       "output":{"shape":"CreateTransitGatewayMulticastDomainResult"}
+    },
+    "CreateTransitGatewayNetworkFunctionAttachment":{
+      "name":"CreateTransitGatewayNetworkFunctionAttachment",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"CreateTransitGatewayNetworkFunctionAttachmentRequest"},
+      "output":{"shape":"CreateTransitGatewayNetworkFunctionAttachmentResult"}
     },
     "CreateTransitGatewayPeeringAttachment":{
       "name":"CreateTransitGatewayPeeringAttachment",
@@ -1921,6 +1966,15 @@
       "input":{"shape":"DeleteManagedPrefixListRequest"},
       "output":{"shape":"DeleteManagedPrefixListResult"}
     },
+    "DeleteMetricCategory":{
+      "name":"DeleteMetricCategory",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DeleteMetricCategoryRequest"},
+      "output":{"shape":"DeleteMetricCategoryResult"}
+    },
     "DeleteNatGateway":{
       "name":"DeleteNatGateway",
       "http":{
@@ -1998,6 +2052,15 @@
       },
       "input":{"shape":"DeleteNetworkInterfacePermissionRequest"},
       "output":{"shape":"DeleteNetworkInterfacePermissionResult"}
+    },
+    "DeleteNetworkingFlexCostAllocationPolicies":{
+      "name":"DeleteNetworkingFlexCostAllocationPolicies",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DeleteNetworkingFlexCostAllocationPoliciesRequest"},
+      "output":{"shape":"DeleteNetworkingFlexCostAllocationPoliciesResult"}
     },
     "DeletePlacementGroup":{
       "name":"DeletePlacementGroup",
@@ -2234,6 +2297,15 @@
       },
       "input":{"shape":"DeleteTransitGatewayMulticastDomainRequest"},
       "output":{"shape":"DeleteTransitGatewayMulticastDomainResult"}
+    },
+    "DeleteTransitGatewayNetworkFunctionAttachment":{
+      "name":"DeleteTransitGatewayNetworkFunctionAttachment",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DeleteTransitGatewayNetworkFunctionAttachmentRequest"},
+      "output":{"shape":"DeleteTransitGatewayNetworkFunctionAttachmentResult"}
     },
     "DeleteTransitGatewayPeeringAttachment":{
       "name":"DeleteTransitGatewayPeeringAttachment",
@@ -3436,6 +3508,15 @@
       "input":{"shape":"DescribeManagedPrefixListsRequest"},
       "output":{"shape":"DescribeManagedPrefixListsResult"}
     },
+    "DescribeMetricCategories":{
+      "name":"DescribeMetricCategories",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DescribeMetricCategoriesRequest"},
+      "output":{"shape":"DescribeMetricCategoriesResult"}
+    },
     "DescribeMovingAddresses":{
       "name":"DescribeMovingAddresses",
       "http":{
@@ -3525,6 +3606,24 @@
       },
       "input":{"shape":"DescribeNetworkInterfacesRequest"},
       "output":{"shape":"DescribeNetworkInterfacesResult"}
+    },
+    "DescribeNetworkingFlexCostAllocationPolicies":{
+      "name":"DescribeNetworkingFlexCostAllocationPolicies",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DescribeNetworkingFlexCostAllocationPoliciesRequest"},
+      "output":{"shape":"DescribeNetworkingFlexCostAllocationPoliciesResult"}
+    },
+    "DescribeNetworkingFlexCostAllocationPolicyAssociations":{
+      "name":"DescribeNetworkingFlexCostAllocationPolicyAssociations",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DescribeNetworkingFlexCostAllocationPolicyAssociationsRequest"},
+      "output":{"shape":"DescribeNetworkingFlexCostAllocationPolicyAssociationsResult"}
     },
     "DescribeOutpostLags":{
       "name":"DescribeOutpostLags",
@@ -3948,6 +4047,15 @@
       },
       "input":{"shape":"DescribeTransitGatewayMulticastDomainsRequest"},
       "output":{"shape":"DescribeTransitGatewayMulticastDomainsResult"}
+    },
+    "DescribeTransitGatewayNetworkFunctionAttachments":{
+      "name":"DescribeTransitGatewayNetworkFunctionAttachments",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DescribeTransitGatewayNetworkFunctionAttachmentsRequest"},
+      "output":{"shape":"DescribeTransitGatewayNetworkFunctionAttachmentsResult"}
     },
     "DescribeTransitGatewayPeeringAttachments":{
       "name":"DescribeTransitGatewayPeeringAttachments",
@@ -4592,6 +4700,15 @@
       "input":{"shape":"DisassociateIpamResourceDiscoveryRequest"},
       "output":{"shape":"DisassociateIpamResourceDiscoveryResult"}
     },
+    "DisassociateKmsKeyId":{
+      "name":"DisassociateKmsKeyId",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DisassociateKmsKeyIdRequest"},
+      "output":{"shape":"DisassociateKmsKeyIdResult"}
+    },
     "DisassociateNatGatewayAddress":{
       "name":"DisassociateNatGatewayAddress",
       "http":{
@@ -4600,6 +4717,15 @@
       },
       "input":{"shape":"DisassociateNatGatewayAddressRequest"},
       "output":{"shape":"DisassociateNatGatewayAddressResult"}
+    },
+    "DisassociateNetworkingFlexCostAllocationPolicy":{
+      "name":"DisassociateNetworkingFlexCostAllocationPolicy",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DisassociateNetworkingFlexCostAllocationPolicyRequest"},
+      "output":{"shape":"DisassociateNetworkingFlexCostAllocationPolicyResult"}
     },
     "DisassociateRouteServer":{
       "name":"DisassociateRouteServer",
@@ -5444,6 +5570,15 @@
       "input":{"shape":"GetNetworkInsightsAccessScopeContentRequest"},
       "output":{"shape":"GetNetworkInsightsAccessScopeContentResult"}
     },
+    "GetNetworkingFlexCostAllocationPolicyVersions":{
+      "name":"GetNetworkingFlexCostAllocationPolicyVersions",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"GetNetworkingFlexCostAllocationPolicyVersionsRequest"},
+      "output":{"shape":"GetNetworkingFlexCostAllocationPolicyVersionsResult"}
+    },
     "GetPasswordData":{
       "name":"GetPasswordData",
       "http":{
@@ -6142,6 +6277,15 @@
       "input":{"shape":"ModifyManagedResourceVisibilityRequest"},
       "output":{"shape":"ModifyManagedResourceVisibilityResult"}
     },
+    "ModifyMetricCategory":{
+      "name":"ModifyMetricCategory",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ModifyMetricCategoryRequest"},
+      "output":{"shape":"ModifyMetricCategoryResult"}
+    },
     "ModifyNetworkInterfaceAttribute":{
       "name":"ModifyNetworkInterfaceAttribute",
       "http":{
@@ -6149,6 +6293,15 @@
         "requestUri":"/"
       },
       "input":{"shape":"ModifyNetworkInterfaceAttributeRequest"}
+    },
+    "ModifyNetworkingFlexCostAllocationPolicy":{
+      "name":"ModifyNetworkingFlexCostAllocationPolicy",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ModifyNetworkingFlexCostAllocationPolicyRequest"},
+      "output":{"shape":"ModifyNetworkingFlexCostAllocationPolicyResult"}
     },
     "ModifyPrivateDnsNameOptions":{
       "name":"ModifyPrivateDnsNameOptions",
@@ -6282,6 +6435,24 @@
       },
       "input":{"shape":"ModifyTransitGatewayMeteringPolicyRequest"},
       "output":{"shape":"ModifyTransitGatewayMeteringPolicyResult"}
+    },
+    "ModifyTransitGatewayNetworkFunctionAttachment":{
+      "name":"ModifyTransitGatewayNetworkFunctionAttachment",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ModifyTransitGatewayNetworkFunctionAttachmentRequest"},
+      "output":{"shape":"ModifyTransitGatewayNetworkFunctionAttachmentResult"}
+    },
+    "ModifyTransitGatewayPeeringAttachment":{
+      "name":"ModifyTransitGatewayPeeringAttachment",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ModifyTransitGatewayPeeringAttachmentRequest"},
+      "output":{"shape":"ModifyTransitGatewayPeeringAttachmentResult"}
     },
     "ModifyTransitGatewayPolicyTableEntry":{
       "name":"ModifyTransitGatewayPolicyTableEntry",
@@ -7509,6 +7680,10 @@
         "VpcEndpointIds":{
           "shape":"VpcEndpointIdList",
           "locationName":"VpcEndpointId"
+        },
+        "TransitGatewayAttachmentIds":{
+          "shape":"TransitGatewayAttachmentIdList",
+          "locationName":"TransitGatewayAttachmentId"
         }
       }
     },
@@ -7729,6 +7904,14 @@
         "ElasticFileSystem":{
           "shape":"VpcEncryptionControlExclusionState",
           "locationName":"elasticFileSystem"
+        },
+        "GlobalAccelerator":{
+          "shape":"VpcEncryptionControlExclusionState",
+          "locationName":"globalAccelerator"
+        },
+        "ApiGatewayV2":{
+          "shape":"VpcEncryptionControlExclusionState",
+          "locationName":"apiGatewayV2"
         }
       }
     },
@@ -7749,6 +7932,13 @@
         "transitions-successful",
         "transitions-failed"
       ]
+    },
+    "ActiveAdditionalKeyExchangesList":{
+      "type":"list",
+      "member":{
+        "shape":"ActiveVpnTunnelAdditionalKeyExchange",
+        "locationName":"item"
+      }
     },
     "ActiveInstance":{
       "type":"structure",
@@ -7776,6 +7966,19 @@
       "member":{
         "shape":"ActiveInstance",
         "locationName":"item"
+      }
+    },
+    "ActiveVpnTunnelAdditionalKeyExchange":{
+      "type":"structure",
+      "members":{
+        "AdditionalKeyExchangeRound":{
+          "shape":"Integer",
+          "locationName":"additionalKeyExchangeRound"
+        },
+        "KeyExchangeMethod":{
+          "shape":"Integer",
+          "locationName":"keyExchangeMethod"
+        }
       }
     },
     "ActiveVpnTunnelStatus":{
@@ -7816,6 +8019,14 @@
         "ProvisioningStatusReason":{
           "shape":"String",
           "locationName":"provisioningStatusReason"
+        },
+        "Phase1AdditionalKeyExchanges":{
+          "shape":"ActiveAdditionalKeyExchangesList",
+          "locationName":"phase1AdditionalKeyExchangeSet"
+        },
+        "Phase2AdditionalKeyExchanges":{
+          "shape":"ActiveAdditionalKeyExchangesList",
+          "locationName":"phase2AdditionalKeyExchangeSet"
         }
       }
     },
@@ -7884,6 +8095,10 @@
         "ServiceId":{
           "shape":"String",
           "locationName":"serviceId"
+        },
+        "PermissionType":{
+          "shape":"PermissionType",
+          "locationName":"permissionType"
         }
       }
     },
@@ -7939,6 +8154,61 @@
       }
     },
     "AdditionalFlexibleNetworkInterfaces":{"type":"integer"},
+    "AdditionalKeyExchangeMethodsList":{
+      "type":"list",
+      "member":{
+        "shape":"AdditionalKeyExchangeMethodsListValue",
+        "locationName":"item"
+      }
+    },
+    "AdditionalKeyExchangeMethodsListValue":{
+      "type":"structure",
+      "members":{
+        "Value":{
+          "shape":"Integer",
+          "locationName":"value"
+        }
+      }
+    },
+    "AdditionalKeyExchangeMethodsRequestList":{
+      "type":"list",
+      "member":{
+        "shape":"AdditionalKeyExchangeMethodsRequestListValue",
+        "locationName":"item"
+      }
+    },
+    "AdditionalKeyExchangeMethodsRequestListValue":{
+      "type":"structure",
+      "members":{
+        "Value":{"shape":"Integer"}
+      }
+    },
+    "AdditionalKeyExchangeRequirement":{
+      "type":"string",
+      "enum":[
+        "required",
+        "optional"
+      ]
+    },
+    "AdditionalKeyExchangeRound":{
+      "type":"integer",
+      "max":7,
+      "min":1
+    },
+    "AdditionalKeyExchangesList":{
+      "type":"list",
+      "member":{
+        "shape":"VpnAdditionalKeyExchange",
+        "locationName":"item"
+      }
+    },
+    "AdditionalKeyExchangesRequestSpecification":{
+      "type":"list",
+      "member":{
+        "shape":"VpnAdditionalKeyExchangeRequest",
+        "locationName":"item"
+      }
+    },
     "Address":{
       "type":"structure",
       "members":{
@@ -8370,6 +8640,10 @@
         "ServiceId":{
           "shape":"String",
           "locationName":"serviceId"
+        },
+        "PermissionType":{
+          "shape":"PermissionType",
+          "locationName":"permissionType"
         }
       }
     },
@@ -9461,6 +9735,24 @@
         }
       }
     },
+    "AssociateKmsKeyIdRequest":{
+      "type":"structure",
+      "required":["KmsKeyId"],
+      "members":{
+        "SnapshotId":{"shape":"SnapshotId"},
+        "KmsKeyId":{"shape":"KmsKeyId"},
+        "DryRun":{"shape":"Boolean"}
+      }
+    },
+    "AssociateKmsKeyIdResult":{
+      "type":"structure",
+      "members":{
+        "Return":{
+          "shape":"Boolean",
+          "locationName":"return"
+        }
+      }
+    },
     "AssociateNatGatewayAddressRequest":{
       "type":"structure",
       "required":[
@@ -9492,6 +9784,33 @@
         "NatGatewayAddresses":{
           "shape":"NatGatewayAddressList",
           "locationName":"natGatewayAddressSet"
+        }
+      }
+    },
+    "AssociateNetworkingFlexCostAllocationPolicyRequest":{
+      "type":"structure",
+      "required":["FcaPolicyId"],
+      "members":{
+        "FcaPolicyId":{"shape":"FlexCostAllocationPolicyId"},
+        "NetworkResourceIds":{"shape":"FlexCostAllocationNetworkResourceIdList"},
+        "NetworkResourceScope":{"shape":"FlexCostAllocationNetworkResourceScope"},
+        "ClientToken":{
+          "shape":"String",
+          "idempotencyToken":true
+        },
+        "DryRun":{"shape":"Boolean"}
+      }
+    },
+    "AssociateNetworkingFlexCostAllocationPolicyResult":{
+      "type":"structure",
+      "members":{
+        "FcaPolicyAssociations":{
+          "shape":"FlexCostAllocationPolicyAssociationSet",
+          "locationName":"fcaPolicyAssociations"
+        },
+        "FcaPolicyAssociationFailures":{
+          "shape":"FlexCostAllocationOperationFailureList",
+          "locationName":"fcaPolicyAssociationFailures"
         }
       }
     },
@@ -9732,6 +10051,22 @@
           "shape":"String",
           "locationName":"vpcId"
         }
+      }
+    },
+    "AssociatedKmsKey":{
+      "type":"structure",
+      "members":{
+        "KmsKeyId":{
+          "shape":"String",
+          "locationName":"kmsKeyId"
+        }
+      }
+    },
+    "AssociatedKmsKeySet":{
+      "type":"list",
+      "member":{
+        "shape":"AssociatedKmsKey",
+        "locationName":"item"
       }
     },
     "AssociatedNetworkType":{
@@ -11582,6 +11917,21 @@
         "locationName":"item"
       }
     },
+    "CapacityBlockInstanceTypePreference":{
+      "type":"structure",
+      "members":{
+        "InstanceType":{"shape":"String"}
+      }
+    },
+    "CapacityBlockInstanceTypePreferenceSet":{
+      "type":"list",
+      "member":{
+        "shape":"CapacityBlockInstanceTypePreference",
+        "locationName":"item"
+      },
+      "max":10,
+      "min":0
+    },
     "CapacityBlockInterconnectStatus":{
       "type":"string",
       "enum":[
@@ -11648,8 +11998,70 @@
         "ZoneType":{
           "shape":"String",
           "locationName":"zoneType"
+        },
+        "CapacityBlockOfferingSegments":{
+          "shape":"CapacityBlockOfferingSegmentSet",
+          "locationName":"capacityBlockOfferingSegmentSet"
         }
       }
+    },
+    "CapacityBlockOfferingSegment":{
+      "type":"structure",
+      "members":{
+        "InstanceType":{
+          "shape":"String",
+          "locationName":"instanceType"
+        },
+        "AvailabilityZone":{
+          "shape":"String",
+          "locationName":"availabilityZone"
+        },
+        "AvailabilityZoneId":{
+          "shape":"String",
+          "locationName":"availabilityZoneId"
+        },
+        "InstanceCount":{
+          "shape":"Integer",
+          "locationName":"instanceCount"
+        },
+        "StartDate":{
+          "shape":"MillisecondDateTime",
+          "locationName":"startDate"
+        },
+        "EndDate":{
+          "shape":"MillisecondDateTime",
+          "locationName":"endDate"
+        },
+        "CapacityBlockDurationHours":{
+          "shape":"Integer",
+          "locationName":"capacityBlockDurationHours"
+        },
+        "CapacityBlockDurationMinutes":{
+          "shape":"Integer",
+          "locationName":"capacityBlockDurationMinutes"
+        },
+        "UpfrontFee":{
+          "shape":"String",
+          "locationName":"upfrontFee"
+        },
+        "CurrencyCode":{
+          "shape":"String",
+          "locationName":"currencyCode"
+        },
+        "ZoneType":{
+          "shape":"String",
+          "locationName":"zoneType"
+        }
+      }
+    },
+    "CapacityBlockOfferingSegmentSet":{
+      "type":"list",
+      "member":{
+        "shape":"CapacityBlockOfferingSegment",
+        "locationName":"item"
+      },
+      "max":10,
+      "min":0
     },
     "CapacityBlockOfferingSet":{
       "type":"list",
@@ -15808,6 +16220,34 @@
         }
       }
     },
+    "CreateMetricCategoryRequest":{
+      "type":"structure",
+      "required":["Metrics"],
+      "members":{
+        "Metrics":{
+          "shape":"MetricCategoryMetricNameList",
+          "locationName":"Metric"
+        },
+        "TagSpecifications":{
+          "shape":"TagSpecificationList",
+          "locationName":"TagSpecification"
+        },
+        "ClientToken":{
+          "shape":"String",
+          "idempotencyToken":true
+        },
+        "DryRun":{"shape":"Boolean"}
+      }
+    },
+    "CreateMetricCategoryResult":{
+      "type":"structure",
+      "members":{
+        "MetricCategory":{
+          "shape":"MetricCategory",
+          "locationName":"metricCategory"
+        }
+      }
+    },
     "CreateNatGatewayRequest":{
       "type":"structure",
       "members":{
@@ -16111,6 +16551,52 @@
           "shape":"String",
           "locationName":"clientToken"
         }
+      }
+    },
+    "CreateNetworkingFlexCostAllocationPolicyRequest":{
+      "type":"structure",
+      "required":["NetworkResourceType"],
+      "members":{
+        "NetworkResourceType":{"shape":"FlexCostAllocationNetworkResourceType"},
+        "NatFcaPolicyDocument":{"shape":"NatFlexCostAllocationPolicyDocument"},
+        "InstanceFcaPolicyDocument":{"shape":"InstanceFlexCostAllocationPolicyDocument"},
+        "PcxFcaPolicyDocument":{"shape":"PcxFlexCostAllocationPolicyDocument"},
+        "ShowBackEnabled":{"shape":"Boolean"},
+        "Description":{"shape":"String"},
+        "TagSpecifications":{"shape":"TagSpecificationList"},
+        "ClientToken":{
+          "shape":"String",
+          "idempotencyToken":true
+        },
+        "DryRun":{"shape":"Boolean"}
+      }
+    },
+    "CreateNetworkingFlexCostAllocationPolicyResult":{
+      "type":"structure",
+      "members":{
+        "FcaPolicyId":{
+          "shape":"FlexCostAllocationPolicyId",
+          "locationName":"fcaPolicyId"
+        },
+        "FcaPolicyArn":{
+          "shape":"FlexCostAllocationPolicyArn",
+          "locationName":"fcaPolicyArn"
+        },
+        "CreatedAt":{
+          "shape":"DateTime",
+          "locationName":"createdAt"
+        },
+        "ExpectedEffectiveAt":{
+          "shape":"DateTime",
+          "locationName":"expectedEffectiveAt"
+        }
+      }
+    },
+    "CreatePeeringConnectionOptionsRequest":{
+      "type":"structure",
+      "members":{
+        "AllowMultipathResilience":{"shape":"Boolean"},
+        "MultipathResilienceMode":{"shape":"MultipathResilienceMode"}
       }
     },
     "CreatePlacementGroupRequest":{
@@ -17016,6 +17502,39 @@
         }
       }
     },
+    "CreateTransitGatewayNetworkFunctionAttachmentRequest":{
+      "type":"structure",
+      "required":[
+        "TransitGatewayId",
+        "ServiceName"
+      ],
+      "members":{
+        "TransitGatewayId":{"shape":"TransitGatewayId"},
+        "ServiceName":{"shape":"String"},
+        "AvailabilityZones":{
+          "shape":"NetworkFunctionAttachmentAZNameList",
+          "locationName":"AvailabilityZone"
+        },
+        "AvailabilityZoneIds":{
+          "shape":"NetworkFunctionAttachmentAZIdList",
+          "locationName":"AvailabilityZoneId"
+        },
+        "TagSpecifications":{
+          "shape":"TagSpecificationList",
+          "locationName":"TagSpecification"
+        },
+        "DryRun":{"shape":"Boolean"}
+      }
+    },
+    "CreateTransitGatewayNetworkFunctionAttachmentResult":{
+      "type":"structure",
+      "members":{
+        "TransitGatewayNetworkFunctionAttachment":{
+          "shape":"TransitGatewayNetworkFunctionAttachment",
+          "locationName":"transitGatewayNetworkFunctionAttachment"
+        }
+      }
+    },
     "CreateTransitGatewayPeeringAttachmentRequest":{
       "type":"structure",
       "required":[
@@ -17040,7 +17559,9 @@
     "CreateTransitGatewayPeeringAttachmentRequestOptions":{
       "type":"structure",
       "members":{
-        "DynamicRouting":{"shape":"DynamicRoutingValue"}
+        "DynamicRouting":{"shape":"DynamicRoutingValue"},
+        "AllowMultipathResilience":{"shape":"Boolean"},
+        "MultipathResilienceMode":{"shape":"TransitGatewayPeeringAttachmentMultipathResilienceMode"}
       }
     },
     "CreateTransitGatewayPeeringAttachmentResult":{
@@ -17718,6 +18239,7 @@
           "shape":"TagSpecificationList",
           "locationName":"TagSpecification"
         },
+        "RequesterPeeringConnectionOptions":{"shape":"CreatePeeringConnectionOptionsRequest"},
         "DryRun":{
           "shape":"Boolean",
           "locationName":"dryRun"
@@ -19013,6 +19535,23 @@
         }
       }
     },
+    "DeleteMetricCategoryRequest":{
+      "type":"structure",
+      "required":["MetricCategoryId"],
+      "members":{
+        "MetricCategoryId":{"shape":"MetricCategoryId"},
+        "DryRun":{"shape":"Boolean"}
+      }
+    },
+    "DeleteMetricCategoryResult":{
+      "type":"structure",
+      "members":{
+        "MetricCategoryId":{
+          "shape":"MetricCategoryId",
+          "locationName":"metricCategoryId"
+        }
+      }
+    },
     "DeleteNatGatewayRequest":{
       "type":"structure",
       "required":["NatGatewayId"],
@@ -19167,6 +19706,27 @@
         "NetworkInterfaceId":{
           "shape":"NetworkInterfaceId",
           "locationName":"networkInterfaceId"
+        }
+      }
+    },
+    "DeleteNetworkingFlexCostAllocationPoliciesRequest":{
+      "type":"structure",
+      "required":["FcaPolicyIds"],
+      "members":{
+        "FcaPolicyIds":{"shape":"FlexCostAllocationPolicyIdList"},
+        "DryRun":{"shape":"Boolean"}
+      }
+    },
+    "DeleteNetworkingFlexCostAllocationPoliciesResult":{
+      "type":"structure",
+      "members":{
+        "Successful":{
+          "shape":"FlexCostAllocationPolicyIdList",
+          "locationName":"successful"
+        },
+        "Failed":{
+          "shape":"FlexCostAllocationOperationFailureList",
+          "locationName":"failed"
         }
       }
     },
@@ -19675,6 +20235,23 @@
         "TransitGatewayMulticastDomain":{
           "shape":"TransitGatewayMulticastDomain",
           "locationName":"transitGatewayMulticastDomain"
+        }
+      }
+    },
+    "DeleteTransitGatewayNetworkFunctionAttachmentRequest":{
+      "type":"structure",
+      "required":["TransitGatewayAttachmentId"],
+      "members":{
+        "TransitGatewayAttachmentId":{"shape":"TransitGatewayAttachmentId"},
+        "DryRun":{"shape":"Boolean"}
+      }
+    },
+    "DeleteTransitGatewayNetworkFunctionAttachmentResult":{
+      "type":"structure",
+      "members":{
+        "TransitGatewayNetworkFunctionAttachment":{
+          "shape":"TransitGatewayNetworkFunctionAttachment",
+          "locationName":"transitGatewayNetworkFunctionAttachment"
         }
       }
     },
@@ -20745,7 +21322,11 @@
         "MaxResults":{"shape":"DescribeCapacityBlockOfferingsMaxResults"},
         "UltraserverType":{"shape":"String"},
         "UltraserverCount":{"shape":"Integer"},
-        "AllAvailabilityZones":{"shape":"Boolean"}
+        "AllAvailabilityZones":{"shape":"Boolean"},
+        "InstanceTypePreferences":{
+          "shape":"CapacityBlockInstanceTypePreferenceSet",
+          "locationName":"InstanceTypePreference"
+        }
       }
     },
     "DescribeCapacityBlockOfferingsResult":{
@@ -21909,6 +22490,11 @@
           "locationName":"fleetSet"
         }
       }
+    },
+    "DescribeFlexCostAllocationPoliciesMaxResults":{
+      "type":"integer",
+      "max":1000,
+      "min":5
     },
     "DescribeFlowLogsRequest":{
       "type":"structure",
@@ -23617,6 +24203,40 @@
         }
       }
     },
+    "DescribeMetricCategoriesMaxResults":{
+      "type":"integer",
+      "max":100,
+      "min":5
+    },
+    "DescribeMetricCategoriesRequest":{
+      "type":"structure",
+      "members":{
+        "MetricCategoryIds":{
+          "shape":"MetricCategoryIdList",
+          "locationName":"MetricCategoryId"
+        },
+        "Filters":{
+          "shape":"FilterList",
+          "locationName":"Filter"
+        },
+        "MaxResults":{"shape":"DescribeMetricCategoriesMaxResults"},
+        "NextToken":{"shape":"String"},
+        "DryRun":{"shape":"Boolean"}
+      }
+    },
+    "DescribeMetricCategoriesResult":{
+      "type":"structure",
+      "members":{
+        "MetricCategories":{
+          "shape":"MetricCategoryList",
+          "locationName":"metricCategorySet"
+        },
+        "NextToken":{
+          "shape":"String",
+          "locationName":"nextToken"
+        }
+      }
+    },
     "DescribeMovingAddressesMaxResults":{
       "type":"integer",
       "max":1000,
@@ -23964,6 +24584,52 @@
         },
         "NextToken":{
           "shape":"String",
+          "locationName":"nextToken"
+        }
+      }
+    },
+    "DescribeNetworkingFlexCostAllocationPoliciesRequest":{
+      "type":"structure",
+      "members":{
+        "FcaPolicyIds":{"shape":"FlexCostAllocationPolicyIdSet"},
+        "MaxResults":{"shape":"DescribeFlexCostAllocationPoliciesMaxResults"},
+        "Filters":{"shape":"FilterList"},
+        "NextToken":{"shape":"NextToken"},
+        "DryRun":{"shape":"Boolean"}
+      }
+    },
+    "DescribeNetworkingFlexCostAllocationPoliciesResult":{
+      "type":"structure",
+      "members":{
+        "FlexCostAllocationPolicies":{
+          "shape":"FlexCostAllocationPolicySet",
+          "locationName":"flexCostAllocationPolicies"
+        },
+        "NextToken":{
+          "shape":"NextToken",
+          "locationName":"nextToken"
+        }
+      }
+    },
+    "DescribeNetworkingFlexCostAllocationPolicyAssociationsRequest":{
+      "type":"structure",
+      "members":{
+        "FcaPolicyAssociationIds":{"shape":"FlexCostAllocationPolicyAssociationIdList"},
+        "MaxResults":{"shape":"DescribeFlexCostAllocationPoliciesMaxResults"},
+        "Filters":{"shape":"FilterList"},
+        "NextToken":{"shape":"NextToken"},
+        "DryRun":{"shape":"Boolean"}
+      }
+    },
+    "DescribeNetworkingFlexCostAllocationPolicyAssociationsResult":{
+      "type":"structure",
+      "members":{
+        "FcaPolicyAssociations":{
+          "shape":"FlexCostAllocationPolicyAssociationSet",
+          "locationName":"fcaPolicyAssociations"
+        },
+        "NextToken":{
+          "shape":"NextToken",
           "locationName":"nextToken"
         }
       }
@@ -25484,6 +26150,35 @@
         "TransitGatewayMulticastDomains":{
           "shape":"TransitGatewayMulticastDomainList",
           "locationName":"transitGatewayMulticastDomains"
+        },
+        "NextToken":{
+          "shape":"String",
+          "locationName":"nextToken"
+        }
+      }
+    },
+    "DescribeTransitGatewayNetworkFunctionAttachmentsRequest":{
+      "type":"structure",
+      "members":{
+        "TransitGatewayAttachmentIds":{
+          "shape":"TransitGatewayNetworkFunctionAttachmentIdList",
+          "locationName":"TransitGatewayAttachmentId"
+        },
+        "Filters":{
+          "shape":"FilterList",
+          "locationName":"Filter"
+        },
+        "MaxResults":{"shape":"TransitGatewayMaxResults"},
+        "NextToken":{"shape":"String"},
+        "DryRun":{"shape":"Boolean"}
+      }
+    },
+    "DescribeTransitGatewayNetworkFunctionAttachmentsResult":{
+      "type":"structure",
+      "members":{
+        "TransitGatewayNetworkFunctionAttachments":{
+          "shape":"TransitGatewayNetworkFunctionAttachmentList",
+          "locationName":"transitGatewayNetworkFunctionAttachmentSet"
         },
         "NextToken":{
           "shape":"String",
@@ -27596,6 +28291,24 @@
         }
       }
     },
+    "DisassociateKmsKeyIdRequest":{
+      "type":"structure",
+      "required":["KmsKeyId"],
+      "members":{
+        "SnapshotId":{"shape":"SnapshotId"},
+        "KmsKeyId":{"shape":"KmsKeyId"},
+        "DryRun":{"shape":"Boolean"}
+      }
+    },
+    "DisassociateKmsKeyIdResult":{
+      "type":"structure",
+      "members":{
+        "Return":{
+          "shape":"Boolean",
+          "locationName":"return"
+        }
+      }
+    },
     "DisassociateNatGatewayAddressRequest":{
       "type":"structure",
       "required":[
@@ -27622,6 +28335,27 @@
         "NatGatewayAddresses":{
           "shape":"NatGatewayAddressList",
           "locationName":"natGatewayAddressSet"
+        }
+      }
+    },
+    "DisassociateNetworkingFlexCostAllocationPolicyRequest":{
+      "type":"structure",
+      "required":["FcaPolicyAssociationIds"],
+      "members":{
+        "FcaPolicyAssociationIds":{"shape":"FlexCostAllocationPolicyDisassociateAssociationIdList"},
+        "DryRun":{"shape":"Boolean"}
+      }
+    },
+    "DisassociateNetworkingFlexCostAllocationPolicyResult":{
+      "type":"structure",
+      "members":{
+        "FcaPolicyDisassociations":{
+          "shape":"FlexCostAllocationPolicyAssociationIdList",
+          "locationName":"fcaPolicyDisassociations"
+        },
+        "FcaPolicyDisassociationFailures":{
+          "shape":"FlexCostAllocationOperationFailureList",
+          "locationName":"fcaPolicyDisassociationFailures"
         }
       }
     },
@@ -30292,6 +31026,22 @@
         "unknown"
       ]
     },
+    "FirewallArn":{"type":"string"},
+    "FirewallMode":{
+      "type":"string",
+      "enum":[
+        "monitor",
+        "enforce"
+      ]
+    },
+    "FirewallOnboardingStatus":{
+      "type":"string",
+      "enum":[
+        "pending",
+        "active",
+        "disabling"
+      ]
+    },
     "FirewallStatefulRule":{
       "type":"structure",
       "members":{
@@ -30858,6 +31608,402 @@
         "instant"
       ]
     },
+    "FlexCostAllocationAssociationMode":{
+      "type":"string",
+      "enum":[
+        "direct",
+        "scope"
+      ]
+    },
+    "FlexCostAllocationCidrLabel":{
+      "type":"string",
+      "max":64,
+      "min":1,
+      "pattern":"[a-zA-Z0-9][a-zA-Z0-9_\\-]{0,63}"
+    },
+    "FlexCostAllocationCidrMapping":{
+      "type":"structure",
+      "required":[
+        "CidrRange",
+        "CidrLabel"
+      ],
+      "members":{
+        "CidrRange":{"shape":"FlexCostAllocationCidrMappingCidrRangeString"},
+        "CidrLabel":{"shape":"FlexCostAllocationCidrLabel"}
+      }
+    },
+    "FlexCostAllocationCidrMappingCidrRangeString":{
+      "type":"string",
+      "max":43,
+      "min":1
+    },
+    "FlexCostAllocationCidrMappingList":{
+      "type":"list",
+      "member":{
+        "shape":"FlexCostAllocationCidrMapping",
+        "locationName":"item"
+      },
+      "max":100,
+      "min":1
+    },
+    "FlexCostAllocationCidrRangeSpecifications":{
+      "type":"structure",
+      "required":[
+        "PrefixesType",
+        "Prefixes"
+      ],
+      "members":{
+        "PrefixesType":{"shape":"FlexCostAllocationCidrRangeSpecificationsPrefixesTypeString"},
+        "Prefixes":{"shape":"FlexCostAllocationCidrMappingList"}
+      }
+    },
+    "FlexCostAllocationCidrRangeSpecificationsPrefixesTypeString":{
+      "type":"string",
+      "max":64,
+      "min":1
+    },
+    "FlexCostAllocationCostDimension":{
+      "type":"string",
+      "enum":[
+        "data-transfer",
+        "data-processing"
+      ]
+    },
+    "FlexCostAllocationCostDimensionList":{
+      "type":"list",
+      "member":{
+        "shape":"FlexCostAllocationCostDimension",
+        "locationName":"item"
+      },
+      "max":2,
+      "min":1
+    },
+    "FlexCostAllocationNetworkResourceId":{"type":"string"},
+    "FlexCostAllocationNetworkResourceIdList":{
+      "type":"list",
+      "member":{
+        "shape":"FlexCostAllocationNetworkResourceId",
+        "locationName":"item"
+      },
+      "max":20,
+      "min":1
+    },
+    "FlexCostAllocationNetworkResourceScope":{
+      "type":"structure",
+      "required":[
+        "ResourceType",
+        "ResourceIds"
+      ],
+      "members":{
+        "ResourceType":{"shape":"FlexCostAllocationNetworkResourceScopeType"},
+        "ResourceIds":{"shape":"FlexCostAllocationNetworkResourceScopeIdList"}
+      }
+    },
+    "FlexCostAllocationNetworkResourceScopeIdList":{
+      "type":"list",
+      "member":{
+        "shape":"String",
+        "locationName":"item"
+      },
+      "max":20,
+      "min":1
+    },
+    "FlexCostAllocationNetworkResourceScopeType":{
+      "type":"string",
+      "enum":[
+        "account",
+        "vpc",
+        "subnet"
+      ]
+    },
+    "FlexCostAllocationNetworkResourceType":{
+      "type":"string",
+      "enum":[
+        "natgw",
+        "pcx",
+        "ec2"
+      ]
+    },
+    "FlexCostAllocationOperationFailure":{
+      "type":"structure",
+      "members":{
+        "ResourceId":{
+          "shape":"String",
+          "locationName":"resourceId"
+        },
+        "FailureCode":{
+          "shape":"String",
+          "locationName":"failureCode"
+        },
+        "FailureReason":{
+          "shape":"String",
+          "locationName":"failureReason"
+        }
+      }
+    },
+    "FlexCostAllocationOperationFailureList":{
+      "type":"list",
+      "member":{
+        "shape":"FlexCostAllocationOperationFailure",
+        "locationName":"item"
+      }
+    },
+    "FlexCostAllocationPolicyArn":{
+      "type":"string",
+      "max":1024,
+      "min":1
+    },
+    "FlexCostAllocationPolicyAssociationDescription":{
+      "type":"structure",
+      "members":{
+        "FcaPolicyAssociationId":{
+          "shape":"FlexCostAllocationPolicyAssociationId",
+          "locationName":"fcaPolicyAssociationId"
+        },
+        "FcaPolicyId":{
+          "shape":"FlexCostAllocationPolicyId",
+          "locationName":"fcaPolicyId"
+        },
+        "NetworkResourceId":{
+          "shape":"String",
+          "locationName":"networkResourceId"
+        },
+        "OwnerAccount":{
+          "shape":"String",
+          "locationName":"ownerAccount"
+        },
+        "AssociatedAt":{
+          "shape":"DateTime",
+          "locationName":"associatedAt"
+        },
+        "ExpectedEffectiveAt":{
+          "shape":"DateTime",
+          "locationName":"expectedEffectiveAt"
+        },
+        "AssociationMode":{
+          "shape":"FlexCostAllocationAssociationMode",
+          "locationName":"associationMode"
+        },
+        "ManagedBy":{
+          "shape":"ManagedBy",
+          "locationName":"managedBy"
+        }
+      }
+    },
+    "FlexCostAllocationPolicyAssociationId":{
+      "type":"string",
+      "max":27,
+      "min":27,
+      "pattern":"fcapassoc-[a-f0-9]{17}"
+    },
+    "FlexCostAllocationPolicyAssociationIdList":{
+      "type":"list",
+      "member":{
+        "shape":"FlexCostAllocationPolicyAssociationId",
+        "locationName":"item"
+      },
+      "max":1000,
+      "min":1
+    },
+    "FlexCostAllocationPolicyAssociationSet":{
+      "type":"list",
+      "member":{
+        "shape":"FlexCostAllocationPolicyAssociationDescription",
+        "locationName":"item"
+      }
+    },
+    "FlexCostAllocationPolicyDescription":{
+      "type":"structure",
+      "members":{
+        "FcaPolicyId":{
+          "shape":"FlexCostAllocationPolicyId",
+          "locationName":"fcaPolicyId"
+        },
+        "FcaPolicyArn":{
+          "shape":"FlexCostAllocationPolicyArn",
+          "locationName":"fcaPolicyArn"
+        },
+        "NetworkResourceType":{
+          "shape":"FlexCostAllocationNetworkResourceType",
+          "locationName":"networkResourceType"
+        },
+        "NatFcaPolicyDocument":{
+          "shape":"NatFlexCostAllocationPolicyDocument",
+          "locationName":"natFcaPolicyDocument"
+        },
+        "InstanceFcaPolicyDocument":{
+          "shape":"InstanceFlexCostAllocationPolicyDocument",
+          "locationName":"instanceFcaPolicyDocument"
+        },
+        "PcxFcaPolicyDocument":{
+          "shape":"PcxFlexCostAllocationPolicyDocument",
+          "locationName":"pcxFcaPolicyDocument"
+        },
+        "ShowBackEnabled":{
+          "shape":"Boolean",
+          "locationName":"showBackEnabled"
+        },
+        "OwnerAccount":{
+          "shape":"String",
+          "locationName":"ownerAccount"
+        },
+        "Description":{
+          "shape":"String",
+          "locationName":"description"
+        },
+        "LatestVersion":{
+          "shape":"FlexCostAllocationPolicyVersionNumber",
+          "locationName":"latestVersion"
+        },
+        "VersionExpectedEffectiveAt":{
+          "shape":"DateTime",
+          "locationName":"versionExpectedEffectiveAt"
+        },
+        "PolicyCreatedAt":{
+          "shape":"DateTime",
+          "locationName":"policyCreatedAt"
+        },
+        "UpdatedAt":{
+          "shape":"DateTime",
+          "locationName":"updatedAt"
+        },
+        "ManagedBy":{
+          "shape":"ManagedBy",
+          "locationName":"managedBy"
+        },
+        "Tags":{
+          "shape":"TagList",
+          "locationName":"tags"
+        }
+      }
+    },
+    "FlexCostAllocationPolicyDisassociateAssociationIdList":{
+      "type":"list",
+      "member":{
+        "shape":"FlexCostAllocationPolicyAssociationId",
+        "locationName":"item"
+      },
+      "max":100,
+      "min":1
+    },
+    "FlexCostAllocationPolicyId":{
+      "type":"string",
+      "max":22,
+      "min":22,
+      "pattern":"fcap-[a-f0-9]{17}"
+    },
+    "FlexCostAllocationPolicyIdList":{
+      "type":"list",
+      "member":{
+        "shape":"FlexCostAllocationPolicyId",
+        "locationName":"item"
+      },
+      "max":50,
+      "min":1
+    },
+    "FlexCostAllocationPolicyIdSet":{
+      "type":"list",
+      "member":{
+        "shape":"FlexCostAllocationPolicyId",
+        "locationName":"item"
+      },
+      "max":1000,
+      "min":1
+    },
+    "FlexCostAllocationPolicySet":{
+      "type":"list",
+      "member":{
+        "shape":"FlexCostAllocationPolicyDescription",
+        "locationName":"item"
+      }
+    },
+    "FlexCostAllocationPolicyVersion":{
+      "type":"structure",
+      "members":{
+        "FcaPolicyId":{
+          "shape":"FlexCostAllocationPolicyId",
+          "locationName":"fcaPolicyId"
+        },
+        "Version":{
+          "shape":"FlexCostAllocationPolicyVersionNumber",
+          "locationName":"version"
+        },
+        "NetworkResourceType":{
+          "shape":"FlexCostAllocationNetworkResourceType",
+          "locationName":"networkResourceType"
+        },
+        "NatFcaPolicyDocument":{
+          "shape":"NatFlexCostAllocationPolicyDocument",
+          "locationName":"natFcaPolicyDocument"
+        },
+        "InstanceFcaPolicyDocument":{
+          "shape":"InstanceFlexCostAllocationPolicyDocument",
+          "locationName":"instanceFcaPolicyDocument"
+        },
+        "PcxFcaPolicyDocument":{
+          "shape":"PcxFlexCostAllocationPolicyDocument",
+          "locationName":"pcxFcaPolicyDocument"
+        },
+        "ShowBackEnabled":{
+          "shape":"Boolean",
+          "locationName":"showBackEnabled"
+        },
+        "Description":{
+          "shape":"String",
+          "locationName":"description"
+        },
+        "ExpectedEffectiveAt":{
+          "shape":"DateTime",
+          "locationName":"expectedEffectiveAt"
+        },
+        "CreatedAt":{
+          "shape":"DateTime",
+          "locationName":"createdAt"
+        }
+      }
+    },
+    "FlexCostAllocationPolicyVersionNumber":{
+      "type":"integer",
+      "max":2147483647,
+      "min":1
+    },
+    "FlexCostAllocationPolicyVersionSet":{
+      "type":"list",
+      "member":{
+        "shape":"FlexCostAllocationPolicyVersion",
+        "locationName":"item"
+      }
+    },
+    "FlexCostAllocationReportingGranularity":{
+      "type":"string",
+      "enum":[
+        "eni",
+        "ec2",
+        "subnet",
+        "vpc",
+        "account",
+        "peering-id",
+        "cidr"
+      ]
+    },
+    "FlexCostAllocationReportingGranularityList":{
+      "type":"list",
+      "member":{
+        "shape":"FlexCostAllocationReportingGranularity",
+        "locationName":"item"
+      },
+      "max":1,
+      "min":1
+    },
+    "FlexCostAllocationVersionsToIncludeList":{
+      "type":"list",
+      "member":{
+        "shape":"FlexCostAllocationPolicyVersionNumber",
+        "locationName":"item"
+      },
+      "max":100,
+      "min":1
+    },
     "FlexibleEnaQueuesSupport":{
       "type":"string",
       "enum":[
@@ -30969,7 +32115,10 @@
         "NetworkInterface",
         "TransitGateway",
         "TransitGatewayAttachment",
-        "RegionalNatGateway"
+        "RegionalNatGateway",
+        "CoreNetwork",
+        "CoreNetworkEdge",
+        "CoreNetworkAttachment"
       ]
     },
     "FpgaDeviceCount":{"type":"integer"},
@@ -32723,6 +33872,24 @@
         }
       }
     },
+    "GetNetworkingFlexCostAllocationPolicyVersionsRequest":{
+      "type":"structure",
+      "required":["FcaPolicyId"],
+      "members":{
+        "FcaPolicyId":{"shape":"FlexCostAllocationPolicyId"},
+        "VersionsToInclude":{"shape":"FlexCostAllocationVersionsToIncludeList"},
+        "DryRun":{"shape":"Boolean"}
+      }
+    },
+    "GetNetworkingFlexCostAllocationPolicyVersionsResult":{
+      "type":"structure",
+      "members":{
+        "FcaPolicyVersions":{
+          "shape":"FlexCostAllocationPolicyVersionSet",
+          "locationName":"fcaPolicyVersions"
+        }
+      }
+    },
     "GetPasswordDataRequest":{
       "type":"structure",
       "required":["InstanceId"],
@@ -34226,6 +35393,19 @@
         "enable",
         "disable"
       ]
+    },
+    "IgwFirewall":{
+      "type":"structure",
+      "members":{
+        "FirewallArn":{
+          "shape":"FirewallArn",
+          "locationName":"firewallArn"
+        },
+        "Status":{
+          "shape":"FirewallOnboardingStatus",
+          "locationName":"status"
+        }
+      }
     },
     "Image":{
       "type":"structure",
@@ -36565,6 +37745,18 @@
           "shape":"String",
           "locationName":"cpuCredits"
         }
+      }
+    },
+    "InstanceFlexCostAllocationPolicyDocument":{
+      "type":"structure",
+      "required":[
+        "ReportingGranularity",
+        "Dimensions"
+      ],
+      "members":{
+        "ReportingGranularity":{"shape":"FlexCostAllocationReportingGranularityList"},
+        "Dimensions":{"shape":"FlexCostAllocationCostDimensionList"},
+        "CidrRangeSpecifications":{"shape":"FlexCostAllocationCidrRangeSpecifications"}
       }
     },
     "InstanceGeneration":{
@@ -40639,7 +41831,9 @@
         "alb",
         "eip",
         "rds",
-        "rnat"
+        "rnat",
+        "lambda-network-connector",
+        "igw-firewall"
       ]
     },
     "IpamPolicySet":{
@@ -41893,7 +43087,8 @@
         "update-in-progress",
         "update-complete",
         "delete-in-progress",
-        "delete-complete"
+        "delete-complete",
+        "disable-complete"
       ]
     },
     "IpamRpkiStatus":{
@@ -43483,13 +44678,21 @@
         "Enabled":{
           "shape":"Boolean",
           "locationName":"enabled"
+        },
+        "MetricCategoryIds":{
+          "shape":"MetricCategoryIdList",
+          "locationName":"metricCategoryIdSet"
         }
       }
     },
     "LaunchTemplatesMonitoringRequest":{
       "type":"structure",
       "members":{
-        "Enabled":{"shape":"Boolean"}
+        "Enabled":{"shape":"Boolean"},
+        "MetricCategoryIds":{
+          "shape":"MetricCategoryIdList",
+          "locationName":"MetricCategoryId"
+        }
       }
     },
     "LicenseConfiguration":{
@@ -44768,6 +45971,46 @@
         "spot-inst-az-fulfillment-rate"
       ]
     },
+    "MetricCategory":{
+      "type":"structure",
+      "members":{
+        "MetricCategoryId":{
+          "shape":"MetricCategoryId",
+          "locationName":"metricCategoryId"
+        },
+        "Metrics":{
+          "shape":"MetricCategoryMetricNameList",
+          "locationName":"metricSet"
+        },
+        "Tags":{
+          "shape":"TagList",
+          "locationName":"tagSet"
+        }
+      }
+    },
+    "MetricCategoryId":{"type":"string"},
+    "MetricCategoryIdList":{
+      "type":"list",
+      "member":{
+        "shape":"MetricCategoryId",
+        "locationName":"item"
+      }
+    },
+    "MetricCategoryList":{
+      "type":"list",
+      "member":{
+        "shape":"MetricCategory",
+        "locationName":"item"
+      }
+    },
+    "MetricCategoryMetricName":{"type":"string"},
+    "MetricCategoryMetricNameList":{
+      "type":"list",
+      "member":{
+        "shape":"MetricCategoryMetricName",
+        "locationName":"item"
+      }
+    },
     "MetricDataResult":{
       "type":"structure",
       "members":{
@@ -44920,7 +46163,9 @@
         "VpcPeering":{"shape":"VpcEncryptionControlExclusionStateInput"},
         "Lambda":{"shape":"VpcEncryptionControlExclusionStateInput"},
         "VpcLattice":{"shape":"VpcEncryptionControlExclusionStateInput"},
-        "ElasticFileSystem":{"shape":"VpcEncryptionControlExclusionStateInput"}
+        "ElasticFileSystem":{"shape":"VpcEncryptionControlExclusionStateInput"},
+        "GlobalAccelerator":{"shape":"VpcEncryptionControlExclusionStateInput"},
+        "ApiGatewayV2":{"shape":"VpcEncryptionControlExclusionStateInput"}
       }
     },
     "ModifyAccountVpcEncryptionControlResult":{
@@ -46044,6 +47289,30 @@
         }
       }
     },
+    "ModifyMetricCategoryRequest":{
+      "type":"structure",
+      "required":[
+        "MetricCategoryId",
+        "Metrics"
+      ],
+      "members":{
+        "MetricCategoryId":{"shape":"MetricCategoryId"},
+        "Metrics":{
+          "shape":"MetricCategoryMetricNameList",
+          "locationName":"Metric"
+        },
+        "DryRun":{"shape":"Boolean"}
+      }
+    },
+    "ModifyMetricCategoryResult":{
+      "type":"structure",
+      "members":{
+        "MetricCategory":{
+          "shape":"MetricCategory",
+          "locationName":"metricCategory"
+        }
+      }
+    },
     "ModifyNetworkInterfaceAttributeRequest":{
       "type":"structure",
       "required":["NetworkInterfaceId"],
@@ -46079,6 +47348,44 @@
         "Attachment":{
           "shape":"NetworkInterfaceAttachmentChanges",
           "locationName":"attachment"
+        }
+      }
+    },
+    "ModifyNetworkingFlexCostAllocationPolicyRequest":{
+      "type":"structure",
+      "required":["FcaPolicyId"],
+      "members":{
+        "FcaPolicyId":{"shape":"FlexCostAllocationPolicyId"},
+        "NatFcaPolicyDocument":{"shape":"NatFlexCostAllocationPolicyDocument"},
+        "InstanceFcaPolicyDocument":{"shape":"InstanceFlexCostAllocationPolicyDocument"},
+        "PcxFcaPolicyDocument":{"shape":"PcxFlexCostAllocationPolicyDocument"},
+        "ShowBackEnabled":{"shape":"Boolean"},
+        "Description":{"shape":"String"},
+        "ClientToken":{
+          "shape":"String",
+          "idempotencyToken":true
+        },
+        "DryRun":{"shape":"Boolean"}
+      }
+    },
+    "ModifyNetworkingFlexCostAllocationPolicyResult":{
+      "type":"structure",
+      "members":{
+        "FcaPolicyId":{
+          "shape":"FlexCostAllocationPolicyId",
+          "locationName":"fcaPolicyId"
+        },
+        "UpdatedAt":{
+          "shape":"DateTime",
+          "locationName":"updatedAt"
+        },
+        "Version":{
+          "shape":"FlexCostAllocationPolicyVersionNumber",
+          "locationName":"version"
+        },
+        "VersionExpectedEffectiveAt":{
+          "shape":"DateTime",
+          "locationName":"versionExpectedEffectiveAt"
         }
       }
     },
@@ -46437,6 +47744,39 @@
         }
       }
     },
+    "ModifyTransitGatewayNetworkFunctionAttachmentRequest":{
+      "type":"structure",
+      "required":["TransitGatewayAttachmentId"],
+      "members":{
+        "TransitGatewayAttachmentId":{"shape":"TransitGatewayAttachmentId"},
+        "AddAvailabilityZones":{
+          "shape":"NetworkFunctionAttachmentAZNameList",
+          "locationName":"AddAvailabilityZone"
+        },
+        "AddAvailabilityZoneIds":{
+          "shape":"NetworkFunctionAttachmentAZIdList",
+          "locationName":"AddAvailabilityZoneId"
+        },
+        "RemoveAvailabilityZones":{
+          "shape":"NetworkFunctionAttachmentAZNameList",
+          "locationName":"RemoveAvailabilityZone"
+        },
+        "RemoveAvailabilityZoneIds":{
+          "shape":"NetworkFunctionAttachmentAZIdList",
+          "locationName":"RemoveAvailabilityZoneId"
+        },
+        "DryRun":{"shape":"Boolean"}
+      }
+    },
+    "ModifyTransitGatewayNetworkFunctionAttachmentResult":{
+      "type":"structure",
+      "members":{
+        "TransitGatewayNetworkFunctionAttachment":{
+          "shape":"TransitGatewayNetworkFunctionAttachment",
+          "locationName":"transitGatewayNetworkFunctionAttachment"
+        }
+      }
+    },
     "ModifyTransitGatewayOptions":{
       "type":"structure",
       "members":{
@@ -46452,6 +47792,31 @@
         "PropagationDefaultRouteTableId":{"shape":"TransitGatewayRouteTableId"},
         "AmazonSideAsn":{"shape":"Long"},
         "EncryptionSupport":{"shape":"EncryptionSupportOptionValue"}
+      }
+    },
+    "ModifyTransitGatewayPeeringAttachmentRequest":{
+      "type":"structure",
+      "required":["TransitGatewayAttachmentId"],
+      "members":{
+        "TransitGatewayAttachmentId":{"shape":"TransitGatewayAttachmentId"},
+        "Options":{"shape":"ModifyTransitGatewayPeeringAttachmentRequestOptions"},
+        "DryRun":{"shape":"Boolean"}
+      }
+    },
+    "ModifyTransitGatewayPeeringAttachmentRequestOptions":{
+      "type":"structure",
+      "members":{
+        "AllowMultipathResilience":{"shape":"Boolean"},
+        "MultipathResilienceMode":{"shape":"TransitGatewayPeeringAttachmentMultipathResilienceMode"}
+      }
+    },
+    "ModifyTransitGatewayPeeringAttachmentResult":{
+      "type":"structure",
+      "members":{
+        "TransitGatewayPeeringAttachment":{
+          "shape":"TransitGatewayPeeringAttachment",
+          "locationName":"transitGatewayPeeringAttachment"
+        }
       }
     },
     "ModifyTransitGatewayPolicyTableEntryRequest":{
@@ -46933,7 +48298,9 @@
         "VpcPeeringExclusion":{"shape":"VpcEncryptionControlExclusionStateInput"},
         "LambdaExclusion":{"shape":"VpcEncryptionControlExclusionStateInput"},
         "VpcLatticeExclusion":{"shape":"VpcEncryptionControlExclusionStateInput"},
-        "ElasticFileSystemExclusion":{"shape":"VpcEncryptionControlExclusionStateInput"}
+        "ElasticFileSystemExclusion":{"shape":"VpcEncryptionControlExclusionStateInput"},
+        "GlobalAcceleratorExclusion":{"shape":"VpcEncryptionControlExclusionStateInput"},
+        "ApiGatewayV2Exclusion":{"shape":"VpcEncryptionControlExclusionStateInput"}
       }
     },
     "ModifyVpcEncryptionControlResult":{
@@ -47122,7 +48489,8 @@
         "DryRun":{"shape":"Boolean"},
         "ServiceId":{"shape":"VpcEndpointServiceId"},
         "AddAllowedPrincipals":{"shape":"ValueStringList"},
-        "RemoveAllowedPrincipals":{"shape":"ValueStringList"}
+        "RemoveAllowedPrincipals":{"shape":"ValueStringList"},
+        "PermissionType":{"shape":"PermissionType"}
       }
     },
     "ModifyVpcEndpointServicePermissionsResult":{
@@ -47313,7 +48681,15 @@
         },
         "StartupAction":{"shape":"String"},
         "LogOptions":{"shape":"VpnTunnelLogOptionsSpecification"},
-        "EnableTunnelLifecycleControl":{"shape":"Boolean"}
+        "EnableTunnelLifecycleControl":{"shape":"Boolean"},
+        "Phase1AdditionalKeyExchanges":{
+          "shape":"AdditionalKeyExchangesRequestSpecification",
+          "locationName":"Phase1AdditionalKeyExchange"
+        },
+        "Phase2AdditionalKeyExchanges":{
+          "shape":"AdditionalKeyExchangesRequestSpecification",
+          "locationName":"Phase2AdditionalKeyExchange"
+        }
       },
       "sensitive":true
     },
@@ -47324,6 +48700,10 @@
         "InstanceIds":{
           "shape":"InstanceIdStringList",
           "locationName":"InstanceId"
+        },
+        "MetricCategoryIds":{
+          "shape":"MetricCategoryIdList",
+          "locationName":"MetricCategoryId"
         },
         "DryRun":{
           "shape":"Boolean",
@@ -47343,6 +48723,10 @@
     "Monitoring":{
       "type":"structure",
       "members":{
+        "MetricCategoryIds":{
+          "shape":"MetricCategoryIdList",
+          "locationName":"metricCategoryIdSet"
+        },
         "State":{
           "shape":"MonitoringState",
           "locationName":"state"
@@ -47476,6 +48860,30 @@
         "enable",
         "disable"
       ]
+    },
+    "MultipathResilienceMode":{
+      "type":"string",
+      "enum":["always-on"]
+    },
+    "MultipathResilienceStatus":{
+      "type":"string",
+      "enum":[
+        "pending",
+        "enabled",
+        "disabled"
+      ]
+    },
+    "NatFlexCostAllocationPolicyDocument":{
+      "type":"structure",
+      "required":[
+        "ReportingGranularity",
+        "Dimensions"
+      ],
+      "members":{
+        "ReportingGranularity":{"shape":"FlexCostAllocationReportingGranularityList"},
+        "Dimensions":{"shape":"FlexCostAllocationCostDimensionList"},
+        "CidrRangeSpecifications":{"shape":"FlexCostAllocationCidrRangeSpecifications"}
+      }
     },
     "NatGateway":{
       "type":"structure",
@@ -47945,6 +49353,54 @@
       "type":"list",
       "member":{
         "shape":"NetworkCardInterfaceType",
+        "locationName":"item"
+      }
+    },
+    "NetworkFirewallAssociation":{
+      "type":"structure",
+      "members":{
+        "FirewallArn":{
+          "shape":"FirewallArn",
+          "locationName":"firewallArn"
+        },
+        "FirewallOnboardingStatus":{
+          "shape":"FirewallOnboardingStatus",
+          "locationName":"firewallOnboardingStatus"
+        },
+        "FirewallMode":{
+          "shape":"FirewallMode",
+          "locationName":"firewallMode"
+        }
+      }
+    },
+    "NetworkFirewallAssociationSet":{
+      "type":"list",
+      "member":{
+        "shape":"NetworkFirewallAssociation",
+        "locationName":"item"
+      }
+    },
+    "NetworkFirewallConnectivityType":{
+      "type":"string",
+      "enum":[
+        "flexible",
+        "outbound-only",
+        "bidirectional",
+        "exclude",
+        "az-unsupported"
+      ]
+    },
+    "NetworkFunctionAttachmentAZIdList":{
+      "type":"list",
+      "member":{
+        "shape":"String",
+        "locationName":"item"
+      }
+    },
+    "NetworkFunctionAttachmentAZNameList":{
+      "type":"list",
+      "member":{
+        "shape":"String",
         "locationName":"item"
       }
     },
@@ -49405,6 +50861,18 @@
         "SubsystemVendorId":{"shape":"String"}
       }
     },
+    "PcxFlexCostAllocationPolicyDocument":{
+      "type":"structure",
+      "required":[
+        "ReportingGranularity",
+        "Dimensions"
+      ],
+      "members":{
+        "ReportingGranularity":{"shape":"FlexCostAllocationReportingGranularityList"},
+        "Dimensions":{"shape":"FlexCostAllocationCostDimensionList"},
+        "CidrRangeSpecifications":{"shape":"FlexCostAllocationCidrRangeSpecifications"}
+      }
+    },
     "PeakBandwidthInGbps":{"type":"double"},
     "PeeringAttachmentStatus":{
       "type":"structure",
@@ -49433,6 +50901,14 @@
         "AllowEgressFromLocalVpcToRemoteClassicLink":{
           "shape":"Boolean",
           "locationName":"allowEgressFromLocalVpcToRemoteClassicLink"
+        },
+        "AllowMultipathResilience":{
+          "shape":"Boolean",
+          "locationName":"allowMultipathResilience"
+        },
+        "MultipathResilienceMode":{
+          "shape":"MultipathResilienceMode",
+          "locationName":"multipathResilienceMode"
         }
       }
     },
@@ -49441,7 +50917,9 @@
       "members":{
         "AllowDnsResolutionFromRemoteVpc":{"shape":"Boolean"},
         "AllowEgressFromLocalClassicLinkToRemoteVpc":{"shape":"Boolean"},
-        "AllowEgressFromLocalVpcToRemoteClassicLink":{"shape":"Boolean"}
+        "AllowEgressFromLocalVpcToRemoteClassicLink":{"shape":"Boolean"},
+        "AllowMultipathResilience":{"shape":"Boolean"},
+        "MultipathResilienceMode":{"shape":"MultipathResilienceMode"}
       }
     },
     "PeeringTgwInfo":{
@@ -49529,6 +51007,13 @@
     "PermissionGroup":{
       "type":"string",
       "enum":["all"]
+    },
+    "PermissionType":{
+      "type":"string",
+      "enum":[
+        "vpc-endpoint",
+        "transit-gateway-attachment"
+      ]
     },
     "Phase1DHGroupNumbersList":{
       "type":"list",
@@ -50739,6 +52224,10 @@
         "CapacityBlocks":{
           "shape":"CapacityBlockSet",
           "locationName":"capacityBlockSet"
+        },
+        "CapacityReservations":{
+          "shape":"CapacityReservationSet",
+          "locationName":"capacityReservationSet"
         }
       }
     },
@@ -51323,6 +52812,10 @@
         "VpcEndpointIds":{
           "shape":"VpcEndpointIdList",
           "locationName":"VpcEndpointId"
+        },
+        "TransitGatewayAttachmentIds":{
+          "shape":"TransitGatewayAttachmentIdList",
+          "locationName":"TransitGatewayAttachmentId"
         }
       }
     },
@@ -52924,6 +54417,7 @@
         "elastic-gpu",
         "export-image-task",
         "export-instance-task",
+        "fca-policy",
         "fleet",
         "fpga-image",
         "host-reservation",
@@ -53022,7 +54516,8 @@
         "ipam-pool-allocation",
         "capacity-reservation-cancellation-quote",
         "application-status-check",
-        "capacity-reservation-modification-quote"
+        "capacity-reservation-modification-quote",
+        "metric-category"
       ]
     },
     "ResourceTypeOption":{
@@ -53694,6 +55189,10 @@
         "IpAddress":{
           "shape":"String",
           "locationName":"ipAddress"
+        },
+        "IgwFirewall":{
+          "shape":"IgwFirewall",
+          "locationName":"igwFirewall"
         }
       }
     },
@@ -54343,6 +55842,10 @@
       "type":"structure",
       "required":["Enabled"],
       "members":{
+        "MetricCategoryIds":{
+          "shape":"MetricCategoryIdList",
+          "locationName":"MetricCategoryId"
+        },
         "Enabled":{
           "shape":"Boolean",
           "locationName":"enabled"
@@ -56072,7 +57575,9 @@
         "alb",
         "nlb",
         "rnat",
-        "rds"
+        "rds",
+        "lambda-network-connector",
+        "igw-firewall"
       ]
     },
     "ServiceNetworkArn":{"type":"string"},
@@ -56191,6 +57696,10 @@
         "FullSnapshotSizeInBytes":{
           "shape":"Long",
           "locationName":"fullSnapshotSizeInBytes"
+        },
+        "AssociatedKmsKeys":{
+          "shape":"AssociatedKmsKeySet",
+          "locationName":"associatedKmsKeySet"
         },
         "SnapshotId":{
           "shape":"String",
@@ -57638,6 +59147,10 @@
           "shape":"String",
           "locationName":"type"
         },
+        "NetworkFirewallConnectivityType":{
+          "shape":"NetworkFirewallConnectivityType",
+          "locationName":"networkFirewallConnectivityType"
+        },
         "SubnetId":{
           "shape":"String",
           "locationName":"subnetId"
@@ -58007,7 +59520,8 @@
       "enum":[
         "high",
         "medium",
-        "low"
+        "low",
+        "unsupported"
       ]
     },
     "SupportedAdditionalProcessorFeature":{
@@ -59052,6 +60566,15 @@
       }
     },
     "TransitGatewayAttachmentId":{"type":"string"},
+    "TransitGatewayAttachmentIdList":{
+      "type":"list",
+      "member":{
+        "shape":"TransitGatewayAttachmentId",
+        "locationName":"item"
+      },
+      "max":50,
+      "min":0
+    },
     "TransitGatewayAttachmentIdStringList":{
       "type":"list",
       "member":{"shape":"TransitGatewayAttachmentId"}
@@ -59850,6 +61373,65 @@
         "deleting"
       ]
     },
+    "TransitGatewayNetworkFunctionAttachment":{
+      "type":"structure",
+      "members":{
+        "TransitGatewayAttachmentId":{
+          "shape":"TransitGatewayAttachmentId",
+          "locationName":"transitGatewayAttachmentId"
+        },
+        "TransitGatewayId":{
+          "shape":"String",
+          "locationName":"transitGatewayId"
+        },
+        "TransitGatewayOwnerId":{
+          "shape":"String",
+          "locationName":"transitGatewayOwnerId"
+        },
+        "ResourceOwnerId":{
+          "shape":"String",
+          "locationName":"resourceOwnerId"
+        },
+        "ResourceId":{
+          "shape":"String",
+          "locationName":"resourceId"
+        },
+        "AvailabilityZones":{
+          "shape":"ValueStringList",
+          "locationName":"availabilityZoneSet"
+        },
+        "AvailabilityZoneIds":{
+          "shape":"ValueStringList",
+          "locationName":"availabilityZoneIdSet"
+        },
+        "State":{
+          "shape":"TransitGatewayAttachmentState",
+          "locationName":"state"
+        },
+        "CreationTime":{
+          "shape":"MillisecondDateTime",
+          "locationName":"creationTime"
+        },
+        "Tags":{
+          "shape":"TagList",
+          "locationName":"tagSet"
+        }
+      }
+    },
+    "TransitGatewayNetworkFunctionAttachmentIdList":{
+      "type":"list",
+      "member":{
+        "shape":"TransitGatewayAttachmentId",
+        "locationName":"item"
+      }
+    },
+    "TransitGatewayNetworkFunctionAttachmentList":{
+      "type":"list",
+      "member":{
+        "shape":"TransitGatewayNetworkFunctionAttachment",
+        "locationName":"item"
+      }
+    },
     "TransitGatewayNetworkInterfaceIdList":{
       "type":"list",
       "member":{
@@ -59958,12 +61540,44 @@
         "locationName":"item"
       }
     },
+    "TransitGatewayPeeringAttachmentMultipathResilienceMode":{
+      "type":"string",
+      "enum":["always-on"]
+    },
+    "TransitGatewayPeeringAttachmentMultipathResilienceStatus":{
+      "type":"string",
+      "enum":[
+        "pending",
+        "enabled",
+        "disabled"
+      ]
+    },
     "TransitGatewayPeeringAttachmentOptions":{
       "type":"structure",
       "members":{
         "DynamicRouting":{
           "shape":"DynamicRoutingValue",
           "locationName":"dynamicRouting"
+        },
+        "RequesterAllowMultipathResilience":{
+          "shape":"Boolean",
+          "locationName":"requesterAllowMultipathResilience"
+        },
+        "RequesterMultipathResilienceMode":{
+          "shape":"TransitGatewayPeeringAttachmentMultipathResilienceMode",
+          "locationName":"requesterMultipathResilienceMode"
+        },
+        "AccepterAllowMultipathResilience":{
+          "shape":"Boolean",
+          "locationName":"accepterAllowMultipathResilience"
+        },
+        "AccepterMultipathResilienceMode":{
+          "shape":"TransitGatewayPeeringAttachmentMultipathResilienceMode",
+          "locationName":"accepterMultipathResilienceMode"
+        },
+        "MultipathResilienceStatus":{
+          "shape":"TransitGatewayPeeringAttachmentMultipathResilienceStatus",
+          "locationName":"multipathResilienceStatus"
         }
       }
     },
@@ -60808,6 +62422,14 @@
         "EnableTunnelLifecycleControl":{
           "shape":"Boolean",
           "locationName":"enableTunnelLifecycleControl"
+        },
+        "Phase1AdditionalKeyExchanges":{
+          "shape":"AdditionalKeyExchangesList",
+          "locationName":"phase1AdditionalKeyExchangeSet"
+        },
+        "Phase2AdditionalKeyExchanges":{
+          "shape":"AdditionalKeyExchangesList",
+          "locationName":"phase2AdditionalKeyExchangeSet"
         }
       }
     },
@@ -60907,7 +62529,8 @@
         "t3",
         "t3a",
         "t4g",
-        "t8i"
+        "t8i",
+        "t9g"
       ]
     },
     "UnlockSnapshotRequest":{
@@ -60934,6 +62557,10 @@
         "InstanceIds":{
           "shape":"InstanceIdStringList",
           "locationName":"InstanceId"
+        },
+        "MetricCategoryIds":{
+          "shape":"MetricCategoryIdList",
+          "locationName":"MetricCategoryId"
         },
         "DryRun":{
           "shape":"Boolean",
@@ -62920,6 +64547,10 @@
           "shape":"BlockPublicAccessStates",
           "locationName":"blockPublicAccessStates"
         },
+        "NetworkFirewallAssociations":{
+          "shape":"NetworkFirewallAssociationSet",
+          "locationName":"networkFirewallAssociationSet"
+        },
         "VpcId":{
           "shape":"String",
           "locationName":"vpcId"
@@ -63214,7 +64845,9 @@
         "VpcPeeringExclusion":{"shape":"VpcEncryptionControlExclusionStateInput"},
         "LambdaExclusion":{"shape":"VpcEncryptionControlExclusionStateInput"},
         "VpcLatticeExclusion":{"shape":"VpcEncryptionControlExclusionStateInput"},
-        "ElasticFileSystemExclusion":{"shape":"VpcEncryptionControlExclusionStateInput"}
+        "ElasticFileSystemExclusion":{"shape":"VpcEncryptionControlExclusionStateInput"},
+        "GlobalAcceleratorExclusion":{"shape":"VpcEncryptionControlExclusionStateInput"},
+        "ApiGatewayV2Exclusion":{"shape":"VpcEncryptionControlExclusionStateInput"}
       }
     },
     "VpcEncryptionControlExclusion":{
@@ -63280,6 +64913,14 @@
         "ElasticFileSystem":{
           "shape":"VpcEncryptionControlExclusion",
           "locationName":"elasticFileSystem"
+        },
+        "GlobalAccelerator":{
+          "shape":"VpcEncryptionControlExclusion",
+          "locationName":"globalAccelerator"
+        },
+        "ApiGatewayV2":{
+          "shape":"VpcEncryptionControlExclusion",
+          "locationName":"apiGatewayV2"
         }
       }
     },
@@ -63570,6 +65211,14 @@
         "PayerResponsibilities":{
           "shape":"PayerResponsibilitySet",
           "locationName":"payerResponsibilitySet"
+        },
+        "TransitGatewayAttachmentId":{
+          "shape":"TransitGatewayAttachmentId",
+          "locationName":"transitGatewayAttachmentId"
+        },
+        "TransitGatewayAttachmentOwner":{
+          "shape":"String",
+          "locationName":"transitGatewayAttachmentOwner"
         }
       }
     },
@@ -63717,6 +65366,10 @@
         "VpcPeeringConnectionId":{
           "shape":"String",
           "locationName":"vpcPeeringConnectionId"
+        },
+        "MultipathResilienceStatus":{
+          "shape":"MultipathResilienceStatus",
+          "locationName":"multipathResilienceStatus"
         }
       }
     },
@@ -63750,6 +65403,14 @@
         "AllowEgressFromLocalVpcToRemoteClassicLink":{
           "shape":"Boolean",
           "locationName":"allowEgressFromLocalVpcToRemoteClassicLink"
+        },
+        "AllowMultipathResilience":{
+          "shape":"Boolean",
+          "locationName":"allowMultipathResilience"
+        },
+        "MultipathResilienceMode":{
+          "shape":"MultipathResilienceMode",
+          "locationName":"multipathResilienceMode"
         }
       }
     },
@@ -63824,6 +65485,35 @@
     "VpcTenancy":{
       "type":"string",
       "enum":["default"]
+    },
+    "VpnAdditionalKeyExchange":{
+      "type":"structure",
+      "members":{
+        "AdditionalKeyExchangeRound":{
+          "shape":"Integer",
+          "locationName":"additionalKeyExchangeRound"
+        },
+        "KeyExchangeMethods":{
+          "shape":"AdditionalKeyExchangeMethodsList",
+          "locationName":"keyExchangeMethodSet"
+        },
+        "Requirement":{
+          "shape":"AdditionalKeyExchangeRequirement",
+          "locationName":"requirement"
+        }
+      }
+    },
+    "VpnAdditionalKeyExchangeRequest":{
+      "type":"structure",
+      "required":["AdditionalKeyExchangeRound"],
+      "members":{
+        "AdditionalKeyExchangeRound":{"shape":"AdditionalKeyExchangeRound"},
+        "KeyExchangeMethods":{
+          "shape":"AdditionalKeyExchangeMethodsRequestList",
+          "locationName":"KeyExchangeMethod"
+        },
+        "Requirement":{"shape":"AdditionalKeyExchangeRequirement"}
+      }
     },
     "VpnConcentrator":{
       "type":"structure",
@@ -64223,7 +65913,15 @@
         },
         "StartupAction":{"shape":"String"},
         "LogOptions":{"shape":"VpnTunnelLogOptionsSpecification"},
-        "EnableTunnelLifecycleControl":{"shape":"Boolean"}
+        "EnableTunnelLifecycleControl":{"shape":"Boolean"},
+        "Phase1AdditionalKeyExchanges":{
+          "shape":"AdditionalKeyExchangesRequestSpecification",
+          "locationName":"Phase1AdditionalKeyExchange"
+        },
+        "Phase2AdditionalKeyExchanges":{
+          "shape":"AdditionalKeyExchangesRequestSpecification",
+          "locationName":"Phase2AdditionalKeyExchange"
+        }
       }
     },
     "VpnTunnelOptionsSpecificationsList":{

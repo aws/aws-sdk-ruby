@@ -100,7 +100,7 @@ module Aws
         def name: () -> ::String
         def arn: () -> ::String
         def id: () -> ::String
-        def language: () -> ("eng" | "fra" | "ita" | "deu" | "spa" | "por")
+        def language: () -> ("eng" | "fra" | "ita" | "deu" | "spa" | "por" | "ara")
         def status: () -> ("CREATING" | "AVAILABLE" | "REFERENCED" | "DELETING" | "DELETED")
         def references: () -> ::Array[::String]
         def tags: () -> ::Hash[::String, ::String]
@@ -108,7 +108,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElementalInference/Client.html#create_dictionary-instance_method
       def create_dictionary: (
                                name: ::String,
-                               language: ("eng" | "fra" | "ita" | "deu" | "spa" | "por"),
+                               language: ("eng" | "fra" | "ita" | "deu" | "spa" | "por" | "ara"),
                                ?entries: ::String,
                                ?tags: Hash[::String, ::String]
                              ) -> _CreateDictionaryResponseSuccess
@@ -136,6 +136,90 @@ module Aws
                          ?tags: Hash[::String, ::String]
                        ) -> _CreateFeedResponseSuccess
                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateFeedResponseSuccess
+
+      interface _CreateFunctionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateFunctionResponse]
+        def name: () -> ::String
+        def target: () -> Types::FunctionTarget
+        def request_expression: () -> ::String
+        def response_expression: () -> ::String
+        def description: () -> ::String
+        def event_bridge_delivery: () -> ("ENABLED" | "DISABLED")
+        def arn: () -> ::String
+        def id: () -> ::String
+        def status: () -> ("CREATING" | "AVAILABLE" | "REFERENCED" | "DELETING" | "DELETED")
+        def references: () -> ::Array[::String]
+        def context_types: () -> ::Array[("FRAMES" | "SUBTITLES" | "CONTEXTUAL_METADATA" | "CLIP_METADATA")]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElementalInference/Client.html#create_function-instance_method
+      def create_function: (
+                             name: ::String,
+                             target: Params::function_target,
+                             request_expression: ::String,
+                             ?response_expression: ::String,
+                             ?description: ::String,
+                             ?event_bridge_delivery: ("ENABLED" | "DISABLED"),
+                             ?tags: Hash[::String, ::String]
+                           ) -> _CreateFunctionResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateFunctionResponseSuccess
+
+      interface _CreateQuestionSetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateQuestionSetResponse]
+        def yes_no: () -> ::Array[Types::YesNoQuestion]
+        def yes_no_per_option: () -> ::Array[Types::YesNoPerOptionQuestion]
+        def choose_one: () -> ::Array[Types::ChooseOneQuestion]
+        def arn: () -> ::String
+        def id: () -> ::String
+        def name: () -> ::String
+        def version: () -> ::String
+        def description: () -> ::String
+        def latest_version: () -> ::String
+        def sha256: () -> ::String
+        def references: () -> ::Array[::String]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElementalInference/Client.html#create_question_set-instance_method
+      def create_question_set: (
+                                 ?yes_no: Array[
+                                   {
+                                     name: ::String,
+                                     question: ::String
+                                   }
+                                 ],
+                                 ?yes_no_per_option: Array[
+                                   Params::yes_no_per_option_question
+                                 ],
+                                 ?choose_one: Array[
+                                   Params::choose_one_question
+                                 ],
+                                 name: ::String,
+                                 ?tags: Hash[::String, ::String]
+                               ) -> _CreateQuestionSetResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateQuestionSetResponseSuccess
+
+      interface _CreateQuestionSetVersionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateQuestionSetVersionResponse]
+        def yes_no: () -> ::Array[Types::YesNoQuestion]
+        def yes_no_per_option: () -> ::Array[Types::YesNoPerOptionQuestion]
+        def choose_one: () -> ::Array[Types::ChooseOneQuestion]
+        def arn: () -> ::String
+        def id: () -> ::String
+        def name: () -> ::String
+        def version: () -> ::String
+        def description: () -> ::String
+        def latest_version: () -> ::String
+        def sha256: () -> ::String
+        def references: () -> ::Array[::String]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElementalInference/Client.html#create_question_set_version-instance_method
+      def create_question_set_version: (
+                                         id: ::String,
+                                         ?sha256: ::String,
+                                         ?description: ::String
+                                       ) -> _CreateQuestionSetVersionResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateQuestionSetVersionResponseSuccess
 
       interface _CreateScheduleActionResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateScheduleActionResponse]
@@ -203,6 +287,39 @@ module Aws
                               ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 
+      interface _DeleteFunctionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteFunctionResponse]
+        def arn: () -> ::String
+        def id: () -> ::String
+        def status: () -> ("CREATING" | "AVAILABLE" | "REFERENCED" | "DELETING" | "DELETED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElementalInference/Client.html#delete_function-instance_method
+      def delete_function: (
+                             id: ::String
+                           ) -> _DeleteFunctionResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteFunctionResponseSuccess
+
+      interface _DeleteQuestionSetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteQuestionSetResponse]
+        def arn: () -> ::String
+        def id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElementalInference/Client.html#delete_question_set-instance_method
+      def delete_question_set: (
+                                 id: ::String
+                               ) -> _DeleteQuestionSetResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteQuestionSetResponseSuccess
+
+      interface _DeleteQuestionSetVersionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteQuestionSetVersionResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElementalInference/Client.html#delete_question_set_version-instance_method
+      def delete_question_set_version: (
+                                         id: ::String,
+                                         question_set_version: ::String
+                                       ) -> _DeleteQuestionSetVersionResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteQuestionSetVersionResponseSuccess
+
       interface _DeleteScheduleActionResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteScheduleActionResponse]
         def action_name: () -> ::String
@@ -242,7 +359,7 @@ module Aws
         def name: () -> ::String
         def arn: () -> ::String
         def id: () -> ::String
-        def language: () -> ("eng" | "fra" | "ita" | "deu" | "spa" | "por")
+        def language: () -> ("eng" | "fra" | "ita" | "deu" | "spa" | "por" | "ara")
         def status: () -> ("CREATING" | "AVAILABLE" | "REFERENCED" | "DELETING" | "DELETED")
         def references: () -> ::Array[::String]
         def tags: () -> ::Hash[::String, ::String]
@@ -296,6 +413,49 @@ module Aws
                        ) -> _GetFixtureResponseSuccess
                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetFixtureResponseSuccess
 
+      interface _GetFunctionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetFunctionResponse]
+        def name: () -> ::String
+        def target: () -> Types::FunctionTarget
+        def request_expression: () -> ::String
+        def response_expression: () -> ::String
+        def description: () -> ::String
+        def event_bridge_delivery: () -> ("ENABLED" | "DISABLED")
+        def arn: () -> ::String
+        def id: () -> ::String
+        def status: () -> ("CREATING" | "AVAILABLE" | "REFERENCED" | "DELETING" | "DELETED")
+        def references: () -> ::Array[::String]
+        def context_types: () -> ::Array[("FRAMES" | "SUBTITLES" | "CONTEXTUAL_METADATA" | "CLIP_METADATA")]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElementalInference/Client.html#get_function-instance_method
+      def get_function: (
+                          id: ::String
+                        ) -> _GetFunctionResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetFunctionResponseSuccess
+
+      interface _GetQuestionSetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetQuestionSetResponse]
+        def yes_no: () -> ::Array[Types::YesNoQuestion]
+        def yes_no_per_option: () -> ::Array[Types::YesNoPerOptionQuestion]
+        def choose_one: () -> ::Array[Types::ChooseOneQuestion]
+        def arn: () -> ::String
+        def id: () -> ::String
+        def name: () -> ::String
+        def version: () -> ::String
+        def description: () -> ::String
+        def latest_version: () -> ::String
+        def sha256: () -> ::String
+        def references: () -> ::Array[::String]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElementalInference/Client.html#get_question_set-instance_method
+      def get_question_set: (
+                              id: ::String,
+                              ?question_set_version: ::String
+                            ) -> _GetQuestionSetResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetQuestionSetResponseSuccess
+
       interface _ListDictionariesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListDictionariesResponse]
         def dictionaries: () -> ::Array[Types::DictionarySummary]
@@ -319,6 +479,43 @@ module Aws
                         ?next_token: ::String
                       ) -> _ListFeedsResponseSuccess
                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListFeedsResponseSuccess
+
+      interface _ListFunctionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListFunctionsResponse]
+        def functions: () -> ::Array[Types::FunctionSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElementalInference/Client.html#list_functions-instance_method
+      def list_functions: (
+                            ?max_results: ::Integer,
+                            ?next_token: ::String
+                          ) -> _ListFunctionsResponseSuccess
+                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListFunctionsResponseSuccess
+
+      interface _ListQuestionSetVersionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListQuestionSetVersionsResponse]
+        def versions: () -> ::Array[Types::QuestionSetVersionSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElementalInference/Client.html#list_question_set_versions-instance_method
+      def list_question_set_versions: (
+                                        id: ::String,
+                                        ?max_results: ::Integer,
+                                        ?next_token: ::String
+                                      ) -> _ListQuestionSetVersionsResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListQuestionSetVersionsResponseSuccess
+
+      interface _ListQuestionSetsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListQuestionSetsResponse]
+        def question_sets: () -> ::Array[Types::QuestionSetSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElementalInference/Client.html#list_question_sets-instance_method
+      def list_question_sets: (
+                                ?max_results: ::Integer,
+                                ?next_token: ::String
+                              ) -> _ListQuestionSetsResponseSuccess
+                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListQuestionSetsResponseSuccess
 
       interface _ListScheduleActionsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListScheduleActionsResponse]
@@ -393,7 +590,7 @@ module Aws
         def name: () -> ::String
         def arn: () -> ::String
         def id: () -> ::String
-        def language: () -> ("eng" | "fra" | "ita" | "deu" | "spa" | "por")
+        def language: () -> ("eng" | "fra" | "ita" | "deu" | "spa" | "por" | "ara")
         def status: () -> ("CREATING" | "AVAILABLE" | "REFERENCED" | "DELETING" | "DELETED")
         def references: () -> ::Array[::String]
         def tags: () -> ::Hash[::String, ::String]
@@ -402,7 +599,7 @@ module Aws
       def update_dictionary: (
                                id: ::String,
                                ?name: ::String,
-                               ?language: ("eng" | "fra" | "ita" | "deu" | "spa" | "por"),
+                               ?language: ("eng" | "fra" | "ita" | "deu" | "spa" | "por" | "ara"),
                                ?entries: ::String
                              ) -> _UpdateDictionaryResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDictionaryResponseSuccess
@@ -435,6 +632,67 @@ module Aws
                          ]
                        ) -> _UpdateFeedResponseSuccess
                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateFeedResponseSuccess
+
+      interface _UpdateFunctionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateFunctionResponse]
+        def name: () -> ::String
+        def target: () -> Types::FunctionTarget
+        def request_expression: () -> ::String
+        def response_expression: () -> ::String
+        def description: () -> ::String
+        def event_bridge_delivery: () -> ("ENABLED" | "DISABLED")
+        def arn: () -> ::String
+        def id: () -> ::String
+        def status: () -> ("CREATING" | "AVAILABLE" | "REFERENCED" | "DELETING" | "DELETED")
+        def references: () -> ::Array[::String]
+        def context_types: () -> ::Array[("FRAMES" | "SUBTITLES" | "CONTEXTUAL_METADATA" | "CLIP_METADATA")]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElementalInference/Client.html#update_function-instance_method
+      def update_function: (
+                             id: ::String,
+                             ?name: ::String,
+                             ?target: Params::function_target,
+                             ?request_expression: ::String,
+                             ?response_expression: ::String,
+                             ?description: ::String,
+                             ?event_bridge_delivery: ("ENABLED" | "DISABLED")
+                           ) -> _UpdateFunctionResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateFunctionResponseSuccess
+
+      interface _UpdateQuestionSetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateQuestionSetResponse]
+        def yes_no: () -> ::Array[Types::YesNoQuestion]
+        def yes_no_per_option: () -> ::Array[Types::YesNoPerOptionQuestion]
+        def choose_one: () -> ::Array[Types::ChooseOneQuestion]
+        def arn: () -> ::String
+        def id: () -> ::String
+        def name: () -> ::String
+        def version: () -> ::String
+        def description: () -> ::String
+        def latest_version: () -> ::String
+        def sha256: () -> ::String
+        def references: () -> ::Array[::String]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElementalInference/Client.html#update_question_set-instance_method
+      def update_question_set: (
+                                 id: ::String,
+                                 ?yes_no: Array[
+                                   {
+                                     name: ::String,
+                                     question: ::String
+                                   }
+                                 ],
+                                 ?yes_no_per_option: Array[
+                                   Params::yes_no_per_option_question
+                                 ],
+                                 ?choose_one: Array[
+                                   Params::choose_one_question
+                                 ],
+                                 ?name: ::String
+                               ) -> _UpdateQuestionSetResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateQuestionSetResponseSuccess
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElementalInference/Client.html#wait_until-instance_method
       def wait_until: (:feed_deleted waiter_name, 

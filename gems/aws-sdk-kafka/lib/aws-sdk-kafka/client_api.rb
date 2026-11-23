@@ -16,6 +16,12 @@ module Aws::Kafka
 
     AmazonMskCluster = Shapes::StructureShape.new(name: 'AmazonMskCluster')
     ApacheKafkaCluster = Shapes::StructureShape.new(name: 'ApacheKafkaCluster')
+    AssessmentFinding = Shapes::StructureShape.new(name: 'AssessmentFinding')
+    AssessmentInfo = Shapes::StructureShape.new(name: 'AssessmentInfo')
+    AssessmentParameters = Shapes::StructureShape.new(name: 'AssessmentParameters')
+    AssessmentStatus = Shapes::StringShape.new(name: 'AssessmentStatus')
+    AssessmentSummary = Shapes::StructureShape.new(name: 'AssessmentSummary')
+    AssessmentType = Shapes::StringShape.new(name: 'AssessmentType')
     AuthorizerLogs = Shapes::StructureShape.new(name: 'AuthorizerLogs')
     BadRequestException = Shapes::StructureShape.new(name: 'BadRequestException')
     BatchAssociateScramSecretRequest = Shapes::StructureShape.new(name: 'BatchAssociateScramSecretRequest')
@@ -28,7 +34,9 @@ module Aws::Kafka
     BrokerLogs = Shapes::StructureShape.new(name: 'BrokerLogs')
     BrokerNodeGroupInfo = Shapes::StructureShape.new(name: 'BrokerNodeGroupInfo')
     BrokerNodeInfo = Shapes::StructureShape.new(name: 'BrokerNodeInfo')
+    BrokerNodeType = Shapes::StringShape.new(name: 'BrokerNodeType')
     BrokerSoftwareInfo = Shapes::StructureShape.new(name: 'BrokerSoftwareInfo')
+    BrokerTypeUpgradeInfo = Shapes::StructureShape.new(name: 'BrokerTypeUpgradeInfo')
     Catalog = Shapes::StructureShape.new(name: 'Catalog')
     ChannelDestinationType = Shapes::StringShape.new(name: 'ChannelDestinationType')
     ChannelInfo = Shapes::StructureShape.new(name: 'ChannelInfo')
@@ -63,6 +71,8 @@ module Aws::Kafka
     ConsumerGroupReplicationUpdate = Shapes::StructureShape.new(name: 'ConsumerGroupReplicationUpdate')
     ControllerMovedException = Shapes::StructureShape.new(name: 'ControllerMovedException')
     ControllerNodeInfo = Shapes::StructureShape.new(name: 'ControllerNodeInfo')
+    CreateAssessmentRequest = Shapes::StructureShape.new(name: 'CreateAssessmentRequest')
+    CreateAssessmentResponse = Shapes::StructureShape.new(name: 'CreateAssessmentResponse')
     CreateChannelRequest = Shapes::StructureShape.new(name: 'CreateChannelRequest')
     CreateChannelResponse = Shapes::StructureShape.new(name: 'CreateChannelResponse')
     CreateClusterRequest = Shapes::StructureShape.new(name: 'CreateClusterRequest')
@@ -79,6 +89,8 @@ module Aws::Kafka
     CreateVpcConnectionResponse = Shapes::StructureShape.new(name: 'CreateVpcConnectionResponse')
     CustomerActionStatus = Shapes::StringShape.new(name: 'CustomerActionStatus')
     DeadLetterQueueS3 = Shapes::StructureShape.new(name: 'DeadLetterQueueS3')
+    DeleteAssessmentRequest = Shapes::StructureShape.new(name: 'DeleteAssessmentRequest')
+    DeleteAssessmentResponse = Shapes::StructureShape.new(name: 'DeleteAssessmentResponse')
     DeleteChannelRequest = Shapes::StructureShape.new(name: 'DeleteChannelRequest')
     DeleteChannelResponse = Shapes::StructureShape.new(name: 'DeleteChannelResponse')
     DeleteClusterPolicyRequest = Shapes::StructureShape.new(name: 'DeleteClusterPolicyRequest')
@@ -93,6 +105,8 @@ module Aws::Kafka
     DeleteTopicResponse = Shapes::StructureShape.new(name: 'DeleteTopicResponse')
     DeleteVpcConnectionRequest = Shapes::StructureShape.new(name: 'DeleteVpcConnectionRequest')
     DeleteVpcConnectionResponse = Shapes::StructureShape.new(name: 'DeleteVpcConnectionResponse')
+    DescribeAssessmentRequest = Shapes::StructureShape.new(name: 'DescribeAssessmentRequest')
+    DescribeAssessmentResponse = Shapes::StructureShape.new(name: 'DescribeAssessmentResponse')
     DescribeChannelRequest = Shapes::StructureShape.new(name: 'DescribeChannelRequest')
     DescribeChannelResponse = Shapes::StructureShape.new(name: 'DescribeChannelResponse')
     DescribeClusterOperationRequest = Shapes::StructureShape.new(name: 'DescribeClusterOperationRequest')
@@ -111,6 +125,8 @@ module Aws::Kafka
     DescribeReplicatorResponse = Shapes::StructureShape.new(name: 'DescribeReplicatorResponse')
     DescribeTopicPartitionsRequest = Shapes::StructureShape.new(name: 'DescribeTopicPartitionsRequest')
     DescribeTopicPartitionsResponse = Shapes::StructureShape.new(name: 'DescribeTopicPartitionsResponse')
+    DescribeTopicReassignmentRequest = Shapes::StructureShape.new(name: 'DescribeTopicReassignmentRequest')
+    DescribeTopicReassignmentResponse = Shapes::StructureShape.new(name: 'DescribeTopicReassignmentResponse')
     DescribeTopicRequest = Shapes::StructureShape.new(name: 'DescribeTopicRequest')
     DescribeTopicResponse = Shapes::StructureShape.new(name: 'DescribeTopicResponse')
     DescribeVpcConnectionRequest = Shapes::StructureShape.new(name: 'DescribeVpcConnectionRequest')
@@ -124,6 +140,9 @@ module Aws::Kafka
     EnhancedMonitoring = Shapes::StringShape.new(name: 'EnhancedMonitoring')
     Error = Shapes::StructureShape.new(name: 'Error')
     ErrorInfo = Shapes::StructureShape.new(name: 'ErrorInfo')
+    FindingCategory = Shapes::StringShape.new(name: 'FindingCategory')
+    FindingRemediation = Shapes::StructureShape.new(name: 'FindingRemediation')
+    FindingSeverity = Shapes::StringShape.new(name: 'FindingSeverity')
     Firehose = Shapes::StructureShape.new(name: 'Firehose')
     ForbiddenException = Shapes::StructureShape.new(name: 'ForbiddenException')
     GetBootstrapBrokersRequest = Shapes::StructureShape.new(name: 'GetBootstrapBrokersRequest')
@@ -159,6 +178,10 @@ module Aws::Kafka
     KafkaTimeoutException = Shapes::StructureShape.new(name: 'KafkaTimeoutException')
     KafkaVersion = Shapes::StructureShape.new(name: 'KafkaVersion')
     KafkaVersionStatus = Shapes::StringShape.new(name: 'KafkaVersionStatus')
+    ListAssessmentFindingsRequest = Shapes::StructureShape.new(name: 'ListAssessmentFindingsRequest')
+    ListAssessmentFindingsResponse = Shapes::StructureShape.new(name: 'ListAssessmentFindingsResponse')
+    ListAssessmentsRequest = Shapes::StructureShape.new(name: 'ListAssessmentsRequest')
+    ListAssessmentsResponse = Shapes::StructureShape.new(name: 'ListAssessmentsResponse')
     ListChannelsRequest = Shapes::StructureShape.new(name: 'ListChannelsRequest')
     ListChannelsResponse = Shapes::StructureShape.new(name: 'ListChannelsResponse')
     ListClientVpcConnectionsRequest = Shapes::StructureShape.new(name: 'ListClientVpcConnectionsRequest')
@@ -185,6 +208,8 @@ module Aws::Kafka
     ListScramSecretsResponse = Shapes::StructureShape.new(name: 'ListScramSecretsResponse')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
+    ListTopicReassignmentsRequest = Shapes::StructureShape.new(name: 'ListTopicReassignmentsRequest')
+    ListTopicReassignmentsResponse = Shapes::StructureShape.new(name: 'ListTopicReassignmentsResponse')
     ListTopicsRequest = Shapes::StructureShape.new(name: 'ListTopicsRequest')
     ListTopicsResponse = Shapes::StructureShape.new(name: 'ListTopicsResponse')
     ListVpcConnectionsRequest = Shapes::StructureShape.new(name: 'ListVpcConnectionsRequest')
@@ -251,7 +276,11 @@ module Aws::Kafka
     ServerlessRequest = Shapes::StructureShape.new(name: 'ServerlessRequest')
     ServerlessSasl = Shapes::StructureShape.new(name: 'ServerlessSasl')
     ServiceUnavailableException = Shapes::StructureShape.new(name: 'ServiceUnavailableException')
+    StartTopicReassignmentRequest = Shapes::StructureShape.new(name: 'StartTopicReassignmentRequest')
+    StartTopicReassignmentResponse = Shapes::StructureShape.new(name: 'StartTopicReassignmentResponse')
     StateInfo = Shapes::StructureShape.new(name: 'StateInfo')
+    StopTopicReassignmentRequest = Shapes::StructureShape.new(name: 'StopTopicReassignmentRequest')
+    StopTopicReassignmentResponse = Shapes::StructureShape.new(name: 'StopTopicReassignmentResponse')
     StorageInfo = Shapes::StructureShape.new(name: 'StorageInfo')
     StorageMode = Shapes::StringShape.new(name: 'StorageMode')
     TableCreation = Shapes::StructureShape.new(name: 'TableCreation')
@@ -264,6 +293,10 @@ module Aws::Kafka
     TopicExistsException = Shapes::StructureShape.new(name: 'TopicExistsException')
     TopicInfo = Shapes::StructureShape.new(name: 'TopicInfo')
     TopicPartitionInfo = Shapes::StructureShape.new(name: 'TopicPartitionInfo')
+    TopicReassignment = Shapes::StringShape.new(name: 'TopicReassignment')
+    TopicReassignmentInfo = Shapes::StructureShape.new(name: 'TopicReassignmentInfo')
+    TopicReassignmentMode = Shapes::StringShape.new(name: 'TopicReassignmentMode')
+    TopicReassignmentStatus = Shapes::StringShape.new(name: 'TopicReassignmentStatus')
     TopicReplication = Shapes::StructureShape.new(name: 'TopicReplication')
     TopicReplicationUpdate = Shapes::StructureShape.new(name: 'TopicReplicationUpdate')
     TopicState = Shapes::StringShape.new(name: 'TopicState')
@@ -323,6 +356,9 @@ module Aws::Kafka
     __integerMin1 = Shapes::IntegerShape.new(name: '__integerMin1')
     __integerMin1Max15 = Shapes::IntegerShape.new(name: '__integerMin1Max15')
     __integerMin1Max16384 = Shapes::IntegerShape.new(name: '__integerMin1Max16384')
+    __integerMin1Max500 = Shapes::IntegerShape.new(name: '__integerMin1Max500')
+    __listOfAssessmentFinding = Shapes::ListShape.new(name: '__listOfAssessmentFinding')
+    __listOfAssessmentInfo = Shapes::ListShape.new(name: '__listOfAssessmentInfo')
     __listOfBrokerEBSVolumeInfo = Shapes::ListShape.new(name: '__listOfBrokerEBSVolumeInfo')
     __listOfChannelInfo = Shapes::ListShape.new(name: '__listOfChannelInfo')
     __listOfClientVpcConnection = Shapes::ListShape.new(name: '__listOfClientVpcConnection')
@@ -348,6 +384,7 @@ module Aws::Kafka
     __listOfTopicConfiguration = Shapes::ListShape.new(name: '__listOfTopicConfiguration')
     __listOfTopicInfo = Shapes::ListShape.new(name: '__listOfTopicInfo')
     __listOfTopicPartitionInfo = Shapes::ListShape.new(name: '__listOfTopicPartitionInfo')
+    __listOfTopicReassignmentInfo = Shapes::ListShape.new(name: '__listOfTopicReassignmentInfo')
     __listOfUnprocessedScramSecret = Shapes::ListShape.new(name: '__listOfUnprocessedScramSecret')
     __listOfVpcConfig = Shapes::ListShape.new(name: '__listOfVpcConfig')
     __listOfVpcConnection = Shapes::ListShape.new(name: '__listOfVpcConnection')
@@ -356,16 +393,20 @@ module Aws::Kafka
     __listOf__string = Shapes::ListShape.new(name: '__listOf__string')
     __listOf__stringMax249 = Shapes::ListShape.new(name: '__listOf__stringMax249')
     __listOf__stringMax256 = Shapes::ListShape.new(name: '__listOf__stringMax256')
+    __listOf__stringMin1Max256 = Shapes::ListShape.new(name: '__listOf__stringMin1Max256')
     __long = Shapes::IntegerShape.new(name: '__long')
+    __mapOf__integer = Shapes::MapShape.new(name: '__mapOf__integer')
     __mapOf__string = Shapes::MapShape.new(name: '__mapOf__string')
     __string = Shapes::StringShape.new(name: '__string')
     __stringMax1024 = Shapes::StringShape.new(name: '__stringMax1024')
+    __stringMax2048 = Shapes::StringShape.new(name: '__stringMax2048')
     __stringMax249 = Shapes::StringShape.new(name: '__stringMax249')
     __stringMax256 = Shapes::StringShape.new(name: '__stringMax256')
     __stringMin1Max128 = Shapes::StringShape.new(name: '__stringMin1Max128')
     __stringMin1Max128Pattern09AZaZ09AZaZ0 = Shapes::StringShape.new(name: '__stringMin1Max128Pattern09AZaZ09AZaZ0')
+    __stringMin1Max256 = Shapes::StringShape.new(name: '__stringMin1Max256')
     __stringMin1Max64 = Shapes::StringShape.new(name: '__stringMin1Max64')
-    __stringMin5Max32 = Shapes::StringShape.new(name: '__stringMin5Max32')
+    __stringMin5Max64 = Shapes::StringShape.new(name: '__stringMin5Max64')
     __timestampIso8601 = Shapes::TimestampShape.new(name: '__timestampIso8601', timestampFormat: "iso8601")
     __timestampUnix = Shapes::TimestampShape.new(name: '__timestampUnix', timestampFormat: "unixTimestamp")
 
@@ -375,6 +416,32 @@ module Aws::Kafka
     ApacheKafkaCluster.add_member(:apache_kafka_cluster_id, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "apacheKafkaClusterId"))
     ApacheKafkaCluster.add_member(:bootstrap_broker_string, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "bootstrapBrokerString"))
     ApacheKafkaCluster.struct_class = Types::ApacheKafkaCluster
+
+    AssessmentFinding.add_member(:category, Shapes::ShapeRef.new(shape: FindingCategory, required: true, location_name: "category"))
+    AssessmentFinding.add_member(:finding_id, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "findingId"))
+    AssessmentFinding.add_member(:message, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "message"))
+    AssessmentFinding.add_member(:remediation, Shapes::ShapeRef.new(shape: FindingRemediation, location_name: "remediation"))
+    AssessmentFinding.add_member(:resource, Shapes::ShapeRef.new(shape: __string, location_name: "resource"))
+    AssessmentFinding.add_member(:severity, Shapes::ShapeRef.new(shape: FindingSeverity, required: true, location_name: "severity"))
+    AssessmentFinding.struct_class = Types::AssessmentFinding
+
+    AssessmentInfo.add_member(:assessment_arn, Shapes::ShapeRef.new(shape: __stringMax2048, location_name: "assessmentArn"))
+    AssessmentInfo.add_member(:assessment_type, Shapes::ShapeRef.new(shape: AssessmentType, location_name: "assessmentType"))
+    AssessmentInfo.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: __stringMax2048, location_name: "clusterArn"))
+    AssessmentInfo.add_member(:creation_time, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "creationTime"))
+    AssessmentInfo.add_member(:status, Shapes::ShapeRef.new(shape: AssessmentStatus, location_name: "status"))
+    AssessmentInfo.add_member(:tags, Shapes::ShapeRef.new(shape: __mapOf__string, location_name: "tags"))
+    AssessmentInfo.struct_class = Types::AssessmentInfo
+
+    AssessmentParameters.add_member(:target_instance_type, Shapes::ShapeRef.new(shape: __stringMax256, location_name: "targetInstanceType"))
+    AssessmentParameters.struct_class = Types::AssessmentParameters
+
+    AssessmentSummary.add_member(:by_category, Shapes::ShapeRef.new(shape: __mapOf__integer, location_name: "byCategory"))
+    AssessmentSummary.add_member(:by_severity, Shapes::ShapeRef.new(shape: __mapOf__integer, location_name: "bySeverity"))
+    AssessmentSummary.add_member(:findings_capped, Shapes::ShapeRef.new(shape: __boolean, location_name: "findingsCapped"))
+    AssessmentSummary.add_member(:has_blocking_findings, Shapes::ShapeRef.new(shape: __boolean, location_name: "hasBlockingFindings"))
+    AssessmentSummary.add_member(:total_findings, Shapes::ShapeRef.new(shape: __integer, location_name: "totalFindings"))
+    AssessmentSummary.struct_class = Types::AssessmentSummary
 
     AuthorizerLogs.add_member(:cloud_watch_logs, Shapes::ShapeRef.new(shape: CloudWatchLogs, location_name: "cloudWatchLogs"))
     AuthorizerLogs.add_member(:firehose, Shapes::ShapeRef.new(shape: Firehose, location_name: "firehose"))
@@ -417,7 +484,7 @@ module Aws::Kafka
 
     BrokerNodeGroupInfo.add_member(:broker_az_distribution, Shapes::ShapeRef.new(shape: BrokerAZDistribution, location_name: "brokerAZDistribution"))
     BrokerNodeGroupInfo.add_member(:client_subnets, Shapes::ShapeRef.new(shape: __listOf__string, required: true, location_name: "clientSubnets"))
-    BrokerNodeGroupInfo.add_member(:instance_type, Shapes::ShapeRef.new(shape: __stringMin5Max32, required: true, location_name: "instanceType"))
+    BrokerNodeGroupInfo.add_member(:instance_type, Shapes::ShapeRef.new(shape: __stringMin5Max64, required: true, location_name: "instanceType"))
     BrokerNodeGroupInfo.add_member(:security_groups, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "securityGroups"))
     BrokerNodeGroupInfo.add_member(:storage_info, Shapes::ShapeRef.new(shape: StorageInfo, location_name: "storageInfo"))
     BrokerNodeGroupInfo.add_member(:connectivity_info, Shapes::ShapeRef.new(shape: ConnectivityInfo, location_name: "connectivityInfo"))
@@ -426,6 +493,7 @@ module Aws::Kafka
 
     BrokerNodeInfo.add_member(:attached_eni_id, Shapes::ShapeRef.new(shape: __string, location_name: "attachedENIId"))
     BrokerNodeInfo.add_member(:broker_id, Shapes::ShapeRef.new(shape: __double, location_name: "brokerId"))
+    BrokerNodeInfo.add_member(:broker_node_type, Shapes::ShapeRef.new(shape: BrokerNodeType, location_name: "brokerNodeType"))
     BrokerNodeInfo.add_member(:client_subnet, Shapes::ShapeRef.new(shape: __string, location_name: "clientSubnet"))
     BrokerNodeInfo.add_member(:client_vpc_ip_address, Shapes::ShapeRef.new(shape: __string, location_name: "clientVpcIpAddress"))
     BrokerNodeInfo.add_member(:current_broker_software_info, Shapes::ShapeRef.new(shape: BrokerSoftwareInfo, location_name: "currentBrokerSoftwareInfo"))
@@ -436,6 +504,10 @@ module Aws::Kafka
     BrokerSoftwareInfo.add_member(:configuration_revision, Shapes::ShapeRef.new(shape: __long, location_name: "configurationRevision"))
     BrokerSoftwareInfo.add_member(:kafka_version, Shapes::ShapeRef.new(shape: __string, location_name: "kafkaVersion"))
     BrokerSoftwareInfo.struct_class = Types::BrokerSoftwareInfo
+
+    BrokerTypeUpgradeInfo.add_member(:topic_reassignment_mode, Shapes::ShapeRef.new(shape: TopicReassignmentMode, location_name: "topicReassignmentMode"))
+    BrokerTypeUpgradeInfo.add_member(:topic_reassignment_operation_arn, Shapes::ShapeRef.new(shape: __stringMax2048, location_name: "topicReassignmentOperationArn"))
+    BrokerTypeUpgradeInfo.struct_class = Types::BrokerTypeUpgradeInfo
 
     Catalog.add_member(:catalog_arn, Shapes::ShapeRef.new(shape: __string, location_name: "catalogArn"))
     Catalog.add_member(:warehouse_location, Shapes::ShapeRef.new(shape: __string, location_name: "warehouseLocation"))
@@ -514,6 +586,7 @@ module Aws::Kafka
     ClusterInfo.add_member(:customer_action_status, Shapes::ShapeRef.new(shape: CustomerActionStatus, location_name: "customerActionStatus"))
     ClusterInfo.struct_class = Types::ClusterInfo
 
+    ClusterOperationInfo.add_member(:broker_type_upgrade_info, Shapes::ShapeRef.new(shape: BrokerTypeUpgradeInfo, location_name: "brokerTypeUpgradeInfo"))
     ClusterOperationInfo.add_member(:client_request_id, Shapes::ShapeRef.new(shape: __string, location_name: "clientRequestId"))
     ClusterOperationInfo.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: __string, location_name: "clusterArn"))
     ClusterOperationInfo.add_member(:creation_time, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "creationTime"))
@@ -546,6 +619,7 @@ module Aws::Kafka
     ClusterOperationV2.add_member(:serverless, Shapes::ShapeRef.new(shape: ClusterOperationV2Serverless, location_name: "serverless"))
     ClusterOperationV2.struct_class = Types::ClusterOperationV2
 
+    ClusterOperationV2Provisioned.add_member(:broker_type_upgrade_info, Shapes::ShapeRef.new(shape: BrokerTypeUpgradeInfo, location_name: "brokerTypeUpgradeInfo"))
     ClusterOperationV2Provisioned.add_member(:operation_steps, Shapes::ShapeRef.new(shape: __listOfClusterOperationStep, location_name: "operationSteps"))
     ClusterOperationV2Provisioned.add_member(:source_cluster_info, Shapes::ShapeRef.new(shape: MutableClusterInfo, location_name: "sourceClusterInfo"))
     ClusterOperationV2Provisioned.add_member(:target_cluster_info, Shapes::ShapeRef.new(shape: MutableClusterInfo, location_name: "targetClusterInfo"))
@@ -616,6 +690,19 @@ module Aws::Kafka
 
     ControllerNodeInfo.add_member(:endpoints, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "endpoints"))
     ControllerNodeInfo.struct_class = Types::ControllerNodeInfo
+
+    CreateAssessmentRequest.add_member(:assessment_parameters, Shapes::ShapeRef.new(shape: AssessmentParameters, location_name: "assessmentParameters"))
+    CreateAssessmentRequest.add_member(:assessment_type, Shapes::ShapeRef.new(shape: AssessmentType, required: true, location_name: "assessmentType"))
+    CreateAssessmentRequest.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "clusterArn"))
+    CreateAssessmentRequest.add_member(:tags, Shapes::ShapeRef.new(shape: __mapOf__string, location_name: "tags"))
+    CreateAssessmentRequest.struct_class = Types::CreateAssessmentRequest
+
+    CreateAssessmentResponse.add_member(:assessment_arn, Shapes::ShapeRef.new(shape: __stringMax2048, location_name: "assessmentArn"))
+    CreateAssessmentResponse.add_member(:assessment_type, Shapes::ShapeRef.new(shape: AssessmentType, location_name: "assessmentType"))
+    CreateAssessmentResponse.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: __stringMax2048, location_name: "clusterArn"))
+    CreateAssessmentResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "creationTime"))
+    CreateAssessmentResponse.add_member(:status, Shapes::ShapeRef.new(shape: AssessmentStatus, location_name: "status"))
+    CreateAssessmentResponse.struct_class = Types::CreateAssessmentResponse
 
     CreateChannelRequest.add_member(:channel_name, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "channelName"))
     CreateChannelRequest.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "clusterArn"))
@@ -725,6 +812,14 @@ module Aws::Kafka
     DeadLetterQueueS3.add_member(:expected_bucket_owner, Shapes::ShapeRef.new(shape: __string, location_name: "expectedBucketOwner"))
     DeadLetterQueueS3.struct_class = Types::DeadLetterQueueS3
 
+    DeleteAssessmentRequest.add_member(:assessment_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "assessmentArn"))
+    DeleteAssessmentRequest.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "clusterArn"))
+    DeleteAssessmentRequest.struct_class = Types::DeleteAssessmentRequest
+
+    DeleteAssessmentResponse.add_member(:assessment_arn, Shapes::ShapeRef.new(shape: __stringMax2048, location_name: "assessmentArn"))
+    DeleteAssessmentResponse.add_member(:status, Shapes::ShapeRef.new(shape: AssessmentStatus, location_name: "status"))
+    DeleteAssessmentResponse.struct_class = Types::DeleteAssessmentResponse
+
     DeleteChannelRequest.add_member(:channel_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "channelArn"))
     DeleteChannelRequest.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "clusterArn"))
     DeleteChannelRequest.struct_class = Types::DeleteChannelRequest
@@ -776,6 +871,22 @@ module Aws::Kafka
     DeleteVpcConnectionResponse.add_member(:vpc_connection_arn, Shapes::ShapeRef.new(shape: __string, location_name: "vpcConnectionArn"))
     DeleteVpcConnectionResponse.add_member(:state, Shapes::ShapeRef.new(shape: VpcConnectionState, location_name: "state"))
     DeleteVpcConnectionResponse.struct_class = Types::DeleteVpcConnectionResponse
+
+    DescribeAssessmentRequest.add_member(:assessment_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "assessmentArn"))
+    DescribeAssessmentRequest.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "clusterArn"))
+    DescribeAssessmentRequest.struct_class = Types::DescribeAssessmentRequest
+
+    DescribeAssessmentResponse.add_member(:assessment_arn, Shapes::ShapeRef.new(shape: __stringMax2048, location_name: "assessmentArn"))
+    DescribeAssessmentResponse.add_member(:assessment_parameters, Shapes::ShapeRef.new(shape: AssessmentParameters, location_name: "assessmentParameters"))
+    DescribeAssessmentResponse.add_member(:assessment_type, Shapes::ShapeRef.new(shape: AssessmentType, location_name: "assessmentType"))
+    DescribeAssessmentResponse.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: __stringMax2048, location_name: "clusterArn"))
+    DescribeAssessmentResponse.add_member(:completion_time, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "completionTime"))
+    DescribeAssessmentResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "creationTime"))
+    DescribeAssessmentResponse.add_member(:status, Shapes::ShapeRef.new(shape: AssessmentStatus, location_name: "status"))
+    DescribeAssessmentResponse.add_member(:status_message, Shapes::ShapeRef.new(shape: __string, location_name: "statusMessage"))
+    DescribeAssessmentResponse.add_member(:summary, Shapes::ShapeRef.new(shape: AssessmentSummary, location_name: "summary"))
+    DescribeAssessmentResponse.add_member(:tags, Shapes::ShapeRef.new(shape: __mapOf__string, location_name: "tags"))
+    DescribeAssessmentResponse.struct_class = Types::DescribeAssessmentResponse
 
     DescribeChannelRequest.add_member(:channel_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "channelArn"))
     DescribeChannelRequest.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "clusterArn"))
@@ -872,6 +983,25 @@ module Aws::Kafka
     DescribeTopicPartitionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location_name: "nextToken"))
     DescribeTopicPartitionsResponse.struct_class = Types::DescribeTopicPartitionsResponse
 
+    DescribeTopicReassignmentRequest.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "clusterArn"))
+    DescribeTopicReassignmentRequest.add_member(:topic_reassignment_operation_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "topicReassignmentOperationArn"))
+    DescribeTopicReassignmentRequest.struct_class = Types::DescribeTopicReassignmentRequest
+
+    DescribeTopicReassignmentResponse.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: __stringMax2048, location_name: "clusterArn"))
+    DescribeTopicReassignmentResponse.add_member(:completed_topics, Shapes::ShapeRef.new(shape: __integer, location_name: "completedTopics"))
+    DescribeTopicReassignmentResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "creationTime"))
+    DescribeTopicReassignmentResponse.add_member(:error_info, Shapes::ShapeRef.new(shape: ErrorInfo, location_name: "errorInfo"))
+    DescribeTopicReassignmentResponse.add_member(:last_update_time, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "lastUpdateTime"))
+    DescribeTopicReassignmentResponse.add_member(:migrated_partitions, Shapes::ShapeRef.new(shape: __integer, location_name: "migratedPartitions"))
+    DescribeTopicReassignmentResponse.add_member(:status, Shapes::ShapeRef.new(shape: TopicReassignmentStatus, location_name: "status"))
+    DescribeTopicReassignmentResponse.add_member(:target_instance_type, Shapes::ShapeRef.new(shape: __string, location_name: "targetInstanceType"))
+    DescribeTopicReassignmentResponse.add_member(:topic_reassignment_operation_arn, Shapes::ShapeRef.new(shape: __stringMax2048, location_name: "topicReassignmentOperationArn"))
+    DescribeTopicReassignmentResponse.add_member(:topics_to_exclude, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "topicsToExclude"))
+    DescribeTopicReassignmentResponse.add_member(:topics_to_include, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "topicsToInclude"))
+    DescribeTopicReassignmentResponse.add_member(:total_partitions, Shapes::ShapeRef.new(shape: __integer, location_name: "totalPartitions"))
+    DescribeTopicReassignmentResponse.add_member(:total_topics, Shapes::ShapeRef.new(shape: __integer, location_name: "totalTopics"))
+    DescribeTopicReassignmentResponse.struct_class = Types::DescribeTopicReassignmentResponse
+
     DescribeTopicRequest.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "clusterArn"))
     DescribeTopicRequest.add_member(:topic_name, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "topicName"))
     DescribeTopicRequest.struct_class = Types::DescribeTopicRequest
@@ -882,6 +1012,7 @@ module Aws::Kafka
     DescribeTopicResponse.add_member(:partition_count, Shapes::ShapeRef.new(shape: __integer, location_name: "partitionCount"))
     DescribeTopicResponse.add_member(:configs, Shapes::ShapeRef.new(shape: __string, location_name: "configs"))
     DescribeTopicResponse.add_member(:status, Shapes::ShapeRef.new(shape: TopicState, location_name: "status"))
+    DescribeTopicResponse.add_member(:replica_ids, Shapes::ShapeRef.new(shape: __listOf__integer, location_name: "replicaIds"))
     DescribeTopicResponse.struct_class = Types::DescribeTopicResponse
 
     DescribeVpcConnectionRequest.add_member(:arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "arn"))
@@ -928,6 +1059,10 @@ module Aws::Kafka
     ErrorInfo.add_member(:error_code, Shapes::ShapeRef.new(shape: __string, location_name: "errorCode"))
     ErrorInfo.add_member(:error_string, Shapes::ShapeRef.new(shape: __string, location_name: "errorString"))
     ErrorInfo.struct_class = Types::ErrorInfo
+
+    FindingRemediation.add_member(:action, Shapes::ShapeRef.new(shape: __string, location_name: "action"))
+    FindingRemediation.add_member(:documentation_url, Shapes::ShapeRef.new(shape: __stringMax2048, location_name: "documentationUrl"))
+    FindingRemediation.struct_class = Types::FindingRemediation
 
     Firehose.add_member(:delivery_stream, Shapes::ShapeRef.new(shape: __string, location_name: "deliveryStream"))
     Firehose.add_member(:enabled, Shapes::ShapeRef.new(shape: __boolean, required: true, location_name: "enabled"))
@@ -1074,6 +1209,28 @@ module Aws::Kafka
     KafkaVersion.add_member(:status, Shapes::ShapeRef.new(shape: KafkaVersionStatus, location_name: "status"))
     KafkaVersion.struct_class = Types::KafkaVersion
 
+    ListAssessmentFindingsRequest.add_member(:assessment_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "assessmentArn"))
+    ListAssessmentFindingsRequest.add_member(:category, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "category"))
+    ListAssessmentFindingsRequest.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "clusterArn"))
+    ListAssessmentFindingsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: __integerMin1Max500, location: "querystring", location_name: "maxResults"))
+    ListAssessmentFindingsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "nextToken"))
+    ListAssessmentFindingsRequest.add_member(:severity, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "severity"))
+    ListAssessmentFindingsRequest.struct_class = Types::ListAssessmentFindingsRequest
+
+    ListAssessmentFindingsResponse.add_member(:findings, Shapes::ShapeRef.new(shape: __listOfAssessmentFinding, location_name: "findings"))
+    ListAssessmentFindingsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location_name: "nextToken"))
+    ListAssessmentFindingsResponse.struct_class = Types::ListAssessmentFindingsResponse
+
+    ListAssessmentsRequest.add_member(:assessment_type, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "assessmentType"))
+    ListAssessmentsRequest.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "clusterArn"))
+    ListAssessmentsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListAssessmentsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "nextToken"))
+    ListAssessmentsRequest.struct_class = Types::ListAssessmentsRequest
+
+    ListAssessmentsResponse.add_member(:assessments, Shapes::ShapeRef.new(shape: __listOfAssessmentInfo, location_name: "assessments"))
+    ListAssessmentsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location_name: "nextToken"))
+    ListAssessmentsResponse.struct_class = Types::ListAssessmentsResponse
+
     ListChannelsRequest.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "clusterArn"))
     ListChannelsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListChannelsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "nextToken"))
@@ -1187,6 +1344,16 @@ module Aws::Kafka
 
     ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: __mapOf__string, location_name: "tags"))
     ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
+
+    ListTopicReassignmentsRequest.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "clusterArn"))
+    ListTopicReassignmentsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListTopicReassignmentsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "nextToken"))
+    ListTopicReassignmentsRequest.add_member(:status_filter, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "statusFilter"))
+    ListTopicReassignmentsRequest.struct_class = Types::ListTopicReassignmentsRequest
+
+    ListTopicReassignmentsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location_name: "nextToken"))
+    ListTopicReassignmentsResponse.add_member(:reassignments, Shapes::ShapeRef.new(shape: __listOfTopicReassignmentInfo, location_name: "reassignments"))
+    ListTopicReassignmentsResponse.struct_class = Types::ListTopicReassignmentsResponse
 
     ListTopicsRequest.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "clusterArn"))
     ListTopicsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
@@ -1457,9 +1624,29 @@ module Aws::Kafka
     ServiceUnavailableException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
     ServiceUnavailableException.struct_class = Types::ServiceUnavailableException
 
+    StartTopicReassignmentRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: __stringMin1Max64, location_name: "clientToken"))
+    StartTopicReassignmentRequest.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "clusterArn"))
+    StartTopicReassignmentRequest.add_member(:target_instance_type, Shapes::ShapeRef.new(shape: __stringMin1Max256, required: true, location_name: "targetInstanceType"))
+    StartTopicReassignmentRequest.add_member(:topics_to_exclude, Shapes::ShapeRef.new(shape: __listOf__stringMin1Max256, location_name: "topicsToExclude"))
+    StartTopicReassignmentRequest.add_member(:topics_to_include, Shapes::ShapeRef.new(shape: __listOf__stringMin1Max256, required: true, location_name: "topicsToInclude"))
+    StartTopicReassignmentRequest.struct_class = Types::StartTopicReassignmentRequest
+
+    StartTopicReassignmentResponse.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: __stringMax2048, location_name: "clusterArn"))
+    StartTopicReassignmentResponse.add_member(:status, Shapes::ShapeRef.new(shape: TopicReassignmentStatus, location_name: "status"))
+    StartTopicReassignmentResponse.add_member(:topic_reassignment_operation_arn, Shapes::ShapeRef.new(shape: __stringMax2048, location_name: "topicReassignmentOperationArn"))
+    StartTopicReassignmentResponse.struct_class = Types::StartTopicReassignmentResponse
+
     StateInfo.add_member(:code, Shapes::ShapeRef.new(shape: __string, location_name: "code"))
     StateInfo.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
     StateInfo.struct_class = Types::StateInfo
+
+    StopTopicReassignmentRequest.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "clusterArn"))
+    StopTopicReassignmentRequest.add_member(:topic_reassignment_operation_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "topicReassignmentOperationArn"))
+    StopTopicReassignmentRequest.struct_class = Types::StopTopicReassignmentRequest
+
+    StopTopicReassignmentResponse.add_member(:status, Shapes::ShapeRef.new(shape: TopicReassignmentStatus, location_name: "status"))
+    StopTopicReassignmentResponse.add_member(:topic_reassignment_operation_arn, Shapes::ShapeRef.new(shape: __stringMax2048, location_name: "topicReassignmentOperationArn"))
+    StopTopicReassignmentResponse.struct_class = Types::StopTopicReassignmentResponse
 
     StorageInfo.add_member(:ebs_storage_info, Shapes::ShapeRef.new(shape: EBSStorageInfo, location_name: "ebsStorageInfo"))
     StorageInfo.struct_class = Types::StorageInfo
@@ -1493,6 +1680,7 @@ module Aws::Kafka
     TopicInfo.add_member(:replication_factor, Shapes::ShapeRef.new(shape: __integer, location_name: "replicationFactor"))
     TopicInfo.add_member(:partition_count, Shapes::ShapeRef.new(shape: __integer, location_name: "partitionCount"))
     TopicInfo.add_member(:out_of_sync_replica_count, Shapes::ShapeRef.new(shape: __integer, location_name: "outOfSyncReplicaCount"))
+    TopicInfo.add_member(:replica_ids, Shapes::ShapeRef.new(shape: __listOf__integer, location_name: "replicaIds"))
     TopicInfo.struct_class = Types::TopicInfo
 
     TopicPartitionInfo.add_member(:partition, Shapes::ShapeRef.new(shape: __integer, location_name: "partition"))
@@ -1500,6 +1688,14 @@ module Aws::Kafka
     TopicPartitionInfo.add_member(:replicas, Shapes::ShapeRef.new(shape: __listOf__integer, location_name: "replicas"))
     TopicPartitionInfo.add_member(:isr, Shapes::ShapeRef.new(shape: __listOf__integer, location_name: "isr"))
     TopicPartitionInfo.struct_class = Types::TopicPartitionInfo
+
+    TopicReassignmentInfo.add_member(:completed_topics, Shapes::ShapeRef.new(shape: __integer, location_name: "completedTopics"))
+    TopicReassignmentInfo.add_member(:creation_time, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "creationTime"))
+    TopicReassignmentInfo.add_member(:status, Shapes::ShapeRef.new(shape: TopicReassignmentStatus, location_name: "status"))
+    TopicReassignmentInfo.add_member(:target_instance_type, Shapes::ShapeRef.new(shape: __string, location_name: "targetInstanceType"))
+    TopicReassignmentInfo.add_member(:topic_reassignment_operation_arn, Shapes::ShapeRef.new(shape: __stringMax2048, location_name: "topicReassignmentOperationArn"))
+    TopicReassignmentInfo.add_member(:total_topics, Shapes::ShapeRef.new(shape: __integer, location_name: "totalTopics"))
+    TopicReassignmentInfo.struct_class = Types::TopicReassignmentInfo
 
     TopicReplication.add_member(:copy_access_control_lists_for_topics, Shapes::ShapeRef.new(shape: __boolean, location_name: "copyAccessControlListsForTopics"))
     TopicReplication.add_member(:copy_topic_configurations, Shapes::ShapeRef.new(shape: __boolean, location_name: "copyTopicConfigurations"))
@@ -1558,6 +1754,7 @@ module Aws::Kafka
     UpdateBrokerTypeRequest.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "clusterArn"))
     UpdateBrokerTypeRequest.add_member(:current_version, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "currentVersion"))
     UpdateBrokerTypeRequest.add_member(:target_instance_type, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "targetInstanceType"))
+    UpdateBrokerTypeRequest.add_member(:topic_reassignment, Shapes::ShapeRef.new(shape: TopicReassignment, location_name: "topicReassignment"))
     UpdateBrokerTypeRequest.struct_class = Types::UpdateBrokerTypeRequest
 
     UpdateBrokerTypeResponse.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: __string, location_name: "clusterArn"))
@@ -1737,6 +1934,10 @@ module Aws::Kafka
     ZookeeperNodeInfo.add_member(:zookeeper_version, Shapes::ShapeRef.new(shape: __string, location_name: "zookeeperVersion"))
     ZookeeperNodeInfo.struct_class = Types::ZookeeperNodeInfo
 
+    __listOfAssessmentFinding.member = Shapes::ShapeRef.new(shape: AssessmentFinding)
+
+    __listOfAssessmentInfo.member = Shapes::ShapeRef.new(shape: AssessmentInfo)
+
     __listOfBrokerEBSVolumeInfo.member = Shapes::ShapeRef.new(shape: BrokerEBSVolumeInfo)
 
     __listOfChannelInfo.member = Shapes::ShapeRef.new(shape: ChannelInfo)
@@ -1787,6 +1988,8 @@ module Aws::Kafka
 
     __listOfTopicPartitionInfo.member = Shapes::ShapeRef.new(shape: TopicPartitionInfo)
 
+    __listOfTopicReassignmentInfo.member = Shapes::ShapeRef.new(shape: TopicReassignmentInfo)
+
     __listOfUnprocessedScramSecret.member = Shapes::ShapeRef.new(shape: UnprocessedScramSecret)
 
     __listOfVpcConfig.member = Shapes::ShapeRef.new(shape: VpcConfig)
@@ -1802,6 +2005,11 @@ module Aws::Kafka
     __listOf__stringMax249.member = Shapes::ShapeRef.new(shape: __stringMax249)
 
     __listOf__stringMax256.member = Shapes::ShapeRef.new(shape: __stringMax256)
+
+    __listOf__stringMin1Max256.member = Shapes::ShapeRef.new(shape: __stringMin1Max256)
+
+    __mapOf__integer.key = Shapes::ShapeRef.new(shape: __string)
+    __mapOf__integer.value = Shapes::ShapeRef.new(shape: __integer)
 
     __mapOf__string.key = Shapes::ShapeRef.new(shape: __string)
     __mapOf__string.value = Shapes::ShapeRef.new(shape: __string)
@@ -1839,6 +2047,22 @@ module Aws::Kafka
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
+
+      api.add_operation(:create_assessment, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateAssessment"
+        o.http_method = "POST"
+        o.http_request_uri = "/v1/clusters/{clusterArn}/assessments"
+        o.input = Shapes::ShapeRef.new(shape: CreateAssessmentRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateAssessmentResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
       api.add_operation(:create_cluster, Seahorse::Model::Operation.new.tap do |o|
@@ -1957,6 +2181,22 @@ module Aws::Kafka
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
+      api.add_operation(:delete_assessment, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteAssessment"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/v1/clusters/{clusterArn}/assessments/{assessmentArn}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteAssessmentRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteAssessmentResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
       api.add_operation(:delete_cluster, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteCluster"
         o.http_method = "DELETE"
@@ -2041,6 +2281,21 @@ module Aws::Kafka
         o.errors << Shapes::ShapeRef.new(shape: ReassignmentInProgressException)
         o.errors << Shapes::ShapeRef.new(shape: GroupSubscribedToTopicException)
         o.errors << Shapes::ShapeRef.new(shape: KafkaRequestException)
+      end)
+
+      api.add_operation(:describe_assessment, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeAssessment"
+        o.http_method = "GET"
+        o.http_request_uri = "/v1/clusters/{clusterArn}/assessments/{assessmentArn}"
+        o.input = Shapes::ShapeRef.new(shape: DescribeAssessmentRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeAssessmentResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
       api.add_operation(:describe_cluster, Seahorse::Model::Operation.new.tap do |o|
@@ -2187,6 +2442,21 @@ module Aws::Kafka
         )
       end)
 
+      api.add_operation(:describe_topic_reassignment, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeTopicReassignment"
+        o.http_method = "GET"
+        o.http_request_uri = "/v1/clusters/{clusterArn}/topic-reassignments/{topicReassignmentOperationArn}"
+        o.input = Shapes::ShapeRef.new(shape: DescribeTopicReassignmentRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeTopicReassignmentResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
+
       api.add_operation(:describe_vpc_connection, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeVpcConnection"
         o.http_method = "GET"
@@ -2242,6 +2512,49 @@ module Aws::Kafka
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
+
+      api.add_operation(:list_assessment_findings, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListAssessmentFindings"
+        o.http_method = "GET"
+        o.http_request_uri = "/v1/clusters/{clusterArn}/assessments/{assessmentArn}/findings"
+        o.input = Shapes::ShapeRef.new(shape: ListAssessmentFindingsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListAssessmentFindingsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_assessments, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListAssessments"
+        o.http_method = "GET"
+        o.http_request_uri = "/v1/clusters/{clusterArn}/assessments"
+        o.input = Shapes::ShapeRef.new(shape: ListAssessmentsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListAssessmentsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_channels, Seahorse::Model::Operation.new.tap do |o|
@@ -2481,6 +2794,27 @@ module Aws::Kafka
         )
       end)
 
+      api.add_operation(:list_topic_reassignments, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListTopicReassignments"
+        o.http_method = "GET"
+        o.http_request_uri = "/v1/clusters/{clusterArn}/topic-reassignments"
+        o.input = Shapes::ShapeRef.new(shape: ListTopicReassignmentsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListTopicReassignmentsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_vpc_connections, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListVpcConnections"
         o.http_method = "GET"
@@ -2580,6 +2914,37 @@ module Aws::Kafka
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
+
+      api.add_operation(:start_topic_reassignment, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartTopicReassignment"
+        o.http_method = "POST"
+        o.http_request_uri = "/v1/clusters/{clusterArn}/topic-reassignments"
+        o.input = Shapes::ShapeRef.new(shape: StartTopicReassignmentRequest)
+        o.output = Shapes::ShapeRef.new(shape: StartTopicReassignmentResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:stop_topic_reassignment, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StopTopicReassignment"
+        o.http_method = "POST"
+        o.http_request_uri = "/v1/clusters/{clusterArn}/topic-reassignments/{topicReassignmentOperationArn}/stop"
+        o.input = Shapes::ShapeRef.new(shape: StopTopicReassignmentRequest)
+        o.output = Shapes::ShapeRef.new(shape: StopTopicReassignmentResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)

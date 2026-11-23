@@ -144,6 +144,7 @@ module Aws
         completion_queue = Queue.new
         abort_upload = false
         errors = []
+        mutex = Mutex.new
         progress = MultipartProgress.new(pending, options[:progress_callback])
 
         while (part = pending.shift)
@@ -160,7 +161,7 @@ module Aws
             # Any error, or the upload completes without this part.
             rescue Exception => e # rubocop:disable Lint/RescueException
               abort_upload = true
-              errors << e
+              mutex.synchronize { errors << e }
             ensure
               p[:body].close
               Thread.current[:net_http_override_body_stream_chunk] = nil if @http_chunk_size
@@ -169,7 +170,7 @@ module Aws
             queued_parts += 1
           rescue StandardError => e
             # Rejected by the executor; abort rather than orphan the upload.
-            errors << e
+            mutex.synchronize { errors << e }
             break
           end
         end

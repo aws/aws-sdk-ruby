@@ -460,6 +460,7 @@ module Aws::IAM
     #   loginprofile = user.create_login_profile({
     #     password: "passwordType",
     #     password_reset_required: false,
+    #     max_signin_session_duration: 1,
     #   })
     # @param [Hash] options ({})
     # @option options [String] :password
@@ -485,6 +486,16 @@ module Aws::IAM
     # @option options [Boolean] :password_reset_required
     #   Specifies whether the user is required to set a new password on next
     #   sign-in.
+    # @option options [Integer] :max_signin_session_duration
+    #   The maximum duration (in seconds) of an Amazon Web Services Sign-In
+    #   session for this IAM user. This setting can have a value from 1 hour
+    #   (3600 seconds) to 90 days (7776000 seconds), inclusive. If you do not
+    #   specify a value, the setting remains unset and the existing sign-in
+    #   session behavior applies.
+    #
+    #   <note markdown="1"> This setting is not supported for the root user.
+    #
+    #    </note>
     # @return [LoginProfile]
     def create_login_profile(options = {})
       options = options.merge(user_name: @name)

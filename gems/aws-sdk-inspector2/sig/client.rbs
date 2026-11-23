@@ -236,17 +236,22 @@ module Aws
       interface _CreateCodeSecurityIntegrationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateCodeSecurityIntegrationResponse]
         def integration_arn: () -> ::String
-        def status: () -> ("PENDING" | "IN_PROGRESS" | "ACTIVE" | "INACTIVE" | "DISABLING")
+        def status: () -> ("PENDING" | "IN_PROGRESS" | "ACTIVE" | "INACTIVE" | "DISABLING" | "ESTABLISHING_CONNECTION_IN_PROGRESS" | "ESTABLISHING_CONNECTION_COMPLETED" | "ESTABLISHING_CONNECTION_FAILED" | "PENDING_MANIFEST_CODE" | "DELETE_IN_PROGRESS" | "DELETE_FAILED")
         def authorization_url: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Inspector2/Client.html#create_code_security_integration-instance_method
       def create_code_security_integration: (
                                               name: ::String,
-                                              type: ("GITLAB_SELF_MANAGED" | "GITHUB"),
+                                              type: ("GITLAB_SELF_MANAGED" | "GITHUB" | "GITHUB_ENTERPRISE_SERVER"),
                                               ?details: {
                                                 gitlab_self_managed: {
                                                   instance_url: ::String,
-                                                  access_token: ::String
+                                                  access_token: ::String,
+                                                  vpc_configuration: Params::code_security_integration_vpc_configuration?
+                                                }?,
+                                                github_enterprise: {
+                                                  instance_url: ::String,
+                                                  vpc_configuration: Params::code_security_integration_vpc_configuration?
                                                 }?
                                               },
                                               ?tags: Hash[::String, ::String]
@@ -277,13 +282,19 @@ module Aws
       def create_connector: (
                               ?client_token: ::String,
                               name: ::String,
-                              provider: ("AZURE"),
+                              provider: ("AZURE" | "GCP"),
                               ?description: ::String,
                               provider_detail: {
                                 azure: {
                                   aws_config_connector_arn: ::String,
                                   scope_configuration: Params::azure_scope_configuration_input,
                                   azure_regions: Array[::String],
+                                  auto_install_vm_scanner: bool?
+                                }?,
+                                gcp: {
+                                  aws_config_connector_arn: ::String,
+                                  scope_configuration: Params::gcp_scope_configuration_input,
+                                  gcp_regions: Array[::String],
                                   auto_install_vm_scanner: bool?
                                 }?
                               },
@@ -655,12 +666,14 @@ module Aws
         include ::Seahorse::Client::_ResponseSuccess[Types::GetCodeSecurityIntegrationResponse]
         def integration_arn: () -> ::String
         def name: () -> ::String
-        def type: () -> ("GITLAB_SELF_MANAGED" | "GITHUB")
-        def status: () -> ("PENDING" | "IN_PROGRESS" | "ACTIVE" | "INACTIVE" | "DISABLING")
+        def type: () -> ("GITLAB_SELF_MANAGED" | "GITHUB" | "GITHUB_ENTERPRISE_SERVER")
+        def status: () -> ("PENDING" | "IN_PROGRESS" | "ACTIVE" | "INACTIVE" | "DISABLING" | "ESTABLISHING_CONNECTION_IN_PROGRESS" | "ESTABLISHING_CONNECTION_COMPLETED" | "ESTABLISHING_CONNECTION_FAILED" | "PENDING_MANIFEST_CODE" | "DELETE_IN_PROGRESS" | "DELETE_FAILED")
         def status_reason: () -> ::String
         def created_on: () -> ::Time
         def last_update_on: () -> ::Time
         def authorization_url: () -> ::String
+        def vpc_configuration: () -> Types::CodeSecurityIntegrationVpcConfiguration
+        def instance_url: () -> ::String
         def tags: () -> ::Hash[::String, ::String]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Inspector2/Client.html#get_code_security_integration-instance_method
@@ -747,7 +760,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Inspector2/Client.html#get_encryption_key-instance_method
       def get_encryption_key: (
                                 scan_type: ("NETWORK" | "PACKAGE" | "CODE"),
-                                resource_type: ("AWS_EC2_INSTANCE" | "AWS_ECR_CONTAINER_IMAGE" | "AWS_ECR_REPOSITORY" | "AWS_LAMBDA_FUNCTION" | "CODE_REPOSITORY" | "Microsoft.Compute/virtualMachines" | "Microsoft.ContainerRegistry/registry/containerImage" | "Microsoft.Web/sites" | "MACHINE_IMAGE")
+                                resource_type: ("AWS_EC2_INSTANCE" | "AWS_ECR_CONTAINER_IMAGE" | "AWS_ECR_REPOSITORY" | "AWS_LAMBDA_FUNCTION" | "CODE_REPOSITORY" | "Microsoft.Compute/virtualMachines" | "Microsoft.ContainerRegistry/registry/containerImage" | "Microsoft.Web/sites" | "MACHINE_IMAGE" | "cloudfunctions.googleapis.com/Function" | "compute.googleapis.com/Instance" | "artifactregistry.googleapis.com/DockerImage")
                               ) -> _GetEncryptionKeyResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetEncryptionKeyResponseSuccess
 
@@ -1148,7 +1161,7 @@ module Aws
                                provider: Array[
                                  {
                                    comparison: ("EQUALS"),
-                                   value: ("AZURE")
+                                   value: ("AZURE" | "GCP")
                                  }
                                ]?
                              }
@@ -1228,7 +1241,7 @@ module Aws
                                        ?aggregation_request: {
                                          account_aggregation: {
                                            finding_type: ("NETWORK_REACHABILITY" | "PACKAGE_VULNERABILITY" | "CODE_VULNERABILITY")?,
-                                           resource_type: ("AWS_EC2_INSTANCE" | "AWS_ECR_CONTAINER_IMAGE" | "AWS_LAMBDA_FUNCTION" | "CODE_REPOSITORY" | "Microsoft.Compute/virtualMachines" | "Microsoft.ContainerRegistry/registry/containerImage" | "Microsoft.Web/sites")?,
+                                           resource_type: ("AWS_EC2_INSTANCE" | "AWS_ECR_CONTAINER_IMAGE" | "AWS_LAMBDA_FUNCTION" | "CODE_REPOSITORY" | "Microsoft.Compute/virtualMachines" | "Microsoft.ContainerRegistry/registry/containerImage" | "Microsoft.Web/sites" | "cloudfunctions.googleapis.com/Function" | "compute.googleapis.com/Instance" | "artifactregistry.googleapis.com/DockerImage")?,
                                            sort_order: ("ASC" | "DESC")?,
                                            sort_by: ("CRITICAL" | "HIGH" | "ALL")?
                                          }?,
@@ -1320,7 +1333,7 @@ module Aws
                                          }?,
                                          finding_type_aggregation: {
                                            finding_type: ("NETWORK_REACHABILITY" | "PACKAGE_VULNERABILITY" | "CODE_VULNERABILITY")?,
-                                           resource_type: ("AWS_EC2_INSTANCE" | "AWS_ECR_CONTAINER_IMAGE" | "AWS_LAMBDA_FUNCTION" | "CODE_REPOSITORY" | "Microsoft.Compute/virtualMachines" | "Microsoft.ContainerRegistry/registry/containerImage" | "Microsoft.Web/sites")?,
+                                           resource_type: ("AWS_EC2_INSTANCE" | "AWS_ECR_CONTAINER_IMAGE" | "AWS_LAMBDA_FUNCTION" | "CODE_REPOSITORY" | "Microsoft.Compute/virtualMachines" | "Microsoft.ContainerRegistry/registry/containerImage" | "Microsoft.Web/sites" | "cloudfunctions.googleapis.com/Function" | "compute.googleapis.com/Instance" | "artifactregistry.googleapis.com/DockerImage")?,
                                            sort_order: ("ASC" | "DESC")?,
                                            sort_by: ("CRITICAL" | "HIGH" | "ALL")?
                                          }?,
@@ -1409,7 +1422,7 @@ module Aws
                                                value: ::String
                                              }
                                            ]?,
-                                           resource_type: ("AWS_EC2_INSTANCE" | "AWS_ECR_CONTAINER_IMAGE" | "AWS_LAMBDA_FUNCTION" | "CODE_REPOSITORY" | "Microsoft.Compute/virtualMachines" | "Microsoft.ContainerRegistry/registry/containerImage" | "Microsoft.Web/sites")?,
+                                           resource_type: ("AWS_EC2_INSTANCE" | "AWS_ECR_CONTAINER_IMAGE" | "AWS_LAMBDA_FUNCTION" | "CODE_REPOSITORY" | "Microsoft.Compute/virtualMachines" | "Microsoft.ContainerRegistry/registry/containerImage" | "Microsoft.Web/sites" | "cloudfunctions.googleapis.com/Function" | "compute.googleapis.com/Instance" | "artifactregistry.googleapis.com/DockerImage")?,
                                            finding_type: ("NETWORK_REACHABILITY" | "PACKAGE_VULNERABILITY" | "CODE_VULNERABILITY")?,
                                            sort_order: ("ASC" | "DESC")?,
                                            sort_by: ("CRITICAL" | "HIGH" | "ALL")?
@@ -1764,7 +1777,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Inspector2/Client.html#reset_encryption_key-instance_method
       def reset_encryption_key: (
                                   scan_type: ("NETWORK" | "PACKAGE" | "CODE"),
-                                  resource_type: ("AWS_EC2_INSTANCE" | "AWS_ECR_CONTAINER_IMAGE" | "AWS_ECR_REPOSITORY" | "AWS_LAMBDA_FUNCTION" | "CODE_REPOSITORY" | "Microsoft.Compute/virtualMachines" | "Microsoft.ContainerRegistry/registry/containerImage" | "Microsoft.Web/sites" | "MACHINE_IMAGE")
+                                  resource_type: ("AWS_EC2_INSTANCE" | "AWS_ECR_CONTAINER_IMAGE" | "AWS_ECR_REPOSITORY" | "AWS_LAMBDA_FUNCTION" | "CODE_REPOSITORY" | "Microsoft.Compute/virtualMachines" | "Microsoft.ContainerRegistry/registry/containerImage" | "Microsoft.Web/sites" | "MACHINE_IMAGE" | "cloudfunctions.googleapis.com/Function" | "compute.googleapis.com/Instance" | "artifactregistry.googleapis.com/DockerImage")
                                 ) -> _ResetEncryptionKeyResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ResetEncryptionKeyResponseSuccess
 
@@ -1918,18 +1931,30 @@ module Aws
       interface _UpdateCodeSecurityIntegrationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateCodeSecurityIntegrationResponse]
         def integration_arn: () -> ::String
-        def status: () -> ("PENDING" | "IN_PROGRESS" | "ACTIVE" | "INACTIVE" | "DISABLING")
+        def status: () -> ("PENDING" | "IN_PROGRESS" | "ACTIVE" | "INACTIVE" | "DISABLING" | "ESTABLISHING_CONNECTION_IN_PROGRESS" | "ESTABLISHING_CONNECTION_COMPLETED" | "ESTABLISHING_CONNECTION_FAILED" | "PENDING_MANIFEST_CODE" | "DELETE_IN_PROGRESS" | "DELETE_FAILED")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Inspector2/Client.html#update_code_security_integration-instance_method
       def update_code_security_integration: (
                                               integration_arn: ::String,
                                               details: {
                                                 gitlab_self_managed: {
-                                                  auth_code: ::String
+                                                  auth_code: ::String,
+                                                  state_token: ::String?
                                                 }?,
                                                 github: {
                                                   code: ::String,
-                                                  installation_id: ::String
+                                                  installation_id: ::String,
+                                                  state_token: ::String?
+                                                }?,
+                                                github_enterprise_server: {
+                                                  app_installation: {
+                                                    code: ::String,
+                                                    installation_id: ::String,
+                                                    state_token: ::String?
+                                                  }?,
+                                                  app_registration: {
+                                                    manifest_code: ::String
+                                                  }?
                                                 }?
                                               }
                                             ) -> _UpdateCodeSecurityIntegrationResponseSuccess
@@ -1997,6 +2022,11 @@ module Aws
                                   azure_regions: Array[::String]?,
                                   scope_configuration: Params::azure_scope_configuration_input?,
                                   auto_install_vm_scanner: bool?
+                                }?,
+                                gcp: {
+                                  gcp_regions: Array[::String]?,
+                                  scope_configuration: Params::gcp_scope_configuration_input?,
+                                  auto_install_vm_scanner: bool?
                                 }?
                               }
                             ) -> _UpdateConnectorResponseSuccess
@@ -2038,7 +2068,7 @@ module Aws
       def update_encryption_key: (
                                    kms_key_id: ::String,
                                    scan_type: ("NETWORK" | "PACKAGE" | "CODE"),
-                                   resource_type: ("AWS_EC2_INSTANCE" | "AWS_ECR_CONTAINER_IMAGE" | "AWS_ECR_REPOSITORY" | "AWS_LAMBDA_FUNCTION" | "CODE_REPOSITORY" | "Microsoft.Compute/virtualMachines" | "Microsoft.ContainerRegistry/registry/containerImage" | "Microsoft.Web/sites" | "MACHINE_IMAGE")
+                                   resource_type: ("AWS_EC2_INSTANCE" | "AWS_ECR_CONTAINER_IMAGE" | "AWS_ECR_REPOSITORY" | "AWS_LAMBDA_FUNCTION" | "CODE_REPOSITORY" | "Microsoft.Compute/virtualMachines" | "Microsoft.ContainerRegistry/registry/containerImage" | "Microsoft.Web/sites" | "MACHINE_IMAGE" | "cloudfunctions.googleapis.com/Function" | "compute.googleapis.com/Instance" | "artifactregistry.googleapis.com/DockerImage")
                                  ) -> _UpdateEncryptionKeyResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateEncryptionKeyResponseSuccess
 
@@ -2115,7 +2145,7 @@ module Aws
                       provider: Array[
                         {
                           comparison: ("EQUALS"),
-                          value: ("AZURE")
+                          value: ("AZURE" | "GCP")
                         }
                       ]?
                     }
@@ -2152,7 +2182,7 @@ module Aws
                       provider: Array[
                         {
                           comparison: ("EQUALS"),
-                          value: ("AZURE")
+                          value: ("AZURE" | "GCP")
                         }
                       ]?
                     }
@@ -2189,7 +2219,7 @@ module Aws
                       provider: Array[
                         {
                           comparison: ("EQUALS"),
-                          value: ("AZURE")
+                          value: ("AZURE" | "GCP")
                         }
                       ]?
                     }

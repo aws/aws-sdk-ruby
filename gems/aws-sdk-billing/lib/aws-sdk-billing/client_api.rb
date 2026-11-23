@@ -87,6 +87,8 @@ module Aws::Billing
     CancellationReason = Shapes::StringShape.new(name: 'CancellationReason')
     ChargeAccount = Shapes::StructureShape.new(name: 'ChargeAccount')
     ChargeAccountList = Shapes::ListShape.new(name: 'ChargeAccountList')
+    ChildCredit = Shapes::StructureShape.new(name: 'ChildCredit')
+    ChildCredits = Shapes::ListShape.new(name: 'ChildCredits')
     ClientToken = Shapes::StringShape.new(name: 'ClientToken')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     ContractAccount = Shapes::StructureShape.new(name: 'ContractAccount')
@@ -113,6 +115,7 @@ module Aws::Billing
     CreditStatus = Shapes::StringShape.new(name: 'CreditStatus')
     CurrencyAmount = Shapes::StringShape.new(name: 'CurrencyAmount')
     CurrencyCode = Shapes::StringShape.new(name: 'CurrencyCode')
+    DecimalAmountString = Shapes::StringShape.new(name: 'DecimalAmountString')
     DeleteBillingViewRequest = Shapes::StructureShape.new(name: 'DeleteBillingViewRequest')
     DeleteBillingViewResponse = Shapes::StructureShape.new(name: 'DeleteBillingViewResponse')
     Dimension = Shapes::StringShape.new(name: 'Dimension')
@@ -246,6 +249,11 @@ module Aws::Billing
     ServiceLevelAccountUsageList = Shapes::ListShape.new(name: 'ServiceLevelAccountUsageList')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
     ShareableAccountIds = Shapes::ListShape.new(name: 'ShareableAccountIds')
+    SplitCreditRequest = Shapes::StructureShape.new(name: 'SplitCreditRequest')
+    SplitCreditResponse = Shapes::StructureShape.new(name: 'SplitCreditResponse')
+    SplitPortion = Shapes::StructureShape.new(name: 'SplitPortion')
+    SplitPortionDescriptionString = Shapes::StringShape.new(name: 'SplitPortionDescriptionString')
+    SplitPortions = Shapes::ListShape.new(name: 'SplitPortions')
     String = Shapes::StringShape.new(name: 'String')
     StringSearch = Shapes::StructureShape.new(name: 'StringSearch')
     StringSearches = Shapes::ListShape.new(name: 'StringSearches')
@@ -257,6 +265,8 @@ module Aws::Billing
     TimePeriodList = Shapes::ListShape.new(name: 'TimePeriodList')
     TimeRange = Shapes::StructureShape.new(name: 'TimeRange')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
+    TransferCreditRequest = Shapes::StructureShape.new(name: 'TransferCreditRequest')
+    TransferCreditResponse = Shapes::StructureShape.new(name: 'TransferCreditResponse')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
     UpdateBillingPreferencesRequest = Shapes::StructureShape.new(name: 'UpdateBillingPreferencesRequest')
@@ -467,6 +477,12 @@ module Aws::Billing
     ChargeAccount.struct_class = Types::ChargeAccount
 
     ChargeAccountList.member = Shapes::ShapeRef.new(shape: ChargeAccount)
+
+    ChildCredit.add_member(:credit_id, Shapes::ShapeRef.new(shape: CreditId, location_name: "creditId"))
+    ChildCredit.add_member(:amount, Shapes::ShapeRef.new(shape: DecimalAmountString, required: true, location_name: "amount"))
+    ChildCredit.struct_class = Types::ChildCredit
+
+    ChildCredits.member = Shapes::ShapeRef.new(shape: ChildCredit)
 
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, required: true, location_name: "message"))
     ConflictException.add_member(:resource_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "resourceId"))
@@ -969,6 +985,23 @@ module Aws::Billing
 
     ShareableAccountIds.member = Shapes::ShapeRef.new(shape: AccountId)
 
+    SplitCreditRequest.add_member(:credit_id, Shapes::ShapeRef.new(shape: CreditId, required: true, location_name: "creditId"))
+    SplitCreditRequest.add_member(:portions, Shapes::ShapeRef.new(shape: SplitPortions, required: true, location_name: "portions"))
+    SplitCreditRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
+    SplitCreditRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
+    SplitCreditRequest.struct_class = Types::SplitCreditRequest
+
+    SplitCreditResponse.add_member(:parent_credit_id, Shapes::ShapeRef.new(shape: CreditId, required: true, location_name: "parentCreditId"))
+    SplitCreditResponse.add_member(:child_credits, Shapes::ShapeRef.new(shape: ChildCredits, required: true, location_name: "childCredits"))
+    SplitCreditResponse.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "dryRun"))
+    SplitCreditResponse.struct_class = Types::SplitCreditResponse
+
+    SplitPortion.add_member(:amount, Shapes::ShapeRef.new(shape: DecimalAmountString, required: true, location_name: "amount"))
+    SplitPortion.add_member(:description, Shapes::ShapeRef.new(shape: SplitPortionDescriptionString, location_name: "description"))
+    SplitPortion.struct_class = Types::SplitPortion
+
+    SplitPortions.member = Shapes::ShapeRef.new(shape: SplitPortion)
+
     StringSearch.add_member(:search_option, Shapes::ShapeRef.new(shape: SearchOption, required: true, location_name: "searchOption"))
     StringSearch.add_member(:search_value, Shapes::ShapeRef.new(shape: SearchValue, required: true, location_name: "searchValue"))
     StringSearch.struct_class = Types::StringSearch
@@ -993,6 +1026,19 @@ module Aws::Billing
     TimeRange.add_member(:begin_date_inclusive, Shapes::ShapeRef.new(shape: Timestamp, location_name: "beginDateInclusive"))
     TimeRange.add_member(:end_date_inclusive, Shapes::ShapeRef.new(shape: Timestamp, location_name: "endDateInclusive"))
     TimeRange.struct_class = Types::TimeRange
+
+    TransferCreditRequest.add_member(:credit_id, Shapes::ShapeRef.new(shape: CreditId, required: true, location_name: "creditId"))
+    TransferCreditRequest.add_member(:destination_account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "destinationAccountId"))
+    TransferCreditRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
+    TransferCreditRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
+    TransferCreditRequest.struct_class = Types::TransferCreditRequest
+
+    TransferCreditResponse.add_member(:source_credit_id, Shapes::ShapeRef.new(shape: CreditId, required: true, location_name: "sourceCreditId"))
+    TransferCreditResponse.add_member(:new_credit_id, Shapes::ShapeRef.new(shape: CreditId, location_name: "newCreditId"))
+    TransferCreditResponse.add_member(:destination_account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "destinationAccountId"))
+    TransferCreditResponse.add_member(:amount, Shapes::ShapeRef.new(shape: DecimalAmountString, required: true, location_name: "amount"))
+    TransferCreditResponse.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "dryRun"))
+    TransferCreditResponse.struct_class = Types::TransferCreditResponse
 
     UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "resourceArn"))
     UntagResourceRequest.add_member(:resource_tag_keys, Shapes::ShapeRef.new(shape: ResourceTagKeyList, required: true, location_name: "resourceTagKeys"))
@@ -1486,6 +1532,21 @@ module Aws::Billing
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
+      api.add_operation(:split_credit, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "SplitCredit"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: SplitCreditRequest)
+        o.output = Shapes::ShapeRef.new(shape: SplitCreditResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
       api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
         o.name = "TagResource"
         o.http_method = "POST"
@@ -1495,6 +1556,21 @@ module Aws::Billing
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:transfer_credit, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "TransferCredit"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: TransferCreditRequest)
+        o.output = Shapes::ShapeRef.new(shape: TransferCreditResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)

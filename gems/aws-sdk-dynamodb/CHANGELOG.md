@@ -1,6 +1,43 @@
 Unreleased Changes
 ------------------
 
+1.187.0 (2026-11-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.186.0 (2026-11-16)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.185.0 (2026-11-11)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.184.0 (2026-11-10)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+* Feature - DynamoDB clients default to 4 max attempts with a 25ms backoff scalar in `standard` and `adaptive` retry modes.
+
+1.183.0 (2026-11-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.182.0 (2026-11-06)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.181.0 (2026-11-04)
+------------------
+
+* Feature - Adds StartBulkPutItems, DescribeBulkOperation, ListBulkOperations, and CancelBulkOperation for asynchronously loading Amazon S3 datasets into existing DynamoDB tables.
+
 1.180.0 (2026-10-29)
 ------------------
 

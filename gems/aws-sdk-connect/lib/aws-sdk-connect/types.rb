@@ -130,8 +130,12 @@ module Aws::Connect
     # Configuration settings for after contact work (ACW) timeout.
     #
     # @!attribute [rw] after_contact_work_time_limit
-    #   The ACW timeout duration in seconds. Minimum: 1 second. Maximum:
-    #   2,000,000 seconds (24 days). Enter 0 for indefinite ACW time.
+    #   The after contact work (ACW) timeout duration in seconds. Minimum: 1
+    #   second. Maximum: 2,000,000 seconds (24 days). For the CHAT channel,
+    #   the maximum for a specific duration is 5,400 seconds (90 minutes);
+    #   higher values end ACW after 90 minutes. For all channels, including
+    #   chat, you can enter 0 for an indefinite amount of time, meaning
+    #   agents must manually choose to end ACW.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/AfterContactWorkConfig AWS API Documentation
@@ -3217,6 +3221,26 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # Information about a case associated with a contact.
+    #
+    # @!attribute [rw] case_id
+    #   Unique identifier of the case in UUID format.
+    #   @return [String]
+    #
+    # @!attribute [rw] case_reference_number
+    #   A friendly number for the case. Reference numbers are not guaranteed
+    #   to be unique.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CaseEntry AWS API Documentation
+    #
+    class CaseEntry < Struct.new(
+      :case_id,
+      :case_reference_number)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The SLA configuration for Case SlaAssignmentType.
     #
     # @!attribute [rw] name
@@ -3249,6 +3273,54 @@ module Aws::Connect
       :field_id,
       :target_field_values,
       :target_sla_minutes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A list of tag conditions that the filter evaluates together using AND
+    # logic. A category segment matches only when the tags on its rule
+    # satisfy every tag condition in the list.
+    #
+    # @!attribute [rw] tag_conditions
+    #   A list of tag conditions. All of the tag conditions must be met for
+    #   the condition to match.
+    #   @return [Array<Types::TagCondition>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CategoriesAttributeAndCondition AWS API Documentation
+    #
+    class CategoriesAttributeAndCondition < Struct.new(
+      :tag_conditions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A filter that matches category segments based on the tags assigned to
+    # the rules that create the categories. Provide exactly one of
+    # `OrConditions`, `AndCondition`, or `TagCondition`.
+    #
+    # @!attribute [rw] or_conditions
+    #   A list of conditions that the filter evaluates using OR logic. A
+    #   category segment matches when at least one of the conditions in the
+    #   list is met.
+    #   @return [Array<Types::CategoriesAttributeAndCondition>]
+    #
+    # @!attribute [rw] and_condition
+    #   A condition that the filter evaluates using AND logic. A category
+    #   segment matches only when all of the tag conditions in the condition
+    #   are met.
+    #   @return [Types::CategoriesAttributeAndCondition]
+    #
+    # @!attribute [rw] tag_condition
+    #   A single tag condition that a category segment must match. The
+    #   category's rule must have the specified tag key and value.
+    #   @return [Types::TagCondition]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CategoriesAttributeFilter AWS API Documentation
+    #
+    class CategoriesAttributeFilter < Struct.new(
+      :or_conditions,
+      :and_condition,
+      :tag_condition)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4044,6 +4116,11 @@ module Aws::Connect
     #   information about the task template.
     #   @return [Types::TaskTemplateInfoV2]
     #
+    # @!attribute [rw] cases
+    #   A list of cases associated with the contact. This field is populated
+    #   when one or more cases have been linked to the contact.
+    #   @return [Array<Types::CaseEntry>]
+    #
     # @!attribute [rw] contact_details
     #   A map of string key/value pairs that contain user-defined attributes
     #   which are lightly typed within the contact. This object is used only
@@ -4066,6 +4143,17 @@ module Aws::Connect
     #   Information about the global resiliency configuration for the
     #   contact, including traffic distribution details.
     #   @return [Types::GlobalResiliencyMetadata]
+    #
+    # @!attribute [rw] contact_lens
+    #   Information about the conversational analytics configuration applied
+    #   to the contact. This field is present only for contacts where
+    #   conversational analytics is enabled in the contact flow.
+    #   @return [Types::ContactLens]
+    #
+    # @!attribute [rw] voicemail_info
+    #   If one or more voicemails were recorded for the contact, this
+    #   contains information about the voicemails.
+    #   @return [Types::VoicemailInfo]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/Contact AWS API Documentation
     #
@@ -4113,11 +4201,14 @@ module Aws::Connect
       :disconnect_reason,
       :contact_evaluations,
       :task_template_info,
+      :cases,
       :contact_details,
       :outbound_strategy,
       :attributes,
       :next_contacts,
-      :global_resiliency_metadata)
+      :global_resiliency_metadata,
+      :contact_lens,
+      :voicemail_info)
       SENSITIVE = [:name, :description]
       include Aws::Structure
     end
@@ -4175,6 +4266,37 @@ module Aws::Connect
       :arn,
       :analytics_mode,
       :is_redacted)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The current processing state of conversational analytics for a
+    # contact, including the analysis status and, when applicable, the
+    # reason for that status.
+    #
+    # @!attribute [rw] status
+    #   The status of conversational analytics processing for the contact.
+    #   Valid values:
+    #
+    #   * `REQUESTED` – Analysis has been requested for the contact and has
+    #     not finished.
+    #
+    #   * `COMPLETED` – Analysis finished successfully.
+    #
+    #   * `FAILED` – Analysis did not finish successfully. See
+    #     `StatusReason` for the cause.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_reason
+    #   The reason for the current analysis status. This value is populated
+    #   only when the status is `FAILED`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ContactAnalysisReferenceState AWS API Documentation
+    #
+    class ContactAnalysisReferenceState < Struct.new(
+      :status,
+      :status_reason)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5142,6 +5264,136 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # Information about the conversational analytics configuration applied
+    # to the contact. This field is present only for contacts where
+    # conversational analytics is enabled in the contact flow.
+    #
+    # @!attribute [rw] conversational_analytics
+    #   The conversational analytics configuration applied to the contact.
+    #   @return [Types::ConversationalAnalytics]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ContactLens AWS API Documentation
+    #
+    class ContactLens < Struct.new(
+      :conversational_analytics)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The per-channel conversational analytics configuration for a contact.
+    #
+    # @!attribute [rw] analytics_modes
+    #   The conversational analytics modes enabled for the channel. Valid
+    #   values:
+    #
+    #   * `RealTime` – Real-time analysis is enabled during the contact.
+    #     Voice channel only.
+    #
+    #   * `PostContact` – Post-contact analysis is enabled after the contact
+    #     ends. Voice channel only.
+    #
+    #   * `ContactLens` – Conversational analytics is enabled for the
+    #     contact. Chat channel only.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ContactLensChannelConfiguration AWS API Documentation
+    #
+    class ContactLensChannelConfiguration < Struct.new(
+      :analytics_modes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The redaction configuration for conversational analytics transcripts.
+    #
+    # @!attribute [rw] behavior
+    #   Specifies whether redaction is enabled for sensitive data, such as
+    #   personal information, in the conversational analytics output. Valid
+    #   values:
+    #
+    #   * `Enable` – Redaction is applied according to the other values in
+    #     this object.
+    #
+    #   * `Disable` – Redaction is not applied, and all other values in this
+    #     object are ignored.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy
+    #   The redaction policy that determines which versions of the
+    #   transcript are stored. Valid values:
+    #
+    #   * `None` – No redaction is applied.
+    #
+    #   * `RedactedOnly` – Only the redacted transcript is stored.
+    #
+    #   * `RedactedAndOriginal` – Both the redacted and the original
+    #     transcript are stored.
+    #   @return [String]
+    #
+    # @!attribute [rw] entities
+    #   The entity types to redact from the transcript (for example, `NAME`,
+    #   `EMAIL`, `ADDRESS`).
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] mask_mode
+    #   How sensitive information is masked in the transcript. Valid values:
+    #
+    #   * `PII` – All redacted entities are replaced with the `[PII]`
+    #     string.
+    #
+    #   * `EntityType` – All redacted entities are replaced with the label
+    #     of the entity. For example, when the `EMAIL` entity is configured
+    #     for redaction, emails in the transcript are replaced with the
+    #     `[EMAIL]` string.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ContactLensRedactionConfiguration AWS API Documentation
+    #
+    class ContactLensRedactionConfiguration < Struct.new(
+      :behavior,
+      :policy,
+      :entities,
+      :mask_mode)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The conversational analytics sentiment analysis configuration for a
+    # contact.
+    #
+    # @!attribute [rw] behavior
+    #   Specifies whether sentiment analysis is enabled for the contact. The
+    #   default value is `Disable`. Valid values:
+    #
+    #   * `Enable` – Sentiment analysis is performed on the contact.
+    #
+    #   * `Disable` – Sentiment analysis is not performed on the contact.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ContactLensSentimentConfiguration AWS API Documentation
+    #
+    class ContactLensSentimentConfiguration < Struct.new(
+      :behavior)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The conversational analytics summary configuration for a contact.
+    #
+    # @!attribute [rw] summary_modes
+    #   The conversational analytics summary modes enabled for the contact.
+    #   Valid values: `PostContact` \| `AutomatedInteraction` \|
+    #   `ContactChain`.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ContactLensSummaryConfiguration AWS API Documentation
+    #
+    class ContactLensSummaryConfiguration < Struct.new(
+      :summary_modes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains the details of a metric to be retrieved for a contact. Use
     # this object to specify which contact level metrics you want to include
     # in your GetContactMetrics request.
@@ -5565,6 +5817,74 @@ module Aws::Connect
       :and_condition,
       :tag_condition,
       :hierarchy_group_condition)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the conversational analytics configuration and state for a
+    # contact.
+    #
+    # @!attribute [rw] configuration
+    #   The conversational analytics settings that apply to the contact.
+    #   @return [Types::ConversationalAnalyticsConfiguration]
+    #
+    # @!attribute [rw] contact_analysis_reference_state
+    #   The current state of conversational analytics processing for the
+    #   contact.
+    #   @return [Types::ContactAnalysisReferenceState]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ConversationalAnalytics AWS API Documentation
+    #
+    class ConversationalAnalytics < Struct.new(
+      :configuration,
+      :contact_analysis_reference_state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The conversational analytics configuration settings for a contact.
+    #
+    # @!attribute [rw] enabled
+    #   Specifies whether conversational analytics is enabled for the
+    #   contact.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] language_locale
+    #   The language locale that conversational analytics uses to analyze
+    #   the contact (for example, `en-US`).
+    #   @return [String]
+    #
+    # @!attribute [rw] language_locales
+    #   The language locales that conversational analytics uses to analyze
+    #   the contact (for example, `en-US` and `es-ES`).
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] channel_configuration
+    #   The per-channel conversational analytics settings for the contact.
+    #   @return [Types::ContactLensChannelConfiguration]
+    #
+    # @!attribute [rw] redaction_configuration
+    #   The redaction configuration for the contact transcript.
+    #   @return [Types::ContactLensRedactionConfiguration]
+    #
+    # @!attribute [rw] summary_configuration
+    #   The summary configuration for the contact.
+    #   @return [Types::ContactLensSummaryConfiguration]
+    #
+    # @!attribute [rw] sentiment_configuration
+    #   The sentiment analysis configuration for the contact.
+    #   @return [Types::ContactLensSentimentConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ConversationalAnalyticsConfiguration AWS API Documentation
+    #
+    class ConversationalAnalyticsConfiguration < Struct.new(
+      :enabled,
+      :language_locale,
+      :language_locales,
+      :channel_configuration,
+      :redaction_configuration,
+      :summary_configuration,
+      :sentiment_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9819,6 +10139,43 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # @!attribute [rw] instance_id
+    #   The identifier of the Connect Customer instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #   @return [String]
+    #
+    # @!attribute [rw] entity_id
+    #   The identifier of the entity whose sessions you want to delete. For
+    #   `USER`, use the user ID or the user ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] entity_type
+    #   The type of entity whose sessions you want to delete.
+    #
+    #   <note markdown="1"> The only valid value is `USER`, which signs out a user in your
+    #   Connect Customer instance.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DeleteAllEntitySessionsRequest AWS API Documentation
+    #
+    class DeleteAllEntitySessionsRequest < Struct.new(
+      :instance_id,
+      :entity_id,
+      :entity_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DeleteAllEntitySessionsResponse AWS API Documentation
+    #
+    class DeleteAllEntitySessionsResponse < Aws::EmptyStructure; end
+
     # Request to DeleteAttachedFile API
     #
     # @!attribute [rw] instance_id
@@ -13383,6 +13740,14 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # End associated emails related to a case.
+    #
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/EndAssociatedEmailsActionDefinition AWS API Documentation
+    #
+    class EndAssociatedEmailsActionDefinition < Aws::EmptyStructure; end
+
     # End associated tasks related to a case.
     #
     # @api private
@@ -13566,6 +13931,39 @@ module Aws::Connect
     #   "key2":"value2"} }.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] item_enablement_status
+    #   A map of item (section or question) identifiers to their enablement
+    #   status, computed by the service from each item's conditional
+    #   enablement configuration. Disabled items are excluded from scoring.
+    #   Valid values: `ENABLED` \| `DISABLED`.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] source_resolution_status
+    #   The aggregate status of resolving the external source data (such as
+    #   Contact Lens analysis and AI metrics) that is used by conditional
+    #   enablement in the evaluation. Source data is resolved asynchronously
+    #   after the evaluation is started. While a source is pending or after
+    #   it fails to resolve, conditions that depend on it evaluate to the
+    #   item's `DefaultAction`. Valid values:
+    #
+    #   * `PENDING` - One or more sources have not been resolved yet. Call
+    #     `DescribeContactEvaluation` again to get updated
+    #     `ItemEnablementStatus` values.
+    #
+    #   * `RESOLVED` - All sources have been resolved.
+    #
+    #   * `FAILED` - One or more sources could not be resolved. Dependent
+    #     conditions use the item's `DefaultAction`.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_values
+    #   The resolved values of the external sources (such as contact data,
+    #   evaluation metadata, form metadata, and AI metrics) that are used by
+    #   the conditions in the evaluation form. You can use these values to
+    #   evaluate the conditions against the current answers without calling
+    #   `DescribeContactEvaluation` again.
+    #   @return [Array<Types::EvaluationResolvedSource>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/Evaluation AWS API Documentation
     #
     class Evaluation < Struct.new(
@@ -13579,7 +13977,10 @@ module Aws::Connect
       :created_time,
       :last_modified_time,
       :evaluation_type,
-      :tags)
+      :tags,
+      :item_enablement_status,
+      :source_resolution_status,
+      :source_values)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -14087,7 +14488,7 @@ module Aws::Connect
     #   @return [Array<Types::EvaluationFormItemEnablementConditionOperand>]
     #
     # @!attribute [rw] operator
-    #   The operator to be used to be applied to operands if more than one
+    #   The operator to apply to the operands when more than one operand is
     #   provided.
     #   @return [String]
     #
@@ -14136,11 +14537,13 @@ module Aws::Connect
     #   @return [Types::EvaluationFormItemEnablementCondition]
     #
     # @!attribute [rw] action
-    #   An enablement action that if condition is satisfied.
+    #   The enablement action to apply if the condition is satisfied.
     #   @return [String]
     #
     # @!attribute [rw] default_action
-    #   An enablement action that if condition is not satisfied.
+    #   The enablement action to apply if the condition is not satisfied.
+    #   This action is also applied when the condition depends on an
+    #   external source that is still pending or could not be resolved.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/EvaluationFormItemEnablementConfiguration AWS API Documentation
@@ -14165,7 +14568,11 @@ module Aws::Connect
     #   @return [Array<Types::EvaluationFormItemEnablementSourceValue>]
     #
     # @!attribute [rw] comparator
-    #   A comparator to be used against list of values.
+    #   A comparator to be used against a list of values. `IN`, `NOT_IN`,
+    #   `ALL_IN`, and `EXACT` compare sets of values. `GREATER_THAN`,
+    #   `LESS_THAN`, `GREATER_THAN_OR_EQUAL_TO`, and `LESS_THAN_OR_EQUAL_TO`
+    #   compare a single numeric or date and time value. `EQUAL_TO` and
+    #   `NOT_EQUAL_TO` compare a single value.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/EvaluationFormItemEnablementExpression AWS API Documentation
@@ -14181,37 +14588,108 @@ module Aws::Connect
     # An enablement expression source item.
     #
     # @!attribute [rw] type
-    #   A type of source item.
+    #   A type of source item. Valid values:
+    #
+    #   * `QUESTION_REF_ID` - The answer to another question in the
+    #     evaluation form.
+    #
+    #   * `CONTACT` - Data from the evaluated contact.
+    #
+    #   * `EVALUATION_METADATA` - Metadata of the evaluation, such as the
+    #     evaluation type.
+    #
+    #   * `AI_METRICS` - Metrics about AI agents, AI sessions, and AI tools
+    #     on the contact.
     #   @return [String]
     #
     # @!attribute [rw] ref_id
-    #   A referenceId of the source item.
+    #   A referenceId of the source item. Use when `Type` is
+    #   `QUESTION_REF_ID`.
+    #   @return [String]
+    #
+    # @!attribute [rw] contact_field
+    #   The contact field to use as the source, such as `CHANNEL`,
+    #   `QUEUE_ARN`, `OVERALL_CUSTOMER_SENTIMENT_SCORE`, or
+    #   `RECORDING_MEDIA_STREAM_TYPES`. Use when `Type` is `CONTACT`.
+    #   @return [String]
+    #
+    # @!attribute [rw] contact_attribute_key
+    #   The key of the contact attribute to use as the source. Use when
+    #   `Type` is `CONTACT`.
+    #   @return [String]
+    #
+    # @!attribute [rw] segment_attribute_key
+    #   The key of the contact segment attribute to use as the source. Use
+    #   when `Type` is `CONTACT`.
+    #   @return [String]
+    #
+    # @!attribute [rw] evaluation_metadata_field
+    #   The evaluation metadata field to use as the source. Use when `Type`
+    #   is `EVALUATION_METADATA`.
+    #   @return [String]
+    #
+    # @!attribute [rw] ai_metrics_field
+    #   The AI metrics field to use as the source. Use when `Type` is
+    #   `AI_METRICS`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/EvaluationFormItemEnablementSource AWS API Documentation
     #
     class EvaluationFormItemEnablementSource < Struct.new(
       :type,
-      :ref_id)
+      :ref_id,
+      :contact_field,
+      :contact_attribute_key,
+      :segment_attribute_key,
+      :evaluation_metadata_field,
+      :ai_metrics_field)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # An enablement expression source value.
+    # An enablement expression source value. Provide only the value member
+    # that matches the specified `Type`.
     #
     # @!attribute [rw] type
-    #   A type of source item value.
+    #   A type of source item value. Valid values: `OPTION_REF_ID` \|
+    #   `STRING_VALUE` \| `NUMERIC_VALUE` \| `BOOLEAN_VALUE` \|
+    #   `DATETIME_VALUE`.
     #   @return [String]
     #
     # @!attribute [rw] ref_id
-    #   A referenceId of the source value.
+    #   A referenceId of the source value. Use when `Type` is
+    #   `OPTION_REF_ID`.
     #   @return [String]
+    #
+    # @!attribute [rw] string_value
+    #   A string value to compare against the source. Use when `Type` is
+    #   `STRING_VALUE`.
+    #   @return [String]
+    #
+    # @!attribute [rw] numeric_value
+    #   A numeric value to compare against the source. Use when `Type` is
+    #   `NUMERIC_VALUE`.
+    #   @return [Float]
+    #
+    # @!attribute [rw] boolean_value
+    #   A Boolean value to compare against the source. Use when `Type` is
+    #   `BOOLEAN_VALUE`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] date_time_value
+    #   A date and time value to compare against the source. Use when `Type`
+    #   is `DATETIME_VALUE`.
+    #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/EvaluationFormItemEnablementSourceValue AWS API Documentation
     #
     class EvaluationFormItemEnablementSourceValue < Struct.new(
       :type,
-      :ref_id)
+      :ref_id,
+      :string_value,
+      :numeric_value,
+      :boolean_value,
+      :date_time_value)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -14272,7 +14750,7 @@ module Aws::Connect
     #   @return [Array<String>]
     #
     # @!attribute [rw] answer_source
-    #   A question automation answer.
+    #   Automation answer source.
     #   @return [Types::EvaluationFormQuestionAutomationAnswerSource]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/EvaluationFormMultiSelectQuestionAutomation AWS API Documentation
@@ -14538,7 +15016,15 @@ module Aws::Connect
     # A question automation answer.
     #
     # @!attribute [rw] source_type
-    #   The automation answer source type.
+    #   The automation answer source type. Valid values:
+    #
+    #   * `CONTACT_LENS_DATA` - The answer is based on Contact Lens data,
+    #     such as rule categories and metrics.
+    #
+    #   * `GEN_AI` - The answer is generated by generative AI.
+    #
+    #   * `CONDITION` - The answer is determined by evaluating the
+    #     conditions defined in the automation rules of the question.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/EvaluationFormQuestionAutomationAnswerSource AWS API Documentation
@@ -14868,6 +15354,11 @@ module Aws::Connect
     #   The score thresholds for performance categories.
     #   @return [Array<Types::EvaluationFormScoreThreshold>]
     #
+    # @!attribute [rw] enablement
+    #   The conditional enablement configuration of the section. Sections
+    #   use the same enablement model as questions.
+    #   @return [Types::EvaluationFormItemEnablementConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/EvaluationFormSection AWS API Documentation
     #
     class EvaluationFormSection < Struct.new(
@@ -14877,7 +15368,8 @@ module Aws::Connect
       :items,
       :weight,
       :is_excluded_from_scoring,
-      :score_thresholds)
+      :score_thresholds,
+      :enablement)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -14921,16 +15413,23 @@ module Aws::Connect
     #   question.
     #   @return [Types::SingleSelectQuestionRuleCategoryAutomation]
     #
+    # @!attribute [rw] automation_rule
+    #   The automation option based on a condition for the single select
+    #   question. Use with the `CONDITION` answer source type.
+    #   @return [Types::SingleSelectQuestionAutomationRule]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/EvaluationFormSingleSelectQuestionAutomationOption AWS API Documentation
     #
     class EvaluationFormSingleSelectQuestionAutomationOption < Struct.new(
       :rule_category,
+      :automation_rule,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
       include Aws::Structure::Union
 
       class RuleCategory < EvaluationFormSingleSelectQuestionAutomationOption; end
+      class AutomationRule < EvaluationFormSingleSelectQuestionAutomationOption; end
       class Unknown < EvaluationFormSingleSelectQuestionAutomationOption; end
     end
 
@@ -15368,6 +15867,41 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # The resolved value of an external source that is used by the
+    # conditions in an evaluation form.
+    #
+    # @!attribute [rw] source
+    #   The external source, such as contact data, evaluation metadata, form
+    #   metadata, or AI metrics.
+    #   @return [Types::EvaluationFormItemEnablementSource]
+    #
+    # @!attribute [rw] status
+    #   The status of resolving the source. Valid values:
+    #
+    #   * `PENDING` - The source has not been resolved yet.
+    #
+    #   * `RESOLVED` - The source has been resolved.
+    #
+    #   * `FAILED` - The source could not be resolved.
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   The resolved values of the source. Present when `Status` is
+    #   `RESOLVED`. Contains one value for a single-valued source, any
+    #   number of values for a multi-valued source, and no values when the
+    #   source is not present on the contact.
+    #   @return [Array<Types::EvaluationFormItemEnablementSourceValue>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/EvaluationResolvedSource AWS API Documentation
+    #
+    class EvaluationResolvedSource < Struct.new(
+      :source,
+      :status,
+      :values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Configuration settings for evaluation reviews.
     #
     # @!attribute [rw] review_notification_recipients
@@ -15794,7 +16328,8 @@ module Aws::Connect
     #   @return [Types::EvaluationQuestionInputDetails]
     #
     # @!attribute [rw] analysis_type
-    #   Type of analysis used to provide suggested answer.
+    #   Type of analysis used to provide suggested answer. Valid values:
+    #   `CONTACT_LENS_DATA` \| `GEN_AI` \| `CONDITION`.
     #   @return [String]
     #
     # @!attribute [rw] analysis_details
@@ -18252,6 +18787,16 @@ module Aws::Connect
     #
     #     UI name: [Average evaluation score][27]
     #
+    #   AVG\_EVALUATION\_SCORE\_BY\_SUBMIT\_TIME
+    #
+    #   : Unit: Percent
+    #
+    #     Valid groupings and filters: Agent, Agent Hierarchy, Channel,
+    #     Evaluation Form ID, Evaluation Source, Form Version, Queue,
+    #     Routing Profile
+    #
+    #     UI name: [Average evaluation score (Submit time)][28]
+    #
     #   AVG\_FIRST\_RESPONSE\_TIME\_AGENT
     #
     #   : Unit: Seconds
@@ -18261,7 +18806,7 @@ module Aws::Connect
     #     Feature, RoutingStepExpression, Initiation method, Routing
     #     Profile, Queue, Q in Connect
     #
-    #     UI name: [Average agent first response time][28]
+    #     UI name: [Average agent first response time][29]
     #
     #   AVG\_FLOW\_TIME
     #
@@ -18273,7 +18818,7 @@ module Aws::Connect
     #     Flows outcome type, Flows resource ID, Initiation method, Resource
     #     published timestamp
     #
-    #     UI name: [Average flow time][29]
+    #     UI name: [Average flow time][30]
     #
     #   AVG\_GREETING\_TIME\_AGENT
     #
@@ -18286,7 +18831,7 @@ module Aws::Connect
     #     Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype,
     #     Q in Connect
     #
-    #     UI name: [Average agent greeting time][30]
+    #     UI name: [Average agent greeting time][31]
     #
     #   AVG\_HANDLE\_TIME
     #
@@ -18296,7 +18841,7 @@ module Aws::Connect
     #     Agent, Agent Hierarchy, AI Use Case, Feature,
     #     contact/segmentAttributes/connect:Subtype, RoutingStepExpression
     #
-    #     UI name: [Average handle time][31]
+    #     UI name: [Average handle time][32]
     #
     #     <note markdown="1"> Feature is a valid filter but not a valid grouping.
     #
@@ -18310,7 +18855,7 @@ module Aws::Connect
     #     AI Agent Name Version, AI Agent Type, AI Use Case, Channel, Queue,
     #     Routing Profile, Session ID
     #
-    #     UI name: [Active AI Agents][32]
+    #     UI name: [Active AI Agents][33]
     #
     #   AI\_HANDOFF\_RATE
     #
@@ -18320,7 +18865,7 @@ module Aws::Connect
     #     Name Version, AI Agent Type, AI Use Case, Channel, Queue, Routing
     #     Profile, Session ID
     #
-    #     UI name: [AI Handoff Rate][33]
+    #     UI name: [AI Handoff Rate][34]
     #
     #   AI\_HANDOFFS
     #
@@ -18330,7 +18875,7 @@ module Aws::Connect
     #     Name Version, AI Agent Type, AI Use Case, Channel, Queue, Routing
     #     Profile, Session ID
     #
-    #     UI name: [AI Handoff Count][34]
+    #     UI name: [AI Handoff Count][35]
     #
     #   AI\_AGENT\_INVOCATION\_SUCCESS
     #
@@ -18340,7 +18885,7 @@ module Aws::Connect
     #     AI Agent Name Version, AI Agent Type, AI Use Case, Channel, Queue,
     #     Routing Profile, Session ID
     #
-    #     UI name: [AI Agent Invocation Success][35]
+    #     UI name: [AI Agent Invocation Success][36]
     #
     #   AI\_AGENT\_INVOCATION\_SUCCESS\_RATE
     #
@@ -18350,7 +18895,7 @@ module Aws::Connect
     #     AI Agent Name Version, AI Agent Type, AI Use Case, Channel, Queue,
     #     Routing Profile, Session ID
     #
-    #     UI name: [AI Agent Invocation Success Rate][36]
+    #     UI name: [AI Agent Invocation Success Rate][37]
     #
     #   AI\_AGENT\_INVOCATIONS
     #
@@ -18360,7 +18905,7 @@ module Aws::Connect
     #     AI Agent Name Version, AI Agent Type, AI Use Case, Channel, Queue,
     #     Routing Profile, Session ID
     #
-    #     UI name: [AI Agent Invocation Count][37]
+    #     UI name: [AI Agent Invocation Count][38]
     #
     #   AI\_AGENT\_RESPONSE\_HELPFUL
     #
@@ -18370,7 +18915,7 @@ module Aws::Connect
     #     AI Agent Name Version, AI Agent Type, AI Use Case, Channel, Queue,
     #     Routing Profile, Session ID
     #
-    #     UI name: [AI Agent Response Helpful][38]
+    #     UI name: [AI Agent Response Helpful][39]
     #
     #   AI\_AGENT\_RESPONSE\_NOT\_HELPFUL
     #
@@ -18380,7 +18925,7 @@ module Aws::Connect
     #     AI Agent Name Version, AI Agent Type, AI Use Case, Channel, Queue,
     #     Routing Profile, Session ID
     #
-    #     UI name: [AI Agent Response Not Helpful][39]
+    #     UI name: [AI Agent Response Not Helpful][40]
     #
     #   AI\_RESPONSE\_COMPLETION\_RATE
     #
@@ -18390,7 +18935,7 @@ module Aws::Connect
     #     Name Version, AI Agent Type, AI Use Case, Channel, Queue, Routing
     #     Profile, Session ID
     #
-    #     UI name: [AI Response Completion Rate][40]
+    #     UI name: [AI Response Completion Rate][41]
     #
     #   AI\_INVOLVED\_CONTACTS
     #
@@ -18400,7 +18945,7 @@ module Aws::Connect
     #     Name Version, AI Agent Type, AI Use Case, Channel, Queue, Routing
     #     Profile, Session ID
     #
-    #     UI name: [AI Involved Contacts][41]
+    #     UI name: [AI Involved Contacts][42]
     #
     #   AI\_PROMPT\_INVOCATION\_SUCCESS
     #
@@ -18411,7 +18956,7 @@ module Aws::Connect
     #     Prompt Name, AI Prompt Type, AI Use Case, Channel, Queue, Routing
     #     Profile, Session ID
     #
-    #     UI name: [AI Prompt Invocation Success][42]
+    #     UI name: [AI Prompt Invocation Success][43]
     #
     #   AI\_PROMPT\_INVOCATION\_SUCCESS\_RATE
     #
@@ -18422,7 +18967,7 @@ module Aws::Connect
     #     Prompt Name, AI Prompt Type, AI Use Case, Channel, Queue, Routing
     #     Profile, Session ID
     #
-    #     UI name: [AI Prompt Invocation Success Rate][43]
+    #     UI name: [AI Prompt Invocation Success Rate][44]
     #
     #   AI\_PROMPT\_INVOCATIONS
     #
@@ -18433,7 +18978,7 @@ module Aws::Connect
     #     Prompt Name, AI Prompt Type, AI Use Case, Channel, Queue, Routing
     #     Profile, Session ID
     #
-    #     UI name: [AI Prompt Invocations][44]
+    #     UI name: [AI Prompt Invocations][45]
     #
     #   AI\_TOOL\_INVOCATION\_SUCCESS
     #
@@ -18444,7 +18989,7 @@ module Aws::Connect
     #     Tool Type, AI Use Case, Channel, Queue, Routing Profile, Session
     #     ID
     #
-    #     UI name: [AI Tool Invocation Success][45]
+    #     UI name: [AI Tool Invocation Success][46]
     #
     #   AI\_TOOL\_INVOCATION\_SUCCESS\_RATE
     #
@@ -18455,7 +19000,7 @@ module Aws::Connect
     #     Tool Type, AI Use Case, Channel, Queue, Routing Profile, Session
     #     ID
     #
-    #     UI name: [AI Tool Invocation Success Rate][46]
+    #     UI name: [AI Tool Invocation Success Rate][47]
     #
     #   AI\_TOOL\_INVOCATIONS
     #
@@ -18466,7 +19011,7 @@ module Aws::Connect
     #     Tool Type, AI Use Case, Channel, Queue, Routing Profile, Session
     #     ID
     #
-    #     UI name: [AI Tool Invocations][47]
+    #     UI name: [AI Tool Invocations][48]
     #
     #   AVG\_AI\_AGENT\_CONVERSATION\_TURNS
     #
@@ -18476,7 +19021,7 @@ module Aws::Connect
     #     AI Agent Name Version, AI Agent Type, AI Use Case, Channel, Queue,
     #     Routing Profile, Session ID
     #
-    #     UI name: [Average AI Agent Conversation Turns][48]
+    #     UI name: [Average AI Agent Conversation Turns][49]
     #
     #   AVG\_AI\_CONVERSATION\_TURNS
     #
@@ -18486,7 +19031,7 @@ module Aws::Connect
     #     Name Version, AI Agent Type, AI Use Case, Channel, Queue, Routing
     #     Profile, Session ID
     #
-    #     UI name: [Average AI Conversation Turns][49]
+    #     UI name: [Average AI Conversation Turns][50]
     #
     #   AVG\_AI\_PROMPT\_INVOCATION\_LATENCY
     #
@@ -18497,7 +19042,7 @@ module Aws::Connect
     #     Prompt Name, AI Prompt Type, AI Use Case, Channel, Queue, Routing
     #     Profile, Session ID
     #
-    #     UI name: [Average AI Prompt Invocation Latency][50]
+    #     UI name: [Average AI Prompt Invocation Latency][51]
     #
     #   AVG\_AI\_TOOL\_INVOCATION\_LATENCY
     #
@@ -18508,7 +19053,7 @@ module Aws::Connect
     #     Tool Type, AI Use Case, Channel, Queue, Routing Profile, Session
     #     ID
     #
-    #     UI name: [Average AI Tool Invocation Latency][51]
+    #     UI name: [Average AI Tool Invocation Latency][52]
     #
     #   AI\_TOOL\_PARAMETER\_ACCURACY
     #
@@ -18519,7 +19064,7 @@ module Aws::Connect
     #     Tool Type, AI Use Case, Channel, Queue, Routing Profile, Session
     #     ID
     #
-    #     UI name: [AI Tool Parameter Accuracy][52]
+    #     UI name: [AI Tool Parameter Accuracy][53]
     #
     #   AI\_TOOL\_SELECTION\_ACCURACY
     #
@@ -18530,7 +19075,7 @@ module Aws::Connect
     #     Tool Type, AI Use Case, Channel, Queue, Routing Profile, Session
     #     ID
     #
-    #     UI name: [AI Tool Selection Accuracy][53]
+    #     UI name: [AI Tool Selection Accuracy][54]
     #
     #   AI\_TOOL\_UTILIZATION\_ACCURACY
     #
@@ -18541,7 +19086,7 @@ module Aws::Connect
     #     Tool Type, AI Use Case, Channel, Queue, Routing Profile, Session
     #     ID
     #
-    #     UI name: [AI Tool Utilization Accuracy][54]
+    #     UI name: [AI Tool Utilization Accuracy][55]
     #
     #   COMPLETENESS\_SCORE
     #
@@ -18551,7 +19096,7 @@ module Aws::Connect
     #     Name Version, AI Agent Type, AI Use Case, Channel, Queue, Routing
     #     Profile, Session ID
     #
-    #     UI name: [Completeness Score][55]
+    #     UI name: [Completeness Score][56]
     #
     #   FAITHFULNESS\_SCORE
     #
@@ -18561,7 +19106,7 @@ module Aws::Connect
     #     Name Version, AI Agent Type, AI Use Case, Channel, Queue, Routing
     #     Profile, Session ID
     #
-    #     UI name: [Faithfulness Score][56]
+    #     UI name: [Faithfulness Score][57]
     #
     #   GOAL\_SUCCESS\_RATE
     #
@@ -18571,7 +19116,7 @@ module Aws::Connect
     #     Name Version, AI Agent Type, AI Use Case, Channel, Queue, Routing
     #     Profile, Session ID
     #
-    #     UI name: [Goal Success Rate][57]
+    #     UI name: [Goal Success Rate][58]
     #
     #   KNOWLEDGE\_CONTENT\_REFERENCES
     #
@@ -18581,7 +19126,7 @@ module Aws::Connect
     #     AI Agent Name Version, AI Agent Type, AI Use Case, Channel,
     #     Knowledge Base Name, Queue, Routing Profile, Session ID
     #
-    #     UI name: [Knowledge Content References][58]
+    #     UI name: [Knowledge Content References][59]
     #
     #   PROACTIVE\_INTENT\_ENGAGEMENT\_RATE
     #
@@ -18591,7 +19136,7 @@ module Aws::Connect
     #     Name Version, AI Agent Type, AI Use Case, Channel, Queue, Routing
     #     Profile, Session ID
     #
-    #     UI name: [Proactive Intent Engagement Rate][59]
+    #     UI name: [Proactive Intent Engagement Rate][60]
     #
     #   PROACTIVE\_INTENT\_RESPONSE\_RATE
     #
@@ -18601,7 +19146,7 @@ module Aws::Connect
     #     Name Version, AI Agent Type, AI Use Case, Channel, Queue, Routing
     #     Profile, Session ID
     #
-    #     UI name: [Proactive Intent Response Rate][60]
+    #     UI name: [Proactive Intent Response Rate][61]
     #
     #   PROACTIVE\_INTENTS\_ANSWERED
     #
@@ -18611,7 +19156,7 @@ module Aws::Connect
     #     Name Version, AI Agent Type, AI Use Case, Channel, Queue, Routing
     #     Profile, Session ID
     #
-    #     UI name: [Proactive Intents Answered][61]
+    #     UI name: [Proactive Intents Answered][62]
     #
     #   PROACTIVE\_INTENTS\_DETECTED
     #
@@ -18621,7 +19166,7 @@ module Aws::Connect
     #     Name Version, AI Agent Type, AI Use Case, Channel, Queue, Routing
     #     Profile, Session ID
     #
-    #     UI name: [Proactive Intents Detected][62]
+    #     UI name: [Proactive Intents Detected][63]
     #
     #   PROACTIVE\_INTENTS\_ENGAGED
     #
@@ -18631,7 +19176,7 @@ module Aws::Connect
     #     Name Version, AI Agent Type, AI Use Case, Channel, Queue, Routing
     #     Profile, Session ID
     #
-    #     UI name: [Proactive Intents Engaged][63]
+    #     UI name: [Proactive Intents Engaged][64]
     #
     #   AVG\_HOLD\_TIME
     #
@@ -18641,7 +19186,7 @@ module Aws::Connect
     #     Agent, Agent Hierarchy, Feature,
     #     contact/segmentAttributes/connect:Subtype, Q in Connect
     #
-    #     UI name: [Average customer hold time][64]
+    #     UI name: [Average customer hold time][65]
     #
     #     <note markdown="1"> Feature is a valid filter but not a valid grouping.
     #
@@ -18655,7 +19200,7 @@ module Aws::Connect
     #     Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype,
     #     Q in Connect
     #
-    #     UI name: [Average customer hold time all contacts][65]
+    #     UI name: [Average customer hold time all contacts][66]
     #
     #   AVG\_HOLDS
     #
@@ -18665,7 +19210,7 @@ module Aws::Connect
     #     Agent, Agent Hierarchy, Feature,
     #     contact/segmentAttributes/connect:Subtype, Q in Connect
     #
-    #     UI name: [Average holds][66]
+    #     UI name: [Average holds][67]
     #
     #     <note markdown="1"> Feature is a valid filter but not a valid grouping.
     #
@@ -18679,7 +19224,7 @@ module Aws::Connect
     #     Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype,
     #     Q in Connect
     #
-    #     UI name: [Average agent interaction and customer hold time][67]
+    #     UI name: [Average agent interaction and customer hold time][68]
     #
     #   AVG\_INTERACTION\_TIME
     #
@@ -18690,7 +19235,7 @@ module Aws::Connect
     #     Valid groupings and filters: Queue, Channel, Routing Profile,
     #     Feature, contact/segmentAttributes/connect:Subtype, Q in Connect
     #
-    #     UI name: [Average agent interaction time][68]
+    #     UI name: [Average agent interaction time][69]
     #
     #     <note markdown="1"> Feature is a valid filter but not a valid grouping.
     #
@@ -18707,7 +19252,7 @@ module Aws::Connect
     #     Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype,
     #     Q in Connect
     #
-    #     UI name: [Average agent interruptions][69]
+    #     UI name: [Average agent interruptions][70]
     #
     #   AVG\_INTERRUPTION\_TIME\_AGENT
     #
@@ -18720,7 +19265,7 @@ module Aws::Connect
     #     Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype,
     #     Q in Connect
     #
-    #     UI name: [Average agent interruption time][70]
+    #     UI name: [Average agent interruption time][71]
     #
     #   AVG\_MESSAGE\_LENGTH\_AGENT
     #
@@ -18731,7 +19276,7 @@ module Aws::Connect
     #     Feature, RoutingStepExpression, Initiation method, Routing
     #     Profile, Queue, Q in Connect
     #
-    #     UI name: [Average agent message length][71]
+    #     UI name: [Average agent message length][72]
     #
     #   AVG\_MESSAGE\_LENGTH\_CUSTOMER
     #
@@ -18742,7 +19287,7 @@ module Aws::Connect
     #     Feature, RoutingStepExpression, Initiation method, Routing
     #     Profile, Queue, Q in Connect
     #
-    #     UI name: [Average customer message length][72]
+    #     UI name: [Average customer message length][73]
     #
     #   AVG\_MESSAGES
     #
@@ -18753,7 +19298,7 @@ module Aws::Connect
     #     Feature, RoutingStepExpression, Initiation method, Routing
     #     Profile, Queue, Q in Connect
     #
-    #     UI name: [Average messages][73]
+    #     UI name: [Average messages][74]
     #
     #   AVG\_MESSAGES\_AGENT
     #
@@ -18764,7 +19309,7 @@ module Aws::Connect
     #     Feature, RoutingStepExpression, Initiation method, Routing
     #     Profile, Queue, Q in Connect
     #
-    #     UI name: [Average agent messages][74]
+    #     UI name: [Average agent messages][75]
     #
     #   AVG\_MESSAGES\_BOT
     #
@@ -18775,7 +19320,7 @@ module Aws::Connect
     #     Feature, RoutingStepExpression, Initiation method, Routing
     #     Profile, Queue, Q in Connect
     #
-    #     UI name: [Average bot messages][75]
+    #     UI name: [Average bot messages][76]
     #
     #   AVG\_MESSAGES\_CUSTOMER
     #
@@ -18786,7 +19331,7 @@ module Aws::Connect
     #     Feature, RoutingStepExpression, Initiation method, Routing
     #     Profile, Queue, Q in Connect
     #
-    #     UI name: [Average customer messages][76]
+    #     UI name: [Average customer messages][77]
     #
     #   AVG\_NON\_TALK\_TIME
     #
@@ -18799,7 +19344,7 @@ module Aws::Connect
     #     Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype,
     #     Q in Connect
     #
-    #     UI name: [Average non-talk time][77]
+    #     UI name: [Average non-talk time][78]
     #
     #   AVG\_QUEUE\_ANSWER\_TIME
     #
@@ -18808,7 +19353,7 @@ module Aws::Connect
     #     Valid groupings and filters: Queue, Channel, Routing Profile,
     #     Feature, contact/segmentAttributes/connect:Subtype, Q in Connect
     #
-    #     UI name: [Average queue answer time][78]
+    #     UI name: [Average queue answer time][79]
     #
     #     Valid metric level filters: `INITIATION_METHOD`, `FEATURE`,
     #     `DISCONNECT_REASON`
@@ -18825,7 +19370,7 @@ module Aws::Connect
     #     Agent, Feature, contact/segmentAttributes/connect:Subtype, Q in
     #     Connect, Agent Hierarchy
     #
-    #     UI name: [Avg. queue answer time - customer first callback][79]
+    #     UI name: [Avg. queue answer time - customer first callback][80]
     #
     #   AVG\_RESPONSE\_TIME\_AGENT
     #
@@ -18836,7 +19381,7 @@ module Aws::Connect
     #     Feature, RoutingStepExpression, Initiation method, Routing
     #     Profile, Queue, Q in Connect
     #
-    #     UI name: [Average agent response time][80]
+    #     UI name: [Average agent response time][81]
     #
     #   AVG\_RESPONSE\_TIME\_CUSTOMER
     #
@@ -18847,7 +19392,7 @@ module Aws::Connect
     #     Feature, RoutingStepExpression, Initiation method, Routing
     #     Profile, Queue, Q in Connect
     #
-    #     UI name: [Average customer response time][81]
+    #     UI name: [Average customer response time][82]
     #
     #   AVG\_RESOLUTION\_TIME
     #
@@ -18856,7 +19401,7 @@ module Aws::Connect
     #     Valid groupings and filters: Queue, Channel, Routing Profile,
     #     contact/segmentAttributes/connect:Subtype, Q in Connect
     #
-    #     UI name: [Average resolution time][82]
+    #     UI name: [Average resolution time][83]
     #
     #   AVG\_TALK\_TIME
     #
@@ -18869,7 +19414,7 @@ module Aws::Connect
     #     Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype,
     #     Q in Connect
     #
-    #     UI name: [Average talk time][83]
+    #     UI name: [Average talk time][84]
     #
     #   AVG\_TALK\_TIME\_AGENT
     #
@@ -18882,7 +19427,7 @@ module Aws::Connect
     #     Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype,
     #     Q in Connect
     #
-    #     UI name: [Average agent talk time][84]
+    #     UI name: [Average agent talk time][85]
     #
     #   AVG\_TALK\_TIME\_CUSTOMER
     #
@@ -18895,7 +19440,7 @@ module Aws::Connect
     #     Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype,
     #     Q in Connect
     #
-    #     UI name: [Average customer talk time][85]
+    #     UI name: [Average customer talk time][86]
     #
     #   AVG\_WAIT\_TIME\_AFTER\_CUSTOMER\_CONNECTION
     #
@@ -18906,7 +19451,7 @@ module Aws::Connect
     #
     #     Valid groupings and filters: Campaign
     #
-    #     UI name: [Average wait time after customer connection][86]
+    #     UI name: [Average wait time after customer connection][87]
     #
     #   AVG\_WAIT\_TIME\_AFTER\_CUSTOMER\_FIRST\_CALLBACK\_CONNECTION
     #
@@ -18917,7 +19462,7 @@ module Aws::Connect
     #     Connect, Agent Hierarchy
     #
     #     UI name: [Avg. wait time after customer connection - customer
-    #     first callback][87]
+    #     first callback][88]
     #
     #   AVG\_WEIGHTED\_EVALUATION\_SCORE
     #
@@ -18927,7 +19472,7 @@ module Aws::Connect
     #     Evaluation Form Id, Evaluation Section ID, Evaluation Question ID,
     #     Evaluation Source, Form Version, Queue, Routing Profile
     #
-    #     UI name: [Average weighted evaluation score][88]
+    #     UI name: [Average weighted evaluation score][89]
     #
     #   BOT\_CONVERSATIONS\_COMPLETED
     #
@@ -18940,7 +19485,7 @@ module Aws::Connect
     #     Initiation method, Invoking resource type, Parent flows resource
     #     ID
     #
-    #     UI name: [Bot conversations completed][89]
+    #     UI name: [Bot conversations completed][90]
     #
     #   BOT\_INTENTS\_COMPLETED
     #
@@ -18953,7 +19498,7 @@ module Aws::Connect
     #     published timestamp, Initiation method, Invoking resource type,
     #     Parent flows resource ID
     #
-    #     UI name: [Bot intents completed][90]
+    #     UI name: [Bot intents completed][91]
     #
     #   CAMPAIGN\_CONTACTS\_ABANDONED\_AFTER\_X
     #
@@ -18968,7 +19513,7 @@ module Aws::Connect
     #     604800 (inclusive), in seconds. For `Comparison`, you must enter
     #     `GT` (for *Greater than*).
     #
-    #     UI name: [Campaign contacts abandoned after X][91]
+    #     UI name: [Campaign contacts abandoned after X][92]
     #
     #   CAMPAIGN\_CONTACTS\_ABANDONED\_AFTER\_X\_RATE
     #
@@ -18983,7 +19528,7 @@ module Aws::Connect
     #     604800 (inclusive), in seconds. For `Comparison`, you must enter
     #     `GT` (for *Greater than*).
     #
-    #     UI name: [Campaign contacts abandoned after X rate][92]
+    #     UI name: [Campaign contacts abandoned after X rate][93]
     #
     #   CAMPAIGN\_INTERACTIONS
     #
@@ -18998,7 +19543,7 @@ module Aws::Connect
     #     contact/segmentAttributes/connect:Subtype, Device Model, Device
     #     Type, Web Notification Type
     #
-    #     UI name: [Campaign interactions][93]
+    #     UI name: [Campaign interactions][94]
     #
     #   CAMPAIGN\_PROGRESS\_RATE
     #
@@ -19011,7 +19556,7 @@ module Aws::Connect
     #     Valid groupings and filters: Campaign, Campaign Execution
     #     Timestamp
     #
-    #     UI name: [Campaign progress rate][94]
+    #     UI name: [Campaign progress rate][95]
     #
     #   CAMPAIGN\_SEND\_ATTEMPTS
     #
@@ -19022,7 +19567,7 @@ module Aws::Connect
     #     Valid groupings and filters: Campaign, Channel,
     #     contact/segmentAttributes/connect:Subtype
     #
-    #     UI name: [Campaign send attempts][95]
+    #     UI name: [Campaign send attempts][96]
     #
     #   CAMPAIGN\_SEND\_EXCLUSIONS
     #
@@ -19035,7 +19580,7 @@ module Aws::Connect
     #     Valid groupings and filters: Campaign, Campaign Excluded Event
     #     Type, Campaign Execution Timestamp
     #
-    #     UI name: [Campaign send exclusions][96]
+    #     UI name: [Campaign send exclusions][97]
     #
     #   CASES\_CREATED
     #
@@ -19045,7 +19590,7 @@ module Aws::Connect
     #
     #     Valid groupings and filters: CASE\_TEMPLATE\_ARN, CASE\_STATUS
     #
-    #     UI name: [Cases created][97]
+    #     UI name: [Cases created][98]
     #
     #   CONTACTS\_CREATED
     #
@@ -19056,7 +19601,7 @@ module Aws::Connect
     #     Valid groupings and filters: Queue, Channel, Routing Profile,
     #     Feature, contact/segmentAttributes/connect:Subtype, Q in Connect
     #
-    #     UI name: [Contacts created][98]
+    #     UI name: [Contacts created][99]
     #
     #     <note markdown="1"> Feature is a valid filter but not a valid grouping.
     #
@@ -19073,7 +19618,7 @@ module Aws::Connect
     #     contact/segmentAttributes/connect:Subtype, RoutingStepExpression,
     #     Q in Connect
     #
-    #     UI name: [Contacts handled][99]
+    #     UI name: [Contacts handled][100]
     #
     #     <note markdown="1"> Feature is a valid filter but not a valid grouping.
     #
@@ -19088,7 +19633,7 @@ module Aws::Connect
     #     Valid groupings and filters: Queue, Channel, Agent, Agent
     #     Hierarchy, contact/segmentAttributes/connect:Subtype, Q in Connect
     #
-    #     UI name: [Contacts handled (connected to agent timestamp)][100]
+    #     UI name: [Contacts handled (connected to agent timestamp)][101]
     #
     #   CONTACTS\_HOLD\_ABANDONS
     #
@@ -19098,7 +19643,7 @@ module Aws::Connect
     #     Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype,
     #     Q in Connect
     #
-    #     UI name: [Contacts hold disconnect][101]
+    #     UI name: [Contacts hold disconnect][102]
     #
     #   CONTACTS\_ON\_HOLD\_AGENT\_DISCONNECT
     #
@@ -19107,7 +19652,7 @@ module Aws::Connect
     #     Valid groupings and filters: Queue, Channel, Routing Profile,
     #     Agent, Agent Hierarchy, Q in Connect
     #
-    #     UI name: [Contacts hold agent disconnect][102]
+    #     UI name: [Contacts hold agent disconnect][103]
     #
     #   CONTACTS\_ON\_HOLD\_CUSTOMER\_DISCONNECT
     #
@@ -19116,7 +19661,7 @@ module Aws::Connect
     #     Valid groupings and filters: Queue, Channel, Routing Profile,
     #     Agent, Agent Hierarchy, Q in Connect
     #
-    #     UI name: [Contacts hold customer disconnect][103]
+    #     UI name: [Contacts hold customer disconnect][104]
     #
     #   CONTACTS\_PUT\_ON\_HOLD
     #
@@ -19125,7 +19670,7 @@ module Aws::Connect
     #     Valid groupings and filters: Queue, Channel, Routing Profile,
     #     Agent, Agent Hierarchy, Q in Connect
     #
-    #     UI name: [Contacts put on hold][104]
+    #     UI name: [Contacts put on hold][105]
     #
     #   CONTACTS\_TRANSFERRED\_OUT\_EXTERNAL
     #
@@ -19134,7 +19679,7 @@ module Aws::Connect
     #     Valid groupings and filters: Queue, Channel, Routing Profile,
     #     Agent, Agent Hierarchy, Q in Connect
     #
-    #     UI name: [Contacts transferred out external][105]
+    #     UI name: [Contacts transferred out external][106]
     #
     #   CONTACTS\_TRANSFERRED\_OUT\_INTERNAL
     #
@@ -19143,7 +19688,7 @@ module Aws::Connect
     #     Valid groupings and filters: Queue, Channel, Routing Profile,
     #     Agent, Agent Hierarchy, Q in Connect
     #
-    #     UI name: [Contacts transferred out internal][106]
+    #     UI name: [Contacts transferred out internal][107]
     #
     #   CONTACTS\_QUEUED
     #
@@ -19153,7 +19698,7 @@ module Aws::Connect
     #     Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype,
     #     Q in Connect
     #
-    #     UI name: [Contacts queued][107]
+    #     UI name: [Contacts queued][108]
     #
     #   CONTACTS\_QUEUED\_BY\_ENQUEUE
     #
@@ -19162,7 +19707,7 @@ module Aws::Connect
     #     Valid groupings and filters: Queue, Channel, Agent, Agent
     #     Hierarchy, contact/segmentAttributes/connect:Subtype
     #
-    #     UI name: [Contacts queued (enqueue timestamp)][108]
+    #     UI name: [Contacts queued (enqueue timestamp)][109]
     #
     #   CONTACTS\_REMOVED\_FROM\_QUEUE\_IN\_X
     #
@@ -19175,7 +19720,7 @@ module Aws::Connect
     #     604800 (inclusive), in seconds. For `Comparison`, you can use `LT`
     #     (for "Less than") or `LTE` (for "Less than equal").
     #
-    #     UI name: [Contacts removed from queue in X seconds][109]
+    #     UI name: [Contacts removed from queue in X seconds][110]
     #
     #   CONTACTS\_RESOLVED\_IN\_X
     #
@@ -19188,7 +19733,7 @@ module Aws::Connect
     #     604800 (inclusive), in seconds. For `Comparison`, you can use `LT`
     #     (for "Less than") or `LTE` (for "Less than equal").
     #
-    #     UI name: [Contacts resolved in X][110]
+    #     UI name: [Contacts resolved in X][111]
     #
     #   CONTACTS\_TRANSFERRED\_OUT
     #
@@ -19198,7 +19743,7 @@ module Aws::Connect
     #     Agent, Agent Hierarchy, Feature,
     #     contact/segmentAttributes/connect:Subtype, Q in Connect
     #
-    #     UI name: [Contacts transferred out][111]
+    #     UI name: [Contacts transferred out][112]
     #
     #     <note markdown="1"> Feature is a valid filter but not a valid grouping.
     #
@@ -19212,7 +19757,7 @@ module Aws::Connect
     #     Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype,
     #     Q in Connect
     #
-    #     UI name: [Contacts transferred out by agent][112]
+    #     UI name: [Contacts transferred out by agent][113]
     #
     #   CONTACTS\_TRANSFERRED\_OUT\_FROM\_QUEUE
     #
@@ -19222,7 +19767,7 @@ module Aws::Connect
     #     Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype,
     #     Q in Connect
     #
-    #     UI name: [Contacts transferred out queue][113]
+    #     UI name: [Contacts transferred out queue][114]
     #
     #   CURRENT\_CASES
     #
@@ -19232,7 +19777,7 @@ module Aws::Connect
     #
     #     Valid groupings and filters: CASE\_TEMPLATE\_ARN, CASE\_STATUS
     #
-    #     UI name: [Current cases][114]
+    #     UI name: [Current cases][115]
     #
     #   CONVERSATIONS\_ABANDONED
     #
@@ -19243,7 +19788,7 @@ module Aws::Connect
     #     Feature, RoutingStepExpression, Initiation method, Routing
     #     Profile, Queue, Q in Connect
     #
-    #     UI name: [Conversations abandoned][115]
+    #     UI name: [Conversations abandoned][116]
     #
     #   DELIVERY\_ATTEMPTS
     #
@@ -19260,7 +19805,7 @@ module Aws::Connect
     #     Device Type, Disconnect Reason, Queue, Routing Profile, Web
     #     Notification Type
     #
-    #     UI name: [Delivery attempts][116]
+    #     UI name: [Delivery attempts][117]
     #
     #     <note markdown="1"> Campaign Delivery EventType filter and grouping are only available
     #     for SMS, Email, WhatsApp, and web notification campaign delivery
@@ -19287,7 +19832,7 @@ module Aws::Connect
     #     Type, Disconnect Reason, Queue, Routing Profile, Web Notification
     #     Type
     #
-    #     UI name: [Delivery attempt disposition rate][117]
+    #     UI name: [Delivery attempt disposition rate][118]
     #
     #     <note markdown="1"> Campaign Delivery Event Type filter and grouping are only
     #     available for SMS, Email, WhatsApp, and web notification campaign
@@ -19301,7 +19846,7 @@ module Aws::Connect
     #
     #   : This metric requires an evaluation form with business outcome
     #     questions. For more information, see [Create an evaluation
-    #     form][118] in the *Connect Customer Administrator Guide*.
+    #     form][119] in the *Connect Customer Administrator Guide*.
     #
     #     Unit: Percent
     #
@@ -19322,7 +19867,7 @@ module Aws::Connect
     #     Routing Profile, Routing Step Expression, Session ID, Subtype,
     #     Telephone Number
     #
-    #     UI name: [Evaluated churn propensity rate][119]
+    #     UI name: [Evaluated churn propensity rate][120]
     #
     #     <note markdown="1"> Feature, Flows Next Resource ID, Flows Next Resource Queue ID,
     #     Flows Next Resource Type, Flows Outcome Type, Flows Resource Type,
@@ -19342,7 +19887,7 @@ module Aws::Connect
     #
     #   : This metric requires an evaluation form with business outcome
     #     questions. For more information, see [Create an evaluation
-    #     form][118] in the *Connect Customer Administrator Guide*.
+    #     form][119] in the *Connect Customer Administrator Guide*.
     #
     #     Unit: Percent
     #
@@ -19363,7 +19908,7 @@ module Aws::Connect
     #     Routing Profile, Routing Step Expression, Session ID, Subtype,
     #     Telephone Number
     #
-    #     UI name: [Evaluated CSAT percent][120]
+    #     UI name: [Evaluated CSAT percent][121]
     #
     #     <note markdown="1"> Feature, Flows Next Resource ID, Flows Next Resource Queue ID,
     #     Flows Next Resource Type, Flows Outcome Type, Flows Resource Type,
@@ -19383,7 +19928,7 @@ module Aws::Connect
     #
     #   : This metric requires an evaluation form with business outcome
     #     questions. For more information, see [Create an evaluation
-    #     form][118] in the *Connect Customer Administrator Guide*.
+    #     form][119] in the *Connect Customer Administrator Guide*.
     #
     #     Unit: Percent
     #
@@ -19404,7 +19949,7 @@ module Aws::Connect
     #     Routing Profile, Routing Step Expression, Session ID, Subtype,
     #     Telephone Number
     #
-    #     UI name: [Evaluated partial self-service resolution rate][121]
+    #     UI name: [Evaluated partial self-service resolution rate][122]
     #
     #     <note markdown="1"> Feature, Flows Next Resource ID, Flows Next Resource Queue ID,
     #     Flows Next Resource Type, Flows Outcome Type, Flows Resource Type,
@@ -19424,7 +19969,7 @@ module Aws::Connect
     #
     #   : This metric requires an evaluation form with business outcome
     #     questions. For more information, see [Create an evaluation
-    #     form][118] in the *Connect Customer Administrator Guide*.
+    #     form][119] in the *Connect Customer Administrator Guide*.
     #
     #     Unit: Percent
     #
@@ -19445,7 +19990,7 @@ module Aws::Connect
     #     Routing Profile, Routing Step Expression, Session ID, Subtype,
     #     Telephone Number
     #
-    #     UI name: [Evaluated self-service resolution rate][122]
+    #     UI name: [Evaluated self-service resolution rate][123]
     #
     #     <note markdown="1"> Feature, Flows Next Resource ID, Flows Next Resource Queue ID,
     #     Flows Next Resource Type, Flows Outcome Type, Flows Resource Type,
@@ -19465,7 +20010,7 @@ module Aws::Connect
     #
     #   : This metric requires an evaluation form with business outcome
     #     questions. For more information, see [Create an evaluation
-    #     form][118] in the *Connect Customer Administrator Guide*.
+    #     form][119] in the *Connect Customer Administrator Guide*.
     #
     #     Unit: Percent
     #
@@ -19486,7 +20031,7 @@ module Aws::Connect
     #     Routing Profile, Routing Step Expression, Session ID, Subtype,
     #     Telephone Number
     #
-    #     UI name: [Evaluated successful sale rate][123]
+    #     UI name: [Evaluated successful sale rate][124]
     #
     #     <note markdown="1"> Feature, Flows Next Resource ID, Flows Next Resource Queue ID,
     #     Flows Next Resource Type, Flows Outcome Type, Flows Resource Type,
@@ -19510,7 +20055,17 @@ module Aws::Connect
     #     Evaluation Form ID, Evaluation Source, Form Version, Queue,
     #     Routing Profile
     #
-    #     UI name: [Evaluations performed][124]
+    #     UI name: [Evaluations performed][125]
+    #
+    #   EVALUATIONS\_PERFORMED\_BY\_SUBMIT\_TIME
+    #
+    #   : Unit: Count
+    #
+    #     Valid groupings and filters: Agent, Agent Hierarchy, Channel,
+    #     Evaluation Form ID, Evaluation Source, Form Version, Queue,
+    #     Routing Profile
+    #
+    #     UI name: [Evaluations performed (Submit time)][126]
     #
     #   FLOWS\_OUTCOME
     #
@@ -19522,7 +20077,7 @@ module Aws::Connect
     #     Flows outcome type, Flows resource ID, Initiation method, Resource
     #     published timestamp
     #
-    #     UI name: [Flows outcome][125]
+    #     UI name: [Flows outcome][127]
     #
     #   FLOWS\_STARTED
     #
@@ -19533,7 +20088,7 @@ module Aws::Connect
     #     resource ID, Flows resource ID, Initiation method, Resource
     #     published timestamp
     #
-    #     UI name: [Flows started][126]
+    #     UI name: [Flows started][128]
     #
     #   HUMAN\_ANSWERED\_CALLS
     #
@@ -19545,7 +20100,7 @@ module Aws::Connect
     #
     #     Valid groupings and filters: Agent, Campaign
     #
-    #     UI name: [Human answered][127]
+    #     UI name: [Human answered][129]
     #
     #   MAX\_FLOW\_TIME
     #
@@ -19557,7 +20112,7 @@ module Aws::Connect
     #     Flows outcome type, Flows resource ID, Initiation method, Resource
     #     published timestamp
     #
-    #     UI name: [Maximum flow time][128]
+    #     UI name: [Maximum flow time][130]
     #
     #   MAX\_QUEUED\_TIME
     #
@@ -19567,7 +20122,7 @@ module Aws::Connect
     #     Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype,
     #     Q in Connect
     #
-    #     UI name: [Maximum queued time][129]
+    #     UI name: [Maximum queued time][131]
     #
     #   MIN\_FLOW\_TIME
     #
@@ -19579,7 +20134,7 @@ module Aws::Connect
     #     Flows outcome type, Flows resource ID, Initiation method, Resource
     #     published timestamp
     #
-    #     UI name: [Minimum flow time][130]
+    #     UI name: [Minimum flow time][132]
     #
     #   PERCENT\_AUTOMATIC\_FAILS
     #
@@ -19589,7 +20144,7 @@ module Aws::Connect
     #     Evaluation Form ID, Evaluation Source, Form Version, Queue,
     #     Routing Profile
     #
-    #     UI name: [Automatic fails percent][131]
+    #     UI name: [Automatic fails percent][133]
     #
     #   PERCENT\_BOT\_CONVERSATIONS\_OUTCOME
     #
@@ -19602,7 +20157,7 @@ module Aws::Connect
     #     Initiation method, Invoking resource type, Parent flows resource
     #     ID
     #
-    #     UI name: [Percent bot conversations outcome][132]
+    #     UI name: [Percent bot conversations outcome][134]
     #
     #   PERCENT\_BOT\_INTENTS\_OUTCOME
     #
@@ -19615,7 +20170,7 @@ module Aws::Connect
     #     published timestamp, Initiation method, Invoking resource type,
     #     Parent flows resource ID
     #
-    #     UI name: [Percent bot intents outcome][133]
+    #     UI name: [Percent bot intents outcome][135]
     #
     #   PERCENT\_CASES\_FIRST\_CONTACT\_RESOLVED
     #
@@ -19625,7 +20180,7 @@ module Aws::Connect
     #
     #     Valid groupings and filters: CASE\_TEMPLATE\_ARN, CASE\_STATUS
     #
-    #     UI name: [Cases resolved on first contact][134]
+    #     UI name: [Cases resolved on first contact][136]
     #
     #   PERCENT\_CONTACTS\_STEP\_EXPIRED
     #
@@ -19657,7 +20212,7 @@ module Aws::Connect
     #     Flows outcome type, Flows resource ID, Initiation method, Resource
     #     published timestamp
     #
-    #     UI name: [Flows outcome percentage][135].
+    #     UI name: [Flows outcome percentage][137].
     #
     #     <note markdown="1"> The `FLOWS_OUTCOME_TYPE` is not a valid grouping.
     #
@@ -19674,7 +20229,7 @@ module Aws::Connect
     #     Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype,
     #     Q in Connect
     #
-    #     UI name: [Non-talk time percent][136]
+    #     UI name: [Non-talk time percent][138]
     #
     #   PERCENT\_TALK\_TIME
     #
@@ -19687,7 +20242,7 @@ module Aws::Connect
     #     Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype,
     #     Q in Connect
     #
-    #     UI name: [Talk time percent][137]
+    #     UI name: [Talk time percent][139]
     #
     #   PERCENT\_TALK\_TIME\_AGENT
     #
@@ -19700,7 +20255,7 @@ module Aws::Connect
     #     Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype,
     #     Q in Connect
     #
-    #     UI name: [Agent talk time percent][138]
+    #     UI name: [Agent talk time percent][140]
     #
     #   PERCENT\_TALK\_TIME\_CUSTOMER
     #
@@ -19713,7 +20268,7 @@ module Aws::Connect
     #     Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype,
     #     Q in Connect
     #
-    #     UI name: [Customer talk time percent][139]
+    #     UI name: [Customer talk time percent][141]
     #
     #   RECIPIENTS\_ATTEMPTED
     #
@@ -19726,7 +20281,7 @@ module Aws::Connect
     #     Valid groupings and filters: Campaign, Campaign Execution
     #     Timestamp
     #
-    #     UI name: [Recipients attempted][140]
+    #     UI name: [Recipients attempted][142]
     #
     #   RECIPIENTS\_INTERACTED
     #
@@ -19742,7 +20297,7 @@ module Aws::Connect
     #     contact/segmentAttributes/connect:Subtype, Campaign Execution
     #     Timestamp
     #
-    #     UI name: [Recipients interacted][141]
+    #     UI name: [Recipients interacted][143]
     #
     #   AI\_AGENT\_COLLABORATORS
     #
@@ -19752,7 +20307,7 @@ module Aws::Connect
     #     Name Version, AI Agent Type, AI Use Case, Channel, Queue, Routing
     #     Profile, Session ID
     #
-    #     UI name: [AI Agent Collaborators][142]
+    #     UI name: [AI Agent Collaborators][144]
     #
     #   AI\_AGENT\_COLLABORATION\_INVOCATIONS
     #
@@ -19762,7 +20317,7 @@ module Aws::Connect
     #     Name Version, AI Agent Type, AI Use Case, Channel, Queue, Routing
     #     Profile, Session ID
     #
-    #     UI name: [AI Agent Collaboration Invocations][143]
+    #     UI name: [AI Agent Collaboration Invocations][145]
     #
     #   AI\_AGENT\_SELECTION\_ACCURACY
     #
@@ -19772,7 +20327,7 @@ module Aws::Connect
     #     AI Agent Name Version, AI Agent Type, AI Use Case, Channel, Queue,
     #     Routing Profile, Session ID
     #
-    #     UI name: [AI Agent Selection Accuracy][144]
+    #     UI name: [AI Agent Selection Accuracy][146]
     #
     #     <note markdown="1"> This metric is available as part of Connect Customer AI.
     #
@@ -19786,7 +20341,7 @@ module Aws::Connect
     #     AI Agent Name Version, AI Agent Type, AI Use Case, Channel, Queue,
     #     Routing Profile, Session ID
     #
-    #     UI name: [Average AI Agent Invocation Latency][145]
+    #     UI name: [Average AI Agent Invocation Latency][147]
     #
     #   CONTEXT\_FIDELITY\_SCORE
     #
@@ -19796,7 +20351,7 @@ module Aws::Connect
     #     AI Agent Name Version, AI Agent Type, AI Use Case, Channel, Queue,
     #     Routing Profile, Session ID
     #
-    #     UI name: [Context Fidelity Score][146]
+    #     UI name: [Context Fidelity Score][148]
     #
     #     <note markdown="1"> This metric is available as part of Connect Customer AI.
     #
@@ -19813,7 +20368,7 @@ module Aws::Connect
     #     Valid groupings and filters: Campaign, Campaign Execution
     #     Timestamp
     #
-    #     UI name: [Recipients targeted][147]
+    #     UI name: [Recipients targeted][149]
     #
     #   REOPENED\_CASE\_ACTIONS
     #
@@ -19823,7 +20378,7 @@ module Aws::Connect
     #
     #     Valid groupings and filters: CASE\_TEMPLATE\_ARN, CASE\_STATUS
     #
-    #     UI name: [Cases reopened][148]
+    #     UI name: [Cases reopened][150]
     #
     #   RESOLVED\_CASE\_ACTIONS
     #
@@ -19833,7 +20388,7 @@ module Aws::Connect
     #
     #     Valid groupings and filters: CASE\_TEMPLATE\_ARN, CASE\_STATUS
     #
-    #     UI name: [Cases resolved][149]
+    #     UI name: [Cases resolved][151]
     #
     #   SERVICE\_LEVEL
     #
@@ -19848,7 +20403,7 @@ module Aws::Connect
     #     604800 (inclusive), in seconds. For `Comparison`, you can use `LT`
     #     (for "Less than") or `LTE` (for "Less than equal").
     #
-    #     UI name: [Service level X][150]
+    #     UI name: [Service level X][152]
     #
     #   STEP\_CONTACTS\_QUEUED
     #
@@ -19880,7 +20435,7 @@ module Aws::Connect
     #     Valid groupings and filters: Queue, Channel, Routing Profile,
     #     Agent, Agent Hierarchy
     #
-    #     UI name: [Agent API connecting time][151]
+    #     UI name: [Agent API connecting time][153]
     #
     #     <note markdown="1"> The `Negate` key in metric-level filters is not applicable for
     #     this metric.
@@ -19903,7 +20458,7 @@ module Aws::Connect
     #     Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype,
     #     RoutingStepExpression, Q in Connect
     #
-    #     UI name: [Contact abandoned][152]
+    #     UI name: [Contact abandoned][154]
     #
     #   SUM\_CONTACTS\_ABANDONED\_IN\_X
     #
@@ -19916,7 +20471,7 @@ module Aws::Connect
     #     604800 (inclusive), in seconds. For `Comparison`, you can use `LT`
     #     (for "Less than") or `LTE` (for "Less than equal").
     #
-    #     UI name: [Contacts abandoned in X seconds][153]
+    #     UI name: [Contacts abandoned in X seconds][155]
     #
     #   SUM\_CONTACTS\_ANSWERED\_IN\_X
     #
@@ -19929,7 +20484,7 @@ module Aws::Connect
     #     604800 (inclusive), in seconds. For `Comparison`, you can use `LT`
     #     (for "Less than") or `LTE` (for "Less than equal").
     #
-    #     UI name: [Contacts answered in X seconds][154]
+    #     UI name: [Contacts answered in X seconds][156]
     #
     #   SUM\_CONTACT\_FLOW\_TIME
     #
@@ -19938,7 +20493,7 @@ module Aws::Connect
     #     Valid groupings and filters: Queue, Channel, Routing Profile,
     #     Agent, Agent Hierarchy, Q in Connect
     #
-    #     UI name: [Contact flow time][155]
+    #     UI name: [Contact flow time][157]
     #
     #   SUM\_CONTACT\_TIME\_AGENT
     #
@@ -19947,7 +20502,7 @@ module Aws::Connect
     #     Valid groupings and filters: Routing Profile, Agent, Agent
     #     Hierarchy
     #
-    #     UI name: [Agent on contact time][156]
+    #     UI name: [Agent on contact time][158]
     #
     #   SUM\_CONTACTS\_DISCONNECTED
     #
@@ -19959,7 +20514,7 @@ module Aws::Connect
     #     Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype,
     #     Q in Connect
     #
-    #     UI name: [Contact disconnected][157]
+    #     UI name: [Contact disconnected][159]
     #
     #   SUM\_ERROR\_STATUS\_TIME\_AGENT
     #
@@ -19968,7 +20523,7 @@ module Aws::Connect
     #     Valid groupings and filters: Routing Profile, Agent, Agent
     #     Hierarchy
     #
-    #     UI name: [Error status time][158]
+    #     UI name: [Error status time][160]
     #
     #   SUM\_HANDLE\_TIME
     #
@@ -19977,7 +20532,7 @@ module Aws::Connect
     #     Valid groupings and filters: Queue, Channel, Routing Profile,
     #     Agent, Agent Hierarchy, Q in Connect
     #
-    #     UI name: [Contact handle time][159]
+    #     UI name: [Contact handle time][161]
     #
     #   SUM\_HOLD\_TIME
     #
@@ -19986,7 +20541,7 @@ module Aws::Connect
     #     Valid groupings and filters: Queue, Channel, Routing Profile,
     #     Agent, Agent Hierarchy, Q in Connect
     #
-    #     UI name: [Customer hold time][160]
+    #     UI name: [Customer hold time][162]
     #
     #   SUM\_IDLE\_TIME\_AGENT
     #
@@ -19995,7 +20550,7 @@ module Aws::Connect
     #     Valid groupings and filters: Routing Profile, Agent, Agent
     #     Hierarchy
     #
-    #     UI name: [Agent idle time][161]
+    #     UI name: [Agent idle time][163]
     #
     #   SUM\_INTERACTION\_AND\_HOLD\_TIME
     #
@@ -20004,7 +20559,7 @@ module Aws::Connect
     #     Valid groupings and filters: Queue, Channel, Routing Profile,
     #     Agent, Agent Hierarchy, Q in Connect
     #
-    #     UI name: [Agent interaction and hold time][162]
+    #     UI name: [Agent interaction and hold time][164]
     #
     #   SUM\_INTERACTION\_TIME
     #
@@ -20013,7 +20568,7 @@ module Aws::Connect
     #     Valid groupings and filters: Queue, Channel, Routing Profile,
     #     Agent, Agent Hierarchy
     #
-    #     UI name: [Agent interaction time][163]
+    #     UI name: [Agent interaction time][165]
     #
     #   SUM\_NON\_PRODUCTIVE\_TIME\_AGENT
     #
@@ -20022,7 +20577,7 @@ module Aws::Connect
     #     Valid groupings and filters: Routing Profile, Agent, Agent
     #     Hierarchy
     #
-    #     UI name: [Agent non-productive time][164]
+    #     UI name: [Agent non-productive time][166]
     #
     #   SUM\_ONLINE\_TIME\_AGENT
     #
@@ -20031,7 +20586,7 @@ module Aws::Connect
     #     Valid groupings and filters: Routing Profile, Agent, Agent
     #     Hierarchy
     #
-    #     UI name: [Online time][165]
+    #     UI name: [Online time][167]
     #
     #   SUM\_RETRY\_CALLBACK\_ATTEMPTS
     #
@@ -20040,7 +20595,7 @@ module Aws::Connect
     #     Valid groupings and filters: Queue, Channel, Routing Profile,
     #     contact/segmentAttributes/connect:Subtype, Q in Connect
     #
-    #     UI name: [Callback attempts][166]
+    #     UI name: [Callback attempts][168]
     #
     #
     #
@@ -20071,145 +20626,147 @@ module Aws::Connect
     #   [25]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-conversation-duration
     #   [26]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-dials-per-minute
     #   [27]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-evaluation-score
-    #   [28]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-agent-first-response-time
-    #   [29]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-flow-time
-    #   [30]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-agent-greeting-time
-    #   [31]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-handle-time
-    #   [32]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#active-ai-agents
-    #   [33]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#ai-handoff-rate
-    #   [34]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#ai-handoffs
-    #   [35]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#ai-agent-invocation-success
-    #   [36]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#ai-agent-invocation-success-rate
-    #   [37]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#ai-agent-invocations
-    #   [38]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#ai-agent-response-helpful
-    #   [39]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#ai-agent-response-not-helpful
-    #   [40]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#ai-response-completion-rate
-    #   [41]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#ai-involved-contacts
-    #   [42]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#ai-prompt-invocation-success
-    #   [43]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#ai-prompt-invocation-success-rate
-    #   [44]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#ai-prompt-invocations
-    #   [45]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#ai-tool-invocation-success
-    #   [46]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#ai-tool-invocation-success-rate
-    #   [47]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#ai-tool-invocations
-    #   [48]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-ai-agent-conversation-turns
-    #   [49]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-ai-conversation-turns
-    #   [50]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-ai-prompt-invocation-latency
-    #   [51]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-ai-tool-invocation-latency
-    #   [52]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#ai-tool-parameter-accuracy
-    #   [53]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#ai-tool-selection-accuracy
-    #   [54]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#ai-tool-utilization-accuracy
-    #   [55]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#completeness-score
-    #   [56]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#faithfulness-score
-    #   [57]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#goal-success-rate
-    #   [58]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#knowledge-content-references
-    #   [59]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#proactive-intents-engagement-rate
-    #   [60]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#proactive-intents-response-rate
-    #   [61]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#proactive-intents-answered
-    #   [62]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#proactive-intents-detected
-    #   [63]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#proactive-intents-engaged
-    #   [64]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-customer-hold-time
-    #   [65]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-customer-hold-time-all-contacts
-    #   [66]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-holds
-    #   [67]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-agent-interaction-and-customer-hold-time
-    #   [68]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-agent-interaction-time
-    #   [69]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-agent-interruptions
-    #   [70]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-agent-interruption-time
-    #   [71]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-agent-message-length
-    #   [72]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-customer-message-length
-    #   [73]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-messages
-    #   [74]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-agent-messages
-    #   [75]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-bot-messages
-    #   [76]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-customer-messages
-    #   [77]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-non-talk-time
-    #   [78]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-queue-answer-time
-    #   [79]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-queue-answer-time-customer-first-callback
-    #   [80]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-response-time-agent
-    #   [81]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-customer-time-agent
-    #   [82]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-resolution-time
-    #   [83]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-talk-time
-    #   [84]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-agent-talk-time
-    #   [85]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-customer-talk-time
-    #   [86]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-wait-time-after-customer-connection
-    #   [87]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-wait-time-after-customer-connection-customer-first-callback
-    #   [88]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-weighted-evaluation-score
-    #   [89]: https://docs.aws.amazon.com/connect/latest/adminguide/bot-metrics.html#bot-conversations-completed
-    #   [90]: https://docs.aws.amazon.com/connect/latest/adminguide/bot-metrics.html#bot-intents-completed
-    #   [91]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#campaign-contacts-abandoned-after-x
-    #   [92]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#campaign-contacts-abandoned-after-x-rate
-    #   [93]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#campaign-interactions
-    #   [94]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#campaign-progress-rate
-    #   [95]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#campaign-send-attempts
-    #   [96]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#campaign-send-exclusions
-    #   [97]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#cases-created
-    #   [98]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contacts-created
-    #   [99]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contacts-handled
-    #   [100]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contacts-handled-by-connected-to-agent-timestamp
-    #   [101]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contacts-hold-disconnect
-    #   [102]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contacts-hold-agent-disconnect
-    #   [103]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contacts-hold-customer-disconnect
-    #   [104]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contacts-put-on-hold
-    #   [105]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contacts-transferred-out-external
-    #   [106]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contacts-transferred-out-internal
-    #   [107]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contacts-queued
-    #   [108]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contacts-queued-by-enqueue
-    #   [109]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contacts-removed-from-queue
-    #   [110]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contacts-resolved
-    #   [111]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contacts-transferred-out
-    #   [112]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contacts-transferred-out-by-agent
-    #   [113]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contacts-transferred-out-queue
-    #   [114]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#current-cases
-    #   [115]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#conversations-abandoned
-    #   [116]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#delivery-attempts
-    #   [117]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#delivery-attempt-disposition-rate
-    #   [118]: https://docs.aws.amazon.com/connect/latest/adminguide/create-evaluation-forms.html
-    #   [119]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#evaluated-churn-propensity-rate
-    #   [120]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#evaluated-csat-percent
-    #   [121]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#evaluated-partial-self-service-resolution-rate
-    #   [122]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#evaluated-self-service-resolution-rate
-    #   [123]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#evaluated-successful-sale-rate
-    #   [124]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#evaluations-performed
-    #   [125]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#flows-outcome
-    #   [126]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#flows-started
-    #   [127]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#human-answered
-    #   [128]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#maximum-flow-time
-    #   [129]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#maximum-queued-time
-    #   [130]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#minimum-flow-time
-    #   [131]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#automatic-fails-percent
-    #   [132]: https://docs.aws.amazon.com/connect/latest/adminguide/bot-metrics.html#percent-bot-conversations-outcome
-    #   [133]: https://docs.aws.amazon.com/connect/latest/adminguide/bot-metrics.html#percent-bot-intents-outcome
-    #   [134]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#cases-resolved-on-first-contact
-    #   [135]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#flows-outcome-percentage
-    #   [136]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#non-talk-time-percent
-    #   [137]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#talk-time-percent
-    #   [138]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#agent-talk-time-percent
-    #   [139]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#customer-talk-time-percent
-    #   [140]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#recipients-attempted
-    #   [141]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#recipients-interacted
-    #   [142]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#ai-agent-collaborators
-    #   [143]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#ai-agent-collaboration-invocations
-    #   [144]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#ai-agent-selection-accuracy
-    #   [145]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-ai-agent-invocation-latency
-    #   [146]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#context-fidelity-score
-    #   [147]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#recipients-targeted
-    #   [148]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#cases-reopened
-    #   [149]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#cases-resolved
-    #   [150]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#service-level
-    #   [151]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#agent-api-connecting-time
-    #   [152]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contacts-abandoned
-    #   [153]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contacts-abandoned-in-x-seconds
-    #   [154]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contacts-answered-in-x-seconds
-    #   [155]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contact-flow-time
-    #   [156]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#agent-on-contact-time
-    #   [157]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contact-disconnected
-    #   [158]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#error-status-time
-    #   [159]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contact-handle-time
-    #   [160]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#customer-hold-time
-    #   [161]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#agent-idle-time
-    #   [162]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#agent-interaction-and-hold-time
-    #   [163]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#agent-interaction-time
-    #   [164]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#agent-non-productive-time
-    #   [165]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#online-time
-    #   [166]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#callback-attempts
+    #   [28]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-evaluation-score-by-submit-time
+    #   [29]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-agent-first-response-time
+    #   [30]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-flow-time
+    #   [31]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-agent-greeting-time
+    #   [32]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-handle-time
+    #   [33]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#active-ai-agents
+    #   [34]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#ai-handoff-rate
+    #   [35]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#ai-handoffs
+    #   [36]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#ai-agent-invocation-success
+    #   [37]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#ai-agent-invocation-success-rate
+    #   [38]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#ai-agent-invocations
+    #   [39]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#ai-agent-response-helpful
+    #   [40]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#ai-agent-response-not-helpful
+    #   [41]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#ai-response-completion-rate
+    #   [42]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#ai-involved-contacts
+    #   [43]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#ai-prompt-invocation-success
+    #   [44]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#ai-prompt-invocation-success-rate
+    #   [45]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#ai-prompt-invocations
+    #   [46]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#ai-tool-invocation-success
+    #   [47]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#ai-tool-invocation-success-rate
+    #   [48]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#ai-tool-invocations
+    #   [49]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-ai-agent-conversation-turns
+    #   [50]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-ai-conversation-turns
+    #   [51]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-ai-prompt-invocation-latency
+    #   [52]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-ai-tool-invocation-latency
+    #   [53]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#ai-tool-parameter-accuracy
+    #   [54]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#ai-tool-selection-accuracy
+    #   [55]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#ai-tool-utilization-accuracy
+    #   [56]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#completeness-score
+    #   [57]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#faithfulness-score
+    #   [58]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#goal-success-rate
+    #   [59]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#knowledge-content-references
+    #   [60]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#proactive-intents-engagement-rate
+    #   [61]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#proactive-intents-response-rate
+    #   [62]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#proactive-intents-answered
+    #   [63]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#proactive-intents-detected
+    #   [64]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#proactive-intents-engaged
+    #   [65]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-customer-hold-time
+    #   [66]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-customer-hold-time-all-contacts
+    #   [67]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-holds
+    #   [68]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-agent-interaction-and-customer-hold-time
+    #   [69]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-agent-interaction-time
+    #   [70]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-agent-interruptions
+    #   [71]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-agent-interruption-time
+    #   [72]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-agent-message-length
+    #   [73]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-customer-message-length
+    #   [74]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-messages
+    #   [75]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-agent-messages
+    #   [76]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-bot-messages
+    #   [77]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-customer-messages
+    #   [78]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-non-talk-time
+    #   [79]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-queue-answer-time
+    #   [80]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-queue-answer-time-customer-first-callback
+    #   [81]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-response-time-agent
+    #   [82]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-customer-time-agent
+    #   [83]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-resolution-time
+    #   [84]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-talk-time
+    #   [85]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-agent-talk-time
+    #   [86]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-customer-talk-time
+    #   [87]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-wait-time-after-customer-connection
+    #   [88]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-wait-time-after-customer-connection-customer-first-callback
+    #   [89]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-weighted-evaluation-score
+    #   [90]: https://docs.aws.amazon.com/connect/latest/adminguide/bot-metrics.html#bot-conversations-completed
+    #   [91]: https://docs.aws.amazon.com/connect/latest/adminguide/bot-metrics.html#bot-intents-completed
+    #   [92]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#campaign-contacts-abandoned-after-x
+    #   [93]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#campaign-contacts-abandoned-after-x-rate
+    #   [94]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#campaign-interactions
+    #   [95]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#campaign-progress-rate
+    #   [96]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#campaign-send-attempts
+    #   [97]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#campaign-send-exclusions
+    #   [98]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#cases-created
+    #   [99]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contacts-created
+    #   [100]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contacts-handled
+    #   [101]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contacts-handled-by-connected-to-agent-timestamp
+    #   [102]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contacts-hold-disconnect
+    #   [103]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contacts-hold-agent-disconnect
+    #   [104]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contacts-hold-customer-disconnect
+    #   [105]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contacts-put-on-hold
+    #   [106]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contacts-transferred-out-external
+    #   [107]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contacts-transferred-out-internal
+    #   [108]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contacts-queued
+    #   [109]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contacts-queued-by-enqueue
+    #   [110]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contacts-removed-from-queue
+    #   [111]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contacts-resolved
+    #   [112]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contacts-transferred-out
+    #   [113]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contacts-transferred-out-by-agent
+    #   [114]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contacts-transferred-out-queue
+    #   [115]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#current-cases
+    #   [116]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#conversations-abandoned
+    #   [117]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#delivery-attempts
+    #   [118]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#delivery-attempt-disposition-rate
+    #   [119]: https://docs.aws.amazon.com/connect/latest/adminguide/create-evaluation-forms.html
+    #   [120]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#evaluated-churn-propensity-rate
+    #   [121]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#evaluated-csat-percent
+    #   [122]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#evaluated-partial-self-service-resolution-rate
+    #   [123]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#evaluated-self-service-resolution-rate
+    #   [124]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#evaluated-successful-sale-rate
+    #   [125]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#evaluations-performed
+    #   [126]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#evaluations-performed-by-submit-time
+    #   [127]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#flows-outcome
+    #   [128]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#flows-started
+    #   [129]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#human-answered
+    #   [130]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#maximum-flow-time
+    #   [131]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#maximum-queued-time
+    #   [132]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#minimum-flow-time
+    #   [133]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#automatic-fails-percent
+    #   [134]: https://docs.aws.amazon.com/connect/latest/adminguide/bot-metrics.html#percent-bot-conversations-outcome
+    #   [135]: https://docs.aws.amazon.com/connect/latest/adminguide/bot-metrics.html#percent-bot-intents-outcome
+    #   [136]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#cases-resolved-on-first-contact
+    #   [137]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#flows-outcome-percentage
+    #   [138]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#non-talk-time-percent
+    #   [139]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#talk-time-percent
+    #   [140]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#agent-talk-time-percent
+    #   [141]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#customer-talk-time-percent
+    #   [142]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#recipients-attempted
+    #   [143]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#recipients-interacted
+    #   [144]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#ai-agent-collaborators
+    #   [145]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#ai-agent-collaboration-invocations
+    #   [146]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#ai-agent-selection-accuracy
+    #   [147]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-ai-agent-invocation-latency
+    #   [148]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#context-fidelity-score
+    #   [149]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#recipients-targeted
+    #   [150]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#cases-reopened
+    #   [151]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#cases-resolved
+    #   [152]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#service-level
+    #   [153]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#agent-api-connecting-time
+    #   [154]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contacts-abandoned
+    #   [155]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contacts-abandoned-in-x-seconds
+    #   [156]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contacts-answered-in-x-seconds
+    #   [157]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contact-flow-time
+    #   [158]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#agent-on-contact-time
+    #   [159]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contact-disconnected
+    #   [160]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#error-status-time
+    #   [161]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contact-handle-time
+    #   [162]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#customer-hold-time
+    #   [163]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#agent-idle-time
+    #   [164]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#agent-interaction-and-hold-time
+    #   [165]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#agent-interaction-time
+    #   [166]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#agent-non-productive-time
+    #   [167]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#online-time
+    #   [168]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#callback-attempts
     #   @return [Array<Types::MetricV2>]
     #
     # @!attribute [rw] next_token
@@ -22047,6 +22604,15 @@ module Aws::Connect
     #   The name of the source.
     #   @return [String]
     #
+    # @!attribute [rw] last_modified_time
+    #   The timestamp when the integration association was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_region
+    #   The Amazon Web Services Region where the integration association was
+    #   last modified.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/IntegrationAssociationSummary AWS API Documentation
     #
     class IntegrationAssociationSummary < Struct.new(
@@ -22057,7 +22623,9 @@ module Aws::Connect
       :integration_arn,
       :source_application_url,
       :source_application_name,
-      :source_type)
+      :source_type,
+      :last_modified_time,
+      :last_modified_region)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -24950,6 +25518,14 @@ module Aws::Connect
     #   supported segment types.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] list_filter
+    #   A filter that restricts the segments returned by the API. When
+    #   `SegmentTypes` includes `Categories`, use
+    #   `CategoriesAttributeFilter` to return only the category segments
+    #   whose rules have tags that match the filter. This enforces tag-based
+    #   access control on the categories a caller can view.
+    #   @return [Types::RealTimeContactAnalysisSegmentsFilter]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListRealtimeContactAnalysisSegmentsV2Request AWS API Documentation
     #
     class ListRealtimeContactAnalysisSegmentsV2Request < Struct.new(
@@ -24958,7 +25534,8 @@ module Aws::Connect
       :max_results,
       :next_token,
       :output_type,
-      :segment_types)
+      :segment_types,
+      :list_filter)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -27629,8 +28206,8 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # Additional recipients for UpdateContact, allowing an empty list to
-    # clear CC recipients.
+    # The additional recipients of an outbound email that you can update. An
+    # empty list of `CcEmailAddresses` clears the existing CC recipients.
     #
     # @!attribute [rw] cc_email_addresses
     #   The additional CC email address recipients. You can specify up to 50
@@ -27702,7 +28279,7 @@ module Aws::Connect
     end
 
     # Information about the property value used in automation of a numeric
-    # questions. Label values are associated with minimum and maximum values
+    # question. Label values are associated with minimum and maximum values
     # for the numeric question.
     #
     # * Sentiment scores have a minimum value of -5 and maximum value of 5.
@@ -28604,7 +29181,14 @@ module Aws::Connect
     # attribute.
     #
     # @!attribute [rw] resource_type
-    #   The type of resource to filter on. Valid values: `CONTACT`.
+    #   The type of resource to filter on. Valid values:
+    #
+    #   * `CONTACT` - Filter on attributes of the contact, such as tags
+    #     assigned to the contact.
+    #
+    #   * `CONTACT_EVALUATION` - Filter on attributes of the contact
+    #     evaluation, such as tags assigned to the contact evaluation, for
+    #     rules triggered on the `OnContactEvaluationSubmit` event source.
     #   @return [String]
     #
     # @!attribute [rw] filter_type
@@ -29756,6 +30340,10 @@ module Aws::Connect
 
     # Provides information about the category rule that was matched.
     #
+    # @!attribute [rw] rule_id
+    #   The unique identifier of the rule that created the matched category.
+    #   @return [String]
+    #
     # @!attribute [rw] points_of_interest
     #   List of PointOfInterest - objects describing a single match of a
     #   rule.
@@ -29764,6 +30352,7 @@ module Aws::Connect
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/RealTimeContactAnalysisCategoryDetails AWS API Documentation
     #
     class RealTimeContactAnalysisCategoryDetails < Struct.new(
+      :rule_id,
       :points_of_interest)
       SENSITIVE = []
       include Aws::Structure
@@ -30109,6 +30698,26 @@ module Aws::Connect
       :time,
       :redaction,
       :sentiment)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A filter that restricts the segments returned by
+    # `ListRealtimeContactAnalysisSegmentsV2`. It currently supports
+    # filtering category segments by the tags on the rules that create them,
+    # which enforces tag-based access control on the categories a caller can
+    # view.
+    #
+    # @!attribute [rw] categories_attribute_filter
+    #   A filter applied to category segments based on the tags of the rules
+    #   that create the matched categories. This filter applies only when
+    #   `SegmentTypes` includes `Categories`.
+    #   @return [Types::CategoriesAttributeFilter]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/RealTimeContactAnalysisSegmentsFilter AWS API Documentation
+    #
+    class RealTimeContactAnalysisSegmentsFilter < Struct.new(
+      :categories_attribute_filter)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -30625,6 +31234,26 @@ module Aws::Connect
     #   `CONTACT_ANALYSIS`. Otherwise, null.
     #   @return [Types::ContactAnalysisReference]
     #
+    # @!attribute [rw] voicemail_recording
+    #   Information about the reference when the `referenceType` is
+    #   `VOICEMAIL_RECORDING`. Otherwise, null.
+    #   @return [Types::VoicemailRecordingReference]
+    #
+    # @!attribute [rw] voicemail_recording_redacted
+    #   Information about the reference when the `referenceType` is
+    #   `VOICEMAIL_RECORDING_REDACTED`. Otherwise, null.
+    #   @return [Types::VoicemailRecordingReference]
+    #
+    # @!attribute [rw] voicemail_analysis
+    #   Information about the reference when the `referenceType` is
+    #   `VOICEMAIL_ANALYSIS`. Otherwise, null.
+    #   @return [Types::VoicemailAnalysisReference]
+    #
+    # @!attribute [rw] voicemail_analysis_redacted
+    #   Information about the reference when the `referenceType` is
+    #   `VOICEMAIL_ANALYSIS_REDACTED`. Otherwise, null.
+    #   @return [Types::VoicemailAnalysisReference]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ReferenceSummary AWS API Documentation
     #
     class ReferenceSummary < Struct.new(
@@ -30639,6 +31268,10 @@ module Aws::Connect
       :date,
       :email,
       :contact_analysis,
+      :voicemail_recording,
+      :voicemail_recording_redacted,
+      :voicemail_analysis,
+      :voicemail_analysis_redacted,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
@@ -30655,6 +31288,10 @@ module Aws::Connect
       class Date < ReferenceSummary; end
       class Email < ReferenceSummary; end
       class ContactAnalysis < ReferenceSummary; end
+      class VoicemailRecording < ReferenceSummary; end
+      class VoicemailRecordingRedacted < ReferenceSummary; end
+      class VoicemailAnalysis < ReferenceSummary; end
+      class VoicemailAnalysisRedacted < ReferenceSummary; end
       class Unknown < ReferenceSummary; end
     end
 
@@ -31690,6 +32327,12 @@ module Aws::Connect
     #   Supported only for `TriggerEventSource` values: `OnCaseUpdate`.
     #   @return [Types::EndAssociatedTasksActionDefinition]
     #
+    # @!attribute [rw] end_associated_emails_action
+    #   Information about the end associated emails action.
+    #
+    #   Supported only for `TriggerEventSource` values: `OnCaseUpdate`.
+    #   @return [Types::EndAssociatedEmailsActionDefinition]
+    #
     # @!attribute [rw] submit_auto_evaluation_action
     #   Information about the submit automated evaluation action.
     #   @return [Types::SubmitAutoEvaluationActionDefinition]
@@ -31723,6 +32366,7 @@ module Aws::Connect
       :update_case_action,
       :assign_sla_action,
       :end_associated_tasks_action,
+      :end_associated_emails_action,
       :submit_auto_evaluation_action,
       :extract_information_action,
       :send_in_app_notification_action)
@@ -34864,11 +35508,43 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # Information about a condition-based automation rule for a single
+    # select question. When the condition is satisfied, the specified answer
+    # option is selected.
+    #
+    # @!attribute [rw] condition
+    #   The condition that must be satisfied for the answer option to be
+    #   selected. The condition uses the same sources, comparators, and
+    #   operators as item enablement conditions.
+    #   @return [Types::EvaluationFormItemEnablementCondition]
+    #
+    # @!attribute [rw] option_ref_id
+    #   The identifier of the answer option to select when the condition is
+    #   satisfied.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/SingleSelectQuestionAutomationRule AWS API Documentation
+    #
+    class SingleSelectQuestionAutomationRule < Struct.new(
+      :condition,
+      :option_ref_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Information about the automation option based on a rule category for a
     # single select question.
     #
     # @!attribute [rw] category
-    #   The category name, as defined in Rules.
+    #   The category name, as defined in Rules. This is equivalent to a
+    #   conversational analytics rule with the same name: the automation
+    #   option is applied based on whether that rule matched the contact.
+    #   For more information about creating rules, see [Create rules][1] in
+    #   the *Connect Customer Administrator Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/contact-lens-rules.html
     #   @return [String]
     #
     # @!attribute [rw] condition
@@ -40964,8 +41640,11 @@ module Aws::Connect
     #   for each channel. ACW timeout specifies how many seconds agents have
     #   for after contact work, such as entering notes about the contact.
     #   The minimum setting is 1 second, and the maximum is 2,000,000
-    #   seconds (24 days). Enter 0 for an indefinite amount of time, meaning
-    #   agents must manually choose to end ACW.
+    #   seconds (24 days). For the CHAT channel, the maximum for a specific
+    #   duration is 5,400 seconds (90 minutes); higher values end ACW after
+    #   90 minutes. For all channels, including chat, you can enter 0 for an
+    #   indefinite amount of time, meaning agents must manually choose to
+    #   end ACW.
     #   @return [Array<Types::AfterContactWorkConfigPerChannel>]
     #
     # @!attribute [rw] phone_number_configs
@@ -42013,10 +42692,13 @@ module Aws::Connect
     # @!attribute [rw] after_contact_work_time_limit
     #   The After Call Work (ACW) timeout setting, in seconds. This
     #   parameter has a minimum value of 0 and a maximum value of 2,000,000
-    #   seconds (24 days). Enter 0 if you don't want to allocate a specific
-    #   amount of ACW time. It essentially means an indefinite amount of
-    #   time. When the conversation ends, ACW starts; the agent must choose
-    #   Close contact to end ACW.
+    #   seconds (24 days). For the CHAT channel, the maximum for a specific
+    #   duration is 5,400 seconds (90 minutes); higher values end ACW after
+    #   90 minutes. For all channels, including chat, you can enter 0 if you
+    #   don't want to allocate a specific amount of ACW time. It
+    #   essentially means an indefinite amount of time. When the
+    #   conversation ends, ACW starts; the agent must choose Close contact
+    #   to end ACW.
     #
     #   <note markdown="1"> When returned by a `SearchUsers` call, `AfterContactWorkTimeLimit`
     #   is returned in milliseconds.
@@ -42918,6 +43600,83 @@ module Aws::Connect
     class VoiceRecordingConfiguration < Struct.new(
       :voice_recording_track,
       :ivr_recording_track)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about a reference when the `referenceType` is
+    # `VOICEMAIL_ANALYSIS` or `VOICEMAIL_ANALYSIS_REDACTED`. Otherwise,
+    # null.
+    #
+    # @!attribute [rw] name
+    #   Identifier of the voicemail analysis reference.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The location path of the voicemail analysis reference.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   Status of the voicemail analysis reference type.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the voicemail analysis reference.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/VoicemailAnalysisReference AWS API Documentation
+    #
+    class VoicemailAnalysisReference < Struct.new(
+      :name,
+      :value,
+      :status,
+      :arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the voicemails recorded for a voice contact.
+    #
+    # @!attribute [rw] number_of_voicemails
+    #   The number of voicemails recorded for the contact. Valid range is
+    #   1-3.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/VoicemailInfo AWS API Documentation
+    #
+    class VoicemailInfo < Struct.new(
+      :number_of_voicemails)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about a reference when the `referenceType` is
+    # `VOICEMAIL_RECORDING` or `VOICEMAIL_RECORDING_REDACTED`. Otherwise,
+    # null.
+    #
+    # @!attribute [rw] name
+    #   Identifier of the voicemail recording reference.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The location path of the voicemail recording reference.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   Status of the voicemail recording reference type.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the voicemail recording reference.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/VoicemailRecordingReference AWS API Documentation
+    #
+    class VoicemailRecordingReference < Struct.new(
+      :name,
+      :value,
+      :status,
+      :arn)
       SENSITIVE = []
       include Aws::Structure
     end

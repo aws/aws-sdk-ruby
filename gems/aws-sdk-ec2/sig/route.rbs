@@ -71,6 +71,9 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Route.html#ip_address-instance_method
       def ip_address: () -> ::String
 
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Route.html#igw_firewall-instance_method
+      def igw_firewall: () -> Types::IgwFirewall
+
       def client: () -> Client
 
 

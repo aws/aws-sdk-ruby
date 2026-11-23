@@ -482,6 +482,17 @@ module Aws::Route53Domains
       SENSITIVE: []
     end
 
+    class RestoreDomainRequest
+      attr_accessor domain_name: ::String
+      attr_accessor consent: Types::Consent
+      SENSITIVE: []
+    end
+
+    class RestoreDomainResponse
+      attr_accessor operation_id: ::String
+      SENSITIVE: []
+    end
+
     class RetrieveDomainAuthCodeRequest
       attr_accessor domain_name: ::String
       SENSITIVE: []

@@ -264,7 +264,8 @@ module Aws::Mgn
     #     An integer representing the maximum number attempts that will be made for
     #     a single request, including the initial attempt.  For example,
     #     setting this value to 5 will result in a request being retried up to
-    #     4 times. Used in `standard` and `adaptive` retry modes.
+    #     4 times. Used in `standard` and `adaptive` retry modes. Defaults to 3,
+    #     except for DynamoDB and DynamoDB Streams, which default to 4.
     #
     #   @option options [String] :profile ("default")
     #     Used when loading credentials from the shared credentials file at `HOME/.aws/credentials`.
@@ -327,15 +328,15 @@ module Aws::Mgn
     #     used by the default backoff function. This option is only used in the
     #     `legacy` retry mode.
     #
-    #   @option options [String] :retry_mode ("legacy")
+    #   @option options [String] :retry_mode ("standard")
     #     Specifies which retry algorithm to use. Values are:
     #
-    #     * `legacy` - The pre-existing retry behavior. This is the default
-    #       value if no retry mode is provided.
+    #     * `legacy` - The pre-existing retry behavior.
     #
     #     * `standard` - A standardized set of retry rules across the AWS SDKs.
     #       This includes support for retry quotas, which limit the number of
-    #       unsuccessful retries a client can make.
+    #       unsuccessful retries a client can make. This is the default value
+    #       if no retry mode is provided.
     #
     #     * `adaptive` - A retry mode that includes all the functionality of
     #       `standard` mode along with automatic client side throttling.
@@ -725,6 +726,7 @@ module Aws::Mgn
     #   resp.data_replication_info.data_replication_error.raw_error #=> String
     #   resp.data_replication_info.last_snapshot_date_time #=> String
     #   resp.data_replication_info.replicator_id #=> String
+    #   resp.data_replication_info.staging_outpost_arn #=> String
     #   resp.life_cycle.added_to_service_date_time #=> String
     #   resp.life_cycle.first_byte_date_time #=> String
     #   resp.life_cycle.elapsed_replication_duration #=> String
@@ -911,6 +913,9 @@ module Aws::Mgn
     # @option params [String] :map_auto_tagging_mpe_id
     #   Launch configuration template map auto tagging MPE ID.
     #
+    # @option params [String] :map_auto_tagging_key
+    #   Launch configuration template map auto tagging key.
+    #
     # @option params [Hash<String,String>] :tags
     #   Request to associate tags during creation of a Launch Configuration
     #   Template.
@@ -958,6 +963,7 @@ module Aws::Mgn
     #   * {Types::LaunchConfigurationTemplate#post_launch_actions #post_launch_actions} => Types::PostLaunchActions
     #   * {Types::LaunchConfigurationTemplate#enable_map_auto_tagging #enable_map_auto_tagging} => Boolean
     #   * {Types::LaunchConfigurationTemplate#map_auto_tagging_mpe_id #map_auto_tagging_mpe_id} => String
+    #   * {Types::LaunchConfigurationTemplate#map_auto_tagging_key #map_auto_tagging_key} => String
     #   * {Types::LaunchConfigurationTemplate#tags #tags} => Hash&lt;String,String&gt;
     #   * {Types::LaunchConfigurationTemplate#ec2_launch_template_id #ec2_launch_template_id} => String
     #   * {Types::LaunchConfigurationTemplate#launch_disposition #launch_disposition} => String
@@ -1005,6 +1011,7 @@ module Aws::Mgn
     #     },
     #     enable_map_auto_tagging: false,
     #     map_auto_tagging_mpe_id: "TagValue",
+    #     map_auto_tagging_key: "TagKey",
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
@@ -1057,6 +1064,7 @@ module Aws::Mgn
     #   resp.post_launch_actions.ssm_documents[0].external_parameters["SsmDocumentParameterName"].dynamic_path #=> String
     #   resp.enable_map_auto_tagging #=> Boolean
     #   resp.map_auto_tagging_mpe_id #=> String
+    #   resp.map_auto_tagging_key #=> String
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
     #   resp.ec2_launch_template_id #=> String
@@ -1093,6 +1101,13 @@ module Aws::Mgn
     # Creates a new network migration definition that specifies the source
     # and target network configuration for a migration.
     #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
     # @option params [required, String] :name
     #   The name of the network migration definition.
     #
@@ -1101,6 +1116,11 @@ module Aws::Mgn
     #
     # @option params [Array<Types::SourceConfiguration>] :source_configurations
     #   A list of source configurations for the network migration.
+    #
+    # @option params [String] :definition_type
+    #   Specifies the type of the definition. `MIGRATION` migrates an existing
+    #   network. `NEW_NETWORK` designs a new network. If you omit this value,
+    #   the definition type is `MIGRATION`.
     #
     # @option params [required, Types::TargetS3Configuration] :target_s3_configuration
     #   The S3 configuration for storing the target network artifacts.
@@ -1135,6 +1155,7 @@ module Aws::Mgn
     #   * {Types::NetworkMigrationDefinition#name #name} => String
     #   * {Types::NetworkMigrationDefinition#description #description} => String
     #   * {Types::NetworkMigrationDefinition#source_configurations #source_configurations} => Array&lt;Types::SourceConfiguration&gt;
+    #   * {Types::NetworkMigrationDefinition#definition_type #definition_type} => String
     #   * {Types::NetworkMigrationDefinition#target_s3_configuration #target_s3_configuration} => Types::TargetS3Configuration
     #   * {Types::NetworkMigrationDefinition#target_network #target_network} => Types::TargetNetwork
     #   * {Types::NetworkMigrationDefinition#target_deployment #target_deployment} => String
@@ -1204,11 +1225,12 @@ module Aws::Mgn
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_network_migration_definition({
+    #     client_token: "ClientIdempotencyToken",
     #     name: "NetworkMigrationDefinitionName", # required
     #     description: "NetworkMigrationDefinitionDescription",
     #     source_configurations: [
     #       {
-    #         source_environment: "NSX", # required, accepts NSX, VSPHERE, FORTIGATE_FIREWALL, PALO_ALTO_FIREWALL, CISCO_ACI, LOGICAL_MODEL, MODELIZE_IT, AWS_DISCOVERY_COLLECTOR
+    #         source_environment: "NSX", # required, accepts NSX, VSPHERE, FORTIGATE_FIREWALL, PALO_ALTO_FIREWALL, CISCO_ACI, LOGICAL_MODEL, MODELIZE_IT, AWS_DISCOVERY_COLLECTOR, MIGRATION_PLANNING_ARTIFACTS, F5_BIGIP
     #         source_s3_configuration: { # required
     #           s3_bucket: "S3BucketName", # required
     #           s3_bucket_owner: "AccountID", # required
@@ -1216,6 +1238,7 @@ module Aws::Mgn
     #         },
     #       },
     #     ],
+    #     definition_type: "MIGRATION", # accepts MIGRATION, NEW_NETWORK
     #     target_s3_configuration: { # required
     #       s3_bucket: "S3BucketName", # required
     #       s3_bucket_owner: "AccountID", # required
@@ -1249,10 +1272,11 @@ module Aws::Mgn
     #   resp.name #=> String
     #   resp.description #=> String
     #   resp.source_configurations #=> Array
-    #   resp.source_configurations[0].source_environment #=> String, one of "NSX", "VSPHERE", "FORTIGATE_FIREWALL", "PALO_ALTO_FIREWALL", "CISCO_ACI", "LOGICAL_MODEL", "MODELIZE_IT", "AWS_DISCOVERY_COLLECTOR"
+    #   resp.source_configurations[0].source_environment #=> String, one of "NSX", "VSPHERE", "FORTIGATE_FIREWALL", "PALO_ALTO_FIREWALL", "CISCO_ACI", "LOGICAL_MODEL", "MODELIZE_IT", "AWS_DISCOVERY_COLLECTOR", "MIGRATION_PLANNING_ARTIFACTS", "F5_BIGIP"
     #   resp.source_configurations[0].source_s3_configuration.s3_bucket #=> String
     #   resp.source_configurations[0].source_s3_configuration.s3_bucket_owner #=> String
     #   resp.source_configurations[0].source_s3_configuration.s3_key #=> String
+    #   resp.definition_type #=> String, one of "MIGRATION", "NEW_NETWORK"
     #   resp.target_s3_configuration.s3_bucket #=> String
     #   resp.target_s3_configuration.s3_bucket_owner #=> String
     #   resp.target_network.topology #=> String, one of "ISOLATED_VPC", "HUB_AND_SPOKE"
@@ -1277,6 +1301,80 @@ module Aws::Mgn
     # @param [Hash] params ({})
     def create_network_migration_definition(params = {}, options = {})
       req = build_request(:create_network_migration_definition, params)
+      req.send_request(options)
+    end
+
+    # Creates a source action, which references a script in AWS Systems
+    # Manager Parameter Store that Application Migration Service runs on
+    # source environment.
+    #
+    # @option params [required, String] :name
+    #   The name of the source action.
+    #
+    # @option params [String] :description
+    #   A description of the source action.
+    #
+    # @option params [required, String] :ssm_parameter_name
+    #   AWS Systems Manager Parameter Store parameter name.
+    #
+    # @option params [Integer] :timeout_seconds
+    #   The maximum time, in seconds, that the script can run on each source
+    #   server.
+    #
+    # @option params [String] :operating_system
+    #   The operating system of the source servers that the script runs on.
+    #   Set to `linux` or `windows` to run the script only on source servers
+    #   with that operating system, or `all` to run it on both.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   Tags to assign to the source action.
+    #
+    # @option params [String] :account_id
+    #   Account ID.
+    #
+    # @return [Types::CreateRemoteSourceActionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateRemoteSourceActionResponse#remote_source_action_id #remote_source_action_id} => String
+    #   * {Types::CreateRemoteSourceActionResponse#arn #arn} => String
+    #   * {Types::CreateRemoteSourceActionResponse#name #name} => String
+    #   * {Types::CreateRemoteSourceActionResponse#description #description} => String
+    #   * {Types::CreateRemoteSourceActionResponse#ssm_parameter_name #ssm_parameter_name} => String
+    #   * {Types::CreateRemoteSourceActionResponse#timeout_seconds #timeout_seconds} => Integer
+    #   * {Types::CreateRemoteSourceActionResponse#operating_system #operating_system} => String
+    #   * {Types::CreateRemoteSourceActionResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_remote_source_action({
+    #     name: "RemoteSourceActionName", # required
+    #     description: "RemoteSourceActionDescription",
+    #     ssm_parameter_name: "SsmParameterStoreParameterName", # required
+    #     timeout_seconds: 1,
+    #     operating_system: "RemoteSourceActionOperatingSystem",
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #     account_id: "AccountID",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.remote_source_action_id #=> String
+    #   resp.arn #=> String
+    #   resp.name #=> String
+    #   resp.description #=> String
+    #   resp.ssm_parameter_name #=> String
+    #   resp.timeout_seconds #=> Integer
+    #   resp.operating_system #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/CreateRemoteSourceAction AWS API Documentation
+    #
+    # @overload create_remote_source_action(params = {})
+    # @param [Hash] params ({})
+    def create_remote_source_action(params = {}, options = {})
+      req = build_request(:create_remote_source_action, params)
       req.send_request(options)
     end
 
@@ -1345,6 +1443,13 @@ module Aws::Mgn
     #   Request to store snapshot on local zone during Replication Settings
     #   template creation.
     #
+    # @option params [String] :outpost_snapshot_location
+    #   Request to set the location of replication snapshots when the staging
+    #   area subnet is on an AWS Outpost during Replication Settings template
+    #   creation. Set to `OUTPOST` to keep replication snapshots on the
+    #   Outpost, or `REGION` to store them in the AWS Region. Required when
+    #   the staging area subnet is on an Outpost, and not allowed otherwise.
+    #
     # @option params [Types::StorageConfiguration] :storage_configuration
     #   Request to configure storage during Replication Settings template
     #   creation.
@@ -1369,6 +1474,7 @@ module Aws::Mgn
     #   * {Types::ReplicationConfigurationTemplate#tags #tags} => Hash&lt;String,String&gt;
     #   * {Types::ReplicationConfigurationTemplate#internet_protocol #internet_protocol} => String
     #   * {Types::ReplicationConfigurationTemplate#store_snapshot_on_local_zone #store_snapshot_on_local_zone} => Boolean
+    #   * {Types::ReplicationConfigurationTemplate#outpost_snapshot_location #outpost_snapshot_location} => String
     #   * {Types::ReplicationConfigurationTemplate#storage_configuration #storage_configuration} => Types::StorageConfiguration
     #
     # @example Request syntax with placeholder values
@@ -1394,6 +1500,7 @@ module Aws::Mgn
     #     },
     #     internet_protocol: "IPV4", # accepts IPV4, IPV6
     #     store_snapshot_on_local_zone: false,
+    #     outpost_snapshot_location: "OUTPOST", # accepts OUTPOST, REGION
     #     storage_configuration: {
     #       storage_type: "EBS", # required, accepts EBS, FSX_ONTAP
     #       fsx_ontap_configuration: {
@@ -1426,6 +1533,7 @@ module Aws::Mgn
     #   resp.tags["TagKey"] #=> String
     #   resp.internet_protocol #=> String, one of "IPV4", "IPV6"
     #   resp.store_snapshot_on_local_zone #=> Boolean
+    #   resp.outpost_snapshot_location #=> String, one of "OUTPOST", "REGION"
     #   resp.storage_configuration.storage_type #=> String, one of "EBS", "FSX_ONTAP"
     #   resp.storage_configuration.fsx_ontap_configuration.storage_virtual_machine_id #=> String
     #   resp.storage_configuration.fsx_ontap_configuration.credentials_secret_arn #=> String
@@ -1629,6 +1737,33 @@ module Aws::Mgn
     # @param [Hash] params ({})
     def delete_network_migration_definition(params = {}, options = {})
       req = build_request(:delete_network_migration_definition, params)
+      req.send_request(options)
+    end
+
+    # Deletes a source action. This operation also deletes the invocation
+    # results of the source action.
+    #
+    # @option params [required, String] :remote_source_action_id
+    #   The unique identifier of the source action to delete.
+    #
+    # @option params [String] :account_id
+    #   Account ID.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_remote_source_action({
+    #     remote_source_action_id: "RemoteSourceActionID", # required
+    #     account_id: "AccountID",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/DeleteRemoteSourceAction AWS API Documentation
+    #
+    # @overload delete_remote_source_action(params = {})
+    # @param [Hash] params ({})
+    def delete_remote_source_action(params = {}, options = {})
+      req = build_request(:delete_remote_source_action, params)
       req.send_request(options)
     end
 
@@ -1916,6 +2051,7 @@ module Aws::Mgn
     #   resp.items[0].post_launch_actions.ssm_documents[0].external_parameters["SsmDocumentParameterName"].dynamic_path #=> String
     #   resp.items[0].enable_map_auto_tagging #=> Boolean
     #   resp.items[0].map_auto_tagging_mpe_id #=> String
+    #   resp.items[0].map_auto_tagging_key #=> String
     #   resp.items[0].tags #=> Hash
     #   resp.items[0].tags["TagKey"] #=> String
     #   resp.items[0].ec2_launch_template_id #=> String
@@ -2002,6 +2138,7 @@ module Aws::Mgn
     #   resp.items[0].tags["TagKey"] #=> String
     #   resp.items[0].internet_protocol #=> String, one of "IPV4", "IPV6"
     #   resp.items[0].store_snapshot_on_local_zone #=> Boolean
+    #   resp.items[0].outpost_snapshot_location #=> String, one of "OUTPOST", "REGION"
     #   resp.items[0].storage_configuration.storage_type #=> String, one of "EBS", "FSX_ONTAP"
     #   resp.items[0].storage_configuration.fsx_ontap_configuration.storage_virtual_machine_id #=> String
     #   resp.items[0].storage_configuration.fsx_ontap_configuration.credentials_secret_arn #=> String
@@ -2088,6 +2225,7 @@ module Aws::Mgn
     #   resp.items[0].data_replication_info.data_replication_error.raw_error #=> String
     #   resp.items[0].data_replication_info.last_snapshot_date_time #=> String
     #   resp.items[0].data_replication_info.replicator_id #=> String
+    #   resp.items[0].data_replication_info.staging_outpost_arn #=> String
     #   resp.items[0].life_cycle.added_to_service_date_time #=> String
     #   resp.items[0].life_cycle.first_byte_date_time #=> String
     #   resp.items[0].life_cycle.elapsed_replication_duration #=> String
@@ -2257,7 +2395,7 @@ module Aws::Mgn
     # dataReplicationInfo.dataReplicationState will be set to DISCONNECTED;
     # The totalStorageBytes property for each of
     # dataReplicationInfo.replicatedDisks will be set to zero;
-    # dataReplicationInfo.lagDuration and dataReplicationInfo.lagDuration
+    # dataReplicationInfo.lagDuration and dataReplicationInfo.etaDateTime
     # will be nullified.
     #
     # @option params [required, String] :source_server_id
@@ -2325,6 +2463,7 @@ module Aws::Mgn
     #   resp.data_replication_info.data_replication_error.raw_error #=> String
     #   resp.data_replication_info.last_snapshot_date_time #=> String
     #   resp.data_replication_info.replicator_id #=> String
+    #   resp.data_replication_info.staging_outpost_arn #=> String
     #   resp.life_cycle.added_to_service_date_time #=> String
     #   resp.life_cycle.first_byte_date_time #=> String
     #   resp.life_cycle.elapsed_replication_duration #=> String
@@ -2386,7 +2525,7 @@ module Aws::Mgn
     # DISCONNECTED; The SourceServer.lifeCycle.state will be changed to
     # CUTOVER; The totalStorageBytes property for each of
     # dataReplicationInfo.replicatedDisks will be set to zero;
-    # dataReplicationInfo.lagDuration and dataReplicationInfo.lagDuration
+    # dataReplicationInfo.lagDuration and dataReplicationInfo.etaDateTime
     # will be nullified.
     #
     # @option params [required, String] :source_server_id
@@ -2454,6 +2593,7 @@ module Aws::Mgn
     #   resp.data_replication_info.data_replication_error.raw_error #=> String
     #   resp.data_replication_info.last_snapshot_date_time #=> String
     #   resp.data_replication_info.replicator_id #=> String
+    #   resp.data_replication_info.staging_outpost_arn #=> String
     #   resp.life_cycle.added_to_service_date_time #=> String
     #   resp.life_cycle.first_byte_date_time #=> String
     #   resp.life_cycle.elapsed_replication_duration #=> String
@@ -2527,6 +2667,7 @@ module Aws::Mgn
     #   * {Types::LaunchConfiguration#post_launch_actions #post_launch_actions} => Types::PostLaunchActions
     #   * {Types::LaunchConfiguration#enable_map_auto_tagging #enable_map_auto_tagging} => Boolean
     #   * {Types::LaunchConfiguration#map_auto_tagging_mpe_id #map_auto_tagging_mpe_id} => String
+    #   * {Types::LaunchConfiguration#map_auto_tagging_key #map_auto_tagging_key} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -2563,6 +2704,7 @@ module Aws::Mgn
     #   resp.post_launch_actions.ssm_documents[0].external_parameters["SsmDocumentParameterName"].dynamic_path #=> String
     #   resp.enable_map_auto_tagging #=> Boolean
     #   resp.map_auto_tagging_mpe_id #=> String
+    #   resp.map_auto_tagging_key #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/GetLaunchConfiguration AWS API Documentation
     #
@@ -2570,6 +2712,55 @@ module Aws::Mgn
     # @param [Hash] params ({})
     def get_launch_configuration(params = {}, options = {})
       req = build_request(:get_launch_configuration, params)
+      req.send_request(options)
+    end
+
+    # Gets the launch configuration defaults of a source server: the Amazon
+    # Elastic Block Store (Amazon EBS) volume configuration used for the
+    # disk mappings created later in the source server's Amazon Elastic
+    # Compute Cloud (Amazon EC2) launch template.
+    #
+    # @option params [required, String] :source_server_id
+    #   Request to get the launch configuration defaults by Source Server ID.
+    #
+    # @option params [String] :account_id
+    #   Request to get the launch configuration defaults by Account ID.
+    #
+    # @return [Types::GetLaunchConfigurationDefaultsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetLaunchConfigurationDefaultsResponse#source_server_id #source_server_id} => String
+    #   * {Types::GetLaunchConfigurationDefaultsResponse#small_volume_max_size #small_volume_max_size} => Integer
+    #   * {Types::GetLaunchConfigurationDefaultsResponse#small_volume_configuration #small_volume_configuration} => Types::SourceServerVolumeConfiguration
+    #   * {Types::GetLaunchConfigurationDefaultsResponse#large_volume_configuration #large_volume_configuration} => Types::SourceServerVolumeConfiguration
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_launch_configuration_defaults({
+    #     source_server_id: "SourceServerID", # required
+    #     account_id: "AccountID",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.source_server_id #=> String
+    #   resp.small_volume_max_size #=> Integer
+    #   resp.small_volume_configuration.volume_type #=> String, one of "io1", "io2", "gp3", "gp2", "st1", "sc1", "standard"
+    #   resp.small_volume_configuration.iops #=> Integer
+    #   resp.small_volume_configuration.throughput #=> Integer
+    #   resp.small_volume_configuration.volume_initialization_rate #=> Integer
+    #   resp.small_volume_configuration.delete_on_termination #=> String, one of "ENABLED", "DISABLED"
+    #   resp.large_volume_configuration.volume_type #=> String, one of "io1", "io2", "gp3", "gp2", "st1", "sc1", "standard"
+    #   resp.large_volume_configuration.iops #=> Integer
+    #   resp.large_volume_configuration.throughput #=> Integer
+    #   resp.large_volume_configuration.volume_initialization_rate #=> Integer
+    #   resp.large_volume_configuration.delete_on_termination #=> String, one of "ENABLED", "DISABLED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/GetLaunchConfigurationDefaults AWS API Documentation
+    #
+    # @overload get_launch_configuration_defaults(params = {})
+    # @param [Hash] params ({})
+    def get_launch_configuration_defaults(params = {}, options = {})
+      req = build_request(:get_launch_configuration_defaults, params)
       req.send_request(options)
     end
 
@@ -2586,6 +2777,7 @@ module Aws::Mgn
     #   * {Types::NetworkMigrationDefinition#name #name} => String
     #   * {Types::NetworkMigrationDefinition#description #description} => String
     #   * {Types::NetworkMigrationDefinition#source_configurations #source_configurations} => Array&lt;Types::SourceConfiguration&gt;
+    #   * {Types::NetworkMigrationDefinition#definition_type #definition_type} => String
     #   * {Types::NetworkMigrationDefinition#target_s3_configuration #target_s3_configuration} => Types::TargetS3Configuration
     #   * {Types::NetworkMigrationDefinition#target_network #target_network} => Types::TargetNetwork
     #   * {Types::NetworkMigrationDefinition#target_deployment #target_deployment} => String
@@ -2645,10 +2837,11 @@ module Aws::Mgn
     #   resp.name #=> String
     #   resp.description #=> String
     #   resp.source_configurations #=> Array
-    #   resp.source_configurations[0].source_environment #=> String, one of "NSX", "VSPHERE", "FORTIGATE_FIREWALL", "PALO_ALTO_FIREWALL", "CISCO_ACI", "LOGICAL_MODEL", "MODELIZE_IT", "AWS_DISCOVERY_COLLECTOR"
+    #   resp.source_configurations[0].source_environment #=> String, one of "NSX", "VSPHERE", "FORTIGATE_FIREWALL", "PALO_ALTO_FIREWALL", "CISCO_ACI", "LOGICAL_MODEL", "MODELIZE_IT", "AWS_DISCOVERY_COLLECTOR", "MIGRATION_PLANNING_ARTIFACTS", "F5_BIGIP"
     #   resp.source_configurations[0].source_s3_configuration.s3_bucket #=> String
     #   resp.source_configurations[0].source_s3_configuration.s3_bucket_owner #=> String
     #   resp.source_configurations[0].source_s3_configuration.s3_key #=> String
+    #   resp.definition_type #=> String, one of "MIGRATION", "NEW_NETWORK"
     #   resp.target_s3_configuration.s3_bucket #=> String
     #   resp.target_s3_configuration.s3_bucket_owner #=> String
     #   resp.target_network.topology #=> String, one of "ISOLATED_VPC", "HUB_AND_SPOKE"
@@ -2744,6 +2937,14 @@ module Aws::Mgn
     #   resp.construct.updated_at #=> Time
     #   resp.construct.properties #=> Hash
     #   resp.construct.properties["ConstructPropertyKey"] #=> String
+    #   resp.construct.enriched_properties #=> Hash
+    #   resp.construct.configuration.security_group.associations.cidrs #=> Array
+    #   resp.construct.configuration.security_group.associations.cidrs[0] #=> String
+    #   resp.construct.configuration.security_group.associations.vm_uui_ds #=> Array
+    #   resp.construct.configuration.security_group.associations.vm_uui_ds[0] #=> String
+    #   resp.construct.configuration.security_group.associations.user_provided_i_ds #=> Array
+    #   resp.construct.configuration.security_group.associations.user_provided_i_ds[0] #=> String
+    #   resp.construct.configuration.security_group_rule.enable_referencing #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/GetNetworkMigrationMapperSegmentConstruct AWS API Documentation
     #
@@ -2782,6 +2983,7 @@ module Aws::Mgn
     #   * {Types::ReplicationConfiguration#use_fips_endpoint #use_fips_endpoint} => Boolean
     #   * {Types::ReplicationConfiguration#internet_protocol #internet_protocol} => String
     #   * {Types::ReplicationConfiguration#store_snapshot_on_local_zone #store_snapshot_on_local_zone} => Boolean
+    #   * {Types::ReplicationConfiguration#outpost_snapshot_location #outpost_snapshot_location} => String
     #   * {Types::ReplicationConfiguration#storage_configuration #storage_configuration} => Types::StorageConfiguration
     #
     # @example Request syntax with placeholder values
@@ -2818,6 +3020,7 @@ module Aws::Mgn
     #   resp.use_fips_endpoint #=> Boolean
     #   resp.internet_protocol #=> String, one of "IPV4", "IPV6"
     #   resp.store_snapshot_on_local_zone #=> Boolean
+    #   resp.outpost_snapshot_location #=> String, one of "OUTPOST", "REGION"
     #   resp.storage_configuration.storage_type #=> String, one of "EBS", "FSX_ONTAP"
     #   resp.storage_configuration.fsx_ontap_configuration.storage_virtual_machine_id #=> String
     #   resp.storage_configuration.fsx_ontap_configuration.credentials_secret_arn #=> String
@@ -3716,12 +3919,13 @@ module Aws::Mgn
     #   resp.items #=> Array
     #   resp.items[0].network_migration_definition_id #=> String
     #   resp.items[0].name #=> String
-    #   resp.items[0].source_environment #=> String, one of "NSX", "VSPHERE", "FORTIGATE_FIREWALL", "PALO_ALTO_FIREWALL", "CISCO_ACI", "LOGICAL_MODEL", "MODELIZE_IT", "AWS_DISCOVERY_COLLECTOR"
+    #   resp.items[0].source_environment #=> String, one of "NSX", "VSPHERE", "FORTIGATE_FIREWALL", "PALO_ALTO_FIREWALL", "CISCO_ACI", "LOGICAL_MODEL", "MODELIZE_IT", "AWS_DISCOVERY_COLLECTOR", "MIGRATION_PLANNING_ARTIFACTS", "F5_BIGIP"
     #   resp.items[0].arn #=> String
     #   resp.items[0].tags #=> Hash
     #   resp.items[0].tags["TagKey"] #=> String
     #   resp.items[0].scope_tags #=> Hash
     #   resp.items[0].scope_tags["ScopeTagKey"] #=> String
+    #   resp.items[0].definition_type #=> String, one of "MIGRATION", "NEW_NETWORK"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/ListNetworkMigrationDefinitions AWS API Documentation
@@ -3976,6 +4180,122 @@ module Aws::Mgn
       req.send_request(options)
     end
 
+    # Lists network migration insights for a network migration definition.
+    #
+    # @option params [required, String] :network_migration_definition_id
+    #   The unique identifier of the network migration definition.
+    #
+    # @option params [String] :network_migration_execution_id
+    #   The unique identifier of the network migration execution to narrow the
+    #   results to.
+    #
+    # @option params [String] :producer_id
+    #   The identifier of the job or API request to narrow the results to.
+    #
+    # @option params [String] :segment_id
+    #   The unique identifier of the segment to narrow the results to.
+    #
+    # @option params [String] :construct_id
+    #   The unique identifier of the construct to narrow the results to.
+    #
+    # @option params [Types::ListNetworkMigrationInsightsFilters] :filters
+    #   Filters to apply when listing insights.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in a single call.
+    #
+    # @option params [String] :next_token
+    #   The token for the next page of results.
+    #
+    # @return [Types::ListNetworkMigrationInsightsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListNetworkMigrationInsightsResponse#items #items} => Array&lt;Types::NetworkMigrationInsight&gt;
+    #   * {Types::ListNetworkMigrationInsightsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: List the WARNING insights a mapping job recorded for one construct
+    #
+    #   resp = client.list_network_migration_insights({
+    #     filters: {
+    #       insight_types: [
+    #         "WARNING", 
+    #       ], 
+    #     }, 
+    #     network_migration_definition_id: "nmd-54cf850b22f7cf65e", 
+    #     network_migration_execution_id: "b1235ba8-398e-4ef0-b803-78c8c85b5021", 
+    #     producer_id: "f7aa9266-b070-421b-a630-e503783b7f12", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     items: [
+    #       {
+    #         construct_id: "533af212-2d0b-4a98-a89c-c01cd2070b5b", 
+    #         created_at: Time.parse(1793621845), 
+    #         insight_id: "0bf04d20-205b-58f6-ac5d-9419e1decf8b", 
+    #         insight_level: "CONSTRUCT", 
+    #         insight_message: {
+    #           code: "mapper.load_balancers.alb_address_conflict_risk", 
+    #           message: "AWS picks this application load balancer's addresses in its subnets when NM deploys it, before the servers launch, and adds more as it scales. Its subnets hold 2 addresses of servers or network load balancers: a server that keeps its address fails to launch, and a network load balancer fails to deploy, if this load balancer took it first. In each zone the load balancer uses the subnet with the most addresses free.", 
+    #           topic: "load_balancers.placement", 
+    #         }, 
+    #         insight_type: "WARNING", 
+    #         network_migration_definition_id: "nmd-54cf850b22f7cf65e", 
+    #         network_migration_execution_id: "b1235ba8-398e-4ef0-b803-78c8c85b5021", 
+    #         producer_id: "f7aa9266-b070-421b-a630-e503783b7f12", 
+    #         producer_name: "MAPPING", 
+    #         producer_type: "JOB", 
+    #         segment_id: "47088070-f6d7-4724-846e-bce3ee48a2d0", 
+    #       }, 
+    #     ], 
+    #     next_token: "NextTokenId", 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_network_migration_insights({
+    #     network_migration_definition_id: "NetworkMigrationDefinitionID", # required
+    #     network_migration_execution_id: "NetworkMigrationExecutionID",
+    #     producer_id: "InsightProducerID",
+    #     segment_id: "SegmentID",
+    #     construct_id: "ConstructID",
+    #     filters: {
+    #       insight_types: ["INTENT_GAP"], # accepts INTENT_GAP, WARNING, QUESTION, INFO, ERROR, CONTEXT, EXCLUDED, BEHAVIOR_CHANGE
+    #     },
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.items #=> Array
+    #   resp.items[0].network_migration_definition_id #=> String
+    #   resp.items[0].network_migration_execution_id #=> String
+    #   resp.items[0].producer_id #=> String
+    #   resp.items[0].producer_type #=> String, one of "JOB", "API"
+    #   resp.items[0].producer_name #=> String, one of "MAPPING", "MAPPING_UPDATE", "CODE_GENERATION", "DEPLOY", "DEPLOYED_STACKS_DELETION", "ANALYZE"
+    #   resp.items[0].segment_id #=> String
+    #   resp.items[0].construct_id #=> String
+    #   resp.items[0].insight_id #=> String
+    #   resp.items[0].insight_level #=> String, one of "RUN", "SEGMENT", "CONSTRUCT"
+    #   resp.items[0].insight_type #=> String, one of "INTENT_GAP", "WARNING", "QUESTION", "INFO", "ERROR", "CONTEXT", "EXCLUDED", "BEHAVIOR_CHANGE"
+    #   resp.items[0].insight_message.code #=> String
+    #   resp.items[0].insight_message.message #=> String
+    #   resp.items[0].insight_message.topic #=> String
+    #   resp.items[0].created_at #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/ListNetworkMigrationInsights AWS API Documentation
+    #
+    # @overload list_network_migration_insights(params = {})
+    # @param [Hash] params ({})
+    def list_network_migration_insights(params = {}, options = {})
+      req = build_request(:list_network_migration_insights, params)
+      req.send_request(options)
+    end
+
     # Lists constructs within a mapper segment, representing individual
     # infrastructure components like VPCs, subnets, or security groups.
     #
@@ -3997,6 +4317,12 @@ module Aws::Mgn
     #
     # @option params [String] :next_token
     #   The token for the next page of results.
+    #
+    # @option params [Boolean] :include_enriched_properties
+    #   Whether to return construct properties using their native value types.
+    #
+    # @option params [Boolean] :include_configuration
+    #   Whether to return construct-type-specific behavioral configuration.
     #
     # @return [Types::ListNetworkMigrationMapperSegmentConstructsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4071,6 +4397,8 @@ module Aws::Mgn
     #     },
     #     max_results: 1,
     #     next_token: "PaginationToken",
+    #     include_enriched_properties: false,
+    #     include_configuration: false,
     #   })
     #
     # @example Response structure
@@ -4086,6 +4414,14 @@ module Aws::Mgn
     #   resp.items[0].updated_at #=> Time
     #   resp.items[0].properties #=> Hash
     #   resp.items[0].properties["ConstructPropertyKey"] #=> String
+    #   resp.items[0].enriched_properties #=> Hash
+    #   resp.items[0].configuration.security_group.associations.cidrs #=> Array
+    #   resp.items[0].configuration.security_group.associations.cidrs[0] #=> String
+    #   resp.items[0].configuration.security_group.associations.vm_uui_ds #=> Array
+    #   resp.items[0].configuration.security_group.associations.vm_uui_ds[0] #=> String
+    #   resp.items[0].configuration.security_group.associations.user_provided_i_ds #=> Array
+    #   resp.items[0].configuration.security_group.associations.user_provided_i_ds[0] #=> String
+    #   resp.items[0].configuration.security_group_rule.enable_referencing #=> Boolean
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/ListNetworkMigrationMapperSegmentConstructs AWS API Documentation
@@ -4365,6 +4701,231 @@ module Aws::Mgn
     # @param [Hash] params ({})
     def list_network_migration_mappings(params = {}, options = {})
       req = build_request(:list_network_migration_mappings, params)
+      req.send_request(options)
+    end
+
+    # Lists the latest invocation result of each source action that ran on a
+    # source server.
+    #
+    # @option params [required, String] :source_server_id
+    #   The unique identifier of the source server to list invocation results
+    #   for.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in a single call.
+    #
+    # @option params [String] :next_token
+    #   The token for the next page of results.
+    #
+    # @option params [String] :account_id
+    #   Account ID.
+    #
+    # @return [Types::ListRemoteSourceActionInvocationResultsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListRemoteSourceActionInvocationResultsResponse#items #items} => Array&lt;Types::RemoteSourceActionInvocationResult&gt;
+    #   * {Types::ListRemoteSourceActionInvocationResultsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_remote_source_action_invocation_results({
+    #     source_server_id: "SourceServerID", # required
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #     account_id: "AccountID",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.items #=> Array
+    #   resp.items[0].remote_source_action_id #=> String
+    #   resp.items[0].connector_owner_account_id #=> String
+    #   resp.items[0].status #=> String, one of "PENDING", "IN_PROGRESS", "DELAYED", "SUCCESS", "CANCELLED", "TIMED_OUT", "FAILED", "CANCELLING", "STALLED"
+    #   resp.items[0].started_at #=> Time
+    #   resp.items[0].ended_at #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/ListRemoteSourceActionInvocationResults AWS API Documentation
+    #
+    # @overload list_remote_source_action_invocation_results(params = {})
+    # @param [Hash] params ({})
+    def list_remote_source_action_invocation_results(params = {}, options = {})
+      req = build_request(:list_remote_source_action_invocation_results, params)
+      req.send_request(options)
+    end
+
+    # Lists the invocations of a source action job, one for each source
+    # server and source action, with optional filtering.
+    #
+    # @option params [required, String] :remote_source_action_job_id
+    #   The unique identifier of the job to list invocations for.
+    #
+    # @option params [Types::ListRemoteSourceActionInvocationsRequestFilters] :filters
+    #   Filters to apply when listing invocations, such as source server or
+    #   status.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in a single call.
+    #
+    # @option params [String] :next_token
+    #   The token for the next page of results.
+    #
+    # @option params [String] :account_id
+    #   Account ID.
+    #
+    # @return [Types::ListRemoteSourceActionInvocationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListRemoteSourceActionInvocationsResponse#items #items} => Array&lt;Types::RemoteSourceActionInvocation&gt;
+    #   * {Types::ListRemoteSourceActionInvocationsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_remote_source_action_invocations({
+    #     remote_source_action_job_id: "RemoteSourceActionJobID", # required
+    #     filters: {
+    #       source_server_arns: ["SourceServerArn"],
+    #       remote_source_action_arns: ["RemoteSourceActionArn"],
+    #       statuses: ["PENDING"], # accepts PENDING, IN_PROGRESS, DELAYED, SUCCESS, CANCELLED, TIMED_OUT, FAILED, CANCELLING, STALLED
+    #     },
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #     account_id: "AccountID",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.items #=> Array
+    #   resp.items[0].source_server_arn #=> String
+    #   resp.items[0].remote_source_action_arn #=> String
+    #   resp.items[0].ssm_command_invocation_id #=> String
+    #   resp.items[0].status #=> String, one of "PENDING", "IN_PROGRESS", "DELAYED", "SUCCESS", "CANCELLED", "TIMED_OUT", "FAILED", "CANCELLING", "STALLED"
+    #   resp.items[0].started_at #=> Time
+    #   resp.items[0].ended_at #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/ListRemoteSourceActionInvocations AWS API Documentation
+    #
+    # @overload list_remote_source_action_invocations(params = {})
+    # @param [Hash] params ({})
+    def list_remote_source_action_invocations(params = {}, options = {})
+      req = build_request(:list_remote_source_action_invocations, params)
+      req.send_request(options)
+    end
+
+    # Lists the source action jobs in the account, with optional filtering.
+    #
+    # @option params [Types::ListRemoteSourceActionJobsRequestFilters] :filters
+    #   Filters to apply when listing source action jobs.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in a single call.
+    #
+    # @option params [String] :next_token
+    #   The token for the next page of results.
+    #
+    # @option params [String] :account_id
+    #   Account ID.
+    #
+    # @return [Types::ListRemoteSourceActionJobsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListRemoteSourceActionJobsResponse#items #items} => Array&lt;Types::RemoteSourceActionJob&gt;
+    #   * {Types::ListRemoteSourceActionJobsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_remote_source_action_jobs({
+    #     filters: {
+    #       remote_source_action_job_i_ds: ["RemoteSourceActionJobID"],
+    #     },
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #     account_id: "AccountID",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.items #=> Array
+    #   resp.items[0].remote_source_action_job_id #=> String
+    #   resp.items[0].arn #=> String
+    #   resp.items[0].status #=> String, one of "PENDING", "RUNNING", "COMPLETED", "FAILED", "STALLED"
+    #   resp.items[0].source_server_arns #=> Array
+    #   resp.items[0].source_server_arns[0] #=> String
+    #   resp.items[0].remote_source_action_arns #=> Array
+    #   resp.items[0].remote_source_action_arns[0] #=> String
+    #   resp.items[0].connector_arn #=> String
+    #   resp.items[0].started_at #=> Time
+    #   resp.items[0].ended_at #=> Time
+    #   resp.items[0].status_reason #=> String
+    #   resp.items[0].tags #=> Hash
+    #   resp.items[0].tags["TagKey"] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/ListRemoteSourceActionJobs AWS API Documentation
+    #
+    # @overload list_remote_source_action_jobs(params = {})
+    # @param [Hash] params ({})
+    def list_remote_source_action_jobs(params = {}, options = {})
+      req = build_request(:list_remote_source_action_jobs, params)
+      req.send_request(options)
+    end
+
+    # Lists the source actions in the account, with optional filtering.
+    #
+    # @option params [Types::ListRemoteSourceActionsRequestFilters] :filters
+    #   Filters to apply when listing source actions.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in a single call.
+    #
+    # @option params [String] :next_token
+    #   The token for the next page of results.
+    #
+    # @option params [String] :account_id
+    #   Account ID.
+    #
+    # @return [Types::ListRemoteSourceActionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListRemoteSourceActionsResponse#items #items} => Array&lt;Types::RemoteSourceAction&gt;
+    #   * {Types::ListRemoteSourceActionsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_remote_source_actions({
+    #     filters: {
+    #       remote_source_action_i_ds: ["RemoteSourceActionID"],
+    #     },
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #     account_id: "AccountID",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.items #=> Array
+    #   resp.items[0].remote_source_action_id #=> String
+    #   resp.items[0].arn #=> String
+    #   resp.items[0].name #=> String
+    #   resp.items[0].description #=> String
+    #   resp.items[0].ssm_parameter_name #=> String
+    #   resp.items[0].timeout_seconds #=> Integer
+    #   resp.items[0].operating_system #=> String
+    #   resp.items[0].tags #=> Hash
+    #   resp.items[0].tags["TagKey"] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/ListRemoteSourceActions AWS API Documentation
+    #
+    # @overload list_remote_source_actions(params = {})
+    # @param [Hash] params ({})
+    def list_remote_source_actions(params = {}, options = {})
+      req = build_request(:list_remote_source_actions, params)
       req.send_request(options)
     end
 
@@ -4662,6 +5223,7 @@ module Aws::Mgn
     #   resp.data_replication_info.data_replication_error.raw_error #=> String
     #   resp.data_replication_info.last_snapshot_date_time #=> String
     #   resp.data_replication_info.replicator_id #=> String
+    #   resp.data_replication_info.staging_outpost_arn #=> String
     #   resp.life_cycle.added_to_service_date_time #=> String
     #   resp.life_cycle.first_byte_date_time #=> String
     #   resp.life_cycle.elapsed_replication_duration #=> String
@@ -4779,6 +5341,7 @@ module Aws::Mgn
     #   resp.data_replication_info.data_replication_error.raw_error #=> String
     #   resp.data_replication_info.last_snapshot_date_time #=> String
     #   resp.data_replication_info.replicator_id #=> String
+    #   resp.data_replication_info.staging_outpost_arn #=> String
     #   resp.life_cycle.added_to_service_date_time #=> String
     #   resp.life_cycle.first_byte_date_time #=> String
     #   resp.life_cycle.elapsed_replication_duration #=> String
@@ -5190,6 +5753,7 @@ module Aws::Mgn
     #   resp.data_replication_info.data_replication_error.raw_error #=> String
     #   resp.data_replication_info.last_snapshot_date_time #=> String
     #   resp.data_replication_info.replicator_id #=> String
+    #   resp.data_replication_info.staging_outpost_arn #=> String
     #   resp.life_cycle.added_to_service_date_time #=> String
     #   resp.life_cycle.first_byte_date_time #=> String
     #   resp.life_cycle.elapsed_replication_duration #=> String
@@ -5310,6 +5874,7 @@ module Aws::Mgn
     #   resp.data_replication_info.data_replication_error.raw_error #=> String
     #   resp.data_replication_info.last_snapshot_date_time #=> String
     #   resp.data_replication_info.replicator_id #=> String
+    #   resp.data_replication_info.staging_outpost_arn #=> String
     #   resp.life_cycle.added_to_service_date_time #=> String
     #   resp.life_cycle.first_byte_date_time #=> String
     #   resp.life_cycle.elapsed_replication_duration #=> String
@@ -5879,9 +6444,11 @@ module Aws::Mgn
     #     network_migration_definition_id: "NetworkMigrationDefinitionID", # required
     #     constructs: [
     #       {
-    #         segment_id: "SegmentID", # required
-    #         construct_id: "ConstructID", # required
+    #         segment_id: "SegmentID",
+    #         segment_logical_id: "LogicalID",
+    #         construct_id: "ConstructID",
     #         construct_type: "NetworkMigrationMapperSegmentConstructType", # required
+    #         construct_logical_id: "ConstructLogicalID",
     #         operation: {
     #           merge: {
     #             merge_constructs: [
@@ -5907,12 +6474,74 @@ module Aws::Mgn
     #               "ConstructPropertyKey" => "MarshalledResourceDefinition",
     #             },
     #           },
+    #           update_v2: {
+    #             name: "SegmentConstructName",
+    #             excluded: false,
+    #             properties: {
+    #               "EnrichedPropertyKey" => {
+    #               },
+    #             },
+    #             properties_to_delete: ["EnrichedPropertyKey"],
+    #             configuration: {
+    #               security_group: {
+    #                 associations: {
+    #                   cidrs: ["CidrBlock"],
+    #                   vm_uui_ds: ["VmUUID"],
+    #                   user_provided_i_ds: ["AssociationUserProvidedID"],
+    #                 },
+    #               },
+    #               security_group_rule: {
+    #                 enable_referencing: false,
+    #               },
+    #             },
+    #           },
+    #           create: {
+    #             name: "SegmentConstructName",
+    #             excluded: false,
+    #             properties: {
+    #               "EnrichedPropertyKey" => {
+    #               },
+    #             },
+    #             configuration: {
+    #               security_group: {
+    #                 associations: {
+    #                   cidrs: ["CidrBlock"],
+    #                   vm_uui_ds: ["VmUUID"],
+    #                   user_provided_i_ds: ["AssociationUserProvidedID"],
+    #                 },
+    #               },
+    #               security_group_rule: {
+    #                 enable_referencing: false,
+    #               },
+    #             },
+    #           },
     #         },
     #       },
     #     ],
     #     segments: [
     #       {
-    #         segment_id: "SegmentID", # required
+    #         segment_id: "SegmentID",
+    #         segment_logical_id: "SegmentLogicalID",
+    #         operation: {
+    #           create: {
+    #             name: "SegmentName", # required
+    #             description: "SegmentDescription",
+    #             target_account: "AccountID",
+    #             scope_tags: {
+    #               "ScopeTagKey" => "ScopeTagValue",
+    #             },
+    #           },
+    #           update: {
+    #             name: "SegmentName",
+    #             description: "SegmentDescription",
+    #             target_account: "AccountID",
+    #             scope_tags: {
+    #               "ScopeTagKey" => "ScopeTagValue",
+    #             },
+    #           },
+    #           delete: {
+    #           },
+    #         },
     #         target_account: "AccountID",
     #         scope_tags: {
     #           "ScopeTagKey" => "ScopeTagValue",
@@ -5931,6 +6560,73 @@ module Aws::Mgn
     # @param [Hash] params ({})
     def start_network_migration_mapping_update(params = {}, options = {})
       req = build_request(:start_network_migration_mapping_update, params)
+      req.send_request(options)
+    end
+
+    # Starts a job that runs a source action on source servers through a
+    # connector.
+    #
+    # @option params [required, Array<String>] :remote_source_action_arns
+    #   The ARNs of the source actions to run.
+    #
+    # @option params [required, String] :connector_arn
+    #   The ARN of the connector that runs the source actions.
+    #
+    # @option params [required, Array<String>] :source_server_arns
+    #   The ARNs of the source servers to run the source actions on.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [Hash<String,String>] :tags
+    #   Tags to assign to the job.
+    #
+    # @option params [String] :account_id
+    #   Account ID.
+    #
+    # @return [Types::StartRemoteSourceActionJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartRemoteSourceActionJobResponse#remote_source_action_job #remote_source_action_job} => Types::RemoteSourceActionJob
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_remote_source_action_job({
+    #     remote_source_action_arns: ["RemoteSourceActionArn"], # required
+    #     connector_arn: "ConnectorArn", # required
+    #     source_server_arns: ["SourceServerArn"], # required
+    #     client_token: "ClientIdempotencyToken",
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #     account_id: "AccountID",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.remote_source_action_job.remote_source_action_job_id #=> String
+    #   resp.remote_source_action_job.arn #=> String
+    #   resp.remote_source_action_job.status #=> String, one of "PENDING", "RUNNING", "COMPLETED", "FAILED", "STALLED"
+    #   resp.remote_source_action_job.source_server_arns #=> Array
+    #   resp.remote_source_action_job.source_server_arns[0] #=> String
+    #   resp.remote_source_action_job.remote_source_action_arns #=> Array
+    #   resp.remote_source_action_job.remote_source_action_arns[0] #=> String
+    #   resp.remote_source_action_job.connector_arn #=> String
+    #   resp.remote_source_action_job.started_at #=> Time
+    #   resp.remote_source_action_job.ended_at #=> Time
+    #   resp.remote_source_action_job.status_reason #=> String
+    #   resp.remote_source_action_job.tags #=> Hash
+    #   resp.remote_source_action_job.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/StartRemoteSourceActionJob AWS API Documentation
+    #
+    # @overload start_remote_source_action_job(params = {})
+    # @param [Hash] params ({})
+    def start_remote_source_action_job(params = {}, options = {})
+      req = build_request(:start_remote_source_action_job, params)
       req.send_request(options)
     end
 
@@ -6002,6 +6698,7 @@ module Aws::Mgn
     #   resp.data_replication_info.data_replication_error.raw_error #=> String
     #   resp.data_replication_info.last_snapshot_date_time #=> String
     #   resp.data_replication_info.replicator_id #=> String
+    #   resp.data_replication_info.staging_outpost_arn #=> String
     #   resp.life_cycle.added_to_service_date_time #=> String
     #   resp.life_cycle.first_byte_date_time #=> String
     #   resp.life_cycle.elapsed_replication_duration #=> String
@@ -6187,6 +6884,7 @@ module Aws::Mgn
     #   resp.data_replication_info.data_replication_error.raw_error #=> String
     #   resp.data_replication_info.last_snapshot_date_time #=> String
     #   resp.data_replication_info.replicator_id #=> String
+    #   resp.data_replication_info.staging_outpost_arn #=> String
     #   resp.life_cycle.added_to_service_date_time #=> String
     #   resp.life_cycle.first_byte_date_time #=> String
     #   resp.life_cycle.elapsed_replication_duration #=> String
@@ -6627,6 +7325,9 @@ module Aws::Mgn
     # @option params [String] :map_auto_tagging_mpe_id
     #   Launch configuration map auto tagging MPE ID.
     #
+    # @option params [String] :map_auto_tagging_key
+    #   Launch configuration map auto tagging key.
+    #
     # @option params [String] :account_id
     #   Update Launch configuration Account ID.
     #
@@ -6644,6 +7345,7 @@ module Aws::Mgn
     #   * {Types::LaunchConfiguration#post_launch_actions #post_launch_actions} => Types::PostLaunchActions
     #   * {Types::LaunchConfiguration#enable_map_auto_tagging #enable_map_auto_tagging} => Boolean
     #   * {Types::LaunchConfiguration#map_auto_tagging_mpe_id #map_auto_tagging_mpe_id} => String
+    #   * {Types::LaunchConfiguration#map_auto_tagging_key #map_auto_tagging_key} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -6687,6 +7389,7 @@ module Aws::Mgn
     #     },
     #     enable_map_auto_tagging: false,
     #     map_auto_tagging_mpe_id: "TagValue",
+    #     map_auto_tagging_key: "TagKey",
     #     account_id: "AccountID",
     #   })
     #
@@ -6718,6 +7421,7 @@ module Aws::Mgn
     #   resp.post_launch_actions.ssm_documents[0].external_parameters["SsmDocumentParameterName"].dynamic_path #=> String
     #   resp.enable_map_auto_tagging #=> Boolean
     #   resp.map_auto_tagging_mpe_id #=> String
+    #   resp.map_auto_tagging_key #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/UpdateLaunchConfiguration AWS API Documentation
     #
@@ -6725,6 +7429,88 @@ module Aws::Mgn
     # @param [Hash] params ({})
     def update_launch_configuration(params = {}, options = {})
       req = build_request(:update_launch_configuration, params)
+      req.send_request(options)
+    end
+
+    # Updates the launch configuration defaults of a source server. They
+    # apply only to disk mappings created later in the source server's
+    # Amazon Elastic Compute Cloud (Amazon EC2) launch template, and members
+    # you omit keep their current values.
+    #
+    # @option params [required, String] :source_server_id
+    #   Request to update the launch configuration defaults by Source Server
+    #   ID.
+    #
+    # @option params [String] :account_id
+    #   Request to update the launch configuration defaults by Account ID.
+    #
+    # @option params [Integer] :small_volume_max_size
+    #   Disks up to this size, in GiB, use the small volume configuration, and
+    #   larger disks use the large one. `0` means every disk uses the large
+    #   one. If you omit it, the current value is kept.
+    #
+    # @option params [Types::SourceServerVolumeConfiguration] :small_volume_configuration
+    #   Volume configuration for disks up to `smallVolumeMaxSize`. If you omit
+    #   it, the current one is kept. If you send it, it replaces the current
+    #   one: fields you omit are cleared, and an empty configuration, `{}`,
+    #   clears all of them.
+    #
+    # @option params [Types::SourceServerVolumeConfiguration] :large_volume_configuration
+    #   Volume configuration for disks larger than `smallVolumeMaxSize`. If
+    #   you omit it, the current one is kept. If you send it, it replaces the
+    #   current one: fields you omit are cleared, and an empty configuration,
+    #   `{}`, clears all of them.
+    #
+    # @return [Types::UpdateLaunchConfigurationDefaultsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateLaunchConfigurationDefaultsResponse#source_server_id #source_server_id} => String
+    #   * {Types::UpdateLaunchConfigurationDefaultsResponse#small_volume_max_size #small_volume_max_size} => Integer
+    #   * {Types::UpdateLaunchConfigurationDefaultsResponse#small_volume_configuration #small_volume_configuration} => Types::SourceServerVolumeConfiguration
+    #   * {Types::UpdateLaunchConfigurationDefaultsResponse#large_volume_configuration #large_volume_configuration} => Types::SourceServerVolumeConfiguration
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_launch_configuration_defaults({
+    #     source_server_id: "SourceServerID", # required
+    #     account_id: "AccountID",
+    #     small_volume_max_size: 1,
+    #     small_volume_configuration: {
+    #       volume_type: "io1", # accepts io1, io2, gp3, gp2, st1, sc1, standard
+    #       iops: 1,
+    #       throughput: 1,
+    #       volume_initialization_rate: 1,
+    #       delete_on_termination: "ENABLED", # accepts ENABLED, DISABLED
+    #     },
+    #     large_volume_configuration: {
+    #       volume_type: "io1", # accepts io1, io2, gp3, gp2, st1, sc1, standard
+    #       iops: 1,
+    #       throughput: 1,
+    #       volume_initialization_rate: 1,
+    #       delete_on_termination: "ENABLED", # accepts ENABLED, DISABLED
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.source_server_id #=> String
+    #   resp.small_volume_max_size #=> Integer
+    #   resp.small_volume_configuration.volume_type #=> String, one of "io1", "io2", "gp3", "gp2", "st1", "sc1", "standard"
+    #   resp.small_volume_configuration.iops #=> Integer
+    #   resp.small_volume_configuration.throughput #=> Integer
+    #   resp.small_volume_configuration.volume_initialization_rate #=> Integer
+    #   resp.small_volume_configuration.delete_on_termination #=> String, one of "ENABLED", "DISABLED"
+    #   resp.large_volume_configuration.volume_type #=> String, one of "io1", "io2", "gp3", "gp2", "st1", "sc1", "standard"
+    #   resp.large_volume_configuration.iops #=> Integer
+    #   resp.large_volume_configuration.throughput #=> Integer
+    #   resp.large_volume_configuration.volume_initialization_rate #=> Integer
+    #   resp.large_volume_configuration.delete_on_termination #=> String, one of "ENABLED", "DISABLED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/UpdateLaunchConfigurationDefaults AWS API Documentation
+    #
+    # @overload update_launch_configuration_defaults(params = {})
+    # @param [Hash] params ({})
+    def update_launch_configuration_defaults(params = {}, options = {})
+      req = build_request(:update_launch_configuration_defaults, params)
       req.send_request(options)
     end
 
@@ -6741,6 +7527,9 @@ module Aws::Mgn
     #
     # @option params [String] :map_auto_tagging_mpe_id
     #   Launch configuration template map auto tagging MPE ID.
+    #
+    # @option params [String] :map_auto_tagging_key
+    #   Launch configuration template map auto tagging key.
     #
     # @option params [String] :launch_disposition
     #   Launch disposition.
@@ -6785,6 +7574,7 @@ module Aws::Mgn
     #   * {Types::LaunchConfigurationTemplate#post_launch_actions #post_launch_actions} => Types::PostLaunchActions
     #   * {Types::LaunchConfigurationTemplate#enable_map_auto_tagging #enable_map_auto_tagging} => Boolean
     #   * {Types::LaunchConfigurationTemplate#map_auto_tagging_mpe_id #map_auto_tagging_mpe_id} => String
+    #   * {Types::LaunchConfigurationTemplate#map_auto_tagging_key #map_auto_tagging_key} => String
     #   * {Types::LaunchConfigurationTemplate#tags #tags} => Hash&lt;String,String&gt;
     #   * {Types::LaunchConfigurationTemplate#ec2_launch_template_id #ec2_launch_template_id} => String
     #   * {Types::LaunchConfigurationTemplate#launch_disposition #launch_disposition} => String
@@ -6833,6 +7623,7 @@ module Aws::Mgn
     #     },
     #     enable_map_auto_tagging: false,
     #     map_auto_tagging_mpe_id: "TagValue",
+    #     map_auto_tagging_key: "TagKey",
     #     launch_disposition: "STOPPED", # accepts STOPPED, STARTED
     #     target_instance_type_right_sizing_method: "NONE", # accepts NONE, BASIC
     #     copy_private_ip: false,
@@ -6882,6 +7673,7 @@ module Aws::Mgn
     #   resp.post_launch_actions.ssm_documents[0].external_parameters["SsmDocumentParameterName"].dynamic_path #=> String
     #   resp.enable_map_auto_tagging #=> Boolean
     #   resp.map_auto_tagging_mpe_id #=> String
+    #   resp.map_auto_tagging_key #=> String
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
     #   resp.ec2_launch_template_id #=> String
@@ -6952,6 +7744,9 @@ module Aws::Mgn
     # @option params [Hash<String,String>] :scope_tags
     #   The updated scope tags for the network migration definition.
     #
+    # @option params [String] :definition_type
+    #   The updated type of the network migration definition.
+    #
     # @return [Types::NetworkMigrationDefinition] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::NetworkMigrationDefinition#arn #arn} => String
@@ -6959,6 +7754,7 @@ module Aws::Mgn
     #   * {Types::NetworkMigrationDefinition#name #name} => String
     #   * {Types::NetworkMigrationDefinition#description #description} => String
     #   * {Types::NetworkMigrationDefinition#source_configurations #source_configurations} => Array&lt;Types::SourceConfiguration&gt;
+    #   * {Types::NetworkMigrationDefinition#definition_type #definition_type} => String
     #   * {Types::NetworkMigrationDefinition#target_s3_configuration #target_s3_configuration} => Types::TargetS3Configuration
     #   * {Types::NetworkMigrationDefinition#target_network #target_network} => Types::TargetNetwork
     #   * {Types::NetworkMigrationDefinition#target_deployment #target_deployment} => String
@@ -7033,7 +7829,7 @@ module Aws::Mgn
     #     description: "NetworkMigrationDefinitionDescription",
     #     source_configurations: [
     #       {
-    #         source_environment: "NSX", # required, accepts NSX, VSPHERE, FORTIGATE_FIREWALL, PALO_ALTO_FIREWALL, CISCO_ACI, LOGICAL_MODEL, MODELIZE_IT, AWS_DISCOVERY_COLLECTOR
+    #         source_environment: "NSX", # required, accepts NSX, VSPHERE, FORTIGATE_FIREWALL, PALO_ALTO_FIREWALL, CISCO_ACI, LOGICAL_MODEL, MODELIZE_IT, AWS_DISCOVERY_COLLECTOR, MIGRATION_PLANNING_ARTIFACTS, F5_BIGIP
     #         source_s3_configuration: { # required
     #           s3_bucket: "S3BucketName", # required
     #           s3_bucket_owner: "AccountID", # required
@@ -7062,6 +7858,7 @@ module Aws::Mgn
     #     scope_tags: {
     #       "ScopeTagKey" => "ScopeTagValue",
     #     },
+    #     definition_type: "MIGRATION", # accepts MIGRATION, NEW_NETWORK
     #   })
     #
     # @example Response structure
@@ -7071,10 +7868,11 @@ module Aws::Mgn
     #   resp.name #=> String
     #   resp.description #=> String
     #   resp.source_configurations #=> Array
-    #   resp.source_configurations[0].source_environment #=> String, one of "NSX", "VSPHERE", "FORTIGATE_FIREWALL", "PALO_ALTO_FIREWALL", "CISCO_ACI", "LOGICAL_MODEL", "MODELIZE_IT", "AWS_DISCOVERY_COLLECTOR"
+    #   resp.source_configurations[0].source_environment #=> String, one of "NSX", "VSPHERE", "FORTIGATE_FIREWALL", "PALO_ALTO_FIREWALL", "CISCO_ACI", "LOGICAL_MODEL", "MODELIZE_IT", "AWS_DISCOVERY_COLLECTOR", "MIGRATION_PLANNING_ARTIFACTS", "F5_BIGIP"
     #   resp.source_configurations[0].source_s3_configuration.s3_bucket #=> String
     #   resp.source_configurations[0].source_s3_configuration.s3_bucket_owner #=> String
     #   resp.source_configurations[0].source_s3_configuration.s3_key #=> String
+    #   resp.definition_type #=> String, one of "MIGRATION", "NEW_NETWORK"
     #   resp.target_s3_configuration.s3_bucket #=> String
     #   resp.target_s3_configuration.s3_bucket_owner #=> String
     #   resp.target_network.topology #=> String, one of "ISOLATED_VPC", "HUB_AND_SPOKE"
@@ -7210,6 +8008,76 @@ module Aws::Mgn
       req.send_request(options)
     end
 
+    # Updates a source action.
+    #
+    # @option params [required, String] :remote_source_action_id
+    #   The unique identifier of the source action to update.
+    #
+    # @option params [String] :name
+    #   The updated name of the source action.
+    #
+    # @option params [String] :description
+    #   The updated description of the source action.
+    #
+    # @option params [String] :ssm_parameter_name
+    #   AWS Systems Manager Parameter Store parameter name.
+    #
+    # @option params [Integer] :timeout_seconds
+    #   The updated maximum time, in seconds, that the script can run on each
+    #   source server.
+    #
+    # @option params [String] :operating_system
+    #   The updated operating system of the source servers that the script
+    #   runs on. Set to `linux` or `windows` to run the script only on source
+    #   servers with that operating system, or `all` to run it on both.
+    #
+    # @option params [String] :account_id
+    #   Account ID.
+    #
+    # @return [Types::UpdateRemoteSourceActionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateRemoteSourceActionResponse#remote_source_action_id #remote_source_action_id} => String
+    #   * {Types::UpdateRemoteSourceActionResponse#arn #arn} => String
+    #   * {Types::UpdateRemoteSourceActionResponse#name #name} => String
+    #   * {Types::UpdateRemoteSourceActionResponse#description #description} => String
+    #   * {Types::UpdateRemoteSourceActionResponse#ssm_parameter_name #ssm_parameter_name} => String
+    #   * {Types::UpdateRemoteSourceActionResponse#timeout_seconds #timeout_seconds} => Integer
+    #   * {Types::UpdateRemoteSourceActionResponse#operating_system #operating_system} => String
+    #   * {Types::UpdateRemoteSourceActionResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_remote_source_action({
+    #     remote_source_action_id: "RemoteSourceActionID", # required
+    #     name: "RemoteSourceActionName",
+    #     description: "RemoteSourceActionDescription",
+    #     ssm_parameter_name: "SsmParameterStoreParameterName",
+    #     timeout_seconds: 1,
+    #     operating_system: "RemoteSourceActionOperatingSystem",
+    #     account_id: "AccountID",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.remote_source_action_id #=> String
+    #   resp.arn #=> String
+    #   resp.name #=> String
+    #   resp.description #=> String
+    #   resp.ssm_parameter_name #=> String
+    #   resp.timeout_seconds #=> Integer
+    #   resp.operating_system #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/UpdateRemoteSourceAction AWS API Documentation
+    #
+    # @overload update_remote_source_action(params = {})
+    # @param [Hash] params ({})
+    def update_remote_source_action(params = {}, options = {})
+      req = build_request(:update_remote_source_action, params)
+      req.send_request(options)
+    end
+
     # Allows you to update multiple ReplicationConfigurations by Source
     # Server ID.
     #
@@ -7275,6 +8143,13 @@ module Aws::Mgn
     # @option params [Boolean] :store_snapshot_on_local_zone
     #   Update replication configuration store snapshot on local zone.
     #
+    # @option params [String] :outpost_snapshot_location
+    #   Updates the location of replication snapshots when the staging area
+    #   subnet is on an AWS Outpost. Set to `OUTPOST` to keep replication
+    #   snapshots on the Outpost, or `REGION` to store them in the AWS Region.
+    #   Required when the staging area subnet is on an Outpost, and not
+    #   allowed otherwise.
+    #
     # @option params [Types::StorageConfiguration] :storage_configuration
     #   Update replication configuration storage configuration.
     #
@@ -7298,6 +8173,7 @@ module Aws::Mgn
     #   * {Types::ReplicationConfiguration#use_fips_endpoint #use_fips_endpoint} => Boolean
     #   * {Types::ReplicationConfiguration#internet_protocol #internet_protocol} => String
     #   * {Types::ReplicationConfiguration#store_snapshot_on_local_zone #store_snapshot_on_local_zone} => Boolean
+    #   * {Types::ReplicationConfiguration#outpost_snapshot_location #outpost_snapshot_location} => String
     #   * {Types::ReplicationConfiguration#storage_configuration #storage_configuration} => Types::StorageConfiguration
     #
     # @example Request syntax with placeholder values
@@ -7332,6 +8208,7 @@ module Aws::Mgn
     #     account_id: "AccountID",
     #     internet_protocol: "IPV4", # accepts IPV4, IPV6
     #     store_snapshot_on_local_zone: false,
+    #     outpost_snapshot_location: "OUTPOST", # accepts OUTPOST, REGION
     #     storage_configuration: {
     #       storage_type: "EBS", # required, accepts EBS, FSX_ONTAP
     #       fsx_ontap_configuration: {
@@ -7368,6 +8245,7 @@ module Aws::Mgn
     #   resp.use_fips_endpoint #=> Boolean
     #   resp.internet_protocol #=> String, one of "IPV4", "IPV6"
     #   resp.store_snapshot_on_local_zone #=> Boolean
+    #   resp.outpost_snapshot_location #=> String, one of "OUTPOST", "REGION"
     #   resp.storage_configuration.storage_type #=> String, one of "EBS", "FSX_ONTAP"
     #   resp.storage_configuration.fsx_ontap_configuration.storage_virtual_machine_id #=> String
     #   resp.storage_configuration.fsx_ontap_configuration.credentials_secret_arn #=> String
@@ -7443,6 +8321,13 @@ module Aws::Mgn
     #   Update replication configuration template store snapshot on local zone
     #   request.
     #
+    # @option params [String] :outpost_snapshot_location
+    #   Updates the location of replication snapshots in the Replication
+    #   Configuration template when the staging area subnet is on an AWS
+    #   Outpost. Set to `OUTPOST` to keep replication snapshots on the
+    #   Outpost, or `REGION` to store them in the AWS Region. Required when
+    #   the staging area subnet is on an Outpost, and not allowed otherwise.
+    #
     # @option params [Types::StorageConfiguration] :storage_configuration
     #   Update replication configuration template storage configuration
     #   request.
@@ -7467,6 +8352,7 @@ module Aws::Mgn
     #   * {Types::ReplicationConfigurationTemplate#tags #tags} => Hash&lt;String,String&gt;
     #   * {Types::ReplicationConfigurationTemplate#internet_protocol #internet_protocol} => String
     #   * {Types::ReplicationConfigurationTemplate#store_snapshot_on_local_zone #store_snapshot_on_local_zone} => Boolean
+    #   * {Types::ReplicationConfigurationTemplate#outpost_snapshot_location #outpost_snapshot_location} => String
     #   * {Types::ReplicationConfigurationTemplate#storage_configuration #storage_configuration} => Types::StorageConfiguration
     #
     # @example Request syntax with placeholder values
@@ -7491,6 +8377,7 @@ module Aws::Mgn
     #     use_fips_endpoint: false,
     #     internet_protocol: "IPV4", # accepts IPV4, IPV6
     #     store_snapshot_on_local_zone: false,
+    #     outpost_snapshot_location: "OUTPOST", # accepts OUTPOST, REGION
     #     storage_configuration: {
     #       storage_type: "EBS", # required, accepts EBS, FSX_ONTAP
     #       fsx_ontap_configuration: {
@@ -7523,6 +8410,7 @@ module Aws::Mgn
     #   resp.tags["TagKey"] #=> String
     #   resp.internet_protocol #=> String, one of "IPV4", "IPV6"
     #   resp.store_snapshot_on_local_zone #=> Boolean
+    #   resp.outpost_snapshot_location #=> String, one of "OUTPOST", "REGION"
     #   resp.storage_configuration.storage_type #=> String, one of "EBS", "FSX_ONTAP"
     #   resp.storage_configuration.fsx_ontap_configuration.storage_virtual_machine_id #=> String
     #   resp.storage_configuration.fsx_ontap_configuration.credentials_secret_arn #=> String
@@ -7622,6 +8510,7 @@ module Aws::Mgn
     #   resp.data_replication_info.data_replication_error.raw_error #=> String
     #   resp.data_replication_info.last_snapshot_date_time #=> String
     #   resp.data_replication_info.replicator_id #=> String
+    #   resp.data_replication_info.staging_outpost_arn #=> String
     #   resp.life_cycle.added_to_service_date_time #=> String
     #   resp.life_cycle.first_byte_date_time #=> String
     #   resp.life_cycle.elapsed_replication_duration #=> String
@@ -7746,6 +8635,7 @@ module Aws::Mgn
     #   resp.data_replication_info.data_replication_error.raw_error #=> String
     #   resp.data_replication_info.last_snapshot_date_time #=> String
     #   resp.data_replication_info.replicator_id #=> String
+    #   resp.data_replication_info.staging_outpost_arn #=> String
     #   resp.life_cycle.added_to_service_date_time #=> String
     #   resp.life_cycle.first_byte_date_time #=> String
     #   resp.life_cycle.elapsed_replication_duration #=> String
@@ -7875,7 +8765,7 @@ module Aws::Mgn
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-mgn'
-      context[:gem_version] = '1.82.0'
+      context[:gem_version] = '1.90.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

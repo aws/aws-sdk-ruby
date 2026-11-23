@@ -347,7 +347,10 @@
         "franceAdditionalInfo":{"shape":"FranceAdditionalInfo"},
         "monacoAdditionalInfo":{"shape":"MonacoAdditionalInfo"},
         "germanyAdditionalInfo":{"shape":"GermanyAdditionalInfo"},
-        "mexicoAdditionalInfo":{"shape":"MexicoAdditionalInfo"}
+        "mexicoAdditionalInfo":{"shape":"MexicoAdditionalInfo"},
+        "unitedArabEmiratesAdditionalInfo":{"shape":"UnitedArabEmiratesAdditionalInfo"},
+        "norwayAdditionalInfo":{"shape":"NorwayAdditionalInfo"},
+        "newZealandAdditionalInfo":{"shape":"NewZealandAdditionalInfo"}
       }
     },
     "AdditionalInfoResponse":{
@@ -380,7 +383,11 @@
         "franceAdditionalInfo":{"shape":"FranceAdditionalInfo"},
         "monacoAdditionalInfo":{"shape":"MonacoAdditionalInfo"},
         "germanyAdditionalInfo":{"shape":"GermanyAdditionalInfo"},
-        "mexicoAdditionalInfo":{"shape":"MexicoAdditionalInfo"}
+        "mexicoAdditionalInfo":{"shape":"MexicoAdditionalInfo"},
+        "colombiaAdditionalInfo":{"shape":"ColombiaAdditionalInfo"},
+        "unitedArabEmiratesAdditionalInfo":{"shape":"UnitedArabEmiratesAdditionalInfo"},
+        "norwayAdditionalInfo":{"shape":"NorwayAdditionalInfo"},
+        "newZealandAdditionalInfo":{"shape":"NewZealandAdditionalInfo"}
       }
     },
     "Address":{
@@ -652,6 +659,28 @@
       "max":50,
       "min":1,
       "pattern":"(?!\\s*$)[\\s\\S]+"
+    },
+    "ColombiaAdditionalInfo":{
+      "type":"structure",
+      "members":{
+        "responsibilityCodes":{"shape":"ColombiaResponsabilidadesList"},
+        "taxpayerTypeCode":{"shape":"ColombiaTipoContribuyenteCode"},
+        "issueDate":{"shape":"DateString"}
+      }
+    },
+    "ColombiaResponsabilidadCode":{
+      "type":"string",
+      "pattern":"\\d{2}"
+    },
+    "ColombiaResponsabilidadesList":{
+      "type":"list",
+      "member":{"shape":"ColombiaResponsabilidadCode"},
+      "max":26,
+      "min":0
+    },
+    "ColombiaTipoContribuyenteCode":{
+      "type":"string",
+      "pattern":"\\d{1}"
     },
     "ConflictException":{
       "type":"structure",
@@ -1151,6 +1180,34 @@
         "businessNumber":{"shape":"BusinessNumber"}
       }
     },
+    "NewZealandAdditionalInfo":{
+      "type":"structure",
+      "members":{
+        "peppolId":{"shape":"NewZealandPeppolId"}
+      }
+    },
+    "NewZealandPeppolId":{
+      "type":"string",
+      "pattern":"[0-9]{13}"
+    },
+    "NorwayAdditionalInfo":{
+      "type":"structure",
+      "members":{
+        "taxRegistrationNumberType":{"shape":"NorwayTaxRegistrationNumberType"},
+        "peppolId":{"shape":"NorwayPeppolId"}
+      }
+    },
+    "NorwayPeppolId":{
+      "type":"string",
+      "pattern":"[0-9]{9}"
+    },
+    "NorwayTaxRegistrationNumberType":{
+      "type":"string",
+      "enum":[
+        "TaxRegistrationNumber",
+        "LocalRegistrationNumber"
+      ]
+    },
     "PaginationTokenString":{
       "type":"string",
       "max":2000,
@@ -1163,7 +1220,7 @@
     },
     "PaymentVoucherNumber":{
       "type":"string",
-      "pattern":"(\\d{17}|[A-Za-z]{3}\\d{13}|(?=[^A-Za-z]*[A-Za-z][^A-Za-z]*$)[0-9A-Za-z]{17})"
+      "pattern":"(\\d{17}|\\d{20}|[A-Za-z]{3}\\d{13}|(?=[^A-Za-z]*[A-Za-z][^A-Za-z]*$)[0-9A-Za-z]{17})"
     },
     "PeppolId":{
       "type":"string",
@@ -1413,6 +1470,14 @@
       "min":1,
       "pattern":"(?!\\s*$)[\\s\\S]+"
     },
+    "StatusReasonCode":{
+      "type":"string",
+      "pattern":"[\\s\\S]*"
+    },
+    "StatusReasonMessage":{
+      "type":"string",
+      "pattern":"[\\s\\S]*"
+    },
     "Steuernummer":{
       "type":"string",
       "pattern":"((10|11|21|22|23|24|26|27|28|30|31|32|40|41)[0-9]{11}|[59][0-9]{12})"
@@ -1569,6 +1634,7 @@
         "taxDocumentMetadatas":{"shape":"TaxDocumentMetadatas"},
         "certifiedEmailId":{"shape":"CertifiedEmailId"},
         "additionalTaxInformation":{"shape":"AdditionalInfoResponse"},
+        "statusReason":{"shape":"TaxRegistrationStatusReason"},
         "legalAddress":{"shape":"Address"}
       },
       "sensitive":true
@@ -1631,6 +1697,13 @@
         "Rejected"
       ]
     },
+    "TaxRegistrationStatusReason":{
+      "type":"structure",
+      "members":{
+        "code":{"shape":"StatusReasonCode"},
+        "message":{"shape":"StatusReasonMessage"}
+      }
+    },
     "TaxRegistrationType":{
       "type":"string",
       "enum":[
@@ -1642,7 +1715,12 @@
         "TIN",
         "NRIC",
         "PAN",
-        "NIP"
+        "NIP",
+        "CUIT",
+        "CDI",
+        "RUT",
+        "NIE",
+        "CI"
       ]
     },
     "TaxRegistrationWithJurisdiction":{
@@ -1663,6 +1741,7 @@
         "taxDocumentMetadatas":{"shape":"TaxDocumentMetadatas"},
         "certifiedEmailId":{"shape":"CertifiedEmailId"},
         "additionalTaxInformation":{"shape":"AdditionalInfoResponse"},
+        "statusReason":{"shape":"TaxRegistrationStatusReason"},
         "jurisdiction":{"shape":"Jurisdiction"}
       },
       "sensitive":true
@@ -1676,6 +1755,25 @@
         "secondaryTaxId":{"shape":"SecondaryTaxId"},
         "industries":{"shape":"Industries"}
       }
+    },
+    "UaeEmiratesId":{
+      "type":"string",
+      "pattern":"784-[0-9]{4}-[0-9]{7}-[0-9]"
+    },
+    "UaePeppolId":{
+      "type":"string",
+      "pattern":"[0-9]{10}"
+    },
+    "UaeTaxRegistrationNumberType":{
+      "type":"string",
+      "enum":[
+        "VATTaxRegistrationNumber",
+        "LocalTaxRegistrationNumber"
+      ]
+    },
+    "UaeTradeLicenseNumber":{
+      "type":"string",
+      "pattern":"[0-9]{10}"
     },
     "UkraineAdditionalInfo":{
       "type":"structure",
@@ -1694,6 +1792,15 @@
     "UniqueIdentificationNumber":{
       "type":"string",
       "pattern":"[a-zA-Z0-9]{39}"
+    },
+    "UnitedArabEmiratesAdditionalInfo":{
+      "type":"structure",
+      "members":{
+        "taxRegistrationNumberType":{"shape":"UaeTaxRegistrationNumberType"},
+        "peppolId":{"shape":"UaePeppolId"},
+        "tradeLicenseNumber":{"shape":"UaeTradeLicenseNumber"},
+        "emiratesId":{"shape":"UaeEmiratesId"}
+      }
     },
     "Url":{
       "type":"string",
@@ -1772,7 +1879,8 @@
         "enterpriseIdentificationNumber":{"shape":"EnterpriseIdentificationNumber"},
         "electronicTransactionCodeNumber":{"shape":"ElectronicTransactionCodeNumber"},
         "paymentVoucherNumber":{"shape":"PaymentVoucherNumber"},
-        "paymentVoucherNumberDate":{"shape":"DateString"}
+        "paymentVoucherNumberDate":{"shape":"DateString"},
+        "vatCreditMethod":{"shape":"Boolean"}
       }
     }
   }

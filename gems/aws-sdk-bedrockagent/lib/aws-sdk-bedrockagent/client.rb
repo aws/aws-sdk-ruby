@@ -264,7 +264,8 @@ module Aws::BedrockAgent
     #     An integer representing the maximum number attempts that will be made for
     #     a single request, including the initial attempt.  For example,
     #     setting this value to 5 will result in a request being retried up to
-    #     4 times. Used in `standard` and `adaptive` retry modes.
+    #     4 times. Used in `standard` and `adaptive` retry modes. Defaults to 3,
+    #     except for DynamoDB and DynamoDB Streams, which default to 4.
     #
     #   @option options [String] :profile ("default")
     #     Used when loading credentials from the shared credentials file at `HOME/.aws/credentials`.
@@ -327,15 +328,15 @@ module Aws::BedrockAgent
     #     used by the default backoff function. This option is only used in the
     #     `legacy` retry mode.
     #
-    #   @option options [String] :retry_mode ("legacy")
+    #   @option options [String] :retry_mode ("standard")
     #     Specifies which retry algorithm to use. Values are:
     #
-    #     * `legacy` - The pre-existing retry behavior. This is the default
-    #       value if no retry mode is provided.
+    #     * `legacy` - The pre-existing retry behavior.
     #
     #     * `standard` - A standardized set of retry rules across the AWS SDKs.
     #       This includes support for retry quotas, which limit the number of
-    #       unsuccessful retries a client can make.
+    #       unsuccessful retries a client can make. This is the default value
+    #       if no retry mode is provided.
     #
     #     * `adaptive` - A retry mode that includes all the functionality of
     #       `standard` mode along with automatic client side throttling.
@@ -2691,6 +2692,10 @@ module Aws::BedrockAgent
     #   resp.knowledge_base.updated_at #=> Time
     #   resp.knowledge_base.failure_reasons #=> Array
     #   resp.knowledge_base.failure_reasons[0] #=> String
+    #   resp.knowledge_base.metadata_configurations #=> Array
+    #   resp.knowledge_base.metadata_configurations[0].name #=> String
+    #   resp.knowledge_base.metadata_configurations[0].type #=> String, one of "STRING", "STRING_LIST"
+    #   resp.knowledge_base.metadata_configurations[0].searchability #=> String, one of "ENABLED", "DISABLED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/CreateKnowledgeBase AWS API Documentation
     #
@@ -5000,6 +5005,10 @@ module Aws::BedrockAgent
     #   resp.knowledge_base.updated_at #=> Time
     #   resp.knowledge_base.failure_reasons #=> Array
     #   resp.knowledge_base.failure_reasons[0] #=> String
+    #   resp.knowledge_base.metadata_configurations #=> Array
+    #   resp.knowledge_base.metadata_configurations[0].name #=> String
+    #   resp.knowledge_base.metadata_configurations[0].type #=> String, one of "STRING", "STRING_LIST"
+    #   resp.knowledge_base.metadata_configurations[0].searchability #=> String, one of "ENABLED", "DISABLED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/GetKnowledgeBase AWS API Documentation
     #
@@ -8252,6 +8261,15 @@ module Aws::BedrockAgent
     #   knowledge base. You must use the same configuration as when the
     #   knowledge base was created.
     #
+    # @option params [Array<Types::MetadataConfiguration>] :metadata_configurations
+    #   Specifies up to 30 custom metadata field configurations for a managed
+    #   knowledge base.
+    #
+    #   The list that you specify replaces the existing configurations. The
+    #   update removes any configuration that you leave out, and its field is
+    #   no longer searchable. An empty list removes all configurations. If you
+    #   don't specify a list, the existing configurations don't change.
+    #
     # @return [Types::UpdateKnowledgeBaseResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateKnowledgeBaseResponse#knowledge_base #knowledge_base} => Types::KnowledgeBase
@@ -8482,6 +8500,13 @@ module Aws::BedrockAgent
     #         index_name: "IndexName",
     #       },
     #     },
+    #     metadata_configurations: [
+    #       {
+    #         name: "MetadataKeyName", # required
+    #         type: "STRING", # required, accepts STRING, STRING_LIST
+    #         searchability: "ENABLED", # required, accepts ENABLED, DISABLED
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -8594,6 +8619,10 @@ module Aws::BedrockAgent
     #   resp.knowledge_base.updated_at #=> Time
     #   resp.knowledge_base.failure_reasons #=> Array
     #   resp.knowledge_base.failure_reasons[0] #=> String
+    #   resp.knowledge_base.metadata_configurations #=> Array
+    #   resp.knowledge_base.metadata_configurations[0].name #=> String
+    #   resp.knowledge_base.metadata_configurations[0].type #=> String, one of "STRING", "STRING_LIST"
+    #   resp.knowledge_base.metadata_configurations[0].searchability #=> String, one of "ENABLED", "DISABLED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/UpdateKnowledgeBase AWS API Documentation
     #
@@ -9229,7 +9258,7 @@ module Aws::BedrockAgent
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrockagent'
-      context[:gem_version] = '1.91.0'
+      context[:gem_version] = '1.98.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

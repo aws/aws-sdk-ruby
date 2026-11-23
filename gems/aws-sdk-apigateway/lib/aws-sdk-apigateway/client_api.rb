@@ -160,6 +160,13 @@ module Aws::APIGateway
     IntegrationResponse = Shapes::StructureShape.new(name: 'IntegrationResponse')
     IntegrationType = Shapes::StringShape.new(name: 'IntegrationType')
     IpAddressType = Shapes::StringShape.new(name: 'IpAddressType')
+    JwtAdditionalClaim = Shapes::StructureShape.new(name: 'JwtAdditionalClaim')
+    JwtClaimFormat = Shapes::StringShape.new(name: 'JwtClaimFormat')
+    JwtConfiguration = Shapes::StructureShape.new(name: 'JwtConfiguration')
+    JwtConfigurationInput = Shapes::StructureShape.new(name: 'JwtConfigurationInput')
+    JwtIssuer = Shapes::StructureShape.new(name: 'JwtIssuer')
+    JwtIssuerInput = Shapes::StructureShape.new(name: 'JwtIssuerInput')
+    JwtSigningAlgorithm = Shapes::StringShape.new(name: 'JwtSigningAlgorithm')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
     ListOfARNs = Shapes::ListShape.new(name: 'ListOfARNs')
     ListOfApiKey = Shapes::ListShape.new(name: 'ListOfApiKey')
@@ -174,6 +181,10 @@ module Aws::APIGateway
     ListOfDomainNameAccessAssociation = Shapes::ListShape.new(name: 'ListOfDomainNameAccessAssociation')
     ListOfEndpointType = Shapes::ListShape.new(name: 'ListOfEndpointType')
     ListOfGatewayResponse = Shapes::ListShape.new(name: 'ListOfGatewayResponse')
+    ListOfJwtAdditionalClaim = Shapes::ListShape.new(name: 'ListOfJwtAdditionalClaim')
+    ListOfJwtIssuer = Shapes::ListShape.new(name: 'ListOfJwtIssuer')
+    ListOfJwtIssuerInput = Shapes::ListShape.new(name: 'ListOfJwtIssuerInput')
+    ListOfJwtSigningAlgorithm = Shapes::ListShape.new(name: 'ListOfJwtSigningAlgorithm')
     ListOfLong = Shapes::ListShape.new(name: 'ListOfLong')
     ListOfModel = Shapes::ListShape.new(name: 'ListOfModel')
     ListOfPatchOperation = Shapes::ListShape.new(name: 'ListOfPatchOperation')
@@ -337,6 +348,7 @@ module Aws::APIGateway
     Authorizer.add_member(:identity_source, Shapes::ShapeRef.new(shape: String, location_name: "identitySource"))
     Authorizer.add_member(:identity_validation_expression, Shapes::ShapeRef.new(shape: String, location_name: "identityValidationExpression"))
     Authorizer.add_member(:authorizer_result_ttl_in_seconds, Shapes::ShapeRef.new(shape: NullableInteger, location_name: "authorizerResultTtlInSeconds"))
+    Authorizer.add_member(:jwt_configuration, Shapes::ShapeRef.new(shape: JwtConfiguration, location_name: "jwtConfiguration"))
     Authorizer.struct_class = Types::Authorizer
 
     Authorizers.add_member(:position, Shapes::ShapeRef.new(shape: String, location_name: "position"))
@@ -396,6 +408,7 @@ module Aws::APIGateway
     CreateAuthorizerRequest.add_member(:identity_source, Shapes::ShapeRef.new(shape: String, location_name: "identitySource"))
     CreateAuthorizerRequest.add_member(:identity_validation_expression, Shapes::ShapeRef.new(shape: String, location_name: "identityValidationExpression"))
     CreateAuthorizerRequest.add_member(:authorizer_result_ttl_in_seconds, Shapes::ShapeRef.new(shape: NullableInteger, location_name: "authorizerResultTtlInSeconds"))
+    CreateAuthorizerRequest.add_member(:jwt_configuration, Shapes::ShapeRef.new(shape: JwtConfigurationInput, location_name: "jwtConfiguration"))
     CreateAuthorizerRequest.struct_class = Types::CreateAuthorizerRequest
 
     CreateBasePathMappingRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "domain_name"))
@@ -996,6 +1009,31 @@ module Aws::APIGateway
     IntegrationResponse.add_member(:content_handling, Shapes::ShapeRef.new(shape: ContentHandlingStrategy, location_name: "contentHandling"))
     IntegrationResponse.struct_class = Types::IntegrationResponse
 
+    JwtAdditionalClaim.add_member(:claim_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "claimName"))
+    JwtAdditionalClaim.add_member(:format, Shapes::ShapeRef.new(shape: JwtClaimFormat, required: true, location_name: "format"))
+    JwtAdditionalClaim.add_member(:required, Shapes::ShapeRef.new(shape: Boolean, location_name: "required"))
+    JwtAdditionalClaim.add_member(:expected_values, Shapes::ShapeRef.new(shape: ListOfString, location_name: "expectedValues"))
+    JwtAdditionalClaim.struct_class = Types::JwtAdditionalClaim
+
+    JwtConfiguration.add_member(:issuers, Shapes::ShapeRef.new(shape: ListOfJwtIssuer, location_name: "issuers"))
+    JwtConfiguration.add_member(:default_algorithms, Shapes::ShapeRef.new(shape: ListOfJwtSigningAlgorithm, location_name: "defaultAlgorithms"))
+    JwtConfiguration.struct_class = Types::JwtConfiguration
+
+    JwtConfigurationInput.add_member(:issuers, Shapes::ShapeRef.new(shape: ListOfJwtIssuerInput, required: true, location_name: "issuers"))
+    JwtConfigurationInput.add_member(:default_algorithms, Shapes::ShapeRef.new(shape: ListOfJwtSigningAlgorithm, required: true, location_name: "defaultAlgorithms"))
+    JwtConfigurationInput.struct_class = Types::JwtConfigurationInput
+
+    JwtIssuer.add_member(:issuer, Shapes::ShapeRef.new(shape: String, location_name: "issuer"))
+    JwtIssuer.add_member(:audiences, Shapes::ShapeRef.new(shape: ListOfString, location_name: "audiences"))
+    JwtIssuer.add_member(:additional_claims, Shapes::ShapeRef.new(shape: ListOfJwtAdditionalClaim, location_name: "additionalClaims"))
+    JwtIssuer.add_member(:jwks_uri, Shapes::ShapeRef.new(shape: String, location_name: "jwksUri"))
+    JwtIssuer.struct_class = Types::JwtIssuer
+
+    JwtIssuerInput.add_member(:issuer, Shapes::ShapeRef.new(shape: String, required: true, location_name: "issuer"))
+    JwtIssuerInput.add_member(:audiences, Shapes::ShapeRef.new(shape: ListOfString, required: true, location_name: "audiences"))
+    JwtIssuerInput.add_member(:additional_claims, Shapes::ShapeRef.new(shape: ListOfJwtAdditionalClaim, location_name: "additionalClaims"))
+    JwtIssuerInput.struct_class = Types::JwtIssuerInput
+
     LimitExceededException.add_member(:retry_after_seconds, Shapes::ShapeRef.new(shape: String, location: "header", location_name: "Retry-After"))
     LimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     LimitExceededException.struct_class = Types::LimitExceededException
@@ -1025,6 +1063,14 @@ module Aws::APIGateway
     ListOfEndpointType.member = Shapes::ShapeRef.new(shape: EndpointType)
 
     ListOfGatewayResponse.member = Shapes::ShapeRef.new(shape: GatewayResponse)
+
+    ListOfJwtAdditionalClaim.member = Shapes::ShapeRef.new(shape: JwtAdditionalClaim)
+
+    ListOfJwtIssuer.member = Shapes::ShapeRef.new(shape: JwtIssuer)
+
+    ListOfJwtIssuerInput.member = Shapes::ShapeRef.new(shape: JwtIssuerInput)
+
+    ListOfJwtSigningAlgorithm.member = Shapes::ShapeRef.new(shape: JwtSigningAlgorithm)
 
     ListOfLong.member = Shapes::ShapeRef.new(shape: Long)
 

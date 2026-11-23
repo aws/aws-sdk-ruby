@@ -60,6 +60,16 @@ module Aws::Kinesis
   #
   #   @return [string]
   #
+  # @!attribute queue_arn
+  #   The ARN of the Kinesis queue
+  #
+  #   @return [string]
+  #
+  # @!attribute resource_type
+  #   The type of Kinesis resource targeted by the operation (e.g., queue). Used for endpoint routing.
+  #
+  #   @return [string]
+  #
   # @!attribute account_id
   #   The AWS AccountId used for the request.
   #
@@ -81,6 +91,8 @@ module Aws::Kinesis
     :consumer_arn,
     :resource_arn,
     :channel_arn,
+    :queue_arn,
+    :resource_type,
     :account_id,
     :account_id_endpoint_mode,
   ) do
@@ -99,6 +111,8 @@ module Aws::Kinesis
         'ConsumerARN' => :consumer_arn,
         'ResourceARN' => :resource_arn,
         'ChannelARN' => :channel_arn,
+        'QueueARN' => :queue_arn,
+        'ResourceType' => :resource_type,
         'AccountId' => :account_id,
         'AccountIdEndpointMode' => :account_id_endpoint_mode,
       }.freeze
@@ -117,6 +131,9 @@ module Aws::Kinesis
       self[:consumer_arn] = options[:consumer_arn]
       self[:resource_arn] = options[:resource_arn]
       self[:channel_arn] = options[:channel_arn]
+      self[:queue_arn] = options[:queue_arn]
+      self[:resource_type] = options[:resource_type]
+      self[:resource_type] = "" if self[:resource_type].nil?
       self[:account_id] = options[:account_id]
       self[:account_id_endpoint_mode] = options[:account_id_endpoint_mode]
     end

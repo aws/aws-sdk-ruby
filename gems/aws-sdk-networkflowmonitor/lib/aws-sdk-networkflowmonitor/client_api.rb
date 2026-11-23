@@ -16,34 +16,55 @@ module Aws::NetworkFlowMonitor
 
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
     AccountId = Shapes::StringShape.new(name: 'AccountId')
+    AccountToAdd = Shapes::StructureShape.new(name: 'AccountToAdd')
+    AccountToAddList = Shapes::ListShape.new(name: 'AccountToAddList')
+    AdditionalFlowInfo = Shapes::StructureShape.new(name: 'AdditionalFlowInfo')
     Arn = Shapes::StringShape.new(name: 'Arn')
     AvailabilityZone = Shapes::StringShape.new(name: 'AvailabilityZone')
     AwsRegion = Shapes::StringShape.new(name: 'AwsRegion')
+    ClientLocation = Shapes::StructureShape.new(name: 'ClientLocation')
     Component = Shapes::StringShape.new(name: 'Component')
     ComponentType = Shapes::StringShape.new(name: 'ComponentType')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     CreateMonitorInput = Shapes::StructureShape.new(name: 'CreateMonitorInput')
     CreateMonitorInputLocalResourcesList = Shapes::ListShape.new(name: 'CreateMonitorInputLocalResourcesList')
     CreateMonitorOutput = Shapes::StructureShape.new(name: 'CreateMonitorOutput')
+    CreatePerformanceMonitorInput = Shapes::StructureShape.new(name: 'CreatePerformanceMonitorInput')
+    CreatePerformanceMonitorInputTargetsList = Shapes::ListShape.new(name: 'CreatePerformanceMonitorInputTargetsList')
+    CreatePerformanceMonitorOutput = Shapes::StructureShape.new(name: 'CreatePerformanceMonitorOutput')
     CreateScopeInput = Shapes::StructureShape.new(name: 'CreateScopeInput')
     CreateScopeInputTargetsList = Shapes::ListShape.new(name: 'CreateScopeInputTargetsList')
     CreateScopeOutput = Shapes::StructureShape.new(name: 'CreateScopeOutput')
     DeleteMonitorInput = Shapes::StructureShape.new(name: 'DeleteMonitorInput')
     DeleteMonitorOutput = Shapes::StructureShape.new(name: 'DeleteMonitorOutput')
+    DeletePerformanceMonitorInput = Shapes::StructureShape.new(name: 'DeletePerformanceMonitorInput')
+    DeletePerformanceMonitorOutput = Shapes::StructureShape.new(name: 'DeletePerformanceMonitorOutput')
     DeleteScopeInput = Shapes::StructureShape.new(name: 'DeleteScopeInput')
     DeleteScopeOutput = Shapes::StructureShape.new(name: 'DeleteScopeOutput')
     DestinationCategory = Shapes::StringShape.new(name: 'DestinationCategory')
     Double = Shapes::FloatShape.new(name: 'Double')
+    FilterOperator = Shapes::StringShape.new(name: 'FilterOperator')
+    FilterParameter = Shapes::StructureShape.new(name: 'FilterParameter')
+    FilterParameterValuesList = Shapes::ListShape.new(name: 'FilterParameterValuesList')
+    FilterParameters = Shapes::ListShape.new(name: 'FilterParameters')
     GetMonitorInput = Shapes::StructureShape.new(name: 'GetMonitorInput')
     GetMonitorOutput = Shapes::StructureShape.new(name: 'GetMonitorOutput')
+    GetMonitorScopeSuggestionsInput = Shapes::StructureShape.new(name: 'GetMonitorScopeSuggestionsInput')
+    GetMonitorScopeSuggestionsOutput = Shapes::StructureShape.new(name: 'GetMonitorScopeSuggestionsOutput')
+    GetPerformanceMonitorInput = Shapes::StructureShape.new(name: 'GetPerformanceMonitorInput')
+    GetPerformanceMonitorOutput = Shapes::StructureShape.new(name: 'GetPerformanceMonitorOutput')
     GetQueryResultsMonitorTopContributorsInput = Shapes::StructureShape.new(name: 'GetQueryResultsMonitorTopContributorsInput')
     GetQueryResultsMonitorTopContributorsOutput = Shapes::StructureShape.new(name: 'GetQueryResultsMonitorTopContributorsOutput')
+    GetQueryResultsPerformanceMonitorInput = Shapes::StructureShape.new(name: 'GetQueryResultsPerformanceMonitorInput')
+    GetQueryResultsPerformanceMonitorOutput = Shapes::StructureShape.new(name: 'GetQueryResultsPerformanceMonitorOutput')
     GetQueryResultsWorkloadInsightsTopContributorsDataInput = Shapes::StructureShape.new(name: 'GetQueryResultsWorkloadInsightsTopContributorsDataInput')
     GetQueryResultsWorkloadInsightsTopContributorsDataOutput = Shapes::StructureShape.new(name: 'GetQueryResultsWorkloadInsightsTopContributorsDataOutput')
     GetQueryResultsWorkloadInsightsTopContributorsInput = Shapes::StructureShape.new(name: 'GetQueryResultsWorkloadInsightsTopContributorsInput')
     GetQueryResultsWorkloadInsightsTopContributorsOutput = Shapes::StructureShape.new(name: 'GetQueryResultsWorkloadInsightsTopContributorsOutput')
     GetQueryStatusMonitorTopContributorsInput = Shapes::StructureShape.new(name: 'GetQueryStatusMonitorTopContributorsInput')
     GetQueryStatusMonitorTopContributorsOutput = Shapes::StructureShape.new(name: 'GetQueryStatusMonitorTopContributorsOutput')
+    GetQueryStatusPerformanceMonitorInput = Shapes::StructureShape.new(name: 'GetQueryStatusPerformanceMonitorInput')
+    GetQueryStatusPerformanceMonitorOutput = Shapes::StructureShape.new(name: 'GetQueryStatusPerformanceMonitorOutput')
     GetQueryStatusWorkloadInsightsTopContributorsDataInput = Shapes::StructureShape.new(name: 'GetQueryStatusWorkloadInsightsTopContributorsDataInput')
     GetQueryStatusWorkloadInsightsTopContributorsDataOutput = Shapes::StructureShape.new(name: 'GetQueryStatusWorkloadInsightsTopContributorsDataOutput')
     GetQueryStatusWorkloadInsightsTopContributorsInput = Shapes::StructureShape.new(name: 'GetQueryStatusWorkloadInsightsTopContributorsInput')
@@ -60,6 +81,8 @@ module Aws::NetworkFlowMonitor
     Limit = Shapes::IntegerShape.new(name: 'Limit')
     ListMonitorsInput = Shapes::StructureShape.new(name: 'ListMonitorsInput')
     ListMonitorsOutput = Shapes::StructureShape.new(name: 'ListMonitorsOutput')
+    ListPerformanceMonitorsInput = Shapes::StructureShape.new(name: 'ListPerformanceMonitorsInput')
+    ListPerformanceMonitorsOutput = Shapes::StructureShape.new(name: 'ListPerformanceMonitorsOutput')
     ListScopesInput = Shapes::StructureShape.new(name: 'ListScopesInput')
     ListScopesOutput = Shapes::StructureShape.new(name: 'ListScopesOutput')
     ListTagsForResourceInput = Shapes::StructureShape.new(name: 'ListTagsForResourceInput')
@@ -80,9 +103,26 @@ module Aws::NetworkFlowMonitor
     MonitorSummary = Shapes::StructureShape.new(name: 'MonitorSummary')
     MonitorTopContributorsRow = Shapes::StructureShape.new(name: 'MonitorTopContributorsRow')
     MonitorTopContributorsRowList = Shapes::ListShape.new(name: 'MonitorTopContributorsRowList')
+    Network = Shapes::StructureShape.new(name: 'Network')
+    OrgMembershipStatus = Shapes::StringShape.new(name: 'OrgMembershipStatus')
+    PerformanceMonitorQueryType = Shapes::StringShape.new(name: 'PerformanceMonitorQueryType')
+    PerformanceMonitorSummary = Shapes::StructureShape.new(name: 'PerformanceMonitorSummary')
+    PerformanceMonitorSummaryList = Shapes::ListShape.new(name: 'PerformanceMonitorSummaryList')
+    PerformanceMonitorTarget = Shapes::StructureShape.new(name: 'PerformanceMonitorTarget')
+    PerformanceMonitorTargetIdentifierString = Shapes::StringShape.new(name: 'PerformanceMonitorTargetIdentifierString')
+    PerformanceMonitorTargetType = Shapes::StringShape.new(name: 'PerformanceMonitorTargetType')
+    PerformanceMonitorTargets = Shapes::ListShape.new(name: 'PerformanceMonitorTargets')
+    PerformanceMonitorType = Shapes::StringShape.new(name: 'PerformanceMonitorType')
+    QueryData = Shapes::ListShape.new(name: 'QueryData')
+    QueryField = Shapes::StructureShape.new(name: 'QueryField')
+    QueryFields = Shapes::ListShape.new(name: 'QueryFields')
+    QueryLimit = Shapes::IntegerShape.new(name: 'QueryLimit')
+    QueryMaxResults = Shapes::IntegerShape.new(name: 'QueryMaxResults')
+    QueryRow = Shapes::ListShape.new(name: 'QueryRow')
     QueryStatus = Shapes::StringShape.new(name: 'QueryStatus')
     ResourceName = Shapes::StringShape.new(name: 'ResourceName')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
+    ScopeCoverageStatus = Shapes::StringShape.new(name: 'ScopeCoverageStatus')
     ScopeId = Shapes::StringShape.new(name: 'ScopeId')
     ScopeStatus = Shapes::StringShape.new(name: 'ScopeStatus')
     ScopeSummary = Shapes::StructureShape.new(name: 'ScopeSummary')
@@ -90,12 +130,16 @@ module Aws::NetworkFlowMonitor
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
     StartQueryMonitorTopContributorsInput = Shapes::StructureShape.new(name: 'StartQueryMonitorTopContributorsInput')
     StartQueryMonitorTopContributorsOutput = Shapes::StructureShape.new(name: 'StartQueryMonitorTopContributorsOutput')
+    StartQueryPerformanceMonitorInput = Shapes::StructureShape.new(name: 'StartQueryPerformanceMonitorInput')
+    StartQueryPerformanceMonitorOutput = Shapes::StructureShape.new(name: 'StartQueryPerformanceMonitorOutput')
     StartQueryWorkloadInsightsTopContributorsDataInput = Shapes::StructureShape.new(name: 'StartQueryWorkloadInsightsTopContributorsDataInput')
     StartQueryWorkloadInsightsTopContributorsDataOutput = Shapes::StructureShape.new(name: 'StartQueryWorkloadInsightsTopContributorsDataOutput')
     StartQueryWorkloadInsightsTopContributorsInput = Shapes::StructureShape.new(name: 'StartQueryWorkloadInsightsTopContributorsInput')
     StartQueryWorkloadInsightsTopContributorsOutput = Shapes::StructureShape.new(name: 'StartQueryWorkloadInsightsTopContributorsOutput')
     StopQueryMonitorTopContributorsInput = Shapes::StructureShape.new(name: 'StopQueryMonitorTopContributorsInput')
     StopQueryMonitorTopContributorsOutput = Shapes::StructureShape.new(name: 'StopQueryMonitorTopContributorsOutput')
+    StopQueryPerformanceMonitorInput = Shapes::StructureShape.new(name: 'StopQueryPerformanceMonitorInput')
+    StopQueryPerformanceMonitorOutput = Shapes::StructureShape.new(name: 'StopQueryPerformanceMonitorOutput')
     StopQueryWorkloadInsightsTopContributorsDataInput = Shapes::StructureShape.new(name: 'StopQueryWorkloadInsightsTopContributorsDataInput')
     StopQueryWorkloadInsightsTopContributorsDataOutput = Shapes::StructureShape.new(name: 'StopQueryWorkloadInsightsTopContributorsDataOutput')
     StopQueryWorkloadInsightsTopContributorsInput = Shapes::StructureShape.new(name: 'StopQueryWorkloadInsightsTopContributorsInput')
@@ -122,6 +166,10 @@ module Aws::NetworkFlowMonitor
     UntagResourceOutput = Shapes::StructureShape.new(name: 'UntagResourceOutput')
     UpdateMonitorInput = Shapes::StructureShape.new(name: 'UpdateMonitorInput')
     UpdateMonitorOutput = Shapes::StructureShape.new(name: 'UpdateMonitorOutput')
+    UpdatePerformanceMonitorInput = Shapes::StructureShape.new(name: 'UpdatePerformanceMonitorInput')
+    UpdatePerformanceMonitorInputTargetsToAddList = Shapes::ListShape.new(name: 'UpdatePerformanceMonitorInputTargetsToAddList')
+    UpdatePerformanceMonitorInputTargetsToRemoveList = Shapes::ListShape.new(name: 'UpdatePerformanceMonitorInputTargetsToRemoveList')
+    UpdatePerformanceMonitorOutput = Shapes::StructureShape.new(name: 'UpdatePerformanceMonitorOutput')
     UpdateScopeInput = Shapes::StructureShape.new(name: 'UpdateScopeInput')
     UpdateScopeInputResourcesToAddList = Shapes::ListShape.new(name: 'UpdateScopeInputResourcesToAddList')
     UpdateScopeInputResourcesToDeleteList = Shapes::ListShape.new(name: 'UpdateScopeInputResourcesToDeleteList')
@@ -140,6 +188,22 @@ module Aws::NetworkFlowMonitor
 
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     AccessDeniedException.struct_class = Types::AccessDeniedException
+
+    AccountToAdd.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "accountId"))
+    AccountToAdd.add_member(:region, Shapes::ShapeRef.new(shape: AwsRegion, required: true, location_name: "region"))
+    AccountToAdd.add_member(:membership, Shapes::ShapeRef.new(shape: OrgMembershipStatus, required: true, location_name: "membership"))
+    AccountToAdd.struct_class = Types::AccountToAdd
+
+    AccountToAddList.member = Shapes::ShapeRef.new(shape: AccountToAdd)
+
+    AdditionalFlowInfo.add_member(:network, Shapes::ShapeRef.new(shape: Network, location_name: "network"))
+    AdditionalFlowInfo.add_member(:client_location, Shapes::ShapeRef.new(shape: ClientLocation, location_name: "clientLocation"))
+    AdditionalFlowInfo.struct_class = Types::AdditionalFlowInfo
+
+    ClientLocation.add_member(:city, Shapes::ShapeRef.new(shape: String, location_name: "city"))
+    ClientLocation.add_member(:subdivision, Shapes::ShapeRef.new(shape: String, location_name: "subdivision"))
+    ClientLocation.add_member(:country, Shapes::ShapeRef.new(shape: String, location_name: "country"))
+    ClientLocation.struct_class = Types::ClientLocation
 
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     ConflictException.struct_class = Types::ConflictException
@@ -164,6 +228,25 @@ module Aws::NetworkFlowMonitor
     CreateMonitorOutput.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     CreateMonitorOutput.struct_class = Types::CreateMonitorOutput
 
+    CreatePerformanceMonitorInput.add_member(:monitor_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "monitorName"))
+    CreatePerformanceMonitorInput.add_member(:scope_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "scopeArn"))
+    CreatePerformanceMonitorInput.add_member(:targets, Shapes::ShapeRef.new(shape: CreatePerformanceMonitorInputTargetsList, required: true, location_name: "targets"))
+    CreatePerformanceMonitorInput.add_member(:client_token, Shapes::ShapeRef.new(shape: UuidString, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
+    CreatePerformanceMonitorInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    CreatePerformanceMonitorInput.struct_class = Types::CreatePerformanceMonitorInput
+
+    CreatePerformanceMonitorInputTargetsList.member = Shapes::ShapeRef.new(shape: PerformanceMonitorTarget)
+
+    CreatePerformanceMonitorOutput.add_member(:monitor_arn, Shapes::ShapeRef.new(shape: MonitorArn, required: true, location_name: "monitorArn"))
+    CreatePerformanceMonitorOutput.add_member(:monitor_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "monitorName"))
+    CreatePerformanceMonitorOutput.add_member(:monitor_status, Shapes::ShapeRef.new(shape: MonitorStatus, required: true, location_name: "monitorStatus"))
+    CreatePerformanceMonitorOutput.add_member(:monitor_type, Shapes::ShapeRef.new(shape: PerformanceMonitorType, required: true, location_name: "monitorType"))
+    CreatePerformanceMonitorOutput.add_member(:targets, Shapes::ShapeRef.new(shape: PerformanceMonitorTargets, required: true, location_name: "targets"))
+    CreatePerformanceMonitorOutput.add_member(:created_at, Shapes::ShapeRef.new(shape: Iso8601Timestamp, required: true, location_name: "createdAt"))
+    CreatePerformanceMonitorOutput.add_member(:modified_at, Shapes::ShapeRef.new(shape: Iso8601Timestamp, required: true, location_name: "modifiedAt"))
+    CreatePerformanceMonitorOutput.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    CreatePerformanceMonitorOutput.struct_class = Types::CreatePerformanceMonitorOutput
+
     CreateScopeInput.add_member(:targets, Shapes::ShapeRef.new(shape: CreateScopeInputTargetsList, required: true, location_name: "targets"))
     CreateScopeInput.add_member(:client_token, Shapes::ShapeRef.new(shape: UuidString, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateScopeInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
@@ -182,10 +265,24 @@ module Aws::NetworkFlowMonitor
 
     DeleteMonitorOutput.struct_class = Types::DeleteMonitorOutput
 
+    DeletePerformanceMonitorInput.add_member(:monitor_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "monitorName"))
+    DeletePerformanceMonitorInput.struct_class = Types::DeletePerformanceMonitorInput
+
+    DeletePerformanceMonitorOutput.struct_class = Types::DeletePerformanceMonitorOutput
+
     DeleteScopeInput.add_member(:scope_id, Shapes::ShapeRef.new(shape: ScopeId, required: true, location: "uri", location_name: "scopeId"))
     DeleteScopeInput.struct_class = Types::DeleteScopeInput
 
     DeleteScopeOutput.struct_class = Types::DeleteScopeOutput
+
+    FilterParameter.add_member(:field, Shapes::ShapeRef.new(shape: String, required: true, location_name: "field"))
+    FilterParameter.add_member(:operator, Shapes::ShapeRef.new(shape: FilterOperator, required: true, location_name: "operator"))
+    FilterParameter.add_member(:values, Shapes::ShapeRef.new(shape: FilterParameterValuesList, required: true, location_name: "values"))
+    FilterParameter.struct_class = Types::FilterParameter
+
+    FilterParameterValuesList.member = Shapes::ShapeRef.new(shape: String)
+
+    FilterParameters.member = Shapes::ShapeRef.new(shape: FilterParameter)
 
     GetMonitorInput.add_member(:monitor_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "monitorName"))
     GetMonitorInput.struct_class = Types::GetMonitorInput
@@ -200,6 +297,30 @@ module Aws::NetworkFlowMonitor
     GetMonitorOutput.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     GetMonitorOutput.struct_class = Types::GetMonitorOutput
 
+    GetMonitorScopeSuggestionsInput.add_member(:monitor_arn, Shapes::ShapeRef.new(shape: MonitorArn, required: true, location: "querystring", location_name: "monitorArn"))
+    GetMonitorScopeSuggestionsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    GetMonitorScopeSuggestionsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "nextToken"))
+    GetMonitorScopeSuggestionsInput.struct_class = Types::GetMonitorScopeSuggestionsInput
+
+    GetMonitorScopeSuggestionsOutput.add_member(:status, Shapes::ShapeRef.new(shape: ScopeCoverageStatus, required: true, location_name: "status"))
+    GetMonitorScopeSuggestionsOutput.add_member(:accounts_to_add, Shapes::ShapeRef.new(shape: AccountToAddList, required: true, location_name: "accountsToAdd"))
+    GetMonitorScopeSuggestionsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    GetMonitorScopeSuggestionsOutput.add_member(:updated_at, Shapes::ShapeRef.new(shape: Iso8601Timestamp, location_name: "updatedAt"))
+    GetMonitorScopeSuggestionsOutput.struct_class = Types::GetMonitorScopeSuggestionsOutput
+
+    GetPerformanceMonitorInput.add_member(:monitor_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "monitorName"))
+    GetPerformanceMonitorInput.struct_class = Types::GetPerformanceMonitorInput
+
+    GetPerformanceMonitorOutput.add_member(:monitor_arn, Shapes::ShapeRef.new(shape: MonitorArn, required: true, location_name: "monitorArn"))
+    GetPerformanceMonitorOutput.add_member(:monitor_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "monitorName"))
+    GetPerformanceMonitorOutput.add_member(:monitor_status, Shapes::ShapeRef.new(shape: MonitorStatus, required: true, location_name: "monitorStatus"))
+    GetPerformanceMonitorOutput.add_member(:monitor_type, Shapes::ShapeRef.new(shape: PerformanceMonitorType, required: true, location_name: "monitorType"))
+    GetPerformanceMonitorOutput.add_member(:targets, Shapes::ShapeRef.new(shape: PerformanceMonitorTargets, required: true, location_name: "targets"))
+    GetPerformanceMonitorOutput.add_member(:created_at, Shapes::ShapeRef.new(shape: Iso8601Timestamp, required: true, location_name: "createdAt"))
+    GetPerformanceMonitorOutput.add_member(:modified_at, Shapes::ShapeRef.new(shape: Iso8601Timestamp, required: true, location_name: "modifiedAt"))
+    GetPerformanceMonitorOutput.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    GetPerformanceMonitorOutput.struct_class = Types::GetPerformanceMonitorOutput
+
     GetQueryResultsMonitorTopContributorsInput.add_member(:monitor_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "monitorName"))
     GetQueryResultsMonitorTopContributorsInput.add_member(:query_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "queryId"))
     GetQueryResultsMonitorTopContributorsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "nextToken"))
@@ -210,6 +331,17 @@ module Aws::NetworkFlowMonitor
     GetQueryResultsMonitorTopContributorsOutput.add_member(:top_contributors, Shapes::ShapeRef.new(shape: MonitorTopContributorsRowList, location_name: "topContributors"))
     GetQueryResultsMonitorTopContributorsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     GetQueryResultsMonitorTopContributorsOutput.struct_class = Types::GetQueryResultsMonitorTopContributorsOutput
+
+    GetQueryResultsPerformanceMonitorInput.add_member(:monitor_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "monitorName"))
+    GetQueryResultsPerformanceMonitorInput.add_member(:query_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "queryId"))
+    GetQueryResultsPerformanceMonitorInput.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "nextToken"))
+    GetQueryResultsPerformanceMonitorInput.add_member(:max_results, Shapes::ShapeRef.new(shape: QueryMaxResults, location: "querystring", location_name: "maxResults"))
+    GetQueryResultsPerformanceMonitorInput.struct_class = Types::GetQueryResultsPerformanceMonitorInput
+
+    GetQueryResultsPerformanceMonitorOutput.add_member(:fields, Shapes::ShapeRef.new(shape: QueryFields, required: true, location_name: "fields"))
+    GetQueryResultsPerformanceMonitorOutput.add_member(:data, Shapes::ShapeRef.new(shape: QueryData, required: true, location_name: "data"))
+    GetQueryResultsPerformanceMonitorOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    GetQueryResultsPerformanceMonitorOutput.struct_class = Types::GetQueryResultsPerformanceMonitorOutput
 
     GetQueryResultsWorkloadInsightsTopContributorsDataInput.add_member(:scope_id, Shapes::ShapeRef.new(shape: ScopeId, required: true, location: "uri", location_name: "scopeId"))
     GetQueryResultsWorkloadInsightsTopContributorsDataInput.add_member(:query_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "queryId"))
@@ -238,6 +370,13 @@ module Aws::NetworkFlowMonitor
 
     GetQueryStatusMonitorTopContributorsOutput.add_member(:status, Shapes::ShapeRef.new(shape: QueryStatus, required: true, location_name: "status"))
     GetQueryStatusMonitorTopContributorsOutput.struct_class = Types::GetQueryStatusMonitorTopContributorsOutput
+
+    GetQueryStatusPerformanceMonitorInput.add_member(:monitor_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "monitorName"))
+    GetQueryStatusPerformanceMonitorInput.add_member(:query_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "queryId"))
+    GetQueryStatusPerformanceMonitorInput.struct_class = Types::GetQueryStatusPerformanceMonitorInput
+
+    GetQueryStatusPerformanceMonitorOutput.add_member(:status, Shapes::ShapeRef.new(shape: QueryStatus, required: true, location_name: "status"))
+    GetQueryStatusPerformanceMonitorOutput.struct_class = Types::GetQueryStatusPerformanceMonitorOutput
 
     GetQueryStatusWorkloadInsightsTopContributorsDataInput.add_member(:scope_id, Shapes::ShapeRef.new(shape: ScopeId, required: true, location: "uri", location_name: "scopeId"))
     GetQueryStatusWorkloadInsightsTopContributorsDataInput.add_member(:query_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "queryId"))
@@ -282,6 +421,16 @@ module Aws::NetworkFlowMonitor
     ListMonitorsOutput.add_member(:monitors, Shapes::ShapeRef.new(shape: MonitorList, required: true, location_name: "monitors"))
     ListMonitorsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     ListMonitorsOutput.struct_class = Types::ListMonitorsOutput
+
+    ListPerformanceMonitorsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "nextToken"))
+    ListPerformanceMonitorsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListPerformanceMonitorsInput.add_member(:monitor_status, Shapes::ShapeRef.new(shape: MonitorStatus, location: "querystring", location_name: "monitorStatus"))
+    ListPerformanceMonitorsInput.add_member(:monitor_type, Shapes::ShapeRef.new(shape: PerformanceMonitorType, location: "querystring", location_name: "monitorType"))
+    ListPerformanceMonitorsInput.struct_class = Types::ListPerformanceMonitorsInput
+
+    ListPerformanceMonitorsOutput.add_member(:monitors, Shapes::ShapeRef.new(shape: PerformanceMonitorSummaryList, required: true, location_name: "monitors"))
+    ListPerformanceMonitorsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    ListPerformanceMonitorsOutput.struct_class = Types::ListPerformanceMonitorsOutput
 
     ListScopesInput.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "nextToken"))
     ListScopesInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
@@ -341,9 +490,39 @@ module Aws::NetworkFlowMonitor
     MonitorTopContributorsRow.add_member(:remote_instance_arn, Shapes::ShapeRef.new(shape: InstanceArn, location_name: "remoteInstanceArn"))
     MonitorTopContributorsRow.add_member(:remote_subnet_arn, Shapes::ShapeRef.new(shape: SubnetArn, location_name: "remoteSubnetArn"))
     MonitorTopContributorsRow.add_member(:remote_vpc_arn, Shapes::ShapeRef.new(shape: VpcArn, location_name: "remoteVpcArn"))
+    MonitorTopContributorsRow.add_member(:additional_flow_info, Shapes::ShapeRef.new(shape: AdditionalFlowInfo, location_name: "additionalFlowInfo"))
     MonitorTopContributorsRow.struct_class = Types::MonitorTopContributorsRow
 
     MonitorTopContributorsRowList.member = Shapes::ShapeRef.new(shape: MonitorTopContributorsRow)
+
+    Network.add_member(:as_name, Shapes::ShapeRef.new(shape: String, location_name: "asName"))
+    Network.add_member(:as_number, Shapes::ShapeRef.new(shape: Long, location_name: "asNumber"))
+    Network.struct_class = Types::Network
+
+    PerformanceMonitorSummary.add_member(:monitor_arn, Shapes::ShapeRef.new(shape: MonitorArn, required: true, location_name: "monitorArn"))
+    PerformanceMonitorSummary.add_member(:monitor_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "monitorName"))
+    PerformanceMonitorSummary.add_member(:monitor_status, Shapes::ShapeRef.new(shape: MonitorStatus, required: true, location_name: "monitorStatus"))
+    PerformanceMonitorSummary.add_member(:monitor_type, Shapes::ShapeRef.new(shape: PerformanceMonitorType, required: true, location_name: "monitorType"))
+    PerformanceMonitorSummary.add_member(:targets, Shapes::ShapeRef.new(shape: PerformanceMonitorTargets, location_name: "targets"))
+    PerformanceMonitorSummary.struct_class = Types::PerformanceMonitorSummary
+
+    PerformanceMonitorSummaryList.member = Shapes::ShapeRef.new(shape: PerformanceMonitorSummary)
+
+    PerformanceMonitorTarget.add_member(:type, Shapes::ShapeRef.new(shape: PerformanceMonitorTargetType, required: true, location_name: "type"))
+    PerformanceMonitorTarget.add_member(:identifier, Shapes::ShapeRef.new(shape: PerformanceMonitorTargetIdentifierString, required: true, location_name: "identifier"))
+    PerformanceMonitorTarget.struct_class = Types::PerformanceMonitorTarget
+
+    PerformanceMonitorTargets.member = Shapes::ShapeRef.new(shape: PerformanceMonitorTarget)
+
+    QueryData.member = Shapes::ShapeRef.new(shape: QueryRow)
+
+    QueryField.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "name"))
+    QueryField.add_member(:type, Shapes::ShapeRef.new(shape: String, required: true, location_name: "type"))
+    QueryField.struct_class = Types::QueryField
+
+    QueryFields.member = Shapes::ShapeRef.new(shape: QueryField)
+
+    QueryRow.member = Shapes::ShapeRef.new(shape: String)
 
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
@@ -368,6 +547,17 @@ module Aws::NetworkFlowMonitor
 
     StartQueryMonitorTopContributorsOutput.add_member(:query_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "queryId"))
     StartQueryMonitorTopContributorsOutput.struct_class = Types::StartQueryMonitorTopContributorsOutput
+
+    StartQueryPerformanceMonitorInput.add_member(:monitor_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "monitorName"))
+    StartQueryPerformanceMonitorInput.add_member(:start_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "startTime"))
+    StartQueryPerformanceMonitorInput.add_member(:end_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "endTime"))
+    StartQueryPerformanceMonitorInput.add_member(:query_type, Shapes::ShapeRef.new(shape: PerformanceMonitorQueryType, required: true, location_name: "queryType"))
+    StartQueryPerformanceMonitorInput.add_member(:filter_parameters, Shapes::ShapeRef.new(shape: FilterParameters, location_name: "filterParameters"))
+    StartQueryPerformanceMonitorInput.add_member(:limit, Shapes::ShapeRef.new(shape: QueryLimit, location_name: "limit"))
+    StartQueryPerformanceMonitorInput.struct_class = Types::StartQueryPerformanceMonitorInput
+
+    StartQueryPerformanceMonitorOutput.add_member(:query_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "queryId"))
+    StartQueryPerformanceMonitorOutput.struct_class = Types::StartQueryPerformanceMonitorOutput
 
     StartQueryWorkloadInsightsTopContributorsDataInput.add_member(:scope_id, Shapes::ShapeRef.new(shape: ScopeId, required: true, location: "uri", location_name: "scopeId"))
     StartQueryWorkloadInsightsTopContributorsDataInput.add_member(:start_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "startTime"))
@@ -395,6 +585,12 @@ module Aws::NetworkFlowMonitor
     StopQueryMonitorTopContributorsInput.struct_class = Types::StopQueryMonitorTopContributorsInput
 
     StopQueryMonitorTopContributorsOutput.struct_class = Types::StopQueryMonitorTopContributorsOutput
+
+    StopQueryPerformanceMonitorInput.add_member(:monitor_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "monitorName"))
+    StopQueryPerformanceMonitorInput.add_member(:query_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "queryId"))
+    StopQueryPerformanceMonitorInput.struct_class = Types::StopQueryPerformanceMonitorInput
+
+    StopQueryPerformanceMonitorOutput.struct_class = Types::StopQueryPerformanceMonitorOutput
 
     StopQueryWorkloadInsightsTopContributorsDataInput.add_member(:scope_id, Shapes::ShapeRef.new(shape: ScopeId, required: true, location: "uri", location_name: "scopeId"))
     StopQueryWorkloadInsightsTopContributorsDataInput.add_member(:query_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "queryId"))
@@ -469,6 +665,26 @@ module Aws::NetworkFlowMonitor
     UpdateMonitorOutput.add_member(:modified_at, Shapes::ShapeRef.new(shape: Iso8601Timestamp, required: true, location_name: "modifiedAt"))
     UpdateMonitorOutput.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     UpdateMonitorOutput.struct_class = Types::UpdateMonitorOutput
+
+    UpdatePerformanceMonitorInput.add_member(:monitor_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "monitorName"))
+    UpdatePerformanceMonitorInput.add_member(:targets_to_add, Shapes::ShapeRef.new(shape: UpdatePerformanceMonitorInputTargetsToAddList, location_name: "targetsToAdd"))
+    UpdatePerformanceMonitorInput.add_member(:targets_to_remove, Shapes::ShapeRef.new(shape: UpdatePerformanceMonitorInputTargetsToRemoveList, location_name: "targetsToRemove"))
+    UpdatePerformanceMonitorInput.add_member(:client_token, Shapes::ShapeRef.new(shape: UuidString, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
+    UpdatePerformanceMonitorInput.struct_class = Types::UpdatePerformanceMonitorInput
+
+    UpdatePerformanceMonitorInputTargetsToAddList.member = Shapes::ShapeRef.new(shape: PerformanceMonitorTarget)
+
+    UpdatePerformanceMonitorInputTargetsToRemoveList.member = Shapes::ShapeRef.new(shape: PerformanceMonitorTarget)
+
+    UpdatePerformanceMonitorOutput.add_member(:monitor_arn, Shapes::ShapeRef.new(shape: MonitorArn, required: true, location_name: "monitorArn"))
+    UpdatePerformanceMonitorOutput.add_member(:monitor_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "monitorName"))
+    UpdatePerformanceMonitorOutput.add_member(:monitor_status, Shapes::ShapeRef.new(shape: MonitorStatus, required: true, location_name: "monitorStatus"))
+    UpdatePerformanceMonitorOutput.add_member(:monitor_type, Shapes::ShapeRef.new(shape: PerformanceMonitorType, required: true, location_name: "monitorType"))
+    UpdatePerformanceMonitorOutput.add_member(:targets, Shapes::ShapeRef.new(shape: PerformanceMonitorTargets, required: true, location_name: "targets"))
+    UpdatePerformanceMonitorOutput.add_member(:created_at, Shapes::ShapeRef.new(shape: Iso8601Timestamp, required: true, location_name: "createdAt"))
+    UpdatePerformanceMonitorOutput.add_member(:modified_at, Shapes::ShapeRef.new(shape: Iso8601Timestamp, required: true, location_name: "modifiedAt"))
+    UpdatePerformanceMonitorOutput.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    UpdatePerformanceMonitorOutput.struct_class = Types::UpdatePerformanceMonitorOutput
 
     UpdateScopeInput.add_member(:scope_id, Shapes::ShapeRef.new(shape: ScopeId, required: true, location: "uri", location_name: "scopeId"))
     UpdateScopeInput.add_member(:resources_to_add, Shapes::ShapeRef.new(shape: UpdateScopeInputResourcesToAddList, location_name: "resourcesToAdd"))
@@ -545,6 +761,20 @@ module Aws::NetworkFlowMonitor
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
+      api.add_operation(:create_performance_monitor, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreatePerformanceMonitor"
+        o.http_method = "POST"
+        o.http_request_uri = "/performance-monitors"
+        o.input = Shapes::ShapeRef.new(shape: CreatePerformanceMonitorInput)
+        o.output = Shapes::ShapeRef.new(shape: CreatePerformanceMonitorOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
       api.add_operation(:create_scope, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateScope"
         o.http_method = "POST"
@@ -565,6 +795,20 @@ module Aws::NetworkFlowMonitor
         o.http_request_uri = "/monitors/{monitorName}"
         o.input = Shapes::ShapeRef.new(shape: DeleteMonitorInput)
         o.output = Shapes::ShapeRef.new(shape: DeleteMonitorOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:delete_performance_monitor, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeletePerformanceMonitor"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/performance-monitors/{monitorName}"
+        o.input = Shapes::ShapeRef.new(shape: DeletePerformanceMonitorInput)
+        o.output = Shapes::ShapeRef.new(shape: DeletePerformanceMonitorOutput)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -601,12 +845,64 @@ module Aws::NetworkFlowMonitor
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
+      api.add_operation(:get_monitor_scope_suggestions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetMonitorScopeSuggestions"
+        o.http_method = "GET"
+        o.http_request_uri = "/monitor-scope-suggestions"
+        o.input = Shapes::ShapeRef.new(shape: GetMonitorScopeSuggestionsInput)
+        o.output = Shapes::ShapeRef.new(shape: GetMonitorScopeSuggestionsOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:get_performance_monitor, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetPerformanceMonitor"
+        o.http_method = "GET"
+        o.http_request_uri = "/performance-monitors/{monitorName}"
+        o.input = Shapes::ShapeRef.new(shape: GetPerformanceMonitorInput)
+        o.output = Shapes::ShapeRef.new(shape: GetPerformanceMonitorOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
       api.add_operation(:get_query_results_monitor_top_contributors, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetQueryResultsMonitorTopContributors"
         o.http_method = "GET"
         o.http_request_uri = "/monitors/{monitorName}/topContributorsQueries/{queryId}/results"
         o.input = Shapes::ShapeRef.new(shape: GetQueryResultsMonitorTopContributorsInput)
         o.output = Shapes::ShapeRef.new(shape: GetQueryResultsMonitorTopContributorsOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:get_query_results_performance_monitor, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetQueryResultsPerformanceMonitor"
+        o.http_method = "GET"
+        o.http_request_uri = "/performance-monitors/{monitorName}/queries/{queryId}/results"
+        o.input = Shapes::ShapeRef.new(shape: GetQueryResultsPerformanceMonitorInput)
+        o.output = Shapes::ShapeRef.new(shape: GetQueryResultsPerformanceMonitorOutput)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -674,6 +970,20 @@ module Aws::NetworkFlowMonitor
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
+      api.add_operation(:get_query_status_performance_monitor, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetQueryStatusPerformanceMonitor"
+        o.http_method = "GET"
+        o.http_request_uri = "/performance-monitors/{monitorName}/queries/{queryId}/status"
+        o.input = Shapes::ShapeRef.new(shape: GetQueryStatusPerformanceMonitorInput)
+        o.output = Shapes::ShapeRef.new(shape: GetQueryStatusPerformanceMonitorOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
       api.add_operation(:get_query_status_workload_insights_top_contributors, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetQueryStatusWorkloadInsightsTopContributors"
         o.http_method = "GET"
@@ -732,6 +1042,24 @@ module Aws::NetworkFlowMonitor
         )
       end)
 
+      api.add_operation(:list_performance_monitors, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListPerformanceMonitors"
+        o.http_method = "GET"
+        o.http_request_uri = "/performance-monitors"
+        o.input = Shapes::ShapeRef.new(shape: ListPerformanceMonitorsInput)
+        o.output = Shapes::ShapeRef.new(shape: ListPerformanceMonitorsOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_scopes, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListScopes"
         o.http_method = "GET"
@@ -778,6 +1106,20 @@ module Aws::NetworkFlowMonitor
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
+      api.add_operation(:start_query_performance_monitor, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartQueryPerformanceMonitor"
+        o.http_method = "POST"
+        o.http_request_uri = "/performance-monitors/{monitorName}/queries"
+        o.input = Shapes::ShapeRef.new(shape: StartQueryPerformanceMonitorInput)
+        o.output = Shapes::ShapeRef.new(shape: StartQueryPerformanceMonitorOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
       api.add_operation(:start_query_workload_insights_top_contributors, Seahorse::Model::Operation.new.tap do |o|
         o.name = "StartQueryWorkloadInsightsTopContributors"
         o.http_method = "POST"
@@ -811,6 +1153,20 @@ module Aws::NetworkFlowMonitor
         o.input = Shapes::ShapeRef.new(shape: StopQueryMonitorTopContributorsInput)
         o.output = Shapes::ShapeRef.new(shape: StopQueryMonitorTopContributorsOutput)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:stop_query_performance_monitor, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StopQueryPerformanceMonitor"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/performance-monitors/{monitorName}/queries/{queryId}"
+        o.input = Shapes::ShapeRef.new(shape: StopQueryPerformanceMonitorInput)
+        o.output = Shapes::ShapeRef.new(shape: StopQueryPerformanceMonitorOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
@@ -878,6 +1234,21 @@ module Aws::NetworkFlowMonitor
         o.input = Shapes::ShapeRef.new(shape: UpdateMonitorInput)
         o.output = Shapes::ShapeRef.new(shape: UpdateMonitorOutput)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:update_performance_monitor, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdatePerformanceMonitor"
+        o.http_method = "PATCH"
+        o.http_request_uri = "/performance-monitors/{monitorName}"
+        o.input = Shapes::ShapeRef.new(shape: UpdatePerformanceMonitorInput)
+        o.output = Shapes::ShapeRef.new(shape: UpdatePerformanceMonitorOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)

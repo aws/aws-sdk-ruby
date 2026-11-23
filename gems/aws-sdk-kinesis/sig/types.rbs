@@ -13,6 +13,64 @@ module Aws::Kinesis
       SENSITIVE: []
     end
 
+    class AcknowledgeDeadLetterQueueRecordsErrorEntry
+      attr_accessor receipt_handle: ::String
+      attr_accessor error_code: ::String
+      attr_accessor error_message: ::String
+      SENSITIVE: []
+    end
+
+    class AcknowledgeDeadLetterQueueRecordsInput
+      attr_accessor queue_arn: ::String
+      attr_accessor entries: ::Array[Types::AcknowledgeDeadLetterQueueRecordsRequestEntry]
+      SENSITIVE: []
+    end
+
+    class AcknowledgeDeadLetterQueueRecordsOutput
+      attr_accessor successful: ::Array[Types::AcknowledgeDeadLetterQueueRecordsResultEntry]
+      attr_accessor failed: ::Array[Types::AcknowledgeDeadLetterQueueRecordsErrorEntry]
+      SENSITIVE: []
+    end
+
+    class AcknowledgeDeadLetterQueueRecordsRequestEntry
+      attr_accessor receipt_handle: ::String
+      SENSITIVE: []
+    end
+
+    class AcknowledgeDeadLetterQueueRecordsResultEntry
+      attr_accessor receipt_handle: ::String
+      SENSITIVE: []
+    end
+
+    class AcknowledgeQueueRecordsErrorEntry
+      attr_accessor receipt_handle: ::String
+      attr_accessor error_code: ::String
+      attr_accessor error_message: ::String
+      SENSITIVE: []
+    end
+
+    class AcknowledgeQueueRecordsInput
+      attr_accessor queue_arn: ::String
+      attr_accessor entries: ::Array[Types::AcknowledgeQueueRecordsRequestEntry]
+      SENSITIVE: []
+    end
+
+    class AcknowledgeQueueRecordsOutput
+      attr_accessor successful: ::Array[Types::AcknowledgeQueueRecordsResultEntry]
+      attr_accessor failed: ::Array[Types::AcknowledgeQueueRecordsErrorEntry]
+      SENSITIVE: []
+    end
+
+    class AcknowledgeQueueRecordsRequestEntry
+      attr_accessor receipt_handle: ::String
+      SENSITIVE: []
+    end
+
+    class AcknowledgeQueueRecordsResultEntry
+      attr_accessor receipt_handle: ::String
+      SENSITIVE: []
+    end
+
     class AddTagsToStreamInput
       attr_accessor stream_name: ::String
       attr_accessor tags: ::Hash[::String, ::String]
@@ -139,6 +197,19 @@ module Aws::Kinesis
       SENSITIVE: []
     end
 
+    class CreateQueueInput
+      attr_accessor queue_name: ::String
+      attr_accessor stream_configuration_list: ::Array[Types::QueueStreamConfiguration]
+      attr_accessor queue_attributes: Types::QueueAttributes
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateQueueOutput
+      attr_accessor queue_description: Types::QueueDescription
+      SENSITIVE: []
+    end
+
     class CreateStreamInput
       attr_accessor stream_name: ::String
       attr_accessor shard_count: ::Integer
@@ -147,6 +218,12 @@ module Aws::Kinesis
       attr_accessor warm_throughput_mi_bps: ::Integer
       attr_accessor max_record_size_in_ki_b: ::Integer
       attr_accessor record_distribution_strategy: ("AUTO" | "USER_PARTITION_KEY")
+      SENSITIVE: []
+    end
+
+    class DeadLetterConfiguration
+      attr_accessor target_type: ("BUILT_IN" | "NONE")
+      attr_accessor max_receive_count: ::Integer
       SENSITIVE: []
     end
 
@@ -167,6 +244,11 @@ module Aws::Kinesis
 
     class DeleteChannelInput
       attr_accessor channel_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteQueueInput
+      attr_accessor queue_arn: ::String
       SENSITIVE: []
     end
 
@@ -220,6 +302,16 @@ module Aws::Kinesis
       attr_accessor on_demand_stream_count_limit: ::Integer
       attr_accessor channel_count: ::Integer
       attr_accessor channel_count_limit: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeQueueInput
+      attr_accessor queue_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeQueueOutput
+      attr_accessor queue_description: Types::QueueDescription
       SENSITIVE: []
     end
 
@@ -430,6 +522,19 @@ module Aws::Kinesis
       SENSITIVE: []
     end
 
+    class ListQueuesInput
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor stream_filter: ::Array[Types::QueueStreamFilter]
+      SENSITIVE: []
+    end
+
+    class ListQueuesOutput
+      attr_accessor queue_summaries: ::Array[Types::QueueSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class ListShardsInput
       attr_accessor stream_name: ::String
       attr_accessor next_token: ::String
@@ -599,6 +704,92 @@ module Aws::Kinesis
       SENSITIVE: []
     end
 
+    class QueueAttributes
+      attr_accessor visibility_timeout_seconds: ::Integer
+      attr_accessor dead_letter_configuration: Types::DeadLetterConfiguration
+      SENSITIVE: []
+    end
+
+    class QueueDescription
+      attr_accessor queue_name: ::String
+      attr_accessor queue_arn: ::String
+      attr_accessor queue_status: ("CREATING" | "ACTIVE" | "UPDATING" | "DELETING")
+      attr_accessor queue_creation_timestamp: ::Time
+      attr_accessor stream_configuration_list: ::Array[Types::QueueStreamConfiguration]
+      attr_accessor queue_attributes: Types::QueueAttributes
+      SENSITIVE: []
+    end
+
+    class QueueRecord
+      attr_accessor receipt_handle: ::String
+      attr_accessor record_id: ::String
+      attr_accessor partition_key: ::String
+      attr_accessor data: ::String
+      attr_accessor approximate_arrival_timestamp: ::Time
+      attr_accessor first_receive_timestamp: ::Time
+      attr_accessor receive_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class QueueStartingPosition
+      attr_accessor type: ("TRIM_HORIZON" | "LATEST" | "AT_TIMESTAMP")
+      attr_accessor timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class QueueStreamConfiguration
+      attr_accessor stream_arn: ::String
+      attr_accessor starting_position: Types::QueueStartingPosition
+      SENSITIVE: []
+    end
+
+    class QueueStreamFilter
+      attr_accessor stream_arn: ::String
+      attr_accessor stream_creation_timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class QueueStreamIdentifier
+      attr_accessor stream_arn: ::String
+      attr_accessor stream_creation_timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class QueueSummary
+      attr_accessor queue_name: ::String
+      attr_accessor queue_arn: ::String
+      attr_accessor queue_status: ("CREATING" | "ACTIVE" | "UPDATING" | "DELETING")
+      attr_accessor queue_creation_timestamp: ::Time
+      attr_accessor streams: ::Array[Types::QueueStreamIdentifier]
+      SENSITIVE: []
+    end
+
+    class ReceiveDeadLetterQueueRecordsInput
+      attr_accessor queue_arn: ::String
+      attr_accessor limit: ::Integer
+      attr_accessor wait_time_seconds: ::Integer
+      attr_accessor visibility_timeout_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class ReceiveDeadLetterQueueRecordsOutput
+      attr_accessor queue_records: ::Array[Types::QueueRecord]
+      SENSITIVE: []
+    end
+
+    class ReceiveQueueRecordsInput
+      attr_accessor queue_arn: ::String
+      attr_accessor limit: ::Integer
+      attr_accessor wait_time_seconds: ::Integer
+      attr_accessor visibility_timeout_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class ReceiveQueueRecordsOutput
+      attr_accessor queue_records: ::Array[Types::QueueRecord]
+      SENSITIVE: []
+    end
+
     class Record
       attr_accessor sequence_number: ::String
       attr_accessor approximate_arrival_timestamp: ::Time
@@ -644,6 +835,35 @@ module Aws::Kinesis
     class ResourceNotFoundException
       attr_accessor message: ::String
       attr_accessor event_type: untyped
+      SENSITIVE: []
+    end
+
+    class RestoreDeadLetterQueueRecordsErrorEntry
+      attr_accessor receipt_handle: ::String
+      attr_accessor error_code: ::String
+      attr_accessor error_message: ::String
+      SENSITIVE: []
+    end
+
+    class RestoreDeadLetterQueueRecordsInput
+      attr_accessor queue_arn: ::String
+      attr_accessor entries: ::Array[Types::RestoreDeadLetterQueueRecordsRequestEntry]
+      SENSITIVE: []
+    end
+
+    class RestoreDeadLetterQueueRecordsOutput
+      attr_accessor successful: ::Array[Types::RestoreDeadLetterQueueRecordsResultEntry]
+      attr_accessor failed: ::Array[Types::RestoreDeadLetterQueueRecordsErrorEntry]
+      SENSITIVE: []
+    end
+
+    class RestoreDeadLetterQueueRecordsRequestEntry
+      attr_accessor receipt_handle: ::String
+      SENSITIVE: []
+    end
+
+    class RestoreDeadLetterQueueRecordsResultEntry
+      attr_accessor receipt_handle: ::String
       SENSITIVE: []
     end
 
@@ -791,6 +1011,7 @@ module Aws::Kinesis
       attr_accessor max_record_size_in_ki_b: ::Integer
       attr_accessor channel_count: ::Integer
       attr_accessor record_distribution_strategy: ("AUTO" | "USER_PARTITION_KEY")
+      attr_accessor queue_count: ::Integer
       SENSITIVE: []
     end
 
@@ -850,6 +1071,11 @@ module Aws::Kinesis
       SENSITIVE: []
     end
 
+    class ThrottlingException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
     class UntagResourceInput
       attr_accessor tag_keys: ::Array[::String]
       attr_accessor resource_arn: ::String
@@ -880,10 +1106,81 @@ module Aws::Kinesis
       SENSITIVE: []
     end
 
+    class UpdateDeadLetterQueueRecordsVisibilityErrorEntry
+      attr_accessor receipt_handle: ::String
+      attr_accessor error_code: ::String
+      attr_accessor error_message: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateDeadLetterQueueRecordsVisibilityInput
+      attr_accessor queue_arn: ::String
+      attr_accessor entries: ::Array[Types::UpdateDeadLetterQueueRecordsVisibilityRequestEntry]
+      SENSITIVE: []
+    end
+
+    class UpdateDeadLetterQueueRecordsVisibilityOutput
+      attr_accessor successful: ::Array[Types::UpdateDeadLetterQueueRecordsVisibilityResultEntry]
+      attr_accessor failed: ::Array[Types::UpdateDeadLetterQueueRecordsVisibilityErrorEntry]
+      SENSITIVE: []
+    end
+
+    class UpdateDeadLetterQueueRecordsVisibilityRequestEntry
+      attr_accessor receipt_handle: ::String
+      attr_accessor visibility_timeout_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class UpdateDeadLetterQueueRecordsVisibilityResultEntry
+      attr_accessor receipt_handle: ::String
+      SENSITIVE: []
+    end
+
     class UpdateMaxRecordSizeInput
       attr_accessor stream_arn: ::String
       attr_accessor stream_id: ::String
       attr_accessor max_record_size_in_ki_b: ::Integer
+      SENSITIVE: []
+    end
+
+    class UpdateQueueInput
+      attr_accessor queue_arn: ::String
+      attr_accessor queue_attributes: Types::QueueAttributes
+      SENSITIVE: []
+    end
+
+    class UpdateQueueOutput
+      attr_accessor queue_description: Types::QueueDescription
+      SENSITIVE: []
+    end
+
+    class UpdateQueueRecordsVisibilityErrorEntry
+      attr_accessor receipt_handle: ::String
+      attr_accessor error_code: ::String
+      attr_accessor error_message: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateQueueRecordsVisibilityInput
+      attr_accessor queue_arn: ::String
+      attr_accessor entries: ::Array[Types::UpdateQueueRecordsVisibilityRequestEntry]
+      SENSITIVE: []
+    end
+
+    class UpdateQueueRecordsVisibilityOutput
+      attr_accessor successful: ::Array[Types::UpdateQueueRecordsVisibilityResultEntry]
+      attr_accessor failed: ::Array[Types::UpdateQueueRecordsVisibilityErrorEntry]
+      SENSITIVE: []
+    end
+
+    class UpdateQueueRecordsVisibilityRequestEntry
+      attr_accessor receipt_handle: ::String
+      attr_accessor visibility_timeout_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class UpdateQueueRecordsVisibilityResultEntry
+      attr_accessor receipt_handle: ::String
       SENSITIVE: []
     end
 

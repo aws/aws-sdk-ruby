@@ -106,6 +106,99 @@ module Aws::ElementalInference
       include Aws::Structure
     end
 
+    # An Amazon Bedrock model to invoke. Elemental Inference invokes the
+    # model in your account by assuming the feed's access role, so a feed
+    # that runs this function must specify an accessRoleArn. The invocation
+    # is subject to your Amazon Bedrock quotas and appears on your bill.
+    #
+    # @!attribute [rw] api
+    #   The Amazon Bedrock API to call. The only valid value is
+    #   INVOKE\_MODEL.
+    #   @return [String]
+    #
+    # @!attribute [rw] model
+    #   The model to invoke. Specify one of the following:
+    #
+    #   * A model ID.
+    #
+    #   * An inference profile ID.
+    #
+    #   * The ARN of a custom model.
+    #
+    #   * The ARN of a provisioned model.
+    #
+    #   Elemental Inference invokes the model in the Region of the feed. To
+    #   use a model in other Regions, specify a cross-Region inference
+    #   profile ID. A custom or provisioned model must be in the Region of
+    #   the feed.
+    #
+    #   The request expression must produce a request body that this model
+    #   accepts, and the model must accept the kind of media that the
+    #   request expression references. For example, a text-only model can't
+    #   accept a request that references media.frames.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elementalinference-2018-11-14/BedrockFunctionTarget AWS API Documentation
+    #
+    class BedrockFunctionTarget < Struct.new(
+      :api,
+      :model)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A question that you ask Elemental Inference, which answers by choosing
+    # one of its options. You specify it in the chooseOne array of a
+    # question set.
+    #
+    # @!attribute [rw] name
+    #   A name for the question. The name must be unique among all the
+    #   questions in the version, across all question types. The name can be
+    #   up to 64 characters. It must start with a letter or an underscore,
+    #   and can contain only the letters A-Z and a-z, the digits 0-9, and
+    #   underscores.
+    #   @return [String]
+    #
+    # @!attribute [rw] question
+    #   The text of the question. The text can be up to 256 bytes, encoded
+    #   in UTF-8. It can contain letters in any language, combining marks,
+    #   digits, spaces, and the following characters: `. , ? ! ' " ( ) - : ;
+    #   / & %`, plus the curly apostrophe and quotation marks (U+2019,
+    #   U+201C, and U+201D).
+    #   @return [String]
+    #
+    # @!attribute [rw] options
+    #   The options that Elemental Inference chooses from. You can specify
+    #   from 2 to 26 options. The question counts as one item toward the
+    #   limit of 100 scored items in a version, regardless of how many
+    #   options it has.
+    #   @return [Array<Types::QuestionOption>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elementalinference-2018-11-14/ChooseOneQuestion AWS API Documentation
+    #
+    class ChooseOneQuestion < Struct.new(
+      :name,
+      :question,
+      :options)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The perClip trigger, which runs the function each time an event
+    # clipping output reports events. Events that the output reports
+    # together share one run, and media.clip.events contains all of them. To
+    # choose this trigger, set perClip to an empty object.
+    #
+    # Specify clippingSettings to name the event clipping output that
+    # reports the events. You can't use this trigger with a function that
+    # references media.transcript or media.contextual.
+    #
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elementalinference-2018-11-14/ClipTrigger AWS API Documentation
+    #
+    class ClipTrigger < Aws::EmptyStructure; end
+
     # A type of OutputConfig, used when the output in a feed is for the clip
     # feature.
     #
@@ -130,6 +223,26 @@ module Aws::ElementalInference
     class ClippingConfig < Struct.new(
       :callback_metadata,
       :data_source_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The event clipping output on this feed that provides events for a
+    # perClip trigger and media.clip for a function. Specify this structure
+    # for a perClip trigger, and for a function that references media.clip
+    # on a fixedInterval trigger.
+    #
+    # If the function output is ENABLED, the output that you name must also
+    # be ENABLED.
+    #
+    # @!attribute [rw] output_name
+    #   The name of an ENABLED event clipping output on this feed.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elementalinference-2018-11-14/ClippingSettings AWS API Documentation
+    #
+    class ClippingSettings < Struct.new(
+      :output_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -202,13 +315,49 @@ module Aws::ElementalInference
     #
     #   * DISABLED – Elemental Inference doesn't populate the people,
     #     environments, brands, and on-screen text fields.
+    #
+    #   If you specify `customQuestions`, you must set this property to
+    #   DISABLED.
     #   @return [String]
+    #
+    # @!attribute [rw] custom_questions
+    #   The question sets that you ask Elemental Inference about each shot,
+    #   each scene, or both, in this output.
+    #
+    #   If you specify customQuestions, you must also set extendedAnalysis
+    #   to DISABLED. If you omit extendedAnalysis, it defaults to ENABLED,
+    #   and the request fails.
+    #
+    #   While a feed references a version of a question set, you can't
+    #   delete that version or the question set.
+    #   @return [Types::CustomQuestionsConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elementalinference-2018-11-14/ContextualMetadataConfig AWS API Documentation
     #
     class ContextualMetadataConfig < Struct.new(
       :summary_generation,
-      :extended_analysis)
+      :extended_analysis,
+      :custom_questions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The contextual metadata output on this feed that provides scenes for a
+    # perScene trigger and media.contextual for a function. Specify this
+    # structure for a perScene trigger, and for a function that references
+    # media.contextual on a perShot trigger.
+    #
+    # If the function output is ENABLED, the output that you name must also
+    # be ENABLED.
+    #
+    # @!attribute [rw] output_name
+    #   The name of an ENABLED contextual metadata output on this feed.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elementalinference-2018-11-14/ContextualMetadataSettings AWS API Documentation
+    #
+    class ContextualMetadataSettings < Struct.new(
+      :output_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -219,8 +368,21 @@ module Aws::ElementalInference
     #
     # @!attribute [rw] language
     #   The language of the dictionary entries. Specify the language using
-    #   an ISO 639-2/T three-letter code. Supported values: eng, fra, ita,
-    #   deu, spa, por.
+    #   an ISO 639-2/T three-letter code. Supported values:
+    #
+    #   * eng – English
+    #
+    #   * fra – French
+    #
+    #   * ita – Italian
+    #
+    #   * deu – German
+    #
+    #   * spa – Spanish
+    #
+    #   * por – Portuguese
+    #
+    #   * ara – Arabic
     #   @return [String]
     #
     # @!attribute [rw] entries
@@ -382,6 +544,173 @@ module Aws::ElementalInference
       include Aws::Structure
     end
 
+    # @!attribute [rw] name
+    #   A name for this function.
+    #   @return [String]
+    #
+    # @!attribute [rw] target
+    #   The destination for the request that the function builds.
+    #   @return [Types::FunctionTarget]
+    #
+    # @!attribute [rw] request_expression
+    #   The JSONata expression that builds the request. Elemental Inference
+    #   evaluates it against the media object of the feed, which holds the
+    #   media and metadata that the function asked for. Maximum length:
+    #   5,120 characters.
+    #
+    #   When you save the function, Elemental Inference evaluates the
+    #   expression against sample media and rejects it if the evaluation
+    #   fails. For a Bedrock target, the result must be a JSON object;
+    #   Elemental Inference doesn't check that the object is a valid
+    #   request body for the model. The expression can reference at most one
+    #   of media.transcript, media.contextual, and media.clip. For a
+    #   passthrough target, it can't reference media.frames.
+    #   @return [String]
+    #
+    # @!attribute [rw] response_expression
+    #   The JSONata expression that selects what to store. Elemental
+    #   Inference evaluates it against the result as its root: the model
+    #   response for a Bedrock target, or the output of the request
+    #   expression for a passthrough target. If a function has no response
+    #   expression, Elemental Inference stores the entire result. Maximum
+    #   length: 5,120 characters.
+    #
+    #   When you save the function, Elemental Inference checks that the
+    #   expression is valid JSONata. For a passthrough target, it also
+    #   evaluates the request and response expressions together against
+    #   sample media, and rejects them if they produce no value.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the function. Maximum length: 1,024 characters.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_bridge_delivery
+    #   Specifies whether Elemental Inference also sends this function's
+    #   results to Amazon EventBridge. Elemental Inference sends a result
+    #   only when the result is a JSON object with a top-level `eventBridge`
+    #   field set to `true`. It sends the result, unchanged, as a Function
+    #   Metadata Generated event to the default event bus in your account,
+    #   after the result is available from GetMetadata. If the result is
+    #   larger than 64 KB, the event has `resultOmitted` set to `true` in
+    #   place of the result.
+    #
+    #   Valid values:
+    #
+    #   * ENABLED – Elemental Inference sends each marked result as an
+    #     event.
+    #
+    #   * DISABLED (default) – Elemental Inference doesn't send events.
+    #
+    #   For a Bedrock target, ENABLED requires a response expression,
+    #   because the model response itself never has a top-level
+    #   `eventBridge` field. A feed output that runs a function with ENABLED
+    #   can't use a fixedInterval trigger shorter than 4 seconds.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags to associate with this function.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elementalinference-2018-11-14/CreateFunctionRequest AWS API Documentation
+    #
+    class CreateFunctionRequest < Struct.new(
+      :name,
+      :target,
+      :request_expression,
+      :response_expression,
+      :description,
+      :event_bridge_delivery,
+      :tags)
+      SENSITIVE = [:request_expression, :response_expression, :description]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
+    #   The name of the function.
+    #   @return [String]
+    #
+    # @!attribute [rw] target
+    #   The destination for the request that the function builds.
+    #   @return [Types::FunctionTarget]
+    #
+    # @!attribute [rw] request_expression
+    #   The JSONata expression that builds the request. Elemental Inference
+    #   evaluates it against the media object of the feed, which holds the
+    #   media and metadata that the function asked for.
+    #   @return [String]
+    #
+    # @!attribute [rw] response_expression
+    #   The JSONata expression that selects what to store. Elemental
+    #   Inference evaluates it against the result as its root: the model
+    #   response for a Bedrock target, or the output of the request
+    #   expression for a passthrough target. If a function has no response
+    #   expression, Elemental Inference stores the entire result.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the function.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_bridge_delivery
+    #   Indicates whether Elemental Inference also sends this function's
+    #   results to Amazon EventBridge. With ENABLED, each result that is a
+    #   JSON object with a top-level `eventBridge` field set to `true` is
+    #   also sent as a Function Metadata Generated event to the default
+    #   event bus in your account.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The ARN of the function.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The ID of the function.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the function. A successful request returns CREATING.
+    #   The function is ready to use as soon as the request succeeds.
+    #   @return [String]
+    #
+    # @!attribute [rw] references
+    #   The IDs of the feeds that have a function output, enabled or
+    #   disabled, that references this function. While this list isn't
+    #   empty, the function can't be deleted, and its name and target
+    #   can't be changed.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] context_types
+    #   The kinds of media context that this function uses. Elemental
+    #   Inference derives this field from the media paths that the request
+    #   expression references; you can't set it. An empty list means that
+    #   the expression references no media, so Elemental Inference supplies
+    #   none at run time.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] tags
+    #   The tags associated with the function.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elementalinference-2018-11-14/CreateFunctionResponse AWS API Documentation
+    #
+    class CreateFunctionResponse < Struct.new(
+      :name,
+      :target,
+      :request_expression,
+      :response_expression,
+      :description,
+      :event_bridge_delivery,
+      :arn,
+      :id,
+      :status,
+      :references,
+      :context_types,
+      :tags)
+      SENSITIVE = [:request_expression, :response_expression, :description]
+      include Aws::Structure
+    end
+
     # Contains configuration information about one output in a feed. It is
     # used in the AssociateFeed and the CreateFeed actions.
     #
@@ -411,6 +740,250 @@ module Aws::ElementalInference
       :output_config,
       :status,
       :description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] yes_no
+    #   An array of questions that Elemental Inference answers with yes or
+    #   no. You can specify up to 50 yesNo questions. An empty array is the
+    #   same as omitting this property.
+    #   @return [Array<Types::YesNoQuestion>]
+    #
+    # @!attribute [rw] yes_no_per_option
+    #   An array of questions that you ask about each of their options.
+    #   Elemental Inference answers yes or no for each option. You can
+    #   specify up to 10 yesNoPerOption questions. An empty array is the
+    #   same as omitting this property.
+    #   @return [Array<Types::YesNoPerOptionQuestion>]
+    #
+    # @!attribute [rw] choose_one
+    #   An array of questions that Elemental Inference answers by choosing
+    #   one of their options. You can specify up to 10 chooseOne questions.
+    #   An empty array is the same as omitting this property.
+    #   @return [Array<Types::ChooseOneQuestion>]
+    #
+    # @!attribute [rw] name
+    #   A user-friendly name for this question set.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Optional tags to associate with the question set. You can also add
+    #   tags later, using TagResource.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elementalinference-2018-11-14/CreateQuestionSetRequest AWS API Documentation
+    #
+    class CreateQuestionSetRequest < Struct.new(
+      :yes_no,
+      :yes_no_per_option,
+      :choose_one,
+      :name,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] yes_no
+    #   The yesNo questions that you specified in the request, in the order
+    #   that you specified them. Elemental Inference doesn't return this
+    #   property if the request didn't include any yesNo questions.
+    #   @return [Array<Types::YesNoQuestion>]
+    #
+    # @!attribute [rw] yes_no_per_option
+    #   The yesNoPerOption questions that you specified in the request, in
+    #   the order that you specified them. Elemental Inference doesn't
+    #   return this property if the request didn't include any
+    #   yesNoPerOption questions.
+    #   @return [Array<Types::YesNoPerOptionQuestion>]
+    #
+    # @!attribute [rw] choose_one
+    #   The chooseOne questions that you specified in the request, in the
+    #   order that you specified them. Elemental Inference doesn't return
+    #   this property if the request didn't include any chooseOne
+    #   questions.
+    #   @return [Array<Types::ChooseOneQuestion>]
+    #
+    # @!attribute [rw] arn
+    #   The ARN of the question set.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   A unique ID that Elemental Inference assigns to the question set.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name that you specified in the request.
+    #   @return [String]
+    #
+    # @!attribute [rw] version
+    #   The version that this response describes. For CreateQuestionSet, the
+    #   version is always DRAFT.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the version. Elemental Inference doesn't return
+    #   this property for CreateQuestionSet, because the DRAFT version has
+    #   no description.
+    #   @return [String]
+    #
+    # @!attribute [rw] latest_version
+    #   The number of the highest version that you have published for this
+    #   question set. Elemental Inference doesn't return this property for
+    #   CreateQuestionSet, because a new question set has no published
+    #   versions.
+    #   @return [String]
+    #
+    # @!attribute [rw] sha256
+    #   The SHA-256 hash of the DRAFT version, as 64 lowercase hexadecimal
+    #   characters. The hash covers the name of the question set and its
+    #   questions. You can specify this value in a CreateQuestionSetVersion
+    #   request, so that Elemental Inference publishes DRAFT only if it
+    #   hasn't changed.
+    #   @return [String]
+    #
+    # @!attribute [rw] references
+    #   A list of feed IDs that reference this version of the question set.
+    #   For a new question set, the list is empty.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] tags
+    #   Any tags that you included when you created the question set.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elementalinference-2018-11-14/CreateQuestionSetResponse AWS API Documentation
+    #
+    class CreateQuestionSetResponse < Struct.new(
+      :yes_no,
+      :yes_no_per_option,
+      :choose_one,
+      :arn,
+      :id,
+      :name,
+      :version,
+      :description,
+      :latest_version,
+      :sha256,
+      :references,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] id
+    #   The ID of the question set whose DRAFT version you want to publish.
+    #   @return [String]
+    #
+    # @!attribute [rw] sha256
+    #   The SHA-256 hash of the DRAFT version that you want to publish, as
+    #   returned by GetQuestionSet or UpdateQuestionSet. If you specify this
+    #   value, Elemental Inference publishes DRAFT only if its current hash
+    #   matches. If it doesn't match, because DRAFT changed after you
+    #   retrieved it, the request fails with ConflictException.
+    #
+    #   If you don't specify this value, Elemental Inference publishes
+    #   DRAFT as it is when it receives the request.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the new version. You can't change the description
+    #   after Elemental Inference publishes the version. If DRAFT hasn't
+    #   changed since the latest version, Elemental Inference ignores this
+    #   value and returns the latest version with its existing description.
+    #
+    #   The description can be up to 256 characters. It can contain the
+    #   letters A-Z and a-z, the digits 0-9, underscores, spaces, and the
+    #   following characters: `- . ' , @ : ;`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elementalinference-2018-11-14/CreateQuestionSetVersionRequest AWS API Documentation
+    #
+    class CreateQuestionSetVersionRequest < Struct.new(
+      :id,
+      :sha256,
+      :description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] yes_no
+    #   The yesNo questions in this version. Elemental Inference doesn't
+    #   return this property if the version has no yesNo questions.
+    #   @return [Array<Types::YesNoQuestion>]
+    #
+    # @!attribute [rw] yes_no_per_option
+    #   The yesNoPerOption questions in this version. Elemental Inference
+    #   doesn't return this property if the version has no yesNoPerOption
+    #   questions.
+    #   @return [Array<Types::YesNoPerOptionQuestion>]
+    #
+    # @!attribute [rw] choose_one
+    #   The chooseOne questions in this version. Elemental Inference
+    #   doesn't return this property if the version has no chooseOne
+    #   questions.
+    #   @return [Array<Types::ChooseOneQuestion>]
+    #
+    # @!attribute [rw] arn
+    #   The ARN of the question set.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The ID of the question set.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the question set at this version.
+    #   @return [String]
+    #
+    # @!attribute [rw] version
+    #   The number of the version that Elemental Inference published. If
+    #   DRAFT hadn't changed since the latest version, this is the number
+    #   of that existing version.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the version. For a new version, this is the
+    #   description that you specified in the request. If DRAFT hadn't
+    #   changed since the latest version, this is the description of that
+    #   existing version. Elemental Inference doesn't return this property
+    #   if the version has no description.
+    #   @return [String]
+    #
+    # @!attribute [rw] latest_version
+    #   The number of the highest version that you have published for this
+    #   question set. It's the same as version.
+    #   @return [String]
+    #
+    # @!attribute [rw] sha256
+    #   The SHA-256 hash of the version, as 64 lowercase hexadecimal
+    #   characters. It's the same as the hash of the DRAFT version that
+    #   Elemental Inference published.
+    #   @return [String]
+    #
+    # @!attribute [rw] references
+    #   A list of feed IDs that reference this version of the question set.
+    #   For a new version, the list is empty.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] tags
+    #   Any tags associated with the question set.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elementalinference-2018-11-14/CreateQuestionSetVersionResponse AWS API Documentation
+    #
+    class CreateQuestionSetVersionResponse < Struct.new(
+      :yes_no,
+      :yes_no_per_option,
+      :choose_one,
+      :arn,
+      :id,
+      :name,
+      :version,
+      :description,
+      :latest_version,
+      :sha256,
+      :references,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -495,6 +1068,29 @@ module Aws::ElementalInference
     #
     class CroppingConfig < Struct.new(
       :template_groups)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The question sets that you ask Elemental Inference about the media in
+    # a contextual metadata output. You must specify at least one of shot or
+    # scene. They can reference the same version of the same question set.
+    #
+    # @!attribute [rw] shot
+    #   The version of a question set to ask Elemental Inference about each
+    #   shot.
+    #   @return [Types::QuestionSetReference]
+    #
+    # @!attribute [rw] scene
+    #   The version of a question set to ask Elemental Inference about each
+    #   scene.
+    #   @return [Types::QuestionSetReference]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elementalinference-2018-11-14/CustomQuestionsConfig AWS API Documentation
+    #
+    class CustomQuestionsConfig < Struct.new(
+      :shot,
+      :scene)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -601,6 +1197,93 @@ module Aws::ElementalInference
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @!attribute [rw] id
+    #   The ID of the function.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elementalinference-2018-11-14/DeleteFunctionRequest AWS API Documentation
+    #
+    class DeleteFunctionRequest < Struct.new(
+      :id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   The ARN of the function.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The ID of the function.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the function. A successful request returns DELETING.
+    #   Elemental Inference removes the function before it returns the
+    #   response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elementalinference-2018-11-14/DeleteFunctionResponse AWS API Documentation
+    #
+    class DeleteFunctionResponse < Struct.new(
+      :arn,
+      :id,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] id
+    #   The ID of the question set to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elementalinference-2018-11-14/DeleteQuestionSetRequest AWS API Documentation
+    #
+    class DeleteQuestionSetRequest < Struct.new(
+      :id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   The ARN of the deleted question set.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The ID of the deleted question set.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elementalinference-2018-11-14/DeleteQuestionSetResponse AWS API Documentation
+    #
+    class DeleteQuestionSetResponse < Struct.new(
+      :arn,
+      :id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] id
+    #   The ID of the question set that contains the version.
+    #   @return [String]
+    #
+    # @!attribute [rw] question_set_version
+    #   The number of the published version to delete. You can't specify
+    #   DRAFT.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elementalinference-2018-11-14/DeleteQuestionSetVersionRequest AWS API Documentation
+    #
+    class DeleteQuestionSetVersionRequest < Struct.new(
+      :id,
+      :question_set_version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elementalinference-2018-11-14/DeleteQuestionSetVersionResponse AWS API Documentation
+    #
+    class DeleteQuestionSetVersionResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] id
     #   The ID of the feed that holds the schedule action.
@@ -788,6 +1471,30 @@ module Aws::ElementalInference
       include Aws::Structure
     end
 
+    # The settings of the fixedInterval trigger, which runs the function
+    # once for every intervalSeconds of content. A function that references
+    # media.transcript must use this trigger. You can't use this trigger
+    # with a function that references media.contextual.
+    #
+    # If the function references media.transcript, specify
+    # subtitlingSettings. If the function references media.clip, specify
+    # clippingSettings. Each run then receives the events that the event
+    # clipping output reported during the interval, in media.clip.events.
+    #
+    # @!attribute [rw] interval_seconds
+    #   The amount of content, in seconds, between runs of the function.
+    #   Valid range: 1 to 60. For a function with eventBridgeDelivery set to
+    #   ENABLED, the minimum is 4.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elementalinference-2018-11-14/FixedIntervalTrigger AWS API Documentation
+    #
+    class FixedIntervalTrigger < Struct.new(
+      :interval_seconds)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Sets the time at which a schedule action runs once. This is a type of
     # ScheduleActionStartConfiguration.
     #
@@ -858,6 +1565,221 @@ module Aws::ElementalInference
       :competitors)
       SENSITIVE = []
       include Aws::Structure
+    end
+
+    # Specifies how Elemental Inference chooses frames from the media of
+    # each run, and how many frames it chooses. The media of a run is the
+    # interval, shot, scene, or clips that the run covers.
+    #
+    # @!attribute [rw] mode
+    #   Which frames of the window to send: FIRST (the first frames),
+    #   UNIFORM (frames spread evenly across the window), or LAST (the last
+    #   frames).
+    #   @return [String]
+    #
+    # @!attribute [rw] count
+    #   The number of frames to send on each run. Valid range: 1 to 64. The
+    #   default is 1. Each frame adds to the size of the model request and
+    #   to what the model charges for it.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elementalinference-2018-11-14/FrameSamplingStrategy AWS API Documentation
+    #
+    class FrameSamplingStrategy < Struct.new(
+      :mode,
+      :count)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The frames that a function receives in media.frames on each run: which
+    # frames, how many, and at what size. Elemental Inference applies these
+    # settings only to a function that references media.frames.
+    #
+    # When you add or change the function output, Elemental Inference
+    # estimates the size of the frames and rejects settings whose frames
+    # won't fit in one model request. To send more frames in each request,
+    # specify a smaller frameSize.
+    #
+    # @!attribute [rw] frame_sampling
+    #   The method for choosing which frames to send.
+    #   @return [Types::FrameSamplingStrategy]
+    #
+    # @!attribute [rw] frame_size
+    #   The size to resize each frame to. If you omit this structure, frames
+    #   keep their source size. Smaller frames reduce the size of the model
+    #   request.
+    #   @return [Types::FrameSize]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elementalinference-2018-11-14/FrameSettings AWS API Documentation
+    #
+    class FrameSettings < Struct.new(
+      :frame_sampling,
+      :frame_size)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The dimensions, in pixels, of each frame that a function sends.
+    # Elemental Inference resizes each frame to exactly this width and
+    # height.
+    #
+    # @!attribute [rw] width_pixels
+    #   The width of each frame, in pixels. Valid range: 1 to 1280.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] height_pixels
+    #   The height of each frame, in pixels. Valid range: 1 to 720.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elementalinference-2018-11-14/FrameSize AWS API Documentation
+    #
+    class FrameSize < Struct.new(
+      :width_pixels,
+      :height_pixels)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The output configuration settings for a function. Use this structure
+    # to run a function on this feed. The name of the output is the name
+    # that you pass to GetMetadata to read the results.
+    #
+    # Include the settings that the function's media context and trigger
+    # require. Elemental Inference ignores settings that neither uses. It
+    # also rejects settings whose frames are estimated to exceed the size of
+    # a single model request.
+    #
+    # A feed that has an enabled function output must also have an enabled
+    # cropping, clipping, subtitling, or contextual metadata output. A feed
+    # that runs a function with a Bedrock target must specify an
+    # accessRoleArn.
+    #
+    # @!attribute [rw] function_arn
+    #   The ARN of the function to run. The function must exist in the same
+    #   account and the same Region as the feed.
+    #   @return [String]
+    #
+    # @!attribute [rw] trigger
+    #   Determines when the function runs.
+    #   @return [Types::Trigger]
+    #
+    # @!attribute [rw] frame_settings
+    #   The frames to send on each run: how many, which ones, and at what
+    #   size. Applies to a function that references media.frames. If you
+    #   omit this structure, Elemental Inference sends the first frame of
+    #   the window, at its source size.
+    #   @return [Types::FrameSettings]
+    #
+    # @!attribute [rw] subtitling_settings
+    #   The smart subtitles output on this feed to read the transcript from.
+    #   Required for a function that references media.transcript.
+    #   @return [Types::SubtitlingSettings]
+    #
+    # @!attribute [rw] contextual_metadata_settings
+    #   The contextual metadata output on this feed to read scenes and
+    #   classifications from. Required for a perScene trigger, and for a
+    #   function that references media.contextual on a perShot trigger.
+    #   @return [Types::ContextualMetadataSettings]
+    #
+    # @!attribute [rw] clipping_settings
+    #   The event clipping output on this feed to read clips from. Required
+    #   for a perClip trigger, and for a function that references
+    #   media.clip.
+    #   @return [Types::ClippingSettings]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elementalinference-2018-11-14/FunctionConfig AWS API Documentation
+    #
+    class FunctionConfig < Struct.new(
+      :function_arn,
+      :trigger,
+      :frame_settings,
+      :subtitling_settings,
+      :contextual_metadata_settings,
+      :clipping_settings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains identifying and configuration details for a function,
+    # including its name, target, status, and derived media context.
+    #
+    # @!attribute [rw] arn
+    #   The ARN of the function.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The ID of the function.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the function.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the function.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the function.
+    #   @return [String]
+    #
+    # @!attribute [rw] target
+    #   The destination for the request that the function builds.
+    #   @return [Types::FunctionTarget]
+    #
+    # @!attribute [rw] context_types
+    #   The kinds of media context that this function uses. Elemental
+    #   Inference derives this field from the media paths that the request
+    #   expression references; you can't set it. An empty list means that
+    #   the expression references no media, so Elemental Inference supplies
+    #   none at run time.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elementalinference-2018-11-14/FunctionSummary AWS API Documentation
+    #
+    class FunctionSummary < Struct.new(
+      :arn,
+      :id,
+      :name,
+      :description,
+      :status,
+      :target,
+      :context_types)
+      SENSITIVE = [:description]
+      include Aws::Structure
+    end
+
+    # The destination for the request that a function builds. Specify
+    # exactly one member.
+    #
+    # @note FunctionTarget is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note FunctionTarget is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of FunctionTarget corresponding to the set member.
+    #
+    # @!attribute [rw] bedrock
+    #   Send the request to an Amazon Bedrock model.
+    #   @return [Types::BedrockFunctionTarget]
+    #
+    # @!attribute [rw] passthrough
+    #   Send the request nowhere. Use this target to reshape the metadata
+    #   that Elemental Inference already produces, with no model invocation
+    #   and no model charges.
+    #   @return [Types::PassthroughFunctionTarget]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elementalinference-2018-11-14/FunctionTarget AWS API Documentation
+    #
+    class FunctionTarget < Struct.new(
+      :bedrock,
+      :passthrough,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Bedrock < FunctionTarget; end
+      class Passthrough < FunctionTarget; end
+      class Unknown < FunctionTarget; end
     end
 
     # The request timed out before the service returned a response. This is
@@ -1078,6 +2000,102 @@ module Aws::ElementalInference
       include Aws::Structure
     end
 
+    # @!attribute [rw] id
+    #   The ID of the function.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elementalinference-2018-11-14/GetFunctionRequest AWS API Documentation
+    #
+    class GetFunctionRequest < Struct.new(
+      :id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
+    #   The name of the function.
+    #   @return [String]
+    #
+    # @!attribute [rw] target
+    #   The destination for the request that the function builds.
+    #   @return [Types::FunctionTarget]
+    #
+    # @!attribute [rw] request_expression
+    #   The JSONata expression that builds the request. Elemental Inference
+    #   evaluates it against the media object of the feed, which holds the
+    #   media and metadata that the function asked for.
+    #   @return [String]
+    #
+    # @!attribute [rw] response_expression
+    #   The JSONata expression that selects what to store. Elemental
+    #   Inference evaluates it against the result as its root: the model
+    #   response for a Bedrock target, or the output of the request
+    #   expression for a passthrough target. If a function has no response
+    #   expression, Elemental Inference stores the entire result.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the function.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_bridge_delivery
+    #   Indicates whether Elemental Inference also sends this function's
+    #   results to Amazon EventBridge. With ENABLED, each result that is a
+    #   JSON object with a top-level `eventBridge` field set to `true` is
+    #   also sent as a Function Metadata Generated event to the default
+    #   event bus in your account.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The ARN of the function.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The ID of the function.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the function.
+    #   @return [String]
+    #
+    # @!attribute [rw] references
+    #   The IDs of the feeds that have a function output, enabled or
+    #   disabled, that references this function. While this list isn't
+    #   empty, the function can't be deleted, and its name and target
+    #   can't be changed.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] context_types
+    #   The kinds of media context that this function uses. Elemental
+    #   Inference derives this field from the media paths that the request
+    #   expression references; you can't set it. An empty list means that
+    #   the expression references no media, so Elemental Inference supplies
+    #   none at run time.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] tags
+    #   The tags associated with the function.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elementalinference-2018-11-14/GetFunctionResponse AWS API Documentation
+    #
+    class GetFunctionResponse < Struct.new(
+      :name,
+      :target,
+      :request_expression,
+      :response_expression,
+      :description,
+      :event_bridge_delivery,
+      :arn,
+      :id,
+      :status,
+      :references,
+      :context_types,
+      :tags)
+      SENSITIVE = [:request_expression, :response_expression, :description]
+      include Aws::Structure
+    end
+
     # Contains configuration information about one output in a feed. It is
     # used in the GetFeed response.
     #
@@ -1117,6 +2135,110 @@ module Aws::ElementalInference
       :status,
       :description,
       :from_association)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] id
+    #   The ID of the question set to retrieve.
+    #   @return [String]
+    #
+    # @!attribute [rw] question_set_version
+    #   The version of the question set to retrieve: DRAFT or the number of
+    #   a published version. If you don't specify a version, Elemental
+    #   Inference returns DRAFT.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elementalinference-2018-11-14/GetQuestionSetRequest AWS API Documentation
+    #
+    class GetQuestionSetRequest < Struct.new(
+      :id,
+      :question_set_version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] yes_no
+    #   The yesNo questions in this version. Elemental Inference doesn't
+    #   return this property if the version has no yesNo questions.
+    #   @return [Array<Types::YesNoQuestion>]
+    #
+    # @!attribute [rw] yes_no_per_option
+    #   The yesNoPerOption questions in this version. Elemental Inference
+    #   doesn't return this property if the version has no yesNoPerOption
+    #   questions.
+    #   @return [Array<Types::YesNoPerOptionQuestion>]
+    #
+    # @!attribute [rw] choose_one
+    #   The chooseOne questions in this version. Elemental Inference
+    #   doesn't return this property if the version has no chooseOne
+    #   questions.
+    #   @return [Array<Types::ChooseOneQuestion>]
+    #
+    # @!attribute [rw] arn
+    #   The ARN of the question set.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The ID of the question set.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the question set at this version. For a published
+    #   version, this is the name that the question set had when the version
+    #   was published.
+    #   @return [String]
+    #
+    # @!attribute [rw] version
+    #   The version that this response describes: DRAFT or the number of a
+    #   published version.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description that you specified when you published this version.
+    #   Elemental Inference doesn't return this property for DRAFT, or for
+    #   a version that you published without a description.
+    #   @return [String]
+    #
+    # @!attribute [rw] latest_version
+    #   The number of the highest version that you have published for this
+    #   question set, even if you have since deleted that version. Elemental
+    #   Inference doesn't return this property if you haven't published a
+    #   version.
+    #   @return [String]
+    #
+    # @!attribute [rw] sha256
+    #   The SHA-256 hash of this version, as 64 lowercase hexadecimal
+    #   characters. The hash covers the name of the question set and its
+    #   questions at this version. For DRAFT, you can specify this value in
+    #   a CreateQuestionSetVersion request, so that Elemental Inference
+    #   publishes DRAFT only if it hasn't changed.
+    #   @return [String]
+    #
+    # @!attribute [rw] references
+    #   A list of feed IDs that reference this version of the question set.
+    #   The list doesn't include feeds that reference other versions.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] tags
+    #   The tags associated with the question set.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elementalinference-2018-11-14/GetQuestionSetResponse AWS API Documentation
+    #
+    class GetQuestionSetResponse < Struct.new(
+      :yes_no,
+      :yes_no_per_option,
+      :choose_one,
+      :arn,
+      :id,
+      :name,
+      :version,
+      :description,
+      :latest_version,
+      :sha256,
+      :references,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1225,6 +2347,118 @@ module Aws::ElementalInference
       include Aws::Structure
     end
 
+    # @!attribute [rw] max_results
+    #   The maximum number of functions to return in one response. Valid
+    #   range: 1 to 100. The default is 100.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token that identifies the page of results to return. Use the
+    #   nextToken value from a previous response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elementalinference-2018-11-14/ListFunctionsRequest AWS API Documentation
+    #
+    class ListFunctionsRequest < Struct.new(
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] functions
+    #   An array of function summaries.
+    #   @return [Array<Types::FunctionSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use in a subsequent request to get the next page of
+    #   results. This field is absent when there are no more results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elementalinference-2018-11-14/ListFunctionsResponse AWS API Documentation
+    #
+    class ListFunctionsResponse < Struct.new(
+      :functions,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] id
+    #   The ID of the question set whose versions you want to list.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return per API request. Valid
+    #   range: 1 to 100.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token that identifies the next batch of results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elementalinference-2018-11-14/ListQuestionSetVersionsRequest AWS API Documentation
+    #
+    class ListQuestionSetVersionsRequest < Struct.new(
+      :id,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] versions
+    #   A list of QuestionSetVersionSummary objects.
+    #   @return [Array<Types::QuestionSetVersionSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next batch of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elementalinference-2018-11-14/ListQuestionSetVersionsResponse AWS API Documentation
+    #
+    class ListQuestionSetVersionsResponse < Struct.new(
+      :versions,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return per API request. Valid
+    #   range: 1 to 100.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token that identifies the next batch of results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elementalinference-2018-11-14/ListQuestionSetsRequest AWS API Documentation
+    #
+    class ListQuestionSetsRequest < Struct.new(
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] question_sets
+    #   A list of QuestionSetSummary objects.
+    #   @return [Array<Types::QuestionSetSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next batch of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elementalinference-2018-11-14/ListQuestionSetsResponse AWS API Documentation
+    #
+    class ListQuestionSetsResponse < Struct.new(
+      :question_sets,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] id
     #   The ID of the feed that you want to query.
     #   @return [String]
@@ -1317,6 +2551,10 @@ module Aws::ElementalInference
     #   feature.
     #   @return [Types::ContextualMetadataConfig]
     #
+    # @!attribute [rw] function
+    #   The output config type that applies to a function.
+    #   @return [Types::FunctionConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elementalinference-2018-11-14/OutputConfig AWS API Documentation
     #
     class OutputConfig < Struct.new(
@@ -1324,6 +2562,7 @@ module Aws::ElementalInference
       :clipping,
       :subtitling,
       :contextual_metadata,
+      :function,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
@@ -1333,8 +2572,23 @@ module Aws::ElementalInference
       class Clipping < OutputConfig; end
       class Subtitling < OutputConfig; end
       class ContextualMetadata < OutputConfig; end
+      class Function < OutputConfig; end
       class Unknown < OutputConfig; end
     end
+
+    # A target that invokes nothing. Elemental Inference evaluates your
+    # request expression, then evaluates your response expression against
+    # that result. If the function has no response expression, Elemental
+    # Inference stores the result of the request expression.
+    #
+    # A passthrough function can't reference media.frames. It also needs no
+    # access role on the feed.
+    #
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elementalinference-2018-11-14/PassthroughFunctionTarget AWS API Documentation
+    #
+    class PassthroughFunctionTarget < Aws::EmptyStructure; end
 
     # @!attribute [rw] id
     #   The ID of the feed to attach the policy to.
@@ -1356,6 +2610,127 @@ module Aws::ElementalInference
     # @see http://docs.aws.amazon.com/goto/WebAPI/elementalinference-2018-11-14/PutFeedPolicyResponse AWS API Documentation
     #
     class PutFeedPolicyResponse < Aws::EmptyStructure; end
+
+    # An option in a yesNoPerOption question or a chooseOne question.
+    #
+    # @!attribute [rw] name
+    #   A name for the option. The name must be unique among the options of
+    #   the question. The name can be up to 64 characters. It must start
+    #   with a letter or an underscore, and can contain only the letters A-Z
+    #   and a-z, the digits 0-9, and underscores.
+    #   @return [String]
+    #
+    # @!attribute [rw] text
+    #   The text of the option. The text must be unique among the options of
+    #   the question, ignoring case. The text can be up to 16 bytes, encoded
+    #   in UTF-8. It can contain the same characters as the text of a
+    #   question.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elementalinference-2018-11-14/QuestionOption AWS API Documentation
+    #
+    class QuestionOption < Struct.new(
+      :name,
+      :text)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Identifies one version of a question set. You specify it in
+    # CustomQuestionsConfig.
+    #
+    # @!attribute [rw] question_set_id
+    #   The ID of the question set. The question set must be in your
+    #   account.
+    #   @return [String]
+    #
+    # @!attribute [rw] version
+    #   The version of the question set: DRAFT or the number of a published
+    #   version. The version must exist.
+    #
+    #   If you specify DRAFT, the output uses the current DRAFT questions
+    #   and picks up changes that you make later by using UpdateQuestionSet.
+    #   To keep the questions for the output fixed, specify a published
+    #   version.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elementalinference-2018-11-14/QuestionSetReference AWS API Documentation
+    #
+    class QuestionSetReference < Struct.new(
+      :question_set_id,
+      :version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains summary information about a question set. Used in the
+    # ListQuestionSets response.
+    #
+    # @!attribute [rw] arn
+    #   The ARN of the question set.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The ID of the question set.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the question set.
+    #   @return [String]
+    #
+    # @!attribute [rw] latest_version
+    #   The number of the highest version that you have published for this
+    #   question set, even if you have since deleted that version. Elemental
+    #   Inference doesn't return this property if you haven't published a
+    #   version.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elementalinference-2018-11-14/QuestionSetSummary AWS API Documentation
+    #
+    class QuestionSetSummary < Struct.new(
+      :arn,
+      :id,
+      :name,
+      :latest_version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains summary information about one version of a question set. Used
+    # in the ListQuestionSetVersions response.
+    #
+    # @!attribute [rw] version
+    #   The version: DRAFT or the number of a published version.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description that you specified when you published this version.
+    #   Elemental Inference doesn't return this property for DRAFT, or for
+    #   a version that you published without a description.
+    #   @return [String]
+    #
+    # @!attribute [rw] sha256
+    #   The SHA-256 hash of this version, as 64 lowercase hexadecimal
+    #   characters. The hash covers the name of the question set and its
+    #   questions at this version.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified_at
+    #   For DRAFT, the time when you created the question set or last
+    #   updated DRAFT. For a published version, the time when you published
+    #   it.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elementalinference-2018-11-14/QuestionSetVersionSummary AWS API Documentation
+    #
+    class QuestionSetVersionSummary < Struct.new(
+      :version,
+      :description,
+      :sha256,
+      :last_modified_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # Removes the game from an event clipping output at the action's
     # scheduled time. This is a type of ScheduleActionOperation, and the
@@ -1385,6 +2760,21 @@ module Aws::ElementalInference
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # The perScene trigger, which runs the function once for each scene that
+    # a contextual metadata output reports. The function runs after the
+    # scene ends, with the media of that scene. To choose this trigger, set
+    # perScene to an empty object.
+    #
+    # Specify contextualMetadataSettings to name the contextual metadata
+    # output that reports the scenes. You can't use this trigger with a
+    # function that references media.transcript or media.clip.
+    #
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elementalinference-2018-11-14/SceneTrigger AWS API Documentation
+    #
+    class SceneTrigger < Aws::EmptyStructure; end
 
     # Describes one schedule action on a feed, including the changes it
     # makes and whether it has run yet. Elemental Inference returns this
@@ -1666,6 +3056,21 @@ module Aws::ElementalInference
       include Aws::Structure
     end
 
+    # The perShot trigger, which runs the function once for each shot that
+    # Elemental Inference detects in the video. The function runs after the
+    # shot ends, with the media of that shot. To choose this trigger, set
+    # perShot to an empty object. The feed must have a video input.
+    #
+    # You can't use this trigger with a function that references
+    # media.transcript or media.clip. If the function references
+    # media.contextual, specify contextualMetadataSettings.
+    #
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elementalinference-2018-11-14/ShotTrigger AWS API Documentation
+    #
+    class ShotTrigger < Aws::EmptyStructure; end
+
     # A type of OutputConfig, used when the output in a feed is for the
     # smart subtitling feature. Smart subtitling uses automatic speech
     # recognition (ASR) to generate live TTML subtitles from the audio in
@@ -1675,8 +3080,27 @@ module Aws::ElementalInference
     #   The language of the audio in the source media. Elemental Inference
     #   uses this setting to optimize transcription accuracy. Specify the
     #   language using an ISO 639-2/T three-letter code, optionally with a
-    #   region subtag. Supported values: eng, eng-au, eng-gb, eng-us, fra,
-    #   ita, deu, spa, por.
+    #   region subtag. Supported values:
+    #
+    #   * eng – English
+    #
+    #   * eng-au – English (Australia)
+    #
+    #   * eng-gb – English (United Kingdom)
+    #
+    #   * eng-us – English (United States)
+    #
+    #   * fra – French
+    #
+    #   * ita – Italian
+    #
+    #   * deu – German
+    #
+    #   * spa – Spanish
+    #
+    #   * por – Portuguese
+    #
+    #   * ara – Arabic
     #   @return [String]
     #
     # @!attribute [rw] aspect_ratio
@@ -1704,6 +3128,26 @@ module Aws::ElementalInference
       :aspect_ratio,
       :dictionary,
       :profanity_filter)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The smart subtitles output on this feed that a function reads
+    # media.transcript from. Specify this structure for a function that
+    # references media.transcript. That function must use a fixedInterval
+    # trigger.
+    #
+    # If the function output is ENABLED, the output that you name must also
+    # be ENABLED.
+    #
+    # @!attribute [rw] output_name
+    #   The name of an ENABLED smart subtitles output on this feed.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elementalinference-2018-11-14/SubtitlingSettings AWS API Documentation
+    #
+    class SubtitlingSettings < Struct.new(
+      :output_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1762,6 +3206,56 @@ module Aws::ElementalInference
       :message)
       SENSITIVE = []
       include Aws::Structure
+    end
+
+    # Determines when a function runs. Specify exactly one member.
+    #
+    # @note Trigger is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note Trigger is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of Trigger corresponding to the set member.
+    #
+    # @!attribute [rw] fixed_interval
+    #   Run the function at a fixed interval of content. This is the only
+    #   trigger for a function that references media.transcript. Can't be
+    #   used with a function that references media.contextual.
+    #   @return [Types::FixedIntervalTrigger]
+    #
+    # @!attribute [rw] per_shot
+    #   Run the function once for each shot that Elemental Inference
+    #   detects. Can't be used with a function that references
+    #   media.transcript or media.clip.
+    #   @return [Types::ShotTrigger]
+    #
+    # @!attribute [rw] per_scene
+    #   Run the function once for each scene boundary that a contextual
+    #   metadata output reports. Requires contextualMetadataSettings. Can't
+    #   be used with a function that references media.transcript or
+    #   media.clip.
+    #   @return [Types::SceneTrigger]
+    #
+    # @!attribute [rw] per_clip
+    #   Run the function once for each clip that an event clipping output
+    #   detects. Requires clippingSettings. Can't be used with a function
+    #   that references media.transcript or media.contextual.
+    #   @return [Types::ClipTrigger]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elementalinference-2018-11-14/Trigger AWS API Documentation
+    #
+    class Trigger < Struct.new(
+      :fixed_interval,
+      :per_shot,
+      :per_scene,
+      :per_clip,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class FixedInterval < Trigger; end
+      class PerShot < Trigger; end
+      class PerScene < Trigger; end
+      class PerClip < Trigger; end
+      class Unknown < Trigger; end
     end
 
     # @!attribute [rw] resource_arn
@@ -1962,6 +3456,144 @@ module Aws::ElementalInference
       include Aws::Structure
     end
 
+    # @!attribute [rw] id
+    #   The ID of the function.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   A new name for the function. You can't change the name while the
+    #   function is referenced by a feed.
+    #   @return [String]
+    #
+    # @!attribute [rw] target
+    #   A new target for the function. You can't change the target while
+    #   the function is referenced by a feed.
+    #   @return [Types::FunctionTarget]
+    #
+    # @!attribute [rw] request_expression
+    #   A new request expression for the function. Elemental Inference
+    #   derives contextTypes again from the new expression. While a feed
+    #   references the function, the new expression must reference the same
+    #   media context as the current one.
+    #   @return [String]
+    #
+    # @!attribute [rw] response_expression
+    #   A new response expression for the function. To remove the response
+    #   expression, specify an empty string. A function with a Bedrock
+    #   target and eventBridgeDelivery set to ENABLED must keep a response
+    #   expression.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A new description for the function.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_bridge_delivery
+    #   Specifies whether Elemental Inference also sends this function's
+    #   marked results to Amazon EventBridge, as described for
+    #   CreateFunction. If you omit this parameter, the current value is
+    #   kept. While a feed references the function, you can change this
+    #   value to DISABLED, but not to ENABLED.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elementalinference-2018-11-14/UpdateFunctionRequest AWS API Documentation
+    #
+    class UpdateFunctionRequest < Struct.new(
+      :id,
+      :name,
+      :target,
+      :request_expression,
+      :response_expression,
+      :description,
+      :event_bridge_delivery)
+      SENSITIVE = [:request_expression, :response_expression, :description]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
+    #   The name of the function.
+    #   @return [String]
+    #
+    # @!attribute [rw] target
+    #   The destination for the request that the function builds.
+    #   @return [Types::FunctionTarget]
+    #
+    # @!attribute [rw] request_expression
+    #   The JSONata expression that builds the request. Elemental Inference
+    #   evaluates it against the media object of the feed, which holds the
+    #   media and metadata that the function asked for.
+    #   @return [String]
+    #
+    # @!attribute [rw] response_expression
+    #   The JSONata expression that selects what to store. Elemental
+    #   Inference evaluates it against the result as its root: the model
+    #   response for a Bedrock target, or the output of the request
+    #   expression for a passthrough target. If a function has no response
+    #   expression, Elemental Inference stores the entire result.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the function.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_bridge_delivery
+    #   Indicates whether Elemental Inference also sends this function's
+    #   results to Amazon EventBridge. With ENABLED, each result that is a
+    #   JSON object with a top-level `eventBridge` field set to `true` is
+    #   also sent as a Function Metadata Generated event to the default
+    #   event bus in your account.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The ARN of the function.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The ID of the function.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the function.
+    #   @return [String]
+    #
+    # @!attribute [rw] references
+    #   The IDs of the feeds that have a function output, enabled or
+    #   disabled, that references this function. While this list isn't
+    #   empty, the function can't be deleted, and its name and target
+    #   can't be changed.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] context_types
+    #   The kinds of media context that this function uses. Elemental
+    #   Inference derives this field from the media paths that the request
+    #   expression references; you can't set it. An empty list means that
+    #   the expression references no media, so Elemental Inference supplies
+    #   none at run time.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] tags
+    #   The tags associated with the function.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elementalinference-2018-11-14/UpdateFunctionResponse AWS API Documentation
+    #
+    class UpdateFunctionResponse < Struct.new(
+      :name,
+      :target,
+      :request_expression,
+      :response_expression,
+      :description,
+      :event_bridge_delivery,
+      :arn,
+      :id,
+      :status,
+      :references,
+      :context_types,
+      :tags)
+      SENSITIVE = [:request_expression, :response_expression, :description]
+      include Aws::Structure
+    end
+
     # Contains configuration information about one output in a feed. It is
     # used in the UpdateFeed action.
     #
@@ -2029,6 +3661,134 @@ module Aws::ElementalInference
       include Aws::Structure
     end
 
+    # @!attribute [rw] id
+    #   The ID of the question set to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] yes_no
+    #   An array of questions that Elemental Inference answers with yes or
+    #   no, to replace all the yesNo questions in DRAFT. You can specify up
+    #   to 50 yesNo questions. If not specified, the yesNo questions are not
+    #   changed. To remove all the yesNo questions, specify an empty array.
+    #   @return [Array<Types::YesNoQuestion>]
+    #
+    # @!attribute [rw] yes_no_per_option
+    #   An array of questions that you ask about each of their options, to
+    #   replace all the yesNoPerOption questions in DRAFT. You can specify
+    #   up to 10 yesNoPerOption questions. If not specified, the
+    #   yesNoPerOption questions are not changed. To remove all the
+    #   yesNoPerOption questions, specify an empty array.
+    #   @return [Array<Types::YesNoPerOptionQuestion>]
+    #
+    # @!attribute [rw] choose_one
+    #   An array of questions that Elemental Inference answers by choosing
+    #   one of their options, to replace all the chooseOne questions in
+    #   DRAFT. You can specify up to 10 chooseOne questions. If not
+    #   specified, the chooseOne questions are not changed. To remove all
+    #   the chooseOne questions, specify an empty array.
+    #   @return [Array<Types::ChooseOneQuestion>]
+    #
+    # @!attribute [rw] name
+    #   A new name for the question set. If not specified, the name is not
+    #   changed.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elementalinference-2018-11-14/UpdateQuestionSetRequest AWS API Documentation
+    #
+    class UpdateQuestionSetRequest < Struct.new(
+      :id,
+      :yes_no,
+      :yes_no_per_option,
+      :choose_one,
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] yes_no
+    #   The yesNo questions in this version. Elemental Inference doesn't
+    #   return this property if the version has no yesNo questions.
+    #   @return [Array<Types::YesNoQuestion>]
+    #
+    # @!attribute [rw] yes_no_per_option
+    #   The yesNoPerOption questions in this version. Elemental Inference
+    #   doesn't return this property if the version has no yesNoPerOption
+    #   questions.
+    #   @return [Array<Types::YesNoPerOptionQuestion>]
+    #
+    # @!attribute [rw] choose_one
+    #   The chooseOne questions in this version. Elemental Inference
+    #   doesn't return this property if the version has no chooseOne
+    #   questions.
+    #   @return [Array<Types::ChooseOneQuestion>]
+    #
+    # @!attribute [rw] arn
+    #   The ARN of the question set.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The ID of the question set.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The updated or original name of the question set.
+    #   @return [String]
+    #
+    # @!attribute [rw] version
+    #   The version that this response describes. For UpdateQuestionSet, the
+    #   version is always DRAFT.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the version. Elemental Inference doesn't return
+    #   this property for UpdateQuestionSet, because the DRAFT version has
+    #   no description.
+    #   @return [String]
+    #
+    # @!attribute [rw] latest_version
+    #   The number of the highest version that you have published for this
+    #   question set, even if you have since deleted that version. Elemental
+    #   Inference doesn't return this property if you haven't published a
+    #   version.
+    #   @return [String]
+    #
+    # @!attribute [rw] sha256
+    #   The SHA-256 hash of the DRAFT version after the update, as 64
+    #   lowercase hexadecimal characters. The hash covers the name of the
+    #   question set and its questions, so it changes when you rename the
+    #   question set. You can specify this value in a
+    #   CreateQuestionSetVersion request, so that Elemental Inference
+    #   publishes DRAFT only if it hasn't changed since this update.
+    #   @return [String]
+    #
+    # @!attribute [rw] references
+    #   A list of feed IDs that reference the DRAFT version of the question
+    #   set.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] tags
+    #   Any tags associated with the question set.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elementalinference-2018-11-14/UpdateQuestionSetResponse AWS API Documentation
+    #
+    class UpdateQuestionSetResponse < Struct.new(
+      :yes_no,
+      :yes_no_per_option,
+      :choose_one,
+      :arn,
+      :id,
+      :name,
+      :version,
+      :description,
+      :latest_version,
+      :sha256,
+      :references,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The input fails to satisfy the constraints specified by the service.
     # Check the error message for details about which parameter or field is
     # invalid and correct the request before retrying.
@@ -2040,6 +3800,72 @@ module Aws::ElementalInference
     #
     class ValidationException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A question that you ask Elemental Inference separately about each of
+    # its options. Elemental Inference answers yes or no for each option.
+    # Word the question so that it fits any of the options. For example, ask
+    # Is this overlay visible? with one option for each overlay. You specify
+    # it in the yesNoPerOption array of a question set.
+    #
+    # @!attribute [rw] name
+    #   A name for the question. The name must be unique among all the
+    #   questions in the version, across all question types. The name can be
+    #   up to 64 characters. It must start with a letter or an underscore,
+    #   and can contain only the letters A-Z and a-z, the digits 0-9, and
+    #   underscores.
+    #   @return [String]
+    #
+    # @!attribute [rw] question
+    #   The text of the question. The text can be up to 256 bytes, encoded
+    #   in UTF-8. It can contain letters in any language, combining marks,
+    #   digits, spaces, and the following characters: `. , ? ! ' " ( ) - : ;
+    #   / & %`, plus the curly apostrophe and quotation marks (U+2019,
+    #   U+201C, and U+201D).
+    #   @return [String]
+    #
+    # @!attribute [rw] options
+    #   The options that you ask the question about. You can specify from 1
+    #   to 50 options. Each option counts as one item toward the limit of
+    #   100 scored items in a version.
+    #   @return [Array<Types::QuestionOption>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elementalinference-2018-11-14/YesNoPerOptionQuestion AWS API Documentation
+    #
+    class YesNoPerOptionQuestion < Struct.new(
+      :name,
+      :question,
+      :options)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A question that you ask Elemental Inference, which answers with yes or
+    # no. You specify it in the yesNo array of a question set.
+    #
+    # @!attribute [rw] name
+    #   A name for the question. The name must be unique among all the
+    #   questions in the version, across all question types. The name can be
+    #   up to 64 characters. It must start with a letter or an underscore,
+    #   and can contain only the letters A-Z and a-z, the digits 0-9, and
+    #   underscores.
+    #   @return [String]
+    #
+    # @!attribute [rw] question
+    #   The text of the question. The text can be up to 256 bytes, encoded
+    #   in UTF-8. It can contain letters in any language, combining marks,
+    #   digits, spaces, and the following characters: `. , ? ! ' " ( ) - : ;
+    #   / & %`, plus the curly apostrophe and quotation marks (U+2019,
+    #   U+201C, and U+201D).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elementalinference-2018-11-14/YesNoQuestion AWS API Documentation
+    #
+    class YesNoQuestion < Struct.new(
+      :name,
+      :question)
       SENSITIVE = []
       include Aws::Structure
     end

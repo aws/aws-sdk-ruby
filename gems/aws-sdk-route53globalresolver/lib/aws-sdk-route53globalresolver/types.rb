@@ -35,6 +35,11 @@ module Aws::Route53GlobalResolver
     #   source.
     #   @return [String]
     #
+    # @!attribute [rw] core_network_endpoint_id
+    #   The ID of the core network endpoint associated with this access
+    #   source.
+    #   @return [String]
+    #
     # @!attribute [rw] created_at
     #   The date and time when the access source was created.
     #   @return [Time]
@@ -59,6 +64,10 @@ module Aws::Route53GlobalResolver
     #   The protocol used by the access source.
     #   @return [String]
     #
+    # @!attribute [rw] segment
+    #   The name of the segment associated with this access source.
+    #   @return [String]
+    #
     # @!attribute [rw] status
     #   The current status of the access source.
     #   @return [String]
@@ -72,12 +81,14 @@ module Aws::Route53GlobalResolver
     class AccessSourcesItem < Struct.new(
       :arn,
       :cidr,
+      :core_network_endpoint_id,
       :created_at,
       :id,
       :ip_address_type,
       :name,
       :dns_view_id,
       :protocol,
+      :segment,
       :status,
       :updated_at)
       SENSITIVE = []
@@ -816,6 +827,163 @@ module Aws::Route53GlobalResolver
       include Aws::Structure
     end
 
+    # A DNS IP address configuration that you provide when you create a core
+    # network endpoint. Each item specifies an IP address for the endpoint
+    # to receive DNS queries, along with its DNS label, and the scope and
+    # Amazon Web Services Regions in which the address applies.
+    #
+    # @!attribute [rw] ipv4_address
+    #   The IPv4 address for the core network endpoint to receive DNS
+    #   queries.
+    #   @return [String]
+    #
+    # @!attribute [rw] ipv6_address
+    #   The IPv6 address for the core network endpoint to receive DNS
+    #   queries.
+    #   @return [String]
+    #
+    # @!attribute [rw] dns_label
+    #   The DNS label to associate with the IP address.
+    #   @return [String]
+    #
+    # @!attribute [rw] region_scope
+    #   Indicates whether the IP address applies to all Amazon Web Services
+    #   Regions or only to the specific Regions that you identify. When the
+    #   value is `REGIONAL`, the Regions are listed in the `regions` field.
+    #   @return [String]
+    #
+    # @!attribute [rw] regions
+    #   The Amazon Web Services Regions in which the IP address applies when
+    #   the region scope is `REGIONAL`.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53globalresolver-2022-09-27/CoreNetworkEndpointDnsIpInputItem AWS API Documentation
+    #
+    class CoreNetworkEndpointDnsIpInputItem < Struct.new(
+      :ipv4_address,
+      :ipv6_address,
+      :dns_label,
+      :region_scope,
+      :regions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A DNS IP address configuration returned for a core network endpoint.
+    # Each item describes an IP address that the endpoint uses to receive
+    # DNS queries, along with its DNS label and name, and the scope and
+    # Amazon Web Services Regions in which the address applies.
+    #
+    # @!attribute [rw] ipv4_address
+    #   The IPv4 address that the core network endpoint uses to receive DNS
+    #   queries.
+    #   @return [String]
+    #
+    # @!attribute [rw] ipv6_address
+    #   The IPv6 address that the core network endpoint uses to receive DNS
+    #   queries.
+    #   @return [String]
+    #
+    # @!attribute [rw] dns_label
+    #   The DNS label associated with the IP address.
+    #   @return [String]
+    #
+    # @!attribute [rw] dns_name
+    #   The fully qualified DNS name associated with the IP address.
+    #   @return [String]
+    #
+    # @!attribute [rw] region_scope
+    #   Indicates whether the IP address applies to all Amazon Web Services
+    #   Regions or only to the specific Regions that you identify. When the
+    #   value is `REGIONAL`, the Regions are listed in the `regions` field.
+    #   @return [String]
+    #
+    # @!attribute [rw] regions
+    #   The Amazon Web Services Regions in which the IP address applies when
+    #   the region scope is `REGIONAL`.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53globalresolver-2022-09-27/CoreNetworkEndpointDnsIpItem AWS API Documentation
+    #
+    class CoreNetworkEndpointDnsIpItem < Struct.new(
+      :ipv4_address,
+      :ipv6_address,
+      :dns_label,
+      :dns_name,
+      :region_scope,
+      :regions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Summary information about a core network endpoint. Route 53 Global
+    # Resolver returns one of these items for each endpoint in the response
+    # to a `ListCoreNetworkEndpoints` request. Each item describes the
+    # endpoint's identifiers, the Global Resolver and Cloud WAN core
+    # network that it connects, its DNS IP addresses, and its current
+    # status.
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the core network endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] available_regions
+    #   The Amazon Web Services Regions in which the core network endpoint
+    #   is available.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] core_network_arn
+    #   The Amazon Resource Name (ARN) of the Cloud WAN core network that
+    #   the endpoint connects to.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The date and time when the core network endpoint was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] global_resolver_id
+    #   The identifier of the Route 53 Global Resolver that the core network
+    #   endpoint is associated with.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The unique identifier of the core network endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] ip_addresses
+    #   The DNS IP addresses that the core network endpoint uses to receive
+    #   DNS queries.
+    #   @return [Array<Types::CoreNetworkEndpointDnsIpItem>]
+    #
+    # @!attribute [rw] name
+    #   The name of the core network endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the core network endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] updated_at
+    #   The date and time when the core network endpoint was last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53globalresolver-2022-09-27/CoreNetworkEndpointsItem AWS API Documentation
+    #
+    class CoreNetworkEndpointsItem < Struct.new(
+      :arn,
+      :available_regions,
+      :core_network_arn,
+      :created_at,
+      :global_resolver_id,
+      :id,
+      :ip_addresses,
+      :name,
+      :status,
+      :updated_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] cidr
     #   The IP address or CIDR range that is allowed to send DNS queries to
     #   the Route 53 Global Resolver.
@@ -829,12 +997,22 @@ module Aws::Route53GlobalResolver
     #   @return [String]
     #
     # @!attribute [rw] ip_address_type
-    #   The IP address type for this access source. Valid values are IPv4
-    #   and IPv6 (if the Route 53 Global Resolver supports dual-stack).
+    #   The IP address type for this access source. Valid values are IPV4,
+    #   IPV6, and NONE. If you provide a CIDR range, this defaults to IPV4;
+    #   otherwise it defaults to NONE.
     #   @return [String]
     #
     # @!attribute [rw] name
     #   A descriptive name for the access source.
+    #   @return [String]
+    #
+    # @!attribute [rw] core_network_endpoint_id
+    #   The ID of the core network endpoint to associate with this access
+    #   source.
+    #   @return [String]
+    #
+    # @!attribute [rw] segment
+    #   The name of the segment to associate with this access source.
     #   @return [String]
     #
     # @!attribute [rw] dns_view_id
@@ -858,6 +1036,8 @@ module Aws::Route53GlobalResolver
       :client_token,
       :ip_address_type,
       :name,
+      :core_network_endpoint_id,
+      :segment,
       :dns_view_id,
       :protocol,
       :tags)
@@ -883,7 +1063,17 @@ module Aws::Route53GlobalResolver
     #   @return [String]
     #
     # @!attribute [rw] ip_address_type
-    #   The IP address type for this access source (IPv4 or IPv6).
+    #   The IP address type for this access source. Valid values are IPV4,
+    #   IPV6, and NONE.
+    #   @return [String]
+    #
+    # @!attribute [rw] core_network_endpoint_id
+    #   The ID of the core network endpoint associated with this access
+    #   source.
+    #   @return [String]
+    #
+    # @!attribute [rw] segment
+    #   The name of the segment associated with this access source.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -915,6 +1105,8 @@ module Aws::Route53GlobalResolver
       :created_at,
       :id,
       :ip_address_type,
+      :core_network_endpoint_id,
+      :segment,
       :name,
       :dns_view_id,
       :protocol,
@@ -1015,6 +1207,113 @@ module Aws::Route53GlobalResolver
       :status,
       :value)
       SENSITIVE = [:value]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier that ensures the request is
+    #   idempotent. Making the same request multiple times with the same
+    #   `clientToken` produces the same result every time.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] core_network_arn
+    #   The Amazon Resource Name (ARN) of the Amazon Web Services Cloud WAN
+    #   core network to connect to this endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] global_resolver_id
+    #   The ID of the Route 53 Global Resolver to associate with this core
+    #   network endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] ip_addresses
+    #   The IP addresses that the core network endpoint uses to resolve DNS
+    #   queries within the Amazon Web Services Cloud WAN core network.
+    #   @return [Array<Types::CoreNetworkEndpointDnsIpInputItem>]
+    #
+    # @!attribute [rw] name
+    #   A descriptive name for the core network endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   An array of user-defined keys and optional values that you can use
+    #   to categorize and organize the core network endpoint.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53globalresolver-2022-09-27/CreateCoreNetworkEndpointInput AWS API Documentation
+    #
+    class CreateCoreNetworkEndpointInput < Struct.new(
+      :client_token,
+      :core_network_arn,
+      :global_resolver_id,
+      :ip_addresses,
+      :name,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the core network endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] available_regions
+    #   The Amazon Web Services Regions in which the core network endpoint
+    #   is available.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] core_network_arn
+    #   The Amazon Resource Name (ARN) of the Amazon Web Services Cloud WAN
+    #   core network connected to the endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The date and time when the core network endpoint was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] global_resolver_id
+    #   The ID of the Route 53 Global Resolver associated with the core
+    #   network endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The unique identifier of the core network endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] ip_addresses
+    #   The IP addresses that the core network endpoint uses to resolve DNS
+    #   queries within the Amazon Web Services Cloud WAN core network.
+    #   @return [Array<Types::CoreNetworkEndpointDnsIpItem>]
+    #
+    # @!attribute [rw] name
+    #   The name of the core network endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the core network endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] updated_at
+    #   The date and time when the core network endpoint was last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53globalresolver-2022-09-27/CreateCoreNetworkEndpointOutput AWS API Documentation
+    #
+    class CreateCoreNetworkEndpointOutput < Struct.new(
+      :arn,
+      :available_regions,
+      :core_network_arn,
+      :created_at,
+      :global_resolver_id,
+      :id,
+      :ip_addresses,
+      :name,
+      :status,
+      :updated_at)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1472,6 +1771,23 @@ module Aws::Route53GlobalResolver
     #   are IPV4 (default) or DUAL\_STACK for both IPv4 and IPv6 support.
     #   @return [String]
     #
+    # @!attribute [rw] public_ip_status
+    #   Specifies the public IP connectivity to configure for the Route 53
+    #   Global Resolver. Public IP addresses let DNS clients send queries to
+    #   the resolver over the internet. Valid values are the following:
+    #
+    #   * `ENABLED_RESERVED` - Public IP connectivity is enabled, and the
+    #     global anycast public IP addresses are reserved for the Route 53
+    #     Global Resolver.
+    #
+    #   * `DISABLED_RESERVED` - Public IP connectivity is disabled, and the
+    #     global anycast public IP addresses remain reserved for the Route
+    #     53 Global Resolver.
+    #
+    #   * `DISABLED_RELEASED` - Public IP connectivity is disabled, and the
+    #     global anycast public IP addresses are released.
+    #   @return [String]
+    #
     # @!attribute [rw] name
     #   A descriptive name for the Route 53 Global Resolver instance.
     #   Maximum length of 64 characters.
@@ -1501,6 +1817,7 @@ module Aws::Route53GlobalResolver
       :client_token,
       :description,
       :ip_address_type,
+      :public_ip_status,
       :name,
       :observability_region,
       :regions,
@@ -1539,6 +1856,23 @@ module Aws::Route53GlobalResolver
     # @!attribute [rw] ip_address_type
     #   The IP address type configured for the Route 53 Global Resolver
     #   (IPV4 or DUAL\_STACK).
+    #   @return [String]
+    #
+    # @!attribute [rw] public_ip_status
+    #   The public IP connectivity configured for the Route 53 Global
+    #   Resolver. Public IP addresses let DNS clients send queries to the
+    #   resolver over the internet. Valid values are the following:
+    #
+    #   * `ENABLED_RESERVED` - Public IP connectivity is enabled, and the
+    #     global anycast public IP addresses are reserved for the Route 53
+    #     Global Resolver.
+    #
+    #   * `DISABLED_RESERVED` - Public IP connectivity is disabled, and the
+    #     global anycast public IP addresses remain reserved for the Route
+    #     53 Global Resolver.
+    #
+    #   * `DISABLED_RELEASED` - Public IP connectivity is disabled, and the
+    #     global anycast public IP addresses are released.
     #   @return [String]
     #
     # @!attribute [rw] ipv4_addresses
@@ -1589,6 +1923,7 @@ module Aws::Route53GlobalResolver
       :description,
       :dns_name,
       :ip_address_type,
+      :public_ip_status,
       :ipv4_addresses,
       :ipv6_addresses,
       :name,
@@ -1690,6 +2025,11 @@ module Aws::Route53GlobalResolver
     #   The IP address or CIDR range of the deleted access source.
     #   @return [String]
     #
+    # @!attribute [rw] core_network_endpoint_id
+    #   The ID of the core network endpoint associated with this access
+    #   source.
+    #   @return [String]
+    #
     # @!attribute [rw] created_at
     #   The date and time when the access source was originally created.
     #   @return [Time]
@@ -1699,7 +2039,8 @@ module Aws::Route53GlobalResolver
     #   @return [String]
     #
     # @!attribute [rw] ip_address_type
-    #   The IP address type of the deleted access source (IPv4 or IPv6).
+    #   The IP address type of the deleted access source. Valid values are
+    #   IPV4, IPV6, and NONE.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -1713,6 +2054,10 @@ module Aws::Route53GlobalResolver
     #
     # @!attribute [rw] protocol
     #   The DNS protocol that was permitted for the deleted access source.
+    #   @return [String]
+    #
+    # @!attribute [rw] segment
+    #   The name of the segment associated with this access source.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -1729,12 +2074,14 @@ module Aws::Route53GlobalResolver
     class DeleteAccessSourceOutput < Struct.new(
       :arn,
       :cidr,
+      :core_network_endpoint_id,
       :created_at,
       :id,
       :ip_address_type,
       :name,
       :dns_view_id,
       :protocol,
+      :segment,
       :status,
       :updated_at)
       SENSITIVE = []
@@ -1771,6 +2118,82 @@ module Aws::Route53GlobalResolver
       :id,
       :status,
       :deleted_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] core_network_endpoint_id
+    #   The unique identifier of the core network endpoint to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53globalresolver-2022-09-27/DeleteCoreNetworkEndpointInput AWS API Documentation
+    #
+    class DeleteCoreNetworkEndpointInput < Struct.new(
+      :core_network_endpoint_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the deleted core network endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] available_regions
+    #   The Amazon Web Services Regions in which the deleted core network
+    #   endpoint was available.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] core_network_arn
+    #   The Amazon Resource Name (ARN) of the Amazon Web Services Cloud WAN
+    #   core network that was connected to the deleted endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The date and time when the core network endpoint was originally
+    #   created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] global_resolver_id
+    #   The ID of the Route 53 Global Resolver that was associated with the
+    #   deleted core network endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The unique identifier of the deleted core network endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] ip_addresses
+    #   The IP addresses that the deleted core network endpoint used to
+    #   resolve DNS queries within the Amazon Web Services Cloud WAN core
+    #   network.
+    #   @return [Array<Types::CoreNetworkEndpointDnsIpItem>]
+    #
+    # @!attribute [rw] name
+    #   The name of the deleted core network endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The final status of the deleted core network endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] updated_at
+    #   The date and time when the core network endpoint was last updated
+    #   before deletion.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53globalresolver-2022-09-27/DeleteCoreNetworkEndpointOutput AWS API Documentation
+    #
+    class DeleteCoreNetworkEndpointOutput < Struct.new(
+      :arn,
+      :available_regions,
+      :core_network_arn,
+      :created_at,
+      :global_resolver_id,
+      :id,
+      :ip_addresses,
+      :name,
+      :status,
+      :updated_at)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2513,6 +2936,11 @@ module Aws::Route53GlobalResolver
     #   The IP range for the rule's parameters in CIDR notation.
     #   @return [String]
     #
+    # @!attribute [rw] core_network_endpoint_id
+    #   The ID of the core network endpoint associated with this access
+    #   source.
+    #   @return [String]
+    #
     # @!attribute [rw] created_at
     #   The time and date the rule was created.
     #   @return [Time]
@@ -2538,6 +2966,10 @@ module Aws::Route53GlobalResolver
     #   instance.
     #   @return [String]
     #
+    # @!attribute [rw] segment
+    #   The name of the segment associated with this access source.
+    #   @return [String]
+    #
     # @!attribute [rw] status
     #   Information about the status of the rule.
     #   @return [String]
@@ -2551,12 +2983,14 @@ module Aws::Route53GlobalResolver
     class GetAccessSourceOutput < Struct.new(
       :arn,
       :cidr,
+      :core_network_endpoint_id,
       :created_at,
       :id,
       :ip_address_type,
       :name,
       :dns_view_id,
       :protocol,
+      :segment,
       :status,
       :updated_at)
       SENSITIVE = []
@@ -2636,6 +3070,80 @@ module Aws::Route53GlobalResolver
       :updated_at,
       :value)
       SENSITIVE = [:value]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] core_network_endpoint_id
+    #   The unique identifier of the core network endpoint to retrieve
+    #   information about.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53globalresolver-2022-09-27/GetCoreNetworkEndpointInput AWS API Documentation
+    #
+    class GetCoreNetworkEndpointInput < Struct.new(
+      :core_network_endpoint_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the core network endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] available_regions
+    #   The Amazon Web Services Regions in which the core network endpoint
+    #   is available.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] core_network_arn
+    #   The Amazon Resource Name (ARN) of the Amazon Web Services Cloud WAN
+    #   core network connected to the endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The date and time when the core network endpoint was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] global_resolver_id
+    #   The ID of the Route 53 Global Resolver associated with the core
+    #   network endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The unique identifier of the core network endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] ip_addresses
+    #   The IP addresses that the core network endpoint uses to resolve DNS
+    #   queries within the Amazon Web Services Cloud WAN core network.
+    #   @return [Array<Types::CoreNetworkEndpointDnsIpItem>]
+    #
+    # @!attribute [rw] name
+    #   The name of the core network endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the core network endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] updated_at
+    #   The date and time when the core network endpoint was last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53globalresolver-2022-09-27/GetCoreNetworkEndpointOutput AWS API Documentation
+    #
+    class GetCoreNetworkEndpointOutput < Struct.new(
+      :arn,
+      :available_regions,
+      :core_network_arn,
+      :created_at,
+      :global_resolver_id,
+      :id,
+      :ip_addresses,
+      :name,
+      :status,
+      :updated_at)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2993,6 +3501,23 @@ module Aws::Route53GlobalResolver
     #   The IP address type configured for the Global Resolver.
     #   @return [String]
     #
+    # @!attribute [rw] public_ip_status
+    #   The public IP connectivity configured for the Route 53 Global
+    #   Resolver. Public IP addresses let DNS clients send queries to the
+    #   resolver over the internet. Valid values are the following:
+    #
+    #   * `ENABLED_RESERVED` - Public IP connectivity is enabled, and the
+    #     global anycast public IP addresses are reserved for the Route 53
+    #     Global Resolver.
+    #
+    #   * `DISABLED_RESERVED` - Public IP connectivity is disabled, and the
+    #     global anycast public IP addresses remain reserved for the Route
+    #     53 Global Resolver.
+    #
+    #   * `DISABLED_RELEASED` - Public IP connectivity is disabled, and the
+    #     global anycast public IP addresses are released.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53globalresolver-2022-09-27/GetGlobalResolverOutput AWS API Documentation
     #
     class GetGlobalResolverOutput < Struct.new(
@@ -3009,7 +3534,8 @@ module Aws::Route53GlobalResolver
       :status,
       :ipv4_addresses,
       :ipv6_addresses,
-      :ip_address_type)
+      :ip_address_type,
+      :public_ip_status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3175,6 +3701,23 @@ module Aws::Route53GlobalResolver
     #   The IP address type configured for the global resolver.
     #   @return [String]
     #
+    # @!attribute [rw] public_ip_status
+    #   The public IP connectivity configured for the Route 53 Global
+    #   Resolver. Public IP addresses let DNS clients send queries to the
+    #   resolver over the internet. Valid values are the following:
+    #
+    #   * `ENABLED_RESERVED` - Public IP connectivity is enabled, and the
+    #     global anycast public IP addresses are reserved for the Route 53
+    #     Global Resolver.
+    #
+    #   * `DISABLED_RESERVED` - Public IP connectivity is disabled, and the
+    #     global anycast public IP addresses remain reserved for the Route
+    #     53 Global Resolver.
+    #
+    #   * `DISABLED_RELEASED` - Public IP connectivity is disabled, and the
+    #     global anycast public IP addresses are released.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53globalresolver-2022-09-27/GlobalResolversItem AWS API Documentation
     #
     class GlobalResolversItem < Struct.new(
@@ -3191,7 +3734,8 @@ module Aws::Route53GlobalResolver
       :status,
       :ipv4_addresses,
       :ipv6_addresses,
-      :ip_address_type)
+      :ip_address_type,
+      :public_ip_status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3344,7 +3888,7 @@ module Aws::Route53GlobalResolver
     #
     # @!attribute [rw] access_sources
     #   An array containing information about the access sources, such as
-    #   the ID, CIDR etc.
+    #   the ID and CIDR.
     #   @return [Array<Types::AccessSourcesItem>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53globalresolver-2022-09-27/ListAccessSourcesOutput AWS API Documentation
@@ -3412,6 +3956,48 @@ module Aws::Route53GlobalResolver
     #   returned in a single response.
     #   @return [String]
     #
+    # @!attribute [rw] filters
+    #   Values to filter the results.
+    #   @return [Hash<String,Array<String>>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53globalresolver-2022-09-27/ListCoreNetworkEndpointsInput AWS API Documentation
+    #
+    class ListCoreNetworkEndpointsInput < Struct.new(
+      :max_results,
+      :next_token,
+      :filters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   A pagination token used for large sets of results that can't be
+    #   returned in a single response. Provide this token in the next call
+    #   to get the results not returned in this call.
+    #   @return [String]
+    #
+    # @!attribute [rw] core_network_endpoints
+    #   An array of information about the core network endpoints.
+    #   @return [Array<Types::CoreNetworkEndpointsItem>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53globalresolver-2022-09-27/ListCoreNetworkEndpointsOutput AWS API Documentation
+    #
+    class ListCoreNetworkEndpointsOutput < Struct.new(
+      :next_token,
+      :core_network_endpoints)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] max_results
+    #   The maximum number of results to retrieve in a single call.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   A pagination token used for large sets of results that can't be
+    #   returned in a single response.
+    #   @return [String]
+    #
     # @!attribute [rw] global_resolver_id
     #   The Global Resolver ID.
     #   @return [String]
@@ -3434,7 +4020,7 @@ module Aws::Route53GlobalResolver
     #
     # @!attribute [rw] dns_views
     #   An array of information about the DNS views, such as whether DNSSEC
-    #   is enabled, creation time, etc.
+    #   is enabled and the creation time.
     #   @return [Array<Types::DNSViewSummary>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53globalresolver-2022-09-27/ListDNSViewsOutput AWS API Documentation
@@ -4013,6 +4599,10 @@ module Aws::Route53GlobalResolver
     #   The CIDR block for the access source.
     #   @return [String]
     #
+    # @!attribute [rw] dns_view_id
+    #   The ID of the DNS view to associate with this access source.
+    #   @return [String]
+    #
     # @!attribute [rw] ip_address_type
     #   The IP address type for the access source.
     #   @return [String]
@@ -4030,6 +4620,7 @@ module Aws::Route53GlobalResolver
     class UpdateAccessSourceInput < Struct.new(
       :access_source_id,
       :cidr,
+      :dns_view_id,
       :ip_address_type,
       :name,
       :protocol)
@@ -4043,6 +4634,11 @@ module Aws::Route53GlobalResolver
     #
     # @!attribute [rw] cidr
     #   The CIDR block of the updated access source.
+    #   @return [String]
+    #
+    # @!attribute [rw] core_network_endpoint_id
+    #   The ID of the core network endpoint associated with this access
+    #   source.
     #   @return [String]
     #
     # @!attribute [rw] created_at
@@ -4069,6 +4665,10 @@ module Aws::Route53GlobalResolver
     #   The protocol of the updated access source.
     #   @return [String]
     #
+    # @!attribute [rw] segment
+    #   The name of the segment associated with this access source.
+    #   @return [String]
+    #
     # @!attribute [rw] status
     #   The current status of the updated access source.
     #   @return [String]
@@ -4082,12 +4682,14 @@ module Aws::Route53GlobalResolver
     class UpdateAccessSourceOutput < Struct.new(
       :arn,
       :cidr,
+      :core_network_endpoint_id,
       :created_at,
       :id,
       :ip_address_type,
       :name,
       :dns_view_id,
       :protocol,
+      :segment,
       :status,
       :updated_at)
       SENSITIVE = []
@@ -4124,6 +4726,94 @@ module Aws::Route53GlobalResolver
     class UpdateAccessTokenOutput < Struct.new(
       :id,
       :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] core_network_endpoint_id
+    #   The unique identifier of the core network endpoint to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the core network endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] update_ip_addresses
+    #   The IP address changes to apply to the core network endpoint. Use
+    #   this parameter to add or remove the IP addresses that the endpoint
+    #   uses to resolve DNS queries within the Amazon Web Services Cloud WAN
+    #   core network.
+    #   @return [Array<Types::UpdateIpAddressEntry>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53globalresolver-2022-09-27/UpdateCoreNetworkEndpointInput AWS API Documentation
+    #
+    class UpdateCoreNetworkEndpointInput < Struct.new(
+      :core_network_endpoint_id,
+      :name,
+      :update_ip_addresses)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the updated core network endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] available_regions
+    #   The Amazon Web Services Regions in which the updated core network
+    #   endpoint is available.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] core_network_arn
+    #   The Amazon Resource Name (ARN) of the Amazon Web Services Cloud WAN
+    #   core network connected to the updated endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The date and time when the core network endpoint was originally
+    #   created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] global_resolver_id
+    #   The ID of the Route 53 Global Resolver associated with the updated
+    #   core network endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The unique identifier of the updated core network endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] ip_addresses
+    #   The IP addresses that the updated core network endpoint uses to
+    #   resolve DNS queries within the Amazon Web Services Cloud WAN core
+    #   network.
+    #   @return [Array<Types::CoreNetworkEndpointDnsIpItem>]
+    #
+    # @!attribute [rw] name
+    #   The name of the updated core network endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the updated core network endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] updated_at
+    #   The date and time when the core network endpoint was last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53globalresolver-2022-09-27/UpdateCoreNetworkEndpointOutput AWS API Documentation
+    #
+    class UpdateCoreNetworkEndpointOutput < Struct.new(
+      :arn,
+      :available_regions,
+      :core_network_arn,
+      :created_at,
+      :global_resolver_id,
+      :id,
+      :ip_addresses,
+      :name,
+      :status,
+      :updated_at)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4494,6 +5184,23 @@ module Aws::Route53GlobalResolver
     #   or DUAL\_STACK for both IPv4 and IPv6 support.
     #   @return [String]
     #
+    # @!attribute [rw] public_ip_status
+    #   Specifies the public IP connectivity to configure for the Route 53
+    #   Global Resolver. Public IP addresses let DNS clients send queries to
+    #   the resolver over the internet. Valid values are the following:
+    #
+    #   * `ENABLED_RESERVED` - Public IP connectivity is enabled, and the
+    #     global anycast public IP addresses are reserved for the Route 53
+    #     Global Resolver.
+    #
+    #   * `DISABLED_RESERVED` - Public IP connectivity is disabled, and the
+    #     global anycast public IP addresses remain reserved for the Route
+    #     53 Global Resolver.
+    #
+    #   * `DISABLED_RELEASED` - Public IP connectivity is disabled, and the
+    #     global anycast public IP addresses are released.
+    #   @return [String]
+    #
     # @!attribute [rw] regions
     #   The list of Amazon Web Services Regions where the Global Resolver
     #   will operate. The resolver will be distributed across these Regions
@@ -4508,6 +5215,7 @@ module Aws::Route53GlobalResolver
       :observability_region,
       :description,
       :ip_address_type,
+      :public_ip_status,
       :regions)
       SENSITIVE = []
       include Aws::Structure
@@ -4577,6 +5285,23 @@ module Aws::Route53GlobalResolver
     #   The IP address type configured for the updated Global Resolver.
     #   @return [String]
     #
+    # @!attribute [rw] public_ip_status
+    #   The public IP connectivity configured for the Route 53 Global
+    #   Resolver. Public IP addresses let DNS clients send queries to the
+    #   resolver over the internet. Valid values are the following:
+    #
+    #   * `ENABLED_RESERVED` - Public IP connectivity is enabled, and the
+    #     global anycast public IP addresses are reserved for the Route 53
+    #     Global Resolver.
+    #
+    #   * `DISABLED_RESERVED` - Public IP connectivity is disabled, and the
+    #     global anycast public IP addresses remain reserved for the Route
+    #     53 Global Resolver.
+    #
+    #   * `DISABLED_RELEASED` - Public IP connectivity is disabled, and the
+    #     global anycast public IP addresses are released.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53globalresolver-2022-09-27/UpdateGlobalResolverOutput AWS API Documentation
     #
     class UpdateGlobalResolverOutput < Struct.new(
@@ -4593,7 +5318,8 @@ module Aws::Route53GlobalResolver
       :status,
       :ipv4_addresses,
       :ipv6_addresses,
-      :ip_address_type)
+      :ip_address_type,
+      :public_ip_status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4659,6 +5385,51 @@ module Aws::Route53GlobalResolver
       :created_at,
       :updated_at,
       :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A single change to apply to the DNS IP addresses of a core network
+    # endpoint when you update it. Each entry specifies the operation to
+    # perform and the IP address details that the operation acts on.
+    #
+    # @!attribute [rw] operation
+    #   The operation to perform on the IP address. Valid values are `ADD`,
+    #   `REMOVE`, and `UPDATE`.
+    #   @return [String]
+    #
+    # @!attribute [rw] ipv4_address
+    #   The IPv4 address that the operation acts on.
+    #   @return [String]
+    #
+    # @!attribute [rw] ipv6_address
+    #   The IPv6 address that the operation acts on.
+    #   @return [String]
+    #
+    # @!attribute [rw] dns_label
+    #   The DNS label associated with the IP address.
+    #   @return [String]
+    #
+    # @!attribute [rw] region_scope
+    #   Indicates whether the IP address applies to all Amazon Web Services
+    #   Regions or only to the specific Regions that you identify. When the
+    #   value is `REGIONAL`, the Regions are listed in the `regions` field.
+    #   @return [String]
+    #
+    # @!attribute [rw] regions
+    #   The Amazon Web Services Regions in which the IP address applies when
+    #   the region scope is `REGIONAL`.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53globalresolver-2022-09-27/UpdateIpAddressEntry AWS API Documentation
+    #
+    class UpdateIpAddressEntry < Struct.new(
+      :operation,
+      :ipv4_address,
+      :ipv6_address,
+      :dns_label,
+      :region_scope,
+      :regions)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -16,6 +16,13 @@ module Aws::QuickSight
 
     APIKey = Shapes::StringShape.new(name: 'APIKey')
     APIKeyConnectionMetadata = Shapes::StructureShape.new(name: 'APIKeyConnectionMetadata')
+    AccessControlApplication = Shapes::StructureShape.new(name: 'AccessControlApplication')
+    AccessControlApplicationAuthenticationType = Shapes::StringShape.new(name: 'AccessControlApplicationAuthenticationType')
+    AccessControlApplicationDescription = Shapes::StringShape.new(name: 'AccessControlApplicationDescription')
+    AccessControlApplicationSecretManagerArn = Shapes::StringShape.new(name: 'AccessControlApplicationSecretManagerArn')
+    AccessControlApplicationStatus = Shapes::StringShape.new(name: 'AccessControlApplicationStatus')
+    AccessControlApplicationSummary = Shapes::StructureShape.new(name: 'AccessControlApplicationSummary')
+    AccessControlApplicationSummaryList = Shapes::ListShape.new(name: 'AccessControlApplicationSummaryList')
     AccessControlConfiguration = Shapes::StructureShape.new(name: 'AccessControlConfiguration')
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
     AccountCustomization = Shapes::StructureShape.new(name: 'AccountCustomization')
@@ -288,6 +295,8 @@ module Aws::QuickSight
     AwsAccountId = Shapes::StringShape.new(name: 'AwsAccountId')
     AwsAndAccountId = Shapes::StringShape.new(name: 'AwsAndAccountId')
     AwsIotAnalyticsParameters = Shapes::StructureShape.new(name: 'AwsIotAnalyticsParameters')
+    AwsRegion = Shapes::StringShape.new(name: 'AwsRegion')
+    AwsRegionList = Shapes::ListShape.new(name: 'AwsRegionList')
     AxisBinding = Shapes::StringShape.new(name: 'AxisBinding')
     AxisDataOptions = Shapes::StructureShape.new(name: 'AxisDataOptions')
     AxisDisplayDataDrivenRange = Shapes::StructureShape.new(name: 'AxisDisplayDataDrivenRange')
@@ -323,6 +332,13 @@ module Aws::QuickSight
     BatchDeleteKnowledgeBaseResponse = Shapes::StructureShape.new(name: 'BatchDeleteKnowledgeBaseResponse')
     BatchDeleteKnowledgeBaseSuccess = Shapes::StructureShape.new(name: 'BatchDeleteKnowledgeBaseSuccess')
     BatchDeleteKnowledgeBaseSuccessList = Shapes::ListShape.new(name: 'BatchDeleteKnowledgeBaseSuccessList')
+    BatchDeletePolicyAssignmentByPolicyRequest = Shapes::StructureShape.new(name: 'BatchDeletePolicyAssignmentByPolicyRequest')
+    BatchDeletePolicyAssignmentByPolicyRequestPrincipalArnsList = Shapes::ListShape.new(name: 'BatchDeletePolicyAssignmentByPolicyRequestPrincipalArnsList')
+    BatchDeletePolicyAssignmentByPolicyResponse = Shapes::StructureShape.new(name: 'BatchDeletePolicyAssignmentByPolicyResponse')
+    BatchDeletePolicyAssignmentError = Shapes::StructureShape.new(name: 'BatchDeletePolicyAssignmentError')
+    BatchDeletePolicyAssignmentErrorList = Shapes::ListShape.new(name: 'BatchDeletePolicyAssignmentErrorList')
+    BatchDeletePolicyAssignmentSuccess = Shapes::StructureShape.new(name: 'BatchDeletePolicyAssignmentSuccess')
+    BatchDeletePolicyAssignmentSuccessList = Shapes::ListShape.new(name: 'BatchDeletePolicyAssignmentSuccessList')
     BatchDeleteTopicReviewedAnswerRequest = Shapes::StructureShape.new(name: 'BatchDeleteTopicReviewedAnswerRequest')
     BatchDeleteTopicReviewedAnswerResponse = Shapes::StructureShape.new(name: 'BatchDeleteTopicReviewedAnswerResponse')
     BatchDescribeUserLimitsError = Shapes::StructureShape.new(name: 'BatchDescribeUserLimitsError')
@@ -330,6 +346,13 @@ module Aws::QuickSight
     BatchDescribeUserLimitsRequest = Shapes::StructureShape.new(name: 'BatchDescribeUserLimitsRequest')
     BatchDescribeUserLimitsRequestUsersList = Shapes::ListShape.new(name: 'BatchDescribeUserLimitsRequestUsersList')
     BatchDescribeUserLimitsResponse = Shapes::StructureShape.new(name: 'BatchDescribeUserLimitsResponse')
+    BatchPutPolicyAssignmentByPolicyRequest = Shapes::StructureShape.new(name: 'BatchPutPolicyAssignmentByPolicyRequest')
+    BatchPutPolicyAssignmentByPolicyRequestAssignmentsList = Shapes::ListShape.new(name: 'BatchPutPolicyAssignmentByPolicyRequestAssignmentsList')
+    BatchPutPolicyAssignmentByPolicyResponse = Shapes::StructureShape.new(name: 'BatchPutPolicyAssignmentByPolicyResponse')
+    BatchPutPolicyAssignmentError = Shapes::StructureShape.new(name: 'BatchPutPolicyAssignmentError')
+    BatchPutPolicyAssignmentErrorList = Shapes::ListShape.new(name: 'BatchPutPolicyAssignmentErrorList')
+    BatchPutPolicyAssignmentSuccess = Shapes::StructureShape.new(name: 'BatchPutPolicyAssignmentSuccess')
+    BatchPutPolicyAssignmentSuccessList = Shapes::ListShape.new(name: 'BatchPutPolicyAssignmentSuccessList')
     BigQueryParameters = Shapes::StructureShape.new(name: 'BigQueryParameters')
     BinCountLimit = Shapes::IntegerShape.new(name: 'BinCountLimit')
     BinCountOptions = Shapes::StructureShape.new(name: 'BinCountOptions')
@@ -418,6 +441,9 @@ module Aws::QuickSight
     ClientEmail = Shapes::StringShape.new(name: 'ClientEmail')
     ClientId = Shapes::StringShape.new(name: 'ClientId')
     ClientSecret = Shapes::StringShape.new(name: 'ClientSecret')
+    ClientSecretConfiguration = Shapes::StructureShape.new(name: 'ClientSecretConfiguration')
+    ClientSecretConfigurationDetail = Shapes::UnionShape.new(name: 'ClientSecretConfigurationDetail')
+    ClientSecretSourceType = Shapes::StringShape.new(name: 'ClientSecretSourceType')
     ClusterId = Shapes::StringShape.new(name: 'ClusterId')
     ClusterMarker = Shapes::StructureShape.new(name: 'ClusterMarker')
     ClusterMarkerConfiguration = Shapes::StructureShape.new(name: 'ClusterMarkerConfiguration')
@@ -524,6 +550,10 @@ module Aws::QuickSight
     CoordinateLatitudeDouble = Shapes::FloatShape.new(name: 'CoordinateLatitudeDouble')
     CoordinateLongitudeDouble = Shapes::FloatShape.new(name: 'CoordinateLongitudeDouble')
     CopySourceArn = Shapes::StringShape.new(name: 'CopySourceArn')
+    CreateAccessControlApplicationRequest = Shapes::StructureShape.new(name: 'CreateAccessControlApplicationRequest')
+    CreateAccessControlApplicationResponse = Shapes::StructureShape.new(name: 'CreateAccessControlApplicationResponse')
+    CreateAccessControlApplicationSecretRequest = Shapes::StructureShape.new(name: 'CreateAccessControlApplicationSecretRequest')
+    CreateAccessControlApplicationSecretResponse = Shapes::StructureShape.new(name: 'CreateAccessControlApplicationSecretResponse')
     CreateAccountCustomizationRequest = Shapes::StructureShape.new(name: 'CreateAccountCustomizationRequest')
     CreateAccountCustomizationResponse = Shapes::StructureShape.new(name: 'CreateAccountCustomizationResponse')
     CreateAccountSubscriptionRequest = Shapes::StructureShape.new(name: 'CreateAccountSubscriptionRequest')
@@ -564,8 +594,12 @@ module Aws::QuickSight
     CreateGroupResponse = Shapes::StructureShape.new(name: 'CreateGroupResponse')
     CreateIAMPolicyAssignmentRequest = Shapes::StructureShape.new(name: 'CreateIAMPolicyAssignmentRequest')
     CreateIAMPolicyAssignmentResponse = Shapes::StructureShape.new(name: 'CreateIAMPolicyAssignmentResponse')
+    CreateInboundConnectorRequest = Shapes::StructureShape.new(name: 'CreateInboundConnectorRequest')
+    CreateInboundConnectorResponse = Shapes::StructureShape.new(name: 'CreateInboundConnectorResponse')
     CreateIngestionRequest = Shapes::StructureShape.new(name: 'CreateIngestionRequest')
     CreateIngestionResponse = Shapes::StructureShape.new(name: 'CreateIngestionResponse')
+    CreateKnowledgeBaseRefreshScheduleRequest = Shapes::StructureShape.new(name: 'CreateKnowledgeBaseRefreshScheduleRequest')
+    CreateKnowledgeBaseRefreshScheduleResponse = Shapes::StructureShape.new(name: 'CreateKnowledgeBaseRefreshScheduleResponse')
     CreateKnowledgeBaseRequest = Shapes::StructureShape.new(name: 'CreateKnowledgeBaseRequest')
     CreateKnowledgeBaseResponse = Shapes::StructureShape.new(name: 'CreateKnowledgeBaseResponse')
     CreateLimitsProfileRequest = Shapes::StructureShape.new(name: 'CreateLimitsProfileRequest')
@@ -833,6 +867,10 @@ module Aws::QuickSight
     DefaultSliderControlOptions = Shapes::StructureShape.new(name: 'DefaultSliderControlOptions')
     DefaultTextAreaControlOptions = Shapes::StructureShape.new(name: 'DefaultTextAreaControlOptions')
     DefaultTextFieldControlOptions = Shapes::StructureShape.new(name: 'DefaultTextFieldControlOptions')
+    DeleteAccessControlApplicationRequest = Shapes::StructureShape.new(name: 'DeleteAccessControlApplicationRequest')
+    DeleteAccessControlApplicationResponse = Shapes::StructureShape.new(name: 'DeleteAccessControlApplicationResponse')
+    DeleteAccessControlApplicationSecretRequest = Shapes::StructureShape.new(name: 'DeleteAccessControlApplicationSecretRequest')
+    DeleteAccessControlApplicationSecretResponse = Shapes::StructureShape.new(name: 'DeleteAccessControlApplicationSecretResponse')
     DeleteAccountCustomPermissionRequest = Shapes::StructureShape.new(name: 'DeleteAccountCustomPermissionRequest')
     DeleteAccountCustomPermissionResponse = Shapes::StructureShape.new(name: 'DeleteAccountCustomPermissionResponse')
     DeleteAccountCustomizationRequest = Shapes::StructureShape.new(name: 'DeleteAccountCustomizationRequest')
@@ -881,6 +919,10 @@ module Aws::QuickSight
     DeleteIAMPolicyAssignmentResponse = Shapes::StructureShape.new(name: 'DeleteIAMPolicyAssignmentResponse')
     DeleteIdentityPropagationConfigRequest = Shapes::StructureShape.new(name: 'DeleteIdentityPropagationConfigRequest')
     DeleteIdentityPropagationConfigResponse = Shapes::StructureShape.new(name: 'DeleteIdentityPropagationConfigResponse')
+    DeleteInboundConnectorRequest = Shapes::StructureShape.new(name: 'DeleteInboundConnectorRequest')
+    DeleteInboundConnectorResponse = Shapes::StructureShape.new(name: 'DeleteInboundConnectorResponse')
+    DeleteKnowledgeBaseRefreshScheduleRequest = Shapes::StructureShape.new(name: 'DeleteKnowledgeBaseRefreshScheduleRequest')
+    DeleteKnowledgeBaseRefreshScheduleResponse = Shapes::StructureShape.new(name: 'DeleteKnowledgeBaseRefreshScheduleResponse')
     DeleteKnowledgeBaseRequest = Shapes::StructureShape.new(name: 'DeleteKnowledgeBaseRequest')
     DeleteKnowledgeBaseResponse = Shapes::StructureShape.new(name: 'DeleteKnowledgeBaseResponse')
     DeleteLimitsProfileRequest = Shapes::StructureShape.new(name: 'DeleteLimitsProfileRequest')
@@ -889,6 +931,8 @@ module Aws::QuickSight
     DeleteNamespaceResponse = Shapes::StructureShape.new(name: 'DeleteNamespaceResponse')
     DeleteOAuthClientApplicationRequest = Shapes::StructureShape.new(name: 'DeleteOAuthClientApplicationRequest')
     DeleteOAuthClientApplicationResponse = Shapes::StructureShape.new(name: 'DeleteOAuthClientApplicationResponse')
+    DeletePolicyAssignmentRequest = Shapes::StructureShape.new(name: 'DeletePolicyAssignmentRequest')
+    DeletePolicyAssignmentResponse = Shapes::StructureShape.new(name: 'DeletePolicyAssignmentResponse')
     DeleteRefreshScheduleRequest = Shapes::StructureShape.new(name: 'DeleteRefreshScheduleRequest')
     DeleteRefreshScheduleResponse = Shapes::StructureShape.new(name: 'DeleteRefreshScheduleResponse')
     DeleteRoleCustomPermissionRequest = Shapes::StructureShape.new(name: 'DeleteRoleCustomPermissionRequest')
@@ -920,6 +964,8 @@ module Aws::QuickSight
     DeleteVPCConnectionRequest = Shapes::StructureShape.new(name: 'DeleteVPCConnectionRequest')
     DeleteVPCConnectionResponse = Shapes::StructureShape.new(name: 'DeleteVPCConnectionResponse')
     Delimiter = Shapes::StringShape.new(name: 'Delimiter')
+    DescribeAccessControlApplicationRequest = Shapes::StructureShape.new(name: 'DescribeAccessControlApplicationRequest')
+    DescribeAccessControlApplicationResponse = Shapes::StructureShape.new(name: 'DescribeAccessControlApplicationResponse')
     DescribeAccountCustomPermissionRequest = Shapes::StructureShape.new(name: 'DescribeAccountCustomPermissionRequest')
     DescribeAccountCustomPermissionResponse = Shapes::StructureShape.new(name: 'DescribeAccountCustomPermissionResponse')
     DescribeAccountCustomizationRequest = Shapes::StructureShape.new(name: 'DescribeAccountCustomizationRequest')
@@ -1002,6 +1048,8 @@ module Aws::QuickSight
     DescribeGroupResponse = Shapes::StructureShape.new(name: 'DescribeGroupResponse')
     DescribeIAMPolicyAssignmentRequest = Shapes::StructureShape.new(name: 'DescribeIAMPolicyAssignmentRequest')
     DescribeIAMPolicyAssignmentResponse = Shapes::StructureShape.new(name: 'DescribeIAMPolicyAssignmentResponse')
+    DescribeInboundConnectorRequest = Shapes::StructureShape.new(name: 'DescribeInboundConnectorRequest')
+    DescribeInboundConnectorResponse = Shapes::StructureShape.new(name: 'DescribeInboundConnectorResponse')
     DescribeIngestionRequest = Shapes::StructureShape.new(name: 'DescribeIngestionRequest')
     DescribeIngestionResponse = Shapes::StructureShape.new(name: 'DescribeIngestionResponse')
     DescribeIpRestrictionRequest = Shapes::StructureShape.new(name: 'DescribeIpRestrictionRequest')
@@ -1010,6 +1058,8 @@ module Aws::QuickSight
     DescribeKeyRegistrationResponse = Shapes::StructureShape.new(name: 'DescribeKeyRegistrationResponse')
     DescribeKnowledgeBasePermissionsRequest = Shapes::StructureShape.new(name: 'DescribeKnowledgeBasePermissionsRequest')
     DescribeKnowledgeBasePermissionsResponse = Shapes::StructureShape.new(name: 'DescribeKnowledgeBasePermissionsResponse')
+    DescribeKnowledgeBaseRefreshScheduleRequest = Shapes::StructureShape.new(name: 'DescribeKnowledgeBaseRefreshScheduleRequest')
+    DescribeKnowledgeBaseRefreshScheduleResponse = Shapes::StructureShape.new(name: 'DescribeKnowledgeBaseRefreshScheduleResponse')
     DescribeKnowledgeBaseRequest = Shapes::StructureShape.new(name: 'DescribeKnowledgeBaseRequest')
     DescribeKnowledgeBaseResponse = Shapes::StructureShape.new(name: 'DescribeKnowledgeBaseResponse')
     DescribeLimitsProfileRequest = Shapes::StructureShape.new(name: 'DescribeLimitsProfileRequest')
@@ -1024,6 +1074,8 @@ module Aws::QuickSight
     DescribeQuickSightQSearchConfigurationResponse = Shapes::StructureShape.new(name: 'DescribeQuickSightQSearchConfigurationResponse')
     DescribeRefreshScheduleRequest = Shapes::StructureShape.new(name: 'DescribeRefreshScheduleRequest')
     DescribeRefreshScheduleResponse = Shapes::StructureShape.new(name: 'DescribeRefreshScheduleResponse')
+    DescribeResourcePermissionsRequest = Shapes::StructureShape.new(name: 'DescribeResourcePermissionsRequest')
+    DescribeResourcePermissionsResponse = Shapes::StructureShape.new(name: 'DescribeResourcePermissionsResponse')
     DescribeRoleCustomPermissionRequest = Shapes::StructureShape.new(name: 'DescribeRoleCustomPermissionRequest')
     DescribeRoleCustomPermissionResponse = Shapes::StructureShape.new(name: 'DescribeRoleCustomPermissionResponse')
     DescribeSelfUpgradeConfigurationRequest = Shapes::StructureShape.new(name: 'DescribeSelfUpgradeConfigurationRequest')
@@ -1120,6 +1172,13 @@ module Aws::QuickSight
     ExportToCSVOption = Shapes::StructureShape.new(name: 'ExportToCSVOption')
     ExportWithHiddenFieldsOption = Shapes::StructureShape.new(name: 'ExportWithHiddenFieldsOption')
     Expression = Shapes::StringShape.new(name: 'Expression')
+    ExternalIdpConfidentialAuthCodeAuthorizingConfig = Shapes::StructureShape.new(name: 'ExternalIdpConfidentialAuthCodeAuthorizingConfig')
+    ExternalIdpConfidentialAuthCodeAuthorizingConfigInput = Shapes::StructureShape.new(name: 'ExternalIdpConfidentialAuthCodeAuthorizingConfigInput')
+    ExternalIdpConfidentialAuthCodeAuthorizingConfigSummary = Shapes::StructureShape.new(name: 'ExternalIdpConfidentialAuthCodeAuthorizingConfigSummary')
+    ExternalIdpConfidentialAuthCodeAuthorizingConfigUpdateInput = Shapes::StructureShape.new(name: 'ExternalIdpConfidentialAuthCodeAuthorizingConfigUpdateInput')
+    ExternalIdpConfidentialClientSecret = Shapes::StructureShape.new(name: 'ExternalIdpConfidentialClientSecret')
+    ExternalIdpConfidentialClientSecretList = Shapes::ListShape.new(name: 'ExternalIdpConfidentialClientSecretList')
+    ExternalIdpPublicAuthCodeAuthorizingConfig = Shapes::StructureShape.new(name: 'ExternalIdpPublicAuthCodeAuthorizingConfig')
     FMKBKnowledgeBaseArn = Shapes::StringShape.new(name: 'FMKBKnowledgeBaseArn')
     FMKBParameters = Shapes::StructureShape.new(name: 'FMKBParameters')
     FailedKeyRegistrationEntries = Shapes::ListShape.new(name: 'FailedKeyRegistrationEntries')
@@ -1128,6 +1187,7 @@ module Aws::QuickSight
     FailedSpaceResourceOperations = Shapes::ListShape.new(name: 'FailedSpaceResourceOperations')
     FailedToUpdateAssociation = Shapes::StructureShape.new(name: 'FailedToUpdateAssociation')
     FailedToUpdateAssociationList = Shapes::ListShape.new(name: 'FailedToUpdateAssociationList')
+    FederatedCatalog = Shapes::StringShape.new(name: 'FederatedCatalog')
     FieldBarSeriesItem = Shapes::StructureShape.new(name: 'FieldBarSeriesItem')
     FieldBasedTooltip = Shapes::StructureShape.new(name: 'FieldBasedTooltip')
     FieldComboSeriesItem = Shapes::StructureShape.new(name: 'FieldComboSeriesItem')
@@ -1331,6 +1391,9 @@ module Aws::QuickSight
     GetFlowPermissionsOutput = Shapes::StructureShape.new(name: 'GetFlowPermissionsOutput')
     GetIdentityContextRequest = Shapes::StructureShape.new(name: 'GetIdentityContextRequest')
     GetIdentityContextResponse = Shapes::StructureShape.new(name: 'GetIdentityContextResponse')
+    GetPolicyAssignmentRequest = Shapes::StructureShape.new(name: 'GetPolicyAssignmentRequest')
+    GetPolicyAssignmentResponse = Shapes::StructureShape.new(name: 'GetPolicyAssignmentResponse')
+    GetPolicyAssignmentResponsePolicyNameString = Shapes::StringShape.new(name: 'GetPolicyAssignmentResponsePolicyNameString')
     GetSessionEmbedUrlRequest = Shapes::StructureShape.new(name: 'GetSessionEmbedUrlRequest')
     GetSessionEmbedUrlResponse = Shapes::StructureShape.new(name: 'GetSessionEmbedUrlResponse')
     GlobalTableBorderOptions = Shapes::StructureShape.new(name: 'GlobalTableBorderOptions')
@@ -1412,6 +1475,8 @@ module Aws::QuickSight
     IPv4Address = Shapes::StringShape.new(name: 'IPv4Address')
     Icon = Shapes::StringShape.new(name: 'Icon')
     IconId = Shapes::StringShape.new(name: 'IconId')
+    IdcTrustedTokenIssuerArn = Shapes::StringShape.new(name: 'IdcTrustedTokenIssuerArn')
+    IdcTrustedTokenIssuerConfig = Shapes::StructureShape.new(name: 'IdcTrustedTokenIssuerConfig')
     Identifier = Shapes::StructureShape.new(name: 'Identifier')
     IdentityCenterConfiguration = Shapes::StructureShape.new(name: 'IdentityCenterConfiguration')
     IdentityMap = Shapes::MapShape.new(name: 'IdentityMap')
@@ -1421,6 +1486,16 @@ module Aws::QuickSight
     IdentityStore = Shapes::StringShape.new(name: 'IdentityStore')
     IdentityType = Shapes::StringShape.new(name: 'IdentityType')
     IdentityTypeNotSupportedException = Shapes::StructureShape.new(name: 'IdentityTypeNotSupportedException')
+    IdpAuthorizingConfig = Shapes::StructureShape.new(name: 'IdpAuthorizingConfig')
+    IdpAuthorizingConfigInput = Shapes::StructureShape.new(name: 'IdpAuthorizingConfigInput')
+    IdpAuthorizingConfigSummary = Shapes::StructureShape.new(name: 'IdpAuthorizingConfigSummary')
+    IdpAuthorizingConfigUpdateInput = Shapes::StructureShape.new(name: 'IdpAuthorizingConfigUpdateInput')
+    IdpAuthorizingConfigurationDetail = Shapes::UnionShape.new(name: 'IdpAuthorizingConfigurationDetail')
+    IdpAuthorizingConfigurationDetailInput = Shapes::UnionShape.new(name: 'IdpAuthorizingConfigurationDetailInput')
+    IdpAuthorizingConfigurationDetailUpdateInput = Shapes::UnionShape.new(name: 'IdpAuthorizingConfigurationDetailUpdateInput')
+    IdpAuthorizingConfigurationSummaryDetail = Shapes::UnionShape.new(name: 'IdpAuthorizingConfigurationSummaryDetail')
+    IdpAuthorizingType = Shapes::StringShape.new(name: 'IdpAuthorizingType')
+    IdpClientSecretInput = Shapes::StructureShape.new(name: 'IdpClientSecretInput')
     Image = Shapes::StructureShape.new(name: 'Image')
     ImageConfiguration = Shapes::StructureShape.new(name: 'ImageConfiguration')
     ImageCustomAction = Shapes::StructureShape.new(name: 'ImageCustomAction')
@@ -1440,6 +1515,17 @@ module Aws::QuickSight
     ImpalaParameters = Shapes::StructureShape.new(name: 'ImpalaParameters')
     ImportTableOperation = Shapes::StructureShape.new(name: 'ImportTableOperation')
     ImportTableOperationSource = Shapes::StructureShape.new(name: 'ImportTableOperationSource')
+    InboundConnector = Shapes::StructureShape.new(name: 'InboundConnector')
+    InboundConnectorApplicationAssociationSummary = Shapes::StructureShape.new(name: 'InboundConnectorApplicationAssociationSummary')
+    InboundConnectorApplicationAssociationSummaryList = Shapes::ListShape.new(name: 'InboundConnectorApplicationAssociationSummaryList')
+    InboundConnectorAssociationArnList = Shapes::ListShape.new(name: 'InboundConnectorAssociationArnList')
+    InboundConnectorConfig = Shapes::StructureShape.new(name: 'InboundConnectorConfig')
+    InboundConnectorDescription = Shapes::StringShape.new(name: 'InboundConnectorDescription')
+    InboundConnectorStatus = Shapes::StringShape.new(name: 'InboundConnectorStatus')
+    InboundConnectorSummary = Shapes::StructureShape.new(name: 'InboundConnectorSummary')
+    InboundConnectorSummaryList = Shapes::ListShape.new(name: 'InboundConnectorSummaryList')
+    InboundConnectorType = Shapes::StringShape.new(name: 'InboundConnectorType')
+    InboundConnectorTypeFilterList = Shapes::ListShape.new(name: 'InboundConnectorTypeFilterList')
     IncludeFolderMembers = Shapes::StringShape.new(name: 'IncludeFolderMembers')
     IncludeGeneratedAnswer = Shapes::StringShape.new(name: 'IncludeGeneratedAnswer')
     IncludeQuickSightQIndex = Shapes::StringShape.new(name: 'IncludeQuickSightQIndex')
@@ -1512,8 +1598,10 @@ module Aws::QuickSight
     KPIVisualStandardLayout = Shapes::StructureShape.new(name: 'KPIVisualStandardLayout')
     KPIVisualStandardLayoutType = Shapes::StringShape.new(name: 'KPIVisualStandardLayoutType')
     KbAwsAccountId = Shapes::StringShape.new(name: 'KbAwsAccountId')
+    KbDayOfWeek = Shapes::StringShape.new(name: 'KbDayOfWeek')
     KbIngestionId = Shapes::StringShape.new(name: 'KbIngestionId')
     KbIngestionStatus = Shapes::StringShape.new(name: 'KbIngestionStatus')
+    KbRefreshInterval = Shapes::StringShape.new(name: 'KbRefreshInterval')
     KbTemplate = Shapes::DocumentShape.new(name: 'KbTemplate', document: true)
     KbTemplateConfiguration = Shapes::StructureShape.new(name: 'KbTemplateConfiguration')
     KeyPairCredentials = Shapes::StructureShape.new(name: 'KeyPairCredentials')
@@ -1525,6 +1613,11 @@ module Aws::QuickSight
     KnowledgeBaseId = Shapes::StringShape.new(name: 'KnowledgeBaseId')
     KnowledgeBaseIngestionSummary = Shapes::StructureShape.new(name: 'KnowledgeBaseIngestionSummary')
     KnowledgeBaseName = Shapes::StringShape.new(name: 'KnowledgeBaseName')
+    KnowledgeBaseRefreshFrequency = Shapes::StructureShape.new(name: 'KnowledgeBaseRefreshFrequency')
+    KnowledgeBaseRefreshScheduleList = Shapes::ListShape.new(name: 'KnowledgeBaseRefreshScheduleList')
+    KnowledgeBaseRefreshScheduleSummary = Shapes::StructureShape.new(name: 'KnowledgeBaseRefreshScheduleSummary')
+    KnowledgeBaseScheduleRefreshOnEntity = Shapes::StructureShape.new(name: 'KnowledgeBaseScheduleRefreshOnEntity')
+    KnowledgeBaseScheduleRefreshOnEntityDayOfMonthString = Shapes::StringShape.new(name: 'KnowledgeBaseScheduleRefreshOnEntityDayOfMonthString')
     KnowledgeBaseSearchFilter = Shapes::StructureShape.new(name: 'KnowledgeBaseSearchFilter')
     KnowledgeBaseSearchFilterName = Shapes::StringShape.new(name: 'KnowledgeBaseSearchFilterName')
     KnowledgeBaseSearchFilters = Shapes::ListShape.new(name: 'KnowledgeBaseSearchFilters')
@@ -1579,6 +1672,9 @@ module Aws::QuickSight
     LinkSharingConfiguration = Shapes::StructureShape.new(name: 'LinkSharingConfiguration')
     LinkedDataSourceId = Shapes::StringShape.new(name: 'LinkedDataSourceId')
     LinkedDataSourceIds = Shapes::ListShape.new(name: 'LinkedDataSourceIds')
+    ListAccessControlApplicationsRequest = Shapes::StructureShape.new(name: 'ListAccessControlApplicationsRequest')
+    ListAccessControlApplicationsRequestMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListAccessControlApplicationsRequestMaxResultsInteger')
+    ListAccessControlApplicationsResponse = Shapes::StructureShape.new(name: 'ListAccessControlApplicationsResponse')
     ListActionConnectorsRequest = Shapes::StructureShape.new(name: 'ListActionConnectorsRequest')
     ListActionConnectorsResponse = Shapes::StructureShape.new(name: 'ListActionConnectorsResponse')
     ListAgentsRequest = Shapes::StructureShape.new(name: 'ListAgentsRequest')
@@ -1630,8 +1726,16 @@ module Aws::QuickSight
     ListIdentityPropagationConfigsRequest = Shapes::StructureShape.new(name: 'ListIdentityPropagationConfigsRequest')
     ListIdentityPropagationConfigsResponse = Shapes::StructureShape.new(name: 'ListIdentityPropagationConfigsResponse')
     ListIdentityPropagationMaxResults = Shapes::IntegerShape.new(name: 'ListIdentityPropagationMaxResults')
+    ListInboundConnectorApplicationAssociationsRequest = Shapes::StructureShape.new(name: 'ListInboundConnectorApplicationAssociationsRequest')
+    ListInboundConnectorApplicationAssociationsRequestMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListInboundConnectorApplicationAssociationsRequestMaxResultsInteger')
+    ListInboundConnectorApplicationAssociationsResponse = Shapes::StructureShape.new(name: 'ListInboundConnectorApplicationAssociationsResponse')
+    ListInboundConnectorsRequest = Shapes::StructureShape.new(name: 'ListInboundConnectorsRequest')
+    ListInboundConnectorsRequestMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListInboundConnectorsRequestMaxResultsInteger')
+    ListInboundConnectorsResponse = Shapes::StructureShape.new(name: 'ListInboundConnectorsResponse')
     ListIngestionsRequest = Shapes::StructureShape.new(name: 'ListIngestionsRequest')
     ListIngestionsResponse = Shapes::StructureShape.new(name: 'ListIngestionsResponse')
+    ListKnowledgeBaseRefreshSchedulesRequest = Shapes::StructureShape.new(name: 'ListKnowledgeBaseRefreshSchedulesRequest')
+    ListKnowledgeBaseRefreshSchedulesResponse = Shapes::StructureShape.new(name: 'ListKnowledgeBaseRefreshSchedulesResponse')
     ListKnowledgeBasesRequest = Shapes::StructureShape.new(name: 'ListKnowledgeBasesRequest')
     ListKnowledgeBasesResponse = Shapes::StructureShape.new(name: 'ListKnowledgeBasesResponse')
     ListLimitsProfilesRequest = Shapes::StructureShape.new(name: 'ListLimitsProfilesRequest')
@@ -1641,6 +1745,11 @@ module Aws::QuickSight
     ListNamespacesResponse = Shapes::StructureShape.new(name: 'ListNamespacesResponse')
     ListOAuthClientApplicationsRequest = Shapes::StructureShape.new(name: 'ListOAuthClientApplicationsRequest')
     ListOAuthClientApplicationsResponse = Shapes::StructureShape.new(name: 'ListOAuthClientApplicationsResponse')
+    ListPrincipalsForPolicyRequest = Shapes::StructureShape.new(name: 'ListPrincipalsForPolicyRequest')
+    ListPrincipalsForPolicyRequestMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListPrincipalsForPolicyRequestMaxResultsInteger')
+    ListPrincipalsForPolicyRequestNextTokenString = Shapes::StringShape.new(name: 'ListPrincipalsForPolicyRequestNextTokenString')
+    ListPrincipalsForPolicyResponse = Shapes::StructureShape.new(name: 'ListPrincipalsForPolicyResponse')
+    ListPrincipalsForPolicyResponseNextTokenString = Shapes::StringShape.new(name: 'ListPrincipalsForPolicyResponseNextTokenString')
     ListRefreshSchedulesRequest = Shapes::StructureShape.new(name: 'ListRefreshSchedulesRequest')
     ListRefreshSchedulesResponse = Shapes::StructureShape.new(name: 'ListRefreshSchedulesResponse')
     ListRoleMembershipsRequest = Shapes::StructureShape.new(name: 'ListRoleMembershipsRequest')
@@ -1781,6 +1890,7 @@ module Aws::QuickSight
     NumericalAggregationFunction = Shapes::StructureShape.new(name: 'NumericalAggregationFunction')
     NumericalDimensionField = Shapes::StructureShape.new(name: 'NumericalDimensionField')
     NumericalMeasureField = Shapes::StructureShape.new(name: 'NumericalMeasureField')
+    OAuthApplicationClientId = Shapes::StringShape.new(name: 'OAuthApplicationClientId')
     OAuthAuthorizationEndpointUrl = Shapes::StringShape.new(name: 'OAuthAuthorizationEndpointUrl')
     OAuthClientApplication = Shapes::StructureShape.new(name: 'OAuthClientApplication')
     OAuthClientApplicationId = Shapes::StringShape.new(name: 'OAuthClientApplicationId')
@@ -1915,9 +2025,13 @@ module Aws::QuickSight
     PluginVisualProperty = Shapes::StructureShape.new(name: 'PluginVisualProperty')
     PluginVisualSortConfiguration = Shapes::StructureShape.new(name: 'PluginVisualSortConfiguration')
     PluginVisualTableQuerySort = Shapes::StructureShape.new(name: 'PluginVisualTableQuerySort')
+    PolicyArn = Shapes::StringShape.new(name: 'PolicyArn')
     PolicyDescription = Shapes::StringShape.new(name: 'PolicyDescription')
     PolicyId = Shapes::StringShape.new(name: 'PolicyId')
     PolicyName = Shapes::StringShape.new(name: 'PolicyName')
+    PolicyPrincipal = Shapes::StructureShape.new(name: 'PolicyPrincipal')
+    PolicyPrincipalList = Shapes::ListShape.new(name: 'PolicyPrincipalList')
+    PolicyType = Shapes::StringShape.new(name: 'PolicyType')
     Port = Shapes::IntegerShape.new(name: 'Port')
     PositiveInteger = Shapes::IntegerShape.new(name: 'PositiveInteger')
     PositiveLong = Shapes::IntegerShape.new(name: 'PositiveLong')
@@ -1932,7 +2046,9 @@ module Aws::QuickSight
     PrestoParameters = Shapes::StructureShape.new(name: 'PrestoParameters')
     PrimaryValueDisplayType = Shapes::StringShape.new(name: 'PrimaryValueDisplayType')
     Principal = Shapes::StringShape.new(name: 'Principal')
+    PrincipalArn = Shapes::StringShape.new(name: 'PrincipalArn')
     PrincipalList = Shapes::ListShape.new(name: 'PrincipalList')
+    PrincipalType = Shapes::StringShape.new(name: 'PrincipalType')
     PrivateKey = Shapes::StringShape.new(name: 'PrivateKey')
     PrivateKeyPassphrase = Shapes::StringShape.new(name: 'PrivateKeyPassphrase')
     ProfileDescription = Shapes::StringShape.new(name: 'ProfileDescription')
@@ -1950,8 +2066,11 @@ module Aws::QuickSight
     PublicSpaceArn = Shapes::StringShape.new(name: 'PublicSpaceArn')
     PublicSpaceId = Shapes::StringShape.new(name: 'PublicSpaceId')
     PurchaseMode = Shapes::StringShape.new(name: 'PurchaseMode')
+    PutAssignmentEntry = Shapes::StructureShape.new(name: 'PutAssignmentEntry')
     PutDataSetRefreshPropertiesRequest = Shapes::StructureShape.new(name: 'PutDataSetRefreshPropertiesRequest')
     PutDataSetRefreshPropertiesResponse = Shapes::StructureShape.new(name: 'PutDataSetRefreshPropertiesResponse')
+    PutPolicyAssignmentRequest = Shapes::StructureShape.new(name: 'PutPolicyAssignmentRequest')
+    PutPolicyAssignmentResponse = Shapes::StructureShape.new(name: 'PutPolicyAssignmentResponse')
     QAQueryText = Shapes::StringShape.new(name: 'QAQueryText')
     QAResult = Shapes::StructureShape.new(name: 'QAResult')
     QAResultType = Shapes::StringShape.new(name: 'QAResultType')
@@ -1968,6 +2087,15 @@ module Aws::QuickSight
     QueryExecutionOptions = Shapes::StructureShape.new(name: 'QueryExecutionOptions')
     QuestionId = Shapes::StringShape.new(name: 'QuestionId')
     QueueInfo = Shapes::StructureShape.new(name: 'QueueInfo')
+    QuickAuthenticationConfig = Shapes::StructureShape.new(name: 'QuickAuthenticationConfig')
+    QuickAuthenticationConfigCreateOutput = Shapes::StructureShape.new(name: 'QuickAuthenticationConfigCreateOutput')
+    QuickAuthenticationConfigInput = Shapes::StructureShape.new(name: 'QuickAuthenticationConfigInput')
+    QuickAuthenticationConfigurationDetail = Shapes::UnionShape.new(name: 'QuickAuthenticationConfigurationDetail')
+    QuickAuthenticationConfigurationDetailCreateOutput = Shapes::UnionShape.new(name: 'QuickAuthenticationConfigurationDetailCreateOutput')
+    QuickAuthenticationConfigurationDetailInput = Shapes::UnionShape.new(name: 'QuickAuthenticationConfigurationDetailInput')
+    QuickAuthenticationType = Shapes::StringShape.new(name: 'QuickAuthenticationType')
+    QuickManagedAuthCodeQuickAuthenticationConfigInput = Shapes::StructureShape.new(name: 'QuickManagedAuthCodeQuickAuthenticationConfigInput')
+    QuickManagedPublicAuthCodeQuickAuthenticationConfig = Shapes::StructureShape.new(name: 'QuickManagedPublicAuthCodeQuickAuthenticationConfig')
     QuickSightUserNotFoundException = Shapes::StructureShape.new(name: 'QuickSightUserNotFoundException')
     QuickSuiteActionsOption = Shapes::StructureShape.new(name: 'QuickSuiteActionsOption')
     RadarChartAggregatedFieldWells = Shapes::StructureShape.new(name: 'RadarChartAggregatedFieldWells')
@@ -2000,6 +2128,7 @@ module Aws::QuickSight
     ReadNoneConnectionMetadata = Shapes::StructureShape.new(name: 'ReadNoneConnectionMetadata')
     RecentSnapshotsConfigurations = Shapes::StructureShape.new(name: 'RecentSnapshotsConfigurations')
     RecoveryWindowInDays = Shapes::IntegerShape.new(name: 'RecoveryWindowInDays')
+    RedirectUriList = Shapes::ListShape.new(name: 'RedirectUriList')
     RedshiftIAMParameters = Shapes::StructureShape.new(name: 'RedshiftIAMParameters')
     RedshiftParameters = Shapes::StructureShape.new(name: 'RedshiftParameters')
     ReferenceLine = Shapes::StructureShape.new(name: 'ReferenceLine')
@@ -2025,6 +2154,7 @@ module Aws::QuickSight
     RefreshSchedule = Shapes::StructureShape.new(name: 'RefreshSchedule')
     RefreshSchedules = Shapes::ListShape.new(name: 'RefreshSchedules')
     Region = Shapes::StringShape.new(name: 'Region')
+    RegionalSecretManagerArnMap = Shapes::MapShape.new(name: 'RegionalSecretManagerArnMap')
     RegisterUserRequest = Shapes::StructureShape.new(name: 'RegisterUserRequest')
     RegisterUserResponse = Shapes::StructureShape.new(name: 'RegisterUserResponse')
     RegisteredCustomerManagedKey = Shapes::StructureShape.new(name: 'RegisteredCustomerManagedKey')
@@ -2067,6 +2197,7 @@ module Aws::QuickSight
     RestoreAnalysisResponse = Shapes::StructureShape.new(name: 'RestoreAnalysisResponse')
     RestrictiveResourceId = Shapes::StringShape.new(name: 'RestrictiveResourceId')
     ReviewedAnswerErrorCode = Shapes::StringShape.new(name: 'ReviewedAnswerErrorCode')
+    Revision = Shapes::IntegerShape.new(name: 'Revision')
     Role = Shapes::StringShape.new(name: 'Role')
     RoleArn = Shapes::StringShape.new(name: 'RoleArn')
     RoleName = Shapes::StringShape.new(name: 'RoleName')
@@ -2109,7 +2240,9 @@ module Aws::QuickSight
     ScatterPlotSortConfiguration = Shapes::StructureShape.new(name: 'ScatterPlotSortConfiguration')
     ScatterPlotUnaggregatedFieldWells = Shapes::StructureShape.new(name: 'ScatterPlotUnaggregatedFieldWells')
     ScatterPlotVisual = Shapes::StructureShape.new(name: 'ScatterPlotVisual')
+    ScheduleId = Shapes::StringShape.new(name: 'ScheduleId')
     ScheduleRefreshOnEntity = Shapes::StructureShape.new(name: 'ScheduleRefreshOnEntity')
+    ScheduleState = Shapes::StringShape.new(name: 'ScheduleState')
     SchedulesConfigurations = Shapes::StructureShape.new(name: 'SchedulesConfigurations')
     ScrollBarOptions = Shapes::StructureShape.new(name: 'ScrollBarOptions')
     SearchActionConnectorsRequest = Shapes::StructureShape.new(name: 'SearchActionConnectorsRequest')
@@ -2199,6 +2332,7 @@ module Aws::QuickSight
     SeriesItemList = Shapes::ListShape.new(name: 'SeriesItemList')
     ServiceAccountCredentials = Shapes::StructureShape.new(name: 'ServiceAccountCredentials')
     ServiceNowParameters = Shapes::StructureShape.new(name: 'ServiceNowParameters')
+    ServiceRoleType = Shapes::StringShape.new(name: 'ServiceRoleType')
     ServiceType = Shapes::StringShape.new(name: 'ServiceType')
     SessionLifetimeInMinutes = Shapes::IntegerShape.new(name: 'SessionLifetimeInMinutes')
     SessionLifetimeInMinutesInvalidException = Shapes::StructureShape.new(name: 'SessionLifetimeInMinutesInvalidException')
@@ -2641,12 +2775,18 @@ module Aws::QuickSight
     UniqueKeyList = Shapes::ListShape.new(name: 'UniqueKeyList')
     UniqueValuesComputation = Shapes::StructureShape.new(name: 'UniqueValuesComputation')
     UnlimitedPixelLength = Shapes::StringShape.new(name: 'UnlimitedPixelLength')
+    UnmaterializedCalculatedColumn = Shapes::StructureShape.new(name: 'UnmaterializedCalculatedColumn')
+    UnmaterializedCalculatedColumnList = Shapes::ListShape.new(name: 'UnmaterializedCalculatedColumnList')
     UnpivotOperation = Shapes::StructureShape.new(name: 'UnpivotOperation')
     UnsupportedPricingPlanException = Shapes::StructureShape.new(name: 'UnsupportedPricingPlanException')
     UnsupportedUserEditionException = Shapes::StructureShape.new(name: 'UnsupportedUserEditionException')
     UntagColumnOperation = Shapes::StructureShape.new(name: 'UntagColumnOperation')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
+    UpdateAccessControlApplicationRequest = Shapes::StructureShape.new(name: 'UpdateAccessControlApplicationRequest')
+    UpdateAccessControlApplicationResponse = Shapes::StructureShape.new(name: 'UpdateAccessControlApplicationResponse')
+    UpdateAccessControlApplicationSecretRequest = Shapes::StructureShape.new(name: 'UpdateAccessControlApplicationSecretRequest')
+    UpdateAccessControlApplicationSecretResponse = Shapes::StructureShape.new(name: 'UpdateAccessControlApplicationSecretResponse')
     UpdateAccountCustomPermissionRequest = Shapes::StructureShape.new(name: 'UpdateAccountCustomPermissionRequest')
     UpdateAccountCustomPermissionResponse = Shapes::StructureShape.new(name: 'UpdateAccountCustomPermissionResponse')
     UpdateAccountCustomizationRequest = Shapes::StructureShape.new(name: 'UpdateAccountCustomizationRequest')
@@ -2724,12 +2864,18 @@ module Aws::QuickSight
     UpdateIAMPolicyAssignmentResponse = Shapes::StructureShape.new(name: 'UpdateIAMPolicyAssignmentResponse')
     UpdateIdentityPropagationConfigRequest = Shapes::StructureShape.new(name: 'UpdateIdentityPropagationConfigRequest')
     UpdateIdentityPropagationConfigResponse = Shapes::StructureShape.new(name: 'UpdateIdentityPropagationConfigResponse')
+    UpdateInboundConnectorApplicationAssociationsRequest = Shapes::StructureShape.new(name: 'UpdateInboundConnectorApplicationAssociationsRequest')
+    UpdateInboundConnectorApplicationAssociationsResponse = Shapes::StructureShape.new(name: 'UpdateInboundConnectorApplicationAssociationsResponse')
+    UpdateInboundConnectorRequest = Shapes::StructureShape.new(name: 'UpdateInboundConnectorRequest')
+    UpdateInboundConnectorResponse = Shapes::StructureShape.new(name: 'UpdateInboundConnectorResponse')
     UpdateIpRestrictionRequest = Shapes::StructureShape.new(name: 'UpdateIpRestrictionRequest')
     UpdateIpRestrictionResponse = Shapes::StructureShape.new(name: 'UpdateIpRestrictionResponse')
     UpdateKeyRegistrationRequest = Shapes::StructureShape.new(name: 'UpdateKeyRegistrationRequest')
     UpdateKeyRegistrationResponse = Shapes::StructureShape.new(name: 'UpdateKeyRegistrationResponse')
     UpdateKnowledgeBasePermissionsRequest = Shapes::StructureShape.new(name: 'UpdateKnowledgeBasePermissionsRequest')
     UpdateKnowledgeBasePermissionsResponse = Shapes::StructureShape.new(name: 'UpdateKnowledgeBasePermissionsResponse')
+    UpdateKnowledgeBaseRefreshScheduleRequest = Shapes::StructureShape.new(name: 'UpdateKnowledgeBaseRefreshScheduleRequest')
+    UpdateKnowledgeBaseRefreshScheduleResponse = Shapes::StructureShape.new(name: 'UpdateKnowledgeBaseRefreshScheduleResponse')
     UpdateKnowledgeBaseRequest = Shapes::StructureShape.new(name: 'UpdateKnowledgeBaseRequest')
     UpdateKnowledgeBaseResponse = Shapes::StructureShape.new(name: 'UpdateKnowledgeBaseResponse')
     UpdateLimitsProfileRequest = Shapes::StructureShape.new(name: 'UpdateLimitsProfileRequest')
@@ -2746,6 +2892,8 @@ module Aws::QuickSight
     UpdateRefreshScheduleRequest = Shapes::StructureShape.new(name: 'UpdateRefreshScheduleRequest')
     UpdateRefreshScheduleResponse = Shapes::StructureShape.new(name: 'UpdateRefreshScheduleResponse')
     UpdateResourcePermissionList = Shapes::ListShape.new(name: 'UpdateResourcePermissionList')
+    UpdateResourcePermissionsRequest = Shapes::StructureShape.new(name: 'UpdateResourcePermissionsRequest')
+    UpdateResourcePermissionsResponse = Shapes::StructureShape.new(name: 'UpdateResourcePermissionsResponse')
     UpdateRoleCustomPermissionRequest = Shapes::StructureShape.new(name: 'UpdateRoleCustomPermissionRequest')
     UpdateRoleCustomPermissionResponse = Shapes::StructureShape.new(name: 'UpdateRoleCustomPermissionResponse')
     UpdateSPICECapacityConfigurationRequest = Shapes::StructureShape.new(name: 'UpdateSPICECapacityConfigurationRequest')
@@ -2791,6 +2939,7 @@ module Aws::QuickSight
     UploadSettings = Shapes::StructureShape.new(name: 'UploadSettings')
     UploadedDocumentMetadata = Shapes::StructureShape.new(name: 'UploadedDocumentMetadata')
     UploadedDocumentName = Shapes::StringShape.new(name: 'UploadedDocumentName')
+    Uri = Shapes::StringShape.new(name: 'Uri')
     User = Shapes::StructureShape.new(name: 'User')
     UserIdentifier = Shapes::UnionShape.new(name: 'UserIdentifier')
     UserIndexCapacity = Shapes::StructureShape.new(name: 'UserIndexCapacity')
@@ -2813,6 +2962,9 @@ module Aws::QuickSight
     VPCConnectionResourceStatus = Shapes::StringShape.new(name: 'VPCConnectionResourceStatus')
     VPCConnectionSummary = Shapes::StructureShape.new(name: 'VPCConnectionSummary')
     VPCConnectionSummaryList = Shapes::ListShape.new(name: 'VPCConnectionSummaryList')
+    ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
+    ValidationExceptionField = Shapes::StructureShape.new(name: 'ValidationExceptionField')
+    ValidationExceptionFieldList = Shapes::ListShape.new(name: 'ValidationExceptionFieldList')
     ValidationStrategy = Shapes::StructureShape.new(name: 'ValidationStrategy')
     ValidationStrategyMode = Shapes::StringShape.new(name: 'ValidationStrategyMode')
     ValueColumnConfiguration = Shapes::StructureShape.new(name: 'ValueColumnConfiguration')
@@ -2904,6 +3056,37 @@ module Aws::QuickSight
     APIKeyConnectionMetadata.add_member(:api_key, Shapes::ShapeRef.new(shape: APIKey, required: true, location_name: "ApiKey"))
     APIKeyConnectionMetadata.add_member(:email, Shapes::ShapeRef.new(shape: Email, location_name: "Email"))
     APIKeyConnectionMetadata.struct_class = Types::APIKeyConnectionMetadata
+
+    AccessControlApplication.add_member(:application_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, required: true, location_name: "ApplicationId"))
+    AccessControlApplication.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "Arn"))
+    AccessControlApplication.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "Name"))
+    AccessControlApplication.add_member(:namespace, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Namespace"))
+    AccessControlApplication.add_member(:authentication_type, Shapes::ShapeRef.new(shape: AccessControlApplicationAuthenticationType, required: true, location_name: "AuthenticationType"))
+    AccessControlApplication.add_member(:status, Shapes::ShapeRef.new(shape: AccessControlApplicationStatus, required: true, location_name: "Status"))
+    AccessControlApplication.add_member(:created_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreatedTime"))
+    AccessControlApplication.add_member(:last_updated_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "LastUpdatedTime"))
+    AccessControlApplication.add_member(:tenant_url, Shapes::ShapeRef.new(shape: String, required: true, location_name: "TenantUrl"))
+    AccessControlApplication.add_member(:description, Shapes::ShapeRef.new(shape: AccessControlApplicationDescription, location_name: "Description"))
+    AccessControlApplication.add_member(:idc_application_arn, Shapes::ShapeRef.new(shape: String, location_name: "IdcApplicationArn"))
+    AccessControlApplication.add_member(:idp_authorizing_configuration, Shapes::ShapeRef.new(shape: IdpAuthorizingConfig, location_name: "IdpAuthorizingConfiguration"))
+    AccessControlApplication.add_member(:quick_authentication_configuration, Shapes::ShapeRef.new(shape: QuickAuthenticationConfig, location_name: "QuickAuthenticationConfiguration"))
+    AccessControlApplication.struct_class = Types::AccessControlApplication
+
+    AccessControlApplicationSummary.add_member(:application_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, required: true, location_name: "ApplicationId"))
+    AccessControlApplicationSummary.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "Arn"))
+    AccessControlApplicationSummary.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "Name"))
+    AccessControlApplicationSummary.add_member(:namespace, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Namespace"))
+    AccessControlApplicationSummary.add_member(:authentication_type, Shapes::ShapeRef.new(shape: AccessControlApplicationAuthenticationType, required: true, location_name: "AuthenticationType"))
+    AccessControlApplicationSummary.add_member(:status, Shapes::ShapeRef.new(shape: AccessControlApplicationStatus, required: true, location_name: "Status"))
+    AccessControlApplicationSummary.add_member(:created_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreatedTime"))
+    AccessControlApplicationSummary.add_member(:last_updated_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "LastUpdatedTime"))
+    AccessControlApplicationSummary.add_member(:tenant_url, Shapes::ShapeRef.new(shape: String, required: true, location_name: "TenantUrl"))
+    AccessControlApplicationSummary.add_member(:idp_authorizing_configuration, Shapes::ShapeRef.new(shape: IdpAuthorizingConfigSummary, location_name: "IdpAuthorizingConfiguration"))
+    AccessControlApplicationSummary.add_member(:quick_authentication_configuration, Shapes::ShapeRef.new(shape: QuickAuthenticationConfig, location_name: "QuickAuthenticationConfiguration"))
+    AccessControlApplicationSummary.add_member(:description, Shapes::ShapeRef.new(shape: AccessControlApplicationDescription, location_name: "Description"))
+    AccessControlApplicationSummary.struct_class = Types::AccessControlApplicationSummary
+
+    AccessControlApplicationSummaryList.member = Shapes::ShapeRef.new(shape: AccessControlApplicationSummary)
 
     AccessControlConfiguration.add_member(:is_acl_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "isACLEnabled", metadata: {"box" => true}))
     AccessControlConfiguration.struct_class = Types::AccessControlConfiguration
@@ -3706,6 +3889,8 @@ module Aws::QuickSight
     AwsIotAnalyticsParameters.add_member(:data_set_name, Shapes::ShapeRef.new(shape: DataSetName, required: true, location_name: "DataSetName"))
     AwsIotAnalyticsParameters.struct_class = Types::AwsIotAnalyticsParameters
 
+    AwsRegionList.member = Shapes::ShapeRef.new(shape: AwsRegion)
+
     AxisDataOptions.add_member(:numeric_axis_options, Shapes::ShapeRef.new(shape: NumericAxisOptions, location_name: "NumericAxisOptions"))
     AxisDataOptions.add_member(:date_axis_options, Shapes::ShapeRef.new(shape: DateAxisOptions, location_name: "DateAxisOptions"))
     AxisDataOptions.struct_class = Types::AxisDataOptions
@@ -3858,6 +4043,30 @@ module Aws::QuickSight
 
     BatchDeleteKnowledgeBaseSuccessList.member = Shapes::ShapeRef.new(shape: BatchDeleteKnowledgeBaseSuccess)
 
+    BatchDeletePolicyAssignmentByPolicyRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AccountId"))
+    BatchDeletePolicyAssignmentByPolicyRequest.add_member(:policy_arn, Shapes::ShapeRef.new(shape: PolicyArn, required: true, location_name: "PolicyArn"))
+    BatchDeletePolicyAssignmentByPolicyRequest.add_member(:principal_arns, Shapes::ShapeRef.new(shape: BatchDeletePolicyAssignmentByPolicyRequestPrincipalArnsList, required: true, location_name: "PrincipalArns"))
+    BatchDeletePolicyAssignmentByPolicyRequest.struct_class = Types::BatchDeletePolicyAssignmentByPolicyRequest
+
+    BatchDeletePolicyAssignmentByPolicyRequestPrincipalArnsList.member = Shapes::ShapeRef.new(shape: PrincipalArn)
+
+    BatchDeletePolicyAssignmentByPolicyResponse.add_member(:policy_arn, Shapes::ShapeRef.new(shape: PolicyArn, required: true, location_name: "PolicyArn"))
+    BatchDeletePolicyAssignmentByPolicyResponse.add_member(:success, Shapes::ShapeRef.new(shape: BatchDeletePolicyAssignmentSuccessList, required: true, location_name: "Success"))
+    BatchDeletePolicyAssignmentByPolicyResponse.add_member(:errors, Shapes::ShapeRef.new(shape: BatchDeletePolicyAssignmentErrorList, required: true, location_name: "Errors"))
+    BatchDeletePolicyAssignmentByPolicyResponse.struct_class = Types::BatchDeletePolicyAssignmentByPolicyResponse
+
+    BatchDeletePolicyAssignmentError.add_member(:principal_arn, Shapes::ShapeRef.new(shape: PrincipalArn, required: true, location_name: "PrincipalArn"))
+    BatchDeletePolicyAssignmentError.add_member(:error_code, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ErrorCode"))
+    BatchDeletePolicyAssignmentError.add_member(:error_message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ErrorMessage"))
+    BatchDeletePolicyAssignmentError.struct_class = Types::BatchDeletePolicyAssignmentError
+
+    BatchDeletePolicyAssignmentErrorList.member = Shapes::ShapeRef.new(shape: BatchDeletePolicyAssignmentError)
+
+    BatchDeletePolicyAssignmentSuccess.add_member(:principal_arn, Shapes::ShapeRef.new(shape: PrincipalArn, required: true, location_name: "PrincipalArn"))
+    BatchDeletePolicyAssignmentSuccess.struct_class = Types::BatchDeletePolicyAssignmentSuccess
+
+    BatchDeletePolicyAssignmentSuccessList.member = Shapes::ShapeRef.new(shape: BatchDeletePolicyAssignmentSuccess)
+
     BatchDeleteTopicReviewedAnswerRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
     BatchDeleteTopicReviewedAnswerRequest.add_member(:topic_id, Shapes::ShapeRef.new(shape: TopicId, required: true, location: "uri", location_name: "TopicId"))
     BatchDeleteTopicReviewedAnswerRequest.add_member(:answer_ids, Shapes::ShapeRef.new(shape: AnswerIds, location_name: "AnswerIds"))
@@ -3890,6 +4099,32 @@ module Aws::QuickSight
     BatchDescribeUserLimitsResponse.add_member(:user_limits, Shapes::ShapeRef.new(shape: UserLimitsList, required: true, location_name: "userLimits"))
     BatchDescribeUserLimitsResponse.add_member(:errors, Shapes::ShapeRef.new(shape: BatchDescribeUserLimitsErrorList, required: true, location_name: "errors"))
     BatchDescribeUserLimitsResponse.struct_class = Types::BatchDescribeUserLimitsResponse
+
+    BatchPutPolicyAssignmentByPolicyRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AccountId"))
+    BatchPutPolicyAssignmentByPolicyRequest.add_member(:policy_arn, Shapes::ShapeRef.new(shape: PolicyArn, required: true, location_name: "PolicyArn"))
+    BatchPutPolicyAssignmentByPolicyRequest.add_member(:assignments, Shapes::ShapeRef.new(shape: BatchPutPolicyAssignmentByPolicyRequestAssignmentsList, required: true, location_name: "Assignments"))
+    BatchPutPolicyAssignmentByPolicyRequest.struct_class = Types::BatchPutPolicyAssignmentByPolicyRequest
+
+    BatchPutPolicyAssignmentByPolicyRequestAssignmentsList.member = Shapes::ShapeRef.new(shape: PutAssignmentEntry)
+
+    BatchPutPolicyAssignmentByPolicyResponse.add_member(:policy_arn, Shapes::ShapeRef.new(shape: PolicyArn, required: true, location_name: "PolicyArn"))
+    BatchPutPolicyAssignmentByPolicyResponse.add_member(:success, Shapes::ShapeRef.new(shape: BatchPutPolicyAssignmentSuccessList, required: true, location_name: "Success"))
+    BatchPutPolicyAssignmentByPolicyResponse.add_member(:errors, Shapes::ShapeRef.new(shape: BatchPutPolicyAssignmentErrorList, required: true, location_name: "Errors"))
+    BatchPutPolicyAssignmentByPolicyResponse.struct_class = Types::BatchPutPolicyAssignmentByPolicyResponse
+
+    BatchPutPolicyAssignmentError.add_member(:principal_arn, Shapes::ShapeRef.new(shape: PrincipalArn, required: true, location_name: "PrincipalArn"))
+    BatchPutPolicyAssignmentError.add_member(:error_code, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ErrorCode"))
+    BatchPutPolicyAssignmentError.add_member(:error_message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ErrorMessage"))
+    BatchPutPolicyAssignmentError.struct_class = Types::BatchPutPolicyAssignmentError
+
+    BatchPutPolicyAssignmentErrorList.member = Shapes::ShapeRef.new(shape: BatchPutPolicyAssignmentError)
+
+    BatchPutPolicyAssignmentSuccess.add_member(:principal_arn, Shapes::ShapeRef.new(shape: PrincipalArn, required: true, location_name: "PrincipalArn"))
+    BatchPutPolicyAssignmentSuccess.add_member(:replaced_policy_arn, Shapes::ShapeRef.new(shape: PolicyArn, location_name: "ReplacedPolicyArn"))
+    BatchPutPolicyAssignmentSuccess.add_member(:revision, Shapes::ShapeRef.new(shape: Revision, required: true, location_name: "Revision"))
+    BatchPutPolicyAssignmentSuccess.struct_class = Types::BatchPutPolicyAssignmentSuccess
+
+    BatchPutPolicyAssignmentSuccessList.member = Shapes::ShapeRef.new(shape: BatchPutPolicyAssignmentSuccess)
 
     BigQueryParameters.add_member(:project_id, Shapes::ShapeRef.new(shape: ProjectId, required: true, location_name: "ProjectId"))
     BigQueryParameters.add_member(:data_set_region, Shapes::ShapeRef.new(shape: DataSetRegion, location_name: "DataSetRegion"))
@@ -4270,6 +4505,9 @@ module Aws::QuickSight
     Capabilities.add_member(:create_and_update_mcp_action, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "CreateAndUpdateMCPAction"))
     Capabilities.add_member(:share_mcp_action, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "ShareMCPAction"))
     Capabilities.add_member(:use_mcp_action, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "UseMCPAction"))
+    Capabilities.add_member(:local_mcp_action, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "LocalMCPAction"))
+    Capabilities.add_member(:create_and_update_local_mcp_action, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "CreateAndUpdateLocalMCPAction"))
+    Capabilities.add_member(:use_local_mcp_action, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "UseLocalMCPAction"))
     Capabilities.add_member(:open_api_action, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "OpenAPIAction"))
     Capabilities.add_member(:create_and_update_open_api_action, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "CreateAndUpdateOpenAPIAction"))
     Capabilities.add_member(:share_open_api_action, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "ShareOpenAPIAction"))
@@ -4737,6 +4975,16 @@ module Aws::QuickSight
     ClientCredentialsGrantMetadata.add_member(:client_credentials_details, Shapes::ShapeRef.new(shape: ClientCredentialsDetails, location_name: "ClientCredentialsDetails"))
     ClientCredentialsGrantMetadata.struct_class = Types::ClientCredentialsGrantMetadata
 
+    ClientSecretConfiguration.add_member(:client_secret_source_type, Shapes::ShapeRef.new(shape: ClientSecretSourceType, required: true, location_name: "ClientSecretSourceType"))
+    ClientSecretConfiguration.add_member(:client_secret_configuration_detail, Shapes::ShapeRef.new(shape: ClientSecretConfigurationDetail, location_name: "ClientSecretConfigurationDetail"))
+    ClientSecretConfiguration.struct_class = Types::ClientSecretConfiguration
+
+    ClientSecretConfigurationDetail.add_member(:idp, Shapes::ShapeRef.new(shape: IdpClientSecretInput, location_name: "Idp"))
+    ClientSecretConfigurationDetail.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    ClientSecretConfigurationDetail.add_member_subclass(:idp, Types::ClientSecretConfigurationDetail::Idp)
+    ClientSecretConfigurationDetail.add_member_subclass(:unknown, Types::ClientSecretConfigurationDetail::Unknown)
+    ClientSecretConfigurationDetail.struct_class = Types::ClientSecretConfigurationDetail
+
     ClusterMarker.add_member(:simple_cluster_marker, Shapes::ShapeRef.new(shape: SimpleClusterMarker, location_name: "SimpleClusterMarker"))
     ClusterMarker.struct_class = Types::ClusterMarker
 
@@ -5038,6 +5286,40 @@ module Aws::QuickSight
     Coordinate.add_member(:longitude, Shapes::ShapeRef.new(shape: CoordinateLongitudeDouble, required: true, location_name: "Longitude"))
     Coordinate.struct_class = Types::Coordinate
 
+    CreateAccessControlApplicationRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
+    CreateAccessControlApplicationRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, required: true, location_name: "ApplicationId"))
+    CreateAccessControlApplicationRequest.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "Name"))
+    CreateAccessControlApplicationRequest.add_member(:description, Shapes::ShapeRef.new(shape: AccessControlApplicationDescription, location_name: "Description"))
+    CreateAccessControlApplicationRequest.add_member(:namespace, Shapes::ShapeRef.new(shape: Namespace, required: true, location_name: "Namespace"))
+    CreateAccessControlApplicationRequest.add_member(:authentication_type, Shapes::ShapeRef.new(shape: AccessControlApplicationAuthenticationType, required: true, location_name: "AuthenticationType"))
+    CreateAccessControlApplicationRequest.add_member(:idp_authorizing_configuration, Shapes::ShapeRef.new(shape: IdpAuthorizingConfigInput, required: true, location_name: "IdpAuthorizingConfiguration"))
+    CreateAccessControlApplicationRequest.add_member(:quick_authentication_configuration, Shapes::ShapeRef.new(shape: QuickAuthenticationConfigInput, required: true, location_name: "QuickAuthenticationConfiguration"))
+    CreateAccessControlApplicationRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateAccessControlApplicationRequest.struct_class = Types::CreateAccessControlApplicationRequest
+
+    CreateAccessControlApplicationResponse.add_member(:status, Shapes::ShapeRef.new(shape: statusCode, required: true, location: "statusCode", location_name: "Status"))
+    CreateAccessControlApplicationResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "RequestId"))
+    CreateAccessControlApplicationResponse.add_member(:application_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ApplicationId"))
+    CreateAccessControlApplicationResponse.add_member(:arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Arn"))
+    CreateAccessControlApplicationResponse.add_member(:access_control_application_status, Shapes::ShapeRef.new(shape: AccessControlApplicationStatus, required: true, location_name: "AccessControlApplicationStatus"))
+    CreateAccessControlApplicationResponse.add_member(:created_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreatedTime"))
+    CreateAccessControlApplicationResponse.add_member(:tenant_url, Shapes::ShapeRef.new(shape: String, required: true, location_name: "TenantUrl"))
+    CreateAccessControlApplicationResponse.add_member(:idc_application_arn, Shapes::ShapeRef.new(shape: String, location_name: "IdcApplicationArn"))
+    CreateAccessControlApplicationResponse.add_member(:quick_authentication_configuration, Shapes::ShapeRef.new(shape: QuickAuthenticationConfigCreateOutput, location_name: "QuickAuthenticationConfiguration"))
+    CreateAccessControlApplicationResponse.struct_class = Types::CreateAccessControlApplicationResponse
+
+    CreateAccessControlApplicationSecretRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
+    CreateAccessControlApplicationSecretRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, required: true, location: "uri", location_name: "ApplicationId"))
+    CreateAccessControlApplicationSecretRequest.add_member(:description, Shapes::ShapeRef.new(shape: AccessControlApplicationDescription, location_name: "Description"))
+    CreateAccessControlApplicationSecretRequest.add_member(:client_secret_configuration, Shapes::ShapeRef.new(shape: ClientSecretConfiguration, required: true, location_name: "ClientSecretConfiguration"))
+    CreateAccessControlApplicationSecretRequest.struct_class = Types::CreateAccessControlApplicationSecretRequest
+
+    CreateAccessControlApplicationSecretResponse.add_member(:status, Shapes::ShapeRef.new(shape: statusCode, required: true, location: "statusCode", location_name: "Status"))
+    CreateAccessControlApplicationSecretResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "RequestId"))
+    CreateAccessControlApplicationSecretResponse.add_member(:client_secret_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, required: true, location_name: "ClientSecretId"))
+    CreateAccessControlApplicationSecretResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreatedAt"))
+    CreateAccessControlApplicationSecretResponse.struct_class = Types::CreateAccessControlApplicationSecretResponse
+
     CreateAccountCustomizationRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
     CreateAccountCustomizationRequest.add_member(:namespace, Shapes::ShapeRef.new(shape: Namespace, location: "querystring", location_name: "namespace"))
     CreateAccountCustomizationRequest.add_member(:account_customization, Shapes::ShapeRef.new(shape: AccountCustomization, required: true, location_name: "AccountCustomization"))
@@ -5225,6 +5507,7 @@ module Aws::QuickSight
     CreateDataSetRequest.add_member(:use_as, Shapes::ShapeRef.new(shape: DataSetUseAs, location_name: "UseAs"))
     CreateDataSetRequest.add_member(:data_prep_configuration, Shapes::ShapeRef.new(shape: DataPrepConfiguration, location_name: "DataPrepConfiguration"))
     CreateDataSetRequest.add_member(:semantic_model_configuration, Shapes::ShapeRef.new(shape: SemanticModelConfiguration, location_name: "SemanticModelConfiguration"))
+    CreateDataSetRequest.add_member(:unmaterialized_calculated_columns, Shapes::ShapeRef.new(shape: UnmaterializedCalculatedColumnList, location_name: "UnmaterializedCalculatedColumns"))
     CreateDataSetRequest.struct_class = Types::CreateDataSetRequest
 
     CreateDataSetResponse.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
@@ -5350,6 +5633,23 @@ module Aws::QuickSight
     CreateIAMPolicyAssignmentResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
     CreateIAMPolicyAssignmentResponse.struct_class = Types::CreateIAMPolicyAssignmentResponse
 
+    CreateInboundConnectorRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
+    CreateInboundConnectorRequest.add_member(:inbound_connector_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, required: true, location_name: "InboundConnectorId"))
+    CreateInboundConnectorRequest.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "Name"))
+    CreateInboundConnectorRequest.add_member(:description, Shapes::ShapeRef.new(shape: InboundConnectorDescription, location_name: "Description"))
+    CreateInboundConnectorRequest.add_member(:inbound_connector_configuration, Shapes::ShapeRef.new(shape: InboundConnectorConfig, required: true, location_name: "InboundConnectorConfiguration"))
+    CreateInboundConnectorRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateInboundConnectorRequest.struct_class = Types::CreateInboundConnectorRequest
+
+    CreateInboundConnectorResponse.add_member(:status, Shapes::ShapeRef.new(shape: statusCode, required: true, location: "statusCode", location_name: "Status"))
+    CreateInboundConnectorResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "RequestId"))
+    CreateInboundConnectorResponse.add_member(:inbound_connector_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "InboundConnectorId"))
+    CreateInboundConnectorResponse.add_member(:arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Arn"))
+    CreateInboundConnectorResponse.add_member(:tenant_url, Shapes::ShapeRef.new(shape: String, required: true, location_name: "TenantUrl"))
+    CreateInboundConnectorResponse.add_member(:inbound_connector_status, Shapes::ShapeRef.new(shape: InboundConnectorStatus, required: true, location_name: "InboundConnectorStatus"))
+    CreateInboundConnectorResponse.add_member(:created_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreatedTime"))
+    CreateInboundConnectorResponse.struct_class = Types::CreateInboundConnectorResponse
+
     CreateIngestionRequest.add_member(:data_set_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "DataSetId"))
     CreateIngestionRequest.add_member(:ingestion_id, Shapes::ShapeRef.new(shape: IngestionId, required: true, location: "uri", location_name: "IngestionId"))
     CreateIngestionRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
@@ -5362,6 +5662,20 @@ module Aws::QuickSight
     CreateIngestionResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
     CreateIngestionResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
     CreateIngestionResponse.struct_class = Types::CreateIngestionResponse
+
+    CreateKnowledgeBaseRefreshScheduleRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: KbAwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
+    CreateKnowledgeBaseRefreshScheduleRequest.add_member(:knowledge_base_id, Shapes::ShapeRef.new(shape: KnowledgeBaseId, required: true, location: "uri", location_name: "KnowledgeBaseId"))
+    CreateKnowledgeBaseRefreshScheduleRequest.add_member(:schedule_id, Shapes::ShapeRef.new(shape: ScheduleId, required: true, location_name: "ScheduleId"))
+    CreateKnowledgeBaseRefreshScheduleRequest.add_member(:schedule_frequency, Shapes::ShapeRef.new(shape: KnowledgeBaseRefreshFrequency, required: true, location_name: "ScheduleFrequency"))
+    CreateKnowledgeBaseRefreshScheduleRequest.add_member(:start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "StartTime"))
+    CreateKnowledgeBaseRefreshScheduleRequest.add_member(:state, Shapes::ShapeRef.new(shape: ScheduleState, location_name: "State"))
+    CreateKnowledgeBaseRefreshScheduleRequest.struct_class = Types::CreateKnowledgeBaseRefreshScheduleRequest
+
+    CreateKnowledgeBaseRefreshScheduleResponse.add_member(:schedule_id, Shapes::ShapeRef.new(shape: ScheduleId, required: true, location_name: "ScheduleId"))
+    CreateKnowledgeBaseRefreshScheduleResponse.add_member(:knowledge_base_arn, Shapes::ShapeRef.new(shape: KnowledgeBaseArn, required: true, location_name: "KnowledgeBaseArn"))
+    CreateKnowledgeBaseRefreshScheduleResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
+    CreateKnowledgeBaseRefreshScheduleResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status", metadata: {"box" => true}))
+    CreateKnowledgeBaseRefreshScheduleResponse.struct_class = Types::CreateKnowledgeBaseRefreshScheduleResponse
 
     CreateKnowledgeBaseRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: KbAwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
     CreateKnowledgeBaseRequest.add_member(:knowledge_base_id, Shapes::ShapeRef.new(shape: KnowledgeBaseId, required: true, location_name: "KnowledgeBaseId"))
@@ -5990,6 +6304,7 @@ module Aws::QuickSight
     DataSet.add_member(:use_as, Shapes::ShapeRef.new(shape: DataSetUseAs, location_name: "UseAs"))
     DataSet.add_member(:data_prep_configuration, Shapes::ShapeRef.new(shape: DataPrepConfiguration, location_name: "DataPrepConfiguration"))
     DataSet.add_member(:semantic_model_configuration, Shapes::ShapeRef.new(shape: SemanticModelConfiguration, location_name: "SemanticModelConfiguration"))
+    DataSet.add_member(:unmaterialized_calculated_columns, Shapes::ShapeRef.new(shape: UnmaterializedCalculatedColumnList, location_name: "UnmaterializedCalculatedColumns"))
     DataSet.struct_class = Types::DataSet
 
     DataSetArnsList.member = Shapes::ShapeRef.new(shape: Arn)
@@ -6456,6 +6771,25 @@ module Aws::QuickSight
     DefaultTextFieldControlOptions.add_member(:display_options, Shapes::ShapeRef.new(shape: TextFieldControlDisplayOptions, location_name: "DisplayOptions"))
     DefaultTextFieldControlOptions.struct_class = Types::DefaultTextFieldControlOptions
 
+    DeleteAccessControlApplicationRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
+    DeleteAccessControlApplicationRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, location: "querystring", location_name: "ApplicationId"))
+    DeleteAccessControlApplicationRequest.add_member(:idc_application_arn, Shapes::ShapeRef.new(shape: Arn, location: "querystring", location_name: "IdcApplicationArn"))
+    DeleteAccessControlApplicationRequest.struct_class = Types::DeleteAccessControlApplicationRequest
+
+    DeleteAccessControlApplicationResponse.add_member(:status, Shapes::ShapeRef.new(shape: statusCode, required: true, location: "statusCode", location_name: "Status"))
+    DeleteAccessControlApplicationResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "RequestId"))
+    DeleteAccessControlApplicationResponse.add_member(:application_id, Shapes::ShapeRef.new(shape: String, location_name: "ApplicationId"))
+    DeleteAccessControlApplicationResponse.struct_class = Types::DeleteAccessControlApplicationResponse
+
+    DeleteAccessControlApplicationSecretRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
+    DeleteAccessControlApplicationSecretRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, required: true, location: "uri", location_name: "ApplicationId"))
+    DeleteAccessControlApplicationSecretRequest.add_member(:client_secret_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, required: true, location: "uri", location_name: "ClientSecretId"))
+    DeleteAccessControlApplicationSecretRequest.struct_class = Types::DeleteAccessControlApplicationSecretRequest
+
+    DeleteAccessControlApplicationSecretResponse.add_member(:status, Shapes::ShapeRef.new(shape: statusCode, required: true, location: "statusCode", location_name: "Status"))
+    DeleteAccessControlApplicationSecretResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "RequestId"))
+    DeleteAccessControlApplicationSecretResponse.struct_class = Types::DeleteAccessControlApplicationSecretResponse
+
     DeleteAccountCustomPermissionRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
     DeleteAccountCustomPermissionRequest.struct_class = Types::DeleteAccountCustomPermissionRequest
 
@@ -6663,6 +6997,26 @@ module Aws::QuickSight
     DeleteIdentityPropagationConfigResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
     DeleteIdentityPropagationConfigResponse.struct_class = Types::DeleteIdentityPropagationConfigResponse
 
+    DeleteInboundConnectorRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
+    DeleteInboundConnectorRequest.add_member(:inbound_connector_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, required: true, location: "uri", location_name: "InboundConnectorId"))
+    DeleteInboundConnectorRequest.struct_class = Types::DeleteInboundConnectorRequest
+
+    DeleteInboundConnectorResponse.add_member(:status, Shapes::ShapeRef.new(shape: statusCode, required: true, location: "statusCode", location_name: "Status"))
+    DeleteInboundConnectorResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "RequestId"))
+    DeleteInboundConnectorResponse.add_member(:inbound_connector_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "InboundConnectorId"))
+    DeleteInboundConnectorResponse.struct_class = Types::DeleteInboundConnectorResponse
+
+    DeleteKnowledgeBaseRefreshScheduleRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: KbAwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
+    DeleteKnowledgeBaseRefreshScheduleRequest.add_member(:knowledge_base_id, Shapes::ShapeRef.new(shape: KnowledgeBaseId, required: true, location: "uri", location_name: "KnowledgeBaseId"))
+    DeleteKnowledgeBaseRefreshScheduleRequest.add_member(:schedule_id, Shapes::ShapeRef.new(shape: ScheduleId, required: true, location: "uri", location_name: "ScheduleId"))
+    DeleteKnowledgeBaseRefreshScheduleRequest.struct_class = Types::DeleteKnowledgeBaseRefreshScheduleRequest
+
+    DeleteKnowledgeBaseRefreshScheduleResponse.add_member(:schedule_id, Shapes::ShapeRef.new(shape: ScheduleId, required: true, location_name: "ScheduleId"))
+    DeleteKnowledgeBaseRefreshScheduleResponse.add_member(:knowledge_base_arn, Shapes::ShapeRef.new(shape: KnowledgeBaseArn, required: true, location_name: "KnowledgeBaseArn"))
+    DeleteKnowledgeBaseRefreshScheduleResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
+    DeleteKnowledgeBaseRefreshScheduleResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status", metadata: {"box" => true}))
+    DeleteKnowledgeBaseRefreshScheduleResponse.struct_class = Types::DeleteKnowledgeBaseRefreshScheduleResponse
+
     DeleteKnowledgeBaseRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: KbAwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
     DeleteKnowledgeBaseRequest.add_member(:knowledge_base_id, Shapes::ShapeRef.new(shape: KnowledgeBaseId, required: true, location: "uri", location_name: "KnowledgeBaseId"))
     DeleteKnowledgeBaseRequest.struct_class = Types::DeleteKnowledgeBaseRequest
@@ -6697,6 +7051,14 @@ module Aws::QuickSight
     DeleteOAuthClientApplicationResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
     DeleteOAuthClientApplicationResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
     DeleteOAuthClientApplicationResponse.struct_class = Types::DeleteOAuthClientApplicationResponse
+
+    DeletePolicyAssignmentRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AccountId"))
+    DeletePolicyAssignmentRequest.add_member(:policy_arn, Shapes::ShapeRef.new(shape: PolicyArn, required: true, location: "querystring", location_name: "PolicyArn"))
+    DeletePolicyAssignmentRequest.add_member(:principal_arn, Shapes::ShapeRef.new(shape: PrincipalArn, required: true, location: "querystring", location_name: "PrincipalArn"))
+    DeletePolicyAssignmentRequest.add_member(:revision, Shapes::ShapeRef.new(shape: Revision, location: "querystring", location_name: "Revision"))
+    DeletePolicyAssignmentRequest.struct_class = Types::DeletePolicyAssignmentRequest
+
+    DeletePolicyAssignmentResponse.struct_class = Types::DeletePolicyAssignmentResponse
 
     DeleteRefreshScheduleRequest.add_member(:data_set_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location: "uri", location_name: "DataSetId"))
     DeleteRefreshScheduleRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
@@ -6853,6 +7215,15 @@ module Aws::QuickSight
     DeleteVPCConnectionResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
     DeleteVPCConnectionResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
     DeleteVPCConnectionResponse.struct_class = Types::DeleteVPCConnectionResponse
+
+    DescribeAccessControlApplicationRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
+    DescribeAccessControlApplicationRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, required: true, location: "uri", location_name: "ApplicationId"))
+    DescribeAccessControlApplicationRequest.struct_class = Types::DescribeAccessControlApplicationRequest
+
+    DescribeAccessControlApplicationResponse.add_member(:status, Shapes::ShapeRef.new(shape: statusCode, required: true, location: "statusCode", location_name: "Status"))
+    DescribeAccessControlApplicationResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "RequestId"))
+    DescribeAccessControlApplicationResponse.add_member(:access_control_application, Shapes::ShapeRef.new(shape: AccessControlApplication, required: true, location_name: "AccessControlApplication"))
+    DescribeAccessControlApplicationResponse.struct_class = Types::DescribeAccessControlApplicationResponse
 
     DescribeAccountCustomPermissionRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
     DescribeAccountCustomPermissionRequest.struct_class = Types::DescribeAccountCustomPermissionRequest
@@ -7314,6 +7685,15 @@ module Aws::QuickSight
     DescribeIAMPolicyAssignmentResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
     DescribeIAMPolicyAssignmentResponse.struct_class = Types::DescribeIAMPolicyAssignmentResponse
 
+    DescribeInboundConnectorRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
+    DescribeInboundConnectorRequest.add_member(:inbound_connector_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, required: true, location: "uri", location_name: "InboundConnectorId"))
+    DescribeInboundConnectorRequest.struct_class = Types::DescribeInboundConnectorRequest
+
+    DescribeInboundConnectorResponse.add_member(:status, Shapes::ShapeRef.new(shape: statusCode, required: true, location: "statusCode", location_name: "Status"))
+    DescribeInboundConnectorResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "RequestId"))
+    DescribeInboundConnectorResponse.add_member(:inbound_connector, Shapes::ShapeRef.new(shape: InboundConnector, required: true, location_name: "InboundConnector"))
+    DescribeInboundConnectorResponse.struct_class = Types::DescribeInboundConnectorResponse
+
     DescribeIngestionRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
     DescribeIngestionRequest.add_member(:data_set_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "DataSetId"))
     DescribeIngestionRequest.add_member(:ingestion_id, Shapes::ShapeRef.new(shape: IngestionId, required: true, location: "uri", location_name: "IngestionId"))
@@ -7357,6 +7737,17 @@ module Aws::QuickSight
     DescribeKnowledgeBasePermissionsResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
     DescribeKnowledgeBasePermissionsResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status", metadata: {"box" => true}))
     DescribeKnowledgeBasePermissionsResponse.struct_class = Types::DescribeKnowledgeBasePermissionsResponse
+
+    DescribeKnowledgeBaseRefreshScheduleRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: KbAwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
+    DescribeKnowledgeBaseRefreshScheduleRequest.add_member(:knowledge_base_id, Shapes::ShapeRef.new(shape: KnowledgeBaseId, required: true, location: "uri", location_name: "KnowledgeBaseId"))
+    DescribeKnowledgeBaseRefreshScheduleRequest.add_member(:schedule_id, Shapes::ShapeRef.new(shape: ScheduleId, required: true, location: "uri", location_name: "ScheduleId"))
+    DescribeKnowledgeBaseRefreshScheduleRequest.struct_class = Types::DescribeKnowledgeBaseRefreshScheduleRequest
+
+    DescribeKnowledgeBaseRefreshScheduleResponse.add_member(:schedule, Shapes::ShapeRef.new(shape: KnowledgeBaseRefreshScheduleSummary, required: true, location_name: "Schedule"))
+    DescribeKnowledgeBaseRefreshScheduleResponse.add_member(:knowledge_base_arn, Shapes::ShapeRef.new(shape: KnowledgeBaseArn, required: true, location_name: "KnowledgeBaseArn"))
+    DescribeKnowledgeBaseRefreshScheduleResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
+    DescribeKnowledgeBaseRefreshScheduleResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status", metadata: {"box" => true}))
+    DescribeKnowledgeBaseRefreshScheduleResponse.struct_class = Types::DescribeKnowledgeBaseRefreshScheduleResponse
 
     DescribeKnowledgeBaseRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: KbAwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
     DescribeKnowledgeBaseRequest.add_member(:knowledge_base_id, Shapes::ShapeRef.new(shape: KnowledgeBaseId, required: true, location: "uri", location_name: "KnowledgeBaseId"))
@@ -7418,6 +7809,15 @@ module Aws::QuickSight
     DescribeRefreshScheduleResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
     DescribeRefreshScheduleResponse.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
     DescribeRefreshScheduleResponse.struct_class = Types::DescribeRefreshScheduleResponse
+
+    DescribeResourcePermissionsRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
+    DescribeResourcePermissionsRequest.struct_class = Types::DescribeResourcePermissionsRequest
+
+    DescribeResourcePermissionsResponse.add_member(:role_type, Shapes::ShapeRef.new(shape: ServiceRoleType, location_name: "RoleType"))
+    DescribeResourcePermissionsResponse.add_member(:customer_managed_role_arn, Shapes::ShapeRef.new(shape: String, location_name: "CustomerManagedRoleArn"))
+    DescribeResourcePermissionsResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
+    DescribeResourcePermissionsResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
+    DescribeResourcePermissionsResponse.struct_class = Types::DescribeResourcePermissionsResponse
 
     DescribeRoleCustomPermissionRequest.add_member(:role, Shapes::ShapeRef.new(shape: Role, required: true, location: "uri", location_name: "Role"))
     DescribeRoleCustomPermissionRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
@@ -7774,6 +8174,37 @@ module Aws::QuickSight
 
     ExportWithHiddenFieldsOption.add_member(:availability_status, Shapes::ShapeRef.new(shape: DashboardBehavior, location_name: "AvailabilityStatus"))
     ExportWithHiddenFieldsOption.struct_class = Types::ExportWithHiddenFieldsOption
+
+    ExternalIdpConfidentialAuthCodeAuthorizingConfig.add_member(:client_id, Shapes::ShapeRef.new(shape: OAuthApplicationClientId, required: true, location_name: "ClientId"))
+    ExternalIdpConfidentialAuthCodeAuthorizingConfig.add_member(:issuer_url, Shapes::ShapeRef.new(shape: Uri, required: true, location_name: "IssuerUrl"))
+    ExternalIdpConfidentialAuthCodeAuthorizingConfig.add_member(:client_secrets, Shapes::ShapeRef.new(shape: ExternalIdpConfidentialClientSecretList, location_name: "ClientSecrets"))
+    ExternalIdpConfidentialAuthCodeAuthorizingConfig.struct_class = Types::ExternalIdpConfidentialAuthCodeAuthorizingConfig
+
+    ExternalIdpConfidentialAuthCodeAuthorizingConfigInput.add_member(:client_id, Shapes::ShapeRef.new(shape: OAuthApplicationClientId, required: true, location_name: "ClientId"))
+    ExternalIdpConfidentialAuthCodeAuthorizingConfigInput.add_member(:issuer_url, Shapes::ShapeRef.new(shape: Uri, required: true, location_name: "IssuerUrl"))
+    ExternalIdpConfidentialAuthCodeAuthorizingConfigInput.add_member(:client_secret, Shapes::ShapeRef.new(shape: IdpClientSecretInput, required: true, location_name: "ClientSecret"))
+    ExternalIdpConfidentialAuthCodeAuthorizingConfigInput.struct_class = Types::ExternalIdpConfidentialAuthCodeAuthorizingConfigInput
+
+    ExternalIdpConfidentialAuthCodeAuthorizingConfigSummary.add_member(:client_id, Shapes::ShapeRef.new(shape: OAuthApplicationClientId, required: true, location_name: "ClientId"))
+    ExternalIdpConfidentialAuthCodeAuthorizingConfigSummary.add_member(:issuer_url, Shapes::ShapeRef.new(shape: Uri, required: true, location_name: "IssuerUrl"))
+    ExternalIdpConfidentialAuthCodeAuthorizingConfigSummary.struct_class = Types::ExternalIdpConfidentialAuthCodeAuthorizingConfigSummary
+
+    ExternalIdpConfidentialAuthCodeAuthorizingConfigUpdateInput.add_member(:client_id, Shapes::ShapeRef.new(shape: OAuthApplicationClientId, required: true, location_name: "ClientId"))
+    ExternalIdpConfidentialAuthCodeAuthorizingConfigUpdateInput.add_member(:issuer_url, Shapes::ShapeRef.new(shape: Uri, required: true, location_name: "IssuerUrl"))
+    ExternalIdpConfidentialAuthCodeAuthorizingConfigUpdateInput.struct_class = Types::ExternalIdpConfidentialAuthCodeAuthorizingConfigUpdateInput
+
+    ExternalIdpConfidentialClientSecret.add_member(:client_secret_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, required: true, location_name: "ClientSecretId"))
+    ExternalIdpConfidentialClientSecret.add_member(:regional_secret_manager_arns, Shapes::ShapeRef.new(shape: RegionalSecretManagerArnMap, location_name: "RegionalSecretManagerArns"))
+    ExternalIdpConfidentialClientSecret.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreatedAt"))
+    ExternalIdpConfidentialClientSecret.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "UpdatedAt"))
+    ExternalIdpConfidentialClientSecret.add_member(:description, Shapes::ShapeRef.new(shape: AccessControlApplicationDescription, location_name: "Description"))
+    ExternalIdpConfidentialClientSecret.struct_class = Types::ExternalIdpConfidentialClientSecret
+
+    ExternalIdpConfidentialClientSecretList.member = Shapes::ShapeRef.new(shape: ExternalIdpConfidentialClientSecret)
+
+    ExternalIdpPublicAuthCodeAuthorizingConfig.add_member(:client_id, Shapes::ShapeRef.new(shape: OAuthApplicationClientId, required: true, location_name: "ClientId"))
+    ExternalIdpPublicAuthCodeAuthorizingConfig.add_member(:issuer_url, Shapes::ShapeRef.new(shape: Uri, required: true, location_name: "IssuerUrl"))
+    ExternalIdpPublicAuthCodeAuthorizingConfig.struct_class = Types::ExternalIdpPublicAuthCodeAuthorizingConfig
 
     FMKBParameters.add_member(:knowledge_base_arn, Shapes::ShapeRef.new(shape: FMKBKnowledgeBaseArn, required: true, location_name: "KnowledgeBaseArn"))
     FMKBParameters.add_member(:linked_data_source_ids, Shapes::ShapeRef.new(shape: LinkedDataSourceIds, location_name: "LinkedDataSourceIds"))
@@ -8625,6 +9056,17 @@ module Aws::QuickSight
     GetIdentityContextResponse.add_member(:context, Shapes::ShapeRef.new(shape: String, location_name: "Context"))
     GetIdentityContextResponse.struct_class = Types::GetIdentityContextResponse
 
+    GetPolicyAssignmentRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AccountId"))
+    GetPolicyAssignmentRequest.add_member(:policy_type, Shapes::ShapeRef.new(shape: PolicyType, required: true, location: "querystring", location_name: "PolicyType"))
+    GetPolicyAssignmentRequest.add_member(:principal_arn, Shapes::ShapeRef.new(shape: PrincipalArn, required: true, location: "querystring", location_name: "PrincipalArn"))
+    GetPolicyAssignmentRequest.struct_class = Types::GetPolicyAssignmentRequest
+
+    GetPolicyAssignmentResponse.add_member(:policy_arn, Shapes::ShapeRef.new(shape: PolicyArn, location_name: "PolicyArn"))
+    GetPolicyAssignmentResponse.add_member(:policy_name, Shapes::ShapeRef.new(shape: GetPolicyAssignmentResponsePolicyNameString, location_name: "PolicyName"))
+    GetPolicyAssignmentResponse.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "UpdatedAt"))
+    GetPolicyAssignmentResponse.add_member(:revision, Shapes::ShapeRef.new(shape: Revision, location_name: "Revision"))
+    GetPolicyAssignmentResponse.struct_class = Types::GetPolicyAssignmentResponse
+
     GetSessionEmbedUrlRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
     GetSessionEmbedUrlRequest.add_member(:entry_point, Shapes::ShapeRef.new(shape: EntryPoint, location: "querystring", location_name: "entry-point"))
     GetSessionEmbedUrlRequest.add_member(:session_lifetime_in_minutes, Shapes::ShapeRef.new(shape: SessionLifetimeInMinutes, location: "querystring", location_name: "session-lifetime"))
@@ -8884,6 +9326,9 @@ module Aws::QuickSight
 
     IAMPolicyAssignmentSummaryList.member = Shapes::ShapeRef.new(shape: IAMPolicyAssignmentSummary)
 
+    IdcTrustedTokenIssuerConfig.add_member(:idc_trusted_token_issuer_arn, Shapes::ShapeRef.new(shape: IdcTrustedTokenIssuerArn, required: true, location_name: "IdcTrustedTokenIssuerArn"))
+    IdcTrustedTokenIssuerConfig.struct_class = Types::IdcTrustedTokenIssuerConfig
+
     Identifier.add_member(:identity, Shapes::ShapeRef.new(shape: LimitedString, required: true, location_name: "Identity"))
     Identifier.struct_class = Types::Identifier
 
@@ -8898,6 +9343,61 @@ module Aws::QuickSight
     IdentityTypeNotSupportedException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     IdentityTypeNotSupportedException.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
     IdentityTypeNotSupportedException.struct_class = Types::IdentityTypeNotSupportedException
+
+    IdpAuthorizingConfig.add_member(:idp_authorizing_type, Shapes::ShapeRef.new(shape: IdpAuthorizingType, required: true, location_name: "IdpAuthorizingType"))
+    IdpAuthorizingConfig.add_member(:idp_authorizing_configuration_detail, Shapes::ShapeRef.new(shape: IdpAuthorizingConfigurationDetail, location_name: "IdpAuthorizingConfigurationDetail"))
+    IdpAuthorizingConfig.add_member(:idc_trusted_token_issuer_configuration, Shapes::ShapeRef.new(shape: IdcTrustedTokenIssuerConfig, location_name: "IdcTrustedTokenIssuerConfiguration"))
+    IdpAuthorizingConfig.struct_class = Types::IdpAuthorizingConfig
+
+    IdpAuthorizingConfigInput.add_member(:idp_authorizing_type, Shapes::ShapeRef.new(shape: IdpAuthorizingType, required: true, location_name: "IdpAuthorizingType"))
+    IdpAuthorizingConfigInput.add_member(:idp_authorizing_configuration_detail_input, Shapes::ShapeRef.new(shape: IdpAuthorizingConfigurationDetailInput, location_name: "IdpAuthorizingConfigurationDetailInput"))
+    IdpAuthorizingConfigInput.add_member(:idc_trusted_token_issuer_configuration, Shapes::ShapeRef.new(shape: IdcTrustedTokenIssuerConfig, location_name: "IdcTrustedTokenIssuerConfiguration"))
+    IdpAuthorizingConfigInput.struct_class = Types::IdpAuthorizingConfigInput
+
+    IdpAuthorizingConfigSummary.add_member(:idp_authorizing_type, Shapes::ShapeRef.new(shape: IdpAuthorizingType, required: true, location_name: "IdpAuthorizingType"))
+    IdpAuthorizingConfigSummary.add_member(:idp_authorizing_configuration_summary_detail, Shapes::ShapeRef.new(shape: IdpAuthorizingConfigurationSummaryDetail, location_name: "IdpAuthorizingConfigurationSummaryDetail"))
+    IdpAuthorizingConfigSummary.add_member(:idc_trusted_token_issuer_configuration, Shapes::ShapeRef.new(shape: IdcTrustedTokenIssuerConfig, location_name: "IdcTrustedTokenIssuerConfiguration"))
+    IdpAuthorizingConfigSummary.struct_class = Types::IdpAuthorizingConfigSummary
+
+    IdpAuthorizingConfigUpdateInput.add_member(:idp_authorizing_type, Shapes::ShapeRef.new(shape: IdpAuthorizingType, required: true, location_name: "IdpAuthorizingType"))
+    IdpAuthorizingConfigUpdateInput.add_member(:idp_authorizing_configuration_detail_input, Shapes::ShapeRef.new(shape: IdpAuthorizingConfigurationDetailUpdateInput, location_name: "IdpAuthorizingConfigurationDetailInput"))
+    IdpAuthorizingConfigUpdateInput.add_member(:idc_trusted_token_issuer_configuration, Shapes::ShapeRef.new(shape: IdcTrustedTokenIssuerConfig, location_name: "IdcTrustedTokenIssuerConfiguration"))
+    IdpAuthorizingConfigUpdateInput.struct_class = Types::IdpAuthorizingConfigUpdateInput
+
+    IdpAuthorizingConfigurationDetail.add_member(:external_idp_public_auth_code, Shapes::ShapeRef.new(shape: ExternalIdpPublicAuthCodeAuthorizingConfig, location_name: "ExternalIdpPublicAuthCode"))
+    IdpAuthorizingConfigurationDetail.add_member(:external_idp_confidential_auth_code, Shapes::ShapeRef.new(shape: ExternalIdpConfidentialAuthCodeAuthorizingConfig, location_name: "ExternalIdpConfidentialAuthCode"))
+    IdpAuthorizingConfigurationDetail.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    IdpAuthorizingConfigurationDetail.add_member_subclass(:external_idp_public_auth_code, Types::IdpAuthorizingConfigurationDetail::ExternalIdpPublicAuthCode)
+    IdpAuthorizingConfigurationDetail.add_member_subclass(:external_idp_confidential_auth_code, Types::IdpAuthorizingConfigurationDetail::ExternalIdpConfidentialAuthCode)
+    IdpAuthorizingConfigurationDetail.add_member_subclass(:unknown, Types::IdpAuthorizingConfigurationDetail::Unknown)
+    IdpAuthorizingConfigurationDetail.struct_class = Types::IdpAuthorizingConfigurationDetail
+
+    IdpAuthorizingConfigurationDetailInput.add_member(:external_idp_public_auth_code, Shapes::ShapeRef.new(shape: ExternalIdpPublicAuthCodeAuthorizingConfig, location_name: "ExternalIdpPublicAuthCode"))
+    IdpAuthorizingConfigurationDetailInput.add_member(:external_idp_confidential_auth_code, Shapes::ShapeRef.new(shape: ExternalIdpConfidentialAuthCodeAuthorizingConfigInput, location_name: "ExternalIdpConfidentialAuthCode"))
+    IdpAuthorizingConfigurationDetailInput.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    IdpAuthorizingConfigurationDetailInput.add_member_subclass(:external_idp_public_auth_code, Types::IdpAuthorizingConfigurationDetailInput::ExternalIdpPublicAuthCode)
+    IdpAuthorizingConfigurationDetailInput.add_member_subclass(:external_idp_confidential_auth_code, Types::IdpAuthorizingConfigurationDetailInput::ExternalIdpConfidentialAuthCode)
+    IdpAuthorizingConfigurationDetailInput.add_member_subclass(:unknown, Types::IdpAuthorizingConfigurationDetailInput::Unknown)
+    IdpAuthorizingConfigurationDetailInput.struct_class = Types::IdpAuthorizingConfigurationDetailInput
+
+    IdpAuthorizingConfigurationDetailUpdateInput.add_member(:external_idp_public_auth_code, Shapes::ShapeRef.new(shape: ExternalIdpPublicAuthCodeAuthorizingConfig, location_name: "ExternalIdpPublicAuthCode"))
+    IdpAuthorizingConfigurationDetailUpdateInput.add_member(:external_idp_confidential_auth_code, Shapes::ShapeRef.new(shape: ExternalIdpConfidentialAuthCodeAuthorizingConfigUpdateInput, location_name: "ExternalIdpConfidentialAuthCode"))
+    IdpAuthorizingConfigurationDetailUpdateInput.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    IdpAuthorizingConfigurationDetailUpdateInput.add_member_subclass(:external_idp_public_auth_code, Types::IdpAuthorizingConfigurationDetailUpdateInput::ExternalIdpPublicAuthCode)
+    IdpAuthorizingConfigurationDetailUpdateInput.add_member_subclass(:external_idp_confidential_auth_code, Types::IdpAuthorizingConfigurationDetailUpdateInput::ExternalIdpConfidentialAuthCode)
+    IdpAuthorizingConfigurationDetailUpdateInput.add_member_subclass(:unknown, Types::IdpAuthorizingConfigurationDetailUpdateInput::Unknown)
+    IdpAuthorizingConfigurationDetailUpdateInput.struct_class = Types::IdpAuthorizingConfigurationDetailUpdateInput
+
+    IdpAuthorizingConfigurationSummaryDetail.add_member(:external_idp_public_auth_code, Shapes::ShapeRef.new(shape: ExternalIdpPublicAuthCodeAuthorizingConfig, location_name: "ExternalIdpPublicAuthCode"))
+    IdpAuthorizingConfigurationSummaryDetail.add_member(:external_idp_confidential_auth_code, Shapes::ShapeRef.new(shape: ExternalIdpConfidentialAuthCodeAuthorizingConfigSummary, location_name: "ExternalIdpConfidentialAuthCode"))
+    IdpAuthorizingConfigurationSummaryDetail.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    IdpAuthorizingConfigurationSummaryDetail.add_member_subclass(:external_idp_public_auth_code, Types::IdpAuthorizingConfigurationSummaryDetail::ExternalIdpPublicAuthCode)
+    IdpAuthorizingConfigurationSummaryDetail.add_member_subclass(:external_idp_confidential_auth_code, Types::IdpAuthorizingConfigurationSummaryDetail::ExternalIdpConfidentialAuthCode)
+    IdpAuthorizingConfigurationSummaryDetail.add_member_subclass(:unknown, Types::IdpAuthorizingConfigurationSummaryDetail::Unknown)
+    IdpAuthorizingConfigurationSummaryDetail.struct_class = Types::IdpAuthorizingConfigurationSummaryDetail
+
+    IdpClientSecretInput.add_member(:regional_secret_manager_arns, Shapes::ShapeRef.new(shape: RegionalSecretManagerArnMap, required: true, location_name: "RegionalSecretManagerArns"))
+    IdpClientSecretInput.struct_class = Types::IdpClientSecretInput
 
     Image.add_member(:source, Shapes::ShapeRef.new(shape: ImageSource, location_name: "Source"))
     Image.add_member(:generated_image_url, Shapes::ShapeRef.new(shape: String, location_name: "GeneratedImageUrl"))
@@ -8964,6 +9464,43 @@ module Aws::QuickSight
     ImportTableOperationSource.add_member(:source_table_id, Shapes::ShapeRef.new(shape: DataSetEntityResourceId, required: true, location_name: "SourceTableId"))
     ImportTableOperationSource.add_member(:column_id_mappings, Shapes::ShapeRef.new(shape: DataSetColumnIdMappingList, location_name: "ColumnIdMappings"))
     ImportTableOperationSource.struct_class = Types::ImportTableOperationSource
+
+    InboundConnector.add_member(:inbound_connector_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, required: true, location_name: "InboundConnectorId"))
+    InboundConnector.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "Arn"))
+    InboundConnector.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "Name"))
+    InboundConnector.add_member(:status, Shapes::ShapeRef.new(shape: InboundConnectorStatus, required: true, location_name: "Status"))
+    InboundConnector.add_member(:tenant_url, Shapes::ShapeRef.new(shape: String, required: true, location_name: "TenantUrl"))
+    InboundConnector.add_member(:created_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreatedTime"))
+    InboundConnector.add_member(:last_updated_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "LastUpdatedTime"))
+    InboundConnector.add_member(:inbound_connector_configuration, Shapes::ShapeRef.new(shape: InboundConnectorConfig, required: true, location_name: "InboundConnectorConfiguration"))
+    InboundConnector.add_member(:description, Shapes::ShapeRef.new(shape: InboundConnectorDescription, location_name: "Description"))
+    InboundConnector.struct_class = Types::InboundConnector
+
+    InboundConnectorApplicationAssociationSummary.add_member(:access_control_application_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "AccessControlApplicationArn"))
+    InboundConnectorApplicationAssociationSummary.add_member(:created_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreatedTime"))
+    InboundConnectorApplicationAssociationSummary.struct_class = Types::InboundConnectorApplicationAssociationSummary
+
+    InboundConnectorApplicationAssociationSummaryList.member = Shapes::ShapeRef.new(shape: InboundConnectorApplicationAssociationSummary)
+
+    InboundConnectorAssociationArnList.member = Shapes::ShapeRef.new(shape: Arn)
+
+    InboundConnectorConfig.add_member(:inbound_connector_type, Shapes::ShapeRef.new(shape: InboundConnectorType, required: true, location_name: "InboundConnectorType"))
+    InboundConnectorConfig.struct_class = Types::InboundConnectorConfig
+
+    InboundConnectorSummary.add_member(:inbound_connector_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, required: true, location_name: "InboundConnectorId"))
+    InboundConnectorSummary.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "Arn"))
+    InboundConnectorSummary.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "Name"))
+    InboundConnectorSummary.add_member(:status, Shapes::ShapeRef.new(shape: InboundConnectorStatus, required: true, location_name: "Status"))
+    InboundConnectorSummary.add_member(:created_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreatedTime"))
+    InboundConnectorSummary.add_member(:last_updated_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "LastUpdatedTime"))
+    InboundConnectorSummary.add_member(:tenant_url, Shapes::ShapeRef.new(shape: String, required: true, location_name: "TenantUrl"))
+    InboundConnectorSummary.add_member(:inbound_connector_configuration, Shapes::ShapeRef.new(shape: InboundConnectorConfig, required: true, location_name: "InboundConnectorConfiguration"))
+    InboundConnectorSummary.add_member(:description, Shapes::ShapeRef.new(shape: InboundConnectorDescription, location_name: "Description"))
+    InboundConnectorSummary.struct_class = Types::InboundConnectorSummary
+
+    InboundConnectorSummaryList.member = Shapes::ShapeRef.new(shape: InboundConnectorSummary)
+
+    InboundConnectorTypeFilterList.member = Shapes::ShapeRef.new(shape: InboundConnectorType)
 
     IncrementalRefresh.add_member(:lookback_window, Shapes::ShapeRef.new(shape: LookbackWindow, required: true, location_name: "LookbackWindow"))
     IncrementalRefresh.struct_class = Types::IncrementalRefresh
@@ -9227,6 +9764,22 @@ module Aws::QuickSight
     KnowledgeBaseIngestionSummary.add_member(:end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "EndTime"))
     KnowledgeBaseIngestionSummary.struct_class = Types::KnowledgeBaseIngestionSummary
 
+    KnowledgeBaseRefreshFrequency.add_member(:interval, Shapes::ShapeRef.new(shape: KbRefreshInterval, required: true, location_name: "Interval"))
+    KnowledgeBaseRefreshFrequency.add_member(:refresh_on_day, Shapes::ShapeRef.new(shape: KnowledgeBaseScheduleRefreshOnEntity, location_name: "RefreshOnDay"))
+    KnowledgeBaseRefreshFrequency.struct_class = Types::KnowledgeBaseRefreshFrequency
+
+    KnowledgeBaseRefreshScheduleList.member = Shapes::ShapeRef.new(shape: KnowledgeBaseRefreshScheduleSummary)
+
+    KnowledgeBaseRefreshScheduleSummary.add_member(:schedule_id, Shapes::ShapeRef.new(shape: ScheduleId, required: true, location_name: "ScheduleId"))
+    KnowledgeBaseRefreshScheduleSummary.add_member(:schedule_frequency, Shapes::ShapeRef.new(shape: KnowledgeBaseRefreshFrequency, required: true, location_name: "ScheduleFrequency"))
+    KnowledgeBaseRefreshScheduleSummary.add_member(:start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "StartTime"))
+    KnowledgeBaseRefreshScheduleSummary.add_member(:state, Shapes::ShapeRef.new(shape: ScheduleState, location_name: "State"))
+    KnowledgeBaseRefreshScheduleSummary.struct_class = Types::KnowledgeBaseRefreshScheduleSummary
+
+    KnowledgeBaseScheduleRefreshOnEntity.add_member(:day_of_week, Shapes::ShapeRef.new(shape: KbDayOfWeek, location_name: "DayOfWeek"))
+    KnowledgeBaseScheduleRefreshOnEntity.add_member(:day_of_month, Shapes::ShapeRef.new(shape: KnowledgeBaseScheduleRefreshOnEntityDayOfMonthString, location_name: "DayOfMonth"))
+    KnowledgeBaseScheduleRefreshOnEntity.struct_class = Types::KnowledgeBaseScheduleRefreshOnEntity
+
     KnowledgeBaseSearchFilter.add_member(:name, Shapes::ShapeRef.new(shape: KnowledgeBaseSearchFilterName, required: true, location_name: "name"))
     KnowledgeBaseSearchFilter.add_member(:operator, Shapes::ShapeRef.new(shape: KnowledgeBaseSearchOperator, required: true, location_name: "operator"))
     KnowledgeBaseSearchFilter.add_member(:value, Shapes::ShapeRef.new(shape: String, required: true, location_name: "value"))
@@ -9408,6 +9961,18 @@ module Aws::QuickSight
     LinkSharingConfiguration.struct_class = Types::LinkSharingConfiguration
 
     LinkedDataSourceIds.member = Shapes::ShapeRef.new(shape: LinkedDataSourceId)
+
+    ListAccessControlApplicationsRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
+    ListAccessControlApplicationsRequest.add_member(:namespace, Shapes::ShapeRef.new(shape: Namespace, location: "querystring", location_name: "namespace"))
+    ListAccessControlApplicationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListAccessControlApplicationsRequestMaxResultsInteger, location: "querystring", location_name: "max-results"))
+    ListAccessControlApplicationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "next-token"))
+    ListAccessControlApplicationsRequest.struct_class = Types::ListAccessControlApplicationsRequest
+
+    ListAccessControlApplicationsResponse.add_member(:status, Shapes::ShapeRef.new(shape: statusCode, required: true, location: "statusCode", location_name: "Status"))
+    ListAccessControlApplicationsResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "RequestId"))
+    ListAccessControlApplicationsResponse.add_member(:access_control_applications, Shapes::ShapeRef.new(shape: AccessControlApplicationSummaryList, required: true, location_name: "AccessControlApplications"))
+    ListAccessControlApplicationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListAccessControlApplicationsResponse.struct_class = Types::ListAccessControlApplicationsResponse
 
     ListActionConnectorsRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
     ListActionConnectorsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "max-results"))
@@ -9676,6 +10241,30 @@ module Aws::QuickSight
     ListIdentityPropagationConfigsResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
     ListIdentityPropagationConfigsResponse.struct_class = Types::ListIdentityPropagationConfigsResponse
 
+    ListInboundConnectorApplicationAssociationsRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
+    ListInboundConnectorApplicationAssociationsRequest.add_member(:inbound_connector_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, required: true, location: "uri", location_name: "InboundConnectorId"))
+    ListInboundConnectorApplicationAssociationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListInboundConnectorApplicationAssociationsRequestMaxResultsInteger, location: "querystring", location_name: "max-results"))
+    ListInboundConnectorApplicationAssociationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "next-token"))
+    ListInboundConnectorApplicationAssociationsRequest.struct_class = Types::ListInboundConnectorApplicationAssociationsRequest
+
+    ListInboundConnectorApplicationAssociationsResponse.add_member(:status, Shapes::ShapeRef.new(shape: statusCode, required: true, location: "statusCode", location_name: "Status"))
+    ListInboundConnectorApplicationAssociationsResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "RequestId"))
+    ListInboundConnectorApplicationAssociationsResponse.add_member(:application_associations, Shapes::ShapeRef.new(shape: InboundConnectorApplicationAssociationSummaryList, required: true, location_name: "ApplicationAssociations"))
+    ListInboundConnectorApplicationAssociationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListInboundConnectorApplicationAssociationsResponse.struct_class = Types::ListInboundConnectorApplicationAssociationsResponse
+
+    ListInboundConnectorsRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
+    ListInboundConnectorsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListInboundConnectorsRequestMaxResultsInteger, location: "querystring", location_name: "max-results"))
+    ListInboundConnectorsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "next-token"))
+    ListInboundConnectorsRequest.add_member(:type, Shapes::ShapeRef.new(shape: InboundConnectorTypeFilterList, location: "querystring", location_name: "type"))
+    ListInboundConnectorsRequest.struct_class = Types::ListInboundConnectorsRequest
+
+    ListInboundConnectorsResponse.add_member(:status, Shapes::ShapeRef.new(shape: statusCode, required: true, location: "statusCode", location_name: "Status"))
+    ListInboundConnectorsResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "RequestId"))
+    ListInboundConnectorsResponse.add_member(:inbound_connector_summaries, Shapes::ShapeRef.new(shape: InboundConnectorSummaryList, required: true, location_name: "InboundConnectorSummaries"))
+    ListInboundConnectorsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListInboundConnectorsResponse.struct_class = Types::ListInboundConnectorsResponse
+
     ListIngestionsRequest.add_member(:data_set_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "DataSetId"))
     ListIngestionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "next-token"))
     ListIngestionsRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
@@ -9687,6 +10276,19 @@ module Aws::QuickSight
     ListIngestionsResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
     ListIngestionsResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
     ListIngestionsResponse.struct_class = Types::ListIngestionsResponse
+
+    ListKnowledgeBaseRefreshSchedulesRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: KbAwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
+    ListKnowledgeBaseRefreshSchedulesRequest.add_member(:knowledge_base_id, Shapes::ShapeRef.new(shape: KnowledgeBaseId, required: true, location: "uri", location_name: "KnowledgeBaseId"))
+    ListKnowledgeBaseRefreshSchedulesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "next-token"))
+    ListKnowledgeBaseRefreshSchedulesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "max-results", metadata: {"box" => true}))
+    ListKnowledgeBaseRefreshSchedulesRequest.struct_class = Types::ListKnowledgeBaseRefreshSchedulesRequest
+
+    ListKnowledgeBaseRefreshSchedulesResponse.add_member(:schedule_summaries, Shapes::ShapeRef.new(shape: KnowledgeBaseRefreshScheduleList, required: true, location_name: "ScheduleSummaries"))
+    ListKnowledgeBaseRefreshSchedulesResponse.add_member(:knowledge_base_arn, Shapes::ShapeRef.new(shape: KnowledgeBaseArn, required: true, location_name: "KnowledgeBaseArn"))
+    ListKnowledgeBaseRefreshSchedulesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListKnowledgeBaseRefreshSchedulesResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
+    ListKnowledgeBaseRefreshSchedulesResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status", metadata: {"box" => true}))
+    ListKnowledgeBaseRefreshSchedulesResponse.struct_class = Types::ListKnowledgeBaseRefreshSchedulesResponse
 
     ListKnowledgeBasesRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: KbAwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
     ListKnowledgeBasesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "max-results", metadata: {"box" => true}))
@@ -9730,6 +10332,17 @@ module Aws::QuickSight
     ListOAuthClientApplicationsResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
     ListOAuthClientApplicationsResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
     ListOAuthClientApplicationsResponse.struct_class = Types::ListOAuthClientApplicationsResponse
+
+    ListPrincipalsForPolicyRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AccountId"))
+    ListPrincipalsForPolicyRequest.add_member(:policy_arn, Shapes::ShapeRef.new(shape: PolicyArn, required: true, location: "querystring", location_name: "PolicyArn"))
+    ListPrincipalsForPolicyRequest.add_member(:principal_type, Shapes::ShapeRef.new(shape: PrincipalType, location: "querystring", location_name: "PrincipalType"))
+    ListPrincipalsForPolicyRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListPrincipalsForPolicyRequestMaxResultsInteger, location: "querystring", location_name: "MaxResults"))
+    ListPrincipalsForPolicyRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: ListPrincipalsForPolicyRequestNextTokenString, location: "querystring", location_name: "NextToken"))
+    ListPrincipalsForPolicyRequest.struct_class = Types::ListPrincipalsForPolicyRequest
+
+    ListPrincipalsForPolicyResponse.add_member(:principals, Shapes::ShapeRef.new(shape: PolicyPrincipalList, required: true, location_name: "Principals"))
+    ListPrincipalsForPolicyResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: ListPrincipalsForPolicyResponseNextTokenString, location_name: "NextToken"))
+    ListPrincipalsForPolicyResponse.struct_class = Types::ListPrincipalsForPolicyResponse
 
     ListRefreshSchedulesRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
     ListRefreshSchedulesRequest.add_member(:data_set_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location: "uri", location_name: "DataSetId"))
@@ -10701,6 +11314,14 @@ module Aws::QuickSight
     PluginVisualTableQuerySort.add_member(:items_limit_configuration, Shapes::ShapeRef.new(shape: PluginVisualItemsLimitConfiguration, location_name: "ItemsLimitConfiguration"))
     PluginVisualTableQuerySort.struct_class = Types::PluginVisualTableQuerySort
 
+    PolicyPrincipal.add_member(:principal_arn, Shapes::ShapeRef.new(shape: PrincipalArn, required: true, location_name: "PrincipalArn"))
+    PolicyPrincipal.add_member(:principal_type, Shapes::ShapeRef.new(shape: PrincipalType, location_name: "PrincipalType"))
+    PolicyPrincipal.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "UpdatedAt"))
+    PolicyPrincipal.add_member(:revision, Shapes::ShapeRef.new(shape: Revision, location_name: "Revision"))
+    PolicyPrincipal.struct_class = Types::PolicyPrincipal
+
+    PolicyPrincipalList.member = Shapes::ShapeRef.new(shape: PolicyPrincipal)
+
     PostgreSqlParameters.add_member(:host, Shapes::ShapeRef.new(shape: Host, required: true, location_name: "Host"))
     PostgreSqlParameters.add_member(:port, Shapes::ShapeRef.new(shape: Port, required: true, location_name: "Port"))
     PostgreSqlParameters.add_member(:database, Shapes::ShapeRef.new(shape: Database, required: true, location_name: "Database"))
@@ -10757,6 +11378,11 @@ module Aws::QuickSight
     ProviderConfig.add_member_subclass(:unknown, Types::ProviderConfig::Unknown)
     ProviderConfig.struct_class = Types::ProviderConfig
 
+    PutAssignmentEntry.add_member(:principal_arn, Shapes::ShapeRef.new(shape: PrincipalArn, required: true, location_name: "PrincipalArn"))
+    PutAssignmentEntry.add_member(:existing_policy_arn, Shapes::ShapeRef.new(shape: PolicyArn, location_name: "ExistingPolicyArn"))
+    PutAssignmentEntry.add_member(:revision, Shapes::ShapeRef.new(shape: Revision, location_name: "Revision"))
+    PutAssignmentEntry.struct_class = Types::PutAssignmentEntry
+
     PutDataSetRefreshPropertiesRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
     PutDataSetRefreshPropertiesRequest.add_member(:data_set_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location: "uri", location_name: "DataSetId"))
     PutDataSetRefreshPropertiesRequest.add_member(:data_set_refresh_properties, Shapes::ShapeRef.new(shape: DataSetRefreshProperties, required: true, location_name: "DataSetRefreshProperties"))
@@ -10765,6 +11391,18 @@ module Aws::QuickSight
     PutDataSetRefreshPropertiesResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
     PutDataSetRefreshPropertiesResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
     PutDataSetRefreshPropertiesResponse.struct_class = Types::PutDataSetRefreshPropertiesResponse
+
+    PutPolicyAssignmentRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AccountId"))
+    PutPolicyAssignmentRequest.add_member(:policy_arn, Shapes::ShapeRef.new(shape: PolicyArn, required: true, location_name: "PolicyArn"))
+    PutPolicyAssignmentRequest.add_member(:principal_arn, Shapes::ShapeRef.new(shape: PrincipalArn, required: true, location_name: "PrincipalArn"))
+    PutPolicyAssignmentRequest.add_member(:existing_policy_arn, Shapes::ShapeRef.new(shape: PolicyArn, location_name: "ExistingPolicyArn"))
+    PutPolicyAssignmentRequest.add_member(:revision, Shapes::ShapeRef.new(shape: Revision, location_name: "Revision"))
+    PutPolicyAssignmentRequest.struct_class = Types::PutPolicyAssignmentRequest
+
+    PutPolicyAssignmentResponse.add_member(:policy_arn, Shapes::ShapeRef.new(shape: PolicyArn, required: true, location_name: "PolicyArn"))
+    PutPolicyAssignmentResponse.add_member(:replaced_policy_arn, Shapes::ShapeRef.new(shape: PolicyArn, location_name: "ReplacedPolicyArn"))
+    PutPolicyAssignmentResponse.add_member(:revision, Shapes::ShapeRef.new(shape: Revision, required: true, location_name: "Revision"))
+    PutPolicyAssignmentResponse.struct_class = Types::PutPolicyAssignmentResponse
 
     QAResult.add_member(:result_type, Shapes::ShapeRef.new(shape: QAResultType, location_name: "ResultType"))
     QAResult.add_member(:dashboard_visual, Shapes::ShapeRef.new(shape: DashboardVisualResult, location_name: "DashboardVisual"))
@@ -10786,6 +11424,43 @@ module Aws::QuickSight
     QueueInfo.add_member(:waiting_on_ingestion, Shapes::ShapeRef.new(shape: String, required: true, location_name: "WaitingOnIngestion"))
     QueueInfo.add_member(:queued_ingestion, Shapes::ShapeRef.new(shape: String, required: true, location_name: "QueuedIngestion"))
     QueueInfo.struct_class = Types::QueueInfo
+
+    QuickAuthenticationConfig.add_member(:quick_authentication_type, Shapes::ShapeRef.new(shape: QuickAuthenticationType, required: true, location_name: "QuickAuthenticationType"))
+    QuickAuthenticationConfig.add_member(:quick_authentication_configuration_detail, Shapes::ShapeRef.new(shape: QuickAuthenticationConfigurationDetail, location_name: "QuickAuthenticationConfigurationDetail"))
+    QuickAuthenticationConfig.struct_class = Types::QuickAuthenticationConfig
+
+    QuickAuthenticationConfigCreateOutput.add_member(:quick_authentication_type, Shapes::ShapeRef.new(shape: QuickAuthenticationType, required: true, location_name: "QuickAuthenticationType"))
+    QuickAuthenticationConfigCreateOutput.add_member(:quick_authentication_configuration_detail_create_output, Shapes::ShapeRef.new(shape: QuickAuthenticationConfigurationDetailCreateOutput, location_name: "QuickAuthenticationConfigurationDetailCreateOutput"))
+    QuickAuthenticationConfigCreateOutput.struct_class = Types::QuickAuthenticationConfigCreateOutput
+
+    QuickAuthenticationConfigInput.add_member(:quick_authentication_type, Shapes::ShapeRef.new(shape: QuickAuthenticationType, required: true, location_name: "QuickAuthenticationType"))
+    QuickAuthenticationConfigInput.add_member(:quick_authentication_configuration_detail_input, Shapes::ShapeRef.new(shape: QuickAuthenticationConfigurationDetailInput, location_name: "QuickAuthenticationConfigurationDetailInput"))
+    QuickAuthenticationConfigInput.struct_class = Types::QuickAuthenticationConfigInput
+
+    QuickAuthenticationConfigurationDetail.add_member(:quick_managed_public_auth_code, Shapes::ShapeRef.new(shape: QuickManagedPublicAuthCodeQuickAuthenticationConfig, location_name: "QuickManagedPublicAuthCode"))
+    QuickAuthenticationConfigurationDetail.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    QuickAuthenticationConfigurationDetail.add_member_subclass(:quick_managed_public_auth_code, Types::QuickAuthenticationConfigurationDetail::QuickManagedPublicAuthCode)
+    QuickAuthenticationConfigurationDetail.add_member_subclass(:unknown, Types::QuickAuthenticationConfigurationDetail::Unknown)
+    QuickAuthenticationConfigurationDetail.struct_class = Types::QuickAuthenticationConfigurationDetail
+
+    QuickAuthenticationConfigurationDetailCreateOutput.add_member(:quick_managed_public_auth_code, Shapes::ShapeRef.new(shape: QuickManagedPublicAuthCodeQuickAuthenticationConfig, location_name: "QuickManagedPublicAuthCode"))
+    QuickAuthenticationConfigurationDetailCreateOutput.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    QuickAuthenticationConfigurationDetailCreateOutput.add_member_subclass(:quick_managed_public_auth_code, Types::QuickAuthenticationConfigurationDetailCreateOutput::QuickManagedPublicAuthCode)
+    QuickAuthenticationConfigurationDetailCreateOutput.add_member_subclass(:unknown, Types::QuickAuthenticationConfigurationDetailCreateOutput::Unknown)
+    QuickAuthenticationConfigurationDetailCreateOutput.struct_class = Types::QuickAuthenticationConfigurationDetailCreateOutput
+
+    QuickAuthenticationConfigurationDetailInput.add_member(:quick_managed_public_auth_code, Shapes::ShapeRef.new(shape: QuickManagedAuthCodeQuickAuthenticationConfigInput, location_name: "QuickManagedPublicAuthCode"))
+    QuickAuthenticationConfigurationDetailInput.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    QuickAuthenticationConfigurationDetailInput.add_member_subclass(:quick_managed_public_auth_code, Types::QuickAuthenticationConfigurationDetailInput::QuickManagedPublicAuthCode)
+    QuickAuthenticationConfigurationDetailInput.add_member_subclass(:unknown, Types::QuickAuthenticationConfigurationDetailInput::Unknown)
+    QuickAuthenticationConfigurationDetailInput.struct_class = Types::QuickAuthenticationConfigurationDetailInput
+
+    QuickManagedAuthCodeQuickAuthenticationConfigInput.add_member(:redirect_uris, Shapes::ShapeRef.new(shape: RedirectUriList, required: true, location_name: "RedirectUris"))
+    QuickManagedAuthCodeQuickAuthenticationConfigInput.struct_class = Types::QuickManagedAuthCodeQuickAuthenticationConfigInput
+
+    QuickManagedPublicAuthCodeQuickAuthenticationConfig.add_member(:redirect_uris, Shapes::ShapeRef.new(shape: RedirectUriList, required: true, location_name: "RedirectUris"))
+    QuickManagedPublicAuthCodeQuickAuthenticationConfig.add_member(:client_id, Shapes::ShapeRef.new(shape: OAuthApplicationClientId, required: true, location_name: "ClientId"))
+    QuickManagedPublicAuthCodeQuickAuthenticationConfig.struct_class = Types::QuickManagedPublicAuthCodeQuickAuthenticationConfig
 
     QuickSightUserNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     QuickSightUserNotFoundException.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
@@ -10928,6 +11603,8 @@ module Aws::QuickSight
     RecentSnapshotsConfigurations.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "Enabled"))
     RecentSnapshotsConfigurations.struct_class = Types::RecentSnapshotsConfigurations
 
+    RedirectUriList.member = Shapes::ShapeRef.new(shape: Uri)
+
     RedshiftIAMParameters.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "RoleArn"))
     RedshiftIAMParameters.add_member(:database_user, Shapes::ShapeRef.new(shape: DatabaseUser, location_name: "DatabaseUser"))
     RedshiftIAMParameters.add_member(:database_groups, Shapes::ShapeRef.new(shape: DatabaseGroupList, location_name: "DatabaseGroups"))
@@ -10937,6 +11614,7 @@ module Aws::QuickSight
     RedshiftParameters.add_member(:host, Shapes::ShapeRef.new(shape: Host, location_name: "Host"))
     RedshiftParameters.add_member(:port, Shapes::ShapeRef.new(shape: OptionalPort, location_name: "Port"))
     RedshiftParameters.add_member(:database, Shapes::ShapeRef.new(shape: Database, required: true, location_name: "Database"))
+    RedshiftParameters.add_member(:federated_catalog, Shapes::ShapeRef.new(shape: FederatedCatalog, location_name: "FederatedCatalog"))
     RedshiftParameters.add_member(:cluster_id, Shapes::ShapeRef.new(shape: ClusterId, location_name: "ClusterId"))
     RedshiftParameters.add_member(:iam_parameters, Shapes::ShapeRef.new(shape: RedshiftIAMParameters, location_name: "IAMParameters"))
     RedshiftParameters.add_member(:identity_center_configuration, Shapes::ShapeRef.new(shape: IdentityCenterConfiguration, location_name: "IdentityCenterConfiguration"))
@@ -11006,6 +11684,9 @@ module Aws::QuickSight
     RefreshSchedule.struct_class = Types::RefreshSchedule
 
     RefreshSchedules.member = Shapes::ShapeRef.new(shape: RefreshSchedule)
+
+    RegionalSecretManagerArnMap.key = Shapes::ShapeRef.new(shape: AwsRegion)
+    RegionalSecretManagerArnMap.value = Shapes::ShapeRef.new(shape: AccessControlApplicationSecretManagerArn)
 
     RegisterUserRequest.add_member(:identity_type, Shapes::ShapeRef.new(shape: IdentityType, required: true, location_name: "IdentityType"))
     RegisterUserRequest.add_member(:email, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Email"))
@@ -13098,6 +13779,15 @@ module Aws::QuickSight
     UniqueValuesComputation.add_member(:category, Shapes::ShapeRef.new(shape: DimensionField, location_name: "Category"))
     UniqueValuesComputation.struct_class = Types::UniqueValuesComputation
 
+    UnmaterializedCalculatedColumn.add_member(:column_id, Shapes::ShapeRef.new(shape: ColumnId, required: true, location_name: "ColumnId"))
+    UnmaterializedCalculatedColumn.add_member(:column_name, Shapes::ShapeRef.new(shape: ColumnName, required: true, location_name: "ColumnName"))
+    UnmaterializedCalculatedColumn.add_member(:expression, Shapes::ShapeRef.new(shape: DataSetCalculatedFieldExpression, required: true, location_name: "Expression"))
+    UnmaterializedCalculatedColumn.add_member(:type, Shapes::ShapeRef.new(shape: ColumnDataType, location_name: "Type"))
+    UnmaterializedCalculatedColumn.add_member(:sub_type, Shapes::ShapeRef.new(shape: ColumnDataSubType, location_name: "SubType"))
+    UnmaterializedCalculatedColumn.struct_class = Types::UnmaterializedCalculatedColumn
+
+    UnmaterializedCalculatedColumnList.member = Shapes::ShapeRef.new(shape: UnmaterializedCalculatedColumn)
+
     UnpivotOperation.add_member(:alias, Shapes::ShapeRef.new(shape: TransformOperationAlias, required: true, location_name: "Alias"))
     UnpivotOperation.add_member(:source, Shapes::ShapeRef.new(shape: TransformOperationSource, required: true, location_name: "Source"))
     UnpivotOperation.add_member(:columns_to_unpivot, Shapes::ShapeRef.new(shape: ColumnToUnpivotList, required: true, location_name: "ColumnsToUnpivot"))
@@ -13126,6 +13816,37 @@ module Aws::QuickSight
     UntagResourceResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
     UntagResourceResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
     UntagResourceResponse.struct_class = Types::UntagResourceResponse
+
+    UpdateAccessControlApplicationRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
+    UpdateAccessControlApplicationRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, required: true, location: "uri", location_name: "ApplicationId"))
+    UpdateAccessControlApplicationRequest.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "Name"))
+    UpdateAccessControlApplicationRequest.add_member(:description, Shapes::ShapeRef.new(shape: AccessControlApplicationDescription, location_name: "Description"))
+    UpdateAccessControlApplicationRequest.add_member(:idp_authorizing_configuration, Shapes::ShapeRef.new(shape: IdpAuthorizingConfigUpdateInput, location_name: "IdpAuthorizingConfiguration"))
+    UpdateAccessControlApplicationRequest.add_member(:quick_authentication_configuration, Shapes::ShapeRef.new(shape: QuickAuthenticationConfigInput, location_name: "QuickAuthenticationConfiguration"))
+    UpdateAccessControlApplicationRequest.add_member(:status, Shapes::ShapeRef.new(shape: AccessControlApplicationStatus, location_name: "Status"))
+    UpdateAccessControlApplicationRequest.struct_class = Types::UpdateAccessControlApplicationRequest
+
+    UpdateAccessControlApplicationResponse.add_member(:status, Shapes::ShapeRef.new(shape: statusCode, required: true, location: "statusCode", location_name: "Status"))
+    UpdateAccessControlApplicationResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "RequestId"))
+    UpdateAccessControlApplicationResponse.add_member(:application_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ApplicationId"))
+    UpdateAccessControlApplicationResponse.add_member(:arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Arn"))
+    UpdateAccessControlApplicationResponse.add_member(:access_control_application_status, Shapes::ShapeRef.new(shape: AccessControlApplicationStatus, required: true, location_name: "AccessControlApplicationStatus"))
+    UpdateAccessControlApplicationResponse.add_member(:last_updated_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "LastUpdatedTime"))
+    UpdateAccessControlApplicationResponse.struct_class = Types::UpdateAccessControlApplicationResponse
+
+    UpdateAccessControlApplicationSecretRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
+    UpdateAccessControlApplicationSecretRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, required: true, location: "uri", location_name: "ApplicationId"))
+    UpdateAccessControlApplicationSecretRequest.add_member(:client_secret_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, required: true, location: "uri", location_name: "ClientSecretId"))
+    UpdateAccessControlApplicationSecretRequest.add_member(:update_regional_secret_manager_arns, Shapes::ShapeRef.new(shape: RegionalSecretManagerArnMap, location_name: "UpdateRegionalSecretManagerArns"))
+    UpdateAccessControlApplicationSecretRequest.add_member(:remove_regional_secret_manager_arns, Shapes::ShapeRef.new(shape: AwsRegionList, location_name: "RemoveRegionalSecretManagerArns"))
+    UpdateAccessControlApplicationSecretRequest.struct_class = Types::UpdateAccessControlApplicationSecretRequest
+
+    UpdateAccessControlApplicationSecretResponse.add_member(:status, Shapes::ShapeRef.new(shape: statusCode, required: true, location: "statusCode", location_name: "Status"))
+    UpdateAccessControlApplicationSecretResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "RequestId"))
+    UpdateAccessControlApplicationSecretResponse.add_member(:client_secret_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, required: true, location_name: "ClientSecretId"))
+    UpdateAccessControlApplicationSecretResponse.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "UpdatedAt"))
+    UpdateAccessControlApplicationSecretResponse.add_member(:regional_secret_manager_arns, Shapes::ShapeRef.new(shape: RegionalSecretManagerArnMap, required: true, location_name: "RegionalSecretManagerArns"))
+    UpdateAccessControlApplicationSecretResponse.struct_class = Types::UpdateAccessControlApplicationSecretResponse
 
     UpdateAccountCustomPermissionRequest.add_member(:custom_permissions_name, Shapes::ShapeRef.new(shape: CustomPermissionsName, required: true, location_name: "CustomPermissionsName"))
     UpdateAccountCustomPermissionRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
@@ -13431,6 +14152,7 @@ module Aws::QuickSight
     UpdateDataSetRequest.add_member(:performance_configuration, Shapes::ShapeRef.new(shape: PerformanceConfiguration, location_name: "PerformanceConfiguration"))
     UpdateDataSetRequest.add_member(:data_prep_configuration, Shapes::ShapeRef.new(shape: DataPrepConfiguration, location_name: "DataPrepConfiguration"))
     UpdateDataSetRequest.add_member(:semantic_model_configuration, Shapes::ShapeRef.new(shape: SemanticModelConfiguration, location_name: "SemanticModelConfiguration"))
+    UpdateDataSetRequest.add_member(:unmaterialized_calculated_columns, Shapes::ShapeRef.new(shape: UnmaterializedCalculatedColumnList, location_name: "UnmaterializedCalculatedColumns"))
     UpdateDataSetRequest.struct_class = Types::UpdateDataSetRequest
 
     UpdateDataSetResponse.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
@@ -13584,6 +14306,32 @@ module Aws::QuickSight
     UpdateIdentityPropagationConfigResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
     UpdateIdentityPropagationConfigResponse.struct_class = Types::UpdateIdentityPropagationConfigResponse
 
+    UpdateInboundConnectorApplicationAssociationsRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
+    UpdateInboundConnectorApplicationAssociationsRequest.add_member(:inbound_connector_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, required: true, location: "uri", location_name: "InboundConnectorId"))
+    UpdateInboundConnectorApplicationAssociationsRequest.add_member(:associate_access_control_applications, Shapes::ShapeRef.new(shape: InboundConnectorAssociationArnList, location_name: "AssociateAccessControlApplications"))
+    UpdateInboundConnectorApplicationAssociationsRequest.add_member(:disassociate_access_control_applications, Shapes::ShapeRef.new(shape: InboundConnectorAssociationArnList, location_name: "DisassociateAccessControlApplications"))
+    UpdateInboundConnectorApplicationAssociationsRequest.struct_class = Types::UpdateInboundConnectorApplicationAssociationsRequest
+
+    UpdateInboundConnectorApplicationAssociationsResponse.add_member(:status, Shapes::ShapeRef.new(shape: statusCode, required: true, location: "statusCode", location_name: "Status"))
+    UpdateInboundConnectorApplicationAssociationsResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "RequestId"))
+    UpdateInboundConnectorApplicationAssociationsResponse.struct_class = Types::UpdateInboundConnectorApplicationAssociationsResponse
+
+    UpdateInboundConnectorRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
+    UpdateInboundConnectorRequest.add_member(:inbound_connector_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, required: true, location: "uri", location_name: "InboundConnectorId"))
+    UpdateInboundConnectorRequest.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "Name"))
+    UpdateInboundConnectorRequest.add_member(:description, Shapes::ShapeRef.new(shape: InboundConnectorDescription, location_name: "Description"))
+    UpdateInboundConnectorRequest.add_member(:inbound_connector_configuration, Shapes::ShapeRef.new(shape: InboundConnectorConfig, location_name: "InboundConnectorConfiguration"))
+    UpdateInboundConnectorRequest.add_member(:inbound_connector_status, Shapes::ShapeRef.new(shape: InboundConnectorStatus, location_name: "InboundConnectorStatus"))
+    UpdateInboundConnectorRequest.struct_class = Types::UpdateInboundConnectorRequest
+
+    UpdateInboundConnectorResponse.add_member(:status, Shapes::ShapeRef.new(shape: statusCode, required: true, location: "statusCode", location_name: "Status"))
+    UpdateInboundConnectorResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "RequestId"))
+    UpdateInboundConnectorResponse.add_member(:inbound_connector_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "InboundConnectorId"))
+    UpdateInboundConnectorResponse.add_member(:arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Arn"))
+    UpdateInboundConnectorResponse.add_member(:inbound_connector_status, Shapes::ShapeRef.new(shape: InboundConnectorStatus, required: true, location_name: "InboundConnectorStatus"))
+    UpdateInboundConnectorResponse.add_member(:last_updated_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "LastUpdatedTime"))
+    UpdateInboundConnectorResponse.struct_class = Types::UpdateInboundConnectorResponse
+
     UpdateIpRestrictionRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
     UpdateIpRestrictionRequest.add_member(:ip_restriction_rule_map, Shapes::ShapeRef.new(shape: IpRestrictionRuleMap, location_name: "IpRestrictionRuleMap"))
     UpdateIpRestrictionRequest.add_member(:vpc_id_restriction_rule_map, Shapes::ShapeRef.new(shape: VpcIdRestrictionRuleMap, location_name: "VpcIdRestrictionRuleMap"))
@@ -13617,6 +14365,20 @@ module Aws::QuickSight
     UpdateKnowledgeBasePermissionsResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
     UpdateKnowledgeBasePermissionsResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status", metadata: {"box" => true}))
     UpdateKnowledgeBasePermissionsResponse.struct_class = Types::UpdateKnowledgeBasePermissionsResponse
+
+    UpdateKnowledgeBaseRefreshScheduleRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: KbAwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
+    UpdateKnowledgeBaseRefreshScheduleRequest.add_member(:knowledge_base_id, Shapes::ShapeRef.new(shape: KnowledgeBaseId, required: true, location: "uri", location_name: "KnowledgeBaseId"))
+    UpdateKnowledgeBaseRefreshScheduleRequest.add_member(:schedule_id, Shapes::ShapeRef.new(shape: ScheduleId, required: true, location: "uri", location_name: "ScheduleId"))
+    UpdateKnowledgeBaseRefreshScheduleRequest.add_member(:schedule_frequency, Shapes::ShapeRef.new(shape: KnowledgeBaseRefreshFrequency, location_name: "ScheduleFrequency"))
+    UpdateKnowledgeBaseRefreshScheduleRequest.add_member(:start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "StartTime"))
+    UpdateKnowledgeBaseRefreshScheduleRequest.add_member(:state, Shapes::ShapeRef.new(shape: ScheduleState, location_name: "State"))
+    UpdateKnowledgeBaseRefreshScheduleRequest.struct_class = Types::UpdateKnowledgeBaseRefreshScheduleRequest
+
+    UpdateKnowledgeBaseRefreshScheduleResponse.add_member(:schedule_id, Shapes::ShapeRef.new(shape: ScheduleId, required: true, location_name: "ScheduleId"))
+    UpdateKnowledgeBaseRefreshScheduleResponse.add_member(:knowledge_base_arn, Shapes::ShapeRef.new(shape: KnowledgeBaseArn, required: true, location_name: "KnowledgeBaseArn"))
+    UpdateKnowledgeBaseRefreshScheduleResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
+    UpdateKnowledgeBaseRefreshScheduleResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status", metadata: {"box" => true}))
+    UpdateKnowledgeBaseRefreshScheduleResponse.struct_class = Types::UpdateKnowledgeBaseRefreshScheduleResponse
 
     UpdateKnowledgeBaseRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: KbAwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
     UpdateKnowledgeBaseRequest.add_member(:knowledge_base_id, Shapes::ShapeRef.new(shape: KnowledgeBaseId, required: true, location: "uri", location_name: "KnowledgeBaseId"))
@@ -13703,6 +14465,17 @@ module Aws::QuickSight
     UpdateRefreshScheduleResponse.struct_class = Types::UpdateRefreshScheduleResponse
 
     UpdateResourcePermissionList.member = Shapes::ShapeRef.new(shape: ResourcePermission)
+
+    UpdateResourcePermissionsRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
+    UpdateResourcePermissionsRequest.add_member(:role_type, Shapes::ShapeRef.new(shape: ServiceRoleType, required: true, location_name: "RoleType"))
+    UpdateResourcePermissionsRequest.add_member(:customer_managed_role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "CustomerManagedRoleArn"))
+    UpdateResourcePermissionsRequest.struct_class = Types::UpdateResourcePermissionsRequest
+
+    UpdateResourcePermissionsResponse.add_member(:role_type, Shapes::ShapeRef.new(shape: ServiceRoleType, location_name: "RoleType"))
+    UpdateResourcePermissionsResponse.add_member(:customer_managed_role_arn, Shapes::ShapeRef.new(shape: String, location_name: "CustomerManagedRoleArn"))
+    UpdateResourcePermissionsResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
+    UpdateResourcePermissionsResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
+    UpdateResourcePermissionsResponse.struct_class = Types::UpdateResourcePermissionsResponse
 
     UpdateRoleCustomPermissionRequest.add_member(:custom_permissions_name, Shapes::ShapeRef.new(shape: RoleName, required: true, location_name: "CustomPermissionsName"))
     UpdateRoleCustomPermissionRequest.add_member(:role, Shapes::ShapeRef.new(shape: Role, required: true, location: "uri", location_name: "Role"))
@@ -14070,6 +14843,17 @@ module Aws::QuickSight
 
     VPCConnectionSummaryList.member = Shapes::ShapeRef.new(shape: VPCConnectionSummary)
 
+    ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Message"))
+    ValidationException.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
+    ValidationException.add_member(:field_list, Shapes::ShapeRef.new(shape: ValidationExceptionFieldList, location_name: "FieldList"))
+    ValidationException.struct_class = Types::ValidationException
+
+    ValidationExceptionField.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Name"))
+    ValidationExceptionField.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Message"))
+    ValidationExceptionField.struct_class = Types::ValidationExceptionField
+
+    ValidationExceptionFieldList.member = Shapes::ShapeRef.new(shape: ValidationExceptionField)
+
     ValidationStrategy.add_member(:mode, Shapes::ShapeRef.new(shape: ValidationStrategyMode, required: true, location_name: "Mode"))
     ValidationStrategy.struct_class = Types::ValidationStrategy
 
@@ -14356,6 +15140,19 @@ module Aws::QuickSight
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
+      api.add_operation(:batch_delete_policy_assignment_by_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "BatchDeletePolicyAssignmentByPolicy"
+        o.http_method = "POST"
+        o.http_request_uri = "/governance-policy-mgmt/accounts/{AccountId}/policy-assignments/batch-delete"
+        o.input = Shapes::ShapeRef.new(shape: BatchDeletePolicyAssignmentByPolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: BatchDeletePolicyAssignmentByPolicyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
       api.add_operation(:batch_delete_topic_reviewed_answer, Seahorse::Model::Operation.new.tap do |o|
         o.name = "BatchDeleteTopicReviewedAnswer"
         o.http_method = "POST"
@@ -14382,6 +15179,19 @@ module Aws::QuickSight
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
+      api.add_operation(:batch_put_policy_assignment_by_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "BatchPutPolicyAssignmentByPolicy"
+        o.http_method = "POST"
+        o.http_request_uri = "/governance-policy-mgmt/accounts/{AccountId}/policy-assignments/batch-put"
+        o.input = Shapes::ShapeRef.new(shape: BatchPutPolicyAssignmentByPolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: BatchPutPolicyAssignmentByPolicyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
       api.add_operation(:cancel_ingestion, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CancelIngestion"
         o.http_method = "DELETE"
@@ -14394,6 +15204,36 @@ module Aws::QuickSight
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceExistsException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+      end)
+
+      api.add_operation(:create_access_control_application, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateAccessControlApplication"
+        o.http_method = "POST"
+        o.http_request_uri = "/accounts/{AwsAccountId}/access-control-applications"
+        o.input = Shapes::ShapeRef.new(shape: CreateAccessControlApplicationRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateAccessControlApplicationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:create_access_control_application_secret, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateAccessControlApplicationSecret"
+        o.http_method = "POST"
+        o.http_request_uri = "/accounts/{AwsAccountId}/access-control-applications/{ApplicationId}/client-secrets"
+        o.input = Shapes::ShapeRef.new(shape: CreateAccessControlApplicationSecretRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateAccessControlApplicationSecretResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
       api.add_operation(:create_account_customization, Seahorse::Model::Operation.new.tap do |o|
@@ -14684,6 +15524,21 @@ module Aws::QuickSight
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
       end)
 
+      api.add_operation(:create_inbound_connector, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateInboundConnector"
+        o.http_method = "POST"
+        o.http_request_uri = "/accounts/{AwsAccountId}/inbound-connectors"
+        o.input = Shapes::ShapeRef.new(shape: CreateInboundConnectorRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateInboundConnectorResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
       api.add_operation(:create_ingestion, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateIngestion"
         o.http_method = "PUT"
@@ -14707,6 +15562,23 @@ module Aws::QuickSight
         o.output = Shapes::ShapeRef.new(shape: CreateKnowledgeBaseResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceExistsException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: PreconditionNotMetException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:create_knowledge_base_refresh_schedule, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateKnowledgeBaseRefreshSchedule"
+        o.http_method = "POST"
+        o.http_request_uri = "/v1/accounts/{AwsAccountId}/knowledge-bases/{KnowledgeBaseId}/kb-refresh-schedules"
+        o.input = Shapes::ShapeRef.new(shape: CreateKnowledgeBaseRefreshScheduleRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateKnowledgeBaseRefreshScheduleResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceExistsException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
@@ -14937,6 +15809,34 @@ module Aws::QuickSight
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedUserEditionException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+      end)
+
+      api.add_operation(:delete_access_control_application, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteAccessControlApplication"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/accounts/{AwsAccountId}/access-control-applications"
+        o.input = Shapes::ShapeRef.new(shape: DeleteAccessControlApplicationRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteAccessControlApplicationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:delete_access_control_application_secret, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteAccessControlApplicationSecret"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/accounts/{AwsAccountId}/access-control-applications/{ApplicationId}/client-secrets/{ClientSecretId}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteAccessControlApplicationSecretRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteAccessControlApplicationSecretResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
       api.add_operation(:delete_account_custom_permission, Seahorse::Model::Operation.new.tap do |o|
@@ -15279,6 +16179,20 @@ module Aws::QuickSight
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
       end)
 
+      api.add_operation(:delete_inbound_connector, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteInboundConnector"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/accounts/{AwsAccountId}/inbound-connectors/{InboundConnectorId}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteInboundConnectorRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteInboundConnectorResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
       api.add_operation(:delete_knowledge_base, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteKnowledgeBase"
         o.http_method = "DELETE"
@@ -15294,6 +16208,21 @@ module Aws::QuickSight
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:delete_knowledge_base_refresh_schedule, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteKnowledgeBaseRefreshSchedule"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/v1/accounts/{AwsAccountId}/knowledge-bases/{KnowledgeBaseId}/kb-refresh-schedules/{ScheduleId}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteKnowledgeBaseRefreshScheduleRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteKnowledgeBaseRefreshScheduleResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: PreconditionNotMetException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
       api.add_operation(:delete_limits_profile, Seahorse::Model::Operation.new.tap do |o|
@@ -15337,6 +16266,20 @@ module Aws::QuickSight
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+      end)
+
+      api.add_operation(:delete_policy_assignment, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeletePolicyAssignment"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/governance-policy-mgmt/accounts/{AccountId}/policy-assignments"
+        o.input = Shapes::ShapeRef.new(shape: DeletePolicyAssignmentRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeletePolicyAssignmentResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
       api.add_operation(:delete_refresh_schedule, Seahorse::Model::Operation.new.tap do |o|
@@ -15556,6 +16499,19 @@ module Aws::QuickSight
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedUserEditionException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+      end)
+
+      api.add_operation(:describe_access_control_application, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeAccessControlApplication"
+        o.http_method = "GET"
+        o.http_request_uri = "/accounts/{AwsAccountId}/access-control-applications/{ApplicationId}"
+        o.input = Shapes::ShapeRef.new(shape: DescribeAccessControlApplicationRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeAccessControlApplicationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
       api.add_operation(:describe_account_custom_permission, Seahorse::Model::Operation.new.tap do |o|
@@ -16132,6 +17088,19 @@ module Aws::QuickSight
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
       end)
 
+      api.add_operation(:describe_inbound_connector, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeInboundConnector"
+        o.http_method = "GET"
+        o.http_request_uri = "/accounts/{AwsAccountId}/inbound-connectors/{InboundConnectorId}"
+        o.input = Shapes::ShapeRef.new(shape: DescribeInboundConnectorRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeInboundConnectorResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
       api.add_operation(:describe_ingestion, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeIngestion"
         o.http_method = "GET"
@@ -16193,6 +17162,22 @@ module Aws::QuickSight
         o.http_request_uri = "/v1/accounts/{AwsAccountId}/knowledge-bases/{KnowledgeBaseId}/permissions"
         o.input = Shapes::ShapeRef.new(shape: DescribeKnowledgeBasePermissionsRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeKnowledgeBasePermissionsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: PreconditionNotMetException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:describe_knowledge_base_refresh_schedule, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeKnowledgeBaseRefreshSchedule"
+        o.http_method = "GET"
+        o.http_request_uri = "/v1/accounts/{AwsAccountId}/knowledge-bases/{KnowledgeBaseId}/kb-refresh-schedules/{ScheduleId}"
+        o.input = Shapes::ShapeRef.new(shape: DescribeKnowledgeBaseRefreshScheduleRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeKnowledgeBaseRefreshScheduleResponse)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
@@ -16282,6 +17267,19 @@ module Aws::QuickSight
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+      end)
+
+      api.add_operation(:describe_resource_permissions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeResourcePermissions"
+        o.http_method = "GET"
+        o.http_request_uri = "/accounts/{AwsAccountId}/account-resource-permissions"
+        o.input = Shapes::ShapeRef.new(shape: DescribeResourcePermissionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeResourcePermissionsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
       end)
 
@@ -16661,6 +17659,19 @@ module Aws::QuickSight
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
+      api.add_operation(:get_policy_assignment, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetPolicyAssignment"
+        o.http_method = "GET"
+        o.http_request_uri = "/governance-policy-mgmt/accounts/{AccountId}/policy-assignments"
+        o.input = Shapes::ShapeRef.new(shape: GetPolicyAssignmentRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetPolicyAssignmentResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
       api.add_operation(:get_session_embed_url, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetSessionEmbedUrl"
         o.http_method = "GET"
@@ -16676,6 +17687,25 @@ module Aws::QuickSight
         o.errors << Shapes::ShapeRef.new(shape: SessionLifetimeInMinutesInvalidException)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedUserEditionException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+      end)
+
+      api.add_operation(:list_access_control_applications, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListAccessControlApplications"
+        o.http_method = "GET"
+        o.http_request_uri = "/accounts/{AwsAccountId}/access-control-applications"
+        o.input = Shapes::ShapeRef.new(shape: ListAccessControlApplicationsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListAccessControlApplicationsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_action_connectors, Seahorse::Model::Operation.new.tap do |o|
@@ -17117,6 +18147,44 @@ module Aws::QuickSight
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
       end)
 
+      api.add_operation(:list_inbound_connector_application_associations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListInboundConnectorApplicationAssociations"
+        o.http_method = "GET"
+        o.http_request_uri = "/accounts/{AwsAccountId}/inbound-connectors/{InboundConnectorId}/associations"
+        o.input = Shapes::ShapeRef.new(shape: ListInboundConnectorApplicationAssociationsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListInboundConnectorApplicationAssociationsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_inbound_connectors, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListInboundConnectors"
+        o.http_method = "GET"
+        o.http_request_uri = "/accounts/{AwsAccountId}/inbound-connectors"
+        o.input = Shapes::ShapeRef.new(shape: ListInboundConnectorsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListInboundConnectorsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_ingestions, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListIngestions"
         o.http_method = "GET"
@@ -17130,6 +18198,28 @@ module Aws::QuickSight
         o.errors << Shapes::ShapeRef.new(shape: ResourceExistsException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_knowledge_base_refresh_schedules, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListKnowledgeBaseRefreshSchedules"
+        o.http_method = "GET"
+        o.http_request_uri = "/v1/accounts/{AwsAccountId}/knowledge-bases/{KnowledgeBaseId}/kb-refresh-schedules"
+        o.input = Shapes::ShapeRef.new(shape: ListKnowledgeBaseRefreshSchedulesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListKnowledgeBaseRefreshSchedulesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: PreconditionNotMetException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -17210,6 +18300,25 @@ module Aws::QuickSight
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_principals_for_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListPrincipalsForPolicy"
+        o.http_method = "GET"
+        o.http_request_uri = "/governance-policy-mgmt/accounts/{AccountId}/policy-assignments/by-policy"
+        o.input = Shapes::ShapeRef.new(shape: ListPrincipalsForPolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListPrincipalsForPolicyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -17597,6 +18706,20 @@ module Aws::QuickSight
         o.errors << Shapes::ShapeRef.new(shape: PreconditionNotMetException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+      end)
+
+      api.add_operation(:put_policy_assignment, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutPolicyAssignment"
+        o.http_method = "PUT"
+        o.http_request_uri = "/governance-policy-mgmt/accounts/{AccountId}/policy-assignments"
+        o.input = Shapes::ShapeRef.new(shape: PutPolicyAssignmentRequest)
+        o.output = Shapes::ShapeRef.new(shape: PutPolicyAssignmentResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
       api.add_operation(:register_user, Seahorse::Model::Operation.new.tap do |o|
@@ -18000,6 +19123,34 @@ module Aws::QuickSight
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+      end)
+
+      api.add_operation(:update_access_control_application, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateAccessControlApplication"
+        o.http_method = "PATCH"
+        o.http_request_uri = "/accounts/{AwsAccountId}/access-control-applications/{ApplicationId}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateAccessControlApplicationRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateAccessControlApplicationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:update_access_control_application_secret, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateAccessControlApplicationSecret"
+        o.http_method = "PUT"
+        o.http_request_uri = "/accounts/{AwsAccountId}/access-control-applications/{ApplicationId}/client-secrets/{ClientSecretId}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateAccessControlApplicationSecretRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateAccessControlApplicationSecretResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
       api.add_operation(:update_account_custom_permission, Seahorse::Model::Operation.new.tap do |o|
@@ -18500,6 +19651,35 @@ module Aws::QuickSight
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
       end)
 
+      api.add_operation(:update_inbound_connector, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateInboundConnector"
+        o.http_method = "PATCH"
+        o.http_request_uri = "/accounts/{AwsAccountId}/inbound-connectors/{InboundConnectorId}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateInboundConnectorRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateInboundConnectorResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:update_inbound_connector_application_associations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateInboundConnectorApplicationAssociations"
+        o.http_method = "PUT"
+        o.http_request_uri = "/accounts/{AwsAccountId}/inbound-connectors/{InboundConnectorId}/associations"
+        o.input = Shapes::ShapeRef.new(shape: UpdateInboundConnectorApplicationAssociationsRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateInboundConnectorApplicationAssociationsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
       api.add_operation(:update_ip_restriction, Seahorse::Model::Operation.new.tap do |o|
         o.name = "UpdateIpRestriction"
         o.http_method = "POST"
@@ -18551,6 +19731,22 @@ module Aws::QuickSight
         o.output = Shapes::ShapeRef.new(shape: UpdateKnowledgeBasePermissionsResponse)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: PreconditionNotMetException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:update_knowledge_base_refresh_schedule, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateKnowledgeBaseRefreshSchedule"
+        o.http_method = "PUT"
+        o.http_request_uri = "/v1/accounts/{AwsAccountId}/knowledge-bases/{KnowledgeBaseId}/kb-refresh-schedules/{ScheduleId}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateKnowledgeBaseRefreshScheduleRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateKnowledgeBaseRefreshScheduleResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
         o.errors << Shapes::ShapeRef.new(shape: PreconditionNotMetException)
@@ -18644,6 +19840,19 @@ module Aws::QuickSight
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: PreconditionNotMetException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+      end)
+
+      api.add_operation(:update_resource_permissions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateResourcePermissions"
+        o.http_method = "PUT"
+        o.http_request_uri = "/accounts/{AwsAccountId}/account-resource-permissions"
+        o.input = Shapes::ShapeRef.new(shape: UpdateResourcePermissionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateResourcePermissionsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
       end)
 

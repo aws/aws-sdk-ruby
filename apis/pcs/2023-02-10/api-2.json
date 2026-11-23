@@ -391,6 +391,10 @@
       "type":"string",
       "pattern":"ami-[a-z0-9]+"
     },
+    "AmiIdOrEmpty":{
+      "type":"string",
+      "pattern":"(ami-[a-z0-9]+)?"
+    },
     "Arn":{
       "type":"string",
       "max":1011,
@@ -467,6 +471,7 @@
         "slurmCustomSettings":{"shape":"SlurmCustomSettings"},
         "slurmdbdCustomSettings":{"shape":"SlurmdbdCustomSettings"},
         "cgroupCustomSettings":{"shape":"CgroupCustomSettings"},
+        "jobSubmitPlugins":{"shape":"JobSubmitPluginList"},
         "authKey":{"shape":"SlurmAuthKey"},
         "jwtAuth":{"shape":"JwtAuth"},
         "accounting":{"shape":"Accounting"},
@@ -480,6 +485,7 @@
         "slurmCustomSettings":{"shape":"SlurmCustomSettings"},
         "slurmdbdCustomSettings":{"shape":"SlurmdbdCustomSettings"},
         "cgroupCustomSettings":{"shape":"CgroupCustomSettings"},
+        "jobSubmitPlugins":{"shape":"JobSubmitPluginList"},
         "accounting":{"shape":"AccountingRequest"},
         "slurmRest":{"shape":"SlurmRestRequest"}
       }
@@ -541,12 +547,14 @@
         "modifiedAt",
         "status",
         "subnetIds",
-        "customLaunchTemplate",
         "iamInstanceProfileArn",
         "scalingConfiguration",
         "instanceConfigs"
       ],
       "members":{
+        "amiId":{"shape":"AmiId"},
+        "securityGroupIds":{"shape":"SecurityGroupIdList"},
+        "sshKeyName":{"shape":"KeyPairName"},
         "name":{"shape":"ComputeNodeGroupName"},
         "id":{"shape":"String"},
         "arn":{"shape":"String"},
@@ -554,9 +562,9 @@
         "createdAt":{"shape":"SyntheticTimestamp_date_time"},
         "modifiedAt":{"shape":"SyntheticTimestamp_date_time"},
         "status":{"shape":"ComputeNodeGroupStatus"},
-        "amiId":{"shape":"AmiId"},
         "subnetIds":{"shape":"SubnetIdList"},
         "purchaseOption":{"shape":"PurchaseOption"},
+        "launchTemplateMode":{"shape":"LaunchTemplateMode"},
         "customLaunchTemplate":{"shape":"CustomLaunchTemplate"},
         "iamInstanceProfileArn":{"shape":"InstanceProfileArn"},
         "scalingConfiguration":{"shape":"ScalingConfiguration"},
@@ -564,6 +572,7 @@
         "spotOptions":{"shape":"SpotOptions"},
         "slurmConfiguration":{"shape":"ComputeNodeGroupSlurmConfiguration"},
         "nodeLifecycleActions":{"shape":"NodeLifecycleActions"},
+        "instanceHealthChecks":{"shape":"InstanceHealthChecks"},
         "errorInfo":{"shape":"ErrorInfoList"}
       }
     },
@@ -703,17 +712,19 @@
         "clusterIdentifier",
         "computeNodeGroupName",
         "subnetIds",
-        "customLaunchTemplate",
         "iamInstanceProfileArn",
         "scalingConfiguration",
         "instanceConfigs"
       ],
       "members":{
+        "amiId":{"shape":"AmiId"},
+        "securityGroupIds":{"shape":"SecurityGroupIdList"},
+        "sshKeyName":{"shape":"KeyPairName"},
         "clusterIdentifier":{"shape":"ClusterIdentifier"},
         "computeNodeGroupName":{"shape":"ComputeNodeGroupName"},
-        "amiId":{"shape":"AmiId"},
         "subnetIds":{"shape":"StringList"},
         "purchaseOption":{"shape":"PurchaseOption"},
+        "launchTemplateMode":{"shape":"LaunchTemplateMode"},
         "customLaunchTemplate":{"shape":"CustomLaunchTemplate"},
         "iamInstanceProfileArn":{"shape":"InstanceProfileArn"},
         "scalingConfiguration":{"shape":"ScalingConfigurationRequest"},
@@ -721,6 +732,7 @@
         "spotOptions":{"shape":"SpotOptions"},
         "slurmConfiguration":{"shape":"ComputeNodeGroupSlurmConfigurationRequest"},
         "nodeLifecycleActions":{"shape":"NodeLifecycleActionsRequest"},
+        "instanceHealthChecks":{"shape":"InstanceHealthChecksRequest"},
         "clientToken":{
           "shape":"SBClientToken",
           "idempotencyToken":true
@@ -767,6 +779,37 @@
       "members":{
         "id":{"shape":"String"},
         "version":{"shape":"String"}
+      }
+    },
+    "DeepHealthCheckOnStart":{
+      "type":"structure",
+      "members":{
+        "profile":{"shape":"DeepHealthCheckOnStartProfile"},
+        "repairAction":{"shape":"DeepHealthCheckOnStartRepairAction"}
+      }
+    },
+    "DeepHealthCheckOnStartProfile":{
+      "type":"string",
+      "enum":[
+        "NONE",
+        "QUICK",
+        "MEDIUM",
+        "LONG"
+      ]
+    },
+    "DeepHealthCheckOnStartRepairAction":{
+      "type":"string",
+      "enum":[
+        "AUTO",
+        "REPLACE",
+        "ISOLATE",
+        "NONE"
+      ]
+    },
+    "DeepHealthChecks":{
+      "type":"structure",
+      "members":{
+        "onStart":{"shape":"DeepHealthCheckOnStart"}
       }
     },
     "DeleteClusterRequest":{
@@ -923,10 +966,47 @@
       "type":"list",
       "member":{"shape":"GresCustomSettingMap"}
     },
+    "HealthMonitoring":{
+      "type":"structure",
+      "members":{
+        "mode":{"shape":"HealthMonitoringMode"},
+        "repairAction":{"shape":"HealthMonitoringRepairAction"}
+      }
+    },
+    "HealthMonitoringMode":{
+      "type":"string",
+      "enum":[
+        "NONE",
+        "STANDARD"
+      ]
+    },
+    "HealthMonitoringRepairAction":{
+      "type":"string",
+      "enum":[
+        "AUTO",
+        "REPLACE",
+        "ISOLATE",
+        "NONE"
+      ]
+    },
     "InstanceConfig":{
       "type":"structure",
       "members":{
         "instanceType":{"shape":"String"}
+      }
+    },
+    "InstanceHealthChecks":{
+      "type":"structure",
+      "members":{
+        "healthMonitoring":{"shape":"HealthMonitoring"},
+        "deepHealthChecks":{"shape":"DeepHealthChecks"}
+      }
+    },
+    "InstanceHealthChecksRequest":{
+      "type":"structure",
+      "members":{
+        "healthMonitoring":{"shape":"HealthMonitoring"},
+        "deepHealthChecks":{"shape":"DeepHealthChecks"}
       }
     },
     "InstanceList":{
@@ -951,6 +1031,61 @@
       "fault":true,
       "retryable":{"throttling":false}
     },
+    "JobSubmitPlugin":{
+      "type":"structure",
+      "required":[
+        "name",
+        "type",
+        "scriptSource"
+      ],
+      "members":{
+        "name":{"shape":"JobSubmitPluginNameString"},
+        "type":{"shape":"JobSubmitPluginType"},
+        "scriptSource":{"shape":"JobSubmitScriptSource"}
+      }
+    },
+    "JobSubmitPluginList":{
+      "type":"list",
+      "member":{"shape":"JobSubmitPlugin"},
+      "max":1,
+      "min":0
+    },
+    "JobSubmitPluginNameString":{
+      "type":"string",
+      "max":64,
+      "min":1,
+      "pattern":"[A-Za-z0-9][A-Za-z0-9_-]*"
+    },
+    "JobSubmitPluginType":{
+      "type":"string",
+      "enum":["STARLARK"]
+    },
+    "JobSubmitScriptSource":{
+      "type":"structure",
+      "required":["scriptLocation"],
+      "members":{
+        "scriptLocation":{"shape":"JobSubmitScriptSourceScriptLocationString"},
+        "s3VersionId":{"shape":"JobSubmitScriptSourceS3VersionIdString"},
+        "checksum":{"shape":"JobSubmitScriptSourceChecksumString"}
+      }
+    },
+    "JobSubmitScriptSourceChecksumString":{
+      "type":"string",
+      "max":64,
+      "min":64,
+      "pattern":"[a-fA-F0-9]{64}"
+    },
+    "JobSubmitScriptSourceS3VersionIdString":{
+      "type":"string",
+      "max":1024,
+      "min":0
+    },
+    "JobSubmitScriptSourceScriptLocationString":{
+      "type":"string",
+      "max":1024,
+      "min":1,
+      "pattern":"s3://[a-z0-9][a-z0-9.-]{1,61}[a-z0-9]/.+"
+    },
     "JwtAuth":{
       "type":"structure",
       "members":{
@@ -967,6 +1102,23 @@
         "secretArn":{"shape":"String"},
         "secretVersion":{"shape":"String"}
       }
+    },
+    "KeyPairName":{
+      "type":"string",
+      "max":255,
+      "min":1
+    },
+    "KeyPairNameOrEmpty":{
+      "type":"string",
+      "max":255,
+      "min":0
+    },
+    "LaunchTemplateMode":{
+      "type":"string",
+      "enum":[
+        "CUSTOM",
+        "MANAGED"
+      ]
     },
     "ListClustersRequest":{
       "type":"structure",
@@ -1249,7 +1401,8 @@
         "computeNodeGroupId":{"shape":"String"},
         "computeNodeGroupName":{"shape":"String"},
         "nodeLifecycleActions":{"shape":"NodeLifecycleActions"},
-        "schedulerVersion":{"shape":"String"}
+        "schedulerVersion":{"shape":"String"},
+        "instanceHealthChecks":{"shape":"InstanceHealthChecks"}
       }
     },
     "RequestTagMap":{
@@ -1389,6 +1542,10 @@
       "pattern":"sg-\\w{8,17}"
     },
     "SecurityGroupIdList":{
+      "type":"list",
+      "member":{"shape":"SecurityGroupId"}
+    },
+    "SecurityGroupIdListOrEmpty":{
       "type":"list",
       "member":{"shape":"SecurityGroupId"}
     },
@@ -1608,6 +1765,7 @@
         "slurmCustomSettings":{"shape":"SlurmCustomSettings"},
         "slurmdbdCustomSettings":{"shape":"SlurmdbdCustomSettings"},
         "cgroupCustomSettings":{"shape":"CgroupCustomSettings"},
+        "jobSubmitPlugins":{"shape":"JobSubmitPluginList"},
         "accounting":{"shape":"UpdateAccountingRequest"},
         "slurmRest":{"shape":"UpdateSlurmRestRequest"}
       }
@@ -1625,10 +1783,13 @@
         "computeNodeGroupIdentifier"
       ],
       "members":{
+        "amiId":{"shape":"AmiIdOrEmpty"},
+        "securityGroupIds":{"shape":"SecurityGroupIdListOrEmpty"},
+        "sshKeyName":{"shape":"KeyPairNameOrEmpty"},
         "clusterIdentifier":{"shape":"ClusterIdentifier"},
         "computeNodeGroupIdentifier":{"shape":"ComputeNodeGroupIdentifier"},
-        "amiId":{"shape":"AmiId"},
         "subnetIds":{"shape":"StringList"},
+        "launchTemplateMode":{"shape":"LaunchTemplateMode"},
         "customLaunchTemplate":{"shape":"CustomLaunchTemplate"},
         "purchaseOption":{"shape":"PurchaseOption"},
         "spotOptions":{"shape":"SpotOptions"},
@@ -1636,6 +1797,7 @@
         "iamInstanceProfileArn":{"shape":"InstanceProfileArn"},
         "slurmConfiguration":{"shape":"UpdateComputeNodeGroupSlurmConfigurationRequest"},
         "nodeLifecycleActions":{"shape":"UpdateNodeLifecycleActionsRequest"},
+        "instanceHealthChecks":{"shape":"UpdateInstanceHealthChecksRequest"},
         "clientToken":{
           "shape":"SBClientToken",
           "idempotencyToken":true
@@ -1661,6 +1823,13 @@
       "box":true,
       "max":10000000,
       "min":-1
+    },
+    "UpdateInstanceHealthChecksRequest":{
+      "type":"structure",
+      "members":{
+        "healthMonitoring":{"shape":"HealthMonitoring"},
+        "deepHealthChecks":{"shape":"DeepHealthChecks"}
+      }
     },
     "UpdateNodeLifecycleActionsRequest":{
       "type":"structure",

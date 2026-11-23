@@ -229,6 +229,11 @@ module Aws::ECR
       SENSITIVE: []
     end
 
+    class DeleteReplication
+      attr_accessor enabled: bool
+      SENSITIVE: []
+    end
+
     class DeleteRepositoryCreationTemplateRequest
       attr_accessor prefix: ::String
       SENSITIVE: []
@@ -690,7 +695,7 @@ module Aws::ECR
     end
 
     class ImageScanStatus
-      attr_accessor status: ("IN_PROGRESS" | "COMPLETE" | "FAILED" | "UNSUPPORTED_IMAGE" | "ACTIVE" | "PENDING" | "SCAN_ELIGIBILITY_EXPIRED" | "FINDINGS_UNAVAILABLE" | "LIMIT_EXCEEDED" | "IMAGE_ARCHIVED")
+      attr_accessor status: ("IN_PROGRESS" | "COMPLETE" | "FAILED" | "UNSUPPORTED_IMAGE" | "ACTIVE" | "PENDING" | "SCAN_ELIGIBILITY_EXPIRED" | "FINDINGS_UNAVAILABLE" | "LIMIT_EXCEEDED" | "IMAGE_ARCHIVED" | "IMAGE_SIZE_EXCEEDED")
       attr_accessor description: ::String
       SENSITIVE: []
     end
@@ -1178,6 +1183,7 @@ module Aws::ECR
     class ReplicationRule
       attr_accessor destinations: ::Array[Types::ReplicationDestination]
       attr_accessor repository_filters: ::Array[Types::RepositoryFilter]
+      attr_accessor delete_replication: Types::DeleteReplication
       SENSITIVE: []
     end
 

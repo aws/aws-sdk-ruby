@@ -64,17 +64,45 @@ module Aws::TranscribeService
     end
 
     # Your request didn't pass one or more validation tests. This can occur
-    # when the entity you're trying to delete doesn't exist or if it's in
-    # a non-terminal state (such as `IN PROGRESS`). See the exception
-    # message field for more information.
+    # when a parameter has an invalid value, when you combine parameters in
+    # a way that isn't supported, when the entity you're trying to delete
+    # doesn't exist, or if it's in a non-terminal state (such as `IN
+    # PROGRESS`). See the exception message field for more information.
     #
     # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] reason
+    #   A code that identifies why the audio in your request was rejected.
+    #   Currently, `TranscribeAudio` returns this field, and only for
+    #   problems with your audio. It isn't returned for other validation
+    #   errors.
+    #
+    #   Possible values:
+    #
+    #   * `audioTooLong`: The audio is longer than the maximum duration of 1
+    #     hour.
+    #
+    #   * `audioTooShort`: The audio is shorter than 0.5 seconds.
+    #
+    #   * `audioFileTooLarge`: The audio is larger than the maximum size.
+    #
+    #   * `unsupportedAudioFormat`: The media format isn't supported.
+    #
+    #   * `unsupportedChannelCount`: You enabled `ChannelIdentification` and
+    #     the audio has more than two channels.
+    #
+    #   * `invalidAudio`: Amazon Transcribe couldn't decode the audio.
+    #
+    #   * `mediaDownloadFailed`: Amazon Transcribe couldn't download the
+    #     audio at your `MediaFileUri`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/BadRequestException AWS API Documentation
     #
     class BadRequestException < Struct.new(
-      :message)
+      :message,
+      :reason)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -338,11 +366,11 @@ module Aws::TranscribeService
     #   @return [String]
     #
     # @!attribute [rw] content_redaction
-    #   Makes it possible to redact or flag specified personally
-    #   identifiable information (PII) in your transcript. If you use
-    #   `ContentRedaction`, you must also include the sub-parameters:
-    #   `RedactionOutput` and `RedactionType`. You can optionally include
-    #   `PiiEntityTypes` to choose which types of PII you want to redact.
+    #   Makes it possible to redact specified personally identifiable
+    #   information (PII) in your transcript. If you use `ContentRedaction`,
+    #   you must also include the sub-parameters: `RedactionOutput` and
+    #   `RedactionType`. You can optionally include `PiiEntityTypes` to
+    #   choose which types of PII you want to redact.
     #   @return [Types::ContentRedaction]
     #
     # @!attribute [rw] language_options
@@ -675,7 +703,7 @@ module Aws::TranscribeService
       include Aws::Structure
     end
 
-    # Makes it possible to redact or flag specified personally identifiable
+    # Makes it possible to redact specified personally identifiable
     # information (PII) in your transcript. If you use `ContentRedaction`,
     # you must also include the sub-parameters: `RedactionOutput` and
     # `RedactionType`. You can optionally include `PiiEntityTypes` to choose
@@ -697,7 +725,10 @@ module Aws::TranscribeService
     #   transcript.
     #
     #   When you choose `redacted_and_unredacted` Amazon Transcribe creates
-    #   a redacted and an unredacted transcript (as two separate files).
+    #   a redacted and an unredacted transcript. For batch jobs, Amazon
+    #   Transcribe creates two separate files. For `TranscribeAudio`, Amazon
+    #   Transcribe returns them in `RedactedResults` and `Results`, or
+    #   writes them as two separate files if you use `OutputConfiguration`.
     #   @return [String]
     #
     # @!attribute [rw] pii_entity_types
@@ -846,7 +877,7 @@ module Aws::TranscribeService
     # @!attribute [rw] encryption_configuration
     #   Specifies the encryption configuration for your custom language
     #   model. Your model artifacts are encrypted with the specified KMS key
-    #   or with an AWS-owned key if a key is not supplied.
+    #   or with an Amazon Web Services owned key if a key is not supplied.
     #   @return [Types::EncryptionConfiguration]
     #
     # @!attribute [rw] tags
@@ -1103,7 +1134,8 @@ module Aws::TranscribeService
     # @!attribute [rw] encryption_configuration
     #   Specifies the encryption configuration for your custom vocabulary
     #   filter. Your vocabulary filter artifacts are encrypted with the
-    #   specified KMS key or with an AWS-owned key if a key is not supplied.
+    #   specified KMS key or with an Amazon Web Services owned key if a key
+    #   is not supplied.
     #   @return [Types::EncryptionConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/CreateVocabularyFilterRequest AWS API Documentation
@@ -1243,7 +1275,7 @@ module Aws::TranscribeService
     # @!attribute [rw] encryption_configuration
     #   Specifies the encryption configuration for your custom vocabulary.
     #   Your vocabulary artifacts are encrypted with the specified KMS key
-    #   or with an AWS-owned key if a key is not supplied.
+    #   or with an Amazon Web Services owned key if a key is not supplied.
     #   @return [Types::EncryptionConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/CreateVocabularyRequest AWS API Documentation
@@ -1463,7 +1495,11 @@ module Aws::TranscribeService
       include Aws::Structure
     end
 
-    # Encryption configuration for the invocation
+    # The encryption configuration for your custom resource. Specify a
+    # customer managed KMS key, and optionally an encryption context, to
+    # encrypt your custom vocabulary, custom vocabulary filter, or custom
+    # language model artifacts at rest. If you do not provide a key, your
+    # artifacts are encrypted with an Amazon Web Services owned key.
     #
     # @!attribute [rw] kms_encryption_context
     #   A map of plain text, non-secret key:value pairs, known as encryption
@@ -4832,13 +4868,12 @@ module Aws::TranscribeService
     #   @return [Types::JobExecutionSettings]
     #
     # @!attribute [rw] content_redaction
-    #   Makes it possible to redact or flag specified personally
-    #   identifiable information (PII) in your transcript. If you use
-    #   `ContentRedaction`, you must also include the sub-parameters:
-    #   `RedactionOutput` and `RedactionType`. You can optionally include
-    #   `PiiEntityTypes` to choose which types of PII you want to redact. If
-    #   you do not include `PiiEntityTypes` in your request, all PII is
-    #   redacted.
+    #   Makes it possible to redact specified personally identifiable
+    #   information (PII) in your transcript. If you use `ContentRedaction`,
+    #   you must also include the sub-parameters: `RedactionOutput` and
+    #   `RedactionType`. You can optionally include `PiiEntityTypes` to
+    #   choose which types of PII you want to redact. If you do not include
+    #   `PiiEntityTypes` in your request, all PII is redacted.
     #   @return [Types::ContentRedaction]
     #
     # @!attribute [rw] identify_language
@@ -5126,6 +5161,193 @@ module Aws::TranscribeService
       include Aws::Structure
     end
 
+    # A word or punctuation mark in your transcript. Labels such as
+    # `SpeakerLabel` and `ChannelLabel` are present only if you enabled the
+    # related feature.
+    #
+    # @!attribute [rw] id
+    #   The position of this item in the transcript, starting at 0.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] content
+    #   The word or punctuation mark. In `RedactedResults`, Amazon
+    #   Transcribe replaces redacted words with `[PII]`.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_time
+    #   The time, in seconds from the start of your audio, when this item
+    #   starts.
+    #   @return [Float]
+    #
+    # @!attribute [rw] end_time
+    #   The time, in seconds from the start of your audio, when this item
+    #   ends.
+    #   @return [Float]
+    #
+    # @!attribute [rw] language_code
+    #   The language of this item, as a locale (for example, `en-US`).
+    #   @return [String]
+    #
+    # @!attribute [rw] channel_label
+    #   The audio channel this item came from (`ch_0` or `ch_1`). Present if
+    #   you enabled `ChannelIdentification`.
+    #
+    #   Item start and end times are measured from the start of the audio,
+    #   separately for each channel.
+    #   @return [String]
+    #
+    # @!attribute [rw] speaker_label
+    #   The speaker of this item (for example, `spk_0`). Present if you
+    #   enabled `ShowSpeakerLabels`.
+    #   @return [String]
+    #
+    # @!attribute [rw] vocabulary_filter_match
+    #   Indicates whether this item matched a word in your custom vocabulary
+    #   filter. Present if you included `VocabularyFilterSettings`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] redactions
+    #   The types of personally identifiable information (PII) that Amazon
+    #   Transcribe redacted from this item. Present only on redacted items
+    #   in `RedactedResults`.
+    #   @return [Array<Types::SyncRedaction>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/SyncItem AWS API Documentation
+    #
+    class SyncItem < Struct.new(
+      :id,
+      :content,
+      :start_time,
+      :end_time,
+      :language_code,
+      :channel_label,
+      :speaker_label,
+      :vocabulary_filter_match,
+      :redactions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A language identified in your audio, and how long it's spoken.
+    #
+    # @!attribute [rw] language_code
+    #   The identified language, as a locale (for example, `en-US`).
+    #   @return [String]
+    #
+    # @!attribute [rw] duration_in_seconds
+    #   The total time, in seconds, the identified language is spoken in
+    #   your audio.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/SyncLanguageCodeItem AWS API Documentation
+    #
+    class SyncLanguageCodeItem < Struct.new(
+      :language_code,
+      :duration_in_seconds)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The audio to transcribe. Specify exactly one of `MediaBytes` or
+    # `MediaFileUri`.
+    #
+    # Audio sent in the request (`MediaBytes`) can be up to 25 MB. Audio in
+    # Amazon S3 (`MediaFileUri`) can be up to 500 MB.
+    #
+    # @note SyncMedia is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @!attribute [rw] media_bytes
+    #   Your audio file, provided inline in the request. The maximum size is
+    #   25 MB (26,214,400 bytes) of audio, measured before base64 encoding.
+    #
+    #   If you use an Amazon Web Services SDK, the SDK base64-encodes the
+    #   bytes for you. If you call the API directly, base64-encode the bytes
+    #   yourself.
+    #   @return [String]
+    #
+    # @!attribute [rw] media_file_uri
+    #   The Amazon S3 location of the media file you want to transcribe. For
+    #   example:
+    #
+    #   * `s3://amzn-s3-demo-bucket/my-media-file.flac`
+    #
+    #   * `s3://amzn-s3-demo-bucket/media-files/my-media-file.flac`
+    #
+    #   The maximum file size is 500 MB. You must have read permission for
+    #   the file.
+    #
+    #   The Amazon S3 bucket that contains your input media must be located
+    #   in the same Amazon Web Services Region where you're making your
+    #   transcription request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/SyncMedia AWS API Documentation
+    #
+    class SyncMedia < Struct.new(
+      :media_bytes,
+      :media_file_uri,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class MediaBytes < SyncMedia; end
+      class MediaFileUri < SyncMedia; end
+      class Unknown < SyncMedia; end
+    end
+
+    # The Amazon S3 location where your transcript is written.
+    #
+    # @!attribute [rw] output_media_file_uri
+    #   The Amazon S3 location where you want your transcript written. For
+    #   example:
+    #
+    #   * `s3://amzn-s3-demo-bucket/my-transcript.json`
+    #
+    #   * `s3://amzn-s3-demo-bucket/transcripts/`
+    #
+    #   If the location ends with an object key, Amazon Transcribe writes
+    #   the transcript to that key. If it is a bucket or ends with a forward
+    #   slash (`/`), it's treated as a prefix, and Amazon Transcribe writes
+    #   the transcript under it to a file named with the request ID of your
+    #   call and a `.json` extension.
+    #
+    #   If you use `ContentRedaction`, Amazon Transcribe writes the redacted
+    #   transcript to the same location and adds `redacted-` before the file
+    #   name (for example, `redacted-my-transcript.json`). With
+    #   `redacted_and_unredacted`, Amazon Transcribe writes both files.
+    #
+    #   If an object already exists at that key, Amazon Transcribe
+    #   overwrites it.
+    #
+    #   In a response, this is the location where Amazon Transcribe wrote
+    #   your transcript. If you requested `redacted_and_unredacted` output,
+    #   this is the location of the unredacted transcript.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/SyncOutputConfiguration AWS API Documentation
+    #
+    class SyncOutputConfiguration < Struct.new(
+      :output_media_file_uri)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A type of personally identifiable information (PII) redacted from an
+    # item.
+    #
+    # @!attribute [rw] type
+    #   The type of PII that was redacted, for example `NAME` or `SSN`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/SyncRedaction AWS API Documentation
+    #
+    class SyncRedaction < Struct.new(
+      :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Adds metadata, in the form of a key:value pair, to the specified
     # resource.
     #
@@ -5216,6 +5438,234 @@ module Aws::TranscribeService
     #
     class ToxicityDetectionSettings < Struct.new(
       :toxicity_categories)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about your audio.
+    #
+    # @!attribute [rw] language_code
+    #   The language of your transcript, as a locale (for example, `en-US`).
+    #   Present if you used `LanguageDetectionMode`.
+    #   @return [String]
+    #
+    # @!attribute [rw] language_codes
+    #   The language identified in your audio, and how long it's spoken.
+    #   Present if you used `LanguageDetectionMode`.
+    #   @return [Array<Types::SyncLanguageCodeItem>]
+    #
+    # @!attribute [rw] media_format
+    #   The format of your audio, as detected by Amazon Transcribe.
+    #   @return [String]
+    #
+    # @!attribute [rw] media_sample_rate_hertz
+    #   The sample rate of your audio, in hertz, as detected by Amazon
+    #   Transcribe.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] speakers_count
+    #   The number of speakers identified in your audio. Present if you
+    #   enabled `ShowSpeakerLabels`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] number_of_channels
+    #   The number of audio channels in your media. Present if you enabled
+    #   `ChannelIdentification`.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/TranscribeAudioMetadata AWS API Documentation
+    #
+    class TranscribeAudioMetadata < Struct.new(
+      :language_code,
+      :language_codes,
+      :media_format,
+      :media_sample_rate_hertz,
+      :speakers_count,
+      :number_of_channels)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] media
+    #   The audio to transcribe. Specify exactly one of `MediaBytes` or
+    #   `MediaFileUri`.
+    #
+    #   Audio sent in the request (`MediaBytes`) can be up to 25 MB. Audio
+    #   in Amazon S3 (`MediaFileUri`) can be up to 500 MB.
+    #   @return [Types::SyncMedia]
+    #
+    # @!attribute [rw] language
+    #   The language spoken in your audio, as a base language code (for
+    #   example, `en` or `es`).
+    #
+    #   Include either `Language` or `LanguageDetectionMode` in your
+    #   request, but not both.
+    #   @return [String]
+    #
+    # @!attribute [rw] language_detection_mode
+    #   Enables automatic language identification. Use `IDENTIFY_LANGUAGE`
+    #   if your audio contains a single language that you don't know in
+    #   advance.
+    #
+    #   You can optionally include `LanguageOptions` to limit identification
+    #   to languages you think may be present, which can improve accuracy.
+    #
+    #   Amazon Transcribe returns the identified language, as a locale (for
+    #   example, `en-US`), in the response metadata.
+    #
+    #   Include either `Language` or `LanguageDetectionMode` in your
+    #   request, but not both.
+    #   @return [String]
+    #
+    # @!attribute [rw] language_options
+    #   A list of two or more languages that you think may be present in
+    #   your audio, as base language codes (for example, `en` and `es`).
+    #   Each language can appear only once. A list with only one language
+    #   returns a `BadRequestException`.
+    #
+    #   You can use `LanguageOptions` only with `LanguageDetectionMode`.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] channel_identification
+    #   Enables channel identification in multi-channel audio. Each channel
+    #   is transcribed independently, and each item in the transcript is
+    #   labeled with its channel.
+    #
+    #   Channel identification supports up to two channels.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] show_speaker_labels
+    #   Enables speaker partitioning (diarization) in your transcript.
+    #   Speaker partitioning labels the speech from individual speakers in
+    #   your media file.
+    #
+    #   If you set `ShowSpeakerLabels` to `true`, you must also include
+    #   `MaxSpeakerLabels`.
+    #
+    #   For more information, see [Partitioning speakers (diarization)][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/diarization.html
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] max_speaker_labels
+    #   Specify the maximum number of speakers you want to partition in your
+    #   media.
+    #
+    #   Note that if your media contains more speakers than the specified
+    #   number, Amazon Transcribe treats multiple speakers as a single
+    #   speaker.
+    #
+    #   You can set `MaxSpeakerLabels` only if `ShowSpeakerLabels` is
+    #   `true`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] vocabulary_settings
+    #   Custom vocabularies to apply to your transcript, with one entry per
+    #   language. In each entry, you can reference a custom vocabulary you
+    #   created or provide phrases inline. All entries must use the same
+    #   type, either all by name or all inline.
+    #
+    #   If you specify `Language`, include exactly one entry, and its
+    #   `Language` must match. If you use `LanguageDetectionMode`, you can
+    #   include one entry for each language in `LanguageOptions`.
+    #   @return [Array<Types::VocabularySettingsEntry>]
+    #
+    # @!attribute [rw] vocabulary_filter_settings
+    #   Custom vocabulary filters to apply to your transcript, and how to
+    #   apply them.
+    #   @return [Types::VocabularyFilterSettings]
+    #
+    # @!attribute [rw] content_redaction
+    #   Redacts personally identifiable information (PII) from your
+    #   transcript. Amazon Transcribe returns the redacted transcript in
+    #   `RedactedResults`.
+    #
+    #   If you set `RedactionOutput` to `redacted_and_unredacted`, Amazon
+    #   Transcribe also returns the unredacted transcript in `Results`.
+    #
+    #   In Sync, content redaction has these limits:
+    #
+    #   * **Languages:** English (`en`), Spanish (`es`), French (`fr`),
+    #     Italian (`it`), German (`de`), and Portuguese (`pt`).
+    #
+    #   * **Language identification:** If you use `LanguageDetectionMode`,
+    #     you must also include `LanguageOptions`, and every language in it
+    #     must be one of the languages above. A request that has no
+    #     `LanguageOptions`, or that lists a language that isn't supported,
+    #     returns a `BadRequestException`.
+    #
+    #   * **Regions:** Content redaction isn't available in the South
+    #     America (São Paulo) Region (`sa-east-1`). It's available in the
+    #     other Amazon Web Services Regions where Sync is available.
+    #   @return [Types::ContentRedaction]
+    #
+    # @!attribute [rw] output_configuration
+    #   Writes the transcript to an Amazon S3 location instead of returning
+    #   it in the response. If you include `OutputConfiguration`, the
+    #   response contains only the output location.
+    #
+    #   You must have write permission for the location you specify.
+    #   @return [Types::SyncOutputConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/TranscribeAudioRequest AWS API Documentation
+    #
+    class TranscribeAudioRequest < Struct.new(
+      :media,
+      :language,
+      :language_detection_mode,
+      :language_options,
+      :channel_identification,
+      :show_speaker_labels,
+      :max_speaker_labels,
+      :vocabulary_settings,
+      :vocabulary_filter_settings,
+      :content_redaction,
+      :output_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] output_configuration
+    #   The Amazon S3 location where your transcript was written. Present
+    #   only if you included `OutputConfiguration` in your request. In that
+    #   case, `TranscriptResponse` isn't returned.
+    #   @return [Types::SyncOutputConfiguration]
+    #
+    # @!attribute [rw] transcript_response
+    #   Your transcript and information about your audio. Present only if
+    #   you didn't include `OutputConfiguration` in your request.
+    #   @return [Types::TranscriptResponse]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/TranscribeAudioResponse AWS API Documentation
+    #
+    class TranscribeAudioResponse < Struct.new(
+      :output_configuration,
+      :transcript_response)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A transcript of your audio.
+    #
+    # @!attribute [rw] transcript
+    #   The full text of your transcript.
+    #
+    #   If you enabled `ChannelIdentification`, the text of channel `ch_0`
+    #   is followed by the text of channel `ch_1`.
+    #   @return [String]
+    #
+    # @!attribute [rw] items
+    #   The words and punctuation in your transcript, with timing and any
+    #   labels you requested.
+    #   @return [Array<Types::SyncItem>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/TranscribeAudioResults AWS API Documentation
+    #
+    class TranscribeAudioResults < Struct.new(
+      :transcript,
+      :items)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5343,6 +5793,36 @@ module Aws::TranscribeService
       :participant_role,
       :negate,
       :targets)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Your transcript and information about your audio.
+    #
+    # @!attribute [rw] metadata
+    #   Information about your audio, such as the detected language, format,
+    #   and sample rate.
+    #   @return [Types::TranscribeAudioMetadata]
+    #
+    # @!attribute [rw] results
+    #   Your unredacted transcript.
+    #
+    #   If you set `RedactionOutput` to `redacted`, Amazon Transcribe
+    #   doesn't return this field. Use `RedactedResults` instead.
+    #   @return [Types::TranscribeAudioResults]
+    #
+    # @!attribute [rw] redacted_results
+    #   Your transcript with personally identifiable information (PII)
+    #   redacted. Present only if you included `ContentRedaction` in your
+    #   request.
+    #   @return [Types::TranscribeAudioResults]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/TranscriptResponse AWS API Documentation
+    #
+    class TranscriptResponse < Struct.new(
+      :metadata,
+      :results,
+      :redacted_results)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5816,7 +6296,8 @@ module Aws::TranscribeService
     # @!attribute [rw] encryption_configuration
     #   Specifies the new encryption configuration for your custom language
     #   model. The model artifacts are re-encrypted in place using the
-    #   specified KMS key or with an AWS-owned key if a key is not supplied.
+    #   specified KMS key or with an Amazon Web Services owned key if a key
+    #   is not supplied.
     #   @return [Types::EncryptionConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/UpdateLanguageModelRequest AWS API Documentation
@@ -5978,10 +6459,10 @@ module Aws::TranscribeService
     #   @return [String]
     #
     # @!attribute [rw] encryption_configuration
-    #   Specifies the new encryption configuration for your custom
-    #   vocabulary filter. The vocabulary filter artifacts are re-encrypted
-    #   in place using the specified KMS key or with an AWS-owned key if a
-    #   key is not supplied.
+    #   Specifies the encryption configuration for your custom vocabulary
+    #   filter. Your vocabulary filter artifacts are encrypted with the
+    #   specified KMS key or with an Amazon Web Services owned key if a key
+    #   is not supplied.
     #   @return [Types::EncryptionConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/UpdateVocabularyFilterRequest AWS API Documentation
@@ -6101,10 +6582,9 @@ module Aws::TranscribeService
     #   @return [String]
     #
     # @!attribute [rw] encryption_configuration
-    #   Specifies the new encryption configuration for your custom
-    #   vocabulary. The vocabulary artifacts are re-encrypted in place using
-    #   the specified KMS key or with an AWS-owned key if a key is not
-    #   supplied.
+    #   Specifies the encryption configuration for your custom vocabulary.
+    #   Your vocabulary artifacts are encrypted with the specified KMS key
+    #   or with an Amazon Web Services owned key if a key is not supplied.
     #   @return [Types::EncryptionConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/UpdateVocabularyRequest AWS API Documentation
@@ -6149,6 +6629,43 @@ module Aws::TranscribeService
       :language_code,
       :last_modified_time,
       :vocabulary_state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A custom vocabulary filter for one language. Specify exactly one of
+    # `VocabularyFilterName` or `Words`.
+    #
+    # @!attribute [rw] language
+    #   The language this custom vocabulary filter applies to, as a base
+    #   language code (for example, `en`). Each language can appear in only
+    #   one entry.
+    #   @return [String]
+    #
+    # @!attribute [rw] vocabulary_filter_name
+    #   The name of a custom vocabulary filter you created. The filter's
+    #   language must match this entry's `Language`.
+    #
+    #   Vocabulary filter names are case sensitive.
+    #
+    #   Include either `VocabularyFilterName` or `Words` in each entry, but
+    #   not both.
+    #   @return [String]
+    #
+    # @!attribute [rw] words
+    #   The words to filter, provided inline. You don't need to create the
+    #   vocabulary filter first.
+    #
+    #   Include either `Words` or `VocabularyFilterName` in each entry, but
+    #   not both.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/VocabularyFilterEntry AWS API Documentation
+    #
+    class VocabularyFilterEntry < Struct.new(
+      :language,
+      :vocabulary_filter_name,
+      :words)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6199,6 +6716,40 @@ module Aws::TranscribeService
       include Aws::Structure
     end
 
+    # Custom vocabulary filters to apply to your transcript, and how to
+    # apply them.
+    #
+    # @!attribute [rw] vocabulary_filter_method
+    #   Specify how you want your custom vocabulary filter applied to your
+    #   transcript.
+    #
+    #   To replace words with `***`, choose `mask`.
+    #
+    #   To delete words, choose `remove`.
+    #
+    #   To flag words without changing them, choose `tag`.
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   Custom vocabulary filters, with one entry per language. In each
+    #   entry, you can reference a custom vocabulary filter you created or
+    #   provide words inline. All entries must use the same type, either all
+    #   by name or all inline.
+    #
+    #   If you specify `Language`, include exactly one entry, and its
+    #   `Language` must match. If you use `LanguageDetectionMode`, you can
+    #   include one entry for each language in `LanguageOptions`.
+    #   @return [Array<Types::VocabularyFilterEntry>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/VocabularyFilterSettings AWS API Documentation
+    #
+    class VocabularyFilterSettings < Struct.new(
+      :vocabulary_filter_method,
+      :filters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Provides information about a custom vocabulary, including the language
     # of the custom vocabulary, when it was last modified, its name, and the
     # processing state.
@@ -6240,6 +6791,64 @@ module Aws::TranscribeService
       :language_code,
       :last_modified_time,
       :vocabulary_state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A phrase in an inline custom vocabulary.
+    #
+    # @!attribute [rw] text
+    #   The phrase to recognize in your audio.
+    #   @return [String]
+    #
+    # @!attribute [rw] display_as
+    #   How the phrase is written in your transcript. If you don't include
+    #   `DisplayAs`, the phrase is written as it appears in `Text`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/VocabularyPhrase AWS API Documentation
+    #
+    class VocabularyPhrase < Struct.new(
+      :text,
+      :display_as)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A custom vocabulary for one language. Specify exactly one of
+    # `VocabularyName` or `Phrases`.
+    #
+    # @!attribute [rw] language
+    #   The language this custom vocabulary applies to, as a base language
+    #   code (for example, `en`). Each language can appear in only one
+    #   entry.
+    #   @return [String]
+    #
+    # @!attribute [rw] vocabulary_name
+    #   The name of a custom vocabulary you created. The vocabulary must be
+    #   in the `READY` state, and its language must match this entry's
+    #   `Language`.
+    #
+    #   Vocabulary names are case sensitive.
+    #
+    #   Include either `VocabularyName` or `Phrases` in each entry, but not
+    #   both.
+    #   @return [String]
+    #
+    # @!attribute [rw] phrases
+    #   Up to 100 phrases to use as a custom vocabulary, provided inline.
+    #   You don't need to create the vocabulary first.
+    #
+    #   Include either `Phrases` or `VocabularyName` in each entry, but not
+    #   both.
+    #   @return [Array<Types::VocabularyPhrase>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/VocabularySettingsEntry AWS API Documentation
+    #
+    class VocabularySettingsEntry < Struct.new(
+      :language,
+      :vocabulary_name,
+      :phrases)
       SENSITIVE = []
       include Aws::Structure
     end

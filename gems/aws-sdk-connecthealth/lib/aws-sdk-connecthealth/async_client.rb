@@ -221,7 +221,8 @@ module Aws::ConnectHealth
     #     An integer representing the maximum number attempts that will be made for
     #     a single request, including the initial attempt.  For example,
     #     setting this value to 5 will result in a request being retried up to
-    #     4 times. Used in `standard` and `adaptive` retry modes.
+    #     4 times. Used in `standard` and `adaptive` retry modes. Defaults to 3,
+    #     except for DynamoDB and DynamoDB Streams, which default to 4.
     #
     #   @option options [Proc] :output_event_stream_handler
     #     When an EventStream or Proc object is provided, it will be used as callback for each chunk of event stream response received along the way.
@@ -287,15 +288,15 @@ module Aws::ConnectHealth
     #     used by the default backoff function. This option is only used in the
     #     `legacy` retry mode.
     #
-    #   @option options [String] :retry_mode ("legacy")
+    #   @option options [String] :retry_mode ("standard")
     #     Specifies which retry algorithm to use. Values are:
     #
-    #     * `legacy` - The pre-existing retry behavior. This is the default
-    #       value if no retry mode is provided.
+    #     * `legacy` - The pre-existing retry behavior.
     #
     #     * `standard` - A standardized set of retry rules across the AWS SDKs.
     #       This includes support for retry quotas, which limit the number of
-    #       unsuccessful retries a client can make.
+    #       unsuccessful retries a client can make. This is the default value
+    #       if no retry mode is provided.
     #
     #     * `adaptive` - A retry mode that includes all the functionality of
     #       `standard` mode along with automatic client side throttling.
@@ -472,6 +473,12 @@ module Aws::ConnectHealth
     #     out_stream.on_validation_exception_event do |event|
     #       event # => Aws::ConnectHealth::Types::validationException
     #     end
+    #     out_stream.on_periodontal_chart_event_event do |event|
+    #       event # => Aws::ConnectHealth::Types::periodontalChartEvent
+    #     end
+    #     out_stream.on_checklist_event_event do |event|
+    #       event # => Aws::ConnectHealth::Types::checklistEvent
+    #     end
     #   end
     #   # => Aws::Seahorse::Client::AsyncResponse
     #
@@ -512,6 +519,12 @@ module Aws::ConnectHealth
     #   end
     #   output_stream.on_validation_exception_event do |event|
     #     event # => Aws::ConnectHealth::Types::validationException
+    #   end
+    #   output_stream.on_periodontal_chart_event_event do |event|
+    #     event # => Aws::ConnectHealth::Types::periodontalChartEvent
+    #   end
+    #   output_stream.on_checklist_event_event do |event|
+    #     event # => Aws::ConnectHealth::Types::checklistEvent
     #   end
     #   output_stream.on_error_event do |event|
     #     # catch unmodeled error event in the stream
@@ -560,7 +573,7 @@ module Aws::ConnectHealth
     #   resp.media_encoding #=> String, one of "pcm", "flac"
     #   # All events are available at resp.response_stream:
     #   resp.response_stream #=> Enumerator
-    #   resp.response_stream.event_types #=> [:transcript_event, :internal_failure_exception, :validation_exception]
+    #   resp.response_stream.event_types #=> [:transcript_event, :internal_failure_exception, :validation_exception, :periodontal_chart_event, :checklist_event]
     #
     #   # For :transcript_event event available at #on_transcript_event_event callback and response eventstream enumerator:
     #   event.transcript_segment.segment_id #=> String
@@ -575,6 +588,33 @@ module Aws::ConnectHealth
     #
     #   # For :validation_exception event available at #on_validation_exception_event callback and response eventstream enumerator:
     #   event.message #=> String
+    #
+    #   # For :periodontal_chart_event event available at #on_periodontal_chart_event_event callback and response eventstream enumerator:
+    #   event.snapshot_version #=> Integer
+    #   event.teeth #=> Array
+    #   event.teeth[0].tooth_number #=> Integer
+    #   event.teeth[0].missing #=> Boolean
+    #   event.teeth[0].mobility #=> Integer
+    #   event.teeth[0].furcation #=> Integer
+    #   event.teeth[0].sites #=> Array
+    #   event.teeth[0].sites[0].site #=> String, one of "DB", "B", "MB", "DL", "L", "ML"
+    #   event.teeth[0].sites[0].probing_depth #=> Integer
+    #   event.teeth[0].sites[0].recession #=> Integer
+    #   event.teeth[0].sites[0].bleeding #=> Boolean
+    #   event.teeth[0].sites[0].suppuration #=> Boolean
+    #   event.review_items #=> Array
+    #   event.review_items[0].reason #=> String, one of "SITE_NOT_CHARTED", "VALUE_NOT_CHARTED", "READING_COUNT_MISMATCH", "LINE_UNCLEAR", "TOOTH_UNCLEAR", "MISSING_TOOTH_CONFLICT", "MEASUREMENT_NOT_CHARTED", "SESSION_ISSUE"
+    #   event.review_items[0].tooth_number #=> Integer
+    #   event.review_items[0].sites #=> Array
+    #   event.review_items[0].sites[0] #=> String, one of "DB", "B", "MB", "DL", "L", "ML"
+    #
+    #   # For :checklist_event event available at #on_checklist_event_event callback and response eventstream enumerator:
+    #   event.snapshot_version #=> Integer
+    #   event.checklists #=> Array
+    #   event.checklists[0].checklist_id #=> String
+    #   event.checklists[0].items #=> Array
+    #   event.checklists[0].items[0].item_key #=> String
+    #   event.checklists[0].items[0].status #=> String, one of "DISCUSSED", "PARTIALLY_DISCUSSED", "NOT_DISCUSSED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connecthealth-2025-01-29/StartMedicalScribeListeningSession AWS API Documentation
     #
@@ -624,7 +664,7 @@ module Aws::ConnectHealth
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-connecthealth'
-      context[:gem_version] = '1.17.0'
+      context[:gem_version] = '1.24.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

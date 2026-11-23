@@ -80,14 +80,17 @@ module Aws::MediaConvert
     AutomatedEncodingSettings = Shapes::StructureShape.new(name: 'AutomatedEncodingSettings')
     Av1AdaptiveQuantization = Shapes::StringShape.new(name: 'Av1AdaptiveQuantization')
     Av1BitDepth = Shapes::StringShape.new(name: 'Av1BitDepth')
+    Av1FastDecode = Shapes::StringShape.new(name: 'Av1FastDecode')
     Av1FilmGrainSynthesis = Shapes::StringShape.new(name: 'Av1FilmGrainSynthesis')
     Av1FramerateControl = Shapes::StringShape.new(name: 'Av1FramerateControl')
     Av1FramerateConversionAlgorithm = Shapes::StringShape.new(name: 'Av1FramerateConversionAlgorithm')
+    Av1GopSizeUnits = Shapes::StringShape.new(name: 'Av1GopSizeUnits')
     Av1QvbrSettings = Shapes::StructureShape.new(name: 'Av1QvbrSettings')
     Av1RateControlMode = Shapes::StringShape.new(name: 'Av1RateControlMode')
     Av1SceneChangeDetect = Shapes::StringShape.new(name: 'Av1SceneChangeDetect')
     Av1Settings = Shapes::StructureShape.new(name: 'Av1Settings')
     Av1SpatialAdaptiveQuantization = Shapes::StringShape.new(name: 'Av1SpatialAdaptiveQuantization')
+    Av1TemporalAdaptiveQuantization = Shapes::StringShape.new(name: 'Av1TemporalAdaptiveQuantization')
     AvailBlanking = Shapes::StructureShape.new(name: 'AvailBlanking')
     AvcIntraClass = Shapes::StringShape.new(name: 'AvcIntraClass')
     AvcIntraFramerateControl = Shapes::StringShape.new(name: 'AvcIntraFramerateControl')
@@ -121,6 +124,7 @@ module Aws::MediaConvert
     CaptionDestinationSettings = Shapes::StructureShape.new(name: 'CaptionDestinationSettings')
     CaptionDestinationType = Shapes::StringShape.new(name: 'CaptionDestinationType')
     CaptionSelector = Shapes::StructureShape.new(name: 'CaptionSelector')
+    CaptionSource = Shapes::StringShape.new(name: 'CaptionSource')
     CaptionSourceByteRateLimit = Shapes::StringShape.new(name: 'CaptionSourceByteRateLimit')
     CaptionSourceConvertPaintOnToPopOn = Shapes::StringShape.new(name: 'CaptionSourceConvertPaintOnToPopOn')
     CaptionSourceFramerate = Shapes::StructureShape.new(name: 'CaptionSourceFramerate')
@@ -241,6 +245,9 @@ module Aws::MediaConvert
     DolbyVisionPresence = Shapes::StringShape.new(name: 'DolbyVisionPresence')
     DolbyVisionProfile = Shapes::StringShape.new(name: 'DolbyVisionProfile')
     DropFrameTimecode = Shapes::StringShape.new(name: 'DropFrameTimecode')
+    DtscSettings = Shapes::StructureShape.new(name: 'DtscSettings')
+    DtsxCodingMode = Shapes::StringShape.new(name: 'DtsxCodingMode')
+    DtsxSettings = Shapes::StructureShape.new(name: 'DtsxSettings')
     DurationControl = Shapes::StructureShape.new(name: 'DurationControl')
     DvbNitSettings = Shapes::StructureShape.new(name: 'DvbNitSettings')
     DvbSdtSettings = Shapes::StructureShape.new(name: 'DvbSdtSettings')
@@ -260,6 +267,8 @@ module Aws::MediaConvert
     DvbddsHandling = Shapes::StringShape.new(name: 'DvbddsHandling')
     DynamicAudioSelector = Shapes::StructureShape.new(name: 'DynamicAudioSelector')
     DynamicAudioSelectorType = Shapes::StringShape.new(name: 'DynamicAudioSelectorType')
+    DynamicMultiviewSettings = Shapes::StructureShape.new(name: 'DynamicMultiviewSettings')
+    DynamicMultiviewSettingsEnabled = Shapes::StringShape.new(name: 'DynamicMultiviewSettingsEnabled')
     Eac3AtmosBitstreamMode = Shapes::StringShape.new(name: 'Eac3AtmosBitstreamMode')
     Eac3AtmosCodingMode = Shapes::StringShape.new(name: 'Eac3AtmosCodingMode')
     Eac3AtmosDialogueIntelligence = Shapes::StringShape.new(name: 'Eac3AtmosDialogueIntelligence')
@@ -289,7 +298,9 @@ module Aws::MediaConvert
     ElementalInferenceConfiguration = Shapes::StructureShape.new(name: 'ElementalInferenceConfiguration')
     ElementalInferenceFeature = Shapes::StringShape.new(name: 'ElementalInferenceFeature')
     ElementalInferenceFeed = Shapes::StructureShape.new(name: 'ElementalInferenceFeed')
+    ElementalInferenceFeedConfigurationSource = Shapes::StructureShape.new(name: 'ElementalInferenceFeedConfigurationSource')
     ElementalInferenceFeedManagementState = Shapes::StringShape.new(name: 'ElementalInferenceFeedManagementState')
+    ElementalInferenceSettings = Shapes::StructureShape.new(name: 'ElementalInferenceSettings')
     EmbeddedConvert608To708 = Shapes::StringShape.new(name: 'EmbeddedConvert608To708')
     EmbeddedDestinationSettings = Shapes::StructureShape.new(name: 'EmbeddedDestinationSettings')
     EmbeddedSourceSettings = Shapes::StructureShape.new(name: 'EmbeddedSourceSettings')
@@ -849,6 +860,7 @@ module Aws::MediaConvert
     __integerMin1000Max480000000 = Shapes::IntegerShape.new(name: '__integerMin1000Max480000000')
     __integerMin100Max1000 = Shapes::IntegerShape.new(name: '__integerMin100Max1000')
     __integerMin10Max48 = Shapes::IntegerShape.new(name: '__integerMin10Max48')
+    __integerMin160000Max448000 = Shapes::IntegerShape.new(name: '__integerMin160000Max448000')
     __integerMin16000Max320000 = Shapes::IntegerShape.new(name: '__integerMin16000Max320000')
     __integerMin16000Max48000 = Shapes::IntegerShape.new(name: '__integerMin16000Max48000')
     __integerMin16Max24 = Shapes::IntegerShape.new(name: '__integerMin16Max24')
@@ -897,6 +909,7 @@ module Aws::MediaConvert
     __integerMin64000Max640000 = Shapes::IntegerShape.new(name: '__integerMin64000Max640000')
     __integerMin64Max2160 = Shapes::IntegerShape.new(name: '__integerMin64Max2160')
     __integerMin6Max16 = Shapes::IntegerShape.new(name: '__integerMin6Max16')
+    __integerMin768000Max768000 = Shapes::IntegerShape.new(name: '__integerMin768000Max768000')
     __integerMin8000Max192000 = Shapes::IntegerShape.new(name: '__integerMin8000Max192000')
     __integerMin8000Max96000 = Shapes::IntegerShape.new(name: '__integerMin8000Max96000')
     __integerMin8Max12 = Shapes::IntegerShape.new(name: '__integerMin8Max12')
@@ -960,6 +973,7 @@ module Aws::MediaConvert
     __listOfProbeResult = Shapes::ListShape.new(name: '__listOfProbeResult')
     __listOfQueue = Shapes::ListShape.new(name: '__listOfQueue')
     __listOfQueueTransition = Shapes::ListShape.new(name: '__listOfQueueTransition')
+    __listOfRectangle = Shapes::ListShape.new(name: '__listOfRectangle')
     __listOfServiceOverride = Shapes::ListShape.new(name: '__listOfServiceOverride')
     __listOfTeletextPageType = Shapes::ListShape.new(name: '__listOfTeletextPageType')
     __listOfTrack = Shapes::ListShape.new(name: '__listOfTrack')
@@ -1028,6 +1042,7 @@ module Aws::MediaConvert
     __stringPatternAZaZ23AZaZ = Shapes::StringShape.new(name: '__stringPatternAZaZ23AZaZ')
     __stringPatternAZaZ23AZaZ09 = Shapes::StringShape.new(name: '__stringPatternAZaZ23AZaZ09')
     __stringPatternArnAwsAZ09EventsAZ090912ConnectionAZAZ09AF0936 = Shapes::StringShape.new(name: '__stringPatternArnAwsAZ09EventsAZ090912ConnectionAZAZ09AF0936')
+    __stringPatternArnAwsElementalInferenceFeedAZ0919 = Shapes::StringShape.new(name: '__stringPatternArnAwsElementalInferenceFeedAZ0919')
     __stringPatternArnAwsUsGovAcm = Shapes::StringShape.new(name: '__stringPatternArnAwsUsGovAcm')
     __stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912MrkAFAF0932 = Shapes::StringShape.new(name: '__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912MrkAFAF0932')
     __stringPatternDD = Shapes::StringShape.new(name: '__stringPatternDD')
@@ -1128,6 +1143,8 @@ module Aws::MediaConvert
     AudioCodecSettings.add_member(:ac_4_settings, Shapes::ShapeRef.new(shape: Ac4Settings, location_name: "ac4Settings"))
     AudioCodecSettings.add_member(:aiff_settings, Shapes::ShapeRef.new(shape: AiffSettings, location_name: "aiffSettings"))
     AudioCodecSettings.add_member(:codec, Shapes::ShapeRef.new(shape: AudioCodec, location_name: "codec"))
+    AudioCodecSettings.add_member(:dtsc_settings, Shapes::ShapeRef.new(shape: DtscSettings, location_name: "dtscSettings"))
+    AudioCodecSettings.add_member(:dtsx_settings, Shapes::ShapeRef.new(shape: DtsxSettings, location_name: "dtsxSettings"))
     AudioCodecSettings.add_member(:eac_3_atmos_settings, Shapes::ShapeRef.new(shape: Eac3AtmosSettings, location_name: "eac3AtmosSettings"))
     AudioCodecSettings.add_member(:eac_3_settings, Shapes::ShapeRef.new(shape: Eac3Settings, location_name: "eac3Settings"))
     AudioCodecSettings.add_member(:flac_settings, Shapes::ShapeRef.new(shape: FlacSettings, location_name: "flacSettings"))
@@ -1217,12 +1234,14 @@ module Aws::MediaConvert
     Av1Settings.add_member(:adaptive_quantization, Shapes::ShapeRef.new(shape: Av1AdaptiveQuantization, location_name: "adaptiveQuantization"))
     Av1Settings.add_member(:bit_depth, Shapes::ShapeRef.new(shape: Av1BitDepth, location_name: "bitDepth"))
     Av1Settings.add_member(:bitrate, Shapes::ShapeRef.new(shape: __integerMin1000Max1152000000, location_name: "bitrate"))
+    Av1Settings.add_member(:fast_decode, Shapes::ShapeRef.new(shape: Av1FastDecode, location_name: "fastDecode"))
     Av1Settings.add_member(:film_grain_synthesis, Shapes::ShapeRef.new(shape: Av1FilmGrainSynthesis, location_name: "filmGrainSynthesis"))
     Av1Settings.add_member(:framerate_control, Shapes::ShapeRef.new(shape: Av1FramerateControl, location_name: "framerateControl"))
     Av1Settings.add_member(:framerate_conversion_algorithm, Shapes::ShapeRef.new(shape: Av1FramerateConversionAlgorithm, location_name: "framerateConversionAlgorithm"))
     Av1Settings.add_member(:framerate_denominator, Shapes::ShapeRef.new(shape: __integerMin1Max2147483647, location_name: "framerateDenominator"))
     Av1Settings.add_member(:framerate_numerator, Shapes::ShapeRef.new(shape: __integerMin1Max2147483647, location_name: "framerateNumerator"))
     Av1Settings.add_member(:gop_size, Shapes::ShapeRef.new(shape: __doubleMin0, location_name: "gopSize"))
+    Av1Settings.add_member(:gop_size_units, Shapes::ShapeRef.new(shape: Av1GopSizeUnits, location_name: "gopSizeUnits"))
     Av1Settings.add_member(:max_bitrate, Shapes::ShapeRef.new(shape: __integerMin1000Max1152000000, location_name: "maxBitrate"))
     Av1Settings.add_member(:number_b_frames_between_reference_frames, Shapes::ShapeRef.new(shape: __integerMin0Max15, location_name: "numberBFramesBetweenReferenceFrames"))
     Av1Settings.add_member(:per_frame_metrics, Shapes::ShapeRef.new(shape: __listOfFrameMetricType, location_name: "perFrameMetrics"))
@@ -1233,6 +1252,7 @@ module Aws::MediaConvert
     Av1Settings.add_member(:sliding_window_ms, Shapes::ShapeRef.new(shape: __integerMin1000Max3000, location_name: "slidingWindowMs"))
     Av1Settings.add_member(:sliding_window_peak_bitrate, Shapes::ShapeRef.new(shape: __integerMin1000Max1152000000, location_name: "slidingWindowPeakBitrate"))
     Av1Settings.add_member(:spatial_adaptive_quantization, Shapes::ShapeRef.new(shape: Av1SpatialAdaptiveQuantization, location_name: "spatialAdaptiveQuantization"))
+    Av1Settings.add_member(:temporal_adaptive_quantization, Shapes::ShapeRef.new(shape: Av1TemporalAdaptiveQuantization, location_name: "temporalAdaptiveQuantization"))
     Av1Settings.struct_class = Types::Av1Settings
 
     AvailBlanking.add_member(:avail_blanking_image, Shapes::ShapeRef.new(shape: __stringMin14PatternS3BmpBMPPngPNGHttpsBmpBMPPngPNG, location_name: "availBlankingImage"))
@@ -1294,11 +1314,13 @@ module Aws::MediaConvert
 
     CancelJobResponse.struct_class = Types::CancelJobResponse
 
+    CaptionDescription.add_member(:audio_source_names, Shapes::ShapeRef.new(shape: __listOf__stringMin1, location_name: "audioSourceNames"))
     CaptionDescription.add_member(:caption_selector_name, Shapes::ShapeRef.new(shape: __stringMin1, location_name: "captionSelectorName"))
     CaptionDescription.add_member(:custom_language_code, Shapes::ShapeRef.new(shape: __stringPatternAZaZ23AZaZ, location_name: "customLanguageCode"))
     CaptionDescription.add_member(:destination_settings, Shapes::ShapeRef.new(shape: CaptionDestinationSettings, location_name: "destinationSettings"))
     CaptionDescription.add_member(:language_code, Shapes::ShapeRef.new(shape: LanguageCode, location_name: "languageCode"))
     CaptionDescription.add_member(:language_description, Shapes::ShapeRef.new(shape: __string, location_name: "languageDescription"))
+    CaptionDescription.add_member(:source, Shapes::ShapeRef.new(shape: CaptionSource, location_name: "source"))
     CaptionDescription.struct_class = Types::CaptionDescription
 
     CaptionDescriptionPreset.add_member(:custom_language_code, Shapes::ShapeRef.new(shape: __stringPatternAZaZ23AZaZ, location_name: "customLanguageCode"))
@@ -1495,6 +1517,7 @@ module Aws::MediaConvert
     CreateJobRequest.add_member(:acceleration_settings, Shapes::ShapeRef.new(shape: AccelerationSettings, location_name: "accelerationSettings"))
     CreateJobRequest.add_member(:billing_tags_source, Shapes::ShapeRef.new(shape: BillingTagsSource, location_name: "billingTagsSource"))
     CreateJobRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: __string, location_name: "clientRequestToken", metadata: {"idempotencyToken" => true}))
+    CreateJobRequest.add_member(:elemental_inference_settings, Shapes::ShapeRef.new(shape: ElementalInferenceSettings, location_name: "elementalInferenceSettings"))
     CreateJobRequest.add_member(:hop_destinations, Shapes::ShapeRef.new(shape: __listOfHopDestination, location_name: "hopDestinations"))
     CreateJobRequest.add_member(:job_engine_version, Shapes::ShapeRef.new(shape: __string, location_name: "jobEngineVersion"))
     CreateJobRequest.add_member(:job_template, Shapes::ShapeRef.new(shape: __string, location_name: "jobTemplate"))
@@ -1514,6 +1537,7 @@ module Aws::MediaConvert
     CreateJobTemplateRequest.add_member(:acceleration_settings, Shapes::ShapeRef.new(shape: AccelerationSettings, location_name: "accelerationSettings"))
     CreateJobTemplateRequest.add_member(:category, Shapes::ShapeRef.new(shape: __string, location_name: "category"))
     CreateJobTemplateRequest.add_member(:description, Shapes::ShapeRef.new(shape: __string, location_name: "description"))
+    CreateJobTemplateRequest.add_member(:elemental_inference_settings, Shapes::ShapeRef.new(shape: ElementalInferenceSettings, location_name: "elementalInferenceSettings"))
     CreateJobTemplateRequest.add_member(:hop_destinations, Shapes::ShapeRef.new(shape: __listOfHopDestination, location_name: "hopDestinations"))
     CreateJobTemplateRequest.add_member(:name, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "name"))
     CreateJobTemplateRequest.add_member(:priority, Shapes::ShapeRef.new(shape: __integerMinNegative50Max50, location_name: "priority"))
@@ -1667,6 +1691,15 @@ module Aws::MediaConvert
     DolbyVisionMetadata.add_member(:rpu, Shapes::ShapeRef.new(shape: DolbyVisionPresence, location_name: "rpu"))
     DolbyVisionMetadata.struct_class = Types::DolbyVisionMetadata
 
+    DtscSettings.add_member(:bitrate, Shapes::ShapeRef.new(shape: __integerMin768000Max768000, location_name: "bitrate"))
+    DtscSettings.add_member(:sample_rate, Shapes::ShapeRef.new(shape: __integerMin48000Max48000, location_name: "sampleRate"))
+    DtscSettings.struct_class = Types::DtscSettings
+
+    DtsxSettings.add_member(:bitrate, Shapes::ShapeRef.new(shape: __integerMin160000Max448000, location_name: "bitrate"))
+    DtsxSettings.add_member(:coding_mode, Shapes::ShapeRef.new(shape: DtsxCodingMode, location_name: "codingMode"))
+    DtsxSettings.add_member(:sample_rate, Shapes::ShapeRef.new(shape: __integerMin48000Max48000, location_name: "sampleRate"))
+    DtsxSettings.struct_class = Types::DtsxSettings
+
     DurationControl.add_member(:integer_duration_maximum_compression_denominator, Shapes::ShapeRef.new(shape: __integerMin1Max2147483647, location_name: "integerDurationMaximumCompressionDenominator"))
     DurationControl.add_member(:integer_duration_maximum_compression_numerator, Shapes::ShapeRef.new(shape: __integerMin0Max2147483647, location_name: "integerDurationMaximumCompressionNumerator"))
     DurationControl.add_member(:integer_duration_trim_threshold_milliseconds, Shapes::ShapeRef.new(shape: __integerMin0Max500, location_name: "integerDurationTrimThresholdMilliseconds"))
@@ -1729,6 +1762,10 @@ module Aws::MediaConvert
     DynamicAudioSelector.add_member(:selector_type, Shapes::ShapeRef.new(shape: DynamicAudioSelectorType, location_name: "selectorType"))
     DynamicAudioSelector.struct_class = Types::DynamicAudioSelector
 
+    DynamicMultiviewSettings.add_member(:enabled, Shapes::ShapeRef.new(shape: DynamicMultiviewSettingsEnabled, location_name: "enabled"))
+    DynamicMultiviewSettings.add_member(:regions, Shapes::ShapeRef.new(shape: __listOfRectangle, location_name: "regions"))
+    DynamicMultiviewSettings.struct_class = Types::DynamicMultiviewSettings
+
     Eac3AtmosSettings.add_member(:bitrate, Shapes::ShapeRef.new(shape: __integerMin384000Max1024000, location_name: "bitrate"))
     Eac3AtmosSettings.add_member(:bitstream_mode, Shapes::ShapeRef.new(shape: Eac3AtmosBitstreamMode, location_name: "bitstreamMode"))
     Eac3AtmosSettings.add_member(:coding_mode, Shapes::ShapeRef.new(shape: Eac3AtmosCodingMode, location_name: "codingMode"))
@@ -1778,6 +1815,12 @@ module Aws::MediaConvert
     ElementalInferenceFeed.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
     ElementalInferenceFeed.add_member(:feed_management_state, Shapes::ShapeRef.new(shape: ElementalInferenceFeedManagementState, location_name: "feedManagementState"))
     ElementalInferenceFeed.struct_class = Types::ElementalInferenceFeed
+
+    ElementalInferenceFeedConfigurationSource.add_member(:feed_arn, Shapes::ShapeRef.new(shape: __stringPatternArnAwsElementalInferenceFeedAZ0919, location_name: "feedArn"))
+    ElementalInferenceFeedConfigurationSource.struct_class = Types::ElementalInferenceFeedConfigurationSource
+
+    ElementalInferenceSettings.add_member(:feed_configuration_source, Shapes::ShapeRef.new(shape: ElementalInferenceFeedConfigurationSource, location_name: "feedConfigurationSource"))
+    ElementalInferenceSettings.struct_class = Types::ElementalInferenceSettings
 
     EmbeddedDestinationSettings.add_member(:destination_608_channel_number, Shapes::ShapeRef.new(shape: __integerMin1Max4, location_name: "destination608ChannelNumber"))
     EmbeddedDestinationSettings.add_member(:destination_708_service_number, Shapes::ShapeRef.new(shape: __integerMin1Max6, location_name: "destination708ServiceNumber"))
@@ -2240,6 +2283,7 @@ module Aws::MediaConvert
     Job.add_member(:created_at, Shapes::ShapeRef.new(shape: __timestampUnix, location_name: "createdAt"))
     Job.add_member(:current_phase, Shapes::ShapeRef.new(shape: JobPhase, location_name: "currentPhase"))
     Job.add_member(:elemental_inference_configuration, Shapes::ShapeRef.new(shape: ElementalInferenceConfiguration, location_name: "elementalInferenceConfiguration"))
+    Job.add_member(:elemental_inference_settings, Shapes::ShapeRef.new(shape: ElementalInferenceSettings, location_name: "elementalInferenceSettings"))
     Job.add_member(:error_code, Shapes::ShapeRef.new(shape: __integer, location_name: "errorCode"))
     Job.add_member(:error_message, Shapes::ShapeRef.new(shape: __string, location_name: "errorMessage"))
     Job.add_member(:hop_destinations, Shapes::ShapeRef.new(shape: __listOfHopDestination, location_name: "hopDestinations"))
@@ -2296,6 +2340,7 @@ module Aws::MediaConvert
     JobTemplate.add_member(:category, Shapes::ShapeRef.new(shape: __string, location_name: "category"))
     JobTemplate.add_member(:created_at, Shapes::ShapeRef.new(shape: __timestampUnix, location_name: "createdAt"))
     JobTemplate.add_member(:description, Shapes::ShapeRef.new(shape: __string, location_name: "description"))
+    JobTemplate.add_member(:elemental_inference_settings, Shapes::ShapeRef.new(shape: ElementalInferenceSettings, location_name: "elementalInferenceSettings"))
     JobTemplate.add_member(:hop_destinations, Shapes::ShapeRef.new(shape: __listOfHopDestination, location_name: "hopDestinations"))
     JobTemplate.add_member(:last_updated, Shapes::ShapeRef.new(shape: __timestampUnix, location_name: "lastUpdated"))
     JobTemplate.add_member(:name, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "name"))
@@ -3000,6 +3045,7 @@ module Aws::MediaConvert
     UpdateJobTemplateRequest.add_member(:acceleration_settings, Shapes::ShapeRef.new(shape: AccelerationSettings, location_name: "accelerationSettings"))
     UpdateJobTemplateRequest.add_member(:category, Shapes::ShapeRef.new(shape: __string, location_name: "category"))
     UpdateJobTemplateRequest.add_member(:description, Shapes::ShapeRef.new(shape: __string, location_name: "description"))
+    UpdateJobTemplateRequest.add_member(:elemental_inference_settings, Shapes::ShapeRef.new(shape: ElementalInferenceSettings, location_name: "elementalInferenceSettings"))
     UpdateJobTemplateRequest.add_member(:hop_destinations, Shapes::ShapeRef.new(shape: __listOfHopDestination, location_name: "hopDestinations"))
     UpdateJobTemplateRequest.add_member(:name, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "name"))
     UpdateJobTemplateRequest.add_member(:priority, Shapes::ShapeRef.new(shape: __integerMinNegative50Max50, location_name: "priority"))
@@ -3066,6 +3112,7 @@ module Aws::MediaConvert
     VideoDescription.add_member(:color_metadata, Shapes::ShapeRef.new(shape: ColorMetadata, location_name: "colorMetadata"))
     VideoDescription.add_member(:crop, Shapes::ShapeRef.new(shape: Rectangle, location_name: "crop"))
     VideoDescription.add_member(:drop_frame_timecode, Shapes::ShapeRef.new(shape: DropFrameTimecode, location_name: "dropFrameTimecode"))
+    VideoDescription.add_member(:dynamic_multiview_settings, Shapes::ShapeRef.new(shape: DynamicMultiviewSettings, location_name: "dynamicMultiviewSettings"))
     VideoDescription.add_member(:fixed_afd, Shapes::ShapeRef.new(shape: __integerMin0Max15, location_name: "fixedAfd"))
     VideoDescription.add_member(:height, Shapes::ShapeRef.new(shape: __integerMin32Max8192, location_name: "height"))
     VideoDescription.add_member(:position, Shapes::ShapeRef.new(shape: Rectangle, location_name: "position"))
@@ -3354,6 +3401,8 @@ module Aws::MediaConvert
     __listOfQueue.member = Shapes::ShapeRef.new(shape: Queue)
 
     __listOfQueueTransition.member = Shapes::ShapeRef.new(shape: QueueTransition)
+
+    __listOfRectangle.member = Shapes::ShapeRef.new(shape: Rectangle)
 
     __listOfServiceOverride.member = Shapes::ShapeRef.new(shape: ServiceOverride)
 
@@ -3846,8 +3895,8 @@ module Aws::MediaConvert
         o.http_request_uri = "/2017-08-29/probe"
         o.input = Shapes::ShapeRef.new(shape: ProbeRequest)
         o.output = Shapes::ShapeRef.new(shape: ProbeResponse)
-        o.errors << Shapes::ShapeRef.new(shape: UnprocessableEntityException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: UnprocessableEntityException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)

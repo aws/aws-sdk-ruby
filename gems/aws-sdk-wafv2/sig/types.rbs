@@ -25,6 +25,11 @@ module Aws::WAFV2
       SENSITIVE: []
     end
 
+    class AWSManagedRulesAISecurityRuleSet
+      attr_accessor bedrock_guardrails: Types::BedrockGuardrails
+      SENSITIVE: []
+    end
+
     class AWSManagedRulesATPRuleSet
       attr_accessor login_path: ::String
       attr_accessor request_inspection: Types::RequestInspection
@@ -66,8 +71,39 @@ module Aws::WAFV2
       SENSITIVE: []
     end
 
+    class AnalyticsConfig
+      attr_accessor mode: ("CROSS_REGION" | "DISABLED")
+      SENSITIVE: []
+    end
+
     class AndStatement
       attr_accessor statements: ::Array[Types::Statement]
+      SENSITIVE: []
+    end
+
+    class ApiPattern
+      attr_accessor method: ::String
+      attr_accessor path_pattern: ::String
+      attr_accessor port: ::Integer
+      attr_accessor domains: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ApiPatternFilter
+      attr_accessor method: ::String
+      attr_accessor path_pattern: ::String
+      attr_accessor port: ::Integer
+      attr_accessor domains: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ApiSecurityEventDetail
+      attr_accessor label: ::String
+      attr_accessor category: ::String
+      attr_accessor confidence: ("LOW" | "MEDIUM" | "HIGH")
+      attr_accessor api_patterns: ::Array[Types::ApiPattern]
+      attr_accessor event_actors: ::Array[Types::EventActorReference]
+      attr_accessor timeline: ::Array[Types::EventTimelineEntry]
       SENSITIVE: []
     end
 
@@ -98,8 +134,25 @@ module Aws::WAFV2
     end
 
     class AssociationConfig
-      attr_accessor request_body: ::Hash[("CLOUDFRONT" | "API_GATEWAY" | "COGNITO_USER_POOL" | "APP_RUNNER_SERVICE" | "VERIFIED_ACCESS_INSTANCE" | "AGENTCORE_GATEWAY"), Types::RequestBodyAssociatedResourceTypeConfig]
-      attr_accessor challenge_javascript_sdk_injection: ::Hash[("CLOUDFRONT" | "API_GATEWAY" | "COGNITO_USER_POOL" | "APP_RUNNER_SERVICE" | "VERIFIED_ACCESS_INSTANCE" | "AGENTCORE_GATEWAY"), Types::ChallengeJavascriptSdkInjectionConfig]
+      attr_accessor request_body: ::Hash[("CLOUDFRONT" | "API_GATEWAY" | "COGNITO_USER_POOL" | "APP_RUNNER_SERVICE" | "VERIFIED_ACCESS_INSTANCE" | "AGENTCORE_GATEWAY" | "APPLICATION_LOAD_BALANCER"), Types::RequestBodyAssociatedResourceTypeConfig]
+      attr_accessor challenge_javascript_sdk_injection: ::Hash[("CLOUDFRONT" | "API_GATEWAY" | "COGNITO_USER_POOL" | "APP_RUNNER_SERVICE" | "VERIFIED_ACCESS_INSTANCE" | "AGENTCORE_GATEWAY" | "APPLICATION_LOAD_BALANCER"), Types::ChallengeJavascriptSdkInjectionConfig]
+      SENSITIVE: []
+    end
+
+    class BedrockGuardrails
+      attr_accessor disable: Types::DisableBedrockGuardrails
+      attr_accessor protect_request_only: Types::BedrockGuardrailsRequestOnly
+      attr_accessor protect_request_and_response: Types::BedrockGuardrailsRequestAndResponse
+      SENSITIVE: []
+    end
+
+    class BedrockGuardrailsRequestAndResponse
+      attr_accessor role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class BedrockGuardrailsRequestOnly
+      attr_accessor role_arn: ::String
       SENSITIVE: []
     end
 
@@ -192,6 +245,24 @@ module Aws::WAFV2
     class Condition
       attr_accessor action_condition: Types::ActionCondition
       attr_accessor label_name_condition: Types::LabelNameCondition
+      SENSITIVE: []
+    end
+
+    class ConnectedAccountChainConfig
+      attr_accessor chain: ("BASE" | "SOLANA")
+      attr_accessor prices: ::Array[Types::ConnectedAccountPrice]
+      SENSITIVE: []
+    end
+
+    class ConnectedAccountConfig
+      attr_accessor connected_account_arn: ::String
+      attr_accessor payment_networks: ::Array[Types::ConnectedAccountChainConfig]
+      SENSITIVE: []
+    end
+
+    class ConnectedAccountPrice
+      attr_accessor amount: ::String
+      attr_accessor currency: ("USDC")
       SENSITIVE: []
     end
 
@@ -289,6 +360,7 @@ module Aws::WAFV2
       attr_accessor on_source_d_do_s_protection_config: Types::OnSourceDDoSProtectionConfig
       attr_accessor application_config: Types::ApplicationConfig
       attr_accessor monetization_config: Types::MonetizationConfig
+      attr_accessor analytics_config: Types::AnalyticsConfig
       SENSITIVE: []
     end
 
@@ -478,6 +550,9 @@ module Aws::WAFV2
       SENSITIVE: []
     end
 
+    class DisableBedrockGuardrails < Aws::EmptyStructure
+    end
+
     class DisallowedFeature
       attr_accessor feature: ::String
       attr_accessor required_pricing_plan: ::String
@@ -494,6 +569,81 @@ module Aws::WAFV2
 
     class EmailField
       attr_accessor identifier: ::String
+      SENSITIVE: []
+    end
+
+    class EventActorChange
+      attr_accessor change_time: ::Time
+      attr_accessor client_ip: ::String
+      attr_accessor tls_fingerprint: ::String
+      attr_accessor asn: ::String
+      attr_accessor asn_organization: ::String
+      attr_accessor country: ::String
+      SENSITIVE: []
+    end
+
+    class EventActorDetail
+      attr_accessor summary: Types::EventActorDetailSummary
+      attr_accessor events: ::Array[Types::RelatedEvent]
+      attr_accessor changes: ::Array[Types::EventActorChange]
+      SENSITIVE: []
+    end
+
+    class EventActorDetailSummary
+      attr_accessor event_actor_id: ::String
+      attr_accessor client_ip: ::String
+      attr_accessor tls_fingerprint: ::String
+      attr_accessor asn: ::String
+      attr_accessor asn_organization: ::String
+      attr_accessor country: ::String
+      attr_accessor auth_fingerprint: ::String
+      attr_accessor created_at: ::Time
+      SENSITIVE: []
+    end
+
+    class EventActorReference
+      attr_accessor event_actor_id: ::String
+      attr_accessor event_actor_value: ::String
+      SENSITIVE: []
+    end
+
+    class EventActorSummary
+      attr_accessor event_actor_id: ::String
+      attr_accessor client_ip: ::String
+      attr_accessor tls_fingerprint: ::String
+      attr_accessor asn: ::String
+      attr_accessor asn_organization: ::String
+      attr_accessor country: ::String
+      attr_accessor auth_fingerprint: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor event_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class EventDetailSummary
+      attr_accessor event_id: ::String
+      attr_accessor event_status: ("EVENT_STARTED" | "EVENT_IN_PROGRESS" | "EVENT_COMPLETED" | "EVENT_ENDED")
+      attr_accessor event_category: ("API_SECURITY")
+      attr_accessor start_time: ::Time
+      attr_accessor last_updated_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor resource_arn: ::String
+      attr_accessor web_acl_arn: ::String
+      attr_accessor api_security_event_detail: Types::ApiSecurityEventDetail
+      SENSITIVE: []
+    end
+
+    class EventFilter
+      attr_accessor name: ("EVENT_CATEGORY" | "RESOURCE_ARN")
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class EventTimelineEntry
+      attr_accessor change_time: ::Time
+      attr_accessor label: ::String
+      attr_accessor confidence: ("LOW" | "MEDIUM" | "HIGH")
+      attr_accessor api_patterns: ::Array[Types::ApiPattern]
       SENSITIVE: []
     end
 
@@ -587,6 +737,29 @@ module Aws::WAFV2
     class GetDecryptedAPIKeyResponse
       attr_accessor token_domains: ::Array[::String]
       attr_accessor creation_timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class GetEventActorRequest
+      attr_accessor scope: ("CLOUDFRONT" | "REGIONAL")
+      attr_accessor event_actor_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetEventActorResponse
+      attr_accessor event_actor: Types::EventActorDetail
+      SENSITIVE: []
+    end
+
+    class GetEventRequest
+      attr_accessor scope: ("CLOUDFRONT" | "REGIONAL")
+      attr_accessor event_id: ::String
+      attr_accessor web_acl_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetEventResponse
+      attr_accessor event: Types::EventDetailSummary
       SENSITIVE: []
     end
 
@@ -967,6 +1140,60 @@ module Aws::WAFV2
       SENSITIVE: []
     end
 
+    class ListEventActorsRequest
+      attr_accessor scope: ("CLOUDFRONT" | "REGIONAL")
+      attr_accessor time_window: Types::TimeWindow
+      attr_accessor sort_by: ("EVENT_COUNT")
+      attr_accessor limit: ::Integer
+      attr_accessor next_marker: ::String
+      SENSITIVE: []
+    end
+
+    class ListEventActorsResponse
+      attr_accessor event_actors: ::Array[Types::EventActorSummary]
+      attr_accessor next_marker: ::String
+      SENSITIVE: []
+    end
+
+    class ListEventsByWebACLRequest
+      attr_accessor scope: ("CLOUDFRONT" | "REGIONAL")
+      attr_accessor web_acl_arn: ::String
+      attr_accessor time_window: Types::TimeWindow
+      attr_accessor filters: ::Array[Types::EventFilter]
+      attr_accessor api_pattern_filters: ::Array[Types::ApiPatternFilter]
+      attr_accessor limit: ::Integer
+      attr_accessor next_marker: ::String
+      attr_accessor sort_order: ("ASC" | "DESC")
+      attr_accessor sort_by: ("START_TIME" | "END_TIME" | "CONFIDENCE")
+      attr_accessor include: ::Array[("TIMELINE")]
+      SENSITIVE: []
+    end
+
+    class ListEventsByWebACLResponse
+      attr_accessor events: ::Array[Types::EventDetailSummary]
+      attr_accessor next_marker: ::String
+      SENSITIVE: []
+    end
+
+    class ListEventsRequest
+      attr_accessor scope: ("CLOUDFRONT" | "REGIONAL")
+      attr_accessor time_window: Types::TimeWindow
+      attr_accessor filters: ::Array[Types::EventFilter]
+      attr_accessor api_pattern_filters: ::Array[Types::ApiPatternFilter]
+      attr_accessor limit: ::Integer
+      attr_accessor next_marker: ::String
+      attr_accessor sort_order: ("ASC" | "DESC")
+      attr_accessor sort_by: ("START_TIME" | "END_TIME" | "CONFIDENCE")
+      attr_accessor include: ::Array[("TIMELINE")]
+      SENSITIVE: []
+    end
+
+    class ListEventsResponse
+      attr_accessor events: ::Array[Types::EventDetailSummary]
+      attr_accessor next_marker: ::String
+      SENSITIVE: []
+    end
+
     class ListIPSetsRequest
       attr_accessor scope: ("CLOUDFRONT" | "REGIONAL")
       attr_accessor next_marker: ::String
@@ -1140,6 +1367,7 @@ module Aws::WAFV2
       attr_accessor aws_managed_rules_atp_rule_set: Types::AWSManagedRulesATPRuleSet
       attr_accessor aws_managed_rules_acfp_rule_set: Types::AWSManagedRulesACFPRuleSet
       attr_accessor aws_managed_rules_anti_d_do_s_rule_set: Types::AWSManagedRulesAntiDDoSRuleSet
+      attr_accessor aws_managed_rules_ai_security_rule_set: Types::AWSManagedRulesAISecurityRuleSet
       SENSITIVE: []
     end
 
@@ -1212,6 +1440,7 @@ module Aws::WAFV2
 
     class MonetizationConfig
       attr_accessor crypto_config: Types::CryptoConfig
+      attr_accessor connected_account_configs: ::Array[Types::ConnectedAccountConfig]
       attr_accessor currency_mode: ("REAL" | "TEST")
       SENSITIVE: []
     end
@@ -1452,6 +1681,16 @@ module Aws::WAFV2
       SENSITIVE: []
     end
 
+    class RelatedEvent
+      attr_accessor event_id: ::String
+      attr_accessor start_time: ::Time
+      attr_accessor label: ::String
+      attr_accessor category: ::String
+      attr_accessor confidence: ("LOW" | "MEDIUM" | "HIGH")
+      attr_accessor api_patterns: ::Array[Types::ApiPattern]
+      SENSITIVE: []
+    end
+
     class ReleaseSummary
       attr_accessor release_version: ::String
       attr_accessor timestamp: ::Time
@@ -1459,7 +1698,7 @@ module Aws::WAFV2
     end
 
     class RequestBodyAssociatedResourceTypeConfig
-      attr_accessor default_size_inspection_limit: ("KB_16" | "KB_32" | "KB_48" | "KB_64")
+      attr_accessor default_size_inspection_limit: ("KB_8" | "KB_16" | "KB_32" | "KB_48" | "KB_64")
       SENSITIVE: []
     end
 
@@ -1820,6 +2059,7 @@ module Aws::WAFV2
       attr_accessor on_source_d_do_s_protection_config: Types::OnSourceDDoSProtectionConfig
       attr_accessor application_config: Types::ApplicationConfig
       attr_accessor monetization_config: Types::MonetizationConfig
+      attr_accessor analytics_config: Types::AnalyticsConfig
       SENSITIVE: []
     end
 
@@ -1892,7 +2132,7 @@ module Aws::WAFV2
 
     class WAFInvalidParameterException
       attr_accessor message: ::String
-      attr_accessor field: ("WEB_ACL" | "RULE_GROUP" | "REGEX_PATTERN_SET" | "IP_SET" | "MANAGED_RULE_SET" | "RULE" | "EXCLUDED_RULE" | "STATEMENT" | "BYTE_MATCH_STATEMENT" | "SQLI_MATCH_STATEMENT" | "XSS_MATCH_STATEMENT" | "SIZE_CONSTRAINT_STATEMENT" | "GEO_MATCH_STATEMENT" | "RATE_BASED_STATEMENT" | "RULE_GROUP_REFERENCE_STATEMENT" | "REGEX_PATTERN_REFERENCE_STATEMENT" | "IP_SET_REFERENCE_STATEMENT" | "MANAGED_RULE_SET_STATEMENT" | "LABEL_MATCH_STATEMENT" | "AND_STATEMENT" | "OR_STATEMENT" | "NOT_STATEMENT" | "IP_ADDRESS" | "IP_ADDRESS_VERSION" | "FIELD_TO_MATCH" | "TEXT_TRANSFORMATION" | "SINGLE_QUERY_ARGUMENT" | "SINGLE_HEADER" | "DEFAULT_ACTION" | "RULE_ACTION" | "ENTITY_LIMIT" | "OVERRIDE_ACTION" | "SCOPE_VALUE" | "RESOURCE_ARN" | "RESOURCE_TYPE" | "TAGS" | "TAG_KEYS" | "METRIC_NAME" | "FIREWALL_MANAGER_STATEMENT" | "FALLBACK_BEHAVIOR" | "POSITION" | "FORWARDED_IP_CONFIG" | "IP_SET_FORWARDED_IP_CONFIG" | "HEADER_NAME" | "CUSTOM_REQUEST_HANDLING" | "RESPONSE_CONTENT_TYPE" | "CUSTOM_RESPONSE" | "CUSTOM_RESPONSE_BODY" | "JSON_MATCH_PATTERN" | "JSON_MATCH_SCOPE" | "BODY_PARSING_FALLBACK_BEHAVIOR" | "LOGGING_FILTER" | "FILTER_CONDITION" | "EXPIRE_TIMESTAMP" | "CHANGE_PROPAGATION_STATUS" | "ASSOCIABLE_RESOURCE" | "LOG_DESTINATION" | "MANAGED_RULE_GROUP_CONFIG" | "PAYLOAD_TYPE" | "HEADER_MATCH_PATTERN" | "COOKIE_MATCH_PATTERN" | "MAP_MATCH_SCOPE" | "OVERSIZE_HANDLING" | "CHALLENGE_CONFIG" | "TOKEN_DOMAIN" | "ATP_RULE_SET_RESPONSE_INSPECTION" | "ASSOCIATED_RESOURCE_TYPE" | "SCOPE_DOWN" | "CUSTOM_KEYS" | "ACP_RULE_SET_RESPONSE_INSPECTION" | "DATA_PROTECTION_CONFIG" | "LOW_REPUTATION_MODE" | "MONETIZATION_CONFIG" | "WALLET_ADDRESS" | "PRICE_AMOUNT" | "PAYMENT_NETWORK" | "PRE_PARSE_TEXT_TRANSFORMATION" | "CHALLENGE_JAVASCRIPT_SDK_INJECTION_CONFIG")
+      attr_accessor field: ("WEB_ACL" | "RULE_GROUP" | "REGEX_PATTERN_SET" | "IP_SET" | "MANAGED_RULE_SET" | "RULE" | "EXCLUDED_RULE" | "STATEMENT" | "BYTE_MATCH_STATEMENT" | "SQLI_MATCH_STATEMENT" | "XSS_MATCH_STATEMENT" | "SIZE_CONSTRAINT_STATEMENT" | "GEO_MATCH_STATEMENT" | "RATE_BASED_STATEMENT" | "RULE_GROUP_REFERENCE_STATEMENT" | "REGEX_PATTERN_REFERENCE_STATEMENT" | "IP_SET_REFERENCE_STATEMENT" | "MANAGED_RULE_SET_STATEMENT" | "LABEL_MATCH_STATEMENT" | "AND_STATEMENT" | "OR_STATEMENT" | "NOT_STATEMENT" | "IP_ADDRESS" | "IP_ADDRESS_VERSION" | "FIELD_TO_MATCH" | "TEXT_TRANSFORMATION" | "SINGLE_QUERY_ARGUMENT" | "SINGLE_HEADER" | "DEFAULT_ACTION" | "RULE_ACTION" | "ENTITY_LIMIT" | "OVERRIDE_ACTION" | "SCOPE_VALUE" | "RESOURCE_ARN" | "RESOURCE_TYPE" | "TAGS" | "TAG_KEYS" | "METRIC_NAME" | "FIREWALL_MANAGER_STATEMENT" | "FALLBACK_BEHAVIOR" | "POSITION" | "FORWARDED_IP_CONFIG" | "IP_SET_FORWARDED_IP_CONFIG" | "HEADER_NAME" | "CUSTOM_REQUEST_HANDLING" | "RESPONSE_CONTENT_TYPE" | "CUSTOM_RESPONSE" | "CUSTOM_RESPONSE_BODY" | "JSON_MATCH_PATTERN" | "JSON_MATCH_SCOPE" | "BODY_PARSING_FALLBACK_BEHAVIOR" | "LOGGING_FILTER" | "FILTER_CONDITION" | "EXPIRE_TIMESTAMP" | "CHANGE_PROPAGATION_STATUS" | "ASSOCIABLE_RESOURCE" | "LOG_DESTINATION" | "MANAGED_RULE_GROUP_CONFIG" | "PAYLOAD_TYPE" | "HEADER_MATCH_PATTERN" | "COOKIE_MATCH_PATTERN" | "MAP_MATCH_SCOPE" | "OVERSIZE_HANDLING" | "CHALLENGE_CONFIG" | "TOKEN_DOMAIN" | "ATP_RULE_SET_RESPONSE_INSPECTION" | "ASSOCIATED_RESOURCE_TYPE" | "SCOPE_DOWN" | "CUSTOM_KEYS" | "ACP_RULE_SET_RESPONSE_INSPECTION" | "DATA_PROTECTION_CONFIG" | "LOW_REPUTATION_MODE" | "MONETIZATION_CONFIG" | "WALLET_ADDRESS" | "PRICE_AMOUNT" | "PAYMENT_NETWORK" | "PRE_PARSE_TEXT_TRANSFORMATION" | "CHALLENGE_JAVASCRIPT_SDK_INJECTION_CONFIG" | "BEDROCK_GUARDRAILS" | "ROLE_ARN")
       attr_accessor parameter: ::String
       attr_accessor reason: ::String
       SENSITIVE: []
@@ -1982,6 +2222,7 @@ module Aws::WAFV2
       attr_accessor on_source_d_do_s_protection_config: Types::OnSourceDDoSProtectionConfig
       attr_accessor application_config: Types::ApplicationConfig
       attr_accessor monetization_config: Types::MonetizationConfig
+      attr_accessor analytics_config: Types::AnalyticsConfig
       SENSITIVE: []
     end
 

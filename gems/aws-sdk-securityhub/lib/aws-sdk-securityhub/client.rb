@@ -264,7 +264,8 @@ module Aws::SecurityHub
     #     An integer representing the maximum number attempts that will be made for
     #     a single request, including the initial attempt.  For example,
     #     setting this value to 5 will result in a request being retried up to
-    #     4 times. Used in `standard` and `adaptive` retry modes.
+    #     4 times. Used in `standard` and `adaptive` retry modes. Defaults to 3,
+    #     except for DynamoDB and DynamoDB Streams, which default to 4.
     #
     #   @option options [String] :profile ("default")
     #     Used when loading credentials from the shared credentials file at `HOME/.aws/credentials`.
@@ -327,15 +328,15 @@ module Aws::SecurityHub
     #     used by the default backoff function. This option is only used in the
     #     `legacy` retry mode.
     #
-    #   @option options [String] :retry_mode ("legacy")
+    #   @option options [String] :retry_mode ("standard")
     #     Specifies which retry algorithm to use. Values are:
     #
-    #     * `legacy` - The pre-existing retry behavior. This is the default
-    #       value if no retry mode is provided.
+    #     * `legacy` - The pre-existing retry behavior.
     #
     #     * `standard` - A standardized set of retry rules across the AWS SDKs.
     #       This includes support for retry quotas, which limit the number of
-    #       unsuccessful retries a client can make.
+    #       unsuccessful retries a client can make. This is the default value
+    #       if no retry mode is provided.
     #
     #     * `adaptive` - A retry mode that includes all the functionality of
     #       `standard` mode along with automatic client side throttling.
@@ -709,7 +710,7 @@ module Aws::SecurityHub
     #   resp.standards_subscriptions[0].standards_status #=> String, one of "PENDING", "READY", "FAILED", "DELETING", "INCOMPLETE"
     #   resp.standards_subscriptions[0].standards_controls_updatable #=> String, one of "READY_FOR_UPDATES", "NOT_READY_FOR_UPDATES"
     #   resp.standards_subscriptions[0].standards_status_reason.status_reason_code #=> String, one of "NO_AVAILABLE_CONFIGURATION_RECORDER", "MAXIMUM_NUMBER_OF_CONFIG_RULES_EXCEEDED", "NO_AVAILABLE_MULTICLOUD_CONNECTOR", "INTERNAL_ERROR"
-    #   resp.standards_subscriptions[0].provider #=> String, one of "AWS", "Azure"
+    #   resp.standards_subscriptions[0].provider #=> String, one of "AWS", "Azure", "GCP"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/BatchDisableStandards AWS API Documentation
     #
@@ -789,7 +790,7 @@ module Aws::SecurityHub
     #   resp.standards_subscriptions[0].standards_status #=> String, one of "PENDING", "READY", "FAILED", "DELETING", "INCOMPLETE"
     #   resp.standards_subscriptions[0].standards_controls_updatable #=> String, one of "READY_FOR_UPDATES", "NOT_READY_FOR_UPDATES"
     #   resp.standards_subscriptions[0].standards_status_reason.status_reason_code #=> String, one of "NO_AVAILABLE_CONFIGURATION_RECORDER", "MAXIMUM_NUMBER_OF_CONFIG_RULES_EXCEEDED", "NO_AVAILABLE_MULTICLOUD_CONNECTOR", "INTERNAL_ERROR"
-    #   resp.standards_subscriptions[0].provider #=> String, one of "AWS", "Azure"
+    #   resp.standards_subscriptions[0].provider #=> String, one of "AWS", "Azure", "GCP"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/BatchEnableStandards AWS API Documentation
     #
@@ -1186,7 +1187,7 @@ module Aws::SecurityHub
     #   resp.configuration_policy_associations[0].target_type #=> String, one of "ACCOUNT", "ORGANIZATIONAL_UNIT", "ROOT"
     #   resp.configuration_policy_associations[0].association_type #=> String, one of "INHERITED", "APPLIED"
     #   resp.configuration_policy_associations[0].updated_at #=> Time
-    #   resp.configuration_policy_associations[0].association_status #=> String, one of "PENDING", "SUCCESS", "FAILED"
+    #   resp.configuration_policy_associations[0].association_status #=> String, one of "PENDING", "SUCCESS", "FAILED", "DISABLED"
     #   resp.configuration_policy_associations[0].association_status_message #=> String
     #   resp.unprocessed_configuration_policy_associations #=> Array
     #   resp.unprocessed_configuration_policy_associations[0].configuration_policy_association_identifiers.target.account_id #=> String
@@ -1306,7 +1307,7 @@ module Aws::SecurityHub
     #   resp.security_controls[0].parameters["NonEmptyString"].value.enum_list #=> Array
     #   resp.security_controls[0].parameters["NonEmptyString"].value.enum_list[0] #=> String
     #   resp.security_controls[0].last_update_reason #=> String
-    #   resp.security_controls[0].provider #=> String, one of "AWS", "Azure"
+    #   resp.security_controls[0].provider #=> String, one of "AWS", "Azure", "GCP"
     #   resp.unprocessed_ids #=> Array
     #   resp.unprocessed_ids[0].security_control_id #=> String
     #   resp.unprocessed_ids[0].error_code #=> String, one of "INVALID_INPUT", "ACCESS_DENIED", "NOT_FOUND", "RESOURCE_NOT_FOUND", "LIMIT_EXCEEDED"
@@ -3466,6 +3467,14 @@ module Aws::SecurityHub
     #         },
     #         azure_regions: ["NonEmptyString"], # required
     #       },
+    #       gcp: {
+    #         aws_config_connector_arn: "NonEmptyString", # required
+    #         scope_configuration: { # required
+    #           scope_type: "PROJECT", # required, accepts PROJECT, ORGANIZATION
+    #           scope_values: ["NonEmptyString"],
+    #         },
+    #         gcp_regions: ["NonEmptyString"], # required
+    #       },
     #     },
     #     tags: {
     #       "TagKey" => "TagValue",
@@ -3541,6 +3550,14 @@ module Aws::SecurityHub
     #           scope_values: ["NonEmptyString"],
     #         },
     #         azure_regions: ["NonEmptyString"], # required
+    #       },
+    #       gcp: {
+    #         aws_config_connector_arn: "NonEmptyString", # required
+    #         scope_configuration: { # required
+    #           scope_type: "PROJECT", # required, accepts PROJECT, ORGANIZATION
+    #           scope_values: ["NonEmptyString"],
+    #         },
+    #         gcp_regions: ["NonEmptyString"], # required
     #       },
     #     },
     #     kms_key_arn: "NonEmptyString",
@@ -5273,7 +5290,7 @@ module Aws::SecurityHub
     #   resp.member_account_limit_reached #=> Boolean
     #   resp.auto_enable_standards #=> String, one of "NONE", "DEFAULT"
     #   resp.organization_configuration.configuration_type #=> String, one of "CENTRAL", "LOCAL"
-    #   resp.organization_configuration.status #=> String, one of "PENDING", "ENABLED", "FAILED"
+    #   resp.organization_configuration.status #=> String, one of "PENDING", "ENABLED", "FAILED", "DISABLED"
     #   resp.organization_configuration.status_message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DescribeOrganizationConfiguration AWS API Documentation
@@ -5479,6 +5496,7 @@ module Aws::SecurityHub
     # @option params [Array<String>] :providers
     #   A list of cloud providers to filter the standards by. For example,
     #   specify `Azure` to return only standards that evaluate Azure
+    #   resources, or `GCP` to return only standards that evaluate GCP
     #   resources.
     #
     # @return [Types::DescribeStandardsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -5554,6 +5572,17 @@ module Aws::SecurityHub
     #           product: "Security Hub", 
     #         }, 
     #       }, 
+    #       {
+    #         description: "The Center for Internet Security (CIS) Google Cloud Platform Foundation Benchmark v4.0.0 is a set of security configuration best practices for Google Cloud Platform. This Security Hub standard automatically checks your compliance readiness against a subset of CIS requirements.", 
+    #         enabled_by_default: false, 
+    #         name: "CIS Google Cloud Platform Foundation Benchmark v4.0.0", 
+    #         provider: "GCP", 
+    #         standards_arn: "arn:aws:securityhub:us-west-1::standards/cis-gcp-foundation-benchmark/v/4.0.0", 
+    #         standards_managed_by: {
+    #           company: "AWS", 
+    #           product: "Security Hub", 
+    #         }, 
+    #       }, 
     #     ], 
     #   }
     #
@@ -5584,12 +5613,39 @@ module Aws::SecurityHub
     #     ], 
     #   }
     #
+    # @example Example: To get available GCP security standards
+    #
+    #   # The following example returns a list of available security standards from a specified provider.
+    #
+    #   resp = client.describe_standards({
+    #     providers: [
+    #       "GCP", 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     standards: [
+    #       {
+    #         description: "The Center for Internet Security (CIS) Google Cloud Platform Foundation Benchmark v4.0.0 is a set of security configuration best practices for Google Cloud Platform. This Security Hub standard automatically checks your compliance readiness against a subset of CIS requirements.", 
+    #         enabled_by_default: false, 
+    #         name: "CIS Google Cloud Platform Foundation Benchmark v4.0.0", 
+    #         provider: "GCP", 
+    #         standards_arn: "arn:aws:securityhub:us-west-1::standards/cis-gcp-foundation-benchmark/v/4.0.0", 
+    #         standards_managed_by: {
+    #           company: "AWS", 
+    #           product: "Security Hub", 
+    #         }, 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_standards({
     #     next_token: "NextToken",
     #     max_results: 1,
-    #     providers: ["AWS"], # accepts AWS, Azure
+    #     providers: ["AWS"], # accepts AWS, Azure, GCP
     #   })
     #
     # @example Response structure
@@ -5599,7 +5655,7 @@ module Aws::SecurityHub
     #   resp.standards[0].name #=> String
     #   resp.standards[0].description #=> String
     #   resp.standards[0].enabled_by_default #=> Boolean
-    #   resp.standards[0].provider #=> String, one of "AWS", "Azure"
+    #   resp.standards[0].provider #=> String, one of "AWS", "Azure", "GCP"
     #   resp.standards[0].standards_managed_by.company #=> String
     #   resp.standards[0].standards_managed_by.product #=> String
     #   resp.next_token #=> String
@@ -6600,7 +6656,7 @@ module Aws::SecurityHub
     #   resp.target_type #=> String, one of "ACCOUNT", "ORGANIZATIONAL_UNIT", "ROOT"
     #   resp.association_type #=> String, one of "INHERITED", "APPLIED"
     #   resp.updated_at #=> Time
-    #   resp.association_status #=> String, one of "PENDING", "SUCCESS", "FAILED"
+    #   resp.association_status #=> String, one of "PENDING", "SUCCESS", "FAILED", "DISABLED"
     #   resp.association_status_message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/GetConfigurationPolicyAssociation AWS API Documentation
@@ -6692,6 +6748,12 @@ module Aws::SecurityHub
     #   resp.provider_detail.azure.scope_configuration.scope_values[0] #=> String
     #   resp.provider_detail.azure.azure_regions #=> Array
     #   resp.provider_detail.azure.azure_regions[0] #=> String
+    #   resp.provider_detail.gcp.aws_config_connector_arn #=> String
+    #   resp.provider_detail.gcp.scope_configuration.scope_type #=> String, one of "PROJECT", "ORGANIZATION"
+    #   resp.provider_detail.gcp.scope_configuration.scope_values #=> Array
+    #   resp.provider_detail.gcp.scope_configuration.scope_values[0] #=> String
+    #   resp.provider_detail.gcp.gcp_regions #=> Array
+    #   resp.provider_detail.gcp.gcp_regions[0] #=> String
     #   resp.created_by #=> String
     #   resp.enablement_status #=> String, one of "ENABLED", "PENDING_ENABLEMENT", "PENDING_UPDATE", "PENDING_DELETION"
     #
@@ -6759,6 +6821,12 @@ module Aws::SecurityHub
     #   resp.provider_detail.azure.scope_configuration.scope_values[0] #=> String
     #   resp.provider_detail.azure.azure_regions #=> Array
     #   resp.provider_detail.azure.azure_regions[0] #=> String
+    #   resp.provider_detail.gcp.aws_config_connector_arn #=> String
+    #   resp.provider_detail.gcp.scope_configuration.scope_type #=> String, one of "PROJECT", "ORGANIZATION"
+    #   resp.provider_detail.gcp.scope_configuration.scope_values #=> Array
+    #   resp.provider_detail.gcp.scope_configuration.scope_values[0] #=> String
+    #   resp.provider_detail.gcp.gcp_regions #=> Array
+    #   resp.provider_detail.gcp.gcp_regions[0] #=> String
     #   resp.enablement_status #=> String, one of "ENABLED", "PENDING_ENABLEMENT", "FAILED_TO_ENABLE", "PENDING_UPDATE", "FAILED_TO_UPDATE", "PENDING_DELETION", "FAILED_TO_DELETE"
     #   resp.enablement_status_reason #=> String
     #
@@ -6792,7 +6860,8 @@ module Aws::SecurityHub
     # @option params [Array<String>] :providers
     #   A list of cloud providers to filter the enabled standards by. For
     #   example, specify `Azure` to return only enabled standards that
-    #   evaluate Azure resources.
+    #   evaluate Azure resources, or `GCP` to return only enabled standards
+    #   that evaluate GCP resources.
     #
     # @return [Types::GetEnabledStandardsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -6832,7 +6901,7 @@ module Aws::SecurityHub
     #     standards_subscription_arns: ["NonEmptyString"],
     #     next_token: "NextToken",
     #     max_results: 1,
-    #     providers: ["AWS"], # accepts AWS, Azure
+    #     providers: ["AWS"], # accepts AWS, Azure, GCP
     #   })
     #
     # @example Response structure
@@ -6845,7 +6914,7 @@ module Aws::SecurityHub
     #   resp.standards_subscriptions[0].standards_status #=> String, one of "PENDING", "READY", "FAILED", "DELETING", "INCOMPLETE"
     #   resp.standards_subscriptions[0].standards_controls_updatable #=> String, one of "READY_FOR_UPDATES", "NOT_READY_FOR_UPDATES"
     #   resp.standards_subscriptions[0].standards_status_reason.status_reason_code #=> String, one of "NO_AVAILABLE_CONFIGURATION_RECORDER", "MAXIMUM_NUMBER_OF_CONFIG_RULES_EXCEEDED", "NO_AVAILABLE_MULTICLOUD_CONNECTOR", "INTERNAL_ERROR"
-    #   resp.standards_subscriptions[0].provider #=> String, one of "AWS", "Azure"
+    #   resp.standards_subscriptions[0].provider #=> String, one of "AWS", "Azure", "GCP"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/GetEnabledStandards AWS API Documentation
@@ -9447,7 +9516,7 @@ module Aws::SecurityHub
     #   resp.items[0].resource.id #=> String
     #   resp.items[0].resource.resource_guid #=> String
     #   resp.items[0].resource.resource_region #=> String
-    #   resp.items[0].resource.cloud_provider #=> String, one of "Azure", "AWS"
+    #   resp.items[0].resource.cloud_provider #=> String, one of "Azure", "AWS", "GCP"
     #   resp.items[0].status #=> String, one of "New", "Updated", "Resolved"
     #   resp.items[0].trait.type #=> String
     #   resp.items[0].trait.title #=> String
@@ -9906,7 +9975,7 @@ module Aws::SecurityHub
     #   resp.resources[0].resource_info.ai_details.self_hosted_total_ai_resource_count #=> Integer
     #   resp.resources[0].resource_criticality #=> String, one of "Very High", "High", "Medium", "Low", "Unknown"
     #   resp.resources[0].criticality_sources #=> Array
-    #   resp.resources[0].criticality_sources[0].source #=> String, one of "AutomationRule", "ResourceName", "TagInference"
+    #   resp.resources[0].criticality_sources[0].source #=> String, one of "AutomationRule", "ResourceName", "TagInference", "CloudWatchTelemetryInference", "InstalledSoftwareAndPackageInference"
     #   resp.resources[0].criticality_sources[0].reason #=> String
     #   resp.next_token #=> String
     #
@@ -10011,7 +10080,7 @@ module Aws::SecurityHub
     #   resp.security_control_definition.parameter_definitions["NonEmptyString"].configuration_options.enum_list.max_items #=> Integer
     #   resp.security_control_definition.parameter_definitions["NonEmptyString"].configuration_options.enum_list.allowed_values #=> Array
     #   resp.security_control_definition.parameter_definitions["NonEmptyString"].configuration_options.enum_list.allowed_values[0] #=> String
-    #   resp.security_control_definition.provider #=> String, one of "AWS", "Azure"
+    #   resp.security_control_definition.provider #=> String, one of "AWS", "Azure", "GCP"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/GetSecurityControlDefinition AWS API Documentation
     #
@@ -10019,6 +10088,379 @@ module Aws::SecurityHub
     # @param [Hash] params ({})
     def get_security_control_definition(params = {}, options = {})
       req = build_request(:get_security_control_definition, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of resources that contain a specific software package.
+    # You identify the package with `PackageName` and `PackageType`. To
+    # narrow the results to one version of the package, include
+    # `PackageVersion`.
+    #
+    # You can use the `Scopes` parameter to define the data boundary for the
+    # query. Currently, `Scopes` supports `AwsOrganizations`. With
+    # `AwsOrganizations`, you can retrieve resources from your entire
+    # organization or from specific organizational units. Only the delegated
+    # administrator account can use `Scopes`.
+    #
+    # You can use the `Filters` parameter to further refine results based on
+    # resource attributes, such as `ResourceType` or `Region`.
+    #
+    # This operation returns paginated results. To retrieve additional
+    # results, use the `NextToken` value from the previous response.
+    #
+    # @option params [required, String] :package_name
+    #   The name of the software package, for example `openssl`. This value
+    #   must match the `PackageName` returned by `GetSoftwareV2`.
+    #
+    # @option params [required, String] :package_type
+    #   The type of the software package, for example `operating-system`,
+    #   `application`, or `library`. This value must match the `PackageType`
+    #   returned by `GetSoftwareV2`.
+    #
+    # @option params [String] :package_version
+    #   The version of the software package, for example `3.0.8`. If you omit
+    #   this value, the response includes resources that contain any version
+    #   of the package.
+    #
+    # @option params [Types::SoftwareFilters] :filters
+    #   Filters the returned resources based on a set of criteria. You can
+    #   nest composite filters up to three levels deep.
+    #
+    # @option params [Types::SoftwareScopes] :scopes
+    #   Limits the results to resources from specific organizational units or
+    #   from the delegated administrator's organization. Only the delegated
+    #   administrator account can use this parameter. Other accounts receive
+    #   an `AccessDeniedException`.
+    #
+    #   This parameter is optional. If you omit it, the delegated
+    #   administrator sees resources from all accounts across the entire
+    #   organization. Other accounts see only their own resources.
+    #
+    #   You can specify up to 10 entries in `Scopes.AwsOrganizations`. If
+    #   multiple entries are specified, the entries are combined using OR
+    #   logic.
+    #
+    # @option params [Array<Types::SortCriterion>] :sort_criteria
+    #   The resource attribute used to sort the list of returned resources,
+    #   for example `Region` or `ResourceType`. You can specify one sort
+    #   criterion.
+    #
+    # @option params [String] :next_token
+    #   The token required for pagination. On your first call, set the value
+    #   of this parameter to `NULL`. For subsequent calls, to continue listing
+    #   data, set the value of this parameter to the value returned in the
+    #   previous response.
+    #
+    #   A token expires one hour after it's issued. If you change the request
+    #   parameters between calls, the token is no longer valid and the request
+    #   fails with a `ValidationException`.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return. Valid values are 1–100. The
+    #   default is 100.
+    #
+    # @return [Types::GetSoftwareResourcesV2Response] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetSoftwareResourcesV2Response#software_resources #software_resources} => Array&lt;Types::SoftwareResourceResult&gt;
+    #   * {Types::GetSoftwareResourcesV2Response#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_software_resources_v2({
+    #     package_name: "NonEmptyString", # required
+    #     package_type: "NonEmptyString", # required
+    #     package_version: "NonEmptyString",
+    #     filters: {
+    #       composite_filters: [
+    #         {
+    #           string_filters: [
+    #             {
+    #               field_name: "AccountId", # accepts AccountId, PackageName, PackageVersion, PackageType, Region, ResourceRegion, ResourceType, ResourceId, ResourceProvider, ResourceOwnerAccountId, ResourceOwnerOrgId, ResourceCloudPartition
+    #               filter: {
+    #                 value: "NonEmptyString",
+    #                 comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS, CONTAINS, NOT_CONTAINS, CONTAINS_WORD
+    #               },
+    #             },
+    #           ],
+    #           nested_composite_filters: {
+    #             # recursive SoftwareCompositeFilterList
+    #           },
+    #           operator: "AND", # accepts AND, OR
+    #         },
+    #       ],
+    #       composite_operator: "AND", # accepts AND, OR
+    #     },
+    #     scopes: {
+    #       aws_organizations: [
+    #         {
+    #           organization_id: "NonEmptyString",
+    #           organizational_unit_id: "NonEmptyString",
+    #         },
+    #       ],
+    #     },
+    #     sort_criteria: [
+    #       {
+    #         field: "NonEmptyString",
+    #         sort_order: "asc", # accepts asc, desc
+    #       },
+    #     ],
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.software_resources #=> Array
+    #   resp.software_resources[0].account_id #=> String
+    #   resp.software_resources[0].resource_type #=> String
+    #   resp.software_resources[0].region #=> String
+    #   resp.software_resources[0].resource_id #=> String
+    #   resp.software_resources[0].resource_provider #=> String
+    #   resp.software_resources[0].resource_owner_org_id #=> String
+    #   resp.software_resources[0].resource_owner_account_id #=> String
+    #   resp.software_resources[0].resource_cloud_partition #=> String
+    #   resp.software_resources[0].resource_region #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/GetSoftwareResourcesV2 AWS API Documentation
+    #
+    # @overload get_software_resources_v2(params = {})
+    # @param [Hash] params ({})
+    def get_software_resources_v2(params = {}, options = {})
+      req = build_request(:get_software_resources_v2, params)
+      req.send_request(options)
+    end
+
+    # Retrieves aggregated counts of software packages installed on your
+    # resources, grouped by a field that you specify. For example, you can
+    # return the most common package types or the accounts with the most
+    # installed packages.
+    #
+    # Each count is the number of package-to-resource pairs that match the
+    # grouping value. A package installed on three resources contributes
+    # three to the count.
+    #
+    # You can use the `Scopes` parameter to define the data boundary for the
+    # query. Currently, `Scopes` supports `AwsOrganizations`. With
+    # `AwsOrganizations`, you can aggregate software from your entire
+    # organization or from specific organizational units. Only the delegated
+    # administrator account can use `Scopes`.
+    #
+    # This operation doesn't paginate. Use `MaxStatisticResults` to control
+    # how many grouping values are returned.
+    #
+    # @option params [required, Array<Types::SoftwareGroupByRule>] :group_by_rules
+    #   How software statistics should be aggregated and organized in the
+    #   response.
+    #
+    # @option params [Types::SoftwareScopes] :scopes
+    #   Limits the results to software on resources from specific
+    #   organizational units or from the delegated administrator's
+    #   organization. Only the delegated administrator account can use this
+    #   parameter. Other accounts receive an `AccessDeniedException`.
+    #
+    #   This parameter is optional. If you omit it, the delegated
+    #   administrator sees statistics from all accounts across the entire
+    #   organization. Other accounts see only statistics for software on their
+    #   own resources.
+    #
+    #   You can specify up to 10 entries in `Scopes.AwsOrganizations`. If
+    #   multiple entries are specified, the entries are combined using OR
+    #   logic.
+    #
+    # @option params [String] :sort_order
+    #   Sorts aggregated statistics by count. The default is descending, which
+    #   returns the values with the highest counts first.
+    #
+    # @option params [Integer] :max_statistic_results
+    #   The maximum number of grouping values to return. Valid values are
+    #   1–400. The default is 400.
+    #
+    # @return [Types::GetSoftwareStatisticsV2Response] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetSoftwareStatisticsV2Response#group_by_results #group_by_results} => Array&lt;Types::GroupByResult&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_software_statistics_v2({
+    #     group_by_rules: [ # required
+    #       {
+    #         group_by_field: "AccountId", # required, accepts AccountId, PackageName, PackageVersion, PackageType, Region, ResourceRegion, ResourceType, ResourceId, ResourceProvider, ResourceOwnerAccountId, ResourceOwnerOrgId, ResourceCloudPartition
+    #         filters: {
+    #           composite_filters: [
+    #             {
+    #               string_filters: [
+    #                 {
+    #                   field_name: "AccountId", # accepts AccountId, PackageName, PackageVersion, PackageType, Region, ResourceRegion, ResourceType, ResourceId, ResourceProvider, ResourceOwnerAccountId, ResourceOwnerOrgId, ResourceCloudPartition
+    #                   filter: {
+    #                     value: "NonEmptyString",
+    #                     comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS, CONTAINS, NOT_CONTAINS, CONTAINS_WORD
+    #                   },
+    #                 },
+    #               ],
+    #               nested_composite_filters: {
+    #                 # recursive SoftwareCompositeFilterList
+    #               },
+    #               operator: "AND", # accepts AND, OR
+    #             },
+    #           ],
+    #           composite_operator: "AND", # accepts AND, OR
+    #         },
+    #       },
+    #     ],
+    #     scopes: {
+    #       aws_organizations: [
+    #         {
+    #           organization_id: "NonEmptyString",
+    #           organizational_unit_id: "NonEmptyString",
+    #         },
+    #       ],
+    #     },
+    #     sort_order: "asc", # accepts asc, desc
+    #     max_statistic_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.group_by_results #=> Array
+    #   resp.group_by_results[0].group_by_field #=> String
+    #   resp.group_by_results[0].group_by_values #=> Array
+    #   resp.group_by_results[0].group_by_values[0].field_value #=> String
+    #   resp.group_by_results[0].group_by_values[0].count #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/GetSoftwareStatisticsV2 AWS API Documentation
+    #
+    # @overload get_software_statistics_v2(params = {})
+    # @param [Hash] params ({})
+    def get_software_statistics_v2(params = {}, options = {})
+      req = build_request(:get_software_statistics_v2, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of software packages installed on your resources. Each
+    # result identifies a package by name, version, and type, and includes
+    # the number of resources that contain that package.
+    #
+    # You can use the `Scopes` parameter to define the data boundary for the
+    # query. Currently, `Scopes` supports `AwsOrganizations`. With
+    # `AwsOrganizations`, you can retrieve software from your entire
+    # organization or from specific organizational units. Only the delegated
+    # administrator account can use `Scopes`.
+    #
+    # You can use the `Filters` parameter to refine results based on package
+    # and resource attributes. You can use `Scopes` and `Filters`
+    # independently or together. When both are provided, `Scopes` narrows
+    # the data set first, and then `Filters` refines results within that
+    # scoped data set.
+    #
+    # To list the resources that contain a specific package, use
+    # `GetSoftwareResourcesV2`. To get counts of software grouped by a
+    # field, use `GetSoftwareStatisticsV2`.
+    #
+    # This operation returns paginated results. To retrieve additional
+    # results, use the `NextToken` value from the previous response.
+    #
+    # @option params [Types::SoftwareFilters] :filters
+    #   Filters software packages based on a set of criteria. You can nest
+    #   composite filters up to three levels deep.
+    #
+    # @option params [Types::SoftwareScopes] :scopes
+    #   Limits the results to software on resources from specific
+    #   organizational units or from the delegated administrator's
+    #   organization. Only the delegated administrator account can use this
+    #   parameter. Other accounts receive an `AccessDeniedException`.
+    #
+    #   This parameter is optional. If you omit it, the delegated
+    #   administrator sees software from all accounts across the entire
+    #   organization. Other accounts see only software on their own resources.
+    #
+    #   You can specify up to 10 entries in `Scopes.AwsOrganizations`. If
+    #   multiple entries are specified, the entries are combined using OR
+    #   logic.
+    #
+    # @option params [Array<Types::SortCriterion>] :sort_criteria
+    #   The software attributes used to sort the list of returned software
+    #   packages. You can't sort by `ResourceCount`.
+    #
+    # @option params [String] :next_token
+    #   The token required for pagination. On your first call, set the value
+    #   of this parameter to `NULL`. For subsequent calls, to continue listing
+    #   data, set the value of this parameter to the value returned in the
+    #   previous response.
+    #
+    #   A token expires one hour after it's issued. If you change `Filters`
+    #   or `SortCriteria` between calls, the token is no longer valid and the
+    #   request fails with a `ValidationException`.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return. Valid values are 1–100. The
+    #   default is 100.
+    #
+    # @return [Types::GetSoftwareV2Response] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetSoftwareV2Response#software #software} => Array&lt;Types::SoftwareResult&gt;
+    #   * {Types::GetSoftwareV2Response#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_software_v2({
+    #     filters: {
+    #       composite_filters: [
+    #         {
+    #           string_filters: [
+    #             {
+    #               field_name: "AccountId", # accepts AccountId, PackageName, PackageVersion, PackageType, Region, ResourceRegion, ResourceType, ResourceId, ResourceProvider, ResourceOwnerAccountId, ResourceOwnerOrgId, ResourceCloudPartition
+    #               filter: {
+    #                 value: "NonEmptyString",
+    #                 comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS, CONTAINS, NOT_CONTAINS, CONTAINS_WORD
+    #               },
+    #             },
+    #           ],
+    #           nested_composite_filters: {
+    #             # recursive SoftwareCompositeFilterList
+    #           },
+    #           operator: "AND", # accepts AND, OR
+    #         },
+    #       ],
+    #       composite_operator: "AND", # accepts AND, OR
+    #     },
+    #     scopes: {
+    #       aws_organizations: [
+    #         {
+    #           organization_id: "NonEmptyString",
+    #           organizational_unit_id: "NonEmptyString",
+    #         },
+    #       ],
+    #     },
+    #     sort_criteria: [
+    #       {
+    #         field: "NonEmptyString",
+    #         sort_order: "asc", # accepts asc, desc
+    #       },
+    #     ],
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.software #=> Array
+    #   resp.software[0].package_name #=> String
+    #   resp.software[0].package_version #=> String
+    #   resp.software[0].package_type #=> String
+    #   resp.software[0].resource_count #=> Integer
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/GetSoftwareV2 AWS API Documentation
+    #
+    # @overload get_software_v2(params = {})
+    # @param [Hash] params ({})
+    def get_software_v2(params = {}, options = {})
+      req = build_request(:get_software_v2, params)
       req.send_request(options)
     end
 
@@ -10425,7 +10867,7 @@ module Aws::SecurityHub
     #     filters: {
     #       configuration_policy_id: "NonEmptyString",
     #       association_type: "INHERITED", # accepts INHERITED, APPLIED
-    #       association_status: "PENDING", # accepts PENDING, SUCCESS, FAILED
+    #       association_status: "PENDING", # accepts PENDING, SUCCESS, FAILED, DISABLED
     #     },
     #   })
     #
@@ -10437,7 +10879,7 @@ module Aws::SecurityHub
     #   resp.configuration_policy_association_summaries[0].target_type #=> String, one of "ACCOUNT", "ORGANIZATIONAL_UNIT", "ROOT"
     #   resp.configuration_policy_association_summaries[0].association_type #=> String, one of "INHERITED", "APPLIED"
     #   resp.configuration_policy_association_summaries[0].updated_at #=> Time
-    #   resp.configuration_policy_association_summaries[0].association_status #=> String, one of "PENDING", "SUCCESS", "FAILED"
+    #   resp.configuration_policy_association_summaries[0].association_status #=> String, one of "PENDING", "SUCCESS", "FAILED", "DISABLED"
     #   resp.configuration_policy_association_summaries[0].association_status_message #=> String
     #   resp.next_token #=> String
     #
@@ -10502,7 +10944,7 @@ module Aws::SecurityHub
     #   resp = client.list_connectors({
     #     next_token: "NextToken",
     #     max_results: 1,
-    #     provider_name: "AZURE", # accepts AZURE
+    #     provider_name: "AZURE", # accepts AZURE, GCP
     #     connector_status: "CONNECTED", # accepts CONNECTED, DEGRADED, FAILED_TO_CONNECT, UNKNOWN
     #     enablement_status: "ENABLED", # accepts ENABLED, PENDING_ENABLEMENT, PENDING_UPDATE, PENDING_DELETION
     #   })
@@ -10515,7 +10957,7 @@ module Aws::SecurityHub
     #   resp.connectors[0].connector_id #=> String
     #   resp.connectors[0].name #=> String
     #   resp.connectors[0].description #=> String
-    #   resp.connectors[0].provider_summary.provider_name #=> String, one of "AZURE"
+    #   resp.connectors[0].provider_summary.provider_name #=> String, one of "AZURE", "GCP"
     #   resp.connectors[0].provider_summary.connector_status #=> String, one of "CONNECTED", "DEGRADED", "FAILED_TO_CONNECT", "UNKNOWN"
     #   resp.connectors[0].provider_summary.provider_configuration.azure.aws_config_connector_arn #=> String
     #   resp.connectors[0].provider_summary.provider_configuration.azure.scope_configuration.scope_type #=> String, one of "TENANT", "SUBSCRIPTION"
@@ -10523,6 +10965,12 @@ module Aws::SecurityHub
     #   resp.connectors[0].provider_summary.provider_configuration.azure.scope_configuration.scope_values[0] #=> String
     #   resp.connectors[0].provider_summary.provider_configuration.azure.azure_regions #=> Array
     #   resp.connectors[0].provider_summary.provider_configuration.azure.azure_regions[0] #=> String
+    #   resp.connectors[0].provider_summary.provider_configuration.gcp.aws_config_connector_arn #=> String
+    #   resp.connectors[0].provider_summary.provider_configuration.gcp.scope_configuration.scope_type #=> String, one of "PROJECT", "ORGANIZATION"
+    #   resp.connectors[0].provider_summary.provider_configuration.gcp.scope_configuration.scope_values #=> Array
+    #   resp.connectors[0].provider_summary.provider_configuration.gcp.scope_configuration.scope_values[0] #=> String
+    #   resp.connectors[0].provider_summary.provider_configuration.gcp.gcp_regions #=> Array
+    #   resp.connectors[0].provider_summary.provider_configuration.gcp.gcp_regions[0] #=> String
     #   resp.connectors[0].created_at #=> Time
     #   resp.connectors[0].created_by #=> String
     #   resp.connectors[0].enablement_status #=> String, one of "ENABLED", "PENDING_ENABLEMENT", "PENDING_UPDATE", "PENDING_DELETION"
@@ -10564,7 +11012,7 @@ module Aws::SecurityHub
     #   resp = client.list_connectors_v2({
     #     next_token: "NextToken",
     #     max_results: 1,
-    #     provider_name: "JIRA_CLOUD", # accepts JIRA_CLOUD, SERVICENOW, AZURE
+    #     provider_name: "JIRA_CLOUD", # accepts JIRA_CLOUD, SERVICENOW, AZURE, GCP
     #     connector_status: "CONNECTED", # accepts CONNECTED, DEGRADED, FAILED_TO_CONNECT, PENDING_AUTHORIZATION, PENDING_CONFIGURATION, UNKNOWN
     #     enablement_status: "ENABLED", # accepts ENABLED, PENDING_ENABLEMENT, FAILED_TO_ENABLE, PENDING_UPDATE, FAILED_TO_UPDATE, PENDING_DELETION, FAILED_TO_DELETE
     #   })
@@ -10577,7 +11025,7 @@ module Aws::SecurityHub
     #   resp.connectors[0].connector_id #=> String
     #   resp.connectors[0].name #=> String
     #   resp.connectors[0].description #=> String
-    #   resp.connectors[0].provider_summary.provider_name #=> String, one of "JIRA_CLOUD", "SERVICENOW", "AZURE"
+    #   resp.connectors[0].provider_summary.provider_name #=> String, one of "JIRA_CLOUD", "SERVICENOW", "AZURE", "GCP"
     #   resp.connectors[0].provider_summary.connector_status #=> String, one of "CONNECTED", "DEGRADED", "FAILED_TO_CONNECT", "PENDING_AUTHORIZATION", "PENDING_CONFIGURATION", "UNKNOWN"
     #   resp.connectors[0].provider_summary.provider_configuration.jira_cloud.cloud_id #=> String
     #   resp.connectors[0].provider_summary.provider_configuration.jira_cloud.project_key #=> String
@@ -10593,6 +11041,12 @@ module Aws::SecurityHub
     #   resp.connectors[0].provider_summary.provider_configuration.azure.scope_configuration.scope_values[0] #=> String
     #   resp.connectors[0].provider_summary.provider_configuration.azure.azure_regions #=> Array
     #   resp.connectors[0].provider_summary.provider_configuration.azure.azure_regions[0] #=> String
+    #   resp.connectors[0].provider_summary.provider_configuration.gcp.aws_config_connector_arn #=> String
+    #   resp.connectors[0].provider_summary.provider_configuration.gcp.scope_configuration.scope_type #=> String, one of "PROJECT", "ORGANIZATION"
+    #   resp.connectors[0].provider_summary.provider_configuration.gcp.scope_configuration.scope_values #=> Array
+    #   resp.connectors[0].provider_summary.provider_configuration.gcp.scope_configuration.scope_values[0] #=> String
+    #   resp.connectors[0].provider_summary.provider_configuration.gcp.gcp_regions #=> Array
+    #   resp.connectors[0].provider_summary.provider_configuration.gcp.gcp_regions[0] #=> String
     #   resp.connectors[0].created_at #=> Time
     #   resp.connectors[0].enablement_status #=> String, one of "ENABLED", "PENDING_ENABLEMENT", "FAILED_TO_ENABLE", "PENDING_UPDATE", "FAILED_TO_UPDATE", "PENDING_DELETION", "FAILED_TO_DELETE"
     #   resp.connectors[0].enablement_status_reason #=> String
@@ -10835,7 +11289,7 @@ module Aws::SecurityHub
     #   resp.resource.id #=> String
     #   resp.resource.resource_guid #=> String
     #   resp.resource.resource_region #=> String
-    #   resp.resource.cloud_provider #=> String, one of "Azure", "AWS"
+    #   resp.resource.cloud_provider #=> String, one of "Azure", "AWS", "GCP"
     #   resp.total_count #=> Integer
     #   resp.trait.type #=> String
     #   resp.trait.title #=> String
@@ -11241,7 +11695,8 @@ module Aws::SecurityHub
     # @option params [Array<String>] :providers
     #   A list of cloud providers to filter the security control definitions
     #   by. For example, specify `Azure` to return only controls that evaluate
-    #   Azure resources.
+    #   Azure resources, or `GCP` to return only controls that evaluate GCP
+    #   resources.
     #
     # @return [Types::ListSecurityControlDefinitionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -11304,10 +11759,21 @@ module Aws::SecurityHub
     #         ], 
     #         description: "This control checks whether Azure Container Apps have managed identity enabled. The control fails if the Container App has a system-assigned or user-assigned managed identity enabled.", 
     #         provider: "Azure", 
-    #         remediation_url: "https://docs.aws.amazon.com/console/securityhub/Azure.App.1/remediation", 
+    #         remediation_url: "https://learn.microsoft.com/en-us/azure/container-apps/managed-identity", 
     #         security_control_id: "Azure.App.1", 
     #         severity_rating: "MEDIUM", 
     #         title: "Azure Container Apps with managed identity enabled should follow least privilege", 
+    #       }, 
+    #       {
+    #         current_region_availability: "AVAILABLE", 
+    #         customizable_properties: [
+    #         ], 
+    #         description: "This control checks whether any GCP API keys exist. The control fails if an API key exists.", 
+    #         provider: "GCP", 
+    #         remediation_url: "https://cloud.google.com/sdk/gcloud/reference/services/api-keys/delete", 
+    #         security_control_id: "GCP.ApiKeys.1", 
+    #         severity_rating: "MEDIUM", 
+    #         title: "GCP API keys should not exist", 
     #       }, 
     #     ], 
     #   }
@@ -11333,7 +11799,7 @@ module Aws::SecurityHub
     #         ], 
     #         description: "This control checks whether Azure Container Apps have managed identity enabled. The control fails if the Container App has a system-assigned or user-assigned managed identity enabled.", 
     #         provider: "Azure", 
-    #         remediation_url: "https://docs.aws.amazon.com/console/securityhub/Azure.App.1/remediation", 
+    #         remediation_url: "https://learn.microsoft.com/en-us/azure/container-apps/managed-identity", 
     #         security_control_id: "Azure.App.1", 
     #         severity_rating: "MEDIUM", 
     #         title: "Azure Container Apps with managed identity enabled should follow least privilege", 
@@ -11344,7 +11810,7 @@ module Aws::SecurityHub
     #         ], 
     #         description: "This control checks whether an Azure Container App passes Azure SDK credentials as plain-text container environment variables. The control fails if any container (including initContainers) defines AZURE_CLIENT_SECRET, AZURE_CLIENT_CERTIFICATE_PASSWORD, or AZURE_PASSWORD as a plain-text environment variable instead of referencing a secret via secretRef.", 
     #         provider: "Azure", 
-    #         remediation_url: "https://docs.aws.amazon.com/console/securityhub/Azure.App.2/remediation", 
+    #         remediation_url: "https://learn.microsoft.com/en-us/azure/container-apps/manage-secrets", 
     #         security_control_id: "Azure.App.2", 
     #         severity_rating: "CRITICAL", 
     #         title: "Azure Container Apps should not pass Azure SDK credentials as environment variables", 
@@ -11355,10 +11821,61 @@ module Aws::SecurityHub
     #         ], 
     #         description: "This control checks whether Azure Container Apps have external ingress configured. The control fails if the Container App ingress is set to accept traffic from anywhere (external).", 
     #         provider: "Azure", 
-    #         remediation_url: "https://docs.aws.amazon.com/console/securityhub/Azure.App.3/remediation", 
+    #         remediation_url: "https://learn.microsoft.com/en-us/azure/container-apps/ingress-how-to", 
     #         security_control_id: "Azure.App.3", 
     #         severity_rating: "HIGH", 
     #         title: "Azure Container Apps should not have external ingress enabled", 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Example: To list GCP security control definitions
+    #
+    #   # The following example lists security control definitions for a specified provider.
+    #
+    #   resp = client.list_security_control_definitions({
+    #     max_results: 3, 
+    #     providers: [
+    #       "GCP", 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     next_token: "U2FsdGVkX1...", 
+    #     security_control_definitions: [
+    #       {
+    #         current_region_availability: "AVAILABLE", 
+    #         customizable_properties: [
+    #         ], 
+    #         description: "This control checks whether any GCP API keys exist. The control fails if an API key exists.", 
+    #         provider: "GCP", 
+    #         remediation_url: "https://cloud.google.com/sdk/gcloud/reference/services/api-keys/delete", 
+    #         security_control_id: "GCP.ApiKeys.1", 
+    #         severity_rating: "MEDIUM", 
+    #         title: "GCP API keys should not exist", 
+    #       }, 
+    #       {
+    #         current_region_availability: "AVAILABLE", 
+    #         customizable_properties: [
+    #         ], 
+    #         description: "This control checks whether a GCP API key restricts which hosts or apps may use it. The control fails if the key has no HTTP referrer, IP address, Android app, or iOS app restriction, or if any allowed HTTP referrer or IP address is effectively open. A referrer is effectively open when its host is * or a wildcard over a top-level domain, such as https://* or *.com. An IP address is effectively open when it allows any host, such as 0.0.0.0, 0.0.0.0/0, ::, or ::/0. A single open entry fails the key even when specific entries are also listed, because the key accepts a request that matches any entry.", 
+    #         provider: "GCP", 
+    #         remediation_url: "https://cloud.google.com/docs/authentication/api-keys#adding-application-restrictions", 
+    #         security_control_id: "GCP.ApiKeys.2", 
+    #         severity_rating: "MEDIUM", 
+    #         title: "GCP API keys should be restricted to specified hosts and apps", 
+    #       }, 
+    #       {
+    #         current_region_availability: "AVAILABLE", 
+    #         customizable_properties: [
+    #         ], 
+    #         description: "This control checks whether a GCP API key is restricted to only the specific APIs an application needs. The control fails if the key declares no restrictions.apiTargets entries, or if any entry targets the broad cloudapis.googleapis.com service, which allows the key to call every enabled service.", 
+    #         provider: "GCP", 
+    #         remediation_url: "https://cloud.google.com/docs/authentication/api-keys#adding-api-restrictions", 
+    #         security_control_id: "GCP.ApiKeys.3", 
+    #         severity_rating: "HIGH", 
+    #         title: "GCP API keys should be restricted to only the APIs an application needs", 
     #       }, 
     #     ], 
     #   }
@@ -11369,7 +11886,7 @@ module Aws::SecurityHub
     #     standards_arn: "NonEmptyString",
     #     next_token: "NextToken",
     #     max_results: 1,
-    #     providers: ["AWS"], # accepts AWS, Azure
+    #     providers: ["AWS"], # accepts AWS, Azure, GCP
     #   })
     #
     # @example Response structure
@@ -11413,7 +11930,7 @@ module Aws::SecurityHub
     #   resp.security_control_definitions[0].parameter_definitions["NonEmptyString"].configuration_options.enum_list.max_items #=> Integer
     #   resp.security_control_definitions[0].parameter_definitions["NonEmptyString"].configuration_options.enum_list.allowed_values #=> Array
     #   resp.security_control_definitions[0].parameter_definitions["NonEmptyString"].configuration_options.enum_list.allowed_values[0] #=> String
-    #   resp.security_control_definitions[0].provider #=> String, one of "AWS", "Azure"
+    #   resp.security_control_definitions[0].provider #=> String, one of "AWS", "Azure", "GCP"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ListSecurityControlDefinitions AWS API Documentation
@@ -11684,7 +12201,7 @@ module Aws::SecurityHub
     #   resp.target_type #=> String, one of "ACCOUNT", "ORGANIZATIONAL_UNIT", "ROOT"
     #   resp.association_type #=> String, one of "INHERITED", "APPLIED"
     #   resp.updated_at #=> Time
-    #   resp.association_status #=> String, one of "PENDING", "SUCCESS", "FAILED"
+    #   resp.association_status #=> String, one of "PENDING", "SUCCESS", "FAILED", "DISABLED"
     #   resp.association_status_message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/StartConfigurationPolicyAssociation AWS API Documentation
@@ -12672,6 +13189,13 @@ module Aws::SecurityHub
     #         },
     #         azure_regions: ["NonEmptyString"], # required
     #       },
+    #       gcp: {
+    #         scope_configuration: { # required
+    #           scope_type: "PROJECT", # required, accepts PROJECT, ORGANIZATION
+    #           scope_values: ["NonEmptyString"],
+    #         },
+    #         gcp_regions: ["NonEmptyString"], # required
+    #       },
     #     },
     #   })
     #
@@ -12724,6 +13248,13 @@ module Aws::SecurityHub
     #           scope_values: ["NonEmptyString"],
     #         },
     #         azure_regions: ["NonEmptyString"], # required
+    #       },
+    #       gcp: {
+    #         scope_configuration: { # required
+    #           scope_type: "PROJECT", # required, accepts PROJECT, ORGANIZATION
+    #           scope_values: ["NonEmptyString"],
+    #         },
+    #         gcp_regions: ["NonEmptyString"], # required
     #       },
     #     },
     #   })
@@ -14478,7 +15009,7 @@ module Aws::SecurityHub
     #     auto_enable_standards: "NONE", # accepts NONE, DEFAULT
     #     organization_configuration: {
     #       configuration_type: "CENTRAL", # accepts CENTRAL, LOCAL
-    #       status: "PENDING", # accepts PENDING, ENABLED, FAILED
+    #       status: "PENDING", # accepts PENDING, ENABLED, FAILED, DISABLED
     #       status_message: "NonEmptyString",
     #     },
     #   })
@@ -14687,7 +15218,7 @@ module Aws::SecurityHub
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-securityhub'
-      context[:gem_version] = '1.173.0'
+      context[:gem_version] = '1.182.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

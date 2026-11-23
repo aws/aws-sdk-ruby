@@ -279,7 +279,7 @@ module Aws::ConnectParticipant
       attr_accessor input_schema: ::String
       attr_accessor template: ::String
       attr_accessor actions: ::Array[::String]
-      SENSITIVE: [:input_schema, :template]
+      SENSITIVE: [:input_schema, :template, :actions]
     end
 
     class WebRTCConnection

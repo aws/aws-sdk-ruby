@@ -1,0 +1,17 @@
+{
+  "version" : 2,
+  "testCases" : [ {
+    "id" : "ListPortalsSuccess",
+    "operationName" : "ListPortals",
+    "input" : { },
+    "expectation" : {
+      "success" : { }
+    },
+    "config" : {
+      "region" : "us-west-1",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  } ]
+}

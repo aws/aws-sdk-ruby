@@ -79,6 +79,22 @@ module Aws
                   | (?Hash[Symbol, untyped]) -> instance
 
 
+      interface _ArchiveProjectResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ArchiveProjectResponse]
+        def id: () -> ::String
+        def arn: () -> ::String
+        def name: () -> ::String
+        def status: () -> ("active" | "archived")
+        def created_at: () -> ::Time
+        def archived_at: () -> ::Time
+        def data_retention: () -> Types::ProjectDataRetention
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Bedrock/Client.html#archive_project-instance_method
+      def archive_project: (
+                             project_identifier: ::String
+                           ) -> _ArchiveProjectResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ArchiveProjectResponseSuccess
+
       interface _BatchDeleteAdvancedPromptOptimizationJobResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::BatchDeleteAdvancedPromptOptimizationJobResponse]
         def errors: () -> ::Array[Types::BatchDeleteAdvancedPromptOptimizationJobError]
@@ -717,6 +733,31 @@ module Aws
                                        ) -> _CreateModelInvocationJobResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateModelInvocationJobResponseSuccess
 
+      interface _CreateProjectResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateProjectResponse]
+        def id: () -> ::String
+        def arn: () -> ::String
+        def name: () -> ::String
+        def status: () -> ("active" | "archived")
+        def created_at: () -> ::Time
+        def archived_at: () -> ::Time
+        def data_retention: () -> Types::ProjectDataRetention
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Bedrock/Client.html#create_project-instance_method
+      def create_project: (
+                            name: ::String,
+                            ?tags: Array[
+                              {
+                                key: ::String,
+                                value: ::String
+                              }
+                            ],
+                            ?data_retention: {
+                              mode: ("default" | "none" | "aws_review" | "provider_data_share" | "inherit")
+                            }
+                          ) -> _CreateProjectResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateProjectResponseSuccess
+
       interface _CreatePromptRouterResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreatePromptRouterResponse]
         def prompt_router_arn: () -> ::String
@@ -765,6 +806,15 @@ module Aws
                                                  ]
                                                ) -> _CreateProvisionedModelThroughputResponseSuccess
                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateProvisionedModelThroughputResponseSuccess
+
+      interface _DeleteAccountDataRetentionStorageResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteAccountDataRetentionStorageResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Bedrock/Client.html#delete_account_data_retention_storage-instance_method
+      def delete_account_data_retention_storage: (
+                                                   model_provider: ("anthropic" | "openai")
+                                                 ) -> _DeleteAccountDataRetentionStorageResponseSuccess
+                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteAccountDataRetentionStorageResponseSuccess
 
       interface _DeleteAutomatedReasoningPolicyResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteAutomatedReasoningPolicyResponse]
@@ -879,6 +929,25 @@ module Aws
                                                          ) -> _DeleteModelInvocationLoggingConfigurationResponseSuccess
                                                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteModelInvocationLoggingConfigurationResponseSuccess
 
+      interface _DeleteOrganizationDataRetentionStorageResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteOrganizationDataRetentionStorageResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Bedrock/Client.html#delete_organization_data_retention_storage-instance_method
+      def delete_organization_data_retention_storage: (
+                                                        model_provider: ("anthropic" | "openai")
+                                                      ) -> _DeleteOrganizationDataRetentionStorageResponseSuccess
+                                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteOrganizationDataRetentionStorageResponseSuccess
+
+      interface _DeleteProjectDataRetentionStorageResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteProjectDataRetentionStorageResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Bedrock/Client.html#delete_project_data_retention_storage-instance_method
+      def delete_project_data_retention_storage: (
+                                                   project_identifier: ::String,
+                                                   model_provider: ("anthropic" | "openai")
+                                                 ) -> _DeleteProjectDataRetentionStorageResponseSuccess
+                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteProjectDataRetentionStorageResponseSuccess
+
       interface _DeletePromptRouterResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeletePromptRouterResponse]
       end
@@ -934,6 +1003,22 @@ module Aws
       def get_account_data_retention: (
                                       ) -> _GetAccountDataRetentionResponseSuccess
                                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAccountDataRetentionResponseSuccess
+
+      interface _GetAccountDataRetentionStorageResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAccountDataRetentionStorageResponse]
+        def scope: () -> ("account" | "organization" | "project")
+        def model_provider: () -> ("anthropic" | "openai")
+        def storage_destination: () -> ("customer_managed" | "amazon_managed")
+        def storage_configuration: () -> Types::DataRetentionStorageConfiguration
+        def updated_at: () -> ::Time
+        def kms_key_status: () -> ("pending" | "active" | "access_denied")
+        def s3_bucket_status: () -> ("pending" | "active" | "access_denied")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Bedrock/Client.html#get_account_data_retention_storage-instance_method
+      def get_account_data_retention_storage: (
+                                                model_provider: ("anthropic" | "openai")
+                                              ) -> _GetAccountDataRetentionStorageResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAccountDataRetentionStorageResponseSuccess
 
       interface _GetAdvancedPromptOptimizationJobResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetAdvancedPromptOptimizationJobResponse]
@@ -1132,7 +1217,8 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Bedrock/Client.html#get_foundation_model-instance_method
       def get_foundation_model: (
-                                  model_identifier: ::String
+                                  model_identifier: ::String,
+                                  ?project_identifier: ::String
                                 ) -> _GetFoundationModelResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetFoundationModelResponseSuccess
 
@@ -1213,7 +1299,8 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Bedrock/Client.html#get_inference_profile-instance_method
       def get_inference_profile: (
-                                   inference_profile_identifier: ::String
+                                   inference_profile_identifier: ::String,
+                                   ?project_identifier: ::String
                                  ) -> _GetInferenceProfileResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetInferenceProfileResponseSuccess
 
@@ -1339,6 +1426,56 @@ module Aws
                                                       ) -> _GetModelInvocationLoggingConfigurationResponseSuccess
                                                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetModelInvocationLoggingConfigurationResponseSuccess
 
+      interface _GetOrganizationDataRetentionStorageResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetOrganizationDataRetentionStorageResponse]
+        def scope: () -> ("account" | "organization" | "project")
+        def model_provider: () -> ("anthropic" | "openai")
+        def storage_destination: () -> ("customer_managed" | "amazon_managed")
+        def storage_configuration: () -> Types::DataRetentionStorageConfiguration
+        def updated_at: () -> ::Time
+        def kms_key_status: () -> ("pending" | "active" | "access_denied")
+        def s3_bucket_status: () -> ("pending" | "active" | "access_denied")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Bedrock/Client.html#get_organization_data_retention_storage-instance_method
+      def get_organization_data_retention_storage: (
+                                                     model_provider: ("anthropic" | "openai")
+                                                   ) -> _GetOrganizationDataRetentionStorageResponseSuccess
+                                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetOrganizationDataRetentionStorageResponseSuccess
+
+      interface _GetProjectResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetProjectResponse]
+        def id: () -> ::String
+        def arn: () -> ::String
+        def name: () -> ::String
+        def status: () -> ("active" | "archived")
+        def created_at: () -> ::Time
+        def archived_at: () -> ::Time
+        def data_retention: () -> Types::ProjectDataRetention
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Bedrock/Client.html#get_project-instance_method
+      def get_project: (
+                         project_identifier: ::String
+                       ) -> _GetProjectResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetProjectResponseSuccess
+
+      interface _GetProjectDataRetentionStorageResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetProjectDataRetentionStorageResponse]
+        def scope: () -> ("account" | "organization" | "project")
+        def model_provider: () -> ("anthropic" | "openai")
+        def storage_destination: () -> ("customer_managed" | "amazon_managed")
+        def storage_configuration: () -> Types::DataRetentionStorageConfiguration
+        def updated_at: () -> ::Time
+        def kms_key_status: () -> ("pending" | "active" | "access_denied")
+        def s3_bucket_status: () -> ("pending" | "active" | "access_denied")
+        def project_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Bedrock/Client.html#get_project_data_retention_storage-instance_method
+      def get_project_data_retention_storage: (
+                                                project_identifier: ::String,
+                                                model_provider: ("anthropic" | "openai")
+                                              ) -> _GetProjectDataRetentionStorageResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetProjectDataRetentionStorageResponseSuccess
+
       interface _GetPromptRouterResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetPromptRouterResponse]
         def prompt_router_name: () -> ::String
@@ -1389,6 +1526,63 @@ module Aws
                                  resource_arn: ::String
                                ) -> _GetResourcePolicyResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetResourcePolicyResponseSuccess
+
+      interface _GetTrustedAccessProgramResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetTrustedAccessProgramResponse]
+        def program_id: () -> ::String
+        def name: () -> ::String
+        def description: () -> ::String
+        def provider_name: () -> ::String
+        def details_url: () -> ::String
+        def enrollment_url: () -> ::String
+        def status: () -> ("requestable" | "eligible" | "enabled" | "disabled" | "revoked")
+        def status_reason: () -> ::String
+        def source: () -> ("organization" | "account" | "project" | "program_default")
+        def eligibility_scope: () -> ("organization" | "account" | "project" | "program_default")
+        def resolved_for: () -> Types::TrustedAccessResolutionContext
+        def opt_in: () -> ("inherit" | "enabled" | "disabled")
+        def updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Bedrock/Client.html#get_trusted_access_program-instance_method
+      def get_trusted_access_program: (
+                                        program_identifier: ::String,
+                                        ?project_identifier: ::String
+                                      ) -> _GetTrustedAccessProgramResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetTrustedAccessProgramResponseSuccess
+
+      interface _GetTrustedAccessProgramAccountEnrollmentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetTrustedAccessProgramAccountEnrollmentResponse]
+        def opt_in: () -> ("inherit" | "enabled" | "disabled")
+        def updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Bedrock/Client.html#get_trusted_access_program_account_enrollment-instance_method
+      def get_trusted_access_program_account_enrollment: (
+                                                           program_identifier: ::String
+                                                         ) -> _GetTrustedAccessProgramAccountEnrollmentResponseSuccess
+                                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetTrustedAccessProgramAccountEnrollmentResponseSuccess
+
+      interface _GetTrustedAccessProgramOrganizationEnrollmentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetTrustedAccessProgramOrganizationEnrollmentResponse]
+        def opt_in: () -> ("inherit" | "enabled" | "disabled")
+        def updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Bedrock/Client.html#get_trusted_access_program_organization_enrollment-instance_method
+      def get_trusted_access_program_organization_enrollment: (
+                                                                program_identifier: ::String
+                                                              ) -> _GetTrustedAccessProgramOrganizationEnrollmentResponseSuccess
+                                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetTrustedAccessProgramOrganizationEnrollmentResponseSuccess
+
+      interface _GetTrustedAccessProgramProjectEnrollmentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetTrustedAccessProgramProjectEnrollmentResponse]
+        def opt_in: () -> ("inherit" | "enabled" | "disabled")
+        def updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Bedrock/Client.html#get_trusted_access_program_project_enrollment-instance_method
+      def get_trusted_access_program_project_enrollment: (
+                                                           program_identifier: ::String,
+                                                           project_identifier: ::String
+                                                         ) -> _GetTrustedAccessProgramProjectEnrollmentResponseSuccess
+                                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetTrustedAccessProgramProjectEnrollmentResponseSuccess
 
       interface _GetUseCaseForModelAccessResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetUseCaseForModelAccessResponse]
@@ -1557,7 +1751,8 @@ module Aws
                                     ?by_provider: ::String,
                                     ?by_customization_type: ("FINE_TUNING" | "CONTINUED_PRE_TRAINING" | "DISTILLATION"),
                                     ?by_output_modality: ("TEXT" | "IMAGE" | "EMBEDDING"),
-                                    ?by_inference_type: ("ON_DEMAND" | "PROVISIONED")
+                                    ?by_inference_type: ("ON_DEMAND" | "PROVISIONED"),
+                                    ?project_identifier: ::String
                                   ) -> _ListFoundationModelsResponseSuccess
                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListFoundationModelsResponseSuccess
 
@@ -1600,7 +1795,8 @@ module Aws
       def list_inference_profiles: (
                                      ?max_results: ::Integer,
                                      ?next_token: ::String,
-                                     ?type_equals: ("SYSTEM_DEFINED" | "APPLICATION")
+                                     ?type_equals: ("SYSTEM_DEFINED" | "APPLICATION"),
+                                     ?project_identifier: ::String
                                    ) -> _ListInferenceProfilesResponseSuccess
                                  | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListInferenceProfilesResponseSuccess
 
@@ -1691,6 +1887,19 @@ module Aws
                                       ) -> _ListModelInvocationJobsResponseSuccess
                                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListModelInvocationJobsResponseSuccess
 
+      interface _ListProjectsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListProjectsResponse]
+        def project_summaries: () -> ::Array[Types::ProjectSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Bedrock/Client.html#list_projects-instance_method
+      def list_projects: (
+                           ?next_token: ::String,
+                           ?max_results: ::Integer,
+                           ?status_filter: ("active" | "archived")
+                         ) -> _ListProjectsResponseSuccess
+                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListProjectsResponseSuccess
+
       interface _ListPromptRoutersResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListPromptRoutersResponse]
         def prompt_router_summaries: () -> ::Array[Types::PromptRouterSummary]
@@ -1733,6 +1942,19 @@ module Aws
                                   ) -> _ListTagsForResourceResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
 
+      interface _ListTrustedAccessProgramsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTrustedAccessProgramsResponse]
+        def program_summaries: () -> ::Array[Types::TrustedAccessProgramSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Bedrock/Client.html#list_trusted_access_programs-instance_method
+      def list_trusted_access_programs: (
+                                          ?project_identifier: ::String,
+                                          ?max_results: ::Integer,
+                                          ?next_token: ::String
+                                        ) -> _ListTrustedAccessProgramsResponseSuccess
+                                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTrustedAccessProgramsResponseSuccess
+
       interface _PutAccountDataRetentionResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::PutAccountDataRetentionResponse]
         def mode: () -> ("default" | "none" | "aws_review" | "provider_data_share" | "inherit")
@@ -1743,6 +1965,28 @@ module Aws
                                         mode: ("default" | "none" | "aws_review" | "provider_data_share" | "inherit")
                                       ) -> _PutAccountDataRetentionResponseSuccess
                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutAccountDataRetentionResponseSuccess
+
+      interface _PutAccountDataRetentionStorageResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutAccountDataRetentionStorageResponse]
+        def scope: () -> ("account" | "organization" | "project")
+        def model_provider: () -> ("anthropic" | "openai")
+        def storage_destination: () -> ("customer_managed" | "amazon_managed")
+        def storage_configuration: () -> Types::DataRetentionStorageConfiguration
+        def updated_at: () -> ::Time
+        def kms_key_status: () -> ("pending" | "active" | "access_denied")
+        def s3_bucket_status: () -> ("pending" | "active" | "access_denied")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Bedrock/Client.html#put_account_data_retention_storage-instance_method
+      def put_account_data_retention_storage: (
+                                                model_provider: ("anthropic" | "openai"),
+                                                storage_destination: ("customer_managed" | "amazon_managed"),
+                                                ?storage_configuration: {
+                                                  kms_key_arn: ::String,
+                                                  s3_bucket_arn: ::String,
+                                                  s3_bucket_owner: ::String
+                                                }
+                                              ) -> _PutAccountDataRetentionStorageResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutAccountDataRetentionStorageResponseSuccess
 
       interface _PutEnforcedGuardrailConfigurationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::PutEnforcedGuardrailConfigurationResponse]
@@ -1795,6 +2039,52 @@ module Aws
                                                       ) -> _PutModelInvocationLoggingConfigurationResponseSuccess
                                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutModelInvocationLoggingConfigurationResponseSuccess
 
+      interface _PutOrganizationDataRetentionStorageResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutOrganizationDataRetentionStorageResponse]
+        def scope: () -> ("account" | "organization" | "project")
+        def model_provider: () -> ("anthropic" | "openai")
+        def storage_destination: () -> ("customer_managed" | "amazon_managed")
+        def storage_configuration: () -> Types::DataRetentionStorageConfiguration
+        def updated_at: () -> ::Time
+        def kms_key_status: () -> ("pending" | "active" | "access_denied")
+        def s3_bucket_status: () -> ("pending" | "active" | "access_denied")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Bedrock/Client.html#put_organization_data_retention_storage-instance_method
+      def put_organization_data_retention_storage: (
+                                                     model_provider: ("anthropic" | "openai"),
+                                                     storage_destination: ("customer_managed" | "amazon_managed"),
+                                                     ?storage_configuration: {
+                                                       kms_key_arn: ::String,
+                                                       s3_bucket_arn: ::String,
+                                                       s3_bucket_owner: ::String
+                                                     }
+                                                   ) -> _PutOrganizationDataRetentionStorageResponseSuccess
+                                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutOrganizationDataRetentionStorageResponseSuccess
+
+      interface _PutProjectDataRetentionStorageResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutProjectDataRetentionStorageResponse]
+        def scope: () -> ("account" | "organization" | "project")
+        def model_provider: () -> ("anthropic" | "openai")
+        def storage_destination: () -> ("customer_managed" | "amazon_managed")
+        def storage_configuration: () -> Types::DataRetentionStorageConfiguration
+        def updated_at: () -> ::Time
+        def kms_key_status: () -> ("pending" | "active" | "access_denied")
+        def s3_bucket_status: () -> ("pending" | "active" | "access_denied")
+        def project_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Bedrock/Client.html#put_project_data_retention_storage-instance_method
+      def put_project_data_retention_storage: (
+                                                project_identifier: ::String,
+                                                model_provider: ("anthropic" | "openai"),
+                                                storage_destination: ("customer_managed" | "amazon_managed"),
+                                                ?storage_configuration: {
+                                                  kms_key_arn: ::String,
+                                                  s3_bucket_arn: ::String,
+                                                  s3_bucket_owner: ::String
+                                                }
+                                              ) -> _PutProjectDataRetentionStorageResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutProjectDataRetentionStorageResponseSuccess
+
       interface _PutResourcePolicyResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::PutResourcePolicyResponse]
         def resource_arn: () -> ::String
@@ -1805,6 +2095,43 @@ module Aws
                                  resource_policy: ::String
                                ) -> _PutResourcePolicyResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutResourcePolicyResponseSuccess
+
+      interface _PutTrustedAccessProgramAccountEnrollmentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutTrustedAccessProgramAccountEnrollmentResponse]
+        def opt_in: () -> ("inherit" | "enabled" | "disabled")
+        def updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Bedrock/Client.html#put_trusted_access_program_account_enrollment-instance_method
+      def put_trusted_access_program_account_enrollment: (
+                                                           program_identifier: ::String,
+                                                           opt_in: ("inherit" | "enabled" | "disabled")
+                                                         ) -> _PutTrustedAccessProgramAccountEnrollmentResponseSuccess
+                                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutTrustedAccessProgramAccountEnrollmentResponseSuccess
+
+      interface _PutTrustedAccessProgramOrganizationEnrollmentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutTrustedAccessProgramOrganizationEnrollmentResponse]
+        def opt_in: () -> ("inherit" | "enabled" | "disabled")
+        def updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Bedrock/Client.html#put_trusted_access_program_organization_enrollment-instance_method
+      def put_trusted_access_program_organization_enrollment: (
+                                                                program_identifier: ::String,
+                                                                opt_in: ("inherit" | "enabled" | "disabled")
+                                                              ) -> _PutTrustedAccessProgramOrganizationEnrollmentResponseSuccess
+                                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutTrustedAccessProgramOrganizationEnrollmentResponseSuccess
+
+      interface _PutTrustedAccessProgramProjectEnrollmentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutTrustedAccessProgramProjectEnrollmentResponse]
+        def opt_in: () -> ("inherit" | "enabled" | "disabled")
+        def updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Bedrock/Client.html#put_trusted_access_program_project_enrollment-instance_method
+      def put_trusted_access_program_project_enrollment: (
+                                                           program_identifier: ::String,
+                                                           project_identifier: ::String,
+                                                           opt_in: ("inherit" | "enabled" | "disabled")
+                                                         ) -> _PutTrustedAccessProgramProjectEnrollmentResponseSuccess
+                                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutTrustedAccessProgramProjectEnrollmentResponseSuccess
 
       interface _PutUseCaseForModelAccessResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::PutUseCaseForModelAccessResponse]
@@ -1890,6 +2217,37 @@ module Aws
                                                             ?client_request_token: ::String
                                                           ) -> _StartAutomatedReasoningPolicyTestWorkflowResponseSuccess
                                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartAutomatedReasoningPolicyTestWorkflowResponseSuccess
+
+      interface _StartTrustedAccessProgramAccountApplicationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartTrustedAccessProgramAccountApplicationResponse]
+        def result: () -> Types::TrustedAccessProgramApplicationResult
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Bedrock/Client.html#start_trusted_access_program_account_application-instance_method
+      def start_trusted_access_program_account_application: (
+                                                              program_identifier: ::String
+                                                            ) -> _StartTrustedAccessProgramAccountApplicationResponseSuccess
+                                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartTrustedAccessProgramAccountApplicationResponseSuccess
+
+      interface _StartTrustedAccessProgramOrganizationApplicationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartTrustedAccessProgramOrganizationApplicationResponse]
+        def result: () -> Types::TrustedAccessProgramApplicationResult
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Bedrock/Client.html#start_trusted_access_program_organization_application-instance_method
+      def start_trusted_access_program_organization_application: (
+                                                                   program_identifier: ::String
+                                                                 ) -> _StartTrustedAccessProgramOrganizationApplicationResponseSuccess
+                                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartTrustedAccessProgramOrganizationApplicationResponseSuccess
+
+      interface _StartTrustedAccessProgramProjectApplicationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartTrustedAccessProgramProjectApplicationResponse]
+        def result: () -> Types::TrustedAccessProgramApplicationResult
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Bedrock/Client.html#start_trusted_access_program_project_application-instance_method
+      def start_trusted_access_program_project_application: (
+                                                              program_identifier: ::String,
+                                                              project_identifier: ::String
+                                                            ) -> _StartTrustedAccessProgramProjectApplicationResponseSuccess
+                                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartTrustedAccessProgramProjectApplicationResponseSuccess
 
       interface _StopAdvancedPromptOptimizationJobResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::StopAdvancedPromptOptimizationJobResponse]
@@ -2056,6 +2414,26 @@ module Aws
                                                ?client_request_token: ::String
                                              ) -> _UpdateMarketplaceModelEndpointResponseSuccess
                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateMarketplaceModelEndpointResponseSuccess
+
+      interface _UpdateProjectResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateProjectResponse]
+        def id: () -> ::String
+        def arn: () -> ::String
+        def name: () -> ::String
+        def status: () -> ("active" | "archived")
+        def created_at: () -> ::Time
+        def archived_at: () -> ::Time
+        def data_retention: () -> Types::ProjectDataRetention
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Bedrock/Client.html#update_project-instance_method
+      def update_project: (
+                            project_identifier: ::String,
+                            ?name: ::String,
+                            ?data_retention: {
+                              mode: ("default" | "none" | "aws_review" | "provider_data_share" | "inherit")
+                            }
+                          ) -> _UpdateProjectResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateProjectResponseSuccess
 
       interface _UpdateProvisionedModelThroughputResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateProvisionedModelThroughputResponse]

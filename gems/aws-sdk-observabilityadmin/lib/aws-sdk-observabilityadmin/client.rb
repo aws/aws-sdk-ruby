@@ -264,7 +264,8 @@ module Aws::ObservabilityAdmin
     #     An integer representing the maximum number attempts that will be made for
     #     a single request, including the initial attempt.  For example,
     #     setting this value to 5 will result in a request being retried up to
-    #     4 times. Used in `standard` and `adaptive` retry modes.
+    #     4 times. Used in `standard` and `adaptive` retry modes. Defaults to 3,
+    #     except for DynamoDB and DynamoDB Streams, which default to 4.
     #
     #   @option options [String] :profile ("default")
     #     Used when loading credentials from the shared credentials file at `HOME/.aws/credentials`.
@@ -327,15 +328,15 @@ module Aws::ObservabilityAdmin
     #     used by the default backoff function. This option is only used in the
     #     `legacy` retry mode.
     #
-    #   @option options [String] :retry_mode ("legacy")
+    #   @option options [String] :retry_mode ("standard")
     #     Specifies which retry algorithm to use. Values are:
     #
-    #     * `legacy` - The pre-existing retry behavior. This is the default
-    #       value if no retry mode is provided.
+    #     * `legacy` - The pre-existing retry behavior.
     #
     #     * `standard` - A standardized set of retry rules across the AWS SDKs.
     #       This includes support for retry quotas, which limit the number of
-    #       unsuccessful retries a client can make.
+    #       unsuccessful retries a client can make. This is the default value
+    #       if no retry mode is provided.
     #
     #     * `adaptive` - A retry mode that includes all the functionality of
     #       `standard` mode along with automatic client side throttling.
@@ -515,9 +516,13 @@ module Aws::ObservabilityAdmin
     #           log_group_selection_criteria: "LogsFilterString",
     #           data_source_selection_criteria: "DataSourceFilterString",
     #           encrypted_log_group_strategy: "ALLOW", # required, accepts ALLOW, SKIP
+    #           centralize_with_data_protection: "ENABLED", # accepts ENABLED, DISABLED
     #         },
     #         source_metrics_configuration: {
     #           metrics_selection_criteria: "MetricsFilterString",
+    #         },
+    #         source_profiles_configuration: {
+    #           profiles_selection_criteria: "ProfilesFilterString",
     #         },
     #         source_context_graph_configuration: {
     #         },
@@ -550,6 +555,11 @@ module Aws::ObservabilityAdmin
     #             region: "Region", # required
     #           },
     #         },
+    #         destination_profiles_configuration: {
+    #           backup_configuration: {
+    #             region: "Region", # required
+    #           },
+    #         },
     #       },
     #     },
     #     tags: {
@@ -567,6 +577,82 @@ module Aws::ObservabilityAdmin
     # @param [Hash] params ({})
     def create_centralization_rule_for_organization(params = {}, options = {})
       req = build_request(:create_centralization_rule_for_organization, params)
+      req.send_request(options)
+    end
+
+    # Creates a connector to a third-party cloud provider. With a connector,
+    # you can discover resources in the provider and collect their
+    # telemetry. Currently, Microsoft Azure is the only supported provider.
+    #
+    # @option params [required, Types::ConnectorConfiguration] :connector_configuration
+    #   The configuration for connecting to the third-party cloud provider.
+    #
+    # @option params [required, String] :role_arn
+    #   The Amazon Resource Name (ARN) of the Amazon Web Services Identity and
+    #   Access Management (IAM) role that CloudWatch assumes to get
+    #   credentials for the third-party cloud provider. The role must trust
+    #   the Amazon CloudWatch Observability Admin service principal,
+    #   `observabilityadmin.amazonaws.com`. The role must also allow
+    #   `sts:GetWebIdentityToken` for the provider's token exchange audience.
+    #
+    # @option params [required, String] :name
+    #   The name of the connector. The name must be unique in the account and
+    #   Region (case-sensitive). If another connector already uses the name,
+    #   the request fails with a `ConflictException`.
+    #
+    #   The name can contain letters, digits, hyphens (-), underscores (\_)
+    #   and periods (.), and must start with a letter.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   The tags that you want to apply to the connector.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   operation completes no more than one time. If you use an Amazon Web
+    #   Services SDK, the SDK generates this value and reuses it on retries.
+    #   If this token matches a previous request with the same parameters, the
+    #   service returns the connector from the first request without an error.
+    #   If you use the same token with different parameters, including
+    #   different tags, the service returns a `ValidationException`. This
+    #   operation is idempotent when you use the same token and parameters.
+    #
+    # @return [Types::CreateConnectorOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateConnectorOutput#connector #connector} => Types::Connector
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_connector({
+    #     connector_configuration: { # required
+    #       azure: {
+    #         tenant_identifier: "AzureTenantIdentifier", # required
+    #         client_identifier: "AzureClientIdentifier", # required
+    #       },
+    #     },
+    #     role_arn: "RoleArn", # required
+    #     name: "ConnectorName", # required
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.connector.arn #=> String
+    #   resp.connector.provider #=> String, one of "AZURE"
+    #   resp.connector.connector_configuration.azure.tenant_identifier #=> String
+    #   resp.connector.connector_configuration.azure.client_identifier #=> String
+    #   resp.connector.role_arn #=> String
+    #   resp.connector.name #=> String
+    #   resp.connector.created_time_stamp #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/CreateConnector AWS API Documentation
+    #
+    # @overload create_connector(params = {})
+    # @param [Hash] params ({})
+    def create_connector(params = {}, options = {})
+      req = build_request(:create_connector, params)
       req.send_request(options)
     end
 
@@ -747,7 +833,7 @@ module Aws::ObservabilityAdmin
     #   resp = client.create_telemetry_rule({
     #     rule_name: "RuleName", # required
     #     rule: { # required
-    #       resource_type: "AWS::EC2::Instance", # accepts AWS::EC2::Instance, AWS::EC2::VPC, AWS::Lambda::Function, AWS::CloudTrail, AWS::EKS::Cluster, AWS::WAFv2::WebACL, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::Route53Resolver::ResolverEndpoint, AWS::BedrockAgentCore::Runtime, AWS::BedrockAgentCore::Browser, AWS::BedrockAgentCore::CodeInterpreter, AWS::BedrockAgentCore::Gateway, AWS::BedrockAgentCore::Memory, AWS::BedrockAgentCore::WorkloadIdentity, AWS::BedrockAgentCore::PaymentManager, AWS::SecurityHub::Hub, AWS::CloudFront::Distribution, AWS::SecurityHub::HubV2, AWS::CloudWatch::OTelEnrichment, AWS::MSK::Cluster, AWS::S3::Bucket, AWS::Bedrock::KnowledgeBase, AWS::XRay::TransactionSearchConfig
+    #       resource_type: "AWS::EC2::Instance", # accepts AWS::EC2::Instance, AWS::EC2::VPC, AWS::Lambda::Function, AWS::CloudTrail, AWS::EKS::Cluster, AWS::WAFv2::WebACL, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::Route53Resolver::ResolverEndpoint, AWS::BedrockAgentCore::Runtime, AWS::BedrockAgentCore::Browser, AWS::BedrockAgentCore::CodeInterpreter, AWS::BedrockAgentCore::Gateway, AWS::BedrockAgentCore::Memory, AWS::BedrockAgentCore::WorkloadIdentity, AWS::BedrockAgentCore::PaymentManager, AWS::SecurityHub::Hub, AWS::CloudFront::Distribution, AWS::SecurityHub::HubV2, AWS::CloudWatch::OTelEnrichment, AWS::MSK::Cluster, AWS::S3::Bucket, AWS::Bedrock::KnowledgeBase, AWS::XRay::TransactionSearchConfig, AWS::CloudWatchOmni, AWS::NetworkFirewall::Firewall
     #       telemetry_type: "Logs", # required, accepts Logs, Metrics, Traces, Insights
     #       telemetry_source_types: ["VPC_FLOW_LOGS"], # accepts VPC_FLOW_LOGS, ROUTE53_RESOLVER_QUERY_LOGS, EKS_AUDIT_LOGS, EKS_AUTHENTICATOR_LOGS, EKS_CONTROLLER_MANAGER_LOGS, EKS_SCHEDULER_LOGS, EKS_API_LOGS
     #       destination_configuration: {
@@ -814,7 +900,7 @@ module Aws::ObservabilityAdmin
     #           log_type: "WAF_LOGS", # accepts WAF_LOGS
     #         },
     #         log_delivery_parameters: {
-    #           log_types: ["APPLICATION_LOGS"], # accepts APPLICATION_LOGS, USAGE_LOGS, SECURITY_FINDING_LOGS, ACCESS_LOGS, CONNECTION_LOGS, S3_SERVER_ACCESS_LOGS, ALB_ACCESS_LOGS, ALB_CONNECTION_LOGS, ALB_HEALTH_CHECK_LOGS
+    #           log_types: ["APPLICATION_LOGS"], # accepts APPLICATION_LOGS, USAGE_LOGS, SECURITY_FINDING_LOGS, ACCESS_LOGS, CONNECTION_LOGS, S3_SERVER_ACCESS_LOGS, ALB_ACCESS_LOGS, ALB_CONNECTION_LOGS, ALB_HEALTH_CHECK_LOGS, FLOW_LOGS, ALERT_LOGS, TLS_LOGS
     #         },
     #         msk_monitoring_parameters: {
     #           enhanced_monitoring: "DEFAULT", # accepts DEFAULT, PER_BROKER, PER_TOPIC_PER_BROKER, PER_TOPIC_PER_PARTITION
@@ -871,7 +957,7 @@ module Aws::ObservabilityAdmin
     #   resp = client.create_telemetry_rule_for_organization({
     #     rule_name: "RuleName", # required
     #     rule: { # required
-    #       resource_type: "AWS::EC2::Instance", # accepts AWS::EC2::Instance, AWS::EC2::VPC, AWS::Lambda::Function, AWS::CloudTrail, AWS::EKS::Cluster, AWS::WAFv2::WebACL, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::Route53Resolver::ResolverEndpoint, AWS::BedrockAgentCore::Runtime, AWS::BedrockAgentCore::Browser, AWS::BedrockAgentCore::CodeInterpreter, AWS::BedrockAgentCore::Gateway, AWS::BedrockAgentCore::Memory, AWS::BedrockAgentCore::WorkloadIdentity, AWS::BedrockAgentCore::PaymentManager, AWS::SecurityHub::Hub, AWS::CloudFront::Distribution, AWS::SecurityHub::HubV2, AWS::CloudWatch::OTelEnrichment, AWS::MSK::Cluster, AWS::S3::Bucket, AWS::Bedrock::KnowledgeBase, AWS::XRay::TransactionSearchConfig
+    #       resource_type: "AWS::EC2::Instance", # accepts AWS::EC2::Instance, AWS::EC2::VPC, AWS::Lambda::Function, AWS::CloudTrail, AWS::EKS::Cluster, AWS::WAFv2::WebACL, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::Route53Resolver::ResolverEndpoint, AWS::BedrockAgentCore::Runtime, AWS::BedrockAgentCore::Browser, AWS::BedrockAgentCore::CodeInterpreter, AWS::BedrockAgentCore::Gateway, AWS::BedrockAgentCore::Memory, AWS::BedrockAgentCore::WorkloadIdentity, AWS::BedrockAgentCore::PaymentManager, AWS::SecurityHub::Hub, AWS::CloudFront::Distribution, AWS::SecurityHub::HubV2, AWS::CloudWatch::OTelEnrichment, AWS::MSK::Cluster, AWS::S3::Bucket, AWS::Bedrock::KnowledgeBase, AWS::XRay::TransactionSearchConfig, AWS::CloudWatchOmni, AWS::NetworkFirewall::Firewall
     #       telemetry_type: "Logs", # required, accepts Logs, Metrics, Traces, Insights
     #       telemetry_source_types: ["VPC_FLOW_LOGS"], # accepts VPC_FLOW_LOGS, ROUTE53_RESOLVER_QUERY_LOGS, EKS_AUDIT_LOGS, EKS_AUTHENTICATOR_LOGS, EKS_CONTROLLER_MANAGER_LOGS, EKS_SCHEDULER_LOGS, EKS_API_LOGS
     #       destination_configuration: {
@@ -938,7 +1024,7 @@ module Aws::ObservabilityAdmin
     #           log_type: "WAF_LOGS", # accepts WAF_LOGS
     #         },
     #         log_delivery_parameters: {
-    #           log_types: ["APPLICATION_LOGS"], # accepts APPLICATION_LOGS, USAGE_LOGS, SECURITY_FINDING_LOGS, ACCESS_LOGS, CONNECTION_LOGS, S3_SERVER_ACCESS_LOGS, ALB_ACCESS_LOGS, ALB_CONNECTION_LOGS, ALB_HEALTH_CHECK_LOGS
+    #           log_types: ["APPLICATION_LOGS"], # accepts APPLICATION_LOGS, USAGE_LOGS, SECURITY_FINDING_LOGS, ACCESS_LOGS, CONNECTION_LOGS, S3_SERVER_ACCESS_LOGS, ALB_ACCESS_LOGS, ALB_CONNECTION_LOGS, ALB_HEALTH_CHECK_LOGS, FLOW_LOGS, ALERT_LOGS, TLS_LOGS
     #         },
     #         msk_monitoring_parameters: {
     #           enhanced_monitoring: "DEFAULT", # accepts DEFAULT, PER_BROKER, PER_TOPIC_PER_BROKER, PER_TOPIC_PER_PARTITION
@@ -991,6 +1077,32 @@ module Aws::ObservabilityAdmin
     # @param [Hash] params ({})
     def delete_centralization_rule_for_organization(params = {}, options = {})
       req = build_request(:delete_centralization_rule_for_organization, params)
+      req.send_request(options)
+    end
+
+    # Deletes a connector and its telemetry manifest.
+    #
+    # @option params [required, String] :connector_identifier
+    #   The connector to delete. Specify one of the following:
+    #
+    #   * The Amazon Resource Name (ARN) of the connector
+    #
+    #   * The ID of the connector
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_connector({
+    #     connector_identifier: "ConnectorIdentifier", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/DeleteConnector AWS API Documentation
+    #
+    # @overload delete_connector(params = {})
+    # @param [Hash] params ({})
+    def delete_connector(params = {}, options = {})
+      req = build_request(:delete_connector, params)
       req.send_request(options)
     end
 
@@ -1163,7 +1275,9 @@ module Aws::ObservabilityAdmin
     #   resp.centralization_rule.source.source_logs_configuration.log_group_selection_criteria #=> String
     #   resp.centralization_rule.source.source_logs_configuration.data_source_selection_criteria #=> String
     #   resp.centralization_rule.source.source_logs_configuration.encrypted_log_group_strategy #=> String, one of "ALLOW", "SKIP"
+    #   resp.centralization_rule.source.source_logs_configuration.centralize_with_data_protection #=> String, one of "ENABLED", "DISABLED"
     #   resp.centralization_rule.source.source_metrics_configuration.metrics_selection_criteria #=> String
+    #   resp.centralization_rule.source.source_profiles_configuration.profiles_selection_criteria #=> String
     #   resp.centralization_rule.destination.region #=> String
     #   resp.centralization_rule.destination.account #=> String
     #   resp.centralization_rule.destination.destination_logs_configuration.logs_encryption_configuration.encryption_strategy #=> String, one of "CUSTOMER_MANAGED", "AWS_OWNED"
@@ -1177,6 +1291,7 @@ module Aws::ObservabilityAdmin
     #   resp.centralization_rule.destination.destination_logs_configuration.tag_propagation_configuration.tag_conflict_resolution_strategy #=> String, one of "IN_SYNC", "ADD_ONLY", "UPDATE_SYNC"
     #   resp.centralization_rule.destination.destination_logs_configuration.log_group_deletion_protection #=> String, one of "ENABLED"
     #   resp.centralization_rule.destination.destination_metrics_configuration.backup_configuration.region #=> String
+    #   resp.centralization_rule.destination.destination_profiles_configuration.backup_configuration.region #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/GetCentralizationRuleForOrganization AWS API Documentation
     #
@@ -1184,6 +1299,163 @@ module Aws::ObservabilityAdmin
     # @param [Hash] params ({})
     def get_centralization_rule_for_organization(params = {}, options = {})
       req = build_request(:get_centralization_rule_for_organization, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the details of a connector.
+    #
+    # @option params [required, String] :connector_identifier
+    #   The connector. Specify one of the following:
+    #
+    #   * The Amazon Resource Name (ARN) of the connector
+    #
+    #   * The ID of the connector
+    #
+    # @return [Types::GetConnectorOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetConnectorOutput#connector #connector} => Types::Connector
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_connector({
+    #     connector_identifier: "ConnectorIdentifier", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.connector.arn #=> String
+    #   resp.connector.provider #=> String, one of "AZURE"
+    #   resp.connector.connector_configuration.azure.tenant_identifier #=> String
+    #   resp.connector.connector_configuration.azure.client_identifier #=> String
+    #   resp.connector.role_arn #=> String
+    #   resp.connector.name #=> String
+    #   resp.connector.created_time_stamp #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/GetConnector AWS API Documentation
+    #
+    # @overload get_connector(params = {})
+    # @param [Hash] params ({})
+    def get_connector(params = {}, options = {})
+      req = build_request(:get_connector, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the telemetry manifest of a connector and its current
+    # version. If the connector has no telemetry manifest, this operation
+    # returns a `ResourceNotFoundException`.
+    #
+    # @option params [required, String] :connector_identifier
+    #   The connector. Specify one of the following:
+    #
+    #   * The Amazon Resource Name (ARN) of the connector
+    #
+    #   * The ID of the connector
+    #
+    # @return [Types::GetConnectorTelemetryManifestOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetConnectorTelemetryManifestOutput#manifest #manifest} => Types::TelemetryManifest
+    #   * {Types::GetConnectorTelemetryManifestOutput#version #version} => Integer
+    #   * {Types::GetConnectorTelemetryManifestOutput#last_update_time_stamp #last_update_time_stamp} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_connector_telemetry_manifest({
+    #     connector_identifier: "ConnectorIdentifier", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.manifest.source.azure #=> Array
+    #   resp.manifest.source.azure[0].telemetry_types #=> Array
+    #   resp.manifest.source.azure[0].telemetry_types[0] #=> String, one of "ResourceLogs", "Metrics", "FlowLogs"
+    #   resp.manifest.source.azure[0].scope.subscriptions.ids #=> Array
+    #   resp.manifest.source.azure[0].scope.subscriptions.ids[0] #=> String
+    #   resp.manifest.source.azure[0].scope.regions #=> Array
+    #   resp.manifest.source.azure[0].scope.regions[0] #=> String
+    #   resp.manifest.source.azure[0].scope.resource_types #=> Array
+    #   resp.manifest.source.azure[0].scope.resource_types[0] #=> String
+    #   resp.manifest.source.azure[0].scope.tag_filters #=> Array
+    #   resp.manifest.source.azure[0].scope.tag_filters[0].key #=> String
+    #   resp.manifest.source.azure[0].scope.tag_filters[0].values #=> Array
+    #   resp.manifest.source.azure[0].scope.tag_filters[0].values[0] #=> String
+    #   resp.manifest.source.azure[0].scope.resources #=> Array
+    #   resp.manifest.source.azure[0].scope.resources[0].region #=> String
+    #   resp.manifest.source.azure[0].scope.resources[0].resource_ids #=> Array
+    #   resp.manifest.source.azure[0].scope.resources[0].resource_ids[0] #=> String
+    #   resp.manifest.infrastructure.azure.subscription_id #=> String
+    #   resp.manifest.infrastructure.azure.event_hubs #=> Array
+    #   resp.manifest.infrastructure.azure.event_hubs[0].tier #=> String, one of "Standard", "Premium"
+    #   resp.manifest.infrastructure.azure.event_hubs[0].partition_count #=> Integer
+    #   resp.manifest.infrastructure.azure.flow_logs.customer_managed.storage_accounts #=> Array
+    #   resp.manifest.infrastructure.azure.flow_logs.customer_managed.storage_accounts[0].region #=> String
+    #   resp.manifest.infrastructure.azure.flow_logs.customer_managed.storage_accounts[0].storage_account_ids #=> Array
+    #   resp.manifest.infrastructure.azure.flow_logs.customer_managed.storage_accounts[0].storage_account_ids[0] #=> String
+    #   resp.manifest.infrastructure.azure.flow_logs.aws_managed.retention_days #=> Integer
+    #   resp.version #=> Integer
+    #   resp.last_update_time_stamp #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/GetConnectorTelemetryManifest AWS API Documentation
+    #
+    # @overload get_connector_telemetry_manifest(params = {})
+    # @param [Hash] params ({})
+    def get_connector_telemetry_manifest(params = {}, options = {})
+      req = build_request(:get_connector_telemetry_manifest, params)
+      req.send_request(options)
+    end
+
+    # Generates the artifacts that you use to create the infrastructure in
+    # your cloud provider that delivers the telemetry declared in the
+    # connector's telemetry manifest. This operation doesn't change any
+    # resources in your cloud provider or in Amazon Web Services.
+    #
+    # @option params [required, String] :connector_identifier
+    #   The connector whose telemetry manifest you want to generate the setup
+    #   from. Specify one of the following:
+    #
+    #   * The Amazon Resource Name (ARN) of the connector
+    #
+    #   * The ID of the connector
+    #
+    # @option params [String] :format
+    #   The format of the setup artifacts. If you omit this value, the service
+    #   uses the default format for the connector's provider (`BICEP` for an
+    #   Azure connector). If the provider doesn't support the format, the
+    #   service returns a `ValidationException`.
+    #
+    # @return [Types::GetConnectorTelemetrySetupOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetConnectorTelemetrySetupOutput#artifacts #artifacts} => Array&lt;Types::SetupArtifact&gt;
+    #   * {Types::GetConnectorTelemetrySetupOutput#required_permissions_to_apply #required_permissions_to_apply} => Array&lt;String&gt;
+    #   * {Types::GetConnectorTelemetrySetupOutput#format #format} => String
+    #   * {Types::GetConnectorTelemetrySetupOutput#provider #provider} => String
+    #   * {Types::GetConnectorTelemetrySetupOutput#manifest_version #manifest_version} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_connector_telemetry_setup({
+    #     connector_identifier: "ConnectorIdentifier", # required
+    #     format: "BICEP", # accepts BICEP
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.artifacts #=> Array
+    #   resp.artifacts[0].file_name #=> String
+    #   resp.artifacts[0].content #=> String
+    #   resp.artifacts[0].format #=> String, one of "BICEP"
+    #   resp.artifacts[0].content_type #=> String
+    #   resp.required_permissions_to_apply #=> Array
+    #   resp.required_permissions_to_apply[0] #=> String
+    #   resp.format #=> String, one of "BICEP"
+    #   resp.provider #=> String, one of "AZURE"
+    #   resp.manifest_version #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/GetConnectorTelemetrySetup AWS API Documentation
+    #
+    # @overload get_connector_telemetry_setup(params = {})
+    # @param [Hash] params ({})
+    def get_connector_telemetry_setup(params = {}, options = {})
+      req = build_request(:get_connector_telemetry_setup, params)
       req.send_request(options)
     end
 
@@ -1376,6 +1648,19 @@ module Aws::ObservabilityAdmin
     #   resp.pipeline.status_reason.description #=> String
     #   resp.pipeline.tags #=> Hash
     #   resp.pipeline.tags["String"] #=> String
+    #   resp.pipeline.last_refresh_time_stamp #=> Integer
+    #   resp.pipeline.source_progress.active #=> Integer
+    #   resp.pipeline.source_progress.total #=> Integer
+    #   resp.pipeline.configuration_summary.sources #=> Array
+    #   resp.pipeline.configuration_summary.sources[0].type #=> String
+    #   resp.pipeline.configuration_summary.data_sources #=> Array
+    #   resp.pipeline.configuration_summary.data_sources[0].name #=> String
+    #   resp.pipeline.configuration_summary.data_sources[0].type #=> String
+    #   resp.pipeline.configuration_summary.processors #=> Array
+    #   resp.pipeline.configuration_summary.processors[0] #=> String
+    #   resp.pipeline.configuration_summary.processor_count #=> Integer
+    #   resp.pipeline.configuration_summary.sinks #=> Array
+    #   resp.pipeline.configuration_summary.sinks[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/GetTelemetryPipeline AWS API Documentation
     #
@@ -1414,7 +1699,7 @@ module Aws::ObservabilityAdmin
     #   resp.rule_arn #=> String
     #   resp.created_time_stamp #=> Integer
     #   resp.last_update_time_stamp #=> Integer
-    #   resp.telemetry_rule.resource_type #=> String, one of "AWS::EC2::Instance", "AWS::EC2::VPC", "AWS::Lambda::Function", "AWS::CloudTrail", "AWS::EKS::Cluster", "AWS::WAFv2::WebACL", "AWS::ElasticLoadBalancingV2::LoadBalancer", "AWS::Route53Resolver::ResolverEndpoint", "AWS::BedrockAgentCore::Runtime", "AWS::BedrockAgentCore::Browser", "AWS::BedrockAgentCore::CodeInterpreter", "AWS::BedrockAgentCore::Gateway", "AWS::BedrockAgentCore::Memory", "AWS::BedrockAgentCore::WorkloadIdentity", "AWS::BedrockAgentCore::PaymentManager", "AWS::SecurityHub::Hub", "AWS::CloudFront::Distribution", "AWS::SecurityHub::HubV2", "AWS::CloudWatch::OTelEnrichment", "AWS::MSK::Cluster", "AWS::S3::Bucket", "AWS::Bedrock::KnowledgeBase", "AWS::XRay::TransactionSearchConfig"
+    #   resp.telemetry_rule.resource_type #=> String, one of "AWS::EC2::Instance", "AWS::EC2::VPC", "AWS::Lambda::Function", "AWS::CloudTrail", "AWS::EKS::Cluster", "AWS::WAFv2::WebACL", "AWS::ElasticLoadBalancingV2::LoadBalancer", "AWS::Route53Resolver::ResolverEndpoint", "AWS::BedrockAgentCore::Runtime", "AWS::BedrockAgentCore::Browser", "AWS::BedrockAgentCore::CodeInterpreter", "AWS::BedrockAgentCore::Gateway", "AWS::BedrockAgentCore::Memory", "AWS::BedrockAgentCore::WorkloadIdentity", "AWS::BedrockAgentCore::PaymentManager", "AWS::SecurityHub::Hub", "AWS::CloudFront::Distribution", "AWS::SecurityHub::HubV2", "AWS::CloudWatch::OTelEnrichment", "AWS::MSK::Cluster", "AWS::S3::Bucket", "AWS::Bedrock::KnowledgeBase", "AWS::XRay::TransactionSearchConfig", "AWS::CloudWatchOmni", "AWS::NetworkFirewall::Firewall"
     #   resp.telemetry_rule.telemetry_type #=> String, one of "Logs", "Metrics", "Traces", "Insights"
     #   resp.telemetry_rule.telemetry_source_types #=> Array
     #   resp.telemetry_rule.telemetry_source_types[0] #=> String, one of "VPC_FLOW_LOGS", "ROUTE53_RESOLVER_QUERY_LOGS", "EKS_AUDIT_LOGS", "EKS_AUTHENTICATOR_LOGS", "EKS_CONTROLLER_MANAGER_LOGS", "EKS_SCHEDULER_LOGS", "EKS_API_LOGS"
@@ -1456,7 +1741,7 @@ module Aws::ObservabilityAdmin
     #   resp.telemetry_rule.destination_configuration.waf_logging_parameters.logging_filter.default_behavior #=> String, one of "KEEP", "DROP"
     #   resp.telemetry_rule.destination_configuration.waf_logging_parameters.log_type #=> String, one of "WAF_LOGS"
     #   resp.telemetry_rule.destination_configuration.log_delivery_parameters.log_types #=> Array
-    #   resp.telemetry_rule.destination_configuration.log_delivery_parameters.log_types[0] #=> String, one of "APPLICATION_LOGS", "USAGE_LOGS", "SECURITY_FINDING_LOGS", "ACCESS_LOGS", "CONNECTION_LOGS", "S3_SERVER_ACCESS_LOGS", "ALB_ACCESS_LOGS", "ALB_CONNECTION_LOGS", "ALB_HEALTH_CHECK_LOGS"
+    #   resp.telemetry_rule.destination_configuration.log_delivery_parameters.log_types[0] #=> String, one of "APPLICATION_LOGS", "USAGE_LOGS", "SECURITY_FINDING_LOGS", "ACCESS_LOGS", "CONNECTION_LOGS", "S3_SERVER_ACCESS_LOGS", "ALB_ACCESS_LOGS", "ALB_CONNECTION_LOGS", "ALB_HEALTH_CHECK_LOGS", "FLOW_LOGS", "ALERT_LOGS", "TLS_LOGS"
     #   resp.telemetry_rule.destination_configuration.msk_monitoring_parameters.enhanced_monitoring #=> String, one of "DEFAULT", "PER_BROKER", "PER_TOPIC_PER_BROKER", "PER_TOPIC_PER_PARTITION"
     #   resp.telemetry_rule.destination_configuration.kms_key_arn #=> String
     #   resp.telemetry_rule.scope #=> String
@@ -1513,7 +1798,7 @@ module Aws::ObservabilityAdmin
     #   resp.rule_arn #=> String
     #   resp.created_time_stamp #=> Integer
     #   resp.last_update_time_stamp #=> Integer
-    #   resp.telemetry_rule.resource_type #=> String, one of "AWS::EC2::Instance", "AWS::EC2::VPC", "AWS::Lambda::Function", "AWS::CloudTrail", "AWS::EKS::Cluster", "AWS::WAFv2::WebACL", "AWS::ElasticLoadBalancingV2::LoadBalancer", "AWS::Route53Resolver::ResolverEndpoint", "AWS::BedrockAgentCore::Runtime", "AWS::BedrockAgentCore::Browser", "AWS::BedrockAgentCore::CodeInterpreter", "AWS::BedrockAgentCore::Gateway", "AWS::BedrockAgentCore::Memory", "AWS::BedrockAgentCore::WorkloadIdentity", "AWS::BedrockAgentCore::PaymentManager", "AWS::SecurityHub::Hub", "AWS::CloudFront::Distribution", "AWS::SecurityHub::HubV2", "AWS::CloudWatch::OTelEnrichment", "AWS::MSK::Cluster", "AWS::S3::Bucket", "AWS::Bedrock::KnowledgeBase", "AWS::XRay::TransactionSearchConfig"
+    #   resp.telemetry_rule.resource_type #=> String, one of "AWS::EC2::Instance", "AWS::EC2::VPC", "AWS::Lambda::Function", "AWS::CloudTrail", "AWS::EKS::Cluster", "AWS::WAFv2::WebACL", "AWS::ElasticLoadBalancingV2::LoadBalancer", "AWS::Route53Resolver::ResolverEndpoint", "AWS::BedrockAgentCore::Runtime", "AWS::BedrockAgentCore::Browser", "AWS::BedrockAgentCore::CodeInterpreter", "AWS::BedrockAgentCore::Gateway", "AWS::BedrockAgentCore::Memory", "AWS::BedrockAgentCore::WorkloadIdentity", "AWS::BedrockAgentCore::PaymentManager", "AWS::SecurityHub::Hub", "AWS::CloudFront::Distribution", "AWS::SecurityHub::HubV2", "AWS::CloudWatch::OTelEnrichment", "AWS::MSK::Cluster", "AWS::S3::Bucket", "AWS::Bedrock::KnowledgeBase", "AWS::XRay::TransactionSearchConfig", "AWS::CloudWatchOmni", "AWS::NetworkFirewall::Firewall"
     #   resp.telemetry_rule.telemetry_type #=> String, one of "Logs", "Metrics", "Traces", "Insights"
     #   resp.telemetry_rule.telemetry_source_types #=> Array
     #   resp.telemetry_rule.telemetry_source_types[0] #=> String, one of "VPC_FLOW_LOGS", "ROUTE53_RESOLVER_QUERY_LOGS", "EKS_AUDIT_LOGS", "EKS_AUTHENTICATOR_LOGS", "EKS_CONTROLLER_MANAGER_LOGS", "EKS_SCHEDULER_LOGS", "EKS_API_LOGS"
@@ -1555,7 +1840,7 @@ module Aws::ObservabilityAdmin
     #   resp.telemetry_rule.destination_configuration.waf_logging_parameters.logging_filter.default_behavior #=> String, one of "KEEP", "DROP"
     #   resp.telemetry_rule.destination_configuration.waf_logging_parameters.log_type #=> String, one of "WAF_LOGS"
     #   resp.telemetry_rule.destination_configuration.log_delivery_parameters.log_types #=> Array
-    #   resp.telemetry_rule.destination_configuration.log_delivery_parameters.log_types[0] #=> String, one of "APPLICATION_LOGS", "USAGE_LOGS", "SECURITY_FINDING_LOGS", "ACCESS_LOGS", "CONNECTION_LOGS", "S3_SERVER_ACCESS_LOGS", "ALB_ACCESS_LOGS", "ALB_CONNECTION_LOGS", "ALB_HEALTH_CHECK_LOGS"
+    #   resp.telemetry_rule.destination_configuration.log_delivery_parameters.log_types[0] #=> String, one of "APPLICATION_LOGS", "USAGE_LOGS", "SECURITY_FINDING_LOGS", "ACCESS_LOGS", "CONNECTION_LOGS", "S3_SERVER_ACCESS_LOGS", "ALB_ACCESS_LOGS", "ALB_CONNECTION_LOGS", "ALB_HEALTH_CHECK_LOGS", "FLOW_LOGS", "ALERT_LOGS", "TLS_LOGS"
     #   resp.telemetry_rule.destination_configuration.msk_monitoring_parameters.enhanced_monitoring #=> String, one of "DEFAULT", "PER_BROKER", "PER_TOPIC_PER_BROKER", "PER_TOPIC_PER_PARTITION"
     #   resp.telemetry_rule.destination_configuration.kms_key_arn #=> String
     #   resp.telemetry_rule.scope #=> String
@@ -1578,6 +1863,52 @@ module Aws::ObservabilityAdmin
     # @param [Hash] params ({})
     def get_telemetry_rule_for_organization(params = {}, options = {})
       req = build_request(:get_telemetry_rule_for_organization, params)
+      req.send_request(options)
+    end
+
+    # Returns the details of a third-party telemetry enrichment, including
+    # its status and source configuration.
+    #
+    # @option params [required, String] :telemetry_enrichment_identifier
+    #   The identifier of the enrichment to return. You can specify one of the
+    #   following:
+    #
+    #   * The name of the enrichment.
+    #
+    #   * The Amazon Resource Name (ARN) of the enrichment.
+    #
+    # @return [Types::GetThirdPartyTelemetryEnrichmentOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetThirdPartyTelemetryEnrichmentOutput#arn #arn} => String
+    #   * {Types::GetThirdPartyTelemetryEnrichmentOutput#name #name} => String
+    #   * {Types::GetThirdPartyTelemetryEnrichmentOutput#status #status} => String
+    #   * {Types::GetThirdPartyTelemetryEnrichmentOutput#status_reason #status_reason} => String
+    #   * {Types::GetThirdPartyTelemetryEnrichmentOutput#telemetry_source_configuration #telemetry_source_configuration} => Types::TelemetrySourceConfigurationOutput
+    #   * {Types::GetThirdPartyTelemetryEnrichmentOutput#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_third_party_telemetry_enrichment({
+    #     telemetry_enrichment_identifier: "ThirdPartyTelemetryEnrichmentIdentifier", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.name #=> String
+    #   resp.status #=> String, one of "Initializing", "Running", "Stopped", "Impaired"
+    #   resp.status_reason #=> String
+    #   resp.telemetry_source_configuration.azure.aws_config_connector_arn #=> String
+    #   resp.telemetry_source_configuration.azure.service_linked_recorder_arn #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["String"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/GetThirdPartyTelemetryEnrichment AWS API Documentation
+    #
+    # @overload get_third_party_telemetry_enrichment(params = {})
+    # @param [Hash] params ({})
+    def get_third_party_telemetry_enrichment(params = {}, options = {})
+      req = build_request(:get_third_party_telemetry_enrichment, params)
       req.send_request(options)
     end
 
@@ -1641,6 +1972,50 @@ module Aws::ObservabilityAdmin
     # @param [Hash] params ({})
     def list_centralization_rules_for_organization(params = {}, options = {})
       req = build_request(:list_centralization_rules_for_organization, params)
+      req.send_request(options)
+    end
+
+    # Lists the connectors in the account and Region. This operation returns
+    # results in pages. To get the next page, pass the returned `NextToken`
+    # in the next call. We recommend that you use pagination to ensure that
+    # the operation returns quickly and successfully.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of connectors to return in one call. The default is
+    #   100.
+    #
+    # @option params [String] :next_token
+    #   The token for the next page of results, returned by a previous call.
+    #
+    # @return [Types::ListConnectorsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListConnectorsOutput#connector_summaries #connector_summaries} => Array&lt;Types::ConnectorSummary&gt;
+    #   * {Types::ListConnectorsOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_connectors({
+    #     max_results: 1,
+    #     next_token: "ConnectorNextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.connector_summaries #=> Array
+    #   resp.connector_summaries[0].arn #=> String
+    #   resp.connector_summaries[0].provider #=> String, one of "AZURE"
+    #   resp.connector_summaries[0].name #=> String
+    #   resp.connector_summaries[0].created_time_stamp #=> Integer
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/ListConnectors AWS API Documentation
+    #
+    # @overload list_connectors(params = {})
+    # @param [Hash] params ({})
+    def list_connectors(params = {}, options = {})
+      req = build_request(:list_connectors, params)
       req.send_request(options)
     end
 
@@ -1748,7 +2123,7 @@ module Aws::ObservabilityAdmin
     #
     #   resp = client.list_resource_telemetry({
     #     resource_identifier_prefix: "ResourceIdentifierPrefix",
-    #     resource_types: ["AWS::EC2::Instance"], # accepts AWS::EC2::Instance, AWS::EC2::VPC, AWS::Lambda::Function, AWS::CloudTrail, AWS::EKS::Cluster, AWS::WAFv2::WebACL, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::Route53Resolver::ResolverEndpoint, AWS::BedrockAgentCore::Runtime, AWS::BedrockAgentCore::Browser, AWS::BedrockAgentCore::CodeInterpreter, AWS::BedrockAgentCore::Gateway, AWS::BedrockAgentCore::Memory, AWS::BedrockAgentCore::WorkloadIdentity, AWS::BedrockAgentCore::PaymentManager, AWS::SecurityHub::Hub, AWS::CloudFront::Distribution, AWS::SecurityHub::HubV2, AWS::CloudWatch::OTelEnrichment, AWS::MSK::Cluster, AWS::S3::Bucket, AWS::Bedrock::KnowledgeBase, AWS::XRay::TransactionSearchConfig
+    #     resource_types: ["AWS::EC2::Instance"], # accepts AWS::EC2::Instance, AWS::EC2::VPC, AWS::Lambda::Function, AWS::CloudTrail, AWS::EKS::Cluster, AWS::WAFv2::WebACL, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::Route53Resolver::ResolverEndpoint, AWS::BedrockAgentCore::Runtime, AWS::BedrockAgentCore::Browser, AWS::BedrockAgentCore::CodeInterpreter, AWS::BedrockAgentCore::Gateway, AWS::BedrockAgentCore::Memory, AWS::BedrockAgentCore::WorkloadIdentity, AWS::BedrockAgentCore::PaymentManager, AWS::SecurityHub::Hub, AWS::CloudFront::Distribution, AWS::SecurityHub::HubV2, AWS::CloudWatch::OTelEnrichment, AWS::MSK::Cluster, AWS::S3::Bucket, AWS::Bedrock::KnowledgeBase, AWS::XRay::TransactionSearchConfig, AWS::CloudWatchOmni, AWS::NetworkFirewall::Firewall
     #     telemetry_configuration_state: {
     #       "Logs" => "Enabled", # accepts Enabled, Disabled, NotApplicable
     #     },
@@ -1765,7 +2140,7 @@ module Aws::ObservabilityAdmin
     #   resp.telemetry_configurations[0].account_identifier #=> String
     #   resp.telemetry_configurations[0].telemetry_configuration_state #=> Hash
     #   resp.telemetry_configurations[0].telemetry_configuration_state["TelemetryType"] #=> String, one of "Enabled", "Disabled", "NotApplicable"
-    #   resp.telemetry_configurations[0].resource_type #=> String, one of "AWS::EC2::Instance", "AWS::EC2::VPC", "AWS::Lambda::Function", "AWS::CloudTrail", "AWS::EKS::Cluster", "AWS::WAFv2::WebACL", "AWS::ElasticLoadBalancingV2::LoadBalancer", "AWS::Route53Resolver::ResolverEndpoint", "AWS::BedrockAgentCore::Runtime", "AWS::BedrockAgentCore::Browser", "AWS::BedrockAgentCore::CodeInterpreter", "AWS::BedrockAgentCore::Gateway", "AWS::BedrockAgentCore::Memory", "AWS::BedrockAgentCore::WorkloadIdentity", "AWS::BedrockAgentCore::PaymentManager", "AWS::SecurityHub::Hub", "AWS::CloudFront::Distribution", "AWS::SecurityHub::HubV2", "AWS::CloudWatch::OTelEnrichment", "AWS::MSK::Cluster", "AWS::S3::Bucket", "AWS::Bedrock::KnowledgeBase", "AWS::XRay::TransactionSearchConfig"
+    #   resp.telemetry_configurations[0].resource_type #=> String, one of "AWS::EC2::Instance", "AWS::EC2::VPC", "AWS::Lambda::Function", "AWS::CloudTrail", "AWS::EKS::Cluster", "AWS::WAFv2::WebACL", "AWS::ElasticLoadBalancingV2::LoadBalancer", "AWS::Route53Resolver::ResolverEndpoint", "AWS::BedrockAgentCore::Runtime", "AWS::BedrockAgentCore::Browser", "AWS::BedrockAgentCore::CodeInterpreter", "AWS::BedrockAgentCore::Gateway", "AWS::BedrockAgentCore::Memory", "AWS::BedrockAgentCore::WorkloadIdentity", "AWS::BedrockAgentCore::PaymentManager", "AWS::SecurityHub::Hub", "AWS::CloudFront::Distribution", "AWS::SecurityHub::HubV2", "AWS::CloudWatch::OTelEnrichment", "AWS::MSK::Cluster", "AWS::S3::Bucket", "AWS::Bedrock::KnowledgeBase", "AWS::XRay::TransactionSearchConfig", "AWS::CloudWatchOmni", "AWS::NetworkFirewall::Firewall"
     #   resp.telemetry_configurations[0].resource_identifier #=> String
     #   resp.telemetry_configurations[0].resource_tags #=> Hash
     #   resp.telemetry_configurations[0].resource_tags["String"] #=> String
@@ -1846,7 +2221,7 @@ module Aws::ObservabilityAdmin
     #   resp = client.list_resource_telemetry_for_organization({
     #     account_identifiers: ["AccountIdentifier"],
     #     resource_identifier_prefix: "ResourceIdentifierPrefix",
-    #     resource_types: ["AWS::EC2::Instance"], # accepts AWS::EC2::Instance, AWS::EC2::VPC, AWS::Lambda::Function, AWS::CloudTrail, AWS::EKS::Cluster, AWS::WAFv2::WebACL, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::Route53Resolver::ResolverEndpoint, AWS::BedrockAgentCore::Runtime, AWS::BedrockAgentCore::Browser, AWS::BedrockAgentCore::CodeInterpreter, AWS::BedrockAgentCore::Gateway, AWS::BedrockAgentCore::Memory, AWS::BedrockAgentCore::WorkloadIdentity, AWS::BedrockAgentCore::PaymentManager, AWS::SecurityHub::Hub, AWS::CloudFront::Distribution, AWS::SecurityHub::HubV2, AWS::CloudWatch::OTelEnrichment, AWS::MSK::Cluster, AWS::S3::Bucket, AWS::Bedrock::KnowledgeBase, AWS::XRay::TransactionSearchConfig
+    #     resource_types: ["AWS::EC2::Instance"], # accepts AWS::EC2::Instance, AWS::EC2::VPC, AWS::Lambda::Function, AWS::CloudTrail, AWS::EKS::Cluster, AWS::WAFv2::WebACL, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::Route53Resolver::ResolverEndpoint, AWS::BedrockAgentCore::Runtime, AWS::BedrockAgentCore::Browser, AWS::BedrockAgentCore::CodeInterpreter, AWS::BedrockAgentCore::Gateway, AWS::BedrockAgentCore::Memory, AWS::BedrockAgentCore::WorkloadIdentity, AWS::BedrockAgentCore::PaymentManager, AWS::SecurityHub::Hub, AWS::CloudFront::Distribution, AWS::SecurityHub::HubV2, AWS::CloudWatch::OTelEnrichment, AWS::MSK::Cluster, AWS::S3::Bucket, AWS::Bedrock::KnowledgeBase, AWS::XRay::TransactionSearchConfig, AWS::CloudWatchOmni, AWS::NetworkFirewall::Firewall
     #     telemetry_configuration_state: {
     #       "Logs" => "Enabled", # accepts Enabled, Disabled, NotApplicable
     #     },
@@ -1863,7 +2238,7 @@ module Aws::ObservabilityAdmin
     #   resp.telemetry_configurations[0].account_identifier #=> String
     #   resp.telemetry_configurations[0].telemetry_configuration_state #=> Hash
     #   resp.telemetry_configurations[0].telemetry_configuration_state["TelemetryType"] #=> String, one of "Enabled", "Disabled", "NotApplicable"
-    #   resp.telemetry_configurations[0].resource_type #=> String, one of "AWS::EC2::Instance", "AWS::EC2::VPC", "AWS::Lambda::Function", "AWS::CloudTrail", "AWS::EKS::Cluster", "AWS::WAFv2::WebACL", "AWS::ElasticLoadBalancingV2::LoadBalancer", "AWS::Route53Resolver::ResolverEndpoint", "AWS::BedrockAgentCore::Runtime", "AWS::BedrockAgentCore::Browser", "AWS::BedrockAgentCore::CodeInterpreter", "AWS::BedrockAgentCore::Gateway", "AWS::BedrockAgentCore::Memory", "AWS::BedrockAgentCore::WorkloadIdentity", "AWS::BedrockAgentCore::PaymentManager", "AWS::SecurityHub::Hub", "AWS::CloudFront::Distribution", "AWS::SecurityHub::HubV2", "AWS::CloudWatch::OTelEnrichment", "AWS::MSK::Cluster", "AWS::S3::Bucket", "AWS::Bedrock::KnowledgeBase", "AWS::XRay::TransactionSearchConfig"
+    #   resp.telemetry_configurations[0].resource_type #=> String, one of "AWS::EC2::Instance", "AWS::EC2::VPC", "AWS::Lambda::Function", "AWS::CloudTrail", "AWS::EKS::Cluster", "AWS::WAFv2::WebACL", "AWS::ElasticLoadBalancingV2::LoadBalancer", "AWS::Route53Resolver::ResolverEndpoint", "AWS::BedrockAgentCore::Runtime", "AWS::BedrockAgentCore::Browser", "AWS::BedrockAgentCore::CodeInterpreter", "AWS::BedrockAgentCore::Gateway", "AWS::BedrockAgentCore::Memory", "AWS::BedrockAgentCore::WorkloadIdentity", "AWS::BedrockAgentCore::PaymentManager", "AWS::SecurityHub::Hub", "AWS::CloudFront::Distribution", "AWS::SecurityHub::HubV2", "AWS::CloudWatch::OTelEnrichment", "AWS::MSK::Cluster", "AWS::S3::Bucket", "AWS::Bedrock::KnowledgeBase", "AWS::XRay::TransactionSearchConfig", "AWS::CloudWatchOmni", "AWS::NetworkFirewall::Firewall"
     #   resp.telemetry_configurations[0].resource_identifier #=> String
     #   resp.telemetry_configurations[0].resource_tags #=> Hash
     #   resp.telemetry_configurations[0].resource_tags["String"] #=> String
@@ -1877,6 +2252,129 @@ module Aws::ObservabilityAdmin
     # @param [Hash] params ({})
     def list_resource_telemetry_for_organization(params = {}, options = {})
       req = build_request(:list_resource_telemetry_for_organization, params)
+      req.send_request(options)
+    end
+
+    # Lists resources in your cloud provider that the connector can access,
+    # such as management groups, subscriptions, resource types, Regions,
+    # resources, and Event Hubs. Use the results to build a telemetry
+    # manifest. This operation returns results in pages. To get the next
+    # page, pass the returned `NextToken` in the next call. We recommend
+    # that you use pagination to ensure that the operation returns quickly
+    # and successfully.
+    #
+    # @option params [required, String] :connector_identifier
+    #   The connector to use for the query. Specify one of the following:
+    #
+    #   * The Amazon Resource Name (ARN) of the connector
+    #
+    #   * The ID of the connector
+    #
+    # @option params [required, Types::ConnectorQuery] :selector
+    #   What to list: one cloud provider, and one type of resource in that
+    #   provider.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in one call. For an
+    #   `EventHubs` query, a page can contain more results than this value.
+    #
+    # @option params [String] :next_token
+    #   The token for the next page of results, returned by a previous call.
+    #
+    # @return [Types::ListResourcesByConnectorOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListResourcesByConnectorOutput#results #results} => Types::ConnectorQueryResults
+    #   * {Types::ListResourcesByConnectorOutput#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_resources_by_connector({
+    #     connector_identifier: "ConnectorIdentifier", # required
+    #     selector: { # required
+    #       azure: {
+    #         management_groups: {
+    #           parent_management_group_id: "AzureManagementGroupId",
+    #         },
+    #         subscriptions: {
+    #           management_group_id: "AzureManagementGroupId",
+    #         },
+    #         resource_types: {
+    #           scope: {
+    #             management_group_id: "AzureManagementGroupId",
+    #             subscription_ids: ["AzureSubscriptionId"],
+    #           },
+    #         },
+    #         regions: {
+    #           scope: {
+    #             management_group_id: "AzureManagementGroupId",
+    #             subscription_ids: ["AzureSubscriptionId"],
+    #           },
+    #         },
+    #         resource_ids: {
+    #           scope: {
+    #             management_group_id: "AzureManagementGroupId",
+    #             subscription_ids: ["AzureSubscriptionId"],
+    #           },
+    #           resource_type: "AzureResourceType",
+    #           region: "AzureRegion",
+    #           tag_filters: [
+    #             {
+    #               key: "TagFilterKey", # required
+    #               values: ["TagFilterValue"], # required
+    #             },
+    #           ],
+    #         },
+    #         event_hubs: {
+    #           scope: {
+    #             management_group_id: "AzureManagementGroupId",
+    #             subscription_ids: ["AzureSubscriptionId"],
+    #           },
+    #           namespace_name: "AzureEventHubNamespaceName",
+    #           region: "AzureRegion",
+    #         },
+    #       },
+    #     },
+    #     max_results: 1,
+    #     next_token: "ConnectorNextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.results.azure.management_groups #=> Array
+    #   resp.results.azure.management_groups[0].id #=> String
+    #   resp.results.azure.management_groups[0].name #=> String
+    #   resp.results.azure.management_groups[0].display_name #=> String
+    #   resp.results.azure.subscriptions #=> Array
+    #   resp.results.azure.subscriptions[0].subscription_id #=> String
+    #   resp.results.azure.subscriptions[0].display_name #=> String
+    #   resp.results.azure.subscriptions[0].state #=> String
+    #   resp.results.azure.subscriptions[0].management_group_id #=> String
+    #   resp.results.azure.resource_types #=> Array
+    #   resp.results.azure.resource_types[0] #=> String
+    #   resp.results.azure.regions #=> Array
+    #   resp.results.azure.regions[0] #=> String
+    #   resp.results.azure.resource_ids #=> Array
+    #   resp.results.azure.resource_ids[0].resource_id #=> String
+    #   resp.results.azure.resource_ids[0].resource_type #=> String
+    #   resp.results.azure.resource_ids[0].region #=> String
+    #   resp.results.azure.resource_ids[0].subscription_id #=> String
+    #   resp.results.azure.resource_ids[0].tags #=> Hash
+    #   resp.results.azure.resource_ids[0].tags["AzureResourceTagKey"] #=> String
+    #   resp.results.azure.event_hubs #=> Array
+    #   resp.results.azure.event_hubs[0].resource_id #=> String
+    #   resp.results.azure.event_hubs[0].event_hub_name #=> String
+    #   resp.results.azure.event_hubs[0].namespace_name #=> String
+    #   resp.results.azure.event_hubs[0].fully_qualified_namespace #=> String
+    #   resp.results.azure.event_hubs[0].region #=> String
+    #   resp.results.azure.event_hubs[0].subscription_id #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/ListResourcesByConnector AWS API Documentation
+    #
+    # @overload list_resources_by_connector(params = {})
+    # @param [Hash] params ({})
+    def list_resources_by_connector(params = {}, options = {})
+      req = build_request(:list_resources_by_connector, params)
       req.send_request(options)
     end
 
@@ -1923,7 +2421,8 @@ module Aws::ObservabilityAdmin
     end
 
     # Lists all tags attached to the specified resource. Supports telemetry
-    # rule resources and telemetry pipeline resources.
+    # rule resources, telemetry pipeline resources, and third-party
+    # telemetry enrichment resources.
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the telemetry rule resource whose
@@ -2046,7 +2545,7 @@ module Aws::ObservabilityAdmin
     #   resp.telemetry_rule_summaries[0].rule_arn #=> String
     #   resp.telemetry_rule_summaries[0].created_time_stamp #=> Integer
     #   resp.telemetry_rule_summaries[0].last_update_time_stamp #=> Integer
-    #   resp.telemetry_rule_summaries[0].resource_type #=> String, one of "AWS::EC2::Instance", "AWS::EC2::VPC", "AWS::Lambda::Function", "AWS::CloudTrail", "AWS::EKS::Cluster", "AWS::WAFv2::WebACL", "AWS::ElasticLoadBalancingV2::LoadBalancer", "AWS::Route53Resolver::ResolverEndpoint", "AWS::BedrockAgentCore::Runtime", "AWS::BedrockAgentCore::Browser", "AWS::BedrockAgentCore::CodeInterpreter", "AWS::BedrockAgentCore::Gateway", "AWS::BedrockAgentCore::Memory", "AWS::BedrockAgentCore::WorkloadIdentity", "AWS::BedrockAgentCore::PaymentManager", "AWS::SecurityHub::Hub", "AWS::CloudFront::Distribution", "AWS::SecurityHub::HubV2", "AWS::CloudWatch::OTelEnrichment", "AWS::MSK::Cluster", "AWS::S3::Bucket", "AWS::Bedrock::KnowledgeBase", "AWS::XRay::TransactionSearchConfig"
+    #   resp.telemetry_rule_summaries[0].resource_type #=> String, one of "AWS::EC2::Instance", "AWS::EC2::VPC", "AWS::Lambda::Function", "AWS::CloudTrail", "AWS::EKS::Cluster", "AWS::WAFv2::WebACL", "AWS::ElasticLoadBalancingV2::LoadBalancer", "AWS::Route53Resolver::ResolverEndpoint", "AWS::BedrockAgentCore::Runtime", "AWS::BedrockAgentCore::Browser", "AWS::BedrockAgentCore::CodeInterpreter", "AWS::BedrockAgentCore::Gateway", "AWS::BedrockAgentCore::Memory", "AWS::BedrockAgentCore::WorkloadIdentity", "AWS::BedrockAgentCore::PaymentManager", "AWS::SecurityHub::Hub", "AWS::CloudFront::Distribution", "AWS::SecurityHub::HubV2", "AWS::CloudWatch::OTelEnrichment", "AWS::MSK::Cluster", "AWS::S3::Bucket", "AWS::Bedrock::KnowledgeBase", "AWS::XRay::TransactionSearchConfig", "AWS::CloudWatchOmni", "AWS::NetworkFirewall::Firewall"
     #   resp.telemetry_rule_summaries[0].telemetry_type #=> String, one of "Logs", "Metrics", "Traces", "Insights"
     #   resp.telemetry_rule_summaries[0].telemetry_source_types #=> Array
     #   resp.telemetry_rule_summaries[0].telemetry_source_types[0] #=> String, one of "VPC_FLOW_LOGS", "ROUTE53_RESOLVER_QUERY_LOGS", "EKS_AUDIT_LOGS", "EKS_AUTHENTICATOR_LOGS", "EKS_CONTROLLER_MANAGER_LOGS", "EKS_SCHEDULER_LOGS", "EKS_API_LOGS"
@@ -2109,7 +2608,7 @@ module Aws::ObservabilityAdmin
     #   resp.telemetry_rule_summaries[0].rule_arn #=> String
     #   resp.telemetry_rule_summaries[0].created_time_stamp #=> Integer
     #   resp.telemetry_rule_summaries[0].last_update_time_stamp #=> Integer
-    #   resp.telemetry_rule_summaries[0].resource_type #=> String, one of "AWS::EC2::Instance", "AWS::EC2::VPC", "AWS::Lambda::Function", "AWS::CloudTrail", "AWS::EKS::Cluster", "AWS::WAFv2::WebACL", "AWS::ElasticLoadBalancingV2::LoadBalancer", "AWS::Route53Resolver::ResolverEndpoint", "AWS::BedrockAgentCore::Runtime", "AWS::BedrockAgentCore::Browser", "AWS::BedrockAgentCore::CodeInterpreter", "AWS::BedrockAgentCore::Gateway", "AWS::BedrockAgentCore::Memory", "AWS::BedrockAgentCore::WorkloadIdentity", "AWS::BedrockAgentCore::PaymentManager", "AWS::SecurityHub::Hub", "AWS::CloudFront::Distribution", "AWS::SecurityHub::HubV2", "AWS::CloudWatch::OTelEnrichment", "AWS::MSK::Cluster", "AWS::S3::Bucket", "AWS::Bedrock::KnowledgeBase", "AWS::XRay::TransactionSearchConfig"
+    #   resp.telemetry_rule_summaries[0].resource_type #=> String, one of "AWS::EC2::Instance", "AWS::EC2::VPC", "AWS::Lambda::Function", "AWS::CloudTrail", "AWS::EKS::Cluster", "AWS::WAFv2::WebACL", "AWS::ElasticLoadBalancingV2::LoadBalancer", "AWS::Route53Resolver::ResolverEndpoint", "AWS::BedrockAgentCore::Runtime", "AWS::BedrockAgentCore::Browser", "AWS::BedrockAgentCore::CodeInterpreter", "AWS::BedrockAgentCore::Gateway", "AWS::BedrockAgentCore::Memory", "AWS::BedrockAgentCore::WorkloadIdentity", "AWS::BedrockAgentCore::PaymentManager", "AWS::SecurityHub::Hub", "AWS::CloudFront::Distribution", "AWS::SecurityHub::HubV2", "AWS::CloudWatch::OTelEnrichment", "AWS::MSK::Cluster", "AWS::S3::Bucket", "AWS::Bedrock::KnowledgeBase", "AWS::XRay::TransactionSearchConfig", "AWS::CloudWatchOmni", "AWS::NetworkFirewall::Firewall"
     #   resp.telemetry_rule_summaries[0].telemetry_type #=> String, one of "Logs", "Metrics", "Traces", "Insights"
     #   resp.telemetry_rule_summaries[0].telemetry_source_types #=> Array
     #   resp.telemetry_rule_summaries[0].telemetry_source_types[0] #=> String, one of "VPC_FLOW_LOGS", "ROUTE53_RESOLVER_QUERY_LOGS", "EKS_AUDIT_LOGS", "EKS_AUTHENTICATOR_LOGS", "EKS_CONTROLLER_MANAGER_LOGS", "EKS_SCHEDULER_LOGS", "EKS_API_LOGS"
@@ -2121,6 +2620,179 @@ module Aws::ObservabilityAdmin
     # @param [Hash] params ({})
     def list_telemetry_rules_for_organization(params = {}, options = {})
       req = build_request(:list_telemetry_rules_for_organization, params)
+      req.send_request(options)
+    end
+
+    # Returns a summary of each third-party telemetry enrichment in your
+    # account and Region. To get the full configuration of an enrichment,
+    # use `GetThirdPartyTelemetryEnrichment`. The results are paginated. To
+    # get the next page of results, use `NextToken`.
+    #
+    # @option params [String] :status
+    #   Returns only the enrichments that have this status. Valid values:
+    #
+    #   * `Initializing` - CloudWatch is setting up the enrichment. Some
+    #     telemetry can be enriched before setup completes.
+    #
+    #   * `Running` - The enrichment is active.
+    #
+    #   * `Stopped` - The enrichment is stopped.
+    #
+    #   * `Impaired` - The enrichment has a problem. `StatusReason` describes
+    #     the problem.
+    #
+    # @option params [String] :telemetry_source
+    #   Returns only the enrichments for this third-party telemetry source.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in a single call. If you omit
+    #   this parameter, the operation returns up to 100 results.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results. A previous call generates this
+    #   token. If you omit this parameter, the operation returns the first
+    #   page of results.
+    #
+    # @return [Types::ListThirdPartyTelemetryEnrichmentsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListThirdPartyTelemetryEnrichmentsOutput#telemetry_enrichments #telemetry_enrichments} => Array&lt;Types::ThirdPartyTelemetryEnrichmentSummary&gt;
+    #   * {Types::ListThirdPartyTelemetryEnrichmentsOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_third_party_telemetry_enrichments({
+    #     status: "Initializing", # accepts Initializing, Running, Stopped, Impaired
+    #     telemetry_source: "Azure", # accepts Azure
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.telemetry_enrichments #=> Array
+    #   resp.telemetry_enrichments[0].name #=> String
+    #   resp.telemetry_enrichments[0].telemetry_source #=> String, one of "Azure"
+    #   resp.telemetry_enrichments[0].status #=> String, one of "Initializing", "Running", "Stopped", "Impaired"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/ListThirdPartyTelemetryEnrichments AWS API Documentation
+    #
+    # @overload list_third_party_telemetry_enrichments(params = {})
+    # @param [Hash] params ({})
+    def list_third_party_telemetry_enrichments(params = {}, options = {})
+      req = build_request(:list_third_party_telemetry_enrichments, params)
+      req.send_request(options)
+    end
+
+    # Creates or replaces the telemetry manifest of a connector. The
+    # telemetry manifest declares which resources in your cloud provider to
+    # collect telemetry from and which telemetry types to collect. To avoid
+    # overwriting changes made by another caller, specify `ExpectedVersion`.
+    #
+    # @option params [required, String] :connector_identifier
+    #   The connector. Specify one of the following:
+    #
+    #   * The Amazon Resource Name (ARN) of the connector
+    #
+    #   * The ID of the connector
+    #
+    # @option params [required, Types::TelemetryManifest] :manifest
+    #   The telemetry manifest.
+    #
+    # @option params [Integer] :expected_version
+    #   The version of the telemetry manifest that you expect to replace, as
+    #   returned by `GetConnectorTelemetryManifest`. Omit this value when you
+    #   create the first telemetry manifest. If the value doesn't match the
+    #   current version, the request fails with a `ConflictException`.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   operation completes no more than one time. If you use an Amazon Web
+    #   Services SDK, the SDK generates this value and reuses it on retries.
+    #   If this token matches a previous request with the same telemetry
+    #   manifest, the service returns the stored version without an error. If
+    #   you use the same token with a different telemetry manifest, the
+    #   service returns a `ValidationException`. This operation is idempotent
+    #   when you use the same token and parameters.
+    #
+    # @return [Types::PutConnectorTelemetryManifestOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutConnectorTelemetryManifestOutput#version #version} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_connector_telemetry_manifest({
+    #     connector_identifier: "ConnectorIdentifier", # required
+    #     manifest: { # required
+    #       source: { # required
+    #         azure: [
+    #           {
+    #             telemetry_types: ["ResourceLogs"], # required, accepts ResourceLogs, Metrics, FlowLogs
+    #             scope: { # required
+    #               subscriptions: {
+    #                 all: {
+    #                 },
+    #                 ids: ["AzureSubscriptionId"],
+    #               },
+    #               regions: ["AzureRegion"],
+    #               resource_types: ["AzureResourceType"],
+    #               tag_filters: [
+    #                 {
+    #                   key: "TagFilterKey", # required
+    #                   values: ["TagFilterValue"], # required
+    #                 },
+    #               ],
+    #               resources: [
+    #                 {
+    #                   region: "AzureRegion", # required
+    #                   resource_ids: ["ManifestAzureResourceId"], # required
+    #                 },
+    #               ],
+    #             },
+    #           },
+    #         ],
+    #       },
+    #       infrastructure: {
+    #         azure: {
+    #           subscription_id: "AzureSubscriptionId",
+    #           event_hubs: [
+    #             {
+    #               tier: "Standard", # required, accepts Standard, Premium
+    #               partition_count: 1, # required
+    #             },
+    #           ],
+    #           flow_logs: {
+    #             customer_managed: {
+    #               storage_accounts: [ # required
+    #                 {
+    #                   region: "AzureRegion", # required
+    #                   storage_account_ids: ["AzureStorageAccountId"], # required
+    #                 },
+    #               ],
+    #             },
+    #             aws_managed: {
+    #               retention_days: 1, # required
+    #             },
+    #           },
+    #         },
+    #       },
+    #     },
+    #     expected_version: 1,
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.version #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/PutConnectorTelemetryManifest AWS API Documentation
+    #
+    # @overload put_connector_telemetry_manifest(params = {})
+    # @param [Hash] params ({})
+    def put_connector_telemetry_manifest(params = {}, options = {})
+      req = build_request(:put_connector_telemetry_manifest, params)
       req.send_request(options)
     end
 
@@ -2225,6 +2897,103 @@ module Aws::ObservabilityAdmin
       req.send_request(options)
     end
 
+    # Starts a refresh of an external-cloud telemetry pipeline. The refresh
+    # re-reads the connector's telemetry manifest and re-discovers the
+    # sources in scope.
+    #
+    # The pipeline must be in the `ACTIVE` or `UPDATE_FAILED` state, with no
+    # refresh already running. You can use `GetTelemetryPipeline` to track
+    # the refresh.
+    #
+    # @option params [required, String] :pipeline_identifier
+    #   The Amazon Resource Name (ARN) of the telemetry pipeline to refresh.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_telemetry_pipeline_refresh({
+    #     pipeline_identifier: "TelemetryPipelineIdentifier", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/StartTelemetryPipelineRefresh AWS API Documentation
+    #
+    # @overload start_telemetry_pipeline_refresh(params = {})
+    # @param [Hash] params ({})
+    def start_telemetry_pipeline_refresh(params = {}, options = {})
+      req = build_request(:start_telemetry_pipeline_refresh, params)
+      req.send_request(options)
+    end
+
+    # Starts a third-party telemetry enrichment. An enrichment adds resource
+    # metadata, such as tags, from a third-party telemetry source to the
+    # telemetry that CloudWatch receives from the resources of that source.
+    #
+    # You specify an Amazon Web Services Config connector for your
+    # third-party environment, such as a Microsoft Azure tenant. You can use
+    # each connector for only one enrichment.
+    #
+    # To use this operation, you must have the
+    # `config:PutThirdPartyServiceLinkedConfigurationRecorder` permission.
+    # If the Amazon Web Services Config service-linked role does not exist
+    # in your account, you must also have the `iam:CreateServiceLinkedRole`
+    # permission.
+    #
+    # @option params [required, String] :name
+    #   A name for the enrichment. The name must be unique in your account and
+    #   Region. You can use the name instead of the ARN to identify the
+    #   enrichment in other operations.
+    #
+    # @option params [required, Types::TelemetrySourceConfigurationInput] :telemetry_source_configuration
+    #   The third-party telemetry source to collect resource metadata from.
+    #   Specify exactly one telemetry source.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   The tags to associate with the enrichment resource.
+    #
+    # @return [Types::StartThirdPartyTelemetryEnrichmentOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartThirdPartyTelemetryEnrichmentOutput#arn #arn} => String
+    #   * {Types::StartThirdPartyTelemetryEnrichmentOutput#name #name} => String
+    #   * {Types::StartThirdPartyTelemetryEnrichmentOutput#status #status} => String
+    #   * {Types::StartThirdPartyTelemetryEnrichmentOutput#status_reason #status_reason} => String
+    #   * {Types::StartThirdPartyTelemetryEnrichmentOutput#telemetry_source_configuration #telemetry_source_configuration} => Types::TelemetrySourceConfigurationOutput
+    #   * {Types::StartThirdPartyTelemetryEnrichmentOutput#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_third_party_telemetry_enrichment({
+    #     name: "ThirdPartyTelemetryEnrichmentName", # required
+    #     telemetry_source_configuration: { # required
+    #       azure: {
+    #         aws_config_connector_arn: "AwsConfigConnectorArn", # required
+    #       },
+    #     },
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.name #=> String
+    #   resp.status #=> String, one of "Initializing", "Running", "Stopped", "Impaired"
+    #   resp.status_reason #=> String
+    #   resp.telemetry_source_configuration.azure.aws_config_connector_arn #=> String
+    #   resp.telemetry_source_configuration.azure.service_linked_recorder_arn #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["String"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/StartThirdPartyTelemetryEnrichment AWS API Documentation
+    #
+    # @overload start_third_party_telemetry_enrichment(params = {})
+    # @param [Hash] params ({})
+    def start_third_party_telemetry_enrichment(params = {}, options = {})
+      req = build_request(:start_third_party_telemetry_enrichment, params)
+      req.send_request(options)
+    end
+
     # Disables the resource tags for telemetry feature for your account,
     # stopping the enhancement of telemetry data with additional resource
     # metadata.
@@ -2274,8 +3043,53 @@ module Aws::ObservabilityAdmin
       req.send_request(options)
     end
 
-    # Adds or updates tags for a resource. Supports telemetry rule resources
-    # and telemetry pipeline resources.
+    # Stops a third-party telemetry enrichment. CloudWatch stops adding
+    # resource metadata from the third-party telemetry source to your
+    # telemetry.
+    #
+    # To use this operation, you must have the
+    # `config:DeleteServiceLinkedConfigurationRecorder` permission.
+    #
+    # @option params [required, String] :telemetry_enrichment_identifier
+    #   The identifier of the enrichment to stop. You can specify one of the
+    #   following:
+    #
+    #   * The name of the enrichment.
+    #
+    #   * The Amazon Resource Name (ARN) of the enrichment.
+    #
+    # @return [Types::StopThirdPartyTelemetryEnrichmentOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StopThirdPartyTelemetryEnrichmentOutput#name #name} => String
+    #   * {Types::StopThirdPartyTelemetryEnrichmentOutput#telemetry_source #telemetry_source} => String
+    #   * {Types::StopThirdPartyTelemetryEnrichmentOutput#status #status} => String
+    #   * {Types::StopThirdPartyTelemetryEnrichmentOutput#status_reason #status_reason} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.stop_third_party_telemetry_enrichment({
+    #     telemetry_enrichment_identifier: "ThirdPartyTelemetryEnrichmentIdentifier", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.name #=> String
+    #   resp.telemetry_source #=> String, one of "Azure"
+    #   resp.status #=> String, one of "Initializing", "Running", "Stopped", "Impaired"
+    #   resp.status_reason #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/observabilityadmin-2018-05-10/StopThirdPartyTelemetryEnrichment AWS API Documentation
+    #
+    # @overload stop_third_party_telemetry_enrichment(params = {})
+    # @param [Hash] params ({})
+    def stop_third_party_telemetry_enrichment(params = {}, options = {})
+      req = build_request(:stop_third_party_telemetry_enrichment, params)
+      req.send_request(options)
+    end
+
+    # Adds or updates tags for a resource. Supports telemetry rule
+    # resources, telemetry pipeline resources, and third-party telemetry
+    # enrichment resources.
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the telemetry rule resource to tag.
@@ -2353,8 +3167,9 @@ module Aws::ObservabilityAdmin
       req.send_request(options)
     end
 
-    # Removes tags from a resource. Supports telemetry rule resources and
-    # telemetry pipeline resources.
+    # Removes tags from a resource. Supports telemetry rule resources,
+    # telemetry pipeline resources, and third-party telemetry enrichment
+    # resources.
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the telemetry rule resource to
@@ -2411,9 +3226,13 @@ module Aws::ObservabilityAdmin
     #           log_group_selection_criteria: "LogsFilterString",
     #           data_source_selection_criteria: "DataSourceFilterString",
     #           encrypted_log_group_strategy: "ALLOW", # required, accepts ALLOW, SKIP
+    #           centralize_with_data_protection: "ENABLED", # accepts ENABLED, DISABLED
     #         },
     #         source_metrics_configuration: {
     #           metrics_selection_criteria: "MetricsFilterString",
+    #         },
+    #         source_profiles_configuration: {
+    #           profiles_selection_criteria: "ProfilesFilterString",
     #         },
     #         source_context_graph_configuration: {
     #         },
@@ -2442,6 +3261,11 @@ module Aws::ObservabilityAdmin
     #           log_group_deletion_protection: "ENABLED", # accepts ENABLED
     #         },
     #         destination_metrics_configuration: {
+    #           backup_configuration: {
+    #             region: "Region", # required
+    #           },
+    #         },
+    #         destination_profiles_configuration: {
     #           backup_configuration: {
     #             region: "Region", # required
     #           },
@@ -2622,7 +3446,7 @@ module Aws::ObservabilityAdmin
     #   resp = client.update_telemetry_rule({
     #     rule_identifier: "RuleIdentifier", # required
     #     rule: { # required
-    #       resource_type: "AWS::EC2::Instance", # accepts AWS::EC2::Instance, AWS::EC2::VPC, AWS::Lambda::Function, AWS::CloudTrail, AWS::EKS::Cluster, AWS::WAFv2::WebACL, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::Route53Resolver::ResolverEndpoint, AWS::BedrockAgentCore::Runtime, AWS::BedrockAgentCore::Browser, AWS::BedrockAgentCore::CodeInterpreter, AWS::BedrockAgentCore::Gateway, AWS::BedrockAgentCore::Memory, AWS::BedrockAgentCore::WorkloadIdentity, AWS::BedrockAgentCore::PaymentManager, AWS::SecurityHub::Hub, AWS::CloudFront::Distribution, AWS::SecurityHub::HubV2, AWS::CloudWatch::OTelEnrichment, AWS::MSK::Cluster, AWS::S3::Bucket, AWS::Bedrock::KnowledgeBase, AWS::XRay::TransactionSearchConfig
+    #       resource_type: "AWS::EC2::Instance", # accepts AWS::EC2::Instance, AWS::EC2::VPC, AWS::Lambda::Function, AWS::CloudTrail, AWS::EKS::Cluster, AWS::WAFv2::WebACL, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::Route53Resolver::ResolverEndpoint, AWS::BedrockAgentCore::Runtime, AWS::BedrockAgentCore::Browser, AWS::BedrockAgentCore::CodeInterpreter, AWS::BedrockAgentCore::Gateway, AWS::BedrockAgentCore::Memory, AWS::BedrockAgentCore::WorkloadIdentity, AWS::BedrockAgentCore::PaymentManager, AWS::SecurityHub::Hub, AWS::CloudFront::Distribution, AWS::SecurityHub::HubV2, AWS::CloudWatch::OTelEnrichment, AWS::MSK::Cluster, AWS::S3::Bucket, AWS::Bedrock::KnowledgeBase, AWS::XRay::TransactionSearchConfig, AWS::CloudWatchOmni, AWS::NetworkFirewall::Firewall
     #       telemetry_type: "Logs", # required, accepts Logs, Metrics, Traces, Insights
     #       telemetry_source_types: ["VPC_FLOW_LOGS"], # accepts VPC_FLOW_LOGS, ROUTE53_RESOLVER_QUERY_LOGS, EKS_AUDIT_LOGS, EKS_AUTHENTICATOR_LOGS, EKS_CONTROLLER_MANAGER_LOGS, EKS_SCHEDULER_LOGS, EKS_API_LOGS
     #       destination_configuration: {
@@ -2689,7 +3513,7 @@ module Aws::ObservabilityAdmin
     #           log_type: "WAF_LOGS", # accepts WAF_LOGS
     #         },
     #         log_delivery_parameters: {
-    #           log_types: ["APPLICATION_LOGS"], # accepts APPLICATION_LOGS, USAGE_LOGS, SECURITY_FINDING_LOGS, ACCESS_LOGS, CONNECTION_LOGS, S3_SERVER_ACCESS_LOGS, ALB_ACCESS_LOGS, ALB_CONNECTION_LOGS, ALB_HEALTH_CHECK_LOGS
+    #           log_types: ["APPLICATION_LOGS"], # accepts APPLICATION_LOGS, USAGE_LOGS, SECURITY_FINDING_LOGS, ACCESS_LOGS, CONNECTION_LOGS, S3_SERVER_ACCESS_LOGS, ALB_ACCESS_LOGS, ALB_CONNECTION_LOGS, ALB_HEALTH_CHECK_LOGS, FLOW_LOGS, ALERT_LOGS, TLS_LOGS
     #         },
     #         msk_monitoring_parameters: {
     #           enhanced_monitoring: "DEFAULT", # accepts DEFAULT, PER_BROKER, PER_TOPIC_PER_BROKER, PER_TOPIC_PER_PARTITION
@@ -2740,7 +3564,7 @@ module Aws::ObservabilityAdmin
     #   resp = client.update_telemetry_rule_for_organization({
     #     rule_identifier: "RuleIdentifier", # required
     #     rule: { # required
-    #       resource_type: "AWS::EC2::Instance", # accepts AWS::EC2::Instance, AWS::EC2::VPC, AWS::Lambda::Function, AWS::CloudTrail, AWS::EKS::Cluster, AWS::WAFv2::WebACL, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::Route53Resolver::ResolverEndpoint, AWS::BedrockAgentCore::Runtime, AWS::BedrockAgentCore::Browser, AWS::BedrockAgentCore::CodeInterpreter, AWS::BedrockAgentCore::Gateway, AWS::BedrockAgentCore::Memory, AWS::BedrockAgentCore::WorkloadIdentity, AWS::BedrockAgentCore::PaymentManager, AWS::SecurityHub::Hub, AWS::CloudFront::Distribution, AWS::SecurityHub::HubV2, AWS::CloudWatch::OTelEnrichment, AWS::MSK::Cluster, AWS::S3::Bucket, AWS::Bedrock::KnowledgeBase, AWS::XRay::TransactionSearchConfig
+    #       resource_type: "AWS::EC2::Instance", # accepts AWS::EC2::Instance, AWS::EC2::VPC, AWS::Lambda::Function, AWS::CloudTrail, AWS::EKS::Cluster, AWS::WAFv2::WebACL, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::Route53Resolver::ResolverEndpoint, AWS::BedrockAgentCore::Runtime, AWS::BedrockAgentCore::Browser, AWS::BedrockAgentCore::CodeInterpreter, AWS::BedrockAgentCore::Gateway, AWS::BedrockAgentCore::Memory, AWS::BedrockAgentCore::WorkloadIdentity, AWS::BedrockAgentCore::PaymentManager, AWS::SecurityHub::Hub, AWS::CloudFront::Distribution, AWS::SecurityHub::HubV2, AWS::CloudWatch::OTelEnrichment, AWS::MSK::Cluster, AWS::S3::Bucket, AWS::Bedrock::KnowledgeBase, AWS::XRay::TransactionSearchConfig, AWS::CloudWatchOmni, AWS::NetworkFirewall::Firewall
     #       telemetry_type: "Logs", # required, accepts Logs, Metrics, Traces, Insights
     #       telemetry_source_types: ["VPC_FLOW_LOGS"], # accepts VPC_FLOW_LOGS, ROUTE53_RESOLVER_QUERY_LOGS, EKS_AUDIT_LOGS, EKS_AUTHENTICATOR_LOGS, EKS_CONTROLLER_MANAGER_LOGS, EKS_SCHEDULER_LOGS, EKS_API_LOGS
     #       destination_configuration: {
@@ -2807,7 +3631,7 @@ module Aws::ObservabilityAdmin
     #           log_type: "WAF_LOGS", # accepts WAF_LOGS
     #         },
     #         log_delivery_parameters: {
-    #           log_types: ["APPLICATION_LOGS"], # accepts APPLICATION_LOGS, USAGE_LOGS, SECURITY_FINDING_LOGS, ACCESS_LOGS, CONNECTION_LOGS, S3_SERVER_ACCESS_LOGS, ALB_ACCESS_LOGS, ALB_CONNECTION_LOGS, ALB_HEALTH_CHECK_LOGS
+    #           log_types: ["APPLICATION_LOGS"], # accepts APPLICATION_LOGS, USAGE_LOGS, SECURITY_FINDING_LOGS, ACCESS_LOGS, CONNECTION_LOGS, S3_SERVER_ACCESS_LOGS, ALB_ACCESS_LOGS, ALB_CONNECTION_LOGS, ALB_HEALTH_CHECK_LOGS, FLOW_LOGS, ALERT_LOGS, TLS_LOGS
     #         },
     #         msk_monitoring_parameters: {
     #           enhanced_monitoring: "DEFAULT", # accepts DEFAULT, PER_BROKER, PER_TOPIC_PER_BROKER, PER_TOPIC_PER_PARTITION
@@ -2889,7 +3713,7 @@ module Aws::ObservabilityAdmin
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-observabilityadmin'
-      context[:gem_version] = '1.47.0'
+      context[:gem_version] = '1.56.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

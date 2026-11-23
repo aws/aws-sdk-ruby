@@ -350,6 +350,19 @@ module Aws
                                        ) -> _AdminListUserAuthEventsResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AdminListUserAuthEventsResponseSuccess
 
+      interface _AdminListUserSessionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AdminListUserSessionsResponse]
+        def sessions: () -> ::Array[Types::SessionDescriptionType]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CognitoIdentityProvider/Client.html#admin_list_user_sessions-instance_method
+      def admin_list_user_sessions: (
+                                      user_pool_id: ::String,
+                                      username: ::String,
+                                      ?next_token: ::String
+                                    ) -> _AdminListUserSessionsResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AdminListUserSessionsResponseSuccess
+
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CognitoIdentityProvider/Client.html#admin_remove_user_from_group-instance_method
       def admin_remove_user_from_group: (
                                           user_pool_id: ::String,
@@ -391,6 +404,18 @@ module Aws
                                              ?client_metadata: Hash[::String, ::String]
                                            ) -> _AdminRespondToAuthChallengeResponseSuccess
                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AdminRespondToAuthChallengeResponseSuccess
+
+      interface _AdminRevokeUserSessionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AdminRevokeUserSessionResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CognitoIdentityProvider/Client.html#admin_revoke_user_session-instance_method
+      def admin_revoke_user_session: (
+                                       user_pool_id: ::String,
+                                       username: ::String,
+                                       session_id: ::String,
+                                       ?revoke_associated_sessions: ("NONE" | "LINKED")
+                                     ) -> _AdminRevokeUserSessionResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AdminRevokeUserSessionResponseSuccess
 
       interface _AdminSetUserMFAPreferenceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::AdminSetUserMFAPreferenceResponse]
@@ -508,6 +533,17 @@ module Aws
                                     ) -> _AssociateSoftwareTokenResponseSuccess
                                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateSoftwareTokenResponseSuccess
 
+      interface _CancelPointInTimeRecoveryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CancelPointInTimeRecoveryResponse]
+        def restoration: () -> Types::RestorationType
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CognitoIdentityProvider/Client.html#cancel_point_in_time_recovery-instance_method
+      def cancel_point_in_time_recovery: (
+                                           user_pool_id: ::String,
+                                           restore_id: ::String
+                                         ) -> _CancelPointInTimeRecoveryResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CancelPointInTimeRecoveryResponseSuccess
+
       interface _ChangePasswordResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ChangePasswordResponse]
       end
@@ -589,6 +625,20 @@ module Aws
                              ?session: ::String
                            ) -> _ConfirmSignUpResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ConfirmSignUpResponseSuccess
+
+      interface _CreateCIMDPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateCIMDPolicyResponse]
+        def cimd_policy: () -> Types::CIMDPolicyType
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CognitoIdentityProvider/Client.html#create_cimd_policy-instance_method
+      def create_cimd_policy: (
+                                user_pool_id: ::String,
+                                client_id: ::String,
+                                policy_name: ::String,
+                                ?cache_duration: ::Integer,
+                                url_patterns: Array[::String]
+                              ) -> _CreateCIMDPolicyResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateCIMDPolicyResponseSuccess
 
       interface _CreateGroupResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateGroupResponse]
@@ -734,6 +784,13 @@ module Aws
                                   custom_auth_mode: ("AUDIT" | "ENFORCED")?
                                 }?
                               },
+                              ?dcr_configuration: {
+                                enable_status: ("Enabled" | "Disabled")?,
+                                open_dcr_enabled: bool?,
+                                authenticated_grant_types: Array[("code" | "implicit" | "client_credentials")]?,
+                                open_dcr_grant_types: Array[("code" | "implicit" | "client_credentials")]?,
+                                allowed_scopes: Array[::String]?
+                              },
                               ?username_configuration: {
                                 case_sensitive: bool
                               },
@@ -779,7 +836,7 @@ module Aws
                                      },
                                      ?read_attributes: Array[::String],
                                      ?write_attributes: Array[::String],
-                                     ?explicit_auth_flows: Array[("ADMIN_NO_SRP_AUTH" | "CUSTOM_AUTH_FLOW_ONLY" | "USER_PASSWORD_AUTH" | "ALLOW_ADMIN_USER_PASSWORD_AUTH" | "ALLOW_CUSTOM_AUTH" | "ALLOW_USER_PASSWORD_AUTH" | "ALLOW_USER_SRP_AUTH" | "ALLOW_REFRESH_TOKEN_AUTH" | "ALLOW_USER_AUTH")],
+                                     ?explicit_auth_flows: Array[("ADMIN_NO_SRP_AUTH" | "CUSTOM_AUTH_FLOW_ONLY" | "USER_PASSWORD_AUTH" | "ALLOW_ADMIN_USER_PASSWORD_AUTH" | "ALLOW_CUSTOM_AUTH" | "ALLOW_USER_PASSWORD_AUTH" | "ALLOW_USER_SRP_AUTH" | "ALLOW_REFRESH_TOKEN_AUTH" | "ALLOW_USER_AUTH" | "ALLOW_TOKEN_EXCHANGE_DELEGATION" | "ALLOW_TOKEN_EXCHANGE_IMPERSONATION")],
                                      ?supported_identity_providers: Array[::String],
                                      ?callback_urls: Array[::String],
                                      ?logout_urls: Array[::String],
@@ -801,7 +858,8 @@ module Aws
                                      ?refresh_token_rotation: {
                                        feature: ("ENABLED" | "DISABLED"),
                                        retry_grace_period_seconds: ::Integer?
-                                     }
+                                     },
+                                     ?publish_secrets_in_aws_secrets_manager: bool
                                    ) -> _CreateUserPoolClientResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateUserPoolClientResponseSuccess
 
@@ -840,6 +898,16 @@ module Aws
                                       ?user_pool_tags: Hash[::String, ::String]
                                     ) -> _CreateUserPoolReplicaResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateUserPoolReplicaResponseSuccess
+
+      interface _DeleteCIMDPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteCIMDPolicyResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CognitoIdentityProvider/Client.html#delete_cimd_policy-instance_method
+      def delete_cimd_policy: (
+                                user_pool_id: ::String,
+                                cimd_policy_id: ::String
+                              ) -> _DeleteCIMDPolicyResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteCIMDPolicyResponseSuccess
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CognitoIdentityProvider/Client.html#delete_group-instance_method
       def delete_group: (
@@ -947,6 +1015,17 @@ module Aws
                                        ) -> _DeleteWebAuthnCredentialResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteWebAuthnCredentialResponseSuccess
 
+      interface _DescribeCIMDPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeCIMDPolicyResponse]
+        def cimd_policy: () -> Types::CIMDPolicyType
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CognitoIdentityProvider/Client.html#describe_cimd_policy-instance_method
+      def describe_cimd_policy: (
+                                  user_pool_id: ::String,
+                                  cimd_policy_id: ::String
+                                ) -> _DescribeCIMDPolicyResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeCIMDPolicyResponseSuccess
+
       interface _DescribeIdentityProviderResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeIdentityProviderResponse]
         def identity_provider: () -> Types::IdentityProviderType
@@ -981,6 +1060,17 @@ module Aws
                                                        ?return_merged_resources: bool
                                                      ) -> _DescribeManagedLoginBrandingByClientResponseSuccess
                                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeManagedLoginBrandingByClientResponseSuccess
+
+      interface _DescribePointInTimeRecoveryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribePointInTimeRecoveryResponse]
+        def restoration: () -> Types::RestorationType
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CognitoIdentityProvider/Client.html#describe_point_in_time_recovery-instance_method
+      def describe_point_in_time_recovery: (
+                                             user_pool_id: ::String,
+                                             restore_id: ::String
+                                           ) -> _DescribePointInTimeRecoveryResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribePointInTimeRecoveryResponseSuccess
 
       interface _DescribeResourceServerResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeResourceServerResponse]
@@ -1120,6 +1210,31 @@ module Aws
                             ) -> _GetClientTokenResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetClientTokenResponseSuccess
 
+      interface _GetDerivedTokenResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDerivedTokenResponse]
+        def issued_token: () -> ::String
+        def issued_token_type: () -> ("ACCESS_TOKEN" | "ID_TOKEN")
+        def token_type: () -> ("Bearer" | "N_A")
+        def expires_in: () -> ::Integer
+        def scopes: () -> ::Array[::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CognitoIdentityProvider/Client.html#get_derived_token-instance_method
+      def get_derived_token: (
+                               client_id: ::String,
+                               ?client_secret: ::String,
+                               subject_token: ::String,
+                               subject_token_type: ("ACCESS_TOKEN" | "ID_TOKEN" | "SAML2"),
+                               ?subject_token_provider_name: ::String,
+                               ?actor_token: ::String,
+                               ?actor_token_type: ("ACCESS_TOKEN" | "ID_TOKEN" | "SAML2"),
+                               ?actor_token_provider_name: ::String,
+                               ?scopes: Array[::String],
+                               ?audiences: Array[::String],
+                               ?resources: Array[::String],
+                               ?requested_token_type: ("ACCESS_TOKEN" | "ID_TOKEN")
+                             ) -> _GetDerivedTokenResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDerivedTokenResponseSuccess
+
       interface _GetDeviceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetDeviceResponse]
         def device: () -> Types::DeviceType
@@ -1250,6 +1365,19 @@ module Aws
                                  ) -> _GetUserAuthFactorsResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetUserAuthFactorsResponseSuccess
 
+      interface _GetUserPoolClientSessionConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetUserPoolClientSessionConfigurationResponse]
+        def user_pool_id: () -> ::String
+        def client_id: () -> ::String
+        def sso_session: () -> Types::ClientSSOSessionConfigType
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CognitoIdentityProvider/Client.html#get_user_pool_client_session_configuration-instance_method
+      def get_user_pool_client_session_configuration: (
+                                                        user_pool_id: ::String,
+                                                        client_id: ::String
+                                                      ) -> _GetUserPoolClientSessionConfigurationResponseSuccess
+                                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetUserPoolClientSessionConfigurationResponseSuccess
+
       interface _GetUserPoolMfaConfigResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetUserPoolMfaConfigResponse]
         def sms_mfa_configuration: () -> Types::SmsMfaConfigType
@@ -1263,6 +1391,18 @@ module Aws
                                       user_pool_id: ::String
                                     ) -> _GetUserPoolMfaConfigResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetUserPoolMfaConfigResponseSuccess
+
+      interface _GetUserPoolSessionConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetUserPoolSessionConfigurationResponse]
+        def user_pool_id: () -> ::String
+        def user_session_tracking: () -> ("ENABLED" | "DISABLED")
+        def token_session: () -> Types::UserPoolTokenSessionConfigType
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CognitoIdentityProvider/Client.html#get_user_pool_session_configuration-instance_method
+      def get_user_pool_session_configuration: (
+                                                 user_pool_id: ::String
+                                               ) -> _GetUserPoolSessionConfigurationResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetUserPoolSessionConfigurationResponseSuccess
 
       interface _GlobalSignOutResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GlobalSignOutResponse]
@@ -1297,6 +1437,44 @@ module Aws
                            ?session: ::String
                          ) -> _InitiateAuthResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _InitiateAuthResponseSuccess
+
+      interface _InitiatePointInTimeRecoveryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::InitiatePointInTimeRecoveryResponse]
+        def restoration: () -> Types::RestorationType
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CognitoIdentityProvider/Client.html#initiate_point_in_time_recovery-instance_method
+      def initiate_point_in_time_recovery: (
+                                             user_pool_id: ::String,
+                                             restore_timestamp: ::Time
+                                           ) -> _InitiatePointInTimeRecoveryResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _InitiatePointInTimeRecoveryResponseSuccess
+
+      interface _ListCIMDPoliciesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListCIMDPoliciesResponse]
+        def next_token: () -> ::String
+        def cimd_policies: () -> ::Array[Types::CIMDPolicySummaryType]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CognitoIdentityProvider/Client.html#list_cimd_policies-instance_method
+      def list_cimd_policies: (
+                                user_pool_id: ::String,
+                                ?next_token: ::String,
+                                ?max_results: ::Integer
+                              ) -> _ListCIMDPoliciesResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCIMDPoliciesResponseSuccess
+
+      interface _ListClientMetadataURLsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListClientMetadataURLsResponse]
+        def next_token: () -> ::String
+        def client_metadata_urls: () -> ::Array[Types::ClientMetadataURLType]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CognitoIdentityProvider/Client.html#list_client_metadata_urls-instance_method
+      def list_client_metadata_urls: (
+                                       user_pool_id: ::String,
+                                       cimd_policy_id: ::String,
+                                       ?next_token: ::String,
+                                       ?max_results: ::Integer
+                                     ) -> _ListClientMetadataURLsResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListClientMetadataURLsResponseSuccess
 
       interface _ListDevicesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListDevicesResponse]
@@ -1336,6 +1514,19 @@ module Aws
                                      ?next_token: ::String
                                    ) -> _ListIdentityProvidersResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListIdentityProvidersResponseSuccess
+
+      interface _ListPointInTimeRecoveriesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListPointInTimeRecoveriesResponse]
+        def restorations: () -> ::Array[Types::RestorationDescriptionType]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CognitoIdentityProvider/Client.html#list_point_in_time_recoveries-instance_method
+      def list_point_in_time_recoveries: (
+                                           user_pool_id: ::String,
+                                           ?next_token: ::String,
+                                           ?max_results: ::Integer
+                                         ) -> _ListPointInTimeRecoveriesResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPointInTimeRecoveriesResponseSuccess
 
       interface _ListResourceServersResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListResourceServersResponse]
@@ -1408,7 +1599,8 @@ module Aws
       def list_user_pool_clients: (
                                     user_pool_id: ::String,
                                     ?max_results: ::Integer,
-                                    ?next_token: ::String
+                                    ?next_token: ::String,
+                                    ?client_type: ("REGULAR" | "DCR")
                                   ) -> _ListUserPoolClientsResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListUserPoolClientsResponseSuccess
 
@@ -1435,6 +1627,18 @@ module Aws
                              max_results: ::Integer
                            ) -> _ListUserPoolsResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListUserPoolsResponseSuccess
+
+      interface _ListUserSessionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListUserSessionsResponse]
+        def sessions: () -> ::Array[Types::SessionDescriptionType]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CognitoIdentityProvider/Client.html#list_user_sessions-instance_method
+      def list_user_sessions: (
+                                access_token: ::String,
+                                ?next_token: ::String
+                              ) -> _ListUserSessionsResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListUserSessionsResponseSuccess
 
       interface _ListUsersResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListUsersResponse]
@@ -1530,9 +1734,21 @@ module Aws
       def revoke_token: (
                           token: ::String,
                           client_id: ::String,
-                          ?client_secret: ::String
+                          ?client_secret: ::String,
+                          ?revoke_associated_sessions: ("NONE" | "LINKED")
                         ) -> _RevokeTokenResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RevokeTokenResponseSuccess
+
+      interface _RevokeUserSessionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RevokeUserSessionResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CognitoIdentityProvider/Client.html#revoke_user_session-instance_method
+      def revoke_user_session: (
+                                 access_token: ::String,
+                                 session_id: ::String,
+                                 ?revoke_associated_sessions: ("NONE" | "LINKED")
+                               ) -> _RevokeUserSessionResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RevokeUserSessionResponseSuccess
 
       interface _SetLogDeliveryConfigurationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::SetLogDeliveryConfigurationResponse]
@@ -1653,6 +1869,22 @@ module Aws
                                    ) -> _SetUserMFAPreferenceResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SetUserMFAPreferenceResponseSuccess
 
+      interface _SetUserPoolClientSessionConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SetUserPoolClientSessionConfigurationResponse]
+        def user_pool_id: () -> ::String
+        def client_id: () -> ::String
+        def sso_session: () -> Types::ClientSSOSessionConfigType
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CognitoIdentityProvider/Client.html#set_user_pool_client_session_configuration-instance_method
+      def set_user_pool_client_session_configuration: (
+                                                        user_pool_id: ::String,
+                                                        client_id: ::String,
+                                                        sso_session: {
+                                                          max_validity_minutes: ::Integer
+                                                        }
+                                                      ) -> _SetUserPoolClientSessionConfigurationResponseSuccess
+                                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SetUserPoolClientSessionConfigurationResponseSuccess
+
       interface _SetUserPoolMfaConfigResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::SetUserPoolMfaConfigResponse]
         def sms_mfa_configuration: () -> Types::SmsMfaConfigType
@@ -1683,6 +1915,22 @@ module Aws
                                       }
                                     ) -> _SetUserPoolMfaConfigResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SetUserPoolMfaConfigResponseSuccess
+
+      interface _SetUserPoolSessionConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SetUserPoolSessionConfigurationResponse]
+        def user_pool_id: () -> ::String
+        def user_session_tracking: () -> ("ENABLED" | "DISABLED")
+        def token_session: () -> Types::UserPoolTokenSessionConfigType
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CognitoIdentityProvider/Client.html#set_user_pool_session_configuration-instance_method
+      def set_user_pool_session_configuration: (
+                                                 user_pool_id: ::String,
+                                                 user_session_tracking: ("ENABLED" | "DISABLED"),
+                                                 token_session: {
+                                                   max_per_user: ::Integer
+                                                 }
+                                               ) -> _SetUserPoolSessionConfigurationResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SetUserPoolSessionConfigurationResponseSuccess
 
       interface _SetUserSettingsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::SetUserSettingsResponse]
@@ -1734,6 +1982,17 @@ module Aws
                      ?client_metadata: Hash[::String, ::String]
                    ) -> _SignUpResponseSuccess
                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SignUpResponseSuccess
+
+      interface _StartPointInTimeRecoveryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartPointInTimeRecoveryResponse]
+        def restoration: () -> Types::RestorationType
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CognitoIdentityProvider/Client.html#start_point_in_time_recovery-instance_method
+      def start_point_in_time_recovery: (
+                                          user_pool_id: ::String,
+                                          restore_id: ::String
+                                        ) -> _StartPointInTimeRecoveryResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartPointInTimeRecoveryResponseSuccess
 
       interface _StartUserImportJobResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::StartUserImportJobResponse]
@@ -1799,6 +2058,33 @@ module Aws
                                         feedback_value: ("Valid" | "Invalid")
                                       ) -> _UpdateAuthEventFeedbackResponseSuccess
                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAuthEventFeedbackResponseSuccess
+
+      interface _UpdateCIMDPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateCIMDPolicyResponse]
+        def cimd_policy: () -> Types::CIMDPolicyType
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CognitoIdentityProvider/Client.html#update_cimd_policy-instance_method
+      def update_cimd_policy: (
+                                user_pool_id: ::String,
+                                cimd_policy_id: ::String,
+                                client_id: ::String,
+                                ?policy_name: ::String,
+                                ?cache_duration: ::Integer,
+                                url_patterns: Array[::String]
+                              ) -> _UpdateCIMDPolicyResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateCIMDPolicyResponseSuccess
+
+      interface _UpdateClientMetadataURLStateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateClientMetadataURLStateResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CognitoIdentityProvider/Client.html#update_client_metadata_url_state-instance_method
+      def update_client_metadata_url_state: (
+                                              user_pool_id: ::String,
+                                              cimd_policy_id: ::String,
+                                              url: ::String,
+                                              action: ("REFRESH" | "INVALIDATE")
+                                            ) -> _UpdateClientMetadataURLStateResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateClientMetadataURLStateResponseSuccess
 
       interface _UpdateDeviceStatusResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateDeviceStatusResponse]
@@ -1966,6 +2252,13 @@ module Aws
                                   custom_auth_mode: ("AUDIT" | "ENFORCED")?
                                 }?
                               },
+                              ?dcr_configuration: {
+                                enable_status: ("Enabled" | "Disabled")?,
+                                open_dcr_enabled: bool?,
+                                authenticated_grant_types: Array[("code" | "implicit" | "client_credentials")]?,
+                                open_dcr_grant_types: Array[("code" | "implicit" | "client_credentials")]?,
+                                allowed_scopes: Array[::String]?
+                              },
                               ?account_recovery_setting: {
                                 recovery_mechanisms: Array[
                                   {
@@ -2008,7 +2301,7 @@ module Aws
                                      },
                                      ?read_attributes: Array[::String],
                                      ?write_attributes: Array[::String],
-                                     ?explicit_auth_flows: Array[("ADMIN_NO_SRP_AUTH" | "CUSTOM_AUTH_FLOW_ONLY" | "USER_PASSWORD_AUTH" | "ALLOW_ADMIN_USER_PASSWORD_AUTH" | "ALLOW_CUSTOM_AUTH" | "ALLOW_USER_PASSWORD_AUTH" | "ALLOW_USER_SRP_AUTH" | "ALLOW_REFRESH_TOKEN_AUTH" | "ALLOW_USER_AUTH")],
+                                     ?explicit_auth_flows: Array[("ADMIN_NO_SRP_AUTH" | "CUSTOM_AUTH_FLOW_ONLY" | "USER_PASSWORD_AUTH" | "ALLOW_ADMIN_USER_PASSWORD_AUTH" | "ALLOW_CUSTOM_AUTH" | "ALLOW_USER_PASSWORD_AUTH" | "ALLOW_USER_SRP_AUTH" | "ALLOW_REFRESH_TOKEN_AUTH" | "ALLOW_USER_AUTH" | "ALLOW_TOKEN_EXCHANGE_DELEGATION" | "ALLOW_TOKEN_EXCHANGE_IMPERSONATION")],
                                      ?supported_identity_providers: Array[::String],
                                      ?callback_urls: Array[::String],
                                      ?logout_urls: Array[::String],
@@ -2030,7 +2323,8 @@ module Aws
                                      ?refresh_token_rotation: {
                                        feature: ("ENABLED" | "DISABLED"),
                                        retry_grace_period_seconds: ::Integer?
-                                     }
+                                     },
+                                     ?publish_secrets_in_aws_secrets_manager: bool
                                    ) -> _UpdateUserPoolClientResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateUserPoolClientResponseSuccess
 

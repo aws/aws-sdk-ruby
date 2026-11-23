@@ -1,6 +1,41 @@
 Unreleased Changes
 ------------------
 
+1.145.0 (2026-11-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.144.0 (2026-11-16)
+------------------
+
+* Feature - AWS KMS now supports sharing KMS keys across AWS accounts using AWS Resource Access Manager (AWS RAM). This release adds the optional ResourceOwners parameter to ListKeys, which lists keys owned by the caller's account (SELF), keys shared with the account through AWS RAM, or both.
+
+1.143.0 (2026-11-11)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.142.0 (2026-11-10)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.141.0 (2026-11-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.140.0 (2026-11-06)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.139.0 (2026-11-04)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.138.0 (2026-10-29)
 ------------------
 

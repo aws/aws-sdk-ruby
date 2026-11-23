@@ -264,7 +264,8 @@ module Aws::QuickSight
     #     An integer representing the maximum number attempts that will be made for
     #     a single request, including the initial attempt.  For example,
     #     setting this value to 5 will result in a request being retried up to
-    #     4 times. Used in `standard` and `adaptive` retry modes.
+    #     4 times. Used in `standard` and `adaptive` retry modes. Defaults to 3,
+    #     except for DynamoDB and DynamoDB Streams, which default to 4.
     #
     #   @option options [String] :profile ("default")
     #     Used when loading credentials from the shared credentials file at `HOME/.aws/credentials`.
@@ -327,15 +328,15 @@ module Aws::QuickSight
     #     used by the default backoff function. This option is only used in the
     #     `legacy` retry mode.
     #
-    #   @option options [String] :retry_mode ("legacy")
+    #   @option options [String] :retry_mode ("standard")
     #     Specifies which retry algorithm to use. Values are:
     #
-    #     * `legacy` - The pre-existing retry behavior. This is the default
-    #       value if no retry mode is provided.
+    #     * `legacy` - The pre-existing retry behavior.
     #
     #     * `standard` - A standardized set of retry rules across the AWS SDKs.
     #       This includes support for retry quotas, which limit the number of
-    #       unsuccessful retries a client can make.
+    #       unsuccessful retries a client can make. This is the default value
+    #       if no retry mode is provided.
     #
     #     * `adaptive` - A retry mode that includes all the functionality of
     #       `standard` mode along with automatic client side throttling.
@@ -1337,6 +1338,59 @@ module Aws::QuickSight
       req.send_request(options)
     end
 
+    # Removes a governance policy from multiple Amazon Quick Sight
+    # principals in a single request. A principal that doesn't have the
+    # policy is reported as a success.
+    #
+    # Each entry succeeds or fails independently. Check the `Errors` list in
+    # the response for entries that failed.
+    #
+    # @option params [required, String] :account_id
+    #   The ID of the Amazon Web Services account that contains the policy and
+    #   the principals.
+    #
+    # @option params [required, String] :policy_arn
+    #   The ARN of the policy to remove. For each principal, the operation
+    #   removes the assignment only if the principal currently has this
+    #   policy.
+    #
+    # @option params [required, Array<String>] :principal_arns
+    #   A list of 1–50 principal ARNs to remove the policy from. Each ARN must
+    #   be unique within the request.
+    #
+    # @return [Types::BatchDeletePolicyAssignmentByPolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchDeletePolicyAssignmentByPolicyResponse#policy_arn #policy_arn} => String
+    #   * {Types::BatchDeletePolicyAssignmentByPolicyResponse#success #success} => Array&lt;Types::BatchDeletePolicyAssignmentSuccess&gt;
+    #   * {Types::BatchDeletePolicyAssignmentByPolicyResponse#errors #errors} => Array&lt;Types::BatchDeletePolicyAssignmentError&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_delete_policy_assignment_by_policy({
+    #     account_id: "AwsAccountId", # required
+    #     policy_arn: "PolicyArn", # required
+    #     principal_arns: ["PrincipalArn"], # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.policy_arn #=> String
+    #   resp.success #=> Array
+    #   resp.success[0].principal_arn #=> String
+    #   resp.errors #=> Array
+    #   resp.errors[0].principal_arn #=> String
+    #   resp.errors[0].error_code #=> String
+    #   resp.errors[0].error_message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/BatchDeletePolicyAssignmentByPolicy AWS API Documentation
+    #
+    # @overload batch_delete_policy_assignment_by_policy(params = {})
+    # @param [Hash] params ({})
+    def batch_delete_policy_assignment_by_policy(params = {}, options = {})
+      req = build_request(:batch_delete_policy_assignment_by_policy, params)
+      req.send_request(options)
+    end
+
     # Deletes reviewed answers for Q Topic.
     #
     # @option params [required, String] :aws_account_id
@@ -1450,6 +1504,65 @@ module Aws::QuickSight
       req.send_request(options)
     end
 
+    # Assigns a governance policy to multiple Amazon Quick Sight principals
+    # in a single request. If a principal already has a policy of the same
+    # type, this operation replaces it.
+    #
+    # Each entry succeeds or fails independently. Check the `Errors` list in
+    # the response for entries that failed.
+    #
+    # @option params [required, String] :account_id
+    #   The ID of the Amazon Web Services account that contains the policy and
+    #   the principals.
+    #
+    # @option params [required, String] :policy_arn
+    #   The ARN of the policy to assign.
+    #
+    # @option params [required, Array<Types::PutAssignmentEntry>] :assignments
+    #   A list of 1–50 principals to assign the policy to. Each principal ARN
+    #   must be unique within the request.
+    #
+    # @return [Types::BatchPutPolicyAssignmentByPolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchPutPolicyAssignmentByPolicyResponse#policy_arn #policy_arn} => String
+    #   * {Types::BatchPutPolicyAssignmentByPolicyResponse#success #success} => Array&lt;Types::BatchPutPolicyAssignmentSuccess&gt;
+    #   * {Types::BatchPutPolicyAssignmentByPolicyResponse#errors #errors} => Array&lt;Types::BatchPutPolicyAssignmentError&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_put_policy_assignment_by_policy({
+    #     account_id: "AwsAccountId", # required
+    #     policy_arn: "PolicyArn", # required
+    #     assignments: [ # required
+    #       {
+    #         principal_arn: "PrincipalArn", # required
+    #         existing_policy_arn: "PolicyArn",
+    #         revision: 1,
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.policy_arn #=> String
+    #   resp.success #=> Array
+    #   resp.success[0].principal_arn #=> String
+    #   resp.success[0].replaced_policy_arn #=> String
+    #   resp.success[0].revision #=> Integer
+    #   resp.errors #=> Array
+    #   resp.errors[0].principal_arn #=> String
+    #   resp.errors[0].error_code #=> String
+    #   resp.errors[0].error_message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/BatchPutPolicyAssignmentByPolicy AWS API Documentation
+    #
+    # @overload batch_put_policy_assignment_by_policy(params = {})
+    # @param [Hash] params ({})
+    def batch_put_policy_assignment_by_policy(params = {}, options = {})
+      req = build_request(:batch_put_policy_assignment_by_policy, params)
+      req.send_request(options)
+    end
+
     # Cancels an ongoing ingestion of data into SPICE.
     #
     # @option params [required, String] :aws_account_id
@@ -1489,6 +1602,202 @@ module Aws::QuickSight
     # @param [Hash] params ({})
     def cancel_ingestion(params = {}, options = {})
       req = build_request(:cancel_ingestion, params)
+      req.send_request(options)
+    end
+
+    # Creates an access control application in an Amazon Quick Sight
+    # account. You use an access control application to define how an
+    # external client signs in to Quick Sight with OAuth 2.0.
+    #
+    # To connect a client to Quick Sight through an inbound connector,
+    # associate the access control application with the connector by using
+    # the `UpdateInboundConnectorApplicationAssociations` operation.
+    #
+    # @option params [required, String] :aws_account_id
+    #   The ID of the Amazon Web Services account that contains the Quick
+    #   Sight account.
+    #
+    # @option params [required, String] :application_id
+    #   The ID for the access control application. This ID is unique per
+    #   Amazon Web Services Region for each Amazon Web Services account.
+    #
+    #   Quick Sight reserves IDs that start with `quick-aca-` for the access
+    #   control application of the Quick Sight desktop application. To create
+    #   one, the ID must be `quick-aca-` followed by your Amazon Web Services
+    #   account ID and the namespace, separated by a hyphen. For example,
+    #   `quick-aca-111122223333-default`. In addition,
+    #   `QuickAuthenticationType` must be `QUICK_MANAGED_PUBLIC_AUTH_CODE`
+    #   with `http://localhost:18080` as the only redirect URI, and
+    #   `IdpAuthorizingType` must be `IDC_AUTH_CODE` or
+    #   `QUICK_MANAGED_AUTH_CODE`.
+    #
+    # @option params [required, String] :name
+    #   The name of the access control application.
+    #
+    # @option params [String] :description
+    #   The description of the access control application.
+    #
+    # @option params [required, String] :namespace
+    #   The Quick Sight namespace for the access control application.
+    #
+    # @option params [required, String] :authentication_type
+    #   The authentication protocol that the access control application uses.
+    #
+    # @option params [required, Types::IdpAuthorizingConfigInput] :idp_authorizing_configuration
+    #   The identity provider configuration of the access control application.
+    #
+    # @option params [required, Types::QuickAuthenticationConfigInput] :quick_authentication_configuration
+    #   The Quick Sight authentication configuration of the access control
+    #   application. You provide redirect URIs, and Quick Sight generates the
+    #   client ID.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   The tags to assign to the access control application.
+    #
+    # @return [Types::CreateAccessControlApplicationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateAccessControlApplicationResponse#status #status} => Integer
+    #   * {Types::CreateAccessControlApplicationResponse#request_id #request_id} => String
+    #   * {Types::CreateAccessControlApplicationResponse#application_id #application_id} => String
+    #   * {Types::CreateAccessControlApplicationResponse#arn #arn} => String
+    #   * {Types::CreateAccessControlApplicationResponse#access_control_application_status #access_control_application_status} => String
+    #   * {Types::CreateAccessControlApplicationResponse#created_time #created_time} => Time
+    #   * {Types::CreateAccessControlApplicationResponse#tenant_url #tenant_url} => String
+    #   * {Types::CreateAccessControlApplicationResponse#idc_application_arn #idc_application_arn} => String
+    #   * {Types::CreateAccessControlApplicationResponse#quick_authentication_configuration #quick_authentication_configuration} => Types::QuickAuthenticationConfigCreateOutput
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_access_control_application({
+    #     aws_account_id: "AwsAccountId", # required
+    #     application_id: "ShortRestrictiveResourceId", # required
+    #     name: "ResourceName", # required
+    #     description: "AccessControlApplicationDescription",
+    #     namespace: "Namespace", # required
+    #     authentication_type: "OIDC", # required, accepts OIDC
+    #     idp_authorizing_configuration: { # required
+    #       idp_authorizing_type: "EXTERNAL_IDP_PUBLIC_AUTH_CODE", # required, accepts EXTERNAL_IDP_PUBLIC_AUTH_CODE, EXTERNAL_IDP_CONFIDENTIAL_AUTH_CODE, QUICK_MANAGED_AUTH_CODE, IDC_AUTH_CODE
+    #       idp_authorizing_configuration_detail_input: {
+    #         external_idp_public_auth_code: {
+    #           client_id: "OAuthApplicationClientId", # required
+    #           issuer_url: "Uri", # required
+    #         },
+    #         external_idp_confidential_auth_code: {
+    #           client_id: "OAuthApplicationClientId", # required
+    #           issuer_url: "Uri", # required
+    #           client_secret: { # required
+    #             regional_secret_manager_arns: { # required
+    #               "AwsRegion" => "AccessControlApplicationSecretManagerArn",
+    #             },
+    #           },
+    #         },
+    #       },
+    #       idc_trusted_token_issuer_configuration: {
+    #         idc_trusted_token_issuer_arn: "IdcTrustedTokenIssuerArn", # required
+    #       },
+    #     },
+    #     quick_authentication_configuration: { # required
+    #       quick_authentication_type: "QUICK_MANAGED_PUBLIC_AUTH_CODE", # required, accepts QUICK_MANAGED_PUBLIC_AUTH_CODE
+    #       quick_authentication_configuration_detail_input: {
+    #         quick_managed_public_auth_code: {
+    #           redirect_uris: ["Uri"], # required
+    #         },
+    #       },
+    #     },
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.status #=> Integer
+    #   resp.request_id #=> String
+    #   resp.application_id #=> String
+    #   resp.arn #=> String
+    #   resp.access_control_application_status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.created_time #=> Time
+    #   resp.tenant_url #=> String
+    #   resp.idc_application_arn #=> String
+    #   resp.quick_authentication_configuration.quick_authentication_type #=> String, one of "QUICK_MANAGED_PUBLIC_AUTH_CODE"
+    #   resp.quick_authentication_configuration.quick_authentication_configuration_detail_create_output.quick_managed_public_auth_code.redirect_uris #=> Array
+    #   resp.quick_authentication_configuration.quick_authentication_configuration_detail_create_output.quick_managed_public_auth_code.redirect_uris[0] #=> String
+    #   resp.quick_authentication_configuration.quick_authentication_configuration_detail_create_output.quick_managed_public_auth_code.client_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/CreateAccessControlApplication AWS API Documentation
+    #
+    # @overload create_access_control_application(params = {})
+    # @param [Hash] params ({})
+    def create_access_control_application(params = {}, options = {})
+      req = build_request(:create_access_control_application, params)
+      req.send_request(options)
+    end
+
+    # Creates a client secret for an access control application. An access
+    # control application can have up to two client secrets, so that you can
+    # rotate a secret without downtime.
+    #
+    # Provide the Amazon Web Services Secrets Manager (Secrets Manager)
+    # secret ARN for each Region where the client secret, issued by your
+    # identity provider (IdP), is stored.
+    #
+    # @option params [required, String] :aws_account_id
+    #   The ID of the Amazon Web Services account that contains the Quick
+    #   Sight account.
+    #
+    # @option params [required, String] :application_id
+    #   The ID of the access control application.
+    #
+    # @option params [String] :description
+    #   A description of the client secret, for example `rotation-june-2026`.
+    #   If you don't provide a description, the client secret has no
+    #   description.
+    #
+    # @option params [required, Types::ClientSecretConfiguration] :client_secret_configuration
+    #   The source of the client secret, which is your IdP, and the Amazon Web
+    #   Services Secrets Manager ARNs of the secret.
+    #
+    # @return [Types::CreateAccessControlApplicationSecretResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateAccessControlApplicationSecretResponse#status #status} => Integer
+    #   * {Types::CreateAccessControlApplicationSecretResponse#request_id #request_id} => String
+    #   * {Types::CreateAccessControlApplicationSecretResponse#client_secret_id #client_secret_id} => String
+    #   * {Types::CreateAccessControlApplicationSecretResponse#created_at #created_at} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_access_control_application_secret({
+    #     aws_account_id: "AwsAccountId", # required
+    #     application_id: "ShortRestrictiveResourceId", # required
+    #     description: "AccessControlApplicationDescription",
+    #     client_secret_configuration: { # required
+    #       client_secret_source_type: "IDP_PROVIDED", # required, accepts IDP_PROVIDED
+    #       client_secret_configuration_detail: {
+    #         idp: {
+    #           regional_secret_manager_arns: { # required
+    #             "AwsRegion" => "AccessControlApplicationSecretManagerArn",
+    #           },
+    #         },
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.status #=> Integer
+    #   resp.request_id #=> String
+    #   resp.client_secret_id #=> String
+    #   resp.created_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/CreateAccessControlApplicationSecret AWS API Documentation
+    #
+    # @overload create_access_control_application_secret(params = {})
+    # @param [Hash] params ({})
+    def create_access_control_application_secret(params = {}, options = {})
+      req = build_request(:create_access_control_application_secret, params)
       req.send_request(options)
     end
 
@@ -2204,8 +2513,8 @@ module Aws::QuickSight
     #     policy_id: "PolicyId", # required
     #     name: "PolicyName", # required
     #     description: "PolicyDescription",
-    #     actions: ["SHARE"], # required, accepts SHARE
-    #     asset_types: ["AGENT"], # required, accepts AGENT, SPACE, KNOWLEDGE_BASE
+    #     actions: ["SHARE"], # required, accepts SHARE, PUBLISH
+    #     asset_types: ["AGENT"], # required, accepts AGENT, SPACE, KNOWLEDGE_BASE, FLOW
     #     applicable_to: { # required
     #       type: "GROUP", # required, accepts GROUP
     #       group_arns: ["Arn"],
@@ -2220,9 +2529,9 @@ module Aws::QuickSight
     #   resp.policy.name #=> String
     #   resp.policy.description #=> String
     #   resp.policy.actions #=> Array
-    #   resp.policy.actions[0] #=> String, one of "SHARE"
+    #   resp.policy.actions[0] #=> String, one of "SHARE", "PUBLISH"
     #   resp.policy.asset_types #=> Array
-    #   resp.policy.asset_types[0] #=> String, one of "AGENT", "SPACE", "KNOWLEDGE_BASE"
+    #   resp.policy.asset_types[0] #=> String, one of "AGENT", "SPACE", "KNOWLEDGE_BASE", "FLOW"
     #   resp.policy.applicable_to.type #=> String, one of "GROUP"
     #   resp.policy.applicable_to.group_arns #=> Array
     #   resp.policy.applicable_to.group_arns[0] #=> String
@@ -2677,6 +2986,9 @@ module Aws::QuickSight
     #       create_and_update_mcp_action: "DENY", # accepts DENY, ALLOW
     #       share_mcp_action: "DENY", # accepts DENY, ALLOW
     #       use_mcp_action: "DENY", # accepts DENY, ALLOW
+    #       local_mcp_action: "DENY", # accepts DENY, ALLOW
+    #       create_and_update_local_mcp_action: "DENY", # accepts DENY, ALLOW
+    #       use_local_mcp_action: "DENY", # accepts DENY, ALLOW
     #       open_api_action: "DENY", # accepts DENY, ALLOW
     #       create_and_update_open_api_action: "DENY", # accepts DENY, ALLOW
     #       share_open_api_action: "DENY", # accepts DENY, ALLOW
@@ -3320,6 +3632,12 @@ module Aws::QuickSight
     #   defines how the prepared data is structured for an analysis, including
     #   table mappings and row-level security configurations. Required when
     #   using the new data preparation experience.
+    #
+    # @option params [Array<Types::UnmaterializedCalculatedColumn>] :unmaterialized_calculated_columns
+    #   A list of unmaterialized calculated columns for the dataset. These
+    #   columns are computed at analysis time and are not stored in the
+    #   prepared data. You can only use this with the new data preparation
+    #   experience.
     #
     # @return [Types::CreateDataSetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4080,6 +4398,15 @@ module Aws::QuickSight
     #         },
     #       ],
     #     },
+    #     unmaterialized_calculated_columns: [
+    #       {
+    #         column_id: "ColumnId", # required
+    #         column_name: "ColumnName", # required
+    #         expression: "DataSetCalculatedFieldExpression", # required
+    #         type: "STRING", # accepts STRING, INTEGER, DECIMAL, DATETIME
+    #         sub_type: "FLOAT", # accepts FLOAT, FIXED
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -4223,6 +4550,7 @@ module Aws::QuickSight
     #         host: "Host",
     #         port: 1,
     #         database: "Database", # required
+    #         federated_catalog: "FederatedCatalog",
     #         cluster_id: "ClusterId",
     #         iam_parameters: {
     #           role_arn: "RoleArn", # required
@@ -4445,6 +4773,7 @@ module Aws::QuickSight
     #               host: "Host",
     #               port: 1,
     #               database: "Database", # required
+    #               federated_catalog: "FederatedCatalog",
     #               cluster_id: "ClusterId",
     #               iam_parameters: {
     #                 role_arn: "RoleArn", # required
@@ -5155,6 +5484,90 @@ module Aws::QuickSight
       req.send_request(options)
     end
 
+    # Creates an inbound connector in a Quick Sight account. An inbound
+    # connector is the endpoint that an external client, such as the Quick
+    # Sight desktop application, uses to reach Quick Sight in your account.
+    #
+    # Your users authenticate through the access control applications that
+    # are associated with the connector. To manage these associations, use
+    # `UpdateInboundConnectorApplicationAssociations`.
+    #
+    # An account can have one `QUICK_DESKTOP` inbound connector in each
+    # Region.
+    #
+    # @option params [required, String] :aws_account_id
+    #   The ID of the Amazon Web Services account that contains the Quick
+    #   Sight account.
+    #
+    # @option params [required, String] :inbound_connector_id
+    #   The ID for the inbound connector. This ID is unique per Amazon Web
+    #   Services Region for each Amazon Web Services account.
+    #
+    #   For a `QUICK_DESKTOP` inbound connector, the ID must be `ibc-desktop-`
+    #   followed by your Amazon Web Services account ID and the Region that
+    #   you call, separated by a hyphen. For example,
+    #   `ibc-desktop-111122223333-us-east-1`. Quick Sight reserves IDs that
+    #   start with `ibc-desktop-` for `QUICK_DESKTOP` inbound connectors.
+    #
+    # @option params [required, String] :name
+    #   The name of the inbound connector.
+    #
+    # @option params [String] :description
+    #   The description of the inbound connector.
+    #
+    # @option params [required, Types::InboundConnectorConfig] :inbound_connector_configuration
+    #   The configuration of the inbound connector.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   The tags to assign to the inbound connector.
+    #
+    # @return [Types::CreateInboundConnectorResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateInboundConnectorResponse#status #status} => Integer
+    #   * {Types::CreateInboundConnectorResponse#request_id #request_id} => String
+    #   * {Types::CreateInboundConnectorResponse#inbound_connector_id #inbound_connector_id} => String
+    #   * {Types::CreateInboundConnectorResponse#arn #arn} => String
+    #   * {Types::CreateInboundConnectorResponse#tenant_url #tenant_url} => String
+    #   * {Types::CreateInboundConnectorResponse#inbound_connector_status #inbound_connector_status} => String
+    #   * {Types::CreateInboundConnectorResponse#created_time #created_time} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_inbound_connector({
+    #     aws_account_id: "AwsAccountId", # required
+    #     inbound_connector_id: "ShortRestrictiveResourceId", # required
+    #     name: "ResourceName", # required
+    #     description: "InboundConnectorDescription",
+    #     inbound_connector_configuration: { # required
+    #       inbound_connector_type: "QUICK_DESKTOP", # required, accepts QUICK_DESKTOP
+    #     },
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.status #=> Integer
+    #   resp.request_id #=> String
+    #   resp.inbound_connector_id #=> String
+    #   resp.arn #=> String
+    #   resp.tenant_url #=> String
+    #   resp.inbound_connector_status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.created_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/CreateInboundConnector AWS API Documentation
+    #
+    # @overload create_inbound_connector(params = {})
+    # @param [Hash] params ({})
+    def create_inbound_connector(params = {}, options = {})
+      req = build_request(:create_inbound_connector, params)
+      req.send_request(options)
+    end
+
     # Creates and starts a new SPICE ingestion for a dataset. You can
     # manually refresh datasets in an Enterprise edition account 32 times in
     # a 24-hour period. You can manually refresh datasets in a Standard
@@ -5356,6 +5769,81 @@ module Aws::QuickSight
     # @param [Hash] params ({})
     def create_knowledge_base(params = {}, options = {})
       req = build_request(:create_knowledge_base, params)
+      req.send_request(options)
+    end
+
+    # Creates a schedule that periodically refreshes an Amazon Quick Sight
+    # knowledge base at the frequency that you specify.
+    #
+    # A knowledge base can have only one refresh schedule. If the knowledge
+    # base already has a refresh schedule, the request fails with a
+    # `LimitExceededException`.
+    #
+    # @option params [required, String] :aws_account_id
+    #   The ID of the Amazon Web Services account that contains the knowledge
+    #   base.
+    #
+    # @option params [required, String] :knowledge_base_id
+    #   The unique identifier for the knowledge base.
+    #
+    # @option params [required, String] :schedule_id
+    #   A unique identifier for the knowledge base refresh schedule.
+    #
+    # @option params [required, Types::KnowledgeBaseRefreshFrequency] :schedule_frequency
+    #   The frequency configuration for the refresh schedule. The frequency
+    #   configuration specifies how often the schedule runs and, for weekly or
+    #   monthly schedules, the day on which it runs.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :start_time
+    #   The date and time, in ISO 8601 format, after which the schedule can
+    #   start refreshing the knowledge base. The first refresh runs at the
+    #   next scheduled time after this date and time. If you don't specify a
+    #   value, the schedule becomes active immediately, and the first refresh
+    #   runs at the next scheduled time.
+    #
+    # @option params [String] :state
+    #   The state that you want the refresh schedule to have when you create
+    #   it. If you don't specify a state, the schedule is created in the
+    #   `ENABLED` state. A schedule that isn't `ENABLED` doesn't run
+    #   refreshes.
+    #
+    # @return [Types::CreateKnowledgeBaseRefreshScheduleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateKnowledgeBaseRefreshScheduleResponse#schedule_id #schedule_id} => String
+    #   * {Types::CreateKnowledgeBaseRefreshScheduleResponse#knowledge_base_arn #knowledge_base_arn} => String
+    #   * {Types::CreateKnowledgeBaseRefreshScheduleResponse#request_id #request_id} => String
+    #   * {Types::CreateKnowledgeBaseRefreshScheduleResponse#status #status} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_knowledge_base_refresh_schedule({
+    #     aws_account_id: "KbAwsAccountId", # required
+    #     knowledge_base_id: "KnowledgeBaseId", # required
+    #     schedule_id: "ScheduleId", # required
+    #     schedule_frequency: { # required
+    #       interval: "DAILY", # required, accepts DAILY, WEEKLY, MONTHLY, HOURLY
+    #       refresh_on_day: {
+    #         day_of_week: "SUNDAY", # accepts SUNDAY, MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY
+    #         day_of_month: "KnowledgeBaseScheduleRefreshOnEntityDayOfMonthString",
+    #       },
+    #     },
+    #     start_time: Time.now,
+    #     state: "ENABLED", # accepts ENABLED, DISABLED
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.schedule_id #=> String
+    #   resp.knowledge_base_arn #=> String
+    #   resp.request_id #=> String
+    #   resp.status #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/CreateKnowledgeBaseRefreshSchedule AWS API Documentation
+    #
+    # @overload create_knowledge_base_refresh_schedule(params = {})
+    # @param [Hash] params ({})
+    def create_knowledge_base_refresh_schedule(params = {}, options = {})
+      req = build_request(:create_knowledge_base_refresh_schedule, params)
       req.send_request(options)
     end
 
@@ -6733,6 +7221,93 @@ module Aws::QuickSight
       req.send_request(options)
     end
 
+    # Deletes an access control application. You can't delete an access
+    # control application that is associated with an inbound connector whose
+    # status is `ENABLED`.
+    #
+    # If another update to the same application is in progress, Quick Sight
+    # returns a `ConflictException`. Retry the request.
+    #
+    # @option params [required, String] :aws_account_id
+    #   The ID of the Amazon Web Services account that contains the Quick
+    #   Sight account.
+    #
+    # @option params [String] :application_id
+    #   The ID of the access control application to delete.
+    #
+    # @option params [String] :idc_application_arn
+    #   The ARN of an IAM Identity Center application that Quick Sight created
+    #   for an access control application that has already been deleted.
+    #   Provide this ARN to clean up the IAM Identity Center application.
+    #
+    # @return [Types::DeleteAccessControlApplicationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteAccessControlApplicationResponse#status #status} => Integer
+    #   * {Types::DeleteAccessControlApplicationResponse#request_id #request_id} => String
+    #   * {Types::DeleteAccessControlApplicationResponse#application_id #application_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_access_control_application({
+    #     aws_account_id: "AwsAccountId", # required
+    #     application_id: "ShortRestrictiveResourceId",
+    #     idc_application_arn: "Arn",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.status #=> Integer
+    #   resp.request_id #=> String
+    #   resp.application_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DeleteAccessControlApplication AWS API Documentation
+    #
+    # @overload delete_access_control_application(params = {})
+    # @param [Hash] params ({})
+    def delete_access_control_application(params = {}, options = {})
+      req = build_request(:delete_access_control_application, params)
+      req.send_request(options)
+    end
+
+    # Deletes a client secret from an access control application.
+    #
+    # @option params [required, String] :aws_account_id
+    #   The ID of the Amazon Web Services account that contains the Quick
+    #   Sight account.
+    #
+    # @option params [required, String] :application_id
+    #   The ID of the access control application.
+    #
+    # @option params [required, String] :client_secret_id
+    #   The ID of the client secret.
+    #
+    # @return [Types::DeleteAccessControlApplicationSecretResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteAccessControlApplicationSecretResponse#status #status} => Integer
+    #   * {Types::DeleteAccessControlApplicationSecretResponse#request_id #request_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_access_control_application_secret({
+    #     aws_account_id: "AwsAccountId", # required
+    #     application_id: "ShortRestrictiveResourceId", # required
+    #     client_secret_id: "ShortRestrictiveResourceId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.status #=> Integer
+    #   resp.request_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DeleteAccessControlApplicationSecret AWS API Documentation
+    #
+    # @overload delete_access_control_application_secret(params = {})
+    # @param [Hash] params ({})
+    def delete_access_control_application_secret(params = {}, options = {})
+      req = build_request(:delete_access_control_application_secret, params)
+      req.send_request(options)
+    end
+
     # Unapplies a custom permissions profile from an account.
     #
     # @option params [required, String] :aws_account_id
@@ -7714,6 +8289,45 @@ module Aws::QuickSight
       req.send_request(options)
     end
 
+    # Deletes an inbound connector. You must disable the connector before
+    # you can delete it. When you delete a connector, Quick Sight doesn't
+    # delete the access control applications that are associated with it.
+    #
+    # @option params [required, String] :aws_account_id
+    #   The ID of the Amazon Web Services account that contains the Quick
+    #   Sight account.
+    #
+    # @option params [required, String] :inbound_connector_id
+    #   The ID of the inbound connector.
+    #
+    # @return [Types::DeleteInboundConnectorResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteInboundConnectorResponse#status #status} => Integer
+    #   * {Types::DeleteInboundConnectorResponse#request_id #request_id} => String
+    #   * {Types::DeleteInboundConnectorResponse#inbound_connector_id #inbound_connector_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_inbound_connector({
+    #     aws_account_id: "AwsAccountId", # required
+    #     inbound_connector_id: "ShortRestrictiveResourceId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.status #=> Integer
+    #   resp.request_id #=> String
+    #   resp.inbound_connector_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DeleteInboundConnector AWS API Documentation
+    #
+    # @overload delete_inbound_connector(params = {})
+    # @param [Hash] params ({})
+    def delete_inbound_connector(params = {}, options = {})
+      req = build_request(:delete_inbound_connector, params)
+      req.send_request(options)
+    end
+
     # Deletes a knowledge base.
     #
     # @option params [required, String] :aws_account_id
@@ -7750,6 +8364,51 @@ module Aws::QuickSight
     # @param [Hash] params ({})
     def delete_knowledge_base(params = {}, options = {})
       req = build_request(:delete_knowledge_base, params)
+      req.send_request(options)
+    end
+
+    # Deletes the refresh schedule for an Amazon Quick Sight knowledge base.
+    # Delete the schedule when you no longer want the knowledge base to
+    # refresh automatically.
+    #
+    # @option params [required, String] :aws_account_id
+    #   The ID of the Amazon Web Services account that contains the knowledge
+    #   base.
+    #
+    # @option params [required, String] :knowledge_base_id
+    #   The unique identifier for the knowledge base.
+    #
+    # @option params [required, String] :schedule_id
+    #   The unique identifier for the refresh schedule to delete.
+    #
+    # @return [Types::DeleteKnowledgeBaseRefreshScheduleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteKnowledgeBaseRefreshScheduleResponse#schedule_id #schedule_id} => String
+    #   * {Types::DeleteKnowledgeBaseRefreshScheduleResponse#knowledge_base_arn #knowledge_base_arn} => String
+    #   * {Types::DeleteKnowledgeBaseRefreshScheduleResponse#request_id #request_id} => String
+    #   * {Types::DeleteKnowledgeBaseRefreshScheduleResponse#status #status} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_knowledge_base_refresh_schedule({
+    #     aws_account_id: "KbAwsAccountId", # required
+    #     knowledge_base_id: "KnowledgeBaseId", # required
+    #     schedule_id: "ScheduleId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.schedule_id #=> String
+    #   resp.knowledge_base_arn #=> String
+    #   resp.request_id #=> String
+    #   resp.status #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DeleteKnowledgeBaseRefreshSchedule AWS API Documentation
+    #
+    # @overload delete_knowledge_base_refresh_schedule(params = {})
+    # @param [Hash] params ({})
+    def delete_knowledge_base_refresh_schedule(params = {}, options = {})
+      req = build_request(:delete_knowledge_base_refresh_schedule, params)
       req.send_request(options)
     end
 
@@ -7860,6 +8519,47 @@ module Aws::QuickSight
     # @param [Hash] params ({})
     def delete_o_auth_client_application(params = {}, options = {})
       req = build_request(:delete_o_auth_client_application, params)
+      req.send_request(options)
+    end
+
+    # Removes a governance policy from an Amazon Quick Sight principal. If
+    # the principal doesn't have the specified policy, the request succeeds
+    # and makes no change. If the principal has a different policy of the
+    # same type, the request fails with a `ConflictException`.
+    #
+    # @option params [required, String] :account_id
+    #   The ID of the Amazon Web Services account that contains the principal.
+    #
+    # @option params [required, String] :policy_arn
+    #   The ARN of the policy to remove. The operation removes the assignment
+    #   only if the principal currently has this policy.
+    #
+    # @option params [required, String] :principal_arn
+    #   The ARN of the user, group, or account to remove the policy from.
+    #
+    # @option params [Integer] :revision
+    #   The revision of the assignment from your most recent read. If the
+    #   assignment has changed since that revision, the request fails with a
+    #   `ConflictException`. If you don't specify a value, the operation
+    #   doesn't check the revision.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_policy_assignment({
+    #     account_id: "AwsAccountId", # required
+    #     policy_arn: "PolicyArn", # required
+    #     principal_arn: "PrincipalArn", # required
+    #     revision: 1,
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DeletePolicyAssignment AWS API Documentation
+    #
+    # @overload delete_policy_assignment(params = {})
+    # @param [Hash] params ({})
+    def delete_policy_assignment(params = {}, options = {})
+      req = build_request(:delete_policy_assignment, params)
       req.send_request(options)
     end
 
@@ -8503,6 +9203,71 @@ module Aws::QuickSight
     # @param [Hash] params ({})
     def delete_vpc_connection(params = {}, options = {})
       req = build_request(:delete_vpc_connection, params)
+      req.send_request(options)
+    end
+
+    # Describes an access control application. The response includes client
+    # secret metadata, but never client secret values.
+    #
+    # @option params [required, String] :aws_account_id
+    #   The ID of the Amazon Web Services account that contains the Quick
+    #   Sight account.
+    #
+    # @option params [required, String] :application_id
+    #   The ID of the access control application.
+    #
+    # @return [Types::DescribeAccessControlApplicationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeAccessControlApplicationResponse#status #status} => Integer
+    #   * {Types::DescribeAccessControlApplicationResponse#request_id #request_id} => String
+    #   * {Types::DescribeAccessControlApplicationResponse#access_control_application #access_control_application} => Types::AccessControlApplication
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_access_control_application({
+    #     aws_account_id: "AwsAccountId", # required
+    #     application_id: "ShortRestrictiveResourceId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.status #=> Integer
+    #   resp.request_id #=> String
+    #   resp.access_control_application.application_id #=> String
+    #   resp.access_control_application.arn #=> String
+    #   resp.access_control_application.name #=> String
+    #   resp.access_control_application.namespace #=> String
+    #   resp.access_control_application.authentication_type #=> String, one of "OIDC"
+    #   resp.access_control_application.status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.access_control_application.created_time #=> Time
+    #   resp.access_control_application.last_updated_time #=> Time
+    #   resp.access_control_application.tenant_url #=> String
+    #   resp.access_control_application.description #=> String
+    #   resp.access_control_application.idc_application_arn #=> String
+    #   resp.access_control_application.idp_authorizing_configuration.idp_authorizing_type #=> String, one of "EXTERNAL_IDP_PUBLIC_AUTH_CODE", "EXTERNAL_IDP_CONFIDENTIAL_AUTH_CODE", "QUICK_MANAGED_AUTH_CODE", "IDC_AUTH_CODE"
+    #   resp.access_control_application.idp_authorizing_configuration.idp_authorizing_configuration_detail.external_idp_public_auth_code.client_id #=> String
+    #   resp.access_control_application.idp_authorizing_configuration.idp_authorizing_configuration_detail.external_idp_public_auth_code.issuer_url #=> String
+    #   resp.access_control_application.idp_authorizing_configuration.idp_authorizing_configuration_detail.external_idp_confidential_auth_code.client_id #=> String
+    #   resp.access_control_application.idp_authorizing_configuration.idp_authorizing_configuration_detail.external_idp_confidential_auth_code.issuer_url #=> String
+    #   resp.access_control_application.idp_authorizing_configuration.idp_authorizing_configuration_detail.external_idp_confidential_auth_code.client_secrets #=> Array
+    #   resp.access_control_application.idp_authorizing_configuration.idp_authorizing_configuration_detail.external_idp_confidential_auth_code.client_secrets[0].client_secret_id #=> String
+    #   resp.access_control_application.idp_authorizing_configuration.idp_authorizing_configuration_detail.external_idp_confidential_auth_code.client_secrets[0].regional_secret_manager_arns #=> Hash
+    #   resp.access_control_application.idp_authorizing_configuration.idp_authorizing_configuration_detail.external_idp_confidential_auth_code.client_secrets[0].regional_secret_manager_arns["AwsRegion"] #=> String
+    #   resp.access_control_application.idp_authorizing_configuration.idp_authorizing_configuration_detail.external_idp_confidential_auth_code.client_secrets[0].created_at #=> Time
+    #   resp.access_control_application.idp_authorizing_configuration.idp_authorizing_configuration_detail.external_idp_confidential_auth_code.client_secrets[0].updated_at #=> Time
+    #   resp.access_control_application.idp_authorizing_configuration.idp_authorizing_configuration_detail.external_idp_confidential_auth_code.client_secrets[0].description #=> String
+    #   resp.access_control_application.idp_authorizing_configuration.idc_trusted_token_issuer_configuration.idc_trusted_token_issuer_arn #=> String
+    #   resp.access_control_application.quick_authentication_configuration.quick_authentication_type #=> String, one of "QUICK_MANAGED_PUBLIC_AUTH_CODE"
+    #   resp.access_control_application.quick_authentication_configuration.quick_authentication_configuration_detail.quick_managed_public_auth_code.redirect_uris #=> Array
+    #   resp.access_control_application.quick_authentication_configuration.quick_authentication_configuration_detail.quick_managed_public_auth_code.redirect_uris[0] #=> String
+    #   resp.access_control_application.quick_authentication_configuration.quick_authentication_configuration_detail.quick_managed_public_auth_code.client_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeAccessControlApplication AWS API Documentation
+    #
+    # @overload describe_access_control_application(params = {})
+    # @param [Hash] params ({})
+    def describe_access_control_application(params = {}, options = {})
+      req = build_request(:describe_access_control_application, params)
       req.send_request(options)
     end
 
@@ -9228,9 +9993,9 @@ module Aws::QuickSight
     #   resp.policy.name #=> String
     #   resp.policy.description #=> String
     #   resp.policy.actions #=> Array
-    #   resp.policy.actions[0] #=> String, one of "SHARE"
+    #   resp.policy.actions[0] #=> String, one of "SHARE", "PUBLISH"
     #   resp.policy.asset_types #=> Array
-    #   resp.policy.asset_types[0] #=> String, one of "AGENT", "SPACE", "KNOWLEDGE_BASE"
+    #   resp.policy.asset_types[0] #=> String, one of "AGENT", "SPACE", "KNOWLEDGE_BASE", "FLOW"
     #   resp.policy.applicable_to.type #=> String, one of "GROUP"
     #   resp.policy.applicable_to.group_arns #=> Array
     #   resp.policy.applicable_to.group_arns[0] #=> String
@@ -9477,6 +10242,7 @@ module Aws::QuickSight
     #   resp.override_parameters.data_sources[0].data_source_parameters.redshift_parameters.host #=> String
     #   resp.override_parameters.data_sources[0].data_source_parameters.redshift_parameters.port #=> Integer
     #   resp.override_parameters.data_sources[0].data_source_parameters.redshift_parameters.database #=> String
+    #   resp.override_parameters.data_sources[0].data_source_parameters.redshift_parameters.federated_catalog #=> String
     #   resp.override_parameters.data_sources[0].data_source_parameters.redshift_parameters.cluster_id #=> String
     #   resp.override_parameters.data_sources[0].data_source_parameters.redshift_parameters.iam_parameters.role_arn #=> String
     #   resp.override_parameters.data_sources[0].data_source_parameters.redshift_parameters.iam_parameters.database_user #=> String
@@ -10240,6 +11006,9 @@ module Aws::QuickSight
     #   resp.custom_permissions.capabilities.create_and_update_mcp_action #=> String, one of "DENY", "ALLOW"
     #   resp.custom_permissions.capabilities.share_mcp_action #=> String, one of "DENY", "ALLOW"
     #   resp.custom_permissions.capabilities.use_mcp_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.local_mcp_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.create_and_update_local_mcp_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions.capabilities.use_local_mcp_action #=> String, one of "DENY", "ALLOW"
     #   resp.custom_permissions.capabilities.open_api_action #=> String, one of "DENY", "ALLOW"
     #   resp.custom_permissions.capabilities.create_and_update_open_api_action #=> String, one of "DENY", "ALLOW"
     #   resp.custom_permissions.capabilities.share_open_api_action #=> String, one of "DENY", "ALLOW"
@@ -11514,6 +12283,12 @@ module Aws::QuickSight
     #   resp.data_set.semantic_model_configuration.semantic_metadata[0].custom_instructions #=> Array
     #   resp.data_set.semantic_model_configuration.semantic_metadata[0].custom_instructions[0].inline_custom_instruction.instruction_text #=> String
     #   resp.data_set.semantic_model_configuration.semantic_metadata[0].custom_instructions[0].inline_custom_instruction.uploaded_document_metadata.name #=> String
+    #   resp.data_set.unmaterialized_calculated_columns #=> Array
+    #   resp.data_set.unmaterialized_calculated_columns[0].column_id #=> String
+    #   resp.data_set.unmaterialized_calculated_columns[0].column_name #=> String
+    #   resp.data_set.unmaterialized_calculated_columns[0].expression #=> String
+    #   resp.data_set.unmaterialized_calculated_columns[0].type #=> String, one of "STRING", "INTEGER", "DECIMAL", "DATETIME"
+    #   resp.data_set.unmaterialized_calculated_columns[0].sub_type #=> String, one of "FLOAT", "FIXED"
     #   resp.request_id #=> String
     #   resp.status #=> Integer
     #
@@ -11677,6 +12452,7 @@ module Aws::QuickSight
     #   resp.data_source.data_source_parameters.redshift_parameters.host #=> String
     #   resp.data_source.data_source_parameters.redshift_parameters.port #=> Integer
     #   resp.data_source.data_source_parameters.redshift_parameters.database #=> String
+    #   resp.data_source.data_source_parameters.redshift_parameters.federated_catalog #=> String
     #   resp.data_source.data_source_parameters.redshift_parameters.cluster_id #=> String
     #   resp.data_source.data_source_parameters.redshift_parameters.iam_parameters.role_arn #=> String
     #   resp.data_source.data_source_parameters.redshift_parameters.iam_parameters.database_user #=> String
@@ -11801,6 +12577,7 @@ module Aws::QuickSight
     #   resp.data_source.alternate_data_source_parameters[0].redshift_parameters.host #=> String
     #   resp.data_source.alternate_data_source_parameters[0].redshift_parameters.port #=> Integer
     #   resp.data_source.alternate_data_source_parameters[0].redshift_parameters.database #=> String
+    #   resp.data_source.alternate_data_source_parameters[0].redshift_parameters.federated_catalog #=> String
     #   resp.data_source.alternate_data_source_parameters[0].redshift_parameters.cluster_id #=> String
     #   resp.data_source.alternate_data_source_parameters[0].redshift_parameters.iam_parameters.role_arn #=> String
     #   resp.data_source.alternate_data_source_parameters[0].redshift_parameters.iam_parameters.database_user #=> String
@@ -12405,6 +13182,51 @@ module Aws::QuickSight
       req.send_request(options)
     end
 
+    # Describes an inbound connector.
+    #
+    # @option params [required, String] :aws_account_id
+    #   The ID of the Amazon Web Services account that contains the Quick
+    #   Sight account.
+    #
+    # @option params [required, String] :inbound_connector_id
+    #   The ID of the inbound connector.
+    #
+    # @return [Types::DescribeInboundConnectorResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeInboundConnectorResponse#status #status} => Integer
+    #   * {Types::DescribeInboundConnectorResponse#request_id #request_id} => String
+    #   * {Types::DescribeInboundConnectorResponse#inbound_connector #inbound_connector} => Types::InboundConnector
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_inbound_connector({
+    #     aws_account_id: "AwsAccountId", # required
+    #     inbound_connector_id: "ShortRestrictiveResourceId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.status #=> Integer
+    #   resp.request_id #=> String
+    #   resp.inbound_connector.inbound_connector_id #=> String
+    #   resp.inbound_connector.arn #=> String
+    #   resp.inbound_connector.name #=> String
+    #   resp.inbound_connector.status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.inbound_connector.tenant_url #=> String
+    #   resp.inbound_connector.created_time #=> Time
+    #   resp.inbound_connector.last_updated_time #=> Time
+    #   resp.inbound_connector.inbound_connector_configuration.inbound_connector_type #=> String, one of "QUICK_DESKTOP"
+    #   resp.inbound_connector.description #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeInboundConnector AWS API Documentation
+    #
+    # @overload describe_inbound_connector(params = {})
+    # @param [Hash] params ({})
+    def describe_inbound_connector(params = {}, options = {})
+      req = build_request(:describe_inbound_connector, params)
+      req.send_request(options)
+    end
+
     # Describes a SPICE ingestion.
     #
     # @option params [required, String] :aws_account_id
@@ -12658,6 +13480,55 @@ module Aws::QuickSight
       req.send_request(options)
     end
 
+    # Describes the refresh schedule for an Amazon Quick Sight knowledge
+    # base, including the schedule's frequency, start time, and state.
+    #
+    # @option params [required, String] :aws_account_id
+    #   The ID of the Amazon Web Services account that contains the knowledge
+    #   base.
+    #
+    # @option params [required, String] :knowledge_base_id
+    #   The unique identifier for the knowledge base.
+    #
+    # @option params [required, String] :schedule_id
+    #   The unique identifier for the refresh schedule.
+    #
+    # @return [Types::DescribeKnowledgeBaseRefreshScheduleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeKnowledgeBaseRefreshScheduleResponse#schedule #schedule} => Types::KnowledgeBaseRefreshScheduleSummary
+    #   * {Types::DescribeKnowledgeBaseRefreshScheduleResponse#knowledge_base_arn #knowledge_base_arn} => String
+    #   * {Types::DescribeKnowledgeBaseRefreshScheduleResponse#request_id #request_id} => String
+    #   * {Types::DescribeKnowledgeBaseRefreshScheduleResponse#status #status} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_knowledge_base_refresh_schedule({
+    #     aws_account_id: "KbAwsAccountId", # required
+    #     knowledge_base_id: "KnowledgeBaseId", # required
+    #     schedule_id: "ScheduleId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.schedule.schedule_id #=> String
+    #   resp.schedule.schedule_frequency.interval #=> String, one of "DAILY", "WEEKLY", "MONTHLY", "HOURLY"
+    #   resp.schedule.schedule_frequency.refresh_on_day.day_of_week #=> String, one of "SUNDAY", "MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY"
+    #   resp.schedule.schedule_frequency.refresh_on_day.day_of_month #=> String
+    #   resp.schedule.start_time #=> Time
+    #   resp.schedule.state #=> String, one of "ENABLED", "DISABLED"
+    #   resp.knowledge_base_arn #=> String
+    #   resp.request_id #=> String
+    #   resp.status #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeKnowledgeBaseRefreshSchedule AWS API Documentation
+    #
+    # @overload describe_knowledge_base_refresh_schedule(params = {})
+    # @param [Hash] params ({})
+    def describe_knowledge_base_refresh_schedule(params = {}, options = {})
+      req = build_request(:describe_knowledge_base_refresh_schedule, params)
+      req.send_request(options)
+    end
+
     # Describes the properties of an existing limits profile.
     #
     # @option params [required, String] :profile_id
@@ -12904,6 +13775,45 @@ module Aws::QuickSight
     # @param [Hash] params ({})
     def describe_refresh_schedule(params = {}, options = {})
       req = build_request(:describe_refresh_schedule, params)
+      req.send_request(options)
+    end
+
+    # Describes the service role configuration for your Amazon Quick Sight
+    # account.
+    #
+    # Call this operation in the Amazon Web Services Region where your
+    # Amazon Quick Sight account is registered (the home Region).
+    #
+    # @option params [required, String] :aws_account_id
+    #   The ID of the Amazon Web Services account whose service role
+    #   configuration you want to describe.
+    #
+    # @return [Types::DescribeResourcePermissionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeResourcePermissionsResponse#role_type #role_type} => String
+    #   * {Types::DescribeResourcePermissionsResponse#customer_managed_role_arn #customer_managed_role_arn} => String
+    #   * {Types::DescribeResourcePermissionsResponse#request_id #request_id} => String
+    #   * {Types::DescribeResourcePermissionsResponse#status #status} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_resource_permissions({
+    #     aws_account_id: "AwsAccountId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.role_type #=> String, one of "QUICKSIGHT_MANAGED", "CUSTOMER_MANAGED"
+    #   resp.customer_managed_role_arn #=> String
+    #   resp.request_id #=> String
+    #   resp.status #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeResourcePermissions AWS API Documentation
+    #
+    # @overload describe_resource_permissions(params = {})
+    # @param [Hash] params ({})
+    def describe_resource_permissions(params = {}, options = {})
+      req = build_request(:describe_resource_permissions, params)
       req.send_request(options)
     end
 
@@ -14175,10 +15085,10 @@ module Aws::QuickSight
       req.send_request(options)
     end
 
-    # Generates an embed URL that you can use to embed an Amazon Quick
-    # dashboard or visual in your website, without having to register any
-    # reader users. Before you use this action, make sure that you have
-    # configured the dashboards and permissions.
+    # Generates an embed URL that you can use to embed an Quick dashboard or
+    # visual in your website, without having to register any reader users.
+    # Before you use this action, make sure that you have configured the
+    # dashboards and permissions.
     #
     # The following rules apply to the generated URL:
     #
@@ -14193,14 +15103,14 @@ module Aws::QuickSight
     #   session duration is 10 hours.
     #
     # * You are charged only when the URL is used or there is interaction
-    #   with Amazon Quick.
+    #   with Quick.
     #
-    # For more information, see [Embedded Analytics][1] in the *Amazon Quick
-    # User Guide*.
+    # For more information, see [Embedded Analytics][1] in the *Quick User
+    # Guide*.
     #
     # For more information about the high-level steps for embedding and for
     # an interactive demo of the ways you can customize embedding, visit the
-    # [Amazon Quick Developer Portal][2].
+    # [Quick Developer Portal][2].
     #
     #
     #
@@ -14217,8 +15127,8 @@ module Aws::QuickSight
     #
     # @option params [required, String] :namespace
     #   The Amazon Quick Sight namespace that the anonymous user virtually
-    #   belongs to. If you are not using an Amazon Quick custom namespace, set
-    #   this to `default`.
+    #   belongs to. If you are not using an Quick custom namespace, set this
+    #   to `default`.
     #
     # @option params [Array<Types::SessionTag>] :session_tags
     #   Session tags are user-specified strings that identify a session in
@@ -14248,7 +15158,7 @@ module Aws::QuickSight
     #
     #   Besides, these are not the tags used for the Amazon Web Services
     #   resource tagging feature. For more information, see [Using Row-Level
-    #   Security (RLS) with Tags][1] in the *Amazon Quick User Guide*.
+    #   Security (RLS) with Tags][1] in the *Quick User Guide*.
     #
     #
     #
@@ -14346,11 +15256,10 @@ module Aws::QuickSight
       req.send_request(options)
     end
 
-    # Generates an embed URL that you can use to embed an Amazon Quick
-    # experience in your website. This action can be used for any type of
-    # user registered in an Amazon Quick account. Before you use this
-    # action, make sure that you have configured the relevant Amazon Quick
-    # resource and permissions.
+    # Generates an embed URL that you can use to embed an Quick experience
+    # in your website. This action can be used for any type of user
+    # registered in an Quick account. Before you use this action, make sure
+    # that you have configured the relevant Quick resource and permissions.
     #
     # The following rules apply to the generated URL:
     #
@@ -14366,14 +15275,14 @@ module Aws::QuickSight
     #   hours (maximum). The default session duration is 10 hours.
     #
     # * You are charged only when the URL is used or there is interaction
-    #   with Amazon Quick.
+    #   with Quick.
     #
-    # For more information, see [Embedded Analytics][1] in the *Amazon Quick
-    # User Guide*.
+    # For more information, see [Embedded Analytics][1] in the *Quick User
+    # Guide*.
     #
     # For more information about the high-level steps for embedding and for
     # an interactive demo of the ways you can customize embedding, visit the
-    # [Amazon Quick Developer Portal][2].
+    # [Quick Developer Portal][2].
     #
     #
     #
@@ -14701,11 +15610,11 @@ module Aws::QuickSight
     #   `SessionLifetimeInMinutes` parameter to customize session duration.
     #
     # For more information, see [Embedding Analytics Using
-    # GetDashboardEmbedUrl][1] in the *Amazon Quick User Guide*.
+    # GetDashboardEmbedUrl][1] in the *Quick User Guide*.
     #
     # For more information about the high-level steps for embedding and for
     # an interactive demo of the ways you can customize embedding, visit the
-    # [Amazon Quick Developer Portal][2].
+    # [Quick Developer Portal][2].
     #
     #
     #
@@ -14746,10 +15655,10 @@ module Aws::QuickSight
     #   the user session is not persisted. The default is `FALSE`.
     #
     # @option params [String] :user_arn
-    #   The Amazon Quick user's Amazon Resource Name (ARN), for use with
-    #   `QUICKSIGHT` identity type. You can use this for any Amazon Quick
-    #   users in your account (readers, authors, or admins) authenticated as
-    #   one of the following:
+    #   The Quick user's Amazon Resource Name (ARN), for use with
+    #   `QUICKSIGHT` identity type. You can use this for any Quick users in
+    #   your account (readers, authors, or admins) authenticated as one of the
+    #   following:
     #
     #   * Active Directory (AD) users or group members
     #
@@ -15051,6 +15960,55 @@ module Aws::QuickSight
       req.send_request(options)
     end
 
+    # Describes the policy of the specified type that an Amazon Quick Sight
+    # principal has. If the principal has no policy of that type, the
+    # response contains no policy details.
+    #
+    # @option params [required, String] :account_id
+    #   The ID of the Amazon Web Services account that contains the principal.
+    #
+    # @option params [required, String] :policy_type
+    #   The type of policy to describe. Choose one of the following values:
+    #
+    #   * `LIMITS_PROFILE` – A limits profile that sets resource usage limits.
+    #
+    #   * `CUSTOM_PERMISSIONS` – A custom permissions profile that restricts
+    #     the capabilities available to a principal.
+    #
+    # @option params [required, String] :principal_arn
+    #   The ARN of the user, group, or account.
+    #
+    # @return [Types::GetPolicyAssignmentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetPolicyAssignmentResponse#policy_arn #policy_arn} => String
+    #   * {Types::GetPolicyAssignmentResponse#policy_name #policy_name} => String
+    #   * {Types::GetPolicyAssignmentResponse#updated_at #updated_at} => Time
+    #   * {Types::GetPolicyAssignmentResponse#revision #revision} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_policy_assignment({
+    #     account_id: "AwsAccountId", # required
+    #     policy_type: "LIMITS_PROFILE", # required, accepts LIMITS_PROFILE, CUSTOM_PERMISSIONS
+    #     principal_arn: "PrincipalArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.policy_arn #=> String
+    #   resp.policy_name #=> String
+    #   resp.updated_at #=> Time
+    #   resp.revision #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/GetPolicyAssignment AWS API Documentation
+    #
+    # @overload get_policy_assignment(params = {})
+    # @param [Hash] params ({})
+    def get_policy_assignment(params = {}, options = {})
+      req = build_request(:get_policy_assignment, params)
+      req.send_request(options)
+    end
+
     # Generates a session URL and authorization code that you can use to
     # embed the Amazon Amazon Quick Sight console in your web server code.
     # Use `GetSessionEmbedUrl` where you want to provide an authoring portal
@@ -15061,11 +16019,11 @@ module Aws::QuickSight
     # permissions profile to the user with the ` UpdateUser ` API operation.
     # Use ` RegisterUser ` API operation to add a new user with a custom
     # permission profile attached. For more information, see the following
-    # sections in the *Amazon Quick User Guide*:
+    # sections in the *Quick User Guide*:
     #
     # * [Embedding Analytics][1]
     #
-    # * [Customizing Access to the Amazon Quick Console][2]
+    # * [Customizing Access to the Quick Console][2]
     #
     #
     #
@@ -15099,10 +16057,10 @@ module Aws::QuickSight
     #   15-600 minutes.
     #
     # @option params [String] :user_arn
-    #   The Amazon Quick user's Amazon Resource Name (ARN), for use with
-    #   `QUICKSIGHT` identity type. You can use this for any type of Amazon
-    #   Quick users in your account (readers, authors, or admins). They need
-    #   to be authenticated as one of the following:
+    #   The Quick user's Amazon Resource Name (ARN), for use with
+    #   `QUICKSIGHT` identity type. You can use this for any type of Quick
+    #   users in your account (readers, authors, or admins). They need to be
+    #   authenticated as one of the following:
     #
     #   1.  Active Directory (AD) users or group members
     #
@@ -15142,6 +16100,80 @@ module Aws::QuickSight
     # @param [Hash] params ({})
     def get_session_embed_url(params = {}, options = {})
       req = build_request(:get_session_embed_url, params)
+      req.send_request(options)
+    end
+
+    # Lists the access control applications in a Quick Sight account in the
+    # current Amazon Web Services Region. You can filter the results by
+    # namespace. Quick Sight paginates the results. To retrieve additional
+    # results, use the `NextToken` parameter.
+    #
+    # @option params [required, String] :aws_account_id
+    #   The ID of the Amazon Web Services account that contains the Quick
+    #   Sight account.
+    #
+    # @option params [String] :namespace
+    #   The namespace to filter by. If you don't specify a namespace, access
+    #   control applications in all namespaces are returned.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return. The default is 100.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results, or null if there are no more
+    #   results.
+    #
+    # @return [Types::ListAccessControlApplicationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListAccessControlApplicationsResponse#status #status} => Integer
+    #   * {Types::ListAccessControlApplicationsResponse#request_id #request_id} => String
+    #   * {Types::ListAccessControlApplicationsResponse#access_control_applications #access_control_applications} => Array&lt;Types::AccessControlApplicationSummary&gt;
+    #   * {Types::ListAccessControlApplicationsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_access_control_applications({
+    #     aws_account_id: "AwsAccountId", # required
+    #     namespace: "Namespace",
+    #     max_results: 1,
+    #     next_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.status #=> Integer
+    #   resp.request_id #=> String
+    #   resp.access_control_applications #=> Array
+    #   resp.access_control_applications[0].application_id #=> String
+    #   resp.access_control_applications[0].arn #=> String
+    #   resp.access_control_applications[0].name #=> String
+    #   resp.access_control_applications[0].namespace #=> String
+    #   resp.access_control_applications[0].authentication_type #=> String, one of "OIDC"
+    #   resp.access_control_applications[0].status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.access_control_applications[0].created_time #=> Time
+    #   resp.access_control_applications[0].last_updated_time #=> Time
+    #   resp.access_control_applications[0].tenant_url #=> String
+    #   resp.access_control_applications[0].idp_authorizing_configuration.idp_authorizing_type #=> String, one of "EXTERNAL_IDP_PUBLIC_AUTH_CODE", "EXTERNAL_IDP_CONFIDENTIAL_AUTH_CODE", "QUICK_MANAGED_AUTH_CODE", "IDC_AUTH_CODE"
+    #   resp.access_control_applications[0].idp_authorizing_configuration.idp_authorizing_configuration_summary_detail.external_idp_public_auth_code.client_id #=> String
+    #   resp.access_control_applications[0].idp_authorizing_configuration.idp_authorizing_configuration_summary_detail.external_idp_public_auth_code.issuer_url #=> String
+    #   resp.access_control_applications[0].idp_authorizing_configuration.idp_authorizing_configuration_summary_detail.external_idp_confidential_auth_code.client_id #=> String
+    #   resp.access_control_applications[0].idp_authorizing_configuration.idp_authorizing_configuration_summary_detail.external_idp_confidential_auth_code.issuer_url #=> String
+    #   resp.access_control_applications[0].idp_authorizing_configuration.idc_trusted_token_issuer_configuration.idc_trusted_token_issuer_arn #=> String
+    #   resp.access_control_applications[0].quick_authentication_configuration.quick_authentication_type #=> String, one of "QUICK_MANAGED_PUBLIC_AUTH_CODE"
+    #   resp.access_control_applications[0].quick_authentication_configuration.quick_authentication_configuration_detail.quick_managed_public_auth_code.redirect_uris #=> Array
+    #   resp.access_control_applications[0].quick_authentication_configuration.quick_authentication_configuration_detail.quick_managed_public_auth_code.redirect_uris[0] #=> String
+    #   resp.access_control_applications[0].quick_authentication_configuration.quick_authentication_configuration_detail.quick_managed_public_auth_code.client_id #=> String
+    #   resp.access_control_applications[0].description #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ListAccessControlApplications AWS API Documentation
+    #
+    # @overload list_access_control_applications(params = {})
+    # @param [Hash] params ({})
+    def list_access_control_applications(params = {}, options = {})
+      req = build_request(:list_access_control_applications, params)
       req.send_request(options)
     end
 
@@ -15338,9 +16370,9 @@ module Aws::QuickSight
     #   resp.policies[0].name #=> String
     #   resp.policies[0].description #=> String
     #   resp.policies[0].actions #=> Array
-    #   resp.policies[0].actions[0] #=> String, one of "SHARE"
+    #   resp.policies[0].actions[0] #=> String, one of "SHARE", "PUBLISH"
     #   resp.policies[0].asset_types #=> Array
-    #   resp.policies[0].asset_types[0] #=> String, one of "AGENT", "SPACE", "KNOWLEDGE_BASE"
+    #   resp.policies[0].asset_types[0] #=> String, one of "AGENT", "SPACE", "KNOWLEDGE_BASE", "FLOW"
     #   resp.policies[0].applicable_to.type #=> String, one of "GROUP"
     #   resp.policies[0].applicable_to.group_arns #=> Array
     #   resp.policies[0].applicable_to.group_arns[0] #=> String
@@ -15806,6 +16838,9 @@ module Aws::QuickSight
     #   resp.custom_permissions_list[0].capabilities.create_and_update_mcp_action #=> String, one of "DENY", "ALLOW"
     #   resp.custom_permissions_list[0].capabilities.share_mcp_action #=> String, one of "DENY", "ALLOW"
     #   resp.custom_permissions_list[0].capabilities.use_mcp_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.local_mcp_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.create_and_update_local_mcp_action #=> String, one of "DENY", "ALLOW"
+    #   resp.custom_permissions_list[0].capabilities.use_local_mcp_action #=> String, one of "DENY", "ALLOW"
     #   resp.custom_permissions_list[0].capabilities.open_api_action #=> String, one of "DENY", "ALLOW"
     #   resp.custom_permissions_list[0].capabilities.create_and_update_open_api_action #=> String, one of "DENY", "ALLOW"
     #   resp.custom_permissions_list[0].capabilities.share_open_api_action #=> String, one of "DENY", "ALLOW"
@@ -16451,6 +17486,7 @@ module Aws::QuickSight
     #   resp.data_sources[0].data_source_parameters.redshift_parameters.host #=> String
     #   resp.data_sources[0].data_source_parameters.redshift_parameters.port #=> Integer
     #   resp.data_sources[0].data_source_parameters.redshift_parameters.database #=> String
+    #   resp.data_sources[0].data_source_parameters.redshift_parameters.federated_catalog #=> String
     #   resp.data_sources[0].data_source_parameters.redshift_parameters.cluster_id #=> String
     #   resp.data_sources[0].data_source_parameters.redshift_parameters.iam_parameters.role_arn #=> String
     #   resp.data_sources[0].data_source_parameters.redshift_parameters.iam_parameters.database_user #=> String
@@ -16575,6 +17611,7 @@ module Aws::QuickSight
     #   resp.data_sources[0].alternate_data_source_parameters[0].redshift_parameters.host #=> String
     #   resp.data_sources[0].alternate_data_source_parameters[0].redshift_parameters.port #=> Integer
     #   resp.data_sources[0].alternate_data_source_parameters[0].redshift_parameters.database #=> String
+    #   resp.data_sources[0].alternate_data_source_parameters[0].redshift_parameters.federated_catalog #=> String
     #   resp.data_sources[0].alternate_data_source_parameters[0].redshift_parameters.cluster_id #=> String
     #   resp.data_sources[0].alternate_data_source_parameters[0].redshift_parameters.iam_parameters.role_arn #=> String
     #   resp.data_sources[0].alternate_data_source_parameters[0].redshift_parameters.iam_parameters.database_user #=> String
@@ -17224,6 +18261,121 @@ module Aws::QuickSight
       req.send_request(options)
     end
 
+    # Lists the access control applications that are associated with an
+    # inbound connector. Quick Sight paginates the results. To retrieve
+    # additional results, use the `NextToken` parameter.
+    #
+    # @option params [required, String] :aws_account_id
+    #   The ID of the Amazon Web Services account that contains the Quick
+    #   Sight account.
+    #
+    # @option params [required, String] :inbound_connector_id
+    #   The ID of the inbound connector.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return. The default is 100.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results, or null if there are no more
+    #   results.
+    #
+    # @return [Types::ListInboundConnectorApplicationAssociationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListInboundConnectorApplicationAssociationsResponse#status #status} => Integer
+    #   * {Types::ListInboundConnectorApplicationAssociationsResponse#request_id #request_id} => String
+    #   * {Types::ListInboundConnectorApplicationAssociationsResponse#application_associations #application_associations} => Array&lt;Types::InboundConnectorApplicationAssociationSummary&gt;
+    #   * {Types::ListInboundConnectorApplicationAssociationsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_inbound_connector_application_associations({
+    #     aws_account_id: "AwsAccountId", # required
+    #     inbound_connector_id: "ShortRestrictiveResourceId", # required
+    #     max_results: 1,
+    #     next_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.status #=> Integer
+    #   resp.request_id #=> String
+    #   resp.application_associations #=> Array
+    #   resp.application_associations[0].access_control_application_arn #=> String
+    #   resp.application_associations[0].created_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ListInboundConnectorApplicationAssociations AWS API Documentation
+    #
+    # @overload list_inbound_connector_application_associations(params = {})
+    # @param [Hash] params ({})
+    def list_inbound_connector_application_associations(params = {}, options = {})
+      req = build_request(:list_inbound_connector_application_associations, params)
+      req.send_request(options)
+    end
+
+    # Lists the inbound connectors in a Quick Sight account. You can filter
+    # the results by connector type. Quick Sight paginates the results. To
+    # retrieve additional results, use the `NextToken` parameter.
+    #
+    # @option params [required, String] :aws_account_id
+    #   The ID of the Amazon Web Services account that contains the Quick
+    #   Sight account.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return. The default is 100.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results, or null if there are no more
+    #   results.
+    #
+    # @option params [Array<String>] :type
+    #   The inbound connector type to filter by.
+    #
+    # @return [Types::ListInboundConnectorsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListInboundConnectorsResponse#status #status} => Integer
+    #   * {Types::ListInboundConnectorsResponse#request_id #request_id} => String
+    #   * {Types::ListInboundConnectorsResponse#inbound_connector_summaries #inbound_connector_summaries} => Array&lt;Types::InboundConnectorSummary&gt;
+    #   * {Types::ListInboundConnectorsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_inbound_connectors({
+    #     aws_account_id: "AwsAccountId", # required
+    #     max_results: 1,
+    #     next_token: "String",
+    #     type: ["QUICK_DESKTOP"], # accepts QUICK_DESKTOP
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.status #=> Integer
+    #   resp.request_id #=> String
+    #   resp.inbound_connector_summaries #=> Array
+    #   resp.inbound_connector_summaries[0].inbound_connector_id #=> String
+    #   resp.inbound_connector_summaries[0].arn #=> String
+    #   resp.inbound_connector_summaries[0].name #=> String
+    #   resp.inbound_connector_summaries[0].status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.inbound_connector_summaries[0].created_time #=> Time
+    #   resp.inbound_connector_summaries[0].last_updated_time #=> Time
+    #   resp.inbound_connector_summaries[0].tenant_url #=> String
+    #   resp.inbound_connector_summaries[0].inbound_connector_configuration.inbound_connector_type #=> String, one of "QUICK_DESKTOP"
+    #   resp.inbound_connector_summaries[0].description #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ListInboundConnectors AWS API Documentation
+    #
+    # @overload list_inbound_connectors(params = {})
+    # @param [Hash] params ({})
+    def list_inbound_connectors(params = {}, options = {})
+      req = build_request(:list_inbound_connectors, params)
+      req.send_request(options)
+    end
+
     # Lists the history of SPICE ingestions for a dataset. Limited to 5 TPS
     # per user and 25 TPS per account.
     #
@@ -17286,6 +18438,69 @@ module Aws::QuickSight
     # @param [Hash] params ({})
     def list_ingestions(params = {}, options = {})
       req = build_request(:list_ingestions, params)
+      req.send_request(options)
+    end
+
+    # Lists the refresh schedules for an Amazon Quick Sight knowledge base.
+    # Currently, a knowledge base can have only one refresh schedule, so the
+    # list contains at most one schedule. Results are paginated. To retrieve
+    # the next page of results, use the `NextToken` value from the previous
+    # response.
+    #
+    # @option params [required, String] :aws_account_id
+    #   The ID of the Amazon Web Services account that contains the knowledge
+    #   base.
+    #
+    # @option params [required, String] :knowledge_base_id
+    #   The unique identifier for the knowledge base.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results. If you don't specify a value,
+    #   the request returns the first page of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in a single page. Valid values
+    #   are 1 through 100. If you don't specify a value, the default is 25.
+    #
+    # @return [Types::ListKnowledgeBaseRefreshSchedulesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListKnowledgeBaseRefreshSchedulesResponse#schedule_summaries #schedule_summaries} => Array&lt;Types::KnowledgeBaseRefreshScheduleSummary&gt;
+    #   * {Types::ListKnowledgeBaseRefreshSchedulesResponse#knowledge_base_arn #knowledge_base_arn} => String
+    #   * {Types::ListKnowledgeBaseRefreshSchedulesResponse#next_token #next_token} => String
+    #   * {Types::ListKnowledgeBaseRefreshSchedulesResponse#request_id #request_id} => String
+    #   * {Types::ListKnowledgeBaseRefreshSchedulesResponse#status #status} => Integer
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_knowledge_base_refresh_schedules({
+    #     aws_account_id: "KbAwsAccountId", # required
+    #     knowledge_base_id: "KnowledgeBaseId", # required
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.schedule_summaries #=> Array
+    #   resp.schedule_summaries[0].schedule_id #=> String
+    #   resp.schedule_summaries[0].schedule_frequency.interval #=> String, one of "DAILY", "WEEKLY", "MONTHLY", "HOURLY"
+    #   resp.schedule_summaries[0].schedule_frequency.refresh_on_day.day_of_week #=> String, one of "SUNDAY", "MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY"
+    #   resp.schedule_summaries[0].schedule_frequency.refresh_on_day.day_of_month #=> String
+    #   resp.schedule_summaries[0].start_time #=> Time
+    #   resp.schedule_summaries[0].state #=> String, one of "ENABLED", "DISABLED"
+    #   resp.knowledge_base_arn #=> String
+    #   resp.next_token #=> String
+    #   resp.request_id #=> String
+    #   resp.status #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ListKnowledgeBaseRefreshSchedules AWS API Documentation
+    #
+    # @overload list_knowledge_base_refresh_schedules(params = {})
+    # @param [Hash] params ({})
+    def list_knowledge_base_refresh_schedules(params = {}, options = {})
+      req = build_request(:list_knowledge_base_refresh_schedules, params)
       req.send_request(options)
     end
 
@@ -17521,6 +18736,79 @@ module Aws::QuickSight
     # @param [Hash] params ({})
     def list_o_auth_client_applications(params = {}, options = {})
       req = build_request(:list_o_auth_client_applications, params)
+      req.send_request(options)
+    end
+
+    # Lists the Amazon Quick Sight principals that have a governance policy.
+    # This operation returns paginated results. A page can contain fewer
+    # results than `MaxResults`, or none, and still include a `NextToken`.
+    # Continue to call the operation until the response doesn't include a
+    # `NextToken`. We recommend that you use pagination to make sure that
+    # the operation returns quickly and successfully.
+    #
+    # Results are eventually consistent and might not reflect recent
+    # changes. If the policy has no assignments, the response contains an
+    # empty `Principals` list. If the policy doesn't exist, the request
+    # fails with a `ResourceNotFoundException`.
+    #
+    # @option params [required, String] :account_id
+    #   The ID of the Amazon Web Services account that contains the policy.
+    #
+    # @option params [required, String] :policy_arn
+    #   The ARN of the policy.
+    #
+    # @option params [String] :principal_type
+    #   An optional filter that limits the results to principals of the
+    #   specified type. If you don't specify a value, the operation returns
+    #   principals of all types. You can specify one of the following values:
+    #
+    #   * `USER` – An Amazon Quick Sight user.
+    #
+    #   * `GROUP` – An Amazon Quick Sight group.
+    #
+    #   * `ACCOUNT` – The Amazon Quick Sight account.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in a single call. Valid range
+    #   is 1–100. If you don't specify a value, the operation returns up to
+    #   100 results.
+    #
+    # @option params [String] :next_token
+    #   The token returned by a previous call. Use it to get the next page of
+    #   results.
+    #
+    # @return [Types::ListPrincipalsForPolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListPrincipalsForPolicyResponse#principals #principals} => Array&lt;Types::PolicyPrincipal&gt;
+    #   * {Types::ListPrincipalsForPolicyResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_principals_for_policy({
+    #     account_id: "AwsAccountId", # required
+    #     policy_arn: "PolicyArn", # required
+    #     principal_type: "USER", # accepts USER, GROUP, ACCOUNT
+    #     max_results: 1,
+    #     next_token: "ListPrincipalsForPolicyRequestNextTokenString",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.principals #=> Array
+    #   resp.principals[0].principal_arn #=> String
+    #   resp.principals[0].principal_type #=> String, one of "USER", "GROUP", "ACCOUNT"
+    #   resp.principals[0].updated_at #=> Time
+    #   resp.principals[0].revision #=> Integer
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ListPrincipalsForPolicy AWS API Documentation
+    #
+    # @overload list_principals_for_policy(params = {})
+    # @param [Hash] params ({})
+    def list_principals_for_policy(params = {}, options = {})
+      req = build_request(:list_principals_for_policy, params)
       req.send_request(options)
     end
 
@@ -19198,6 +20486,70 @@ module Aws::QuickSight
       req.send_request(options)
     end
 
+    # Assigns a governance policy to an Amazon Quick Sight principal. A
+    # principal can have one policy of each policy type. If the principal
+    # already has a policy of the same type, this operation replaces it.
+    #
+    # To make the change conditional, specify `ExistingPolicyArn`,
+    # `Revision`, or both. If the current assignment doesn't match, the
+    # request fails with a `ConflictException` and makes no change. If the
+    # principal already has the specified policy, the request succeeds and
+    # makes no change.
+    #
+    # @option params [required, String] :account_id
+    #   The ID of the Amazon Web Services account that contains the policy and
+    #   the principal.
+    #
+    # @option params [required, String] :policy_arn
+    #   The Amazon Resource Name (ARN) of the policy to assign.
+    #
+    # @option params [required, String] :principal_arn
+    #   The ARN of the user, group, or account to assign the policy to.
+    #
+    # @option params [String] :existing_policy_arn
+    #   The ARN of the policy that you expect the principal to have before
+    #   this request. If the principal has a different policy of the same
+    #   type, or no policy of that type, the request fails with a
+    #   `ConflictException` and makes no change. If you don't specify a
+    #   value, the operation doesn't check the existing assignment.
+    #
+    # @option params [Integer] :revision
+    #   The revision of the assignment from your most recent read. If the
+    #   assignment has changed since that revision, the request fails with a
+    #   `ConflictException`. If you don't specify a value, the operation
+    #   doesn't check the revision.
+    #
+    # @return [Types::PutPolicyAssignmentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutPolicyAssignmentResponse#policy_arn #policy_arn} => String
+    #   * {Types::PutPolicyAssignmentResponse#replaced_policy_arn #replaced_policy_arn} => String
+    #   * {Types::PutPolicyAssignmentResponse#revision #revision} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_policy_assignment({
+    #     account_id: "AwsAccountId", # required
+    #     policy_arn: "PolicyArn", # required
+    #     principal_arn: "PrincipalArn", # required
+    #     existing_policy_arn: "PolicyArn",
+    #     revision: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.policy_arn #=> String
+    #   resp.replaced_policy_arn #=> String
+    #   resp.revision #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/PutPolicyAssignment AWS API Documentation
+    #
+    # @overload put_policy_assignment(params = {})
+    # @param [Hash] params ({})
+    def put_policy_assignment(params = {}, options = {})
+      req = build_request(:put_policy_assignment, params)
+      req.send_request(options)
+    end
+
     # Creates an Amazon Quick Sight user whose identity is associated with
     # the Identity and Access Management (IAM) identity or role specified in
     # the request. When you register a new user from the Quick Sight API,
@@ -20717,6 +22069,7 @@ module Aws::QuickSight
     #               host: "Host",
     #               port: 1,
     #               database: "Database", # required
+    #               federated_catalog: "FederatedCatalog",
     #               cluster_id: "ClusterId",
     #               iam_parameters: {
     #                 role_arn: "RoleArn", # required
@@ -21634,6 +22987,166 @@ module Aws::QuickSight
       req.send_request(options)
     end
 
+    # Updates an access control application. You can change its name,
+    # description, status, IdP settings such as the client ID and issuer
+    # URL, and its Quick Sight authentication settings such as redirect
+    # URIs.
+    #
+    # You can't change the `IdpAuthorizingType`, the
+    # `QuickAuthenticationType`, or the trusted token issuer after the
+    # application is created. To manage client secrets, use
+    # `CreateAccessControlApplicationSecret`,
+    # `UpdateAccessControlApplicationSecret`, and
+    # `DeleteAccessControlApplicationSecret`.
+    #
+    # @option params [required, String] :aws_account_id
+    #   The ID of the Amazon Web Services account that contains the Quick
+    #   Sight account.
+    #
+    # @option params [required, String] :application_id
+    #   The ID of the access control application.
+    #
+    # @option params [String] :name
+    #   The new name of the access control application.
+    #
+    # @option params [String] :description
+    #   The new description of the access control application.
+    #
+    # @option params [Types::IdpAuthorizingConfigUpdateInput] :idp_authorizing_configuration
+    #   The identity provider settings to update, such as the client ID and
+    #   issuer URL. You can't change the `IdpAuthorizingType` or the trusted
+    #   token issuer. To manage client secrets, use the client secret
+    #   operations.
+    #
+    # @option params [Types::QuickAuthenticationConfigInput] :quick_authentication_configuration
+    #   The Quick Sight authentication settings to update, such as redirect
+    #   URIs. You can't change the `QuickAuthenticationType`.
+    #
+    # @option params [String] :status
+    #   The new status of the access control application.
+    #
+    # @return [Types::UpdateAccessControlApplicationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateAccessControlApplicationResponse#status #status} => Integer
+    #   * {Types::UpdateAccessControlApplicationResponse#request_id #request_id} => String
+    #   * {Types::UpdateAccessControlApplicationResponse#application_id #application_id} => String
+    #   * {Types::UpdateAccessControlApplicationResponse#arn #arn} => String
+    #   * {Types::UpdateAccessControlApplicationResponse#access_control_application_status #access_control_application_status} => String
+    #   * {Types::UpdateAccessControlApplicationResponse#last_updated_time #last_updated_time} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_access_control_application({
+    #     aws_account_id: "AwsAccountId", # required
+    #     application_id: "ShortRestrictiveResourceId", # required
+    #     name: "ResourceName",
+    #     description: "AccessControlApplicationDescription",
+    #     idp_authorizing_configuration: {
+    #       idp_authorizing_type: "EXTERNAL_IDP_PUBLIC_AUTH_CODE", # required, accepts EXTERNAL_IDP_PUBLIC_AUTH_CODE, EXTERNAL_IDP_CONFIDENTIAL_AUTH_CODE, QUICK_MANAGED_AUTH_CODE, IDC_AUTH_CODE
+    #       idp_authorizing_configuration_detail_input: {
+    #         external_idp_public_auth_code: {
+    #           client_id: "OAuthApplicationClientId", # required
+    #           issuer_url: "Uri", # required
+    #         },
+    #         external_idp_confidential_auth_code: {
+    #           client_id: "OAuthApplicationClientId", # required
+    #           issuer_url: "Uri", # required
+    #         },
+    #       },
+    #       idc_trusted_token_issuer_configuration: {
+    #         idc_trusted_token_issuer_arn: "IdcTrustedTokenIssuerArn", # required
+    #       },
+    #     },
+    #     quick_authentication_configuration: {
+    #       quick_authentication_type: "QUICK_MANAGED_PUBLIC_AUTH_CODE", # required, accepts QUICK_MANAGED_PUBLIC_AUTH_CODE
+    #       quick_authentication_configuration_detail_input: {
+    #         quick_managed_public_auth_code: {
+    #           redirect_uris: ["Uri"], # required
+    #         },
+    #       },
+    #     },
+    #     status: "ENABLED", # accepts ENABLED, DISABLED
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.status #=> Integer
+    #   resp.request_id #=> String
+    #   resp.application_id #=> String
+    #   resp.arn #=> String
+    #   resp.access_control_application_status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.last_updated_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateAccessControlApplication AWS API Documentation
+    #
+    # @overload update_access_control_application(params = {})
+    # @param [Hash] params ({})
+    def update_access_control_application(params = {}, options = {})
+      req = build_request(:update_access_control_application, params)
+      req.send_request(options)
+    end
+
+    # Updates the Amazon Web Services Secrets Manager secret ARNs of an
+    # IdP-provided client secret. You can add, replace, or remove the ARN
+    # for a Region, but you can't remove the last remaining Region. To
+    # remove it, delete the client secret.
+    #
+    # @option params [required, String] :aws_account_id
+    #   The ID of the Amazon Web Services account that contains the Quick
+    #   Sight account.
+    #
+    # @option params [required, String] :application_id
+    #   The ID of the access control application.
+    #
+    # @option params [required, String] :client_secret_id
+    #   The ID of the client secret.
+    #
+    # @option params [Hash<String,String>] :update_regional_secret_manager_arns
+    #   The Region ARNs to add or replace. The Region in each ARN must match
+    #   its key.
+    #
+    # @option params [Array<String>] :remove_regional_secret_manager_arns
+    #   The Regions whose ARNs to remove. You can't remove the last remaining
+    #   Region. To remove it, delete the client secret instead.
+    #
+    # @return [Types::UpdateAccessControlApplicationSecretResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateAccessControlApplicationSecretResponse#status #status} => Integer
+    #   * {Types::UpdateAccessControlApplicationSecretResponse#request_id #request_id} => String
+    #   * {Types::UpdateAccessControlApplicationSecretResponse#client_secret_id #client_secret_id} => String
+    #   * {Types::UpdateAccessControlApplicationSecretResponse#updated_at #updated_at} => Time
+    #   * {Types::UpdateAccessControlApplicationSecretResponse#regional_secret_manager_arns #regional_secret_manager_arns} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_access_control_application_secret({
+    #     aws_account_id: "AwsAccountId", # required
+    #     application_id: "ShortRestrictiveResourceId", # required
+    #     client_secret_id: "ShortRestrictiveResourceId", # required
+    #     update_regional_secret_manager_arns: {
+    #       "AwsRegion" => "AccessControlApplicationSecretManagerArn",
+    #     },
+    #     remove_regional_secret_manager_arns: ["AwsRegion"],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.status #=> Integer
+    #   resp.request_id #=> String
+    #   resp.client_secret_id #=> String
+    #   resp.updated_at #=> Time
+    #   resp.regional_secret_manager_arns #=> Hash
+    #   resp.regional_secret_manager_arns["AwsRegion"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateAccessControlApplicationSecret AWS API Documentation
+    #
+    # @overload update_access_control_application_secret(params = {})
+    # @param [Hash] params ({})
+    def update_access_control_application_secret(params = {}, options = {})
+      req = build_request(:update_access_control_application_secret, params)
+      req.send_request(options)
+    end
+
     # Applies a custom permissions profile to an account.
     #
     # @option params [required, String] :custom_permissions_name
@@ -22404,8 +23917,8 @@ module Aws::QuickSight
     #     policy_id: "PolicyId", # required
     #     name: "PolicyName",
     #     description: "PolicyDescription",
-    #     actions: ["SHARE"], # accepts SHARE
-    #     asset_types: ["AGENT"], # accepts AGENT, SPACE, KNOWLEDGE_BASE
+    #     actions: ["SHARE"], # accepts SHARE, PUBLISH
+    #     asset_types: ["AGENT"], # accepts AGENT, SPACE, KNOWLEDGE_BASE, FLOW
     #     applicable_to: {
     #       type: "GROUP", # required, accepts GROUP
     #       group_arns: ["Arn"],
@@ -22420,9 +23933,9 @@ module Aws::QuickSight
     #   resp.policy.name #=> String
     #   resp.policy.description #=> String
     #   resp.policy.actions #=> Array
-    #   resp.policy.actions[0] #=> String, one of "SHARE"
+    #   resp.policy.actions[0] #=> String, one of "SHARE", "PUBLISH"
     #   resp.policy.asset_types #=> Array
-    #   resp.policy.asset_types[0] #=> String, one of "AGENT", "SPACE", "KNOWLEDGE_BASE"
+    #   resp.policy.asset_types[0] #=> String, one of "AGENT", "SPACE", "KNOWLEDGE_BASE", "FLOW"
     #   resp.policy.applicable_to.type #=> String, one of "GROUP"
     #   resp.policy.applicable_to.group_arns #=> Array
     #   resp.policy.applicable_to.group_arns[0] #=> String
@@ -22938,6 +24451,9 @@ module Aws::QuickSight
     #       create_and_update_mcp_action: "DENY", # accepts DENY, ALLOW
     #       share_mcp_action: "DENY", # accepts DENY, ALLOW
     #       use_mcp_action: "DENY", # accepts DENY, ALLOW
+    #       local_mcp_action: "DENY", # accepts DENY, ALLOW
+    #       create_and_update_local_mcp_action: "DENY", # accepts DENY, ALLOW
+    #       use_local_mcp_action: "DENY", # accepts DENY, ALLOW
     #       open_api_action: "DENY", # accepts DENY, ALLOW
     #       create_and_update_open_api_action: "DENY", # accepts DENY, ALLOW
     #       share_open_api_action: "DENY", # accepts DENY, ALLOW
@@ -23741,6 +25257,12 @@ module Aws::QuickSight
     #   table mappings and row-level security configurations. Required when
     #   using the new data preparation experience.
     #
+    # @option params [Array<Types::UnmaterializedCalculatedColumn>] :unmaterialized_calculated_columns
+    #   A list of unmaterialized calculated columns for the dataset. These
+    #   columns are computed at analysis time and are not stored in the
+    #   prepared data. You can only use this with the new data preparation
+    #   experience.
+    #
     # @return [Types::UpdateDataSetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateDataSetResponse#arn #arn} => String
@@ -24486,6 +26008,15 @@ module Aws::QuickSight
     #         },
     #       ],
     #     },
+    #     unmaterialized_calculated_columns: [
+    #       {
+    #         column_id: "ColumnId", # required
+    #         column_name: "ColumnName", # required
+    #         expression: "DataSetCalculatedFieldExpression", # required
+    #         type: "STRING", # accepts STRING, INTEGER, DECIMAL, DATETIME
+    #         sub_type: "FLOAT", # accepts FLOAT, FIXED
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -24672,6 +26203,7 @@ module Aws::QuickSight
     #         host: "Host",
     #         port: 1,
     #         database: "Database", # required
+    #         federated_catalog: "FederatedCatalog",
     #         cluster_id: "ClusterId",
     #         iam_parameters: {
     #           role_arn: "RoleArn", # required
@@ -24894,6 +26426,7 @@ module Aws::QuickSight
     #               host: "Host",
     #               port: 1,
     #               database: "Database", # required
+    #               federated_catalog: "FederatedCatalog",
     #               cluster_id: "ClusterId",
     #               iam_parameters: {
     #                 role_arn: "RoleArn", # required
@@ -25704,6 +27237,118 @@ module Aws::QuickSight
       req.send_request(options)
     end
 
+    # Updates an inbound connector. You can change its name, description,
+    # status, and configuration. You can't change the connector type after
+    # the connector is created.
+    #
+    # @option params [required, String] :aws_account_id
+    #   The ID of the Amazon Web Services account that contains the Quick
+    #   Sight account.
+    #
+    # @option params [required, String] :inbound_connector_id
+    #   The ID of the inbound connector.
+    #
+    # @option params [String] :name
+    #   The new name of the inbound connector.
+    #
+    # @option params [String] :description
+    #   The new description of the inbound connector.
+    #
+    # @option params [Types::InboundConnectorConfig] :inbound_connector_configuration
+    #   The new configuration of the inbound connector. You can't change the
+    #   `InboundConnectorType`.
+    #
+    # @option params [String] :inbound_connector_status
+    #   The new status of the inbound connector.
+    #
+    # @return [Types::UpdateInboundConnectorResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateInboundConnectorResponse#status #status} => Integer
+    #   * {Types::UpdateInboundConnectorResponse#request_id #request_id} => String
+    #   * {Types::UpdateInboundConnectorResponse#inbound_connector_id #inbound_connector_id} => String
+    #   * {Types::UpdateInboundConnectorResponse#arn #arn} => String
+    #   * {Types::UpdateInboundConnectorResponse#inbound_connector_status #inbound_connector_status} => String
+    #   * {Types::UpdateInboundConnectorResponse#last_updated_time #last_updated_time} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_inbound_connector({
+    #     aws_account_id: "AwsAccountId", # required
+    #     inbound_connector_id: "ShortRestrictiveResourceId", # required
+    #     name: "ResourceName",
+    #     description: "InboundConnectorDescription",
+    #     inbound_connector_configuration: {
+    #       inbound_connector_type: "QUICK_DESKTOP", # required, accepts QUICK_DESKTOP
+    #     },
+    #     inbound_connector_status: "ENABLED", # accepts ENABLED, DISABLED
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.status #=> Integer
+    #   resp.request_id #=> String
+    #   resp.inbound_connector_id #=> String
+    #   resp.arn #=> String
+    #   resp.inbound_connector_status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.last_updated_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateInboundConnector AWS API Documentation
+    #
+    # @overload update_inbound_connector(params = {})
+    # @param [Hash] params ({})
+    def update_inbound_connector(params = {}, options = {})
+      req = build_request(:update_inbound_connector, params)
+      req.send_request(options)
+    end
+
+    # Associates access control applications with an inbound connector,
+    # disassociates them from it, or both. You can add up to 20 associations
+    # and remove up to 20 associations in each request. An inbound connector
+    # supports up to 6,000 associations.
+    #
+    # @option params [required, String] :aws_account_id
+    #   The ID of the Amazon Web Services account that contains the Quick
+    #   Sight account.
+    #
+    # @option params [required, String] :inbound_connector_id
+    #   The ID of the inbound connector.
+    #
+    # @option params [Array<String>] :associate_access_control_applications
+    #   The ARNs of up to 20 access control applications to associate with the
+    #   inbound connector. ARNs that are already associated are ignored.
+    #
+    # @option params [Array<String>] :disassociate_access_control_applications
+    #   The ARNs of up to 20 access control applications to disassociate from
+    #   the inbound connector. ARNs that aren't associated are ignored.
+    #
+    # @return [Types::UpdateInboundConnectorApplicationAssociationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateInboundConnectorApplicationAssociationsResponse#status #status} => Integer
+    #   * {Types::UpdateInboundConnectorApplicationAssociationsResponse#request_id #request_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_inbound_connector_application_associations({
+    #     aws_account_id: "AwsAccountId", # required
+    #     inbound_connector_id: "ShortRestrictiveResourceId", # required
+    #     associate_access_control_applications: ["Arn"],
+    #     disassociate_access_control_applications: ["Arn"],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.status #=> Integer
+    #   resp.request_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateInboundConnectorApplicationAssociations AWS API Documentation
+    #
+    # @overload update_inbound_connector_application_associations(params = {})
+    # @param [Hash] params ({})
+    def update_inbound_connector_application_associations(params = {}, options = {})
+      req = build_request(:update_inbound_connector_application_associations, params)
+      req.send_request(options)
+    end
+
     # Updates the content and status of IP rules. Traffic from a source is
     # allowed when the source satisfies either the `IpRestrictionRule`,
     # `VpcIdRestrictionRule`, or `VpcEndpointIdRestrictionRule`. To use this
@@ -25960,6 +27605,79 @@ module Aws::QuickSight
     # @param [Hash] params ({})
     def update_knowledge_base_permissions(params = {}, options = {})
       req = build_request(:update_knowledge_base_permissions, params)
+      req.send_request(options)
+    end
+
+    # Updates the refresh schedule for an Amazon Quick Sight knowledge base.
+    # Use this operation to change how often the knowledge base refreshes,
+    # or to enable or disable the schedule. Specify the schedule by its
+    # `ScheduleId`. The operation changes only the fields that you provide.
+    # Any field that you omit keeps its existing value.
+    #
+    # @option params [required, String] :aws_account_id
+    #   The ID of the Amazon Web Services account that contains the knowledge
+    #   base.
+    #
+    # @option params [required, String] :knowledge_base_id
+    #   The unique identifier for the knowledge base.
+    #
+    # @option params [required, String] :schedule_id
+    #   The unique identifier for the refresh schedule to update.
+    #
+    # @option params [Types::KnowledgeBaseRefreshFrequency] :schedule_frequency
+    #   The frequency configuration for the refresh schedule. The frequency
+    #   configuration specifies how often the schedule runs and, for weekly or
+    #   monthly schedules, the day on which it runs. If you don't specify
+    #   this parameter, the schedule keeps its existing frequency.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :start_time
+    #   The date and time, in ISO 8601 format, after which the schedule can
+    #   start refreshing the knowledge base. The first refresh runs at the
+    #   next scheduled time after this date and time. If you don't specify
+    #   this parameter, the schedule keeps its existing start time.
+    #
+    # @option params [String] :state
+    #   The state of the refresh schedule. A schedule that isn't `ENABLED`
+    #   doesn't run refreshes. If you don't specify this parameter, the
+    #   schedule keeps its existing state.
+    #
+    # @return [Types::UpdateKnowledgeBaseRefreshScheduleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateKnowledgeBaseRefreshScheduleResponse#schedule_id #schedule_id} => String
+    #   * {Types::UpdateKnowledgeBaseRefreshScheduleResponse#knowledge_base_arn #knowledge_base_arn} => String
+    #   * {Types::UpdateKnowledgeBaseRefreshScheduleResponse#request_id #request_id} => String
+    #   * {Types::UpdateKnowledgeBaseRefreshScheduleResponse#status #status} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_knowledge_base_refresh_schedule({
+    #     aws_account_id: "KbAwsAccountId", # required
+    #     knowledge_base_id: "KnowledgeBaseId", # required
+    #     schedule_id: "ScheduleId", # required
+    #     schedule_frequency: {
+    #       interval: "DAILY", # required, accepts DAILY, WEEKLY, MONTHLY, HOURLY
+    #       refresh_on_day: {
+    #         day_of_week: "SUNDAY", # accepts SUNDAY, MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY
+    #         day_of_month: "KnowledgeBaseScheduleRefreshOnEntityDayOfMonthString",
+    #       },
+    #     },
+    #     start_time: Time.now,
+    #     state: "ENABLED", # accepts ENABLED, DISABLED
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.schedule_id #=> String
+    #   resp.knowledge_base_arn #=> String
+    #   resp.request_id #=> String
+    #   resp.status #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateKnowledgeBaseRefreshSchedule AWS API Documentation
+    #
+    # @overload update_knowledge_base_refresh_schedule(params = {})
+    # @param [Hash] params ({})
+    def update_knowledge_base_refresh_schedule(params = {}, options = {})
+      req = build_request(:update_knowledge_base_refresh_schedule, params)
       req.send_request(options)
     end
 
@@ -26286,6 +28004,87 @@ module Aws::QuickSight
     # @param [Hash] params ({})
     def update_refresh_schedule(params = {}, options = {})
       req = build_request(:update_refresh_schedule, params)
+      req.send_request(options)
+    end
+
+    # Updates the service role configuration that Amazon Quick Sight uses to
+    # access resources in your Amazon Web Services account. To use this
+    # operation, you must have the `quicksight:UpdateResourcePermissions`
+    # and `iam:PassRole` permissions.
+    #
+    # Call this operation in the Amazon Web Services Region where your
+    # Amazon Quick Sight account is registered (the home Region). You can
+    # switch from a role managed by Amazon Quick Sight to a customer-managed
+    # role, or replace one customer-managed role with another. You can't
+    # use this operation to switch back to a role managed by Amazon Quick
+    # Sight.
+    #
+    # @option params [required, String] :aws_account_id
+    #   The ID of the Amazon Web Services account whose service role
+    #   configuration you want to update.
+    #
+    # @option params [required, String] :role_type
+    #   The type of service role that you want Amazon Quick Sight to use. The
+    #   only supported value for this operation is `CUSTOMER_MANAGED`.
+    #   Requests that specify `QUICKSIGHT_MANAGED` are rejected.
+    #
+    # @option params [required, String] :customer_managed_role_arn
+    #   The ARN of the customer-managed role that you want Amazon Quick Sight
+    #   to use. To use this operation, you must have the `iam:PassRole`
+    #   permission for the role.
+    #
+    #   Configure the role as follows:
+    #
+    #   * The role must belong to the Amazon Web Services account specified by
+    #     `AwsAccountId`.
+    #
+    #   * Configure the role trust policy to allow the Amazon Quick Sight
+    #     service principal to call `sts:AssumeRole`.
+    #
+    #   * Attach a permissions policy that allows access to the resources that
+    #     you want Amazon Quick Sight to use.
+    #
+    #   * To use features that rely on session tags, configure the role trust
+    #     policy to allow the Amazon Quick Sight service principal to call
+    #     `sts:TagSession`.
+    #
+    #   If the role doesn't exist or its trust policy doesn't allow
+    #   `sts:AssumeRole`, the request returns an `AccessDeniedException`.
+    #
+    #   When you call this operation, Amazon Quick Sight attempts to assume
+    #   the role with session tags and records whether the attempt succeeds.
+    #   If you later add or remove `sts:TagSession` from the trust policy,
+    #   call this operation again with the same role ARN to refresh the stored
+    #   capability.
+    #
+    # @return [Types::UpdateResourcePermissionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateResourcePermissionsResponse#role_type #role_type} => String
+    #   * {Types::UpdateResourcePermissionsResponse#customer_managed_role_arn #customer_managed_role_arn} => String
+    #   * {Types::UpdateResourcePermissionsResponse#request_id #request_id} => String
+    #   * {Types::UpdateResourcePermissionsResponse#status #status} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_resource_permissions({
+    #     aws_account_id: "AwsAccountId", # required
+    #     role_type: "QUICKSIGHT_MANAGED", # required, accepts QUICKSIGHT_MANAGED, CUSTOMER_MANAGED
+    #     customer_managed_role_arn: "RoleArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.role_type #=> String, one of "QUICKSIGHT_MANAGED", "CUSTOMER_MANAGED"
+    #   resp.customer_managed_role_arn #=> String
+    #   resp.request_id #=> String
+    #   resp.status #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateResourcePermissions AWS API Documentation
+    #
+    # @overload update_resource_permissions(params = {})
+    # @param [Hash] params ({})
+    def update_resource_permissions(params = {}, options = {})
+      req = build_request(:update_resource_permissions, params)
       req.send_request(options)
     end
 
@@ -28048,7 +29847,7 @@ module Aws::QuickSight
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-quicksight'
-      context[:gem_version] = '1.206.0'
+      context[:gem_version] = '1.215.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

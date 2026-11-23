@@ -374,6 +374,9 @@ module Aws
                                          sql_parameters: {
                                            query_string: ::String?,
                                            analysis_template_arn: ::String?
+                                         }?,
+                                         job_parameters: {
+                                           analysis_template_arn: ::String
                                          }?
                                        },
                                        ?kms_key_arn: ::String,
@@ -1186,7 +1189,7 @@ module Aws
       interface _PopulateIntermediateTableResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::PopulateIntermediateTableOutput]
         def analysis_id: () -> ::String
-        def analysis_type: () -> ("QUERY")
+        def analysis_type: () -> ("QUERY" | "JOB")
         def version_id: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CleanRooms/Client.html#populate_intermediate_table-instance_method
@@ -1201,7 +1204,8 @@ module Aws
                                              properties: {
                                                spark: Hash[::String, ::String]?
                                              }?
-                                           }?
+                                           }?,
+                                           job_compute_configuration: Params::protected_job_compute_configuration?
                                          },
                                          ?analysis_payer_account_id: ::String
                                        ) -> _PopulateIntermediateTableResponseSuccess
@@ -1262,15 +1266,7 @@ module Aws
                                      }?
                                    }
                                  },
-                                 ?compute_configuration: {
-                                   worker: {
-                                     type: ("CR.1X" | "CR.4X"),
-                                     number: ::Integer,
-                                     properties: {
-                                       spark: Hash[::String, ::String]?
-                                     }?
-                                   }?
-                                 },
+                                 ?compute_configuration: Params::protected_job_compute_configuration,
                                  ?job_compute_payer_account_id: ::String
                                ) -> _StartProtectedJobResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartProtectedJobResponseSuccess

@@ -264,7 +264,8 @@ module Aws::BedrockAgentCoreControl
     #     An integer representing the maximum number attempts that will be made for
     #     a single request, including the initial attempt.  For example,
     #     setting this value to 5 will result in a request being retried up to
-    #     4 times. Used in `standard` and `adaptive` retry modes.
+    #     4 times. Used in `standard` and `adaptive` retry modes. Defaults to 3,
+    #     except for DynamoDB and DynamoDB Streams, which default to 4.
     #
     #   @option options [String] :profile ("default")
     #     Used when loading credentials from the shared credentials file at `HOME/.aws/credentials`.
@@ -327,15 +328,15 @@ module Aws::BedrockAgentCoreControl
     #     used by the default backoff function. This option is only used in the
     #     `legacy` retry mode.
     #
-    #   @option options [String] :retry_mode ("legacy")
+    #   @option options [String] :retry_mode ("standard")
     #     Specifies which retry algorithm to use. Values are:
     #
-    #     * `legacy` - The pre-existing retry behavior. This is the default
-    #       value if no retry mode is provided.
+    #     * `legacy` - The pre-existing retry behavior.
     #
     #     * `standard` - A standardized set of retry rules across the AWS SDKs.
     #       This includes support for retry quotas, which limit the number of
-    #       unsuccessful retries a client can make.
+    #       unsuccessful retries a client can make. This is the default value
+    #       if no retry mode is provided.
     #
     #     * `adaptive` - A retry mode that includes all the functionality of
     #       `standard` mode along with automatic client side throttling.
@@ -694,6 +695,12 @@ module Aws::BedrockAgentCoreControl
     # @option params [Types::LifecycleConfiguration] :lifecycle_configuration
     #   The life cycle configuration for the AgentCore Runtime.
     #
+    # @option params [Types::RuntimeHooksConfiguration] :hooks_configuration
+    #   The lifecycle hooks configuration for the AgentCore Runtime. Use
+    #   lifecycle hooks to run actions in the agent's container at fixed
+    #   points in the runtime's lifecycle, such as warming up the agent
+    #   before sessions are created.
+    #
     # @option params [Hash<String,String>] :environment_variables
     #   Environment variables to set in the AgentCore Runtime environment.
     #
@@ -722,6 +729,11 @@ module Aws::BedrockAgentCoreControl
     #   non-overlapping entries, each containing either a single port or an
     #   inclusive port range. Ports must be between `8000` and `12000`,
     #   excluding the reserved port `8443`.
+    #
+    # @option params [Array<Types::ResourceConfiguration>] :resource_configurations
+    #   The resource configurations for the AgentCore Runtime, such as the
+    #   minimum amount of memory to allocate to the runtime. You can specify
+    #   at most one resource configuration.
     #
     # @return [Types::CreateAgentRuntimeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -820,6 +832,17 @@ module Aws::BedrockAgentCoreControl
     #             },
     #           },
     #         ],
+    #         certificate_configurations: [
+    #           {
+    #             s3: {
+    #               uri: "CertificateS3Uri", # required
+    #               bucket_owner_account_id: "CertificateBucketOwnerAccountId",
+    #             },
+    #             secrets_manager: {
+    #               secret_arn: "CertificateSecretArn", # required
+    #             },
+    #           },
+    #         ],
     #         allowed_workload_configuration: {
     #           hosting_environments: [
     #             {
@@ -842,6 +865,18 @@ module Aws::BedrockAgentCoreControl
     #       idle_runtime_session_timeout: 1,
     #       max_lifetime: 1,
     #     },
+    #     hooks_configuration: {
+    #       build: {
+    #         warmup: {
+    #           action: { # required
+    #             http_post: {
+    #               path: "LifecycleHookPath", # required
+    #               port: 1,
+    #             },
+    #           },
+    #         },
+    #       },
+    #     },
     #     environment_variables: {
     #       "EnvironmentVariableKey" => "EnvironmentVariableValue",
     #     },
@@ -862,10 +897,22 @@ module Aws::BedrockAgentCoreControl
     #           volume_name: "CapacityProviderVolumeName", # required
     #           mount_path: "MountPath", # required
     #         },
+    #         s3_bucket_mount: {
+    #           bucket: "S3BucketMountConfigurationBucketString", # required
+    #           mount_path: "MountPath", # required
+    #           prefix: "S3BucketMountConfigurationPrefixString",
+    #           s3_bucket_owner: "S3BucketMountConfigurationS3BucketOwnerString",
+    #           s3_bucket_region: "S3BucketMountConfigurationS3BucketRegionString",
+    #         },
     #       },
     #     ],
     #     capacity_provider_configuration: {
     #       capacity_provider_arn: "CapacityProviderArn", # required
+    #       operating_system_configuration: {
+    #         linux: {
+    #           privilege_mode: "STANDARD", # accepts STANDARD, PRIVILEGED
+    #         },
+    #       },
     #     },
     #     tags: {
     #       "TagKey" => "TagValue",
@@ -878,6 +925,11 @@ module Aws::BedrockAgentCoreControl
     #           from: 1, # required
     #           to: 1, # required
     #         },
+    #       },
+    #     ],
+    #     resource_configurations: [
+    #       {
+    #         minimum_memory_in_mi_b: 1, # required
     #       },
     #     ],
     #   })
@@ -1347,6 +1399,9 @@ module Aws::BedrockAgentCoreControl
     #             propagated_tags: {
     #               "TagKey" => "TagValue",
     #             },
+    #             cpu_options: {
+    #               nested_virtualization: "ENABLED", # accepts ENABLED, DISABLED
+    #             },
     #           },
     #         },
     #         vpc_configuration: { # required
@@ -1720,11 +1775,11 @@ module Aws::BedrockAgentCoreControl
     # @option params [String] :description
     #   A description of the dataset.
     #
-    # @option params [required, Types::DataSourceType] :source
+    # @option params [Types::DataSourceType] :source
     #   Source of initial examples. Provide either inline examples or an S3
     #   URI pointing to a JSONL file.
     #
-    # @option params [required, String] :schema_type
+    # @option params [String] :schema_type
     #   Versioned schema type governing the structure of examples. Immutable
     #   after creation.
     #
@@ -1748,7 +1803,7 @@ module Aws::BedrockAgentCoreControl
     #     client_token: "ClientToken",
     #     dataset_name: "DatasetName", # required
     #     description: "CreateDatasetRequestDescriptionString",
-    #     source: { # required
+    #     source: {
     #       inline_examples: {
     #         examples: [ # required
     #           {
@@ -1759,7 +1814,7 @@ module Aws::BedrockAgentCoreControl
     #         s3_uri: "S3Uri", # required
     #       },
     #     },
-    #     schema_type: "AGENTCORE_EVALUATION_PREDEFINED_V1", # required, accepts AGENTCORE_EVALUATION_PREDEFINED_V1, AGENTCORE_EVALUATION_SIMULATED_V1, THIRD_PARTY_EVALUATION_V1
+    #     schema_type: "AGENTCORE_EVALUATION_PREDEFINED_V1", # accepts AGENTCORE_EVALUATION_PREDEFINED_V1, AGENTCORE_EVALUATION_SIMULATED_V1, THIRD_PARTY_EVALUATION_V1
     #     kms_key_arn: "KmsKeyArn",
     #     tags: {
     #       "TagKey" => "TagValue",
@@ -2101,6 +2156,11 @@ module Aws::BedrockAgentCoreControl
     #   A map of key-value pairs to associate with the gateway as metadata
     #   tags.
     #
+    # @option params [Types::DomainOverride] :domain_override
+    #   The public domain names that the gateway advertises in its OAuth
+    #   discovery URLs instead of the inbound Host header. Specify this when
+    #   clients reach the gateway through your own proxy or custom domain.
+    #
     # @return [Types::CreateGatewayResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateGatewayResponse#gateway_arn #gateway_arn} => String
@@ -2125,6 +2185,7 @@ module Aws::BedrockAgentCoreControl
     #   * {Types::CreateGatewayResponse#exception_level #exception_level} => String
     #   * {Types::CreateGatewayResponse#web_acl_arn #web_acl_arn} => String
     #   * {Types::CreateGatewayResponse#waf_configuration #waf_configuration} => Types::WafConfiguration
+    #   * {Types::CreateGatewayResponse#domain_override #domain_override} => Types::DomainOverride
     #
     # @example Request syntax with placeholder values
     #
@@ -2206,6 +2267,17 @@ module Aws::BedrockAgentCoreControl
     #             },
     #           },
     #         ],
+    #         certificate_configurations: [
+    #           {
+    #             s3: {
+    #               uri: "CertificateS3Uri", # required
+    #               bucket_owner_account_id: "CertificateBucketOwnerAccountId",
+    #             },
+    #             secrets_manager: {
+    #               secret_arn: "CertificateSecretArn", # required
+    #             },
+    #           },
+    #         ],
     #         allowed_workload_configuration: {
     #           hosting_environments: [
     #             {
@@ -2235,6 +2307,10 @@ module Aws::BedrockAgentCoreControl
     #             ],
     #           },
     #         },
+    #         response_interception_mode: "BUFFERED", # accepts BUFFERED, STREAM
+    #         response_streaming_configuration: {
+    #           max_events_per_invocation: 1,
+    #         },
     #       },
     #     ],
     #     policy_engine_configuration: {
@@ -2244,6 +2320,10 @@ module Aws::BedrockAgentCoreControl
     #     exception_level: "DEBUG", # accepts DEBUG
     #     tags: {
     #       "TagKey" => "TagValue",
+    #     },
+    #     domain_override: {
+    #       default_domain: "PublicDomainName", # required
+    #       alternate_domains: ["PublicDomainName"],
     #     },
     #   })
     #
@@ -2307,6 +2387,10 @@ module Aws::BedrockAgentCoreControl
     #   resp.authorizer_configuration.custom_jwt_authorizer.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.tags #=> Hash
     #   resp.authorizer_configuration.custom_jwt_authorizer.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.tags["TagKey"] #=> String
     #   resp.authorizer_configuration.custom_jwt_authorizer.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.routing_domain #=> String
+    #   resp.authorizer_configuration.custom_jwt_authorizer.certificate_configurations #=> Array
+    #   resp.authorizer_configuration.custom_jwt_authorizer.certificate_configurations[0].s3.uri #=> String
+    #   resp.authorizer_configuration.custom_jwt_authorizer.certificate_configurations[0].s3.bucket_owner_account_id #=> String
+    #   resp.authorizer_configuration.custom_jwt_authorizer.certificate_configurations[0].secrets_manager.secret_arn #=> String
     #   resp.authorizer_configuration.custom_jwt_authorizer.allowed_workload_configuration.hosting_environments #=> Array
     #   resp.authorizer_configuration.custom_jwt_authorizer.allowed_workload_configuration.hosting_environments[0].arn #=> String
     #   resp.authorizer_configuration.custom_jwt_authorizer.allowed_workload_configuration.workload_identities #=> Array
@@ -2320,12 +2404,17 @@ module Aws::BedrockAgentCoreControl
     #   resp.interceptor_configurations[0].input_configuration.pass_request_headers #=> Boolean
     #   resp.interceptor_configurations[0].input_configuration.payload_filter.exclude #=> Array
     #   resp.interceptor_configurations[0].input_configuration.payload_filter.exclude[0].field #=> String, one of "RESPONSE_BODY"
+    #   resp.interceptor_configurations[0].response_interception_mode #=> String, one of "BUFFERED", "STREAM"
+    #   resp.interceptor_configurations[0].response_streaming_configuration.max_events_per_invocation #=> Integer
     #   resp.policy_engine_configuration.arn #=> String
     #   resp.policy_engine_configuration.mode #=> String, one of "LOG_ONLY", "ENFORCE"
     #   resp.workload_identity_details.workload_identity_arn #=> String
     #   resp.exception_level #=> String, one of "DEBUG"
     #   resp.web_acl_arn #=> String
     #   resp.waf_configuration.failure_mode #=> String, one of "FAIL_CLOSE", "FAIL_OPEN"
+    #   resp.domain_override.default_domain #=> String
+    #   resp.domain_override.alternate_domains #=> Array
+    #   resp.domain_override.alternate_domains[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/CreateGateway AWS API Documentation
     #
@@ -3289,6 +3378,13 @@ module Aws::BedrockAgentCoreControl
     #               volume_name: "CapacityProviderVolumeName", # required
     #               mount_path: "MountPath", # required
     #             },
+    #             s3_bucket_mount: {
+    #               bucket: "S3BucketMountConfigurationBucketString", # required
+    #               mount_path: "MountPath", # required
+    #               prefix: "S3BucketMountConfigurationPrefixString",
+    #               s3_bucket_owner: "S3BucketMountConfigurationS3BucketOwnerString",
+    #               s3_bucket_region: "S3BucketMountConfigurationS3BucketRegionString",
+    #             },
     #           },
     #         ],
     #       },
@@ -3358,6 +3454,17 @@ module Aws::BedrockAgentCoreControl
     #             },
     #           },
     #         ],
+    #         certificate_configurations: [
+    #           {
+    #             s3: {
+    #               uri: "CertificateS3Uri", # required
+    #               bucket_owner_account_id: "CertificateBucketOwnerAccountId",
+    #             },
+    #             secrets_manager: {
+    #               secret_arn: "CertificateSecretArn", # required
+    #             },
+    #           },
+    #         ],
     #         allowed_workload_configuration: {
     #           hosting_environments: [
     #             {
@@ -3424,6 +3531,14 @@ module Aws::BedrockAgentCoreControl
     #             url: "HarnessRemoteMcpUrl", # required
     #             headers: {
     #               "HttpHeaderKey" => "HttpHeaderValue",
+    #             },
+    #             outbound_auth: {
+    #               aws_iam: {
+    #                 service: "IamCredentialProviderServiceString", # required
+    #                 region: "IamCredentialProviderRegionString",
+    #               },
+    #               none: {
+    #               },
     #             },
     #           },
     #           agent_core_browser: {
@@ -3631,6 +3746,8 @@ module Aws::BedrockAgentCoreControl
     #   resp.harness.tools[0].config.remote_mcp.url #=> String
     #   resp.harness.tools[0].config.remote_mcp.headers #=> Hash
     #   resp.harness.tools[0].config.remote_mcp.headers["HttpHeaderKey"] #=> String
+    #   resp.harness.tools[0].config.remote_mcp.outbound_auth.aws_iam.service #=> String
+    #   resp.harness.tools[0].config.remote_mcp.outbound_auth.aws_iam.region #=> String
     #   resp.harness.tools[0].config.agent_core_browser.browser_arn #=> String
     #   resp.harness.tools[0].config.agent_core_gateway.gateway_arn #=> String
     #   resp.harness.tools[0].config.agent_core_gateway.outbound_auth.oauth.provider_arn #=> String
@@ -3677,6 +3794,11 @@ module Aws::BedrockAgentCoreControl
     #   resp.harness.environment.agent_core_runtime_environment.filesystem_configurations[0].efs_access_point.mount_path #=> String
     #   resp.harness.environment.agent_core_runtime_environment.filesystem_configurations[0].capacity_provider_volume.volume_name #=> String
     #   resp.harness.environment.agent_core_runtime_environment.filesystem_configurations[0].capacity_provider_volume.mount_path #=> String
+    #   resp.harness.environment.agent_core_runtime_environment.filesystem_configurations[0].s3_bucket_mount.bucket #=> String
+    #   resp.harness.environment.agent_core_runtime_environment.filesystem_configurations[0].s3_bucket_mount.mount_path #=> String
+    #   resp.harness.environment.agent_core_runtime_environment.filesystem_configurations[0].s3_bucket_mount.prefix #=> String
+    #   resp.harness.environment.agent_core_runtime_environment.filesystem_configurations[0].s3_bucket_mount.s3_bucket_owner #=> String
+    #   resp.harness.environment.agent_core_runtime_environment.filesystem_configurations[0].s3_bucket_mount.s3_bucket_region #=> String
     #   resp.harness.environment_artifact.container_configuration.container_uri #=> String
     #   resp.harness.environment_variables #=> Hash
     #   resp.harness.environment_variables["EnvironmentVariableKey"] #=> String
@@ -3718,6 +3840,10 @@ module Aws::BedrockAgentCoreControl
     #   resp.harness.authorizer_configuration.custom_jwt_authorizer.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.tags #=> Hash
     #   resp.harness.authorizer_configuration.custom_jwt_authorizer.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.tags["TagKey"] #=> String
     #   resp.harness.authorizer_configuration.custom_jwt_authorizer.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.routing_domain #=> String
+    #   resp.harness.authorizer_configuration.custom_jwt_authorizer.certificate_configurations #=> Array
+    #   resp.harness.authorizer_configuration.custom_jwt_authorizer.certificate_configurations[0].s3.uri #=> String
+    #   resp.harness.authorizer_configuration.custom_jwt_authorizer.certificate_configurations[0].s3.bucket_owner_account_id #=> String
+    #   resp.harness.authorizer_configuration.custom_jwt_authorizer.certificate_configurations[0].secrets_manager.secret_arn #=> String
     #   resp.harness.authorizer_configuration.custom_jwt_authorizer.allowed_workload_configuration.hosting_environments #=> Array
     #   resp.harness.authorizer_configuration.custom_jwt_authorizer.allowed_workload_configuration.hosting_environments[0].arn #=> String
     #   resp.harness.authorizer_configuration.custom_jwt_authorizer.allowed_workload_configuration.workload_identities #=> Array
@@ -3865,8 +3991,8 @@ module Aws::BedrockAgentCoreControl
     #   permissions for the memory to access Amazon Web Services services.
     #
     # @option params [required, Integer] :event_expiry_duration
-    #   The duration after which memory events expire. Specified as an ISO
-    #   8601 duration.
+    #   The number of days after which memory events expire, between 7 and
+    #   3650 days.
     #
     # @option params [Array<Types::MemoryStrategyInput>] :memory_strategies
     #   The memory strategies to use for this memory. Strategies define how
@@ -4490,6 +4616,17 @@ module Aws::BedrockAgentCoreControl
     #             },
     #           },
     #         ],
+    #         certificate_configurations: [
+    #           {
+    #             s3: {
+    #               uri: "CertificateS3Uri", # required
+    #               bucket_owner_account_id: "CertificateBucketOwnerAccountId",
+    #             },
+    #             secrets_manager: {
+    #               secret_arn: "CertificateSecretArn", # required
+    #             },
+    #           },
+    #         ],
     #       },
     #       google_oauth_2_provider_config: {
     #         client_id: "ClientIdType", # required
@@ -4618,6 +4755,10 @@ module Aws::BedrockAgentCoreControl
     #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.tags #=> Hash
     #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.tags["TagKey"] #=> String
     #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.routing_domain #=> String
+    #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.certificate_configurations #=> Array
+    #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.certificate_configurations[0].s3.uri #=> String
+    #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.certificate_configurations[0].s3.bucket_owner_account_id #=> String
+    #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.certificate_configurations[0].secrets_manager.secret_arn #=> String
     #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.private_key_jwt_config.private_key_source.kms_key_source.kms_key_arn #=> String
     #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.private_key_jwt_config.signing_algorithm #=> String, one of "RS256", "PS256", "ES256"
     #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.private_key_jwt_config.additional_header_claims #=> Hash
@@ -4888,10 +5029,15 @@ module Aws::BedrockAgentCoreControl
     #   The type of payment connector, which determines the payment provider
     #   integration.
     #
-    # @option params [required, Array<Types::CredentialsProviderConfiguration>] :credential_provider_configurations
+    # @option params [Array<Types::CredentialsProviderConfiguration>] :credential_provider_configurations
     #   The credential provider configurations for the payment connector.
     #   These configurations specify how the connector authenticates with the
     #   payment provider.
+    #
+    #   For an `AwsBilling` payment connector, omit this parameter or specify
+    #   an empty list. The service uses the AWS Marketplace service-linked
+    #   role in your account, which must exist before you create the
+    #   connector, and you must have permission to call `iam:GetRole` on it.
     #
     # @option params [String] :provision_mode
     #   The provision mode for creating the payment connector. If you don't
@@ -4934,14 +5080,17 @@ module Aws::BedrockAgentCoreControl
     #     payment_manager_id: "PaymentManagerId", # required
     #     name: "PaymentConnectorName", # required
     #     description: "PaymentsDescription",
-    #     type: "CoinbaseCDP", # required, accepts CoinbaseCDP, StripePrivy
-    #     credential_provider_configurations: [ # required
+    #     type: "CoinbaseCDP", # required, accepts CoinbaseCDP, StripePrivy, AwsBilling
+    #     credential_provider_configurations: [
     #       {
     #         coinbase_cdp: {
     #           credential_provider_arn: "PaymentCredentialProviderArn", # required
     #         },
     #         stripe_privy: {
     #           credential_provider_arn: "PaymentCredentialProviderArn", # required
+    #         },
+    #         aws_billing: {
+    #           iam_role_arn: "RoleArn", # required
     #         },
     #       },
     #     ],
@@ -4954,10 +5103,11 @@ module Aws::BedrockAgentCoreControl
     #   resp.payment_connector_id #=> String
     #   resp.payment_manager_id #=> String
     #   resp.name #=> String
-    #   resp.type #=> String, one of "CoinbaseCDP", "StripePrivy"
+    #   resp.type #=> String, one of "CoinbaseCDP", "StripePrivy", "AwsBilling"
     #   resp.credential_provider_configurations #=> Array
     #   resp.credential_provider_configurations[0].coinbase_cdp.credential_provider_arn #=> String
     #   resp.credential_provider_configurations[0].stripe_privy.credential_provider_arn #=> String
+    #   resp.credential_provider_configurations[0].aws_billing.iam_role_arn #=> String
     #   resp.created_at #=> Time
     #   resp.status #=> String, one of "CREATING", "UPDATING", "DELETING", "READY", "CREATE_FAILED", "UPDATE_FAILED", "DELETE_FAILED", "AWS_MARKETPLACE_SUBSCRIPTION_REQUIRED", "PENDING_AUTHENTICATION", "PROVISIONING", "AUTHENTICATION_EXPIRED", "AUTHENTICATION_FAILED"
     #   resp.authorization_url #=> String
@@ -5196,6 +5346,17 @@ module Aws::BedrockAgentCoreControl
     #             },
     #           },
     #         ],
+    #         certificate_configurations: [
+    #           {
+    #             s3: {
+    #               uri: "CertificateS3Uri", # required
+    #               bucket_owner_account_id: "CertificateBucketOwnerAccountId",
+    #             },
+    #             secrets_manager: {
+    #               secret_arn: "CertificateSecretArn", # required
+    #             },
+    #           },
+    #         ],
     #         allowed_workload_configuration: {
     #           hosting_environments: [
     #             {
@@ -5258,6 +5419,10 @@ module Aws::BedrockAgentCoreControl
     #   resp.authorizer_configuration.custom_jwt_authorizer.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.tags #=> Hash
     #   resp.authorizer_configuration.custom_jwt_authorizer.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.tags["TagKey"] #=> String
     #   resp.authorizer_configuration.custom_jwt_authorizer.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.routing_domain #=> String
+    #   resp.authorizer_configuration.custom_jwt_authorizer.certificate_configurations #=> Array
+    #   resp.authorizer_configuration.custom_jwt_authorizer.certificate_configurations[0].s3.uri #=> String
+    #   resp.authorizer_configuration.custom_jwt_authorizer.certificate_configurations[0].s3.bucket_owner_account_id #=> String
+    #   resp.authorizer_configuration.custom_jwt_authorizer.certificate_configurations[0].secrets_manager.secret_arn #=> String
     #   resp.authorizer_configuration.custom_jwt_authorizer.allowed_workload_configuration.hosting_environments #=> Array
     #   resp.authorizer_configuration.custom_jwt_authorizer.allowed_workload_configuration.hosting_environments[0].arn #=> String
     #   resp.authorizer_configuration.custom_jwt_authorizer.allowed_workload_configuration.workload_identities #=> Array
@@ -5625,6 +5790,17 @@ module Aws::BedrockAgentCoreControl
     #                 },
     #                 routing_domain: "RoutingDomain",
     #               },
+    #             },
+    #           },
+    #         ],
+    #         certificate_configurations: [
+    #           {
+    #             s3: {
+    #               uri: "CertificateS3Uri", # required
+    #               bucket_owner_account_id: "CertificateBucketOwnerAccountId",
+    #             },
+    #             secrets_manager: {
+    #               secret_arn: "CertificateSecretArn", # required
     #             },
     #           },
     #         ],
@@ -6545,6 +6721,8 @@ module Aws::BedrockAgentCoreControl
     #   resp.harness.tools[0].config.remote_mcp.url #=> String
     #   resp.harness.tools[0].config.remote_mcp.headers #=> Hash
     #   resp.harness.tools[0].config.remote_mcp.headers["HttpHeaderKey"] #=> String
+    #   resp.harness.tools[0].config.remote_mcp.outbound_auth.aws_iam.service #=> String
+    #   resp.harness.tools[0].config.remote_mcp.outbound_auth.aws_iam.region #=> String
     #   resp.harness.tools[0].config.agent_core_browser.browser_arn #=> String
     #   resp.harness.tools[0].config.agent_core_gateway.gateway_arn #=> String
     #   resp.harness.tools[0].config.agent_core_gateway.outbound_auth.oauth.provider_arn #=> String
@@ -6591,6 +6769,11 @@ module Aws::BedrockAgentCoreControl
     #   resp.harness.environment.agent_core_runtime_environment.filesystem_configurations[0].efs_access_point.mount_path #=> String
     #   resp.harness.environment.agent_core_runtime_environment.filesystem_configurations[0].capacity_provider_volume.volume_name #=> String
     #   resp.harness.environment.agent_core_runtime_environment.filesystem_configurations[0].capacity_provider_volume.mount_path #=> String
+    #   resp.harness.environment.agent_core_runtime_environment.filesystem_configurations[0].s3_bucket_mount.bucket #=> String
+    #   resp.harness.environment.agent_core_runtime_environment.filesystem_configurations[0].s3_bucket_mount.mount_path #=> String
+    #   resp.harness.environment.agent_core_runtime_environment.filesystem_configurations[0].s3_bucket_mount.prefix #=> String
+    #   resp.harness.environment.agent_core_runtime_environment.filesystem_configurations[0].s3_bucket_mount.s3_bucket_owner #=> String
+    #   resp.harness.environment.agent_core_runtime_environment.filesystem_configurations[0].s3_bucket_mount.s3_bucket_region #=> String
     #   resp.harness.environment_artifact.container_configuration.container_uri #=> String
     #   resp.harness.environment_variables #=> Hash
     #   resp.harness.environment_variables["EnvironmentVariableKey"] #=> String
@@ -6632,6 +6815,10 @@ module Aws::BedrockAgentCoreControl
     #   resp.harness.authorizer_configuration.custom_jwt_authorizer.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.tags #=> Hash
     #   resp.harness.authorizer_configuration.custom_jwt_authorizer.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.tags["TagKey"] #=> String
     #   resp.harness.authorizer_configuration.custom_jwt_authorizer.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.routing_domain #=> String
+    #   resp.harness.authorizer_configuration.custom_jwt_authorizer.certificate_configurations #=> Array
+    #   resp.harness.authorizer_configuration.custom_jwt_authorizer.certificate_configurations[0].s3.uri #=> String
+    #   resp.harness.authorizer_configuration.custom_jwt_authorizer.certificate_configurations[0].s3.bucket_owner_account_id #=> String
+    #   resp.harness.authorizer_configuration.custom_jwt_authorizer.certificate_configurations[0].secrets_manager.secret_arn #=> String
     #   resp.harness.authorizer_configuration.custom_jwt_authorizer.allowed_workload_configuration.hosting_environments #=> Array
     #   resp.harness.authorizer_configuration.custom_jwt_authorizer.allowed_workload_configuration.hosting_environments[0].arn #=> String
     #   resp.harness.authorizer_configuration.custom_jwt_authorizer.allowed_workload_configuration.workload_identities #=> Array
@@ -7176,6 +7363,52 @@ module Aws::BedrockAgentCoreControl
       req.send_request(options)
     end
 
+    # Returns the account's service-defined default Agent Insight Store.
+    # The logical default exists for every enrolled account; its backing
+    # state may be initialized on first access.
+    #
+    # @option params [required, String] :agent_insight_store_id
+    #   Specifies the unique identifier of the Agent Insight Store to
+    #   retrieve.
+    #
+    # @return [Types::GetAgentInsightStoreResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetAgentInsightStoreResponse#agent_insight_store_arn #agent_insight_store_arn} => String
+    #   * {Types::GetAgentInsightStoreResponse#agent_insight_store_id #agent_insight_store_id} => String
+    #   * {Types::GetAgentInsightStoreResponse#status #status} => String
+    #   * {Types::GetAgentInsightStoreResponse#enablement_status #enablement_status} => String
+    #   * {Types::GetAgentInsightStoreResponse#encryption_configuration #encryption_configuration} => Types::AgentInsightStoreEncryptionConfiguration
+    #   * {Types::GetAgentInsightStoreResponse#created_at #created_at} => Time
+    #   * {Types::GetAgentInsightStoreResponse#updated_at #updated_at} => Time
+    #   * {Types::GetAgentInsightStoreResponse#failure_reason #failure_reason} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_agent_insight_store({
+    #     agent_insight_store_id: "AgentInsightStoreId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.agent_insight_store_arn #=> String
+    #   resp.agent_insight_store_id #=> String
+    #   resp.status #=> String, one of "ACTIVE", "UPDATING", "INACTIVE", "ERROR"
+    #   resp.enablement_status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.encryption_configuration.mode #=> String, one of "AWS_OWNED_KMS_KEY", "CUSTOMER_MANAGED_KMS"
+    #   resp.encryption_configuration.kms_key_arn #=> String
+    #   resp.created_at #=> Time
+    #   resp.updated_at #=> Time
+    #   resp.failure_reason #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/GetAgentInsightStore AWS API Documentation
+    #
+    # @overload get_agent_insight_store(params = {})
+    # @param [Hash] params ({})
+    def get_agent_insight_store(params = {}, options = {})
+      req = build_request(:get_agent_insight_store, params)
+      req.send_request(options)
+    end
+
     # Gets an Amazon Bedrock AgentCore Runtime.
     #
     # @option params [required, String] :agent_runtime_id
@@ -7196,6 +7429,7 @@ module Aws::BedrockAgentCoreControl
     #   * {Types::GetAgentRuntimeResponse#network_configuration #network_configuration} => Types::NetworkConfiguration
     #   * {Types::GetAgentRuntimeResponse#status #status} => String
     #   * {Types::GetAgentRuntimeResponse#lifecycle_configuration #lifecycle_configuration} => Types::LifecycleConfiguration
+    #   * {Types::GetAgentRuntimeResponse#hooks_configuration #hooks_configuration} => Types::RuntimeHooksConfiguration
     #   * {Types::GetAgentRuntimeResponse#failure_reason #failure_reason} => String
     #   * {Types::GetAgentRuntimeResponse#description #description} => String
     #   * {Types::GetAgentRuntimeResponse#workload_identity_details #workload_identity_details} => Types::WorkloadIdentityDetails
@@ -7209,6 +7443,7 @@ module Aws::BedrockAgentCoreControl
     #   * {Types::GetAgentRuntimeResponse#capacity_provider_configuration #capacity_provider_configuration} => Types::CapacityProviderConfiguration
     #   * {Types::GetAgentRuntimeResponse#platform_version #platform_version} => String
     #   * {Types::GetAgentRuntimeResponse#allowed_ports #allowed_ports} => Array&lt;Types::AllowedPort&gt;
+    #   * {Types::GetAgentRuntimeResponse#resource_configurations #resource_configurations} => Array&lt;Types::ResourceConfiguration&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -7235,6 +7470,8 @@ module Aws::BedrockAgentCoreControl
     #   resp.status #=> String, one of "CREATING", "CREATE_FAILED", "UPDATING", "UPDATE_FAILED", "READY", "DELETING", "DELETE_FAILED"
     #   resp.lifecycle_configuration.idle_runtime_session_timeout #=> Integer
     #   resp.lifecycle_configuration.max_lifetime #=> Integer
+    #   resp.hooks_configuration.build.warmup.action.http_post.path #=> String
+    #   resp.hooks_configuration.build.warmup.action.http_post.port #=> Integer
     #   resp.failure_reason #=> String
     #   resp.description #=> String
     #   resp.workload_identity_details.workload_identity_arn #=> String
@@ -7288,6 +7525,10 @@ module Aws::BedrockAgentCoreControl
     #   resp.authorizer_configuration.custom_jwt_authorizer.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.tags #=> Hash
     #   resp.authorizer_configuration.custom_jwt_authorizer.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.tags["TagKey"] #=> String
     #   resp.authorizer_configuration.custom_jwt_authorizer.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.routing_domain #=> String
+    #   resp.authorizer_configuration.custom_jwt_authorizer.certificate_configurations #=> Array
+    #   resp.authorizer_configuration.custom_jwt_authorizer.certificate_configurations[0].s3.uri #=> String
+    #   resp.authorizer_configuration.custom_jwt_authorizer.certificate_configurations[0].s3.bucket_owner_account_id #=> String
+    #   resp.authorizer_configuration.custom_jwt_authorizer.certificate_configurations[0].secrets_manager.secret_arn #=> String
     #   resp.authorizer_configuration.custom_jwt_authorizer.allowed_workload_configuration.hosting_environments #=> Array
     #   resp.authorizer_configuration.custom_jwt_authorizer.allowed_workload_configuration.hosting_environments[0].arn #=> String
     #   resp.authorizer_configuration.custom_jwt_authorizer.allowed_workload_configuration.workload_identities #=> Array
@@ -7303,12 +7544,20 @@ module Aws::BedrockAgentCoreControl
     #   resp.filesystem_configurations[0].efs_access_point.mount_path #=> String
     #   resp.filesystem_configurations[0].capacity_provider_volume.volume_name #=> String
     #   resp.filesystem_configurations[0].capacity_provider_volume.mount_path #=> String
+    #   resp.filesystem_configurations[0].s3_bucket_mount.bucket #=> String
+    #   resp.filesystem_configurations[0].s3_bucket_mount.mount_path #=> String
+    #   resp.filesystem_configurations[0].s3_bucket_mount.prefix #=> String
+    #   resp.filesystem_configurations[0].s3_bucket_mount.s3_bucket_owner #=> String
+    #   resp.filesystem_configurations[0].s3_bucket_mount.s3_bucket_region #=> String
     #   resp.capacity_provider_configuration.capacity_provider_arn #=> String
+    #   resp.capacity_provider_configuration.operating_system_configuration.linux.privilege_mode #=> String, one of "STANDARD", "PRIVILEGED"
     #   resp.platform_version #=> String
     #   resp.allowed_ports #=> Array
     #   resp.allowed_ports[0].port #=> Integer
     #   resp.allowed_ports[0].port_range.from #=> Integer
     #   resp.allowed_ports[0].port_range.to #=> Integer
+    #   resp.resource_configurations #=> Array
+    #   resp.resource_configurations[0].minimum_memory_in_mi_b #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/GetAgentRuntime AWS API Documentation
     #
@@ -7594,6 +7843,7 @@ module Aws::BedrockAgentCoreControl
     #   resp.compute_configuration.ec2_configuration.launch_template_source.launch_parameters.instance_profile_arn #=> String
     #   resp.compute_configuration.ec2_configuration.launch_template_source.launch_parameters.propagated_tags #=> Hash
     #   resp.compute_configuration.ec2_configuration.launch_template_source.launch_parameters.propagated_tags["TagKey"] #=> String
+    #   resp.compute_configuration.ec2_configuration.launch_template_source.launch_parameters.cpu_options.nested_virtualization #=> String, one of "ENABLED", "DISABLED"
     #   resp.compute_configuration.ec2_configuration.vpc_configuration.subnets #=> Array
     #   resp.compute_configuration.ec2_configuration.vpc_configuration.subnets[0] #=> String
     #   resp.compute_configuration.ec2_configuration.vpc_configuration.security_groups #=> Array
@@ -7885,6 +8135,7 @@ module Aws::BedrockAgentCoreControl
     #   * {Types::GetDatasetResponse#schema_type #schema_type} => String
     #   * {Types::GetDatasetResponse#kms_key_arn #kms_key_arn} => String
     #   * {Types::GetDatasetResponse#example_count #example_count} => Integer
+    #   * {Types::GetDatasetResponse#example_count_by_field #example_count_by_field} => Types::ExampleCountByField
     #   * {Types::GetDatasetResponse#download_url #download_url} => String
     #   * {Types::GetDatasetResponse#download_url_expires_at #download_url_expires_at} => Time
     #   * {Types::GetDatasetResponse#created_at #created_at} => Time
@@ -7911,6 +8162,9 @@ module Aws::BedrockAgentCoreControl
     #   resp.schema_type #=> String, one of "AGENTCORE_EVALUATION_PREDEFINED_V1", "AGENTCORE_EVALUATION_SIMULATED_V1", "THIRD_PARTY_EVALUATION_V1"
     #   resp.kms_key_arn #=> String
     #   resp.example_count #=> Integer
+    #   resp.example_count_by_field.turns #=> Integer
+    #   resp.example_count_by_field.input #=> Integer
+    #   resp.example_count_by_field.actor_profile #=> Integer
     #   resp.download_url #=> String
     #   resp.download_url_expires_at #=> Time
     #   resp.created_at #=> Time
@@ -8062,6 +8316,7 @@ module Aws::BedrockAgentCoreControl
     #   * {Types::GetGatewayResponse#exception_level #exception_level} => String
     #   * {Types::GetGatewayResponse#web_acl_arn #web_acl_arn} => String
     #   * {Types::GetGatewayResponse#waf_configuration #waf_configuration} => Types::WafConfiguration
+    #   * {Types::GetGatewayResponse#domain_override #domain_override} => Types::DomainOverride
     #
     # @example Request syntax with placeholder values
     #
@@ -8129,6 +8384,10 @@ module Aws::BedrockAgentCoreControl
     #   resp.authorizer_configuration.custom_jwt_authorizer.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.tags #=> Hash
     #   resp.authorizer_configuration.custom_jwt_authorizer.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.tags["TagKey"] #=> String
     #   resp.authorizer_configuration.custom_jwt_authorizer.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.routing_domain #=> String
+    #   resp.authorizer_configuration.custom_jwt_authorizer.certificate_configurations #=> Array
+    #   resp.authorizer_configuration.custom_jwt_authorizer.certificate_configurations[0].s3.uri #=> String
+    #   resp.authorizer_configuration.custom_jwt_authorizer.certificate_configurations[0].s3.bucket_owner_account_id #=> String
+    #   resp.authorizer_configuration.custom_jwt_authorizer.certificate_configurations[0].secrets_manager.secret_arn #=> String
     #   resp.authorizer_configuration.custom_jwt_authorizer.allowed_workload_configuration.hosting_environments #=> Array
     #   resp.authorizer_configuration.custom_jwt_authorizer.allowed_workload_configuration.hosting_environments[0].arn #=> String
     #   resp.authorizer_configuration.custom_jwt_authorizer.allowed_workload_configuration.workload_identities #=> Array
@@ -8142,12 +8401,17 @@ module Aws::BedrockAgentCoreControl
     #   resp.interceptor_configurations[0].input_configuration.pass_request_headers #=> Boolean
     #   resp.interceptor_configurations[0].input_configuration.payload_filter.exclude #=> Array
     #   resp.interceptor_configurations[0].input_configuration.payload_filter.exclude[0].field #=> String, one of "RESPONSE_BODY"
+    #   resp.interceptor_configurations[0].response_interception_mode #=> String, one of "BUFFERED", "STREAM"
+    #   resp.interceptor_configurations[0].response_streaming_configuration.max_events_per_invocation #=> Integer
     #   resp.policy_engine_configuration.arn #=> String
     #   resp.policy_engine_configuration.mode #=> String, one of "LOG_ONLY", "ENFORCE"
     #   resp.workload_identity_details.workload_identity_arn #=> String
     #   resp.exception_level #=> String, one of "DEBUG"
     #   resp.web_acl_arn #=> String
     #   resp.waf_configuration.failure_mode #=> String, one of "FAIL_CLOSE", "FAIL_OPEN"
+    #   resp.domain_override.default_domain #=> String
+    #   resp.domain_override.alternate_domains #=> Array
+    #   resp.domain_override.alternate_domains[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/GetGateway AWS API Documentation
     #
@@ -8566,6 +8830,8 @@ module Aws::BedrockAgentCoreControl
     #   resp.harness.tools[0].config.remote_mcp.url #=> String
     #   resp.harness.tools[0].config.remote_mcp.headers #=> Hash
     #   resp.harness.tools[0].config.remote_mcp.headers["HttpHeaderKey"] #=> String
+    #   resp.harness.tools[0].config.remote_mcp.outbound_auth.aws_iam.service #=> String
+    #   resp.harness.tools[0].config.remote_mcp.outbound_auth.aws_iam.region #=> String
     #   resp.harness.tools[0].config.agent_core_browser.browser_arn #=> String
     #   resp.harness.tools[0].config.agent_core_gateway.gateway_arn #=> String
     #   resp.harness.tools[0].config.agent_core_gateway.outbound_auth.oauth.provider_arn #=> String
@@ -8612,6 +8878,11 @@ module Aws::BedrockAgentCoreControl
     #   resp.harness.environment.agent_core_runtime_environment.filesystem_configurations[0].efs_access_point.mount_path #=> String
     #   resp.harness.environment.agent_core_runtime_environment.filesystem_configurations[0].capacity_provider_volume.volume_name #=> String
     #   resp.harness.environment.agent_core_runtime_environment.filesystem_configurations[0].capacity_provider_volume.mount_path #=> String
+    #   resp.harness.environment.agent_core_runtime_environment.filesystem_configurations[0].s3_bucket_mount.bucket #=> String
+    #   resp.harness.environment.agent_core_runtime_environment.filesystem_configurations[0].s3_bucket_mount.mount_path #=> String
+    #   resp.harness.environment.agent_core_runtime_environment.filesystem_configurations[0].s3_bucket_mount.prefix #=> String
+    #   resp.harness.environment.agent_core_runtime_environment.filesystem_configurations[0].s3_bucket_mount.s3_bucket_owner #=> String
+    #   resp.harness.environment.agent_core_runtime_environment.filesystem_configurations[0].s3_bucket_mount.s3_bucket_region #=> String
     #   resp.harness.environment_artifact.container_configuration.container_uri #=> String
     #   resp.harness.environment_variables #=> Hash
     #   resp.harness.environment_variables["EnvironmentVariableKey"] #=> String
@@ -8653,6 +8924,10 @@ module Aws::BedrockAgentCoreControl
     #   resp.harness.authorizer_configuration.custom_jwt_authorizer.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.tags #=> Hash
     #   resp.harness.authorizer_configuration.custom_jwt_authorizer.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.tags["TagKey"] #=> String
     #   resp.harness.authorizer_configuration.custom_jwt_authorizer.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.routing_domain #=> String
+    #   resp.harness.authorizer_configuration.custom_jwt_authorizer.certificate_configurations #=> Array
+    #   resp.harness.authorizer_configuration.custom_jwt_authorizer.certificate_configurations[0].s3.uri #=> String
+    #   resp.harness.authorizer_configuration.custom_jwt_authorizer.certificate_configurations[0].s3.bucket_owner_account_id #=> String
+    #   resp.harness.authorizer_configuration.custom_jwt_authorizer.certificate_configurations[0].secrets_manager.secret_arn #=> String
     #   resp.harness.authorizer_configuration.custom_jwt_authorizer.allowed_workload_configuration.hosting_environments #=> Array
     #   resp.harness.authorizer_configuration.custom_jwt_authorizer.allowed_workload_configuration.hosting_environments[0].arn #=> String
     #   resp.harness.authorizer_configuration.custom_jwt_authorizer.allowed_workload_configuration.workload_identities #=> Array
@@ -8967,6 +9242,10 @@ module Aws::BedrockAgentCoreControl
     #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.tags #=> Hash
     #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.tags["TagKey"] #=> String
     #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.routing_domain #=> String
+    #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.certificate_configurations #=> Array
+    #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.certificate_configurations[0].s3.uri #=> String
+    #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.certificate_configurations[0].s3.bucket_owner_account_id #=> String
+    #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.certificate_configurations[0].secrets_manager.secret_arn #=> String
     #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.private_key_jwt_config.private_key_source.kms_key_source.kms_key_arn #=> String
     #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.private_key_jwt_config.signing_algorithm #=> String, one of "RS256", "PS256", "ES256"
     #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.private_key_jwt_config.additional_header_claims #=> Hash
@@ -9171,11 +9450,12 @@ module Aws::BedrockAgentCoreControl
     #   resp.payment_connector_id #=> String
     #   resp.name #=> String
     #   resp.description #=> String
-    #   resp.type #=> String, one of "CoinbaseCDP", "StripePrivy"
+    #   resp.type #=> String, one of "CoinbaseCDP", "StripePrivy", "AwsBilling"
     #   resp.provision_mode #=> String, one of "MANUAL", "QUICK_CREATE"
     #   resp.credential_provider_configurations #=> Array
     #   resp.credential_provider_configurations[0].coinbase_cdp.credential_provider_arn #=> String
     #   resp.credential_provider_configurations[0].stripe_privy.credential_provider_arn #=> String
+    #   resp.credential_provider_configurations[0].aws_billing.iam_role_arn #=> String
     #   resp.created_at #=> Time
     #   resp.last_updated_at #=> Time
     #   resp.status #=> String, one of "CREATING", "UPDATING", "DELETING", "READY", "CREATE_FAILED", "UPDATE_FAILED", "DELETE_FAILED", "AWS_MARKETPLACE_SUBSCRIPTION_REQUIRED", "PENDING_AUTHENTICATION", "PROVISIONING", "AUTHENTICATION_EXPIRED", "AUTHENTICATION_FAILED"
@@ -9318,6 +9598,10 @@ module Aws::BedrockAgentCoreControl
     #   resp.authorizer_configuration.custom_jwt_authorizer.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.tags #=> Hash
     #   resp.authorizer_configuration.custom_jwt_authorizer.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.tags["TagKey"] #=> String
     #   resp.authorizer_configuration.custom_jwt_authorizer.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.routing_domain #=> String
+    #   resp.authorizer_configuration.custom_jwt_authorizer.certificate_configurations #=> Array
+    #   resp.authorizer_configuration.custom_jwt_authorizer.certificate_configurations[0].s3.uri #=> String
+    #   resp.authorizer_configuration.custom_jwt_authorizer.certificate_configurations[0].s3.bucket_owner_account_id #=> String
+    #   resp.authorizer_configuration.custom_jwt_authorizer.certificate_configurations[0].secrets_manager.secret_arn #=> String
     #   resp.authorizer_configuration.custom_jwt_authorizer.allowed_workload_configuration.hosting_environments #=> Array
     #   resp.authorizer_configuration.custom_jwt_authorizer.allowed_workload_configuration.hosting_environments[0].arn #=> String
     #   resp.authorizer_configuration.custom_jwt_authorizer.allowed_workload_configuration.workload_identities #=> Array
@@ -9759,6 +10043,10 @@ module Aws::BedrockAgentCoreControl
     #   resp.authorizer_configuration.custom_jwt_authorizer.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.tags #=> Hash
     #   resp.authorizer_configuration.custom_jwt_authorizer.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.tags["TagKey"] #=> String
     #   resp.authorizer_configuration.custom_jwt_authorizer.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.routing_domain #=> String
+    #   resp.authorizer_configuration.custom_jwt_authorizer.certificate_configurations #=> Array
+    #   resp.authorizer_configuration.custom_jwt_authorizer.certificate_configurations[0].s3.uri #=> String
+    #   resp.authorizer_configuration.custom_jwt_authorizer.certificate_configurations[0].s3.bucket_owner_account_id #=> String
+    #   resp.authorizer_configuration.custom_jwt_authorizer.certificate_configurations[0].secrets_manager.secret_arn #=> String
     #   resp.authorizer_configuration.custom_jwt_authorizer.allowed_workload_configuration.hosting_environments #=> Array
     #   resp.authorizer_configuration.custom_jwt_authorizer.allowed_workload_configuration.hosting_environments[0].arn #=> String
     #   resp.authorizer_configuration.custom_jwt_authorizer.allowed_workload_configuration.workload_identities #=> Array
@@ -9959,6 +10247,57 @@ module Aws::BedrockAgentCoreControl
     # @param [Hash] params ({})
     def get_workload_identity(params = {}, options = {})
       req = build_request(:get_workload_identity, params)
+      req.send_request(options)
+    end
+
+    # Lists the account's service-defined default Agent Insight Store. The
+    # singleton backing state may be initialized on first access.
+    #
+    # @option params [String] :next_token
+    #   If the total number of results is greater than the `maxResults` value
+    #   provided in the request, enter the token returned in the `nextToken`
+    #   field in the response in this field to return the next batch of
+    #   results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in the response. If the total
+    #   number of results is greater than this value, use the token returned
+    #   in the response in the `nextToken` field when making another request
+    #   to return the next batch of results.
+    #
+    # @return [Types::ListAgentInsightStoresResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListAgentInsightStoresResponse#agent_insight_stores #agent_insight_stores} => Array&lt;Types::AgentInsightStoreSummary&gt;
+    #   * {Types::ListAgentInsightStoresResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_agent_insight_stores({
+    #     next_token: "ListAgentInsightStoresRequestNextTokenString",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.agent_insight_stores #=> Array
+    #   resp.agent_insight_stores[0].agent_insight_store_arn #=> String
+    #   resp.agent_insight_stores[0].agent_insight_store_id #=> String
+    #   resp.agent_insight_stores[0].status #=> String, one of "ACTIVE", "UPDATING", "INACTIVE", "ERROR"
+    #   resp.agent_insight_stores[0].enablement_status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.agent_insight_stores[0].encryption_configuration.mode #=> String, one of "AWS_OWNED_KMS_KEY", "CUSTOMER_MANAGED_KMS"
+    #   resp.agent_insight_stores[0].encryption_configuration.kms_key_arn #=> String
+    #   resp.agent_insight_stores[0].created_at #=> Time
+    #   resp.agent_insight_stores[0].updated_at #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/ListAgentInsightStores AWS API Documentation
+    #
+    # @overload list_agent_insight_stores(params = {})
+    # @param [Hash] params ({})
+    def list_agent_insight_stores(params = {}, options = {})
+      req = build_request(:list_agent_insight_stores, params)
       req.send_request(options)
     end
 
@@ -10560,15 +10899,22 @@ module Aws::BedrockAgentCoreControl
     # Returns paginated examples from the dataset. The server embeds the
     # resolved version in the pagination token. Once pagination begins, all
     # subsequent pages are pinned to that version regardless of concurrent
-    # mutations.
+    # mutations. A request with a pagination token can omit
+    # `datasetVersion`. If it sets a version that differs from the token's
+    # version, the request fails with a `ValidationException`.
     #
     # @option params [required, String] :dataset_id
     #   The unique identifier of the dataset.
     #
     # @option params [String] :dataset_version
     #   Version to paginate: "DRAFT" or a version number. Defaults to DRAFT
-    #   if absent. Only used on the first request; for subsequent pages, the
-    #   version is extracted from the pagination token.
+    #   if absent on the first request. With a pagination token, the version
+    #   comes from the token: you can omit this member, and a value that
+    #   differs from the token's version is rejected with a
+    #   `ValidationException`.
+    #
+    # @option params [Types::ListDatasetExamplesFilter] :filter
+    #   A filter to apply to the examples.
     #
     # @option params [Integer] :max_results
     #   Maximum number of examples to return per page.
@@ -10591,6 +10937,14 @@ module Aws::BedrockAgentCoreControl
     #   resp = client.list_dataset_examples({
     #     dataset_id: "DatasetId", # required
     #     dataset_version: "DatasetVersion",
+    #     filter: {
+    #       generation_ids: ["DatasetGenerationId"],
+    #       example_fields: [
+    #         {
+    #           any_of: ["TURNS"], # accepts TURNS, INPUT, ACTOR_PROFILE
+    #         },
+    #       ],
+    #     },
     #     max_results: 1,
     #     next_token: "ListDatasetExamplesRequestNextTokenString",
     #   })
@@ -10618,6 +10972,9 @@ module Aws::BedrockAgentCoreControl
     # @option params [required, String] :dataset_id
     #   The unique identifier of the dataset.
     #
+    # @option params [Types::ListDatasetVersionsFilter] :filter
+    #   A filter to apply to the dataset versions.
+    #
     # @option params [String] :next_token
     #   The token for the next page of results.
     #
@@ -10635,7 +10992,16 @@ module Aws::BedrockAgentCoreControl
     #
     #   resp = client.list_dataset_versions({
     #     dataset_id: "DatasetId", # required
-    #     next_token: "String",
+    #     filter: {
+    #       example_count_by_field: [
+    #         {
+    #           any_of: ["TURNS"], # accepts TURNS, INPUT, ACTOR_PROFILE
+    #           min: 1,
+    #           max: 1,
+    #         },
+    #       ],
+    #     },
+    #     next_token: "ListDatasetVersionsRequestNextTokenString",
     #     max_results: 1,
     #   })
     #
@@ -10644,6 +11010,9 @@ module Aws::BedrockAgentCoreControl
     #   resp.versions #=> Array
     #   resp.versions[0].dataset_version #=> String
     #   resp.versions[0].example_count #=> Integer
+    #   resp.versions[0].example_count_by_field.turns #=> Integer
+    #   resp.versions[0].example_count_by_field.input #=> Integer
+    #   resp.versions[0].example_count_by_field.actor_profile #=> Integer
     #   resp.versions[0].created_at #=> Time
     #   resp.next_token #=> String
     #
@@ -10657,6 +11026,9 @@ module Aws::BedrockAgentCoreControl
     end
 
     # Lists all datasets in the caller's account, paginated.
+    #
+    # @option params [Types::ListDatasetsFilter] :filter
+    #   A filter to apply to the datasets.
     #
     # @option params [String] :next_token
     #   The token for the next page of results.
@@ -10674,6 +11046,15 @@ module Aws::BedrockAgentCoreControl
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_datasets({
+    #     filter: {
+    #       example_count_by_field: [
+    #         {
+    #           any_of: ["TURNS"], # accepts TURNS, INPUT, ACTOR_PROFILE
+    #           min: 1,
+    #           max: 1,
+    #         },
+    #       ],
+    #     },
     #     next_token: "ListDatasetsRequestNextTokenString",
     #     max_results: 1,
     #   })
@@ -10689,6 +11070,9 @@ module Aws::BedrockAgentCoreControl
     #   resp.datasets[0].draft_status #=> String, one of "MODIFIED", "UNMODIFIED"
     #   resp.datasets[0].schema_type #=> String, one of "AGENTCORE_EVALUATION_PREDEFINED_V1", "AGENTCORE_EVALUATION_SIMULATED_V1", "THIRD_PARTY_EVALUATION_V1"
     #   resp.datasets[0].example_count #=> Integer
+    #   resp.datasets[0].example_count_by_field.turns #=> Integer
+    #   resp.datasets[0].example_count_by_field.input #=> Integer
+    #   resp.datasets[0].example_count_by_field.actor_profile #=> Integer
     #   resp.datasets[0].created_at #=> Time
     #   resp.datasets[0].updated_at #=> Time
     #   resp.next_token #=> String
@@ -11352,7 +11736,7 @@ module Aws::BedrockAgentCoreControl
     #   resp.payment_connectors #=> Array
     #   resp.payment_connectors[0].payment_connector_id #=> String
     #   resp.payment_connectors[0].name #=> String
-    #   resp.payment_connectors[0].type #=> String, one of "CoinbaseCDP", "StripePrivy"
+    #   resp.payment_connectors[0].type #=> String, one of "CoinbaseCDP", "StripePrivy", "AwsBilling"
     #   resp.payment_connectors[0].provision_mode #=> String, one of "MANUAL", "QUICK_CREATE"
     #   resp.payment_connectors[0].status #=> String, one of "CREATING", "UPDATING", "DELETING", "READY", "CREATE_FAILED", "UPDATE_FAILED", "DELETE_FAILED", "AWS_MARKETPLACE_SUBSCRIPTION_REQUIRED", "PENDING_AUTHENTICATION", "PROVISIONING", "AUTHENTICATION_EXPIRED", "AUTHENTICATION_FAILED"
     #   resp.payment_connectors[0].last_updated_at #=> Time
@@ -12722,6 +13106,75 @@ module Aws::BedrockAgentCoreControl
       req.send_request(options)
     end
 
+    # Updates the enablement status or encryption configuration of an Agent
+    # Insight Store.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier to ensure that the API request
+    #   completes no more than one time. If you don't specify this field, a
+    #   value is randomly generated for you. If this token matches a previous
+    #   request, the service ignores the request, but doesn't return an
+    #   error. For more information, see [Ensuring idempotency][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #
+    # @option params [required, String] :agent_insight_store_id
+    #   Specifies the unique identifier of the Agent Insight Store to update.
+    #
+    # @option params [String] :enablement_status
+    #   Specifies whether the Agent Insight Store accepts new Agent Insights.
+    #   If you don't specify this parameter, the store's current enablement
+    #   setting remains unchanged.
+    #
+    # @option params [Types::AgentInsightStoreEncryptionConfiguration] :encryption_configuration
+    #   Specifies the encryption mode and key configuration to use for new
+    #   Agent Insights. If you don't specify this parameter, the store's
+    #   current encryption configuration remains unchanged.
+    #
+    # @return [Types::UpdateAgentInsightStoreResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateAgentInsightStoreResponse#agent_insight_store_arn #agent_insight_store_arn} => String
+    #   * {Types::UpdateAgentInsightStoreResponse#agent_insight_store_id #agent_insight_store_id} => String
+    #   * {Types::UpdateAgentInsightStoreResponse#status #status} => String
+    #   * {Types::UpdateAgentInsightStoreResponse#enablement_status #enablement_status} => String
+    #   * {Types::UpdateAgentInsightStoreResponse#updated_at #updated_at} => Time
+    #   * {Types::UpdateAgentInsightStoreResponse#failure_reason #failure_reason} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_agent_insight_store({
+    #     client_token: "ClientToken",
+    #     agent_insight_store_id: "AgentInsightStoreId", # required
+    #     enablement_status: "ENABLED", # accepts ENABLED, DISABLED
+    #     encryption_configuration: {
+    #       mode: "AWS_OWNED_KMS_KEY", # required, accepts AWS_OWNED_KMS_KEY, CUSTOMER_MANAGED_KMS
+    #       kms_key_arn: "KmsKeyArn",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.agent_insight_store_arn #=> String
+    #   resp.agent_insight_store_id #=> String
+    #   resp.status #=> String, one of "ACTIVE", "UPDATING", "INACTIVE", "ERROR"
+    #   resp.enablement_status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.updated_at #=> Time
+    #   resp.failure_reason #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/UpdateAgentInsightStore AWS API Documentation
+    #
+    # @overload update_agent_insight_store(params = {})
+    # @param [Hash] params ({})
+    def update_agent_insight_store(params = {}, options = {})
+      req = build_request(:update_agent_insight_store, params)
+      req.send_request(options)
+    end
+
     # Updates an existing Amazon Secure Agent.
     #
     # @option params [required, String] :agent_runtime_id
@@ -12755,6 +13208,9 @@ module Aws::BedrockAgentCoreControl
     # @option params [Types::LifecycleConfiguration] :lifecycle_configuration
     #   The updated life cycle configuration for the AgentCore Runtime.
     #
+    # @option params [Types::RuntimeHooksConfiguration] :hooks_configuration
+    #   The updated lifecycle hooks configuration for the AgentCore Runtime.
+    #
     # @option params [Types::RuntimeMetadataConfiguration] :metadata_configuration
     #   The updated configuration for microVM Metadata Service (MMDS) settings
     #   for the AgentCore Runtime.
@@ -12780,6 +13236,10 @@ module Aws::BedrockAgentCoreControl
     #   non-overlapping entries, each containing either a single port or an
     #   inclusive port range. Ports must be between `8000` and `12000`,
     #   excluding the reserved port `8443`.
+    #
+    # @option params [Array<Types::ResourceConfiguration>] :resource_configurations
+    #   The updated resource configurations for the AgentCore Runtime. You can
+    #   specify at most one resource configuration.
     #
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier to ensure idempotency of the
@@ -12885,6 +13345,17 @@ module Aws::BedrockAgentCoreControl
     #             },
     #           },
     #         ],
+    #         certificate_configurations: [
+    #           {
+    #             s3: {
+    #               uri: "CertificateS3Uri", # required
+    #               bucket_owner_account_id: "CertificateBucketOwnerAccountId",
+    #             },
+    #             secrets_manager: {
+    #               secret_arn: "CertificateSecretArn", # required
+    #             },
+    #           },
+    #         ],
     #         allowed_workload_configuration: {
     #           hosting_environments: [
     #             {
@@ -12906,6 +13377,18 @@ module Aws::BedrockAgentCoreControl
     #     lifecycle_configuration: {
     #       idle_runtime_session_timeout: 1,
     #       max_lifetime: 1,
+    #     },
+    #     hooks_configuration: {
+    #       build: {
+    #         warmup: {
+    #           action: { # required
+    #             http_post: {
+    #               path: "LifecycleHookPath", # required
+    #               port: 1,
+    #             },
+    #           },
+    #         },
+    #       },
     #     },
     #     metadata_configuration: {
     #       require_mmdsv2: false, # required
@@ -12930,10 +13413,22 @@ module Aws::BedrockAgentCoreControl
     #           volume_name: "CapacityProviderVolumeName", # required
     #           mount_path: "MountPath", # required
     #         },
+    #         s3_bucket_mount: {
+    #           bucket: "S3BucketMountConfigurationBucketString", # required
+    #           mount_path: "MountPath", # required
+    #           prefix: "S3BucketMountConfigurationPrefixString",
+    #           s3_bucket_owner: "S3BucketMountConfigurationS3BucketOwnerString",
+    #           s3_bucket_region: "S3BucketMountConfigurationS3BucketRegionString",
+    #         },
     #       },
     #     ],
     #     capacity_provider_configuration: {
     #       capacity_provider_arn: "CapacityProviderArn", # required
+    #       operating_system_configuration: {
+    #         linux: {
+    #           privilege_mode: "STANDARD", # accepts STANDARD, PRIVILEGED
+    #         },
+    #       },
     #     },
     #     platform_version: "PlatformVersion",
     #     allowed_ports: [
@@ -12943,6 +13438,11 @@ module Aws::BedrockAgentCoreControl
     #           from: 1, # required
     #           to: 1, # required
     #         },
+    #       },
+    #     ],
+    #     resource_configurations: [
+    #       {
+    #         minimum_memory_in_mi_b: 1, # required
     #       },
     #     ],
     #     client_token: "ClientToken",
@@ -13684,6 +14184,12 @@ module Aws::BedrockAgentCoreControl
     # @option params [Types::WafConfiguration] :waf_configuration
     #   The updated Amazon Web Services WAF configuration for the gateway.
     #
+    # @option params [Types::DomainOverride] :domain_override
+    #   The updated public domain names that the gateway advertises in its
+    #   OAuth discovery URLs instead of the inbound Host header. Specify this
+    #   when clients reach the gateway through your own proxy or custom
+    #   domain.
+    #
     # @return [Types::UpdateGatewayResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateGatewayResponse#gateway_arn #gateway_arn} => String
@@ -13708,6 +14214,7 @@ module Aws::BedrockAgentCoreControl
     #   * {Types::UpdateGatewayResponse#exception_level #exception_level} => String
     #   * {Types::UpdateGatewayResponse#web_acl_arn #web_acl_arn} => String
     #   * {Types::UpdateGatewayResponse#waf_configuration #waf_configuration} => Types::WafConfiguration
+    #   * {Types::UpdateGatewayResponse#domain_override #domain_override} => Types::DomainOverride
     #
     # @example Request syntax with placeholder values
     #
@@ -13789,6 +14296,17 @@ module Aws::BedrockAgentCoreControl
     #             },
     #           },
     #         ],
+    #         certificate_configurations: [
+    #           {
+    #             s3: {
+    #               uri: "CertificateS3Uri", # required
+    #               bucket_owner_account_id: "CertificateBucketOwnerAccountId",
+    #             },
+    #             secrets_manager: {
+    #               secret_arn: "CertificateSecretArn", # required
+    #             },
+    #           },
+    #         ],
     #         allowed_workload_configuration: {
     #           hosting_environments: [
     #             {
@@ -13823,6 +14341,10 @@ module Aws::BedrockAgentCoreControl
     #             ],
     #           },
     #         },
+    #         response_interception_mode: "BUFFERED", # accepts BUFFERED, STREAM
+    #         response_streaming_configuration: {
+    #           max_events_per_invocation: 1,
+    #         },
     #       },
     #     ],
     #     policy_engine_configuration: {
@@ -13832,6 +14354,10 @@ module Aws::BedrockAgentCoreControl
     #     exception_level: "DEBUG", # accepts DEBUG
     #     waf_configuration: {
     #       failure_mode: "FAIL_CLOSE", # accepts FAIL_CLOSE, FAIL_OPEN
+    #     },
+    #     domain_override: {
+    #       default_domain: "PublicDomainName", # required
+    #       alternate_domains: ["PublicDomainName"],
     #     },
     #   })
     #
@@ -13895,6 +14421,10 @@ module Aws::BedrockAgentCoreControl
     #   resp.authorizer_configuration.custom_jwt_authorizer.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.tags #=> Hash
     #   resp.authorizer_configuration.custom_jwt_authorizer.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.tags["TagKey"] #=> String
     #   resp.authorizer_configuration.custom_jwt_authorizer.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.routing_domain #=> String
+    #   resp.authorizer_configuration.custom_jwt_authorizer.certificate_configurations #=> Array
+    #   resp.authorizer_configuration.custom_jwt_authorizer.certificate_configurations[0].s3.uri #=> String
+    #   resp.authorizer_configuration.custom_jwt_authorizer.certificate_configurations[0].s3.bucket_owner_account_id #=> String
+    #   resp.authorizer_configuration.custom_jwt_authorizer.certificate_configurations[0].secrets_manager.secret_arn #=> String
     #   resp.authorizer_configuration.custom_jwt_authorizer.allowed_workload_configuration.hosting_environments #=> Array
     #   resp.authorizer_configuration.custom_jwt_authorizer.allowed_workload_configuration.hosting_environments[0].arn #=> String
     #   resp.authorizer_configuration.custom_jwt_authorizer.allowed_workload_configuration.workload_identities #=> Array
@@ -13908,12 +14438,17 @@ module Aws::BedrockAgentCoreControl
     #   resp.interceptor_configurations[0].input_configuration.pass_request_headers #=> Boolean
     #   resp.interceptor_configurations[0].input_configuration.payload_filter.exclude #=> Array
     #   resp.interceptor_configurations[0].input_configuration.payload_filter.exclude[0].field #=> String, one of "RESPONSE_BODY"
+    #   resp.interceptor_configurations[0].response_interception_mode #=> String, one of "BUFFERED", "STREAM"
+    #   resp.interceptor_configurations[0].response_streaming_configuration.max_events_per_invocation #=> Integer
     #   resp.policy_engine_configuration.arn #=> String
     #   resp.policy_engine_configuration.mode #=> String, one of "LOG_ONLY", "ENFORCE"
     #   resp.workload_identity_details.workload_identity_arn #=> String
     #   resp.exception_level #=> String, one of "DEBUG"
     #   resp.web_acl_arn #=> String
     #   resp.waf_configuration.failure_mode #=> String, one of "FAIL_CLOSE", "FAIL_OPEN"
+    #   resp.domain_override.default_domain #=> String
+    #   resp.domain_override.alternate_domains #=> Array
+    #   resp.domain_override.alternate_domains[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/UpdateGateway AWS API Documentation
     #
@@ -14837,6 +15372,13 @@ module Aws::BedrockAgentCoreControl
     #               volume_name: "CapacityProviderVolumeName", # required
     #               mount_path: "MountPath", # required
     #             },
+    #             s3_bucket_mount: {
+    #               bucket: "S3BucketMountConfigurationBucketString", # required
+    #               mount_path: "MountPath", # required
+    #               prefix: "S3BucketMountConfigurationPrefixString",
+    #               s3_bucket_owner: "S3BucketMountConfigurationS3BucketOwnerString",
+    #               s3_bucket_region: "S3BucketMountConfigurationS3BucketRegionString",
+    #             },
     #           },
     #         ],
     #       },
@@ -14909,6 +15451,17 @@ module Aws::BedrockAgentCoreControl
     #               },
     #             },
     #           ],
+    #           certificate_configurations: [
+    #             {
+    #               s3: {
+    #                 uri: "CertificateS3Uri", # required
+    #                 bucket_owner_account_id: "CertificateBucketOwnerAccountId",
+    #               },
+    #               secrets_manager: {
+    #                 secret_arn: "CertificateSecretArn", # required
+    #               },
+    #             },
+    #           ],
     #           allowed_workload_configuration: {
     #             hosting_environments: [
     #               {
@@ -14976,6 +15529,14 @@ module Aws::BedrockAgentCoreControl
     #             url: "HarnessRemoteMcpUrl", # required
     #             headers: {
     #               "HttpHeaderKey" => "HttpHeaderValue",
+    #             },
+    #             outbound_auth: {
+    #               aws_iam: {
+    #                 service: "IamCredentialProviderServiceString", # required
+    #                 region: "IamCredentialProviderRegionString",
+    #               },
+    #               none: {
+    #               },
     #             },
     #           },
     #           agent_core_browser: {
@@ -15182,6 +15743,8 @@ module Aws::BedrockAgentCoreControl
     #   resp.harness.tools[0].config.remote_mcp.url #=> String
     #   resp.harness.tools[0].config.remote_mcp.headers #=> Hash
     #   resp.harness.tools[0].config.remote_mcp.headers["HttpHeaderKey"] #=> String
+    #   resp.harness.tools[0].config.remote_mcp.outbound_auth.aws_iam.service #=> String
+    #   resp.harness.tools[0].config.remote_mcp.outbound_auth.aws_iam.region #=> String
     #   resp.harness.tools[0].config.agent_core_browser.browser_arn #=> String
     #   resp.harness.tools[0].config.agent_core_gateway.gateway_arn #=> String
     #   resp.harness.tools[0].config.agent_core_gateway.outbound_auth.oauth.provider_arn #=> String
@@ -15228,6 +15791,11 @@ module Aws::BedrockAgentCoreControl
     #   resp.harness.environment.agent_core_runtime_environment.filesystem_configurations[0].efs_access_point.mount_path #=> String
     #   resp.harness.environment.agent_core_runtime_environment.filesystem_configurations[0].capacity_provider_volume.volume_name #=> String
     #   resp.harness.environment.agent_core_runtime_environment.filesystem_configurations[0].capacity_provider_volume.mount_path #=> String
+    #   resp.harness.environment.agent_core_runtime_environment.filesystem_configurations[0].s3_bucket_mount.bucket #=> String
+    #   resp.harness.environment.agent_core_runtime_environment.filesystem_configurations[0].s3_bucket_mount.mount_path #=> String
+    #   resp.harness.environment.agent_core_runtime_environment.filesystem_configurations[0].s3_bucket_mount.prefix #=> String
+    #   resp.harness.environment.agent_core_runtime_environment.filesystem_configurations[0].s3_bucket_mount.s3_bucket_owner #=> String
+    #   resp.harness.environment.agent_core_runtime_environment.filesystem_configurations[0].s3_bucket_mount.s3_bucket_region #=> String
     #   resp.harness.environment_artifact.container_configuration.container_uri #=> String
     #   resp.harness.environment_variables #=> Hash
     #   resp.harness.environment_variables["EnvironmentVariableKey"] #=> String
@@ -15269,6 +15837,10 @@ module Aws::BedrockAgentCoreControl
     #   resp.harness.authorizer_configuration.custom_jwt_authorizer.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.tags #=> Hash
     #   resp.harness.authorizer_configuration.custom_jwt_authorizer.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.tags["TagKey"] #=> String
     #   resp.harness.authorizer_configuration.custom_jwt_authorizer.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.routing_domain #=> String
+    #   resp.harness.authorizer_configuration.custom_jwt_authorizer.certificate_configurations #=> Array
+    #   resp.harness.authorizer_configuration.custom_jwt_authorizer.certificate_configurations[0].s3.uri #=> String
+    #   resp.harness.authorizer_configuration.custom_jwt_authorizer.certificate_configurations[0].s3.bucket_owner_account_id #=> String
+    #   resp.harness.authorizer_configuration.custom_jwt_authorizer.certificate_configurations[0].secrets_manager.secret_arn #=> String
     #   resp.harness.authorizer_configuration.custom_jwt_authorizer.allowed_workload_configuration.hosting_environments #=> Array
     #   resp.harness.authorizer_configuration.custom_jwt_authorizer.allowed_workload_configuration.hosting_environments[0].arn #=> String
     #   resp.harness.authorizer_configuration.custom_jwt_authorizer.allowed_workload_configuration.workload_identities #=> Array
@@ -15401,8 +15973,8 @@ module Aws::BedrockAgentCoreControl
     #   The updated description of the AgentCore Memory resource.
     #
     # @option params [Integer] :event_expiry_duration
-    #   The number of days after which memory events will expire, between 7
-    #   and 365 days.
+    #   The number of days after which memory events expire, between 7 and
+    #   3650 days.
     #
     # @option params [String] :memory_execution_role_arn
     #   The ARN of the IAM role that provides permissions for the AgentCore
@@ -16191,6 +16763,17 @@ module Aws::BedrockAgentCoreControl
     #             },
     #           },
     #         ],
+    #         certificate_configurations: [
+    #           {
+    #             s3: {
+    #               uri: "CertificateS3Uri", # required
+    #               bucket_owner_account_id: "CertificateBucketOwnerAccountId",
+    #             },
+    #             secrets_manager: {
+    #               secret_arn: "CertificateSecretArn", # required
+    #             },
+    #           },
+    #         ],
     #       },
     #       google_oauth_2_provider_config: {
     #         client_id: "ClientIdType", # required
@@ -16317,6 +16900,10 @@ module Aws::BedrockAgentCoreControl
     #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.tags #=> Hash
     #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.tags["TagKey"] #=> String
     #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.routing_domain #=> String
+    #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.certificate_configurations #=> Array
+    #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.certificate_configurations[0].s3.uri #=> String
+    #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.certificate_configurations[0].s3.bucket_owner_account_id #=> String
+    #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.certificate_configurations[0].secrets_manager.secret_arn #=> String
     #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.private_key_jwt_config.private_key_source.kms_key_source.kms_key_arn #=> String
     #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.private_key_jwt_config.signing_algorithm #=> String, one of "RS256", "PS256", "ES256"
     #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.private_key_jwt_config.additional_header_claims #=> Hash
@@ -16595,7 +17182,7 @@ module Aws::BedrockAgentCoreControl
     #     payment_manager_id: "PaymentManagerId", # required
     #     payment_connector_id: "PaymentConnectorId", # required
     #     description: "PaymentsDescription",
-    #     type: "CoinbaseCDP", # accepts CoinbaseCDP, StripePrivy
+    #     type: "CoinbaseCDP", # accepts CoinbaseCDP, StripePrivy, AwsBilling
     #     credential_provider_configurations: [
     #       {
     #         coinbase_cdp: {
@@ -16603,6 +17190,9 @@ module Aws::BedrockAgentCoreControl
     #         },
     #         stripe_privy: {
     #           credential_provider_arn: "PaymentCredentialProviderArn", # required
+    #         },
+    #         aws_billing: {
+    #           iam_role_arn: "RoleArn", # required
     #         },
     #       },
     #     ],
@@ -16614,10 +17204,11 @@ module Aws::BedrockAgentCoreControl
     #   resp.payment_connector_id #=> String
     #   resp.payment_manager_id #=> String
     #   resp.name #=> String
-    #   resp.type #=> String, one of "CoinbaseCDP", "StripePrivy"
+    #   resp.type #=> String, one of "CoinbaseCDP", "StripePrivy", "AwsBilling"
     #   resp.credential_provider_configurations #=> Array
     #   resp.credential_provider_configurations[0].coinbase_cdp.credential_provider_arn #=> String
     #   resp.credential_provider_configurations[0].stripe_privy.credential_provider_arn #=> String
+    #   resp.credential_provider_configurations[0].aws_billing.iam_role_arn #=> String
     #   resp.last_updated_at #=> Time
     #   resp.status #=> String, one of "CREATING", "UPDATING", "DELETING", "READY", "CREATE_FAILED", "UPDATE_FAILED", "DELETE_FAILED", "AWS_MARKETPLACE_SUBSCRIPTION_REQUIRED", "PENDING_AUTHENTICATION", "PROVISIONING", "AUTHENTICATION_EXPIRED", "AUTHENTICATION_FAILED"
     #   resp.authorization_url #=> String
@@ -16834,6 +17425,17 @@ module Aws::BedrockAgentCoreControl
     #                 },
     #                 routing_domain: "RoutingDomain",
     #               },
+    #             },
+    #           },
+    #         ],
+    #         certificate_configurations: [
+    #           {
+    #             s3: {
+    #               uri: "CertificateS3Uri", # required
+    #               bucket_owner_account_id: "CertificateBucketOwnerAccountId",
+    #             },
+    #             secrets_manager: {
+    #               secret_arn: "CertificateSecretArn", # required
     #             },
     #           },
     #         ],
@@ -17154,6 +17756,17 @@ module Aws::BedrockAgentCoreControl
     #               },
     #             },
     #           ],
+    #           certificate_configurations: [
+    #             {
+    #               s3: {
+    #                 uri: "CertificateS3Uri", # required
+    #                 bucket_owner_account_id: "CertificateBucketOwnerAccountId",
+    #               },
+    #               secrets_manager: {
+    #                 secret_arn: "CertificateSecretArn", # required
+    #               },
+    #             },
+    #           ],
     #           allowed_workload_configuration: {
     #             hosting_environments: [
     #               {
@@ -17217,6 +17830,10 @@ module Aws::BedrockAgentCoreControl
     #   resp.authorizer_configuration.custom_jwt_authorizer.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.tags #=> Hash
     #   resp.authorizer_configuration.custom_jwt_authorizer.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.tags["TagKey"] #=> String
     #   resp.authorizer_configuration.custom_jwt_authorizer.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.routing_domain #=> String
+    #   resp.authorizer_configuration.custom_jwt_authorizer.certificate_configurations #=> Array
+    #   resp.authorizer_configuration.custom_jwt_authorizer.certificate_configurations[0].s3.uri #=> String
+    #   resp.authorizer_configuration.custom_jwt_authorizer.certificate_configurations[0].s3.bucket_owner_account_id #=> String
+    #   resp.authorizer_configuration.custom_jwt_authorizer.certificate_configurations[0].secrets_manager.secret_arn #=> String
     #   resp.authorizer_configuration.custom_jwt_authorizer.allowed_workload_configuration.hosting_environments #=> Array
     #   resp.authorizer_configuration.custom_jwt_authorizer.allowed_workload_configuration.hosting_environments[0].arn #=> String
     #   resp.authorizer_configuration.custom_jwt_authorizer.allowed_workload_configuration.workload_identities #=> Array
@@ -17552,7 +18169,7 @@ module Aws::BedrockAgentCoreControl
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrockagentcorecontrol'
-      context[:gem_version] = '1.86.0'
+      context[:gem_version] = '1.97.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

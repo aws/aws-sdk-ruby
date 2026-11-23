@@ -1,6 +1,51 @@
 Unreleased Changes
 ------------------
 
+1.133.0 (2026-11-20)
+------------------
+
+* Feature - This release adds ResourceTypeOptInIncremental to the UpdateRegionSettings request and the DescribeRegionSettings response, so customers can opt in to or out of incremental backups. It currently applies only to Amazon DynamoDB table backups.
+
+1.132.0 (2026-11-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.131.0 (2026-11-16)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.130.0 (2026-11-12)
+------------------
+
+* Feature - Adding new notification types for SNS notifications
+
+1.129.0 (2026-11-11)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.128.0 (2026-11-10)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.127.0 (2026-11-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.126.0 (2026-11-06)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.125.0 (2026-11-04)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.124.0 (2026-10-29)
 ------------------
 

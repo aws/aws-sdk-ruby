@@ -1260,7 +1260,8 @@
         "VIDEO",
         "CUSTOMER_ARTIFACT",
         "CUSTOMER_ARTIFACT_LOG",
-        "TESTSPEC_OUTPUT"
+        "TESTSPEC_OUTPUT",
+        "DEVICE_CONNECT_COMMAND_LOG"
       ]
     },
     "Artifacts":{
@@ -1628,6 +1629,7 @@
         "modelId":{"shape":"String"},
         "formFactor":{"shape":"DeviceFormFactor"},
         "platform":{"shape":"DevicePlatform"},
+        "type":{"shape":"DeviceType"},
         "os":{"shape":"String"},
         "cpu":{"shape":"CPU"},
         "resolution":{"shape":"Resolution"},
@@ -1655,6 +1657,7 @@
         "ARN",
         "PLATFORM",
         "FORM_FACTOR",
+        "DEVICE_TYPE",
         "MANUFACTURER",
         "REMOTE_ACCESS_ENABLED",
         "REMOTE_DEBUG_ENABLED",
@@ -1704,6 +1707,7 @@
         "MODEL",
         "AVAILABILITY",
         "FORM_FACTOR",
+        "DEVICE_TYPE",
         "MANUFACTURER",
         "REMOTE_ACCESS_ENABLED",
         "REMOTE_DEBUG_ENABLED",
@@ -1836,6 +1840,13 @@
         "matchedDevicesCount":{"shape":"Integer"},
         "maxDevices":{"shape":"Integer"}
       }
+    },
+    "DeviceType":{
+      "type":"string",
+      "enum":[
+        "PHYSICAL",
+        "VIRTUAL"
+      ]
     },
     "Devices":{
       "type":"list",
@@ -2178,7 +2189,10 @@
     },
     "InsightsType":{
       "type":"string",
-      "enum":["TEST_REPORT"]
+      "enum":[
+        "TEST_REPORT",
+        "NONE"
+      ]
     },
     "InsightsTypes":{
       "type":"list",
@@ -3133,6 +3147,7 @@
         "webUrl":{"shape":"String"},
         "skipAppResign":{"shape":"SkipAppResign"},
         "testSpecArn":{"shape":"AmazonResourceName"},
+        "testPackageArn":{"shape":"AmazonResourceName"},
         "deviceSelectionResult":{"shape":"DeviceSelectionResult"},
         "vpcConfig":{"shape":"VpcConfig"},
         "executionRoleArn":{"shape":"AmazonRoleResourceName"},

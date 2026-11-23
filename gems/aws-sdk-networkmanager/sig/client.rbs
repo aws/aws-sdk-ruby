@@ -102,6 +102,17 @@ module Aws
                                   ) -> _AssociateConnectPeerResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateConnectPeerResponseSuccess
 
+      interface _AssociateContextStoreResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AssociateContextStoreResponse]
+        def context_store_association: () -> Types::ContextStoreAssociation
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkManager/Client.html#associate_context_store-instance_method
+      def associate_context_store: (
+                                     context_store_id: ::String,
+                                     ?transit_gateway_arn: ::String
+                                   ) -> _AssociateContextStoreResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateContextStoreResponseSuccess
+
       interface _AssociateCustomerGatewayResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::AssociateCustomerGatewayResponse]
         def customer_gateway_association: () -> Types::CustomerGatewayAssociation
@@ -215,6 +226,24 @@ module Aws
                                ]
                              ) -> _CreateConnectionResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateConnectionResponseSuccess
+
+      interface _CreateContextStoreResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateContextStoreResponse]
+        def context_store: () -> Types::ContextStore
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkManager/Client.html#create_context_store-instance_method
+      def create_context_store: (
+                                  global_network_id: ::String,
+                                  ?description: ::String,
+                                  ?tags: Array[
+                                    {
+                                      key: ::String?,
+                                      value: ::String?
+                                    }
+                                  ],
+                                  ?client_token: ::String
+                                ) -> _CreateContextStoreResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateContextStoreResponseSuccess
 
       interface _CreateCoreNetworkResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateCoreNetworkResponse]
@@ -502,6 +531,16 @@ module Aws
                              ) -> _DeleteConnectionResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteConnectionResponseSuccess
 
+      interface _DeleteContextStoreResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteContextStoreResponse]
+        def context_store: () -> Types::ContextStore
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkManager/Client.html#delete_context_store-instance_method
+      def delete_context_store: (
+                                  context_store_id: ::String
+                                ) -> _DeleteContextStoreResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteContextStoreResponseSuccess
+
       interface _DeleteCoreNetworkResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteCoreNetworkResponse]
         def core_network: () -> Types::CoreNetwork
@@ -632,6 +671,17 @@ module Aws
                                      ) -> _DisassociateConnectPeerResponseSuccess
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociateConnectPeerResponseSuccess
 
+      interface _DisassociateContextStoreResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisassociateContextStoreResponse]
+        def context_store_association: () -> Types::ContextStoreAssociation
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkManager/Client.html#disassociate_context_store-instance_method
+      def disassociate_context_store: (
+                                        context_store_id: ::String,
+                                        transit_gateway_arn: ::String
+                                      ) -> _DisassociateContextStoreResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociateContextStoreResponseSuccess
+
       interface _DisassociateCustomerGatewayResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DisassociateCustomerGatewayResponse]
         def customer_gateway_association: () -> Types::CustomerGatewayAssociation
@@ -724,6 +774,37 @@ module Aws
                              ?next_token: ::String
                            ) -> _GetConnectionsResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetConnectionsResponseSuccess
+
+      interface _GetContextStoreResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetContextStoreResponse]
+        def context_store: () -> Types::ContextStore
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkManager/Client.html#get_context_store-instance_method
+      def get_context_store: (
+                               context_store_id: ::String
+                             ) -> _GetContextStoreResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetContextStoreResponseSuccess
+
+      interface _GetContextStoreAssociationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetContextStoreAssociationResponse]
+        def context_store_association: () -> Types::ContextStoreAssociation
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkManager/Client.html#get_context_store_association-instance_method
+      def get_context_store_association: (
+                                           context_store_id: ::String,
+                                           transit_gateway_arn: ::String
+                                         ) -> _GetContextStoreAssociationResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetContextStoreAssociationResponseSuccess
+
+      interface _GetContextVersionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetContextVersionResponse]
+        def version_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkManager/Client.html#get_context_version-instance_method
+      def get_context_version: (
+                                 context_store_id: ::String
+                               ) -> _GetContextVersionResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetContextVersionResponseSuccess
 
       interface _GetCoreNetworkResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetCoreNetworkResponse]
@@ -1118,6 +1199,62 @@ module Aws
                               ) -> _ListConnectPeersResponseSuccess
                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListConnectPeersResponseSuccess
 
+      interface _ListContextChangesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListContextChangesResponse]
+        def context_changes: () -> ::Array[Types::ContextChange]
+        def from_version_id: () -> ::String
+        def to_version_id: () -> ::String
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkManager/Client.html#list_context_changes-instance_method
+      def list_context_changes: (
+                                  context_store_id: ::String,
+                                  from_version_id: ::String,
+                                  ?max_results: ::Integer,
+                                  ?next_token: ::String
+                                ) -> _ListContextChangesResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListContextChangesResponseSuccess
+
+      interface _ListContextStoreAssociationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListContextStoreAssociationsResponse]
+        def context_store_associations: () -> ::Array[Types::ContextStoreAssociation]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkManager/Client.html#list_context_store_associations-instance_method
+      def list_context_store_associations: (
+                                             context_store_id: ::String,
+                                             ?max_results: ::Integer,
+                                             ?next_token: ::String
+                                           ) -> _ListContextStoreAssociationsResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListContextStoreAssociationsResponseSuccess
+
+      interface _ListContextStoresResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListContextStoresResponse]
+        def context_stores: () -> ::Array[Types::ContextStore]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkManager/Client.html#list_context_stores-instance_method
+      def list_context_stores: (
+                                 ?global_network_id: ::String,
+                                 ?max_results: ::Integer,
+                                 ?next_token: ::String
+                               ) -> _ListContextStoresResponseSuccess
+                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListContextStoresResponseSuccess
+
+      interface _ListContextsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListContextsResponse]
+        def contexts: () -> ::Array[Types::ContextEntry]
+        def next_token: () -> ::String
+        def version_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkManager/Client.html#list_contexts-instance_method
+      def list_contexts: (
+                           context_store_id: ::String,
+                           ?max_results: ::Integer,
+                           ?next_token: ::String
+                         ) -> _ListContextsResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListContextsResponseSuccess
+
       interface _ListCoreNetworkPolicyVersionsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListCoreNetworkPolicyVersionsResponse]
         def core_network_policy_versions: () -> ::Array[Types::CoreNetworkPolicyVersion]
@@ -1394,6 +1531,17 @@ module Aws
                                ?description: ::String
                              ) -> _UpdateConnectionResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateConnectionResponseSuccess
+
+      interface _UpdateContextStoreResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateContextStoreResponse]
+        def context_store: () -> Types::ContextStore
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkManager/Client.html#update_context_store-instance_method
+      def update_context_store: (
+                                  context_store_id: ::String,
+                                  ?description: ::String
+                                ) -> _UpdateContextStoreResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateContextStoreResponseSuccess
 
       interface _UpdateCoreNetworkResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateCoreNetworkResponse]

@@ -392,7 +392,7 @@ module Aws::EndUserMessaging
       attr_accessor configuration_set_name: ::String
       attr_accessor context: ::Hash[::String, ::String]
       attr_accessor reference_id: ::String
-      SENSITIVE: [:destination_identity]
+      SENSITIVE: [:destination_identity, :context]
     end
 
     class SendNotifyCodeVerificationOutput
@@ -424,7 +424,7 @@ module Aws::EndUserMessaging
     class TextParameters
       attr_accessor inline_template_body: ::String
       attr_accessor destination_country_parameters: ::Hash[::String, ::String]
-      SENSITIVE: [:inline_template_body]
+      SENSITIVE: [:inline_template_body, :destination_country_parameters]
     end
 
     class ThrottlingException
@@ -549,7 +549,7 @@ module Aws::EndUserMessaging
     class UpdateTextParameters
       attr_accessor inline_template_body: ::String
       attr_accessor destination_country_parameters: ::Hash[::String, ::String]
-      SENSITIVE: [:inline_template_body]
+      SENSITIVE: [:inline_template_body, :destination_country_parameters]
     end
 
     class UpdateVoiceParameters

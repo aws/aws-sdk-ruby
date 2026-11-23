@@ -1185,11 +1185,13 @@ module Aws
         def subnet_ids: () -> ::Array[::String]
         def security_group_ids: () -> ::Array[::String]
         def ip_address_type: () -> ("IPV4" | "IPV6")
+        def resource_config_dns_resolution: () -> ("IN_VPC" | "PUBLIC")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/VPCLattice/Client.html#update_resource_gateway-instance_method
       def update_resource_gateway: (
                                      resource_gateway_identifier: ::String,
-                                     ?security_group_ids: Array[::String]
+                                     ?security_group_ids: Array[::String],
+                                     ?resource_config_dns_resolution: ("IN_VPC" | "PUBLIC")
                                    ) -> _UpdateResourceGatewayResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateResourceGatewayResponseSuccess
 

@@ -153,6 +153,35 @@ module Aws
       end
     end
 
+    # Eager loads SDK constants from gems that have already been required.
+    #
+    # Call this method during application startup, after requiring the service
+    # gems your application uses:
+    #
+    #     require 'aws-sdk-s3'
+    #     require 'aws-sdk-sqs'
+    #
+    #     Aws.eager_load!
+    #
+    # Service gems required after this call are not eager loaded. This method
+    # loads Ruby code but does not make any AWS service requests. Eager loading
+    # can increase memory usage, so applications should require only the
+    # service gems they use.
+    #
+    # @return [void]
+    def eager_load!
+      Aws.constants.each do |name|
+        namespace = Aws.const_get(name)
+        next unless namespace.is_a?(Module)
+
+        namespace.constants.each do |constant|
+          namespace.const_get(constant)
+        end
+      end
+
+      nil
+    end
+
     # @api private
     def eager_autoload!(*args)
       msg = 'Aws.eager_autoload is no longer needed, usage of '\

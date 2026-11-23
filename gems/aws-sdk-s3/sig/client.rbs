@@ -97,6 +97,7 @@ module Aws
       interface _AbortMultipartUploadResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::AbortMultipartUploadOutput]
         def request_charged: () -> ("requester")
+        def version_id: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3/Client.html#abort_multipart_upload-instance_method
       def abort_multipart_upload: (
@@ -348,6 +349,7 @@ module Aws
         def request_charged: () -> ("requester")
         def checksum_algorithm: () -> ("CRC32" | "CRC32C" | "SHA1" | "SHA256" | "CRC64NVME" | "SHA512" | "MD5" | "XXHASH64" | "XXHASH3" | "XXHASH128")
         def checksum_type: () -> ("COMPOSITE" | "FULL_OBJECT")
+        def version_id: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3/Client.html#create_multipart_upload-instance_method
       def create_multipart_upload: (
@@ -1473,6 +1475,7 @@ module Aws
         def request_charged: () -> ("requester")
         def checksum_algorithm: () -> ("CRC32" | "CRC32C" | "SHA1" | "SHA256" | "CRC64NVME" | "SHA512" | "MD5" | "XXHASH64" | "XXHASH3" | "XXHASH128")
         def checksum_type: () -> ("COMPOSITE" | "FULL_OBJECT")
+        def version_id: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3/Client.html#list_parts-instance_method
       def list_parts: (
@@ -1970,8 +1973,10 @@ module Aws
                                                   key: ::String,
                                                   value: ::String
                                                 }
-                                              ]?
-                                            }?
+                                              ]?,
+                                              not: Params::replication_rule_not_operator?
+                                            }?,
+                                            not: Params::replication_rule_not_operator?
                                           }?,
                                           status: ("Enabled" | "Disabled"),
                                           source_selection_criteria: {
@@ -1993,7 +1998,10 @@ module Aws
                                               owner: ("Destination")
                                             }?,
                                             encryption_configuration: {
-                                              replica_kms_key_id: ::String?
+                                              replica_kms_key_id: ::String?,
+                                              use_source_multi_region_key: {
+                                                status: ("Enabled" | "Disabled")
+                                              }?
                                             }?,
                                             replication_time: {
                                               status: ("Enabled" | "Disabled"),
@@ -2554,6 +2562,7 @@ module Aws
         def ssekms_key_id: () -> ::String
         def bucket_key_enabled: () -> bool
         def request_charged: () -> ("requester")
+        def version_id: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3/Client.html#upload_part-instance_method
       def upload_part: (
@@ -2593,6 +2602,7 @@ module Aws
         def ssekms_key_id: () -> ::String
         def bucket_key_enabled: () -> bool
         def request_charged: () -> ("requester")
+        def version_id: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3/Client.html#upload_part_copy-instance_method
       def upload_part_copy: (

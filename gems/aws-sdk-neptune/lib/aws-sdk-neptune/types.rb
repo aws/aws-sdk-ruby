@@ -2032,6 +2032,18 @@ module Aws::Neptune
     #   [1]: https://docs.aws.amazon.com/neptune/latest/userguide/neptune-serverless-using.html
     #   @return [Types::ServerlessV2ScalingConfigurationInfo]
     #
+    # @!attribute [rw] serverless_v2_platform_version
+    #   The serverless platform version used by the Neptune Serverless DB
+    #   cluster.
+    #
+    #   For more information, see [Using Amazon Neptune Serverless][1] in
+    #   the *Amazon Neptune User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/neptune/latest/userguide/neptune-serverless-using.html
+    #   @return [String]
+    #
     # @!attribute [rw] global_cluster_identifier
     #   Contains a user-supplied global database cluster identifier. This
     #   identifier is the unique key that identifies a global database.
@@ -2121,6 +2133,7 @@ module Aws::Neptune
       :cross_account_clone,
       :automatic_restart_time,
       :serverless_v2_scaling_configuration,
+      :serverless_v2_platform_version,
       :global_cluster_identifier,
       :io_optimized_next_allowed_modification_time,
       :storage_type,
@@ -4942,6 +4955,62 @@ module Aws::Neptune
       :filters,
       :marker,
       :max_records)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] serverless_v2_platform_version
+    #   A specific platform version to return details for.
+    #
+    #   Example: `3`
+    #   @return [String]
+    #
+    # @!attribute [rw] engine
+    #   The database engine to return platform version details for.
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   This parameter isn't currently supported.
+    #   @return [Array<Types::Filter>]
+    #
+    # @!attribute [rw] default_only
+    #   Specifies whether to return only the default platform versions for
+    #   each engine. The default platform version is the version used for
+    #   new DB clusters.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] include_all
+    #   Specifies whether to also include platform versions which are no
+    #   longer in use.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] max_records
+    #   The maximum number of records to include in the response. If more
+    #   than the `MaxRecords` value is available, a pagination token called
+    #   a marker is included in the response so you can retrieve the
+    #   remaining results.
+    #
+    #   Default: 20
+    #
+    #   Constraints: Minimum 1, maximum 200.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] marker
+    #   An optional pagination token provided by a previous request. If this
+    #   parameter is specified, the response includes only records beyond
+    #   the marker, up to the value specified by `MaxRecords`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/DescribeServerlessV2PlatformVersionsMessage AWS API Documentation
+    #
+    class DescribeServerlessV2PlatformVersionsMessage < Struct.new(
+      :serverless_v2_platform_version,
+      :engine,
+      :filters,
+      :default_only,
+      :include_all,
+      :max_records,
+      :marker)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8053,6 +8122,109 @@ module Aws::Neptune
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/SNSTopicArnNotFoundFault AWS API Documentation
     #
     class SNSTopicArnNotFoundFault < Aws::EmptyStructure; end
+
+    # Specifies any Neptune Serverless properties or limits that differ
+    # between serverless platform versions.
+    #
+    # @!attribute [rw] min_capacity
+    #   Specifies the lower Neptune capacity unit (NCU) limit that a
+    #   serverless platform version supports.
+    #   @return [Float]
+    #
+    # @!attribute [rw] max_capacity
+    #   Specifies the upper Neptune capacity unit (NCU) limit that a
+    #   serverless platform version supports.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/ServerlessV2FeaturesSupport AWS API Documentation
+    #
+    class ServerlessV2FeaturesSupport < Struct.new(
+      :min_capacity,
+      :max_capacity)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # This data type is used as a response element in the
+    # `DescribeServerlessV2PlatformVersions` action. It describes the
+    # properties of a specific Neptune Serverless platform version.
+    #
+    # For more information, see [Using Amazon Neptune Serverless][1] in the
+    # *Amazon Neptune User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/neptune/latest/userguide/neptune-serverless-using.html
+    #
+    # @!attribute [rw] serverless_v2_platform_version
+    #   The version number of the serverless platform.
+    #   @return [String]
+    #
+    # @!attribute [rw] serverless_v2_platform_version_description
+    #   The description of the serverless platform.
+    #   @return [String]
+    #
+    # @!attribute [rw] engine
+    #   The name of the database engine.
+    #   @return [String]
+    #
+    # @!attribute [rw] serverless_v2_features_support
+    #   Specifies any Neptune Serverless properties or limits that differ
+    #   between serverless platform versions. You can retrieve the platform
+    #   version of an existing DB cluster and check whether that version
+    #   supports certain serverless features before you attempt to use those
+    #   features.
+    #   @return [Types::ServerlessV2FeaturesSupport]
+    #
+    # @!attribute [rw] status
+    #   The status of the serverless platform version. Valid statuses are
+    #   the following:
+    #
+    #   * `enabled` - The platform version is in use.
+    #
+    #   * `disabled` - The platform version is not in use.
+    #   @return [String]
+    #
+    # @!attribute [rw] is_default
+    #   Indicates whether this platform version is the default version for
+    #   the engine. The default platform version is the version used for new
+    #   DB clusters.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/ServerlessV2PlatformVersionInfo AWS API Documentation
+    #
+    class ServerlessV2PlatformVersionInfo < Struct.new(
+      :serverless_v2_platform_version,
+      :serverless_v2_platform_version_description,
+      :engine,
+      :serverless_v2_features_support,
+      :status,
+      :is_default)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the result of a successful invocation of the
+    # `DescribeServerlessV2PlatformVersions` action.
+    #
+    # @!attribute [rw] marker
+    #   An optional pagination token provided by a previous request. If this
+    #   parameter is specified, the response includes only records beyond
+    #   the marker, up to the value specified by `MaxRecords`.
+    #   @return [String]
+    #
+    # @!attribute [rw] serverless_v2_platform_versions
+    #   A list of ServerlessV2PlatformVersionInfo elements.
+    #   @return [Array<Types::ServerlessV2PlatformVersionInfo>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/ServerlessV2PlatformVersionsMessage AWS API Documentation
+    #
+    class ServerlessV2PlatformVersionsMessage < Struct.new(
+      :marker,
+      :serverless_v2_platform_versions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # Contains the scaling configuration of a Neptune Serverless DB cluster.
     #

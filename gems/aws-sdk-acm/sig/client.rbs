@@ -373,6 +373,7 @@ module Aws
       def list_certificates: (
                                ?certificate_statuses: Array[("PENDING_VALIDATION" | "ISSUED" | "INACTIVE" | "EXPIRED" | "VALIDATION_TIMED_OUT" | "REVOKED" | "FAILED")],
                                ?certificate_key_pair_origins: Array[("AWS_MANAGED" | "ACME" | "CUSTOMER_PROVIDED")],
+                               ?root_hierarchy_types: Array[("N2_AMAZON_MANAGED" | "N2_SFG2_AMAZON_MANAGED")],
                                ?includes: {
                                  extended_key_usage: Array[("TLS_WEB_SERVER_AUTHENTICATION" | "TLS_WEB_CLIENT_AUTHENTICATION" | "CODE_SIGNING" | "EMAIL_PROTECTION" | "TIME_STAMPING" | "OCSP_SIGNING" | "IPSEC_END_SYSTEM" | "IPSEC_TUNNEL" | "IPSEC_USER" | "ANY" | "NONE" | "CUSTOM")]?,
                                  key_usage: Array[("DIGITAL_SIGNATURE" | "NON_REPUDIATION" | "KEY_ENCIPHERMENT" | "DATA_ENCIPHERMENT" | "KEY_AGREEMENT" | "CERTIFICATE_SIGNING" | "CRL_SIGNING" | "ENCIPHER_ONLY" | "DECIPHER_ONLY" | "ANY" | "CUSTOM")]?,
@@ -463,7 +464,9 @@ module Aws
                                    }
                                  ],
                                  ?key_algorithm: ("RSA_1024" | "RSA_2048" | "RSA_3072" | "RSA_4096" | "EC_prime256v1" | "EC_secp384r1" | "EC_secp521r1"),
-                                 ?managed_by: ("CLOUDFRONT")
+                                 ?managed_by: ("CLOUDFRONT"),
+                                 ?certificate_usage: ("CLIENT_AND_SERVER_AUTH" | "CLIENT_AUTH_ONLY"),
+                                 ?root_hierarchy_type: ("N2_AMAZON_MANAGED" | "N2_SFG2_AMAZON_MANAGED")
                                ) -> _RequestCertificateResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RequestCertificateResponseSuccess
 

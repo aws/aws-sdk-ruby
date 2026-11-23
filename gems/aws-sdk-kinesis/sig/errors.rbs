@@ -32,6 +32,9 @@ module Aws
       class ProvisionedThroughputExceededException < ServiceError
         def message: () -> ::String
       end
+      class ThrottlingException < ServiceError
+        def message: () -> ::String
+      end
       class ValidationException < ServiceError
         def message: () -> ::String
       end

@@ -231,7 +231,12 @@ module Aws
                               ?description: ::String,
                               ?tags: Hash[::String, ::String],
                               ?server_side_encryption_configuration: {
-                                kms_key_id: ::String?
+                                kms_key_id: ::String?,
+                                replica_kms_keys: Array[
+                                  {
+                                    arn: ::String
+                                  }
+                                ]?
                               }
                             ) -> _CreateAssistantResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAssistantResponseSuccess
@@ -359,7 +364,12 @@ module Aws
                                      }?
                                    },
                                    ?server_side_encryption_configuration: {
-                                     kms_key_id: ::String?
+                                     kms_key_id: ::String?,
+                                     replica_kms_keys: Array[
+                                       {
+                                         arn: ::String
+                                       }
+                                     ]?
                                    },
                                    ?description: ::String,
                                    ?tags: Hash[::String, ::String]
@@ -1146,6 +1156,34 @@ module Aws
                              ?override_knowledge_base_search_type: ("HYBRID" | "SEMANTIC")
                            ) -> _QueryAssistantResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _QueryAssistantResponseSuccess
+
+      interface _RegisterAssistantReplicaKeyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RegisterAssistantReplicaKeyResponse]
+        def assistant: () -> Types::AssistantData
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QConnect/Client.html#register_assistant_replica_key-instance_method
+      def register_assistant_replica_key: (
+                                            assistant_id: ::String,
+                                            replica_kms_key: {
+                                              arn: ::String
+                                            },
+                                            ?client_token: ::String
+                                          ) -> _RegisterAssistantReplicaKeyResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RegisterAssistantReplicaKeyResponseSuccess
+
+      interface _RegisterKnowledgeBaseReplicaKeyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RegisterKnowledgeBaseReplicaKeyResponse]
+        def knowledge_base: () -> Types::KnowledgeBaseData
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QConnect/Client.html#register_knowledge_base_replica_key-instance_method
+      def register_knowledge_base_replica_key: (
+                                                 knowledge_base_id: ::String,
+                                                 replica_kms_key: {
+                                                   arn: ::String
+                                                 },
+                                                 ?client_token: ::String
+                                               ) -> _RegisterKnowledgeBaseReplicaKeyResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RegisterKnowledgeBaseReplicaKeyResponseSuccess
 
       interface _RemoveAssistantAIAgentResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::RemoveAssistantAIAgentResponse]

@@ -14,6 +14,8 @@ module Aws::Lambda
 
     include Seahorse::Model
 
+    AcceleratorConfig = Shapes::StructureShape.new(name: 'AcceleratorConfig')
+    AcceleratorMemoryGB = Shapes::IntegerShape.new(name: 'AcceleratorMemoryGB')
     AccountLimit = Shapes::StructureShape.new(name: 'AccountLimit')
     AccountUsage = Shapes::StructureShape.new(name: 'AccountUsage')
     Action = Shapes::StringShape.new(name: 'Action')
@@ -123,6 +125,8 @@ module Aws::Lambda
     DeleteCapacityProviderResponse = Shapes::StructureShape.new(name: 'DeleteCapacityProviderResponse')
     DeleteCodeSigningConfigRequest = Shapes::StructureShape.new(name: 'DeleteCodeSigningConfigRequest')
     DeleteCodeSigningConfigResponse = Shapes::StructureShape.new(name: 'DeleteCodeSigningConfigResponse')
+    DeleteDurableExecutionRequest = Shapes::StructureShape.new(name: 'DeleteDurableExecutionRequest')
+    DeleteDurableExecutionResponse = Shapes::StructureShape.new(name: 'DeleteDurableExecutionResponse')
     DeleteEventSourceMappingRequest = Shapes::StructureShape.new(name: 'DeleteEventSourceMappingRequest')
     DeleteFunctionCodeSigningConfigRequest = Shapes::StructureShape.new(name: 'DeleteFunctionCodeSigningConfigRequest')
     DeleteFunctionConcurrencyRequest = Shapes::StructureShape.new(name: 'DeleteFunctionConcurrencyRequest')
@@ -174,7 +178,9 @@ module Aws::Lambda
     EventError = Shapes::StructureShape.new(name: 'EventError')
     EventId = Shapes::IntegerShape.new(name: 'EventId')
     EventInput = Shapes::StructureShape.new(name: 'EventInput')
+    EventPauseReason = Shapes::StructureShape.new(name: 'EventPauseReason')
     EventResult = Shapes::StructureShape.new(name: 'EventResult')
+    EventResumeReason = Shapes::StructureShape.new(name: 'EventResumeReason')
     EventSourceMappingArn = Shapes::StringShape.new(name: 'EventSourceMappingArn')
     EventSourceMappingConfiguration = Shapes::StructureShape.new(name: 'EventSourceMappingConfiguration')
     EventSourceMappingLoggingConfig = Shapes::StructureShape.new(name: 'EventSourceMappingLoggingConfig')
@@ -192,6 +198,8 @@ module Aws::Lambda
     ExecutionDetails = Shapes::StructureShape.new(name: 'ExecutionDetails')
     ExecutionEnvironmentMemoryGiBPerVCpu = Shapes::FloatShape.new(name: 'ExecutionEnvironmentMemoryGiBPerVCpu')
     ExecutionFailedDetails = Shapes::StructureShape.new(name: 'ExecutionFailedDetails')
+    ExecutionPausedDetails = Shapes::StructureShape.new(name: 'ExecutionPausedDetails')
+    ExecutionResumedDetails = Shapes::StructureShape.new(name: 'ExecutionResumedDetails')
     ExecutionStartedDetails = Shapes::StructureShape.new(name: 'ExecutionStartedDetails')
     ExecutionStatus = Shapes::StringShape.new(name: 'ExecutionStatus')
     ExecutionStatusList = Shapes::ListShape.new(name: 'ExecutionStatusList')
@@ -199,6 +207,7 @@ module Aws::Lambda
     ExecutionSucceededDetails = Shapes::StructureShape.new(name: 'ExecutionSucceededDetails')
     ExecutionTimedOutDetails = Shapes::StructureShape.new(name: 'ExecutionTimedOutDetails')
     ExecutionTimeout = Shapes::IntegerShape.new(name: 'ExecutionTimeout')
+    ExecutionTimeoutPaused = Shapes::BooleanShape.new(name: 'ExecutionTimeoutPaused')
     ExecutionTimestamp = Shapes::TimestampShape.new(name: 'ExecutionTimestamp')
     FileSystemArn = Shapes::StringShape.new(name: 'FileSystemArn')
     FileSystemConfig = Shapes::StructureShape.new(name: 'FileSystemConfig')
@@ -222,6 +231,9 @@ module Aws::Lambda
     FunctionName = Shapes::StringShape.new(name: 'FunctionName')
     FunctionResponseType = Shapes::StringShape.new(name: 'FunctionResponseType')
     FunctionResponseTypeList = Shapes::ListShape.new(name: 'FunctionResponseTypeList')
+    FunctionRuntimeAlias = Shapes::StringShape.new(name: 'FunctionRuntimeAlias')
+    FunctionRuntimeArn = Shapes::StringShape.new(name: 'FunctionRuntimeArn')
+    FunctionRuntimeConfig = Shapes::StructureShape.new(name: 'FunctionRuntimeConfig')
     FunctionScalingConfig = Shapes::StructureShape.new(name: 'FunctionScalingConfig')
     FunctionScalingConfigExecutionEnvironments = Shapes::IntegerShape.new(name: 'FunctionScalingConfigExecutionEnvironments')
     FunctionUrl = Shapes::StringShape.new(name: 'FunctionUrl')
@@ -316,6 +328,7 @@ module Aws::Lambda
     KMSKeyArn = Shapes::StringShape.new(name: 'KMSKeyArn')
     KMSKeyArnNonEmpty = Shapes::StringShape.new(name: 'KMSKeyArnNonEmpty')
     KMSNotFoundException = Shapes::StructureShape.new(name: 'KMSNotFoundException')
+    KafkaEventSourceMappingConsumptionMode = Shapes::StringShape.new(name: 'KafkaEventSourceMappingConsumptionMode')
     KafkaSchemaRegistryAccessConfig = Shapes::StructureShape.new(name: 'KafkaSchemaRegistryAccessConfig')
     KafkaSchemaRegistryAccessConfigList = Shapes::ListShape.new(name: 'KafkaSchemaRegistryAccessConfigList')
     KafkaSchemaRegistryAuthType = Shapes::StringShape.new(name: 'KafkaSchemaRegistryAuthType')
@@ -331,6 +344,7 @@ module Aws::Lambda
     LayerArn = Shapes::StringShape.new(name: 'LayerArn')
     LayerList = Shapes::ListShape.new(name: 'LayerList')
     LayerName = Shapes::StringShape.new(name: 'LayerName')
+    LayerNameOrArn = Shapes::StringShape.new(name: 'LayerNameOrArn')
     LayerPermissionAllowedAction = Shapes::StringShape.new(name: 'LayerPermissionAllowedAction')
     LayerPermissionAllowedPrincipal = Shapes::StringShape.new(name: 'LayerPermissionAllowedPrincipal')
     LayerVersionArn = Shapes::StringShape.new(name: 'LayerVersionArn')
@@ -425,6 +439,10 @@ module Aws::Lambda
     PackageType = Shapes::StringShape.new(name: 'PackageType')
     ParallelizationFactor = Shapes::IntegerShape.new(name: 'ParallelizationFactor')
     Pattern = Shapes::StringShape.new(name: 'Pattern')
+    PauseDetails = Shapes::StructureShape.new(name: 'PauseDetails')
+    PauseDurableExecutionRequest = Shapes::StructureShape.new(name: 'PauseDurableExecutionRequest')
+    PauseDurableExecutionResponse = Shapes::StructureShape.new(name: 'PauseDurableExecutionResponse')
+    PauseReason = Shapes::StringShape.new(name: 'PauseReason')
     PerExecutionEnvironmentMaxConcurrency = Shapes::IntegerShape.new(name: 'PerExecutionEnvironmentMaxConcurrency')
     PolicyLengthExceededException = Shapes::StructureShape.new(name: 'PolicyLengthExceededException')
     PolicyResourceArn = Shapes::StringShape.new(name: 'PolicyResourceArn')
@@ -478,14 +496,19 @@ module Aws::Lambda
     ResourceNotReadyException = Shapes::StructureShape.new(name: 'ResourceNotReadyException')
     ResourcePolicy = Shapes::StringShape.new(name: 'ResourcePolicy')
     ResponseStreamingInvocationType = Shapes::StringShape.new(name: 'ResponseStreamingInvocationType')
+    ResumeDurableExecutionRequest = Shapes::StructureShape.new(name: 'ResumeDurableExecutionRequest')
+    ResumeDurableExecutionResponse = Shapes::StructureShape.new(name: 'ResumeDurableExecutionResponse')
+    ResumeReason = Shapes::StringShape.new(name: 'ResumeReason')
     RetentionPeriodInDays = Shapes::IntegerShape.new(name: 'RetentionPeriodInDays')
     RetryDetails = Shapes::StructureShape.new(name: 'RetryDetails')
     ReverseOrder = Shapes::BooleanShape.new(name: 'ReverseOrder')
     RevisionId = Shapes::StringShape.new(name: 'RevisionId')
     RoleArn = Shapes::StringShape.new(name: 'RoleArn')
     Runtime = Shapes::StringShape.new(name: 'Runtime')
+    RuntimeAliasDeletedException = Shapes::StructureShape.new(name: 'RuntimeAliasDeletedException')
     RuntimeVersionArn = Shapes::StringShape.new(name: 'RuntimeVersionArn')
     RuntimeVersionConfig = Shapes::StructureShape.new(name: 'RuntimeVersionConfig')
+    RuntimeVersionDeletedException = Shapes::StructureShape.new(name: 'RuntimeVersionDeletedException')
     RuntimeVersionError = Shapes::StructureShape.new(name: 'RuntimeVersionError')
     S3Bucket = Shapes::StringShape.new(name: 'S3Bucket')
     S3FilesConfig = Shapes::StructureShape.new(name: 'S3FilesConfig')
@@ -604,6 +627,9 @@ module Aws::Lambda
     WorkingDirectory = Shapes::StringShape.new(name: 'WorkingDirectory')
     XAmznTraceId = Shapes::StringShape.new(name: 'XAmznTraceId')
 
+    AcceleratorConfig.add_member(:accelerator_memory_size, Shapes::ShapeRef.new(shape: AcceleratorMemoryGB, required: true, location_name: "AcceleratorMemorySize"))
+    AcceleratorConfig.struct_class = Types::AcceleratorConfig
+
     AccountLimit.add_member(:total_code_size, Shapes::ShapeRef.new(shape: Long, location_name: "TotalCodeSize"))
     AccountLimit.add_member(:code_size_unzipped, Shapes::ShapeRef.new(shape: Long, location_name: "CodeSizeUnzipped"))
     AccountLimit.add_member(:code_size_zipped, Shapes::ShapeRef.new(shape: Long, location_name: "CodeSizeZipped"))
@@ -615,7 +641,7 @@ module Aws::Lambda
     AccountUsage.add_member(:function_count, Shapes::ShapeRef.new(shape: Long, location_name: "FunctionCount"))
     AccountUsage.struct_class = Types::AccountUsage
 
-    AddLayerVersionPermissionRequest.add_member(:layer_name, Shapes::ShapeRef.new(shape: LayerName, required: true, location: "uri", location_name: "LayerName"))
+    AddLayerVersionPermissionRequest.add_member(:layer_name, Shapes::ShapeRef.new(shape: LayerNameOrArn, required: true, location: "uri", location_name: "LayerName"))
     AddLayerVersionPermissionRequest.add_member(:version_number, Shapes::ShapeRef.new(shape: LayerVersionNumber, required: true, location: "uri", location_name: "VersionNumber"))
     AddLayerVersionPermissionRequest.add_member(:statement_id, Shapes::ShapeRef.new(shape: StatementId, required: true, location_name: "StatementId"))
     AddLayerVersionPermissionRequest.add_member(:action, Shapes::ShapeRef.new(shape: LayerPermissionAllowedAction, required: true, location_name: "Action"))
@@ -949,6 +975,8 @@ module Aws::Lambda
     CreateFunctionRequest.add_member(:tenancy_config, Shapes::ShapeRef.new(shape: TenancyConfig, location_name: "TenancyConfig"))
     CreateFunctionRequest.add_member(:capacity_provider_config, Shapes::ShapeRef.new(shape: CapacityProviderConfig, location_name: "CapacityProviderConfig"))
     CreateFunctionRequest.add_member(:durable_config, Shapes::ShapeRef.new(shape: DurableConfig, location_name: "DurableConfig"))
+    CreateFunctionRequest.add_member(:runtime_config, Shapes::ShapeRef.new(shape: FunctionRuntimeConfig, location_name: "RuntimeConfig"))
+    CreateFunctionRequest.add_member(:accelerator_config, Shapes::ShapeRef.new(shape: AcceleratorConfig, location_name: "AcceleratorConfig"))
     CreateFunctionRequest.struct_class = Types::CreateFunctionRequest
 
     CreateFunctionUrlConfigRequest.add_member(:function_name, Shapes::ShapeRef.new(shape: FunctionUrlFunctionName, required: true, location: "uri", location_name: "FunctionName"))
@@ -984,6 +1012,12 @@ module Aws::Lambda
 
     DeleteCodeSigningConfigResponse.struct_class = Types::DeleteCodeSigningConfigResponse
 
+    DeleteDurableExecutionRequest.add_member(:durable_execution_arn, Shapes::ShapeRef.new(shape: DurableExecutionArn, required: true, location: "uri", location_name: "DurableExecutionArn"))
+    DeleteDurableExecutionRequest.struct_class = Types::DeleteDurableExecutionRequest
+
+    DeleteDurableExecutionResponse.add_member(:deletion_request_timestamp, Shapes::ShapeRef.new(shape: ExecutionTimestamp, required: true, location_name: "DeletionRequestTimestamp"))
+    DeleteDurableExecutionResponse.struct_class = Types::DeleteDurableExecutionResponse
+
     DeleteEventSourceMappingRequest.add_member(:uuid, Shapes::ShapeRef.new(shape: UUIDString, required: true, location: "uri", location_name: "UUID"))
     DeleteEventSourceMappingRequest.struct_class = Types::DeleteEventSourceMappingRequest
 
@@ -1008,7 +1042,7 @@ module Aws::Lambda
     DeleteFunctionUrlConfigRequest.add_member(:qualifier, Shapes::ShapeRef.new(shape: FunctionUrlQualifier, location: "querystring", location_name: "Qualifier"))
     DeleteFunctionUrlConfigRequest.struct_class = Types::DeleteFunctionUrlConfigRequest
 
-    DeleteLayerVersionRequest.add_member(:layer_name, Shapes::ShapeRef.new(shape: LayerName, required: true, location: "uri", location_name: "LayerName"))
+    DeleteLayerVersionRequest.add_member(:layer_name, Shapes::ShapeRef.new(shape: LayerNameOrArn, required: true, location: "uri", location_name: "LayerName"))
     DeleteLayerVersionRequest.add_member(:version_number, Shapes::ShapeRef.new(shape: LayerVersionNumber, required: true, location: "uri", location_name: "VersionNumber"))
     DeleteLayerVersionRequest.struct_class = Types::DeleteLayerVersionRequest
 
@@ -1136,6 +1170,8 @@ module Aws::Lambda
     Event.add_member(:callback_failed_details, Shapes::ShapeRef.new(shape: CallbackFailedDetails, location_name: "CallbackFailedDetails"))
     Event.add_member(:callback_timed_out_details, Shapes::ShapeRef.new(shape: CallbackTimedOutDetails, location_name: "CallbackTimedOutDetails"))
     Event.add_member(:invocation_completed_details, Shapes::ShapeRef.new(shape: InvocationCompletedDetails, location_name: "InvocationCompletedDetails"))
+    Event.add_member(:execution_paused_details, Shapes::ShapeRef.new(shape: ExecutionPausedDetails, location_name: "ExecutionPausedDetails"))
+    Event.add_member(:execution_resumed_details, Shapes::ShapeRef.new(shape: ExecutionResumedDetails, location_name: "ExecutionResumedDetails"))
     Event.struct_class = Types::Event
 
     EventError.add_member(:payload, Shapes::ShapeRef.new(shape: ErrorObject, location_name: "Payload"))
@@ -1146,9 +1182,17 @@ module Aws::Lambda
     EventInput.add_member(:truncated, Shapes::ShapeRef.new(shape: Truncated, location_name: "Truncated"))
     EventInput.struct_class = Types::EventInput
 
+    EventPauseReason.add_member(:payload, Shapes::ShapeRef.new(shape: PauseReason, location_name: "Payload"))
+    EventPauseReason.add_member(:truncated, Shapes::ShapeRef.new(shape: Truncated, location_name: "Truncated"))
+    EventPauseReason.struct_class = Types::EventPauseReason
+
     EventResult.add_member(:payload, Shapes::ShapeRef.new(shape: OperationPayload, location_name: "Payload"))
     EventResult.add_member(:truncated, Shapes::ShapeRef.new(shape: Truncated, location_name: "Truncated"))
     EventResult.struct_class = Types::EventResult
+
+    EventResumeReason.add_member(:payload, Shapes::ShapeRef.new(shape: ResumeReason, location_name: "Payload"))
+    EventResumeReason.add_member(:truncated, Shapes::ShapeRef.new(shape: Truncated, location_name: "Truncated"))
+    EventResumeReason.struct_class = Types::EventResumeReason
 
     EventSourceMappingConfiguration.add_member(:uuid, Shapes::ShapeRef.new(shape: UUIDString, location_name: "UUID"))
     EventSourceMappingConfiguration.add_member(:starting_position, Shapes::ShapeRef.new(shape: EventSourcePosition, location_name: "StartingPosition"))
@@ -1211,6 +1255,15 @@ module Aws::Lambda
 
     ExecutionFailedDetails.add_member(:error, Shapes::ShapeRef.new(shape: EventError, required: true, location_name: "Error"))
     ExecutionFailedDetails.struct_class = Types::ExecutionFailedDetails
+
+    ExecutionPausedDetails.add_member(:pause_request_timestamp, Shapes::ShapeRef.new(shape: ExecutionTimestamp, required: true, location_name: "PauseRequestTimestamp"))
+    ExecutionPausedDetails.add_member(:reason, Shapes::ShapeRef.new(shape: EventPauseReason, location_name: "Reason"))
+    ExecutionPausedDetails.add_member(:execution_timeout_paused, Shapes::ShapeRef.new(shape: ExecutionTimeoutPaused, required: true, location_name: "ExecutionTimeoutPaused"))
+    ExecutionPausedDetails.struct_class = Types::ExecutionPausedDetails
+
+    ExecutionResumedDetails.add_member(:resume_request_timestamp, Shapes::ShapeRef.new(shape: ExecutionTimestamp, required: true, location_name: "ResumeRequestTimestamp"))
+    ExecutionResumedDetails.add_member(:reason, Shapes::ShapeRef.new(shape: EventResumeReason, location_name: "Reason"))
+    ExecutionResumedDetails.struct_class = Types::ExecutionResumedDetails
 
     ExecutionStartedDetails.add_member(:input, Shapes::ShapeRef.new(shape: EventInput, required: true, location_name: "Input"))
     ExecutionStartedDetails.add_member(:execution_timeout, Shapes::ShapeRef.new(shape: DurationSeconds, required: true, location_name: "ExecutionTimeout"))
@@ -1310,6 +1363,8 @@ module Aws::Lambda
     FunctionConfiguration.add_member(:capacity_provider_config, Shapes::ShapeRef.new(shape: CapacityProviderConfig, location_name: "CapacityProviderConfig"))
     FunctionConfiguration.add_member(:config_sha_256, Shapes::ShapeRef.new(shape: String, location_name: "ConfigSha256"))
     FunctionConfiguration.add_member(:durable_config, Shapes::ShapeRef.new(shape: DurableConfig, location_name: "DurableConfig"))
+    FunctionConfiguration.add_member(:runtime_config, Shapes::ShapeRef.new(shape: FunctionRuntimeConfig, location_name: "RuntimeConfig"))
+    FunctionConfiguration.add_member(:accelerator_config, Shapes::ShapeRef.new(shape: AcceleratorConfig, location_name: "AcceleratorConfig"))
     FunctionConfiguration.struct_class = Types::FunctionConfiguration
 
     FunctionEventInvokeConfig.add_member(:last_modified, Shapes::ShapeRef.new(shape: Date, location_name: "LastModified"))
@@ -1324,6 +1379,10 @@ module Aws::Lambda
     FunctionList.member = Shapes::ShapeRef.new(shape: FunctionConfiguration)
 
     FunctionResponseTypeList.member = Shapes::ShapeRef.new(shape: FunctionResponseType)
+
+    FunctionRuntimeConfig.add_member(:runtime_arn, Shapes::ShapeRef.new(shape: FunctionRuntimeArn, required: true, location_name: "RuntimeArn"))
+    FunctionRuntimeConfig.add_member(:runtime_alias, Shapes::ShapeRef.new(shape: FunctionRuntimeAlias, required: true, location_name: "RuntimeAlias"))
+    FunctionRuntimeConfig.struct_class = Types::FunctionRuntimeConfig
 
     FunctionScalingConfig.add_member(:min_execution_environments, Shapes::ShapeRef.new(shape: FunctionScalingConfigExecutionEnvironments, location_name: "MinExecutionEnvironments"))
     FunctionScalingConfig.add_member(:max_execution_environments, Shapes::ShapeRef.new(shape: FunctionScalingConfigExecutionEnvironments, location_name: "MaxExecutionEnvironments"))
@@ -1400,6 +1459,8 @@ module Aws::Lambda
     GetDurableExecutionResponse.add_member(:trace_header, Shapes::ShapeRef.new(shape: TraceHeader, location_name: "TraceHeader"))
     GetDurableExecutionResponse.add_member(:execution_data_included, Shapes::ShapeRef.new(shape: ExecutionDataIncluded, location_name: "ExecutionDataIncluded"))
     GetDurableExecutionResponse.add_member(:durable_config, Shapes::ShapeRef.new(shape: DurableConfig, location_name: "DurableConfig"))
+    GetDurableExecutionResponse.add_member(:pause_details, Shapes::ShapeRef.new(shape: PauseDetails, location_name: "PauseDetails"))
+    GetDurableExecutionResponse.add_member(:expected_execution_timeout_timestamp, Shapes::ShapeRef.new(shape: ExecutionTimestamp, location_name: "ExpectedExecutionTimeoutTimestamp"))
     GetDurableExecutionResponse.struct_class = Types::GetDurableExecutionResponse
 
     GetDurableExecutionStateRequest.add_member(:durable_execution_arn, Shapes::ShapeRef.new(shape: DurableExecutionArn, required: true, location: "uri", location_name: "DurableExecutionArn"))
@@ -1478,7 +1539,7 @@ module Aws::Lambda
     GetLayerVersionByArnRequest.add_member(:arn, Shapes::ShapeRef.new(shape: LayerVersionArn, required: true, location: "querystring", location_name: "Arn"))
     GetLayerVersionByArnRequest.struct_class = Types::GetLayerVersionByArnRequest
 
-    GetLayerVersionPolicyRequest.add_member(:layer_name, Shapes::ShapeRef.new(shape: LayerName, required: true, location: "uri", location_name: "LayerName"))
+    GetLayerVersionPolicyRequest.add_member(:layer_name, Shapes::ShapeRef.new(shape: LayerNameOrArn, required: true, location: "uri", location_name: "LayerName"))
     GetLayerVersionPolicyRequest.add_member(:version_number, Shapes::ShapeRef.new(shape: LayerVersionNumber, required: true, location: "uri", location_name: "VersionNumber"))
     GetLayerVersionPolicyRequest.struct_class = Types::GetLayerVersionPolicyRequest
 
@@ -1486,7 +1547,7 @@ module Aws::Lambda
     GetLayerVersionPolicyResponse.add_member(:revision_id, Shapes::ShapeRef.new(shape: String, location_name: "RevisionId"))
     GetLayerVersionPolicyResponse.struct_class = Types::GetLayerVersionPolicyResponse
 
-    GetLayerVersionRequest.add_member(:layer_name, Shapes::ShapeRef.new(shape: LayerName, required: true, location: "uri", location_name: "LayerName"))
+    GetLayerVersionRequest.add_member(:layer_name, Shapes::ShapeRef.new(shape: LayerNameOrArn, required: true, location: "uri", location_name: "LayerName"))
     GetLayerVersionRequest.add_member(:version_number, Shapes::ShapeRef.new(shape: LayerVersionNumber, required: true, location: "uri", location_name: "VersionNumber"))
     GetLayerVersionRequest.struct_class = Types::GetLayerVersionRequest
 
@@ -1837,7 +1898,7 @@ module Aws::Lambda
 
     ListLayerVersionsRequest.add_member(:compatible_architecture, Shapes::ShapeRef.new(shape: Architecture, location: "querystring", location_name: "CompatibleArchitecture"))
     ListLayerVersionsRequest.add_member(:compatible_runtime, Shapes::ShapeRef.new(shape: Runtime, location: "querystring", location_name: "CompatibleRuntime"))
-    ListLayerVersionsRequest.add_member(:layer_name, Shapes::ShapeRef.new(shape: LayerName, required: true, location: "uri", location_name: "LayerName"))
+    ListLayerVersionsRequest.add_member(:layer_name, Shapes::ShapeRef.new(shape: LayerNameOrArn, required: true, location: "uri", location_name: "LayerName"))
     ListLayerVersionsRequest.add_member(:marker, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "Marker"))
     ListLayerVersionsRequest.add_member(:max_items, Shapes::ShapeRef.new(shape: MaxLayerListItems, location: "querystring", location_name: "MaxItems"))
     ListLayerVersionsRequest.struct_class = Types::ListLayerVersionsRequest
@@ -1935,6 +1996,19 @@ module Aws::Lambda
 
     Operations.member = Shapes::ShapeRef.new(shape: Operation)
 
+    PauseDetails.add_member(:pause_request_timestamp, Shapes::ShapeRef.new(shape: ExecutionTimestamp, required: true, location_name: "PauseRequestTimestamp"))
+    PauseDetails.add_member(:reason, Shapes::ShapeRef.new(shape: PauseReason, location_name: "Reason"))
+    PauseDetails.add_member(:execution_timeout_paused, Shapes::ShapeRef.new(shape: ExecutionTimeoutPaused, required: true, location_name: "ExecutionTimeoutPaused"))
+    PauseDetails.struct_class = Types::PauseDetails
+
+    PauseDurableExecutionRequest.add_member(:durable_execution_arn, Shapes::ShapeRef.new(shape: DurableExecutionArn, required: true, location: "uri", location_name: "DurableExecutionArn"))
+    PauseDurableExecutionRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
+    PauseDurableExecutionRequest.add_member(:reason, Shapes::ShapeRef.new(shape: PauseReason, location_name: "Reason"))
+    PauseDurableExecutionRequest.add_member(:execution_timeout_paused, Shapes::ShapeRef.new(shape: ExecutionTimeoutPaused, location_name: "ExecutionTimeoutPaused"))
+    PauseDurableExecutionRequest.struct_class = Types::PauseDurableExecutionRequest
+
+    PauseDurableExecutionResponse.struct_class = Types::PauseDurableExecutionResponse
+
     PolicyLengthExceededException.add_member(:type, Shapes::ShapeRef.new(shape: String, location_name: "Type"))
     PolicyLengthExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     PolicyLengthExceededException.struct_class = Types::PolicyLengthExceededException
@@ -1974,7 +2048,7 @@ module Aws::Lambda
     PublicPolicyException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     PublicPolicyException.struct_class = Types::PublicPolicyException
 
-    PublishLayerVersionRequest.add_member(:layer_name, Shapes::ShapeRef.new(shape: LayerName, required: true, location: "uri", location_name: "LayerName"))
+    PublishLayerVersionRequest.add_member(:layer_name, Shapes::ShapeRef.new(shape: LayerNameOrArn, required: true, location: "uri", location_name: "LayerName"))
     PublishLayerVersionRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
     PublishLayerVersionRequest.add_member(:content, Shapes::ShapeRef.new(shape: LayerVersionContentInput, required: true, location_name: "Content"))
     PublishLayerVersionRequest.add_member(:compatible_architectures, Shapes::ShapeRef.new(shape: CompatibleArchitectures, location_name: "CompatibleArchitectures"))
@@ -2073,7 +2147,7 @@ module Aws::Lambda
     RecursiveInvocationException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     RecursiveInvocationException.struct_class = Types::RecursiveInvocationException
 
-    RemoveLayerVersionPermissionRequest.add_member(:layer_name, Shapes::ShapeRef.new(shape: LayerName, required: true, location: "uri", location_name: "LayerName"))
+    RemoveLayerVersionPermissionRequest.add_member(:layer_name, Shapes::ShapeRef.new(shape: LayerNameOrArn, required: true, location: "uri", location_name: "LayerName"))
     RemoveLayerVersionPermissionRequest.add_member(:version_number, Shapes::ShapeRef.new(shape: LayerVersionNumber, required: true, location: "uri", location_name: "VersionNumber"))
     RemoveLayerVersionPermissionRequest.add_member(:statement_id, Shapes::ShapeRef.new(shape: StatementId, required: true, location: "uri", location_name: "StatementId"))
     RemoveLayerVersionPermissionRequest.add_member(:revision_id, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "RevisionId"))
@@ -2110,13 +2184,28 @@ module Aws::Lambda
     ResourceNotReadyException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     ResourceNotReadyException.struct_class = Types::ResourceNotReadyException
 
+    ResumeDurableExecutionRequest.add_member(:durable_execution_arn, Shapes::ShapeRef.new(shape: DurableExecutionArn, required: true, location: "uri", location_name: "DurableExecutionArn"))
+    ResumeDurableExecutionRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
+    ResumeDurableExecutionRequest.add_member(:reason, Shapes::ShapeRef.new(shape: ResumeReason, location_name: "Reason"))
+    ResumeDurableExecutionRequest.struct_class = Types::ResumeDurableExecutionRequest
+
+    ResumeDurableExecutionResponse.struct_class = Types::ResumeDurableExecutionResponse
+
     RetryDetails.add_member(:current_attempt, Shapes::ShapeRef.new(shape: AttemptCount, location_name: "CurrentAttempt"))
     RetryDetails.add_member(:next_attempt_delay_seconds, Shapes::ShapeRef.new(shape: DurationSeconds, location_name: "NextAttemptDelaySeconds"))
     RetryDetails.struct_class = Types::RetryDetails
 
+    RuntimeAliasDeletedException.add_member(:type, Shapes::ShapeRef.new(shape: String, location_name: "Type"))
+    RuntimeAliasDeletedException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    RuntimeAliasDeletedException.struct_class = Types::RuntimeAliasDeletedException
+
     RuntimeVersionConfig.add_member(:runtime_version_arn, Shapes::ShapeRef.new(shape: RuntimeVersionArn, location_name: "RuntimeVersionArn"))
     RuntimeVersionConfig.add_member(:error, Shapes::ShapeRef.new(shape: RuntimeVersionError, location_name: "Error"))
     RuntimeVersionConfig.struct_class = Types::RuntimeVersionConfig
+
+    RuntimeVersionDeletedException.add_member(:type, Shapes::ShapeRef.new(shape: String, location_name: "Type"))
+    RuntimeVersionDeletedException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    RuntimeVersionDeletedException.struct_class = Types::RuntimeVersionDeletedException
 
     RuntimeVersionError.add_member(:error_code, Shapes::ShapeRef.new(shape: String, location_name: "ErrorCode"))
     RuntimeVersionError.add_member(:message, Shapes::ShapeRef.new(shape: SensitiveString, location_name: "Message"))
@@ -2147,6 +2236,7 @@ module Aws::Lambda
 
     SelfManagedKafkaEventSourceConfig.add_member(:consumer_group_id, Shapes::ShapeRef.new(shape: URI, location_name: "ConsumerGroupId"))
     SelfManagedKafkaEventSourceConfig.add_member(:schema_registry_config, Shapes::ShapeRef.new(shape: KafkaSchemaRegistryConfig, location_name: "SchemaRegistryConfig"))
+    SelfManagedKafkaEventSourceConfig.add_member(:consumption_mode, Shapes::ShapeRef.new(shape: KafkaEventSourceMappingConsumptionMode, location_name: "ConsumptionMode"))
     SelfManagedKafkaEventSourceConfig.struct_class = Types::SelfManagedKafkaEventSourceConfig
 
     SendDurableExecutionCallbackFailureRequest.add_member(:callback_id, Shapes::ShapeRef.new(shape: CallbackId, required: true, location: "uri", location_name: "CallbackId"))
@@ -2382,6 +2472,8 @@ module Aws::Lambda
     UpdateFunctionConfigurationRequest.add_member(:logging_config, Shapes::ShapeRef.new(shape: LoggingConfig, location_name: "LoggingConfig"))
     UpdateFunctionConfigurationRequest.add_member(:capacity_provider_config, Shapes::ShapeRef.new(shape: CapacityProviderConfig, location_name: "CapacityProviderConfig"))
     UpdateFunctionConfigurationRequest.add_member(:durable_config, Shapes::ShapeRef.new(shape: DurableConfig, location_name: "DurableConfig"))
+    UpdateFunctionConfigurationRequest.add_member(:runtime_config, Shapes::ShapeRef.new(shape: FunctionRuntimeConfig, location_name: "RuntimeConfig"))
+    UpdateFunctionConfigurationRequest.add_member(:accelerator_config, Shapes::ShapeRef.new(shape: AcceleratorConfig, location_name: "AcceleratorConfig"))
     UpdateFunctionConfigurationRequest.struct_class = Types::UpdateFunctionConfigurationRequest
 
     UpdateFunctionEventInvokeConfigRequest.add_member(:function_name, Shapes::ShapeRef.new(shape: NamespacedFunctionName, required: true, location: "uri", location_name: "FunctionName"))
@@ -2615,6 +2707,19 @@ module Aws::Lambda
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:delete_durable_execution, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteDurableExecution"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/2025-12-01/durable-executions/{DurableExecutionArn}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteDurableExecutionRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteDurableExecutionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
@@ -3041,6 +3146,7 @@ module Aws::Lambda
         o.http_request_uri = "/2015-03-31/functions/{FunctionName}/invocations"
         o.input = Shapes::ShapeRef.new(shape: InvocationRequest)
         o.output = Shapes::ShapeRef.new(shape: InvocationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: RuntimeAliasDeletedException)
         o.errors << Shapes::ShapeRef.new(shape: CodeArtifactUserDeletedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotReadyException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
@@ -3066,6 +3172,7 @@ module Aws::Lambda
         o.errors << Shapes::ShapeRef.new(shape: EFSIOException)
         o.errors << Shapes::ShapeRef.new(shape: KMSInvalidStateException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: RuntimeVersionDeletedException)
         o.errors << Shapes::ShapeRef.new(shape: ENILimitReachedException)
         o.errors << Shapes::ShapeRef.new(shape: SnapStartNotReadyException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
@@ -3130,6 +3237,7 @@ module Aws::Lambda
         o.http_request_uri = "/2021-11-15/functions/{FunctionName}/response-streaming-invocations"
         o.input = Shapes::ShapeRef.new(shape: InvokeWithResponseStreamRequest)
         o.output = Shapes::ShapeRef.new(shape: InvokeWithResponseStreamResponse)
+        o.errors << Shapes::ShapeRef.new(shape: RuntimeAliasDeletedException)
         o.errors << Shapes::ShapeRef.new(shape: CodeArtifactUserDeletedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotReadyException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
@@ -3155,6 +3263,7 @@ module Aws::Lambda
         o.errors << Shapes::ShapeRef.new(shape: EFSIOException)
         o.errors << Shapes::ShapeRef.new(shape: KMSInvalidStateException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: RuntimeVersionDeletedException)
         o.errors << Shapes::ShapeRef.new(shape: ENILimitReachedException)
         o.errors << Shapes::ShapeRef.new(shape: SnapStartNotReadyException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
@@ -3430,6 +3539,23 @@ module Aws::Lambda
         )
       end)
 
+      api.add_operation(:pause_durable_execution, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PauseDurableExecution"
+        o.http_method = "POST"
+        o.http_request_uri = "/2025-12-01/durable-executions/{DurableExecutionArn}/pause"
+        o.input = Shapes::ShapeRef.new(shape: PauseDurableExecutionRequest)
+        o.output = Shapes::ShapeRef.new(shape: PauseDurableExecutionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: KMSInvalidStateException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: KMSNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: KMSAccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: KMSDisabledException)
+      end)
+
       api.add_operation(:publish_layer_version, Seahorse::Model::Operation.new.tap do |o|
         o.name = "PublishLayerVersion"
         o.http_method = "POST"
@@ -3574,6 +3700,7 @@ module Aws::Lambda
         o.input = Shapes::ShapeRef.new(shape: RemoveLayerVersionPermissionRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -3592,6 +3719,23 @@ module Aws::Lambda
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: PreconditionFailedException)
+      end)
+
+      api.add_operation(:resume_durable_execution, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ResumeDurableExecution"
+        o.http_method = "POST"
+        o.http_request_uri = "/2025-12-01/durable-executions/{DurableExecutionArn}/resume"
+        o.input = Shapes::ShapeRef.new(shape: ResumeDurableExecutionRequest)
+        o.output = Shapes::ShapeRef.new(shape: ResumeDurableExecutionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: KMSInvalidStateException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: KMSNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: KMSAccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: KMSDisabledException)
       end)
 
       api.add_operation(:send_durable_execution_callback_failure, Seahorse::Model::Operation.new.tap do |o|

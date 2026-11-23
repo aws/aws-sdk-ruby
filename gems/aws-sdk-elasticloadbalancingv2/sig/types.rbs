@@ -144,6 +144,14 @@ module Aws::ElasticLoadBalancingV2
       SENSITIVE: []
     end
 
+    class ClientCertificateIdentityFilter
+      attr_accessor field: ("subject-cn" | "subject-ou" | "san-dns" | "san-uri")
+      attr_accessor action: ("accept")
+      attr_accessor match_type: ("exact" | "prefix")
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
     class CreateListenerInput
       attr_accessor load_balancer_arn: ::String
       attr_accessor protocol: ("HTTP" | "HTTPS" | "TCP" | "TLS" | "UDP" | "TCP_UDP" | "GENEVE" | "QUIC" | "TCP_QUIC")
@@ -854,6 +862,7 @@ module Aws::ElasticLoadBalancingV2
       attr_accessor ignore_client_certificate_expiry: bool
       attr_accessor trust_store_association_status: ("active" | "removed")
       attr_accessor advertise_trust_store_ca_names: ("on" | "off")
+      attr_accessor client_certificate_identity_filters: ::Array[Types::ClientCertificateIdentityFilter]
       SENSITIVE: []
     end
 

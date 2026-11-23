@@ -264,7 +264,8 @@ module Aws::Glue
     #     An integer representing the maximum number attempts that will be made for
     #     a single request, including the initial attempt.  For example,
     #     setting this value to 5 will result in a request being retried up to
-    #     4 times. Used in `standard` and `adaptive` retry modes.
+    #     4 times. Used in `standard` and `adaptive` retry modes. Defaults to 3,
+    #     except for DynamoDB and DynamoDB Streams, which default to 4.
     #
     #   @option options [String] :profile ("default")
     #     Used when loading credentials from the shared credentials file at `HOME/.aws/credentials`.
@@ -327,15 +328,15 @@ module Aws::Glue
     #     used by the default backoff function. This option is only used in the
     #     `legacy` retry mode.
     #
-    #   @option options [String] :retry_mode ("legacy")
+    #   @option options [String] :retry_mode ("standard")
     #     Specifies which retry algorithm to use. Values are:
     #
-    #     * `legacy` - The pre-existing retry behavior. This is the default
-    #       value if no retry mode is provided.
+    #     * `legacy` - The pre-existing retry behavior.
     #
     #     * `standard` - A standardized set of retry rules across the AWS SDKs.
     #       This includes support for retry quotas, which limit the number of
-    #       unsuccessful retries a client can make.
+    #       unsuccessful retries a client can make. This is the default value
+    #       if no retry mode is provided.
     #
     #     * `adaptive` - A retry mode that includes all the functionality of
     #       `standard` mode along with automatic client side throttling.
@@ -515,9 +516,9 @@ module Aws::Glue
     #
     # @return [Types::AssociateGlossaryTermsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::AssociateGlossaryTermsResponse#asset_identifier #asset_identifier} => String
+    #   * {Types::AssociateGlossaryTermsResponse#asset_id #asset_id} => String
     #   * {Types::AssociateGlossaryTermsResponse#iterable_form_name #iterable_form_name} => String
-    #   * {Types::AssociateGlossaryTermsResponse#item_identifier #item_identifier} => String
+    #   * {Types::AssociateGlossaryTermsResponse#item_id #item_id} => String
     #   * {Types::AssociateGlossaryTermsResponse#glossary_terms #glossary_terms} => Array&lt;String&gt;
     #
     # @example Request syntax with placeholder values
@@ -532,9 +533,9 @@ module Aws::Glue
     #
     # @example Response structure
     #
-    #   resp.asset_identifier #=> String
+    #   resp.asset_id #=> String
     #   resp.iterable_form_name #=> String
-    #   resp.item_identifier #=> String
+    #   resp.item_id #=> String
     #   resp.glossary_terms #=> Array
     #   resp.glossary_terms[0] #=> String
     #
@@ -1077,6 +1078,8 @@ module Aws::Glue
     #
     #   resp.results #=> Array
     #   resp.results[0].result_id #=> String
+    #   resp.results[0].evaluation_run_mode #=> String, one of "ON_DEMAND", "EVALUATION_CONFIG"
+    #   resp.results[0].data_quality_evaluation_config #=> String
     #   resp.results[0].profile_id #=> String
     #   resp.results[0].score #=> Float
     #   resp.results[0].data_source.glue_table.database_name #=> String
@@ -1172,6 +1175,8 @@ module Aws::Glue
     #
     #   resp.results #=> Array
     #   resp.results[0].result_id #=> String
+    #   resp.results[0].evaluation_run_mode #=> String, one of "ON_DEMAND", "EVALUATION_CONFIG"
+    #   resp.results[0].data_quality_evaluation_config #=> String
     #   resp.results[0].data_source.glue_table.database_name #=> String
     #   resp.results[0].data_source.glue_table.table_name #=> String
     #   resp.results[0].data_source.glue_table.catalog_id #=> String
@@ -2931,6 +2936,255 @@ module Aws::Glue
       req.send_request(options)
     end
 
+    # Creates a data quality evaluation configuration, which evaluates the
+    # data quality of a collection of tables in the Glue Data Catalog once,
+    # on a schedule, or when table metadata changes. A configuration applies
+    # to a catalog, a database, or a single table, and evaluates every table
+    # in scope, including tables added later, without per-table setup.
+    #
+    # When configurations at more than one level apply to the same table,
+    # the most specific configuration applies. Each table is evaluated at
+    # most once an hour, whichever triggers you choose.
+    #
+    # @option params [required, String] :name
+    #   A name for the data quality evaluation configuration. The name must be
+    #   unique within your account.
+    #
+    # @option params [required, String] :level
+    #   The Glue Data Catalog hierarchical level that the configuration
+    #   applies to. Valid values are `CATALOG`, `DATABASE`, and `TABLE`.
+    #
+    # @option params [required, Types::DataQualityEvaluationConfigDataSource] :data_source
+    #   The catalog, database, or table that the configuration applies to, as
+    #   specified by `Level`.
+    #
+    # @option params [String] :ruleset_name
+    #   The name of a Data Quality Definition Language (DQDL) ruleset,
+    #   containing analyzers, rules, or both, to evaluate tables with. You
+    #   create the ruleset using the `CreateDataQualityRuleset` API. Specify
+    #   either `RulesetName` or `ManagedRulesetName`, not both.
+    #
+    # @option params [String] :managed_ruleset_name
+    #   A built-in ruleset that profiles each table, used when `RulesetName`
+    #   is not set. The default is `SIMPLE`. Choose from the following
+    #   built-in rulesets:
+    #
+    #   SIMPLE
+    #
+    #   : Row count and column count, completeness, minimum, and maximum for
+    #     every column, mean, sum, and standard deviation for numeric columns,
+    #     and column length for string columns.
+    #
+    #   ADVANCED
+    #
+    #   : Every statistic in `SIMPLE`, plus distribution, uniqueness, and
+    #     distinct values count.
+    #
+    # @option params [Array<String>] :triggers
+    #   When the configuration evaluates tables. You can choose one or more
+    #   triggers, and each table is evaluated at most once an hour. The
+    #   default is `ONCE`. Choose from the following triggers:
+    #
+    #   ONCE
+    #
+    #   : Evaluates each table one time, including when tables are added to a
+    #     database or catalog.
+    #
+    #   SCHEDULE
+    #
+    #   : Evaluates each table on the cron or rate expression in
+    #     `ScheduleExpression`, between the optional `StartAt` and `EndAt`
+    #     times.
+    #
+    #   METADATA\_CHANGE
+    #
+    #   : Evaluates a table whenever its Glue Data Catalog metadata changes,
+    #     such as a schema change or an Apache Iceberg commit.
+    #
+    # @option params [String] :schedule_expression
+    #   A cron or rate expression, in UTC, for the `SCHEDULE` trigger, for
+    #   example `cron(0 6 * * ? *)`. The schedule can run at most once an
+    #   hour.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :start_at
+    #   The time from which the schedule runs, inclusive.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :end_at
+    #   The time at which the schedule stops running, exclusive.
+    #
+    # @option params [required, String] :role
+    #   The IAM role that evaluations assume. You can specify the role name or
+    #   the role Amazon Resource Name (ARN).
+    #
+    #   The role must allow the `glue.amazonaws.com` service principal to
+    #   assume it, and needs permissions to read the catalog
+    #   (`glue:GetCatalog`, `glue:GetDatabase`, `glue:GetTable`,
+    #   `glue:SearchTables`, and `glue:GetPartitions`), read and create
+    #   rulesets (`glue:GetDataQualityRuleset` and
+    #   `glue:CreateDataQualityRuleset`), start evaluations
+    #   (`glue:StartDataQualityRulesetEvaluationRun`,
+    #   `glue:PublishDataQuality`, and `iam:PassRole` on the role itself),
+    #   read the tables' data in Amazon S3, and write logs to Amazon
+    #   CloudWatch Logs. If a catalog-level or database-level configuration
+    #   applies to an Amazon S3 Tables catalog, the role also needs
+    #   `s3tables:ListTableBuckets` and `s3tables:ListTables`. If you use Lake
+    #   Formation, the role needs the `DESCRIBE` permission on the tables.
+    #
+    # @option params [Integer] :number_of_workers
+    #   The number of `G.1X` workers to be used in the run. The default is 5.
+    #
+    # @option params [Integer] :timeout
+    #   The timeout for a run in minutes. This is the maximum time that a run
+    #   can consume resources before it is terminated and enters `TIMEOUT`
+    #   status. The default is 2,880 minutes (48 hours).
+    #
+    # @option params [Types::DataQualityEvaluationConfigAdditionalRunOptions] :additional_run_options
+    #   Additional run options you can specify for an evaluation run.
+    #
+    # @option params [Hash<String,Types::DataSource>] :additional_data_sources
+    #   A map of reference strings to additional data sources you can specify
+    #   for an evaluation run.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   A list of tags applied to the data quality evaluation configuration.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   operation completes no more than one time. If this token matches a
+    #   previous request, the service ignores the request, but does not return
+    #   an error.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::CreateDataQualityEvaluationConfigResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateDataQualityEvaluationConfigResponse#name #name} => String
+    #   * {Types::CreateDataQualityEvaluationConfigResponse#evaluation_run_mode #evaluation_run_mode} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_data_quality_evaluation_config({
+    #     name: "NameString", # required
+    #     level: "CATALOG", # required, accepts CATALOG, DATABASE, TABLE
+    #     data_source: { # required
+    #       glue_tables: {
+    #         catalog_id: "NameString", # required
+    #         database_name: "NameString",
+    #         table_name_pattern: "NameString",
+    #         pre_processing_query: "PreProcessingQueryString",
+    #         connection_name: "NameString",
+    #         additional_options: {
+    #           "NameString" => "DescriptionString",
+    #         },
+    #       },
+    #     },
+    #     ruleset_name: "NameString",
+    #     managed_ruleset_name: "SIMPLE", # accepts SIMPLE, ADVANCED
+    #     triggers: ["ONCE"], # accepts ONCE, SCHEDULE, METADATA_CHANGE
+    #     schedule_expression: "DataQualityEvaluationConfigScheduleExpression",
+    #     start_at: Time.now,
+    #     end_at: Time.now,
+    #     role: "RoleString", # required
+    #     number_of_workers: 1,
+    #     timeout: 1,
+    #     additional_run_options: {
+    #       cloud_watch_metrics_enabled: false,
+    #       results_s3_prefix: "UriString",
+    #       composite_rule_evaluation_method: "COLUMN", # accepts COLUMN, ROW
+    #       row_level_results: {
+    #         max_rows_to_write: 1,
+    #         result_type: "ALL", # accepts ALL, PASSED_ONLY, FAILED_ONLY
+    #         catalog_table_config: {
+    #           database_name: "NameString",
+    #           table_name: "NameString",
+    #           s3_location: "UriString",
+    #           catalog_id: "NameString",
+    #         },
+    #       },
+    #       profiling_results: {
+    #         write_profiling_results_enabled: false,
+    #         catalog_table_config: {
+    #           database_name: "NameString",
+    #           table_name: "NameString",
+    #           s3_location: "UriString",
+    #           catalog_id: "NameString",
+    #         },
+    #         distribution_results: {
+    #           write_distribution_results_enabled: false,
+    #           catalog_table_config: {
+    #             database_name: "NameString",
+    #             table_name: "NameString",
+    #             s3_location: "UriString",
+    #             catalog_id: "NameString",
+    #           },
+    #         },
+    #       },
+    #       observation_scope: "ALL", # accepts ALL, NONE
+    #       observation_mode: "SCHEDULED", # accepts SCHEDULED, FIXED
+    #       data_quality_rule_results: {
+    #         write_data_quality_rule_results_enabled: false,
+    #         catalog_table_config: {
+    #           database_name: "NameString",
+    #           table_name: "NameString",
+    #           s3_location: "UriString",
+    #           catalog_id: "NameString",
+    #         },
+    #       },
+    #       observation_results: {
+    #         write_observation_results_enabled: false,
+    #         catalog_table_config: {
+    #           database_name: "NameString",
+    #           table_name: "NameString",
+    #           s3_location: "UriString",
+    #           catalog_id: "NameString",
+    #         },
+    #       },
+    #       custom_log_group_prefix: "GenericString",
+    #     },
+    #     additional_data_sources: {
+    #       "NameString" => {
+    #         glue_table: {
+    #           database_name: "NameString", # required
+    #           table_name: "NameString", # required
+    #           catalog_id: "NameString",
+    #           connection_name: "NameString",
+    #           additional_options: {
+    #             "NameString" => "DescriptionString",
+    #           },
+    #         },
+    #         data_quality_glue_table: {
+    #           database_name: "NameString", # required
+    #           table_name: "NameString", # required
+    #           catalog_id: "NameString",
+    #           connection_name: "NameString",
+    #           additional_options: {
+    #             "NameString" => "DescriptionString",
+    #           },
+    #           pre_processing_query: "PreProcessingQueryString",
+    #         },
+    #       },
+    #     },
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #     client_token: "ClientTokenString",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.name #=> String
+    #   resp.evaluation_run_mode #=> String, one of "ON_DEMAND", "EVALUATION_CONFIG"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateDataQualityEvaluationConfig AWS API Documentation
+    #
+    # @overload create_data_quality_evaluation_config(params = {})
+    # @param [Hash] params ({})
+    def create_data_quality_evaluation_config(params = {}, options = {})
+      req = build_request(:create_data_quality_evaluation_config, params)
+      req.send_request(options)
+    end
+
     # Creates a data quality ruleset with DQDL rules applied to a specified
     # Glue table.
     #
@@ -3334,8 +3588,8 @@ module Aws::Glue
     #   resp = client.create_glossary_term({
     #     glossary_identifier: "GlossaryId", # required
     #     name: "GlossaryTermName", # required
-    #     short_description: "GlossaryShortDescription",
-    #     long_description: "GlossaryLongDescription",
+    #     short_description: "GlossaryTermShortDescription",
+    #     long_description: "GlossaryTermLongDescription",
     #     client_token: "HashString",
     #   })
     #
@@ -3821,11 +4075,18 @@ module Aws::Glue
     #   developer guide.
     #
     #   Jobs that are created without specifying a Glue version default to
-    #   Glue 5.1.
+    #   Glue 6.0.
+    #
+    #   Set `GlueVersion` to `auto` to turn on automatic version upgrades for
+    #   the job. For more information, see [Automatic version upgrades for
+    #   Glue jobs][2] in the developer guide. For the job requirements, see
+    #   [Before you start][3].
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/glue/latest/dg/add-job.html
+    #   [2]: https://docs.aws.amazon.com/glue/latest/dg/auto-version-upgrades.html
+    #   [3]: https://docs.aws.amazon.com/glue/latest/dg/auto-version-upgrades.html#auto-version-upgrades-before-you-start
     #
     # @option params [Integer] :number_of_workers
     #   The number of workers of a defined `workerType` that are allocated
@@ -5360,8 +5621,11 @@ module Aws::Glue
     #         {
     #           resource_type: "JAR", # accepts JAR, FILE, ARCHIVE
     #           uri: "URI",
+    #           last_modified: Time.now,
     #         },
     #       ],
+    #       artifact_location: "URI",
+    #       governance_mode: "IAM_ONLY", # accepts IAM_ONLY, LAKE_FORMATION
     #     },
     #   })
     #
@@ -5455,28 +5719,6 @@ module Aws::Glue
       req.send_request(options)
     end
 
-    # Deletes an asset type from Glue Data Catalog.
-    #
-    # @option params [required, String] :identifier
-    #   The identifier of the asset type to delete.
-    #
-    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
-    #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.delete_asset_type({
-    #     identifier: "AssetTypeId", # required
-    #   })
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteAssetType AWS API Documentation
-    #
-    # @overload delete_asset_type(params = {})
-    # @param [Hash] params ({})
-    def delete_asset_type(params = {}, options = {})
-      req = build_request(:delete_asset_type, params)
-      req.send_request(options)
-    end
-
     # Deletes a form attachment from an asset in Glue Data Catalog.
     #
     # @option params [required, String] :asset_identifier
@@ -5497,9 +5739,9 @@ module Aws::Glue
     #
     # @return [Types::DeleteAttachmentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::DeleteAttachmentResponse#asset_identifier #asset_identifier} => String
+    #   * {Types::DeleteAttachmentResponse#asset_id #asset_id} => String
     #   * {Types::DeleteAttachmentResponse#iterable_form_name #iterable_form_name} => String
-    #   * {Types::DeleteAttachmentResponse#item_identifier #item_identifier} => String
+    #   * {Types::DeleteAttachmentResponse#item_id #item_id} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -5512,9 +5754,9 @@ module Aws::Glue
     #
     # @example Response structure
     #
-    #   resp.asset_identifier #=> String
+    #   resp.asset_id #=> String
     #   resp.iterable_form_name #=> String
-    #   resp.item_identifier #=> String
+    #   resp.item_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteAttachment AWS API Documentation
     #
@@ -5826,6 +6068,28 @@ module Aws::Glue
     # @param [Hash] params ({})
     def delete_custom_entity_type(params = {}, options = {})
       req = build_request(:delete_custom_entity_type, params)
+      req.send_request(options)
+    end
+
+    # Deletes a data quality evaluation configuration.
+    #
+    # @option params [required, String] :name
+    #   The name of the data quality evaluation configuration to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_data_quality_evaluation_config({
+    #     name: "NameString", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteDataQualityEvaluationConfig AWS API Documentation
+    #
+    # @overload delete_data_quality_evaluation_config(params = {})
+    # @param [Hash] params ({})
+    def delete_data_quality_evaluation_config(params = {}, options = {})
+      req = build_request(:delete_data_quality_evaluation_config, params)
       req.send_request(options)
     end
 
@@ -7314,9 +7578,9 @@ module Aws::Glue
     #
     # @return [Types::DisassociateGlossaryTermsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::DisassociateGlossaryTermsResponse#asset_identifier #asset_identifier} => String
+    #   * {Types::DisassociateGlossaryTermsResponse#asset_id #asset_id} => String
     #   * {Types::DisassociateGlossaryTermsResponse#iterable_form_name #iterable_form_name} => String
-    #   * {Types::DisassociateGlossaryTermsResponse#item_identifier #item_identifier} => String
+    #   * {Types::DisassociateGlossaryTermsResponse#item_id #item_id} => String
     #   * {Types::DisassociateGlossaryTermsResponse#glossary_terms #glossary_terms} => Array&lt;String&gt;
     #
     # @example Request syntax with placeholder values
@@ -7331,9 +7595,9 @@ module Aws::Glue
     #
     # @example Response structure
     #
-    #   resp.asset_identifier #=> String
+    #   resp.asset_id #=> String
     #   resp.iterable_form_name #=> String
-    #   resp.item_identifier #=> String
+    #   resp.item_id #=> String
     #   resp.glossary_terms #=> Array
     #   resp.glossary_terms[0] #=> String
     #
@@ -7408,7 +7672,7 @@ module Aws::Glue
     #
     #   * {Types::GetAssetTypeResponse#id #id} => String
     #   * {Types::GetAssetTypeResponse#name #name} => String
-    #   * {Types::GetAssetTypeResponse#forms #forms} => Hash&lt;String,Types::AssetTypeFormReference&gt;
+    #   * {Types::GetAssetTypeResponse#forms #forms} => Hash&lt;String,Types::AssetTypeFormOutput&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -7421,7 +7685,7 @@ module Aws::Glue
     #   resp.id #=> String
     #   resp.name #=> String
     #   resp.forms #=> Hash
-    #   resp.forms["AssetTypeFormKey"].form_type_identifier #=> String
+    #   resp.forms["AssetTypeFormKey"].form_type_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetAssetType AWS API Documentation
     #
@@ -8797,22 +9061,20 @@ module Aws::Glue
     #
     # @return [Types::GetDataCatalogExportConfigurationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::GetDataCatalogExportConfigurationOutput#export_setting #export_setting} => String
-    #   * {Types::GetDataCatalogExportConfigurationOutput#status #status} => String
-    #   * {Types::GetDataCatalogExportConfigurationOutput#encryption_configuration #encryption_configuration} => Types::ExportEncryptionConfiguration
-    #   * {Types::GetDataCatalogExportConfigurationOutput#s3_table_bucket_arn #s3_table_bucket_arn} => String
     #   * {Types::GetDataCatalogExportConfigurationOutput#created_at #created_at} => Time
     #   * {Types::GetDataCatalogExportConfigurationOutput#updated_at #updated_at} => Time
+    #   * {Types::GetDataCatalogExportConfigurationOutput#s3_tables_configuration #s3_tables_configuration} => Types::S3TablesConfigurationResult
+    #   * {Types::GetDataCatalogExportConfigurationOutput#assets #assets} => Types::AssetsExportResult
     #
     # @example Response structure
     #
-    #   resp.export_setting #=> String, one of "ENABLED", "DISABLED"
-    #   resp.status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "FAILED"
-    #   resp.encryption_configuration.sse_algorithm #=> String
-    #   resp.encryption_configuration.kms_key_arn #=> String
-    #   resp.s3_table_bucket_arn #=> String
     #   resp.created_at #=> Time
     #   resp.updated_at #=> Time
+    #   resp.s3_tables_configuration.table_bucket_arn #=> String
+    #   resp.s3_tables_configuration.encryption_configuration.sse_algorithm #=> String
+    #   resp.s3_tables_configuration.encryption_configuration.kms_key_arn #=> String
+    #   resp.assets.s3_tables_export #=> String, one of "ENABLED", "DISABLED"
+    #   resp.assets.s3_tables_export_state.status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "FAILED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetDataCatalogExportConfiguration AWS API Documentation
     #
@@ -8820,6 +9082,119 @@ module Aws::Glue
     # @param [Hash] params ({})
     def get_data_catalog_export_configuration(params = {}, options = {})
       req = build_request(:get_data_catalog_export_configuration, params)
+      req.send_request(options)
+    end
+
+    # Retrieves a data quality evaluation configuration.
+    #
+    # @option params [required, String] :name
+    #   The name of the data quality evaluation configuration.
+    #
+    # @return [Types::GetDataQualityEvaluationConfigResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetDataQualityEvaluationConfigResponse#name #name} => String
+    #   * {Types::GetDataQualityEvaluationConfigResponse#evaluation_run_mode #evaluation_run_mode} => String
+    #   * {Types::GetDataQualityEvaluationConfigResponse#created_on #created_on} => Time
+    #   * {Types::GetDataQualityEvaluationConfigResponse#last_modified_on #last_modified_on} => Time
+    #   * {Types::GetDataQualityEvaluationConfigResponse#level #level} => String
+    #   * {Types::GetDataQualityEvaluationConfigResponse#data_source #data_source} => Types::DataQualityEvaluationConfigDataSource
+    #   * {Types::GetDataQualityEvaluationConfigResponse#ruleset_name #ruleset_name} => String
+    #   * {Types::GetDataQualityEvaluationConfigResponse#managed_ruleset_name #managed_ruleset_name} => String
+    #   * {Types::GetDataQualityEvaluationConfigResponse#triggers #triggers} => Array&lt;String&gt;
+    #   * {Types::GetDataQualityEvaluationConfigResponse#schedule_expression #schedule_expression} => String
+    #   * {Types::GetDataQualityEvaluationConfigResponse#start_at #start_at} => Time
+    #   * {Types::GetDataQualityEvaluationConfigResponse#end_at #end_at} => Time
+    #   * {Types::GetDataQualityEvaluationConfigResponse#pause_runs #pause_runs} => Boolean
+    #   * {Types::GetDataQualityEvaluationConfigResponse#role #role} => String
+    #   * {Types::GetDataQualityEvaluationConfigResponse#number_of_workers #number_of_workers} => Integer
+    #   * {Types::GetDataQualityEvaluationConfigResponse#timeout #timeout} => Integer
+    #   * {Types::GetDataQualityEvaluationConfigResponse#additional_run_options #additional_run_options} => Types::DataQualityEvaluationConfigAdditionalRunOptions
+    #   * {Types::GetDataQualityEvaluationConfigResponse#additional_data_sources #additional_data_sources} => Hash&lt;String,Types::DataSource&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_data_quality_evaluation_config({
+    #     name: "NameString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.name #=> String
+    #   resp.evaluation_run_mode #=> String, one of "ON_DEMAND", "EVALUATION_CONFIG"
+    #   resp.created_on #=> Time
+    #   resp.last_modified_on #=> Time
+    #   resp.level #=> String, one of "CATALOG", "DATABASE", "TABLE"
+    #   resp.data_source.glue_tables.catalog_id #=> String
+    #   resp.data_source.glue_tables.database_name #=> String
+    #   resp.data_source.glue_tables.table_name_pattern #=> String
+    #   resp.data_source.glue_tables.pre_processing_query #=> String
+    #   resp.data_source.glue_tables.connection_name #=> String
+    #   resp.data_source.glue_tables.additional_options #=> Hash
+    #   resp.data_source.glue_tables.additional_options["NameString"] #=> String
+    #   resp.ruleset_name #=> String
+    #   resp.managed_ruleset_name #=> String, one of "SIMPLE", "ADVANCED"
+    #   resp.triggers #=> Array
+    #   resp.triggers[0] #=> String, one of "ONCE", "SCHEDULE", "METADATA_CHANGE"
+    #   resp.schedule_expression #=> String
+    #   resp.start_at #=> Time
+    #   resp.end_at #=> Time
+    #   resp.pause_runs #=> Boolean
+    #   resp.role #=> String
+    #   resp.number_of_workers #=> Integer
+    #   resp.timeout #=> Integer
+    #   resp.additional_run_options.cloud_watch_metrics_enabled #=> Boolean
+    #   resp.additional_run_options.results_s3_prefix #=> String
+    #   resp.additional_run_options.composite_rule_evaluation_method #=> String, one of "COLUMN", "ROW"
+    #   resp.additional_run_options.row_level_results.max_rows_to_write #=> Integer
+    #   resp.additional_run_options.row_level_results.result_type #=> String, one of "ALL", "PASSED_ONLY", "FAILED_ONLY"
+    #   resp.additional_run_options.row_level_results.catalog_table_config.database_name #=> String
+    #   resp.additional_run_options.row_level_results.catalog_table_config.table_name #=> String
+    #   resp.additional_run_options.row_level_results.catalog_table_config.s3_location #=> String
+    #   resp.additional_run_options.row_level_results.catalog_table_config.catalog_id #=> String
+    #   resp.additional_run_options.profiling_results.write_profiling_results_enabled #=> Boolean
+    #   resp.additional_run_options.profiling_results.catalog_table_config.database_name #=> String
+    #   resp.additional_run_options.profiling_results.catalog_table_config.table_name #=> String
+    #   resp.additional_run_options.profiling_results.catalog_table_config.s3_location #=> String
+    #   resp.additional_run_options.profiling_results.catalog_table_config.catalog_id #=> String
+    #   resp.additional_run_options.profiling_results.distribution_results.write_distribution_results_enabled #=> Boolean
+    #   resp.additional_run_options.profiling_results.distribution_results.catalog_table_config.database_name #=> String
+    #   resp.additional_run_options.profiling_results.distribution_results.catalog_table_config.table_name #=> String
+    #   resp.additional_run_options.profiling_results.distribution_results.catalog_table_config.s3_location #=> String
+    #   resp.additional_run_options.profiling_results.distribution_results.catalog_table_config.catalog_id #=> String
+    #   resp.additional_run_options.observation_scope #=> String, one of "ALL", "NONE"
+    #   resp.additional_run_options.observation_mode #=> String, one of "SCHEDULED", "FIXED"
+    #   resp.additional_run_options.data_quality_rule_results.write_data_quality_rule_results_enabled #=> Boolean
+    #   resp.additional_run_options.data_quality_rule_results.catalog_table_config.database_name #=> String
+    #   resp.additional_run_options.data_quality_rule_results.catalog_table_config.table_name #=> String
+    #   resp.additional_run_options.data_quality_rule_results.catalog_table_config.s3_location #=> String
+    #   resp.additional_run_options.data_quality_rule_results.catalog_table_config.catalog_id #=> String
+    #   resp.additional_run_options.observation_results.write_observation_results_enabled #=> Boolean
+    #   resp.additional_run_options.observation_results.catalog_table_config.database_name #=> String
+    #   resp.additional_run_options.observation_results.catalog_table_config.table_name #=> String
+    #   resp.additional_run_options.observation_results.catalog_table_config.s3_location #=> String
+    #   resp.additional_run_options.observation_results.catalog_table_config.catalog_id #=> String
+    #   resp.additional_run_options.custom_log_group_prefix #=> String
+    #   resp.additional_data_sources #=> Hash
+    #   resp.additional_data_sources["NameString"].glue_table.database_name #=> String
+    #   resp.additional_data_sources["NameString"].glue_table.table_name #=> String
+    #   resp.additional_data_sources["NameString"].glue_table.catalog_id #=> String
+    #   resp.additional_data_sources["NameString"].glue_table.connection_name #=> String
+    #   resp.additional_data_sources["NameString"].glue_table.additional_options #=> Hash
+    #   resp.additional_data_sources["NameString"].glue_table.additional_options["NameString"] #=> String
+    #   resp.additional_data_sources["NameString"].data_quality_glue_table.database_name #=> String
+    #   resp.additional_data_sources["NameString"].data_quality_glue_table.table_name #=> String
+    #   resp.additional_data_sources["NameString"].data_quality_glue_table.catalog_id #=> String
+    #   resp.additional_data_sources["NameString"].data_quality_glue_table.connection_name #=> String
+    #   resp.additional_data_sources["NameString"].data_quality_glue_table.additional_options #=> Hash
+    #   resp.additional_data_sources["NameString"].data_quality_glue_table.additional_options["NameString"] #=> String
+    #   resp.additional_data_sources["NameString"].data_quality_glue_table.pre_processing_query #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetDataQualityEvaluationConfig AWS API Documentation
+    #
+    # @overload get_data_quality_evaluation_config(params = {})
+    # @param [Hash] params ({})
+    def get_data_quality_evaluation_config(params = {}, options = {})
+      req = build_request(:get_data_quality_evaluation_config, params)
       req.send_request(options)
     end
 
@@ -8910,6 +9285,8 @@ module Aws::Glue
     # @return [Types::GetDataQualityResultResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetDataQualityResultResponse#result_id #result_id} => String
+    #   * {Types::GetDataQualityResultResponse#evaluation_run_mode #evaluation_run_mode} => String
+    #   * {Types::GetDataQualityResultResponse#data_quality_evaluation_config #data_quality_evaluation_config} => String
     #   * {Types::GetDataQualityResultResponse#profile_id #profile_id} => String
     #   * {Types::GetDataQualityResultResponse#score #score} => Float
     #   * {Types::GetDataQualityResultResponse#data_source #data_source} => Types::DataSource
@@ -8934,6 +9311,8 @@ module Aws::Glue
     # @example Response structure
     #
     #   resp.result_id #=> String
+    #   resp.evaluation_run_mode #=> String, one of "ON_DEMAND", "EVALUATION_CONFIG"
+    #   resp.data_quality_evaluation_config #=> String
     #   resp.profile_id #=> String
     #   resp.score #=> Float
     #   resp.data_source.glue_table.database_name #=> String
@@ -9015,6 +9394,8 @@ module Aws::Glue
     # @return [Types::GetDataQualityResultV2Response] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetDataQualityResultV2Response#result_id #result_id} => String
+    #   * {Types::GetDataQualityResultV2Response#evaluation_run_mode #evaluation_run_mode} => String
+    #   * {Types::GetDataQualityResultV2Response#data_quality_evaluation_config #data_quality_evaluation_config} => String
     #   * {Types::GetDataQualityResultV2Response#data_source #data_source} => Types::DataSource
     #   * {Types::GetDataQualityResultV2Response#profile_id #profile_id} => String
     #   * {Types::GetDataQualityResultV2Response#dimensions #dimensions} => Hash&lt;String,String&gt;
@@ -9040,6 +9421,8 @@ module Aws::Glue
     # @example Response structure
     #
     #   resp.result_id #=> String
+    #   resp.evaluation_run_mode #=> String, one of "ON_DEMAND", "EVALUATION_CONFIG"
+    #   resp.data_quality_evaluation_config #=> String
     #   resp.data_source.glue_table.database_name #=> String
     #   resp.data_source.glue_table.table_name #=> String
     #   resp.data_source.glue_table.catalog_id #=> String
@@ -10170,6 +10553,54 @@ module Aws::Glue
     # @param [Hash] params ({})
     def get_job_runs(params = {}, options = {})
       req = build_request(:get_job_runs, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the current status and results of an upgrade analysis.
+    #
+    # @option params [required, String] :analysis_id
+    #   The unique identifier of the upgrade analysis to retrieve.
+    #
+    # @option params [required, String] :job_name
+    #   The name of the job associated with the analysis.
+    #
+    # @return [Types::GetJobUpgradeAnalysisResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetJobUpgradeAnalysisResponse#job_name #job_name} => String
+    #   * {Types::GetJobUpgradeAnalysisResponse#analysis_id #analysis_id} => String
+    #   * {Types::GetJobUpgradeAnalysisResponse#status #status} => String
+    #   * {Types::GetJobUpgradeAnalysisResponse#source_version #source_version} => String
+    #   * {Types::GetJobUpgradeAnalysisResponse#target_version #target_version} => String
+    #   * {Types::GetJobUpgradeAnalysisResponse#analysis_type #analysis_type} => String
+    #   * {Types::GetJobUpgradeAnalysisResponse#auto_upgrade_evaluation_summary #auto_upgrade_evaluation_summary} => String
+    #   * {Types::GetJobUpgradeAnalysisResponse#error_message #error_message} => String
+    #   * {Types::GetJobUpgradeAnalysisResponse#auto_upgrade_eligibility_summary #auto_upgrade_eligibility_summary} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_job_upgrade_analysis({
+    #     analysis_id: "Id", # required
+    #     job_name: "Name", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.job_name #=> String
+    #   resp.analysis_id #=> String
+    #   resp.status #=> String, one of "OBSERVING", "WAITING_FOR_CONSENT", "UPGRADING", "SUCCEEDED", "FAILED", "TIMEOUT", "STOPPED"
+    #   resp.source_version #=> String
+    #   resp.target_version #=> String
+    #   resp.analysis_type #=> String, one of "AUTO_UPGRADE"
+    #   resp.auto_upgrade_evaluation_summary #=> String
+    #   resp.error_message #=> String
+    #   resp.auto_upgrade_eligibility_summary #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetJobUpgradeAnalysis AWS API Documentation
+    #
+    # @overload get_job_upgrade_analysis(params = {})
+    # @param [Hash] params ({})
+    def get_job_upgrade_analysis(params = {}, options = {})
+      req = build_request(:get_job_upgrade_analysis, params)
       req.send_request(options)
     end
 
@@ -13661,6 +14092,9 @@ module Aws::Glue
     #   resp.user_defined_function.resource_uris #=> Array
     #   resp.user_defined_function.resource_uris[0].resource_type #=> String, one of "JAR", "FILE", "ARCHIVE"
     #   resp.user_defined_function.resource_uris[0].uri #=> String
+    #   resp.user_defined_function.resource_uris[0].last_modified #=> Time
+    #   resp.user_defined_function.artifact_location #=> String
+    #   resp.user_defined_function.governance_mode #=> String, one of "IAM_ONLY", "LAKE_FORMATION"
     #   resp.user_defined_function.catalog_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetUserDefinedFunction AWS API Documentation
@@ -13734,6 +14168,9 @@ module Aws::Glue
     #   resp.user_defined_functions[0].resource_uris #=> Array
     #   resp.user_defined_functions[0].resource_uris[0].resource_type #=> String, one of "JAR", "FILE", "ARCHIVE"
     #   resp.user_defined_functions[0].resource_uris[0].uri #=> String
+    #   resp.user_defined_functions[0].resource_uris[0].last_modified #=> Time
+    #   resp.user_defined_functions[0].artifact_location #=> String
+    #   resp.user_defined_functions[0].governance_mode #=> String, one of "IAM_ONLY", "LAKE_FORMATION"
     #   resp.user_defined_functions[0].catalog_id #=> String
     #   resp.next_token #=> String
     #
@@ -14622,6 +15059,60 @@ module Aws::Glue
       req.send_request(options)
     end
 
+    # Lists the data quality evaluation configurations in your account,
+    # optionally filtered by level.
+    #
+    # @option params [String] :level
+    #   Lists only the configurations that apply to this level.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return.
+    #
+    # @option params [String] :next_token
+    #   A paginated token to offset the results. If you don't specify a
+    #   token, the operation returns results starting from the beginning of
+    #   the list.
+    #
+    # @return [Types::ListDataQualityEvaluationConfigsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListDataQualityEvaluationConfigsResponse#data_quality_evaluation_configs #data_quality_evaluation_configs} => Array&lt;Types::DataQualityEvaluationConfigListDetails&gt;
+    #   * {Types::ListDataQualityEvaluationConfigsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_data_quality_evaluation_configs({
+    #     level: "CATALOG", # accepts CATALOG, DATABASE, TABLE
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.data_quality_evaluation_configs #=> Array
+    #   resp.data_quality_evaluation_configs[0].name #=> String
+    #   resp.data_quality_evaluation_configs[0].evaluation_run_mode #=> String, one of "ON_DEMAND", "EVALUATION_CONFIG"
+    #   resp.data_quality_evaluation_configs[0].created_on #=> Time
+    #   resp.data_quality_evaluation_configs[0].last_modified_on #=> Time
+    #   resp.data_quality_evaluation_configs[0].level #=> String, one of "CATALOG", "DATABASE", "TABLE"
+    #   resp.data_quality_evaluation_configs[0].data_source.glue_tables.catalog_id #=> String
+    #   resp.data_quality_evaluation_configs[0].data_source.glue_tables.database_name #=> String
+    #   resp.data_quality_evaluation_configs[0].data_source.glue_tables.table_name_pattern #=> String
+    #   resp.data_quality_evaluation_configs[0].ruleset_name #=> String
+    #   resp.data_quality_evaluation_configs[0].managed_ruleset_name #=> String, one of "SIMPLE", "ADVANCED"
+    #   resp.data_quality_evaluation_configs[0].pause_runs #=> Boolean
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ListDataQualityEvaluationConfigs AWS API Documentation
+    #
+    # @overload list_data_quality_evaluation_configs(params = {})
+    # @param [Hash] params ({})
+    def list_data_quality_evaluation_configs(params = {}, options = {})
+      req = build_request(:list_data_quality_evaluation_configs, params)
+      req.send_request(options)
+    end
+
     # Returns all data quality execution results for your account.
     #
     # @option params [Types::DataQualityResultFilterCriteria] :filter
@@ -14669,6 +15160,8 @@ module Aws::Glue
     #       job_run_id: "HashString",
     #       started_after: Time.now,
     #       started_before: Time.now,
+    #       evaluation_run_mode: "ON_DEMAND", # accepts ON_DEMAND, EVALUATION_CONFIG
+    #       data_quality_evaluation_config: "NameString",
     #     },
     #     next_token: "PaginationToken",
     #     max_results: 1,
@@ -14678,6 +15171,8 @@ module Aws::Glue
     #
     #   resp.results #=> Array
     #   resp.results[0].result_id #=> String
+    #   resp.results[0].evaluation_run_mode #=> String, one of "ON_DEMAND", "EVALUATION_CONFIG"
+    #   resp.results[0].data_quality_evaluation_config #=> String
     #   resp.results[0].data_source.glue_table.database_name #=> String
     #   resp.results[0].data_source.glue_table.table_name #=> String
     #   resp.results[0].data_source.glue_table.catalog_id #=> String
@@ -14757,6 +15252,8 @@ module Aws::Glue
     #         "NameString" => "NameString",
     #       },
     #       evaluation_context: "NameString",
+    #       evaluation_run_mode: "ON_DEMAND", # accepts ON_DEMAND, EVALUATION_CONFIG
+    #       data_quality_evaluation_config: "NameString",
     #     },
     #     next_token: "PaginationToken",
     #     max_results: 1,
@@ -14766,6 +15263,8 @@ module Aws::Glue
     #
     #   resp.results #=> Array
     #   resp.results[0].result_id #=> String
+    #   resp.results[0].evaluation_run_mode #=> String, one of "ON_DEMAND", "EVALUATION_CONFIG"
+    #   resp.results[0].data_quality_evaluation_config #=> String
     #   resp.results[0].data_source.glue_table.database_name #=> String
     #   resp.results[0].data_source.glue_table.table_name #=> String
     #   resp.results[0].data_source.glue_table.catalog_id #=> String
@@ -16535,8 +17034,9 @@ module Aws::Glue
     # Creates or updates an asset in Glue Data Catalog. If the asset already
     # exists, this operation updates it; otherwise, a new asset is created.
     #
-    # @option params [required, String] :asset_type_id
-    #   The identifier of the asset type for the asset.
+    # @option params [String] :asset_type_identifier
+    #   The identifier of the asset type for the asset. This field is
+    #   required.
     #
     # @option params [required, String] :identifier
     #   The unique identifier of the asset. If an asset with this identifier
@@ -16548,7 +17048,7 @@ module Aws::Glue
     # @option params [String] :description
     #   The description of the asset.
     #
-    # @option params [required, Hash<String,Types::AssetFormEntry>] :forms
+    # @option params [required, Hash<String,Types::AssetFormInput>] :forms
     #   The forms to set on the asset, keyed by form name. Each entry
     #   specifies the form type and its JSON content.
     #
@@ -16564,19 +17064,20 @@ module Aws::Glue
     #   * {Types::PutAssetResponse#id #id} => String
     #   * {Types::PutAssetResponse#name #name} => String
     #   * {Types::PutAssetResponse#description #description} => String
+    #   * {Types::PutAssetResponse#asset_type_id #asset_type_id} => String
     #   * {Types::PutAssetResponse#created_at #created_at} => Time
     #   * {Types::PutAssetResponse#forms #forms} => Hash&lt;String,Types::AssetFormEntry&gt;
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.put_asset({
-    #     asset_type_id: "AssetTypeId", # required
+    #     asset_type_identifier: "AssetTypeId",
     #     identifier: "AssetId", # required
     #     name: "AssetName", # required
     #     description: "AssetDescription",
     #     forms: { # required
     #       "AssetFormKey" => {
-    #         form_type_id: "FormTypeId",
+    #         form_type_identifier: "FormTypeId",
     #         content: "FormContent",
     #       },
     #     },
@@ -16588,6 +17089,7 @@ module Aws::Glue
     #   resp.id #=> String
     #   resp.name #=> String
     #   resp.description #=> String
+    #   resp.asset_type_id #=> String
     #   resp.created_at #=> Time
     #   resp.forms #=> Hash
     #   resp.forms["AssetFormKey"].form_type_id #=> String
@@ -16599,59 +17101,6 @@ module Aws::Glue
     # @param [Hash] params ({})
     def put_asset(params = {}, options = {})
       req = build_request(:put_asset, params)
-      req.send_request(options)
-    end
-
-    # Creates or updates an asset type in Glue Data Catalog. An asset type
-    # defines the structure of assets by specifying which forms they
-    # include. If an asset type with the given name already exists, it is
-    # updated.
-    #
-    # @option params [required, String] :name
-    #   The name of the asset type.
-    #
-    # @option params [required, Hash<String,Types::AssetTypeFormReference>] :forms
-    #   The forms that make up the asset type, keyed by form name. Each entry
-    #   references the form type that defines the form's schema.
-    #
-    # @option params [String] :client_token
-    #   A unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request.
-    #
-    #   **A suitable default value is auto-generated.** You should normally
-    #   not need to pass this option.**
-    #
-    # @return [Types::PutAssetTypeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
-    #
-    #   * {Types::PutAssetTypeResponse#id #id} => String
-    #   * {Types::PutAssetTypeResponse#name #name} => String
-    #   * {Types::PutAssetTypeResponse#forms #forms} => Hash&lt;String,Types::AssetTypeFormReference&gt;
-    #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.put_asset_type({
-    #     name: "AssetTypeName", # required
-    #     forms: { # required
-    #       "AssetTypeFormKey" => {
-    #         form_type_identifier: "FormTypeId", # required
-    #       },
-    #     },
-    #     client_token: "HashString",
-    #   })
-    #
-    # @example Response structure
-    #
-    #   resp.id #=> String
-    #   resp.name #=> String
-    #   resp.forms #=> Hash
-    #   resp.forms["AssetTypeFormKey"].form_type_identifier #=> String
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/PutAssetType AWS API Documentation
-    #
-    # @overload put_asset_type(params = {})
-    # @param [Hash] params ({})
-    def put_asset_type(params = {}, options = {})
-      req = build_request(:put_asset_type, params)
       req.send_request(options)
     end
 
@@ -16678,8 +17127,9 @@ module Aws::Glue
     #   The JSON content of the form, conforming to the schema of the
     #   specified form type.
     #
-    # @option params [required, String] :form_type_id
-    #   The identifier of the form type for this attachment.
+    # @option params [String] :form_type_identifier
+    #   The identifier of the form type for this attachment. This field is
+    #   required.
     #
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
@@ -16690,9 +17140,9 @@ module Aws::Glue
     #
     # @return [Types::PutAttachmentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::PutAttachmentResponse#asset_identifier #asset_identifier} => String
+    #   * {Types::PutAttachmentResponse#asset_id #asset_id} => String
     #   * {Types::PutAttachmentResponse#iterable_form_name #iterable_form_name} => String
-    #   * {Types::PutAttachmentResponse#item_identifier #item_identifier} => String
+    #   * {Types::PutAttachmentResponse#item_id #item_id} => String
     #   * {Types::PutAttachmentResponse#attachment_name #attachment_name} => String
     #   * {Types::PutAttachmentResponse#form_type_id #form_type_id} => String
     #
@@ -16704,15 +17154,15 @@ module Aws::Glue
     #     item_identifier: "ItemIdentifier",
     #     attachment_name: "AttachmentName", # required
     #     content: "FormContent", # required
-    #     form_type_id: "FormTypeId", # required
+    #     form_type_identifier: "FormTypeId",
     #     client_token: "HashString",
     #   })
     #
     # @example Response structure
     #
-    #   resp.asset_identifier #=> String
+    #   resp.asset_id #=> String
     #   resp.iterable_form_name #=> String
-    #   resp.item_identifier #=> String
+    #   resp.item_id #=> String
     #   resp.attachment_name #=> String
     #   resp.form_type_id #=> String
     #
@@ -16769,15 +17219,6 @@ module Aws::Glue
     # Use this operation to enable or disable the export of catalog metadata
     # to S3 Tables.
     #
-    # @option params [required, String] :export_setting
-    #   The export setting for the data catalog. Specify `ENABLED` to start
-    #   exporting catalog metadata to S3 Tables, or `DISABLED` to stop
-    #   exporting. This field is required.
-    #
-    # @option params [Types::ExportEncryptionConfiguration] :encryption_configuration
-    #   The encryption configuration for the exported data. If not specified,
-    #   the default encryption settings are used.
-    #
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request.
@@ -16785,27 +17226,42 @@ module Aws::Glue
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
+    # @option params [Types::S3TablesConfiguration] :s3_tables_configuration
+    #   The S3 Tables configuration for the export. The encryption
+    #   configuration applies only when Glue creates the table bucket that
+    #   holds the exported catalog metadata. If not specified, the default
+    #   encryption settings are used.
+    #
+    # @option params [Types::AssetsExport] :assets
+    #   The export setting for asset metadata. Set `S3TablesExport` to
+    #   `ENABLED` to start exporting asset metadata to S3 Tables, or to
+    #   `DISABLED` to stop exporting.
+    #
     # @return [Types::PutDataCatalogExportConfigurationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::PutDataCatalogExportConfigurationOutput#export_setting #export_setting} => String
-    #   * {Types::PutDataCatalogExportConfigurationOutput#encryption_configuration #encryption_configuration} => Types::ExportEncryptionConfiguration
+    #   * {Types::PutDataCatalogExportConfigurationOutput#s3_tables_configuration #s3_tables_configuration} => Types::S3TablesConfiguration
+    #   * {Types::PutDataCatalogExportConfigurationOutput#assets #assets} => Types::AssetsExport
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.put_data_catalog_export_configuration({
-    #     export_setting: "ENABLED", # required, accepts ENABLED, DISABLED
-    #     encryption_configuration: {
-    #       sse_algorithm: "SseAlgorithm",
-    #       kms_key_arn: "KmsKeyArnString",
-    #     },
     #     client_token: "HashString",
+    #     s3_tables_configuration: {
+    #       encryption_configuration: {
+    #         sse_algorithm: "SseAlgorithm",
+    #         kms_key_arn: "KmsKeyArnString",
+    #       },
+    #     },
+    #     assets: {
+    #       s3_tables_export: "ENABLED", # accepts ENABLED, DISABLED
+    #     },
     #   })
     #
     # @example Response structure
     #
-    #   resp.export_setting #=> String, one of "ENABLED", "DISABLED"
-    #   resp.encryption_configuration.sse_algorithm #=> String
-    #   resp.encryption_configuration.kms_key_arn #=> String
+    #   resp.s3_tables_configuration.encryption_configuration.sse_algorithm #=> String
+    #   resp.s3_tables_configuration.encryption_configuration.kms_key_arn #=> String
+    #   resp.assets.s3_tables_export #=> String, one of "ENABLED", "DISABLED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/PutDataCatalogExportConfiguration AWS API Documentation
     #
@@ -17984,8 +18440,8 @@ module Aws::Glue
     end
 
     # Searches for assets in Glue Data Catalog using full-text search,
-    # filters, sorting, and aggregations. Returns matching assets with
-    # relevance-ranked results.
+    # filters, and sorting. Returns matching assets with relevance-ranked
+    # results.
     #
     # @option params [String] :search_text
     #   The text to search for. At least one of `searchText` or `filterClause`
@@ -18034,7 +18490,7 @@ module Aws::Glue
     #       ],
     #       attribute_filter: {
     #         attribute: "SearchAttribute", # required
-    #         operator: "equals", # required, accepts equals, greaterThan, greaterThanOrEquals, lessThan, lessThanOrEquals, notExists
+    #         comparator: "EQUALS", # accepts EQUALS, GREATER_THAN, GREATER_THAN_OR_EQUALS, LESS_THAN, LESS_THAN_OR_EQUALS, NOT_EXISTS
     #         value: {
     #           string_value: "SearchFilterStringValue",
     #           long_value: 1,
@@ -18054,8 +18510,9 @@ module Aws::Glue
     #
     #   resp.items #=> Array
     #   resp.items[0].id #=> String
-    #   resp.items[0].asset_name #=> String
-    #   resp.items[0].asset_description #=> String
+    #   resp.items[0].name #=> String
+    #   resp.items[0].description #=> String
+    #   resp.items[0].created_at #=> Time
     #   resp.items[0].updated_at #=> Time
     #   resp.items[0].asset_type_id #=> String
     #   resp.next_token #=> String
@@ -19141,6 +19598,45 @@ module Aws::Glue
       req.send_request(options)
     end
 
+    # Resumes an analysis that is waiting for upgrade consent.
+    #
+    # @option params [required, String] :job_name
+    #   The name of the job associated with the analysis to resume.
+    #
+    # @option params [String] :analysis_id
+    #   The unique identifier of the upgrade analysis. The analysis must be in
+    #   `WAITING_FOR_CONSENT` status.
+    #
+    # @option params [String] :upgrade_consent
+    #   The customer's decision on whether to proceed with the upgrade.
+    #
+    # @return [Types::StartJobUpgradeAnalysisResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartJobUpgradeAnalysisResponse#analysis_id #analysis_id} => String
+    #   * {Types::StartJobUpgradeAnalysisResponse#job_name #job_name} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_job_upgrade_analysis({
+    #     job_name: "Name", # required
+    #     analysis_id: "Id",
+    #     upgrade_consent: "APPROVE", # accepts APPROVE, DECLINE
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.analysis_id #=> String
+    #   resp.job_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/StartJobUpgradeAnalysis AWS API Documentation
+    #
+    # @overload start_job_upgrade_analysis(params = {})
+    # @param [Hash] params ({})
+    def start_job_upgrade_analysis(params = {}, options = {})
+      req = build_request(:start_job_upgrade_analysis, params)
+      req.send_request(options)
+    end
+
     # Starts a task to estimate the quality of the transform.
     #
     # When you provide label sets as examples of truth, Glue machine
@@ -19448,6 +19944,32 @@ module Aws::Glue
     # @param [Hash] params ({})
     def stop_crawler_schedule(params = {}, options = {})
       req = build_request(:stop_crawler_schedule, params)
+      req.send_request(options)
+    end
+
+    # Stops an in-progress upgrade analysis.
+    #
+    # @option params [required, String] :job_name
+    #   The name of the job associated with the analysis.
+    #
+    # @option params [required, String] :analysis_id
+    #   The unique identifier of the analysis to stop.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.stop_job_upgrade_analysis({
+    #     job_name: "Name", # required
+    #     analysis_id: "Id", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/StopJobUpgradeAnalysis AWS API Documentation
+    #
+    # @overload stop_job_upgrade_analysis(params = {})
+    # @param [Hash] params ({})
+    def stop_job_upgrade_analysis(params = {}, options = {})
+      req = build_request(:stop_job_upgrade_analysis, params)
       req.send_request(options)
     end
 
@@ -20562,6 +21084,288 @@ module Aws::Glue
       req.send_request(options)
     end
 
+    # Updates a data quality evaluation configuration. Fields that you
+    # don't specify keep their current values.
+    #
+    # @option params [required, String] :name
+    #   The name of the data quality evaluation configuration to update.
+    #
+    # @option params [Types::DataQualityEvaluationConfigDataSource] :data_source
+    #   The database or table that the configuration applies to. Replaces the
+    #   current data source.
+    #
+    # @option params [String] :ruleset_name
+    #   The name of a Data Quality Definition Language (DQDL) ruleset,
+    #   containing analyzers, rules, or both, to evaluate tables with. You
+    #   create the ruleset using the `CreateDataQualityRuleset` API. Specify
+    #   either `RulesetName` or `ManagedRulesetName`, not both.
+    #
+    # @option params [String] :managed_ruleset_name
+    #   A built-in ruleset, `SIMPLE` or `ADVANCED`, that profiles each table.
+    #
+    # @option params [Array<String>] :triggers
+    #   When the configuration evaluates tables. Replaces the current
+    #   triggers. Choose from the following triggers:
+    #
+    #   ONCE
+    #
+    #   : Evaluates each table one time, including when tables are added to a
+    #     database or catalog.
+    #
+    #   SCHEDULE
+    #
+    #   : Evaluates each table on the cron or rate expression in
+    #     `ScheduleExpression`, between the optional `StartAt` and `EndAt`
+    #     times.
+    #
+    #   METADATA\_CHANGE
+    #
+    #   : Evaluates a table whenever its Glue Data Catalog metadata changes,
+    #     such as a schema change or an Apache Iceberg commit.
+    #
+    # @option params [String] :schedule_expression
+    #   A cron or rate expression, in UTC, for the `SCHEDULE` trigger, for
+    #   example `cron(0 6 * * ? *)`. The schedule can run at most once an
+    #   hour.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :start_at
+    #   The time from which the schedule runs, inclusive.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :end_at
+    #   The time at which the schedule stops running, exclusive.
+    #
+    # @option params [Boolean] :pause_runs
+    #   Specifies whether to pause the configuration. While paused, the
+    #   configuration evaluates nothing, including tables added to the catalog
+    #   or database.
+    #
+    # @option params [String] :role
+    #   The IAM role that evaluations assume. You can specify the role name or
+    #   the role Amazon Resource Name (ARN). The role needs the trust policy
+    #   and permissions described for `CreateDataQualityEvaluationConfig`.
+    #
+    # @option params [Integer] :number_of_workers
+    #   The number of `G.1X` workers to be used in the run. The default is 5.
+    #
+    # @option params [Integer] :timeout
+    #   The timeout for a run in minutes. This is the maximum time that a run
+    #   can consume resources before it is terminated and enters `TIMEOUT`
+    #   status. The default is 2,880 minutes (48 hours).
+    #
+    # @option params [Types::DataQualityEvaluationConfigAdditionalRunOptions] :additional_run_options
+    #   Additional run options you can specify for an evaluation run.
+    #
+    # @option params [Hash<String,Types::DataSource>] :additional_data_sources
+    #   A map of reference strings to additional data sources you can specify
+    #   for an evaluation run.
+    #
+    # @return [Types::UpdateDataQualityEvaluationConfigResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateDataQualityEvaluationConfigResponse#name #name} => String
+    #   * {Types::UpdateDataQualityEvaluationConfigResponse#evaluation_run_mode #evaluation_run_mode} => String
+    #   * {Types::UpdateDataQualityEvaluationConfigResponse#created_on #created_on} => Time
+    #   * {Types::UpdateDataQualityEvaluationConfigResponse#last_modified_on #last_modified_on} => Time
+    #   * {Types::UpdateDataQualityEvaluationConfigResponse#level #level} => String
+    #   * {Types::UpdateDataQualityEvaluationConfigResponse#data_source #data_source} => Types::DataQualityEvaluationConfigDataSource
+    #   * {Types::UpdateDataQualityEvaluationConfigResponse#ruleset_name #ruleset_name} => String
+    #   * {Types::UpdateDataQualityEvaluationConfigResponse#managed_ruleset_name #managed_ruleset_name} => String
+    #   * {Types::UpdateDataQualityEvaluationConfigResponse#triggers #triggers} => Array&lt;String&gt;
+    #   * {Types::UpdateDataQualityEvaluationConfigResponse#schedule_expression #schedule_expression} => String
+    #   * {Types::UpdateDataQualityEvaluationConfigResponse#start_at #start_at} => Time
+    #   * {Types::UpdateDataQualityEvaluationConfigResponse#end_at #end_at} => Time
+    #   * {Types::UpdateDataQualityEvaluationConfigResponse#pause_runs #pause_runs} => Boolean
+    #   * {Types::UpdateDataQualityEvaluationConfigResponse#role #role} => String
+    #   * {Types::UpdateDataQualityEvaluationConfigResponse#number_of_workers #number_of_workers} => Integer
+    #   * {Types::UpdateDataQualityEvaluationConfigResponse#timeout #timeout} => Integer
+    #   * {Types::UpdateDataQualityEvaluationConfigResponse#additional_run_options #additional_run_options} => Types::DataQualityEvaluationConfigAdditionalRunOptions
+    #   * {Types::UpdateDataQualityEvaluationConfigResponse#additional_data_sources #additional_data_sources} => Hash&lt;String,Types::DataSource&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_data_quality_evaluation_config({
+    #     name: "NameString", # required
+    #     data_source: {
+    #       glue_tables: {
+    #         catalog_id: "NameString", # required
+    #         database_name: "NameString",
+    #         table_name_pattern: "NameString",
+    #         pre_processing_query: "PreProcessingQueryString",
+    #         connection_name: "NameString",
+    #         additional_options: {
+    #           "NameString" => "DescriptionString",
+    #         },
+    #       },
+    #     },
+    #     ruleset_name: "NameString",
+    #     managed_ruleset_name: "SIMPLE", # accepts SIMPLE, ADVANCED
+    #     triggers: ["ONCE"], # accepts ONCE, SCHEDULE, METADATA_CHANGE
+    #     schedule_expression: "DataQualityEvaluationConfigScheduleExpression",
+    #     start_at: Time.now,
+    #     end_at: Time.now,
+    #     pause_runs: false,
+    #     role: "RoleString",
+    #     number_of_workers: 1,
+    #     timeout: 1,
+    #     additional_run_options: {
+    #       cloud_watch_metrics_enabled: false,
+    #       results_s3_prefix: "UriString",
+    #       composite_rule_evaluation_method: "COLUMN", # accepts COLUMN, ROW
+    #       row_level_results: {
+    #         max_rows_to_write: 1,
+    #         result_type: "ALL", # accepts ALL, PASSED_ONLY, FAILED_ONLY
+    #         catalog_table_config: {
+    #           database_name: "NameString",
+    #           table_name: "NameString",
+    #           s3_location: "UriString",
+    #           catalog_id: "NameString",
+    #         },
+    #       },
+    #       profiling_results: {
+    #         write_profiling_results_enabled: false,
+    #         catalog_table_config: {
+    #           database_name: "NameString",
+    #           table_name: "NameString",
+    #           s3_location: "UriString",
+    #           catalog_id: "NameString",
+    #         },
+    #         distribution_results: {
+    #           write_distribution_results_enabled: false,
+    #           catalog_table_config: {
+    #             database_name: "NameString",
+    #             table_name: "NameString",
+    #             s3_location: "UriString",
+    #             catalog_id: "NameString",
+    #           },
+    #         },
+    #       },
+    #       observation_scope: "ALL", # accepts ALL, NONE
+    #       observation_mode: "SCHEDULED", # accepts SCHEDULED, FIXED
+    #       data_quality_rule_results: {
+    #         write_data_quality_rule_results_enabled: false,
+    #         catalog_table_config: {
+    #           database_name: "NameString",
+    #           table_name: "NameString",
+    #           s3_location: "UriString",
+    #           catalog_id: "NameString",
+    #         },
+    #       },
+    #       observation_results: {
+    #         write_observation_results_enabled: false,
+    #         catalog_table_config: {
+    #           database_name: "NameString",
+    #           table_name: "NameString",
+    #           s3_location: "UriString",
+    #           catalog_id: "NameString",
+    #         },
+    #       },
+    #       custom_log_group_prefix: "GenericString",
+    #     },
+    #     additional_data_sources: {
+    #       "NameString" => {
+    #         glue_table: {
+    #           database_name: "NameString", # required
+    #           table_name: "NameString", # required
+    #           catalog_id: "NameString",
+    #           connection_name: "NameString",
+    #           additional_options: {
+    #             "NameString" => "DescriptionString",
+    #           },
+    #         },
+    #         data_quality_glue_table: {
+    #           database_name: "NameString", # required
+    #           table_name: "NameString", # required
+    #           catalog_id: "NameString",
+    #           connection_name: "NameString",
+    #           additional_options: {
+    #             "NameString" => "DescriptionString",
+    #           },
+    #           pre_processing_query: "PreProcessingQueryString",
+    #         },
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.name #=> String
+    #   resp.evaluation_run_mode #=> String, one of "ON_DEMAND", "EVALUATION_CONFIG"
+    #   resp.created_on #=> Time
+    #   resp.last_modified_on #=> Time
+    #   resp.level #=> String, one of "CATALOG", "DATABASE", "TABLE"
+    #   resp.data_source.glue_tables.catalog_id #=> String
+    #   resp.data_source.glue_tables.database_name #=> String
+    #   resp.data_source.glue_tables.table_name_pattern #=> String
+    #   resp.data_source.glue_tables.pre_processing_query #=> String
+    #   resp.data_source.glue_tables.connection_name #=> String
+    #   resp.data_source.glue_tables.additional_options #=> Hash
+    #   resp.data_source.glue_tables.additional_options["NameString"] #=> String
+    #   resp.ruleset_name #=> String
+    #   resp.managed_ruleset_name #=> String, one of "SIMPLE", "ADVANCED"
+    #   resp.triggers #=> Array
+    #   resp.triggers[0] #=> String, one of "ONCE", "SCHEDULE", "METADATA_CHANGE"
+    #   resp.schedule_expression #=> String
+    #   resp.start_at #=> Time
+    #   resp.end_at #=> Time
+    #   resp.pause_runs #=> Boolean
+    #   resp.role #=> String
+    #   resp.number_of_workers #=> Integer
+    #   resp.timeout #=> Integer
+    #   resp.additional_run_options.cloud_watch_metrics_enabled #=> Boolean
+    #   resp.additional_run_options.results_s3_prefix #=> String
+    #   resp.additional_run_options.composite_rule_evaluation_method #=> String, one of "COLUMN", "ROW"
+    #   resp.additional_run_options.row_level_results.max_rows_to_write #=> Integer
+    #   resp.additional_run_options.row_level_results.result_type #=> String, one of "ALL", "PASSED_ONLY", "FAILED_ONLY"
+    #   resp.additional_run_options.row_level_results.catalog_table_config.database_name #=> String
+    #   resp.additional_run_options.row_level_results.catalog_table_config.table_name #=> String
+    #   resp.additional_run_options.row_level_results.catalog_table_config.s3_location #=> String
+    #   resp.additional_run_options.row_level_results.catalog_table_config.catalog_id #=> String
+    #   resp.additional_run_options.profiling_results.write_profiling_results_enabled #=> Boolean
+    #   resp.additional_run_options.profiling_results.catalog_table_config.database_name #=> String
+    #   resp.additional_run_options.profiling_results.catalog_table_config.table_name #=> String
+    #   resp.additional_run_options.profiling_results.catalog_table_config.s3_location #=> String
+    #   resp.additional_run_options.profiling_results.catalog_table_config.catalog_id #=> String
+    #   resp.additional_run_options.profiling_results.distribution_results.write_distribution_results_enabled #=> Boolean
+    #   resp.additional_run_options.profiling_results.distribution_results.catalog_table_config.database_name #=> String
+    #   resp.additional_run_options.profiling_results.distribution_results.catalog_table_config.table_name #=> String
+    #   resp.additional_run_options.profiling_results.distribution_results.catalog_table_config.s3_location #=> String
+    #   resp.additional_run_options.profiling_results.distribution_results.catalog_table_config.catalog_id #=> String
+    #   resp.additional_run_options.observation_scope #=> String, one of "ALL", "NONE"
+    #   resp.additional_run_options.observation_mode #=> String, one of "SCHEDULED", "FIXED"
+    #   resp.additional_run_options.data_quality_rule_results.write_data_quality_rule_results_enabled #=> Boolean
+    #   resp.additional_run_options.data_quality_rule_results.catalog_table_config.database_name #=> String
+    #   resp.additional_run_options.data_quality_rule_results.catalog_table_config.table_name #=> String
+    #   resp.additional_run_options.data_quality_rule_results.catalog_table_config.s3_location #=> String
+    #   resp.additional_run_options.data_quality_rule_results.catalog_table_config.catalog_id #=> String
+    #   resp.additional_run_options.observation_results.write_observation_results_enabled #=> Boolean
+    #   resp.additional_run_options.observation_results.catalog_table_config.database_name #=> String
+    #   resp.additional_run_options.observation_results.catalog_table_config.table_name #=> String
+    #   resp.additional_run_options.observation_results.catalog_table_config.s3_location #=> String
+    #   resp.additional_run_options.observation_results.catalog_table_config.catalog_id #=> String
+    #   resp.additional_run_options.custom_log_group_prefix #=> String
+    #   resp.additional_data_sources #=> Hash
+    #   resp.additional_data_sources["NameString"].glue_table.database_name #=> String
+    #   resp.additional_data_sources["NameString"].glue_table.table_name #=> String
+    #   resp.additional_data_sources["NameString"].glue_table.catalog_id #=> String
+    #   resp.additional_data_sources["NameString"].glue_table.connection_name #=> String
+    #   resp.additional_data_sources["NameString"].glue_table.additional_options #=> Hash
+    #   resp.additional_data_sources["NameString"].glue_table.additional_options["NameString"] #=> String
+    #   resp.additional_data_sources["NameString"].data_quality_glue_table.database_name #=> String
+    #   resp.additional_data_sources["NameString"].data_quality_glue_table.table_name #=> String
+    #   resp.additional_data_sources["NameString"].data_quality_glue_table.catalog_id #=> String
+    #   resp.additional_data_sources["NameString"].data_quality_glue_table.connection_name #=> String
+    #   resp.additional_data_sources["NameString"].data_quality_glue_table.additional_options #=> Hash
+    #   resp.additional_data_sources["NameString"].data_quality_glue_table.additional_options["NameString"] #=> String
+    #   resp.additional_data_sources["NameString"].data_quality_glue_table.pre_processing_query #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateDataQualityEvaluationConfig AWS API Documentation
+    #
+    # @overload update_data_quality_evaluation_config(params = {})
+    # @param [Hash] params ({})
+    def update_data_quality_evaluation_config(params = {}, options = {})
+      req = build_request(:update_data_quality_evaluation_config, params)
+      req.send_request(options)
+    end
+
     # Updates the specified data quality ruleset.
     #
     # @option params [required, String] :name
@@ -20740,7 +21544,8 @@ module Aws::Glue
     #   The updated name of the glossary.
     #
     # @option params [String] :description
-    #   The updated description of the glossary.
+    #   The new description. Omit it to keep the current description; set it
+    #   to an empty string to clear it.
     #
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
@@ -20760,7 +21565,7 @@ module Aws::Glue
     #   resp = client.update_glossary({
     #     identifier: "GlossaryId", # required
     #     name: "GlossaryName",
-    #     description: "MetadataDescription",
+    #     description: "UpdateGlossaryDescription",
     #     client_token: "HashString",
     #   })
     #
@@ -20788,10 +21593,12 @@ module Aws::Glue
     #   The updated name of the glossary term.
     #
     # @option params [String] :short_description
-    #   The updated short description of the glossary term.
+    #   The new short description. Omit it to keep the current one; set it to
+    #   an empty string to clear it.
     #
     # @option params [String] :long_description
-    #   The updated long description of the glossary term.
+    #   The new long description. Omit it to keep the current one; set it to
+    #   an empty string to clear it.
     #
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
@@ -20813,8 +21620,8 @@ module Aws::Glue
     #   resp = client.update_glossary_term({
     #     identifier: "GlossaryTermId", # required
     #     name: "GlossaryTermName",
-    #     short_description: "GlossaryShortDescription",
-    #     long_description: "GlossaryLongDescription",
+    #     short_description: "UpdateGlossaryTermShortDescription",
+    #     long_description: "UpdateGlossaryTermLongDescription",
     #     client_token: "HashString",
     #   })
     #
@@ -21985,8 +22792,11 @@ module Aws::Glue
     #         {
     #           resource_type: "JAR", # accepts JAR, FILE, ARCHIVE
     #           uri: "URI",
+    #           last_modified: Time.now,
     #         },
     #       ],
+    #       artifact_location: "URI",
+    #       governance_mode: "IAM_ONLY", # accepts IAM_ONLY, LAKE_FORMATION
     #     },
     #   })
     #
@@ -22069,7 +22879,7 @@ module Aws::Glue
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.289.0'
+      context[:gem_version] = '1.299.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

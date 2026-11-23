@@ -298,7 +298,8 @@ module Aws
                                 details: ::String
                               }
                             ],
-                            ?alias: ::String
+                            ?alias: ::String,
+                            ?session_metadata: ::String
                           ) -> _PutRumEventsResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutRumEventsResponseSuccess
 

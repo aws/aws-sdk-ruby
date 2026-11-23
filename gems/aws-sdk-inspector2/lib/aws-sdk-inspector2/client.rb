@@ -264,7 +264,8 @@ module Aws::Inspector2
     #     An integer representing the maximum number attempts that will be made for
     #     a single request, including the initial attempt.  For example,
     #     setting this value to 5 will result in a request being retried up to
-    #     4 times. Used in `standard` and `adaptive` retry modes.
+    #     4 times. Used in `standard` and `adaptive` retry modes. Defaults to 3,
+    #     except for DynamoDB and DynamoDB Streams, which default to 4.
     #
     #   @option options [String] :profile ("default")
     #     Used when loading credentials from the shared credentials file at `HOME/.aws/credentials`.
@@ -327,15 +328,15 @@ module Aws::Inspector2
     #     used by the default backoff function. This option is only used in the
     #     `legacy` retry mode.
     #
-    #   @option options [String] :retry_mode ("legacy")
+    #   @option options [String] :retry_mode ("standard")
     #     Specifies which retry algorithm to use. Values are:
     #
-    #     * `legacy` - The pre-existing retry behavior. This is the default
-    #       value if no retry mode is provided.
+    #     * `legacy` - The pre-existing retry behavior.
     #
     #     * `standard` - A standardized set of retry rules across the AWS SDKs.
     #       This includes support for retry quotas, which limit the number of
-    #       unsuccessful retries a client can make.
+    #       unsuccessful retries a client can make. This is the default value
+    #       if no retry mode is provided.
     #
     #     * `adaptive` - A retry mode that includes all the functionality of
     #       `standard` mode along with automatic client side throttling.
@@ -853,7 +854,7 @@ module Aws::Inspector2
     #   resp.accounts[0].free_trial_info[0].start #=> Time
     #   resp.accounts[0].free_trial_info[0].end #=> Time
     #   resp.accounts[0].free_trial_info[0].status #=> String, one of "ACTIVE", "INACTIVE"
-    #   resp.accounts[0].free_trial_info[0].cloud_provider #=> String, one of "AWS", "AZURE", "NOT_APPLICABLE"
+    #   resp.accounts[0].free_trial_info[0].cloud_provider #=> String, one of "AWS", "AZURE", "GCP", "NOT_APPLICABLE"
     #   resp.failed_accounts #=> Array
     #   resp.failed_accounts[0].account_id #=> String
     #   resp.failed_accounts[0].code #=> String, one of "ACCESS_DENIED", "INTERNAL_ERROR"
@@ -1145,11 +1146,30 @@ module Aws::Inspector2
     #
     #   resp = client.create_code_security_integration({
     #     name: "IntegrationName", # required
-    #     type: "GITLAB_SELF_MANAGED", # required, accepts GITLAB_SELF_MANAGED, GITHUB
+    #     type: "GITLAB_SELF_MANAGED", # required, accepts GITLAB_SELF_MANAGED, GITHUB, GITHUB_ENTERPRISE_SERVER
     #     details: {
     #       gitlab_self_managed: {
     #         instance_url: "InstanceUrl", # required
     #         access_token: "GitLabAccessToken", # required
+    #         vpc_configuration: {
+    #           vpc_id: "VpcId", # required
+    #           vpc_endpoint_id: "VpcEndpointId", # required
+    #           code_connections_host_arn: "CodeConnectionsHostArn",
+    #           subnet_ids: ["SubnetId"],
+    #           security_groups: ["SecurityGroupId"],
+    #           tls_certificate: "TlsCertificate",
+    #         },
+    #       },
+    #       github_enterprise: {
+    #         instance_url: "InstanceUrl", # required
+    #         vpc_configuration: {
+    #           vpc_id: "VpcId", # required
+    #           vpc_endpoint_id: "VpcEndpointId", # required
+    #           code_connections_host_arn: "CodeConnectionsHostArn",
+    #           subnet_ids: ["SubnetId"],
+    #           security_groups: ["SecurityGroupId"],
+    #           tls_certificate: "TlsCertificate",
+    #         },
     #       },
     #     },
     #     tags: {
@@ -1160,7 +1180,7 @@ module Aws::Inspector2
     # @example Response structure
     #
     #   resp.integration_arn #=> String
-    #   resp.status #=> String, one of "PENDING", "IN_PROGRESS", "ACTIVE", "INACTIVE", "DISABLING"
+    #   resp.status #=> String, one of "PENDING", "IN_PROGRESS", "ACTIVE", "INACTIVE", "DISABLING", "ESTABLISHING_CONNECTION_IN_PROGRESS", "ESTABLISHING_CONNECTION_COMPLETED", "ESTABLISHING_CONNECTION_FAILED", "PENDING_MANIFEST_CODE", "DELETE_IN_PROGRESS", "DELETE_FAILED"
     #   resp.authorization_url #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/CreateCodeSecurityIntegration AWS API Documentation
@@ -1307,26 +1327,45 @@ module Aws::Inspector2
     #   resp = client.create_connector({
     #     client_token: "String",
     #     name: "ConnectorName", # required
-    #     provider: "AZURE", # required, accepts AZURE
+    #     provider: "AZURE", # required, accepts AZURE, GCP
     #     description: "ConnectorDescription",
     #     provider_detail: { # required
     #       azure: {
     #         aws_config_connector_arn: "AwsConfigConnectorArn", # required
     #         scope_configuration: { # required
     #           vm_scanning: {
-    #             scope_type: "TENANT", # required, accepts TENANT, SUBSCRIPTION
+    #             scope_type: "TENANT", # required, accepts TENANT, SUBSCRIPTION, ORGANIZATION, PROJECT
     #             scope_values: ["ScopeValue"],
     #           },
     #           container_image_scanning: {
-    #             scope_type: "TENANT", # required, accepts TENANT, SUBSCRIPTION
+    #             scope_type: "TENANT", # required, accepts TENANT, SUBSCRIPTION, ORGANIZATION, PROJECT
     #             scope_values: ["ScopeValue"],
     #           },
     #           serverless_scanning: {
-    #             scope_type: "TENANT", # required, accepts TENANT, SUBSCRIPTION
+    #             scope_type: "TENANT", # required, accepts TENANT, SUBSCRIPTION, ORGANIZATION, PROJECT
     #             scope_values: ["ScopeValue"],
     #           },
     #         },
     #         azure_regions: ["AzureRegion"], # required
+    #         auto_install_vm_scanner: false,
+    #       },
+    #       gcp: {
+    #         aws_config_connector_arn: "AwsConfigConnectorArn", # required
+    #         scope_configuration: { # required
+    #           vm_scanning: {
+    #             scope_type: "TENANT", # required, accepts TENANT, SUBSCRIPTION, ORGANIZATION, PROJECT
+    #             scope_values: ["GcpScopeValue"],
+    #           },
+    #           container_image_scanning: {
+    #             scope_type: "TENANT", # required, accepts TENANT, SUBSCRIPTION, ORGANIZATION, PROJECT
+    #             scope_values: ["GcpScopeValue"],
+    #           },
+    #           serverless_scanning: {
+    #             scope_type: "TENANT", # required, accepts TENANT, SUBSCRIPTION, ORGANIZATION, PROJECT
+    #             scope_values: ["GcpScopeValue"],
+    #           },
+    #         },
+    #         gcp_regions: ["GcpRegion"], # required
     #         auto_install_vm_scanner: false,
     #       },
     #     },
@@ -1603,6 +1642,19 @@ module Aws::Inspector2
     #           file_path: {
     #             comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
     #             value: "StringInput", # required
+    #           },
+    #           runtime_reachability: {
+    #             comparison: "EQUALS", # required, accepts EQUALS, NOT_EQUALS
+    #             value: "REACHABLE", # required, accepts REACHABLE, NOT_REACHABLE, UNKNOWN
+    #           },
+    #           runtime_reachability_reason: {
+    #             comparison: "EQUALS", # required, accepts EQUALS, NOT_EQUALS
+    #             value: "PACKAGE_IN_DOCKERFILE_WORKLOAD_PATH", # required, accepts PACKAGE_IN_DOCKERFILE_WORKLOAD_PATH, PACKAGE_NOT_IN_DOCKERFILE_WORKLOAD_PATH, PROCESS_OBSERVED_IN_EC2_RUNTIME, PROCESS_NOT_OBSERVED_IN_EC2_RUNTIME
+    #           },
+    #           purl_qualifier: {
+    #             comparison: "EQUALS", # required, accepts EQUALS
+    #             key: "arch", # required, accepts arch, collector, dev_dependency, distro, epoch, go_toolchain, hardened, private, rust_toolchain, scope, skip_chromium_download, source, stream, transitive_dependency, unresolved, vendor
+    #             value: "MapValue",
     #           },
     #         },
     #       ],
@@ -2090,6 +2142,19 @@ module Aws::Inspector2
     #           file_path: {
     #             comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
     #             value: "StringInput", # required
+    #           },
+    #           runtime_reachability: {
+    #             comparison: "EQUALS", # required, accepts EQUALS, NOT_EQUALS
+    #             value: "REACHABLE", # required, accepts REACHABLE, NOT_REACHABLE, UNKNOWN
+    #           },
+    #           runtime_reachability_reason: {
+    #             comparison: "EQUALS", # required, accepts EQUALS, NOT_EQUALS
+    #             value: "PACKAGE_IN_DOCKERFILE_WORKLOAD_PATH", # required, accepts PACKAGE_IN_DOCKERFILE_WORKLOAD_PATH, PACKAGE_NOT_IN_DOCKERFILE_WORKLOAD_PATH, PROCESS_OBSERVED_IN_EC2_RUNTIME, PROCESS_NOT_OBSERVED_IN_EC2_RUNTIME
+    #           },
+    #           purl_qualifier: {
+    #             comparison: "EQUALS", # required, accepts EQUALS
+    #             key: "arch", # required, accepts arch, collector, dev_dependency, distro, epoch, go_toolchain, hardened, private, rust_toolchain, scope, skip_chromium_download, source, stream, transitive_dependency, unresolved, vendor
+    #             value: "MapValue",
     #           },
     #         },
     #       ],
@@ -3156,6 +3221,8 @@ module Aws::Inspector2
     #   * {Types::GetCodeSecurityIntegrationResponse#created_on #created_on} => Time
     #   * {Types::GetCodeSecurityIntegrationResponse#last_update_on #last_update_on} => Time
     #   * {Types::GetCodeSecurityIntegrationResponse#authorization_url #authorization_url} => String
+    #   * {Types::GetCodeSecurityIntegrationResponse#vpc_configuration #vpc_configuration} => Types::CodeSecurityIntegrationVpcConfiguration
+    #   * {Types::GetCodeSecurityIntegrationResponse#instance_url #instance_url} => String
     #   * {Types::GetCodeSecurityIntegrationResponse#tags #tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
@@ -3171,12 +3238,21 @@ module Aws::Inspector2
     #
     #   resp.integration_arn #=> String
     #   resp.name #=> String
-    #   resp.type #=> String, one of "GITLAB_SELF_MANAGED", "GITHUB"
-    #   resp.status #=> String, one of "PENDING", "IN_PROGRESS", "ACTIVE", "INACTIVE", "DISABLING"
+    #   resp.type #=> String, one of "GITLAB_SELF_MANAGED", "GITHUB", "GITHUB_ENTERPRISE_SERVER"
+    #   resp.status #=> String, one of "PENDING", "IN_PROGRESS", "ACTIVE", "INACTIVE", "DISABLING", "ESTABLISHING_CONNECTION_IN_PROGRESS", "ESTABLISHING_CONNECTION_COMPLETED", "ESTABLISHING_CONNECTION_FAILED", "PENDING_MANIFEST_CODE", "DELETE_IN_PROGRESS", "DELETE_FAILED"
     #   resp.status_reason #=> String
     #   resp.created_on #=> Time
     #   resp.last_update_on #=> Time
     #   resp.authorization_url #=> String
+    #   resp.vpc_configuration.vpc_id #=> String
+    #   resp.vpc_configuration.vpc_endpoint_id #=> String
+    #   resp.vpc_configuration.code_connections_host_arn #=> String
+    #   resp.vpc_configuration.subnet_ids #=> Array
+    #   resp.vpc_configuration.subnet_ids[0] #=> String
+    #   resp.vpc_configuration.security_groups #=> Array
+    #   resp.vpc_configuration.security_groups[0] #=> String
+    #   resp.vpc_configuration.tls_certificate #=> String
+    #   resp.instance_url #=> String
     #   resp.tags #=> Hash
     #   resp.tags["MapKey"] #=> String
     #
@@ -3406,7 +3482,7 @@ module Aws::Inspector2
     #
     #   resp = client.get_encryption_key({
     #     scan_type: "NETWORK", # required, accepts NETWORK, PACKAGE, CODE
-    #     resource_type: "AWS_EC2_INSTANCE", # required, accepts AWS_EC2_INSTANCE, AWS_ECR_CONTAINER_IMAGE, AWS_ECR_REPOSITORY, AWS_LAMBDA_FUNCTION, CODE_REPOSITORY, Microsoft.Compute/virtualMachines, Microsoft.ContainerRegistry/registry/containerImage, Microsoft.Web/sites, MACHINE_IMAGE
+    #     resource_type: "AWS_EC2_INSTANCE", # required, accepts AWS_EC2_INSTANCE, AWS_ECR_CONTAINER_IMAGE, AWS_ECR_REPOSITORY, AWS_LAMBDA_FUNCTION, CODE_REPOSITORY, Microsoft.Compute/virtualMachines, Microsoft.ContainerRegistry/registry/containerImage, Microsoft.Web/sites, MACHINE_IMAGE, cloudfunctions.googleapis.com/Function, compute.googleapis.com/Instance, artifactregistry.googleapis.com/DockerImage
     #   })
     #
     # @example Response structure
@@ -3563,6 +3639,13 @@ module Aws::Inspector2
     #   resp.filter_criteria.vulnerable_packages[0].source_lambda_layer_arn.value #=> String
     #   resp.filter_criteria.vulnerable_packages[0].file_path.comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS"
     #   resp.filter_criteria.vulnerable_packages[0].file_path.value #=> String
+    #   resp.filter_criteria.vulnerable_packages[0].runtime_reachability.comparison #=> String, one of "EQUALS", "NOT_EQUALS"
+    #   resp.filter_criteria.vulnerable_packages[0].runtime_reachability.value #=> String, one of "REACHABLE", "NOT_REACHABLE", "UNKNOWN"
+    #   resp.filter_criteria.vulnerable_packages[0].runtime_reachability_reason.comparison #=> String, one of "EQUALS", "NOT_EQUALS"
+    #   resp.filter_criteria.vulnerable_packages[0].runtime_reachability_reason.value #=> String, one of "PACKAGE_IN_DOCKERFILE_WORKLOAD_PATH", "PACKAGE_NOT_IN_DOCKERFILE_WORKLOAD_PATH", "PROCESS_OBSERVED_IN_EC2_RUNTIME", "PROCESS_NOT_OBSERVED_IN_EC2_RUNTIME"
+    #   resp.filter_criteria.vulnerable_packages[0].purl_qualifier.comparison #=> String, one of "EQUALS"
+    #   resp.filter_criteria.vulnerable_packages[0].purl_qualifier.key #=> String, one of "arch", "collector", "dev_dependency", "distro", "epoch", "go_toolchain", "hardened", "private", "rust_toolchain", "scope", "skip_chromium_download", "source", "stream", "transitive_dependency", "unresolved", "vendor"
+    #   resp.filter_criteria.vulnerable_packages[0].purl_qualifier.value #=> String
     #   resp.filter_criteria.related_vulnerabilities #=> Array
     #   resp.filter_criteria.related_vulnerabilities[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS"
     #   resp.filter_criteria.related_vulnerabilities[0].value #=> String
@@ -4518,8 +4601,8 @@ module Aws::Inspector2
     #   resp.integrations #=> Array
     #   resp.integrations[0].integration_arn #=> String
     #   resp.integrations[0].name #=> String
-    #   resp.integrations[0].type #=> String, one of "GITLAB_SELF_MANAGED", "GITHUB"
-    #   resp.integrations[0].status #=> String, one of "PENDING", "IN_PROGRESS", "ACTIVE", "INACTIVE", "DISABLING"
+    #   resp.integrations[0].type #=> String, one of "GITLAB_SELF_MANAGED", "GITHUB", "GITHUB_ENTERPRISE_SERVER"
+    #   resp.integrations[0].status #=> String, one of "PENDING", "IN_PROGRESS", "ACTIVE", "INACTIVE", "DISABLING", "ESTABLISHING_CONNECTION_IN_PROGRESS", "ESTABLISHING_CONNECTION_COMPLETED", "ESTABLISHING_CONNECTION_FAILED", "PENDING_MANIFEST_CODE", "DELETE_IN_PROGRESS", "DELETE_FAILED"
     #   resp.integrations[0].status_reason #=> String
     #   resp.integrations[0].created_on #=> Time
     #   resp.integrations[0].last_update_on #=> Time
@@ -4818,7 +4901,7 @@ module Aws::Inspector2
     #       provider: [
     #         {
     #           comparison: "EQUALS", # required, accepts EQUALS
-    #           value: "AZURE", # required, accepts AZURE
+    #           value: "AZURE", # required, accepts AZURE, GCP
     #         },
     #       ],
     #     },
@@ -4830,7 +4913,7 @@ module Aws::Inspector2
     #   resp.items[0].connector_arn #=> String
     #   resp.items[0].name #=> String
     #   resp.items[0].description #=> String
-    #   resp.items[0].provider #=> String, one of "AZURE"
+    #   resp.items[0].provider #=> String, one of "AZURE", "GCP"
     #   resp.items[0].enablement_status #=> String, one of "ENABLED", "PENDING_ENABLEMENT", "FAILED_TO_ENABLE", "PENDING_UPDATE", "FAILED_TO_UPDATE", "PENDING_DELETION", "DELETED", "FAILED_TO_DELETE"
     #   resp.items[0].enablement_status_reason #=> String
     #   resp.items[0].health.connector_status #=> String, one of "CONNECTED", "DEGRADED", "FAILED_TO_CONNECT", "PENDING_AUTHORIZATION", "PENDING_CONFIGURATION", "UNKNOWN"
@@ -4841,17 +4924,17 @@ module Aws::Inspector2
     #   resp.items[0].azure_regions #=> Array
     #   resp.items[0].azure_regions[0] #=> String
     #   resp.items[0].aws_config_connector_arn #=> String
-    #   resp.items[0].scope_configuration.vm_scanning.scope_type #=> String, one of "TENANT", "SUBSCRIPTION"
+    #   resp.items[0].scope_configuration.vm_scanning.scope_type #=> String, one of "TENANT", "SUBSCRIPTION", "ORGANIZATION", "PROJECT"
     #   resp.items[0].scope_configuration.vm_scanning.scope_values #=> Array
     #   resp.items[0].scope_configuration.vm_scanning.scope_values[0] #=> String
     #   resp.items[0].scope_configuration.vm_scanning.state #=> String, one of "ACTIVE", "PENDING", "ERROR", "DISABLED"
     #   resp.items[0].scope_configuration.vm_scanning.state_reason #=> String
-    #   resp.items[0].scope_configuration.container_image_scanning.scope_type #=> String, one of "TENANT", "SUBSCRIPTION"
+    #   resp.items[0].scope_configuration.container_image_scanning.scope_type #=> String, one of "TENANT", "SUBSCRIPTION", "ORGANIZATION", "PROJECT"
     #   resp.items[0].scope_configuration.container_image_scanning.scope_values #=> Array
     #   resp.items[0].scope_configuration.container_image_scanning.scope_values[0] #=> String
     #   resp.items[0].scope_configuration.container_image_scanning.state #=> String, one of "ACTIVE", "PENDING", "ERROR", "DISABLED"
     #   resp.items[0].scope_configuration.container_image_scanning.state_reason #=> String
-    #   resp.items[0].scope_configuration.serverless_scanning.scope_type #=> String, one of "TENANT", "SUBSCRIPTION"
+    #   resp.items[0].scope_configuration.serverless_scanning.scope_type #=> String, one of "TENANT", "SUBSCRIPTION", "ORGANIZATION", "PROJECT"
     #   resp.items[0].scope_configuration.serverless_scanning.scope_values #=> Array
     #   resp.items[0].scope_configuration.serverless_scanning.scope_values[0] #=> String
     #   resp.items[0].scope_configuration.serverless_scanning.state #=> String, one of "ACTIVE", "PENDING", "ERROR", "DISABLED"
@@ -4859,6 +4942,23 @@ module Aws::Inspector2
     #   resp.items[0].tags #=> Hash
     #   resp.items[0].tags["ConnectorTagKey"] #=> String
     #   resp.items[0].auto_install_vm_scanner #=> Boolean
+    #   resp.items[0].gcp_regions #=> Array
+    #   resp.items[0].gcp_regions[0] #=> String
+    #   resp.items[0].gcp_scope_configuration.vm_scanning.scope_type #=> String, one of "TENANT", "SUBSCRIPTION", "ORGANIZATION", "PROJECT"
+    #   resp.items[0].gcp_scope_configuration.vm_scanning.scope_values #=> Array
+    #   resp.items[0].gcp_scope_configuration.vm_scanning.scope_values[0] #=> String
+    #   resp.items[0].gcp_scope_configuration.vm_scanning.state #=> String, one of "ACTIVE", "PENDING", "ERROR", "DISABLED"
+    #   resp.items[0].gcp_scope_configuration.vm_scanning.state_reason #=> String
+    #   resp.items[0].gcp_scope_configuration.container_image_scanning.scope_type #=> String, one of "TENANT", "SUBSCRIPTION", "ORGANIZATION", "PROJECT"
+    #   resp.items[0].gcp_scope_configuration.container_image_scanning.scope_values #=> Array
+    #   resp.items[0].gcp_scope_configuration.container_image_scanning.scope_values[0] #=> String
+    #   resp.items[0].gcp_scope_configuration.container_image_scanning.state #=> String, one of "ACTIVE", "PENDING", "ERROR", "DISABLED"
+    #   resp.items[0].gcp_scope_configuration.container_image_scanning.state_reason #=> String
+    #   resp.items[0].gcp_scope_configuration.serverless_scanning.scope_type #=> String, one of "TENANT", "SUBSCRIPTION", "ORGANIZATION", "PROJECT"
+    #   resp.items[0].gcp_scope_configuration.serverless_scanning.scope_values #=> Array
+    #   resp.items[0].gcp_scope_configuration.serverless_scanning.scope_values[0] #=> String
+    #   resp.items[0].gcp_scope_configuration.serverless_scanning.state #=> String, one of "ACTIVE", "PENDING", "ERROR", "DISABLED"
+    #   resp.items[0].gcp_scope_configuration.serverless_scanning.state_reason #=> String
     #   resp.next_token #=> String
     #
     #
@@ -5120,7 +5220,7 @@ module Aws::Inspector2
     #
     #   resp.next_token #=> String
     #   resp.covered_resources #=> Array
-    #   resp.covered_resources[0].resource_type #=> String, one of "AWS_EC2_INSTANCE", "AWS_ECR_CONTAINER_IMAGE", "AWS_ECR_REPOSITORY", "AWS_LAMBDA_FUNCTION", "CODE_REPOSITORY", "Microsoft.Compute/virtualMachines", "Microsoft.ContainerRegistry/registry/containerImage", "Microsoft.ContainerRegistry/registry/containerRepository", "Microsoft.Web/sites", "Microsoft.ContainerRegistry/registries", "MACHINE_IMAGE"
+    #   resp.covered_resources[0].resource_type #=> String, one of "AWS_EC2_INSTANCE", "AWS_ECR_CONTAINER_IMAGE", "AWS_ECR_REPOSITORY", "AWS_LAMBDA_FUNCTION", "CODE_REPOSITORY", "Microsoft.Compute/virtualMachines", "Microsoft.ContainerRegistry/registry/containerImage", "Microsoft.ContainerRegistry/registry/containerRepository", "Microsoft.Web/sites", "Microsoft.ContainerRegistry/registries", "MACHINE_IMAGE", "cloudfunctions.googleapis.com/Function", "compute.googleapis.com/Instance", "artifactregistry.googleapis.com/Repository", "artifactregistry.googleapis.com/DockerImage"
     #   resp.covered_resources[0].resource_id #=> String
     #   resp.covered_resources[0].account_id #=> String
     #   resp.covered_resources[0].scan_type #=> String, one of "NETWORK", "PACKAGE", "CODE"
@@ -5182,7 +5282,7 @@ module Aws::Inspector2
     #   resp.covered_resources[0].resource_metadata.machine_image.platform #=> String, one of "WINDOWS", "LINUX", "UNKNOWN"
     #   resp.covered_resources[0].last_scanned_at #=> Time
     #   resp.covered_resources[0].scan_mode #=> String, one of "EC2_SSM_AGENT_BASED", "EC2_AGENTLESS", "EC2_INSPECTOR_AGENT_BASED", "VM_INSPECTOR_AGENT_BASED"
-    #   resp.covered_resources[0].provider #=> String, one of "AWS", "AZURE"
+    #   resp.covered_resources[0].provider #=> String, one of "AWS", "AZURE", "GCP"
     #   resp.covered_resources[0].provider_account_id #=> String
     #   resp.covered_resources[0].provider_org_id #=> String
     #   resp.covered_resources[0].provider_region #=> String
@@ -5204,7 +5304,10 @@ module Aws::Inspector2
     #   coverage data for your environment.
     #
     # @option params [String] :group_by
-    #   The value to group the results by.
+    #   The value to group the results by. For multi-cloud resources, use
+    #   `PROVIDER`, `PROVIDER_ACCOUNT_ID` (Azure subscription ID or Google
+    #   Cloud Platform (GCP) project ID), `PROVIDER_ORG_ID` (Azure tenant ID
+    #   or Google Cloud Platform (GCP) organization ID), or `PROVIDER_REGION`.
     #
     # @option params [String] :next_token
     #   A token to use for paginating results that are returned in the
@@ -5652,6 +5755,13 @@ module Aws::Inspector2
     #   resp.filters[0].criteria.vulnerable_packages[0].source_lambda_layer_arn.value #=> String
     #   resp.filters[0].criteria.vulnerable_packages[0].file_path.comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS"
     #   resp.filters[0].criteria.vulnerable_packages[0].file_path.value #=> String
+    #   resp.filters[0].criteria.vulnerable_packages[0].runtime_reachability.comparison #=> String, one of "EQUALS", "NOT_EQUALS"
+    #   resp.filters[0].criteria.vulnerable_packages[0].runtime_reachability.value #=> String, one of "REACHABLE", "NOT_REACHABLE", "UNKNOWN"
+    #   resp.filters[0].criteria.vulnerable_packages[0].runtime_reachability_reason.comparison #=> String, one of "EQUALS", "NOT_EQUALS"
+    #   resp.filters[0].criteria.vulnerable_packages[0].runtime_reachability_reason.value #=> String, one of "PACKAGE_IN_DOCKERFILE_WORKLOAD_PATH", "PACKAGE_NOT_IN_DOCKERFILE_WORKLOAD_PATH", "PROCESS_OBSERVED_IN_EC2_RUNTIME", "PROCESS_NOT_OBSERVED_IN_EC2_RUNTIME"
+    #   resp.filters[0].criteria.vulnerable_packages[0].purl_qualifier.comparison #=> String, one of "EQUALS"
+    #   resp.filters[0].criteria.vulnerable_packages[0].purl_qualifier.key #=> String, one of "arch", "collector", "dev_dependency", "distro", "epoch", "go_toolchain", "hardened", "private", "rust_toolchain", "scope", "skip_chromium_download", "source", "stream", "transitive_dependency", "unresolved", "vendor"
+    #   resp.filters[0].criteria.vulnerable_packages[0].purl_qualifier.value #=> String
     #   resp.filters[0].criteria.related_vulnerabilities #=> Array
     #   resp.filters[0].criteria.related_vulnerabilities[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS"
     #   resp.filters[0].criteria.related_vulnerabilities[0].value #=> String
@@ -5832,7 +5942,7 @@ module Aws::Inspector2
     #     aggregation_request: {
     #       account_aggregation: {
     #         finding_type: "NETWORK_REACHABILITY", # accepts NETWORK_REACHABILITY, PACKAGE_VULNERABILITY, CODE_VULNERABILITY
-    #         resource_type: "AWS_EC2_INSTANCE", # accepts AWS_EC2_INSTANCE, AWS_ECR_CONTAINER_IMAGE, AWS_LAMBDA_FUNCTION, CODE_REPOSITORY, Microsoft.Compute/virtualMachines, Microsoft.ContainerRegistry/registry/containerImage, Microsoft.Web/sites
+    #         resource_type: "AWS_EC2_INSTANCE", # accepts AWS_EC2_INSTANCE, AWS_ECR_CONTAINER_IMAGE, AWS_LAMBDA_FUNCTION, CODE_REPOSITORY, Microsoft.Compute/virtualMachines, Microsoft.ContainerRegistry/registry/containerImage, Microsoft.Web/sites, cloudfunctions.googleapis.com/Function, compute.googleapis.com/Instance, artifactregistry.googleapis.com/DockerImage
     #         sort_order: "ASC", # accepts ASC, DESC
     #         sort_by: "CRITICAL", # accepts CRITICAL, HIGH, ALL
     #       },
@@ -5924,7 +6034,7 @@ module Aws::Inspector2
     #       },
     #       finding_type_aggregation: {
     #         finding_type: "NETWORK_REACHABILITY", # accepts NETWORK_REACHABILITY, PACKAGE_VULNERABILITY, CODE_VULNERABILITY
-    #         resource_type: "AWS_EC2_INSTANCE", # accepts AWS_EC2_INSTANCE, AWS_ECR_CONTAINER_IMAGE, AWS_LAMBDA_FUNCTION, CODE_REPOSITORY, Microsoft.Compute/virtualMachines, Microsoft.ContainerRegistry/registry/containerImage, Microsoft.Web/sites
+    #         resource_type: "AWS_EC2_INSTANCE", # accepts AWS_EC2_INSTANCE, AWS_ECR_CONTAINER_IMAGE, AWS_LAMBDA_FUNCTION, CODE_REPOSITORY, Microsoft.Compute/virtualMachines, Microsoft.ContainerRegistry/registry/containerImage, Microsoft.Web/sites, cloudfunctions.googleapis.com/Function, compute.googleapis.com/Instance, artifactregistry.googleapis.com/DockerImage
     #         sort_order: "ASC", # accepts ASC, DESC
     #         sort_by: "CRITICAL", # accepts CRITICAL, HIGH, ALL
     #       },
@@ -6013,7 +6123,7 @@ module Aws::Inspector2
     #             value: "StringInput", # required
     #           },
     #         ],
-    #         resource_type: "AWS_EC2_INSTANCE", # accepts AWS_EC2_INSTANCE, AWS_ECR_CONTAINER_IMAGE, AWS_LAMBDA_FUNCTION, CODE_REPOSITORY, Microsoft.Compute/virtualMachines, Microsoft.ContainerRegistry/registry/containerImage, Microsoft.Web/sites
+    #         resource_type: "AWS_EC2_INSTANCE", # accepts AWS_EC2_INSTANCE, AWS_ECR_CONTAINER_IMAGE, AWS_LAMBDA_FUNCTION, CODE_REPOSITORY, Microsoft.Compute/virtualMachines, Microsoft.ContainerRegistry/registry/containerImage, Microsoft.Web/sites, cloudfunctions.googleapis.com/Function, compute.googleapis.com/Instance, artifactregistry.googleapis.com/DockerImage
     #         finding_type: "NETWORK_REACHABILITY", # accepts NETWORK_REACHABILITY, PACKAGE_VULNERABILITY, CODE_VULNERABILITY
     #         sort_order: "ASC", # accepts ASC, DESC
     #         sort_by: "CRITICAL", # accepts CRITICAL, HIGH, ALL
@@ -6310,7 +6420,7 @@ module Aws::Inspector2
     #   resp.responses[0].account_aggregation.fix_available_count #=> Integer
     #   resp.responses[0].ami_aggregation.ami #=> String
     #   resp.responses[0].ami_aggregation.account_id #=> String
-    #   resp.responses[0].ami_aggregation.cloud_provider #=> String, one of "AWS", "AZURE"
+    #   resp.responses[0].ami_aggregation.cloud_provider #=> String, one of "AWS", "AZURE", "GCP"
     #   resp.responses[0].ami_aggregation.cloud_partition #=> String
     #   resp.responses[0].ami_aggregation.cloud_region #=> String
     #   resp.responses[0].ami_aggregation.cloud_org_id #=> String
@@ -6396,7 +6506,7 @@ module Aws::Inspector2
     #   resp.responses[0].package_aggregation.severity_counts.untriaged #=> Integer
     #   resp.responses[0].repository_aggregation.repository #=> String
     #   resp.responses[0].repository_aggregation.account_id #=> String
-    #   resp.responses[0].repository_aggregation.cloud_provider #=> String, one of "AWS", "AZURE"
+    #   resp.responses[0].repository_aggregation.cloud_provider #=> String, one of "AWS", "AZURE", "GCP"
     #   resp.responses[0].repository_aggregation.cloud_partition #=> String
     #   resp.responses[0].repository_aggregation.cloud_region #=> String
     #   resp.responses[0].repository_aggregation.cloud_org_id #=> String
@@ -6458,7 +6568,7 @@ module Aws::Inspector2
     #   resp.responses[0].code_repository_aggregation.account_id #=> String
     #   resp.responses[0].code_repository_aggregation.resource_id #=> String
     #   resp.responses[0].vm_instance_aggregation.resource_id #=> String
-    #   resp.responses[0].vm_instance_aggregation.cloud_provider #=> String, one of "AWS", "AZURE"
+    #   resp.responses[0].vm_instance_aggregation.cloud_provider #=> String, one of "AWS", "AZURE", "GCP"
     #   resp.responses[0].vm_instance_aggregation.cloud_account_id #=> String
     #   resp.responses[0].vm_instance_aggregation.cloud_partition #=> String
     #   resp.responses[0].vm_instance_aggregation.cloud_region #=> String
@@ -6479,7 +6589,7 @@ module Aws::Inspector2
     #   resp.responses[0].vm_instance_aggregation.exploit_available_active_findings_count #=> Integer
     #   resp.responses[0].vm_instance_aggregation.fix_available_active_findings_count #=> Integer
     #   resp.responses[0].container_image_aggregation.resource_id #=> String
-    #   resp.responses[0].container_image_aggregation.cloud_provider #=> String, one of "AWS", "AZURE"
+    #   resp.responses[0].container_image_aggregation.cloud_provider #=> String, one of "AWS", "AZURE", "GCP"
     #   resp.responses[0].container_image_aggregation.cloud_account_id #=> String
     #   resp.responses[0].container_image_aggregation.cloud_partition #=> String
     #   resp.responses[0].container_image_aggregation.cloud_region #=> String
@@ -6503,7 +6613,7 @@ module Aws::Inspector2
     #   resp.responses[0].container_image_aggregation.exploit_available_active_findings_count #=> Integer
     #   resp.responses[0].container_image_aggregation.fix_available_active_findings_count #=> Integer
     #   resp.responses[0].serverless_function_aggregation.resource_id #=> String
-    #   resp.responses[0].serverless_function_aggregation.cloud_provider #=> String, one of "AWS", "AZURE"
+    #   resp.responses[0].serverless_function_aggregation.cloud_provider #=> String, one of "AWS", "AZURE", "GCP"
     #   resp.responses[0].serverless_function_aggregation.cloud_account_id #=> String
     #   resp.responses[0].serverless_function_aggregation.cloud_partition #=> String
     #   resp.responses[0].serverless_function_aggregation.cloud_region #=> String
@@ -6790,6 +6900,19 @@ module Aws::Inspector2
     #             comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
     #             value: "StringInput", # required
     #           },
+    #           runtime_reachability: {
+    #             comparison: "EQUALS", # required, accepts EQUALS, NOT_EQUALS
+    #             value: "REACHABLE", # required, accepts REACHABLE, NOT_REACHABLE, UNKNOWN
+    #           },
+    #           runtime_reachability_reason: {
+    #             comparison: "EQUALS", # required, accepts EQUALS, NOT_EQUALS
+    #             value: "PACKAGE_IN_DOCKERFILE_WORKLOAD_PATH", # required, accepts PACKAGE_IN_DOCKERFILE_WORKLOAD_PATH, PACKAGE_NOT_IN_DOCKERFILE_WORKLOAD_PATH, PROCESS_OBSERVED_IN_EC2_RUNTIME, PROCESS_NOT_OBSERVED_IN_EC2_RUNTIME
+    #           },
+    #           purl_qualifier: {
+    #             comparison: "EQUALS", # required, accepts EQUALS
+    #             key: "arch", # required, accepts arch, collector, dev_dependency, distro, epoch, go_toolchain, hardened, private, rust_toolchain, scope, skip_chromium_download, source, stream, transitive_dependency, unresolved, vendor
+    #             value: "MapValue",
+    #           },
     #         },
     #       ],
     #       related_vulnerabilities: [
@@ -7038,7 +7161,7 @@ module Aws::Inspector2
     #   resp.findings[0].updated_at #=> Time
     #   resp.findings[0].status #=> String, one of "ACTIVE", "SUPPRESSED", "CLOSED"
     #   resp.findings[0].resources #=> Array
-    #   resp.findings[0].resources[0].type #=> String, one of "AWS_EC2_INSTANCE", "AWS_ECR_CONTAINER_IMAGE", "AWS_ECR_REPOSITORY", "AWS_LAMBDA_FUNCTION", "CODE_REPOSITORY", "Microsoft.Compute/virtualMachines", "Microsoft.ContainerRegistry/registry/containerImage", "Microsoft.Web/sites", "MACHINE_IMAGE"
+    #   resp.findings[0].resources[0].type #=> String, one of "AWS_EC2_INSTANCE", "AWS_ECR_CONTAINER_IMAGE", "AWS_ECR_REPOSITORY", "AWS_LAMBDA_FUNCTION", "CODE_REPOSITORY", "Microsoft.Compute/virtualMachines", "Microsoft.ContainerRegistry/registry/containerImage", "Microsoft.Web/sites", "MACHINE_IMAGE", "cloudfunctions.googleapis.com/Function", "compute.googleapis.com/Instance", "artifactregistry.googleapis.com/DockerImage"
     #   resp.findings[0].resources[0].id #=> String
     #   resp.findings[0].resources[0].partition #=> String
     #   resp.findings[0].resources[0].region #=> String
@@ -7140,7 +7263,7 @@ module Aws::Inspector2
     #   resp.findings[0].resources[0].details.serverless_function.architectures[0] #=> String, one of "X86_64", "ARM64"
     #   resp.findings[0].resources[0].details.serverless_function.layers #=> Array
     #   resp.findings[0].resources[0].details.serverless_function.layers[0] #=> String
-    #   resp.findings[0].resources[0].provider #=> String, one of "AWS", "AZURE"
+    #   resp.findings[0].resources[0].provider #=> String, one of "AWS", "AZURE", "GCP"
     #   resp.findings[0].resources[0].provider_account_id #=> String
     #   resp.findings[0].resources[0].provider_org_id #=> String
     #   resp.findings[0].inspector_score #=> Float
@@ -7172,6 +7295,9 @@ module Aws::Inspector2
     #   resp.findings[0].package_vulnerability_details.vulnerable_packages[0].fixed_in_version #=> String
     #   resp.findings[0].package_vulnerability_details.vulnerable_packages[0].remediation #=> String
     #   resp.findings[0].package_vulnerability_details.vulnerable_packages[0].source_lambda_layer_arn #=> String
+    #   resp.findings[0].package_vulnerability_details.vulnerable_packages[0].runtime_reachability #=> String, one of "REACHABLE", "NOT_REACHABLE", "UNKNOWN"
+    #   resp.findings[0].package_vulnerability_details.vulnerable_packages[0].runtime_reachability_reason #=> String, one of "PACKAGE_IN_DOCKERFILE_WORKLOAD_PATH", "PACKAGE_NOT_IN_DOCKERFILE_WORKLOAD_PATH", "PROCESS_OBSERVED_IN_EC2_RUNTIME", "PROCESS_NOT_OBSERVED_IN_EC2_RUNTIME"
+    #   resp.findings[0].package_vulnerability_details.vulnerable_packages[0].purl #=> String
     #   resp.findings[0].package_vulnerability_details.source #=> String
     #   resp.findings[0].package_vulnerability_details.cvss #=> Array
     #   resp.findings[0].package_vulnerability_details.cvss[0].base_score #=> Float
@@ -7390,11 +7516,11 @@ module Aws::Inspector2
     #   resp.totals #=> Array
     #   resp.totals[0].account_id #=> String
     #   resp.totals[0].usage #=> Array
-    #   resp.totals[0].usage[0].type #=> String, one of "EC2_INSTANCE_HOURS", "ECR_INITIAL_SCAN", "ECR_RESCAN", "LAMBDA_FUNCTION_HOURS", "LAMBDA_FUNCTION_CODE_HOURS", "CODE_REPOSITORY_SAST", "CODE_REPOSITORY_IAC", "CODE_REPOSITORY_SCA", "EC2_AGENTLESS_INSTANCE_HOURS", "AZURE_CONTAINER_IMAGE_INITIAL_SCAN", "AZURE_CONTAINER_IMAGE_RESCAN", "AZURE_VM_AGENT_BASED_INSTANCE_HOURS", "AZURE_SERVERLESS_FUNCTION_HOURS", "EC2_AMI_HOURS"
+    #   resp.totals[0].usage[0].type #=> String, one of "EC2_INSTANCE_HOURS", "ECR_INITIAL_SCAN", "ECR_RESCAN", "LAMBDA_FUNCTION_HOURS", "LAMBDA_FUNCTION_CODE_HOURS", "CODE_REPOSITORY_SAST", "CODE_REPOSITORY_IAC", "CODE_REPOSITORY_SCA", "EC2_AGENTLESS_INSTANCE_HOURS", "AZURE_CONTAINER_IMAGE_INITIAL_SCAN", "AZURE_CONTAINER_IMAGE_RESCAN", "AZURE_VM_AGENT_BASED_INSTANCE_HOURS", "AZURE_SERVERLESS_FUNCTION_HOURS", "EC2_AMI_HOURS", "EC2_AMI_ONE_SHOT_SCAN", "GCP_VM_AGENT_BASED_INSTANCE_HOURS", "GCP_CLOUD_RUN_HOURS", "GCP_CONTAINER_IMAGE_INITIAL_SCAN", "GCP_CONTAINER_IMAGE_RESCAN"
     #   resp.totals[0].usage[0].total #=> Float
     #   resp.totals[0].usage[0].estimated_monthly_cost #=> Float
     #   resp.totals[0].usage[0].currency #=> String, one of "USD"
-    #   resp.totals[0].usage[0].cloud_provider #=> String, one of "AWS", "AZURE", "NOT_APPLICABLE"
+    #   resp.totals[0].usage[0].cloud_provider #=> String, one of "AWS", "AZURE", "GCP", "NOT_APPLICABLE"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/ListUsageTotals AWS API Documentation
     #
@@ -7420,7 +7546,7 @@ module Aws::Inspector2
     #
     #   resp = client.reset_encryption_key({
     #     scan_type: "NETWORK", # required, accepts NETWORK, PACKAGE, CODE
-    #     resource_type: "AWS_EC2_INSTANCE", # required, accepts AWS_EC2_INSTANCE, AWS_ECR_CONTAINER_IMAGE, AWS_ECR_REPOSITORY, AWS_LAMBDA_FUNCTION, CODE_REPOSITORY, Microsoft.Compute/virtualMachines, Microsoft.ContainerRegistry/registry/containerImage, Microsoft.Web/sites, MACHINE_IMAGE
+    #     resource_type: "AWS_EC2_INSTANCE", # required, accepts AWS_EC2_INSTANCE, AWS_ECR_CONTAINER_IMAGE, AWS_ECR_REPOSITORY, AWS_LAMBDA_FUNCTION, CODE_REPOSITORY, Microsoft.Compute/virtualMachines, Microsoft.ContainerRegistry/registry/containerImage, Microsoft.Web/sites, MACHINE_IMAGE, cloudfunctions.googleapis.com/Function, compute.googleapis.com/Instance, artifactregistry.googleapis.com/DockerImage
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/ResetEncryptionKey AWS API Documentation
@@ -8009,10 +8135,22 @@ module Aws::Inspector2
     #     details: { # required
     #       gitlab_self_managed: {
     #         auth_code: "GitLabAuthCode", # required
+    #         state_token: "PkceState",
     #       },
     #       github: {
     #         code: "GitHubAuthCode", # required
     #         installation_id: "GitHubInstallationId", # required
+    #         state_token: "PkceState",
+    #       },
+    #       github_enterprise_server: {
+    #         app_installation: {
+    #           code: "GitHubAuthCode", # required
+    #           installation_id: "GitHubInstallationId", # required
+    #           state_token: "PkceState",
+    #         },
+    #         app_registration: {
+    #           manifest_code: "GitHubEnterpriseServerManifestCode", # required
+    #         },
     #       },
     #     },
     #   })
@@ -8020,7 +8158,7 @@ module Aws::Inspector2
     # @example Response structure
     #
     #   resp.integration_arn #=> String
-    #   resp.status #=> String, one of "PENDING", "IN_PROGRESS", "ACTIVE", "INACTIVE", "DISABLING"
+    #   resp.status #=> String, one of "PENDING", "IN_PROGRESS", "ACTIVE", "INACTIVE", "DISABLING", "ESTABLISHING_CONNECTION_IN_PROGRESS", "ESTABLISHING_CONNECTION_COMPLETED", "ESTABLISHING_CONNECTION_FAILED", "PENDING_MANIFEST_CODE", "DELETE_IN_PROGRESS", "DELETE_FAILED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/UpdateCodeSecurityIntegration AWS API Documentation
     #
@@ -8201,16 +8339,34 @@ module Aws::Inspector2
     #         azure_regions: ["AzureRegion"],
     #         scope_configuration: {
     #           vm_scanning: {
-    #             scope_type: "TENANT", # required, accepts TENANT, SUBSCRIPTION
+    #             scope_type: "TENANT", # required, accepts TENANT, SUBSCRIPTION, ORGANIZATION, PROJECT
     #             scope_values: ["ScopeValue"],
     #           },
     #           container_image_scanning: {
-    #             scope_type: "TENANT", # required, accepts TENANT, SUBSCRIPTION
+    #             scope_type: "TENANT", # required, accepts TENANT, SUBSCRIPTION, ORGANIZATION, PROJECT
     #             scope_values: ["ScopeValue"],
     #           },
     #           serverless_scanning: {
-    #             scope_type: "TENANT", # required, accepts TENANT, SUBSCRIPTION
+    #             scope_type: "TENANT", # required, accepts TENANT, SUBSCRIPTION, ORGANIZATION, PROJECT
     #             scope_values: ["ScopeValue"],
+    #           },
+    #         },
+    #         auto_install_vm_scanner: false,
+    #       },
+    #       gcp: {
+    #         gcp_regions: ["GcpRegion"],
+    #         scope_configuration: {
+    #           vm_scanning: {
+    #             scope_type: "TENANT", # required, accepts TENANT, SUBSCRIPTION, ORGANIZATION, PROJECT
+    #             scope_values: ["GcpScopeValue"],
+    #           },
+    #           container_image_scanning: {
+    #             scope_type: "TENANT", # required, accepts TENANT, SUBSCRIPTION, ORGANIZATION, PROJECT
+    #             scope_values: ["GcpScopeValue"],
+    #           },
+    #           serverless_scanning: {
+    #             scope_type: "TENANT", # required, accepts TENANT, SUBSCRIPTION, ORGANIZATION, PROJECT
+    #             scope_values: ["GcpScopeValue"],
     #           },
     #         },
     #         auto_install_vm_scanner: false,
@@ -8349,7 +8505,7 @@ module Aws::Inspector2
     #   resp = client.update_encryption_key({
     #     kms_key_id: "KmsKeyArn", # required
     #     scan_type: "NETWORK", # required, accepts NETWORK, PACKAGE, CODE
-    #     resource_type: "AWS_EC2_INSTANCE", # required, accepts AWS_EC2_INSTANCE, AWS_ECR_CONTAINER_IMAGE, AWS_ECR_REPOSITORY, AWS_LAMBDA_FUNCTION, CODE_REPOSITORY, Microsoft.Compute/virtualMachines, Microsoft.ContainerRegistry/registry/containerImage, Microsoft.Web/sites, MACHINE_IMAGE
+    #     resource_type: "AWS_EC2_INSTANCE", # required, accepts AWS_EC2_INSTANCE, AWS_ECR_CONTAINER_IMAGE, AWS_ECR_REPOSITORY, AWS_LAMBDA_FUNCTION, CODE_REPOSITORY, Microsoft.Compute/virtualMachines, Microsoft.ContainerRegistry/registry/containerImage, Microsoft.Web/sites, MACHINE_IMAGE, cloudfunctions.googleapis.com/Function, compute.googleapis.com/Instance, artifactregistry.googleapis.com/DockerImage
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/UpdateEncryptionKey AWS API Documentation
@@ -8613,6 +8769,19 @@ module Aws::Inspector2
     #           file_path: {
     #             comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
     #             value: "StringInput", # required
+    #           },
+    #           runtime_reachability: {
+    #             comparison: "EQUALS", # required, accepts EQUALS, NOT_EQUALS
+    #             value: "REACHABLE", # required, accepts REACHABLE, NOT_REACHABLE, UNKNOWN
+    #           },
+    #           runtime_reachability_reason: {
+    #             comparison: "EQUALS", # required, accepts EQUALS, NOT_EQUALS
+    #             value: "PACKAGE_IN_DOCKERFILE_WORKLOAD_PATH", # required, accepts PACKAGE_IN_DOCKERFILE_WORKLOAD_PATH, PACKAGE_NOT_IN_DOCKERFILE_WORKLOAD_PATH, PROCESS_OBSERVED_IN_EC2_RUNTIME, PROCESS_NOT_OBSERVED_IN_EC2_RUNTIME
+    #           },
+    #           purl_qualifier: {
+    #             comparison: "EQUALS", # required, accepts EQUALS
+    #             key: "arch", # required, accepts arch, collector, dev_dependency, distro, epoch, go_toolchain, hardened, private, rust_toolchain, scope, skip_chromium_download, source, stream, transitive_dependency, unresolved, vendor
+    #             value: "MapValue",
     #           },
     #         },
     #       ],
@@ -8941,7 +9110,7 @@ module Aws::Inspector2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-inspector2'
-      context[:gem_version] = '1.90.0'
+      context[:gem_version] = '1.100.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

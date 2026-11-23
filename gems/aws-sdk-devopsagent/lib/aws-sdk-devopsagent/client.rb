@@ -272,7 +272,8 @@ module Aws::DevOpsAgent
     #     An integer representing the maximum number attempts that will be made for
     #     a single request, including the initial attempt.  For example,
     #     setting this value to 5 will result in a request being retried up to
-    #     4 times. Used in `standard` and `adaptive` retry modes.
+    #     4 times. Used in `standard` and `adaptive` retry modes. Defaults to 3,
+    #     except for DynamoDB and DynamoDB Streams, which default to 4.
     #
     #   @option options [Proc] :output_event_stream_handler
     #     When an EventStream or Proc object is provided, it will be used as callback for each chunk of event stream response received along the way.
@@ -338,15 +339,15 @@ module Aws::DevOpsAgent
     #     used by the default backoff function. This option is only used in the
     #     `legacy` retry mode.
     #
-    #   @option options [String] :retry_mode ("legacy")
+    #   @option options [String] :retry_mode ("standard")
     #     Specifies which retry algorithm to use. Values are:
     #
-    #     * `legacy` - The pre-existing retry behavior. This is the default
-    #       value if no retry mode is provided.
+    #     * `legacy` - The pre-existing retry behavior.
     #
     #     * `standard` - A standardized set of retry rules across the AWS SDKs.
     #       This includes support for retry quotas, which limit the number of
-    #       unsuccessful retries a client can make.
+    #       unsuccessful retries a client can make. This is the default value
+    #       if no retry mode is provided.
     #
     #     * `adaptive` - A retry mode that includes all the functionality of
     #       `standard` mode along with automatic client side throttling.
@@ -528,12 +529,32 @@ module Aws::DevOpsAgent
     #         agent_elevated_role_arn: "RoleArn",
     #         agent_elevated_role_arn_status: "valid", # accepts valid, invalid, pending-confirmation
     #       },
+    #       source_aws_org: {
+    #         account_type: "source", # required, accepts source
+    #         organizational_unit: { # required
+    #           organizational_unit_id: "OrgUnitId", # required
+    #           account_ids: ["AwsAccountId"],
+    #         },
+    #         deployment_state: {
+    #           deployed_account_count: 1,
+    #           issues: [
+    #             {
+    #               reason_code: "accountSuspended", # required, accepts accountSuspended, accountNotInScope, managementAccountNotSupported, stackInstanceInoperable, accessDenied, deploymentFailed, secondaryAccountLimitExceeded
+    #               account_count: 1, # required
+    #               account_ids: ["AwsAccountId"], # required
+    #               message: "OrgSourceIssueMessage",
+    #             },
+    #           ],
+    #           last_evaluated_at: Time.now,
+    #         },
+    #       },
     #       aws: {
     #         assumable_role_arn: "RoleArn", # required
     #         account_id: "AWSConfigurationAccountIdString", # required
     #         account_type: "monitor", # required, accepts monitor
     #         agent_elevated_role_arn: "RoleArn",
     #         agent_elevated_role_arn_status: "valid", # accepts valid, invalid, pending-confirmation
+    #         service_management_role_arn: "RoleArn",
     #       },
     #       github: {
     #         repo_name: "String", # required
@@ -651,6 +672,10 @@ module Aws::DevOpsAgent
     #             channel_id: "MSTeamsChannelId", # required
     #           },
     #         },
+    #         bidirectional: {
+    #           role_arn: "RoleArn", # required
+    #           enabled: false,
+    #         },
     #       },
     #       release_management: {
     #         name: "DisplayName", # required
@@ -691,11 +716,24 @@ module Aws::DevOpsAgent
     #   resp.association.configuration.source_aws.external_id #=> String
     #   resp.association.configuration.source_aws.agent_elevated_role_arn #=> String
     #   resp.association.configuration.source_aws.agent_elevated_role_arn_status #=> String, one of "valid", "invalid", "pending-confirmation"
+    #   resp.association.configuration.source_aws_org.account_type #=> String, one of "source"
+    #   resp.association.configuration.source_aws_org.organizational_unit.organizational_unit_id #=> String
+    #   resp.association.configuration.source_aws_org.organizational_unit.account_ids #=> Array
+    #   resp.association.configuration.source_aws_org.organizational_unit.account_ids[0] #=> String
+    #   resp.association.configuration.source_aws_org.deployment_state.deployed_account_count #=> Integer
+    #   resp.association.configuration.source_aws_org.deployment_state.issues #=> Array
+    #   resp.association.configuration.source_aws_org.deployment_state.issues[0].reason_code #=> String, one of "accountSuspended", "accountNotInScope", "managementAccountNotSupported", "stackInstanceInoperable", "accessDenied", "deploymentFailed", "secondaryAccountLimitExceeded"
+    #   resp.association.configuration.source_aws_org.deployment_state.issues[0].account_count #=> Integer
+    #   resp.association.configuration.source_aws_org.deployment_state.issues[0].account_ids #=> Array
+    #   resp.association.configuration.source_aws_org.deployment_state.issues[0].account_ids[0] #=> String
+    #   resp.association.configuration.source_aws_org.deployment_state.issues[0].message #=> String
+    #   resp.association.configuration.source_aws_org.deployment_state.last_evaluated_at #=> Time
     #   resp.association.configuration.aws.assumable_role_arn #=> String
     #   resp.association.configuration.aws.account_id #=> String
     #   resp.association.configuration.aws.account_type #=> String, one of "monitor"
     #   resp.association.configuration.aws.agent_elevated_role_arn #=> String
     #   resp.association.configuration.aws.agent_elevated_role_arn_status #=> String, one of "valid", "invalid", "pending-confirmation"
+    #   resp.association.configuration.aws.service_management_role_arn #=> String
     #   resp.association.configuration.github.repo_name #=> String
     #   resp.association.configuration.github.repo_id #=> String
     #   resp.association.configuration.github.owner #=> String
@@ -757,6 +795,8 @@ module Aws::DevOpsAgent
     #   resp.association.configuration.msteams.transmission_target.ops_oncall_target.channel_id #=> String
     #   resp.association.configuration.msteams.transmission_target.ops_sre_target.channel_name #=> String
     #   resp.association.configuration.msteams.transmission_target.ops_sre_target.channel_id #=> String
+    #   resp.association.configuration.msteams.bidirectional.role_arn #=> String
+    #   resp.association.configuration.msteams.bidirectional.enabled #=> Boolean
     #   resp.association.configuration.release_management.name #=> String
     #   resp.association.configuration.release_management.network_access.private_access.private_connection_name #=> String
     #   resp.association.configuration.release_management.network_access.private_access.runtime_role_arn #=> String
@@ -814,6 +854,11 @@ module Aws::DevOpsAgent
     #   The preferences to configure on the agent space. Preferences not
     #   provided take their default values.
     #
+    # @option params [String] :aws_source_mode
+    #   Specifies whether the AgentSpace's Amazon Web Services source
+    #   configuration targets an individual Amazon Web Services account or an
+    #   Amazon Web Services Organization.
+    #
     # @return [Types::CreateAgentSpaceOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateAgentSpaceOutput#agent_space #agent_space} => Types::AgentSpace
@@ -833,6 +878,7 @@ module Aws::DevOpsAgent
     #     preferences: {
     #       "elevatedActionsEnabled" => false,
     #     },
+    #     aws_source_mode: "standalone", # accepts standalone, organization
     #   })
     #
     # @example Response structure
@@ -846,6 +892,7 @@ module Aws::DevOpsAgent
     #   resp.agent_space.agent_space_id #=> String
     #   resp.agent_space.preferences #=> Hash
     #   resp.agent_space.preferences["AgentSpacePreferenceKey"] #=> Boolean
+    #   resp.agent_space.aws_source_mode #=> String, one of "standalone", "organization"
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
     #
@@ -1041,7 +1088,7 @@ module Aws::DevOpsAgent
     #       reference_url: "ReferenceInputReferenceUrlString", # required
     #       association_id: "ResourceId", # required
     #     },
-    #     task_type: "INVESTIGATION", # required, accepts INVESTIGATION, EVALUATION, RELEASE_READINESS_REVIEW, RELEASE_TESTING
+    #     task_type: "INVESTIGATION", # required, accepts INVESTIGATION, EVALUATION, RELEASE_READINESS_REVIEW, RELEASE_TESTING, CODE_CHANGE_RISK_ANALYSIS
     #     title: "BacklogTaskTitle", # required
     #     description: "BacklogTaskDescription",
     #     priority: "CRITICAL", # required, accepts CRITICAL, HIGH, MEDIUM, LOW, MINIMAL
@@ -1060,7 +1107,7 @@ module Aws::DevOpsAgent
     #   resp.task.reference.reference_id #=> String
     #   resp.task.reference.reference_url #=> String
     #   resp.task.reference.association_id #=> String
-    #   resp.task.task_type #=> String, one of "INVESTIGATION", "EVALUATION", "RELEASE_READINESS_REVIEW", "RELEASE_TESTING"
+    #   resp.task.task_type #=> String, one of "INVESTIGATION", "EVALUATION", "RELEASE_READINESS_REVIEW", "RELEASE_TESTING", "CODE_CHANGE_RISK_ANALYSIS"
     #   resp.task.priority #=> String, one of "CRITICAL", "HIGH", "MEDIUM", "LOW", "MINIMAL"
     #   resp.task.status #=> String, one of "PENDING_TRIAGE", "LINKED", "PENDING_START", "IN_PROGRESS", "PENDING_CUSTOMER_APPROVAL", "COMPLETED", "FAILED", "TIMED_OUT", "CANCELED", "SKIPPED", "WAITING"
     #   resp.task.created_at #=> Time
@@ -1694,6 +1741,7 @@ module Aws::DevOpsAgent
     #   resp.agent_space.agent_space_id #=> String
     #   resp.agent_space.preferences #=> Hash
     #   resp.agent_space.preferences["AgentSpacePreferenceKey"] #=> Boolean
+    #   resp.agent_space.aws_source_mode #=> String, one of "standalone", "organization"
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
     #
@@ -1865,11 +1913,24 @@ module Aws::DevOpsAgent
     #   resp.association.configuration.source_aws.external_id #=> String
     #   resp.association.configuration.source_aws.agent_elevated_role_arn #=> String
     #   resp.association.configuration.source_aws.agent_elevated_role_arn_status #=> String, one of "valid", "invalid", "pending-confirmation"
+    #   resp.association.configuration.source_aws_org.account_type #=> String, one of "source"
+    #   resp.association.configuration.source_aws_org.organizational_unit.organizational_unit_id #=> String
+    #   resp.association.configuration.source_aws_org.organizational_unit.account_ids #=> Array
+    #   resp.association.configuration.source_aws_org.organizational_unit.account_ids[0] #=> String
+    #   resp.association.configuration.source_aws_org.deployment_state.deployed_account_count #=> Integer
+    #   resp.association.configuration.source_aws_org.deployment_state.issues #=> Array
+    #   resp.association.configuration.source_aws_org.deployment_state.issues[0].reason_code #=> String, one of "accountSuspended", "accountNotInScope", "managementAccountNotSupported", "stackInstanceInoperable", "accessDenied", "deploymentFailed", "secondaryAccountLimitExceeded"
+    #   resp.association.configuration.source_aws_org.deployment_state.issues[0].account_count #=> Integer
+    #   resp.association.configuration.source_aws_org.deployment_state.issues[0].account_ids #=> Array
+    #   resp.association.configuration.source_aws_org.deployment_state.issues[0].account_ids[0] #=> String
+    #   resp.association.configuration.source_aws_org.deployment_state.issues[0].message #=> String
+    #   resp.association.configuration.source_aws_org.deployment_state.last_evaluated_at #=> Time
     #   resp.association.configuration.aws.assumable_role_arn #=> String
     #   resp.association.configuration.aws.account_id #=> String
     #   resp.association.configuration.aws.account_type #=> String, one of "monitor"
     #   resp.association.configuration.aws.agent_elevated_role_arn #=> String
     #   resp.association.configuration.aws.agent_elevated_role_arn_status #=> String, one of "valid", "invalid", "pending-confirmation"
+    #   resp.association.configuration.aws.service_management_role_arn #=> String
     #   resp.association.configuration.github.repo_name #=> String
     #   resp.association.configuration.github.repo_id #=> String
     #   resp.association.configuration.github.owner #=> String
@@ -1931,6 +1992,8 @@ module Aws::DevOpsAgent
     #   resp.association.configuration.msteams.transmission_target.ops_oncall_target.channel_id #=> String
     #   resp.association.configuration.msteams.transmission_target.ops_sre_target.channel_name #=> String
     #   resp.association.configuration.msteams.transmission_target.ops_sre_target.channel_id #=> String
+    #   resp.association.configuration.msteams.bidirectional.role_arn #=> String
+    #   resp.association.configuration.msteams.bidirectional.enabled #=> Boolean
     #   resp.association.configuration.release_management.name #=> String
     #   resp.association.configuration.release_management.network_access.private_access.private_connection_name #=> String
     #   resp.association.configuration.release_management.network_access.private_access.runtime_role_arn #=> String
@@ -1982,7 +2045,7 @@ module Aws::DevOpsAgent
     #   resp.task.reference.reference_id #=> String
     #   resp.task.reference.reference_url #=> String
     #   resp.task.reference.association_id #=> String
-    #   resp.task.task_type #=> String, one of "INVESTIGATION", "EVALUATION", "RELEASE_READINESS_REVIEW", "RELEASE_TESTING"
+    #   resp.task.task_type #=> String, one of "INVESTIGATION", "EVALUATION", "RELEASE_READINESS_REVIEW", "RELEASE_TESTING", "CODE_CHANGE_RISK_ANALYSIS"
     #   resp.task.priority #=> String, one of "CRITICAL", "HIGH", "MEDIUM", "LOW", "MINIMAL"
     #   resp.task.status #=> String, one of "PENDING_TRIAGE", "LINKED", "PENDING_START", "IN_PROGRESS", "PENDING_CUSTOMER_APPROVAL", "COMPLETED", "FAILED", "TIMED_OUT", "CANCELED", "SKIPPED", "WAITING"
     #   resp.task.created_at #=> Time
@@ -1998,6 +2061,48 @@ module Aws::DevOpsAgent
     # @param [Hash] params ({})
     def get_backlog_task(params = {}, options = {})
       req = build_request(:get_backlog_task, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the details of a chat execution, including its execution ID,
+    # summary, timestamps, and archive status.
+    #
+    # @option params [required, String] :agent_space_id
+    #   The unique identifier of the agent space that contains the chat
+    #   execution.
+    #
+    # @option params [required, String] :execution_id
+    #   The unique identifier of the chat execution to retrieve.
+    #
+    # @return [Types::GetChatResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetChatResponse#execution_id #execution_id} => String
+    #   * {Types::GetChatResponse#summary #summary} => String
+    #   * {Types::GetChatResponse#created_at #created_at} => Time
+    #   * {Types::GetChatResponse#updated_at #updated_at} => Time
+    #   * {Types::GetChatResponse#archive_status #archive_status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_chat({
+    #     agent_space_id: "AgentSpaceIdentifier", # required
+    #     execution_id: "ResourceId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.execution_id #=> String
+    #   resp.summary #=> String
+    #   resp.created_at #=> Time
+    #   resp.updated_at #=> Time
+    #   resp.archive_status #=> String, one of "ACTIVE", "ARCHIVED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devops-agent-2026-01-01/GetChat AWS API Documentation
+    #
+    # @overload get_chat(params = {})
+    # @param [Hash] params ({})
+    def get_chat(params = {}, options = {})
+      req = build_request(:get_chat, params)
       req.send_request(options)
     end
 
@@ -2283,6 +2388,7 @@ module Aws::DevOpsAgent
     #   resp.agent_spaces[0].agent_space_id #=> String
     #   resp.agent_spaces[0].preferences #=> Hash
     #   resp.agent_spaces[0].preferences["AgentSpacePreferenceKey"] #=> Boolean
+    #   resp.agent_spaces[0].aws_source_mode #=> String, one of "standalone", "organization"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-agent-2026-01-01/ListAgentSpaces AWS API Documentation
     #
@@ -2539,11 +2645,24 @@ module Aws::DevOpsAgent
     #   resp.associations[0].configuration.source_aws.external_id #=> String
     #   resp.associations[0].configuration.source_aws.agent_elevated_role_arn #=> String
     #   resp.associations[0].configuration.source_aws.agent_elevated_role_arn_status #=> String, one of "valid", "invalid", "pending-confirmation"
+    #   resp.associations[0].configuration.source_aws_org.account_type #=> String, one of "source"
+    #   resp.associations[0].configuration.source_aws_org.organizational_unit.organizational_unit_id #=> String
+    #   resp.associations[0].configuration.source_aws_org.organizational_unit.account_ids #=> Array
+    #   resp.associations[0].configuration.source_aws_org.organizational_unit.account_ids[0] #=> String
+    #   resp.associations[0].configuration.source_aws_org.deployment_state.deployed_account_count #=> Integer
+    #   resp.associations[0].configuration.source_aws_org.deployment_state.issues #=> Array
+    #   resp.associations[0].configuration.source_aws_org.deployment_state.issues[0].reason_code #=> String, one of "accountSuspended", "accountNotInScope", "managementAccountNotSupported", "stackInstanceInoperable", "accessDenied", "deploymentFailed", "secondaryAccountLimitExceeded"
+    #   resp.associations[0].configuration.source_aws_org.deployment_state.issues[0].account_count #=> Integer
+    #   resp.associations[0].configuration.source_aws_org.deployment_state.issues[0].account_ids #=> Array
+    #   resp.associations[0].configuration.source_aws_org.deployment_state.issues[0].account_ids[0] #=> String
+    #   resp.associations[0].configuration.source_aws_org.deployment_state.issues[0].message #=> String
+    #   resp.associations[0].configuration.source_aws_org.deployment_state.last_evaluated_at #=> Time
     #   resp.associations[0].configuration.aws.assumable_role_arn #=> String
     #   resp.associations[0].configuration.aws.account_id #=> String
     #   resp.associations[0].configuration.aws.account_type #=> String, one of "monitor"
     #   resp.associations[0].configuration.aws.agent_elevated_role_arn #=> String
     #   resp.associations[0].configuration.aws.agent_elevated_role_arn_status #=> String, one of "valid", "invalid", "pending-confirmation"
+    #   resp.associations[0].configuration.aws.service_management_role_arn #=> String
     #   resp.associations[0].configuration.github.repo_name #=> String
     #   resp.associations[0].configuration.github.repo_id #=> String
     #   resp.associations[0].configuration.github.owner #=> String
@@ -2605,6 +2724,8 @@ module Aws::DevOpsAgent
     #   resp.associations[0].configuration.msteams.transmission_target.ops_oncall_target.channel_id #=> String
     #   resp.associations[0].configuration.msteams.transmission_target.ops_sre_target.channel_name #=> String
     #   resp.associations[0].configuration.msteams.transmission_target.ops_sre_target.channel_id #=> String
+    #   resp.associations[0].configuration.msteams.bidirectional.role_arn #=> String
+    #   resp.associations[0].configuration.msteams.bidirectional.enabled #=> Boolean
     #   resp.associations[0].configuration.release_management.name #=> String
     #   resp.associations[0].configuration.release_management.network_access.private_access.private_connection_name #=> String
     #   resp.associations[0].configuration.release_management.network_access.private_access.runtime_role_arn #=> String
@@ -2670,7 +2791,7 @@ module Aws::DevOpsAgent
     #       created_before: Time.now,
     #       priority: ["CRITICAL"], # accepts CRITICAL, HIGH, MEDIUM, LOW, MINIMAL
     #       status: ["PENDING_TRIAGE"], # accepts PENDING_TRIAGE, LINKED, PENDING_START, IN_PROGRESS, PENDING_CUSTOMER_APPROVAL, COMPLETED, FAILED, TIMED_OUT, CANCELED, SKIPPED, WAITING
-    #       task_type: ["INVESTIGATION"], # accepts INVESTIGATION, EVALUATION, RELEASE_READINESS_REVIEW, RELEASE_TESTING
+    #       task_type: ["INVESTIGATION"], # accepts INVESTIGATION, EVALUATION, RELEASE_READINESS_REVIEW, RELEASE_TESTING, CODE_CHANGE_RISK_ANALYSIS
     #       primary_task_id: "ResourceId",
     #     },
     #     limit: 1,
@@ -2692,7 +2813,7 @@ module Aws::DevOpsAgent
     #   resp.tasks[0].reference.reference_id #=> String
     #   resp.tasks[0].reference.reference_url #=> String
     #   resp.tasks[0].reference.association_id #=> String
-    #   resp.tasks[0].task_type #=> String, one of "INVESTIGATION", "EVALUATION", "RELEASE_READINESS_REVIEW", "RELEASE_TESTING"
+    #   resp.tasks[0].task_type #=> String, one of "INVESTIGATION", "EVALUATION", "RELEASE_READINESS_REVIEW", "RELEASE_TESTING", "CODE_CHANGE_RISK_ANALYSIS"
     #   resp.tasks[0].priority #=> String, one of "CRITICAL", "HIGH", "MEDIUM", "LOW", "MINIMAL"
     #   resp.tasks[0].status #=> String, one of "PENDING_TRIAGE", "LINKED", "PENDING_START", "IN_PROGRESS", "PENDING_CUSTOMER_APPROVAL", "COMPLETED", "FAILED", "TIMED_OUT", "CANCELED", "SKIPPED", "WAITING"
     #   resp.tasks[0].created_at #=> Time
@@ -2728,6 +2849,10 @@ module Aws::DevOpsAgent
     # @option params [String] :next_token
     #   Token for pagination
     #
+    # @option params [String] :archive_status
+    #   The archive status to filter by. Use this parameter to list only
+    #   archived chat executions or only active ones.
+    #
     # @return [Types::ListChatsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListChatsResponse#executions #executions} => Array&lt;Types::ChatExecution&gt;
@@ -2740,6 +2865,7 @@ module Aws::DevOpsAgent
     #     user_id: "ResourceId",
     #     max_results: 1,
     #     next_token: "String",
+    #     archive_status: "ACTIVE", # accepts ACTIVE, ARCHIVED
     #   })
     #
     # @example Response structure
@@ -2749,6 +2875,7 @@ module Aws::DevOpsAgent
     #   resp.executions[0].created_at #=> Time
     #   resp.executions[0].updated_at #=> Time
     #   resp.executions[0].summary #=> String
+    #   resp.executions[0].archive_status #=> String, one of "ACTIVE", "ARCHIVED"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-agent-2026-01-01/ListChats AWS API Documentation
@@ -4026,6 +4153,12 @@ module Aws::DevOpsAgent
     #   included revert to their default values. When omitted, the current
     #   preferences are left unchanged.
     #
+    # @option params [String] :aws_source_mode
+    #   Specifies whether the AgentSpace's Amazon Web Services source
+    #   configuration targets an individual Amazon Web Services account or an
+    #   Amazon Web Services Organization. Use this parameter to switch an
+    #   existing AgentSpace between source modes.
+    #
     # @return [Types::UpdateAgentSpaceOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateAgentSpaceOutput#agent_space #agent_space} => Types::AgentSpace
@@ -4040,6 +4173,7 @@ module Aws::DevOpsAgent
     #     preferences: {
     #       "elevatedActionsEnabled" => false,
     #     },
+    #     aws_source_mode: "standalone", # accepts standalone, organization
     #   })
     #
     # @example Response structure
@@ -4053,6 +4187,7 @@ module Aws::DevOpsAgent
     #   resp.agent_space.agent_space_id #=> String
     #   resp.agent_space.preferences #=> Hash
     #   resp.agent_space.preferences["AgentSpacePreferenceKey"] #=> Boolean
+    #   resp.agent_space.aws_source_mode #=> String, one of "standalone", "organization"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-agent-2026-01-01/UpdateAgentSpace AWS API Documentation
     #
@@ -4322,12 +4457,32 @@ module Aws::DevOpsAgent
     #         agent_elevated_role_arn: "RoleArn",
     #         agent_elevated_role_arn_status: "valid", # accepts valid, invalid, pending-confirmation
     #       },
+    #       source_aws_org: {
+    #         account_type: "source", # required, accepts source
+    #         organizational_unit: { # required
+    #           organizational_unit_id: "OrgUnitId", # required
+    #           account_ids: ["AwsAccountId"],
+    #         },
+    #         deployment_state: {
+    #           deployed_account_count: 1,
+    #           issues: [
+    #             {
+    #               reason_code: "accountSuspended", # required, accepts accountSuspended, accountNotInScope, managementAccountNotSupported, stackInstanceInoperable, accessDenied, deploymentFailed, secondaryAccountLimitExceeded
+    #               account_count: 1, # required
+    #               account_ids: ["AwsAccountId"], # required
+    #               message: "OrgSourceIssueMessage",
+    #             },
+    #           ],
+    #           last_evaluated_at: Time.now,
+    #         },
+    #       },
     #       aws: {
     #         assumable_role_arn: "RoleArn", # required
     #         account_id: "AWSConfigurationAccountIdString", # required
     #         account_type: "monitor", # required, accepts monitor
     #         agent_elevated_role_arn: "RoleArn",
     #         agent_elevated_role_arn_status: "valid", # accepts valid, invalid, pending-confirmation
+    #         service_management_role_arn: "RoleArn",
     #       },
     #       github: {
     #         repo_name: "String", # required
@@ -4445,6 +4600,10 @@ module Aws::DevOpsAgent
     #             channel_id: "MSTeamsChannelId", # required
     #           },
     #         },
+    #         bidirectional: {
+    #           role_arn: "RoleArn", # required
+    #           enabled: false,
+    #         },
     #       },
     #       release_management: {
     #         name: "DisplayName", # required
@@ -4485,11 +4644,24 @@ module Aws::DevOpsAgent
     #   resp.association.configuration.source_aws.external_id #=> String
     #   resp.association.configuration.source_aws.agent_elevated_role_arn #=> String
     #   resp.association.configuration.source_aws.agent_elevated_role_arn_status #=> String, one of "valid", "invalid", "pending-confirmation"
+    #   resp.association.configuration.source_aws_org.account_type #=> String, one of "source"
+    #   resp.association.configuration.source_aws_org.organizational_unit.organizational_unit_id #=> String
+    #   resp.association.configuration.source_aws_org.organizational_unit.account_ids #=> Array
+    #   resp.association.configuration.source_aws_org.organizational_unit.account_ids[0] #=> String
+    #   resp.association.configuration.source_aws_org.deployment_state.deployed_account_count #=> Integer
+    #   resp.association.configuration.source_aws_org.deployment_state.issues #=> Array
+    #   resp.association.configuration.source_aws_org.deployment_state.issues[0].reason_code #=> String, one of "accountSuspended", "accountNotInScope", "managementAccountNotSupported", "stackInstanceInoperable", "accessDenied", "deploymentFailed", "secondaryAccountLimitExceeded"
+    #   resp.association.configuration.source_aws_org.deployment_state.issues[0].account_count #=> Integer
+    #   resp.association.configuration.source_aws_org.deployment_state.issues[0].account_ids #=> Array
+    #   resp.association.configuration.source_aws_org.deployment_state.issues[0].account_ids[0] #=> String
+    #   resp.association.configuration.source_aws_org.deployment_state.issues[0].message #=> String
+    #   resp.association.configuration.source_aws_org.deployment_state.last_evaluated_at #=> Time
     #   resp.association.configuration.aws.assumable_role_arn #=> String
     #   resp.association.configuration.aws.account_id #=> String
     #   resp.association.configuration.aws.account_type #=> String, one of "monitor"
     #   resp.association.configuration.aws.agent_elevated_role_arn #=> String
     #   resp.association.configuration.aws.agent_elevated_role_arn_status #=> String, one of "valid", "invalid", "pending-confirmation"
+    #   resp.association.configuration.aws.service_management_role_arn #=> String
     #   resp.association.configuration.github.repo_name #=> String
     #   resp.association.configuration.github.repo_id #=> String
     #   resp.association.configuration.github.owner #=> String
@@ -4551,6 +4723,8 @@ module Aws::DevOpsAgent
     #   resp.association.configuration.msteams.transmission_target.ops_oncall_target.channel_id #=> String
     #   resp.association.configuration.msteams.transmission_target.ops_sre_target.channel_name #=> String
     #   resp.association.configuration.msteams.transmission_target.ops_sre_target.channel_id #=> String
+    #   resp.association.configuration.msteams.bidirectional.role_arn #=> String
+    #   resp.association.configuration.msteams.bidirectional.enabled #=> Boolean
     #   resp.association.configuration.release_management.name #=> String
     #   resp.association.configuration.release_management.network_access.private_access.private_connection_name #=> String
     #   resp.association.configuration.release_management.network_access.private_access.runtime_role_arn #=> String
@@ -4618,7 +4792,7 @@ module Aws::DevOpsAgent
     #   resp.task.reference.reference_id #=> String
     #   resp.task.reference.reference_url #=> String
     #   resp.task.reference.association_id #=> String
-    #   resp.task.task_type #=> String, one of "INVESTIGATION", "EVALUATION", "RELEASE_READINESS_REVIEW", "RELEASE_TESTING"
+    #   resp.task.task_type #=> String, one of "INVESTIGATION", "EVALUATION", "RELEASE_READINESS_REVIEW", "RELEASE_TESTING", "CODE_CHANGE_RISK_ANALYSIS"
     #   resp.task.priority #=> String, one of "CRITICAL", "HIGH", "MEDIUM", "LOW", "MINIMAL"
     #   resp.task.status #=> String, one of "PENDING_TRIAGE", "LINKED", "PENDING_START", "IN_PROGRESS", "PENDING_CUSTOMER_APPROVAL", "COMPLETED", "FAILED", "TIMED_OUT", "CANCELED", "SKIPPED", "WAITING"
     #   resp.task.created_at #=> Time
@@ -4634,6 +4808,69 @@ module Aws::DevOpsAgent
     # @param [Hash] params ({})
     def update_backlog_task(params = {}, options = {})
       req = build_request(:update_backlog_task, params)
+      req.send_request(options)
+    end
+
+    # Updates a chat execution. You can use this operation to change the
+    # chat execution's summary or to archive or unarchive it.
+    #
+    # Archiving a chat execution hides it from the default chat list.
+    # Unarchiving a chat execution restores it to the default chat list.
+    #
+    # @option params [required, String] :agent_space_id
+    #   The unique identifier of the agent space that contains the chat
+    #   execution to update.
+    #
+    # @option params [required, String] :execution_id
+    #   The unique identifier of the chat execution to update.
+    #
+    # @option params [String] :summary
+    #   The new summary to set for the chat execution.
+    #
+    # @option params [String] :archive_status
+    #   The archive status to set for the chat execution. Use this parameter
+    #   to archive the chat execution, hiding it from the default chat list,
+    #   or to unarchive it, restoring it to the default chat list.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier to ensure that the operation
+    #   completes no more than one time. If this token matches a previous
+    #   request, the service ignores the request, but does not return an
+    #   error.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::UpdateChatResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateChatResponse#execution_id #execution_id} => String
+    #   * {Types::UpdateChatResponse#summary #summary} => String
+    #   * {Types::UpdateChatResponse#updated_at #updated_at} => Time
+    #   * {Types::UpdateChatResponse#archive_status #archive_status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_chat({
+    #     agent_space_id: "AgentSpaceIdentifier", # required
+    #     execution_id: "ResourceId", # required
+    #     summary: "UpdateChatRequestSummaryString",
+    #     archive_status: "ACTIVE", # accepts ACTIVE, ARCHIVED
+    #     client_token: "UpdateChatRequestClientTokenString",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.execution_id #=> String
+    #   resp.summary #=> String
+    #   resp.updated_at #=> Time
+    #   resp.archive_status #=> String, one of "ACTIVE", "ARCHIVED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devops-agent-2026-01-01/UpdateChat AWS API Documentation
+    #
+    # @overload update_chat(params = {})
+    # @param [Hash] params ({})
+    def update_chat(params = {}, options = {})
+      req = build_request(:update_chat, params)
       req.send_request(options)
     end
 
@@ -4945,7 +5182,7 @@ module Aws::DevOpsAgent
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-devopsagent'
-      context[:gem_version] = '1.23.0'
+      context[:gem_version] = '1.33.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

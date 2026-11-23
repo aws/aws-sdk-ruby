@@ -33,6 +33,15 @@ module Aws
       }?
     }
 
+      type code_security_integration_vpc_configuration = {
+      vpc_id: ::String,
+      vpc_endpoint_id: ::String,
+      code_connections_host_arn: ::String?,
+      subnet_ids: Array[::String]?,
+      security_groups: Array[::String]?,
+      tls_certificate: ::String?
+    }
+
       type code_security_scan_configuration = {
       periodic_scan_configuration: {
         frequency: ("WEEKLY" | "MONTHLY" | "NEVER")?,
@@ -46,15 +55,30 @@ module Aws
 
       type azure_scope_configuration_input = {
       vm_scanning: {
-        scope_type: ("TENANT" | "SUBSCRIPTION"),
+        scope_type: ("TENANT" | "SUBSCRIPTION" | "ORGANIZATION" | "PROJECT"),
         scope_values: Array[::String]?
       }?,
       container_image_scanning: {
-        scope_type: ("TENANT" | "SUBSCRIPTION"),
+        scope_type: ("TENANT" | "SUBSCRIPTION" | "ORGANIZATION" | "PROJECT"),
         scope_values: Array[::String]?
       }?,
       serverless_scanning: {
-        scope_type: ("TENANT" | "SUBSCRIPTION"),
+        scope_type: ("TENANT" | "SUBSCRIPTION" | "ORGANIZATION" | "PROJECT"),
+        scope_values: Array[::String]?
+      }?
+    }
+
+      type gcp_scope_configuration_input = {
+      vm_scanning: {
+        scope_type: ("TENANT" | "SUBSCRIPTION" | "ORGANIZATION" | "PROJECT"),
+        scope_values: Array[::String]?
+      }?,
+      container_image_scanning: {
+        scope_type: ("TENANT" | "SUBSCRIPTION" | "ORGANIZATION" | "PROJECT"),
+        scope_values: Array[::String]?
+      }?,
+      serverless_scanning: {
+        scope_type: ("TENANT" | "SUBSCRIPTION" | "ORGANIZATION" | "PROJECT"),
         scope_values: Array[::String]?
       }?
     }
@@ -506,6 +530,19 @@ module Aws
       file_path: {
         comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
         value: ::String
+      }?,
+      runtime_reachability: {
+        comparison: ("EQUALS" | "NOT_EQUALS"),
+        value: ("REACHABLE" | "NOT_REACHABLE" | "UNKNOWN")
+      }?,
+      runtime_reachability_reason: {
+        comparison: ("EQUALS" | "NOT_EQUALS"),
+        value: ("PACKAGE_IN_DOCKERFILE_WORKLOAD_PATH" | "PACKAGE_NOT_IN_DOCKERFILE_WORKLOAD_PATH" | "PROCESS_OBSERVED_IN_EC2_RUNTIME" | "PROCESS_NOT_OBSERVED_IN_EC2_RUNTIME")
+      }?,
+      purl_qualifier: {
+        comparison: ("EQUALS"),
+        key: ("arch" | "collector" | "dev_dependency" | "distro" | "epoch" | "go_toolchain" | "hardened" | "private" | "rust_toolchain" | "scope" | "skip_chromium_download" | "source" | "stream" | "transitive_dependency" | "unresolved" | "vendor"),
+        value: ::String?
       }?
     }
 

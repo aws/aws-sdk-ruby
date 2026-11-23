@@ -15,6 +15,8 @@ module Aws::MarketplaceAgreement
     include Seahorse::Model
 
     AWSAccountId = Shapes::StringShape.new(name: 'AWSAccountId')
+    AcceptAgreementApprovalInput = Shapes::StructureShape.new(name: 'AcceptAgreementApprovalInput')
+    AcceptAgreementApprovalOutput = Shapes::StructureShape.new(name: 'AcceptAgreementApprovalOutput')
     AcceptAgreementCancellationRequestInput = Shapes::StructureShape.new(name: 'AcceptAgreementCancellationRequestInput')
     AcceptAgreementCancellationRequestOutput = Shapes::StructureShape.new(name: 'AcceptAgreementCancellationRequestOutput')
     AcceptAgreementPaymentRequestInput = Shapes::StructureShape.new(name: 'AcceptAgreementPaymentRequestInput')
@@ -24,8 +26,37 @@ module Aws::MarketplaceAgreement
     AcceptedTerm = Shapes::UnionShape.new(name: 'AcceptedTerm')
     AcceptedTermList = Shapes::ListShape.new(name: 'AcceptedTermList')
     Acceptor = Shapes::StructureShape.new(name: 'Acceptor')
+    AcceptorContact = Shapes::StructureShape.new(name: 'AcceptorContact')
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
     AccessDeniedExceptionReason = Shapes::StringShape.new(name: 'AccessDeniedExceptionReason')
+    AgreementApprovalDeployedOnAws = Shapes::StringShape.new(name: 'AgreementApprovalDeployedOnAws')
+    AgreementApprovalId = Shapes::StringShape.new(name: 'AgreementApprovalId')
+    AgreementApprovalLevelName = Shapes::StringShape.new(name: 'AgreementApprovalLevelName')
+    AgreementApprovalName = Shapes::StringShape.new(name: 'AgreementApprovalName')
+    AgreementApprovalNote = Shapes::StringShape.new(name: 'AgreementApprovalNote')
+    AgreementApprovalOfferId = Shapes::StringShape.new(name: 'AgreementApprovalOfferId')
+    AgreementApprovalOfferSetId = Shapes::StringShape.new(name: 'AgreementApprovalOfferSetId')
+    AgreementApprovalPartyType = Shapes::StringShape.new(name: 'AgreementApprovalPartyType')
+    AgreementApprovalPlan = Shapes::UnionShape.new(name: 'AgreementApprovalPlan')
+    AgreementApprovalPlanInput = Shapes::UnionShape.new(name: 'AgreementApprovalPlanInput')
+    AgreementApprovalPlanInputs = Shapes::ListShape.new(name: 'AgreementApprovalPlanInputs')
+    AgreementApprovalPlanName = Shapes::StringShape.new(name: 'AgreementApprovalPlanName')
+    AgreementApprovalPlanReference = Shapes::StringShape.new(name: 'AgreementApprovalPlanReference')
+    AgreementApprovalPlans = Shapes::ListShape.new(name: 'AgreementApprovalPlans')
+    AgreementApprovalProposalSummary = Shapes::StructureShape.new(name: 'AgreementApprovalProposalSummary')
+    AgreementApprovalProposer = Shapes::StructureShape.new(name: 'AgreementApprovalProposer')
+    AgreementApprovalPurchaseOrder = Shapes::StructureShape.new(name: 'AgreementApprovalPurchaseOrder')
+    AgreementApprovalPurchaseOrders = Shapes::ListShape.new(name: 'AgreementApprovalPurchaseOrders')
+    AgreementApprovalRequester = Shapes::StructureShape.new(name: 'AgreementApprovalRequester')
+    AgreementApprovalResource = Shapes::StructureShape.new(name: 'AgreementApprovalResource')
+    AgreementApprovalResourceId = Shapes::StringShape.new(name: 'AgreementApprovalResourceId')
+    AgreementApprovalResourceName = Shapes::StringShape.new(name: 'AgreementApprovalResourceName')
+    AgreementApprovalResourceType = Shapes::StringShape.new(name: 'AgreementApprovalResourceType')
+    AgreementApprovalResources = Shapes::ListShape.new(name: 'AgreementApprovalResources')
+    AgreementApprovalStatus = Shapes::StringShape.new(name: 'AgreementApprovalStatus')
+    AgreementApprovalSummaries = Shapes::ListShape.new(name: 'AgreementApprovalSummaries')
+    AgreementApprovalSummary = Shapes::StructureShape.new(name: 'AgreementApprovalSummary')
+    AgreementApprovalType = Shapes::StringShape.new(name: 'AgreementApprovalType')
     AgreementCancellationRequestCancellationReason = Shapes::StringShape.new(name: 'AgreementCancellationRequestCancellationReason')
     AgreementCancellationRequestDescription = Shapes::StringShape.new(name: 'AgreementCancellationRequestDescription')
     AgreementCancellationRequestId = Shapes::StringShape.new(name: 'AgreementCancellationRequestId')
@@ -44,12 +75,26 @@ module Aws::MarketplaceAgreement
     AgreementInvoiceLineItemGroupSummary = Shapes::StructureShape.new(name: 'AgreementInvoiceLineItemGroupSummary')
     AgreementProposalId = Shapes::StringShape.new(name: 'AgreementProposalId')
     AgreementRequestId = Shapes::StringShape.new(name: 'AgreementRequestId')
+    AgreementRequestStatus = Shapes::StringShape.new(name: 'AgreementRequestStatus')
+    AgreementRequestSummary = Shapes::StructureShape.new(name: 'AgreementRequestSummary')
+    AgreementRequestSummaryList = Shapes::ListShape.new(name: 'AgreementRequestSummaryList')
+    AgreementRequestTerm = Shapes::UnionShape.new(name: 'AgreementRequestTerm')
+    AgreementRequestTermList = Shapes::ListShape.new(name: 'AgreementRequestTermList')
+    AgreementRequestTermsMaxResults = Shapes::IntegerShape.new(name: 'AgreementRequestTermsMaxResults')
     AgreementResourceType = Shapes::StringShape.new(name: 'AgreementResourceType')
     AgreementStatus = Shapes::StringShape.new(name: 'AgreementStatus')
     AgreementType = Shapes::StringShape.new(name: 'AgreementType')
     AgreementViewSummary = Shapes::StructureShape.new(name: 'AgreementViewSummary')
     AgreementViewSummaryList = Shapes::ListShape.new(name: 'AgreementViewSummaryList')
+    ApprovalRequirement = Shapes::StringShape.new(name: 'ApprovalRequirement')
+    Approver = Shapes::UnionShape.new(name: 'Approver')
+    ApproverName = Shapes::StringShape.new(name: 'ApproverName')
+    ApproverOutcome = Shapes::UnionShape.new(name: 'ApproverOutcome')
+    ApproverOutcomeId = Shapes::StringShape.new(name: 'ApproverOutcomeId')
+    ApproverOutcomeStatus = Shapes::StringShape.new(name: 'ApproverOutcomeStatus')
     AwsArn = Shapes::StringShape.new(name: 'AwsArn')
+    AwsOrganizationAdminApprover = Shapes::StructureShape.new(name: 'AwsOrganizationAdminApprover')
+    AwsOrganizationApproverOutcome = Shapes::StructureShape.new(name: 'AwsOrganizationApproverOutcome')
     BatchCreateBillingAdjustmentError = Shapes::StructureShape.new(name: 'BatchCreateBillingAdjustmentError')
     BatchCreateBillingAdjustmentErrorList = Shapes::ListShape.new(name: 'BatchCreateBillingAdjustmentErrorList')
     BatchCreateBillingAdjustmentItem = Shapes::StructureShape.new(name: 'BatchCreateBillingAdjustmentItem')
@@ -68,13 +113,32 @@ module Aws::MarketplaceAgreement
     BillingAdjustmentSummaryList = Shapes::ListShape.new(name: 'BillingAdjustmentSummaryList')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     BoundedString = Shapes::StringShape.new(name: 'BoundedString')
+    BuyerAgreementApproval = Shapes::StructureShape.new(name: 'BuyerAgreementApproval')
+    BuyerAgreementApprovalApproverInput = Shapes::StructureShape.new(name: 'BuyerAgreementApprovalApproverInput')
+    BuyerAgreementApprovalCriteria = Shapes::StructureShape.new(name: 'BuyerAgreementApprovalCriteria')
+    BuyerAgreementApprovalGroup = Shapes::StructureShape.new(name: 'BuyerAgreementApprovalGroup')
+    BuyerAgreementApprovalGroups = Shapes::ListShape.new(name: 'BuyerAgreementApprovalGroups')
+    BuyerAgreementApprovalLevel = Shapes::StructureShape.new(name: 'BuyerAgreementApprovalLevel')
+    BuyerAgreementApprovalLevels = Shapes::ListShape.new(name: 'BuyerAgreementApprovalLevels')
+    BuyerAgreementApprovalPlan = Shapes::StructureShape.new(name: 'BuyerAgreementApprovalPlan')
+    BuyerAgreementApprovalPlanGroup = Shapes::StructureShape.new(name: 'BuyerAgreementApprovalPlanGroup')
+    BuyerAgreementApprovalPlanGroups = Shapes::ListShape.new(name: 'BuyerAgreementApprovalPlanGroups')
+    BuyerAgreementApprovalPlanInput = Shapes::StructureShape.new(name: 'BuyerAgreementApprovalPlanInput')
+    BuyerAgreementApprovalPlanLevel = Shapes::StructureShape.new(name: 'BuyerAgreementApprovalPlanLevel')
+    BuyerAgreementApprovalPlanLevels = Shapes::ListShape.new(name: 'BuyerAgreementApprovalPlanLevels')
+    BuyerAgreementApprovalRejectionInput = Shapes::StructureShape.new(name: 'BuyerAgreementApprovalRejectionInput')
+    BuyerApproverOutcomes = Shapes::ListShape.new(name: 'BuyerApproverOutcomes')
+    BuyerApprovers = Shapes::ListShape.new(name: 'BuyerApprovers')
     ByolPricingTerm = Shapes::StructureShape.new(name: 'ByolPricingTerm')
+    CallerIdentity = Shapes::StructureShape.new(name: 'CallerIdentity')
     CancelAgreementCancellationRequestInput = Shapes::StructureShape.new(name: 'CancelAgreementCancellationRequestInput')
     CancelAgreementCancellationRequestOutput = Shapes::StructureShape.new(name: 'CancelAgreementCancellationRequestOutput')
     CancelAgreementInput = Shapes::StructureShape.new(name: 'CancelAgreementInput')
     CancelAgreementOutput = Shapes::StructureShape.new(name: 'CancelAgreementOutput')
     CancelAgreementPaymentRequestInput = Shapes::StructureShape.new(name: 'CancelAgreementPaymentRequestInput')
     CancelAgreementPaymentRequestOutput = Shapes::StructureShape.new(name: 'CancelAgreementPaymentRequestOutput')
+    CancelAgreementRequestInput = Shapes::StructureShape.new(name: 'CancelAgreementRequestInput')
+    CancelAgreementRequestOutput = Shapes::StructureShape.new(name: 'CancelAgreementRequestOutput')
     Catalog = Shapes::StringShape.new(name: 'Catalog')
     Charge = Shapes::StructureShape.new(name: 'Charge')
     ChargeId = Shapes::StringShape.new(name: 'ChargeId')
@@ -89,6 +153,10 @@ module Aws::MarketplaceAgreement
     ConfigurableUpfrontRateCardList = Shapes::ListShape.new(name: 'ConfigurableUpfrontRateCardList')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     Constraints = Shapes::StructureShape.new(name: 'Constraints')
+    ContactCompanyName = Shapes::StringShape.new(name: 'ContactCompanyName')
+    ContactType = Shapes::StringShape.new(name: 'ContactType')
+    ContactTypeList = Shapes::ListShape.new(name: 'ContactTypeList')
+    CountryCode = Shapes::StringShape.new(name: 'CountryCode')
     CreateAgreementRequestInput = Shapes::StructureShape.new(name: 'CreateAgreementRequestInput')
     CreateAgreementRequestOutput = Shapes::StructureShape.new(name: 'CreateAgreementRequestOutput')
     CurrencyCode = Shapes::StringShape.new(name: 'CurrencyCode')
@@ -99,6 +167,9 @@ module Aws::MarketplaceAgreement
     DimensionList = Shapes::ListShape.new(name: 'DimensionList')
     DocumentItem = Shapes::StructureShape.new(name: 'DocumentItem')
     DocumentList = Shapes::ListShape.new(name: 'DocumentList')
+    EmailAddress = Shapes::StringShape.new(name: 'EmailAddress')
+    EmailApprover = Shapes::StructureShape.new(name: 'EmailApprover')
+    EmailApproverOutcome = Shapes::StructureShape.new(name: 'EmailApproverOutcome')
     EndTimeBehavior = Shapes::StructureShape.new(name: 'EndTimeBehavior')
     EndTimeBehaviorReasonCode = Shapes::StringShape.new(name: 'EndTimeBehaviorReasonCode')
     EndTimeBehaviorType = Shapes::StringShape.new(name: 'EndTimeBehaviorType')
@@ -118,12 +189,23 @@ module Aws::MarketplaceAgreement
     FixedPercentage = Shapes::StructureShape.new(name: 'FixedPercentage')
     FixedUpfrontPricingTerm = Shapes::StructureShape.new(name: 'FixedUpfrontPricingTerm')
     FreeTrialPricingTerm = Shapes::StructureShape.new(name: 'FreeTrialPricingTerm')
+    FreeTrialSummary = Shapes::StructureShape.new(name: 'FreeTrialSummary')
+    GetAgreementApprovalInput = Shapes::StructureShape.new(name: 'GetAgreementApprovalInput')
+    GetAgreementApprovalOutput = Shapes::StructureShape.new(name: 'GetAgreementApprovalOutput')
     GetAgreementCancellationRequestInput = Shapes::StructureShape.new(name: 'GetAgreementCancellationRequestInput')
     GetAgreementCancellationRequestOutput = Shapes::StructureShape.new(name: 'GetAgreementCancellationRequestOutput')
+    GetAgreementContactsInput = Shapes::StructureShape.new(name: 'GetAgreementContactsInput')
+    GetAgreementContactsOutput = Shapes::StructureShape.new(name: 'GetAgreementContactsOutput')
     GetAgreementEntitlementsInput = Shapes::StructureShape.new(name: 'GetAgreementEntitlementsInput')
     GetAgreementEntitlementsOutput = Shapes::StructureShape.new(name: 'GetAgreementEntitlementsOutput')
     GetAgreementPaymentRequestInput = Shapes::StructureShape.new(name: 'GetAgreementPaymentRequestInput')
     GetAgreementPaymentRequestOutput = Shapes::StructureShape.new(name: 'GetAgreementPaymentRequestOutput')
+    GetAgreementRequestApprovalPlansInput = Shapes::StructureShape.new(name: 'GetAgreementRequestApprovalPlansInput')
+    GetAgreementRequestApprovalPlansOutput = Shapes::StructureShape.new(name: 'GetAgreementRequestApprovalPlansOutput')
+    GetAgreementRequestInput = Shapes::StructureShape.new(name: 'GetAgreementRequestInput')
+    GetAgreementRequestOutput = Shapes::StructureShape.new(name: 'GetAgreementRequestOutput')
+    GetAgreementRequestTermsInput = Shapes::StructureShape.new(name: 'GetAgreementRequestTermsInput')
+    GetAgreementRequestTermsOutput = Shapes::StructureShape.new(name: 'GetAgreementRequestTermsOutput')
     GetAgreementTermsInput = Shapes::StructureShape.new(name: 'GetAgreementTermsInput')
     GetAgreementTermsOutput = Shapes::StructureShape.new(name: 'GetAgreementTermsOutput')
     GetBillingAdjustmentRequestInput = Shapes::StructureShape.new(name: 'GetBillingAdjustmentRequestInput')
@@ -144,6 +226,8 @@ module Aws::MarketplaceAgreement
     ItemizedChargeList = Shapes::ListShape.new(name: 'ItemizedChargeList')
     LegalTerm = Shapes::StructureShape.new(name: 'LegalTerm')
     LineItemGroupBy = Shapes::StringShape.new(name: 'LineItemGroupBy')
+    ListAgreementApprovalsInput = Shapes::StructureShape.new(name: 'ListAgreementApprovalsInput')
+    ListAgreementApprovalsOutput = Shapes::StructureShape.new(name: 'ListAgreementApprovalsOutput')
     ListAgreementCancellationRequestsInput = Shapes::StructureShape.new(name: 'ListAgreementCancellationRequestsInput')
     ListAgreementCancellationRequestsOutput = Shapes::StructureShape.new(name: 'ListAgreementCancellationRequestsOutput')
     ListAgreementChargesInput = Shapes::StructureShape.new(name: 'ListAgreementChargesInput')
@@ -152,6 +236,8 @@ module Aws::MarketplaceAgreement
     ListAgreementInvoiceLineItemsOutput = Shapes::StructureShape.new(name: 'ListAgreementInvoiceLineItemsOutput')
     ListAgreementPaymentRequestsInput = Shapes::StructureShape.new(name: 'ListAgreementPaymentRequestsInput')
     ListAgreementPaymentRequestsOutput = Shapes::StructureShape.new(name: 'ListAgreementPaymentRequestsOutput')
+    ListAgreementRequestsInput = Shapes::StructureShape.new(name: 'ListAgreementRequestsInput')
+    ListAgreementRequestsOutput = Shapes::StructureShape.new(name: 'ListAgreementRequestsOutput')
     ListBillingAdjustmentRequestsInput = Shapes::StructureShape.new(name: 'ListBillingAdjustmentRequestsInput')
     ListBillingAdjustmentRequestsOutput = Shapes::StructureShape.new(name: 'ListBillingAdjustmentRequestsOutput')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
@@ -159,7 +245,9 @@ module Aws::MarketplaceAgreement
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     OfferId = Shapes::StringShape.new(name: 'OfferId')
     OfferSetId = Shapes::StringShape.new(name: 'OfferSetId')
+    OfferVisibilityScope = Shapes::StringShape.new(name: 'OfferVisibilityScope')
     OffsetDuration = Shapes::StringShape.new(name: 'OffsetDuration')
+    OrganizationId = Shapes::StringShape.new(name: 'OrganizationId')
     PartyType = Shapes::StringShape.new(name: 'PartyType')
     PaymentRequestApprovalStrategy = Shapes::StringShape.new(name: 'PaymentRequestApprovalStrategy')
     PaymentRequestDescription = Shapes::StringShape.new(name: 'PaymentRequestDescription')
@@ -176,13 +264,18 @@ module Aws::MarketplaceAgreement
     PaymentScheduleTermTemplate = Shapes::StructureShape.new(name: 'PaymentScheduleTermTemplate')
     PaymentScheduleTermTemplateScheduleList = Shapes::ListShape.new(name: 'PaymentScheduleTermTemplateScheduleList')
     PercentageRange = Shapes::StructureShape.new(name: 'PercentageRange')
+    PersonName = Shapes::StringShape.new(name: 'PersonName')
     PositiveAmountUpto8Decimals = Shapes::StringShape.new(name: 'PositiveAmountUpto8Decimals')
     PositiveIntegerWithDefaultValueOne = Shapes::IntegerShape.new(name: 'PositiveIntegerWithDefaultValueOne')
     PriceIncrease = Shapes::UnionShape.new(name: 'PriceIncrease')
     PriceIncreasePercentage = Shapes::StringShape.new(name: 'PriceIncreasePercentage')
     PricingCurrencyAmount = Shapes::StructureShape.new(name: 'PricingCurrencyAmount')
+    PrincipalArn = Shapes::StringShape.new(name: 'PrincipalArn')
+    ProcurementToolApprover = Shapes::StructureShape.new(name: 'ProcurementToolApprover')
+    ProcurementToolApproverOutcome = Shapes::StructureShape.new(name: 'ProcurementToolApproverOutcome')
     ProposalSummary = Shapes::StructureShape.new(name: 'ProposalSummary')
     Proposer = Shapes::StructureShape.new(name: 'Proposer')
+    ProposerLegalName = Shapes::StringShape.new(name: 'ProposerLegalName')
     PurchaseOrder = Shapes::StructureShape.new(name: 'PurchaseOrder')
     PurchaseOrderReference = Shapes::StringShape.new(name: 'PurchaseOrderReference')
     PurchaseOrders = Shapes::ListShape.new(name: 'PurchaseOrders')
@@ -190,6 +283,8 @@ module Aws::MarketplaceAgreement
     RateCardList = Shapes::ListShape.new(name: 'RateCardList')
     RecurringPaymentTerm = Shapes::StructureShape.new(name: 'RecurringPaymentTerm')
     RegistrationToken = Shapes::StringShape.new(name: 'RegistrationToken')
+    RejectAgreementApprovalInput = Shapes::StructureShape.new(name: 'RejectAgreementApprovalInput')
+    RejectAgreementApprovalOutput = Shapes::StructureShape.new(name: 'RejectAgreementApprovalOutput')
     RejectAgreementCancellationRequestInput = Shapes::StructureShape.new(name: 'RejectAgreementCancellationRequestInput')
     RejectAgreementCancellationRequestOutput = Shapes::StructureShape.new(name: 'RejectAgreementCancellationRequestOutput')
     RejectAgreementPaymentRequestInput = Shapes::StructureShape.new(name: 'RejectAgreementPaymentRequestInput')
@@ -221,6 +316,8 @@ module Aws::MarketplaceAgreement
     Sort = Shapes::StructureShape.new(name: 'Sort')
     SortBy = Shapes::StringShape.new(name: 'SortBy')
     SortOrder = Shapes::StringShape.new(name: 'SortOrder')
+    StartAgreementApprovalsInput = Shapes::StructureShape.new(name: 'StartAgreementApprovalsInput')
+    StartAgreementApprovalsOutput = Shapes::StructureShape.new(name: 'StartAgreementApprovalsOutput')
     String = Shapes::StringShape.new(name: 'String')
     SupportTerm = Shapes::StructureShape.new(name: 'SupportTerm')
     TaxBreakdown = Shapes::ListShape.new(name: 'TaxBreakdown')
@@ -246,6 +343,11 @@ module Aws::MarketplaceAgreement
     VariablePaymentTerm = Shapes::StructureShape.new(name: 'VariablePaymentTerm')
     VariablePaymentTermConfiguration = Shapes::StructureShape.new(name: 'VariablePaymentTermConfiguration')
     ZeroValueInteger = Shapes::IntegerShape.new(name: 'ZeroValueInteger')
+
+    AcceptAgreementApprovalInput.add_member(:buyer_agreement_approval_approver_input, Shapes::ShapeRef.new(shape: BuyerAgreementApprovalApproverInput, location_name: "buyerAgreementApprovalApproverInput"))
+    AcceptAgreementApprovalInput.struct_class = Types::AcceptAgreementApprovalInput
+
+    AcceptAgreementApprovalOutput.struct_class = Types::AcceptAgreementApprovalOutput
 
     AcceptAgreementCancellationRequestInput.add_member(:agreement_id, Shapes::ShapeRef.new(shape: AgreementId, required: true, location_name: "agreementId"))
     AcceptAgreementCancellationRequestInput.add_member(:agreement_cancellation_request_id, Shapes::ShapeRef.new(shape: AgreementCancellationRequestId, required: true, location_name: "agreementCancellationRequestId"))
@@ -318,10 +420,74 @@ module Aws::MarketplaceAgreement
     Acceptor.add_member(:account_id, Shapes::ShapeRef.new(shape: AWSAccountId, location_name: "accountId"))
     Acceptor.struct_class = Types::Acceptor
 
+    AcceptorContact.add_member(:first_name, Shapes::ShapeRef.new(shape: PersonName, required: true, location_name: "firstName"))
+    AcceptorContact.add_member(:last_name, Shapes::ShapeRef.new(shape: PersonName, required: true, location_name: "lastName"))
+    AcceptorContact.add_member(:email_address, Shapes::ShapeRef.new(shape: EmailAddress, required: true, location_name: "emailAddress"))
+    AcceptorContact.add_member(:company_name, Shapes::ShapeRef.new(shape: ContactCompanyName, required: true, location_name: "companyName"))
+    AcceptorContact.add_member(:country_code, Shapes::ShapeRef.new(shape: CountryCode, required: true, location_name: "countryCode"))
+    AcceptorContact.struct_class = Types::AcceptorContact
+
     AccessDeniedException.add_member(:request_id, Shapes::ShapeRef.new(shape: RequestId, location_name: "requestId"))
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
     AccessDeniedException.add_member(:reason, Shapes::ShapeRef.new(shape: AccessDeniedExceptionReason, location_name: "reason"))
     AccessDeniedException.struct_class = Types::AccessDeniedException
+
+    AgreementApprovalPlan.add_member(:buyer_agreement_approval_plan, Shapes::ShapeRef.new(shape: BuyerAgreementApprovalPlan, location_name: "buyerAgreementApprovalPlan"))
+    AgreementApprovalPlan.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    AgreementApprovalPlan.add_member_subclass(:buyer_agreement_approval_plan, Types::AgreementApprovalPlan::BuyerAgreementApprovalPlan)
+    AgreementApprovalPlan.add_member_subclass(:unknown, Types::AgreementApprovalPlan::Unknown)
+    AgreementApprovalPlan.struct_class = Types::AgreementApprovalPlan
+
+    AgreementApprovalPlanInput.add_member(:buyer_agreement_approval_plan_input, Shapes::ShapeRef.new(shape: BuyerAgreementApprovalPlanInput, location_name: "buyerAgreementApprovalPlanInput"))
+    AgreementApprovalPlanInput.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    AgreementApprovalPlanInput.add_member_subclass(:buyer_agreement_approval_plan_input, Types::AgreementApprovalPlanInput::BuyerAgreementApprovalPlanInput)
+    AgreementApprovalPlanInput.add_member_subclass(:unknown, Types::AgreementApprovalPlanInput::Unknown)
+    AgreementApprovalPlanInput.struct_class = Types::AgreementApprovalPlanInput
+
+    AgreementApprovalPlanInputs.member = Shapes::ShapeRef.new(shape: AgreementApprovalPlanInput)
+
+    AgreementApprovalPlans.member = Shapes::ShapeRef.new(shape: AgreementApprovalPlan)
+
+    AgreementApprovalProposalSummary.add_member(:offer_id, Shapes::ShapeRef.new(shape: AgreementApprovalOfferId, required: true, location_name: "offerId"))
+    AgreementApprovalProposalSummary.add_member(:offer_set_id, Shapes::ShapeRef.new(shape: AgreementApprovalOfferSetId, location_name: "offerSetId"))
+    AgreementApprovalProposalSummary.add_member(:resources, Shapes::ShapeRef.new(shape: AgreementApprovalResources, location_name: "resources"))
+    AgreementApprovalProposalSummary.add_member(:visibility_scope, Shapes::ShapeRef.new(shape: OfferVisibilityScope, required: true, location_name: "visibilityScope"))
+    AgreementApprovalProposalSummary.struct_class = Types::AgreementApprovalProposalSummary
+
+    AgreementApprovalProposer.add_member(:account_id, Shapes::ShapeRef.new(shape: AWSAccountId, required: true, location_name: "accountId"))
+    AgreementApprovalProposer.add_member(:legal_name, Shapes::ShapeRef.new(shape: ProposerLegalName, required: true, location_name: "legalName"))
+    AgreementApprovalProposer.struct_class = Types::AgreementApprovalProposer
+
+    AgreementApprovalPurchaseOrder.add_member(:charge_id, Shapes::ShapeRef.new(shape: ChargeId, required: true, location_name: "chargeId"))
+    AgreementApprovalPurchaseOrder.add_member(:purchase_order_reference, Shapes::ShapeRef.new(shape: PurchaseOrderReference, location_name: "purchaseOrderReference"))
+    AgreementApprovalPurchaseOrder.struct_class = Types::AgreementApprovalPurchaseOrder
+
+    AgreementApprovalPurchaseOrders.member = Shapes::ShapeRef.new(shape: AgreementApprovalPurchaseOrder)
+
+    AgreementApprovalRequester.add_member(:account_id, Shapes::ShapeRef.new(shape: AWSAccountId, required: true, location_name: "accountId"))
+    AgreementApprovalRequester.struct_class = Types::AgreementApprovalRequester
+
+    AgreementApprovalResource.add_member(:id, Shapes::ShapeRef.new(shape: AgreementApprovalResourceId, required: true, location_name: "id"))
+    AgreementApprovalResource.add_member(:type, Shapes::ShapeRef.new(shape: AgreementApprovalResourceType, required: true, location_name: "type"))
+    AgreementApprovalResource.add_member(:name, Shapes::ShapeRef.new(shape: AgreementApprovalResourceName, required: true, location_name: "name"))
+    AgreementApprovalResource.add_member(:deployed_on_aws, Shapes::ShapeRef.new(shape: AgreementApprovalDeployedOnAws, location_name: "deployedOnAws"))
+    AgreementApprovalResource.struct_class = Types::AgreementApprovalResource
+
+    AgreementApprovalResources.member = Shapes::ShapeRef.new(shape: AgreementApprovalResource)
+
+    AgreementApprovalSummaries.member = Shapes::ShapeRef.new(shape: AgreementApprovalSummary)
+
+    AgreementApprovalSummary.add_member(:approval_type, Shapes::ShapeRef.new(shape: AgreementApprovalType, required: true, location_name: "approvalType"))
+    AgreementApprovalSummary.add_member(:agreement_request_id, Shapes::ShapeRef.new(shape: AgreementRequestId, required: true, location_name: "agreementRequestId"))
+    AgreementApprovalSummary.add_member(:agreement_approval_id, Shapes::ShapeRef.new(shape: AgreementApprovalId, required: true, location_name: "agreementApprovalId"))
+    AgreementApprovalSummary.add_member(:name, Shapes::ShapeRef.new(shape: AgreementApprovalName, required: true, location_name: "name"))
+    AgreementApprovalSummary.add_member(:status, Shapes::ShapeRef.new(shape: AgreementApprovalStatus, required: true, location_name: "status"))
+    AgreementApprovalSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createdAt"))
+    AgreementApprovalSummary.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "updatedAt"))
+    AgreementApprovalSummary.add_member(:started_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "startedAt"))
+    AgreementApprovalSummary.add_member(:expires_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "expiresAt"))
+    AgreementApprovalSummary.add_member(:approval_needed_by, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "approvalNeededBy"))
+    AgreementApprovalSummary.struct_class = Types::AgreementApprovalSummary
 
     AgreementCancellationRequestSummary.add_member(:agreement_cancellation_request_id, Shapes::ShapeRef.new(shape: AgreementCancellationRequestId, location_name: "agreementCancellationRequestId"))
     AgreementCancellationRequestSummary.add_member(:agreement_id, Shapes::ShapeRef.new(shape: AgreementId, location_name: "agreementId"))
@@ -356,6 +522,47 @@ module Aws::MarketplaceAgreement
     AgreementInvoiceLineItemGroupSummary.add_member(:invoicing_entity, Shapes::ShapeRef.new(shape: InvoicingEntity, location_name: "invoicingEntity"))
     AgreementInvoiceLineItemGroupSummary.struct_class = Types::AgreementInvoiceLineItemGroupSummary
 
+    AgreementRequestSummary.add_member(:agreement_request_id, Shapes::ShapeRef.new(shape: AgreementRequestId, location_name: "agreementRequestId"))
+    AgreementRequestSummary.add_member(:agreement_type, Shapes::ShapeRef.new(shape: AgreementType, location_name: "agreementType"))
+    AgreementRequestSummary.add_member(:status, Shapes::ShapeRef.new(shape: AgreementRequestStatus, location_name: "status"))
+    AgreementRequestSummary.add_member(:agreement_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "agreementId"))
+    AgreementRequestSummary.add_member(:proposal_summary, Shapes::ShapeRef.new(shape: ProposalSummary, location_name: "proposalSummary"))
+    AgreementRequestSummary.struct_class = Types::AgreementRequestSummary
+
+    AgreementRequestSummaryList.member = Shapes::ShapeRef.new(shape: AgreementRequestSummary)
+
+    AgreementRequestTerm.add_member(:legal_term, Shapes::ShapeRef.new(shape: LegalTerm, location_name: "legalTerm"))
+    AgreementRequestTerm.add_member(:support_term, Shapes::ShapeRef.new(shape: SupportTerm, location_name: "supportTerm"))
+    AgreementRequestTerm.add_member(:renewal_term, Shapes::ShapeRef.new(shape: RenewalTerm, location_name: "renewalTerm"))
+    AgreementRequestTerm.add_member(:usage_based_pricing_term, Shapes::ShapeRef.new(shape: UsageBasedPricingTerm, location_name: "usageBasedPricingTerm"))
+    AgreementRequestTerm.add_member(:configurable_upfront_pricing_term, Shapes::ShapeRef.new(shape: ConfigurableUpfrontPricingTerm, location_name: "configurableUpfrontPricingTerm"))
+    AgreementRequestTerm.add_member(:byol_pricing_term, Shapes::ShapeRef.new(shape: ByolPricingTerm, location_name: "byolPricingTerm"))
+    AgreementRequestTerm.add_member(:recurring_payment_term, Shapes::ShapeRef.new(shape: RecurringPaymentTerm, location_name: "recurringPaymentTerm"))
+    AgreementRequestTerm.add_member(:validity_term, Shapes::ShapeRef.new(shape: ValidityTerm, location_name: "validityTerm"))
+    AgreementRequestTerm.add_member(:payment_schedule_term, Shapes::ShapeRef.new(shape: PaymentScheduleTerm, location_name: "paymentScheduleTerm"))
+    AgreementRequestTerm.add_member(:free_trial_pricing_term, Shapes::ShapeRef.new(shape: FreeTrialPricingTerm, location_name: "freeTrialPricingTerm"))
+    AgreementRequestTerm.add_member(:fixed_upfront_pricing_term, Shapes::ShapeRef.new(shape: FixedUpfrontPricingTerm, location_name: "fixedUpfrontPricingTerm"))
+    AgreementRequestTerm.add_member(:variable_payment_term, Shapes::ShapeRef.new(shape: VariablePaymentTerm, location_name: "variablePaymentTerm"))
+    AgreementRequestTerm.add_member(:net_payment_term, Shapes::ShapeRef.new(shape: NetPaymentTerm, location_name: "netPaymentTerm"))
+    AgreementRequestTerm.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    AgreementRequestTerm.add_member_subclass(:legal_term, Types::AgreementRequestTerm::LegalTerm)
+    AgreementRequestTerm.add_member_subclass(:support_term, Types::AgreementRequestTerm::SupportTerm)
+    AgreementRequestTerm.add_member_subclass(:renewal_term, Types::AgreementRequestTerm::RenewalTerm)
+    AgreementRequestTerm.add_member_subclass(:usage_based_pricing_term, Types::AgreementRequestTerm::UsageBasedPricingTerm)
+    AgreementRequestTerm.add_member_subclass(:configurable_upfront_pricing_term, Types::AgreementRequestTerm::ConfigurableUpfrontPricingTerm)
+    AgreementRequestTerm.add_member_subclass(:byol_pricing_term, Types::AgreementRequestTerm::ByolPricingTerm)
+    AgreementRequestTerm.add_member_subclass(:recurring_payment_term, Types::AgreementRequestTerm::RecurringPaymentTerm)
+    AgreementRequestTerm.add_member_subclass(:validity_term, Types::AgreementRequestTerm::ValidityTerm)
+    AgreementRequestTerm.add_member_subclass(:payment_schedule_term, Types::AgreementRequestTerm::PaymentScheduleTerm)
+    AgreementRequestTerm.add_member_subclass(:free_trial_pricing_term, Types::AgreementRequestTerm::FreeTrialPricingTerm)
+    AgreementRequestTerm.add_member_subclass(:fixed_upfront_pricing_term, Types::AgreementRequestTerm::FixedUpfrontPricingTerm)
+    AgreementRequestTerm.add_member_subclass(:variable_payment_term, Types::AgreementRequestTerm::VariablePaymentTerm)
+    AgreementRequestTerm.add_member_subclass(:net_payment_term, Types::AgreementRequestTerm::NetPaymentTerm)
+    AgreementRequestTerm.add_member_subclass(:unknown, Types::AgreementRequestTerm::Unknown)
+    AgreementRequestTerm.struct_class = Types::AgreementRequestTerm
+
+    AgreementRequestTermList.member = Shapes::ShapeRef.new(shape: AgreementRequestTerm)
+
     AgreementViewSummary.add_member(:agreement_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "agreementId"))
     AgreementViewSummary.add_member(:acceptance_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "acceptanceTime"))
     AgreementViewSummary.add_member(:start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "startTime"))
@@ -370,9 +577,41 @@ module Aws::MarketplaceAgreement
     AgreementViewSummary.add_member(:initial_agreement_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "initialAgreementId"))
     AgreementViewSummary.add_member(:end_time_behavior_type, Shapes::ShapeRef.new(shape: EndTimeBehaviorType, location_name: "endTimeBehaviorType"))
     AgreementViewSummary.add_member(:end_time_behavior_reason_code, Shapes::ShapeRef.new(shape: EndTimeBehaviorReasonCode, location_name: "endTimeBehaviorReasonCode"))
+    AgreementViewSummary.add_member(:free_trial_end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "freeTrialEndTime"))
+    AgreementViewSummary.add_member(:includes_contact_of_type, Shapes::ShapeRef.new(shape: ContactTypeList, location_name: "includesContactOfType"))
     AgreementViewSummary.struct_class = Types::AgreementViewSummary
 
     AgreementViewSummaryList.member = Shapes::ShapeRef.new(shape: AgreementViewSummary)
+
+    Approver.add_member(:email_approver, Shapes::ShapeRef.new(shape: EmailApprover, location_name: "emailApprover"))
+    Approver.add_member(:procurement_tool_approver, Shapes::ShapeRef.new(shape: ProcurementToolApprover, location_name: "procurementToolApprover"))
+    Approver.add_member(:aws_organization_admin_approver, Shapes::ShapeRef.new(shape: AwsOrganizationAdminApprover, location_name: "awsOrganizationAdminApprover"))
+    Approver.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    Approver.add_member_subclass(:email_approver, Types::Approver::EmailApprover)
+    Approver.add_member_subclass(:procurement_tool_approver, Types::Approver::ProcurementToolApprover)
+    Approver.add_member_subclass(:aws_organization_admin_approver, Types::Approver::AwsOrganizationAdminApprover)
+    Approver.add_member_subclass(:unknown, Types::Approver::Unknown)
+    Approver.struct_class = Types::Approver
+
+    ApproverOutcome.add_member(:email_approver_outcome, Shapes::ShapeRef.new(shape: EmailApproverOutcome, location_name: "emailApproverOutcome"))
+    ApproverOutcome.add_member(:procurement_tool_approver_outcome, Shapes::ShapeRef.new(shape: ProcurementToolApproverOutcome, location_name: "procurementToolApproverOutcome"))
+    ApproverOutcome.add_member(:aws_organization_approver_outcome, Shapes::ShapeRef.new(shape: AwsOrganizationApproverOutcome, location_name: "awsOrganizationApproverOutcome"))
+    ApproverOutcome.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    ApproverOutcome.add_member_subclass(:email_approver_outcome, Types::ApproverOutcome::EmailApproverOutcome)
+    ApproverOutcome.add_member_subclass(:procurement_tool_approver_outcome, Types::ApproverOutcome::ProcurementToolApproverOutcome)
+    ApproverOutcome.add_member_subclass(:aws_organization_approver_outcome, Types::ApproverOutcome::AwsOrganizationApproverOutcome)
+    ApproverOutcome.add_member_subclass(:unknown, Types::ApproverOutcome::Unknown)
+    ApproverOutcome.struct_class = Types::ApproverOutcome
+
+    AwsOrganizationAdminApprover.add_member(:organization_id, Shapes::ShapeRef.new(shape: OrganizationId, required: true, location_name: "organizationId"))
+    AwsOrganizationAdminApprover.struct_class = Types::AwsOrganizationAdminApprover
+
+    AwsOrganizationApproverOutcome.add_member(:note, Shapes::ShapeRef.new(shape: AgreementApprovalNote, location_name: "note"))
+    AwsOrganizationApproverOutcome.add_member(:status, Shapes::ShapeRef.new(shape: ApproverOutcomeStatus, required: true, location_name: "status"))
+    AwsOrganizationApproverOutcome.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "updatedAt"))
+    AwsOrganizationApproverOutcome.add_member(:approver_outcome_id, Shapes::ShapeRef.new(shape: ApproverOutcomeId, location_name: "approverOutcomeId"))
+    AwsOrganizationApproverOutcome.add_member(:purchase_orders, Shapes::ShapeRef.new(shape: AgreementApprovalPurchaseOrders, location_name: "purchaseOrders"))
+    AwsOrganizationApproverOutcome.struct_class = Types::AwsOrganizationApproverOutcome
 
     BatchCreateBillingAdjustmentError.add_member(:code, Shapes::ShapeRef.new(shape: BillingAdjustmentErrorCode, required: true, location_name: "code"))
     BatchCreateBillingAdjustmentError.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
@@ -419,9 +658,80 @@ module Aws::MarketplaceAgreement
 
     BillingAdjustmentSummaryList.member = Shapes::ShapeRef.new(shape: BillingAdjustmentSummary)
 
+    BuyerAgreementApproval.add_member(:approval_type, Shapes::ShapeRef.new(shape: AgreementApprovalType, required: true, location_name: "approvalType"))
+    BuyerAgreementApproval.add_member(:agreement_approval_id, Shapes::ShapeRef.new(shape: AgreementApprovalId, required: true, location_name: "agreementApprovalId"))
+    BuyerAgreementApproval.add_member(:name, Shapes::ShapeRef.new(shape: AgreementApprovalName, required: true, location_name: "name"))
+    BuyerAgreementApproval.add_member(:agreement_request_id, Shapes::ShapeRef.new(shape: AgreementRequestId, required: true, location_name: "agreementRequestId"))
+    BuyerAgreementApproval.add_member(:status, Shapes::ShapeRef.new(shape: AgreementApprovalStatus, required: true, location_name: "status"))
+    BuyerAgreementApproval.add_member(:requester, Shapes::ShapeRef.new(shape: AgreementApprovalRequester, required: true, location_name: "requester"))
+    BuyerAgreementApproval.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createdAt"))
+    BuyerAgreementApproval.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "updatedAt"))
+    BuyerAgreementApproval.add_member(:started_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "startedAt"))
+    BuyerAgreementApproval.add_member(:expires_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "expiresAt"))
+    BuyerAgreementApproval.add_member(:approval_needed_by, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "approvalNeededBy"))
+    BuyerAgreementApproval.add_member(:levels, Shapes::ShapeRef.new(shape: BuyerAgreementApprovalLevels, required: true, location_name: "levels"))
+    BuyerAgreementApproval.add_member(:plan_input, Shapes::ShapeRef.new(shape: BuyerAgreementApprovalPlanInput, required: true, location_name: "planInput"))
+    BuyerAgreementApproval.add_member(:proposer, Shapes::ShapeRef.new(shape: AgreementApprovalProposer, required: true, location_name: "proposer"))
+    BuyerAgreementApproval.add_member(:proposal_summary, Shapes::ShapeRef.new(shape: AgreementApprovalProposalSummary, required: true, location_name: "proposalSummary"))
+    BuyerAgreementApproval.struct_class = Types::BuyerAgreementApproval
+
+    BuyerAgreementApprovalApproverInput.add_member(:agreement_approval_id, Shapes::ShapeRef.new(shape: AgreementApprovalId, required: true, location_name: "agreementApprovalId"))
+    BuyerAgreementApprovalApproverInput.add_member(:purchase_orders, Shapes::ShapeRef.new(shape: AgreementApprovalPurchaseOrders, location_name: "purchaseOrders"))
+    BuyerAgreementApprovalApproverInput.add_member(:note, Shapes::ShapeRef.new(shape: AgreementApprovalNote, location_name: "note"))
+    BuyerAgreementApprovalApproverInput.add_member(:approver_outcome_id_to_override, Shapes::ShapeRef.new(shape: ApproverOutcomeId, location_name: "approverOutcomeIdToOverride"))
+    BuyerAgreementApprovalApproverInput.struct_class = Types::BuyerAgreementApprovalApproverInput
+
+    BuyerAgreementApprovalCriteria.add_member(:required_approval_count, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "requiredApprovalCount"))
+    BuyerAgreementApprovalCriteria.struct_class = Types::BuyerAgreementApprovalCriteria
+
+    BuyerAgreementApprovalGroup.add_member(:approval_criteria, Shapes::ShapeRef.new(shape: BuyerAgreementApprovalCriteria, required: true, location_name: "approvalCriteria"))
+    BuyerAgreementApprovalGroup.add_member(:approvers, Shapes::ShapeRef.new(shape: BuyerApproverOutcomes, required: true, location_name: "approvers"))
+    BuyerAgreementApprovalGroup.struct_class = Types::BuyerAgreementApprovalGroup
+
+    BuyerAgreementApprovalGroups.member = Shapes::ShapeRef.new(shape: BuyerAgreementApprovalGroup)
+
+    BuyerAgreementApprovalLevel.add_member(:name, Shapes::ShapeRef.new(shape: AgreementApprovalLevelName, location_name: "name"))
+    BuyerAgreementApprovalLevel.add_member(:groups, Shapes::ShapeRef.new(shape: BuyerAgreementApprovalGroups, required: true, location_name: "groups"))
+    BuyerAgreementApprovalLevel.struct_class = Types::BuyerAgreementApprovalLevel
+
+    BuyerAgreementApprovalLevels.member = Shapes::ShapeRef.new(shape: BuyerAgreementApprovalLevel)
+
+    BuyerAgreementApprovalPlan.add_member(:plan_reference, Shapes::ShapeRef.new(shape: AgreementApprovalPlanReference, required: true, location_name: "planReference"))
+    BuyerAgreementApprovalPlan.add_member(:name, Shapes::ShapeRef.new(shape: AgreementApprovalPlanName, location_name: "name"))
+    BuyerAgreementApprovalPlan.add_member(:levels, Shapes::ShapeRef.new(shape: BuyerAgreementApprovalPlanLevels, required: true, location_name: "levels"))
+    BuyerAgreementApprovalPlan.struct_class = Types::BuyerAgreementApprovalPlan
+
+    BuyerAgreementApprovalPlanGroup.add_member(:approval_criteria, Shapes::ShapeRef.new(shape: BuyerAgreementApprovalCriteria, required: true, location_name: "approvalCriteria"))
+    BuyerAgreementApprovalPlanGroup.add_member(:approvers, Shapes::ShapeRef.new(shape: BuyerApprovers, required: true, location_name: "approvers"))
+    BuyerAgreementApprovalPlanGroup.struct_class = Types::BuyerAgreementApprovalPlanGroup
+
+    BuyerAgreementApprovalPlanGroups.member = Shapes::ShapeRef.new(shape: BuyerAgreementApprovalPlanGroup)
+
+    BuyerAgreementApprovalPlanInput.add_member(:plan_reference, Shapes::ShapeRef.new(shape: AgreementApprovalPlanReference, required: true, location_name: "planReference"))
+    BuyerAgreementApprovalPlanInput.add_member(:requester_note, Shapes::ShapeRef.new(shape: AgreementApprovalNote, location_name: "requesterNote"))
+    BuyerAgreementApprovalPlanInput.struct_class = Types::BuyerAgreementApprovalPlanInput
+
+    BuyerAgreementApprovalPlanLevel.add_member(:name, Shapes::ShapeRef.new(shape: AgreementApprovalLevelName, location_name: "name"))
+    BuyerAgreementApprovalPlanLevel.add_member(:groups, Shapes::ShapeRef.new(shape: BuyerAgreementApprovalPlanGroups, required: true, location_name: "groups"))
+    BuyerAgreementApprovalPlanLevel.struct_class = Types::BuyerAgreementApprovalPlanLevel
+
+    BuyerAgreementApprovalPlanLevels.member = Shapes::ShapeRef.new(shape: BuyerAgreementApprovalPlanLevel)
+
+    BuyerAgreementApprovalRejectionInput.add_member(:agreement_approval_id, Shapes::ShapeRef.new(shape: AgreementApprovalId, required: true, location_name: "agreementApprovalId"))
+    BuyerAgreementApprovalRejectionInput.add_member(:note, Shapes::ShapeRef.new(shape: AgreementApprovalNote, required: true, location_name: "note"))
+    BuyerAgreementApprovalRejectionInput.add_member(:approver_outcome_id_to_override, Shapes::ShapeRef.new(shape: ApproverOutcomeId, location_name: "approverOutcomeIdToOverride"))
+    BuyerAgreementApprovalRejectionInput.struct_class = Types::BuyerAgreementApprovalRejectionInput
+
+    BuyerApproverOutcomes.member = Shapes::ShapeRef.new(shape: ApproverOutcome)
+
+    BuyerApprovers.member = Shapes::ShapeRef.new(shape: Approver)
+
     ByolPricingTerm.add_member(:type, Shapes::ShapeRef.new(shape: UnversionedTermType, location_name: "type"))
     ByolPricingTerm.add_member(:id, Shapes::ShapeRef.new(shape: TermId, location_name: "id"))
     ByolPricingTerm.struct_class = Types::ByolPricingTerm
+
+    CallerIdentity.add_member(:principal_arn, Shapes::ShapeRef.new(shape: PrincipalArn, required: true, location_name: "principalArn"))
+    CallerIdentity.struct_class = Types::CallerIdentity
 
     CancelAgreementCancellationRequestInput.add_member(:agreement_id, Shapes::ShapeRef.new(shape: AgreementId, required: true, location_name: "agreementId"))
     CancelAgreementCancellationRequestInput.add_member(:agreement_cancellation_request_id, Shapes::ShapeRef.new(shape: AgreementCancellationRequestId, required: true, location_name: "agreementCancellationRequestId"))
@@ -457,6 +767,11 @@ module Aws::MarketplaceAgreement
     CancelAgreementPaymentRequestOutput.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdAt"))
     CancelAgreementPaymentRequestOutput.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "updatedAt"))
     CancelAgreementPaymentRequestOutput.struct_class = Types::CancelAgreementPaymentRequestOutput
+
+    CancelAgreementRequestInput.add_member(:agreement_request_id, Shapes::ShapeRef.new(shape: AgreementRequestId, required: true, location_name: "agreementRequestId"))
+    CancelAgreementRequestInput.struct_class = Types::CancelAgreementRequestInput
+
+    CancelAgreementRequestOutput.struct_class = Types::CancelAgreementRequestOutput
 
     Charge.add_member(:id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "id"))
     Charge.add_member(:revision, Shapes::ShapeRef.new(shape: ChargeRevision, location_name: "revision"))
@@ -507,16 +822,23 @@ module Aws::MarketplaceAgreement
     Constraints.add_member(:quantity_configuration, Shapes::ShapeRef.new(shape: BoundedString, location_name: "quantityConfiguration"))
     Constraints.struct_class = Types::Constraints
 
+    ContactTypeList.member = Shapes::ShapeRef.new(shape: ContactType)
+
     CreateAgreementRequestInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateAgreementRequestInput.add_member(:intent, Shapes::ShapeRef.new(shape: Intent, required: true, location_name: "intent"))
     CreateAgreementRequestInput.add_member(:requested_terms, Shapes::ShapeRef.new(shape: RequestedTermList, required: true, location_name: "requestedTerms"))
     CreateAgreementRequestInput.add_member(:source_agreement_identifier, Shapes::ShapeRef.new(shape: ResourceId, location_name: "sourceAgreementIdentifier"))
     CreateAgreementRequestInput.add_member(:agreement_proposal_identifier, Shapes::ShapeRef.new(shape: AgreementProposalId, location_name: "agreementProposalIdentifier"))
     CreateAgreementRequestInput.add_member(:tax_configuration, Shapes::ShapeRef.new(shape: TaxConfiguration, location_name: "taxConfiguration"))
+    CreateAgreementRequestInput.add_member(:acceptor_contact, Shapes::ShapeRef.new(shape: AcceptorContact, location_name: "acceptorContact"))
     CreateAgreementRequestInput.struct_class = Types::CreateAgreementRequestInput
 
     CreateAgreementRequestOutput.add_member(:agreement_request_id, Shapes::ShapeRef.new(shape: AgreementRequestId, location_name: "agreementRequestId"))
+    CreateAgreementRequestOutput.add_member(:agreement_type, Shapes::ShapeRef.new(shape: AgreementType, location_name: "agreementType"))
     CreateAgreementRequestOutput.add_member(:charge_summary, Shapes::ShapeRef.new(shape: ChargeSummary, location_name: "chargeSummary"))
+    CreateAgreementRequestOutput.add_member(:status, Shapes::ShapeRef.new(shape: AgreementRequestStatus, location_name: "status"))
+    CreateAgreementRequestOutput.add_member(:approval_requirement, Shapes::ShapeRef.new(shape: ApprovalRequirement, location_name: "approvalRequirement"))
+    CreateAgreementRequestOutput.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdAt"))
     CreateAgreementRequestOutput.struct_class = Types::CreateAgreementRequestOutput
 
     DescribeAgreementInput.add_member(:agreement_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "agreementId"))
@@ -534,6 +856,7 @@ module Aws::MarketplaceAgreement
     DescribeAgreementOutput.add_member(:status, Shapes::ShapeRef.new(shape: AgreementStatus, location_name: "status"))
     DescribeAgreementOutput.add_member(:initial_agreement_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "initialAgreementId"))
     DescribeAgreementOutput.add_member(:end_time_behavior, Shapes::ShapeRef.new(shape: EndTimeBehavior, location_name: "endTimeBehavior"))
+    DescribeAgreementOutput.add_member(:free_trial_summary, Shapes::ShapeRef.new(shape: FreeTrialSummary, location_name: "freeTrialSummary"))
     DescribeAgreementOutput.struct_class = Types::DescribeAgreementOutput
 
     Dimension.add_member(:dimension_key, Shapes::ShapeRef.new(shape: BoundedString, required: true, location_name: "dimensionKey"))
@@ -548,6 +871,20 @@ module Aws::MarketplaceAgreement
     DocumentItem.struct_class = Types::DocumentItem
 
     DocumentList.member = Shapes::ShapeRef.new(shape: DocumentItem)
+
+    EmailApprover.add_member(:email_address, Shapes::ShapeRef.new(shape: EmailAddress, required: true, location_name: "emailAddress"))
+    EmailApprover.add_member(:name, Shapes::ShapeRef.new(shape: ApproverName, location_name: "name"))
+    EmailApprover.struct_class = Types::EmailApprover
+
+    EmailApproverOutcome.add_member(:note, Shapes::ShapeRef.new(shape: AgreementApprovalNote, location_name: "note"))
+    EmailApproverOutcome.add_member(:status, Shapes::ShapeRef.new(shape: ApproverOutcomeStatus, required: true, location_name: "status"))
+    EmailApproverOutcome.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "updatedAt"))
+    EmailApproverOutcome.add_member(:approver_outcome_id, Shapes::ShapeRef.new(shape: ApproverOutcomeId, location_name: "approverOutcomeId"))
+    EmailApproverOutcome.add_member(:email_address, Shapes::ShapeRef.new(shape: EmailAddress, required: true, location_name: "emailAddress"))
+    EmailApproverOutcome.add_member(:name, Shapes::ShapeRef.new(shape: ApproverName, location_name: "name"))
+    EmailApproverOutcome.add_member(:purchase_orders, Shapes::ShapeRef.new(shape: AgreementApprovalPurchaseOrders, location_name: "purchaseOrders"))
+    EmailApproverOutcome.add_member(:overridden_by, Shapes::ShapeRef.new(shape: CallerIdentity, location_name: "overriddenBy"))
+    EmailApproverOutcome.struct_class = Types::EmailApproverOutcome
 
     EndTimeBehavior.add_member(:type, Shapes::ShapeRef.new(shape: EndTimeBehaviorType, required: true, location_name: "type"))
     EndTimeBehavior.add_member(:reason_code, Shapes::ShapeRef.new(shape: EndTimeBehaviorReasonCode, location_name: "reasonCode"))
@@ -573,6 +910,7 @@ module Aws::MarketplaceAgreement
     ExpectedCharge.add_member(:amount_after_tax, Shapes::ShapeRef.new(shape: BoundedString, location_name: "amountAfterTax"))
     ExpectedCharge.add_member(:timing, Shapes::ShapeRef.new(shape: Timing, location_name: "timing"))
     ExpectedCharge.add_member(:estimated_taxes, Shapes::ShapeRef.new(shape: EstimatedTaxes, location_name: "estimatedTaxes"))
+    ExpectedCharge.add_member(:purchase_order_reference, Shapes::ShapeRef.new(shape: PurchaseOrderReference, location_name: "purchaseOrderReference"))
     ExpectedCharge.struct_class = Types::ExpectedCharge
 
     ExpectedChargeList.member = Shapes::ShapeRef.new(shape: ExpectedCharge)
@@ -602,6 +940,15 @@ module Aws::MarketplaceAgreement
     FreeTrialPricingTerm.add_member(:grants, Shapes::ShapeRef.new(shape: GrantList, location_name: "grants"))
     FreeTrialPricingTerm.struct_class = Types::FreeTrialPricingTerm
 
+    FreeTrialSummary.add_member(:trial_end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "trialEndTime"))
+    FreeTrialSummary.struct_class = Types::FreeTrialSummary
+
+    GetAgreementApprovalInput.add_member(:agreement_approval_id, Shapes::ShapeRef.new(shape: AgreementApprovalId, required: true, location_name: "agreementApprovalId"))
+    GetAgreementApprovalInput.struct_class = Types::GetAgreementApprovalInput
+
+    GetAgreementApprovalOutput.add_member(:buyer_agreement_approval, Shapes::ShapeRef.new(shape: BuyerAgreementApproval, location_name: "buyerAgreementApproval"))
+    GetAgreementApprovalOutput.struct_class = Types::GetAgreementApprovalOutput
+
     GetAgreementCancellationRequestInput.add_member(:agreement_cancellation_request_id, Shapes::ShapeRef.new(shape: AgreementCancellationRequestId, required: true, location_name: "agreementCancellationRequestId"))
     GetAgreementCancellationRequestInput.add_member(:agreement_id, Shapes::ShapeRef.new(shape: AgreementId, required: true, location_name: "agreementId"))
     GetAgreementCancellationRequestInput.struct_class = Types::GetAgreementCancellationRequestInput
@@ -615,6 +962,12 @@ module Aws::MarketplaceAgreement
     GetAgreementCancellationRequestOutput.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdAt"))
     GetAgreementCancellationRequestOutput.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "updatedAt"))
     GetAgreementCancellationRequestOutput.struct_class = Types::GetAgreementCancellationRequestOutput
+
+    GetAgreementContactsInput.add_member(:agreement_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "agreementId"))
+    GetAgreementContactsInput.struct_class = Types::GetAgreementContactsInput
+
+    GetAgreementContactsOutput.add_member(:acceptor_contact, Shapes::ShapeRef.new(shape: AcceptorContact, location_name: "acceptorContact"))
+    GetAgreementContactsOutput.struct_class = Types::GetAgreementContactsOutput
 
     GetAgreementEntitlementsInput.add_member(:agreement_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "agreementId"))
     GetAgreementEntitlementsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
@@ -641,6 +994,39 @@ module Aws::MarketplaceAgreement
     GetAgreementPaymentRequestOutput.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdAt"))
     GetAgreementPaymentRequestOutput.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "updatedAt"))
     GetAgreementPaymentRequestOutput.struct_class = Types::GetAgreementPaymentRequestOutput
+
+    GetAgreementRequestApprovalPlansInput.add_member(:agreement_request_id, Shapes::ShapeRef.new(shape: AgreementRequestId, required: true, location_name: "agreementRequestId"))
+    GetAgreementRequestApprovalPlansInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
+    GetAgreementRequestApprovalPlansInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    GetAgreementRequestApprovalPlansInput.struct_class = Types::GetAgreementRequestApprovalPlansInput
+
+    GetAgreementRequestApprovalPlansOutput.add_member(:items, Shapes::ShapeRef.new(shape: AgreementApprovalPlans, required: true, location_name: "items"))
+    GetAgreementRequestApprovalPlansOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    GetAgreementRequestApprovalPlansOutput.struct_class = Types::GetAgreementRequestApprovalPlansOutput
+
+    GetAgreementRequestInput.add_member(:agreement_request_id, Shapes::ShapeRef.new(shape: AgreementRequestId, required: true, location_name: "agreementRequestId"))
+    GetAgreementRequestInput.struct_class = Types::GetAgreementRequestInput
+
+    GetAgreementRequestOutput.add_member(:agreement_request_id, Shapes::ShapeRef.new(shape: AgreementRequestId, location_name: "agreementRequestId"))
+    GetAgreementRequestOutput.add_member(:agreement_type, Shapes::ShapeRef.new(shape: AgreementType, location_name: "agreementType"))
+    GetAgreementRequestOutput.add_member(:status, Shapes::ShapeRef.new(shape: AgreementRequestStatus, location_name: "status"))
+    GetAgreementRequestOutput.add_member(:approval_requirement, Shapes::ShapeRef.new(shape: ApprovalRequirement, location_name: "approvalRequirement"))
+    GetAgreementRequestOutput.add_member(:agreement_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "agreementId"))
+    GetAgreementRequestOutput.add_member(:intent, Shapes::ShapeRef.new(shape: Intent, location_name: "intent"))
+    GetAgreementRequestOutput.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdAt"))
+    GetAgreementRequestOutput.add_member(:charge_summary, Shapes::ShapeRef.new(shape: ChargeSummary, location_name: "chargeSummary"))
+    GetAgreementRequestOutput.add_member(:proposer, Shapes::ShapeRef.new(shape: Proposer, location_name: "proposer"))
+    GetAgreementRequestOutput.add_member(:proposal_summary, Shapes::ShapeRef.new(shape: ProposalSummary, location_name: "proposalSummary"))
+    GetAgreementRequestOutput.struct_class = Types::GetAgreementRequestOutput
+
+    GetAgreementRequestTermsInput.add_member(:agreement_request_id, Shapes::ShapeRef.new(shape: AgreementRequestId, required: true, location_name: "agreementRequestId"))
+    GetAgreementRequestTermsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: AgreementRequestTermsMaxResults, location_name: "maxResults"))
+    GetAgreementRequestTermsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    GetAgreementRequestTermsInput.struct_class = Types::GetAgreementRequestTermsInput
+
+    GetAgreementRequestTermsOutput.add_member(:terms, Shapes::ShapeRef.new(shape: AgreementRequestTermList, required: true, location_name: "terms"))
+    GetAgreementRequestTermsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    GetAgreementRequestTermsOutput.struct_class = Types::GetAgreementRequestTermsOutput
 
     GetAgreementTermsInput.add_member(:agreement_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "agreementId"))
     GetAgreementTermsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
@@ -700,6 +1086,19 @@ module Aws::MarketplaceAgreement
     LegalTerm.add_member(:documents, Shapes::ShapeRef.new(shape: DocumentList, location_name: "documents"))
     LegalTerm.struct_class = Types::LegalTerm
 
+    ListAgreementApprovalsInput.add_member(:catalog, Shapes::ShapeRef.new(shape: Catalog, location_name: "catalog"))
+    ListAgreementApprovalsInput.add_member(:party_type, Shapes::ShapeRef.new(shape: AgreementApprovalPartyType, required: true, location_name: "partyType"))
+    ListAgreementApprovalsInput.add_member(:agreement_request_id, Shapes::ShapeRef.new(shape: AgreementRequestId, location_name: "agreementRequestId"))
+    ListAgreementApprovalsInput.add_member(:approval_type, Shapes::ShapeRef.new(shape: AgreementApprovalType, location_name: "approvalType"))
+    ListAgreementApprovalsInput.add_member(:status, Shapes::ShapeRef.new(shape: AgreementApprovalStatus, location_name: "status"))
+    ListAgreementApprovalsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
+    ListAgreementApprovalsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListAgreementApprovalsInput.struct_class = Types::ListAgreementApprovalsInput
+
+    ListAgreementApprovalsOutput.add_member(:items, Shapes::ShapeRef.new(shape: AgreementApprovalSummaries, required: true, location_name: "items"))
+    ListAgreementApprovalsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListAgreementApprovalsOutput.struct_class = Types::ListAgreementApprovalsOutput
+
     ListAgreementCancellationRequestsInput.add_member(:party_type, Shapes::ShapeRef.new(shape: PartyType, required: true, location_name: "partyType"))
     ListAgreementCancellationRequestsInput.add_member(:agreement_id, Shapes::ShapeRef.new(shape: AgreementId, location_name: "agreementId"))
     ListAgreementCancellationRequestsInput.add_member(:status, Shapes::ShapeRef.new(shape: AgreementCancellationRequestStatus, location_name: "status"))
@@ -751,6 +1150,17 @@ module Aws::MarketplaceAgreement
     ListAgreementPaymentRequestsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListAgreementPaymentRequestsOutput.add_member(:items, Shapes::ShapeRef.new(shape: PaymentRequestSummaryList, required: true, location_name: "items"))
     ListAgreementPaymentRequestsOutput.struct_class = Types::ListAgreementPaymentRequestsOutput
+
+    ListAgreementRequestsInput.add_member(:catalog, Shapes::ShapeRef.new(shape: Catalog, location_name: "catalog"))
+    ListAgreementRequestsInput.add_member(:status, Shapes::ShapeRef.new(shape: AgreementRequestStatus, location_name: "status"))
+    ListAgreementRequestsInput.add_member(:resource_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "resourceId"))
+    ListAgreementRequestsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
+    ListAgreementRequestsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListAgreementRequestsInput.struct_class = Types::ListAgreementRequestsInput
+
+    ListAgreementRequestsOutput.add_member(:items, Shapes::ShapeRef.new(shape: AgreementRequestSummaryList, location_name: "items"))
+    ListAgreementRequestsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListAgreementRequestsOutput.struct_class = Types::ListAgreementRequestsOutput
 
     ListBillingAdjustmentRequestsInput.add_member(:agreement_id, Shapes::ShapeRef.new(shape: AgreementId, location_name: "agreementId"))
     ListBillingAdjustmentRequestsInput.add_member(:status, Shapes::ShapeRef.new(shape: BillingAdjustmentStatus, location_name: "status"))
@@ -818,6 +1228,18 @@ module Aws::MarketplaceAgreement
     PricingCurrencyAmount.add_member(:currency_code, Shapes::ShapeRef.new(shape: CurrencyCode, location_name: "currencyCode"))
     PricingCurrencyAmount.struct_class = Types::PricingCurrencyAmount
 
+    ProcurementToolApprover.add_member(:name, Shapes::ShapeRef.new(shape: ApproverName, required: true, location_name: "name"))
+    ProcurementToolApprover.struct_class = Types::ProcurementToolApprover
+
+    ProcurementToolApproverOutcome.add_member(:note, Shapes::ShapeRef.new(shape: AgreementApprovalNote, location_name: "note"))
+    ProcurementToolApproverOutcome.add_member(:status, Shapes::ShapeRef.new(shape: ApproverOutcomeStatus, required: true, location_name: "status"))
+    ProcurementToolApproverOutcome.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "updatedAt"))
+    ProcurementToolApproverOutcome.add_member(:approver_outcome_id, Shapes::ShapeRef.new(shape: ApproverOutcomeId, location_name: "approverOutcomeId"))
+    ProcurementToolApproverOutcome.add_member(:name, Shapes::ShapeRef.new(shape: ApproverName, required: true, location_name: "name"))
+    ProcurementToolApproverOutcome.add_member(:purchase_orders, Shapes::ShapeRef.new(shape: AgreementApprovalPurchaseOrders, location_name: "purchaseOrders"))
+    ProcurementToolApproverOutcome.add_member(:overridden_by, Shapes::ShapeRef.new(shape: CallerIdentity, location_name: "overriddenBy"))
+    ProcurementToolApproverOutcome.struct_class = Types::ProcurementToolApproverOutcome
+
     ProposalSummary.add_member(:resources, Shapes::ShapeRef.new(shape: Resources, location_name: "resources"))
     ProposalSummary.add_member(:offer_id, Shapes::ShapeRef.new(shape: OfferId, location_name: "offerId"))
     ProposalSummary.add_member(:offer_set_id, Shapes::ShapeRef.new(shape: OfferSetId, location_name: "offerSetId"))
@@ -846,6 +1268,11 @@ module Aws::MarketplaceAgreement
     RecurringPaymentTerm.add_member(:billing_period, Shapes::ShapeRef.new(shape: BoundedString, location_name: "billingPeriod"))
     RecurringPaymentTerm.add_member(:price, Shapes::ShapeRef.new(shape: BoundedString, location_name: "price"))
     RecurringPaymentTerm.struct_class = Types::RecurringPaymentTerm
+
+    RejectAgreementApprovalInput.add_member(:buyer_agreement_approval_rejection_input, Shapes::ShapeRef.new(shape: BuyerAgreementApprovalRejectionInput, location_name: "buyerAgreementApprovalRejectionInput"))
+    RejectAgreementApprovalInput.struct_class = Types::RejectAgreementApprovalInput
+
+    RejectAgreementApprovalOutput.struct_class = Types::RejectAgreementApprovalOutput
 
     RejectAgreementCancellationRequestInput.add_member(:agreement_id, Shapes::ShapeRef.new(shape: AgreementId, required: true, location_name: "agreementId"))
     RejectAgreementCancellationRequestInput.add_member(:agreement_cancellation_request_id, Shapes::ShapeRef.new(shape: AgreementCancellationRequestId, required: true, location_name: "agreementCancellationRequestId"))
@@ -991,6 +1418,14 @@ module Aws::MarketplaceAgreement
     Sort.add_member(:sort_order, Shapes::ShapeRef.new(shape: SortOrder, location_name: "sortOrder"))
     Sort.struct_class = Types::Sort
 
+    StartAgreementApprovalsInput.add_member(:agreement_request_id, Shapes::ShapeRef.new(shape: AgreementRequestId, required: true, location_name: "agreementRequestId"))
+    StartAgreementApprovalsInput.add_member(:plan_inputs, Shapes::ShapeRef.new(shape: AgreementApprovalPlanInputs, required: true, location_name: "planInputs"))
+    StartAgreementApprovalsInput.add_member(:purchase_orders, Shapes::ShapeRef.new(shape: AgreementApprovalPurchaseOrders, location_name: "purchaseOrders"))
+    StartAgreementApprovalsInput.struct_class = Types::StartAgreementApprovalsInput
+
+    StartAgreementApprovalsOutput.add_member(:approval_summaries, Shapes::ShapeRef.new(shape: AgreementApprovalSummaries, required: true, location_name: "approvalSummaries"))
+    StartAgreementApprovalsOutput.struct_class = Types::StartAgreementApprovalsOutput
+
     SupportTerm.add_member(:type, Shapes::ShapeRef.new(shape: UnversionedTermType, location_name: "type"))
     SupportTerm.add_member(:id, Shapes::ShapeRef.new(shape: TermId, location_name: "id"))
     SupportTerm.add_member(:refund_policy, Shapes::ShapeRef.new(shape: BoundedString, location_name: "refundPolicy"))
@@ -1084,6 +1519,20 @@ module Aws::MarketplaceAgreement
         "uid" => "marketplace-agreement-2020-03-01",
       }
 
+      api.add_operation(:accept_agreement_approval, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AcceptAgreementApproval"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: AcceptAgreementApprovalInput)
+        o.output = Shapes::ShapeRef.new(shape: AcceptAgreementApprovalOutput)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
       api.add_operation(:accept_agreement_cancellation_request, Seahorse::Model::Operation.new.tap do |o|
         o.name = "AcceptAgreementCancellationRequest"
         o.http_method = "POST"
@@ -1122,6 +1571,7 @@ module Aws::MarketplaceAgreement
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
@@ -1181,6 +1631,20 @@ module Aws::MarketplaceAgreement
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
+      api.add_operation(:cancel_agreement_request, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CancelAgreementRequest"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CancelAgreementRequestInput)
+        o.output = Shapes::ShapeRef.new(shape: CancelAgreementRequestOutput)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
       api.add_operation(:create_agreement_request, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateAgreementRequest"
         o.http_method = "POST"
@@ -1209,6 +1673,19 @@ module Aws::MarketplaceAgreement
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
+      api.add_operation(:get_agreement_approval, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetAgreementApproval"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetAgreementApprovalInput)
+        o.output = Shapes::ShapeRef.new(shape: GetAgreementApprovalOutput)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
       api.add_operation(:get_agreement_cancellation_request, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetAgreementCancellationRequest"
         o.http_method = "POST"
@@ -1217,6 +1694,19 @@ module Aws::MarketplaceAgreement
         o.output = Shapes::ShapeRef.new(shape: GetAgreementCancellationRequestOutput)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:get_agreement_contacts, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetAgreementContacts"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetAgreementContactsInput)
+        o.output = Shapes::ShapeRef.new(shape: GetAgreementContactsOutput)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
@@ -1254,6 +1744,57 @@ module Aws::MarketplaceAgreement
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
+      api.add_operation(:get_agreement_request, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetAgreementRequest"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetAgreementRequestInput)
+        o.output = Shapes::ShapeRef.new(shape: GetAgreementRequestOutput)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:get_agreement_request_approval_plans, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetAgreementRequestApprovalPlans"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetAgreementRequestApprovalPlansInput)
+        o.output = Shapes::ShapeRef.new(shape: GetAgreementRequestApprovalPlansOutput)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:get_agreement_request_terms, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetAgreementRequestTerms"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetAgreementRequestTermsInput)
+        o.output = Shapes::ShapeRef.new(shape: GetAgreementRequestTermsOutput)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:get_agreement_terms, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetAgreementTerms"
         o.http_method = "POST"
@@ -1284,6 +1825,24 @@ module Aws::MarketplaceAgreement
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:list_agreement_approvals, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListAgreementApprovals"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListAgreementApprovalsInput)
+        o.output = Shapes::ShapeRef.new(shape: ListAgreementApprovalsOutput)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_agreement_cancellation_requests, Seahorse::Model::Operation.new.tap do |o|
@@ -1359,6 +1918,24 @@ module Aws::MarketplaceAgreement
         )
       end)
 
+      api.add_operation(:list_agreement_requests, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListAgreementRequests"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListAgreementRequestsInput)
+        o.output = Shapes::ShapeRef.new(shape: ListAgreementRequestsOutput)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_billing_adjustment_requests, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListBillingAdjustmentRequests"
         o.http_method = "POST"
@@ -1375,6 +1952,20 @@ module Aws::MarketplaceAgreement
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:reject_agreement_approval, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "RejectAgreementApproval"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: RejectAgreementApprovalInput)
+        o.output = Shapes::ShapeRef.new(shape: RejectAgreementApprovalOutput)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
       api.add_operation(:reject_agreement_cancellation_request, Seahorse::Model::Operation.new.tap do |o|
@@ -1445,6 +2036,20 @@ module Aws::MarketplaceAgreement
         o.output = Shapes::ShapeRef.new(shape: SendAgreementPaymentRequestOutput)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:start_agreement_approvals, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartAgreementApprovals"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: StartAgreementApprovalsInput)
+        o.output = Shapes::ShapeRef.new(shape: StartAgreementApprovalsOutput)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)

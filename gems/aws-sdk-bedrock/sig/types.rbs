@@ -62,6 +62,22 @@ module Aws::Bedrock
       SENSITIVE: []
     end
 
+    class ArchiveProjectRequest
+      attr_accessor project_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class ArchiveProjectResponse
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor status: ("active" | "archived")
+      attr_accessor created_at: ::Time
+      attr_accessor archived_at: ::Time
+      attr_accessor data_retention: Types::ProjectDataRetention
+      SENSITIVE: [:name]
+    end
+
     class AutomatedEvaluationConfig
       attr_accessor dataset_metric_configs: ::Array[Types::EvaluationDatasetMetricConfig]
       attr_accessor evaluator_model_config: Types::EvaluatorModelConfig
@@ -468,7 +484,7 @@ module Aws::Bedrock
       attr_accessor unused_variables: ::Array[::String]
       attr_accessor conflicting_rules: ::Array[::String]
       attr_accessor disjoint_rule_sets: ::Array[Types::AutomatedReasoningPolicyDisjointRuleSet]
-      SENSITIVE: []
+      SENSITIVE: [:unused_types, :unused_variables]
     end
 
     class AutomatedReasoningPolicyDefinitionRule
@@ -542,7 +558,7 @@ module Aws::Bedrock
     class AutomatedReasoningPolicyDisjointRuleSet
       attr_accessor variables: ::Array[::String]
       attr_accessor rules: ::Array[::String]
-      SENSITIVE: []
+      SENSITIVE: [:variables]
     end
 
     class AutomatedReasoningPolicyFidelityReport
@@ -551,7 +567,7 @@ module Aws::Bedrock
       attr_accessor rule_reports: ::Hash[::String, Types::AutomatedReasoningPolicyRuleReport]
       attr_accessor variable_reports: ::Hash[::String, Types::AutomatedReasoningPolicyVariableReport]
       attr_accessor document_sources: ::Array[Types::AutomatedReasoningPolicyReportSourceDocument]
-      SENSITIVE: []
+      SENSITIVE: [:variable_reports]
     end
 
     class AutomatedReasoningPolicyGenerateFidelityReportContent
@@ -641,7 +657,7 @@ module Aws::Bedrock
       attr_accessor grounding_justifications: ::Array[::String]
       attr_accessor accuracy_score: ::Float
       attr_accessor accuracy_justification: ::String
-      SENSITIVE: [:accuracy_justification]
+      SENSITIVE: [:grounding_justifications, :accuracy_justification]
     end
 
     class AutomatedReasoningPolicyScenario
@@ -789,7 +805,7 @@ module Aws::Bedrock
       attr_accessor grounding_justifications: ::Array[::String]
       attr_accessor accuracy_score: ::Float
       attr_accessor accuracy_justification: ::String
-      SENSITIVE: [:policy_variable, :accuracy_justification]
+      SENSITIVE: [:policy_variable, :grounding_justifications, :accuracy_justification]
     end
 
     class AutomatedReasoningPolicyWorkflowTypeContent
@@ -851,7 +867,7 @@ module Aws::Bedrock
 
     class BatchDeleteEvaluationJobRequest
       attr_accessor job_identifiers: ::Array[::String]
-      SENSITIVE: []
+      SENSITIVE: [:job_identifiers]
     end
 
     class BatchDeleteEvaluationJobResponse
@@ -1169,6 +1185,24 @@ module Aws::Bedrock
       SENSITIVE: []
     end
 
+    class CreateProjectRequest
+      attr_accessor name: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor data_retention: Types::ProjectDataRetention
+      SENSITIVE: [:name]
+    end
+
+    class CreateProjectResponse
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor status: ("active" | "archived")
+      attr_accessor created_at: ::Time
+      attr_accessor archived_at: ::Time
+      attr_accessor data_retention: Types::ProjectDataRetention
+      SENSITIVE: [:name]
+    end
+
     class CreatePromptRouterRequest
       attr_accessor client_request_token: ::String
       attr_accessor prompt_router_name: ::String
@@ -1284,6 +1318,21 @@ module Aws::Bedrock
       SENSITIVE: []
     end
 
+    class DataRetentionStorageConfiguration
+      attr_accessor kms_key_arn: ::String
+      attr_accessor s3_bucket_arn: ::String
+      attr_accessor s3_bucket_owner: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteAccountDataRetentionStorageRequest
+      attr_accessor model_provider: ("anthropic" | "openai")
+      SENSITIVE: []
+    end
+
+    class DeleteAccountDataRetentionStorageResponse < Aws::EmptyStructure
+    end
+
     class DeleteAutomatedReasoningPolicyBuildWorkflowRequest
       attr_accessor policy_arn: ::String
       attr_accessor build_workflow_id: ::String
@@ -1384,6 +1433,23 @@ module Aws::Bedrock
     class DeleteModelInvocationLoggingConfigurationResponse < Aws::EmptyStructure
     end
 
+    class DeleteOrganizationDataRetentionStorageRequest
+      attr_accessor model_provider: ("anthropic" | "openai")
+      SENSITIVE: []
+    end
+
+    class DeleteOrganizationDataRetentionStorageResponse < Aws::EmptyStructure
+    end
+
+    class DeleteProjectDataRetentionStorageRequest
+      attr_accessor project_identifier: ::String
+      attr_accessor model_provider: ("anthropic" | "openai")
+      SENSITIVE: []
+    end
+
+    class DeleteProjectDataRetentionStorageResponse < Aws::EmptyStructure
+    end
+
     class DeletePromptRouterRequest
       attr_accessor prompt_router_arn: ::String
       SENSITIVE: []
@@ -1482,7 +1548,7 @@ module Aws::Bedrock
       attr_accessor task_type: ("Summarization" | "Classification" | "QuestionAndAnswer" | "Generation" | "Custom")
       attr_accessor dataset: Types::EvaluationDataset
       attr_accessor metric_names: ::Array[::String]
-      SENSITIVE: []
+      SENSITIVE: [:metric_names]
     end
 
     class EvaluationInferenceConfig
@@ -1686,6 +1752,22 @@ module Aws::Bedrock
     class GetAccountDataRetentionResponse
       attr_accessor mode: ("default" | "none" | "aws_review" | "provider_data_share" | "inherit")
       attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class GetAccountDataRetentionStorageRequest
+      attr_accessor model_provider: ("anthropic" | "openai")
+      SENSITIVE: []
+    end
+
+    class GetAccountDataRetentionStorageResponse
+      attr_accessor scope: ("account" | "organization" | "project")
+      attr_accessor model_provider: ("anthropic" | "openai")
+      attr_accessor storage_destination: ("customer_managed" | "amazon_managed")
+      attr_accessor storage_configuration: Types::DataRetentionStorageConfiguration
+      attr_accessor updated_at: ::Time
+      attr_accessor kms_key_status: ("pending" | "active" | "access_denied")
+      attr_accessor s3_bucket_status: ("pending" | "active" | "access_denied")
       SENSITIVE: []
     end
 
@@ -1896,6 +1978,7 @@ module Aws::Bedrock
 
     class GetFoundationModelRequest
       attr_accessor model_identifier: ::String
+      attr_accessor project_identifier: ::String
       SENSITIVE: []
     end
 
@@ -1931,7 +2014,7 @@ module Aws::Bedrock
       attr_accessor blocked_input_messaging: ::String
       attr_accessor blocked_outputs_messaging: ::String
       attr_accessor kms_key_arn: ::String
-      SENSITIVE: [:name, :description, :blocked_input_messaging, :blocked_outputs_messaging]
+      SENSITIVE: [:name, :description, :status_reasons, :failure_recommendations, :blocked_input_messaging, :blocked_outputs_messaging]
     end
 
     class GetImportedModelRequest
@@ -1955,6 +2038,7 @@ module Aws::Bedrock
 
     class GetInferenceProfileRequest
       attr_accessor inference_profile_identifier: ::String
+      attr_accessor project_identifier: ::String
       SENSITIVE: []
     end
 
@@ -2092,6 +2176,56 @@ module Aws::Bedrock
       SENSITIVE: []
     end
 
+    class GetOrganizationDataRetentionStorageRequest
+      attr_accessor model_provider: ("anthropic" | "openai")
+      SENSITIVE: []
+    end
+
+    class GetOrganizationDataRetentionStorageResponse
+      attr_accessor scope: ("account" | "organization" | "project")
+      attr_accessor model_provider: ("anthropic" | "openai")
+      attr_accessor storage_destination: ("customer_managed" | "amazon_managed")
+      attr_accessor storage_configuration: Types::DataRetentionStorageConfiguration
+      attr_accessor updated_at: ::Time
+      attr_accessor kms_key_status: ("pending" | "active" | "access_denied")
+      attr_accessor s3_bucket_status: ("pending" | "active" | "access_denied")
+      SENSITIVE: []
+    end
+
+    class GetProjectDataRetentionStorageRequest
+      attr_accessor project_identifier: ::String
+      attr_accessor model_provider: ("anthropic" | "openai")
+      SENSITIVE: []
+    end
+
+    class GetProjectDataRetentionStorageResponse
+      attr_accessor scope: ("account" | "organization" | "project")
+      attr_accessor model_provider: ("anthropic" | "openai")
+      attr_accessor storage_destination: ("customer_managed" | "amazon_managed")
+      attr_accessor storage_configuration: Types::DataRetentionStorageConfiguration
+      attr_accessor updated_at: ::Time
+      attr_accessor kms_key_status: ("pending" | "active" | "access_denied")
+      attr_accessor s3_bucket_status: ("pending" | "active" | "access_denied")
+      attr_accessor project_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetProjectRequest
+      attr_accessor project_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetProjectResponse
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor status: ("active" | "archived")
+      attr_accessor created_at: ::Time
+      attr_accessor archived_at: ::Time
+      attr_accessor data_retention: Types::ProjectDataRetention
+      SENSITIVE: [:name]
+    end
+
     class GetPromptRouterRequest
       attr_accessor prompt_router_arn: ::String
       SENSITIVE: []
@@ -2143,6 +2277,63 @@ module Aws::Bedrock
       SENSITIVE: []
     end
 
+    class GetTrustedAccessProgramAccountEnrollmentRequest
+      attr_accessor program_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetTrustedAccessProgramAccountEnrollmentResponse
+      attr_accessor opt_in: ("inherit" | "enabled" | "disabled")
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class GetTrustedAccessProgramOrganizationEnrollmentRequest
+      attr_accessor program_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetTrustedAccessProgramOrganizationEnrollmentResponse
+      attr_accessor opt_in: ("inherit" | "enabled" | "disabled")
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class GetTrustedAccessProgramProjectEnrollmentRequest
+      attr_accessor program_identifier: ::String
+      attr_accessor project_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetTrustedAccessProgramProjectEnrollmentResponse
+      attr_accessor opt_in: ("inherit" | "enabled" | "disabled")
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class GetTrustedAccessProgramRequest
+      attr_accessor program_identifier: ::String
+      attr_accessor project_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetTrustedAccessProgramResponse
+      attr_accessor program_id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor provider_name: ::String
+      attr_accessor details_url: ::String
+      attr_accessor enrollment_url: ::String
+      attr_accessor status: ("requestable" | "eligible" | "enabled" | "disabled" | "revoked")
+      attr_accessor status_reason: ::String
+      attr_accessor source: ("organization" | "account" | "project" | "program_default")
+      attr_accessor eligibility_scope: ("organization" | "account" | "project" | "program_default")
+      attr_accessor resolved_for: Types::TrustedAccessResolutionContext
+      attr_accessor opt_in: ("inherit" | "enabled" | "disabled")
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
     class GetUseCaseForModelAccessRequest < Aws::EmptyStructure
     end
 
@@ -2190,7 +2381,7 @@ module Aws::Bedrock
       attr_accessor output_action: ("BLOCK" | "NONE")
       attr_accessor input_enabled: bool
       attr_accessor output_enabled: bool
-      SENSITIVE: [:input_action, :output_action]
+      SENSITIVE: [:input_modalities, :output_modalities, :input_action, :output_action]
     end
 
     class GuardrailContentFilterConfig
@@ -2203,7 +2394,7 @@ module Aws::Bedrock
       attr_accessor output_action: ("BLOCK" | "NONE")
       attr_accessor input_enabled: bool
       attr_accessor output_enabled: bool
-      SENSITIVE: [:input_action, :output_action]
+      SENSITIVE: [:input_modalities, :output_modalities, :input_action, :output_action]
     end
 
     class GuardrailContentFiltersTier
@@ -2373,7 +2564,7 @@ module Aws::Bedrock
       attr_accessor output_action: ("BLOCK" | "NONE")
       attr_accessor input_enabled: bool
       attr_accessor output_enabled: bool
-      SENSITIVE: [:name, :definition, :input_action, :output_action]
+      SENSITIVE: [:name, :definition, :examples, :input_action, :output_action]
     end
 
     class GuardrailTopicConfig
@@ -2385,7 +2576,7 @@ module Aws::Bedrock
       attr_accessor output_action: ("BLOCK" | "NONE")
       attr_accessor input_enabled: bool
       attr_accessor output_enabled: bool
-      SENSITIVE: [:name, :definition, :input_action, :output_action]
+      SENSITIVE: [:name, :definition, :examples, :input_action, :output_action]
     end
 
     class GuardrailTopicPolicy
@@ -2463,7 +2654,7 @@ module Aws::Bedrock
     class ImplicitFilterConfiguration
       attr_accessor metadata_attributes: ::Array[Types::MetadataAttributeSchema]
       attr_accessor model_arn: ::String
-      SENSITIVE: []
+      SENSITIVE: [:metadata_attributes]
     end
 
     class ImportedModelSummary
@@ -2741,6 +2932,7 @@ module Aws::Bedrock
       attr_accessor by_customization_type: ("FINE_TUNING" | "CONTINUED_PRE_TRAINING" | "DISTILLATION")
       attr_accessor by_output_modality: ("TEXT" | "IMAGE" | "EMBEDDING")
       attr_accessor by_inference_type: ("ON_DEMAND" | "PROVISIONED")
+      attr_accessor project_identifier: ::String
       SENSITIVE: []
     end
 
@@ -2783,6 +2975,7 @@ module Aws::Bedrock
       attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
       attr_accessor type_equals: ("SYSTEM_DEFINED" | "APPLICATION")
+      attr_accessor project_identifier: ::String
       SENSITIVE: []
     end
 
@@ -2879,6 +3072,19 @@ module Aws::Bedrock
       SENSITIVE: []
     end
 
+    class ListProjectsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor status_filter: ("active" | "archived")
+      SENSITIVE: []
+    end
+
+    class ListProjectsResponse
+      attr_accessor project_summaries: ::Array[Types::ProjectSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class ListPromptRoutersRequest
       attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
@@ -2918,6 +3124,19 @@ module Aws::Bedrock
 
     class ListTagsForResourceResponse
       attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class ListTrustedAccessProgramsRequest
+      attr_accessor project_identifier: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTrustedAccessProgramsResponse
+      attr_accessor program_summaries: ::Array[Types::TrustedAccessProgramSummary]
+      attr_accessor next_token: ::String
       SENSITIVE: []
     end
 
@@ -3126,6 +3345,22 @@ module Aws::Bedrock
       SENSITIVE: []
     end
 
+    class ProjectDataRetention
+      attr_accessor mode: ("default" | "none" | "aws_review" | "provider_data_share" | "inherit")
+      SENSITIVE: []
+    end
+
+    class ProjectSummary
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor status: ("active" | "archived")
+      attr_accessor created_at: ::Time
+      attr_accessor archived_at: ::Time
+      attr_accessor data_retention: Types::ProjectDataRetention
+      SENSITIVE: [:name]
+    end
+
     class PromptRouterSummary
       attr_accessor prompt_router_name: ::String
       attr_accessor routing_criteria: Types::RoutingCriteria
@@ -3177,6 +3412,24 @@ module Aws::Bedrock
       SENSITIVE: []
     end
 
+    class PutAccountDataRetentionStorageRequest
+      attr_accessor model_provider: ("anthropic" | "openai")
+      attr_accessor storage_destination: ("customer_managed" | "amazon_managed")
+      attr_accessor storage_configuration: Types::DataRetentionStorageConfiguration
+      SENSITIVE: []
+    end
+
+    class PutAccountDataRetentionStorageResponse
+      attr_accessor scope: ("account" | "organization" | "project")
+      attr_accessor model_provider: ("anthropic" | "openai")
+      attr_accessor storage_destination: ("customer_managed" | "amazon_managed")
+      attr_accessor storage_configuration: Types::DataRetentionStorageConfiguration
+      attr_accessor updated_at: ::Time
+      attr_accessor kms_key_status: ("pending" | "active" | "access_denied")
+      attr_accessor s3_bucket_status: ("pending" | "active" | "access_denied")
+      SENSITIVE: []
+    end
+
     class PutEnforcedGuardrailConfigurationRequest
       attr_accessor config_id: ::String
       attr_accessor guardrail_inference_config: Types::AccountEnforcedGuardrailInferenceInputConfiguration
@@ -3198,6 +3451,44 @@ module Aws::Bedrock
     class PutModelInvocationLoggingConfigurationResponse < Aws::EmptyStructure
     end
 
+    class PutOrganizationDataRetentionStorageRequest
+      attr_accessor model_provider: ("anthropic" | "openai")
+      attr_accessor storage_destination: ("customer_managed" | "amazon_managed")
+      attr_accessor storage_configuration: Types::DataRetentionStorageConfiguration
+      SENSITIVE: []
+    end
+
+    class PutOrganizationDataRetentionStorageResponse
+      attr_accessor scope: ("account" | "organization" | "project")
+      attr_accessor model_provider: ("anthropic" | "openai")
+      attr_accessor storage_destination: ("customer_managed" | "amazon_managed")
+      attr_accessor storage_configuration: Types::DataRetentionStorageConfiguration
+      attr_accessor updated_at: ::Time
+      attr_accessor kms_key_status: ("pending" | "active" | "access_denied")
+      attr_accessor s3_bucket_status: ("pending" | "active" | "access_denied")
+      SENSITIVE: []
+    end
+
+    class PutProjectDataRetentionStorageRequest
+      attr_accessor project_identifier: ::String
+      attr_accessor model_provider: ("anthropic" | "openai")
+      attr_accessor storage_destination: ("customer_managed" | "amazon_managed")
+      attr_accessor storage_configuration: Types::DataRetentionStorageConfiguration
+      SENSITIVE: []
+    end
+
+    class PutProjectDataRetentionStorageResponse
+      attr_accessor scope: ("account" | "organization" | "project")
+      attr_accessor model_provider: ("anthropic" | "openai")
+      attr_accessor storage_destination: ("customer_managed" | "amazon_managed")
+      attr_accessor storage_configuration: Types::DataRetentionStorageConfiguration
+      attr_accessor updated_at: ::Time
+      attr_accessor kms_key_status: ("pending" | "active" | "access_denied")
+      attr_accessor s3_bucket_status: ("pending" | "active" | "access_denied")
+      attr_accessor project_arn: ::String
+      SENSITIVE: []
+    end
+
     class PutResourcePolicyRequest
       attr_accessor resource_arn: ::String
       attr_accessor resource_policy: ::String
@@ -3206,6 +3497,43 @@ module Aws::Bedrock
 
     class PutResourcePolicyResponse
       attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class PutTrustedAccessProgramAccountEnrollmentRequest
+      attr_accessor program_identifier: ::String
+      attr_accessor opt_in: ("inherit" | "enabled" | "disabled")
+      SENSITIVE: []
+    end
+
+    class PutTrustedAccessProgramAccountEnrollmentResponse
+      attr_accessor opt_in: ("inherit" | "enabled" | "disabled")
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class PutTrustedAccessProgramOrganizationEnrollmentRequest
+      attr_accessor program_identifier: ::String
+      attr_accessor opt_in: ("inherit" | "enabled" | "disabled")
+      SENSITIVE: []
+    end
+
+    class PutTrustedAccessProgramOrganizationEnrollmentResponse
+      attr_accessor opt_in: ("inherit" | "enabled" | "disabled")
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class PutTrustedAccessProgramProjectEnrollmentRequest
+      attr_accessor program_identifier: ::String
+      attr_accessor project_identifier: ::String
+      attr_accessor opt_in: ("inherit" | "enabled" | "disabled")
+      SENSITIVE: []
+    end
+
+    class PutTrustedAccessProgramProjectEnrollmentResponse
+      attr_accessor opt_in: ("inherit" | "enabled" | "disabled")
+      attr_accessor updated_at: ::Time
       SENSITIVE: []
     end
 
@@ -3350,7 +3678,7 @@ module Aws::Bedrock
       attr_accessor and_all: ::Array[Types::RetrievalFilter]
       attr_accessor or_all: ::Array[Types::RetrievalFilter]
       attr_accessor unknown: untyped
-      SENSITIVE: []
+      SENSITIVE: [:and_all, :or_all]
 
       class Equals < RetrievalFilter
       end
@@ -3468,6 +3796,37 @@ module Aws::Bedrock
       SENSITIVE: []
     end
 
+    class StartTrustedAccessProgramAccountApplicationRequest
+      attr_accessor program_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class StartTrustedAccessProgramAccountApplicationResponse
+      attr_accessor result: Types::TrustedAccessProgramApplicationResult
+      SENSITIVE: []
+    end
+
+    class StartTrustedAccessProgramOrganizationApplicationRequest
+      attr_accessor program_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class StartTrustedAccessProgramOrganizationApplicationResponse
+      attr_accessor result: Types::TrustedAccessProgramApplicationResult
+      SENSITIVE: []
+    end
+
+    class StartTrustedAccessProgramProjectApplicationRequest
+      attr_accessor program_identifier: ::String
+      attr_accessor project_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class StartTrustedAccessProgramProjectApplicationResponse
+      attr_accessor result: Types::TrustedAccessProgramApplicationResult
+      SENSITIVE: []
+    end
+
     class StatusDetails
       attr_accessor validation_details: Types::ValidationDetails
       attr_accessor data_processing_details: Types::DataProcessingDetails
@@ -3578,6 +3937,47 @@ module Aws::Bedrock
       SENSITIVE: []
     end
 
+    class TrustedAccessProgramApplicationResult
+      attr_accessor provider_handoff: Types::TrustedAccessProgramProviderHandoff
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class ProviderHandoff < TrustedAccessProgramApplicationResult
+      end
+      class Unknown < TrustedAccessProgramApplicationResult
+      end
+    end
+
+    class TrustedAccessProgramProviderHandoff
+      attr_accessor enrollment_url: ::String
+      attr_accessor application_token: ::String
+      attr_accessor application_token_expires_at: ::Time
+      SENSITIVE: [:application_token]
+    end
+
+    class TrustedAccessProgramSummary
+      attr_accessor program_id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor provider_name: ::String
+      attr_accessor details_url: ::String
+      attr_accessor enrollment_url: ::String
+      attr_accessor status: ("requestable" | "eligible" | "enabled" | "disabled" | "revoked")
+      attr_accessor status_reason: ::String
+      attr_accessor source: ("organization" | "account" | "project" | "program_default")
+      attr_accessor eligibility_scope: ("organization" | "account" | "project" | "program_default")
+      attr_accessor resolved_for: Types::TrustedAccessResolutionContext
+      attr_accessor opt_in: ("inherit" | "enabled" | "disabled")
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class TrustedAccessResolutionContext
+      attr_accessor account_id: ::String
+      attr_accessor project_arn: ::String
+      SENSITIVE: []
+    end
+
     class UntagResourceRequest
       attr_accessor resource_arn: ::String
       attr_accessor tag_keys: ::Array[::String]
@@ -3683,6 +4083,24 @@ module Aws::Bedrock
     class UpdateMarketplaceModelEndpointResponse
       attr_accessor marketplace_model_endpoint: Types::MarketplaceModelEndpoint
       SENSITIVE: []
+    end
+
+    class UpdateProjectRequest
+      attr_accessor project_identifier: ::String
+      attr_accessor name: ::String
+      attr_accessor data_retention: Types::ProjectDataRetention
+      SENSITIVE: [:name]
+    end
+
+    class UpdateProjectResponse
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor status: ("active" | "archived")
+      attr_accessor created_at: ::Time
+      attr_accessor archived_at: ::Time
+      attr_accessor data_retention: Types::ProjectDataRetention
+      SENSITIVE: [:name]
     end
 
     class UpdateProvisionedModelThroughputRequest

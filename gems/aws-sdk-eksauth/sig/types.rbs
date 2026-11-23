@@ -28,6 +28,7 @@ module Aws::EKSAuth
       attr_accessor pod_identity_association: Types::PodIdentityAssociation
       attr_accessor assumed_role_user: Types::AssumedRoleUser
       attr_accessor credentials: Types::Credentials
+      attr_accessor workload_identity_provider_arn: ::String
       SENSITIVE: [:credentials]
     end
 

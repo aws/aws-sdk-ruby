@@ -48,6 +48,17 @@ module Aws::NetworkManager
       SENSITIVE: []
     end
 
+    class AssociateContextStoreRequest
+      attr_accessor context_store_id: ::String
+      attr_accessor transit_gateway_arn: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateContextStoreResponse
+      attr_accessor context_store_association: Types::ContextStoreAssociation
+      SENSITIVE: []
+    end
+
     class AssociateCustomerGatewayRequest
       attr_accessor customer_gateway_arn: ::String
       attr_accessor global_network_id: ::String
@@ -246,6 +257,42 @@ module Aws::NetworkManager
       SENSITIVE: []
     end
 
+    class ContextChange
+      attr_accessor change_type: ("ADDED" | "REMOVED")
+      attr_accessor context: Types::ContextEntry
+      SENSITIVE: []
+    end
+
+    class ContextEntry
+      attr_accessor context_id: ::String
+      attr_accessor context_type: ::String
+      attr_accessor segment_type: ::String
+      attr_accessor public_id: ::String
+      attr_accessor region: ::String
+      attr_accessor availability_zone: ::String
+      attr_accessor attachment_type: ::String
+      SENSITIVE: []
+    end
+
+    class ContextStore
+      attr_accessor global_network_id: ::String
+      attr_accessor context_store_id: ::String
+      attr_accessor context_store_arn: ::String
+      attr_accessor description: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor state: ("PENDING" | "AVAILABLE" | "UPDATING" | "DELETING" | "DELETED")
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class ContextStoreAssociation
+      attr_accessor context_store_id: ::String
+      attr_accessor transit_gateway_arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor state: ("ASSOCIATING" | "ASSOCIATED" | "DISASSOCIATING" | "FAILED")
+      SENSITIVE: []
+    end
+
     class CoreNetwork
       attr_accessor global_network_id: ::String
       attr_accessor core_network_id: ::String
@@ -310,6 +357,7 @@ module Aws::NetworkManager
       attr_accessor peer_edge_locations: ::Array[::String]
       attr_accessor attachment_id: ::String
       attr_accessor routing_policy_association_details: ::Array[Types::RoutingPolicyAssociationDetail]
+      attr_accessor multipath_resilience: Types::MultipathResilienceChangeValues
       SENSITIVE: []
     end
 
@@ -452,6 +500,19 @@ module Aws::NetworkManager
 
     class CreateConnectionResponse
       attr_accessor connection: Types::Connection
+      SENSITIVE: []
+    end
+
+    class CreateContextStoreRequest
+      attr_accessor global_network_id: ::String
+      attr_accessor description: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateContextStoreResponse
+      attr_accessor context_store: Types::ContextStore
       SENSITIVE: []
     end
 
@@ -663,6 +724,16 @@ module Aws::NetworkManager
       SENSITIVE: []
     end
 
+    class DeleteContextStoreRequest
+      attr_accessor context_store_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteContextStoreResponse
+      attr_accessor context_store: Types::ContextStore
+      SENSITIVE: []
+    end
+
     class DeleteCoreNetworkPolicyVersionRequest
       attr_accessor core_network_id: ::String
       attr_accessor policy_version_id: ::Integer
@@ -816,6 +887,17 @@ module Aws::NetworkManager
       SENSITIVE: []
     end
 
+    class DisassociateContextStoreRequest
+      attr_accessor context_store_id: ::String
+      attr_accessor transit_gateway_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DisassociateContextStoreResponse
+      attr_accessor context_store_association: Types::ContextStoreAssociation
+      SENSITIVE: []
+    end
+
     class DisassociateCustomerGatewayRequest
       attr_accessor global_network_id: ::String
       attr_accessor customer_gateway_arn: ::String
@@ -911,6 +993,37 @@ module Aws::NetworkManager
     class GetConnectionsResponse
       attr_accessor connections: ::Array[Types::Connection]
       attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetContextStoreAssociationRequest
+      attr_accessor context_store_id: ::String
+      attr_accessor transit_gateway_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetContextStoreAssociationResponse
+      attr_accessor context_store_association: Types::ContextStoreAssociation
+      SENSITIVE: []
+    end
+
+    class GetContextStoreRequest
+      attr_accessor context_store_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetContextStoreResponse
+      attr_accessor context_store: Types::ContextStore
+      SENSITIVE: []
+    end
+
+    class GetContextVersionRequest
+      attr_accessor context_store_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetContextVersionResponse
+      attr_accessor version_id: ::String
       SENSITIVE: []
     end
 
@@ -1334,6 +1447,62 @@ module Aws::NetworkManager
       SENSITIVE: []
     end
 
+    class ListContextChangesRequest
+      attr_accessor context_store_id: ::String
+      attr_accessor from_version_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListContextChangesResponse
+      attr_accessor context_changes: ::Array[Types::ContextChange]
+      attr_accessor from_version_id: ::String
+      attr_accessor to_version_id: ::String
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListContextStoreAssociationsRequest
+      attr_accessor context_store_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListContextStoreAssociationsResponse
+      attr_accessor context_store_associations: ::Array[Types::ContextStoreAssociation]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListContextStoresRequest
+      attr_accessor global_network_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListContextStoresResponse
+      attr_accessor context_stores: ::Array[Types::ContextStore]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListContextsRequest
+      attr_accessor context_store_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListContextsResponse
+      attr_accessor contexts: ::Array[Types::ContextEntry]
+      attr_accessor next_token: ::String
+      attr_accessor version_id: ::String
+      SENSITIVE: []
+    end
+
     class ListCoreNetworkPolicyVersionsRequest
       attr_accessor core_network_id: ::String
       attr_accessor max_results: ::Integer
@@ -1439,6 +1608,12 @@ module Aws::NetworkManager
       attr_accessor address: ::String
       attr_accessor latitude: ::String
       attr_accessor longitude: ::String
+      SENSITIVE: []
+    end
+
+    class MultipathResilienceChangeValues
+      attr_accessor mode: ("best-effort" | "disabled")
+      attr_accessor edge_sets: ::Array[::Array[::String]]
       SENSITIVE: []
     end
 
@@ -1911,6 +2086,17 @@ module Aws::NetworkManager
 
     class UpdateConnectionResponse
       attr_accessor connection: Types::Connection
+      SENSITIVE: []
+    end
+
+    class UpdateContextStoreRequest
+      attr_accessor context_store_id: ::String
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateContextStoreResponse
+      attr_accessor context_store: Types::ContextStore
       SENSITIVE: []
     end
 

@@ -71,7 +71,10 @@ module Aws
 
         it 'instructs plugins to #add_handlers' do
           expect(plugin).to receive(:add_handlers).
-            with(kind_of(Seahorse::Client::HandlerList), kind_of(Struct))
+            with(
+              kind_of(Seahorse::Client::HandlerList),
+              kind_of(Seahorse::Client::Configuration::DynamicStruct)
+            )
           GlobalConfigClient.new
         end
 

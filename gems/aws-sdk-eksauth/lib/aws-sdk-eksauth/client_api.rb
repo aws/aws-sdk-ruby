@@ -49,6 +49,7 @@ module Aws::EKSAuth
     AssumeRoleForPodIdentityResponse.add_member(:pod_identity_association, Shapes::ShapeRef.new(shape: PodIdentityAssociation, required: true, location_name: "podIdentityAssociation"))
     AssumeRoleForPodIdentityResponse.add_member(:assumed_role_user, Shapes::ShapeRef.new(shape: AssumedRoleUser, required: true, location_name: "assumedRoleUser"))
     AssumeRoleForPodIdentityResponse.add_member(:credentials, Shapes::ShapeRef.new(shape: Credentials, required: true, location_name: "credentials"))
+    AssumeRoleForPodIdentityResponse.add_member(:workload_identity_provider_arn, Shapes::ShapeRef.new(shape: String, location_name: "workloadIdentityProviderArn"))
     AssumeRoleForPodIdentityResponse.struct_class = Types::AssumeRoleForPodIdentityResponse
 
     AssumedRoleUser.add_member(:arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "arn"))

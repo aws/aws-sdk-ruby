@@ -1,6 +1,56 @@
 Unreleased Changes
 ------------------
 
+1.100.0 (2026-11-20)
+------------------
+
+* Feature - This release adds runtimeReachability, runtimeReachabilityReason, and purl fields to vulnerable packages in the finding model. It also adds runtimeReachability, runtimeReachabilityReason and purlQualifier package filters for listing findings, suppression rules, and findings reports.
+
+1.99.0 (2026-11-19)
+------------------
+
+* Feature - Amazon Inspector Code Security now supports GitHub Enterprise Server integrations. For GitHub Enterprise Server and GitLab Self-Managed, you can connect over a private network by adding a VPC configuration when you create an integration.
+
+1.98.0 (2026-11-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.97.0 (2026-11-17)
+------------------
+
+* Feature - This release extends vulnerability management to Google Cloud Platform (GCP) Compute Engine virtual machine (VM) instances, container images in Google Artifact Registry (GAR), and Cloud Run functions.
+
+1.96.0 (2026-11-16)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.95.0 (2026-11-11)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.94.0 (2026-11-10)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.93.0 (2026-11-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.92.0 (2026-11-06)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.91.0 (2026-11-04)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.90.0 (2026-10-29)
 ------------------
 

@@ -264,7 +264,8 @@ module Aws::Resiliencehubv2
     #     An integer representing the maximum number attempts that will be made for
     #     a single request, including the initial attempt.  For example,
     #     setting this value to 5 will result in a request being retried up to
-    #     4 times. Used in `standard` and `adaptive` retry modes.
+    #     4 times. Used in `standard` and `adaptive` retry modes. Defaults to 3,
+    #     except for DynamoDB and DynamoDB Streams, which default to 4.
     #
     #   @option options [String] :profile ("default")
     #     Used when loading credentials from the shared credentials file at `HOME/.aws/credentials`.
@@ -327,15 +328,15 @@ module Aws::Resiliencehubv2
     #     used by the default backoff function. This option is only used in the
     #     `legacy` retry mode.
     #
-    #   @option options [String] :retry_mode ("legacy")
+    #   @option options [String] :retry_mode ("standard")
     #     Specifies which retry algorithm to use. Values are:
     #
-    #     * `legacy` - The pre-existing retry behavior. This is the default
-    #       value if no retry mode is provided.
+    #     * `legacy` - The pre-existing retry behavior.
     #
     #     * `standard` - A standardized set of retry rules across the AWS SDKs.
     #       This includes support for retry quotas, which limit the number of
-    #       unsuccessful retries a client can make.
+    #       unsuccessful retries a client can make. This is the default value
+    #       if no retry mode is provided.
     #
     #     * `adaptive` - A retry mode that includes all the functionality of
     #       `standard` mode along with automatic client side throttling.
@@ -1945,6 +1946,30 @@ module Aws::Resiliencehubv2
     #   resp.test_run.policy.multi_region.rpo_in_minutes #=> Integer
     #   resp.test_run.policy.multi_region.disaster_recovery_approach #=> String, one of "ACTIVE_ACTIVE", "HOT_STANDBY", "WARM_STANDBY", "PILOT_LIGHT", "BACKUP_AND_RESTORE"
     #   resp.test_run.policy.data_recovery.time_between_backups_in_minutes #=> Integer
+    #   resp.test_run.effective_policy_values.availability_slo.value #=> Float
+    #   resp.test_run.effective_policy_values.availability_slo.policy_name #=> String
+    #   resp.test_run.effective_policy_values.availability_slo.source #=> String, one of "SELF", "CROSS_ACCOUNT"
+    #   resp.test_run.effective_policy_values.multi_az_rto.value #=> Integer
+    #   resp.test_run.effective_policy_values.multi_az_rto.policy_name #=> String
+    #   resp.test_run.effective_policy_values.multi_az_rto.source #=> String, one of "SELF", "CROSS_ACCOUNT"
+    #   resp.test_run.effective_policy_values.multi_az_rpo.value #=> Integer
+    #   resp.test_run.effective_policy_values.multi_az_rpo.policy_name #=> String
+    #   resp.test_run.effective_policy_values.multi_az_rpo.source #=> String, one of "SELF", "CROSS_ACCOUNT"
+    #   resp.test_run.effective_policy_values.multi_az_dr_approach.value #=> String
+    #   resp.test_run.effective_policy_values.multi_az_dr_approach.policy_name #=> String
+    #   resp.test_run.effective_policy_values.multi_az_dr_approach.source #=> String, one of "SELF", "CROSS_ACCOUNT"
+    #   resp.test_run.effective_policy_values.multi_region_rto.value #=> Integer
+    #   resp.test_run.effective_policy_values.multi_region_rto.policy_name #=> String
+    #   resp.test_run.effective_policy_values.multi_region_rto.source #=> String, one of "SELF", "CROSS_ACCOUNT"
+    #   resp.test_run.effective_policy_values.multi_region_rpo.value #=> Integer
+    #   resp.test_run.effective_policy_values.multi_region_rpo.policy_name #=> String
+    #   resp.test_run.effective_policy_values.multi_region_rpo.source #=> String, one of "SELF", "CROSS_ACCOUNT"
+    #   resp.test_run.effective_policy_values.multi_region_dr_approach.value #=> String
+    #   resp.test_run.effective_policy_values.multi_region_dr_approach.policy_name #=> String
+    #   resp.test_run.effective_policy_values.multi_region_dr_approach.source #=> String, one of "SELF", "CROSS_ACCOUNT"
+    #   resp.test_run.effective_policy_values.data_recovery_time_between_backups.value #=> Integer
+    #   resp.test_run.effective_policy_values.data_recovery_time_between_backups.policy_name #=> String
+    #   resp.test_run.effective_policy_values.data_recovery_time_between_backups.source #=> String, one of "SELF", "CROSS_ACCOUNT"
     #   resp.test_run.report_output.report_type #=> String, one of "FAILURE_MODE", "TESTING"
     #   resp.test_run.report_output.status #=> String, one of "PENDING", "SUCCEEDED", "FAILED"
     #   resp.test_run.report_output.service_arn #=> String
@@ -3728,9 +3753,25 @@ module Aws::Resiliencehubv2
     # pre-configured, AWS recommended test that defines which resilience
     # capability to validate.
     #
+    # @option params [Integer] :max_results
+    #   Pagination page size.
+    #
+    # @option params [String] :next_token
+    #   Pagination token.
+    #
     # @return [Types::ListTestTemplatesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListTestTemplatesResponse#test_templates #test_templates} => Array&lt;Types::TestTemplateSummary&gt;
+    #   * {Types::ListTestTemplatesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_test_templates({
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
     #
     # @example Response structure
     #
@@ -3738,6 +3779,7 @@ module Aws::Resiliencehubv2
     #   resp.test_templates[0].test_template_arn #=> String
     #   resp.test_templates[0].name #=> String
     #   resp.test_templates[0].description #=> String
+    #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehubv2-2026-02-17/ListTestTemplates AWS API Documentation
     #
@@ -4729,7 +4771,7 @@ module Aws::Resiliencehubv2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-resiliencehubv2'
-      context[:gem_version] = '1.13.0'
+      context[:gem_version] = '1.20.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

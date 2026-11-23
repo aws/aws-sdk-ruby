@@ -21,6 +21,7 @@ module Aws::ComputeOptimizerAutomation
     AccountInfoList = Shapes::ListShape.new(name: 'AccountInfoList')
     AssociateAccountsRequest = Shapes::StructureShape.new(name: 'AssociateAccountsRequest')
     AssociateAccountsResponse = Shapes::StructureShape.new(name: 'AssociateAccountsResponse')
+    AutoEnrollMemberAccounts = Shapes::StringShape.new(name: 'AutoEnrollMemberAccounts')
     AutomationEvent = Shapes::StructureShape.new(name: 'AutomationEvent')
     AutomationEventFilter = Shapes::StructureShape.new(name: 'AutomationEventFilter')
     AutomationEventFilterList = Shapes::ListShape.new(name: 'AutomationEventFilterList')
@@ -36,11 +37,14 @@ module Aws::ComputeOptimizerAutomation
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     ClientToken = Shapes::StringShape.new(name: 'ClientToken')
     ComparisonOperator = Shapes::StringShape.new(name: 'ComparisonOperator')
+    ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     CreateAutomationRuleRequest = Shapes::StructureShape.new(name: 'CreateAutomationRuleRequest')
     CreateAutomationRuleResponse = Shapes::StructureShape.new(name: 'CreateAutomationRuleResponse')
     Criteria = Shapes::StructureShape.new(name: 'Criteria')
     DeleteAutomationRuleRequest = Shapes::StructureShape.new(name: 'DeleteAutomationRuleRequest')
     DeleteAutomationRuleResponse = Shapes::StructureShape.new(name: 'DeleteAutomationRuleResponse')
+    DeleteOrganizationEnrollmentConfigurationRequest = Shapes::StructureShape.new(name: 'DeleteOrganizationEnrollmentConfigurationRequest')
+    DeleteOrganizationEnrollmentConfigurationResponse = Shapes::StructureShape.new(name: 'DeleteOrganizationEnrollmentConfigurationResponse')
     DisassociateAccountsRequest = Shapes::StructureShape.new(name: 'DisassociateAccountsRequest')
     DisassociateAccountsResponse = Shapes::StructureShape.new(name: 'DisassociateAccountsResponse')
     Double = Shapes::FloatShape.new(name: 'Double')
@@ -94,6 +98,12 @@ module Aws::ComputeOptimizerAutomation
     ListAutomationRulesRequest = Shapes::StructureShape.new(name: 'ListAutomationRulesRequest')
     ListAutomationRulesRequestMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListAutomationRulesRequestMaxResultsInteger')
     ListAutomationRulesResponse = Shapes::StructureShape.new(name: 'ListAutomationRulesResponse')
+    ListOrganizationEnrollmentConfigurationsRequest = Shapes::StructureShape.new(name: 'ListOrganizationEnrollmentConfigurationsRequest')
+    ListOrganizationEnrollmentConfigurationsRequestMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListOrganizationEnrollmentConfigurationsRequestMaxResultsInteger')
+    ListOrganizationEnrollmentConfigurationsResponse = Shapes::StructureShape.new(name: 'ListOrganizationEnrollmentConfigurationsResponse')
+    ListOrganizationalUnitsRequest = Shapes::StructureShape.new(name: 'ListOrganizationalUnitsRequest')
+    ListOrganizationalUnitsRequestMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListOrganizationalUnitsRequestMaxResultsInteger')
+    ListOrganizationalUnitsResponse = Shapes::StructureShape.new(name: 'ListOrganizationalUnitsResponse')
     ListRecommendedActionSummariesRequest = Shapes::StructureShape.new(name: 'ListRecommendedActionSummariesRequest')
     ListRecommendedActionSummariesRequestMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListRecommendedActionSummariesRequestMaxResultsInteger')
     ListRecommendedActionSummariesResponse = Shapes::StructureShape.new(name: 'ListRecommendedActionSummariesResponse')
@@ -108,12 +118,28 @@ module Aws::ComputeOptimizerAutomation
     OptInRequiredException = Shapes::StructureShape.new(name: 'OptInRequiredException')
     OrganizationConfiguration = Shapes::StructureShape.new(name: 'OrganizationConfiguration')
     OrganizationConfigurationAccountIds = Shapes::ListShape.new(name: 'OrganizationConfigurationAccountIds')
+    OrganizationConfigurationOrganizationalUnitIds = Shapes::ListShape.new(name: 'OrganizationConfigurationOrganizationalUnitIds')
+    OrganizationEnrollmentConfiguration = Shapes::StructureShape.new(name: 'OrganizationEnrollmentConfiguration')
+    OrganizationEnrollmentConfigurationStatus = Shapes::StringShape.new(name: 'OrganizationEnrollmentConfigurationStatus')
+    OrganizationEnrollmentConfigurationType = Shapes::StringShape.new(name: 'OrganizationEnrollmentConfigurationType')
+    OrganizationEnrollmentConfigurationTypes = Shapes::ListShape.new(name: 'OrganizationEnrollmentConfigurationTypes')
+    OrganizationEnrollmentConfigurations = Shapes::ListShape.new(name: 'OrganizationEnrollmentConfigurations')
     OrganizationRuleMode = Shapes::StringShape.new(name: 'OrganizationRuleMode')
+    OrganizationRuleModeSource = Shapes::StructureShape.new(name: 'OrganizationRuleModeSource')
+    OrganizationRuleModeSourceType = Shapes::StringShape.new(name: 'OrganizationRuleModeSourceType')
     OrganizationScope = Shapes::StructureShape.new(name: 'OrganizationScope')
+    OrganizationTarget = Shapes::UnionShape.new(name: 'OrganizationTarget')
+    OrganizationTargetType = Shapes::StringShape.new(name: 'OrganizationTargetType')
+    OrganizationalUnitId = Shapes::StringShape.new(name: 'OrganizationalUnitId')
+    OrganizationalUnitIds = Shapes::ListShape.new(name: 'OrganizationalUnitIds')
+    OrganizationalUnitInfo = Shapes::StructureShape.new(name: 'OrganizationalUnitInfo')
+    OrganizationalUnitInfoList = Shapes::ListShape.new(name: 'OrganizationalUnitInfoList')
     PreviewResult = Shapes::StructureShape.new(name: 'PreviewResult')
     PreviewResultSummaries = Shapes::ListShape.new(name: 'PreviewResultSummaries')
     PreviewResultSummary = Shapes::StructureShape.new(name: 'PreviewResultSummary')
     PreviewResults = Shapes::ListShape.new(name: 'PreviewResults')
+    PutOrganizationEnrollmentConfigurationRequest = Shapes::StructureShape.new(name: 'PutOrganizationEnrollmentConfigurationRequest')
+    PutOrganizationEnrollmentConfigurationResponse = Shapes::StructureShape.new(name: 'PutOrganizationEnrollmentConfigurationResponse')
     RecommendedAction = Shapes::StructureShape.new(name: 'RecommendedAction')
     RecommendedActionFilter = Shapes::StructureShape.new(name: 'RecommendedActionFilter')
     RecommendedActionFilterList = Shapes::ListShape.new(name: 'RecommendedActionFilterList')
@@ -187,6 +213,7 @@ module Aws::ComputeOptimizerAutomation
     AccountInfo.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "accountId"))
     AccountInfo.add_member(:status, Shapes::ShapeRef.new(shape: EnrollmentStatus, required: true, location_name: "status"))
     AccountInfo.add_member(:organization_rule_mode, Shapes::ShapeRef.new(shape: OrganizationRuleMode, required: true, location_name: "organizationRuleMode"))
+    AccountInfo.add_member(:organization_rule_mode_source, Shapes::ShapeRef.new(shape: OrganizationRuleModeSource, location_name: "organizationRuleModeSource"))
     AccountInfo.add_member(:status_reason, Shapes::ShapeRef.new(shape: String, location_name: "statusReason"))
     AccountInfo.add_member(:last_updated_timestamp, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "lastUpdatedTimestamp"))
     AccountInfo.struct_class = Types::AccountInfo
@@ -264,6 +291,9 @@ module Aws::ComputeOptimizerAutomation
 
     AutomationRules.member = Shapes::ShapeRef.new(shape: AutomationRule)
 
+    ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    ConflictException.struct_class = Types::ConflictException
+
     CreateAutomationRuleRequest.add_member(:name, Shapes::ShapeRef.new(shape: RuleName, required: true, location_name: "name"))
     CreateAutomationRuleRequest.add_member(:description, Shapes::ShapeRef.new(shape: RuleDescription, location_name: "description"))
     CreateAutomationRuleRequest.add_member(:rule_type, Shapes::ShapeRef.new(shape: RuleType, required: true, location_name: "ruleType"))
@@ -309,6 +339,13 @@ module Aws::ComputeOptimizerAutomation
     DeleteAutomationRuleRequest.struct_class = Types::DeleteAutomationRuleRequest
 
     DeleteAutomationRuleResponse.struct_class = Types::DeleteAutomationRuleResponse
+
+    DeleteOrganizationEnrollmentConfigurationRequest.add_member(:target, Shapes::ShapeRef.new(shape: OrganizationTarget, required: true, location_name: "target"))
+    DeleteOrganizationEnrollmentConfigurationRequest.add_member(:configuration_types, Shapes::ShapeRef.new(shape: OrganizationEnrollmentConfigurationTypes, required: true, location_name: "configurationTypes"))
+    DeleteOrganizationEnrollmentConfigurationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
+    DeleteOrganizationEnrollmentConfigurationRequest.struct_class = Types::DeleteOrganizationEnrollmentConfigurationRequest
+
+    DeleteOrganizationEnrollmentConfigurationResponse.struct_class = Types::DeleteOrganizationEnrollmentConfigurationResponse
 
     DisassociateAccountsRequest.add_member(:account_ids, Shapes::ShapeRef.new(shape: AccountIdList, required: true, location_name: "accountIds"))
     DisassociateAccountsRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
@@ -399,6 +436,7 @@ module Aws::ComputeOptimizerAutomation
     GetEnrollmentConfigurationResponse.add_member(:status_reason, Shapes::ShapeRef.new(shape: String, location_name: "statusReason"))
     GetEnrollmentConfigurationResponse.add_member(:organization_rule_mode, Shapes::ShapeRef.new(shape: OrganizationRuleMode, location_name: "organizationRuleMode"))
     GetEnrollmentConfigurationResponse.add_member(:last_updated_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdatedTimestamp"))
+    GetEnrollmentConfigurationResponse.add_member(:organization_enrollment_configuration_status, Shapes::ShapeRef.new(shape: OrganizationEnrollmentConfigurationStatus, location_name: "organizationEnrollmentConfigurationStatus"))
     GetEnrollmentConfigurationResponse.struct_class = Types::GetEnrollmentConfigurationResponse
 
     IdempotencyTokenInUseException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
@@ -439,6 +477,7 @@ module Aws::ComputeOptimizerAutomation
     ListAutomationEventStepsResponse.struct_class = Types::ListAutomationEventStepsResponse
 
     ListAutomationEventSummariesRequest.add_member(:filters, Shapes::ShapeRef.new(shape: AutomationEventFilterList, location_name: "filters"))
+    ListAutomationEventSummariesRequest.add_member(:organizational_unit_ids, Shapes::ShapeRef.new(shape: OrganizationalUnitIds, location_name: "organizationalUnitIds"))
     ListAutomationEventSummariesRequest.add_member(:start_date_inclusive, Shapes::ShapeRef.new(shape: String, location_name: "startDateInclusive"))
     ListAutomationEventSummariesRequest.add_member(:end_date_exclusive, Shapes::ShapeRef.new(shape: String, location_name: "endDateExclusive"))
     ListAutomationEventSummariesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListAutomationEventSummariesRequestMaxResultsInteger, location_name: "maxResults"))
@@ -450,6 +489,7 @@ module Aws::ComputeOptimizerAutomation
     ListAutomationEventSummariesResponse.struct_class = Types::ListAutomationEventSummariesResponse
 
     ListAutomationEventsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: AutomationEventFilterList, location_name: "filters"))
+    ListAutomationEventsRequest.add_member(:organizational_unit_ids, Shapes::ShapeRef.new(shape: OrganizationalUnitIds, location_name: "organizationalUnitIds"))
     ListAutomationEventsRequest.add_member(:start_time_inclusive, Shapes::ShapeRef.new(shape: Timestamp, location_name: "startTimeInclusive"))
     ListAutomationEventsRequest.add_member(:end_time_exclusive, Shapes::ShapeRef.new(shape: Timestamp, location_name: "endTimeExclusive"))
     ListAutomationEventsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListAutomationEventsRequestMaxResultsInteger, location_name: "maxResults"))
@@ -493,7 +533,26 @@ module Aws::ComputeOptimizerAutomation
     ListAutomationRulesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListAutomationRulesResponse.struct_class = Types::ListAutomationRulesResponse
 
+    ListOrganizationEnrollmentConfigurationsRequest.add_member(:target_type, Shapes::ShapeRef.new(shape: OrganizationTargetType, location_name: "targetType"))
+    ListOrganizationEnrollmentConfigurationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListOrganizationEnrollmentConfigurationsRequestMaxResultsInteger, location_name: "maxResults"))
+    ListOrganizationEnrollmentConfigurationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListOrganizationEnrollmentConfigurationsRequest.struct_class = Types::ListOrganizationEnrollmentConfigurationsRequest
+
+    ListOrganizationEnrollmentConfigurationsResponse.add_member(:organization_enrollment_configurations, Shapes::ShapeRef.new(shape: OrganizationEnrollmentConfigurations, required: true, location_name: "organizationEnrollmentConfigurations"))
+    ListOrganizationEnrollmentConfigurationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListOrganizationEnrollmentConfigurationsResponse.struct_class = Types::ListOrganizationEnrollmentConfigurationsResponse
+
+    ListOrganizationalUnitsRequest.add_member(:organizational_unit_ids, Shapes::ShapeRef.new(shape: OrganizationalUnitIds, location_name: "organizationalUnitIds"))
+    ListOrganizationalUnitsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListOrganizationalUnitsRequestMaxResultsInteger, location_name: "maxResults"))
+    ListOrganizationalUnitsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListOrganizationalUnitsRequest.struct_class = Types::ListOrganizationalUnitsRequest
+
+    ListOrganizationalUnitsResponse.add_member(:organizational_units, Shapes::ShapeRef.new(shape: OrganizationalUnitInfoList, required: true, location_name: "organizationalUnits"))
+    ListOrganizationalUnitsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListOrganizationalUnitsResponse.struct_class = Types::ListOrganizationalUnitsResponse
+
     ListRecommendedActionSummariesRequest.add_member(:filters, Shapes::ShapeRef.new(shape: RecommendedActionFilterList, location_name: "filters"))
+    ListRecommendedActionSummariesRequest.add_member(:organizational_unit_ids, Shapes::ShapeRef.new(shape: OrganizationalUnitIds, location_name: "organizationalUnitIds"))
     ListRecommendedActionSummariesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListRecommendedActionSummariesRequestMaxResultsInteger, location_name: "maxResults"))
     ListRecommendedActionSummariesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListRecommendedActionSummariesRequest.struct_class = Types::ListRecommendedActionSummariesRequest
@@ -503,6 +562,7 @@ module Aws::ComputeOptimizerAutomation
     ListRecommendedActionSummariesResponse.struct_class = Types::ListRecommendedActionSummariesResponse
 
     ListRecommendedActionsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: RecommendedActionFilterList, location_name: "filters"))
+    ListRecommendedActionsRequest.add_member(:organizational_unit_ids, Shapes::ShapeRef.new(shape: OrganizationalUnitIds, location_name: "organizationalUnitIds"))
     ListRecommendedActionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListRecommendedActionsRequestMaxResultsInteger, location_name: "maxResults"))
     ListRecommendedActionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListRecommendedActionsRequest.struct_class = Types::ListRecommendedActionsRequest
@@ -525,12 +585,51 @@ module Aws::ComputeOptimizerAutomation
 
     OrganizationConfiguration.add_member(:rule_apply_order, Shapes::ShapeRef.new(shape: RuleApplyOrder, location_name: "ruleApplyOrder"))
     OrganizationConfiguration.add_member(:account_ids, Shapes::ShapeRef.new(shape: OrganizationConfigurationAccountIds, location_name: "accountIds"))
+    OrganizationConfiguration.add_member(:organizational_unit_ids, Shapes::ShapeRef.new(shape: OrganizationConfigurationOrganizationalUnitIds, location_name: "organizationalUnitIds"))
+    OrganizationConfiguration.add_member(:excluded_organizational_unit_ids, Shapes::ShapeRef.new(shape: OrganizationConfigurationOrganizationalUnitIds, location_name: "excludedOrganizationalUnitIds"))
+    OrganizationConfiguration.add_member(:excluded_account_ids, Shapes::ShapeRef.new(shape: OrganizationConfigurationAccountIds, location_name: "excludedAccountIds"))
     OrganizationConfiguration.struct_class = Types::OrganizationConfiguration
 
     OrganizationConfigurationAccountIds.member = Shapes::ShapeRef.new(shape: AccountId)
 
+    OrganizationConfigurationOrganizationalUnitIds.member = Shapes::ShapeRef.new(shape: OrganizationalUnitId)
+
+    OrganizationEnrollmentConfiguration.add_member(:target_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "targetId"))
+    OrganizationEnrollmentConfiguration.add_member(:target_type, Shapes::ShapeRef.new(shape: OrganizationTargetType, required: true, location_name: "targetType"))
+    OrganizationEnrollmentConfiguration.add_member(:organization_rule_mode, Shapes::ShapeRef.new(shape: OrganizationRuleMode, location_name: "organizationRuleMode"))
+    OrganizationEnrollmentConfiguration.struct_class = Types::OrganizationEnrollmentConfiguration
+
+    OrganizationEnrollmentConfigurationTypes.member = Shapes::ShapeRef.new(shape: OrganizationEnrollmentConfigurationType)
+
+    OrganizationEnrollmentConfigurations.member = Shapes::ShapeRef.new(shape: OrganizationEnrollmentConfiguration)
+
+    OrganizationRuleModeSource.add_member(:source_type, Shapes::ShapeRef.new(shape: OrganizationRuleModeSourceType, required: true, location_name: "sourceType"))
+    OrganizationRuleModeSource.add_member(:source_target_id, Shapes::ShapeRef.new(shape: String, location_name: "sourceTargetId"))
+    OrganizationRuleModeSource.struct_class = Types::OrganizationRuleModeSource
+
     OrganizationScope.add_member(:account_ids, Shapes::ShapeRef.new(shape: OrganizationConfigurationAccountIds, location_name: "accountIds"))
+    OrganizationScope.add_member(:organizational_unit_ids, Shapes::ShapeRef.new(shape: OrganizationConfigurationOrganizationalUnitIds, location_name: "organizationalUnitIds"))
+    OrganizationScope.add_member(:excluded_organizational_unit_ids, Shapes::ShapeRef.new(shape: OrganizationConfigurationOrganizationalUnitIds, location_name: "excludedOrganizationalUnitIds"))
+    OrganizationScope.add_member(:excluded_account_ids, Shapes::ShapeRef.new(shape: OrganizationConfigurationAccountIds, location_name: "excludedAccountIds"))
     OrganizationScope.struct_class = Types::OrganizationScope
+
+    OrganizationTarget.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "accountId"))
+    OrganizationTarget.add_member(:organizational_unit_id, Shapes::ShapeRef.new(shape: OrganizationalUnitId, location_name: "organizationalUnitId"))
+    OrganizationTarget.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    OrganizationTarget.add_member_subclass(:account_id, Types::OrganizationTarget::AccountId)
+    OrganizationTarget.add_member_subclass(:organizational_unit_id, Types::OrganizationTarget::OrganizationalUnitId)
+    OrganizationTarget.add_member_subclass(:unknown, Types::OrganizationTarget::Unknown)
+    OrganizationTarget.struct_class = Types::OrganizationTarget
+
+    OrganizationalUnitIds.member = Shapes::ShapeRef.new(shape: OrganizationalUnitId)
+
+    OrganizationalUnitInfo.add_member(:organizational_unit_id, Shapes::ShapeRef.new(shape: OrganizationalUnitId, required: true, location_name: "organizationalUnitId"))
+    OrganizationalUnitInfo.add_member(:auto_enroll_member_accounts, Shapes::ShapeRef.new(shape: AutoEnrollMemberAccounts, required: true, location_name: "autoEnrollMemberAccounts"))
+    OrganizationalUnitInfo.add_member(:organization_rule_mode, Shapes::ShapeRef.new(shape: OrganizationRuleMode, required: true, location_name: "organizationRuleMode"))
+    OrganizationalUnitInfo.add_member(:organization_rule_mode_source, Shapes::ShapeRef.new(shape: OrganizationRuleModeSource, required: true, location_name: "organizationRuleModeSource"))
+    OrganizationalUnitInfo.struct_class = Types::OrganizationalUnitInfo
+
+    OrganizationalUnitInfoList.member = Shapes::ShapeRef.new(shape: OrganizationalUnitInfo)
 
     PreviewResult.add_member(:recommended_action_id, Shapes::ShapeRef.new(shape: RecommendedActionId, location_name: "recommendedActionId"))
     PreviewResult.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "resourceArn"))
@@ -556,6 +655,13 @@ module Aws::ComputeOptimizerAutomation
     PreviewResultSummary.struct_class = Types::PreviewResultSummary
 
     PreviewResults.member = Shapes::ShapeRef.new(shape: PreviewResult)
+
+    PutOrganizationEnrollmentConfigurationRequest.add_member(:target, Shapes::ShapeRef.new(shape: OrganizationTarget, required: true, location_name: "target"))
+    PutOrganizationEnrollmentConfigurationRequest.add_member(:organization_rule_mode, Shapes::ShapeRef.new(shape: OrganizationRuleMode, location_name: "organizationRuleMode"))
+    PutOrganizationEnrollmentConfigurationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
+    PutOrganizationEnrollmentConfigurationRequest.struct_class = Types::PutOrganizationEnrollmentConfigurationRequest
+
+    PutOrganizationEnrollmentConfigurationResponse.struct_class = Types::PutOrganizationEnrollmentConfigurationResponse
 
     RecommendedAction.add_member(:recommended_action_id, Shapes::ShapeRef.new(shape: RecommendedActionId, location_name: "recommendedActionId"))
     RecommendedAction.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "resourceArn"))
@@ -807,6 +913,24 @@ module Aws::ComputeOptimizerAutomation
         o.errors << Shapes::ShapeRef.new(shape: IdempotencyTokenInUseException)
       end)
 
+      api.add_operation(:delete_organization_enrollment_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteOrganizationEnrollmentConfiguration"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteOrganizationEnrollmentConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteOrganizationEnrollmentConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: OptInRequiredException)
+        o.errors << Shapes::ShapeRef.new(shape: IdempotentParameterMismatchException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: IdempotencyTokenInUseException)
+      end)
+
       api.add_operation(:disassociate_accounts, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DisassociateAccounts"
         o.http_method = "POST"
@@ -1022,6 +1146,48 @@ module Aws::ComputeOptimizerAutomation
         )
       end)
 
+      api.add_operation(:list_organization_enrollment_configurations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListOrganizationEnrollmentConfigurations"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListOrganizationEnrollmentConfigurationsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListOrganizationEnrollmentConfigurationsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: OptInRequiredException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_organizational_units, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListOrganizationalUnits"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListOrganizationalUnitsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListOrganizationalUnitsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: OptInRequiredException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_recommended_action_summaries, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListRecommendedActionSummaries"
         o.http_method = "POST"
@@ -1078,6 +1244,24 @@ module Aws::ComputeOptimizerAutomation
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+      end)
+
+      api.add_operation(:put_organization_enrollment_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutOrganizationEnrollmentConfiguration"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: PutOrganizationEnrollmentConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: PutOrganizationEnrollmentConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: OptInRequiredException)
+        o.errors << Shapes::ShapeRef.new(shape: IdempotentParameterMismatchException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: IdempotencyTokenInUseException)
       end)
 
       api.add_operation(:rollback_automation_event, Seahorse::Model::Operation.new.tap do |o|

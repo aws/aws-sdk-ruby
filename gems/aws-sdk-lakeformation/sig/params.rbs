@@ -31,6 +31,10 @@ module Aws
     }
 
       type resource = {
+      any_resource: {
+        catalog_id: ::String?,
+        resource_type: ("TABLE")
+      }?,
       catalog: {
         id: ::String?
       }?,
@@ -69,6 +73,13 @@ module Aws
       rls_policy: {
         catalog_id: ::String?,
         name: ::String
+      }?,
+      user_defined_function: {
+        catalog_id: ::String?,
+        database_name: ::String,
+        name: ::String?,
+        user_defined_function_wildcard: {
+        }?
       }?
     }
 
@@ -78,11 +89,11 @@ module Aws
         data_lake_principal_identifier: ::String?
       }?,
       resource: Params::resource?,
-      permissions: Array[("ALL" | "SELECT" | "ALTER" | "DROP" | "DELETE" | "INSERT" | "DESCRIBE" | "CREATE_DATABASE" | "CREATE_TABLE" | "DATA_LOCATION_ACCESS" | "CREATE_LF_TAG" | "ASSOCIATE" | "GRANT_WITH_LF_TAG_EXPRESSION" | "CREATE_LF_TAG_EXPRESSION" | "CREATE_CATALOG" | "SUPER_USER")]?,
+      permissions: Array[("ALL" | "SELECT" | "ALTER" | "DROP" | "DELETE" | "INSERT" | "DESCRIBE" | "CREATE_DATABASE" | "CREATE_TABLE" | "DATA_LOCATION_ACCESS" | "CREATE_LF_TAG" | "ASSOCIATE" | "GRANT_WITH_LF_TAG_EXPRESSION" | "CREATE_LF_TAG_EXPRESSION" | "CREATE_CATALOG" | "SUPER_USER" | "EXECUTE")]?,
       condition: {
         expression: ::String?
       }?,
-      permissions_with_grant_option: Array[("ALL" | "SELECT" | "ALTER" | "DROP" | "DELETE" | "INSERT" | "DESCRIBE" | "CREATE_DATABASE" | "CREATE_TABLE" | "DATA_LOCATION_ACCESS" | "CREATE_LF_TAG" | "ASSOCIATE" | "GRANT_WITH_LF_TAG_EXPRESSION" | "CREATE_LF_TAG_EXPRESSION" | "CREATE_CATALOG" | "SUPER_USER")]?
+      permissions_with_grant_option: Array[("ALL" | "SELECT" | "ALTER" | "DROP" | "DELETE" | "INSERT" | "DESCRIBE" | "CREATE_DATABASE" | "CREATE_TABLE" | "DATA_LOCATION_ACCESS" | "CREATE_LF_TAG" | "ASSOCIATE" | "GRANT_WITH_LF_TAG_EXPRESSION" | "CREATE_LF_TAG_EXPRESSION" | "CREATE_CATALOG" | "SUPER_USER" | "EXECUTE")]?
     }
 
       type data_cells_filter = {

@@ -13,6 +13,7 @@ module Aws
 
       class BadRequestException < ServiceError
         def message: () -> ::String
+        def reason: () -> ::String
       end
       class ConflictException < ServiceError
         def message: () -> ::String

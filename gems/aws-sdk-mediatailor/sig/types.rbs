@@ -562,7 +562,7 @@ module Aws::MediaTailor
 
     class Function
       attr_accessor function_id: ::String
-      attr_accessor function_type: ("HTTP_REQUEST" | "AWS_SERVICE_REQUEST" | "CUSTOM_OUTPUT" | "CONCURRENT_EXECUTOR" | "SEQUENTIAL_EXECUTOR" | "VAST_REQUEST")
+      attr_accessor function_type: ("HTTP_REQUEST" | "AWS_SERVICE_REQUEST" | "CUSTOM_OUTPUT" | "CONCURRENT_EXECUTOR" | "SEQUENTIAL_EXECUTOR" | "VAST_REQUEST" | "HLS_TAG_PROCESSOR")
       attr_accessor description: ::String
       attr_accessor http_request_configuration: Types::HttpRequestConfiguration
       attr_accessor aws_service_request_configuration: Types::AwsServiceRequestConfiguration
@@ -570,6 +570,7 @@ module Aws::MediaTailor
       attr_accessor concurrent_executor_configuration: Types::ConcurrentExecutorConfiguration
       attr_accessor sequential_executor_configuration: Types::SequentialExecutorConfiguration
       attr_accessor vast_request_configuration: Types::VastRequestConfiguration
+      attr_accessor hls_tag_processor_configuration: Types::HlsTagProcessorConfiguration
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor arn: ::String
       SENSITIVE: []
@@ -614,7 +615,7 @@ module Aws::MediaTailor
 
     class GetFunctionResponse
       attr_accessor function_id: ::String
-      attr_accessor function_type: ("HTTP_REQUEST" | "AWS_SERVICE_REQUEST" | "CUSTOM_OUTPUT" | "CONCURRENT_EXECUTOR" | "SEQUENTIAL_EXECUTOR" | "VAST_REQUEST")
+      attr_accessor function_type: ("HTTP_REQUEST" | "AWS_SERVICE_REQUEST" | "CUSTOM_OUTPUT" | "CONCURRENT_EXECUTOR" | "SEQUENTIAL_EXECUTOR" | "VAST_REQUEST" | "HLS_TAG_PROCESSOR")
       attr_accessor description: ::String
       attr_accessor http_request_configuration: Types::HttpRequestConfiguration
       attr_accessor aws_service_request_configuration: Types::AwsServiceRequestConfiguration
@@ -622,6 +623,7 @@ module Aws::MediaTailor
       attr_accessor concurrent_executor_configuration: Types::ConcurrentExecutorConfiguration
       attr_accessor sequential_executor_configuration: Types::SequentialExecutorConfiguration
       attr_accessor vast_request_configuration: Types::VastRequestConfiguration
+      attr_accessor hls_tag_processor_configuration: Types::HlsTagProcessorConfiguration
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor arn: ::String
       SENSITIVE: []
@@ -658,7 +660,7 @@ module Aws::MediaTailor
       attr_accessor ad_conditioning_configuration: Types::AdConditioningConfiguration
       attr_accessor ad_decision_server_configuration: Types::AdDecisionServerConfiguration
       attr_accessor yield_optimization_configuration: Types::YieldOptimizationConfiguration
-      attr_accessor function_mapping: ::Hash[("PRE_SESSION_INITIALIZATION" | "PRE_ADS_REQUEST" | "POST_ADS_RESPONSE" | "PRE_MANIFEST_INSERTION"), ::String]
+      attr_accessor function_mapping: ::Hash[("PRE_SESSION_INITIALIZATION" | "PRE_ADS_REQUEST" | "POST_ADS_RESPONSE" | "PRE_MANIFEST_INSERTION" | "POST_ORIGIN_RESPONSE"), ::String]
       attr_accessor ads_personalization_timeouts: Types::AdsPersonalizationTimeouts
       attr_accessor ads_personalization_concurrency: Types::AdsPersonalizationConcurrency
       attr_accessor beaconing_configuration: Types::BeaconingConfiguration
@@ -693,6 +695,14 @@ module Aws::MediaTailor
     class HlsPlaylistSettings
       attr_accessor manifest_window_seconds: ::Integer
       attr_accessor ad_markup_type: ::Array[("DATERANGE" | "SCTE35_ENHANCED")]
+      SENSITIVE: []
+    end
+
+    class HlsTagProcessorConfiguration
+      attr_accessor runtime: ("JSONATA")
+      attr_accessor output: ::Hash[::String, ::String]
+      attr_accessor tag_filter: ::Array[("EXT-X-DATERANGE")]
+      attr_accessor run_condition: ::String
       SENSITIVE: []
     end
 
@@ -890,8 +900,8 @@ module Aws::MediaTailor
     end
 
     class ManifestServiceInteractionLog
-      attr_accessor publish_opt_in_event_types: ::Array[("PRE_SESSION_INIT_HOOK_SUMMARY" | "PRE_SESSION_INIT_FUNCTION_COMPLETED")]
-      attr_accessor exclude_event_types: ::Array[("GENERATED_MANIFEST" | "ORIGIN_MANIFEST" | "SESSION_INITIALIZED" | "TRACKING_RESPONSE" | "CONFIG_SYNTAX_ERROR" | "CONFIG_SECURITY_ERROR" | "UNKNOWN_HOST" | "TIMEOUT_ERROR" | "CONNECTION_ERROR" | "IO_ERROR" | "UNKNOWN_ERROR" | "HOST_DISALLOWED" | "PARSING_ERROR" | "MANIFEST_ERROR" | "NO_MASTER_OR_MEDIA_PLAYLIST" | "NO_MASTER_PLAYLIST" | "NO_MEDIA_PLAYLIST" | "INCOMPATIBLE_HLS_VERSION" | "SCTE35_PARSING_ERROR" | "INVALID_SINGLE_PERIOD_DASH_MANIFEST" | "UNSUPPORTED_SINGLE_PERIOD_DASH_MANIFEST" | "LAST_PERIOD_MISSING_AUDIO" | "LAST_PERIOD_MISSING_AUDIO_WARNING" | "ERROR_ORIGIN_PREFIX_INTERPOLATION" | "ERROR_ADS_INTERPOLATION" | "ERROR_LIVE_PRE_ROLL_ADS_INTERPOLATION" | "ERROR_CDN_AD_SEGMENT_INTERPOLATION" | "ERROR_CDN_CONTENT_SEGMENT_INTERPOLATION" | "ERROR_SLATE_AD_URL_INTERPOLATION" | "ERROR_PROFILE_NAME_INTERPOLATION" | "ERROR_BUMPER_START_INTERPOLATION" | "ERROR_BUMPER_END_INTERPOLATION" | "PRE_SESSION_INIT_HOOK_ERROR" | "PRE_SESSION_INIT_FUNCTION_ERROR")]
+      attr_accessor publish_opt_in_event_types: ::Array[("PRE_SESSION_INIT_HOOK_SUMMARY" | "PRE_SESSION_INIT_FUNCTION_COMPLETED" | "POST_ORIGIN_RESPONSE_HOOK_SUMMARY" | "POST_ORIGIN_RESPONSE_FUNCTION_COMPLETED")]
+      attr_accessor exclude_event_types: ::Array[("GENERATED_MANIFEST" | "ORIGIN_MANIFEST" | "SESSION_INITIALIZED" | "TRACKING_RESPONSE" | "CONFIG_SYNTAX_ERROR" | "CONFIG_SECURITY_ERROR" | "UNKNOWN_HOST" | "TIMEOUT_ERROR" | "CONNECTION_ERROR" | "IO_ERROR" | "UNKNOWN_ERROR" | "HOST_DISALLOWED" | "PARSING_ERROR" | "MANIFEST_ERROR" | "NO_MASTER_OR_MEDIA_PLAYLIST" | "NO_MASTER_PLAYLIST" | "NO_MEDIA_PLAYLIST" | "INCOMPATIBLE_HLS_VERSION" | "SCTE35_PARSING_ERROR" | "INVALID_SINGLE_PERIOD_DASH_MANIFEST" | "UNSUPPORTED_SINGLE_PERIOD_DASH_MANIFEST" | "LAST_PERIOD_MISSING_AUDIO" | "LAST_PERIOD_MISSING_AUDIO_WARNING" | "ERROR_ORIGIN_PREFIX_INTERPOLATION" | "ERROR_ADS_INTERPOLATION" | "ERROR_LIVE_PRE_ROLL_ADS_INTERPOLATION" | "ERROR_CDN_AD_SEGMENT_INTERPOLATION" | "ERROR_CDN_CONTENT_SEGMENT_INTERPOLATION" | "ERROR_SLATE_AD_URL_INTERPOLATION" | "ERROR_PROFILE_NAME_INTERPOLATION" | "ERROR_BUMPER_START_INTERPOLATION" | "ERROR_BUMPER_END_INTERPOLATION" | "PRE_SESSION_INIT_HOOK_ERROR" | "PRE_SESSION_INIT_FUNCTION_ERROR" | "POST_ORIGIN_RESPONSE_HOOK_ERROR" | "POST_ORIGIN_RESPONSE_FUNCTION_ERROR")]
       SENSITIVE: []
     end
 
@@ -921,7 +931,7 @@ module Aws::MediaTailor
       attr_accessor ad_conditioning_configuration: Types::AdConditioningConfiguration
       attr_accessor ad_decision_server_configuration: Types::AdDecisionServerConfiguration
       attr_accessor yield_optimization_configuration: Types::YieldOptimizationConfiguration
-      attr_accessor function_mapping: ::Hash[("PRE_SESSION_INITIALIZATION" | "PRE_ADS_REQUEST" | "POST_ADS_RESPONSE" | "PRE_MANIFEST_INSERTION"), ::String]
+      attr_accessor function_mapping: ::Hash[("PRE_SESSION_INITIALIZATION" | "PRE_ADS_REQUEST" | "POST_ADS_RESPONSE" | "PRE_MANIFEST_INSERTION" | "POST_ORIGIN_RESPONSE"), ::String]
       attr_accessor ads_personalization_timeouts: Types::AdsPersonalizationTimeouts
       attr_accessor ads_personalization_concurrency: Types::AdsPersonalizationConcurrency
       attr_accessor beaconing_configuration: Types::BeaconingConfiguration
@@ -979,7 +989,7 @@ module Aws::MediaTailor
 
     class PutFunctionRequest
       attr_accessor function_id: ::String
-      attr_accessor function_type: ("HTTP_REQUEST" | "AWS_SERVICE_REQUEST" | "CUSTOM_OUTPUT" | "CONCURRENT_EXECUTOR" | "SEQUENTIAL_EXECUTOR" | "VAST_REQUEST")
+      attr_accessor function_type: ("HTTP_REQUEST" | "AWS_SERVICE_REQUEST" | "CUSTOM_OUTPUT" | "CONCURRENT_EXECUTOR" | "SEQUENTIAL_EXECUTOR" | "VAST_REQUEST" | "HLS_TAG_PROCESSOR")
       attr_accessor description: ::String
       attr_accessor http_request_configuration: Types::HttpRequestConfiguration
       attr_accessor aws_service_request_configuration: Types::AwsServiceRequestConfiguration
@@ -987,13 +997,14 @@ module Aws::MediaTailor
       attr_accessor concurrent_executor_configuration: Types::ConcurrentExecutorConfiguration
       attr_accessor sequential_executor_configuration: Types::SequentialExecutorConfiguration
       attr_accessor vast_request_configuration: Types::VastRequestConfiguration
+      attr_accessor hls_tag_processor_configuration: Types::HlsTagProcessorConfiguration
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
     end
 
     class PutFunctionResponse
       attr_accessor function_id: ::String
-      attr_accessor function_type: ("HTTP_REQUEST" | "AWS_SERVICE_REQUEST" | "CUSTOM_OUTPUT" | "CONCURRENT_EXECUTOR" | "SEQUENTIAL_EXECUTOR" | "VAST_REQUEST")
+      attr_accessor function_type: ("HTTP_REQUEST" | "AWS_SERVICE_REQUEST" | "CUSTOM_OUTPUT" | "CONCURRENT_EXECUTOR" | "SEQUENTIAL_EXECUTOR" | "VAST_REQUEST" | "HLS_TAG_PROCESSOR")
       attr_accessor description: ::String
       attr_accessor http_request_configuration: Types::HttpRequestConfiguration
       attr_accessor aws_service_request_configuration: Types::AwsServiceRequestConfiguration
@@ -1001,6 +1012,7 @@ module Aws::MediaTailor
       attr_accessor concurrent_executor_configuration: Types::ConcurrentExecutorConfiguration
       attr_accessor sequential_executor_configuration: Types::SequentialExecutorConfiguration
       attr_accessor vast_request_configuration: Types::VastRequestConfiguration
+      attr_accessor hls_tag_processor_configuration: Types::HlsTagProcessorConfiguration
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor arn: ::String
       SENSITIVE: []
@@ -1025,7 +1037,7 @@ module Aws::MediaTailor
       attr_accessor ad_conditioning_configuration: Types::AdConditioningConfiguration
       attr_accessor ad_decision_server_configuration: Types::AdDecisionServerConfiguration
       attr_accessor yield_optimization_configuration: Types::YieldOptimizationConfiguration
-      attr_accessor function_mapping: ::Hash[("PRE_SESSION_INITIALIZATION" | "PRE_ADS_REQUEST" | "POST_ADS_RESPONSE" | "PRE_MANIFEST_INSERTION"), ::String]
+      attr_accessor function_mapping: ::Hash[("PRE_SESSION_INITIALIZATION" | "PRE_ADS_REQUEST" | "POST_ADS_RESPONSE" | "PRE_MANIFEST_INSERTION" | "POST_ORIGIN_RESPONSE"), ::String]
       attr_accessor ads_personalization_timeouts: Types::AdsPersonalizationTimeouts
       attr_accessor ads_personalization_concurrency: Types::AdsPersonalizationConcurrency
       attr_accessor beaconing_configuration: Types::BeaconingConfiguration
@@ -1058,7 +1070,7 @@ module Aws::MediaTailor
       attr_accessor ad_conditioning_configuration: Types::AdConditioningConfiguration
       attr_accessor ad_decision_server_configuration: Types::AdDecisionServerConfiguration
       attr_accessor yield_optimization_configuration: Types::YieldOptimizationConfiguration
-      attr_accessor function_mapping: ::Hash[("PRE_SESSION_INITIALIZATION" | "PRE_ADS_REQUEST" | "POST_ADS_RESPONSE" | "PRE_MANIFEST_INSERTION"), ::String]
+      attr_accessor function_mapping: ::Hash[("PRE_SESSION_INITIALIZATION" | "PRE_ADS_REQUEST" | "POST_ADS_RESPONSE" | "PRE_MANIFEST_INSERTION" | "POST_ORIGIN_RESPONSE"), ::String]
       attr_accessor ads_personalization_timeouts: Types::AdsPersonalizationTimeouts
       attr_accessor ads_personalization_concurrency: Types::AdsPersonalizationConcurrency
       attr_accessor beaconing_configuration: Types::BeaconingConfiguration

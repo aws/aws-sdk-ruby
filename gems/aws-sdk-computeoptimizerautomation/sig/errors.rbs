@@ -14,6 +14,9 @@ module Aws
       class AccessDeniedException < ServiceError
         def message: () -> ::String
       end
+      class ConflictException < ServiceError
+        def message: () -> ::String
+      end
       class ForbiddenException < ServiceError
         def message: () -> ::String
       end

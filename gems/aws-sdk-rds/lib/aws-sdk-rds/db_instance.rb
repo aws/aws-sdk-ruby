@@ -86,6 +86,20 @@ module Aws::RDS
       data[:endpoint]
     end
 
+    # Specifies the connection endpoint for the DB instance that currently
+    # has the primary role.
+    #
+    # This endpoint points to the new primary DB instance after a
+    # switchover, so you don't have to connect to a different DNS name.
+    #
+    # A read replica reports the same primary endpoint as the DB instance it
+    # replicates from. When you promote a read replica, it reports its own
+    # primary endpoint.
+    # @return [Types::PrimaryEndpoint]
+    def primary_endpoint
+      data[:primary_endpoint]
+    end
+
     # The amount of storage in gibibytes (GiB) allocated for the DB
     # instance.
     # @return [Integer]
@@ -892,6 +906,14 @@ module Aws::RDS
     # @return [String]
     def db_capacity_reservation_identifier
       data[:db_capacity_reservation_identifier]
+    end
+
+    # Indicates whether the DB instance uses VPC networking. For a DB
+    # instance in an Aurora PostgreSQL DB cluster without VPC networking,
+    # the value is `false`.
+    # @return [Boolean]
+    def vpc_networking_enabled
+      data[:vpc_networking_enabled]
     end
 
     # @!endgroup

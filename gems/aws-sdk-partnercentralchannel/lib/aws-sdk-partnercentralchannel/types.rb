@@ -82,6 +82,118 @@ module Aws::PartnerCentralChannel
       include Aws::Structure
     end
 
+    # The postal address of a legal entity.
+    #
+    # @!attribute [rw] city
+    #   The city or locality.
+    #   @return [String]
+    #
+    # @!attribute [rw] state_or_region
+    #   The state, province, or prefecture.
+    #   @return [String]
+    #
+    # @!attribute [rw] postal_code
+    #   The postal code.
+    #   @return [String]
+    #
+    # @!attribute [rw] country_code
+    #   The two-letter ISO 3166-1 country code.
+    #   @return [String]
+    #
+    # @!attribute [rw] address_line
+    #   The first line of the street address.
+    #   @return [String]
+    #
+    # @!attribute [rw] address_line_2
+    #   The second line of the street address.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-channel-2024-03-18/Address AWS API Documentation
+    #
+    class Address < Struct.new(
+      :city,
+      :state_or_region,
+      :postal_code,
+      :country_code,
+      :address_line,
+      :address_line_2)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains details about a canceled channel contract.
+    #
+    # @!attribute [rw] id
+    #   The unique identifier of the canceled channel contract.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the canceled channel contract.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the canceled channel contract.
+    #   @return [String]
+    #
+    # @!attribute [rw] cancellation_reason
+    #   The reason the channel contract was canceled, if one was provided.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-channel-2024-03-18/CancelChannelContractDetail AWS API Documentation
+    #
+    class CancelChannelContractDetail < Struct.new(
+      :id,
+      :arn,
+      :status,
+      :cancellation_reason)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] catalog
+    #   The catalog identifier for the channel contract.
+    #   @return [String]
+    #
+    # @!attribute [rw] identifier
+    #   The unique identifier of the channel contract to cancel.
+    #   @return [String]
+    #
+    # @!attribute [rw] reason
+    #   The reason for canceling the channel contract. Later requests don't
+    #   change or remove it.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier to ensure idempotency of the
+    #   request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-channel-2024-03-18/CancelChannelContractRequest AWS API Documentation
+    #
+    class CancelChannelContractRequest < Struct.new(
+      :catalog,
+      :identifier,
+      :reason,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] channel_contract_detail
+    #   Details of the canceled channel contract.
+    #   @return [Types::CancelChannelContractDetail]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-channel-2024-03-18/CancelChannelContractResponse AWS API Documentation
+    #
+    class CancelChannelContractResponse < Struct.new(
+      :channel_contract_detail)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains details about a canceled channel handshake.
     #
     # @!attribute [rw] id
@@ -133,6 +245,189 @@ module Aws::PartnerCentralChannel
       :channel_handshake_detail)
       SENSITIVE = []
       include Aws::Structure
+    end
+
+    # Detailed information about a channel contract.
+    #
+    # @!attribute [rw] id
+    #   The unique identifier of the channel contract.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the channel contract.
+    #   @return [String]
+    #
+    # @!attribute [rw] catalog
+    #   The catalog identifier associated with the channel contract.
+    #   @return [String]
+    #
+    # @!attribute [rw] contract_type
+    #   The type of the channel contract.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the channel contract.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp when the channel contract was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The timestamp when the channel contract was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] responded_at
+    #   The timestamp when the channel contract was accepted, if applicable.
+    #   @return [Time]
+    #
+    # @!attribute [rw] cancellation_reason
+    #   The reason the channel contract was canceled, if one was provided.
+    #   @return [String]
+    #
+    # @!attribute [rw] details
+    #   Type-specific details of the channel contract.
+    #   @return [Types::ChannelContractDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-channel-2024-03-18/ChannelContractDetail AWS API Documentation
+    #
+    class ChannelContractDetail < Struct.new(
+      :id,
+      :arn,
+      :catalog,
+      :contract_type,
+      :status,
+      :created_at,
+      :updated_at,
+      :responded_at,
+      :cancellation_reason,
+      :details)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains detailed information about different types of channel
+    # contracts.
+    #
+    # @note ChannelContractDetails is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of ChannelContractDetails corresponding to the set member.
+    #
+    # @!attribute [rw] managed_services_attestation_details
+    #   Details specific to managed services attestation channel contracts.
+    #   Applies only to managed services attestation channel contracts.
+    #   @return [Types::ManagedServicesAttestationDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-channel-2024-03-18/ChannelContractDetails AWS API Documentation
+    #
+    class ChannelContractDetails < Struct.new(
+      :managed_services_attestation_details,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class ManagedServicesAttestationDetails < ChannelContractDetails; end
+      class Unknown < ChannelContractDetails; end
+    end
+
+    # Contains the payload data for different types of channel contracts.
+    #
+    # @note ChannelContractPayload is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @!attribute [rw] managed_services_attestation_payload
+    #   Payload for creating a managed services attestation channel
+    #   contract. Applies only to managed services attestation channel
+    #   contracts.
+    #   @return [Types::ManagedServicesAttestationPayload]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-channel-2024-03-18/ChannelContractPayload AWS API Documentation
+    #
+    class ChannelContractPayload < Struct.new(
+      :managed_services_attestation_payload,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class ManagedServicesAttestationPayload < ChannelContractPayload; end
+      class Unknown < ChannelContractPayload; end
+    end
+
+    # Summary information about a channel contract.
+    #
+    # @!attribute [rw] id
+    #   The unique identifier of the channel contract.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the channel contract.
+    #   @return [String]
+    #
+    # @!attribute [rw] catalog
+    #   The catalog identifier associated with the channel contract.
+    #   @return [String]
+    #
+    # @!attribute [rw] contract_type
+    #   The type of the channel contract.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the channel contract.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp when the channel contract was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The timestamp when the channel contract was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] responded_at
+    #   The timestamp when the channel contract was accepted, if applicable.
+    #   @return [Time]
+    #
+    # @!attribute [rw] details
+    #   Type-specific summary details of the channel contract.
+    #   @return [Types::ChannelContractSummaryDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-channel-2024-03-18/ChannelContractSummary AWS API Documentation
+    #
+    class ChannelContractSummary < Struct.new(
+      :id,
+      :arn,
+      :catalog,
+      :contract_type,
+      :status,
+      :created_at,
+      :updated_at,
+      :responded_at,
+      :details)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains summary information about different types of channel
+    # contracts.
+    #
+    # @note ChannelContractSummaryDetails is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of ChannelContractSummaryDetails corresponding to the set member.
+    #
+    # @!attribute [rw] managed_services_attestation_details
+    #   Summary details specific to managed services attestation channel
+    #   contracts. Applies only to managed services attestation channel
+    #   contracts.
+    #   @return [Types::ManagedServicesAttestationSummaryDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-channel-2024-03-18/ChannelContractSummaryDetails AWS API Documentation
+    #
+    class ChannelContractSummaryDetails < Struct.new(
+      :managed_services_attestation_details,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class ManagedServicesAttestationDetails < ChannelContractSummaryDetails; end
+      class Unknown < ChannelContractSummaryDetails; end
     end
 
     # Contains the payload data for different types of channel handshakes.
@@ -261,6 +556,74 @@ module Aws::PartnerCentralChannel
       include Aws::Structure
     end
 
+    # Contains details about a newly created channel contract.
+    #
+    # @!attribute [rw] id
+    #   The unique identifier of the created channel contract.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the created channel contract.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-channel-2024-03-18/CreateChannelContractDetail AWS API Documentation
+    #
+    class CreateChannelContractDetail < Struct.new(
+      :id,
+      :arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] contract_type
+    #   The type of channel contract to create (for example, managed
+    #   services attestation).
+    #   @return [String]
+    #
+    # @!attribute [rw] catalog
+    #   The catalog identifier for the channel contract.
+    #   @return [String]
+    #
+    # @!attribute [rw] payload
+    #   The payload containing specific details for the contract type.
+    #   @return [Types::ChannelContractPayload]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier to ensure idempotency of the
+    #   request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Key-value pairs to associate with the channel contract.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-channel-2024-03-18/CreateChannelContractRequest AWS API Documentation
+    #
+    class CreateChannelContractRequest < Struct.new(
+      :contract_type,
+      :catalog,
+      :payload,
+      :client_token,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] channel_contract_detail
+    #   Details of the created channel contract.
+    #   @return [Types::CreateChannelContractDetail]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-channel-2024-03-18/CreateChannelContractResponse AWS API Documentation
+    #
+    class CreateChannelContractResponse < Struct.new(
+      :channel_contract_detail)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains details about a newly created channel handshake.
     #
     # @!attribute [rw] id
@@ -382,6 +745,12 @@ module Aws::PartnerCentralChannel
     #   Key-value pairs to associate with the program management account.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] type
+    #   The type of the program management account (for example, resale
+    #   billing transfer, managed services), required for the managed
+    #   services provider program.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-channel-2024-03-18/CreateProgramManagementAccountRequest AWS API Documentation
     #
     class CreateProgramManagementAccountRequest < Struct.new(
@@ -390,7 +759,8 @@ module Aws::PartnerCentralChannel
       :display_name,
       :account_id,
       :client_token,
-      :tags)
+      :tags,
+      :type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -449,7 +819,8 @@ module Aws::PartnerCentralChannel
     #   @return [String]
     #
     # @!attribute [rw] resale_account_model
-    #   The resale account model for the relationship.
+    #   The resale account model for the relationship. Applies only to
+    #   billing transfer relationships.
     #   @return [String]
     #
     # @!attribute [rw] sector
@@ -469,8 +840,20 @@ module Aws::PartnerCentralChannel
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] requested_support_plan
-    #   The support plan requested for this relationship.
+    #   The support plan requested for this relationship. Applies only to
+    #   billing transfer relationships.
     #   @return [Types::SupportPlan]
+    #
+    # @!attribute [rw] account_scope
+    #   The account scope for a managed services relationship (for example,
+    #   entire organization, specific member accounts). Applies only to
+    #   managed services relationships.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_date
+    #   The start date of the managed services relationship. Applies only to
+    #   managed services relationships.
+    #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-channel-2024-03-18/CreateRelationshipRequest AWS API Documentation
     #
@@ -484,7 +867,9 @@ module Aws::PartnerCentralChannel
       :sector,
       :client_token,
       :tags,
-      :requested_support_plan)
+      :requested_support_plan,
+      :account_scope,
+      :start_date)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -568,6 +953,35 @@ module Aws::PartnerCentralChannel
     class DeleteRelationshipResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] catalog
+    #   The catalog identifier for the channel contract.
+    #   @return [String]
+    #
+    # @!attribute [rw] identifier
+    #   The unique identifier of the channel contract to retrieve.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-channel-2024-03-18/GetChannelContractRequest AWS API Documentation
+    #
+    class GetChannelContractRequest < Struct.new(
+      :catalog,
+      :identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] channel_contract_detail
+    #   Details of the requested channel contract.
+    #   @return [Types::ChannelContractDetail]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-channel-2024-03-18/GetChannelContractResponse AWS API Documentation
+    #
+    class GetChannelContractResponse < Struct.new(
+      :channel_contract_detail)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] catalog
     #   The catalog identifier for the relationship.
     #   @return [String]
     #
@@ -647,6 +1061,110 @@ module Aws::PartnerCentralChannel
       :message)
       SENSITIVE = []
       include Aws::Structure
+    end
+
+    # @!attribute [rw] catalog
+    #   The catalog identifier to filter channel contracts.
+    #   @return [String]
+    #
+    # @!attribute [rw] contract_type
+    #   Filter results by contract type.
+    #   @return [String]
+    #
+    # @!attribute [rw] statuses
+    #   Filter results by channel contract status.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] contract_type_filters
+    #   Type-specific filters for channel contracts.
+    #   @return [Types::ListChannelContractsTypeFilters]
+    #
+    # @!attribute [rw] contract_type_sort
+    #   Type-specific sorting options for channel contracts.
+    #   @return [Types::ListChannelContractsTypeSort]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in a single call.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   Token for retrieving the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-channel-2024-03-18/ListChannelContractsRequest AWS API Documentation
+    #
+    class ListChannelContractsRequest < Struct.new(
+      :catalog,
+      :contract_type,
+      :statuses,
+      :contract_type_filters,
+      :contract_type_sort,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] items
+    #   List of channel contracts matching the criteria.
+    #   @return [Array<Types::ChannelContractSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   Token for retrieving the next page of results, if available.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-channel-2024-03-18/ListChannelContractsResponse AWS API Documentation
+    #
+    class ListChannelContractsResponse < Struct.new(
+      :items,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Type-specific filters for listing channel contracts.
+    #
+    # @note ListChannelContractsTypeFilters is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @!attribute [rw] managed_services_attestation_type_filters
+    #   Filters specific to managed services attestation channel contracts.
+    #   Applies only to managed services attestation channel contracts.
+    #   @return [Types::ManagedServicesAttestationTypeFilters]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-channel-2024-03-18/ListChannelContractsTypeFilters AWS API Documentation
+    #
+    class ListChannelContractsTypeFilters < Struct.new(
+      :managed_services_attestation_type_filters,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class ManagedServicesAttestationTypeFilters < ListChannelContractsTypeFilters; end
+      class Unknown < ListChannelContractsTypeFilters; end
+    end
+
+    # Type-specific sorting options for listing channel contracts.
+    #
+    # @note ListChannelContractsTypeSort is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @!attribute [rw] managed_services_attestation_type_sort
+    #   Sorting options specific to managed services attestation channel
+    #   contracts. Applies only to managed services attestation channel
+    #   contracts.
+    #   @return [Types::ManagedServicesAttestationTypeSort]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-channel-2024-03-18/ListChannelContractsTypeSort AWS API Documentation
+    #
+    class ListChannelContractsTypeSort < Struct.new(
+      :managed_services_attestation_type_sort,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class ManagedServicesAttestationTypeSort < ListChannelContractsTypeSort; end
+      class Unknown < ListChannelContractsTypeSort; end
     end
 
     # @!attribute [rw] handshake_type
@@ -816,6 +1334,10 @@ module Aws::PartnerCentralChannel
     #   Token for retrieving the next page of results.
     #   @return [String]
     #
+    # @!attribute [rw] type
+    #   Filter by program management account type.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-channel-2024-03-18/ListProgramManagementAccountsRequest AWS API Documentation
     #
     class ListProgramManagementAccountsRequest < Struct.new(
@@ -826,7 +1348,8 @@ module Aws::PartnerCentralChannel
       :account_ids,
       :statuses,
       :sort,
-      :next_token)
+      :next_token,
+      :type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -974,6 +1497,206 @@ module Aws::PartnerCentralChannel
       include Aws::Structure
     end
 
+    # Details specific to managed services attestation channel contracts.
+    # Applies only to managed services attestation channel contracts.
+    #
+    # @!attribute [rw] legal_entity_name
+    #   The legal name of the end customer's legal entity.
+    #   @return [String]
+    #
+    # @!attribute [rw] relationship_identifier
+    #   The identifier of the relationship covered by the attestation.
+    #   @return [String]
+    #
+    # @!attribute [rw] program_management_account_identifier
+    #   The identifier of the program management account.
+    #   @return [String]
+    #
+    # @!attribute [rw] member_account_ids
+    #   The AWS account IDs of the end customer's member accounts covered
+    #   by the managed services.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] end_date
+    #   The end date of the managed services attestation.
+    #   @return [Time]
+    #
+    # @!attribute [rw] supported_services
+    #   The managed services that the partner provides to the end customer.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] signatory_name
+    #   The name of the person who signs the attestation for the end
+    #   customer.
+    #   @return [String]
+    #
+    # @!attribute [rw] signatory_email
+    #   The email address of the signatory.
+    #   @return [String]
+    #
+    # @!attribute [rw] legal_entity_address
+    #   The address of the end customer's legal entity, if available.
+    #   @return [Types::Address]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-channel-2024-03-18/ManagedServicesAttestationDetails AWS API Documentation
+    #
+    class ManagedServicesAttestationDetails < Struct.new(
+      :legal_entity_name,
+      :relationship_identifier,
+      :program_management_account_identifier,
+      :member_account_ids,
+      :end_date,
+      :supported_services,
+      :signatory_name,
+      :signatory_email,
+      :legal_entity_address)
+      SENSITIVE = [:legal_entity_name, :signatory_name, :signatory_email, :legal_entity_address]
+      include Aws::Structure
+    end
+
+    # Payload for managed services attestation channel contract requests.
+    # Applies only to managed services attestation channel contracts.
+    #
+    # @!attribute [rw] legal_entity_name
+    #   The legal name of the end customer's legal entity.
+    #   @return [String]
+    #
+    # @!attribute [rw] relationship_identifier
+    #   The identifier of the managed services relationship to cover with
+    #   the attestation.
+    #   @return [String]
+    #
+    # @!attribute [rw] program_management_account_identifier
+    #   The identifier of the program management account for the
+    #   relationship.
+    #   @return [String]
+    #
+    # @!attribute [rw] member_account_ids
+    #   The AWS account IDs of the end customer's member accounts to cover,
+    #   not allowed when the account scope is the entire organization.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] end_date
+    #   The end date of the attestation, which must be after the start date
+    #   of the relationship.
+    #   @return [Time]
+    #
+    # @!attribute [rw] supported_services
+    #   The managed services that the partner provides to the end customer.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] legal_entity_address
+    #   The address of the end customer's legal entity.
+    #   @return [Types::Address]
+    #
+    # @!attribute [rw] signatory_name
+    #   The name of the person who signs the attestation for the end
+    #   customer.
+    #   @return [String]
+    #
+    # @!attribute [rw] signatory_email
+    #   The email address to which the attestation is sent for signature.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-channel-2024-03-18/ManagedServicesAttestationPayload AWS API Documentation
+    #
+    class ManagedServicesAttestationPayload < Struct.new(
+      :legal_entity_name,
+      :relationship_identifier,
+      :program_management_account_identifier,
+      :member_account_ids,
+      :end_date,
+      :supported_services,
+      :legal_entity_address,
+      :signatory_name,
+      :signatory_email)
+      SENSITIVE = [:legal_entity_name, :legal_entity_address, :signatory_name, :signatory_email]
+      include Aws::Structure
+    end
+
+    # Summary information about a managed services attestation channel
+    # contract. Applies only to managed services attestation channel
+    # contracts.
+    #
+    # @!attribute [rw] legal_entity_name
+    #   The legal name of the end customer's legal entity.
+    #   @return [String]
+    #
+    # @!attribute [rw] relationship_identifier
+    #   The identifier of the relationship covered by the attestation.
+    #   @return [String]
+    #
+    # @!attribute [rw] program_management_account_identifier
+    #   The identifier of the program management account.
+    #   @return [String]
+    #
+    # @!attribute [rw] member_account_ids
+    #   The AWS account IDs of the end customer's member accounts covered
+    #   by the managed services.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] end_date
+    #   The end date of the managed services attestation.
+    #   @return [Time]
+    #
+    # @!attribute [rw] supported_services
+    #   The managed services that the partner provides to the end customer.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-channel-2024-03-18/ManagedServicesAttestationSummaryDetails AWS API Documentation
+    #
+    class ManagedServicesAttestationSummaryDetails < Struct.new(
+      :legal_entity_name,
+      :relationship_identifier,
+      :program_management_account_identifier,
+      :member_account_ids,
+      :end_date,
+      :supported_services)
+      SENSITIVE = [:legal_entity_name]
+      include Aws::Structure
+    end
+
+    # Filters specific to managed services attestation channel contracts.
+    # Applies only to managed services attestation channel contracts.
+    #
+    # @!attribute [rw] relationship_identifiers
+    #   Filter by relationship identifiers.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] legal_entity_names
+    #   Filter by legal entity names.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-channel-2024-03-18/ManagedServicesAttestationTypeFilters AWS API Documentation
+    #
+    class ManagedServicesAttestationTypeFilters < Struct.new(
+      :relationship_identifiers,
+      :legal_entity_names)
+      SENSITIVE = [:legal_entity_names]
+      include Aws::Structure
+    end
+
+    # Sorting options specific to managed services attestation channel
+    # contracts. Applies only to managed services attestation channel
+    # contracts.
+    #
+    # @!attribute [rw] sort_order
+    #   The sort order (ascending or descending).
+    #   @return [String]
+    #
+    # @!attribute [rw] sort_by
+    #   The field to sort by.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-channel-2024-03-18/ManagedServicesAttestationTypeSort AWS API Documentation
+    #
+    class ManagedServicesAttestationTypeSort < Struct.new(
+      :sort_order,
+      :sort_by)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Configuration for partner-led support plans.
     #
     # @!attribute [rw] coverage
@@ -1058,6 +1781,10 @@ module Aws::PartnerCentralChannel
     #   The current status of the program management account.
     #   @return [String]
     #
+    # @!attribute [rw] type
+    #   The type of the program management account.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-channel-2024-03-18/ProgramManagementAccountSummary AWS API Documentation
     #
     class ProgramManagementAccountSummary < Struct.new(
@@ -1071,7 +1798,8 @@ module Aws::PartnerCentralChannel
       :created_at,
       :updated_at,
       :start_date,
-      :status)
+      :status,
+      :type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1197,11 +1925,22 @@ module Aws::PartnerCentralChannel
     #   @return [String]
     #
     # @!attribute [rw] resale_account_model
-    #   The resale account model for the relationship.
+    #   The resale account model for the relationship. Applies only to
+    #   billing transfer relationships.
     #   @return [String]
     #
     # @!attribute [rw] sector
     #   The business sector for the relationship.
+    #   @return [String]
+    #
+    # @!attribute [rw] account_scope
+    #   The account scope of the managed services relationship. Applies only
+    #   to managed services relationships.
+    #   @return [String]
+    #
+    # @!attribute [rw] channel_contract_id
+    #   The identifier of the channel contract currently in effect for the
+    #   relationship. Applies only to managed services relationships.
     #   @return [String]
     #
     # @!attribute [rw] created_at
@@ -1214,6 +1953,10 @@ module Aws::PartnerCentralChannel
     #
     # @!attribute [rw] start_date
     #   The start date of the relationship.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_date
+    #   The end date of the relationship.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-channel-2024-03-18/RelationshipDetail AWS API Documentation
@@ -1229,9 +1972,12 @@ module Aws::PartnerCentralChannel
       :display_name,
       :resale_account_model,
       :sector,
+      :account_scope,
+      :channel_contract_id,
       :created_at,
       :updated_at,
-      :start_date)
+      :start_date,
+      :end_date)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1832,7 +2578,8 @@ module Aws::PartnerCentralChannel
     #   @return [String]
     #
     # @!attribute [rw] requested_support_plan
-    #   The updated support plan for the relationship.
+    #   The updated support plan for the relationship. Applies only to
+    #   billing transfer relationships.
     #   @return [Types::SupportPlan]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-channel-2024-03-18/UpdateRelationshipRequest AWS API Documentation

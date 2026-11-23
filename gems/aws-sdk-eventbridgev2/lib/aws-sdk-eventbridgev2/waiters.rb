@@ -67,10 +67,11 @@ module Aws::EventBridgeV2
   # The following table lists the valid waiter names, the operations they call,
   # and the default `:delay` and `:max_attempts` values.
   #
-  # | waiter_name       | params                      | :delay   | :max_attempts |
-  # | ----------------- | --------------------------- | -------- | ------------- |
-  # | event_bus_active  | {Client#describe_event_bus} | 2        | 60            |
-  # | event_bus_deleted | {Client#describe_event_bus} | 2        | 60            |
+  # | waiter_name           | params                       | :delay   | :max_attempts |
+  # | --------------------- | ---------------------------- | -------- | ------------- |
+  # | event_bus_active      | {Client#describe_event_bus}  | 2        | 60            |
+  # | event_bus_deleted     | {Client#describe_event_bus}  | 2        | 60            |
+  # | msk_subscriber_active | {Client#describe_subscriber} | 2        | 150           |
   #
   module Waiters
 
@@ -166,6 +167,51 @@ module Aws::EventBridgeV2
 
       # @option (see Client#describe_event_bus)
       # @return (see Client#describe_event_bus)
+      def wait(params = {})
+        @waiter.wait(client: @client, params: params)
+      end
+
+      # @api private
+      attr_reader :waiter
+
+    end
+
+    # Waits until an Amazon MSK subscriber's connectivity reports ACTIVE. Use after CreateSubscriber or UpdateSubscriber on a subscriber that targets an MSK cluster. Fails fast on PROVISION_FAILED, surfacing MskDetails.StateReason. PROVISIONING falls through to the implicit retry. Applies only to MSK subscribers; other subscribers return no MskDetails, so the waiter times out.
+    class MskSubscriberActive
+
+      # @param [Hash] options
+      # @option options [required, Client] :client
+      # @option options [Integer] :max_attempts (150)
+      # @option options [Integer] :delay (2)
+      # @option options [Proc] :before_attempt
+      # @option options [Proc] :before_wait
+      def initialize(options)
+        @client = options.fetch(:client)
+        @waiter = Aws::Waiters::Waiter.new({
+          max_attempts: 150,
+          delay: 2,
+          poller: Aws::Waiters::Poller.new(
+            operation_name: :describe_subscriber,
+            acceptors: [
+              {
+                "matcher" => "path",
+                "argument" => "subscriber_details.msk_details.connectivity_state",
+                "state" => "failure",
+                "expected" => "PROVISION_FAILED"
+              },
+              {
+                "matcher" => "path",
+                "argument" => "subscriber_details.msk_details.connectivity_state",
+                "state" => "success",
+                "expected" => "ACTIVE"
+              }
+            ]
+          )
+        }.merge(options))
+      end
+
+      # @option (see Client#describe_subscriber)
+      # @return (see Client#describe_subscriber)
       def wait(params = {})
         @waiter.wait(client: @client, params: params)
       end

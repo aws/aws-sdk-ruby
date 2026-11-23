@@ -63,6 +63,7 @@
     "DeleteRegistryRecord": "<p>Deletes a registry record. The record's status transitions to <code>DELETING</code> and the record is removed asynchronously.</p>",
     "DeleteResourcePolicy": "<p>Deletes the resource-based policy for a specified resource.</p> <note> <p>This feature is currently available only for AgentCore Runtime and Gateway.</p> </note>",
     "DeleteWorkloadIdentity": "<p>Deletes a workload identity.</p>",
+    "GetAgentInsightStore": "<p>Returns the account's service-defined default Agent Insight Store. The logical default exists for every enrolled account; its backing state may be initialized on first access.</p>",
     "GetAgentRuntime": "<p>Gets an Amazon Bedrock AgentCore Runtime.</p>",
     "GetAgentRuntimeEndpoint": "<p>Gets information about an Amazon Secure AgentEndpoint.</p>",
     "GetApiKeyCredentialProvider": "<p>Retrieves information about an API key credential provider.</p>",
@@ -98,6 +99,7 @@
     "GetResourcePolicy": "<p>Retrieves the resource-based policy for a specified resource.</p> <note> <p>This feature is currently available only for AgentCore Runtime and Gateway.</p> </note>",
     "GetTokenVault": "<p>Retrieves information about a token vault.</p>",
     "GetWorkloadIdentity": "<p>Retrieves information about a workload identity.</p>",
+    "ListAgentInsightStores": "<p>Lists the account's service-defined default Agent Insight Store. The singleton backing state may be initialized on first access.</p>",
     "ListAgentRuntimeEndpoints": "<p>Lists all endpoints for a specific Amazon Secure Agent.</p>",
     "ListAgentRuntimeVersions": "<p>Lists all versions of a specific Amazon Secure Agent.</p>",
     "ListAgentRuntimeVersionsByCapacityProvider": "<p>Lists the agent runtime versions that are associated with a capacity provider. Use this operation to identify the runtimes you must disassociate before you can delete the capacity provider. Results are paginated; use the <code>nextToken</code> parameter to retrieve additional results.</p>",
@@ -110,7 +112,7 @@
     "ListConfigurationBundleVersions": "<p>Lists all versions of a configuration bundle, with optional filtering by branch name or creation source.</p>",
     "ListConfigurationBundles": "<p>Lists all configuration bundles in the account.</p>",
     "ListConsentPortals": "<p>Lists all of the consent portals in your account.</p>",
-    "ListDatasetExamples": "<p> Returns paginated examples from the dataset. The server embeds the resolved version in the pagination token. Once pagination begins, all subsequent pages are pinned to that version regardless of concurrent mutations. </p>",
+    "ListDatasetExamples": "<p> Returns paginated examples from the dataset. The server embeds the resolved version in the pagination token. Once pagination begins, all subsequent pages are pinned to that version regardless of concurrent mutations. A request with a pagination token can omit <code>datasetVersion</code>. If it sets a version that differs from the token's version, the request fails with a <code>ValidationException</code>. </p>",
     "ListDatasetVersions": "<p> Lists all published versions of a dataset, sorted by version number descending (newest first). Does not include the DRAFT working copy. </p>",
     "ListDatasets": "<p> Lists all datasets in the caller's account, paginated. </p>",
     "ListEvaluators": "<p> Lists all available evaluators, including both builtin evaluators provided by the service and custom evaluators created by the user. </p>",
@@ -147,6 +149,7 @@
     "SynchronizeGatewayTargets": "<p>Synchronizes the gateway targets by fetching the latest tool definitions from the target endpoints.</p> <p>You cannot synchronize a target that is in a pending authorization state (<code>CREATE_PENDING_AUTH</code>, <code>UPDATE_PENDING_AUTH</code>, or <code>SYNCHRONIZE_PENDING_AUTH</code>). Wait for the authorization to complete or fail before synchronizing.</p> <p>You cannot synchronize a target that has a static tool schema (<code>mcpToolSchema</code>) configured. Remove the static schema through an <code>UpdateGatewayTarget</code> call to enable dynamic tool synchronization.</p>",
     "TagResource": "<p>Associates the specified tags to a resource with the specified resourceArn. If existing tags on a resource are not specified in the request parameters, they are not changed. When a resource is deleted, the tags associated with that resource are also deleted.</p> <note> <p>This feature is currently available only for AgentCore Runtime, Browser, Browser Profile, Code Interpreter tool, and Gateway.</p> </note>",
     "UntagResource": "<p>Removes the specified tags from the specified resource.</p> <note> <p>This feature is currently available only for AgentCore Runtime, Browser, Browser Profile, Code Interpreter tool, and Gateway.</p> </note>",
+    "UpdateAgentInsightStore": "<p>Updates the enablement status or encryption configuration of an Agent Insight Store.</p>",
     "UpdateAgentRuntime": "<p>Updates an existing Amazon Secure Agent.</p>",
     "UpdateAgentRuntimeEndpoint": "<p>Updates an existing Amazon Bedrock AgentCore Runtime endpoint.</p>",
     "UpdateApiKeyCredentialProvider": "<p>Updates an existing API key credential provider.</p>",
@@ -262,6 +265,74 @@
         "CreateAgentRuntimeEndpointRequest$description": "<p>The description of the AgentCore Runtime endpoint.</p>",
         "GetAgentRuntimeEndpointResponse$description": "<p>The description of the AgentCore Runtime endpoint.</p>",
         "UpdateAgentRuntimeEndpointRequest$description": "<p>The updated description of the AgentCore Runtime endpoint.</p>"
+      }
+    },
+    "AgentInsightStoreArn": {
+      "base": null,
+      "refs": {
+        "AgentInsightStoreSummary$agentInsightStoreArn": "<p>The Amazon Resource Name (ARN) of the Agent Insight Store.</p>",
+        "GetAgentInsightStoreResponse$agentInsightStoreArn": "<p>The Amazon Resource Name (ARN) of the Agent Insight Store.</p>",
+        "UpdateAgentInsightStoreResponse$agentInsightStoreArn": "<p>The Amazon Resource Name (ARN) of the updated Agent Insight Store.</p>"
+      }
+    },
+    "AgentInsightStoreEnablementStatus": {
+      "base": null,
+      "refs": {
+        "AgentInsightStoreSummary$enablementStatus": "<p>Specifies whether the Agent Insight Store accepts new Agent Insights. The default value is enabled.</p>",
+        "GetAgentInsightStoreResponse$enablementStatus": "<p>Specifies whether the Agent Insight Store accepts new Agent Insights. The default value is enabled.</p>",
+        "UpdateAgentInsightStoreRequest$enablementStatus": "<p>Specifies whether the Agent Insight Store accepts new Agent Insights. If you don't specify this parameter, the store's current enablement setting remains unchanged.</p>",
+        "UpdateAgentInsightStoreResponse$enablementStatus": "<p>Specifies whether the Agent Insight Store accepts new Agent Insights after the update request.</p>"
+      }
+    },
+    "AgentInsightStoreEncryptionConfiguration": {
+      "base": "<p>Contains the encryption mode and key configuration used to encrypt new Agent Insights in an Agent Insight Store.</p>",
+      "refs": {
+        "AgentInsightStoreSummary$encryptionConfiguration": "<p>Specifies the encryption mode and key configuration that encrypts new Agent Insights and protects the data at rest.</p>",
+        "GetAgentInsightStoreResponse$encryptionConfiguration": "<p>Specifies the encryption mode and key configuration that encrypts new Agent Insights and protects the data at rest.</p>",
+        "UpdateAgentInsightStoreRequest$encryptionConfiguration": "<p>Specifies the encryption mode and key configuration to use for new Agent Insights. If you don't specify this parameter, the store's current encryption configuration remains unchanged.</p>"
+      }
+    },
+    "AgentInsightStoreEncryptionMode": {
+      "base": "<p>Specifies the encryption mode used to protect new Agent Insights. Valid values:</p> <dl> <dt>AWS_OWNED_KMS_KEY</dt> <dd> <p>Uses an AWS owned key.</p> </dd> <dt>CUSTOMER_MANAGED_KMS</dt> <dd> <p>Uses a customer managed AWS Key Management Service (AWS KMS) key.</p> </dd> </dl>",
+      "refs": {
+        "AgentInsightStoreEncryptionConfiguration$mode": "<p>Specifies the encryption mode used to protect new Agent Insights.</p>"
+      }
+    },
+    "AgentInsightStoreFailureReason": {
+      "base": null,
+      "refs": {
+        "GetAgentInsightStoreResponse$failureReason": "<p>Describes the failure that prevented the Agent Insight Store from reaching its requested lifecycle status.</p>",
+        "UpdateAgentInsightStoreResponse$failureReason": "<p>Describes the failure that prevented the Agent Insight Store from reaching its requested lifecycle status.</p>"
+      }
+    },
+    "AgentInsightStoreId": {
+      "base": "<p>Service-defined identifier for an Agent Insight Store.</p>",
+      "refs": {
+        "AgentInsightStoreSummary$agentInsightStoreId": "<p>The unique identifier of the Agent Insight Store.</p>",
+        "GetAgentInsightStoreRequest$agentInsightStoreId": "<p>Specifies the unique identifier of the Agent Insight Store to retrieve.</p>",
+        "GetAgentInsightStoreResponse$agentInsightStoreId": "<p>The unique identifier of the Agent Insight Store.</p>",
+        "UpdateAgentInsightStoreRequest$agentInsightStoreId": "<p>Specifies the unique identifier of the Agent Insight Store to update.</p>",
+        "UpdateAgentInsightStoreResponse$agentInsightStoreId": "<p>The unique identifier of the updated Agent Insight Store.</p>"
+      }
+    },
+    "AgentInsightStoreStatus": {
+      "base": null,
+      "refs": {
+        "AgentInsightStoreSummary$status": "<p>The current lifecycle status of the Agent Insight Store. Valid values:</p> <dl> <dt>ACTIVE</dt> <dd> <p>The store is available.</p> </dd> <dt>UPDATING</dt> <dd> <p>The service is applying a requested change.</p> </dd> <dt>INACTIVE</dt> <dd> <p>The store does not accept new Agent Insights.</p> </dd> <dt>ERROR</dt> <dd> <p>The store requires intervention.</p> </dd> </dl>",
+        "GetAgentInsightStoreResponse$status": "<p>The current lifecycle status of the Agent Insight Store. Valid values:</p> <dl> <dt>ACTIVE</dt> <dd> <p>The store is available.</p> </dd> <dt>UPDATING</dt> <dd> <p>The service is applying a requested change.</p> </dd> <dt>INACTIVE</dt> <dd> <p>The store does not accept new Agent Insights.</p> </dd> <dt>ERROR</dt> <dd> <p>The store requires intervention.</p> </dd> </dl>",
+        "UpdateAgentInsightStoreResponse$status": "<p>The lifecycle status of the Agent Insight Store after the update request. Valid values:</p> <dl> <dt>ACTIVE</dt> <dd> <p>The store is available.</p> </dd> <dt>UPDATING</dt> <dd> <p>The service is applying a requested change.</p> </dd> <dt>INACTIVE</dt> <dd> <p>The store does not accept new Agent Insights.</p> </dd> <dt>ERROR</dt> <dd> <p>The store requires intervention.</p> </dd> </dl>"
+      }
+    },
+    "AgentInsightStoreSummary": {
+      "base": "<p>Contains summary information about an Agent Insight Store.</p>",
+      "refs": {
+        "AgentInsightStoreSummaryList$member": null
+      }
+    },
+    "AgentInsightStoreSummaryList": {
+      "base": null,
+      "refs": {
+        "ListAgentInsightStoresResponse$agentInsightStores": "<p>The Agent Insight Store summaries.</p>"
       }
     },
     "AgentManagedRuntimeType": {
@@ -734,6 +805,12 @@
         "S3Configuration$bucketOwnerAccountId": "<p>The account ID of the Amazon S3 bucket owner. This ID is used for cross-account access to the bucket.</p>"
       }
     },
+    "AwsBillingConnectorConfiguration": {
+      "base": "<p>The configuration for an AWS Billing payment connector. Payments made through an AWS Billing payment connector are charged to the AWS account that owns the payment manager, and appear on that account's AWS bill as AWS Marketplace charges.</p>",
+      "refs": {
+        "CredentialsProviderConfiguration$awsBilling": "<p>The configuration for an AWS Billing payment connector. The service sets this configuration when it creates the connector and returns it in responses. Don't specify it when you create an AWS Billing payment connector.</p>"
+      }
+    },
     "BatchPutGatewayRateLimitsRequest": {
       "base": null,
       "refs": {}
@@ -952,6 +1029,12 @@
         "BrowserSummaries$member": null
       }
     },
+    "BuildLifecycleHooks": {
+      "base": "<p>The lifecycle hooks that run when you create or update the AgentCore Runtime, before any sessions are created.</p>",
+      "refs": {
+        "RuntimeHooksConfiguration$build": "<p>The hooks that run when you create or update the AgentCore Runtime, before any sessions are created.</p>"
+      }
+    },
     "CapacityProviderArn": {
       "base": null,
       "refs": {
@@ -1102,7 +1185,7 @@
       }
     },
     "CertificateConfiguration": {
-      "base": "<p>A reference to a private certificate authority (CA) certificate that the gateway uses to verify TLS connections to the target endpoint. Use this when the target presents a certificate issued by a private CA that is not trusted by default. Specify exactly one certificate source. The configuration is a reference only and never contains the certificate content.</p>",
+      "base": "<p>A reference to a private certificate authority (CA) certificate that AgentCore uses to verify TLS connections to an endpoint, such as a gateway target or an identity provider, that presents a certificate issued by a private CA that is not trusted by default. Specify exactly one certificate source. The configuration is a reference only and never contains the certificate content.</p>",
       "refs": {
         "CertificateConfigurationList$member": null
       }
@@ -1112,6 +1195,9 @@
       "refs": {
         "CreateGatewayTargetRequest$certificateConfigurations": "<p>The private certificate authority (CA) configurations for the gateway target. Use this to have the gateway trust a private CA when it establishes TLS connections to the target endpoint. Provide each certificate by reference to an Amazon S3 object or an Amazon Web Services Secrets Manager secret. You can specify only one certificate authority configuration in this list.</p>",
         "CreateGatewayTargetResponse$certificateConfigurations": "<p>The private certificate authority (CA) configurations for the gateway target.</p>",
+        "CustomJWTAuthorizerConfiguration$certificateConfigurations": "<p>The private certificate authority (CA) configurations for the identity provider. Use this to have AgentCore Identity trust a private CA when establishing TLS connections to identity provider endpoints. You can specify only one certificate authority configuration in this list. Provide the certificate by reference to an Amazon S3 object or an Amazon Web Services Secrets Manager secret. You can use this only together with <code>privateEndpoint</code>.</p>",
+        "CustomOauth2ProviderConfigInput$certificateConfigurations": "<p>The private certificate authority (CA) configurations for the identity provider. Use this to have AgentCore Identity trust a private CA when establishing TLS connections to identity provider endpoints. You can specify only one certificate authority configuration in this list. Provide the certificate by reference to an Amazon S3 object or an Amazon Web Services Secrets Manager secret. You can use this only together with <code>privateEndpoint</code>.</p>",
+        "CustomOauth2ProviderConfigOutput$certificateConfigurations": "<p>The private certificate authority (CA) configurations for the identity provider. Use this to have AgentCore Identity trust a private CA when establishing TLS connections to identity provider endpoints. You can specify only one certificate authority configuration in this list. Provide the certificate by reference to an Amazon S3 object or an Amazon Web Services Secrets Manager secret. You can use this only together with <code>privateEndpoint</code>.</p>",
         "GatewayTarget$certificateConfigurations": "<p>The private certificate authority (CA) configurations for the gateway target.</p>",
         "GetGatewayTargetResponse$certificateConfigurations": "<p>The private certificate authority (CA) configurations for the gateway target.</p>",
         "UpdateGatewayTargetRequest$certificateConfigurations": "<p>The private certificate authority (CA) configurations for the gateway target. Use this to have the gateway trust a private CA when it establishes TLS connections to the target endpoint. Provide each certificate by reference to an Amazon S3 object or an Amazon Web Services Secrets Manager secret. You can specify only one certificate authority configuration in this list. To remove a previously configured certificate authority, omit this field on update.</p>",
@@ -1239,6 +1325,7 @@
         "DeletePaymentManagerRequest$clientToken": "<p>A unique, case-sensitive identifier to ensure that the API request completes no more than one time. If you don't specify this field, a value is randomly generated for you. If this token matches a previous request, the service ignores the request, but doesn't return an error. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">Ensuring idempotency</a>.</p>",
         "RotatePaymentConnectorCredentialsRequest$clientToken": "<p>A unique, case-sensitive identifier to ensure that the API request completes no more than one time. If you don't specify this field, a value is randomly generated for you. If this token matches a previous request, the service ignores the request, but doesn't return an error. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">Ensuring idempotency</a>.</p>",
         "StartPolicyGenerationRequest$clientToken": "<p>A unique, case-sensitive identifier to ensure the idempotency of the request. The Amazon Web Services SDK automatically generates this token, so you don't need to provide it in most cases. If you retry a request with the same client token, the service returns the same response without starting a duplicate generation.</p>",
+        "UpdateAgentInsightStoreRequest$clientToken": "<p>A unique, case-sensitive identifier to ensure that the API request completes no more than one time. If you don't specify this field, a value is randomly generated for you. If this token matches a previous request, the service ignores the request, but doesn't return an error. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">Ensuring idempotency</a>.</p>",
         "UpdateAgentRuntimeEndpointRequest$clientToken": "<p>A unique, case-sensitive identifier to ensure idempotency of the request.</p>",
         "UpdateAgentRuntimeRequest$clientToken": "<p>A unique, case-sensitive identifier to ensure idempotency of the request.</p>",
         "UpdateCapacityProviderInput$clientToken": "<p>A unique, case-sensitive identifier to ensure that the API request completes no more than one time. If you don't specify this field, a value is randomly generated for you. If this token matches a previous request, the service ignores the request, but doesn't return an error. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">Ensuring idempotency</a>.</p>",
@@ -1823,6 +1910,12 @@
         "ContentConfiguration$type": "<p>Type of content to stream.</p>"
       }
     },
+    "CpuOptions": {
+      "base": "<p>The CPU configuration for capacity provider instances, including nested virtualization.</p>",
+      "refs": {
+        "LaunchParameters$cpuOptions": "<p>The central processing unit (CPU) options for the instances that the capacity provider launches.</p>"
+      }
+    },
     "CreateAgentRuntimeEndpointRequest": {
       "base": null,
       "refs": {}
@@ -1992,7 +2085,7 @@
     "CreateMemoryInputEventExpiryDurationInteger": {
       "base": null,
       "refs": {
-        "CreateMemoryInput$eventExpiryDuration": "<p>The duration after which memory events expire. Specified as an ISO 8601 duration.</p>"
+        "CreateMemoryInput$eventExpiryDuration": "<p>The number of days after which memory events expire, between 7 and 3650 days.</p>"
       }
     },
     "CreateMemoryOutput": {
@@ -2169,7 +2262,7 @@
       }
     },
     "CredentialsProviderConfiguration": {
-      "base": "<p>The credential provider configuration for a payment connector. Specifies the payment provider type and its associated credential provider.</p>",
+      "base": "<p>The configuration for a payment connector. Specifies the payment provider type and either its associated credential provider or, for an AWS Billing payment connector, its billing configuration.</p>",
       "refs": {
         "CredentialsProviderConfigurations$member": null
       }
@@ -2177,7 +2270,7 @@
     "CredentialsProviderConfigurations": {
       "base": null,
       "refs": {
-        "CreatePaymentConnectorRequest$credentialProviderConfigurations": "<p>The credential provider configurations for the payment connector. These configurations specify how the connector authenticates with the payment provider.</p>",
+        "CreatePaymentConnectorRequest$credentialProviderConfigurations": "<p>The credential provider configurations for the payment connector. These configurations specify how the connector authenticates with the payment provider.</p> <p>For an <code>AwsBilling</code> payment connector, omit this parameter or specify an empty list. The service uses the AWS Marketplace service-linked role in your account, which must exist before you create the connector, and you must have permission to call <code>iam:GetRole</code> on it.</p>",
         "CreatePaymentConnectorResponse$credentialProviderConfigurations": "<p>The credential provider configurations for the created payment connector.</p>",
         "GetPaymentConnectorResponse$credentialProviderConfigurations": "<p>The credential provider configurations for the payment connector.</p>",
         "UpdatePaymentConnectorRequest$credentialProviderConfigurations": "<p>The updated credential provider configurations for the payment connector.</p>",
@@ -2332,6 +2425,12 @@
         "ListDatasetExamplesResponse$examples": "<p> Paginated example content. Each element is a JSON object containing at least an <code>exampleId</code> field plus the schema-specific content fields. </p>"
       }
     },
+    "DatasetGenerationId": {
+      "base": null,
+      "refs": {
+        "ListDatasetExamplesFilterGenerationIdsList$member": null
+      }
+    },
     "DatasetId": {
       "base": null,
       "refs": {
@@ -2406,7 +2505,7 @@
         "DeleteDatasetResponse$datasetVersion": "<p> The version that was deleted. </p>",
         "GetDatasetRequest$datasetVersion": "<p> Version to retrieve: \"DRAFT\" or a version number. Defaults to DRAFT if absent. </p>",
         "GetDatasetResponse$datasetVersion": "<p> The resolved version: \"DRAFT\" (default) or the requested version number. </p>",
-        "ListDatasetExamplesRequest$datasetVersion": "<p> Version to paginate: \"DRAFT\" or a version number. Defaults to DRAFT if absent. Only used on the first request; for subsequent pages, the version is extracted from the pagination token. </p>",
+        "ListDatasetExamplesRequest$datasetVersion": "<p> Version to paginate: \"DRAFT\" or a version number. Defaults to DRAFT if absent on the first request. With a pagination token, the version comes from the token: you can omit this member, and a value that differs from the token's version is rejected with a <code>ValidationException</code>. </p>",
         "ListDatasetExamplesResponse$datasetVersion": "<p> The version returned. </p>"
       }
     },
@@ -3042,6 +3141,16 @@
         "ManagedResourceDetails$domain": "<p>The domain associated with this managed resource.</p>"
       }
     },
+    "DomainOverride": {
+      "base": "<p>The public domain names for a gateway that clients reach through your own proxy or custom domain. When you configure a domain override, the gateway advertises these domains instead of the inbound Host header in the URLs that it returns for OAuth discovery, such as the protected resource metadata and the <code>WWW-Authenticate</code> challenge.</p>",
+      "refs": {
+        "CreateGatewayRequest$domainOverride": "<p>The public domain names that the gateway advertises in its OAuth discovery URLs instead of the inbound Host header. Specify this when clients reach the gateway through your own proxy or custom domain.</p>",
+        "CreateGatewayResponse$domainOverride": "<p>The public domain names that the gateway advertises in its OAuth discovery URLs instead of the inbound Host header.</p>",
+        "GetGatewayResponse$domainOverride": "<p>The public domain names that the gateway advertises in its OAuth discovery URLs instead of the inbound Host header.</p>",
+        "UpdateGatewayRequest$domainOverride": "<p>The updated public domain names that the gateway advertises in its OAuth discovery URLs instead of the inbound Host header. Specify this when clients reach the gateway through your own proxy or custom domain.</p>",
+        "UpdateGatewayResponse$domainOverride": "<p>The public domain names that the gateway advertises in its OAuth discovery URLs instead of the inbound Host header.</p>"
+      }
+    },
     "Double": {
       "base": null,
       "refs": {
@@ -3445,6 +3554,64 @@
       "refs": {
         "EvaluatorSummary$evaluatorType": "<p> The type of evaluator, indicating whether it is a built-in evaluator provided by the service or a custom evaluator created by the user. </p>",
         "GetEvaluatorResponse$evaluatorType": "<p> The kind of evaluator resource. Valid values: </p> <ul> <li> <p> <code>Builtin</code> – An Amazon Web Services-managed global evaluator.</p> </li> <li> <p> <code>ThirdParty</code> – An Amazon Web Services-managed global evaluator from a third-party provider.</p> </li> <li> <p> <code>Custom</code> – A customer-created evaluator.</p> </li> <li> <p> <code>CustomCode</code> – A customer-created code-based evaluator.</p> </li> <li> <p> <code>CustomDerived</code> – A customer-created evaluator derived from an existing base evaluator.</p> </li> </ul>"
+      }
+    },
+    "ExampleCountByField": {
+      "base": "<p> The number of examples that have each field. An example can have more than one of these fields, so the counts can add up to more than <code>exampleCount</code>. </p>",
+      "refs": {
+        "DatasetSummary$exampleCountByField": "<p> The number of examples that have each field, for the DRAFT. Absent when the counts are unknown. </p>",
+        "DatasetVersionSummary$exampleCountByField": "<p> The number of examples that have each field, for this version. Absent when the counts are unknown. </p>",
+        "GetDatasetResponse$exampleCountByField": "<p> The number of examples that have each field, for the resolved version. Absent when the counts are unknown. </p>"
+      }
+    },
+    "ExampleCountByFieldCondition": {
+      "base": "<p> A condition on the number of examples that have the given fields. The count includes each example that has at least one of the fields in <code>anyOf</code>. </p>",
+      "refs": {
+        "ExampleCountByFieldConditionList$member": null
+      }
+    },
+    "ExampleCountByFieldConditionList": {
+      "base": "<p> A list of example count conditions. A resource matches if it meets at least one condition. </p>",
+      "refs": {
+        "ListDatasetVersionsFilter$exampleCountByField": "<p> Returns only versions whose example counts meet at least one of these conditions. </p>",
+        "ListDatasetsFilter$exampleCountByField": "<p> Returns only datasets whose DRAFT example counts meet at least one of these conditions. </p>"
+      }
+    },
+    "ExampleCountByFieldConditionMaxLong": {
+      "base": null,
+      "refs": {
+        "ExampleCountByFieldCondition$max": "<p> The maximum count, inclusive. </p>"
+      }
+    },
+    "ExampleCountByFieldConditionMinLong": {
+      "base": null,
+      "refs": {
+        "ExampleCountByFieldCondition$min": "<p> The minimum count, inclusive. </p>"
+      }
+    },
+    "ExampleField": {
+      "base": "<p> A field that a dataset example can have. </p>",
+      "refs": {
+        "ExampleFieldList$member": null
+      }
+    },
+    "ExampleFieldCondition": {
+      "base": "<p> A condition on the fields of an example. </p>",
+      "refs": {
+        "ExampleFieldConditionList$member": null
+      }
+    },
+    "ExampleFieldConditionList": {
+      "base": "<p> A list of example field conditions. An example matches if it meets at least one condition. </p>",
+      "refs": {
+        "ListDatasetExamplesFilter$exampleFields": "<p> Returns only examples that meet at least one of these conditions. Examples last written before example field filtering was available never match. </p>"
+      }
+    },
+    "ExampleFieldList": {
+      "base": "<p> A list of example fields. </p>",
+      "refs": {
+        "ExampleCountByFieldCondition$anyOf": "<p> The fields to count. An example counts if it has at least one of these fields. Required. </p>",
+        "ExampleFieldCondition$anyOf": "<p> Matches examples that have at least one of these fields. Required. </p>"
       }
     },
     "ExampleId": {
@@ -3981,6 +4148,14 @@
         "GetGatewayResponse$gatewayUrl": "<p>An endpoint for invoking gateway.</p>",
         "UpdateGatewayResponse$gatewayUrl": "<p>An endpoint for invoking the updated gateway.</p>"
       }
+    },
+    "GetAgentInsightStoreRequest": {
+      "base": null,
+      "refs": {}
+    },
+    "GetAgentInsightStoreResponse": {
+      "base": null,
+      "refs": {}
     },
     "GetAgentRuntimeEndpointRequest": {
       "base": null,
@@ -4700,6 +4875,12 @@
         "HarnessToolConfiguration$remoteMcp": "<p>Configuration for remote MCP server.</p>"
       }
     },
+    "HarnessRemoteMcpOutboundAuth": {
+      "base": "<p>Authentication method for calling a remote MCP server.</p>",
+      "refs": {
+        "HarnessRemoteMcpConfig$outboundAuth": "<p>How the harness authenticates to this MCP server. Defaults to no authentication.</p>"
+      }
+    },
     "HarnessRemoteMcpUrl": {
       "base": null,
       "refs": {
@@ -4959,6 +5140,12 @@
         "HarnessRemoteMcpConfig$headers": "<p>Custom headers to include when connecting to the remote MCP server.</p>"
       }
     },
+    "HttpPostLifecycleHookAction": {
+      "base": "<p>A lifecycle hook action that sends an HTTP <code>POST</code> request to the agent's container. The path and port can't conflict with a path that your agent already serves for AgentCore Runtime, such as the protocol's invocation path or the health check path.</p>",
+      "refs": {
+        "LifecycleHookAction$httpPost": "<p>Sends an HTTP <code>POST</code> request to your agent's container on the specified port and path to run the hook. The hook succeeds if your container returns a <code>2xx</code> response. The hook fails if your container returns any other response or doesn't respond before the hook times out.</p>"
+      }
+    },
     "HttpQueryParameterName": {
       "base": null,
       "refs": {
@@ -4974,7 +5161,8 @@
     "IamCredentialProvider": {
       "base": "<p>An IAM credential provider for gateway authentication. This structure contains the configuration for authenticating with the target endpoint using IAM credentials and SigV4 signing.</p>",
       "refs": {
-        "CredentialProvider$iamCredentialProvider": "<p>The IAM credential provider. This provider uses IAM authentication with SigV4 signing to access the target endpoint.</p>"
+        "CredentialProvider$iamCredentialProvider": "<p>The IAM credential provider. This provider uses IAM authentication with SigV4 signing to access the target endpoint.</p>",
+        "HarnessRemoteMcpOutboundAuth$awsIam": "<p>Sign requests to the remote MCP server with Signature Version 4 (SigV4) using the harness execution role. If you don't specify a Region, the harness Region is used.</p>"
       }
     },
     "IamCredentialProviderRegionString": {
@@ -5243,6 +5431,7 @@
         "HarnessSlidingWindowConfiguration$messagesCount": "<p>The number of recent messages to retain in the context window.</p>",
         "HarnessSummarizationConfiguration$preserveRecentMessages": "<p>The number of recent messages to preserve without summarization.</p>",
         "MessageBasedTrigger$messageCount": "<p>The number of messages that trigger memory processing.</p>",
+        "ResourceConfiguration$minimumMemoryInMiB": "<p>The minimum amount of memory, in mebibytes, to allocate to the AgentCore Runtime.</p>",
         "SelfManagedConfiguration$historicalContextWindowSize": "<p>The number of historical messages to include in processing context.</p>",
         "TimeBasedTrigger$idleSessionTimeout": "<p>Idle session timeout (seconds) that triggers memory processing.</p>",
         "TokenBasedTrigger$tokenCount": "<p>Number of tokens that trigger memory processing.</p>",
@@ -5346,6 +5535,7 @@
     "KmsKeyArn": {
       "base": null,
       "refs": {
+        "AgentInsightStoreEncryptionConfiguration$kmsKeyArn": "<p>Specifies the Amazon Resource Name (ARN) of the customer managed AWS KMS key that you use to encrypt new Agent Insights. This field is required when <code>mode</code> is <code>CUSTOMER_MANAGED_KMS</code> and cannot be specified when <code>mode</code> is <code>AWS_OWNED_KMS_KEY</code>.</p>",
         "CreateConfigurationBundleRequest$kmsKeyArn": "<p>Optional KMS key ARN for encrypting component configurations.</p>",
         "CreateDatasetRequest$kmsKeyArn": "<p> Optional KMS key ARN for server-side encryption on service Amazon S3 writes. </p>",
         "CreateEvaluatorRequest$kmsKeyArn": "<p> The Amazon Resource Name (ARN) of a customer managed KMS key to use for encrypting sensitive evaluator data, including instructions and rating scale. If you don't specify a KMS key, the evaluator data is encrypted with an Amazon Web Services owned key. Only symmetric encryption KMS keys are supported. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/evaluations-encryption.html\">Encryption at rest for AgentCore Evaluations</a>. </p>",
@@ -5473,8 +5663,8 @@
       "refs": {
         "CreateAgentRuntimeRequest$lifecycleConfiguration": "<p>The life cycle configuration for the AgentCore Runtime.</p>",
         "GetAgentRuntimeResponse$lifecycleConfiguration": "<p>The life cycle configuration for the AgentCore Runtime.</p>",
-        "HarnessAgentCoreRuntimeEnvironment$lifecycleConfiguration": null,
-        "HarnessAgentCoreRuntimeEnvironmentRequest$lifecycleConfiguration": null,
+        "HarnessAgentCoreRuntimeEnvironment$lifecycleConfiguration": "<p>The lifecycle configuration for the harness's runtime environment. For a harness, <code>idleRuntimeSessionTimeout</code> and <code>maxLifetime</code> each accept a value between 60 and 28800 seconds (8 hours), and <code>idleRuntimeSessionTimeout</code> must be less than or equal to <code>maxLifetime</code>.</p>",
+        "HarnessAgentCoreRuntimeEnvironmentRequest$lifecycleConfiguration": "<p>The lifecycle configuration for the harness's runtime environment. For a harness, <code>idleRuntimeSessionTimeout</code> and <code>maxLifetime</code> each accept a value between 60 and 28800 seconds (8 hours), and <code>idleRuntimeSessionTimeout</code> must be less than or equal to <code>maxLifetime</code>. Values above 28800 seconds are rejected with a <code>ValidationException</code>.</p>",
         "UpdateAgentRuntimeRequest$lifecycleConfiguration": "<p>The updated life cycle configuration for the AgentCore Runtime.</p>"
       }
     },
@@ -5488,6 +5678,24 @@
       "base": null,
       "refs": {
         "LifecycleConfiguration$maxLifetime": "<p>Maximum lifetime for the instance in seconds. Once reached, instances will be automatically terminated and replaced. Default: 28800 seconds (8 hours).</p>"
+      }
+    },
+    "LifecycleHook": {
+      "base": "<p>A lifecycle hook, which defines the action that AgentCore Runtime runs at a point in the runtime's lifecycle.</p>",
+      "refs": {
+        "BuildLifecycleHooks$warmup": "<p>The hook that warms up your agent before any sessions are created. Use this hook to load the resources that your sessions need, such as models, libraries, or caches. Your hook must complete within 120 seconds.</p>"
+      }
+    },
+    "LifecycleHookAction": {
+      "base": "<p>The action that a lifecycle hook runs. Specify exactly one member. Currently, <code>httpPost</code> is the only supported action.</p>",
+      "refs": {
+        "LifecycleHook$action": "<p>The action that AgentCore Runtime runs for the hook. Specify exactly one action.</p>"
+      }
+    },
+    "LifecycleHookPath": {
+      "base": "<p>The path for an HTTP <code>POST</code> lifecycle hook action. The path must begin with <code>/</code>, can contain up to 32 characters, and can contain only letters, numbers, and the characters <code>.</code>, <code>_</code>, <code>~</code>, <code>/</code>, and <code>-</code>.</p>",
+      "refs": {
+        "HttpPostLifecycleHookAction$path": "<p>The path in the agent's container that AgentCore Runtime sends the <code>POST</code> request to.</p>"
       }
     },
     "LimitEntries": {
@@ -5525,6 +5733,32 @@
       "refs": {
         "Oauth2ProviderConfigOutput$linkedinOauth2ProviderConfig": "<p>The configuration details for the LinkedIn OAuth2 provider.</p>"
       }
+    },
+    "LinuxOperatingSystemConfiguration": {
+      "base": "<p>Contains the operating system configuration of agents that run on Linux instances, such as the privilege mode.</p>",
+      "refs": {
+        "OperatingSystemConfiguration$linux": "<p>The operating system configuration of agents that run on Linux instances.</p>"
+      }
+    },
+    "ListAgentInsightStoresRequest": {
+      "base": null,
+      "refs": {}
+    },
+    "ListAgentInsightStoresRequestMaxResultsInteger": {
+      "base": null,
+      "refs": {
+        "ListAgentInsightStoresRequest$maxResults": "<p>The maximum number of results to return in the response. If the total number of results is greater than this value, use the token returned in the response in the <code>nextToken</code> field when making another request to return the next batch of results.</p>"
+      }
+    },
+    "ListAgentInsightStoresRequestNextTokenString": {
+      "base": null,
+      "refs": {
+        "ListAgentInsightStoresRequest$nextToken": "<p>If the total number of results is greater than the <code>maxResults</code> value provided in the request, enter the token returned in the <code>nextToken</code> field in the response in this field to return the next batch of results.</p>"
+      }
+    },
+    "ListAgentInsightStoresResponse": {
+      "base": null,
+      "refs": {}
     },
     "ListAgentRuntimeEndpointsRequest": {
       "base": null,
@@ -5640,6 +5874,18 @@
       "base": null,
       "refs": {}
     },
+    "ListDatasetExamplesFilter": {
+      "base": "<p> A filter for <code>ListDatasetExamples</code>. </p>",
+      "refs": {
+        "ListDatasetExamplesRequest$filter": "<p> A filter to apply to the examples. </p>"
+      }
+    },
+    "ListDatasetExamplesFilterGenerationIdsList": {
+      "base": "<p> A list of dataset generation IDs. </p>",
+      "refs": {
+        "ListDatasetExamplesFilter$generationIds": "<p> Returns only examples created by this dataset generation. Specify one ID. </p>"
+      }
+    },
     "ListDatasetExamplesRequest": {
       "base": null,
       "refs": {}
@@ -5660,6 +5906,12 @@
       "base": null,
       "refs": {}
     },
+    "ListDatasetVersionsFilter": {
+      "base": "<p> A filter for <code>ListDatasetVersions</code>. </p>",
+      "refs": {
+        "ListDatasetVersionsRequest$filter": "<p> A filter to apply to the dataset versions. </p>"
+      }
+    },
     "ListDatasetVersionsRequest": {
       "base": null,
       "refs": {}
@@ -5670,9 +5922,21 @@
         "ListDatasetVersionsRequest$maxResults": "<p> The maximum number of versions to return per page. </p>"
       }
     },
+    "ListDatasetVersionsRequestNextTokenString": {
+      "base": null,
+      "refs": {
+        "ListDatasetVersionsRequest$nextToken": "<p> The token for the next page of results. </p>"
+      }
+    },
     "ListDatasetVersionsResponse": {
       "base": null,
       "refs": {}
+    },
+    "ListDatasetsFilter": {
+      "base": "<p> A filter for <code>ListDatasets</code>. </p>",
+      "refs": {
+        "ListDatasetsRequest$filter": "<p> A filter to apply to the datasets. </p>"
+      }
     },
     "ListDatasetsRequest": {
       "base": null,
@@ -5974,6 +6238,9 @@
         "DatasetSummary$exampleCount": "<p> The number of examples in the dataset. </p>",
         "DatasetVersionSummary$exampleCount": "<p> The number of examples in this version. </p>",
         "DeleteDatasetExamplesResponse$deletedCount": "<p> The number of examples deleted. </p>",
+        "ExampleCountByField$turns": "<p> The number of examples that have <code>turns</code>. </p>",
+        "ExampleCountByField$input": "<p> The number of examples that have <code>input</code>. </p>",
+        "ExampleCountByField$actorProfile": "<p> The number of examples that have <code>actor_profile</code>. </p>",
         "GetDatasetResponse$exampleCount": "<p> The number of examples in the DRAFT. </p>",
         "UpdateDatasetExamplesResponse$updatedCount": "<p> The number of examples updated. </p>"
       }
@@ -6067,6 +6334,12 @@
       "base": null,
       "refs": {
         "ClaimMatchValueType$matchValueStringList": "<p>An array of strings to check for a match.</p>"
+      }
+    },
+    "MaxEventsPerInvocation": {
+      "base": null,
+      "refs": {
+        "ResponseStreamingConfiguration$maxEventsPerInvocation": "<p>Specifies the maximum number of response events that the gateway sends to the interceptor in one invocation. The interceptor's output for the first batch determines the status code and headers of the response. The gateway ignores the status code and headers that the interceptor returns for later batches.</p>"
       }
     },
     "MaxResults": {
@@ -6472,6 +6745,7 @@
         "CapacityProviderVolumeConfiguration$mountPath": "<p>The mount path for the capacity provider volume inside the AgentCore Runtime. The path must be under <code>/mnt</code> with exactly one subdirectory level (for example, <code>/mnt/data</code>).</p>",
         "EfsAccessPointConfiguration$mountPath": "<p>The mount path for the EFS access point inside the AgentCore Runtime. The path must be under <code>/mnt</code> with exactly one subdirectory level (for example, <code>/mnt/data</code>).</p>",
         "EfsConfiguration$mountPath": "<p>The absolute path within the session at which the access point is mounted, for example <code>/mnt/efs</code>. Each mount path must be unique across all file system configurations in the session.</p>",
+        "S3BucketMountConfiguration$mountPath": "<p>The mount path for the S3 bucket inside the AgentCore Runtime. The path must be under <code>/mnt</code> with exactly one subdirectory level (for example, <code>/mnt/data</code>).</p>",
         "S3FilesAccessPointConfiguration$mountPath": "<p>The mount path for the S3 Files access point inside the AgentCore Runtime. The path must be under <code>/mnt</code> with exactly one subdirectory level (for example, <code>/mnt/data</code>).</p>",
         "S3FilesConfiguration$mountPath": "<p>The absolute path within the session at which the access point is mounted, for example <code>/mnt/s3data</code>. Each mount path must be unique across all file system configurations in the session.</p>",
         "SessionStorageConfiguration$mountPath": "<p>The mount path for the session storage filesystem inside the AgentCore Runtime. The path must be under <code>/mnt</code> with exactly one subdirectory level (for example, <code>/mnt/data</code>).</p>"
@@ -6572,6 +6846,12 @@
       "refs": {
         "Content$rawText": "<p>The raw text content containing natural language descriptions of desired policy behavior. This text is processed by AI to generate corresponding Dogwood policy statements that match the described intent.</p>",
         "PolicyGenerationAsset$rawTextFragment": "<p>The portion of the original natural language input that this generated policy asset addresses. This helps users understand which part of their policy description was translated into this specific Dogwood policy statement, enabling better policy selection and refinement. When a single natural language input describes multiple authorization requirements, the generation process creates separate policy assets for each requirement, with each asset's rawTextFragment showing which requirement it addresses. Use this mapping to verify that all parts of your natural language input were correctly translated into Dogwood policies.</p>"
+      }
+    },
+    "NestedVirtualization": {
+      "base": null,
+      "refs": {
+        "CpuOptions$nestedVirtualization": "<p>Specifies whether your agents can use hardware virtualization on their instances. The following values are possible:</p> <ul> <li> <p> <code>ENABLED</code> – Your agents can use hardware virtualization on their instances. To use this value, choose the <code>LINUX_X86_64</code> operating system and instance types that support nested virtualization.</p> </li> <li> <p> <code>DISABLED</code> – Your agents can't use hardware virtualization on their instances. This is the default.</p> </li> </ul>"
       }
     },
     "NetworkConfiguration": {
@@ -6922,6 +7202,12 @@
       "base": "<p>The operating system and CPU architecture for capacity provider instances.</p>",
       "refs": {
         "LaunchParameters$operatingSystem": "<p>The operating system and CPU architecture for the instances.</p>"
+      }
+    },
+    "OperatingSystemConfiguration": {
+      "base": "<p>Contains the operating system configuration of the agents that AgentCore Runtime runs on a capacity provider. Specify the member for the operating system of the capacity provider.</p>",
+      "refs": {
+        "CapacityProviderConfiguration$operatingSystemConfiguration": "<p>The operating system configuration of the agents that Amazon Bedrock AgentCore Runtime runs on the capacity provider.</p>"
       }
     },
     "OptionalLogGroupName": {
@@ -7531,6 +7817,12 @@
         "PrivateKeyJwtConfig$privateKeySource": "<p>The private key source for the JWT client assertion.</p>"
       }
     },
+    "PrivilegeMode": {
+      "base": "<p>The privilege mode of the agents, either <code>STANDARD</code> (the default) or <code>PRIVILEGED</code>.</p>",
+      "refs": {
+        "LinuxOperatingSystemConfiguration$privilegeMode": "<p>The privilege mode of the agents. If you omit this field, the agents run in <code>STANDARD</code> privilege mode. The following values are possible:</p> <ul> <li> <p> <code>STANDARD</code> – The agent runs without elevated privileges. This is the default.</p> </li> <li> <p> <code>PRIVILEGED</code> – The agent runs with elevated privileges on its instance. Use this mode for agents that build container images, run containers, or install system packages. A session that runs a <code>PRIVILEGED</code> agent runs only that agent.</p> </li> </ul>"
+      }
+    },
     "Prompt": {
       "base": null,
       "refs": {
@@ -7577,6 +7869,19 @@
       "base": null,
       "refs": {
         "ProviderPrefix$separator": "<p>The single character that separates the provider prefix from the model name (for example, <code>.</code>). The default is <code>.</code>.</p>"
+      }
+    },
+    "PublicDomainName": {
+      "base": null,
+      "refs": {
+        "DomainOverride$defaultDomain": "<p>The default public domain name for the gateway. The gateway advertises this domain when a request doesn't select a specific domain.</p>",
+        "PublicDomainNameList$member": null
+      }
+    },
+    "PublicDomainNameList": {
+      "base": null,
+      "refs": {
+        "DomainOverride$alternateDomains": "<p>Additional public domain names for the gateway, up to 10. Don't repeat the default domain or list a domain more than once. A request can select one of these domains, or the default domain, with the <code>x-amzn-bedrock-agentcore-gateway-domain</code> header. The gateway rejects a request that selects a domain that isn't configured.</p>"
       }
     },
     "PutResourcePolicyRequest": {
@@ -7905,10 +8210,24 @@
         "ManagedResourceDetails$resourceAssociationArn": "<p>The ARN of the service network resource association.</p>"
       }
     },
+    "ResourceConfiguration": {
+      "base": "<p>The resource configuration for an AgentCore Runtime.</p>",
+      "refs": {
+        "ResourceConfigurations$member": null
+      }
+    },
     "ResourceConfigurationIdentifier": {
       "base": null,
       "refs": {
         "SelfManagedLatticeResource$resourceConfigurationIdentifier": "<p>The ARN or ID of the VPC Lattice resource configuration.</p>"
+      }
+    },
+    "ResourceConfigurations": {
+      "base": "<p>A list of resource configurations for an AgentCore Runtime. The list can contain at most one resource configuration.</p>",
+      "refs": {
+        "CreateAgentRuntimeRequest$resourceConfigurations": "<p>The resource configurations for the AgentCore Runtime, such as the minimum amount of memory to allocate to the runtime. You can specify at most one resource configuration.</p>",
+        "GetAgentRuntimeResponse$resourceConfigurations": "<p>The resource configurations for the AgentCore Runtime.</p>",
+        "UpdateAgentRuntimeRequest$resourceConfigurations": "<p>The updated resource configurations for the AgentCore Runtime. You can specify at most one resource configuration.</p>"
       }
     },
     "ResourceGatewayArn": {
@@ -8025,10 +8344,22 @@
         "ListCodeInterpretersRequest$type": "<p>The type of code interpreters to list.</p>"
       }
     },
+    "ResponseInterceptionMode": {
+      "base": null,
+      "refs": {
+        "GatewayInterceptorConfiguration$responseInterceptionMode": "<p>Specifies how the interceptor processes streamed target responses. You can set this field only on an interceptor that includes the <code>RESPONSE</code> interception point. Valid values include:</p> <ul> <li> <p> <code>BUFFERED</code> - The gateway collects the complete target response and then invokes the interceptor once. This is the default.</p> </li> <li> <p> <code>STREAM</code> - The gateway sends a streamed target response to the interceptor in batches of events and returns each processed batch to the client as soon as it's ready. Non-streamed responses still use <code>BUFFERED</code> processing. If you specify <code>STREAM</code>, you must also specify <code>responseStreamingConfiguration</code>, and the input configuration can't exclude the response body.</p> </li> </ul>"
+      }
+    },
     "ResponseListType": {
       "base": null,
       "refs": {
         "Oauth2AuthorizationServerMetadata$responseTypes": "<p>The supported response types for the OAuth2 authorization server.</p>"
+      }
+    },
+    "ResponseStreamingConfiguration": {
+      "base": "<p>Specifies the settings that the gateway uses to send a streamed target response to the interceptor in batches.</p>",
+      "refs": {
+        "GatewayInterceptorConfiguration$responseStreamingConfiguration": "<p>Specifies the batching settings for a streamed response. Specify this field only when <code>responseInterceptionMode</code> is <code>STREAM</code>. You must specify it for <code>STREAM</code>.</p>"
       }
     },
     "ResponseType": {
@@ -8063,6 +8394,7 @@
     "RoleArn": {
       "base": null,
       "refs": {
+        "AwsBillingConnectorConfiguration$iamRoleArn": "<p>The Amazon Resource Name (ARN) of the AWS Marketplace service-linked role in the account that owns the payment manager. The service sets this value when it creates the connector.</p>",
         "CreateAgentRuntimeRequest$roleArn": "<p>The IAM role ARN that provides permissions for the AgentCore Runtime.</p>",
         "CreateBrowserRequest$executionRoleArn": "<p>The Amazon Resource Name (ARN) of the IAM role that provides permissions for the browser to access Amazon Web Services services.</p>",
         "CreateCodeInterpreterRequest$executionRoleArn": "<p>The Amazon Resource Name (ARN) of the IAM role that provides permissions for the code interpreter to access Amazon Web Services services.</p>",
@@ -8148,6 +8480,14 @@
         "ContainerConfiguration$containerUri": "<p>The ECR URI of the container.</p>"
       }
     },
+    "RuntimeHooksConfiguration": {
+      "base": "<p>The lifecycle hooks that AgentCore Runtime runs at fixed points in the runtime's lifecycle.</p>",
+      "refs": {
+        "CreateAgentRuntimeRequest$hooksConfiguration": "<p>The lifecycle hooks configuration for the AgentCore Runtime. Use lifecycle hooks to run actions in the agent's container at fixed points in the runtime's lifecycle, such as warming up the agent before sessions are created.</p>",
+        "GetAgentRuntimeResponse$hooksConfiguration": "<p>The lifecycle hooks configuration for the AgentCore Runtime.</p>",
+        "UpdateAgentRuntimeRequest$hooksConfiguration": "<p>The updated lifecycle hooks configuration for the AgentCore Runtime.</p>"
+      }
+    },
     "RuntimeMetadataConfiguration": {
       "base": "<p>Configuration for microVM metadata service settings.</p>",
       "refs": {
@@ -8165,6 +8505,36 @@
       "base": "<p>Configuration for an AgentCore Runtime target. Specifies the agent runtime to route requests to via HTTP.</p>",
       "refs": {
         "HttpTargetConfiguration$agentcoreRuntime": "<p>The AgentCore Runtime target configuration for HTTP-based communication with an agent runtime.</p>"
+      }
+    },
+    "S3BucketMountConfiguration": {
+      "base": "<p>Mounts an Amazon S3 bucket in the AgentCore Runtime with Mountpoint for Amazon S3. Files under the mount path map to objects in the bucket.</p>",
+      "refs": {
+        "FilesystemConfiguration$s3BucketMount": "<p>Mounts an Amazon S3 bucket as a file system in the AgentCore Runtime.</p>"
+      }
+    },
+    "S3BucketMountConfigurationBucketString": {
+      "base": null,
+      "refs": {
+        "S3BucketMountConfiguration$bucket": "<p>The name of the S3 bucket to mount. You can specify a general purpose bucket or a directory bucket.</p>"
+      }
+    },
+    "S3BucketMountConfigurationPrefixString": {
+      "base": null,
+      "refs": {
+        "S3BucketMountConfiguration$prefix": "<p>The key prefix to mount. Only objects under this prefix are visible at the mount path. To give each session its own prefix, include <code>{runtimeSessionId}</code> (for example, <code>data/{runtimeSessionId}/</code>). If you omit the prefix, the whole bucket is mounted.</p>"
+      }
+    },
+    "S3BucketMountConfigurationS3BucketOwnerString": {
+      "base": null,
+      "refs": {
+        "S3BucketMountConfiguration$s3BucketOwner": "<p>The AWS account ID that must own the bucket. If you omit it, the bucket must be owned by the account that owns the AgentCore Runtime.</p>"
+      }
+    },
+    "S3BucketMountConfigurationS3BucketRegionString": {
+      "base": null,
+      "refs": {
+        "S3BucketMountConfiguration$s3BucketRegion": "<p>The AWS Region of the S3 bucket. If you omit it, the bucket must be in the same Region as the AgentCore Runtime.</p>"
       }
     },
     "S3BucketUri": {
@@ -8568,6 +8938,7 @@
     "ServerPort": {
       "base": "<p>A port between <code>8000</code> and <code>12000</code>. Port <code>8443</code> is reserved and cannot be used.</p>",
       "refs": {
+        "HttpPostLifecycleHookAction$port": "<p>The port in the agent's container that AgentCore Runtime sends the <code>POST</code> request to. If you don't specify a port, the default is the runtime's server port: the port in the protocol configuration if one is set, otherwise the protocol's default port.</p>",
         "ProtocolConfiguration$port": "<p>The port on which the agent server listens. The port must be between <code>8000</code> and <code>12000</code>, excluding the reserved port <code>8443</code>. When this field is omitted, the default is <code>8080</code> for <code>HTTP</code> and <code>AGUI</code>, <code>8000</code> for <code>MCP</code>, and <code>9000</code> for <code>A2A</code>.</p>"
       }
     },
@@ -8859,6 +9230,7 @@
         "HarnessSummarizationConfiguration$summarizationSystemPrompt": "<p>The system prompt used for generating summaries.</p>",
         "HarnessVersionSummary$failureReason": "<p>Reason why the create or update operation for this harness version failed.</p>",
         "InvocationConfiguration$payloadDeliveryBucketName": "<p>The S3 bucket name for event payload delivery.</p>",
+        "ListAgentInsightStoresResponse$nextToken": "<p>If the total number of results is greater than the <code>maxResults</code> value provided in the request, use this token when making another request in the <code>nextToken</code> field to return the next batch of results.</p>",
         "ListAgentRuntimeVersionsByCapacityProviderOutput$nextToken": "<p>If the total number of results is greater than the <code>maxResults</code> value provided in the request, use this token when making another request in the <code>nextToken</code> field to return the next batch of results.</p>",
         "ListApiKeyCredentialProvidersRequest$nextToken": "<p>Pagination token.</p>",
         "ListApiKeyCredentialProvidersResponse$nextToken": "<p>Pagination token for the next page of results.</p>",
@@ -8869,7 +9241,6 @@
         "ListConsentPortalsRequest$nextToken": "<p>A token to retrieve the next page of results. Use the value returned in a previous response to request the next page.</p>",
         "ListConsentPortalsResponse$nextToken": "<p>The token to use in a subsequent request to retrieve the next page of results. This value is null when there are no more results to return.</p>",
         "ListDatasetExamplesResponse$nextToken": "<p> The token for the next page of results, or null if there are no more results. </p>",
-        "ListDatasetVersionsRequest$nextToken": "<p> The token for the next page of results. </p>",
         "ListDatasetVersionsResponse$nextToken": "<p> The token for the next page of results, or null if there are no more results. </p>",
         "ListDatasetsResponse$nextToken": "<p> The token for the next page of results, or null if there are no more results. </p>",
         "ListEvaluatorsRequest$nextToken": "<p> The pagination token from a previous request to retrieve the next page of results. </p>",
@@ -9327,6 +9698,8 @@
       "base": null,
       "refs": {
         "AddDatasetExamplesResponse$updatedAt": "<p> The timestamp when the examples were added. </p>",
+        "AgentInsightStoreSummary$createdAt": "<p>The date and time when the Agent Insight Store was created.</p>",
+        "AgentInsightStoreSummary$updatedAt": "<p>The date and time when the Agent Insight Store was last updated.</p>",
         "ApiKeyCredentialProviderItem$createdTime": "<p>The timestamp when the API key credential provider was created.</p>",
         "ApiKeyCredentialProviderItem$lastUpdatedTime": "<p>The timestamp when the API key credential provider was last updated.</p>",
         "CapacityProviderSummary$lastUpdatedAt": "<p>The timestamp when the capacity provider was last updated.</p>",
@@ -9348,6 +9721,8 @@
         "DeleteDatasetResponse$updatedAt": "<p> The timestamp when the delete was initiated. </p>",
         "EvaluatorSummary$createdAt": "<p> The timestamp when the evaluator was created. </p>",
         "EvaluatorSummary$updatedAt": "<p> The timestamp when the evaluator was last updated. </p>",
+        "GetAgentInsightStoreResponse$createdAt": "<p>The date and time when the Agent Insight Store was created.</p>",
+        "GetAgentInsightStoreResponse$updatedAt": "<p>The date and time when the Agent Insight Store was last updated.</p>",
         "GetApiKeyCredentialProviderResponse$createdTime": "<p>The timestamp when the API key credential provider was created.</p>",
         "GetApiKeyCredentialProviderResponse$lastUpdatedTime": "<p>The timestamp when the API key credential provider was last updated.</p>",
         "GetConfigurationBundleResponse$createdAt": "<p>The timestamp when the configuration bundle was created.</p>",
@@ -9384,6 +9759,7 @@
         "PaymentCredentialProviderItem$lastUpdatedTime": "<p>The timestamp when the payment credential provider was last updated.</p>",
         "ResetTokenVaultKeyMaterialResponse$lastModifiedDate": "<p>The timestamp when the token vault was last modified.</p>",
         "SetTokenVaultCMKResponse$lastModifiedDate": "<p>The timestamp when the token vault was last modified.</p>",
+        "UpdateAgentInsightStoreResponse$updatedAt": "<p>The date and time when the Agent Insight Store was last updated.</p>",
         "UpdateApiKeyCredentialProviderResponse$createdTime": "<p>The timestamp when the API key credential provider was created.</p>",
         "UpdateApiKeyCredentialProviderResponse$lastUpdatedTime": "<p>The timestamp when the API key credential provider was last updated.</p>",
         "UpdateConfigurationBundleResponse$updatedAt": "<p>The timestamp when the configuration bundle was updated.</p>",
@@ -9598,7 +9974,8 @@
       "base": null,
       "refs": {
         "HarnessGatewayOutboundAuth$awsIam": "<p>SigV4-sign requests using the agent's execution role.</p>",
-        "HarnessGatewayOutboundAuth$none": "<p>No authentication.</p>"
+        "HarnessGatewayOutboundAuth$none": "<p>No authentication.</p>",
+        "HarnessRemoteMcpOutboundAuth$none": "<p>No authentication.</p>"
       }
     },
     "UntagResourceRequest": {
@@ -9606,6 +9983,14 @@
       "refs": {}
     },
     "UntagResourceResponse": {
+      "base": null,
+      "refs": {}
+    },
+    "UpdateAgentInsightStoreRequest": {
+      "base": null,
+      "refs": {}
+    },
+    "UpdateAgentInsightStoreResponse": {
       "base": null,
       "refs": {}
     },
@@ -9760,7 +10145,7 @@
     "UpdateMemoryInputEventExpiryDurationInteger": {
       "base": null,
       "refs": {
-        "UpdateMemoryInput$eventExpiryDuration": "<p>The number of days after which memory events will expire, between 7 and 365 days.</p>"
+        "UpdateMemoryInput$eventExpiryDuration": "<p>The number of days after which memory events expire, between 7 and 3650 days.</p>"
       }
     },
     "UpdateMemoryOutput": {

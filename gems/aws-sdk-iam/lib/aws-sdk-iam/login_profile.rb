@@ -47,6 +47,17 @@ module Aws::IAM
       data[:password_reset_required]
     end
 
+    # The maximum duration (in seconds) of an Amazon Web Services Sign-In
+    # session for the user.
+    #
+    # This member is omitted when the setting is unset. In that case, no
+    # default value is returned and the existing sign-in session behavior
+    # applies.
+    # @return [Integer]
+    def max_signin_session_duration
+      data[:max_signin_session_duration]
+    end
+
     # @!endgroup
 
     # @return [Client]
@@ -190,6 +201,7 @@ module Aws::IAM
     #   loginprofile = login_profile.create({
     #     password: "passwordType",
     #     password_reset_required: false,
+    #     max_signin_session_duration: 1,
     #   })
     # @param [Hash] options ({})
     # @option options [String] :password
@@ -215,6 +227,16 @@ module Aws::IAM
     # @option options [Boolean] :password_reset_required
     #   Specifies whether the user is required to set a new password on next
     #   sign-in.
+    # @option options [Integer] :max_signin_session_duration
+    #   The maximum duration (in seconds) of an Amazon Web Services Sign-In
+    #   session for this IAM user. This setting can have a value from 1 hour
+    #   (3600 seconds) to 90 days (7776000 seconds), inclusive. If you do not
+    #   specify a value, the setting remains unset and the existing sign-in
+    #   session behavior applies.
+    #
+    #   <note markdown="1"> This setting is not supported for the root user.
+    #
+    #    </note>
     # @return [LoginProfile]
     def create(options = {})
       options = options.merge(user_name: @user_name)
@@ -246,6 +268,8 @@ module Aws::IAM
     #   login_profile.update({
     #     password: "passwordType",
     #     password_reset_required: false,
+    #     max_signin_session_duration: 1,
+    #     reset_max_signin_session_duration: false,
     #   })
     # @param [Hash] options ({})
     # @option options [String] :password
@@ -274,6 +298,35 @@ module Aws::IAM
     # @option options [Boolean] :password_reset_required
     #   Allows this new password to be used only once by requiring the
     #   specified IAM user to set a new password on next sign-in.
+    # @option options [Integer] :max_signin_session_duration
+    #   The maximum duration (in seconds) of an Amazon Web Services Sign-In
+    #   session for the specified IAM user. This setting can have a value from
+    #   1 hour (3600 seconds) to 90 days (7776000 seconds), inclusive, and
+    #   replaces any value currently configured for the user.
+    #
+    #   If you omit both this parameter and `ResetMaxSigninSessionDuration`,
+    #   the current setting is unchanged. You cannot specify this parameter
+    #   and set `ResetMaxSigninSessionDuration` to `true` in the same request.
+    #   If you update only the sign-in session duration, the user's password
+    #   and `PasswordResetRequired` setting do not change.
+    #
+    #   Changes to this setting apply to new sign-in sessions. Sessions that
+    #   are already established are not affected.
+    #
+    #   <note markdown="1"> This setting is not supported for the root user.
+    #
+    #    </note>
+    # @option options [Boolean] :reset_max_signin_session_duration
+    #   Specifies whether to clear the maximum sign-in session duration for
+    #   the specified IAM user. Set this value to `true` to return the setting
+    #   to its unset state, so that the existing sign-in session behavior
+    #   applies. When the setting is unset, the user's
+    #   `MaxSigninSessionDuration` is omitted from responses.
+    #
+    #   If you set this value to `false` or omit it, the current setting is
+    #   not cleared. You cannot set this value to `true` and specify
+    #   `MaxSigninSessionDuration` in the same request. Clearing a setting
+    #   that is already unset has no effect.
     # @return [EmptyStructure]
     def update(options = {})
       options = options.merge(user_name: @user_name)

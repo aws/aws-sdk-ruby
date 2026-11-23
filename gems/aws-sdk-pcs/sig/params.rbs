@@ -8,6 +8,16 @@
 module Aws
   module PCS
     module Params
+      type job_submit_plugin = {
+      name: ::String,
+      type: ("STARLARK"),
+      script_source: {
+        script_location: ::String,
+        s3_version_id: ::String?,
+        checksum: ::String?
+      }
+    }
+
       type node_lifecycle_stages = {
       node_bootstrapped: Array[
         Params::node_lifecycle_script

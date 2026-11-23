@@ -18,12 +18,22 @@ module Aws::IAMToolbox
       SENSITIVE: []
     end
 
+    class Check
+      attr_accessor check_type: ("SERVICE_CONTROL_POLICY" | "RESOURCE_CONTROL_POLICY" | "VPC_ENDPOINT" | "RESOURCE" | "PRINCIPAL" | "PERMISSIONS_BOUNDARY" | "SESSION")
+      attr_accessor evaluated_effect: ("ALLOW" | "NO_IMPACT" | "IMPLICIT_DENY" | "EXPLICIT_DENY")
+      attr_accessor target_arn: ::String
+      attr_accessor relevant_policy_types: ::Array[("IDENTITY_BASED_POLICY" | "RESOURCE_BASED_POLICY" | "PERMISSIONS_BOUNDARY" | "SESSION_POLICY" | "SERVICE_CONTROL_POLICY" | "RESOURCE_CONTROL_POLICY" | "VPC_ENDPOINT_POLICY")]
+      attr_accessor matched_policies: ::Array[Types::MatchedPolicy]
+      SENSITIVE: []
+    end
+
     class Evaluation
       attr_accessor action: ::String
       attr_accessor resource: ::String
       attr_accessor context: ::Hash[::String, untyped]
       attr_accessor evaluated_effect: ("ALLOW" | "EXPLICIT_DENY" | "IMPLICIT_DENY")
       attr_accessor matched_policies: ::Array[Types::MatchedPolicy]
+      attr_accessor checks: ::Array[Types::Check]
       SENSITIVE: []
     end
 
@@ -38,6 +48,17 @@ module Aws::IAMToolbox
       attr_accessor evaluations: ::Array[Types::Evaluation]
       attr_accessor policies: ::Array[Types::PolicyInfo]
       attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetRequestAuthorizationPolicyInput
+      attr_accessor authorization_id: ::String
+      attr_accessor policy_uri: ::String
+      SENSITIVE: []
+    end
+
+    class GetRequestAuthorizationPolicyOutput
+      attr_accessor policy_document: untyped
       SENSITIVE: []
     end
 
@@ -63,6 +84,7 @@ module Aws::IAMToolbox
       attr_accessor inline: bool
       attr_accessor uri: ::String
       attr_accessor attached_to: ::Array[Types::AttachedTo]
+      attr_accessor policy_source: ::Hash[::String, ::String]
       SENSITIVE: []
     end
 
