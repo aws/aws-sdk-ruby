@@ -1,0 +1,255 @@
+[
+  {
+    "description": "matching types",
+    "diagnostic": "{\"String\": \"x\", \"Integer\": 1, \"StringList\": [\"a\"], \"StringMap\": {\"k\": \"v\"}, \"Union\": {\"Text\": \"y\"}}",
+    "input": "a566537472696e67617867496e7465676572016a537472696e674c69737481616169537472696e674d6170a1616b617665556e696f6ea164546578746179",
+    "expect": {
+      "string": "x",
+      "integer": 1,
+      "string_list": [
+        "a"
+      ],
+      "string_map": {
+        "k": "v"
+      },
+      "union": {
+        "__class": "Text",
+        "text": "y"
+      }
+    }
+  },
+  {
+    "description": "renamed and unknown members",
+    "diagnostic": "{\"wire\": \"w\", \"NotAMember\": [1, {\"x\": 2}]}",
+    "input": "a2647769726561776a4e6f74414d656d6265728201a1617802",
+    "expect": {
+      "renamed": "w"
+    }
+  },
+  {
+    "description": "CBOR null and undefined values",
+    "diagnostic": "{\"String\": null, \"StringList\": [null, undefined], \"StringMap\": {\"k\": undefined}, \"Integer\": undefined}",
+    "input": "a466537472696e67f66a537472696e674c69737482f6f769537472696e674d6170a1616bf767496e7465676572f7",
+    "expect": {
+      "integer": "undefined",
+      "string_list": [
+        null,
+        "undefined"
+      ],
+      "string_map": {
+        "k": "undefined"
+      }
+    }
+  },
+  {
+    "description": "Integer for a string member, String for an integer member",
+    "diagnostic": "{\"String\": 5, \"Integer\": \"five\"}",
+    "input": "a266537472696e670567496e74656765726466697665",
+    "expect": {
+      "string": 5,
+      "integer": "five"
+    }
+  },
+  {
+    "description": "array for a structure member, map for a list member",
+    "diagnostic": "{\"Child\": [1, 2], \"StringList\": {\"a\": \"b\"}}",
+    "input": "a2654368696c648201026a537472696e674c697374a161616162",
+    "expect": {
+      "string_list": [
+        [
+          "a",
+          "b"
+        ]
+      ],
+      "child": {}
+    }
+  },
+  {
+    "description": "indefinite-length maps, arrays and strings",
+    "diagnostic": "{_ \"String\": (_ \"a\", \"b\"), \"StringList\": [_ \"a\"], \"StringMap\": {_ \"k\": \"v\"}}",
+    "input": "bf66537472696e677f61616162ff6a537472696e674c6973749f6161ff69537472696e674d6170bf616b6176ffff",
+    "expect": {
+      "string": "ab",
+      "string_list": [
+        "a"
+      ],
+      "string_map": {
+        "k": "v"
+      }
+    }
+  },
+  {
+    "description": "a union with an unknown member",
+    "diagnostic": "{\"Union\": {\"Z\": 1}}",
+    "input": "a165556e696f6ea1615a01",
+    "expect": {
+      "union": {
+        "__class": "Unknown",
+        "unknown": {
+          "name": "Z",
+          "value": 1
+        }
+      }
+    }
+  },
+  {
+    "description": "an empty union",
+    "diagnostic": "{\"Union\": {}}",
+    "input": "a165556e696f6ea0",
+    "error": "NoMethodError"
+  },
+  {
+    "description": "a union with only __type",
+    "diagnostic": "{\"Union\": {\"__type\": \"t\"}}",
+    "input": "a165556e696f6ea1665f5f747970656174",
+    "error": "NoMethodError"
+  },
+  {
+    "description": "a union member with a null value",
+    "diagnostic": "{\"Union\": {\"Text\": null}}",
+    "input": "a165556e696f6ea16454657874f6",
+    "error": "NoMethodError"
+  },
+  {
+    "description": "a union with two members",
+    "diagnostic": "{\"Union\": {\"Number\": 1, \"Text\": \"x\"}}",
+    "input": "a165556e696f6ea2664e756d6265720164546578746178",
+    "expect": {
+      "union": {
+        "__class": "Text",
+        "text": "x"
+      }
+    }
+  },
+  {
+    "description": "trailing bytes after the body",
+    "diagnostic": "{\"String\": \"x\"} 1",
+    "input": "a166537472696e67617801",
+    "error": "Aws::Cbor::ExtraBytesError"
+  },
+  {
+    "description": "a CBOR null body",
+    "diagnostic": "null",
+    "input": "f6",
+    "expect": null
+  },
+  {
+    "description": "nesting deeper than the decoder limit",
+    "diagnostic": "130 nested {\"Child\": ...} around {\"String\": \"leaf\"}",
+    "input": "a1654368696c64a1654368696c64a1654368696c64a1654368696c64a1654368696c64a1654368696c64a1654368696c64a1654368696c64a1654368696c64a1654368696c64a1654368696c64a1654368696c64a1654368696c64a1654368696c64a1654368696c64a1654368696c64a1654368696c64a1654368696c64a1654368696c64a1654368696c64a1654368696c64a1654368696c64a1654368696c64a1654368696c64a1654368696c64a1654368696c64a1654368696c64a1654368696c64a1654368696c64a1654368696c64a1654368696c64a1654368696c64a1654368696c64a1654368696c64a1654368696c64a1654368696c64a1654368696c64a1654368696c64a1654368696c64a1654368696c64a1654368696c64a1654368696c64a1654368696c64a1654368696c64a1654368696c64a1654368696c64a1654368696c64a1654368696c64a1654368696c64a1654368696c64a1654368696c64a1654368696c64a1654368696c64a1654368696c64a1654368696c64a1654368696c64a1654368696c64a1654368696c64a1654368696c64a1654368696c64a1654368696c64a1654368696c64a1654368696c64a1654368696c64a1654368696c64a1654368696c64a1654368696c64a1654368696c64a1654368696c64a1654368696c64a1654368696c64a1654368696c64a1654368696c64a1654368696c64a1654368696c64a1654368696c64a1654368696c64a1654368696c64a1654368696c64a1654368696c64a1654368696c64a1654368696c64a1654368696c64a1654368696c64a1654368696c64a1654368696c64a1654368696c64a1654368696c64a1654368696c64a1654368696c64a1654368696c64a1654368696c64a1654368696c64a1654368696c64a1654368696c64a1654368696c64a1654368696c64a1654368696c64a1654368696c64a1654368696c64a1654368696c64a1654368696c64a1654368696c64a1654368696c64a1654368696c64a1654368696c64a1654368696c64a1654368696c64a1654368696c64a1654368696c64a1654368696c64a1654368696c64a1654368696c64a1654368696c64a1654368696c64a1654368696c64a1654368696c64a1654368696c64a1654368696c64a1654368696c64a1654368696c64a1654368696c64a1654368696c64a1654368696c64a1654368696c64a1654368696c64a1654368696c64a1654368696c64a1654368696c64a1654368696c64a166537472696e67646c656166",
+    "error": "Aws::Cbor::Error"
+  },
+  {
+    "description": "a truncated body",
+    "diagnostic": "{\"String\": \"abcdef\"} without its last 2 bytes",
+    "input": "a166537472696e676661626364",
+    "error": "Aws::Cbor::OutOfBytesError"
+  },
+  {
+    "description": "a non-map body with trailing bytes",
+    "diagnostic": "5 1",
+    "input": "0501",
+    "error": "Aws::Cbor::ExtraBytesError"
+  },
+  {
+    "description": "a malformed member value with trailing bytes",
+    "diagnostic": "{\"Child\": 5} 1",
+    "input": "a1654368696c640501",
+    "error": "Aws::Cbor::ExtraBytesError"
+  },
+  {
+    "description": "a list claiming more elements than the body holds",
+    "diagnostic": "{\"StringList\": array header for 1000000 elements, no elements}",
+    "input": "a16a537472696e674c6973749a000f4240",
+    "error": "Aws::Cbor::OutOfBytesError"
+  },
+  {
+    "description": "a duplicate map key whose last value is null",
+    "diagnostic": "{\"StringMap\": {\"k\": \"v\", \"k\": null}}",
+    "input": "a169537472696e674d6170a2616b6176616bf6",
+    "expect": {
+      "string_map": {}
+    }
+  },
+  {
+    "description": "duplicate map keys with a null in between",
+    "diagnostic": "{\"StringMap\": {\"k\": \"v1\", \"j\": \"x\", \"k\": null, \"k\": \"v2\"}}",
+    "input": "a169537472696e674d6170a4616b627631616a6178616bf6616b627632",
+    "expect": {
+      "string_map": {
+        "k": "v2",
+        "j": "x"
+      }
+    }
+  },
+  {
+    "description": "an empty union overwritten by a duplicate key",
+    "diagnostic": "{\"Union\": {}, \"Union\": {\"Text\": \"x\"}}",
+    "input": "a265556e696f6ea065556e696f6ea164546578746178",
+    "expect": {
+      "union": {
+        "__class": "Text",
+        "text": "x"
+      }
+    }
+  },
+  {
+    "description": "query compatible: a union whose flattened list member comes first",
+    "diagnostic": "{\"FlatUnion\": {\"Text\": \"x\"}}",
+    "input": "a169466c6174556e696f6ea164546578746178",
+    "queryCompatible": true,
+    "expect": {
+      "flat_union": {
+        "__class": "FlatList",
+        "flat_list": []
+      },
+      "flat_list": [],
+      "flat_map": {}
+    }
+  },
+  {
+    "description": "query compatible: a union with only its flattened list member",
+    "diagnostic": "{\"FlatUnion\": {\"FlatList\": [\"y\"]}}",
+    "input": "a169466c6174556e696f6ea168466c61744c697374816179",
+    "queryCompatible": true,
+    "expect": {
+      "flat_union": {
+        "__class": "FlatList",
+        "flat_list": [
+          "y"
+        ]
+      },
+      "flat_list": [],
+      "flat_map": {}
+    }
+  },
+  {
+    "description": "query compatible: flattened list and map members unset",
+    "diagnostic": "{\"String\": \"x\", \"Child\": {}}",
+    "input": "a266537472696e676178654368696c64a0",
+    "queryCompatible": true,
+    "expect": {
+      "string": "x",
+      "child": {
+        "flat_list": [],
+        "flat_map": {}
+      },
+      "flat_list": [],
+      "flat_map": {}
+    }
+  },
+  {
+    "description": "query compatible: flattened list and map members set",
+    "diagnostic": "{\"FlatList\": [\"a\"], \"FlatMap\": {\"k\": \"v\"}}",
+    "input": "a268466c61744c69737481616167466c61744d6170a1616b6176",
+    "queryCompatible": true,
+    "expect": {
+      "flat_list": [
+        "a"
+      ],
+      "flat_map": {
+        "k": "v"
+      }
+    }
+  }
+]

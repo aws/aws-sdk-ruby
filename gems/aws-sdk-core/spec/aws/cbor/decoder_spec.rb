@@ -94,6 +94,64 @@ module Aws
           expect { Decoder.new(payload).decode }.not_to raise_error
         end
       end
+
+      # Methods used by RpcV2::Parser; behavior must match #decode.
+      describe 'parser read surface (@api private)' do
+        it 'yields each map key with the map size, the block reading the value' do
+          d = Decoder.new(Encoder.new.add({ 'S' => 'hi', 'N' => 1 }).bytes)
+          pairs = []
+          d.each_map_key { |key, size| pairs << [key, size, d.decode_item] }
+          expect(pairs).to eq([['S', 2, 'hi'], ['N', 2, 1]])
+        end
+
+        it 'yields once per array element, the block reading it' do
+          d = Decoder.new(Encoder.new.add([10, 20]).bytes)
+          elements = []
+          d.each_array_element { elements << d.decode_item }
+          expect(elements).to eq([10, 20])
+        end
+
+        it 'peeks the next item type without consuming it' do
+          d = Decoder.new(Encoder.new.add([1]).bytes)
+          expect(d.peek_type).to eq(:array)
+          expect(d.decode_item).to eq([1])
+        end
+
+        it 'preserves OutOfBytesError on underrun' do
+          bytes = [0xa1, 0x62, 0x61].pack('C*').force_encoding(Encoding::BINARY) # map with a truncated 2-byte key
+          expect { Decoder.new(bytes).each_map_key { nil } }.to raise_error(OutOfBytesError)
+        end
+
+        it 'preserves the depth guard when driven via decode_item' do
+          payload = ("\xc6".b * 128) + "\x00".b
+          expect { Decoder.new(payload).decode_item }.to raise_error(Error, /Maximum nesting depth/)
+        end
+
+        it 'counts maps and arrays read with blocks toward the decode_item depth limit' do
+          read = lambda do |d|
+            case d.peek_type
+            when :array then d.each_array_element { read.call(d) }
+            when :map then d.each_map_key { read.call(d) }
+            else d.decode_item
+            end
+          end
+          arrays = ->(depth) { (1..depth).reduce(1) { |inner, _| [inner] } }
+          maps = ->(depth) { (1..depth).reduce(1) { |inner, _| { 'k' => inner } } }
+          mixed = ->(depth) { (1..depth).reduce(1) { |inner, i| i.even? ? [inner] : { 'k' => inner } } }
+
+          [arrays, maps, mixed].each do |nest|
+            expect { read.call(Decoder.new(Encoder.new.add(nest.call(128)).bytes)) }
+              .to raise_error(Error, /Maximum nesting depth/)
+            expect { read.call(Decoder.new(Encoder.new.add(nest.call(127)).bytes)) }.not_to raise_error
+          end
+        end
+
+        it 'reads the item with the block passed to decode, then raises ExtraBytesError like #decode' do
+          expect(Decoder.new(Encoder.new.add(1).bytes).decode(&:decode_item)).to eq(1)
+          extra = Decoder.new(Encoder.new.add(1).add(2).bytes)
+          expect { extra.decode(&:decode_item) }.to raise_error(ExtraBytesError)
+        end
+      end
     end
   end
 end

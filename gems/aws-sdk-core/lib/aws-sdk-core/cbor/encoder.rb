@@ -7,7 +7,7 @@ module Aws
     # Pure ruby implementation of CBOR encoder.
     class Encoder
       def initialize
-        @buffer = String.new
+        @buffer = String.new(capacity: 1024, encoding: Encoding::BINARY)
       end
 
       # @return the encoded bytes in CBOR format for all added data
@@ -71,22 +71,25 @@ module Aws
 
       MAX_INTEGER = 18_446_744_073_709_551_616 # 2^64
 
+      # Appending an Integer to the BINARY buffer adds it as one byte, without allocating.
       def head(major_type, value)
-        @buffer <<
-          case value
-          when 0...24
-            [major_type + value].pack('C') # 8-bit unsigned
-          when 0...256
-            [major_type + 24, value].pack('CC')
-          when 0...65_536
-            [major_type + 25, value].pack('Cn')
-          when 0...4_294_967_296
-            [major_type + 26, value].pack('CN')
-          when 0...MAX_INTEGER
-            [major_type + 27, value].pack('CQ>')
-          else
-            raise Error, "Value is too large to encode: #{value}"
-          end
+        buf = @buffer
+        if value < 24
+          raise Error, "Value is too large to encode: #{value}" if value < 0
+
+          buf << (major_type + value) # 8-bit unsigned
+        elsif value < 256
+          buf << (major_type + 24) << value
+        elsif value < 65_536
+          buf << (major_type + 25) << (value >> 8) << (value & 0xFF)
+        elsif value < 4_294_967_296
+          buf << (major_type + 26) << (value >> 24) << ((value >> 16) & 0xFF) <<
+            ((value >> 8) & 0xFF) << (value & 0xFF)
+        elsif value < MAX_INTEGER
+          buf << (major_type + 27) << [value].pack('Q>')
+        else
+          raise Error, "Value is too large to encode: #{value}"
+        end
       end
 
       # streaming style, lower level interface
@@ -192,9 +195,13 @@ module Aws
       end
 
       def add_string(value)
-        value = value.encode(Encoding::UTF_8).force_encoding(Encoding::BINARY)
+        # UTF-8 and ASCII-only strings already have their UTF-8 bytes; anything else is
+        # transcoded, which raises for invalid bytes as before.
+        value = value.encode(Encoding::UTF_8) unless value.encoding == Encoding::UTF_8 || value.ascii_only?
         head(MAJOR_TYPE_STR, value.bytesize)
-        @buffer << value
+        # ASCII-only strings append to the BINARY buffer as is; others need a binary copy,
+        # or Ruby raises Encoding::CompatibilityError.
+        @buffer << (value.ascii_only? ? value : value.b)
       end
 
       # caller is responsible for adding length values
@@ -221,7 +228,24 @@ module Aws
       end
 
       def add_tag(tag)
-        head(MAJOR_TYPE_TAG, tag)
+        return head(MAJOR_TYPE_TAG, tag) if tag.is_a?(Integer)
+
+        # Tagged takes any tag object; #head only handles Integers.
+        @buffer <<
+          case tag
+          when 0...24
+            [MAJOR_TYPE_TAG + tag].pack('C') # 8-bit unsigned
+          when 0...256
+            [MAJOR_TYPE_TAG + 24, tag].pack('CC')
+          when 0...65_536
+            [MAJOR_TYPE_TAG + 25, tag].pack('Cn')
+          when 0...4_294_967_296
+            [MAJOR_TYPE_TAG + 26, tag].pack('CN')
+          when 0...MAX_INTEGER
+            [MAJOR_TYPE_TAG + 27, tag].pack('CQ>')
+          else
+            raise Error, "Value is too large to encode: #{tag}"
+          end
       end
 
       def add_time(value)
@@ -238,6 +262,31 @@ module Aws
         end
         s.reverse!
       end
+
+      # Writes a definite-length map when the entry count is only known after writing the entries.
+      # The block adds the entries and returns their count.
+      def add_counted_map
+        start = @buffer.bytesize
+        @buffer << MAJOR_TYPE_MAP # placeholder header for an empty map
+        count = yield
+        return @buffer.setbyte(start, MAJOR_TYPE_MAP + count) if count < 24
+
+        entries = @buffer.slice!(start..)
+        start_map(count)
+        @buffer << entries.byteslice(1..)
+      end
+
+      # Appends bytes that are already CBOR encoded, such as a cached map key.
+      def add_encoded(bytes)
+        @buffer << bytes
+      end
+
+      # Typed writers used by RpcV2::Builder, which already knows each value's type.
+      #
+      # @api private
+      public :start_map, :start_array, :add_string, :add_auto_integer,
+             :add_auto_float, :add_boolean, :add_byte_string, :add_time,
+             :add_counted_map, :add_encoded
     end
   end
 end

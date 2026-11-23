@@ -1,6 +1,7 @@
 Unreleased Changes
 ------------------
 
+* Feature - Speed up request serialization and response parsing for AWS services using the Smithy RPC v2 CBOR protocol.
 * Feature - Add `Aws.eager_load!` to eagerly resolve constants registered by loaded AWS SDK gems.
 
 3.271.1 (2026-11-20)

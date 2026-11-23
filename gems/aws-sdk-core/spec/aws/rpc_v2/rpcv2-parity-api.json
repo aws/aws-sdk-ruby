@@ -1,0 +1,241 @@
+{
+  "metadata": {
+    "protocol": "smithy-rpc-v2-cbor",
+    "apiVersion": "2020-01-01",
+    "endpointPrefix": "svc",
+    "serviceId": "Svc",
+    "signatureVersion": "v4",
+    "targetPrefix": "Svc"
+  },
+  "operations": {
+    "Op": {
+      "name": "Op",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "Item"
+      },
+      "output": {
+        "shape": "Item"
+      }
+    }
+  },
+  "shapes": {
+    "Item": {
+      "type": "structure",
+      "members": {
+        "String": {
+          "shape": "String"
+        },
+        "Integer": {
+          "shape": "Integer"
+        },
+        "Double": {
+          "shape": "Double"
+        },
+        "Boolean": {
+          "shape": "Boolean"
+        },
+        "Timestamp": {
+          "shape": "Timestamp"
+        },
+        "Blob": {
+          "shape": "Blob"
+        },
+        "StringList": {
+          "shape": "StringList"
+        },
+        "StringMap": {
+          "shape": "StringMap"
+        },
+        "Union": {
+          "shape": "Union"
+        },
+        "Child": {
+          "shape": "Item"
+        },
+        "Children": {
+          "shape": "ItemList"
+        },
+        "Renamed": {
+          "shape": "String",
+          "locationName": "wire"
+        },
+        "Wide": {
+          "shape": "Wide"
+        },
+        "FlatUnion": {
+          "shape": "FlatUnion"
+        },
+        "FlatList": {
+          "shape": "FlatList"
+        },
+        "FlatMap": {
+          "shape": "FlatMap"
+        }
+      }
+    },
+    "Wide": {
+      "type": "structure",
+      "members": {
+        "Field1": {
+          "shape": "String"
+        },
+        "Field2": {
+          "shape": "String"
+        },
+        "Field3": {
+          "shape": "String"
+        },
+        "Field4": {
+          "shape": "String"
+        },
+        "Field5": {
+          "shape": "String"
+        },
+        "Field6": {
+          "shape": "String"
+        },
+        "Field7": {
+          "shape": "String"
+        },
+        "Field8": {
+          "shape": "String"
+        },
+        "Field9": {
+          "shape": "String"
+        },
+        "Field10": {
+          "shape": "String"
+        },
+        "Field11": {
+          "shape": "String"
+        },
+        "Field12": {
+          "shape": "String"
+        },
+        "Field13": {
+          "shape": "String"
+        },
+        "Field14": {
+          "shape": "String"
+        },
+        "Field15": {
+          "shape": "String"
+        },
+        "Field16": {
+          "shape": "String"
+        },
+        "Field17": {
+          "shape": "String"
+        },
+        "Field18": {
+          "shape": "String"
+        },
+        "Field19": {
+          "shape": "String"
+        },
+        "Field20": {
+          "shape": "String"
+        },
+        "Field21": {
+          "shape": "String"
+        },
+        "Field22": {
+          "shape": "String"
+        },
+        "Field23": {
+          "shape": "String"
+        },
+        "Field24": {
+          "shape": "String"
+        },
+        "Field25": {
+          "shape": "String"
+        }
+      }
+    },
+    "Union": {
+      "type": "structure",
+      "union": true,
+      "members": {
+        "Text": {
+          "shape": "String"
+        },
+        "Number": {
+          "shape": "Integer"
+        }
+      }
+    },
+    "FlatUnion": {
+      "type": "structure",
+      "union": true,
+      "members": {
+        "FlatList": {
+          "shape": "FlatList"
+        },
+        "Text": {
+          "shape": "String"
+        }
+      }
+    },
+    "ItemList": {
+      "type": "list",
+      "member": {
+        "shape": "Item"
+      }
+    },
+    "StringList": {
+      "type": "list",
+      "member": {
+        "shape": "String"
+      }
+    },
+    "FlatList": {
+      "type": "list",
+      "member": {
+        "shape": "String"
+      },
+      "flattened": true
+    },
+    "StringMap": {
+      "type": "map",
+      "key": {
+        "shape": "String"
+      },
+      "value": {
+        "shape": "String"
+      }
+    },
+    "FlatMap": {
+      "type": "map",
+      "key": {
+        "shape": "String"
+      },
+      "value": {
+        "shape": "String"
+      },
+      "flattened": true
+    },
+    "String": {
+      "type": "string"
+    },
+    "Integer": {
+      "type": "integer"
+    },
+    "Double": {
+      "type": "double"
+    },
+    "Boolean": {
+      "type": "boolean"
+    },
+    "Timestamp": {
+      "type": "timestamp"
+    },
+    "Blob": {
+      "type": "blob"
+    }
+  }
+}
