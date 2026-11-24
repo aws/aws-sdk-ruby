@@ -7825,13 +7825,26 @@ module Aws::BedrockAgentCore
     #   The filters to apply to the search results.
     #   @return [Types::WebSearchFilters]
     #
+    # @!attribute [rw] user_location
+    #   `userLocation` may allow for Web Search results to be refined for
+    #   that location. This is done by supplying a `country`. The field is
+    #   optional.
+    #
+    #   The value is checked against assigned ISO 3166-1 alpha-2 codes, so
+    #   unassigned and user-assigned codes such as `UK` and `XK`, empty or
+    #   whitespace-only values are rejected. An omitted value is treated as
+    #   absent. Without location, as a fallback Web Search may use your
+    #   query to localize results or default to `en_US`.
+    #   @return [Types::WebSearchUserLocation]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/InvokeWebSearchInput AWS API Documentation
     #
     class InvokeWebSearchInput < Struct.new(
       :web_search_id,
       :search_query,
       :max_results,
-      :filters)
+      :filters,
+      :user_location)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13747,6 +13760,21 @@ module Aws::BedrockAgentCore
       :url,
       :text,
       :published_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The geographic location to use for the web search.
+    #
+    # @!attribute [rw] country
+    #   The two-letter ISO 3166-1 alpha-2 country code. The code is
+    #   case-insensitive.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/WebSearchUserLocation AWS API Documentation
+    #
+    class WebSearchUserLocation < Struct.new(
+      :country)
       SENSITIVE = []
       include Aws::Structure
     end

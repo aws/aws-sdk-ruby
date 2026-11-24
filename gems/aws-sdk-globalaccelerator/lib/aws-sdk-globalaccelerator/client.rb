@@ -785,16 +785,20 @@ module Aws::GlobalAccelerator
     #   You can specify one or two addresses, separated by a space. Do not
     #   include the /32 suffix.
     #
-    #   Note that you can't update IP addresses for an existing accelerator.
-    #   To change them, you must create a new accelerator with the new
-    #   addresses.
+    #   If you create an accelerator with only IP addresses provided by Global
+    #   Accelerator, you can't update it later to use BYOIP addresses. If you
+    #   create an accelerator with at least one BYOIP address, you can update
+    #   its IP addresses later. For more information, see [Update an
+    #   accelerator to change your IP addresses][1] in the *Global Accelerator
+    #   Developer Guide*.
     #
-    #   For more information, see [Bring your own IP addresses (BYOIP)][1] in
+    #   For more information, see [Bring your own IP addresses (BYOIP)][2] in
     #   the *Global Accelerator Developer Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/global-accelerator/latest/dg/using-byoip.html
+    #   [1]: https://docs.aws.amazon.com/global-accelerator/latest/dg/using-byoip.update-accelerator.html
+    #   [2]: https://docs.aws.amazon.com/global-accelerator/latest/dg/using-byoip.html
     #
     # @option params [Boolean] :enabled
     #   Indicates whether an accelerator is enabled. The value is true or
@@ -1029,16 +1033,20 @@ module Aws::GlobalAccelerator
     #   You can specify one or two addresses, separated by a space. Do not
     #   include the /32 suffix.
     #
-    #   Note that you can't update IP addresses for an existing accelerator.
-    #   To change them, you must create a new accelerator with the new
-    #   addresses.
+    #   If you create an accelerator with only IP addresses provided by Global
+    #   Accelerator, you can't update it later to use BYOIP addresses. If you
+    #   create an accelerator with at least one BYOIP address, you can update
+    #   its IP addresses later. For more information, see [Update an
+    #   accelerator to change your IP addresses][1] in the *Global Accelerator
+    #   Developer Guide*.
     #
-    #   For more information, see [Bring your own IP addresses (BYOIP)][1] in
+    #   For more information, see [Bring your own IP addresses (BYOIP)][2] in
     #   the *Global Accelerator Developer Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/global-accelerator/latest/dg/using-byoip.html
+    #   [1]: https://docs.aws.amazon.com/global-accelerator/latest/dg/using-byoip.update-accelerator.html
+    #   [2]: https://docs.aws.amazon.com/global-accelerator/latest/dg/using-byoip.html
     #
     # @option params [Boolean] :enabled
     #   Indicates whether an accelerator is enabled. The value is true or
@@ -2514,7 +2522,7 @@ module Aws::GlobalAccelerator
 
     # Provides a complete mapping from the public accelerator IP address and
     # port to destination EC2 instance IP addresses and ports in the virtual
-    # public cloud (VPC) subnet endpoint for a custom routing accelerator.
+    # private cloud (VPC) subnet endpoint for a custom routing accelerator.
     # For each subnet endpoint that you add, Global Accelerator creates a
     # new static port mapping for the accelerator. The port mappings don't
     # change after Global Accelerator generates them, so you can retrieve
@@ -2887,8 +2895,8 @@ module Aws::GlobalAccelerator
     # The `RemoveEndpoints` API operation is the recommended option for
     # removing endpoints. The alternative is to remove endpoints by updating
     # an endpoint group by using the [UpdateEndpointGroup][1] API operation.
-    # There are two advantages to using `AddEndpoints` to remove endpoints
-    # instead:
+    # There are two advantages to using `RemoveEndpoints` to remove
+    # endpoints instead:
     #
     # * It's more convenient, because you only need to specify the
     #   endpoints that you want to remove. With the `UpdateEndpointGroup`
@@ -3048,7 +3056,21 @@ module Aws::GlobalAccelerator
     #   accelerator, the value can be IPV4 or DUAL\_STACK.
     #
     # @option params [Array<String>] :ip_addresses
-    #   The IP addresses for an accelerator.
+    #   The IP addresses for an accelerator. Specify one or two IPv4
+    #   addresses. Do not include the /32 suffix.
+    #
+    #   You can update IP addresses only for an accelerator that you created
+    #   with at least one BYOIP address. You can't update an accelerator that
+    #   has only IP addresses provided by Global Accelerator to use BYOIP
+    #   addresses. Instead, create a new accelerator with your BYOIP
+    #   addresses.
+    #
+    #   For more information, see [Update an accelerator to change your IP
+    #   addresses][1] in the *Global Accelerator Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/global-accelerator/latest/dg/using-byoip.update-accelerator.html
     #
     # @option params [Boolean] :enabled
     #   Indicates whether an accelerator is enabled. The value is true or
@@ -3705,7 +3727,7 @@ module Aws::GlobalAccelerator
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-globalaccelerator'
-      context[:gem_version] = '1.109.0'
+      context[:gem_version] = '1.110.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

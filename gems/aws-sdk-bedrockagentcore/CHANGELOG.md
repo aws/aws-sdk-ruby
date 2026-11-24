@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.74.0 (2026-11-24)
+------------------
+
+* Feature - Adds the optional userLocation parameter to InvokeWebSearch. Specify a two-letter ISO 3166-1 alpha-2 country code to refine web search results for that country. InvokeWebSearch also accepts search queries in languages other than English.
+
 1.73.0 (2026-11-19)
 ------------------
 

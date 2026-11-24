@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.110.0 (2026-11-24)
+------------------
+
+* Feature - AWS Global Accelerator supports Client IP Preservation for NLBs with TLS Listener endpoints.
+
 1.109.0 (2026-11-18)
 ------------------
 

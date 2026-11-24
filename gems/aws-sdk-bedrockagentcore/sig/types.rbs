@@ -2306,6 +2306,7 @@ module Aws::BedrockAgentCore
       attr_accessor search_query: ::String
       attr_accessor max_results: ::Integer
       attr_accessor filters: Types::WebSearchFilters
+      attr_accessor user_location: Types::WebSearchUserLocation
       SENSITIVE: []
     end
 
@@ -4028,6 +4029,11 @@ module Aws::BedrockAgentCore
       attr_accessor url: ::String
       attr_accessor text: ::String
       attr_accessor published_at: ::Time
+      SENSITIVE: []
+    end
+
+    class WebSearchUserLocation
+      attr_accessor country: ::String
       SENSITIVE: []
     end
 

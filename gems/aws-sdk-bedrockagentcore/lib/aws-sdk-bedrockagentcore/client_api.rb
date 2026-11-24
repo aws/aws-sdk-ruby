@@ -977,10 +977,12 @@ module Aws::BedrockAgentCore
     ViewPort = Shapes::StructureShape.new(name: 'ViewPort')
     ViewPortHeight = Shapes::IntegerShape.new(name: 'ViewPortHeight')
     ViewPortWidth = Shapes::IntegerShape.new(name: 'ViewPortWidth')
+    WebSearchCountryCode = Shapes::StringShape.new(name: 'WebSearchCountryCode')
     WebSearchFilters = Shapes::StructureShape.new(name: 'WebSearchFilters')
     WebSearchId = Shapes::StringShape.new(name: 'WebSearchId')
     WebSearchResult = Shapes::StructureShape.new(name: 'WebSearchResult')
     WebSearchResultList = Shapes::ListShape.new(name: 'WebSearchResultList')
+    WebSearchUserLocation = Shapes::StructureShape.new(name: 'WebSearchUserLocation')
     WorkloadIdentityNameType = Shapes::StringShape.new(name: 'WorkloadIdentityNameType')
     WorkloadIdentityTokenType = Shapes::StringShape.new(name: 'WorkloadIdentityTokenType')
     WwwAuthenticateHeader = Shapes::StringShape.new(name: 'WwwAuthenticateHeader')
@@ -2760,6 +2762,7 @@ module Aws::BedrockAgentCore
     InvokeWebSearchInput.add_member(:search_query, Shapes::ShapeRef.new(shape: InvokeWebSearchInputSearchQueryString, required: true, location_name: "searchQuery"))
     InvokeWebSearchInput.add_member(:max_results, Shapes::ShapeRef.new(shape: InvokeWebSearchInputMaxResultsInteger, location_name: "maxResults"))
     InvokeWebSearchInput.add_member(:filters, Shapes::ShapeRef.new(shape: WebSearchFilters, location_name: "filters"))
+    InvokeWebSearchInput.add_member(:user_location, Shapes::ShapeRef.new(shape: WebSearchUserLocation, location_name: "userLocation"))
     InvokeWebSearchInput.struct_class = Types::InvokeWebSearchInput
 
     InvokeWebSearchOutput.add_member(:results, Shapes::ShapeRef.new(shape: WebSearchResultList, required: true, location_name: "results"))
@@ -4070,6 +4073,9 @@ module Aws::BedrockAgentCore
     WebSearchResult.struct_class = Types::WebSearchResult
 
     WebSearchResultList.member = Shapes::ShapeRef.new(shape: WebSearchResult)
+
+    WebSearchUserLocation.add_member(:country, Shapes::ShapeRef.new(shape: WebSearchCountryCode, location_name: "country"))
+    WebSearchUserLocation.struct_class = Types::WebSearchUserLocation
 
     WwwAuthenticateHeaderList.member = Shapes::ShapeRef.new(shape: WwwAuthenticateHeader)
 

@@ -1214,6 +1214,9 @@ module Aws
                                    published_after: ::Time?,
                                    published_before: ::Time?
                                  }?
+                               },
+                               ?user_location: {
+                                 country: ::String?
                                }
                              ) -> _InvokeWebSearchResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _InvokeWebSearchResponseSuccess

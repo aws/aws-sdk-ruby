@@ -4567,6 +4567,17 @@ module Aws::BedrockAgentCore
     # @option params [Types::WebSearchFilters] :filters
     #   The filters to apply to the search results.
     #
+    # @option params [Types::WebSearchUserLocation] :user_location
+    #   `userLocation` may allow for Web Search results to be refined for that
+    #   location. This is done by supplying a `country`. The field is
+    #   optional.
+    #
+    #   The value is checked against assigned ISO 3166-1 alpha-2 codes, so
+    #   unassigned and user-assigned codes such as `UK` and `XK`, empty or
+    #   whitespace-only values are rejected. An omitted value is treated as
+    #   absent. Without location, as a fallback Web Search may use your query
+    #   to localize results or default to `en_US`.
+    #
     # @return [Types::InvokeWebSearchOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::InvokeWebSearchOutput#results #results} => Array&lt;Types::WebSearchResult&gt;
@@ -4587,6 +4598,9 @@ module Aws::BedrockAgentCore
     #     }, 
     #     max_results: 1, 
     #     search_query: "Amazon Bedrock AgentCore web search", 
+    #     user_location: {
+    #       country: "US", 
+    #     }, 
     #     web_search_id: "web-search.v1", 
     #   })
     #
@@ -4617,6 +4631,9 @@ module Aws::BedrockAgentCore
     #         published_after: Time.now,
     #         published_before: Time.now,
     #       },
+    #     },
+    #     user_location: {
+    #       country: "WebSearchCountryCode",
     #     },
     #   })
     #
@@ -7397,7 +7414,7 @@ module Aws::BedrockAgentCore
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrockagentcore'
-      context[:gem_version] = '1.73.0'
+      context[:gem_version] = '1.74.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
