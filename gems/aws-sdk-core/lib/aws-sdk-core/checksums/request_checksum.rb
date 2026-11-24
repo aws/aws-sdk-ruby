@@ -42,6 +42,7 @@ module Aws
           header_name = Checksums.header_name(algorithm)
           location = request_location
           remove_flexible_checksum_headers
+          normalize_algorithm_header(algorithm)
           @context[:http_checksum][:request_checksum_applied] = true
           if location == 'trailer'
             apply_trailer_checksum(algorithm, header_name)
@@ -108,6 +109,11 @@ module Aws
           headers.each do |header, _value|
             headers.delete(header) if flexible_checksum_header?(header)
           end
+        end
+
+        def normalize_algorithm_header(algorithm)
+          header = @checksum[:request_algorithm_header]
+          headers[header] = algorithm if header && headers[header]
         end
 
         def remove_algorithm_header

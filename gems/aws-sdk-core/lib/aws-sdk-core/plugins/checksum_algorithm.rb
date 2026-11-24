@@ -133,10 +133,8 @@ module Aws
           def call(context)
             checksum = Extension.http_checksum(context.operation)
             algorithm = apply_request_checksum(context, checksum)
-            validator = Checksums::ResponseValidator.new(context, checksum).register
-            response = track_features(context.config, algorithm) { @handler.call(context) }
-            validator.raise_if_failed
-            response
+            Checksums::ResponseValidator.new(context, checksum).register
+            track_features(context.config, algorithm) { @handler.call(context) }
           end
 
           private

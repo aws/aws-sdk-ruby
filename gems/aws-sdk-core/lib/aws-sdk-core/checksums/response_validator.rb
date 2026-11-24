@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require 'base64'
 require_relative '../checksums'
 
 module Aws
@@ -26,10 +25,6 @@ module Aws
           add_data_listener
           add_success_listener
           self
-        end
-
-        def raise_if_failed
-          raise @state[:error] if @state[:error]
         end
 
         private
@@ -73,6 +68,9 @@ module Aws
               @context[:http_checksum][:validated] = @state[:algorithm]
             else
               record_failure(computed)
+              # Raising here lets the response record the error and invoke
+              # error listeners before returning through the handler stack.
+              raise @state[:error]
             end
           end
         end
@@ -88,12 +86,13 @@ module Aws
           # checksum to validate. Explicit stubs continue through validation.
           return if @context[:generated_stub]
 
+          # TODO: Revisit malformed checksum candidate handling after the
+          # Flexible Checksums SEP defines the required behavior.
           validation_list.each do |algorithm|
             header_name = Checksums.header_name(algorithm)
             expected = headers[header_name]
             next unless expected
             break if skip_response_validation?(expected)
-            next unless valid_base64_checksum?(expected)
 
             @state[:algorithm] = algorithm
             @state[:header_name] = header_name
@@ -101,17 +100,6 @@ module Aws
             @state[:expected] = expected
             break
           end
-        end
-
-        # Valid Base64 values are checksum candidates regardless of decoded length.
-        # A nonmatching value must fail validation.
-        def valid_base64_checksum?(value)
-          return false if value.nil? || value.empty?
-
-          Base64.strict_decode64(value)
-          true
-        rescue ArgumentError
-          false
         end
 
         def record_failure(computed)

@@ -82,6 +82,8 @@ module Aws
               response = client.operation(string: 'payload', checksum_algorithm: algorithm.downcase)
               request = response.context.http_request
 
+              expect(request.headers['x-amz-sdk-checksum-algorithm'])
+                .to eq(algorithm)
               expect(request.headers["x-amz-checksum-#{algorithm.downcase}"])
                 .to eq(checksum_for(algorithm, request.body))
             end
@@ -313,12 +315,42 @@ module Aws
               )
 
               if test_case.dig('expect', 'kind') == 'failure'
-                message = Regexp.escape(test_case.dig('expect', 'message'))
+                expected_message = test_case.dig('expect', 'message')
+                message = Regexp.escape(expected_message)
                 expect { client.operation(string: 'payload') }
                   .to raise_error(
                     Aws::Core::Errors::ChecksumError,
                     /#{message}/
                   )
+
+                next unless test_case.dig('expect', 'responseLifecycle')
+
+                log_output = StringIO.new
+                configured = client_class.new(
+                  **client_options,
+                  raise_response_errors: false,
+                  logger: Logger.new(log_output)
+                )
+                configured.stub_responses(
+                  :operation,
+                  status_code: 200,
+                  headers: test_case['responseHeaders'],
+                  body: test_case['responsePayload']
+                )
+
+                Dir.mktmpdir do |dir|
+                  path = File.join(dir, 'target')
+                  response = configured.operation(
+                    { string: 'payload' },
+                    target: path
+                  )
+
+                  expect(response.error)
+                    .to be_a(Aws::Core::Errors::ChecksumError)
+                  expect(response.error.message).to include(expected_message)
+                  expect(log_output.string).to include(expected_message)
+                  expect(File.exist?(path)).to be(false)
+                end
               else
                 response = client.operation(string: 'payload')
                 expect(response.context[:http_checksum][:validated])
@@ -362,7 +394,7 @@ module Aws
           it 'clears attempt-specific response checksum state when headers repeat' do
             add_response_checksum_behavior(%w[CRC32])
             context = client.operation(string: 'payload').context
-            validator = Checksums::ResponseValidator.new(
+            Checksums::ResponseValidator.new(
               context,
               Extension.http_checksum(context.operation)
             ).register
@@ -380,14 +412,14 @@ module Aws
               body: 'success'
             )
 
-            expect { validator.raise_if_failed }.not_to raise_error
+            expect(context.http_response.error).to be_nil
             expect(context[:http_checksum][:validated]).to be_nil
           end
 
           it 'does not validate a checksum on a non-success response' do
             add_response_checksum_behavior(%w[CRC32])
             context = client.operation(string: 'payload').context
-            validator = Checksums::ResponseValidator.new(
+            Checksums::ResponseValidator.new(
               context,
               Extension.http_checksum(context.operation)
             ).register
@@ -398,13 +430,13 @@ module Aws
               body: 'failed'
             )
 
-            expect { validator.raise_if_failed }.not_to raise_error
+            expect(context.http_response.error).to be_nil
           end
 
           it 'does not validate a checksum on a generated stub response' do
             add_response_checksum_behavior(%w[CRC32])
             context = client.operation(string: 'payload').context
-            validator = Checksums::ResponseValidator.new(
+            Checksums::ResponseValidator.new(
               context,
               Extension.http_checksum(context.operation)
             ).register
@@ -418,7 +450,7 @@ module Aws
               body: '{}'
             )
 
-            expect { validator.raise_if_failed }.not_to raise_error
+            expect(context.http_response.error).to be_nil
           end
 
           it 'does not validate a response without an enabled validation mode' do
