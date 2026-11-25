@@ -3,7 +3,6 @@
 # This is generated code!
 
 require_relative 'plugins/endpoint'
-require 'smithy-client/plugins/checksum_required'
 require 'smithy-client/plugins/content_length'
 require 'smithy-client/plugins/default_params'
 require 'smithy-client/plugins/host_prefix'
@@ -23,6 +22,8 @@ require 'smithy-client/plugins/transfer_encoding'
 require 'aws-sdk-core/plugins/global_configuration'
 require 'aws-sdk-core/plugins/shared_config'
 require 'aws-sdk-core/plugins/user_agent'
+require 'aws-sdk-core/plugins/checksum_algorithm'
+require 'aws-sdk-core/plugins/http_checksum'
 require 'aws-sdk-core/plugins/invocation_id'
 require 'aws-sdk-core/plugins/recursion_detection'
 require 'aws-sdk-core/plugins/retry_errors'
@@ -43,7 +44,6 @@ module Aws::NetworkFirewall
     @identifier = :networkfirewall
 
     add_plugin(::Aws::NetworkFirewall::Plugins::Endpoint)
-    add_plugin(Smithy::Client::Plugins::ChecksumRequired)
     add_plugin(Smithy::Client::Plugins::ContentLength)
     add_plugin(Smithy::Client::Plugins::DefaultParams)
     add_plugin(Smithy::Client::Plugins::HostPrefix)
@@ -63,6 +63,8 @@ module Aws::NetworkFirewall
     add_plugin(Aws::Core::Plugins::GlobalConfiguration)
     add_plugin(Aws::Core::Plugins::SharedConfig)
     add_plugin(Aws::Core::Plugins::UserAgent)
+    add_plugin(Aws::Core::Plugins::ChecksumAlgorithm)
+    add_plugin(Aws::Core::Plugins::HttpChecksum)
     add_plugin(Aws::Core::Plugins::InvocationId)
     add_plugin(Aws::Core::Plugins::RecursionDetection)
     add_plugin(Aws::Core::Plugins::RetryErrors)
@@ -139,23 +141,41 @@ module Aws::NetworkFirewall
     #  * `ENV['AWS_DEFAULT_REGION']`
     #  * `~/.aws/credentials` as `region` under a profile
     #  * `~/.aws/config` as `region` under a profile
+    # @option options [String] :request_checksum_calculation (when_supported)
+    #  Determines when a checksum is calculated for request payloads. Values are:
+    #  
+    #  * `when_supported` - (default) A checksum is calculated for operations
+    #    modeled with the `httpChecksum` trait when `requestChecksumRequired`
+    #    is `true` or a `requestAlgorithmMember` is modeled.
+    #  * `when_required` - A checksum is calculated only when
+    #    `requestChecksumRequired` is `true`, or when the caller supplies a
+    #    modeled `requestAlgorithmMember`.
     # @option options [Integer] :request_min_compression_size_bytes (10240)
     #  The minimum size in bytes that triggers compression for request bodies.
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
+    # @option options [String] :response_checksum_validation (when_supported)
+    #  Determines when checksum validation is performed for response payloads.
+    #  Values are:
+    #  
+    #  * `when_supported` - (default) Validation is enabled for operations
+    #    modeled with a `requestValidationModeMember` and at least one
+    #    `responseAlgorithms` value supported by the client.
+    #  * `when_required` - Validation is performed only when the caller sets
+    #    the modeled `requestValidationModeMember` to `ENABLED`.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #
+    #  
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #
+    #  
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #
+    #  
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -1409,7 +1429,7 @@ module Aws::NetworkFirewall
     # @option params [Boolean] :analyze_rule_group
     #   <p>Indicates whether you want Network Firewall to analyze the stateless rules in the rule group for rule behavior such as asymmetric routing. If set to <code>TRUE</code>, Network Firewall runs the analysis and then creates the rule group for you. To run the stateless rule group analyzer without creating the rule group, set <code>DryRun</code> to <code>TRUE</code>.</p>
     # @option params [Types::SummaryConfiguration] :summary_configuration
-    #   <p>An object that contains a <code>RuleOptions</code> array of strings.
+    #   <p>An object that contains a <code>RuleOptions</code> array of strings. 
     #            You use <code>RuleOptions</code> to determine which of the following <a>RuleSummary</a> values are returned in response to <code>DescribeRuleGroupSummary</code>.</p>
     #            <ul>
     #               <li>
@@ -1624,7 +1644,7 @@ module Aws::NetworkFirewall
     # @option params [Types::TLSInspectionConfiguration] :tls_inspection_configuration
     #   <p>The object that defines a TLS inspection configuration. This, along with <a>TLSInspectionConfigurationResponse</a>, define the TLS inspection configuration. You can retrieve all objects for a TLS inspection configuration by calling <a>DescribeTLSInspectionConfiguration</a>. </p>
     #            <p>Network Firewall uses a TLS inspection configuration to decrypt traffic. Network Firewall re-encrypts the traffic before sending it to its destination.</p>
-    #            <p>To use a TLS inspection configuration, you add it to a new Network Firewall firewall policy, then you apply the firewall policy to a firewall. Network Firewall acts as a proxy service to decrypt and inspect the traffic traveling through your firewalls. You can reference a TLS inspection configuration from more than one firewall policy, and you can use a firewall policy in more than one firewall. For more information about using TLS inspection configurations, see
+    #            <p>To use a TLS inspection configuration, you add it to a new Network Firewall firewall policy, then you apply the firewall policy to a firewall. Network Firewall acts as a proxy service to decrypt and inspect the traffic traveling through your firewalls. You can reference a TLS inspection configuration from more than one firewall policy, and you can use a firewall policy in more than one firewall. For more information about using TLS inspection configurations, see 
     #       <a href="https://docs.aws.amazon.com/network-firewall/latest/developerguide/tls-inspection.html">Inspecting SSL/TLS traffic with TLS
     #   inspection configurations</a> in the <i>Network Firewall Developer Guide</i>.</p>
     # @option params [String] :description
@@ -2374,7 +2394,7 @@ module Aws::NetworkFirewall
 
     # <p>Deletes the specified <a>VpcEndpointAssociation</a>.</p>
     #          <p>You can check whether an endpoint association is
-    #          in use by reviewing the route tables for the Availability Zones where you have the endpoint subnet mapping.
+    #          in use by reviewing the route tables for the Availability Zones where you have the endpoint subnet mapping. 
     #          You can retrieve the subnet mapping by calling <a>DescribeVpcEndpointAssociation</a>.
     #          You define and update the route tables through Amazon VPC. As needed, update the route tables for the
     #          Availability Zone to remove the firewall endpoint for the association. When the route tables no longer use the firewall endpoint,
@@ -2610,7 +2630,7 @@ module Aws::NetworkFirewall
       request.send_request(options)
     end
 
-    # <p>Returns the high-level information about a firewall, including the Availability Zones where the Firewall is
+    # <p>Returns the high-level information about a firewall, including the Availability Zones where the Firewall is 
     #            currently in use. </p>
     # @param [Hash, Types::DescribeFirewallMetadataRequest] params
     # @option params [String] :firewall_arn
@@ -3890,7 +3910,7 @@ module Aws::NetworkFirewall
 
     # <p>Returns the results of a specific flow operation. </p>
     #          <p>Flow operations let you manage the flows tracked in the flow table, also known as the firewall table.</p>
-    #          <p>A flow is network traffic that is monitored by a firewall, either by stateful or stateless rules.
+    #          <p>A flow is network traffic that is monitored by a firewall, either by stateful or stateless rules. 
     # For traffic to be considered part of a flow, it must share Destination, DestinationPort, Direction, Protocol, Source, and SourcePort. </p>
     # @param [Hash, Types::ListFlowOperationResultsRequest] params
     # @option params [String] :firewall_arn
@@ -3959,10 +3979,10 @@ module Aws::NetworkFirewall
       request.send_request(options)
     end
 
-    # <p>Returns a list of all flow operations ran in a specific firewall.
+    # <p>Returns a list of all flow operations ran in a specific firewall. 
     #          You can optionally narrow the request scope by specifying the operation type or Availability Zone associated with a firewall's flow operations.  </p>
     #          <p>Flow operations let you manage the flows tracked in the flow table, also known as the firewall table.</p>
-    #          <p>A flow is network traffic that is monitored by a firewall, either by stateful or stateless rules.
+    #          <p>A flow is network traffic that is monitored by a firewall, either by stateful or stateless rules. 
     # For traffic to be considered part of a flow, it must share Destination, DestinationPort, Direction, Protocol, Source, and SourcePort. </p>
     # @param [Hash, Types::ListFlowOperationsRequest] params
     # @option params [String] :firewall_arn
@@ -4292,7 +4312,7 @@ module Aws::NetworkFirewall
     end
 
     # <p>Creates or updates an IAM policy for your rule group, firewall policy, or firewall. Use this to share these resources between accounts. This operation works in conjunction with the Amazon Web Services Resource Access Manager (RAM) service to manage resource sharing for Network Firewall. </p>
-    #          <p>For information about using sharing with Network Firewall resources, see
+    #          <p>For information about using sharing with Network Firewall resources, see 
     #     <a href="https://docs.aws.amazon.com/network-firewall/latest/developerguide/sharing.html">Sharing Network Firewall resources</a> in the <i>Network Firewall Developer Guide</i>.</p>
     #          <p>Use this operation to create or update a resource policy for your Network Firewall rule group, firewall policy, or firewall. In the resource policy, you specify the accounts that you want to share the Network Firewall resource with and the operations that you want the accounts to be able to perform. </p>
     #          <p>When you add an account in the resource policy, you then run the following Resource Access Manager (RAM) operations to access and accept the shared resource. </p>
@@ -4420,13 +4440,13 @@ module Aws::NetworkFirewall
       request.send_request(options)
     end
 
-    # <p>Begins capturing the flows in a firewall, according to the filters you define.
-    #          Captures are similar, but not identical to snapshots. Capture operations provide visibility into flows that are not closed and are tracked by a firewall's flow table.
+    # <p>Begins capturing the flows in a firewall, according to the filters you define. 
+    #          Captures are similar, but not identical to snapshots. Capture operations provide visibility into flows that are not closed and are tracked by a firewall's flow table. 
     #          Unlike snapshots, captures are a time-boxed view. </p>
-    #          <p>A flow is network traffic that is monitored by a firewall, either by stateful or stateless rules.
+    #          <p>A flow is network traffic that is monitored by a firewall, either by stateful or stateless rules. 
     # For traffic to be considered part of a flow, it must share Destination, DestinationPort, Direction, Protocol, Source, and SourcePort. </p>
     #          <note>
-    #             <p>To avoid encountering operation limits, you should avoid starting captures with broad filters, like wide IP ranges.
+    #             <p>To avoid encountering operation limits, you should avoid starting captures with broad filters, like wide IP ranges. 
     #             Instead, we recommend you define more specific criteria with <code>FlowFilters</code>, like narrow IP ranges, ports, or protocols.</p>
     #          </note>
     # @param [Hash, Types::StartFlowCaptureRequest] params
@@ -4440,7 +4460,7 @@ module Aws::NetworkFirewall
     # @option params [String] :vpc_endpoint_id
     #   <p>A unique identifier for the primary endpoint associated with a firewall.</p>
     # @option params [Integer] :minimum_flow_age_in_seconds
-    #   <p>The reqested <code>FlowOperation</code> ignores flows with an age (in seconds) lower than <code>MinimumFlowAgeInSeconds</code>.
+    #   <p>The reqested <code>FlowOperation</code> ignores flows with an age (in seconds) lower than <code>MinimumFlowAgeInSeconds</code>. 
     #   You provide this for start commands.</p>
     #            <note>
     #               <p>We recommend setting this value to at least 1 minute (60 seconds) to reduce chance of capturing flows that are not yet established.</p>
@@ -4483,12 +4503,12 @@ module Aws::NetworkFirewall
       request.send_request(options)
     end
 
-    # <p>Begins the flushing of traffic from the firewall, according to the filters you define.
-    #          When the operation starts, impacted flows are temporarily marked as timed out before the Suricata engine prunes,
+    # <p>Begins the flushing of traffic from the firewall, according to the filters you define. 
+    #          When the operation starts, impacted flows are temporarily marked as timed out before the Suricata engine prunes, 
     #          or flushes, the flows from the firewall table.</p>
     #          <important>
-    #             <p>While the flush completes, impacted flows are processed as midstream traffic. This may result in a
-    #             temporary increase in midstream traffic metrics. We recommend that you double check your stream exception policy
+    #             <p>While the flush completes, impacted flows are processed as midstream traffic. This may result in a 
+    #             temporary increase in midstream traffic metrics. We recommend that you double check your stream exception policy 
     #             before you perform a flush operation.</p>
     #          </important>
     # @param [Hash, Types::StartFlowFlushRequest] params
@@ -4502,7 +4522,7 @@ module Aws::NetworkFirewall
     # @option params [String] :vpc_endpoint_id
     #   <p>A unique identifier for the primary endpoint associated with a firewall.</p>
     # @option params [Integer] :minimum_flow_age_in_seconds
-    #   <p>The reqested <code>FlowOperation</code> ignores flows with an age (in seconds) lower than <code>MinimumFlowAgeInSeconds</code>.
+    #   <p>The reqested <code>FlowOperation</code> ignores flows with an age (in seconds) lower than <code>MinimumFlowAgeInSeconds</code>. 
     #   You provide this for start commands.</p>
     # @option params [Array<Types::FlowFilter>] :flow_filters
     #   <p>Defines the scope a flow operation. You can use up to 20 filters to configure a single flow operation.</p>
@@ -5098,11 +5118,11 @@ module Aws::NetworkFirewall
     #            Network Firewall disables logging for the firewall.</p>
     # @option params [Boolean] :enable_monitoring_dashboard
     #   <p>A boolean that lets you enable or disable the detailed firewall monitoring dashboard on the firewall. </p>
-    #            <p>The monitoring dashboard provides comprehensive visibility into your firewall's flow logs and alert logs.
+    #            <p>The monitoring dashboard provides comprehensive visibility into your firewall's flow logs and alert logs. 
     #            After you enable detailed monitoring, you can access these dashboards directly from the <b>Monitoring</b> page of the Network Firewall console.</p>
     #            <p>
-    #            Specify <code>TRUE</code> to enable the the detailed monitoring dashboard on the firewall.
-    #            Specify <code>FALSE</code> to disable the the detailed monitoring dashboard on the firewall.
+    #            Specify <code>TRUE</code> to enable the the detailed monitoring dashboard on the firewall. 
+    #            Specify <code>FALSE</code> to disable the the detailed monitoring dashboard on the firewall. 
     #         </p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -5800,7 +5820,7 @@ module Aws::NetworkFirewall
     # @option params [Types::TLSInspectionConfiguration] :tls_inspection_configuration
     #   <p>The object that defines a TLS inspection configuration. This, along with <a>TLSInspectionConfigurationResponse</a>, define the TLS inspection configuration. You can retrieve all objects for a TLS inspection configuration by calling <a>DescribeTLSInspectionConfiguration</a>. </p>
     #            <p>Network Firewall uses a TLS inspection configuration to decrypt traffic. Network Firewall re-encrypts the traffic before sending it to its destination.</p>
-    #            <p>To use a TLS inspection configuration, you add it to a new Network Firewall firewall policy, then you apply the firewall policy to a firewall. Network Firewall acts as a proxy service to decrypt and inspect the traffic traveling through your firewalls. You can reference a TLS inspection configuration from more than one firewall policy, and you can use a firewall policy in more than one firewall. For more information about using TLS inspection configurations, see
+    #            <p>To use a TLS inspection configuration, you add it to a new Network Firewall firewall policy, then you apply the firewall policy to a firewall. Network Firewall acts as a proxy service to decrypt and inspect the traffic traveling through your firewalls. You can reference a TLS inspection configuration from more than one firewall policy, and you can use a firewall policy in more than one firewall. For more information about using TLS inspection configurations, see 
     #       <a href="https://docs.aws.amazon.com/network-firewall/latest/developerguide/tls-inspection.html">Inspecting SSL/TLS traffic with TLS
     #   inspection configurations</a> in the <i>Network Firewall Developer Guide</i>.</p>
     # @option params [String] :description
@@ -5961,7 +5981,8 @@ module Aws::NetworkFirewall
     # @option options [Integer] :max_wait_time
     # @option options [Integer] :min_delay
     # @option options [Integer] :max_delay
-    # @return [nil] Returns `nil` if the waiter was successful.
+    # @return [Smithy::Client::Response] Returns the successful response
+    #   that satisfied the waiter's success condition.
     # @raise [FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition
     #   out of, preventing success.

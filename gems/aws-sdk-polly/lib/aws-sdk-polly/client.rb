@@ -3,7 +3,6 @@
 # This is generated code!
 
 require_relative 'plugins/endpoint'
-require 'smithy-client/plugins/checksum_required'
 require 'smithy-client/plugins/content_length'
 require 'smithy-client/plugins/default_params'
 require 'smithy-client/plugins/host_prefix'
@@ -23,6 +22,8 @@ require 'smithy-client/plugins/transfer_encoding'
 require 'aws-sdk-core/plugins/global_configuration'
 require 'aws-sdk-core/plugins/shared_config'
 require 'aws-sdk-core/plugins/user_agent'
+require 'aws-sdk-core/plugins/checksum_algorithm'
+require 'aws-sdk-core/plugins/http_checksum'
 require 'aws-sdk-core/plugins/invocation_id'
 require 'aws-sdk-core/plugins/recursion_detection'
 require 'aws-sdk-core/plugins/retry_errors'
@@ -43,7 +44,6 @@ module Aws::Polly
     @identifier = :polly
 
     add_plugin(::Aws::Polly::Plugins::Endpoint)
-    add_plugin(Smithy::Client::Plugins::ChecksumRequired)
     add_plugin(Smithy::Client::Plugins::ContentLength)
     add_plugin(Smithy::Client::Plugins::DefaultParams)
     add_plugin(Smithy::Client::Plugins::HostPrefix)
@@ -63,6 +63,8 @@ module Aws::Polly
     add_plugin(Aws::Core::Plugins::GlobalConfiguration)
     add_plugin(Aws::Core::Plugins::SharedConfig)
     add_plugin(Aws::Core::Plugins::UserAgent)
+    add_plugin(Aws::Core::Plugins::ChecksumAlgorithm)
+    add_plugin(Aws::Core::Plugins::HttpChecksum)
     add_plugin(Aws::Core::Plugins::InvocationId)
     add_plugin(Aws::Core::Plugins::RecursionDetection)
     add_plugin(Aws::Core::Plugins::RetryErrors)
@@ -139,23 +141,41 @@ module Aws::Polly
     #  * `ENV['AWS_DEFAULT_REGION']`
     #  * `~/.aws/credentials` as `region` under a profile
     #  * `~/.aws/config` as `region` under a profile
+    # @option options [String] :request_checksum_calculation (when_supported)
+    #  Determines when a checksum is calculated for request payloads. Values are:
+    #  
+    #  * `when_supported` - (default) A checksum is calculated for operations
+    #    modeled with the `httpChecksum` trait when `requestChecksumRequired`
+    #    is `true` or a `requestAlgorithmMember` is modeled.
+    #  * `when_required` - A checksum is calculated only when
+    #    `requestChecksumRequired` is `true`, or when the caller supplies a
+    #    modeled `requestAlgorithmMember`.
     # @option options [Integer] :request_min_compression_size_bytes (10240)
     #  The minimum size in bytes that triggers compression for request bodies.
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
+    # @option options [String] :response_checksum_validation (when_supported)
+    #  Determines when checksum validation is performed for response payloads.
+    #  Values are:
+    #  
+    #  * `when_supported` - (default) Validation is enabled for operations
+    #    modeled with a `requestValidationModeMember` and at least one
+    #    `responseAlgorithms` value supported by the client.
+    #  * `when_required` - Validation is performed only when the caller sets
+    #    the modeled `requestValidationModeMember` to `ENABLED`.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #
+    #  
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #
+    #  
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #
+    #  
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -562,7 +582,7 @@ module Aws::Polly
       request.send_request(options)
     end
 
-    # <p>Synthesizes UTF-8 input, plain text, or SSML over a bidirectional streaming connection.
+    # <p>Synthesizes UTF-8 input, plain text, or SSML over a bidirectional streaming connection. 
     #       Specify synthesis parameters in HTTP/2 headers, send text incrementally as events on the input stream,
     #        and receive synthesized audio as it becomes available.</p>
     #          <p>This operation serves as a bidirectional counterpart to <code>SynthesizeSpeech</code>:</p>
@@ -575,15 +595,15 @@ module Aws::Polly
     #          </ul>
     # @param [Hash, Types::StartSpeechSynthesisStreamInput] params
     # @option params [String] :engine
-    #   <p>Specifies the engine for Amazon Polly to use when processing input text for speech synthesis.
+    #   <p>Specifies the engine for Amazon Polly to use when processing input text for speech synthesis. 
     #         Currently, only the <code>generative</code> engine is supported.
     #         If you specify a voice that the selected engine doesn't support, Amazon Polly returns an error.</p>
     # @option params [String] :language_code
-    #   <p>An optional parameter that sets the language code for the speech synthesis request. Specify this parameter only
-    #         when using a bilingual voice. If a bilingual voice is used and no language code is specified, Amazon Polly
+    #   <p>An optional parameter that sets the language code for the speech synthesis request. Specify this parameter only 
+    #         when using a bilingual voice. If a bilingual voice is used and no language code is specified, Amazon Polly 
     #         uses the default language of the bilingual voice.</p>
     # @option params [Array<String>] :lexicon_names
-    #   <p>The names of one or more pronunciation lexicons for the service to apply
+    #   <p>The names of one or more pronunciation lexicons for the service to apply 
     #         during synthesis. Amazon Polly applies lexicons only when the lexicon language matches the voice language.</p>
     # @option params [String] :output_format
     #   <p>The audio format for the synthesized speech. Currently, Amazon Polly does not support JSON speech marks.</p>
@@ -920,7 +940,8 @@ module Aws::Polly
     # @option options [Integer] :max_wait_time
     # @option options [Integer] :min_delay
     # @option options [Integer] :max_delay
-    # @return [nil] Returns `nil` if the waiter was successful.
+    # @return [Smithy::Client::Response] Returns the successful response
+    #   that satisfied the waiter's success condition.
     # @raise [FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition
     #   out of, preventing success.

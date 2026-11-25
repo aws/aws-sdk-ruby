@@ -3,7 +3,6 @@
 # This is generated code!
 
 require_relative 'plugins/endpoint'
-require 'smithy-client/plugins/checksum_required'
 require 'smithy-client/plugins/content_length'
 require 'smithy-client/plugins/default_params'
 require 'smithy-client/plugins/host_prefix'
@@ -23,6 +22,8 @@ require 'smithy-client/plugins/transfer_encoding'
 require 'aws-sdk-core/plugins/global_configuration'
 require 'aws-sdk-core/plugins/shared_config'
 require 'aws-sdk-core/plugins/user_agent'
+require 'aws-sdk-core/plugins/checksum_algorithm'
+require 'aws-sdk-core/plugins/http_checksum'
 require 'aws-sdk-core/plugins/invocation_id'
 require 'aws-sdk-core/plugins/recursion_detection'
 require 'aws-sdk-core/plugins/retry_errors'
@@ -43,7 +44,6 @@ module Aws::DirectConnect
     @identifier = :directconnect
 
     add_plugin(::Aws::DirectConnect::Plugins::Endpoint)
-    add_plugin(Smithy::Client::Plugins::ChecksumRequired)
     add_plugin(Smithy::Client::Plugins::ContentLength)
     add_plugin(Smithy::Client::Plugins::DefaultParams)
     add_plugin(Smithy::Client::Plugins::HostPrefix)
@@ -63,6 +63,8 @@ module Aws::DirectConnect
     add_plugin(Aws::Core::Plugins::GlobalConfiguration)
     add_plugin(Aws::Core::Plugins::SharedConfig)
     add_plugin(Aws::Core::Plugins::UserAgent)
+    add_plugin(Aws::Core::Plugins::ChecksumAlgorithm)
+    add_plugin(Aws::Core::Plugins::HttpChecksum)
     add_plugin(Aws::Core::Plugins::InvocationId)
     add_plugin(Aws::Core::Plugins::RecursionDetection)
     add_plugin(Aws::Core::Plugins::RetryErrors)
@@ -139,23 +141,41 @@ module Aws::DirectConnect
     #  * `ENV['AWS_DEFAULT_REGION']`
     #  * `~/.aws/credentials` as `region` under a profile
     #  * `~/.aws/config` as `region` under a profile
+    # @option options [String] :request_checksum_calculation (when_supported)
+    #  Determines when a checksum is calculated for request payloads. Values are:
+    #  
+    #  * `when_supported` - (default) A checksum is calculated for operations
+    #    modeled with the `httpChecksum` trait when `requestChecksumRequired`
+    #    is `true` or a `requestAlgorithmMember` is modeled.
+    #  * `when_required` - A checksum is calculated only when
+    #    `requestChecksumRequired` is `true`, or when the caller supplies a
+    #    modeled `requestAlgorithmMember`.
     # @option options [Integer] :request_min_compression_size_bytes (10240)
     #  The minimum size in bytes that triggers compression for request bodies.
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
+    # @option options [String] :response_checksum_validation (when_supported)
+    #  Determines when checksum validation is performed for response payloads.
+    #  Values are:
+    #  
+    #  * `when_supported` - (default) Validation is enabled for operations
+    #    modeled with a `requestValidationModeMember` and at least one
+    #    `responseAlgorithms` value supported by the client.
+    #  * `when_required` - Validation is performed only when the caller sets
+    #    the modeled `requestValidationModeMember` to `ENABLED`.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #
+    #  
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #
+    #  
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #
+    #  
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -359,7 +379,7 @@ module Aws::DirectConnect
     end
 
     # <p>Creates a hosted connection on the specified interconnect or a link aggregation group (LAG) of interconnects.</p>
-    #          <p>Allocates a VLAN number and a specified amount of capacity (bandwidth) for use by a hosted connection on the specified interconnect or LAG of interconnects.
+    #          <p>Allocates a VLAN number and a specified amount of capacity (bandwidth) for use by a hosted connection on the specified interconnect or LAG of interconnects. 
     #       Amazon Web Services polices the hosted connection for the specified capacity and the Direct Connect Partner must also police the hosted connection for the specified capacity.</p>
     #          <note>
     #             <p>Intended for use by Direct Connect Partners only.</p>
@@ -453,7 +473,7 @@ module Aws::DirectConnect
     end
 
     # <p>Provisions a private virtual interface to be owned by the specified Amazon Web Services account.</p>
-    #          <p>Virtual interfaces created using this action must be confirmed by the owner using <a>ConfirmPrivateVirtualInterface</a>.
+    #          <p>Virtual interfaces created using this action must be confirmed by the owner using <a>ConfirmPrivateVirtualInterface</a>. 
     #       Until then, the virtual interface is in the <code>Confirming</code> state and is not available to handle traffic.</p>
     # @param [Hash, Types::AllocatePrivateVirtualInterfaceRequest] params
     # @option params [String] :connection_id
@@ -757,10 +777,10 @@ module Aws::DirectConnect
 
     # <p>Associates an existing connection with a link aggregation group (LAG). The connection
     #       is interrupted and re-established as a member of the LAG (connectivity to Amazon Web Services is
-    #       interrupted). The connection must be hosted on the same Direct Connect endpoint as the LAG, and its
-    #       bandwidth must match the bandwidth for the LAG. You can re-associate a connection that's
-    #       currently associated with a different LAG; however, if removing the connection would cause
-    #       the original LAG to fall below its setting for minimum number of operational connections,
+    #       interrupted). The connection must be hosted on the same Direct Connect endpoint as the LAG, and its 
+    #       bandwidth must match the bandwidth for the LAG. You can re-associate a connection that's 
+    #       currently associated with a different LAG; however, if removing the connection would cause 
+    #       the original LAG to fall below its setting for minimum number of operational connections, 
     #       the request fails.</p>
     #          <p>Any virtual interfaces that are directly associated with the connection are
     #       automatically re-associated with the LAG. If the connection was originally associated
@@ -876,7 +896,7 @@ module Aws::DirectConnect
     # <p>Associates a hosted connection and its virtual interfaces with a link aggregation
     #       group (LAG) or interconnect. If the target interconnect or LAG has an existing hosted
     #       connection with a conflicting VLAN number or IP address, the operation fails. This
-    #       action temporarily interrupts the hosted connection's connectivity to Amazon Web Services
+    #       action temporarily interrupts the hosted connection's connectivity to Amazon Web Services 
     #       as it is being migrated.</p>
     #          <note>
     #             <p>Intended for use by Direct Connect Partners only.</p>
@@ -1084,7 +1104,7 @@ module Aws::DirectConnect
     end
 
     # <p>Confirms the creation of the specified hosted connection on an interconnect.</p>
-    #          <p>Upon creation, the hosted connection is initially in the <code>Ordering</code> state, and
+    #          <p>Upon creation, the hosted connection is initially in the <code>Ordering</code> state, and 
     #       remains in this state until the owner confirms creation of the hosted connection.</p>
     # @param [Hash, Types::ConfirmConnectionRequest] params
     # @option params [String] :connection_id
@@ -1112,9 +1132,9 @@ module Aws::DirectConnect
     # @param [Hash, Types::ConfirmCustomerAgreementRequest] params
     # @option params [String] :agreement_name
     #   <p>
-    #
+    #   
     #         The name of the customer agreement.
-    #
+    #   
     #       </p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -1164,7 +1184,7 @@ module Aws::DirectConnect
     end
 
     # <p>Accepts ownership of a public virtual interface created by another Amazon Web Services account.</p>
-    #          <p>After the virtual interface owner makes this call, the specified virtual interface is
+    #          <p>After the virtual interface owner makes this call, the specified virtual interface is 
     #       created and made available to handle traffic.</p>
     # @param [Hash, Types::ConfirmPublicVirtualInterfaceRequest] params
     # @option params [String] :virtual_interface_id
@@ -1214,7 +1234,7 @@ module Aws::DirectConnect
     # <p>Creates a BGP peer on the specified virtual interface.</p>
     #          <p>You must create a BGP peer for the corresponding address family (IPv4/IPv6) in order to
     #       access Amazon Web Services resources that also use that address family.</p>
-    #          <p>If logical redundancy is not supported by the connection, interconnect, or LAG, the BGP peer cannot
+    #          <p>If logical redundancy is not supported by the connection, interconnect, or LAG, the BGP peer cannot 
     #       be in the same address family as an existing BGP peer on the virtual interface.</p>
     #          <p>When creating a IPv6 BGP peer, omit the Amazon address and customer address. IPv6 addresses are automatically assigned from
     #       the Amazon pool of IPv6 addresses; you cannot specify custom IPv6 addresses.</p>
@@ -1312,12 +1332,12 @@ module Aws::DirectConnect
     end
 
     # <p>Creates a connection between a customer network and a specific Direct Connect location.</p>
-    #          <p>A connection links your internal network to an Direct Connect location over a standard Ethernet fiber-optic
+    #          <p>A connection links your internal network to an Direct Connect location over a standard Ethernet fiber-optic 
     #       cable. One end of the cable is connected to your router, the other to an Direct Connect router.</p>
     #          <p>To find the locations for your Region, use <a>DescribeLocations</a>.</p>
     #          <p>You can automatically add the new connection to a link aggregation group (LAG) by
     #       specifying a LAG ID in the request. This ensures that the new connection is allocated on the
-    #       same Direct Connect endpoint that hosts the specified LAG. If there are no available ports on the endpoint,
+    #       same Direct Connect endpoint that hosts the specified LAG. If there are no available ports on the endpoint, 
     #       the request fails and no connection is created.</p>
     # @param [Hash, Types::CreateConnectionRequest] params
     # @option params [String] :location
@@ -1411,9 +1431,9 @@ module Aws::DirectConnect
       request.send_request(options)
     end
 
-    # <p>Creates a Direct Connect gateway, which is an intermediate object that enables you to connect a set
-    #       of virtual interfaces and virtual private gateways. A Direct Connect gateway is global and visible in any
-    #       Amazon Web Services Region after it is created. The virtual interfaces and virtual private gateways that
+    # <p>Creates a Direct Connect gateway, which is an intermediate object that enables you to connect a set 
+    #       of virtual interfaces and virtual private gateways. A Direct Connect gateway is global and visible in any 
+    #       Amazon Web Services Region after it is created. The virtual interfaces and virtual private gateways that 
     #       are connected through a Direct Connect gateway can be in different Amazon Web Services Regions. This enables you to
     #       connect to a VPC in any Region, regardless of the Region in which the virtual interfaces
     #       are located, and pass traffic between them.</p>
@@ -1590,7 +1610,7 @@ module Aws::DirectConnect
     end
 
     # <p>Creates an interconnect between an Direct Connect Partner's network and a specific Direct Connect location.</p>
-    #          <p>An interconnect is a connection that is capable of hosting other connections. The
+    #          <p>An interconnect is a connection that is capable of hosting other connections. The 
     #       Direct Connect Partner can use an interconnect to provide Direct Connect hosted
     #       connections to customers through their own network services. Like a standard connection, an
     #       interconnect links the partner's network to an Direct Connect location over a standard Ethernet
@@ -1598,7 +1618,7 @@ module Aws::DirectConnect
     #       router.</p>
     #          <p>You can automatically add the new interconnect to a link aggregation group (LAG) by
     #       specifying a LAG ID in the request. This ensures that the new interconnect is allocated on
-    #       the same Direct Connect endpoint that hosts the specified LAG. If there are no available ports on the
+    #       the same Direct Connect endpoint that hosts the specified LAG. If there are no available ports on the 
     #       endpoint, the request fails and no interconnect is created.</p>
     #          <p>For each end customer, the Direct Connect Partner provisions a connection on their interconnect by calling <a>AllocateHostedConnection</a>.
     #       The end customer can then connect to Amazon Web Services resources by creating a virtual interface on their connection, using the VLAN assigned to them by the Direct Connect Partner.</p>
@@ -1681,7 +1701,7 @@ module Aws::DirectConnect
     # <p>Creates a link aggregation group (LAG) with the specified number of bundled
     #       physical dedicated connections between the customer network and a specific Direct Connect location.
     #       A LAG is a logical interface that uses the Link Aggregation Control Protocol
-    #       (LACP) to aggregate multiple interfaces, enabling you to treat them as a single
+    #       (LACP) to aggregate multiple interfaces, enabling you to treat them as a single 
     #       interface.</p>
     #          <p>All connections in a LAG must use the same bandwidth (either 1Gbps, 10Gbps, 100Gbps,
     #       or 400Gbps) and must terminate at the same Direct Connect endpoint.</p>
@@ -1694,8 +1714,8 @@ module Aws::DirectConnect
     #       will be created on the same Direct Connect endpoint to which the dedicated connection terminates. Any
     #       virtual interfaces associated with the dedicated connection are automatically disassociated
     #       and re-associated with the LAG. The connection ID does not change.</p>
-    #          <p>If the Amazon Web Services account used to create a LAG is a registered Direct Connect Partner, the LAG is
-    #       automatically enabled to host sub-connections. For a LAG owned by a partner, any associated virtual
+    #          <p>If the Amazon Web Services account used to create a LAG is a registered Direct Connect Partner, the LAG is 
+    #       automatically enabled to host sub-connections. For a LAG owned by a partner, any associated virtual 
     #       interfaces cannot be directly configured.</p>
     # @param [Hash, Types::CreateLagRequest] params
     # @option params [Integer] :number_of_connections
@@ -1854,14 +1874,14 @@ module Aws::DirectConnect
 
     # <p>Creates a private virtual interface. A virtual interface is the VLAN that transports Direct Connect traffic.
     #       A private virtual interface can be connected to either a Direct Connect gateway or a Virtual Private Gateway (VGW).
-    #       Connecting the private virtual interface to a Direct Connect gateway enables the possibility for connecting to multiple
-    #       VPCs, including VPCs in different Amazon Web Services Regions. Connecting the private virtual interface
+    #       Connecting the private virtual interface to a Direct Connect gateway enables the possibility for connecting to multiple 
+    #       VPCs, including VPCs in different Amazon Web Services Regions. Connecting the private virtual interface 
     #       to a VGW only provides access to a single VPC within the same Region.</p>
     #          <p>Setting the MTU of a virtual interface to 8500 (jumbo frames) can cause an update to
-    #       the underlying physical connection if it wasn't updated to support jumbo frames. Updating
-    #       the connection disrupts network connectivity for all virtual interfaces associated with
-    #       the connection for up to 30 seconds. To check whether your connection supports jumbo
-    #       frames, call <a>DescribeConnections</a>. To check whether your virtual
+    #       the underlying physical connection if it wasn't updated to support jumbo frames. Updating 
+    #       the connection disrupts network connectivity for all virtual interfaces associated with 
+    #       the connection for up to 30 seconds. To check whether your connection supports jumbo 
+    #       frames, call <a>DescribeConnections</a>. To check whether your virtual 
     #       interface supports jumbo frames, call <a>DescribeVirtualInterfaces</a>.</p>
     # @param [Hash, Types::CreatePrivateVirtualInterfaceRequest] params
     # @option params [String] :connection_id
@@ -2351,8 +2371,8 @@ module Aws::DirectConnect
     end
 
     # <p>Deletes the specified connection.</p>
-    #          <p>Deleting a connection only stops the Direct Connect port hour and data transfer charges.
-    #       If you are partnering with any third parties to connect with the Direct Connect location,
+    #          <p>Deleting a connection only stops the Direct Connect port hour and data transfer charges. 
+    #       If you are partnering with any third parties to connect with the Direct Connect location, 
     #       you must cancel your service with them separately.</p>
     # @param [Hash, Types::DeleteConnectionRequest] params
     # @option params [String] :connection_id
@@ -2420,7 +2440,7 @@ module Aws::DirectConnect
     end
 
     # <p>Deletes the specified Direct Connect gateway. You must first delete all virtual interfaces that are
-    #       attached to the Direct Connect gateway and disassociate all virtual private gateways associated
+    #       attached to the Direct Connect gateway and disassociate all virtual private gateways associated 
     #       with the Direct Connect gateway.</p>
     # @param [Hash, Types::DeleteDirectConnectGatewayRequest] params
     # @option params [String] :direct_connect_gateway_id
@@ -2760,7 +2780,7 @@ module Aws::DirectConnect
     # @option params [String] :connection_id
     #   <p>The ID of the connection.</p>
     # @option params [String] :provider_name
-    #   <p>The name of the APN partner or service provider who establishes connectivity on your behalf. If you specify this parameter,
+    #   <p>The name of the APN partner or service provider who establishes connectivity on your behalf. If you specify this parameter, 
     #         the LOA-CFA lists the provider name alongside your company name as the requester of the cross connect.</p>
     # @option params [String] :loa_content_type
     #   <p>The standard media type for the LOA-CFA document. The only supported value is application/pdf.</p>
@@ -3126,9 +3146,9 @@ module Aws::DirectConnect
     end
 
     # <p>Lists the attachments between your Direct Connect gateways and virtual interfaces. You must specify
-    #       a Direct Connect gateway, a virtual interface, or both. If you specify a Direct Connect gateway, the response contains
-    #       all virtual interfaces attached to the Direct Connect gateway. If you specify a virtual interface, the
-    #       response contains all Direct Connect gateways attached to the virtual interface. If you specify both,
+    #       a Direct Connect gateway, a virtual interface, or both. If you specify a Direct Connect gateway, the response contains 
+    #       all virtual interfaces attached to the Direct Connect gateway. If you specify a virtual interface, the 
+    #       response contains all Direct Connect gateways attached to the virtual interface. If you specify both, 
     #       the response contains the attachment between the Direct Connect gateway and the virtual interface.</p>
     # @param [Hash, Types::DescribeDirectConnectGatewayAttachmentsRequest] params
     # @option params [String] :direct_connect_gateway_id
@@ -3534,14 +3554,14 @@ module Aws::DirectConnect
     end
 
     # <p>Gets the LOA-CFA for a connection, interconnect, or link aggregation group (LAG).</p>
-    #          <p>The Letter of Authorization - Connecting Facility Assignment (LOA-CFA) is a document that is used when establishing
+    #          <p>The Letter of Authorization - Connecting Facility Assignment (LOA-CFA) is a document that is used when establishing 
     #       your cross connect to Amazon Web Services at the colocation facility. For more information, see <a href="https://docs.aws.amazon.com/directconnect/latest/UserGuide/Colocation.html">Requesting Cross Connects at Direct Connect Locations</a>
     #       in the <i>Direct Connect User Guide</i>.</p>
     # @param [Hash, Types::DescribeLoaRequest] params
     # @option params [String] :connection_id
     #   <p>The ID of a connection, LAG, or interconnect.</p>
     # @option params [String] :provider_name
-    #   <p>The name of the service provider who establishes connectivity on your behalf. If you specify this parameter, the
+    #   <p>The name of the service provider who establishes connectivity on your behalf. If you specify this parameter, the 
     #         LOA-CFA lists the provider name alongside your company name as the requester of the cross connect.</p>
     # @option params [String] :loa_content_type
     #   <p>The standard media type for the LOA-CFA document. The only supported value is application/pdf.</p>
@@ -3798,7 +3818,7 @@ module Aws::DirectConnect
     #       interrupted and re-established as a standalone connection (the connection is not
     #       deleted; to delete the connection, use the <a>DeleteConnection</a> request).
     #       If the LAG has associated virtual interfaces or hosted connections, they remain
-    #       associated with the LAG. A disassociated connection owned by an Direct Connect Partner is
+    #       associated with the LAG. A disassociated connection owned by an Direct Connect Partner is 
     #       automatically converted to an interconnect.</p>
     #          <p>If disassociating the connection would cause the LAG to fall below its setting for
     #       minimum number of operational connections, the request fails, except when it's the last
@@ -4738,10 +4758,10 @@ module Aws::DirectConnect
 
     # <p>Updates the specified attributes of the specified virtual private interface.</p>
     #          <p>Setting the MTU of a virtual interface to 8500 (jumbo frames) can cause an update to
-    #       the underlying physical connection if it wasn't updated to support jumbo frames. Updating
-    #       the connection disrupts network connectivity for all virtual interfaces associated with
-    #       the connection for up to 30 seconds. To check whether your connection supports jumbo
-    #       frames, call <a>DescribeConnections</a>. To check whether your virtual
+    #       the underlying physical connection if it wasn't updated to support jumbo frames. Updating 
+    #       the connection disrupts network connectivity for all virtual interfaces associated with 
+    #       the connection for up to 30 seconds. To check whether your connection supports jumbo 
+    #       frames, call <a>DescribeConnections</a>. To check whether your virtual 
     #       interface supports jumbo frames, call <a>DescribeVirtualInterfaces</a>.</p>
     # @param [Hash, Types::UpdateVirtualInterfaceAttributesRequest] params
     # @option params [String] :virtual_interface_id
@@ -4884,7 +4904,8 @@ module Aws::DirectConnect
     # @option options [Integer] :max_wait_time
     # @option options [Integer] :min_delay
     # @option options [Integer] :max_delay
-    # @return [nil] Returns `nil` if the waiter was successful.
+    # @return [Smithy::Client::Response] Returns the successful response
+    #   that satisfied the waiter's success condition.
     # @raise [FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition
     #   out of, preventing success.

@@ -3,7 +3,6 @@
 # This is generated code!
 
 require_relative 'plugins/endpoint'
-require 'smithy-client/plugins/checksum_required'
 require 'smithy-client/plugins/content_length'
 require 'smithy-client/plugins/default_params'
 require 'smithy-client/plugins/host_prefix'
@@ -23,6 +22,8 @@ require 'smithy-client/plugins/transfer_encoding'
 require 'aws-sdk-core/plugins/global_configuration'
 require 'aws-sdk-core/plugins/shared_config'
 require 'aws-sdk-core/plugins/user_agent'
+require 'aws-sdk-core/plugins/checksum_algorithm'
+require 'aws-sdk-core/plugins/http_checksum'
 require 'aws-sdk-core/plugins/invocation_id'
 require 'aws-sdk-core/plugins/recursion_detection'
 require 'aws-sdk-core/plugins/retry_errors'
@@ -43,7 +44,6 @@ module Aws::Rbin
     @identifier = :rbin
 
     add_plugin(::Aws::Rbin::Plugins::Endpoint)
-    add_plugin(Smithy::Client::Plugins::ChecksumRequired)
     add_plugin(Smithy::Client::Plugins::ContentLength)
     add_plugin(Smithy::Client::Plugins::DefaultParams)
     add_plugin(Smithy::Client::Plugins::HostPrefix)
@@ -63,6 +63,8 @@ module Aws::Rbin
     add_plugin(Aws::Core::Plugins::GlobalConfiguration)
     add_plugin(Aws::Core::Plugins::SharedConfig)
     add_plugin(Aws::Core::Plugins::UserAgent)
+    add_plugin(Aws::Core::Plugins::ChecksumAlgorithm)
+    add_plugin(Aws::Core::Plugins::HttpChecksum)
     add_plugin(Aws::Core::Plugins::InvocationId)
     add_plugin(Aws::Core::Plugins::RecursionDetection)
     add_plugin(Aws::Core::Plugins::RetryErrors)
@@ -139,23 +141,41 @@ module Aws::Rbin
     #  * `ENV['AWS_DEFAULT_REGION']`
     #  * `~/.aws/credentials` as `region` under a profile
     #  * `~/.aws/config` as `region` under a profile
+    # @option options [String] :request_checksum_calculation (when_supported)
+    #  Determines when a checksum is calculated for request payloads. Values are:
+    #  
+    #  * `when_supported` - (default) A checksum is calculated for operations
+    #    modeled with the `httpChecksum` trait when `requestChecksumRequired`
+    #    is `true` or a `requestAlgorithmMember` is modeled.
+    #  * `when_required` - A checksum is calculated only when
+    #    `requestChecksumRequired` is `true`, or when the caller supplies a
+    #    modeled `requestAlgorithmMember`.
     # @option options [Integer] :request_min_compression_size_bytes (10240)
     #  The minimum size in bytes that triggers compression for request bodies.
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
+    # @option options [String] :response_checksum_validation (when_supported)
+    #  Determines when checksum validation is performed for response payloads.
+    #  Values are:
+    #  
+    #  * `when_supported` - (default) Validation is enabled for operations
+    #    modeled with a `requestValidationModeMember` and at least one
+    #    `responseAlgorithms` value supported by the client.
+    #  * `when_required` - Validation is performed only when the caller sets
+    #    the modeled `requestValidationModeMember` to `ENABLED`.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #
+    #  
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #
+    #  
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #
+    #  
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -213,18 +233,18 @@ module Aws::Rbin
     #          <ul>
     #             <li>
     #                <p>
-    #                   <b>Tag-level retention rules</b> - These retention rules use
-    #           resource tags to identify the resources to protect. For each retention rule, you specify one or
-    #           more tag key and value pairs. Resources (of the specified type) that have at least one of these
-    #           tag key and value pairs are automatically retained in the Recycle Bin upon deletion. Use this
+    #                   <b>Tag-level retention rules</b> - These retention rules use 
+    #           resource tags to identify the resources to protect. For each retention rule, you specify one or 
+    #           more tag key and value pairs. Resources (of the specified type) that have at least one of these 
+    #           tag key and value pairs are automatically retained in the Recycle Bin upon deletion. Use this 
     #           type of retention rule to protect specific resources in your account based on their tags.</p>
     #             </li>
     #             <li>
     #                <p>
-    #                   <b>Region-level retention rules</b> - These retention rules,
-    #           by default, apply to all of the resources (of the specified type) in the Region, even if the
-    #           resources are not tagged. However, you can specify exclusion tags to exclude resources that have
-    #           specific tags. Use this type of retention rule to protect all resources of a specific type in a
+    #                   <b>Region-level retention rules</b> - These retention rules, 
+    #           by default, apply to all of the resources (of the specified type) in the Region, even if the 
+    #           resources are not tagged. However, you can specify exclusion tags to exclude resources that have 
+    #           specific tags. Use this type of retention rule to protect all resources of a specific type in a 
     #           Region.</p>
     #             </li>
     #          </ul>
@@ -232,14 +252,14 @@ module Aws::Rbin
     #       Create Recycle Bin retention rules</a> in the <i>Amazon EBS User Guide</i>.</p>
     # @param [Hash, Types::CreateRuleRequest] params
     # @option params [Types::RetentionPeriod] :retention_period
-    #   <p>Information about the retention period for which the retention rule is to
+    #   <p>Information about the retention period for which the retention rule is to 
     #     retain resources.</p>
     # @option params [String] :description
     #   <p>The retention rule description.</p>
     # @option params [Array<Types::Tag>] :tags
     #   <p>Information about the tags to assign to the retention rule.</p>
     # @option params [String] :resource_type
-    #   <p>The resource type to be retained by the retention rule. Currently, only EBS volumes, EBS snapshots, and EBS-backed AMIs
+    #   <p>The resource type to be retained by the retention rule. Currently, only EBS volumes, EBS snapshots, and EBS-backed AMIs 
     #         are supported.</p>
     #            <ul>
     #               <li>
@@ -254,19 +274,19 @@ module Aws::Rbin
     #               </li>
     #            </ul>
     # @option params [Array<Types::ResourceTag>] :resource_tags
-    #   <p>[Tag-level retention rules only] Specifies the resource tags to use to identify resources that are to be retained by a
-    #     tag-level retention rule. For tag-level retention rules, only deleted resources, of the specified resource type, that
-    #     have one or more of the specified tag key and value pairs are retained. If a resource is deleted, but it does not have
+    #   <p>[Tag-level retention rules only] Specifies the resource tags to use to identify resources that are to be retained by a 
+    #     tag-level retention rule. For tag-level retention rules, only deleted resources, of the specified resource type, that 
+    #     have one or more of the specified tag key and value pairs are retained. If a resource is deleted, but it does not have 
     #     any of the specified tag key and value pairs, it is immediately deleted without being retained by the retention rule.</p>
     #            <p>You can add the same tag key and value pair to a maximum or five retention rules.</p>
-    #            <p>To create a Region-level retention rule, omit this parameter. A Region-level retention rule
-    #         does not have any resource tags specified. It retains all deleted resources of the specified
+    #            <p>To create a Region-level retention rule, omit this parameter. A Region-level retention rule 
+    #         does not have any resource tags specified. It retains all deleted resources of the specified 
     #         resource type in the Region in which the rule is created, even if the resources are not tagged.</p>
     # @option params [Types::LockConfiguration] :lock_configuration
     #   <p>Information about the retention rule lock configuration.</p>
     # @option params [Array<Types::ResourceTag>] :exclude_resource_tags
-    #   <p>[Region-level retention rules only] Specifies the exclusion tags to use to identify resources that are to be excluded,
-    #   or ignored, by a Region-level retention rule. Resources that have any of these tags are not retained by the retention rule
+    #   <p>[Region-level retention rules only] Specifies the exclusion tags to use to identify resources that are to be excluded, 
+    #   or ignored, by a Region-level retention rule. Resources that have any of these tags are not retained by the retention rule 
     #   upon deletion.</p>
     #            <p>You can't specify exclusion tags for tag-level retention rules.</p>
     # @example Request syntax with placeholder values
@@ -425,7 +445,7 @@ module Aws::Rbin
     # @option params [String] :next_token
     #   <p>The token for the next page of results.</p>
     # @option params [String] :resource_type
-    #   <p>The resource type retained by the retention rule. Only retention rules that retain
+    #   <p>The resource type retained by the retention rule. Only retention rules that retain 
     #         the specified resource type are listed. Currently, only EBS volumes, EBS snapshots, and EBS-backed AMIs are supported.</p>
     #            <ul>
     #               <li>
@@ -439,13 +459,13 @@ module Aws::Rbin
     #               </li>
     #            </ul>
     # @option params [Array<Types::ResourceTag>] :resource_tags
-    #   <p>[Tag-level retention rules only] Information about the resource tags used to identify resources that are retained by the retention
+    #   <p>[Tag-level retention rules only] Information about the resource tags used to identify resources that are retained by the retention 
     #         rule.</p>
     # @option params [String] :lock_state
-    #   <p>The lock state of the retention rules to list. Only retention rules with the specified
+    #   <p>The lock state of the retention rules to list. Only retention rules with the specified 
     #         lock state are returned.</p>
     # @option params [Array<Types::ResourceTag>] :exclude_resource_tags
-    #   <p>[Region-level retention rules only] Information about the exclusion tags used to identify resources that are to be
+    #   <p>[Region-level retention rules only] Information about the exclusion tags used to identify resources that are to be 
     #   excluded, or ignored, by the retention rule.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -517,10 +537,10 @@ module Aws::Rbin
       request.send_request(options)
     end
 
-    # <p>Locks a Region-level retention rule. A locked retention rule can't be modified or
+    # <p>Locks a Region-level retention rule. A locked retention rule can't be modified or 
     #       deleted.</p>
     #          <note>
-    #             <p>You can't lock tag-level retention rules, or Region-level retention rules that
+    #             <p>You can't lock tag-level retention rules, or Region-level retention rules that 
     #         have exclusion tags.</p>
     #          </note>
     # @param [Hash, Types::LockRuleRequest] params
@@ -605,7 +625,7 @@ module Aws::Rbin
       request.send_request(options)
     end
 
-    # <p>Unlocks a retention rule. After a retention rule is unlocked, it can be modified or deleted
+    # <p>Unlocks a retention rule. After a retention rule is unlocked, it can be modified or deleted 
     #       only after the unlock delay period expires.</p>
     # @param [Hash, Types::UnlockRuleRequest] params
     # @option params [String] :identifier
@@ -677,35 +697,35 @@ module Aws::Rbin
       request.send_request(options)
     end
 
-    # <p>Updates an existing Recycle Bin retention rule. You can update a retention rule's description,
-    #       resource tags, and retention period at any time after creation. You can't update a retention rule's
+    # <p>Updates an existing Recycle Bin retention rule. You can update a retention rule's description, 
+    #       resource tags, and retention period at any time after creation. You can't update a retention rule's 
     #       resource type after creation. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/recycle-bin-working-with-rules.html#recycle-bin-update-rule">
     #       Update Recycle Bin retention rules</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>
     # @param [Hash, Types::UpdateRuleRequest] params
     # @option params [String] :identifier
     #   <p>The unique ID of the retention rule.</p>
     # @option params [Types::RetentionPeriod] :retention_period
-    #   <p>Information about the retention period for which the retention rule is to
+    #   <p>Information about the retention period for which the retention rule is to 
     #     retain resources.</p>
     # @option params [String] :description
     #   <p>The retention rule description.</p>
     # @option params [String] :resource_type
     #   <note>
-    #               <p>This parameter is currently not supported. You can't update a retention rule's resource type
+    #               <p>This parameter is currently not supported. You can't update a retention rule's resource type 
     #         after creation.</p>
     #            </note>
     # @option params [Array<Types::ResourceTag>] :resource_tags
-    #   <p>[Tag-level retention rules only] Specifies the resource tags to use to identify resources that are to be retained by a
-    #     tag-level retention rule. For tag-level retention rules, only deleted resources, of the specified resource type, that
-    #     have one or more of the specified tag key and value pairs are retained. If a resource is deleted, but it does not have
+    #   <p>[Tag-level retention rules only] Specifies the resource tags to use to identify resources that are to be retained by a 
+    #     tag-level retention rule. For tag-level retention rules, only deleted resources, of the specified resource type, that 
+    #     have one or more of the specified tag key and value pairs are retained. If a resource is deleted, but it does not have 
     #     any of the specified tag key and value pairs, it is immediately deleted without being retained by the retention rule.</p>
     #            <p>You can add the same tag key and value pair to a maximum or five retention rules.</p>
-    #            <p>To create a Region-level retention rule, omit this parameter. A Region-level retention rule
-    #         does not have any resource tags specified. It retains all deleted resources of the specified
+    #            <p>To create a Region-level retention rule, omit this parameter. A Region-level retention rule 
+    #         does not have any resource tags specified. It retains all deleted resources of the specified 
     #         resource type in the Region in which the rule is created, even if the resources are not tagged.</p>
     # @option params [Array<Types::ResourceTag>] :exclude_resource_tags
-    #   <p>[Region-level retention rules only] Specifies the exclusion tags to use to identify resources that are to be excluded,
-    #   or ignored, by a Region-level retention rule. Resources that have any of these tags are not retained by the retention rule
+    #   <p>[Region-level retention rules only] Specifies the exclusion tags to use to identify resources that are to be excluded, 
+    #   or ignored, by a Region-level retention rule. Resources that have any of these tags are not retained by the retention rule 
     #   upon deletion.</p>
     #            <p>You can't specify exclusion tags for tag-level retention rules.</p>
     # @example Request syntax with placeholder values
@@ -816,7 +836,8 @@ module Aws::Rbin
     # @option options [Integer] :max_wait_time
     # @option options [Integer] :min_delay
     # @option options [Integer] :max_delay
-    # @return [nil] Returns `nil` if the waiter was successful.
+    # @return [Smithy::Client::Response] Returns the successful response
+    #   that satisfied the waiter's success condition.
     # @raise [FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition
     #   out of, preventing success.

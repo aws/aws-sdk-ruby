@@ -3,7 +3,6 @@
 # This is generated code!
 
 require_relative 'plugins/endpoint'
-require 'smithy-client/plugins/checksum_required'
 require 'smithy-client/plugins/content_length'
 require 'smithy-client/plugins/default_params'
 require 'smithy-client/plugins/host_prefix'
@@ -23,6 +22,8 @@ require 'smithy-client/plugins/transfer_encoding'
 require 'aws-sdk-core/plugins/global_configuration'
 require 'aws-sdk-core/plugins/shared_config'
 require 'aws-sdk-core/plugins/user_agent'
+require 'aws-sdk-core/plugins/checksum_algorithm'
+require 'aws-sdk-core/plugins/http_checksum'
 require 'aws-sdk-core/plugins/invocation_id'
 require 'aws-sdk-core/plugins/recursion_detection'
 require 'aws-sdk-core/plugins/retry_errors'
@@ -43,7 +44,6 @@ module Aws::Outposts
     @identifier = :outposts
 
     add_plugin(::Aws::Outposts::Plugins::Endpoint)
-    add_plugin(Smithy::Client::Plugins::ChecksumRequired)
     add_plugin(Smithy::Client::Plugins::ContentLength)
     add_plugin(Smithy::Client::Plugins::DefaultParams)
     add_plugin(Smithy::Client::Plugins::HostPrefix)
@@ -63,6 +63,8 @@ module Aws::Outposts
     add_plugin(Aws::Core::Plugins::GlobalConfiguration)
     add_plugin(Aws::Core::Plugins::SharedConfig)
     add_plugin(Aws::Core::Plugins::UserAgent)
+    add_plugin(Aws::Core::Plugins::ChecksumAlgorithm)
+    add_plugin(Aws::Core::Plugins::HttpChecksum)
     add_plugin(Aws::Core::Plugins::InvocationId)
     add_plugin(Aws::Core::Plugins::RecursionDetection)
     add_plugin(Aws::Core::Plugins::RetryErrors)
@@ -139,23 +141,41 @@ module Aws::Outposts
     #  * `ENV['AWS_DEFAULT_REGION']`
     #  * `~/.aws/credentials` as `region` under a profile
     #  * `~/.aws/config` as `region` under a profile
+    # @option options [String] :request_checksum_calculation (when_supported)
+    #  Determines when a checksum is calculated for request payloads. Values are:
+    #  
+    #  * `when_supported` - (default) A checksum is calculated for operations
+    #    modeled with the `httpChecksum` trait when `requestChecksumRequired`
+    #    is `true` or a `requestAlgorithmMember` is modeled.
+    #  * `when_required` - A checksum is calculated only when
+    #    `requestChecksumRequired` is `true`, or when the caller supplies a
+    #    modeled `requestAlgorithmMember`.
     # @option options [Integer] :request_min_compression_size_bytes (10240)
     #  The minimum size in bytes that triggers compression for request bodies.
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
+    # @option options [String] :response_checksum_validation (when_supported)
+    #  Determines when checksum validation is performed for response payloads.
+    #  Values are:
+    #  
+    #  * `when_supported` - (default) Validation is enabled for operations
+    #    modeled with a `requestValidationModeMember` and at least one
+    #    `responseAlgorithms` value supported by the client.
+    #  * `when_required` - Validation is performed only when the caller sets
+    #    the modeled `requestValidationModeMember` to `ENABLED`.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #
+    #  
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #
+    #  
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #
+    #  
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -677,7 +697,7 @@ module Aws::Outposts
     # @option params [Types::RackPhysicalProperties] :rack_physical_properties
     #   <p> Information about the physical and logistical details for the rack at this site.
     #         For more information
-    #         about hardware requirements for racks, see <a href="https://docs.aws.amazon.com/outposts/latest/userguide/outposts-requirements.html#checklist">Network
+    #         about hardware requirements for racks, see <a href="https://docs.aws.amazon.com/outposts/latest/userguide/outposts-requirements.html#checklist">Network 
     #           readiness checklist</a> in the Amazon Web Services Outposts User Guide.
     #           </p>
     # @example Request syntax with placeholder values
@@ -910,7 +930,7 @@ module Aws::Outposts
     #          </note>
     #          <p> Gets information about the specified connection. </p>
     #          <p>
-    #       Use CloudTrail to monitor this action or Amazon Web Services managed policy for Amazon Web Services Outposts to secure it. For
+    #       Use CloudTrail to monitor this action or Amazon Web Services managed policy for Amazon Web Services Outposts to secure it. For 
     #       more information, see <a href="https://docs.aws.amazon.com/outposts/latest/userguide/security-iam-awsmanpol.html">
     #       Amazon Web Services managed policies for Amazon Web Services Outposts</a> and <a href="https://docs.aws.amazon.com/outposts/latest/userguide/logging-using-cloudtrail.html">
     #       Logging Amazon Web Services Outposts API calls with Amazon Web Services CloudTrail</a> in the <i>Amazon Web Services Outposts User Guide</i>.
@@ -1506,8 +1526,8 @@ module Aws::Outposts
     end
 
     # <p>Lists the hardware assets for the specified Outpost.</p>
-    #          <p>Use filters to return specific results. If you specify multiple filters, the results include only the resources that match
-    #  all of the specified filters. For a filter where you can specify multiple values, the results include
+    #          <p>Use filters to return specific results. If you specify multiple filters, the results include only the resources that match 
+    #  all of the specified filters. For a filter where you can specify multiple values, the results include 
     #  items that match any of the values that you specify for the filter.</p>
     # @param [Hash, Types::ListAssetsInput] params
     # @option params [String] :outpost_identifier
@@ -1623,8 +1643,8 @@ module Aws::Outposts
     end
 
     # <p>Lists the capacity tasks for your Amazon Web Services account.</p>
-    #          <p>Use filters to return specific results. If you specify multiple filters, the results include only the resources that match
-    #  all of the specified filters. For a filter where you can specify multiple values, the results include
+    #          <p>Use filters to return specific results. If you specify multiple filters, the results include only the resources that match 
+    #  all of the specified filters. For a filter where you can specify multiple values, the results include 
     #  items that match any of the values that you specify for the filter.</p>
     # @param [Hash, Types::ListCapacityTasksInput] params
     # @option params [String] :outpost_identifier_filter
@@ -1669,8 +1689,8 @@ module Aws::Outposts
     end
 
     # <p>Lists the items in the catalog.</p>
-    #          <p>Use filters to return specific results. If you specify multiple filters, the results include only the resources that match
-    #  all of the specified filters. For a filter where you can specify multiple values, the results include
+    #          <p>Use filters to return specific results. If you specify multiple filters, the results include only the resources that match 
+    #  all of the specified filters. For a filter where you can specify multiple values, the results include 
     #  items that match any of the values that you specify for the filter.</p>
     # @param [Hash, Types::ListCatalogItemsInput] params
     # @option params [String] :next_token
@@ -1807,8 +1827,8 @@ module Aws::Outposts
     end
 
     # <p>Lists the Outposts for your Amazon Web Services account.</p>
-    #          <p>Use filters to return specific results. If you specify multiple filters, the results include only the resources that match
-    #  all of the specified filters. For a filter where you can specify multiple values, the results include
+    #          <p>Use filters to return specific results. If you specify multiple filters, the results include only the resources that match 
+    #  all of the specified filters. For a filter where you can specify multiple values, the results include 
     #  items that match any of the values that you specify for the filter.</p>
     # @param [Hash, Types::ListOutpostsInput] params
     # @option params [String] :next_token
@@ -2018,8 +2038,8 @@ module Aws::Outposts
 
     # <p>Lists the Outpost sites for your Amazon Web Services account. Use filters to return specific
     #       results.</p>
-    #          <p>Use filters to return specific results. If you specify multiple filters, the results include only the resources that match
-    #  all of the specified filters. For a filter where you can specify multiple values, the results include
+    #          <p>Use filters to return specific results. If you specify multiple filters, the results include only the resources that match 
+    #  all of the specified filters. For a filter where you can specify multiple values, the results include 
     #  items that match any of the values that you specify for the filter.</p>
     # @param [Hash, Types::ListSitesInput] params
     # @option params [String] :next_token
@@ -2198,7 +2218,7 @@ module Aws::Outposts
     #          </note>
     #          <p> Starts the connection required for Outpost server installation. </p>
     #          <p>
-    #       Use CloudTrail to monitor this action or Amazon Web Services managed policy for Amazon Web Services Outposts to secure it. For
+    #       Use CloudTrail to monitor this action or Amazon Web Services managed policy for Amazon Web Services Outposts to secure it. For 
     #       more information, see <a href="https://docs.aws.amazon.com/outposts/latest/userguide/security-iam-awsmanpol.html">
     #       Amazon Web Services managed policies for Amazon Web Services Outposts</a> and <a href="https://docs.aws.amazon.com/outposts/latest/userguide/logging-using-cloudtrail.html">
     #       Logging Amazon Web Services Outposts API calls with Amazon Web Services CloudTrail</a> in the <i>Amazon Web Services Outposts User Guide</i>.
@@ -2651,7 +2671,7 @@ module Aws::Outposts
     end
 
     # <p>Update the physical and logistical details for a rack at a site. For more information
-    #       about hardware requirements for racks, see <a href="https://docs.aws.amazon.com/outposts/latest/userguide/outposts-requirements.html#checklist">Network
+    #       about hardware requirements for racks, see <a href="https://docs.aws.amazon.com/outposts/latest/userguide/outposts-requirements.html#checklist">Network 
     #         readiness checklist</a> in the Amazon Web Services Outposts User Guide.
     #          </p>
     #          <p>To update a rack at a site with an order of <code>IN_PROGRESS</code>, you must wait for
@@ -2736,7 +2756,7 @@ module Aws::Outposts
     #   <p>The type of optical standard that you will use to attach the Outpost to your network. This
     #         field is dependent on uplink speed, fiber type, and distance to the upstream device.
     #         For more information
-    #         about networking requirements for racks, see <a href="https://docs.aws.amazon.com/outposts/latest/userguide/outposts-requirements.html#facility-networking">Network</a>
+    #         about networking requirements for racks, see <a href="https://docs.aws.amazon.com/outposts/latest/userguide/outposts-requirements.html#facility-networking">Network</a> 
     #           in the Amazon Web Services Outposts User Guide.
     #           </p>
     #            <ul>
@@ -2897,7 +2917,8 @@ module Aws::Outposts
     # @option options [Integer] :max_wait_time
     # @option options [Integer] :min_delay
     # @option options [Integer] :max_delay
-    # @return [nil] Returns `nil` if the waiter was successful.
+    # @return [Smithy::Client::Response] Returns the successful response
+    #   that satisfied the waiter's success condition.
     # @raise [FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition
     #   out of, preventing success.

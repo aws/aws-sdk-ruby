@@ -863,7 +863,7 @@ module Aws::CostExplorer
     #   <p>An <a href="https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html">Expression</a>
     #               object used to categorize costs. This supports dimensions, tags, and nested expressions.
     #               Currently the only dimensions supported are <code>LINKED_ACCOUNT</code>,
-    #
+    #   
     #               <code>SERVICE_CODE</code>, <code>RECORD_TYPE</code>, <code>LINKED_ACCOUNT_NAME</code>, <code>REGION</code>, and <code>USAGE_TYPE</code>.</p>
     #            <p>
     #               <code>RECORD_TYPE</code> is a dimension used for Cost Explorer APIs, and is also
@@ -7041,33 +7041,33 @@ module Aws::CostExplorer
     #   @return [String]
     # @!attribute reserved_capacity_details
     #   <p>Details about the reservations that Amazon Web Services recommends that you
-    #
+    #               
     #               purchase.</p>
     #   @return [Types::ReservedCapacityDetails]
     # @!attribute recommended_number_of_capacity_units_to_purchase
     #   <p>The number of reserved capacity units that Amazon Web Services recommends that you
-    #
+    #               
     #               purchase.</p>
     #   @return [String]
     # @!attribute minimum_number_of_capacity_units_used_per_hour
     #   <p>The minimum number of provisioned capacity units that you used in an hour during the
-    #
+    #               
     #               historical period. Amazon Web Services uses this to calculate your recommended
-    #
+    #               
     #               reservation purchases.</p>
     #   @return [String]
     # @!attribute maximum_number_of_capacity_units_used_per_hour
     #   <p>The maximum number of provisioned capacity units that you used in an hour during the
-    #
+    #               
     #               historical period. Amazon Web Services uses this to calculate your recommended
-    #
+    #               
     #               reservation purchases.</p>
     #   @return [String]
     # @!attribute average_number_of_capacity_units_used_per_hour
     #   <p>The average number of provisioned capacity units that you used in an hour during the
-    #
+    #               
     #               historical period. Amazon Web Services uses this to calculate your recommended
-    #
+    #               
     #               reservation purchases.</p>
     #   @return [String]
     class ReservationPurchaseRecommendationDetail < Struct.new(
@@ -7171,7 +7171,7 @@ module Aws::CostExplorer
     end
 
     # <p>Details about the reservations that Amazon Web Services recommends that you
-    #
+    #             
     #             purchase.</p>
     # @!attribute dynamo_db_capacity_details
     #   <p>The DynamoDB reservations that Amazon Web Services recommends that you purchase.</p>

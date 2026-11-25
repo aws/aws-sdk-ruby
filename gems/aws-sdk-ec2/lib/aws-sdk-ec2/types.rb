@@ -91,8 +91,8 @@ module Aws::EC2
     #       For example, to find all resources that have a tag with the key <code>Owner</code> and the value <code>TeamA</code>, specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p>
     #   @return [Array<Types::TagSpecification>]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class AcceptAddressTransferRequest < Struct.new(
@@ -215,8 +215,8 @@ module Aws::EC2
     #   <p>The IDs of the subnets to associate with the transit gateway multicast domain.</p>
     #   @return [Array<String>]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class AcceptTransitGatewayMulticastDomainAssociationsRequest < Struct.new(
@@ -245,8 +245,8 @@ module Aws::EC2
     #   <p>The ID of the transit gateway attachment.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class AcceptTransitGatewayPeeringAttachmentRequest < Struct.new(
@@ -273,8 +273,8 @@ module Aws::EC2
     #   <p>The ID of the attachment.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class AcceptTransitGatewayVpcAttachmentRequest < Struct.new(
@@ -298,8 +298,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute service_id
@@ -331,8 +331,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute vpc_peering_connection_id
@@ -864,15 +864,15 @@ module Aws::EC2
     end
 
     # @!attribute cidr
-    #   <p>The address range, in CIDR notation. This must be the exact range that you provisioned.
+    #   <p>The address range, in CIDR notation. This must be the exact range that you provisioned. 
     #            You can't advertise only a portion of the provisioned range.</p>
     #   @return [String]
     # @!attribute asn
     #   <p>The public 2-byte or 4-byte ASN that you want to advertise.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute network_border_group
@@ -931,8 +931,8 @@ module Aws::EC2
     #         addresses cannot move between network border groups.</p>
     #   @return [String]
     # @!attribute customer_owned_ipv4_pool
-    #   <p>The ID of a customer-owned address pool. Use this parameter to let Amazon EC2
-    #           select an address from the address pool. Alternatively, specify a specific
+    #   <p>The ID of a customer-owned address pool. Use this parameter to let Amazon EC2 
+    #           select an address from the address pool. Alternatively, specify a specific 
     #           address from the address pool.</p>
     #   @return [String]
     # @!attribute tag_specifications
@@ -942,8 +942,8 @@ module Aws::EC2
     #   <p>The ID of an IPAM pool which has an Amazon-provided or BYOIP public IPv4 CIDR provisioned to it. For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/ipam/tutorials-eip-pool.html">Allocate sequential Elastic IP addresses from an IPAM pool</a> in the <i>Amazon VPC IPAM User Guide</i>.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class AllocateAddressRequest < Struct.new(
@@ -1022,7 +1022,7 @@ module Aws::EC2
     #   @return [String]
     # @!attribute outpost_arn
     #   <p>The Amazon Resource Name (ARN) of the Amazon Web Services Outpost on which to allocate
-    #               the Dedicated Host. If you specify <b>OutpostArn</b>, you can
+    #               the Dedicated Host. If you specify <b>OutpostArn</b>, you can 
     #               optionally specify <b>AssetIds</b>.</p>
     #            <p>If you are allocating the Dedicated Host in a Region, omit this parameter.</p>
     #   @return [String]
@@ -1032,20 +1032,20 @@ module Aws::EC2
     #                   maintenance</a> in the <i>Amazon EC2 User Guide</i>.</p>
     #   @return [String]
     # @!attribute asset_ids
-    #   <p>The IDs of the Outpost hardware assets on which to allocate the Dedicated Hosts. Targeting
-    #               specific hardware assets on an Outpost can help to minimize latency between your workloads.
-    #               This parameter is supported only if you specify <b>OutpostArn</b>.
+    #   <p>The IDs of the Outpost hardware assets on which to allocate the Dedicated Hosts. Targeting 
+    #               specific hardware assets on an Outpost can help to minimize latency between your workloads. 
+    #               This parameter is supported only if you specify <b>OutpostArn</b>. 
     #               If you are allocating the Dedicated Hosts in a Region, omit this parameter.</p>
     #            <ul>
     #               <li>
-    #                  <p>If you specify this parameter, you can omit <b>Quantity</b>.
-    #                       In this case, Amazon EC2 allocates a Dedicated Host on each specified hardware
+    #                  <p>If you specify this parameter, you can omit <b>Quantity</b>. 
+    #                       In this case, Amazon EC2 allocates a Dedicated Host on each specified hardware 
     #                       asset.</p>
     #               </li>
     #               <li>
-    #                  <p>If you specify both <b>AssetIds</b> and
-    #                       <b>Quantity</b>, then the value for
-    #                       <b>Quantity</b> must be equal to the number of asset IDs
+    #                  <p>If you specify both <b>AssetIds</b> and 
+    #                       <b>Quantity</b>, then the value for 
+    #                       <b>Quantity</b> must be equal to the number of asset IDs 
     #                       specified.</p>
     #               </li>
     #            </ul>
@@ -1076,11 +1076,11 @@ module Aws::EC2
     #               same request.</p>
     #   @return [String]
     # @!attribute quantity
-    #   <p>The number of Dedicated Hosts to allocate to your account with these parameters. If you are
-    #               allocating the Dedicated Hosts on an Outpost, and you specify <b>AssetIds</b>,
-    #               you can omit this parameter. In this case, Amazon EC2 allocates a Dedicated Host on each
-    #               specified hardware asset. If you specify both <b>AssetIds</b> and
-    #               <b>Quantity</b>, then the value that you specify for
+    #   <p>The number of Dedicated Hosts to allocate to your account with these parameters. If you are 
+    #               allocating the Dedicated Hosts on an Outpost, and you specify <b>AssetIds</b>, 
+    #               you can omit this parameter. In this case, Amazon EC2 allocates a Dedicated Host on each 
+    #               specified hardware asset. If you specify both <b>AssetIds</b> and 
+    #               <b>Quantity</b>, then the value that you specify for 
     #               <b>Quantity</b> must be equal to the number of asset IDs specified.</p>
     #   @return [Integer]
     # @!attribute availability_zone
@@ -1120,8 +1120,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute ipam_pool_id
@@ -1814,7 +1814,7 @@ module Aws::EC2
     #   <p>The ID of the VPC in which the associated target network is located.</p>
     #   @return [String]
     # @!attribute security_group_ids
-    #   <p>The IDs of the security groups to apply to the associated target network. Up to 5 security groups can
+    #   <p>The IDs of the security groups to apply to the associated target network. Up to 5 security groups can 
     #   			be applied to an associated target network.</p>
     #   @return [Array<String>]
     # @!attribute dry_run
@@ -1866,7 +1866,7 @@ module Aws::EC2
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Provides authorization for Amazon to bring an Autonomous System Number (ASN) to a specific Amazon Web Services account using bring your own ASN (BYOASN).
+    # <p>Provides authorization for Amazon to bring an Autonomous System Number (ASN) to a specific Amazon Web Services account using bring your own ASN (BYOASN). 
     #             For details on the format of the message and signature, see <a href="https://docs.aws.amazon.com/vpc/latest/ipam/tutorials-byoasn.html">Tutorial: Bring your ASN to IPAM</a> in the <i>Amazon VPC IPAM guide</i>.</p>
     # @!attribute message
     #   <p>The authorization context's message.</p>
@@ -2004,8 +2004,8 @@ module Aws::EC2
     #   <p>The number of private IP addresses to assign to the NAT gateway. You can't specify this parameter when also specifying private IP addresses.</p>
     #   @return [Integer]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class AssignPrivateNatGatewayAddressRequest < Struct.new(
@@ -2057,8 +2057,8 @@ module Aws::EC2
     #   <p>Deprecated.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute network_interface_id
@@ -2109,8 +2109,8 @@ module Aws::EC2
     #   <p>A unique, case-sensitive identifier that you provide to ensure that the operation completes no more than one time. If you retry a request with the same token, the service ignores the request but does not return an error. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html">Ensuring idempotency</a>.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the operation, without actually making the
-    #     request, and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the operation, without actually making the 
+    #     request, and provides an error response. If you have the required permissions, the error response is 
     #     <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class AssociateApplicationStatusCheckRequest < Struct.new(
@@ -2177,7 +2177,7 @@ module Aws::EC2
     #   <p>The ID of the subnet to associate with the Client VPN endpoint. Required for VPC-based endpoints. For Transit Gateway-based endpoints, use <code>AvailabilityZone</code> or <code>AvailabilityZoneId</code> instead.</p>
     #   @return [String]
     # @!attribute client_token
-    #   <p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+    #   <p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. 
     #   For more information, see <a href="https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html">Ensuring idempotency</a>.</p>
     #   @return [String]
     # @!attribute dry_run
@@ -2218,15 +2218,15 @@ module Aws::EC2
     end
 
     # @!attribute dhcp_options_id
-    #   <p>The ID of the DHCP options set, or <code>default</code> to associate
+    #   <p>The ID of the DHCP options set, or <code>default</code> to associate 
     #           no DHCP options with the VPC.</p>
     #   @return [String]
     # @!attribute vpc_id
     #   <p>The ID of the VPC.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class AssociateDhcpOptionsRequest < Struct.new(
@@ -2243,7 +2243,7 @@ module Aws::EC2
     #   <p>The ARN of the ACM certificate with which to associate the IAM role.</p>
     #   @return [String]
     # @!attribute role_arn
-    #   <p>The ARN of the IAM role to associate with the ACM certificate. You can associate up to 16 IAM roles with an ACM
+    #   <p>The ARN of the IAM role to associate with the ACM certificate. You can associate up to 16 IAM roles with an ACM 
     #   			certificate.</p>
     #   @return [String]
     # @!attribute dry_run
@@ -2263,7 +2263,7 @@ module Aws::EC2
     #   <p>The name of the Amazon S3 bucket to which the certificate was uploaded.</p>
     #   @return [String]
     # @!attribute certificate_s3_object_key
-    #   <p>The Amazon S3 object key where the certificate, certificate chain, and encrypted private key bundle are stored. The
+    #   <p>The Amazon S3 object key where the certificate, certificate chain, and encrypted private key bundle are stored. The 
     #   			object key is formatted as follows: <code>role_arn</code>/<code>certificate_arn</code>.</p>
     #   @return [String]
     # @!attribute encryption_kms_key_id
@@ -2306,8 +2306,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute instance_event_window_id
@@ -2338,8 +2338,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute asn
@@ -2370,8 +2370,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute ipam_id
@@ -2419,8 +2419,8 @@ module Aws::EC2
     #   <p>The private IPv4 addresses that you want to assign to the NAT gateway.</p>
     #   @return [Array<String>]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute availability_zone
@@ -2466,8 +2466,8 @@ module Aws::EC2
     #   <p>The ID of the VPC to associate with the route server.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class AssociateRouteServerRequest < Struct.new(
@@ -2498,8 +2498,8 @@ module Aws::EC2
     #   <p>The ID of a public IPv4 pool. A public IPv4 pool is a pool of IPv4 addresses that you've brought to Amazon Web Services with BYOIP.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute subnet_id
@@ -2543,8 +2543,8 @@ module Aws::EC2
     #   <p>A VPC ID.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class AssociateSecurityGroupVpcRequest < Struct.new(
@@ -2616,8 +2616,8 @@ module Aws::EC2
     #   <p>The IDs of the subnets to associate with the transit gateway multicast domain.</p>
     #   @return [Array<String>]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class AssociateTransitGatewayMulticastDomainRequest < Struct.new(
@@ -2649,8 +2649,8 @@ module Aws::EC2
     #   <p>The ID of the transit gateway attachment to associate with the policy table.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class AssociateTransitGatewayPolicyTableRequest < Struct.new(
@@ -2681,8 +2681,8 @@ module Aws::EC2
     #   <p>The ID of the attachment.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class AssociateTransitGatewayRouteTableRequest < Struct.new(
@@ -2724,8 +2724,8 @@ module Aws::EC2
     #                   idempotency</a>.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class AssociateTrunkInterfaceRequest < Struct.new(
@@ -2838,7 +2838,7 @@ module Aws::EC2
     #   <p>The name of the Amazon S3 bucket in which the Amazon S3 object is stored.</p>
     #   @return [String]
     # @!attribute certificate_s3_object_key
-    #   <p>The key of the Amazon S3 object where the certificate, certificate chain, and encrypted private key bundle
+    #   <p>The key of the Amazon S3 object where the certificate, certificate chain, and encrypted private key bundle 
     #   			are stored. The object key is formatted as follows: <code>role_arn</code>/<code>certificate_arn</code>.
     #   		</p>
     #   @return [String]
@@ -2913,8 +2913,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute instance_id
@@ -2959,8 +2959,8 @@ module Aws::EC2
     #         underscores(_)</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #   			and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #   			and provides an error response. If you have the required permissions, the error response is 
     #   			<code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class AttachImageWatermarkRequest < Struct.new(
@@ -2986,8 +2986,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute internet_gateway_id
@@ -3075,8 +3075,8 @@ module Aws::EC2
     #               modification request. For more information, see <a href="https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html">Ensuring idempotency</a>.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class AttachVerifiedAccessTrustProviderRequest < Struct.new(
@@ -3110,13 +3110,13 @@ module Aws::EC2
     #   <p>Indicates whether the EBS volume is deleted on instance termination.</p>
     #   @return [Boolean]
     # @!attribute associated_resource
-    #   <p>The ARN of the Amazon Web Services-managed resource
+    #   <p>The ARN of the Amazon Web Services-managed resource 
     #         to which the volume is attached.</p>
     #   @return [String]
     # @!attribute instance_owning_service
-    #   <p>The service principal of the Amazon Web Services service that owns the underlying
+    #   <p>The service principal of the Amazon Web Services service that owns the underlying 
     #         resource to which the volume is attached.</p>
-    #            <p>This parameter is returned only for volumes that are attached to
+    #            <p>This parameter is returned only for volumes that are attached to 
     #         Amazon Web Services-managed resources.</p>
     #   @return [String]
     # @!attribute ebs_card_index
@@ -3127,12 +3127,12 @@ module Aws::EC2
     #   @return [String]
     # @!attribute instance_id
     #   <p>The ID of the instance.</p>
-    #            <p>If the volume is attached to an Amazon Web Services-managed resource, this parameter
+    #            <p>If the volume is attached to an Amazon Web Services-managed resource, this parameter 
     #         returns <code>null</code>.</p>
     #   @return [String]
     # @!attribute device
     #   <p>The device name.</p>
-    #            <p>If the volume is attached to an Amazon Web Services-managed resource, this parameter
+    #            <p>If the volume is attached to an Amazon Web Services-managed resource, this parameter 
     #         returns <code>null</code>.</p>
     #   @return [String]
     # @!attribute state
@@ -3171,8 +3171,8 @@ module Aws::EC2
     #   <p>The index of the EBS card. Some instance types support multiple EBS cards. The default EBS card index is 0.</p>
     #   @return [Integer]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class AttachVolumeRequest < Struct.new(
@@ -3222,13 +3222,13 @@ module Aws::EC2
       include ::Smithy::Schema::Structure
     end
 
-    # <p>ENA Express uses Amazon Web Services Scalable Reliable Datagram (SRD) technology to increase the
-    # 			maximum bandwidth used per stream and minimize tail latency of network traffic between EC2 instances.
-    # 			With ENA Express, you can communicate between two EC2 instances in the same subnet within the same
+    # <p>ENA Express uses Amazon Web Services Scalable Reliable Datagram (SRD) technology to increase the 
+    # 			maximum bandwidth used per stream and minimize tail latency of network traffic between EC2 instances. 
+    # 			With ENA Express, you can communicate between two EC2 instances in the same subnet within the same 
     # 			account, or in different accounts. Both sending and receiving instances must have ENA Express enabled.</p>
-    #          <p>To improve the reliability of network packet delivery, ENA Express reorders network packets on the
-    # 			receiving end by default. However, some UDP-based applications are designed to handle network packets
-    # 			that are out of order to reduce the overhead for packet delivery at the network layer. When ENA Express
+    #          <p>To improve the reliability of network packet delivery, ENA Express reorders network packets on the 
+    # 			receiving end by default. However, some UDP-based applications are designed to handle network packets 
+    # 			that are out of order to reduce the overhead for packet delivery at the network layer. When ENA Express 
     # 			is enabled, you can specify whether UDP network traffic uses it.</p>
     # @!attribute ena_srd_enabled
     #   <p>Indicates whether ENA Express is enabled for the network interface.</p>
@@ -3245,13 +3245,13 @@ module Aws::EC2
       include ::Smithy::Schema::Structure
     end
 
-    # <p>ENA Express is compatible with both TCP and UDP transport protocols. When it's enabled, TCP traffic
-    # 			automatically uses it. However, some UDP-based applications are designed to handle network packets that are
-    # 			out of order, without a need for retransmission, such as live video broadcasting or other near-real-time
-    # 			applications. For UDP traffic, you can specify whether to use ENA Express, based on your application
+    # <p>ENA Express is compatible with both TCP and UDP transport protocols. When it's enabled, TCP traffic 
+    # 			automatically uses it. However, some UDP-based applications are designed to handle network packets that are 
+    # 			out of order, without a need for retransmission, such as live video broadcasting or other near-real-time 
+    # 			applications. For UDP traffic, you can specify whether to use ENA Express, based on your application 
     # 			environment needs.</p>
     # @!attribute ena_srd_udp_enabled
-    #   <p>Indicates whether UDP traffic to and from the instance uses ENA Express. To specify this setting,
+    #   <p>Indicates whether UDP traffic to and from the instance uses ENA Express. To specify this setting, 
     #   			you must first enable ENA Express.</p>
     #   @return [Boolean]
     class AttachmentEnaSrdUdpSpecification < Struct.new(
@@ -3366,7 +3366,7 @@ module Aws::EC2
     #   <p>A brief description of the authorization rule.</p>
     #   @return [String]
     # @!attribute client_token
-    #   <p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+    #   <p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. 
     #   For more information, see <a href="https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html">Ensuring idempotency</a>.</p>
     #   @return [String]
     # @!attribute dry_run
@@ -3401,8 +3401,8 @@ module Aws::EC2
     #   <p>The tags applied to the security group rule.</p>
     #   @return [Array<Types::TagSpecification>]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute group_id
@@ -3465,10 +3465,10 @@ module Aws::EC2
     #   <p>The IPv4 address range, in CIDR format.</p>
     #            <note>
     #               <p>
-    #                  Amazon Web Services <a href="https://en.wikipedia.org/wiki/Canonicalization">canonicalizes</a> IPv4 and IPv6 CIDRs. For example, if you specify 100.68.0.18/18 for the CIDR block,
-    #                 Amazon Web Services canonicalizes the CIDR block to 100.68.0.0/18. Any subsequent DescribeSecurityGroups and DescribeSecurityGroupRules calls will
-    #                 return the canonicalized form of the CIDR block. Additionally, if you attempt to add another rule with the
-    #                 non-canonical form of the CIDR (such as 100.68.0.18/18) and there is already a rule for the canonicalized
+    #                  Amazon Web Services <a href="https://en.wikipedia.org/wiki/Canonicalization">canonicalizes</a> IPv4 and IPv6 CIDRs. For example, if you specify 100.68.0.18/18 for the CIDR block, 
+    #                 Amazon Web Services canonicalizes the CIDR block to 100.68.0.0/18. Any subsequent DescribeSecurityGroups and DescribeSecurityGroupRules calls will 
+    #                 return the canonicalized form of the CIDR block. Additionally, if you attempt to add another rule with the 
+    #                 non-canonical form of the CIDR (such as 100.68.0.18/18) and there is already a rule for the canonicalized 
     #                 form of the CIDR block (such as 100.68.0.0/18), the API throws an duplicate rule error.</p>
     #            </note>
     #            <p>To specify an IPv6 address range, use IP permissions instead.</p>
@@ -3494,7 +3494,7 @@ module Aws::EC2
     #   <p>The IP protocol name (<code>tcp</code>, <code>udp</code>, <code>icmp</code>) or number
     #         (see <a href="http://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml">Protocol Numbers</a>). To specify all protocols, use <code>-1</code>.</p>
     #            <p>To specify <code>icmpv6</code>, use IP permissions instead.</p>
-    #            <p>If you specify a protocol other than one of the supported values, traffic is allowed
+    #            <p>If you specify a protocol other than one of the supported values, traffic is allowed 
     #            on all ports, regardless of any ports that you specify.</p>
     #            <p>To specify multiple rules and descriptions for the rules, use IP permissions instead.</p>
     #   @return [String]
@@ -3504,14 +3504,14 @@ module Aws::EC2
     #                and port range, specify a set of IP permissions instead.</p>
     #   @return [String]
     # @!attribute source_security_group_owner_id
-    #   <p>The Amazon Web Services account ID for the source security group, if the source security group is
+    #   <p>The Amazon Web Services account ID for the source security group, if the source security group is 
     #            in a different account.</p>
-    #            <p>The rule grants full ICMP, UDP, and TCP access. To create a rule with a specific protocol
+    #            <p>The rule grants full ICMP, UDP, and TCP access. To create a rule with a specific protocol 
     #            and port range, use IP permissions instead.</p>
     #   @return [String]
     # @!attribute to_port
     #   <p>If the protocol is TCP or UDP, this is the end of the port range.
-    #              If the protocol is ICMP, this is the ICMP code or -1 (all ICMP codes).
+    #              If the protocol is ICMP, this is the ICMP code or -1 (all ICMP codes). 
     #              If the start port is -1 (all ICMP types), then the end port must be -1 (all ICMP codes).</p>
     #            <p>To specify multiple rules and descriptions for the rules, use IP permissions instead.</p>
     #   @return [Integer]
@@ -3519,8 +3519,8 @@ module Aws::EC2
     #   <p>The tags applied to the security group rule.</p>
     #   @return [Array<Types::TagSpecification>]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class AuthorizeSecurityGroupIngressRequest < Struct.new(
@@ -3940,8 +3940,8 @@ module Aws::EC2
     #         else, Amazon EC2 returns an error.</p>
     #   @return [Types::Storage]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #   			and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #   			and provides an error response. If you have the required permissions, the error response is 
     #   			<code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class BundleInstanceRequest < Struct.new(
@@ -4046,7 +4046,7 @@ module Aws::EC2
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Information about an address range that is provisioned for use with your Amazon Web Services resources
+    # <p>Information about an address range that is provisioned for use with your Amazon Web Services resources 
     #          through bring your own IP addresses (BYOIP).</p>
     # @!attribute cidr
     #   <p>The address range, in CIDR notation.</p>
@@ -4156,8 +4156,8 @@ module Aws::EC2
     #   <p>The ID of the bundle task.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #   			and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #   			and provides an error response. If you have the required permissions, the error response is 
     #   			<code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class CancelBundleTaskRequest < Struct.new(
@@ -4268,8 +4268,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute conversion_task_id
@@ -4289,8 +4289,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute report_id
@@ -4332,8 +4332,8 @@ module Aws::EC2
     #   <p>The ID of the AMI that was shared with your Amazon Web Services account.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #   			and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #   			and provides an error response. If you have the required permissions, the error response is 
     #   			<code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class CancelImageLaunchPermissionRequest < Struct.new(
@@ -4360,8 +4360,8 @@ module Aws::EC2
     #   <p>The reason for canceling the task.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute import_task_id
@@ -4454,8 +4454,8 @@ module Aws::EC2
 
     # <p>Contains the parameters for CancelSpotFleetRequests.</p>
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute spot_fleet_request_ids
@@ -4463,7 +4463,7 @@ module Aws::EC2
     #            <p>Constraint: You can specify up to 100 IDs in a single request.</p>
     #   @return [Array<String>]
     # @!attribute terminate_instances
-    #   <p>Indicates whether to terminate the associated instances when the Spot Fleet request is canceled.
+    #   <p>Indicates whether to terminate the associated instances when the Spot Fleet request is canceled. 
     #           The default is to terminate the instances.</p>
     #            <p>To let the instances continue to run after the Spot Fleet request is canceled, specify
     #             <code>no-terminate-instances</code>.</p>
@@ -4603,7 +4603,7 @@ module Aws::EC2
     #   			use.</p>
     #   @return [Integer]
     # @!attribute allocation_metadata
-    #   <p>Additional metadata associated with the capacity allocation. Each entry contains a key-value pair providing context
+    #   <p>Additional metadata associated with the capacity allocation. Each entry contains a key-value pair providing context 
     #   			about the allocation.</p>
     #   @return [Array<Types::CapacityAllocationMetadataEntry>]
     class CapacityAllocation < Struct.new(
@@ -4941,7 +4941,7 @@ module Aws::EC2
     #   <p>The remaining capacity. Indicates the number of resources that can be launched into the Capacity Block.</p>
     #   @return [Integer]
     # @!attribute total_unavailable_capacity
-    #   <p>The unavailable capacity. Indicates the instance capacity that is unavailable for use
+    #   <p>The unavailable capacity. Indicates the instance capacity that is unavailable for use 
     #   			due to a system status check failure.</p>
     #   @return [Integer]
     # @!attribute capacity_reservation_statuses
@@ -5107,7 +5107,7 @@ module Aws::EC2
     #   @return [String]
     # @!attribute reservation_create_timestamp
     #   <p>
-    #   The timestamp when the capacity reservation was originally created, in milliseconds since epoch. This differs from the start timestamp as
+    #   The timestamp when the capacity reservation was originally created, in milliseconds since epoch. This differs from the start timestamp as 
     #   reservations can be created before they become active.
     #   </p>
     #   @return [Time]
@@ -5143,7 +5143,7 @@ module Aws::EC2
     #   @return [String]
     # @!attribute reservation_unused_financial_owner
     #   <p>
-    #           The Amazon Web Services account ID that is financially responsible for unused capacity reservation costs.
+    #           The Amazon Web Services account ID that is financially responsible for unused capacity reservation costs. 
     #       </p>
     #   @return [String]
     # @!attribute tags
@@ -5308,50 +5308,50 @@ module Aws::EC2
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>expired</code> - The Capacity Reservation expired automatically at the date and time
+    #                     <code>expired</code> - The Capacity Reservation expired automatically at the date and time 
     #   		specified in your reservation request. The reserved capacity is no longer available for your use.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>cancelled</code> - The Capacity Reservation was canceled. The reserved capacity is no
+    #                     <code>cancelled</code> - The Capacity Reservation was canceled. The reserved capacity is no 
     #   		longer available for your use.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>pending</code> - The Capacity Reservation request was successful but the capacity
+    #                     <code>pending</code> - The Capacity Reservation request was successful but the capacity 
     #   		provisioning is still pending.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>failed</code> - The Capacity Reservation request has failed. A request can fail due to
-    #   		request parameters that are not valid, capacity constraints, or instance limit constraints. You
+    #                     <code>failed</code> - The Capacity Reservation request has failed. A request can fail due to 
+    #   		request parameters that are not valid, capacity constraints, or instance limit constraints. You 
     #   		can view a failed request for 60 minutes.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>scheduled</code> - (<i>Future-dated Capacity Reservations</i>) The
-    #   		future-dated Capacity Reservation request was approved and the Capacity Reservation is scheduled
+    #                     <code>scheduled</code> - (<i>Future-dated Capacity Reservations</i>) The 
+    #   		future-dated Capacity Reservation request was approved and the Capacity Reservation is scheduled 
     #   		for delivery on the requested start date.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>payment-pending</code> - (<i>Capacity Blocks</i>) The upfront
+    #                     <code>payment-pending</code> - (<i>Capacity Blocks</i>) The upfront 
     #   	    payment has not been processed yet.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>payment-failed</code> - (<i>Capacity Blocks</i>) The upfront
+    #                     <code>payment-failed</code> - (<i>Capacity Blocks</i>) The upfront 
     #   	    payment was not processed in the 12-hour time frame. Your Capacity Block was released.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>assessing</code> - (<i>Future-dated Capacity Reservations</i>)
+    #                     <code>assessing</code> - (<i>Future-dated Capacity Reservations</i>) 
     #   		Amazon EC2 is assessing your request for a future-dated Capacity Reservation.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>delayed</code> - (<i>Future-dated Capacity Reservations</i>) Amazon EC2
-    #   		encountered a delay in provisioning the requested future-dated Capacity Reservation. Amazon EC2 is
+    #                     <code>delayed</code> - (<i>Future-dated Capacity Reservations</i>) Amazon EC2 
+    #   		encountered a delay in provisioning the requested future-dated Capacity Reservation. Amazon EC2 is 
     #   		unable to deliver the requested capacity by the requested start date and time.</p>
     #               </li>
     #               <li>
@@ -6278,7 +6278,7 @@ module Aws::EC2
 
     # <p>Information about the client certificate to be used for authentication.</p>
     # @!attribute client_root_certificate_chain_arn
-    #   <p>The ARN of the client certificate. The certificate must be signed by a certificate
+    #   <p>The ARN of the client certificate. The certificate must be signed by a certificate 
     #   			authority (CA) and it must be provisioned in Certificate Manager (ACM).</p>
     #   @return [String]
     class CertificateAuthenticationRequest < Struct.new(
@@ -6551,7 +6551,7 @@ module Aws::EC2
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Describes the authentication methods used by a Client VPN endpoint. For more information, see <a href="https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/client-authentication.html">Authentication</a>
+    # <p>Describes the authentication methods used by a Client VPN endpoint. For more information, see <a href="https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/client-authentication.html">Authentication</a> 
     # 			in the <i>Client VPN Administrator Guide</i>.</p>
     # @!attribute type
     #   <p>The authentication type used.</p>
@@ -6576,7 +6576,7 @@ module Aws::EC2
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Describes the authentication method to be used by a Client VPN endpoint. For more information, see <a href="https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/authentication-authrization.html#client-authentication">Authentication</a>
+    # <p>Describes the authentication method to be used by a Client VPN endpoint. For more information, see <a href="https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/authentication-authrization.html#client-authentication">Authentication</a> 
     # 			in the <i>Client VPN Administrator Guide</i>.</p>
     # @!attribute type
     #   <p>The type of client authentication to be used.</p>
@@ -6628,7 +6628,7 @@ module Aws::EC2
     #   <p>The ID of the client connection.</p>
     #   @return [String]
     # @!attribute username
-    #   <p>The username of the client who established the client connection. This information is only provided
+    #   <p>The username of the client who established the client connection. This information is only provided 
     #   			if Active Directory client authentication is used.</p>
     #   @return [String]
     # @!attribute connection_established_time
@@ -6734,7 +6734,7 @@ module Aws::EC2
     #   @return [Array<String>]
     # @!attribute split_tunnel
     #   <p>Indicates whether split-tunnel is enabled in the Client VPN endpoint.</p>
-    #            <p>For information about split-tunnel VPN endpoints, see <a href="https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/split-tunnel-vpn.html">Split-Tunnel Client VPN endpoint</a>
+    #            <p>For information about split-tunnel VPN endpoints, see <a href="https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/split-tunnel-vpn.html">Split-Tunnel Client VPN endpoint</a> 
     #   			in the <i>Client VPN Administrator Guide</i>.</p>
     #   @return [Boolean]
     # @!attribute vpn_protocol
@@ -6789,7 +6789,7 @@ module Aws::EC2
     # @!attribute client_route_enforcement_options
     #   <p>Client route enforcement is a feature of the Client VPN service that helps enforce administrator defined routes on devices connected through the VPN. T
     #   		his feature helps improve your security posture by ensuring that network traffic originating from a connected client is not inadvertently sent outside the VPN tunnel.</p>
-    #            <p>Client route enforcement works by monitoring the route table of a connected device for routing policy changes to the VPN connection. If the feature detects any VPN routing policy modifications, it will automatically force an update to the route table,
+    #            <p>Client route enforcement works by monitoring the route table of a connected device for routing policy changes to the VPN connection. If the feature detects any VPN routing policy modifications, it will automatically force an update to the route table, 
     #   			reverting it back to the expected route configurations.</p>
     #   @return [Types::ClientRouteEnforcementResponseOptions]
     # @!attribute disconnect_on_session_timeout
@@ -6865,7 +6865,7 @@ module Aws::EC2
     #            <ul>
     #               <li>
     #                  <p>
-    #                     <code>pending-associate</code> - The Client VPN endpoint has been created but no target networks
+    #                     <code>pending-associate</code> - The Client VPN endpoint has been created but no target networks 
     #   					have been associated. The Client VPN endpoint cannot accept connections.</p>
     #               </li>
     #               <li>
@@ -6915,9 +6915,9 @@ module Aws::EC2
     #   <p>The route type.</p>
     #   @return [String]
     # @!attribute origin
-    #   <p>Indicates how the route was associated with the Client VPN endpoint.
-    #   			<code>associate</code> indicates that the route was automatically added when the target network
-    #   			was associated with the Client VPN endpoint. <code>add-route</code> indicates that the route
+    #   <p>Indicates how the route was associated with the Client VPN endpoint. 
+    #   			<code>associate</code> indicates that the route was automatically added when the target network 
+    #   			was associated with the Client VPN endpoint. <code>add-route</code> indicates that the route 
     #   			was manually added using the <b>CreateClientVpnRoute</b> action.</p>
     #   @return [String]
     # @!attribute status
@@ -7195,8 +7195,8 @@ module Aws::EC2
     #   <p>The product code. This must be a product code that you own.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the operation, without actually making the
-    #     request, and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the operation, without actually making the 
+    #     request, and provides an error response. If you have the required permissions, the error response is 
     #     <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class ConfirmProductInstanceRequest < Struct.new(
@@ -7482,8 +7482,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute source_fpga_image_id
@@ -7499,7 +7499,7 @@ module Aws::EC2
     #   <p>The Region that contains the source AFI.</p>
     #   @return [String]
     # @!attribute client_token
-    #   <p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+    #   <p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. 
     #         	For more information, see <a href="https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html">Ensuring idempotency</a>.</p>
     #   @return [String]
     class CopyFpgaImageRequest < Struct.new(
@@ -7625,7 +7625,7 @@ module Aws::EC2
     #         Each snapshot associated with the AMI will be completed within the specified completion
     #         duration, with copy throughput automatically adjusted for each snapshot based on its size to
     #         meet the timing target.</p>
-    #            <p>If you do not specify a value, the AMI copy operation is completed on a best-effort
+    #            <p>If you do not specify a value, the AMI copy operation is completed on a best-effort 
     #         basis.</p>
     #            <note>
     #               <p>This parameter is not supported when copying an AMI to or from a Local Zone, or to an
@@ -7647,8 +7647,8 @@ module Aws::EC2
     #         specified.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #   			and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #   			and provides an error response. If you have the required permissions, the error response is 
     #   			<code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class CopyImageRequest < Struct.new(
@@ -7693,16 +7693,16 @@ module Aws::EC2
     #               <p>Only supported when copying a snapshot to an Outpost.</p>
     #            </note>
     #            <p>For more information, see <a href="https://docs.aws.amazon.com/ebs/latest/userguide/snapshots-outposts.html#copy-snapshots">
-    #     		Copy snapshots from an Amazon Web Services Region to an Outpost</a> in the
+    #     		Copy snapshots from an Amazon Web Services Region to an Outpost</a> in the 
     #         <i>Amazon EBS User Guide</i>.</p>
     #   @return [String]
     # @!attribute destination_region
     #   @return [String]
     # @!attribute encrypted
-    #   <p>To encrypt a copy of an unencrypted snapshot if encryption by default is not enabled,
-    #         enable encryption using this parameter. Otherwise, omit this parameter. Copies of encrypted
-    #         snapshots are encrypted, even if you omit this parameter and encryption by default is not
-    #         enabled. You cannot set this parameter to false. For more information, see <a href="https://docs.aws.amazon.com/ebs/latest/userguide/ebs-encryption.html">Amazon EBS encryption</a> in the
+    #   <p>To encrypt a copy of an unencrypted snapshot if encryption by default is not enabled, 
+    #         enable encryption using this parameter. Otherwise, omit this parameter. Copies of encrypted 
+    #         snapshots are encrypted, even if you omit this parameter and encryption by default is not 
+    #         enabled. You cannot set this parameter to false. For more information, see <a href="https://docs.aws.amazon.com/ebs/latest/userguide/ebs-encryption.html">Amazon EBS encryption</a> in the 
     #         <i>Amazon EBS User Guide</i>.</p>
     #   @return [Boolean]
     # @!attribute kms_key_id
@@ -7724,7 +7724,7 @@ module Aws::EC2
     #                  <p>Alias ARN. For example, arn:aws:kms:us-east-1:012345678910:alias/ExampleAlias.</p>
     #               </li>
     #            </ul>
-    #            <p>Amazon Web Services authenticates the KMS key asynchronously. Therefore, if you specify an ID, alias, or ARN that is not valid,
+    #            <p>Amazon Web Services authenticates the KMS key asynchronously. Therefore, if you specify an ID, alias, or ARN that is not valid, 
     #         the action can appear to complete, but eventually fails.</p>
     #   @return [String]
     # @!attribute presigned_url
@@ -7742,23 +7742,23 @@ module Aws::EC2
     #   <note>
     #               <p>Not supported when copying snapshots to or from Local Zones or Outposts.</p>
     #            </note>
-    #            <p>Specify a completion duration, in 15 minute increments, to initiate a time-based snapshot
-    #         copy. Time-based snapshot copy operations complete within the specified duration. For more
+    #            <p>Specify a completion duration, in 15 minute increments, to initiate a time-based snapshot 
+    #         copy. Time-based snapshot copy operations complete within the specified duration. For more 
     #         information, see <a href="https://docs.aws.amazon.com/ebs/latest/userguide/time-based-copies.html">
     #           Time-based copies</a>.</p>
-    #            <p>If you do not specify a value, the snapshot copy operation is completed on a
+    #            <p>If you do not specify a value, the snapshot copy operation is completed on a 
     #         best-effort basis.</p>
     #   @return [Integer]
     # @!attribute destination_availability_zone
-    #   <p>The Local Zone, for example, <code>cn-north-1-pkx-1a</code> to which to copy the
+    #   <p>The Local Zone, for example, <code>cn-north-1-pkx-1a</code> to which to copy the 
     #         snapshot.</p>
     #            <note>
     #               <p>Only supported when copying a snapshot to a Local Zone.</p>
     #            </note>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class CopySnapshotRequest < Struct.new(
@@ -7799,9 +7799,9 @@ module Aws::EC2
     #   <p>The ID of the source EBS volume to copy.</p>
     #   @return [String]
     # @!attribute iops
-    #   <p>The number of I/O operations per second (IOPS) to provision for the volume copy.
-    #         Required for <code>io1</code> and <code>io2</code> volumes. Optional for <code>gp3</code>
-    #         volumes. Omit for all other volume types. Full provisioned IOPS performance can be
+    #   <p>The number of I/O operations per second (IOPS) to provision for the volume copy. 
+    #         Required for <code>io1</code> and <code>io2</code> volumes. Optional for <code>gp3</code> 
+    #         volumes. Omit for all other volume types. Full provisioned IOPS performance can be 
     #         achieved only once the volume copy is fully initialized. </p>
     #            <p>Valid ranges:</p>
     #            <ul>
@@ -7818,13 +7818,13 @@ module Aws::EC2
     #            <note>
     #               <p>
     #                  <a href="https://docs.aws.amazon.com/ec2/latest/instancetypes/ec2-nitro-instances.html">
-    #   Instances built on the Nitro System</a> can support up to 256,000 IOPS. Other instances can support up to 32,000
+    #   Instances built on the Nitro System</a> can support up to 256,000 IOPS. Other instances can support up to 32,000 
     #   IOPS.</p>
     #            </note>
     #   @return [Integer]
     # @!attribute size
-    #   <p>The size of the volume copy, in GiBs. The size must be equal to or greater than the
-    #         size of the source volume. If not specified, the size defaults to the size of the source
+    #   <p>The size of the volume copy, in GiBs. The size must be equal to or greater than the 
+    #         size of the source volume. If not specified, the size defaults to the size of the source 
     #         volume.</p>
     #            <p>Maximum supported sizes:</p>
     #            <ul>
@@ -7849,49 +7849,49 @@ module Aws::EC2
     #            </ul>
     #   @return [Integer]
     # @!attribute volume_type
-    #   <p>The volume type for the volume copy. If not specified, the volume type defaults to
+    #   <p>The volume type for the volume copy. If not specified, the volume type defaults to 
     #         <code>gp2</code>.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute tag_specifications
     #   <p>The tags to apply to the volume copy during creation.</p>
     #   @return [Array<Types::TagSpecification>]
     # @!attribute multi_attach_enabled
-    #   <p>Indicates whether to enable Amazon EBS Multi-Attach for the volume copy. If you enable
-    #         Multi-Attach, you can attach the volume to up to 16 Nitro instances in the same
-    #         Availability Zone simultaneously. Supported with <code>io1</code> and <code>io2</code> volumes only. For more
+    #   <p>Indicates whether to enable Amazon EBS Multi-Attach for the volume copy. If you enable 
+    #         Multi-Attach, you can attach the volume to up to 16 Nitro instances in the same 
+    #         Availability Zone simultaneously. Supported with <code>io1</code> and <code>io2</code> volumes only. For more 
     #         information, see <a href="https://docs.aws.amazon.com/ebs/latest/userguide/ebs-volumes-multi.html">
     #           Amazon EBS Multi-Attach</a>.</p>
     #   @return [Boolean]
     # @!attribute throughput
-    #   <p>The throughput to provision for the volume copy, in MiB/s. Supported for <code>gp3</code>
-    #         volumes only. Omit for all other volume types. Full provisioned throughput performance can be
+    #   <p>The throughput to provision for the volume copy, in MiB/s. Supported for <code>gp3</code> 
+    #         volumes only. Omit for all other volume types. Full provisioned throughput performance can be 
     #         achieved only once the volume copy is fully initialized.</p>
     #            <p>Valid Range: <code>125 - 2000</code> MiB/s</p>
     #            <p></p>
     #   @return [Integer]
     # @!attribute client_token
-    #   <p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the
+    #   <p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the 
     #         request. For more information, see <a href="https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html">
     #           Ensure Idempotency</a>.</p>
     #   @return [String]
     # @!attribute encrypted
-    #   <p>Indicates whether to encrypt the volume copy. If the source volume is encrypted, the
-    #         service always encrypts the copy regardless of this value. Set to <code>true</code> to
-    #         encrypt a copy of an unencrypted source volume during the copy operation. If you set
-    #         <code>Encrypted</code> to <code>true</code> but do not specify <code>KmsKeyId</code>, the
+    #   <p>Indicates whether to encrypt the volume copy. If the source volume is encrypted, the 
+    #         service always encrypts the copy regardless of this value. Set to <code>true</code> to 
+    #         encrypt a copy of an unencrypted source volume during the copy operation. If you set 
+    #         <code>Encrypted</code> to <code>true</code> but do not specify <code>KmsKeyId</code>, the 
     #         service uses the default KMS key for EBS encryption in your account.</p>
     #   @return [Boolean]
     # @!attribute kms_key_id
-    #   <p>The identifier of the KMS key to use for encryption of the volume copy. Specify a
-    #         symmetric encryption KMS key. You can specify a KMS key using the key ID, key ARN, alias
-    #         name, or alias ARN. If you set <code>Encrypted</code> to <code>true</code> but do not
-    #         specify this parameter, the service uses the default KMS key for EBS encryption in your
-    #         account. For cross-account volume copies, this must be a KMS key in the calling
+    #   <p>The identifier of the KMS key to use for encryption of the volume copy. Specify a 
+    #         symmetric encryption KMS key. You can specify a KMS key using the key ID, key ARN, alias 
+    #         name, or alias ARN. If you set <code>Encrypted</code> to <code>true</code> but do not 
+    #         specify this parameter, the service uses the default KMS key for EBS encryption in your 
+    #         account. For cross-account volume copies, this must be a KMS key in the calling 
     #         account.</p>
     #   @return [String]
     class CopyVolumesRequest < Struct.new(
@@ -7931,7 +7931,7 @@ module Aws::EC2
     #   <p>The number of threads per CPU core.</p>
     #   @return [Integer]
     # @!attribute amd_sev_snp
-    #   <p>Indicates whether the instance is enabled for AMD SEV-SNP. For more information, see
+    #   <p>Indicates whether the instance is enabled for AMD SEV-SNP. For more information, see 
     #               <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/sev-snp.html">AMD SEV-SNP</a>.</p>
     #   @return [String]
     # @!attribute nested_virtualization
@@ -7959,8 +7959,8 @@ module Aws::EC2
     #                   <code>2</code>.</p>
     #   @return [Integer]
     # @!attribute amd_sev_snp
-    #   <p>Indicates whether to enable the instance for AMD SEV-SNP. AMD SEV-SNP is supported
-    #               with M6a, R6a, and C6a instance types only. For more information, see
+    #   <p>Indicates whether to enable the instance for AMD SEV-SNP. AMD SEV-SNP is supported 
+    #               with M6a, R6a, and C6a instance types only. For more information, see 
     #               <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/sev-snp.html">AMD SEV-SNP</a>.</p>
     #   @return [String]
     # @!attribute nested_virtualization
@@ -8064,8 +8064,8 @@ module Aws::EC2
     #   <p>A unique, case-sensitive identifier that you provide to ensure that the operation completes no more than one time. If you retry a request with the same token, the service ignores the request but does not return an error. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html">Ensuring idempotency</a>.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the operation, without actually making the
-    #     request, and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the operation, without actually making the 
+    #     request, and provides an error response. If you have the required permissions, the error response is 
     #     <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class CreateApplicationStatusCheckRequest < Struct.new(
@@ -8115,7 +8115,7 @@ module Aws::EC2
     #   @return [String]
     # @!attribute schedule
     #   <p>
-    #   The frequency at which data exports are generated.
+    #   The frequency at which data exports are generated. 
     #   </p>
     #   @return [String]
     # @!attribute output_format
@@ -8130,7 +8130,7 @@ module Aws::EC2
     #   @return [String]
     # @!attribute dry_run
     #   <p>
-    #   Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.
+    #   Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. 
     #   If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.
     #   </p>
     #   @return [Boolean]
@@ -8637,8 +8637,8 @@ module Aws::EC2
     #   <p>The tags to associate with the carrier gateway.</p>
     #   @return [Array<Types::TagSpecification>]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute client_token
@@ -8672,7 +8672,7 @@ module Aws::EC2
     #   <p>The IPv4 address range, in CIDR notation, from which to assign client IP addresses. The address range cannot overlap with the local CIDR of the VPC in which the associated subnet is located, or the routes that you add manually. The address range cannot be changed after the Client VPN endpoint has been created. Client CIDR range must have a size of at least /22 and must not be greater than /12.</p>
     #   @return [String]
     # @!attribute server_certificate_arn
-    #   <p>The ARN of the server certificate. For more information, see
+    #   <p>The ARN of the server certificate. For more information, see 
     #   			the <a href="https://docs.aws.amazon.com/acm/latest/userguide/">Certificate Manager User Guide</a>.</p>
     #   @return [String]
     # @!attribute authentication_options
@@ -8719,14 +8719,14 @@ module Aws::EC2
     # @!attribute split_tunnel
     #   <p>Indicates whether split-tunnel is enabled on the Client VPN endpoint.</p>
     #            <p>By default, split-tunnel on a VPN endpoint is disabled.</p>
-    #            <p>For information about split-tunnel VPN endpoints, see <a href="https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/split-tunnel-vpn.html">Split-tunnel Client VPN endpoint</a> in the
+    #            <p>For information about split-tunnel VPN endpoints, see <a href="https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/split-tunnel-vpn.html">Split-tunnel Client VPN endpoint</a> in the 
     #   			<i>Client VPN Administrator Guide</i>.</p>
     #   @return [Boolean]
     # @!attribute dry_run
     #   <p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute client_token
-    #   <p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+    #   <p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. 
     #   For more information, see <a href="https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html">Ensuring idempotency</a>.</p>
     #   @return [String]
     # @!attribute tag_specifications
@@ -8760,11 +8760,11 @@ module Aws::EC2
     # @!attribute client_route_enforcement_options
     #   <p>Client route enforcement is a feature of the Client VPN service that helps enforce administrator defined routes on devices connected through the VPN. T
     #   		his feature helps improve your security posture by ensuring that network traffic originating from a connected client is not inadvertently sent outside the VPN tunnel.</p>
-    #            <p>Client route enforcement works by monitoring the route table of a connected device for routing policy changes to the VPN connection. If the feature detects any VPN routing policy modifications, it will automatically force an update to the route table,
+    #            <p>Client route enforcement works by monitoring the route table of a connected device for routing policy changes to the VPN connection. If the feature detects any VPN routing policy modifications, it will automatically force an update to the route table, 
     #   			reverting it back to the expected route configurations.</p>
     #   @return [Types::ClientRouteEnforcementOptions]
     # @!attribute disconnect_on_session_timeout
-    #   <p>Indicates whether the client VPN session is disconnected after the maximum timeout specified in <code>SessionTimeoutHours</code> is reached. If <code>true</code>, users are prompted to reconnect client VPN. If <code>false</code>, client VPN attempts to reconnect automatically.
+    #   <p>Indicates whether the client VPN session is disconnected after the maximum timeout specified in <code>SessionTimeoutHours</code> is reached. If <code>true</code>, users are prompted to reconnect client VPN. If <code>false</code>, client VPN attempts to reconnect automatically. 
     #                      The default value is <code>true</code>.</p>
     #   @return [Boolean]
     # @!attribute endpoint_ip_address_type
@@ -8863,7 +8863,7 @@ module Aws::EC2
     #   <p>A brief description of the route.</p>
     #   @return [String]
     # @!attribute client_token
-    #   <p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+    #   <p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. 
     #   For more information, see <a href="https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html">Ensuring idempotency</a>.</p>
     #   @return [String]
     # @!attribute dry_run
@@ -8904,8 +8904,8 @@ module Aws::EC2
     #         </p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class CreateCoipCidrRequest < Struct.new(
@@ -8942,8 +8942,8 @@ module Aws::EC2
     #         </p>
     #   @return [Array<Types::TagSpecification>]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class CreateCoipPoolRequest < Struct.new(
@@ -9044,8 +9044,8 @@ module Aws::EC2
     #               but not both.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute ipv6_native
@@ -9080,8 +9080,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class CreateDefaultVpcRequest < Struct.new(
@@ -9122,14 +9122,14 @@ module Aws::EC2
     #                  <ul>
     #                     <li>
     #                        <p>
-    #                           <b>Username</b> - Only the default administrative user
-    #                        (<code>aws-managed-user</code>) is supported and it is used by default. You can't
+    #                           <b>Username</b> - Only the default administrative user 
+    #                        (<code>aws-managed-user</code>) is supported and it is used by default. You can't 
     #                        specify a different administrative user.</p>
     #                     </li>
     #                     <li>
     #                        <p>
-    #                           <b>Password</b> - If you did not change the default
-    #                        password for <code>aws-managed-user</code>, specify the default password, which is
+    #                           <b>Password</b> - If you did not change the default 
+    #                        password for <code>aws-managed-user</code>, specify the default password, which is 
     #                        <i>blank</i>. Otherwise, specify your password.</p>
     #                     </li>
     #                  </ul>
@@ -9141,13 +9141,13 @@ module Aws::EC2
     #                  <ul>
     #                     <li>
     #                        <p>
-    #                           <b>Username</b> - If you did not change the default
-    #                        administrative user, specify <code>ec2-user</code>. Otherwise, specify the username
+    #                           <b>Username</b> - If you did not change the default 
+    #                        administrative user, specify <code>ec2-user</code>. Otherwise, specify the username 
     #                        for your administrative user.</p>
     #                     </li>
     #                     <li>
     #                        <p>
-    #                           <b>Password</b> - Specify the password for the
+    #                           <b>Password</b> - Specify the password for the 
     #                        administrative user.</p>
     #                     </li>
     #                  </ul>
@@ -9195,8 +9195,8 @@ module Aws::EC2
     #   <p>The tags to assign to the DHCP option.</p>
     #   @return [Array<Types::TagSpecification>]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class CreateDhcpOptionsRequest < Struct.new(
@@ -9225,8 +9225,8 @@ module Aws::EC2
     #   			request. For more information, see <a href="https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html">Ensuring idempotency</a>.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute vpc_id
@@ -9341,8 +9341,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute client_token
@@ -9418,9 +9418,9 @@ module Aws::EC2
     #               health checks</a> in the <i>Amazon EC2 User Guide</i>.</p>
     #   @return [Boolean]
     # @!attribute tag_specifications
-    #   <p>The key-value pair for tagging the EC2 Fleet request on creation. For more information, see
+    #   <p>The key-value pair for tagging the EC2 Fleet request on creation. For more information, see 
     #            <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html#tag-resources">Tag your resources</a>.</p>
-    #            <p>If the fleet type is <code>instant</code>, specify a resource type of <code>fleet</code>
+    #            <p>If the fleet type is <code>instant</code>, specify a resource type of <code>fleet</code> 
     #            to tag the fleet, <code>instance</code> to tag the instances at launch,
     #            <code>volume</code> to tag the volumes at launch, or <code>network-interface</code> to
     #            tag the network interfaces at launch.</p>
@@ -9475,8 +9475,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute client_token
@@ -9541,7 +9541,7 @@ module Aws::EC2
     #   <p>The fields to include in the flow log record. List the fields in the order in which
     #               they should appear. If you omit this parameter, the flow log is created using the
     #               default format. If you specify this parameter, you must include at least one
-    #               field. For more information about the available fields, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/flow-log-records.html">Flow log records</a>
+    #               field. For more information about the available fields, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/flow-log-records.html">Flow log records</a> 
     #               in the <i>Amazon VPC User Guide</i> or <a href="https://docs.aws.amazon.com/vpc/latest/tgw/tgw-flow-logs.html#flow-log-records">Transit Gateway Flow Log
     #                       records</a> in the <i>Amazon Web Services Transit Gateway Guide</i>.</p>
     #            <p>Specify the fields using the <code>${field-id}</code> format, separated by spaces.</p>
@@ -9550,7 +9550,7 @@ module Aws::EC2
     #   <p>The tags to apply to the flow logs.</p>
     #   @return [Array<Types::TagSpecification>]
     # @!attribute max_aggregation_interval
-    #   <p>The maximum interval of time during which a flow of packets is captured and aggregated into a flow log record.
+    #   <p>The maximum interval of time during which a flow of packets is captured and aggregated into a flow log record. 
     #               The possible values are 60 seconds (1 minute) or 600 seconds (10 minutes).
     #               This parameter must be 60 seconds for transit gateway resource types.</p>
     #            <p>When a network interface is attached to a <a href="https://docs.aws.amazon.com/ec2/latest/instancetypes/ec2-nitro-instances.html">Nitro-based
@@ -9607,8 +9607,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute input_storage_location
@@ -9624,7 +9624,7 @@ module Aws::EC2
     #   <p>A name for the AFI.</p>
     #   @return [String]
     # @!attribute client_token
-    #   <p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+    #   <p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. 
     #         	For more information, see <a href="https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html">Ensuring Idempotency</a>.</p>
     #   @return [String]
     # @!attribute tag_specifications
@@ -9702,12 +9702,12 @@ module Aws::EC2
     #            <p>Default: <code>regional</code> (for instances in Local Zones only)</p>
     #   @return [String]
     # @!attribute boot_mode_override
-    #   <p>The boot mode of the new image, which overrides the default boot mode. By default,
-    #         if you do not specify this parameter, the new image inherits
+    #   <p>The boot mode of the new image, which overrides the default boot mode. By default, 
+    #         if you do not specify this parameter, the new image inherits 
     #         the <code>boot-mode</code> from the source instance.</p>
     #            <p>A value of <code>uefi</code> indicates that the image only supports UEFI boot mode. You can
     #         specify this parameter only if the <code>current-instance-boot-mode</code> of the source instance is
-    #           <code>uefi</code>. To find the <code>boot-mode</code> or <code>current-instance-boot-mode</code> of
+    #           <code>uefi</code>. To find the <code>boot-mode</code> or <code>current-instance-boot-mode</code> of 
     #           an instance, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeInstances.html">DescribeInstances</a>.</p>
     #            <note>
     #               <p>The operating system contained in the AMI must be configured to support the specified
@@ -9717,8 +9717,8 @@ module Aws::EC2
     #         the <i>Amazon EC2 User Guide</i>.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #   			and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #   			and provides an error response. If you have the required permissions, the error response is 
     #   			<code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute instance_id
@@ -9806,8 +9806,8 @@ module Aws::EC2
     #   <p>The ID of the image to report on.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #   			and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #   			and provides an error response. If you have the required permissions, the error response is 
     #   			<code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute resource_types
@@ -9851,15 +9851,15 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #               and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #               and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #               Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute subnet_id
     #   <p>The ID of the subnet in which to create the EC2 Instance Connect Endpoint.</p>
     #   @return [String]
     # @!attribute security_group_ids
-    #   <p>One or more security groups to associate with the endpoint. If you don't specify a security group,
+    #   <p>One or more security groups to associate with the endpoint. If you don't specify a security group, 
     #               the default security group for your VPC will be associated with the endpoint.</p>
     #   @return [Array<String>]
     # @!attribute preserve_client_ip
@@ -9944,8 +9944,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute name
@@ -10055,8 +10055,8 @@ module Aws::EC2
     #   <p>The tags to assign to the internet gateway.</p>
     #   @return [Array<Types::TagSpecification>]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class CreateInternetGatewayRequest < Struct.new(
@@ -10154,8 +10154,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute ipam_id
@@ -10254,8 +10254,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute tag_specifications
@@ -10291,8 +10291,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute ipam_scope_id
@@ -10320,11 +10320,11 @@ module Aws::EC2
     #   <p>The IP protocol assigned to this IPAM pool. You must choose either IPv4 or IPv6 protocol for a pool.</p>
     #   @return [String]
     # @!attribute auto_import
-    #   <p>If selected, IPAM will continuously look for resources within the CIDR range of this pool
+    #   <p>If selected, IPAM will continuously look for resources within the CIDR range of this pool 
     #            and automatically import them as allocations into your IPAM. The CIDRs that will be allocated for
-    #            these resources must not already be allocated to other resources in order for the import to succeed. IPAM will import
-    #            a CIDR regardless of its compliance with the pool's allocation rules, so a resource might be imported and subsequently
-    #            marked as noncompliant. If IPAM discovers multiple CIDRs that overlap, IPAM will import the largest CIDR only. If IPAM
+    #            these resources must not already be allocated to other resources in order for the import to succeed. IPAM will import 
+    #            a CIDR regardless of its compliance with the pool's allocation rules, so a resource might be imported and subsequently 
+    #            marked as noncompliant. If IPAM discovers multiple CIDRs that overlap, IPAM will import the largest CIDR only. If IPAM 
     #            discovers multiple CIDRs with matching CIDRs, IPAM will randomly import one of them only.
     #         </p>
     #            <p>A locale must be set on the pool for this feature to work.</p>
@@ -10333,15 +10333,15 @@ module Aws::EC2
     #   <p>Determines if the pool is publicly advertisable. The request can only contain <code>PubliclyAdvertisable</code> if <code>AddressFamily</code> is <code>ipv6</code> and <code>PublicIpSource</code> is <code>byoip</code>.</p>
     #   @return [Boolean]
     # @!attribute allocation_min_netmask_length
-    #   <p>The minimum netmask length required for CIDR allocations in this IPAM pool to be compliant. The minimum netmask length must be
+    #   <p>The minimum netmask length required for CIDR allocations in this IPAM pool to be compliant. The minimum netmask length must be 
     #            less than the maximum netmask length. Possible netmask lengths for IPv4 addresses are 0 - 32. Possible netmask lengths for IPv6 addresses are  0 - 128.</p>
     #   @return [Integer]
     # @!attribute allocation_max_netmask_length
-    #   <p>The maximum netmask length possible for CIDR allocations in this IPAM pool to be compliant. The maximum netmask length must be
+    #   <p>The maximum netmask length possible for CIDR allocations in this IPAM pool to be compliant. The maximum netmask length must be 
     #            greater than the minimum netmask length. Possible netmask lengths for IPv4 addresses are 0 - 32. Possible netmask lengths for IPv6 addresses are  0 - 128.</p>
     #   @return [Integer]
     # @!attribute allocation_default_netmask_length
-    #   <p>The default netmask length for allocations added to this pool. If, for example, the CIDR assigned to this pool is 10.0.0.0/8 and you enter 16 here,
+    #   <p>The default netmask length for allocations added to this pool. If, for example, the CIDR assigned to this pool is 10.0.0.0/8 and you enter 16 here, 
     #            new allocations will default to 10.0.0.0/16.</p>
     #   @return [Integer]
     # @!attribute allocation_resource_tags
@@ -10358,7 +10358,7 @@ module Aws::EC2
     #   <p>Limits which service in Amazon Web Services that the pool can be used in. "ec2", for example, allows users to use space for Elastic IP addresses and VPCs.</p>
     #   @return [String]
     # @!attribute public_ip_source
-    #   <p>The IP address source for pools in the public scope. Only used for provisioning IP address CIDRs to pools in the public scope. Default is <code>byoip</code>. For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/ipam/intro-create-ipv6-pools.html">Create IPv6 pools</a> in the <i>Amazon VPC IPAM User Guide</i>.
+    #   <p>The IP address source for pools in the public scope. Only used for provisioning IP address CIDRs to pools in the public scope. Default is <code>byoip</code>. For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/ipam/intro-create-ipv6-pools.html">Create IPv6 pools</a> in the <i>Amazon VPC IPAM User Guide</i>. 
     #            By default, you can add only one Amazon-provided IPv6 CIDR block to a top-level IPv6 pool if PublicIpSource is <code>amazon</code>. For information on increasing the default limit, see <a href="https://docs.aws.amazon.com/vpc/latest/ipam/quotas-ipam.html"> Quotas for your IPAM</a> in the <i>Amazon VPC IPAM User Guide</i>.</p>
     #   @return [String]
     # @!attribute source_resource
@@ -10400,8 +10400,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute ipam_id
@@ -10449,8 +10449,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute ipam_prefix_list_resolver_id
@@ -10503,8 +10503,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute description
@@ -10558,8 +10558,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute description
@@ -10663,8 +10663,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute ipam_id
@@ -10761,8 +10761,8 @@ module Aws::EC2
     #            </p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class CreateKeyPairRequest < Struct.new(
@@ -10922,7 +10922,7 @@ module Aws::EC2
     end
 
     # @!attribute destination_cidr_block
-    #   <p>The CIDR range used for destination matches. Routing decisions are based on
+    #   <p>The CIDR range used for destination matches. Routing decisions are based on 
     #           the most specific match.</p>
     #   @return [String]
     # @!attribute local_gateway_route_table_id
@@ -10932,8 +10932,8 @@ module Aws::EC2
     #   <p>The ID of the virtual interface group.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute network_interface_id
@@ -10941,7 +10941,7 @@ module Aws::EC2
     #   @return [String]
     # @!attribute destination_prefix_list_id
     #   <p>
-    #            The ID of the prefix list. Use a prefix list in place of <code>DestinationCidrBlock</code>. You
+    #            The ID of the prefix list. Use a prefix list in place of <code>DestinationCidrBlock</code>. You 
     #            cannot use <code>DestinationPrefixListId</code> and <code>DestinationCidrBlock</code> in the same request.
     #         </p>
     #   @return [String]
@@ -10971,7 +10971,7 @@ module Aws::EC2
 
     # @!attribute local_gateway_id
     #   <p>
-    #         The ID of the local gateway.
+    #         The ID of the local gateway. 
     #         </p>
     #   @return [String]
     # @!attribute mode
@@ -10985,8 +10985,8 @@ module Aws::EC2
     #         </p>
     #   @return [Array<Types::TagSpecification>]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class CreateLocalGatewayRouteTableRequest < Struct.new(
@@ -11027,8 +11027,8 @@ module Aws::EC2
     #         </p>
     #   @return [Array<Types::TagSpecification>]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class CreateLocalGatewayRouteTableVirtualInterfaceGroupAssociationRequest < Struct.new(
@@ -11063,8 +11063,8 @@ module Aws::EC2
     #   <p>The tags to assign to the local gateway route table VPC association.</p>
     #   @return [Array<Types::TagSpecification>]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class CreateLocalGatewayRouteTableVpcAssociationRequest < Struct.new(
@@ -11103,8 +11103,8 @@ module Aws::EC2
     #            being created.</p>
     #   @return [Array<Types::TagSpecification>]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class CreateLocalGatewayVirtualInterfaceGroupRequest < Struct.new(
@@ -11153,8 +11153,8 @@ module Aws::EC2
     #   <p>The tags to apply to a resource when the local gateway virtual interface is being created. </p>
     #   @return [Array<Types::TagSpecification>]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute peer_bgp_asn_extended
@@ -11198,7 +11198,7 @@ module Aws::EC2
     #   @return [String]
     # @!attribute mac_credentials
     #   <p>
-    #               <b>[Apple silicon Mac instances only]</b> Specifies the
+    #               <b>[Apple silicon Mac instances only]</b> Specifies the 
     #            following credentials:</p>
     #            <ul>
     #               <li>
@@ -11208,14 +11208,14 @@ module Aws::EC2
     #                  <ul>
     #                     <li>
     #                        <p>
-    #                           <b>Username</b> - Only the default administrative
-    #                        user (<code>aws-managed-user</code>) is supported and it is used by default. You
+    #                           <b>Username</b> - Only the default administrative 
+    #                        user (<code>aws-managed-user</code>) is supported and it is used by default. You 
     #                        can't specify a different administrative user.</p>
     #                     </li>
     #                     <li>
     #                        <p>
-    #                           <b>Password</b> - If you did not change the default
-    #                        password for <code>aws-managed-user</code>, specify the default password, which
+    #                           <b>Password</b> - If you did not change the default 
+    #                        password for <code>aws-managed-user</code>, specify the default password, which 
     #                        is <i>blank</i>. Otherwise, specify your password.</p>
     #                     </li>
     #                  </ul>
@@ -11227,13 +11227,13 @@ module Aws::EC2
     #                  <ul>
     #                     <li>
     #                        <p>
-    #                           <b>Username</b> - If you did not change the default
-    #                        administrative user, specify <code>ec2-user</code>. Otherwise, specify the username
+    #                           <b>Username</b> - If you did not change the default 
+    #                        administrative user, specify <code>ec2-user</code>. Otherwise, specify the username 
     #                        for your administrative user.</p>
     #                     </li>
     #                     <li>
     #                        <p>
-    #                           <b>Password</b> - Specify the password for the
+    #                           <b>Password</b> - Specify the password for the 
     #                        administrative user.</p>
     #                     </li>
     #                  </ul>
@@ -11249,12 +11249,12 @@ module Aws::EC2
     #            </p>
     #   @return [String]
     # @!attribute mac_system_integrity_protection_configuration
-    #   <p>Specifies the overrides to selectively enable or disable individual SIP settings.
-    #            The individual settings you specify here override the overall SIP status you specify
+    #   <p>Specifies the overrides to selectively enable or disable individual SIP settings. 
+    #            The individual settings you specify here override the overall SIP status you specify 
     #            for <b>MacSystemIntegrityProtectionStatus</b>.</p>
     #   @return [Types::MacSystemIntegrityProtectionConfigurationRequest]
     # @!attribute mac_system_integrity_protection_status
-    #   <p>Specifies the overall SIP status for the instance. To enable all SIP settings, specify
+    #   <p>Specifies the overall SIP status for the instance. To enable all SIP settings, specify 
     #            <code>enabled</code>. To disable all SIP settings, specify <code>disabled</code>.</p>
     #   @return [String]
     # @!attribute tag_specifications
@@ -11286,8 +11286,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute prefix_list_name
@@ -11345,7 +11345,7 @@ module Aws::EC2
     #            <p>For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateways-regional.html">Regional NAT gateways for automatic multi-AZ expansion</a> in the <i>Amazon VPC User Guide</i>.</p>
     #   @return [String]
     # @!attribute allocation_id
-    #   <p>[Public NAT gateways only] The allocation ID of an Elastic IP address to associate
+    #   <p>[Public NAT gateways only] The allocation ID of an Elastic IP address to associate 
     #             with the NAT gateway. You cannot specify an Elastic IP address with a private NAT gateway.
     #             If the Elastic IP address is associated with another resource, you must first disassociate it.</p>
     #   @return [String]
@@ -11355,8 +11355,8 @@ module Aws::EC2
     #            <p>Constraint: Maximum 64 ASCII characters.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute subnet_id
@@ -11374,23 +11374,23 @@ module Aws::EC2
     #   <p>The tags to assign to the NAT gateway.</p>
     #   @return [Array<Types::TagSpecification>]
     # @!attribute connectivity_type
-    #   <p>Indicates whether the NAT gateway supports public or private connectivity.
+    #   <p>Indicates whether the NAT gateway supports public or private connectivity. 
     #             The default is public connectivity.</p>
     #   @return [String]
     # @!attribute private_ip_address
     #   <p>The private IPv4 address to assign to the NAT gateway. If you don't provide an address, a private IPv4 address will be automatically assigned.</p>
     #   @return [String]
     # @!attribute secondary_allocation_ids
-    #   <p>Secondary EIP allocation IDs. For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateway-working-with.html">Create a NAT gateway</a>
+    #   <p>Secondary EIP allocation IDs. For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateway-working-with.html">Create a NAT gateway</a> 
     #               in the <i>Amazon VPC User Guide</i>.</p>
     #   @return [Array<String>]
     # @!attribute secondary_private_ip_addresses
-    #   <p>Secondary private IPv4 addresses. For more information about secondary addresses, see
+    #   <p>Secondary private IPv4 addresses. For more information about secondary addresses, see 
     #               <a href="https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateway-working-with.html">Create a NAT gateway</a> in the <i>Amazon VPC User Guide</i>.</p>
     #   @return [Array<String>]
     # @!attribute secondary_private_ip_address_count
-    #   <p>[Private NAT gateway only] The number of secondary private IPv4 addresses you want to assign to the NAT gateway.
-    #               For more information about secondary addresses, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateway-working-with.html">Create a NAT gateway</a>
+    #   <p>[Private NAT gateway only] The number of secondary private IPv4 addresses you want to assign to the NAT gateway. 
+    #               For more information about secondary addresses, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateway-working-with.html">Create a NAT gateway</a> 
     #               in the <i>Amazon VPC User Guide</i>.</p>
     #   @return [Integer]
     class CreateNatGatewayRequest < Struct.new(
@@ -11429,8 +11429,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute network_acl_id
@@ -11442,10 +11442,10 @@ module Aws::EC2
     #   @return [Integer]
     # @!attribute protocol
     #   <p>The protocol number. A value of "-1" means all protocols. If you specify "-1" or a
-    #     			protocol number other than "6" (TCP), "17" (UDP), or "1" (ICMP), traffic on all ports is
-    #   			allowed, regardless of any ports or ICMP types or codes that you specify. If you specify
-    #   			protocol "58" (ICMPv6) and specify an IPv4 CIDR block, traffic for all ICMP types and
-    #   			codes allowed, regardless of any that you specify. If you specify protocol "58" (ICMPv6)
+    #     			protocol number other than "6" (TCP), "17" (UDP), or "1" (ICMP), traffic on all ports is 
+    #   			allowed, regardless of any ports or ICMP types or codes that you specify. If you specify 
+    #   			protocol "58" (ICMPv6) and specify an IPv4 CIDR block, traffic for all ICMP types and 
+    #   			codes allowed, regardless of any that you specify. If you specify protocol "58" (ICMPv6) 
     #   			and specify an IPv6 CIDR block, you must specify an ICMP type and code.</p>
     #   @return [String]
     # @!attribute rule_action
@@ -11463,7 +11463,7 @@ module Aws::EC2
     #                   <code>2001:db8:1234:1a00::/64</code>).</p>
     #   @return [String]
     # @!attribute icmp_type_code
-    #   <p>ICMP protocol: The ICMP or ICMPv6 type and code. Required if specifying protocol
+    #   <p>ICMP protocol: The ICMP or ICMPv6 type and code. Required if specifying protocol 
     #   		        1 (ICMP) or protocol 58 (ICMPv6) with an IPv6 CIDR block.</p>
     #   @return [Types::IcmpTypeCode]
     # @!attribute port_range
@@ -11495,8 +11495,8 @@ module Aws::EC2
     #               request. For more information, see <a href="https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html">Ensuring idempotency</a>.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute vpc_id
@@ -11535,15 +11535,15 @@ module Aws::EC2
     #   <p>The paths to exclude.</p>
     #   @return [Array<Types::AccessScopePathRequest>]
     # @!attribute client_token
-    #   <p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information,
+    #   <p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, 
     #      see <a href="https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html">How to ensure idempotency</a>.</p>
     #   @return [String]
     # @!attribute tag_specifications
     #   <p>The tags to apply.</p>
     #   @return [Array<Types::TagSpecification>]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class CreateNetworkInsightsAccessScopeRequest < Struct.new(
@@ -11595,12 +11595,12 @@ module Aws::EC2
     #   <p>The tags to add to the path.</p>
     #   @return [Array<Types::TagSpecification>]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute client_token
-    #   <p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information,
+    #   <p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, 
     #      see <a href="https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html">How to ensure idempotency</a>.</p>
     #   @return [String]
     # @!attribute filter_at_source
@@ -11863,8 +11863,8 @@ module Aws::EC2
     #               is set to <code>cluster</code>.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the operation, without actually making the
-    #     request, and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the operation, without actually making the 
+    #     request, and provides an error response. If you have the required permissions, the error response is 
     #     <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute group_name
@@ -11903,8 +11903,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute tag_specifications
@@ -11939,53 +11939,53 @@ module Aws::EC2
     #   <p>The ID of the instance for which to replace the root volume.</p>
     #   @return [String]
     # @!attribute snapshot_id
-    #   <p>The ID of the snapshot from which to restore the replacement root volume. The
-    #         specified snapshot must be a snapshot that you previously created from the original
+    #   <p>The ID of the snapshot from which to restore the replacement root volume. The 
+    #         specified snapshot must be a snapshot that you previously created from the original 
     #         root volume.</p>
-    #            <p>If you want to restore the replacement root volume to the initial launch state,
-    #         if you want to restore the replacement root volume from an AMI, or if you want to
+    #            <p>If you want to restore the replacement root volume to the initial launch state, 
+    #         if you want to restore the replacement root volume from an AMI, or if you want to 
     #         replace the root volume with a specified volume, omit this parameter.</p>
     #   @return [String]
     # @!attribute client_token
-    #   <p>Unique, case-sensitive identifier you provide to ensure the idempotency of the request.
-    #         If you do not specify a client token, a randomly generated token is used for the request
+    #   <p>Unique, case-sensitive identifier you provide to ensure the idempotency of the request. 
+    #         If you do not specify a client token, a randomly generated token is used for the request 
     #         to ensure idempotency. For more information, see <a href="https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html">Ensuring idempotency</a>.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute tag_specifications
     #   <p>The tags to apply to the root volume replacement task.</p>
     #   @return [Array<Types::TagSpecification>]
     # @!attribute image_id
-    #   <p>The ID of the AMI to use to restore the root volume. The specified AMI must have the
-    #         same product code, billing information, architecture type, and virtualization type as
+    #   <p>The ID of the AMI to use to restore the root volume. The specified AMI must have the 
+    #         same product code, billing information, architecture type, and virtualization type as 
     #         that of the instance.</p>
-    #            <p>If you want to restore the replacement volume from a specific snapshot, if you want
-    #         to restore it to its launch state, or if you want to replace the root volume with a
+    #            <p>If you want to restore the replacement volume from a specific snapshot, if you want 
+    #         to restore it to its launch state, or if you want to replace the root volume with a 
     #         specified volume, omit this parameter.</p>
     #   @return [String]
     # @!attribute delete_replaced_root_volume
-    #   <p>Indicates whether to automatically delete the original root volume after the root volume
-    #         replacement task completes. To delete the original root volume, specify <code>true</code>.
-    #         If you choose to keep the original root volume after the replacement task completes, you must
+    #   <p>Indicates whether to automatically delete the original root volume after the root volume 
+    #         replacement task completes. To delete the original root volume, specify <code>true</code>. 
+    #         If you choose to keep the original root volume after the replacement task completes, you must 
     #         manually delete it when you no longer need it.</p>
     #   @return [Boolean]
     # @!attribute volume_initialization_rate
-    #   <p>Specifies the Amazon EBS Provisioned Rate for Volume Initialization (volume initialization rate), in MiB/s, at which to download
-    #         the snapshot blocks from Amazon S3 to the replacement root volume. This is also known as
-    #         <i>volume initialization</i>. Specifying a volume initialization rate ensures that
+    #   <p>Specifies the Amazon EBS Provisioned Rate for Volume Initialization (volume initialization rate), in MiB/s, at which to download 
+    #         the snapshot blocks from Amazon S3 to the replacement root volume. This is also known as 
+    #         <i>volume initialization</i>. Specifying a volume initialization rate ensures that 
     #         the volume is initialized at a predictable and consistent rate after creation.</p>
     #            <p>Omit this parameter if:</p>
     #            <ul>
     #               <li>
-    #                  <p>You want to create the volume using fast snapshot restore. You must specify a snapshot
-    #             that is enabled for fast snapshot restore. In this case, the volume is fully initialized at
+    #                  <p>You want to create the volume using fast snapshot restore. You must specify a snapshot 
+    #             that is enabled for fast snapshot restore. In this case, the volume is fully initialized at 
     #             creation.</p>
     #                  <note>
-    #                     <p>If you specify a snapshot that is enabled for fast snapshot restore and a volume initialization rate,
+    #                     <p>If you specify a snapshot that is enabled for fast snapshot restore and a volume initialization rate, 
     #               the volume will be initialized at the specified rate instead of fast snapshot restore.</p>
     #                  </note>
     #               </li>
@@ -11998,11 +11998,11 @@ module Aws::EC2
     #            <p>Valid range: 100 - 300 MiB/s</p>
     #   @return [Integer]
     # @!attribute volume_id
-    #   <p>The ID of the volume to use as the replacement root volume. The specified volume must
+    #   <p>The ID of the volume to use as the replacement root volume. The specified volume must 
     #         be in the same Availability Zone as the instance, must be in the <code>available</code>
     #         state, and must not be attached to an instance. If the original root volume is encrypted,
     #         the specified volume must also be encrypted.</p>
-    #            <p>If you want to restore the replacement root volume from a specific snapshot, an AMI,
+    #            <p>If you want to restore the replacement root volume from a specific snapshot, an AMI, 
     #         or to its launch state, omit this parameter.</p>
     #   @return [String]
     class CreateReplaceRootVolumeTaskRequest < Struct.new(
@@ -12100,8 +12100,8 @@ module Aws::EC2
     #            </ul>
     #   @return [Array<Types::TagSpecification>]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #   			and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #   			and provides an error response. If you have the required permissions, the error response is 
     #   			<code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class CreateRestoreImageTaskRequest < Struct.new(
@@ -12150,8 +12150,8 @@ module Aws::EC2
     #   <p>The Amazon Resource Name (ARN) of the ODB network.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute route_table_id
@@ -12227,8 +12227,8 @@ module Aws::EC2
     #   <p>Unique, case-sensitive identifier to ensure idempotency of the request.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute tag_specifications
@@ -12267,8 +12267,8 @@ module Aws::EC2
     #   <p>The BGP options for the peer, including ASN (Autonomous System Number) and BFD (Bidrectional Forwarding Detection) settings.</p>
     #   @return [Types::RouteServerBgpOptionsRequest]
     # @!attribute dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute tag_specifications
@@ -12304,8 +12304,8 @@ module Aws::EC2
     #   <p>Unique, case-sensitive identifier to ensure idempotency of the request.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute persist_routes
@@ -12354,8 +12354,8 @@ module Aws::EC2
     #               request. For more information, see <a href="https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html">Ensuring idempotency</a>.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute vpc_id
@@ -12496,8 +12496,8 @@ module Aws::EC2
     #   <p>The tags to assign to the security group.</p>
     #   @return [Array<Types::TagSpecification>]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class CreateSecurityGroupRequest < Struct.new(
@@ -12533,50 +12533,50 @@ module Aws::EC2
 
     # <p>Describes a snapshot.</p>
     # @!attribute owner_alias
-    #   <p>The Amazon Web Services owner alias, from an Amazon-maintained list (<code>amazon</code>). This is not
+    #   <p>The Amazon Web Services owner alias, from an Amazon-maintained list (<code>amazon</code>). This is not  
     #         the user-configured Amazon Web Services account alias set using the IAM console.</p>
     #   @return [String]
     # @!attribute outpost_arn
-    #   <p>The ARN of the Outpost on which the snapshot is stored. For more information, see <a href="https://docs.aws.amazon.com/ebs/latest/userguide/snapshots-outposts.html">Amazon EBS local snapshots on Outposts</a> in the
+    #   <p>The ARN of the Outpost on which the snapshot is stored. For more information, see <a href="https://docs.aws.amazon.com/ebs/latest/userguide/snapshots-outposts.html">Amazon EBS local snapshots on Outposts</a> in the 
     #     		<i>Amazon EBS User Guide</i>.</p>
     #   @return [String]
     # @!attribute tags
     #   <p>Any tags assigned to the snapshot.</p>
     #   @return [Array<Types::Tag>]
     # @!attribute storage_tier
-    #   <p>The storage tier in which the snapshot is stored. <code>standard</code> indicates
-    #         that the snapshot is stored in the standard snapshot storage tier and that it is ready
-    #         for use. <code>archive</code> indicates that the snapshot is currently archived and that
+    #   <p>The storage tier in which the snapshot is stored. <code>standard</code> indicates 
+    #         that the snapshot is stored in the standard snapshot storage tier and that it is ready 
+    #         for use. <code>archive</code> indicates that the snapshot is currently archived and that 
     #         it must be restored before it can be used.</p>
     #   @return [String]
     # @!attribute restore_expiry_time
-    #   <p>Only for archived snapshots that are temporarily restored. Indicates the date and
+    #   <p>Only for archived snapshots that are temporarily restored. Indicates the date and 
     #         time when a temporarily restored snapshot will be automatically re-archived.</p>
     #   @return [Time]
     # @!attribute sse_type
     #   <p>Reserved for future use.</p>
     #   @return [String]
     # @!attribute availability_zone
-    #   <p>The Availability Zone or Local Zone of the snapshot. For example, <code>us-west-1a</code>
+    #   <p>The Availability Zone or Local Zone of the snapshot. For example, <code>us-west-1a</code> 
     #         (Availability Zone) or <code>us-west-2-lax-1a</code> (Local Zone).</p>
     #   @return [String]
     # @!attribute transfer_type
     #   <note>
     #               <p>Only for snapshot copies.</p>
     #            </note>
-    #            <p>Indicates whether the snapshot copy was created with a standard or time-based
-    #         snapshot copy operation. Time-based snapshot copy operations complete within the
-    #         completion duration specified in the request. Standard snapshot copy operations
+    #            <p>Indicates whether the snapshot copy was created with a standard or time-based 
+    #         snapshot copy operation. Time-based snapshot copy operations complete within the 
+    #         completion duration specified in the request. Standard snapshot copy operations 
     #         are completed on a best-effort basis.</p>
     #            <ul>
     #               <li>
     #                  <p>
-    #                     <code>standard</code> - The snapshot copy was created with a standard
+    #                     <code>standard</code> - The snapshot copy was created with a standard 
     #             snapshot copy operation.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>time-based</code> - The snapshot copy was created with a time-based
+    #                     <code>time-based</code> - The snapshot copy was created with a time-based 
     #             snapshot copy operation.</p>
     #               </li>
     #            </ul>
@@ -12593,8 +12593,8 @@ module Aws::EC2
     # @!attribute full_snapshot_size_in_bytes
     #   <p>The full size of the snapshot, in bytes.</p>
     #            <important>
-    #               <p>This is <b>not</b> the incremental size of the snapshot.
-    #           This is the full snapshot size and represents the size of all the blocks that were
+    #               <p>This is <b>not</b> the incremental size of the snapshot. 
+    #           This is the full snapshot size and represents the size of all the blocks that were 
     #           written to the source volume at the time the snapshot was created.</p>
     #            </important>
     #   @return [Integer]
@@ -12679,12 +12679,12 @@ module Aws::EC2
     #   @return [String]
     # @!attribute outpost_arn
     #   <note>
-    #               <p>Only supported for volumes on Outposts. If the source volume is not on an Outpost,
+    #               <p>Only supported for volumes on Outposts. If the source volume is not on an Outpost, 
     #           omit this parameter.</p>
     #            </note>
     #            <ul>
     #               <li>
-    #                  <p>To create the snapshot on the same Outpost as the source volume, specify the
+    #                  <p>To create the snapshot on the same Outpost as the source volume, specify the 
     #             ARN of that Outpost. The snapshot must be created on the same Outpost as the volume.</p>
     #               </li>
     #               <li>
@@ -12701,16 +12701,16 @@ module Aws::EC2
     #   @return [Array<Types::TagSpecification>]
     # @!attribute location
     #   <note>
-    #               <p>Only supported for volumes in Local Zones. If the source volume is not in a Local Zone,
+    #               <p>Only supported for volumes in Local Zones. If the source volume is not in a Local Zone, 
     #           omit this parameter.</p>
     #            </note>
     #            <ul>
     #               <li>
-    #                  <p>To create a local snapshot in the same Local Zone as the source volume, specify
+    #                  <p>To create a local snapshot in the same Local Zone as the source volume, specify 
     #             <code>local</code>.</p>
     #               </li>
     #               <li>
-    #                  <p>To create a regional snapshot in the parent Region of the Local Zone, specify
+    #                  <p>To create a regional snapshot in the parent Region of the Local Zone, specify 
     #             <code>regional</code> or omit this parameter.</p>
     #               </li>
     #            </ul>
@@ -12718,8 +12718,8 @@ module Aws::EC2
     #            </p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class CreateSnapshotRequest < Struct.new(
@@ -12743,12 +12743,12 @@ module Aws::EC2
     #   @return [Types::InstanceSpecification]
     # @!attribute outpost_arn
     #   <note>
-    #               <p>Only supported for instances on Outposts. If the source instance is not on an Outpost,
+    #               <p>Only supported for instances on Outposts. If the source instance is not on an Outpost, 
     #           omit this parameter.</p>
     #            </note>
     #            <ul>
     #               <li>
-    #                  <p>To create the snapshots on the same Outpost as the source instance, specify the
+    #                  <p>To create the snapshots on the same Outpost as the source instance, specify the 
     #             ARN of that Outpost. The snapshots must be created on the same Outpost as the instance.</p>
     #               </li>
     #               <li>
@@ -12762,8 +12762,8 @@ module Aws::EC2
     #   <p>Tags to apply to every snapshot specified by the instance.</p>
     #   @return [Array<Types::TagSpecification>]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute copy_tags_from_source
@@ -12771,16 +12771,16 @@ module Aws::EC2
     #   @return [String]
     # @!attribute location
     #   <note>
-    #               <p>Only supported for instances in Local Zones. If the source instance is not in a Local Zone,
+    #               <p>Only supported for instances in Local Zones. If the source instance is not in a Local Zone, 
     #           omit this parameter.</p>
     #            </note>
     #            <ul>
     #               <li>
-    #                  <p>To create local snapshots in the same Local Zone as the source instance, specify
+    #                  <p>To create local snapshots in the same Local Zone as the source instance, specify 
     #             <code>local</code>.</p>
     #               </li>
     #               <li>
-    #                  <p>To create regional snapshots in the parent Region of the Local Zone, specify
+    #                  <p>To create regional snapshots in the parent Region of the Local Zone, specify 
     #             <code>regional</code> or omit this parameter.</p>
     #               </li>
     #            </ul>
@@ -12821,7 +12821,7 @@ module Aws::EC2
     #   @return [Boolean]
     # @!attribute bucket
     #   <p>The name of the Amazon S3 bucket in which to store the Spot Instance data feed. For
-    #               more information about bucket names, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucketnamingrules.html">Bucket naming rules</a>
+    #               more information about bucket names, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucketnamingrules.html">Bucket naming rules</a> 
     #               in the <i>Amazon S3 User Guide</i>.</p>
     #   @return [String]
     # @!attribute prefix
@@ -12861,8 +12861,8 @@ module Aws::EC2
     #   <p>The tags to apply to the AMI object that will be stored in the Amazon S3 bucket. </p>
     #   @return [Array<Types::S3ObjectTag>]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #   			and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #   			and provides an error response. If you have the required permissions, the error response is 
     #   			<code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class CreateStoreImageTaskRequest < Struct.new(
@@ -12894,12 +12894,12 @@ module Aws::EC2
     #   <p>The IPv4 or IPV6 CIDR range to reserve.</p>
     #   @return [String]
     # @!attribute reservation_type
-    #   <p>The type of reservation. The reservation type determines how the reserved IP addresses are
+    #   <p>The type of reservation. The reservation type determines how the reserved IP addresses are 
     #               assigned to resources.</p>
     #            <ul>
     #               <li>
     #                  <p>
-    #                     <code>prefix</code> - Amazon Web Services assigns the reserved IP addresses to
+    #                     <code>prefix</code> - Amazon Web Services assigns the reserved IP addresses to 
     #                       network interfaces.</p>
     #               </li>
     #               <li>
@@ -12912,8 +12912,8 @@ module Aws::EC2
     #   <p>The description to assign to the subnet CIDR reservation.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute tag_specifications
@@ -12948,10 +12948,10 @@ module Aws::EC2
     #   @return [Array<Types::TagSpecification>]
     # @!attribute availability_zone
     #   <p>The Availability Zone or Local Zone for the subnet.</p>
-    #            <p>Default: Amazon Web Services selects one for you. If you create more than one subnet in your VPC, we
+    #            <p>Default: Amazon Web Services selects one for you. If you create more than one subnet in your VPC, we 
     #             do not necessarily select a different zone for each subnet.</p>
     #            <p>To create a subnet in a Local Zone, set this value to the Local Zone ID, for example
-    #             <code>us-west-2-lax-1a</code>. For information about the Regions that support Local Zones,
+    #             <code>us-west-2-lax-1a</code>. For information about the Regions that support Local Zones, 
     #              see <a href="https://docs.aws.amazon.com/local-zones/latest/ug/available-local-zones.html">Available Local Zones</a>.</p>
     #            <p>To create a subnet in an Outpost, set this value to the Availability Zone for the
     #              Outpost and specify the Outpost ARN.</p>
@@ -12960,8 +12960,8 @@ module Aws::EC2
     #   <p>The AZ ID or the Local Zone ID of the subnet.</p>
     #   @return [String]
     # @!attribute cidr_block
-    #   <p>The IPv4 network range for the subnet, in CIDR notation. For example, <code>10.0.0.0/24</code>.
-    #              We modify the specified CIDR block to its canonical form; for example, if you specify
+    #   <p>The IPv4 network range for the subnet, in CIDR notation. For example, <code>10.0.0.0/24</code>. 
+    #              We modify the specified CIDR block to its canonical form; for example, if you specify 
     #              <code>100.68.0.18/18</code>, we modify it to <code>100.68.0.0/18</code>.</p>
     #            <p>This parameter is not supported for an IPv6 only subnet.</p>
     #   @return [String]
@@ -12992,8 +12992,8 @@ module Aws::EC2
     #   <p>An IPv6 netmask length for the subnet.</p>
     #   @return [Integer]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class CreateSubnetRequest < Struct.new(
@@ -13028,8 +13028,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute resources
@@ -13057,8 +13057,8 @@ module Aws::EC2
     #   <p>The tags to assign to a Traffic Mirror filter.</p>
     #   @return [Array<Types::TagSpecification>]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute client_token
@@ -13123,8 +13123,8 @@ module Aws::EC2
     #   <p>The description of the Traffic Mirror rule.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute client_token
@@ -13203,8 +13203,8 @@ module Aws::EC2
     #   <p>The tags to assign to a Traffic Mirror session.</p>
     #   @return [Array<Types::TagSpecification>]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute client_token
@@ -13255,8 +13255,8 @@ module Aws::EC2
     #   <p>The tags to assign to the Traffic Mirror target.</p>
     #   @return [Array<Types::TagSpecification>]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute client_token
@@ -13319,8 +13319,8 @@ module Aws::EC2
     #   <p>The tags to apply to the Connect peer.</p>
     #   @return [Array<Types::TagSpecification>]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class CreateTransitGatewayConnectPeerRequest < Struct.new(
@@ -13358,8 +13358,8 @@ module Aws::EC2
     #   <p>The tags to apply to the Connect attachment.</p>
     #   @return [Array<Types::TagSpecification>]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class CreateTransitGatewayConnectRequest < Struct.new(
@@ -13433,8 +13433,8 @@ module Aws::EC2
     #   <p>The Amazon Web Services account ID to which the metered traffic should be attributed.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class CreateTransitGatewayMeteringPolicyEntryRequest < Struct.new(
@@ -13478,8 +13478,8 @@ module Aws::EC2
     #   <p>The tags to assign to the metering policy.</p>
     #   @return [Array<Types::TagSpecification>]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class CreateTransitGatewayMeteringPolicyRequest < Struct.new(
@@ -13514,8 +13514,8 @@ module Aws::EC2
     #   <p>The tags for the transit gateway multicast domain.</p>
     #   @return [Array<Types::TagSpecification>]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class CreateTransitGatewayMulticastDomainRequest < Struct.new(
@@ -13579,8 +13579,8 @@ module Aws::EC2
     #   <p>The tags to apply to the transit gateway peering attachment.</p>
     #   @return [Array<Types::TagSpecification>]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class CreateTransitGatewayPeeringAttachmentRequest < Struct.new(
@@ -13633,8 +13633,8 @@ module Aws::EC2
     #   <p>The ID of the transit gateway route table to use for traffic matching this rule.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class CreateTransitGatewayPolicyTableEntryRequest < Struct.new(
@@ -13667,8 +13667,8 @@ module Aws::EC2
     #   <p>The tags specification for the transit gateway policy table created during the request.</p>
     #   @return [Array<Types::TagSpecification>]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class CreateTransitGatewayPolicyTableRequest < Struct.new(
@@ -13705,8 +13705,8 @@ module Aws::EC2
     #   <p>Indicates whether to drop traffic that matches this route.</p>
     #   @return [Boolean]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class CreateTransitGatewayPrefixListReferenceRequest < Struct.new(
@@ -13742,8 +13742,8 @@ module Aws::EC2
     #   <p>The tags to apply to the transit gateway.</p>
     #   @return [Array<Types::TagSpecification>]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class CreateTransitGatewayRequest < Struct.new(
@@ -13782,8 +13782,8 @@ module Aws::EC2
     #   <p>Indicates whether to drop traffic that matches this route.</p>
     #   @return [Boolean]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class CreateTransitGatewayRouteRequest < Struct.new(
@@ -13819,8 +13819,8 @@ module Aws::EC2
     #   <p>The tags specifications applied to the transit gateway route table announcement.</p>
     #   @return [Array<Types::TagSpecification>]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class CreateTransitGatewayRouteTableAnnouncementRequest < Struct.new(
@@ -13852,8 +13852,8 @@ module Aws::EC2
     #   <p>The tags to apply to the transit gateway route table.</p>
     #   @return [Array<Types::TagSpecification>]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class CreateTransitGatewayRouteTableRequest < Struct.new(
@@ -13884,7 +13884,7 @@ module Aws::EC2
     #   <p>The ID of the VPC.</p>
     #   @return [String]
     # @!attribute subnet_ids
-    #   <p>The IDs of one or more subnets. You can specify only one subnet per Availability Zone.
+    #   <p>The IDs of one or more subnets. You can specify only one subnet per Availability Zone. 
     #            You must specify at least one subnet, but we recommend that you specify two subnets for better availability.
     #            The transit gateway uses one IP address from each specified subnet.</p>
     #   @return [Array<String>]
@@ -13895,8 +13895,8 @@ module Aws::EC2
     #   <p>The tags to apply to the VPC attachment.</p>
     #   @return [Array<Types::TagSpecification>]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class CreateTransitGatewayVpcAttachmentRequest < Struct.new(
@@ -14125,8 +14125,8 @@ module Aws::EC2
     #               modification request. For more information, see <a href="https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html">Ensuring idempotency</a>.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute sse_specification
@@ -14190,8 +14190,8 @@ module Aws::EC2
     #               modification request. For more information, see <a href="https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html">Ensuring idempotency</a>.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute sse_specification
@@ -14233,8 +14233,8 @@ module Aws::EC2
     #               modification request. For more information, see <a href="https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html">Ensuring idempotency</a>.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute fips_enabled
@@ -14396,8 +14396,8 @@ module Aws::EC2
     #               modification request. For more information, see <a href="https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html">Ensuring idempotency</a>.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute sse_specification
@@ -14444,12 +14444,12 @@ module Aws::EC2
     #   <p>The Amazon Resource Name (ARN) of the Outpost.</p>
     #   @return [String]
     # @!attribute source_volume_id
-    #   <p>The ID of the source volume from which the volume copy was created. Only for
+    #   <p>The ID of the source volume from which the volume copy was created. Only for 
     #         volume copies.</p>
     #   @return [String]
     # @!attribute iops
-    #   <p>The number of I/O operations per second (IOPS). For <code>gp3</code>, <code>io1</code>, and <code>io2</code> volumes, this represents
-    #         the number of IOPS that are provisioned for the volume. For <code>gp2</code> volumes, this represents the baseline
+    #   <p>The number of I/O operations per second (IOPS). For <code>gp3</code>, <code>io1</code>, and <code>io2</code> volumes, this represents 
+    #         the number of IOPS that are provisioned for the volume. For <code>gp2</code> volumes, this represents the baseline 
     #         performance of the volume and the rate at which the volume accumulates I/O credits for bursting.</p>
     #   @return [Integer]
     # @!attribute tags
@@ -14480,7 +14480,7 @@ module Aws::EC2
     #   <p>The service provider that manages the volume.</p>
     #   @return [Types::OperatorResponse]
     # @!attribute volume_initialization_rate
-    #   <p>The Amazon EBS Provisioned Rate for Volume Initialization (volume initialization rate) specified for the volume during creation,
+    #   <p>The Amazon EBS Provisioned Rate for Volume Initialization (volume initialization rate) specified for the volume during creation, 
     #         in MiB/s. If no volume initialization rate was specified, the value is <code>null</code>.</p>
     #   @return [Integer]
     # @!attribute volume_arn
@@ -14594,18 +14594,18 @@ module Aws::EC2
     #         but not both.</p>
     #   @return [String]
     # @!attribute encrypted
-    #   <p>Indicates whether the volume should be encrypted.
-    #         The effect of setting the encryption state to <code>true</code> depends on
-    #   the volume origin (new or from a snapshot), starting encryption state, ownership, and whether encryption by default is enabled.
+    #   <p>Indicates whether the volume should be encrypted. 
+    #         The effect of setting the encryption state to <code>true</code> depends on 
+    #   the volume origin (new or from a snapshot), starting encryption state, ownership, and whether encryption by default is enabled. 
     #         For more information, see <a href="https://docs.aws.amazon.com/ebs/latest/userguide/work-with-ebs-encr.html#encryption-by-default">Encryption by default</a>
     #         in the <i>Amazon EBS User Guide</i>.</p>
-    #            <p>Encrypted Amazon EBS volumes must be attached to instances that support Amazon EBS encryption.
+    #            <p>Encrypted Amazon EBS volumes must be attached to instances that support Amazon EBS encryption. 
     #         For more information, see <a href="https://docs.aws.amazon.com/ebs/latest/userguide/ebs-encryption-requirements.html#ebs-encryption_supported_instances">Supported
     #           instance types</a>.</p>
     #   @return [Boolean]
     # @!attribute iops
-    #   <p>The number of I/O operations per second (IOPS) to provision for the volume.
-    #         Required for <code>io1</code> and <code>io2</code> volumes. Optional for <code>gp3</code>
+    #   <p>The number of I/O operations per second (IOPS) to provision for the volume. 
+    #         Required for <code>io1</code> and <code>io2</code> volumes. Optional for <code>gp3</code> 
     #         volumes. Omit for all other volume types. </p>
     #            <p>Valid ranges:</p>
     #            <ul>
@@ -14622,7 +14622,7 @@ module Aws::EC2
     #            <note>
     #               <p>
     #                  <a href="https://docs.aws.amazon.com/ec2/latest/instancetypes/ec2-nitro-instances.html">
-    #   Instances built on the Nitro System</a> can support up to 256,000 IOPS. Other instances can support up to 32,000
+    #   Instances built on the Nitro System</a> can support up to 256,000 IOPS. Other instances can support up to 32,000 
     #   IOPS.</p>
     #            </note>
     #   @return [Integer]
@@ -14645,18 +14645,18 @@ module Aws::EC2
     #                  <p>Alias ARN. For example, arn:aws:kms:us-east-1:012345678910:alias/ExampleAlias.</p>
     #               </li>
     #            </ul>
-    #            <p>Amazon Web Services authenticates the KMS key asynchronously. Therefore, if you specify an ID, alias, or ARN that is not valid,
+    #            <p>Amazon Web Services authenticates the KMS key asynchronously. Therefore, if you specify an ID, alias, or ARN that is not valid, 
     #         the action can appear to complete, but eventually fails.</p>
     #   @return [String]
     # @!attribute outpost_arn
     #   <p>The Amazon Resource Name (ARN) of the Outpost on which to create the volume.</p>
-    #            <p>If you intend to use a volume with an instance running on an outpost, then you must
-    #            create the volume on the same outpost as the instance. You can't use a volume created
+    #            <p>If you intend to use a volume with an instance running on an outpost, then you must 
+    #            create the volume on the same outpost as the instance. You can't use a volume created 
     #            in an Amazon Web Services Region with an instance on an Amazon Web Services outpost, or the other way around.</p>
     #   @return [String]
     # @!attribute size
     #   <p>The size of the volume, in GiBs. You must specify either a snapshot ID or a volume size.
-    #         If you specify a snapshot, the default is the snapshot size, and you can specify a volume size
+    #         If you specify a snapshot, the default is the snapshot size, and you can specify a volume size 
     #         that is equal to or larger than the snapshot size.</p>
     #            <p>Valid sizes:</p>
     #            <ul>
@@ -14719,36 +14719,36 @@ module Aws::EC2
     #   <p>The tags to apply to the volume during creation.</p>
     #   @return [Array<Types::TagSpecification>]
     # @!attribute multi_attach_enabled
-    #   <p>Indicates whether to enable Amazon EBS Multi-Attach. If you enable Multi-Attach, you can attach the
-    #         volume to up to 16 <a href="https://docs.aws.amazon.com/ec2/latest/instancetypes/ec2-nitro-instances.html">Instances built on the Nitro System</a> in the same Availability Zone. This parameter is
-    #       	supported with <code>io1</code> and <code>io2</code> volumes only. For more information,
+    #   <p>Indicates whether to enable Amazon EBS Multi-Attach. If you enable Multi-Attach, you can attach the 
+    #         volume to up to 16 <a href="https://docs.aws.amazon.com/ec2/latest/instancetypes/ec2-nitro-instances.html">Instances built on the Nitro System</a> in the same Availability Zone. This parameter is 
+    #       	supported with <code>io1</code> and <code>io2</code> volumes only. For more information, 
     #       	see <a href="https://docs.aws.amazon.com/ebs/latest/userguide/ebs-volumes-multi.html">
     #       		Amazon EBS Multi-Attach</a> in the <i>Amazon EBS User Guide</i>.</p>
     #   @return [Boolean]
     # @!attribute throughput
-    #   <p>The throughput to provision for the volume, in MiB/s. Supported for <code>gp3</code>
+    #   <p>The throughput to provision for the volume, in MiB/s. Supported for <code>gp3</code> 
     #         volumes only. Omit for all other volume types.</p>
     #            <p>Valid Range: <code>125 - 2000</code> MiB/s</p>
     #   @return [Integer]
     # @!attribute client_token
-    #   <p>Unique, case-sensitive identifier that you provide to ensure the idempotency
-    #         of the request. For more information, see <a href="https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html">Ensure
+    #   <p>Unique, case-sensitive identifier that you provide to ensure the idempotency 
+    #         of the request. For more information, see <a href="https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html">Ensure 
     #           Idempotency</a>.</p>
     #   @return [String]
     # @!attribute volume_initialization_rate
-    #   <p>Specifies the Amazon EBS Provisioned Rate for Volume Initialization (volume initialization rate), in MiB/s, at which to download
-    #         the snapshot blocks from Amazon S3 to the volume. This is also known as <i>volume
-    #           initialization</i>. Specifying a volume initialization rate ensures that the volume is
+    #   <p>Specifies the Amazon EBS Provisioned Rate for Volume Initialization (volume initialization rate), in MiB/s, at which to download 
+    #         the snapshot blocks from Amazon S3 to the volume. This is also known as <i>volume 
+    #           initialization</i>. Specifying a volume initialization rate ensures that the volume is 
     #         initialized at a predictable and consistent rate after creation.</p>
-    #            <p>This parameter is supported only for volumes created from snapshots. Omit this parameter
+    #            <p>This parameter is supported only for volumes created from snapshots. Omit this parameter 
     #         if:</p>
     #            <ul>
     #               <li>
-    #                  <p>You want to create the volume using fast snapshot restore. You must specify a snapshot
-    #             that is enabled for fast snapshot restore. In this case, the volume is fully initialized at
+    #                  <p>You want to create the volume using fast snapshot restore. You must specify a snapshot 
+    #             that is enabled for fast snapshot restore. In this case, the volume is fully initialized at 
     #             creation.</p>
     #                  <note>
-    #                     <p>If you specify a snapshot that is enabled for fast snapshot restore and a volume initialization rate,
+    #                     <p>If you specify a snapshot that is enabled for fast snapshot restore and a volume initialization rate, 
     #               the volume will be initialized at the specified rate instead of fast snapshot restore.</p>
     #                  </note>
     #               </li>
@@ -14764,8 +14764,8 @@ module Aws::EC2
     #   <p>Reserved for internal use.</p>
     #   @return [Types::OperatorRequest]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class CreateVolumeRequest < Struct.new(
@@ -14792,8 +14792,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute subnet_id
@@ -14844,8 +14844,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute vpc_id
@@ -14876,8 +14876,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute service_id
@@ -14929,8 +14929,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute vpc_endpoint_type
@@ -15064,8 +15064,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute acceptance_required
@@ -15136,8 +15136,8 @@ module Aws::EC2
     #   <p>The tags to assign to the peering connection.</p>
     #   @return [Array<Types::TagSpecification>]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute vpc_id
@@ -15189,7 +15189,7 @@ module Aws::EC2
     #   @return [String]
     # @!attribute ipv4_ipam_pool_id
     #   <p>The ID of an IPv4 IPAM pool you want to use for allocating this VPC's CIDR. For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/ipam/what-is-it-ipam.html">What is IPAM?</a> in the <i>Amazon VPC IPAM User Guide</i>.
-    #
+    #            
     #         </p>
     #   @return [String]
     # @!attribute ipv4_netmask_length
@@ -15213,8 +15213,8 @@ module Aws::EC2
     #   <p>The tags to assign to the VPC.</p>
     #   @return [Array<Types::TagSpecification>]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute instance_tenancy
@@ -15273,8 +15273,8 @@ module Aws::EC2
     #   <p>The tags to apply to the VPN concentrator during creation.</p>
     #   @return [Array<Types::TagSpecification>]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class CreateVpnConcentratorRequest < Struct.new(
@@ -15537,7 +15537,7 @@ module Aws::EC2
     #   @return [String]
     # @!attribute ip_address
     #   <p>
-    #               The IP address for the customer gateway device's outside interface. The address must be static. If <code>OutsideIpAddressType</code> in your VPN connection options is set to <code>PrivateIpv4</code>, you can use an RFC6598 or RFC1918 private IPv4 address. If
+    #               The IP address for the customer gateway device's outside interface. The address must be static. If <code>OutsideIpAddressType</code> in your VPN connection options is set to <code>PrivateIpv4</code>, you can use an RFC6598 or RFC1918 private IPv4 address. If 
     #               <code>OutsideIpAddressType</code> is set to <code>PublicIpv4</code>, you can use a public IPv4 address. If <code>OutsideIpAddressType</code> is set to <code>Ipv6</code>, you can use a public IPv6 address.
     #           </p>
     #   @return [String]
@@ -15577,8 +15577,8 @@ module Aws::EC2
     #   <p>The metric used for the network performance request.</p>
     #   @return [String]
     # @!attribute statistic
-    #   <p>The metric data aggregation period, <code>p50</code>, between the specified <code>startDate</code>
-    #            and <code>endDate</code>. For example, a metric of <code>five_minutes</code> is the median of all
+    #   <p>The metric data aggregation period, <code>p50</code>, between the specified <code>startDate</code> 
+    #            and <code>endDate</code>. For example, a metric of <code>five_minutes</code> is the median of all 
     #            the data points gathered within those five minutes. <code>p50</code> is the only supported metric.</p>
     #   @return [String]
     # @!attribute period
@@ -15719,8 +15719,8 @@ module Aws::EC2
     #   <p>A unique, case-sensitive identifier that you provide to ensure that the operation completes no more than one time. If you retry a request with the same token, the service ignores the request but does not return an error. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html">Ensuring idempotency</a>.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the operation, without actually making the
-    #     request, and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the operation, without actually making the 
+    #     request, and provides an error response. If you have the required permissions, the error response is 
     #     <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DeleteApplicationStatusCheckRequest < Struct.new(
@@ -15751,7 +15751,7 @@ module Aws::EC2
     #   @return [String]
     # @!attribute dry_run
     #   <p>
-    #   Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.
+    #   Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. 
     #   If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.
     #   </p>
     #   @return [Boolean]
@@ -15781,8 +15781,8 @@ module Aws::EC2
     #   <p>The ID of the carrier gateway.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DeleteCarrierGatewayRequest < Struct.new(
@@ -15896,12 +15896,12 @@ module Aws::EC2
     #   @return [String]
     # @!attribute coip_pool_id
     #   <p>
-    #           The ID of the customer-owned address pool.
+    #           The ID of the customer-owned address pool. 
     #         </p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DeleteCoipCidrRequest < Struct.new(
@@ -15931,8 +15931,8 @@ module Aws::EC2
     #   <p>The ID of the CoIP pool that you want to delete. </p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DeleteCoipPoolRequest < Struct.new(
@@ -15978,8 +15978,8 @@ module Aws::EC2
     #   <p>The ID of the DHCP options set.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DeleteDhcpOptionsRequest < Struct.new(
@@ -15992,8 +15992,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute egress_only_internet_gateway_id
@@ -16072,8 +16072,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute fleet_ids
@@ -16116,8 +16116,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute flow_log_ids
@@ -16145,8 +16145,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute fpga_image_id
@@ -16176,8 +16176,8 @@ module Aws::EC2
     #   <p>The ID of the report to delete.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #   			and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #   			and provides an error response. If you have the required permissions, the error response is 
     #   			<code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DeleteImageUsageReportRequest < Struct.new(
@@ -16201,8 +16201,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #               and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #               and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #               Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute instance_connect_endpoint_id
@@ -16229,8 +16229,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute force_delete
@@ -16262,8 +16262,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute internet_gateway_id
@@ -16279,8 +16279,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute ipam_external_resource_verification_token_id
@@ -16333,8 +16333,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute ipam_policy_id
@@ -16362,8 +16362,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute ipam_pool_id
@@ -16398,8 +16398,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute ipam_prefix_list_resolver_id
@@ -16426,8 +16426,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute ipam_prefix_list_resolver_target_id
@@ -16454,8 +16454,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute ipam_id
@@ -16496,8 +16496,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute ipam_resource_discovery_id
@@ -16573,8 +16573,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute ipam_scope_id
@@ -16607,8 +16607,8 @@ module Aws::EC2
     #   <p>The ID of the key pair.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DeleteKeyPairRequest < Struct.new(
@@ -16770,13 +16770,13 @@ module Aws::EC2
     #   <p>The ID of the local gateway route table.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute destination_prefix_list_id
     #   <p>
-    #            Use a prefix list in place of <code>DestinationCidrBlock</code>. You cannot use
+    #            Use a prefix list in place of <code>DestinationCidrBlock</code>. You cannot use 
     #            <code>DestinationPrefixListId</code> and <code>DestinationCidrBlock</code> in the same request.
     #         </p>
     #   @return [String]
@@ -16808,8 +16808,8 @@ module Aws::EC2
     #         </p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DeleteLocalGatewayRouteTableRequest < Struct.new(
@@ -16838,8 +16838,8 @@ module Aws::EC2
     #         </p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DeleteLocalGatewayRouteTableVirtualInterfaceGroupAssociationRequest < Struct.new(
@@ -16866,8 +16866,8 @@ module Aws::EC2
     #   <p>The ID of the association.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DeleteLocalGatewayRouteTableVpcAssociationRequest < Struct.new(
@@ -16894,8 +16894,8 @@ module Aws::EC2
     #   <p>The ID of the local gateway virtual interface group to delete.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DeleteLocalGatewayVirtualInterfaceGroupRequest < Struct.new(
@@ -16922,8 +16922,8 @@ module Aws::EC2
     #   <p>The ID of the local virtual interface to delete.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DeleteLocalGatewayVirtualInterfaceRequest < Struct.new(
@@ -16947,8 +16947,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute prefix_list_id
@@ -16975,8 +16975,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute nat_gateway_id
@@ -17003,8 +17003,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute network_acl_id
@@ -17028,8 +17028,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute network_acl_id
@@ -17048,8 +17048,8 @@ module Aws::EC2
     #   <p>The ID of the Network Access Scope analysis.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DeleteNetworkInsightsAccessScopeAnalysisRequest < Struct.new(
@@ -17073,8 +17073,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute network_insights_access_scope_id
@@ -17101,8 +17101,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute network_insights_analysis_id
@@ -17129,8 +17129,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute network_insights_path_id
@@ -17212,8 +17212,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the operation, without actually making the
-    #     request, and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the operation, without actually making the 
+    #     request, and provides an error response. If you have the required permissions, the error response is 
     #     <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute group_name
@@ -17229,8 +17229,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute pool_id
@@ -17314,8 +17314,8 @@ module Aws::EC2
     #   <p>The ID of the prefix list for the route.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute route_table_id
@@ -17343,8 +17343,8 @@ module Aws::EC2
     #   <p>The ID of the route server endpoint to delete.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DeleteRouteServerEndpointRequest < Struct.new(
@@ -17371,8 +17371,8 @@ module Aws::EC2
     #   <p>The ID of the route server peer to delete.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DeleteRouteServerPeerRequest < Struct.new(
@@ -17399,8 +17399,8 @@ module Aws::EC2
     #   <p>The ID of the route server to delete.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DeleteRouteServerRequest < Struct.new(
@@ -17424,8 +17424,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute route_table_id
@@ -17517,8 +17517,8 @@ module Aws::EC2
     #               you must specify the security group ID.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DeleteSecurityGroupRequest < Struct.new(
@@ -17550,8 +17550,8 @@ module Aws::EC2
     #   <p>The ID of the EBS snapshot.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DeleteSnapshotRequest < Struct.new(
@@ -17628,8 +17628,8 @@ module Aws::EC2
     #   <p>The ID of the subnet CIDR reservation.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DeleteSubnetCidrReservationRequest < Struct.new(
@@ -17656,8 +17656,8 @@ module Aws::EC2
     #   <p>The ID of the subnet.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DeleteSubnetRequest < Struct.new(
@@ -17670,8 +17670,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute resources
@@ -17702,8 +17702,8 @@ module Aws::EC2
     #   <p>The ID of the Traffic Mirror filter.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DeleteTrafficMirrorFilterRequest < Struct.new(
@@ -17730,8 +17730,8 @@ module Aws::EC2
     #   <p>The ID of the Traffic Mirror rule.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DeleteTrafficMirrorFilterRuleRequest < Struct.new(
@@ -17758,8 +17758,8 @@ module Aws::EC2
     #   <p>The ID of the Traffic Mirror session.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DeleteTrafficMirrorSessionRequest < Struct.new(
@@ -17786,8 +17786,8 @@ module Aws::EC2
     #   <p>The ID of the Traffic Mirror target.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DeleteTrafficMirrorTargetRequest < Struct.new(
@@ -17840,8 +17840,8 @@ module Aws::EC2
     #   <p>The ID of the Connect peer.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DeleteTransitGatewayConnectPeerRequest < Struct.new(
@@ -17868,8 +17868,8 @@ module Aws::EC2
     #   <p>The ID of the Connect attachment.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DeleteTransitGatewayConnectRequest < Struct.new(
@@ -17899,8 +17899,8 @@ module Aws::EC2
     #   <p>The rule number of the metering policy entry to delete.</p>
     #   @return [Integer]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DeleteTransitGatewayMeteringPolicyEntryRequest < Struct.new(
@@ -17928,8 +17928,8 @@ module Aws::EC2
     #   <p>The ID of the transit gateway metering policy to delete.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DeleteTransitGatewayMeteringPolicyRequest < Struct.new(
@@ -17956,8 +17956,8 @@ module Aws::EC2
     #   <p>The ID of the transit gateway multicast domain.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DeleteTransitGatewayMulticastDomainRequest < Struct.new(
@@ -17984,8 +17984,8 @@ module Aws::EC2
     #   <p>The ID of the transit gateway peering attachment.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DeleteTransitGatewayPeeringAttachmentRequest < Struct.new(
@@ -18015,8 +18015,8 @@ module Aws::EC2
     #   <p>The rule number of the policy table entry to delete.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DeleteTransitGatewayPolicyTableEntryRequest < Struct.new(
@@ -18044,8 +18044,8 @@ module Aws::EC2
     #   <p>The transit gateway policy table to delete.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DeleteTransitGatewayPolicyTableRequest < Struct.new(
@@ -18075,8 +18075,8 @@ module Aws::EC2
     #   <p>The ID of the prefix list.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DeleteTransitGatewayPrefixListReferenceRequest < Struct.new(
@@ -18104,8 +18104,8 @@ module Aws::EC2
     #   <p>The ID of the transit gateway.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DeleteTransitGatewayRequest < Struct.new(
@@ -18135,8 +18135,8 @@ module Aws::EC2
     #   <p>The CIDR range for the route. This must match the CIDR for the route exactly.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DeleteTransitGatewayRouteRequest < Struct.new(
@@ -18164,8 +18164,8 @@ module Aws::EC2
     #   <p>The transit gateway route table ID that's being deleted. </p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DeleteTransitGatewayRouteTableAnnouncementRequest < Struct.new(
@@ -18192,8 +18192,8 @@ module Aws::EC2
     #   <p>The ID of the transit gateway route table.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DeleteTransitGatewayRouteTableRequest < Struct.new(
@@ -18220,8 +18220,8 @@ module Aws::EC2
     #   <p>The ID of the attachment.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DeleteTransitGatewayVpcAttachmentRequest < Struct.new(
@@ -18252,8 +18252,8 @@ module Aws::EC2
     #               modification request. For more information, see <a href="https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html">Ensuring idempotency</a>.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DeleteVerifiedAccessEndpointRequest < Struct.new(
@@ -18285,8 +18285,8 @@ module Aws::EC2
     #               modification request. For more information, see <a href="https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html">Ensuring idempotency</a>.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DeleteVerifiedAccessGroupRequest < Struct.new(
@@ -18314,8 +18314,8 @@ module Aws::EC2
     #   <p>The ID of the Verified Access instance.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute client_token
@@ -18347,8 +18347,8 @@ module Aws::EC2
     #   <p>The ID of the Verified Access trust provider.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute client_token
@@ -18380,8 +18380,8 @@ module Aws::EC2
     #   <p>The ID of the volume.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DeleteVolumeRequest < Struct.new(
@@ -18394,8 +18394,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute exclusion_id
@@ -18422,8 +18422,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute vpc_encryption_control_id
@@ -18450,8 +18450,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute connection_notification_ids
@@ -18479,8 +18479,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute service_ids
@@ -18508,8 +18508,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute vpc_endpoint_ids
@@ -18536,8 +18536,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute vpc_peering_connection_id
@@ -18567,8 +18567,8 @@ module Aws::EC2
     #   <p>The ID of the VPC.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DeleteVpcRequest < Struct.new(
@@ -18584,8 +18584,8 @@ module Aws::EC2
     #   <p>The ID of the VPN concentrator to delete.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DeleteVpnConcentratorRequest < Struct.new(
@@ -18689,12 +18689,12 @@ module Aws::EC2
     end
 
     # @!attribute cidr
-    #   <p>The address range, in CIDR notation. The prefix must be the same prefix
+    #   <p>The address range, in CIDR notation. The prefix must be the same prefix 
     #            that you specified when you provisioned the address range.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DeprovisionByoipCidrRequest < Struct.new(
@@ -18718,8 +18718,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute ipam_id
@@ -18750,8 +18750,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute ipam_pool_id
@@ -18782,8 +18782,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute pool_id
@@ -18830,8 +18830,8 @@ module Aws::EC2
     #            <p>Default: The snapshots are not deleted.</p>
     #   @return [Boolean]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #   			and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #   			and provides an error response. If you have the required permissions, the error response is 
     #   			<code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DeregisterImageRequest < Struct.new(
@@ -18861,8 +18861,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute instance_tag_attribute
@@ -18918,8 +18918,8 @@ module Aws::EC2
     #   <p>The IDs of the group members' network interfaces.</p>
     #   @return [Array<String>]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DeregisterTransitGatewayMulticastGroupMembersRequest < Struct.new(
@@ -18954,8 +18954,8 @@ module Aws::EC2
     #   <p>The IDs of the group sources' network interfaces.</p>
     #   @return [Array<String>]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DeregisterTransitGatewayMulticastGroupSourcesRequest < Struct.new(
@@ -18981,8 +18981,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #              and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #              and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #              Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute attribute_names
@@ -19009,8 +19009,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DescribeAccountVpcEncryptionControlRequest < Struct.new(
@@ -19042,8 +19042,8 @@ module Aws::EC2
     #   <p>The maximum number of address transfers to return in one page of results.</p>
     #   @return [Integer]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DescribeAddressTransfersRequest < Struct.new(
@@ -19085,8 +19085,8 @@ module Aws::EC2
     #   <p>The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.</p>
     #   @return [Integer]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DescribeAddressesAttributeRequest < Struct.new(
@@ -19121,8 +19121,8 @@ module Aws::EC2
     #            <p>Default: Describes all your Elastic IP addresses.</p>
     #   @return [Array<String>]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute filters
@@ -19198,8 +19198,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DescribeAggregateIdFormatRequest < Struct.new(
@@ -19248,8 +19248,8 @@ module Aws::EC2
     #   <p>The token returned from a previous paginated request. Pagination continues from the end of the items returned by the previous request.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the operation, without actually making the
-    #     request, and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the operation, without actually making the 
+    #     request, and provides an error response. If you have the required permissions, the error response is 
     #     <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DescribeApplicationStatusCheckAssociationsRequest < Struct.new(
@@ -19308,8 +19308,8 @@ module Aws::EC2
     #   <p>Specifies whether to include recently deleted application status checks that remain available during the deletion grace period. If you omit this parameter or set it to <code>false</code>, the response includes only active checks.</p>
     #   @return [Boolean]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the operation, without actually making the
-    #     request, and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the operation, without actually making the 
+    #     request, and provides an error response. If you have the required permissions, the error response is 
     #     <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DescribeApplicationStatusChecksRequest < Struct.new(
@@ -19366,8 +19366,8 @@ module Aws::EC2
     #   <p>The token returned from a previous paginated request. Pagination continues from the end of the items returned by the previous request.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the operation, without actually making the
-    #     request, and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the operation, without actually making the 
+    #     request, and provides an error response. If you have the required permissions, the error response is 
     #     <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DescribeApplicationStatusRequest < Struct.new(
@@ -19410,8 +19410,8 @@ module Aws::EC2
     #            <p>If you do not use this parameter, the results include only the zones for the Regions where you have chosen the option to opt in.</p>
     #   @return [Boolean]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute filters
@@ -19473,7 +19473,7 @@ module Aws::EC2
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>zone-type</code> - The type of zone (<code>availability-zone</code> |
+    #                     <code>zone-type</code> - The type of zone (<code>availability-zone</code> | 
     #             <code>local-zone</code> | <code>wavelength-zone</code>).</p>
     #               </li>
     #            </ul>
@@ -19512,8 +19512,8 @@ module Aws::EC2
     #   <p>One or more filters.</p>
     #   @return [Array<Types::Filter>]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DescribeAwsNetworkPerformanceMetricSubscriptionsRequest < Struct.new(
@@ -19547,8 +19547,8 @@ module Aws::EC2
     #            <p>Default: Describes all your bundle tasks.</p>
     #   @return [Array<String>]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #   			and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #   			and provides an error response. If you have the required permissions, the error response is 
     #   			<code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute filters
@@ -19622,8 +19622,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute max_results
@@ -19666,7 +19666,7 @@ module Aws::EC2
     #   <p>The token to use to retrieve the next page of results.</p>
     #   @return [String]
     # @!attribute max_results
-    #   <p>The maximum number of items to return for this request. To get the next page of items, make another request with the token returned in the output. For more information,
+    #   <p>The maximum number of items to return for this request. To get the next page of items, make another request with the token returned in the output. For more information, 
     #       see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination">Pagination</a>.</p>
     #   @return [Integer]
     # @!attribute filters
@@ -19748,7 +19748,7 @@ module Aws::EC2
     #   <p>The token to use to retrieve the next page of results.</p>
     #   @return [String]
     # @!attribute max_results
-    #   <p>The maximum number of items to return for this request. To get the next page of items, make another request with the token returned in the output. For more information,
+    #   <p>The maximum number of items to return for this request. To get the next page of items, make another request with the token returned in the output. For more information, 
     #       see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination">Pagination</a>.</p>
     #   @return [Integer]
     class DescribeCapacityBlockExtensionOfferingsRequest < Struct.new(
@@ -19802,7 +19802,7 @@ module Aws::EC2
     #   <p>The token to use to retrieve the next page of results.</p>
     #   @return [String]
     # @!attribute max_results
-    #   <p>The maximum number of items to return for this request. To get the next page of items, make another request with the token returned in the output. For more information,
+    #   <p>The maximum number of items to return for this request. To get the next page of items, make another request with the token returned in the output. For more information, 
     #       see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination">Pagination</a>.</p>
     #   @return [Integer]
     # @!attribute ultraserver_type
@@ -19858,7 +19858,7 @@ module Aws::EC2
     #   <p>The token to use to retrieve the next page of results.</p>
     #   @return [String]
     # @!attribute max_results
-    #   <p>The maximum number of items to return for this request. To get the next page of items, make another request with the token returned in the output. For more information,
+    #   <p>The maximum number of items to return for this request. To get the next page of items, make another request with the token returned in the output. For more information, 
     #       see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination">Pagination</a>.</p>
     #   @return [Integer]
     # @!attribute filters
@@ -19907,7 +19907,7 @@ module Aws::EC2
     #   <p>The token to use to retrieve the next page of results.</p>
     #   @return [String]
     # @!attribute max_results
-    #   <p>The maximum number of items to return for this request. To get the next page of items, make another request with the token returned in the output. For more information,
+    #   <p>The maximum number of items to return for this request. To get the next page of items, make another request with the token returned in the output. For more information, 
     #       see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination">Pagination</a>.</p>
     #   @return [Integer]
     # @!attribute filters
@@ -19945,9 +19945,9 @@ module Aws::EC2
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>state</code> - The state of the Capacity Block (<code>active</code> |
-    #   					<code>expired</code> | <code>unavailable</code> | <code>cancelled</code> |
-    #   					<code>failed</code> | <code>scheduled</code> | <code>payment-pending</code> |
+    #                     <code>state</code> - The state of the Capacity Block (<code>active</code> | 
+    #   					<code>expired</code> | <code>unavailable</code> | <code>cancelled</code> | 
+    #   					<code>failed</code> | <code>scheduled</code> | <code>payment-pending</code> | 
     #   					<code>payment-failed</code>).</p>
     #               </li>
     #               <li>
@@ -20003,7 +20003,7 @@ module Aws::EC2
     #   @return [String]
     # @!attribute dry_run
     #   <p>
-    #   Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.
+    #   Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. 
     #   If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.
     #   </p>
     #   @return [Boolean]
@@ -20067,7 +20067,7 @@ module Aws::EC2
     #   <p>The token to use to retrieve the next page of results.</p>
     #   @return [String]
     # @!attribute max_results
-    #   <p>The maximum number of items to return for this request. To get the next page of items, make another request with the token returned in the output. For more information,
+    #   <p>The maximum number of items to return for this request. To get the next page of items, make another request with the token returned in the output. For more information, 
     #       see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination">Pagination</a>.</p>
     #   @return [Integer]
     # @!attribute filters
@@ -20128,7 +20128,7 @@ module Aws::EC2
     #   <p>The IDs of the cancellation quotes to describe.</p>
     #   @return [Array<String>]
     # @!attribute max_results
-    #   <p>The maximum number of items to return for this request. To get the next page of items, make another request with the token returned in the output. For more information,
+    #   <p>The maximum number of items to return for this request. To get the next page of items, make another request with the token returned in the output. For more information, 
     #       see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination">Pagination</a>.</p>
     #   @return [Integer]
     # @!attribute next_token
@@ -20171,7 +20171,7 @@ module Aws::EC2
     #   <p>The IDs of the date change quotes to describe.</p>
     #   @return [Array<String>]
     # @!attribute max_results
-    #   <p>The maximum number of items to return for this request. To get the next page of items, make another request with the token returned in the output. For more information,
+    #   <p>The maximum number of items to return for this request. To get the next page of items, make another request with the token returned in the output. For more information, 
     #       see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination">Pagination</a>.</p>
     #   @return [Integer]
     # @!attribute next_token
@@ -20217,7 +20217,7 @@ module Aws::EC2
     #   <p>The token to use to retrieve the next page of results.</p>
     #   @return [String]
     # @!attribute max_results
-    #   <p>The maximum number of items to return for this request. To get the next page of items, make another request with the token returned in the output. For more information,
+    #   <p>The maximum number of items to return for this request. To get the next page of items, make another request with the token returned in the output. For more information, 
     #       see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination">Pagination</a>.</p>
     #   @return [Integer]
     # @!attribute filters
@@ -20279,8 +20279,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the operation, without actually making the
-    #     request, and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the operation, without actually making the 
+    #     request, and provides an error response. If you have the required permissions, the error response is 
     #     <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute next_token
@@ -20354,7 +20354,7 @@ module Aws::EC2
     #   <p>The token to use to retrieve the next page of results.</p>
     #   @return [String]
     # @!attribute max_results
-    #   <p>The maximum number of items to return for this request. To get the next page of items, make another request with the token returned in the output. For more information,
+    #   <p>The maximum number of items to return for this request. To get the next page of items, make another request with the token returned in the output. For more information, 
     #       see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination">Pagination</a>.</p>
     #   @return [Integer]
     # @!attribute filters
@@ -20569,8 +20569,8 @@ module Aws::EC2
     #   <p>The token for the next page of results.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DescribeCarrierGatewaysRequest < Struct.new(
@@ -20601,8 +20601,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute instance_ids
@@ -20973,8 +20973,8 @@ module Aws::EC2
     #   <p>The token for the next page of results.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DescribeCoipPoolsRequest < Struct.new(
@@ -21005,8 +21005,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute conversion_task_ids
@@ -21105,8 +21105,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute next_token
@@ -21158,8 +21158,8 @@ module Aws::EC2
     #   	For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination">Pagination</a>.</p>
     #   @return [Integer]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute filters
@@ -21220,8 +21220,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute egress_only_internet_gateway_ids
@@ -21280,8 +21280,8 @@ module Aws::EC2
     #   <p>The Elastic Graphics accelerator IDs.</p>
     #   @return [Array<String>]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #               and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #               and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #               Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute filters
@@ -21357,8 +21357,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute filters
@@ -21457,8 +21457,8 @@ module Aws::EC2
     #   <p>The token returned from a previous paginated request. Pagination continues from the end of the items returned by the previous request.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #   			and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #   			and provides an error response. If you have the required permissions, the error response is 
     #   			<code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DescribeFastLaunchImagesRequest < Struct.new(
@@ -21563,7 +21563,7 @@ module Aws::EC2
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>Client.UserInitiated - Lifecycle state transition</code> - The state successfully transitioned
+    #                     <code>Client.UserInitiated - Lifecycle state transition</code> - The state successfully transitioned 
     #             to <code>optimizing</code>, <code>enabled</code>, or <code>disabled</code>.</p>
     #               </li>
     #            </ul>
@@ -21629,18 +21629,18 @@ module Aws::EC2
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>state</code>: The state of fast snapshot restores for the snapshot
-    #            (<code>enabling</code> |
-    #             <code>optimizing</code> |
-    #             <code>enabled</code> |
-    #             <code>disabling</code> |
+    #                     <code>state</code>: The state of fast snapshot restores for the snapshot 
+    #            (<code>enabling</code> | 
+    #             <code>optimizing</code> | 
+    #             <code>enabled</code> | 
+    #             <code>disabling</code> | 
     #             <code>disabled</code>).</p>
     #               </li>
     #            </ul>
     #   @return [Array<Types::Filter>]
     # @!attribute max_results
     #   <p>The maximum number of items to return for this request.
-    #   	To get the next page of items, make another request with the token returned in the output.
+    #   	To get the next page of items, make another request with the token returned in the output. 
     #   	For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination">Pagination</a>.</p>
     #   @return [Integer]
     # @!attribute next_token
@@ -21648,8 +21648,8 @@ module Aws::EC2
     #     Pagination continues from the end of the items returned by the previous request.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DescribeFastSnapshotRestoresRequest < Struct.new(
@@ -21667,7 +21667,7 @@ module Aws::EC2
     #   <p>Information about the state of fast snapshot restores.</p>
     #   @return [Array<Types::DescribeFastSnapshotRestoreSuccessItem>]
     # @!attribute next_token
-    #   <p>The token to include in another request to get the next page of items.
+    #   <p>The token to include in another request to get the next page of items. 
     #     This value is <code>null</code> when there are no more items to return.</p>
     #   @return [String]
     class DescribeFastSnapshotRestoresResult < Struct.new(
@@ -21710,8 +21710,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute event_type
@@ -21779,8 +21779,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute max_results
@@ -21868,8 +21868,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute max_results
@@ -21950,8 +21950,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute filter
@@ -22036,8 +22036,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute fpga_image_id
@@ -22068,16 +22068,16 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute fpga_image_ids
     #   <p>The AFI IDs.</p>
     #   @return [Array<String>]
     # @!attribute owners
-    #   <p>Filters the AFI by owner. Specify an Amazon Web Services account ID, <code>self</code>
-    #   			(owner is the sender of the request), or an Amazon Web Services owner alias (valid values are
+    #   <p>Filters the AFI by owner. Specify an Amazon Web Services account ID, <code>self</code> 
+    #   			(owner is the sender of the request), or an Amazon Web Services owner alias (valid values are 
     #   			<code>amazon</code> | <code>aws-marketplace</code>).</p>
     #   @return [Array<String>]
     # @!attribute filters
@@ -22390,7 +22390,7 @@ module Aws::EC2
     #   @return [Array<Types::Filter>]
     # @!attribute max_results
     #   <p>The maximum number of items to return for this request. To get the next page of
-    #               items, make another request with the token returned in the output. For more information,
+    #               items, make another request with the token returned in the output. For more information, 
     #               see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination">Pagination</a>.</p>
     #   @return [Integer]
     # @!attribute next_token
@@ -22412,7 +22412,7 @@ module Aws::EC2
     #   <p>Information about the IAM instance profile associations.</p>
     #   @return [Array<Types::IamInstanceProfileAssociation>]
     # @!attribute next_token
-    #   <p>The token to include in another request to get the next page of items.
+    #   <p>The token to include in another request to get the next page of items. 
     #               This value is <code>null</code> when there are no more items to return.</p>
     #   @return [String]
     class DescribeIamInstanceProfileAssociationsResult < Struct.new(
@@ -22589,8 +22589,8 @@ module Aws::EC2
     #   <p>The ID of the AMI.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #   			and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #   			and provides an error response. If you have the required permissions, the error response is 
     #   			<code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DescribeImageAttributeRequest < Struct.new(
@@ -22629,8 +22629,8 @@ module Aws::EC2
     #   <p>The token returned from a previous paginated request. Pagination continues from the end of the items returned by the previous request.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #   			and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #   			and provides an error response. If you have the required permissions, the error response is 
     #   			<code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute max_results
@@ -22701,8 +22701,8 @@ module Aws::EC2
     #            </ul>
     #   @return [Array<Types::Filter>]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #   			and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #   			and provides an error response. If you have the required permissions, the error response is 
     #   			<code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute max_results
@@ -22776,8 +22776,8 @@ module Aws::EC2
     #            </ul>
     #   @return [Array<Types::Filter>]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #   			and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #   			and provides an error response. If you have the required permissions, the error response is 
     #   			<code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute max_results
@@ -22866,8 +22866,8 @@ module Aws::EC2
     #   <p>The token returned from a previous paginated request. Pagination continues from the end of the items returned by the previous request.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #   			and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #   			and provides an error response. If you have the required permissions, the error response is 
     #   			<code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute filters
@@ -23152,8 +23152,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute filters
@@ -23199,8 +23199,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute filters
@@ -23250,7 +23250,7 @@ module Aws::EC2
     #   <p>The block device mapping of the instance.</p>
     #   @return [Array<Types::InstanceBlockDeviceMapping>]
     # @!attribute disable_api_termination
-    #   <p>Indicates whether termination protection is enabled. If the value is <code>true</code>,
+    #   <p>Indicates whether termination protection is enabled. If the value is <code>true</code>, 
     #               you can't terminate the instance using the Amazon EC2 console, command line tools, or API.</p>
     #   @return [Types::AttributeBooleanValue]
     # @!attribute ena_support
@@ -23326,8 +23326,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the operation, without actually making the
-    #     request, and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the operation, without actually making the 
+    #     request, and provides an error response. If you have the required permissions, the error response is 
     #     <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute instance_id
@@ -23348,8 +23348,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #               and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #               and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #               Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute max_results
@@ -23369,7 +23369,7 @@ module Aws::EC2
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>state</code> - The state of the EC2 Instance Connect Endpoint (<code>create-in-progress</code> | <code>create-complete</code> | <code>create-failed</code> |
+    #                     <code>state</code> - The state of the EC2 Instance Connect Endpoint (<code>create-in-progress</code> | <code>create-complete</code> | <code>create-failed</code> | 
     #                       <code>delete-in-progress</code> | <code>delete-complete</code> | <code>delete-failed</code>).</p>
     #               </li>
     #               <li>
@@ -23388,7 +23388,7 @@ module Aws::EC2
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>tag-value</code> - The value of a tag assigned to the resource. Use this filter to find all resources
+    #                     <code>tag-value</code> - The value of a tag assigned to the resource. Use this filter to find all resources 
     #                       that have a tag with a specific value, regardless of tag key.</p>
     #               </li>
     #               <li>
@@ -23430,8 +23430,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the operation, without actually making the
-    #     request, and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the operation, without actually making the 
+    #     request, and provides an error response. If you have the required permissions, the error response is 
     #     <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute filters
@@ -23487,8 +23487,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DescribeInstanceEventNotificationAttributesRequest < Struct.new(
@@ -23512,8 +23512,8 @@ module Aws::EC2
 
     # <p>Describe instance event windows by InstanceEventWindow.</p>
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute instance_event_window_ids
@@ -23692,8 +23692,8 @@ module Aws::EC2
     #   <p>The token returned from a previous paginated request. Pagination continues from the end of the items returned by the previous request.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #   			and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #   			and provides an error response. If you have the required permissions, the error response is 
     #   			<code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DescribeInstanceImageMetadataRequest < Struct.new(
@@ -23725,19 +23725,19 @@ module Aws::EC2
     end
 
     # @!attribute instance_ids
-    #   <p>The IDs of the SQL Server High Availability instances to describe. If omitted, the API returns
+    #   <p>The IDs of the SQL Server High Availability instances to describe. If omitted, the API returns 
     #         historical states for all SQL Server High Availability instances.</p>
     #   @return [Array<String>]
     # @!attribute start_time
-    #   <p>The start data and time of the period for which to get the historical
+    #   <p>The start data and time of the period for which to get the historical 
     #         SQL Server High Availability states. If omitted, the API returns all available historical states.</p>
     #            <p>Timezone: UTC</p>
     #            <p>Format: <code>YYYY-MM-DDThh:mm:ss.sssZ</code>
     #            </p>
     #   @return [Time]
     # @!attribute end_time
-    #   <p>The end data and time of the period for which to get historical SQL Server High Availability
-    #         states. If omitted, the API returns historical states up to the current
+    #   <p>The end data and time of the period for which to get historical SQL Server High Availability 
+    #         states. If omitted, the API returns historical states up to the current 
     #         date and time.</p>
     #            <p>Timezone: UTC</p>
     #            <p>Format: <code>YYYY-MM-DDThh:mm:ss.sssZ</code>
@@ -23747,18 +23747,18 @@ module Aws::EC2
     #   <p>The token to use to retrieve the next page of results.</p>
     #   @return [String]
     # @!attribute max_results
-    #   <p>The maximum number of results to return for the request in a
-    #       single page. The remaining results can be seen by sending another request with the
+    #   <p>The maximum number of results to return for the request in a 
+    #       single page. The remaining results can be seen by sending another request with the 
     #       returned <code>nextToken</code> value.</p>
     #   @return [Integer]
     # @!attribute filters
-    #   <p>One or more filters to apply to the results. Supported filters
+    #   <p>One or more filters to apply to the results. Supported filters 
     #       include:</p>
     #            <ul>
     #               <li>
     #                  <p>
-    #                     <code>tag:<key></code> - The tag key and value pair assigned to the
-    #     instance. For example, to find all instances tagged with <code>Owner:TeamA</code>, specify
+    #                     <code>tag:<key></code> - The tag key and value pair assigned to the 
+    #     instance. For example, to find all instances tagged with <code>Owner:TeamA</code>, specify 
     #     <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p>
     #               </li>
     #               <li>
@@ -23767,20 +23767,20 @@ module Aws::EC2
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>haStatus</code> - The SQL Server High Availability status of the SQL Server High Availability instance (<code>processing</code> |
+    #                     <code>haStatus</code> - The SQL Server High Availability status of the SQL Server High Availability instance (<code>processing</code> | 
     #         <code>active</code> | <code>standby</code> | <code>invalid</code>).</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>sqlServerLicenseUsage</code> - The license type for the SQL Server license
+    #                     <code>sqlServerLicenseUsage</code> - The license type for the SQL Server license 
     #         (<code>full</code> | <code>waived</code>).</p>
     #               </li>
     #            </ul>
     #   @return [Array<Types::Filter>]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action,
-    #       without actually making the request, and provides an error response. If you have the
-    #       required permissions, the error response is <code>DryRunOperation</code>. Otherwise,
+    #   <p>Checks whether you have the required permissions for the action, 
+    #       without actually making the request, and provides an error response. If you have the 
+    #       required permissions, the error response is <code>DryRunOperation</code>. Otherwise, 
     #       it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DescribeInstanceSqlHaHistoryStatesRequest < Struct.new(
@@ -23801,7 +23801,7 @@ module Aws::EC2
     #   <p>Information about the historical SQL Server High Availability states of the SQL Server High Availability instances.</p>
     #   @return [Array<Types::RegisteredInstance>]
     # @!attribute next_token
-    #   <p>The token to use to retrieve the next page of results.
+    #   <p>The token to use to retrieve the next page of results. 
     #       This value is <code>null</code> when there are no more results to return.</p>
     #   @return [String]
     class DescribeInstanceSqlHaHistoryStatesResult < Struct.new(
@@ -23814,25 +23814,25 @@ module Aws::EC2
     end
 
     # @!attribute instance_ids
-    #   <p>The IDs of the SQL Server High Availability instances to describe. If omitted, the API returns
+    #   <p>The IDs of the SQL Server High Availability instances to describe. If omitted, the API returns 
     #         SQL Server High Availability states for all SQL Server High Availability instances.</p>
     #   @return [Array<String>]
     # @!attribute next_token
     #   <p>The token to use to retrieve the next page of results.</p>
     #   @return [String]
     # @!attribute max_results
-    #   <p>The maximum number of results to return for the request in a
-    #       single page. The remaining results can be seen by sending another request with the
+    #   <p>The maximum number of results to return for the request in a 
+    #       single page. The remaining results can be seen by sending another request with the 
     #       returned <code>nextToken</code> value.</p>
     #   @return [Integer]
     # @!attribute filters
-    #   <p>One or more filters to apply to the results. Supported filters
+    #   <p>One or more filters to apply to the results. Supported filters 
     #       include:</p>
     #            <ul>
     #               <li>
     #                  <p>
-    #                     <code>tag:<key></code> - The tag key and value pair assigned to the
-    #     instance. For example, to find all instances tagged with <code>Owner:TeamA</code>, specify
+    #                     <code>tag:<key></code> - The tag key and value pair assigned to the 
+    #     instance. For example, to find all instances tagged with <code>Owner:TeamA</code>, specify 
     #     <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p>
     #               </li>
     #               <li>
@@ -23841,20 +23841,20 @@ module Aws::EC2
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>haStatus</code> - The SQL Server High Availability status of the SQL Server High Availability instance (<code>processing</code> |
+    #                     <code>haStatus</code> - The SQL Server High Availability status of the SQL Server High Availability instance (<code>processing</code> | 
     #         <code>active</code> | <code>standby</code> | <code>invalid</code>).</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>sqlServerLicenseUsage</code> - The license type for the SQL Server license
+    #                     <code>sqlServerLicenseUsage</code> - The license type for the SQL Server license 
     #         (<code>full</code> | <code>waived</code>).</p>
     #               </li>
     #            </ul>
     #   @return [Array<Types::Filter>]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action,
-    #       without actually making the request, and provides an error response. If you have the
-    #       required permissions, the error response is <code>DryRunOperation</code>. Otherwise,
+    #   <p>Checks whether you have the required permissions for the action, 
+    #       without actually making the request, and provides an error response. If you have the 
+    #       required permissions, the error response is <code>DryRunOperation</code>. Otherwise, 
     #       it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DescribeInstanceSqlHaStatesRequest < Struct.new(
@@ -23873,7 +23873,7 @@ module Aws::EC2
     #   <p>Information about the SQL Server High Availability instances.</p>
     #   @return [Array<Types::RegisteredInstance>]
     # @!attribute next_token
-    #   <p>The token to use to retrieve the next page of results.
+    #   <p>The token to use to retrieve the next page of results. 
     #       This value is <code>null</code> when there are no more results to return.</p>
     #   @return [String]
     class DescribeInstanceSqlHaStatesResult < Struct.new(
@@ -23905,8 +23905,8 @@ module Aws::EC2
     #               even if managed resource visibility is set to hidden.</p>
     #   @return [Boolean]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the operation, without actually making the
-    #     request, and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the operation, without actually making the 
+    #     request, and provides an error response. If you have the required permissions, the error response is 
     #     <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute filters
@@ -24004,8 +24004,8 @@ module Aws::EC2
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>attached-ebs-status.status</code> - The status of the attached EBS volume
-    #                       for the instance (<code>ok</code> | <code>impaired</code> | <code>initializing</code> |
+    #                     <code>attached-ebs-status.status</code> - The status of the attached EBS volume 
+    #                       for the instance (<code>ok</code> | <code>impaired</code> | <code>initializing</code> | 
     #                       <code>insufficient-data</code> | <code>not-applicable</code>).</p>
     #               </li>
     #               <li>
@@ -24053,8 +24053,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the operation, without actually making the
-    #     request, and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the operation, without actually making the 
+    #     request, and provides an error response. If you have the required permissions, the error response is 
     #     <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute next_token
@@ -24249,12 +24249,12 @@ module Aws::EC2
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>ebs-info.attachment-limit-type</code> - The type of Amazon EBS volume attachment limit
+    #                     <code>ebs-info.attachment-limit-type</code> - The type of Amazon EBS volume attachment limit 
     #        (<code>shared</code> | <code>dedicated</code>).</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>ebs-info.maximum-ebs-attachments</code> - The maximum number of Amazon EBS volumes that
+    #                     <code>ebs-info.maximum-ebs-attachments</code> - The maximum number of Amazon EBS volumes that 
     #        can be attached to the instance type.</p>
     #               </li>
     #               <li>
@@ -24558,8 +24558,8 @@ module Aws::EC2
     #               even if managed resource visibility is set to hidden.</p>
     #   @return [Boolean]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the operation, without actually making the
-    #     request, and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the operation, without actually making the 
+    #     request, and provides an error response. If you have the required permissions, the error response is 
     #     <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute filters
@@ -24942,7 +24942,7 @@ module Aws::EC2
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>network-interface.deny-all-igw-traffic</code> - A Boolean that indicates whether
+    #                     <code>network-interface.deny-all-igw-traffic</code> - A Boolean that indicates whether 
     #                   a network interface with an IPv6 address is unreachable from the public internet.</p>
     #               </li>
     #               <li>
@@ -25073,8 +25073,8 @@ module Aws::EC2
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>network-performance-options.bandwidth-weighting</code> - Where the performance boost
-    #           			is applied, if applicable. Valid values: <code>default</code>, <code>vpc-1</code>,
+    #                     <code>network-performance-options.bandwidth-weighting</code> - Where the performance boost 
+    #           			is applied, if applicable. Valid values: <code>default</code>, <code>vpc-1</code>, 
     #           			<code>ebs-1</code>.</p>
     #               </li>
     #               <li>
@@ -25326,8 +25326,8 @@ module Aws::EC2
     #   	For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination">Pagination</a>.</p>
     #   @return [Integer]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute internet_gateway_ids
@@ -25393,8 +25393,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute max_results
@@ -25430,8 +25430,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute filters
@@ -25564,8 +25564,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute filters
@@ -25609,8 +25609,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute ipam_pool_allocation_ids
@@ -25653,8 +25653,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute filters
@@ -25697,8 +25697,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute filters
@@ -25745,8 +25745,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute filters
@@ -25789,8 +25789,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute ipam_resource_discovery_ids
@@ -25833,8 +25833,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute ipam_resource_discovery_association_ids
@@ -25877,8 +25877,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute filters
@@ -25921,8 +25921,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute filters
@@ -25975,8 +25975,8 @@ module Aws::EC2
     #   	To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.</p>
     #   @return [Integer]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute filters
@@ -26033,8 +26033,8 @@ module Aws::EC2
     #            </p>
     #   @return [Boolean]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute filters
@@ -26339,7 +26339,7 @@ module Aws::EC2
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>local-gateway-route-table-arn</code> - The Amazon Resource Name (ARN) of the local
+    #                     <code>local-gateway-route-table-arn</code> - The Amazon Resource Name (ARN) of the local 
     #                  gateway route table for the virtual interface group.</p>
     #               </li>
     #               <li>
@@ -26356,7 +26356,7 @@ module Aws::EC2
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>owner-id</code> - The ID of the Amazon Web Services account that owns the local gateway virtual
+    #                     <code>owner-id</code> - The ID of the Amazon Web Services account that owns the local gateway virtual 
     #                  interface group association.</p>
     #               </li>
     #               <li>
@@ -26373,8 +26373,8 @@ module Aws::EC2
     #   <p>The token for the next page of results.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DescribeLocalGatewayRouteTableVirtualInterfaceGroupAssociationsRequest < Struct.new(
@@ -26416,7 +26416,7 @@ module Aws::EC2
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>local-gateway-route-table-arn</code> - The Amazon Resource Name (ARN) of the local
+    #                     <code>local-gateway-route-table-arn</code> - The Amazon Resource Name (ARN) of the local 
     #                  gateway route table for the association.</p>
     #               </li>
     #               <li>
@@ -26450,8 +26450,8 @@ module Aws::EC2
     #   <p>The token for the next page of results.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DescribeLocalGatewayRouteTableVpcAssociationsRequest < Struct.new(
@@ -26493,7 +26493,7 @@ module Aws::EC2
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>local-gateway-route-table-arn</code> - The Amazon Resource Name (ARN) of the
+    #                     <code>local-gateway-route-table-arn</code> - The Amazon Resource Name (ARN) of the 
     #                  local gateway route table.</p>
     #               </li>
     #               <li>
@@ -26522,8 +26522,8 @@ module Aws::EC2
     #   <p>The token for the next page of results.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DescribeLocalGatewayRouteTablesRequest < Struct.new(
@@ -26585,8 +26585,8 @@ module Aws::EC2
     #   <p>The token for the next page of results.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DescribeLocalGatewayVirtualInterfaceGroupsRequest < Struct.new(
@@ -26628,7 +26628,7 @@ module Aws::EC2
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>local-bgp-asn</code> - The Border Gateway Protocol (BGP) Autonomous System Number (ASN)
+    #                     <code>local-bgp-asn</code> - The Border Gateway Protocol (BGP) Autonomous System Number (ASN) 
     #                  of the local gateway.</p>
     #               </li>
     #               <li>
@@ -26665,8 +26665,8 @@ module Aws::EC2
     #   <p>The token for the next page of results.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DescribeLocalGatewayVirtualInterfacesRequest < Struct.new(
@@ -26728,8 +26728,8 @@ module Aws::EC2
     #   <p>The token for the next page of results.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DescribeLocalGatewaysRequest < Struct.new(
@@ -26764,14 +26764,14 @@ module Aws::EC2
     #            <ul>
     #               <li>
     #                  <p>
-    #                     <code>lock-state</code> - The state of the snapshot lock (<code>compliance-cooloff</code> |
+    #                     <code>lock-state</code> - The state of the snapshot lock (<code>compliance-cooloff</code> | 
     #             <code>governance</code> | <code>compliance</code> | <code>expired</code>).</p>
     #               </li>
     #            </ul>
     #   @return [Array<Types::Filter>]
     # @!attribute max_results
     #   <p>The maximum number of items to return for this request.
-    #   	To get the next page of items, make another request with the token returned in the output.
+    #   	To get the next page of items, make another request with the token returned in the output. 
     #   	For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination">Pagination</a>.</p>
     #   @return [Integer]
     # @!attribute next_token
@@ -26782,8 +26782,8 @@ module Aws::EC2
     #   <p>The IDs of the snapshots for which to view the lock status.</p>
     #   @return [Array<String>]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DescribeLockedSnapshotsRequest < Struct.new(
@@ -26802,7 +26802,7 @@ module Aws::EC2
     #   <p>Information about the snapshots.</p>
     #   @return [Array<Types::LockedSnapshotsInfo>]
     # @!attribute next_token
-    #   <p>The token to include in another request to get the next page of items.
+    #   <p>The token to include in another request to get the next page of items. 
     #     This value is <code>null</code> when there are no more items to return.</p>
     #   @return [String]
     class DescribeLockedSnapshotsResult < Struct.new(
@@ -26879,12 +26879,12 @@ module Aws::EC2
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>task-state</code> - The state of the task (<code>successful</code> | <code>failed</code> |
+    #                     <code>task-state</code> - The state of the task (<code>successful</code> | <code>failed</code> | 
     #                  <code>in-progress</code> | <code>pending</code>).</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>mac-system-integrity-protection-configuration.sip-status</code> - The overall SIP
+    #                     <code>mac-system-integrity-protection-configuration.sip-status</code> - The overall SIP 
     #                  state requested in the task (<code>enabled</code> | <code>disabled</code>).</p>
     #               </li>
     #               <li>
@@ -26934,8 +26934,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute filters
@@ -26993,8 +26993,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute public_ips
@@ -27048,8 +27048,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute filter
@@ -27130,8 +27130,8 @@ module Aws::EC2
     #   	For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination">Pagination</a>.</p>
     #   @return [Integer]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute network_acl_ids
@@ -27190,7 +27190,7 @@ module Aws::EC2
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>entry.egress</code> - A Boolean that indicates the type of rule. Specify <code>true</code>
+    #                     <code>entry.egress</code> - A Boolean that indicates the type of rule. Specify <code>true</code> 
     #   		                for egress rules, or <code>false</code> for ingress rules.</p>
     #               </li>
     #               <li>
@@ -27268,8 +27268,8 @@ module Aws::EC2
     #      To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.</p>
     #   @return [Integer]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute next_token
@@ -27316,8 +27316,8 @@ module Aws::EC2
     #      To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.</p>
     #   @return [Integer]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute next_token
@@ -27378,8 +27378,8 @@ module Aws::EC2
     #      To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.</p>
     #   @return [Integer]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute next_token
@@ -27461,8 +27461,8 @@ module Aws::EC2
     #      To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.</p>
     #   @return [Integer]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute next_token
@@ -27943,8 +27943,8 @@ module Aws::EC2
     #   <p>The token for the next page of results.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DescribeOutpostLagsRequest < Struct.new(
@@ -27978,8 +27978,8 @@ module Aws::EC2
     #   <p>The IDs of the placement groups.</p>
     #   @return [Array<String>]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the operation, without actually making the
-    #     request, and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the operation, without actually making the 
+    #     request, and provides an error response. If you have the required permissions, the error response is 
     #     <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute group_names
@@ -28060,8 +28060,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute filters
@@ -28115,8 +28115,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute resources
@@ -28225,8 +28225,8 @@ module Aws::EC2
     #   <p>Indicates whether to display all Regions, including Regions that are disabled for your account.</p>
     #   @return [Boolean]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute filters
@@ -28238,7 +28238,7 @@ module Aws::EC2
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>opt-in-status</code> - The opt-in status of the Region (<code>opt-in-not-required</code> | <code>opted-in</code> |
+    #                     <code>opt-in-status</code> - The opt-in status of the Region (<code>opt-in-not-required</code> | <code>opted-in</code> | 
     #                    <code>not-opted-in</code>).</p>
     #               </li>
     #               <li>
@@ -28283,7 +28283,7 @@ module Aws::EC2
     #   @return [Array<Types::Filter>]
     # @!attribute max_results
     #   <p>The maximum number of items to return for this request.
-    #   	To get the next page of items, make another request with the token returned in the output.
+    #   	To get the next page of items, make another request with the token returned in the output. 
     #   	For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination">Pagination</a>.</p>
     #   @return [Integer]
     # @!attribute next_token
@@ -28291,8 +28291,8 @@ module Aws::EC2
     #     Pagination continues from the end of the items returned by the previous request.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DescribeReplaceRootVolumeTasksRequest < Struct.new(
@@ -28311,7 +28311,7 @@ module Aws::EC2
     #   <p>Information about the root volume replacement task.</p>
     #   @return [Array<Types::ReplaceRootVolumeTask>]
     # @!attribute next_token
-    #   <p>The token to include in another request to get the next page of items.
+    #   <p>The token to include in another request to get the next page of items. 
     #     This value is <code>null</code> when there are no more items to return.</p>
     #   @return [String]
     class DescribeReplaceRootVolumeTasksResult < Struct.new(
@@ -28779,8 +28779,8 @@ module Aws::EC2
     #   <p>One or more filters to apply to the describe request.</p>
     #   @return [Array<Types::Filter>]
     # @!attribute dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DescribeRouteServerEndpointsRequest < Struct.new(
@@ -28823,8 +28823,8 @@ module Aws::EC2
     #   <p>One or more filters to apply to the describe request.</p>
     #   @return [Array<Types::Filter>]
     # @!attribute dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DescribeRouteServerPeersRequest < Struct.new(
@@ -28867,8 +28867,8 @@ module Aws::EC2
     #   <p>One or more filters to apply to the describe request.</p>
     #   @return [Array<Types::Filter>]
     # @!attribute dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DescribeRouteServersRequest < Struct.new(
@@ -28907,8 +28907,8 @@ module Aws::EC2
     #   	For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination">Pagination</a>.</p>
     #   @return [Integer]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute route_table_ids
@@ -28962,7 +28962,7 @@ module Aws::EC2
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>route.destination-prefix-list-id</code> - The ID (prefix) of the Amazon Web Services
+    #                     <code>route.destination-prefix-list-id</code> - The ID (prefix) of the Amazon Web Services 
     #   				      service specified in a route in the table.</p>
     #               </li>
     #               <li>
@@ -28988,7 +28988,7 @@ module Aws::EC2
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>route.origin</code> - Describes how the route was created.
+    #                     <code>route.origin</code> - Describes how the route was created. 
     #                           <code>CreateRouteTable</code> indicates that the route was automatically
     #                       created when the route table was created; <code>CreateRoute</code> indicates
     #                       that the route was manually added to the route table;
@@ -29053,8 +29053,8 @@ module Aws::EC2
 
     # <p>Contains the parameters for DescribeScheduledInstanceAvailability.</p>
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute filters
@@ -29078,7 +29078,7 @@ module Aws::EC2
     #   <p>The time period for the first schedule to start.</p>
     #   @return [Types::SlotDateTimeRangeRequest]
     # @!attribute max_results
-    #   <p>The maximum number of results to return in a single call.
+    #   <p>The maximum number of results to return in a single call. 
     #            This value can be between 5 and 300. The default value is 300.
     #            To retrieve the remaining results, make another call with the returned
     #            <code>NextToken</code> value.</p>
@@ -29129,8 +29129,8 @@ module Aws::EC2
 
     # <p>Contains the parameters for DescribeScheduledInstances.</p>
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute filters
@@ -29151,7 +29151,7 @@ module Aws::EC2
     #            </ul>
     #   @return [Array<Types::Filter>]
     # @!attribute max_results
-    #   <p>The maximum number of results to return in a single call.
+    #   <p>The maximum number of results to return in a single call. 
     #            This value can be between 5 and 300. The default value is 100.
     #            To retrieve the remaining results, make another call with the returned
     #            <code>NextToken</code> value.</p>
@@ -29471,8 +29471,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute group_id
@@ -29520,8 +29520,8 @@ module Aws::EC2
     #   <p>The IDs of the security group rules.</p>
     #   @return [Array<String>]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute next_token
@@ -29529,7 +29529,7 @@ module Aws::EC2
     #               Pagination continues from the end of the items returned by the previous request.</p>
     #   @return [String]
     # @!attribute max_results
-    #   <p>The maximum number of items to return for this request. To get the next page of
+    #   <p>The maximum number of items to return for this request. To get the next page of 
     #               items, make another request with the token returned in the output. This value
     #               can be between 5 and 1000. If this parameter is not specified, then all items are
     #               returned. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination">Pagination</a>.</p>
@@ -29550,7 +29550,7 @@ module Aws::EC2
     #   <p>Information about security group rules.</p>
     #   @return [Array<Types::SecurityGroupRule>]
     # @!attribute next_token
-    #   <p>The token to include in another request to get the next page of items.
+    #   <p>The token to include in another request to get the next page of items. 
     #               This value is <code>null</code> when there are no more items to return.</p>
     #   @return [String]
     class DescribeSecurityGroupRulesResult < Struct.new(
@@ -29596,8 +29596,8 @@ module Aws::EC2
     #   	For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination">Pagination</a>.</p>
     #   @return [Integer]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DescribeSecurityGroupVpcAssociationsRequest < Struct.new(
@@ -29641,13 +29641,13 @@ module Aws::EC2
     #   @return [String]
     # @!attribute max_results
     #   <p>The maximum number of items to return for this request. To get the next page of items,
-    #               make another request with the token returned in the output. This value can be between 5 and 1000.
-    #               If this parameter is not specified, then all items are returned. For more information, see
+    #               make another request with the token returned in the output. This value can be between 5 and 1000. 
+    #               If this parameter is not specified, then all items are returned. For more information, see 
     #               <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination">Pagination</a>.</p>
     #   @return [Integer]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute filters
@@ -29848,8 +29848,8 @@ module Aws::EC2
     #   <p>The token for the next page of results.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DescribeServiceLinkVirtualInterfacesRequest < Struct.new(
@@ -29886,8 +29886,8 @@ module Aws::EC2
     #   <p>The ID of the EBS snapshot.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DescribeSnapshotAttributeRequest < Struct.new(
@@ -29934,14 +29934,14 @@ module Aws::EC2
     #               <li>
     #                  <p>
     #                     <code>last-tiering-operation</code> - The state of the last archive or restore action. (<code>archival-in-progress</code> | <code>archival-completed</code> |
-    #             <code>archival-failed</code> | <code>permanent-restore-in-progress</code> | <code>permanent-restore-completed</code> | <code>permanent-restore-failed</code> |
+    #             <code>archival-failed</code> | <code>permanent-restore-in-progress</code> | <code>permanent-restore-completed</code> | <code>permanent-restore-failed</code> | 
     #   		<code>temporary-restore-in-progress</code> | <code>temporary-restore-completed</code> | <code>temporary-restore-failed</code>)</p>
     #               </li>
     #            </ul>
     #   @return [Array<Types::Filter>]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute next_token
@@ -29950,7 +29950,7 @@ module Aws::EC2
     #   @return [String]
     # @!attribute max_results
     #   <p>The maximum number of items to return for this request.
-    #   	To get the next page of items, make another request with the token returned in the output.
+    #   	To get the next page of items, make another request with the token returned in the output. 
     #   	For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination">Pagination</a>.</p>
     #   @return [Integer]
     class DescribeSnapshotTierStatusRequest < Struct.new(
@@ -29968,7 +29968,7 @@ module Aws::EC2
     #   <p>Information about the snapshot's storage tier.</p>
     #   @return [Array<Types::SnapshotTierStatus>]
     # @!attribute next_token
-    #   <p>The token to include in another request to get the next page of items.
+    #   <p>The token to include in another request to get the next page of items. 
     #     This value is <code>null</code> when there are no more items to return.</p>
     #   @return [String]
     class DescribeSnapshotTierStatusResult < Struct.new(
@@ -29982,7 +29982,7 @@ module Aws::EC2
 
     # @!attribute max_results
     #   <p>The maximum number of items to return for this request.
-    #   	To get the next page of items, make another request with the token returned in the output.
+    #   	To get the next page of items, make another request with the token returned in the output. 
     #   	For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination">Pagination</a>.</p>
     #   @return [Integer]
     # @!attribute next_token
@@ -30001,8 +30001,8 @@ module Aws::EC2
     #            <p>Default: Describes the snapshots for which you have create volume permissions.</p>
     #   @return [Array<String>]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute filters
@@ -30019,14 +30019,14 @@ module Aws::EC2
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>owner-alias</code> - The owner alias, from an Amazon-maintained list
-    #             (<code>amazon</code>).
+    #                     <code>owner-alias</code> - The owner alias, from an Amazon-maintained list  
+    #             (<code>amazon</code>). 
     #             This is not the user-configured Amazon Web Services account alias set using the IAM console.
     #             We recommend that you use the related parameter instead of this filter.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>owner-id</code> - The Amazon Web Services account ID of the owner. We recommend that
+    #                     <code>owner-id</code> - The Amazon Web Services account ID of the owner. We recommend that 
     #             you use the related parameter instead of this filter.</p>
     #               </li>
     #               <li>
@@ -30090,7 +30090,7 @@ module Aws::EC2
     end
 
     # @!attribute next_token
-    #   <p>The token to include in another request to get the next page of items.
+    #   <p>The token to include in another request to get the next page of items. 
     #     This value is <code>null</code> when there are no more items to return.</p>
     #   @return [String]
     # @!attribute snapshots
@@ -30375,7 +30375,7 @@ module Aws::EC2
     #               <li>
     #                  <p>
     #                     <code>launch.block-device-mapping.volume-type</code> - The type of EBS volume:
-    #                       <code>gp2</code> or <code>gp3</code> for General Purpose SSD, <code>io1</code>
+    #                       <code>gp2</code> or <code>gp3</code> for General Purpose SSD, <code>io1</code> 
     #                       or <code>io2</code> for Provisioned IOPS SSD, <code>st1</code> for Throughput
     #                       Optimized HDD, <code>sc1</code> for Cold HDD, or <code>standard</code> for
     #                       Magnetic.</p>
@@ -30669,13 +30669,13 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute max_results
     #   <p>The maximum number of items to return for this request. To get the next page of items,
-    #             make another request with the token returned in the output. For more information,
+    #             make another request with the token returned in the output. For more information, 
     #             see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination">Pagination</a>.</p>
     #   @return [Integer]
     # @!attribute next_token
@@ -30715,8 +30715,8 @@ module Aws::EC2
     #         request.</p>
     #   @return [Array<String>]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #   			and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #   			and provides an error response. If you have the required permissions, the error response is 
     #   			<code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute filters
@@ -30925,8 +30925,8 @@ module Aws::EC2
     #   	For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination">Pagination</a>.</p>
     #   @return [Integer]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DescribeSubnetsRequest < Struct.new(
@@ -30957,8 +30957,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute filters
@@ -30974,7 +30974,7 @@ module Aws::EC2
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>resource-type</code> - The resource type. For a list of possible values, see
+    #                     <code>resource-type</code> - The resource type. For a list of possible values, see 
     #                  <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_TagSpecification.html">TagSpecification</a>.</p>
     #               </li>
     #               <li>
@@ -30990,7 +30990,7 @@ module Aws::EC2
     #            </ul>
     #   @return [Array<Types::Filter>]
     # @!attribute max_results
-    #   <p>The maximum number of items to return for this request. This value can be between 5 and 1000.
+    #   <p>The maximum number of items to return for this request. This value can be between 5 and 1000. 
     #            To get the next page of items, make another request with the token returned in the output.
     #            For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination">Pagination</a>.</p>
     #   @return [Integer]
@@ -31010,7 +31010,7 @@ module Aws::EC2
     end
 
     # @!attribute next_token
-    #   <p>The token to include in another request to get the next page of items.
+    #   <p>The token to include in another request to get the next page of items. 
     #            This value is <code>null</code> when there are no more items to return.</p>
     #   @return [String]
     # @!attribute tags
@@ -31032,8 +31032,8 @@ module Aws::EC2
     #   <p>Traffic filter ID.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute filters
@@ -31116,8 +31116,8 @@ module Aws::EC2
     #   <p>The ID of the Traffic Mirror filter.</p>
     #   @return [Array<String>]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute filters
@@ -31171,8 +31171,8 @@ module Aws::EC2
     #   <p>The ID of the Traffic Mirror session.</p>
     #   @return [Array<String>]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute filters
@@ -31254,8 +31254,8 @@ module Aws::EC2
     #   <p>The ID of the Traffic Mirror targets.</p>
     #   @return [Array<String>]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute filters
@@ -31372,8 +31372,8 @@ module Aws::EC2
     #   <p>The token for the next page of results.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DescribeTransitGatewayAttachmentsRequest < Struct.new(
@@ -31433,8 +31433,8 @@ module Aws::EC2
     #   <p>The token for the next page of results.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DescribeTransitGatewayConnectPeersRequest < Struct.new(
@@ -31506,8 +31506,8 @@ module Aws::EC2
     #   <p>The token for the next page of results.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DescribeTransitGatewayConnectsRequest < Struct.new(
@@ -31551,8 +31551,8 @@ module Aws::EC2
     #   <p>The token for the next page of results.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DescribeTransitGatewayMeteringPoliciesRequest < Struct.new(
@@ -31610,8 +31610,8 @@ module Aws::EC2
     #   <p>The token for the next page of results.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DescribeTransitGatewayMulticastDomainsRequest < Struct.new(
@@ -31686,8 +31686,8 @@ module Aws::EC2
     #   <p>The token for the next page of results.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DescribeTransitGatewayPeeringAttachmentsRequest < Struct.new(
@@ -31731,8 +31731,8 @@ module Aws::EC2
     #   <p>The token for the next page of results.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DescribeTransitGatewayPolicyTablesRequest < Struct.new(
@@ -31776,8 +31776,8 @@ module Aws::EC2
     #   <p>The token for the next page of results.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DescribeTransitGatewayRouteTableAnnouncementsRequest < Struct.new(
@@ -31845,8 +31845,8 @@ module Aws::EC2
     #   <p>The token for the next page of results.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DescribeTransitGatewayRouteTablesRequest < Struct.new(
@@ -31908,8 +31908,8 @@ module Aws::EC2
     #   <p>The token for the next page of results.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DescribeTransitGatewayVpcAttachmentsRequest < Struct.new(
@@ -31963,12 +31963,12 @@ module Aws::EC2
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>options.default-route-table-association</code> - Indicates whether resource attachments are automatically
+    #                     <code>options.default-route-table-association</code> - Indicates whether resource attachments are automatically 
     #                  associated with the default association route table (<code>enable</code> | <code>disable</code>).</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>options.default-route-table-propagation</code> - Indicates whether resource attachments automatically propagate
+    #                     <code>options.default-route-table-propagation</code> - Indicates whether resource attachments automatically propagate 
     #                  routes to the default propagation route table (<code>enable</code> | <code>disable</code>).</p>
     #               </li>
     #               <li>
@@ -32008,8 +32008,8 @@ module Aws::EC2
     #   <p>The token for the next page of results.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DescribeTransitGatewaysRequest < Struct.new(
@@ -32043,8 +32043,8 @@ module Aws::EC2
     #   <p>The IDs of the associations.</p>
     #   @return [Array<String>]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute filters
@@ -32114,8 +32114,8 @@ module Aws::EC2
     #   <p>One or more filters. Filter names and values are case-sensitive.</p>
     #   @return [Array<Types::Filter>]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DescribeVerifiedAccessEndpointsRequest < Struct.new(
@@ -32164,8 +32164,8 @@ module Aws::EC2
     #   <p>One or more filters. Filter names and values are case-sensitive.</p>
     #   @return [Array<Types::Filter>]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DescribeVerifiedAccessGroupsRequest < Struct.new(
@@ -32210,8 +32210,8 @@ module Aws::EC2
     #   <p>One or more filters. Filter names and values are case-sensitive.</p>
     #   @return [Array<Types::Filter>]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DescribeVerifiedAccessInstanceLoggingConfigurationsRequest < Struct.new(
@@ -32255,8 +32255,8 @@ module Aws::EC2
     #   <p>One or more filters. Filter names and values are case-sensitive.</p>
     #   @return [Array<Types::Filter>]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DescribeVerifiedAccessInstancesRequest < Struct.new(
@@ -32300,8 +32300,8 @@ module Aws::EC2
     #   <p>One or more filters. Filter names and values are case-sensitive.</p>
     #   @return [Array<Types::Filter>]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DescribeVerifiedAccessTrustProvidersRequest < Struct.new(
@@ -32338,8 +32338,8 @@ module Aws::EC2
     #   <p>The ID of the volume.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DescribeVolumeAttributeRequest < Struct.new(
@@ -32373,7 +32373,7 @@ module Aws::EC2
 
     # @!attribute max_results
     #   <p>The maximum number of items to return for this request.
-    #   	To get the next page of items, make another request with the token returned in the output.
+    #   	To get the next page of items, make another request with the token returned in the output. 
     #   	For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination">Pagination</a>.</p>
     #   @return [Integer]
     # @!attribute next_token
@@ -32388,8 +32388,8 @@ module Aws::EC2
     #   <p>Indicates whether to include managed resources in the output. If this parameter is set to <code>true</code>, the output includes resources that are managed by Amazon Web Services services, even if managed resource visibility is set to hidden.</p>
     #   @return [Boolean]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute filters
@@ -32470,7 +32470,7 @@ module Aws::EC2
     end
 
     # @!attribute next_token
-    #   <p>The token to include in another request to get the next page of items.
+    #   <p>The token to include in another request to get the next page of items. 
     #     This value is <code>null</code> when there are no more items to return.</p>
     #   @return [String]
     # @!attribute volume_statuses
@@ -32486,8 +32486,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute volume_ids
@@ -32498,7 +32498,7 @@ module Aws::EC2
     #            <ul>
     #               <li>
     #                  <p>
-    #                     <code>modification-state</code> - The current modification state (modifying |
+    #                     <code>modification-state</code> - The current modification state (modifying | 
     #             optimizing | completed | failed).</p>
     #               </li>
     #               <li>
@@ -32511,7 +32511,7 @@ module Aws::EC2
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>original-volume-type</code> - The original volume type of the volume (standard |
+    #                     <code>original-volume-type</code> - The original volume type of the volume (standard | 
     #             io1 | io2 | gp2 | sc1 | st1).</p>
     #               </li>
     #               <li>
@@ -32532,7 +32532,7 @@ module Aws::EC2
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>target-volume-type</code> - The target volume type of the volume (standard |
+    #                     <code>target-volume-type</code> - The target volume type of the volume (standard | 
     #             io1 | io2 | gp2 | sc1 | st1).</p>
     #               </li>
     #               <li>
@@ -32570,7 +32570,7 @@ module Aws::EC2
     end
 
     # @!attribute next_token
-    #   <p>The token to include in another request to get the next page of items.
+    #   <p>The token to include in another request to get the next page of items. 
     #     This value is <code>null</code> when there are no more items to return.</p>
     #   @return [String]
     # @!attribute volumes_modifications
@@ -32592,8 +32592,8 @@ module Aws::EC2
     #   <p>Indicates whether to include managed resources in the output. If this parameter is set to <code>true</code>, the output includes resources that are managed by Amazon Web Services services, even if managed resource visibility is set to hidden.</p>
     #   @return [Boolean]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute filters
@@ -32645,8 +32645,8 @@ module Aws::EC2
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>fast-restored</code> - Indicates whether the volume was created from a
-    #             snapshot that is enabled for fast snapshot restore (<code>true</code> |
+    #                     <code>fast-restored</code> - Indicates whether the volume was created from a 
+    #             snapshot that is enabled for fast snapshot restore (<code>true</code> | 
     #             <code>false</code>).</p>
     #               </li>
     #               <li>
@@ -32693,7 +32693,7 @@ module Aws::EC2
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>volume-type</code> - The Amazon EBS volume type (<code>gp2</code> | <code>gp3</code> | <code>io1</code> | <code>io2</code> |
+    #                     <code>volume-type</code> - The Amazon EBS volume type (<code>gp2</code> | <code>gp3</code> | <code>io1</code> | <code>io2</code> | 
     #             <code>st1</code> | <code>sc1</code>| <code>standard</code>)</p>
     #               </li>
     #            </ul>
@@ -32704,7 +32704,7 @@ module Aws::EC2
     #   @return [String]
     # @!attribute max_results
     #   <p>The maximum number of items to return for this request.
-    #   	To get the next page of items, make another request with the token returned in the output.
+    #   	To get the next page of items, make another request with the token returned in the output. 
     #   	For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination">Pagination</a>.</p>
     #   @return [Integer]
     class DescribeVolumesRequest < Struct.new(
@@ -32721,7 +32721,7 @@ module Aws::EC2
     end
 
     # @!attribute next_token
-    #   <p>The token to include in another request to get the next page of items.
+    #   <p>The token to include in another request to get the next page of items. 
     #     This value is <code>null</code> when there are no more items to return.</p>
     #   @return [String]
     # @!attribute volumes
@@ -32743,8 +32743,8 @@ module Aws::EC2
     #   <p>The ID of the VPC.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DescribeVpcAttributeRequest < Struct.new(
@@ -32786,8 +32786,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute filters
@@ -32860,8 +32860,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DescribeVpcBlockPublicAccessOptionsRequest < Struct.new(
@@ -32920,8 +32920,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute vpc_ids
@@ -32968,8 +32968,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute filters
@@ -33018,8 +33018,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute vpc_endpoint_ids
@@ -33095,8 +33095,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute connection_notification_id
@@ -33171,8 +33171,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute filters
@@ -33188,7 +33188,7 @@ module Aws::EC2
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>vpc-endpoint-owner</code> - The ID of the Amazon Web Services account ID
+    #                     <code>vpc-endpoint-owner</code> - The ID of the Amazon Web Services account ID 
     #   		            that owns the endpoint.</p>
     #               </li>
     #               <li>
@@ -33246,8 +33246,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute service_ids
@@ -33322,8 +33322,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute service_id
@@ -33382,8 +33382,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute service_names
@@ -33394,7 +33394,7 @@ module Aws::EC2
     #            <ul>
     #               <li>
     #                  <p>
-    #                     <code>owner</code> - The ID or alias of the Amazon Web Services account that owns
+    #                     <code>owner</code> - The ID or alias of the Amazon Web Services account that owns 
     #                       the service.</p>
     #               </li>
     #               <li>
@@ -33467,8 +33467,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute vpc_endpoint_ids
@@ -33515,7 +33515,7 @@ module Aws::EC2
     #               <li>
     #                  <p>
     #                     <code>vpc-endpoint-type</code> - The type of VPC endpoint (<code>Interface</code> |
-    #                       <code>Gateway</code> | <code>GatewayLoadBalancer</code> | <code>Resource</code> |
+    #                       <code>Gateway</code> | <code>GatewayLoadBalancer</code> | <code>Resource</code> | 
     #                       <code>ServiceNetwork</code> | <code>Tunnel</code>).</p>
     #               </li>
     #            </ul>
@@ -33563,8 +33563,8 @@ module Aws::EC2
     #   	For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination">Pagination</a>.</p>
     #   @return [Integer]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute vpc_peering_connection_ids
@@ -33749,8 +33749,8 @@ module Aws::EC2
     #   	For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination">Pagination</a>.</p>
     #   @return [Integer]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DescribeVpcsRequest < Struct.new(
@@ -33794,8 +33794,8 @@ module Aws::EC2
     #   <p>The token for the next page of results.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DescribeVpnConcentratorsRequest < Struct.new(
@@ -34014,7 +34014,7 @@ module Aws::EC2
     #               The default is <code>false</code>.</p>
     #   @return [Boolean]
     # @!attribute per_hour_partition
-    #   <p>Indicates whether to partition the flow log per hour. This reduces the cost and response
+    #   <p>Indicates whether to partition the flow log per hour. This reduces the cost and response 
     #               time for queries. The default is <code>false</code>.</p>
     #   @return [Boolean]
     class DestinationOptionsRequest < Struct.new(
@@ -34048,8 +34048,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute instance_id
@@ -34087,8 +34087,8 @@ module Aws::EC2
     #           <code>123456789012:approvedAmi</code>).</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #   			and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #   			and provides an error response. If you have the required permissions, the error response is 
     #   			<code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DetachImageWatermarkRequest < Struct.new(
@@ -34113,8 +34113,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute internet_gateway_id
@@ -34188,8 +34188,8 @@ module Aws::EC2
     #               modification request. For more information, see <a href="https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html">Ensuring idempotency</a>.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DetachVerifiedAccessTrustProviderRequest < Struct.new(
@@ -34223,13 +34223,13 @@ module Aws::EC2
     #   <p>Indicates whether the EBS volume is deleted on instance termination.</p>
     #   @return [Boolean]
     # @!attribute associated_resource
-    #   <p>The ARN of the Amazon Web Services-managed resource
+    #   <p>The ARN of the Amazon Web Services-managed resource 
     #         to which the volume is attached.</p>
     #   @return [String]
     # @!attribute instance_owning_service
-    #   <p>The service principal of the Amazon Web Services service that owns the underlying
+    #   <p>The service principal of the Amazon Web Services service that owns the underlying 
     #         resource to which the volume is attached.</p>
-    #            <p>This parameter is returned only for volumes that are attached to
+    #            <p>This parameter is returned only for volumes that are attached to 
     #         Amazon Web Services-managed resources.</p>
     #   @return [String]
     # @!attribute ebs_card_index
@@ -34240,12 +34240,12 @@ module Aws::EC2
     #   @return [String]
     # @!attribute instance_id
     #   <p>The ID of the instance.</p>
-    #            <p>If the volume is attached to an Amazon Web Services-managed resource, this parameter
+    #            <p>If the volume is attached to an Amazon Web Services-managed resource, this parameter 
     #         returns <code>null</code>.</p>
     #   @return [String]
     # @!attribute device
     #   <p>The device name.</p>
-    #            <p>If the volume is attached to an Amazon Web Services-managed resource, this parameter
+    #            <p>If the volume is attached to an Amazon Web Services-managed resource, this parameter 
     #         returns <code>null</code>.</p>
     #   @return [String]
     # @!attribute state
@@ -34288,8 +34288,8 @@ module Aws::EC2
     #   <p>The ID of the volume.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DetachVolumeRequest < Struct.new(
@@ -34469,8 +34469,8 @@ module Aws::EC2
     #   <p>The allocation ID of an Elastic IP address.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DisableAddressTransferRequest < Struct.new(
@@ -34494,8 +34494,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #   			and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #   			and provides an error response. If you have the required permissions, the error response is 
     #   			<code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DisableAllowedImagesSettingsRequest < Struct.new(
@@ -34525,8 +34525,8 @@ module Aws::EC2
     #   <p>A unique, case-sensitive identifier that you provide to ensure that the operation completes no more than one time. If you retry a request with the same token, the service ignores the request but does not return an error. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html">Ensuring idempotency</a>.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the operation, without actually making the
-    #     request, and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the operation, without actually making the 
+    #     request, and provides an error response. If you have the required permissions, the error response is 
     #     <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DisableApplicationStatusCheckSuppressionRequest < Struct.new(
@@ -34567,8 +34567,8 @@ module Aws::EC2
     #   <p>The statistic used for the disabled subscription. </p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DisableAwsNetworkPerformanceMetricSubscriptionRequest < Struct.new(
@@ -34596,7 +34596,7 @@ module Aws::EC2
 
     # @!attribute dry_run
     #   <p>
-    #   Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.
+    #   Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. 
     #   If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.
     #   </p>
     #   @return [Boolean]
@@ -34616,7 +34616,7 @@ module Aws::EC2
 
     # @!attribute capacity_manager_status
     #   <p>
-    #   The current status of Capacity Manager after the disable operation.
+    #   The current status of Capacity Manager after the disable operation. 
     #   </p>
     #   @return [String]
     # @!attribute organizations_access
@@ -34634,8 +34634,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DisableEbsEncryptionByDefaultRequest < Struct.new(
@@ -34666,8 +34666,8 @@ module Aws::EC2
     #         account.</p>
     #   @return [Boolean]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #   			and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #   			and provides an error response. If you have the required permissions, the error response is 
     #   			<code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DisableFastLaunchRequest < Struct.new(
@@ -34802,7 +34802,7 @@ module Aws::EC2
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>Client.UserInitiated - Lifecycle state transition</code> - The state successfully transitioned
+    #                     <code>Client.UserInitiated - Lifecycle state transition</code> - The state successfully transitioned 
     #             to <code>optimizing</code>, <code>enabled</code>, or <code>disabled</code>.</p>
     #               </li>
     #            </ul>
@@ -34859,8 +34859,8 @@ module Aws::EC2
     #   <p>The IDs of one or more snapshots. For example, <code>snap-1234567890abcdef0</code>.</p>
     #   @return [Array<String>]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DisableFastSnapshotRestoresRequest < Struct.new(
@@ -34890,8 +34890,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #   			and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #   			and provides an error response. If you have the required permissions, the error response is 
     #   			<code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DisableImageBlockPublicAccessRequest < Struct.new(
@@ -34918,8 +34918,8 @@ module Aws::EC2
     #   <p>The ID of the AMI.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #   			and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #   			and provides an error response. If you have the required permissions, the error response is 
     #   			<code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DisableImageDeprecationRequest < Struct.new(
@@ -34946,8 +34946,8 @@ module Aws::EC2
     #   <p>The ID of the AMI.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #   			and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #   			and provides an error response. If you have the required permissions, the error response is 
     #   			<code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DisableImageDeregistrationProtectionRequest < Struct.new(
@@ -34974,8 +34974,8 @@ module Aws::EC2
     #   <p>The ID of the AMI.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #   			and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #   			and provides an error response. If you have the required permissions, the error response is 
     #   			<code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DisableImageRequest < Struct.new(
@@ -35002,9 +35002,9 @@ module Aws::EC2
     #   <p>The IDs of the instances to disable from SQL Server High Availability standby detection monitoring.</p>
     #   @return [Array<String>]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action,
-    #       without actually making the request, and provides an error response. If you have the
-    #       required permissions, the error response is <code>DryRunOperation</code>. Otherwise,
+    #   <p>Checks whether you have the required permissions for the action, 
+    #       without actually making the request, and provides an error response. If you have the 
+    #       required permissions, the error response is <code>DryRunOperation</code>. Otherwise, 
     #       it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DisableInstanceSqlHaStandbyDetectionsRequest < Struct.new(
@@ -35017,7 +35017,7 @@ module Aws::EC2
     end
 
     # @!attribute instances
-    #   <p>Information about the instances that were disabled from SQL Server High Availability standby
+    #   <p>Information about the instances that were disabled from SQL Server High Availability standby 
     #         detection monitoring.</p>
     #   @return [Array<Types::RegisteredInstance>]
     class DisableInstanceSqlHaStandbyDetectionsResult < Struct.new(
@@ -35029,8 +35029,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute delegated_admin_account_id
@@ -35057,8 +35057,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute ipam_policy_id
@@ -35096,8 +35096,8 @@ module Aws::EC2
     #   <p>The ID of the route table for which to disable route server propagation.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DisableRouteServerPropagationRequest < Struct.new(
@@ -35146,8 +35146,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DisableSnapshotBlockPublicAccessRequest < Struct.new(
@@ -35176,8 +35176,8 @@ module Aws::EC2
     #   <p>The ID of the attachment.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute transit_gateway_route_table_announcement_id
@@ -35251,8 +35251,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute vpc_id
@@ -35285,8 +35285,8 @@ module Aws::EC2
     #   <p>Deprecated.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DisassociateAddressRequest < Struct.new(
@@ -35312,8 +35312,8 @@ module Aws::EC2
     #   <p>A unique, case-sensitive identifier that you provide to ensure that the operation completes no more than one time. If you retry a request with the same token, the service ignores the request but does not return an error. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html">Ensuring idempotency</a>.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the operation, without actually making the
-    #     request, and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the operation, without actually making the 
+    #     request, and provides an error response. If you have the required permissions, the error response is 
     #     <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DisassociateApplicationStatusCheckRequest < Struct.new(
@@ -35460,8 +35460,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute instance_event_window_id
@@ -35492,8 +35492,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute asn
@@ -35524,8 +35524,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute ipam_resource_discovery_association_id
@@ -35561,8 +35561,8 @@ module Aws::EC2
     #   <p>The maximum amount of time to wait (in seconds) before forcibly releasing the IP addresses if connections are still in progress. Default value is 350 seconds.</p>
     #   @return [Integer]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DisassociateNatGatewayAddressRequest < Struct.new(
@@ -35598,8 +35598,8 @@ module Aws::EC2
     #   <p>The ID of the VPC to disassociate from the route server.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DisassociateRouteServerRequest < Struct.new(
@@ -35624,8 +35624,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute association_id
@@ -35647,8 +35647,8 @@ module Aws::EC2
     #   <p>A VPC ID.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DisassociateSecurityGroupVpcRequest < Struct.new(
@@ -35708,8 +35708,8 @@ module Aws::EC2
     #   <p>The IDs of the subnets;</p>
     #   @return [Array<String>]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DisassociateTransitGatewayMulticastDomainRequest < Struct.new(
@@ -35741,8 +35741,8 @@ module Aws::EC2
     #   <p>The ID of the transit gateway attachment to disassociate from the policy table.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DisassociateTransitGatewayPolicyTableRequest < Struct.new(
@@ -35773,8 +35773,8 @@ module Aws::EC2
     #   <p>The ID of the attachment.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DisassociateTransitGatewayRouteTableRequest < Struct.new(
@@ -35807,8 +35807,8 @@ module Aws::EC2
     #                   idempotency</a>.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class DisassociateTrunkInterfaceRequest < Struct.new(
@@ -36023,7 +36023,7 @@ module Aws::EC2
     #   @return [String]
     # @!attribute private_dns_specified_domains
     #   <p>
-    #   Indicates which of the private domains to create private hosted zones for and associate with the specified VPC. Only supported when private DNS is enabled and the private DNS preference is <code>VERIFIED_DOMAINS_AND_SPECIFIED_DOMAINS</code> or <code>SPECIFIED_DOMAINS_ONLY</code>.
+    #   Indicates which of the private domains to create private hosted zones for and associate with the specified VPC. Only supported when private DNS is enabled and the private DNS preference is <code>VERIFIED_DOMAINS_AND_SPECIFIED_DOMAINS</code> or <code>SPECIFIED_DOMAINS_ONLY</code>. 
     #   </p>
     #   @return [Array<String>]
     class DnsOptions < Struct.new(
@@ -36072,7 +36072,7 @@ module Aws::EC2
     #   @return [String]
     # @!attribute private_dns_specified_domains
     #   <p>
-    #   Indicates which of the private domains to create private hosted zones for and associate with the specified VPC. Only supported when private DNS is enabled and the private DNS preference is verified-domains-and-specified-domains or specified-domains-only.
+    #   Indicates which of the private domains to create private hosted zones for and associate with the specified VPC. Only supported when private DNS is enabled and the private DNS preference is verified-domains-and-specified-domains or specified-domains-only. 
     #   </p>
     #   @return [Array<String>]
     class DnsOptionsSpecification < Struct.new(
@@ -36088,12 +36088,12 @@ module Aws::EC2
 
     # <p>Information about the DNS server to be used.</p>
     # @!attribute custom_dns_servers
-    #   <p>The IPv4 address range, in CIDR notation, of the DNS servers to be used. You can specify up to
-    #   			two DNS servers. Ensure that the DNS servers can be reached by the clients. The specified values
+    #   <p>The IPv4 address range, in CIDR notation, of the DNS servers to be used. You can specify up to 
+    #   			two DNS servers. Ensure that the DNS servers can be reached by the clients. The specified values 
     #   			overwrite the existing values.</p>
     #   @return [Array<String>]
     # @!attribute enabled
-    #   <p>Indicates whether DNS servers should be used. Specify <code>False</code> to delete the existing DNS
+    #   <p>Indicates whether DNS servers should be used. Specify <code>False</code> to delete the existing DNS 
     #   			servers.</p>
     #   @return [Boolean]
     class DnsServersOptionsModifyStructure < Struct.new(
@@ -36131,8 +36131,8 @@ module Aws::EC2
     #                     <code>io2</code>: 100 - 256,000 IOPS</p>
     #               </li>
     #            </ul>
-    #            <p>For <code>io2</code> volumes, you can achieve up to 256,000 IOPS on
-    #   <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances">instances
+    #            <p>For <code>io2</code> volumes, you can achieve up to 256,000 IOPS on 
+    #   <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances">instances 
     #   built on the Nitro System</a>. On other instances, you can achieve performance up to 32,000 IOPS.</p>
     #            <p>This parameter is required for <code>io1</code> and <code>io2</code> volumes. The default for <code>gp3</code> volumes
     #               is 3,000 IOPS.</p>
@@ -36177,7 +36177,7 @@ module Aws::EC2
     #                   <i>Amazon EBS User Guide</i>.</p>
     #   @return [String]
     # @!attribute kms_key_id
-    #   <p>Identifier (key ID, key alias, key ARN, or alias ARN) of the customer managed KMS key
+    #   <p>Identifier (key ID, key alias, key ARN, or alias ARN) of the customer managed KMS key 
     #               to use for EBS encryption.</p>
     #            <p>This parameter is only supported on <code>BlockDeviceMapping</code> objects called by
     #                   <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RunInstances.html">RunInstances</a>, <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RequestSpotFleet.html">RequestSpotFleet</a>,
@@ -36198,69 +36198,69 @@ module Aws::EC2
     #            <p>Either <code>AvailabilityZone</code> or <code>AvailabilityZoneId</code> can be specified,
     #               but not both. If neither is specified, Amazon EC2 automatically selects an Availability Zone within
     #               the Region.</p>
-    #            <p>This parameter is not supported when using
-    #               <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateFleet.html">CreateFleet</a>,
-    #               <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateImage.html">CreateImage</a>,
-    #               <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeImages.html">DescribeImages</a>,
-    #               <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RequestSpotFleet.html">RequestSpotFleet</a>,
-    #               <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RequestSpotInstances.html">RequestSpotInstances</a>, and
+    #            <p>This parameter is not supported when using 
+    #               <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateFleet.html">CreateFleet</a>, 
+    #               <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateImage.html">CreateImage</a>, 
+    #               <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeImages.html">DescribeImages</a>, 
+    #               <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RequestSpotFleet.html">RequestSpotFleet</a>, 
+    #               <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RequestSpotInstances.html">RequestSpotInstances</a>, and 
     #               <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RunInstances.html">RunInstances</a>.</p>
     #   @return [String]
     # @!attribute encrypted
     #   <p>Indicates whether the encryption state of an EBS volume is changed while being
-    #               restored from a backing snapshot. The effect of setting the encryption state to <code>true</code> depends on
+    #               restored from a backing snapshot. The effect of setting the encryption state to <code>true</code> depends on 
     #   the volume origin (new or from a snapshot), starting encryption state, ownership, and whether encryption by default is enabled. For more information, see <a href="https://docs.aws.amazon.com/ebs/latest/userguide/ebs-encryption.html#encryption-parameters">Amazon EBS encryption</a> in the <i>Amazon EBS User Guide</i>.</p>
     #            <p>In no case can you remove encryption from an encrypted volume.</p>
     #            <p>Encrypted volumes can only be attached to instances that support Amazon EBS encryption. For
     #               more information, see <a href="https://docs.aws.amazon.com/ebs/latest/userguide/ebs-encryption-requirements.html#ebs-encryption_supported_instances">Supported instance types</a>.</p>
     #            <p>This parameter is not returned by <a>DescribeImageAttribute</a>.</p>
-    #            <p>For <a>CreateImage</a> and <a>RegisterImage</a>, whether you can
-    #               include this parameter, and the allowed values differ depending on the type of block
+    #            <p>For <a>CreateImage</a> and <a>RegisterImage</a>, whether you can 
+    #               include this parameter, and the allowed values differ depending on the type of block 
     #               device mapping you are creating.</p>
     #            <ul>
     #               <li>
-    #                  <p>If you are creating a block device mapping for a <b>new (empty)
-    #                       volume</b>, you can include this parameter, and specify either <code>true</code>
-    #                       for an encrypted volume, or <code>false</code> for an unencrypted volume. If you omit
+    #                  <p>If you are creating a block device mapping for a <b>new (empty) 
+    #                       volume</b>, you can include this parameter, and specify either <code>true</code> 
+    #                       for an encrypted volume, or <code>false</code> for an unencrypted volume. If you omit 
     #                       this parameter, it defaults to <code>false</code> (unencrypted).</p>
     #               </li>
     #               <li>
-    #                  <p>If you are creating a block device mapping from an <b>existing
-    #                       encrypted or unencrypted snapshot</b>, you must omit this parameter. If you
-    #                       include this parameter, the request will fail, regardless of the value that you
+    #                  <p>If you are creating a block device mapping from an <b>existing 
+    #                       encrypted or unencrypted snapshot</b>, you must omit this parameter. If you 
+    #                       include this parameter, the request will fail, regardless of the value that you 
     #                       specify.</p>
     #               </li>
     #               <li>
-    #                  <p>If you are creating a block device mapping from an <b>existing
-    #                       unencrypted volume</b>, you can include this parameter, but you must specify
-    #                       <code>false</code>. If you specify <code>true</code>, the request will fail. In this
+    #                  <p>If you are creating a block device mapping from an <b>existing 
+    #                       unencrypted volume</b>, you can include this parameter, but you must specify 
+    #                       <code>false</code>. If you specify <code>true</code>, the request will fail. In this 
     #                       case, we recommend that you omit the parameter.</p>
     #               </li>
     #               <li>
-    #                  <p>If you are creating a block device mapping from an <b>existing
-    #                       encrypted volume</b>, you can include this parameter, and specify either
-    #                       <code>true</code> or <code>false</code>. However, if you specify <code>false</code>,
-    #                       the parameter is ignored and the block device mapping is always encrypted. In this
+    #                  <p>If you are creating a block device mapping from an <b>existing 
+    #                       encrypted volume</b>, you can include this parameter, and specify either 
+    #                       <code>true</code> or <code>false</code>. However, if you specify <code>false</code>, 
+    #                       the parameter is ignored and the block device mapping is always encrypted. In this 
     #                       case, we recommend that you omit the parameter.</p>
     #               </li>
     #            </ul>
     #   @return [Boolean]
     # @!attribute volume_initialization_rate
-    #   <p>Specifies the Amazon EBS Provisioned Rate for Volume Initialization (volume initialization rate), in MiB/s, at which to download the snapshot
-    #               blocks from Amazon S3 to the volume. This is also known as <i>volume
-    #                   initialization</i>. Specifying a volume initialization rate ensures that the volume is initialized
-    #               at a predictable and consistent rate after creation. For more information, see
-    #               <a href="https://docs.aws.amazon.com/ebs/latest/userguide/initalize-volume.html">Initialize
+    #   <p>Specifies the Amazon EBS Provisioned Rate for Volume Initialization (volume initialization rate), in MiB/s, at which to download the snapshot 
+    #               blocks from Amazon S3 to the volume. This is also known as <i>volume 
+    #                   initialization</i>. Specifying a volume initialization rate ensures that the volume is initialized 
+    #               at a predictable and consistent rate after creation. For more information, see 
+    #               <a href="https://docs.aws.amazon.com/ebs/latest/userguide/initalize-volume.html">Initialize 
     #                   Amazon EBS volumes</a> in the <i>Amazon EC2 User Guide</i>.</p>
-    #            <p>This parameter is supported only for volumes created from snapshots. Omit this parameter
+    #            <p>This parameter is supported only for volumes created from snapshots. Omit this parameter 
     #               if:</p>
     #            <ul>
     #               <li>
-    #                  <p>You want to create the volume using fast snapshot restore. You must specify a snapshot
-    #                       that is enabled for fast snapshot restore. In this case, the volume is fully initialized at
+    #                  <p>You want to create the volume using fast snapshot restore. You must specify a snapshot 
+    #                       that is enabled for fast snapshot restore. In this case, the volume is fully initialized at 
     #                       creation.</p>
     #                  <note>
-    #                     <p>If you specify a snapshot that is enabled for fast snapshot restore and a volume initialization rate,
+    #                     <p>If you specify a snapshot that is enabled for fast snapshot restore and a volume initialization rate, 
     #                           the volume will be initialized at the specified rate instead of fast snapshot restore.</p>
     #                  </note>
     #               </li>
@@ -36268,7 +36268,7 @@ module Aws::EC2
     #                  <p>You want to create a volume that is initialized at the default rate.</p>
     #               </li>
     #            </ul>
-    #            <p>This parameter is not supported when using <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateImage.html">CreateImage</a>
+    #            <p>This parameter is not supported when using <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateImage.html">CreateImage</a> 
     #               and <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeImages.html">DescribeImages</a>.</p>
     #            <p>Valid range: 100 - 300 MiB/s</p>
     #   @return [Integer]
@@ -36278,12 +36278,12 @@ module Aws::EC2
     #            <p>Either <code>AvailabilityZone</code> or <code>AvailabilityZoneId</code> can be specified,
     #               but not both. If neither is specified, Amazon EC2 automatically selects an Availability Zone within
     #               the Region.</p>
-    #            <p>This parameter is not supported when using
-    #               <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateFleet.html">CreateFleet</a>,
-    #               <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateImage.html">CreateImage</a>,
-    #               <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeImages.html">DescribeImages</a>,
-    #               <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RequestSpotFleet.html">RequestSpotFleet</a>,
-    #               <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RequestSpotInstances.html">RequestSpotInstances</a>, and
+    #            <p>This parameter is not supported when using 
+    #               <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateFleet.html">CreateFleet</a>, 
+    #               <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateImage.html">CreateImage</a>, 
+    #               <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeImages.html">DescribeImages</a>, 
+    #               <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RequestSpotFleet.html">RequestSpotFleet</a>, 
+    #               <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RequestSpotInstances.html">RequestSpotInstances</a>, and 
     #               <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RunInstances.html">RunInstances</a>.</p>
     #   @return [String]
     # @!attribute ebs_card_index
@@ -36326,7 +36326,7 @@ module Aws::EC2
     #   <p>The throughput that the volume supports, in MiB/s.</p>
     #   @return [Integer]
     # @!attribute kms_key_id
-    #   <p>Identifier (key ID, key alias, key ARN, or alias ARN) of the customer managed KMS key
+    #   <p>Identifier (key ID, key alias, key ARN, or alias ARN) of the customer managed KMS key 
     #            to use for EBS encryption.</p>
     #   @return [String]
     # @!attribute snapshot_id
@@ -36405,13 +36405,13 @@ module Aws::EC2
     #   <p>Indicates whether non-volatile memory express (NVMe) is supported.</p>
     #   @return [String]
     # @!attribute maximum_ebs_attachments
-    #   <p>Indicates the maximum number of Amazon EBS volumes that can be attached to
-    #      the instance type. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/volume_limits.html">Amazon EBS volume limits for
+    #   <p>Indicates the maximum number of Amazon EBS volumes that can be attached to 
+    #      the instance type. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/volume_limits.html">Amazon EBS volume limits for 
     #       Amazon EC2 instances</a> in the <i>Amazon EC2 User Guide</i>.</p>
     #   @return [Integer]
     # @!attribute attachment_limit_type
-    #   <p>Indicates whether the instance type features a shared or dedicated Amazon EBS
-    #      volume attachment limit. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/volume_limits.html">Amazon EBS volume limits for
+    #   <p>Indicates whether the instance type features a shared or dedicated Amazon EBS 
+    #      volume attachment limit. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/volume_limits.html">Amazon EBS volume limits for 
     #       Amazon EC2 instances</a> in the <i>Amazon EC2 User Guide</i>.</p>
     #   @return [String]
     # @!attribute maximum_ebs_cards
@@ -36449,12 +36449,12 @@ module Aws::EC2
     #   <p>The ID of the EBS volume.</p>
     #   @return [String]
     # @!attribute associated_resource
-    #   <p>The ARN of the Amazon Web Services-managed resource
+    #   <p>The ARN of the Amazon Web Services-managed resource 
     #               to which the volume is attached.</p>
     #   @return [String]
     # @!attribute volume_owner_id
     #   <p>The ID of the Amazon Web Services account that owns the volume.</p>
-    #            <p>This parameter is returned only for volumes that are attached to
+    #            <p>This parameter is returned only for volumes that are attached to 
     #               Amazon Web Services-managed resources.</p>
     #   @return [String]
     # @!attribute operator
@@ -36579,7 +36579,7 @@ module Aws::EC2
     #   <p>The current state of the EC2 Instance Connect Endpoint.</p>
     #   @return [String]
     # @!attribute state_message
-    #   <p>The message for the current state of the EC2 Instance Connect Endpoint.
+    #   <p>The message for the current state of the EC2 Instance Connect Endpoint. 
     #           Can include a failure message.</p>
     #   @return [String]
     # @!attribute dns_name
@@ -36622,7 +36622,7 @@ module Aws::EC2
     #            </p>
     #   @return [Boolean]
     # @!attribute security_group_ids
-    #   <p>The security groups associated with the endpoint. If you didn't specify a security group,
+    #   <p>The security groups associated with the endpoint. If you didn't specify a security group, 
     #               the default security group for your VPC is associated with the endpoint.</p>
     #   @return [Array<String>]
     # @!attribute tags
@@ -36813,7 +36813,7 @@ module Aws::EC2
     #             <p>Amazon Elastic Inference is no longer available.</p>
     #          </note>
     #          <p>
-    #            Describes an elastic inference accelerator.
+    #            Describes an elastic inference accelerator. 
     #         </p>
     # @!attribute type
     #   <p>
@@ -36822,7 +36822,7 @@ module Aws::EC2
     #   @return [String]
     # @!attribute count
     #   <p>
-    #               The number of elastic inference accelerators to attach to the instance.
+    #               The number of elastic inference accelerators to attach to the instance. 
     #           </p>
     #            <p>Default: 1</p>
     #   @return [Integer]
@@ -36839,16 +36839,16 @@ module Aws::EC2
     #             <p>Amazon Elastic Inference is no longer available.</p>
     #          </note>
     #          <p>
-    #             Describes the association between an instance and an elastic inference accelerator.
+    #             Describes the association between an instance and an elastic inference accelerator. 
     #         </p>
     # @!attribute elastic_inference_accelerator_arn
     #   <p>
-    #               The Amazon Resource Name (ARN) of the elastic inference accelerator.
+    #               The Amazon Resource Name (ARN) of the elastic inference accelerator. 
     #           </p>
     #   @return [String]
     # @!attribute elastic_inference_accelerator_association_id
     #   <p>
-    #               The ID of the association.
+    #               The ID of the association. 
     #           </p>
     #   @return [String]
     # @!attribute elastic_inference_accelerator_association_state
@@ -36872,13 +36872,13 @@ module Aws::EC2
       include ::Smithy::Schema::Structure
     end
 
-    # <p>ENA Express uses Amazon Web Services Scalable Reliable Datagram (SRD) technology to increase the
-    # 			maximum bandwidth used per stream and minimize tail latency of network traffic between EC2 instances.
-    # 			With ENA Express, you can communicate between two EC2 instances in the same subnet within the same
+    # <p>ENA Express uses Amazon Web Services Scalable Reliable Datagram (SRD) technology to increase the 
+    # 			maximum bandwidth used per stream and minimize tail latency of network traffic between EC2 instances. 
+    # 			With ENA Express, you can communicate between two EC2 instances in the same subnet within the same 
     # 			account, or in different accounts. Both sending and receiving instances must have ENA Express enabled.</p>
-    #          <p>To improve the reliability of network packet delivery, ENA Express reorders network packets on the
-    # 			receiving end by default. However, some UDP-based applications are designed to handle network packets
-    # 			that are out of order to reduce the overhead for packet delivery at the network layer. When ENA Express
+    #          <p>To improve the reliability of network packet delivery, ENA Express reorders network packets on the 
+    # 			receiving end by default. However, some UDP-based applications are designed to handle network packets 
+    # 			that are out of order to reduce the overhead for packet delivery at the network layer. When ENA Express 
     # 			is enabled, you can specify whether UDP network traffic uses it.</p>
     # @!attribute ena_srd_enabled
     #   <p>Indicates whether ENA Express is enabled for the network interface.</p>
@@ -36914,13 +36914,13 @@ module Aws::EC2
       include ::Smithy::Schema::Structure
     end
 
-    # <p>ENA Express is compatible with both TCP and UDP transport protocols. When it's enabled, TCP traffic
-    # 			automatically uses it. However, some UDP-based applications are designed to handle network packets that are
-    # 			out of order, without a need for retransmission, such as live video broadcasting or other near-real-time
-    # 			applications. For UDP traffic, you can specify whether to use ENA Express, based on your application
+    # <p>ENA Express is compatible with both TCP and UDP transport protocols. When it's enabled, TCP traffic 
+    # 			automatically uses it. However, some UDP-based applications are designed to handle network packets that are 
+    # 			out of order, without a need for retransmission, such as live video broadcasting or other near-real-time 
+    # 			applications. For UDP traffic, you can specify whether to use ENA Express, based on your application 
     # 			environment needs.</p>
     # @!attribute ena_srd_udp_enabled
-    #   <p>Indicates whether UDP traffic to and from the instance uses ENA Express. To specify this setting,
+    #   <p>Indicates whether UDP traffic to and from the instance uses ENA Express. To specify this setting, 
     #   			you must first enable ENA Express.</p>
     #   @return [Boolean]
     class EnaSrdUdpSpecification < Struct.new(
@@ -36951,8 +36951,8 @@ module Aws::EC2
     #   <p>The ID of the account that you want to transfer the Elastic IP address to.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class EnableAddressTransferRequest < Struct.new(
@@ -36982,8 +36982,8 @@ module Aws::EC2
     #         not allowed by the image criteria.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #   			and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #   			and provides an error response. If you have the required permissions, the error response is 
     #   			<code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class EnableAllowedImagesSettingsRequest < Struct.new(
@@ -37017,8 +37017,8 @@ module Aws::EC2
     #   <p>A unique, case-sensitive identifier that you provide to ensure that the operation completes no more than one time. If you retry a request with the same token, the service ignores the request but does not return an error. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html">Ensuring idempotency</a>.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the operation, without actually making the
-    #     request, and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the operation, without actually making the 
+    #     request, and provides an error response. If you have the required permissions, the error response is 
     #     <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class EnableApplicationStatusCheckSuppressionRequest < Struct.new(
@@ -37060,8 +37060,8 @@ module Aws::EC2
     #   <p>The statistic used for the enabled subscription.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class EnableAwsNetworkPerformanceMetricSubscriptionRequest < Struct.new(
@@ -37094,13 +37094,13 @@ module Aws::EC2
     #   @return [Boolean]
     # @!attribute dry_run
     #   <p>
-    #   Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.
+    #   Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. 
     #   If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.
     #   </p>
     #   @return [Boolean]
     # @!attribute client_token
     #   <p>
-    #   Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+    #   Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. 
     #   </p>
     #   @return [String]
     class EnableCapacityManagerRequest < Struct.new(
@@ -37133,8 +37133,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class EnableEbsEncryptionByDefaultRequest < Struct.new(
@@ -37179,8 +37179,8 @@ module Aws::EC2
     #         greater.</p>
     #   @return [Integer]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #   			and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #   			and provides an error response. If you have the required permissions, the error response is 
     #   			<code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class EnableFastLaunchRequest < Struct.new(
@@ -37319,7 +37319,7 @@ module Aws::EC2
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>Client.UserInitiated - Lifecycle state transition</code> - The state successfully transitioned
+    #                     <code>Client.UserInitiated - Lifecycle state transition</code> - The state successfully transitioned 
     #             to <code>optimizing</code>, <code>enabled</code>, or <code>disabled</code>.</p>
     #               </li>
     #            </ul>
@@ -37377,8 +37377,8 @@ module Aws::EC2
     #         a snapshot that was shared with you from another Amazon Web Services account.</p>
     #   @return [Array<String>]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class EnableFastSnapshotRestoresRequest < Struct.new(
@@ -37413,8 +37413,8 @@ module Aws::EC2
     #         in the specified Region.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #   			and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #   			and provides an error response. If you have the required permissions, the error response is 
     #   			<code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class EnableImageBlockPublicAccessRequest < Struct.new(
@@ -37450,8 +37450,8 @@ module Aws::EC2
     #         date.</p>
     #   @return [Time]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #   			and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #   			and provides an error response. If you have the required permissions, the error response is 
     #   			<code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class EnableImageDeprecationRequest < Struct.new(
@@ -37483,8 +37483,8 @@ module Aws::EC2
     #         protection is disabled.</p>
     #   @return [Boolean]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #   			and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #   			and provides an error response. If you have the required permissions, the error response is 
     #   			<code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class EnableImageDeregistrationProtectionRequest < Struct.new(
@@ -37512,8 +37512,8 @@ module Aws::EC2
     #   <p>The ID of the AMI.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #   			and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #   			and provides an error response. If you have the required permissions, the error response is 
     #   			<code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class EnableImageRequest < Struct.new(
@@ -37540,15 +37540,15 @@ module Aws::EC2
     #   <p>The IDs of the instances to enable for SQL Server High Availability standby detection monitoring.</p>
     #   @return [Array<String>]
     # @!attribute sql_server_credentials
-    #   <p>The ARN of the Secrets Manager secret containing the SQL Server access credentials. The specified
-    #         secret must contain valid SQL Server credentials for the specified instances. If not specified,
-    #         deafult local user credentials will be used by the Amazon Web Services Systems Manager agent. To enable
+    #   <p>The ARN of the Secrets Manager secret containing the SQL Server access credentials. The specified 
+    #         secret must contain valid SQL Server credentials for the specified instances. If not specified, 
+    #         deafult local user credentials will be used by the Amazon Web Services Systems Manager agent. To enable 
     #         instances with different credentials, you must make separate requests.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action,
-    #       without actually making the request, and provides an error response. If you have the
-    #       required permissions, the error response is <code>DryRunOperation</code>. Otherwise,
+    #   <p>Checks whether you have the required permissions for the action, 
+    #       without actually making the request, and provides an error response. If you have the 
+    #       required permissions, the error response is <code>DryRunOperation</code>. Otherwise, 
     #       it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class EnableInstanceSqlHaStandbyDetectionsRequest < Struct.new(
@@ -37562,7 +37562,7 @@ module Aws::EC2
     end
 
     # @!attribute instances
-    #   <p>Information about the instances that were enabled for SQL Server High Availability standby
+    #   <p>Information about the instances that were enabled for SQL Server High Availability standby 
     #         detection monitoring.</p>
     #   @return [Array<Types::RegisteredInstance>]
     class EnableInstanceSqlHaStandbyDetectionsResult < Struct.new(
@@ -37624,8 +37624,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute delegated_admin_account_id
@@ -37652,8 +37652,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute ipam_policy_id
@@ -37685,8 +37685,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class EnableReachabilityAnalyzerOrganizationSharingRequest < Struct.new(
@@ -37715,8 +37715,8 @@ module Aws::EC2
     #   <p>The ID of the route table to which route server will propagate routes.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class EnableRouteServerPropagationRequest < Struct.new(
@@ -37765,21 +37765,21 @@ module Aws::EC2
     end
 
     # @!attribute state
-    #   <p>The mode in which to enable block public access for snapshots for the Region.
+    #   <p>The mode in which to enable block public access for snapshots for the Region. 
     #         Specify one of the following values:</p>
     #            <ul>
     #               <li>
     #                  <p>
-    #                     <code>block-all-sharing</code> - Prevents all public sharing of snapshots in
-    #             the Region. Users in the account will no longer be able to request new public
-    #             sharing. Additionally, snapshots that are already publicly shared are treated as
+    #                     <code>block-all-sharing</code> - Prevents all public sharing of snapshots in 
+    #             the Region. Users in the account will no longer be able to request new public 
+    #             sharing. Additionally, snapshots that are already publicly shared are treated as 
     #             private and they are no longer publicly available.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>block-new-sharing</code>  - Prevents only new public sharing of snapshots
-    #             in the Region. Users in the account will no longer be able to request new public
-    #             sharing. However, snapshots that are already publicly shared, remain publicly
+    #                     <code>block-new-sharing</code>  - Prevents only new public sharing of snapshots 
+    #             in the Region. Users in the account will no longer be able to request new public 
+    #             sharing. However, snapshots that are already publicly shared, remain publicly 
     #             available.</p>
     #               </li>
     #            </ul>
@@ -37787,8 +37787,8 @@ module Aws::EC2
     #               <code>unblocked</code> is not a valid value for <b>EnableSnapshotBlockPublicAccess</b>.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class EnableSnapshotBlockPublicAccessRequest < Struct.new(
@@ -37801,8 +37801,8 @@ module Aws::EC2
     end
 
     # @!attribute state
-    #   <p>The state of block public access for snapshots for the account and Region. Returns
-    #         either <code>block-all-sharing</code> or <code>block-new-sharing</code> if the request
+    #   <p>The state of block public access for snapshots for the account and Region. Returns 
+    #         either <code>block-all-sharing</code> or <code>block-new-sharing</code> if the request 
     #         succeeds.</p>
     #   @return [String]
     class EnableSnapshotBlockPublicAccessResult < Struct.new(
@@ -37820,8 +37820,8 @@ module Aws::EC2
     #   <p>The ID of the attachment.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute transit_gateway_route_table_announcement_id
@@ -37876,8 +37876,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute volume_id
@@ -37915,8 +37915,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute vpc_id
@@ -38110,10 +38110,10 @@ module Aws::EC2
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>launchSpecUnusable</code> - The price specified in a launch specification
+    #                     <code>launchSpecUnusable</code> - The price specified in a launch specification 
     #                  is not valid because it is below the Spot price for the requested Spot pools.</p>
-    #                  <p>Note: Even if a fleet with the <code>maintain</code> request type is in the process
-    #                  of being canceled, it may still publish a <code>launchSpecUnusable</code> event. This
+    #                  <p>Note: Even if a fleet with the <code>maintain</code> request type is in the process 
+    #                  of being canceled, it may still publish a <code>launchSpecUnusable</code> event. This 
     #                  does not mean that the canceled fleet is attempting to launch a new instance.</p>
     #               </li>
     #               <li>
@@ -38436,8 +38436,8 @@ module Aws::EC2
     #   <p>The disk image format.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute image_id
@@ -38730,8 +38730,8 @@ module Aws::EC2
     #   <p>The name of the S3 bucket.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class ExportTransitGatewayRoutesRequest < Struct.new(
@@ -38746,7 +38746,7 @@ module Aws::EC2
     end
 
     # @!attribute s3_location
-    #   <p>The URL of the exported file in Amazon S3. For example,
+    #   <p>The URL of the exported file in Amazon S3. For example, 
     #            s3://<i>bucket_name</i>/VPCTransitGateway/TransitGatewayRouteTables/<i>file_name</i>.</p>
     #   @return [String]
     class ExportTransitGatewayRoutesResult < Struct.new(
@@ -38761,8 +38761,8 @@ module Aws::EC2
     #   <p>The ID of the Verified Access instance.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class ExportVerifiedAccessInstanceClientConfigurationRequest < Struct.new(
@@ -38961,17 +38961,17 @@ module Aws::EC2
       include ::Smithy::Schema::Structure
     end
 
-    # <p>A filter name and value pair that is used to return a more specific list of results from a describe operation.
+    # <p>A filter name and value pair that is used to return a more specific list of results from a describe operation. 
     #          Filters can be used to match a set of resources by specific criteria, such as tags, attributes, or IDs.</p>
-    #          <p>If you specify multiple filters, the filters are joined with an <code>AND</code>, and the request returns only
+    #          <p>If you specify multiple filters, the filters are joined with an <code>AND</code>, and the request returns only 
     #            results that match all of the specified filters.</p>
     #          <p>For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Filtering.html#Filtering_Resources_CLI">List and filter using the CLI and API</a> in the <i>Amazon EC2 User Guide</i>.</p>
     # @!attribute name
     #   <p>The name of the filter. Filter names are case-sensitive.</p>
     #   @return [String]
     # @!attribute values
-    #   <p>The filter values. Filter values are case-sensitive. If you specify multiple values for a
-    #            filter, the values are joined with an <code>OR</code>, and the request returns all results
+    #   <p>The filter values. Filter values are case-sensitive. If you specify multiple values for a 
+    #            filter, the values are joined with an <code>OR</code>, and the request returns all results 
     #            that match any of the specified values.</p>
     #   @return [Array<String>]
     class Filter < Struct.new(
@@ -39019,7 +39019,7 @@ module Aws::EC2
     #   <p>The protocol.</p>
     #   @return [String]
     # @!attribute rule_action
-    #   <p>The rule action. The possible values are <code>pass</code>, <code>drop</code>, and
+    #   <p>The rule action. The possible values are <code>pass</code>, <code>drop</code>, and 
     #            <code>alert</code>.</p>
     #   @return [String]
     # @!attribute direction
@@ -39060,7 +39060,7 @@ module Aws::EC2
     #   <p>The protocols.</p>
     #   @return [Array<Integer>]
     # @!attribute rule_action
-    #   <p>The rule action. The possible values are <code>pass</code>, <code>drop</code>, and
+    #   <p>The rule action. The possible values are <code>pass</code>, <code>drop</code>, and 
     #            <code>forward_to_site</code>.</p>
     #   @return [String]
     # @!attribute priority
@@ -39419,8 +39419,8 @@ module Aws::EC2
     #                     <code>io2</code>: 100 - 256,000 IOPS</p>
     #               </li>
     #            </ul>
-    #            <p>For <code>io2</code> volumes, you can achieve up to 256,000 IOPS on
-    #   <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances">instances
+    #            <p>For <code>io2</code> volumes, you can achieve up to 256,000 IOPS on 
+    #   <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances">instances 
     #   built on the Nitro System</a>. On other instances, you can achieve performance up to 32,000 IOPS.</p>
     #            <p>This parameter is required for <code>io1</code> and <code>io2</code> volumes. The default for <code>gp3</code> volumes
     #            is 3,000 IOPS.</p>
@@ -39431,7 +39431,7 @@ module Aws::EC2
     #            <p>Valid Range: Minimum value of 125. Maximum value of 2,000.</p>
     #   @return [Integer]
     # @!attribute kms_key_id
-    #   <p>Identifier (key ID, key alias, key ARN, or alias ARN) of the customer managed KMS key
+    #   <p>Identifier (key ID, key alias, key ARN, or alias ARN) of the customer managed KMS key 
     #            to use for EBS encryption.</p>
     #            <p>This parameter is only supported on <code>BlockDeviceMapping</code> objects called by
     #               <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateFleet.html">CreateFleet</a>, <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RequestSpotInstances.html">RequestSpotInstances</a>, and <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RunInstances.html">RunInstances</a>.</p>
@@ -39602,12 +39602,12 @@ module Aws::EC2
     #            </note>
     #   @return [String]
     # @!attribute max_price
-    #   <p>The maximum price per unit hour that you are willing to pay for a Spot Instance. We do not
-    #            recommend using this parameter because it can lead to increased interruptions. If you
+    #   <p>The maximum price per unit hour that you are willing to pay for a Spot Instance. We do not 
+    #            recommend using this parameter because it can lead to increased interruptions. If you 
     #            do not specify this parameter, you will pay the current Spot price.
     #         </p>
     #            <important>
-    #               <p>If you specify a maximum price, your instances will be interrupted more frequently
+    #               <p>If you specify a maximum price, your instances will be interrupted more frequently 
     #            than if you do not specify this parameter.</p>
     #               <p>If you specify a maximum price, it must be more than USD $0.001. Specifying a value
     #            below USD $0.001 will result in an <code>InvalidParameterValue</code> error
@@ -39769,12 +39769,12 @@ module Aws::EC2
     #            </note>
     #   @return [String]
     # @!attribute max_price
-    #   <p>The maximum price per unit hour that you are willing to pay for a Spot Instance. We do not
-    #            recommend using this parameter because it can lead to increased interruptions. If you
+    #   <p>The maximum price per unit hour that you are willing to pay for a Spot Instance. We do not 
+    #            recommend using this parameter because it can lead to increased interruptions. If you 
     #            do not specify this parameter, you will pay the current Spot price.
     #         </p>
     #            <important>
-    #               <p>If you specify a maximum price, your instances will be interrupted more
+    #               <p>If you specify a maximum price, your instances will be interrupted more 
     #               frequently than if you do not specify this parameter.</p>
     #               <p>If you specify a maximum price, it must be more than USD $0.001. Specifying a value
     #               below USD $0.001 will result in an <code>InvalidParameterValue</code> error
@@ -40409,8 +40409,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #   			and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #   			and provides an error response. If you have the required permissions, the error response is 
     #   			<code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class GetAllowedImagesSettingsRequest < Struct.new(
@@ -40472,7 +40472,7 @@ module Aws::EC2
     end
 
     # @!attribute certificate_arn
-    #   <p>The ARN of the ACM certificate for which to view the associated IAM roles, encryption keys, and Amazon
+    #   <p>The ARN of the ACM certificate for which to view the associated IAM roles, encryption keys, and Amazon 
     #   			S3 object information.</p>
     #   @return [String]
     # @!attribute dry_run
@@ -40509,8 +40509,8 @@ module Aws::EC2
     #   	To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.</p>
     #   @return [Integer]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class GetAssociatedIpv6PoolCidrsRequest < Struct.new(
@@ -40557,8 +40557,8 @@ module Aws::EC2
     #   <p>The token for the next page of results.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class GetAwsNetworkPerformanceDataRequest < Struct.new(
@@ -40591,7 +40591,7 @@ module Aws::EC2
 
     # @!attribute dry_run
     #   <p>
-    #   Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.
+    #   Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. 
     #   If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.
     #   </p>
     #   @return [Boolean]
@@ -40625,7 +40625,7 @@ module Aws::EC2
     #   @return [String]
     # @!attribute ingestion_status_message
     #   <p>
-    #   A descriptive message providing additional details about the current ingestion status. This may include error information if ingestion has
+    #   A descriptive message providing additional details about the current ingestion status. This may include error information if ingestion has 
     #   failed or progress details during initial setup.
     #   </p>
     #   @return [String]
@@ -40670,7 +40670,7 @@ module Aws::EC2
     #   @return [Time]
     # @!attribute period
     #   <p>
-    #   The granularity, in seconds, of the returned data points.
+    #   The granularity, in seconds, of the returned data points. 
     #   </p>
     #   @return [Integer]
     # @!attribute group_by
@@ -40695,7 +40695,7 @@ module Aws::EC2
     #   @return [String]
     # @!attribute dry_run
     #   <p>
-    #   Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have
+    #   Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have 
     #   the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.
     #   </p>
     #   @return [Boolean]
@@ -40746,17 +40746,17 @@ module Aws::EC2
     #   @return [Array<Types::CapacityManagerCondition>]
     # @!attribute start_time
     #   <p>
-    #   The start time for the dimension query, in ISO 8601 format. Only dimensions with data in this time range will be returned.
+    #   The start time for the dimension query, in ISO 8601 format. Only dimensions with data in this time range will be returned. 
     #   </p>
     #   @return [Time]
     # @!attribute end_time
     #   <p>
-    #   The end time for the dimension query, in ISO 8601 format. Only dimensions with data in this time range will be returned.
+    #   The end time for the dimension query, in ISO 8601 format. Only dimensions with data in this time range will be returned. 
     #   </p>
     #   @return [Time]
     # @!attribute metric_names
     #   <p>
-    #   The metric names to use as an additional filter when retrieving dimensions. Only dimensions that have data for these
+    #   The metric names to use as an additional filter when retrieving dimensions. Only dimensions that have data for these 
     #   metrics will be returned. Required parameter with maximum size of 1 for v1.
     #   </p>
     #   @return [Array<String>]
@@ -40772,7 +40772,7 @@ module Aws::EC2
     #   @return [String]
     # @!attribute dry_run
     #   <p>
-    #   Checks whether you have the required permissions for the action, without actually making the request, and provides
+    #   Checks whether you have the required permissions for the action, without actually making the request, and provides 
     #   an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.
     #   </p>
     #   @return [Boolean]
@@ -40862,7 +40862,7 @@ module Aws::EC2
     #   <p>The token to use to retrieve the next page of results.</p>
     #   @return [String]
     # @!attribute max_results
-    #   <p>The maximum number of items to return for this request. To get the next page of items, make another request with the token returned in the output. For more information,
+    #   <p>The maximum number of items to return for this request. To get the next page of items, make another request with the token returned in the output. For more information, 
     #       see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination">Pagination</a>.</p>
     #   @return [Integer]
     # @!attribute dry_run
@@ -40905,50 +40905,50 @@ module Aws::EC2
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>expired</code> - The Capacity Reservation expired automatically at the date and time
+    #                     <code>expired</code> - The Capacity Reservation expired automatically at the date and time 
     #   		specified in your reservation request. The reserved capacity is no longer available for your use.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>cancelled</code> - The Capacity Reservation was canceled. The reserved capacity is no
+    #                     <code>cancelled</code> - The Capacity Reservation was canceled. The reserved capacity is no 
     #   		longer available for your use.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>pending</code> - The Capacity Reservation request was successful but the capacity
+    #                     <code>pending</code> - The Capacity Reservation request was successful but the capacity 
     #   		provisioning is still pending.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>failed</code> - The Capacity Reservation request has failed. A request can fail due to
-    #   		request parameters that are not valid, capacity constraints, or instance limit constraints. You
+    #                     <code>failed</code> - The Capacity Reservation request has failed. A request can fail due to 
+    #   		request parameters that are not valid, capacity constraints, or instance limit constraints. You 
     #   		can view a failed request for 60 minutes.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>scheduled</code> - (<i>Future-dated Capacity Reservations</i>) The
-    #   		future-dated Capacity Reservation request was approved and the Capacity Reservation is scheduled
+    #                     <code>scheduled</code> - (<i>Future-dated Capacity Reservations</i>) The 
+    #   		future-dated Capacity Reservation request was approved and the Capacity Reservation is scheduled 
     #   		for delivery on the requested start date.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>payment-pending</code> - (<i>Capacity Blocks</i>) The upfront
+    #                     <code>payment-pending</code> - (<i>Capacity Blocks</i>) The upfront 
     #   	    payment has not been processed yet.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>payment-failed</code> - (<i>Capacity Blocks</i>) The upfront
+    #                     <code>payment-failed</code> - (<i>Capacity Blocks</i>) The upfront 
     #   	    payment was not processed in the 12-hour time frame. Your Capacity Block was released.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>assessing</code> - (<i>Future-dated Capacity Reservations</i>)
+    #                     <code>assessing</code> - (<i>Future-dated Capacity Reservations</i>) 
     #   		Amazon EC2 is assessing your request for a future-dated Capacity Reservation.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>delayed</code> - (<i>Future-dated Capacity Reservations</i>) Amazon EC2
-    #   		encountered a delay in provisioning the requested future-dated Capacity Reservation. Amazon EC2 is
+    #                     <code>delayed</code> - (<i>Future-dated Capacity Reservations</i>) Amazon EC2 
+    #   		encountered a delay in provisioning the requested future-dated Capacity Reservation. Amazon EC2 is 
     #   		unable to deliver the requested capacity by the requested start date and time.</p>
     #               </li>
     #               <li>
@@ -41085,8 +41085,8 @@ module Aws::EC2
     #   <p>The token for the next page of results.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class GetCoipPoolUsageRequest < Struct.new(
@@ -41132,8 +41132,8 @@ module Aws::EC2
     #            <p>Default: disabled (<code>false</code>)</p>
     #   @return [Boolean]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the operation, without actually making the
-    #     request, and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the operation, without actually making the 
+    #     request, and provides an error response. If you have the required permissions, the error response is 
     #     <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class GetConsoleOutputRequest < Struct.new(
@@ -41167,8 +41167,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the operation, without actually making the
-    #     request, and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the operation, without actually making the 
+    #     request, and provides an error response. If you have the required permissions, the error response is 
     #     <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute instance_id
@@ -41204,8 +41204,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute report_id
@@ -41280,8 +41280,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the operation, without actually making the
-    #     request, and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the operation, without actually making the 
+    #     request, and provides an error response. If you have the required permissions, the error response is 
     #     <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute instance_family
@@ -41308,8 +41308,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class GetEbsDefaultKmsKeyIdRequest < Struct.new(
@@ -41332,8 +41332,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class GetEbsEncryptionByDefaultRequest < Struct.new(
@@ -41360,8 +41360,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class GetEnabledIpamPolicyRequest < Struct.new(
@@ -41392,8 +41392,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute flow_log_id
@@ -41436,7 +41436,7 @@ module Aws::EC2
     #   <p>The token to use to retrieve the next page of results.</p>
     #   @return [String]
     # @!attribute max_results
-    #   <p>The maximum number of items to return for this request. To get the next page of items, make another request with the token returned in the output. For more information,
+    #   <p>The maximum number of items to return for this request. To get the next page of items, make another request with the token returned in the output. For more information, 
     #       see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination">Pagination</a>.</p>
     #   @return [Integer]
     # @!attribute dry_run
@@ -41514,8 +41514,8 @@ module Aws::EC2
     #   <p>The ID of the AMI whose ancestry you want to trace.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #   			and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #   			and provides an error response. If you have the required permissions, the error response is 
     #   			<code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class GetImageAncestryRequest < Struct.new(
@@ -41540,8 +41540,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #   			and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #   			and provides an error response. If you have the required permissions, the error response is 
     #   			<code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class GetImageBlockPublicAccessStateRequest < Struct.new(
@@ -41594,8 +41594,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the operation, without actually making the
-    #     request, and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the operation, without actually making the 
+    #     request, and provides an error response. If you have the required permissions, the error response is 
     #     <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class GetInstanceMetadataDefaultsRequest < Struct.new(
@@ -41624,13 +41624,13 @@ module Aws::EC2
     #   <p>The required public endorsement key type.</p>
     #   @return [String]
     # @!attribute key_format
-    #   <p>The required public endorsement key format. Specify <code>der</code> for a DER-encoded public
-    #               key that is compatible with OpenSSL. Specify <code>tpmt</code> for a TPM 2.0 format that is
+    #   <p>The required public endorsement key format. Specify <code>der</code> for a DER-encoded public 
+    #               key that is compatible with OpenSSL. Specify <code>tpmt</code> for a TPM 2.0 format that is 
     #               compatible with tpm2-tools. The returned key is base64 encoded.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Specify this parameter to verify whether the request will succeed, without actually making the
-    #               request. If the request will succeed, the response is <code>DryRunOperation</code>. Otherwise,
+    #   <p>Specify this parameter to verify whether the request will succeed, without actually making the 
+    #               request. If the request will succeed, the response is <code>DryRunOperation</code>. Otherwise, 
     #               the response is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class GetInstanceTpmEkPubRequest < Struct.new(
@@ -41668,8 +41668,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute architecture_types
@@ -41726,8 +41726,8 @@ module Aws::EC2
     #   <p>The ID of the instance from which to retrieve the UEFI data.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the operation, without actually making the
-    #     request, and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the operation, without actually making the 
+    #     request, and provides an error response. If you have the required permissions, the error response is 
     #     <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class GetInstanceUefiDataRequest < Struct.new(
@@ -41755,12 +41755,12 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute cidr
-    #   <p>The CIDR you want the history of. The CIDR can be an IPv4 or IPv6 IP address range.
+    #   <p>The CIDR you want the history of. The CIDR can be an IPv4 or IPv6 IP address range. 
     #            If you enter a /16 IPv4 CIDR, you will get records that match it exactly. You will not get records for any subnets within the /16 CIDR.</p>
     #   @return [String]
     # @!attribute ipam_scope_id
@@ -41812,8 +41812,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute ipam_resource_discovery_id
@@ -41860,8 +41860,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute ipam_resource_discovery_id
@@ -41912,8 +41912,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute ipam_resource_discovery_id
@@ -42090,8 +42090,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute ipam_policy_id
@@ -42149,8 +42149,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute max_results
@@ -42194,8 +42194,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute ipam_pool_id
@@ -42242,8 +42242,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute ipam_pool_id
@@ -42286,8 +42286,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute ipam_prefix_list_resolver_id
@@ -42330,8 +42330,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute ipam_prefix_list_resolver_id
@@ -42374,8 +42374,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute ipam_prefix_list_resolver_id
@@ -42422,8 +42422,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute filters
@@ -42699,8 +42699,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute prefix_list_id
@@ -42740,8 +42740,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute prefix_list_id
@@ -42785,8 +42785,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the operation, without actually making the
-    #     request, and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the operation, without actually making the 
+    #     request, and provides an error response. If you have the required permissions, the error response is 
     #     <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class GetManagedResourceVisibilityRequest < Struct.new(
@@ -42819,8 +42819,8 @@ module Aws::EC2
     #   <p>The token for the next page of results.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class GetNetworkInsightsAccessScopeAnalysisFindingsRequest < Struct.new(
@@ -42861,8 +42861,8 @@ module Aws::EC2
     #   <p>The ID of the Network Access Scope.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class GetNetworkInsightsAccessScopeContentRequest < Struct.new(
@@ -42889,8 +42889,8 @@ module Aws::EC2
     #   <p>The ID of the Windows instance.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the operation, without actually making the
-    #     request, and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the operation, without actually making the 
+    #     request, and provides an error response. If you have the required permissions, the error response is 
     #     <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class GetPasswordDataRequest < Struct.new(
@@ -42995,8 +42995,8 @@ module Aws::EC2
     #   <p>The ID of the route server for which to get association information.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class GetRouteServerAssociationsRequest < Struct.new(
@@ -43026,8 +43026,8 @@ module Aws::EC2
     #   <p>The ID of the route table for which to get propagation information.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class GetRouteServerPropagationsRequest < Struct.new(
@@ -43061,8 +43061,8 @@ module Aws::EC2
     #   <p>The maximum number of routing database entries to return in a single response.</p>
     #   @return [Integer]
     # @!attribute dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute filters
@@ -43136,8 +43136,8 @@ module Aws::EC2
     #            </ul>
     #   @return [Array<Types::Filter>]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class GetSecurityGroupsForVpcRequest < Struct.new(
@@ -43207,8 +43207,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class GetSnapshotBlockPublicAccessStateRequest < Struct.new(
@@ -43224,19 +43224,19 @@ module Aws::EC2
     #            <ul>
     #               <li>
     #                  <p>
-    #                     <code>block-all-sharing</code> - All public sharing of snapshots is blocked. Users in
-    #             the account can't request new public sharing. Additionally, snapshots that were already
+    #                     <code>block-all-sharing</code> - All public sharing of snapshots is blocked. Users in 
+    #             the account can't request new public sharing. Additionally, snapshots that were already 
     #             publicly shared are treated as private and are not publicly available.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>block-new-sharing</code>  - Only new public sharing of snapshots is blocked.
-    #             Users in the account can't request new public sharing. However, snapshots that were
+    #                     <code>block-new-sharing</code>  - Only new public sharing of snapshots is blocked. 
+    #             Users in the account can't request new public sharing. However, snapshots that were 
     #             already publicly shared, remain publicly available.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>unblocked</code>  - Public sharing is not blocked. Users can publicly share
+    #                     <code>unblocked</code>  - Public sharing is not blocked. Users can publicly share 
     #             snapshots.</p>
     #               </li>
     #            </ul>
@@ -43296,8 +43296,8 @@ module Aws::EC2
     #               <code>InstanceTypes</code>.</p>
     #   @return [Types::InstanceRequirementsWithMetadataRequest]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute max_results
@@ -43387,8 +43387,8 @@ module Aws::EC2
     #   <p>The ID of the subnet.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute next_token
@@ -43449,8 +43449,8 @@ module Aws::EC2
     #   <p>The token for the next page of results.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class GetTransitGatewayAttachmentPropagationsRequest < Struct.new(
@@ -43494,8 +43494,8 @@ module Aws::EC2
     #   <p>The token for the next page of results.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class GetTransitGatewayMeteringPolicyEntriesRequest < Struct.new(
@@ -43563,8 +43563,8 @@ module Aws::EC2
     #   <p>The token for the next page of results.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class GetTransitGatewayMulticastDomainAssociationsRequest < Struct.new(
@@ -43608,8 +43608,8 @@ module Aws::EC2
     #   <p>The token for the next page of results.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class GetTransitGatewayPolicyTableAssociationsRequest < Struct.new(
@@ -43691,8 +43691,8 @@ module Aws::EC2
     #   <p>The token for the next page of results.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class GetTransitGatewayPolicyTableEntriesRequest < Struct.new(
@@ -43768,8 +43768,8 @@ module Aws::EC2
     #   <p>The token for the next page of results.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class GetTransitGatewayPrefixListReferencesRequest < Struct.new(
@@ -43829,8 +43829,8 @@ module Aws::EC2
     #   <p>The token for the next page of results.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class GetTransitGatewayRouteTableAssociationsRequest < Struct.new(
@@ -43890,8 +43890,8 @@ module Aws::EC2
     #   <p>The token for the next page of results.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class GetTransitGatewayRouteTablePropagationsRequest < Struct.new(
@@ -43925,8 +43925,8 @@ module Aws::EC2
     #   <p>The ID of the Verified Access endpoint.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class GetVerifiedAccessEndpointPolicyRequest < Struct.new(
@@ -43964,8 +43964,8 @@ module Aws::EC2
     #   <p>The token for the next page of results.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class GetVerifiedAccessEndpointTargetsRequest < Struct.new(
@@ -43998,8 +43998,8 @@ module Aws::EC2
     #   <p>The ID of the Verified Access group.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class GetVerifiedAccessGroupPolicyRequest < Struct.new(
@@ -44038,8 +44038,8 @@ module Aws::EC2
     #   <p>The token returned from a previous paginated request. Pagination continues from the end of the items returned by the previous request.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class GetVpcResourcesBlockingEncryptionEnforcementRequest < Struct.new(
@@ -45829,8 +45829,8 @@ module Aws::EC2
     #   <p>Information about the disk containers.</p>
     #   @return [Array<Types::ImageDiskContainer>]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute encrypted
@@ -46135,8 +46135,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute description
@@ -46242,8 +46242,8 @@ module Aws::EC2
     #   <p>The tags to apply to the imported key pair.</p>
     #   @return [Array<Types::TagSpecification>]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute key_name
@@ -46306,8 +46306,8 @@ module Aws::EC2
     #   <p>Information about the disk container.</p>
     #   @return [Types::SnapshotDiskContainer]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute encrypted
@@ -46415,8 +46415,8 @@ module Aws::EC2
     #      but not both.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute availability_zone
@@ -46557,12 +46557,12 @@ module Aws::EC2
     #            <ul>
     #               <li>
     #                  <p>
-    #                     <code>default</code> - Volume initialized using the default volume initialization
+    #                     <code>default</code> - Volume initialized using the default volume initialization 
     #             rate or fast snapshot restore.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>provisioned-rate</code> - Volume initialized using an Amazon EBS Provisioned
+    #                     <code>provisioned-rate</code> - Volume initialized using an Amazon EBS Provisioned 
     #             Rate for Volume Initialization.</p>
     #               </li>
     #               <li>
@@ -46572,11 +46572,11 @@ module Aws::EC2
     #            </ul>
     #   @return [String]
     # @!attribute progress
-    #   <p>The current volume initialization progress as a percentage (0-100). Returns <code>100</code>
+    #   <p>The current volume initialization progress as a percentage (0-100). Returns <code>100</code> 
     #         when volume initialization has completed.</p>
     #   @return [Integer]
     # @!attribute estimated_time_to_complete_in_seconds
-    #   <p>The estimated remaining time, in seconds, for volume initialization to complete. Returns
+    #   <p>The estimated remaining time, in seconds, for volume initialization to complete. Returns 
     #         <code>0</code> when volume initialization has completed.</p>
     #            <p>Only available for volumes created with Amazon EBS Provisioned Rate for Volume Initialization.</p>
     #   @return [Integer]
@@ -46699,8 +46699,8 @@ module Aws::EC2
     #               Enclaves.</p>
     #   @return [Types::EnclaveOptions]
     # @!attribute boot_mode
-    #   <p>The boot mode that was specified by the AMI. If the value is <code>uefi-preferred</code>,
-    #               the AMI supports both UEFI and Legacy BIOS. The <code>currentInstanceBootMode</code> parameter
+    #   <p>The boot mode that was specified by the AMI. If the value is <code>uefi-preferred</code>, 
+    #               the AMI supports both UEFI and Legacy BIOS. The <code>currentInstanceBootMode</code> parameter 
     #               is the boot mode that is used to boot the instance at launch or start.</p>
     #            <note>
     #               <p>The operating system contained in the AMI must be configured to support the specified boot mode.</p>
@@ -46919,13 +46919,13 @@ module Aws::EC2
       include ::Smithy::Schema::Structure
     end
 
-    # <p>ENA Express uses Amazon Web Services Scalable Reliable Datagram (SRD) technology to increase the
-    # 			maximum bandwidth used per stream and minimize tail latency of network traffic between EC2 instances.
-    # 			With ENA Express, you can communicate between two EC2 instances in the same subnet within the same
+    # <p>ENA Express uses Amazon Web Services Scalable Reliable Datagram (SRD) technology to increase the 
+    # 			maximum bandwidth used per stream and minimize tail latency of network traffic between EC2 instances. 
+    # 			With ENA Express, you can communicate between two EC2 instances in the same subnet within the same 
     # 			account, or in different accounts. Both sending and receiving instances must have ENA Express enabled.</p>
-    #          <p>To improve the reliability of network packet delivery, ENA Express reorders network packets on the
-    # 			receiving end by default. However, some UDP-based applications are designed to handle network packets
-    # 			that are out of order to reduce the overhead for packet delivery at the network layer. When ENA Express
+    #          <p>To improve the reliability of network packet delivery, ENA Express reorders network packets on the 
+    # 			receiving end by default. However, some UDP-based applications are designed to handle network packets 
+    # 			that are out of order to reduce the overhead for packet delivery at the network layer. When ENA Express 
     # 			is enabled, you can specify whether UDP network traffic uses it.</p>
     # @!attribute ena_srd_enabled
     #   <p>Indicates whether ENA Express is enabled for the network interface.</p>
@@ -46942,13 +46942,13 @@ module Aws::EC2
       include ::Smithy::Schema::Structure
     end
 
-    # <p>ENA Express is compatible with both TCP and UDP transport protocols. When it's enabled, TCP traffic
-    # 			automatically uses it. However, some UDP-based applications are designed to handle network packets that are
-    # 			out of order, without a need for retransmission, such as live video broadcasting or other near-real-time
-    # 			applications. For UDP traffic, you can specify whether to use ENA Express, based on your application
+    # <p>ENA Express is compatible with both TCP and UDP transport protocols. When it's enabled, TCP traffic 
+    # 			automatically uses it. However, some UDP-based applications are designed to handle network packets that are 
+    # 			out of order, without a need for retransmission, such as live video broadcasting or other near-real-time 
+    # 			applications. For UDP traffic, you can specify whether to use ENA Express, based on your application 
     # 			environment needs.</p>
     # @!attribute ena_srd_udp_enabled
-    #   <p>Indicates whether UDP traffic to and from the instance uses ENA Express. To specify this setting,
+    #   <p>Indicates whether UDP traffic to and from the instance uses ENA Express. To specify this setting, 
     #   			you must first enable ENA Express.</p>
     #   @return [Boolean]
     class InstanceAttachmentEnaSrdUdpSpecification < Struct.new(
@@ -47384,7 +47384,7 @@ module Aws::EC2
     #   <p>The IPv6 address.</p>
     #   @return [String]
     # @!attribute is_primary_ipv6
-    #   <p>Determines if an IPv6 address associated with a network interface is the primary IPv6 address. When you enable an IPv6 GUA address to be a primary IPv6, the first IPv6 GUA will be made the primary IPv6 address until the instance is terminated or the network interface is detached.
+    #   <p>Determines if an IPv6 address associated with a network interface is the primary IPv6 address. When you enable an IPv6 GUA address to be a primary IPv6, the first IPv6 GUA will be made the primary IPv6 address until the instance is terminated or the network interface is detached.  
     #               For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RunInstances.html">RunInstances</a>.</p>
     #   @return [Boolean]
     class InstanceIpv6Address < Struct.new(
@@ -47868,7 +47868,7 @@ module Aws::EC2
     #               be assigned to a new network interface, not an existing one. You cannot specify more
     #               than one network interface in the request. If launching into a default subnet, the
     #               default value is <code>true</code>.</p>
-    #            <p>Amazon Web Services charges for all public IPv4 addresses, including public IPv4 addresses
+    #            <p>Amazon Web Services charges for all public IPv4 addresses, including public IPv4 addresses 
     #   associated with running instances and Elastic IP addresses. For more information, see the <i>Public IPv4 Address</i> tab on the <a href="http://aws.amazon.com/vpc/pricing/">Amazon VPC pricing page</a>.</p>
     #   @return [Boolean]
     # @!attribute delete_on_termination
@@ -48012,11 +48012,11 @@ module Aws::EC2
       include ::Smithy::Schema::Structure
     end
 
-    # <p>With network performance options, you can adjust your bandwidth preferences to meet
+    # <p>With network performance options, you can adjust your bandwidth preferences to meet 
     #     		the needs of the workload that runs on your instance.</p>
     # @!attribute bandwidth_weighting
-    #   <p>When you configure network bandwidth weighting, you can boost your baseline bandwidth for either
-    #       		networking or EBS by up to 25%. The total available baseline bandwidth for your instance remains
+    #   <p>When you configure network bandwidth weighting, you can boost your baseline bandwidth for either 
+    #       		networking or EBS by up to 25%. The total available baseline bandwidth for your instance remains 
     #       		the same. The default option uses the standard bandwidth configuration for your instance type.</p>
     #   @return [String]
     class InstanceNetworkPerformanceOptions < Struct.new(
@@ -48027,10 +48027,10 @@ module Aws::EC2
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Configure network performance options for your instance that are geared towards performance
+    # <p>Configure network performance options for your instance that are geared towards performance 
     #     		improvements based on the workload that it runs.</p>
     # @!attribute bandwidth_weighting
-    #   <p>Specify the bandwidth weighting option to boost the associated type of baseline bandwidth,
+    #   <p>Specify the bandwidth weighting option to boost the associated type of baseline bandwidth, 
     #       		as follows:</p>
     #            <dl>
     #               <dt>default</dt>
@@ -48039,12 +48039,12 @@ module Aws::EC2
     #               </dd>
     #               <dt>vpc-1</dt>
     #               <dd>
-    #                  <p>This option boosts your networking baseline bandwidth and reduces your EBS baseline
+    #                  <p>This option boosts your networking baseline bandwidth and reduces your EBS baseline 
     #       					bandwidth.</p>
     #               </dd>
     #               <dt>ebs-1</dt>
     #               <dd>
-    #                  <p>This option boosts your EBS baseline bandwidth and reduces your networking baseline
+    #                  <p>This option boosts your EBS baseline bandwidth and reduces your networking baseline 
     #       					bandwidth.</p>
     #               </dd>
     #            </dl>
@@ -48090,17 +48090,17 @@ module Aws::EC2
     #          <p>When you specify multiple attributes, you get instance types that satisfy all of the
     #          specified attributes. If you specify multiple values for an attribute, you get instance
     #          types that satisfy any of the specified values.</p>
-    #          <p>To limit the list of instance types from which Amazon EC2 can identify matching instance types,
+    #          <p>To limit the list of instance types from which Amazon EC2 can identify matching instance types, 
     #          you can use one of the following parameters, but not both in the same request:</p>
     #          <ul>
     #             <li>
     #                <p>
-    #                   <code>AllowedInstanceTypes</code> - The instance types to include in the list. All
+    #                   <code>AllowedInstanceTypes</code> - The instance types to include in the list. All 
     #                other instance types are ignored, even if they match your specified attributes.</p>
     #             </li>
     #             <li>
     #                <p>
-    #                   <code>ExcludedInstanceTypes</code> - The instance types to exclude from the list,
+    #                   <code>ExcludedInstanceTypes</code> - The instance types to exclude from the list, 
     #                even if they match your specified attributes.</p>
     #             </li>
     #          </ul>
@@ -48139,8 +48139,8 @@ module Aws::EC2
     #               </li>
     #            </ul>
     #            <note>
-    #               <p>Don't confuse the CPU manufacturer with the CPU architecture. Instances will
-    #            be launched with a compatible CPU architecture based on the Amazon Machine Image (AMI) that you
+    #               <p>Don't confuse the CPU manufacturer with the CPU architecture. Instances will 
+    #            be launched with a compatible CPU architecture based on the Amazon Machine Image (AMI) that you 
     #            specify in your launch template.</p>
     #            </note>
     #            <p>Default: Any manufacturer</p>
@@ -48234,7 +48234,7 @@ module Aws::EC2
     #            </p>
     #   @return [String]
     # @!attribute burstable_performance
-    #   <p>Indicates whether burstable performance T instance types are included, excluded, or required. For more information, see
+    #   <p>Indicates whether burstable performance T instance types are included, excluded, or required. For more information, see 
     #         <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/burstable-performance-instances.html">Burstable performance instances</a>.</p>
     #            <ul>
     #               <li>
@@ -48423,7 +48423,7 @@ module Aws::EC2
     #            <p>Default: No minimum or maximum limits</p>
     #   @return [Types::NetworkBandwidthGbps]
     # @!attribute allowed_instance_types
-    #   <p>The instance types to apply your specified attributes against. All other instance types
+    #   <p>The instance types to apply your specified attributes against. All other instance types 
     #            are ignored, even if they match your specified attributes.</p>
     #            <p>You can use strings with one or more wild cards, represented by
     #            an asterisk (<code>*</code>), to allow an instance type, size, or generation. The
@@ -48516,17 +48516,17 @@ module Aws::EC2
     #          <p>When you specify multiple attributes, you get instance types that satisfy all of the
     #          specified attributes. If you specify multiple values for an attribute, you get instance
     #          types that satisfy any of the specified values.</p>
-    #          <p>To limit the list of instance types from which Amazon EC2 can identify matching instance types,
+    #          <p>To limit the list of instance types from which Amazon EC2 can identify matching instance types, 
     #          you can use one of the following parameters, but not both in the same request:</p>
     #          <ul>
     #             <li>
     #                <p>
-    #                   <code>AllowedInstanceTypes</code> - The instance types to include in the list. All
+    #                   <code>AllowedInstanceTypes</code> - The instance types to include in the list. All 
     #                other instance types are ignored, even if they match your specified attributes.</p>
     #             </li>
     #             <li>
     #                <p>
-    #                   <code>ExcludedInstanceTypes</code> - The instance types to exclude from the list,
+    #                   <code>ExcludedInstanceTypes</code> - The instance types to exclude from the list, 
     #                even if they match your specified attributes.</p>
     #             </li>
     #          </ul>
@@ -48565,8 +48565,8 @@ module Aws::EC2
     #               </li>
     #            </ul>
     #            <note>
-    #               <p>Don't confuse the CPU manufacturer with the CPU architecture. Instances will
-    #            be launched with a compatible CPU architecture based on the Amazon Machine Image (AMI) that you
+    #               <p>Don't confuse the CPU manufacturer with the CPU architecture. Instances will 
+    #            be launched with a compatible CPU architecture based on the Amazon Machine Image (AMI) that you 
     #            specify in your launch template.</p>
     #            </note>
     #            <p>Default: Any manufacturer</p>
@@ -48661,7 +48661,7 @@ module Aws::EC2
     #            </p>
     #   @return [String]
     # @!attribute burstable_performance
-    #   <p>Indicates whether burstable performance T instance types are included, excluded, or required. For more information, see
+    #   <p>Indicates whether burstable performance T instance types are included, excluded, or required. For more information, see 
     #         <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/burstable-performance-instances.html">Burstable performance instances</a>.</p>
     #            <ul>
     #               <li>
@@ -48845,12 +48845,12 @@ module Aws::EC2
     #            <p>Default: No minimum or maximum limits</p>
     #   @return [Types::AcceleratorTotalMemoryMiBRequest]
     # @!attribute network_bandwidth_gbps
-    #   <p>The minimum and maximum amount of baseline network bandwidth, in gigabits per second
+    #   <p>The minimum and maximum amount of baseline network bandwidth, in gigabits per second 
     #             (Gbps). For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-network-bandwidth.html">Amazon EC2 instance network bandwidth</a> in the <i>Amazon EC2 User Guide</i>.</p>
     #            <p>Default: No minimum or maximum limits</p>
     #   @return [Types::NetworkBandwidthGbpsRequest]
     # @!attribute allowed_instance_types
-    #   <p>The instance types to apply your specified attributes against. All other instance types
+    #   <p>The instance types to apply your specified attributes against. All other instance types 
     #            are ignored, even if they match your specified attributes.</p>
     #            <p>You can use strings with one or more wild cards, represented by
     #            an asterisk (<code>*</code>), to allow an instance type, size, or generation. The
@@ -49111,8 +49111,8 @@ module Aws::EC2
     #   <p>Excludes the root volume from being snapshotted.</p>
     #   @return [Boolean]
     # @!attribute exclude_data_volume_ids
-    #   <p>The IDs of the data (non-root) volumes to exclude from the multi-volume snapshot set.
-    #         If you specify the ID of the root volume, the request fails. To exclude the root volume,
+    #   <p>The IDs of the data (non-root) volumes to exclude from the multi-volume snapshot set. 
+    #         If you specify the ID of the root volume, the request fails. To exclude the root volume, 
     #         use <b>ExcludeBootVolume</b>.</p>
     #            <p>You can specify up to 40 volume IDs per request.</p>
     #   @return [Array<String>]
@@ -49236,7 +49236,7 @@ module Aws::EC2
     #               support an instance, such as hardware failures and network connectivity problems.</p>
     #   @return [Types::InstanceStatusSummary]
     # @!attribute attached_ebs_status
-    #   <p>Reports impaired functionality that stems from an attached Amazon EBS volume that is
+    #   <p>Reports impaired functionality that stems from an attached Amazon EBS volume that is 
     #               unreachable and unable to complete I/O operations.</p>
     #   @return [Types::EbsStatusSummary]
     # @!attribute application_status
@@ -49799,7 +49799,7 @@ module Aws::EC2
 
     # <p>Describes the permissions for a security group rule.</p>
     # @!attribute ip_protocol
-    #   <p>The IP protocol name (<code>tcp</code>, <code>udp</code>, <code>icmp</code>, <code>icmpv6</code>)
+    #   <p>The IP protocol name (<code>tcp</code>, <code>udp</code>, <code>icmp</code>, <code>icmpv6</code>) 
     #           or number (see <a href="http://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml">Protocol Numbers</a>).</p>
     #            <p>Use <code>-1</code> to specify all protocols. When authorizing
     #           security group rules, specifying <code>-1</code> or a protocol number other than
@@ -49814,7 +49814,7 @@ module Aws::EC2
     #   @return [Integer]
     # @!attribute to_port
     #   <p>If the protocol is TCP or UDP, this is the end of the port range.
-    #             If the protocol is ICMP or ICMPv6, this is the ICMP code or -1 (all ICMP codes).
+    #             If the protocol is ICMP or ICMPv6, this is the ICMP code or -1 (all ICMP codes). 
     #             If the start port is -1 (all ICMP types), then the end port must be -1 (all ICMP codes).</p>
     #   @return [Integer]
     # @!attribute user_id_group_pairs
@@ -49854,10 +49854,10 @@ module Aws::EC2
     #               not both. To specify a single IPv4 address, use the /32 prefix length.</p>
     #            <note>
     #               <p>
-    #                 Amazon Web Services <a href="https://en.wikipedia.org/wiki/Canonicalization">canonicalizes</a> IPv4 and IPv6 CIDRs. For example, if you specify 100.68.0.18/18 for the CIDR block,
-    #                 Amazon Web Services canonicalizes the CIDR block to 100.68.0.0/18. Any subsequent DescribeSecurityGroups and DescribeSecurityGroupRules calls will
-    #                 return the canonicalized form of the CIDR block. Additionally, if you attempt to add another rule with the
-    #                 non-canonical form of the CIDR (such as 100.68.0.18/18) and there is already a rule for the canonicalized
+    #                 Amazon Web Services <a href="https://en.wikipedia.org/wiki/Canonicalization">canonicalizes</a> IPv4 and IPv6 CIDRs. For example, if you specify 100.68.0.18/18 for the CIDR block, 
+    #                 Amazon Web Services canonicalizes the CIDR block to 100.68.0.0/18. Any subsequent DescribeSecurityGroups and DescribeSecurityGroupRules calls will 
+    #                 return the canonicalized form of the CIDR block. Additionally, if you attempt to add another rule with the 
+    #                 non-canonical form of the CIDR (such as 100.68.0.18/18) and there is already a rule for the canonicalized 
     #                 form of the CIDR block (such as 100.68.0.0/18), the API throws an duplicate rule error.</p>
     #            </note>
     #   @return [String]
@@ -50038,7 +50038,7 @@ module Aws::EC2
     #   <p>The account ID.</p>
     #   @return [String]
     # @!attribute discovery_region
-    #   <p>The Amazon Web Services Region that the account information is returned from.
+    #   <p>The Amazon Web Services Region that the account information is returned from. 
     #            An account can be discovered in multiple regions and will have a separate discovered account for each Region.</p>
     #   @return [String]
     # @!attribute failure_reason
@@ -50714,11 +50714,11 @@ module Aws::EC2
     #   <p>The description of the IPAM pool.</p>
     #   @return [String]
     # @!attribute auto_import
-    #   <p>If selected, IPAM will continuously look for resources within the CIDR range of this pool
+    #   <p>If selected, IPAM will continuously look for resources within the CIDR range of this pool 
     #            and automatically import them as allocations into your IPAM. The CIDRs that will be allocated for
-    #            these resources must not already be allocated to other resources in order for the import to succeed. IPAM will import
-    #            a CIDR regardless of its compliance with the pool's allocation rules, so a resource might be imported and subsequently
-    #            marked as noncompliant. If IPAM discovers multiple CIDRs that overlap, IPAM will import the largest CIDR only. If IPAM
+    #            these resources must not already be allocated to other resources in order for the import to succeed. IPAM will import 
+    #            a CIDR regardless of its compliance with the pool's allocation rules, so a resource might be imported and subsequently 
+    #            marked as noncompliant. If IPAM discovers multiple CIDRs that overlap, IPAM will import the largest CIDR only. If IPAM 
     #            discovers multiple CIDRs with matching CIDRs, IPAM will randomly import one of them only.
     #         </p>
     #            <p>A locale must be set on the pool for this feature to work.</p>
@@ -50736,7 +50736,7 @@ module Aws::EC2
     #   <p>The maximum netmask length possible for CIDR allocations in this IPAM pool to be compliant. The maximum netmask length must be greater than the minimum netmask length. Possible netmask lengths for IPv4 addresses are 0 - 32. Possible netmask lengths for IPv6 addresses are  0 - 128.</p>
     #   @return [Integer]
     # @!attribute allocation_default_netmask_length
-    #   <p>The default netmask length for allocations added to this pool. If, for example, the CIDR assigned to this pool is 10.0.0.0/8 and
+    #   <p>The default netmask length for allocations added to this pool. If, for example, the CIDR assigned to this pool is 10.0.0.0/8 and 
     #            you enter 16 here, new allocations will default to 10.0.0.0/16.</p>
     #   @return [Integer]
     # @!attribute allocation_resource_tags
@@ -50750,7 +50750,7 @@ module Aws::EC2
     #   <p>Limits which service in Amazon Web Services that the pool can be used in. "ec2", for example, allows users to use space for Elastic IP addresses and VPCs.</p>
     #   @return [String]
     # @!attribute public_ip_source
-    #   <p>The IP address source for pools in the public scope. Only used for provisioning IP address CIDRs to pools in the public scope. Default is <code>BYOIP</code>. For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/ipam/intro-create-ipv6-pools.html">Create IPv6 pools</a> in the <i>Amazon VPC IPAM User Guide</i>.
+    #   <p>The IP address source for pools in the public scope. Only used for provisioning IP address CIDRs to pools in the public scope. Default is <code>BYOIP</code>. For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/ipam/intro-create-ipv6-pools.html">Create IPv6 pools</a> in the <i>Amazon VPC IPAM User Guide</i>. 
     #            By default, you can add only one Amazon-provided IPv6 CIDR block to a top-level IPv6 pool. For information on increasing the default limit, see <a href="https://docs.aws.amazon.com/vpc/latest/ipam/quotas-ipam.html">Quotas for your IPAM</a> in the <i>Amazon VPC IPAM User Guide</i>.</p>
     #   @return [String]
     # @!attribute source_resource
@@ -50789,7 +50789,7 @@ module Aws::EC2
 
     # <p>In IPAM, an allocation is a CIDR assignment from an IPAM pool to another IPAM pool or to a resource.</p>
     # @!attribute cidr
-    #   <p>The CIDR for the allocation. A CIDR is a representation of an IP address and its associated network mask (or netmask) and
+    #   <p>The CIDR for the allocation. A CIDR is a representation of an IP address and its associated network mask (or netmask) and 
     #            refers to a range of IP addresses. An IPv4 CIDR example is <code>10.24.34.0/23</code>. An IPv6 CIDR example is <code>2001:DB8::/32</code>.</p>
     #   @return [String]
     # @!attribute ipam_pool_allocation_id
@@ -50830,7 +50830,7 @@ module Aws::EC2
 
     # <p>A CIDR provisioned to an IPAM pool.</p>
     # @!attribute cidr
-    #   <p>The CIDR provisioned to the IPAM pool. A CIDR is a representation of an IP address and its associated network mask (or netmask)
+    #   <p>The CIDR provisioned to the IPAM pool. A CIDR is a representation of an IP address and its associated network mask (or netmask) 
     #            and refers to a range of IP addresses. An IPv4 CIDR example is <code>10.24.34.0/23</code>. An IPv6 CIDR example is <code>2001:DB8::/32</code>.</p>
     #   @return [String]
     # @!attribute state
@@ -52346,10 +52346,10 @@ module Aws::EC2
     #           not both. To specify a single IPv6 address, use the /128 prefix length.</p>
     #            <note>
     #               <p>
-    #                 Amazon Web Services <a href="https://en.wikipedia.org/wiki/Canonicalization">canonicalizes</a> IPv4 and IPv6 CIDRs. For example, if you specify 100.68.0.18/18 for the CIDR block,
-    #                 Amazon Web Services canonicalizes the CIDR block to 100.68.0.0/18. Any subsequent DescribeSecurityGroups and DescribeSecurityGroupRules calls will
-    #                 return the canonicalized form of the CIDR block. Additionally, if you attempt to add another rule with the
-    #                 non-canonical form of the CIDR (such as 100.68.0.18/18) and there is already a rule for the canonicalized
+    #                 Amazon Web Services <a href="https://en.wikipedia.org/wiki/Canonicalization">canonicalizes</a> IPv4 and IPv6 CIDRs. For example, if you specify 100.68.0.18/18 for the CIDR block, 
+    #                 Amazon Web Services canonicalizes the CIDR block to 100.68.0.0/18. Any subsequent DescribeSecurityGroups and DescribeSecurityGroupRules calls will 
+    #                 return the canonicalized form of the CIDR block. Additionally, if you attempt to add another rule with the 
+    #                 non-canonical form of the CIDR (such as 100.68.0.18/18) and there is already a rule for the canonicalized 
     #                 form of the CIDR block (such as 100.68.0.0/18), the API throws an duplicate rule error.</p>
     #            </note>
     #   @return [String]
@@ -52393,7 +52393,7 @@ module Aws::EC2
     #                  <p>For RSA key pairs, the key fingerprint is the SHA-1 digest of the DER encoded private key.</p>
     #               </li>
     #               <li>
-    #                  <p>For ED25519 key pairs, the key fingerprint is the base64-encoded SHA-256 digest, which
+    #                  <p>For ED25519 key pairs, the key fingerprint is the base64-encoded SHA-256 digest, which 
     #                      is the default for OpenSSH, starting with <a href="http://www.openssh.com/txt/release-6.8">OpenSSH 6.8</a>.</p>
     #               </li>
     #            </ul>
@@ -52512,7 +52512,7 @@ module Aws::EC2
     #   <p>The name of the key pair.</p>
     #   @return [String]
     # @!attribute network_interfaces
-    #   <p>The network interfaces. If you specify a network interface, you must specify
+    #   <p>The network interfaces. If you specify a network interface, you must specify 
     #              subnet IDs and security group IDs using the network interface.</p>
     #   @return [Array<Types::InstanceNetworkInterfaceSpecification>]
     # @!attribute placement
@@ -52836,7 +52836,7 @@ module Aws::EC2
     #   <p>The throughput that the volume supports, in MiB/s.</p>
     #   @return [Integer]
     # @!attribute volume_initialization_rate
-    #   <p>The Amazon EBS Provisioned Rate for Volume Initialization (volume initialization rate) specified for the volume, in MiB/s.
+    #   <p>The Amazon EBS Provisioned Rate for Volume Initialization (volume initialization rate) specified for the volume, in MiB/s. 
     #               If no volume initialization rate was specified, the value is <code>null</code>.</p>
     #   @return [Integer]
     # @!attribute ebs_card_index
@@ -52889,8 +52889,8 @@ module Aws::EC2
     #                     <code>io2</code>: 100 - 256,000 IOPS</p>
     #               </li>
     #            </ul>
-    #            <p>For <code>io2</code> volumes, you can achieve up to 256,000 IOPS on
-    #   <a href="https://docs.aws.amazon.com/ec2/latest/instancetypes/ec2-nitro-instances.html">instances
+    #            <p>For <code>io2</code> volumes, you can achieve up to 256,000 IOPS on 
+    #   <a href="https://docs.aws.amazon.com/ec2/latest/instancetypes/ec2-nitro-instances.html">instances 
     #   built on the Nitro System</a>. On other instances, you can achieve performance up to 32,000 IOPS.</p>
     #            <p>This parameter is supported for <code>io1</code>, <code>io2</code>, and <code>gp3</code> volumes only.</p>
     #   @return [Integer]
@@ -52940,19 +52940,19 @@ module Aws::EC2
     #            <p>Valid Range: Minimum value of 125. Maximum value of 2,000.</p>
     #   @return [Integer]
     # @!attribute volume_initialization_rate
-    #   <p>Specifies the Amazon EBS Provisioned Rate for Volume Initialization (volume initialization rate), in MiB/s, at which to download
-    #               the snapshot blocks from Amazon S3 to the volume. This is also known as <i>volume
-    #                   initialization</i>. Specifying a volume initialization rate ensures that the volume is
+    #   <p>Specifies the Amazon EBS Provisioned Rate for Volume Initialization (volume initialization rate), in MiB/s, at which to download 
+    #               the snapshot blocks from Amazon S3 to the volume. This is also known as <i>volume 
+    #                   initialization</i>. Specifying a volume initialization rate ensures that the volume is 
     #               initialized at a predictable and consistent rate after creation.</p>
-    #            <p>This parameter is supported only for volumes created from snapshots. Omit this parameter
+    #            <p>This parameter is supported only for volumes created from snapshots. Omit this parameter 
     #               if:</p>
     #            <ul>
     #               <li>
-    #                  <p>You want to create the volume using fast snapshot restore. You must specify a snapshot
-    #                       that is enabled for fast snapshot restore. In this case, the volume is fully initialized
+    #                  <p>You want to create the volume using fast snapshot restore. You must specify a snapshot 
+    #                       that is enabled for fast snapshot restore. In this case, the volume is fully initialized 
     #                       at creation.</p>
     #                  <note>
-    #                     <p>If you specify a snapshot that is enabled for fast snapshot restore and a volume initialization rate,
+    #                     <p>If you specify a snapshot that is enabled for fast snapshot restore and a volume initialization rate, 
     #                           the volume will be initialized at the specified rate instead of fast snapshot restore.</p>
     #                  </note>
     #               </li>
@@ -53024,13 +53024,13 @@ module Aws::EC2
       include ::Smithy::Schema::Structure
     end
 
-    # <p>ENA Express uses Amazon Web Services Scalable Reliable Datagram (SRD) technology to increase the
-    # 			maximum bandwidth used per stream and minimize tail latency of network traffic between EC2 instances.
-    # 			With ENA Express, you can communicate between two EC2 instances in the same subnet within the same
+    # <p>ENA Express uses Amazon Web Services Scalable Reliable Datagram (SRD) technology to increase the 
+    # 			maximum bandwidth used per stream and minimize tail latency of network traffic between EC2 instances. 
+    # 			With ENA Express, you can communicate between two EC2 instances in the same subnet within the same 
     # 			account, or in different accounts. Both sending and receiving instances must have ENA Express enabled.</p>
-    #          <p>To improve the reliability of network packet delivery, ENA Express reorders network packets on the
-    # 			receiving end by default. However, some UDP-based applications are designed to handle network packets
-    # 			that are out of order to reduce the overhead for packet delivery at the network layer. When ENA Express
+    #          <p>To improve the reliability of network packet delivery, ENA Express reorders network packets on the 
+    # 			receiving end by default. However, some UDP-based applications are designed to handle network packets 
+    # 			that are out of order to reduce the overhead for packet delivery at the network layer. When ENA Express 
     # 			is enabled, you can specify whether UDP network traffic uses it.</p>
     # @!attribute ena_srd_enabled
     #   <p>Indicates whether ENA Express is enabled for the network interface.</p>
@@ -53047,13 +53047,13 @@ module Aws::EC2
       include ::Smithy::Schema::Structure
     end
 
-    # <p>ENA Express is compatible with both TCP and UDP transport protocols. When it's enabled, TCP traffic
-    # 			automatically uses it. However, some UDP-based applications are designed to handle network packets that are
-    # 			out of order, without a need for retransmission, such as live video broadcasting or other near-real-time
-    # 			applications. For UDP traffic, you can specify whether to use ENA Express, based on your application
+    # <p>ENA Express is compatible with both TCP and UDP transport protocols. When it's enabled, TCP traffic 
+    # 			automatically uses it. However, some UDP-based applications are designed to handle network packets that are 
+    # 			out of order, without a need for retransmission, such as live video broadcasting or other near-real-time 
+    # 			applications. For UDP traffic, you can specify whether to use ENA Express, based on your application 
     # 			environment needs.</p>
     # @!attribute ena_srd_udp_enabled
-    #   <p>Indicates whether UDP traffic to and from the instance uses ENA Express. To specify this setting,
+    #   <p>Indicates whether UDP traffic to and from the instance uses ENA Express. To specify this setting, 
     #   			you must first enable ENA Express.</p>
     #   @return [Boolean]
     class LaunchTemplateEnaSrdUdpSpecification < Struct.new(
@@ -53360,7 +53360,7 @@ module Aws::EC2
     # @!attribute associate_public_ip_address
     #   <p>Indicates whether to associate a public IPv4 address with eth0 for a new network
     #               interface.</p>
-    #            <p>Amazon Web Services charges for all public IPv4 addresses, including public IPv4 addresses
+    #            <p>Amazon Web Services charges for all public IPv4 addresses, including public IPv4 addresses 
     #   associated with running instances and Elastic IP addresses. For more information, see the <i>Public IPv4 Address</i> tab on the <a href="http://aws.amazon.com/vpc/pricing/">Amazon VPC pricing page</a>.</p>
     #   @return [Boolean]
     # @!attribute delete_on_termination
@@ -53476,7 +53476,7 @@ module Aws::EC2
     #   @return [Boolean]
     # @!attribute associate_public_ip_address
     #   <p>Associates a public IPv4 address with eth0 for a new network interface.</p>
-    #            <p>Amazon Web Services charges for all public IPv4 addresses, including public IPv4 addresses
+    #            <p>Amazon Web Services charges for all public IPv4 addresses, including public IPv4 addresses 
     #   associated with running instances and Elastic IP addresses. For more information, see the <i>Public IPv4 Address</i> tab on the <a href="http://aws.amazon.com/vpc/pricing/">Amazon VPC pricing page</a>.</p>
     #   @return [Boolean]
     # @!attribute delete_on_termination
@@ -53758,7 +53758,7 @@ module Aws::EC2
     #   <p>The instance type.</p>
     #   @return [String]
     # @!attribute spot_price
-    #   <p>The maximum price per unit hour that you are willing to pay for a Spot Instance. We do not recommend using this parameter because it can lead to
+    #   <p>The maximum price per unit hour that you are willing to pay for a Spot Instance. We do not recommend using this parameter because it can lead to 
     #            increased interruptions. If you do not specify this parameter, you will pay the current Spot price.</p>
     #            <important>
     #               <p>If you specify a maximum price, your instances will be interrupted more frequently than if you do not specify this parameter.</p>
@@ -54251,8 +54251,8 @@ module Aws::EC2
     #   	        For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination">Pagination</a>.</p>
     #   @return [Integer]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #   			and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #   			and provides an error response. If you have the required permissions, the error response is 
     #   			<code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class ListImagesInRecycleBinRequest < Struct.new(
@@ -54284,7 +54284,7 @@ module Aws::EC2
 
     # @!attribute max_results
     #   <p>The maximum number of items to return for this request.
-    #   	To get the next page of items, make another request with the token returned in the output.
+    #   	To get the next page of items, make another request with the token returned in the output. 
     #   	For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination">Pagination</a>.</p>
     #   @return [Integer]
     # @!attribute next_token
@@ -54292,12 +54292,12 @@ module Aws::EC2
     #     Pagination continues from the end of the items returned by the previous request.</p>
     #   @return [String]
     # @!attribute snapshot_ids
-    #   <p>The IDs of the snapshots to list. Omit this parameter to list all of the
+    #   <p>The IDs of the snapshots to list. Omit this parameter to list all of the 
     #         snapshots that are in the Recycle Bin.</p>
     #   @return [Array<String>]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class ListSnapshotsInRecycleBinRequest < Struct.new(
@@ -54315,7 +54315,7 @@ module Aws::EC2
     #   <p>Information about the snapshots.</p>
     #   @return [Array<Types::SnapshotRecycleBinInfo>]
     # @!attribute next_token
-    #   <p>The token to include in another request to get the next page of items.
+    #   <p>The token to include in another request to get the next page of items. 
     #     This value is <code>null</code> when there are no more items to return.</p>
     #   @return [String]
     class ListSnapshotsInRecycleBinResult < Struct.new(
@@ -54328,17 +54328,17 @@ module Aws::EC2
     end
 
     # @!attribute volume_ids
-    #   <p>The IDs of the volumes to list. Omit this parameter to list all of the
+    #   <p>The IDs of the volumes to list. Omit this parameter to list all of the 
     #         volumes that are in the Recycle Bin.</p>
     #   @return [Array<String>]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute max_results
     #   <p>The maximum number of items to return for this request.
-    #   	To get the next page of items, make another request with the token returned in the output.
+    #   	To get the next page of items, make another request with the token returned in the output. 
     #   	For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination">Pagination</a>.</p>
     #            <p>Valid range: 5 - 500</p>
     #   @return [Integer]
@@ -54361,7 +54361,7 @@ module Aws::EC2
     #   <p>Information about the volumes.</p>
     #   @return [Array<Types::VolumeRecycleBinInfo>]
     # @!attribute next_token
-    #   <p>The token to include in another request to get the next page of items.
+    #   <p>The token to include in another request to get the next page of items. 
     #     This value is <code>null</code> when there are no more items to return.</p>
     #   @return [String]
     class ListVolumesInRecycleBinResult < Struct.new(
@@ -54756,8 +54756,8 @@ module Aws::EC2
     #   <p>The ID of the snapshot to lock.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute lock_mode
@@ -54765,7 +54765,7 @@ module Aws::EC2
     #            <ul>
     #               <li>
     #                  <p>
-    #                     <code>governance</code> - Locks the snapshot in governance mode. Snapshots locked in governance
+    #                     <code>governance</code> - Locks the snapshot in governance mode. Snapshots locked in governance 
     #             mode can't be deleted until one of the following conditions are met:</p>
     #                  <ul>
     #                     <li>
@@ -54775,47 +54775,47 @@ module Aws::EC2
     #                        <p>The snapshot is unlocked by a user with the appropriate permissions.</p>
     #                     </li>
     #                  </ul>
-    #                  <p>Users with the appropriate IAM permissions can unlock the snapshot, increase or decrease the lock
+    #                  <p>Users with the appropriate IAM permissions can unlock the snapshot, increase or decrease the lock 
     #             duration, and change the lock mode to <code>compliance</code> at any time.</p>
     #                  <p>If you lock a snapshot in <code>governance</code> mode, omit <b>
     #             CoolOffPeriod</b>.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>compliance</code> - Locks the snapshot in compliance mode. Snapshots locked in compliance
-    #             mode can't be unlocked by any user. They can be deleted only after the lock duration expires. Users
-    #             can't decrease the lock duration or change the lock mode to <code>governance</code>. However, users
+    #                     <code>compliance</code> - Locks the snapshot in compliance mode. Snapshots locked in compliance 
+    #             mode can't be unlocked by any user. They can be deleted only after the lock duration expires. Users 
+    #             can't decrease the lock duration or change the lock mode to <code>governance</code>. However, users 
     #             with appropriate IAM permissions can increase the lock duration at any time.</p>
-    #                  <p>If you lock a snapshot in <code>compliance</code> mode, you can optionally specify
+    #                  <p>If you lock a snapshot in <code>compliance</code> mode, you can optionally specify 
     #             <b>CoolOffPeriod</b>.</p>
     #               </li>
     #            </ul>
     #   @return [String]
     # @!attribute cool_off_period
-    #   <p>The cooling-off period during which you can unlock the snapshot or modify the lock settings after
-    #         locking the snapshot in compliance mode, in hours. After the cooling-off period expires, you can't
-    #         unlock or delete the snapshot, decrease the lock duration, or change the lock mode. You can increase
+    #   <p>The cooling-off period during which you can unlock the snapshot or modify the lock settings after 
+    #         locking the snapshot in compliance mode, in hours. After the cooling-off period expires, you can't 
+    #         unlock or delete the snapshot, decrease the lock duration, or change the lock mode. You can increase 
     #         the lock duration after the cooling-off period expires.</p>
-    #            <p>The cooling-off period is optional when locking a snapshot in compliance mode. If you are locking
+    #            <p>The cooling-off period is optional when locking a snapshot in compliance mode. If you are locking 
     #         the snapshot in governance mode, omit this parameter.</p>
-    #            <p>To lock the snapshot in compliance mode immediately without a cooling-off period, omit this
+    #            <p>To lock the snapshot in compliance mode immediately without a cooling-off period, omit this 
     #         parameter.</p>
-    #            <p>If you are extending the lock duration for a snapshot that is locked in compliance mode after
-    #         the cooling-off period has expired, omit this parameter. If you specify a cooling-period in a such
+    #            <p>If you are extending the lock duration for a snapshot that is locked in compliance mode after 
+    #         the cooling-off period has expired, omit this parameter. If you specify a cooling-period in a such 
     #         a request, the request fails.</p>
     #            <p>Allowed values: Min 1, max 72.</p>
     #   @return [Integer]
     # @!attribute lock_duration
-    #   <p>The period of time for which to lock the snapshot, in days. The snapshot lock will automatically
+    #   <p>The period of time for which to lock the snapshot, in days. The snapshot lock will automatically 
     #         expire after this period lapses.</p>
-    #            <p>You must specify either this parameter or <b>ExpirationDate</b>, but
+    #            <p>You must specify either this parameter or <b>ExpirationDate</b>, but 
     #         not both.</p>
     #            <p>Allowed values: Min: 1, max 36500</p>
     #   @return [Integer]
     # @!attribute expiration_date
-    #   <p>The date and time at which the snapshot lock is to automatically expire, in the UTC time zone
+    #   <p>The date and time at which the snapshot lock is to automatically expire, in the UTC time zone 
     #         (<code>YYYY-MM-DDThh:mm:ss.sssZ</code>).</p>
-    #            <p>You must specify either this parameter or <b>LockDuration</b>, but
+    #            <p>You must specify either this parameter or <b>LockDuration</b>, but 
     #         not both.</p>
     #   @return [Time]
     class LockSnapshotRequest < Struct.new(
@@ -54839,26 +54839,26 @@ module Aws::EC2
     #            <ul>
     #               <li>
     #                  <p>
-    #                     <code>compliance-cooloff</code> - The snapshot has been locked in
-    #             compliance mode but it is still within the cooling-off period. The snapshot can't be
-    #             deleted, but it can be unlocked and the lock settings can be modified by users with
+    #                     <code>compliance-cooloff</code> - The snapshot has been locked in 
+    #             compliance mode but it is still within the cooling-off period. The snapshot can't be 
+    #             deleted, but it can be unlocked and the lock settings can be modified by users with 
     #             appropriate permissions.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>governance</code> - The snapshot is locked in governance mode. The
-    #             snapshot can't be deleted, but it can be unlocked and the lock settings can be
+    #                     <code>governance</code> - The snapshot is locked in governance mode. The 
+    #             snapshot can't be deleted, but it can be unlocked and the lock settings can be 
     #             modified by users with appropriate permissions.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>compliance</code> - The snapshot is locked in compliance mode and the
-    #             cooling-off period has expired. The snapshot can't be unlocked or deleted. The lock
+    #                     <code>compliance</code> - The snapshot is locked in compliance mode and the 
+    #             cooling-off period has expired. The snapshot can't be unlocked or deleted. The lock 
     #             duration can only be increased by users with appropriate permissions.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>expired</code> - The snapshot was locked in compliance or governance
+    #                     <code>expired</code> - The snapshot was locked in compliance or governance 
     #             mode but the lock duration has expired. The snapshot is not locked and can be deleted.</p>
     #               </li>
     #            </ul>
@@ -54870,19 +54870,19 @@ module Aws::EC2
     #   <p>The compliance mode cooling-off period, in hours.</p>
     #   @return [Integer]
     # @!attribute cool_off_period_expires_on
-    #   <p>The date and time at which the compliance mode cooling-off period expires, in the UTC time zone
+    #   <p>The date and time at which the compliance mode cooling-off period expires, in the UTC time zone 
     #         (<code>YYYY-MM-DDThh:mm:ss.sssZ</code>).</p>
     #   @return [Time]
     # @!attribute lock_created_on
-    #   <p>The date and time at which the snapshot was locked, in the UTC time zone
+    #   <p>The date and time at which the snapshot was locked, in the UTC time zone 
     #         (<code>YYYY-MM-DDThh:mm:ss.sssZ</code>).</p>
     #   @return [Time]
     # @!attribute lock_expires_on
-    #   <p>The date and time at which the lock will expire, in the UTC time zone
+    #   <p>The date and time at which the lock will expire, in the UTC time zone 
     #         (<code>YYYY-MM-DDThh:mm:ss.sssZ</code>).</p>
     #   @return [Time]
     # @!attribute lock_duration_start_time
-    #   <p>The date and time at which the lock duration started, in the UTC time zone
+    #   <p>The date and time at which the lock duration started, in the UTC time zone 
     #         (<code>YYYY-MM-DDThh:mm:ss.sssZ</code>).</p>
     #   @return [Time]
     class LockSnapshotResult < Struct.new(
@@ -54912,26 +54912,26 @@ module Aws::EC2
     #            <ul>
     #               <li>
     #                  <p>
-    #                     <code>compliance-cooloff</code> - The snapshot has been locked in
-    #             compliance mode but it is still within the cooling-off period. The snapshot can't be
-    #             deleted, but it can be unlocked and the lock settings can be modified by users with
+    #                     <code>compliance-cooloff</code> - The snapshot has been locked in 
+    #             compliance mode but it is still within the cooling-off period. The snapshot can't be 
+    #             deleted, but it can be unlocked and the lock settings can be modified by users with 
     #             appropriate permissions.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>governance</code> - The snapshot is locked in governance mode. The
-    #             snapshot can't be deleted, but it can be unlocked and the lock settings can be
+    #                     <code>governance</code> - The snapshot is locked in governance mode. The 
+    #             snapshot can't be deleted, but it can be unlocked and the lock settings can be 
     #             modified by users with appropriate permissions.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>compliance</code> - The snapshot is locked in compliance mode and the
-    #             cooling-off period has expired. The snapshot can't be unlocked or deleted. The lock
+    #                     <code>compliance</code> - The snapshot is locked in compliance mode and the 
+    #             cooling-off period has expired. The snapshot can't be unlocked or deleted. The lock 
     #             duration can only be increased by users with appropriate permissions.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>expired</code> - The snapshot was locked in compliance or governance
+    #                     <code>expired</code> - The snapshot was locked in compliance or governance 
     #             mode but the lock duration has expired. The snapshot is not locked and can be deleted.</p>
     #               </li>
     #            </ul>
@@ -54943,7 +54943,7 @@ module Aws::EC2
     #   <p>The compliance mode cooling-off period, in hours.</p>
     #   @return [Integer]
     # @!attribute cool_off_period_expires_on
-    #   <p>The date and time at which the compliance mode cooling-off period expires, in the UTC time zone
+    #   <p>The date and time at which the compliance mode cooling-off period expires, in the UTC time zone 
     #         (<code>YYYY-MM-DDThh:mm:ss.sssZ</code>).</p>
     #   @return [Time]
     # @!attribute lock_created_on
@@ -54951,7 +54951,7 @@ module Aws::EC2
     #   @return [Time]
     # @!attribute lock_duration_start_time
     #   <p>The date and time at which the lock duration started, in the UTC time zone (<code>YYYY-MM-DDThh:mm:ss.sssZ</code>).</p>
-    #            <p>If you lock a snapshot that is in the <code>pending</code> state, the lock duration
+    #            <p>If you lock a snapshot that is in the <code>pending</code> state, the lock duration 
     #         starts only once the snapshot enters the <code>completed</code> state.</p>
     #   @return [Time]
     # @!attribute lock_expires_on
@@ -54995,7 +54995,7 @@ module Aws::EC2
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Information about a System Integrity Protection (SIP) modification task or volume
+    # <p>Information about a System Integrity Protection (SIP) modification task or volume 
     #          ownership delegation task for an Amazon EC2 Mac instance.</p>
     # @!attribute instance_id
     #   <p>The ID of the Amazon EC2 Mac instance.</p>
@@ -55004,11 +55004,11 @@ module Aws::EC2
     #   <p>The ID of task.</p>
     #   @return [String]
     # @!attribute mac_system_integrity_protection_config
-    #   <p>[SIP modification tasks only] Information about the SIP
+    #   <p>[SIP modification tasks only] Information about the SIP 
     #            configuration.</p>
     #   @return [Types::MacSystemIntegrityProtectionConfiguration]
     # @!attribute start_time
-    #   <p>The date and time the task was created, in the UTC timezone
+    #   <p>The date and time the task was created, in the UTC timezone 
     #            (<code>YYYY-MM-DDThh:mm:ss.sssZ</code>).</p>
     #   @return [Time]
     # @!attribute tags
@@ -55480,8 +55480,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute mode
@@ -55546,8 +55546,8 @@ module Aws::EC2
     #   <p>The domain name to modify for the IP address.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class ModifyAddressAttributeRequest < Struct.new(
@@ -55620,8 +55620,8 @@ module Aws::EC2
     #   <p>A unique, case-sensitive identifier that you provide to ensure that the operation completes no more than one time. If you retry a request with the same token, the service ignores the request but does not return an error. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html">Ensuring idempotency</a>.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the operation, without actually making the
-    #     request, and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the operation, without actually making the 
+    #     request, and provides an error response. If you have the required permissions, the error response is 
     #     <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class ModifyApplicationStatusCheckRequest < Struct.new(
@@ -55664,12 +55664,12 @@ module Aws::EC2
     #         group.</p>
     #   @return [String]
     # @!attribute opt_in_status
-    #   <p>Indicates whether to opt in to the zone group. The only valid value is <code>opted-in</code>.
+    #   <p>Indicates whether to opt in to the zone group. The only valid value is <code>opted-in</code>. 
     #         You must contact Amazon Web Services Support to opt out of a Local Zone or Wavelength Zone group.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class ModifyAvailabilityZoneGroupRequest < Struct.new(
@@ -55886,7 +55886,7 @@ module Aws::EC2
     #            <p>The default value is <code>disabled</code>.</p>
     #   @return [String]
     # @!attribute client_token
-    #   <p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+    #   <p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. 
     #   For more information, see <a href="https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html">Ensuring idempotency</a>.</p>
     #   @return [String]
     # @!attribute dry_run
@@ -55920,7 +55920,7 @@ module Aws::EC2
     #   <p>The ID of the Client VPN endpoint to modify.</p>
     #   @return [String]
     # @!attribute server_certificate_arn
-    #   <p>The ARN of the server certificate to be used. The server certificate must be provisioned in
+    #   <p>The ARN of the server certificate to be used. The server certificate must be provisioned in 
     #   			Certificate Manager (ACM).</p>
     #   @return [String]
     # @!attribute connection_log_options
@@ -55943,7 +55943,7 @@ module Aws::EC2
     #            </ul>
     #   @return [Types::ConnectionLogOptions]
     # @!attribute dns_servers
-    #   <p>Information about the DNS servers to be used by Client VPN connections. A Client VPN endpoint can have
+    #   <p>Information about the DNS servers to be used by Client VPN connections. A Client VPN endpoint can have 
     #   			up to two DNS servers.</p>
     #   @return [Types::DnsServersOptionsModifyStructure]
     # @!attribute vpn_port
@@ -55958,7 +55958,7 @@ module Aws::EC2
     #   @return [String]
     # @!attribute split_tunnel
     #   <p>Indicates whether the VPN is split-tunnel.</p>
-    #            <p>For information about split-tunnel VPN endpoints, see <a href="https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/split-tunnel-vpn.html">Split-tunnel Client VPN endpoint</a> in the
+    #            <p>For information about split-tunnel VPN endpoints, see <a href="https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/split-tunnel-vpn.html">Split-tunnel Client VPN endpoint</a> in the 
     #           	<i>Client VPN Administrator Guide</i>.</p>
     #   @return [Boolean]
     # @!attribute dry_run
@@ -55990,7 +55990,7 @@ module Aws::EC2
     # @!attribute client_route_enforcement_options
     #   <p>Client route enforcement is a feature of the Client VPN service that helps enforce administrator defined routes on devices connected through the VPN. T
     #   		his feature helps improve your security posture by ensuring that network traffic originating from a connected client is not inadvertently sent outside the VPN tunnel.</p>
-    #            <p>Client route enforcement works by monitoring the route table of a connected device for routing policy changes to the VPN connection. If the feature detects any VPN routing policy modifications, it will automatically force an update to the route table,
+    #            <p>Client route enforcement works by monitoring the route table of a connected device for routing policy changes to the VPN connection. If the feature detects any VPN routing policy modifications, it will automatically force an update to the route table, 
     #   			reverting it back to the expected route configurations.</p>
     #   @return [Types::ClientRouteEnforcementOptions]
     # @!attribute disconnect_on_session_timeout
@@ -56039,8 +56039,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the operation, without actually making the
-    #     request, and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the operation, without actually making the 
+    #     request, and provides an error response. If you have the required permissions, the error response is 
     #     <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute instance_family
@@ -56091,13 +56091,13 @@ module Aws::EC2
     #                  <p>Alias ARN. For example, arn:aws:kms:us-east-1:012345678910:alias/ExampleAlias.</p>
     #               </li>
     #            </ul>
-    #            <p>Amazon Web Services authenticates the KMS key asynchronously. Therefore, if you specify an ID, alias, or ARN that is not valid,
+    #            <p>Amazon Web Services authenticates the KMS key asynchronously. Therefore, if you specify an ID, alias, or ARN that is not valid, 
     #         the action can appear to complete, but eventually fails.</p>
     #            <p>Amazon EBS does not support asymmetric KMS keys.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class ModifyEbsDefaultKmsKeyIdRequest < Struct.new(
@@ -56121,8 +56121,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute excess_capacity_termination_policy
@@ -56168,8 +56168,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute fpga_image_id
@@ -56403,8 +56403,8 @@ module Aws::EC2
     #            </important>
     #   @return [Types::AttributeValue]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #   			and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #   			and provides an error response. If you have the required permissions, the error response is 
     #   			<code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class ModifyImageAttributeRequest < Struct.new(
@@ -56447,8 +56447,8 @@ module Aws::EC2
     #            <p></p>
     #   @return [Types::AttributeBooleanValue]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the operation, without actually making the
-    #     request, and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the operation, without actually making the 
+    #     request, and provides an error response. If you have the required permissions, the error response is 
     #     <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute instance_id
@@ -56483,15 +56483,15 @@ module Aws::EC2
     #   <p>Modifies the <code>DeleteOnTermination</code> attribute for volumes that are currently
     #               attached. The volume must be owned by the caller. If no value is specified for
     #                   <code>DeleteOnTermination</code>, the default is <code>true</code> and the volume is
-    #               deleted when the instance is terminated. You can't modify the <code>DeleteOnTermination</code>
+    #               deleted when the instance is terminated. You can't modify the <code>DeleteOnTermination</code> 
     #               attribute for volumes that are attached to Amazon Web Services-managed resources.</p>
     #            <p>To add instance store volumes to an Amazon EBS-backed instance, you must add them when
     #               you launch the instance. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/block-device-mapping-concepts.html#Using_OverridingAMIBDM">Update the block device mapping when launching an instance</a> in the
     #                   <i>Amazon EC2 User Guide</i>.</p>
     #   @return [Array<Types::InstanceBlockDeviceMappingSpecification>]
     # @!attribute disable_api_termination
-    #   <p>Enable or disable termination protection for the instance. If the value is <code>true</code>,
-    #               you can't terminate the instance using the Amazon EC2 console, command line interface, or API.
+    #   <p>Enable or disable termination protection for the instance. If the value is <code>true</code>, 
+    #               you can't terminate the instance using the Amazon EC2 console, command line interface, or API. 
     #               You can't enable termination protection for Spot Instances.</p>
     #   @return [Types::AttributeBooleanValue]
     # @!attribute instance_type
@@ -56597,8 +56597,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the operation, without actually making the
-    #     request, and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the operation, without actually making the 
+    #     request, and provides an error response. If you have the required permissions, the error response is 
     #     <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute instance_connect_endpoint_id
@@ -56620,7 +56620,7 @@ module Aws::EC2
     #               security group, not the name.</p>
     #   @return [Array<String>]
     # @!attribute preserve_client_ip
-    #   <p>Indicates whether the client IP address is preserved as the source when you connect to a resource.
+    #   <p>Indicates whether the client IP address is preserved as the source when you connect to a resource. 
     #               The following are the possible values.</p>
     #            <ul>
     #               <li>
@@ -56670,8 +56670,8 @@ module Aws::EC2
     #               When nested virtualization is enabled, Virtual Secure Mode (VSM) is automatically disabled for the instance.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the operation, without actually making the
-    #     request, and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the operation, without actually making the 
+    #     request, and provides an error response. If you have the required permissions, the error response is 
     #     <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class ModifyInstanceCpuOptionsRequest < Struct.new(
@@ -56690,11 +56690,11 @@ module Aws::EC2
     #   <p>The ID of the instance that was updated.</p>
     #   @return [String]
     # @!attribute core_count
-    #   <p>The number of CPU cores that are running for the specified instance after the
+    #   <p>The number of CPU cores that are running for the specified instance after the 
     #   			update.</p>
     #   @return [Integer]
     # @!attribute threads_per_core
-    #   <p>The number of threads that are running per CPU core for the specified
+    #   <p>The number of threads that are running per CPU core for the specified 
     #   			instance after the update.</p>
     #   @return [Integer]
     # @!attribute nested_virtualization
@@ -56712,8 +56712,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the operation, without actually making the
-    #     request, and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the operation, without actually making the 
+    #     request, and provides an error response. If you have the required permissions, the error response is 
     #     <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute client_token
@@ -56752,8 +56752,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the operation, without actually making the
-    #     request, and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the operation, without actually making the 
+    #     request, and provides an error response. If you have the required permissions, the error response is 
     #     <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute instance_id
@@ -56788,8 +56788,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute name
@@ -56973,8 +56973,8 @@ module Aws::EC2
     #               <i>Amazon EC2 User Guide</i>.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the operation, without actually making the
-    #     request, and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the operation, without actually making the 
+    #     request, and provides an error response. If you have the required permissions, the error response is 
     #     <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute http_tokens_enforced
@@ -57017,17 +57017,17 @@ module Aws::EC2
     #            <ul>
     #               <li>
     #                  <p>
-    #                     <code>optional</code> - IMDSv2 is optional. You can choose whether to send a
-    #                       session token in your instance metadata retrieval requests. If you retrieve
-    #                       IAM role credentials without a session token, you receive the IMDSv1 role
-    #                       credentials. If you retrieve IAM role credentials using a valid session token,
+    #                     <code>optional</code> - IMDSv2 is optional. You can choose whether to send a 
+    #                       session token in your instance metadata retrieval requests. If you retrieve 
+    #                       IAM role credentials without a session token, you receive the IMDSv1 role 
+    #                       credentials. If you retrieve IAM role credentials using a valid session token, 
     #                       you receive the IMDSv2 role credentials.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>required</code> - IMDSv2 is required. You must send a session token
-    #                       in your instance metadata retrieval requests. With this option, retrieving the
-    #                       IAM role credentials always returns IMDSv2 credentials; IMDSv1 credentials are
+    #                     <code>required</code> - IMDSv2 is required. You must send a session token 
+    #                       in your instance metadata retrieval requests. With this option, retrieving the 
+    #                       IAM role credentials always returns IMDSv2 credentials; IMDSv1 credentials are 
     #                       not available.</p>
     #               </li>
     #            </ul>
@@ -57067,7 +57067,7 @@ module Aws::EC2
     #                   <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute http_protocol_ipv6
-    #   <p>Enables or disables the IPv6 endpoint for the instance metadata service.
+    #   <p>Enables or disables the IPv6 endpoint for the instance metadata service. 
     #               Applies only if you enabled the HTTP metadata endpoint.</p>
     #   @return [String]
     # @!attribute instance_metadata_tags
@@ -57117,19 +57117,19 @@ module Aws::EC2
     #               </dd>
     #               <dt>vpc-1</dt>
     #               <dd>
-    #                  <p>This option boosts your networking baseline bandwidth and reduces your EBS
+    #                  <p>This option boosts your networking baseline bandwidth and reduces your EBS 
     #                           baseline bandwidth.</p>
     #               </dd>
     #               <dt>ebs-1</dt>
     #               <dd>
-    #                  <p>This option boosts your EBS baseline bandwidth and reduces your networking
+    #                  <p>This option boosts your EBS baseline bandwidth and reduces your networking 
     #                           baseline bandwidth.</p>
     #               </dd>
     #            </dl>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the operation, without actually making the
-    #     request, and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the operation, without actually making the 
+    #     request, and provides an error response. If you have the required permissions, the error response is 
     #     <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class ModifyInstanceNetworkPerformanceRequest < Struct.new(
@@ -57222,8 +57222,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute ipam_policy_id
@@ -57269,8 +57269,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute ipam_pool_allocation_id
@@ -57301,8 +57301,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute ipam_pool_id
@@ -57312,23 +57312,23 @@ module Aws::EC2
     #   <p>The description of the IPAM pool you want to modify.</p>
     #   @return [String]
     # @!attribute auto_import
-    #   <p>If true, IPAM will continuously look for resources within the CIDR range of this pool
+    #   <p>If true, IPAM will continuously look for resources within the CIDR range of this pool 
     #            and automatically import them as allocations into your IPAM. The CIDRs that will be allocated for
-    #            these resources must not already be allocated to other resources in order for the import to succeed. IPAM will import
-    #            a CIDR regardless of its compliance with the pool's allocation rules, so a resource might be imported and subsequently
-    #            marked as noncompliant. If IPAM discovers multiple CIDRs that overlap, IPAM will import the largest CIDR only. If IPAM
+    #            these resources must not already be allocated to other resources in order for the import to succeed. IPAM will import 
+    #            a CIDR regardless of its compliance with the pool's allocation rules, so a resource might be imported and subsequently 
+    #            marked as noncompliant. If IPAM discovers multiple CIDRs that overlap, IPAM will import the largest CIDR only. If IPAM 
     #            discovers multiple CIDRs with matching CIDRs, IPAM will randomly import one of them only.
     #         </p>
     #            <p>A locale must be set on the pool for this feature to work.</p>
     #   @return [Boolean]
     # @!attribute allocation_min_netmask_length
-    #   <p>The minimum netmask length required for CIDR allocations in this IPAM pool to be compliant. Possible
-    #            netmask lengths for IPv4 addresses are 0 - 32. Possible netmask lengths for IPv6 addresses are  0 - 128. The minimum netmask
+    #   <p>The minimum netmask length required for CIDR allocations in this IPAM pool to be compliant. Possible 
+    #            netmask lengths for IPv4 addresses are 0 - 32. Possible netmask lengths for IPv6 addresses are  0 - 128. The minimum netmask 
     #            length must be less than the maximum netmask length.</p>
     #   @return [Integer]
     # @!attribute allocation_max_netmask_length
-    #   <p>The maximum netmask length possible for CIDR allocations in this IPAM pool to be compliant. Possible
-    #            netmask lengths for IPv4 addresses are 0 - 32. Possible netmask lengths for IPv6 addresses are  0 - 128.The maximum netmask
+    #   <p>The maximum netmask length possible for CIDR allocations in this IPAM pool to be compliant. Possible 
+    #            netmask lengths for IPv4 addresses are 0 - 32. Possible netmask lengths for IPv6 addresses are  0 - 128.The maximum netmask 
     #            length must be greater than the minimum netmask length.</p>
     #   @return [Integer]
     # @!attribute allocation_default_netmask_length
@@ -57372,8 +57372,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute ipam_prefix_list_resolver_id
@@ -57408,8 +57408,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute ipam_prefix_list_resolver_target_id
@@ -57449,8 +57449,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute ipam_id
@@ -57502,8 +57502,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute resource_id
@@ -57550,8 +57550,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute ipam_resource_discovery_id
@@ -57673,8 +57673,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute ipam_scope_id
@@ -57778,13 +57778,13 @@ module Aws::EC2
     #   <p>The ID of the network interface.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute destination_prefix_list_id
     #   <p>
-    #            The ID of the prefix list. Use a prefix list in place of <code>DestinationCidrBlock</code>. You
+    #            The ID of the prefix list. Use a prefix list in place of <code>DestinationCidrBlock</code>. You 
     #            cannot use <code>DestinationPrefixListId</code> and <code>DestinationCidrBlock</code> in the same request.
     #         </p>
     #   @return [String]
@@ -57813,8 +57813,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute prefix_list_id
@@ -57833,10 +57833,10 @@ module Aws::EC2
     #   <p>One or more entries to remove from the prefix list.</p>
     #   @return [Array<Types::RemovePrefixListEntry>]
     # @!attribute max_entries
-    #   <p>The maximum number of entries for the prefix list. You cannot modify the entries
+    #   <p>The maximum number of entries for the prefix list. You cannot modify the entries  
     #               of a prefix list and modify the size of a prefix list at the same time.</p>
     #            <p>If any of the resources that reference the prefix list cannot support the new
-    #               maximum size, the modify operation fails. Check the state message for the IDs of
+    #               maximum size, the modify operation fails. Check the state message for the IDs of 
     #               the first ten resources that do not support the new maximum size.</p>
     #   @return [Integer]
     # @!attribute ipam_prefix_list_resolver_sync_enabled
@@ -57869,8 +57869,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the operation, without actually making the
-    #     request, and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the operation, without actually making the 
+    #     request, and provides an error response. If you have the required permissions, the error response is 
     #     <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute default_visibility
@@ -58044,8 +58044,8 @@ module Aws::EC2
     #            </ul>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the operation, without actually making the
-    #     request, and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the operation, without actually making the 
+    #     request, and provides an error response. If you have the required permissions, the error response is 
     #     <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class ModifyPublicIpDnsNameOptionsRequest < Struct.new(
@@ -58128,8 +58128,8 @@ module Aws::EC2
     #   <p>Specifies whether to enable SNS notifications for route server events. Enabling SNS notifications persists BGP status changes to an SNS topic provisioned by Amazon Web Services.</p>
     #   @return [Boolean]
     # @!attribute dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class ModifyRouteServerRequest < Struct.new(
@@ -58162,8 +58162,8 @@ module Aws::EC2
     #   <p>Information about the security group properties to update.</p>
     #   @return [Array<Types::SecurityGroupRuleUpdate>]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class ModifySecurityGroupRulesRequest < Struct.new(
@@ -58206,8 +58206,8 @@ module Aws::EC2
     #   <p>The account ID to modify for the snapshot.</p>
     #   @return [Array<String>]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class ModifySnapshotAttributeRequest < Struct.new(
@@ -58231,8 +58231,8 @@ module Aws::EC2
     #   <p>The name of the storage tier. You must specify <code>archive</code>.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class ModifySnapshotTierRequest < Struct.new(
@@ -58322,7 +58322,7 @@ module Aws::EC2
     # @!attribute map_public_ip_on_launch
     #   <p>Specify <code>true</code> to indicate that network interfaces attached to instances created in the
     #               specified subnet should be assigned a public IPv4 address.</p>
-    #            <p>Amazon Web Services charges for all public IPv4 addresses, including public IPv4 addresses
+    #            <p>Amazon Web Services charges for all public IPv4 addresses, including public IPv4 addresses 
     #   associated with running instances and Elastic IP addresses. For more information, see the <i>Public IPv4 Address</i> tab on the <a href="http://aws.amazon.com/vpc/pricing/">Amazon VPC pricing page</a>.</p>
     #   @return [Types::AttributeBooleanValue]
     # @!attribute subnet_id
@@ -58338,11 +58338,11 @@ module Aws::EC2
     #            <p>You must set this value when you specify <code>true</code> for <code>MapCustomerOwnedIpOnLaunch</code>.</p>
     #   @return [String]
     # @!attribute enable_dns64
-    #   <p>Indicates whether DNS queries made to the Amazon-provided DNS Resolver in this subnet
+    #   <p>Indicates whether DNS queries made to the Amazon-provided DNS Resolver in this subnet 
     #               should return synthetic IPv6 addresses for IPv4-only destinations.</p>
-    #            <p>You must first configure a NAT gateway in a public subnet (separate from the subnet
-    #              containing the IPv6-only workloads). For example, the subnet containing the NAT gateway
-    #              should have a <code>0.0.0.0/0</code> route pointing to the internet gateway. For more
+    #            <p>You must first configure a NAT gateway in a public subnet (separate from the subnet 
+    #              containing the IPv6-only workloads). For example, the subnet containing the NAT gateway 
+    #              should have a <code>0.0.0.0/0</code> route pointing to the internet gateway. For more 
     #              information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateway-nat64-dns64.html#nat-gateway-nat64-dns64-walkthrough">Configure DNS64 and NAT64</a> in the <i>Amazon VPC User Guide</i>.</p>
     #   @return [Types::AttributeBooleanValue]
     # @!attribute private_dns_hostname_type_on_launch
@@ -58358,16 +58358,16 @@ module Aws::EC2
     #   @return [Types::AttributeBooleanValue]
     # @!attribute enable_lni_at_device_index
     #   <p>
-    #               Indicates the device position for local network interfaces in this subnet. For example,
-    #               <code>1</code> indicates local network interfaces in this subnet are the secondary
+    #               Indicates the device position for local network interfaces in this subnet. For example, 
+    #               <code>1</code> indicates local network interfaces in this subnet are the secondary 
     #               network interface (eth1). A local network interface cannot be the primary network
     #               interface (eth0).
     #           </p>
     #   @return [Integer]
     # @!attribute disable_lni_at_device_index
     #   <p>
-    #               Specify <code>true</code> to indicate that local network interfaces at the current
-    #               position should be disabled.
+    #               Specify <code>true</code> to indicate that local network interfaces at the current 
+    #               position should be disabled. 
     #           </p>
     #   @return [Types::AttributeBooleanValue]
     class ModifySubnetAttributeRequest < Struct.new(
@@ -58398,8 +58398,8 @@ module Aws::EC2
     #   <p>The network service, for example Amazon DNS, that you no longer want to mirror.</p>
     #   @return [Array<String>]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class ModifyTrafficMirrorFilterNetworkServicesRequest < Struct.new(
@@ -58460,8 +58460,8 @@ module Aws::EC2
     #            <p>When you remove a property from a Traffic Mirror filter rule, the property is set to the default.</p>
     #   @return [Array<String>]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class ModifyTrafficMirrorFilterRuleRequest < Struct.new(
@@ -58525,8 +58525,8 @@ module Aws::EC2
     #            <p>When you remove a property from a Traffic Mirror session, the property is set to the default.</p>
     #   @return [Array<String>]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class ModifyTrafficMirrorSessionRequest < Struct.new(
@@ -58566,8 +58566,8 @@ module Aws::EC2
     #   <p>The IDs of middlebox attachments to remove from the metering policy.</p>
     #   @return [Array<String>]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class ModifyTransitGatewayMeteringPolicyRequest < Struct.new(
@@ -58607,7 +58607,7 @@ module Aws::EC2
     #   @return [String]
     # @!attribute security_group_referencing_support
     #   <p>Enables you to reference a security group across VPCs attached to a transit gateway to simplify security group management.
-    #
+    #   
     #   </p>
     #            <p>This option is disabled by default.</p>
     #            <p>For more information about security group referencing, see  <a href="https://docs.aws.amazon.com/vpc/latest/tgw/tgw-vpc-attachments.html#vpc-attachment-security">Security group referencing</a> in the <i>Amazon Web Services Transit Gateways Guide</i>.</p>
@@ -58632,7 +58632,7 @@ module Aws::EC2
     #   <p>The ID of the default propagation route table.</p>
     #   @return [String]
     # @!attribute amazon_side_asn
-    #   <p>A private Autonomous System Number (ASN) for the Amazon side of a BGP session.
+    #   <p>A private Autonomous System Number (ASN) for the Amazon side of a BGP session. 
     #               The range is 64512 to 65534 for 16-bit ASNs and 4200000000 to 4294967294 for 32-bit ASNs.</p>
     #            <p>The modify ASN operation is not allowed on a transit gateway if it has the following attachments:</p>
     #            <ul>
@@ -58693,8 +58693,8 @@ module Aws::EC2
     #   <p>The ID of the transit gateway route table to use for traffic matching this rule.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class ModifyTransitGatewayPolicyTableEntryRequest < Struct.new(
@@ -58733,8 +58733,8 @@ module Aws::EC2
     #   <p>Indicates whether to drop traffic that matches this route.</p>
     #   @return [Boolean]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class ModifyTransitGatewayPrefixListReferenceRequest < Struct.new(
@@ -58770,8 +58770,8 @@ module Aws::EC2
     #   <p>The options to modify.</p>
     #   @return [Types::ModifyTransitGatewayOptions]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class ModifyTransitGatewayRequest < Struct.new(
@@ -58809,8 +58809,8 @@ module Aws::EC2
     #   <p>The new VPC attachment options.</p>
     #   @return [Types::ModifyTransitGatewayVpcAttachmentRequestOptions]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class ModifyTransitGatewayVpcAttachmentRequest < Struct.new(
@@ -58831,7 +58831,7 @@ module Aws::EC2
     #   @return [String]
     # @!attribute security_group_referencing_support
     #   <p>Enables you to reference a security group across VPCs attached to a transit gateway to simplify security group management.
-    #
+    #   
     #   </p>
     #            <p>This option is disabled by default.</p>
     #            <p>For more information about security group referencing, see  <a href="https://docs.aws.amazon.com/vpc/latest/tgw/tgw-vpc-attachments.html#vpc-attachment-security">Security group referencing</a> in the <i>Amazon Web Services Transit Gateways Guide</i>.</p>
@@ -58936,8 +58936,8 @@ module Aws::EC2
     #               modification request. For more information, see <a href="https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html">Ensuring idempotency</a>.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute sse_specification
@@ -59032,8 +59032,8 @@ module Aws::EC2
     #               modification request. For more information, see <a href="https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html">Ensuring idempotency</a>.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute rds_options
@@ -59083,8 +59083,8 @@ module Aws::EC2
     #               modification request. For more information, see <a href="https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html">Ensuring idempotency</a>.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute sse_specification
@@ -59136,8 +59136,8 @@ module Aws::EC2
     #               modification request. For more information, see <a href="https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html">Ensuring idempotency</a>.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class ModifyVerifiedAccessGroupRequest < Struct.new(
@@ -59170,8 +59170,8 @@ module Aws::EC2
     #   <p>The configuration options for Verified Access instances.</p>
     #   @return [Types::VerifiedAccessLogOptions]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute client_token
@@ -59207,8 +59207,8 @@ module Aws::EC2
     #   <p>A description for the Verified Access instance.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute client_token
@@ -59343,8 +59343,8 @@ module Aws::EC2
     #   <p>A description for the Verified Access trust provider.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute client_token
@@ -59390,8 +59390,8 @@ module Aws::EC2
     #   <p>The ID of the volume.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class ModifyVolumeAttributeRequest < Struct.new(
@@ -59405,8 +59405,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute volume_id
@@ -59468,24 +59468,24 @@ module Aws::EC2
     #            <note>
     #               <p>
     #                  <a href="https://docs.aws.amazon.com/ec2/latest/instancetypes/ec2-nitro-instances.html">
-    #   Instances built on the Nitro System</a> can support up to 256,000 IOPS. Other instances can support up to 32,000
+    #   Instances built on the Nitro System</a> can support up to 256,000 IOPS. Other instances can support up to 32,000 
     #   IOPS.</p>
     #            </note>
     #            <p>Default: The existing value is retained if you keep the same volume type. If you change
     #         the volume type to <code>io1</code>, <code>io2</code>, or <code>gp3</code>, the default is 3,000.</p>
     #   @return [Integer]
     # @!attribute throughput
-    #   <p>The target throughput of the volume, in MiB/s. This parameter is valid only for <code>gp3</code> volumes.
+    #   <p>The target throughput of the volume, in MiB/s. This parameter is valid only for <code>gp3</code> volumes. 
     #         The maximum value is 2,000.</p>
     #            <p>Default: The existing value is retained if the source and target volume type is <code>gp3</code>.
     #         Otherwise, the default value is 125.</p>
     #            <p>Valid Range: Minimum value of 125. Maximum value of 2,000.</p>
     #   @return [Integer]
     # @!attribute multi_attach_enabled
-    #   <p>Specifies whether to enable Amazon EBS Multi-Attach. If you enable Multi-Attach, you can attach the
+    #   <p>Specifies whether to enable Amazon EBS Multi-Attach. If you enable Multi-Attach, you can attach the 
     #   	  volume to up to 16 <a href="https://docs.aws.amazon.com/ec2/latest/instancetypes/ec2-nitro-instances.html">
-    #   			Nitro-based instances</a> in the same Availability Zone. This parameter is
-    #   		supported with <code>io1</code> and <code>io2</code> volumes only. For more information, see
+    #   			Nitro-based instances</a> in the same Availability Zone. This parameter is 
+    #   		supported with <code>io1</code> and <code>io2</code> volumes only. For more information, see 
     #   	  <a href="https://docs.aws.amazon.com/ebs/latest/userguide/ebs-volumes-multi.html">
     #   			Amazon EBS Multi-Attach</a> in the <i>Amazon EBS User Guide</i>.</p>
     #   @return [Boolean]
@@ -59544,8 +59544,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute exclusion_id
@@ -59586,8 +59586,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute internet_gateway_block_mode
@@ -59628,8 +59628,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute vpc_encryption_control_id
@@ -59692,8 +59692,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute connection_notification_id
@@ -59729,8 +59729,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute service_id
@@ -59773,8 +59773,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute vpc_endpoint_id
@@ -59795,7 +59795,7 @@ module Aws::EC2
     #   <p>(Gateway endpoint) The IDs of the route tables to disassociate from the endpoint.</p>
     #   @return [Array<String>]
     # @!attribute add_subnet_ids
-    #   <p>(Interface and Gateway Load Balancer endpoints) The IDs of the subnets in which to serve the endpoint.
+    #   <p>(Interface and Gateway Load Balancer endpoints) The IDs of the subnets in which to serve the endpoint. 
     #               For a Gateway Load Balancer endpoint, you can specify only one subnet.</p>
     #   @return [Array<String>]
     # @!attribute remove_subnet_ids
@@ -59852,8 +59852,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute service_id
@@ -59926,8 +59926,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute service_id
@@ -59960,8 +59960,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute service_id
@@ -60006,8 +60006,8 @@ module Aws::EC2
     #   <p>The VPC peering connection options for the accepter VPC.</p>
     #   @return [Types::PeeringConnectionOptionsRequest]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute requester_peering_connection_options
@@ -60049,8 +60049,8 @@ module Aws::EC2
     #   <p>The instance tenancy attribute for the VPC. </p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class ModifyVpcTenancyRequest < Struct.new(
@@ -60454,8 +60454,8 @@ module Aws::EC2
     #   <p>The IDs of the instances.</p>
     #   @return [Array<String>]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the operation, without actually making the
-    #     request, and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the operation, without actually making the 
+    #     request, and provides an error response. If you have the required permissions, the error response is 
     #     <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class MonitorInstancesRequest < Struct.new(
@@ -60492,8 +60492,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute public_ip
@@ -60524,8 +60524,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute cidr
@@ -60669,7 +60669,7 @@ module Aws::EC2
     #   <p>The ID of the NAT gateway.</p>
     #   @return [String]
     # @!attribute provisioned_bandwidth
-    #   <p>Reserved. If you need to sustain traffic greater than the <a href="https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html#vpc-limits-gateways">documented limits</a>,
+    #   <p>Reserved. If you need to sustain traffic greater than the <a href="https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html#vpc-limits-gateways">documented limits</a>, 
     #             contact Amazon Web Services Support.</p>
     #   @return [Types::ProvisionedBandwidth]
     # @!attribute state
@@ -60976,9 +60976,9 @@ module Aws::EC2
 
     # <p>The minimum and maximum amount of network bandwidth, in gigabits per second (Gbps).</p>
     #          <note>
-    #             <p>Setting the minimum bandwidth does not guarantee that your instance will achieve the
-    #             minimum bandwidth. Amazon EC2 will identify instance types that support the specified minimum
-    #             bandwidth, but the actual bandwidth of your instance might go below the specified minimum
+    #             <p>Setting the minimum bandwidth does not guarantee that your instance will achieve the 
+    #             minimum bandwidth. Amazon EC2 will identify instance types that support the specified minimum 
+    #             bandwidth, but the actual bandwidth of your instance might go below the specified minimum 
     #             at times. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-network-bandwidth.html#available-instance-bandwidth">Available instance bandwidth</a> in the
     #             <i>Amazon EC2 User Guide</i>.</p>
     #          </note>
@@ -61001,9 +61001,9 @@ module Aws::EC2
 
     # <p>The minimum and maximum amount of network bandwidth, in gigabits per second (Gbps).</p>
     #          <note>
-    #             <p>Setting the minimum bandwidth does not guarantee that your instance will achieve the
-    #             minimum bandwidth. Amazon EC2 will identify instance types that support the specified minimum
-    #             bandwidth, but the actual bandwidth of your instance might go below the specified minimum
+    #             <p>Setting the minimum bandwidth does not guarantee that your instance will achieve the 
+    #             minimum bandwidth. Amazon EC2 will identify instance types that support the specified minimum 
+    #             bandwidth, but the actual bandwidth of your instance might go below the specified minimum 
     #             at times. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-network-bandwidth.html#available-instance-bandwidth">Available instance bandwidth</a> in the
     #             <i>Amazon EC2 User Guide</i>.</p>
     #          </note>
@@ -62439,7 +62439,7 @@ module Aws::EC2
 
     # <p>The VPC peering connection options.</p>
     # @!attribute allow_dns_resolution_from_remote_vpc
-    #   <p>If true, enables a local VPC to resolve public DNS hostnames to private IP addresses
+    #   <p>If true, enables a local VPC to resolve public DNS hostnames to private IP addresses 
     #           when queried from instances in the peer VPC.</p>
     #   @return [Boolean]
     # @!attribute allow_egress_from_local_classic_link_to_remote_vpc
@@ -62791,7 +62791,7 @@ module Aws::EC2
     # <p>Describes the placement of an instance.</p>
     # @!attribute availability_zone_id
     #   <p>The ID of the Availability Zone of the instance.</p>
-    #            <p>On input, you can specify <code>AvailabilityZone</code> or <code>AvailabilityZoneId</code>,
+    #            <p>On input, you can specify <code>AvailabilityZone</code> or <code>AvailabilityZoneId</code>, 
     #               but not both. If you specify neither one, Amazon EC2 automatically selects an Availability Zone
     #               for you.</p>
     #            <p>This parameter is not supported for <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateFleet">CreateFleet</a>.</p>
@@ -62837,7 +62837,7 @@ module Aws::EC2
     #   @return [String]
     # @!attribute availability_zone
     #   <p>The Availability Zone of the instance.</p>
-    #            <p>On input, you can specify <code>AvailabilityZone</code> or <code>AvailabilityZoneId</code>,
+    #            <p>On input, you can specify <code>AvailabilityZone</code> or <code>AvailabilityZoneId</code>, 
     #               but not both. If you specify neither one, Amazon EC2 automatically selects an Availability Zone
     #               for you.</p>
     #            <p>This parameter is not supported for <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateFleet">CreateFleet</a>.</p>
@@ -63306,12 +63306,12 @@ module Aws::EC2
     end
 
     # @!attribute cidr
-    #   <p>The public IPv4 or IPv6 address range, in CIDR notation. The most specific IPv4 prefix that you can
-    #             specify is /24. The most specific IPv6 address range that you can bring is /48 for CIDRs that are publicly advertisable and /56 for CIDRs that are not publicly advertisable. The address range cannot overlap with another address range that you've
+    #   <p>The public IPv4 or IPv6 address range, in CIDR notation. The most specific IPv4 prefix that you can 
+    #             specify is /24. The most specific IPv6 address range that you can bring is /48 for CIDRs that are publicly advertisable and /56 for CIDRs that are not publicly advertisable. The address range cannot overlap with another address range that you've 
     #            brought to this or another Region.</p>
     #   @return [String]
     # @!attribute cidr_authorization_context
-    #   <p>A signed document that proves that you are authorized to bring the specified IP address
+    #   <p>A signed document that proves that you are authorized to bring the specified IP address 
     #            range to Amazon using BYOIP.</p>
     #   @return [Types::CidrAuthorizationContext]
     # @!attribute publicly_advertisable
@@ -63323,8 +63323,8 @@ module Aws::EC2
     #   <p>A description for the address range and the address pool.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute pool_tag_specifications
@@ -63378,8 +63378,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute ipam_id
@@ -63414,8 +63414,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute ipam_pool_id
@@ -63466,8 +63466,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute ipam_pool_id
@@ -63509,7 +63509,7 @@ module Aws::EC2
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Reserved. If you need to sustain traffic greater than the <a href="https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html#vpc-limits-gateways">documented limits</a>,
+    # <p>Reserved. If you need to sustain traffic greater than the <a href="https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html#vpc-limits-gateways">documented limits</a>, 
     #           contact Amazon Web Services Support.</p>
     # @!attribute provision_time
     #   <p>Reserved.</p>
@@ -63599,8 +63599,8 @@ module Aws::EC2
     #   <p>The total number of available addresses.</p>
     #   @return [Integer]
     # @!attribute network_border_group
-    #   <p>The name of the location from which the address pool is advertised.
-    #               A network border group is a unique set of Availability Zones or Local Zones
+    #   <p>The name of the location from which the address pool is advertised. 
+    #               A network border group is a unique set of Availability Zones or Local Zones 
     #               from where Amazon Web Services advertises public IP addresses.</p>
     #   @return [String]
     # @!attribute tags
@@ -63886,12 +63886,12 @@ module Aws::EC2
 
     # <p>Contains the parameters for PurchaseScheduledInstances.</p>
     # @!attribute client_token
-    #   <p>Unique, case-sensitive identifier that ensures the idempotency of the request.
+    #   <p>Unique, case-sensitive identifier that ensures the idempotency of the request. 
     #            For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html">Ensuring Idempotency</a>.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute purchase_requests
@@ -63923,8 +63923,8 @@ module Aws::EC2
     #   <p>The instance IDs.</p>
     #   @return [Array<String>]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the operation, without actually making the
-    #     request, and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the operation, without actually making the 
+    #     request, and provides an error response. If you have the required permissions, the error response is 
     #     <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class RebootInstancesRequest < Struct.new(
@@ -63982,7 +63982,7 @@ module Aws::EC2
 
     # <p>Describes a Region.</p>
     # @!attribute opt_in_status
-    #   <p>The Region opt-in status. The possible values are <code>opt-in-not-required</code>, <code>opted-in</code>, and
+    #   <p>The Region opt-in status. The possible values are <code>opt-in-not-required</code>, <code>opted-in</code>, and 
     #           <code>not-opted-in</code>.</p>
     #   @return [String]
     # @!attribute geography
@@ -64092,8 +64092,8 @@ module Aws::EC2
     #            <p>To tag an AMI after it has been registered, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateTags.html">CreateTags</a>.</p>
     #   @return [Array<Types::TagSpecification>]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #   			and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #   			and provides an error response. If you have the required permissions, the error response is 
     #   			<code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute name
@@ -64184,8 +64184,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute instance_tag_attribute
@@ -64241,8 +64241,8 @@ module Aws::EC2
     #   <p>The group members' network interface IDs to register with the  transit gateway multicast group.</p>
     #   @return [Array<String>]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class RegisterTransitGatewayMulticastGroupMembersRequest < Struct.new(
@@ -64277,8 +64277,8 @@ module Aws::EC2
     #   <p>The group sources' network interface IDs to register with the  transit gateway multicast group.</p>
     #   @return [Array<String>]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class RegisterTransitGatewayMulticastGroupSourcesRequest < Struct.new(
@@ -64303,7 +64303,7 @@ module Aws::EC2
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Describes an Amazon EC2 instance that is enabled for SQL Server High Availability standby
+    # <p>Describes an Amazon EC2 instance that is enabled for SQL Server High Availability standby 
     #       detection monitoring.</p>
     # @!attribute instance_id
     #   <p>The ID of the SQL Server High Availability instance.</p>
@@ -64334,18 +64334,18 @@ module Aws::EC2
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>standby</code> - The SQL Server High Availability instance is a standby failover node in an SQL Server High Availability
+    #                     <code>standby</code> - The SQL Server High Availability instance is a standby failover node in an SQL Server High Availability 
     #             cluster.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>invalid</code> - An error occurred due to misconfigured permissions, or unable
+    #                     <code>invalid</code> - An error occurred due to misconfigured permissions, or unable 
     #             to dertemine SQL Server High Availability status for the SQL Server High Availability instance.</p>
     #               </li>
     #            </ul>
     #   @return [String]
     # @!attribute processing_status
-    #   <p>A brief description of the SQL Server High Availability status. If the instance is in the <code>invalid</code>
+    #   <p>A brief description of the SQL Server High Availability status. If the instance is in the <code>invalid</code> 
     #         High Availability status, this parameter includes the error message.</p>
     #   @return [String]
     # @!attribute last_updated_time
@@ -64353,7 +64353,7 @@ module Aws::EC2
     #         in the UTC time zone (<code>YYYY-MM-DDThh:mm:ss.sssZ</code>).</p>
     #   @return [Time]
     # @!attribute sql_server_credentials
-    #   <p>The ARN of the Secrets Manager secret containing the SQL Server access credentials for the SQL Server High Availability instance.
+    #   <p>The ARN of the Secrets Manager secret containing the SQL Server access credentials for the SQL Server High Availability instance. 
     #         If not specified, deafult local user credentials will be used by the Amazon Web Services Systems Manager agent.</p>
     #   @return [String]
     # @!attribute tags
@@ -64435,8 +64435,8 @@ module Aws::EC2
     #   <p>The IDs of the subnets to associate with the transit gateway multicast domain.</p>
     #   @return [Array<String>]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class RejectTransitGatewayMulticastDomainAssociationsRequest < Struct.new(
@@ -64465,8 +64465,8 @@ module Aws::EC2
     #   <p>The ID of the transit gateway peering attachment.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class RejectTransitGatewayPeeringAttachmentRequest < Struct.new(
@@ -64493,8 +64493,8 @@ module Aws::EC2
     #   <p>The ID of the attachment.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class RejectTransitGatewayVpcAttachmentRequest < Struct.new(
@@ -64518,8 +64518,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute service_id
@@ -64550,8 +64550,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute vpc_peering_connection_id
@@ -64589,8 +64589,8 @@ module Aws::EC2
     #            <p>If you provide an incorrect network border group, you receive an <code>InvalidAddress.NotFound</code> error.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class ReleaseAddressRequest < Struct.new(
@@ -64632,8 +64632,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>A check for whether you have the required permissions for the action without actually making the request
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>A check for whether you have the required permissions for the action without actually making the request 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute ipam_pool_id
@@ -64766,8 +64766,8 @@ module Aws::EC2
     #         usable in the account in the specified Amazon Web Services Region.</p>
     #   @return [Array<Types::ImageCriterionRequest>]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #   			and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #   			and provides an error response. If you have the required permissions, the error response is 
     #   			<code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class ReplaceImageCriteriaInAllowedImagesSettingsRequest < Struct.new(
@@ -64798,8 +64798,8 @@ module Aws::EC2
     #         existing instance type specification.</p>
     #   @return [Types::InstanceTypeSpecificationRequest]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #   			and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #   			and provides an error response. If you have the required permissions, the error response is 
     #   			<code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class ReplaceImageInstanceTypeSpecificationRequest < Struct.new(
@@ -64824,8 +64824,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute association_id
@@ -64856,8 +64856,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute network_acl_id
@@ -64868,10 +64868,10 @@ module Aws::EC2
     #   @return [Integer]
     # @!attribute protocol
     #   <p>The protocol number. A value of "-1" means all protocols. If you specify "-1" or a
-    #              protocol number other than "6" (TCP), "17" (UDP), or "1" (ICMP), traffic on all ports is
-    #              allowed, regardless of any ports or ICMP types or codes that you specify. If you specify
-    #              protocol "58" (ICMPv6) and specify an IPv4 CIDR block, traffic for all ICMP types and
-    #              codes allowed, regardless of any that you specify. If you specify protocol "58" (ICMPv6)
+    #              protocol number other than "6" (TCP), "17" (UDP), or "1" (ICMP), traffic on all ports is 
+    #              allowed, regardless of any ports or ICMP types or codes that you specify. If you specify 
+    #              protocol "58" (ICMPv6) and specify an IPv4 CIDR block, traffic for all ICMP types and 
+    #              codes allowed, regardless of any that you specify. If you specify protocol "58" (ICMPv6) 
     #              and specify an IPv6 CIDR block, you must specify an ICMP type and code.</p>
     #   @return [String]
     # @!attribute rule_action
@@ -64894,7 +64894,7 @@ module Aws::EC2
     #   		        1 (ICMP) or protocol 58 (ICMPv6) with an IPv6 CIDR block.</p>
     #   @return [Types::IcmpTypeCode]
     # @!attribute port_range
-    #   <p>TCP or UDP protocols: The range of ports the rule applies to.
+    #   <p>TCP or UDP protocols: The range of ports the rule applies to. 
     #   		        Required if specifying protocol 6 (TCP) or 17 (UDP).</p>
     #   @return [Types::PortRange]
     class ReplaceNetworkAclEntryRequest < Struct.new(
@@ -64930,12 +64930,12 @@ module Aws::EC2
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>in-progress</code> - the original volume is being detached and the
+    #                     <code>in-progress</code> - the original volume is being detached and the 
     #             replacement volume is being attached.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>succeeded</code> - the replacement volume has been successfully attached
+    #                     <code>succeeded</code> - the replacement volume has been successfully attached 
     #             to the instance and the instance is available.</p>
     #               </li>
     #               <li>
@@ -64944,17 +64944,17 @@ module Aws::EC2
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>failed</code> - the replacement task has failed but the original root
+    #                     <code>failed</code> - the replacement task has failed but the original root 
     #             volume is still attached.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>failing-detached</code> - the replacement task is in the process of failing.
+    #                     <code>failing-detached</code> - the replacement task is in the process of failing. 
     #             The instance might have no root volume attached.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>failed-detached</code> - the replacement task has failed and the instance
+    #                     <code>failed-detached</code> - the replacement task has failed and the instance 
     #             has no root volume attached.</p>
     #               </li>
     #            </ul>
@@ -64975,7 +64975,7 @@ module Aws::EC2
     #   <p>The ID of the snapshot used to create the replacement root volume.</p>
     #   @return [String]
     # @!attribute delete_replaced_root_volume
-    #   <p>Indicates whether the original root volume is to be deleted after the root volume
+    #   <p>Indicates whether the original root volume is to be deleted after the root volume 
     #         replacement task completes.</p>
     #   @return [Boolean]
     class ReplaceRootVolumeTask < Struct.new(
@@ -65019,8 +65019,8 @@ module Aws::EC2
     #   <p>The Amazon Resource Name (ARN) of the ODB network.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute route_table_id
@@ -65078,8 +65078,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute association_id
@@ -65126,8 +65126,8 @@ module Aws::EC2
     #   <p>Indicates whether traffic matching this route is to be dropped.</p>
     #   @return [Boolean]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class ReplaceTransitGatewayRouteRequest < Struct.new(
@@ -65188,8 +65188,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the operation, without actually making the
-    #     request, and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the operation, without actually making the 
+    #     request, and provides an error response. If you have the required permissions, the error response is 
     #     <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute instances
@@ -65533,17 +65533,17 @@ module Aws::EC2
     #            <p>When you specify multiple attributes, you get instance types that satisfy all of the
     #            specified attributes. If you specify multiple values for an attribute, you get instance
     #            types that satisfy any of the specified values.</p>
-    #            <p>To limit the list of instance types from which Amazon EC2 can identify matching instance types,
+    #            <p>To limit the list of instance types from which Amazon EC2 can identify matching instance types, 
     #            you can use one of the following parameters, but not both in the same request:</p>
     #            <ul>
     #               <li>
     #                  <p>
-    #                     <code>AllowedInstanceTypes</code> - The instance types to include in the list. All
+    #                     <code>AllowedInstanceTypes</code> - The instance types to include in the list. All 
     #                  other instance types are ignored, even if they match your specified attributes.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>ExcludedInstanceTypes</code> - The instance types to exclude from the list,
+    #                     <code>ExcludedInstanceTypes</code> - The instance types to exclude from the list, 
     #                  even if they match your specified attributes.</p>
     #               </li>
     #            </ul>
@@ -65673,7 +65673,7 @@ module Aws::EC2
     #                   <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute spot_price
-    #   <p>The maximum price per unit hour that you are willing to pay for a Spot Instance. We do not recommend
+    #   <p>The maximum price per unit hour that you are willing to pay for a Spot Instance. We do not recommend 
     #               using this parameter because it can lead to increased interruptions. If you do not specify this parameter, you will pay the current Spot price.</p>
     #            <important>
     #               <p>If you specify a maximum price, your instances will be interrupted more frequently than if you do not specify this parameter.</p>
@@ -65786,8 +65786,8 @@ module Aws::EC2
     #   <p>Deprecated.</p>
     #   @return [String]
     # @!attribute block_device_mappings
-    #   <p>The block device mapping entries. You can't specify both a snapshot ID and an encryption value.
-    #              This is because only blank volumes can be encrypted on creation. If a snapshot is the basis for a volume,
+    #   <p>The block device mapping entries. You can't specify both a snapshot ID and an encryption value. 
+    #              This is because only blank volumes can be encrypted on creation. If a snapshot is the basis for a volume, 
     #              it is not blank and its encryption status is used for the volume encryption status.</p>
     #   @return [Array<Types::BlockDeviceMapping>]
     # @!attribute ebs_optimized
@@ -65815,7 +65815,7 @@ module Aws::EC2
     #            <p>Default: Disabled</p>
     #   @return [Types::RunInstancesMonitoringEnabled]
     # @!attribute network_interfaces
-    #   <p>The network interfaces. If you specify a network interface, you must specify
+    #   <p>The network interfaces. If you specify a network interface, you must specify 
     #              subnet IDs and security group IDs using the network interface.</p>
     #   @return [Array<Types::InstanceNetworkInterfaceSpecification>]
     # @!attribute placement
@@ -66436,8 +66436,8 @@ module Aws::EC2
     #   <p>The attribute of the IP address.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class ResetAddressAttributeRequest < Struct.new(
@@ -66462,8 +66462,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class ResetEbsDefaultKmsKeyIdRequest < Struct.new(
@@ -66486,8 +66486,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute fpga_image_id
@@ -66526,8 +66526,8 @@ module Aws::EC2
     #   <p>The ID of the AMI.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #   			and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #   			and provides an error response. If you have the required permissions, the error response is 
     #   			<code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class ResetImageAttributeRequest < Struct.new(
@@ -66541,8 +66541,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the operation, without actually making the
-    #     request, and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the operation, without actually making the 
+    #     request, and provides an error response. If you have the required permissions, the error response is 
     #     <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute instance_id
@@ -66597,8 +66597,8 @@ module Aws::EC2
     #   <p>The ID of the snapshot.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class ResetSnapshotAttributeRequest < Struct.new(
@@ -66923,8 +66923,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute public_ip
@@ -66958,8 +66958,8 @@ module Aws::EC2
     #   <p>The ID of the AMI to restore.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #   			and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #   			and provides an error response. If you have the required permissions, the error response is 
     #   			<code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class RestoreImageFromRecycleBinRequest < Struct.new(
@@ -66983,8 +66983,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute prefix_list_id
@@ -67022,8 +67022,8 @@ module Aws::EC2
     #   <p>The ID of the snapshot to restore.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class RestoreSnapshotFromRecycleBinRequest < Struct.new(
@@ -67039,7 +67039,7 @@ module Aws::EC2
     #   <p>The ID of the snapshot.</p>
     #   @return [String]
     # @!attribute outpost_arn
-    #   <p>The ARN of the Outpost on which the snapshot is stored. For more information, see <a href="https://docs.aws.amazon.com/ebs/latest/userguide/snapshots-outposts.html">Amazon EBS local snapshots on Outposts</a> in the
+    #   <p>The ARN of the Outpost on which the snapshot is stored. For more information, see <a href="https://docs.aws.amazon.com/ebs/latest/userguide/snapshots-outposts.html">Amazon EBS local snapshots on Outposts</a> in the 
     #         <i>Amazon EBS User Guide</i>.</p>
     #   @return [String]
     # @!attribute description
@@ -67091,21 +67091,21 @@ module Aws::EC2
     #   <p>The ID of the snapshot to restore.</p>
     #   @return [String]
     # @!attribute temporary_restore_days
-    #   <p>Specifies the number of days for which to temporarily restore an archived snapshot.
-    #         Required for temporary restores only. The snapshot will be automatically re-archived
+    #   <p>Specifies the number of days for which to temporarily restore an archived snapshot. 
+    #         Required for temporary restores only. The snapshot will be automatically re-archived 
     #         after this period.</p>
-    #            <p>To temporarily restore an archived snapshot, specify the number of days and omit
-    #         the <b>PermanentRestore</b> parameter or set it to
+    #            <p>To temporarily restore an archived snapshot, specify the number of days and omit 
+    #         the <b>PermanentRestore</b> parameter or set it to 
     #         <code>false</code>.</p>
     #   @return [Integer]
     # @!attribute permanent_restore
-    #   <p>Indicates whether to permanently restore an archived snapshot. To permanently restore
-    #         an archived snapshot, specify <code>true</code> and omit the
+    #   <p>Indicates whether to permanently restore an archived snapshot. To permanently restore 
+    #         an archived snapshot, specify <code>true</code> and omit the 
     #         <b>RestoreSnapshotTierRequest$TemporaryRestoreDays</b> parameter.</p>
     #   @return [Boolean]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class RestoreSnapshotTierRequest < Struct.new(
@@ -67126,11 +67126,11 @@ module Aws::EC2
     #   <p>The date and time when the snapshot restore process started.</p>
     #   @return [Time]
     # @!attribute restore_duration
-    #   <p>For temporary restores only. The number of days for which the archived snapshot
+    #   <p>For temporary restores only. The number of days for which the archived snapshot 
     #         is temporarily restored.</p>
     #   @return [Integer]
     # @!attribute is_permanent_restore
-    #   <p>Indicates whether the snapshot is permanently restored. <code>true</code> indicates a permanent
+    #   <p>Indicates whether the snapshot is permanently restored. <code>true</code> indicates a permanent 
     #         restore. <code>false</code> indicates a temporary restore.</p>
     #   @return [Boolean]
     class RestoreSnapshotTierResult < Struct.new(
@@ -67148,8 +67148,8 @@ module Aws::EC2
     #   <p>The ID of the volume to restore.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class RestoreVolumeFromRecycleBinRequest < Struct.new(
@@ -67215,8 +67215,8 @@ module Aws::EC2
     #   <p>The IDs of the security group rules.</p>
     #   @return [Array<String>]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute group_id
@@ -67303,14 +67303,14 @@ module Aws::EC2
     #   <p>The sets of IP permissions. You can't specify a source security group and a CIDR IP address range in the same set of permissions.</p>
     #   @return [Array<Types::IpPermission>]
     # @!attribute ip_protocol
-    #   <p>The IP protocol name (<code>tcp</code>, <code>udp</code>, <code>icmp</code>) or number
-    #           (see <a href="http://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml">Protocol Numbers</a>).
+    #   <p>The IP protocol name (<code>tcp</code>, <code>udp</code>, <code>icmp</code>) or number 
+    #           (see <a href="http://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml">Protocol Numbers</a>). 
     #           Use <code>-1</code> to specify all.</p>
     #   @return [String]
     # @!attribute source_security_group_name
-    #   <p>[Default VPC] The name of the source security group. You can't specify this parameter
-    #            in combination with the following parameters: the CIDR IP address range, the start of the port range,
-    #            the IP protocol, and the end of the port range. The source security group must be in the same VPC.
+    #   <p>[Default VPC] The name of the source security group. You can't specify this parameter 
+    #            in combination with the following parameters: the CIDR IP address range, the start of the port range, 
+    #            the IP protocol, and the end of the port range. The source security group must be in the same VPC. 
     #            To revoke a specific rule for an IP protocol and port range, use a set of IP permissions instead.</p>
     #   @return [String]
     # @!attribute source_security_group_owner_id
@@ -67324,8 +67324,8 @@ module Aws::EC2
     #   <p>The IDs of the security group rules.</p>
     #   @return [Array<String>]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class RevokeSecurityGroupIngressRequest < Struct.new(
@@ -67492,7 +67492,7 @@ module Aws::EC2
     #   <p>The Amazon Resource Name (ARN) of the ODB network.</p>
     #   @return [String]
     # @!attribute ip_address
-    #   <p>The next hop IP address for routes propagated by VPC Route
+    #   <p>The next hop IP address for routes propagated by VPC Route 
     #               Server into VPC route tables.</p>
     #   @return [String]
     class Route < Struct.new(
@@ -67521,7 +67521,7 @@ module Aws::EC2
     end
 
     # <p>Describes a route server and its configuration.</p>
-    #          <p>Amazon VPC Route Server simplifies routing for traffic between workloads that are deployed within a VPC and its internet gateways. With this feature,
+    #          <p>Amazon VPC Route Server simplifies routing for traffic between workloads that are deployed within a VPC and its internet gateways. With this feature, 
     # VPC Route Server dynamically updates VPC and internet gateway route tables with your preferred IPv4 or IPv6 routes to achieve routing fault tolerance for those workloads. This enables you to automatically reroute traffic within a VPC, which increases the manageability of VPC routing and interoperability with third-party workloads.</p>
     #          <p>Route server supports the follow route table types:</p>
     #          <ul>
@@ -68107,10 +68107,10 @@ module Aws::EC2
     #   @return [String]
     # @!attribute max_count
     #   <p>The maximum number of instances to launch. If you specify a value that is more
-    #               capacity than Amazon EC2 can launch in the target Availability Zone, Amazon EC2
+    #               capacity than Amazon EC2 can launch in the target Availability Zone, Amazon EC2 
     #               launches the largest possible number of instances above the specified minimum
     #               count.</p>
-    #            <p>Constraints: Between 1 and the quota for the specified instance type for your account for this Region.
+    #            <p>Constraints: Between 1 and the quota for the specified instance type for your account for this Region. 
     #               For more information, see <a href="https://docs.aws.amazon.com/ec2/latest/instancetypes/ec2-instance-quotas.html">Amazon EC2 instance type quotas</a>.</p>
     #   @return [Integer]
     # @!attribute min_count
@@ -68196,7 +68196,7 @@ module Aws::EC2
     #            <p>To tag a resource after it has been created, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateTags.html">CreateTags</a>.</p>
     #   @return [Array<Types::TagSpecification>]
     # @!attribute launch_template
-    #   <p>The launch template. Any additional parameters that you specify for the new instance
+    #   <p>The launch template. Any additional parameters that you specify for the new instance 
     #               overwrite the corresponding parameters included in the launch template.</p>
     #   @return [Types::LaunchTemplateSpecification]
     # @!attribute instance_market_options
@@ -68247,7 +68247,7 @@ module Aws::EC2
     #               instance.</p>
     #   @return [Types::EnclaveOptionsRequest]
     # @!attribute private_dns_name_options
-    #   <p>The options for the instance hostname.
+    #   <p>The options for the instance hostname. 
     #               The default values are inherited from the subnet.
     #               Applies only if creating a network interface, not attaching an existing one.</p>
     #   @return [Types::PrivateDnsNameOptionsRequest]
@@ -68282,8 +68282,8 @@ module Aws::EC2
     #   <p>The secondary interfaces to associate with the instance.</p>
     #   @return [Array<Types::InstanceSecondaryInterfaceSpecificationRequest>]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the operation, without actually making the
-    #     request, and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the operation, without actually making the 
+    #     request, and provides an error response. If you have the required permissions, the error response is 
     #     <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute disable_api_termination
@@ -68388,12 +68388,12 @@ module Aws::EC2
 
     # <p>Contains the parameters for RunScheduledInstances.</p>
     # @!attribute client_token
-    #   <p>Unique, case-sensitive identifier that ensures the idempotency of the request.
+    #   <p>Unique, case-sensitive identifier that ensures the idempotency of the request. 
     #            For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html">Ensuring Idempotency</a>.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute instance_count
@@ -68401,7 +68401,7 @@ module Aws::EC2
     #            <p>Default: 1</p>
     #   @return [Integer]
     # @!attribute launch_specification
-    #   <p>The launch specification. You must match the instance type, Availability Zone,
+    #   <p>The launch specification. You must match the instance type, Availability Zone, 
     #            network, and platform of the schedule that you purchased.</p>
     #   @return [Types::ScheduledInstancesLaunchSpecification]
     # @!attribute scheduled_instance_id
@@ -68649,7 +68649,7 @@ module Aws::EC2
     #   <p>The frequency (<code>Daily</code>, <code>Weekly</code>, or <code>Monthly</code>).</p>
     #   @return [String]
     # @!attribute interval
-    #   <p>The interval quantity. The interval unit depends on the value of <code>Frequency</code>. For example, every 2
+    #   <p>The interval quantity. The interval unit depends on the value of <code>Frequency</code>. For example, every 2 
     #            weeks or every 2 months.</p>
     #   @return [Integer]
     # @!attribute occurrence_days
@@ -68692,8 +68692,8 @@ module Aws::EC2
     #            for <code>ephemeral0</code> and <code>ephemeral1</code>. The number of available instance store
     #            volumes depends on the instance type. After you connect to the instance, you must mount the
     #            volume.</p>
-    #            <p>Constraints: For M3 instances, you must specify instance store volumes in the block device
-    #            mapping for the instance. When you launch an M3 instance, we ignore any instance store volumes
+    #            <p>Constraints: For M3 instances, you must specify instance store volumes in the block device 
+    #            mapping for the instance. When you launch an M3 instance, we ignore any instance store volumes 
     #            specified in the block device mapping for the AMI.</p>
     #   @return [String]
     class ScheduledInstancesBlockDeviceMapping < Struct.new(
@@ -68712,11 +68712,11 @@ module Aws::EC2
     #   <p>Indicates whether the volume is deleted on instance termination.</p>
     #   @return [Boolean]
     # @!attribute encrypted
-    #   <p>Indicates whether the volume is encrypted. You can attached encrypted volumes only to instances that
+    #   <p>Indicates whether the volume is encrypted. You can attached encrypted volumes only to instances that 
     #            support them.</p>
     #   @return [Boolean]
     # @!attribute iops
-    #   <p>The number of I/O operations per second (IOPS) to provision for a <code>gp3</code>, <code>io1</code>, or <code>io2</code>
+    #   <p>The number of I/O operations per second (IOPS) to provision for a <code>gp3</code>, <code>io1</code>, or <code>io2</code> 
     #      	   volume.</p>
     #   @return [Integer]
     # @!attribute snapshot_id
@@ -68724,7 +68724,7 @@ module Aws::EC2
     #   @return [String]
     # @!attribute volume_size
     #   <p>The size of the volume, in GiB.</p>
-    #            <p>Default: If you're creating the volume from a snapshot and don't specify a volume size, the default
+    #            <p>Default: If you're creating the volume from a snapshot and don't specify a volume size, the default 
     #            is the snapshot size.</p>
     #   @return [Integer]
     # @!attribute volume_type
@@ -68861,7 +68861,7 @@ module Aws::EC2
     #            assigned to a new network interface, not an existing one. You cannot specify more than one
     #            network interface in the request. If launching into a default subnet, the default value is
     #            <code>true</code>.</p>
-    #            <p>Amazon Web Services charges for all public IPv4 addresses, including public IPv4 addresses
+    #            <p>Amazon Web Services charges for all public IPv4 addresses, including public IPv4 addresses 
     #   associated with running instances and Elastic IP addresses. For more information, see the <i>Public IPv4 Address</i> tab on the <a href="http://aws.amazon.com/vpc/pricing/">Amazon VPC pricing page</a>.</p>
     #   @return [Boolean]
     # @!attribute delete_on_termination
@@ -68972,8 +68972,8 @@ module Aws::EC2
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>route-search.supernet-of-match</code> - The routes with a CIDR that encompass the CIDR filter.
-    #                  For example, if you have 10.0.1.0/29 and 10.0.1.0/31 routes in your route table and you specify <code>supernet-of-match</code>
+    #                     <code>route-search.supernet-of-match</code> - The routes with a CIDR that encompass the CIDR filter. 
+    #                  For example, if you have 10.0.1.0/29 and 10.0.1.0/31 routes in your route table and you specify <code>supernet-of-match</code> 
     #                  as 10.0.1.0/30, then the result returns 10.0.1.0/29.</p>
     #               </li>
     #               <li>
@@ -68994,8 +68994,8 @@ module Aws::EC2
     #   <p>The token for the next page of results.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class SearchLocalGatewayRoutesRequest < Struct.new(
@@ -69077,8 +69077,8 @@ module Aws::EC2
     #   <p>The token for the next page of results.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class SearchTransitGatewayMulticastGroupsRequest < Struct.new(
@@ -69164,8 +69164,8 @@ module Aws::EC2
     #            1000.</p>
     #   @return [Integer]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute next_token
@@ -69599,8 +69599,8 @@ module Aws::EC2
     #   <p>The ID of the VPC with the referencing security group.</p>
     #   @return [String]
     # @!attribute vpc_peering_connection_id
-    #   <p>The ID of the VPC peering connection (if applicable). For more information about security group referencing for peering connections, see
-    #             <a href="https://docs.aws.amazon.com/vpc/latest/peering/vpc-peering-security-groups.html">Update your security groups to reference peer security groups</a>
+    #   <p>The ID of the VPC peering connection (if applicable). For more information about security group referencing for peering connections, see 
+    #             <a href="https://docs.aws.amazon.com/vpc/latest/peering/vpc-peering-security-groups.html">Update your security groups to reference peer security groups</a> 
     #             in the <i>VPC Peering Guide</i>.</p>
     #   @return [String]
     # @!attribute transit_gateway_id
@@ -69641,7 +69641,7 @@ module Aws::EC2
     #   @return [Integer]
     # @!attribute to_port
     #   <p>If the protocol is TCP or UDP, this is the end of the port range.
-    #               If the protocol is ICMP or ICMPv6, this is the ICMP code or -1 (all ICMP codes).
+    #               If the protocol is ICMP or ICMPv6, this is the ICMP code or -1 (all ICMP codes). 
     #               If the start port is -1 (all ICMP types), then the end port must be -1 (all ICMP codes).</p>
     #   @return [Integer]
     # @!attribute cidr_ipv4
@@ -69721,14 +69721,14 @@ module Aws::EC2
     #          </ul>
     #          <note>
     #             <p>
-    #                 Amazon Web Services <a href="https://en.wikipedia.org/wiki/Canonicalization">canonicalizes</a> IPv4 and IPv6 CIDRs. For example, if you specify 100.68.0.18/18 for the CIDR block,
-    #               Amazon Web Services canonicalizes the CIDR block to 100.68.0.0/18. Any subsequent DescribeSecurityGroups and DescribeSecurityGroupRules calls will
-    #               return the canonicalized form of the CIDR block. Additionally, if you attempt to add another rule with the
-    #               non-canonical form of the CIDR (such as 100.68.0.18/18) and there is already a rule for the canonicalized
+    #                 Amazon Web Services <a href="https://en.wikipedia.org/wiki/Canonicalization">canonicalizes</a> IPv4 and IPv6 CIDRs. For example, if you specify 100.68.0.18/18 for the CIDR block, 
+    #               Amazon Web Services canonicalizes the CIDR block to 100.68.0.0/18. Any subsequent DescribeSecurityGroups and DescribeSecurityGroupRules calls will 
+    #               return the canonicalized form of the CIDR block. Additionally, if you attempt to add another rule with the 
+    #               non-canonical form of the CIDR (such as 100.68.0.18/18) and there is already a rule for the canonicalized 
     #               form of the CIDR block (such as 100.68.0.0/18), the API throws an duplicate rule error.</p>
     #          </note>
-    #          <p>When you modify a rule, you cannot change the rule type. For example, if the rule
-    #             uses an IPv4 address range, you must use <code>CidrIpv4</code> to specify a new IPv4
+    #          <p>When you modify a rule, you cannot change the rule type. For example, if the rule  
+    #             uses an IPv4 address range, you must use <code>CidrIpv4</code> to specify a new IPv4 
     #             address range.</p>
     # @!attribute ip_protocol
     #   <p>The IP protocol name (<code>tcp</code>, <code>udp</code>, <code>icmp</code>,
@@ -69741,7 +69741,7 @@ module Aws::EC2
     #   @return [Integer]
     # @!attribute to_port
     #   <p>If the protocol is TCP or UDP, this is the end of the port range.
-    #               If the protocol is ICMP or ICMPv6, this is the ICMP code or -1 (all ICMP codes).
+    #               If the protocol is ICMP or ICMPv6, this is the ICMP code or -1 (all ICMP codes). 
     #               If the start port is -1 (all ICMP types), then the end port must be -1 (all ICMP codes).</p>
     #   @return [Integer]
     # @!attribute cidr_ipv4
@@ -69826,8 +69826,8 @@ module Aws::EC2
     #   <p>The ID of the instance.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the operation, without actually making the
-    #     request, and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the operation, without actually making the 
+    #     request, and provides an error response. If you have the required permissions, the error response is 
     #     <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class SendDiagnosticInterruptRequest < Struct.new(
@@ -69895,7 +69895,7 @@ module Aws::EC2
     #   <p>The supported Regions.</p>
     #   @return [Array<Types::SupportedRegionDetail>]
     # @!attribute remote_access_enabled
-    #   <p>Indicates whether consumers can access the service from a Region other than the
+    #   <p>Indicates whether consumers can access the service from a Region other than the 
     #               Region where the service is hosted.</p>
     #   @return [Boolean]
     class ServiceConfiguration < Struct.new(
@@ -70105,50 +70105,50 @@ module Aws::EC2
 
     # <p>Describes a snapshot.</p>
     # @!attribute owner_alias
-    #   <p>The Amazon Web Services owner alias, from an Amazon-maintained list (<code>amazon</code>). This is not
+    #   <p>The Amazon Web Services owner alias, from an Amazon-maintained list (<code>amazon</code>). This is not  
     #         the user-configured Amazon Web Services account alias set using the IAM console.</p>
     #   @return [String]
     # @!attribute outpost_arn
-    #   <p>The ARN of the Outpost on which the snapshot is stored. For more information, see <a href="https://docs.aws.amazon.com/ebs/latest/userguide/snapshots-outposts.html">Amazon EBS local snapshots on Outposts</a> in the
+    #   <p>The ARN of the Outpost on which the snapshot is stored. For more information, see <a href="https://docs.aws.amazon.com/ebs/latest/userguide/snapshots-outposts.html">Amazon EBS local snapshots on Outposts</a> in the 
     #     		<i>Amazon EBS User Guide</i>.</p>
     #   @return [String]
     # @!attribute tags
     #   <p>Any tags assigned to the snapshot.</p>
     #   @return [Array<Types::Tag>]
     # @!attribute storage_tier
-    #   <p>The storage tier in which the snapshot is stored. <code>standard</code> indicates
-    #         that the snapshot is stored in the standard snapshot storage tier and that it is ready
-    #         for use. <code>archive</code> indicates that the snapshot is currently archived and that
+    #   <p>The storage tier in which the snapshot is stored. <code>standard</code> indicates 
+    #         that the snapshot is stored in the standard snapshot storage tier and that it is ready 
+    #         for use. <code>archive</code> indicates that the snapshot is currently archived and that 
     #         it must be restored before it can be used.</p>
     #   @return [String]
     # @!attribute restore_expiry_time
-    #   <p>Only for archived snapshots that are temporarily restored. Indicates the date and
+    #   <p>Only for archived snapshots that are temporarily restored. Indicates the date and 
     #         time when a temporarily restored snapshot will be automatically re-archived.</p>
     #   @return [Time]
     # @!attribute sse_type
     #   <p>Reserved for future use.</p>
     #   @return [String]
     # @!attribute availability_zone
-    #   <p>The Availability Zone or Local Zone of the snapshot. For example, <code>us-west-1a</code>
+    #   <p>The Availability Zone or Local Zone of the snapshot. For example, <code>us-west-1a</code> 
     #         (Availability Zone) or <code>us-west-2-lax-1a</code> (Local Zone).</p>
     #   @return [String]
     # @!attribute transfer_type
     #   <note>
     #               <p>Only for snapshot copies.</p>
     #            </note>
-    #            <p>Indicates whether the snapshot copy was created with a standard or time-based
-    #         snapshot copy operation. Time-based snapshot copy operations complete within the
-    #         completion duration specified in the request. Standard snapshot copy operations
+    #            <p>Indicates whether the snapshot copy was created with a standard or time-based 
+    #         snapshot copy operation. Time-based snapshot copy operations complete within the 
+    #         completion duration specified in the request. Standard snapshot copy operations 
     #         are completed on a best-effort basis.</p>
     #            <ul>
     #               <li>
     #                  <p>
-    #                     <code>standard</code> - The snapshot copy was created with a standard
+    #                     <code>standard</code> - The snapshot copy was created with a standard 
     #             snapshot copy operation.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>time-based</code> - The snapshot copy was created with a time-based
+    #                     <code>time-based</code> - The snapshot copy was created with a time-based 
     #             snapshot copy operation.</p>
     #               </li>
     #            </ul>
@@ -70165,8 +70165,8 @@ module Aws::EC2
     # @!attribute full_snapshot_size_in_bytes
     #   <p>The full size of the snapshot, in bytes.</p>
     #            <important>
-    #               <p>This is <b>not</b> the incremental size of the snapshot.
-    #           This is the full snapshot size and represents the size of all the blocks that were
+    #               <p>This is <b>not</b> the incremental size of the snapshot. 
+    #           This is the full snapshot size and represents the size of all the blocks that were 
     #           written to the source volume at the time the snapshot was created.</p>
     #            </important>
     #   @return [Integer]
@@ -70323,7 +70323,7 @@ module Aws::EC2
 
     # <p>Information about a snapshot.</p>
     # @!attribute description
-    #   <p>Description specified by the CreateSnapshotRequest that has been applied to all
+    #   <p>Description specified by the CreateSnapshotRequest that has been applied to all 
     #       snapshots.</p>
     #   @return [String]
     # @!attribute tags
@@ -70355,14 +70355,14 @@ module Aws::EC2
     #   <p>Snapshot id that can be used to describe this snapshot.</p>
     #   @return [String]
     # @!attribute outpost_arn
-    #   <p>The ARN of the Outpost on which the snapshot is stored. For more information, see <a href="https://docs.aws.amazon.com/ebs/latest/userguide/snapshots-outposts.html">Amazon EBS local snapshots on Outposts</a> in the
+    #   <p>The ARN of the Outpost on which the snapshot is stored. For more information, see <a href="https://docs.aws.amazon.com/ebs/latest/userguide/snapshots-outposts.html">Amazon EBS local snapshots on Outposts</a> in the 
     #     		<i>Amazon EBS User Guide</i>.</p>
     #   @return [String]
     # @!attribute sse_type
     #   <p>Reserved for future use.</p>
     #   @return [String]
     # @!attribute availability_zone
-    #   <p>The Availability Zone or Local Zone of the snapshots. For example, <code>us-west-1a</code>
+    #   <p>The Availability Zone or Local Zone of the snapshots. For example, <code>us-west-1a</code> 
     #         (Availability Zone) or <code>us-west-2-lax-1a</code> (Local Zone).</p>
     #   @return [String]
     class SnapshotInfo < Struct.new(
@@ -70482,9 +70482,9 @@ module Aws::EC2
     #   <p>The tags that are assigned to the snapshot.</p>
     #   @return [Array<Types::Tag>]
     # @!attribute storage_tier
-    #   <p>The storage tier in which the snapshot is stored. <code>standard</code> indicates
-    #         that the snapshot is stored in the standard snapshot storage tier and that it is ready
-    #         for use. <code>archive</code> indicates that the snapshot is currently archived and that
+    #   <p>The storage tier in which the snapshot is stored. <code>standard</code> indicates 
+    #         that the snapshot is stored in the standard snapshot storage tier and that it is ready 
+    #         for use. <code>archive</code> indicates that the snapshot is currently archived and that 
     #         it must be restored before it can be used.</p>
     #   @return [String]
     # @!attribute last_tiering_start_time
@@ -70503,7 +70503,7 @@ module Aws::EC2
     #   <p>The date and time when the last archive process was completed.</p>
     #   @return [Time]
     # @!attribute restore_expiry_time
-    #   <p>Only for archived snapshots that are temporarily restored. Indicates the date and
+    #   <p>Only for archived snapshots that are temporarily restored. Indicates the date and 
     #         time when a temporarily restored snapshot will be automatically re-archived.</p>
     #   @return [Time]
     class SnapshotTierStatus < Struct.new(
@@ -70627,7 +70627,7 @@ module Aws::EC2
     #   <p>The network interfaces.</p>
     #            <note>
     #               <p>
-    #                  <code>SpotFleetLaunchSpecification</code> does not support Elastic Fabric Adapter (EFA).
+    #                  <code>SpotFleetLaunchSpecification</code> does not support Elastic Fabric Adapter (EFA). 
     #                You must use <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_LaunchTemplateConfig.html">LaunchTemplateConfig</a> instead.</p>
     #            </note>
     #   @return [Array<Types::InstanceNetworkInterfaceSpecification>]
@@ -70635,12 +70635,12 @@ module Aws::EC2
     #   <p>The placement information.</p>
     #   @return [Types::SpotPlacement]
     # @!attribute ramdisk_id
-    #   <p>The ID of the RAM disk. Some kernels require additional drivers at launch. Check the kernel
-    #             requirements for information about whether you need to specify a RAM disk. To find kernel
+    #   <p>The ID of the RAM disk. Some kernels require additional drivers at launch. Check the kernel 
+    #             requirements for information about whether you need to specify a RAM disk. To find kernel 
     #             requirements, refer to the Amazon Web Services Resource Center and search for the kernel ID.</p>
     #   @return [String]
     # @!attribute spot_price
-    #   <p>The maximum price per unit hour that you are willing to pay for a Spot Instance. We do not recommend using this parameter because it can lead to
+    #   <p>The maximum price per unit hour that you are willing to pay for a Spot Instance. We do not recommend using this parameter because it can lead to 
     #             increased interruptions. If you do not specify this parameter, you will pay the current Spot price.</p>
     #            <important>
     #               <p>If you specify a maximum price, your instances will be interrupted more frequently than if you do not specify this parameter.</p>
@@ -70729,7 +70729,7 @@ module Aws::EC2
 
     # <p>Describes a Spot Fleet request.</p>
     # @!attribute activity_status
-    #   <p>The progress of the Spot Fleet request.
+    #   <p>The progress of the Spot Fleet request. 
     #             If there is an error, the status is <code>error</code>.
     #             After all requests are placed, the status is <code>pending_fulfillment</code>.
     #             If the size of the fleet is equal to or greater than its target capacity, the status is <code>fulfilled</code>.
@@ -70772,16 +70772,16 @@ module Aws::EC2
     #            <dl>
     #               <dt>priceCapacityOptimized (recommended)</dt>
     #               <dd>
-    #                  <p>Spot Fleet identifies the pools with
-    #                      the highest capacity availability for the number of instances that are launching. This means
-    #                      that we will request Spot Instances from the pools that we believe have the lowest chance of interruption
+    #                  <p>Spot Fleet identifies the pools with  
+    #                      the highest capacity availability for the number of instances that are launching. This means 
+    #                      that we will request Spot Instances from the pools that we believe have the lowest chance of interruption 
     #                      in the near term. Spot Fleet then requests Spot Instances from the lowest priced of these pools.</p>
     #               </dd>
     #               <dt>capacityOptimized</dt>
     #               <dd>
-    #                  <p>Spot Fleet identifies the pools with
-    #                      the highest capacity availability for the number of instances that are launching. This means
-    #                      that we will request Spot Instances from the pools that we believe have the lowest chance of interruption
+    #                  <p>Spot Fleet identifies the pools with  
+    #                      the highest capacity availability for the number of instances that are launching. This means 
+    #                      that we will request Spot Instances from the pools that we believe have the lowest chance of interruption 
     #                      in the near term. To give certain
     #             instance types a higher chance of launching first, use
     #             <code>capacityOptimizedPrioritized</code>. Set a priority for each instance type by
@@ -70870,7 +70870,7 @@ module Aws::EC2
     #               in your request, you must use <code>LaunchTemplateConfigs</code>.</p>
     #   @return [Array<Types::LaunchTemplateConfig>]
     # @!attribute spot_price
-    #   <p>The maximum price per unit hour that you are willing to pay for a Spot Instance. We do not recommend
+    #   <p>The maximum price per unit hour that you are willing to pay for a Spot Instance. We do not recommend 
     #               using this parameter because it can lead to increased interruptions. If you do not specify this parameter, you will pay the current Spot price.</p>
     #            <important>
     #               <p>If you specify a maximum price, your instances will be interrupted more frequently than if you do not specify this parameter.</p>
@@ -70984,7 +70984,7 @@ module Aws::EC2
     #   <p>Reserved.</p>
     #   @return [String]
     # @!attribute target_capacity_unit_type
-    #   <p>The unit for the target capacity. You can specify this parameter only when
+    #   <p>The unit for the target capacity. You can specify this parameter only when 
     #            using attribute-based instance type selection.</p>
     #            <p>Default: <code>units</code> (the number of instances)</p>
     #   @return [String]
@@ -71092,7 +71092,7 @@ module Aws::EC2
     #   <p>The ID of the Spot Instance request.</p>
     #   @return [String]
     # @!attribute spot_price
-    #   <p>The maximum price per unit hour that you are willing to pay for a Spot Instance. We do not recommend
+    #   <p>The maximum price per unit hour that you are willing to pay for a Spot Instance. We do not recommend 
     #               using this parameter because it can lead to increased interruptions. If you do not specify this parameter, you will pay the current Spot price.</p>
     #            <important>
     #               <p>If you specify a maximum price, your instances will be interrupted more frequently than if you do not specify this parameter.</p>
@@ -71290,16 +71290,16 @@ module Aws::EC2
     #            <dl>
     #               <dt>price-capacity-optimized (recommended)</dt>
     #               <dd>
-    #                  <p>EC2 Fleet identifies the pools with
-    #                     the highest capacity availability for the number of instances that are launching. This means
-    #                     that we will request Spot Instances from the pools that we believe have the lowest chance of interruption
+    #                  <p>EC2 Fleet identifies the pools with  
+    #                     the highest capacity availability for the number of instances that are launching. This means 
+    #                     that we will request Spot Instances from the pools that we believe have the lowest chance of interruption 
     #                     in the near term. EC2 Fleet then requests Spot Instances from the lowest priced of these pools.</p>
     #               </dd>
     #               <dt>capacity-optimized</dt>
     #               <dd>
-    #                  <p>EC2 Fleet identifies the pools with
-    #                     the highest capacity availability for the number of instances that are launching. This means
-    #                     that we will request Spot Instances from the pools that we believe have the lowest chance of interruption
+    #                  <p>EC2 Fleet identifies the pools with  
+    #                     the highest capacity availability for the number of instances that are launching. This means 
+    #                     that we will request Spot Instances from the pools that we believe have the lowest chance of interruption 
     #                     in the near term. To give certain
     #                     instance types a higher chance of launching first, use
     #                     <code>capacity-optimized-prioritized</code>. Set a priority for each instance type by
@@ -71414,16 +71414,16 @@ module Aws::EC2
     #            <dl>
     #               <dt>price-capacity-optimized (recommended)</dt>
     #               <dd>
-    #                  <p>EC2 Fleet identifies the pools with
-    #                     the highest capacity availability for the number of instances that are launching. This means
-    #                     that we will request Spot Instances from the pools that we believe have the lowest chance of interruption
+    #                  <p>EC2 Fleet identifies the pools with  
+    #                     the highest capacity availability for the number of instances that are launching. This means 
+    #                     that we will request Spot Instances from the pools that we believe have the lowest chance of interruption 
     #                     in the near term. EC2 Fleet then requests Spot Instances from the lowest priced of these pools.</p>
     #               </dd>
     #               <dt>capacity-optimized</dt>
     #               <dd>
-    #                  <p>EC2 Fleet identifies the pools with
-    #                     the highest capacity availability for the number of instances that are launching. This means
-    #                     that we will request Spot Instances from the pools that we believe have the lowest chance of interruption
+    #                  <p>EC2 Fleet identifies the pools with  
+    #                     the highest capacity availability for the number of instances that are launching. This means 
+    #                     that we will request Spot Instances from the pools that we believe have the lowest chance of interruption 
     #                     in the near term. To give certain
     #                     instance types a higher chance of launching first, use
     #                     <code>capacity-optimized-prioritized</code>. Set a priority for each instance type by
@@ -71451,7 +71451,7 @@ module Aws::EC2
     #                     come from the next lowest priced pool that has available capacity. If a pool runs out of
     #                     capacity before fulfilling your desired capacity, EC2 Fleet will continue to fulfill your
     #                     request by drawing from the next lowest priced pool. To ensure that your desired capacity is
-    #                     met, you might receive Spot Instances from several pools. Because this strategy only considers instance
+    #                     met, you might receive Spot Instances from several pools. Because this strategy only considers instance 
     #                     price and not capacity availability, it might lead to high interruption rates.</p>
     #               </dd>
     #            </dl>
@@ -71588,7 +71588,7 @@ module Aws::EC2
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The maximum price per unit hour that you are willing to pay for a Spot Instance. We do not recommend
+    # <p>The maximum price per unit hour that you are willing to pay for a Spot Instance. We do not recommend 
     #             using this parameter because it can lead to increased interruptions. If you do not specify this parameter, you will pay the current Spot price.</p>
     #          <important>
     #             <p>If you specify a maximum price, your instances will be interrupted more frequently than if you do not specify this parameter.</p>
@@ -71606,7 +71606,7 @@ module Aws::EC2
     #   <p>A general description of the AMI.</p>
     #   @return [String]
     # @!attribute spot_price
-    #   <p>The maximum price per unit hour that you are willing to pay for a Spot Instance. We do not recommend
+    #   <p>The maximum price per unit hour that you are willing to pay for a Spot Instance. We do not recommend 
     #               using this parameter because it can lead to increased interruptions. If you do not specify this parameter, you will pay the current Spot price.</p>
     #            <important>
     #               <p>If you specify a maximum price, your instances will be interrupted more frequently than if you do not specify this parameter.</p>
@@ -71631,7 +71631,7 @@ module Aws::EC2
 
     # <p>Describes a stale rule in a security group.</p>
     # @!attribute from_port
-    #   <p>If the protocol is TCP or UDP, this is the start of the port range.
+    #   <p>If the protocol is TCP or UDP, this is the start of the port range. 
     #             If the protocol is ICMP or ICMPv6, this is the ICMP type or -1 (all ICMP types).</p>
     #   @return [Integer]
     # @!attribute ip_protocol
@@ -71697,8 +71697,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute s3_bucket
@@ -71759,8 +71759,8 @@ module Aws::EC2
     #   <p>Reserved.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the operation, without actually making the
-    #     request, and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the operation, without actually making the 
+    #     request, and provides an error response. If you have the required permissions, the error response is 
     #     <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class StartInstancesRequest < Struct.new(
@@ -71788,15 +71788,15 @@ module Aws::EC2
     #   <p>The ID of the Network Access Scope.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute tag_specifications
     #   <p>The tags to apply.</p>
     #   @return [Array<Types::TagSpecification>]
     # @!attribute client_token
-    #   <p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information,
+    #   <p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, 
     #      see <a href="https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html">How to ensure idempotency</a>.</p>
     #   @return [String]
     class StartNetworkInsightsAccessScopeAnalysisRequest < Struct.new(
@@ -71834,15 +71834,15 @@ module Aws::EC2
     #   <p>The Amazon Resource Names (ARN) of the resources that the path will ignore.</p>
     #   @return [Array<String>]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute tag_specifications
     #   <p>The tags to apply.</p>
     #   @return [Array<Types::TagSpecification>]
     # @!attribute client_token
-    #   <p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information,
+    #   <p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, 
     #      see <a href="https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html">How to ensure idempotency</a>.</p>
     #   @return [String]
     class StartNetworkInsightsAnalysisRequest < Struct.new(
@@ -71871,8 +71871,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute service_id
@@ -72005,8 +72005,8 @@ module Aws::EC2
     #            </p>
     #   @return [Boolean]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the operation, without actually making the
-    #     request, and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the operation, without actually making the 
+    #     request, and provides an error response. If you have the required permissions, the error response is 
     #     <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute force
@@ -72116,9 +72116,9 @@ module Aws::EC2
     #   @return [String]
     # @!attribute enable_lni_at_device_index
     #   <p>
-    #               Indicates the device position for local network interfaces in this subnet. For example,
-    #               <code>1</code> indicates local network interfaces in this subnet are the secondary
-    #               network interface (eth1).
+    #               Indicates the device position for local network interfaces in this subnet. For example, 
+    #               <code>1</code> indicates local network interfaces in this subnet are the secondary 
+    #               network interface (eth1). 
     #           </p>
     #   @return [Integer]
     # @!attribute map_customer_owned_ip_on_launch
@@ -72148,7 +72148,7 @@ module Aws::EC2
     #   <p>The Amazon Resource Name (ARN) of the Outpost.</p>
     #   @return [String]
     # @!attribute enable_dns64
-    #   <p>Indicates whether DNS queries made to the Amazon-provided DNS Resolver in this subnet
+    #   <p>Indicates whether DNS queries made to the Amazon-provided DNS Resolver in this subnet 
     #               should return synthetic IPv6 addresses for IPv4-only destinations.</p>
     #   @return [Boolean]
     # @!attribute ipv6_native
@@ -72205,7 +72205,7 @@ module Aws::EC2
     #   @return [Boolean]
     # @!attribute map_public_ip_on_launch
     #   <p>Indicates whether instances launched in this subnet receive a public IPv4 address.</p>
-    #            <p>Amazon Web Services charges for all public IPv4 addresses, including public IPv4 addresses
+    #            <p>Amazon Web Services charges for all public IPv4 addresses, including public IPv4 addresses 
     #   associated with running instances and Elastic IP addresses. For more information, see the <i>Public IPv4 Address</i> tab on the <a href="http://aws.amazon.com/vpc/pricing/">Amazon VPC pricing page</a>.</p>
     #   @return [Boolean]
     class Subnet < Struct.new(
@@ -72311,17 +72311,17 @@ module Aws::EC2
     #   <p>The ID of the subnet.</p>
     #   @return [String]
     # @!attribute ipv4
-    #   <p>The IPv4 address to assign to the endpoint network interface in the subnet. You must provide
+    #   <p>The IPv4 address to assign to the endpoint network interface in the subnet. You must provide 
     #               an IPv4 address if the VPC endpoint supports IPv4.</p>
-    #            <p>If you specify an IPv4 address when modifying a VPC endpoint, we replace the existing
-    #               endpoint network interface with a new endpoint network interface with this IP address.
+    #            <p>If you specify an IPv4 address when modifying a VPC endpoint, we replace the existing 
+    #               endpoint network interface with a new endpoint network interface with this IP address. 
     #               This process temporarily disconnects the subnet and the VPC endpoint.</p>
     #   @return [String]
     # @!attribute ipv6
-    #   <p>The IPv6 address to assign to the endpoint network interface in the subnet. You must provide
+    #   <p>The IPv6 address to assign to the endpoint network interface in the subnet. You must provide 
     #               an IPv6 address if the VPC endpoint supports IPv6.</p>
-    #            <p>If you specify an IPv6 address when modifying a VPC endpoint, we replace the existing
-    #               endpoint network interface with a new endpoint network interface with this IP address.
+    #            <p>If you specify an IPv6 address when modifying a VPC endpoint, we replace the existing 
+    #               endpoint network interface with a new endpoint network interface with this IP address. 
     #               This process temporarily disconnects the subnet and the VPC endpoint.</p>
     #   @return [String]
     class SubnetConfiguration < Struct.new(
@@ -72476,7 +72476,7 @@ module Aws::EC2
     #   <p>The Region code.</p>
     #   @return [String]
     # @!attribute service_state
-    #   <p>The service state. The possible values are <code>Pending</code>, <code>Available</code>,
+    #   <p>The service state. The possible values are <code>Pending</code>, <code>Available</code>, 
     #               <code>Deleting</code>, <code>Deleted</code>, <code>Failed</code>, and <code>Closed</code>.</p>
     #   @return [String]
     class SupportedRegionDetail < Struct.new(
@@ -72491,7 +72491,7 @@ module Aws::EC2
     # <p>Describes a tag.</p>
     # @!attribute key
     #   <p>The key of the tag.</p>
-    #            <p>Constraints: Tag keys are case-sensitive and accept a maximum of 127 Unicode characters.
+    #            <p>Constraints: Tag keys are case-sensitive and accept a maximum of 127 Unicode characters. 
     #            May not begin with <code>aws:</code>.</p>
     #   @return [String]
     # @!attribute value
@@ -72563,7 +72563,7 @@ module Aws::EC2
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The tags to apply to a resource when the resource is being created. When you specify a tag, you must
+    # <p>The tags to apply to a resource when the resource is being created. When you specify a tag, you must 
     #        specify the resource type to tag, otherwise the request will fail.</p>
     #          <note>
     #             <p>The <code>Valid Values</code> lists all the resource types that can be tagged.
@@ -72596,7 +72596,7 @@ module Aws::EC2
     #          will launch instances until it reaches the maximum amount that you're willing to pay. When
     #          the maximum amount you're willing to pay is reached, the fleet stops launching instances
     #          even if it hasn’t met the target capacity. The <code>MaxTotalPrice</code> parameters are
-    #          located in <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_OnDemandOptions.html">OnDemandOptions</a>
+    #          located in <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_OnDemandOptions.html">OnDemandOptions</a> 
     #          and <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_SpotOptions">SpotOptions</a>.</p>
     # @!attribute total_target_capacity
     #   <p>The number of units to request, filled the default target capacity type.</p>
@@ -72625,7 +72625,7 @@ module Aws::EC2
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The number of units to request. You can choose to set the target capacity as the number of
+    # <p>The number of units to request. You can choose to set the target capacity as the number of 
     #          instances. Or you can set the target capacity to a performance characteristic that is important to your application workload,
     #          such as vCPUs, memory, or I/O. If the request type is <code>maintain</code>, you can
     #          specify a target capacity of 0 and add capacity later.</p>
@@ -72635,7 +72635,7 @@ module Aws::EC2
     #          in your request, EC2 Fleet will launch instances until it reaches the maximum amount that you're
     #          willing to pay. When the maximum amount you're willing to pay is reached, the fleet stops
     #          launching instances even if it hasn't met the target capacity. The
-    #          <code>MaxTotalPrice</code> parameters are located in <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_OnDemandOptionsRequest">OnDemandOptionsRequest</a>
+    #          <code>MaxTotalPrice</code> parameters are located in <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_OnDemandOptionsRequest">OnDemandOptionsRequest</a> 
     #          and <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_SpotOptionsRequest">SpotOptionsRequest</a>.</p>
     # @!attribute total_target_capacity
     #   <p>The number of units to request, filled using the default target capacity type.</p>
@@ -72790,7 +72790,7 @@ module Aws::EC2
     #   <p>The ID of the client connection to be terminated.</p>
     #   @return [String]
     # @!attribute username
-    #   <p>The name of the user who initiated the connection. Use this option to terminate all active connections for
+    #   <p>The name of the user who initiated the connection. Use this option to terminate all active connections for 
     #   			the specified user. This option can only be used if the user has established up to five connections.</p>
     #   @return [String]
     # @!attribute dry_run
@@ -72864,8 +72864,8 @@ module Aws::EC2
     #            </p>
     #   @return [Boolean]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the operation, without actually making the
-    #     request, and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the operation, without actually making the 
+    #     request, and provides an error response. If you have the required permissions, the error response is 
     #     <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class TerminateInstancesRequest < Struct.new(
@@ -73897,7 +73897,7 @@ module Aws::EC2
 
     # <p>Describes the options for a transit gateway.</p>
     # @!attribute amazon_side_asn
-    #   <p>A private Autonomous System Number (ASN) for the Amazon side of a BGP session.
+    #   <p>A private Autonomous System Number (ASN) for the Amazon side of a BGP session. 
     #            The range is 64512 to 65534 for 16-bit ASNs and 4200000000 to 4294967294 for 32-bit ASNs.</p>
     #   @return [Integer]
     # @!attribute transit_gateway_cidr_blocks
@@ -73931,7 +73931,7 @@ module Aws::EC2
     #   @return [String]
     # @!attribute security_group_referencing_support
     #   <p>Enables you to reference a security group across VPCs attached to a transit gateway to simplify security group management.
-    #
+    #   
     #   </p>
     #            <p>This option is disabled by default.</p>
     #   @return [String]
@@ -74230,7 +74230,7 @@ module Aws::EC2
 
     # <p>Describes the options for a transit gateway.</p>
     # @!attribute amazon_side_asn
-    #   <p>A private Autonomous System Number (ASN) for the Amazon side of a BGP session.
+    #   <p>A private Autonomous System Number (ASN) for the Amazon side of a BGP session. 
     #            The range is 64512 to 65534 for 16-bit ASNs and 4200000000 to 4294967294 for 32-bit ASNs. The default is <code>64512</code>.</p>
     #   @return [Integer]
     # @!attribute auto_accept_shared_attachments
@@ -74250,7 +74250,7 @@ module Aws::EC2
     #   @return [String]
     # @!attribute security_group_referencing_support
     #   <p>Enables you to reference a security group across VPCs attached to a transit gateway to simplify security group management.
-    #
+    #   
     #   </p>
     #            <p>This option is disabled by default.</p>
     #            <p>For more information about security group referencing, see  <a href="https://docs.aws.amazon.com/vpc/latest/tgw/tgw-vpc-attachments.html#vpc-attachment-security">Security group referencing</a> in the <i>Amazon Web Services Transit Gateways Guide</i>.</p>
@@ -74837,8 +74837,8 @@ module Aws::EC2
     #   <p>The maximum amount of time to wait (in seconds) before forcibly releasing the IP addresses if connections are still in progress. Default value is 350 seconds.</p>
     #   @return [Integer]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class UnassignPrivateNatGatewayAddressRequest < Struct.new(
@@ -74871,8 +74871,8 @@ module Aws::EC2
     #   <p>The ID of the snapshot to unlock.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class UnlockSnapshotRequest < Struct.new(
@@ -74899,8 +74899,8 @@ module Aws::EC2
     #   <p>The IDs of the instances.</p>
     #   @return [Array<String>]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the operation, without actually making the
-    #     request, and provides an error response. If you have the required permissions, the error response is
+    #   <p>Checks whether you have the required permissions for the operation, without actually making the 
+    #     request, and provides an error response. If you have the required permissions, the error response is 
     #     <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class UnmonitorInstancesRequest < Struct.new(
@@ -75090,7 +75090,7 @@ module Aws::EC2
     #   @return [Boolean]
     # @!attribute dry_run
     #   <p>
-    #   Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If
+    #   Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If 
     #   you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.
     #   </p>
     #   @return [Boolean]
@@ -75203,8 +75203,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute group_id
@@ -75248,8 +75248,8 @@ module Aws::EC2
     end
 
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute group_id
@@ -75353,7 +75353,7 @@ module Aws::EC2
     #               this value is not returned.</p>
     #   @return [String]
     # @!attribute group_name
-    #   <p>[Default VPC] The name of the security group. For a security group in a nondefault VPC,
+    #   <p>[Default VPC] The name of the security group. For a security group in a nondefault VPC, 
     #            use the security group ID. </p>
     #            <p>For a referenced security group in another VPC, this value is not returned if the
     #               referenced security group is deleted.</p>
@@ -75453,8 +75453,8 @@ module Aws::EC2
     #               interface.</p>
     #   @return [Array<String>]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class ValidateSecurityGroupQuotasForInterfaceRequest < Struct.new(
@@ -76171,7 +76171,7 @@ module Aws::EC2
     end
 
     # <p>
-    #          Verified Access provides server side encryption by default to data at rest using Amazon Web Services-owned KMS keys. You also have the option of using customer managed KMS keys, which can be specified using the options below.
+    #          Verified Access provides server side encryption by default to data at rest using Amazon Web Services-owned KMS keys. You also have the option of using customer managed KMS keys, which can be specified using the options below. 
     #       </p>
     # @!attribute customer_managed_key_enabled
     #   <p>
@@ -76341,12 +76341,12 @@ module Aws::EC2
     #   <p>The Amazon Resource Name (ARN) of the Outpost.</p>
     #   @return [String]
     # @!attribute source_volume_id
-    #   <p>The ID of the source volume from which the volume copy was created. Only for
+    #   <p>The ID of the source volume from which the volume copy was created. Only for 
     #         volume copies.</p>
     #   @return [String]
     # @!attribute iops
-    #   <p>The number of I/O operations per second (IOPS). For <code>gp3</code>, <code>io1</code>, and <code>io2</code> volumes, this represents
-    #         the number of IOPS that are provisioned for the volume. For <code>gp2</code> volumes, this represents the baseline
+    #   <p>The number of I/O operations per second (IOPS). For <code>gp3</code>, <code>io1</code>, and <code>io2</code> volumes, this represents 
+    #         the number of IOPS that are provisioned for the volume. For <code>gp2</code> volumes, this represents the baseline 
     #         performance of the volume and the rate at which the volume accumulates I/O credits for bursting.</p>
     #   @return [Integer]
     # @!attribute tags
@@ -76377,7 +76377,7 @@ module Aws::EC2
     #   <p>The service provider that manages the volume.</p>
     #   @return [Types::OperatorResponse]
     # @!attribute volume_initialization_rate
-    #   <p>The Amazon EBS Provisioned Rate for Volume Initialization (volume initialization rate) specified for the volume during creation,
+    #   <p>The Amazon EBS Provisioned Rate for Volume Initialization (volume initialization rate) specified for the volume during creation, 
     #         in MiB/s. If no volume initialization rate was specified, the value is <code>null</code>.</p>
     #   @return [Integer]
     # @!attribute volume_arn
@@ -76452,13 +76452,13 @@ module Aws::EC2
     #   <p>Indicates whether the EBS volume is deleted on instance termination.</p>
     #   @return [Boolean]
     # @!attribute associated_resource
-    #   <p>The ARN of the Amazon Web Services-managed resource
+    #   <p>The ARN of the Amazon Web Services-managed resource 
     #         to which the volume is attached.</p>
     #   @return [String]
     # @!attribute instance_owning_service
-    #   <p>The service principal of the Amazon Web Services service that owns the underlying
+    #   <p>The service principal of the Amazon Web Services service that owns the underlying 
     #         resource to which the volume is attached.</p>
-    #            <p>This parameter is returned only for volumes that are attached to
+    #            <p>This parameter is returned only for volumes that are attached to 
     #         Amazon Web Services-managed resources.</p>
     #   @return [String]
     # @!attribute ebs_card_index
@@ -76469,12 +76469,12 @@ module Aws::EC2
     #   @return [String]
     # @!attribute instance_id
     #   <p>The ID of the instance.</p>
-    #            <p>If the volume is attached to an Amazon Web Services-managed resource, this parameter
+    #            <p>If the volume is attached to an Amazon Web Services-managed resource, this parameter 
     #         returns <code>null</code>.</p>
     #   @return [String]
     # @!attribute device
     #   <p>The device name.</p>
-    #            <p>If the volume is attached to an Amazon Web Services-managed resource, this parameter
+    #            <p>If the volume is attached to an Amazon Web Services-managed resource, this parameter 
     #         returns <code>null</code>.</p>
     #   @return [String]
     # @!attribute state
@@ -76607,7 +76607,7 @@ module Aws::EC2
     #   <p>The throughput that the volume supports, in MiB/s.</p>
     #   @return [Integer]
     # @!attribute outpost_arn
-    #   <p>The ARN of the Outpost on which the volume is stored. For more information, see <a href="https://docs.aws.amazon.com/ebs/latest/userguide/ebs-volumes-outposts.html">Amazon EBS volumes on Outposts</a> in the
+    #   <p>The ARN of the Outpost on which the volume is stored. For more information, see <a href="https://docs.aws.amazon.com/ebs/latest/userguide/ebs-volumes-outposts.html">Amazon EBS volumes on Outposts</a> in the 
     #         <i>Amazon EBS User Guide</i>.</p>
     #   @return [String]
     # @!attribute availability_zone
@@ -76702,19 +76702,19 @@ module Aws::EC2
     #            <ul>
     #               <li>
     #                  <p>
-    #                     <code>io-enabled</code> - Indicates the volume I/O status. For more
-    #             information, see <a href="https://docs.aws.amazon.com/ebs/latest/userguide/monitoring-volume-checks.html">Amazon EBS volume
+    #                     <code>io-enabled</code> - Indicates the volume I/O status. For more 
+    #             information, see <a href="https://docs.aws.amazon.com/ebs/latest/userguide/monitoring-volume-checks.html">Amazon EBS volume 
     #               status checks</a>.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>io-performance</code> - Indicates the volume performance status.
-    #             For more information, see <a href="https://docs.aws.amazon.com/ebs/latest/userguide/monitoring-volume-checks.html">Amazon EBS volume
+    #                     <code>io-performance</code> - Indicates the volume performance status. 
+    #             For more information, see <a href="https://docs.aws.amazon.com/ebs/latest/userguide/monitoring-volume-checks.html">Amazon EBS volume 
     #               status checks</a>.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>initialization-state</code> - Indicates the status of the volume
+    #                     <code>initialization-state</code> - Indicates the status of the volume 
     #             initialization process. For more information, see <a href="https://docs.aws.amazon.com/ebs/latest/userguide/initalize-volume.html">Initialize Amazon EBS volumes</a>.</p>
     #               </li>
     #            </ul>
@@ -76802,11 +76802,11 @@ module Aws::EC2
     #   <p>Information about the instances to which the volume is attached.</p>
     #   @return [Array<Types::VolumeStatusAttachmentStatus>]
     # @!attribute initialization_status_details
-    #   <p>Information about the volume initialization. It can take up to 5 minutes
+    #   <p>Information about the volume initialization. It can take up to 5 minutes 
     #         for the volume initialization information to be updated.</p>
-    #            <p>Only available for volumes created from snapshots. Not available for empty
+    #            <p>Only available for volumes created from snapshots. Not available for empty 
     #         volumes created without a snapshot.</p>
-    #            <p>For more information, see
+    #            <p>For more information, see 
     #         <a href="https://docs.aws.amazon.com/ebs/latest/userguide/initalize-volume.html">
     #           Initialize Amazon EBS volumes</a>.</p>
     #   @return [Types::InitializationStatusDetails]
@@ -77556,7 +77556,7 @@ module Aws::EC2
 
     # <p>Describes the VPC peering connection options.</p>
     # @!attribute allow_dns_resolution_from_remote_vpc
-    #   <p>Indicates whether a local VPC can resolve public DNS hostnames to private IP addresses
+    #   <p>Indicates whether a local VPC can resolve public DNS hostnames to private IP addresses 
     #           when queried from instances in a peer VPC.</p>
     #   @return [Boolean]
     # @!attribute allow_egress_from_local_classic_link_to_remote_vpc
@@ -77874,7 +77874,7 @@ module Aws::EC2
     #   @return [String]
     # @!attribute tunnel_bandwidth
     #   <p>
-    #   			The desired bandwidth specification for the VPN tunnel, used when creating or modifying VPN connection options to set the tunnel's throughput
+    #   			The desired bandwidth specification for the VPN tunnel, used when creating or modifying VPN connection options to set the tunnel's throughput 
     #   			capacity. <code>standard</code> supports up to 1.25 Gbps per tunnel, while <code>large</code> supports up to 5 Gbps per tunnel. The default value is <code>standard</code>. Existing
     #   			VPN connections without a bandwidth setting will automatically default to <code>standard</code>.
     #   		</p>
@@ -78188,8 +78188,8 @@ module Aws::EC2
     #   <p>The address range, in CIDR notation.</p>
     #   @return [String]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making the request,
-    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, 
+    #      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. 
     #      Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     class WithdrawByoipCidrRequest < Struct.new(

@@ -3,7 +3,6 @@
 # This is generated code!
 
 require_relative 'plugins/endpoint'
-require 'smithy-client/plugins/checksum_required'
 require 'smithy-client/plugins/content_length'
 require 'smithy-client/plugins/default_params'
 require 'smithy-client/plugins/host_prefix'
@@ -23,6 +22,8 @@ require 'smithy-client/plugins/transfer_encoding'
 require 'aws-sdk-core/plugins/global_configuration'
 require 'aws-sdk-core/plugins/shared_config'
 require 'aws-sdk-core/plugins/user_agent'
+require 'aws-sdk-core/plugins/checksum_algorithm'
+require 'aws-sdk-core/plugins/http_checksum'
 require 'aws-sdk-core/plugins/invocation_id'
 require 'aws-sdk-core/plugins/recursion_detection'
 require 'aws-sdk-core/plugins/retry_errors'
@@ -43,7 +44,6 @@ module Aws::Transcribe
     @identifier = :transcribe
 
     add_plugin(::Aws::Transcribe::Plugins::Endpoint)
-    add_plugin(Smithy::Client::Plugins::ChecksumRequired)
     add_plugin(Smithy::Client::Plugins::ContentLength)
     add_plugin(Smithy::Client::Plugins::DefaultParams)
     add_plugin(Smithy::Client::Plugins::HostPrefix)
@@ -63,6 +63,8 @@ module Aws::Transcribe
     add_plugin(Aws::Core::Plugins::GlobalConfiguration)
     add_plugin(Aws::Core::Plugins::SharedConfig)
     add_plugin(Aws::Core::Plugins::UserAgent)
+    add_plugin(Aws::Core::Plugins::ChecksumAlgorithm)
+    add_plugin(Aws::Core::Plugins::HttpChecksum)
     add_plugin(Aws::Core::Plugins::InvocationId)
     add_plugin(Aws::Core::Plugins::RecursionDetection)
     add_plugin(Aws::Core::Plugins::RetryErrors)
@@ -139,23 +141,41 @@ module Aws::Transcribe
     #  * `ENV['AWS_DEFAULT_REGION']`
     #  * `~/.aws/credentials` as `region` under a profile
     #  * `~/.aws/config` as `region` under a profile
+    # @option options [String] :request_checksum_calculation (when_supported)
+    #  Determines when a checksum is calculated for request payloads. Values are:
+    #  
+    #  * `when_supported` - (default) A checksum is calculated for operations
+    #    modeled with the `httpChecksum` trait when `requestChecksumRequired`
+    #    is `true` or a `requestAlgorithmMember` is modeled.
+    #  * `when_required` - A checksum is calculated only when
+    #    `requestChecksumRequired` is `true`, or when the caller supplies a
+    #    modeled `requestAlgorithmMember`.
     # @option options [Integer] :request_min_compression_size_bytes (10240)
     #  The minimum size in bytes that triggers compression for request bodies.
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
+    # @option options [String] :response_checksum_validation (when_supported)
+    #  Determines when checksum validation is performed for response payloads.
+    #  Values are:
+    #  
+    #  * `when_supported` - (default) Validation is enabled for operations
+    #    modeled with a `requestValidationModeMember` and at least one
+    #    `responseAlgorithms` value supported by the client.
+    #  * `when_required` - Validation is performed only when the caller sets
+    #    the modeled `requestValidationModeMember` to `ENABLED`.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #
+    #  
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #
+    #  
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #
+    #  
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -213,11 +233,11 @@ module Aws::Transcribe
     #          <p>All categories are automatically applied to your Call Analytics transcriptions. Note that in
     #             order to apply categories to your transcriptions, you must create them before submitting your
     #             transcription request, as categories cannot be applied retroactively.</p>
-    #          <p>When creating a new category, you can use the <code>InputType</code> parameter to
-    #             label the category as a <code>POST_CALL</code> or a <code>REAL_TIME</code> category.
-    #             <code>POST_CALL</code> categories can only be applied to post-call transcriptions and
-    #             <code>REAL_TIME</code> categories can only be applied to real-time transcriptions. If you
-    #             do not include <code>InputType</code>, your category is created as a
+    #          <p>When creating a new category, you can use the <code>InputType</code> parameter to 
+    #             label the category as a <code>POST_CALL</code> or a <code>REAL_TIME</code> category. 
+    #             <code>POST_CALL</code> categories can only be applied to post-call transcriptions and 
+    #             <code>REAL_TIME</code> categories can only be applied to real-time transcriptions. If you 
+    #             do not include <code>InputType</code>, your category is created as a 
     #             <code>POST_CALL</code> category by default.</p>
     #          <p>Call Analytics categories are composed of rules. For each category, you must create
     #             between 1 and 20 rules. Rules can include these parameters: , , , and .</p>
@@ -233,9 +253,9 @@ module Aws::Transcribe
     #               generic name like <code>test-category</code>.</p>
     #            <p>Category names are case sensitive.</p>
     # @option params [Array<Types::Rule>] :rules
-    #   <p>Rules define a Call Analytics category. When creating a new category, you must create
-    #               between 1 and 20 rules for that category. For each rule, you specify a filter you want
-    #               applied to the attributes of a call. For example, you can choose a sentiment filter that
+    #   <p>Rules define a Call Analytics category. When creating a new category, you must create 
+    #               between 1 and 20 rules for that category. For each rule, you specify a filter you want 
+    #               applied to the attributes of a call. For example, you can choose a sentiment filter that 
     #               detects if a customer's sentiment was positive during the last 30 seconds of the call.</p>
     # @option params [Array<Types::Tag>] :tags
     #   <p>Adds one or more custom tags, each in the form of a key:value pair, to a new
@@ -243,14 +263,14 @@ module Aws::Transcribe
     #            <p>To learn more about using tags with Amazon Transcribe, refer to <a href="https://docs.aws.amazon.com/transcribe/latest/dg/tagging.html">Tagging
     #               resources</a>.</p>
     # @option params [String] :input_type
-    #   <p>Choose whether you want to create a real-time or a post-call category for your Call
+    #   <p>Choose whether you want to create a real-time or a post-call category for your Call 
     #               Analytics transcription.</p>
-    #            <p>Specifying <code>POST_CALL</code> assigns your category to post-call transcriptions;
-    #               categories with this input type cannot be applied to streaming (real-time)
+    #            <p>Specifying <code>POST_CALL</code> assigns your category to post-call transcriptions; 
+    #               categories with this input type cannot be applied to streaming (real-time) 
     #               transcriptions.</p>
-    #            <p>Specifying <code>REAL_TIME</code> assigns your category to streaming transcriptions;
+    #            <p>Specifying <code>REAL_TIME</code> assigns your category to streaming transcriptions; 
     #               categories with this input type cannot be applied to post-call transcriptions.</p>
-    #            <p>If you do not include <code>InputType</code>, your category is created as a post-call
+    #            <p>If you do not include <code>InputType</code>, your category is created as a post-call 
     #               category by default.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -452,7 +472,7 @@ module Aws::Transcribe
     #               model must contain terms in only one language, and the language you select for your
     #               custom language model must match the language of your training and tuning data.</p>
     #            <p>For a list of supported languages and their associated language codes, refer to the
-    #                   <a href="https://docs.aws.amazon.com/transcribe/latest/dg/supported-languages.html">Supported languages</a> table. Note that US English (<code>en-US</code>) is the
+    #                   <a href="https://docs.aws.amazon.com/transcribe/latest/dg/supported-languages.html">Supported languages</a> table. Note that US English (<code>en-US</code>) is the 
     #               only language supported with Amazon Transcribe Medical.</p>
     #            <p>A custom language model can only be used to transcribe files in the same language as
     #               the model. For example, if you create a custom language model using US English
@@ -1250,7 +1270,7 @@ module Aws::Transcribe
     #          <p>To view the status of the specified medical transcription job, check the
     #                 <code>MedicalScribeJobStatus</code> field. If the status is <code>COMPLETED</code>,
     #             the job is finished. You can find the results at the location specified in
-    #                 <code>MedicalScribeOutput</code>.
+    #                 <code>MedicalScribeOutput</code>. 
     #                 If the status is <code>FAILED</code>, <code>FailureReason</code> provides details on why your Medical Scribe job
     #             failed.</p>
     #          <p>To get a list of your Medical Scribe jobs, use the  operation.</p>
@@ -2207,15 +2227,15 @@ module Aws::Transcribe
     #                 center audio with Call Analytics</a>.</p>
     #          <p>If you want to apply categories to your Call Analytics job, you must create them
     #             before submitting your job request. Categories cannot be retroactively applied to a job.
-    #             To create a new category, use the
-    #             operation. To learn more about Call Analytics categories, see <a href="https://docs.aws.amazon.com/transcribe/latest/dg/tca-categories-batch.html">Creating categories for post-call
-    #                 transcriptions</a> and <a href="https://docs.aws.amazon.com/transcribe/latest/dg/tca-categories-stream.html">Creating categories for
+    #             To create a new category, use the 
+    #             operation. To learn more about Call Analytics categories, see <a href="https://docs.aws.amazon.com/transcribe/latest/dg/tca-categories-batch.html">Creating categories for post-call 
+    #                 transcriptions</a> and <a href="https://docs.aws.amazon.com/transcribe/latest/dg/tca-categories-stream.html">Creating categories for 
     #                     real-time transcriptions</a>.</p>
     #          <p>To make a <code>StartCallAnalyticsJob</code> request, you must first upload your media
     #             file into an Amazon S3 bucket; you can then specify the Amazon S3
     #             location of the file using the <code>Media</code> parameter.</p>
-    #          <p>Job queuing is available for Call Analytics jobs. If you pass a <code>DataAccessRoleArn</code>
-    #             in your request and you exceed your Concurrent Job Limit, your job will automatically be
+    #          <p>Job queuing is available for Call Analytics jobs. If you pass a <code>DataAccessRoleArn</code> 
+    #             in your request and you exceed your Concurrent Job Limit, your job will automatically be 
     #             added to a queue to be processed once your concurrent job count is below the limit.</p>
     #          <p>You must include the following parameters in your <code>StartCallAnalyticsJob</code>
     #             request:</p>
@@ -2286,8 +2306,8 @@ module Aws::Transcribe
     #                   KMS key ARNs</a>.</p>
     #            <p>If you do not specify an encryption key, your output is encrypted with the default
     #               Amazon S3 key (SSE-S3).</p>
-    #            <p>Note that the role making the  request and the role specified in
-    #   		the <code>DataAccessRoleArn</code> request parameter (if present) must have permission to use the
+    #            <p>Note that the role making the  request and the role specified in 
+    #   		the <code>DataAccessRoleArn</code> request parameter (if present) must have permission to use the 
     #   		specified KMS key.</p>
     # @option params [String] :data_access_role_arn
     #   <p>The Amazon Resource Name (ARN) of an IAM role that has permissions to
@@ -2433,7 +2453,7 @@ module Aws::Transcribe
     end
 
     # <p>Transcribes patient-clinician conversations and generates clinical notes. </p>
-    #          <p>Amazon Web Services HealthScribe automatically provides rich conversation transcripts, identifies speaker roles,
+    #          <p>Amazon Web Services HealthScribe automatically provides rich conversation transcripts, identifies speaker roles, 
     #             classifies dialogues, extracts medical terms, and generates preliminary clinical notes.
     #             To learn more about these features, refer to <a href="https://docs.aws.amazon.com/transcribe/latest/dg/health-scribe.html">Amazon Web Services HealthScribe</a>.</p>
     #          <p>To make a <code>StartMedicalScribeJob</code> request, you must first upload
@@ -2474,7 +2494,7 @@ module Aws::Transcribe
     #             <li>
     #                <p>
     #                   <code>ChannelDefinitions</code>: A <code>MedicalScribeChannelDefinitions</code> array should be set if and only if the <code>ChannelIdentification</code>
-    #                 value of <code>Settings</code> is set to true.
+    #                 value of <code>Settings</code> is set to true. 
     #                 </p>
     #             </li>
     #          </ul>
@@ -2487,14 +2507,14 @@ module Aws::Transcribe
     # @option params [Types::Media] :media
     #   <p>Describes the Amazon S3 location of the media file you want to use in your
     #               request.</p>
-    #            <p>For information on supported media formats, refer to the <code>MediaFormat</code>
-    #               parameter or the <a href="https://docs.aws.amazon.com/transcribe/latest/dg/how-input.html#how-input-audio">Media formats</a> section
+    #            <p>For information on supported media formats, refer to the <code>MediaFormat</code> 
+    #               parameter or the <a href="https://docs.aws.amazon.com/transcribe/latest/dg/how-input.html#how-input-audio">Media formats</a> section 
     #               in the Amazon S3 Developer Guide.</p>
     # @option params [String] :output_bucket_name
     #   <p>The name of the Amazon S3 bucket where you want your Medical Scribe
     #               output stored. Do not include the <code>S3://</code> prefix of the specified
     #               bucket.</p>
-    #            <p>Note that the role specified in the <code>DataAccessRoleArn</code> request parameter
+    #            <p>Note that the role specified in the <code>DataAccessRoleArn</code> request parameter 
     #               must have permission to use the specified location. You
     #               can change Amazon S3 permissions using the <a href="https://console.aws.amazon.com/s3">Amazon Web Services Management Console</a>. See also <a href="https://docs.aws.amazon.com/transcribe/latest/dg/security_iam_id-based-policy-examples.html#auth-role-iam-user">Permissions Required for IAM User Roles</a>.</p>
     # @option params [String] :output_encryption_kms_key_id
@@ -2506,16 +2526,16 @@ module Aws::Transcribe
     #                   KMS key ARNs</a>.</p>
     #            <p>If you do not specify an encryption key, your output is encrypted with the default
     #                   Amazon S3 key (SSE-S3).</p>
-    #            <p>Note that the role making the  request and the role specified in
-    #   		the <code>DataAccessRoleArn</code> request parameter (if present)
+    #            <p>Note that the role making the  request and the role specified in 
+    #   		the <code>DataAccessRoleArn</code> request parameter (if present) 
     #   		must have permission to use the specified KMS key.</p>
     # @option params [Hash<String, String>] :kms_encryption_context
     #   <p>A map of plain text, non-secret key:value pairs, known as encryption context pairs,
     #               that provide an added layer of security for your data. For more information, see <a href="https://docs.aws.amazon.com/transcribe/latest/dg/key-management.html#kms-context">KMS encryption context</a> and <a href="https://docs.aws.amazon.com/transcribe/latest/dg/symmetric-asymmetric.html">Asymmetric keys in KMS</a>.</p>
     # @option params [String] :data_access_role_arn
     #   <p>The Amazon Resource Name (ARN) of an IAM role that has permissions to
-    #               access the Amazon S3 bucket that contains your input files,
-    #               write to the output bucket, and use your KMS key if supplied.
+    #               access the Amazon S3 bucket that contains your input files, 
+    #               write to the output bucket, and use your KMS key if supplied.  
     #                If the role that you specify doesn’t have the appropriate permissions your request fails.</p>
     #            <p>IAM role ARNs have the format
     #               <code>arn:partition:iam::account:role/role-name-with-path</code>. For example:
@@ -2524,16 +2544,16 @@ module Aws::Transcribe
     #               ARNs</a>.</p>
     # @option params [Types::MedicalScribeSettings] :settings
     #   <p>Makes it possible to control how your Medical Scribe job is processed using a
-    #               <code>MedicalScribeSettings</code> object. Specify <code>ChannelIdentification</code> if
-    #               <code>ChannelDefinitions</code> are set. Enabled <code>ShowSpeakerLabels</code> if <code>ChannelIdentification</code>
+    #               <code>MedicalScribeSettings</code> object. Specify <code>ChannelIdentification</code> if 
+    #               <code>ChannelDefinitions</code> are set. Enabled <code>ShowSpeakerLabels</code> if <code>ChannelIdentification</code> 
     #               and <code>ChannelDefinitions</code> are not set. One and only one of <code>ChannelIdentification</code> and <code>ShowSpeakerLabels</code>
     #               must be set. If <code>ShowSpeakerLabels</code> is set, <code>MaxSpeakerLabels</code> must also be set. Use <code>Settings</code>
-    #               to specify a vocabulary or vocabulary filter or both using <code>VocabularyName</code>, <code>VocabularyFilterName</code>.
+    #               to specify a vocabulary or vocabulary filter or both using <code>VocabularyName</code>, <code>VocabularyFilterName</code>. 
     #               <code>VocabularyFilterMethod</code> must be specified if <code>VocabularyFilterName</code> is set.
     #           </p>
     # @option params [Array<Types::MedicalScribeChannelDefinition>] :channel_definitions
     #   <p>Makes it possible to specify which speaker is on which channel. For example, if the clinician
-    #                is the first participant to speak, you would set <code>ChannelId</code> of the first <code>ChannelDefinition</code>
+    #                is the first participant to speak, you would set <code>ChannelId</code> of the first <code>ChannelDefinition</code> 
     #                in the list to <code>0</code> (to indicate the first channel) and <code>ParticipantRole</code> to
     #                   <code>CLINICIAN</code> (to indicate that it's the clinician speaking).
     #                   Then you would set the <code>ChannelId</code> of the second <code>ChannelDefinition</code> in the list to
@@ -2718,8 +2738,8 @@ module Aws::Transcribe
     # @option params [Types::Media] :media
     #   <p>Describes the Amazon S3 location of the media file you want to use in your
     #               request.</p>
-    #            <p>For information on supported media formats, refer to the <code>MediaFormat</code>
-    #               parameter or the <a href="https://docs.aws.amazon.com/transcribe/latest/dg/how-input.html#how-input-audio">Media formats</a> section
+    #            <p>For information on supported media formats, refer to the <code>MediaFormat</code> 
+    #               parameter or the <a href="https://docs.aws.amazon.com/transcribe/latest/dg/how-input.html#how-input-audio">Media formats</a> section 
     #               in the Amazon S3 Developer Guide.</p>
     # @option params [String] :output_bucket_name
     #   <p>The name of the Amazon S3 bucket where you want your medical transcription
@@ -2779,8 +2799,8 @@ module Aws::Transcribe
     #                   KMS key ARNs</a>.</p>
     #            <p>If you do not specify an encryption key, your output is encrypted with the default
     #               Amazon S3 key (SSE-S3).</p>
-    #            <p>Note that the role making the  request and the role specified
-    #       		in the <code>DataAccessRoleArn</code> request parameter (if present) must have permission to use the
+    #            <p>Note that the role making the  request and the role specified 
+    #       		in the <code>DataAccessRoleArn</code> request parameter (if present) must have permission to use the 
     #   		specified KMS key.</p>
     # @option params [Hash<String, String>] :kms_encryption_context
     #   <p>A map of plain text, non-secret key:value pairs, known as encryption context pairs,
@@ -3018,14 +3038,14 @@ module Aws::Transcribe
     #                   KMS key ARNs</a>.</p>
     #            <p>If you do not specify an encryption key, your output is encrypted with the default
     #               Amazon S3 key (SSE-S3).</p>
-    #            <p>Note that the role making the  request and the role specified in the
-    #   		<code>DataAccessRoleArn</code> request parameter (if present) must have permission to use the specified
+    #            <p>Note that the role making the  request and the role specified in the 
+    #   		<code>DataAccessRoleArn</code> request parameter (if present) must have permission to use the specified 
     #   		KMS key.</p>
     # @option params [Hash<String, String>] :kms_encryption_context
     #   <p>A map of plain text, non-secret key:value pairs, known as encryption context pairs,
     #               that provide an added layer of security for your data. For more information, see <a href="https://docs.aws.amazon.com/transcribe/latest/dg/key-management.html#kms-context">KMS encryption context</a> and <a href="https://docs.aws.amazon.com/transcribe/latest/dg/symmetric-asymmetric.html">Asymmetric keys in KMS</a>.</p>
     # @option params [Types::Settings] :settings
-    #   <p>Specify additional optional settings in your
+    #   <p>Specify additional optional settings in your  
     #               request, including channel identification, alternative transcriptions, speaker
     #               partitioning. You can use that to apply custom vocabularies and vocabulary filters.</p>
     #            <p>If you want to include a custom vocabulary or a custom vocabulary filter (or both)
@@ -3051,9 +3071,9 @@ module Aws::Transcribe
     #               include the sub-parameters: <code>AllowDeferredExecution</code> and
     #                   <code>DataAccessRoleArn</code>.</p>
     # @option params [Types::ContentRedaction] :content_redaction
-    #   <p>Makes it possible to redact or flag specified personally identifiable information (PII) in
-    #               your transcript. If you use <code>ContentRedaction</code>, you must also include the
-    #               sub-parameters: <code>RedactionOutput</code> and <code>RedactionType</code>. You can
+    #   <p>Makes it possible to redact or flag specified personally identifiable information (PII) in 
+    #               your transcript. If you use <code>ContentRedaction</code>, you must also include the 
+    #               sub-parameters: <code>RedactionOutput</code> and <code>RedactionType</code>. You can 
     #               optionally include <code>PiiEntityTypes</code> to choose which types of PII you want to redact.
     #               If you do not include <code>PiiEntityTypes</code> in your request, all PII is redacted.</p>
     # @option params [Boolean] :identify_language
@@ -3141,10 +3161,10 @@ module Aws::Transcribe
     #                   <code>VocabularyName</code> or <code>VocabularyFilterName</code> (or both)
     #               sub-parameter.</p>
     # @option params [Array<Types::ToxicityDetectionSettings>] :toxicity_detection
-    #   <p>Enables toxic speech detection in your transcript. If you include
+    #   <p>Enables toxic speech detection in your transcript. If you include 
     #               <code>ToxicityDetection</code> in your request, you must also include
     #               <code>ToxicityCategories</code>.</p>
-    #            <p>For information on the types of toxic speech Amazon Transcribe can detect, see
+    #            <p>For information on the types of toxic speech Amazon Transcribe can detect, see 
     #               <a href="https://docs.aws.amazon.com/transcribe/latest/dg/toxic-language.html">Detecting toxic
     #                   speech</a>.</p>
     # @example Request syntax with placeholder values
@@ -3382,7 +3402,7 @@ module Aws::Transcribe
     #   <p>The rules used for the updated Call Analytics category. The rules you provide in this
     #               field replace the ones that are currently being used in the specified category.</p>
     # @option params [String] :input_type
-    #   <p>Choose whether you want to update a real-time or a post-call category. The
+    #   <p>Choose whether you want to update a real-time or a post-call category. The 
     #               input type you specify must match the input type specified when the category was created. For
     #               example, if you created a category with the <code>POST_CALL</code> input type, you must
     #               use <code>POST_CALL</code> as the input type when updating this category.</p>
@@ -3853,7 +3873,8 @@ module Aws::Transcribe
     # @option options [Integer] :max_wait_time
     # @option options [Integer] :min_delay
     # @option options [Integer] :max_delay
-    # @return [nil] Returns `nil` if the waiter was successful.
+    # @return [Smithy::Client::Response] Returns the successful response
+    #   that satisfied the waiter's success condition.
     # @raise [FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition
     #   out of, preventing success.

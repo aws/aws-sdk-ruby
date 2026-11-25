@@ -3,7 +3,6 @@
 # This is generated code!
 
 require_relative 'plugins/endpoint'
-require 'smithy-client/plugins/checksum_required'
 require 'smithy-client/plugins/content_length'
 require 'smithy-client/plugins/default_params'
 require 'smithy-client/plugins/host_prefix'
@@ -23,6 +22,8 @@ require 'smithy-client/plugins/transfer_encoding'
 require 'aws-sdk-core/plugins/global_configuration'
 require 'aws-sdk-core/plugins/shared_config'
 require 'aws-sdk-core/plugins/user_agent'
+require 'aws-sdk-core/plugins/checksum_algorithm'
+require 'aws-sdk-core/plugins/http_checksum'
 require 'aws-sdk-core/plugins/invocation_id'
 require 'aws-sdk-core/plugins/recursion_detection'
 require 'aws-sdk-core/plugins/retry_errors'
@@ -43,7 +44,6 @@ module Aws::IoTSiteWise
     @identifier = :iotsitewise
 
     add_plugin(::Aws::IoTSiteWise::Plugins::Endpoint)
-    add_plugin(Smithy::Client::Plugins::ChecksumRequired)
     add_plugin(Smithy::Client::Plugins::ContentLength)
     add_plugin(Smithy::Client::Plugins::DefaultParams)
     add_plugin(Smithy::Client::Plugins::HostPrefix)
@@ -63,6 +63,8 @@ module Aws::IoTSiteWise
     add_plugin(Aws::Core::Plugins::GlobalConfiguration)
     add_plugin(Aws::Core::Plugins::SharedConfig)
     add_plugin(Aws::Core::Plugins::UserAgent)
+    add_plugin(Aws::Core::Plugins::ChecksumAlgorithm)
+    add_plugin(Aws::Core::Plugins::HttpChecksum)
     add_plugin(Aws::Core::Plugins::InvocationId)
     add_plugin(Aws::Core::Plugins::RecursionDetection)
     add_plugin(Aws::Core::Plugins::RetryErrors)
@@ -139,23 +141,41 @@ module Aws::IoTSiteWise
     #  * `ENV['AWS_DEFAULT_REGION']`
     #  * `~/.aws/credentials` as `region` under a profile
     #  * `~/.aws/config` as `region` under a profile
+    # @option options [String] :request_checksum_calculation (when_supported)
+    #  Determines when a checksum is calculated for request payloads. Values are:
+    #  
+    #  * `when_supported` - (default) A checksum is calculated for operations
+    #    modeled with the `httpChecksum` trait when `requestChecksumRequired`
+    #    is `true` or a `requestAlgorithmMember` is modeled.
+    #  * `when_required` - A checksum is calculated only when
+    #    `requestChecksumRequired` is `true`, or when the caller supplies a
+    #    modeled `requestAlgorithmMember`.
     # @option options [Integer] :request_min_compression_size_bytes (10240)
     #  The minimum size in bytes that triggers compression for request bodies.
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
+    # @option options [String] :response_checksum_validation (when_supported)
+    #  Determines when checksum validation is performed for response payloads.
+    #  Values are:
+    #  
+    #  * `when_supported` - (default) Validation is enabled for operations
+    #    modeled with a `requestValidationModeMember` and at least one
+    #    `responseAlgorithms` value supported by the client.
+    #  * `when_required` - Validation is performed only when the caller sets
+    #    the modeled `requestValidationModeMember` to `ENABLED`.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #
+    #  
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #
+    #  
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #
+    #  
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -340,7 +360,7 @@ module Aws::IoTSiteWise
     end
 
     # <important>
-    #             <p>The IoT SiteWise Monitor feature will no longer be open to new
+    #             <p>The IoT SiteWise Monitor feature will no longer be open to new 
     #   customers starting November 7, 2025. If you would like to use the IoT SiteWise Monitor feature, sign up prior to that date. Existing customers can
     #   continue to use the service as normal. For more information, see
     # <a href="https://docs.aws.amazon.com/iot-sitewise/latest/appguide/iotsitewise-monitor-availability-change.html">IoT SiteWise Monitor availability change</a>.</p>
@@ -986,7 +1006,7 @@ module Aws::IoTSiteWise
     end
 
     # <important>
-    #             <p>The IoT SiteWise Monitor feature will no longer be open to new
+    #             <p>The IoT SiteWise Monitor feature will no longer be open to new 
     #   customers starting November 7, 2025. If you would like to use the IoT SiteWise Monitor feature, sign up prior to that date. Existing customers can
     #   continue to use the service as normal. For more information, see
     # <a href="https://docs.aws.amazon.com/iot-sitewise/latest/appguide/iotsitewise-monitor-availability-change.html">IoT SiteWise Monitor availability change</a>.</p>
@@ -1484,15 +1504,15 @@ module Aws::IoTSiteWise
     #            <p>You can specify up to 200 properties per composite model. For more
     #         information, see <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/quotas.html">Quotas</a> in the <i>IoT SiteWise User Guide</i>.</p>
     # @option params [String] :if_match
-    #   <p>The expected current entity tag (ETag) for the asset model’s latest or active version (specified using <code>matchForVersionType</code>).
+    #   <p>The expected current entity tag (ETag) for the asset model’s latest or active version (specified using <code>matchForVersionType</code>).   
     #       The create request is rejected if the tag does not match the latest or active version's current entity tag.
     #       See <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/opt-locking-for-model.html">Optimistic locking for asset model writes</a>
     #       in the <i>IoT SiteWise User Guide</i>.</p>
     # @option params [String] :if_none_match
-    #   <p>Accepts <b>*</b> to reject the create request if an active version
+    #   <p>Accepts <b>*</b> to reject the create request if an active version 
     #       (specified using <code>matchForVersionType</code> as <code>ACTIVE</code>) already exists for the asset model.</p>
     # @option params [String] :match_for_version_type
-    #   <p>Specifies the asset model version type (<code>LATEST</code> or <code>ACTIVE</code>) used in
+    #   <p>Specifies the asset model version type (<code>LATEST</code> or <code>ACTIVE</code>) used in 
     #     conjunction with <code>If-Match</code> or <code>If-None-Match</code> headers to determine the target ETag for the create operation.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -1658,7 +1678,7 @@ module Aws::IoTSiteWise
     # @option params [Types::JobConfiguration] :job_configuration
     #   <p>Contains the configuration information of a job, such as the file format used to save data in Amazon S3.</p>
     # @option params [Boolean] :adaptive_ingestion
-    #   <p>If set to true, ingest new data into IoT SiteWise storage. Measurements with notifications, metrics and transforms are
+    #   <p>If set to true, ingest new data into IoT SiteWise storage. Measurements with notifications, metrics and transforms are 
     #      computed. If set to false, historical data is ingested into IoT SiteWise as is.</p>
     # @option params [Boolean] :delete_files_after_import
     #   <p>If set to true, your data files is deleted from S3, after ingestion into IoT SiteWise storage.</p>
@@ -1741,7 +1761,7 @@ module Aws::IoTSiteWise
     # @option params [Types::ComputationModelConfiguration] :computation_model_configuration
     #   <p>The configuration for the computation model.</p>
     # @option params [Hash<String, Types::ComputationModelDataBindingValue>] :computation_model_data_binding
-    #   <p>The data binding for the computation model. Key is a variable name defined in configuration.
+    #   <p>The data binding for the computation model. Key is a variable name defined in configuration. 
     #     Value is a <code>ComputationModelDataBindingValue</code> referenced by the variable.</p>
     # @option params [String] :client_token
     #   <p>A unique case-sensitive identifier that you can provide to ensure the idempotency of the request. Don't reuse this client token if a new idempotent request is required.</p>
@@ -1809,7 +1829,7 @@ module Aws::IoTSiteWise
     end
 
     # <important>
-    #             <p>The IoT SiteWise Monitor feature will no longer be open to new
+    #             <p>The IoT SiteWise Monitor feature will no longer be open to new 
     #   customers starting November 7, 2025. If you would like to use the IoT SiteWise Monitor feature, sign up prior to that date. Existing customers can
     #   continue to use the service as normal. For more information, see
     # <a href="https://docs.aws.amazon.com/iot-sitewise/latest/appguide/iotsitewise-monitor-availability-change.html">IoT SiteWise Monitor availability change</a>.</p>
@@ -2237,7 +2257,7 @@ module Aws::IoTSiteWise
     end
 
     # <important>
-    #             <p>The IoT SiteWise Monitor feature will no longer be open to new
+    #             <p>The IoT SiteWise Monitor feature will no longer be open to new 
     #   customers starting November 7, 2025. If you would like to use the IoT SiteWise Monitor feature, sign up prior to that date. Existing customers can
     #   continue to use the service as normal. For more information, see
     # <a href="https://docs.aws.amazon.com/iot-sitewise/latest/appguide/iotsitewise-monitor-availability-change.html">IoT SiteWise Monitor availability change</a>.</p>
@@ -2356,7 +2376,7 @@ module Aws::IoTSiteWise
     end
 
     # <important>
-    #             <p>The IoT SiteWise Monitor feature will no longer be open to new
+    #             <p>The IoT SiteWise Monitor feature will no longer be open to new 
     #   customers starting November 7, 2025. If you would like to use the IoT SiteWise Monitor feature, sign up prior to that date. Existing customers can
     #   continue to use the service as normal. For more information, see
     # <a href="https://docs.aws.amazon.com/iot-sitewise/latest/appguide/iotsitewise-monitor-availability-change.html">IoT SiteWise Monitor availability change</a>.</p>
@@ -2642,15 +2662,15 @@ module Aws::IoTSiteWise
     # @option params [String] :client_token
     #   <p>A unique case-sensitive identifier that you can provide to ensure the idempotency of the request. Don't reuse this client token if a new idempotent request is required.</p>
     # @option params [String] :if_match
-    #   <p>The expected current entity tag (ETag) for the asset model’s latest or active version (specified using <code>matchForVersionType</code>).
+    #   <p>The expected current entity tag (ETag) for the asset model’s latest or active version (specified using <code>matchForVersionType</code>).   
     #       The delete request is rejected if the tag does not match the latest or active version's current entity tag.
     #       See <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/opt-locking-for-model.html">Optimistic locking for asset model writes</a>
     #       in the <i>IoT SiteWise User Guide</i>.</p>
     # @option params [String] :if_none_match
-    #   <p>Accepts <b>*</b> to reject the delete request if an active version
+    #   <p>Accepts <b>*</b> to reject the delete request if an active version 
     #       (specified using <code>matchForVersionType</code> as <code>ACTIVE</code>) already exists for the asset model.</p>
     # @option params [String] :match_for_version_type
-    #   <p>Specifies the asset model version type (<code>LATEST</code> or <code>ACTIVE</code>) used in
+    #   <p>Specifies the asset model version type (<code>LATEST</code> or <code>ACTIVE</code>) used in 
     #     conjunction with <code>If-Match</code> or <code>If-None-Match</code> headers to determine the target ETag for the delete operation.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -2699,15 +2719,15 @@ module Aws::IoTSiteWise
     # @option params [String] :client_token
     #   <p>A unique case-sensitive identifier that you can provide to ensure the idempotency of the request. Don't reuse this client token if a new idempotent request is required.</p>
     # @option params [String] :if_match
-    #   <p>The expected current entity tag (ETag) for the asset model’s latest or active version (specified using <code>matchForVersionType</code>).
+    #   <p>The expected current entity tag (ETag) for the asset model’s latest or active version (specified using <code>matchForVersionType</code>).   
     #       The delete request is rejected if the tag does not match the latest or active version's current entity tag.
     #       See <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/opt-locking-for-model.html">Optimistic locking for asset model writes</a>
     #       in the <i>IoT SiteWise User Guide</i>.</p>
     # @option params [String] :if_none_match
-    #   <p>Accepts <b>*</b> to reject the delete request if an active version
+    #   <p>Accepts <b>*</b> to reject the delete request if an active version 
     #       (specified using <code>matchForVersionType</code> as <code>ACTIVE</code>) already exists for the asset model.</p>
     # @option params [String] :match_for_version_type
-    #   <p>Specifies the asset model version type (<code>LATEST</code> or <code>ACTIVE</code>) used in
+    #   <p>Specifies the asset model version type (<code>LATEST</code> or <code>ACTIVE</code>) used in 
     #     conjunction with <code>If-Match</code> or <code>If-None-Match</code> headers to determine the target ETag for the delete operation.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -3438,7 +3458,7 @@ module Aws::IoTSiteWise
     # @option params [Boolean] :exclude_properties
     #   <p> Whether or not to exclude asset model properties from the response. </p>
     # @option params [String] :asset_model_version
-    #   <p>The version alias that specifies the latest or active version of the asset model.
+    #   <p>The version alias that specifies the latest or active version of the asset model. 
     #             The details are returned in the response. The default value is <code>LATEST</code>. See <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/model-active-version.html">
     #             Asset model versions</a> in the <i>IoT SiteWise User Guide</i>.</p>
     # @example Request syntax with placeholder values
@@ -3688,7 +3708,7 @@ module Aws::IoTSiteWise
     #   <p>The ID of a composite model on this asset model. This can be either the actual ID in UUID format, or else <code>externalId:</code> followed by the external ID, if it has one.
     #       For more information, see <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-id-references">Referencing objects with external IDs</a> in the <i>IoT SiteWise User Guide</i>.</p>
     # @option params [String] :asset_model_version
-    #   <p>The version alias that specifies the latest or active version of the asset model.
+    #   <p>The version alias that specifies the latest or active version of the asset model. 
     #             The details are returned in the response. The default value is <code>LATEST</code>. See <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/model-active-version.html">
     #             Asset model versions</a> in the <i>IoT SiteWise User Guide</i>.</p>
     # @example Request syntax with placeholder values
@@ -5933,12 +5953,12 @@ module Aws::IoTSiteWise
     # <p>Invokes SiteWise Assistant to start or continue a conversation.</p>
     # @param [Hash, Types::InvokeAssistantRequest] params
     # @option params [String] :conversation_id
-    #   <p>The ID assigned to a conversation. IoT SiteWise automatically generates a unique ID for you, and this parameter is never required.
+    #   <p>The ID assigned to a conversation. IoT SiteWise automatically generates a unique ID for you, and this parameter is never required. 
     #     However, if you prefer to have your own ID, you must specify it here in UUID format. If you specify your own ID, it must be globally unique.</p>
     # @option params [String] :message
     #   <p>A text message sent to the SiteWise Assistant by the user.</p>
     # @option params [Boolean] :enable_trace
-    #   <p>Specifies if to turn trace on or not. It is used to track the SiteWise Assistant's
+    #   <p>Specifies if to turn trace on or not. It is used to track the SiteWise Assistant's 
     #     reasoning, and data access process.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -6180,7 +6200,7 @@ module Aws::IoTSiteWise
     #   <p>The maximum number of results to return for each paginated request.</p>
     #            <p>Default: 50</p>
     # @option params [String] :asset_model_version
-    #   <p>The version alias that specifies the latest or active version of the asset model.
+    #   <p>The version alias that specifies the latest or active version of the asset model. 
     #             The details are returned in the response. The default value is <code>LATEST</code>. See <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/model-active-version.html">
     #             Asset model versions</a> in the <i>IoT SiteWise User Guide</i>.</p>
     # @example Request syntax with placeholder values
@@ -6247,7 +6267,7 @@ module Aws::IoTSiteWise
     #            <p>Default: <code>BASE</code>
     #            </p>
     # @option params [String] :asset_model_version
-    #   <p>The version alias that specifies the latest or active version of the asset model.
+    #   <p>The version alias that specifies the latest or active version of the asset model. 
     #             The details are returned in the response. The default value is <code>LATEST</code>. See <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/model-active-version.html">
     #             Asset model versions</a> in the <i>IoT SiteWise User Guide</i>.</p>
     # @example Request syntax with placeholder values
@@ -6386,7 +6406,7 @@ module Aws::IoTSiteWise
     #   <p>The maximum number of results to return for each paginated request.</p>
     #            <p>Default: 50</p>
     # @option params [String] :asset_model_version
-    #   <p>The version alias that specifies the latest or active version of the asset model.
+    #   <p>The version alias that specifies the latest or active version of the asset model. 
     #             The details are returned in the response. The default value is <code>LATEST</code>. See <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/model-active-version.html">
     #             Asset model versions</a> in the <i>IoT SiteWise User Guide</i>.</p>
     # @example Request syntax with placeholder values
@@ -8387,7 +8407,7 @@ module Aws::IoTSiteWise
     end
 
     # <important>
-    #             <p>The IoT SiteWise Monitor feature will no longer be open to new
+    #             <p>The IoT SiteWise Monitor feature will no longer be open to new 
     #   customers starting November 7, 2025. If you would like to use the IoT SiteWise Monitor feature, sign up prior to that date. Existing customers can
     #   continue to use the service as normal. For more information, see
     # <a href="https://docs.aws.amazon.com/iot-sitewise/latest/appguide/iotsitewise-monitor-availability-change.html">IoT SiteWise Monitor availability change</a>.</p>
@@ -8549,15 +8569,15 @@ module Aws::IoTSiteWise
     # @option params [String] :client_token
     #   <p>A unique case-sensitive identifier that you can provide to ensure the idempotency of the request. Don't reuse this client token if a new idempotent request is required.</p>
     # @option params [String] :if_match
-    #   <p>The expected current entity tag (ETag) for the asset model’s latest or active version (specified using <code>matchForVersionType</code>).
+    #   <p>The expected current entity tag (ETag) for the asset model’s latest or active version (specified using <code>matchForVersionType</code>).   
     #       The update request is rejected if the tag does not match the latest or active version's current entity tag.
     #       See <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/opt-locking-for-model.html">Optimistic locking for asset model writes</a>
     #       in the <i>IoT SiteWise User Guide</i>.</p>
     # @option params [String] :if_none_match
-    #   <p>Accepts <b>*</b> to reject the update request if an active version
+    #   <p>Accepts <b>*</b> to reject the update request if an active version 
     #       (specified using <code>matchForVersionType</code> as <code>ACTIVE</code>) already exists for the asset model.</p>
     # @option params [String] :match_for_version_type
-    #   <p>Specifies the asset model version type (<code>LATEST</code> or <code>ACTIVE</code>) used in
+    #   <p>Specifies the asset model version type (<code>LATEST</code> or <code>ACTIVE</code>) used in 
     #     conjunction with <code>If-Match</code> or <code>If-None-Match</code> headers to determine the target ETag for the update operation.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -8813,15 +8833,15 @@ module Aws::IoTSiteWise
     #            <p>You can specify up to 200 properties per composite model. For more
     #         information, see <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/quotas.html">Quotas</a> in the <i>IoT SiteWise User Guide</i>.</p>
     # @option params [String] :if_match
-    #   <p>The expected current entity tag (ETag) for the asset model’s latest or active version (specified using <code>matchForVersionType</code>).
+    #   <p>The expected current entity tag (ETag) for the asset model’s latest or active version (specified using <code>matchForVersionType</code>).   
     #       The update request is rejected if the tag does not match the latest or active version's current entity tag.
     #       See <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/opt-locking-for-model.html">Optimistic locking for asset model writes</a>
     #       in the <i>IoT SiteWise User Guide</i>.</p>
     # @option params [String] :if_none_match
-    #   <p>Accepts <b>*</b> to reject the update request if an active version
+    #   <p>Accepts <b>*</b> to reject the update request if an active version 
     #       (specified using <code>matchForVersionType</code> as <code>ACTIVE</code>) already exists for the asset model.</p>
     # @option params [String] :match_for_version_type
-    #   <p>Specifies the asset model version type (<code>LATEST</code> or <code>ACTIVE</code>) used in
+    #   <p>Specifies the asset model version type (<code>LATEST</code> or <code>ACTIVE</code>) used in 
     #     conjunction with <code>If-Match</code> or <code>If-None-Match</code> headers to determine the target ETag for the update operation.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -9007,7 +9027,7 @@ module Aws::IoTSiteWise
     # @option params [Types::ComputationModelConfiguration] :computation_model_configuration
     #   <p>The configuration for the computation model.</p>
     # @option params [Hash<String, Types::ComputationModelDataBindingValue>] :computation_model_data_binding
-    #   <p>The data binding for the computation model. Key is a variable name defined in configuration.
+    #   <p>The data binding for the computation model. Key is a variable name defined in configuration. 
     #     Value is a <code>ComputationModelDataBindingValue</code> referenced by the variable.</p>
     # @option params [String] :client_token
     #   <p>A unique case-sensitive identifier that you can provide to ensure the idempotency of the
@@ -9068,7 +9088,7 @@ module Aws::IoTSiteWise
     end
 
     # <important>
-    #             <p>The IoT SiteWise Monitor feature will no longer be open to new
+    #             <p>The IoT SiteWise Monitor feature will no longer be open to new 
     #   customers starting November 7, 2025. If you would like to use the IoT SiteWise Monitor feature, sign up prior to that date. Existing customers can
     #   continue to use the service as normal. For more information, see
     # <a href="https://docs.aws.amazon.com/iot-sitewise/latest/appguide/iotsitewise-monitor-availability-change.html">IoT SiteWise Monitor availability change</a>.</p>
@@ -9322,7 +9342,7 @@ module Aws::IoTSiteWise
     end
 
     # <important>
-    #             <p>The IoT SiteWise Monitor feature will no longer be open to new
+    #             <p>The IoT SiteWise Monitor feature will no longer be open to new 
     #   customers starting November 7, 2025. If you would like to use the IoT SiteWise Monitor feature, sign up prior to that date. Existing customers can
     #   continue to use the service as normal. For more information, see
     # <a href="https://docs.aws.amazon.com/iot-sitewise/latest/appguide/iotsitewise-monitor-availability-change.html">IoT SiteWise Monitor availability change</a>.</p>
@@ -9410,7 +9430,7 @@ module Aws::IoTSiteWise
     end
 
     # <important>
-    #             <p>The IoT SiteWise Monitor feature will no longer be open to new
+    #             <p>The IoT SiteWise Monitor feature will no longer be open to new 
     #   customers starting November 7, 2025. If you would like to use the IoT SiteWise Monitor feature, sign up prior to that date. Existing customers can
     #   continue to use the service as normal. For more information, see
     # <a href="https://docs.aws.amazon.com/iot-sitewise/latest/appguide/iotsitewise-monitor-availability-change.html">IoT SiteWise Monitor availability change</a>.</p>
@@ -9610,7 +9630,8 @@ module Aws::IoTSiteWise
     # @option options [Integer] :max_wait_time
     # @option options [Integer] :min_delay
     # @option options [Integer] :max_delay
-    # @return [nil] Returns `nil` if the waiter was successful.
+    # @return [Smithy::Client::Response] Returns the successful response
+    #   that satisfied the waiter's success condition.
     # @raise [FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition
     #   out of, preventing success.

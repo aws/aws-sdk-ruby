@@ -1665,7 +1665,7 @@ module Aws::LakeFormation
     #            <p>The temporary security credentials consist of an access key and a session token. The access key consists of an access key ID and a secret key. When the credentials are created, they are associated with an IAM access control policy that limits what the user can do when using the credentials.</p>
     #   @return [Types::TemporaryCredentials]
     # @!attribute accessible_data_locations
-    #   <p>Refers to the Amazon S3 locations that can be
+    #   <p>Refers to the Amazon S3 locations that can be 
     #         accessed through the <code>GetTemporaryCredentialsForLocation</code> API operation.</p>
     #   @return [Array<String>]
     # @!attribute credentials_scope
@@ -3748,7 +3748,7 @@ module Aws::LakeFormation
       include ::Smithy::Schema::Structure
     end
 
-    # <p>An object that defines an Amazon S3 object to be deleted if a transaction cancels, provided that
+    # <p>An object that defines an Amazon S3 object to be deleted if a transaction cancels, provided that 
     #       <code>VirtualPut</code> was called before writing the object.</p>
     # @!attribute uri
     #   <p>The path to the Amazon S3 object. Must start with s3://</p>

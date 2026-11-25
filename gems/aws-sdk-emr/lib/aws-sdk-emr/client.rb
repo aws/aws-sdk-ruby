@@ -3,7 +3,6 @@
 # This is generated code!
 
 require_relative 'plugins/endpoint'
-require 'smithy-client/plugins/checksum_required'
 require 'smithy-client/plugins/content_length'
 require 'smithy-client/plugins/default_params'
 require 'smithy-client/plugins/host_prefix'
@@ -23,6 +22,8 @@ require 'smithy-client/plugins/transfer_encoding'
 require 'aws-sdk-core/plugins/global_configuration'
 require 'aws-sdk-core/plugins/shared_config'
 require 'aws-sdk-core/plugins/user_agent'
+require 'aws-sdk-core/plugins/checksum_algorithm'
+require 'aws-sdk-core/plugins/http_checksum'
 require 'aws-sdk-core/plugins/invocation_id'
 require 'aws-sdk-core/plugins/recursion_detection'
 require 'aws-sdk-core/plugins/retry_errors'
@@ -43,7 +44,6 @@ module Aws::EMR
     @identifier = :emr
 
     add_plugin(::Aws::EMR::Plugins::Endpoint)
-    add_plugin(Smithy::Client::Plugins::ChecksumRequired)
     add_plugin(Smithy::Client::Plugins::ContentLength)
     add_plugin(Smithy::Client::Plugins::DefaultParams)
     add_plugin(Smithy::Client::Plugins::HostPrefix)
@@ -63,6 +63,8 @@ module Aws::EMR
     add_plugin(Aws::Core::Plugins::GlobalConfiguration)
     add_plugin(Aws::Core::Plugins::SharedConfig)
     add_plugin(Aws::Core::Plugins::UserAgent)
+    add_plugin(Aws::Core::Plugins::ChecksumAlgorithm)
+    add_plugin(Aws::Core::Plugins::HttpChecksum)
     add_plugin(Aws::Core::Plugins::InvocationId)
     add_plugin(Aws::Core::Plugins::RecursionDetection)
     add_plugin(Aws::Core::Plugins::RetryErrors)
@@ -139,23 +141,41 @@ module Aws::EMR
     #  * `ENV['AWS_DEFAULT_REGION']`
     #  * `~/.aws/credentials` as `region` under a profile
     #  * `~/.aws/config` as `region` under a profile
+    # @option options [String] :request_checksum_calculation (when_supported)
+    #  Determines when a checksum is calculated for request payloads. Values are:
+    #  
+    #  * `when_supported` - (default) A checksum is calculated for operations
+    #    modeled with the `httpChecksum` trait when `requestChecksumRequired`
+    #    is `true` or a `requestAlgorithmMember` is modeled.
+    #  * `when_required` - A checksum is calculated only when
+    #    `requestChecksumRequired` is `true`, or when the caller supplies a
+    #    modeled `requestAlgorithmMember`.
     # @option options [Integer] :request_min_compression_size_bytes (10240)
     #  The minimum size in bytes that triggers compression for request bodies.
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
+    # @option options [String] :response_checksum_validation (when_supported)
+    #  Determines when checksum validation is performed for response payloads.
+    #  Values are:
+    #  
+    #  * `when_supported` - (default) Validation is enabled for operations
+    #    modeled with a `requestValidationModeMember` and at least one
+    #    `responseAlgorithms` value supported by the client.
+    #  * `when_required` - Validation is performed only when the caller sets
+    #    the modeled `requestValidationModeMember` to `ENABLED`.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #
+    #  
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #
+    #  
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #
+    #  
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -1556,7 +1576,7 @@ module Aws::EMR
     # @option params [Boolean] :dry_run
     #   <p>Determines if the user interface presigned URL is for a dry run.</p>
     # @option params [String] :execution_role_arn
-    #   <p>The execution role ARN associated with the cluster's application user interface
+    #   <p>The execution role ARN associated with the cluster's application user interface 
     #            presigned URL.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -3699,14 +3719,14 @@ module Aws::EMR
       request.send_request(options)
     end
 
-    # <p>You can use the <code>SetKeepJobFlowAliveWhenNoSteps</code> to configure a cluster (job flow) to terminate after the step execution, i.e., all your
-    #          steps are executed. If you want a transient cluster that shuts down after the last of the current executing steps are completed,
+    # <p>You can use the <code>SetKeepJobFlowAliveWhenNoSteps</code> to configure a cluster (job flow) to terminate after the step execution, i.e., all your 
+    #          steps are executed. If you want a transient cluster that shuts down after the last of the current executing steps are completed, 
     #          you can configure <code>SetKeepJobFlowAliveWhenNoSteps</code> to false. If you want a long running cluster, configure <code>SetKeepJobFlowAliveWhenNoSteps</code> to true.</p>
     #          <p>For more information, see <a href="https://docs.aws.amazon.com/emr/latest/ManagementGuide/UsingEMR_TerminationProtection.html">Managing Cluster Termination</a> in the <i>Amazon EMR Management Guide</i>.</p>
     # @param [Hash, Types::SetKeepJobFlowAliveWhenNoStepsInput] params
     # @option params [Array<String>] :job_flow_ids
-    #   <p>A list of strings that uniquely identify the clusters to protect. This identifier is returned by
-    #            <a href="https://docs.aws.amazon.com/emr/latest/APIReference/API_RunJobFlow.html">RunJobFlow</a> and can also
+    #   <p>A list of strings that uniquely identify the clusters to protect. This identifier is returned by 
+    #            <a href="https://docs.aws.amazon.com/emr/latest/APIReference/API_RunJobFlow.html">RunJobFlow</a> and can also 
     #            be obtained from <a href="https://docs.aws.amazon.com/emr/latest/APIReference/API_DescribeJobFlows.html">DescribeJobFlows</a>.</p>
     # @option params [Boolean] :keep_job_flow_alive_when_no_steps
     #   <p>A Boolean that indicates whether to terminate the cluster after all steps are executed.</p>
@@ -3766,22 +3786,22 @@ module Aws::EMR
       request.send_request(options)
     end
 
-    # <p>Specify whether to enable unhealthy node replacement, which lets Amazon EMR gracefully
-    #          replace core nodes on a cluster if any nodes become unhealthy. For example, a node becomes
-    #          unhealthy if disk usage is above 90%. If unhealthy node replacement is on and <code>TerminationProtected</code> are off,
-    #          Amazon EMR immediately terminates the unhealthy core nodes. To use unhealthy node replacement
+    # <p>Specify whether to enable unhealthy node replacement, which lets Amazon EMR gracefully 
+    #          replace core nodes on a cluster if any nodes become unhealthy. For example, a node becomes 
+    #          unhealthy if disk usage is above 90%. If unhealthy node replacement is on and <code>TerminationProtected</code> are off, 
+    #          Amazon EMR immediately terminates the unhealthy core nodes. To use unhealthy node replacement 
     #          and retain unhealthy core nodes, use  to turn on
-    #          termination protection. In such cases, Amazon EMR adds
+    #          termination protection. In such cases, Amazon EMR adds 
     #          the unhealthy nodes to a denylist, reducing job interruptions and failures.</p>
-    #          <p>If unhealthy node replacement is on, Amazon EMR
-    #          notifies YARN and other applications on the cluster to stop scheduling tasks
+    #          <p>If unhealthy node replacement is on, Amazon EMR 
+    #          notifies YARN and other applications on the cluster to stop scheduling tasks 
     #          with these nodes, moves the data, and then terminates the nodes.</p>
-    #          <p>For more information, see <a href="https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-node-replacement.html">graceful
+    #          <p>For more information, see <a href="https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-node-replacement.html">graceful 
     #          node replacement</a> in the <i>Amazon EMR Management Guide</i>.</p>
     # @param [Hash, Types::SetUnhealthyNodeReplacementInput] params
     # @option params [Array<String>] :job_flow_ids
-    #   <p>The list of strings that uniquely identify the clusters for which to turn on
-    #            unhealthy node replacement. You can get these identifiers by running the
+    #   <p>The list of strings that uniquely identify the clusters for which to turn on 
+    #            unhealthy node replacement. You can get these identifiers by running the 
     #            <a>RunJobFlow</a> or the <a>DescribeJobFlows</a> operations.</p>
     # @option params [Boolean] :unhealthy_node_replacement
     #   <p>Indicates whether to turn on or turn off graceful unhealthy node replacement.</p>
@@ -4204,7 +4224,8 @@ module Aws::EMR
     # @option options [Integer] :max_wait_time
     # @option options [Integer] :min_delay
     # @option options [Integer] :max_delay
-    # @return [nil] Returns `nil` if the waiter was successful.
+    # @return [Smithy::Client::Response] Returns the successful response
+    #   that satisfied the waiter's success condition.
     # @raise [FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition
     #   out of, preventing success.

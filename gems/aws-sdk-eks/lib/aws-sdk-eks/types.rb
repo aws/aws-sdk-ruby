@@ -1452,9 +1452,9 @@ module Aws::EKS
     #               <i>Amazon EKS User Guide</i>.</p>
     #   @return [Types::StorageConfigResponse]
     # @!attribute deletion_protection
-    #   <p>The current deletion protection setting for the cluster. When <code>true</code>,
-    #               deletion protection is enabled and the cluster cannot be deleted until protection is
-    #               disabled. When <code>false</code>, the cluster can be deleted normally. This setting
+    #   <p>The current deletion protection setting for the cluster. When <code>true</code>, 
+    #               deletion protection is enabled and the cluster cannot be deleted until protection is 
+    #               disabled. When <code>false</code>, the cluster can be deleted normally. This setting 
     #               only applies to clusters in an active state.</p>
     #   @return [Boolean]
     # @!attribute control_plane_scaling_config
@@ -1859,7 +1859,7 @@ module Aws::EKS
     #               IAM principal type. For nodes (<code>EC2</code> (for EKS Auto Mode),
     #                   <code>EC2_LINUX</code>, <code>EC2_WINDOWS</code>, <code>FARGATE_LINUX</code>, and
     #                   <code>HYBRID_LINUX</code>), the only valid ARN is IAM roles.
-    #
+    #               
     #               You can't use the STS session principal type with access entries because this is a
     #               temporary principal for each session and not a permanent identity that can be assigned
     #               permissions.</p>
@@ -2192,7 +2192,7 @@ module Aws::EKS
     # @!attribute name
     #   <p>The unique name to give to your cluster. The name can contain only alphanumeric characters (case-sensitive),
     #   hyphens, and underscores. It must start with an alphanumeric character and can't be longer than
-    #   100 characters. The name must be unique within the Amazon Web Services Region and Amazon Web Services account that you're
+    #   100 characters. The name must be unique within the Amazon Web Services Region and Amazon Web Services account that you're 
     #   creating the cluster in.</p>
     #   @return [String]
     # @!attribute version
@@ -2299,8 +2299,8 @@ module Aws::EKS
     #               and delete EBS volumes in your Amazon Web Services account.</p>
     #   @return [Types::StorageConfigRequest]
     # @!attribute deletion_protection
-    #   <p>Indicates whether to enable deletion protection for the cluster. When enabled, the cluster
-    #               cannot be deleted unless deletion protection is first disabled. This helps prevent
+    #   <p>Indicates whether to enable deletion protection for the cluster. When enabled, the cluster 
+    #               cannot be deleted unless deletion protection is first disabled. This helps prevent 
     #               accidental cluster deletion. Default value is <code>false</code>.</p>
     #   @return [Boolean]
     # @!attribute control_plane_scaling_config
@@ -2485,7 +2485,7 @@ module Aws::EKS
     # @!attribute disk_size
     #   <p>The root device disk size (in GiB) for your node group instances. The default disk
     #               size is 20 GiB for Linux and Bottlerocket. The default disk size is 50 GiB for Windows.
-    #               If you specify <code>launchTemplate</code>, then don't specify  <code>diskSize</code>, or the node group
+    #               If you specify <code>launchTemplate</code>, then don't specify  <code>diskSize</code>, or the node group 
     #               deployment will fail. For more information about using launch templates with Amazon EKS, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html">Customizing managed nodes with launch templates</a> in the <i>Amazon EKS User Guide</i>.</p>
     #   @return [Integer]
     # @!attribute subnets
@@ -2518,7 +2518,7 @@ module Aws::EKS
     #   @return [String]
     # @!attribute remote_access
     #   <p>The remote access configuration to use with your node group. For Linux, the protocol
-    #               is SSH. For Windows, the protocol is RDP. If you specify <code>launchTemplate</code>, then don't specify
+    #               is SSH. For Windows, the protocol is RDP. If you specify <code>launchTemplate</code>, then don't specify 
     #                   <code>remoteAccess</code>, or the node group  deployment will fail.
     #               For more information about using launch templates with Amazon EKS, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html">Customizing managed nodes with launch templates</a> in the <i>Amazon EKS User Guide</i>.</p>
     #   @return [Types::RemoteAccessConfig]
@@ -2534,7 +2534,7 @@ module Aws::EKS
     #               </i>.
     #               If you specify <code>launchTemplate</code>, then don't specify  <code>
     #                  <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_IamInstanceProfile.html">IamInstanceProfile</a>
-    #               </code> in your launch template, or the node group
+    #               </code> in your launch template, or the node group 
     #               deployment will fail. For more information about using launch templates with Amazon EKS, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html">Customizing managed nodes with launch templates</a> in the <i>Amazon EKS User Guide</i>.</p>
     #   @return [String]
     # @!attribute labels
@@ -2576,7 +2576,7 @@ module Aws::EKS
     # @!attribute version
     #   <p>The Kubernetes version to use for your managed nodes. By default, the Kubernetes version of the
     #               cluster is used, and this is the only accepted specified value. If you specify <code>launchTemplate</code>,
-    #               and your launch template uses a custom AMI, then don't specify  <code>version</code>, or the node group
+    #               and your launch template uses a custom AMI, then don't specify  <code>version</code>, or the node group 
     #               deployment will fail. For more information about using launch templates with Amazon EKS, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html">Customizing managed nodes with launch templates</a> in the <i>Amazon EKS User Guide</i>.</p>
     #   @return [String]
     # @!attribute release_version
@@ -2587,7 +2587,7 @@ module Aws::EKS
     #               groups support the November 2022 and later releases of the Windows AMIs. For information
     #               about Windows versions, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/eks-ami-versions-windows.html">Amazon EKS
     #                   optimized Windows AMI versions</a> in the <i>Amazon EKS User Guide</i>.</p>
-    #            <p>If you specify <code>launchTemplate</code>, and your launch template uses a custom AMI, then don't specify
+    #            <p>If you specify <code>launchTemplate</code>, and your launch template uses a custom AMI, then don't specify 
     #                   <code>releaseVersion</code>, or the node group  deployment will fail.
     #               For more information about using launch templates with Amazon EKS, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html">Customizing managed nodes with launch templates</a> in the <i>Amazon EKS User Guide</i>.</p>
     #   @return [String]
@@ -5700,29 +5700,29 @@ module Aws::EKS
     #               disabled by default.</p>
     #   @return [Boolean]
     # @!attribute max_unhealthy_node_threshold_count
-    #   <p>Specify a count threshold of unhealthy nodes, above which node auto
-    #               repair actions will stop. When using this, you cannot also set
+    #   <p>Specify a count threshold of unhealthy nodes, above which node auto 
+    #               repair actions will stop. When using this, you cannot also set 
     #               <code>maxUnhealthyNodeThresholdPercentage</code> at the same time.</p>
     #   @return [Integer]
     # @!attribute max_unhealthy_node_threshold_percentage
-    #   <p>Specify a percentage threshold of unhealthy nodes, above which node auto
-    #               repair actions will stop. When using this, you cannot also set
+    #   <p>Specify a percentage threshold of unhealthy nodes, above which node auto 
+    #               repair actions will stop. When using this, you cannot also set 
     #               <code>maxUnhealthyNodeThresholdCount</code> at the same time.</p>
     #   @return [Integer]
     # @!attribute max_parallel_nodes_repaired_count
-    #   <p>Specify the maximum number of nodes that can be repaired concurrently or in parallel,
-    #               expressed as a count of unhealthy nodes. This gives you finer-grained control over the
-    #               pace of node replacements. When using this, you cannot also set
+    #   <p>Specify the maximum number of nodes that can be repaired concurrently or in parallel, 
+    #               expressed as a count of unhealthy nodes. This gives you finer-grained control over the 
+    #               pace of node replacements. When using this, you cannot also set 
     #               <code>maxParallelNodesRepairedPercentage</code> at the same time.</p>
     #   @return [Integer]
     # @!attribute max_parallel_nodes_repaired_percentage
-    #   <p>Specify the maximum number of nodes that can be repaired concurrently or in parallel,
-    #               expressed as a percentage of unhealthy nodes. This gives you finer-grained control over the
-    #               pace of node replacements. When using this, you cannot also set
+    #   <p>Specify the maximum number of nodes that can be repaired concurrently or in parallel, 
+    #               expressed as a percentage of unhealthy nodes. This gives you finer-grained control over the 
+    #               pace of node replacements. When using this, you cannot also set 
     #               <code>maxParallelNodesRepairedCount</code> at the same time.</p>
     #   @return [Integer]
     # @!attribute node_repair_config_overrides
-    #   <p>Specify granular overrides for specific repair actions. These overrides control the
+    #   <p>Specify granular overrides for specific repair actions. These overrides control the 
     #               repair action and the repair delay time before a node is considered eligible for repair.
     #               If you use this, you must specify all the values.</p>
     #   @return [Array<Types::NodeRepairConfigOverrides>]
@@ -5739,7 +5739,7 @@ module Aws::EKS
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Specify granular overrides for specific repair actions. These overrides control the
+    # <p>Specify granular overrides for specific repair actions. These overrides control the 
     #             repair action and the repair delay time before a node is considered eligible for repair.
     #             If you use this, you must specify all the values.</p>
     # @!attribute node_monitoring_condition
@@ -5751,7 +5751,7 @@ module Aws::EKS
     #               override would apply to.</p>
     #   @return [String]
     # @!attribute min_repair_wait_time_mins
-    #   <p>Specify the minimum time in minutes to wait before attempting to repair a node
+    #   <p>Specify the minimum time in minutes to wait before attempting to repair a node 
     #               with this specific <code>nodeMonitoringCondition</code> and
     #               <code>nodeUnhealthyReason</code>.</p>
     #   @return [Integer]
@@ -5983,7 +5983,7 @@ module Aws::EKS
     #               updated to the specified size. If this parameter is given a value that is smaller than
     #               the current number of running worker nodes, the necessary number of worker nodes are
     #               terminated to match the given value.
-    #
+    #               
     #               When using CloudFormation, no action occurs if you remove this parameter from your CFN
     #               template.</p>
     #            <p>This parameter can be different from <code>minSize</code> in some cases, such as when
@@ -6224,7 +6224,7 @@ module Aws::EKS
     #   <p>The Amazon EC2 instance type for etcd instances of your local Amazon EKS cluster on Amazon Web Services Outposts. This instance type applies to all etcd instances and cannot be changed after cluster creation.</p>
     #   @return [String]
     # @!attribute etcd_placement
-    #   <p>An object representing the placement configuration for the etcd instances of your local
+    #   <p>An object representing the placement configuration for the etcd instances of your local 
     #               Amazon EKS cluster on an Amazon Web Services Outpost. For more information, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/eks-outposts-capacity-considerations.html">Capacity considerations</a> in the <i>Amazon EKS User Guide</i>.</p>
     #   @return [Types::EtcdPlacementRequest]
     class OutpostConfigRequest < Struct.new(
@@ -6259,7 +6259,7 @@ module Aws::EKS
     #               all etcd instances.</p>
     #   @return [String]
     # @!attribute etcd_placement
-    #   <p>An object representing the placement configuration for the etcd instances of your local
+    #   <p>An object representing the placement configuration for the etcd instances of your local 
     #               Amazon EKS cluster on an Amazon Web Services Outpost. For more information, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/eks-outposts-capacity-considerations.html">Capacity
     #                   considerations</a> in the <i>Amazon EKS User Guide</i>.</p>
     #   @return [Types::EtcdPlacementResponse]
@@ -7609,9 +7609,9 @@ module Aws::EKS
     #               configuration after the cluster is created.</p>
     #   @return [Types::RemoteNetworkConfigRequest]
     # @!attribute deletion_protection
-    #   <p>Specifies whether to enable or disable deletion protection for the cluster. When
-    #               enabled (<code>true</code>), the cluster cannot be deleted until deletion protection is
-    #               explicitly disabled. When disabled (<code>false</code>), the cluster can be deleted
+    #   <p>Specifies whether to enable or disable deletion protection for the cluster. When 
+    #               enabled (<code>true</code>), the cluster cannot be deleted until deletion protection is 
+    #               explicitly disabled. When disabled (<code>false</code>), the cluster can be deleted 
     #               normally.</p>
     #   @return [Boolean]
     # @!attribute control_plane_scaling_config
@@ -7826,7 +7826,7 @@ module Aws::EKS
     #               <i>Amazon EKS User Guide</i>. Amazon EKS managed node groups support the November 2022 and later releases
     #               of the Windows AMIs. For information about Windows versions, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/eks-ami-versions-windows.html">Amazon EKS
     #                   optimized Windows AMI versions</a> in the <i>Amazon EKS User Guide</i>.</p>
-    #            <p>If you specify <code>launchTemplate</code>, and your launch template uses a custom AMI, then don't specify
+    #            <p>If you specify <code>launchTemplate</code>, and your launch template uses a custom AMI, then don't specify 
     #                   <code>releaseVersion</code>, or the node group  update will fail.
     #               For more information about using launch templates with Amazon EKS, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html">Customizing managed nodes with launch templates</a> in the <i>Amazon EKS User Guide</i>.</p>
     #   @return [String]

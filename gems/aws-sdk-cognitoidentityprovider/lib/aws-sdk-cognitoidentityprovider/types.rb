@@ -426,10 +426,10 @@ module Aws::CognitoIdentityProvider
     #   @return [Array<Types::AttributeType>]
     # @!attribute validation_data
     #   <p>Temporary user attributes that contribute to the outcomes of your pre sign-up Lambda
-    #       trigger. This set of key-value pairs are for custom validation of information that you
+    #       trigger. This set of key-value pairs are for custom validation of information that you 
     #       collect from your users but don't need to retain.</p>
     #            <p>Your Lambda function can analyze this additional data and act on it. Your function
-    #       can automatically confirm and verify select users or perform external API operations
+    #       can automatically confirm and verify select users or perform external API operations 
     #       like logging user attributes and validation data to Amazon CloudWatch Logs.</p>
     #            <p>For more information about the pre sign-up Lambda trigger, see <a href="https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-lambda-pre-sign-up.html">Pre sign-up Lambda trigger</a>.</p>
     #   @return [Array<Types::AttributeType>]
@@ -842,11 +842,11 @@ module Aws::CognitoIdentityProvider
     #                   <code>"email": "testuser@example.com"</code>.</p>
     #   @return [Array<Types::AttributeType>]
     # @!attribute user_create_date
-    #   <p>The date and time when the item was created. Amazon Cognito returns this timestamp in UNIX epoch time format. Your SDK might render the output in a
+    #   <p>The date and time when the item was created. Amazon Cognito returns this timestamp in UNIX epoch time format. Your SDK might render the output in a 
     #   human-readable format like ISO 8601 or a Java <code>Date</code> object.</p>
     #   @return [Time]
     # @!attribute user_last_modified_date
-    #   <p>The date and time when the item was modified. Amazon Cognito returns this timestamp in UNIX epoch time format. Your SDK might render the output in a
+    #   <p>The date and time when the item was modified. Amazon Cognito returns this timestamp in UNIX epoch time format. Your SDK might render the output in a 
     #   human-readable format like ISO 8601 or a Java <code>Date</code> object.</p>
     #   @return [Time]
     # @!attribute enabled
@@ -1149,12 +1149,12 @@ module Aws::CognitoIdentityProvider
     #            </note>
     #   @return [Hash<String, String>]
     # @!attribute analytics_metadata
-    #   <p>Information that supports analytics outcomes with Amazon Pinpoint, including the
-    #   user's endpoint ID. The endpoint ID is a destination for Amazon Pinpoint push notifications, for example a device identifier,
+    #   <p>Information that supports analytics outcomes with Amazon Pinpoint, including the 
+    #   user's endpoint ID. The endpoint ID is a destination for Amazon Pinpoint push notifications, for example a device identifier, 
     #   email address, or phone number.</p>
     #   @return [Types::AnalyticsMetadataType]
     # @!attribute context_data
-    #   <p>Contextual data about your user session like the device fingerprint, IP address, or location. Amazon Cognito threat
+    #   <p>Contextual data about your user session like the device fingerprint, IP address, or location. Amazon Cognito threat 
     #   protection evaluates the risk of an authentication event based on the context that your app generates and passes to Amazon Cognito
     #   when it makes API requests.</p>
     #            <p>For more information, see <a href="https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-settings-viewing-threat-protection-app.html">Collecting data for threat protection in
@@ -1190,15 +1190,15 @@ module Aws::CognitoIdentityProvider
     #            <p>Possible challenges include the following:</p>
     #            <note>
     #               <p>All of the following challenges require <code>USERNAME</code> and, when the app
-    #                   client has a client secret, <code>SECRET_HASH</code> in the parameters. Include a
+    #                   client has a client secret, <code>SECRET_HASH</code> in the parameters. Include a 
     #                   <code>DEVICE_KEY</code> for device authentication.</p>
     #            </note>
     #            <ul>
     #               <li>
     #                  <p>
     #                     <code>WEB_AUTHN</code>: Respond to the challenge with the results of a
-    #                       successful authentication with a WebAuthn authenticator, or passkey, as
-    #                       <code>CREDENTIAL</code>. Examples of WebAuthn authenticators include
+    #                       successful authentication with a WebAuthn authenticator, or passkey, as 
+    #                       <code>CREDENTIAL</code>. Examples of WebAuthn authenticators include 
     #                       biometric devices and security keys.</p>
     #               </li>
     #               <li>
@@ -1211,8 +1211,8 @@ module Aws::CognitoIdentityProvider
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>SELECT_CHALLENGE</code>: Respond with a challenge selection as <code>ANSWER</code>.
-    #                   It must be one of the challenge types in the <code>AvailableChallenges</code> response
+    #                     <code>SELECT_CHALLENGE</code>: Respond with a challenge selection as <code>ANSWER</code>. 
+    #                   It must be one of the challenge types in the <code>AvailableChallenges</code> response 
     #                   parameter. Add the parameters of the selected challenge, for example <code>USERNAME</code>
     #                   and <code>SMS_OTP</code>.</p>
     #               </li>
@@ -1241,7 +1241,7 @@ module Aws::CognitoIdentityProvider
     #               <li>
     #                  <p>
     #                     <code>PASSWORD_VERIFIER</code>: Respond with the second stage of SRP secrets as
-    #                           <code>PASSWORD_CLAIM_SIGNATURE</code>, <code>PASSWORD_CLAIM_SECRET_BLOCK</code>,
+    #                           <code>PASSWORD_CLAIM_SIGNATURE</code>, <code>PASSWORD_CLAIM_SECRET_BLOCK</code>, 
     #                           and <code>TIMESTAMP</code>.</p>
     #               </li>
     #               <li>
@@ -1253,7 +1253,7 @@ module Aws::CognitoIdentityProvider
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>DEVICE_SRP_AUTH</code>: Respond with the initial parameters of device SRP
+    #                     <code>DEVICE_SRP_AUTH</code>: Respond with the initial parameters of device SRP 
     #                   authentication. For more information, see <a href="https://docs.aws.amazon.com/cognito/latest/developerguide/amazon-cognito-user-pools-device-tracking.html#user-pools-remembered-devices-signing-in-with-a-device">Signing in with a device</a>.</p>
     #               </li>
     #               <li>
@@ -1266,18 +1266,18 @@ module Aws::CognitoIdentityProvider
     #               <li>
     #                  <p>
     #                     <code>NEW_PASSWORD_REQUIRED</code>: For users who are required to change their
-    #                       passwords after successful first login. Respond to this challenge with
-    #                       <code>NEW_PASSWORD</code> and any required attributes that Amazon Cognito returned in
-    #                       the <code>requiredAttributes</code> parameter. You can also set values for
-    #                       attributes that aren't required by your user pool and that your app client
+    #                       passwords after successful first login. Respond to this challenge with 
+    #                       <code>NEW_PASSWORD</code> and any required attributes that Amazon Cognito returned in 
+    #                       the <code>requiredAttributes</code> parameter. You can also set values for 
+    #                       attributes that aren't required by your user pool and that your app client 
     #                       can write.</p>
     #                  <p>Amazon Cognito only returns this challenge for users who have temporary passwords.
-    #                       When you create passwordless users, you must provide values for all required
+    #                       When you create passwordless users, you must provide values for all required 
     #                       attributes.</p>
     #                  <note>
-    #                     <p>In a <code>NEW_PASSWORD_REQUIRED</code> challenge response, you can't modify a required attribute that already has a value.
-    #   In <code>AdminRespondToAuthChallenge</code> or <code>RespondToAuthChallenge</code>, set a value for any keys that Amazon Cognito returned in the
-    #   <code>requiredAttributes</code> parameter, then use the <code>AdminUpdateUserAttributes</code> or <code>UpdateUserAttributes</code> API
+    #                     <p>In a <code>NEW_PASSWORD_REQUIRED</code> challenge response, you can't modify a required attribute that already has a value. 
+    #   In <code>AdminRespondToAuthChallenge</code> or <code>RespondToAuthChallenge</code>, set a value for any keys that Amazon Cognito returned in the 
+    #   <code>requiredAttributes</code> parameter, then use the <code>AdminUpdateUserAttributes</code> or <code>UpdateUserAttributes</code> API 
     #   operation to modify the value of any additional attributes.</p>
     #                  </note>
     #               </li>
@@ -1286,15 +1286,15 @@ module Aws::CognitoIdentityProvider
     #                     <code>MFA_SETUP</code>: For users who are required to setup an MFA factor
     #                       before they can sign in. The MFA types activated for the user pool will be
     #                       listed in the challenge parameters <code>MFAS_CAN_SETUP</code> value. </p>
-    #                  <p>To set up time-based one-time password (TOTP) MFA, use the session returned
-    #                       in this challenge from <code>InitiateAuth</code> or <code>AdminInitiateAuth</code>
+    #                  <p>To set up time-based one-time password (TOTP) MFA, use the session returned 
+    #                       in this challenge from <code>InitiateAuth</code> or <code>AdminInitiateAuth</code> 
     #                       as an input to <code>AssociateSoftwareToken</code>. Then, use the session returned
-    #                       by <code>VerifySoftwareToken</code> as an input to
+    #                       by <code>VerifySoftwareToken</code> as an input to 
     #                       <code>RespondToAuthChallenge</code> or <code>AdminRespondToAuthChallenge</code>
     #                   with challenge name <code>MFA_SETUP</code> to complete sign-in.
     #                   </p>
-    #                  <p>To set up SMS or email MFA, collect a <code>phone_number</code> or
-    #                       <code>email</code> attribute for the user. Then restart the authentication
+    #                  <p>To set up SMS or email MFA, collect a <code>phone_number</code> or 
+    #                       <code>email</code> attribute for the user. Then restart the authentication 
     #                       flow with an <code>InitiateAuth</code> or <code>AdminInitiateAuth</code> request.
     #                   </p>
     #               </li>
@@ -1430,8 +1430,8 @@ module Aws::CognitoIdentityProvider
     # @!attribute pagination_token
     #   <p>This API operation returns a limited number of results. The pagination token is
     #   an identifier that you can present in an additional API request with the same parameters. When
-    #   you include the pagination token, Amazon Cognito returns the next set of items after the current list.
-    #   Subsequent requests return a new pagination token. By use of this token, you can paginate
+    #   you include the pagination token, Amazon Cognito returns the next set of items after the current list. 
+    #   Subsequent requests return a new pagination token. By use of this token, you can paginate 
     #   through the full list of items.</p>
     #   @return [String]
     class AdminListDevicesRequest < Struct.new(
@@ -1451,8 +1451,8 @@ module Aws::CognitoIdentityProvider
     #               device information, last-accessed and created dates, and the device key.</p>
     #   @return [Array<Types::DeviceType>]
     # @!attribute pagination_token
-    #   <p>The identifier that Amazon Cognito returned with the previous request to this operation. When
-    #   you include a pagination token in your request, Amazon Cognito returns the next set of items in
+    #   <p>The identifier that Amazon Cognito returned with the previous request to this operation. When 
+    #   you include a pagination token in your request, Amazon Cognito returns the next set of items in 
     #   the list. By use of this token, you can paginate through the full list of items.</p>
     #   @return [String]
     class AdminListDevicesResponse < Struct.new(
@@ -1480,8 +1480,8 @@ module Aws::CognitoIdentityProvider
     # @!attribute next_token
     #   <p>This API operation returns a limited number of results. The pagination token is
     #   an identifier that you can present in an additional API request with the same parameters. When
-    #   you include the pagination token, Amazon Cognito returns the next set of items after the current list.
-    #   Subsequent requests return a new pagination token. By use of this token, you can paginate
+    #   you include the pagination token, Amazon Cognito returns the next set of items after the current list. 
+    #   Subsequent requests return a new pagination token. By use of this token, you can paginate 
     #   through the full list of items.</p>
     #   @return [String]
     class AdminListGroupsForUserRequest < Struct.new(
@@ -1499,8 +1499,8 @@ module Aws::CognitoIdentityProvider
     #   <p>An array of groups and information about them.</p>
     #   @return [Array<Types::GroupType>]
     # @!attribute next_token
-    #   <p>The identifier that Amazon Cognito returned with the previous request to this operation. When
-    #   you include a pagination token in your request, Amazon Cognito returns the next set of items in
+    #   <p>The identifier that Amazon Cognito returned with the previous request to this operation. When 
+    #   you include a pagination token in your request, Amazon Cognito returns the next set of items in 
     #   the list. By use of this token, you can paginate through the full list of items.</p>
     #   @return [String]
     class AdminListGroupsForUserResponse < Struct.new(
@@ -1530,8 +1530,8 @@ module Aws::CognitoIdentityProvider
     # @!attribute next_token
     #   <p>This API operation returns a limited number of results. The pagination token is
     #   an identifier that you can present in an additional API request with the same parameters. When
-    #   you include the pagination token, Amazon Cognito returns the next set of items after the current list.
-    #   Subsequent requests return a new pagination token. By use of this token, you can paginate
+    #   you include the pagination token, Amazon Cognito returns the next set of items after the current list. 
+    #   Subsequent requests return a new pagination token. By use of this token, you can paginate 
     #   through the full list of items.</p>
     #   @return [String]
     class AdminListUserAuthEventsRequest < Struct.new(
@@ -1551,8 +1551,8 @@ module Aws::CognitoIdentityProvider
     #               <code>EventResponse</code>.</p>
     #   @return [Array<Types::AuthEventType>]
     # @!attribute next_token
-    #   <p>The identifier that Amazon Cognito returned with the previous request to this operation. When
-    #   you include a pagination token in your request, Amazon Cognito returns the next set of items in
+    #   <p>The identifier that Amazon Cognito returned with the previous request to this operation. When 
+    #   you include a pagination token in your request, Amazon Cognito returns the next set of items in 
     #   the list. By use of this token, you can paginate through the full list of items.</p>
     #   @return [String]
     class AdminListUserAuthEventsResponse < Struct.new(
@@ -1663,15 +1663,15 @@ module Aws::CognitoIdentityProvider
     #            <p>Possible challenges include the following:</p>
     #            <note>
     #               <p>All of the following challenges require <code>USERNAME</code> and, when the app
-    #                   client has a client secret, <code>SECRET_HASH</code> in the parameters. Include a
+    #                   client has a client secret, <code>SECRET_HASH</code> in the parameters. Include a 
     #                   <code>DEVICE_KEY</code> for device authentication.</p>
     #            </note>
     #            <ul>
     #               <li>
     #                  <p>
     #                     <code>WEB_AUTHN</code>: Respond to the challenge with the results of a
-    #                       successful authentication with a WebAuthn authenticator, or passkey, as
-    #                       <code>CREDENTIAL</code>. Examples of WebAuthn authenticators include
+    #                       successful authentication with a WebAuthn authenticator, or passkey, as 
+    #                       <code>CREDENTIAL</code>. Examples of WebAuthn authenticators include 
     #                       biometric devices and security keys.</p>
     #               </li>
     #               <li>
@@ -1684,8 +1684,8 @@ module Aws::CognitoIdentityProvider
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>SELECT_CHALLENGE</code>: Respond with a challenge selection as <code>ANSWER</code>.
-    #                   It must be one of the challenge types in the <code>AvailableChallenges</code> response
+    #                     <code>SELECT_CHALLENGE</code>: Respond with a challenge selection as <code>ANSWER</code>. 
+    #                   It must be one of the challenge types in the <code>AvailableChallenges</code> response 
     #                   parameter. Add the parameters of the selected challenge, for example <code>USERNAME</code>
     #                   and <code>SMS_OTP</code>.</p>
     #               </li>
@@ -1714,7 +1714,7 @@ module Aws::CognitoIdentityProvider
     #               <li>
     #                  <p>
     #                     <code>PASSWORD_VERIFIER</code>: Respond with the second stage of SRP secrets as
-    #                           <code>PASSWORD_CLAIM_SIGNATURE</code>, <code>PASSWORD_CLAIM_SECRET_BLOCK</code>,
+    #                           <code>PASSWORD_CLAIM_SIGNATURE</code>, <code>PASSWORD_CLAIM_SECRET_BLOCK</code>, 
     #                           and <code>TIMESTAMP</code>.</p>
     #               </li>
     #               <li>
@@ -1726,7 +1726,7 @@ module Aws::CognitoIdentityProvider
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>DEVICE_SRP_AUTH</code>: Respond with the initial parameters of device SRP
+    #                     <code>DEVICE_SRP_AUTH</code>: Respond with the initial parameters of device SRP 
     #                   authentication. For more information, see <a href="https://docs.aws.amazon.com/cognito/latest/developerguide/amazon-cognito-user-pools-device-tracking.html#user-pools-remembered-devices-signing-in-with-a-device">Signing in with a device</a>.</p>
     #               </li>
     #               <li>
@@ -1739,18 +1739,18 @@ module Aws::CognitoIdentityProvider
     #               <li>
     #                  <p>
     #                     <code>NEW_PASSWORD_REQUIRED</code>: For users who are required to change their
-    #                       passwords after successful first login. Respond to this challenge with
-    #                       <code>NEW_PASSWORD</code> and any required attributes that Amazon Cognito returned in
-    #                       the <code>requiredAttributes</code> parameter. You can also set values for
-    #                       attributes that aren't required by your user pool and that your app client
+    #                       passwords after successful first login. Respond to this challenge with 
+    #                       <code>NEW_PASSWORD</code> and any required attributes that Amazon Cognito returned in 
+    #                       the <code>requiredAttributes</code> parameter. You can also set values for 
+    #                       attributes that aren't required by your user pool and that your app client 
     #                       can write.</p>
     #                  <p>Amazon Cognito only returns this challenge for users who have temporary passwords.
-    #                       When you create passwordless users, you must provide values for all required
+    #                       When you create passwordless users, you must provide values for all required 
     #                       attributes.</p>
     #                  <note>
-    #                     <p>In a <code>NEW_PASSWORD_REQUIRED</code> challenge response, you can't modify a required attribute that already has a value.
-    #   In <code>AdminRespondToAuthChallenge</code> or <code>RespondToAuthChallenge</code>, set a value for any keys that Amazon Cognito returned in the
-    #   <code>requiredAttributes</code> parameter, then use the <code>AdminUpdateUserAttributes</code> or <code>UpdateUserAttributes</code> API
+    #                     <p>In a <code>NEW_PASSWORD_REQUIRED</code> challenge response, you can't modify a required attribute that already has a value. 
+    #   In <code>AdminRespondToAuthChallenge</code> or <code>RespondToAuthChallenge</code>, set a value for any keys that Amazon Cognito returned in the 
+    #   <code>requiredAttributes</code> parameter, then use the <code>AdminUpdateUserAttributes</code> or <code>UpdateUserAttributes</code> API 
     #   operation to modify the value of any additional attributes.</p>
     #                  </note>
     #               </li>
@@ -1759,15 +1759,15 @@ module Aws::CognitoIdentityProvider
     #                     <code>MFA_SETUP</code>: For users who are required to setup an MFA factor
     #                       before they can sign in. The MFA types activated for the user pool will be
     #                       listed in the challenge parameters <code>MFAS_CAN_SETUP</code> value. </p>
-    #                  <p>To set up time-based one-time password (TOTP) MFA, use the session returned
-    #                       in this challenge from <code>InitiateAuth</code> or <code>AdminInitiateAuth</code>
+    #                  <p>To set up time-based one-time password (TOTP) MFA, use the session returned 
+    #                       in this challenge from <code>InitiateAuth</code> or <code>AdminInitiateAuth</code> 
     #                       as an input to <code>AssociateSoftwareToken</code>. Then, use the session returned
-    #                       by <code>VerifySoftwareToken</code> as an input to
+    #                       by <code>VerifySoftwareToken</code> as an input to 
     #                       <code>RespondToAuthChallenge</code> or <code>AdminRespondToAuthChallenge</code>
     #                   with challenge name <code>MFA_SETUP</code> to complete sign-in.
     #                   </p>
-    #                  <p>To set up SMS or email MFA, collect a <code>phone_number</code> or
-    #                       <code>email</code> attribute for the user. Then restart the authentication
+    #                  <p>To set up SMS or email MFA, collect a <code>phone_number</code> or 
+    #                       <code>email</code> attribute for the user. Then restart the authentication 
     #                       flow with an <code>InitiateAuth</code> or <code>AdminInitiateAuth</code> request.
     #                   </p>
     #               </li>
@@ -1790,7 +1790,7 @@ module Aws::CognitoIdentityProvider
     #               "USERNAME": "[username]",
     #               "ANSWER": "[Challenge name]"}</code>
     #                  </p>
-    #                  <p>Available challenges are <code>PASSWORD</code>, <code>PASSWORD_SRP</code>,
+    #                  <p>Available challenges are <code>PASSWORD</code>, <code>PASSWORD_SRP</code>, 
     #               <code>EMAIL_OTP</code>, <code>SMS_OTP</code>, and <code>WEB_AUTHN</code>.</p>
     #                  <p>Complete authentication in the <code>SELECT_CHALLENGE</code> response for
     #               <code>PASSWORD</code>, <code>PASSWORD_SRP</code>, and <code>WEB_AUTHN</code>:</p>
@@ -1871,7 +1871,7 @@ module Aws::CognitoIdentityProvider
     #               <dt>SMS_OTP</dt>
     #               <dd>
     #                  <p>
-    #                     <code>"ChallengeName": "SMS_OTP", "ChallengeResponses":
+    #                     <code>"ChallengeName": "SMS_OTP", "ChallengeResponses": 
     #               {"SMS_OTP_CODE": "[code]", "USERNAME": "[username]"}</code>
     #                  </p>
     #               </dd>
@@ -1891,7 +1891,7 @@ module Aws::CognitoIdentityProvider
     #               </dd>
     #               <dt>PASSWORD_VERIFIER</dt>
     #               <dd>
-    #                  <p>This challenge response is part of the SRP flow. Amazon Cognito requires
+    #                  <p>This challenge response is part of the SRP flow. Amazon Cognito requires 
     #               that your application respond to this challenge within a few seconds. When
     #               the response time exceeds this period, your user pool returns a
     #               <code>NotAuthorizedException</code> error.</p>
@@ -1922,9 +1922,9 @@ module Aws::CognitoIdentityProvider
     #                   This parameter can also set values for writable attributes that aren't
     #                   required by your user pool.</p>
     #                  <note>
-    #                     <p>In a <code>NEW_PASSWORD_REQUIRED</code> challenge response, you can't modify a required attribute that already has a value.
-    #   In <code>AdminRespondToAuthChallenge</code> or <code>RespondToAuthChallenge</code>, set a value for any keys that Amazon Cognito returned in the
-    #   <code>requiredAttributes</code> parameter, then use the <code>AdminUpdateUserAttributes</code> or <code>UpdateUserAttributes</code> API
+    #                     <p>In a <code>NEW_PASSWORD_REQUIRED</code> challenge response, you can't modify a required attribute that already has a value. 
+    #   In <code>AdminRespondToAuthChallenge</code> or <code>RespondToAuthChallenge</code>, set a value for any keys that Amazon Cognito returned in the 
+    #   <code>requiredAttributes</code> parameter, then use the <code>AdminUpdateUserAttributes</code> or <code>UpdateUserAttributes</code> API 
     #   operation to modify the value of any additional attributes.</p>
     #                  </note>
     #               </dd>
@@ -1981,12 +1981,12 @@ module Aws::CognitoIdentityProvider
     #                   <code>AdminRespondToAuthChallenge</code> request.</p>
     #   @return [String]
     # @!attribute analytics_metadata
-    #   <p>Information that supports analytics outcomes with Amazon Pinpoint, including the
-    #   user's endpoint ID. The endpoint ID is a destination for Amazon Pinpoint push notifications, for example a device identifier,
+    #   <p>Information that supports analytics outcomes with Amazon Pinpoint, including the 
+    #   user's endpoint ID. The endpoint ID is a destination for Amazon Pinpoint push notifications, for example a device identifier, 
     #   email address, or phone number.</p>
     #   @return [Types::AnalyticsMetadataType]
     # @!attribute context_data
-    #   <p>Contextual data about your user session like the device fingerprint, IP address, or location. Amazon Cognito threat
+    #   <p>Contextual data about your user session like the device fingerprint, IP address, or location. Amazon Cognito threat 
     #   protection evaluates the risk of an authentication event based on the context that your app generates and passes to Amazon Cognito
     #   when it makes API requests.</p>
     #            <p>For more information, see <a href="https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-settings-viewing-threat-protection-app.html">Collecting data for threat protection in
@@ -2044,15 +2044,15 @@ module Aws::CognitoIdentityProvider
     #            <p>Possible challenges include the following:</p>
     #            <note>
     #               <p>All of the following challenges require <code>USERNAME</code> and, when the app
-    #                   client has a client secret, <code>SECRET_HASH</code> in the parameters. Include a
+    #                   client has a client secret, <code>SECRET_HASH</code> in the parameters. Include a 
     #                   <code>DEVICE_KEY</code> for device authentication.</p>
     #            </note>
     #            <ul>
     #               <li>
     #                  <p>
     #                     <code>WEB_AUTHN</code>: Respond to the challenge with the results of a
-    #                       successful authentication with a WebAuthn authenticator, or passkey, as
-    #                       <code>CREDENTIAL</code>. Examples of WebAuthn authenticators include
+    #                       successful authentication with a WebAuthn authenticator, or passkey, as 
+    #                       <code>CREDENTIAL</code>. Examples of WebAuthn authenticators include 
     #                       biometric devices and security keys.</p>
     #               </li>
     #               <li>
@@ -2065,8 +2065,8 @@ module Aws::CognitoIdentityProvider
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>SELECT_CHALLENGE</code>: Respond with a challenge selection as <code>ANSWER</code>.
-    #                   It must be one of the challenge types in the <code>AvailableChallenges</code> response
+    #                     <code>SELECT_CHALLENGE</code>: Respond with a challenge selection as <code>ANSWER</code>. 
+    #                   It must be one of the challenge types in the <code>AvailableChallenges</code> response 
     #                   parameter. Add the parameters of the selected challenge, for example <code>USERNAME</code>
     #                   and <code>SMS_OTP</code>.</p>
     #               </li>
@@ -2095,7 +2095,7 @@ module Aws::CognitoIdentityProvider
     #               <li>
     #                  <p>
     #                     <code>PASSWORD_VERIFIER</code>: Respond with the second stage of SRP secrets as
-    #                           <code>PASSWORD_CLAIM_SIGNATURE</code>, <code>PASSWORD_CLAIM_SECRET_BLOCK</code>,
+    #                           <code>PASSWORD_CLAIM_SIGNATURE</code>, <code>PASSWORD_CLAIM_SECRET_BLOCK</code>, 
     #                           and <code>TIMESTAMP</code>.</p>
     #               </li>
     #               <li>
@@ -2107,7 +2107,7 @@ module Aws::CognitoIdentityProvider
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>DEVICE_SRP_AUTH</code>: Respond with the initial parameters of device SRP
+    #                     <code>DEVICE_SRP_AUTH</code>: Respond with the initial parameters of device SRP 
     #                   authentication. For more information, see <a href="https://docs.aws.amazon.com/cognito/latest/developerguide/amazon-cognito-user-pools-device-tracking.html#user-pools-remembered-devices-signing-in-with-a-device">Signing in with a device</a>.</p>
     #               </li>
     #               <li>
@@ -2120,18 +2120,18 @@ module Aws::CognitoIdentityProvider
     #               <li>
     #                  <p>
     #                     <code>NEW_PASSWORD_REQUIRED</code>: For users who are required to change their
-    #                       passwords after successful first login. Respond to this challenge with
-    #                       <code>NEW_PASSWORD</code> and any required attributes that Amazon Cognito returned in
-    #                       the <code>requiredAttributes</code> parameter. You can also set values for
-    #                       attributes that aren't required by your user pool and that your app client
+    #                       passwords after successful first login. Respond to this challenge with 
+    #                       <code>NEW_PASSWORD</code> and any required attributes that Amazon Cognito returned in 
+    #                       the <code>requiredAttributes</code> parameter. You can also set values for 
+    #                       attributes that aren't required by your user pool and that your app client 
     #                       can write.</p>
     #                  <p>Amazon Cognito only returns this challenge for users who have temporary passwords.
-    #                       When you create passwordless users, you must provide values for all required
+    #                       When you create passwordless users, you must provide values for all required 
     #                       attributes.</p>
     #                  <note>
-    #                     <p>In a <code>NEW_PASSWORD_REQUIRED</code> challenge response, you can't modify a required attribute that already has a value.
-    #   In <code>AdminRespondToAuthChallenge</code> or <code>RespondToAuthChallenge</code>, set a value for any keys that Amazon Cognito returned in the
-    #   <code>requiredAttributes</code> parameter, then use the <code>AdminUpdateUserAttributes</code> or <code>UpdateUserAttributes</code> API
+    #                     <p>In a <code>NEW_PASSWORD_REQUIRED</code> challenge response, you can't modify a required attribute that already has a value. 
+    #   In <code>AdminRespondToAuthChallenge</code> or <code>RespondToAuthChallenge</code>, set a value for any keys that Amazon Cognito returned in the 
+    #   <code>requiredAttributes</code> parameter, then use the <code>AdminUpdateUserAttributes</code> or <code>UpdateUserAttributes</code> API 
     #   operation to modify the value of any additional attributes.</p>
     #                  </note>
     #               </li>
@@ -2140,15 +2140,15 @@ module Aws::CognitoIdentityProvider
     #                     <code>MFA_SETUP</code>: For users who are required to setup an MFA factor
     #                       before they can sign in. The MFA types activated for the user pool will be
     #                       listed in the challenge parameters <code>MFAS_CAN_SETUP</code> value. </p>
-    #                  <p>To set up time-based one-time password (TOTP) MFA, use the session returned
-    #                       in this challenge from <code>InitiateAuth</code> or <code>AdminInitiateAuth</code>
+    #                  <p>To set up time-based one-time password (TOTP) MFA, use the session returned 
+    #                       in this challenge from <code>InitiateAuth</code> or <code>AdminInitiateAuth</code> 
     #                       as an input to <code>AssociateSoftwareToken</code>. Then, use the session returned
-    #                       by <code>VerifySoftwareToken</code> as an input to
+    #                       by <code>VerifySoftwareToken</code> as an input to 
     #                       <code>RespondToAuthChallenge</code> or <code>AdminRespondToAuthChallenge</code>
     #                   with challenge name <code>MFA_SETUP</code> to complete sign-in.
     #                   </p>
-    #                  <p>To set up SMS or email MFA, collect a <code>phone_number</code> or
-    #                       <code>email</code> attribute for the user. Then restart the authentication
+    #                  <p>To set up SMS or email MFA, collect a <code>phone_number</code> or 
+    #                       <code>email</code> attribute for the user. Then restart the authentication 
     #                       flow with an <code>InitiateAuth</code> or <code>AdminInitiateAuth</code> request.
     #                   </p>
     #               </li>
@@ -2333,7 +2333,7 @@ module Aws::CognitoIdentityProvider
     #   <p>Your feedback to the authentication event. When you provide a <code>FeedbackValue</code>
     #   value of <code>valid</code>, you tell Amazon Cognito that you trust a user session where Amazon Cognito
     #   has evaluated some level of risk. When you provide a <code>FeedbackValue</code> value of
-    #   <code>invalid</code>, you tell Amazon Cognito that you don't trust a user session, or you
+    #   <code>invalid</code>, you tell Amazon Cognito that you don't trust a user session, or you 
     #   don't believe that Amazon Cognito evaluated a high-enough risk level.</p>
     #   @return [String]
     class AdminUpdateAuthEventFeedbackRequest < Struct.new(
@@ -2625,7 +2625,7 @@ module Aws::CognitoIdentityProvider
     end
 
     # @!attribute access_token
-    #   <p>A valid access token that Amazon Cognito issued to the currently signed-in user. Must include a scope claim for
+    #   <p>A valid access token that Amazon Cognito issued to the currently signed-in user. Must include a scope claim for 
     #   <code>aws.cognito.signin.user.admin</code>.</p>
     #            <p>You can provide either an access token or a session ID in the request.</p>
     #   @return [String]
@@ -2696,7 +2696,7 @@ module Aws::CognitoIdentityProvider
     #   <p>The type of authentication event.</p>
     #   @return [String]
     # @!attribute creation_date
-    #   <p>The date and time when the item was created. Amazon Cognito returns this timestamp in UNIX epoch time format. Your SDK might render the output in a
+    #   <p>The date and time when the item was created. Amazon Cognito returns this timestamp in UNIX epoch time format. Your SDK might render the output in a 
     #   human-readable format like ISO 8601 or a Java <code>Date</code> object.</p>
     #   @return [Time]
     # @!attribute event_response
@@ -2792,7 +2792,7 @@ module Aws::CognitoIdentityProvider
     #             "USERNAME": "[username]",
     #             "ANSWER": "[Challenge name]"}</code>
     #                </p>
-    #                <p>Available challenges are <code>PASSWORD</code>, <code>PASSWORD_SRP</code>,
+    #                <p>Available challenges are <code>PASSWORD</code>, <code>PASSWORD_SRP</code>, 
     #             <code>EMAIL_OTP</code>, <code>SMS_OTP</code>, and <code>WEB_AUTHN</code>.</p>
     #                <p>Complete authentication in the <code>SELECT_CHALLENGE</code> response for
     #             <code>PASSWORD</code>, <code>PASSWORD_SRP</code>, and <code>WEB_AUTHN</code>:</p>
@@ -2873,7 +2873,7 @@ module Aws::CognitoIdentityProvider
     #             <dt>SMS_OTP</dt>
     #             <dd>
     #                <p>
-    #                   <code>"ChallengeName": "SMS_OTP", "ChallengeResponses":
+    #                   <code>"ChallengeName": "SMS_OTP", "ChallengeResponses": 
     #             {"SMS_OTP_CODE": "[code]", "USERNAME": "[username]"}</code>
     #                </p>
     #             </dd>
@@ -2893,7 +2893,7 @@ module Aws::CognitoIdentityProvider
     #             </dd>
     #             <dt>PASSWORD_VERIFIER</dt>
     #             <dd>
-    #                <p>This challenge response is part of the SRP flow. Amazon Cognito requires
+    #                <p>This challenge response is part of the SRP flow. Amazon Cognito requires 
     #             that your application respond to this challenge within a few seconds. When
     #             the response time exceeds this period, your user pool returns a
     #             <code>NotAuthorizedException</code> error.</p>
@@ -2924,9 +2924,9 @@ module Aws::CognitoIdentityProvider
     #                 This parameter can also set values for writable attributes that aren't
     #                 required by your user pool.</p>
     #                <note>
-    #                   <p>In a <code>NEW_PASSWORD_REQUIRED</code> challenge response, you can't modify a required attribute that already has a value.
-    # In <code>AdminRespondToAuthChallenge</code> or <code>RespondToAuthChallenge</code>, set a value for any keys that Amazon Cognito returned in the
-    # <code>requiredAttributes</code> parameter, then use the <code>AdminUpdateUserAttributes</code> or <code>UpdateUserAttributes</code> API
+    #                   <p>In a <code>NEW_PASSWORD_REQUIRED</code> challenge response, you can't modify a required attribute that already has a value. 
+    # In <code>AdminRespondToAuthChallenge</code> or <code>RespondToAuthChallenge</code>, set a value for any keys that Amazon Cognito returned in the 
+    # <code>requiredAttributes</code> parameter, then use the <code>AdminUpdateUserAttributes</code> or <code>UpdateUserAttributes</code> API 
     # operation to modify the value of any additional attributes.</p>
     #                </note>
     #             </dd>
@@ -3134,7 +3134,7 @@ module Aws::CognitoIdentityProvider
     end
 
     # @!attribute access_token
-    #   <p>A valid access token that Amazon Cognito issued to the currently signed-in user. Must include a scope claim for
+    #   <p>A valid access token that Amazon Cognito issued to the currently signed-in user. Must include a scope claim for 
     #   <code>aws.cognito.signin.user.admin</code>.</p>
     #   @return [String]
     # @!attribute credential
@@ -3204,7 +3204,7 @@ module Aws::CognitoIdentityProvider
 
     # <p>The confirm-device request.</p>
     # @!attribute access_token
-    #   <p>A valid access token that Amazon Cognito issued to the currently signed-in user. Must include a scope claim for
+    #   <p>A valid access token that Amazon Cognito issued to the currently signed-in user. Must include a scope claim for 
     #   <code>aws.cognito.signin.user.admin</code>.</p>
     #   @return [String]
     # @!attribute device_key
@@ -3279,12 +3279,12 @@ module Aws::CognitoIdentityProvider
     #   <p>The new password that your user wants to set.</p>
     #   @return [String]
     # @!attribute analytics_metadata
-    #   <p>Information that supports analytics outcomes with Amazon Pinpoint, including the
-    #   user's endpoint ID. The endpoint ID is a destination for Amazon Pinpoint push notifications, for example a device identifier,
+    #   <p>Information that supports analytics outcomes with Amazon Pinpoint, including the 
+    #   user's endpoint ID. The endpoint ID is a destination for Amazon Pinpoint push notifications, for example a device identifier, 
     #   email address, or phone number.</p>
     #   @return [Types::AnalyticsMetadataType]
     # @!attribute user_context_data
-    #   <p>Contextual data about your user session like the device fingerprint, IP address, or location. Amazon Cognito threat
+    #   <p>Contextual data about your user session like the device fingerprint, IP address, or location. Amazon Cognito threat 
     #   protection evaluates the risk of an authentication event based on the context that your app generates and passes to Amazon Cognito
     #   when it makes API requests.</p>
     #            <p>For more information, see <a href="https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-settings-viewing-threat-protection-app.html">Collecting data for threat protection in
@@ -3381,12 +3381,12 @@ module Aws::CognitoIdentityProvider
     #            <p>For more information about sign-in aliases, see <a href="https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-settings-attributes.html#user-pool-settings-aliases">Customizing sign-in attributes</a>.</p>
     #   @return [Boolean]
     # @!attribute analytics_metadata
-    #   <p>Information that supports analytics outcomes with Amazon Pinpoint, including the
-    #   user's endpoint ID. The endpoint ID is a destination for Amazon Pinpoint push notifications, for example a device identifier,
+    #   <p>Information that supports analytics outcomes with Amazon Pinpoint, including the 
+    #   user's endpoint ID. The endpoint ID is a destination for Amazon Pinpoint push notifications, for example a device identifier, 
     #   email address, or phone number.</p>
     #   @return [Types::AnalyticsMetadataType]
     # @!attribute user_context_data
-    #   <p>Contextual data about your user session like the device fingerprint, IP address, or location. Amazon Cognito threat
+    #   <p>Contextual data about your user session like the device fingerprint, IP address, or location. Amazon Cognito threat 
     #   protection evaluates the risk of an authentication event based on the context that your app generates and passes to Amazon Cognito
     #   when it makes API requests.</p>
     #            <p>For more information, see <a href="https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-settings-viewing-threat-protection-app.html">Collecting data for threat protection in
@@ -3598,11 +3598,11 @@ module Aws::CognitoIdentityProvider
     #                       "rsa-sha256" }</code>
     #                  </p>
     #                  <p>Create or update request with Metadata file: <code>"ProviderDetails": { "IDPInit": "true",
-    #                       "IDPSignout": "true", "EncryptedResponses" : "true",
+    #                       "IDPSignout": "true", "EncryptedResponses" : "true",  
     #                       "MetadataFile": "[metadata XML]", "RequestSigningAlgorithm":
     #                       "rsa-sha256" }</code>
     #                  </p>
-    #                  <p>The value of <code>MetadataFile</code> must be the plaintext metadata document with all
+    #                  <p>The value of <code>MetadataFile</code> must be the plaintext metadata document with all 
     #                   quote (") characters escaped by backslashes.</p>
     #                  <p>Describe response: <code>"ProviderDetails": { "IDPInit": "true",
     #                       "IDPSignout": "true", "EncryptedResponses" : "true", "ActiveEncryptionCertificate": "[certificate]",
@@ -3650,7 +3650,7 @@ module Aws::CognitoIdentityProvider
     #               <dt>SignInWithApple</dt>
     #               <dd>
     #                  <p>Create or update request: <code>"ProviderDetails": { "authorize_scopes":
-    #                       "email name", "client_id": "com.example.cognito", "private_key": "1EXAMPLE",
+    #                       "email name", "client_id": "com.example.cognito", "private_key": "1EXAMPLE", 
     #                       "key_id": "2EXAMPLE", "team_id": "3EXAMPLE" }</code>
     #                  </p>
     #                  <p>Describe response: <code>"ProviderDetails": {
@@ -3664,15 +3664,15 @@ module Aws::CognitoIdentityProvider
     #               </dd>
     #               <dt>Facebook</dt>
     #               <dd>
-    #                  <p>Create or update request: <code>"ProviderDetails": { "api_version": "v17.0",
-    #               "authorize_scopes": "public_profile, email", "client_id": "1example23456789",
+    #                  <p>Create or update request: <code>"ProviderDetails": { "api_version": "v17.0", 
+    #               "authorize_scopes": "public_profile, email", "client_id": "1example23456789", 
     #               "client_secret": "provider-app-client-secret" }</code>
     #                  </p>
-    #                  <p>Describe response: <code>"ProviderDetails":
-    #               { "api_version": "v17.0", "attributes_url": "https://graph.facebook.com/v17.0/me?fields=",
-    #               "attributes_url_add_attributes": "true", "authorize_scopes": "public_profile, email",
-    #               "authorize_url": "https://www.facebook.com/v17.0/dialog/oauth", "client_id":
-    #               "1example23456789", "client_secret": "provider-app-client-secret", "token_request_method":
+    #                  <p>Describe response: <code>"ProviderDetails": 
+    #               { "api_version": "v17.0", "attributes_url": "https://graph.facebook.com/v17.0/me?fields=", 
+    #               "attributes_url_add_attributes": "true", "authorize_scopes": "public_profile, email", 
+    #               "authorize_url": "https://www.facebook.com/v17.0/dialog/oauth", "client_id": 
+    #               "1example23456789", "client_secret": "provider-app-client-secret", "token_request_method": 
     #               "GET", "token_url": "https://graph.facebook.com/v17.0/oauth/access_token" }</code>
     #                  </p>
     #               </dd>
@@ -3948,42 +3948,42 @@ module Aws::CognitoIdentityProvider
     #   <p>A custom client secret that you want to use for the app client. You cannot specify both GenerateSecret as true and provide a ClientSecret value.</p>
     #   @return [String]
     # @!attribute refresh_token_validity
-    #   <p>The refresh token time limit. After this limit expires, your user can't use
-    #   their refresh token. To specify the time unit for <code>RefreshTokenValidity</code> as
-    #   <code>seconds</code>, <code>minutes</code>, <code>hours</code>, or <code>days</code>,
+    #   <p>The refresh token time limit. After this limit expires, your user can't use 
+    #   their refresh token. To specify the time unit for <code>RefreshTokenValidity</code> as 
+    #   <code>seconds</code>, <code>minutes</code>, <code>hours</code>, or <code>days</code>, 
     #   set a <code>TokenValidityUnits</code> value in your API request.</p>
     #            <p>For example, when you set <code>RefreshTokenValidity</code> as <code>10</code> and
     #   <code>TokenValidityUnits</code> as <code>days</code>, your user can refresh their session
     #   and retrieve new access and ID tokens for 10 days.</p>
-    #            <p>The default time unit for <code>RefreshTokenValidity</code> in an API request is days.
-    #   You can't set <code>RefreshTokenValidity</code> to 0. If you do, Amazon Cognito overrides the
-    #   value with the default value of 30 days. <i>Valid range</i> is displayed below
+    #            <p>The default time unit for <code>RefreshTokenValidity</code> in an API request is days. 
+    #   You can't set <code>RefreshTokenValidity</code> to 0. If you do, Amazon Cognito overrides the 
+    #   value with the default value of 30 days. <i>Valid range</i> is displayed below 
     #   in seconds.</p>
     #            <p>If you don't specify otherwise in the configuration of your app client, your refresh
     #   tokens are valid for 30 days.</p>
     #   @return [Integer]
     # @!attribute access_token_validity
-    #   <p>The access token time limit. After this limit expires, your user can't use
-    #   their access token. To specify the time unit for <code>AccessTokenValidity</code> as
-    #   <code>seconds</code>, <code>minutes</code>, <code>hours</code>, or <code>days</code>,
+    #   <p>The access token time limit. After this limit expires, your user can't use 
+    #   their access token. To specify the time unit for <code>AccessTokenValidity</code> as 
+    #   <code>seconds</code>, <code>minutes</code>, <code>hours</code>, or <code>days</code>, 
     #   set a <code>TokenValidityUnits</code> value in your API request.</p>
     #            <p>For example, when you set <code>AccessTokenValidity</code> to <code>10</code> and
     #   <code>TokenValidityUnits</code> to <code>hours</code>, your user can authorize access with
     #   their access token for 10 hours.</p>
-    #            <p>The default time unit for <code>AccessTokenValidity</code> in an API request is hours.
+    #            <p>The default time unit for <code>AccessTokenValidity</code> in an API request is hours. 
     #   <i>Valid range</i> is displayed below in seconds.</p>
     #            <p>If you don't specify otherwise in the configuration of your app client, your access
     #   tokens are valid for one hour.</p>
     #   @return [Integer]
     # @!attribute id_token_validity
-    #   <p>The ID token time limit. After this limit expires, your user can't use
-    #   their ID token. To specify the time unit for <code>IdTokenValidity</code> as
-    #   <code>seconds</code>, <code>minutes</code>, <code>hours</code>, or <code>days</code>,
+    #   <p>The ID token time limit. After this limit expires, your user can't use 
+    #   their ID token. To specify the time unit for <code>IdTokenValidity</code> as 
+    #   <code>seconds</code>, <code>minutes</code>, <code>hours</code>, or <code>days</code>, 
     #   set a <code>TokenValidityUnits</code> value in your API request.</p>
     #            <p>For example, when you set <code>IdTokenValidity</code> as <code>10</code> and
-    #   <code>TokenValidityUnits</code> as <code>hours</code>, your user can authenticate their
+    #   <code>TokenValidityUnits</code> as <code>hours</code>, your user can authenticate their 
     #   session with their ID token for 10 hours.</p>
-    #            <p>The default time unit for <code>IdTokenValidity</code> in an API request is hours.
+    #            <p>The default time unit for <code>IdTokenValidity</code> in an API request is hours. 
     #   <i>Valid range</i> is displayed below in seconds.</p>
     #            <p>If you don't specify otherwise in the configuration of your app client, your ID
     #   tokens are valid for one hour.</p>
@@ -4022,12 +4022,12 @@ module Aws::CognitoIdentityProvider
     #       pool</a>.</p>
     #   @return [Array<String>]
     # @!attribute explicit_auth_flows
-    #   <p>The <a href="https://docs.aws.amazon.com/cognito/latest/developerguide/amazon-cognito-user-pools-authentication-flow-methods.html">authentication flows</a> that you want your user pool client to support. For each app
-    #   client in your user pool, you can sign in your users with any combination of one or more flows, including with
-    #   a user name and Secure Remote Password (SRP), a user name and password, or a custom authentication process that
+    #   <p>The <a href="https://docs.aws.amazon.com/cognito/latest/developerguide/amazon-cognito-user-pools-authentication-flow-methods.html">authentication flows</a> that you want your user pool client to support. For each app 
+    #   client in your user pool, you can sign in your users with any combination of one or more flows, including with 
+    #   a user name and Secure Remote Password (SRP), a user name and password, or a custom authentication process that 
     #   you define with Lambda functions.</p>
     #            <note>
-    #               <p>If you don't specify a value for <code>ExplicitAuthFlows</code>, your app client supports
+    #               <p>If you don't specify a value for <code>ExplicitAuthFlows</code>, your app client supports 
     #   <code>ALLOW_REFRESH_TOKEN_AUTH</code>, <code>ALLOW_USER_SRP_AUTH</code>, and <code>ALLOW_CUSTOM_AUTH</code>.
     #   </p>
     #            </note>
@@ -4040,7 +4040,7 @@ module Aws::CognitoIdentityProvider
     #               secure remote password (SRP), passwordless, and passkey authentication.
     #               This authentiation flow can do username-password and SRP authentication
     #               without other <code>ExplicitAuthFlows</code> permitting them. For example
-    #               users can complete an SRP challenge through <code>USER_AUTH</code>
+    #               users can complete an SRP challenge through <code>USER_AUTH</code> 
     #               without the flow <code>USER_SRP_AUTH</code> being active for the app
     #               client. This flow doesn't include <code>CUSTOM_AUTH</code>.
     #           </p>
@@ -4052,7 +4052,7 @@ module Aws::CognitoIdentityProvider
     #                     <code>ALLOW_ADMIN_USER_PASSWORD_AUTH</code>: Enable admin based user password
     #               authentication flow <code>ADMIN_USER_PASSWORD_AUTH</code>. This setting replaces
     #               the <code>ADMIN_NO_SRP_AUTH</code> setting. With this authentication flow, your app
-    #               passes a user name and password to Amazon Cognito in the request, instead of using the Secure
+    #               passes a user name and password to Amazon Cognito in the request, instead of using the Secure 
     #               Remote Password (SRP) protocol to securely transmit the password.</p>
     #               </li>
     #               <li>
@@ -4076,7 +4076,7 @@ module Aws::CognitoIdentityProvider
     #               tokens.</p>
     #               </li>
     #            </ul>
-    #            <p>In some environments, you will see the values <code>ADMIN_NO_SRP_AUTH</code>, <code>CUSTOM_AUTH_FLOW_ONLY</code>, or <code>USER_PASSWORD_AUTH</code>.
+    #            <p>In some environments, you will see the values <code>ADMIN_NO_SRP_AUTH</code>, <code>CUSTOM_AUTH_FLOW_ONLY</code>, or <code>USER_PASSWORD_AUTH</code>. 
     #   You can't assign these legacy <code>ExplicitAuthFlows</code> values to user pool clients at the same time as values that begin with <code>ALLOW_</code>,
     #   like <code>ALLOW_USER_SRP_AUTH</code>.</p>
     #   @return [Array<String>]
@@ -4086,10 +4086,10 @@ module Aws::CognitoIdentityProvider
     #               <code>Google</code>, <code>SignInWithApple</code>, and <code>LoginWithAmazon</code>.
     #               You can also specify the names that you configured for the SAML and OIDC IdPs in your
     #               user pool, for example <code>MySAMLIdP</code> or <code>MyOIDCIdP</code>.</p>
-    #            <p>This parameter sets the IdPs that <a href="https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-managed-login.html">managed
-    #               login</a> will display on the login page for your app client. The removal of
-    #               <code>COGNITO</code> from this list doesn't prevent authentication operations
-    #               for local users with the user pools API in an Amazon Web Services SDK. The only way to prevent
+    #            <p>This parameter sets the IdPs that <a href="https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-managed-login.html">managed 
+    #               login</a> will display on the login page for your app client. The removal of 
+    #               <code>COGNITO</code> from this list doesn't prevent authentication operations 
+    #               for local users with the user pools API in an Amazon Web Services SDK. The only way to prevent 
     #               SDK-based authentication is to block access with a <a href="https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-waf.html">WAF rule</a>.
     #           </p>
     #   @return [Array<String>]
@@ -4171,7 +4171,7 @@ module Aws::CognitoIdentityProvider
     #   @return [Array<String>]
     # @!attribute allowed_o_auth_flows_user_pool_client
     #   <p>Set to <code>true</code> to use OAuth 2.0 authorization server features in your app client.</p>
-    #            <p>This parameter must have a value of <code>true</code> before you can configure
+    #            <p>This parameter must have a value of <code>true</code> before you can configure 
     #   the following features in your app client.</p>
     #            <ul>
     #               <li>
@@ -4191,10 +4191,10 @@ module Aws::CognitoIdentityProvider
     #                     <code>AllowedOAuthFlows</code>: Support for authorization code, implicit, and client credentials OAuth 2.0 grants.</p>
     #               </li>
     #            </ul>
-    #            <p>To use authorization server features, configure one of these features in the Amazon Cognito console or set
-    #   <code>AllowedOAuthFlowsUserPoolClient</code> to <code>true</code> in a <code>CreateUserPoolClient</code> or
-    #   <code>UpdateUserPoolClient</code> API request. If you don't set a value for
-    #   <code>AllowedOAuthFlowsUserPoolClient</code> in a request with the CLI or SDKs, it defaults
+    #            <p>To use authorization server features, configure one of these features in the Amazon Cognito console or set 
+    #   <code>AllowedOAuthFlowsUserPoolClient</code> to <code>true</code> in a <code>CreateUserPoolClient</code> or 
+    #   <code>UpdateUserPoolClient</code> API request. If you don't set a value for 
+    #   <code>AllowedOAuthFlowsUserPoolClient</code> in a request with the CLI or SDKs, it defaults 
     #   to <code>false</code>. When <code>false</code>, only SDK-based API sign-in is permitted.</p>
     #   @return [Boolean]
     # @!attribute analytics_configuration
@@ -4205,8 +4205,8 @@ module Aws::CognitoIdentityProvider
     #               more information, see <a href="https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-pinpoint-integration.html">Using Amazon Pinpoint analytics</a>.</p>
     #   @return [Types::AnalyticsConfigurationType]
     # @!attribute prevent_user_existence_errors
-    #   <p>When <code>ENABLED</code>, suppresses messages that might indicate a valid user exists
-    #               when someone attempts sign-in. This parameters sets your preference for the errors and
+    #   <p>When <code>ENABLED</code>, suppresses messages that might indicate a valid user exists 
+    #               when someone attempts sign-in. This parameters sets your preference for the errors and 
     #               responses that you want Amazon Cognito APIs to return during authentication, account
     #               confirmation, and password recovery when the user doesn't exist in the user pool. When
     #               set to <code>ENABLED</code> and the user doesn't exist, authentication returns an error
@@ -4233,7 +4233,7 @@ module Aws::CognitoIdentityProvider
     #               a client secret.</p>
     #   @return [Boolean]
     # @!attribute auth_session_validity
-    #   <p>Amazon Cognito creates a session token for each API request in an authentication flow. <code>AuthSessionValidity</code> is the duration,
+    #   <p>Amazon Cognito creates a session token for each API request in an authentication flow. <code>AuthSessionValidity</code> is the duration, 
     #   in minutes, of that session token. Your user pool native user must respond to each authentication challenge before the session expires.</p>
     #   @return [Integer]
     # @!attribute refresh_token_rotation
@@ -4403,9 +4403,9 @@ module Aws::CognitoIdentityProvider
     #   <p>When active, <code>DeletionProtection</code> prevents accidental deletion of your user
     #   pool. Before you can delete a user pool that you have protected against deletion, you
     #   must deactivate this feature.</p>
-    #            <p>When you try to delete a protected user pool in a <code>DeleteUserPool</code> API request,
-    #   Amazon Cognito returns an <code>InvalidParameterException</code> error. To delete a protected user pool,
-    #   send a new <code>DeleteUserPool</code> request after you deactivate deletion protection in an
+    #            <p>When you try to delete a protected user pool in a <code>DeleteUserPool</code> API request, 
+    #   Amazon Cognito returns an <code>InvalidParameterException</code> error. To delete a protected user pool, 
+    #   send a new <code>DeleteUserPool</code> request after you deactivate deletion protection in an 
     #   <code>UpdateUserPool</code> API request.</p>
     #   @return [String]
     # @!attribute lambda_config
@@ -4519,9 +4519,9 @@ module Aws::CognitoIdentityProvider
     #               required attributes in your user pool. For more information, see <a href="https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-settings-attributes.html">Working with user attributes</a>.</p>
     #   @return [Array<Types::SchemaAttributeType>]
     # @!attribute user_pool_add_ons
-    #   <p>Contains settings for activation of threat protection, including the operating
-    #   mode and additional authentication types. To log user security information but take
-    #   no action, set to <code>AUDIT</code>. To configure automatic security responses to
+    #   <p>Contains settings for activation of threat protection, including the operating 
+    #   mode and additional authentication types. To log user security information but take 
+    #   no action, set to <code>AUDIT</code>. To configure automatic security responses to 
     #   potentially unwanted traffic to your user pool, set to <code>ENFORCED</code>.</p>
     #            <p>For more information, see <a href="https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pool-settings-advanced-security.html">Adding advanced security to a user pool</a>. To activate this setting, your user pool must be on the <a href="https://docs.aws.amazon.com/cognito/latest/developerguide/feature-plans-features-plus.html">
     #                        Plus tier</a>.</p>
@@ -4793,7 +4793,7 @@ module Aws::CognitoIdentityProvider
     #               attribute name, for example <code>custom:department</code>.</p>
     #   @return [Array<String>]
     # @!attribute access_token
-    #   <p>A valid access token that Amazon Cognito issued to the currently signed-in user. Must include a scope claim for
+    #   <p>A valid access token that Amazon Cognito issued to the currently signed-in user. Must include a scope claim for 
     #   <code>aws.cognito.signin.user.admin</code>.</p>
     #   @return [String]
     class DeleteUserAttributesRequest < Struct.new(
@@ -4921,7 +4921,7 @@ module Aws::CognitoIdentityProvider
 
     # <p>Represents the request to delete a user.</p>
     # @!attribute access_token
-    #   <p>A valid access token that Amazon Cognito issued to the currently signed-in user. Must include a scope claim for
+    #   <p>A valid access token that Amazon Cognito issued to the currently signed-in user. Must include a scope claim for 
     #   <code>aws.cognito.signin.user.admin</code>.</p>
     #   @return [String]
     class DeleteUserRequest < Struct.new(
@@ -4933,7 +4933,7 @@ module Aws::CognitoIdentityProvider
     end
 
     # @!attribute access_token
-    #   <p>A valid access token that Amazon Cognito issued to the currently signed-in user. Must include a scope claim for
+    #   <p>A valid access token that Amazon Cognito issued to the currently signed-in user. Must include a scope claim for 
     #   <code>aws.cognito.signin.user.admin</code>.</p>
     #   @return [String]
     # @!attribute credential_id
@@ -5359,11 +5359,11 @@ module Aws::CognitoIdentityProvider
     #   <p>Metadata about a user's device, like name and last-access source IP.</p>
     #   @return [Array<Types::AttributeType>]
     # @!attribute device_create_date
-    #   <p>The date and time when the item was created. Amazon Cognito returns this timestamp in UNIX epoch time format. Your SDK might render the output in a
+    #   <p>The date and time when the item was created. Amazon Cognito returns this timestamp in UNIX epoch time format. Your SDK might render the output in a 
     #   human-readable format like ISO 8601 or a Java <code>Date</code> object.</p>
     #   @return [Time]
     # @!attribute device_last_modified_date
-    #   <p>The date and time when the item was modified. Amazon Cognito returns this timestamp in UNIX epoch time format. Your SDK might render the output in a
+    #   <p>The date and time when the item was modified. Amazon Cognito returns this timestamp in UNIX epoch time format. Your SDK might render the output in a 
     #   human-readable format like ISO 8601 or a Java <code>Date</code> object.</p>
     #   @return [Time]
     # @!attribute device_last_authenticated_date
@@ -5730,7 +5730,7 @@ module Aws::CognitoIdentityProvider
     #   <p>Your feedback to the authentication event. When you provide a <code>FeedbackValue</code>
     #   value of <code>valid</code>, you tell Amazon Cognito that you trust a user session where Amazon Cognito
     #   has evaluated some level of risk. When you provide a <code>FeedbackValue</code> value of
-    #   <code>invalid</code>, you tell Amazon Cognito that you don't trust a user session, or you
+    #   <code>invalid</code>, you tell Amazon Cognito that you don't trust a user session, or you 
     #   don't believe that Amazon Cognito evaluated a high-enough risk level.</p>
     #   @return [String]
     # @!attribute provider
@@ -5862,7 +5862,7 @@ module Aws::CognitoIdentityProvider
 
     # <p>Represents the request to forget the device.</p>
     # @!attribute access_token
-    #   <p>A valid access token that Amazon Cognito issued to the currently signed-in user. Must include a scope claim for
+    #   <p>A valid access token that Amazon Cognito issued to the currently signed-in user. Must include a scope claim for 
     #   <code>aws.cognito.signin.user.admin</code>.</p>
     #   @return [String]
     # @!attribute device_key
@@ -5888,7 +5888,7 @@ module Aws::CognitoIdentityProvider
     #               about <code>SecretHash</code>, see <a href="https://docs.aws.amazon.com/cognito/latest/developerguide/signing-up-users-in-your-app.html#cognito-user-pools-computing-secret-hash">Computing secret hash values</a>.</p>
     #   @return [String]
     # @!attribute user_context_data
-    #   <p>Contextual data about your user session like the device fingerprint, IP address, or location. Amazon Cognito threat
+    #   <p>Contextual data about your user session like the device fingerprint, IP address, or location. Amazon Cognito threat 
     #   protection evaluates the risk of an authentication event based on the context that your app generates and passes to Amazon Cognito
     #   when it makes API requests.</p>
     #            <p>For more information, see <a href="https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-settings-viewing-threat-protection-app.html">Collecting data for threat protection in
@@ -5902,8 +5902,8 @@ module Aws::CognitoIdentityProvider
     #               third-party IdP.</p>
     #   @return [String]
     # @!attribute analytics_metadata
-    #   <p>Information that supports analytics outcomes with Amazon Pinpoint, including the
-    #   user's endpoint ID. The endpoint ID is a destination for Amazon Pinpoint push notifications, for example a device identifier,
+    #   <p>Information that supports analytics outcomes with Amazon Pinpoint, including the 
+    #   user's endpoint ID. The endpoint ID is a destination for Amazon Pinpoint push notifications, for example a device identifier, 
     #   email address, or phone number.</p>
     #   @return [Types::AnalyticsMetadataType]
     # @!attribute client_metadata
@@ -6066,7 +6066,7 @@ module Aws::CognitoIdentityProvider
     #   <p>The key of the device that you want to get information about.</p>
     #   @return [String]
     # @!attribute access_token
-    #   <p>A valid access token that Amazon Cognito issued to the currently signed-in user. Must include a scope claim for
+    #   <p>A valid access token that Amazon Cognito issued to the currently signed-in user. Must include a scope claim for 
     #   <code>aws.cognito.signin.user.admin</code>.</p>
     #   @return [String]
     class GetDeviceRequest < Struct.new(
@@ -6326,7 +6326,7 @@ module Aws::CognitoIdentityProvider
 
     # <p>Represents the request to get user attribute verification.</p>
     # @!attribute access_token
-    #   <p>A valid access token that Amazon Cognito issued to the currently signed-in user. Must include a scope claim for
+    #   <p>A valid access token that Amazon Cognito issued to the currently signed-in user. Must include a scope claim for 
     #   <code>aws.cognito.signin.user.admin</code>.</p>
     #   @return [String]
     # @!attribute attribute_name
@@ -6389,7 +6389,7 @@ module Aws::CognitoIdentityProvider
     end
 
     # @!attribute access_token
-    #   <p>A valid access token that Amazon Cognito issued to the currently signed-in user. Must include a scope claim for
+    #   <p>A valid access token that Amazon Cognito issued to the currently signed-in user. Must include a scope claim for 
     #   <code>aws.cognito.signin.user.admin</code>.</p>
     #   @return [String]
     class GetUserAuthFactorsRequest < Struct.new(
@@ -6491,7 +6491,7 @@ module Aws::CognitoIdentityProvider
 
     # <p>Represents the request to get information about the user.</p>
     # @!attribute access_token
-    #   <p>A valid access token that Amazon Cognito issued to the currently signed-in user. Must include a scope claim for
+    #   <p>A valid access token that Amazon Cognito issued to the currently signed-in user. Must include a scope claim for 
     #   <code>aws.cognito.signin.user.admin</code>.</p>
     #   @return [String]
     class GetUserRequest < Struct.new(
@@ -6542,7 +6542,7 @@ module Aws::CognitoIdentityProvider
 
     # <p>Represents the request to sign out all devices.</p>
     # @!attribute access_token
-    #   <p>A valid access token that Amazon Cognito issued to the currently signed-in user. Must include a scope claim for
+    #   <p>A valid access token that Amazon Cognito issued to the currently signed-in user. Must include a scope claim for 
     #   <code>aws.cognito.signin.user.admin</code>.</p>
     #   @return [String]
     class GlobalSignOutRequest < Struct.new(
@@ -6608,11 +6608,11 @@ module Aws::CognitoIdentityProvider
     #            <p>The default <code>Precedence</code> value is <code>null</code>.</p>
     #   @return [Integer]
     # @!attribute last_modified_date
-    #   <p>The date and time when the item was modified. Amazon Cognito returns this timestamp in UNIX epoch time format. Your SDK might render the output in a
+    #   <p>The date and time when the item was modified. Amazon Cognito returns this timestamp in UNIX epoch time format. Your SDK might render the output in a 
     #   human-readable format like ISO 8601 or a Java <code>Date</code> object.</p>
     #   @return [Time]
     # @!attribute creation_date
-    #   <p>The date and time when the item was created. Amazon Cognito returns this timestamp in UNIX epoch time format. Your SDK might render the output in a
+    #   <p>The date and time when the item was created. Amazon Cognito returns this timestamp in UNIX epoch time format. Your SDK might render the output in a 
     #   human-readable format like ISO 8601 or a Java <code>Date</code> object.</p>
     #   @return [Time]
     class GroupType < Struct.new(
@@ -6698,11 +6698,11 @@ module Aws::CognitoIdentityProvider
     #                       "rsa-sha256" }</code>
     #                  </p>
     #                  <p>Create or update request with Metadata file: <code>"ProviderDetails": { "IDPInit": "true",
-    #                       "IDPSignout": "true", "EncryptedResponses" : "true",
+    #                       "IDPSignout": "true", "EncryptedResponses" : "true",  
     #                       "MetadataFile": "[metadata XML]", "RequestSigningAlgorithm":
     #                       "rsa-sha256" }</code>
     #                  </p>
-    #                  <p>The value of <code>MetadataFile</code> must be the plaintext metadata document with all
+    #                  <p>The value of <code>MetadataFile</code> must be the plaintext metadata document with all 
     #                   quote (") characters escaped by backslashes.</p>
     #                  <p>Describe response: <code>"ProviderDetails": { "IDPInit": "true",
     #                       "IDPSignout": "true", "EncryptedResponses" : "true", "ActiveEncryptionCertificate": "[certificate]",
@@ -6750,7 +6750,7 @@ module Aws::CognitoIdentityProvider
     #               <dt>SignInWithApple</dt>
     #               <dd>
     #                  <p>Create or update request: <code>"ProviderDetails": { "authorize_scopes":
-    #                       "email name", "client_id": "com.example.cognito", "private_key": "1EXAMPLE",
+    #                       "email name", "client_id": "com.example.cognito", "private_key": "1EXAMPLE", 
     #                       "key_id": "2EXAMPLE", "team_id": "3EXAMPLE" }</code>
     #                  </p>
     #                  <p>Describe response: <code>"ProviderDetails": {
@@ -6764,15 +6764,15 @@ module Aws::CognitoIdentityProvider
     #               </dd>
     #               <dt>Facebook</dt>
     #               <dd>
-    #                  <p>Create or update request: <code>"ProviderDetails": { "api_version": "v17.0",
-    #               "authorize_scopes": "public_profile, email", "client_id": "1example23456789",
+    #                  <p>Create or update request: <code>"ProviderDetails": { "api_version": "v17.0", 
+    #               "authorize_scopes": "public_profile, email", "client_id": "1example23456789", 
     #               "client_secret": "provider-app-client-secret" }</code>
     #                  </p>
-    #                  <p>Describe response: <code>"ProviderDetails":
-    #               { "api_version": "v17.0", "attributes_url": "https://graph.facebook.com/v17.0/me?fields=",
-    #               "attributes_url_add_attributes": "true", "authorize_scopes": "public_profile, email",
-    #               "authorize_url": "https://www.facebook.com/v17.0/dialog/oauth", "client_id":
-    #               "1example23456789", "client_secret": "provider-app-client-secret", "token_request_method":
+    #                  <p>Describe response: <code>"ProviderDetails": 
+    #               { "api_version": "v17.0", "attributes_url": "https://graph.facebook.com/v17.0/me?fields=", 
+    #               "attributes_url_add_attributes": "true", "authorize_scopes": "public_profile, email", 
+    #               "authorize_url": "https://www.facebook.com/v17.0/dialog/oauth", "client_id": 
+    #               "1example23456789", "client_secret": "provider-app-client-secret", "token_request_method": 
     #               "GET", "token_url": "https://graph.facebook.com/v17.0/oauth/access_token" }</code>
     #                  </p>
     #               </dd>
@@ -6796,11 +6796,11 @@ module Aws::CognitoIdentityProvider
     #               <code>Level4</code>.</p>
     #   @return [Hash<String, String>]
     # @!attribute last_modified_date
-    #   <p>The date and time when the item was modified. Amazon Cognito returns this timestamp in UNIX epoch time format. Your SDK might render the output in a
+    #   <p>The date and time when the item was modified. Amazon Cognito returns this timestamp in UNIX epoch time format. Your SDK might render the output in a 
     #   human-readable format like ISO 8601 or a Java <code>Date</code> object.</p>
     #   @return [Time]
     # @!attribute creation_date
-    #   <p>The date and time when the item was created. Amazon Cognito returns this timestamp in UNIX epoch time format. Your SDK might render the output in a
+    #   <p>The date and time when the item was created. Amazon Cognito returns this timestamp in UNIX epoch time format. Your SDK might render the output in a 
     #   human-readable format like ISO 8601 or a Java <code>Date</code> object.</p>
     #   @return [Time]
     class IdentityProviderType < Struct.new(
@@ -7070,12 +7070,12 @@ module Aws::CognitoIdentityProvider
     #   <p>The ID of the app client that your user wants to sign in to.</p>
     #   @return [String]
     # @!attribute analytics_metadata
-    #   <p>Information that supports analytics outcomes with Amazon Pinpoint, including the
-    #   user's endpoint ID. The endpoint ID is a destination for Amazon Pinpoint push notifications, for example a device identifier,
+    #   <p>Information that supports analytics outcomes with Amazon Pinpoint, including the 
+    #   user's endpoint ID. The endpoint ID is a destination for Amazon Pinpoint push notifications, for example a device identifier, 
     #   email address, or phone number.</p>
     #   @return [Types::AnalyticsMetadataType]
     # @!attribute user_context_data
-    #   <p>Contextual data about your user session like the device fingerprint, IP address, or location. Amazon Cognito threat
+    #   <p>Contextual data about your user session like the device fingerprint, IP address, or location. Amazon Cognito threat 
     #   protection evaluates the risk of an authentication event based on the context that your app generates and passes to Amazon Cognito
     #   when it makes API requests.</p>
     #            <p>For more information, see <a href="https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-settings-viewing-threat-protection-app.html">Collecting data for threat protection in
@@ -7111,15 +7111,15 @@ module Aws::CognitoIdentityProvider
     #            <p>Possible challenges include the following:</p>
     #            <note>
     #               <p>All of the following challenges require <code>USERNAME</code> and, when the app
-    #                   client has a client secret, <code>SECRET_HASH</code> in the parameters. Include a
+    #                   client has a client secret, <code>SECRET_HASH</code> in the parameters. Include a 
     #                   <code>DEVICE_KEY</code> for device authentication.</p>
     #            </note>
     #            <ul>
     #               <li>
     #                  <p>
     #                     <code>WEB_AUTHN</code>: Respond to the challenge with the results of a
-    #                       successful authentication with a WebAuthn authenticator, or passkey, as
-    #                       <code>CREDENTIAL</code>. Examples of WebAuthn authenticators include
+    #                       successful authentication with a WebAuthn authenticator, or passkey, as 
+    #                       <code>CREDENTIAL</code>. Examples of WebAuthn authenticators include 
     #                       biometric devices and security keys.</p>
     #               </li>
     #               <li>
@@ -7132,8 +7132,8 @@ module Aws::CognitoIdentityProvider
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>SELECT_CHALLENGE</code>: Respond with a challenge selection as <code>ANSWER</code>.
-    #                   It must be one of the challenge types in the <code>AvailableChallenges</code> response
+    #                     <code>SELECT_CHALLENGE</code>: Respond with a challenge selection as <code>ANSWER</code>. 
+    #                   It must be one of the challenge types in the <code>AvailableChallenges</code> response 
     #                   parameter. Add the parameters of the selected challenge, for example <code>USERNAME</code>
     #                   and <code>SMS_OTP</code>.</p>
     #               </li>
@@ -7162,7 +7162,7 @@ module Aws::CognitoIdentityProvider
     #               <li>
     #                  <p>
     #                     <code>PASSWORD_VERIFIER</code>: Respond with the second stage of SRP secrets as
-    #                           <code>PASSWORD_CLAIM_SIGNATURE</code>, <code>PASSWORD_CLAIM_SECRET_BLOCK</code>,
+    #                           <code>PASSWORD_CLAIM_SIGNATURE</code>, <code>PASSWORD_CLAIM_SECRET_BLOCK</code>, 
     #                           and <code>TIMESTAMP</code>.</p>
     #               </li>
     #               <li>
@@ -7174,7 +7174,7 @@ module Aws::CognitoIdentityProvider
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>DEVICE_SRP_AUTH</code>: Respond with the initial parameters of device SRP
+    #                     <code>DEVICE_SRP_AUTH</code>: Respond with the initial parameters of device SRP 
     #                   authentication. For more information, see <a href="https://docs.aws.amazon.com/cognito/latest/developerguide/amazon-cognito-user-pools-device-tracking.html#user-pools-remembered-devices-signing-in-with-a-device">Signing in with a device</a>.</p>
     #               </li>
     #               <li>
@@ -7187,18 +7187,18 @@ module Aws::CognitoIdentityProvider
     #               <li>
     #                  <p>
     #                     <code>NEW_PASSWORD_REQUIRED</code>: For users who are required to change their
-    #                       passwords after successful first login. Respond to this challenge with
-    #                       <code>NEW_PASSWORD</code> and any required attributes that Amazon Cognito returned in
-    #                       the <code>requiredAttributes</code> parameter. You can also set values for
-    #                       attributes that aren't required by your user pool and that your app client
+    #                       passwords after successful first login. Respond to this challenge with 
+    #                       <code>NEW_PASSWORD</code> and any required attributes that Amazon Cognito returned in 
+    #                       the <code>requiredAttributes</code> parameter. You can also set values for 
+    #                       attributes that aren't required by your user pool and that your app client 
     #                       can write.</p>
     #                  <p>Amazon Cognito only returns this challenge for users who have temporary passwords.
-    #                       When you create passwordless users, you must provide values for all required
+    #                       When you create passwordless users, you must provide values for all required 
     #                       attributes.</p>
     #                  <note>
-    #                     <p>In a <code>NEW_PASSWORD_REQUIRED</code> challenge response, you can't modify a required attribute that already has a value.
-    #   In <code>AdminRespondToAuthChallenge</code> or <code>RespondToAuthChallenge</code>, set a value for any keys that Amazon Cognito returned in the
-    #   <code>requiredAttributes</code> parameter, then use the <code>AdminUpdateUserAttributes</code> or <code>UpdateUserAttributes</code> API
+    #                     <p>In a <code>NEW_PASSWORD_REQUIRED</code> challenge response, you can't modify a required attribute that already has a value. 
+    #   In <code>AdminRespondToAuthChallenge</code> or <code>RespondToAuthChallenge</code>, set a value for any keys that Amazon Cognito returned in the 
+    #   <code>requiredAttributes</code> parameter, then use the <code>AdminUpdateUserAttributes</code> or <code>UpdateUserAttributes</code> API 
     #   operation to modify the value of any additional attributes.</p>
     #                  </note>
     #               </li>
@@ -7207,15 +7207,15 @@ module Aws::CognitoIdentityProvider
     #                     <code>MFA_SETUP</code>: For users who are required to setup an MFA factor
     #                       before they can sign in. The MFA types activated for the user pool will be
     #                       listed in the challenge parameters <code>MFAS_CAN_SETUP</code> value. </p>
-    #                  <p>To set up time-based one-time password (TOTP) MFA, use the session returned
-    #                       in this challenge from <code>InitiateAuth</code> or <code>AdminInitiateAuth</code>
+    #                  <p>To set up time-based one-time password (TOTP) MFA, use the session returned 
+    #                       in this challenge from <code>InitiateAuth</code> or <code>AdminInitiateAuth</code> 
     #                       as an input to <code>AssociateSoftwareToken</code>. Then, use the session returned
-    #                       by <code>VerifySoftwareToken</code> as an input to
+    #                       by <code>VerifySoftwareToken</code> as an input to 
     #                       <code>RespondToAuthChallenge</code> or <code>AdminRespondToAuthChallenge</code>
     #                   with challenge name <code>MFA_SETUP</code> to complete sign-in.
     #                   </p>
-    #                  <p>To set up SMS or email MFA, collect a <code>phone_number</code> or
-    #                       <code>email</code> attribute for the user. Then restart the authentication
+    #                  <p>To set up SMS or email MFA, collect a <code>phone_number</code> or 
+    #                       <code>email</code> attribute for the user. Then restart the authentication 
     #                       flow with an <code>InitiateAuth</code> or <code>AdminInitiateAuth</code> request.
     #                   </p>
     #               </li>
@@ -7604,7 +7604,7 @@ module Aws::CognitoIdentityProvider
 
     # <p>Represents the request to list the devices.</p>
     # @!attribute access_token
-    #   <p>A valid access token that Amazon Cognito issued to the currently signed-in user. Must include a scope claim for
+    #   <p>A valid access token that Amazon Cognito issued to the currently signed-in user. Must include a scope claim for 
     #   <code>aws.cognito.signin.user.admin</code>.</p>
     #   @return [String]
     # @!attribute limit
@@ -7613,8 +7613,8 @@ module Aws::CognitoIdentityProvider
     # @!attribute pagination_token
     #   <p>This API operation returns a limited number of results. The pagination token is
     #   an identifier that you can present in an additional API request with the same parameters. When
-    #   you include the pagination token, Amazon Cognito returns the next set of items after the current list.
-    #   Subsequent requests return a new pagination token. By use of this token, you can paginate
+    #   you include the pagination token, Amazon Cognito returns the next set of items after the current list. 
+    #   Subsequent requests return a new pagination token. By use of this token, you can paginate 
     #   through the full list of items.</p>
     #   @return [String]
     class ListDevicesRequest < Struct.new(
@@ -7633,8 +7633,8 @@ module Aws::CognitoIdentityProvider
     #               information, last-accessed and created dates, and the device key.</p>
     #   @return [Array<Types::DeviceType>]
     # @!attribute pagination_token
-    #   <p>The identifier that Amazon Cognito returned with the previous request to this operation. When
-    #   you include a pagination token in your request, Amazon Cognito returns the next set of items in
+    #   <p>The identifier that Amazon Cognito returned with the previous request to this operation. When 
+    #   you include a pagination token in your request, Amazon Cognito returns the next set of items in 
     #   the list. By use of this token, you can paginate through the full list of items.</p>
     #   @return [String]
     class ListDevicesResponse < Struct.new(
@@ -7655,8 +7655,8 @@ module Aws::CognitoIdentityProvider
     # @!attribute next_token
     #   <p>This API operation returns a limited number of results. The pagination token is
     #   an identifier that you can present in an additional API request with the same parameters. When
-    #   you include the pagination token, Amazon Cognito returns the next set of items after the current list.
-    #   Subsequent requests return a new pagination token. By use of this token, you can paginate
+    #   you include the pagination token, Amazon Cognito returns the next set of items after the current list. 
+    #   Subsequent requests return a new pagination token. By use of this token, you can paginate 
     #   through the full list of items.</p>
     #   @return [String]
     class ListGroupsRequest < Struct.new(
@@ -7674,8 +7674,8 @@ module Aws::CognitoIdentityProvider
     #               description, precedence, and IAM role values.</p>
     #   @return [Array<Types::GroupType>]
     # @!attribute next_token
-    #   <p>The identifier that Amazon Cognito returned with the previous request to this operation. When
-    #   you include a pagination token in your request, Amazon Cognito returns the next set of items in
+    #   <p>The identifier that Amazon Cognito returned with the previous request to this operation. When 
+    #   you include a pagination token in your request, Amazon Cognito returns the next set of items in 
     #   the list. By use of this token, you can paginate through the full list of items.</p>
     #   @return [String]
     class ListGroupsResponse < Struct.new(
@@ -7696,8 +7696,8 @@ module Aws::CognitoIdentityProvider
     # @!attribute next_token
     #   <p>This API operation returns a limited number of results. The pagination token is
     #   an identifier that you can present in an additional API request with the same parameters. When
-    #   you include the pagination token, Amazon Cognito returns the next set of items after the current list.
-    #   Subsequent requests return a new pagination token. By use of this token, you can paginate
+    #   you include the pagination token, Amazon Cognito returns the next set of items after the current list. 
+    #   Subsequent requests return a new pagination token. By use of this token, you can paginate 
     #   through the full list of items.</p>
     #   @return [String]
     class ListIdentityProvidersRequest < Struct.new(
@@ -7715,8 +7715,8 @@ module Aws::CognitoIdentityProvider
     #               the IdP name and type, and trust-relationship details like the issuer URL.</p>
     #   @return [Array<Types::ProviderDescription>]
     # @!attribute next_token
-    #   <p>The identifier that Amazon Cognito returned with the previous request to this operation. When
-    #   you include a pagination token in your request, Amazon Cognito returns the next set of items in
+    #   <p>The identifier that Amazon Cognito returned with the previous request to this operation. When 
+    #   you include a pagination token in your request, Amazon Cognito returns the next set of items in 
     #   the list. By use of this token, you can paginate through the full list of items.</p>
     #   @return [String]
     class ListIdentityProvidersResponse < Struct.new(
@@ -7738,8 +7738,8 @@ module Aws::CognitoIdentityProvider
     # @!attribute next_token
     #   <p>This API operation returns a limited number of results. The pagination token is
     #   an identifier that you can present in an additional API request with the same parameters. When
-    #   you include the pagination token, Amazon Cognito returns the next set of items after the current list.
-    #   Subsequent requests return a new pagination token. By use of this token, you can paginate
+    #   you include the pagination token, Amazon Cognito returns the next set of items after the current list. 
+    #   Subsequent requests return a new pagination token. By use of this token, you can paginate 
     #   through the full list of items.</p>
     #   @return [String]
     class ListResourceServersRequest < Struct.new(
@@ -7757,8 +7757,8 @@ module Aws::CognitoIdentityProvider
     #               response includes names, identifiers, and custom scopes.</p>
     #   @return [Array<Types::ResourceServerType>]
     # @!attribute next_token
-    #   <p>The identifier that Amazon Cognito returned with the previous request to this operation. When
-    #   you include a pagination token in your request, Amazon Cognito returns the next set of items in
+    #   <p>The identifier that Amazon Cognito returned with the previous request to this operation. When 
+    #   you include a pagination token in your request, Amazon Cognito returns the next set of items in 
     #   the list. By use of this token, you can paginate through the full list of items.</p>
     #   @return [String]
     class ListResourceServersResponse < Struct.new(
@@ -7802,8 +7802,8 @@ module Aws::CognitoIdentityProvider
     # @!attribute next_token
     #   <p>This API operation returns a limited number of results. The pagination token is
     #   an identifier that you can present in an additional API request with the same parameters. When
-    #   you include the pagination token, Amazon Cognito returns the next set of items after the current list.
-    #   Subsequent requests return a new pagination token. By use of this token, you can paginate
+    #   you include the pagination token, Amazon Cognito returns the next set of items after the current list. 
+    #   Subsequent requests return a new pagination token. By use of this token, you can paginate 
     #   through the full list of items.</p>
     #   @return [String]
     class ListTermsRequest < Struct.new(
@@ -7823,8 +7823,8 @@ module Aws::CognitoIdentityProvider
     # @!attribute next_token
     #   <p>This API operation returns a limited number of results. The pagination token is
     #   an identifier that you can present in an additional API request with the same parameters. When
-    #   you include the pagination token, Amazon Cognito returns the next set of items after the current list.
-    #   Subsequent requests return a new pagination token. By use of this token, you can paginate
+    #   you include the pagination token, Amazon Cognito returns the next set of items after the current list. 
+    #   Subsequent requests return a new pagination token. By use of this token, you can paginate 
     #   through the full list of items.</p>
     #   @return [String]
     class ListTermsResponse < Struct.new(
@@ -7847,8 +7847,8 @@ module Aws::CognitoIdentityProvider
     # @!attribute pagination_token
     #   <p>This API operation returns a limited number of results. The pagination token is
     #   an identifier that you can present in an additional API request with the same parameters. When
-    #   you include the pagination token, Amazon Cognito returns the next set of items after the current list.
-    #   Subsequent requests return a new pagination token. By use of this token, you can paginate
+    #   you include the pagination token, Amazon Cognito returns the next set of items after the current list. 
+    #   Subsequent requests return a new pagination token. By use of this token, you can paginate 
     #   through the full list of items.</p>
     #   @return [String]
     class ListUserImportJobsRequest < Struct.new(
@@ -7868,8 +7868,8 @@ module Aws::CognitoIdentityProvider
     #               includes logging destination, status, and the Amazon S3 pre-signed URL for CSV upload.</p>
     #   @return [Array<Types::UserImportJobType>]
     # @!attribute pagination_token
-    #   <p>The identifier that Amazon Cognito returned with the previous request to this operation. When
-    #   you include a pagination token in your request, Amazon Cognito returns the next set of items in
+    #   <p>The identifier that Amazon Cognito returned with the previous request to this operation. When 
+    #   you include a pagination token in your request, Amazon Cognito returns the next set of items in 
     #   the list. By use of this token, you can paginate through the full list of items.</p>
     #   @return [String]
     class ListUserImportJobsResponse < Struct.new(
@@ -7891,8 +7891,8 @@ module Aws::CognitoIdentityProvider
     # @!attribute next_token
     #   <p>This API operation returns a limited number of results. The pagination token is
     #   an identifier that you can present in an additional API request with the same parameters. When
-    #   you include the pagination token, Amazon Cognito returns the next set of items after the current list.
-    #   Subsequent requests return a new pagination token. By use of this token, you can paginate
+    #   you include the pagination token, Amazon Cognito returns the next set of items after the current list. 
+    #   Subsequent requests return a new pagination token. By use of this token, you can paginate 
     #   through the full list of items.</p>
     #   @return [String]
     class ListUserPoolClientSecretsRequest < Struct.new(
@@ -7910,8 +7910,8 @@ module Aws::CognitoIdentityProvider
     #   <p>A list of client secret descriptors containing the identifier and creation date for each secret. For security reasons, the response never reveals the actual secret value in ClientSecretValue.</p>
     #   @return [Array<Types::ClientSecretDescriptorType>]
     # @!attribute next_token
-    #   <p>The identifier that Amazon Cognito returned with the previous request to this operation. When
-    #   you include a pagination token in your request, Amazon Cognito returns the next set of items in
+    #   <p>The identifier that Amazon Cognito returned with the previous request to this operation. When 
+    #   you include a pagination token in your request, Amazon Cognito returns the next set of items in 
     #   the list. By use of this token, you can paginate through the full list of items.</p>
     #   @return [String]
     class ListUserPoolClientSecretsResponse < Struct.new(
@@ -7934,8 +7934,8 @@ module Aws::CognitoIdentityProvider
     # @!attribute next_token
     #   <p>This API operation returns a limited number of results. The pagination token is
     #   an identifier that you can present in an additional API request with the same parameters. When
-    #   you include the pagination token, Amazon Cognito returns the next set of items after the current list.
-    #   Subsequent requests return a new pagination token. By use of this token, you can paginate
+    #   you include the pagination token, Amazon Cognito returns the next set of items after the current list. 
+    #   Subsequent requests return a new pagination token. By use of this token, you can paginate 
     #   through the full list of items.</p>
     #   @return [String]
     class ListUserPoolClientsRequest < Struct.new(
@@ -7953,8 +7953,8 @@ module Aws::CognitoIdentityProvider
     #   <p>An array of app clients and their details. Includes app client ID and name.</p>
     #   @return [Array<Types::UserPoolClientDescription>]
     # @!attribute next_token
-    #   <p>The identifier that Amazon Cognito returned with the previous request to this operation. When
-    #   you include a pagination token in your request, Amazon Cognito returns the next set of items in
+    #   <p>The identifier that Amazon Cognito returned with the previous request to this operation. When 
+    #   you include a pagination token in your request, Amazon Cognito returns the next set of items in 
     #   the list. By use of this token, you can paginate through the full list of items.</p>
     #   @return [String]
     class ListUserPoolClientsResponse < Struct.new(
@@ -8003,8 +8003,8 @@ module Aws::CognitoIdentityProvider
     # @!attribute next_token
     #   <p>This API operation returns a limited number of results. The pagination token is
     #   an identifier that you can present in an additional API request with the same parameters. When
-    #   you include the pagination token, Amazon Cognito returns the next set of items after the current list.
-    #   Subsequent requests return a new pagination token. By use of this token, you can paginate
+    #   you include the pagination token, Amazon Cognito returns the next set of items after the current list. 
+    #   Subsequent requests return a new pagination token. By use of this token, you can paginate 
     #   through the full list of items.</p>
     #   @return [String]
     # @!attribute max_results
@@ -8024,8 +8024,8 @@ module Aws::CognitoIdentityProvider
     #   <p>An array of user pools and their configuration details.</p>
     #   @return [Array<Types::UserPoolDescriptionType>]
     # @!attribute next_token
-    #   <p>The identifier that Amazon Cognito returned with the previous request to this operation. When
-    #   you include a pagination token in your request, Amazon Cognito returns the next set of items in
+    #   <p>The identifier that Amazon Cognito returned with the previous request to this operation. When 
+    #   you include a pagination token in your request, Amazon Cognito returns the next set of items in 
     #   the list. By use of this token, you can paginate through the full list of items.</p>
     #   @return [String]
     class ListUserPoolsResponse < Struct.new(
@@ -8053,8 +8053,8 @@ module Aws::CognitoIdentityProvider
     # @!attribute next_token
     #   <p>This API operation returns a limited number of results. The pagination token is
     #   an identifier that you can present in an additional API request with the same parameters. When
-    #   you include the pagination token, Amazon Cognito returns the next set of items after the current list.
-    #   Subsequent requests return a new pagination token. By use of this token, you can paginate
+    #   you include the pagination token, Amazon Cognito returns the next set of items after the current list. 
+    #   Subsequent requests return a new pagination token. By use of this token, you can paginate 
     #   through the full list of items.</p>
     #   @return [String]
     class ListUsersInGroupRequest < Struct.new(
@@ -8072,8 +8072,8 @@ module Aws::CognitoIdentityProvider
     #   <p>An array of users who are members in the group, and their attributes.</p>
     #   @return [Array<Types::UserType>]
     # @!attribute next_token
-    #   <p>The identifier that Amazon Cognito returned with the previous request to this operation. When
-    #   you include a pagination token in your request, Amazon Cognito returns the next set of items in
+    #   <p>The identifier that Amazon Cognito returned with the previous request to this operation. When 
+    #   you include a pagination token in your request, Amazon Cognito returns the next set of items in 
     #   the list. By use of this token, you can paginate through the full list of items.</p>
     #   @return [String]
     class ListUsersInGroupResponse < Struct.new(
@@ -8109,8 +8109,8 @@ module Aws::CognitoIdentityProvider
     # @!attribute pagination_token
     #   <p>This API operation returns a limited number of results. The pagination token is
     #   an identifier that you can present in an additional API request with the same parameters. When
-    #   you include the pagination token, Amazon Cognito returns the next set of items after the current list.
-    #   Subsequent requests return a new pagination token. By use of this token, you can paginate
+    #   you include the pagination token, Amazon Cognito returns the next set of items after the current list. 
+    #   Subsequent requests return a new pagination token. By use of this token, you can paginate 
     #   through the full list of items.</p>
     #   @return [String]
     # @!attribute filter
@@ -8227,8 +8227,8 @@ module Aws::CognitoIdentityProvider
     #               duplicates.</p>
     #   @return [Array<Types::UserType>]
     # @!attribute pagination_token
-    #   <p>The identifier that Amazon Cognito returned with the previous request to this operation. When
-    #   you include a pagination token in your request, Amazon Cognito returns the next set of items in
+    #   <p>The identifier that Amazon Cognito returned with the previous request to this operation. When 
+    #   you include a pagination token in your request, Amazon Cognito returns the next set of items in 
     #   the list. By use of this token, you can paginate through the full list of items.</p>
     #   @return [String]
     class ListUsersResponse < Struct.new(
@@ -8241,14 +8241,14 @@ module Aws::CognitoIdentityProvider
     end
 
     # @!attribute access_token
-    #   <p>A valid access token that Amazon Cognito issued to the currently signed-in user. Must include a scope claim for
+    #   <p>A valid access token that Amazon Cognito issued to the currently signed-in user. Must include a scope claim for 
     #   <code>aws.cognito.signin.user.admin</code>.</p>
     #   @return [String]
     # @!attribute next_token
     #   <p>This API operation returns a limited number of results. The pagination token is
     #   an identifier that you can present in an additional API request with the same parameters. When
-    #   you include the pagination token, Amazon Cognito returns the next set of items after the current list.
-    #   Subsequent requests return a new pagination token. By use of this token, you can paginate
+    #   you include the pagination token, Amazon Cognito returns the next set of items after the current list. 
+    #   Subsequent requests return a new pagination token. By use of this token, you can paginate 
     #   through the full list of items.</p>
     #   @return [String]
     # @!attribute max_results
@@ -8269,8 +8269,8 @@ module Aws::CognitoIdentityProvider
     #   <p>A list of registered passkeys for a user.</p>
     #   @return [Array<Types::WebAuthnCredentialDescription>]
     # @!attribute next_token
-    #   <p>The identifier that Amazon Cognito returned with the previous request to this operation. When
-    #   you include a pagination token in your request, Amazon Cognito returns the next set of items in
+    #   <p>The identifier that Amazon Cognito returned with the previous request to this operation. When 
+    #   you include a pagination token in your request, Amazon Cognito returns the next set of items in 
     #   the list. By use of this token, you can paginate through the full list of items.</p>
     #   @return [String]
     class ListWebAuthnCredentialsResponse < Struct.new(
@@ -8438,11 +8438,11 @@ module Aws::CognitoIdentityProvider
     #               browser-adaptive mode.</p>
     #   @return [Array<Types::AssetType>]
     # @!attribute creation_date
-    #   <p>The date and time when the item was created. Amazon Cognito returns this timestamp in UNIX epoch time format. Your SDK might render the output in a
+    #   <p>The date and time when the item was created. Amazon Cognito returns this timestamp in UNIX epoch time format. Your SDK might render the output in a 
     #   human-readable format like ISO 8601 or a Java <code>Date</code> object.</p>
     #   @return [Time]
     # @!attribute last_modified_date
-    #   <p>The date and time when the item was modified. Amazon Cognito returns this timestamp in UNIX epoch time format. Your SDK might render the output in a
+    #   <p>The date and time when the item was modified. Amazon Cognito returns this timestamp in UNIX epoch time format. Your SDK might render the output in a 
     #   human-readable format like ISO 8601 or a Java <code>Date</code> object.</p>
     #   @return [Time]
     class ManagedLoginBrandingType < Struct.new(
@@ -8741,11 +8741,11 @@ module Aws::CognitoIdentityProvider
     #               parameter: Facebook, Google, Login with Amazon, and Sign in with Apple.</p>
     #   @return [String]
     # @!attribute last_modified_date
-    #   <p>The date and time when the item was modified. Amazon Cognito returns this timestamp in UNIX epoch time format. Your SDK might render the output in a
+    #   <p>The date and time when the item was modified. Amazon Cognito returns this timestamp in UNIX epoch time format. Your SDK might render the output in a 
     #   human-readable format like ISO 8601 or a Java <code>Date</code> object.</p>
     #   @return [Time]
     # @!attribute creation_date
-    #   <p>The date and time when the item was created. Amazon Cognito returns this timestamp in UNIX epoch time format. Your SDK might render the output in a
+    #   <p>The date and time when the item was created. Amazon Cognito returns this timestamp in UNIX epoch time format. Your SDK might render the output in a 
     #   human-readable format like ISO 8601 or a Java <code>Date</code> object.</p>
     #   @return [Time]
     class ProviderDescription < Struct.new(
@@ -8850,7 +8850,7 @@ module Aws::CognitoIdentityProvider
     #               about <code>SecretHash</code>, see <a href="https://docs.aws.amazon.com/cognito/latest/developerguide/signing-up-users-in-your-app.html#cognito-user-pools-computing-secret-hash">Computing secret hash values</a>.</p>
     #   @return [String]
     # @!attribute user_context_data
-    #   <p>Contextual data about your user session like the device fingerprint, IP address, or location. Amazon Cognito threat
+    #   <p>Contextual data about your user session like the device fingerprint, IP address, or location. Amazon Cognito threat 
     #   protection evaluates the risk of an authentication event based on the context that your app generates and passes to Amazon Cognito
     #   when it makes API requests.</p>
     #            <p>For more information, see <a href="https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-settings-viewing-threat-protection-app.html">Collecting data for threat protection in
@@ -8864,8 +8864,8 @@ module Aws::CognitoIdentityProvider
     #               third-party IdP.</p>
     #   @return [String]
     # @!attribute analytics_metadata
-    #   <p>Information that supports analytics outcomes with Amazon Pinpoint, including the
-    #   user's endpoint ID. The endpoint ID is a destination for Amazon Pinpoint push notifications, for example a device identifier,
+    #   <p>Information that supports analytics outcomes with Amazon Pinpoint, including the 
+    #   user's endpoint ID. The endpoint ID is a destination for Amazon Pinpoint push notifications, for example a device identifier, 
     #   email address, or phone number.</p>
     #   @return [Types::AnalyticsMetadataType]
     # @!attribute client_metadata
@@ -9005,15 +9005,15 @@ module Aws::CognitoIdentityProvider
     #            <p>Possible challenges include the following:</p>
     #            <note>
     #               <p>All of the following challenges require <code>USERNAME</code> and, when the app
-    #                   client has a client secret, <code>SECRET_HASH</code> in the parameters. Include a
+    #                   client has a client secret, <code>SECRET_HASH</code> in the parameters. Include a 
     #                   <code>DEVICE_KEY</code> for device authentication.</p>
     #            </note>
     #            <ul>
     #               <li>
     #                  <p>
     #                     <code>WEB_AUTHN</code>: Respond to the challenge with the results of a
-    #                       successful authentication with a WebAuthn authenticator, or passkey, as
-    #                       <code>CREDENTIAL</code>. Examples of WebAuthn authenticators include
+    #                       successful authentication with a WebAuthn authenticator, or passkey, as 
+    #                       <code>CREDENTIAL</code>. Examples of WebAuthn authenticators include 
     #                       biometric devices and security keys.</p>
     #               </li>
     #               <li>
@@ -9026,8 +9026,8 @@ module Aws::CognitoIdentityProvider
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>SELECT_CHALLENGE</code>: Respond with a challenge selection as <code>ANSWER</code>.
-    #                   It must be one of the challenge types in the <code>AvailableChallenges</code> response
+    #                     <code>SELECT_CHALLENGE</code>: Respond with a challenge selection as <code>ANSWER</code>. 
+    #                   It must be one of the challenge types in the <code>AvailableChallenges</code> response 
     #                   parameter. Add the parameters of the selected challenge, for example <code>USERNAME</code>
     #                   and <code>SMS_OTP</code>.</p>
     #               </li>
@@ -9056,7 +9056,7 @@ module Aws::CognitoIdentityProvider
     #               <li>
     #                  <p>
     #                     <code>PASSWORD_VERIFIER</code>: Respond with the second stage of SRP secrets as
-    #                           <code>PASSWORD_CLAIM_SIGNATURE</code>, <code>PASSWORD_CLAIM_SECRET_BLOCK</code>,
+    #                           <code>PASSWORD_CLAIM_SIGNATURE</code>, <code>PASSWORD_CLAIM_SECRET_BLOCK</code>, 
     #                           and <code>TIMESTAMP</code>.</p>
     #               </li>
     #               <li>
@@ -9068,7 +9068,7 @@ module Aws::CognitoIdentityProvider
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>DEVICE_SRP_AUTH</code>: Respond with the initial parameters of device SRP
+    #                     <code>DEVICE_SRP_AUTH</code>: Respond with the initial parameters of device SRP 
     #                   authentication. For more information, see <a href="https://docs.aws.amazon.com/cognito/latest/developerguide/amazon-cognito-user-pools-device-tracking.html#user-pools-remembered-devices-signing-in-with-a-device">Signing in with a device</a>.</p>
     #               </li>
     #               <li>
@@ -9081,18 +9081,18 @@ module Aws::CognitoIdentityProvider
     #               <li>
     #                  <p>
     #                     <code>NEW_PASSWORD_REQUIRED</code>: For users who are required to change their
-    #                       passwords after successful first login. Respond to this challenge with
-    #                       <code>NEW_PASSWORD</code> and any required attributes that Amazon Cognito returned in
-    #                       the <code>requiredAttributes</code> parameter. You can also set values for
-    #                       attributes that aren't required by your user pool and that your app client
+    #                       passwords after successful first login. Respond to this challenge with 
+    #                       <code>NEW_PASSWORD</code> and any required attributes that Amazon Cognito returned in 
+    #                       the <code>requiredAttributes</code> parameter. You can also set values for 
+    #                       attributes that aren't required by your user pool and that your app client 
     #                       can write.</p>
     #                  <p>Amazon Cognito only returns this challenge for users who have temporary passwords.
-    #                       When you create passwordless users, you must provide values for all required
+    #                       When you create passwordless users, you must provide values for all required 
     #                       attributes.</p>
     #                  <note>
-    #                     <p>In a <code>NEW_PASSWORD_REQUIRED</code> challenge response, you can't modify a required attribute that already has a value.
-    #   In <code>AdminRespondToAuthChallenge</code> or <code>RespondToAuthChallenge</code>, set a value for any keys that Amazon Cognito returned in the
-    #   <code>requiredAttributes</code> parameter, then use the <code>AdminUpdateUserAttributes</code> or <code>UpdateUserAttributes</code> API
+    #                     <p>In a <code>NEW_PASSWORD_REQUIRED</code> challenge response, you can't modify a required attribute that already has a value. 
+    #   In <code>AdminRespondToAuthChallenge</code> or <code>RespondToAuthChallenge</code>, set a value for any keys that Amazon Cognito returned in the 
+    #   <code>requiredAttributes</code> parameter, then use the <code>AdminUpdateUserAttributes</code> or <code>UpdateUserAttributes</code> API 
     #   operation to modify the value of any additional attributes.</p>
     #                  </note>
     #               </li>
@@ -9101,15 +9101,15 @@ module Aws::CognitoIdentityProvider
     #                     <code>MFA_SETUP</code>: For users who are required to setup an MFA factor
     #                       before they can sign in. The MFA types activated for the user pool will be
     #                       listed in the challenge parameters <code>MFAS_CAN_SETUP</code> value. </p>
-    #                  <p>To set up time-based one-time password (TOTP) MFA, use the session returned
-    #                       in this challenge from <code>InitiateAuth</code> or <code>AdminInitiateAuth</code>
+    #                  <p>To set up time-based one-time password (TOTP) MFA, use the session returned 
+    #                       in this challenge from <code>InitiateAuth</code> or <code>AdminInitiateAuth</code> 
     #                       as an input to <code>AssociateSoftwareToken</code>. Then, use the session returned
-    #                       by <code>VerifySoftwareToken</code> as an input to
+    #                       by <code>VerifySoftwareToken</code> as an input to 
     #                       <code>RespondToAuthChallenge</code> or <code>AdminRespondToAuthChallenge</code>
     #                   with challenge name <code>MFA_SETUP</code> to complete sign-in.
     #                   </p>
-    #                  <p>To set up SMS or email MFA, collect a <code>phone_number</code> or
-    #                       <code>email</code> attribute for the user. Then restart the authentication
+    #                  <p>To set up SMS or email MFA, collect a <code>phone_number</code> or 
+    #                       <code>email</code> attribute for the user. Then restart the authentication 
     #                       flow with an <code>InitiateAuth</code> or <code>AdminInitiateAuth</code> request.
     #                   </p>
     #               </li>
@@ -9140,7 +9140,7 @@ module Aws::CognitoIdentityProvider
     #               "USERNAME": "[username]",
     #               "ANSWER": "[Challenge name]"}</code>
     #                  </p>
-    #                  <p>Available challenges are <code>PASSWORD</code>, <code>PASSWORD_SRP</code>,
+    #                  <p>Available challenges are <code>PASSWORD</code>, <code>PASSWORD_SRP</code>, 
     #               <code>EMAIL_OTP</code>, <code>SMS_OTP</code>, and <code>WEB_AUTHN</code>.</p>
     #                  <p>Complete authentication in the <code>SELECT_CHALLENGE</code> response for
     #               <code>PASSWORD</code>, <code>PASSWORD_SRP</code>, and <code>WEB_AUTHN</code>:</p>
@@ -9221,7 +9221,7 @@ module Aws::CognitoIdentityProvider
     #               <dt>SMS_OTP</dt>
     #               <dd>
     #                  <p>
-    #                     <code>"ChallengeName": "SMS_OTP", "ChallengeResponses":
+    #                     <code>"ChallengeName": "SMS_OTP", "ChallengeResponses": 
     #               {"SMS_OTP_CODE": "[code]", "USERNAME": "[username]"}</code>
     #                  </p>
     #               </dd>
@@ -9241,7 +9241,7 @@ module Aws::CognitoIdentityProvider
     #               </dd>
     #               <dt>PASSWORD_VERIFIER</dt>
     #               <dd>
-    #                  <p>This challenge response is part of the SRP flow. Amazon Cognito requires
+    #                  <p>This challenge response is part of the SRP flow. Amazon Cognito requires 
     #               that your application respond to this challenge within a few seconds. When
     #               the response time exceeds this period, your user pool returns a
     #               <code>NotAuthorizedException</code> error.</p>
@@ -9272,9 +9272,9 @@ module Aws::CognitoIdentityProvider
     #                   This parameter can also set values for writable attributes that aren't
     #                   required by your user pool.</p>
     #                  <note>
-    #                     <p>In a <code>NEW_PASSWORD_REQUIRED</code> challenge response, you can't modify a required attribute that already has a value.
-    #   In <code>AdminRespondToAuthChallenge</code> or <code>RespondToAuthChallenge</code>, set a value for any keys that Amazon Cognito returned in the
-    #   <code>requiredAttributes</code> parameter, then use the <code>AdminUpdateUserAttributes</code> or <code>UpdateUserAttributes</code> API
+    #                     <p>In a <code>NEW_PASSWORD_REQUIRED</code> challenge response, you can't modify a required attribute that already has a value. 
+    #   In <code>AdminRespondToAuthChallenge</code> or <code>RespondToAuthChallenge</code>, set a value for any keys that Amazon Cognito returned in the 
+    #   <code>requiredAttributes</code> parameter, then use the <code>AdminUpdateUserAttributes</code> or <code>UpdateUserAttributes</code> API 
     #   operation to modify the value of any additional attributes.</p>
     #                  </note>
     #               </dd>
@@ -9323,12 +9323,12 @@ module Aws::CognitoIdentityProvider
     #       <code>DEVICE_KEY</code>, see <a href="https://docs.aws.amazon.com/cognito/latest/developerguide/amazon-cognito-user-pools-device-tracking.html">Working with user devices in your user pool</a>.</p>
     #   @return [Hash<String, String>]
     # @!attribute analytics_metadata
-    #   <p>Information that supports analytics outcomes with Amazon Pinpoint, including the
-    #   user's endpoint ID. The endpoint ID is a destination for Amazon Pinpoint push notifications, for example a device identifier,
+    #   <p>Information that supports analytics outcomes with Amazon Pinpoint, including the 
+    #   user's endpoint ID. The endpoint ID is a destination for Amazon Pinpoint push notifications, for example a device identifier, 
     #   email address, or phone number.</p>
     #   @return [Types::AnalyticsMetadataType]
     # @!attribute user_context_data
-    #   <p>Contextual data about your user session like the device fingerprint, IP address, or location. Amazon Cognito threat
+    #   <p>Contextual data about your user session like the device fingerprint, IP address, or location. Amazon Cognito threat 
     #   protection evaluates the risk of an authentication event based on the context that your app generates and passes to Amazon Cognito
     #   when it makes API requests.</p>
     #            <p>For more information, see <a href="https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-settings-viewing-threat-protection-app.html">Collecting data for threat protection in
@@ -9385,15 +9385,15 @@ module Aws::CognitoIdentityProvider
     #            <p>Possible challenges include the following:</p>
     #            <note>
     #               <p>All of the following challenges require <code>USERNAME</code> and, when the app
-    #                   client has a client secret, <code>SECRET_HASH</code> in the parameters. Include a
+    #                   client has a client secret, <code>SECRET_HASH</code> in the parameters. Include a 
     #                   <code>DEVICE_KEY</code> for device authentication.</p>
     #            </note>
     #            <ul>
     #               <li>
     #                  <p>
     #                     <code>WEB_AUTHN</code>: Respond to the challenge with the results of a
-    #                       successful authentication with a WebAuthn authenticator, or passkey, as
-    #                       <code>CREDENTIAL</code>. Examples of WebAuthn authenticators include
+    #                       successful authentication with a WebAuthn authenticator, or passkey, as 
+    #                       <code>CREDENTIAL</code>. Examples of WebAuthn authenticators include 
     #                       biometric devices and security keys.</p>
     #               </li>
     #               <li>
@@ -9406,8 +9406,8 @@ module Aws::CognitoIdentityProvider
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>SELECT_CHALLENGE</code>: Respond with a challenge selection as <code>ANSWER</code>.
-    #                   It must be one of the challenge types in the <code>AvailableChallenges</code> response
+    #                     <code>SELECT_CHALLENGE</code>: Respond with a challenge selection as <code>ANSWER</code>. 
+    #                   It must be one of the challenge types in the <code>AvailableChallenges</code> response 
     #                   parameter. Add the parameters of the selected challenge, for example <code>USERNAME</code>
     #                   and <code>SMS_OTP</code>.</p>
     #               </li>
@@ -9436,7 +9436,7 @@ module Aws::CognitoIdentityProvider
     #               <li>
     #                  <p>
     #                     <code>PASSWORD_VERIFIER</code>: Respond with the second stage of SRP secrets as
-    #                           <code>PASSWORD_CLAIM_SIGNATURE</code>, <code>PASSWORD_CLAIM_SECRET_BLOCK</code>,
+    #                           <code>PASSWORD_CLAIM_SIGNATURE</code>, <code>PASSWORD_CLAIM_SECRET_BLOCK</code>, 
     #                           and <code>TIMESTAMP</code>.</p>
     #               </li>
     #               <li>
@@ -9448,7 +9448,7 @@ module Aws::CognitoIdentityProvider
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>DEVICE_SRP_AUTH</code>: Respond with the initial parameters of device SRP
+    #                     <code>DEVICE_SRP_AUTH</code>: Respond with the initial parameters of device SRP 
     #                   authentication. For more information, see <a href="https://docs.aws.amazon.com/cognito/latest/developerguide/amazon-cognito-user-pools-device-tracking.html#user-pools-remembered-devices-signing-in-with-a-device">Signing in with a device</a>.</p>
     #               </li>
     #               <li>
@@ -9461,18 +9461,18 @@ module Aws::CognitoIdentityProvider
     #               <li>
     #                  <p>
     #                     <code>NEW_PASSWORD_REQUIRED</code>: For users who are required to change their
-    #                       passwords after successful first login. Respond to this challenge with
-    #                       <code>NEW_PASSWORD</code> and any required attributes that Amazon Cognito returned in
-    #                       the <code>requiredAttributes</code> parameter. You can also set values for
-    #                       attributes that aren't required by your user pool and that your app client
+    #                       passwords after successful first login. Respond to this challenge with 
+    #                       <code>NEW_PASSWORD</code> and any required attributes that Amazon Cognito returned in 
+    #                       the <code>requiredAttributes</code> parameter. You can also set values for 
+    #                       attributes that aren't required by your user pool and that your app client 
     #                       can write.</p>
     #                  <p>Amazon Cognito only returns this challenge for users who have temporary passwords.
-    #                       When you create passwordless users, you must provide values for all required
+    #                       When you create passwordless users, you must provide values for all required 
     #                       attributes.</p>
     #                  <note>
-    #                     <p>In a <code>NEW_PASSWORD_REQUIRED</code> challenge response, you can't modify a required attribute that already has a value.
-    #   In <code>AdminRespondToAuthChallenge</code> or <code>RespondToAuthChallenge</code>, set a value for any keys that Amazon Cognito returned in the
-    #   <code>requiredAttributes</code> parameter, then use the <code>AdminUpdateUserAttributes</code> or <code>UpdateUserAttributes</code> API
+    #                     <p>In a <code>NEW_PASSWORD_REQUIRED</code> challenge response, you can't modify a required attribute that already has a value. 
+    #   In <code>AdminRespondToAuthChallenge</code> or <code>RespondToAuthChallenge</code>, set a value for any keys that Amazon Cognito returned in the 
+    #   <code>requiredAttributes</code> parameter, then use the <code>AdminUpdateUserAttributes</code> or <code>UpdateUserAttributes</code> API 
     #   operation to modify the value of any additional attributes.</p>
     #                  </note>
     #               </li>
@@ -9481,15 +9481,15 @@ module Aws::CognitoIdentityProvider
     #                     <code>MFA_SETUP</code>: For users who are required to setup an MFA factor
     #                       before they can sign in. The MFA types activated for the user pool will be
     #                       listed in the challenge parameters <code>MFAS_CAN_SETUP</code> value. </p>
-    #                  <p>To set up time-based one-time password (TOTP) MFA, use the session returned
-    #                       in this challenge from <code>InitiateAuth</code> or <code>AdminInitiateAuth</code>
+    #                  <p>To set up time-based one-time password (TOTP) MFA, use the session returned 
+    #                       in this challenge from <code>InitiateAuth</code> or <code>AdminInitiateAuth</code> 
     #                       as an input to <code>AssociateSoftwareToken</code>. Then, use the session returned
-    #                       by <code>VerifySoftwareToken</code> as an input to
+    #                       by <code>VerifySoftwareToken</code> as an input to 
     #                       <code>RespondToAuthChallenge</code> or <code>AdminRespondToAuthChallenge</code>
     #                   with challenge name <code>MFA_SETUP</code> to complete sign-in.
     #                   </p>
-    #                  <p>To set up SMS or email MFA, collect a <code>phone_number</code> or
-    #                       <code>email</code> attribute for the user. Then restart the authentication
+    #                  <p>To set up SMS or email MFA, collect a <code>phone_number</code> or 
+    #                       <code>email</code> attribute for the user. Then restart the authentication 
     #                       flow with an <code>InitiateAuth</code> or <code>AdminInitiateAuth</code> request.
     #                   </p>
     #               </li>
@@ -9578,7 +9578,7 @@ module Aws::CognitoIdentityProvider
     #               always-block IP address ranges. </p>
     #   @return [Types::RiskExceptionConfigurationType]
     # @!attribute last_modified_date
-    #   <p>The date and time when the item was modified. Amazon Cognito returns this timestamp in UNIX epoch time format. Your SDK might render the output in a
+    #   <p>The date and time when the item was modified. Amazon Cognito returns this timestamp in UNIX epoch time format. Your SDK might render the output in a 
     #   human-readable format like ISO 8601 or a Java <code>Date</code> object.</p>
     #   @return [Time]
     class RiskConfigurationType < Struct.new(
@@ -9913,7 +9913,7 @@ module Aws::CognitoIdentityProvider
     #                        Essentials tier</a> or higher.</p>
     #   @return [Types::WebAuthnMfaSettingsType]
     # @!attribute access_token
-    #   <p>A valid access token that Amazon Cognito issued to the currently signed-in user. Must include a scope claim for
+    #   <p>A valid access token that Amazon Cognito issued to the currently signed-in user. Must include a scope claim for 
     #   <code>aws.cognito.signin.user.admin</code>.</p>
     #   @return [String]
     class SetUserMFAPreferenceRequest < Struct.new(
@@ -10026,7 +10026,7 @@ module Aws::CognitoIdentityProvider
 
     # <p>Represents the request to set user settings.</p>
     # @!attribute access_token
-    #   <p>A valid access token that Amazon Cognito issued to the currently signed-in user. Must include a scope claim for
+    #   <p>A valid access token that Amazon Cognito issued to the currently signed-in user. Must include a scope claim for 
     #   <code>aws.cognito.signin.user.admin</code>.</p>
     #   @return [String]
     # @!attribute mfa_options
@@ -10098,20 +10098,20 @@ module Aws::CognitoIdentityProvider
     #   @return [Array<Types::AttributeType>]
     # @!attribute validation_data
     #   <p>Temporary user attributes that contribute to the outcomes of your pre sign-up Lambda
-    #       trigger. This set of key-value pairs are for custom validation of information that you
+    #       trigger. This set of key-value pairs are for custom validation of information that you 
     #       collect from your users but don't need to retain.</p>
     #            <p>Your Lambda function can analyze this additional data and act on it. Your function
-    #       can automatically confirm and verify select users or perform external API operations
+    #       can automatically confirm and verify select users or perform external API operations 
     #       like logging user attributes and validation data to Amazon CloudWatch Logs.</p>
     #            <p>For more information about the pre sign-up Lambda trigger, see <a href="https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-lambda-pre-sign-up.html">Pre sign-up Lambda trigger</a>.</p>
     #   @return [Array<Types::AttributeType>]
     # @!attribute analytics_metadata
-    #   <p>Information that supports analytics outcomes with Amazon Pinpoint, including the
-    #   user's endpoint ID. The endpoint ID is a destination for Amazon Pinpoint push notifications, for example a device identifier,
+    #   <p>Information that supports analytics outcomes with Amazon Pinpoint, including the 
+    #   user's endpoint ID. The endpoint ID is a destination for Amazon Pinpoint push notifications, for example a device identifier, 
     #   email address, or phone number.</p>
     #   @return [Types::AnalyticsMetadataType]
     # @!attribute user_context_data
-    #   <p>Contextual data about your user session like the device fingerprint, IP address, or location. Amazon Cognito threat
+    #   <p>Contextual data about your user session like the device fingerprint, IP address, or location. Amazon Cognito threat 
     #   protection evaluates the risk of an authentication event based on the context that your app generates and passes to Amazon Cognito
     #   when it makes API requests.</p>
     #            <p>For more information, see <a href="https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-settings-viewing-threat-protection-app.html">Collecting data for threat protection in
@@ -10364,7 +10364,7 @@ module Aws::CognitoIdentityProvider
     end
 
     # @!attribute access_token
-    #   <p>A valid access token that Amazon Cognito issued to the currently signed-in user. Must include a scope claim for
+    #   <p>A valid access token that Amazon Cognito issued to the currently signed-in user. Must include a scope claim for 
     #   <code>aws.cognito.signin.user.admin</code>.</p>
     #   @return [String]
     class StartWebAuthnRegistrationRequest < Struct.new(
@@ -10469,11 +10469,11 @@ module Aws::CognitoIdentityProvider
     #   <p>This parameter is reserved for future use and currently accepts one value.</p>
     #   @return [String]
     # @!attribute creation_date
-    #   <p>The date and time when the item was created. Amazon Cognito returns this timestamp in UNIX epoch time format. Your SDK might render the output in a
+    #   <p>The date and time when the item was created. Amazon Cognito returns this timestamp in UNIX epoch time format. Your SDK might render the output in a 
     #   human-readable format like ISO 8601 or a Java <code>Date</code> object.</p>
     #   @return [Time]
     # @!attribute last_modified_date
-    #   <p>The date and time when the item was modified. Amazon Cognito returns this timestamp in UNIX epoch time format. Your SDK might render the output in a
+    #   <p>The date and time when the item was modified. Amazon Cognito returns this timestamp in UNIX epoch time format. Your SDK might render the output in a 
     #   human-readable format like ISO 8601 or a Java <code>Date</code> object.</p>
     #   @return [Time]
     class TermsDescriptionType < Struct.new(
@@ -10527,11 +10527,11 @@ module Aws::CognitoIdentityProvider
     #                   "https://terms.example.com/es"</code>.</p>
     #   @return [Hash<String, String>]
     # @!attribute creation_date
-    #   <p>The date and time when the item was created. Amazon Cognito returns this timestamp in UNIX epoch time format. Your SDK might render the output in a
+    #   <p>The date and time when the item was created. Amazon Cognito returns this timestamp in UNIX epoch time format. Your SDK might render the output in a 
     #   human-readable format like ISO 8601 or a Java <code>Date</code> object.</p>
     #   @return [Time]
     # @!attribute last_modified_date
-    #   <p>The date and time when the item was modified. Amazon Cognito returns this timestamp in UNIX epoch time format. Your SDK might render the output in a
+    #   <p>The date and time when the item was modified. Amazon Cognito returns this timestamp in UNIX epoch time format. Your SDK might render the output in a 
     #   human-readable format like ISO 8601 or a Java <code>Date</code> object.</p>
     #   @return [Time]
     class TermsType < Struct.new(
@@ -10641,11 +10641,11 @@ module Aws::CognitoIdentityProvider
     #   <p>The CSS version number.</p>
     #   @return [String]
     # @!attribute last_modified_date
-    #   <p>The date and time when the item was modified. Amazon Cognito returns this timestamp in UNIX epoch time format. Your SDK might render the output in a
+    #   <p>The date and time when the item was modified. Amazon Cognito returns this timestamp in UNIX epoch time format. Your SDK might render the output in a 
     #   human-readable format like ISO 8601 or a Java <code>Date</code> object.</p>
     #   @return [Time]
     # @!attribute creation_date
-    #   <p>The date and time when the item was created. Amazon Cognito returns this timestamp in UNIX epoch time format. Your SDK might render the output in a
+    #   <p>The date and time when the item was created. Amazon Cognito returns this timestamp in UNIX epoch time format. Your SDK might render the output in a 
     #   human-readable format like ISO 8601 or a Java <code>Date</code> object.</p>
     #   @return [Time]
     class UICustomizationType < Struct.new(
@@ -10776,7 +10776,7 @@ module Aws::CognitoIdentityProvider
     #   <p>Your feedback to the authentication event. When you provide a <code>FeedbackValue</code>
     #   value of <code>valid</code>, you tell Amazon Cognito that you trust a user session where Amazon Cognito
     #   has evaluated some level of risk. When you provide a <code>FeedbackValue</code> value of
-    #   <code>invalid</code>, you tell Amazon Cognito that you don't trust a user session, or you
+    #   <code>invalid</code>, you tell Amazon Cognito that you don't trust a user session, or you 
     #   don't believe that Amazon Cognito evaluated a high-enough risk level.</p>
     #   @return [String]
     class UpdateAuthEventFeedbackRequest < Struct.new(
@@ -10800,7 +10800,7 @@ module Aws::CognitoIdentityProvider
 
     # <p>Represents the request to update the device status.</p>
     # @!attribute access_token
-    #   <p>A valid access token that Amazon Cognito issued to the currently signed-in user. Must include a scope claim for
+    #   <p>A valid access token that Amazon Cognito issued to the currently signed-in user. Must include a scope claim for 
     #   <code>aws.cognito.signin.user.admin</code>.</p>
     #   @return [String]
     # @!attribute device_key
@@ -10933,11 +10933,11 @@ module Aws::CognitoIdentityProvider
     #                       "rsa-sha256" }</code>
     #                  </p>
     #                  <p>Create or update request with Metadata file: <code>"ProviderDetails": { "IDPInit": "true",
-    #                       "IDPSignout": "true", "EncryptedResponses" : "true",
+    #                       "IDPSignout": "true", "EncryptedResponses" : "true",  
     #                       "MetadataFile": "[metadata XML]", "RequestSigningAlgorithm":
     #                       "rsa-sha256" }</code>
     #                  </p>
-    #                  <p>The value of <code>MetadataFile</code> must be the plaintext metadata document with all
+    #                  <p>The value of <code>MetadataFile</code> must be the plaintext metadata document with all 
     #                   quote (") characters escaped by backslashes.</p>
     #                  <p>Describe response: <code>"ProviderDetails": { "IDPInit": "true",
     #                       "IDPSignout": "true", "EncryptedResponses" : "true", "ActiveEncryptionCertificate": "[certificate]",
@@ -10985,7 +10985,7 @@ module Aws::CognitoIdentityProvider
     #               <dt>SignInWithApple</dt>
     #               <dd>
     #                  <p>Create or update request: <code>"ProviderDetails": { "authorize_scopes":
-    #                       "email name", "client_id": "com.example.cognito", "private_key": "1EXAMPLE",
+    #                       "email name", "client_id": "com.example.cognito", "private_key": "1EXAMPLE", 
     #                       "key_id": "2EXAMPLE", "team_id": "3EXAMPLE" }</code>
     #                  </p>
     #                  <p>Describe response: <code>"ProviderDetails": {
@@ -10999,15 +10999,15 @@ module Aws::CognitoIdentityProvider
     #               </dd>
     #               <dt>Facebook</dt>
     #               <dd>
-    #                  <p>Create or update request: <code>"ProviderDetails": { "api_version": "v17.0",
-    #               "authorize_scopes": "public_profile, email", "client_id": "1example23456789",
+    #                  <p>Create or update request: <code>"ProviderDetails": { "api_version": "v17.0", 
+    #               "authorize_scopes": "public_profile, email", "client_id": "1example23456789", 
     #               "client_secret": "provider-app-client-secret" }</code>
     #                  </p>
-    #                  <p>Describe response: <code>"ProviderDetails":
-    #               { "api_version": "v17.0", "attributes_url": "https://graph.facebook.com/v17.0/me?fields=",
-    #               "attributes_url_add_attributes": "true", "authorize_scopes": "public_profile, email",
-    #               "authorize_url": "https://www.facebook.com/v17.0/dialog/oauth", "client_id":
-    #               "1example23456789", "client_secret": "provider-app-client-secret", "token_request_method":
+    #                  <p>Describe response: <code>"ProviderDetails": 
+    #               { "api_version": "v17.0", "attributes_url": "https://graph.facebook.com/v17.0/me?fields=", 
+    #               "attributes_url_add_attributes": "true", "authorize_scopes": "public_profile, email", 
+    #               "authorize_url": "https://www.facebook.com/v17.0/dialog/oauth", "client_id": 
+    #               "1example23456789", "client_secret": "provider-app-client-secret", "token_request_method": 
     #               "GET", "token_url": "https://graph.facebook.com/v17.0/oauth/access_token" }</code>
     #                  </p>
     #               </dd>
@@ -11252,7 +11252,7 @@ module Aws::CognitoIdentityProvider
     #               attribute value until they verify the new value.</p>
     #   @return [Array<Types::AttributeType>]
     # @!attribute access_token
-    #   <p>A valid access token that Amazon Cognito issued to the currently signed-in user. Must include a scope claim for
+    #   <p>A valid access token that Amazon Cognito issued to the currently signed-in user. Must include a scope claim for 
     #   <code>aws.cognito.signin.user.admin</code>.</p>
     #   @return [String]
     # @!attribute client_metadata
@@ -11326,42 +11326,42 @@ module Aws::CognitoIdentityProvider
     #   <p>A friendly name for the app client.</p>
     #   @return [String]
     # @!attribute refresh_token_validity
-    #   <p>The refresh token time limit. After this limit expires, your user can't use
-    #   their refresh token. To specify the time unit for <code>RefreshTokenValidity</code> as
-    #   <code>seconds</code>, <code>minutes</code>, <code>hours</code>, or <code>days</code>,
+    #   <p>The refresh token time limit. After this limit expires, your user can't use 
+    #   their refresh token. To specify the time unit for <code>RefreshTokenValidity</code> as 
+    #   <code>seconds</code>, <code>minutes</code>, <code>hours</code>, or <code>days</code>, 
     #   set a <code>TokenValidityUnits</code> value in your API request.</p>
     #            <p>For example, when you set <code>RefreshTokenValidity</code> as <code>10</code> and
     #   <code>TokenValidityUnits</code> as <code>days</code>, your user can refresh their session
     #   and retrieve new access and ID tokens for 10 days.</p>
-    #            <p>The default time unit for <code>RefreshTokenValidity</code> in an API request is days.
-    #   You can't set <code>RefreshTokenValidity</code> to 0. If you do, Amazon Cognito overrides the
-    #   value with the default value of 30 days. <i>Valid range</i> is displayed below
+    #            <p>The default time unit for <code>RefreshTokenValidity</code> in an API request is days. 
+    #   You can't set <code>RefreshTokenValidity</code> to 0. If you do, Amazon Cognito overrides the 
+    #   value with the default value of 30 days. <i>Valid range</i> is displayed below 
     #   in seconds.</p>
     #            <p>If you don't specify otherwise in the configuration of your app client, your refresh
     #   tokens are valid for 30 days.</p>
     #   @return [Integer]
     # @!attribute access_token_validity
-    #   <p>The access token time limit. After this limit expires, your user can't use
-    #   their access token. To specify the time unit for <code>AccessTokenValidity</code> as
-    #   <code>seconds</code>, <code>minutes</code>, <code>hours</code>, or <code>days</code>,
+    #   <p>The access token time limit. After this limit expires, your user can't use 
+    #   their access token. To specify the time unit for <code>AccessTokenValidity</code> as 
+    #   <code>seconds</code>, <code>minutes</code>, <code>hours</code>, or <code>days</code>, 
     #   set a <code>TokenValidityUnits</code> value in your API request.</p>
     #            <p>For example, when you set <code>AccessTokenValidity</code> to <code>10</code> and
     #   <code>TokenValidityUnits</code> to <code>hours</code>, your user can authorize access with
     #   their access token for 10 hours.</p>
-    #            <p>The default time unit for <code>AccessTokenValidity</code> in an API request is hours.
+    #            <p>The default time unit for <code>AccessTokenValidity</code> in an API request is hours. 
     #   <i>Valid range</i> is displayed below in seconds.</p>
     #            <p>If you don't specify otherwise in the configuration of your app client, your access
     #   tokens are valid for one hour.</p>
     #   @return [Integer]
     # @!attribute id_token_validity
-    #   <p>The ID token time limit. After this limit expires, your user can't use
-    #   their ID token. To specify the time unit for <code>IdTokenValidity</code> as
-    #   <code>seconds</code>, <code>minutes</code>, <code>hours</code>, or <code>days</code>,
+    #   <p>The ID token time limit. After this limit expires, your user can't use 
+    #   their ID token. To specify the time unit for <code>IdTokenValidity</code> as 
+    #   <code>seconds</code>, <code>minutes</code>, <code>hours</code>, or <code>days</code>, 
     #   set a <code>TokenValidityUnits</code> value in your API request.</p>
     #            <p>For example, when you set <code>IdTokenValidity</code> as <code>10</code> and
-    #   <code>TokenValidityUnits</code> as <code>hours</code>, your user can authenticate their
+    #   <code>TokenValidityUnits</code> as <code>hours</code>, your user can authenticate their 
     #   session with their ID token for 10 hours.</p>
-    #            <p>The default time unit for <code>IdTokenValidity</code> in an API request is hours.
+    #            <p>The default time unit for <code>IdTokenValidity</code> in an API request is hours. 
     #   <i>Valid range</i> is displayed below in seconds.</p>
     #            <p>If you don't specify otherwise in the configuration of your app client, your ID
     #   tokens are valid for one hour.</p>
@@ -11400,12 +11400,12 @@ module Aws::CognitoIdentityProvider
     #       pool</a>.</p>
     #   @return [Array<String>]
     # @!attribute explicit_auth_flows
-    #   <p>The <a href="https://docs.aws.amazon.com/cognito/latest/developerguide/amazon-cognito-user-pools-authentication-flow-methods.html">authentication flows</a> that you want your user pool client to support. For each app
-    #   client in your user pool, you can sign in your users with any combination of one or more flows, including with
-    #   a user name and Secure Remote Password (SRP), a user name and password, or a custom authentication process that
+    #   <p>The <a href="https://docs.aws.amazon.com/cognito/latest/developerguide/amazon-cognito-user-pools-authentication-flow-methods.html">authentication flows</a> that you want your user pool client to support. For each app 
+    #   client in your user pool, you can sign in your users with any combination of one or more flows, including with 
+    #   a user name and Secure Remote Password (SRP), a user name and password, or a custom authentication process that 
     #   you define with Lambda functions.</p>
     #            <note>
-    #               <p>If you don't specify a value for <code>ExplicitAuthFlows</code>, your app client supports
+    #               <p>If you don't specify a value for <code>ExplicitAuthFlows</code>, your app client supports 
     #   <code>ALLOW_REFRESH_TOKEN_AUTH</code>, <code>ALLOW_USER_SRP_AUTH</code>, and <code>ALLOW_CUSTOM_AUTH</code>.
     #   </p>
     #            </note>
@@ -11418,7 +11418,7 @@ module Aws::CognitoIdentityProvider
     #               secure remote password (SRP), passwordless, and passkey authentication.
     #               This authentiation flow can do username-password and SRP authentication
     #               without other <code>ExplicitAuthFlows</code> permitting them. For example
-    #               users can complete an SRP challenge through <code>USER_AUTH</code>
+    #               users can complete an SRP challenge through <code>USER_AUTH</code> 
     #               without the flow <code>USER_SRP_AUTH</code> being active for the app
     #               client. This flow doesn't include <code>CUSTOM_AUTH</code>.
     #           </p>
@@ -11430,7 +11430,7 @@ module Aws::CognitoIdentityProvider
     #                     <code>ALLOW_ADMIN_USER_PASSWORD_AUTH</code>: Enable admin based user password
     #               authentication flow <code>ADMIN_USER_PASSWORD_AUTH</code>. This setting replaces
     #               the <code>ADMIN_NO_SRP_AUTH</code> setting. With this authentication flow, your app
-    #               passes a user name and password to Amazon Cognito in the request, instead of using the Secure
+    #               passes a user name and password to Amazon Cognito in the request, instead of using the Secure 
     #               Remote Password (SRP) protocol to securely transmit the password.</p>
     #               </li>
     #               <li>
@@ -11454,7 +11454,7 @@ module Aws::CognitoIdentityProvider
     #               tokens.</p>
     #               </li>
     #            </ul>
-    #            <p>In some environments, you will see the values <code>ADMIN_NO_SRP_AUTH</code>, <code>CUSTOM_AUTH_FLOW_ONLY</code>, or <code>USER_PASSWORD_AUTH</code>.
+    #            <p>In some environments, you will see the values <code>ADMIN_NO_SRP_AUTH</code>, <code>CUSTOM_AUTH_FLOW_ONLY</code>, or <code>USER_PASSWORD_AUTH</code>. 
     #   You can't assign these legacy <code>ExplicitAuthFlows</code> values to user pool clients at the same time as values that begin with <code>ALLOW_</code>,
     #   like <code>ALLOW_USER_SRP_AUTH</code>.</p>
     #   @return [Array<String>]
@@ -11464,10 +11464,10 @@ module Aws::CognitoIdentityProvider
     #               <code>Google</code>, <code>SignInWithApple</code>, and <code>LoginWithAmazon</code>.
     #               You can also specify the names that you configured for the SAML and OIDC IdPs in your
     #               user pool, for example <code>MySAMLIdP</code> or <code>MyOIDCIdP</code>.</p>
-    #            <p>This parameter sets the IdPs that <a href="https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-managed-login.html">managed
-    #               login</a> will display on the login page for your app client. The removal of
-    #               <code>COGNITO</code> from this list doesn't prevent authentication operations
-    #               for local users with the user pools API in an Amazon Web Services SDK. The only way to prevent
+    #            <p>This parameter sets the IdPs that <a href="https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-managed-login.html">managed 
+    #               login</a> will display on the login page for your app client. The removal of 
+    #               <code>COGNITO</code> from this list doesn't prevent authentication operations 
+    #               for local users with the user pools API in an Amazon Web Services SDK. The only way to prevent 
     #               SDK-based authentication is to block access with a <a href="https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-waf.html">WAF rule</a>.
     #           </p>
     #   @return [Array<String>]
@@ -11546,7 +11546,7 @@ module Aws::CognitoIdentityProvider
     #   @return [Array<String>]
     # @!attribute allowed_o_auth_flows_user_pool_client
     #   <p>Set to <code>true</code> to use OAuth 2.0 authorization server features in your app client.</p>
-    #            <p>This parameter must have a value of <code>true</code> before you can configure
+    #            <p>This parameter must have a value of <code>true</code> before you can configure 
     #   the following features in your app client.</p>
     #            <ul>
     #               <li>
@@ -11566,10 +11566,10 @@ module Aws::CognitoIdentityProvider
     #                     <code>AllowedOAuthFlows</code>: Support for authorization code, implicit, and client credentials OAuth 2.0 grants.</p>
     #               </li>
     #            </ul>
-    #            <p>To use authorization server features, configure one of these features in the Amazon Cognito console or set
-    #   <code>AllowedOAuthFlowsUserPoolClient</code> to <code>true</code> in a <code>CreateUserPoolClient</code> or
-    #   <code>UpdateUserPoolClient</code> API request. If you don't set a value for
-    #   <code>AllowedOAuthFlowsUserPoolClient</code> in a request with the CLI or SDKs, it defaults
+    #            <p>To use authorization server features, configure one of these features in the Amazon Cognito console or set 
+    #   <code>AllowedOAuthFlowsUserPoolClient</code> to <code>true</code> in a <code>CreateUserPoolClient</code> or 
+    #   <code>UpdateUserPoolClient</code> API request. If you don't set a value for 
+    #   <code>AllowedOAuthFlowsUserPoolClient</code> in a request with the CLI or SDKs, it defaults 
     #   to <code>false</code>. When <code>false</code>, only SDK-based API sign-in is permitted.</p>
     #   @return [Boolean]
     # @!attribute analytics_configuration
@@ -11580,8 +11580,8 @@ module Aws::CognitoIdentityProvider
     #               more information, see <a href="https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-pinpoint-integration.html">Using Amazon Pinpoint analytics</a>.</p>
     #   @return [Types::AnalyticsConfigurationType]
     # @!attribute prevent_user_existence_errors
-    #   <p>When <code>ENABLED</code>, suppresses messages that might indicate a valid user exists
-    #               when someone attempts sign-in. This parameters sets your preference for the errors and
+    #   <p>When <code>ENABLED</code>, suppresses messages that might indicate a valid user exists 
+    #               when someone attempts sign-in. This parameters sets your preference for the errors and 
     #               responses that you want Amazon Cognito APIs to return during authentication, account
     #               confirmation, and password recovery when the user doesn't exist in the user pool. When
     #               set to <code>ENABLED</code> and the user doesn't exist, authentication returns an error
@@ -11606,7 +11606,7 @@ module Aws::CognitoIdentityProvider
     #               a client secret.</p>
     #   @return [Boolean]
     # @!attribute auth_session_validity
-    #   <p>Amazon Cognito creates a session token for each API request in an authentication flow. <code>AuthSessionValidity</code> is the duration,
+    #   <p>Amazon Cognito creates a session token for each API request in an authentication flow. <code>AuthSessionValidity</code> is the duration, 
     #   in minutes, of that session token. Your user pool native user must respond to each authentication challenge before the session expires.</p>
     #   @return [Integer]
     # @!attribute refresh_token_rotation
@@ -11767,9 +11767,9 @@ module Aws::CognitoIdentityProvider
     #   <p>When active, <code>DeletionProtection</code> prevents accidental deletion of your user
     #   pool. Before you can delete a user pool that you have protected against deletion, you
     #   must deactivate this feature.</p>
-    #            <p>When you try to delete a protected user pool in a <code>DeleteUserPool</code> API request,
-    #   Amazon Cognito returns an <code>InvalidParameterException</code> error. To delete a protected user pool,
-    #   send a new <code>DeleteUserPool</code> request after you deactivate deletion protection in an
+    #            <p>When you try to delete a protected user pool in a <code>DeleteUserPool</code> API request, 
+    #   Amazon Cognito returns an <code>InvalidParameterException</code> error. To delete a protected user pool, 
+    #   send a new <code>DeleteUserPool</code> request after you deactivate deletion protection in an 
     #   <code>UpdateUserPool</code> API request.</p>
     #   @return [String]
     # @!attribute lambda_config
@@ -11854,9 +11854,9 @@ module Aws::CognitoIdentityProvider
     #               self-service sign-up.</p>
     #   @return [Types::AdminCreateUserConfigType]
     # @!attribute user_pool_add_ons
-    #   <p>Contains settings for activation of threat protection, including the operating
-    #   mode and additional authentication types. To log user security information but take
-    #   no action, set to <code>AUDIT</code>. To configure automatic security responses to
+    #   <p>Contains settings for activation of threat protection, including the operating 
+    #   mode and additional authentication types. To log user security information but take 
+    #   no action, set to <code>AUDIT</code>. To configure automatic security responses to 
     #   potentially unwanted traffic to your user pool, set to <code>ENFORCED</code>.</p>
     #            <p>For more information, see <a href="https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pool-settings-advanced-security.html">Adding advanced security to a user pool</a>. To activate this setting, your user pool must be on the <a href="https://docs.aws.amazon.com/cognito/latest/developerguide/feature-plans-features-plus.html">
     #                        Plus tier</a>.</p>
@@ -12006,7 +12006,7 @@ module Aws::CognitoIdentityProvider
     #   <p>The pre-signed URL target for uploading the CSV file.</p>
     #   @return [String]
     # @!attribute creation_date
-    #   <p>The date and time when the item was created. Amazon Cognito returns this timestamp in UNIX epoch time format. Your SDK might render the output in a
+    #   <p>The date and time when the item was created. Amazon Cognito returns this timestamp in UNIX epoch time format. Your SDK might render the output in a 
     #   human-readable format like ISO 8601 or a Java <code>Date</code> object.</p>
     #   @return [Time]
     # @!attribute start_date
@@ -12159,9 +12159,9 @@ module Aws::CognitoIdentityProvider
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Contains settings for activation of threat protection, including the operating
-    # mode and additional authentication types. To log user security information but take
-    # no action, set to <code>AUDIT</code>. To configure automatic security responses to
+    # <p>Contains settings for activation of threat protection, including the operating 
+    # mode and additional authentication types. To log user security information but take 
+    # no action, set to <code>AUDIT</code>. To configure automatic security responses to 
     # potentially unwanted traffic to your user pool, set to <code>ENFORCED</code>.</p>
     #          <p>For more information, see <a href="https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pool-settings-advanced-security.html">Adding advanced security to a user pool</a>. To activate this setting, your user pool must be on the <a href="https://docs.aws.amazon.com/cognito/latest/developerguide/feature-plans-features-plus.html">
     #                      Plus tier</a>.</p>
@@ -12218,50 +12218,50 @@ module Aws::CognitoIdentityProvider
     #   <p>The app client secret.</p>
     #   @return [String]
     # @!attribute last_modified_date
-    #   <p>The date and time when the item was modified. Amazon Cognito returns this timestamp in UNIX epoch time format. Your SDK might render the output in a
+    #   <p>The date and time when the item was modified. Amazon Cognito returns this timestamp in UNIX epoch time format. Your SDK might render the output in a 
     #   human-readable format like ISO 8601 or a Java <code>Date</code> object.</p>
     #   @return [Time]
     # @!attribute creation_date
-    #   <p>The date and time when the item was created. Amazon Cognito returns this timestamp in UNIX epoch time format. Your SDK might render the output in a
+    #   <p>The date and time when the item was created. Amazon Cognito returns this timestamp in UNIX epoch time format. Your SDK might render the output in a 
     #   human-readable format like ISO 8601 or a Java <code>Date</code> object.</p>
     #   @return [Time]
     # @!attribute refresh_token_validity
-    #   <p>The refresh token time limit. After this limit expires, your user can't use
-    #   their refresh token. To specify the time unit for <code>RefreshTokenValidity</code> as
-    #   <code>seconds</code>, <code>minutes</code>, <code>hours</code>, or <code>days</code>,
+    #   <p>The refresh token time limit. After this limit expires, your user can't use 
+    #   their refresh token. To specify the time unit for <code>RefreshTokenValidity</code> as 
+    #   <code>seconds</code>, <code>minutes</code>, <code>hours</code>, or <code>days</code>, 
     #   set a <code>TokenValidityUnits</code> value in your API request.</p>
     #            <p>For example, when you set <code>RefreshTokenValidity</code> as <code>10</code> and
     #   <code>TokenValidityUnits</code> as <code>days</code>, your user can refresh their session
     #   and retrieve new access and ID tokens for 10 days.</p>
-    #            <p>The default time unit for <code>RefreshTokenValidity</code> in an API request is days.
-    #   You can't set <code>RefreshTokenValidity</code> to 0. If you do, Amazon Cognito overrides the
-    #   value with the default value of 30 days. <i>Valid range</i> is displayed below
+    #            <p>The default time unit for <code>RefreshTokenValidity</code> in an API request is days. 
+    #   You can't set <code>RefreshTokenValidity</code> to 0. If you do, Amazon Cognito overrides the 
+    #   value with the default value of 30 days. <i>Valid range</i> is displayed below 
     #   in seconds.</p>
     #            <p>If you don't specify otherwise in the configuration of your app client, your refresh
     #   tokens are valid for 30 days.</p>
     #   @return [Integer]
     # @!attribute access_token_validity
-    #   <p>The access token time limit. After this limit expires, your user can't use
-    #   their access token. To specify the time unit for <code>AccessTokenValidity</code> as
-    #   <code>seconds</code>, <code>minutes</code>, <code>hours</code>, or <code>days</code>,
+    #   <p>The access token time limit. After this limit expires, your user can't use 
+    #   their access token. To specify the time unit for <code>AccessTokenValidity</code> as 
+    #   <code>seconds</code>, <code>minutes</code>, <code>hours</code>, or <code>days</code>, 
     #   set a <code>TokenValidityUnits</code> value in your API request.</p>
     #            <p>For example, when you set <code>AccessTokenValidity</code> to <code>10</code> and
     #   <code>TokenValidityUnits</code> to <code>hours</code>, your user can authorize access with
     #   their access token for 10 hours.</p>
-    #            <p>The default time unit for <code>AccessTokenValidity</code> in an API request is hours.
+    #            <p>The default time unit for <code>AccessTokenValidity</code> in an API request is hours. 
     #   <i>Valid range</i> is displayed below in seconds.</p>
     #            <p>If you don't specify otherwise in the configuration of your app client, your access
     #   tokens are valid for one hour.</p>
     #   @return [Integer]
     # @!attribute id_token_validity
-    #   <p>The ID token time limit. After this limit expires, your user can't use
-    #   their ID token. To specify the time unit for <code>IdTokenValidity</code> as
-    #   <code>seconds</code>, <code>minutes</code>, <code>hours</code>, or <code>days</code>,
+    #   <p>The ID token time limit. After this limit expires, your user can't use 
+    #   their ID token. To specify the time unit for <code>IdTokenValidity</code> as 
+    #   <code>seconds</code>, <code>minutes</code>, <code>hours</code>, or <code>days</code>, 
     #   set a <code>TokenValidityUnits</code> value in your API request.</p>
     #            <p>For example, when you set <code>IdTokenValidity</code> as <code>10</code> and
-    #   <code>TokenValidityUnits</code> as <code>hours</code>, your user can authenticate their
+    #   <code>TokenValidityUnits</code> as <code>hours</code>, your user can authenticate their 
     #   session with their ID token for 10 hours.</p>
-    #            <p>The default time unit for <code>IdTokenValidity</code> in an API request is hours.
+    #            <p>The default time unit for <code>IdTokenValidity</code> in an API request is hours. 
     #   <i>Valid range</i> is displayed below in seconds.</p>
     #            <p>If you don't specify otherwise in the configuration of your app client, your ID
     #   tokens are valid for one hour.</p>
@@ -12302,12 +12302,12 @@ module Aws::CognitoIdentityProvider
     #       pool</a>.</p>
     #   @return [Array<String>]
     # @!attribute explicit_auth_flows
-    #   <p>The <a href="https://docs.aws.amazon.com/cognito/latest/developerguide/amazon-cognito-user-pools-authentication-flow-methods.html">authentication flows</a> that you want your user pool client to support. For each app
-    #   client in your user pool, you can sign in your users with any combination of one or more flows, including with
-    #   a user name and Secure Remote Password (SRP), a user name and password, or a custom authentication process that
+    #   <p>The <a href="https://docs.aws.amazon.com/cognito/latest/developerguide/amazon-cognito-user-pools-authentication-flow-methods.html">authentication flows</a> that you want your user pool client to support. For each app 
+    #   client in your user pool, you can sign in your users with any combination of one or more flows, including with 
+    #   a user name and Secure Remote Password (SRP), a user name and password, or a custom authentication process that 
     #   you define with Lambda functions.</p>
     #            <note>
-    #               <p>If you don't specify a value for <code>ExplicitAuthFlows</code>, your app client supports
+    #               <p>If you don't specify a value for <code>ExplicitAuthFlows</code>, your app client supports 
     #   <code>ALLOW_REFRESH_TOKEN_AUTH</code>, <code>ALLOW_USER_SRP_AUTH</code>, and <code>ALLOW_CUSTOM_AUTH</code>.
     #   </p>
     #            </note>
@@ -12320,7 +12320,7 @@ module Aws::CognitoIdentityProvider
     #               secure remote password (SRP), passwordless, and passkey authentication.
     #               This authentiation flow can do username-password and SRP authentication
     #               without other <code>ExplicitAuthFlows</code> permitting them. For example
-    #               users can complete an SRP challenge through <code>USER_AUTH</code>
+    #               users can complete an SRP challenge through <code>USER_AUTH</code> 
     #               without the flow <code>USER_SRP_AUTH</code> being active for the app
     #               client. This flow doesn't include <code>CUSTOM_AUTH</code>.
     #           </p>
@@ -12332,7 +12332,7 @@ module Aws::CognitoIdentityProvider
     #                     <code>ALLOW_ADMIN_USER_PASSWORD_AUTH</code>: Enable admin based user password
     #               authentication flow <code>ADMIN_USER_PASSWORD_AUTH</code>. This setting replaces
     #               the <code>ADMIN_NO_SRP_AUTH</code> setting. With this authentication flow, your app
-    #               passes a user name and password to Amazon Cognito in the request, instead of using the Secure
+    #               passes a user name and password to Amazon Cognito in the request, instead of using the Secure 
     #               Remote Password (SRP) protocol to securely transmit the password.</p>
     #               </li>
     #               <li>
@@ -12356,7 +12356,7 @@ module Aws::CognitoIdentityProvider
     #               tokens.</p>
     #               </li>
     #            </ul>
-    #            <p>In some environments, you will see the values <code>ADMIN_NO_SRP_AUTH</code>, <code>CUSTOM_AUTH_FLOW_ONLY</code>, or <code>USER_PASSWORD_AUTH</code>.
+    #            <p>In some environments, you will see the values <code>ADMIN_NO_SRP_AUTH</code>, <code>CUSTOM_AUTH_FLOW_ONLY</code>, or <code>USER_PASSWORD_AUTH</code>. 
     #   You can't assign these legacy <code>ExplicitAuthFlows</code> values to user pool clients at the same time as values that begin with <code>ALLOW_</code>,
     #   like <code>ALLOW_USER_SRP_AUTH</code>.</p>
     #   @return [Array<String>]
@@ -12366,10 +12366,10 @@ module Aws::CognitoIdentityProvider
     #               <code>Google</code>, <code>SignInWithApple</code>, and <code>LoginWithAmazon</code>.
     #               You can also specify the names that you configured for the SAML and OIDC IdPs in your
     #               user pool, for example <code>MySAMLIdP</code> or <code>MyOIDCIdP</code>.</p>
-    #            <p>This parameter sets the IdPs that <a href="https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-managed-login.html">managed
-    #               login</a> will display on the login page for your app client. The removal of
-    #               <code>COGNITO</code> from this list doesn't prevent authentication operations
-    #               for local users with the user pools API in an Amazon Web Services SDK. The only way to prevent
+    #            <p>This parameter sets the IdPs that <a href="https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-managed-login.html">managed 
+    #               login</a> will display on the login page for your app client. The removal of 
+    #               <code>COGNITO</code> from this list doesn't prevent authentication operations 
+    #               for local users with the user pools API in an Amazon Web Services SDK. The only way to prevent 
     #               SDK-based authentication is to block access with a <a href="https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-waf.html">WAF rule</a>.
     #           </p>
     #   @return [Array<String>]
@@ -12453,7 +12453,7 @@ module Aws::CognitoIdentityProvider
     #   @return [Array<String>]
     # @!attribute allowed_o_auth_flows_user_pool_client
     #   <p>Set to <code>true</code> to use OAuth 2.0 authorization server features in your app client.</p>
-    #            <p>This parameter must have a value of <code>true</code> before you can configure
+    #            <p>This parameter must have a value of <code>true</code> before you can configure 
     #   the following features in your app client.</p>
     #            <ul>
     #               <li>
@@ -12473,10 +12473,10 @@ module Aws::CognitoIdentityProvider
     #                     <code>AllowedOAuthFlows</code>: Support for authorization code, implicit, and client credentials OAuth 2.0 grants.</p>
     #               </li>
     #            </ul>
-    #            <p>To use authorization server features, configure one of these features in the Amazon Cognito console or set
-    #   <code>AllowedOAuthFlowsUserPoolClient</code> to <code>true</code> in a <code>CreateUserPoolClient</code> or
-    #   <code>UpdateUserPoolClient</code> API request. If you don't set a value for
-    #   <code>AllowedOAuthFlowsUserPoolClient</code> in a request with the CLI or SDKs, it defaults
+    #            <p>To use authorization server features, configure one of these features in the Amazon Cognito console or set 
+    #   <code>AllowedOAuthFlowsUserPoolClient</code> to <code>true</code> in a <code>CreateUserPoolClient</code> or 
+    #   <code>UpdateUserPoolClient</code> API request. If you don't set a value for 
+    #   <code>AllowedOAuthFlowsUserPoolClient</code> in a request with the CLI or SDKs, it defaults 
     #   to <code>false</code>. When <code>false</code>, only SDK-based API sign-in is permitted.</p>
     #   @return [Boolean]
     # @!attribute analytics_configuration
@@ -12490,8 +12490,8 @@ module Aws::CognitoIdentityProvider
     #            </note>
     #   @return [Types::AnalyticsConfigurationType]
     # @!attribute prevent_user_existence_errors
-    #   <p>When <code>ENABLED</code>, suppresses messages that might indicate a valid user exists
-    #               when someone attempts sign-in. This parameters sets your preference for the errors and
+    #   <p>When <code>ENABLED</code>, suppresses messages that might indicate a valid user exists 
+    #               when someone attempts sign-in. This parameters sets your preference for the errors and 
     #               responses that you want Amazon Cognito APIs to return during authentication, account
     #               confirmation, and password recovery when the user doesn't exist in the user pool. When
     #               set to <code>ENABLED</code> and the user doesn't exist, authentication returns an error
@@ -12524,7 +12524,7 @@ module Aws::CognitoIdentityProvider
     #               data, see <a href="https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pool-settings-adaptive-authentication.html#user-pool-settings-adaptive-authentication-device-fingerprint">Adding user device and session data to API requests</a>.</p>
     #   @return [Boolean]
     # @!attribute auth_session_validity
-    #   <p>Amazon Cognito creates a session token for each API request in an authentication flow. <code>AuthSessionValidity</code> is the duration,
+    #   <p>Amazon Cognito creates a session token for each API request in an authentication flow. <code>AuthSessionValidity</code> is the duration, 
     #   in minutes, of that session token. Your user pool native user must respond to each authentication challenge before the session expires.</p>
     #   @return [Integer]
     # @!attribute refresh_token_rotation
@@ -12590,11 +12590,11 @@ module Aws::CognitoIdentityProvider
     #     This property is no longer available.
     #   @return [String]
     # @!attribute last_modified_date
-    #   <p>The date and time when the item was modified. Amazon Cognito returns this timestamp in UNIX epoch time format. Your SDK might render the output in a
+    #   <p>The date and time when the item was modified. Amazon Cognito returns this timestamp in UNIX epoch time format. Your SDK might render the output in a 
     #   human-readable format like ISO 8601 or a Java <code>Date</code> object.</p>
     #   @return [Time]
     # @!attribute creation_date
-    #   <p>The date and time when the item was created. Amazon Cognito returns this timestamp in UNIX epoch time format. Your SDK might render the output in a
+    #   <p>The date and time when the item was created. Amazon Cognito returns this timestamp in UNIX epoch time format. Your SDK might render the output in a 
     #   human-readable format like ISO 8601 or a Java <code>Date</code> object.</p>
     #   @return [Time]
     # @!attribute replica_regions
@@ -12714,9 +12714,9 @@ module Aws::CognitoIdentityProvider
     #   <p>When active, <code>DeletionProtection</code> prevents accidental deletion of your user
     #   pool. Before you can delete a user pool that you have protected against deletion, you
     #   must deactivate this feature.</p>
-    #            <p>When you try to delete a protected user pool in a <code>DeleteUserPool</code> API request,
-    #   Amazon Cognito returns an <code>InvalidParameterException</code> error. To delete a protected user pool,
-    #   send a new <code>DeleteUserPool</code> request after you deactivate deletion protection in an
+    #            <p>When you try to delete a protected user pool in a <code>DeleteUserPool</code> API request, 
+    #   Amazon Cognito returns an <code>InvalidParameterException</code> error. To delete a protected user pool, 
+    #   send a new <code>DeleteUserPool</code> request after you deactivate deletion protection in an 
     #   <code>UpdateUserPool</code> API request.</p>
     #   @return [String]
     # @!attribute lambda_config
@@ -12730,11 +12730,11 @@ module Aws::CognitoIdentityProvider
     #     This property is no longer available.
     #   @return [String]
     # @!attribute last_modified_date
-    #   <p>The date and time when the item was modified. Amazon Cognito returns this timestamp in UNIX epoch time format. Your SDK might render the output in a
+    #   <p>The date and time when the item was modified. Amazon Cognito returns this timestamp in UNIX epoch time format. Your SDK might render the output in a 
     #   human-readable format like ISO 8601 or a Java <code>Date</code> object.</p>
     #   @return [Time]
     # @!attribute creation_date
-    #   <p>The date and time when the item was created. Amazon Cognito returns this timestamp in UNIX epoch time format. Your SDK might render the output in a
+    #   <p>The date and time when the item was created. Amazon Cognito returns this timestamp in UNIX epoch time format. Your SDK might render the output in a 
     #   human-readable format like ISO 8601 or a Java <code>Date</code> object.</p>
     #   @return [Time]
     # @!attribute schema_attributes
@@ -12865,9 +12865,9 @@ module Aws::CognitoIdentityProvider
     #   <p>The configuration for <code>AdminCreateUser</code> requests.</p>
     #   @return [Types::AdminCreateUserConfigType]
     # @!attribute user_pool_add_ons
-    #   <p>Contains settings for activation of threat protection, including the operating
-    #   mode and additional authentication types. To log user security information but take
-    #   no action, set to <code>AUDIT</code>. To configure automatic security responses to
+    #   <p>Contains settings for activation of threat protection, including the operating 
+    #   mode and additional authentication types. To log user security information but take 
+    #   no action, set to <code>AUDIT</code>. To configure automatic security responses to 
     #   potentially unwanted traffic to your user pool, set to <code>ENFORCED</code>.</p>
     #            <p>For more information, see <a href="https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pool-settings-advanced-security.html">Adding advanced security to a user pool</a>. To activate this setting, your user pool must be on the <a href="https://docs.aws.amazon.com/cognito/latest/developerguide/feature-plans-features-plus.html">
     #                        Plus tier</a>.</p>
@@ -12970,11 +12970,11 @@ module Aws::CognitoIdentityProvider
     #   <p>Names and values of a user's attributes, for example <code>email</code>.</p>
     #   @return [Array<Types::AttributeType>]
     # @!attribute user_create_date
-    #   <p>The date and time when the item was created. Amazon Cognito returns this timestamp in UNIX epoch time format. Your SDK might render the output in a
+    #   <p>The date and time when the item was created. Amazon Cognito returns this timestamp in UNIX epoch time format. Your SDK might render the output in a 
     #   human-readable format like ISO 8601 or a Java <code>Date</code> object.</p>
     #   @return [Time]
     # @!attribute user_last_modified_date
-    #   <p>The date and time when the item was modified. Amazon Cognito returns this timestamp in UNIX epoch time format. Your SDK might render the output in a
+    #   <p>The date and time when the item was modified. Amazon Cognito returns this timestamp in UNIX epoch time format. Your SDK might render the output in a 
     #   human-readable format like ISO 8601 or a Java <code>Date</code> object.</p>
     #   @return [Time]
     # @!attribute enabled
@@ -13126,7 +13126,7 @@ module Aws::CognitoIdentityProvider
     end
 
     # @!attribute access_token
-    #   <p>A valid access token that Amazon Cognito issued to the currently signed-in user. Must include a scope claim for
+    #   <p>A valid access token that Amazon Cognito issued to the currently signed-in user. Must include a scope claim for 
     #   <code>aws.cognito.signin.user.admin</code>.</p>
     #   @return [String]
     # @!attribute session
@@ -13169,7 +13169,7 @@ module Aws::CognitoIdentityProvider
 
     # <p>Represents the request to verify user attributes.</p>
     # @!attribute access_token
-    #   <p>A valid access token that Amazon Cognito issued to the currently signed-in user. Must include a scope claim for
+    #   <p>A valid access token that Amazon Cognito issued to the currently signed-in user. Must include a scope claim for 
     #   <code>aws.cognito.signin.user.admin</code>.</p>
     #   @return [String]
     # @!attribute attribute_name
@@ -13313,7 +13313,7 @@ module Aws::CognitoIdentityProvider
     #               Bluetooth Low Energy.</p>
     #   @return [Array<String>]
     # @!attribute created_at
-    #   <p>The date and time when the item was created. Amazon Cognito returns this timestamp in UNIX epoch time format. Your SDK might render the output in a
+    #   <p>The date and time when the item was created. Amazon Cognito returns this timestamp in UNIX epoch time format. Your SDK might render the output in a 
     #   human-readable format like ISO 8601 or a Java <code>Date</code> object.</p>
     #   @return [Time]
     class WebAuthnCredentialDescription < Struct.new(

@@ -3,7 +3,6 @@
 # This is generated code!
 
 require_relative 'plugins/endpoint'
-require 'smithy-client/plugins/checksum_required'
 require 'smithy-client/plugins/content_length'
 require 'smithy-client/plugins/default_params'
 require 'smithy-client/plugins/host_prefix'
@@ -23,6 +22,8 @@ require 'smithy-client/plugins/transfer_encoding'
 require 'aws-sdk-core/plugins/global_configuration'
 require 'aws-sdk-core/plugins/shared_config'
 require 'aws-sdk-core/plugins/user_agent'
+require 'aws-sdk-core/plugins/checksum_algorithm'
+require 'aws-sdk-core/plugins/http_checksum'
 require 'aws-sdk-core/plugins/invocation_id'
 require 'aws-sdk-core/plugins/recursion_detection'
 require 'aws-sdk-core/plugins/retry_errors'
@@ -44,7 +45,6 @@ module Aws::GameLift
     @identifier = :gamelift
 
     add_plugin(::Aws::GameLift::Plugins::Endpoint)
-    add_plugin(Smithy::Client::Plugins::ChecksumRequired)
     add_plugin(Smithy::Client::Plugins::ContentLength)
     add_plugin(Smithy::Client::Plugins::DefaultParams)
     add_plugin(Smithy::Client::Plugins::HostPrefix)
@@ -64,6 +64,8 @@ module Aws::GameLift
     add_plugin(Aws::Core::Plugins::GlobalConfiguration)
     add_plugin(Aws::Core::Plugins::SharedConfig)
     add_plugin(Aws::Core::Plugins::UserAgent)
+    add_plugin(Aws::Core::Plugins::ChecksumAlgorithm)
+    add_plugin(Aws::Core::Plugins::HttpChecksum)
     add_plugin(Aws::Core::Plugins::InvocationId)
     add_plugin(Aws::Core::Plugins::RecursionDetection)
     add_plugin(Aws::Core::Plugins::RetryErrors)
@@ -140,23 +142,41 @@ module Aws::GameLift
     #  * `ENV['AWS_DEFAULT_REGION']`
     #  * `~/.aws/credentials` as `region` under a profile
     #  * `~/.aws/config` as `region` under a profile
+    # @option options [String] :request_checksum_calculation (when_supported)
+    #  Determines when a checksum is calculated for request payloads. Values are:
+    #  
+    #  * `when_supported` - (default) A checksum is calculated for operations
+    #    modeled with the `httpChecksum` trait when `requestChecksumRequired`
+    #    is `true` or a `requestAlgorithmMember` is modeled.
+    #  * `when_required` - A checksum is calculated only when
+    #    `requestChecksumRequired` is `true`, or when the caller supplies a
+    #    modeled `requestAlgorithmMember`.
     # @option options [Integer] :request_min_compression_size_bytes (10240)
     #  The minimum size in bytes that triggers compression for request bodies.
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
+    # @option options [String] :response_checksum_validation (when_supported)
+    #  Determines when checksum validation is performed for response payloads.
+    #  Values are:
+    #  
+    #  * `when_supported` - (default) Validation is enabled for operations
+    #    modeled with a `requestValidationModeMember` and at least one
+    #    `responseAlgorithms` value supported by the client.
+    #  * `when_required` - Validation is performed only when the caller sets
+    #    the modeled `requestValidationModeMember` to `ENABLED`.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #
+    #  
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #
+    #  
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #
+    #  
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -323,7 +343,7 @@ module Aws::GameLift
     #   <p>A custom string that uniquely identifies the game server to claim. If this parameter is left empty, Amazon GameLift Servers FleetIQ searches for an available
     #               game server in the specified game server group.</p>
     # @option params [String] :game_server_data
-    #   <p>A set of custom game server properties, formatted as a single string value. This data
+    #   <p>A set of custom game server properties, formatted as a single string value. This data 
     #               is passed to a game client or service when it requests information on game servers. </p>
     # @option params [Types::ClaimFilterOption] :filter_option
     #   <p>Object that restricts how a claimed game server is chosen.</p>
@@ -503,7 +523,7 @@ module Aws::GameLift
     #               build's operating system later.</p>
     #            <note>
     #               <p>Amazon Linux 2 (AL2) will reach end of support on 6/30/2026. See more details in
-    #               the <a href="http://aws.amazon.com/amazon-linux-2/faqs/">Amazon Linux 2 FAQs</a>.
+    #               the <a href="http://aws.amazon.com/amazon-linux-2/faqs/">Amazon Linux 2 FAQs</a>. 
     #               For game servers
     #                   that are hosted on AL2 and use server SDK version 4.x for Amazon GameLift Servers, first update the
     #                   game server build to server SDK 5.x, and then deploy to AL2023 instances. See
@@ -1152,7 +1172,7 @@ module Aws::GameLift
     # @option params [String] :name
     #   <p>A descriptive identifier for the container group definition. The name value must be unique in an Amazon Web Services Region.</p>
     # @option params [String] :container_group_type
-    #   <p>The type of container group being defined. Container group type determines how Amazon GameLift Servers
+    #   <p>The type of container group being defined. Container group type determines how Amazon GameLift Servers 
     #         deploys the container group on each fleet instance.</p>
     #            <p>Default value: <code>GAME_SERVER</code>
     #            </p>
@@ -1553,10 +1573,10 @@ module Aws::GameLift
     #               detailed descriptions of Amazon EC2 instance types.</p>
     # @option params [Array<Types::IpPermission>] :ec2_inbound_permissions
     #   <p>The IP address ranges and port settings that allow inbound traffic to access game
-    #               server processes and other processes on this fleet. Set this parameter for managed EC2 fleets. You can leave this parameter empty when creating the fleet, but you must call
-    #               <a href="https://docs.aws.amazon.com/gamelift/latest/apireference/API_UpdateFleetPortSettings">https://docs.aws.amazon.com/gamelift/latest/apireference/API_UpdateFleetPortSettings</a> to set it before players can connect to game sessions.
-    #               As a best practice, we recommend
-    #               opening ports for remote access only when you need them and closing them when you're finished.
+    #               server processes and other processes on this fleet. Set this parameter for managed EC2 fleets. You can leave this parameter empty when creating the fleet, but you must call 
+    #               <a href="https://docs.aws.amazon.com/gamelift/latest/apireference/API_UpdateFleetPortSettings">https://docs.aws.amazon.com/gamelift/latest/apireference/API_UpdateFleetPortSettings</a> to set it before players can connect to game sessions. 
+    #               As a best practice, we recommend 
+    #               opening ports for remote access only when you need them and closing them when you're finished. 
     #               For Amazon GameLift Servers Realtime fleets, Amazon GameLift Servers automatically sets TCP and UDP ranges.</p>
     # @option params [String] :new_game_session_protection_policy
     #   <p>The status of termination protection for active game sessions on the fleet. By
@@ -1600,18 +1620,18 @@ module Aws::GameLift
     #               settings. </p>
     # @option params [String] :peer_vpc_id
     #   <p>A unique identifier for a VPC with resources to be accessed by your Amazon GameLift Servers fleet. The
-    #               VPC must be in the same Region as your fleet. To look up a VPC ID, use the
-    #               <a href="https://console.aws.amazon.com/vpc/">VPC Dashboard</a> in the Amazon Web Services Management Console.
+    #               VPC must be in the same Region as your fleet. To look up a VPC ID, use the 
+    #               <a href="https://console.aws.amazon.com/vpc/">VPC Dashboard</a> in the Amazon Web Services Management Console. 
     #               Learn more about VPC peering in <a href="https://docs.aws.amazon.com/gamelift/latest/developerguide/vpc-peering.html">VPC Peering with Amazon GameLift Servers Fleets</a>.</p>
     # @option params [String] :fleet_type
     #   <p>Indicates whether to use On-Demand or Spot instances for this fleet. By default, this
     #               property is set to <code>ON_DEMAND</code>. Learn more about when to use <a href="https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-ec2-instances.html#gamelift-ec2-instances-spot"> On-Demand versus Spot Instances</a>. This fleet property can't be changed after the fleet is created.</p>
     # @option params [String] :instance_role_arn
-    #   <p>A unique identifier for an IAM role that manages access to your Amazon Web Services services.
-    #           With an instance role ARN set, any application that runs on an instance in this fleet can assume the role,
-    #           including install scripts, server processes, and daemons (background processes). Create a role or look up a role's
+    #   <p>A unique identifier for an IAM role that manages access to your Amazon Web Services services. 
+    #           With an instance role ARN set, any application that runs on an instance in this fleet can assume the role, 
+    #           including install scripts, server processes, and daemons (background processes). Create a role or look up a role's 
     #           ARN by using the <a href="https://console.aws.amazon.com/iam/">IAM dashboard</a> in the Amazon Web Services Management Console.
-    #           Learn more about using on-box credentials for your game servers at
+    #           Learn more about using on-box credentials for your game servers at 
     #           <a href="https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-resources.html">
     #           Access external resources from a game server</a>. This fleet property can't be changed after the fleet is created.</p>
     # @option params [Types::CertificateConfiguration] :certificate_configuration
@@ -1637,7 +1657,7 @@ module Aws::GameLift
     #               by Amazon GameLift Servers. Provide a list of one or more Amazon Web Services Region codes, such as
     #                   <code>us-west-2</code>, or Local Zone names. When using this parameter, Amazon GameLift Servers
     #               requires you to include your home location in the request. For a list of supported
-    #               Regions and Local Zones, see
+    #               Regions and Local Zones, see 
     #               <a href="https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-regions.html">
     #                   Amazon GameLift Servers service locations</a> for managed hosting.</p>
     # @option params [Array<Types::Tag>] :tags
@@ -1655,7 +1675,7 @@ module Aws::GameLift
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>ANYWHERE</code> – Game servers
+    #                     <code>ANYWHERE</code> – Game servers 
     #                       and supporting software are deployed to compute resources that you provide and
     #                       manage. With this compute type, you can also set the
     #                           <code>AnywhereConfiguration</code> parameter.</p>
@@ -1997,11 +2017,11 @@ module Aws::GameLift
     #               </li>
     #            </ul>
     # @option params [String] :game_server_protection_policy
-    #   <p>A flag that indicates whether instances in the game server group are protected
-    #               from early termination. Unprotected instances that have active game servers running might
-    #               be terminated during a scale-down event, causing players to be dropped from the game.
-    #               Protected instances cannot be terminated while there are active game servers running except
-    #               in the event of a forced game server group deletion. An exception to this is with Spot
+    #   <p>A flag that indicates whether instances in the game server group are protected 
+    #               from early termination. Unprotected instances that have active game servers running might 
+    #               be terminated during a scale-down event, causing players to be dropped from the game. 
+    #               Protected instances cannot be terminated while there are active game servers running except 
+    #               in the event of a forced game server group deletion. An exception to this is with Spot 
     #               Instances, which can be terminated by Amazon Web Services regardless of protection status. This property is set to <code>NO_PROTECTION</code> by default.</p>
     # @option params [Array<String>] :vpc_subnets
     #   <p>A list of virtual private cloud (VPC) subnets to use with instances in the game server
@@ -2140,7 +2160,7 @@ module Aws::GameLift
     # @option params [Array<Types::GameProperty>] :game_properties
     #   <p>A set of key-value pairs that can store custom data in a game session.
     #     For example: <code>{"Key": "difficulty", "Value": "novice"}</code>.
-    #             For an example, see <a href="https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-client-api.html#game-properties-create">Create a game session with custom properties</a>.
+    #             For an example, see <a href="https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-client-api.html#game-properties-create">Create a game session with custom properties</a>.                    
     #           </p>
     #            <note>
     #               <ul>
@@ -2350,14 +2370,14 @@ module Aws::GameLift
     #             <b>Related actions</b>
     #          </p>
     #          <p>
-    #             <a href="https://docs.aws.amazon.com/gamelift/latest/apireference/API_CreateGameSessionQueue.html">CreateGameSessionQueue</a>
+    #             <a href="https://docs.aws.amazon.com/gamelift/latest/apireference/API_CreateGameSessionQueue.html">CreateGameSessionQueue</a> 
     #                     |
     #                     <a href="https://docs.aws.amazon.com/gamelift/latest/apireference/API_DescribeGameSessionQueues.html">DescribeGameSessionQueues</a>
-    #                     |
+    #                     | 
     #                     <a href="https://docs.aws.amazon.com/gamelift/latest/apireference/API_UpdateGameSessionQueue.html">UpdateGameSessionQueue</a>
-    #                     |
+    #                     | 
     #                     <a href="https://docs.aws.amazon.com/gamelift/latest/apireference/API_DeleteGameSessionQueue.html">DeleteGameSessionQueue</a>
-    #                     |
+    #                     | 
     #                     <a href="https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets">All APIs by task</a>
     #          </p>
     # @param [Hash, Types::CreateGameSessionQueueInput] params
@@ -2369,19 +2389,19 @@ module Aws::GameLift
     #               <p>The minimum value is 10 and the maximum value is 600.</p>
     #            </note>
     # @option params [Array<Types::PlayerLatencyPolicy>] :player_latency_policies
-    #   <p>A set of policies that enforce a sliding cap on player latency when processing game sessions placement requests.
+    #   <p>A set of policies that enforce a sliding cap on player latency when processing game sessions placement requests. 
     #   	Use multiple policies to gradually relax the cap over time if Amazon GameLift Servers can't make a placement.
     #   	    Policies are evaluated in order starting with the lowest maximum latency value.</p>
     # @option params [Array<Types::GameSessionQueueDestination>] :destinations
-    #   <p>A list of fleets and/or fleet aliases that can be used to fulfill game session placement requests in the queue.
+    #   <p>A list of fleets and/or fleet aliases that can be used to fulfill game session placement requests in the queue. 
     #       Destinations are identified by either a fleet ARN or a fleet alias ARN, and are listed in order of placement preference.</p>
     # @option params [Types::FilterConfiguration] :filter_configuration
-    #   <p>A list of locations where a queue is allowed to place new game sessions. Locations
-    #               are specified in the form of Amazon Web Services Region codes, such as <code>us-west-2</code>. If this parameter is
+    #   <p>A list of locations where a queue is allowed to place new game sessions. Locations 
+    #               are specified in the form of Amazon Web Services Region codes, such as <code>us-west-2</code>. If this parameter is 
     #               not set, game sessions can be placed in any queue location. </p>
     # @option params [Types::PriorityConfiguration] :priority_configuration
-    #   <p>Custom settings to use when prioritizing destinations and locations for game session placements. This
-    #               configuration replaces the FleetIQ default prioritization process. Priority types that are not explicitly
+    #   <p>Custom settings to use when prioritizing destinations and locations for game session placements. This 
+    #               configuration replaces the FleetIQ default prioritization process. Priority types that are not explicitly 
     #               named will be automatically applied at the end of the prioritization process. </p>
     # @option params [String] :custom_event_data
     #   <p>Information to be added to all events that are related to this game session
@@ -2568,7 +2588,7 @@ module Aws::GameLift
     #   <p>An SNS topic ARN that is set up to receive matchmaking notifications. See <a href="https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-notification.html">
     #                   Setting up notifications for matchmaking</a> for more information.</p>
     # @option params [Integer] :additional_player_count
-    #   <p>The number of player slots in a match to keep open for future players. For example, if the configuration's rule set specifies
+    #   <p>The number of player slots in a match to keep open for future players. For example, if the configuration's rule set specifies 
     #               a match for a single 12-person team, and the additional player count is set to 2, only 10 players are selected for the match. This parameter is not used if <code>FlexMatchMode</code> is set to
     #                   <code>STANDALONE</code>.</p>
     # @option params [String] :custom_event_data
@@ -2964,8 +2984,8 @@ module Aws::GameLift
     #               This value cannot be updated later.
     #           </p>
     #            <note>
-    #               <p>Node.js 10 will reach end of support on September 30, 2026. See more details
-    #               in the <a href="http://aws.amazon.com/gamelift/faq/nodejs10/">Node.js 10 FAQs</a>. For migration guidance,
+    #               <p>Node.js 10 will reach end of support on September 30, 2026. See more details 
+    #               in the <a href="http://aws.amazon.com/gamelift/faq/nodejs10/">Node.js 10 FAQs</a>. For migration guidance, 
     #               see <a href="https://docs.aws.amazon.com/gamelift/latest/realtimeguide/realtime-script.html#realtime-script-nodejs-migration">
     #                   Migrating from Node.js 10 to 24</a>.</p>
     #            </note>
@@ -3082,12 +3102,12 @@ module Aws::GameLift
     #          </p>
     # @param [Hash, Types::CreateVpcPeeringAuthorizationInput] params
     # @option params [String] :game_lift_aws_account_id
-    #   <p>A unique identifier for the Amazon Web Services account that you use to manage your Amazon GameLift Servers fleet.
+    #   <p>A unique identifier for the Amazon Web Services account that you use to manage your Amazon GameLift Servers fleet. 
     #               You can find your Account ID in the Amazon Web Services Management Console under account settings.</p>
     # @option params [String] :peer_vpc_id
     #   <p>A unique identifier for a VPC with resources to be accessed by your Amazon GameLift Servers fleet. The
-    #               VPC must be in the same Region as your fleet. To look up a VPC ID, use the
-    #               <a href="https://console.aws.amazon.com/vpc/">VPC Dashboard</a> in the Amazon Web Services Management Console.
+    #               VPC must be in the same Region as your fleet. To look up a VPC ID, use the 
+    #               <a href="https://console.aws.amazon.com/vpc/">VPC Dashboard</a> in the Amazon Web Services Management Console. 
     #               Learn more about VPC peering in <a href="https://docs.aws.amazon.com/gamelift/latest/developerguide/vpc-peering.html">VPC Peering with Amazon GameLift Servers Fleets</a>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -3185,8 +3205,8 @@ module Aws::GameLift
     #               settings.</p>
     # @option params [String] :peer_vpc_id
     #   <p>A unique identifier for a VPC with resources to be accessed by your Amazon GameLift Servers fleet. The
-    #               VPC must be in the same Region as your fleet. To look up a VPC ID, use the
-    #               <a href="https://console.aws.amazon.com/vpc/">VPC Dashboard</a> in the Amazon Web Services Management Console.
+    #               VPC must be in the same Region as your fleet. To look up a VPC ID, use the 
+    #               <a href="https://console.aws.amazon.com/vpc/">VPC Dashboard</a> in the Amazon Web Services Management Console. 
     #               Learn more about VPC peering in <a href="https://docs.aws.amazon.com/gamelift/latest/developerguide/vpc-peering.html">VPC Peering with Amazon GameLift Servers Fleets</a>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -3327,7 +3347,7 @@ module Aws::GameLift
     #          <p>
     #             <b>Result</b>
     #          </p>
-    #          <p>If successful, Amazon GameLift Servers removes the container group definition versions that you request deletion for.
+    #          <p>If successful, Amazon GameLift Servers removes the container group definition versions that you request deletion for. 
     #     This request will fail for any requested versions if the following is true: </p>
     #          <ul>
     #             <li>
@@ -3737,12 +3757,12 @@ module Aws::GameLift
     #          </p>
     # @param [Hash, Types::DeleteVpcPeeringAuthorizationInput] params
     # @option params [String] :game_lift_aws_account_id
-    #   <p>A unique identifier for the Amazon Web Services account that you use to manage your Amazon GameLift Servers fleet.
+    #   <p>A unique identifier for the Amazon Web Services account that you use to manage your Amazon GameLift Servers fleet. 
     #               You can find your Account ID in the Amazon Web Services Management Console under account settings.</p>
     # @option params [String] :peer_vpc_id
     #   <p>A unique identifier for a VPC with resources to be accessed by your Amazon GameLift Servers fleet. The
-    #               VPC must be in the same Region as your fleet. To look up a VPC ID, use the
-    #               <a href="https://console.aws.amazon.com/vpc/">VPC Dashboard</a> in the Amazon Web Services Management Console.
+    #               VPC must be in the same Region as your fleet. To look up a VPC ID, use the 
+    #               <a href="https://console.aws.amazon.com/vpc/">VPC Dashboard</a> in the Amazon Web Services Management Console. 
     #               Learn more about VPC peering in <a href="https://docs.aws.amazon.com/gamelift/latest/developerguide/vpc-peering.html">VPC Peering with Amazon GameLift Servers Fleets</a>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -4611,7 +4631,7 @@ module Aws::GameLift
     #          <p>Retrieves the resource capacity settings for one or more fleets.  For a container
     #             fleet, this operation also returns counts for game server container groups.</p>
     #          <p>With multi-location fleets, this operation retrieves data for the fleet's home Region
-    #             only. To retrieve capacity for remote locations, see
+    #             only. To retrieve capacity for remote locations, see 
     #             <a href="https://docs.aws.amazon.com/gamelift/latest/apireference/API_DescribeFleetLocationCapacity.html">https://docs.aws.amazon.com/gamelift/latest/apireference/API_DescribeFleetLocationCapacity.html</a>.</p>
     #          <p>This operation can be used in the following ways: </p>
     #          <ul>
@@ -5459,7 +5479,7 @@ module Aws::GameLift
     #             This practice can cause you to exceed your API limit, which results in errors. Instead,
     #             you must configure an Amazon Simple Notification Service (SNS) topic to receive notifications from FlexMatch or
     #             queues. Continuously polling with <code>DescribeGameSessionPlacement</code> should only
-    #             be used for games in development with low game session usage. For a reference
+    #             be used for games in development with low game session usage. For a reference 
     #             implementation of event-based game session placement tracking, see <a href="https://github.com/amazon-gamelift/amazon-gamelift-toolkit/tree/main/event-based-session-placement">
     #                 Event-based game session placement guidance</a> in the Amazon GameLift Toolkit.</p>
     # @param [Hash, Types::DescribeGameSessionPlacementInput] params
@@ -6033,7 +6053,7 @@ module Aws::GameLift
     #          </ul>
     #          <p>To request player sessions, specify either a player session ID, game session ID, or
     #             player ID. You can filter this request by player session status. If you provide
-    #             a specific <code>PlayerSessionId</code> or <code>PlayerId</code>, Amazon GameLift Servers ignores the filter criteria.
+    #             a specific <code>PlayerSessionId</code> or <code>PlayerId</code>, Amazon GameLift Servers ignores the filter criteria. 
     #             Use the pagination parameters to retrieve results as a set of sequential pages. </p>
     #          <p>If successful, a <code>PlayerSession</code> object is returned for each session that
     #             matches the request.</p>
@@ -6126,7 +6146,7 @@ module Aws::GameLift
     #          <p>Retrieves a fleet's runtime configuration settings. The runtime configuration
     #             determines which server processes run, and how, on computes in the fleet. For managed
     #             EC2 fleets, the runtime configuration describes server processes that run on each fleet
-    #             instance. You can update a fleet's runtime configuration at any time using
+    #             instance. You can update a fleet's runtime configuration at any time using 
     #             <a href="https://docs.aws.amazon.com/gamelift/latest/apireference/API_UpdateRuntimeConfiguration.html">UpdateRuntimeConfiguration</a>.</p>
     #          <p>To get the current runtime configuration for a fleet, provide the fleet ID. </p>
     #          <p>If successful, a <code>RuntimeConfiguration</code> object is returned for the
@@ -8012,7 +8032,7 @@ module Aws::GameLift
     #             handles all compute registry tasks for you. For an Anywhere fleet that doesn't use the
     #             Agent, call this operation to register fleet computes.</p>
     #          <p>To register a compute, give the compute a name (must be unique within the
-    #             fleet) and specify the compute resource's DNS name or IP address. Provide a
+    #             fleet) and specify the compute resource's DNS name or IP address. Provide a 
     #             fleet ID and a fleet location to associate with the compute being registered. You can
     #             optionally include the path to a TLS certificate on the compute resource.</p>
     #          <p>If successful, this operation returns compute details, including an Amazon GameLift Servers SDK
@@ -8133,13 +8153,13 @@ module Aws::GameLift
     #               across all game server groups in your Amazon Web Services account.</p>
     # @option params [String] :instance_id
     #   <p>The unique identifier for the instance where the game server is running. This ID is
-    #               available in the instance metadata. EC2 instance IDs
+    #               available in the instance metadata. EC2 instance IDs 
     #               use a 17-character format, for example: <code>i-1234567890abcdef0</code>.</p>
     # @option params [String] :connection_info
     #   <p>Information that is needed to make inbound client connections to the game server. This
     #               might include the IP address and port, DNS name, and other information.</p>
     # @option params [String] :game_server_data
-    #   <p>A set of custom game server properties, formatted as a single string value. This data
+    #   <p>A set of custom game server properties, formatted as a single string value. This data 
     #               is passed to a game client or service when it requests information on game servers. </p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -8752,7 +8772,7 @@ module Aws::GameLift
     #   <p>A descriptive label that is associated with a game session. Session names do not need to be unique.</p>
     # @option params [Array<Types::PlayerLatency>] :player_latencies
     #   <p>A set of values, expressed in milliseconds, that indicates the amount of latency that a player experiences when connected to a fleet location (Amazon Web Services Regions or custom locations for Amazon GameLift Servers Anywhere fleets). This information is used to try to place the new game session where it
-    #               can offer the best possible gameplay experience for the players.
+    #               can offer the best possible gameplay experience for the players. 
     #               </p>
     # @option params [Array<Types::DesiredPlayerSession>] :desired_player_sessions
     #   <p>Set of information on each player to create a player session for.</p>
@@ -9154,7 +9174,7 @@ module Aws::GameLift
     #             </li>
     #          </ul>
     #          <p>If successful, Amazon GameLift Servers no longer initiates scaling events except in response to manual
-    #             changes using <a href="https://docs.aws.amazon.com/gamelift/latest/apireference/API_UpdateFleetCapacity.html">UpdateFleetCapacity</a>. To restart fleet actions again, call
+    #             changes using <a href="https://docs.aws.amazon.com/gamelift/latest/apireference/API_UpdateFleetCapacity.html">UpdateFleetCapacity</a>. To restart fleet actions again, call 
     #             <a href="https://docs.aws.amazon.com/gamelift/latest/apireference/API_StartFleetActions.html">StartFleetActions</a>.</p>
     #          <p>
     #             <b>Learn more</b>
@@ -9475,8 +9495,8 @@ module Aws::GameLift
     #          </p>
     #          <p>Amazon GameLift Servers server SDK 5 reference guide for <code>OnProcessTerminate()</code>
     #             (<a href="https://docs.aws.amazon.com/gamelift/latest/developerguide/integration-server-sdk5-cpp-initsdk.html">C++</a>)
-    #             (<a href="https://docs.aws.amazon.com/gamelift/latest/developerguide/integration-server-sdk5-csharp-initsdk.html">C#</a>)
-    #             (<a href="https://docs.aws.amazon.com/gamelift/latest/developerguide/integration-server-sdk5-unreal-initsdk.html">Unreal</a>)
+    #             (<a href="https://docs.aws.amazon.com/gamelift/latest/developerguide/integration-server-sdk5-csharp-initsdk.html">C#</a>) 
+    #             (<a href="https://docs.aws.amazon.com/gamelift/latest/developerguide/integration-server-sdk5-unreal-initsdk.html">Unreal</a>) 
     #             (<a href="https://docs.aws.amazon.com/gamelift/latest/developerguide/integration-server-sdk-go-initsdk.html">Go</a>)
     #         </p>
     # @param [Hash, Types::TerminateGameSessionInput] params
@@ -9720,7 +9740,7 @@ module Aws::GameLift
     #             updated, this operation might initiate a fleet deployment. You can track deployments for
     #             a fleet using <a href="https://docs.aws.amazon.com/gamelift/latest/apireference/API_DescribeFleetDeployment.html">https://docs.aws.amazon.com/gamelift/latest/apireference/API_DescribeFleetDeployment.html</a>.</p>
     #          <note>
-    #             <p>A managed fleet's runtime environment, which depends on the fleet's
+    #             <p>A managed fleet's runtime environment, which depends on the fleet's 
     #                 Amazon Machine Image (AMI) version, can't be updated. You must create a new
     #                 fleet. As a best practice, we recommend replacing your managed fleets every 30
     #                 days to maintain a secure and up-to-date runtime environment for your hosted game
@@ -10011,7 +10031,7 @@ module Aws::GameLift
     #          <p>If successful, this operation returns the complete properties of the new container group
     #       definition version.</p>
     #          <p>If the container group definition version is used in an active fleet, the update
-    #       automatically initiates a new fleet deployment of the new version. You can track a fleet's
+    #       automatically initiates a new fleet deployment of the new version. You can track a fleet's 
     #       deployments using <a href="https://docs.aws.amazon.com/gamelift/latest/apireference/API_ListFleetDeployments.html">ListFleetDeployments</a>.</p>
     # @param [Hash, Types::UpdateContainerGroupDefinitionInput] params
     # @option params [String] :name
@@ -10274,7 +10294,7 @@ module Aws::GameLift
     #          <p>To update fleet attributes, specify the fleet ID and the property values that you want
     #             to change. If successful, Amazon GameLift Servers returns the identifiers for the updated fleet.</p>
     #          <note>
-    #             <p>A managed fleet's runtime environment, which depends on the fleet's
+    #             <p>A managed fleet's runtime environment, which depends on the fleet's 
     #                 Amazon Machine Image (AMI) version, can't be updated. You must create a new
     #                 fleet. As a best practice, we recommend replacing your managed fleets every 30
     #                 days to maintain a secure and up-to-date runtime environment for your hosted game
@@ -10361,13 +10381,13 @@ module Aws::GameLift
     #             manage capacity settings in each location individually.</p>
     #          <ul>
     #             <li>
-    #                <p>Minimum/maximum size: Set hard limits on the number of Amazon EC2 instances allowed. If Amazon GameLift Servers receives a
-    #                     request--either through manual update or automatic scaling--it won't change the capacity
+    #                <p>Minimum/maximum size: Set hard limits on the number of Amazon EC2 instances allowed. If Amazon GameLift Servers receives a 
+    #                     request--either through manual update or automatic scaling--it won't change the capacity 
     #                     to a value outside of this range.</p>
     #             </li>
     #             <li>
-    #                <p>Desired capacity: As an alternative to automatic scaling, manually set the number of Amazon EC2
-    #                     instances to be maintained.
+    #                <p>Desired capacity: As an alternative to automatic scaling, manually set the number of Amazon EC2 
+    #                     instances to be maintained. 
     #                     Before changing a fleet's desired capacity, check the maximum capacity of the
     #                     fleet's Amazon EC2 instance type by calling <a href="https://docs.aws.amazon.com/gamelift/latest/apireference/API_DescribeEC2InstanceLimits.html">DescribeEC2InstanceLimits</a>.</p>
     #             </li>
@@ -10560,7 +10580,7 @@ module Aws::GameLift
     # @option params [String] :game_server_id
     #   <p>A custom string that uniquely identifies the game server to update.</p>
     # @option params [String] :game_server_data
-    #   <p>A set of custom game server properties, formatted as a single string value. This data
+    #   <p>A set of custom game server properties, formatted as a single string value. This data 
     #               is passed to a game client or service when it requests information on game servers. </p>
     # @option params [String] :utilization_status
     #   <p>Indicates if the game server is available or is currently hosting gameplay. You can
@@ -10644,11 +10664,11 @@ module Aws::GameLift
     #               capacity weighting, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-instance-weighting.html"> Instance Weighting for
     #                   Amazon EC2 Auto Scaling</a> in the Amazon EC2 Auto Scaling User Guide.</p>
     # @option params [String] :game_server_protection_policy
-    #   <p>A flag that indicates whether instances in the game server group are protected
-    #               from early termination. Unprotected instances that have active game servers running might
-    #               be terminated during a scale-down event, causing players to be dropped from the game.
-    #               Protected instances cannot be terminated while there are active game servers running except
-    #               in the event of a forced game server group deletion. An exception to this is with Spot
+    #   <p>A flag that indicates whether instances in the game server group are protected 
+    #               from early termination. Unprotected instances that have active game servers running might 
+    #               be terminated during a scale-down event, causing players to be dropped from the game. 
+    #               Protected instances cannot be terminated while there are active game servers running except 
+    #               in the event of a forced game server group deletion. An exception to this is with Spot 
     #               Instances, which can be terminated by Amazon Web Services regardless of protection status. This property is set to <code>NO_PROTECTION</code> by default.</p>
     # @option params [String] :balancing_strategy
     #   <p>Indicates how Amazon GameLift Servers FleetIQ balances the use of Spot Instances and On-Demand Instances in the
@@ -10848,19 +10868,19 @@ module Aws::GameLift
     #               <p>The minimum value is 10 and the maximum value is 600.</p>
     #            </note>
     # @option params [Array<Types::PlayerLatencyPolicy>] :player_latency_policies
-    #   <p>A set of policies that enforce a sliding cap on player latency when processing game sessions placement requests.
+    #   <p>A set of policies that enforce a sliding cap on player latency when processing game sessions placement requests. 
     #   	Use multiple policies to gradually relax the cap over time if Amazon GameLift Servers can't make a placement.
     #   	    Policies are evaluated in order starting with the lowest maximum latency value. When updating policies, provide a complete collection of policies.</p>
     # @option params [Array<Types::GameSessionQueueDestination>] :destinations
-    #   <p>A list of fleets and/or fleet aliases that can be used to fulfill game session placement requests in the queue.
+    #   <p>A list of fleets and/or fleet aliases that can be used to fulfill game session placement requests in the queue. 
     #       Destinations are identified by either a fleet ARN or a fleet alias ARN, and are listed in order of placement preference. When updating this list, provide a complete list of destinations.</p>
     # @option params [Types::FilterConfiguration] :filter_configuration
-    #   <p>A list of locations where a queue is allowed to place new game sessions. Locations
-    #               are specified in the form of Amazon Web Services Region codes, such as <code>us-west-2</code>. If this parameter is
+    #   <p>A list of locations where a queue is allowed to place new game sessions. Locations 
+    #               are specified in the form of Amazon Web Services Region codes, such as <code>us-west-2</code>. If this parameter is 
     #               not set, game sessions can be placed in any queue location. To remove an existing filter configuration, pass in an empty set.</p>
     # @option params [Types::PriorityConfiguration] :priority_configuration
-    #   <p>Custom settings to use when prioritizing destinations and locations for game session placements. This
-    #               configuration replaces the FleetIQ default prioritization process. Priority types that are not explicitly
+    #   <p>Custom settings to use when prioritizing destinations and locations for game session placements. This 
+    #               configuration replaces the FleetIQ default prioritization process. Priority types that are not explicitly 
     #               named will be automatically applied at the end of the prioritization process. To remove an existing priority configuration, pass in an empty set.</p>
     # @option params [String] :custom_event_data
     #   <p>Information to be added to all events that are related to this game session
@@ -10975,7 +10995,7 @@ module Aws::GameLift
     #   <p>An SNS topic ARN that is set up to receive matchmaking notifications. See <a href="https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-notification.html">
     #                   Setting up notifications for matchmaking</a> for more information.</p>
     # @option params [Integer] :additional_player_count
-    #   <p>The number of player slots in a match to keep open for future players. For example, if the configuration's rule set specifies
+    #   <p>The number of player slots in a match to keep open for future players. For example, if the configuration's rule set specifies 
     #               a match for a single 12-person team, and the additional player count is set to 2, only 10 players are selected for the match. This parameter is not used if <code>FlexMatchMode</code> is set to
     #                   <code>STANDALONE</code>.</p>
     # @option params [String] :custom_event_data
@@ -11322,7 +11342,8 @@ module Aws::GameLift
     # @option options [Integer] :max_wait_time
     # @option options [Integer] :min_delay
     # @option options [Integer] :max_delay
-    # @return [nil] Returns `nil` if the waiter was successful.
+    # @return [Smithy::Client::Response] Returns the successful response
+    #   that satisfied the waiter's success condition.
     # @raise [FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition
     #   out of, preventing success.

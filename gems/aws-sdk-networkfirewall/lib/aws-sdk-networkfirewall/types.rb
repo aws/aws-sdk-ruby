@@ -139,8 +139,8 @@ module Aws::NetworkFirewall
     end
 
     # <p>A report that captures key activity from the last 30 days of network traffic monitored by your firewall.</p>
-    #          <p>You can generate up to one report per traffic type, per 30 day period. For example, when you successfully create an HTTP traffic report,
-    #          you cannot create another HTTP traffic report until 30 days pass. Alternatively, if you generate a report that combines metrics on both HTTP
+    #          <p>You can generate up to one report per traffic type, per 30 day period. For example, when you successfully create an HTTP traffic report, 
+    #          you cannot create another HTTP traffic report until 30 days pass. Alternatively, if you generate a report that combines metrics on both HTTP 
     #          and HTTPS traffic, you cannot create another report for either traffic type until 30 days pass.</p>
     # @!attribute analysis_report_id
     #   <p>The unique ID of the query that ran when you requested an analysis report. </p>
@@ -466,8 +466,8 @@ module Aws::NetworkFirewall
     #            this value reflects its state, for example <code>CREATING</code> or <code>DELETING</code>.</p>
     #   @return [String]
     # @!attribute status_message
-    #   <p>If Network Firewall fails to create or delete the firewall endpoint in the subnet, it populates this with the reason for the error or failure and how to resolve it.
-    #            A <code>FAILED</code> status indicates a non-recoverable state, and a <code>ERROR</code> status indicates an issue that you can fix.
+    #   <p>If Network Firewall fails to create or delete the firewall endpoint in the subnet, it populates this with the reason for the error or failure and how to resolve it. 
+    #            A <code>FAILED</code> status indicates a non-recoverable state, and a <code>ERROR</code> status indicates an issue that you can fix. 
     #            Depending on the error, it can take as many as 15 minutes to populate this field. For more information about the causes for failiure or errors and solutions available for this field, see <a href="https://docs.aws.amazon.com/network-firewall/latest/developerguide/firewall-troubleshooting-endpoint-failures.html">Troubleshooting firewall endpoint failures</a> in the <i>Network Firewall Developer Guide</i>.</p>
     #   @return [String]
     # @!attribute dns_name
@@ -1218,7 +1218,7 @@ module Aws::NetworkFirewall
     #   <p>Indicates whether you want Network Firewall to analyze the stateless rules in the rule group for rule behavior such as asymmetric routing. If set to <code>TRUE</code>, Network Firewall runs the analysis and then creates the rule group for you. To run the stateless rule group analyzer without creating the rule group, set <code>DryRun</code> to <code>TRUE</code>.</p>
     #   @return [Boolean]
     # @!attribute summary_configuration
-    #   <p>An object that contains a <code>RuleOptions</code> array of strings.
+    #   <p>An object that contains a <code>RuleOptions</code> array of strings. 
     #            You use <code>RuleOptions</code> to determine which of the following <a>RuleSummary</a> values are returned in response to <code>DescribeRuleGroupSummary</code>.</p>
     #            <ul>
     #               <li>
@@ -1278,7 +1278,7 @@ module Aws::NetworkFirewall
     # @!attribute tls_inspection_configuration
     #   <p>The object that defines a TLS inspection configuration. This, along with <a>TLSInspectionConfigurationResponse</a>, define the TLS inspection configuration. You can retrieve all objects for a TLS inspection configuration by calling <a>DescribeTLSInspectionConfiguration</a>. </p>
     #            <p>Network Firewall uses a TLS inspection configuration to decrypt traffic. Network Firewall re-encrypts the traffic before sending it to its destination.</p>
-    #            <p>To use a TLS inspection configuration, you add it to a new Network Firewall firewall policy, then you apply the firewall policy to a firewall. Network Firewall acts as a proxy service to decrypt and inspect the traffic traveling through your firewalls. You can reference a TLS inspection configuration from more than one firewall policy, and you can use a firewall policy in more than one firewall. For more information about using TLS inspection configurations, see
+    #            <p>To use a TLS inspection configuration, you add it to a new Network Firewall firewall policy, then you apply the firewall policy to a firewall. Network Firewall acts as a proxy service to decrypt and inspect the traffic traveling through your firewalls. You can reference a TLS inspection configuration from more than one firewall policy, and you can use a firewall policy in more than one firewall. For more information about using TLS inspection configurations, see 
     #       <a href="https://docs.aws.amazon.com/network-firewall/latest/developerguide/tls-inspection.html">Inspecting SSL/TLS traffic with TLS
     #   inspection configurations</a> in the <i>Network Firewall Developer Guide</i>.</p>
     #   @return [Types::TLSInspectionConfiguration]
@@ -1353,7 +1353,7 @@ module Aws::NetworkFirewall
     #   <p>The configuration settings for the VPC endpoint association. These settings include the firewall and the VPC and subnet to use for the firewall endpoint. </p>
     #   @return [Types::VpcEndpointAssociation]
     # @!attribute vpc_endpoint_association_status
-    #   <p>Detailed information about the current status of a <a>VpcEndpointAssociation</a>. You can retrieve this
+    #   <p>Detailed information about the current status of a <a>VpcEndpointAssociation</a>. You can retrieve this 
     #   by calling <a>DescribeVpcEndpointAssociation</a> and providing the VPC endpoint association ARN.</p>
     #   @return [Types::VpcEndpointAssociationStatus]
     class CreateVpcEndpointAssociationResponse < Struct.new(
@@ -1801,7 +1801,7 @@ module Aws::NetworkFirewall
     #   <p>The configuration settings for the VPC endpoint association. These settings include the firewall and the VPC and subnet to use for the firewall endpoint. </p>
     #   @return [Types::VpcEndpointAssociation]
     # @!attribute vpc_endpoint_association_status
-    #   <p>Detailed information about the current status of a <a>VpcEndpointAssociation</a>. You can retrieve this
+    #   <p>Detailed information about the current status of a <a>VpcEndpointAssociation</a>. You can retrieve this 
     #   by calling <a>DescribeVpcEndpointAssociation</a> and providing the VPC endpoint association ARN.</p>
     #   @return [Types::VpcEndpointAssociationStatus]
     class DeleteVpcEndpointAssociationResponse < Struct.new(
@@ -1921,7 +1921,7 @@ module Aws::NetworkFirewall
     #         </p>
     #   @return [String]
     # @!attribute supported_availability_zones
-    #   <p>The Availability Zones that the firewall currently supports. This includes all Availability Zones for which
+    #   <p>The Availability Zones that the firewall currently supports. This includes all Availability Zones for which 
     #          the firewall has a subnet defined. </p>
     #   @return [Hash<String, Types::AvailabilityZoneMetadata>]
     # @!attribute transit_gateway_attachment_id
@@ -2065,7 +2065,7 @@ module Aws::NetworkFirewall
     #   @return [String]
     # @!attribute flow_operation_status
     #   <p>Returns the status of the flow operation. This string is returned in the responses to start, list, and describe commands.</p>
-    #            <p>If the status is <code>COMPLETED_WITH_ERRORS</code>, results may be returned with any number of <code>Flows</code> missing from the response.
+    #            <p>If the status is <code>COMPLETED_WITH_ERRORS</code>, results may be returned with any number of <code>Flows</code> missing from the response. 
     #   If the status is <code>FAILED</code>, <code>Flows</code> returned will be empty.</p>
     #   @return [String]
     # @!attribute status_message
@@ -2120,7 +2120,7 @@ module Aws::NetworkFirewall
     # @!attribute enable_monitoring_dashboard
     #   <p>A boolean that reflects whether or not the firewall monitoring dashboard is enabled on a firewall.</p>
     #            <p>
-    #            Returns <code>TRUE</code> when the firewall monitoring dashboard is enabled on the firewall.
+    #            Returns <code>TRUE</code> when the firewall monitoring dashboard is enabled on the firewall. 
     #            Returns <code>FALSE</code> when the firewall monitoring dashboard is not enabled on the firewall.
     #         </p>
     #   @return [Boolean]
@@ -2583,7 +2583,7 @@ module Aws::NetworkFirewall
     # @!attribute tls_inspection_configuration
     #   <p>The object that defines a TLS inspection configuration. This, along with <a>TLSInspectionConfigurationResponse</a>, define the TLS inspection configuration. You can retrieve all objects for a TLS inspection configuration by calling <a>DescribeTLSInspectionConfiguration</a>. </p>
     #            <p>Network Firewall uses a TLS inspection configuration to decrypt traffic. Network Firewall re-encrypts the traffic before sending it to its destination.</p>
-    #            <p>To use a TLS inspection configuration, you add it to a new Network Firewall firewall policy, then you apply the firewall policy to a firewall. Network Firewall acts as a proxy service to decrypt and inspect the traffic traveling through your firewalls. You can reference a TLS inspection configuration from more than one firewall policy, and you can use a firewall policy in more than one firewall. For more information about using TLS inspection configurations, see
+    #            <p>To use a TLS inspection configuration, you add it to a new Network Firewall firewall policy, then you apply the firewall policy to a firewall. Network Firewall acts as a proxy service to decrypt and inspect the traffic traveling through your firewalls. You can reference a TLS inspection configuration from more than one firewall policy, and you can use a firewall policy in more than one firewall. For more information about using TLS inspection configurations, see 
     #       <a href="https://docs.aws.amazon.com/network-firewall/latest/developerguide/tls-inspection.html">Inspecting SSL/TLS traffic with TLS
     #   inspection configurations</a> in the <i>Network Firewall Developer Guide</i>.</p>
     #   @return [Types::TLSInspectionConfiguration]
@@ -2615,7 +2615,7 @@ module Aws::NetworkFirewall
     #   <p>The configuration settings for the VPC endpoint association. These settings include the firewall and the VPC and subnet to use for the firewall endpoint. </p>
     #   @return [Types::VpcEndpointAssociation]
     # @!attribute vpc_endpoint_association_status
-    #   <p>Detailed information about the current status of a <a>VpcEndpointAssociation</a>. You can retrieve this
+    #   <p>Detailed information about the current status of a <a>VpcEndpointAssociation</a>. You can retrieve this 
     #   by calling <a>DescribeVpcEndpointAssociation</a> and providing the VPC endpoint association ARN.</p>
     #   @return [Types::VpcEndpointAssociationStatus]
     class DescribeVpcEndpointAssociationResponse < Struct.new(
@@ -3151,7 +3151,7 @@ module Aws::NetworkFirewall
     #         </p>
     #   @return [String]
     # @!attribute configuration_sync_state_summary
-    #   <p>The configuration sync state for the firewall. This summarizes the <code>Config</code>
+    #   <p>The configuration sync state for the firewall. This summarizes the <code>Config</code> 
     #                  settings in the <code>SyncStates</code> for this firewall status object. </p>
     #            <p>When you create a firewall or update its configuration, for example by adding a rule
     #            group to its firewall policy, Network Firewall distributes the configuration changes to all
@@ -3164,7 +3164,7 @@ module Aws::NetworkFirewall
     # @!attribute sync_states
     #   <p>Status for the subnets that you've configured in the firewall. This contains
     #         one array element per Availability Zone where you've configured a subnet in the firewall. </p>
-    #            <p>These objects provide detailed information for the settings
+    #            <p>These objects provide detailed information for the settings 
     #     <code>ConfigurationSyncStateSummary</code> and <code>Status</code>. </p>
     #   @return [Hash<String, Types::SyncState>]
     # @!attribute capacity_usage_summary
@@ -3185,7 +3185,7 @@ module Aws::NetworkFirewall
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Any number of arrays, where each array is a single flow identified in the scope of the operation.
+    # <p>Any number of arrays, where each array is a single flow identified in the scope of the operation. 
     # If multiple flows were in the scope of the operation, multiple <code>Flows</code> arrays are returned.</p>
     # @!attribute source_address
     #   <p>A single IP address specification. This is used in the <a>MatchAttributes</a> source and destination specifications.</p>
@@ -3194,17 +3194,17 @@ module Aws::NetworkFirewall
     #   <p>A single IP address specification. This is used in the <a>MatchAttributes</a> source and destination specifications.</p>
     #   @return [Types::Address]
     # @!attribute source_port
-    #   <p>The source port to inspect for. You can specify an individual port,
-    #    for example <code>1994</code> and you can specify a port range, for example <code>1990:1994</code>.
+    #   <p>The source port to inspect for. You can specify an individual port, 
+    #    for example <code>1994</code> and you can specify a port range, for example <code>1990:1994</code>. 
     #    To match with any port, specify <code>ANY</code>.</p>
     #   @return [String]
     # @!attribute destination_port
-    #   <p>The destination port to inspect for. You can specify an individual port,
-    #    for example <code>1994</code> and you can specify a port range, for example <code>1990:1994</code>.
+    #   <p>The destination port to inspect for. You can specify an individual port, 
+    #    for example <code>1994</code> and you can specify a port range, for example <code>1990:1994</code>. 
     #    To match with any port, specify <code>ANY</code>.</p>
     #   @return [String]
     # @!attribute protocol
-    #   <p>The protocols to inspect for, specified using the assigned internet protocol number (IANA)
+    #   <p>The protocols to inspect for, specified using the assigned internet protocol number (IANA) 
     #    for each protocol. If not specified, this matches with any protocol.</p>
     #   @return [String]
     # @!attribute age
@@ -3244,17 +3244,17 @@ module Aws::NetworkFirewall
     #   <p>A single IP address specification. This is used in the <a>MatchAttributes</a> source and destination specifications.</p>
     #   @return [Types::Address]
     # @!attribute source_port
-    #   <p>The source port to inspect for. You can specify an individual port,
-    #    for example <code>1994</code> and you can specify a port range, for example <code>1990:1994</code>.
+    #   <p>The source port to inspect for. You can specify an individual port, 
+    #    for example <code>1994</code> and you can specify a port range, for example <code>1990:1994</code>. 
     #    To match with any port, specify <code>ANY</code>.</p>
     #   @return [String]
     # @!attribute destination_port
-    #   <p>The destination port to inspect for. You can specify an individual port,
-    #    for example <code>1994</code> and you can specify a port range, for example <code>1990:1994</code>.
+    #   <p>The destination port to inspect for. You can specify an individual port, 
+    #    for example <code>1994</code> and you can specify a port range, for example <code>1990:1994</code>. 
     #    To match with any port, specify <code>ANY</code>.</p>
     #   @return [String]
     # @!attribute protocols
-    #   <p>The protocols to inspect for, specified using the assigned internet protocol number (IANA)
+    #   <p>The protocols to inspect for, specified using the assigned internet protocol number (IANA) 
     #    for each protocol. If not specified, this matches with any protocol.</p>
     #   @return [Array<String>]
     class FlowFilter < Struct.new(
@@ -3271,10 +3271,10 @@ module Aws::NetworkFirewall
 
     # <p>Contains information about a flow operation, such as related statuses, unique identifiers, and all filters defined in the operation.</p>
     #          <p>Flow operations let you manage the flows tracked in the flow table, also known as the firewall table.</p>
-    #          <p>A flow is network traffic that is monitored by a firewall, either by stateful or stateless rules.
+    #          <p>A flow is network traffic that is monitored by a firewall, either by stateful or stateless rules. 
     # For traffic to be considered part of a flow, it must share Destination, DestinationPort, Direction, Protocol, Source, and SourcePort. </p>
     # @!attribute minimum_flow_age_in_seconds
-    #   <p>The reqested <code>FlowOperation</code> ignores flows with an age (in seconds) lower than <code>MinimumFlowAgeInSeconds</code>.
+    #   <p>The reqested <code>FlowOperation</code> ignores flows with an age (in seconds) lower than <code>MinimumFlowAgeInSeconds</code>. 
     #   You provide this for start commands.</p>
     #   @return [Integer]
     # @!attribute flow_filters
@@ -3301,7 +3301,7 @@ module Aws::NetworkFirewall
     #   @return [Time]
     # @!attribute flow_operation_status
     #   <p>Returns the status of the flow operation. This string is returned in the responses to start, list, and describe commands.</p>
-    #            <p>If the status is <code>COMPLETED_WITH_ERRORS</code>, results may be returned with any number of <code>Flows</code> missing from the response.
+    #            <p>If the status is <code>COMPLETED_WITH_ERRORS</code>, results may be returned with any number of <code>Flows</code> missing from the response. 
     #   If the status is <code>FAILED</code>, <code>Flows</code> returned will be empty.</p>
     #   @return [String]
     class FlowOperationMetadata < Struct.new(
@@ -3315,12 +3315,12 @@ module Aws::NetworkFirewall
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Describes the amount of time that can pass without any traffic sent through the firewall before the firewall determines that the connection is idle and Network Firewall removes the flow entry from its flow table.
+    # <p>Describes the amount of time that can pass without any traffic sent through the firewall before the firewall determines that the connection is idle and Network Firewall removes the flow entry from its flow table. 
     #           When you update this value, existing connections will be treated according to your stream exception policy configuration.
     #      </p>
     # @!attribute tcp_idle_timeout_seconds
     #   <p>The number of seconds that can pass without any TCP traffic sent through the firewall before the firewall determines that the connection is idle.
-    #           After the idle timeout passes, data packets are dropped, however, the next TCP SYN packet is considered a new flow and is processed by the firewall.
+    #           After the idle timeout passes, data packets are dropped, however, the next TCP SYN packet is considered a new flow and is processed by the firewall. 
     #           Clients or targets can use TCP keepalive packets to reset the idle timeout.
     #            </p>
     #            <p>You can define the <code>TcpIdleTimeoutSeconds</code> value to be between 60 and 6000 seconds. If no value is provided, it defaults to 350 seconds.
@@ -3371,11 +3371,11 @@ module Aws::NetworkFirewall
     #   <p>The status of the analysis report you specify. Statuses include <code>RUNNING</code>, <code>COMPLETED</code>, or <code>FAILED</code>.</p>
     #   @return [String]
     # @!attribute start_time
-    #   <p> The date and time within the last 30 days from which to start retrieving analysis data,
+    #   <p> The date and time within the last 30 days from which to start retrieving analysis data, 
     #      in UTC format (for example, <code>YYYY-MM-DDTHH:MM:SSZ</code>. </p>
     #   @return [Time]
     # @!attribute end_time
-    #   <p>The date and time, up to the current date, from which to stop retrieving analysis data,
+    #   <p>The date and time, up to the current date, from which to stop retrieving analysis data, 
     #      in UTC format (for example, <code>YYYY-MM-DDTHH:MM:SSZ</code>). </p>
     #   @return [Time]
     # @!attribute report_time
@@ -3435,8 +3435,8 @@ module Aws::NetworkFirewall
     #            Inter-Domain Routing</a>.</p>
     #   @return [String]
     # @!attribute source_port
-    #   <p>The source port to inspect for. You can specify an individual port,
-    #    for example <code>1994</code> and you can specify a port range, for example <code>1990:1994</code>.
+    #   <p>The source port to inspect for. You can specify an individual port, 
+    #    for example <code>1994</code> and you can specify a port range, for example <code>1990:1994</code>. 
     #    To match with any port, specify <code>ANY</code>.</p>
     #   @return [String]
     # @!attribute direction
@@ -3468,8 +3468,8 @@ module Aws::NetworkFirewall
     #            Inter-Domain Routing</a>.</p>
     #   @return [String]
     # @!attribute destination_port
-    #   <p>The destination port to inspect for. You can specify an individual port,
-    #    for example <code>1994</code> and you can specify a port range, for example <code>1990:1994</code>.
+    #   <p>The destination port to inspect for. You can specify an individual port, 
+    #    for example <code>1994</code> and you can specify a port range, for example <code>1990:1994</code>. 
     #    To match with any port, specify <code>ANY</code>.</p>
     #   @return [String]
     class Header < Struct.new(
@@ -3505,7 +3505,7 @@ module Aws::NetworkFirewall
     # <p>A list of IP addresses and address ranges, in CIDR notation. This is part of a <a>RuleVariables</a>. </p>
     # @!attribute definition
     #   <p>The list of IP addresses and address ranges, in CIDR notation.
-    #
+    #            
     #         </p>
     #   @return [Array<String>]
     class IPSet < Struct.new(
@@ -3856,18 +3856,18 @@ module Aws::NetworkFirewall
     #   @return [String]
     # @!attribute flow_operation_status
     #   <p>Returns the status of the flow operation. This string is returned in the responses to start, list, and describe commands.</p>
-    #            <p>If the status is <code>COMPLETED_WITH_ERRORS</code>, results may be returned with any number of <code>Flows</code> missing from the response.
+    #            <p>If the status is <code>COMPLETED_WITH_ERRORS</code>, results may be returned with any number of <code>Flows</code> missing from the response. 
     #   If the status is <code>FAILED</code>, <code>Flows</code> returned will be empty.</p>
     #   @return [String]
     # @!attribute status_message
-    #   <p>If the asynchronous operation fails, Network Firewall populates this with the reason for the error or failure.
+    #   <p>If the asynchronous operation fails, Network Firewall populates this with the reason for the error or failure. 
     #            Options include <code>Flow operation error</code> and <code>Flow timeout</code>.</p>
     #   @return [String]
     # @!attribute flow_request_timestamp
     #   <p>A timestamp indicating when the Suricata engine identified flows impacted by an operation. </p>
     #   @return [Time]
     # @!attribute flows
-    #   <p>Any number of arrays, where each array is a single flow identified in the scope of the operation.
+    #   <p>Any number of arrays, where each array is a single flow identified in the scope of the operation. 
     #   If multiple flows were in the scope of the operation, multiple <code>Flows</code> arrays are returned.</p>
     #   @return [Array<Types::Flow>]
     # @!attribute next_token
@@ -3934,7 +3934,7 @@ module Aws::NetworkFirewall
 
     # @!attribute flow_operations
     #   <p>Flow operations let you manage the flows tracked in the flow table, also known as the firewall table.</p>
-    #            <p>A flow is network traffic that is monitored by a firewall, either by stateful or stateless rules.
+    #            <p>A flow is network traffic that is monitored by a firewall, either by stateful or stateless rules. 
     #   For traffic to be considered part of a flow, it must share Destination, DestinationPort, Direction, Protocol, Source, and SourcePort. </p>
     #   @return [Array<Types::FlowOperationMetadata>]
     # @!attribute next_token
@@ -4289,8 +4289,8 @@ module Aws::NetworkFirewall
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>TLS</code> - Logs for events that are related to TLS inspection. For more information, see
-    #             <a href="https://docs.aws.amazon.com/network-firewall/latest/developerguide/tls-inspection-configurations.html">Inspecting SSL/TLS traffic with TLS inspection configurations</a>
+    #                     <code>TLS</code> - Logs for events that are related to TLS inspection. For more information, see  
+    #             <a href="https://docs.aws.amazon.com/network-firewall/latest/developerguide/tls-inspection-configurations.html">Inspecting SSL/TLS traffic with TLS inspection configurations</a> 
     #                 in the <i>Network Firewall Developer Guide</i>.</p>
     #               </li>
     #            </ul>
@@ -4375,20 +4375,20 @@ module Aws::NetworkFirewall
     #            specified, this matches with any destination address. </p>
     #   @return [Array<Types::Address>]
     # @!attribute source_ports
-    #   <p>The source port to inspect for. You can specify an individual port,
-    #    for example <code>1994</code> and you can specify a port range, for example <code>1990:1994</code>.
+    #   <p>The source port to inspect for. You can specify an individual port, 
+    #    for example <code>1994</code> and you can specify a port range, for example <code>1990:1994</code>. 
     #    To match with any port, specify <code>ANY</code>.</p>
     #            <p> If not specified, this matches with any source port.</p>
     #            <p>This setting is only used for protocols 6 (TCP) and 17 (UDP).</p>
     #   @return [Array<Types::PortRange>]
     # @!attribute destination_ports
-    #   <p>The destination port to inspect for. You can specify an individual port,
-    #    for example <code>1994</code> and you can specify a port range, for example <code>1990:1994</code>.
+    #   <p>The destination port to inspect for. You can specify an individual port, 
+    #    for example <code>1994</code> and you can specify a port range, for example <code>1990:1994</code>. 
     #    To match with any port, specify <code>ANY</code>.</p>
     #            <p>This setting is only used for protocols 6 (TCP) and 17 (UDP). </p>
     #   @return [Array<Types::PortRange>]
     # @!attribute protocols
-    #   <p>The protocols to inspect for, specified using the assigned internet protocol number (IANA)
+    #   <p>The protocols to inspect for, specified using the assigned internet protocol number (IANA) 
     #    for each protocol. If not specified, this matches with any protocol.</p>
     #   @return [Array<Integer>]
     # @!attribute tcp_flags
@@ -4504,7 +4504,7 @@ module Aws::NetworkFirewall
 
     # <p>A set of port ranges for use in the rules in a rule group. </p>
     # @!attribute definition
-    #   <p>The set of port ranges.
+    #   <p>The set of port ranges. 
     #         </p>
     #   @return [Array<String>]
     class PortSet < Struct.new(
@@ -5381,7 +5381,7 @@ module Aws::NetworkFirewall
 
     # <p>Stateful inspection criteria for a domain list rule group. </p>
     #          <p>For HTTPS traffic, domain filtering is SNI-based. It uses the server name indicator extension of the TLS handshake.</p>
-    #          <p>By default, Network Firewall domain list inspection only includes traffic coming from the VPC where you deploy the firewall. To inspect traffic from IP addresses outside of the deployment VPC, you set the <code>HOME_NET</code> rule variable to include the CIDR range of the deployment VPC plus the other CIDR ranges. For more information, see <a>RuleVariables</a> in this guide and
+    #          <p>By default, Network Firewall domain list inspection only includes traffic coming from the VPC where you deploy the firewall. To inspect traffic from IP addresses outside of the deployment VPC, you set the <code>HOME_NET</code> rule variable to include the CIDR range of the deployment VPC plus the other CIDR ranges. For more information, see <a>RuleVariables</a> in this guide and 
     #       <a href="https://docs.aws.amazon.com/network-firewall/latest/developerguide/stateful-rule-groups-domain-names.html">Stateful domain list rule groups in Network Firewall</a> in the <i>Network Firewall Developer Guide</i>.</p>
     # @!attribute targets
     #   <p>The domains that you want to inspect for in your traffic flows. Valid domain specifications are the following:</p>
@@ -5400,7 +5400,7 @@ module Aws::NetworkFirewall
     # @!attribute generated_rules_type
     #   <p>Whether you want to apply allow, reject, alert, or drop behavior to the domains in your target list.</p>
     #            <note>
-    #               <p>When logging is enabled and you choose Alert, traffic that matches the domain specifications
+    #               <p>When logging is enabled and you choose Alert, traffic that matches the domain specifications 
     #               generates an alert in the firewall's logs. Then, traffic either passes, is rejected, or drops based on other rules in the firewall policy.</p>
     #            </note>
     #   @return [String]
@@ -5482,7 +5482,7 @@ module Aws::NetworkFirewall
     #            <p>You can specify individual ports, for example <code>1994</code>, and you can specify port ranges, such as <code>1990:1994</code>.</p>
     #   @return [Array<Types::PortRange>]
     # @!attribute protocols
-    #   <p>The protocols to inspect for, specified using the assigned internet protocol number (IANA)
+    #   <p>The protocols to inspect for, specified using the assigned internet protocol number (IANA) 
     #    for each protocol. If not specified, this matches with any protocol.</p>
     #            <p>Network Firewall currently supports only TCP.</p>
     #   @return [Array<Integer>]
@@ -5560,7 +5560,7 @@ module Aws::NetworkFirewall
     #   <p>A unique identifier for the primary endpoint associated with a firewall.</p>
     #   @return [String]
     # @!attribute minimum_flow_age_in_seconds
-    #   <p>The reqested <code>FlowOperation</code> ignores flows with an age (in seconds) lower than <code>MinimumFlowAgeInSeconds</code>.
+    #   <p>The reqested <code>FlowOperation</code> ignores flows with an age (in seconds) lower than <code>MinimumFlowAgeInSeconds</code>. 
     #   You provide this for start commands.</p>
     #            <note>
     #               <p>We recommend setting this value to at least 1 minute (60 seconds) to reduce chance of capturing flows that are not yet established.</p>
@@ -5590,7 +5590,7 @@ module Aws::NetworkFirewall
     #   @return [String]
     # @!attribute flow_operation_status
     #   <p>Returns the status of the flow operation. This string is returned in the responses to start, list, and describe commands.</p>
-    #            <p>If the status is <code>COMPLETED_WITH_ERRORS</code>, results may be returned with any number of <code>Flows</code> missing from the response.
+    #            <p>If the status is <code>COMPLETED_WITH_ERRORS</code>, results may be returned with any number of <code>Flows</code> missing from the response. 
     #   If the status is <code>FAILED</code>, <code>Flows</code> returned will be empty.</p>
     #   @return [String]
     class StartFlowCaptureResponse < Struct.new(
@@ -5617,7 +5617,7 @@ module Aws::NetworkFirewall
     #   <p>A unique identifier for the primary endpoint associated with a firewall.</p>
     #   @return [String]
     # @!attribute minimum_flow_age_in_seconds
-    #   <p>The reqested <code>FlowOperation</code> ignores flows with an age (in seconds) lower than <code>MinimumFlowAgeInSeconds</code>.
+    #   <p>The reqested <code>FlowOperation</code> ignores flows with an age (in seconds) lower than <code>MinimumFlowAgeInSeconds</code>. 
     #   You provide this for start commands.</p>
     #   @return [Integer]
     # @!attribute flow_filters
@@ -5644,7 +5644,7 @@ module Aws::NetworkFirewall
     #   @return [String]
     # @!attribute flow_operation_status
     #   <p>Returns the status of the flow operation. This string is returned in the responses to start, list, and describe commands.</p>
-    #            <p>If the status is <code>COMPLETED_WITH_ERRORS</code>, results may be returned with any number of <code>Flows</code> missing from the response.
+    #            <p>If the status is <code>COMPLETED_WITH_ERRORS</code>, results may be returned with any number of <code>Flows</code> missing from the response. 
     #   If the status is <code>FAILED</code>, <code>Flows</code> returned will be empty.</p>
     #   @return [String]
     class StartFlowFlushResponse < Struct.new(
@@ -5663,12 +5663,12 @@ module Aws::NetworkFirewall
     #          </important>
     # @!attribute rule_order
     #   <p>Indicates how to manage the order of stateful rule evaluation for the policy. <code>STRICT_ORDER</code> is the
-    #            recommended option, but <code>DEFAULT_ACTION_ORDER</code> is the default option. With <code>STRICT_ORDER</code>,
-    #            provide your rules in the order that you want them to be evaluated.
-    #            You can then choose one or more default actions for packets that don't match any rules.
-    #            Choose <code>STRICT_ORDER</code> to have the stateful rules engine determine the evaluation order of your rules.
-    #            The default action for this rule order is <code>PASS</code>, followed by <code>DROP</code>, <code>REJECT</code>, and <code>ALERT</code> actions.
-    #            Stateful rules are provided to the rule engine as Suricata compatible strings, and Suricata evaluates them based on your settings.
+    #            recommended option, but <code>DEFAULT_ACTION_ORDER</code> is the default option. With <code>STRICT_ORDER</code>, 
+    #            provide your rules in the order that you want them to be evaluated. 
+    #            You can then choose one or more default actions for packets that don't match any rules. 
+    #            Choose <code>STRICT_ORDER</code> to have the stateful rules engine determine the evaluation order of your rules. 
+    #            The default action for this rule order is <code>PASS</code>, followed by <code>DROP</code>, <code>REJECT</code>, and <code>ALERT</code> actions. 
+    #            Stateful rules are provided to the rule engine as Suricata compatible strings, and Suricata evaluates them based on your settings. 
     #            For more information, see
     #            <a href="https://docs.aws.amazon.com/network-firewall/latest/developerguide/suricata-rule-evaluation-order.html">Evaluation order for stateful rules</a> in the <i>Network Firewall Developer Guide</i>.
     #         </p>
@@ -5789,7 +5789,7 @@ module Aws::NetworkFirewall
     #   <p>The action that allows the policy owner to override the behavior of the rule group within a policy.</p>
     #   @return [Types::StatefulRuleGroupOverride]
     # @!attribute deep_threat_inspection
-    #   <p>Network Firewall plans to augment the active threat defense managed rule group with an additional deep threat inspection capability. When this capability is released, Amazon Web Services will analyze service logs of network traffic processed by these rule groups to identify threat indicators across customers.
+    #   <p>Network Firewall plans to augment the active threat defense managed rule group with an additional deep threat inspection capability. When this capability is released, Amazon Web Services will analyze service logs of network traffic processed by these rule groups to identify threat indicators across customers. 
     #            Amazon Web Services will use these threat indicators to improve the active threat defense managed rule groups and protect the security of Amazon Web Services customers and services.</p>
     #            <note>
     #               <p>Customers can opt-out of deep threat inspection at any time through the Network Firewall console or API. When customers opt out, Network Firewall  will not use the network traffic processed by those customers' active threat defense rule groups for rule group improvement.</p>
@@ -5942,7 +5942,7 @@ module Aws::NetworkFirewall
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The status of the firewall endpoint and firewall policy configuration for a single VPC subnet.
+    # <p>The status of the firewall endpoint and firewall policy configuration for a single VPC subnet. 
     #           This is part of the <a>FirewallStatus</a>. </p>
     #          <p>For each VPC subnet that you associate with a firewall, Network Firewall does the
     #          following: </p>
@@ -6009,7 +6009,7 @@ module Aws::NetworkFirewall
 
     # <p>The object that defines a TLS inspection configuration. This, along with <a>TLSInspectionConfigurationResponse</a>, define the TLS inspection configuration. You can retrieve all objects for a TLS inspection configuration by calling <a>DescribeTLSInspectionConfiguration</a>. </p>
     #          <p>Network Firewall uses a TLS inspection configuration to decrypt traffic. Network Firewall re-encrypts the traffic before sending it to its destination.</p>
-    #          <p>To use a TLS inspection configuration, you add it to a new Network Firewall firewall policy, then you apply the firewall policy to a firewall. Network Firewall acts as a proxy service to decrypt and inspect the traffic traveling through your firewalls. You can reference a TLS inspection configuration from more than one firewall policy, and you can use a firewall policy in more than one firewall. For more information about using TLS inspection configurations, see
+    #          <p>To use a TLS inspection configuration, you add it to a new Network Firewall firewall policy, then you apply the firewall policy to a firewall. Network Firewall acts as a proxy service to decrypt and inspect the traffic traveling through your firewalls. You can reference a TLS inspection configuration from more than one firewall policy, and you can use a firewall policy in more than one firewall. For more information about using TLS inspection configurations, see 
     #     <a href="https://docs.aws.amazon.com/network-firewall/latest/developerguide/tls-inspection.html">Inspecting SSL/TLS traffic with TLS
     # inspection configurations</a> in the <i>Network Firewall Developer Guide</i>.</p>
     # @!attribute server_certificate_configurations
@@ -6874,11 +6874,11 @@ module Aws::NetworkFirewall
     #   @return [Types::LoggingConfiguration]
     # @!attribute enable_monitoring_dashboard
     #   <p>A boolean that lets you enable or disable the detailed firewall monitoring dashboard on the firewall. </p>
-    #            <p>The monitoring dashboard provides comprehensive visibility into your firewall's flow logs and alert logs.
+    #            <p>The monitoring dashboard provides comprehensive visibility into your firewall's flow logs and alert logs. 
     #            After you enable detailed monitoring, you can access these dashboards directly from the <b>Monitoring</b> page of the Network Firewall console.</p>
     #            <p>
-    #            Specify <code>TRUE</code> to enable the the detailed monitoring dashboard on the firewall.
-    #            Specify <code>FALSE</code> to disable the the detailed monitoring dashboard on the firewall.
+    #            Specify <code>TRUE</code> to enable the the detailed monitoring dashboard on the firewall. 
+    #            Specify <code>FALSE</code> to disable the the detailed monitoring dashboard on the firewall. 
     #         </p>
     #   @return [Boolean]
     class UpdateLoggingConfigurationRequest < Struct.new(
@@ -6904,7 +6904,7 @@ module Aws::NetworkFirewall
     # @!attribute enable_monitoring_dashboard
     #   <p>A boolean that reflects whether or not the firewall monitoring dashboard is enabled on a firewall.</p>
     #            <p>
-    #            Returns <code>TRUE</code> when the firewall monitoring dashboard is enabled on the firewall.
+    #            Returns <code>TRUE</code> when the firewall monitoring dashboard is enabled on the firewall. 
     #            Returns <code>FALSE</code> when the firewall monitoring dashboard is not enabled on the firewall.
     #         </p>
     #   @return [Boolean]
@@ -7392,7 +7392,7 @@ module Aws::NetworkFirewall
     # @!attribute tls_inspection_configuration
     #   <p>The object that defines a TLS inspection configuration. This, along with <a>TLSInspectionConfigurationResponse</a>, define the TLS inspection configuration. You can retrieve all objects for a TLS inspection configuration by calling <a>DescribeTLSInspectionConfiguration</a>. </p>
     #            <p>Network Firewall uses a TLS inspection configuration to decrypt traffic. Network Firewall re-encrypts the traffic before sending it to its destination.</p>
-    #            <p>To use a TLS inspection configuration, you add it to a new Network Firewall firewall policy, then you apply the firewall policy to a firewall. Network Firewall acts as a proxy service to decrypt and inspect the traffic traveling through your firewalls. You can reference a TLS inspection configuration from more than one firewall policy, and you can use a firewall policy in more than one firewall. For more information about using TLS inspection configurations, see
+    #            <p>To use a TLS inspection configuration, you add it to a new Network Firewall firewall policy, then you apply the firewall policy to a firewall. Network Firewall acts as a proxy service to decrypt and inspect the traffic traveling through your firewalls. You can reference a TLS inspection configuration from more than one firewall policy, and you can use a firewall policy in more than one firewall. For more information about using TLS inspection configurations, see 
     #       <a href="https://docs.aws.amazon.com/network-firewall/latest/developerguide/tls-inspection.html">Inspecting SSL/TLS traffic with TLS
     #   inspection configurations</a> in the <i>Network Firewall Developer Guide</i>.</p>
     #   @return [Types::TLSInspectionConfiguration]
@@ -7452,14 +7452,14 @@ module Aws::NetworkFirewall
       include ::Smithy::Schema::Structure
     end
 
-    # <p>A VPC endpoint association defines a single subnet to use for a firewall endpoint for a <code>Firewall</code>.
-    #        You can define VPC endpoint associations only in the Availability Zones that already have
+    # <p>A VPC endpoint association defines a single subnet to use for a firewall endpoint for a <code>Firewall</code>. 
+    #        You can define VPC endpoint associations only in the Availability Zones that already have 
     #            a subnet mapping defined in the <code>Firewall</code> resource. </p>
     #          <note>
     #             <p>You can retrieve the list of Availability Zones that are available for use by calling <code>DescribeFirewallMetadata</code>.</p>
     #          </note>
-    #          <p>To manage firewall endpoints, first, in the <code>Firewall</code> specification, you specify a single VPC and one subnet
-    #            for each of the Availability Zones where you want to use the firewall. Then you can define additional endpoints as
+    #          <p>To manage firewall endpoints, first, in the <code>Firewall</code> specification, you specify a single VPC and one subnet 
+    #            for each of the Availability Zones where you want to use the firewall. Then you can define additional endpoints as 
     #            VPC endpoint associations. </p>
     #          <p>You can use VPC endpoint associations to expand the protections of the firewall as follows: </p>
     #          <ul>
@@ -7472,9 +7472,9 @@ module Aws::NetworkFirewall
     #                   <b>Define multiple firewall endpoints for a VPC in an Availability Zone</b> - You can create additional firewall endpoints for the VPC that you have defined in the firewall, in any Availability Zone that already has an endpoint defined in the <code>Firewall</code> subnet mappings. You can create multiple VPC endpoint associations for any other VPC where you use the firewall.</p>
     #             </li>
     #          </ul>
-    #          <p>You can use Resource Access Manager to share a <code>Firewall</code> that you own with other accounts, which gives them the ability to use the firewall
+    #          <p>You can use Resource Access Manager to share a <code>Firewall</code> that you own with other accounts, which gives them the ability to use the firewall 
     #       to create VPC endpoint associations. For information about sharing a firewall, see <code>PutResourcePolicy</code>
-    #           in this guide and see
+    #           in this guide and see 
     #     <a href="https://docs.aws.amazon.com/network-firewall/latest/developerguide/sharing.html">Sharing Network Firewall resources</a> in the <i>Network Firewall Developer Guide</i>.</p>
     #          <p>The status of the VPC endpoint association, which indicates whether it's ready to filter network traffic,
     #          is provided in the corresponding <a>VpcEndpointAssociationStatus</a>. You can retrieve both
@@ -7529,7 +7529,7 @@ module Aws::NetworkFirewall
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Detailed information about the current status of a <a>VpcEndpointAssociation</a>. You can retrieve this
+    # <p>Detailed information about the current status of a <a>VpcEndpointAssociation</a>. You can retrieve this 
     # by calling <a>DescribeVpcEndpointAssociation</a> and providing the VPC endpoint association ARN.</p>
     # @!attribute status
     #   <p>The readiness of the configured firewall endpoint to handle network traffic. </p>

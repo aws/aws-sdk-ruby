@@ -2384,7 +2384,7 @@ module Aws::DataSync
     #         something is read from the source and sent over the network.</p>
     #            <p>If DataSync fails to transfer something, this value can be less than
     #           <code>EstimatedFoldersToTransfer</code>. In some cases, this value can also be greater than
-    #           <code>EstimatedFoldersToTransfer</code>.
+    #           <code>EstimatedFoldersToTransfer</code>. 
     #       </p>
     #            <note>
     #               <p>Applies only to <a href="https://docs.aws.amazon.com/datasync/latest/userguide/choosing-task-mode.html">Enhanced mode
@@ -3125,7 +3125,7 @@ module Aws::DataSync
     #       returns an array that contains a list of locations when the <a href="https://docs.aws.amazon.com/datasync/latest/userguide/API_ListLocations.html">ListLocations</a> operation is
     #       called.</p>
     # @!attribute location_arn
-    #   <p>The Amazon Resource Name (ARN) of the location. For Network File System (NFS) or Amazon EFS,
+    #   <p>The Amazon Resource Name (ARN) of the location. For Network File System (NFS) or Amazon EFS, 
     #         the location is the export path. For Amazon S3, the location is the prefix path that you
     #         want to mount and use as the root of the location.</p>
     #   @return [String]

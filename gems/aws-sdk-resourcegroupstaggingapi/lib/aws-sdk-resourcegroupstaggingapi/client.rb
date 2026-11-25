@@ -3,7 +3,6 @@
 # This is generated code!
 
 require_relative 'plugins/endpoint'
-require 'smithy-client/plugins/checksum_required'
 require 'smithy-client/plugins/content_length'
 require 'smithy-client/plugins/default_params'
 require 'smithy-client/plugins/host_prefix'
@@ -23,6 +22,8 @@ require 'smithy-client/plugins/transfer_encoding'
 require 'aws-sdk-core/plugins/global_configuration'
 require 'aws-sdk-core/plugins/shared_config'
 require 'aws-sdk-core/plugins/user_agent'
+require 'aws-sdk-core/plugins/checksum_algorithm'
+require 'aws-sdk-core/plugins/http_checksum'
 require 'aws-sdk-core/plugins/invocation_id'
 require 'aws-sdk-core/plugins/recursion_detection'
 require 'aws-sdk-core/plugins/retry_errors'
@@ -43,7 +44,6 @@ module Aws::ResourceGroupsTaggingAPI
     @identifier = :resourcegroupstaggingapi
 
     add_plugin(::Aws::ResourceGroupsTaggingAPI::Plugins::Endpoint)
-    add_plugin(Smithy::Client::Plugins::ChecksumRequired)
     add_plugin(Smithy::Client::Plugins::ContentLength)
     add_plugin(Smithy::Client::Plugins::DefaultParams)
     add_plugin(Smithy::Client::Plugins::HostPrefix)
@@ -63,6 +63,8 @@ module Aws::ResourceGroupsTaggingAPI
     add_plugin(Aws::Core::Plugins::GlobalConfiguration)
     add_plugin(Aws::Core::Plugins::SharedConfig)
     add_plugin(Aws::Core::Plugins::UserAgent)
+    add_plugin(Aws::Core::Plugins::ChecksumAlgorithm)
+    add_plugin(Aws::Core::Plugins::HttpChecksum)
     add_plugin(Aws::Core::Plugins::InvocationId)
     add_plugin(Aws::Core::Plugins::RecursionDetection)
     add_plugin(Aws::Core::Plugins::RetryErrors)
@@ -139,23 +141,41 @@ module Aws::ResourceGroupsTaggingAPI
     #  * `ENV['AWS_DEFAULT_REGION']`
     #  * `~/.aws/credentials` as `region` under a profile
     #  * `~/.aws/config` as `region` under a profile
+    # @option options [String] :request_checksum_calculation (when_supported)
+    #  Determines when a checksum is calculated for request payloads. Values are:
+    #  
+    #  * `when_supported` - (default) A checksum is calculated for operations
+    #    modeled with the `httpChecksum` trait when `requestChecksumRequired`
+    #    is `true` or a `requestAlgorithmMember` is modeled.
+    #  * `when_required` - A checksum is calculated only when
+    #    `requestChecksumRequired` is `true`, or when the caller supplies a
+    #    modeled `requestAlgorithmMember`.
     # @option options [Integer] :request_min_compression_size_bytes (10240)
     #  The minimum size in bytes that triggers compression for request bodies.
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
+    # @option options [String] :response_checksum_validation (when_supported)
+    #  Determines when checksum validation is performed for response payloads.
+    #  Values are:
+    #  
+    #  * `when_supported` - (default) Validation is enabled for operations
+    #    modeled with a `requestValidationModeMember` and at least one
+    #    `responseAlgorithms` value supported by the client.
+    #  * `when_required` - Validation is performed only when the caller sets
+    #    the modeled `requestValidationModeMember` to `ENABLED`.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #
+    #  
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #
+    #  
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #
+    #  
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -210,7 +230,7 @@ module Aws::ResourceGroupsTaggingAPI
     end
 
     # <p>Describes the status of the <code>StartReportCreation</code> operation. </p>
-    #          <p>You can call this operation only from the organization's
+    #          <p>You can call this operation only from the organization's 
     #     management account and from the us-east-1 Region.</p>
     # @param [Hash, Types::DescribeReportCreationInput] params
     # @example Request syntax with placeholder values
@@ -236,9 +256,9 @@ module Aws::ResourceGroupsTaggingAPI
     #          <p>For more information on tag policies, see <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html">Tag Policies</a> in
     #             the <i>Organizations User Guide.</i>
     #          </p>
-    #          <p>You can call this operation only from the organization's
+    #          <p>You can call this operation only from the organization's 
     #     management account and from the us-east-1 Region.</p>
-    #          <p>This operation supports pagination, where the response can be sent in
+    #          <p>This operation supports pagination, where the response can be sent in 
     #     multiple pages. You should check the <code>PaginationToken</code> response parameter to determine
     #     if there are additional results available to return. Repeat the query, passing the
     #     <code>PaginationToken</code> response parameter value as an input to the next request until you
@@ -297,13 +317,13 @@ module Aws::ResourceGroupsTaggingAPI
     #   <p>Specifies a list of attributes to group the counts of noncompliant resources by. If
     #               supplied, the counts are sorted by those attributes.</p>
     # @option params [Integer] :max_results
-    #   <p>Specifies the maximum number of results to be returned in each page. A
+    #   <p>Specifies the maximum number of results to be returned in each page. A 
     #       query can return fewer than this maximum, even if there are more results still to return. You
     #       should always check the <code>PaginationToken</code> response value to see if there are more
     #       results. You can specify a minimum of 1 and a maximum value of 100.</p>
     # @option params [String] :pagination_token
-    #   <p>Specifies a <code>PaginationToken</code> response value from a
-    #       previous request to indicate that you want the next page of results. Leave this parameter empty
+    #   <p>Specifies a <code>PaginationToken</code> response value from a 
+    #       previous request to indicate that you want the next page of results. Leave this parameter empty 
     #       in your initial request.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -356,7 +376,7 @@ module Aws::ResourceGroupsTaggingAPI
     #                </p>
     #             </li>
     #          </ul>
-    #          <p>This operation supports pagination, where the response can be sent in
+    #          <p>This operation supports pagination, where the response can be sent in 
     #     multiple pages. You should check the <code>PaginationToken</code> response parameter to determine
     #     if there are additional results available to return. Repeat the query, passing the
     #     <code>PaginationToken</code> response parameter value as an input to the next request until you
@@ -370,8 +390,8 @@ module Aws::ResourceGroupsTaggingAPI
     #          </note>
     # @param [Hash, Types::GetResourcesInput] params
     # @option params [String] :pagination_token
-    #   <p>Specifies a <code>PaginationToken</code> response value from a
-    #       previous request to indicate that you want the next page of results. Leave this parameter empty
+    #   <p>Specifies a <code>PaginationToken</code> response value from a 
+    #       previous request to indicate that you want the next page of results. Leave this parameter empty 
     #       in your initial request.</p>
     # @option params [Array<Types::TagFilter>] :tag_filters
     #   <p>Specifies a list of TagFilters (keys and values) to restrict the output to only those
@@ -435,7 +455,7 @@ module Aws::ResourceGroupsTaggingAPI
     #               </li>
     #            </ul>
     # @option params [Integer] :resources_per_page
-    #   <p>Specifies the maximum number of results to be returned in each page. A
+    #   <p>Specifies the maximum number of results to be returned in each page. A 
     #       query can return fewer than this maximum, even if there are more results still to return. You
     #       should always check the <code>PaginationToken</code> response value to see if there are more
     #       results. You can specify a minimum of 1 and a maximum value of 100.</p>
@@ -556,7 +576,7 @@ module Aws::ResourceGroupsTaggingAPI
 
     # <p>Returns all tag keys currently in use in the specified Amazon Web Services Region for the calling
     #             account.</p>
-    #          <p>This operation supports pagination, where the response can be sent in
+    #          <p>This operation supports pagination, where the response can be sent in 
     #     multiple pages. You should check the <code>PaginationToken</code> response parameter to determine
     #     if there are additional results available to return. Repeat the query, passing the
     #     <code>PaginationToken</code> response parameter value as an input to the next request until you
@@ -564,8 +584,8 @@ module Aws::ResourceGroupsTaggingAPI
     #     there are no more results waiting to be returned.</p>
     # @param [Hash, Types::GetTagKeysInput] params
     # @option params [String] :pagination_token
-    #   <p>Specifies a <code>PaginationToken</code> response value from a
-    #       previous request to indicate that you want the next page of results. Leave this parameter empty
+    #   <p>Specifies a <code>PaginationToken</code> response value from a 
+    #       previous request to indicate that you want the next page of results. Leave this parameter empty 
     #       in your initial request.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -587,7 +607,7 @@ module Aws::ResourceGroupsTaggingAPI
 
     # <p>Returns all tag values for the specified key that are used in the specified Amazon Web Services
     #             Region for the calling account.</p>
-    #          <p>This operation supports pagination, where the response can be sent in
+    #          <p>This operation supports pagination, where the response can be sent in 
     #     multiple pages. You should check the <code>PaginationToken</code> response parameter to determine
     #     if there are additional results available to return. Repeat the query, passing the
     #     <code>PaginationToken</code> response parameter value as an input to the next request until you
@@ -595,8 +615,8 @@ module Aws::ResourceGroupsTaggingAPI
     #     there are no more results waiting to be returned.</p>
     # @param [Hash, Types::GetTagValuesInput] params
     # @option params [String] :pagination_token
-    #   <p>Specifies a <code>PaginationToken</code> response value from a
-    #       previous request to indicate that you want the next page of results. Leave this parameter empty
+    #   <p>Specifies a <code>PaginationToken</code> response value from a 
+    #       previous request to indicate that you want the next page of results. Leave this parameter empty 
     #       in your initial request.</p>
     # @option params [String] :key
     #   <p>Specifies the tag key for which you want to list all existing values that are
@@ -664,7 +684,7 @@ module Aws::ResourceGroupsTaggingAPI
     #          <p>For more information about evaluating resource compliance with tag policies, including
     #             the required permissions, review <a href="https://docs.aws.amazon.com/tag-editor/latest/userguide/tag-policies-orgs.html#tag-policies-permissions-org">Permissions for evaluating organization-wide compliance</a> in the
     #                 <i>Tagging Amazon Web Services Resources and Tag Editor</i> user guide. </p>
-    #          <p>You can call this operation only from the organization's
+    #          <p>You can call this operation only from the organization's 
     #     management account and from the us-east-1 Region.</p>
     #          <p>If the account associated with the identity used to call
     #                 <code>StartReportCreation</code> is different from the account that owns the Amazon S3
@@ -927,7 +947,8 @@ module Aws::ResourceGroupsTaggingAPI
     # @option options [Integer] :max_wait_time
     # @option options [Integer] :min_delay
     # @option options [Integer] :max_delay
-    # @return [nil] Returns `nil` if the waiter was successful.
+    # @return [Smithy::Client::Response] Returns the successful response
+    #   that satisfied the waiter's success condition.
     # @raise [FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition
     #   out of, preventing success.

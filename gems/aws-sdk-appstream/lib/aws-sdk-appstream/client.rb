@@ -3,7 +3,6 @@
 # This is generated code!
 
 require_relative 'plugins/endpoint'
-require 'smithy-client/plugins/checksum_required'
 require 'smithy-client/plugins/content_length'
 require 'smithy-client/plugins/default_params'
 require 'smithy-client/plugins/host_prefix'
@@ -23,6 +22,8 @@ require 'smithy-client/plugins/transfer_encoding'
 require 'aws-sdk-core/plugins/global_configuration'
 require 'aws-sdk-core/plugins/shared_config'
 require 'aws-sdk-core/plugins/user_agent'
+require 'aws-sdk-core/plugins/checksum_algorithm'
+require 'aws-sdk-core/plugins/http_checksum'
 require 'aws-sdk-core/plugins/invocation_id'
 require 'aws-sdk-core/plugins/recursion_detection'
 require 'aws-sdk-core/plugins/retry_errors'
@@ -44,7 +45,6 @@ module Aws::AppStream
     @identifier = :appstream
 
     add_plugin(::Aws::AppStream::Plugins::Endpoint)
-    add_plugin(Smithy::Client::Plugins::ChecksumRequired)
     add_plugin(Smithy::Client::Plugins::ContentLength)
     add_plugin(Smithy::Client::Plugins::DefaultParams)
     add_plugin(Smithy::Client::Plugins::HostPrefix)
@@ -64,6 +64,8 @@ module Aws::AppStream
     add_plugin(Aws::Core::Plugins::GlobalConfiguration)
     add_plugin(Aws::Core::Plugins::SharedConfig)
     add_plugin(Aws::Core::Plugins::UserAgent)
+    add_plugin(Aws::Core::Plugins::ChecksumAlgorithm)
+    add_plugin(Aws::Core::Plugins::HttpChecksum)
     add_plugin(Aws::Core::Plugins::InvocationId)
     add_plugin(Aws::Core::Plugins::RecursionDetection)
     add_plugin(Aws::Core::Plugins::RetryErrors)
@@ -140,23 +142,41 @@ module Aws::AppStream
     #  * `ENV['AWS_DEFAULT_REGION']`
     #  * `~/.aws/credentials` as `region` under a profile
     #  * `~/.aws/config` as `region` under a profile
+    # @option options [String] :request_checksum_calculation (when_supported)
+    #  Determines when a checksum is calculated for request payloads. Values are:
+    #  
+    #  * `when_supported` - (default) A checksum is calculated for operations
+    #    modeled with the `httpChecksum` trait when `requestChecksumRequired`
+    #    is `true` or a `requestAlgorithmMember` is modeled.
+    #  * `when_required` - A checksum is calculated only when
+    #    `requestChecksumRequired` is `true`, or when the caller supplies a
+    #    modeled `requestAlgorithmMember`.
     # @option options [Integer] :request_min_compression_size_bytes (10240)
     #  The minimum size in bytes that triggers compression for request bodies.
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
+    # @option options [String] :response_checksum_validation (when_supported)
+    #  Determines when checksum validation is performed for response payloads.
+    #  Values are:
+    #  
+    #  * `when_supported` - (default) Validation is enabled for operations
+    #    modeled with a `requestValidationModeMember` and at least one
+    #    `responseAlgorithms` value supported by the client.
+    #  * `when_required` - Validation is performed only when the caller sets
+    #    the modeled `requestValidationModeMember` to `ENABLED`.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #
+    #  
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #
+    #  
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #
+    #  
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -755,7 +775,7 @@ module Aws::AppStream
     # @option params [String] :app_block_builder_name
     #   <p>The name of the app block builder.</p>
     # @option params [Integer] :validity
-    #   <p>The time that the streaming URL will be valid, in seconds.
+    #   <p>The time that the streaming URL will be valid, in seconds. 
     #               Specify a value between 1 and 604800 seconds. The default is 3600 seconds.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -1822,7 +1842,7 @@ module Aws::AppStream
     # @option params [String] :name
     #   <p>The name of the image builder.</p>
     # @option params [Integer] :validity
-    #   <p>The time that the streaming URL will be valid, in seconds.
+    #   <p>The time that the streaming URL will be valid, in seconds. 
     #               Specify a value between 1 and 604800 seconds. The default is 3600 seconds.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -2526,7 +2546,7 @@ module Aws::AppStream
       request.send_request(options)
     end
 
-    # <p>Deletes the specified image. You cannot delete an image when it is in use.
+    # <p>Deletes the specified image. You cannot delete an image when it is in use.  
     #             After you delete an image, you cannot provision new capacity using the image.</p>
     # @param [Hash, Types::DeleteImageRequest] params
     # @option params [String] :name
@@ -3076,7 +3096,7 @@ module Aws::AppStream
       request.send_request(options)
     end
 
-    # <p>Retrieves a list that describes one or more specified Directory Config objects for WorkSpaces Applications, if the names for these objects are provided. Otherwise, all Directory Config objects in the account are described. These objects include the configuration information required to join fleets and image builders to Microsoft Active Directory domains.
+    # <p>Retrieves a list that describes one or more specified Directory Config objects for WorkSpaces Applications, if the names for these objects are provided. Otherwise, all Directory Config objects in the account are described. These objects include the configuration information required to join fleets and image builders to Microsoft Active Directory domains. 
     #         </p>
     #          <p>Although the response syntax in this topic includes the account password, this password is not returned in the actual response.</p>
     # @param [Hash, Types::DescribeDirectoryConfigsRequest] params
@@ -3466,7 +3486,7 @@ module Aws::AppStream
     end
 
     # <p>Retrieves a list that describes the streaming sessions for a specified stack and fleet. If a UserId is provided for the stack and fleet,
-    #             only streaming sessions for that user are described. If an authentication type is not provided,
+    #             only streaming sessions for that user are described. If an authentication type is not provided, 
     #             the default is to authenticate users using a streaming URL.</p>
     # @param [Hash, Types::DescribeSessionsRequest] params
     # @option params [String] :stack_name
@@ -3481,7 +3501,7 @@ module Aws::AppStream
     #   <p>The size of each page of results. The default value is 20 and the maximum value is 50.</p>
     # @option params [String] :authentication_type
     #   <p>The authentication method. Specify <code>API</code> for a user
-    #               authenticated using a streaming URL or <code>SAML</code> for a SAML federated user.
+    #               authenticated using a streaming URL or <code>SAML</code> for a SAML federated user. 
     #               The default is to authenticate users using a streaming URL.</p>
     # @option params [String] :instance_id
     #   <p>The identifier for the instance hosting the session.</p>
@@ -4614,7 +4634,7 @@ module Aws::AppStream
     end
 
     # <p>Adds or overwrites one or more tags for the specified WorkSpaces Applications resource. You can tag WorkSpaces Applications image builders, images, fleets, and stacks.</p>
-    #          <p>Each tag consists of a key and an optional value. If a resource already has a tag with the same key,
+    #          <p>Each tag consists of a key and an optional value. If a resource already has a tag with the same key, 
     #                 this operation updates its value.</p>
     #          <p>To list the current tags for your resources, use <a>ListTagsForResource</a>.
     #                 To disassociate tags from your resources, use <a>UntagResource</a>.</p>
@@ -5649,7 +5669,8 @@ module Aws::AppStream
     # @option options [Integer] :max_wait_time
     # @option options [Integer] :min_delay
     # @option options [Integer] :max_delay
-    # @return [nil] Returns `nil` if the waiter was successful.
+    # @return [Smithy::Client::Response] Returns the successful response
+    #   that satisfied the waiter's success condition.
     # @raise [FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition
     #   out of, preventing success.

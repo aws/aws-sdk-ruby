@@ -3,7 +3,6 @@
 # This is generated code!
 
 require_relative 'plugins/endpoint'
-require 'smithy-client/plugins/checksum_required'
 require 'smithy-client/plugins/content_length'
 require 'smithy-client/plugins/default_params'
 require 'smithy-client/plugins/host_prefix'
@@ -23,6 +22,8 @@ require 'smithy-client/plugins/transfer_encoding'
 require 'aws-sdk-core/plugins/global_configuration'
 require 'aws-sdk-core/plugins/shared_config'
 require 'aws-sdk-core/plugins/user_agent'
+require 'aws-sdk-core/plugins/checksum_algorithm'
+require 'aws-sdk-core/plugins/http_checksum'
 require 'aws-sdk-core/plugins/invocation_id'
 require 'aws-sdk-core/plugins/recursion_detection'
 require 'aws-sdk-core/plugins/retry_errors'
@@ -43,7 +44,6 @@ module Aws::Backup
     @identifier = :backup
 
     add_plugin(::Aws::Backup::Plugins::Endpoint)
-    add_plugin(Smithy::Client::Plugins::ChecksumRequired)
     add_plugin(Smithy::Client::Plugins::ContentLength)
     add_plugin(Smithy::Client::Plugins::DefaultParams)
     add_plugin(Smithy::Client::Plugins::HostPrefix)
@@ -63,6 +63,8 @@ module Aws::Backup
     add_plugin(Aws::Core::Plugins::GlobalConfiguration)
     add_plugin(Aws::Core::Plugins::SharedConfig)
     add_plugin(Aws::Core::Plugins::UserAgent)
+    add_plugin(Aws::Core::Plugins::ChecksumAlgorithm)
+    add_plugin(Aws::Core::Plugins::HttpChecksum)
     add_plugin(Aws::Core::Plugins::InvocationId)
     add_plugin(Aws::Core::Plugins::RecursionDetection)
     add_plugin(Aws::Core::Plugins::RetryErrors)
@@ -139,23 +141,41 @@ module Aws::Backup
     #  * `ENV['AWS_DEFAULT_REGION']`
     #  * `~/.aws/credentials` as `region` under a profile
     #  * `~/.aws/config` as `region` under a profile
+    # @option options [String] :request_checksum_calculation (when_supported)
+    #  Determines when a checksum is calculated for request payloads. Values are:
+    #  
+    #  * `when_supported` - (default) A checksum is calculated for operations
+    #    modeled with the `httpChecksum` trait when `requestChecksumRequired`
+    #    is `true` or a `requestAlgorithmMember` is modeled.
+    #  * `when_required` - A checksum is calculated only when
+    #    `requestChecksumRequired` is `true`, or when the caller supplies a
+    #    modeled `requestAlgorithmMember`.
     # @option options [Integer] :request_min_compression_size_bytes (10240)
     #  The minimum size in bytes that triggers compression for request bodies.
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
+    # @option options [String] :response_checksum_validation (when_supported)
+    #  Determines when checksum validation is performed for response payloads.
+    #  Values are:
+    #  
+    #  * `when_supported` - (default) Validation is enabled for operations
+    #    modeled with a `requestValidationModeMember` and at least one
+    #    `responseAlgorithms` value supported by the client.
+    #  * `when_required` - Validation is performed only when the caller sets
+    #    the modeled `requestValidationModeMember` to `ENABLED`.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #
+    #  
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #
+    #  
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #
+    #  
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -608,14 +628,14 @@ module Aws::Backup
     # @option params [String] :description
     #   <p>The description of the legal hold.</p>
     # @option params [String] :idempotency_token
-    #   <p>This is a user-chosen string used to distinguish between otherwise identical
-    #            calls. Retrying a successful request with the
+    #   <p>This is a user-chosen string used to distinguish between otherwise identical 
+    #            calls. Retrying a successful request with the 
     #            same idempotency token results in a success message with no action taken.</p>
     # @option params [Types::RecoveryPointSelection] :recovery_point_selection
     #   <p>The criteria to assign a set of resources, such as resource types or backup vaults.</p>
     # @option params [Hash<String, String>] :tags
-    #   <p>Optional tags to include. A tag is a key-value pair you can use to manage,
-    #            filter, and search for your resources. Allowed characters include UTF-8 letters,
+    #   <p>Optional tags to include. A tag is a key-value pair you can use to manage, 
+    #            filter, and search for your resources. Allowed characters include UTF-8 letters, 
     #            numbers, spaces, and the following characters: + - = . _ : /. </p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -661,8 +681,8 @@ module Aws::Backup
     end
 
     # <p>Creates a logical container to where backups may be copied.</p>
-    #          <p>This request includes a name, the Region, the maximum number of retention days, the
-    #       minimum number of retention days, and optionally can include tags and a creator request
+    #          <p>This request includes a name, the Region, the maximum number of retention days, the 
+    #       minimum number of retention days, and optionally can include tags and a creator request 
     #       ID.</p>
     #          <note>
     #             <p>Do not include sensitive data, such as passport numbers, in the name of a backup
@@ -670,14 +690,14 @@ module Aws::Backup
     #          </note>
     # @param [Hash, Types::CreateLogicallyAirGappedBackupVaultInput] params
     # @option params [String] :backup_vault_name
-    #   <p>The name of a logical container where backups are stored. Logically air-gapped
-    #            backup vaults are identified by names that are unique to the account used to create
+    #   <p>The name of a logical container where backups are stored. Logically air-gapped 
+    #            backup vaults are identified by names that are unique to the account used to create 
     #            them and the Region where they are created.</p>
     # @option params [Hash<String, String>] :backup_vault_tags
     #   <p>The tags to assign to the vault.</p>
     # @option params [String] :creator_request_id
     #   <p>The ID of the creation request.</p>
-    #            <p>This parameter is optional. If used, this parameter must contain
+    #            <p>This parameter is optional. If used, this parameter must contain 
     #            1 to 50 alphanumeric or '-_.' characters.</p>
     # @option params [Integer] :min_retention_days
     #   <p>This setting specifies the minimum retention period
@@ -821,14 +841,14 @@ module Aws::Backup
     end
 
     # <p>Creates a restore testing plan.</p>
-    #          <p>The first of two steps to create a restore testing
-    #          plan. After this request is successful, finish the procedure using
+    #          <p>The first of two steps to create a restore testing 
+    #          plan. After this request is successful, finish the procedure using 
     #          CreateRestoreTestingSelection.</p>
     # @param [Hash, Types::CreateRestoreTestingPlanInput] params
     # @option params [String] :creator_request_id
-    #   <p>This is a unique string that identifies the request and
-    #            allows failed requests to be retriedwithout the risk of running
-    #            the operation twice. This parameter is optional. If used, this
+    #   <p>This is a unique string that identifies the request and 
+    #            allows failed requests to be retriedwithout the risk of running 
+    #            the operation twice. This parameter is optional. If used, this 
     #            parameter must contain 1 to 50 alphanumeric or '-_.' characters.</p>
     # @option params [Types::RestoreTestingPlanForCreate] :restore_testing_plan
     #   <p>A restore testing plan must contain a unique <code>RestoreTestingPlanName</code> string
@@ -875,8 +895,8 @@ module Aws::Backup
       request.send_request(options)
     end
 
-    # <p>This request can be sent after CreateRestoreTestingPlan request
-    #          returns successfully. This is the second part of creating a resource testing
+    # <p>This request can be sent after CreateRestoreTestingPlan request 
+    #          returns successfully. This is the second part of creating a resource testing 
     #          plan, and it must be completed sequentially.</p>
     #          <p>This consists of <code>RestoreTestingSelectionName</code>,
     #          <code>ProtectedResourceType</code>, and one of the following:</p>
@@ -897,16 +917,16 @@ module Aws::Backup
     #          <code>ProtectedResourceArns</code> along with <code>ProtectedResourceConditions</code>.
     #          Alternatively, you can include up to 30 specific protected resource ARNs in
     #          <code>ProtectedResourceArns</code>.</p>
-    #          <p>Cannot select by both protected resource types AND specific ARNs.
+    #          <p>Cannot select by both protected resource types AND specific ARNs. 
     #          Request will fail if both are included.</p>
     # @param [Hash, Types::CreateRestoreTestingSelectionInput] params
     # @option params [String] :creator_request_id
-    #   <p>This is an optional unique string that identifies the request and allows
-    #            failed requests to be retried without the risk of running the operation
-    #            twice. If used, this parameter must contain
+    #   <p>This is an optional unique string that identifies the request and allows 
+    #            failed requests to be retried without the risk of running the operation 
+    #            twice. If used, this parameter must contain 
     #            1 to 50 alphanumeric or '-_.' characters.</p>
     # @option params [String] :restore_testing_plan_name
-    #   <p>Input the restore testing plan name that was returned from the
+    #   <p>Input the restore testing plan name that was returned from the 
     #            related CreateRestoreTestingPlan request.</p>
     # @option params [Types::RestoreTestingSelectionForCreate] :restore_testing_selection
     #   <p>This consists of <code>RestoreTestingSelectionName</code>,
@@ -1212,10 +1232,10 @@ module Aws::Backup
     #       Instead, it enters an <code>EXPIRED</code> state.</p>
     #          <p>
     #             <code>EXPIRED</code> recovery points can be deleted with this API once the IAM role
-    #       has the <code>iam:CreateServiceLinkedRole</code> action. To learn more about adding this role, see
+    #       has the <code>iam:CreateServiceLinkedRole</code> action. To learn more about adding this role, see 
     #       <a href="https://docs.aws.amazon.com/aws-backup/latest/devguide/deleting-backups.html#deleting-backups-troubleshooting">
     #          Troubleshooting manual deletions</a>.</p>
-    #          <p>If the user or role is deleted or the permission within the role is removed,
+    #          <p>If the user or role is deleted or the permission within the role is removed, 
     #       the deletion will not be successful and will enter an <code>EXPIRED</code> state.</p>
     # @param [Hash, Types::DeleteRecoveryPointInput] params
     # @option params [String] :backup_vault_name
@@ -1261,11 +1281,11 @@ module Aws::Backup
     end
 
     # <p>This request deletes the specified restore testing plan.</p>
-    #          <p>Deletion can only successfully occur if all associated
+    #          <p>Deletion can only successfully occur if all associated 
     #          restore testing selections are deleted first.</p>
     # @param [Hash, Types::DeleteRestoreTestingPlanInput] params
     # @option params [String] :restore_testing_plan_name
-    #   <p>Required unique name of the restore testing plan you wish
+    #   <p>Required unique name of the restore testing plan you wish 
     #            to delete.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -1282,16 +1302,16 @@ module Aws::Backup
       request.send_request(options)
     end
 
-    # <p>Input the Restore Testing Plan name and Restore Testing Selection
+    # <p>Input the Restore Testing Plan name and Restore Testing Selection 
     #          name.</p>
-    #          <p>All testing selections associated with a restore testing plan must
+    #          <p>All testing selections associated with a restore testing plan must 
     #          be deleted before the restore testing plan can be deleted.</p>
     # @param [Hash, Types::DeleteRestoreTestingSelectionInput] params
     # @option params [String] :restore_testing_plan_name
-    #   <p>Required unique name of the restore testing plan that contains the
+    #   <p>Required unique name of the restore testing plan that contains the 
     #            restore testing selection you wish to delete.</p>
     # @option params [String] :restore_testing_selection_name
-    #   <p>Required unique name of the restore testing selection you
+    #   <p>Required unique name of the restore testing selection you 
     #            wish to delete.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -1973,16 +1993,16 @@ module Aws::Backup
       request.send_request(options)
     end
 
-    # <p>This action to a specific child (nested) recovery point removes the relationship
+    # <p>This action to a specific child (nested) recovery point removes the relationship 
     #          between the specified recovery point and its parent (composite) recovery point.</p>
     # @param [Hash, Types::DisassociateRecoveryPointFromParentInput] params
     # @option params [String] :backup_vault_name
     #   <p>The name of a logical container where the child (nested) recovery point
-    #            is stored. Backup vaults are identified by names that are unique to the account used
+    #            is stored. Backup vaults are identified by names that are unique to the account used 
     #            to create them and the Amazon Web Services Region where they are created.</p>
     # @option params [String] :recovery_point_arn
-    #   <p>The Amazon Resource Name (ARN) that uniquely identifies the child
-    #            (nested) recovery point; for example,
+    #   <p>The Amazon Resource Name (ARN) that uniquely identifies the child 
+    #            (nested) recovery point; for example, 
     #            <code>arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45.</code>
     #            </p>
     # @example Request syntax with placeholder values
@@ -2418,7 +2438,7 @@ module Aws::Backup
       request.send_request(options)
     end
 
-    # <p>This action returns details for a specified legal hold. The details are the
+    # <p>This action returns details for a specified legal hold. The details are the 
     #          body of a legal hold in JSON format, in addition to metadata.</p>
     # @param [Hash, Types::GetLegalHoldInput] params
     # @option params [String] :legal_hold_id
@@ -2495,7 +2515,7 @@ module Aws::Backup
       request.send_request(options)
     end
 
-    # <p>This operation returns the metadata and details specific to
+    # <p>This operation returns the metadata and details specific to 
     #          the backup index associated with the specified recovery point.</p>
     # @param [Hash, Types::GetRecoveryPointIndexDetailsInput] params
     # @option params [String] :backup_vault_name
@@ -2591,20 +2611,20 @@ module Aws::Backup
       request.send_request(options)
     end
 
-    # <p>This request returns the minimal required set of metadata needed to
-    #          start a restore job with secure default settings. <code>BackupVaultName</code>
-    #          and <code>RecoveryPointArn</code> are required parameters.
+    # <p>This request returns the minimal required set of metadata needed to 
+    #          start a restore job with secure default settings. <code>BackupVaultName</code> 
+    #          and <code>RecoveryPointArn</code> are required parameters. 
     #          <code>BackupVaultAccountId</code> is an optional parameter.</p>
     # @param [Hash, Types::GetRestoreTestingInferredMetadataInput] params
     # @option params [String] :backup_vault_account_id
     #   <p>The account ID of the specified backup vault.</p>
     # @option params [String] :backup_vault_name
-    #   <p>The name of a logical container where backups are stored. Backup
-    #            vaults are identified by names that are unique to the account used to
-    #            create them and the Amazon Web ServicesRegion where they are created.
+    #   <p>The name of a logical container where backups are stored. Backup 
+    #            vaults are identified by names that are unique to the account used to 
+    #            create them and the Amazon Web ServicesRegion where they are created. 
     #            They consist of letters, numbers, and hyphens.</p>
     # @option params [String] :recovery_point_arn
-    #   <p>An Amazon Resource Name (ARN) that uniquely identifies a recovery
+    #   <p>An Amazon Resource Name (ARN) that uniquely identifies a recovery 
     #            point; for example,
     #            <code>arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45</code>.
     #         </p>
@@ -2669,7 +2689,7 @@ module Aws::Backup
       request.send_request(options)
     end
 
-    # <p>Returns RestoreTestingSelection, which displays resources
+    # <p>Returns RestoreTestingSelection, which displays resources 
     #          and elements of the restore testing plan.</p>
     # @param [Hash, Types::GetRestoreTestingSelectionInput] params
     # @option params [String] :restore_testing_plan_name
@@ -2912,26 +2932,26 @@ module Aws::Backup
       request.send_request(options)
     end
 
-    # <p>This is a request for a summary of backup jobs created
-    #          or running within the most recent 14 days. You can
-    #          include parameters AccountID, State, ResourceType, MessageCategory,
-    #          AggregationPeriod, MaxResults, or NextToken to filter
+    # <p>This is a request for a summary of backup jobs created 
+    #          or running within the most recent 14 days. You can 
+    #          include parameters AccountID, State, ResourceType, MessageCategory, 
+    #          AggregationPeriod, MaxResults, or NextToken to filter 
     #          results.</p>
-    #          <p>This request returns a summary that contains
-    #          Region, Account, State, ResourceType, MessageCategory,
+    #          <p>This request returns a summary that contains 
+    #          Region, Account, State, ResourceType, MessageCategory, 
     #          StartTime, EndTime, and Count of included jobs.</p>
     # @param [Hash, Types::ListBackupJobSummariesInput] params
     # @option params [String] :account_id
     #   <p>Returns the job count for the specified account.</p>
-    #            <p>If the request is sent from a member account or an account
-    #            not part of Amazon Web Services Organizations, jobs within requestor's account
+    #            <p>If the request is sent from a member account or an account 
+    #            not part of Amazon Web Services Organizations, jobs within requestor's account 
     #            will be returned.</p>
-    #            <p>Root, admin, and delegated administrator accounts can use
-    #            the value ANY to return job counts from every account in the
+    #            <p>Root, admin, and delegated administrator accounts can use 
+    #            the value ANY to return job counts from every account in the 
     #            organization.</p>
     #            <p>
-    #               <code>AGGREGATE_ALL</code> aggregates job counts
-    #            from all accounts within the authenticated organization,
+    #               <code>AGGREGATE_ALL</code> aggregates job counts 
+    #            from all accounts within the authenticated organization, 
     #            then returns the sum.</p>
     # @option params [String] :state
     #   <p>This parameter returns the job count for jobs with the specified state.</p>
@@ -2951,24 +2971,24 @@ module Aws::Backup
     #            <p>GET
     #            /audit/backup-job-summaries?AggregationPeriod=FOURTEEN_DAYS&MessageCategory=SUCCESS&State=COMPLETED</p>
     # @option params [String] :resource_type
-    #   <p>Returns the job count for the specified resource type.
-    #            Use request <code>GetSupportedResourceTypes</code> to obtain
+    #   <p>Returns the job count for the specified resource type. 
+    #            Use request <code>GetSupportedResourceTypes</code> to obtain 
     #            strings for supported resource types.</p>
     #            <p>The the value ANY returns count of all resource types.</p>
     #            <p>
-    #               <code>AGGREGATE_ALL</code> aggregates job counts
+    #               <code>AGGREGATE_ALL</code> aggregates job counts 
     #            for all resource types and returns the sum.</p>
     #            <p>The type of Amazon Web Services resource to be backed up; for example, an Amazon Elastic Block Store (Amazon EBS) volume or an Amazon Relational Database Service (Amazon RDS) database.</p>
     # @option params [String] :message_category
-    #   <p>This parameter returns the job count for the specified
+    #   <p>This parameter returns the job count for the specified 
     #            message category.</p>
-    #            <p>Example accepted strings include <code>AccessDenied</code>,
-    #            <code>Success</code>, and <code>InvalidParameters</code>. See
-    #            <a href="https://docs.aws.amazon.com/aws-backup/latest/devguide/monitoring.html">Monitoring</a>
+    #            <p>Example accepted strings include <code>AccessDenied</code>, 
+    #            <code>Success</code>, and <code>InvalidParameters</code>. See 
+    #            <a href="https://docs.aws.amazon.com/aws-backup/latest/devguide/monitoring.html">Monitoring</a> 
     #            for a list of accepted MessageCategory strings.</p>
     #            <p>The the value ANY returns count of all message categories.</p>
     #            <p>
-    #               <code>AGGREGATE_ALL</code> aggregates job counts
+    #               <code>AGGREGATE_ALL</code> aggregates job counts 
     #            for all message categories and returns the sum.</p>
     # @option params [String] :aggregation_period
     #   <p>The period for the returned results.</p>
@@ -2988,7 +3008,7 @@ module Aws::Backup
     #            </ul>
     # @option params [Integer] :max_results
     #   <p>The maximum number of items to be returned.</p>
-    #            <p>The value is an integer. Range of accepted values is from
+    #            <p>The value is an integer. Range of accepted values is from 
     #            1 to 500.</p>
     # @option params [String] :next_token
     #   <p>The next item following a partial list of returned resources. For example, if a request
@@ -3035,7 +3055,7 @@ module Aws::Backup
     #          days. For a longer period of time, consider using these <a href="https://docs.aws.amazon.com/aws-backup/latest/devguide/monitoring.html">monitoring tools</a>.</p>
     # @param [Hash, Types::ListBackupJobsInput] params
     # @option params [String] :next_token
-    #   <p>The next item following a partial list of returned items. For example, if a request is
+    #   <p>The next item following a partial list of returned items. For example, if a request is 
     #            made to return <code>MaxResults</code> number of items, <code>NextToken</code> allows you
     #            to return more items in your list starting at the location pointed to by the next
     #            token.</p>
@@ -3121,7 +3141,7 @@ module Aws::Backup
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>SAP HANA on Amazon EC2</code> for SAP HANA databases
+    #                     <code>SAP HANA on Amazon EC2</code> for SAP HANA databases 
     #               on Amazon Elastic Compute Cloud instances</p>
     #               </li>
     #               <li>
@@ -3151,17 +3171,17 @@ module Aws::Backup
     # @option params [String] :by_parent_job_id
     #   <p>This is a filter to list child (nested) jobs based on parent job ID.</p>
     # @option params [String] :by_message_category
-    #   <p>This is an optional parameter that can be used to
-    #            filter out jobs with a MessageCategory which matches the
+    #   <p>This is an optional parameter that can be used to 
+    #            filter out jobs with a MessageCategory which matches the 
     #            value you input.</p>
-    #            <p>Example strings may include <code>AccessDenied</code>,
-    #            <code>SUCCESS</code>, <code>AGGREGATE_ALL</code>, and
+    #            <p>Example strings may include <code>AccessDenied</code>, 
+    #            <code>SUCCESS</code>, <code>AGGREGATE_ALL</code>, and 
     #            <code>InvalidParameters</code>.</p>
     #            <p>View <a href="https://docs.aws.amazon.com/aws-backup/latest/devguide/monitoring.html">Monitoring</a>
     #            </p>
     #            <p>The wildcard () returns count of all message categories.</p>
     #            <p>
-    #               <code>AGGREGATE_ALL</code> aggregates job counts
+    #               <code>AGGREGATE_ALL</code> aggregates job counts 
     #               for all message categories and returns the sum.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -3469,53 +3489,53 @@ module Aws::Backup
       request.send_request(options)
     end
 
-    # <p>This request obtains a list of copy jobs created
-    #          or running within the the most recent 14 days. You can
-    #          include parameters AccountID, State, ResourceType, MessageCategory,
-    #          AggregationPeriod, MaxResults, or NextToken to filter
+    # <p>This request obtains a list of copy jobs created 
+    #          or running within the the most recent 14 days. You can 
+    #          include parameters AccountID, State, ResourceType, MessageCategory, 
+    #          AggregationPeriod, MaxResults, or NextToken to filter 
     #          results.</p>
-    #          <p>This request returns a summary that contains
-    #          Region, Account, State, RestourceType, MessageCategory,
+    #          <p>This request returns a summary that contains 
+    #          Region, Account, State, RestourceType, MessageCategory, 
     #          StartTime, EndTime, and Count of included jobs.</p>
     # @param [Hash, Types::ListCopyJobSummariesInput] params
     # @option params [String] :account_id
     #   <p>Returns the job count for the specified account.</p>
-    #            <p>If the request is sent from a member account or an account
-    #            not part of Amazon Web Services Organizations, jobs within requestor's account
+    #            <p>If the request is sent from a member account or an account 
+    #            not part of Amazon Web Services Organizations, jobs within requestor's account 
     #            will be returned.</p>
-    #            <p>Root, admin, and delegated administrator accounts can use
-    #            the value ANY to return job counts from every account in the
+    #            <p>Root, admin, and delegated administrator accounts can use 
+    #            the value ANY to return job counts from every account in the 
     #            organization.</p>
     #            <p>
-    #               <code>AGGREGATE_ALL</code> aggregates job counts
-    #            from all accounts within the authenticated organization,
+    #               <code>AGGREGATE_ALL</code> aggregates job counts 
+    #            from all accounts within the authenticated organization, 
     #            then returns the sum.</p>
     # @option params [String] :state
-    #   <p>This parameter returns the job count for jobs
+    #   <p>This parameter returns the job count for jobs 
     #            with the specified state.</p>
     #            <p>The the value ANY returns count of all states.</p>
     #            <p>
-    #               <code>AGGREGATE_ALL</code> aggregates job counts
+    #               <code>AGGREGATE_ALL</code> aggregates job counts 
     #            for all states and returns the sum.</p>
     # @option params [String] :resource_type
-    #   <p>Returns the job count for the specified resource type.
-    #            Use request <code>GetSupportedResourceTypes</code> to obtain
+    #   <p>Returns the job count for the specified resource type. 
+    #            Use request <code>GetSupportedResourceTypes</code> to obtain 
     #            strings for supported resource types.</p>
     #            <p>The the value ANY returns count of all resource types.</p>
     #            <p>
-    #               <code>AGGREGATE_ALL</code> aggregates job counts
+    #               <code>AGGREGATE_ALL</code> aggregates job counts 
     #            for all resource types and returns the sum.</p>
     #            <p>The type of Amazon Web Services resource to be backed up; for example, an Amazon Elastic Block Store (Amazon EBS) volume or an Amazon Relational Database Service (Amazon RDS) database.</p>
     # @option params [String] :message_category
-    #   <p>This parameter returns the job count for the specified
+    #   <p>This parameter returns the job count for the specified 
     #            message category.</p>
-    #            <p>Example accepted strings include <code>AccessDenied</code>,
-    #            <code>Success</code>, and <code>InvalidParameters</code>. See
-    #            <a href="https://docs.aws.amazon.com/aws-backup/latest/devguide/monitoring.html">Monitoring</a>
+    #            <p>Example accepted strings include <code>AccessDenied</code>, 
+    #            <code>Success</code>, and <code>InvalidParameters</code>. See 
+    #            <a href="https://docs.aws.amazon.com/aws-backup/latest/devguide/monitoring.html">Monitoring</a> 
     #            for a list of accepted MessageCategory strings.</p>
     #            <p>The the value ANY returns count of all message categories.</p>
     #            <p>
-    #               <code>AGGREGATE_ALL</code> aggregates job counts
+    #               <code>AGGREGATE_ALL</code> aggregates job counts 
     #            for all message categories and returns the sum.</p>
     # @option params [String] :aggregation_period
     #   <p>The period for the returned results.</p>
@@ -3534,9 +3554,9 @@ module Aws::Backup
     #               </li>
     #            </ul>
     # @option params [Integer] :max_results
-    #   <p>This parameter sets the maximum number of items
+    #   <p>This parameter sets the maximum number of items 
     #            to be returned.</p>
-    #            <p>The value is an integer. Range of accepted values is from
+    #            <p>The value is an integer. Range of accepted values is from 
     #            1 to 500.</p>
     # @option params [String] :next_token
     #   <p>The next item following a partial list of returned resources. For example, if a request
@@ -3653,7 +3673,7 @@ module Aws::Backup
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>SAP HANA on Amazon EC2</code> for SAP HANA databases
+    #                     <code>SAP HANA on Amazon EC2</code> for SAP HANA databases 
     #               on Amazon Elastic Compute Cloud instances</p>
     #               </li>
     #               <li>
@@ -3685,18 +3705,18 @@ module Aws::Backup
     # @option params [String] :by_parent_job_id
     #   <p>This is a filter to list child (nested) jobs based on parent job ID.</p>
     # @option params [String] :by_message_category
-    #   <p>This is an optional parameter that can be used to
-    #            filter out jobs with a MessageCategory which matches the
+    #   <p>This is an optional parameter that can be used to 
+    #            filter out jobs with a MessageCategory which matches the 
     #            value you input.</p>
-    #            <p>Example strings may include <code>AccessDenied</code>,
-    #            <code>SUCCESS</code>, <code>AGGREGATE_ALL</code>, and
+    #            <p>Example strings may include <code>AccessDenied</code>, 
+    #            <code>SUCCESS</code>, <code>AGGREGATE_ALL</code>, and 
     #            <code>INVALIDPARAMETERS</code>.</p>
-    #            <p>View
+    #            <p>View 
     #            <a href="https://docs.aws.amazon.com/aws-backup/latest/devguide/monitoring.html">Monitoring</a>
     #            for a list of accepted strings.</p>
     #            <p>The the value ANY returns count of all message categories.</p>
     #            <p>
-    #               <code>AGGREGATE_ALL</code> aggregates job counts
+    #               <code>AGGREGATE_ALL</code> aggregates job counts 
     #               for all message categories and returns the sum.</p>
     # @option params [String] :by_source_recovery_point_arn
     #   <p>Filters copy jobs by the specified source recovery point ARN.</p>
@@ -3813,10 +3833,10 @@ module Aws::Backup
       request.send_request(options)
     end
 
-    # <p>This operation returns a list of recovery points that have an
+    # <p>This operation returns a list of recovery points that have an 
     #          associated index, belonging to the specified account.</p>
-    #          <p>Optional parameters you can include are: MaxResults;
-    #          NextToken; SourceResourceArns; CreatedBefore; CreatedAfter;
+    #          <p>Optional parameters you can include are: MaxResults; 
+    #          NextToken; SourceResourceArns; CreatedBefore; CreatedAfter; 
     #          and ResourceType.</p>
     # @param [Hash, Types::ListIndexedRecoveryPointsInput] params
     # @option params [String] :next_token
@@ -3828,16 +3848,16 @@ module Aws::Backup
     # @option params [Integer] :max_results
     #   <p>The maximum number of resource list items to be returned.</p>
     # @option params [String] :source_resource_arn
-    #   <p>A string of the  Amazon Resource Name (ARN) that uniquely identifies
+    #   <p>A string of the  Amazon Resource Name (ARN) that uniquely identifies 
     #            the source resource.</p>
     # @option params [Time] :created_before
-    #   <p>Returns only indexed recovery points that were created before the
+    #   <p>Returns only indexed recovery points that were created before the 
     #            specified date.</p>
     # @option params [Time] :created_after
-    #   <p>Returns only indexed recovery points that were created after the
+    #   <p>Returns only indexed recovery points that were created after the 
     #            specified date.</p>
     # @option params [String] :resource_type
-    #   <p>Returns a list of indexed recovery points for the specified
+    #   <p>Returns a list of indexed recovery points for the specified 
     #            resource type(s).</p>
     #            <p>Accepted values include:</p>
     #            <ul>
@@ -3851,11 +3871,11 @@ module Aws::Backup
     #               </li>
     #            </ul>
     # @option params [String] :index_status
-    #   <p>Include this parameter to filter the returned list by
+    #   <p>Include this parameter to filter the returned list by 
     #            the indicated statuses.</p>
     #            <p>Accepted values: <code>PENDING</code> | <code>ACTIVE</code> | <code>FAILED</code> | <code>DELETING</code>
     #            </p>
-    #            <p>A recovery point with an index that has the status of <code>ACTIVE</code>
+    #            <p>A recovery point with an index that has the status of <code>ACTIVE</code> 
     #            can be included in a search.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -4093,7 +4113,7 @@ module Aws::Backup
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>SAP HANA on Amazon EC2</code> for SAP HANA databases
+    #                     <code>SAP HANA on Amazon EC2</code> for SAP HANA databases 
     #               on Amazon Elastic Compute Cloud instances</p>
     #               </li>
     #               <li>
@@ -4197,7 +4217,7 @@ module Aws::Backup
       request.send_request(options)
     end
 
-    # <p>This action returns recovery point ARNs (Amazon Resource Names) of the
+    # <p>This action returns recovery point ARNs (Amazon Resource Names) of the 
     #          specified legal hold.</p>
     # @param [Hash, Types::ListRecoveryPointsByLegalHoldInput] params
     # @option params [String] :legal_hold_id
@@ -4258,10 +4278,10 @@ module Aws::Backup
     #            </note>
     # @option params [Boolean] :managed_by_aws_backup_only
     #   <p>This attribute filters recovery points based on ownership.</p>
-    #            <p>If this is
-    #            set to <code>TRUE</code>, the response will contain recovery points associated
+    #            <p>If this is 
+    #            set to <code>TRUE</code>, the response will contain recovery points associated 
     #            with the selected resources that are managed by Backup.</p>
-    #            <p>If this is set to <code>FALSE</code>, the response will contain all
+    #            <p>If this is set to <code>FALSE</code>, the response will contain all 
     #            recovery points associated with the selected resource, except for EBS
     #            snapshots copied within the same Region and account.</p>
     #            <p>Type: Boolean</p>
@@ -4325,8 +4345,8 @@ module Aws::Backup
     #            <p>
     #               <code>CREATED | RUNNING | COMPLETED | FAILED | COMPLETED_WITH_ISSUES</code>
     #            </p>
-    #            <p> Please note that only scanning jobs finish with state completed with issues.
-    #               For backup jobs this is a console interpretation of a job that finishes in
+    #            <p> Please note that only scanning jobs finish with state completed with issues. 
+    #               For backup jobs this is a console interpretation of a job that finishes in 
     #               completed state and has a status message.</p>
     # @option params [Integer] :max_results
     #   <p>The number of desired results from 1 to 1000. Optional. If unspecified, the query will
@@ -4464,41 +4484,41 @@ module Aws::Backup
       request.send_request(options)
     end
 
-    # <p>This request obtains a summary of restore jobs created
-    #          or running within the the most recent 14 days. You can
-    #          include parameters AccountID, State, ResourceType,
-    #          AggregationPeriod, MaxResults, or NextToken to filter
+    # <p>This request obtains a summary of restore jobs created 
+    #          or running within the the most recent 14 days. You can 
+    #          include parameters AccountID, State, ResourceType,  
+    #          AggregationPeriod, MaxResults, or NextToken to filter 
     #          results.</p>
-    #          <p>This request returns a summary that contains
-    #          Region, Account, State, RestourceType, MessageCategory,
+    #          <p>This request returns a summary that contains 
+    #          Region, Account, State, RestourceType, MessageCategory, 
     #          StartTime, EndTime, and Count of included jobs.</p>
     # @param [Hash, Types::ListRestoreJobSummariesInput] params
     # @option params [String] :account_id
     #   <p>Returns the job count for the specified account.</p>
-    #            <p>If the request is sent from a member account or an account
-    #            not part of Amazon Web Services Organizations, jobs within requestor's account
+    #            <p>If the request is sent from a member account or an account 
+    #            not part of Amazon Web Services Organizations, jobs within requestor's account 
     #            will be returned.</p>
-    #            <p>Root, admin, and delegated administrator accounts can use
-    #            the value ANY to return job counts from every account in the
+    #            <p>Root, admin, and delegated administrator accounts can use 
+    #            the value ANY to return job counts from every account in the 
     #            organization.</p>
     #            <p>
-    #               <code>AGGREGATE_ALL</code> aggregates job counts
-    #            from all accounts within the authenticated organization,
+    #               <code>AGGREGATE_ALL</code> aggregates job counts 
+    #            from all accounts within the authenticated organization, 
     #            then returns the sum.</p>
     # @option params [String] :state
-    #   <p>This parameter returns the job count for jobs
+    #   <p>This parameter returns the job count for jobs 
     #            with the specified state.</p>
     #            <p>The the value ANY returns count of all states.</p>
     #            <p>
-    #               <code>AGGREGATE_ALL</code> aggregates job counts
+    #               <code>AGGREGATE_ALL</code> aggregates job counts 
     #            for all states and returns the sum.</p>
     # @option params [String] :resource_type
-    #   <p>Returns the job count for the specified resource type.
-    #            Use request <code>GetSupportedResourceTypes</code> to obtain
+    #   <p>Returns the job count for the specified resource type. 
+    #            Use request <code>GetSupportedResourceTypes</code> to obtain 
     #            strings for supported resource types.</p>
     #            <p>The the value ANY returns count of all resource types.</p>
     #            <p>
-    #               <code>AGGREGATE_ALL</code> aggregates job counts
+    #               <code>AGGREGATE_ALL</code> aggregates job counts 
     #            for all resource types and returns the sum.</p>
     #            <p>The type of Amazon Web Services resource to be backed up; for example, an Amazon Elastic Block Store (Amazon EBS) volume or an Amazon Relational Database Service (Amazon RDS) database.</p>
     # @option params [String] :aggregation_period
@@ -4518,9 +4538,9 @@ module Aws::Backup
     #               </li>
     #            </ul>
     # @option params [Integer] :max_results
-    #   <p>This parameter sets the maximum number of items
+    #   <p>This parameter sets the maximum number of items 
     #            to be returned.</p>
-    #            <p>The value is an integer. Range of accepted values is from
+    #            <p>The value is an integer. Range of accepted values is from 
     #            1 to 500.</p>
     # @option params [String] :next_token
     #   <p>The next item following a partial list of returned resources. For example, if a request
@@ -4631,7 +4651,7 @@ module Aws::Backup
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>SAP HANA on Amazon EC2</code> for SAP HANA databases
+    #                     <code>SAP HANA on Amazon EC2</code> for SAP HANA databases 
     #               on Amazon Elastic Compute Cloud instances</p>
     #               </li>
     #               <li>
@@ -4660,7 +4680,7 @@ module Aws::Backup
     #   <p>Returns only copy jobs completed after a date expressed in Unix format and Coordinated
     #            Universal Time (UTC).</p>
     # @option params [String] :by_restore_testing_plan_arn
-    #   <p>This returns only restore testing jobs that match the
+    #   <p>This returns only restore testing jobs that match the 
     #            specified resource Amazon Resource Name (ARN).</p>
     # @option params [String] :by_parent_job_id
     #   <p>This is a filter to list child (nested) restore jobs based on parent restore job ID.</p>
@@ -4727,7 +4747,7 @@ module Aws::Backup
     #             <code>ByRecoveryPointCreationDateBefore</code>.</p>
     # @param [Hash, Types::ListRestoreJobsByProtectedResourceInput] params
     # @option params [String] :resource_arn
-    #   <p>Returns only restore jobs that match the specified resource
+    #   <p>Returns only restore jobs that match the specified resource 
     #            Amazon Resource Name (ARN).</p>
     # @option params [String] :by_status
     #   <p>Returns only restore jobs associated with the specified job status.</p>
@@ -4736,9 +4756,9 @@ module Aws::Backup
     # @option params [Time] :by_recovery_point_creation_date_before
     #   <p>Returns only restore jobs of recovery points that were created before the specified date.</p>
     # @option params [String] :next_token
-    #   <p>The next item following a partial list of returned items. For example,
-    #            if a request ismade to return <code>MaxResults</code> number of items,
-    #            <code>NextToken</code> allows you to return more items in your list
+    #   <p>The next item following a partial list of returned items. For example, 
+    #            if a request ismade to return <code>MaxResults</code> number of items, 
+    #            <code>NextToken</code> allows you to return more items in your list 
     #            starting at the location pointed to by the next token.</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of items to be returned.</p>
@@ -4798,9 +4818,9 @@ module Aws::Backup
     # @option params [Integer] :max_results
     #   <p>The maximum number of items to be returned.</p>
     # @option params [String] :next_token
-    #   <p>The next item following a partial list of returned items.
-    #            For example, if a request is made to return <code>MaxResults</code>
-    #            number of items, <code>NextToken</code> allows you to return more items
+    #   <p>The next item following a partial list of returned items. 
+    #            For example, if a request is made to return <code>MaxResults</code> 
+    #            number of items, <code>NextToken</code> allows you to return more items 
     #            in your list starting at the location pointed to by the nexttoken.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -4832,18 +4852,18 @@ module Aws::Backup
       request.send_request(options)
     end
 
-    # <p>Returns a list of restore testing selections. Can be filtered
+    # <p>Returns a list of restore testing selections. Can be filtered 
     #          by <code>MaxResults</code> and <code>RestoreTestingPlanName</code>.</p>
     # @param [Hash, Types::ListRestoreTestingSelectionsInput] params
     # @option params [Integer] :max_results
     #   <p>The maximum number of items to be returned.</p>
     # @option params [String] :next_token
-    #   <p>The next item following a partial list of returned items.
-    #            For example, if a request is made to return <code>MaxResults</code>
-    #            number of items, <code>NextToken</code> allows you to return more items
+    #   <p>The next item following a partial list of returned items. 
+    #            For example, if a request is made to return <code>MaxResults</code> 
+    #            number of items, <code>NextToken</code> allows you to return more items 
     #            in your list starting at the location pointed to by the nexttoken.</p>
     # @option params [String] :restore_testing_plan_name
-    #   <p>Returns restore testing selections by the specified restore testing
+    #   <p>Returns restore testing selections by the specified restore testing 
     #            plan name.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -4883,13 +4903,13 @@ module Aws::Backup
     #            <p>
     #               <code>AGGREGATE_ALL</code> aggregates job counts from all accounts within the authenticated organization, then returns the sum.</p>
     # @option params [String] :resource_type
-    #   <p>Returns the job count for the specified resource type. Use request
+    #   <p>Returns the job count for the specified resource type. Use request 
     #            <code>GetSupportedResourceTypes</code> to obtain strings for supported resource types.</p>
     #            <p>The the value <code>ANY</code> returns count of all resource types.</p>
     #            <p>
     #               <code>AGGREGATE_ALL</code> aggregates job counts for all resource types and returns the sum.</p>
     # @option params [String] :malware_scanner
-    #   <p>Returns only the scan jobs for the specified malware scanner.
+    #   <p>Returns only the scan jobs for the specified malware scanner. 
     #            Currently the only MalwareScanner is <code>GUARDDUTY</code>. But the field also supports <code>ANY</code>, and <code>AGGREGATE_ALL</code>.</p>
     # @option params [String] :scan_result_status
     #   <p>Returns only the scan jobs for the specified scan results.</p>
@@ -4915,7 +4935,7 @@ module Aws::Backup
     #   <p>The maximum number of items to be returned.</p>
     #            <p>The value is an integer. Range of accepted values is from 1 to 500.</p>
     # @option params [String] :next_token
-    #   <p>The next item following a partial list of returned items. For example, if a request is made to
+    #   <p>The next item following a partial list of returned items. For example, if a request is made to 
     #            return <code>MaxResults</code> number of items, <code>NextToken</code> allows you to return more items
     #            in your list starting at the location pointed to by the next token.</p>
     # @example Request syntax with placeholder values
@@ -4964,8 +4984,8 @@ module Aws::Backup
     #            <p>Pattern: <code>^[0-9]{12}$</code>
     #            </p>
     # @option params [String] :by_backup_vault_name
-    #   <p>Returns only scan jobs that will be stored in the specified backup vault.
-    #            Backup vaults are identified by names that are unique to the account
+    #   <p>Returns only scan jobs that will be stored in the specified backup vault. 
+    #            Backup vaults are identified by names that are unique to the account 
     #            used to create them and the Amazon Web Services Region where they are created.</p>
     #            <p>Pattern: <code>^[a-zA-Z0-9\-\_\.]{2,50}$</code>
     #            </p>
@@ -4980,7 +5000,7 @@ module Aws::Backup
     # @option params [String] :by_resource_arn
     #   <p>Returns only scan jobs that match the specified resource Amazon Resource Name (ARN).</p>
     # @option params [String] :by_resource_type
-    #   <p>Returns restore testing selections by the specified restore testing
+    #   <p>Returns restore testing selections by the specified restore testing 
     #            plan name.</p>
     #            <ul>
     #               <li>
@@ -5018,7 +5038,7 @@ module Aws::Backup
     #   <p>The maximum number of items to be returned.</p>
     #            <p>Valid Range: Minimum value of 1. Maximum value of 1000.</p>
     # @option params [String] :next_token
-    #   <p>The next item following a partial list of returned items. For example, if a request is made to
+    #   <p>The next item following a partial list of returned items. For example, if a request is made to 
     #            return <code>MaxResults</code> number of items, <code>NextToken</code> allows you to return more items
     #            in your list starting at the location pointed to by the next token.</p>
     # @example Request syntax with placeholder values
@@ -5197,10 +5217,10 @@ module Aws::Backup
     #          point currently stored in a backup vault. If specified, Vault Lock enforces a minimum and
     #          maximum retention period for future backup and copy jobs that target a backup vault.</p>
     #          <note>
-    #             <p>Backup Vault Lock has been assessed by Cohasset Associates for use in environments
-    #             that are subject to SEC 17a-4, CFTC, and FINRA regulations. For more information about
-    #             how Backup Vault Lock relates to these regulations, see the
-    #             <a href="https://docs.aws.amazon.com/aws-backup/latest/devguide/samples/cohassetreport.zip">Cohasset Associates
+    #             <p>Backup Vault Lock has been assessed by Cohasset Associates for use in environments 
+    #             that are subject to SEC 17a-4, CFTC, and FINRA regulations. For more information about 
+    #             how Backup Vault Lock relates to these regulations, see the 
+    #             <a href="https://docs.aws.amazon.com/aws-backup/latest/devguide/samples/cohassetreport.zip">Cohasset Associates 
     #                Compliance Assessment.</a>
     #             </p>
     #          </note>
@@ -5303,10 +5323,10 @@ module Aws::Backup
       request.send_request(options)
     end
 
-    # <p>This request allows you to send your independent self-run
-    #          restore test validation results.
-    #          <code>RestoreJobId</code> and <code>ValidationStatus</code>
-    #          are required. Optionally, you can input a
+    # <p>This request allows you to send your independent self-run 
+    #          restore test validation results. 
+    #          <code>RestoreJobId</code> and <code>ValidationStatus</code> 
+    #          are required. Optionally, you can input a 
     #          <code>ValidationStatusMessage</code>.</p>
     # @param [Hash, Types::PutRestoreValidationResultInput] params
     # @option params [String] :restore_job_id
@@ -5314,7 +5334,7 @@ module Aws::Backup
     # @option params [String] :validation_status
     #   <p>The status of your restore validation.</p>
     # @option params [String] :validation_status_message
-    #   <p>This is an optional message string you can input to
+    #   <p>This is an optional message string you can input to 
     #            describe the validation status for the restore test validation.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -5382,22 +5402,22 @@ module Aws::Backup
     #            idempotency token results in a success message with no action taken.</p>
     # @option params [Integer] :start_window_minutes
     #   <p>A value in minutes after a backup is scheduled before a job will be canceled if it
-    #            doesn't start successfully. This value is optional, and the default is 8 hours.
+    #            doesn't start successfully. This value is optional, and the default is 8 hours. 
     #            If this value is included, it must be at least 60 minutes to avoid errors.</p>
     #            <p>This parameter has a maximum value of 100 years (52,560,000 minutes).</p>
-    #            <p>During the start window, the backup job status remains in <code>CREATED</code> status until it
-    #            has successfully begun or until the start window time has run out. If within the start
-    #            window time Backup receives an error that allows the job to be retried,
-    #            Backup will automatically retry to begin the job at least every 10 minutes
-    #            until the backup
-    #            successfully begins (the job status changes to <code>RUNNING</code>) or until the job status
+    #            <p>During the start window, the backup job status remains in <code>CREATED</code> status until it 
+    #            has successfully begun or until the start window time has run out. If within the start 
+    #            window time Backup receives an error that allows the job to be retried, 
+    #            Backup will automatically retry to begin the job at least every 10 minutes 
+    #            until the backup 
+    #            successfully begins (the job status changes to <code>RUNNING</code>) or until the job status 
     #            changes to <code>EXPIRED</code> (which is expected to occur when the start window time is over).</p>
     # @option params [Integer] :complete_window_minutes
     #   <p>A value in minutes during which a successfully started backup must complete, or else
     #               Backup will cancel the job. This value is optional. This value begins
     #            counting down from when the backup was scheduled. It does not add additional time for
     #               <code>StartWindowMinutes</code>, or if the backup started later than scheduled.</p>
-    #            <p>Like <code>StartWindowMinutes</code>, this parameter has a maximum value of
+    #            <p>Like <code>StartWindowMinutes</code>, this parameter has a maximum value of 
     #            100 years (52,560,000 minutes).</p>
     # @option params [Types::Lifecycle] :lifecycle
     #   <p>The lifecycle defines when a protected resource is transitioned to cold storage and when
@@ -5407,7 +5427,7 @@ module Aws::Backup
     #            days. Therefore, the “retention” setting must be 90 days greater than the “transition to
     #            cold after days” setting. The “transition to cold after days” setting cannot be changed
     #            after a backup has been transitioned to cold. </p>
-    #            <p>Resource types that can transition to cold storage are listed in the <a href="https://docs.aws.amazon.com/aws-backup/latest/devguide/backup-feature-availability.html#features-by-resource">Feature
+    #            <p>Resource types that can transition to cold storage are listed in the <a href="https://docs.aws.amazon.com/aws-backup/latest/devguide/backup-feature-availability.html#features-by-resource">Feature 
     #            availability by resource</a> table. Backup ignores this expression for
     #            other resource types.</p>
     #            <p>This parameter has a maximum value of 100 years (36,500 days).</p>
@@ -5421,7 +5441,7 @@ module Aws::Backup
     #            <code>"WindowsVSS""disabled"</code> to create a regular backup. The
     #            <code>WindowsVSS</code> option is not enabled by default.</p>
     # @option params [String] :index
-    #   <p>Include this parameter to enable index creation if your backup
+    #   <p>Include this parameter to enable index creation if your backup 
     #            job has a resource type that supports backup indexes.</p>
     #            <p>Resource types that support backup indexes include:</p>
     #            <ul>
@@ -5434,9 +5454,9 @@ module Aws::Backup
     #                     <code>S3</code> for Amazon Simple Storage Service (Amazon S3)</p>
     #               </li>
     #            </ul>
-    #            <p>Index can have 1 of 2 possible values, either <code>ENABLED</code> or
+    #            <p>Index can have 1 of 2 possible values, either <code>ENABLED</code> or 
     #            <code>DISABLED</code>.</p>
-    #            <p>To create a backup index for an eligible <code>ACTIVE</code> recovery point
+    #            <p>To create a backup index for an eligible <code>ACTIVE</code> recovery point 
     #            that does not yet have a backup index, set value to <code>ENABLED</code>.</p>
     #            <p>To delete a backup index, set value to <code>DISABLED</code>.</p>
     # @example Request syntax with placeholder values
@@ -5480,8 +5500,8 @@ module Aws::Backup
 
     # <p>Starts a job to create a one-time copy of the specified resource.</p>
     #          <p>Does not support continuous backups.</p>
-    #          <p>See <a href="https://docs.aws.amazon.com/aws-backup/latest/devguide/recov-point-create-a-copy.html#backup-copy-retry">Copy
-    #       job retry</a> for information on how Backup retries copy job
+    #          <p>See <a href="https://docs.aws.amazon.com/aws-backup/latest/devguide/recov-point-create-a-copy.html#backup-copy-retry">Copy 
+    #       job retry</a> for information on how Backup retries copy job 
     #       operations.</p>
     # @param [Hash, Types::StartCopyJobInput] params
     # @option params [String] :recovery_point_arn
@@ -5503,16 +5523,16 @@ module Aws::Backup
     #            calls to <code>StartCopyJob</code>. Retrying a successful request with the same idempotency
     #            token results in a success message with no action taken.</p>
     # @option params [Types::Lifecycle] :lifecycle
-    #   <p>Specifies the time period, in days, before a recovery point transitions to cold storage
+    #   <p>Specifies the time period, in days, before a recovery point transitions to cold storage 
     #            or is deleted.</p>
     #            <p>Backups transitioned to cold storage must be stored in cold storage for a minimum of 90
     #            days. Therefore, on the console, the retention setting must be 90 days greater than the
     #            transition to cold after days setting. The transition to cold after days setting can't
     #            be changed after a backup has been transitioned to cold.</p>
-    #            <p>Resource types that can transition to cold storage are listed in the <a href="https://docs.aws.amazon.com/aws-backup/latest/devguide/backup-feature-availability.html#features-by-resource">Feature
+    #            <p>Resource types that can transition to cold storage are listed in the <a href="https://docs.aws.amazon.com/aws-backup/latest/devguide/backup-feature-availability.html#features-by-resource">Feature 
     #            availability by resource</a> table. Backup ignores this expression for
     #            other resource types.</p>
-    #            <p>To remove the existing lifecycle and retention periods and keep your recovery points indefinitely,
+    #            <p>To remove the existing lifecycle and retention periods and keep your recovery points indefinitely, 
     #            specify -1 for <code>MoveToColdStorageAfterDays</code> and <code>DeleteAfterDays</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -5772,7 +5792,7 @@ module Aws::Backup
     # <p>Starts scanning jobs for specific resources.</p>
     # @param [Hash, Types::StartScanJobInput] params
     # @option params [String] :backup_vault_name
-    #   <p>The name of a logical container where backups are stored. Backup vaults are identified by names that
+    #   <p>The name of a logical container where backups are stored. Backup vaults are identified by names that 
     #             are unique to the account used to create them and the Amazon Web Services Region where they are created.</p>
     #            <p>Pattern: <code>^[a-zA-Z0-9\-\_]{2,50}$</code>
     #            </p>
@@ -5788,7 +5808,7 @@ module Aws::Backup
     # @option params [String] :malware_scanner
     #   <p>Specifies the malware scanner used during the scan job. Currently only supports <code>GUARDDUTY</code>.</p>
     # @option params [String] :recovery_point_arn
-    #   <p>An Amazon Resource Name (ARN) that uniquely identifies a recovery point. This is your target recovery point for a full scan.
+    #   <p>An Amazon Resource Name (ARN) that uniquely identifies a recovery point. This is your target recovery point for a full scan. 
     #            If you are running an incremental scan, this will be your a recovery point which has been created after your base recovery point selection.</p>
     # @option params [String] :scan_base_recovery_point_arn
     #   <p>An ARN that uniquely identifies the base recovery point to be used for incremental scanning.</p>
@@ -5910,17 +5930,17 @@ module Aws::Backup
 
     # <p>Removes a set of key-value pairs from a recovery point, backup plan, or backup vault
     #          identified by an Amazon Resource Name (ARN)</p>
-    #          <p>This API is not supported for recovery points for resource types
-    #          including Aurora, Amazon DocumentDB. Amazon EBS,
+    #          <p>This API is not supported for recovery points for resource types 
+    #          including Aurora, Amazon DocumentDB. Amazon EBS, 
     #          Amazon FSx, Neptune, and Amazon RDS.</p>
     # @param [Hash, Types::UntagResourceInput] params
     # @option params [String] :resource_arn
     #   <p>An ARN that uniquely identifies a resource. The format of the ARN depends on the type of
     #            the tagged resource.</p>
-    #            <p>ARNs that do not include <code>backup</code> are incompatible with tagging.
-    #            <code>TagResource</code> and <code>UntagResource</code> with invalid ARNs will
-    #            result in an error. Acceptable ARN content can include
-    #            <code>arn:aws:backup:us-east</code>. Invalid ARN content may look like
+    #            <p>ARNs that do not include <code>backup</code> are incompatible with tagging. 
+    #            <code>TagResource</code> and <code>UntagResource</code> with invalid ARNs will 
+    #            result in an error. Acceptable ARN content can include 
+    #            <code>arn:aws:backup:us-east</code>. Invalid ARN content may look like 
     #            <code>arn:aws:ec2:us-east</code>.</p>
     # @option params [Array<String>] :tag_key_list
     #   <p>The keys to identify which key-value tags to remove from a resource.</p>
@@ -6140,9 +6160,9 @@ module Aws::Backup
     #   <p>This specifies the IAM role ARN used for this operation.</p>
     #            <p>For example, arn:aws:iam::123456789012:role/S3Access</p>
     # @option params [String] :index
-    #   <p>Index can have 1 of 2 possible values, either <code>ENABLED</code> or
+    #   <p>Index can have 1 of 2 possible values, either <code>ENABLED</code> or 
     #            <code>DISABLED</code>.</p>
-    #            <p>To create a backup index for an eligible <code>ACTIVE</code> recovery point
+    #            <p>To create a backup index for an eligible <code>ACTIVE</code> recovery point 
     #            that does not yet have a backup index, set value to <code>ENABLED</code>.</p>
     #            <p>To delete a backup index, set value to <code>DISABLED</code>.</p>
     # @example Request syntax with placeholder values
@@ -6179,8 +6199,8 @@ module Aws::Backup
     #          cold after days” setting. The “transition to cold after days” setting cannot be changed
     #          after a backup has been transitioned to cold.</p>
     #          <important>
-    #             <p>If your lifecycle currently uses the parameters <code>DeleteAfterDays</code> and
-    #          <code>MoveToColdStorageAfterDays</code>, include these parameters and their values when you call
+    #             <p>If your lifecycle currently uses the parameters <code>DeleteAfterDays</code> and 
+    #          <code>MoveToColdStorageAfterDays</code>, include these parameters and their values when you call 
     #          this operation. Not including them may result in your plan updating with null values.</p>
     #          </important>
     #          <p>This operation does not support continuous backups.</p>
@@ -6242,12 +6262,12 @@ module Aws::Backup
     # @param [Hash, Types::UpdateRegionSettingsInput] params
     # @option params [Hash<String, Boolean>] :resource_type_opt_in_preference
     #   <p>Updates the list of services along with the opt-in preferences for the Region.</p>
-    #            <p>If resource assignments are only based on tags, then service opt-in settings are applied.
-    #            If a resource type is explicitly assigned to a backup plan, such as Amazon S3,
-    #            Amazon EC2, or Amazon RDS, it will be included in the
-    #            backup even if the opt-in is not enabled for that particular service.
-    #            If both a resource type and tags are specified in a resource assignment,
-    #            the resource type specified in the backup plan takes priority over the
+    #            <p>If resource assignments are only based on tags, then service opt-in settings are applied. 
+    #            If a resource type is explicitly assigned to a backup plan, such as Amazon S3, 
+    #            Amazon EC2, or Amazon RDS, it will be included in the 
+    #            backup even if the opt-in is not enabled for that particular service. 
+    #            If both a resource type and tags are specified in a resource assignment, 
+    #            the resource type specified in the backup plan takes priority over the 
     #            tag condition. Service opt-in settings are disregarded in this situation.</p>
     # @option params [Hash<String, Boolean>] :resource_type_management_preference
     #   <p>Enables or disables full Backup management of backups for a resource type.
@@ -6333,8 +6353,8 @@ module Aws::Backup
       request.send_request(options)
     end
 
-    # <p>This request will send changes to your specified restore testing
-    #          plan. <code>RestoreTestingPlanName</code>
+    # <p>This request will send changes to your specified restore testing 
+    #          plan. <code>RestoreTestingPlanName</code> 
     #          cannot be updated after it is created.</p>
     #          <p>
     #             <code>RecoveryPointSelection</code> can contain:</p>
@@ -6403,21 +6423,21 @@ module Aws::Backup
     end
 
     # <p>Updates the specified restore testing selection.</p>
-    #          <p>Most elements except the <code>RestoreTestingSelectionName</code>
+    #          <p>Most elements except the <code>RestoreTestingSelectionName</code> 
     #          can be updated with this request.</p>
     #          <p>You can use either protected resource ARNs or conditions, but not both.</p>
     # @param [Hash, Types::UpdateRestoreTestingSelectionInput] params
     # @option params [String] :restore_testing_plan_name
-    #   <p>The restore testing plan name is required to update the
+    #   <p>The restore testing plan name is required to update the 
     #            indicated testing plan.</p>
     # @option params [Types::RestoreTestingSelectionForUpdate] :restore_testing_selection
-    #   <p>To update your restore testing selection, you can use either
-    #            protected resource ARNs or conditions, but not both. That is, if your
-    #            selection has <code>ProtectedResourceArns</code>, requesting an update
-    #            with the parameter <code>ProtectedResourceConditions</code> will be
+    #   <p>To update your restore testing selection, you can use either 
+    #            protected resource ARNs or conditions, but not both. That is, if your 
+    #            selection has <code>ProtectedResourceArns</code>, requesting an update 
+    #            with the parameter <code>ProtectedResourceConditions</code> will be 
     #            unsuccessful.</p>
     # @option params [String] :restore_testing_selection_name
-    #   <p>The required restore testing selection name of the restore
+    #   <p>The required restore testing selection name of the restore 
     #            testing selection you wish to update.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -6571,7 +6591,8 @@ module Aws::Backup
     # @option options [Integer] :max_wait_time
     # @option options [Integer] :min_delay
     # @option options [Integer] :max_delay
-    # @return [nil] Returns `nil` if the waiter was successful.
+    # @return [Smithy::Client::Response] Returns the successful response
+    #   that satisfied the waiter's success condition.
     # @raise [FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition
     #   out of, preventing success.

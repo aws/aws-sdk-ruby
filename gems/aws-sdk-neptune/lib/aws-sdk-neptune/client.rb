@@ -3,7 +3,6 @@
 # This is generated code!
 
 require_relative 'plugins/endpoint'
-require 'smithy-client/plugins/checksum_required'
 require 'smithy-client/plugins/content_length'
 require 'smithy-client/plugins/default_params'
 require 'smithy-client/plugins/host_prefix'
@@ -23,6 +22,8 @@ require 'smithy-client/plugins/transfer_encoding'
 require 'aws-sdk-core/plugins/global_configuration'
 require 'aws-sdk-core/plugins/shared_config'
 require 'aws-sdk-core/plugins/user_agent'
+require 'aws-sdk-core/plugins/checksum_algorithm'
+require 'aws-sdk-core/plugins/http_checksum'
 require 'aws-sdk-core/plugins/invocation_id'
 require 'aws-sdk-core/plugins/recursion_detection'
 require 'aws-sdk-core/plugins/retry_errors'
@@ -44,7 +45,6 @@ module Aws::Neptune
     @identifier = :neptune
 
     add_plugin(::Aws::Neptune::Plugins::Endpoint)
-    add_plugin(Smithy::Client::Plugins::ChecksumRequired)
     add_plugin(Smithy::Client::Plugins::ContentLength)
     add_plugin(Smithy::Client::Plugins::DefaultParams)
     add_plugin(Smithy::Client::Plugins::HostPrefix)
@@ -64,6 +64,8 @@ module Aws::Neptune
     add_plugin(Aws::Core::Plugins::GlobalConfiguration)
     add_plugin(Aws::Core::Plugins::SharedConfig)
     add_plugin(Aws::Core::Plugins::UserAgent)
+    add_plugin(Aws::Core::Plugins::ChecksumAlgorithm)
+    add_plugin(Aws::Core::Plugins::HttpChecksum)
     add_plugin(Aws::Core::Plugins::InvocationId)
     add_plugin(Aws::Core::Plugins::RecursionDetection)
     add_plugin(Aws::Core::Plugins::RetryErrors)
@@ -141,23 +143,41 @@ module Aws::Neptune
     #  * `ENV['AWS_DEFAULT_REGION']`
     #  * `~/.aws/credentials` as `region` under a profile
     #  * `~/.aws/config` as `region` under a profile
+    # @option options [String] :request_checksum_calculation (when_supported)
+    #  Determines when a checksum is calculated for request payloads. Values are:
+    #  
+    #  * `when_supported` - (default) A checksum is calculated for operations
+    #    modeled with the `httpChecksum` trait when `requestChecksumRequired`
+    #    is `true` or a `requestAlgorithmMember` is modeled.
+    #  * `when_required` - A checksum is calculated only when
+    #    `requestChecksumRequired` is `true`, or when the caller supplies a
+    #    modeled `requestAlgorithmMember`.
     # @option options [Integer] :request_min_compression_size_bytes (10240)
     #  The minimum size in bytes that triggers compression for request bodies.
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
+    # @option options [String] :response_checksum_validation (when_supported)
+    #  Determines when checksum validation is performed for response payloads.
+    #  Values are:
+    #  
+    #  * `when_supported` - (default) Validation is enabled for operations
+    #    modeled with a `requestValidationModeMember` and at least one
+    #    `responseAlgorithms` value supported by the client.
+    #  * `when_required` - Validation is performed only when the caller sets
+    #    the modeled `requestValidationModeMember` to `ENABLED`.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #
+    #  
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #
+    #  
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #
+    #  
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -467,7 +487,7 @@ module Aws::Neptune
     # @param [Hash, Types::CopyDBClusterSnapshotMessage] params
     # @option params [String] :source_db_cluster_snapshot_identifier
     #   <p>The identifier of the DB cluster snapshot to copy. This parameter is not
-    #         case-sensitive. If the source DB cluster snapshot is in a different region or
+    #         case-sensitive. If the source DB cluster snapshot is in a different region or 
     #         owned by another account, specify the snapshot ARN.</p>
     #            <p>Constraints:</p>
     #            <ul>
@@ -1338,12 +1358,12 @@ module Aws::Neptune
     #            </p>
     # @option params [Boolean] :publicly_accessible
     #   <p>Indicates whether the DB instance is publicly accessible.</p>
-    #            <p>When the DB instance is publicly accessible and you connect from outside of the DB instance's virtual private
-    #         cloud (VPC), its Domain Name System (DNS) endpoint resolves to the public IP address. When you connect from within
-    #         the same VPC as the DB instance, the endpoint resolves to the private IP address. Access to the DB instance is
-    #         ultimately controlled by the security group it uses. That public access isn't permitted if the security group assigned
+    #            <p>When the DB instance is publicly accessible and you connect from outside of the DB instance's virtual private 
+    #         cloud (VPC), its Domain Name System (DNS) endpoint resolves to the public IP address. When you connect from within 
+    #         the same VPC as the DB instance, the endpoint resolves to the private IP address. Access to the DB instance is 
+    #         ultimately controlled by the security group it uses. That public access isn't permitted if the security group assigned 
     #         to the DB cluster doesn't permit it.</p>
-    #            <p>When the DB instance isn't publicly accessible, it is an internal DB instance with a DNS name that resolves to a
+    #            <p>When the DB instance isn't publicly accessible, it is an internal DB instance with a DNS name that resolves to a 
     #         private IP address.</p>
     # @option params [Array<Types::Tag>] :tags
     #   <p>The tags to assign to the new instance.</p>
@@ -4326,7 +4346,7 @@ module Aws::Neptune
     # @param [Hash, Types::FailoverGlobalClusterMessage] params
     # @option params [String] :global_cluster_identifier
     #   <p>Identifier of the Neptune global database that should be failed over.
-    #         The identifier is the unique key assigned by the user when the Neptune
+    #         The identifier is the unique key assigned by the user when the Neptune 
     #         global database was created. In other words, it's the name of the global
     #         database that you want to fail over.</p>
     #            <p>Constraints: Must match the identifier of an existing Neptune global
@@ -5100,12 +5120,12 @@ module Aws::Neptune
     #            </p>
     # @option params [Boolean] :publicly_accessible
     #   <p>Indicates whether the DB instance is publicly accessible.</p>
-    #            <p>When the DB instance is publicly accessible and you connect from outside of the DB instance's virtual private
-    #         cloud (VPC), its Domain Name System (DNS) endpoint resolves to the public IP address. When you connect from within
-    #         the same VPC as the DB instance, the endpoint resolves to the private IP address. Access to the DB instance is
-    #         ultimately controlled by the security group it uses. That public access isn't permitted if the security group assigned
+    #            <p>When the DB instance is publicly accessible and you connect from outside of the DB instance's virtual private 
+    #         cloud (VPC), its Domain Name System (DNS) endpoint resolves to the public IP address. When you connect from within 
+    #         the same VPC as the DB instance, the endpoint resolves to the private IP address. Access to the DB instance is 
+    #         ultimately controlled by the security group it uses. That public access isn't permitted if the security group assigned 
     #         to the DB cluster doesn't permit it.</p>
-    #            <p>When the DB instance isn't publicly accessible, it is an internal DB instance with a DNS name that resolves to a
+    #            <p>When the DB instance isn't publicly accessible, it is an internal DB instance with a DNS name that resolves to a 
     #         private IP address.</p>
     # @option params [String] :monitoring_role_arn
     #   <p>The ARN for the IAM role that permits Neptune to send enhanced monitoring metrics to
@@ -5464,7 +5484,7 @@ module Aws::Neptune
     # @option params [Array<String>] :event_categories
     #   <p> A list of event categories for a SourceType that you want to subscribe to. You can see a
     #         list of the categories for a given SourceType
-    #
+    #         
     #         by using the <b>DescribeEventCategories</b> action.</p>
     # @option params [Boolean] :enabled
     #   <p> A Boolean value; set to <b>true</b> to activate the
@@ -7028,7 +7048,8 @@ module Aws::Neptune
     # @option options [Integer] :max_wait_time
     # @option options [Integer] :min_delay
     # @option options [Integer] :max_delay
-    # @return [nil] Returns `nil` if the waiter was successful.
+    # @return [Smithy::Client::Response] Returns the successful response
+    #   that satisfied the waiter's success condition.
     # @raise [FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition
     #   out of, preventing success.

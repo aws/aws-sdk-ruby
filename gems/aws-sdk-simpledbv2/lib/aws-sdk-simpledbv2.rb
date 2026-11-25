@@ -13,8 +13,8 @@ Aws.const_set('SimpleDBv2', Module.new) unless Aws.const_defined?('SimpleDBv2')
 # @title Amazon SimpleDB v2
 # Amazon SimpleDB is a web service providing the core database functions of data indexing and
 #      querying in the cloud. By offloading the time and effort associated with building and operating a web-scale
-#      database, SimpleDB provides developers the freedom to focus on application development.
-#
+#      database, SimpleDB provides developers the freedom to focus on application development. 
+# 
 #      A traditional, clustered relational database requires a sizable upfront capital outlay, is complex to design,
 #      and often requires extensive and repetitive database administration. Amazon SimpleDB is dramatically simpler,
 #      requiring no schema, automatically indexing your data and providing a simple API for storage and access.

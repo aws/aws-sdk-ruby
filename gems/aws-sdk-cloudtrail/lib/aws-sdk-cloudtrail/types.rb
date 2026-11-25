@@ -111,8 +111,8 @@ module Aws::CloudTrail
     #          events that are important to you. For more information about configuring advanced event selectors, see
     #             the <a href="https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-data-events-with-cloudtrail.html">Logging data events</a>, <a href="https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-network-events-with-cloudtrail.html">Logging network activity events</a>, and <a href="https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-management-events-with-cloudtrail.html">Logging management events</a> topics in the <i>CloudTrail User Guide</i>.</p>
     #          <p>You cannot apply both event selectors and advanced event selectors to a trail.</p>
-    #          <p>For information about configurable advanced event selector fields, see
-    #          <a href="https://docs.aws.amazon.com/awscloudtrail/latest/APIReference/API_AdvancedEventSelector.html">AdvancedEventSelector</a>
+    #          <p>For information about configurable advanced event selector fields, see 
+    #          <a href="https://docs.aws.amazon.com/awscloudtrail/latest/APIReference/API_AdvancedEventSelector.html">AdvancedEventSelector</a> 
     #          in the <i>CloudTrail API Reference</i>.</p>
     # @!attribute name
     #   <p>An optional, descriptive name for an advanced event selector, such as "Log data events
@@ -135,11 +135,11 @@ module Aws::CloudTrail
     #   <p> A field in a CloudTrail event record on which to filter events to be logged. For
     #            event data stores for CloudTrail Insights events, Config configuration items, Audit Manager evidence, or events outside of Amazon Web Services, the field is used only for
     #            selecting events as filtering is not supported.</p>
-    #            <p>For more information, see
-    #            <a href="https://docs.aws.amazon.com/awscloudtrail/latest/APIReference/API_AdvancedFieldSelector.html">AdvancedFieldSelector</a>
+    #            <p>For more information, see 
+    #            <a href="https://docs.aws.amazon.com/awscloudtrail/latest/APIReference/API_AdvancedFieldSelector.html">AdvancedFieldSelector</a> 
     #            in the <i>CloudTrail API Reference</i>.</p>
     #            <note>
-    #               <p>Selectors don't support the use of wildcards like <code>*</code> . To match multiple values with a single condition,
+    #               <p>Selectors don't support the use of wildcards like <code>*</code> . To match multiple values with a single condition, 
     #               you may use <code>StartsWith</code>, <code>EndsWith</code>, <code>NotStartsWith</code>, or <code>NotEndsWith</code> to explicitly match the beginning or end of the event field.</p>
     #            </note>
     #   @return [String]
@@ -306,7 +306,7 @@ module Aws::CloudTrail
       include ::Smithy::Schema::Structure
     end
 
-    # <p>This exception is thrown when the specified event data store cannot yet be deleted because it
+    # <p>This exception is thrown when the specified event data store cannot yet be deleted because it 
     #          is in use by a channel.</p>
     # @!attribute message
     #   <p>Brief description of the exception returned by the request.</p>
@@ -406,7 +406,7 @@ module Aws::CloudTrail
     end
 
     # <p>
-    #          You are trying to update a resource when another request is in progress. Allow sufficient wait time for the previous request to complete, then retry your request.
+    #          You are trying to update a resource when another request is in progress. Allow sufficient wait time for the previous request to complete, then retry your request. 
     #       </p>
     # @!attribute message
     #   <p>Brief description of the exception returned by the request.</p>
@@ -454,7 +454,7 @@ module Aws::CloudTrail
     #   <p>The name of the channel.</p>
     #   @return [String]
     # @!attribute source
-    #   <p>The name of the partner or external event source. You cannot change this name after you create the
+    #   <p>The name of the partner or external event source. You cannot change this name after you create the 
     #            channel. A maximum of one channel is allowed per source.</p>
     #            <p>
     #            A source can be either <code>Custom</code> for all valid non-Amazon Web Services
@@ -515,7 +515,7 @@ module Aws::CloudTrail
     #   <p>
     #      The refresh schedule configuration for the dashboard.
     #   </p>
-    #            <p>To create the Highlights dashboard, you must set a refresh schedule and set the <code>Status</code> to <code>ENABLED</code>. The <code>Unit</code> for the refresh schedule must be <code>HOURS</code>
+    #            <p>To create the Highlights dashboard, you must set a refresh schedule and set the <code>Status</code> to <code>ENABLED</code>. The <code>Unit</code> for the refresh schedule must be <code>HOURS</code> 
     #      and the <code>Value</code> must be <code>6</code>.</p>
     #   @return [Types::RefreshSchedule]
     # @!attribute tags_list
@@ -615,15 +615,15 @@ module Aws::CloudTrail
     #   <p>The retention period of the event data store, in days. If <code>BillingMode</code> is set to <code>EXTENDABLE_RETENTION_PRICING</code>, you can set a retention period of
     #            up to 3653 days, the equivalent of 10 years. If <code>BillingMode</code> is set to <code>FIXED_RETENTION_PRICING</code>, you can set a retention period of
     #            up to 2557 days, the equivalent of seven years.</p>
-    #            <p>CloudTrail  Lake determines whether to retain an event by checking if the <code>eventTime</code>
-    #            of the event is within the specified retention period. For example, if you set a retention period of 90 days, CloudTrail will remove events
+    #            <p>CloudTrail  Lake determines whether to retain an event by checking if the <code>eventTime</code> 
+    #            of the event is within the specified retention period. For example, if you set a retention period of 90 days, CloudTrail will remove events 
     #         when the <code>eventTime</code> is older than 90 days.</p>
     #            <note>
-    #               <p>If you plan to copy trail events to this event data store, we recommend
+    #               <p>If you plan to copy trail events to this event data store, we recommend 
     #               that you consider both the age of the events that you
     #               want to copy as well as how long you want to keep the copied events
-    #               in your event data store. For example, if you copy trail events that are 5 years old
-    #               and specify a retention period of 7 years, the event data store
+    #               in your event data store. For example, if you copy trail events that are 5 years old 
+    #               and specify a retention period of 7 years, the event data store 
     #               will retain those events for two years.</p>
     #            </note>
     #   @return [Integer]
@@ -684,18 +684,18 @@ module Aws::CloudTrail
     #            <ul>
     #               <li>
     #                  <p>
-    #                     <code>EXTENDABLE_RETENTION_PRICING</code> - This billing mode is generally recommended if you want a flexible retention period of up to 3653 days (about 10 years).
+    #                     <code>EXTENDABLE_RETENTION_PRICING</code> - This billing mode is generally recommended if you want a flexible retention period of up to 3653 days (about 10 years). 
     #                   The default retention period for this billing mode is 366 days.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>FIXED_RETENTION_PRICING</code> - This billing mode is recommended if you expect to ingest more than 25 TB of event data per month and need a retention period of up to 2557 days (about 7 years).
+    #                     <code>FIXED_RETENTION_PRICING</code> - This billing mode is recommended if you expect to ingest more than 25 TB of event data per month and need a retention period of up to 2557 days (about 7 years). 
     #                   The default retention period for this billing mode is 2557 days.</p>
     #               </li>
     #            </ul>
     #            <p>The default value is <code>EXTENDABLE_RETENTION_PRICING</code>.</p>
-    #            <p>For more information about CloudTrail pricing,
-    #            see <a href="http://aws.amazon.com/cloudtrail/pricing/">CloudTrail Pricing</a> and
+    #            <p>For more information about CloudTrail pricing, 
+    #            see <a href="http://aws.amazon.com/cloudtrail/pricing/">CloudTrail Pricing</a> and 
     #            <a href="https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-lake-manage-costs.html">Managing CloudTrail Lake costs</a>.</p>
     #   @return [String]
     class CreateEventDataStoreRequest < Struct.new(
@@ -807,8 +807,8 @@ module Aws::CloudTrail
     #            </ul>
     #   @return [String]
     # @!attribute s3_bucket_name
-    #   <p>Specifies the name of the Amazon S3 bucket designated for publishing log files.
-    #            For information about bucket naming rules, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucketnamingrules.html">Bucket naming rules</a>
+    #   <p>Specifies the name of the Amazon S3 bucket designated for publishing log files. 
+    #            For information about bucket naming rules, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucketnamingrules.html">Bucket naming rules</a> 
     #            in the <i>Amazon Simple Storage Service User Guide</i>.
     #           </p>
     #   @return [String]
@@ -1044,8 +1044,8 @@ module Aws::CloudTrail
     #                </p>
     #             </li>
     #          </ul>
-    #          <p>To log data events for all other resource types including objects stored in
-    #          <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/directory-buckets-overview.html">directory buckets</a>, you must use <a href="https://docs.aws.amazon.com/awscloudtrail/latest/APIReference/API_AdvancedEventSelector.html">AdvancedEventSelectors</a>. You must also
+    #          <p>To log data events for all other resource types including objects stored in 
+    #          <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/directory-buckets-overview.html">directory buckets</a>, you must use <a href="https://docs.aws.amazon.com/awscloudtrail/latest/APIReference/API_AdvancedEventSelector.html">AdvancedEventSelectors</a>. You must also 
     #          use <code>AdvancedEventSelectors</code> if you want to filter on the <code>eventName</code> field.</p>
     #          <p>Configure the <code>DataResource</code> to specify the resource type and resource ARNs for which you want to log data events.</p>
     #          <note>
@@ -1390,8 +1390,8 @@ module Aws::CloudTrail
     #   @return [String]
     # @!attribute prompt
     #   <p>
-    #            The prompt used for a generated query. For information about generated queries, see
-    #            <a href="https://docs.aws.amazon.com/awscloudtrail/latest/userguide/lake-query-generator.html">Create CloudTrail Lake queries from natural language prompts</a>
+    #            The prompt used for a generated query. For information about generated queries, see 
+    #            <a href="https://docs.aws.amazon.com/awscloudtrail/latest/userguide/lake-query-generator.html">Create CloudTrail Lake queries from natural language prompts</a> 
     #            in the <i>CloudTrail </i> user guide.
     #         </p>
     #   @return [String]
@@ -1479,11 +1479,11 @@ module Aws::CloudTrail
 
     # <p>Contains information about the destination receiving events.</p>
     # @!attribute type
-    #   <p>The type of destination for events arriving from a channel. For channels used for a CloudTrail Lake integration, the value is <code>EVENT_DATA_STORE</code>. For service-linked channels,
+    #   <p>The type of destination for events arriving from a channel. For channels used for a CloudTrail Lake integration, the value is <code>EVENT_DATA_STORE</code>. For service-linked channels, 
     #            the value is <code>AWS_SERVICE</code>. </p>
     #   @return [String]
     # @!attribute location
-    #   <p> For channels used for a CloudTrail Lake integration, the location is the ARN of an event data store that receives events from a channel.
+    #   <p> For channels used for a CloudTrail Lake integration, the location is the ARN of an event data store that receives events from a channel. 
     #            For service-linked channels, the location is the name of the Amazon Web Services service.</p>
     #   @return [String]
     class Destination < Struct.new(
@@ -1532,7 +1532,7 @@ module Aws::CloudTrail
     #   @return [String]
     # @!attribute federation_role_arn
     #   <p>
-    #            The ARN of the federation role to use for the event data store. Amazon Web Services services like Lake Formation use this federation role to access data for the federated event
+    #            The ARN of the federation role to use for the event data store. Amazon Web Services services like Lake Formation use this federation role to access data for the federated event 
     #            data store. The federation role must exist in your account and provide the <a href="https://docs.aws.amazon.com/awscloudtrail/latest/userguide/query-federation.html#query-federation-permissions-role">required minimum permissions</a>.
     #         </p>
     #   @return [String]
@@ -1716,8 +1716,8 @@ module Aws::CloudTrail
     end
 
     # <p>
-    #         You cannot delete the event data store because Lake query federation is enabled. To delete the event data store, run the <code>DisableFederation</code> operation to
-    #          disable Lake query federation on the event data store.
+    #         You cannot delete the event data store because Lake query federation is enabled. To delete the event data store, run the <code>DisableFederation</code> operation to 
+    #          disable Lake query federation on the event data store. 
     #       </p>
     # @!attribute message
     #   <p>Brief description of the exception returned by the request.</p>
@@ -1813,8 +1813,8 @@ module Aws::CloudTrail
     #               Events</a> and <a href="https://docs.aws.amazon.com/awscloudtrail/latest/userguide/WhatIsCloudTrail-Limits.html">Limits in CloudTrail</a> in the <i>CloudTrail User
     #            Guide</i>.</p>
     #            <note>
-    #               <p>To log data events for all other resource types including objects stored in
-    #               <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/directory-buckets-overview.html">directory buckets</a>, you must use <a href="https://docs.aws.amazon.com/awscloudtrail/latest/APIReference/API_AdvancedEventSelector.html">AdvancedEventSelectors</a>. You must also
+    #               <p>To log data events for all other resource types including objects stored in 
+    #               <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/directory-buckets-overview.html">directory buckets</a>, you must use <a href="https://docs.aws.amazon.com/awscloudtrail/latest/APIReference/API_AdvancedEventSelector.html">AdvancedEventSelectors</a>. You must also 
     #               use <code>AdvancedEventSelectors</code> if you want to filter on the <code>eventName</code> field.</p>
     #            </note>
     #   @return [Array<Types::DataResource>]
@@ -1846,8 +1846,8 @@ module Aws::CloudTrail
     #   @return [Array<String>]
     # @!attribute prompt
     #   <p>
-    #            The prompt that you want to use to generate the query. The prompt must be in English. For example prompts, see
-    #            <a href="https://docs.aws.amazon.com/awscloudtrail/latest/userguide/lake-query-generator.html#lake-query-generator-examples">Example prompts</a>
+    #            The prompt that you want to use to generate the query. The prompt must be in English. For example prompts, see 
+    #            <a href="https://docs.aws.amazon.com/awscloudtrail/latest/userguide/lake-query-generator.html#lake-query-generator-examples">Example prompts</a> 
     #            in the <i>CloudTrail </i> user guide.
     #         </p>
     #   @return [String]
@@ -1867,7 +1867,7 @@ module Aws::CloudTrail
     #   @return [String]
     # @!attribute query_alias
     #   <p>
-    #            An alias that identifies the prompt. When you run the <code>StartQuery</code> operation, you can pass in either the <code>QueryAlias</code> or
+    #            An alias that identifies the prompt. When you run the <code>StartQuery</code> operation, you can pass in either the <code>QueryAlias</code> or 
     #            <code>QueryStatement</code> parameter.
     #         </p>
     #   @return [String]
@@ -1887,7 +1887,7 @@ module Aws::CloudTrail
     end
 
     # <p>
-    #          This exception is thrown when a valid query could not be generated for the provided prompt.
+    #          This exception is thrown when a valid query could not be generated for the provided prompt. 
     #       </p>
     # @!attribute message
     #   <p>Brief description of the exception returned by the request.</p>
@@ -1929,12 +1929,12 @@ module Aws::CloudTrail
     #            whether the channel applies to all Regions or a single Region. </p>
     #   @return [Types::SourceConfig]
     # @!attribute destinations
-    #   <p>The destinations for the channel. For channels created for integrations,
-    #            the destinations are the event data stores that log events arriving through the channel.
+    #   <p>The destinations for the channel. For channels created for integrations, 
+    #            the destinations are the event data stores that log events arriving through the channel. 
     #            For service-linked channels, the destination is the Amazon Web Services service that created the service-linked channel to receive events.</p>
     #   @return [Array<Types::Destination>]
     # @!attribute ingestion_status
-    #   <p>A table showing information about the most recent successful and failed attempts
+    #   <p>A table showing information about the most recent successful and failed attempts 
     #         to ingest events.</p>
     #   @return [Types::IngestionStatus]
     class GetChannelResponse < Struct.new(
@@ -2130,7 +2130,7 @@ module Aws::CloudTrail
     #   @return [String]
     # @!attribute federation_status
     #   <p>
-    #            Indicates the <a href="https://docs.aws.amazon.com/awscloudtrail/latest/userguide/query-federation.html">Lake query federation</a> status. The status is
+    #            Indicates the <a href="https://docs.aws.amazon.com/awscloudtrail/latest/userguide/query-federation.html">Lake query federation</a> status. The status is 
     #            <code>ENABLED</code> if Lake query federation is enabled, or <code>DISABLED</code> if Lake query federation is disabled. You cannot delete an event data store if the <code>FederationStatus</code> is <code>ENABLED</code>.
     #         </p>
     #   @return [String]
@@ -2140,7 +2140,7 @@ module Aws::CloudTrail
     #         </p>
     #   @return [String]
     # @!attribute partition_keys
-    #   <p>The partition keys for the event data store. To improve query performance and efficiency, CloudTrail Lake organizes
+    #   <p>The partition keys for the event data store. To improve query performance and efficiency, CloudTrail Lake organizes 
     #            event data into partitions based on values derived from partition keys.</p>
     #   @return [Array<Types::PartitionKey>]
     class GetEventDataStoreResponse < Struct.new(
@@ -2329,7 +2329,7 @@ module Aws::CloudTrail
     #            selectors.</p>
     #   @return [String]
     # @!attribute insight_selectors
-    #   <p>Contains the Insights types that are enabled on a trail or event data store. It also specifies the event categories on which a particular Insight type is enabled.
+    #   <p>Contains the Insights types that are enabled on a trail or event data store. It also specifies the event categories on which a particular Insight type is enabled. 
     #               <code>ApiCallRateInsight</code> and <code>ApiErrorRateInsight</code> are valid Insight
     #            types.The EventCategory field can specify <code>Management</code> or <code>Data</code> events or both. For event data store, you can log Insights for management events only.</p>
     #   @return [Array<Types::InsightSelector>]
@@ -2437,7 +2437,7 @@ module Aws::CloudTrail
 
     # @!attribute resource_arn
     #   <p>
-    #            The Amazon Resource Name (ARN) of the CloudTrail event data store, dashboard, or channel attached to resource-based policy.
+    #            The Amazon Resource Name (ARN) of the CloudTrail event data store, dashboard, or channel attached to resource-based policy. 
     #         </p>
     #            <p>Example event data store ARN format:
     #            <code>arn:aws:cloudtrail:us-east-2:123456789012:eventdatastore/EXAMPLE-f852-4e8f-8bd1-bcf6cEXAMPLE</code>
@@ -2455,8 +2455,8 @@ module Aws::CloudTrail
     #   @return [String]
     # @!attribute delegated_admin_resource_policy
     #   <p>
-    #            The default resource-based policy that is automatically generated for the delegated administrator of an Organizations organization.
-    #            This policy will be evaluated in tandem with any policy you submit for the resource. For more information about this policy,
+    #            The default resource-based policy that is automatically generated for the delegated administrator of an Organizations organization. 
+    #            This policy will be evaluated in tandem with any policy you submit for the resource. For more information about this policy, 
     #            see <a href="https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-lake-organizations.html#cloudtrail-lake-organizations-eds-rbp">Default resource policy for delegated administrators</a>.
     #         </p>
     #   @return [String]
@@ -2526,8 +2526,8 @@ module Aws::CloudTrail
     #               Responses</a> in the Amazon S3 API Reference. </p>
     #            <note>
     #               <p>This error occurs only when there is a problem with the destination S3 bucket, and
-    #               does not occur for requests that time out. To resolve the issue,
-    #               fix the <a href="https://docs.aws.amazon.com/awscloudtrail/latest/userguide/create-s3-bucket-policy-for-cloudtrail.html">bucket policy</a> so that CloudTrail
+    #               does not occur for requests that time out. To resolve the issue, 
+    #               fix the <a href="https://docs.aws.amazon.com/awscloudtrail/latest/userguide/create-s3-bucket-policy-for-cloudtrail.html">bucket policy</a> so that CloudTrail 
     #               can write to the bucket; or create a new bucket and call <code>UpdateTrail</code> to specify the new bucket.</p>
     #            </note>
     #   @return [String]
@@ -2571,8 +2571,8 @@ module Aws::CloudTrail
     #               Responses</a> in the Amazon S3 API Reference. </p>
     #            <note>
     #               <p>This error occurs only when there is a problem with the destination S3 bucket, and
-    #               does not occur for requests that time out. To resolve the issue,
-    #               fix the <a href="https://docs.aws.amazon.com/awscloudtrail/latest/userguide/create-s3-bucket-policy-for-cloudtrail.html">bucket policy</a> so that CloudTrail
+    #               does not occur for requests that time out. To resolve the issue, 
+    #               fix the <a href="https://docs.aws.amazon.com/awscloudtrail/latest/userguide/create-s3-bucket-policy-for-cloudtrail.html">bucket policy</a> so that CloudTrail 
     #               can write to the bucket; or create a new bucket and call <code>UpdateTrail</code> to specify the new bucket.</p>
     #            </note>
     #   @return [String]
@@ -2753,7 +2753,7 @@ module Aws::CloudTrail
       include ::Smithy::Schema::Structure
     end
 
-    # <p>A table showing information about the most recent successful and failed attempts
+    # <p>A table showing information about the most recent successful and failed attempts 
     #          to ingest events.</p>
     # @!attribute latest_ingestion_success_time
     #   <p>The time stamp of the most recent successful ingestion of events for the channel.</p>
@@ -2802,7 +2802,7 @@ module Aws::CloudTrail
     #               <code>ApiErrorRateInsight</code> are valid Insight types.</p>
     #            <p>The <code>ApiCallRateInsight</code> Insights type analyzes write-only
     #            management API calls or read and write data API calls that are aggregated per minute against a baseline API call volume.</p>
-    #            <p>The <code>ApiErrorRateInsight</code> Insights type analyzes management and data
+    #            <p>The <code>ApiErrorRateInsight</code> Insights type analyzes management and data 
     #            API calls that result in error codes. The error is shown if the API call is
     #            unsuccessful.</p>
     #   @return [String]
@@ -2813,7 +2813,7 @@ module Aws::CloudTrail
     #                  <p>If EventCategories is not provided, the specified Insights types are enabled on management API calls by default.</p>
     #               </li>
     #               <li>
-    #                  <p>If EventCategories is provided, the given event categories will overwrite the existing ones. For example,
+    #                  <p>If EventCategories is provided, the given event categories will overwrite the existing ones. For example, 
     #               if a trail already has Insights enabled on management events, and then a PutInsightSelectors request is made with only data events specified in EventCategories, Insights on management events will be disabled.
     #               </p>
     #               </li>
@@ -2843,7 +2843,7 @@ module Aws::CloudTrail
     end
 
     # <p>For the <code>CreateTrail</code>
-    #             <code>PutInsightSelectors</code>, <code>UpdateTrail</code>, <code>StartQuery</code>, and <code>StartImport</code> operations, this exception is thrown
+    #             <code>PutInsightSelectors</code>, <code>UpdateTrail</code>, <code>StartQuery</code>, and <code>StartImport</code> operations, this exception is thrown 
     #          when the policy on the S3 bucket or KMS key does
     #          not have sufficient permissions for the operation.</p>
     #          <p>For all other operations, this exception is thrown when the policy for the KMS key does
@@ -3040,12 +3040,12 @@ module Aws::CloudTrail
 
     # <p>For <code>PutInsightSelectors</code>, this exception is thrown when the formatting or syntax of the <code>InsightSelectors</code> JSON statement is not
     #          valid, or the specified <code>InsightType</code> in the <code>InsightSelectors</code> statement is not
-    #          valid. Valid values for <code>InsightType</code> are <code>ApiCallRateInsight</code> and <code>ApiErrorRateInsight</code>. To enable Insights on an event data store, the destination event data store specified by the
-    #          <code>InsightsDestination</code> parameter must log Insights events and the source event data
+    #          valid. Valid values for <code>InsightType</code> are <code>ApiCallRateInsight</code> and <code>ApiErrorRateInsight</code>. To enable Insights on an event data store, the destination event data store specified by the 
+    #          <code>InsightsDestination</code> parameter must log Insights events and the source event data 
     #          store specified by the <code>EventDataStore</code> parameter must log management events.</p>
-    #          <p>For <code>UpdateEventDataStore</code>, this exception is thrown if Insights are enabled on the event data store and the updated
-    #          advanced event selectors are not compatible with the configured <code>InsightSelectors</code>.
-    #          If the <code>InsightSelectors</code> includes an <code>InsightType</code> of <code>ApiCallRateInsight</code>, the source event data store must log <code>write</code> management events.
+    #          <p>For <code>UpdateEventDataStore</code>, this exception is thrown if Insights are enabled on the event data store and the updated 
+    #          advanced event selectors are not compatible with the configured <code>InsightSelectors</code>. 
+    #          If the <code>InsightSelectors</code> includes an <code>InsightType</code> of <code>ApiCallRateInsight</code>, the source event data store must log <code>write</code> management events. 
     #          If the <code>InsightSelectors</code> includes an <code>InsightType</code> of <code>ApiErrorRateInsight</code>, the source event data store must log management events.</p>
     # @!attribute message
     #   <p>Brief description of the exception returned by the request.</p>
@@ -3522,7 +3522,7 @@ module Aws::CloudTrail
     #   <p>The number of events to return. Possible values are 1 through 50. The default is 50.</p>
     #   @return [Integer]
     # @!attribute next_token
-    #   <p>The token to use to get the next page of results after a previous API call. This token must be passed in with the same parameters that were specified in the original call.
+    #   <p>The token to use to get the next page of results after a previous API call. This token must be passed in with the same parameters that were specified in the original call. 
     #         For example, if the original call specified a EventName as a dimension with <code>PutObject</code> as a value, the call with NextToken should include those same parameters.
     #         </p>
     #   @return [String]
@@ -3544,7 +3544,7 @@ module Aws::CloudTrail
     #   <p>A list of events returned based on the InsightSource, DataType or Dimensions specified. The events list is sorted by time. The most recent event is listed first.</p>
     #   @return [Array<Types::Event>]
     # @!attribute next_token
-    #   <p>The token to use to get the next page of results after a previous API call. If the token does not appear, there are no more results to return. The token must be passed in with the same parameters as the previous call.
+    #   <p>The token to use to get the next page of results after a previous API call. If the token does not appear, there are no more results to return. The token must be passed in with the same parameters as the previous call. 
     #         For example, if the original call specified a EventName as a dimension with <code>PutObject</code> as a value, the call with NextToken should include those same parameters.
     #         </p>
     #   @return [String]
@@ -3558,8 +3558,8 @@ module Aws::CloudTrail
     end
 
     # @!attribute trail_name
-    #   <p>The Amazon Resource Name(ARN) or name of the trail for which you want to retrieve Insights metrics data.
-    #         This parameter should only be provided to fetch Insights metrics data generated on trails logging data events.
+    #   <p>The Amazon Resource Name(ARN) or name of the trail for which you want to retrieve Insights metrics data. 
+    #         This parameter should only be provided to fetch Insights metrics data generated on trails logging data events. 
     #         This parameter is not required for Insights metric data generated on trails logging management events.</p>
     #   @return [String]
     # @!attribute event_source
@@ -3569,8 +3569,8 @@ module Aws::CloudTrail
     #   <p>The name of the event, typically the Amazon Web Services API on which unusual levels of activity were recorded.</p>
     #   @return [String]
     # @!attribute insight_type
-    #   <p>The type of CloudTrail Insights event, which is either <code>ApiCallRateInsight</code> or <code>ApiErrorRateInsight</code>.
-    #            The <code>ApiCallRateInsight</code> Insights type analyzes write-only management API calls that are aggregated per minute against a baseline API call volume.
+    #   <p>The type of CloudTrail Insights event, which is either <code>ApiCallRateInsight</code> or <code>ApiErrorRateInsight</code>. 
+    #            The <code>ApiCallRateInsight</code> Insights type analyzes write-only management API calls that are aggregated per minute against a baseline API call volume. 
     #            The <code>ApiErrorRateInsight</code> Insights type analyzes management API calls that result in error codes.</p>
     #   @return [String]
     # @!attribute error_code
@@ -3582,20 +3582,20 @@ module Aws::CloudTrail
     #            <p>The default is 90 days before the time of request.</p>
     #   @return [Time]
     # @!attribute end_time
-    #   <p>Specifies, in UTC, the end time for time-series data. The value specified is exclusive;
+    #   <p>Specifies, in UTC, the end time for time-series data. The value specified is exclusive; 
     #            results include data points up to the specified time stamp.</p>
     #            <p>The default is the time of request.</p>
     #   @return [Time]
     # @!attribute period
-    #   <p>Granularity of data to retrieve, in seconds. Valid values are <code>60</code>, <code>300</code>, and <code>3600</code>.
+    #   <p>Granularity of data to retrieve, in seconds. Valid values are <code>60</code>, <code>300</code>, and <code>3600</code>. 
     #            If you specify any other value, you will get an error. The default is 3600 seconds.</p>
     #   @return [Integer]
     # @!attribute data_type
-    #   <p>Type of data points to return. Valid values are <code>NonZeroData</code> and
+    #   <p>Type of data points to return. Valid values are <code>NonZeroData</code> and 
     #            <code>FillWithZeros</code>. The default is <code>NonZeroData</code>.</p>
     #   @return [String]
     # @!attribute max_results
-    #   <p>The maximum number of data points to return. Valid values are integers from 1 to 21600.
+    #   <p>The maximum number of data points to return. Valid values are integers from 1 to 21600. 
     #            The default value is 21600.</p>
     #   @return [Integer]
     # @!attribute next_token
@@ -3630,8 +3630,8 @@ module Aws::CloudTrail
     #   <p>The name of the event, typically the Amazon Web Services API on which unusual levels of activity were recorded.</p>
     #   @return [String]
     # @!attribute insight_type
-    #   <p>The type of CloudTrail Insights event, which is either <code>ApiCallRateInsight</code> or <code>ApiErrorRateInsight</code>.
-    #            The <code>ApiCallRateInsight</code> Insights type analyzes write-only management API calls that are aggregated per minute against a baseline API call volume.
+    #   <p>The type of CloudTrail Insights event, which is either <code>ApiCallRateInsight</code> or <code>ApiErrorRateInsight</code>. 
+    #            The <code>ApiCallRateInsight</code> Insights type analyzes write-only management API calls that are aggregated per minute against a baseline API call volume. 
     #            The <code>ApiErrorRateInsight</code> Insights type analyzes management API calls that result in error codes.</p>
     #   @return [String]
     # @!attribute error_code
@@ -3645,7 +3645,7 @@ module Aws::CloudTrail
     #   <p>List of values representing the API call rate or error rate at each timestamp. The number of values is equal to the number of timestamps.</p>
     #   @return [Array<Float>]
     # @!attribute next_token
-    #   <p>Only returned if the full results could not be returned in a single query. You can set the <code>NextToken</code> parameter
+    #   <p>Only returned if the full results could not be returned in a single query. You can set the <code>NextToken</code> parameter 
     #            in the next request to this value to continue retrieval.</p>
     #   @return [String]
     class ListInsightsMetricDataResponse < Struct.new(
@@ -4172,7 +4172,7 @@ module Aws::CloudTrail
     #               <code>AdvancedEventSelectors</code> are overwritten.</p>
     #   @return [Array<Types::EventSelector>]
     # @!attribute advanced_event_selectors
-    #   <p> Specifies the settings for advanced event selectors. You can use advanced event selectors to
+    #   <p> Specifies the settings for advanced event selectors. You can use advanced event selectors to 
     #            log management events, data events for all resource types, and network activity events.</p>
     #            <p>You can add advanced event
     #            selectors, and conditions for your advanced event selectors, up to a maximum of 500 values
@@ -4180,7 +4180,7 @@ module Aws::CloudTrail
     #               <code>AdvancedEventSelectors</code> or <code>EventSelectors</code>, but not both. If you
     #            apply <code>AdvancedEventSelectors</code> to a trail, any existing
     #               <code>EventSelectors</code> are overwritten. For more information about advanced event
-    #            selectors, see <a href="https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-data-events-with-cloudtrail.html">Logging data events</a> and
+    #            selectors, see <a href="https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-data-events-with-cloudtrail.html">Logging data events</a> and 
     #            <a href="https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-network-events-with-cloudtrail.html">Logging network activity events</a>
     #            in the <i>CloudTrail User Guide</i>. </p>
     #   @return [Array<Types::AdvancedEventSelector>]
@@ -4223,24 +4223,24 @@ module Aws::CloudTrail
     #            <p>You cannot use this parameter with the <code>EventDataStore</code> and <code>InsightsDestination</code> parameters.</p>
     #   @return [String]
     # @!attribute insight_selectors
-    #   <p>Contains the Insights types you want to log on a specific category of events on a trail or event data store.
+    #   <p>Contains the Insights types you want to log on a specific category of events on a trail or event data store. 
     #               <code>ApiCallRateInsight</code> and <code>ApiErrorRateInsight</code> are valid Insight
     #            types.The EventCategory field can specify <code>Management</code> or <code>Data</code> events or both. For event data store, you can log Insights for management events only.</p>
     #            <p>The <code>ApiCallRateInsight</code> Insights type analyzes write-only management
     #   	         API calls or read and write data API calls that are aggregated per minute against a baseline API call volume.</p>
-    #            <p>The <code>ApiErrorRateInsight</code> Insights type analyzes management and data
+    #            <p>The <code>ApiErrorRateInsight</code> Insights type analyzes management and data 
     #   	          API calls that result in error codes. The error is shown if the API call is
     #   	          unsuccessful.</p>
     #   @return [Array<Types::InsightSelector>]
     # @!attribute event_data_store
     #   <p>The ARN (or ID suffix of the ARN) of the source event data store for which you want to change or add Insights
-    #            selectors. To enable Insights on an event data store, you must provide both the
+    #            selectors. To enable Insights on an event data store, you must provide both the 
     #            <code>EventDataStore</code> and <code>InsightsDestination</code> parameters.</p>
     #            <p>You cannot use this parameter with the <code>TrailName</code> parameter.</p>
     #   @return [String]
     # @!attribute insights_destination
     #   <p>
-    #            The ARN (or ID suffix of the ARN) of the destination event data store that logs Insights events. To enable Insights on an event data store, you must provide both the
+    #            The ARN (or ID suffix of the ARN) of the destination event data store that logs Insights events. To enable Insights on an event data store, you must provide both the 
     #            <code>EventDataStore</code> and <code>InsightsDestination</code> parameters.
     #         </p>
     #            <p>You cannot use this parameter with the <code>TrailName</code> parameter.</p>
@@ -4261,7 +4261,7 @@ module Aws::CloudTrail
     #            selectors.</p>
     #   @return [String]
     # @!attribute insight_selectors
-    #   <p>Contains the Insights types you want to log on a specific category of events in a trail or event data store.
+    #   <p>Contains the Insights types you want to log on a specific category of events in a trail or event data store. 
     #               <code>ApiCallRateInsight</code> and <code>ApiErrorRateInsight</code> are valid Insight
     #            types.The EventCategory field can specify <code>Management</code> or <code>Data</code> events or both. For event data store, you can only log Insights for management events only.</p>
     #   @return [Array<Types::InsightSelector>]
@@ -4301,8 +4301,8 @@ module Aws::CloudTrail
     #   <p>
     #            A JSON-formatted string for an Amazon Web Services resource-based policy.
     #         </p>
-    #            <p> For example resource-based policies, see
-    #            <a href="https://docs.aws.amazon.com/awscloudtrail/latest/userguide/security_iam_resource-based-policy-examples.html">CloudTrail resource-based policy examples</a>
+    #            <p> For example resource-based policies, see 
+    #            <a href="https://docs.aws.amazon.com/awscloudtrail/latest/userguide/security_iam_resource-based-policy-examples.html">CloudTrail resource-based policy examples</a> 
     #            in the <i>CloudTrail User Guide</i>.</p>
     #   @return [String]
     class PutResourcePolicyRequest < Struct.new(
@@ -4334,8 +4334,8 @@ module Aws::CloudTrail
     #   @return [String]
     # @!attribute delegated_admin_resource_policy
     #   <p>
-    #            The default resource-based policy that is automatically generated for the delegated administrator of an Organizations organization.
-    #            This policy will be evaluated in tandem with any policy you submit for the resource. For more information about this policy,
+    #            The default resource-based policy that is automatically generated for the delegated administrator of an Organizations organization. 
+    #            This policy will be evaluated in tandem with any policy you submit for the resource. For more information about this policy, 
     #            see <a href="https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-lake-organizations.html#cloudtrail-lake-organizations-eds-rbp">Default resource policy for delegated administrators</a>.
     #         </p>
     #   @return [String]
@@ -4891,7 +4891,7 @@ module Aws::CloudTrail
     end
 
     # <p>
-    #    This exception is thrown when the quota is exceeded. For information about CloudTrail quotas, see <a href="https://docs.aws.amazon.com/general/latest/gr/ct.html#limits_cloudtrail">Service quotas</a>
+    #    This exception is thrown when the quota is exceeded. For information about CloudTrail quotas, see <a href="https://docs.aws.amazon.com/general/latest/gr/ct.html#limits_cloudtrail">Service quotas</a> 
     #    in the <i>Amazon Web Services General Reference</i>.
     # </p>
     # @!attribute message
@@ -5268,7 +5268,7 @@ module Aws::CloudTrail
     end
 
     # <p>
-    #          This exception is thrown when the request rate exceeds the limit.
+    #          This exception is thrown when the request rate exceeds the limit. 
     #       </p>
     # @!attribute message
     #   <p>Brief description of the exception returned by the request.</p>
@@ -5605,7 +5605,7 @@ module Aws::CloudTrail
     #   <p>Specifies whether an event data store collects events logged for an organization in
     #               Organizations.</p>
     #            <note>
-    #               <p>Only the management account for the organization can convert an organization event data store to a non-organization event data store, or convert a non-organization event data store to
+    #               <p>Only the management account for the organization can convert an organization event data store to a non-organization event data store, or convert a non-organization event data store to 
     #            an organization event data store.</p>
     #            </note>
     #   @return [Boolean]
@@ -5613,11 +5613,11 @@ module Aws::CloudTrail
     #   <p>The retention period of the event data store, in days. If <code>BillingMode</code> is set to <code>EXTENDABLE_RETENTION_PRICING</code>, you can set a retention period of
     #            up to 3653 days, the equivalent of 10 years. If <code>BillingMode</code> is set to <code>FIXED_RETENTION_PRICING</code>, you can set a retention period of
     #            up to 2557 days, the equivalent of seven years.</p>
-    #            <p>CloudTrail  Lake determines whether to retain an event by checking if the <code>eventTime</code>
-    #            of the event is within the specified retention period. For example, if you set a retention period of 90 days, CloudTrail will remove events
+    #            <p>CloudTrail  Lake determines whether to retain an event by checking if the <code>eventTime</code> 
+    #            of the event is within the specified retention period. For example, if you set a retention period of 90 days, CloudTrail will remove events 
     #            when the <code>eventTime</code> is older than 90 days.</p>
     #            <note>
-    #               <p>If you decrease the retention period of an event data store, CloudTrail will remove any events with an <code>eventTime</code> older than the new retention period. For example, if the previous
+    #               <p>If you decrease the retention period of an event data store, CloudTrail will remove any events with an <code>eventTime</code> older than the new retention period. For example, if the previous 
     #               retention period was 365 days and you decrease it to 100 days, CloudTrail  will remove events with an <code>eventTime</code> older than 100 days.</p>
     #            </note>
     #   @return [Integer]
@@ -5667,26 +5667,26 @@ module Aws::CloudTrail
     #   @return [String]
     # @!attribute billing_mode
     #   <note>
-    #               <p>You can't change the billing mode from <code>EXTENDABLE_RETENTION_PRICING</code> to <code>FIXED_RETENTION_PRICING</code>. If <code>BillingMode</code> is set to
+    #               <p>You can't change the billing mode from <code>EXTENDABLE_RETENTION_PRICING</code> to <code>FIXED_RETENTION_PRICING</code>. If <code>BillingMode</code> is set to 
     #               <code>EXTENDABLE_RETENTION_PRICING</code> and you want to use <code>FIXED_RETENTION_PRICING</code> instead, you'll need to stop ingestion on the event data store and create a new event data store that uses <code>FIXED_RETENTION_PRICING</code>.</p>
     #            </note>
-    #            <p>The billing mode for the event data store determines the cost
+    #            <p>The billing mode for the event data store determines the cost 
     #            for ingesting events and the default and maximum retention period for the event data store.</p>
     #            <p>The following are the possible values:</p>
     #            <ul>
     #               <li>
     #                  <p>
-    #                     <code>EXTENDABLE_RETENTION_PRICING</code> - This billing mode is generally recommended if you want a flexible retention period of up to 3653 days (about 10 years). The default retention period for this billing mode is
+    #                     <code>EXTENDABLE_RETENTION_PRICING</code> - This billing mode is generally recommended if you want a flexible retention period of up to 3653 days (about 10 years). The default retention period for this billing mode is 
     #                  366 days.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>FIXED_RETENTION_PRICING</code> - This billing mode is recommended if you expect to ingest more than 25 TB of event data per month and need a retention period of up to 2557 days (about 7 years).
+    #                     <code>FIXED_RETENTION_PRICING</code> - This billing mode is recommended if you expect to ingest more than 25 TB of event data per month and need a retention period of up to 2557 days (about 7 years). 
     #                  The default retention period for this billing mode is 2557 days.</p>
     #               </li>
     #            </ul>
-    #            <p>For more information about CloudTrail pricing,
-    #            see <a href="http://aws.amazon.com/cloudtrail/pricing/">CloudTrail Pricing</a> and
+    #            <p>For more information about CloudTrail pricing, 
+    #            see <a href="http://aws.amazon.com/cloudtrail/pricing/">CloudTrail Pricing</a> and 
     #            <a href="https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-lake-manage-costs.html">Managing CloudTrail Lake costs</a>.</p>
     #   @return [String]
     class UpdateEventDataStoreRequest < Struct.new(
@@ -5751,7 +5751,7 @@ module Aws::CloudTrail
     #   @return [String]
     # @!attribute federation_status
     #   <p>
-    #            Indicates the <a href="https://docs.aws.amazon.com/awscloudtrail/latest/userguide/query-federation.html">Lake query federation</a> status. The status is
+    #            Indicates the <a href="https://docs.aws.amazon.com/awscloudtrail/latest/userguide/query-federation.html">Lake query federation</a> status. The status is 
     #            <code>ENABLED</code> if Lake query federation is enabled, or <code>DISABLED</code> if Lake query federation is disabled. You cannot delete an event data store if the <code>FederationStatus</code> is <code>ENABLED</code>.
     #         </p>
     #   @return [String]
@@ -5889,7 +5889,7 @@ module Aws::CloudTrail
     #               <code>false</code>, the trail will remain in the current Amazon Web Services account but
     #            be deleted from all member accounts in the organization.</p>
     #            <note>
-    #               <p>Only the management account for the organization can convert an organization trail to a non-organization trail, or convert a non-organization trail to
+    #               <p>Only the management account for the organization can convert an organization trail to a non-organization trail, or convert a non-organization trail to 
     #               an organization trail.</p>
     #            </note>
     #   @return [Boolean]

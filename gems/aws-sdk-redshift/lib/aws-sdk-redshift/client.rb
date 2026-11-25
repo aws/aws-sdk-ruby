@@ -3,7 +3,6 @@
 # This is generated code!
 
 require_relative 'plugins/endpoint'
-require 'smithy-client/plugins/checksum_required'
 require 'smithy-client/plugins/content_length'
 require 'smithy-client/plugins/default_params'
 require 'smithy-client/plugins/host_prefix'
@@ -23,6 +22,8 @@ require 'smithy-client/plugins/transfer_encoding'
 require 'aws-sdk-core/plugins/global_configuration'
 require 'aws-sdk-core/plugins/shared_config'
 require 'aws-sdk-core/plugins/user_agent'
+require 'aws-sdk-core/plugins/checksum_algorithm'
+require 'aws-sdk-core/plugins/http_checksum'
 require 'aws-sdk-core/plugins/invocation_id'
 require 'aws-sdk-core/plugins/recursion_detection'
 require 'aws-sdk-core/plugins/retry_errors'
@@ -43,7 +44,6 @@ module Aws::Redshift
     @identifier = :redshift
 
     add_plugin(::Aws::Redshift::Plugins::Endpoint)
-    add_plugin(Smithy::Client::Plugins::ChecksumRequired)
     add_plugin(Smithy::Client::Plugins::ContentLength)
     add_plugin(Smithy::Client::Plugins::DefaultParams)
     add_plugin(Smithy::Client::Plugins::HostPrefix)
@@ -63,6 +63,8 @@ module Aws::Redshift
     add_plugin(Aws::Core::Plugins::GlobalConfiguration)
     add_plugin(Aws::Core::Plugins::SharedConfig)
     add_plugin(Aws::Core::Plugins::UserAgent)
+    add_plugin(Aws::Core::Plugins::ChecksumAlgorithm)
+    add_plugin(Aws::Core::Plugins::HttpChecksum)
     add_plugin(Aws::Core::Plugins::InvocationId)
     add_plugin(Aws::Core::Plugins::RecursionDetection)
     add_plugin(Aws::Core::Plugins::RetryErrors)
@@ -139,23 +141,41 @@ module Aws::Redshift
     #  * `ENV['AWS_DEFAULT_REGION']`
     #  * `~/.aws/credentials` as `region` under a profile
     #  * `~/.aws/config` as `region` under a profile
+    # @option options [String] :request_checksum_calculation (when_supported)
+    #  Determines when a checksum is calculated for request payloads. Values are:
+    #  
+    #  * `when_supported` - (default) A checksum is calculated for operations
+    #    modeled with the `httpChecksum` trait when `requestChecksumRequired`
+    #    is `true` or a `requestAlgorithmMember` is modeled.
+    #  * `when_required` - A checksum is calculated only when
+    #    `requestChecksumRequired` is `true`, or when the caller supplies a
+    #    modeled `requestAlgorithmMember`.
     # @option options [Integer] :request_min_compression_size_bytes (10240)
     #  The minimum size in bytes that triggers compression for request bodies.
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
+    # @option options [String] :response_checksum_validation (when_supported)
+    #  Determines when checksum validation is performed for response payloads.
+    #  Values are:
+    #  
+    #  * `when_supported` - (default) Validation is enabled for operations
+    #    modeled with a `requestValidationModeMember` and at least one
+    #    `responseAlgorithms` value supported by the client.
+    #  * `when_required` - Validation is performed only when the caller sets
+    #    the modeled `requestValidationModeMember` to `ENABLED`.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #
+    #  
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #
+    #  
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #
+    #  
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -258,7 +278,7 @@ module Aws::Redshift
     end
 
     # <p>Adds a partner integration to a cluster.
-    #             This operation authorizes a partner to push status updates for the specified database.
+    #             This operation authorizes a partner to push status updates for the specified database. 
     #             To complete the integration, you also set up the integration on the partner website.</p>
     # @param [Hash, Types::AddPartnerInput] params
     # @option params [String] :account_id
@@ -507,8 +527,8 @@ module Aws::Redshift
     # <p>Authorizes the specified Amazon Web Services account to restore the specified
     #             snapshot.</p>
     #          <p>
-    # For more information about working with snapshots, go to
-    # <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-snapshots.html">Amazon Redshift Snapshots</a>
+    # For more information about working with snapshots, go to 
+    # <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-snapshots.html">Amazon Redshift Snapshots</a> 
     # in the <i>Amazon Redshift Cluster Management Guide</i>.</p>
     # @param [Hash, Types::AuthorizeSnapshotAccessMessage] params
     # @option params [String] :snapshot_identifier
@@ -520,12 +540,12 @@ module Aws::Redshift
     #            <ul>
     #               <li>
     #                  <p>
-    #                     <i>If the snapshot to access doesn't exist and the associated IAM policy doesn't allow access to all (*) snapshots</i> -  This parameter is required. Otherwise, permissions
+    #                     <i>If the snapshot to access doesn't exist and the associated IAM policy doesn't allow access to all (*) snapshots</i> -  This parameter is required. Otherwise, permissions 
     #                   aren't available to check if the snapshot exists.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <i>If the snapshot to access exists</i> - This parameter isn't required. Redshift can retrieve the cluster identifier and use it to
+    #                     <i>If the snapshot to access exists</i> - This parameter isn't required. Redshift can retrieve the cluster identifier and use it to 
     #                   validate snapshot authorization.</p>
     #               </li>
     #            </ul>
@@ -722,8 +742,8 @@ module Aws::Redshift
     #             you can make a manual copy of the snapshot. Manual snapshots are retained until you
     #             delete them.</p>
     #          <p>
-    # For more information about working with snapshots, go to
-    # <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-snapshots.html">Amazon Redshift Snapshots</a>
+    # For more information about working with snapshots, go to 
+    # <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-snapshots.html">Amazon Redshift Snapshots</a> 
     # in the <i>Amazon Redshift Cluster Management Guide</i>.</p>
     # @param [Hash, Types::CopyClusterSnapshotMessage] params
     # @option params [String] :source_snapshot_identifier
@@ -843,7 +863,7 @@ module Aws::Redshift
     # @option params [String] :authentication_profile_name
     #   <p>The name of the authentication profile to be created.</p>
     # @option params [String] :authentication_profile_content
-    #   <p>The content of the authentication profile in JSON format.
+    #   <p>The content of the authentication profile in JSON format. 
     #               The maximum length of the JSON string is determined by a quota for your account.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -867,9 +887,9 @@ module Aws::Redshift
     # <p>Creates a new cluster with the specified parameters.</p>
     #          <p>To create a cluster in Virtual Private Cloud (VPC), you must provide a cluster
     #             subnet group name. The cluster subnet group identifies the subnets of your VPC that
-    #             Amazon Redshift uses when creating the cluster.
-    # For more information about managing clusters, go to
-    # <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html">Amazon Redshift Clusters</a>
+    #             Amazon Redshift uses when creating the cluster. 
+    # For more information about managing clusters, go to 
+    # <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html">Amazon Redshift Clusters</a> 
     # in the <i>Amazon Redshift Cluster Management Guide</i>.</p>
     #          <p>VPC Block Public Access (BPA) enables you to block resources in VPCs and subnets that
     #             you own in a Region from reaching or being reached from the internet through internet
@@ -962,8 +982,8 @@ module Aws::Redshift
     #   <p>The node type to be provisioned for the cluster. For information about node types,
     #               go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html#how-many-nodes"> Working with
     #                   Clusters</a> in the <i>Amazon Redshift Cluster Management Guide</i>. </p>
-    #            <p>Valid Values:
-    #               <code>dc2.large</code> | <code>dc2.8xlarge</code> | <code>rg.large</code> | <code>rg.xlarge</code> | <code>rg.4xlarge</code> | <code>rg.12xlarge</code> |
+    #            <p>Valid Values: 
+    #               <code>dc2.large</code> | <code>dc2.8xlarge</code> | <code>rg.large</code> | <code>rg.xlarge</code> | <code>rg.4xlarge</code> | <code>rg.12xlarge</code> | 
     #               <code>ra3.large</code> | <code>ra3.xlplus</code> | <code>ra3.4xlarge</code> | <code>ra3.16xlarge</code>
     #            </p>
     # @option params [String] :master_username
@@ -1086,7 +1106,7 @@ module Aws::Redshift
     #           </p>
     #            <ul>
     #               <li>
-    #                  <p>For clusters with RG or RA3 nodes - Select a port within the ranges <code>5431-5455</code> or <code>8191-8215</code>. (If you have an existing cluster
+    #                  <p>For clusters with RG or RA3 nodes - Select a port within the ranges <code>5431-5455</code> or <code>8191-8215</code>. (If you have an existing cluster 
     #                   with RG or RA3 nodes, it isn't required that you change the port to these ranges.)</p>
     #               </li>
     #               <li>
@@ -1124,7 +1144,7 @@ module Aws::Redshift
     #   <p>If <code>true</code>, the cluster can be accessed from a public network. </p>
     #            <p>Default: false</p>
     # @option params [Boolean] :encrypted
-    #   <p>If <code>true</code>, the data in the cluster is encrypted at rest.
+    #   <p>If <code>true</code>, the data in the cluster is encrypted at rest. 
     #               If you set the value on this parameter to <code>false</code>, the request will fail.</p>
     #            <p>Default: true</p>
     # @option params [String] :hsm_client_certificate_identifier
@@ -1136,7 +1156,7 @@ module Aws::Redshift
     # @option params [String] :elastic_ip
     #   <p>The Elastic IP (EIP) address for the cluster.</p>
     #            <p>Constraints: The cluster must be provisioned in EC2-VPC and publicly-accessible
-    #               through an Internet gateway. Don't specify the Elastic IP address for a publicly accessible
+    #               through an Internet gateway. Don't specify the Elastic IP address for a publicly accessible 
     #               cluster with availability zone relocation turned on. For more information about provisioning clusters in
     #               EC2-VPC, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html#cluster-platforms">Supported
     #                   Platforms to Launch Your Cluster</a> in the Amazon Redshift Cluster Management Guide.</p>
@@ -1176,13 +1196,13 @@ module Aws::Redshift
     # @option params [String] :load_sample_data
     #   <p>A flag that specifies whether to load sample data once the cluster is created.</p>
     # @option params [Boolean] :manage_master_password
-    #   <p>If <code>true</code>, Amazon Redshift uses Secrets Manager to manage this cluster's admin credentials.
-    #               You can't use <code>MasterUserPassword</code> if <code>ManageMasterPassword</code> is true.
-    #               If <code>ManageMasterPassword</code> is false or not set, Amazon Redshift uses
+    #   <p>If <code>true</code>, Amazon Redshift uses Secrets Manager to manage this cluster's admin credentials. 
+    #               You can't use <code>MasterUserPassword</code> if <code>ManageMasterPassword</code> is true. 
+    #               If <code>ManageMasterPassword</code> is false or not set, Amazon Redshift uses 
     #               <code>MasterUserPassword</code> for the admin user account's password.
     #           </p>
     # @option params [String] :master_password_secret_kms_key_id
-    #   <p>The ID of the Key Management Service (KMS) key used to encrypt and store the cluster's admin credentials secret.
+    #   <p>The ID of the Key Management Service (KMS) key used to encrypt and store the cluster's admin credentials secret. 
     #               You can only use this parameter if <code>ManageMasterPassword</code> is true.</p>
     # @option params [String] :ip_address_type
     #   <p>The IP address types that the cluster supports. Possible values are <code>ipv4</code> and <code>dualstack</code>.</p>
@@ -1475,9 +1495,9 @@ module Aws::Redshift
     #             cluster with a parameter group when you create the cluster. You can also associate an
     #             existing cluster with a parameter group after the cluster is created by using <a>ModifyCluster</a>. </p>
     #          <p>Parameters in the parameter group define specific behavior that applies to the
-    #             databases you create on the cluster.
-    # For more information about parameters and parameter groups, go to
-    # <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-parameter-groups.html">Amazon Redshift Parameter Groups</a>
+    #             databases you create on the cluster. 
+    # For more information about parameters and parameter groups, go to 
+    # <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-parameter-groups.html">Amazon Redshift Parameter Groups</a> 
     # in the <i>Amazon Redshift Cluster Management Guide</i>.</p>
     # @param [Hash, Types::CreateClusterParameterGroupMessage] params
     # @option params [String] :parameter_group_name
@@ -1551,7 +1571,7 @@ module Aws::Redshift
     #             to non-VPC clusters.</p>
     #          <p>
     # For information about managing security groups, go to
-    # <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-security-groups.html">Amazon Redshift Cluster Security Groups</a> in the
+    # <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-security-groups.html">Amazon Redshift Cluster Security Groups</a> in the 
     # <i>Amazon Redshift Cluster Management Guide</i>.</p>
     # @param [Hash, Types::CreateClusterSecurityGroupMessage] params
     # @option params [String] :cluster_security_group_name
@@ -1636,8 +1656,8 @@ module Aws::Redshift
     # <p>Creates a manual snapshot of the specified cluster. The cluster must be in the
     #                 <code>available</code> state. </p>
     #          <p>
-    # For more information about working with snapshots, go to
-    # <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-snapshots.html">Amazon Redshift Snapshots</a>
+    # For more information about working with snapshots, go to 
+    # <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-snapshots.html">Amazon Redshift Snapshots</a> 
     # in the <i>Amazon Redshift Cluster Management Guide</i>.</p>
     # @param [Hash, Types::CreateClusterSnapshotMessage] params
     # @option params [String] :snapshot_identifier
@@ -1747,7 +1767,7 @@ module Aws::Redshift
     #             Amazon Redshift subnet group.</p>
     #          <p>
     # For information about subnet groups, go to
-    # <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-cluster-subnet-groups.html">Amazon Redshift Cluster Subnet Groups</a> in the
+    # <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-cluster-subnet-groups.html">Amazon Redshift Cluster Subnet Groups</a> in the 
     # <i>Amazon Redshift Cluster Management Guide</i>.</p>
     # @param [Hash, Types::CreateClusterSubnetGroupMessage] params
     # @option params [String] :cluster_subnet_group_name
@@ -1825,7 +1845,7 @@ module Aws::Redshift
       request.send_request(options)
     end
 
-    # <p>Used to create a custom domain name for a cluster. Properties include the custom domain name, the
+    # <p>Used to create a custom domain name for a cluster. Properties include the custom domain name, the 
     #             cluster the custom domain is associated with, and the certificate Amazon Resource Name (ARN).</p>
     # @param [Hash, Types::CreateCustomDomainAssociationMessage] params
     # @option params [String] :custom_domain_name
@@ -2269,12 +2289,12 @@ module Aws::Redshift
     # @option params [String] :redshift_idc_application_name
     #   <p>The name of the Redshift application in IAM Identity Center.</p>
     # @option params [String] :identity_namespace
-    #   <p>The namespace for the Amazon Redshift IAM Identity Center application instance. It determines which managed application
+    #   <p>The namespace for the Amazon Redshift IAM Identity Center application instance. It determines which managed application 
     #               verifies the connection token.</p>
     # @option params [String] :idc_display_name
     #   <p>The display name for the Amazon Redshift IAM Identity Center application instance. It appears in the console.</p>
     # @option params [String] :iam_role_arn
-    #   <p>The IAM role ARN for the Amazon Redshift IAM Identity Center application instance. It has the required permissions
+    #   <p>The IAM role ARN for the Amazon Redshift IAM Identity Center application instance. It has the required permissions 
     #               to be assumed and invoke the IDC Identity Center API.</p>
     # @option params [Array<Types::AuthorizedTokenIssuer>] :authorized_token_issuer_list
     #   <p>The token issuer list for the Amazon Redshift IAM Identity Center application instance.</p>
@@ -2389,33 +2409,33 @@ module Aws::Redshift
     end
 
     # <p>Creates a scheduled action. A scheduled action contains a schedule and an Amazon Redshift API action.
-    #             For example, you can create a schedule of when to run the <code>ResizeCluster</code> API operation.
+    #             For example, you can create a schedule of when to run the <code>ResizeCluster</code> API operation. 
     #         </p>
     # @param [Hash, Types::CreateScheduledActionMessage] params
     # @option params [String] :scheduled_action_name
-    #   <p>The name of the scheduled action. The name must be unique within an account.
+    #   <p>The name of the scheduled action. The name must be unique within an account. 
     #               For more information about this parameter, see <a>ScheduledAction</a>. </p>
     # @option params [Types::ScheduledActionType] :target_action
-    #   <p>A JSON format string of the Amazon Redshift API operation with input parameters.
+    #   <p>A JSON format string of the Amazon Redshift API operation with input parameters. 
     #               For more information about this parameter, see <a>ScheduledAction</a>. </p>
     # @option params [String] :schedule
-    #   <p>The schedule in <code>at( )</code> or <code>cron( )</code> format.
+    #   <p>The schedule in <code>at( )</code> or <code>cron( )</code> format. 
     #               For more information about this parameter, see <a>ScheduledAction</a>.</p>
     # @option params [String] :iam_role
-    #   <p>The IAM role to assume to run the target action.
+    #   <p>The IAM role to assume to run the target action. 
     #               For more information about this parameter, see <a>ScheduledAction</a>. </p>
     # @option params [String] :scheduled_action_description
-    #   <p>The description of the scheduled action.
+    #   <p>The description of the scheduled action. 
     #               </p>
     # @option params [Time] :start_time
-    #   <p>The start time in UTC of the scheduled action.
+    #   <p>The start time in UTC of the scheduled action. 
     #               Before this time, the scheduled action does not trigger.
     #               For more information about this parameter, see <a>ScheduledAction</a>.</p>
     # @option params [Time] :end_time
-    #   <p>The end time in UTC of the scheduled action. After this time, the scheduled action does not trigger.
+    #   <p>The end time in UTC of the scheduled action. After this time, the scheduled action does not trigger. 
     #               For more information about this parameter, see <a>ScheduledAction</a>. </p>
     # @option params [Boolean] :enable
-    #   <p>If true, the schedule is enabled. If false, the scheduled action does not trigger.
+    #   <p>If true, the schedule is enabled. If false, the scheduled action does not trigger. 
     #               For more information about <code>state</code> of the scheduled action, see <a>ScheduledAction</a>. </p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -2485,8 +2505,8 @@ module Aws::Redshift
     #             from Key Management Service (KMS) to encrypt copied snapshots in a
     #             destination region.</p>
     #          <p>
-    # For more information about managing snapshot copy grants, go to
-    # <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-db-encryption.html">Amazon Redshift Database Encryption</a>
+    # For more information about managing snapshot copy grants, go to 
+    # <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-db-encryption.html">Amazon Redshift Database Encryption</a> 
     # in the <i>Amazon Redshift Cluster Management Guide</i>.
     # </p>
     # @param [Hash, Types::CreateSnapshotCopyGrantMessage] params
@@ -2664,10 +2684,10 @@ module Aws::Redshift
     #               The value must be a positive number.
     #               </p>
     # @option params [String] :period
-    #   <p>The time period that the amount applies to. A <code>weekly</code> period begins on Sunday. The default is <code>monthly</code>.
+    #   <p>The time period that the amount applies to. A <code>weekly</code> period begins on Sunday. The default is <code>monthly</code>. 
     #               </p>
     # @option params [String] :breach_action
-    #   <p>The action that Amazon Redshift takes when the limit is reached. The default is log.
+    #   <p>The action that Amazon Redshift takes when the limit is reached. The default is log. 
     #               For more information about this parameter, see <a>UsageLimit</a>.</p>
     # @option params [Array<Types::Tag>] :tags
     #   <p>A list of tag instances.</p>
@@ -2716,7 +2736,7 @@ module Aws::Redshift
     # @option params [String] :data_share_arn
     #   <p>The namespace Amazon Resource Name (ARN) of the datashare to remove authorization from.</p>
     # @option params [String] :consumer_identifier
-    #   <p>The identifier of the data consumer that is to have authorization removed from the datashare.
+    #   <p>The identifier of the data consumer that is to have authorization removed from the datashare. 
     #               This identifier is an Amazon Web Services account ID or a keyword, such as ADX.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -2774,9 +2794,9 @@ module Aws::Redshift
 
     # <p>Deletes a previously provisioned cluster without its final snapshot being created. A successful response from the web
     #             service indicates that the request was received correctly. Use <a>DescribeClusters</a> to monitor the status of the deletion. The delete
-    #             operation cannot be canceled or reverted once submitted.
-    # For more information about managing clusters, go to
-    # <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html">Amazon Redshift Clusters</a>
+    #             operation cannot be canceled or reverted once submitted. 
+    # For more information about managing clusters, go to 
+    # <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html">Amazon Redshift Clusters</a> 
     # in the <i>Amazon Redshift Cluster Management Guide</i>.</p>
     #          <p>If you want to shut down the cluster and retain it for future use, set
     #                 <i>SkipFinalClusterSnapshot</i> to <code>false</code> and specify a
@@ -2785,8 +2805,8 @@ module Aws::Redshift
     #             status of the cluster will be "final-snapshot" while the snapshot is being taken, then
     #             it's "deleting" once Amazon Redshift begins deleting the cluster. </p>
     #          <p>
-    # For more information about managing clusters, go to
-    # <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html">Amazon Redshift Clusters</a>
+    # For more information about managing clusters, go to 
+    # <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html">Amazon Redshift Clusters</a> 
     # in the <i>Amazon Redshift Cluster Management Guide</i>.</p>
     # @param [Hash, Types::DeleteClusterMessage] params
     # @option params [String] :cluster_identifier
@@ -3098,7 +3118,7 @@ module Aws::Redshift
     #          </note>
     #          <p>
     # For information about managing security groups, go to
-    # <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-security-groups.html">Amazon Redshift Cluster Security Groups</a> in the
+    # <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-security-groups.html">Amazon Redshift Cluster Security Groups</a> in the 
     # <i>Amazon Redshift Cluster Management Guide</i>.</p>
     # @param [Hash, Types::DeleteClusterSecurityGroupMessage] params
     # @option params [String] :cluster_security_group_name
@@ -3478,7 +3498,7 @@ module Aws::Redshift
       request.send_request(options)
     end
 
-    # <p>Deletes a scheduled action.
+    # <p>Deletes a scheduled action. 
     #              </p>
     # @param [Hash, Types::DeleteScheduledActionMessage] params
     # @option params [String] :scheduled_action_name
@@ -3582,10 +3602,10 @@ module Aws::Redshift
     # <p>Deregisters a cluster or serverless namespace from the Amazon Web Services Glue Data Catalog.</p>
     # @param [Hash, Types::DeregisterNamespaceInputMessage] params
     # @option params [Types::NamespaceIdentifierUnion] :namespace_identifier
-    #   <p>The unique identifier of the cluster or
+    #   <p>The unique identifier of the cluster or 
     #               serverless namespace that you want to deregister.</p>
     # @option params [Array<String>] :consumer_identifiers
-    #   <p>An array containing the ID of the consumer account
+    #   <p>An array containing the ID of the consumer account 
     #               that you want to deregister the cluster or serverless namespace from.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -3732,8 +3752,8 @@ module Aws::Redshift
     #             optionally specify a name to retrieve the description of a specific parameter
     #             group.</p>
     #          <p>
-    # For more information about parameters and parameter groups, go to
-    # <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-parameter-groups.html">Amazon Redshift Parameter Groups</a>
+    # For more information about parameters and parameter groups, go to 
+    # <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-parameter-groups.html">Amazon Redshift Parameter Groups</a> 
     # in the <i>Amazon Redshift Cluster Management Guide</i>.</p>
     #          <p>If you specify both tag keys and tag values in the same request, Amazon Redshift returns
     #             all parameter groups that match any combination of the specified keys and values. For
@@ -3820,8 +3840,8 @@ module Aws::Redshift
     #             such as from <a>ModifyClusterParameterGroup</a>, you can specify
     #                 <i>source</i> equal to <i>user</i>.</p>
     #          <p>
-    # For more information about parameters and parameter groups, go to
-    # <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-parameter-groups.html">Amazon Redshift Parameter Groups</a>
+    # For more information about parameters and parameter groups, go to 
+    # <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-parameter-groups.html">Amazon Redshift Parameter Groups</a> 
     # in the <i>Amazon Redshift Cluster Management Guide</i>.</p>
     # @param [Hash, Types::DescribeClusterParametersMessage] params
     # @option params [String] :parameter_group_name
@@ -3886,7 +3906,7 @@ module Aws::Redshift
     #             group.</p>
     #          <p>
     # For information about managing security groups, go to
-    # <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-security-groups.html">Amazon Redshift Cluster Security Groups</a> in the
+    # <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-security-groups.html">Amazon Redshift Cluster Security Groups</a> in the 
     # <i>Amazon Redshift Cluster Management Guide</i>.</p>
     #          <p>If you specify both tag keys and tag values in the same request, Amazon Redshift returns
     #             all security groups that match any combination of the specified keys and values. For
@@ -4321,9 +4341,9 @@ module Aws::Redshift
 
     # <p>Returns descriptions of the available Amazon Redshift cluster versions. You can call this
     #             operation even before creating any clusters to learn more about the Amazon Redshift versions.
-    #
-    # For more information about managing clusters, go to
-    # <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html">Amazon Redshift Clusters</a>
+    #             
+    # For more information about managing clusters, go to 
+    # <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html">Amazon Redshift Clusters</a> 
     # in the <i>Amazon Redshift Cluster Management Guide</i>.</p>
     # @param [Hash, Types::DescribeClusterVersionsMessage] params
     # @option params [String] :cluster_version
@@ -4389,9 +4409,9 @@ module Aws::Redshift
 
     # <p>Returns properties of provisioned clusters including general cluster properties,
     #             cluster database properties, maintenance and backup properties, and security and access
-    #             properties. This operation supports pagination.
-    # For more information about managing clusters, go to
-    # <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html">Amazon Redshift Clusters</a>
+    #             properties. This operation supports pagination. 
+    # For more information about managing clusters, go to 
+    # <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html">Amazon Redshift Clusters</a> 
     # in the <i>Amazon Redshift Cluster Management Guide</i>.</p>
     #          <p>If you specify both tag keys and tag values in the same request, Amazon Redshift returns
     #             all clusters that match any combination of the specified keys and values. For example,
@@ -4872,8 +4892,8 @@ module Aws::Redshift
     # <p>Returns a list of parameter settings for the specified parameter group
     #             family.</p>
     #          <p>
-    # For more information about parameters and parameter groups, go to
-    # <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-parameter-groups.html">Amazon Redshift Parameter Groups</a>
+    # For more information about parameters and parameter groups, go to 
+    # <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-parameter-groups.html">Amazon Redshift Parameter Groups</a> 
     # in the <i>Amazon Redshift Cluster Management Guide</i>.</p>
     # @param [Hash, Types::DescribeDefaultClusterParametersMessage] params
     # @option params [String] :parameter_group_family
@@ -5005,10 +5025,10 @@ module Aws::Redshift
     # @option params [String] :cluster_identifier
     #   <p>The cluster identifier of the cluster to access.</p>
     # @option params [String] :account
-    #   <p>The Amazon Web Services account ID of either the cluster owner (grantor) or grantee.
+    #   <p>The Amazon Web Services account ID of either the cluster owner (grantor) or grantee. 
     #          If <code>Grantee</code> parameter is true, then the <code>Account</code> value is of the grantor.</p>
     # @option params [Boolean] :grantee
-    #   <p>Indicates whether to check authorization from a grantor or grantee point of view.
+    #   <p>Indicates whether to check authorization from a grantor or grantee point of view. 
     #              If true, Amazon Redshift returns endpoint authorizations that you've been granted.
     #              If false (default), checks authorization from a grantor point of view.</p>
     # @option params [Integer] :max_records
@@ -5622,13 +5642,13 @@ module Aws::Redshift
       request.send_request(options)
     end
 
-    # <p>Returns properties of possible node configurations such as node type, number of nodes, and
+    # <p>Returns properties of possible node configurations such as node type, number of nodes, and 
     #             disk usage for the specified action type.</p>
     # @param [Hash, Types::DescribeNodeConfigurationOptionsMessage] params
     # @option params [String] :action_type
     #   <p>The action type to evaluate for possible node configurations.
-    #               Specify "restore-cluster" to get configuration combinations based on an existing snapshot.
-    #               Specify "recommend-node-config" to get configuration recommendations based on an existing cluster or snapshot.
+    #               Specify "restore-cluster" to get configuration combinations based on an existing snapshot. 
+    #               Specify "recommend-node-config" to get configuration recommendations based on an existing cluster or snapshot. 
     #               Specify "resize-cluster" to get configuration combinations for elastic resize based on an existing cluster.
     #           </p>
     # @option params [String] :cluster_identifier
@@ -5638,8 +5658,8 @@ module Aws::Redshift
     # @option params [String] :snapshot_arn
     #   <p>The Amazon Resource Name (ARN) of the snapshot associated with the message to describe node configuration.</p>
     # @option params [String] :owner_account
-    #   <p>The Amazon Web Services account used to create or copy the snapshot.
-    #               Required if you are restoring a snapshot you do not own,
+    #   <p>The Amazon Web Services account used to create or copy the snapshot. 
+    #               Required if you are restoring a snapshot you do not own, 
     #               optional if you own the snapshot.</p>
     # @option params [Array<Types::NodeConfigurationOptionsFilter>] :filters
     #   <p>A set of name, operator, and value items to filter the results.</p>
@@ -5701,9 +5721,9 @@ module Aws::Redshift
     #             Zones (AZ) in the specific Amazon Web Services Region that you can specify, and the node types you can
     #             request. The node types differ by available storage, memory, CPU and price. With the
     #             cost involved you might want to obtain a list of cluster options in the specific region
-    #             and specify values when creating a cluster.
-    # For more information about managing clusters, go to
-    # <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html">Amazon Redshift Clusters</a>
+    #             and specify values when creating a cluster. 
+    # For more information about managing clusters, go to 
+    # <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html">Amazon Redshift Clusters</a> 
     # in the <i>Amazon Redshift Cluster Management Guide</i>.</p>
     # @param [Hash, Types::DescribeOrderableClusterOptionsMessage] params
     # @option params [String] :cluster_version
@@ -5810,11 +5830,11 @@ module Aws::Redshift
     # @option params [String] :qev2_idc_application_arn
     #   <p>The Amazon Resource Name (ARN) for the Amazon Redshift Query Editor (QEV2) application that integrates with IAM Identity Center.</p>
     # @option params [Integer] :max_records
-    #   <p>The maximum number of response records to return in each call. If the number of remaining response records
-    #               exceeds the specified MaxRecords value, a value is returned in a marker field of the response. You can retrieve
+    #   <p>The maximum number of response records to return in each call. If the number of remaining response records 
+    #               exceeds the specified MaxRecords value, a value is returned in a marker field of the response. You can retrieve 
     #               the next set of records by retrying the command with the returned marker value.</p>
     # @option params [String] :marker
-    #   <p>A value that indicates the starting point for the next set of response records in a subsequent request. If a
+    #   <p>A value that indicates the starting point for the next set of response records in a subsequent request. If a 
     #               value is returned in a response, you can retrieve the next set
     #               of records by providing this returned marker value in the Marker parameter
     #               and retrying the command. If the Marker field is empty, all response
@@ -5860,11 +5880,11 @@ module Aws::Redshift
     # @option params [String] :redshift_idc_application_arn
     #   <p>The ARN for the Redshift application that integrates with IAM Identity Center.</p>
     # @option params [Integer] :max_records
-    #   <p>The maximum number of response records to return in each call. If the number of remaining response records
-    #               exceeds the specified MaxRecords value, a value is returned in a marker field of the response. You can retrieve
+    #   <p>The maximum number of response records to return in each call. If the number of remaining response records 
+    #               exceeds the specified MaxRecords value, a value is returned in a marker field of the response. You can retrieve 
     #               the next set of records by retrying the command with the returned marker value.</p>
     # @option params [String] :marker
-    #   <p>A value that indicates the starting point for the next set of response records in a subsequent request. If a
+    #   <p>A value that indicates the starting point for the next set of response records in a subsequent request. If a 
     #               value is returned in a response, you can retrieve the next set
     #               of records by providing this returned marker value in the Marker parameter
     #               and retrying the command. If the Marker field is empty, all response
@@ -5949,8 +5969,8 @@ module Aws::Redshift
     #               is returned in a <code>Marker</code> field of the response. You can retrieve the next
     #               set of records by retrying the command with the returned marker value.</p>
     # @option params [String] :marker
-    #   <p>An optional pagination token provided by a previous <code>DescribeReservedNodeExchangeStatus</code> request. If this
-    #               parameter is specified, the response includes only records beyond the marker, up to the value
+    #   <p>An optional pagination token provided by a previous <code>DescribeReservedNodeExchangeStatus</code> request. If this 
+    #               parameter is specified, the response includes only records beyond the marker, up to the value 
     #               specified by the <code>MaxRecords</code> parameter. You can retrieve the next set of response
     #               records by providing the returned marker value in the <code>Marker</code> parameter and
     #               retrying the request.</p>
@@ -5994,8 +6014,8 @@ module Aws::Redshift
     #             offering ID in you call to <a>PurchaseReservedNodeOffering</a> to reserve one
     #             or more nodes for your Amazon Redshift cluster. </p>
     #          <p>
-    # For more information about reserved node offerings, go to
-    # <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/purchase-reserved-node-instance.html">Purchasing Reserved Nodes</a>
+    # For more information about reserved node offerings, go to 
+    # <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/purchase-reserved-node-instance.html">Purchasing Reserved Nodes</a> 
     # in the <i>Amazon Redshift Cluster Management Guide</i>.</p>
     # @param [Hash, Types::DescribeReservedNodeOfferingsMessage] params
     # @option params [String] :reserved_node_offering_id
@@ -6156,7 +6176,7 @@ module Aws::Redshift
       request.send_request(options)
     end
 
-    # <p>Describes properties of scheduled actions.
+    # <p>Describes properties of scheduled actions. 
     #              </p>
     # @param [Hash, Types::DescribeScheduledActionsMessage] params
     # @option params [String] :scheduled_action_name
@@ -6164,13 +6184,13 @@ module Aws::Redshift
     # @option params [String] :target_action_type
     #   <p>The type of the scheduled actions to retrieve. </p>
     # @option params [Time] :start_time
-    #   <p>The start time in UTC of the scheduled actions to retrieve.
+    #   <p>The start time in UTC of the scheduled actions to retrieve. 
     #               Only active scheduled actions that have invocations after this time are retrieved.</p>
     # @option params [Time] :end_time
-    #   <p>The end time in UTC of the scheduled action to retrieve.
+    #   <p>The end time in UTC of the scheduled action to retrieve. 
     #               Only active scheduled actions that have invocations before this time are retrieved.</p>
     # @option params [Boolean] :active
-    #   <p>If true, retrieve only active scheduled actions.
+    #   <p>If true, retrieve only active scheduled actions. 
     #              If false, retrieve only disabled scheduled actions. </p>
     # @option params [Array<Types::ScheduledActionFilter>] :filters
     #   <p>List of scheduled action filters. </p>
@@ -6250,8 +6270,8 @@ module Aws::Redshift
     # <p>Returns a list of snapshot copy grants owned by the Amazon Web Services account in the destination
     #             region.</p>
     #          <p>
-    # For more information about managing snapshot copy grants, go to
-    # <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-db-encryption.html">Amazon Redshift Database Encryption</a>
+    # For more information about managing snapshot copy grants, go to 
+    # <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-db-encryption.html">Amazon Redshift Database Encryption</a> 
     # in the <i>Amazon Redshift Cluster Management Guide</i>.
     # </p>
     # @param [Hash, Types::DescribeSnapshotCopyGrantsMessage] params
@@ -6528,7 +6548,7 @@ module Aws::Redshift
     #               <li>
     #                  <p>Integration (zero-ETL integration or S3 event integration)</p>
     #                  <note>
-    #                     <p>To describe the tags associated with an <code>integration</code>, don't specify <code>ResourceType</code>,
+    #                     <p>To describe the tags associated with an <code>integration</code>, don't specify <code>ResourceType</code>, 
     #                       instead specify the <code>ResourceName</code> of the integration.</p>
     #                  </note>
     #               </li>
@@ -6596,19 +6616,19 @@ module Aws::Redshift
     #             Results are filtered based on the combination of input usage limit identifier, cluster identifier, and feature type parameters:</p>
     #          <ul>
     #             <li>
-    #                <p>If usage limit identifier, cluster identifier, and feature type are not provided,
+    #                <p>If usage limit identifier, cluster identifier, and feature type are not provided, 
     #                 then all usage limit objects for the current account in the current region are returned.</p>
     #             </li>
     #             <li>
-    #                <p>If usage limit identifier is provided,
+    #                <p>If usage limit identifier is provided, 
     #                 then the corresponding usage limit object is returned.</p>
     #             </li>
     #             <li>
-    #                <p>If cluster identifier is provided,
+    #                <p>If cluster identifier is provided, 
     #                 then all usage limit objects for the specified cluster are returned.</p>
     #             </li>
     #             <li>
-    #                <p>If cluster identifier and feature type are provided,
+    #                <p>If cluster identifier and feature type are provided, 
     #                 then all usage limit objects for the combination of cluster and feature are returned.</p>
     #             </li>
     #          </ul>
@@ -7030,7 +7050,7 @@ module Aws::Redshift
     #            </ul>
     # @option params [String] :s3_key_prefix
     #   <p>The prefix applied to the log file names.</p>
-    #            <p>Valid characters are any letter from any language, any whitespace character, any numeric character, and the following characters:
+    #            <p>Valid characters are any letter from any language, any whitespace character, any numeric character, and the following characters: 
     #               underscore (<code>_</code>), period (<code>.</code>), colon (<code>:</code>), slash (<code>/</code>), equal (<code>=</code>), plus (<code>+</code>), backslash (<code>\</code>),
     #               hyphen (<code>-</code>), at symbol (<code>@</code>).</p>
     # @option params [String] :log_destination_type
@@ -7694,7 +7714,7 @@ module Aws::Redshift
     #             Amazon Web Services Identity and Access Management User Guide.</p>
     #          <p>The Identity and Access Management (IAM) identity that runs
     #             this operation must have an IAM policy attached that allows access to all
-    #             necessary actions and resources.
+    #             necessary actions and resources. 
     #                 For more information about permissions, see <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-iam-access-control-identity-based.html">Using identity-based policies (IAM policies)</a> in the
     #             Amazon Redshift Cluster Management Guide. </p>
     # @param [Hash, Types::GetClusterCredentialsWithIAMMessage] params
@@ -7733,19 +7753,19 @@ module Aws::Redshift
       request.send_request(options)
     end
 
-    # <p>Generates an encrypted authentication token that propagates the caller's
-    #             Amazon Web Services IAM Identity Center identity to Amazon Redshift clusters. This API extracts the
-    #             Amazon Web Services IAM Identity Center identity from enhanced credentials and creates a secure token
+    # <p>Generates an encrypted authentication token that propagates the caller's 
+    #             Amazon Web Services IAM Identity Center identity to Amazon Redshift clusters. This API extracts the 
+    #             Amazon Web Services IAM Identity Center identity from enhanced credentials and creates a secure token 
     #             that Amazon Redshift drivers can use for authentication.</p>
-    #          <p>The token is encrypted using Key Management Service (KMS) and can only be
-    #             decrypted by the specified Amazon Redshift clusters. The token contains the caller's
+    #          <p>The token is encrypted using Key Management Service (KMS) and can only be 
+    #             decrypted by the specified Amazon Redshift clusters. The token contains the caller's 
     #             Amazon Web Services IAM Identity Center identity information and is valid for a limited time period.</p>
-    #          <p>This API is exclusively for use with Amazon Web Services IAM Identity Center enhanced credentials. If the
-    #             caller is not using enhanced credentials with embedded Amazon Web Services IAM Identity Center identity, the API will
+    #          <p>This API is exclusively for use with Amazon Web Services IAM Identity Center enhanced credentials. If the 
+    #             caller is not using enhanced credentials with embedded Amazon Web Services IAM Identity Center identity, the API will 
     #             return an error.</p>
     # @param [Hash, Types::GetIdentityCenterAuthTokenRequest] params
     # @option params [Array<String>] :cluster_ids
-    #   <p>A list of cluster identifiers that the generated token can be used with.
+    #   <p>A list of cluster identifiers that the generated token can be used with. 
     #               The token will be scoped to only allow authentication to the specified clusters.</p>
     #            <p>Constraints:</p>
     #            <ul>
@@ -7812,8 +7832,8 @@ module Aws::Redshift
     #               is returned in a <code>Marker</code> field of the response. You can retrieve the next
     #               set of records by retrying the command with the returned marker value.</p>
     # @option params [String] :marker
-    #   <p>An optional pagination token provided by a previous <code>GetReservedNodeExchangeConfigurationOptions</code> request. If this
-    #               parameter is specified, the response includes only records beyond the marker, up to the value
+    #   <p>An optional pagination token provided by a previous <code>GetReservedNodeExchangeConfigurationOptions</code> request. If this 
+    #               parameter is specified, the response includes only records beyond the marker, up to the value 
     #               specified by the <code>MaxRecords</code> parameter. You can retrieve the next set of response
     #               records by providing the returned marker value in the <code>Marker</code> parameter and
     #               retrying the request.</p>
@@ -7955,17 +7975,17 @@ module Aws::Redshift
     # <p>List the Amazon Redshift Advisor recommendations for one or multiple Amazon Redshift clusters in an Amazon Web Services account.</p>
     # @param [Hash, Types::ListRecommendationsMessage] params
     # @option params [String] :cluster_identifier
-    #   <p>The unique identifier of the Amazon Redshift cluster for which the list of Advisor recommendations is returned.
+    #   <p>The unique identifier of the Amazon Redshift cluster for which the list of Advisor recommendations is returned. 
     #             If the neither the cluster identifier and the cluster namespace ARN parameters are specified, then recommendations for all clusters in the account are returned.</p>
     # @option params [String] :namespace_arn
     #   <p>The Amazon Redshift cluster namespace Amazon Resource Name (ARN) for which the list of Advisor recommendations is returned.
     #               If the neither the cluster identifier and the cluster namespace ARN parameters are specified, then recommendations for all clusters in the account are returned.</p>
     # @option params [Integer] :max_records
-    #   <p>The maximum number of response records to return in each call. If the number of remaining response records
-    #               exceeds the specified MaxRecords value, a value is returned in a marker field of the response. You can retrieve
+    #   <p>The maximum number of response records to return in each call. If the number of remaining response records 
+    #               exceeds the specified MaxRecords value, a value is returned in a marker field of the response. You can retrieve 
     #               the next set of records by retrying the command with the returned marker value.</p>
     # @option params [String] :marker
-    #   <p>A value that indicates the starting point for the next set of response records in a subsequent request. If a
+    #   <p>A value that indicates the starting point for the next set of response records in a subsequent request. If a 
     #               value is returned in a response, you can retrieve the next set
     #               of records by providing this returned marker value in the Marker parameter
     #               and retrying the command. If the Marker field is empty, all response
@@ -8077,9 +8097,9 @@ module Aws::Redshift
     #             cluster. When resizing a cluster, you must specify both the number of nodes and the node
     #             type even if one of the parameters does not change.</p>
     #          <p>You can add another security or
-    #             parameter group, or change the admin user password. Resetting a cluster password or modifying the security groups associated with a cluster do not need a reboot. However, modifying a parameter group requires a reboot for parameters to take effect.
-    # For more information about managing clusters, go to
-    # <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html">Amazon Redshift Clusters</a>
+    #             parameter group, or change the admin user password. Resetting a cluster password or modifying the security groups associated with a cluster do not need a reboot. However, modifying a parameter group requires a reboot for parameters to take effect. 
+    # For more information about managing clusters, go to 
+    # <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html">Amazon Redshift Clusters</a> 
     # in the <i>Amazon Redshift Cluster Management Guide</i>.</p>
     #          <p>VPC Block Public Access (BPA) enables you to block resources in VPCs and subnets that
     #             you own in a Region from reaching or being reached from the internet through internet
@@ -8120,19 +8140,19 @@ module Aws::Redshift
     #   <p>The new node type of the cluster. If you specify a new node type, you must also
     #               specify the number of nodes parameter.</p>
     #            <p>
-    #   For more information about resizing clusters, go to
-    #   <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/rs-resize-tutorial.html">Resizing Clusters in Amazon Redshift</a>
+    #   For more information about resizing clusters, go to 
+    #   <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/rs-resize-tutorial.html">Resizing Clusters in Amazon Redshift</a> 
     #   in the <i>Amazon Redshift Cluster Management Guide</i>.</p>
-    #            <p>Valid Values:
-    #               <code>dc2.large</code> | <code>dc2.8xlarge</code> | <code>rg.large</code> | <code>rg.xlarge</code> | <code>rg.4xlarge</code> | <code>rg.12xlarge</code> |
+    #            <p>Valid Values: 
+    #               <code>dc2.large</code> | <code>dc2.8xlarge</code> | <code>rg.large</code> | <code>rg.xlarge</code> | <code>rg.4xlarge</code> | <code>rg.12xlarge</code> | 
     #               <code>ra3.large</code> | <code>ra3.xlplus</code> | <code>ra3.4xlarge</code> | <code>ra3.16xlarge</code>
     #            </p>
     # @option params [Integer] :number_of_nodes
     #   <p>The new number of nodes of the cluster. If you specify a new number of nodes, you
     #               must also specify the node type parameter.</p>
     #            <p>
-    #   For more information about resizing clusters, go to
-    #   <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/rs-resize-tutorial.html">Resizing Clusters in Amazon Redshift</a>
+    #   For more information about resizing clusters, go to 
+    #   <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/rs-resize-tutorial.html">Resizing Clusters in Amazon Redshift</a> 
     #   in the <i>Amazon Redshift Cluster Management Guide</i>.</p>
     #            <p>Valid Values: Integer greater than <code>0</code>.</p>
     # @option params [Array<String>] :cluster_security_groups
@@ -8225,9 +8245,9 @@ module Aws::Redshift
     #            <p>For major version upgrades, if a non-default cluster parameter group is currently
     #               in use, a new cluster parameter group in the cluster parameter group family for the new
     #               version must be specified. The new cluster parameter group can be the default for that
-    #               cluster parameter group family.
-    #   For more information about parameters and parameter groups, go to
-    #   <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-parameter-groups.html">Amazon Redshift Parameter Groups</a>
+    #               cluster parameter group family. 
+    #   For more information about parameters and parameter groups, go to 
+    #   <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-parameter-groups.html">Amazon Redshift Parameter Groups</a> 
     #   in the <i>Amazon Redshift Cluster Management Guide</i>.</p>
     #            <p>Example: <code>1.0</code>
     #            </p>
@@ -8307,7 +8327,7 @@ module Aws::Redshift
     #           </p>
     #            <ul>
     #               <li>
-    #                  <p>For clusters with RG or RA3 nodes - Select a port within the ranges <code>5431-5455</code> or <code>8191-8215</code>. (If you have an existing cluster
+    #                  <p>For clusters with RG or RA3 nodes - Select a port within the ranges <code>5431-5455</code> or <code>8191-8215</code>. (If you have an existing cluster 
     #                   with RG or RA3 nodes, it isn't required that you change the port to these ranges.)</p>
     #               </li>
     #               <li>
@@ -8315,13 +8335,13 @@ module Aws::Redshift
     #               </li>
     #            </ul>
     # @option params [Boolean] :manage_master_password
-    #   <p>If <code>true</code>, Amazon Redshift uses Secrets Manager to manage this cluster's admin credentials.
-    #               You can't use <code>MasterUserPassword</code> if <code>ManageMasterPassword</code> is true.
-    #               If <code>ManageMasterPassword</code> is false or not set, Amazon Redshift uses
+    #   <p>If <code>true</code>, Amazon Redshift uses Secrets Manager to manage this cluster's admin credentials. 
+    #               You can't use <code>MasterUserPassword</code> if <code>ManageMasterPassword</code> is true. 
+    #               If <code>ManageMasterPassword</code> is false or not set, Amazon Redshift uses 
     #               <code>MasterUserPassword</code> for the admin user account's password.
     #           </p>
     # @option params [String] :master_password_secret_kms_key_id
-    #   <p>The ID of the Key Management Service (KMS) key used to encrypt and store the cluster's admin credentials secret.
+    #   <p>The ID of the Key Management Service (KMS) key used to encrypt and store the cluster's admin credentials secret. 
     #               You can only use this parameter if <code>ManageMasterPassword</code> is true.</p>
     # @option params [String] :ip_address_type
     #   <p>The IP address types that the cluster supports. Possible values are <code>ipv4</code> and <code>dualstack</code>.</p>
@@ -9280,8 +9300,8 @@ module Aws::Redshift
 
     # <p>Modifies the parameters of a parameter group. For the parameters parameter, it can't contain ASCII characters.</p>
     #          <p>
-    # For more information about parameters and parameter groups, go to
-    # <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-parameter-groups.html">Amazon Redshift Parameter Groups</a>
+    # For more information about parameters and parameter groups, go to 
+    # <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-parameter-groups.html">Amazon Redshift Parameter Groups</a> 
     # in the <i>Amazon Redshift Cluster Management Guide</i>.</p>
     # @param [Hash, Types::ModifyClusterParameterGroupMessage] params
     # @option params [String] :parameter_group_name
@@ -9805,10 +9825,10 @@ module Aws::Redshift
     # @option params [String] :redshift_idc_application_arn
     #   <p>The ARN for the Redshift application that integrates with IAM Identity Center.</p>
     # @option params [String] :identity_namespace
-    #   <p>The namespace for the Amazon Redshift IAM Identity Center application to change. It determines which managed application
+    #   <p>The namespace for the Amazon Redshift IAM Identity Center application to change. It determines which managed application 
     #               verifies the connection token.</p>
     # @option params [String] :iam_role_arn
-    #   <p>The IAM role ARN associated with the Amazon Redshift IAM Identity Center application to change. It has the required permissions
+    #   <p>The IAM role ARN associated with the Amazon Redshift IAM Identity Center application to change. It has the required permissions 
     #               to be assumed and invoke the IDC Identity Center API.</p>
     # @option params [String] :idc_display_name
     #   <p>The display name for the Amazon Redshift IAM Identity Center application to change. It appears on the console.</p>
@@ -9907,27 +9927,27 @@ module Aws::Redshift
       request.send_request(options)
     end
 
-    # <p>Modifies a scheduled action.
+    # <p>Modifies a scheduled action. 
     #             </p>
     # @param [Hash, Types::ModifyScheduledActionMessage] params
     # @option params [String] :scheduled_action_name
     #   <p>The name of the scheduled action to modify. </p>
     # @option params [Types::ScheduledActionType] :target_action
-    #   <p>A modified JSON format of the scheduled action.
+    #   <p>A modified JSON format of the scheduled action. 
     #               For more information about this parameter, see <a>ScheduledAction</a>. </p>
     # @option params [String] :schedule
-    #   <p>A modified schedule in either <code>at( )</code> or <code>cron( )</code> format.
+    #   <p>A modified schedule in either <code>at( )</code> or <code>cron( )</code> format. 
     #               For more information about this parameter, see <a>ScheduledAction</a>.</p>
     # @option params [String] :iam_role
-    #   <p>A different IAM role to assume to run the target action.
+    #   <p>A different IAM role to assume to run the target action. 
     #               For more information about this parameter, see <a>ScheduledAction</a>.</p>
     # @option params [String] :scheduled_action_description
     #   <p>A modified description of the scheduled action. </p>
     # @option params [Time] :start_time
-    #   <p>A modified start time of the scheduled action.
+    #   <p>A modified start time of the scheduled action. 
     #               For more information about this parameter, see <a>ScheduledAction</a>. </p>
     # @option params [Time] :end_time
-    #   <p>A modified end time of the scheduled action.
+    #   <p>A modified end time of the scheduled action. 
     #               For more information about this parameter, see <a>ScheduledAction</a>. </p>
     # @option params [Boolean] :enable
     #   <p>A modified enable flag of the scheduled action. If true, the scheduled action is active. If false, the scheduled action is disabled. </p>
@@ -10287,16 +10307,16 @@ module Aws::Redshift
       request.send_request(options)
     end
 
-    # <p>Modifies a usage limit in a cluster.
+    # <p>Modifies a usage limit in a cluster. 
     #             You can't modify the feature type or period of a usage limit.</p>
     # @param [Hash, Types::ModifyUsageLimitMessage] params
     # @option params [String] :usage_limit_id
     #   <p>The identifier of the usage limit to modify.</p>
     # @option params [Integer] :amount
-    #   <p>The new limit amount.
+    #   <p>The new limit amount. 
     #               For more information about this parameter, see <a>UsageLimit</a>. </p>
     # @option params [String] :breach_action
-    #   <p>The new action that Amazon Redshift takes when the limit is reached.
+    #   <p>The new action that Amazon Redshift takes when the limit is reached. 
     #               For more information about this parameter, see <a>UsageLimit</a>. </p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -10556,8 +10576,8 @@ module Aws::Redshift
     #             node offerings. You can call this API by providing a specific reserved node offering and
     #             the number of nodes you want to reserve. </p>
     #          <p>
-    # For more information about reserved node offerings, go to
-    # <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/purchase-reserved-node-instance.html">Purchasing Reserved Nodes</a>
+    # For more information about reserved node offerings, go to 
+    # <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/purchase-reserved-node-instance.html">Purchasing Reserved Nodes</a> 
     # in the <i>Amazon Redshift Cluster Management Guide</i>.</p>
     # @param [Hash, Types::PurchaseReservedNodeOfferingMessage] params
     # @option params [String] :reserved_node_offering_id
@@ -10634,9 +10654,9 @@ module Aws::Redshift
     #             momentary outage to the cluster, during which the cluster status is set to
     #                 <code>rebooting</code>. A cluster event is created when the reboot is completed. Any
     #             pending cluster modifications (see <a>ModifyCluster</a>) are applied at this
-    #             reboot.
-    # For more information about managing clusters, go to
-    # <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html">Amazon Redshift Clusters</a>
+    #             reboot. 
+    # For more information about managing clusters, go to 
+    # <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html">Amazon Redshift Clusters</a> 
     # in the <i>Amazon Redshift Cluster Management Guide</i>. </p>
     # @param [Hash, Types::RebootClusterMessage] params
     # @option params [String] :cluster_identifier
@@ -10861,10 +10881,10 @@ module Aws::Redshift
     # <p>Registers a cluster or serverless namespace to the Amazon Web Services Glue Data Catalog.</p>
     # @param [Hash, Types::RegisterNamespaceInputMessage] params
     # @option params [Types::NamespaceIdentifierUnion] :namespace_identifier
-    #   <p>The unique identifier of the cluster or
+    #   <p>The unique identifier of the cluster or 
     #               serverless namespace that you want to register. </p>
     # @option params [Array<String>] :consumer_identifiers
-    #   <p>An array containing the ID of the consumer account
+    #   <p>An array containing the ID of the consumer account 
     #               that you want to register the namespace to.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -11295,8 +11315,8 @@ module Aws::Redshift
     #          <p>For more information about VPC BPA, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/security-vpc-bpa.html">Block public access to VPCs and
     #             subnets</a> in the <i>Amazon VPC User Guide</i>.</p>
     #          <p>
-    # For more information about working with snapshots, go to
-    # <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-snapshots.html">Amazon Redshift Snapshots</a>
+    # For more information about working with snapshots, go to 
+    # <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-snapshots.html">Amazon Redshift Snapshots</a> 
     # in the <i>Amazon Redshift Cluster Management Guide</i>.</p>
     # @param [Hash, Types::RestoreFromClusterSnapshotMessage] params
     # @option params [String] :cluster_identifier
@@ -11335,7 +11355,7 @@ module Aws::Redshift
     # @option params [Integer] :port
     #   <p>The port number on which the cluster accepts connections.</p>
     #            <p>Default: The same port as the original cluster.</p>
-    #            <p>Valid values: For clusters with DC2 nodes, must be within the range <code>1150</code>-<code>65535</code>. For clusters with RG or RA3 nodes, must be
+    #            <p>Valid values: For clusters with DC2 nodes, must be within the range <code>1150</code>-<code>65535</code>. For clusters with RG or RA3 nodes, must be 
     #               within the ranges <code>5431</code>-<code>5455</code> or <code>8191</code>-<code>8215</code>.</p>
     # @option params [String] :availability_zone
     #   <p>The Amazon EC2 Availability Zone in which to restore the cluster.</p>
@@ -11364,7 +11384,7 @@ module Aws::Redshift
     #   <p>Specifies the name of the HSM configuration that contains the information the
     #               Amazon Redshift cluster can use to retrieve and store keys in an HSM.</p>
     # @option params [String] :elastic_ip
-    #   <p>The Elastic IP (EIP) address for the cluster. Don't specify the Elastic IP address for a publicly
+    #   <p>The Elastic IP (EIP) address for the cluster. Don't specify the Elastic IP address for a publicly 
     #               accessible cluster with availability zone relocation turned on.</p>
     # @option params [String] :cluster_parameter_group_name
     #   <p>The name of the parameter group to be associated with this cluster.</p>
@@ -11415,17 +11435,17 @@ module Aws::Redshift
     #               of existing snapshots.</p>
     #            <p>The value must be either -1 or an integer between 1 and 3,653.</p>
     # @option params [String] :kms_key_id
-    #   <p>The Key Management Service (KMS) key ID of the encryption key that encrypts data in the cluster
-    #               restored from a shared snapshot. You can also provide
-    #               the key ID when you restore from an unencrypted snapshot to an encrypted cluster in
-    #               the same account. Additionally, you can specify a new KMS key ID when you restore from an encrypted
-    #               snapshot in the same account in order to change it. In that case, the restored cluster is encrypted
+    #   <p>The Key Management Service (KMS) key ID of the encryption key that encrypts data in the cluster 
+    #               restored from a shared snapshot. You can also provide 
+    #               the key ID when you restore from an unencrypted snapshot to an encrypted cluster in 
+    #               the same account. Additionally, you can specify a new KMS key ID when you restore from an encrypted 
+    #               snapshot in the same account in order to change it. In that case, the restored cluster is encrypted 
     #               with the new KMS key ID.</p>
     # @option params [String] :node_type
     #   <p>The node type that the restored cluster will be provisioned with.</p>
     #            <p>If you have a DC instance type, you
     #               must restore into that same instance type and size. In other words, you can only restore
-    #               a dc2.large node type into another dc2 type. For more information about node types, see
+    #               a dc2.large node type into another dc2 type. For more information about node types, see 
     #                   <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html#rs-about-clusters-and-nodes">
     #                   About Clusters and Nodes</a> in the <i>Amazon Redshift Cluster Management Guide</i>. </p>
     # @option params [Boolean] :enhanced_vpc_routing
@@ -11466,14 +11486,14 @@ module Aws::Redshift
     # @option params [String] :target_reserved_node_offering_id
     #   <p>The identifier of the target reserved node offering.</p>
     # @option params [Boolean] :encrypted
-    #   <p>Enables support for restoring an unencrypted snapshot to a cluster encrypted
+    #   <p>Enables support for restoring an unencrypted snapshot to a cluster encrypted 
     #               with Key Management Service (KMS) and a customer managed key.</p>
     # @option params [Boolean] :manage_master_password
-    #   <p>If <code>true</code>, Amazon Redshift uses Secrets Manager to manage the restored
-    #               cluster's admin credentials. If <code>ManageMasterPassword</code> is false or not set,
+    #   <p>If <code>true</code>, Amazon Redshift uses Secrets Manager to manage the restored 
+    #               cluster's admin credentials. If <code>ManageMasterPassword</code> is false or not set, 
     #               Amazon Redshift uses the admin credentials the cluster had at the time the snapshot was taken.</p>
     # @option params [String] :master_password_secret_kms_key_id
-    #   <p>The ID of the Key Management Service (KMS) key used to encrypt and store the cluster's admin credentials secret.
+    #   <p>The ID of the Key Management Service (KMS) key used to encrypt and store the cluster's admin credentials secret. 
     #               You can only use this parameter if <code>ManageMasterPassword</code> is true.</p>
     # @option params [String] :ip_address_type
     #   <p>The IP address type for the cluster. Possible values are <code>ipv4</code> and <code>dualstack</code>.</p>
@@ -11763,7 +11783,7 @@ module Aws::Redshift
     #                 <code>NewTableName</code> parameter value in the call to
     #                 <code>RestoreTableFromClusterSnapshot</code>. This way, you can replace the original
     #             table with the table created from the snapshot.</p>
-    #          <p>You can't use this operation to restore tables with
+    #          <p>You can't use this operation to restore tables with 
     #             <a href="https://docs.aws.amazon.com/redshift/latest/dg/t_Sorting_data.html#t_Sorting_data-interleaved">interleaved sort keys</a>.</p>
     # @param [Hash, Types::RestoreTableFromClusterSnapshotMessage] params
     # @option params [String] :cluster_identifier
@@ -11787,8 +11807,8 @@ module Aws::Redshift
     # @option params [String] :new_table_name
     #   <p>The name of the table to create as a result of the current request.</p>
     # @option params [Boolean] :enable_case_sensitive_identifier
-    #   <p>Indicates whether name identifiers for database, schema, and table are case sensitive.
-    #               If <code>true</code>, the names are case sensitive.
+    #   <p>Indicates whether name identifiers for database, schema, and table are case sensitive. 
+    #               If <code>true</code>, the names are case sensitive. 
     #               If <code>false</code> (default), the names are not case sensitive.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -12052,9 +12072,9 @@ module Aws::Redshift
     end
 
     # <p>Revokes an ingress rule in an Amazon Redshift security group for a previously authorized
-    #             IP range or Amazon EC2 security group. To add an ingress rule, see <a>AuthorizeClusterSecurityGroupIngress</a>.
+    #             IP range or Amazon EC2 security group. To add an ingress rule, see <a>AuthorizeClusterSecurityGroupIngress</a>. 
     # For information about managing security groups, go to
-    # <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-security-groups.html">Amazon Redshift Cluster Security Groups</a> in the
+    # <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-security-groups.html">Amazon Redshift Cluster Security Groups</a> in the 
     # <i>Amazon Redshift Cluster Management Guide</i>. </p>
     # @param [Hash, Types::RevokeClusterSecurityGroupIngressMessage] params
     # @option params [String] :cluster_security_group_name
@@ -12139,7 +12159,7 @@ module Aws::Redshift
     # @option params [Array<String>] :vpc_ids
     #   <p>The virtual private cloud (VPC) identifiers for which access is to be revoked.</p>
     # @option params [Boolean] :force
-    #   <p>Indicates whether to force the revoke action.
+    #   <p>Indicates whether to force the revoke action. 
     #              If true, the Redshift-managed VPC endpoints associated with the endpoint authorization are also deleted.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -12173,8 +12193,8 @@ module Aws::Redshift
     #             snapshot. If the account is currently restoring the snapshot, the restore will run to
     #             completion.</p>
     #          <p>
-    # For more information about working with snapshots, go to
-    # <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-snapshots.html">Amazon Redshift Snapshots</a>
+    # For more information about working with snapshots, go to 
+    # <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-snapshots.html">Amazon Redshift Snapshots</a> 
     # in the <i>Amazon Redshift Cluster Management Guide</i>.</p>
     # @param [Hash, Types::RevokeSnapshotAccessMessage] params
     # @option params [String] :snapshot_identifier
@@ -12568,7 +12588,8 @@ module Aws::Redshift
     # @option options [Integer] :max_wait_time
     # @option options [Integer] :min_delay
     # @option options [Integer] :max_delay
-    # @return [nil] Returns `nil` if the waiter was successful.
+    # @return [Smithy::Client::Response] Returns the successful response
+    #   that satisfied the waiter's success condition.
     # @raise [FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition
     #   out of, preventing success.

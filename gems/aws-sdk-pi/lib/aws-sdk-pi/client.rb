@@ -3,7 +3,6 @@
 # This is generated code!
 
 require_relative 'plugins/endpoint'
-require 'smithy-client/plugins/checksum_required'
 require 'smithy-client/plugins/content_length'
 require 'smithy-client/plugins/default_params'
 require 'smithy-client/plugins/host_prefix'
@@ -23,6 +22,8 @@ require 'smithy-client/plugins/transfer_encoding'
 require 'aws-sdk-core/plugins/global_configuration'
 require 'aws-sdk-core/plugins/shared_config'
 require 'aws-sdk-core/plugins/user_agent'
+require 'aws-sdk-core/plugins/checksum_algorithm'
+require 'aws-sdk-core/plugins/http_checksum'
 require 'aws-sdk-core/plugins/invocation_id'
 require 'aws-sdk-core/plugins/recursion_detection'
 require 'aws-sdk-core/plugins/retry_errors'
@@ -44,7 +45,6 @@ module Aws::PI
     @identifier = :pi
 
     add_plugin(::Aws::PI::Plugins::Endpoint)
-    add_plugin(Smithy::Client::Plugins::ChecksumRequired)
     add_plugin(Smithy::Client::Plugins::ContentLength)
     add_plugin(Smithy::Client::Plugins::DefaultParams)
     add_plugin(Smithy::Client::Plugins::HostPrefix)
@@ -64,6 +64,8 @@ module Aws::PI
     add_plugin(Aws::Core::Plugins::GlobalConfiguration)
     add_plugin(Aws::Core::Plugins::SharedConfig)
     add_plugin(Aws::Core::Plugins::UserAgent)
+    add_plugin(Aws::Core::Plugins::ChecksumAlgorithm)
+    add_plugin(Aws::Core::Plugins::HttpChecksum)
     add_plugin(Aws::Core::Plugins::InvocationId)
     add_plugin(Aws::Core::Plugins::RecursionDetection)
     add_plugin(Aws::Core::Plugins::RetryErrors)
@@ -140,23 +142,41 @@ module Aws::PI
     #  * `ENV['AWS_DEFAULT_REGION']`
     #  * `~/.aws/credentials` as `region` under a profile
     #  * `~/.aws/config` as `region` under a profile
+    # @option options [String] :request_checksum_calculation (when_supported)
+    #  Determines when a checksum is calculated for request payloads. Values are:
+    #  
+    #  * `when_supported` - (default) A checksum is calculated for operations
+    #    modeled with the `httpChecksum` trait when `requestChecksumRequired`
+    #    is `true` or a `requestAlgorithmMember` is modeled.
+    #  * `when_required` - A checksum is calculated only when
+    #    `requestChecksumRequired` is `true`, or when the caller supplies a
+    #    modeled `requestAlgorithmMember`.
     # @option options [Integer] :request_min_compression_size_bytes (10240)
     #  The minimum size in bytes that triggers compression for request bodies.
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
+    # @option options [String] :response_checksum_validation (when_supported)
+    #  Determines when checksum validation is performed for response payloads.
+    #  Values are:
+    #  
+    #  * `when_supported` - (default) Validation is enabled for operations
+    #    modeled with a `requestValidationModeMember` and at least one
+    #    `responseAlgorithms` value supported by the client.
+    #  * `when_required` - Validation is performed only when the caller sets
+    #    the modeled `requestValidationModeMember` to `ENABLED`.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #
+    #  
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #
+    #  
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #
+    #  
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -218,7 +238,7 @@ module Aws::PI
     # @option params [String] :identifier
     #   <p>An immutable, Amazon Web Services Region-unique identifier for a data source. Performance Insights gathers metrics from
     #               this data source.</p>
-    #            <p>To use an Amazon RDS instance as a data source, you specify its <code>DbiResourceId</code> value.
+    #            <p>To use an Amazon RDS instance as a data source, you specify its <code>DbiResourceId</code> value. 
     #               For example, specify <code>db-ADECBTYHKTSAUMUZQYPDS2GW4A</code>.</p>
     # @option params [Time] :start_time
     #   <p>The start time defined for the analysis report.</p>
@@ -257,8 +277,8 @@ module Aws::PI
     # @option params [String] :service_type
     #   <p>The Amazon Web Services service for which Performance Insights will return metrics. Valid value is <code>RDS</code>.</p>
     # @option params [String] :identifier
-    #   <p>An immutable identifier for a data source that is unique for an Amazon Web Services Region. Performance Insights gathers metrics from this data source.
-    #               In the console, the identifier is shown as <i>ResourceID</i>. When you
+    #   <p>An immutable identifier for a data source that is unique for an Amazon Web Services Region. Performance Insights gathers metrics from this data source. 
+    #               In the console, the identifier is shown as <i>ResourceID</i>. When you 
     #               call <code>DescribeDBInstances</code>, the identifier is returned as <code>DbiResourceId</code>.</p>
     #            <p>To use a DB instance as a data source, specify its <code>DbiResourceId</code> value. For example, specify
     #               <code>db-ABCDEFGHIJKLMNOPQRSTU1VW2X</code>.</p>
@@ -284,7 +304,7 @@ module Aws::PI
     # <p>For a specific time period, retrieve the top <code>N</code> dimension keys for a metric.
     #       </p>
     #          <note>
-    #             <p>Each response element returns a maximum of 500 bytes. For larger elements, such as SQL statements,
+    #             <p>Each response element returns a maximum of 500 bytes. For larger elements, such as SQL statements, 
     #         only the first 500 bytes are returned.</p>
     #          </note>
     # @param [Hash, Types::DescribeDimensionKeysRequest] params
@@ -305,12 +325,12 @@ module Aws::PI
     # @option params [String] :identifier
     #   <p>An immutable, Amazon Web Services Region-unique identifier for a data source. Performance Insights gathers metrics from
     #               this data source.</p>
-    #            <p>To use an Amazon RDS instance as a data source, you specify its <code>DbiResourceId</code> value.
+    #            <p>To use an Amazon RDS instance as a data source, you specify its <code>DbiResourceId</code> value. 
     #               For example, specify <code>db-FAIHNTYBKTGAUSUZQYPDS2GW4A</code>.
     #           </p>
     # @option params [Time] :start_time
     #   <p>The date and time specifying the beginning of the requested time series data. You must specify a
-    #               <code>StartTime</code> within the past 7 days. The value specified is <i>inclusive</i>,
+    #               <code>StartTime</code> within the past 7 days. The value specified is <i>inclusive</i>, 
     #               which means that data points equal to or greater than <code>StartTime</code> are returned.
     #           </p>
     #            <p>The value for <code>StartTime</code> must be earlier than the value for <code>EndTime</code>.
@@ -333,15 +353,15 @@ module Aws::PI
     #                     <code>db.sampledload.avg</code> - The raw number of active sessions for the database engine. </p>
     #               </li>
     #            </ul>
-    #            <p>If the number of active sessions is less than an internal Performance Insights threshold, <code>db.load.avg</code>
-    #               and <code>db.sampledload.avg</code> are the same value. If the number of active sessions is greater than
-    #               the internal threshold, Performance Insights samples the active sessions, with <code>db.load.avg</code>
-    #               showing the scaled values, <code>db.sampledload.avg</code> showing the raw values, and
-    #               <code>db.sampledload.avg</code> less than <code>db.load.avg</code>. For most use cases, you can
+    #            <p>If the number of active sessions is less than an internal Performance Insights threshold, <code>db.load.avg</code> 
+    #               and <code>db.sampledload.avg</code> are the same value. If the number of active sessions is greater than 
+    #               the internal threshold, Performance Insights samples the active sessions, with <code>db.load.avg</code> 
+    #               showing the scaled values, <code>db.sampledload.avg</code> showing the raw values, and 
+    #               <code>db.sampledload.avg</code> less than <code>db.load.avg</code>. For most use cases, you can 
     #               query <code>db.load.avg</code> only.
     #           </p>
     # @option params [Integer] :period_in_seconds
-    #   <p>The granularity, in seconds, of the data points returned from Performance Insights. A period can be as short as
+    #   <p>The granularity, in seconds, of the data points returned from Performance Insights. A period can be as short as 
     #               one second, or as long as one day (86400 seconds). Valid values are:
     #           </p>
     #            <ul>
@@ -366,7 +386,7 @@ module Aws::PI
     #                     <code>86400</code> (twenty-four hours)</p>
     #               </li>
     #            </ul>
-    #            <p>If you don't specify <code>PeriodInSeconds</code>, then Performance Insights chooses a value for you, with a
+    #            <p>If you don't specify <code>PeriodInSeconds</code>, then Performance Insights chooses a value for you, with a 
     #               goal of returning roughly 100-200 data points in the response.
     #           </p>
     # @option params [Types::DimensionGroup] :group_by
@@ -379,7 +399,7 @@ module Aws::PI
     #               syntax is as follows: <code>"AdditionalMetrics" : { "<i>string</i>" : "<i>string</i>" }</code>.</p>
     #            <p>The only supported statistic function is <code>.avg</code>.</p>
     # @option params [Types::DimensionGroup] :partition_by
-    #   <p>For each dimension specified in <code>GroupBy</code>, specify a secondary dimension
+    #   <p>For each dimension specified in <code>GroupBy</code>, specify a secondary dimension 
     #               to further subdivide the partition keys in the response.
     #           </p>
     # @option params [Hash<String, String>] :filter
@@ -469,8 +489,8 @@ module Aws::PI
     # @option params [String] :service_type
     #   <p>The Amazon Web Services service for which Performance Insights returns data. The only valid value is <code>RDS</code>.</p>
     # @option params [String] :identifier
-    #   <p>The ID for a data source from which to gather dimension data. This ID must be immutable and
-    #             unique within an Amazon Web Services Region. When a DB instance is the data source, specify its
+    #   <p>The ID for a data source from which to gather dimension data. This ID must be immutable and 
+    #             unique within an Amazon Web Services Region. When a DB instance is the data source, specify its 
     #             <code>DbiResourceId</code> value. For example, specify <code>db-ABCDEFGHIJKLMNOPQRSTU1VW2X</code>.
     #         </p>
     # @option params [String] :group
@@ -511,7 +531,7 @@ module Aws::PI
     #                     <code>db.query.id</code> for dimension group <code>db.query</code> (DocumentDB only)</p>
     #               </li>
     #               <li>
-    #                  <p>For the dimension group <code>db.lock_snapshot</code>, the <code>GroupIdentifier</code> is the epoch timestamp when Performance Insights captured the snapshot, in seconds.
+    #                  <p>For the dimension group <code>db.lock_snapshot</code>, the <code>GroupIdentifier</code> is the epoch timestamp when Performance Insights captured the snapshot, in seconds. 
     #                       You can retrieve this value with the <code>GetResourceMetrics</code> operation for a 1 second period.</p>
     #               </li>
     #            </ul>
@@ -574,8 +594,8 @@ module Aws::PI
     #   <p>The Amazon Web Services service for which Performance Insights will return metrics. Valid value is
     #               <code>RDS</code>.</p>
     # @option params [String] :identifier
-    #   <p>An immutable identifier for a data source that is unique for an Amazon Web Services Region. Performance Insights gathers
-    #               metrics from this data source. In the console, the identifier is shown as
+    #   <p>An immutable identifier for a data source that is unique for an Amazon Web Services Region. Performance Insights gathers 
+    #               metrics from this data source. In the console, the identifier is shown as 
     #               <i>ResourceID</i>. When you call <code>DescribeDBInstances</code>, the identifier is
     #               returned as <code>DbiResourceId</code>.</p>
     #            <p>To use a DB instance as a data source, specify its <code>DbiResourceId</code> value. For example, specify
@@ -588,7 +608,7 @@ module Aws::PI
     #   <p>Indicates the text format in the report. The options are <code>PLAIN_TEXT</code> or <code>MARKDOWN</code>. The default
     #               value is <code>plain text</code>.</p>
     # @option params [String] :accept_language
-    #   <p>The text language in the report. The default language is <code>EN_US</code> (English).
+    #   <p>The text language in the report. The default language is <code>EN_US</code> (English). 
     #           </p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -670,15 +690,15 @@ module Aws::PI
       request.send_request(options)
     end
 
-    # <p>Retrieve the metadata for different features. For example, the metadata might indicate
+    # <p>Retrieve the metadata for different features. For example, the metadata might indicate 
     #             that a feature is turned on or off on a specific DB instance.
     #         </p>
     # @param [Hash, Types::GetResourceMetadataRequest] params
     # @option params [String] :service_type
     #   <p>The Amazon Web Services service for which Performance Insights returns metrics.</p>
     # @option params [String] :identifier
-    #   <p>An immutable identifier for a data source that is unique for an Amazon Web Services Region.
-    #               Performance Insights gathers metrics from this data source. To use a DB instance as a data source,
+    #   <p>An immutable identifier for a data source that is unique for an Amazon Web Services Region. 
+    #               Performance Insights gathers metrics from this data source. To use a DB instance as a data source, 
     #               specify its <code>DbiResourceId</code> value. For example, specify <code>db-ABCDEFGHIJKLMNOPQRSTU1VW2X</code>.
     #           </p>
     # @example Request syntax with placeholder values
@@ -708,7 +728,7 @@ module Aws::PI
     #           specific dimension groups and dimensions, and provide filtering criteria for each group. You must specify an aggregate function for
     #           each metric.</p>
     #          <note>
-    #             <p>Each response element returns a maximum of 500 bytes. For larger elements, such as SQL statements,
+    #             <p>Each response element returns a maximum of 500 bytes. For larger elements, such as SQL statements, 
     #                only the first 500 bytes are returned.</p>
     #          </note>
     # @param [Hash, Types::GetResourceMetricsRequest] params
@@ -734,19 +754,19 @@ module Aws::PI
     #                   <code>db-ABCDEFGHIJKLMNOPQRSTU1VW2X</code>.</p>
     # @option params [Array<Types::MetricQuery>] :metric_queries
     #   <p>An array of one or more queries to perform. Each query must specify a Performance Insights metric and specify an aggregate function, and you can provide filtering
-    #               criteria. You must append the aggregate function to the metric. For example, to find the average for the metric <code>db.load</code>
-    #               you must use <code>db.load.avg</code>. Valid values for aggregate functions include <code>.avg</code>, <code>.min</code>,
+    #               criteria. You must append the aggregate function to the metric. For example, to find the average for the metric <code>db.load</code> 
+    #               you must use <code>db.load.avg</code>. Valid values for aggregate functions include <code>.avg</code>, <code>.min</code>, 
     #               <code>.max</code>, and <code>.sum</code>.</p>
     # @option params [Time] :start_time
     #   <p>The date and time specifying the beginning of the requested time series query range. You can't
-    #               specify a <code>StartTime</code> that is earlier than 7 days ago. By default, Performance Insights has 7 days of
+    #               specify a <code>StartTime</code> that is earlier than 7 days ago. By default, Performance Insights has 7 days of 
     #               retention, but you can extend this range up to 2 years. The value specified is
-    #               <i>inclusive</i>. Thus, the command returns data points equal to or greater
+    #               <i>inclusive</i>. Thus, the command returns data points equal to or greater 
     #               than <code>StartTime</code>.</p>
     #            <p>The value for <code>StartTime</code> must be earlier than the value for <code>EndTime</code>.</p>
     # @option params [Time] :end_time
-    #   <p>The date and time specifying the end of the requested time series query range. The value
-    #               specified is <i>exclusive</i>. Thus, the command returns data points less than
+    #   <p>The date and time specifying the end of the requested time series query range. The value 
+    #               specified is <i>exclusive</i>. Thus, the command returns data points less than 
     #               (but not equal to) <code>EndTime</code>.</p>
     #            <p>The value for <code>EndTime</code> must be later than the value for <code>StartTime</code>.</p>
     # @option params [Integer] :period_in_seconds
@@ -850,17 +870,17 @@ module Aws::PI
     # @option params [Array<String>] :metrics
     #   <p>The types of metrics for which to retrieve dimensions. Valid values include <code>db.load</code>.</p>
     # @option params [Integer] :max_results
-    #   <p>The maximum number of items to return in the response. If more items exist than the specified
-    #               <code>MaxRecords</code> value, a pagination token is included in the response so that the remaining
+    #   <p>The maximum number of items to return in the response. If more items exist than the specified 
+    #               <code>MaxRecords</code> value, a pagination token is included in the response so that the remaining 
     #               results can be retrieved.</p>
     # @option params [String] :next_token
-    #   <p>An optional pagination token provided by a previous request. If this parameter is specified,
+    #   <p>An optional pagination token provided by a previous request. If this parameter is specified, 
     #               the response includes only records beyond the token, up to the value specified by <code>MaxRecords</code>.
     #           </p>
     # @option params [Array<String>] :authorized_actions
     #   <p>The actions to discover the dimensions you are authorized to access. If you specify multiple actions, then the response will
     #           contain the dimensions common for all the actions.</p>
-    #            <p>When you don't specify this request parameter or provide an empty list, the response contains all the
+    #            <p>When you don't specify this request parameter or provide an empty list, the response contains all the 
     #               available dimensions for the target database engine whether or not you are authorized to access them.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -929,11 +949,11 @@ module Aws::PI
     #               </li>
     #            </ul>
     # @option params [String] :next_token
-    #   <p>An optional pagination token provided by a previous request. If this parameter is specified,
+    #   <p>An optional pagination token provided by a previous request. If this parameter is specified, 
     #             the response includes only records beyond the token, up to the value specified by <code>MaxRecords</code>.
     #         </p>
     # @option params [Integer] :max_results
-    #   <p>The maximum number of items to return. If the <code>MaxRecords</code> value is less than the number
+    #   <p>The maximum number of items to return. If the <code>MaxRecords</code> value is less than the number 
     #               of existing items, the response includes a pagination token. </p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -984,7 +1004,7 @@ module Aws::PI
     #   <p>The maximum number of items to return in the response. If more items exist than the specified <code>MaxResults</code> value, a
     #               pagination token is included in the response so that the remaining results can be retrieved. </p>
     # @option params [String] :next_token
-    #   <p>An optional pagination token provided by a previous request.
+    #   <p>An optional pagination token provided by a previous request. 
     #               If this parameter is specified, the response includes only records beyond
     #               the token, up to the value specified by <code>MaxResults</code>.</p>
     # @example Request syntax with placeholder values
@@ -1028,7 +1048,7 @@ module Aws::PI
     #            <p>To use a DB instance as a data source, specify its <code>DbiResourceId</code> value. For example, specify
     #               <code>db-ABCDEFGHIJKLMNOPQRSTU1VW2X</code>.</p>
     # @option params [String] :next_token
-    #   <p>An optional pagination token provided by a previous request.
+    #   <p>An optional pagination token provided by a previous request. 
     #               If this parameter is specified, the response includes only records beyond
     #               the token, up to the value specified by <code>MaxResults</code>.</p>
     # @option params [Integer] :max_results
@@ -1077,8 +1097,8 @@ module Aws::PI
     # @option params [String] :service_type
     #   <p>List the tags for the Amazon Web Services service for which Performance Insights returns metrics. Valid value is <code>RDS</code>.</p>
     # @option params [String] :resource_arn
-    #   <p>Lists all the tags for the Amazon RDS Performance Insights resource. This value is an
-    #               Amazon Resource Name (ARN). For information about creating an ARN,
+    #   <p>Lists all the tags for the Amazon RDS Performance Insights resource. This value is an 
+    #               Amazon Resource Name (ARN). For information about creating an ARN, 
     #               see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.ARN.html#USER_Tagging.ARN.Constructing">
     #                   Constructing an RDS Amazon Resource Name (ARN)</a>.</p>
     # @example Request syntax with placeholder values
@@ -1109,7 +1129,7 @@ module Aws::PI
     # @option params [String] :service_type
     #   <p>The Amazon Web Services service for which Performance Insights returns metrics. Valid value is <code>RDS</code>.</p>
     # @option params [String] :resource_arn
-    #   <p>The Amazon RDS Performance Insights resource that the tags are added to. This value is an Amazon Resource Name (ARN). For information about
+    #   <p>The Amazon RDS Performance Insights resource that the tags are added to. This value is an Amazon Resource Name (ARN). For information about  
     #               creating an ARN, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.ARN.html#USER_Tagging.ARN.Constructing">
     #                   Constructing an RDS Amazon Resource Name (ARN)</a>.</p>
     # @option params [Array<Types::Tag>] :tags
@@ -1141,7 +1161,7 @@ module Aws::PI
     # @option params [String] :service_type
     #   <p>List the tags for the Amazon Web Services service for which Performance Insights returns metrics. Valid value is <code>RDS</code>.</p>
     # @option params [String] :resource_arn
-    #   <p>The Amazon RDS Performance Insights resource that the tags are added to. This value is an Amazon Resource Name (ARN). For information about
+    #   <p>The Amazon RDS Performance Insights resource that the tags are added to. This value is an Amazon Resource Name (ARN). For information about  
     #               creating an ARN, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.ARN.html#USER_Tagging.ARN.Constructing">
     #                   Constructing an RDS Amazon Resource Name (ARN)</a>.</p>
     # @option params [Array<String>] :tag_keys
@@ -1214,7 +1234,8 @@ module Aws::PI
     # @option options [Integer] :max_wait_time
     # @option options [Integer] :min_delay
     # @option options [Integer] :max_delay
-    # @return [nil] Returns `nil` if the waiter was successful.
+    # @return [Smithy::Client::Response] Returns the successful response
+    #   that satisfied the waiter's success condition.
     # @raise [FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition
     #   out of, preventing success.

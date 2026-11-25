@@ -3,7 +3,6 @@
 # This is generated code!
 
 require_relative 'plugins/endpoint'
-require 'smithy-client/plugins/checksum_required'
 require 'smithy-client/plugins/content_length'
 require 'smithy-client/plugins/default_params'
 require 'smithy-client/plugins/host_prefix'
@@ -23,6 +22,8 @@ require 'smithy-client/plugins/transfer_encoding'
 require 'aws-sdk-core/plugins/global_configuration'
 require 'aws-sdk-core/plugins/shared_config'
 require 'aws-sdk-core/plugins/user_agent'
+require 'aws-sdk-core/plugins/checksum_algorithm'
+require 'aws-sdk-core/plugins/http_checksum'
 require 'aws-sdk-core/plugins/invocation_id'
 require 'aws-sdk-core/plugins/recursion_detection'
 require 'aws-sdk-core/plugins/retry_errors'
@@ -44,7 +45,6 @@ module Aws::Kinesis
     @identifier = :kinesis
 
     add_plugin(::Aws::Kinesis::Plugins::Endpoint)
-    add_plugin(Smithy::Client::Plugins::ChecksumRequired)
     add_plugin(Smithy::Client::Plugins::ContentLength)
     add_plugin(Smithy::Client::Plugins::DefaultParams)
     add_plugin(Smithy::Client::Plugins::HostPrefix)
@@ -64,6 +64,8 @@ module Aws::Kinesis
     add_plugin(Aws::Core::Plugins::GlobalConfiguration)
     add_plugin(Aws::Core::Plugins::SharedConfig)
     add_plugin(Aws::Core::Plugins::UserAgent)
+    add_plugin(Aws::Core::Plugins::ChecksumAlgorithm)
+    add_plugin(Aws::Core::Plugins::HttpChecksum)
     add_plugin(Aws::Core::Plugins::InvocationId)
     add_plugin(Aws::Core::Plugins::RecursionDetection)
     add_plugin(Aws::Core::Plugins::RetryErrors)
@@ -141,23 +143,41 @@ module Aws::Kinesis
     #  * `ENV['AWS_DEFAULT_REGION']`
     #  * `~/.aws/credentials` as `region` under a profile
     #  * `~/.aws/config` as `region` under a profile
+    # @option options [String] :request_checksum_calculation (when_supported)
+    #  Determines when a checksum is calculated for request payloads. Values are:
+    #  
+    #  * `when_supported` - (default) A checksum is calculated for operations
+    #    modeled with the `httpChecksum` trait when `requestChecksumRequired`
+    #    is `true` or a `requestAlgorithmMember` is modeled.
+    #  * `when_required` - A checksum is calculated only when
+    #    `requestChecksumRequired` is `true`, or when the caller supplies a
+    #    modeled `requestAlgorithmMember`.
     # @option options [Integer] :request_min_compression_size_bytes (10240)
     #  The minimum size in bytes that triggers compression for request bodies.
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
+    # @option options [String] :response_checksum_validation (when_supported)
+    #  Determines when checksum validation is performed for response payloads.
+    #  Values are:
+    #  
+    #  * `when_supported` - (default) Validation is enabled for operations
+    #    modeled with a `requestValidationModeMember` and at least one
+    #    `responseAlgorithms` value supported by the client.
+    #  * `when_required` - Validation is performed only when the caller sets
+    #    the modeled `requestValidationModeMember` to `ENABLED`.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #
+    #  
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #
+    #  
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #
+    #  
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -1504,14 +1524,14 @@ module Aws::Kinesis
     #             You can terminate the loop when the shard is closed, or when the shard iterator reaches
     #             the record with the sequence number or other attribute that marks it as the last record
     #             to process.</p>
-    #          <p>Each data record can be up to 1 MiB in size by default. Amazon Kinesis Data Streams supports
-    #             large records up to 10 MiB in size, but the average throughput for your stream cannot exceed
-    #             1 MiB per second. For more information about how large records are handled, see
-    #             <a href="https://docs.aws.amazon.com/streams/latest/dev/large-records.html">Large records</a>.
-    #             Each shard can read up to 2 MiB per second. You can ensure that your calls don't exceed
-    #             the maximum supported size or throughput by using the <code>Limit</code> parameter to
-    #             specify the maximum number of records that <a>GetRecords</a> can return.
-    #             Consider your average record size when determining this limit. The maximum number of records
+    #          <p>Each data record can be up to 1 MiB in size by default. Amazon Kinesis Data Streams supports 
+    #             large records up to 10 MiB in size, but the average throughput for your stream cannot exceed 
+    #             1 MiB per second. For more information about how large records are handled, see 
+    #             <a href="https://docs.aws.amazon.com/streams/latest/dev/large-records.html">Large records</a>. 
+    #             Each shard can read up to 2 MiB per second. You can ensure that your calls don't exceed 
+    #             the maximum supported size or throughput by using the <code>Limit</code> parameter to 
+    #             specify the maximum number of records that <a>GetRecords</a> can return. 
+    #             Consider your average record size when determining this limit. The maximum number of records 
     #             that can be returned per call is 10,000.</p>
     #          <p>The size of the data returned by <a>GetRecords</a> varies depending on the
     #             utilization of the shard. It is recommended that consumer applications retrieve records
@@ -2518,10 +2538,10 @@ module Aws::Kinesis
       request.send_request(options)
     end
 
-    # <p>Attaches a resource-based policy to a data stream or registered consumer. If you are using an identity other than the root user of
-    #             the Amazon Web Services account that owns the resource, the calling identity must have the <code>PutResourcePolicy</code> permissions on the
+    # <p>Attaches a resource-based policy to a data stream or registered consumer. If you are using an identity other than the root user of 
+    #             the Amazon Web Services account that owns the resource, the calling identity must have the <code>PutResourcePolicy</code> permissions on the 
     #             specified Kinesis Data Streams resource and belong to the owner's account in order to use this operation.
-    #             If you don't have <code>PutResourcePolicy</code> permissions, Amazon Kinesis Data Streams returns a <code>403 Access Denied error</code>.
+    #             If you don't have <code>PutResourcePolicy</code> permissions, Amazon Kinesis Data Streams returns a <code>403 Access Denied error</code>. 
     #             If you receive a <code>ResourceNotFoundException</code>, check to see if you passed a valid stream or consumer resource.
     #         </p>
     #          <p> Request patterns can be one of the following:</p>
@@ -2566,7 +2586,7 @@ module Aws::Kinesis
     #             shard you subscribe to. This rate is unaffected by the total number of consumers that
     #             read from the same stream.</p>
     #          <p>You can add tags to the registered consumer when making a <code>RegisterStreamConsumer</code> request by setting the <code>Tags</code> parameter. If you pass the <code>Tags</code> parameter, in addition to having the <code>kinesis:RegisterStreamConsumer</code> permission, you must also have the <code>kinesis:TagResource</code> permission for the consumer that will be registered. Tags will take effect from the <code>CREATING</code> status of the consumer.</p>
-    #          <p>With On-demand Advantage streams, you can register up to 50 consumers per stream to use Enhanced Fan-out. With On-demand Standard and Provisioned streams, you can register up to 20 consumers per stream to use Enhanced Fan-out. A given consumer can only be
+    #          <p>With On-demand Advantage streams, you can register up to 50 consumers per stream to use Enhanced Fan-out. With On-demand Standard and Provisioned streams, you can register up to 20 consumers per stream to use Enhanced Fan-out. A given consumer can only be 
     #             registered with one stream at a time.</p>
     #          <p>For an example of how to use this operation, see <a href="https://docs.aws.amazon.com/streams/latest/dev/building-enhanced-consumers-api.html">Enhanced Fan-Out
     #                 Using the Kinesis Data Streams API</a>.</p>
@@ -3614,7 +3634,8 @@ module Aws::Kinesis
     # @option options [Integer] :max_wait_time
     # @option options [Integer] :min_delay
     # @option options [Integer] :max_delay
-    # @return [nil] Returns `nil` if the waiter was successful.
+    # @return [Smithy::Client::Response] Returns the successful response
+    #   that satisfied the waiter's success condition.
     # @raise [FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition
     #   out of, preventing success.

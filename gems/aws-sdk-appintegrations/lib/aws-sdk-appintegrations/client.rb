@@ -3,7 +3,6 @@
 # This is generated code!
 
 require_relative 'plugins/endpoint'
-require 'smithy-client/plugins/checksum_required'
 require 'smithy-client/plugins/content_length'
 require 'smithy-client/plugins/default_params'
 require 'smithy-client/plugins/host_prefix'
@@ -23,6 +22,8 @@ require 'smithy-client/plugins/transfer_encoding'
 require 'aws-sdk-core/plugins/global_configuration'
 require 'aws-sdk-core/plugins/shared_config'
 require 'aws-sdk-core/plugins/user_agent'
+require 'aws-sdk-core/plugins/checksum_algorithm'
+require 'aws-sdk-core/plugins/http_checksum'
 require 'aws-sdk-core/plugins/invocation_id'
 require 'aws-sdk-core/plugins/recursion_detection'
 require 'aws-sdk-core/plugins/retry_errors'
@@ -43,7 +44,6 @@ module Aws::AppIntegrations
     @identifier = :appintegrations
 
     add_plugin(::Aws::AppIntegrations::Plugins::Endpoint)
-    add_plugin(Smithy::Client::Plugins::ChecksumRequired)
     add_plugin(Smithy::Client::Plugins::ContentLength)
     add_plugin(Smithy::Client::Plugins::DefaultParams)
     add_plugin(Smithy::Client::Plugins::HostPrefix)
@@ -63,6 +63,8 @@ module Aws::AppIntegrations
     add_plugin(Aws::Core::Plugins::GlobalConfiguration)
     add_plugin(Aws::Core::Plugins::SharedConfig)
     add_plugin(Aws::Core::Plugins::UserAgent)
+    add_plugin(Aws::Core::Plugins::ChecksumAlgorithm)
+    add_plugin(Aws::Core::Plugins::HttpChecksum)
     add_plugin(Aws::Core::Plugins::InvocationId)
     add_plugin(Aws::Core::Plugins::RecursionDetection)
     add_plugin(Aws::Core::Plugins::RetryErrors)
@@ -139,23 +141,41 @@ module Aws::AppIntegrations
     #  * `ENV['AWS_DEFAULT_REGION']`
     #  * `~/.aws/credentials` as `region` under a profile
     #  * `~/.aws/config` as `region` under a profile
+    # @option options [String] :request_checksum_calculation (when_supported)
+    #  Determines when a checksum is calculated for request payloads. Values are:
+    #  
+    #  * `when_supported` - (default) A checksum is calculated for operations
+    #    modeled with the `httpChecksum` trait when `requestChecksumRequired`
+    #    is `true` or a `requestAlgorithmMember` is modeled.
+    #  * `when_required` - A checksum is calculated only when
+    #    `requestChecksumRequired` is `true`, or when the caller supplies a
+    #    modeled `requestAlgorithmMember`.
     # @option options [Integer] :request_min_compression_size_bytes (10240)
     #  The minimum size in bytes that triggers compression for request bodies.
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
+    # @option options [String] :response_checksum_validation (when_supported)
+    #  Determines when checksum validation is performed for response payloads.
+    #  Values are:
+    #  
+    #  * `when_supported` - (default) Validation is enabled for operations
+    #    modeled with a `requestValidationModeMember` and at least one
+    #    `responseAlgorithms` value supported by the client.
+    #  * `when_required` - Validation is performed only when the caller sets
+    #    the modeled `requestValidationModeMember` to `ENABLED`.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #
+    #  
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #
+    #  
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #
+    #  
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -568,8 +588,8 @@ module Aws::AppIntegrations
     #       DataIntegrationAssociations can be deleted. Deleting a DataIntegration also deletes the
     #       underlying Amazon AppFlow flow and service linked role. </p>
     #          <note>
-    #             <p>You cannot create a DataIntegration association for a DataIntegration that has been previously associated.
-    # Use a different DataIntegration, or recreate the DataIntegration using the
+    #             <p>You cannot create a DataIntegration association for a DataIntegration that has been previously associated.  
+    # Use a different DataIntegration, or recreate the DataIntegration using the 
     # <a href="https://docs.aws.amazon.com/appintegrations/latest/APIReference/API_CreateDataIntegration.html">CreateDataIntegration</a> API.</p>
     #          </note>
     # @param [Hash, Types::DeleteDataIntegrationRequest] params
@@ -697,8 +717,8 @@ module Aws::AppIntegrations
 
     # <p>Returns information about the DataIntegration.</p>
     #          <note>
-    #             <p>You cannot create a DataIntegration association for a DataIntegration that has been previously associated.
-    # Use a different DataIntegration, or recreate the DataIntegration using the
+    #             <p>You cannot create a DataIntegration association for a DataIntegration that has been previously associated.  
+    # Use a different DataIntegration, or recreate the DataIntegration using the 
     # <a href="https://docs.aws.amazon.com/appintegrations/latest/APIReference/API_CreateDataIntegration.html">CreateDataIntegration</a> API.</p>
     #          </note>
     # @param [Hash, Types::GetDataIntegrationRequest] params
@@ -780,7 +800,7 @@ module Aws::AppIntegrations
     # @option params [String] :application_id
     #   <p>A unique identifier for the Application.</p>
     # @option params [String] :next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of results to return per page.</p>
@@ -831,7 +851,7 @@ module Aws::AppIntegrations
     # <p>Lists applications in the account.</p>
     # @param [Hash, Types::ListApplicationsRequest] params
     # @option params [String] :next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of results to return per page.</p>
@@ -889,15 +909,15 @@ module Aws::AppIntegrations
 
     # <p>Returns a paginated list of DataIntegration associations in the account.</p>
     #          <note>
-    #             <p>You cannot create a DataIntegration association for a DataIntegration that has been previously associated.
-    # Use a different DataIntegration, or recreate the DataIntegration using the
+    #             <p>You cannot create a DataIntegration association for a DataIntegration that has been previously associated.  
+    # Use a different DataIntegration, or recreate the DataIntegration using the 
     # <a href="https://docs.aws.amazon.com/appintegrations/latest/APIReference/API_CreateDataIntegration.html">CreateDataIntegration</a> API.</p>
     #          </note>
     # @param [Hash, Types::ListDataIntegrationAssociationsRequest] params
     # @option params [String] :data_integration_identifier
     #   <p>A unique identifier for the DataIntegration.</p>
     # @option params [String] :next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of results to return per page.</p>
@@ -946,13 +966,13 @@ module Aws::AppIntegrations
 
     # <p>Returns a paginated list of DataIntegrations in the account.</p>
     #          <note>
-    #             <p>You cannot create a DataIntegration association for a DataIntegration that has been previously associated.
-    # Use a different DataIntegration, or recreate the DataIntegration using the
+    #             <p>You cannot create a DataIntegration association for a DataIntegration that has been previously associated.  
+    # Use a different DataIntegration, or recreate the DataIntegration using the 
     # <a href="https://docs.aws.amazon.com/appintegrations/latest/APIReference/API_CreateDataIntegration.html">CreateDataIntegration</a> API.</p>
     #          </note>
     # @param [Hash, Types::ListDataIntegrationsRequest] params
     # @option params [String] :next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of results to return per page.</p>
@@ -986,7 +1006,7 @@ module Aws::AppIntegrations
     # @option params [String] :event_integration_name
     #   <p>The name of the event integration. </p>
     # @option params [String] :next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of results to return per page.</p>
@@ -1024,7 +1044,7 @@ module Aws::AppIntegrations
     # <p>Returns a paginated list of event integrations in the account.</p>
     # @param [Hash, Types::ListEventIntegrationsRequest] params
     # @option params [String] :next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of results to return per page.</p>
@@ -1223,8 +1243,8 @@ module Aws::AppIntegrations
 
     # <p>Updates the description of a DataIntegration.</p>
     #          <note>
-    #             <p>You cannot create a DataIntegration association for a DataIntegration that has been previously associated.
-    # Use a different DataIntegration, or recreate the DataIntegration using the
+    #             <p>You cannot create a DataIntegration association for a DataIntegration that has been previously associated.  
+    # Use a different DataIntegration, or recreate the DataIntegration using the 
     # <a href="https://docs.aws.amazon.com/appintegrations/latest/APIReference/API_CreateDataIntegration.html">CreateDataIntegration</a> API.</p>
     #          </note>
     # @param [Hash, Types::UpdateDataIntegrationRequest] params
@@ -1365,7 +1385,8 @@ module Aws::AppIntegrations
     # @option options [Integer] :max_wait_time
     # @option options [Integer] :min_delay
     # @option options [Integer] :max_delay
-    # @return [nil] Returns `nil` if the waiter was successful.
+    # @return [Smithy::Client::Response] Returns the successful response
+    #   that satisfied the waiter's success condition.
     # @raise [FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition
     #   out of, preventing success.

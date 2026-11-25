@@ -46,7 +46,7 @@ module Aws::Textract
   module Errors
     extend Smithy::Client::DynamicErrors
 
-    # <p>You aren't authorized to perform the action. Use the Amazon Resource Name (ARN)
+    # <p>You aren't authorized to perform the action. Use the Amazon Resource Name (ARN) 
     #             of an authorized user or IAM role to perform the operation.</p>
     class AccessDeniedException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
@@ -221,7 +221,7 @@ module Aws::Textract
       end
     end
 
-    # <p>An input parameter violated a constraint. For example, in synchronous operations,
+    # <p>An input parameter violated a constraint. For example, in synchronous operations, 
     #        an <code>InvalidParameterException</code> exception occurs
     #       when neither of the <code>S3Object</code> or <code>Bytes</code> values are supplied in the <code>Document</code>
     #       request parameter.
@@ -283,7 +283,7 @@ module Aws::Textract
       end
     end
 
-    # <p>The number of requests exceeded your throughput limit. If you want to increase this limit,
+    # <p>The number of requests exceeded your throughput limit. If you want to increase this limit, 
     #          contact Amazon Textract.</p>
     class ProvisionedThroughputExceededException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context

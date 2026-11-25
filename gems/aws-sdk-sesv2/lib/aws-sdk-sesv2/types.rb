@@ -2117,9 +2117,9 @@ module Aws::SESv2
     #               appropriate records in the DNS configuration of the domain for up to 72 hours.</p>
     #   @return [Array<String>]
     # @!attribute signing_hosted_zone
-    #   <p>The hosted zone where Amazon SES publishes the DKIM public key TXT records for this email identity.
+    #   <p>The hosted zone where Amazon SES publishes the DKIM public key TXT records for this email identity. 
     #           This value indicates the DNS zone that customers must reference when configuring their CNAME records for DKIM authentication.</p>
-    #            <p>When configuring DKIM for your domain, create CNAME records in your DNS that point to the selectors in this hosted zone.
+    #            <p>When configuring DKIM for your domain, create CNAME records in your DNS that point to the selectors in this hosted zone. 
     #           For example:</p>
     #            <p>
     #               <code>
@@ -4058,7 +4058,7 @@ module Aws::SESv2
 
     # <p>Represents a request to retrieve information about a specific reputation entity.</p>
     # @!attribute reputation_entity_reference
-    #   <p>The unique identifier for the reputation entity. For resource-type entities,
+    #   <p>The unique identifier for the reputation entity. For resource-type entities, 
     #               this is the Amazon Resource Name (ARN) of the resource.</p>
     #   @return [String]
     # @!attribute reputation_entity_type
@@ -4075,7 +4075,7 @@ module Aws::SESv2
 
     # <p>Information about the requested reputation entity.</p>
     # @!attribute reputation_entity
-    #   <p>The reputation entity information, including status records, policy configuration,
+    #   <p>The reputation entity information, including status records, policy configuration, 
     #               and reputation impact.</p>
     #   @return [Types::ReputationEntity]
     class GetReputationEntityResponse < Struct.new(
@@ -5194,18 +5194,18 @@ module Aws::SESv2
 
     # <p>Represents a request to list reputation entities with optional filtering.</p>
     # @!attribute filter
-    #   <p>An object that contains filters to apply when listing reputation entities.
-    #               You can filter by entity type, reputation impact, sending status, or entity
+    #   <p>An object that contains filters to apply when listing reputation entities. 
+    #               You can filter by entity type, reputation impact, sending status, or entity 
     #               reference prefix.</p>
     #   @return [Hash<String, String>]
     # @!attribute next_token
-    #   <p>A token returned from a previous call to <code>ListReputationEntities</code> to indicate
+    #   <p>A token returned from a previous call to <code>ListReputationEntities</code> to indicate 
     #               the position in the list of reputation entities.</p>
     #   @return [String]
     # @!attribute page_size
-    #   <p>The number of results to show in a single call to <code>ListReputationEntities</code>.
-    #               If the number of results is larger than the number you specified in this parameter,
-    #               then the response includes a <code>NextToken</code> element, which you can use to obtain
+    #   <p>The number of results to show in a single call to <code>ListReputationEntities</code>. 
+    #               If the number of results is larger than the number you specified in this parameter, 
+    #               then the response includes a <code>NextToken</code> element, which you can use to obtain 
     #               additional results.</p>
     #   @return [Integer]
     class ListReputationEntitiesRequest < Struct.new(
@@ -5223,8 +5223,8 @@ module Aws::SESv2
     #   <p>An array that contains information about the reputation entities in your account.</p>
     #   @return [Array<Types::ReputationEntity>]
     # @!attribute next_token
-    #   <p>A token that indicates that there are additional reputation entities to list.
-    #               To view additional reputation entities, issue another request to <code>ListReputationEntities</code>,
+    #   <p>A token that indicates that there are additional reputation entities to list. 
+    #               To view additional reputation entities, issue another request to <code>ListReputationEntities</code>, 
     #               and pass this token in the <code>NextToken</code> parameter.</p>
     #   @return [String]
     class ListReputationEntitiesResponse < Struct.new(
@@ -6677,9 +6677,9 @@ module Aws::SESv2
     #               appropriate records in the DNS configuration of the domain for up to 72 hours.</p>
     #   @return [Array<String>]
     # @!attribute signing_hosted_zone
-    #   <p>The hosted zone where Amazon SES publishes the DKIM public key TXT records for this email identity.
+    #   <p>The hosted zone where Amazon SES publishes the DKIM public key TXT records for this email identity. 
     #           This value indicates the DNS zone that customers must reference when configuring their CNAME records for DKIM authentication.</p>
-    #            <p>When configuring DKIM for your domain, create CNAME records in your DNS that point to the selectors in this hosted zone.
+    #            <p>When configuring DKIM for your domain, create CNAME records in your DNS that point to the selectors in this hosted zone. 
     #           For example:</p>
     #            <p>
     #               <code>
@@ -6982,25 +6982,25 @@ module Aws::SESv2
       include ::Smithy::Schema::Structure
     end
 
-    # <p>An object that contains information about a reputation entity, including its
+    # <p>An object that contains information about a reputation entity, including its 
     #             reference, type, policy, status records, and reputation impact.</p>
     # @!attribute reputation_entity_reference
-    #   <p>The unique identifier for the reputation entity. For resource-type entities,
+    #   <p>The unique identifier for the reputation entity. For resource-type entities, 
     #               this is the Amazon Resource Name (ARN) of the resource.</p>
     #   @return [String]
     # @!attribute reputation_entity_type
     #   <p>The type of reputation entity. Currently, only <code>RESOURCE</code> type entities are supported.</p>
     #   @return [String]
     # @!attribute reputation_management_policy
-    #   <p>The Amazon Resource Name (ARN) of the reputation management policy applied to
+    #   <p>The Amazon Resource Name (ARN) of the reputation management policy applied to 
     #               this entity. This is an Amazon Web Services Amazon SES-managed policy.</p>
     #   @return [String]
     # @!attribute customer_managed_status
-    #   <p>The customer-managed status record for this reputation entity, including the
+    #   <p>The customer-managed status record for this reputation entity, including the 
     #               current status, cause description, and last updated timestamp.</p>
     #   @return [Types::StatusRecord]
     # @!attribute aws_ses_managed_status
-    #   <p>The Amazon Web Services Amazon SES-managed status record for this reputation entity, including the
+    #   <p>The Amazon Web Services Amazon SES-managed status record for this reputation entity, including the 
     #               current status, cause description, and last updated timestamp.</p>
     #   @return [Types::StatusRecord]
     # @!attribute sending_status_aggregate
@@ -7014,8 +7014,8 @@ module Aws::SESv2
     #               The entity can only send emails when both statuses permit sending.</p>
     #   @return [String]
     # @!attribute reputation_impact
-    #   <p>The reputation impact level for this entity, representing the highest impact
-    #               reputation finding currently active. Reputation findings can be retrieved using
+    #   <p>The reputation impact level for this entity, representing the highest impact 
+    #               reputation finding currently active. Reputation findings can be retrieved using 
     #               the <code>ListRecommendations</code> operation.</p>
     #   @return [String]
     class ReputationEntity < Struct.new(
@@ -7544,7 +7544,7 @@ module Aws::SESv2
       include ::Smithy::Schema::Structure
     end
 
-    # <p>An object that contains status information for a reputation entity, including
+    # <p>An object that contains status information for a reputation entity, including 
     #             the current status, cause description, and timestamp.</p>
     # @!attribute status
     #   <p>The current sending status. This can be one of the following:</p>
@@ -7564,7 +7564,7 @@ module Aws::SESv2
     #            </ul>
     #   @return [String]
     # @!attribute cause
-    #   <p>A description of the reason for the current status, or null if no specific
+    #   <p>A description of the reason for the current status, or null if no specific 
     #               cause is available.</p>
     #   @return [String]
     # @!attribute last_updated_timestamp
@@ -7896,8 +7896,8 @@ module Aws::SESv2
     # <p>An object that defines the email template to use for an email message, and the values
     #             to use for any message variables in that template. An <i>email
     #                 template</i> is a type of message template that contains content that you
-    #             want to reuse in email messages that you send. You can specifiy the email template by providing
-    #             the name or ARN of an <i>email template</i>
+    #             want to reuse in email messages that you send. You can specifiy the email template by providing 
+    #             the name or ARN of an <i>email template</i> 
     #             previously saved in your Amazon SES account or by providing the full template content.</p>
     # @!attribute template_name
     #   <p>The name of the template. You will refer to this name when you send email using the
@@ -7910,8 +7910,8 @@ module Aws::SESv2
     # @!attribute template_content
     #   <p>The content of the template.</p>
     #            <note>
-    #               <p>Amazon SES supports only simple substitions when you send email using the
-    #                   <code>SendEmail</code> or <code>SendBulkEmail</code> operations and
+    #               <p>Amazon SES supports only simple substitions when you send email using the  
+    #                   <code>SendEmail</code> or <code>SendBulkEmail</code> operations and 
     #                   you provide the full template content in the request.</p>
     #            </note>
     #   @return [Types::EmailTemplateContent]
@@ -8554,7 +8554,7 @@ module Aws::SESv2
     #   <p>The type of reputation entity. Currently, only <code>RESOURCE</code> type entities are supported.</p>
     #   @return [String]
     # @!attribute reputation_entity_reference
-    #   <p>The unique identifier for the reputation entity. For resource-type entities,
+    #   <p>The unique identifier for the reputation entity. For resource-type entities, 
     #               this is the Amazon Resource Name (ARN) of the resource.</p>
     #   @return [String]
     # @!attribute sending_status
@@ -8597,11 +8597,11 @@ module Aws::SESv2
     #   <p>The type of reputation entity. Currently, only <code>RESOURCE</code> type entities are supported.</p>
     #   @return [String]
     # @!attribute reputation_entity_reference
-    #   <p>The unique identifier for the reputation entity. For resource-type entities,
+    #   <p>The unique identifier for the reputation entity. For resource-type entities, 
     #               this is the Amazon Resource Name (ARN) of the resource.</p>
     #   @return [String]
     # @!attribute reputation_entity_policy
-    #   <p>The Amazon Resource Name (ARN) of the reputation management policy to apply
+    #   <p>The Amazon Resource Name (ARN) of the reputation management policy to apply 
     #               to this entity. This is an Amazon Web Services Amazon SES-managed policy.</p>
     #   @return [String]
     class UpdateReputationEntityPolicyRequest < Struct.new(

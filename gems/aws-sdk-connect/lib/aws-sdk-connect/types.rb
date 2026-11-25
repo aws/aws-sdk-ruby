@@ -298,8 +298,8 @@ module Aws::Connect
     #   <p>List of <code>StateTransition</code> for a supervisor.</p>
     #   @return [Array<Types::StateTransition>]
     # @!attribute voice_enhancement_mode
-    #   <p>The voice enhancement mode used by the agent as the call is ending.
-    #     Valid values: VOICE_ISOLATION | NOISE_SUPPRESSION | NONE.
+    #   <p>The voice enhancement mode used by the agent as the call is ending. 
+    #     Valid values: VOICE_ISOLATION | NOISE_SUPPRESSION | NONE. 
     #     A value of null indicates this mode has not yet been set for this user.</p>
     #   @return [String]
     # @!attribute active_region
@@ -914,7 +914,7 @@ module Aws::Connect
     #   <p>The identifier of the Connect Customer instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>
     #   @return [String]
     # @!attribute language_code
-    #   <p>The language code of the vocabulary entries. For a list of languages and their corresponding language codes, see
+    #   <p>The language code of the vocabulary entries. For a list of languages and their corresponding language codes, see 
     #   <a href="https://docs.aws.amazon.com/transcribe/latest/dg/transcribe-whatis.html">What is Amazon Transcribe?</a>
     #            </p>
     #   @return [String]
@@ -1435,7 +1435,7 @@ module Aws::Connect
     #   <p>The use case for the file.</p>
     #   @return [String]
     # @!attribute associated_resource_arn
-    #   <p>The resource to which the attached file is (being) uploaded to. The supported resources are <a href="https://docs.aws.amazon.com/connect/latest/adminguide/cases.html">Cases</a>, <a href="https://docs.aws.amazon.com/connect/latest/adminguide/setup-email-channel.html">Email</a>, and
+    #   <p>The resource to which the attached file is (being) uploaded to. The supported resources are <a href="https://docs.aws.amazon.com/connect/latest/adminguide/cases.html">Cases</a>, <a href="https://docs.aws.amazon.com/connect/latest/adminguide/setup-email-channel.html">Email</a>, and 
     #       <a href="https://docs.aws.amazon.com/connect/latest/adminguide/concepts-getting-started-tasks.html">Task</a>.</p>
     #            <note>
     #               <p>This value must be a valid ARN.</p>
@@ -1702,7 +1702,7 @@ module Aws::Connect
       include ::Smithy::Schema::Structure
     end
 
-    # <p>This API is in preview release for Connect Customer and is subject to change. To
+    # <p>This API is in preview release for Connect Customer and is subject to change. To 
     # request access to this API, contact Amazon Web Services Support.</p>
     #          <p>Information about an authentication profile. An authentication profile is a resource that stores the
     #    authentication settings for users in your contact center. You use authentication profiles to set up IP address range
@@ -1790,7 +1790,7 @@ module Aws::Connect
       end
     end
 
-    # <p>This API is in preview release for Connect Customer and is subject to change. To
+    # <p>This API is in preview release for Connect Customer and is subject to change. To 
     # request access to this API, contact Amazon Web Services Support.</p>
     #          <p>A summary of a given authentication profile.</p>
     # @!attribute id
@@ -5762,8 +5762,8 @@ module Aws::Connect
     #   <p>Values that enable you to categorize your predefined attributes. You can use them in custom UI elements across the Connect Customer admin website.</p>
     #   @return [Array<String>]
     # @!attribute attribute_configuration
-    #   <p>Custom metadata that is associated to predefined attributes to control behavior
-    #   in upstream services, such as controlling
+    #   <p>Custom metadata that is associated to predefined attributes to control behavior 
+    #   in upstream services, such as controlling 
     #   how a predefined attribute should be displayed in the Connect Customer admin website.</p>
     #   @return [Types::InputPredefinedAttributeConfiguration]
     class CreatePredefinedAttributeRequest < Struct.new(
@@ -5788,7 +5788,7 @@ module Aws::Connect
     #   <p>The description of the prompt.</p>
     #   @return [String]
     # @!attribute s3_uri
-    #   <p>The URI for the S3 bucket where the prompt is stored. You can provide S3 pre-signed URLs returned by the
+    #   <p>The URI for the S3 bucket where the prompt is stored. You can provide S3 pre-signed URLs returned by the 
     #   <a href="https://docs.aws.amazon.com/connect/latest/APIReference/API_GetPromptFile.html">GetPromptFile</a>
     #    API instead of providing S3 URIs.</p>
     #   @return [String]
@@ -6205,7 +6205,7 @@ module Aws::Connect
     #   <p>The default values for fields when a task is created by referencing this template.</p>
     #   @return [Types::TaskTemplateDefaults]
     # @!attribute status
-    #   <p>Marks a template as <code>ACTIVE</code> or <code>INACTIVE</code> for a task to refer to it.
+    #   <p>Marks a template as <code>ACTIVE</code> or <code>INACTIVE</code> for a task to refer to it. 
     #   Tasks can only be created from <code>ACTIVE</code> templates.
     #   If a template is marked as <code>INACTIVE</code>, then a task that refers to this template cannot be created. </p>
     #   @return [String]
@@ -6645,7 +6645,7 @@ module Aws::Connect
     #   <p>A unique name of the custom vocabulary.</p>
     #   @return [String]
     # @!attribute language_code
-    #   <p>The language code of the vocabulary entries. For a list of languages and their corresponding language codes, see
+    #   <p>The language code of the vocabulary entries. For a list of languages and their corresponding language codes, see 
     #   <a href="https://docs.aws.amazon.com/transcribe/latest/dg/transcribe-whatis.html">What is Amazon Transcribe?</a>
     #            </p>
     #   @return [String]
@@ -7529,7 +7529,7 @@ module Aws::Connect
     #   <p>The identifier of the Connect Customer instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>
     #   @return [String]
     # @!attribute language_code
-    #   <p>The language code of the vocabulary entries. For a list of languages and their corresponding language codes, see
+    #   <p>The language code of the vocabulary entries. For a list of languages and their corresponding language codes, see 
     #   <a href="https://docs.aws.amazon.com/transcribe/latest/dg/transcribe-whatis.html">What is Amazon Transcribe?</a>
     #            </p>
     #   @return [String]
@@ -13217,7 +13217,7 @@ module Aws::Connect
     #         <code>AGENTS_ONLINE</code> metric.</p>
     #               </li>
     #               <li>
-    #                  <p>If you group by <code>SUBTYPE</code> or <code>VALIDATION_TEST_TYPE</code> as secondary grouping then you must include <code>QUEUE</code> as
+    #                  <p>If you group by <code>SUBTYPE</code> or <code>VALIDATION_TEST_TYPE</code> as secondary grouping then you must include <code>QUEUE</code> as 
     #        primary grouping and use Queue as filter</p>
     #               </li>
     #               <li>
@@ -13345,7 +13345,7 @@ module Aws::Connect
     #            </dl>
     #   @return [Array<Types::CurrentMetric>]
     # @!attribute next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     #            <p>The token expires after 5 minutes from the time it is created. Subsequent requests that use
     #      the token must use the same request parameters as the request that generated the token.</p>
@@ -13430,7 +13430,7 @@ module Aws::Connect
     #            <p>Currently tagging is only supported on the resources that are passed in the filter.</p>
     #   @return [Types::UserDataFilters]
     # @!attribute next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     #   @return [String]
     # @!attribute max_results
@@ -13890,7 +13890,7 @@ module Aws::Connect
     #            </dl>
     #   @return [Array<Types::HistoricalMetric>]
     # @!attribute next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     #   @return [String]
     # @!attribute max_results
@@ -15625,7 +15625,7 @@ module Aws::Connect
     #            </dl>
     #   @return [Array<Types::MetricV2>]
     # @!attribute next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     #   @return [String]
     # @!attribute max_results
@@ -15750,7 +15750,7 @@ module Aws::Connect
     #   <p>Fields that are part of the template.</p>
     #   @return [Array<Types::TaskTemplateField>]
     # @!attribute status
-    #   <p>Marks a template as <code>ACTIVE</code> or <code>INACTIVE</code> for a task to refer to it.
+    #   <p>Marks a template as <code>ACTIVE</code> or <code>INACTIVE</code> for a task to refer to it. 
     #   Tasks can only be created from <code>ACTIVE</code> templates.
     #   If a template is marked as <code>INACTIVE</code>, then a task that refers to this template cannot be created.</p>
     #   @return [String]
@@ -17384,7 +17384,7 @@ module Aws::Connect
     #   <p>The identifier of the Connect Customer instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>
     #   @return [String]
     # @!attribute next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     #   @return [String]
     # @!attribute max_results
@@ -17426,7 +17426,7 @@ module Aws::Connect
     #   <p>The identifier of the dataset to get the association status.</p>
     #   @return [String]
     # @!attribute next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     #   @return [String]
     # @!attribute max_results
@@ -17464,7 +17464,7 @@ module Aws::Connect
     #   <p>The identifier of the Connect Customer instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>
     #   @return [String]
     # @!attribute next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     #   @return [String]
     # @!attribute max_results
@@ -17500,7 +17500,7 @@ module Aws::Connect
     #   <p>The identifier of the Connect Customer instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>
     #   @return [String]
     # @!attribute next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     #   @return [String]
     # @!attribute max_results
@@ -17541,7 +17541,7 @@ module Aws::Connect
     #   <p>The maximum number of results to return per page. </p>
     #   @return [Integer]
     # @!attribute next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     #   @return [String]
     class ListAssociatedContactsRequest < Struct.new(
@@ -17577,7 +17577,7 @@ module Aws::Connect
     #   <p>The maximum number of results to return per page. The default MaxResult size is 100.</p>
     #   @return [Integer]
     # @!attribute next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     #   @return [String]
     class ListAttachedFilesConfigurationsRequest < Struct.new(
@@ -17612,7 +17612,7 @@ module Aws::Connect
     #   <p>The maximum number of results to return per page.</p>
     #   @return [Integer]
     # @!attribute next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     #   @return [String]
     class ListAuthenticationProfilesRequest < Struct.new(
@@ -17644,7 +17644,7 @@ module Aws::Connect
     #   <p>The identifier of the Connect Customer instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>
     #   @return [String]
     # @!attribute next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     #   @return [String]
     # @!attribute max_results
@@ -17688,7 +17688,7 @@ module Aws::Connect
     #   <p>The identifier of the parent hours of operation.</p>
     #   @return [String]
     # @!attribute next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     #   @return [String]
     # @!attribute max_results
@@ -17752,7 +17752,7 @@ module Aws::Connect
     #   <p>The identifier of the contact in this instance of Connect Customer. </p>
     #   @return [String]
     # @!attribute next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     #            <important>
     #               <p>This is not expected to be set because the value returned in the previous response is always null.</p>
@@ -17793,7 +17793,7 @@ module Aws::Connect
     #   <p>The identifier of the flow.</p>
     #   @return [String]
     # @!attribute next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     #   @return [String]
     # @!attribute max_results
@@ -17832,7 +17832,7 @@ module Aws::Connect
     #   <p>The identifier of the flow module.</p>
     #   @return [String]
     # @!attribute next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     #   @return [String]
     # @!attribute max_results
@@ -17871,7 +17871,7 @@ module Aws::Connect
     #   <p>The identifier of the flow module.</p>
     #   @return [String]
     # @!attribute next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     #   @return [String]
     # @!attribute max_results
@@ -17907,7 +17907,7 @@ module Aws::Connect
     #   <p>The identifier of the Connect Customer instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>
     #   @return [String]
     # @!attribute next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     #   @return [String]
     # @!attribute max_results
@@ -17949,7 +17949,7 @@ module Aws::Connect
     #   <p>The identifier of the flow.</p>
     #   @return [String]
     # @!attribute next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     #   @return [String]
     # @!attribute max_results
@@ -17988,7 +17988,7 @@ module Aws::Connect
     #   <p>The type of flow.</p>
     #   @return [Array<String>]
     # @!attribute next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     #   @return [String]
     # @!attribute max_results
@@ -18030,7 +18030,7 @@ module Aws::Connect
     #   <p>The type of reference.</p>
     #   @return [Array<String>]
     # @!attribute next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     #            <important>
     #               <p>This is not expected to be set, because the value returned in the previous response is always null.</p>
@@ -18240,7 +18240,7 @@ module Aws::Connect
     #   <p>The identifier of the Connect Customer instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>
     #   @return [String]
     # @!attribute language_code
-    #   <p>The language code of the vocabulary entries. For a list of languages and their corresponding language codes, see
+    #   <p>The language code of the vocabulary entries. For a list of languages and their corresponding language codes, see 
     #   <a href="https://docs.aws.amazon.com/transcribe/latest/dg/transcribe-whatis.html">What is Amazon Transcribe?</a>
     #            </p>
     #   @return [String]
@@ -18248,7 +18248,7 @@ module Aws::Connect
     #   <p>The maximum number of results to return per page.</p>
     #   @return [Integer]
     # @!attribute next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     #   @return [String]
     class ListDefaultVocabulariesRequest < Struct.new(
@@ -18332,7 +18332,7 @@ module Aws::Connect
     #   <p>The maximum number of results to return per page.</p>
     #   @return [Integer]
     # @!attribute next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     #   @return [String]
     class ListEvaluationFormAIVersionsRequest < Struct.new(
@@ -18371,7 +18371,7 @@ module Aws::Connect
     #   <p>The maximum number of results to return per page.</p>
     #   @return [Integer]
     # @!attribute next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     #   @return [String]
     class ListEvaluationFormVersionsRequest < Struct.new(
@@ -18407,7 +18407,7 @@ module Aws::Connect
     #   <p>The maximum number of results to return per page.</p>
     #   @return [Integer]
     # @!attribute next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     #   @return [String]
     class ListEvaluationFormsRequest < Struct.new(
@@ -18477,7 +18477,7 @@ module Aws::Connect
     #   <p>A valid resource type.</p>
     #   @return [String]
     # @!attribute next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     #   @return [String]
     # @!attribute max_results
@@ -18561,7 +18561,7 @@ module Aws::Connect
     #   <p>The identifier of the Connect Customer instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>
     #   @return [String]
     # @!attribute next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     #   @return [String]
     # @!attribute max_results
@@ -18596,7 +18596,7 @@ module Aws::Connect
     #   <p>The identifier of the Connect Customer instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>
     #   @return [String]
     # @!attribute next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     #   @return [String]
     # @!attribute max_results
@@ -18634,7 +18634,7 @@ module Aws::Connect
     #   <p>A valid resource type.</p>
     #   @return [String]
     # @!attribute next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     #   @return [String]
     # @!attribute max_results
@@ -18667,7 +18667,7 @@ module Aws::Connect
     end
 
     # @!attribute next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     #   @return [String]
     # @!attribute max_results
@@ -18704,7 +18704,7 @@ module Aws::Connect
     #   <p>The integration type.</p>
     #   @return [String]
     # @!attribute next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     #   @return [String]
     # @!attribute max_results
@@ -18744,7 +18744,7 @@ module Aws::Connect
     #   <p>The identifier of the Connect Customer instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>
     #   @return [String]
     # @!attribute next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     #   @return [String]
     # @!attribute max_results
@@ -18779,7 +18779,7 @@ module Aws::Connect
     #   <p>The identifier of the Connect Customer instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>
     #   @return [String]
     # @!attribute next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     #   @return [String]
     # @!attribute max_results
@@ -18821,7 +18821,7 @@ module Aws::Connect
     #   <p>The maximum number of results to return per page.</p>
     #   @return [Integer]
     # @!attribute next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     #   @return [String]
     class ListMetricsRequest < Struct.new(
@@ -18899,7 +18899,7 @@ module Aws::Connect
     #   <p>The ISO country code.</p>
     #   @return [Array<String>]
     # @!attribute next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     #   @return [String]
     # @!attribute max_results
@@ -18994,7 +18994,7 @@ module Aws::Connect
     #   <p>The maximum number of results to return per page.</p>
     #   @return [Integer]
     # @!attribute next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     #   @return [String]
     # @!attribute phone_number_country_codes
@@ -19113,7 +19113,7 @@ module Aws::Connect
     #   <p>The identifier for the queue.</p>
     #   @return [String]
     # @!attribute next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     #   @return [String]
     # @!attribute max_results
@@ -19160,7 +19160,7 @@ module Aws::Connect
     #   <p>The identifier for the queue.</p>
     #   @return [String]
     # @!attribute next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     #   @return [String]
     # @!attribute max_results
@@ -19207,7 +19207,7 @@ module Aws::Connect
     #   <p>The type of queue.</p>
     #   @return [Array<String>]
     # @!attribute next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     #   @return [String]
     # @!attribute max_results
@@ -19243,7 +19243,7 @@ module Aws::Connect
     #   <p>The identifier of the Connect Customer instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance. Both Instance ID and Instance ARN are supported input formats. </p>
     #   @return [String]
     # @!attribute next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     #   @return [String]
     # @!attribute max_results
@@ -19289,7 +19289,7 @@ module Aws::Connect
     #   <p>The maximum number of results to return per page.</p>
     #   @return [Integer]
     # @!attribute next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     #   @return [String]
     # @!attribute output_type
@@ -19347,7 +19347,7 @@ module Aws::Connect
     #   <p>The identifier of the routing profile.</p>
     #   @return [String]
     # @!attribute next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     #   @return [String]
     # @!attribute max_results
@@ -19394,7 +19394,7 @@ module Aws::Connect
     #   <p>The identifier of the routing profile.</p>
     #   @return [String]
     # @!attribute next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     #   @return [String]
     # @!attribute max_results
@@ -19438,7 +19438,7 @@ module Aws::Connect
     #   <p>The identifier of the Connect Customer instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>
     #   @return [String]
     # @!attribute next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     #   @return [String]
     # @!attribute max_results
@@ -19482,7 +19482,7 @@ module Aws::Connect
     #   <p>The maximum number of results to return per page.</p>
     #   @return [Integer]
     # @!attribute next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     #   @return [String]
     class ListRulesRequest < Struct.new(
@@ -19516,7 +19516,7 @@ module Aws::Connect
     #   <p>The identifier of the Connect Customer instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>
     #   @return [String]
     # @!attribute next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     #   @return [String]
     # @!attribute max_results
@@ -19554,7 +19554,7 @@ module Aws::Connect
     #   <p>The identifier of the Connect Customer instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>
     #   @return [String]
     # @!attribute next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     #   @return [String]
     # @!attribute max_results
@@ -19601,7 +19601,7 @@ module Aws::Connect
     #   <p>The identifier of the Connect Customer instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>
     #   @return [String]
     # @!attribute next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     #   @return [String]
     # @!attribute max_results
@@ -19696,7 +19696,7 @@ module Aws::Connect
     #   <p>The identifier of the Connect Customer instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>
     #   @return [String]
     # @!attribute next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     #   @return [String]
     # @!attribute max_results
@@ -19741,7 +19741,7 @@ module Aws::Connect
     #   <p>The identifier of the Connect Customer instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>
     #   @return [String]
     # @!attribute next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     #   @return [String]
     # @!attribute max_results
@@ -19799,7 +19799,7 @@ module Aws::Connect
     #   <p>The identifier of the Connect Customer instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>
     #   @return [String]
     # @!attribute next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     #            <important>
     #               <p>It is not expected that you set this because the value returned in the previous response is always null.</p>
@@ -19812,7 +19812,7 @@ module Aws::Connect
     #            </important>
     #   @return [Integer]
     # @!attribute status
-    #   <p>Marks a template as <code>ACTIVE</code> or <code>INACTIVE</code> for a task to refer to it.
+    #   <p>Marks a template as <code>ACTIVE</code> or <code>INACTIVE</code> for a task to refer to it. 
     #   Tasks can only be created from <code>ACTIVE</code> templates.
     #   If a template is marked as <code>INACTIVE</code>, then a task that refers to this template cannot be created.</p>
     #   @return [String]
@@ -19862,7 +19862,7 @@ module Aws::Connect
     #   <p>Filter execution records by status.</p>
     #   @return [String]
     # @!attribute next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     #   @return [String]
     # @!attribute max_results
@@ -19915,7 +19915,7 @@ module Aws::Connect
     #   <p>Filter executions by status.</p>
     #   @return [String]
     # @!attribute next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     #   @return [String]
     # @!attribute max_results
@@ -19955,7 +19955,7 @@ module Aws::Connect
     #   <p>The identifier of the Amazon Connect instance.</p>
     #   @return [String]
     # @!attribute next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     #   @return [String]
     # @!attribute max_results
@@ -19995,7 +19995,7 @@ module Aws::Connect
     #   <p>The maximum number of results to return per page.</p>
     #   @return [Integer]
     # @!attribute next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     #   @return [String]
     class ListTrafficDistributionGroupUsersRequest < Struct.new(
@@ -20027,7 +20027,7 @@ module Aws::Connect
     #   <p>The maximum number of results to return per page.</p>
     #   @return [Integer]
     # @!attribute next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     #   @return [String]
     # @!attribute instance_id
@@ -20066,7 +20066,7 @@ module Aws::Connect
     #   <p>The identifier for the integration association.</p>
     #   @return [String]
     # @!attribute next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     #   @return [String]
     # @!attribute max_results
@@ -20102,7 +20102,7 @@ module Aws::Connect
     #   <p>The identifier of the Connect Customer instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>
     #   @return [String]
     # @!attribute next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     #   @return [String]
     # @!attribute max_results
@@ -20223,7 +20223,7 @@ module Aws::Connect
     #   <p>The identifier of the Connect Customer instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>
     #   @return [String]
     # @!attribute next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     #   @return [String]
     # @!attribute max_results
@@ -21856,7 +21856,7 @@ module Aws::Connect
 
     # <p>Configuration information for the timer. After the timer configuration is set, it persists for the duration of
     #    the chat. It persists across new contacts in the chain, for example, transfer contacts.</p>
-    #          <p>For more information about how chat timeouts work, see
+    #          <p>For more information about how chat timeouts work, see 
     #    <a href="https://docs.aws.amazon.com/connect/latest/adminguide/setup-chat-timeouts.html">Set up chat timeouts for human participants</a>. </p>
     # @!attribute participant_role
     #   <p>The role of the participant in the chat conversation.</p>
@@ -21882,7 +21882,7 @@ module Aws::Connect
 
     # <p>The value of the timer. Either the timer action (<code>Unset</code> to delete the timer), or the duration of the
     #    timer in minutes. Only one value can be set.</p>
-    #          <p>For more information about how chat timeouts work, see
+    #          <p>For more information about how chat timeouts work, see 
     #    <a href="https://docs.aws.amazon.com/connect/latest/adminguide/setup-chat-timeouts.html">Set up chat timeouts for human participants</a>. </p>
     # @!attribute participant_timer_action
     #   <p>The timer action. Currently only one value is allowed: <code>Unset</code>. It deletes a timer.</p>
@@ -22168,8 +22168,8 @@ module Aws::Connect
     #   <p>Values that enable you to categorize your predefined attributes. You can use them in custom UI elements across the Connect Customer admin website.</p>
     #   @return [Array<String>]
     # @!attribute attribute_configuration
-    #   <p>Custom metadata that is associated to predefined attributes to control behavior
-    #   in upstream services, such as controlling
+    #   <p>Custom metadata that is associated to predefined attributes to control behavior 
+    #   in upstream services, such as controlling 
     #   how a predefined attribute should be displayed in the Connect Customer admin website.</p>
     #   @return [Types::PredefinedAttributeConfiguration]
     # @!attribute last_modified_time
@@ -23623,7 +23623,7 @@ module Aws::Connect
     # @!attribute by_month_day
     #   <p>Specifies which day of the month the event should occur on (1-31). Used with MONTHLY or YEARLY frequency to schedule events on specific date within a month.</p>
     #            <p> Examples:
-    #   [15] for events on the 15th of each month,
+    #   [15] for events on the 15th of each month, 
     #   [-1] for events on the last day of month. </p>
     #            <p>Note: It does not accept multiple values in the same list. If a specified day doesn't exist in a particular month (e.g., day 31 in February), the event will be skipped for that month. This field cannot be used simultaneously with ByWeekdayOccurrence as they represent different scheduling approaches (specific dates vs. relative weekday positions).</p>
     #   @return [Array<Integer>]
@@ -24864,7 +24864,7 @@ module Aws::Connect
     #   <p>The maximum number of results to return per page.</p>
     #   @return [Integer]
     # @!attribute next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     #   @return [String]
     class SearchAvailablePhoneNumbersRequest < Struct.new(
@@ -24900,7 +24900,7 @@ module Aws::Connect
     #   <p>The identifier of the Connect Customer instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>
     #   @return [String]
     # @!attribute next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     #   @return [String]
     # @!attribute max_results
@@ -25310,7 +25310,7 @@ module Aws::Connect
     #   <p>The maximum number of results to return per page.</p>
     #   @return [Integer]
     # @!attribute next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     #   @return [String]
     # @!attribute search_criteria
@@ -25354,7 +25354,7 @@ module Aws::Connect
     #   <p>The identifier of the Connect Customer instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>
     #   @return [String]
     # @!attribute next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     #   @return [String]
     # @!attribute max_results
@@ -25449,7 +25449,7 @@ module Aws::Connect
     #   <p>The identifier of the Connect Customer instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>
     #   @return [String]
     # @!attribute next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     #   @return [String]
     # @!attribute max_results
@@ -25496,7 +25496,7 @@ module Aws::Connect
     #   <p>The identifier of the Connect Customer instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>
     #   @return [String]
     # @!attribute next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     #   @return [String]
     # @!attribute max_results
@@ -25634,7 +25634,7 @@ module Aws::Connect
     #   <p>The identifier of the Connect Customer instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>
     #   @return [String]
     # @!attribute next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     #   @return [String]
     # @!attribute max_results
@@ -25681,7 +25681,7 @@ module Aws::Connect
     #   <p>The identifier of the Connect Customer instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>
     #   @return [String]
     # @!attribute next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     #   @return [String]
     # @!attribute max_results
@@ -25733,7 +25733,7 @@ module Aws::Connect
     #   <p>The identifier of the Connect Customer instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>
     #   @return [String]
     # @!attribute next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     #   @return [String]
     # @!attribute max_results
@@ -25863,7 +25863,7 @@ module Aws::Connect
     #   <p>The identifier of the Connect Customer instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>
     #   @return [String]
     # @!attribute next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     #   @return [String]
     # @!attribute max_results
@@ -25918,7 +25918,7 @@ module Aws::Connect
     #   <p>The maximum number of results to return per page.</p>
     #   @return [Integer]
     # @!attribute next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     #   @return [String]
     # @!attribute search_criteria
@@ -25962,7 +25962,7 @@ module Aws::Connect
     #   <p>The identifier of the Connect Customer instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>
     #   @return [String]
     # @!attribute next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     #   @return [String]
     # @!attribute max_results
@@ -26017,7 +26017,7 @@ module Aws::Connect
     #   <p>The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.</p>
     #   @return [String]
     # @!attribute next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     #   @return [String]
     # @!attribute max_results
@@ -26112,7 +26112,7 @@ module Aws::Connect
     #   <p>The identifier of the Connect Customer instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>
     #   @return [String]
     # @!attribute next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     #   @return [String]
     # @!attribute max_results
@@ -26215,7 +26215,7 @@ module Aws::Connect
     #   <p>The maximum number of results to return per page.</p>
     #   @return [Integer]
     # @!attribute next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     #   @return [String]
     # @!attribute state
@@ -26225,7 +26225,7 @@ module Aws::Connect
     #   <p>The starting pattern of the name of the vocabulary.</p>
     #   @return [String]
     # @!attribute language_code
-    #   <p>The language code of the vocabulary entries. For a list of languages and their corresponding language codes, see
+    #   <p>The language code of the vocabulary entries. For a list of languages and their corresponding language codes, see 
     #   <a href="https://docs.aws.amazon.com/transcribe/latest/dg/transcribe-whatis.html">What is Amazon Transcribe?</a>
     #            </p>
     #   @return [String]
@@ -26739,8 +26739,8 @@ module Aws::Connect
 
     # <p>Information about the send in-app notification action.</p>
     # @!attribute content
-    #   <p>Notification content. Supports variable injection. For more information, see
-    #   <a href="https://docs.aws.amazon.com/connect/latest/adminguide/contact-lens-variable-injection.html">JSONPath reference</a>
+    #   <p>Notification content. Supports variable injection. For more information, see 
+    #   <a href="https://docs.aws.amazon.com/connect/latest/adminguide/contact-lens-variable-injection.html">JSONPath reference</a> 
     #   in the <i>Connect Customer Administrators Guide</i>.</p>
     #   @return [Hash<String, String>]
     # @!attribute recipient
@@ -26768,13 +26768,13 @@ module Aws::Connect
     #   <p>Notification delivery method.</p>
     #   @return [String]
     # @!attribute subject
-    #   <p>The subject of the email if the delivery method is <code>EMAIL</code>. Supports variable injection. For more information, see
-    #   <a href="https://docs.aws.amazon.com/connect/latest/adminguide/contact-lens-variable-injection.html">JSONPath reference</a>
+    #   <p>The subject of the email if the delivery method is <code>EMAIL</code>. Supports variable injection. For more information, see 
+    #   <a href="https://docs.aws.amazon.com/connect/latest/adminguide/contact-lens-variable-injection.html">JSONPath reference</a> 
     #   in the <i>Connect Customer Administrators Guide</i>.</p>
     #   @return [String]
     # @!attribute content
-    #   <p>Notification content. Supports variable injection. For more information, see
-    #   <a href="https://docs.aws.amazon.com/connect/latest/adminguide/contact-lens-variable-injection.html">JSONPath reference</a>
+    #   <p>Notification content. Supports variable injection. For more information, see 
+    #   <a href="https://docs.aws.amazon.com/connect/latest/adminguide/contact-lens-variable-injection.html">JSONPath reference</a> 
     #   in the <i>Connect Customer Administrators Guide</i>.</p>
     #   @return [String]
     # @!attribute content_type
@@ -28720,13 +28720,13 @@ module Aws::Connect
 
     # <p>Information about the task action.</p>
     # @!attribute name
-    #   <p>The name. Supports variable injection. For more information, see
-    #   <a href="https://docs.aws.amazon.com/connect/latest/adminguide/contact-lens-variable-injection.html">JSONPath reference</a>
+    #   <p>The name. Supports variable injection. For more information, see 
+    #   <a href="https://docs.aws.amazon.com/connect/latest/adminguide/contact-lens-variable-injection.html">JSONPath reference</a> 
     #   in the <i>Connect Customer Administrators Guide</i>.</p>
     #   @return [String]
     # @!attribute description
-    #   <p>The description. Supports variable injection. For more information, see
-    #   <a href="https://docs.aws.amazon.com/connect/latest/adminguide/contact-lens-variable-injection.html">JSONPath reference</a>
+    #   <p>The description. Supports variable injection. For more information, see 
+    #   <a href="https://docs.aws.amazon.com/connect/latest/adminguide/contact-lens-variable-injection.html">JSONPath reference</a> 
     #   in the <i>Connect Customer Administrators Guide</i>.</p>
     #   @return [String]
     # @!attribute contact_flow_id
@@ -28877,7 +28877,7 @@ module Aws::Connect
     #   <p>The description of the task template.</p>
     #   @return [String]
     # @!attribute status
-    #   <p>Marks a template as <code>ACTIVE</code> or <code>INACTIVE</code> for a task to refer to it.
+    #   <p>Marks a template as <code>ACTIVE</code> or <code>INACTIVE</code> for a task to refer to it. 
     #   Tasks can only be created from <code>ACTIVE</code> templates.
     #   If a template is marked as <code>INACTIVE</code>, then a task that refers to this template cannot be created.</p>
     #   @return [String]
@@ -29246,8 +29246,8 @@ module Aws::Connect
     #      <code>DeleteTrafficDistributionGroup</code> API. The default traffic distribution group is deleted as
     #      part of the process for deleting a replica.</p>
     #            <note>
-    #               <p>The <code>SignInConfig</code> distribution is available only on a
-    #   default <code>TrafficDistributionGroup</code> (see the <code>IsDefault</code> parameter in the
+    #               <p>The <code>SignInConfig</code> distribution is available only on a 
+    #   default <code>TrafficDistributionGroup</code> (see the <code>IsDefault</code> parameter in the 
     #   <a href="https://docs.aws.amazon.com/connect/latest/APIReference/API_TrafficDistributionGroup.html">TrafficDistributionGroup</a>
     #    data type). If you call
     #       <code>UpdateTrafficDistribution</code> with a modified <code>SignInConfig</code> and a non-default <code>TrafficDistributionGroup</code>,
@@ -30867,8 +30867,8 @@ module Aws::Connect
     #   <p>Values that enable you to categorize your predefined attributes. You can use them in custom UI elements across the Connect Customer admin website.</p>
     #   @return [Array<String>]
     # @!attribute attribute_configuration
-    #   <p>Custom metadata that is associated to predefined attributes to control behavior
-    #   in upstream services, such as controlling
+    #   <p>Custom metadata that is associated to predefined attributes to control behavior 
+    #   in upstream services, such as controlling 
     #   how a predefined attribute should be displayed in the Connect Customer admin website.</p>
     #   @return [Types::InputPredefinedAttributeConfiguration]
     class UpdatePredefinedAttributeRequest < Struct.new(
@@ -30896,7 +30896,7 @@ module Aws::Connect
     #   <p>A description of the prompt.</p>
     #   @return [String]
     # @!attribute s3_uri
-    #   <p>The URI for the S3 bucket where the prompt is stored. You can provide S3 pre-signed URLs returned by the
+    #   <p>The URI for the S3 bucket where the prompt is stored. You can provide S3 pre-signed URLs returned by the 
     #   <a href="https://docs.aws.amazon.com/connect/latest/APIReference/API_GetPromptFile.html">GetPromptFile</a>
     #    API instead of providing S3 URIs.</p>
     #   @return [String]
@@ -31312,7 +31312,7 @@ module Aws::Connect
     #   <p>The default values for fields when a task is created by referencing this template.</p>
     #   @return [Types::TaskTemplateDefaults]
     # @!attribute status
-    #   <p>Marks a template as <code>ACTIVE</code> or <code>INACTIVE</code> for a task to refer to it.
+    #   <p>Marks a template as <code>ACTIVE</code> or <code>INACTIVE</code> for a task to refer to it. 
     #   Tasks can only be created from <code>ACTIVE</code> templates.
     #   If a template is marked as <code>INACTIVE</code>, then a task that refers to this template cannot be created.</p>
     #            <p>Although this parameter is marked as optional, the service requires it when calling <code>UpdateTaskTemplate</code>.</p>
@@ -31371,7 +31371,7 @@ module Aws::Connect
     #   <p>Fields that are part of the template.</p>
     #   @return [Array<Types::TaskTemplateField>]
     # @!attribute status
-    #   <p>Marks a template as <code>ACTIVE</code> or <code>INACTIVE</code> for a task to refer to it.
+    #   <p>Marks a template as <code>ACTIVE</code> or <code>INACTIVE</code> for a task to refer to it. 
     #   Tasks can only be created from <code>ACTIVE</code> templates.
     #   If a template is marked as <code>INACTIVE</code>, then a task that refers to this template cannot be created.</p>
     #   @return [String]
@@ -32938,7 +32938,7 @@ module Aws::Connect
     #   <p>The Amazon Resource Name (ARN) of the custom vocabulary.</p>
     #   @return [String]
     # @!attribute language_code
-    #   <p>The language code of the vocabulary entries. For a list of languages and their corresponding language codes, see
+    #   <p>The language code of the vocabulary entries. For a list of languages and their corresponding language codes, see 
     #   <a href="https://docs.aws.amazon.com/transcribe/latest/dg/transcribe-whatis.html">What is Amazon Transcribe?</a>
     #            </p>
     #   @return [String]
@@ -32988,7 +32988,7 @@ module Aws::Connect
     #   <p>The Amazon Resource Name (ARN) of the custom vocabulary.</p>
     #   @return [String]
     # @!attribute language_code
-    #   <p>The language code of the vocabulary entries. For a list of languages and their corresponding language codes, see
+    #   <p>The language code of the vocabulary entries. For a list of languages and their corresponding language codes, see 
     #   <a href="https://docs.aws.amazon.com/transcribe/latest/dg/transcribe-whatis.html">What is Amazon Transcribe?</a>
     #            </p>
     #   @return [String]

@@ -135,8 +135,8 @@ module Aws::Imagebuilder
     #   <p>The tags to apply to AMIs distributed to this Region.</p>
     #   @return [Hash<String, String>]
     # @!attribute kms_key_id
-    #   <p>The Amazon Resource Name (ARN) that uniquely identifies the KMS key used to encrypt the distributed image.
-    #   			This can be either the Key ARN or the Alias ARN. For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN">Key identifiers (KeyId)</a>
+    #   <p>The Amazon Resource Name (ARN) that uniquely identifies the KMS key used to encrypt the distributed image. 
+    #   			This can be either the Key ARN or the Alias ARN. For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN">Key identifiers (KeyId)</a> 
     #   			in the <i>Key Management Service Developer Guide</i>.</p>
     #   @return [String]
     # @!attribute launch_permission
@@ -161,7 +161,7 @@ module Aws::Imagebuilder
     # 			policy, Image Builder disables the pipeline after 5 consecutive failed scheduled
     # 			builds.</p>
     # @!attribute failure_count
-    #   <p>The number of consecutive scheduled image pipeline executions that must fail before Image Builder
+    #   <p>The number of consecutive scheduled image pipeline executions that must fail before Image Builder 
     #   			automatically disables the pipeline.</p>
     #   @return [Integer]
     class AutoDisablePolicy < Struct.new(
@@ -303,7 +303,7 @@ module Aws::Imagebuilder
     #   <p>The description of the component.</p>
     #   @return [String]
     # @!attribute change_description
-    #   <p>Describes what change has been made in this version of the component,
+    #   <p>Describes what change has been made in this version of the component, 
     #   			or what makes this version different from other versions of the component.</p>
     #   @return [String]
     # @!attribute type
@@ -322,7 +322,7 @@ module Aws::Imagebuilder
     #   <p>Describes the current status of the component.</p>
     #   @return [Types::ComponentState]
     # @!attribute parameters
-    #   <p>Contains parameter details for each of the parameters that the component document
+    #   <p>Contains parameter details for each of the parameters that the component document 
     #   			defined for the component.</p>
     #   @return [Array<Types::ComponentParameterDetail>]
     # @!attribute owner
@@ -334,7 +334,7 @@ module Aws::Imagebuilder
     #   <p>Component data contains the YAML document content for the component.</p>
     #   @return [String]
     # @!attribute kms_key_id
-    #   <p>The KMS key identifier used to encrypt the component. This can be either the Key ARN or the Alias ARN. For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN">Key identifiers (KeyId)</a>
+    #   <p>The KMS key identifier used to encrypt the component. This can be either the Key ARN or the Alias ARN. For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN">Key identifiers (KeyId)</a> 
     #   			in the <i>Key Management Service Developer Guide</i>.</p>
     #   @return [String]
     # @!attribute encrypted
@@ -349,11 +349,11 @@ module Aws::Imagebuilder
     #   <p>The tags that apply to the component.</p>
     #   @return [Hash<String, String>]
     # @!attribute publisher
-    #   <p>Contains the name of the publisher if this is a third-party component. Otherwise,
+    #   <p>Contains the name of the publisher if this is a third-party component. Otherwise, 
     #   			this property is empty.</p>
     #   @return [String]
     # @!attribute obfuscate
-    #   <p>Indicates whether component source is hidden from view in the console, and from
+    #   <p>Indicates whether component source is hidden from view in the console, and from 
     #   			component detail results for API, CLI, or SDK operations.</p>
     #   @return [Boolean]
     # @!attribute product_codes
@@ -549,11 +549,11 @@ module Aws::Imagebuilder
     #   <p>The tags that apply to the component.</p>
     #   @return [Hash<String, String>]
     # @!attribute publisher
-    #   <p>Contains the name of the publisher if this is a third-party component. Otherwise,
+    #   <p>Contains the name of the publisher if this is a third-party component. Otherwise, 
     #   			this property is empty.</p>
     #   @return [String]
     # @!attribute obfuscate
-    #   <p>Indicates whether component source is hidden from view in the console, and from
+    #   <p>Indicates whether component source is hidden from view in the console, and from 
     #   			component detail results for API, CLI, or SDK operations.</p>
     #   @return [Boolean]
     class ComponentSummary < Struct.new(
@@ -586,11 +586,11 @@ module Aws::Imagebuilder
     # @!attribute arn
     #   <p>The Amazon Resource Name (ARN) of the component.</p>
     #            <note>
-    #               <p>Semantic versioning is included in each object's Amazon Resource Name (ARN),
+    #               <p>Semantic versioning is included in each object's Amazon Resource Name (ARN), 
     #   	at the level that applies to that object as follows:</p>
     #               <ol>
     #                  <li>
-    #                     <p>Versionless ARNs and Name ARNs do not include specific values in any of the nodes. The nodes are
+    #                     <p>Versionless ARNs and Name ARNs do not include specific values in any of the nodes. The nodes are 
     #   				either left off entirely, or they are specified as wildcards, for example: x.x.x.</p>
     #                  </li>
     #                  <li>
@@ -608,19 +608,19 @@ module Aws::Imagebuilder
     # @!attribute version
     #   <p>The semantic version of the component.</p>
     #            <note>
-    #               <p>The semantic version has four nodes: <major>.<minor>.<patch>/<build>.
+    #               <p>The semantic version has four nodes: <major>.<minor>.<patch>/<build>. 
     #   	You can assign values for the first three, and can filter on all of them.</p>
     #               <p>
-    #                  <b>Assignment:</b> For the first three nodes, you can assign any positive integer value, including
-    #   	zero. The upper limit is 2^30-1, or 1073741823, for each node. Image Builder automatically assigns the
+    #                  <b>Assignment:</b> For the first three nodes, you can assign any positive integer value, including 
+    #   	zero. The upper limit is 2^30-1, or 1073741823, for each node. Image Builder automatically assigns the 
     #   	build number to the fourth node.</p>
     #               <p>
-    #                  <b>Patterns:</b> You can use any numeric pattern that adheres to the assignment requirements for
-    #   	the nodes that you can assign. For example, you might choose a software version pattern, such as 1.0.0, or
+    #                  <b>Patterns:</b> You can use any numeric pattern that adheres to the assignment requirements for 
+    #   	the nodes that you can assign. For example, you might choose a software version pattern, such as 1.0.0, or 
     #   	a date, such as 2021.01.01.</p>
     #               <p>
-    #                  <b>Filtering:</b> You can use wildcards (x) to specify the most recent versions or nodes when
-    #   	selecting the base image or components for your recipe. When you use a wildcard in any node, all nodes
+    #                  <b>Filtering:</b> You can use wildcards (x) to specify the most recent versions or nodes when 
+    #   	selecting the base image or components for your recipe. When you use a wildcard in any node, all nodes 
     #   	to the right of the first wildcard must also be wildcards.</p>
     #            </note>
     #   @return [String]
@@ -719,11 +719,11 @@ module Aws::Imagebuilder
     # @!attribute arn
     #   <p>The Amazon Resource Name (ARN) of the container recipe.</p>
     #            <note>
-    #               <p>Semantic versioning is included in each object's Amazon Resource Name (ARN),
+    #               <p>Semantic versioning is included in each object's Amazon Resource Name (ARN), 
     #   	at the level that applies to that object as follows:</p>
     #               <ol>
     #                  <li>
-    #                     <p>Versionless ARNs and Name ARNs do not include specific values in any of the nodes. The nodes are
+    #                     <p>Versionless ARNs and Name ARNs do not include specific values in any of the nodes. The nodes are 
     #   				either left off entirely, or they are specified as wildcards, for example: x.x.x.</p>
     #                  </li>
     #                  <li>
@@ -754,19 +754,19 @@ module Aws::Imagebuilder
     # @!attribute version
     #   <p>The semantic version of the container recipe.</p>
     #            <note>
-    #               <p>The semantic version has four nodes: <major>.<minor>.<patch>/<build>.
+    #               <p>The semantic version has four nodes: <major>.<minor>.<patch>/<build>. 
     #   	You can assign values for the first three, and can filter on all of them.</p>
     #               <p>
-    #                  <b>Assignment:</b> For the first three nodes, you can assign any positive integer value, including
-    #   	zero. The upper limit is 2^30-1, or 1073741823, for each node. Image Builder automatically assigns the
+    #                  <b>Assignment:</b> For the first three nodes, you can assign any positive integer value, including 
+    #   	zero. The upper limit is 2^30-1, or 1073741823, for each node. Image Builder automatically assigns the 
     #   	build number to the fourth node.</p>
     #               <p>
-    #                  <b>Patterns:</b> You can use any numeric pattern that adheres to the assignment requirements for
-    #   	the nodes that you can assign. For example, you might choose a software version pattern, such as 1.0.0, or
+    #                  <b>Patterns:</b> You can use any numeric pattern that adheres to the assignment requirements for 
+    #   	the nodes that you can assign. For example, you might choose a software version pattern, such as 1.0.0, or 
     #   	a date, such as 2021.01.01.</p>
     #               <p>
-    #                  <b>Filtering:</b> You can use wildcards (x) to specify the most recent versions or nodes when
-    #   	selecting the base image or components for your recipe. When you use a wildcard in any node, all nodes
+    #                  <b>Filtering:</b> You can use wildcards (x) to specify the most recent versions or nodes when 
+    #   	selecting the base image or components for your recipe. When you use a wildcard in any node, all nodes 
     #   	to the right of the first wildcard must also be wildcards.</p>
     #            </note>
     #   @return [String]
@@ -791,7 +791,7 @@ module Aws::Imagebuilder
     #   @return [String]
     # @!attribute kms_key_id
     #   <p>The KMS key that Image Builder uses to encrypt the recipe's Dockerfile template
-    #   			data at rest. This can be either the Key ARN or the Alias ARN. For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN">Key identifiers (KeyId)</a>
+    #   			data at rest. This can be either the Key ARN or the Alias ARN. For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN">Key identifiers (KeyId)</a> 
     #   			in the <i>Key Management Service Developer Guide</i>. If you don't specify a key, Image Builder
     #   			encrypts the template data with a KMS key that Image Builder owns. This key
     #   			isn't used to encrypt the output container image.</p>
@@ -803,8 +803,8 @@ module Aws::Imagebuilder
     #   			and doesn't describe encryption of the output container image.</p>
     #   @return [Boolean]
     # @!attribute parent_image
-    #   <p>The base image for customizations specified in the container recipe. This can
-    #   			contain an Image Builder image resource ARN or a container image URI, for example
+    #   <p>The base image for customizations specified in the container recipe. This can 
+    #   			contain an Image Builder image resource ARN or a container image URI, for example 
     #   			<code>amazonlinux:latest</code>.</p>
     #   @return [String]
     # @!attribute date_created
@@ -867,8 +867,8 @@ module Aws::Imagebuilder
     #   <p>The date when this container recipe was created.</p>
     #   @return [String]
     # @!attribute instance_image
-    #   <p>The base image for a container build and test instance. This can contain an AMI ID
-    #   		or it can specify an Amazon Web Services Systems Manager (SSM) Parameter Store Parameter, prefixed by <code>ssm:</code>,
+    #   <p>The base image for a container build and test instance. This can contain an AMI ID 
+    #   		or it can specify an Amazon Web Services Systems Manager (SSM) Parameter Store Parameter, prefixed by <code>ssm:</code>, 
     #   		followed by the parameter name or ARN.</p>
     #            <p>If not specified, Image Builder uses the appropriate ECS-optimized AMI as a base image.</p>
     #   @return [String]
@@ -904,15 +904,15 @@ module Aws::Imagebuilder
     #   <p>The semantic version of the component. This version follows the semantic version
     #   			syntax.</p>
     #            <note>
-    #               <p>The semantic version has four nodes: <major>.<minor>.<patch>/<build>.
+    #               <p>The semantic version has four nodes: <major>.<minor>.<patch>/<build>. 
     #   	You can assign values for the first three, and can filter on all of them.</p>
     #               <p>
-    #                  <b>Assignment:</b> For the first three nodes, you can assign any positive integer value, including
-    #   	zero. The upper limit is 2^30-1, or 1073741823, for each node. Image Builder automatically assigns the
+    #                  <b>Assignment:</b> For the first three nodes, you can assign any positive integer value, including 
+    #   	zero. The upper limit is 2^30-1, or 1073741823, for each node. Image Builder automatically assigns the 
     #   	build number to the fourth node.</p>
     #               <p>
-    #                  <b>Patterns:</b> You can use any numeric pattern that adheres to the assignment requirements for
-    #   	the nodes that you can assign. For example, you might choose a software version pattern, such as 1.0.0, or
+    #                  <b>Patterns:</b> You can use any numeric pattern that adheres to the assignment requirements for 
+    #   	the nodes that you can assign. For example, you might choose a software version pattern, such as 1.0.0, or 
     #   	a date, such as 2021.01.01.</p>
     #            </note>
     #   @return [String]
@@ -947,7 +947,7 @@ module Aws::Imagebuilder
     #   @return [String]
     # @!attribute kms_key_id
     #   <p>The Amazon Resource Name (ARN) that uniquely identifies the KMS key used to encrypt this component.
-    #   			This can be either the Key ARN or the Alias ARN. For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN">Key identifiers (KeyId)</a>
+    #   			This can be either the Key ARN or the Alias ARN. For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN">Key identifiers (KeyId)</a> 
     #   			in the <i>Key Management Service Developer Guide</i>. If you don't specify a key, Image Builder encrypts the
     #   			component data with a KMS key that Image Builder owns.</p>
     #   @return [String]
@@ -1025,15 +1025,15 @@ module Aws::Imagebuilder
     #   <p>The semantic version of the container recipe. This version follows the semantic
     #   			version syntax.</p>
     #            <note>
-    #               <p>The semantic version has four nodes: <major>.<minor>.<patch>/<build>.
+    #               <p>The semantic version has four nodes: <major>.<minor>.<patch>/<build>. 
     #   	You can assign values for the first three, and can filter on all of them.</p>
     #               <p>
-    #                  <b>Assignment:</b> For the first three nodes, you can assign any positive integer value, including
-    #   	zero. The upper limit is 2^30-1, or 1073741823, for each node. Image Builder automatically assigns the
+    #                  <b>Assignment:</b> For the first three nodes, you can assign any positive integer value, including 
+    #   	zero. The upper limit is 2^30-1, or 1073741823, for each node. Image Builder automatically assigns the 
     #   	build number to the fourth node.</p>
     #               <p>
-    #                  <b>Patterns:</b> You can use any numeric pattern that adheres to the assignment requirements for
-    #   	the nodes that you can assign. For example, you might choose a software version pattern, such as 1.0.0, or
+    #                  <b>Patterns:</b> You can use any numeric pattern that adheres to the assignment requirements for 
+    #   	the nodes that you can assign. For example, you might choose a software version pattern, such as 1.0.0, or 
     #   	a date, such as 2021.01.01.</p>
     #            </note>
     #   @return [String]
@@ -1087,8 +1087,8 @@ module Aws::Imagebuilder
     #   			must already exist in the Amazon Web Services Region where the build runs.</p>
     #   @return [Types::TargetContainerRepository]
     # @!attribute kms_key_id
-    #   <p>The Amazon Resource Name (ARN) that uniquely identifies which KMS key is used to encrypt the Dockerfile
-    #   			template. This can be either the Key ARN or the Alias ARN. For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN">Key identifiers (KeyId)</a>
+    #   <p>The Amazon Resource Name (ARN) that uniquely identifies which KMS key is used to encrypt the Dockerfile 
+    #   			template. This can be either the Key ARN or the Alias ARN. For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN">Key identifiers (KeyId)</a> 
     #   			in the <i>Key Management Service Developer Guide</i>.</p>
     #   @return [String]
     # @!attribute client_token
@@ -1232,7 +1232,7 @@ module Aws::Imagebuilder
     #   			property or <code>imageRecipeArn</code>, but not both.</p>
     #   @return [String]
     # @!attribute infrastructure_configuration_arn
-    #   <p>The Amazon Resource Name (ARN) of the infrastructure configuration that
+    #   <p>The Amazon Resource Name (ARN) of the infrastructure configuration that 
     #   			builds images created by this image pipeline.</p>
     #   @return [String]
     # @!attribute distribution_configuration_arn
@@ -1284,7 +1284,7 @@ module Aws::Imagebuilder
     #   			workflows.</p>
     #   @return [Array<Types::WorkflowConfiguration>]
     # @!attribute execution_role
-    #   <p>The name or Amazon Resource Name (ARN) for the IAM role you create that grants
+    #   <p>The name or Amazon Resource Name (ARN) for the IAM role you create that grants 
     #   			Image Builder access to perform workflow actions.</p>
     #   @return [String]
     # @!attribute logging_configuration
@@ -1357,15 +1357,15 @@ module Aws::Imagebuilder
     #   <p>The semantic version of the image recipe. This version follows the semantic version
     #   			syntax.</p>
     #            <note>
-    #               <p>The semantic version has four nodes: <major>.<minor>.<patch>/<build>.
+    #               <p>The semantic version has four nodes: <major>.<minor>.<patch>/<build>. 
     #   	You can assign values for the first three, and can filter on all of them.</p>
     #               <p>
-    #                  <b>Assignment:</b> For the first three nodes, you can assign any positive integer value, including
-    #   	zero. The upper limit is 2^30-1, or 1073741823, for each node. Image Builder automatically assigns the
+    #                  <b>Assignment:</b> For the first three nodes, you can assign any positive integer value, including 
+    #   	zero. The upper limit is 2^30-1, or 1073741823, for each node. Image Builder automatically assigns the 
     #   	build number to the fourth node.</p>
     #               <p>
-    #                  <b>Patterns:</b> You can use any numeric pattern that adheres to the assignment requirements for
-    #   	the nodes that you can assign. For example, you might choose a software version pattern, such as 1.0.0, or
+    #                  <b>Patterns:</b> You can use any numeric pattern that adheres to the assignment requirements for 
+    #   	the nodes that you can assign. For example, you might choose a software version pattern, such as 1.0.0, or 
     #   	a date, such as 2021.01.01.</p>
     #            </note>
     #   @return [String]
@@ -1378,7 +1378,7 @@ module Aws::Imagebuilder
     #   			new recipes.</p>
     #   @return [Array<Types::ComponentConfiguration>]
     # @!attribute parent_image
-    #   <p>The base image for customizations specified in the image recipe. You can specify the
+    #   <p>The base image for customizations specified in the image recipe. You can specify the 
     #   			parent image using one of the following options:</p>
     #            <ul>
     #               <li>
@@ -1388,14 +1388,14 @@ module Aws::Imagebuilder
     #                  <p>Image Builder image Amazon Resource Name (ARN)</p>
     #               </li>
     #               <li>
-    #                  <p>Amazon Web Services Systems Manager (SSM) Parameter Store Parameter, prefixed by <code>ssm:</code>,
+    #                  <p>Amazon Web Services Systems Manager (SSM) Parameter Store Parameter, prefixed by <code>ssm:</code>, 
     #   					followed by the parameter name or ARN.</p>
     #               </li>
     #               <li>
     #                  <p>Amazon Web Services Marketplace product ID</p>
     #               </li>
     #            </ul>
-    #            <p>If you enter an AMI ID or an SSM parameter that contains the AMI ID, you must have access
+    #            <p>If you enter an AMI ID or an SSM parameter that contains the AMI ID, you must have access 
     #   			to the AMI. The AMI must also be in the Region where you're creating
     #   			the recipe.</p>
     #   @return [String]
@@ -1684,7 +1684,7 @@ module Aws::Imagebuilder
     #            </ul>
     #   @return [Types::InstanceMetadataOptions]
     # @!attribute tags
-    #   <p>The metadata tags to assign to the infrastructure configuration resource that Image Builder
+    #   <p>The metadata tags to assign to the infrastructure configuration resource that Image Builder 
     #   			creates as output. Tags are formatted as key value pairs.</p>
     #   @return [Hash<String, String>]
     # @!attribute placement
@@ -1849,18 +1849,18 @@ module Aws::Imagebuilder
     #   			workflow already exists.</p>
     #   @return [String]
     # @!attribute semantic_version
-    #   <p>The semantic version of this workflow resource. The semantic version syntax
+    #   <p>The semantic version of this workflow resource. The semantic version syntax 
     #   			adheres to the following rules.</p>
     #            <note>
-    #               <p>The semantic version has four nodes: <major>.<minor>.<patch>/<build>.
+    #               <p>The semantic version has four nodes: <major>.<minor>.<patch>/<build>. 
     #   	You can assign values for the first three, and can filter on all of them.</p>
     #               <p>
-    #                  <b>Assignment:</b> For the first three nodes, you can assign any positive integer value, including
-    #   	zero. The upper limit is 2^30-1, or 1073741823, for each node. Image Builder automatically assigns the
+    #                  <b>Assignment:</b> For the first three nodes, you can assign any positive integer value, including 
+    #   	zero. The upper limit is 2^30-1, or 1073741823, for each node. Image Builder automatically assigns the 
     #   	build number to the fourth node.</p>
     #               <p>
-    #                  <b>Patterns:</b> You can use any numeric pattern that adheres to the assignment requirements for
-    #   	the nodes that you can assign. For example, you might choose a software version pattern, such as 1.0.0, or
+    #                  <b>Patterns:</b> You can use any numeric pattern that adheres to the assignment requirements for 
+    #   	the nodes that you can assign. For example, you might choose a software version pattern, such as 1.0.0, or 
     #   	a date, such as 2021.01.01.</p>
     #            </note>
     #   @return [String]
@@ -1868,7 +1868,7 @@ module Aws::Imagebuilder
     #   <p>Describes the workflow.</p>
     #   @return [String]
     # @!attribute change_description
-    #   <p>Describes what change has been made in this version of the workflow, or
+    #   <p>Describes what change has been made in this version of the workflow, or 
     #   			what makes this version different from other versions of the workflow.</p>
     #   @return [String]
     # @!attribute data
@@ -1888,7 +1888,7 @@ module Aws::Imagebuilder
     #   @return [String]
     # @!attribute kms_key_id
     #   <p>The Amazon Resource Name (ARN) that uniquely identifies the KMS key used to encrypt this workflow resource.
-    #   			This can be either the Key ARN or the Alias ARN. For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN">Key identifiers (KeyId)</a>
+    #   			This can be either the Key ARN or the Alias ARN. For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN">Key identifiers (KeyId)</a> 
     #   			in the <i>Key Management Service Developer Guide</i>. If you don't specify a key, Image Builder encrypts the workflow
     #   			document with a KMS key that Image Builder owns.</p>
     #   @return [String]
@@ -2348,14 +2348,14 @@ module Aws::Imagebuilder
     #   			specified accounts.</p>
     #   @return [Array<Types::LaunchTemplateConfiguration>]
     # @!attribute s3_export_configuration
-    #   <p>Configure export settings to deliver disk images created from your image build,
+    #   <p>Configure export settings to deliver disk images created from your image build, 
     #   			using a file format that is compatible with your VMs in that Region.</p>
     #   @return [Types::S3ExportConfiguration]
     # @!attribute fast_launch_configurations
     #   <p>The Windows faster-launching configurations to use for AMI distribution.</p>
     #   @return [Array<Types::FastLaunchConfiguration>]
     # @!attribute ssm_parameter_configurations
-    #   <p>Contains settings to update Amazon Web Services Systems Manager (SSM) Parameter Store Parameters with
+    #   <p>Contains settings to update Amazon Web Services Systems Manager (SSM) Parameter Store Parameters with 
     #   			output AMI IDs from the build by target Region.</p>
     #   @return [Array<Types::SsmParameterConfiguration>]
     class Distribution < Struct.new(
@@ -2395,7 +2395,7 @@ module Aws::Imagebuilder
     #   <p>The description of the distribution configuration.</p>
     #   @return [String]
     # @!attribute distributions
-    #   <p>The distribution objects that apply Region-specific settings for the deployment of
+    #   <p>The distribution objects that apply Region-specific settings for the deployment of 
     #   			the image to targeted Regions.</p>
     #   @return [Array<Types::Distribution>]
     # @!attribute timeout_minutes
@@ -2504,8 +2504,8 @@ module Aws::Imagebuilder
     #   <p>The IOPS value for the device. Required only when volumeType is io1 or io2.</p>
     #   @return [Integer]
     # @!attribute kms_key_id
-    #   <p>The Amazon Resource Name (ARN) that uniquely identifies the KMS key to use when encrypting the device.
-    #   			This can be either the Key ARN or the Alias ARN. For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN">Key identifiers (KeyId)</a>
+    #   <p>The Amazon Resource Name (ARN) that uniquely identifies the KMS key to use when encrypting the device. 
+    #   			This can be either the Key ARN or the Alias ARN. For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN">Key identifiers (KeyId)</a> 
     #   			in the <i>Key Management Service Developer Guide</i>.</p>
     #   @return [String]
     # @!attribute snapshot_id
@@ -3087,7 +3087,7 @@ module Aws::Imagebuilder
     end
 
     # @!attribute workflow_execution_id
-    #   <p>Use the unique identifier for a runtime instance of the workflow to get
+    #   <p>Use the unique identifier for a runtime instance of the workflow to get 
     #   			runtime details.</p>
     #   @return [String]
     class GetWorkflowExecutionRequest < Struct.new(
@@ -3102,7 +3102,7 @@ module Aws::Imagebuilder
     #   <p>The request ID that uniquely identifies this request.</p>
     #   @return [String]
     # @!attribute workflow_build_version_arn
-    #   <p>The Amazon Resource Name (ARN) of the build version for the Image Builder workflow resource
+    #   <p>The Amazon Resource Name (ARN) of the build version for the Image Builder workflow resource 
     #   			that defines the specified runtime instance of the workflow.</p>
     #   @return [String]
     # @!attribute workflow_execution_id
@@ -3131,15 +3131,15 @@ module Aws::Imagebuilder
     #   			finishes in one of those states.</p>
     #   @return [Integer]
     # @!attribute total_steps_succeeded
-    #   <p>A runtime count for the number of steps that ran successfully in the specified runtime
+    #   <p>A runtime count for the number of steps that ran successfully in the specified runtime 
     #   			instance of the workflow.</p>
     #   @return [Integer]
     # @!attribute total_steps_failed
-    #   <p>A runtime count for the number of steps that failed in the specified runtime instance
+    #   <p>A runtime count for the number of steps that failed in the specified runtime instance 
     #   			of the workflow.</p>
     #   @return [Integer]
     # @!attribute total_steps_skipped
-    #   <p>A runtime count for the number of steps that were skipped in the specified runtime
+    #   <p>A runtime count for the number of steps that were skipped in the specified runtime 
     #   			instance of the workflow.</p>
     #   @return [Integer]
     # @!attribute start_time
@@ -3347,11 +3347,11 @@ module Aws::Imagebuilder
     # @!attribute arn
     #   <p>The Amazon Resource Name (ARN) of the image.</p>
     #            <note>
-    #               <p>Semantic versioning is included in each object's Amazon Resource Name (ARN),
+    #               <p>Semantic versioning is included in each object's Amazon Resource Name (ARN), 
     #   	at the level that applies to that object as follows:</p>
     #               <ol>
     #                  <li>
-    #                     <p>Versionless ARNs and Name ARNs do not include specific values in any of the nodes. The nodes are
+    #                     <p>Versionless ARNs and Name ARNs do not include specific values in any of the nodes. The nodes are 
     #   				either left off entirely, or they are specified as wildcards, for example: x.x.x.</p>
     #                  </li>
     #                  <li>
@@ -3372,19 +3372,19 @@ module Aws::Imagebuilder
     # @!attribute version
     #   <p>The semantic version of the image.</p>
     #            <note>
-    #               <p>The semantic version has four nodes: <major>.<minor>.<patch>/<build>.
+    #               <p>The semantic version has four nodes: <major>.<minor>.<patch>/<build>. 
     #   	You can assign values for the first three, and can filter on all of them.</p>
     #               <p>
-    #                  <b>Assignment:</b> For the first three nodes, you can assign any positive integer value, including
-    #   	zero. The upper limit is 2^30-1, or 1073741823, for each node. Image Builder automatically assigns the
+    #                  <b>Assignment:</b> For the first three nodes, you can assign any positive integer value, including 
+    #   	zero. The upper limit is 2^30-1, or 1073741823, for each node. Image Builder automatically assigns the 
     #   	build number to the fourth node.</p>
     #               <p>
-    #                  <b>Patterns:</b> You can use any numeric pattern that adheres to the assignment requirements for
-    #   	the nodes that you can assign. For example, you might choose a software version pattern, such as 1.0.0, or
+    #                  <b>Patterns:</b> You can use any numeric pattern that adheres to the assignment requirements for 
+    #   	the nodes that you can assign. For example, you might choose a software version pattern, such as 1.0.0, or 
     #   	a date, such as 2021.01.01.</p>
     #               <p>
-    #                  <b>Filtering:</b> You can use wildcards (x) to specify the most recent versions or nodes when
-    #   	selecting the base image or components for your recipe. When you use a wildcard in any node, all nodes
+    #                  <b>Filtering:</b> You can use wildcards (x) to specify the most recent versions or nodes when 
+    #   	selecting the base image or components for your recipe. When you use a wildcard in any node, all nodes 
     #   	to the right of the first wildcard must also be wildcards.</p>
     #            </note>
     #   @return [String]
@@ -3392,22 +3392,22 @@ module Aws::Imagebuilder
     #   <p>The image operating system platform, such as Linux or Windows.</p>
     #   @return [String]
     # @!attribute enhanced_image_metadata_enabled
-    #   <p>Indicates whether Image Builder collects additional information about the image, such as
+    #   <p>Indicates whether Image Builder collects additional information about the image, such as 
     #   			the operating system (OS) version and package list.</p>
     #   @return [Boolean]
     # @!attribute os_version
-    #   <p>The operating system version for instances that launch from this image. For example,
+    #   <p>The operating system version for instances that launch from this image. For example, 
     #   			Amazon Linux 2, Ubuntu 18, or Microsoft Windows Server 2019.</p>
     #   @return [String]
     # @!attribute state
     #   <p>The state of the image.</p>
     #   @return [Types::ImageState]
     # @!attribute image_recipe
-    #   <p>For images that distribute an AMI, this is the image recipe that Image Builder used to
+    #   <p>For images that distribute an AMI, this is the image recipe that Image Builder used to 
     #   			create the image. For container images, this is empty.</p>
     #   @return [Types::ImageRecipe]
     # @!attribute container_recipe
-    #   <p>For container images, this is the container recipe that Image Builder used to create the
+    #   <p>For container images, this is the container recipe that Image Builder used to create the 
     #   			image. For images that distribute an AMI, this is empty.</p>
     #   @return [Types::ContainerRecipe]
     # @!attribute source_pipeline_name
@@ -3442,22 +3442,22 @@ module Aws::Imagebuilder
     #            <ul>
     #               <li>
     #                  <p>
-    #                     <b>USER_INITIATED</b> – A manual
+    #                     <b>USER_INITIATED</b> – A manual 
     #   					pipeline build request.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <b>SCHEDULED</b> – A pipeline build
+    #                     <b>SCHEDULED</b> – A pipeline build 
     #   					initiated by a cron expression in the Image Builder pipeline, or from EventBridge.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <b>IMPORT</b> – A VM import created
+    #                     <b>IMPORT</b> – A VM import created 
     #   					the image to use as the base image for the recipe.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <b>IMPORT_ISO</b> – An ISO disk import created
+    #                     <b>IMPORT_ISO</b> – An ISO disk import created 
     #   					the image.</p>
     #               </li>
     #            </ul>
@@ -3481,7 +3481,7 @@ module Aws::Imagebuilder
     #   <p>Identifies the last runtime instance of the lifecycle policy to take action on the image.</p>
     #   @return [String]
     # @!attribute execution_role
-    #   <p>The name or Amazon Resource Name (ARN) for the IAM role you create that grants
+    #   <p>The name or Amazon Resource Name (ARN) for the IAM role you create that grants 
     #   			Image Builder access to perform workflow actions.</p>
     #   @return [String]
     # @!attribute workflows
@@ -3489,7 +3489,7 @@ module Aws::Imagebuilder
     #   			associated with the image.</p>
     #   @return [Array<Types::WorkflowConfiguration>]
     # @!attribute logging_configuration
-    #   <p>The logging configuration that's defined for the image. Image Builder uses the defined settings
+    #   <p>The logging configuration that's defined for the image. Image Builder uses the defined settings 
     #   			to direct execution log output during image creation.</p>
     #   @return [Types::ImageLoggingConfiguration]
     class Image < Struct.new(
@@ -3588,10 +3588,10 @@ module Aws::Imagebuilder
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The logging configuration that's defined for the image. Image Builder uses the defined settings
+    # <p>The logging configuration that's defined for the image. Image Builder uses the defined settings 
     # 			to direct execution log output during image creation.</p>
     # @!attribute log_group_name
-    #   <p>The log group name that Image Builder uses for image creation. If not specified, the log group
+    #   <p>The log group name that Image Builder uses for image creation. If not specified, the log group 
     #   			name defaults to <code>/aws/imagebuilder/image-name</code>.</p>
     #   @return [String]
     class ImageLoggingConfiguration < Struct.new(
@@ -3606,11 +3606,11 @@ module Aws::Imagebuilder
     # 			Inventory at build time. The list includes packages that shipped with the
     # 			base image.</p>
     # @!attribute package_name
-    #   <p>The name of the package that's reported to the operating system package
+    #   <p>The name of the package that's reported to the operating system package 
     #   			manager.</p>
     #   @return [String]
     # @!attribute package_version
-    #   <p>The version of the package that's reported to the operating system package
+    #   <p>The version of the package that's reported to the operating system package 
     #   			manager.</p>
     #   @return [String]
     class ImagePackage < Struct.new(
@@ -3681,8 +3681,8 @@ module Aws::Imagebuilder
     #   <p>The date on which this image pipeline was last run.</p>
     #   @return [String]
     # @!attribute last_run_status
-    #   <p>The status of the last image that this pipeline built, such as
-    #   			<code>BUILDING</code>, <code>TESTING</code>, <code>FAILED</code>,
+    #   <p>The status of the last image that this pipeline built, such as 
+    #   			<code>BUILDING</code>, <code>TESTING</code>, <code>FAILED</code>, 
     #   			or <code>AVAILABLE</code>.</p>
     #   @return [String]
     # @!attribute date_next_run
@@ -3702,7 +3702,7 @@ module Aws::Imagebuilder
     #   			<a href="https://docs.aws.amazon.com/imagebuilder/latest/APIReference/API_StartImagePipelineExecution.html">StartImagePipelineExecution</a> request instead.</p>
     #   @return [Hash<String, String>]
     # @!attribute execution_role
-    #   <p>The name or Amazon Resource Name (ARN) for the IAM role you create that grants
+    #   <p>The name or Amazon Resource Name (ARN) for the IAM role you create that grants 
     #   			Image Builder access to perform workflow actions.</p>
     #   @return [String]
     # @!attribute workflows
@@ -3713,11 +3713,11 @@ module Aws::Imagebuilder
     #   			image build logs and the log group for pipeline execution logs.</p>
     #   @return [Types::PipelineLoggingConfiguration]
     # @!attribute consecutive_failures
-    #   <p>Image Builder tracks the number of consecutive failures for scheduled pipeline
+    #   <p>Image Builder tracks the number of consecutive failures for scheduled pipeline 
     #   			executions and takes one of the following actions each time it runs on a schedule:</p>
     #            <ul>
     #               <li>
-    #                  <p>If the pipeline execution is successful, the number of consecutive
+    #                  <p>If the pipeline execution is successful, the number of consecutive 
     #   					failures resets to zero.</p>
     #               </li>
     #               <li>
@@ -3726,7 +3726,7 @@ module Aws::Imagebuilder
     #   					<a>AutoDisablePolicy</a>, Image Builder disables the pipeline.</p>
     #               </li>
     #            </ul>
-    #            <p>The consecutive failure count is also reset to zero under the following
+    #            <p>The consecutive failure count is also reset to zero under the following 
     #   			conditions:</p>
     #            <ul>
     #               <li>
@@ -3736,7 +3736,7 @@ module Aws::Imagebuilder
     #                  <p>The pipeline configuration is updated.</p>
     #               </li>
     #            </ul>
-    #            <p>If the pipeline runs manually and fails, the count remains the same. The next
+    #            <p>If the pipeline runs manually and fails, the count remains the same. The next 
     #   			scheduled run continues to increment where it left off before.</p>
     #   @return [Integer]
     class ImagePipeline < Struct.new(
@@ -3819,7 +3819,7 @@ module Aws::Imagebuilder
     #   			in the <i>Amazon Web Services General Reference</i>.</p>
     #   @return [Array<Types::ComponentConfiguration>]
     # @!attribute parent_image
-    #   <p>The base image for customizations specified in the image recipe. You can specify the
+    #   <p>The base image for customizations specified in the image recipe. You can specify the 
     #   			parent image using one of the following options:</p>
     #            <ul>
     #               <li>
@@ -3829,7 +3829,7 @@ module Aws::Imagebuilder
     #                  <p>Image Builder image Amazon Resource Name (ARN)</p>
     #               </li>
     #               <li>
-    #                  <p>Amazon Web Services Systems Manager (SSM) Parameter Store Parameter, prefixed by <code>ssm:</code>,
+    #                  <p>Amazon Web Services Systems Manager (SSM) Parameter Store Parameter, prefixed by <code>ssm:</code>, 
     #   					followed by the parameter name or ARN.</p>
     #               </li>
     #               <li>
@@ -4164,7 +4164,7 @@ module Aws::Imagebuilder
     #   <p>The image operating system platform, such as Linux or Windows.</p>
     #   @return [String]
     # @!attribute os_version
-    #   <p>The operating system version of the instances that launch from this image. For
+    #   <p>The operating system version of the instances that launch from this image. For 
     #   			example, Amazon Linux 2, Ubuntu 18, or Microsoft Windows Server 2019.</p>
     #   @return [String]
     # @!attribute state
@@ -4188,22 +4188,22 @@ module Aws::Imagebuilder
     #            <ul>
     #               <li>
     #                  <p>
-    #                     <b>USER_INITIATED</b> – A manual
+    #                     <b>USER_INITIATED</b> – A manual 
     #   					pipeline build request.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <b>SCHEDULED</b> – A pipeline build
+    #                     <b>SCHEDULED</b> – A pipeline build 
     #   					initiated by a cron expression in the Image Builder pipeline, or from EventBridge.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <b>IMPORT</b> – A VM import created
+    #                     <b>IMPORT</b> – A VM import created 
     #   					the image to use as the base image for the recipe.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <b>IMPORT_ISO</b> – An ISO disk import created
+    #                     <b>IMPORT_ISO</b> – An ISO disk import created 
     #   					the image.</p>
     #               </li>
     #            </ul>
@@ -4246,7 +4246,7 @@ module Aws::Imagebuilder
     # <p>Configure image tests for your pipeline build. Tests run after building the image, to
     # 			verify that the AMI or container image is valid before distributing it.</p>
     # @!attribute image_tests_enabled
-    #   <p>Specifies whether tests run after building the image.
+    #   <p>Specifies whether tests run after building the image. 
     #   			When enabled, tests run after the image build and before image distribution.
     #   			Defaults to <code>true</code>.</p>
     #   @return [Boolean]
@@ -4271,11 +4271,11 @@ module Aws::Imagebuilder
     # @!attribute arn
     #   <p>The Amazon Resource Name (ARN) of a specific version of an Image Builder image.</p>
     #            <note>
-    #               <p>Semantic versioning is included in each object's Amazon Resource Name (ARN),
+    #               <p>Semantic versioning is included in each object's Amazon Resource Name (ARN), 
     #   	at the level that applies to that object as follows:</p>
     #               <ol>
     #                  <li>
-    #                     <p>Versionless ARNs and Name ARNs do not include specific values in any of the nodes. The nodes are
+    #                     <p>Versionless ARNs and Name ARNs do not include specific values in any of the nodes. The nodes are 
     #   				either left off entirely, or they are specified as wildcards, for example: x.x.x.</p>
     #                  </li>
     #                  <li>
@@ -4297,24 +4297,24 @@ module Aws::Imagebuilder
     #   <p>The semantic version of the image. This version follows the semantic
     #   			version syntax.</p>
     #            <note>
-    #               <p>The semantic version has four nodes: <major>.<minor>.<patch>/<build>.
+    #               <p>The semantic version has four nodes: <major>.<minor>.<patch>/<build>. 
     #   	You can assign values for the first three, and can filter on all of them.</p>
     #               <p>
-    #                  <b>Assignment:</b> For the first three nodes, you can assign any positive integer value, including
-    #   	zero. The upper limit is 2^30-1, or 1073741823, for each node. Image Builder automatically assigns the
+    #                  <b>Assignment:</b> For the first three nodes, you can assign any positive integer value, including 
+    #   	zero. The upper limit is 2^30-1, or 1073741823, for each node. Image Builder automatically assigns the 
     #   	build number to the fourth node.</p>
     #               <p>
-    #                  <b>Patterns:</b> You can use any numeric pattern that adheres to the assignment requirements for
-    #   	the nodes that you can assign. For example, you might choose a software version pattern, such as 1.0.0, or
+    #                  <b>Patterns:</b> You can use any numeric pattern that adheres to the assignment requirements for 
+    #   	the nodes that you can assign. For example, you might choose a software version pattern, such as 1.0.0, or 
     #   	a date, such as 2021.01.01.</p>
     #               <p>
-    #                  <b>Filtering:</b> You can use wildcards (x) to specify the most recent versions or nodes when
-    #   	selecting the base image or components for your recipe. When you use a wildcard in any node, all nodes
+    #                  <b>Filtering:</b> You can use wildcards (x) to specify the most recent versions or nodes when 
+    #   	selecting the base image or components for your recipe. When you use a wildcard in any node, all nodes 
     #   	to the right of the first wildcard must also be wildcards.</p>
     #            </note>
     #   @return [String]
     # @!attribute platform
-    #   <p>The operating system platform of the image version, for example "Windows" or
+    #   <p>The operating system platform of the image version, for example "Windows" or 
     #   			"Linux".</p>
     #   @return [String]
     # @!attribute os_version
@@ -4333,22 +4333,22 @@ module Aws::Imagebuilder
     #            <ul>
     #               <li>
     #                  <p>
-    #                     <b>USER_INITIATED</b> – A manual
+    #                     <b>USER_INITIATED</b> – A manual 
     #   					pipeline build request.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <b>SCHEDULED</b> – A pipeline build
+    #                     <b>SCHEDULED</b> – A pipeline build 
     #   					initiated by a cron expression in the Image Builder pipeline, or from EventBridge.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <b>IMPORT</b> – A VM import created
+    #                     <b>IMPORT</b> – A VM import created 
     #   					the image to use as the base image for the recipe.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <b>IMPORT_ISO</b> – An ISO disk import created
+    #                     <b>IMPORT_ISO</b> – An ISO disk import created 
     #   					the image.</p>
     #               </li>
     #            </ul>
@@ -4386,15 +4386,15 @@ module Aws::Imagebuilder
     #   <p>The semantic version of the component. This version follows the semantic version
     #   			syntax.</p>
     #            <note>
-    #               <p>The semantic version has four nodes: <major>.<minor>.<patch>/<build>.
+    #               <p>The semantic version has four nodes: <major>.<minor>.<patch>/<build>. 
     #   	You can assign values for the first three, and can filter on all of them.</p>
     #               <p>
-    #                  <b>Assignment:</b> For the first three nodes, you can assign any positive integer value, including
-    #   	zero. The upper limit is 2^30-1, or 1073741823, for each node. Image Builder automatically assigns the
+    #                  <b>Assignment:</b> For the first three nodes, you can assign any positive integer value, including 
+    #   	zero. The upper limit is 2^30-1, or 1073741823, for each node. Image Builder automatically assigns the 
     #   	build number to the fourth node.</p>
     #               <p>
-    #                  <b>Patterns:</b> You can use any numeric pattern that adheres to the assignment requirements for
-    #   	the nodes that you can assign. For example, you might choose a software version pattern, such as 1.0.0, or
+    #                  <b>Patterns:</b> You can use any numeric pattern that adheres to the assignment requirements for 
+    #   	the nodes that you can assign. For example, you might choose a software version pattern, such as 1.0.0, or 
     #   	a date, such as 2021.01.01.</p>
     #            </note>
     #   @return [String]
@@ -4430,7 +4430,7 @@ module Aws::Imagebuilder
     #   @return [String]
     # @!attribute kms_key_id
     #   <p>The Amazon Resource Name (ARN) of the KMS key that is used to encrypt this component.
-    #   			This can be either the Key ARN or the Alias ARN. For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN">Key identifiers (KeyId)</a>
+    #   			This can be either the Key ARN or the Alias ARN. For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN">Key identifiers (KeyId)</a> 
     #   			in the <i>Key Management Service Developer Guide</i>. If you don't specify a key, Image Builder encrypts the
     #   			component data with a KMS key that Image Builder owns.</p>
     #   @return [String]
@@ -4498,7 +4498,7 @@ module Aws::Imagebuilder
     #   <p>The description for your disk image import.</p>
     #   @return [String]
     # @!attribute platform
-    #   <p>The operating system platform for the imported image. Allowed values include
+    #   <p>The operating system platform for the imported image. Allowed values include 
     #   			the following: <code>Windows</code>.</p>
     #   @return [String]
     # @!attribute os_version
@@ -4512,7 +4512,7 @@ module Aws::Imagebuilder
     #   			account, and creates it if it doesn't exist.</p>
     #   @return [String]
     # @!attribute infrastructure_configuration_arn
-    #   <p>The Amazon Resource Name (ARN) of the infrastructure configuration resource that's used for
+    #   <p>The Amazon Resource Name (ARN) of the infrastructure configuration resource that's used for 
     #   			launching the EC2 instance on which the ISO image is built.</p>
     #   @return [String]
     # @!attribute uri
@@ -4531,7 +4531,7 @@ module Aws::Imagebuilder
     #   <p>Tags that are attached to image resources created from the import.</p>
     #   @return [Hash<String, String>]
     # @!attribute register_image_options
-    #   <p>Configures Secure Boot and UEFI settings for the
+    #   <p>Configures Secure Boot and UEFI settings for the 
     #   			imported image.</p>
     #   @return [Types::RegisterImageOptions]
     # @!attribute windows_configuration
@@ -4594,15 +4594,15 @@ module Aws::Imagebuilder
     #   <p>The semantic version to attach to the base image that was created during the import
     #   			process. This version follows the semantic version syntax.</p>
     #            <note>
-    #               <p>The semantic version has four nodes: <major>.<minor>.<patch>/<build>.
+    #               <p>The semantic version has four nodes: <major>.<minor>.<patch>/<build>. 
     #   	You can assign values for the first three, and can filter on all of them.</p>
     #               <p>
-    #                  <b>Assignment:</b> For the first three nodes, you can assign any positive integer value, including
-    #   	zero. The upper limit is 2^30-1, or 1073741823, for each node. Image Builder automatically assigns the
+    #                  <b>Assignment:</b> For the first three nodes, you can assign any positive integer value, including 
+    #   	zero. The upper limit is 2^30-1, or 1073741823, for each node. Image Builder automatically assigns the 
     #   	build number to the fourth node.</p>
     #               <p>
-    #                  <b>Patterns:</b> You can use any numeric pattern that adheres to the assignment requirements for
-    #   	the nodes that you can assign. For example, you might choose a software version pattern, such as 1.0.0, or
+    #                  <b>Patterns:</b> You can use any numeric pattern that adheres to the assignment requirements for 
+    #   	the nodes that you can assign. For example, you might choose a software version pattern, such as 1.0.0, or 
     #   	a date, such as 2021.01.01.</p>
     #            </note>
     #   @return [String]
@@ -4867,8 +4867,8 @@ module Aws::Imagebuilder
     # <p>Defines a custom base AMI and block device mapping configurations of an instance used
     # 			for building and testing container images.</p>
     # @!attribute image
-    #   <p>The base image for a container build and test instance. This can contain an AMI ID
-    #   			or it can specify an Amazon Web Services Systems Manager (SSM) Parameter Store Parameter, prefixed by <code>ssm:</code>,
+    #   <p>The base image for a container build and test instance. This can contain an AMI ID 
+    #   			or it can specify an Amazon Web Services Systems Manager (SSM) Parameter Store Parameter, prefixed by <code>ssm:</code>, 
     #   			followed by the parameter name or ARN.</p>
     #            <p>If not specified, Image Builder uses the appropriate ECS-optimized AMI as a base image.</p>
     #   @return [String]
@@ -5122,13 +5122,13 @@ module Aws::Imagebuilder
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Contains details for a resource that the runtime instance of the
+    # <p>Contains details for a resource that the runtime instance of the 
     # 			lifecycle policy identified for action.</p>
     # @!attribute account_id
     #   <p>The account that owns the impacted resource.</p>
     #   @return [String]
     # @!attribute resource_id
-    #   <p>Identifies the impacted resource. The resource ID depends on the type of
+    #   <p>Identifies the impacted resource. The resource ID depends on the type of 
     #   			resource, as follows.</p>
     #            <ul>
     #               <li>
@@ -5152,11 +5152,11 @@ module Aws::Imagebuilder
     #   <p>The Amazon Web Services Region where the lifecycle execution resource is stored.</p>
     #   @return [String]
     # @!attribute snapshots
-    #   <p>A list of associated resource snapshots for the impacted resource if
+    #   <p>A list of associated resource snapshots for the impacted resource if 
     #   			it’s an AMI.</p>
     #   @return [Array<Types::LifecycleExecutionSnapshotResource>]
     # @!attribute image_uris
-    #   <p>For an impacted container image, this identifies a list of URIs for associated
+    #   <p>For an impacted container image, this identifies a list of URIs for associated 
     #   			container images distributed to ECR repositories.</p>
     #   @return [Array<String>]
     # @!attribute start_time
@@ -5197,10 +5197,10 @@ module Aws::Imagebuilder
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Contains the state of an impacted resource that the runtime instance
+    # <p>Contains the state of an impacted resource that the runtime instance 
     # 			of the lifecycle policy identified for action.</p>
     # @!attribute status
-    #   <p>The runtime status of the lifecycle action taken for the
+    #   <p>The runtime status of the lifecycle action taken for the 
     #   			impacted resource.</p>
     #   @return [String]
     # @!attribute reason
@@ -5234,7 +5234,7 @@ module Aws::Imagebuilder
       end
     end
 
-    # <p>Contains the state of an impacted snapshot resource that the runtime
+    # <p>Contains the state of an impacted snapshot resource that the runtime 
     # 			instance of the lifecycle policy identified for action.</p>
     # @!attribute snapshot_id
     #   <p>Identifies the impacted snapshot resource.</p>
@@ -5284,7 +5284,7 @@ module Aws::Imagebuilder
     #   			schedule and cancels any in-flight lifecycle execution.</p>
     #   @return [String]
     # @!attribute execution_role
-    #   <p>The name or Amazon Resource Name (ARN) of the IAM role that Image Builder uses to run the lifecycle policy.
+    #   <p>The name or Amazon Resource Name (ARN) of the IAM role that Image Builder uses to run the lifecycle policy. 
     #   			This is a custom role that you create.</p>
     #   @return [String]
     # @!attribute resource_type
@@ -5308,8 +5308,8 @@ module Aws::Imagebuilder
     #   <p>The timestamp for the last time Image Builder ran the lifecycle policy.</p>
     #   @return [Time]
     # @!attribute tags
-    #   <p>To help manage your lifecycle policy resources, you can assign your own
-    #   			metadata to each resource in the form of tags. Each tag consists of a key and
+    #   <p>To help manage your lifecycle policy resources, you can assign your own 
+    #   			metadata to each resource in the form of tags. Each tag consists of a key and 
     #   			an optional value, both of which you define.</p>
     #   @return [Hash<String, String>]
     class LifecyclePolicy < Struct.new(
@@ -5407,11 +5407,11 @@ module Aws::Imagebuilder
 
     # <p>Specifies resources that lifecycle policy actions should not apply to.</p>
     # @!attribute tag_map
-    #   <p>Contains a list of tags that Image Builder uses to skip lifecycle actions for Image Builder image
+    #   <p>Contains a list of tags that Image Builder uses to skip lifecycle actions for Image Builder image 
     #   			resources that have them.</p>
     #   @return [Hash<String, String>]
     # @!attribute amis
-    #   <p>Lists configuration values that apply to AMIs that Image Builder should exclude
+    #   <p>Lists configuration values that apply to AMIs that Image Builder should exclude 
     #   			from the lifecycle action.</p>
     #   @return [Types::LifecyclePolicyDetailExclusionRulesAmis]
     class LifecyclePolicyDetailExclusionRules < Struct.new(
@@ -5460,7 +5460,7 @@ module Aws::Imagebuilder
       end
     end
 
-    # <p>Defines criteria to exclude AMIs from lifecycle actions based on the last
+    # <p>Defines criteria to exclude AMIs from lifecycle actions based on the last 
     # 			time they were used to launch an instance.</p>
     # @!attribute value
     #   <p>The integer number of units for the time period. For example <code>6</code> (months).</p>
@@ -5485,22 +5485,22 @@ module Aws::Imagebuilder
     #   			type.</p>
     #   @return [String]
     # @!attribute value
-    #   <p>The number of units for the time period or for the count. For example, a value of
+    #   <p>The number of units for the time period or for the count. For example, a value of 
     #   			<code>6</code> might refer to six months or six AMIs.</p>
     #            <note>
-    #               <p>For count-based filters, this value represents the minimum number of resources
-    #   				to keep on hand. If you have fewer resources than this number, the resource is
+    #               <p>For count-based filters, this value represents the minimum number of resources 
+    #   				to keep on hand. If you have fewer resources than this number, the resource is 
     #   				excluded from lifecycle actions.</p>
     #            </note>
     #   @return [Integer]
     # @!attribute unit
-    #   <p>Defines the unit of time that the lifecycle policy uses to determine impacted
+    #   <p>Defines the unit of time that the lifecycle policy uses to determine impacted 
     #   			resources. This is required for age-based rules.</p>
     #   @return [String]
     # @!attribute retain_at_least
-    #   <p>For age-based filters, this is the number of resources to keep on hand after the lifecycle
-    #   			<code>DELETE</code> action is applied. Impacted resources are only deleted if you have more than
-    #   			this number of resources. If you have fewer resources than this number, the impacted resource
+    #   <p>For age-based filters, this is the number of resources to keep on hand after the lifecycle 
+    #   			<code>DELETE</code> action is applied. Impacted resources are only deleted if you have more than 
+    #   			this number of resources. If you have fewer resources than this number, the impacted resource 
     #   			is not deleted.</p>
     #   @return [Integer]
     class LifecyclePolicyDetailFilter < Struct.new(
@@ -5517,11 +5517,11 @@ module Aws::Imagebuilder
     # <p>Resource selection criteria for the lifecycle policy. You must provide
     # 			exactly one selection criteria: either recipes or a tag map, not both.</p>
     # @!attribute recipes
-    #   <p>A list of recipes that are used as selection criteria for the output
+    #   <p>A list of recipes that are used as selection criteria for the output 
     #   			images that the lifecycle policy applies to.</p>
     #   @return [Array<Types::LifecyclePolicyResourceSelectionRecipe>]
     # @!attribute tag_map
-    #   <p>A list of tags that are used as selection criteria for the Image Builder image
+    #   <p>A list of tags that are used as selection criteria for the Image Builder image 
     #   			resources that the lifecycle policy applies to.</p>
     #   @return [Hash<String, String>]
     class LifecyclePolicyResourceSelection < Struct.new(
@@ -5578,8 +5578,8 @@ module Aws::Imagebuilder
     #   <p>The timestamp for the last time Image Builder ran the lifecycle policy.</p>
     #   @return [Time]
     # @!attribute tags
-    #   <p>To help manage your lifecycle policy resources, you can assign your own
-    #   			metadata to each resource in the form of tags. Each tag consists of a key and
+    #   <p>To help manage your lifecycle policy resources, you can assign your own 
+    #   			metadata to each resource in the form of tags. Each tag consists of a key and 
     #   			an optional value, both of which you define.</p>
     #   @return [Hash<String, String>]
     class LifecyclePolicySummary < Struct.new(
@@ -5609,7 +5609,7 @@ module Aws::Imagebuilder
     #   <p>The maximum number of items to return in a single request.</p>
     #   @return [Integer]
     # @!attribute next_token
-    #   <p>A token to specify where to start paginating. Use the <code>nextToken</code> value
+    #   <p>A token to specify where to start paginating. Use the <code>nextToken</code> value 
     #   	from a previously truncated response.</p>
     #   @return [String]
     class ListComponentBuildVersionsRequest < Struct.new(
@@ -5632,8 +5632,8 @@ module Aws::Imagebuilder
     #   			included.</p>
     #   @return [Array<Types::ComponentSummary>]
     # @!attribute next_token
-    #   <p>The next token used for paginated responses. When this field isn't empty,
-    #   	there are additional elements that the service hasn't included in this request. Use this token
+    #   <p>The next token used for paginated responses. When this field isn't empty, 
+    #   	there are additional elements that the service hasn't included in this request. Use this token 
     #   		with the next request to retrieve additional objects.</p>
     #   @return [String]
     class ListComponentBuildVersionsResponse < Struct.new(
@@ -5708,7 +5708,7 @@ module Aws::Imagebuilder
     #   <p>The maximum number of items to return in a single request.</p>
     #   @return [Integer]
     # @!attribute next_token
-    #   <p>A token to specify where to start paginating. Use the <code>nextToken</code> value
+    #   <p>A token to specify where to start paginating. Use the <code>nextToken</code> value 
     #   	from a previously truncated response.</p>
     #   @return [String]
     class ListComponentsRequest < Struct.new(
@@ -5729,13 +5729,13 @@ module Aws::Imagebuilder
     # @!attribute component_version_list
     #   <p>The list of component semantic versions.</p>
     #            <note>
-    #               <p>The semantic version has four nodes: <major>.<minor>.<patch>/<build>.
+    #               <p>The semantic version has four nodes: <major>.<minor>.<patch>/<build>. 
     #   	You can assign values for the first three, and can filter on all of them.</p>
     #            </note>
     #   @return [Array<Types::ComponentVersion>]
     # @!attribute next_token
-    #   <p>The next token used for paginated responses. When this field isn't empty,
-    #   	there are additional elements that the service hasn't included in this request. Use this token
+    #   <p>The next token used for paginated responses. When this field isn't empty, 
+    #   	there are additional elements that the service hasn't included in this request. Use this token 
     #   		with the next request to retrieve additional objects.</p>
     #   @return [String]
     class ListComponentsResponse < Struct.new(
@@ -5783,7 +5783,7 @@ module Aws::Imagebuilder
     #   <p>The maximum number of items to return in a single request.</p>
     #   @return [Integer]
     # @!attribute next_token
-    #   <p>A token to specify where to start paginating. Use the <code>nextToken</code> value
+    #   <p>A token to specify where to start paginating. Use the <code>nextToken</code> value 
     #   	from a previously truncated response.</p>
     #   @return [String]
     class ListContainerRecipesRequest < Struct.new(
@@ -5804,8 +5804,8 @@ module Aws::Imagebuilder
     #   <p>The list of container recipes returned for the request.</p>
     #   @return [Array<Types::ContainerRecipeSummary>]
     # @!attribute next_token
-    #   <p>The next token used for paginated responses. When this field isn't empty,
-    #   	there are additional elements that the service hasn't included in this request. Use this token
+    #   <p>The next token used for paginated responses. When this field isn't empty, 
+    #   	there are additional elements that the service hasn't included in this request. Use this token 
     #   		with the next request to retrieve additional objects.</p>
     #   @return [String]
     class ListContainerRecipesResponse < Struct.new(
@@ -5825,7 +5825,7 @@ module Aws::Imagebuilder
     #   <p>The maximum number of items to return in a single request.</p>
     #   @return [Integer]
     # @!attribute next_token
-    #   <p>A token to specify where to start paginating. Use the <code>nextToken</code> value
+    #   <p>A token to specify where to start paginating. Use the <code>nextToken</code> value 
     #   	from a previously truncated response.</p>
     #   @return [String]
     class ListDistributionConfigurationsRequest < Struct.new(
@@ -5845,8 +5845,8 @@ module Aws::Imagebuilder
     #   <p>The list of distributions.</p>
     #   @return [Array<Types::DistributionConfigurationSummary>]
     # @!attribute next_token
-    #   <p>The next token used for paginated responses. When this field isn't empty,
-    #   	there are additional elements that the service hasn't included in this request. Use this token
+    #   <p>The next token used for paginated responses. When this field isn't empty, 
+    #   	there are additional elements that the service hasn't included in this request. Use this token 
     #   		with the next request to retrieve additional objects.</p>
     #   @return [String]
     class ListDistributionConfigurationsResponse < Struct.new(
@@ -5900,7 +5900,7 @@ module Aws::Imagebuilder
     #   <p>The maximum number of items to return in a single request.</p>
     #   @return [Integer]
     # @!attribute next_token
-    #   <p>A token to specify where to start paginating. Use the <code>nextToken</code> value
+    #   <p>A token to specify where to start paginating. Use the <code>nextToken</code> value 
     #   	from a previously truncated response.</p>
     #   @return [String]
     class ListImageBuildVersionsRequest < Struct.new(
@@ -5921,8 +5921,8 @@ module Aws::Imagebuilder
     #   <p>The list of image build versions.</p>
     #   @return [Array<Types::ImageSummary>]
     # @!attribute next_token
-    #   <p>The next token used for paginated responses. When this field isn't empty,
-    #   	there are additional elements that the service hasn't included in this request. Use this token
+    #   <p>The next token used for paginated responses. When this field isn't empty, 
+    #   	there are additional elements that the service hasn't included in this request. Use this token 
     #   		with the next request to retrieve additional objects.</p>
     #   @return [String]
     class ListImageBuildVersionsResponse < Struct.new(
@@ -5943,7 +5943,7 @@ module Aws::Imagebuilder
     #   <p>The maximum number of items to return in a single request.</p>
     #   @return [Integer]
     # @!attribute next_token
-    #   <p>A token to specify where to start paginating. Use the <code>nextToken</code> value
+    #   <p>A token to specify where to start paginating. Use the <code>nextToken</code> value 
     #   	from a previously truncated response.</p>
     #   @return [String]
     class ListImagePackagesRequest < Struct.new(
@@ -5963,8 +5963,8 @@ module Aws::Imagebuilder
     #   <p>The list of Image Packages returned in the response.</p>
     #   @return [Array<Types::ImagePackage>]
     # @!attribute next_token
-    #   <p>The next token used for paginated responses. When this field isn't empty,
-    #   	there are additional elements that the service hasn't included in this request. Use this token
+    #   <p>The next token used for paginated responses. When this field isn't empty, 
+    #   	there are additional elements that the service hasn't included in this request. Use this token 
     #   		with the next request to retrieve additional objects.</p>
     #   @return [String]
     class ListImagePackagesResponse < Struct.new(
@@ -6000,7 +6000,7 @@ module Aws::Imagebuilder
     #   <p>The maximum number of items to return in a single request.</p>
     #   @return [Integer]
     # @!attribute next_token
-    #   <p>A token to specify where to start paginating. Use the <code>nextToken</code> value
+    #   <p>A token to specify where to start paginating. Use the <code>nextToken</code> value 
     #   	from a previously truncated response.</p>
     #   @return [String]
     class ListImagePipelineImagesRequest < Struct.new(
@@ -6021,8 +6021,8 @@ module Aws::Imagebuilder
     #   <p>The list of images built by this pipeline.</p>
     #   @return [Array<Types::ImageSummary>]
     # @!attribute next_token
-    #   <p>The next token used for paginated responses. When this field isn't empty,
-    #   	there are additional elements that the service hasn't included in this request. Use this token
+    #   <p>The next token used for paginated responses. When this field isn't empty, 
+    #   	there are additional elements that the service hasn't included in this request. Use this token 
     #   		with the next request to retrieve additional objects.</p>
     #   @return [String]
     class ListImagePipelineImagesResponse < Struct.new(
@@ -6074,7 +6074,7 @@ module Aws::Imagebuilder
     #   <p>The maximum number of items to return in a single request.</p>
     #   @return [Integer]
     # @!attribute next_token
-    #   <p>A token to specify where to start paginating. Use the <code>nextToken</code> value
+    #   <p>A token to specify where to start paginating. Use the <code>nextToken</code> value 
     #   	from a previously truncated response.</p>
     #   @return [String]
     class ListImagePipelinesRequest < Struct.new(
@@ -6094,8 +6094,8 @@ module Aws::Imagebuilder
     #   <p>The list of image pipelines.</p>
     #   @return [Array<Types::ImagePipeline>]
     # @!attribute next_token
-    #   <p>The next token used for paginated responses. When this field isn't empty,
-    #   	there are additional elements that the service hasn't included in this request. Use this token
+    #   <p>The next token used for paginated responses. When this field isn't empty, 
+    #   	there are additional elements that the service hasn't included in this request. Use this token 
     #   		with the next request to retrieve additional objects.</p>
     #   @return [String]
     class ListImagePipelinesResponse < Struct.new(
@@ -6110,7 +6110,7 @@ module Aws::Imagebuilder
 
     # @!attribute owner
     #   <p>You can specify the recipe owner to filter results by that owner. By default, this request will
-    #   			only show image recipes owned by your account. To filter by a different owner, specify one of the
+    #   			only show image recipes owned by your account. To filter by a different owner, specify one of the 
     #   			<code>Valid Values</code> that are listed for this parameter.</p>
     #   @return [String]
     # @!attribute filters
@@ -6137,7 +6137,7 @@ module Aws::Imagebuilder
     #   <p>The maximum number of items to return in a single request.</p>
     #   @return [Integer]
     # @!attribute next_token
-    #   <p>A token to specify where to start paginating. Use the <code>nextToken</code> value
+    #   <p>A token to specify where to start paginating. Use the <code>nextToken</code> value 
     #   	from a previously truncated response.</p>
     #   @return [String]
     class ListImageRecipesRequest < Struct.new(
@@ -6155,12 +6155,12 @@ module Aws::Imagebuilder
     #   <p>The request ID that uniquely identifies this request.</p>
     #   @return [String]
     # @!attribute image_recipe_summary_list
-    #   <p>A list of <code>ImageRecipeSummary</code> objects that contain identifying characteristics for the
+    #   <p>A list of <code>ImageRecipeSummary</code> objects that contain identifying characteristics for the 
     #   			image recipe, such as the name, the Amazon Resource Name (ARN), and the date created, along with other key details.</p>
     #   @return [Array<Types::ImageRecipeSummary>]
     # @!attribute next_token
-    #   <p>The next token used for paginated responses. When this field isn't empty,
-    #   	there are additional elements that the service hasn't included in this request. Use this token
+    #   <p>The next token used for paginated responses. When this field isn't empty, 
+    #   	there are additional elements that the service hasn't included in this request. Use this token 
     #   		with the next request to retrieve additional objects.</p>
     #   @return [String]
     class ListImageRecipesResponse < Struct.new(
@@ -6196,7 +6196,7 @@ module Aws::Imagebuilder
     #            <p>If you don't specify a filter, Image Builder returns an aggregation for your account.</p>
     #   @return [Types::Filter]
     # @!attribute next_token
-    #   <p>A token to specify where to start paginating. Use the <code>nextToken</code> value
+    #   <p>A token to specify where to start paginating. Use the <code>nextToken</code> value 
     #   	from a previously truncated response.</p>
     #   @return [String]
     class ListImageScanFindingAggregationsRequest < Struct.new(
@@ -6239,8 +6239,8 @@ module Aws::Imagebuilder
     #   <p>An array of image scan finding aggregations that match the filter criteria.</p>
     #   @return [Array<Types::ImageScanFindingAggregation>]
     # @!attribute next_token
-    #   <p>The next token used for paginated responses. When this field isn't empty,
-    #   	there are additional elements that the service hasn't included in this request. Use this token
+    #   <p>The next token used for paginated responses. When this field isn't empty, 
+    #   	there are additional elements that the service hasn't included in this request. Use this token 
     #   		with the next request to retrieve additional objects.</p>
     #   @return [String]
     class ListImageScanFindingAggregationsResponse < Struct.new(
@@ -6285,7 +6285,7 @@ module Aws::Imagebuilder
     #   <p>The maximum number of items to return in a single request.</p>
     #   @return [Integer]
     # @!attribute next_token
-    #   <p>A token to specify where to start paginating. Use the <code>nextToken</code> value
+    #   <p>A token to specify where to start paginating. Use the <code>nextToken</code> value 
     #   	from a previously truncated response.</p>
     #   @return [String]
     class ListImageScanFindingsRequest < Struct.new(
@@ -6306,8 +6306,8 @@ module Aws::Imagebuilder
     #   			criteria.</p>
     #   @return [Array<Types::ImageScanFinding>]
     # @!attribute next_token
-    #   <p>The next token used for paginated responses. When this field isn't empty,
-    #   	there are additional elements that the service hasn't included in this request. Use this token
+    #   <p>The next token used for paginated responses. When this field isn't empty, 
+    #   	there are additional elements that the service hasn't included in this request. Use this token 
     #   		with the next request to retrieve additional objects.</p>
     #   @return [String]
     class ListImageScanFindingsResponse < Struct.new(
@@ -6321,7 +6321,7 @@ module Aws::Imagebuilder
     end
 
     # @!attribute owner
-    #   <p>Filters the list to images owned by you, by Amazon, or shared with you by other accounts.
+    #   <p>Filters the list to images owned by you, by Amazon, or shared with you by other accounts. 
     #   		By default, only your account's images are returned.</p>
     #   @return [String]
     # @!attribute filters
@@ -6364,7 +6364,7 @@ module Aws::Imagebuilder
     #   <p>The maximum number of items to return in a single request.</p>
     #   @return [Integer]
     # @!attribute next_token
-    #   <p>A token to specify where to start paginating. Use the <code>nextToken</code> value
+    #   <p>A token to specify where to start paginating. Use the <code>nextToken</code> value 
     #   	from a previously truncated response.</p>
     #   @return [String]
     # @!attribute include_deprecated
@@ -6391,17 +6391,17 @@ module Aws::Imagebuilder
     # @!attribute image_version_list
     #   <p>The list of image semantic versions.</p>
     #            <note>
-    #               <p>The semantic version has four nodes: <major>.<minor>.<patch>/<build>.
+    #               <p>The semantic version has four nodes: <major>.<minor>.<patch>/<build>. 
     #   	You can assign values for the first three, and can filter on all of them.</p>
     #               <p>
-    #                  <b>Filtering:</b> You can use wildcards (x) to specify the most recent versions or nodes when
-    #   	selecting the base image or components for your recipe. When you use a wildcard in any node, all nodes
+    #                  <b>Filtering:</b> You can use wildcards (x) to specify the most recent versions or nodes when 
+    #   	selecting the base image or components for your recipe. When you use a wildcard in any node, all nodes 
     #   	to the right of the first wildcard must also be wildcards.</p>
     #            </note>
     #   @return [Array<Types::ImageVersion>]
     # @!attribute next_token
-    #   <p>The next token used for paginated responses. When this field isn't empty,
-    #   	there are additional elements that the service hasn't included in this request. Use this token
+    #   <p>The next token used for paginated responses. When this field isn't empty, 
+    #   	there are additional elements that the service hasn't included in this request. Use this token 
     #   		with the next request to retrieve additional objects.</p>
     #   @return [String]
     class ListImagesResponse < Struct.new(
@@ -6421,7 +6421,7 @@ module Aws::Imagebuilder
     #   <p>The maximum number of items to return in a single request.</p>
     #   @return [Integer]
     # @!attribute next_token
-    #   <p>A token to specify where to start paginating. Use the <code>nextToken</code> value
+    #   <p>A token to specify where to start paginating. Use the <code>nextToken</code> value 
     #   	from a previously truncated response.</p>
     #   @return [String]
     class ListInfrastructureConfigurationsRequest < Struct.new(
@@ -6441,8 +6441,8 @@ module Aws::Imagebuilder
     #   <p>The list of infrastructure configurations.</p>
     #   @return [Array<Types::InfrastructureConfigurationSummary>]
     # @!attribute next_token
-    #   <p>The next token used for paginated responses. When this field isn't empty,
-    #   	there are additional elements that the service hasn't included in this request. Use this token
+    #   <p>The next token used for paginated responses. When this field isn't empty, 
+    #   	there are additional elements that the service hasn't included in this request. Use this token 
     #   		with the next request to retrieve additional objects.</p>
     #   @return [String]
     class ListInfrastructureConfigurationsResponse < Struct.new(
@@ -6471,7 +6471,7 @@ module Aws::Imagebuilder
     #   <p>The maximum number of items to return in a single request.</p>
     #   @return [Integer]
     # @!attribute next_token
-    #   <p>A token to specify where to start paginating. Use the <code>nextToken</code> value
+    #   <p>A token to specify where to start paginating. Use the <code>nextToken</code> value 
     #   	from a previously truncated response.</p>
     #   @return [String]
     class ListLifecycleExecutionResourcesRequest < Struct.new(
@@ -6495,8 +6495,8 @@ module Aws::Imagebuilder
     #   <p>A list of resources that were identified for lifecycle actions.</p>
     #   @return [Array<Types::LifecycleExecutionResource>]
     # @!attribute next_token
-    #   <p>The next token used for paginated responses. When this field isn't empty,
-    #   	there are additional elements that the service hasn't included in this request. Use this token
+    #   <p>The next token used for paginated responses. When this field isn't empty, 
+    #   	there are additional elements that the service hasn't included in this request. Use this token 
     #   		with the next request to retrieve additional objects.</p>
     #   @return [String]
     class ListLifecycleExecutionResourcesResponse < Struct.new(
@@ -6514,7 +6514,7 @@ module Aws::Imagebuilder
     #   <p>The maximum number of items to return in a single request.</p>
     #   @return [Integer]
     # @!attribute next_token
-    #   <p>A token to specify where to start paginating. Use the <code>nextToken</code> value
+    #   <p>A token to specify where to start paginating. Use the <code>nextToken</code> value 
     #   	from a previously truncated response.</p>
     #   @return [String]
     # @!attribute resource_arn
@@ -6538,8 +6538,8 @@ module Aws::Imagebuilder
     #   <p>A list of lifecycle runtime instances for the specified resource.</p>
     #   @return [Array<Types::LifecycleExecution>]
     # @!attribute next_token
-    #   <p>The next token used for paginated responses. When this field isn't empty,
-    #   	there are additional elements that the service hasn't included in this request. Use this token
+    #   <p>The next token used for paginated responses. When this field isn't empty, 
+    #   	there are additional elements that the service hasn't included in this request. Use this token 
     #   		with the next request to retrieve additional objects.</p>
     #   @return [String]
     class ListLifecycleExecutionsResponse < Struct.new(
@@ -6560,7 +6560,7 @@ module Aws::Imagebuilder
     #   <p>The maximum number of items to return in a single request.</p>
     #   @return [Integer]
     # @!attribute next_token
-    #   <p>A token to specify where to start paginating. Use the <code>nextToken</code> value
+    #   <p>A token to specify where to start paginating. Use the <code>nextToken</code> value 
     #   	from a previously truncated response.</p>
     #   @return [String]
     class ListLifecyclePoliciesRequest < Struct.new(
@@ -6574,12 +6574,12 @@ module Aws::Imagebuilder
     end
 
     # @!attribute lifecycle_policy_summary_list
-    #   <p>A list of lifecycle policies in your Amazon Web Services account that meet the criteria
+    #   <p>A list of lifecycle policies in your Amazon Web Services account that meet the criteria 
     #   			specified in the request.</p>
     #   @return [Array<Types::LifecyclePolicySummary>]
     # @!attribute next_token
-    #   <p>The next token used for paginated responses. When this field isn't empty,
-    #   	there are additional elements that the service hasn't included in this request. Use this token
+    #   <p>The next token used for paginated responses. When this field isn't empty, 
+    #   	there are additional elements that the service hasn't included in this request. Use this token 
     #   		with the next request to retrieve additional objects.</p>
     #   @return [String]
     class ListLifecyclePoliciesResponse < Struct.new(
@@ -6617,7 +6617,7 @@ module Aws::Imagebuilder
     #   <p>The maximum number of items to return in a single request.</p>
     #   @return [Integer]
     # @!attribute next_token
-    #   <p>A token to specify where to start paginating. Use the <code>nextToken</code> value
+    #   <p>A token to specify where to start paginating. Use the <code>nextToken</code> value 
     #   	from a previously truncated response.</p>
     #   @return [String]
     class ListWaitingWorkflowStepsRequest < Struct.new(
@@ -6636,8 +6636,8 @@ module Aws::Imagebuilder
     #   			<a>SendWorkflowStepAction</a> or the wait times out.</p>
     #   @return [Array<Types::WorkflowStepExecution>]
     # @!attribute next_token
-    #   <p>The next token used for paginated responses. When this field isn't empty,
-    #   	there are additional elements that the service hasn't included in this request. Use this token
+    #   <p>The next token used for paginated responses. When this field isn't empty, 
+    #   	there are additional elements that the service hasn't included in this request. Use this token 
     #   		with the next request to retrieve additional objects.</p>
     #   @return [String]
     class ListWaitingWorkflowStepsResponse < Struct.new(
@@ -6659,7 +6659,7 @@ module Aws::Imagebuilder
     #   <p>The maximum number of items to return in a single request.</p>
     #   @return [Integer]
     # @!attribute next_token
-    #   <p>A token to specify where to start paginating. Use the <code>nextToken</code> value
+    #   <p>A token to specify where to start paginating. Use the <code>nextToken</code> value 
     #   	from a previously truncated response.</p>
     #   @return [String]
     class ListWorkflowBuildVersionsRequest < Struct.new(
@@ -6677,8 +6677,8 @@ module Aws::Imagebuilder
     #   			resource specified in the request.</p>
     #   @return [Array<Types::WorkflowSummary>]
     # @!attribute next_token
-    #   <p>The next token used for paginated responses. When this field isn't empty,
-    #   	there are additional elements that the service hasn't included in this request. Use this token
+    #   <p>The next token used for paginated responses. When this field isn't empty, 
+    #   	there are additional elements that the service hasn't included in this request. Use this token 
     #   		with the next request to retrieve additional objects.</p>
     #   @return [String]
     class ListWorkflowBuildVersionsResponse < Struct.new(
@@ -6694,11 +6694,11 @@ module Aws::Imagebuilder
     #   <p>The maximum number of items to return in a single request.</p>
     #   @return [Integer]
     # @!attribute next_token
-    #   <p>A token to specify where to start paginating. Use the <code>nextToken</code> value
+    #   <p>A token to specify where to start paginating. Use the <code>nextToken</code> value 
     #   	from a previously truncated response.</p>
     #   @return [String]
     # @!attribute image_build_version_arn
-    #   <p>List all workflow runtime instances for the specified image build version
+    #   <p>List all workflow runtime instances for the specified image build version 
     #   			resource ARN.</p>
     #   @return [String]
     class ListWorkflowExecutionsRequest < Struct.new(
@@ -6721,7 +6721,7 @@ module Aws::Imagebuilder
     #   			versions.</p>
     #   @return [Array<Types::WorkflowExecutionMetadata>]
     # @!attribute image_build_version_arn
-    #   <p>The resource Amazon Resource Name (ARN) of the image build version for which you requested a list of
+    #   <p>The resource Amazon Resource Name (ARN) of the image build version for which you requested a list of 
     #   			workflow runtime details.</p>
     #   @return [String]
     # @!attribute message
@@ -6730,8 +6730,8 @@ module Aws::Imagebuilder
     #   			available even when no workflow executions remain for the image.</p>
     #   @return [String]
     # @!attribute next_token
-    #   <p>The next token used for paginated responses. When this field isn't empty,
-    #   	there are additional elements that the service hasn't included in this request. Use this token
+    #   <p>The next token used for paginated responses. When this field isn't empty, 
+    #   	there are additional elements that the service hasn't included in this request. Use this token 
     #   		with the next request to retrieve additional objects.</p>
     #   @return [String]
     class ListWorkflowExecutionsResponse < Struct.new(
@@ -6750,7 +6750,7 @@ module Aws::Imagebuilder
     #   <p>The maximum number of items to return in a single request.</p>
     #   @return [Integer]
     # @!attribute next_token
-    #   <p>A token to specify where to start paginating. Use the <code>nextToken</code> value
+    #   <p>A token to specify where to start paginating. Use the <code>nextToken</code> value 
     #   	from a previously truncated response.</p>
     #   @return [String]
     # @!attribute workflow_execution_id
@@ -6771,11 +6771,11 @@ module Aws::Imagebuilder
     #   <p>The request ID that uniquely identifies this request.</p>
     #   @return [String]
     # @!attribute steps
-    #   <p>Contains an array of runtime details that represents each step in this runtime
+    #   <p>Contains an array of runtime details that represents each step in this runtime 
     #   			instance of the workflow.</p>
     #   @return [Array<Types::WorkflowStepMetadata>]
     # @!attribute workflow_build_version_arn
-    #   <p>The build version Amazon Resource Name (ARN) for the Image Builder workflow resource that defines the steps for
+    #   <p>The build version Amazon Resource Name (ARN) for the Image Builder workflow resource that defines the steps for 
     #   			this runtime instance of the workflow.</p>
     #   @return [String]
     # @!attribute workflow_execution_id
@@ -6783,15 +6783,15 @@ module Aws::Imagebuilder
     #   			when it ran the workflow.</p>
     #   @return [String]
     # @!attribute image_build_version_arn
-    #   <p>The image build version resource Amazon Resource Name (ARN) that's associated with the specified runtime
+    #   <p>The image build version resource Amazon Resource Name (ARN) that's associated with the specified runtime 
     #   			instance of the workflow.</p>
     #   @return [String]
     # @!attribute message
     #   <p>The output message from the list action, if applicable.</p>
     #   @return [String]
     # @!attribute next_token
-    #   <p>The next token used for paginated responses. When this field isn't empty,
-    #   	there are additional elements that the service hasn't included in this request. Use this token
+    #   <p>The next token used for paginated responses. When this field isn't empty, 
+    #   	there are additional elements that the service hasn't included in this request. Use this token 
     #   		with the next request to retrieve additional objects.</p>
     #   @return [String]
     class ListWorkflowStepExecutionsResponse < Struct.new(
@@ -6830,7 +6830,7 @@ module Aws::Imagebuilder
     #   <p>The maximum number of items to return in a single request.</p>
     #   @return [Integer]
     # @!attribute next_token
-    #   <p>A token to specify where to start paginating. Use the <code>nextToken</code> value
+    #   <p>A token to specify where to start paginating. Use the <code>nextToken</code> value 
     #   	from a previously truncated response.</p>
     #   @return [String]
     class ListWorkflowsRequest < Struct.new(
@@ -6849,8 +6849,8 @@ module Aws::Imagebuilder
     #   <p>A list of workflow versions that match the request criteria.</p>
     #   @return [Array<Types::WorkflowVersion>]
     # @!attribute next_token
-    #   <p>The next token used for paginated responses. When this field isn't empty,
-    #   	there are additional elements that the service hasn't included in this request. Use this token
+    #   <p>The next token used for paginated responses. When this field isn't empty, 
+    #   	there are additional elements that the service hasn't included in this request. Use this token 
     #   		with the next request to retrieve additional objects.</p>
     #   @return [String]
     class ListWorkflowsResponse < Struct.new(
@@ -6988,21 +6988,21 @@ module Aws::Imagebuilder
       include ::Smithy::Schema::Structure
     end
 
-    # <p>By default, EC2 instances run on shared tenancy hardware. This means that multiple
-    # 			Amazon Web Services accounts might share the same physical hardware. When you use dedicated hardware,
-    # 			the physical server that hosts your instances is dedicated to your Amazon Web Services account.
-    # 			Instance placement settings contain the details for the physical hardware where
+    # <p>By default, EC2 instances run on shared tenancy hardware. This means that multiple 
+    # 			Amazon Web Services accounts might share the same physical hardware. When you use dedicated hardware, 
+    # 			the physical server that hosts your instances is dedicated to your Amazon Web Services account. 
+    # 			Instance placement settings contain the details for the physical hardware where 
     # 			instances that Image Builder launches during image creation will run.</p>
     # @!attribute availability_zone
     #   <p>The Availability Zone where your build and test instances will launch.</p>
     #   @return [String]
     # @!attribute tenancy
-    #   <p>The tenancy of the instance. An instance with a tenancy of <code>dedicated</code>
-    #   			runs on single-tenant hardware. An instance with a tenancy of <code>host</code> runs
+    #   <p>The tenancy of the instance. An instance with a tenancy of <code>dedicated</code> 
+    #   			runs on single-tenant hardware. An instance with a tenancy of <code>host</code> runs 
     #   			on a Dedicated Host.</p>
-    #            <p>If tenancy is set to <code>host</code>, then you can optionally specify one target
-    #   			for placement – either host ID or host resource group ARN. If automatic placement
-    #   			is enabled for your host, and you don't specify any placement target, Amazon EC2 will try to
+    #            <p>If tenancy is set to <code>host</code>, then you can optionally specify one target 
+    #   			for placement – either host ID or host resource group ARN. If automatic placement 
+    #   			is enabled for your host, and you don't specify any placement target, Amazon EC2 will try to 
     #   			find an available host for your build and test instances.</p>
     #   @return [String]
     # @!attribute host_id
@@ -7026,12 +7026,12 @@ module Aws::Imagebuilder
 
     # <p>Information about a single product code.</p>
     # @!attribute product_code_id
-    #   <p>For Amazon Web Services Marketplace components, this contains the product code ID that can be stamped onto
-    #   			an EC2 AMI to ensure that components are billed correctly. If this property is empty,
+    #   <p>For Amazon Web Services Marketplace components, this contains the product code ID that can be stamped onto 
+    #   			an EC2 AMI to ensure that components are billed correctly. If this property is empty, 
     #   			it might mean that the component is not published.</p>
     #   @return [String]
     # @!attribute product_code_type
-    #   <p>The owner of the product code that's billed. If this property is
+    #   <p>The owner of the product code that's billed. If this property is 
     #   			empty, it might mean that the component is not published.</p>
     #   @return [String]
     class ProductCodeListItem < Struct.new(
@@ -7206,23 +7206,23 @@ module Aws::Imagebuilder
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Controls Secure Boot and UEFI data settings for the resulting image
-    # 			during ISO imports. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/uefi-secure-boot.html">UEFI Secure Boot for Amazon EC2 instances</a> in
+    # <p>Controls Secure Boot and UEFI data settings for the resulting image 
+    # 			during ISO imports. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/uefi-secure-boot.html">UEFI Secure Boot for Amazon EC2 instances</a> in 
     # 			the <i>
     #                <i>Amazon EC2 User Guide</i>
     #             </i>.</p>
     # @!attribute secure_boot_enabled
-    #   <p>Specifies whether Secure Boot is enabled for the output AMI.
-    #   			The default value is <code>true</code>. To disable Secure Boot
+    #   <p>Specifies whether Secure Boot is enabled for the output AMI. 
+    #   			The default value is <code>true</code>. To disable Secure Boot 
     #   			for custom unsigned drivers, set this value to <code>false</code>.</p>
     #   @return [Boolean]
     # @!attribute uefi_data
-    #   <p>A Base64-encoded representation of the non-volatile UEFI variable store.
-    #   			You can specify this parameter only when
-    #   			<code>secureBootEnabled</code> is <code>true</code> or
-    #   			unspecified. You can inspect and modify the UEFI data by using
+    #   <p>A Base64-encoded representation of the non-volatile UEFI variable store. 
+    #   			You can specify this parameter only when 
+    #   			<code>secureBootEnabled</code> is <code>true</code> or 
+    #   			unspecified. You can inspect and modify the UEFI data by using 
     #   			the <a href="https://github.com/awslabs/python-uefivars">python-uefivars tool on GitHub</a>.</p>
-    #            <p>For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/uefi-variables.html">UEFI
+    #            <p>For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/uefi-variables.html">UEFI 
     #   				variables for Amazon EC2 instances</a>.</p>
     #   @return [String]
     class RegisterImageOptions < Struct.new(
@@ -7484,15 +7484,15 @@ module Aws::Imagebuilder
     #   			<code>America/Los_Angeles</code>. If not specified, this defaults to UTC.</p>
     #   @return [String]
     # @!attribute pipeline_execution_start_condition
-    #   <p>The start condition configures when the pipeline should trigger a new image build,
-    #   			as follows. If no value is set Image Builder defaults to
+    #   <p>The start condition configures when the pipeline should trigger a new image build, 
+    #   			as follows. If no value is set Image Builder defaults to 
     #   			<code>EXPRESSION_MATCH_AND_DEPENDENCY_UPDATES_AVAILABLE</code>.</p>
     #            <ul>
     #               <li>
     #                  <p>
-    #                     <code>EXPRESSION_MATCH_AND_DEPENDENCY_UPDATES_AVAILABLE</code> (default) –
-    #   					When you use semantic version filters on the base image or components in your
-    #   					image recipe, EC2 Image Builder builds a new image only when there are new versions of
+    #                     <code>EXPRESSION_MATCH_AND_DEPENDENCY_UPDATES_AVAILABLE</code> (default) – 
+    #   					When you use semantic version filters on the base image or components in your 
+    #   					image recipe, EC2 Image Builder builds a new image only when there are new versions of 
     #   					the base image or components in your recipe that match the filter.</p>
     #                  <note>
     #                     <p>For semantic version syntax, see
@@ -7512,7 +7512,7 @@ module Aws::Imagebuilder
     #            </note>
     #   @return [String]
     # @!attribute auto_disable_policy
-    #   <p>The policy that configures when Image Builder should automatically disable a pipeline that
+    #   <p>The policy that configures when Image Builder should automatically disable a pipeline that 
     #   			is failing.</p>
     #   @return [Types::AutoDisablePolicy]
     class Schedule < Struct.new(
@@ -7573,7 +7573,7 @@ module Aws::Imagebuilder
     #   			specified in the request.</p>
     #   @return [String]
     # @!attribute image_build_version_arn
-    #   <p>The Amazon Resource Name (ARN) of the image build version that received the action
+    #   <p>The Amazon Resource Name (ARN) of the image build version that received the action 
     #   			request.</p>
     #   @return [String]
     # @!attribute client_token
@@ -7650,16 +7650,16 @@ module Aws::Imagebuilder
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Configuration for a single Parameter in the Amazon Web Services Systems Manager (SSM) Parameter Store in
+    # <p>Configuration for a single Parameter in the Amazon Web Services Systems Manager (SSM) Parameter Store in 
     # 			a given Region.</p>
     # @!attribute ami_account_id
-    #   <p>Specify the account that will own the Parameter in a given Region. During distribution,
-    #   			this account must be specified in distribution settings as a target account for the
+    #   <p>Specify the account that will own the Parameter in a given Region. During distribution, 
+    #   			this account must be specified in distribution settings as a target account for the 
     #   			Region.</p>
     #   @return [String]
     # @!attribute parameter_name
-    #   <p>This is the name of the Parameter in the target Region or account. The image
-    #   			distribution creates the Parameter if it doesn't already exist. Otherwise, it updates
+    #   <p>This is the name of the Parameter in the target Region or account. The image 
+    #   			distribution creates the Parameter if it doesn't already exist. Otherwise, it updates 
     #   			the parameter.</p>
     #   @return [String]
     # @!attribute data_type
@@ -7688,7 +7688,7 @@ module Aws::Imagebuilder
     #          in the <i>Amazon EC2 API Reference</i>.</p>
     #   @return [String]
     # @!attribute tags
-    #   <p>The tags for Image Builder to apply to the image resource that's created
+    #   <p>The tags for Image Builder to apply to the image resource that's created 
     #   			when pipeline execution starts.</p>
     #   @return [Hash<String, String>]
     class StartImagePipelineExecutionRequest < Struct.new(
@@ -8350,12 +8350,12 @@ module Aws::Imagebuilder
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Windows-specific configuration settings for an ISO import, including
+    # <p>Windows-specific configuration settings for an ISO import, including 
     # 			the edition to install from a multi-edition Windows ISO file.</p>
     # @!attribute image_index
-    #   <p>The 1-based index that specifies which Windows edition to install
-    #   			from a multi-edition Windows ISO file. A Windows ISO can contain a
-    #   			<code>.wim</code> file with multiple image indexes, each representing
+    #   <p>The 1-based index that specifies which Windows edition to install 
+    #   			from a multi-edition Windows ISO file. A Windows ISO can contain a 
+    #   			<code>.wim</code> file with multiple image indexes, each representing 
     #   			a different edition.</p>
     #   @return [Integer]
     class WindowsConfiguration < Struct.new(
@@ -8375,21 +8375,21 @@ module Aws::Imagebuilder
     #   <p>The name of the workflow resource.</p>
     #   @return [String]
     # @!attribute version
-    #   <p>The workflow resource version. Workflow resources are immutable.
+    #   <p>The workflow resource version. Workflow resources are immutable. 
     #   			To make a change, you can clone a workflow or create a new version.</p>
     #   @return [String]
     # @!attribute description
     #   <p>The description of the workflow.</p>
     #   @return [String]
     # @!attribute change_description
-    #   <p>Describes what change has been made in this version of the workflow, or
+    #   <p>Describes what change has been made in this version of the workflow, or 
     #   			what makes this version different from other versions of the workflow.</p>
     #   @return [String]
     # @!attribute type
     #   <p>The image creation stage that the workflow applies to.</p>
     #   @return [String]
     # @!attribute state
-    #   <p>Describes the current status of the workflow and the reason for
+    #   <p>Describes the current status of the workflow and the reason for 
     #   			that status.</p>
     #   @return [Types::WorkflowState]
     # @!attribute owner
@@ -8399,7 +8399,7 @@ module Aws::Imagebuilder
     #   <p>Contains the YAML document content for the workflow.</p>
     #   @return [String]
     # @!attribute kms_key_id
-    #   <p>The KMS key identifier used to encrypt the workflow resource. This can be either the Key ARN or the Alias ARN. For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN">Key identifiers (KeyId)</a>
+    #   <p>The KMS key identifier used to encrypt the workflow resource. This can be either the Key ARN or the Alias ARN. For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN">Key identifiers (KeyId)</a> 
     #   			in the <i>Key Management Service Developer Guide</i>.</p>
     #   @return [String]
     # @!attribute date_created
@@ -8432,21 +8432,21 @@ module Aws::Imagebuilder
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Contains control settings and configurable inputs for a workflow
+    # <p>Contains control settings and configurable inputs for a workflow 
     # 			resource.</p>
     # @!attribute workflow_arn
     #   <p>The Amazon Resource Name (ARN) of the workflow resource.</p>
     #   @return [String]
     # @!attribute parameters
-    #   <p>Contains parameter values for each of the parameters that the workflow
+    #   <p>Contains parameter values for each of the parameters that the workflow 
     #   			document defined for the workflow resource.</p>
     #   @return [Array<Types::WorkflowParameter>]
     # @!attribute parallel_group
-    #   <p>Test workflows are defined within named runtime groups called parallel groups.
-    #   			The parallel group is the named group that contains this test workflow. Test
-    #   			workflows within a parallel group can run at the same time. Image Builder starts up to five
-    #   			test workflows in the group at the same time, and starts additional workflows as
-    #   			others complete, until all workflows in the group have completed. This field only
+    #   <p>Test workflows are defined within named runtime groups called parallel groups. 
+    #   			The parallel group is the named group that contains this test workflow. Test 
+    #   			workflows within a parallel group can run at the same time. Image Builder starts up to five 
+    #   			test workflows in the group at the same time, and starts additional workflows as 
+    #   			others complete, until all workflows in the group have completed. This field only 
     #   			applies for test workflows.</p>
     #   @return [String]
     # @!attribute on_failure
@@ -8556,7 +8556,7 @@ module Aws::Imagebuilder
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Defines a parameter that's used to provide configuration details for the
+    # <p>Defines a parameter that's used to provide configuration details for the 
     # 			workflow.</p>
     # @!attribute name
     #   <p>The name of this input parameter.</p>
@@ -8602,14 +8602,14 @@ module Aws::Imagebuilder
     # <p>Contains runtime details for a workflow step that has paused at a
     # 			<code>WaitForAction</code> step, and is waiting for you to send an action.</p>
     # @!attribute step_execution_id
-    #   <p>Uniquely identifies the workflow step that ran for the associated
+    #   <p>Uniquely identifies the workflow step that ran for the associated 
     #   			image build version.</p>
     #   @return [String]
     # @!attribute image_build_version_arn
     #   <p>The Amazon Resource Name (ARN) of the image build version that ran the workflow.</p>
     #   @return [String]
     # @!attribute workflow_execution_id
-    #   <p>Uniquely identifies the runtime instance of the workflow that contains
+    #   <p>Uniquely identifies the runtime instance of the workflow that contains 
     #   			the workflow step that ran for the associated image build version.</p>
     #   @return [String]
     # @!attribute workflow_build_version_arn

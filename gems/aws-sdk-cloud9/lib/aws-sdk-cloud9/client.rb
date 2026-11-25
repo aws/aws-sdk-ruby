@@ -3,7 +3,6 @@
 # This is generated code!
 
 require_relative 'plugins/endpoint'
-require 'smithy-client/plugins/checksum_required'
 require 'smithy-client/plugins/content_length'
 require 'smithy-client/plugins/default_params'
 require 'smithy-client/plugins/host_prefix'
@@ -23,6 +22,8 @@ require 'smithy-client/plugins/transfer_encoding'
 require 'aws-sdk-core/plugins/global_configuration'
 require 'aws-sdk-core/plugins/shared_config'
 require 'aws-sdk-core/plugins/user_agent'
+require 'aws-sdk-core/plugins/checksum_algorithm'
+require 'aws-sdk-core/plugins/http_checksum'
 require 'aws-sdk-core/plugins/invocation_id'
 require 'aws-sdk-core/plugins/recursion_detection'
 require 'aws-sdk-core/plugins/retry_errors'
@@ -43,7 +44,6 @@ module Aws::Cloud9
     @identifier = :cloud9
 
     add_plugin(::Aws::Cloud9::Plugins::Endpoint)
-    add_plugin(Smithy::Client::Plugins::ChecksumRequired)
     add_plugin(Smithy::Client::Plugins::ContentLength)
     add_plugin(Smithy::Client::Plugins::DefaultParams)
     add_plugin(Smithy::Client::Plugins::HostPrefix)
@@ -63,6 +63,8 @@ module Aws::Cloud9
     add_plugin(Aws::Core::Plugins::GlobalConfiguration)
     add_plugin(Aws::Core::Plugins::SharedConfig)
     add_plugin(Aws::Core::Plugins::UserAgent)
+    add_plugin(Aws::Core::Plugins::ChecksumAlgorithm)
+    add_plugin(Aws::Core::Plugins::HttpChecksum)
     add_plugin(Aws::Core::Plugins::InvocationId)
     add_plugin(Aws::Core::Plugins::RecursionDetection)
     add_plugin(Aws::Core::Plugins::RetryErrors)
@@ -139,23 +141,41 @@ module Aws::Cloud9
     #  * `ENV['AWS_DEFAULT_REGION']`
     #  * `~/.aws/credentials` as `region` under a profile
     #  * `~/.aws/config` as `region` under a profile
+    # @option options [String] :request_checksum_calculation (when_supported)
+    #  Determines when a checksum is calculated for request payloads. Values are:
+    #  
+    #  * `when_supported` - (default) A checksum is calculated for operations
+    #    modeled with the `httpChecksum` trait when `requestChecksumRequired`
+    #    is `true` or a `requestAlgorithmMember` is modeled.
+    #  * `when_required` - A checksum is calculated only when
+    #    `requestChecksumRequired` is `true`, or when the caller supplies a
+    #    modeled `requestAlgorithmMember`.
     # @option options [Integer] :request_min_compression_size_bytes (10240)
     #  The minimum size in bytes that triggers compression for request bodies.
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
+    # @option options [String] :response_checksum_validation (when_supported)
+    #  Determines when checksum validation is performed for response payloads.
+    #  Values are:
+    #  
+    #  * `when_supported` - (default) Validation is enabled for operations
+    #    modeled with a `requestValidationModeMember` and at least one
+    #    `responseAlgorithms` value supported by the client.
+    #  * `when_required` - Validation is performed only when the caller sets
+    #    the modeled `requestValidationModeMember` to `ENABLED`.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #
+    #  
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #
+    #  
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #
+    #  
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -212,8 +232,8 @@ module Aws::Cloud9
     # <p>Creates an Cloud9 development environment, launches an Amazon Elastic Compute Cloud (Amazon EC2) instance, and
     #       then connects from the instance to the environment.</p>
     #          <important>
-    #             <p>Cloud9 is no longer available to new customers. Existing customers of
-    #         Cloud9 can continue to use the service as normal.
+    #             <p>Cloud9 is no longer available to new customers. Existing customers of 
+    #         Cloud9 can continue to use the service as normal. 
     #         <a href="http://aws.amazon.com/blogs/devops/how-to-migrate-from-aws-cloud9-to-aws-ide-toolkits-or-aws-cloudshell/">Learn more"</a>
     #             </p>
     #          </important>
@@ -294,7 +314,7 @@ module Aws::Cloud9
     # @option params [Boolean] :dry_run
     #   <p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     # @example CreateEnvironmentEC2
-    #
+    #   
     #   params = {
     #     name: "my-demo-environment",
     #     description: "This is my demonstration environment.",
@@ -344,8 +364,8 @@ module Aws::Cloud9
 
     # <p>Adds an environment member to an Cloud9 development environment.</p>
     #          <important>
-    #             <p>Cloud9 is no longer available to new customers. Existing customers of
-    #         Cloud9 can continue to use the service as normal.
+    #             <p>Cloud9 is no longer available to new customers. Existing customers of 
+    #         Cloud9 can continue to use the service as normal. 
     #         <a href="http://aws.amazon.com/blogs/devops/how-to-migrate-from-aws-cloud9-to-aws-ide-toolkits-or-aws-cloudshell/">Learn more"</a>
     #             </p>
     #          </important>
@@ -368,7 +388,7 @@ module Aws::Cloud9
     #               </li>
     #            </ul>
     # @example CreateEnvironmentMembership
-    #
+    #   
     #   params = {
     #     environment_id: "8d9967e2f0624182b74e7690ad69ebEX",
     #     user_arn: "arn:aws:iam::123456789012:user/AnotherDemoUser",
@@ -413,8 +433,8 @@ module Aws::Cloud9
     # <p>Deletes an Cloud9 development environment. If an Amazon EC2 instance is connected to the
     #       environment, also terminates the instance.</p>
     #          <important>
-    #             <p>Cloud9 is no longer available to new customers. Existing customers of
-    #         Cloud9 can continue to use the service as normal.
+    #             <p>Cloud9 is no longer available to new customers. Existing customers of 
+    #         Cloud9 can continue to use the service as normal. 
     #         <a href="http://aws.amazon.com/blogs/devops/how-to-migrate-from-aws-cloud9-to-aws-ide-toolkits-or-aws-cloudshell/">Learn more"</a>
     #             </p>
     #          </important>
@@ -422,7 +442,7 @@ module Aws::Cloud9
     # @option params [String] :environment_id
     #   <p>The ID of the environment to delete.</p>
     # @example DeleteEnvironment
-    #
+    #   
     #   params = {
     #     environment_id: "8d9967e2f0624182b74e7690ad69ebEX"
     #   }
@@ -447,8 +467,8 @@ module Aws::Cloud9
 
     # <p>Deletes an environment member from a development environment.</p>
     #          <important>
-    #             <p>Cloud9 is no longer available to new customers. Existing customers of
-    #         Cloud9 can continue to use the service as normal.
+    #             <p>Cloud9 is no longer available to new customers. Existing customers of 
+    #         Cloud9 can continue to use the service as normal. 
     #         <a href="http://aws.amazon.com/blogs/devops/how-to-migrate-from-aws-cloud9-to-aws-ide-toolkits-or-aws-cloudshell/">Learn more"</a>
     #             </p>
     #          </important>
@@ -459,7 +479,7 @@ module Aws::Cloud9
     #   <p>The Amazon Resource Name (ARN) of the environment member to delete from the
     #         environment.</p>
     # @example DeleteEnvironmentMembership
-    #
+    #   
     #   params = {
     #     environment_id: "8d9967e2f0624182b74e7690ad69ebEX",
     #     user_arn: "arn:aws:iam::123456789012:user/AnotherDemoUser"
@@ -486,8 +506,8 @@ module Aws::Cloud9
 
     # <p>Gets information about environment members for an Cloud9 development environment.</p>
     #          <important>
-    #             <p>Cloud9 is no longer available to new customers. Existing customers of
-    #         Cloud9 can continue to use the service as normal.
+    #             <p>Cloud9 is no longer available to new customers. Existing customers of 
+    #         Cloud9 can continue to use the service as normal. 
     #         <a href="http://aws.amazon.com/blogs/devops/how-to-migrate-from-aws-cloud9-to-aws-ide-toolkits-or-aws-cloudshell/">Learn more"</a>
     #             </p>
     #          </important>
@@ -627,8 +647,8 @@ module Aws::Cloud9
 
     # <p>Gets status information for an Cloud9 development environment.</p>
     #          <important>
-    #             <p>Cloud9 is no longer available to new customers. Existing customers of
-    #         Cloud9 can continue to use the service as normal.
+    #             <p>Cloud9 is no longer available to new customers. Existing customers of 
+    #         Cloud9 can continue to use the service as normal. 
     #         <a href="http://aws.amazon.com/blogs/devops/how-to-migrate-from-aws-cloud9-to-aws-ide-toolkits-or-aws-cloudshell/">Learn more"</a>
     #             </p>
     #          </important>
@@ -636,7 +656,7 @@ module Aws::Cloud9
     # @option params [String] :environment_id
     #   <p>The ID of the environment to get status information about.</p>
     # @example DescribeEnvironmentStatus
-    #
+    #   
     #   params = {
     #     environment_id: "8d9967e2f0624182b74e7690ad69ebEX"
     #   }
@@ -667,8 +687,8 @@ module Aws::Cloud9
 
     # <p>Gets information about Cloud9 development environments.</p>
     #          <important>
-    #             <p>Cloud9 is no longer available to new customers. Existing customers of
-    #         Cloud9 can continue to use the service as normal.
+    #             <p>Cloud9 is no longer available to new customers. Existing customers of 
+    #         Cloud9 can continue to use the service as normal. 
     #         <a href="http://aws.amazon.com/blogs/devops/how-to-migrate-from-aws-cloud9-to-aws-ide-toolkits-or-aws-cloudshell/">Learn more"</a>
     #             </p>
     #          </important>
@@ -676,7 +696,7 @@ module Aws::Cloud9
     # @option params [Array<String>] :environment_ids
     #   <p>The IDs of individual environments to get information about.</p>
     # @example DescribeEnvironments
-    #
+    #   
     #   params = {
     #     environment_ids: [
     #       "8d9967e2f0624182b74e7690ad69ebEX",
@@ -747,14 +767,14 @@ module Aws::Cloud9
 
     # <p>Gets a list of Cloud9 development environment identifiers.</p>
     #          <important>
-    #             <p>Cloud9 is no longer available to new customers. Existing customers of
-    #         Cloud9 can continue to use the service as normal.
+    #             <p>Cloud9 is no longer available to new customers. Existing customers of 
+    #         Cloud9 can continue to use the service as normal. 
     #         <a href="http://aws.amazon.com/blogs/devops/how-to-migrate-from-aws-cloud9-to-aws-ide-toolkits-or-aws-cloudshell/">Learn more"</a>
     #             </p>
     #          </important>
     #          <important>
-    #             <p>Cloud9 is no longer available to new customers. Existing customers of
-    #         Cloud9 can continue to use the service as normal.
+    #             <p>Cloud9 is no longer available to new customers. Existing customers of 
+    #         Cloud9 can continue to use the service as normal. 
     #         <a href="http://aws.amazon.com/blogs/devops/how-to-migrate-from-aws-cloud9-to-aws-ide-toolkits-or-aws-cloudshell/">Learn more"</a>
     #             </p>
     #          </important>
@@ -768,7 +788,7 @@ module Aws::Cloud9
     # @option params [Integer] :max_results
     #   <p>The maximum number of environments to get identifiers for.</p>
     # @example ListEnvironments
-    #
+    #   
     #   params = {}
     #   options = {}
     #   response = client.list_environments(params, options)
@@ -800,8 +820,8 @@ module Aws::Cloud9
 
     # <p>Gets a list of the tags associated with an Cloud9 development environment.</p>
     #          <important>
-    #             <p>Cloud9 is no longer available to new customers. Existing customers of
-    #         Cloud9 can continue to use the service as normal.
+    #             <p>Cloud9 is no longer available to new customers. Existing customers of 
+    #         Cloud9 can continue to use the service as normal. 
     #         <a href="http://aws.amazon.com/blogs/devops/how-to-migrate-from-aws-cloud9-to-aws-ide-toolkits-or-aws-cloudshell/">Learn more"</a>
     #             </p>
     #          </important>
@@ -833,8 +853,8 @@ module Aws::Cloud9
 
     # <p>Adds tags to an Cloud9 development environment.</p>
     #          <important>
-    #             <p>Cloud9 is no longer available to new customers. Existing customers of
-    #         Cloud9 can continue to use the service as normal.
+    #             <p>Cloud9 is no longer available to new customers. Existing customers of 
+    #         Cloud9 can continue to use the service as normal. 
     #         <a href="http://aws.amazon.com/blogs/devops/how-to-migrate-from-aws-cloud9-to-aws-ide-toolkits-or-aws-cloudshell/">Learn more"</a>
     #             </p>
     #          </important>
@@ -871,8 +891,8 @@ module Aws::Cloud9
 
     # <p>Removes tags from an Cloud9 development environment.</p>
     #          <important>
-    #             <p>Cloud9 is no longer available to new customers. Existing customers of
-    #         Cloud9 can continue to use the service as normal.
+    #             <p>Cloud9 is no longer available to new customers. Existing customers of 
+    #         Cloud9 can continue to use the service as normal. 
     #         <a href="http://aws.amazon.com/blogs/devops/how-to-migrate-from-aws-cloud9-to-aws-ide-toolkits-or-aws-cloudshell/">Learn more"</a>
     #             </p>
     #          </important>
@@ -901,8 +921,8 @@ module Aws::Cloud9
 
     # <p>Changes the settings of an existing Cloud9 development environment.</p>
     #          <important>
-    #             <p>Cloud9 is no longer available to new customers. Existing customers of
-    #         Cloud9 can continue to use the service as normal.
+    #             <p>Cloud9 is no longer available to new customers. Existing customers of 
+    #         Cloud9 can continue to use the service as normal. 
     #         <a href="http://aws.amazon.com/blogs/devops/how-to-migrate-from-aws-cloud9-to-aws-ide-toolkits-or-aws-cloudshell/">Learn more"</a>
     #             </p>
     #          </important>
@@ -933,7 +953,7 @@ module Aws::Cloud9
     #         owner.</p>
     #            </note>
     # @example UpdateEnvironment
-    #
+    #   
     #   params = {
     #     environment_id: "8d9967e2f0624182b74e7690ad69ebEX",
     #     name: "my-changed-demo-environment",
@@ -964,8 +984,8 @@ module Aws::Cloud9
     # <p>Changes the settings of an existing environment member for an Cloud9 development
     #       environment.</p>
     #          <important>
-    #             <p>Cloud9 is no longer available to new customers. Existing customers of
-    #         Cloud9 can continue to use the service as normal.
+    #             <p>Cloud9 is no longer available to new customers. Existing customers of 
+    #         Cloud9 can continue to use the service as normal. 
     #         <a href="http://aws.amazon.com/blogs/devops/how-to-migrate-from-aws-cloud9-to-aws-ide-toolkits-or-aws-cloudshell/">Learn more"</a>
     #             </p>
     #          </important>
@@ -990,7 +1010,7 @@ module Aws::Cloud9
     #               </li>
     #            </ul>
     # @example UpdateEnvironmentMembership
-    #
+    #   
     #   params = {
     #     environment_id: "8d9967e2f0624182b74e7690ad69ebEX",
     #     user_arn: "arn:aws:iam::123456789012:user/AnotherDemoUser",
@@ -1083,7 +1103,8 @@ module Aws::Cloud9
     # @option options [Integer] :max_wait_time
     # @option options [Integer] :min_delay
     # @option options [Integer] :max_delay
-    # @return [nil] Returns `nil` if the waiter was successful.
+    # @return [Smithy::Client::Response] Returns the successful response
+    #   that satisfied the waiter's success condition.
     # @raise [FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition
     #   out of, preventing success.

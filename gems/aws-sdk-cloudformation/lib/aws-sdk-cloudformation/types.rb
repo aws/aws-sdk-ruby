@@ -2713,33 +2713,33 @@ module Aws::CloudFormation
     #   <p>Status of the resource scan.</p>
     #            <dl>
     #               <dt>
-    #
+    #             
     #               IN_PROGRESS
-    #
+    #             
     #           </dt>
     #               <dd>
     #                  <p>The resource scan is still in progress.</p>
     #               </dd>
     #               <dt>
-    #
+    #             
     #               COMPLETE
-    #
+    #             
     #           </dt>
     #               <dd>
     #                  <p>The resource scan is complete.</p>
     #               </dd>
     #               <dt>
-    #
+    #             
     #               EXPIRED
-    #
+    #             
     #           </dt>
     #               <dd>
     #                  <p>The resource scan has expired.</p>
     #               </dd>
     #               <dt>
-    #
+    #             
     #               FAILED
-    #
+    #             
     #           </dt>
     #               <dd>
     #                  <p>The resource scan has failed.</p>
@@ -6867,33 +6867,33 @@ module Aws::CloudFormation
     #   <p>Status of the processing of a resource in a generated template.</p>
     #            <dl>
     #               <dt>
-    #
+    #        
     #         InProgress
-    #
+    #        
     #       </dt>
     #               <dd>
     #                  <p>The resource processing is still in progress.</p>
     #               </dd>
     #               <dt>
-    #
+    #        
     #         Complete
-    #
+    #        
     #       </dt>
     #               <dd>
     #                  <p>The resource processing is complete.</p>
     #               </dd>
     #               <dt>
-    #
+    #        
     #         Pending
-    #
+    #        
     #       </dt>
     #               <dd>
     #                  <p>The resource processing is pending.</p>
     #               </dd>
     #               <dt>
-    #
+    #        
     #         Failed
-    #
+    #        
     #       </dt>
     #               <dd>
     #                  <p>The resource processing has failed.</p>
@@ -7066,33 +7066,33 @@ module Aws::CloudFormation
     #   <p>Status of the resource scan.</p>
     #            <dl>
     #               <dt>
-    #
+    #        
     #         IN_PROGRESS
-    #
+    #        
     #       </dt>
     #               <dd>
     #                  <p>The resource scan is still in progress.</p>
     #               </dd>
     #               <dt>
-    #
+    #        
     #         COMPLETE
-    #
+    #        
     #       </dt>
     #               <dd>
     #                  <p>The resource scan is complete.</p>
     #               </dd>
     #               <dt>
-    #
+    #        
     #         EXPIRED
-    #
+    #        
     #       </dt>
     #               <dd>
     #                  <p>The resource scan has expired.</p>
     #               </dd>
     #               <dt>
-    #
+    #        
     #         FAILED
-    #
+    #        
     #       </dt>
     #               <dd>
     #                  <p>The resource scan has failed.</p>

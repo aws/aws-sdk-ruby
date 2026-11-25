@@ -3,7 +3,6 @@
 # This is generated code!
 
 require_relative 'plugins/endpoint'
-require 'smithy-client/plugins/checksum_required'
 require 'smithy-client/plugins/content_length'
 require 'smithy-client/plugins/default_params'
 require 'smithy-client/plugins/host_prefix'
@@ -23,6 +22,8 @@ require 'smithy-client/plugins/transfer_encoding'
 require 'aws-sdk-core/plugins/global_configuration'
 require 'aws-sdk-core/plugins/shared_config'
 require 'aws-sdk-core/plugins/user_agent'
+require 'aws-sdk-core/plugins/checksum_algorithm'
+require 'aws-sdk-core/plugins/http_checksum'
 require 'aws-sdk-core/plugins/invocation_id'
 require 'aws-sdk-core/plugins/recursion_detection'
 require 'aws-sdk-core/plugins/retry_errors'
@@ -43,7 +44,6 @@ module Aws::RAM
     @identifier = :ram
 
     add_plugin(::Aws::RAM::Plugins::Endpoint)
-    add_plugin(Smithy::Client::Plugins::ChecksumRequired)
     add_plugin(Smithy::Client::Plugins::ContentLength)
     add_plugin(Smithy::Client::Plugins::DefaultParams)
     add_plugin(Smithy::Client::Plugins::HostPrefix)
@@ -63,6 +63,8 @@ module Aws::RAM
     add_plugin(Aws::Core::Plugins::GlobalConfiguration)
     add_plugin(Aws::Core::Plugins::SharedConfig)
     add_plugin(Aws::Core::Plugins::UserAgent)
+    add_plugin(Aws::Core::Plugins::ChecksumAlgorithm)
+    add_plugin(Aws::Core::Plugins::HttpChecksum)
     add_plugin(Aws::Core::Plugins::InvocationId)
     add_plugin(Aws::Core::Plugins::RecursionDetection)
     add_plugin(Aws::Core::Plugins::RetryErrors)
@@ -139,23 +141,41 @@ module Aws::RAM
     #  * `ENV['AWS_DEFAULT_REGION']`
     #  * `~/.aws/credentials` as `region` under a profile
     #  * `~/.aws/config` as `region` under a profile
+    # @option options [String] :request_checksum_calculation (when_supported)
+    #  Determines when a checksum is calculated for request payloads. Values are:
+    #  
+    #  * `when_supported` - (default) A checksum is calculated for operations
+    #    modeled with the `httpChecksum` trait when `requestChecksumRequired`
+    #    is `true` or a `requestAlgorithmMember` is modeled.
+    #  * `when_required` - A checksum is calculated only when
+    #    `requestChecksumRequired` is `true`, or when the caller supplies a
+    #    modeled `requestAlgorithmMember`.
     # @option options [Integer] :request_min_compression_size_bytes (10240)
     #  The minimum size in bytes that triggers compression for request bodies.
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
+    # @option options [String] :response_checksum_validation (when_supported)
+    #  Determines when checksum validation is performed for response payloads.
+    #  Values are:
+    #  
+    #  * `when_supported` - (default) Validation is enabled for operations
+    #    modeled with a `requestValidationModeMember` and at least one
+    #    `responseAlgorithms` value supported by the client.
+    #  * `when_required` - Validation is performed only when the caller sets
+    #    the modeled `requestValidationModeMember` to `ENABLED`.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #
+    #  
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #
+    #  
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #
+    #  
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -219,12 +239,12 @@ module Aws::RAM
     #   <p>Specifies a unique, case-sensitive identifier that you provide to
     #                ensure the idempotency of the request. This lets you safely retry the request without
     #                accidentally performing the same operation a second time. Passing the same value to a
-    #                later call to an operation requires that you also pass the same value for all other
-    #                parameters. We recommend that you use a <a href="https://wikipedia.org/wiki/Universally_unique_identifier">UUID type of
+    #                later call to an operation requires that you also pass the same value for all other 
+    #                parameters. We recommend that you use a <a href="https://wikipedia.org/wiki/Universally_unique_identifier">UUID type of 
     #                value.</a>.</p>
     #            <p>If you don't provide this value, then Amazon Web Services generates a random one for
     #                you.</p>
-    #            <p>If you retry the operation with the same <code>ClientToken</code>, but with
+    #            <p>If you retry the operation with the same <code>ClientToken</code>, but with 
     #                different parameters, the retry fails with an <code>IdempotentParameterMismatch</code>
     #                error.</p>
     # @example Request syntax with placeholder values
@@ -315,7 +335,7 @@ module Aws::RAM
     #               </li>
     #            </ul>
     #            <note>
-    #               <p>Not all resource types can be shared with IAM roles and users.
+    #               <p>Not all resource types can be shared with IAM roles and users. 
     #                For more information, see <a href="https://docs.aws.amazon.com/ram/latest/userguide/permissions.html#permissions-rbp-supported-resource-types">Sharing with IAM roles and users</a> in the <i>Resource Access Manager User
     #                       Guide</i>.</p>
     #            </note>
@@ -323,12 +343,12 @@ module Aws::RAM
     #   <p>Specifies a unique, case-sensitive identifier that you provide to
     #                ensure the idempotency of the request. This lets you safely retry the request without
     #                accidentally performing the same operation a second time. Passing the same value to a
-    #                later call to an operation requires that you also pass the same value for all other
-    #                parameters. We recommend that you use a <a href="https://wikipedia.org/wiki/Universally_unique_identifier">UUID type of
+    #                later call to an operation requires that you also pass the same value for all other 
+    #                parameters. We recommend that you use a <a href="https://wikipedia.org/wiki/Universally_unique_identifier">UUID type of 
     #                value.</a>.</p>
     #            <p>If you don't provide this value, then Amazon Web Services generates a random one for
     #                you.</p>
-    #            <p>If you retry the operation with the same <code>ClientToken</code>, but with
+    #            <p>If you retry the operation with the same <code>ClientToken</code>, but with 
     #                different parameters, the retry fails with an <code>IdempotentParameterMismatch</code>
     #                error.</p>
     # @option params [Array<String>] :sources
@@ -377,7 +397,7 @@ module Aws::RAM
     #               permissions.</p>
     # @option params [String] :permission_arn
     #   <p>Specifies the <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Name (ARN)</a> of the RAM permission to associate with the resource share.
-    #               To find the ARN for a permission, use either the <a>ListPermissions</a> operation or go to the <a href="https://console.aws.amazon.com/ram/home#Permissions:">Permissions library</a> page in the RAM console and
+    #               To find the ARN for a permission, use either the <a>ListPermissions</a> operation or go to the <a href="https://console.aws.amazon.com/ram/home#Permissions:">Permissions library</a> page in the RAM console and 
     #                then choose the name of the permission. The ARN is displayed on the detail page.</p>
     # @option params [Boolean] :replace
     #   <p>Specifies whether the specified permission should replace the existing permission
@@ -394,12 +414,12 @@ module Aws::RAM
     #   <p>Specifies a unique, case-sensitive identifier that you provide to
     #                ensure the idempotency of the request. This lets you safely retry the request without
     #                accidentally performing the same operation a second time. Passing the same value to a
-    #                later call to an operation requires that you also pass the same value for all other
-    #                parameters. We recommend that you use a <a href="https://wikipedia.org/wiki/Universally_unique_identifier">UUID type of
+    #                later call to an operation requires that you also pass the same value for all other 
+    #                parameters. We recommend that you use a <a href="https://wikipedia.org/wiki/Universally_unique_identifier">UUID type of 
     #                value.</a>.</p>
     #            <p>If you don't provide this value, then Amazon Web Services generates a random one for
     #                you.</p>
-    #            <p>If you retry the operation with the same <code>ClientToken</code>, but with
+    #            <p>If you retry the operation with the same <code>ClientToken</code>, but with 
     #                different parameters, the retry fails with an <code>IdempotentParameterMismatch</code>
     #                error.</p>
     # @option params [Integer] :permission_version
@@ -449,7 +469,7 @@ module Aws::RAM
     #               </code>
     #               and is case sensitive. For example, to specify an Amazon EC2 Subnet, you can use the
     #               string <code>ec2:Subnet</code>. To see the list of valid values for this parameter,
-    #               query the <a>ListResourceTypes</a> operation. This value must match the display name of the resource
+    #               query the <a>ListResourceTypes</a> operation. This value must match the display name of the resource 
     #               (available in <code>ListResourceTypes</code>).</p>
     # @option params [String] :policy_template
     #   <p>A string in JSON format string that contains the following elements of a
@@ -470,30 +490,30 @@ module Aws::RAM
     #               </li>
     #               <li>
     #                  <p>
-    #                     <b>Condition</b>: (optional) specifies conditional
-    #                       parameters that must evaluate to true when a user attempts an action for that
-    #                       action to be allowed. For more information about the Condition element, see
+    #                     <b>Condition</b>: (optional) specifies conditional 
+    #                       parameters that must evaluate to true when a user attempts an action for that 
+    #                       action to be allowed. For more information about the Condition element, see 
     #                       <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_condition.html">IAM
     #                           policies: Condition element</a> in the <i>Identity and Access Management User
     #                       Guide</i>.</p>
     #               </li>
     #            </ul>
     #            <p>This template can't include either the <code>Resource</code> or
-    #               <code>Principal</code> elements. Those are both filled in by RAM when it instantiates
-    #               the resource-based policy on each resource shared using this managed permission. The
-    #               <code>Resource</code> comes from the ARN of the specific resource that you are sharing.
-    #               The <code>Principal</code> comes from the list of identities added to the resource
+    #               <code>Principal</code> elements. Those are both filled in by RAM when it instantiates 
+    #               the resource-based policy on each resource shared using this managed permission. The 
+    #               <code>Resource</code> comes from the ARN of the specific resource that you are sharing. 
+    #               The <code>Principal</code> comes from the list of identities added to the resource 
     #               share.</p>
     # @option params [String] :client_token
     #   <p>Specifies a unique, case-sensitive identifier that you provide to
     #                ensure the idempotency of the request. This lets you safely retry the request without
     #                accidentally performing the same operation a second time. Passing the same value to a
-    #                later call to an operation requires that you also pass the same value for all other
-    #                parameters. We recommend that you use a <a href="https://wikipedia.org/wiki/Universally_unique_identifier">UUID type of
+    #                later call to an operation requires that you also pass the same value for all other 
+    #                parameters. We recommend that you use a <a href="https://wikipedia.org/wiki/Universally_unique_identifier">UUID type of 
     #                value.</a>.</p>
     #            <p>If you don't provide this value, then Amazon Web Services generates a random one for
     #                you.</p>
-    #            <p>If you retry the operation with the same <code>ClientToken</code>, but with
+    #            <p>If you retry the operation with the same <code>ClientToken</code>, but with 
     #                different parameters, the retry fails with an <code>IdempotentParameterMismatch</code>
     #                error.</p>
     # @option params [Array<Types::Tag>] :tags
@@ -572,30 +592,30 @@ module Aws::RAM
     #               </li>
     #               <li>
     #                  <p>
-    #                     <b>Condition</b>: (optional) specifies conditional
-    #                       parameters that must evaluate to true when a user attempts an action for that
-    #                       action to be allowed. For more information about the Condition element, see
+    #                     <b>Condition</b>: (optional) specifies conditional 
+    #                       parameters that must evaluate to true when a user attempts an action for that 
+    #                       action to be allowed. For more information about the Condition element, see 
     #                       <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_condition.html">IAM
     #                           policies: Condition element</a> in the <i>Identity and Access Management User
     #                       Guide</i>.</p>
     #               </li>
     #            </ul>
     #            <p>This template can't include either the <code>Resource</code> or
-    #               <code>Principal</code> elements. Those are both filled in by RAM when it instantiates
-    #               the resource-based policy on each resource shared using this managed permission. The
-    #               <code>Resource</code> comes from the ARN of the specific resource that you are sharing.
-    #               The <code>Principal</code> comes from the list of identities added to the resource
+    #               <code>Principal</code> elements. Those are both filled in by RAM when it instantiates 
+    #               the resource-based policy on each resource shared using this managed permission. The 
+    #               <code>Resource</code> comes from the ARN of the specific resource that you are sharing. 
+    #               The <code>Principal</code> comes from the list of identities added to the resource 
     #               share.</p>
     # @option params [String] :client_token
     #   <p>Specifies a unique, case-sensitive identifier that you provide to
     #                ensure the idempotency of the request. This lets you safely retry the request without
     #                accidentally performing the same operation a second time. Passing the same value to a
-    #                later call to an operation requires that you also pass the same value for all other
-    #                parameters. We recommend that you use a <a href="https://wikipedia.org/wiki/Universally_unique_identifier">UUID type of
+    #                later call to an operation requires that you also pass the same value for all other 
+    #                parameters. We recommend that you use a <a href="https://wikipedia.org/wiki/Universally_unique_identifier">UUID type of 
     #                value.</a>.</p>
     #            <p>If you don't provide this value, then Amazon Web Services generates a random one for
     #                you.</p>
-    #            <p>If you retry the operation with the same <code>ClientToken</code>, but with
+    #            <p>If you retry the operation with the same <code>ClientToken</code>, but with 
     #                different parameters, the retry fails with an <code>IdempotentParameterMismatch</code>
     #                error.</p>
     # @example Request syntax with placeholder values
@@ -685,7 +705,7 @@ module Aws::RAM
     #               </li>
     #            </ul>
     #            <note>
-    #               <p>Not all resource types can be shared with IAM roles and users.
+    #               <p>Not all resource types can be shared with IAM roles and users. 
     #                For more information, see <a href="https://docs.aws.amazon.com/ram/latest/userguide/permissions.html#permissions-rbp-supported-resource-types">Sharing with IAM roles and users</a> in the <i>Resource Access Manager User
     #                       Guide</i>.</p>
     #            </note>
@@ -702,12 +722,12 @@ module Aws::RAM
     #   <p>Specifies a unique, case-sensitive identifier that you provide to
     #                ensure the idempotency of the request. This lets you safely retry the request without
     #                accidentally performing the same operation a second time. Passing the same value to a
-    #                later call to an operation requires that you also pass the same value for all other
-    #                parameters. We recommend that you use a <a href="https://wikipedia.org/wiki/Universally_unique_identifier">UUID type of
+    #                later call to an operation requires that you also pass the same value for all other 
+    #                parameters. We recommend that you use a <a href="https://wikipedia.org/wiki/Universally_unique_identifier">UUID type of 
     #                value.</a>.</p>
     #            <p>If you don't provide this value, then Amazon Web Services generates a random one for
     #                you.</p>
-    #            <p>If you retry the operation with the same <code>ClientToken</code>, but with
+    #            <p>If you retry the operation with the same <code>ClientToken</code>, but with 
     #                different parameters, the retry fails with an <code>IdempotentParameterMismatch</code>
     #                error.</p>
     # @option params [Array<String>] :permission_arns
@@ -781,12 +801,12 @@ module Aws::RAM
     #   <p>Specifies a unique, case-sensitive identifier that you provide to
     #                ensure the idempotency of the request. This lets you safely retry the request without
     #                accidentally performing the same operation a second time. Passing the same value to a
-    #                later call to an operation requires that you also pass the same value for all other
-    #                parameters. We recommend that you use a <a href="https://wikipedia.org/wiki/Universally_unique_identifier">UUID type of
+    #                later call to an operation requires that you also pass the same value for all other 
+    #                parameters. We recommend that you use a <a href="https://wikipedia.org/wiki/Universally_unique_identifier">UUID type of 
     #                value.</a>.</p>
     #            <p>If you don't provide this value, then Amazon Web Services generates a random one for
     #                you.</p>
-    #            <p>If you retry the operation with the same <code>ClientToken</code>, but with
+    #            <p>If you retry the operation with the same <code>ClientToken</code>, but with 
     #                different parameters, the retry fails with an <code>IdempotentParameterMismatch</code>
     #                error.</p>
     # @example Request syntax with placeholder values
@@ -829,12 +849,12 @@ module Aws::RAM
     #   <p>Specifies a unique, case-sensitive identifier that you provide to
     #                ensure the idempotency of the request. This lets you safely retry the request without
     #                accidentally performing the same operation a second time. Passing the same value to a
-    #                later call to an operation requires that you also pass the same value for all other
-    #                parameters. We recommend that you use a <a href="https://wikipedia.org/wiki/Universally_unique_identifier">UUID type of
+    #                later call to an operation requires that you also pass the same value for all other 
+    #                parameters. We recommend that you use a <a href="https://wikipedia.org/wiki/Universally_unique_identifier">UUID type of 
     #                value.</a>.</p>
     #            <p>If you don't provide this value, then Amazon Web Services generates a random one for
     #                you.</p>
-    #            <p>If you retry the operation with the same <code>ClientToken</code>, but with
+    #            <p>If you retry the operation with the same <code>ClientToken</code>, but with 
     #                different parameters, the retry fails with an <code>IdempotentParameterMismatch</code>
     #                error.</p>
     # @example Request syntax with placeholder values
@@ -870,12 +890,12 @@ module Aws::RAM
     #   <p>Specifies a unique, case-sensitive identifier that you provide to
     #                ensure the idempotency of the request. This lets you safely retry the request without
     #                accidentally performing the same operation a second time. Passing the same value to a
-    #                later call to an operation requires that you also pass the same value for all other
-    #                parameters. We recommend that you use a <a href="https://wikipedia.org/wiki/Universally_unique_identifier">UUID type of
+    #                later call to an operation requires that you also pass the same value for all other 
+    #                parameters. We recommend that you use a <a href="https://wikipedia.org/wiki/Universally_unique_identifier">UUID type of 
     #                value.</a>.</p>
     #            <p>If you don't provide this value, then Amazon Web Services generates a random one for
     #                you.</p>
-    #            <p>If you retry the operation with the same <code>ClientToken</code>, but with
+    #            <p>If you retry the operation with the same <code>ClientToken</code>, but with 
     #                different parameters, the retry fails with an <code>IdempotentParameterMismatch</code>
     #                error.</p>
     # @example Request syntax with placeholder values
@@ -942,7 +962,7 @@ module Aws::RAM
     #               </li>
     #            </ul>
     #            <note>
-    #               <p>Not all resource types can be shared with IAM roles and users.
+    #               <p>Not all resource types can be shared with IAM roles and users. 
     #                For more information, see <a href="https://docs.aws.amazon.com/ram/latest/userguide/permissions.html#permissions-rbp-supported-resource-types">Sharing with IAM roles and users</a> in the <i>Resource Access Manager User
     #                       Guide</i>.</p>
     #            </note>
@@ -950,12 +970,12 @@ module Aws::RAM
     #   <p>Specifies a unique, case-sensitive identifier that you provide to
     #                ensure the idempotency of the request. This lets you safely retry the request without
     #                accidentally performing the same operation a second time. Passing the same value to a
-    #                later call to an operation requires that you also pass the same value for all other
-    #                parameters. We recommend that you use a <a href="https://wikipedia.org/wiki/Universally_unique_identifier">UUID type of
+    #                later call to an operation requires that you also pass the same value for all other 
+    #                parameters. We recommend that you use a <a href="https://wikipedia.org/wiki/Universally_unique_identifier">UUID type of 
     #                value.</a>.</p>
     #            <p>If you don't provide this value, then Amazon Web Services generates a random one for
     #                you.</p>
-    #            <p>If you retry the operation with the same <code>ClientToken</code>, but with
+    #            <p>If you retry the operation with the same <code>ClientToken</code>, but with 
     #                different parameters, the retry fails with an <code>IdempotentParameterMismatch</code>
     #                error.</p>
     # @option params [Array<String>] :sources
@@ -1007,12 +1027,12 @@ module Aws::RAM
     #   <p>Specifies a unique, case-sensitive identifier that you provide to
     #                ensure the idempotency of the request. This lets you safely retry the request without
     #                accidentally performing the same operation a second time. Passing the same value to a
-    #                later call to an operation requires that you also pass the same value for all other
-    #                parameters. We recommend that you use a <a href="https://wikipedia.org/wiki/Universally_unique_identifier">UUID type of
+    #                later call to an operation requires that you also pass the same value for all other 
+    #                parameters. We recommend that you use a <a href="https://wikipedia.org/wiki/Universally_unique_identifier">UUID type of 
     #                value.</a>.</p>
     #            <p>If you don't provide this value, then Amazon Web Services generates a random one for
     #                you.</p>
-    #            <p>If you retry the operation with the same <code>ClientToken</code>, but with
+    #            <p>If you retry the operation with the same <code>ClientToken</code>, but with 
     #                different parameters, the retry fails with an <code>IdempotentParameterMismatch</code>
     #                error.</p>
     # @example Request syntax with placeholder values
@@ -1066,7 +1086,7 @@ module Aws::RAM
     # @param [Hash, Types::GetPermissionRequest] params
     # @option params [String] :permission_arn
     #   <p>Specifies the <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Name (ARN)</a> of the permission whose contents you want to retrieve.
-    #               To find the ARN for a permission, use either the <a>ListPermissions</a> operation or go to the <a href="https://console.aws.amazon.com/ram/home#Permissions:">Permissions library</a> page in the RAM console and
+    #               To find the ARN for a permission, use either the <a>ListPermissions</a> operation or go to the <a href="https://console.aws.amazon.com/ram/home#Permissions:">Permissions library</a> page in the RAM console and 
     #                then choose the name of the permission. The ARN is displayed on the detail page.</p>
     # @option params [Integer] :permission_version
     #   <p>Specifies the version number of the RAM permission to retrieve. If you don't specify
@@ -1124,19 +1144,19 @@ module Aws::RAM
     # @option params [String] :principal
     #   <p>Specifies the principal.</p>
     # @option params [String] :next_token
-    #   <p>Specifies that you want to receive the next page of results. Valid
+    #   <p>Specifies that you want to receive the next page of results. Valid 
     #                only if you received a <code>NextToken</code> response in the previous request. If you
-    #                did, it indicates that more output is available. Set this parameter to the value
-    #                provided by the previous call's <code>NextToken</code> response to request the
+    #                did, it indicates that more output is available. Set this parameter to the value 
+    #                provided by the previous call's <code>NextToken</code> response to request the 
     #                next page of results.</p>
     # @option params [Integer] :max_results
-    #   <p>Specifies the total number of results that you want included on each page
-    #                of the response. If you do not include this parameter, it defaults to a value that is
+    #   <p>Specifies the total number of results that you want included on each page 
+    #                of the response. If you do not include this parameter, it defaults to a value that is 
     #                specific to the operation. If additional items exist beyond the number you specify, the
     #                <code>NextToken</code> response element is returned with a value (not null).
-    #                Include the specified value as the <code>NextToken</code> request parameter in the next
-    #                call to the operation to get the next part of the results. Note that the service might
-    #                return fewer results than the maximum even when there are more results available. You
+    #                Include the specified value as the <code>NextToken</code> request parameter in the next 
+    #                call to the operation to get the next part of the results. Note that the service might 
+    #                return fewer results than the maximum even when there are more results available. You 
     #                should check <code>NextToken</code> after every operation to ensure that you receive all
     #                of the results.</p>
     # @example Request syntax with placeholder values
@@ -1201,19 +1221,19 @@ module Aws::RAM
     # @option params [String] :association_status
     #   <p>Specifies that you want to retrieve only associations that have this status.</p>
     # @option params [String] :next_token
-    #   <p>Specifies that you want to receive the next page of results. Valid
+    #   <p>Specifies that you want to receive the next page of results. Valid 
     #                only if you received a <code>NextToken</code> response in the previous request. If you
-    #                did, it indicates that more output is available. Set this parameter to the value
-    #                provided by the previous call's <code>NextToken</code> response to request the
+    #                did, it indicates that more output is available. Set this parameter to the value 
+    #                provided by the previous call's <code>NextToken</code> response to request the 
     #                next page of results.</p>
     # @option params [Integer] :max_results
-    #   <p>Specifies the total number of results that you want included on each page
-    #                of the response. If you do not include this parameter, it defaults to a value that is
+    #   <p>Specifies the total number of results that you want included on each page 
+    #                of the response. If you do not include this parameter, it defaults to a value that is 
     #                specific to the operation. If additional items exist beyond the number you specify, the
     #                <code>NextToken</code> response element is returned with a value (not null).
-    #                Include the specified value as the <code>NextToken</code> request parameter in the next
-    #                call to the operation to get the next part of the results. Note that the service might
-    #                return fewer results than the maximum even when there are more results available. You
+    #                Include the specified value as the <code>NextToken</code> request parameter in the next 
+    #                call to the operation to get the next part of the results. Note that the service might 
+    #                return fewer results than the maximum even when there are more results available. You 
     #                should check <code>NextToken</code> after every operation to ensure that you receive all
     #                of the results.</p>
     # @example Request syntax with placeholder values
@@ -1268,19 +1288,19 @@ module Aws::RAM
     #               list of <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs)</a>
     #            </p>
     # @option params [String] :next_token
-    #   <p>Specifies that you want to receive the next page of results. Valid
+    #   <p>Specifies that you want to receive the next page of results. Valid 
     #                only if you received a <code>NextToken</code> response in the previous request. If you
-    #                did, it indicates that more output is available. Set this parameter to the value
-    #                provided by the previous call's <code>NextToken</code> response to request the
+    #                did, it indicates that more output is available. Set this parameter to the value 
+    #                provided by the previous call's <code>NextToken</code> response to request the 
     #                next page of results.</p>
     # @option params [Integer] :max_results
-    #   <p>Specifies the total number of results that you want included on each page
-    #                of the response. If you do not include this parameter, it defaults to a value that is
+    #   <p>Specifies the total number of results that you want included on each page 
+    #                of the response. If you do not include this parameter, it defaults to a value that is 
     #                specific to the operation. If additional items exist beyond the number you specify, the
     #                <code>NextToken</code> response element is returned with a value (not null).
-    #                Include the specified value as the <code>NextToken</code> request parameter in the next
-    #                call to the operation to get the next part of the results. Note that the service might
-    #                return fewer results than the maximum even when there are more results available. You
+    #                Include the specified value as the <code>NextToken</code> request parameter in the next 
+    #                call to the operation to get the next part of the results. Note that the service might 
+    #                return fewer results than the maximum even when there are more results available. You 
     #                should check <code>NextToken</code> after every operation to ensure that you receive all
     #                of the results.</p>
     # @example Request syntax with placeholder values
@@ -1368,19 +1388,19 @@ module Aws::RAM
     #   <p>Specifies that you want to retrieve details of only those resource shares that match the
     #               specified tag keys and values.</p>
     # @option params [String] :next_token
-    #   <p>Specifies that you want to receive the next page of results. Valid
+    #   <p>Specifies that you want to receive the next page of results. Valid 
     #                only if you received a <code>NextToken</code> response in the previous request. If you
-    #                did, it indicates that more output is available. Set this parameter to the value
-    #                provided by the previous call's <code>NextToken</code> response to request the
+    #                did, it indicates that more output is available. Set this parameter to the value 
+    #                provided by the previous call's <code>NextToken</code> response to request the 
     #                next page of results.</p>
     # @option params [Integer] :max_results
-    #   <p>Specifies the total number of results that you want included on each page
-    #                of the response. If you do not include this parameter, it defaults to a value that is
+    #   <p>Specifies the total number of results that you want included on each page 
+    #                of the response. If you do not include this parameter, it defaults to a value that is 
     #                specific to the operation. If additional items exist beyond the number you specify, the
     #                <code>NextToken</code> response element is returned with a value (not null).
-    #                Include the specified value as the <code>NextToken</code> request parameter in the next
-    #                call to the operation to get the next part of the results. Note that the service might
-    #                return fewer results than the maximum even when there are more results available. You
+    #                Include the specified value as the <code>NextToken</code> request parameter in the next 
+    #                call to the operation to get the next part of the results. Note that the service might 
+    #                return fewer results than the maximum even when there are more results available. You 
     #                should check <code>NextToken</code> after every operation to ensure that you receive all
     #                of the results.</p>
     # @option params [String] :permission_arn
@@ -1455,38 +1475,38 @@ module Aws::RAM
     # @option params [String] :resource_share_invitation_arn
     #   <p>Specifies the <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Name (ARN)</a> of the invitation. You can use <a>GetResourceShareInvitations</a> to find the ARN of the invitation.</p>
     # @option params [String] :next_token
-    #   <p>Specifies that you want to receive the next page of results. Valid
+    #   <p>Specifies that you want to receive the next page of results. Valid 
     #                only if you received a <code>NextToken</code> response in the previous request. If you
-    #                did, it indicates that more output is available. Set this parameter to the value
-    #                provided by the previous call's <code>NextToken</code> response to request the
+    #                did, it indicates that more output is available. Set this parameter to the value 
+    #                provided by the previous call's <code>NextToken</code> response to request the 
     #                next page of results.</p>
     # @option params [Integer] :max_results
-    #   <p>Specifies the total number of results that you want included on each page
-    #                of the response. If you do not include this parameter, it defaults to a value that is
+    #   <p>Specifies the total number of results that you want included on each page 
+    #                of the response. If you do not include this parameter, it defaults to a value that is 
     #                specific to the operation. If additional items exist beyond the number you specify, the
     #                <code>NextToken</code> response element is returned with a value (not null).
-    #                Include the specified value as the <code>NextToken</code> request parameter in the next
-    #                call to the operation to get the next part of the results. Note that the service might
-    #                return fewer results than the maximum even when there are more results available. You
+    #                Include the specified value as the <code>NextToken</code> request parameter in the next 
+    #                call to the operation to get the next part of the results. Note that the service might 
+    #                return fewer results than the maximum even when there are more results available. You 
     #                should check <code>NextToken</code> after every operation to ensure that you receive all
     #                of the results.</p>
     # @option params [String] :resource_region_scope
-    #   <p>Specifies that you want the results to include only
+    #   <p>Specifies that you want the results to include only 
     #               resources that have the specified scope.</p>
     #            <ul>
     #               <li>
     #                  <p>
-    #                     <code>ALL</code> – the results include both global and
+    #                     <code>ALL</code> – the results include both global and 
     #                       regional resources or resource types.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>GLOBAL</code> – the results include only global
+    #                     <code>GLOBAL</code> – the results include only global 
     #                       resources or resource types.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>REGIONAL</code> – the results include only regional
+    #                     <code>REGIONAL</code> – the results include only regional 
     #                       resources or resource types.</p>
     #               </li>
     #            </ul>
@@ -1557,19 +1577,19 @@ module Aws::RAM
     #            <p>When <code>false</code> (the default value), lists associations with resource shares that use
     #               any version of the specified managed permission.</p>
     # @option params [String] :next_token
-    #   <p>Specifies that you want to receive the next page of results. Valid
+    #   <p>Specifies that you want to receive the next page of results. Valid 
     #                only if you received a <code>NextToken</code> response in the previous request. If you
-    #                did, it indicates that more output is available. Set this parameter to the value
-    #                provided by the previous call's <code>NextToken</code> response to request the
+    #                did, it indicates that more output is available. Set this parameter to the value 
+    #                provided by the previous call's <code>NextToken</code> response to request the 
     #                next page of results.</p>
     # @option params [Integer] :max_results
-    #   <p>Specifies the total number of results that you want included on each page
-    #                of the response. If you do not include this parameter, it defaults to a value that is
+    #   <p>Specifies the total number of results that you want included on each page 
+    #                of the response. If you do not include this parameter, it defaults to a value that is 
     #                specific to the operation. If additional items exist beyond the number you specify, the
     #                <code>NextToken</code> response element is returned with a value (not null).
-    #                Include the specified value as the <code>NextToken</code> request parameter in the next
-    #                call to the operation to get the next part of the results. Note that the service might
-    #                return fewer results than the maximum even when there are more results available. You
+    #                Include the specified value as the <code>NextToken</code> request parameter in the next 
+    #                call to the operation to get the next part of the results. Note that the service might 
+    #                return fewer results than the maximum even when there are more results available. You 
     #                should check <code>NextToken</code> after every operation to ensure that you receive all
     #                of the results.</p>
     # @example Request syntax with placeholder values
@@ -1622,19 +1642,19 @@ module Aws::RAM
     #               can use the <code>permissionVersion</code> parameter on the <a>AssociateResourceSharePermission</a> operation to specify a non-default
     #               version to attach.</p>
     # @option params [String] :next_token
-    #   <p>Specifies that you want to receive the next page of results. Valid
+    #   <p>Specifies that you want to receive the next page of results. Valid 
     #                only if you received a <code>NextToken</code> response in the previous request. If you
-    #                did, it indicates that more output is available. Set this parameter to the value
-    #                provided by the previous call's <code>NextToken</code> response to request the
+    #                did, it indicates that more output is available. Set this parameter to the value 
+    #                provided by the previous call's <code>NextToken</code> response to request the 
     #                next page of results.</p>
     # @option params [Integer] :max_results
-    #   <p>Specifies the total number of results that you want included on each page
-    #                of the response. If you do not include this parameter, it defaults to a value that is
+    #   <p>Specifies the total number of results that you want included on each page 
+    #                of the response. If you do not include this parameter, it defaults to a value that is 
     #                specific to the operation. If additional items exist beyond the number you specify, the
     #                <code>NextToken</code> response element is returned with a value (not null).
-    #                Include the specified value as the <code>NextToken</code> request parameter in the next
-    #                call to the operation to get the next part of the results. Note that the service might
-    #                return fewer results than the maximum even when there are more results available. You
+    #                Include the specified value as the <code>NextToken</code> request parameter in the next 
+    #                call to the operation to get the next part of the results. Note that the service might 
+    #                return fewer results than the maximum even when there are more results available. You 
     #                should check <code>NextToken</code> after every operation to ensure that you receive all
     #                of the results.</p>
     # @example Request syntax with placeholder values
@@ -1694,19 +1714,19 @@ module Aws::RAM
     #                   <code>ec2:subnet</code>. You can use the <a>ListResourceTypes</a>
     #               operation to get the specific string required.</p>
     # @option params [String] :next_token
-    #   <p>Specifies that you want to receive the next page of results. Valid
+    #   <p>Specifies that you want to receive the next page of results. Valid 
     #                only if you received a <code>NextToken</code> response in the previous request. If you
-    #                did, it indicates that more output is available. Set this parameter to the value
-    #                provided by the previous call's <code>NextToken</code> response to request the
+    #                did, it indicates that more output is available. Set this parameter to the value 
+    #                provided by the previous call's <code>NextToken</code> response to request the 
     #                next page of results.</p>
     # @option params [Integer] :max_results
-    #   <p>Specifies the total number of results that you want included on each page
-    #                of the response. If you do not include this parameter, it defaults to a value that is
+    #   <p>Specifies the total number of results that you want included on each page 
+    #                of the response. If you do not include this parameter, it defaults to a value that is 
     #                specific to the operation. If additional items exist beyond the number you specify, the
     #                <code>NextToken</code> response element is returned with a value (not null).
-    #                Include the specified value as the <code>NextToken</code> request parameter in the next
-    #                call to the operation to get the next part of the results. Note that the service might
-    #                return fewer results than the maximum even when there are more results available. You
+    #                Include the specified value as the <code>NextToken</code> request parameter in the next 
+    #                call to the operation to get the next part of the results. Note that the service might 
+    #                return fewer results than the maximum even when there are more results available. You 
     #                should check <code>NextToken</code> after every operation to ensure that you receive all
     #                of the results.</p>
     # @option params [String] :permission_type
@@ -1833,7 +1853,7 @@ module Aws::RAM
     #               </li>
     #            </ul>
     #            <note>
-    #               <p>Not all resource types can be shared with IAM roles and users.
+    #               <p>Not all resource types can be shared with IAM roles and users. 
     #                For more information, see <a href="https://docs.aws.amazon.com/ram/latest/userguide/permissions.html#permissions-rbp-supported-resource-types">Sharing with IAM roles and users</a> in the <i>Resource Access Manager User
     #                       Guide</i>.</p>
     #            </note>
@@ -1846,19 +1866,19 @@ module Aws::RAM
     #   <p>Specifies that you want to list information for only principals associated with the
     #               resource shares specified by a list the <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs)</a>.</p>
     # @option params [String] :next_token
-    #   <p>Specifies that you want to receive the next page of results. Valid
+    #   <p>Specifies that you want to receive the next page of results. Valid 
     #                only if you received a <code>NextToken</code> response in the previous request. If you
-    #                did, it indicates that more output is available. Set this parameter to the value
-    #                provided by the previous call's <code>NextToken</code> response to request the
+    #                did, it indicates that more output is available. Set this parameter to the value 
+    #                provided by the previous call's <code>NextToken</code> response to request the 
     #                next page of results.</p>
     # @option params [Integer] :max_results
-    #   <p>Specifies the total number of results that you want included on each page
-    #                of the response. If you do not include this parameter, it defaults to a value that is
+    #   <p>Specifies the total number of results that you want included on each page 
+    #                of the response. If you do not include this parameter, it defaults to a value that is 
     #                specific to the operation. If additional items exist beyond the number you specify, the
     #                <code>NextToken</code> response element is returned with a value (not null).
-    #                Include the specified value as the <code>NextToken</code> request parameter in the next
-    #                call to the operation to get the next part of the results. Note that the service might
-    #                return fewer results than the maximum even when there are more results available. You
+    #                Include the specified value as the <code>NextToken</code> request parameter in the next 
+    #                call to the operation to get the next part of the results. Note that the service might 
+    #                return fewer results than the maximum even when there are more results available. You 
     #                should check <code>NextToken</code> after every operation to ensure that you receive all
     #                of the results.</p>
     # @example Request syntax with placeholder values
@@ -1910,19 +1930,19 @@ module Aws::RAM
     #   <p>Specifies that you want to see only the details about requests with a status that
     #               matches this value.</p>
     # @option params [String] :next_token
-    #   <p>Specifies that you want to receive the next page of results. Valid
+    #   <p>Specifies that you want to receive the next page of results. Valid 
     #                only if you received a <code>NextToken</code> response in the previous request. If you
-    #                did, it indicates that more output is available. Set this parameter to the value
-    #                provided by the previous call's <code>NextToken</code> response to request the
+    #                did, it indicates that more output is available. Set this parameter to the value 
+    #                provided by the previous call's <code>NextToken</code> response to request the 
     #                next page of results.</p>
     # @option params [Integer] :max_results
-    #   <p>Specifies the total number of results that you want included on each page
-    #                of the response. If you do not include this parameter, it defaults to a value that is
+    #   <p>Specifies the total number of results that you want included on each page 
+    #                of the response. If you do not include this parameter, it defaults to a value that is 
     #                specific to the operation. If additional items exist beyond the number you specify, the
     #                <code>NextToken</code> response element is returned with a value (not null).
-    #                Include the specified value as the <code>NextToken</code> request parameter in the next
-    #                call to the operation to get the next part of the results. Note that the service might
-    #                return fewer results than the maximum even when there are more results available. You
+    #                Include the specified value as the <code>NextToken</code> request parameter in the next 
+    #                call to the operation to get the next part of the results. Note that the service might 
+    #                return fewer results than the maximum even when there are more results available. You 
     #                should check <code>NextToken</code> after every operation to ensure that you receive all
     #                of the results.</p>
     # @example Request syntax with placeholder values
@@ -1971,19 +1991,19 @@ module Aws::RAM
     #   <p>Specifies the <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Name (ARN)</a> of the resource share for which you want to retrieve the associated
     #               permissions.</p>
     # @option params [String] :next_token
-    #   <p>Specifies that you want to receive the next page of results. Valid
+    #   <p>Specifies that you want to receive the next page of results. Valid 
     #                only if you received a <code>NextToken</code> response in the previous request. If you
-    #                did, it indicates that more output is available. Set this parameter to the value
-    #                provided by the previous call's <code>NextToken</code> response to request the
+    #                did, it indicates that more output is available. Set this parameter to the value 
+    #                provided by the previous call's <code>NextToken</code> response to request the 
     #                next page of results.</p>
     # @option params [Integer] :max_results
-    #   <p>Specifies the total number of results that you want included on each page
-    #                of the response. If you do not include this parameter, it defaults to a value that is
+    #   <p>Specifies the total number of results that you want included on each page 
+    #                of the response. If you do not include this parameter, it defaults to a value that is 
     #                specific to the operation. If additional items exist beyond the number you specify, the
     #                <code>NextToken</code> response element is returned with a value (not null).
-    #                Include the specified value as the <code>NextToken</code> request parameter in the next
-    #                call to the operation to get the next part of the results. Note that the service might
-    #                return fewer results than the maximum even when there are more results available. You
+    #                Include the specified value as the <code>NextToken</code> request parameter in the next 
+    #                call to the operation to get the next part of the results. Note that the service might 
+    #                return fewer results than the maximum even when there are more results available. You 
     #                should check <code>NextToken</code> after every operation to ensure that you receive all
     #                of the results.</p>
     # @example Request syntax with placeholder values
@@ -2029,38 +2049,38 @@ module Aws::RAM
     # <p>Lists the resource types that can be shared by RAM.</p>
     # @param [Hash, Types::ListResourceTypesRequest] params
     # @option params [String] :next_token
-    #   <p>Specifies that you want to receive the next page of results. Valid
+    #   <p>Specifies that you want to receive the next page of results. Valid 
     #                only if you received a <code>NextToken</code> response in the previous request. If you
-    #                did, it indicates that more output is available. Set this parameter to the value
-    #                provided by the previous call's <code>NextToken</code> response to request the
+    #                did, it indicates that more output is available. Set this parameter to the value 
+    #                provided by the previous call's <code>NextToken</code> response to request the 
     #                next page of results.</p>
     # @option params [Integer] :max_results
-    #   <p>Specifies the total number of results that you want included on each page
-    #                of the response. If you do not include this parameter, it defaults to a value that is
+    #   <p>Specifies the total number of results that you want included on each page 
+    #                of the response. If you do not include this parameter, it defaults to a value that is 
     #                specific to the operation. If additional items exist beyond the number you specify, the
     #                <code>NextToken</code> response element is returned with a value (not null).
-    #                Include the specified value as the <code>NextToken</code> request parameter in the next
-    #                call to the operation to get the next part of the results. Note that the service might
-    #                return fewer results than the maximum even when there are more results available. You
+    #                Include the specified value as the <code>NextToken</code> request parameter in the next 
+    #                call to the operation to get the next part of the results. Note that the service might 
+    #                return fewer results than the maximum even when there are more results available. You 
     #                should check <code>NextToken</code> after every operation to ensure that you receive all
     #                of the results.</p>
     # @option params [String] :resource_region_scope
-    #   <p>Specifies that you want the results to include only
+    #   <p>Specifies that you want the results to include only 
     #               resources that have the specified scope.</p>
     #            <ul>
     #               <li>
     #                  <p>
-    #                     <code>ALL</code> – the results include both global and
+    #                     <code>ALL</code> – the results include both global and 
     #                       regional resources or resource types.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>GLOBAL</code> – the results include only global
+    #                     <code>GLOBAL</code> – the results include only global 
     #                       resources or resource types.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>REGIONAL</code> – the results include only regional
+    #                     <code>REGIONAL</code> – the results include only regional 
     #                       resources or resource types.</p>
     #               </li>
     #            </ul>
@@ -2133,38 +2153,38 @@ module Aws::RAM
     #   <p>Specifies that you want to list only resources in the resource shares identified by the
     #               specified <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs)</a>.</p>
     # @option params [String] :next_token
-    #   <p>Specifies that you want to receive the next page of results. Valid
+    #   <p>Specifies that you want to receive the next page of results. Valid 
     #                only if you received a <code>NextToken</code> response in the previous request. If you
-    #                did, it indicates that more output is available. Set this parameter to the value
-    #                provided by the previous call's <code>NextToken</code> response to request the
+    #                did, it indicates that more output is available. Set this parameter to the value 
+    #                provided by the previous call's <code>NextToken</code> response to request the 
     #                next page of results.</p>
     # @option params [Integer] :max_results
-    #   <p>Specifies the total number of results that you want included on each page
-    #                of the response. If you do not include this parameter, it defaults to a value that is
+    #   <p>Specifies the total number of results that you want included on each page 
+    #                of the response. If you do not include this parameter, it defaults to a value that is 
     #                specific to the operation. If additional items exist beyond the number you specify, the
     #                <code>NextToken</code> response element is returned with a value (not null).
-    #                Include the specified value as the <code>NextToken</code> request parameter in the next
-    #                call to the operation to get the next part of the results. Note that the service might
-    #                return fewer results than the maximum even when there are more results available. You
+    #                Include the specified value as the <code>NextToken</code> request parameter in the next 
+    #                call to the operation to get the next part of the results. Note that the service might 
+    #                return fewer results than the maximum even when there are more results available. You 
     #                should check <code>NextToken</code> after every operation to ensure that you receive all
     #                of the results.</p>
     # @option params [String] :resource_region_scope
-    #   <p>Specifies that you want the results to include only
+    #   <p>Specifies that you want the results to include only 
     #               resources that have the specified scope.</p>
     #            <ul>
     #               <li>
     #                  <p>
-    #                     <code>ALL</code> – the results include both global and
+    #                     <code>ALL</code> – the results include both global and 
     #                       regional resources or resource types.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>GLOBAL</code> – the results include only global
+    #                     <code>GLOBAL</code> – the results include only global 
     #                       resources or resource types.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>REGIONAL</code> – the results include only regional
+    #                     <code>REGIONAL</code> – the results include only regional 
     #                       resources or resource types.</p>
     #               </li>
     #            </ul>
@@ -2296,12 +2316,12 @@ module Aws::RAM
     #   <p>Specifies a unique, case-sensitive identifier that you provide to
     #                ensure the idempotency of the request. This lets you safely retry the request without
     #                accidentally performing the same operation a second time. Passing the same value to a
-    #                later call to an operation requires that you also pass the same value for all other
-    #                parameters. We recommend that you use a <a href="https://wikipedia.org/wiki/Universally_unique_identifier">UUID type of
+    #                later call to an operation requires that you also pass the same value for all other 
+    #                parameters. We recommend that you use a <a href="https://wikipedia.org/wiki/Universally_unique_identifier">UUID type of 
     #                value.</a>.</p>
     #            <p>If you don't provide this value, then Amazon Web Services generates a random one for
     #                you.</p>
-    #            <p>If you retry the operation with the same <code>ClientToken</code>, but with
+    #            <p>If you retry the operation with the same <code>ClientToken</code>, but with 
     #                different parameters, the retry fails with an <code>IdempotentParameterMismatch</code>
     #                error.</p>
     # @example Request syntax with placeholder values
@@ -2384,12 +2404,12 @@ module Aws::RAM
     #   <p>Specifies a unique, case-sensitive identifier that you provide to
     #                ensure the idempotency of the request. This lets you safely retry the request without
     #                accidentally performing the same operation a second time. Passing the same value to a
-    #                later call to an operation requires that you also pass the same value for all other
-    #                parameters. We recommend that you use a <a href="https://wikipedia.org/wiki/Universally_unique_identifier">UUID type of
+    #                later call to an operation requires that you also pass the same value for all other 
+    #                parameters. We recommend that you use a <a href="https://wikipedia.org/wiki/Universally_unique_identifier">UUID type of 
     #                value.</a>.</p>
     #            <p>If you don't provide this value, then Amazon Web Services generates a random one for
     #                you.</p>
-    #            <p>If you retry the operation with the same <code>ClientToken</code>, but with
+    #            <p>If you retry the operation with the same <code>ClientToken</code>, but with 
     #                different parameters, the retry fails with an <code>IdempotentParameterMismatch</code>
     #                error.</p>
     # @example Request syntax with placeholder values
@@ -2464,12 +2484,12 @@ module Aws::RAM
     #   <p>Specifies a unique, case-sensitive identifier that you provide to
     #                ensure the idempotency of the request. This lets you safely retry the request without
     #                accidentally performing the same operation a second time. Passing the same value to a
-    #                later call to an operation requires that you also pass the same value for all other
-    #                parameters. We recommend that you use a <a href="https://wikipedia.org/wiki/Universally_unique_identifier">UUID type of
+    #                later call to an operation requires that you also pass the same value for all other 
+    #                parameters. We recommend that you use a <a href="https://wikipedia.org/wiki/Universally_unique_identifier">UUID type of 
     #                value.</a>.</p>
     #            <p>If you don't provide this value, then Amazon Web Services generates a random one for
     #                you.</p>
-    #            <p>If you retry the operation with the same <code>ClientToken</code>, but with
+    #            <p>If you retry the operation with the same <code>ClientToken</code>, but with 
     #                different parameters, the retry fails with an <code>IdempotentParameterMismatch</code>
     #                error.</p>
     # @example Request syntax with placeholder values
@@ -2516,12 +2536,12 @@ module Aws::RAM
     #   <p>Specifies a unique, case-sensitive identifier that you provide to
     #                ensure the idempotency of the request. This lets you safely retry the request without
     #                accidentally performing the same operation a second time. Passing the same value to a
-    #                later call to an operation requires that you also pass the same value for all other
-    #                parameters. We recommend that you use a <a href="https://wikipedia.org/wiki/Universally_unique_identifier">UUID type of
+    #                later call to an operation requires that you also pass the same value for all other 
+    #                parameters. We recommend that you use a <a href="https://wikipedia.org/wiki/Universally_unique_identifier">UUID type of 
     #                value.</a>.</p>
     #            <p>If you don't provide this value, then Amazon Web Services generates a random one for
     #                you.</p>
-    #            <p>If you retry the operation with the same <code>ClientToken</code>, but with
+    #            <p>If you retry the operation with the same <code>ClientToken</code>, but with 
     #                different parameters, the retry fails with an <code>IdempotentParameterMismatch</code>
     #                error.</p>
     # @example Request syntax with placeholder values
@@ -2623,12 +2643,12 @@ module Aws::RAM
     #   <p>Specifies a unique, case-sensitive identifier that you provide to
     #                ensure the idempotency of the request. This lets you safely retry the request without
     #                accidentally performing the same operation a second time. Passing the same value to a
-    #                later call to an operation requires that you also pass the same value for all other
-    #                parameters. We recommend that you use a <a href="https://wikipedia.org/wiki/Universally_unique_identifier">UUID type of
+    #                later call to an operation requires that you also pass the same value for all other 
+    #                parameters. We recommend that you use a <a href="https://wikipedia.org/wiki/Universally_unique_identifier">UUID type of 
     #                value.</a>.</p>
     #            <p>If you don't provide this value, then Amazon Web Services generates a random one for
     #                you.</p>
-    #            <p>If you retry the operation with the same <code>ClientToken</code>, but with
+    #            <p>If you retry the operation with the same <code>ClientToken</code>, but with 
     #                different parameters, the retry fails with an <code>IdempotentParameterMismatch</code>
     #                error.</p>
     # @example Request syntax with placeholder values
@@ -2722,7 +2742,8 @@ module Aws::RAM
     # @option options [Integer] :max_wait_time
     # @option options [Integer] :min_delay
     # @option options [Integer] :max_delay
-    # @return [nil] Returns `nil` if the waiter was successful.
+    # @return [Smithy::Client::Response] Returns the successful response
+    #   that satisfied the waiter's success condition.
     # @raise [FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition
     #   out of, preventing success.

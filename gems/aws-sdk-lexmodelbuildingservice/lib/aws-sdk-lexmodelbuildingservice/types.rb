@@ -2066,7 +2066,7 @@ module Aws::LexModelBuildingService
     # @!attribute migration_summaries
     #   <p>An array of summaries for migrations from Amazon Lex V1 to Amazon Lex V2. To see
     #         details of the migration, use the <code>migrationId</code> from the
-    #         summary in a call to the
+    #         summary in a call to the 
     #         operation.</p>
     #   @return [Array<Types::MigrationSummary>]
     # @!attribute next_token
