@@ -3,6 +3,8 @@
 require_relative '../../../gems/aws-sdk-core/lib/aws-sdk-core/plugins/global_configuration'
 require_relative '../../../gems/aws-sdk-core/lib/aws-sdk-core/plugins/shared_config'
 require_relative '../../../gems/aws-sdk-core/lib/aws-sdk-core/plugins/user_agent'
+require_relative '../../../gems/aws-sdk-core/lib/aws-sdk-core/plugins/checksum_algorithm'
+require_relative '../../../gems/aws-sdk-core/lib/aws-sdk-core/plugins/http_checksum'
 require_relative '../../../gems/aws-sdk-core/lib/aws-sdk-core/plugins/invocation_id'
 require_relative '../../../gems/aws-sdk-core/lib/aws-sdk-core/plugins/recursion_detection'
 require_relative '../../../gems/aws-sdk-core/lib/aws-sdk-core/plugins/retry_errors'
@@ -36,6 +38,8 @@ module BuildTools
           Aws::Core::Plugins::GlobalConfiguration => { require_path: 'aws-sdk-core/plugins/global_configuration' },
           Aws::Core::Plugins::SharedConfig => { require_path: 'aws-sdk-core/plugins/shared_config' },
           Aws::Core::Plugins::UserAgent => { require_path: 'aws-sdk-core/plugins/user_agent' },
+          Aws::Core::Plugins::ChecksumAlgorithm => { require_path: 'aws-sdk-core/plugins/checksum_algorithm' },
+          Aws::Core::Plugins::HttpChecksum => { require_path: 'aws-sdk-core/plugins/http_checksum' },
           Aws::Core::Plugins::InvocationId => { require_path: 'aws-sdk-core/plugins/invocation_id' },
           Aws::Core::Plugins::RecursionDetection => { require_path: 'aws-sdk-core/plugins/recursion_detection' },
           Aws::Core::Plugins::RetryErrors => { require_path: 'aws-sdk-core/plugins/retry_errors' },
@@ -47,6 +51,7 @@ module BuildTools
         [
           Smithy::Client::Plugins::UserAgent,
           Smithy::Client::Plugins::RetryErrors,
+          Smithy::Client::Plugins::ChecksumRequired,
           Smithy::Client::Plugins::StubResponses
         ]
       end

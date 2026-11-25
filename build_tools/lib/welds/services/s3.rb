@@ -3,6 +3,7 @@
 require_relative '../../../../gems/aws-sdk-s3/lib/aws-sdk-s3/plugins/accelerate'
 require_relative '../../../../gems/aws-sdk-s3/lib/aws-sdk-s3/plugins/arn'
 require_relative '../../../../gems/aws-sdk-s3/lib/aws-sdk-s3/plugins/bucket_dns'
+require_relative '../../../../gems/aws-sdk-s3/lib/aws-sdk-s3/plugins/checksum_algorithm'
 require_relative '../../../../gems/aws-sdk-s3/lib/aws-sdk-s3/plugins/iad_regional_endpoint'
 require_relative '../../../../gems/aws-sdk-s3/lib/aws-sdk-s3/plugins/custom_paginators'
 require_relative '../../../../gems/aws-sdk-s3/lib/aws-sdk-s3/paginators/list_objects'
@@ -92,6 +93,7 @@ module BuildTools
             Aws::S3::Plugins::Accelerate => { require_path: 'aws-sdk-s3/plugins/accelerate' },
             Aws::S3::Plugins::ARN => { require_path: 'aws-sdk-s3/plugins/arn' },
             Aws::S3::Plugins::BucketDns => { require_path: 'aws-sdk-s3/plugins/bucket_dns' },
+            Aws::S3::Plugins::ChecksumAlgorithm => { require_path: 'aws-sdk-s3/plugins/checksum_algorithm' },
             Aws::S3::Plugins::IADRegionalEndpoint => { require_path: 'aws-sdk-s3/plugins/iad_regional_endpoint' },
             Aws::S3::Plugins::CustomPaginators => { require_path: 'aws-sdk-s3/plugins/custom_paginators' }
           }
