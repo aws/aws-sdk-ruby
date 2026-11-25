@@ -708,6 +708,10 @@ module Aws::WAFV2
     #     `arn:partition:elasticloadbalancing:region:account-id:loadbalancer/app/load-balancer-name/load-balancer-id
     #     `
     #
+    #   * For an Elastic Load Balancing for Envoy proxy:
+    #     `arn:partition:elasticloadbalancing:region:account-id:proxy/proxy-name:proxy-id
+    #     `
+    #
     #   * For an Amazon API Gateway REST API:
     #     `arn:partition:apigateway:region::/restapis/api-id/stages/stage-name
     #     `
@@ -754,9 +758,10 @@ module Aws::WAFV2
     # Use this to customize the maximum size of the request body that your
     # protected resources forward to WAF for inspection. You can customize
     # this setting for Application Load Balancer, CloudFront, API Gateway,
-    # Amazon Cognito, App Runner, or Verified Access resources. The default
-    # setting is 8 KB (8,192 bytes) for Application Load Balancer and 16 KB
-    # (16,384 bytes) for the other resource types.
+    # Amazon Cognito, App Runner, Verified Access, or Elastic Load Balancing
+    # for Envoy resources. The default setting is 8 KB (8,192 bytes) for
+    # Application Load Balancer and 16 KB (16,384 bytes) for the other
+    # resource types.
     #
     # <note markdown="1"> You are charged additional fees when your protected resources forward
     # body sizes that are larger than the default. For more information, see
@@ -778,10 +783,11 @@ module Aws::WAFV2
     # @!attribute [rw] request_body
     #   Customizes the maximum size of the request body that your protected
     #   Application Load Balancer, CloudFront, API Gateway, Amazon Cognito,
-    #   App Runner, and Verified Access resources forward to WAF for
-    #   inspection. The default size is 8 KB (8,192 bytes) for Application
-    #   Load Balancer and 16 KB (16,384 bytes) for the other resource types.
-    #   You can change the setting for any of the available resource types.
+    #   App Runner, Verified Access, and Elastic Load Balancing for Envoy
+    #   resources forward to WAF for inspection. The default size is 8 KB
+    #   (8,192 bytes) for Application Load Balancer and 16 KB (16,384 bytes)
+    #   for the other resource types. You can change the setting for any of
+    #   the available resource types.
     #
     #   <note markdown="1"> You are charged additional fees when your protected resources
     #   forward body sizes that are larger than the default. For more
@@ -980,10 +986,11 @@ module Aws::WAFV2
     #     bytes), and you can change the limit in the web ACL
     #     `AssociationConfig`.
     #
-    #   * For CloudFront, API Gateway, Amazon Cognito, App Runner, and
-    #     Verified Access, the default limit is 16 KB (16,384 bytes), and
-    #     you can increase the limit for each resource type in the web ACL
-    #     `AssociationConfig`, for additional processing fees.
+    #   * For CloudFront, API Gateway, Amazon Cognito, App Runner, Verified
+    #     Access, and Elastic Load Balancing for Envoy, the default limit is
+    #     16 KB (16,384 bytes), and you can increase the limit for each
+    #     resource type in the web ACL `AssociationConfig`, for additional
+    #     processing fees.
     #
     #   * For Amplify, use the CloudFront limit.
     #
@@ -1062,15 +1069,15 @@ module Aws::WAFV2
     #     path, for example, `/images/daily-ad.jpg`.
     #
     #   * `JA3Fingerprint`: Available for use with Amazon CloudFront
-    #     distributions and Application Load Balancers. Match against the
-    #     request's JA3 fingerprint. The JA3 fingerprint is a 32-character
-    #     hash derived from the TLS Client Hello of an incoming request.
-    #     This fingerprint serves as a unique identifier for the client's
-    #     TLS configuration. You can use this choice with a
-    #     `ByteMatchStatement`, `RegexMatchStatement`,
-    #     `RegexPatternSetReferenceStatement`, or `SizeConstraintStatement`.
-    #     You can't use it with `SqliMatchStatement` or
-    #     `XssMatchStatement`.
+    #     distributions, Application Load Balancers, and Elastic Load
+    #     Balancing for Envoy proxies. Match against the request's JA3
+    #     fingerprint. The JA3 fingerprint is a 32-character hash derived
+    #     from the TLS Client Hello of an incoming request. This fingerprint
+    #     serves as a unique identifier for the client's TLS configuration.
+    #     You can use this choice with a `ByteMatchStatement`,
+    #     `RegexMatchStatement`, `RegexPatternSetReferenceStatement`, or
+    #     `SizeConstraintStatement`. You can't use it with
+    #     `SqliMatchStatement` or `XssMatchStatement`.
     #
     #     You can obtain the JA3 fingerprint for client requests from the
     #     web ACL logs. If WAF is able to calculate the fingerprint, it
@@ -2265,9 +2272,10 @@ module Aws::WAFV2
     #   Use this to customize the maximum size of the request body that your
     #   protected resources forward to WAF for inspection. You can customize
     #   this setting for Application Load Balancer, CloudFront, API Gateway,
-    #   Amazon Cognito, App Runner, or Verified Access resources. The
-    #   default setting is 8 KB (8,192 bytes) for Application Load Balancer
-    #   and 16 KB (16,384 bytes) for the other resource types.
+    #   Amazon Cognito, App Runner, Verified Access, or Elastic Load
+    #   Balancing for Envoy resources. The default setting is 8 KB (8,192
+    #   bytes) for Application Load Balancer and 16 KB (16,384 bytes) for
+    #   the other resource types.
     #
     #   <note markdown="1"> You are charged additional fees when your protected resources
     #   forward body sizes that are larger than the default. For more
@@ -3275,6 +3283,10 @@ module Aws::WAFV2
     #     `arn:partition:elasticloadbalancing:region:account-id:loadbalancer/app/load-balancer-name/load-balancer-id
     #     `
     #
+    #   * For an Elastic Load Balancing for Envoy proxy:
+    #     `arn:partition:elasticloadbalancing:region:account-id:proxy/proxy-name:proxy-id
+    #     `
+    #
     #   * For an Amazon API Gateway REST API:
     #     `arn:partition:apigateway:region::/restapis/api-id/stages/stage-name
     #     `
@@ -3789,10 +3801,11 @@ module Aws::WAFV2
     #     bytes), and you can change the limit in the web ACL
     #     `AssociationConfig`.
     #
-    #   * For CloudFront, API Gateway, Amazon Cognito, App Runner, and
-    #     Verified Access, the default limit is 16 KB (16,384 bytes), and
-    #     you can increase the limit for each resource type in the web ACL
-    #     `AssociationConfig`, for additional processing fees.
+    #   * For CloudFront, API Gateway, Amazon Cognito, App Runner, Verified
+    #     Access, and Elastic Load Balancing for Envoy, the default limit is
+    #     16 KB (16,384 bytes), and you can increase the limit for each
+    #     resource type in the web ACL `AssociationConfig`, for additional
+    #     processing fees.
     #
     #   * For Amplify, use the CloudFront limit.
     #
@@ -3823,10 +3836,11 @@ module Aws::WAFV2
     #     bytes), and you can change the limit in the web ACL
     #     `AssociationConfig`.
     #
-    #   * For CloudFront, API Gateway, Amazon Cognito, App Runner, and
-    #     Verified Access, the default limit is 16 KB (16,384 bytes), and
-    #     you can increase the limit for each resource type in the web ACL
-    #     `AssociationConfig`, for additional processing fees.
+    #   * For CloudFront, API Gateway, Amazon Cognito, App Runner, Verified
+    #     Access, and Elastic Load Balancing for Envoy, the default limit is
+    #     16 KB (16,384 bytes), and you can increase the limit for each
+    #     resource type in the web ACL `AssociationConfig`, for additional
+    #     processing fees.
     #
     #   * For Amplify, use the CloudFront limit.
     #
@@ -3870,14 +3884,15 @@ module Aws::WAFV2
     #   @return [Types::HeaderOrder]
     #
     # @!attribute [rw] ja3_fingerprint
-    #   Available for use with Amazon CloudFront distributions and
-    #   Application Load Balancers. Match against the request's JA3
-    #   fingerprint. The JA3 fingerprint is a 32-character hash derived from
-    #   the TLS Client Hello of an incoming request. This fingerprint serves
-    #   as a unique identifier for the client's TLS configuration. WAF
-    #   calculates and logs this fingerprint for each request that has
-    #   enough TLS Client Hello information for the calculation. Almost all
-    #   web requests include this information.
+    #   Available for use with Amazon CloudFront distributions, Application
+    #   Load Balancers, and Elastic Load Balancing for Envoy proxies. Match
+    #   against the request's JA3 fingerprint. The JA3 fingerprint is a
+    #   32-character hash derived from the TLS Client Hello of an incoming
+    #   request. This fingerprint serves as a unique identifier for the
+    #   client's TLS configuration. WAF calculates and logs this
+    #   fingerprint for each request that has enough TLS Client Hello
+    #   information for the calculation. Almost all web requests include
+    #   this information.
     #
     #   <note markdown="1"> You can use this choice with a `ByteMatchStatement`,
     #   `RegexMatchStatement`, `RegexPatternSetReferenceStatement`, or
@@ -3902,14 +3917,15 @@ module Aws::WAFV2
     #   @return [Types::JA3Fingerprint]
     #
     # @!attribute [rw] ja4_fingerprint
-    #   Available for use with Amazon CloudFront distributions and
-    #   Application Load Balancers. Match against the request's JA4
-    #   fingerprint. The JA4 fingerprint is a 36-character hash derived from
-    #   the TLS Client Hello of an incoming request. This fingerprint serves
-    #   as a unique identifier for the client's TLS configuration. WAF
-    #   calculates and logs this fingerprint for each request that has
-    #   enough TLS Client Hello information for the calculation. Almost all
-    #   web requests include this information.
+    #   Available for use with Amazon CloudFront distributions, Application
+    #   Load Balancers, and Elastic Load Balancing for Envoy proxies. Match
+    #   against the request's JA4 fingerprint. The JA4 fingerprint is a
+    #   36-character hash derived from the TLS Client Hello of an incoming
+    #   request. This fingerprint serves as a unique identifier for the
+    #   client's TLS configuration. WAF calculates and logs this
+    #   fingerprint for each request that has enough TLS Client Hello
+    #   information for the calculation. Almost all web requests include
+    #   this information.
     #
     #   <note markdown="1"> You can use this choice with a `ByteMatchStatement`,
     #   `RegexMatchStatement`, `RegexPatternSetReferenceStatement`, or
@@ -5158,9 +5174,10 @@ module Aws::WAFV2
     # @!attribute [rw] scope
     #   Specifies whether the web ACL is for an Amazon Web Services
     #   CloudFront distribution or for a regional application. A regional
-    #   application can be an Application Load Balancer, an AppSync GraphQL
-    #   API, an Amazon Cognito user pool, an Amazon Web Services App Runner
-    #   service, or an Amazon Web Services Verified Access instance.
+    #   application can be an Application Load Balancer, an Elastic Load
+    #   Balancing for Envoy proxy, an AppSync GraphQL API, an Amazon Cognito
+    #   user pool, an Amazon Web Services App Runner service, or an Amazon
+    #   Web Services Verified Access instance.
     #   @return [String]
     #
     # @!attribute [rw] uri_path_prefix
@@ -5279,6 +5296,10 @@ module Aws::WAFV2
     #
     #   * For an Application Load Balancer:
     #     `arn:partition:elasticloadbalancing:region:account-id:loadbalancer/app/load-balancer-name/load-balancer-id
+    #     `
+    #
+    #   * For an Elastic Load Balancing for Envoy proxy:
+    #     `arn:partition:elasticloadbalancing:region:account-id:proxy/proxy-name:proxy-id
     #     `
     #
     #   * For an Amazon API Gateway REST API:
@@ -5895,14 +5916,14 @@ module Aws::WAFV2
       include Aws::Structure
     end
 
-    # Available for use with Amazon CloudFront distributions and Application
-    # Load Balancers. Match against the request's JA3 fingerprint. The JA3
-    # fingerprint is a 32-character hash derived from the TLS Client Hello
-    # of an incoming request. This fingerprint serves as a unique identifier
-    # for the client's TLS configuration. WAF calculates and logs this
-    # fingerprint for each request that has enough TLS Client Hello
-    # information for the calculation. Almost all web requests include this
-    # information.
+    # Available for use with Amazon CloudFront distributions, Application
+    # Load Balancers, and Elastic Load Balancing for Envoy proxies. Match
+    # against the request's JA3 fingerprint. The JA3 fingerprint is a
+    # 32-character hash derived from the TLS Client Hello of an incoming
+    # request. This fingerprint serves as a unique identifier for the
+    # client's TLS configuration. WAF calculates and logs this fingerprint
+    # for each request that has enough TLS Client Hello information for the
+    # calculation. Almost all web requests include this information.
     #
     # <note markdown="1"> You can use this choice with a `ByteMatchStatement`,
     # `RegexMatchStatement`, `RegexPatternSetReferenceStatement`, or
@@ -5946,14 +5967,14 @@ module Aws::WAFV2
       include Aws::Structure
     end
 
-    # Available for use with Amazon CloudFront distributions and Application
-    # Load Balancers. Match against the request's JA4 fingerprint. The JA4
-    # fingerprint is a 36-character hash derived from the TLS Client Hello
-    # of an incoming request. This fingerprint serves as a unique identifier
-    # for the client's TLS configuration. WAF calculates and logs this
-    # fingerprint for each request that has enough TLS Client Hello
-    # information for the calculation. Almost all web requests include this
-    # information.
+    # Available for use with Amazon CloudFront distributions, Application
+    # Load Balancers, and Elastic Load Balancing for Envoy proxies. Match
+    # against the request's JA4 fingerprint. The JA4 fingerprint is a
+    # 36-character hash derived from the TLS Client Hello of an incoming
+    # request. This fingerprint serves as a unique identifier for the
+    # client's TLS configuration. WAF calculates and logs this fingerprint
+    # for each request that has enough TLS Client Hello information for the
+    # calculation. Almost all web requests include this information.
     #
     # <note markdown="1"> You can use this choice with a `ByteMatchStatement`,
     # `RegexMatchStatement`, `RegexPatternSetReferenceStatement`, or
@@ -6079,10 +6100,11 @@ module Aws::WAFV2
     #     bytes), and you can change the limit in the web ACL
     #     `AssociationConfig`.
     #
-    #   * For CloudFront, API Gateway, Amazon Cognito, App Runner, and
-    #     Verified Access, the default limit is 16 KB (16,384 bytes), and
-    #     you can increase the limit for each resource type in the web ACL
-    #     `AssociationConfig`, for additional processing fees.
+    #   * For CloudFront, API Gateway, Amazon Cognito, App Runner, Verified
+    #     Access, and Elastic Load Balancing for Envoy, the default limit is
+    #     16 KB (16,384 bytes), and you can increase the limit for each
+    #     resource type in the web ACL `AssociationConfig`, for additional
+    #     processing fees.
     #
     #   * For Amplify, use the CloudFront limit.
     #
@@ -9883,10 +9905,11 @@ module Aws::WAFV2
 
     # Customizes the maximum size of the request body that your protected
     # Application Load Balancer, CloudFront, API Gateway, Amazon Cognito,
-    # App Runner, and Verified Access resources forward to WAF for
-    # inspection. The default size is 8 KB (8,192 bytes) for Application
-    # Load Balancer and 16 KB (16,384 bytes) for the other resource types.
-    # You can change the setting for any of the available resource types.
+    # App Runner, Verified Access, and Elastic Load Balancing for Envoy
+    # resources forward to WAF for inspection. The default size is 8 KB
+    # (8,192 bytes) for Application Load Balancer and 16 KB (16,384 bytes)
+    # for the other resource types. You can change the setting for any of
+    # the available resource types.
     #
     # <note markdown="1"> You are charged additional fees when your protected resources forward
     # body sizes that are larger than the default. For more information, see
@@ -9908,9 +9931,10 @@ module Aws::WAFV2
     # @!attribute [rw] default_size_inspection_limit
     #   Specifies the maximum size of the web request body component that an
     #   associated Application Load Balancer, CloudFront, API Gateway,
-    #   Amazon Cognito, App Runner, or Verified Access resource should send
-    #   to WAF for inspection. This applies to statements in the web ACL
-    #   that inspect the body or JSON body.
+    #   Amazon Cognito, App Runner, Verified Access, or Elastic Load
+    #   Balancing for Envoy resource should send to WAF for inspection. This
+    #   applies to statements in the web ACL that inspect the body or JSON
+    #   body.
     #
     #   You can specify `KB_8` only for Application Load Balancer, with the
     #   `APPLICATION_LOAD_BALANCER` resource type.
@@ -12435,9 +12459,10 @@ module Aws::WAFV2
     #   Use this to customize the maximum size of the request body that your
     #   protected resources forward to WAF for inspection. You can customize
     #   this setting for Application Load Balancer, CloudFront, API Gateway,
-    #   Amazon Cognito, App Runner, or Verified Access resources. The
-    #   default setting is 8 KB (8,192 bytes) for Application Load Balancer
-    #   and 16 KB (16,384 bytes) for the other resource types.
+    #   Amazon Cognito, App Runner, Verified Access, or Elastic Load
+    #   Balancing for Envoy resources. The default setting is 8 KB (8,192
+    #   bytes) for Application Load Balancer and 16 KB (16,384 bytes) for
+    #   the other resource types.
     #
     #   <note markdown="1"> You are charged additional fees when your protected resources
     #   forward body sizes that are larger than the default. For more
@@ -13106,10 +13131,10 @@ module Aws::WAFV2
     # RuleGroup, and managed rule group. You can associate a web ACL with
     # one or more Amazon Web Services resources to protect. The resource
     # types include Amazon CloudFront distribution, Amazon API Gateway REST
-    # API, Application Load Balancer, AppSync GraphQL API, Amazon Cognito
-    # user pool, App Runner service, Amplify application, Amazon Web
-    # Services Verified Access instance, and Amazon Bedrock AgentCore
-    # Gateway.
+    # API, Application Load Balancer, Elastic Load Balancing for Envoy
+    # proxy, AppSync GraphQL API, Amazon Cognito user pool, App Runner
+    # service, Amplify application, Amazon Web Services Verified Access
+    # instance, and Amazon Bedrock AgentCore Gateway.
     #
     # @!attribute [rw] name
     #   The name of the web ACL. You cannot change the name of a web ACL
@@ -13282,9 +13307,10 @@ module Aws::WAFV2
     #   Use this to customize the maximum size of the request body that your
     #   protected resources forward to WAF for inspection. You can customize
     #   this setting for Application Load Balancer, CloudFront, API Gateway,
-    #   Amazon Cognito, App Runner, or Verified Access resources. The
-    #   default setting is 8 KB (8,192 bytes) for Application Load Balancer
-    #   and 16 KB (16,384 bytes) for the other resource types.
+    #   Amazon Cognito, App Runner, Verified Access, or Elastic Load
+    #   Balancing for Envoy resources. The default setting is 8 KB (8,192
+    #   bytes) for Application Load Balancer and 16 KB (16,384 bytes) for
+    #   the other resource types.
     #
     #   <note markdown="1"> You are charged additional fees when your protected resources
     #   forward body sizes that are larger than the default. For more

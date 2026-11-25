@@ -159,6 +159,7 @@ module Aws
   autoload :EFS, 'aws-sdk-efs'
   autoload :EKS, 'aws-sdk-eks'
   autoload :EKSAuth, 'aws-sdk-eksauth'
+  autoload :ELBProxy, 'aws-sdk-elbproxy'
   autoload :EMR, 'aws-sdk-emr'
   autoload :EMRContainers, 'aws-sdk-emrcontainers'
   autoload :EMRServerless, 'aws-sdk-emrserverless'

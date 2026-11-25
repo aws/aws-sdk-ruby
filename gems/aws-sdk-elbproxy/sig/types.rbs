@@ -1,0 +1,492 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::ELBProxy
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateCertificateRequest
+      attr_accessor proxy_identifier: ::String
+      attr_accessor certificate_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateCertificateResponse
+      attr_accessor certificate_association: Types::CertificateAssociation
+      SENSITIVE: []
+    end
+
+    class Attribute
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class AttributeDetails
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      attr_accessor default_value: ::String
+      SENSITIVE: []
+    end
+
+    class CertificateAssociation
+      attr_accessor certificate_arn: ::String
+      attr_accessor status: Types::CertificateAssociationStatus
+      attr_accessor created_at: ::Time
+      SENSITIVE: []
+    end
+
+    class CertificateAssociationStatus
+      attr_accessor code: ("associate-in-progress" | "active" | "associate-failed" | "disassociate-in-progress" | "disassociated")
+      attr_accessor reasons: ::Array[Types::CertificateAssociationStatusReason]
+      SENSITIVE: []
+    end
+
+    class CertificateAssociationStatusReason
+      attr_accessor code: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ConfigurationArchive
+      attr_accessor configuration_bytes: ::String
+      SENSITIVE: [:configuration_bytes]
+    end
+
+    class ConfigurationFile
+      attr_accessor configuration_bytes: ::String
+      SENSITIVE: [:configuration_bytes]
+    end
+
+    class ConfigurationMetadata
+      attr_accessor config_file_hash: ::String
+      attr_accessor config_archive_hash: ::String
+      attr_accessor config_file_last_updated_at: ::Time
+      attr_accessor config_archive_last_updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CreateProxyRequest
+      attr_accessor name: ::String
+      attr_accessor type: ("envoy")
+      attr_accessor proxy_version: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor configuration: Types::ProxyConfiguration
+      attr_accessor network_configuration: Types::ProxyNetworkUserConfiguration
+      attr_accessor attributes: ::Array[Types::Attribute]
+      attr_accessor customer_kms_key_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateProxyResponse
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor type: ("envoy")
+      attr_accessor proxy_version: ::String
+      attr_accessor dns_name: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor network_configuration: Types::ProxyNetworkConfiguration
+      attr_accessor status: Types::ProxyStatus
+      attr_accessor configuration_metadata: Types::ConfigurationMetadata
+      attr_accessor created_at: ::Time
+      attr_accessor customer_kms_key_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteProxyRequest
+      attr_accessor proxy_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteProxyResponse
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor status: Types::ProxyStatus
+      SENSITIVE: []
+    end
+
+    class DisassociateCertificateRequest
+      attr_accessor proxy_identifier: ::String
+      attr_accessor certificate_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class DisassociateCertificateResponse
+      attr_accessor certificate_association: Types::CertificateAssociation
+      SENSITIVE: []
+    end
+
+    class GetProxyAttributesRequest
+      attr_accessor proxy_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetProxyAttributesResponse
+      attr_accessor attributes: ::Array[Types::AttributeDetails]
+      SENSITIVE: []
+    end
+
+    class GetProxyConfigurationContentsRequest
+      attr_accessor proxy_identifier: ::String
+      attr_accessor include_config_file: bool
+      attr_accessor include_config_archive: bool
+      SENSITIVE: []
+    end
+
+    class GetProxyConfigurationContentsResponse
+      attr_accessor configuration_file_contents: ::String
+      attr_accessor configuration_archive_contents: ::String
+      attr_accessor configuration_metadata: Types::ConfigurationMetadata
+      attr_accessor customer_kms_key_arn: ::String
+      SENSITIVE: [:configuration_file_contents, :configuration_archive_contents]
+    end
+
+    class GetProxyRequest
+      attr_accessor proxy_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetProxyResponse
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor type: ("envoy")
+      attr_accessor proxy_version: ::String
+      attr_accessor dns_name: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor network_configuration: Types::ProxyNetworkConfiguration
+      attr_accessor status: Types::ProxyStatus
+      attr_accessor configuration_metadata: Types::ConfigurationMetadata
+      attr_accessor created_at: ::Time
+      attr_accessor customer_kms_key_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetProxyUpdateRequest
+      attr_accessor proxy_identifier: ::String
+      attr_accessor update_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetProxyUpdateResponse
+      attr_accessor proxy_arn: ::String
+      attr_accessor update_id: ::String
+      attr_accessor state: Types::ProxyUpdateState
+      attr_accessor details: Types::ProxyUpdateDetails
+      attr_accessor submitted_at: ::Time
+      attr_accessor validated_at: ::Time
+      attr_accessor completed_at: ::Time
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListCertificateAssociationsRequest
+      attr_accessor proxy_identifier: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListCertificateAssociationsResponse
+      attr_accessor items: ::Array[Types::CertificateAssociation]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListProxiesRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListProxiesResponse
+      attr_accessor items: ::Array[Types::ProxySummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListProxyUpdatesRequest
+      attr_accessor proxy_identifier: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListProxyUpdatesResponse
+      attr_accessor items: ::Array[Types::ProxyUpdateSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListProxyVersionsRequest
+      attr_accessor type: ("envoy")
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListProxyVersionsResponse
+      attr_accessor items: ::Array[Types::ProxyVersionSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceInput
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceOutput
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class OperationNotPermittedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class PriorRequestNotCompletedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ProxyConfiguration
+      attr_accessor configuration_file: Types::ConfigurationFile
+      attr_accessor configuration_archive: Types::ConfigurationArchive
+      SENSITIVE: []
+    end
+
+    class ProxyConfigurationUpdateDetails
+      attr_accessor new_configuration_metadata: Types::ConfigurationMetadata
+      SENSITIVE: []
+    end
+
+    class ProxyIpAddressingConfiguration
+      attr_accessor ipv4_addressability: ("off" | "internet-facing" | "internal")
+      attr_accessor ipv6_addressability: ("off" | "internet-facing" | "internal")
+      SENSITIVE: []
+    end
+
+    class ProxyIpConfiguration
+      attr_accessor ip_addressing_configuration: Types::ProxyIpAddressingConfiguration
+      SENSITIVE: []
+    end
+
+    class ProxyNetworkConfiguration
+      attr_accessor ip_configuration: Types::ProxyIpConfiguration
+      attr_accessor vpc_configuration: Types::ProxyVpcConfiguration
+      SENSITIVE: []
+    end
+
+    class ProxyNetworkUserConfiguration
+      attr_accessor ip_configuration: Types::ProxyIpConfiguration
+      attr_accessor vpc_configuration: Types::ProxyVpcUserConfiguration
+      SENSITIVE: []
+    end
+
+    class ProxyStatus
+      attr_accessor code: ("action-required" | "active" | "create-failed" | "create-in-progress" | "deleted" | "delete-in-progress" | "update-in-progress" | "cancel-update-in-progress")
+      attr_accessor reasons: ::Array[Types::ProxyStatusReason]
+      SENSITIVE: []
+    end
+
+    class ProxyStatusReason
+      attr_accessor code: ::String
+      attr_accessor target: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ProxySummary
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor type: ("envoy")
+      attr_accessor dns_name: ::String
+      attr_accessor vpc_id: ::String
+      attr_accessor status: Types::ProxyStatus
+      attr_accessor created_at: ::Time
+      SENSITIVE: []
+    end
+
+    class ProxyUpdateDetails
+      attr_accessor configuration: Types::ProxyConfigurationUpdateDetails
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Configuration < ProxyUpdateDetails
+      end
+      class Unknown < ProxyUpdateDetails
+      end
+    end
+
+    class ProxyUpdateState
+      attr_accessor validation_status: ("not-validated" | "valid" | "invalid")
+      attr_accessor propagation_status: ("in-progress" | "complete" | "skipped" | "failed" | "cancelled")
+      attr_accessor reasons: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ProxyUpdateSummary
+      attr_accessor update_id: ::String
+      attr_accessor type: ("update-proxy-configuration")
+      attr_accessor validation_status: ("not-validated" | "valid" | "invalid")
+      attr_accessor propagation_status: ("in-progress" | "complete" | "skipped" | "failed" | "cancelled")
+      attr_accessor submitted_at: ::Time
+      attr_accessor validated_at: ::Time
+      attr_accessor completed_at: ::Time
+      SENSITIVE: []
+    end
+
+    class ProxyVersionSummary
+      attr_accessor type: ("envoy")
+      attr_accessor version: ::String
+      SENSITIVE: []
+    end
+
+    class ProxyVpcConfiguration
+      attr_accessor vpc_id: ::String
+      attr_accessor availability_zones: ::Array[Types::SubnetAndZone]
+      attr_accessor security_groups: ::Array[Types::SecurityGroupDetails]
+      SENSITIVE: []
+    end
+
+    class ProxyVpcUserConfiguration
+      attr_accessor subnets: ::Array[Types::SubnetDetails]
+      attr_accessor security_groups: ::Array[Types::SecurityGroupDetails]
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class SecurityGroupDetails
+      attr_accessor security_group_id: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceQuotaExceededException
+      attr_accessor message: ::String
+      attr_accessor quota_code: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ::String
+      attr_accessor service_code: ::String
+      SENSITIVE: []
+    end
+
+    class SubnetAndZone
+      attr_accessor subnet_id: ::String
+      attr_accessor zone_id: ::String
+      attr_accessor zone_name: ::String
+      SENSITIVE: []
+    end
+
+    class SubnetDetails
+      attr_accessor subnet_id: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceInput
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class TagResourceOutput < Aws::EmptyStructure
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UntagResourceInput
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceOutput < Aws::EmptyStructure
+    end
+
+    class UpdateProxyAttributesRequest
+      attr_accessor proxy_identifier: ::String
+      attr_accessor attributes: ::Array[Types::Attribute]
+      SENSITIVE: []
+    end
+
+    class UpdateProxyAttributesResponse
+      attr_accessor attributes: ::Array[Types::AttributeDetails]
+      SENSITIVE: []
+    end
+
+    class UpdateProxyConfigurationRequest
+      attr_accessor proxy_identifier: ::String
+      attr_accessor configuration_file: Types::ConfigurationFile
+      attr_accessor configuration_archive: Types::ConfigurationArchive
+      attr_accessor reset_configuration_archive: bool
+      attr_accessor customer_kms_key_arn: ::String
+      attr_accessor reset_customer_kms_key_arn: bool
+      SENSITIVE: []
+    end
+
+    class UpdateProxyConfigurationResponse
+      attr_accessor configuration_metadata: Types::ConfigurationMetadata
+      attr_accessor update_id: ::String
+      attr_accessor customer_kms_key_arn: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateProxyNetworkConfigurationRequest
+      attr_accessor proxy_identifier: ::String
+      attr_accessor vpc_configuration: Types::UpdateProxyVpcConfiguration
+      SENSITIVE: []
+    end
+
+    class UpdateProxyNetworkConfigurationResponse
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor type: ("envoy")
+      attr_accessor proxy_version: ::String
+      attr_accessor dns_name: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor network_configuration: Types::ProxyNetworkConfiguration
+      attr_accessor status: Types::ProxyStatus
+      attr_accessor configuration_metadata: Types::ConfigurationMetadata
+      attr_accessor created_at: ::Time
+      attr_accessor customer_kms_key_arn: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateProxyVpcConfiguration
+      attr_accessor subnets: ::Array[Types::SubnetDetails]
+      attr_accessor security_groups: ::Array[Types::SecurityGroupDetails]
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+  end
+end

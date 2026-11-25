@@ -1,0 +1,49 @@
+{
+  "version" : 2,
+  "testCases" : [ {
+    "id" : "ListProxiesSuccess",
+    "operationName" : "ListProxies",
+    "input" : { },
+    "expectation" : {
+      "success" : { }
+    },
+    "config" : {
+      "region" : "us-east-1",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
+    "id" : "ListProxyVersionsSuccess",
+    "operationName" : "ListProxyVersions",
+    "input" : {
+      "type" : "envoy"
+    },
+    "expectation" : {
+      "success" : { }
+    },
+    "config" : {
+      "region" : "us-east-1",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
+    "id" : "GetProxyCrossAccountValidation",
+    "operationName" : "GetProxy",
+    "input" : {
+      "proxyIdentifier" : "arn:aws:elasticloadbalancing:us-east-1:000000000000:proxy/smoke-test-nonexistent:abc123"
+    },
+    "expectation" : {
+      "failure" : {
+        "errorId" : "ValidationException"
+      }
+    },
+    "config" : {
+      "region" : "us-east-1",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  } ]
+}

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.1312.0 (2026-11-25)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::ELBProxy`.
+
 1.1311.0 (2026-11-23)
 ------------------
 

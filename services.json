@@ -497,6 +497,9 @@
   "EKSAuth": {
     "models": "eks-auth/2023-11-26"
   },
+  "ELBProxy": {
+    "models": "elb-proxy/2026-11-20"
+  },
   "EMR": {
     "models": "elasticmapreduce/2009-03-31"
   },

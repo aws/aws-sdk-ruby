@@ -230,10 +230,10 @@ module Aws
                             },
                             ?token_domains: Array[::String],
                             ?association_config: {
-                              request_body: Hash[("CLOUDFRONT" | "API_GATEWAY" | "COGNITO_USER_POOL" | "APP_RUNNER_SERVICE" | "VERIFIED_ACCESS_INSTANCE" | "AGENTCORE_GATEWAY" | "APPLICATION_LOAD_BALANCER"), {
+                              request_body: Hash[("CLOUDFRONT" | "API_GATEWAY" | "COGNITO_USER_POOL" | "APP_RUNNER_SERVICE" | "VERIFIED_ACCESS_INSTANCE" | "ELB_PROXY" | "AGENTCORE_GATEWAY" | "APPLICATION_LOAD_BALANCER"), {
                                   default_size_inspection_limit: ("KB_8" | "KB_16" | "KB_32" | "KB_48" | "KB_64")
                                 }]?,
-                              challenge_javascript_sdk_injection: Hash[("CLOUDFRONT" | "API_GATEWAY" | "COGNITO_USER_POOL" | "APP_RUNNER_SERVICE" | "VERIFIED_ACCESS_INSTANCE" | "AGENTCORE_GATEWAY" | "APPLICATION_LOAD_BALANCER"), {
+                              challenge_javascript_sdk_injection: Hash[("CLOUDFRONT" | "API_GATEWAY" | "COGNITO_USER_POOL" | "APP_RUNNER_SERVICE" | "VERIFIED_ACCESS_INSTANCE" | "ELB_PROXY" | "AGENTCORE_GATEWAY" | "APPLICATION_LOAD_BALANCER"), {
                                 }]?
                             },
                             ?on_source_d_do_s_protection_config: {
@@ -888,7 +888,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WAFV2/Client.html#list_resources_for_web_acl-instance_method
       def list_resources_for_web_acl: (
                                         web_acl_arn: ::String,
-                                        ?resource_type: ("APPLICATION_LOAD_BALANCER" | "API_GATEWAY" | "APPSYNC" | "COGNITO_USER_POOL" | "APP_RUNNER_SERVICE" | "VERIFIED_ACCESS_INSTANCE" | "AMPLIFY" | "AGENTCORE_GATEWAY")
+                                        ?resource_type: ("APPLICATION_LOAD_BALANCER" | "API_GATEWAY" | "APPSYNC" | "COGNITO_USER_POOL" | "APP_RUNNER_SERVICE" | "VERIFIED_ACCESS_INSTANCE" | "AMPLIFY" | "ELB_PROXY" | "AGENTCORE_GATEWAY")
                                       ) -> _ListResourcesForWebACLResponseSuccess
                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListResourcesForWebACLResponseSuccess
 
@@ -1163,10 +1163,10 @@ module Aws
                             },
                             ?token_domains: Array[::String],
                             ?association_config: {
-                              request_body: Hash[("CLOUDFRONT" | "API_GATEWAY" | "COGNITO_USER_POOL" | "APP_RUNNER_SERVICE" | "VERIFIED_ACCESS_INSTANCE" | "AGENTCORE_GATEWAY" | "APPLICATION_LOAD_BALANCER"), {
+                              request_body: Hash[("CLOUDFRONT" | "API_GATEWAY" | "COGNITO_USER_POOL" | "APP_RUNNER_SERVICE" | "VERIFIED_ACCESS_INSTANCE" | "ELB_PROXY" | "AGENTCORE_GATEWAY" | "APPLICATION_LOAD_BALANCER"), {
                                   default_size_inspection_limit: ("KB_8" | "KB_16" | "KB_32" | "KB_48" | "KB_64")
                                 }]?,
-                              challenge_javascript_sdk_injection: Hash[("CLOUDFRONT" | "API_GATEWAY" | "COGNITO_USER_POOL" | "APP_RUNNER_SERVICE" | "VERIFIED_ACCESS_INSTANCE" | "AGENTCORE_GATEWAY" | "APPLICATION_LOAD_BALANCER"), {
+                              challenge_javascript_sdk_injection: Hash[("CLOUDFRONT" | "API_GATEWAY" | "COGNITO_USER_POOL" | "APP_RUNNER_SERVICE" | "VERIFIED_ACCESS_INSTANCE" | "ELB_PROXY" | "AGENTCORE_GATEWAY" | "APPLICATION_LOAD_BALANCER"), {
                                 }]?
                             },
                             ?on_source_d_do_s_protection_config: {

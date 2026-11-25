@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.284.0 (2026-11-25)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-elbproxy` gem.
+
 3.283.0 (2026-11-20)
 ------------------
 

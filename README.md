@@ -724,6 +724,7 @@ RubyGems.org page under "LINKS" section.
 | Elastic Disaster Recovery Service                     | Aws::Drs                                 | aws-sdk-drs                                 | 2020-02-26  |
 | Elastic Load Balancing                                | Aws::ElasticLoadBalancing                | aws-sdk-elasticloadbalancing                | 2012-06-01  |
 | Elastic Load Balancing                                | Aws::ElasticLoadBalancingV2              | aws-sdk-elasticloadbalancingv2              | 2015-12-01  |
+| Elastic Load Balancing for Envoy                      | Aws::ELBProxy                            | aws-sdk-elbproxy                            | 2026-11-20  |
 | Firewall Management Service                           | Aws::FMS                                 | aws-sdk-fms                                 | 2018-01-01  |
 | IAM Roles Anywhere                                    | Aws::RolesAnywhere                       | aws-sdk-rolesanywhere                       | 2018-05-10  |
 | IAM Toolbox (Preview)                                 | Aws::IAMToolbox                          | aws-sdk-iamtoolbox                          | 2018-05-10  |

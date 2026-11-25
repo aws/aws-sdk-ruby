@@ -134,8 +134,8 @@ module Aws::WAFV2
     end
 
     class AssociationConfig
-      attr_accessor request_body: ::Hash[("CLOUDFRONT" | "API_GATEWAY" | "COGNITO_USER_POOL" | "APP_RUNNER_SERVICE" | "VERIFIED_ACCESS_INSTANCE" | "AGENTCORE_GATEWAY" | "APPLICATION_LOAD_BALANCER"), Types::RequestBodyAssociatedResourceTypeConfig]
-      attr_accessor challenge_javascript_sdk_injection: ::Hash[("CLOUDFRONT" | "API_GATEWAY" | "COGNITO_USER_POOL" | "APP_RUNNER_SERVICE" | "VERIFIED_ACCESS_INSTANCE" | "AGENTCORE_GATEWAY" | "APPLICATION_LOAD_BALANCER"), Types::ChallengeJavascriptSdkInjectionConfig]
+      attr_accessor request_body: ::Hash[("CLOUDFRONT" | "API_GATEWAY" | "COGNITO_USER_POOL" | "APP_RUNNER_SERVICE" | "VERIFIED_ACCESS_INSTANCE" | "ELB_PROXY" | "AGENTCORE_GATEWAY" | "APPLICATION_LOAD_BALANCER"), Types::RequestBodyAssociatedResourceTypeConfig]
+      attr_accessor challenge_javascript_sdk_injection: ::Hash[("CLOUDFRONT" | "API_GATEWAY" | "COGNITO_USER_POOL" | "APP_RUNNER_SERVICE" | "VERIFIED_ACCESS_INSTANCE" | "ELB_PROXY" | "AGENTCORE_GATEWAY" | "APPLICATION_LOAD_BALANCER"), Types::ChallengeJavascriptSdkInjectionConfig]
       SENSITIVE: []
     end
 
@@ -1262,7 +1262,7 @@ module Aws::WAFV2
 
     class ListResourcesForWebACLRequest
       attr_accessor web_acl_arn: ::String
-      attr_accessor resource_type: ("APPLICATION_LOAD_BALANCER" | "API_GATEWAY" | "APPSYNC" | "COGNITO_USER_POOL" | "APP_RUNNER_SERVICE" | "VERIFIED_ACCESS_INSTANCE" | "AMPLIFY" | "AGENTCORE_GATEWAY")
+      attr_accessor resource_type: ("APPLICATION_LOAD_BALANCER" | "API_GATEWAY" | "APPSYNC" | "COGNITO_USER_POOL" | "APP_RUNNER_SERVICE" | "VERIFIED_ACCESS_INSTANCE" | "AMPLIFY" | "ELB_PROXY" | "AGENTCORE_GATEWAY")
       SENSITIVE: []
     end
 

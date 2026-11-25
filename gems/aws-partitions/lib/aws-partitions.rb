@@ -404,6 +404,7 @@ module Aws
             'EFS' => 'elasticfilesystem',
             'EKS' => 'eks',
             'EKSAuth' => 'eks-auth',
+            'ELBProxy' => 'elb-proxy',
             'EMR' => 'elasticmapreduce',
             'EMRContainers' => 'emr-containers',
             'EMRServerless' => 'emr-serverless',
