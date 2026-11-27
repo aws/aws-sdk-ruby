@@ -2931,6 +2931,7 @@ module Aws::CloudWatch
     #   * {Types::GetOTelEnrichmentOutput#exclude_filters #exclude_filters} => Array&lt;Types::OTelEnrichmentMetricSelector&gt;
     #   * {Types::GetOTelEnrichmentOutput#created_at #created_at} => Time
     #   * {Types::GetOTelEnrichmentOutput#updated_at #updated_at} => Time
+    #   * {Types::GetOTelEnrichmentOutput#enable_tag_enrichment #enable_tag_enrichment} => Boolean
     #
     # @example Response structure
     #
@@ -2945,6 +2946,7 @@ module Aws::CloudWatch
     #   resp.exclude_filters[0].metric_names[0] #=> String
     #   resp.created_at #=> Time
     #   resp.updated_at #=> Time
+    #   resp.enable_tag_enrichment #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/GetOTelEnrichment AWS API Documentation
     #
@@ -3338,6 +3340,18 @@ module Aws::CloudWatch
     #   specify. There is a low probability that the returned results include
     #   metrics with last published data as much as 50 minutes more than the
     #   specified time interval.
+    #
+    #   A namespace can contain many metrics that published data in the past
+    #   two weeks but not in the past three hours. In this case, a page of
+    #   results can contain few or no metrics and still include a `NextToken`.
+    #   You need to continue making calls with the returned `NextToken` until
+    #   no token is returned. If you need a continuous feed of active metrics
+    #   across namespaces, use metric streams. For more information, see [Use
+    #   metric streams][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Metric-Streams.html
     #
     # @option params [Boolean] :include_linked_accounts
     #   If you are using this operation in a monitoring account, specify
@@ -5756,18 +5770,22 @@ module Aws::CloudWatch
     # [supported Amazon Web Services resources][1] in the account. Once
     # enabled, metrics that contain a resource identifier dimension (for
     # example, EC2 `CPUUtilization` with an `InstanceId` dimension) are
-    # enriched with resource ARN and resource tag labels and become
-    # queryable using PromQL.
+    # enriched with resource ARN labels and, optionally, resource tag
+    # labels, and become queryable using PromQL.
     #
-    # Before calling this operation, you must enable resource tags on
-    # telemetry for your account. For more information, see [Enable resource
-    # tags on telemetry][2].
+    # To include resource tag labels, you must also enable resource tags on
+    # telemetry for the account. For more information, see [Enable resource
+    # tags on telemetry][2]. If `EnableTagEnrichment` is `false`, enrichment
+    # reads no resource tags, so it does not require resource tags on
+    # telemetry.
     #
     # Optionally, `IncludeFilters` and `ExcludeFilters` limit enrichment to
-    # a subset of the account's metrics. These filters are stored only when
-    # this operation starts enrichment. Calling `StartOTelEnrichment` for an
-    # account where enrichment is already running has no effect and does not
-    # modify the filters that are applied. To change them, use
+    # a subset of the account's metrics, and `EnableTagEnrichment` controls
+    # whether enriched metrics include resource tag labels. These settings
+    # are stored only when this operation starts enrichment. Calling
+    # `StartOTelEnrichment` for an account where enrichment is already
+    # running has no effect and does not modify the filters or the tag
+    # enrichment setting that are applied. To change them, use
     # [UpdateOTelEnrichment][3].
     #
     #
@@ -5794,12 +5812,27 @@ module Aws::CloudWatch
     #   A maximum of 100 filters is allowed across `IncludeFilters` and
     #   `ExcludeFilters` combined.
     #
+    # @option params [Boolean] :enable_tag_enrichment
+    #   Specifies whether enriched metrics include resource tag labels. If
+    #   `true`, enriched metrics include resource tag labels. If `false`, they
+    #   include resource ARN labels but no resource tag labels. If you omit
+    #   this parameter, the default is `true`.
+    #
+    #   When `EnableTagEnrichment` is `true`, enriched metrics that carry
+    #   resource tag labels are charged at the OTel enrichment rate. For more
+    #   information, see [Amazon CloudWatch Pricing][1].
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/cloudwatch/pricing/
+    #
     # @return [Types::StartOTelEnrichmentOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartOTelEnrichmentOutput#include_filters #include_filters} => Array&lt;Types::OTelEnrichmentMetricSelector&gt;
     #   * {Types::StartOTelEnrichmentOutput#exclude_filters #exclude_filters} => Array&lt;Types::OTelEnrichmentMetricSelector&gt;
     #   * {Types::StartOTelEnrichmentOutput#created_at #created_at} => Time
     #   * {Types::StartOTelEnrichmentOutput#updated_at #updated_at} => Time
+    #   * {Types::StartOTelEnrichmentOutput#enable_tag_enrichment #enable_tag_enrichment} => Boolean
     #
     # @example Request syntax with placeholder values
     #
@@ -5816,6 +5849,7 @@ module Aws::CloudWatch
     #         metric_names: ["MetricName"],
     #       },
     #     ],
+    #     enable_tag_enrichment: false,
     #   })
     #
     # @example Response structure
@@ -5830,6 +5864,7 @@ module Aws::CloudWatch
     #   resp.exclude_filters[0].metric_names[0] #=> String
     #   resp.created_at #=> Time
     #   resp.updated_at #=> Time
+    #   resp.enable_tag_enrichment #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/StartOTelEnrichment AWS API Documentation
     #
@@ -6036,12 +6071,29 @@ module Aws::CloudWatch
     #   A maximum of 100 filters is allowed across `IncludeFilters` and
     #   `ExcludeFilters` combined.
     #
+    # @option params [Boolean] :enable_tag_enrichment
+    #   Specifies whether enriched metrics include resource tag labels. If
+    #   `true`, enriched metrics include resource tag labels. If `false`, they
+    #   include resource ARN labels but no resource tag labels. If you omit
+    #   this parameter, the stored value is not changed. The operation also
+    #   replaces the stored filters, so to change only this setting, specify
+    #   the current `IncludeFilters` and `ExcludeFilters` in the same request.
+    #
+    #   When `EnableTagEnrichment` is `true`, enriched metrics that carry
+    #   resource tag labels are charged at the OTel enrichment rate. For more
+    #   information, see [Amazon CloudWatch Pricing][1].
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/cloudwatch/pricing/
+    #
     # @return [Types::UpdateOTelEnrichmentOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateOTelEnrichmentOutput#include_filters #include_filters} => Array&lt;Types::OTelEnrichmentMetricSelector&gt;
     #   * {Types::UpdateOTelEnrichmentOutput#exclude_filters #exclude_filters} => Array&lt;Types::OTelEnrichmentMetricSelector&gt;
     #   * {Types::UpdateOTelEnrichmentOutput#created_at #created_at} => Time
     #   * {Types::UpdateOTelEnrichmentOutput#updated_at #updated_at} => Time
+    #   * {Types::UpdateOTelEnrichmentOutput#enable_tag_enrichment #enable_tag_enrichment} => Boolean
     #
     # @example Request syntax with placeholder values
     #
@@ -6058,6 +6110,7 @@ module Aws::CloudWatch
     #         metric_names: ["MetricName"],
     #       },
     #     ],
+    #     enable_tag_enrichment: false,
     #   })
     #
     # @example Response structure
@@ -6072,6 +6125,7 @@ module Aws::CloudWatch
     #   resp.exclude_filters[0].metric_names[0] #=> String
     #   resp.created_at #=> Time
     #   resp.updated_at #=> Time
+    #   resp.enable_tag_enrichment #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/UpdateOTelEnrichment AWS API Documentation
     #
@@ -6170,7 +6224,7 @@ module Aws::CloudWatch
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-cloudwatch'
-      context[:gem_version] = '1.162.0'
+      context[:gem_version] = '1.163.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

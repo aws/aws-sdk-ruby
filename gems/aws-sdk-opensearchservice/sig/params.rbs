@@ -52,6 +52,20 @@ module Aws
       }?
     }
 
+      type catalog_configuration = {
+      service_managed_s3_tables: {
+        encryption_configuration: {
+          enabled: bool?,
+          kms_key_arn: ::String?
+        }?
+      }?
+    }
+
+      type catalog_options = {
+      enabled: bool,
+      catalog: Params::catalog_configuration?
+    }
+
       type saml_options_input = {
       enabled: bool?,
       idp: {

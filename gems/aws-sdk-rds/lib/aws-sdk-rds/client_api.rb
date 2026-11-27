@@ -2427,6 +2427,7 @@ module Aws::RDS
     DeleteDBClusterMessage.add_member(:skip_final_snapshot, Shapes::ShapeRef.new(shape: Boolean, location_name: "SkipFinalSnapshot"))
     DeleteDBClusterMessage.add_member(:final_db_snapshot_identifier, Shapes::ShapeRef.new(shape: String, location_name: "FinalDBSnapshotIdentifier"))
     DeleteDBClusterMessage.add_member(:delete_automated_backups, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "DeleteAutomatedBackups"))
+    DeleteDBClusterMessage.add_member(:delete_db_instances, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "DeleteDBInstances"))
     DeleteDBClusterMessage.struct_class = Types::DeleteDBClusterMessage
 
     DeleteDBClusterParameterGroupMessage.add_member(:db_cluster_parameter_group_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DBClusterParameterGroupName"))

@@ -496,6 +496,7 @@ module Aws
         def exclude_filters: () -> ::Array[Types::OTelEnrichmentMetricSelector]
         def created_at: () -> ::Time
         def updated_at: () -> ::Time
+        def enable_tag_enrichment: () -> bool
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatch/Client.html#get_o_tel_enrichment-instance_method
       def get_o_tel_enrichment: (
@@ -982,6 +983,7 @@ module Aws
         def exclude_filters: () -> ::Array[Types::OTelEnrichmentMetricSelector]
         def created_at: () -> ::Time
         def updated_at: () -> ::Time
+        def enable_tag_enrichment: () -> bool
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatch/Client.html#start_o_tel_enrichment-instance_method
       def start_o_tel_enrichment: (
@@ -996,7 +998,8 @@ module Aws
                                         namespace: ::String,
                                         metric_names: Array[::String]?
                                       }
-                                    ]
+                                    ],
+                                    ?enable_tag_enrichment: bool
                                   ) -> _StartOTelEnrichmentResponseSuccess
                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartOTelEnrichmentResponseSuccess
 
@@ -1048,6 +1051,7 @@ module Aws
         def exclude_filters: () -> ::Array[Types::OTelEnrichmentMetricSelector]
         def created_at: () -> ::Time
         def updated_at: () -> ::Time
+        def enable_tag_enrichment: () -> bool
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatch/Client.html#update_o_tel_enrichment-instance_method
       def update_o_tel_enrichment: (
@@ -1062,7 +1066,8 @@ module Aws
                                          namespace: ::String,
                                          metric_names: Array[::String]?
                                        }
-                                     ]
+                                     ],
+                                     ?enable_tag_enrichment: bool
                                    ) -> _UpdateOTelEnrichmentResponseSuccess
                                  | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateOTelEnrichmentResponseSuccess
 

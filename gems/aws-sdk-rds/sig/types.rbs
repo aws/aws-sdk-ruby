@@ -1866,6 +1866,7 @@ module Aws::RDS
       attr_accessor skip_final_snapshot: bool
       attr_accessor final_db_snapshot_identifier: ::String
       attr_accessor delete_automated_backups: bool
+      attr_accessor delete_db_instances: bool
       SENSITIVE: []
     end
 

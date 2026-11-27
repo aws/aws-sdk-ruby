@@ -10706,6 +10706,10 @@ module Aws::RDS
     # cluster members are terminated and read replicas are promoted to
     # standalone instances.
     #
+    # To delete an Amazon Aurora DB cluster and all of its DB instances in a
+    # single call, set `DeleteDBInstances` to `true`. Otherwise, delete each
+    # DB instance in the DB cluster before you delete the DB cluster.
+    #
     # For more information on Amazon Aurora, see [ What is Amazon
     # Aurora?][1] in the *Amazon Aurora User Guide*.
     #
@@ -10765,6 +10769,49 @@ module Aws::RDS
     #   deleted, unless the Amazon Web Services Backup policy specifies a
     #   point-in-time restore rule.
     #
+    # @option params [Boolean] :delete_db_instances
+    #   Specifies whether to delete all DB instances in the DB cluster
+    #   together with the DB cluster. If you set this value to `true`, RDS
+    #   deletes every DB instance in the DB cluster and then deletes the DB
+    #   cluster. You don't need to call `DeleteDBInstance` for each DB
+    #   instance first. If you set this value to `false` or don't specify it,
+    #   RDS deletes the DB cluster only after you delete each of its DB
+    #   instances.
+    #
+    #   You must have permission to call `DeleteDBInstance` on every DB
+    #   instance in the DB cluster. If RDS can't delete a DB instance in the
+    #   DB cluster, the request fails and RDS doesn't delete the DB cluster
+    #   or any of its DB instances.
+    #
+    #   Constraints:
+    #
+    #   * You can't specify this parameter for a DB cluster that is a member
+    #     of an Aurora global database. Remove the DB cluster from the global
+    #     database first.
+    #
+    #   * You can't specify this parameter for an Aurora Limitless Database
+    #     DB cluster.
+    #
+    #   * Deletion protection must be turned off for the DB cluster.
+    #
+    #   * No DB instance in the DB cluster can be in the `deleting` state or
+    #     be switching over, be the blue DB instance of an active blue/green
+    #     deployment, or have an active zero-ETL integration.
+    #
+    #   * No DB instance in the DB cluster can be the source of an Aurora read
+    #     replica DB cluster, or have a read replica that is being created or
+    #     a cross-Region read replica that is being restored.
+    #
+    #   * The DB cluster can't be in the `stopping` state.
+    #
+    #   If the DB cluster doesn't contain any DB instances, RDS deletes the
+    #   DB cluster the same way as when you don't specify this parameter.
+    #
+    #   Default: `false`
+    #
+    #   Valid for Cluster Type: Aurora MySQL and Aurora PostgreSQL DB clusters
+    #   only
+    #
     # @return [Types::DeleteDBClusterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DeleteDBClusterResult#db_cluster #db_cluster} => Types::DBCluster
@@ -10798,6 +10845,88 @@ module Aws::RDS
     #     }, 
     #   }
     #
+    # @example Example: To delete a DB cluster and all of its DB instances
+    #
+    #   # The following example deletes the Aurora DB cluster named sample-cluster and all of the DB instances in it in a single
+    #   # call.
+    #
+    #   resp = client.delete_db_cluster({
+    #     db_cluster_identifier: "sample-cluster", 
+    #     delete_db_instances: true, 
+    #     skip_final_snapshot: true, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     db_cluster: {
+    #       allocated_storage: 1, 
+    #       associated_roles: [
+    #       ], 
+    #       auto_minor_version_upgrade: true, 
+    #       availability_zones: [
+    #         "us-east-1a", 
+    #         "us-east-1d", 
+    #         "us-east-1c", 
+    #       ], 
+    #       backup_retention_period: 7, 
+    #       cluster_create_time: Time.parse("2026-10-24T05:19:14.105Z"), 
+    #       copy_tags_to_snapshot: false, 
+    #       cross_account_clone: false, 
+    #       db_cluster_arn: "arn:aws:rds:us-east-1:123456789012:cluster:sample-cluster", 
+    #       db_cluster_identifier: "sample-cluster", 
+    #       db_cluster_members: [
+    #         {
+    #           db_cluster_parameter_group_status: "in-sync", 
+    #           db_instance_identifier: "sample-cluster-instance-1", 
+    #           is_cluster_writer: true, 
+    #           promotion_tier: 1, 
+    #         }, 
+    #       ], 
+    #       db_cluster_parameter_group: "default.aurora-postgresql17", 
+    #       database_insights_mode: "standard", 
+    #       db_cluster_resource_id: "cluster-EXAMPLE123456789", 
+    #       deletion_protection: false, 
+    #       domain_memberships: [
+    #       ], 
+    #       earliest_restorable_time: Time.parse("2026-10-24T05:19:19.661Z"), 
+    #       endpoint: "sample-cluster.cluster-############.us-east-1.rds.amazonaws.com", 
+    #       engine: "aurora-postgresql", 
+    #       engine_lifecycle_support: "open-source-rds-extended-support", 
+    #       engine_mode: "provisioned", 
+    #       engine_version: "17.9", 
+    #       hosted_zone_id: "Z1RLNU0EXAMPLE", 
+    #       http_endpoint_enabled: false, 
+    #       iam_database_authentication_enabled: true, 
+    #       internet_access_gateway_enabled: true, 
+    #       latest_restorable_time: Time.parse("2026-10-24T05:19:19.661Z"), 
+    #       local_write_forwarding_status: "disabled", 
+    #       master_username: "postgres", 
+    #       multi_az: false, 
+    #       performance_insights_enabled: false, 
+    #       port: 5432, 
+    #       preferred_backup_window: "05:05-05:35", 
+    #       preferred_maintenance_window: "wed:09:32-wed:10:02", 
+    #       read_replica_identifiers: [
+    #       ], 
+    #       reader_endpoint: "sample-cluster.cluster-ro-############.us-east-1.rds.amazonaws.com", 
+    #       serverless_v2_platform_version: "4", 
+    #       serverless_v2_scaling_configuration: {
+    #         max_capacity: 16.0, 
+    #         min_capacity: 0.0, 
+    #         seconds_until_auto_pause: 300, 
+    #       }, 
+    #       status: "deleting", 
+    #       storage_encrypted: false, 
+    #       storage_encryption_type: "sse-rds", 
+    #       tag_list: [
+    #       ], 
+    #       upgrade_rollout_order: "second", 
+    #       vpc_networking_enabled: false, 
+    #       vpc_security_groups: [
+    #       ], 
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_db_cluster({
@@ -10805,6 +10934,7 @@ module Aws::RDS
     #     skip_final_snapshot: false,
     #     final_db_snapshot_identifier: "String",
     #     delete_automated_backups: false,
+    #     delete_db_instances: false,
     #   })
     #
     # @example Response structure
@@ -36594,7 +36724,7 @@ module Aws::RDS
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.337.0'
+      context[:gem_version] = '1.338.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

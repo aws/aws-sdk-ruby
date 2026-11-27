@@ -24,6 +24,7 @@ module Aws::NeptuneGraph
     CancelImportTaskInput = Shapes::StructureShape.new(name: 'CancelImportTaskInput')
     CancelImportTaskOutput = Shapes::StructureShape.new(name: 'CancelImportTaskOutput')
     CancelQueryInput = Shapes::StructureShape.new(name: 'CancelQueryInput')
+    ComputeConfiguration = Shapes::UnionShape.new(name: 'ComputeConfiguration')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     ConflictExceptionReason = Shapes::StringShape.new(name: 'ConflictExceptionReason')
     CreateGraphInput = Shapes::StructureShape.new(name: 'CreateGraphInput')
@@ -85,6 +86,8 @@ module Aws::NeptuneGraph
     GraphId = Shapes::StringShape.new(name: 'GraphId')
     GraphIdentifier = Shapes::StringShape.new(name: 'GraphIdentifier')
     GraphName = Shapes::StringShape.new(name: 'GraphName')
+    GraphSessionConfiguration = Shapes::StructureShape.new(name: 'GraphSessionConfiguration')
+    GraphSessionMemory = Shapes::IntegerShape.new(name: 'GraphSessionMemory')
     GraphSnapshotSummary = Shapes::StructureShape.new(name: 'GraphSnapshotSummary')
     GraphSnapshotSummaryList = Shapes::ListShape.new(name: 'GraphSnapshotSummaryList')
     GraphStatus = Shapes::StringShape.new(name: 'GraphStatus')
@@ -132,6 +135,7 @@ module Aws::NeptuneGraph
     PrivateGraphEndpointStatus = Shapes::StringShape.new(name: 'PrivateGraphEndpointStatus')
     PrivateGraphEndpointSummary = Shapes::StructureShape.new(name: 'PrivateGraphEndpointSummary')
     PrivateGraphEndpointSummaryList = Shapes::ListShape.new(name: 'PrivateGraphEndpointSummaryList')
+    ProvisionedGraphConfiguration = Shapes::StructureShape.new(name: 'ProvisionedGraphConfiguration')
     ProvisionedMemory = Shapes::IntegerShape.new(name: 'ProvisionedMemory')
     QueryLanguage = Shapes::StringShape.new(name: 'QueryLanguage')
     QueryResponseBlob = Shapes::BlobShape.new(name: 'QueryResponseBlob', streaming: true)
@@ -222,6 +226,14 @@ module Aws::NeptuneGraph
     CancelQueryInput.add_member(:query_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "queryId"))
     CancelQueryInput.struct_class = Types::CancelQueryInput
 
+    ComputeConfiguration.add_member(:provisioned_graph, Shapes::ShapeRef.new(shape: ProvisionedGraphConfiguration, location_name: "provisionedGraph"))
+    ComputeConfiguration.add_member(:graph_session, Shapes::ShapeRef.new(shape: GraphSessionConfiguration, location_name: "graphSession"))
+    ComputeConfiguration.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    ComputeConfiguration.add_member_subclass(:provisioned_graph, Types::ComputeConfiguration::ProvisionedGraph)
+    ComputeConfiguration.add_member_subclass(:graph_session, Types::ComputeConfiguration::GraphSession)
+    ComputeConfiguration.add_member_subclass(:unknown, Types::ComputeConfiguration::Unknown)
+    ComputeConfiguration.struct_class = Types::ComputeConfiguration
+
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     ConflictException.add_member(:reason, Shapes::ShapeRef.new(shape: ConflictExceptionReason, location_name: "reason"))
     ConflictException.struct_class = Types::ConflictException
@@ -233,7 +245,8 @@ module Aws::NeptuneGraph
     CreateGraphInput.add_member(:vector_search_configuration, Shapes::ShapeRef.new(shape: VectorSearchConfiguration, location_name: "vectorSearchConfiguration"))
     CreateGraphInput.add_member(:replica_count, Shapes::ShapeRef.new(shape: ReplicaCount, location_name: "replicaCount"))
     CreateGraphInput.add_member(:deletion_protection, Shapes::ShapeRef.new(shape: Boolean, location_name: "deletionProtection"))
-    CreateGraphInput.add_member(:provisioned_memory, Shapes::ShapeRef.new(shape: ProvisionedMemory, required: true, location_name: "provisionedMemory"))
+    CreateGraphInput.add_member(:provisioned_memory, Shapes::ShapeRef.new(shape: ProvisionedMemory, deprecated: true, location_name: "provisionedMemory", metadata: {"deprecatedMessage" => "ProvisionedMemory is deprecated. Use ComputeConfiguration instead.", "deprecatedSince" => "2026-11-25"}))
+    CreateGraphInput.add_member(:compute_configuration, Shapes::ShapeRef.new(shape: ComputeConfiguration, location_name: "computeConfiguration"))
     CreateGraphInput.struct_class = Types::CreateGraphInput
 
     CreateGraphOutput.add_member(:id, Shapes::ShapeRef.new(shape: GraphId, required: true, location_name: "id"))
@@ -242,7 +255,8 @@ module Aws::NeptuneGraph
     CreateGraphOutput.add_member(:status, Shapes::ShapeRef.new(shape: GraphStatus, location_name: "status"))
     CreateGraphOutput.add_member(:status_reason, Shapes::ShapeRef.new(shape: String, location_name: "statusReason"))
     CreateGraphOutput.add_member(:create_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createTime"))
-    CreateGraphOutput.add_member(:provisioned_memory, Shapes::ShapeRef.new(shape: ProvisionedMemory, location_name: "provisionedMemory"))
+    CreateGraphOutput.add_member(:provisioned_memory, Shapes::ShapeRef.new(shape: ProvisionedMemory, deprecated: true, location_name: "provisionedMemory", metadata: {"deprecatedMessage" => "ProvisionedMemory is deprecated. Refer to ComputeConfiguration instead.", "deprecatedSince" => "2026-11-25"}))
+    CreateGraphOutput.add_member(:compute_configuration, Shapes::ShapeRef.new(shape: ComputeConfiguration, location_name: "computeConfiguration"))
     CreateGraphOutput.add_member(:endpoint, Shapes::ShapeRef.new(shape: String, location_name: "endpoint"))
     CreateGraphOutput.add_member(:public_connectivity, Shapes::ShapeRef.new(shape: Boolean, location_name: "publicConnectivity"))
     CreateGraphOutput.add_member(:vector_search_configuration, Shapes::ShapeRef.new(shape: VectorSearchConfiguration, location_name: "vectorSearchConfiguration"))
@@ -317,7 +331,8 @@ module Aws::NeptuneGraph
     DeleteGraphOutput.add_member(:status, Shapes::ShapeRef.new(shape: GraphStatus, location_name: "status"))
     DeleteGraphOutput.add_member(:status_reason, Shapes::ShapeRef.new(shape: String, location_name: "statusReason"))
     DeleteGraphOutput.add_member(:create_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createTime"))
-    DeleteGraphOutput.add_member(:provisioned_memory, Shapes::ShapeRef.new(shape: ProvisionedMemory, location_name: "provisionedMemory"))
+    DeleteGraphOutput.add_member(:provisioned_memory, Shapes::ShapeRef.new(shape: ProvisionedMemory, deprecated: true, location_name: "provisionedMemory", metadata: {"deprecatedMessage" => "ProvisionedMemory is deprecated. Refer to ComputeConfiguration instead.", "deprecatedSince" => "2026-11-25"}))
+    DeleteGraphOutput.add_member(:compute_configuration, Shapes::ShapeRef.new(shape: ComputeConfiguration, location_name: "computeConfiguration"))
     DeleteGraphOutput.add_member(:endpoint, Shapes::ShapeRef.new(shape: String, location_name: "endpoint"))
     DeleteGraphOutput.add_member(:public_connectivity, Shapes::ShapeRef.new(shape: Boolean, location_name: "publicConnectivity"))
     DeleteGraphOutput.add_member(:vector_search_configuration, Shapes::ShapeRef.new(shape: VectorSearchConfiguration, location_name: "vectorSearchConfiguration"))
@@ -440,7 +455,8 @@ module Aws::NeptuneGraph
     GetGraphOutput.add_member(:status, Shapes::ShapeRef.new(shape: GraphStatus, location_name: "status"))
     GetGraphOutput.add_member(:status_reason, Shapes::ShapeRef.new(shape: String, location_name: "statusReason"))
     GetGraphOutput.add_member(:create_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createTime"))
-    GetGraphOutput.add_member(:provisioned_memory, Shapes::ShapeRef.new(shape: ProvisionedMemory, location_name: "provisionedMemory"))
+    GetGraphOutput.add_member(:provisioned_memory, Shapes::ShapeRef.new(shape: ProvisionedMemory, deprecated: true, location_name: "provisionedMemory", metadata: {"deprecatedMessage" => "ProvisionedMemory is deprecated. Refer to ComputeConfiguration instead.", "deprecatedSince" => "2026-11-25"}))
+    GetGraphOutput.add_member(:compute_configuration, Shapes::ShapeRef.new(shape: ComputeConfiguration, location_name: "computeConfiguration"))
     GetGraphOutput.add_member(:endpoint, Shapes::ShapeRef.new(shape: String, location_name: "endpoint"))
     GetGraphOutput.add_member(:public_connectivity, Shapes::ShapeRef.new(shape: Boolean, location_name: "publicConnectivity"))
     GetGraphOutput.add_member(:vector_search_configuration, Shapes::ShapeRef.new(shape: VectorSearchConfiguration, location_name: "vectorSearchConfiguration"))
@@ -525,6 +541,9 @@ module Aws::NeptuneGraph
     GraphDataSummary.add_member(:edge_structures, Shapes::ShapeRef.new(shape: EdgeStructures, location_name: "edgeStructures"))
     GraphDataSummary.struct_class = Types::GraphDataSummary
 
+    GraphSessionConfiguration.add_member(:min_memory, Shapes::ShapeRef.new(shape: GraphSessionMemory, location_name: "minMemory"))
+    GraphSessionConfiguration.struct_class = Types::GraphSessionConfiguration
+
     GraphSnapshotSummary.add_member(:id, Shapes::ShapeRef.new(shape: SnapshotId, required: true, location_name: "id"))
     GraphSnapshotSummary.add_member(:name, Shapes::ShapeRef.new(shape: SnapshotName, required: true, location_name: "name"))
     GraphSnapshotSummary.add_member(:arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "arn"))
@@ -540,12 +559,13 @@ module Aws::NeptuneGraph
     GraphSummary.add_member(:name, Shapes::ShapeRef.new(shape: GraphName, required: true, location_name: "name"))
     GraphSummary.add_member(:arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "arn"))
     GraphSummary.add_member(:status, Shapes::ShapeRef.new(shape: GraphStatus, location_name: "status"))
-    GraphSummary.add_member(:provisioned_memory, Shapes::ShapeRef.new(shape: ProvisionedMemory, location_name: "provisionedMemory"))
+    GraphSummary.add_member(:provisioned_memory, Shapes::ShapeRef.new(shape: ProvisionedMemory, deprecated: true, location_name: "provisionedMemory", metadata: {"deprecatedMessage" => "ProvisionedMemory is deprecated. Refer to ComputeConfiguration instead.", "deprecatedSince" => "2026-11-25"}))
     GraphSummary.add_member(:public_connectivity, Shapes::ShapeRef.new(shape: Boolean, location_name: "publicConnectivity"))
     GraphSummary.add_member(:endpoint, Shapes::ShapeRef.new(shape: String, location_name: "endpoint"))
     GraphSummary.add_member(:replica_count, Shapes::ShapeRef.new(shape: ReplicaCount, location_name: "replicaCount"))
     GraphSummary.add_member(:kms_key_identifier, Shapes::ShapeRef.new(shape: String, location_name: "kmsKeyIdentifier"))
     GraphSummary.add_member(:deletion_protection, Shapes::ShapeRef.new(shape: Boolean, location_name: "deletionProtection"))
+    GraphSummary.add_member(:compute_configuration, Shapes::ShapeRef.new(shape: ComputeConfiguration, location_name: "computeConfiguration"))
     GraphSummary.struct_class = Types::GraphSummary
 
     GraphSummaryList.member = Shapes::ShapeRef.new(shape: GraphSummary)
@@ -670,6 +690,9 @@ module Aws::NeptuneGraph
 
     PrivateGraphEndpointSummaryList.member = Shapes::ShapeRef.new(shape: PrivateGraphEndpointSummary)
 
+    ProvisionedGraphConfiguration.add_member(:memory, Shapes::ShapeRef.new(shape: ProvisionedMemory, required: true, location_name: "memory"))
+    ProvisionedGraphConfiguration.struct_class = Types::ProvisionedGraphConfiguration
+
     QuerySummary.add_member(:id, Shapes::ShapeRef.new(shape: String, location_name: "id"))
     QuerySummary.add_member(:query_string, Shapes::ShapeRef.new(shape: String, location_name: "queryString"))
     QuerySummary.add_member(:waited, Shapes::ShapeRef.new(shape: Integer, location_name: "waited"))
@@ -689,7 +712,8 @@ module Aws::NeptuneGraph
     ResetGraphOutput.add_member(:status, Shapes::ShapeRef.new(shape: GraphStatus, location_name: "status"))
     ResetGraphOutput.add_member(:status_reason, Shapes::ShapeRef.new(shape: String, location_name: "statusReason"))
     ResetGraphOutput.add_member(:create_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createTime"))
-    ResetGraphOutput.add_member(:provisioned_memory, Shapes::ShapeRef.new(shape: ProvisionedMemory, location_name: "provisionedMemory"))
+    ResetGraphOutput.add_member(:provisioned_memory, Shapes::ShapeRef.new(shape: ProvisionedMemory, deprecated: true, location_name: "provisionedMemory", metadata: {"deprecatedMessage" => "ProvisionedMemory is deprecated. Refer to ComputeConfiguration instead.", "deprecatedSince" => "2026-11-25"}))
+    ResetGraphOutput.add_member(:compute_configuration, Shapes::ShapeRef.new(shape: ComputeConfiguration, location_name: "computeConfiguration"))
     ResetGraphOutput.add_member(:endpoint, Shapes::ShapeRef.new(shape: String, location_name: "endpoint"))
     ResetGraphOutput.add_member(:public_connectivity, Shapes::ShapeRef.new(shape: Boolean, location_name: "publicConnectivity"))
     ResetGraphOutput.add_member(:vector_search_configuration, Shapes::ShapeRef.new(shape: VectorSearchConfiguration, location_name: "vectorSearchConfiguration"))
@@ -705,7 +729,8 @@ module Aws::NeptuneGraph
 
     RestoreGraphFromSnapshotInput.add_member(:snapshot_identifier, Shapes::ShapeRef.new(shape: SnapshotIdentifier, required: true, location: "uri", location_name: "snapshotIdentifier"))
     RestoreGraphFromSnapshotInput.add_member(:graph_name, Shapes::ShapeRef.new(shape: GraphName, required: true, location_name: "graphName"))
-    RestoreGraphFromSnapshotInput.add_member(:provisioned_memory, Shapes::ShapeRef.new(shape: ProvisionedMemory, location_name: "provisionedMemory"))
+    RestoreGraphFromSnapshotInput.add_member(:provisioned_memory, Shapes::ShapeRef.new(shape: ProvisionedMemory, deprecated: true, location_name: "provisionedMemory", metadata: {"deprecatedMessage" => "ProvisionedMemory is deprecated. Use ComputeConfiguration instead.", "deprecatedSince" => "2026-11-25"}))
+    RestoreGraphFromSnapshotInput.add_member(:compute_configuration, Shapes::ShapeRef.new(shape: ComputeConfiguration, location_name: "computeConfiguration"))
     RestoreGraphFromSnapshotInput.add_member(:deletion_protection, Shapes::ShapeRef.new(shape: Boolean, location_name: "deletionProtection"))
     RestoreGraphFromSnapshotInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     RestoreGraphFromSnapshotInput.add_member(:replica_count, Shapes::ShapeRef.new(shape: ReplicaCount, location_name: "replicaCount"))
@@ -718,7 +743,8 @@ module Aws::NeptuneGraph
     RestoreGraphFromSnapshotOutput.add_member(:status, Shapes::ShapeRef.new(shape: GraphStatus, location_name: "status"))
     RestoreGraphFromSnapshotOutput.add_member(:status_reason, Shapes::ShapeRef.new(shape: String, location_name: "statusReason"))
     RestoreGraphFromSnapshotOutput.add_member(:create_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createTime"))
-    RestoreGraphFromSnapshotOutput.add_member(:provisioned_memory, Shapes::ShapeRef.new(shape: ProvisionedMemory, location_name: "provisionedMemory"))
+    RestoreGraphFromSnapshotOutput.add_member(:provisioned_memory, Shapes::ShapeRef.new(shape: ProvisionedMemory, deprecated: true, location_name: "provisionedMemory", metadata: {"deprecatedMessage" => "ProvisionedMemory is deprecated. Refer to ComputeConfiguration instead.", "deprecatedSince" => "2026-11-25"}))
+    RestoreGraphFromSnapshotOutput.add_member(:compute_configuration, Shapes::ShapeRef.new(shape: ComputeConfiguration, location_name: "computeConfiguration"))
     RestoreGraphFromSnapshotOutput.add_member(:endpoint, Shapes::ShapeRef.new(shape: String, location_name: "endpoint"))
     RestoreGraphFromSnapshotOutput.add_member(:public_connectivity, Shapes::ShapeRef.new(shape: Boolean, location_name: "publicConnectivity"))
     RestoreGraphFromSnapshotOutput.add_member(:vector_search_configuration, Shapes::ShapeRef.new(shape: VectorSearchConfiguration, location_name: "vectorSearchConfiguration"))
@@ -769,7 +795,8 @@ module Aws::NeptuneGraph
     StartGraphOutput.add_member(:status, Shapes::ShapeRef.new(shape: GraphStatus, location_name: "status"))
     StartGraphOutput.add_member(:status_reason, Shapes::ShapeRef.new(shape: String, location_name: "statusReason"))
     StartGraphOutput.add_member(:create_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createTime"))
-    StartGraphOutput.add_member(:provisioned_memory, Shapes::ShapeRef.new(shape: ProvisionedMemory, location_name: "provisionedMemory"))
+    StartGraphOutput.add_member(:provisioned_memory, Shapes::ShapeRef.new(shape: ProvisionedMemory, deprecated: true, location_name: "provisionedMemory", metadata: {"deprecatedMessage" => "ProvisionedMemory is deprecated. Refer to ComputeConfiguration instead.", "deprecatedSince" => "2026-11-25"}))
+    StartGraphOutput.add_member(:compute_configuration, Shapes::ShapeRef.new(shape: ComputeConfiguration, location_name: "computeConfiguration"))
     StartGraphOutput.add_member(:endpoint, Shapes::ShapeRef.new(shape: String, location_name: "endpoint"))
     StartGraphOutput.add_member(:public_connectivity, Shapes::ShapeRef.new(shape: Boolean, location_name: "publicConnectivity"))
     StartGraphOutput.add_member(:vector_search_configuration, Shapes::ShapeRef.new(shape: VectorSearchConfiguration, location_name: "vectorSearchConfiguration"))
@@ -809,7 +836,8 @@ module Aws::NeptuneGraph
     StopGraphOutput.add_member(:status, Shapes::ShapeRef.new(shape: GraphStatus, location_name: "status"))
     StopGraphOutput.add_member(:status_reason, Shapes::ShapeRef.new(shape: String, location_name: "statusReason"))
     StopGraphOutput.add_member(:create_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createTime"))
-    StopGraphOutput.add_member(:provisioned_memory, Shapes::ShapeRef.new(shape: ProvisionedMemory, location_name: "provisionedMemory"))
+    StopGraphOutput.add_member(:provisioned_memory, Shapes::ShapeRef.new(shape: ProvisionedMemory, deprecated: true, location_name: "provisionedMemory", metadata: {"deprecatedMessage" => "ProvisionedMemory is deprecated. Refer to ComputeConfiguration instead.", "deprecatedSince" => "2026-11-25"}))
+    StopGraphOutput.add_member(:compute_configuration, Shapes::ShapeRef.new(shape: ComputeConfiguration, location_name: "computeConfiguration"))
     StopGraphOutput.add_member(:endpoint, Shapes::ShapeRef.new(shape: String, location_name: "endpoint"))
     StopGraphOutput.add_member(:public_connectivity, Shapes::ShapeRef.new(shape: Boolean, location_name: "publicConnectivity"))
     StopGraphOutput.add_member(:vector_search_configuration, Shapes::ShapeRef.new(shape: VectorSearchConfiguration, location_name: "vectorSearchConfiguration"))
@@ -848,7 +876,8 @@ module Aws::NeptuneGraph
 
     UpdateGraphInput.add_member(:graph_identifier, Shapes::ShapeRef.new(shape: GraphIdentifier, required: true, location: "uri", location_name: "graphIdentifier"))
     UpdateGraphInput.add_member(:public_connectivity, Shapes::ShapeRef.new(shape: Boolean, location_name: "publicConnectivity"))
-    UpdateGraphInput.add_member(:provisioned_memory, Shapes::ShapeRef.new(shape: ProvisionedMemory, location_name: "provisionedMemory"))
+    UpdateGraphInput.add_member(:provisioned_memory, Shapes::ShapeRef.new(shape: ProvisionedMemory, deprecated: true, location_name: "provisionedMemory", metadata: {"deprecatedMessage" => "ProvisionedMemory is deprecated. Use ComputeConfiguration instead.", "deprecatedSince" => "2026-11-25"}))
+    UpdateGraphInput.add_member(:compute_configuration, Shapes::ShapeRef.new(shape: ComputeConfiguration, location_name: "computeConfiguration"))
     UpdateGraphInput.add_member(:deletion_protection, Shapes::ShapeRef.new(shape: Boolean, location_name: "deletionProtection"))
     UpdateGraphInput.struct_class = Types::UpdateGraphInput
 
@@ -858,7 +887,8 @@ module Aws::NeptuneGraph
     UpdateGraphOutput.add_member(:status, Shapes::ShapeRef.new(shape: GraphStatus, location_name: "status"))
     UpdateGraphOutput.add_member(:status_reason, Shapes::ShapeRef.new(shape: String, location_name: "statusReason"))
     UpdateGraphOutput.add_member(:create_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createTime"))
-    UpdateGraphOutput.add_member(:provisioned_memory, Shapes::ShapeRef.new(shape: ProvisionedMemory, location_name: "provisionedMemory"))
+    UpdateGraphOutput.add_member(:provisioned_memory, Shapes::ShapeRef.new(shape: ProvisionedMemory, deprecated: true, location_name: "provisionedMemory", metadata: {"deprecatedMessage" => "ProvisionedMemory is deprecated. Refer to ComputeConfiguration instead.", "deprecatedSince" => "2026-11-25"}))
+    UpdateGraphOutput.add_member(:compute_configuration, Shapes::ShapeRef.new(shape: ComputeConfiguration, location_name: "computeConfiguration"))
     UpdateGraphOutput.add_member(:endpoint, Shapes::ShapeRef.new(shape: String, location_name: "endpoint"))
     UpdateGraphOutput.add_member(:public_connectivity, Shapes::ShapeRef.new(shape: Boolean, location_name: "publicConnectivity"))
     UpdateGraphOutput.add_member(:vector_search_configuration, Shapes::ShapeRef.new(shape: VectorSearchConfiguration, location_name: "vectorSearchConfiguration"))

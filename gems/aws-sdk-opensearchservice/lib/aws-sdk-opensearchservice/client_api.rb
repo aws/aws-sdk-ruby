@@ -104,6 +104,9 @@ module Aws::OpenSearchService
     CapabilityFailures = Shapes::ListShape.new(name: 'CapabilityFailures')
     CapabilityName = Shapes::StringShape.new(name: 'CapabilityName')
     CapabilityStatus = Shapes::StringShape.new(name: 'CapabilityStatus')
+    CatalogConfiguration = Shapes::UnionShape.new(name: 'CatalogConfiguration')
+    CatalogOptions = Shapes::StructureShape.new(name: 'CatalogOptions')
+    CatalogOptionsStatus = Shapes::StructureShape.new(name: 'CatalogOptionsStatus')
     CategoryDiffResult = Shapes::StructureShape.new(name: 'CategoryDiffResult')
     ChangeProgressDetails = Shapes::StructureShape.new(name: 'ChangeProgressDetails')
     ChangeProgressStage = Shapes::StructureShape.new(name: 'ChangeProgressStage')
@@ -582,6 +585,7 @@ module Aws::OpenSearchService
     S3BucketName = Shapes::StringShape.new(name: 'S3BucketName')
     S3GlueDataCatalog = Shapes::StructureShape.new(name: 'S3GlueDataCatalog')
     S3Key = Shapes::StringShape.new(name: 'S3Key')
+    S3TablesEncryptionConfiguration = Shapes::StructureShape.new(name: 'S3TablesEncryptionConfiguration')
     S3VectorsEngine = Shapes::StructureShape.new(name: 'S3VectorsEngine')
     SAMLEntityId = Shapes::StringShape.new(name: 'SAMLEntityId')
     SAMLIdp = Shapes::StructureShape.new(name: 'SAMLIdp')
@@ -600,6 +604,7 @@ module Aws::OpenSearchService
     ScheduledBy = Shapes::StringShape.new(name: 'ScheduledBy')
     SecurityLakeDirectQueryDataSource = Shapes::StructureShape.new(name: 'SecurityLakeDirectQueryDataSource')
     ServerlessVectorAcceleration = Shapes::StructureShape.new(name: 'ServerlessVectorAcceleration')
+    ServiceManagedS3TablesCatalog = Shapes::StructureShape.new(name: 'ServiceManagedS3TablesCatalog')
     ServiceOptions = Shapes::StructureShape.new(name: 'ServiceOptions')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
     ServiceSoftwareOptions = Shapes::StructureShape.new(name: 'ServiceSoftwareOptions')
@@ -999,6 +1004,20 @@ module Aws::OpenSearchService
 
     CapabilityFailures.member = Shapes::ShapeRef.new(shape: CapabilityFailure)
 
+    CatalogConfiguration.add_member(:service_managed_s3_tables, Shapes::ShapeRef.new(shape: ServiceManagedS3TablesCatalog, location_name: "ServiceManagedS3Tables"))
+    CatalogConfiguration.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    CatalogConfiguration.add_member_subclass(:service_managed_s3_tables, Types::CatalogConfiguration::ServiceManagedS3Tables)
+    CatalogConfiguration.add_member_subclass(:unknown, Types::CatalogConfiguration::Unknown)
+    CatalogConfiguration.struct_class = Types::CatalogConfiguration
+
+    CatalogOptions.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "Enabled"))
+    CatalogOptions.add_member(:catalog, Shapes::ShapeRef.new(shape: CatalogConfiguration, location_name: "Catalog"))
+    CatalogOptions.struct_class = Types::CatalogOptions
+
+    CatalogOptionsStatus.add_member(:options, Shapes::ShapeRef.new(shape: CatalogOptions, location_name: "Options"))
+    CatalogOptionsStatus.add_member(:status, Shapes::ShapeRef.new(shape: OptionStatus, location_name: "Status"))
+    CatalogOptionsStatus.struct_class = Types::CatalogOptionsStatus
+
     CategoryDiffResult.add_member(:status, Shapes::ShapeRef.new(shape: DiffStatus, location_name: "Status"))
     CategoryDiffResult.add_member(:in_sync, Shapes::ShapeRef.new(shape: DiffCount, location_name: "InSync"))
     CategoryDiffResult.add_member(:source_only, Shapes::ShapeRef.new(shape: DiffCount, location_name: "SourceOnly"))
@@ -1144,6 +1163,7 @@ module Aws::OpenSearchService
     CreateDomainRequest.add_member(:node_to_node_encryption_options, Shapes::ShapeRef.new(shape: NodeToNodeEncryptionOptions, location_name: "NodeToNodeEncryptionOptions"))
     CreateDomainRequest.add_member(:advanced_options, Shapes::ShapeRef.new(shape: AdvancedOptions, location_name: "AdvancedOptions"))
     CreateDomainRequest.add_member(:log_publishing_options, Shapes::ShapeRef.new(shape: LogPublishingOptions, location_name: "LogPublishingOptions"))
+    CreateDomainRequest.add_member(:catalog_options, Shapes::ShapeRef.new(shape: CatalogOptions, location_name: "CatalogOptions"))
     CreateDomainRequest.add_member(:domain_endpoint_options, Shapes::ShapeRef.new(shape: DomainEndpointOptions, location_name: "DomainEndpointOptions"))
     CreateDomainRequest.add_member(:advanced_security_options, Shapes::ShapeRef.new(shape: AdvancedSecurityOptionsInput, location_name: "AdvancedSecurityOptions"))
     CreateDomainRequest.add_member(:identity_center_options, Shapes::ShapeRef.new(shape: IdentityCenterOptionsInput, location_name: "IdentityCenterOptions"))
@@ -1559,6 +1579,7 @@ module Aws::OpenSearchService
     DomainConfig.add_member(:node_to_node_encryption_options, Shapes::ShapeRef.new(shape: NodeToNodeEncryptionOptionsStatus, location_name: "NodeToNodeEncryptionOptions"))
     DomainConfig.add_member(:advanced_options, Shapes::ShapeRef.new(shape: AdvancedOptionsStatus, location_name: "AdvancedOptions"))
     DomainConfig.add_member(:log_publishing_options, Shapes::ShapeRef.new(shape: LogPublishingOptionsStatus, location_name: "LogPublishingOptions"))
+    DomainConfig.add_member(:catalog_options, Shapes::ShapeRef.new(shape: CatalogOptionsStatus, location_name: "CatalogOptions"))
     DomainConfig.add_member(:domain_endpoint_options, Shapes::ShapeRef.new(shape: DomainEndpointOptionsStatus, location_name: "DomainEndpointOptions"))
     DomainConfig.add_member(:advanced_security_options, Shapes::ShapeRef.new(shape: AdvancedSecurityOptionsStatus, location_name: "AdvancedSecurityOptions"))
     DomainConfig.add_member(:identity_center_options, Shapes::ShapeRef.new(shape: IdentityCenterOptionsStatus, location_name: "IdentityCenterOptions"))
@@ -1658,6 +1679,7 @@ module Aws::OpenSearchService
     DomainStatus.add_member(:node_to_node_encryption_options, Shapes::ShapeRef.new(shape: NodeToNodeEncryptionOptions, location_name: "NodeToNodeEncryptionOptions"))
     DomainStatus.add_member(:advanced_options, Shapes::ShapeRef.new(shape: AdvancedOptions, location_name: "AdvancedOptions"))
     DomainStatus.add_member(:log_publishing_options, Shapes::ShapeRef.new(shape: LogPublishingOptions, location_name: "LogPublishingOptions"))
+    DomainStatus.add_member(:catalog_options, Shapes::ShapeRef.new(shape: CatalogOptions, location_name: "CatalogOptions"))
     DomainStatus.add_member(:service_software_options, Shapes::ShapeRef.new(shape: ServiceSoftwareOptions, location_name: "ServiceSoftwareOptions"))
     DomainStatus.add_member(:domain_endpoint_options, Shapes::ShapeRef.new(shape: DomainEndpointOptions, location_name: "DomainEndpointOptions"))
     DomainStatus.add_member(:advanced_security_options, Shapes::ShapeRef.new(shape: AdvancedSecurityOptions, location_name: "AdvancedSecurityOptions"))
@@ -2485,6 +2507,10 @@ module Aws::OpenSearchService
     S3GlueDataCatalog.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "RoleArn"))
     S3GlueDataCatalog.struct_class = Types::S3GlueDataCatalog
 
+    S3TablesEncryptionConfiguration.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "Enabled"))
+    S3TablesEncryptionConfiguration.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "KmsKeyArn"))
+    S3TablesEncryptionConfiguration.struct_class = Types::S3TablesEncryptionConfiguration
+
     S3VectorsEngine.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "Enabled"))
     S3VectorsEngine.struct_class = Types::S3VectorsEngine
 
@@ -2538,6 +2564,9 @@ module Aws::OpenSearchService
 
     ServerlessVectorAcceleration.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "Enabled"))
     ServerlessVectorAcceleration.struct_class = Types::ServerlessVectorAcceleration
+
+    ServiceManagedS3TablesCatalog.add_member(:encryption_configuration, Shapes::ShapeRef.new(shape: S3TablesEncryptionConfiguration, location_name: "EncryptionConfiguration"))
+    ServiceManagedS3TablesCatalog.struct_class = Types::ServiceManagedS3TablesCatalog
 
     ServiceOptions.add_member(:supported_regions, Shapes::ShapeRef.new(shape: RegionsList, location_name: "SupportedRegions"))
     ServiceOptions.struct_class = Types::ServiceOptions
@@ -2702,6 +2731,7 @@ module Aws::OpenSearchService
     UpdateDomainConfigRequest.add_member(:access_policies, Shapes::ShapeRef.new(shape: PolicyDocument, location_name: "AccessPolicies"))
     UpdateDomainConfigRequest.add_member(:ip_address_type, Shapes::ShapeRef.new(shape: IPAddressType, location_name: "IPAddressType"))
     UpdateDomainConfigRequest.add_member(:log_publishing_options, Shapes::ShapeRef.new(shape: LogPublishingOptions, location_name: "LogPublishingOptions"))
+    UpdateDomainConfigRequest.add_member(:catalog_options, Shapes::ShapeRef.new(shape: CatalogOptions, location_name: "CatalogOptions"))
     UpdateDomainConfigRequest.add_member(:encryption_at_rest_options, Shapes::ShapeRef.new(shape: EncryptionAtRestOptions, location_name: "EncryptionAtRestOptions"))
     UpdateDomainConfigRequest.add_member(:domain_endpoint_options, Shapes::ShapeRef.new(shape: DomainEndpointOptions, location_name: "DomainEndpointOptions"))
     UpdateDomainConfigRequest.add_member(:node_to_node_encryption_options, Shapes::ShapeRef.new(shape: NodeToNodeEncryptionOptions, location_name: "NodeToNodeEncryptionOptions"))

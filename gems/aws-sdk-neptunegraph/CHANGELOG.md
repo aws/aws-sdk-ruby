@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.69.0 (2026-11-27)
+------------------
+
+* Feature - Adds support for Graph Sessions, a new offering backed by on-demand ephemeral compute.
+
 1.68.0 (2026-11-18)
 ------------------
 

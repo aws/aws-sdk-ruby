@@ -719,6 +719,68 @@ module Aws::ElasticsearchService
       include Aws::Structure
     end
 
+    # The catalog that a domain publishes to. Specify exactly one catalog
+    # type.
+    #
+    # @note CatalogConfiguration is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note CatalogConfiguration is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of CatalogConfiguration corresponding to the set member.
+    #
+    # @!attribute [rw] service_managed_s3_tables
+    #   An Amazon S3 Tables catalog that the service creates and manages for
+    #   the domain.
+    #   @return [Types::ServiceManagedS3TablesCatalog]
+    #
+    class CatalogConfiguration < Struct.new(
+      :service_managed_s3_tables,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class ServiceManagedS3Tables < CatalogConfiguration; end
+      class Unknown < CatalogConfiguration; end
+    end
+
+    # Specifies the configuration for integrating the domain with a data
+    # catalog, so that the domain can publish its data as tables. The only
+    # supported catalog is an Amazon S3 Tables catalog that the service
+    # creates and manages for the domain.
+    #
+    # @!attribute [rw] enabled
+    #   Whether the domain publishes data to the catalog. Accepted values
+    #   true or false
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] catalog
+    #   The catalog that the domain publishes to.
+    #   @return [Types::CatalogConfiguration]
+    #
+    class CatalogOptions < Struct.new(
+      :enabled,
+      :catalog)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configured catalog options for the domain and their current
+    # status.
+    #
+    # @!attribute [rw] options
+    #   The catalog options configured for the domain.
+    #   @return [Types::CatalogOptions]
+    #
+    # @!attribute [rw] status
+    #   The status of the catalog options for the domain.
+    #   @return [Types::OptionStatus]
+    #
+    class CatalogOptionsStatus < Struct.new(
+      :options,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Specifies change details of the domain configuration change.
     #
     # @!attribute [rw] change_id
@@ -1083,6 +1145,11 @@ module Aws::ElasticsearchService
     #   to publish a given type of Elasticsearch log.
     #   @return [Hash<String,Types::LogPublishingOption>]
     #
+    # @!attribute [rw] catalog_options
+    #   Options for publishing the domain's data to a data catalog, such as
+    #   a service-managed Amazon S3 Tables catalog.
+    #   @return [Types::CatalogOptions]
+    #
     # @!attribute [rw] domain_endpoint_options
     #   Options to specify configuration that will be applied to the domain
     #   endpoint.
@@ -1138,6 +1205,7 @@ module Aws::ElasticsearchService
       :node_to_node_encryption_options,
       :advanced_options,
       :log_publishing_options,
+      :catalog_options,
       :domain_endpoint_options,
       :advanced_security_options,
       :auto_tune_options,
@@ -2485,6 +2553,11 @@ module Aws::ElasticsearchService
     #   Log publishing options for the given domain.
     #   @return [Types::LogPublishingOptionsStatus]
     #
+    # @!attribute [rw] catalog_options
+    #   The catalog options configured for the given domain and their
+    #   current status.
+    #   @return [Types::CatalogOptionsStatus]
+    #
     # @!attribute [rw] domain_endpoint_options
     #   Specifies the `DomainEndpointOptions` for the Elasticsearch domain.
     #   @return [Types::DomainEndpointOptionsStatus]
@@ -2534,6 +2607,7 @@ module Aws::ElasticsearchService
       :node_to_node_encryption_options,
       :advanced_options,
       :log_publishing_options,
+      :catalog_options,
       :domain_endpoint_options,
       :advanced_security_options,
       :auto_tune_options,
@@ -2664,6 +2738,10 @@ module Aws::ElasticsearchService
     #   Log publishing options for the given domain.
     #   @return [Hash<String,Types::LogPublishingOption>]
     #
+    # @!attribute [rw] catalog_options
+    #   The catalog options for the given domain.
+    #   @return [Types::CatalogOptions]
+    #
     # @!attribute [rw] service_software_options
     #   The current status of the Elasticsearch domain's service software.
     #   @return [Types::ServiceSoftwareOptions]
@@ -2734,6 +2812,7 @@ module Aws::ElasticsearchService
       :node_to_node_encryption_options,
       :advanced_options,
       :log_publishing_options,
+      :catalog_options,
       :service_software_options,
       :domain_endpoint_options,
       :advanced_security_options,
@@ -4146,6 +4225,26 @@ module Aws::ElasticsearchService
     #
     class RevokeVpcEndpointAccessResponse < Aws::EmptyStructure; end
 
+    # Specifies the encryption settings for the tables in a service-managed
+    # Amazon S3 Tables catalog.
+    #
+    # @!attribute [rw] enabled
+    #   Whether to encrypt the tables with the AWS KMS key specified in
+    #   `KmsKeyArn`. Accepted values true or false
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] kms_key_arn
+    #   The ARN of the AWS KMS key to encrypt the tables with. Takes the
+    #   form `arn:aws:kms:region:account-id:key/key-id`.
+    #   @return [String]
+    #
+    class S3TablesEncryptionConfiguration < Struct.new(
+      :enabled,
+      :kms_key_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Specifies the SAML Identity Provider's information.
     #
     # @!attribute [rw] metadata_content
@@ -4272,6 +4371,19 @@ module Aws::ElasticsearchService
       :action_type,
       :action,
       :severity)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the configuration for an Amazon S3 Tables catalog that the
+    # service creates and manages for the domain.
+    #
+    # @!attribute [rw] encryption_configuration
+    #   Encryption settings for the tables in the catalog.
+    #   @return [Types::S3TablesEncryptionConfiguration]
+    #
+    class ServiceManagedS3TablesCatalog < Struct.new(
+      :encryption_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4658,6 +4770,11 @@ module Aws::ElasticsearchService
     #   to publish a given type of Elasticsearch log.
     #   @return [Hash<String,Types::LogPublishingOption>]
     #
+    # @!attribute [rw] catalog_options
+    #   Options for publishing the domain's data to a data catalog, such as
+    #   a service-managed Amazon S3 Tables catalog.
+    #   @return [Types::CatalogOptions]
+    #
     # @!attribute [rw] domain_endpoint_options
     #   Options to specify configuration that will be applied to the domain
     #   endpoint.
@@ -4723,6 +4840,7 @@ module Aws::ElasticsearchService
       :advanced_options,
       :access_policies,
       :log_publishing_options,
+      :catalog_options,
       :domain_endpoint_options,
       :advanced_security_options,
       :node_to_node_encryption_options,

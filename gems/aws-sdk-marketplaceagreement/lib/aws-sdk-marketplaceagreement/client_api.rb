@@ -15,6 +15,7 @@ module Aws::MarketplaceAgreement
     include Seahorse::Model
 
     AWSAccountId = Shapes::StringShape.new(name: 'AWSAccountId')
+    AWSRegion = Shapes::StringShape.new(name: 'AWSRegion')
     AcceptAgreementApprovalInput = Shapes::StructureShape.new(name: 'AcceptAgreementApprovalInput')
     AcceptAgreementApprovalOutput = Shapes::StructureShape.new(name: 'AcceptAgreementApprovalOutput')
     AcceptAgreementCancellationRequestInput = Shapes::StructureShape.new(name: 'AcceptAgreementCancellationRequestInput')
@@ -282,6 +283,8 @@ module Aws::MarketplaceAgreement
     RateCardItem = Shapes::StructureShape.new(name: 'RateCardItem')
     RateCardList = Shapes::ListShape.new(name: 'RateCardList')
     RecurringPaymentTerm = Shapes::StructureShape.new(name: 'RecurringPaymentTerm')
+    RegionalPrice = Shapes::StructureShape.new(name: 'RegionalPrice')
+    RegionalPriceList = Shapes::ListShape.new(name: 'RegionalPriceList')
     RegistrationToken = Shapes::StringShape.new(name: 'RegistrationToken')
     RejectAgreementApprovalInput = Shapes::StructureShape.new(name: 'RejectAgreementApprovalInput')
     RejectAgreementApprovalOutput = Shapes::StructureShape.new(name: 'RejectAgreementApprovalOutput')
@@ -1258,6 +1261,7 @@ module Aws::MarketplaceAgreement
 
     RateCardItem.add_member(:dimension_key, Shapes::ShapeRef.new(shape: BoundedString, location_name: "dimensionKey"))
     RateCardItem.add_member(:price, Shapes::ShapeRef.new(shape: BoundedString, location_name: "price"))
+    RateCardItem.add_member(:regional_prices, Shapes::ShapeRef.new(shape: RegionalPriceList, location_name: "regionalPrices"))
     RateCardItem.struct_class = Types::RateCardItem
 
     RateCardList.member = Shapes::ShapeRef.new(shape: RateCardItem)
@@ -1268,6 +1272,12 @@ module Aws::MarketplaceAgreement
     RecurringPaymentTerm.add_member(:billing_period, Shapes::ShapeRef.new(shape: BoundedString, location_name: "billingPeriod"))
     RecurringPaymentTerm.add_member(:price, Shapes::ShapeRef.new(shape: BoundedString, location_name: "price"))
     RecurringPaymentTerm.struct_class = Types::RecurringPaymentTerm
+
+    RegionalPrice.add_member(:region, Shapes::ShapeRef.new(shape: AWSRegion, required: true, location_name: "region"))
+    RegionalPrice.add_member(:price, Shapes::ShapeRef.new(shape: BoundedString, required: true, location_name: "price"))
+    RegionalPrice.struct_class = Types::RegionalPrice
+
+    RegionalPriceList.member = Shapes::ShapeRef.new(shape: RegionalPrice)
 
     RejectAgreementApprovalInput.add_member(:buyer_agreement_approval_rejection_input, Shapes::ShapeRef.new(shape: BuyerAgreementApprovalRejectionInput, location_name: "buyerAgreementApprovalRejectionInput"))
     RejectAgreementApprovalInput.struct_class = Types::RejectAgreementApprovalInput

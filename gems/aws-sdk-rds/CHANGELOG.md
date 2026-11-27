@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.338.0 (2026-11-27)
+------------------
+
+* Feature - Aurora PostgreSQL and Aurora MySQL now let you delete a DB cluster and all its instances in a single API call or console action, without deleting each instance first. Cluster deletion also completes faster.
+
 1.337.0 (2026-11-19)
 ------------------
 

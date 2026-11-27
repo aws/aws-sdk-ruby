@@ -575,6 +575,7 @@ module Aws::CloudWatch
       attr_accessor exclude_filters: ::Array[Types::OTelEnrichmentMetricSelector]
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
+      attr_accessor enable_tag_enrichment: bool
       SENSITIVE: []
     end
 
@@ -1251,6 +1252,7 @@ module Aws::CloudWatch
     class StartOTelEnrichmentInput
       attr_accessor include_filters: ::Array[Types::OTelEnrichmentMetricSelector]
       attr_accessor exclude_filters: ::Array[Types::OTelEnrichmentMetricSelector]
+      attr_accessor enable_tag_enrichment: bool
       SENSITIVE: []
     end
 
@@ -1259,6 +1261,7 @@ module Aws::CloudWatch
       attr_accessor exclude_filters: ::Array[Types::OTelEnrichmentMetricSelector]
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
+      attr_accessor enable_tag_enrichment: bool
       SENSITIVE: []
     end
 
@@ -1311,6 +1314,7 @@ module Aws::CloudWatch
     class UpdateOTelEnrichmentInput
       attr_accessor include_filters: ::Array[Types::OTelEnrichmentMetricSelector]
       attr_accessor exclude_filters: ::Array[Types::OTelEnrichmentMetricSelector]
+      attr_accessor enable_tag_enrichment: bool
       SENSITIVE: []
     end
 
@@ -1319,6 +1323,7 @@ module Aws::CloudWatch
       attr_accessor exclude_filters: ::Array[Types::OTelEnrichmentMetricSelector]
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
+      attr_accessor enable_tag_enrichment: bool
       SENSITIVE: []
     end
 

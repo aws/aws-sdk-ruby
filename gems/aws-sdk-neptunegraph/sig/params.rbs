@@ -8,6 +8,15 @@
 module Aws
   module NeptuneGraph
     module Params
+      type compute_configuration = {
+      provisioned_graph: {
+        memory: ::Integer
+      }?,
+      graph_session: {
+        min_memory: ::Integer?
+      }?
+    }
+
       type import_options = {
       neptune: {
         s3_export_path: ::String,

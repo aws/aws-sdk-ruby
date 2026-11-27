@@ -1166,6 +1166,7 @@ module Aws::MarketplaceAgreement
     class RateCardItem
       attr_accessor dimension_key: ::String
       attr_accessor price: ::String
+      attr_accessor regional_prices: ::Array[Types::RegionalPrice]
       SENSITIVE: []
     end
 
@@ -1174,6 +1175,12 @@ module Aws::MarketplaceAgreement
       attr_accessor id: ::String
       attr_accessor currency_code: ::String
       attr_accessor billing_period: ::String
+      attr_accessor price: ::String
+      SENSITIVE: []
+    end
+
+    class RegionalPrice
+      attr_accessor region: ::String
       attr_accessor price: ::String
       SENSITIVE: []
     end

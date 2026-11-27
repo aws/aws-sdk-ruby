@@ -1487,6 +1487,73 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
+    # The catalog that a domain publishes to. Specify exactly one catalog
+    # type.
+    #
+    # @note CatalogConfiguration is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note CatalogConfiguration is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of CatalogConfiguration corresponding to the set member.
+    #
+    # @!attribute [rw] service_managed_s3_tables
+    #   An Amazon S3 Tables catalog that OpenSearch Service creates and
+    #   manages for the domain.
+    #   @return [Types::ServiceManagedS3TablesCatalog]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/CatalogConfiguration AWS API Documentation
+    #
+    class CatalogConfiguration < Struct.new(
+      :service_managed_s3_tables,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class ServiceManagedS3Tables < CatalogConfiguration; end
+      class Unknown < CatalogConfiguration; end
+    end
+
+    # Container for the parameters that configure the domain's integration
+    # with a data catalog, so that the domain can publish its data as
+    # tables. The only supported catalog is an Amazon S3 Tables catalog that
+    # OpenSearch Service creates and manages for the domain.
+    #
+    # @!attribute [rw] enabled
+    #   Whether the domain publishes data to the catalog.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] catalog
+    #   The catalog that the domain publishes to.
+    #   @return [Types::CatalogConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/CatalogOptions AWS API Documentation
+    #
+    class CatalogOptions < Struct.new(
+      :enabled,
+      :catalog)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configured catalog options for the domain and their current
+    # status.
+    #
+    # @!attribute [rw] options
+    #   The catalog options configured for the domain.
+    #   @return [Types::CatalogOptions]
+    #
+    # @!attribute [rw] status
+    #   The status of the catalog options for the domain.
+    #   @return [Types::OptionStatus]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/CatalogOptionsStatus AWS API Documentation
+    #
+    class CatalogOptionsStatus < Struct.new(
+      :options,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The result of comparing one metadata category between two domains.
     #
     # @!attribute [rw] status
@@ -2313,6 +2380,11 @@ module Aws::OpenSearchService
     #   Key-value pairs to configure log publishing.
     #   @return [Hash<String,Types::LogPublishingOption>]
     #
+    # @!attribute [rw] catalog_options
+    #   Options for publishing the domain's data to a data catalog, such as
+    #   a service-managed Amazon S3 Tables catalog.
+    #   @return [Types::CatalogOptions]
+    #
     # @!attribute [rw] domain_endpoint_options
     #   Additional options for the domain endpoint, such as whether to
     #   require HTTPS for all traffic.
@@ -2393,6 +2465,7 @@ module Aws::OpenSearchService
       :node_to_node_encryption_options,
       :advanced_options,
       :log_publishing_options,
+      :catalog_options,
       :domain_endpoint_options,
       :advanced_security_options,
       :identity_center_options,
@@ -4385,6 +4458,11 @@ module Aws::OpenSearchService
     #   Key-value pairs to configure log publishing.
     #   @return [Types::LogPublishingOptionsStatus]
     #
+    # @!attribute [rw] catalog_options
+    #   The catalog options configured for the domain and their current
+    #   status.
+    #   @return [Types::CatalogOptionsStatus]
+    #
     # @!attribute [rw] domain_endpoint_options
     #   Additional options for the domain endpoint, such as whether to
     #   require HTTPS for all traffic.
@@ -4457,6 +4535,7 @@ module Aws::OpenSearchService
       :node_to_node_encryption_options,
       :advanced_options,
       :log_publishing_options,
+      :catalog_options,
       :domain_endpoint_options,
       :advanced_security_options,
       :identity_center_options,
@@ -4879,6 +4958,10 @@ module Aws::OpenSearchService
     #   Log publishing options for the domain.
     #   @return [Hash<String,Types::LogPublishingOption>]
     #
+    # @!attribute [rw] catalog_options
+    #   The catalog options for the domain.
+    #   @return [Types::CatalogOptions]
+    #
     # @!attribute [rw] service_software_options
     #   The current status of the domain's service software.
     #   @return [Types::ServiceSoftwareOptions]
@@ -4972,6 +5055,7 @@ module Aws::OpenSearchService
       :node_to_node_encryption_options,
       :advanced_options,
       :log_publishing_options,
+      :catalog_options,
       :service_software_options,
       :domain_endpoint_options,
       :advanced_security_options,
@@ -9031,6 +9115,28 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
+    # Encryption settings for the tables in a service-managed Amazon S3
+    # Tables catalog.
+    #
+    # @!attribute [rw] enabled
+    #   Whether to encrypt the tables with the AWS KMS key specified in
+    #   `KmsKeyArn`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] kms_key_arn
+    #   The ARN of the AWS KMS key to encrypt the tables with. Takes the
+    #   form `arn:aws:kms:region:account-id:key/key-id`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/S3TablesEncryptionConfiguration AWS API Documentation
+    #
+    class S3TablesEncryptionConfiguration < Struct.new(
+      :enabled,
+      :kms_key_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Options for enabling S3 vectors engine features on the specified
     # domain.
     #
@@ -9302,6 +9408,21 @@ module Aws::OpenSearchService
     #
     class ServerlessVectorAcceleration < Struct.new(
       :enabled)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration for an Amazon S3 Tables catalog that OpenSearch Service
+    # creates and manages for the domain.
+    #
+    # @!attribute [rw] encryption_configuration
+    #   Encryption settings for the tables in the catalog.
+    #   @return [Types::S3TablesEncryptionConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/ServiceManagedS3TablesCatalog AWS API Documentation
+    #
+    class ServiceManagedS3TablesCatalog < Struct.new(
+      :encryption_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10161,6 +10282,11 @@ module Aws::OpenSearchService
     #   Options to publish OpenSearch logs to Amazon CloudWatch Logs.
     #   @return [Hash<String,Types::LogPublishingOption>]
     #
+    # @!attribute [rw] catalog_options
+    #   Options for publishing the domain's data to a data catalog, such as
+    #   a service-managed Amazon S3 Tables catalog.
+    #   @return [Types::CatalogOptions]
+    #
     # @!attribute [rw] encryption_at_rest_options
     #   Encryption at rest options for the domain.
     #   @return [Types::EncryptionAtRestOptions]
@@ -10274,6 +10400,7 @@ module Aws::OpenSearchService
       :access_policies,
       :ip_address_type,
       :log_publishing_options,
+      :catalog_options,
       :encryption_at_rest_options,
       :domain_endpoint_options,
       :node_to_node_encryption_options,

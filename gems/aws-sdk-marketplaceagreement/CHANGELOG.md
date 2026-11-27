@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.61.0 (2026-11-27)
+------------------
+
+* Feature - This release adds per-Region pricing to AWS Marketplace usage-based pricing terms. Rate card items can now include Region-specific price overrides. When a Regional price is present for an AWS Region, it replaces the default price for that dimension.
+
 1.60.0 (2026-11-18)
 ------------------
 

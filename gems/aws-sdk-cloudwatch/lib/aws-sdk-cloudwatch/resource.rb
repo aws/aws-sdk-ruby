@@ -304,6 +304,18 @@ module Aws::CloudWatch
     #   specify. There is a low probability that the returned results include
     #   metrics with last published data as much as 50 minutes more than the
     #   specified time interval.
+    #
+    #   A namespace can contain many metrics that published data in the past
+    #   two weeks but not in the past three hours. In this case, a page of
+    #   results can contain few or no metrics and still include a `NextToken`.
+    #   You need to continue making calls with the returned `NextToken` until
+    #   no token is returned. If you need a continuous feed of active metrics
+    #   across namespaces, use metric streams. For more information, see [Use
+    #   metric streams][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Metric-Streams.html
     # @option options [Boolean] :include_linked_accounts
     #   If you are using this operation in a monitoring account, specify
     #   `true` to include metrics from source accounts in the returned data.

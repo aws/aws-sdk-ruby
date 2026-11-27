@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.139.0 (2026-11-27)
+------------------
+
+* Feature - Catalog APIs for Optimized engine domains
+
 1.138.0 (2026-11-18)
 ------------------
 

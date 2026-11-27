@@ -1389,6 +1389,10 @@ module Aws::OpenSearchService
     # @option params [Hash<String,Types::LogPublishingOption>] :log_publishing_options
     #   Key-value pairs to configure log publishing.
     #
+    # @option params [Types::CatalogOptions] :catalog_options
+    #   Options for publishing the domain's data to a data catalog, such as a
+    #   service-managed Amazon S3 Tables catalog.
+    #
     # @option params [Types::DomainEndpointOptions] :domain_endpoint_options
     #   Additional options for the domain endpoint, such as whether to require
     #   HTTPS for all traffic.
@@ -1516,6 +1520,17 @@ module Aws::OpenSearchService
     #       "INDEX_SLOW_LOGS" => {
     #         cloud_watch_logs_log_group_arn: "CloudWatchLogsLogGroupArn",
     #         enabled: false,
+    #       },
+    #     },
+    #     catalog_options: {
+    #       enabled: false, # required
+    #       catalog: {
+    #         service_managed_s3_tables: {
+    #           encryption_configuration: {
+    #             enabled: false,
+    #             kms_key_arn: "KmsKeyArn",
+    #           },
+    #         },
     #       },
     #     },
     #     domain_endpoint_options: {
@@ -1683,6 +1698,9 @@ module Aws::OpenSearchService
     #   resp.domain_status.log_publishing_options #=> Hash
     #   resp.domain_status.log_publishing_options["LogType"].cloud_watch_logs_log_group_arn #=> String
     #   resp.domain_status.log_publishing_options["LogType"].enabled #=> Boolean
+    #   resp.domain_status.catalog_options.enabled #=> Boolean
+    #   resp.domain_status.catalog_options.catalog.service_managed_s3_tables.encryption_configuration.enabled #=> Boolean
+    #   resp.domain_status.catalog_options.catalog.service_managed_s3_tables.encryption_configuration.kms_key_arn #=> String
     #   resp.domain_status.service_software_options.current_version #=> String
     #   resp.domain_status.service_software_options.new_version #=> String
     #   resp.domain_status.service_software_options.update_available #=> Boolean
@@ -2225,6 +2243,9 @@ module Aws::OpenSearchService
     #   resp.domain_status.log_publishing_options #=> Hash
     #   resp.domain_status.log_publishing_options["LogType"].cloud_watch_logs_log_group_arn #=> String
     #   resp.domain_status.log_publishing_options["LogType"].enabled #=> Boolean
+    #   resp.domain_status.catalog_options.enabled #=> Boolean
+    #   resp.domain_status.catalog_options.catalog.service_managed_s3_tables.encryption_configuration.enabled #=> Boolean
+    #   resp.domain_status.catalog_options.catalog.service_managed_s3_tables.encryption_configuration.kms_key_arn #=> String
     #   resp.domain_status.service_software_options.current_version #=> String
     #   resp.domain_status.service_software_options.new_version #=> String
     #   resp.domain_status.service_software_options.update_available #=> Boolean
@@ -2681,6 +2702,9 @@ module Aws::OpenSearchService
     #   resp.domain_status.log_publishing_options #=> Hash
     #   resp.domain_status.log_publishing_options["LogType"].cloud_watch_logs_log_group_arn #=> String
     #   resp.domain_status.log_publishing_options["LogType"].enabled #=> Boolean
+    #   resp.domain_status.catalog_options.enabled #=> Boolean
+    #   resp.domain_status.catalog_options.catalog.service_managed_s3_tables.encryption_configuration.enabled #=> Boolean
+    #   resp.domain_status.catalog_options.catalog.service_managed_s3_tables.encryption_configuration.kms_key_arn #=> String
     #   resp.domain_status.service_software_options.current_version #=> String
     #   resp.domain_status.service_software_options.new_version #=> String
     #   resp.domain_status.service_software_options.update_available #=> Boolean
@@ -3006,6 +3030,14 @@ module Aws::OpenSearchService
     #   resp.domain_config.log_publishing_options.status.update_version #=> Integer
     #   resp.domain_config.log_publishing_options.status.state #=> String, one of "RequiresIndexDocuments", "Processing", "Active"
     #   resp.domain_config.log_publishing_options.status.pending_deletion #=> Boolean
+    #   resp.domain_config.catalog_options.options.enabled #=> Boolean
+    #   resp.domain_config.catalog_options.options.catalog.service_managed_s3_tables.encryption_configuration.enabled #=> Boolean
+    #   resp.domain_config.catalog_options.options.catalog.service_managed_s3_tables.encryption_configuration.kms_key_arn #=> String
+    #   resp.domain_config.catalog_options.status.creation_date #=> Time
+    #   resp.domain_config.catalog_options.status.update_date #=> Time
+    #   resp.domain_config.catalog_options.status.update_version #=> Integer
+    #   resp.domain_config.catalog_options.status.state #=> String, one of "RequiresIndexDocuments", "Processing", "Active"
+    #   resp.domain_config.catalog_options.status.pending_deletion #=> Boolean
     #   resp.domain_config.domain_endpoint_options.options.enforce_https #=> Boolean
     #   resp.domain_config.domain_endpoint_options.options.tls_security_policy #=> String, one of "Policy-Min-TLS-1-0-2019-07", "Policy-Min-TLS-1-2-2019-07", "Policy-Min-TLS-1-2-PFS-2023-10", "Policy-Min-TLS-1-2-RFC9151-FIPS-2024-08", "Policy-Min-TLS-1-2-FIPS-PQ-2026-10"
     #   resp.domain_config.domain_endpoint_options.options.custom_endpoint_enabled #=> Boolean
@@ -3359,6 +3391,9 @@ module Aws::OpenSearchService
     #   resp.domain_status_list[0].log_publishing_options #=> Hash
     #   resp.domain_status_list[0].log_publishing_options["LogType"].cloud_watch_logs_log_group_arn #=> String
     #   resp.domain_status_list[0].log_publishing_options["LogType"].enabled #=> Boolean
+    #   resp.domain_status_list[0].catalog_options.enabled #=> Boolean
+    #   resp.domain_status_list[0].catalog_options.catalog.service_managed_s3_tables.encryption_configuration.enabled #=> Boolean
+    #   resp.domain_status_list[0].catalog_options.catalog.service_managed_s3_tables.encryption_configuration.kms_key_arn #=> String
     #   resp.domain_status_list[0].service_software_options.current_version #=> String
     #   resp.domain_status_list[0].service_software_options.new_version #=> String
     #   resp.domain_status_list[0].service_software_options.update_available #=> Boolean
@@ -3542,6 +3577,9 @@ module Aws::OpenSearchService
     #   resp.dry_run_config.log_publishing_options #=> Hash
     #   resp.dry_run_config.log_publishing_options["LogType"].cloud_watch_logs_log_group_arn #=> String
     #   resp.dry_run_config.log_publishing_options["LogType"].enabled #=> Boolean
+    #   resp.dry_run_config.catalog_options.enabled #=> Boolean
+    #   resp.dry_run_config.catalog_options.catalog.service_managed_s3_tables.encryption_configuration.enabled #=> Boolean
+    #   resp.dry_run_config.catalog_options.catalog.service_managed_s3_tables.encryption_configuration.kms_key_arn #=> String
     #   resp.dry_run_config.service_software_options.current_version #=> String
     #   resp.dry_run_config.service_software_options.new_version #=> String
     #   resp.dry_run_config.service_software_options.update_available #=> Boolean
@@ -6624,6 +6662,10 @@ module Aws::OpenSearchService
     # @option params [Hash<String,Types::LogPublishingOption>] :log_publishing_options
     #   Options to publish OpenSearch logs to Amazon CloudWatch Logs.
     #
+    # @option params [Types::CatalogOptions] :catalog_options
+    #   Options for publishing the domain's data to a data catalog, such as a
+    #   service-managed Amazon S3 Tables catalog.
+    #
     # @option params [Types::EncryptionAtRestOptions] :encryption_at_rest_options
     #   Encryption at rest options for the domain.
     #
@@ -6775,6 +6817,17 @@ module Aws::OpenSearchService
     #       "INDEX_SLOW_LOGS" => {
     #         cloud_watch_logs_log_group_arn: "CloudWatchLogsLogGroupArn",
     #         enabled: false,
+    #       },
+    #     },
+    #     catalog_options: {
+    #       enabled: false, # required
+    #       catalog: {
+    #         service_managed_s3_tables: {
+    #           encryption_configuration: {
+    #             enabled: false,
+    #             kms_key_arn: "KmsKeyArn",
+    #           },
+    #         },
     #       },
     #     },
     #     encryption_at_rest_options: {
@@ -6996,6 +7049,14 @@ module Aws::OpenSearchService
     #   resp.domain_config.log_publishing_options.status.update_version #=> Integer
     #   resp.domain_config.log_publishing_options.status.state #=> String, one of "RequiresIndexDocuments", "Processing", "Active"
     #   resp.domain_config.log_publishing_options.status.pending_deletion #=> Boolean
+    #   resp.domain_config.catalog_options.options.enabled #=> Boolean
+    #   resp.domain_config.catalog_options.options.catalog.service_managed_s3_tables.encryption_configuration.enabled #=> Boolean
+    #   resp.domain_config.catalog_options.options.catalog.service_managed_s3_tables.encryption_configuration.kms_key_arn #=> String
+    #   resp.domain_config.catalog_options.status.creation_date #=> Time
+    #   resp.domain_config.catalog_options.status.update_date #=> Time
+    #   resp.domain_config.catalog_options.status.update_version #=> Integer
+    #   resp.domain_config.catalog_options.status.state #=> String, one of "RequiresIndexDocuments", "Processing", "Active"
+    #   resp.domain_config.catalog_options.status.pending_deletion #=> Boolean
     #   resp.domain_config.domain_endpoint_options.options.enforce_https #=> Boolean
     #   resp.domain_config.domain_endpoint_options.options.tls_security_policy #=> String, one of "Policy-Min-TLS-1-0-2019-07", "Policy-Min-TLS-1-2-2019-07", "Policy-Min-TLS-1-2-PFS-2023-10", "Policy-Min-TLS-1-2-RFC9151-FIPS-2024-08", "Policy-Min-TLS-1-2-FIPS-PQ-2026-10"
     #   resp.domain_config.domain_endpoint_options.options.custom_endpoint_enabled #=> Boolean
@@ -7554,7 +7615,7 @@ module Aws::OpenSearchService
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-opensearchservice'
-      context[:gem_version] = '1.124.0'
+      context[:gem_version] = '1.125.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

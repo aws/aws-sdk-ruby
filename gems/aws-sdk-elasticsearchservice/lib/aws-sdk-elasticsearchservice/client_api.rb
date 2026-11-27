@@ -60,6 +60,9 @@ module Aws::ElasticsearchService
     CancelElasticsearchServiceSoftwareUpdateResponse = Shapes::StructureShape.new(name: 'CancelElasticsearchServiceSoftwareUpdateResponse')
     CancelledChangeProperty = Shapes::StructureShape.new(name: 'CancelledChangeProperty')
     CancelledChangePropertyList = Shapes::ListShape.new(name: 'CancelledChangePropertyList')
+    CatalogConfiguration = Shapes::UnionShape.new(name: 'CatalogConfiguration')
+    CatalogOptions = Shapes::StructureShape.new(name: 'CatalogOptions')
+    CatalogOptionsStatus = Shapes::StructureShape.new(name: 'CatalogOptionsStatus')
     ChangeProgressDetails = Shapes::StructureShape.new(name: 'ChangeProgressDetails')
     ChangeProgressStage = Shapes::StructureShape.new(name: 'ChangeProgressStage')
     ChangeProgressStageList = Shapes::ListShape.new(name: 'ChangeProgressStageList')
@@ -220,6 +223,7 @@ module Aws::ElasticsearchService
     InvalidTypeException = Shapes::StructureShape.new(name: 'InvalidTypeException')
     Issue = Shapes::StringShape.new(name: 'Issue')
     Issues = Shapes::ListShape.new(name: 'Issues')
+    KmsKeyArn = Shapes::StringShape.new(name: 'KmsKeyArn')
     KmsKeyId = Shapes::StringShape.new(name: 'KmsKeyId')
     LastUpdated = Shapes::TimestampShape.new(name: 'LastUpdated')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
@@ -310,6 +314,7 @@ module Aws::ElasticsearchService
     RollbackOnDisable = Shapes::StringShape.new(name: 'RollbackOnDisable')
     S3BucketName = Shapes::StringShape.new(name: 'S3BucketName')
     S3Key = Shapes::StringShape.new(name: 'S3Key')
+    S3TablesEncryptionConfiguration = Shapes::StructureShape.new(name: 'S3TablesEncryptionConfiguration')
     SAMLEntityId = Shapes::StringShape.new(name: 'SAMLEntityId')
     SAMLIdp = Shapes::StructureShape.new(name: 'SAMLIdp')
     SAMLMetadata = Shapes::StringShape.new(name: 'SAMLMetadata')
@@ -319,6 +324,7 @@ module Aws::ElasticsearchService
     ScheduledAutoTuneDescription = Shapes::StringShape.new(name: 'ScheduledAutoTuneDescription')
     ScheduledAutoTuneDetails = Shapes::StructureShape.new(name: 'ScheduledAutoTuneDetails')
     ScheduledAutoTuneSeverityType = Shapes::StringShape.new(name: 'ScheduledAutoTuneSeverityType')
+    ServiceManagedS3TablesCatalog = Shapes::StructureShape.new(name: 'ServiceManagedS3TablesCatalog')
     ServiceSoftwareOptions = Shapes::StructureShape.new(name: 'ServiceSoftwareOptions')
     ServiceUrl = Shapes::StringShape.new(name: 'ServiceUrl')
     SnapshotOptions = Shapes::StructureShape.new(name: 'SnapshotOptions')
@@ -536,6 +542,20 @@ module Aws::ElasticsearchService
 
     CancelledChangePropertyList.member = Shapes::ShapeRef.new(shape: CancelledChangeProperty)
 
+    CatalogConfiguration.add_member(:service_managed_s3_tables, Shapes::ShapeRef.new(shape: ServiceManagedS3TablesCatalog, location_name: "ServiceManagedS3Tables"))
+    CatalogConfiguration.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    CatalogConfiguration.add_member_subclass(:service_managed_s3_tables, Types::CatalogConfiguration::ServiceManagedS3Tables)
+    CatalogConfiguration.add_member_subclass(:unknown, Types::CatalogConfiguration::Unknown)
+    CatalogConfiguration.struct_class = Types::CatalogConfiguration
+
+    CatalogOptions.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "Enabled"))
+    CatalogOptions.add_member(:catalog, Shapes::ShapeRef.new(shape: CatalogConfiguration, location_name: "Catalog"))
+    CatalogOptions.struct_class = Types::CatalogOptions
+
+    CatalogOptionsStatus.add_member(:options, Shapes::ShapeRef.new(shape: CatalogOptions, location_name: "Options"))
+    CatalogOptionsStatus.add_member(:status, Shapes::ShapeRef.new(shape: OptionStatus, location_name: "Status"))
+    CatalogOptionsStatus.struct_class = Types::CatalogOptionsStatus
+
     ChangeProgressDetails.add_member(:change_id, Shapes::ShapeRef.new(shape: GUID, location_name: "ChangeId"))
     ChangeProgressDetails.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
     ChangeProgressDetails.add_member(:config_change_status, Shapes::ShapeRef.new(shape: ConfigChangeStatus, location_name: "ConfigChangeStatus"))
@@ -610,6 +630,7 @@ module Aws::ElasticsearchService
     CreateElasticsearchDomainRequest.add_member(:node_to_node_encryption_options, Shapes::ShapeRef.new(shape: NodeToNodeEncryptionOptions, location_name: "NodeToNodeEncryptionOptions"))
     CreateElasticsearchDomainRequest.add_member(:advanced_options, Shapes::ShapeRef.new(shape: AdvancedOptions, location_name: "AdvancedOptions"))
     CreateElasticsearchDomainRequest.add_member(:log_publishing_options, Shapes::ShapeRef.new(shape: LogPublishingOptions, location_name: "LogPublishingOptions"))
+    CreateElasticsearchDomainRequest.add_member(:catalog_options, Shapes::ShapeRef.new(shape: CatalogOptions, location_name: "CatalogOptions"))
     CreateElasticsearchDomainRequest.add_member(:domain_endpoint_options, Shapes::ShapeRef.new(shape: DomainEndpointOptions, location_name: "DomainEndpointOptions"))
     CreateElasticsearchDomainRequest.add_member(:advanced_security_options, Shapes::ShapeRef.new(shape: AdvancedSecurityOptionsInput, location_name: "AdvancedSecurityOptions"))
     CreateElasticsearchDomainRequest.add_member(:auto_tune_options, Shapes::ShapeRef.new(shape: AutoTuneOptionsInput, location_name: "AutoTuneOptions"))
@@ -895,6 +916,7 @@ module Aws::ElasticsearchService
     ElasticsearchDomainConfig.add_member(:node_to_node_encryption_options, Shapes::ShapeRef.new(shape: NodeToNodeEncryptionOptionsStatus, location_name: "NodeToNodeEncryptionOptions"))
     ElasticsearchDomainConfig.add_member(:advanced_options, Shapes::ShapeRef.new(shape: AdvancedOptionsStatus, location_name: "AdvancedOptions"))
     ElasticsearchDomainConfig.add_member(:log_publishing_options, Shapes::ShapeRef.new(shape: LogPublishingOptionsStatus, location_name: "LogPublishingOptions"))
+    ElasticsearchDomainConfig.add_member(:catalog_options, Shapes::ShapeRef.new(shape: CatalogOptionsStatus, location_name: "CatalogOptions"))
     ElasticsearchDomainConfig.add_member(:domain_endpoint_options, Shapes::ShapeRef.new(shape: DomainEndpointOptionsStatus, location_name: "DomainEndpointOptions"))
     ElasticsearchDomainConfig.add_member(:advanced_security_options, Shapes::ShapeRef.new(shape: AdvancedSecurityOptionsStatus, location_name: "AdvancedSecurityOptions"))
     ElasticsearchDomainConfig.add_member(:auto_tune_options, Shapes::ShapeRef.new(shape: AutoTuneOptionsStatus, location_name: "AutoTuneOptions"))
@@ -926,6 +948,7 @@ module Aws::ElasticsearchService
     ElasticsearchDomainStatus.add_member(:node_to_node_encryption_options, Shapes::ShapeRef.new(shape: NodeToNodeEncryptionOptions, location_name: "NodeToNodeEncryptionOptions"))
     ElasticsearchDomainStatus.add_member(:advanced_options, Shapes::ShapeRef.new(shape: AdvancedOptions, location_name: "AdvancedOptions"))
     ElasticsearchDomainStatus.add_member(:log_publishing_options, Shapes::ShapeRef.new(shape: LogPublishingOptions, location_name: "LogPublishingOptions"))
+    ElasticsearchDomainStatus.add_member(:catalog_options, Shapes::ShapeRef.new(shape: CatalogOptions, location_name: "CatalogOptions"))
     ElasticsearchDomainStatus.add_member(:service_software_options, Shapes::ShapeRef.new(shape: ServiceSoftwareOptions, location_name: "ServiceSoftwareOptions"))
     ElasticsearchDomainStatus.add_member(:domain_endpoint_options, Shapes::ShapeRef.new(shape: DomainEndpointOptions, location_name: "DomainEndpointOptions"))
     ElasticsearchDomainStatus.add_member(:advanced_security_options, Shapes::ShapeRef.new(shape: AdvancedSecurityOptions, location_name: "AdvancedSecurityOptions"))
@@ -1266,6 +1289,10 @@ module Aws::ElasticsearchService
 
     RevokeVpcEndpointAccessResponse.struct_class = Types::RevokeVpcEndpointAccessResponse
 
+    S3TablesEncryptionConfiguration.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "Enabled"))
+    S3TablesEncryptionConfiguration.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "KmsKeyArn"))
+    S3TablesEncryptionConfiguration.struct_class = Types::S3TablesEncryptionConfiguration
+
     SAMLIdp.add_member(:metadata_content, Shapes::ShapeRef.new(shape: SAMLMetadata, required: true, location_name: "MetadataContent"))
     SAMLIdp.add_member(:entity_id, Shapes::ShapeRef.new(shape: SAMLEntityId, required: true, location_name: "EntityId"))
     SAMLIdp.struct_class = Types::SAMLIdp
@@ -1291,6 +1318,9 @@ module Aws::ElasticsearchService
     ScheduledAutoTuneDetails.add_member(:action, Shapes::ShapeRef.new(shape: ScheduledAutoTuneDescription, location_name: "Action"))
     ScheduledAutoTuneDetails.add_member(:severity, Shapes::ShapeRef.new(shape: ScheduledAutoTuneSeverityType, location_name: "Severity"))
     ScheduledAutoTuneDetails.struct_class = Types::ScheduledAutoTuneDetails
+
+    ServiceManagedS3TablesCatalog.add_member(:encryption_configuration, Shapes::ShapeRef.new(shape: S3TablesEncryptionConfiguration, location_name: "EncryptionConfiguration"))
+    ServiceManagedS3TablesCatalog.struct_class = Types::ServiceManagedS3TablesCatalog
 
     ServiceSoftwareOptions.add_member(:current_version, Shapes::ShapeRef.new(shape: String, location_name: "CurrentVersion"))
     ServiceSoftwareOptions.add_member(:new_version, Shapes::ShapeRef.new(shape: String, location_name: "NewVersion"))
@@ -1371,6 +1401,7 @@ module Aws::ElasticsearchService
     UpdateElasticsearchDomainConfigRequest.add_member(:advanced_options, Shapes::ShapeRef.new(shape: AdvancedOptions, location_name: "AdvancedOptions"))
     UpdateElasticsearchDomainConfigRequest.add_member(:access_policies, Shapes::ShapeRef.new(shape: PolicyDocument, location_name: "AccessPolicies"))
     UpdateElasticsearchDomainConfigRequest.add_member(:log_publishing_options, Shapes::ShapeRef.new(shape: LogPublishingOptions, location_name: "LogPublishingOptions"))
+    UpdateElasticsearchDomainConfigRequest.add_member(:catalog_options, Shapes::ShapeRef.new(shape: CatalogOptions, location_name: "CatalogOptions"))
     UpdateElasticsearchDomainConfigRequest.add_member(:domain_endpoint_options, Shapes::ShapeRef.new(shape: DomainEndpointOptions, location_name: "DomainEndpointOptions"))
     UpdateElasticsearchDomainConfigRequest.add_member(:advanced_security_options, Shapes::ShapeRef.new(shape: AdvancedSecurityOptionsInput, location_name: "AdvancedSecurityOptions"))
     UpdateElasticsearchDomainConfigRequest.add_member(:node_to_node_encryption_options, Shapes::ShapeRef.new(shape: NodeToNodeEncryptionOptions, location_name: "NodeToNodeEncryptionOptions"))

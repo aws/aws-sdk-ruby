@@ -1964,6 +1964,9 @@ module Aws::MarketplaceAgreement
     #   resp.terms[0].usage_based_pricing_term.rate_cards[0].rate_card #=> Array
     #   resp.terms[0].usage_based_pricing_term.rate_cards[0].rate_card[0].dimension_key #=> String
     #   resp.terms[0].usage_based_pricing_term.rate_cards[0].rate_card[0].price #=> String
+    #   resp.terms[0].usage_based_pricing_term.rate_cards[0].rate_card[0].regional_prices #=> Array
+    #   resp.terms[0].usage_based_pricing_term.rate_cards[0].rate_card[0].regional_prices[0].region #=> String
+    #   resp.terms[0].usage_based_pricing_term.rate_cards[0].rate_card[0].regional_prices[0].price #=> String
     #   resp.terms[0].configurable_upfront_pricing_term.type #=> String
     #   resp.terms[0].configurable_upfront_pricing_term.id #=> String
     #   resp.terms[0].configurable_upfront_pricing_term.currency_code #=> String
@@ -1975,6 +1978,9 @@ module Aws::MarketplaceAgreement
     #   resp.terms[0].configurable_upfront_pricing_term.rate_cards[0].rate_card #=> Array
     #   resp.terms[0].configurable_upfront_pricing_term.rate_cards[0].rate_card[0].dimension_key #=> String
     #   resp.terms[0].configurable_upfront_pricing_term.rate_cards[0].rate_card[0].price #=> String
+    #   resp.terms[0].configurable_upfront_pricing_term.rate_cards[0].rate_card[0].regional_prices #=> Array
+    #   resp.terms[0].configurable_upfront_pricing_term.rate_cards[0].rate_card[0].regional_prices[0].region #=> String
+    #   resp.terms[0].configurable_upfront_pricing_term.rate_cards[0].rate_card[0].regional_prices[0].price #=> String
     #   resp.terms[0].configurable_upfront_pricing_term.configuration.selector_value #=> String
     #   resp.terms[0].configurable_upfront_pricing_term.configuration.dimensions #=> Array
     #   resp.terms[0].configurable_upfront_pricing_term.configuration.dimensions[0].dimension_key #=> String
@@ -2112,6 +2118,9 @@ module Aws::MarketplaceAgreement
     #   resp.accepted_terms[0].usage_based_pricing_term.rate_cards[0].rate_card #=> Array
     #   resp.accepted_terms[0].usage_based_pricing_term.rate_cards[0].rate_card[0].dimension_key #=> String
     #   resp.accepted_terms[0].usage_based_pricing_term.rate_cards[0].rate_card[0].price #=> String
+    #   resp.accepted_terms[0].usage_based_pricing_term.rate_cards[0].rate_card[0].regional_prices #=> Array
+    #   resp.accepted_terms[0].usage_based_pricing_term.rate_cards[0].rate_card[0].regional_prices[0].region #=> String
+    #   resp.accepted_terms[0].usage_based_pricing_term.rate_cards[0].rate_card[0].regional_prices[0].price #=> String
     #   resp.accepted_terms[0].configurable_upfront_pricing_term.type #=> String
     #   resp.accepted_terms[0].configurable_upfront_pricing_term.id #=> String
     #   resp.accepted_terms[0].configurable_upfront_pricing_term.currency_code #=> String
@@ -2123,6 +2132,9 @@ module Aws::MarketplaceAgreement
     #   resp.accepted_terms[0].configurable_upfront_pricing_term.rate_cards[0].rate_card #=> Array
     #   resp.accepted_terms[0].configurable_upfront_pricing_term.rate_cards[0].rate_card[0].dimension_key #=> String
     #   resp.accepted_terms[0].configurable_upfront_pricing_term.rate_cards[0].rate_card[0].price #=> String
+    #   resp.accepted_terms[0].configurable_upfront_pricing_term.rate_cards[0].rate_card[0].regional_prices #=> Array
+    #   resp.accepted_terms[0].configurable_upfront_pricing_term.rate_cards[0].rate_card[0].regional_prices[0].region #=> String
+    #   resp.accepted_terms[0].configurable_upfront_pricing_term.rate_cards[0].rate_card[0].regional_prices[0].price #=> String
     #   resp.accepted_terms[0].configurable_upfront_pricing_term.configuration.selector_value #=> String
     #   resp.accepted_terms[0].configurable_upfront_pricing_term.configuration.dimensions #=> Array
     #   resp.accepted_terms[0].configurable_upfront_pricing_term.configuration.dimensions[0].dimension_key #=> String
@@ -3613,7 +3625,7 @@ module Aws::MarketplaceAgreement
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-marketplaceagreement'
-      context[:gem_version] = '1.60.0'
+      context[:gem_version] = '1.61.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -410,7 +410,8 @@ module Aws
       def delete: (
                     ?skip_final_snapshot: bool,
                     ?final_db_snapshot_identifier: ::String,
-                    ?delete_automated_backups: bool
+                    ?delete_automated_backups: bool,
+                    ?delete_db_instances: bool
                   ) -> DBCluster
                 | (?Hash[Symbol, untyped]) -> DBCluster
 

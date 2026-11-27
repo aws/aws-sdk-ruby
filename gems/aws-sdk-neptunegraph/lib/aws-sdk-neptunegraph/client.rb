@@ -594,6 +594,19 @@ module Aws::NeptuneGraph
 
     # Creates a new Neptune Analytics graph.
     #
+    # Neptune Analytics supports two types of graphs, selected using
+    # `computeConfiguration`:
+    #
+    # * *Provisioned graphs* use dedicated compute that is always available.
+    #   Use provisioned graphs for workloads that require higher memory or
+    #   predictable latency.
+    #
+    # * *Graph sessions* use ephemeral compute that is bootstrapped when a
+    #   query is sent to the graph. The compute is automatically stopped
+    #   after a few minutes with no traffic. The next query sent to the
+    #   graph bootstraps the compute again, so queries that bootstrap the
+    #   compute are subject to cold start latency.
+    #
     # @option params [required, String] :graph_name
     #   A name for the new Neptune Analytics graph to be created.
     #
@@ -630,9 +643,21 @@ module Aws::NeptuneGraph
     #   The graph can’t be deleted when deletion protection is enabled.
     #   (`true` or `false`).
     #
-    # @option params [required, Integer] :provisioned_memory
+    # @option params [Integer] :provisioned_memory
     #   The provisioned memory-optimized Neptune Capacity Units (m-NCUs) to
     #   use for the graph. Min = 16
+    #
+    #   <note markdown="1"> This field is deprecated. We recommend using `computeConfiguration`
+    #   instead.
+    #
+    #    </note>
+    #
+    # @option params [Types::ComputeConfiguration] :compute_configuration
+    #   The compute configuration for the new graph. Specify
+    #   `provisionedGraph` to create a provisioned graph with dedicated,
+    #   always-available compute, or `graphSession` to create a graph session
+    #   that uses ephemeral compute bootstrapped on demand when a query is
+    #   sent, and is subject to cold start latency.
     #
     # @return [Types::CreateGraphOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -643,6 +668,7 @@ module Aws::NeptuneGraph
     #   * {Types::CreateGraphOutput#status_reason #status_reason} => String
     #   * {Types::CreateGraphOutput#create_time #create_time} => Time
     #   * {Types::CreateGraphOutput#provisioned_memory #provisioned_memory} => Integer
+    #   * {Types::CreateGraphOutput#compute_configuration #compute_configuration} => Types::ComputeConfiguration
     #   * {Types::CreateGraphOutput#endpoint #endpoint} => String
     #   * {Types::CreateGraphOutput#public_connectivity #public_connectivity} => Boolean
     #   * {Types::CreateGraphOutput#vector_search_configuration #vector_search_configuration} => Types::VectorSearchConfiguration
@@ -666,7 +692,15 @@ module Aws::NeptuneGraph
     #     },
     #     replica_count: 1,
     #     deletion_protection: false,
-    #     provisioned_memory: 1, # required
+    #     provisioned_memory: 1,
+    #     compute_configuration: {
+    #       provisioned_graph: {
+    #         memory: 1, # required
+    #       },
+    #       graph_session: {
+    #         min_memory: 1,
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
@@ -678,6 +712,8 @@ module Aws::NeptuneGraph
     #   resp.status_reason #=> String
     #   resp.create_time #=> Time
     #   resp.provisioned_memory #=> Integer
+    #   resp.compute_configuration.provisioned_graph.memory #=> Integer
+    #   resp.compute_configuration.graph_session.min_memory #=> Integer
     #   resp.endpoint #=> String
     #   resp.public_connectivity #=> Boolean
     #   resp.vector_search_configuration.dimension #=> Integer
@@ -759,10 +795,20 @@ module Aws::NeptuneGraph
     # The data can be loaded from files in S3 that in either the [Gremlin
     # CSV format][1] or the [openCypher load format][2].
     #
+    # <note markdown="1"> Graph session cannot be created using this API. Create an empty Graph
+    # Session using [CreateGraph][3] or restore a snapshot as Graph Session
+    # using [RestoreGraphFromSnapshot][4] and use [neptune.load CALL
+    # procedure][5] to load data into the Graph Session instead.
+    #
+    #  </note>
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/neptune/latest/userguide/bulk-load-tutorial-format-gremlin.html
     # [2]: https://docs.aws.amazon.com/neptune/latest/userguide/bulk-load-tutorial-format-opencypher.html
+    # [3]: https://docs.aws.amazon.com/neptune-analytics/latest/apiref/API_CreateGraph.html
+    # [4]: https://docs.aws.amazon.com/neptune-analytics/latest/apiref/API_RestoreGraphFromSnapshot.html
+    # [5]: https://docs.aws.amazon.com/neptune-analytics/latest/userguide/batch-load.html
     #
     # @option params [required, String] :graph_name
     #   A name for the new Neptune Analytics graph to be created.
@@ -1001,6 +1047,7 @@ module Aws::NeptuneGraph
     #   * {Types::DeleteGraphOutput#status_reason #status_reason} => String
     #   * {Types::DeleteGraphOutput#create_time #create_time} => Time
     #   * {Types::DeleteGraphOutput#provisioned_memory #provisioned_memory} => Integer
+    #   * {Types::DeleteGraphOutput#compute_configuration #compute_configuration} => Types::ComputeConfiguration
     #   * {Types::DeleteGraphOutput#endpoint #endpoint} => String
     #   * {Types::DeleteGraphOutput#public_connectivity #public_connectivity} => Boolean
     #   * {Types::DeleteGraphOutput#vector_search_configuration #vector_search_configuration} => Types::VectorSearchConfiguration
@@ -1026,6 +1073,8 @@ module Aws::NeptuneGraph
     #   resp.status_reason #=> String
     #   resp.create_time #=> Time
     #   resp.provisioned_memory #=> Integer
+    #   resp.compute_configuration.provisioned_graph.memory #=> Integer
+    #   resp.compute_configuration.graph_session.min_memory #=> Integer
     #   resp.endpoint #=> String
     #   resp.public_connectivity #=> Boolean
     #   resp.vector_search_configuration.dimension #=> Integer
@@ -1278,6 +1327,7 @@ module Aws::NeptuneGraph
     #   * {Types::GetGraphOutput#status_reason #status_reason} => String
     #   * {Types::GetGraphOutput#create_time #create_time} => Time
     #   * {Types::GetGraphOutput#provisioned_memory #provisioned_memory} => Integer
+    #   * {Types::GetGraphOutput#compute_configuration #compute_configuration} => Types::ComputeConfiguration
     #   * {Types::GetGraphOutput#endpoint #endpoint} => String
     #   * {Types::GetGraphOutput#public_connectivity #public_connectivity} => Boolean
     #   * {Types::GetGraphOutput#vector_search_configuration #vector_search_configuration} => Types::VectorSearchConfiguration
@@ -1302,6 +1352,8 @@ module Aws::NeptuneGraph
     #   resp.status_reason #=> String
     #   resp.create_time #=> Time
     #   resp.provisioned_memory #=> Integer
+    #   resp.compute_configuration.provisioned_graph.memory #=> Integer
+    #   resp.compute_configuration.graph_session.min_memory #=> Integer
     #   resp.endpoint #=> String
     #   resp.public_connectivity #=> Boolean
     #   resp.vector_search_configuration.dimension #=> Integer
@@ -1743,6 +1795,8 @@ module Aws::NeptuneGraph
     #   resp.graphs[0].replica_count #=> Integer
     #   resp.graphs[0].kms_key_identifier #=> String
     #   resp.graphs[0].deletion_protection #=> Boolean
+    #   resp.graphs[0].compute_configuration.provisioned_graph.memory #=> Integer
+    #   resp.graphs[0].compute_configuration.graph_session.min_memory #=> Integer
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-graph-2023-11-29/ListGraphs AWS API Documentation
@@ -1958,6 +2012,7 @@ module Aws::NeptuneGraph
     #   * {Types::ResetGraphOutput#status_reason #status_reason} => String
     #   * {Types::ResetGraphOutput#create_time #create_time} => Time
     #   * {Types::ResetGraphOutput#provisioned_memory #provisioned_memory} => Integer
+    #   * {Types::ResetGraphOutput#compute_configuration #compute_configuration} => Types::ComputeConfiguration
     #   * {Types::ResetGraphOutput#endpoint #endpoint} => String
     #   * {Types::ResetGraphOutput#public_connectivity #public_connectivity} => Boolean
     #   * {Types::ResetGraphOutput#vector_search_configuration #vector_search_configuration} => Types::VectorSearchConfiguration
@@ -1983,6 +2038,8 @@ module Aws::NeptuneGraph
     #   resp.status_reason #=> String
     #   resp.create_time #=> Time
     #   resp.provisioned_memory #=> Integer
+    #   resp.compute_configuration.provisioned_graph.memory #=> Integer
+    #   resp.compute_configuration.graph_session.min_memory #=> Integer
     #   resp.endpoint #=> String
     #   resp.public_connectivity #=> Boolean
     #   resp.vector_search_configuration.dimension #=> Integer
@@ -2020,6 +2077,18 @@ module Aws::NeptuneGraph
     #
     #   Min = 16
     #
+    #   <note markdown="1"> This field is deprecated. We recommend using `computeConfiguration`
+    #   instead.
+    #
+    #    </note>
+    #
+    # @option params [Types::ComputeConfiguration] :compute_configuration
+    #   The compute configuration for the restored graph. A snapshot can be
+    #   restored into either a provisioned graph or a graph session,
+    #   regardless of the compute type of the source graph. A snapshot taken
+    #   from a provisioned graph can be restored into a graph session as long
+    #   as the data in the snapshot fits within the graph session.
+    #
     # @option params [Boolean] :deletion_protection
     #   A value that indicates whether the graph has deletion protection
     #   enabled. The graph can't be deleted when deletion protection is
@@ -2050,6 +2119,7 @@ module Aws::NeptuneGraph
     #   * {Types::RestoreGraphFromSnapshotOutput#status_reason #status_reason} => String
     #   * {Types::RestoreGraphFromSnapshotOutput#create_time #create_time} => Time
     #   * {Types::RestoreGraphFromSnapshotOutput#provisioned_memory #provisioned_memory} => Integer
+    #   * {Types::RestoreGraphFromSnapshotOutput#compute_configuration #compute_configuration} => Types::ComputeConfiguration
     #   * {Types::RestoreGraphFromSnapshotOutput#endpoint #endpoint} => String
     #   * {Types::RestoreGraphFromSnapshotOutput#public_connectivity #public_connectivity} => Boolean
     #   * {Types::RestoreGraphFromSnapshotOutput#vector_search_configuration #vector_search_configuration} => Types::VectorSearchConfiguration
@@ -2065,6 +2135,14 @@ module Aws::NeptuneGraph
     #     snapshot_identifier: "SnapshotIdentifier", # required
     #     graph_name: "GraphName", # required
     #     provisioned_memory: 1,
+    #     compute_configuration: {
+    #       provisioned_graph: {
+    #         memory: 1, # required
+    #       },
+    #       graph_session: {
+    #         min_memory: 1,
+    #       },
+    #     },
     #     deletion_protection: false,
     #     tags: {
     #       "TagKey" => "TagValue",
@@ -2082,6 +2160,8 @@ module Aws::NeptuneGraph
     #   resp.status_reason #=> String
     #   resp.create_time #=> Time
     #   resp.provisioned_memory #=> Integer
+    #   resp.compute_configuration.provisioned_graph.memory #=> Integer
+    #   resp.compute_configuration.graph_session.min_memory #=> Integer
     #   resp.endpoint #=> String
     #   resp.public_connectivity #=> Boolean
     #   resp.vector_search_configuration.dimension #=> Integer
@@ -2212,6 +2292,12 @@ module Aws::NeptuneGraph
 
     # Starts the specific graph.
     #
+    # <note markdown="1"> Graph sessions are started automatically when a query is sent to the
+    # graph. While this API is supported for graph sessions, it isn't
+    # required.
+    #
+    #  </note>
+    #
     # @option params [required, String] :graph_identifier
     #   The unique identifier of the Neptune Analytics graph.
     #
@@ -2224,6 +2310,7 @@ module Aws::NeptuneGraph
     #   * {Types::StartGraphOutput#status_reason #status_reason} => String
     #   * {Types::StartGraphOutput#create_time #create_time} => Time
     #   * {Types::StartGraphOutput#provisioned_memory #provisioned_memory} => Integer
+    #   * {Types::StartGraphOutput#compute_configuration #compute_configuration} => Types::ComputeConfiguration
     #   * {Types::StartGraphOutput#endpoint #endpoint} => String
     #   * {Types::StartGraphOutput#public_connectivity #public_connectivity} => Boolean
     #   * {Types::StartGraphOutput#vector_search_configuration #vector_search_configuration} => Types::VectorSearchConfiguration
@@ -2248,6 +2335,8 @@ module Aws::NeptuneGraph
     #   resp.status_reason #=> String
     #   resp.create_time #=> Time
     #   resp.provisioned_memory #=> Integer
+    #   resp.compute_configuration.provisioned_graph.memory #=> Integer
+    #   resp.compute_configuration.graph_session.min_memory #=> Integer
     #   resp.endpoint #=> String
     #   resp.public_connectivity #=> Boolean
     #   resp.vector_search_configuration.dimension #=> Integer
@@ -2270,8 +2359,21 @@ module Aws::NeptuneGraph
     # Storage Service (S3). The graph needs to be empty and in the AVAILABLE
     # state.
     #
+    # <note markdown="1"> Graph sessions don't support this API. Use [neptune.load CALL
+    # procedure][1] to load data into the Graph Session instead.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/neptune-analytics/latest/userguide/batch-load.html
+    #
     # @option params [Types::ImportOptions] :import_options
-    #   Options for how to perform an import.
+    #   Contains options for controlling the import process. For example, if
+    #   the `failOnError` key is set to `false`, the import skips problem data
+    #   and attempts to continue (whereas if set to `true`, the default, or if
+    #   omitted, the import operation halts immediately when an error is
+    #   encountered.
     #
     # @option params [Boolean] :fail_on_error
     #   If set to true, the task halts when an import error is encountered. If
@@ -2364,6 +2466,12 @@ module Aws::NeptuneGraph
 
     # Stops the specific graph.
     #
+    # <note markdown="1"> Graph sessions are stopped automatically after a few minutes with no
+    # traffic. While this API is supported for graph sessions, it isn't
+    # required.
+    #
+    #  </note>
+    #
     # @option params [required, String] :graph_identifier
     #   The unique identifier of the Neptune Analytics graph.
     #
@@ -2376,6 +2484,7 @@ module Aws::NeptuneGraph
     #   * {Types::StopGraphOutput#status_reason #status_reason} => String
     #   * {Types::StopGraphOutput#create_time #create_time} => Time
     #   * {Types::StopGraphOutput#provisioned_memory #provisioned_memory} => Integer
+    #   * {Types::StopGraphOutput#compute_configuration #compute_configuration} => Types::ComputeConfiguration
     #   * {Types::StopGraphOutput#endpoint #endpoint} => String
     #   * {Types::StopGraphOutput#public_connectivity #public_connectivity} => Boolean
     #   * {Types::StopGraphOutput#vector_search_configuration #vector_search_configuration} => Types::VectorSearchConfiguration
@@ -2400,6 +2509,8 @@ module Aws::NeptuneGraph
     #   resp.status_reason #=> String
     #   resp.create_time #=> Time
     #   resp.provisioned_memory #=> Integer
+    #   resp.compute_configuration.provisioned_graph.memory #=> Integer
+    #   resp.compute_configuration.graph_session.min_memory #=> Integer
     #   resp.endpoint #=> String
     #   resp.public_connectivity #=> Boolean
     #   resp.vector_search_configuration.dimension #=> Integer
@@ -2502,6 +2613,17 @@ module Aws::NeptuneGraph
     #
     #   Min = 16
     #
+    #   <note markdown="1"> This field is deprecated. We recommend using `computeConfiguration`
+    #   instead.
+    #
+    #    </note>
+    #
+    # @option params [Types::ComputeConfiguration] :compute_configuration
+    #   The updated compute configuration for the graph. A graph session can
+    #   be scaled up to a provisioned graph, and a provisioned graph can be
+    #   scaled down to a graph session, as long as the data in the graph fits
+    #   within the graph session.
+    #
     # @option params [Boolean] :deletion_protection
     #   A value that indicates whether the graph has deletion protection
     #   enabled. The graph can't be deleted when deletion protection is
@@ -2516,6 +2638,7 @@ module Aws::NeptuneGraph
     #   * {Types::UpdateGraphOutput#status_reason #status_reason} => String
     #   * {Types::UpdateGraphOutput#create_time #create_time} => Time
     #   * {Types::UpdateGraphOutput#provisioned_memory #provisioned_memory} => Integer
+    #   * {Types::UpdateGraphOutput#compute_configuration #compute_configuration} => Types::ComputeConfiguration
     #   * {Types::UpdateGraphOutput#endpoint #endpoint} => String
     #   * {Types::UpdateGraphOutput#public_connectivity #public_connectivity} => Boolean
     #   * {Types::UpdateGraphOutput#vector_search_configuration #vector_search_configuration} => Types::VectorSearchConfiguration
@@ -2531,6 +2654,14 @@ module Aws::NeptuneGraph
     #     graph_identifier: "GraphIdentifier", # required
     #     public_connectivity: false,
     #     provisioned_memory: 1,
+    #     compute_configuration: {
+    #       provisioned_graph: {
+    #         memory: 1, # required
+    #       },
+    #       graph_session: {
+    #         min_memory: 1,
+    #       },
+    #     },
     #     deletion_protection: false,
     #   })
     #
@@ -2543,6 +2674,8 @@ module Aws::NeptuneGraph
     #   resp.status_reason #=> String
     #   resp.create_time #=> Time
     #   resp.provisioned_memory #=> Integer
+    #   resp.compute_configuration.provisioned_graph.memory #=> Integer
+    #   resp.compute_configuration.graph_session.min_memory #=> Integer
     #   resp.endpoint #=> String
     #   resp.public_connectivity #=> Boolean
     #   resp.vector_search_configuration.dimension #=> Integer
@@ -2579,7 +2712,7 @@ module Aws::NeptuneGraph
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-neptunegraph'
-      context[:gem_version] = '1.68.0'
+      context[:gem_version] = '1.69.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

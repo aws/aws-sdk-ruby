@@ -173,6 +173,42 @@ module Aws::NeptuneGraph
       include Aws::Structure
     end
 
+    # The compute configuration of a graph. A graph is either a provisioned
+    # graph or a graph session.
+    #
+    # @note ComputeConfiguration is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note ComputeConfiguration is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of ComputeConfiguration corresponding to the set member.
+    #
+    # @!attribute [rw] provisioned_graph
+    #   Configuration for a provisioned graph. A provisioned graph uses
+    #   dedicated compute that is always available. Use provisioned graphs
+    #   for workloads that require higher memory or predictable latency.
+    #   @return [Types::ProvisionedGraphConfiguration]
+    #
+    # @!attribute [rw] graph_session
+    #   Configuration for a graph session. A graph session uses ephemeral
+    #   compute that is bootstrapped when a query is sent to the graph. The
+    #   compute is automatically stopped after a few minutes with no
+    #   traffic; the next query bootstraps the compute again. Queries that
+    #   bootstrap the compute are subject to cold start latency.
+    #   @return [Types::GraphSessionConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-graph-2023-11-29/ComputeConfiguration AWS API Documentation
+    #
+    class ComputeConfiguration < Struct.new(
+      :provisioned_graph,
+      :graph_session,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class ProvisionedGraph < ComputeConfiguration; end
+      class GraphSession < ComputeConfiguration; end
+      class Unknown < ComputeConfiguration; end
+    end
+
     # Raised when a conflict is encountered.
     #
     # @!attribute [rw] message
@@ -238,7 +274,20 @@ module Aws::NeptuneGraph
     # @!attribute [rw] provisioned_memory
     #   The provisioned memory-optimized Neptune Capacity Units (m-NCUs) to
     #   use for the graph. Min = 16
+    #
+    #   <note markdown="1"> This field is deprecated. We recommend using `computeConfiguration`
+    #   instead.
+    #
+    #    </note>
     #   @return [Integer]
+    #
+    # @!attribute [rw] compute_configuration
+    #   The compute configuration for the new graph. Specify
+    #   `provisionedGraph` to create a provisioned graph with dedicated,
+    #   always-available compute, or `graphSession` to create a graph
+    #   session that uses ephemeral compute bootstrapped on demand when a
+    #   query is sent, and is subject to cold start latency.
+    #   @return [Types::ComputeConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-graph-2023-11-29/CreateGraphInput AWS API Documentation
     #
@@ -250,7 +299,8 @@ module Aws::NeptuneGraph
       :vector_search_configuration,
       :replica_count,
       :deletion_protection,
-      :provisioned_memory)
+      :provisioned_memory,
+      :compute_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -288,7 +338,18 @@ module Aws::NeptuneGraph
     #   use for the graph.
     #
     #   Min = 16
+    #
+    #   <note markdown="1"> This field is deprecated. For backward compatibility, it returns
+    #   `memory` for a `provisionedGraph` and `minMemory` for a
+    #   `graphSession`. Use `computeConfiguration` instead.
+    #
+    #    </note>
     #   @return [Integer]
+    #
+    # @!attribute [rw] compute_configuration
+    #   The compute configuration of the graph: either a provisioned graph
+    #   or a graph session.
+    #   @return [Types::ComputeConfiguration]
     #
     # @!attribute [rw] endpoint
     #   The graph endpoint.
@@ -343,6 +404,7 @@ module Aws::NeptuneGraph
       :status_reason,
       :create_time,
       :provisioned_memory,
+      :compute_configuration,
       :endpoint,
       :public_connectivity,
       :vector_search_configuration,
@@ -726,7 +788,18 @@ module Aws::NeptuneGraph
     # @!attribute [rw] provisioned_memory
     #   The number of memory-optimized Neptune Capacity Units (m-NCUs)
     #   allocated to the graph.
+    #
+    #   <note markdown="1"> This field is deprecated. For backward compatibility, it returns
+    #   `memory` for a `provisionedGraph` and `minMemory` for a
+    #   `graphSession`. Use `computeConfiguration` instead.
+    #
+    #    </note>
     #   @return [Integer]
+    #
+    # @!attribute [rw] compute_configuration
+    #   The compute configuration of the graph: either a provisioned graph
+    #   or a graph session.
+    #   @return [Types::ComputeConfiguration]
     #
     # @!attribute [rw] endpoint
     #   The graph endpoint.
@@ -737,8 +810,8 @@ module Aws::NeptuneGraph
     #   @return [Boolean]
     #
     # @!attribute [rw] vector_search_configuration
-    #   Specifies the number of dimensions for vector embeddings loaded into
-    #   the graph. Max = 65535
+    #   The vector-search configuration for the graph, which specifies the
+    #   vector dimension to use in the vector index, if any.
     #   @return [Types::VectorSearchConfiguration]
     #
     # @!attribute [rw] replica_count
@@ -772,6 +845,7 @@ module Aws::NeptuneGraph
       :status_reason,
       :create_time,
       :provisioned_memory,
+      :compute_configuration,
       :endpoint,
       :public_connectivity,
       :vector_search_configuration,
@@ -1251,7 +1325,18 @@ module Aws::NeptuneGraph
     # @!attribute [rw] provisioned_memory
     #   The number of memory-optimized Neptune Capacity Units (m-NCUs)
     #   allocated to the graph.
+    #
+    #   <note markdown="1"> This field is deprecated. For backward compatibility, it returns
+    #   `memory` for a `provisionedGraph` and `minMemory` for a
+    #   `graphSession`. Use `computeConfiguration` instead.
+    #
+    #    </note>
     #   @return [Integer]
+    #
+    # @!attribute [rw] compute_configuration
+    #   The compute configuration of the graph: either a provisioned graph
+    #   or a graph session.
+    #   @return [Types::ComputeConfiguration]
     #
     # @!attribute [rw] endpoint
     #   The graph endpoint.
@@ -1262,8 +1347,8 @@ module Aws::NeptuneGraph
     #   @return [Boolean]
     #
     # @!attribute [rw] vector_search_configuration
-    #   Specifies the number of dimensions for vector embeddings loaded into
-    #   the graph. Max = 65535
+    #   The vector-search configuration for the graph, which specifies the
+    #   vector dimension to use in the vector index, if any.
     #   @return [Types::VectorSearchConfiguration]
     #
     # @!attribute [rw] replica_count
@@ -1297,6 +1382,7 @@ module Aws::NeptuneGraph
       :status_reason,
       :create_time,
       :provisioned_memory,
+      :compute_configuration,
       :endpoint,
       :public_connectivity,
       :vector_search_configuration,
@@ -1704,6 +1790,25 @@ module Aws::NeptuneGraph
       include Aws::Structure
     end
 
+    # The compute configuration for a graph session.
+    #
+    # @!attribute [rw] min_memory
+    #   The minimum Session Neptune Capacity Units (s-NCUs) available to the
+    #   graph session.
+    #
+    #   A graph session can burst up to 2x the configured min memory. For
+    #   example, a `minMemory` of 4 can burst up to 8 s-NCUs, and a
+    #   `minMemory` of 8 can burst up to 16 s-NCUs.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-graph-2023-11-29/GraphSessionConfiguration AWS API Documentation
+    #
+    class GraphSessionConfiguration < Struct.new(
+      :min_memory)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Details about a graph snapshot.
     #
     # @!attribute [rw] id
@@ -1774,6 +1879,12 @@ module Aws::NeptuneGraph
     # @!attribute [rw] provisioned_memory
     #   The number of memory-optimized Neptune Capacity Units (m-NCUs)
     #   allocated to the graph.
+    #
+    #   <note markdown="1"> This field is deprecated. For backward compatibility, it returns
+    #   `memory` for a `provisionedGraph` and `minMemory` for a
+    #   `graphSession`. Use `computeConfiguration` instead.
+    #
+    #    </note>
     #   @return [Integer]
     #
     # @!attribute [rw] public_connectivity
@@ -1796,6 +1907,11 @@ module Aws::NeptuneGraph
     #   If `true`, deletion protection is enabled for the graph.
     #   @return [Boolean]
     #
+    # @!attribute [rw] compute_configuration
+    #   The compute configuration of the graph: either a provisioned graph
+    #   or a graph session.
+    #   @return [Types::ComputeConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-graph-2023-11-29/GraphSummary AWS API Documentation
     #
     class GraphSummary < Struct.new(
@@ -1808,7 +1924,8 @@ module Aws::NeptuneGraph
       :endpoint,
       :replica_count,
       :kms_key_identifier,
-      :deletion_protection)
+      :deletion_protection,
+      :compute_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2361,6 +2478,21 @@ module Aws::NeptuneGraph
       include Aws::Structure
     end
 
+    # The compute configuration for a provisioned graph.
+    #
+    # @!attribute [rw] memory
+    #   The provisioned memory-optimized Neptune Capacity Units (m-NCUs) to
+    #   use for the graph.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-graph-2023-11-29/ProvisionedGraphConfiguration AWS API Documentation
+    #
+    class ProvisionedGraphConfiguration < Struct.new(
+      :memory)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Details of the query listed.
     #
     # @!attribute [rw] id
@@ -2444,7 +2576,18 @@ module Aws::NeptuneGraph
     # @!attribute [rw] provisioned_memory
     #   The number of memory-optimized Neptune Capacity Units (m-NCUs)
     #   allocated to the graph.
+    #
+    #   <note markdown="1"> This field is deprecated. For backward compatibility, it returns
+    #   `memory` for a `provisionedGraph` and `minMemory` for a
+    #   `graphSession`. Use `computeConfiguration` instead.
+    #
+    #    </note>
     #   @return [Integer]
+    #
+    # @!attribute [rw] compute_configuration
+    #   The compute configuration of the graph: either a provisioned graph
+    #   or a graph session.
+    #   @return [Types::ComputeConfiguration]
     #
     # @!attribute [rw] endpoint
     #   The graph endpoint.
@@ -2455,8 +2598,8 @@ module Aws::NeptuneGraph
     #   @return [Boolean]
     #
     # @!attribute [rw] vector_search_configuration
-    #   Specifies the number of dimensions for vector embeddings loaded into
-    #   the graph. Max = 65535
+    #   The vector-search configuration for the graph, which specifies the
+    #   vector dimension to use in the vector index, if any.
     #   @return [Types::VectorSearchConfiguration]
     #
     # @!attribute [rw] replica_count
@@ -2489,6 +2632,7 @@ module Aws::NeptuneGraph
       :status_reason,
       :create_time,
       :provisioned_memory,
+      :compute_configuration,
       :endpoint,
       :public_connectivity,
       :vector_search_configuration,
@@ -2533,7 +2677,20 @@ module Aws::NeptuneGraph
     #   use for the graph.
     #
     #   Min = 16
+    #
+    #   <note markdown="1"> This field is deprecated. We recommend using `computeConfiguration`
+    #   instead.
+    #
+    #    </note>
     #   @return [Integer]
+    #
+    # @!attribute [rw] compute_configuration
+    #   The compute configuration for the restored graph. A snapshot can be
+    #   restored into either a provisioned graph or a graph session,
+    #   regardless of the compute type of the source graph. A snapshot taken
+    #   from a provisioned graph can be restored into a graph session as
+    #   long as the data in the snapshot fits within the graph session.
+    #   @return [Types::ComputeConfiguration]
     #
     # @!attribute [rw] deletion_protection
     #   A value that indicates whether the graph has deletion protection
@@ -2566,6 +2723,7 @@ module Aws::NeptuneGraph
       :snapshot_identifier,
       :graph_name,
       :provisioned_memory,
+      :compute_configuration,
       :deletion_protection,
       :tags,
       :replica_count,
@@ -2601,7 +2759,18 @@ module Aws::NeptuneGraph
     # @!attribute [rw] provisioned_memory
     #   The number of memory-optimized Neptune Capacity Units (m-NCUs)
     #   allocated to the graph.
+    #
+    #   <note markdown="1"> This field is deprecated. For backward compatibility, it returns
+    #   `memory` for a `provisionedGraph` and `minMemory` for a
+    #   `graphSession`. Use `computeConfiguration` instead.
+    #
+    #    </note>
     #   @return [Integer]
+    #
+    # @!attribute [rw] compute_configuration
+    #   The compute configuration of the graph: either a provisioned graph
+    #   or a graph session.
+    #   @return [Types::ComputeConfiguration]
     #
     # @!attribute [rw] endpoint
     #   The graph endpoint.
@@ -2612,8 +2781,8 @@ module Aws::NeptuneGraph
     #   @return [Boolean]
     #
     # @!attribute [rw] vector_search_configuration
-    #   Specifies the number of dimensions for vector embeddings loaded into
-    #   the graph. Max = 65535
+    #   The vector-search configuration for the graph, which specifies the
+    #   vector dimension to use in the vector index, if any.
     #   @return [Types::VectorSearchConfiguration]
     #
     # @!attribute [rw] replica_count
@@ -2646,6 +2815,7 @@ module Aws::NeptuneGraph
       :status_reason,
       :create_time,
       :provisioned_memory,
+      :compute_configuration,
       :endpoint,
       :public_connectivity,
       :vector_search_configuration,
@@ -2661,6 +2831,7 @@ module Aws::NeptuneGraph
     # A service quota was exceeded.
     #
     # @!attribute [rw] message
+    #   A message describing the problem.
     #   @return [String]
     #
     # @!attribute [rw] resource_id
@@ -2836,7 +3007,18 @@ module Aws::NeptuneGraph
     # @!attribute [rw] provisioned_memory
     #   The number of memory-optimized Neptune Capacity Units (m-NCUs)
     #   allocated to the graph.
+    #
+    #   <note markdown="1"> This field is deprecated. For backward compatibility, it returns
+    #   `memory` for a `provisionedGraph` and `minMemory` for a
+    #   `graphSession`. Use `computeConfiguration` instead.
+    #
+    #    </note>
     #   @return [Integer]
+    #
+    # @!attribute [rw] compute_configuration
+    #   The compute configuration of the graph: either a provisioned graph
+    #   or a graph session.
+    #   @return [Types::ComputeConfiguration]
     #
     # @!attribute [rw] endpoint
     #   The graph endpoint.
@@ -2847,8 +3029,8 @@ module Aws::NeptuneGraph
     #   @return [Boolean]
     #
     # @!attribute [rw] vector_search_configuration
-    #   Specifies the number of dimensions for vector embeddings loaded into
-    #   the graph. Max = 65535
+    #   The vector-search configuration for the graph, which specifies the
+    #   vector dimension to use in the vector index, if any.
     #   @return [Types::VectorSearchConfiguration]
     #
     # @!attribute [rw] replica_count
@@ -2882,6 +3064,7 @@ module Aws::NeptuneGraph
       :status_reason,
       :create_time,
       :provisioned_memory,
+      :compute_configuration,
       :endpoint,
       :public_connectivity,
       :vector_search_configuration,
@@ -2895,7 +3078,11 @@ module Aws::NeptuneGraph
     end
 
     # @!attribute [rw] import_options
-    #   Options for how to perform an import.
+    #   Contains options for controlling the import process. For example, if
+    #   the `failOnError` key is set to `false`, the import skips problem
+    #   data and attempts to continue (whereas if set to `true`, the
+    #   default, or if omitted, the import operation halts immediately when
+    #   an error is encountered.
     #   @return [Types::ImportOptions]
     #
     # @!attribute [rw] fail_on_error
@@ -2989,7 +3176,11 @@ module Aws::NeptuneGraph
     #   @return [String]
     #
     # @!attribute [rw] import_options
-    #   Options for how to perform an import.
+    #   Contains options for controlling the import process. For example, if
+    #   the `failOnError` key is set to `false`, the import skips problem
+    #   data and attempts to continue (whereas if set to `true`, the
+    #   default, or if omitted, the import operation halts immediately when
+    #   an error is encountered.
     #   @return [Types::ImportOptions]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-graph-2023-11-29/StartImportTaskOutput AWS API Documentation
@@ -3046,7 +3237,18 @@ module Aws::NeptuneGraph
     # @!attribute [rw] provisioned_memory
     #   The number of memory-optimized Neptune Capacity Units (m-NCUs)
     #   allocated to the graph.
+    #
+    #   <note markdown="1"> This field is deprecated. For backward compatibility, it returns
+    #   `memory` for a `provisionedGraph` and `minMemory` for a
+    #   `graphSession`. Use `computeConfiguration` instead.
+    #
+    #    </note>
     #   @return [Integer]
+    #
+    # @!attribute [rw] compute_configuration
+    #   The compute configuration of the graph: either a provisioned graph
+    #   or a graph session.
+    #   @return [Types::ComputeConfiguration]
     #
     # @!attribute [rw] endpoint
     #   The graph endpoint.
@@ -3057,8 +3259,8 @@ module Aws::NeptuneGraph
     #   @return [Boolean]
     #
     # @!attribute [rw] vector_search_configuration
-    #   Specifies the number of dimensions for vector embeddings loaded into
-    #   the graph. Max = 65535
+    #   The vector-search configuration for the graph, which specifies the
+    #   vector dimension to use in the vector index, if any.
     #   @return [Types::VectorSearchConfiguration]
     #
     # @!attribute [rw] replica_count
@@ -3092,6 +3294,7 @@ module Aws::NeptuneGraph
       :status_reason,
       :create_time,
       :provisioned_memory,
+      :compute_configuration,
       :endpoint,
       :public_connectivity,
       :vector_search_configuration,
@@ -3157,6 +3360,7 @@ module Aws::NeptuneGraph
     # Request cannot be processed due to known reasons. Eg. partition full.
     #
     # @!attribute [rw] message
+    #   A message describing the problem.
     #   @return [String]
     #
     # @!attribute [rw] reason
@@ -3208,7 +3412,19 @@ module Aws::NeptuneGraph
     #   use for the graph.
     #
     #   Min = 16
+    #
+    #   <note markdown="1"> This field is deprecated. We recommend using `computeConfiguration`
+    #   instead.
+    #
+    #    </note>
     #   @return [Integer]
+    #
+    # @!attribute [rw] compute_configuration
+    #   The updated compute configuration for the graph. A graph session can
+    #   be scaled up to a provisioned graph, and a provisioned graph can be
+    #   scaled down to a graph session, as long as the data in the graph
+    #   fits within the graph session.
+    #   @return [Types::ComputeConfiguration]
     #
     # @!attribute [rw] deletion_protection
     #   A value that indicates whether the graph has deletion protection
@@ -3222,6 +3438,7 @@ module Aws::NeptuneGraph
       :graph_identifier,
       :public_connectivity,
       :provisioned_memory,
+      :compute_configuration,
       :deletion_protection)
       SENSITIVE = []
       include Aws::Structure
@@ -3254,7 +3471,18 @@ module Aws::NeptuneGraph
     # @!attribute [rw] provisioned_memory
     #   The number of memory-optimized Neptune Capacity Units (m-NCUs)
     #   allocated to the graph.
+    #
+    #   <note markdown="1"> This field is deprecated. For backward compatibility, it returns
+    #   `memory` for a `provisionedGraph` and `minMemory` for a
+    #   `graphSession`. Use `computeConfiguration` instead.
+    #
+    #    </note>
     #   @return [Integer]
+    #
+    # @!attribute [rw] compute_configuration
+    #   The compute configuration of the graph: either a provisioned graph
+    #   or a graph session.
+    #   @return [Types::ComputeConfiguration]
     #
     # @!attribute [rw] endpoint
     #   The graph endpoint.
@@ -3265,8 +3493,8 @@ module Aws::NeptuneGraph
     #   @return [Boolean]
     #
     # @!attribute [rw] vector_search_configuration
-    #   Specifies the number of dimensions for vector embeddings loaded into
-    #   the graph. Max = 65535
+    #   The vector-search configuration for the graph, which specifies the
+    #   vector dimension to use in the vector index, if any.
     #   @return [Types::VectorSearchConfiguration]
     #
     # @!attribute [rw] replica_count
@@ -3299,6 +3527,7 @@ module Aws::NeptuneGraph
       :status_reason,
       :create_time,
       :provisioned_memory,
+      :compute_configuration,
       :endpoint,
       :public_connectivity,
       :vector_search_configuration,

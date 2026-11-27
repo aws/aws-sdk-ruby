@@ -2507,6 +2507,11 @@ module Aws::CloudWatch
     #   was last stored.
     #   @return [Time]
     #
+    # @!attribute [rw] enable_tag_enrichment
+    #   Specifies whether enriched metrics include resource tag labels for
+    #   the account. This parameter is omitted when enrichment is stopped.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/GetOTelEnrichmentOutput AWS API Documentation
     #
     class GetOTelEnrichmentOutput < Struct.new(
@@ -2514,7 +2519,8 @@ module Aws::CloudWatch
       :include_filters,
       :exclude_filters,
       :created_at,
-      :updated_at)
+      :updated_at,
+      :enable_tag_enrichment)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3172,6 +3178,18 @@ module Aws::CloudWatch
     #   specify. There is a low probability that the returned results
     #   include metrics with last published data as much as 50 minutes more
     #   than the specified time interval.
+    #
+    #   A namespace can contain many metrics that published data in the past
+    #   two weeks but not in the past three hours. In this case, a page of
+    #   results can contain few or no metrics and still include a
+    #   `NextToken`. You need to continue making calls with the returned
+    #   `NextToken` until no token is returned. If you need a continuous
+    #   feed of active metrics across namespaces, use metric streams. For
+    #   more information, see [Use metric streams][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Metric-Streams.html
     #   @return [String]
     #
     # @!attribute [rw] include_linked_accounts
@@ -6631,11 +6649,27 @@ module Aws::CloudWatch
     #   `ExcludeFilters` combined.
     #   @return [Array<Types::OTelEnrichmentMetricSelector>]
     #
+    # @!attribute [rw] enable_tag_enrichment
+    #   Specifies whether enriched metrics include resource tag labels. If
+    #   `true`, enriched metrics include resource tag labels. If `false`,
+    #   they include resource ARN labels but no resource tag labels. If you
+    #   omit this parameter, the default is `true`.
+    #
+    #   When `EnableTagEnrichment` is `true`, enriched metrics that carry
+    #   resource tag labels are charged at the OTel enrichment rate. For
+    #   more information, see [Amazon CloudWatch Pricing][1].
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/cloudwatch/pricing/
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/StartOTelEnrichmentInput AWS API Documentation
     #
     class StartOTelEnrichmentInput < Struct.new(
       :include_filters,
-      :exclude_filters)
+      :exclude_filters,
+      :enable_tag_enrichment)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6657,13 +6691,19 @@ module Aws::CloudWatch
     #   was last stored.
     #   @return [Time]
     #
+    # @!attribute [rw] enable_tag_enrichment
+    #   Specifies whether enriched metrics include resource tag labels for
+    #   the account.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/StartOTelEnrichmentOutput AWS API Documentation
     #
     class StartOTelEnrichmentOutput < Struct.new(
       :include_filters,
       :exclude_filters,
       :created_at,
-      :updated_at)
+      :updated_at,
+      :enable_tag_enrichment)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6854,11 +6894,30 @@ module Aws::CloudWatch
     #   `ExcludeFilters` combined.
     #   @return [Array<Types::OTelEnrichmentMetricSelector>]
     #
+    # @!attribute [rw] enable_tag_enrichment
+    #   Specifies whether enriched metrics include resource tag labels. If
+    #   `true`, enriched metrics include resource tag labels. If `false`,
+    #   they include resource ARN labels but no resource tag labels. If you
+    #   omit this parameter, the stored value is not changed. The operation
+    #   also replaces the stored filters, so to change only this setting,
+    #   specify the current `IncludeFilters` and `ExcludeFilters` in the
+    #   same request.
+    #
+    #   When `EnableTagEnrichment` is `true`, enriched metrics that carry
+    #   resource tag labels are charged at the OTel enrichment rate. For
+    #   more information, see [Amazon CloudWatch Pricing][1].
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/cloudwatch/pricing/
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/UpdateOTelEnrichmentInput AWS API Documentation
     #
     class UpdateOTelEnrichmentInput < Struct.new(
       :include_filters,
-      :exclude_filters)
+      :exclude_filters,
+      :enable_tag_enrichment)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6885,13 +6944,20 @@ module Aws::CloudWatch
     #   was last stored.
     #   @return [Time]
     #
+    # @!attribute [rw] enable_tag_enrichment
+    #   Specifies whether enriched metrics include resource tag labels for
+    #   the account after the update. If the request omits
+    #   `EnableTagEnrichment`, this is the value that was already stored.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/UpdateOTelEnrichmentOutput AWS API Documentation
     #
     class UpdateOTelEnrichmentOutput < Struct.new(
       :include_filters,
       :exclude_filters,
       :created_at,
-      :updated_at)
+      :updated_at,
+      :enable_tag_enrichment)
       SENSITIVE = []
       include Aws::Structure
     end

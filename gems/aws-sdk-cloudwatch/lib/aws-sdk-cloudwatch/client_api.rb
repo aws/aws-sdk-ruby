@@ -65,6 +65,7 @@ module Aws::CloudWatch
     AttributeValue = Shapes::StringShape.new(name: 'AttributeValue')
     AwsQueryErrorMessage = Shapes::StringShape.new(name: 'AwsQueryErrorMessage')
     BatchFailures = Shapes::ListShape.new(name: 'BatchFailures')
+    Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     ComparisonOperator = Shapes::StringShape.new(name: 'ComparisonOperator')
     CompositeAlarm = Shapes::StructureShape.new(name: 'CompositeAlarm')
     CompositeAlarms = Shapes::ListShape.new(name: 'CompositeAlarms')
@@ -885,6 +886,7 @@ module Aws::CloudWatch
     GetOTelEnrichmentOutput.add_member(:exclude_filters, Shapes::ShapeRef.new(shape: OTelEnrichmentMetricSelectorList, location_name: "ExcludeFilters"))
     GetOTelEnrichmentOutput.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedAt"))
     GetOTelEnrichmentOutput.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "UpdatedAt"))
+    GetOTelEnrichmentOutput.add_member(:enable_tag_enrichment, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnableTagEnrichment", metadata: {"box" => true}))
     GetOTelEnrichmentOutput.struct_class = Types::GetOTelEnrichmentOutput
 
     GetResourceMetricsConfigurationInput.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "ResourceArn"))
@@ -1459,12 +1461,14 @@ module Aws::CloudWatch
 
     StartOTelEnrichmentInput.add_member(:include_filters, Shapes::ShapeRef.new(shape: OTelEnrichmentMetricSelectorList, location_name: "IncludeFilters"))
     StartOTelEnrichmentInput.add_member(:exclude_filters, Shapes::ShapeRef.new(shape: OTelEnrichmentMetricSelectorList, location_name: "ExcludeFilters"))
+    StartOTelEnrichmentInput.add_member(:enable_tag_enrichment, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnableTagEnrichment", metadata: {"box" => true}))
     StartOTelEnrichmentInput.struct_class = Types::StartOTelEnrichmentInput
 
     StartOTelEnrichmentOutput.add_member(:include_filters, Shapes::ShapeRef.new(shape: OTelEnrichmentMetricSelectorList, location_name: "IncludeFilters"))
     StartOTelEnrichmentOutput.add_member(:exclude_filters, Shapes::ShapeRef.new(shape: OTelEnrichmentMetricSelectorList, location_name: "ExcludeFilters"))
     StartOTelEnrichmentOutput.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedAt"))
     StartOTelEnrichmentOutput.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "UpdatedAt"))
+    StartOTelEnrichmentOutput.add_member(:enable_tag_enrichment, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnableTagEnrichment", metadata: {"box" => true}))
     StartOTelEnrichmentOutput.struct_class = Types::StartOTelEnrichmentOutput
 
     StatisticSet.add_member(:sample_count, Shapes::ShapeRef.new(shape: DatapointValue, required: true, location_name: "SampleCount"))
@@ -1508,12 +1512,14 @@ module Aws::CloudWatch
 
     UpdateOTelEnrichmentInput.add_member(:include_filters, Shapes::ShapeRef.new(shape: OTelEnrichmentMetricSelectorList, location_name: "IncludeFilters"))
     UpdateOTelEnrichmentInput.add_member(:exclude_filters, Shapes::ShapeRef.new(shape: OTelEnrichmentMetricSelectorList, location_name: "ExcludeFilters"))
+    UpdateOTelEnrichmentInput.add_member(:enable_tag_enrichment, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnableTagEnrichment", metadata: {"box" => true}))
     UpdateOTelEnrichmentInput.struct_class = Types::UpdateOTelEnrichmentInput
 
     UpdateOTelEnrichmentOutput.add_member(:include_filters, Shapes::ShapeRef.new(shape: OTelEnrichmentMetricSelectorList, location_name: "IncludeFilters"))
     UpdateOTelEnrichmentOutput.add_member(:exclude_filters, Shapes::ShapeRef.new(shape: OTelEnrichmentMetricSelectorList, location_name: "ExcludeFilters"))
     UpdateOTelEnrichmentOutput.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedAt"))
     UpdateOTelEnrichmentOutput.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "UpdatedAt"))
+    UpdateOTelEnrichmentOutput.add_member(:enable_tag_enrichment, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnableTagEnrichment", metadata: {"box" => true}))
     UpdateOTelEnrichmentOutput.struct_class = Types::UpdateOTelEnrichmentOutput
 
     UpdateResourceMetricsConfigurationInput.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "ResourceArn"))

@@ -13484,13 +13484,58 @@ module Aws::RDS
     #   specifies a point-in-time restore rule.
     #   @return [Boolean]
     #
+    # @!attribute [rw] delete_db_instances
+    #   Specifies whether to delete all DB instances in the DB cluster
+    #   together with the DB cluster. If you set this value to `true`, RDS
+    #   deletes every DB instance in the DB cluster and then deletes the DB
+    #   cluster. You don't need to call `DeleteDBInstance` for each DB
+    #   instance first. If you set this value to `false` or don't specify
+    #   it, RDS deletes the DB cluster only after you delete each of its DB
+    #   instances.
+    #
+    #   You must have permission to call `DeleteDBInstance` on every DB
+    #   instance in the DB cluster. If RDS can't delete a DB instance in
+    #   the DB cluster, the request fails and RDS doesn't delete the DB
+    #   cluster or any of its DB instances.
+    #
+    #   Constraints:
+    #
+    #   * You can't specify this parameter for a DB cluster that is a
+    #     member of an Aurora global database. Remove the DB cluster from
+    #     the global database first.
+    #
+    #   * You can't specify this parameter for an Aurora Limitless Database
+    #     DB cluster.
+    #
+    #   * Deletion protection must be turned off for the DB cluster.
+    #
+    #   * No DB instance in the DB cluster can be in the `deleting` state or
+    #     be switching over, be the blue DB instance of an active blue/green
+    #     deployment, or have an active zero-ETL integration.
+    #
+    #   * No DB instance in the DB cluster can be the source of an Aurora
+    #     read replica DB cluster, or have a read replica that is being
+    #     created or a cross-Region read replica that is being restored.
+    #
+    #   * The DB cluster can't be in the `stopping` state.
+    #
+    #   If the DB cluster doesn't contain any DB instances, RDS deletes the
+    #   DB cluster the same way as when you don't specify this parameter.
+    #
+    #   Default: `false`
+    #
+    #   Valid for Cluster Type: Aurora MySQL and Aurora PostgreSQL DB
+    #   clusters only
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBClusterMessage AWS API Documentation
     #
     class DeleteDBClusterMessage < Struct.new(
       :db_cluster_identifier,
       :skip_final_snapshot,
       :final_db_snapshot_identifier,
-      :delete_automated_backups)
+      :delete_automated_backups,
+      :delete_db_instances)
       SENSITIVE = []
       include Aws::Structure
     end

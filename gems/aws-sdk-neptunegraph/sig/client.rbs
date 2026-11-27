@@ -129,6 +129,7 @@ module Aws
         def status_reason: () -> ::String
         def create_time: () -> ::Time
         def provisioned_memory: () -> ::Integer
+        def compute_configuration: () -> Types::ComputeConfiguration
         def endpoint: () -> ::String
         def public_connectivity: () -> bool
         def vector_search_configuration: () -> Types::VectorSearchConfiguration
@@ -149,7 +150,8 @@ module Aws
                           },
                           ?replica_count: ::Integer,
                           ?deletion_protection: bool,
-                          provisioned_memory: ::Integer
+                          ?provisioned_memory: ::Integer,
+                          ?compute_configuration: Params::compute_configuration
                         ) -> _CreateGraphResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateGraphResponseSuccess
 
@@ -230,6 +232,7 @@ module Aws
         def status_reason: () -> ::String
         def create_time: () -> ::Time
         def provisioned_memory: () -> ::Integer
+        def compute_configuration: () -> Types::ComputeConfiguration
         def endpoint: () -> ::String
         def public_connectivity: () -> bool
         def vector_search_configuration: () -> Types::VectorSearchConfiguration
@@ -322,6 +325,7 @@ module Aws
         def status_reason: () -> ::String
         def create_time: () -> ::Time
         def provisioned_memory: () -> ::Integer
+        def compute_configuration: () -> Types::ComputeConfiguration
         def endpoint: () -> ::String
         def public_connectivity: () -> bool
         def vector_search_configuration: () -> Types::VectorSearchConfiguration
@@ -510,6 +514,7 @@ module Aws
         def status_reason: () -> ::String
         def create_time: () -> ::Time
         def provisioned_memory: () -> ::Integer
+        def compute_configuration: () -> Types::ComputeConfiguration
         def endpoint: () -> ::String
         def public_connectivity: () -> bool
         def vector_search_configuration: () -> Types::VectorSearchConfiguration
@@ -535,6 +540,7 @@ module Aws
         def status_reason: () -> ::String
         def create_time: () -> ::Time
         def provisioned_memory: () -> ::Integer
+        def compute_configuration: () -> Types::ComputeConfiguration
         def endpoint: () -> ::String
         def public_connectivity: () -> bool
         def vector_search_configuration: () -> Types::VectorSearchConfiguration
@@ -549,6 +555,7 @@ module Aws
                                          snapshot_identifier: ::String,
                                          graph_name: ::String,
                                          ?provisioned_memory: ::Integer,
+                                         ?compute_configuration: Params::compute_configuration,
                                          ?deletion_protection: bool,
                                          ?tags: Hash[::String, ::String],
                                          ?replica_count: ::Integer,
@@ -606,6 +613,7 @@ module Aws
         def status_reason: () -> ::String
         def create_time: () -> ::Time
         def provisioned_memory: () -> ::Integer
+        def compute_configuration: () -> Types::ComputeConfiguration
         def endpoint: () -> ::String
         def public_connectivity: () -> bool
         def vector_search_configuration: () -> Types::VectorSearchConfiguration
@@ -654,6 +662,7 @@ module Aws
         def status_reason: () -> ::String
         def create_time: () -> ::Time
         def provisioned_memory: () -> ::Integer
+        def compute_configuration: () -> Types::ComputeConfiguration
         def endpoint: () -> ::String
         def public_connectivity: () -> bool
         def vector_search_configuration: () -> Types::VectorSearchConfiguration
@@ -698,6 +707,7 @@ module Aws
         def status_reason: () -> ::String
         def create_time: () -> ::Time
         def provisioned_memory: () -> ::Integer
+        def compute_configuration: () -> Types::ComputeConfiguration
         def endpoint: () -> ::String
         def public_connectivity: () -> bool
         def vector_search_configuration: () -> Types::VectorSearchConfiguration
@@ -712,6 +722,7 @@ module Aws
                           graph_identifier: ::String,
                           ?public_connectivity: bool,
                           ?provisioned_memory: ::Integer,
+                          ?compute_configuration: Params::compute_configuration,
                           ?deletion_protection: bool
                         ) -> _UpdateGraphResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateGraphResponseSuccess

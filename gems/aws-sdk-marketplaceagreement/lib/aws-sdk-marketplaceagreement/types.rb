@@ -4465,11 +4465,19 @@ module Aws::MarketplaceAgreement
     #   calculating the amount to be charged.
     #   @return [String]
     #
+    # @!attribute [rw] regional_prices
+    #   The per-Region price overrides for the product dimension. When a
+    #   Regional price is present for an AWS Region, it replaces the default
+    #   `price`. This field is absent when the offer doesn't define
+    #   regional price overrides.
+    #   @return [Array<Types::RegionalPrice>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/RateCardItem AWS API Documentation
     #
     class RateCardItem < Struct.new(
       :dimension_key,
-      :price)
+      :price,
+      :regional_prices)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4504,6 +4512,26 @@ module Aws::MarketplaceAgreement
       :id,
       :currency_code,
       :billing_period,
+      :price)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A per-Region price override for a product dimension in a rate card.
+    #
+    # @!attribute [rw] region
+    #   The AWS Region that the price override applies to.
+    #   @return [String]
+    #
+    # @!attribute [rw] price
+    #   The per unit price for the product dimension in the specified AWS
+    #   Region.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/RegionalPrice AWS API Documentation
+    #
+    class RegionalPrice < Struct.new(
+      :region,
       :price)
       SENSITIVE = []
       include Aws::Structure

@@ -1109,7 +1109,8 @@ module Aws
                                db_cluster_identifier: ::String,
                                ?skip_final_snapshot: bool,
                                ?final_db_snapshot_identifier: ::String,
-                               ?delete_automated_backups: bool
+                               ?delete_automated_backups: bool,
+                               ?delete_db_instances: bool
                              ) -> _DeleteDBClusterResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteDBClusterResponseSuccess
 

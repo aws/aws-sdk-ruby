@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.163.0 (2026-11-27)
+------------------
+
+* Feature - CloudWatch OTel enrichment supports a free basic option and a paid tag enrichment option, using the EnableTagEnrichment flag. Set it to true (default) to enrich vended metrics with resource ARN and tag labels for PromQL queries. Set it to false to get the free basic option without resource tags.
+
 1.162.0 (2026-11-18)
 ------------------
 

@@ -53,6 +53,20 @@ module Aws::NeptuneGraph
       SENSITIVE: []
     end
 
+    class ComputeConfiguration
+      attr_accessor provisioned_graph: Types::ProvisionedGraphConfiguration
+      attr_accessor graph_session: Types::GraphSessionConfiguration
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class ProvisionedGraph < ComputeConfiguration
+      end
+      class GraphSession < ComputeConfiguration
+      end
+      class Unknown < ComputeConfiguration
+      end
+    end
+
     class ConflictException
       attr_accessor message: ::String
       attr_accessor reason: ("CONCURRENT_MODIFICATION")
@@ -68,6 +82,7 @@ module Aws::NeptuneGraph
       attr_accessor replica_count: ::Integer
       attr_accessor deletion_protection: bool
       attr_accessor provisioned_memory: ::Integer
+      attr_accessor compute_configuration: Types::ComputeConfiguration
       SENSITIVE: []
     end
 
@@ -79,6 +94,7 @@ module Aws::NeptuneGraph
       attr_accessor status_reason: ::String
       attr_accessor create_time: ::Time
       attr_accessor provisioned_memory: ::Integer
+      attr_accessor compute_configuration: Types::ComputeConfiguration
       attr_accessor endpoint: ::String
       attr_accessor public_connectivity: bool
       attr_accessor vector_search_configuration: Types::VectorSearchConfiguration
@@ -170,6 +186,7 @@ module Aws::NeptuneGraph
       attr_accessor status_reason: ::String
       attr_accessor create_time: ::Time
       attr_accessor provisioned_memory: ::Integer
+      attr_accessor compute_configuration: Types::ComputeConfiguration
       attr_accessor endpoint: ::String
       attr_accessor public_connectivity: bool
       attr_accessor vector_search_configuration: Types::VectorSearchConfiguration
@@ -306,6 +323,7 @@ module Aws::NeptuneGraph
       attr_accessor status_reason: ::String
       attr_accessor create_time: ::Time
       attr_accessor provisioned_memory: ::Integer
+      attr_accessor compute_configuration: Types::ComputeConfiguration
       attr_accessor endpoint: ::String
       attr_accessor public_connectivity: bool
       attr_accessor vector_search_configuration: Types::VectorSearchConfiguration
@@ -413,6 +431,11 @@ module Aws::NeptuneGraph
       SENSITIVE: []
     end
 
+    class GraphSessionConfiguration
+      attr_accessor min_memory: ::Integer
+      SENSITIVE: []
+    end
+
     class GraphSnapshotSummary
       attr_accessor id: ::String
       attr_accessor name: ::String
@@ -435,6 +458,7 @@ module Aws::NeptuneGraph
       attr_accessor replica_count: ::Integer
       attr_accessor kms_key_identifier: ::String
       attr_accessor deletion_protection: bool
+      attr_accessor compute_configuration: Types::ComputeConfiguration
       SENSITIVE: []
     end
 
@@ -586,6 +610,11 @@ module Aws::NeptuneGraph
       SENSITIVE: []
     end
 
+    class ProvisionedGraphConfiguration
+      attr_accessor memory: ::Integer
+      SENSITIVE: []
+    end
+
     class QuerySummary
       attr_accessor id: ::String
       attr_accessor query_string: ::String
@@ -609,6 +638,7 @@ module Aws::NeptuneGraph
       attr_accessor status_reason: ::String
       attr_accessor create_time: ::Time
       attr_accessor provisioned_memory: ::Integer
+      attr_accessor compute_configuration: Types::ComputeConfiguration
       attr_accessor endpoint: ::String
       attr_accessor public_connectivity: bool
       attr_accessor vector_search_configuration: Types::VectorSearchConfiguration
@@ -629,6 +659,7 @@ module Aws::NeptuneGraph
       attr_accessor snapshot_identifier: ::String
       attr_accessor graph_name: ::String
       attr_accessor provisioned_memory: ::Integer
+      attr_accessor compute_configuration: Types::ComputeConfiguration
       attr_accessor deletion_protection: bool
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor replica_count: ::Integer
@@ -644,6 +675,7 @@ module Aws::NeptuneGraph
       attr_accessor status_reason: ::String
       attr_accessor create_time: ::Time
       attr_accessor provisioned_memory: ::Integer
+      attr_accessor compute_configuration: Types::ComputeConfiguration
       attr_accessor endpoint: ::String
       attr_accessor public_connectivity: bool
       attr_accessor vector_search_configuration: Types::VectorSearchConfiguration
@@ -703,6 +735,7 @@ module Aws::NeptuneGraph
       attr_accessor status_reason: ::String
       attr_accessor create_time: ::Time
       attr_accessor provisioned_memory: ::Integer
+      attr_accessor compute_configuration: Types::ComputeConfiguration
       attr_accessor endpoint: ::String
       attr_accessor public_connectivity: bool
       attr_accessor vector_search_configuration: Types::VectorSearchConfiguration
@@ -751,6 +784,7 @@ module Aws::NeptuneGraph
       attr_accessor status_reason: ::String
       attr_accessor create_time: ::Time
       attr_accessor provisioned_memory: ::Integer
+      attr_accessor compute_configuration: Types::ComputeConfiguration
       attr_accessor endpoint: ::String
       attr_accessor public_connectivity: bool
       attr_accessor vector_search_configuration: Types::VectorSearchConfiguration
@@ -795,6 +829,7 @@ module Aws::NeptuneGraph
       attr_accessor graph_identifier: ::String
       attr_accessor public_connectivity: bool
       attr_accessor provisioned_memory: ::Integer
+      attr_accessor compute_configuration: Types::ComputeConfiguration
       attr_accessor deletion_protection: bool
       SENSITIVE: []
     end
@@ -807,6 +842,7 @@ module Aws::NeptuneGraph
       attr_accessor status_reason: ::String
       attr_accessor create_time: ::Time
       attr_accessor provisioned_memory: ::Integer
+      attr_accessor compute_configuration: Types::ComputeConfiguration
       attr_accessor endpoint: ::String
       attr_accessor public_connectivity: bool
       attr_accessor vector_search_configuration: Types::VectorSearchConfiguration

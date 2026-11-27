@@ -206,6 +206,29 @@ module Aws::ElasticsearchService
       SENSITIVE: []
     end
 
+    class CatalogConfiguration
+      attr_accessor service_managed_s3_tables: Types::ServiceManagedS3TablesCatalog
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class ServiceManagedS3Tables < CatalogConfiguration
+      end
+      class Unknown < CatalogConfiguration
+      end
+    end
+
+    class CatalogOptions
+      attr_accessor enabled: bool
+      attr_accessor catalog: Types::CatalogConfiguration
+      SENSITIVE: []
+    end
+
+    class CatalogOptionsStatus
+      attr_accessor options: Types::CatalogOptions
+      attr_accessor status: Types::OptionStatus
+      SENSITIVE: []
+    end
+
     class ChangeProgressDetails
       attr_accessor change_id: ::String
       attr_accessor message: ::String
@@ -298,6 +321,7 @@ module Aws::ElasticsearchService
       attr_accessor node_to_node_encryption_options: Types::NodeToNodeEncryptionOptions
       attr_accessor advanced_options: ::Hash[::String, ::String]
       attr_accessor log_publishing_options: ::Hash[("INDEX_SLOW_LOGS" | "SEARCH_SLOW_LOGS" | "ES_APPLICATION_LOGS" | "AUDIT_LOGS"), Types::LogPublishingOption]
+      attr_accessor catalog_options: Types::CatalogOptions
       attr_accessor domain_endpoint_options: Types::DomainEndpointOptions
       attr_accessor advanced_security_options: Types::AdvancedSecurityOptionsInput
       attr_accessor auto_tune_options: Types::AutoTuneOptionsInput
@@ -696,6 +720,7 @@ module Aws::ElasticsearchService
       attr_accessor node_to_node_encryption_options: Types::NodeToNodeEncryptionOptionsStatus
       attr_accessor advanced_options: Types::AdvancedOptionsStatus
       attr_accessor log_publishing_options: Types::LogPublishingOptionsStatus
+      attr_accessor catalog_options: Types::CatalogOptionsStatus
       attr_accessor domain_endpoint_options: Types::DomainEndpointOptionsStatus
       attr_accessor advanced_security_options: Types::AdvancedSecurityOptionsStatus
       attr_accessor auto_tune_options: Types::AutoTuneOptionsStatus
@@ -729,6 +754,7 @@ module Aws::ElasticsearchService
       attr_accessor node_to_node_encryption_options: Types::NodeToNodeEncryptionOptions
       attr_accessor advanced_options: ::Hash[::String, ::String]
       attr_accessor log_publishing_options: ::Hash[("INDEX_SLOW_LOGS" | "SEARCH_SLOW_LOGS" | "ES_APPLICATION_LOGS" | "AUDIT_LOGS"), Types::LogPublishingOption]
+      attr_accessor catalog_options: Types::CatalogOptions
       attr_accessor service_software_options: Types::ServiceSoftwareOptions
       attr_accessor domain_endpoint_options: Types::DomainEndpointOptions
       attr_accessor advanced_security_options: Types::AdvancedSecurityOptions
@@ -1160,6 +1186,12 @@ module Aws::ElasticsearchService
     class RevokeVpcEndpointAccessResponse < Aws::EmptyStructure
     end
 
+    class S3TablesEncryptionConfiguration
+      attr_accessor enabled: bool
+      attr_accessor kms_key_arn: ::String
+      SENSITIVE: []
+    end
+
     class SAMLIdp
       attr_accessor metadata_content: ::String
       attr_accessor entity_id: ::String
@@ -1191,6 +1223,11 @@ module Aws::ElasticsearchService
       attr_accessor action_type: ("JVM_HEAP_SIZE_TUNING" | "JVM_YOUNG_GEN_TUNING")
       attr_accessor action: ::String
       attr_accessor severity: ("LOW" | "MEDIUM" | "HIGH")
+      SENSITIVE: []
+    end
+
+    class ServiceManagedS3TablesCatalog
+      attr_accessor encryption_configuration: Types::S3TablesEncryptionConfiguration
       SENSITIVE: []
     end
 
@@ -1292,6 +1329,7 @@ module Aws::ElasticsearchService
       attr_accessor advanced_options: ::Hash[::String, ::String]
       attr_accessor access_policies: ::String
       attr_accessor log_publishing_options: ::Hash[("INDEX_SLOW_LOGS" | "SEARCH_SLOW_LOGS" | "ES_APPLICATION_LOGS" | "AUDIT_LOGS"), Types::LogPublishingOption]
+      attr_accessor catalog_options: Types::CatalogOptions
       attr_accessor domain_endpoint_options: Types::DomainEndpointOptions
       attr_accessor advanced_security_options: Types::AdvancedSecurityOptionsInput
       attr_accessor node_to_node_encryption_options: Types::NodeToNodeEncryptionOptions
